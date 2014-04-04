@@ -1834,9 +1834,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comp_09.4-sending.jpg" id="LrM-cR-RUn">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" id="LrM-cR-RUn">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_dark_header.png" id="gmt-c3-7j4">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XxH-iI-cot" customClass="MontserratLabel">
                                 <rect key="frame" x="76" y="32" width="168" height="21"/>
@@ -3150,7 +3154,6 @@
         <image name="btn_td_done.png" width="251" height="41"/>
         <image name="comp_07-account_transactions2.jpg" width="640" height="1136"/>
         <image name="comp_09.2-send_bitcoin2.jpg" width="640" height="1136"/>
-        <image name="comp_09.4-sending.jpg" width="640" height="1136"/>
         <image name="comp_9_transactions_details.jpg" width="640" height="1136"/>
         <image name="darken_bottom_table_cell.png" width="320" height="111"/>
         <image name="divider.png" width="320" height="27"/>

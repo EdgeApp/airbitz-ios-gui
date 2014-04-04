@@ -12,6 +12,7 @@
 #import "User.h"
 #import "CalculatorView.h"
 #import "ButtonSelectorView.h"
+#import "SendStatusViewController.h"
 
 #define DOLLAR_CURRENCY_NUM 840
 
@@ -19,6 +20,7 @@
 {
 	ConfirmationSliderView *confirmationSlider;
 	UITextField *selectedTextField;
+	SendStatusViewController *sendStatusController;
 }
 
 @property (nonatomic, weak) IBOutlet UIButton *blockingButton;
@@ -143,6 +145,32 @@
         }
     }
 }
+
+-(void)showSendStatus
+{
+	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+	sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
+	
+
+	
+	CGRect frame = self.view.bounds;
+	//frame.origin.x = frame.size.width;
+	sendStatusController.view.frame = frame;
+	[self.view addSubview:sendStatusController.view];
+	sendStatusController.view.alpha = 0.0;
+	
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 sendStatusController.view.alpha = 1.0;
+	 }
+					 completion:^(BOOL finished)
+	 {
+	 }];
+}
+
 #pragma mark Actions
 
 -(IBAction)Back:(id)sender
@@ -184,6 +212,8 @@
 
 -(void)initiateSendRequest
 {
+	[self showSendStatus];
+	/*
 	tABC_CC ABC_InitiateSendRequest(const char *szUserName,
                                     const char *szPassword,
                                     const char *szWalletUUID,
@@ -191,7 +221,7 @@
                                     tABC_TxDetails *pDetails,
                                     tABC_Request_Callback fRequestCallback,
                                     void *pData,
-                                    tABC_Error *pError);
+                                    tABC_Error *pError);*/
 }
 
 -(void)setWalletButtonTitle
