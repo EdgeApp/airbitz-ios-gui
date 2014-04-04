@@ -230,16 +230,15 @@
 		
 		if(nCount)
 		{
-			tABC_TxDetails transactionDetails;
-			
-			transactionDetails.amountSatoshi = self.amountToSendSatoshi;
-			transactionDetails.amountFeesAirbitzSatoshi = 0;
-			transactionDetails.amountFeesMinersSatoshi = 0;
-			transactionDetails.amountCurrency = currency;
-			transactionDetails.attributes = 0;
-			transactionDetails.szCategory = "";
-			transactionDetails.szName = "A Transaction";
-			transactionDetails.szName = "Here are some notes";
+			tABC_TxDetails Details;
+			Details.amountSatoshi = self.amountToSendSatoshi;
+			Details.amountCurrency = currency;
+			Details.amountFeesAirbitzSatoshi = 0;
+			Details.amountFeesMinersSatoshi = 0;
+			Details.szName = "A Transaction";
+			Details.szCategory = "blah";
+			Details.szNotes = "NewNotes";
+			Details.attributes = 0x2;
 			
 			tABC_WalletInfo *info = aWalletInfo[self.selectedWalletIndex];
 			
@@ -247,7 +246,7 @@
 										[[User Singleton].password UTF8String],
 										info->szUUID,
 										[self.sendToAddress UTF8String],
-										&transactionDetails,
+										&Details,
 										ABC_SendConfirmation_Callback,
 										(__bridge void *)self,
 										&Error);
@@ -258,6 +257,8 @@
 			{
 				[self printABC_Error:&Error];
 			}
+			
+			ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 		}
 	}
 }
