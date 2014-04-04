@@ -375,6 +375,8 @@
 		B5F2EB1718DE0523008ACF88 /* btn_light~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB1518DE0523008ACF88 /* btn_light~iphone.png */; };
 		B5F2EB1A18DE06B7008ACF88 /* img_collapseExpandBlueDown@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB1818DE06B7008ACF88 /* img_collapseExpandBlueDown@2x~iphone.png */; };
 		B5F2EB1B18DE06B7008ACF88 /* img_collapseExpandBlueDown~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB1918DE06B7008ACF88 /* img_collapseExpandBlueDown~iphone.png */; };
+		B5FD392818EE2DFD00BE2670 /* SendStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */; };
+		B5FD392A18EE33AD00BE2670 /* comp_09.4-sending.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5FD392918EE33AD00BE2670 /* comp_09.4-sending.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -845,6 +847,9 @@
 		B5F2EB1518DE0523008ACF88 /* btn_light~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_light~iphone.png"; sourceTree = "<group>"; };
 		B5F2EB1818DE06B7008ACF88 /* img_collapseExpandBlueDown@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_collapseExpandBlueDown@2x~iphone.png"; sourceTree = "<group>"; };
 		B5F2EB1918DE06B7008ACF88 /* img_collapseExpandBlueDown~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_collapseExpandBlueDown~iphone.png"; sourceTree = "<group>"; };
+		B5FD392618EE2DFD00BE2670 /* SendStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendStatusViewController.h; sourceTree = "<group>"; };
+		B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendStatusViewController.m; sourceTree = "<group>"; };
+		B5FD392918EE33AD00BE2670 /* comp_09.4-sending.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_09.4-sending.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1289,6 +1294,7 @@
 				B5F2E9C818DCD638008ACF88 /* comp_09.1-send_bitcoin(2).jpg */,
 				B5E7F58218E51048009B5844 /* comp_09.2-send_bitcoin2.jpg */,
 				B55D0FE418E1F7FD0035DCC8 /* comp_9_transactions_details.jpg */,
+				B5FD392918EE33AD00BE2670 /* comp_09.4-sending.jpg */,
 				B5C0A95D18EA07F6008F302C /* comp_10.2-request_bitcoin.jpg */,
 				B59C144218C012B500AEA789 /* bar_balance@2x~iphone.png */,
 				B59C144318C012B500AEA789 /* bar_balance~iphone.png */,
@@ -1550,6 +1556,8 @@
 				B5C0A9C718EA0E55008F302C /* FlashSelectView.m */,
 				B5C0A9AC18EA0D78008F302C /* SendConfirmationViewController.h */,
 				B5C0A9AD18EA0D78008F302C /* SendConfirmationViewController.m */,
+				B5FD392618EE2DFD00BE2670 /* SendStatusViewController.h */,
+				B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */,
 				B5C0A9AE18EA0D78008F302C /* SendViewController.h */,
 				B5C0A9AF18EA0D78008F302C /* SendViewController.m */,
 				B56553D818ECAEF7005B35E1 /* ConfirmationSliderView.h */,
@@ -1893,6 +1901,7 @@
 				B5184B7A18E0EDD70001712A /* btn_big_blue2~iphone.png in Resources */,
 				B59C14E118C012B500AEA789 /* btn_blue~iphone.png in Resources */,
 				B59C153418C012B500AEA789 /* tabbar_base@2x~iphone.png in Resources */,
+				B5FD392A18EE33AD00BE2670 /* comp_09.4-sending.jpg in Resources */,
 				B59C14D618C012B500AEA789 /* btn_6@2x~iphone.png in Resources */,
 				B5F2E9D918DCE475008ACF88 /* Green-check~iphone.png in Resources */,
 				B5F2EB0B18DDE73A008ACF88 /* icon_rightArrow@2x~iphone.png in Resources */,
@@ -2012,6 +2021,7 @@
 				B5C0A97718EA0A42008F302C /* BD_Website_Cell.m in Sources */,
 				B55A031418EA55C700845090 /* ButtonCell.m in Sources */,
 				B5137C3618A435BD00DA4A34 /* CDataScanner.m in Sources */,
+				B5FD392818EE2DFD00BE2670 /* SendStatusViewController.m in Sources */,
 				B5137C3A18A435BD00DA4A34 /* CJSONScanner.m in Sources */,
 				B5C0A97E18EA0A7F008F302C /* DividerView.m in Sources */,
 				B57C207A18C14687005D7245 /* MainViewController.m in Sources */,

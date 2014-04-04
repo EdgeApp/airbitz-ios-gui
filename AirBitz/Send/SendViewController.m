@@ -23,7 +23,6 @@
 }
 @property (weak, nonatomic) IBOutlet UIImageView *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView *flashSelector;
-@property (nonatomic, weak) IBOutlet UIButton *fromWalletButton;
 @property (nonatomic, weak) IBOutlet UITextField *sendToTextField;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector;
 
