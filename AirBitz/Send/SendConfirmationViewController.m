@@ -21,6 +21,8 @@
 	ConfirmationSliderView *confirmationSlider;
 	UITextField *selectedTextField;
 	SendStatusViewController *sendStatusController;
+	BOOL callbackSuccess;
+	NSString *strReason;
 }
 
 @property (nonatomic, weak) IBOutlet UIButton *blockingButton;
@@ -159,6 +161,8 @@
 	[self.view addSubview:sendStatusController.view];
 	sendStatusController.view.alpha = 0.0;
 	
+	sendStatusController.messageLabel.text = NSLocalizedString(@"Sending...", @"status message");
+	
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -213,15 +217,49 @@
 -(void)initiateSendRequest
 {
 	[self showSendStatus];
-	/*
-	tABC_CC ABC_InitiateSendRequest(const char *szUserName,
-                                    const char *szPassword,
-                                    const char *szWalletUUID,
-                                    const char *szDestAddress,
-                                    tABC_TxDetails *pDetails,
-                                    tABC_Request_Callback fRequestCallback,
-                                    void *pData,
-                                    tABC_Error *pError);*/
+	tABC_Error Error;
+	tABC_CC result;
+	tABC_WalletInfo **aWalletInfo = NULL;
+    unsigned int nCount;
+	double currency;
+	
+	result = ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi([self.amountBTCTextField.text doubleValue]), &currency, DOLLAR_CURRENCY_NUM, &Error);
+	if(result == ABC_CC_Ok)
+	{
+		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
+		
+		if(nCount)
+		{
+			tABC_TxDetails transactionDetails;
+			
+			transactionDetails.amountSatoshi = self.amountToSendSatoshi;
+			transactionDetails.amountFeesAirbitzSatoshi = 0;
+			transactionDetails.amountFeesMinersSatoshi = 0;
+			transactionDetails.amountCurrency = currency;
+			transactionDetails.attributes = 0;
+			transactionDetails.szCategory = "";
+			transactionDetails.szName = "A Transaction";
+			transactionDetails.szName = "Here are some notes";
+			
+			tABC_WalletInfo *info = aWalletInfo[self.selectedWalletIndex];
+			
+			result = ABC_InitiateSendRequest([[User Singleton].name UTF8String],
+										[[User Singleton].password UTF8String],
+										info->szUUID,
+										[self.sendToAddress UTF8String],
+										&transactionDetails,
+										ABC_SendConfirmation_Callback,
+										(__bridge void *)self,
+										&Error);
+			if(result == ABC_CC_Ok)
+			{
+			}
+			else
+			{
+				[self printABC_Error:&Error];
+			}
+		}
+	}
 }
 
 -(void)setWalletButtonTitle
@@ -393,4 +431,39 @@
 {
 	NSLog(@"Selected item %i", itemIndex);
 }
+
+#pragma mark ABC Callbacks
+
+void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
+{
+	// NSLog(@"Request callback");
+    
+    if (pResults)
+    {
+        SendConfirmationViewController *controller = (__bridge id)pResults->pData;
+        controller->callbackSuccess = (BOOL)pResults->bSuccess;
+        controller->strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
+		
+        if (pResults->requestType == ABC_RequestType_SendBitcoin)
+        {
+            //NSLog(@"Sign-in completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
+            [controller performSelectorOnMainThread:@selector(sendBitcoinComplete) withObject:nil waitUntilDone:FALSE];
+        }
+    }
+}
+
+-(void)sendBitcoinComplete
+{
+	if(callbackSuccess)
+	{
+		NSLog(@"Transaction complete!");
+	}
+	else
+	{
+		NSLog(@"Error: %@", strReason);
+	}
+	[sendStatusController.view removeFromSuperview];
+	sendStatusController = nil;
+}
+
 @end

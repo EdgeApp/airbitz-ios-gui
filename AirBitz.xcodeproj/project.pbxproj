@@ -1552,6 +1552,9 @@
 		B5C0A9AB18EA0D78008F302C /* Send */ = {
 			isa = PBXGroup;
 			children = (
+				B56553D818ECAEF7005B35E1 /* ConfirmationSliderView.h */,
+				B56553D918ECAEF7005B35E1 /* ConfirmationSliderView.m */,
+				B56553E918ECB687005B35E1 /* ConfirmationSliderView.xib */,
 				B5C0A9C618EA0E55008F302C /* FlashSelectView.h */,
 				B5C0A9C718EA0E55008F302C /* FlashSelectView.m */,
 				B5C0A9AC18EA0D78008F302C /* SendConfirmationViewController.h */,
@@ -1560,9 +1563,6 @@
 				B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */,
 				B5C0A9AE18EA0D78008F302C /* SendViewController.h */,
 				B5C0A9AF18EA0D78008F302C /* SendViewController.m */,
-				B56553D818ECAEF7005B35E1 /* ConfirmationSliderView.h */,
-				B56553D918ECAEF7005B35E1 /* ConfirmationSliderView.m */,
-				B56553E918ECB687005B35E1 /* ConfirmationSliderView.xib */,
 			);
 			path = Send;
 			sourceTree = "<group>";

@@ -1850,10 +1850,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" id="CRP-JF-TAp">
-                                <rect key="frame" x="98" y="185" width="126" height="165"/>
+                                <rect key="frame" x="97" y="185" width="126" height="165"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sending..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PY5-r2-zeB" customClass="LatoLabel">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PY5-r2-zeB" customClass="LatoLabel">
                                 <rect key="frame" x="20" y="374" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1861,9 +1861,40 @@
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
+                            <view contentMode="scaleToFill" id="mh2-Km-QgO">
+                                <rect key="frame" x="20" y="403" width="280" height="145"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="h_seperator.png" id="bJZ-W0-sf0">
+                                        <rect key="frame" x="44" y="70" width="192" height="5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c7D-Vl-Pb7" customClass="LatoLabel">
+                                        <rect key="frame" x="44" y="41" width="192" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y63-cl-VMA" customClass="LatoLabel">
+                                        <rect key="frame" x="44" y="83" width="192" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="bitCoinLabel" destination="c7D-Vl-Pb7" id="Z9b-9P-bwW"/>
+                        <outlet property="currencyView" destination="mh2-Km-QgO" id="ClV-tX-dtA"/>
+                        <outlet property="fiatLabel" destination="y63-cl-VMA" id="93R-xN-iEo"/>
+                        <outlet property="messageLabel" destination="PY5-r2-zeB" id="jr7-Gk-xHS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akK-ti-Ibh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3160,6 +3191,7 @@
         <image name="divider_thumb.png" width="16" height="4"/>
         <image name="emboss_down.png" width="20" height="21"/>
         <image name="emboss_up.png" width="291" height="193"/>
+        <image name="h_seperator.png" width="192" height="5"/>
         <image name="icon_USD_light.png" width="20" height="21"/>
         <image name="icon_bitcoin_light.png" width="20" height="21"/>
         <image name="icon_directory_dark.png" width="28" height="23"/>
