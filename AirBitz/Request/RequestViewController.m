@@ -39,7 +39,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *BTC_TextField;
 @property (nonatomic, weak) IBOutlet UITextField *USD_TextField;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector;
-
+@property (nonatomic, weak) IBOutlet UILabel *exchangeRateLabel;
 @end
 
 @implementation RequestViewController
@@ -83,7 +83,8 @@
 	
 	ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(1.0), &currency, DOLLAR_CURRENCY_NUM, &error);
 	
-	self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", currency];
+	//self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", currency];
+	self.exchangeRateLabel.text = [NSString stringWithFormat:@"1 BTC = $%.2f", currency];
 	
 	CGRect frame = self.keypadView.frame;
 	frame.origin.y = frame.origin.y + frame.size.height;

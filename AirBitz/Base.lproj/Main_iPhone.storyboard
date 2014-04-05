@@ -960,7 +960,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1.000" minimumFontSize="17" id="Ug3-Vw-VAD" customClass="StylizedTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00000" minimumFontSize="17" id="Ug3-Vw-VAD" customClass="StylizedTextField">
                                 <rect key="frame" x="55" y="124" width="173" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -968,7 +968,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="600.00" minimumFontSize="17" id="dY3-MX-MNV" customClass="StylizedTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" minimumFontSize="17" id="dY3-MX-MNV" customClass="StylizedTextField">
                                 <rect key="frame" x="55" y="163" width="173" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1279,7 +1279,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 BTC = $600.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jwC-1c-veH">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jwC-1c-veH">
                                 <rect key="frame" x="15" y="211" width="290" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -1300,6 +1300,7 @@
                         <outlet property="BTC_TextField" destination="Ug3-Vw-VAD" id="wxA-0t-0gW"/>
                         <outlet property="USD_TextField" destination="dY3-MX-MNV" id="KN9-2s-2Cb"/>
                         <outlet property="buttonSelector" destination="TyS-sr-hRl" id="JcR-Jg-aYq"/>
+                        <outlet property="exchangeRateLabel" destination="jwC-1c-veH" id="3U1-BI-cHp"/>
                         <outlet property="keypadView" destination="FS5-S0-Rqp" id="Xh1-wc-LVQ"/>
                     </connections>
                 </viewController>
