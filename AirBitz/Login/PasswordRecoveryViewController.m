@@ -277,8 +277,11 @@ typedef enum eAlertType
 {
 	if(alertType == ALERT_TYPE_SETUP_COMPLETE)
 	{
-		//user dismissed recovery questions complete alert
-		[self.delegate passwordRecoveryViewControllerDidFinish:self];
+		if(buttonIndex == 1)
+		{
+			//user dismissed recovery questions complete alert
+			[self.delegate passwordRecoveryViewControllerDidFinish:self];
+		}
 	}
 	else
 	{
@@ -439,8 +442,8 @@ typedef enum eAlertType
 							  initWithTitle:NSLocalizedString(@"Recovery Questions Set", @"Title of recovery questions setup complete alert")
 							  message:@"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly in order to succeed."
 							  delegate:self
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
+							  cancelButtonTitle:@"Cancel"
+							  otherButtonTitles:@"OK", nil];
 		[alert show];
     }
     else
