@@ -178,10 +178,6 @@
 	 }];
 }
 
--(void)createCompletedTransaction:(char *)transactionID
-{
-}
-
 #pragma mark Actions
 
 -(IBAction)Back:(id)sender
@@ -223,7 +219,7 @@
 
 -(void)initiateSendRequest
 {
-	[self showSendStatus];
+	//[self showSendStatus];
 	tABC_Error Error;
 	tABC_CC result;
 	tABC_WalletInfo **aWalletInfo = NULL;
@@ -493,6 +489,11 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 
 -(void)sendBitcoinComplete:(NSString *)transactionID
 {
+	[self performSelector:@selector(showTransactionDetails:) withObject:transactionID afterDelay:3.0]; //show sending screen for 3 seconds
+}
+
+-(void)showTransactionDetails:(NSString *)transactionID
+{
 	if(callbackSuccess)
 	{
 		tABC_WalletInfo **aWalletInfo = NULL;
@@ -572,8 +573,7 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 	{
 		NSLog(@"Error: %@", strReason);
 	}
-	[sendStatusController.view removeFromSuperview];
-	sendStatusController = nil;
+	
 }
 
 #pragma mark TransactionDetailsViewController delegates
@@ -582,6 +582,9 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 {
 	[controller.view removeFromSuperview];
 	transactionDetailsController = nil;
+	
+	[sendStatusController.view removeFromSuperview];
+	sendStatusController = nil;
 }
 
 @end
