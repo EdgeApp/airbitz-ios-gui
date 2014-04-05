@@ -7,6 +7,7 @@
 //
 
 #import "WalletMakerView.h"
+#import "ABC.h"
 
 @interface WalletMakerView ()
 {
@@ -35,6 +36,8 @@
         [self addSubview:view];
 		
 		originalFrame = self.frame;
+		
+		
     }
     return self;
 }

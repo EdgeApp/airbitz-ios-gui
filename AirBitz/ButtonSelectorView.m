@@ -15,6 +15,7 @@
 	CGRect originalButtonFrame;
 	UITableView *selectionTable;
 	CGRect originalFrame;
+	float amountToGrow;
 }
 
 @end
@@ -57,6 +58,14 @@
 	return stretchable;
 }
 
+-(void)close
+{
+	if(self.button.selected)
+	{
+		[self hideTable];
+	}
+}
+
 -(IBAction)ButtonPressed
 {
 	if(self.button.selected)
@@ -65,6 +74,7 @@
 	}
 	else
 	{
+		//animate button width (wider)
 		self.button.selected = YES;
 		[UIView animateWithDuration:0.5
 							  delay:0.0
@@ -111,7 +121,10 @@
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
+		 
 		 CGRect frame = selectionTable.frame;
+		 float originalHeight = frame.size.height;
+
 		 frame.size.height = self.arrayItemsToSelect.count * TABLE_ROW_HEIGHT + (self.button.frame.size.height / 2);
 		 
 		 
@@ -124,11 +137,21 @@
 			 frame.size.height -= diff;
 		 }
 		 
+		 amountToGrow = frame.size.height - originalHeight;
+		 
 		 selectionTable.frame = frame;
 		 
 		 CGRect myFrame = originalFrame;
 		 myFrame.size.height = frame.origin.y + frame.size.height;
 		 self.frame = myFrame;
+		 
+		 //animate our container's frame (if we have a container)
+		 if(self.containerView)
+		 {
+			 frame = self.containerView.frame;
+			 frame.size.height += amountToGrow;
+			 self.containerView.frame = frame;
+		 }
 	 }
 	 completion:^(BOOL finished)
 	 {
@@ -151,6 +174,13 @@
 		 selectionTable.frame = frame;
 		 
 		 self.frame = originalFrame;
+		 
+		 if(self.containerView)
+		 {
+			 frame = self.containerView.frame;
+			 frame.size.height -= amountToGrow;
+			 self.containerView.frame = frame;
+		 }
 		 
 	 }
 					 completion:^(BOOL finished)

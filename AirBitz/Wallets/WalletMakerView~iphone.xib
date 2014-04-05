@@ -23,12 +23,12 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="31R-cB-dYy">
                     <rect key="frame" x="7" y="7" width="304" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your wallet (not working yet)" minimumFontSize="17" id="61J-35-M5b">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your wallet (not working yet)" minimumFontSize="17" id="61J-35-M5b" customClass="StylizedTextField">
                     <rect key="frame" x="14" y="11" width="292" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -36,8 +36,11 @@
                 </textField>
                 <view contentMode="scaleToFill" id="nZC-1B-QJw" customClass="ButtonSelectorView">
                     <rect key="frame" x="7" y="44" width="304" height="38"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="containerView" destination="-1" id="Lmg-VI-Thb"/>
+                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.47450980390000003" blue="0.72549019609999998" alpha="1" colorSpace="deviceRGB"/>
