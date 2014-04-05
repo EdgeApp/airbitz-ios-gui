@@ -261,6 +261,8 @@
     unsigned char *pData = NULL;
 	tABC_Error error;
 	
+	[self.view endEditing:YES];
+	
 	const char *requestID = [self createReceiveRequest];
 	
 	if(requestID)
