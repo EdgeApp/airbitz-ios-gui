@@ -448,48 +448,21 @@
 {
 	if(walletMakerVisible == NO)
 	{
-		//get a list of currencies so we can populate the walletMaker
-		tABC_Currency *currencyArray;
-		tABC_Error error;
-		int numCurrencies;
-		tABC_CC result = ABC_GetCurrencies(&currencyArray, &numCurrencies, &error);
-		if(result == ABC_CC_Ok)
-		{
-			/*
-			typedef struct sABC_Currency
-			{
-				char    *szCode;		// currency ISO 4217 code
-				int     num;			// currency ISO 4217 num
-				char    *szDescription; // currency description
-				char    *szCountries;	// currency countries
-			} tABC_Currency;
-			*/
-			
-			NSMutableArray *arrayCurrencyStrings = [[NSMutableArray alloc] init];
-			for(int i=0; i<numCurrencies; i++)
-			{
-				//populate with currency code and description
-				[arrayCurrencyStrings addObject:[NSString stringWithFormat:@"%s - %@", currencyArray[i].szCode, [NSString stringWithUTF8String:currencyArray[i].szDescription]]];
-			}
-			
-			self.walletMakerView.buttonSelectorView.arrayItemsToSelect = arrayCurrencyStrings;
-			
-			walletMakerVisible = YES;
-			self.walletMakerView.hidden = NO;
-			[[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
-			[self createBlockingButtonUnderView:self.walletMakerView];
-			[UIView animateWithDuration:0.35
-								  delay:0.0
-								options:UIViewAnimationOptionCurveEaseOut
-							 animations:^
-			 {
-				 self.walletMakerView.frame = originalWalletMakerFrame;
-			 }
-			 completion:^(BOOL finished)
-			 {
+		walletMakerVisible = YES;
+		self.walletMakerView.hidden = NO;
+		[[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
+		[self createBlockingButtonUnderView:self.walletMakerView];
+		[UIView animateWithDuration:0.35
+							  delay:0.0
+							options:UIViewAnimationOptionCurveEaseOut
+						 animations:^
+		 {
+			 self.walletMakerView.frame = originalWalletMakerFrame;
+		 }
+		 completion:^(BOOL finished)
+		 {
 
-			 }];
-		}
+		 }];
 	}
 }
 

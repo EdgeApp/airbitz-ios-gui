@@ -254,7 +254,16 @@
 {
 	[self hideTable];
 	
-	[self.button setTitle:[self.arrayItemsToSelect objectAtIndex:indexPath.row ] forState:UIControlStateNormal];
+	if([self.delegate respondsToSelector:@selector(ButtonSelector:willSetButtonTextToString:)])
+	{
+		NSString *desiredString = [self.arrayItemsToSelect objectAtIndex:indexPath.row ];
+		
+		[self.button setTitle:[self.delegate ButtonSelector:self willSetButtonTextToString:desiredString] forState:UIControlStateNormal];
+	}
+	else
+	{
+		[self.button setTitle:[self.arrayItemsToSelect objectAtIndex:indexPath.row ] forState:UIControlStateNormal];
+	}
 }
 
 @end

@@ -34,5 +34,5 @@
 @required
 -(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex;
 @optional
-
+-(NSString *)ButtonSelector:(ButtonSelectorView *)view willSetButtonTextToString:(NSString *)desiredString; //allows delegate to alter the new desired button title
 @end
