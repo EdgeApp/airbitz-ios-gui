@@ -12,6 +12,9 @@
 #import "Transaction.h"
 #import "NSDate+Helper.h"
 #import "TransactionDetailsViewController.h"
+#import "ABC.h"
+
+#define DOLLAR_CURRENCY_NUM	840
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate>
 {
@@ -69,7 +72,11 @@
 	if(balanceState == BALANCE_VIEW_DOWN)
 	{
 		//dollars
-		return [NSString stringWithFormat:@"$ %.2f", bitCoin * EXCHANGE_RATE];
+		double currency;
+		tABC_Error error;
+		
+		ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(bitCoin), &currency, DOLLAR_CURRENCY_NUM, &error);
+		return [NSString stringWithFormat:@"$ %.2f", currency];
 	}
 	else
 	{
