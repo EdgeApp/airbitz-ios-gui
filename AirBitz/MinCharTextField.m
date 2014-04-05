@@ -27,6 +27,7 @@
 												 name:UITextFieldTextDidChangeNotification
 											   object:self];
 	self.layer.cornerRadius = 6.0;
+	[super awakeFromNib];
 }
 
 - (void)myTextDidChange

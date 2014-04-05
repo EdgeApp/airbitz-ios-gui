@@ -934,6 +934,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="info" destination="Int-ih-AH6" eventType="touchUpInside" id="UtQ-gc-gqZ"/>
                                     <action selector="info" destination="ZP6-jP-fb3" eventType="touchUpInside" id="lOP-Wz-6r1"/>
                                 </connections>
                             </button>
@@ -1001,6 +1002,9 @@
                                 <state key="normal" title="Import Wallet" backgroundImage="btn_import_wallet.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="ImportWallet" destination="Int-ih-AH6" eventType="touchUpInside" id="3so-hE-R4g"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="WCA-P7-L3q">
                                 <rect key="frame" x="89" y="251" width="61" height="66"/>
@@ -1010,6 +1014,9 @@
                                 <state key="normal" title="Email" backgroundImage="btn_email.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="email" destination="Int-ih-AH6" eventType="touchUpInside" id="Bnp-tj-IdK"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="mkM-bm-hN8">
                                 <rect key="frame" x="155" y="251" width="61" height="66"/>
@@ -1019,6 +1026,9 @@
                                 <state key="normal" title="SMS" backgroundImage="btn_SMS.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="SMS" destination="Int-ih-AH6" eventType="touchUpInside" id="N7C-1J-dGc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="e3p-Sp-KAc">
                                 <rect key="frame" x="220" y="242" width="79" height="83"/>

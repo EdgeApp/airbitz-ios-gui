@@ -385,9 +385,9 @@
 
 -(void)pinTextFieldChanged:(UITextField *)textField
 {
-	if(textField.text.length > 4)
+	if(textField.text.length == 4)
 	{
-		textField.text = [textField.text substringToIndex:4];
+		[textField resignFirstResponder];
 	}
 }
 

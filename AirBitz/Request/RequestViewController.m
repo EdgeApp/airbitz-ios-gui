@@ -255,6 +255,26 @@
 
 #pragma mark Actions
 
+-(IBAction)info
+{
+	[self.view endEditing:YES];
+}
+
+-(IBAction)ImportWallet
+{
+	[self.view endEditing:YES];
+}
+
+-(IBAction)email
+{
+	[self.view endEditing:YES];
+}
+
+-(IBAction)SMS
+{
+	[self.view endEditing:YES];
+}
+
 -(IBAction)QRCodeButton
 {
 	unsigned int width = 0;

@@ -29,6 +29,7 @@
 	{
 		self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName: color}];
 	}
+	[super awakeFromNib];
 }
 
 
