@@ -10,8 +10,9 @@
 #import "User.h"
 #import "NSDate+Helper.h"
 #import "ABC.h"
+#import "InfoView.h"
 
-@interface TransactionDetailsViewController () <UITextFieldDelegate>
+@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate>
 {
 	UITextField *activeTextField;
 	CGRect originalFrame;
@@ -21,7 +22,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *walletLabel;
 @property (nonatomic, weak) IBOutlet UILabel *bitCoinLabel;
-@property (nonatomic, weak) IBOutlet UIButton *addressButton;
+@property (nonatomic, weak) IBOutlet UIButton *advancedDetailsButton;
 @property (nonatomic, weak) IBOutlet UIButton *doneButton;
 @property (nonatomic, weak) IBOutlet UITextField *fiatTextField;
 @property (nonatomic, weak) IBOutlet UITextField *categoryTextField;
@@ -45,8 +46,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
-	[self.addressButton setBackgroundImage:blue_button_image forState:UIControlStateNormal];
-	[self.addressButton setBackgroundImage:blue_button_image forState:UIControlStateSelected];
+	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateNormal];
+	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateSelected];
 	
 	self.fiatTextField.delegate = self;
 	self.notesTextField.delegate = self;
@@ -71,7 +72,7 @@
 	
 	self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
 	self.nameLabel.text = self.transaction.strName;
-	[self.addressButton setTitle:self.transaction.strAddress forState:UIControlStateNormal]; 
+	//[self.addressButton setTitle:self.transaction.strAddress forState:UIControlStateNormal];
 	
 	self.walletLabel.text = self.transaction.strWalletName;
 	self.bitCoinLabel.text = [NSString stringWithFormat:@"B %.5f", ABC_SatoshiToBitcoin(self.transaction.amountSatoshi)];
@@ -165,8 +166,28 @@
 	[self.delegate TransactionDetailsViewControllerDone:self];
 }
 
--(IBAction)Address
+-(IBAction)AdvancedDetails
 {
+	//spawn infoView
+	InfoView *iv = [InfoView CreateWithDelegate:self];
+	iv.frame = self.view.bounds;
+	
+	NSString* path = [[NSBundle mainBundle] pathForResource:@"transactionDetails" ofType:@"html"];
+	NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+	
+	//transaction ID
+	content = [content stringByReplacingOccurrencesOfString:@"*1" withString:self.transaction.strID];
+	//Total sent
+	content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[NSString stringWithFormat:@"BTC %.5f", ABC_SatoshiToBitcoin(self.transaction.amountSatoshi)]];
+	//source
+	#warning TODO: source and destination addresses are faked for now, so's miner's fee.
+	content = [content stringByReplacingOccurrencesOfString:@"*3" withString:@"1.002<BR>1K7iGspRyQsposdKCSbsoXZntsJ7DPNssN<BR>0.0345<BR>1z8fkj4igkh498thgkjERGG23fhD4gGaNSHa<BR>0.2342<BR>1Wfh8d9csf987gT7H6fjkhd0fkj4tkjhf8S4er3"];
+	//Destination
+	content = [content stringByReplacingOccurrencesOfString:@"*4" withString:@"1M6TCZJTdVX1xGC8iAcQLTDtRKF2zM6M38<BR>1.27059<BR>12HUD1dsrc9dhQgGtWxqy8dAM2XDgvKdzq<BR>0.00001"];
+	//Miner Fee
+	content = [content stringByReplacingOccurrencesOfString:@"*5" withString:@"0.0001"];
+	iv.htmlInfoToDisplay = content;
+	[self.view addSubview:iv];
 }
 
 -(UIImage *)stretchableImage:(NSString *)imageName
@@ -245,6 +266,13 @@
 {
 	[textField resignFirstResponder];
 	return YES;
+}
+
+#pragma mark infoView delegates
+
+-(void)InfoViewFinished:(InfoView *)infoView
+{
+	[infoView removeFromSuperview];
 }
 
 @end

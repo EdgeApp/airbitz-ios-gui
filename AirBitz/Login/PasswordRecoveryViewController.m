@@ -442,7 +442,7 @@ typedef enum eAlertType
 							  initWithTitle:NSLocalizedString(@"Recovery Questions Set", @"Title of recovery questions setup complete alert")
 							  message:@"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly in order to succeed."
 							  delegate:self
-							  cancelButtonTitle:@"Cancel"
+							  cancelButtonTitle:@"Back"
 							  otherButtonTitles:@"OK", nil];
 		[alert show];
     }

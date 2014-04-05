@@ -13,8 +13,11 @@
 
 
 @property (nonatomic, assign) id<InfoViewDelegate> delegate;
+@property (nonatomic, strong) NSString *htmlInfoToDisplay;
 
 + (InfoView *)CreateWithDelegate:(id<InfoViewDelegate>)delegate;
+
+-(void)enableScrolling:(BOOL)scrollEnabled;
 
 @end
 

@@ -381,6 +381,7 @@
 		B5FD392F18EFC30E00BE2670 /* WalletMakerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD392E18EFC30E00BE2670 /* WalletMakerView.m */; };
 		B5FD393118EFC35A00BE2670 /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */; };
 		B5FD393418F06FD800BE2670 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD393318F06FD800BE2670 /* StylizedTextField.m */; };
+		B5FD393618F0A67100BE2670 /* transactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393518F0A67100BE2670 /* transactionDetails.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -860,6 +861,7 @@
 		B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "WalletMakerView~iphone.xib"; sourceTree = "<group>"; };
 		B5FD393218F06FD800BE2670 /* StylizedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField.h; sourceTree = "<group>"; };
 		B5FD393318F06FD800BE2670 /* StylizedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField.m; sourceTree = "<group>"; };
+		B5FD393518F0A67100BE2670 /* transactionDetails.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = transactionDetails.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1629,6 +1631,7 @@
 			isa = PBXGroup;
 			children = (
 				B5F2E9A918D4AF6C008ACF88 /* info.html */,
+				B5FD393518F0A67100BE2670 /* transactionDetails.html */,
 			);
 			name = html;
 			path = Resources/html;
@@ -1944,6 +1947,7 @@
 				B59C143318C0129300AEA789 /* bd_cell_bottom@2x~iphone.png in Resources */,
 				B59C14EF18C012B500AEA789 /* btn_email~iphone.png in Resources */,
 				B55A030418EA206300845090 /* btn_unselected@2x~iphone.png in Resources */,
+				B5FD393618F0A67100BE2670 /* transactionDetails.html in Resources */,
 				B5E7F57D18E4EC4E009B5844 /* scan_frame@2x~iphone.png in Resources */,
 				B59C150218C012B500AEA789 /* btn_send@2x~iphone.png in Resources */,
 				B59C14ED18C012B500AEA789 /* btn_dot~iphone.png in Resources */,

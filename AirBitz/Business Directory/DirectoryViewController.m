@@ -362,7 +362,13 @@ typedef enum eMapDisplayState
 	//spawn infoView
 	InfoView *iv = [InfoView CreateWithDelegate:self];
 	iv.frame = self.view.bounds;
+	[iv enableScrolling:NO];
 	[self.view addSubview:iv];
+	
+	NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
+	NSString* path = [[NSBundle mainBundle] pathForResource:@"info" ofType:@"html"];
+	NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+	iv.htmlInfoToDisplay = [content stringByReplacingOccurrencesOfString:@"*" withString:version];;
 }
 
 #pragma mark Back Button

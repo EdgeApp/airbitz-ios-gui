@@ -42,8 +42,7 @@
 	self.webView.layer.cornerRadius = 4.0;
 	self.webView.clipsToBounds = YES;
 	self.webView.delegate = self;
-	self.webView.scrollView.scrollEnabled = NO;
-	self.webView.scrollView.bounces = NO;
+	
 	
 	self.darkenView.delegate = self;
 	self.darkenView.alpha = 0.0;
@@ -51,14 +50,7 @@
 	self.contentView.transform = CGAffineTransformMakeScale(0.7, 0.7);
 	self.contentView.layer.cornerRadius = 7.0;
 
-	NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
-	NSString* path = [[NSBundle mainBundle] pathForResource:@"info" ofType:@"html"];
-	NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-	NSString *htmlString = [content stringByReplacingOccurrencesOfString:@"*" withString:version];
-	[self.webView loadHTMLString:htmlString baseURL:nil];
-	
-	//[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"info" ofType:@"html"]isDirectory:NO]]];
-	
+
 	[UIView animateWithDuration:0.25
 						  delay:0.0
 						options:UIViewAnimationOptionCurveLinear
@@ -91,6 +83,18 @@
 			   }];
 		  }];
 	 }];
+}
+
+-(void)enableScrolling:(BOOL)scrollEnabled
+{
+	self.webView.scrollView.scrollEnabled = scrollEnabled;
+	self.webView.scrollView.bounces = scrollEnabled;
+}
+
+-(void)setHtmlInfoToDisplay:(NSString *)htmlInfoToDisplay
+{
+	_htmlInfoToDisplay = htmlInfoToDisplay;
+	[self.webView loadHTMLString:_htmlInfoToDisplay baseURL:nil];
 }
 
 - (id)initWithFrame:(CGRect)frame
