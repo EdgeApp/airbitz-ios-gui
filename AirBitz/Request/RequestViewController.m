@@ -40,8 +40,6 @@
 @property (nonatomic, weak) IBOutlet UITextField *USD_TextField;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector;
 
-//@property (nonatomic, weak) IBOutlet UIImageView *testImageView;
-
 @end
 
 @implementation RequestViewController
@@ -79,7 +77,13 @@
 	
 	//set initial textField contents
 	self.BTC_TextField.text = @"1.0000";
-	self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", 1.0 * EXCHANGE_RATE];
+	
+	double currency;
+	tABC_Error error;
+	
+	ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(1.0), &currency, DOLLAR_CURRENCY_NUM, &error);
+	
+	self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", currency];
 	
 	CGRect frame = self.keypadView.frame;
 	frame.origin.y = frame.origin.y + frame.size.height;
@@ -89,7 +93,6 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-	//[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:NO]];
 	[super viewDidAppear:animated];
 }
 
@@ -99,24 +102,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark Actions
 
-/*
- typedef struct sABC_TxDetails
- {
- 
-	int64_t amountSatoshi;				// amount of bitcoins in satoshi (including fees if any)
-	int64_t amountFeesAirbitzSatoshi;	// airbitz fees in satoshi
-	int64_t amountFeesMinersSatoshi;	// miners fees in satoshi
-	double amountCurrency;				// amount in currency
-	char *szName;						// payer or payee
-	char *szCategory;					// category for the transaction
-	char *szNotes;						// notes for the transaction
-	unsigned int attributes;			// attributes for the transaction
-} tABC_TxDetails;
-
- createReceiveREquest will now give me addresses
-*/
 
 -(const char *)createReceiveRequest
 {
@@ -201,7 +187,7 @@
 		{
 			if (data[(y * width) + x] & 0x1)
 			{
-				printf("%c", '*');
+				//printf("%c", '*');
 				*buf++ = 0;
 				*buf++ = 0;
 				*buf++ = 0;
@@ -216,7 +202,7 @@
 				*buf++ = 255;
 			}
 		}
-		printf("\n");
+		//printf("\n");
 	}
 	
 	CGContextRef ctx;
@@ -240,14 +226,16 @@
 	return rawImage;
 }
 
--(void)showQRCodeViewControllerWithQRImage:(UIImage *)image
+-(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
 	
 	qrViewController.delegate = self;
 	qrViewController.qrCodeImage = image;
-	
+	qrViewController.addressString = address;
+	qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
+	qrViewController.amountSatoshi = ABC_BitcoinToSatoshi([self.BTC_TextField.text doubleValue]);
 	CGRect frame = self.view.bounds;
 	qrViewController.view.frame = frame;
 	[self.view addSubview:qrViewController.view];
@@ -264,6 +252,8 @@
 	 {
 	 }];
 }
+
+#pragma mark Actions
 
 -(IBAction)QRCodeButton
 {
@@ -285,17 +275,11 @@
 	
 		if(result == ABC_CC_Ok)
 		{
-			printf("QRCode width: %d\n", width);
-			//UtilHexDump("QRCode data", pData, width * width);
+			//printf("QRCode width: %d\n", width);
 			
 			UIImage *qrImage = [self dataToImage:pData withWidth:width andHeight:width];
 			
-			
-			
-			//self.testImageView.image = qrImage;
-			//self.testImageView.layer.magnificationFilter = kCAFilterNearest;
-			[self showQRCodeViewControllerWithQRImage:qrImage];
-			
+			[self showQRCodeViewControllerWithQRImage:qrImage address:@"Put address here"];
 		}
 		else
 		{
@@ -303,15 +287,8 @@
 		}
 		if(requestID) free((void*)requestID);
 	}
-	
     if(pData) free(pData);
 }
-
-/*-(IBAction)Back
-{
-	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:YES]];
-	[self.delegate RequestViewControllerDone:self];
-}*/
 
 #pragma mark textfield delegates
 
@@ -336,73 +313,34 @@
 	[self updateTextFieldContents];
 }
 
-/*
--(IBAction)digit:(UIButton *)sender
-{
-	if(sender.tag < 10)
-	{
-		if(sender.tag == 0)
-		{
-			//allow 0 only if current value is non-zero OR there's a decimal point
-			if(([selectedTextField.text intValue] != 0) || ([selectedTextField.text rangeOfString:@"."].location != NSNotFound))
-			{
-				selectedTextField.text = [selectedTextField.text stringByAppendingFormat:@"%li", (long)sender.tag];
-			}
-		}
-		else
-		{
-			selectedTextField.text = [selectedTextField.text stringByAppendingFormat:@"%li", (long)sender.tag];
-		}
-	}
-	else
-	{
-		if ([selectedTextField.text rangeOfString:@"."].location == NSNotFound)
-		{
-			selectedTextField.text = [selectedTextField.text stringByAppendingString:@"."];
-		}
-	}
-	[self updateTextFieldContents];
-}
-
--(IBAction)operation:(UIButton *)sender
-{
-	switch (sender.tag)
-	{
-			case OPERATION_CLEAR:
-				selectedTextField.text = @"";
-				break;
-			case OPERATION_BACK:
-				selectedTextField.text = [selectedTextField.text substringToIndex:selectedTextField.text.length-(selectedTextField.text.length > 0)];
-				break;
-			case OPERATION_DONE:
-				[self.BTC_TextField resignFirstResponder];
-				[self.USD_TextField resignFirstResponder];
-				break;
-			case OPERATION_DIVIDE:
-			case OPERATION_EQUAL:
-			case OPERATION_MINUS:
-			case OPERATION_MULTIPLY:
-			case OPERATION_PLUS:
-			case OPERATION_PERCENT:
-				break;
-				
-	}
-	[self updateTextFieldContents];
-}
-*/
 -(void)updateTextFieldContents
 {
 	if(selectedTextField == self.BTC_TextField)
 	{
 		double value = [self.BTC_TextField.text doubleValue];
 		
-		self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", value * EXCHANGE_RATE];
+		double currency;
+		tABC_Error error;
+		
+		ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(value), &currency, DOLLAR_CURRENCY_NUM, &error);
+		
+		self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", currency];
 	}
 	else
 	{
 		double value = [self.USD_TextField.text doubleValue];
-		//NSLog(@"Value: %@", [NSString stringWithFormat:@"%.6f", value * EXCHANGE_RATE]);
-		self.BTC_TextField.text = [NSString stringWithFormat:@"%.4f", value / EXCHANGE_RATE];
+
+		int64_t satoshi;
+		tABC_Error	error;
+		tABC_CC result;
+		double bitcoin;
+		
+		result = ABC_CurrencyToSatoshi(value, DOLLAR_CURRENCY_NUM, &satoshi, &error);
+		if(result == ABC_CC_Ok)
+		{
+			bitcoin = ABC_SatoshiToBitcoin(satoshi);
+			self.BTC_TextField.text = [NSString stringWithFormat:@"%.4f", bitcoin];
+		}
 	}
 }
 

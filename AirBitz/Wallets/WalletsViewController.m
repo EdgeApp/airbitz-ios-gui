@@ -15,6 +15,8 @@
 #import "ABC.h"
 #import "User.h"
 
+#define DOLLAR_CURRENCY_NUM	840
+
 @interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate>
 {
 	BalanceView *balanceView;
@@ -116,7 +118,7 @@
     transaction.date = [self dateFromString:@"01/15/2014"];
     transaction.confirmations = 2;
     transaction.bConfirmed = NO;
-    transaction.amount = 25;
+    transaction.amountSatoshi = 25 * 100000000;
     transaction.balance = 32.5;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
@@ -129,7 +131,7 @@
     transaction.date = [self dateFromString:@"12/15/2013"];
     transaction.confirmations = 4;
     transaction.bConfirmed = YES;
-    transaction.amount = -17.5;
+    transaction.amountSatoshi = -17.5 * 100000000;
     transaction.balance = 7.5;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
@@ -142,7 +144,7 @@
     transaction.date = [self dateFromString:@"12/10/2013"];
     transaction.confirmations = 3;
     transaction.bConfirmed = NO;
-    transaction.amount = 5;
+    transaction.amountSatoshi = 5 * 100000000;
     transaction.balance = 20;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
@@ -173,7 +175,7 @@
     transaction.date = [self dateFromString:@"01/15/2014"];
     transaction.confirmations = 2;
     transaction.bConfirmed = NO;
-    transaction.amount = -.05593;
+    transaction.amountSatoshi = -.05593 * 100000000;
     transaction.balance = 8.32177;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
@@ -186,7 +188,7 @@
     transaction.date = [self dateFromString:@"01/15/2014"];
     transaction.confirmations = 2;
     transaction.bConfirmed = NO;
-    transaction.amount = .1377;
+    transaction.amountSatoshi = .1377 * 100000000;
     transaction.balance = 8.3777;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
@@ -199,7 +201,7 @@
     transaction.date = [self dateFromString:@"12/15/2013"];
     transaction.confirmations = 4;
     transaction.bConfirmed = YES;
-    transaction.amount = -4.12;
+    transaction.amountSatoshi = -4.12 * 100000000;
     transaction.balance = 8.24;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
@@ -212,7 +214,7 @@
     transaction.date = [self dateFromString:@"12/10/2013"];
     transaction.confirmations = 3;
     transaction.bConfirmed = NO;
-    transaction.amount = 2.36;
+    transaction.amountSatoshi = 2.36 * 100000000;
     transaction.balance = 12.36;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
@@ -367,7 +369,12 @@
 	}
 	
 	balanceView.topAmount.text = [NSString stringWithFormat:@"B %.2f", totalBitcoin];
-	balanceView.botAmount.text = [NSString stringWithFormat:@"$ %.2f", totalBitcoin * EXCHANGE_RATE];
+	
+	double currency;
+	tABC_Error error;
+	
+	ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(totalBitcoin), &currency, DOLLAR_CURRENCY_NUM, &error);
+	balanceView.botAmount.text = [NSString stringWithFormat:@"$ %.2f", currency];
 	[balanceView refresh];
 }
 
@@ -385,7 +392,11 @@
 	if(balanceState == BALANCE_VIEW_DOWN)
 	{
 		//dollars
-		return [NSString stringWithFormat:@"$ %.2f", bitCoin * EXCHANGE_RATE];
+		double currency;
+		tABC_Error error;
+		
+		ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(bitCoin), &currency, DOLLAR_CURRENCY_NUM, &error);
+		return [NSString stringWithFormat:@"$ %.2f", currency];
 	}
 	else
 	{

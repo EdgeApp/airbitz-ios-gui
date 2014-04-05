@@ -1406,7 +1406,7 @@
                         <outlet property="addressLabel" destination="4Li-R2-dUi" id="Ptt-kM-ccT"/>
                         <outlet property="amountLabel" destination="2FV-6E-gId" id="TuK-CX-L2B"/>
                         <outlet property="qrCodeImageView" destination="0A5-KU-hj2" id="g0D-Lx-S59"/>
-                        <outlet property="statusLabel" destination="O1G-gR-pT0" id="v1Y-Pk-Hk8"/>
+                        <outlet property="statusLabel" destination="O1G-gR-pT0" id="D6E-8w-Iqx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKP-kx-08U" userLabel="First Responder" sceneMemberID="firstResponder"/>

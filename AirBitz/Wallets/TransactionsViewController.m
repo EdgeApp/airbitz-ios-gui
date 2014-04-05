@@ -67,7 +67,7 @@
 }
 
 //note this method duplicated in WalletsViewController
--(NSString *)conversion:(double)bitCoin
+-(NSString *)conversion:(int64_t)satoshi
 {
 	if(balanceState == BALANCE_VIEW_DOWN)
 	{
@@ -75,13 +75,13 @@
 		double currency;
 		tABC_Error error;
 		
-		ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(bitCoin), &currency, DOLLAR_CURRENCY_NUM, &error);
+		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 		return [NSString stringWithFormat:@"$ %.2f", currency];
 	}
 	else
 	{
 		//bitcoin
-		return [NSString stringWithFormat:@"B %.2f", bitCoin];
+		return [NSString stringWithFormat:@"B %.2f", ABC_SatoshiToBitcoin(satoshi)];
 	}
 }
 
@@ -191,8 +191,8 @@
 	
 	//amount
 	//cell.amountLabel.text = [NSString stringWithFormat:@"%d"
-	cell.amountLabel.text = [self conversion:transaction.amount];
-	if(transaction.amount < 0)
+	cell.amountLabel.text = [self conversion:transaction.amountSatoshi];
+	if(transaction.amountSatoshi < 0)
 	{
 		cell.amountLabel.textColor = [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0];
 	}

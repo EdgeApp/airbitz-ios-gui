@@ -13,7 +13,10 @@
 @interface ShowWalletQRViewController : UIViewController
 
 @property (assign) id<ShowWalletQRViewControllerDelegate> delegate;
-@property (nonatomic, strong) IBOutlet UIImage *qrCodeImage;
+@property (nonatomic, strong) UIImage *qrCodeImage;
+@property (nonatomic, strong) NSString *statusString;
+@property (nonatomic, strong) NSString *addressString;
+@property (nonatomic, assign) int64_t amountSatoshi;
 
 @end
 

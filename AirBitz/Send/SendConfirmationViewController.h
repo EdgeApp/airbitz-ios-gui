@@ -15,7 +15,7 @@
 
 @property (assign) id<SendConfirmationViewControllerDelegate> delegate;
 @property (nonatomic, copy) NSString *sendToAddress;
-@property (nonatomic, assign) long long amountToSendSatoshi;
+@property (nonatomic, assign) int64_t amountToSendSatoshi;
 @property (nonatomic, assign) int selectedWalletIndex;
 @end
 

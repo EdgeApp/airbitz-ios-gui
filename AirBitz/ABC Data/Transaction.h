@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define EXCHANGE_RATE			600.0	/* cw temp dollars divided by this equals bitcoin */
+//#define EXCHANGE_RATE			600.0	/* cw temp dollars divided by this equals bitcoin */
 
 @interface Transaction : NSObject
 
@@ -20,7 +20,7 @@
 @property (nonatomic, strong)   NSDate          *date;
 @property (nonatomic, assign)   BOOL            bConfirmed;
 @property (nonatomic, assign)   unsigned int    confirmations;
-@property (nonatomic, assign)   double          amount;
+@property (nonatomic, assign)   SInt64			amountSatoshi;
 @property (nonatomic, assign)   double          balance;
 @property (nonatomic, copy)     NSString        *strCategory;
 @property (nonatomic, copy)     NSString        *strNotes;

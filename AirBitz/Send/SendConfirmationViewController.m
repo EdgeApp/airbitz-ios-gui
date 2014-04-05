@@ -443,7 +443,8 @@
 	
 	if(selectedTextField == self.amountBTCTextField)
 	{
-		result = ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi([self.amountBTCTextField.text doubleValue]), &currency, DOLLAR_CURRENCY_NUM, &error);
+		self.amountToSendSatoshi = ABC_BitcoinToSatoshi([self.amountBTCTextField.text doubleValue]);
+		result = ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 		if(result == ABC_CC_Ok)
 		{
 			self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
@@ -455,6 +456,7 @@
 		result = ABC_CurrencyToSatoshi([self.amountUSDTextField.text doubleValue], DOLLAR_CURRENCY_NUM, &satoshi, &error);
 		if(result == ABC_CC_Ok)
 		{
+			self.amountToSendSatoshi = satoshi;
 			currency = ABC_SatoshiToBitcoin(satoshi);
 			self.amountBTCTextField.text = [NSString stringWithFormat:@"%.5f", currency];
 		}
@@ -495,55 +497,76 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 	{
 		tABC_WalletInfo **aWalletInfo = NULL;
 		tABC_Error error;
-		tABC_TxDetails *details;
+		tABC_TxInfo *txInfo;
+		//tABC_TxDetails *details;
 		unsigned int nCount;
 		
 		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &error);
 		
 		if(nCount)
 		{
-			tABC_WalletInfo *info = aWalletInfo[self.selectedWalletIndex];
+			tABC_WalletInfo *walletInfo = aWalletInfo[self.selectedWalletIndex];
 			
 			NSLog(@"Transaction complete with Transaction ID: %@", transactionID);
 			
-			//call ABC_GEtTransaction instead (gives me the txINfo)
 			
-			tABC_CC result = ABC_GetTransactionDetails([[User Singleton].name UTF8String],
+			tABC_CC result = ABC_GetTransaction([[User Singleton].name UTF8String],
 											  [[User Singleton].password UTF8String],
-											  info->szUUID,
+											  walletInfo->szUUID,
 											  [transactionID UTF8String],
-											  &details,
+											  &txInfo,
 											  &error);
 			
-									
-									
-			completedTransaction = [[Transaction alloc] init];
-			/*
-			 @property (nonatomic, copy)     NSString        *strID;
-			 @property (nonatomic, copy)     NSString        *strWalletUUID;
-			 @property (nonatomic, copy)     NSString        *strWalletName;
-			 @property (nonatomic, copy)     NSString        *strName;
-			 @property (nonatomic, copy)     NSString        *strAddress;
-			 @property (nonatomic, strong)   NSDate          *date;
-			 @property (nonatomic, assign)   BOOL            bConfirmed;
-			 @property (nonatomic, assign)   unsigned int    confirmations;
-			 @property (nonatomic, assign)   double          amount;
-			 @property (nonatomic, assign)   double          balance;
-			 @property (nonatomic, copy)     NSString        *strCategory;
-			 @property (nonatomic, copy)     NSString        *strNotes;
-			 */
-			 
-			 completedTransaction.strID = transactionID;
-			 completedTransaction.strWalletUUID = [NSString stringWithUTF8String:info->szUUID];
-			 completedTransaction.strWalletName = [NSString stringWithUTF8String:info->szName];
-			 completedTransaction.strAddress = @"1zCW9a6c4ad322888594e155f3298737495fb0d997041dfcc255041d16d165fcd656";
-			 //completedTransaction.date
-			 
-			 ABC_FreeWalletInfoArray(aWalletInfo, nCount);
-			 ABC_FreeTxDetails(details);  //call freeTransaction here
+			if(result == ABC_CC_Ok)
+			{
+				completedTransaction = [[Transaction alloc] init];
+				/*
+				 @property (nonatomic, copy)     NSString        *strID;
+				 @property (nonatomic, copy)     NSString        *strWalletUUID;
+				 @property (nonatomic, copy)     NSString        *strWalletName;
+				 @property (nonatomic, copy)     NSString        *strName;
+				 @property (nonatomic, copy)     NSString        *strAddress;
+				 @property (nonatomic, strong)   NSDate          *date;
+				 @property (nonatomic, assign)   BOOL            bConfirmed;
+				 @property (nonatomic, assign)   unsigned int    confirmations;
+				 @property (nonatomic, assign)   double          amount;
+				 @property (nonatomic, assign)   double          balance;
+				 @property (nonatomic, copy)     NSString        *strCategory;
+				 @property (nonatomic, copy)     NSString        *strNotes;
+				 */
+				 
+				NSString *address;
+				if(txInfo->countAddresses)
+				{
+					address = [NSString stringWithUTF8String:txInfo->aAddresses[0]];
+				}
+				else
+				{
+					address = @"NO ADDRESS";
+				}
+				 
+				completedTransaction.strID = transactionID;
+				completedTransaction.strWalletUUID = [NSString stringWithUTF8String:walletInfo->szUUID];
+				completedTransaction.strWalletName = [NSString stringWithUTF8String:walletInfo->szName];
+				completedTransaction.strAddress = address;
+				completedTransaction.date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)txInfo->timeCreation];
+				#warning TODO: what do I do with bConfirmed and comfirmations?
+				completedTransaction.bConfirmed = NO;
+				completedTransaction.confirmations = 0;
+				 
+				completedTransaction.amountSatoshi = txInfo->pDetails->amountSatoshi;
+				#warning TODO: what do I do with balance?
+				completedTransaction.balance = 0;
+				
+				completedTransaction.strCategory = [NSString stringWithUTF8String:txInfo->pDetails->szCategory];
+				completedTransaction.strNotes = [NSString stringWithUTF8String:txInfo->pDetails->szNotes];
+				
+				ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+				ABC_FreeTransaction(txInfo);
+				
+				[self launchTransactionDetailsWithTransaction:completedTransaction];
+			}
 		}
-		
-		
 	}
 	else
 	{
