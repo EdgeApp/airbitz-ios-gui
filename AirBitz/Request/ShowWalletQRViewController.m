@@ -10,10 +10,10 @@
 
 @interface ShowWalletQRViewController ()
 
-@property (nonatomic, weak) IBOutlet UIImageView *qr_imageView;
 @property (nonatomic, weak) IBOutlet UILabel *statusLabel;
 @property (nonatomic, weak) IBOutlet UILabel *amountLabel;
 @property (nonatomic, weak) IBOutlet UILabel *addressLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *qrCodeImageView;
 @end
 
 @implementation ShowWalletQRViewController
@@ -31,6 +31,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	self.qrCodeImageView.layer.magnificationFilter = kCAFilterNearest;
+	self.qrCodeImageView.image = self.qrCodeImage;
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +51,7 @@
 
 -(IBAction)Back
 {
+	[self.delegate ShowWalletQRViewControllerDone:self];
 }
 
 -(IBAction)Info

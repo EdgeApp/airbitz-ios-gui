@@ -15,6 +15,7 @@
 
 @property (assign) id<TransactionDetailsViewControllerDelegate> delegate;
 @property (nonatomic, weak) Transaction *transaction;
+
 @end
 
 @protocol TransactionDetailsViewControllerDelegate <NSObject>

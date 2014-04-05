@@ -377,6 +377,7 @@
 		B5F2EB1B18DE06B7008ACF88 /* img_collapseExpandBlueDown~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB1918DE06B7008ACF88 /* img_collapseExpandBlueDown~iphone.png */; };
 		B5FD392818EE2DFD00BE2670 /* SendStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */; };
 		B5FD392A18EE33AD00BE2670 /* comp_09.4-sending.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5FD392918EE33AD00BE2670 /* comp_09.4-sending.jpg */; };
+		B5FD392C18EF1B8C00BE2670 /* comp_08-transactions_details.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5FD392B18EF1B8C00BE2670 /* comp_08-transactions_details.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -850,6 +851,7 @@
 		B5FD392618EE2DFD00BE2670 /* SendStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendStatusViewController.h; sourceTree = "<group>"; };
 		B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendStatusViewController.m; sourceTree = "<group>"; };
 		B5FD392918EE33AD00BE2670 /* comp_09.4-sending.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_09.4-sending.jpg"; sourceTree = "<group>"; };
+		B5FD392B18EF1B8C00BE2670 /* comp_08-transactions_details.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_08-transactions_details.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1292,6 +1294,7 @@
 				B5F2E9C618DB4CDF008ACF88 /* comp_03.1-password _recovery.jpg */,
 				B57C20A618C2A6DF005D7245 /* comp_00-sign_in.jpg */,
 				B5F2E9C818DCD638008ACF88 /* comp_09.1-send_bitcoin(2).jpg */,
+				B5FD392B18EF1B8C00BE2670 /* comp_08-transactions_details.jpg */,
 				B5E7F58218E51048009B5844 /* comp_09.2-send_bitcoin2.jpg */,
 				B55D0FE418E1F7FD0035DCC8 /* comp_9_transactions_details.jpg */,
 				B5FD392918EE33AD00BE2670 /* comp_09.4-sending.jpg */,
@@ -1894,6 +1897,7 @@
 				B59C14CA18C012B500AEA789 /* btn_0@2x~iphone.png in Resources */,
 				B59C14EE18C012B500AEA789 /* btn_email@2x~iphone.png in Resources */,
 				B55A02FF18EA206300845090 /* btn_changeCategories~iphone.png in Resources */,
+				B5FD392C18EF1B8C00BE2670 /* comp_08-transactions_details.jpg in Resources */,
 				B59C143C18C0129300AEA789 /* bd_icon_location~iphone.png in Resources */,
 				B59C151A18C012B500AEA789 /* icon_directory_dark~iphone.png in Resources */,
 				B5137C0D18A40A8400DA4A34 /* Lato-Italic.ttf in Resources */,

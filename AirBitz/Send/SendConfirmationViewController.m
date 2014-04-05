@@ -13,16 +13,19 @@
 #import "CalculatorView.h"
 #import "ButtonSelectorView.h"
 #import "SendStatusViewController.h"
+#import "TransactionDetailsViewController.h"
 
 #define DOLLAR_CURRENCY_NUM 840
 
-@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, ButtonSelectorDelegate>
+@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, TransactionDetailsViewControllerDelegate>
 {
 	ConfirmationSliderView *confirmationSlider;
 	UITextField *selectedTextField;
 	SendStatusViewController *sendStatusController;
+	TransactionDetailsViewController *transactionDetailsController;
 	BOOL callbackSuccess;
 	NSString *strReason;
+	Transaction *completedTransaction;	// nil until sendTransaction is successfully completed
 }
 
 @property (nonatomic, weak) IBOutlet UIButton *blockingButton;
@@ -175,6 +178,10 @@
 	 }];
 }
 
+-(void)createCompletedTransaction:(char *)transactionID
+{
+}
+
 #pragma mark Actions
 
 -(IBAction)Back:(id)sender
@@ -252,6 +259,7 @@
 										&Error);
 			if(result == ABC_CC_Ok)
 			{
+				[self showSendStatus];
 			}
 			else
 			{
@@ -301,6 +309,32 @@
 	
 	self.buttonSelector.arrayItemsToSelect = [walletsArray copy];
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+}
+
+-(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
+{
+	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+	transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+	
+	transactionDetailsController.delegate = self;
+	transactionDetailsController.transaction = transaction;
+	CGRect frame = self.view.bounds;
+	frame.origin.x = frame.size.width;
+	transactionDetailsController.view.frame = frame;
+	[self.view addSubview:transactionDetailsController.view];
+	
+	
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 transactionDetailsController.view.frame = self.view.bounds;
+	 }
+					 completion:^(BOOL finished)
+	 {
+	 }];
+	
 }
 
 #pragma mark UITextField delegates
@@ -447,17 +481,69 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 		
         if (pResults->requestType == ABC_RequestType_SendBitcoin)
         {
+			
             //NSLog(@"Sign-in completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
-            [controller performSelectorOnMainThread:@selector(sendBitcoinComplete) withObject:nil waitUntilDone:FALSE];
+            [controller performSelectorOnMainThread:@selector(sendBitcoinComplete:) withObject:[NSString stringWithUTF8String:pResults->pRetData] waitUntilDone:FALSE];
+			free(pResults->pRetData);
         }
     }
 }
 
--(void)sendBitcoinComplete
+-(void)sendBitcoinComplete:(NSString *)transactionID
 {
 	if(callbackSuccess)
 	{
-		NSLog(@"Transaction complete!");
+		tABC_WalletInfo **aWalletInfo = NULL;
+		tABC_Error error;
+		tABC_TxDetails *details;
+		unsigned int nCount;
+		
+		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &error);
+		
+		if(nCount)
+		{
+			tABC_WalletInfo *info = aWalletInfo[self.selectedWalletIndex];
+			
+			NSLog(@"Transaction complete with Transaction ID: %@", transactionID);
+			
+			//call ABC_GEtTransaction instead (gives me the txINfo)
+			
+			tABC_CC result = ABC_GetTransactionDetails([[User Singleton].name UTF8String],
+											  [[User Singleton].password UTF8String],
+											  info->szUUID,
+											  [transactionID UTF8String],
+											  &details,
+											  &error);
+			
+									
+									
+			completedTransaction = [[Transaction alloc] init];
+			/*
+			 @property (nonatomic, copy)     NSString        *strID;
+			 @property (nonatomic, copy)     NSString        *strWalletUUID;
+			 @property (nonatomic, copy)     NSString        *strWalletName;
+			 @property (nonatomic, copy)     NSString        *strName;
+			 @property (nonatomic, copy)     NSString        *strAddress;
+			 @property (nonatomic, strong)   NSDate          *date;
+			 @property (nonatomic, assign)   BOOL            bConfirmed;
+			 @property (nonatomic, assign)   unsigned int    confirmations;
+			 @property (nonatomic, assign)   double          amount;
+			 @property (nonatomic, assign)   double          balance;
+			 @property (nonatomic, copy)     NSString        *strCategory;
+			 @property (nonatomic, copy)     NSString        *strNotes;
+			 */
+			 
+			 completedTransaction.strID = transactionID;
+			 completedTransaction.strWalletUUID = [NSString stringWithUTF8String:info->szUUID];
+			 completedTransaction.strWalletName = [NSString stringWithUTF8String:info->szName];
+			 completedTransaction.strAddress = @"1zCW9a6c4ad322888594e155f3298737495fb0d997041dfcc255041d16d165fcd656";
+			 //completedTransaction.date
+			 
+			 ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+			 ABC_FreeTxDetails(details);  //call freeTransaction here
+		}
+		
+		
 	}
 	else
 	{
@@ -465,6 +551,14 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 	}
 	[sendStatusController.view removeFromSuperview];
 	sendStatusController = nil;
+}
+
+#pragma mark TransactionDetailsViewController delegates
+
+-(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
+{
+	[controller.view removeFromSuperview];
+	transactionDetailsController = nil;
 }
 
 @end
