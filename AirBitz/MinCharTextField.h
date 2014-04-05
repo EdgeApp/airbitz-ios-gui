@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StylizedTextField.h"
 
-@interface MinCharTextField : UITextField
+@interface MinCharTextField : StylizedTextField
 
 @property (nonatomic, assign) int minimumCharacters;
 @property (nonatomic, readonly) BOOL satisfiesMinimumCharacters;

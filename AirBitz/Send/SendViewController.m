@@ -51,8 +51,6 @@
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Send From:", @"Label text on Send Bitcoin screen");
 	
 	[self setWalletButtonTitle];
-	
-	
 }
 
 -(void)viewWillAppear:(BOOL)animated

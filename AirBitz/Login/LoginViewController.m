@@ -10,6 +10,7 @@
 #import "ABC.h"
 #import "SignUpViewController.h"
 #import "User.h"
+#import "StylizedTextField.h"
 
 #define CONTENT_VIEW_SCALE_WITH_KEYBOARD	0.75
 #define LOGO_IMAGE_SHRINK_SCALE_FACTOR		0.5
@@ -34,8 +35,8 @@ typedef enum eLoginMode
 	UITextField *activeTextField;
 }
 @property (nonatomic, weak) IBOutlet UIView *contentView;
-@property (nonatomic, weak) IBOutlet UITextField *userNameTextField;
-@property (nonatomic, weak) IBOutlet UITextField *passwordTextField;
+@property (nonatomic, weak) IBOutlet StylizedTextField *userNameTextField;
+@property (nonatomic, weak) IBOutlet StylizedTextField *passwordTextField;
 @property (nonatomic, weak) IBOutlet UIImageView *swipeArrow;
 @property (nonatomic, weak) IBOutlet UILabel *swipeText;
 @property (nonatomic, weak) IBOutlet UILabel *titleText;
@@ -252,12 +253,8 @@ typedef enum eLoginMode
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-	
-	//show searchCluesTableView
-	//hide divider bar
 	BOOL shrinkLogo = NO;
 	//Get KeyboardFrame (in Window coordinates)
-	//if(notification.object == self)
 	if(activeTextField)
 	{
 		//NSLog(@"Keyboard will show for Login View");
@@ -320,19 +317,7 @@ typedef enum eLoginMode
 - (void)keyboardWillHide:(NSNotification *)notification
 {
 	if(activeTextField)
-	//if(notification.object == self)
 	{
-		//NSLog(@"Keyboard will hide for Login View Controller");
-		/*[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-
-		 }
-						 completion:^(BOOL finished)
-		 {
-		 }];*/
 		 activeTextField = nil;
 	}
 }

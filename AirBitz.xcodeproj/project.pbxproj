@@ -380,6 +380,7 @@
 		B5FD392C18EF1B8C00BE2670 /* comp_08-transactions_details.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5FD392B18EF1B8C00BE2670 /* comp_08-transactions_details.jpg */; };
 		B5FD392F18EFC30E00BE2670 /* WalletMakerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD392E18EFC30E00BE2670 /* WalletMakerView.m */; };
 		B5FD393118EFC35A00BE2670 /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */; };
+		B5FD393418F06FD800BE2670 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD393318F06FD800BE2670 /* StylizedTextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -857,6 +858,8 @@
 		B5FD392D18EFC30E00BE2670 /* WalletMakerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletMakerView.h; sourceTree = "<group>"; };
 		B5FD392E18EFC30E00BE2670 /* WalletMakerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletMakerView.m; sourceTree = "<group>"; };
 		B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "WalletMakerView~iphone.xib"; sourceTree = "<group>"; };
+		B5FD393218F06FD800BE2670 /* StylizedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField.h; sourceTree = "<group>"; };
+		B5FD393318F06FD800BE2670 /* StylizedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1164,6 +1167,8 @@
 				B5C0A9AB18EA0D78008F302C /* Send */,
 				B5004A2618A5C755003560A4 /* Server.h */,
 				B5C0A9B218EA0D99008F302C /* Settings */,
+				B5FD393218F06FD800BE2670 /* StylizedTextField.h */,
+				B5FD393318F06FD800BE2670 /* StylizedTextField.m */,
 				B59C161918C1436300AEA789 /* TabBarView.h */,
 				B59C161A18C1436300AEA789 /* TabBarView.m */,
 				B57C207B18C15009005D7245 /* TabBarButton.h */,
@@ -2010,6 +2015,7 @@
 				B5C0A9C518EA0DD8008F302C /* WalletsViewController.m in Sources */,
 				B56553DA18ECAEF7005B35E1 /* ConfirmationSliderView.m in Sources */,
 				B561E1AB18D2573F002DCDC2 /* DarkenView.m in Sources */,
+				B5FD393418F06FD800BE2670 /* StylizedTextField.m in Sources */,
 				4C08A6E918C53BDA0071B87C /* Transaction.m in Sources */,
 				B5F2E9CF18DCDFB0008ACF88 /* PasswordVerifyView.m in Sources */,
 				B55A030818EA210000845090 /* RadioButtonCell.m in Sources */,
