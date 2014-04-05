@@ -469,7 +469,7 @@
 			for(int i=0; i<numCurrencies; i++)
 			{
 				//populate with currency code and description
-				[arrayCurrencyStrings addObject:[NSString stringWithFormat:@"%s - %s", currencyArray[i].szCode, currencyArray[i].szDescription ]];
+				[arrayCurrencyStrings addObject:[NSString stringWithFormat:@"%s - %@", currencyArray[i].szCode, [NSString stringWithUTF8String:currencyArray[i].szDescription]]];
 			}
 			
 			self.walletMakerView.buttonSelectorView.arrayItemsToSelect = arrayCurrencyStrings;
