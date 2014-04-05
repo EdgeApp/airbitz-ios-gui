@@ -378,6 +378,8 @@
 		B5FD392818EE2DFD00BE2670 /* SendStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */; };
 		B5FD392A18EE33AD00BE2670 /* comp_09.4-sending.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5FD392918EE33AD00BE2670 /* comp_09.4-sending.jpg */; };
 		B5FD392C18EF1B8C00BE2670 /* comp_08-transactions_details.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5FD392B18EF1B8C00BE2670 /* comp_08-transactions_details.jpg */; };
+		B5FD392F18EFC30E00BE2670 /* WalletMakerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD392E18EFC30E00BE2670 /* WalletMakerView.m */; };
+		B5FD393118EFC35A00BE2670 /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -852,6 +854,9 @@
 		B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendStatusViewController.m; sourceTree = "<group>"; };
 		B5FD392918EE33AD00BE2670 /* comp_09.4-sending.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_09.4-sending.jpg"; sourceTree = "<group>"; };
 		B5FD392B18EF1B8C00BE2670 /* comp_08-transactions_details.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_08-transactions_details.jpg"; sourceTree = "<group>"; };
+		B5FD392D18EFC30E00BE2670 /* WalletMakerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletMakerView.h; sourceTree = "<group>"; };
+		B5FD392E18EFC30E00BE2670 /* WalletMakerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletMakerView.m; sourceTree = "<group>"; };
+		B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "WalletMakerView~iphone.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1606,6 +1611,9 @@
 				B5C0A9BC18EA0DD8008F302C /* TransactionsViewController.m */,
 				B5C0A9BD18EA0DD8008F302C /* WalletCell.h */,
 				B5C0A9BE18EA0DD8008F302C /* WalletCell.m */,
+				B5FD392D18EFC30E00BE2670 /* WalletMakerView.h */,
+				B5FD392E18EFC30E00BE2670 /* WalletMakerView.m */,
+				B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */,
 				B5C0A9BF18EA0DD8008F302C /* WalletsViewController.h */,
 				B5C0A9C018EA0DD8008F302C /* WalletsViewController.m */,
 			);
@@ -1727,6 +1735,7 @@
 				B59C152A18C012B500AEA789 /* icon_USD_light.png in Resources */,
 				B56553F418EDDD26005B35E1 /* ButtonSelectorView~iphone.xib in Resources */,
 				B59C151F18C012B500AEA789 /* icon_request~iphone.png in Resources */,
+				B5FD393118EFC35A00BE2670 /* WalletMakerView~iphone.xib in Resources */,
 				B56553E018ECAFE8005B35E1 /* btn_alwaysConfirm_off~iphone.png in Resources */,
 				B55A02FE18EA206300845090 /* btn_changeCategories@2x~iphone.png in Resources */,
 				B59C14CD18C012B500AEA789 /* btn_1~iphone.png in Resources */,
@@ -2009,6 +2018,7 @@
 				B5675B5C18A17F6F002E0703 /* AppDelegate.m in Sources */,
 				B55A031D18EB569000845090 /* CategoriesViewController.m in Sources */,
 				B561E1A618D2572D002DCDC2 /* InfoView.m in Sources */,
+				B5FD392F18EFC30E00BE2670 /* WalletMakerView.m in Sources */,
 				B5376E1D18B55D920099EF8F /* UIImage+Colorize.m in Sources */,
 				B5C0A9C218EA0DD8008F302C /* TransactionDetailsViewController.m in Sources */,
 				B5C0A9B018EA0D78008F302C /* SendConfirmationViewController.m in Sources */,

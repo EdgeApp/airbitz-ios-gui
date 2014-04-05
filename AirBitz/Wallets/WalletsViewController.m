@@ -14,6 +14,7 @@
 #import "Transaction.h"
 #import "ABC.h"
 #import "User.h"
+#import "WalletMakerView.h"
 
 #define DOLLAR_CURRENCY_NUM	840
 
@@ -26,11 +27,16 @@
 	tBalanceViewState balanceState;
 	UIView *activeWalletsHeaderView;
 	UIView *archivedWalletsHeaderView;
+	CGRect originalWalletMakerFrame;
+	UIButton *blockingButton;
+	BOOL walletMakerVisible;
 }
 
 @property (nonatomic, strong) NSMutableArray *arrayWallets;
 @property (nonatomic, strong) NSMutableArray *arrayArchivedWallets;
 
+@property (nonatomic, weak) IBOutlet WalletMakerView *walletMakerView;
+@property (nonatomic, weak) IBOutlet UIView *headerView;
 @property (nonatomic, weak) IBOutlet UIView *balanceViewPlaceholder;
 @property (nonatomic, weak) IBOutlet UITableView *walletsTable;
 @end
@@ -65,6 +71,14 @@
 	self.walletsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.walletsTable.allowsSelectionDuringEditing = YES;
 	currencyConversionFactor = 1.0;
+	
+	CGRect frame = self.walletMakerView.frame;
+	originalWalletMakerFrame = frame;
+	frame.size.height = 0;
+	self.walletMakerView.frame = frame;
+	self.walletMakerView.hidden = YES;
+	self.walletMakerView.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
+	[self.walletMakerView.buttonSelectorView.button setTitle:@"USD" forState:UIControlStateNormal];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -87,6 +101,58 @@
 }
 
 #pragma mark - Misc Methods
+
+-(void)createBlockingButtonUnderView:(UIView *)view
+{
+	blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	CGRect frame = self.view.bounds;
+	frame.origin.y = self.headerView.frame.origin.y + self.headerView.frame.size.height;
+	frame.size.height = self.view.bounds.size.height - frame.origin.y;
+	blockingButton.frame = frame;
+	blockingButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+	[self.view insertSubview:blockingButton belowSubview:self.walletMakerView];
+	blockingButton.alpha = 0.0;
+	
+	[blockingButton addTarget:self
+			   action:@selector(blockingButtonHit:)
+	 forControlEvents:UIControlEventTouchDown];
+	
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveLinear
+					 animations:^
+	 {
+		 blockingButton.alpha = 1.0;
+	 }
+	 completion:^(BOOL finished)
+	 {
+		 
+	 }];
+	
+}
+
+-(void)removeBlockingButton
+{
+	[self.walletMakerView.textField resignFirstResponder];
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveLinear
+					 animations:^
+	 {
+		 blockingButton.alpha = 0.0;
+	 }
+					 completion:^(BOOL finished)
+	 {
+		 [blockingButton removeFromSuperview];
+		 blockingButton = nil;
+	 }];
+}
+
+-(void)blockingButtonHit:(UIButton *)button
+{
+	[self hideWalletMaker];
+	[self removeBlockingButton];
+}
 
 // retrieves the wallets from the server and put them in the two member arrays
 - (void)getWallets
@@ -380,6 +446,46 @@
 
 -(IBAction)addWallet
 {
+	if(walletMakerVisible == NO)
+	{
+		walletMakerVisible = YES;
+		self.walletMakerView.hidden = NO;
+		[[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
+		[self createBlockingButtonUnderView:self.walletMakerView];
+		[UIView animateWithDuration:0.35
+							  delay:0.0
+							options:UIViewAnimationOptionCurveEaseOut
+						 animations:^
+		 {
+			 self.walletMakerView.frame = originalWalletMakerFrame;
+		 }
+		 completion:^(BOOL finished)
+		 {
+
+		 }];
+	}
+}
+
+-(void)hideWalletMaker
+{
+	if(walletMakerVisible == YES)
+	{
+		walletMakerVisible = NO;
+		
+		CGRect frame = self.walletMakerView.frame;
+		frame.size.height = 0;
+		[UIView animateWithDuration:0.35
+							  delay:0.0
+							options:UIViewAnimationOptionCurveEaseOut
+						 animations:^
+		 {
+			 self.walletMakerView.frame = frame;
+		 }
+						 completion:^(BOOL finished)
+		 {
+			 self.walletMakerView.hidden = YES;
+		 }];
+	}
 }
 
 -(IBAction)info

@@ -1395,7 +1395,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Li-R2-dUi" customClass="LatoLabel">
                                 <rect key="frame" x="34" y="408" width="251" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1565,11 +1565,18 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" id="Bzx-4y-6VM" customClass="WalletMakerView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="balanceViewPlaceholder" destination="6Yg-1c-9dj" id="pOU-nS-3UF"/>
+                        <outlet property="headerView" destination="XEF-aZ-4GM" id="jN4-Wu-KM6"/>
+                        <outlet property="walletMakerView" destination="Bzx-4y-6VM" id="RsE-Lm-43W"/>
                         <outlet property="walletsTable" destination="w7G-E8-m3C" id="ZYa-Zf-mib"/>
                     </connections>
                 </viewController>

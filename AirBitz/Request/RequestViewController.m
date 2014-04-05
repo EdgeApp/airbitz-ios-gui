@@ -115,8 +115,9 @@
 	
 	//first need to create a transaction details struct
 	details.amountSatoshi = ABC_BitcoinToSatoshi([self.BTC_TextField.text doubleValue]);
-	#warning TODO: need to set up fees
-	details.amountFeesAirbitzSatoshi = details.amountSatoshi / 100;
+	
+	//the true fee values will be set by the core
+	details.amountFeesAirbitzSatoshi = 0;
 	details.amountFeesMinersSatoshi = 0;
 	
 	#warning TODO:  hard coded to DOLLAR right now
@@ -148,8 +149,7 @@
 	#warning TODO: Need to set up notes for this transaction
 	details.szNotes = "";
 	
-	#warning TODO: Need to set up attributes for this transaction
-	details.attributes = 0x2;
+	details.attributes = 0x0; //for our own use (not used by the core)
 	
 	if(pAccountSettings)
 	{
@@ -278,8 +278,19 @@
 			//printf("QRCode width: %d\n", width);
 			
 			UIImage *qrImage = [self dataToImage:pData withWidth:width andHeight:width];
+			char *requestAddress;
 			
-			[self showQRCodeViewControllerWithQRImage:qrImage address:@"Put address here"];
+			result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
+										   [[User Singleton].password UTF8String],
+										   [selectedWalletUUID UTF8String],
+										  requestID,
+										  &requestAddress,
+										  &error);
+			if(result == ABC_CC_Ok)
+			{
+				[self showQRCodeViewControllerWithQRImage:qrImage address:[NSString stringWithUTF8String:requestAddress]];
+				free(requestAddress);
+			}
 		}
 		else
 		{
