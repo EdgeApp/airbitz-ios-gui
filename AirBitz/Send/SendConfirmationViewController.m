@@ -113,7 +113,7 @@
 	double currency;
 	tABC_Error error;
 	
-	/* cw eventually pull currency number from the wallet.  Wallet specifies what currency it's in */
+#warning TODO: eventually pull currency number from the wallet.  Wallet specifies what currency it's in
 	result = ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 				
 	if(result == ABC_CC_Ok)
@@ -125,6 +125,15 @@
 	if(result == ABC_CC_Ok)
 	{
 		self.conversionLabel.text = [NSString stringWithFormat:@"1.00 BTC = $%.2f USD", currency];
+	}
+	
+	if(self.amountToSendSatoshi)
+	{
+		[self.withdrawlPIN becomeFirstResponder];
+	}
+	else
+	{
+		[self.amountBTCTextField becomeFirstResponder];
 	}
 }
 
@@ -194,7 +203,7 @@
 	 }
 	 completion:^(BOOL finished)
 	 {
-		 [self.delegate sendConfirmationViewController:self didConfirm:NO];
+		 [self.delegate sendConfirmationViewControllerDidFinish:self];
 	 }];
 }
 
@@ -587,6 +596,8 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 	
 	[sendStatusController.view removeFromSuperview];
 	sendStatusController = nil;
+	
+	[self.delegate sendConfirmationViewControllerDidFinish:self];
 }
 
 @end

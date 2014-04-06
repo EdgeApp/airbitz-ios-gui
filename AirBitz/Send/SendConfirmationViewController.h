@@ -24,5 +24,5 @@
 @protocol SendConfirmationViewControllerDelegate <NSObject>
 
 @required
--(void)sendConfirmationViewController:(SendConfirmationViewController *)controller didConfirm:(BOOL)didConfirm;
+-(void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller;
 @end

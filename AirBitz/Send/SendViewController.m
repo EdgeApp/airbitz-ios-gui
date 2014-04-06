@@ -298,15 +298,9 @@
 
 #pragma mark - SendConfirmationViewController Delegates
 
--(void)sendConfirmationViewController:(SendConfirmationViewController *)controller didConfirm:(BOOL)didConfirm
+-(void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
 {
-	if(didConfirm)
-	{
-	}
-	else
-	{
-		[reader start];
-	}
+	[reader start];
 	[sendConfirmationViewController.view removeFromSuperview];
 	sendConfirmationViewController = nil;
 }
