@@ -75,9 +75,6 @@
 	self.BTC_TextField.delegate = self;
 	self.USD_TextField.delegate = self;
 	
-	//set initial textField contents
-	self.BTC_TextField.text = @"1.0000";
-	
 	double currency;
 	tABC_Error error;
 	
