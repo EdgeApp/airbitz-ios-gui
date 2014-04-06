@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-//#define EXCHANGE_RATE			600.0	/* cw temp dollars divided by this equals bitcoin */
-
 @interface Transaction : NSObject
 
 @property (nonatomic, copy)     NSString        *strID;

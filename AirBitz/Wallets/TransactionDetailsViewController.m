@@ -12,6 +12,8 @@
 #import "ABC.h"
 #import "InfoView.h"
 
+#define DOLLAR_CURRENCY_NUM	840
+
 @interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate>
 {
 	UITextField *activeTextField;
@@ -97,6 +99,16 @@
 		else
 		{
 			self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.strWalletName];
+		}
+		
+		double currency;
+		tABC_CC result;
+		tABC_Error error;
+#warning TODO: hard coded for dollar currency right now
+		result = ABC_SatoshiToCurrency(self.transaction.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+		if(result == ABC_CC_Ok)
+		{
+			self.fiatTextField.text = [NSString stringWithFormat:@"USD %.2f", currency ];
 		}
 	}
 }
