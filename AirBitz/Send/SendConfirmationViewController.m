@@ -133,7 +133,9 @@
 	}
 	else
 	{
-		[self.amountBTCTextField becomeFirstResponder];
+		self.amountUSDTextField.text = nil;
+		self.amountBTCTextField.text = nil;
+		[self.amountUSDTextField becomeFirstResponder];
 	}
 }
 

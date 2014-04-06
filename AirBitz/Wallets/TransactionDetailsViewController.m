@@ -108,7 +108,7 @@
 		result = ABC_SatoshiToCurrency(self.transaction.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 		if(result == ABC_CC_Ok)
 		{
-			self.fiatTextField.text = [NSString stringWithFormat:@"USD %.2f", currency ];
+			self.fiatTextField.text = [NSString stringWithFormat:@"$%.2f", currency ];
 		}
 	}
 }

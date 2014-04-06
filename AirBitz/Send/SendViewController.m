@@ -300,9 +300,11 @@
 
 -(void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
 {
+	self.sendToTextField.text = nil;
 	[reader start];
 	[sendConfirmationViewController.view removeFromSuperview];
 	sendConfirmationViewController = nil;
+	
 }
 
 #pragma mark - ZBar's Delegate method
@@ -325,13 +327,32 @@
 		if (uri != NULL)
 		{
 			if (uri->szAddress)
+			{
 				printf("    address: %s\n", uri->szAddress);
-			printf("    amount: %lld\n", uri->amountSatoshi);
-			if (uri->szLabel)
-				printf("    label: %s\n", uri->szLabel);
-			if (uri->szMessage)
-				printf("    message: %s\n", uri->szMessage);
-				[self showSendConfirmationWithAddress:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:[NSString stringWithUTF8String:uri->szLabel]];
+			
+				printf("    amount: %lld\n", uri->amountSatoshi);
+				
+				NSString *label;
+				if (uri->szLabel)
+				{
+					printf("    label: %s\n", uri->szLabel);
+					label = [NSString stringWithUTF8String:uri->szLabel];
+				}
+				else
+				{
+					label = NSLocalizedString(@"Anonymous", nil);
+				}
+				if (uri->szMessage)
+				{
+						printf("    message: %s\n", uri->szMessage);
+				}
+				[self showSendConfirmationWithAddress:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label];
+			}
+			else
+			{
+				printf("No address!");
+				[view start];
+			}
 		}
 		else
 		{
