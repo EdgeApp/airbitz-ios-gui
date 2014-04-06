@@ -120,7 +120,7 @@
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
--(void)showSendConfirmationWithAddress:(NSString *)address amount:(long long)amount
+-(void)showSendConfirmationWithAddress:(NSString *)address amount:(long long)amount nameLabel:(NSString *)nameLabel
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
@@ -129,6 +129,7 @@
 	sendConfirmationViewController.sendToAddress = address;
 	sendConfirmationViewController.amountToSendSatoshi = amount;
 	sendConfirmationViewController.selectedWalletIndex = self.buttonSelector.selectedItemIndex;
+	sendConfirmationViewController.nameLabel = nameLabel;
 	
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
@@ -229,7 +230,7 @@
 {
 	if(textField.text.length)
 	{
-		[self showSendConfirmationWithAddress:textField.text amount:0.0];
+		[self showSendConfirmationWithAddress:textField.text amount:0.0 nameLabel:@" "];
 	}
 	else
 	{
@@ -336,7 +337,7 @@
 				printf("    label: %s\n", uri->szLabel);
 			if (uri->szMessage)
 				printf("    message: %s\n", uri->szMessage);
-				[self showSendConfirmationWithAddress:[NSString stringWithFormat:@"%s", uri->szAddress] amount:uri->amountSatoshi];
+				[self showSendConfirmationWithAddress:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:[NSString stringWithUTF8String:uri->szLabel]];
 		}
 		else
 		{

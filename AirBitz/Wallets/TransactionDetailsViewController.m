@@ -19,7 +19,6 @@
 	UIButton *blockingButton;
 }
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
-@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *walletLabel;
 @property (nonatomic, weak) IBOutlet UILabel *bitCoinLabel;
 @property (nonatomic, weak) IBOutlet UIButton *advancedDetailsButton;
@@ -74,7 +73,7 @@
 	self.nameLabel.text = self.transaction.strName;
 	//[self.addressButton setTitle:self.transaction.strAddress forState:UIControlStateNormal];
 	
-	self.walletLabel.text = self.transaction.strWalletName;
+	
 	self.bitCoinLabel.text = [NSString stringWithFormat:@"B %.5f", ABC_SatoshiToBitcoin(self.transaction.amountSatoshi)];
 	
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -90,6 +89,15 @@
 		frame.origin.x = 0;
 		frame.origin.y = 0;
 		originalFrame = frame;
+		
+		if(_transactionDetailsMode == TD_MODE_SENT)
+		{
+			self.walletLabel.text = [NSString stringWithFormat:@"From: %@", self.transaction.strWalletName];
+		}
+		else
+		{
+			self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.strWalletName];
+		}
 	}
 }
 

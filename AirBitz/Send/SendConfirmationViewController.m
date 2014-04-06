@@ -317,9 +317,11 @@
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
 	transactionDetailsController.view.frame = frame;
+	
+	transactionDetailsController.nameLabel.text = self.nameLabel;
+	transactionDetailsController.transactionDetailsMode = TD_MODE_SENT;
+	
 	[self.view addSubview:transactionDetailsController.view];
-	
-	
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
