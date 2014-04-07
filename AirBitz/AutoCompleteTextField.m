@@ -39,8 +39,18 @@
 -(void)awakeFromNib
 {
 	CGRect frame = self.frame;
-	frame.origin.y += (frame.size.height + 5.0);
-	frame.size.height *= 5;
+	
+	if(_tableAbove)
+	{
+		//this isn't getting called
+		frame.size.height *= 5;
+		frame.origin.y = 200.0; //cw hack
+	}
+	else
+	{
+		frame.origin.y += (frame.size.height + 5.0);
+		frame.size.height *= 5;
+	}
 	
 	autoCompleteTableView = [[UITableView alloc] initWithFrame:frame];
 	businessNames = [[NSMutableArray alloc] init];
@@ -57,6 +67,15 @@
 	[self generateListOfContactNames];
 	
 	self.delegate = self;
+}
+
+-(void)setTableAbove:(BOOL)tableAbove
+{
+	_tableAbove = tableAbove;
+	
+	CGRect frame = autoCompleteTableView.frame;
+	frame.origin.y = 150.0;
+	autoCompleteTableView.frame = frame;
 }
 
 -(void)dealloc
@@ -141,6 +160,7 @@
 
 -(void)showTableViewAnimated:(BOOL)animated
 {
+	[autoCompleteTableView.superview bringSubviewToFront:autoCompleteTableView];
 	if(animated)
 	{
 		[UIView animateWithDuration:0.25
@@ -189,41 +209,56 @@
 
 #pragma mark UITextField delegates
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+	if([self.autoTextFieldDelegate respondsToSelector:@selector(autoCompleteTextFieldDidBeginEditing:)])
+	{
+		[self.autoTextFieldDelegate autoCompleteTextFieldDidBeginEditing:self];
+	}
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString * searchStr = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
-	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
-	NSMutableString *urlString = [[NSMutableString alloc] init];
-	
-	NSString *searchTerm = [textField.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-	if(searchTerm == nil)
+	if(self.arrayAutoCompleteStrings.count)
 	{
-		//there are non ascii characters in the string
-		searchTerm = @" ";
-		
+		autoCompleteResults = self.arrayAutoCompleteStrings;
 	}
 	else
 	{
-		searchTerm = textField.text;
-	}
-	
-	[urlString appendString:[NSString stringWithFormat:@"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm]];
-	
-	[self addLocationToQuery:urlString];
-	//NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
-	if(urlString != (id)[NSNull null])
-	{
-		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
-										withParams:nil
-										withObject:textField
-									  withDelegate:self
-								acceptableCacheAge:15.0
-									   cacheResult:YES];
-	}
-	
-    [self searchAutocompleteEntriesWithSubstring:searchStr];
-    
+		[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
+		NSMutableString *urlString = [[NSMutableString alloc] init];
+		
+		NSString *searchTerm = [textField.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+		if(searchTerm == nil)
+		{
+			//there are non ascii characters in the string
+			searchTerm = @" ";
+			
+		}
+		else
+		{
+			searchTerm = textField.text;
+		}
+		
+		[urlString appendString:[NSString stringWithFormat:@"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm]];
+		
+		[self addLocationToQuery:urlString];
+		//NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
+		if(urlString != (id)[NSNull null])
+		{
+			[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
+											withParams:nil
+											withObject:textField
+										  withDelegate:self
+									acceptableCacheAge:15.0
+										   cacheResult:YES];
+		}
+		
+		
+    }
+	[self searchAutocompleteEntriesWithSubstring:searchStr];
     return YES;
 }
 
@@ -272,19 +307,49 @@
     
     [searchArray removeAllObjects];
     
-    for(NSString *curString in namesArray)
-    {
-        NSRange substringRange = [curString rangeOfString:substring options:NSCaseInsensitiveSearch];
-        //
-		if(substringRange.length > 1)
-        {
-            [searchArray addObject:curString];
-        }
-		else if (substringRange.location == 0)
+	if(self.arrayAutoCompleteStrings.count)
+	{
+		for(NSString *curString in self.arrayAutoCompleteStrings)
 		{
-			[searchArray addObject:curString];
+			NSArray *myArray = [curString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":"]];
+			NSString *theString;
+			//search for the stuff after the colon (i.e. don't search for Income: Expense: etc.)
+			if(myArray.count == 2)
+			{
+				theString = [myArray objectAtIndex:1];
+			}
+			else
+			{
+				theString = [myArray objectAtIndex:0];
+			}
+			NSRange substringRange = [theString rangeOfString:substring options:NSCaseInsensitiveSearch];
+			//
+			if(substringRange.length > 1)
+			{
+				[searchArray addObject:curString];
+			}
+			else if (substringRange.location == 0)
+			{
+				[searchArray addObject:curString];
+			}
 		}
-    }
+	}
+	else
+	{
+		for(NSString *curString in namesArray)
+		{
+			NSRange substringRange = [curString rangeOfString:substring options:NSCaseInsensitiveSearch];
+			//
+			if(substringRange.length > 1)
+			{
+				[searchArray addObject:curString];
+			}
+			else if (substringRange.location == 0)
+			{
+				[searchArray addObject:curString];
+			}
+		}
+	}
     
     if ([searchArray count] > 0)
     {
@@ -294,9 +359,11 @@
 	{
 		[self showTableViewAnimated:NO];
 	}
-    
-    //[autoCompleteTableView reloadData];
-	//[self mergeAutoCompleteResults];
+	if(self.arrayAutoCompleteStrings)
+	{
+		autoCompleteResults = searchArray;
+		[autoCompleteTableView reloadData];
+	}
 }
 
 #pragma mark - DLURLServer Callbacks

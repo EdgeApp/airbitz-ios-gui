@@ -15,7 +15,7 @@
 
 #define DOLLAR_CURRENCY_NUM	840
 
-@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate>
+@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, AutoCompleteTextFieldDelegate>
 {
 	UITextField *activeTextField;
 	CGRect originalFrame;
@@ -27,8 +27,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *advancedDetailsButton;
 @property (nonatomic, weak) IBOutlet UIButton *doneButton;
 @property (nonatomic, weak) IBOutlet UITextField *fiatTextField;
-@property (nonatomic, weak) IBOutlet UITextField *categoryTextField;
 @property (nonatomic, weak) IBOutlet UITextField *notesTextField;
+@property (nonatomic, weak) IBOutlet AutoCompleteTextField *categoryTextField;
 @property (nonatomic, weak) IBOutlet AutoCompleteTextField *nameTextField;
 @end
 
@@ -53,7 +53,7 @@
 	
 	self.fiatTextField.delegate = self;
 	self.notesTextField.delegate = self;
-	self.categoryTextField.delegate = self;
+	self.categoryTextField.autoTextFieldDelegate = self;
 	
 	/*
 	 @property (nonatomic, copy)     NSString        *strID;
@@ -75,6 +75,8 @@
 	self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
 	//self.nameLabel.text = self.transaction.strName;
 	self.nameTextField.text = self.transaction.strName;
+	self.categoryTextField.arrayAutoCompleteStrings = [NSArray arrayWithObjects:@"Income:Salary", @"Income:Rent", @"Transfer:Bank Account", @"Transfer:Cash", @"Transfer:Wallet", @"Expense:Dining", @"Expense:Clothing", @"Expense:Computers", @"Expense:Electronics", @"Expense:Education", @"Expense:Entertainment", @"Expense:Rent", @"Expense:Insurance", @"Expense:Medical", @"Expense:Pets", @"Expense:Recreation", @"Expense:Tax", @"Expense:Vacation", @"Expense:Utilities",nil];
+	self.categoryTextField.tableAbove = YES;
 	//[self.addressButton setTitle:self.transaction.strAddress forState:UIControlStateNormal];
 	
 	
@@ -270,6 +272,13 @@
 		 {
 		 }];
 	}
+}
+
+#pragma mark AutoCompleteTextField delegates
+
+-(void)autoCompleteTextFieldDidBeginEditing:(AutoCompleteTextField *)textField
+{
+	[self textFieldDidBeginEditing:textField];
 }
 
 #pragma mark UITextField delegates
