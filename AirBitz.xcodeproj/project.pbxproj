@@ -382,6 +382,7 @@
 		B5FD393118EFC35A00BE2670 /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */; };
 		B5FD393418F06FD800BE2670 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD393318F06FD800BE2670 /* StylizedTextField.m */; };
 		B5FD393618F0A67100BE2670 /* transactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393518F0A67100BE2670 /* transactionDetails.html */; };
+		B5FD394718F240E600BE2670 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -862,6 +863,8 @@
 		B5FD393218F06FD800BE2670 /* StylizedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField.h; sourceTree = "<group>"; };
 		B5FD393318F06FD800BE2670 /* StylizedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField.m; sourceTree = "<group>"; };
 		B5FD393518F0A67100BE2670 /* transactionDetails.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = transactionDetails.html; sourceTree = "<group>"; };
+		B5FD394518F240E600BE2670 /* AutoCompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCompleteTextField.h; sourceTree = "<group>"; };
+		B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCompleteTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1133,6 +1136,8 @@
 				B5675B5A18A17F6F002E0703 /* AppDelegate.h */,
 				B5C0A96218EA0A42008F302C /* Business Directory */,
 				B5675B5B18A17F6F002E0703 /* AppDelegate.m */,
+				B5FD394518F240E600BE2670 /* AutoCompleteTextField.h */,
+				B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */,
 				B57C209418C25011005D7245 /* BalanceView.h */,
 				B57C209518C25011005D7245 /* BalanceView.m */,
 				B57C209718C2502D005D7245 /* BalanceView~iphone.xib */,
@@ -2014,6 +2019,7 @@
 				B5C0A97D18EA0A7F008F302C /* DirectoryViewController.m in Sources */,
 				B5C0A9CB18EA0FF0008F302C /* ShowWalletQRViewController.m in Sources */,
 				B5E7F57A18E4AAD5009B5844 /* User.m in Sources */,
+				B5FD394718F240E600BE2670 /* AutoCompleteTextField.m in Sources */,
 				B5C0A9B118EA0D78008F302C /* SendViewController.m in Sources */,
 				B5C0A98D18EA0B80008F302C /* AnnotationContentView.m in Sources */,
 				B5C0A9C518EA0DD8008F302C /* WalletsViewController.m in Sources */,

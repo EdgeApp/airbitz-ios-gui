@@ -11,6 +11,7 @@
 #import "NSDate+Helper.h"
 #import "ABC.h"
 #import "InfoView.h"
+#import "AutoCompleteTextField.h"
 
 #define DOLLAR_CURRENCY_NUM	840
 
@@ -28,7 +29,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *fiatTextField;
 @property (nonatomic, weak) IBOutlet UITextField *categoryTextField;
 @property (nonatomic, weak) IBOutlet UITextField *notesTextField;
-
+@property (nonatomic, weak) IBOutlet AutoCompleteTextField *nameTextField;
 @end
 
 @implementation TransactionDetailsViewController
@@ -72,7 +73,8 @@
 	// self.dateLabel.text = [NSDate stringForDisplayFromDate:self.transaction.date prefixed:NO alwaysDisplayTime:YES];
 	
 	self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
-	self.nameLabel.text = self.transaction.strName;
+	//self.nameLabel.text = self.transaction.strName;
+	self.nameTextField.text = self.transaction.strName;
 	//[self.addressButton setTitle:self.transaction.strAddress forState:UIControlStateNormal];
 	
 	
