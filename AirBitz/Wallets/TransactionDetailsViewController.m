@@ -53,7 +53,8 @@
 	
 	self.fiatTextField.delegate = self;
 	self.notesTextField.delegate = self;
-	self.categoryTextField.autoTextFieldDelegate = self;
+	self.nameTextField.delegate = self;
+	self.categoryTextField.delegate = self;
 	
 	/*
 	 @property (nonatomic, copy)     NSString        *strID;
@@ -271,17 +272,28 @@
 		 completion:^(BOOL finished)
 		 {
 		 }];
+		 
+		 [self removeBlockingButton];
 	}
 }
 
 #pragma mark AutoCompleteTextField delegates
 
--(void)autoCompleteTextFieldDidBeginEditing:(AutoCompleteTextField *)textField
+/*-(void)textFieldDidBeginEditing:(AutoCompleteTextField *)textField
 {
 	[self textFieldDidBeginEditing:textField];
-}
+}*/
 
 #pragma mark UITextField delegates
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+	if([textField isKindOfClass:[AutoCompleteTextField class]])
+	{
+		[(AutoCompleteTextField *)textField autoCompleteTextFieldShouldChangeCharactersInRange:range replacementString:string];
+	}
+	return YES;
+}
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -295,6 +307,10 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+	if([textField isKindOfClass:[AutoCompleteTextField class]])
+	{
+		[(AutoCompleteTextField *)textField autoCompleteTextFieldShouldReturn];
+	}
 	[textField resignFirstResponder];
 	return YES;
 }

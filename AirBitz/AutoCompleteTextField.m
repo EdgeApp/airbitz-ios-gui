@@ -15,12 +15,12 @@
 
 @interface AutoCompleteTextField () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, DL_URLRequestDelegate>
 {
-	NSArray *namesArray;		//list of names from contacts
-	NSMutableArray *businessNames;	//list of names from business search
-	NSMutableArray *searchArray;
+	NSArray *contactsArray;		//list of all names from contacts
+	NSMutableArray *foundBusinessNames;	//list of found names from business search
+	NSMutableArray *foundContactsArray;	//list of found names from contacts search
 	UITableView *autoCompleteTableView;
 	
-	NSArray *autoCompleteResults;	//contacts and business all merged together and sorted
+	NSArray *autoCompleteResults;	//found Contacts and found Businesses all merged together and sorted
 }
 @end
 
@@ -53,7 +53,7 @@
 	}
 	
 	autoCompleteTableView = [[UITableView alloc] initWithFrame:frame];
-	businessNames = [[NSMutableArray alloc] init];
+	foundBusinessNames = [[NSMutableArray alloc] init];
 	
 	autoCompleteTableView.delegate = self;
 	autoCompleteTableView.dataSource = self;
@@ -66,7 +66,7 @@
 	[self hideTableViewAnimated:NO];
 	[self generateListOfContactNames];
 	
-	self.delegate = self;
+	//self.delegate = self;  <-- BAD!  App will hang
 }
 
 -(void)setTableAbove:(BOOL)tableAbove
@@ -81,14 +81,14 @@
 -(void)dealloc
 {
 	[autoCompleteTableView removeFromSuperview];
-	businessNames = nil;
+	foundBusinessNames = nil;
 	autoCompleteTableView = nil;
 }
 
 
 - (void)generateListOfContactNames
 {
-    searchArray = [[NSMutableArray alloc]init];
+    foundContactsArray = [[NSMutableArray alloc]init];
     
 	CFErrorRef error;
 	ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
@@ -130,9 +130,9 @@
 			[allNames addObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName]];
 		}
 		
-		namesArray = allNames;
+		contactsArray = allNames;
 		autoCompleteResults = allNames; //start autoCompleteResults with something (don't have business names at this point)
-		NSLog(@"All Email %@", namesArray);
+		NSLog(@"All Email %@", contactsArray);
 	}
 }
 
@@ -200,8 +200,8 @@
 
 -(void)mergeAutoCompleteResults
 {
-	NSMutableSet *set = [NSMutableSet setWithArray:searchArray];
-	[set addObjectsFromArray:businessNames];
+	NSMutableSet *set = [NSMutableSet setWithArray:foundContactsArray];
+	[set addObjectsFromArray:foundBusinessNames];
 	
 	autoCompleteResults = [[set allObjects] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 	[autoCompleteTableView reloadData];
@@ -209,17 +209,11 @@
 
 #pragma mark UITextField delegates
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
+//call these from our parent's UITextField delegates (couldn't make ourself our own delegate.  Would cause infinite recursion hang)
+-(void)autoCompleteTextFieldShouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-	if([self.autoTextFieldDelegate respondsToSelector:@selector(autoCompleteTextFieldDidBeginEditing:)])
-	{
-		[self.autoTextFieldDelegate autoCompleteTextFieldDidBeginEditing:self];
-	}
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    NSString * searchStr = [textField.text stringByReplacingCharactersInRange:range withString:string];
+	//call from - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+    NSString * searchStr = [self.text stringByReplacingCharactersInRange:range withString:string];
     
 	if(self.arrayAutoCompleteStrings.count)
 	{
@@ -230,27 +224,28 @@
 		[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 		NSMutableString *urlString = [[NSMutableString alloc] init];
 		
-		NSString *searchTerm = [textField.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+		NSString *searchTerm = [searchStr stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 		if(searchTerm == nil)
 		{
 			//there are non ascii characters in the string
 			searchTerm = @" ";
 			
 		}
-		else
-		{
-			searchTerm = textField.text;
-		}
+		//else
+		//{
+			//searchTerm = searchStr;
+		//}
 		
 		[urlString appendString:[NSString stringWithFormat:@"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm]];
 		
 		[self addLocationToQuery:urlString];
-		//NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
+
 		if(urlString != (id)[NSNull null])
 		{
+			NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
 			[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
 											withParams:nil
-											withObject:textField
+											withObject:self
 										  withDelegate:self
 									acceptableCacheAge:15.0
 										   cacheResult:YES];
@@ -259,14 +254,14 @@
 		
     }
 	[self searchAutocompleteEntriesWithSubstring:searchStr];
-    return YES;
+    //return YES;
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
+-(void)autoCompleteTextFieldShouldReturn
 {
-	[self resignFirstResponder];
+	//[self resignFirstResponder];
 	[self hideTableViewAnimated:YES];
-	return YES;
+	//return YES;
 }
 
 
@@ -305,7 +300,7 @@
 {
     NSLog(@"Search Text %@",substring);
     
-    [searchArray removeAllObjects];
+    [foundContactsArray removeAllObjects];
     
 	if(self.arrayAutoCompleteStrings.count)
 	{
@@ -326,42 +321,42 @@
 			//
 			if(substringRange.length > 1)
 			{
-				[searchArray addObject:curString];
+				[foundContactsArray addObject:curString];
 			}
 			else if (substringRange.location == 0)
 			{
-				[searchArray addObject:curString];
+				[foundContactsArray addObject:curString];
 			}
 		}
 	}
 	else
 	{
-		for(NSString *curString in namesArray)
+		for(NSString *curString in contactsArray)
 		{
 			NSRange substringRange = [curString rangeOfString:substring options:NSCaseInsensitiveSearch];
 			//
 			if(substringRange.length > 1)
 			{
-				[searchArray addObject:curString];
+				[foundContactsArray addObject:curString];
 			}
 			else if (substringRange.location == 0)
 			{
-				[searchArray addObject:curString];
+				[foundContactsArray addObject:curString];
 			}
 		}
 	}
     
-    if ([searchArray count] > 0)
+    if ([foundContactsArray count] > 0)
     {
 		[self showTableViewAnimated:YES];
     }
 	else
 	{
-		[self showTableViewAnimated:NO];
+		[self hideTableViewAnimated:YES];
 	}
 	if(self.arrayAutoCompleteStrings)
 	{
-		autoCompleteResults = searchArray;
+		autoCompleteResults = foundContactsArray;
 		[autoCompleteTableView reloadData];
 	}
 }
@@ -384,24 +379,33 @@
 	searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
 
 	//build array of business (prune categories out of list)
-	[businessNames removeAllObjects];
+	[foundBusinessNames removeAllObjects];
 	for(NSDictionary *dict in searchResultsArray)
 	{
 		NSString *type = [dict objectForKey:@"type"];
 		if([type isEqualToString:@"business"])
 		{
-			[businessNames addObject:[dict objectForKey:@"text"]];
+			[foundBusinessNames addObject:[dict objectForKey:@"text"]];
 		}
 	}
 	
 	if(searchResultsArray.count)
 	{
-		NSLog(@"Results: %@", businessNames);
+		NSLog(@"Results: %@", foundBusinessNames);
 	}
 	else
 	{
 		NSLog(@"SEARCH RESULTS ARRAY IS EMPTY!");
 	}
+	if (([foundContactsArray count] > 0) || (foundBusinessNames.count))
+    {
+		[self showTableViewAnimated:YES];
+    }
+	else
+	{
+		[self hideTableViewAnimated:YES];
+	}
+	
 
 	[self mergeAutoCompleteResults];
 }
