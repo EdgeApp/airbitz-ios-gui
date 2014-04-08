@@ -13,6 +13,8 @@
 #import "Location.h"
 #import "CJSONDeserializer.h"
 
+#define USE_AUTOCOMPLETE_QUERY 0
+
 @interface AutoCompleteTextField () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, DL_URLRequestDelegate>
 {
 	NSArray *contactsArray;		//list of all names from contacts
@@ -235,7 +237,8 @@
 		//{
 			//searchTerm = searchStr;
 		//}
-		
+
+#if USE_AUTOCOMPLETE_QUERY
 		[urlString appendString:[NSString stringWithFormat:@"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm]];
 		
 		[self addLocationToQuery:urlString];
@@ -250,6 +253,22 @@
 									acceptableCacheAge:15.0
 										   cacheResult:YES];
 		}
+#else
+		[urlString appendString:[NSString stringWithFormat:@"%@/search/?term=%@&radius=1609&sort=1", SERVER_API, searchTerm]];
+		
+		[self addLocationToQuery:urlString];
+		
+		if(urlString != (id)[NSNull null])
+		{
+			NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
+			[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
+											withParams:nil
+											withObject:self
+										  withDelegate:self
+									acceptableCacheAge:15.0
+										   cacheResult:YES];
+		}
+#endif
 		
 		
     }
@@ -380,15 +399,25 @@
 
 	//build array of business (prune categories out of list)
 	[foundBusinessNames removeAllObjects];
+	
+
 	for(NSDictionary *dict in searchResultsArray)
 	{
+#if USE_AUTOCOMPLETE_QUERY
 		NSString *type = [dict objectForKey:@"type"];
 		if([type isEqualToString:@"business"])
 		{
 			[foundBusinessNames addObject:[dict objectForKey:@"text"]];
 		}
+#else
+		NSString *name = [dict objectForKey:@"name"];
+		if(name && name != (id)[NSNull null])
+		{
+			[foundBusinessNames addObject:name];
+		}
+#endif
 	}
-	
+
 	if(searchResultsArray.count)
 	{
 		NSLog(@"Results: %@", foundBusinessNames);

@@ -37,7 +37,7 @@
 #define CURRENT_LOCATION_STRING	NSLocalizedString(@"Current Location", nil)
 #define ON_THE_WEB_STRING	NSLocalizedString(@"On The Web", nil)
 
-#define DEFAULT_SEARCH_RADIUS_MILES	50
+//#define DEFAULT_SEARCH_RADIUS_MILES	50
 
 #define SHOW_SERVER_PAGE		0		/* set to 1 to replace bitcoin discount label with server page count (should be 0 for deployment) */
 
