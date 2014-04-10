@@ -42,6 +42,8 @@
 {
 	CGRect frame = self.frame;
 	
+	[super awakeFromNib];
+	
 	if(_tableAbove)
 	{
 		//this isn't getting called

@@ -64,6 +64,8 @@
 		B5184B7D18E0F4DA0001712A /* btn_big_blue2_dark@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5184B7B18E0F4DA0001712A /* btn_big_blue2_dark@2x~iphone.png */; };
 		B5184B7E18E0F4DA0001712A /* btn_big_blue2_dark~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5184B7C18E0F4DA0001712A /* btn_big_blue2_dark~iphone.png */; };
 		B5376E1D18B55D920099EF8F /* UIImage+Colorize.m in Sources */ = {isa = PBXBuildFile; fileRef = B5376E1C18B55D920099EF8F /* UIImage+Colorize.m */; };
+		B53FD64318F6EA110001E00D /* clearButton@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B53FD64118F6EA110001E00D /* clearButton@2x~iphone.png */; };
+		B53FD64418F6EA110001E00D /* clearButton~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B53FD64218F6EA110001E00D /* clearButton~iphone.png */; };
 		B55A02FC18EA206300845090 /* btn_cancel@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02F218EA206300845090 /* btn_cancel@2x~iphone.png */; };
 		B55A02FD18EA206300845090 /* btn_cancel~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02F318EA206300845090 /* btn_cancel~iphone.png */; };
 		B55A02FE18EA206300845090 /* btn_changeCategories@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02F418EA206300845090 /* btn_changeCategories@2x~iphone.png */; };
@@ -479,6 +481,8 @@
 		B5184B7C18E0F4DA0001712A /* btn_big_blue2_dark~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_big_blue2_dark~iphone.png"; sourceTree = "<group>"; };
 		B5376E1B18B55D920099EF8F /* UIImage+Colorize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Colorize.h"; sourceTree = "<group>"; };
 		B5376E1C18B55D920099EF8F /* UIImage+Colorize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Colorize.m"; sourceTree = "<group>"; };
+		B53FD64118F6EA110001E00D /* clearButton@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clearButton@2x~iphone.png"; sourceTree = "<group>"; };
+		B53FD64218F6EA110001E00D /* clearButton~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clearButton~iphone.png"; sourceTree = "<group>"; };
 		B55A02F218EA206300845090 /* btn_cancel@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_cancel@2x~iphone.png"; sourceTree = "<group>"; };
 		B55A02F318EA206300845090 /* btn_cancel~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_cancel~iphone.png"; sourceTree = "<group>"; };
 		B55A02F418EA206300845090 /* btn_changeCategories@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_changeCategories@2x~iphone.png"; sourceTree = "<group>"; };
@@ -1223,6 +1227,8 @@
 		B5675B9F18A19A84002E0703 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				B53FD64118F6EA110001E00D /* clearButton@2x~iphone.png */,
+				B53FD64218F6EA110001E00D /* clearButton~iphone.png */,
 				B5675BA018A19A84002E0703 /* back_arrow@2x~iphone.png */,
 				B5675BA118A19A84002E0703 /* back_arrow~iphone.png */,
 				B5675BA218A19A84002E0703 /* background@2x~iphone.jpg */,
@@ -1834,6 +1840,7 @@
 				B59C142018C0113A00AEA789 /* divider_thumb~iphone.png in Resources */,
 				B5C0A8E018E644EE008F302C /* flash_auto@2x~iphone.png in Resources */,
 				B5137C4218A487C500DA4A34 /* icon_location@2x~iphone.png in Resources */,
+				B53FD64318F6EA110001E00D /* clearButton@2x~iphone.png in Resources */,
 				B59C153C18C012B500AEA789 /* tabbar_popup_right@2x~iphone.png in Resources */,
 				B5F2EB1B18DE06B7008ACF88 /* img_collapseExpandBlueDown~iphone.png in Resources */,
 				B5184B7618E0D5E90001712A /* btn_big_green~iphone.png in Resources */,
@@ -1908,6 +1915,7 @@
 				B59C143718C0129300AEA789 /* bd_cell_top@2x~iphone.png in Resources */,
 				B59C141E18C0113A00AEA789 /* divider@2x~iphone.png in Resources */,
 				B59C14F118C012B500AEA789 /* btn_equal~iphone.png in Resources */,
+				B53FD64418F6EA110001E00D /* clearButton~iphone.png in Resources */,
 				B59C143818C0129300AEA789 /* bd_cell_top~iphone.png in Resources */,
 				B5F2E9D118DCDFE7008ACF88 /* PasswordVerifyView~iphone.xib in Resources */,
 				B5137C3E18A4529500DA4A34 /* logo@2x~iphone.png in Resources */,

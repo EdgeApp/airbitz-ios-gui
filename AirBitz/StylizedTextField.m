@@ -30,7 +30,19 @@
 		self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName: color}];
 	}
 	[super awakeFromNib];
+	
+	//UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+	UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 15.0, 15.0)];
+	[button setImage:[UIImage imageNamed:@"clearButton.png"] forState:UIControlStateNormal];
+	[button setFrame:CGRectMake(0.0f, 0.0f, 15.0f, 15.0f)]; // Required for iOS7
+	[button addTarget:self action:@selector(doClear) forControlEvents:UIControlEventTouchUpInside];
+	 self.rightView = button;
+	 self.rightViewMode = self.clearButtonMode;
 }
 
+-(void)doClear
+{
+	self.text = @"";
+}
 
 @end

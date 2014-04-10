@@ -140,7 +140,7 @@
 	//frame.origin.y = self.headerView.frame.origin.y + self.headerView.frame.size.height;
 	//frame.size.height = self.view.bounds.size.height - frame.origin.y;
 	blockingButton.frame = frame;
-	blockingButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+	blockingButton.backgroundColor = [UIColor clearColor]; //[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
 	[self.view insertSubview:blockingButton belowSubview:view];
 	blockingButton.alpha = 0.0;
 	
