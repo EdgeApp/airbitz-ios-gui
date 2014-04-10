@@ -334,6 +334,10 @@
 	self.text = [autoCompleteResults objectAtIndex:indexPath.row];
     [self hideTableViewAnimated:YES];
     [self resignFirstResponder];
+	if([self.autoTextFieldDelegate respondsToSelector:@selector(autoCompleteTextFieldDidSelectFromTable:)])
+	{
+		[self.autoTextFieldDelegate autoCompleteTextFieldDidSelectFromTable:self];
+	}
 }
 
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring

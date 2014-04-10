@@ -55,6 +55,8 @@
 	self.notesTextField.delegate = self;
 	self.nameTextField.delegate = self;
 	self.categoryTextField.delegate = self;
+	self.nameTextField.autoTextFieldDelegate = self;
+	self.categoryTextField.autoTextFieldDelegate = self;
 	
 	/*
 	 @property (nonatomic, copy)     NSString        *strID;
@@ -291,6 +293,14 @@
 	[self textFieldDidBeginEditing:textField];
 }*/
 
+-(void)autoCompleteTextFieldDidSelectFromTable:(AutoCompleteTextField *)textField
+{
+	if(textField == self.nameTextField)
+	{
+		[self.categoryTextField becomeFirstResponder];
+	}
+}
+
 #pragma mark UITextField delegates
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -324,6 +334,10 @@
 		[(AutoCompleteTextField *)textField autoCompleteTextFieldShouldReturn];
 	}
 	[textField resignFirstResponder];
+	if(textField == self.nameTextField)
+	{
+		[self.categoryTextField becomeFirstResponder];
+	}
 	return YES;
 }
 
