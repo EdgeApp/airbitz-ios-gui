@@ -261,6 +261,11 @@
 {
 	if(activeTextField)
 	{
+		if([activeTextField isKindOfClass:[AutoCompleteTextField class]])
+		{
+			//hide autocomplete tableView if visible
+			[(AutoCompleteTextField *)activeTextField autoCompleteTextFieldShouldReturn];
+		}
 		activeTextField = nil;
 		[UIView animateWithDuration:0.35
 							  delay: 0.0
@@ -298,6 +303,10 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	activeTextField = textField;
+	if([textField isKindOfClass:[AutoCompleteTextField class]])
+	{
+		[(AutoCompleteTextField *)textField autoCompleteTextFieldDidBeginEditing];
+	}
 	[self createBlockingButtonUnderView:textField];
 }
 

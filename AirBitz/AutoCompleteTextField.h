@@ -17,6 +17,7 @@
 @property (nonatomic, assign) BOOL tableAbove;	//set if you want the table to appear above the textField
 //@property (assign) id<AutoCompleteTextFieldDelegate> autoTextFieldDelegate;
 
+-(void)autoCompleteTextFieldDidBeginEditing;
 -(void)autoCompleteTextFieldShouldReturn;	//call this from our delegate's -textFieldShouldReturn method
 -(void)autoCompleteTextFieldShouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 

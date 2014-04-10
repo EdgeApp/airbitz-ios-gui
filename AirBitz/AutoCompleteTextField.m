@@ -211,6 +211,56 @@
 
 #pragma mark UITextField delegates
 
+-(void)kickOffSearchWithString:(NSString *)searchStr
+{
+	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
+	NSMutableString *urlString = [[NSMutableString alloc] init];
+	
+	NSString *searchTerm = [searchStr stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+	if(searchTerm == nil)
+	{
+		//there are non ascii characters in the string
+		searchTerm = @" ";
+		
+	}
+	//else
+	//{
+	//searchTerm = searchStr;
+	//}
+	
+#if USE_AUTOCOMPLETE_QUERY
+	[urlString appendString:[NSString stringWithFormat:@"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm]];
+	
+	[self addLocationToQuery:urlString];
+	
+	if(urlString != (id)[NSNull null])
+	{
+		NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
+		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
+										withParams:nil
+										withObject:self
+									  withDelegate:self
+								acceptableCacheAge:15.0
+									   cacheResult:YES];
+	}
+#else
+	[urlString appendString:[NSString stringWithFormat:@"%@/search/?term=%@&radius=1609&sort=1", SERVER_API, searchTerm]];
+	
+	[self addLocationToQuery:urlString];
+	
+	if(urlString != (id)[NSNull null])
+	{
+		NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
+		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
+										withParams:nil
+										withObject:self
+									  withDelegate:self
+								acceptableCacheAge:15.0
+									   cacheResult:YES];
+	}
+#endif
+}
+
 //call these from our parent's UITextField delegates (couldn't make ourself our own delegate.  Would cause infinite recursion hang)
 -(void)autoCompleteTextFieldShouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -223,57 +273,17 @@
 	}
 	else
 	{
-		[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
-		NSMutableString *urlString = [[NSMutableString alloc] init];
-		
-		NSString *searchTerm = [searchStr stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-		if(searchTerm == nil)
-		{
-			//there are non ascii characters in the string
-			searchTerm = @" ";
-			
-		}
-		//else
-		//{
-			//searchTerm = searchStr;
-		//}
-
-#if USE_AUTOCOMPLETE_QUERY
-		[urlString appendString:[NSString stringWithFormat:@"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm]];
-		
-		[self addLocationToQuery:urlString];
-
-		if(urlString != (id)[NSNull null])
-		{
-			NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
-			[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
-											withParams:nil
-											withObject:self
-										  withDelegate:self
-									acceptableCacheAge:15.0
-										   cacheResult:YES];
-		}
-#else
-		[urlString appendString:[NSString stringWithFormat:@"%@/search/?term=%@&radius=1609&sort=1", SERVER_API, searchTerm]];
-		
-		[self addLocationToQuery:urlString];
-		
-		if(urlString != (id)[NSNull null])
-		{
-			NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
-			[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
-											withParams:nil
-											withObject:self
-										  withDelegate:self
-									acceptableCacheAge:15.0
-										   cacheResult:YES];
-		}
-#endif
+		[self kickOffSearchWithString:searchStr];
 		
 		
     }
 	[self searchAutocompleteEntriesWithSubstring:searchStr];
     //return YES;
+}
+
+-(void)autoCompleteTextFieldDidBeginEditing
+{
+	[self kickOffSearchWithString:self.text];
 }
 
 -(void)autoCompleteTextFieldShouldReturn
