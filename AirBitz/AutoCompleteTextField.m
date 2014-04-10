@@ -283,12 +283,23 @@
 
 -(void)autoCompleteTextFieldDidBeginEditing
 {
-	[self kickOffSearchWithString:self.text];
+	if(self.arrayAutoCompleteStrings.count)
+	{
+		autoCompleteResults = self.arrayAutoCompleteStrings;
+	}
+	else
+	{
+		[self kickOffSearchWithString:self.text];
+		
+		
+    }
+	[self searchAutocompleteEntriesWithSubstring:self.text];
 }
 
 -(void)autoCompleteTextFieldShouldReturn
 {
 	//[self resignFirstResponder];
+	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 	[self hideTableViewAnimated:YES];
 	//return YES;
 }
@@ -333,28 +344,35 @@
     
 	if(self.arrayAutoCompleteStrings.count)
 	{
-		for(NSString *curString in self.arrayAutoCompleteStrings)
+		if([substring isEqualToString:@""])
 		{
-			NSArray *myArray = [curString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":"]];
-			NSString *theString;
-			//search for the stuff after the colon (i.e. don't search for Income: Expense: etc.)
-			if(myArray.count == 2)
+			[foundContactsArray addObjectsFromArray:self.arrayAutoCompleteStrings];
+		}
+		else
+		{
+			for(NSString *curString in self.arrayAutoCompleteStrings)
 			{
-				theString = [myArray objectAtIndex:1];
-			}
-			else
-			{
-				theString = [myArray objectAtIndex:0];
-			}
-			NSRange substringRange = [theString rangeOfString:substring options:NSCaseInsensitiveSearch];
-			//
-			if(substringRange.length > 1)
-			{
-				[foundContactsArray addObject:curString];
-			}
-			else if (substringRange.location == 0)
-			{
-				[foundContactsArray addObject:curString];
+				NSArray *myArray = [curString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":"]];
+				NSString *theString;
+				//search for the stuff after the colon (i.e. don't search for Income: Expense: etc.)
+				if(myArray.count == 2)
+				{
+					theString = [myArray objectAtIndex:1];
+				}
+				else
+				{
+					theString = [myArray objectAtIndex:0];
+				}
+				NSRange substringRange = [theString rangeOfString:substring options:NSCaseInsensitiveSearch];
+				//
+				if(substringRange.length > 1)
+				{
+					[foundContactsArray addObject:curString];
+				}
+				else if (substringRange.location == 0)
+				{
+					[foundContactsArray addObject:curString];
+				}
 			}
 		}
 	}
@@ -379,10 +397,10 @@
     {
 		[self showTableViewAnimated:YES];
     }
-	else
+	/*else
 	{
 		[self hideTableViewAnimated:YES];
-	}
+	}*/
 	if(self.arrayAutoCompleteStrings)
 	{
 		autoCompleteResults = foundContactsArray;
@@ -440,10 +458,10 @@
     {
 		[self showTableViewAnimated:YES];
     }
-	else
+	/*else
 	{
 		[self hideTableViewAnimated:YES];
-	}
+	}*/
 	
 
 	[self mergeAutoCompleteResults];

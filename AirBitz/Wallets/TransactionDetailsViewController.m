@@ -303,11 +303,12 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	activeTextField = textField;
+	[self createBlockingButtonUnderView:textField];
 	if([textField isKindOfClass:[AutoCompleteTextField class]])
 	{
 		[(AutoCompleteTextField *)textField autoCompleteTextFieldDidBeginEditing];
 	}
-	[self createBlockingButtonUnderView:textField];
+	
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
