@@ -12,10 +12,11 @@
 #import "ABC.h"
 #import "InfoView.h"
 #import "AutoCompleteTextField.h"
+#import "CalculatorView.h"
 
 #define DOLLAR_CURRENCY_NUM	840
 
-@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, AutoCompleteTextFieldDelegate>
+@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, AutoCompleteTextFieldDelegate, CalculatorViewDelegate>
 {
 	UITextField *activeTextField;
 	CGRect originalFrame;
@@ -30,6 +31,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *notesTextField;
 @property (nonatomic, weak) IBOutlet AutoCompleteTextField *categoryTextField;
 @property (nonatomic, weak) IBOutlet AutoCompleteTextField *nameTextField;
+@property (nonatomic, weak) IBOutlet CalculatorView *keypadView;
 @end
 
 @implementation TransactionDetailsViewController
@@ -51,7 +53,10 @@
 	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateNormal];
 	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateSelected];
 	
+	self.keypadView.delegate = self;
+	
 	self.fiatTextField.delegate = self;
+	self.fiatTextField.inputView = self.keypadView;
 	self.notesTextField.delegate = self;
 	self.nameTextField.delegate = self;
 	self.categoryTextField.delegate = self;
@@ -120,6 +125,10 @@
 		{
 			self.fiatTextField.text = [NSString stringWithFormat:@"$%.2f", currency ];
 		}
+		
+		frame = self.keypadView.frame;
+		frame.origin.y = frame.origin.y + frame.size.height;
+		self.keypadView.frame = frame;
 	}
 }
 
@@ -287,6 +296,18 @@
 	}
 }
 
+#pragma mark calculator delegates
+
+-(void)CalculatorDone:(CalculatorView *)calculator
+{
+	[self.fiatTextField resignFirstResponder];
+}
+
+-(void)CalculatorValueChanged:(CalculatorView *)calculator
+{
+}
+
+
 #pragma mark AutoCompleteTextField delegates
 
 -(void)autoCompleteTextFieldDidSelectFromTable:(AutoCompleteTextField *)textField
@@ -311,6 +332,7 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	activeTextField = textField;
+	self.keypadView.textField = textField;
 	[self createBlockingButtonUnderView:textField];
 	if([textField isKindOfClass:[AutoCompleteTextField class]])
 	{
