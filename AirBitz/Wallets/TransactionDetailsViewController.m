@@ -132,6 +132,12 @@
 	}
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+	NSLog(@"View Did Disappear!");
+	[self.delegate TransactionDetailsViewControllerDone:self];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
