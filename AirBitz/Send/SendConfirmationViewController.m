@@ -437,6 +437,7 @@
 {
 	[self.amountUSDTextField resignFirstResponder];
 	[self.amountBTCTextField resignFirstResponder];
+	[self.withdrawlPIN becomeFirstResponder];
 }
 
 -(void)CalculatorValueChanged:(CalculatorView *)calculator
