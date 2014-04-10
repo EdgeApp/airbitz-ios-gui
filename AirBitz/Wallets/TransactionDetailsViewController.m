@@ -89,6 +89,7 @@
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	
+	self.nameTextField.placeholder = NSLocalizedString(@"Payee or Business Name", nil);
 	[self.nameTextField becomeFirstResponder];
 }
 
@@ -287,11 +288,6 @@
 }
 
 #pragma mark AutoCompleteTextField delegates
-
-/*-(void)textFieldDidBeginEditing:(AutoCompleteTextField *)textField
-{
-	[self textFieldDidBeginEditing:textField];
-}*/
 
 -(void)autoCompleteTextFieldDidSelectFromTable:(AutoCompleteTextField *)textField
 {
