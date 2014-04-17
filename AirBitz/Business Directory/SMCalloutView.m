@@ -557,7 +557,7 @@ NSTimeInterval kSMCalloutViewRepositionDelayForUIScrollView = 1.0/3.0;
         41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 99, 99, 99, 99, 99
     };
     
-    NSData *inputData = [string dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSData *inputData = [string dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     NSUInteger inputLength = [inputData length];
     const unsigned char *inputBytes = [inputData bytes];
     

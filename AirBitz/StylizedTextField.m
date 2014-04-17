@@ -22,14 +22,10 @@
 
 -(void)awakeFromNib
 {
-	[self setTintColor:[UIColor whiteColor]];
-	
-	UIColor *color = [UIColor lightTextColor];
-	if(self.placeholder)
-	{
-		self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName: color}];
-	}
 	[super awakeFromNib];
+	[self setTintColor:[UIColor whiteColor]];
+	[self setPlaceholderTextColor];
+	
 	
 	//UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 	UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 15.0, 15.0)];
@@ -38,6 +34,27 @@
 	[button addTarget:self action:@selector(doClear) forControlEvents:UIControlEventTouchUpInside];
 	 self.rightView = button;
 	 self.rightViewMode = self.clearButtonMode;
+	 
+	//UIColor *color = [UIColor lightTextColor];
+	//YOURTEXTFIELD.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"PlaceHolder Text" attributes:@{NSForegroundColorAttributeName: color}];
+}
+
+-(void)setPlaceholderTextColor
+{
+	if(self.placeholder)
+	{
+		UIColor *color = [UIColor lightTextColor];
+		{
+			self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName: color}];
+		}
+	}
+}
+
+
+-(void)setPlaceholder:(NSString *)placeholder
+{
+	[super setPlaceholder:placeholder];
+	[self setPlaceholderTextColor];
 }
 
 -(void)doClear

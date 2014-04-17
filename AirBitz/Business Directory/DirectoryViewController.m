@@ -588,7 +588,7 @@ typedef enum eMapDisplayState
 	}
 	[self addLocationToQuery:query];
 	
-	NSString *serverQuery = [query stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+	NSString *serverQuery = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	//NSLog(@"Query to server: %@", serverQuery);
 	
 	[[DL_URLServer controller] issueRequestURL:serverQuery
@@ -1447,7 +1447,7 @@ typedef enum eMapDisplayState
 	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 	NSMutableString *urlString = [[NSMutableString alloc] init];
 
-	NSString *searchTerm = [textField.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+	NSString *searchTerm = [textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	if(searchTerm == nil)
 	{
 		//there are non ascii characters in the string
@@ -1461,10 +1461,10 @@ typedef enum eMapDisplayState
 	[urlString appendString:[NSString stringWithFormat:@"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm]];
 
 	[self addLocationToQuery:urlString];
-	//NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
+	//NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
 	if(urlString != (id)[NSNull null])
 	{
-		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
+		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 										withParams:nil
 										withObject:textField
 									  withDelegate:self
@@ -1492,7 +1492,7 @@ typedef enum eMapDisplayState
 	NSMutableString *query = [[NSMutableString alloc] initWithString:[NSString stringWithFormat:@"%@/autocomplete-location?term=%@", SERVER_API, textField.text]];
 	[self addLocationToQuery:query];
 	//NSLog(@"Location Query: %@", query);
-	[[DL_URLServer controller] issueRequestURL:[query stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
+	[[DL_URLServer controller] issueRequestURL:[query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 									withParams:nil
 									withObject:textField
 								  withDelegate:self

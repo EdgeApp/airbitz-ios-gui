@@ -258,7 +258,7 @@
 {
 	/*//http://107.170.22.83:80/api/v1/autocomplete-location/?term=sa
 	NSLog( @"location text changed: %@", textField.text);
-	NSString *paramDataString = [NSString stringWithFormat:@"%@/autocomplete-location?term=%@", SERVER_API, [textField.text stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+	NSString *paramDataString = [NSString stringWithFormat:@"%@/autocomplete-location?term=%@", SERVER_API, [textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 	[[DL_URLServer controller] issueRequestURL:paramDataString
 									withParams:nil
 									withObject:textField

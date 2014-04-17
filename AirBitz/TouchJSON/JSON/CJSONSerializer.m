@@ -187,7 +187,7 @@ static NSData *kTrue = NULL;
             else if (theValue == 1)
                 theResult = kTrue;
             else
-                theResult = [[inNumber stringValue] dataUsingEncoding:NSASCIIStringEncoding];
+                theResult = [[inNumber stringValue] dataUsingEncoding:NSUTF8StringEncoding];
             }
             break;
         case kCFNumberFloat32Type:
@@ -204,7 +204,7 @@ static NSData *kTrue = NULL;
         case kCFNumberLongLongType:
         case kCFNumberCFIndexType:
         default:
-            theResult = [[inNumber stringValue] dataUsingEncoding:NSASCIIStringEncoding];
+            theResult = [[inNumber stringValue] dataUsingEncoding:NSUTF8StringEncoding];
             break;
         }
     return(theResult);
@@ -352,7 +352,7 @@ static NSData *kTrue = NULL;
         [theData appendData:theValueData];
         
         if (theKey != [theKeys lastObject])
-            [theData appendData:[@"," dataUsingEncoding:NSASCIIStringEncoding]];
+            [theData appendData:[@"," dataUsingEncoding:NSUTF8StringEncoding]];
         }
 
     [theData appendBytes:"}" length:1];

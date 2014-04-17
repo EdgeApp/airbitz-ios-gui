@@ -218,7 +218,7 @@
 	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 	NSMutableString *urlString = [[NSMutableString alloc] init];
 	
-	NSString *searchTerm = [searchStr stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+	NSString *searchTerm = [searchStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	if(searchTerm == nil)
 	{
 		//there are non ascii characters in the string
@@ -237,8 +237,8 @@
 	
 	if(urlString != (id)[NSNull null])
 	{
-		NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
-		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
+		NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 										withParams:nil
 										withObject:self
 									  withDelegate:self
@@ -252,8 +252,8 @@
 	
 	if(urlString != (id)[NSNull null])
 	{
-		NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
-		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]
+		NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 										withParams:nil
 										withObject:self
 									  withDelegate:self
