@@ -8,8 +8,9 @@
 
 #import "CalculatorView.h"
 
+#define DIGIT_BACK			11
+
 #define OPERATION_CLEAR		0
-#define OPERATION_BACK		1
 #define OPERATION_DONE		2
 #define OPERATION_DIVIDE	3
 #define OPERATION_EQUAL		4
@@ -17,6 +18,15 @@
 #define OPERATION_MULTIPLY	6
 #define OPERATION_PLUS		7
 #define OPERATION_PERCENT	8
+
+@interface CalculatorView ()
+{
+	float accumulator;
+	int operation;
+	BOOL lastKeyWasOperation;
+}
+
+@end
 
 @implementation CalculatorView
 
@@ -40,9 +50,63 @@
     return self;
 }
 
+-(void)loadAccumulator
+{
+	accumulator = [self.textField.text floatValue];
+}
+
+-(void)performLastOperation
+{
+	switch(operation)
+	{
+		case OPERATION_CLEAR:
+		case OPERATION_DONE:
+			NSLog(@"Performing loadAccumulator");
+			[self loadAccumulator];
+			break;
+		case OPERATION_DIVIDE:
+			NSLog(@"Performing Divide");
+			accumulator /= [self.textField.text floatValue];
+			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
+			break;
+		case OPERATION_EQUAL:
+			NSLog(@"Performing Equal");
+			break;
+		case OPERATION_MINUS:
+			NSLog(@"Performing Minus");
+			accumulator -= [self.textField.text floatValue];
+			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
+			break;
+		case OPERATION_MULTIPLY:
+			NSLog(@"Performing Multiply");
+			accumulator *= [self.textField.text floatValue];
+			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
+			break;
+		case OPERATION_PLUS:
+			NSLog(@"Performing Plus");
+			accumulator += [self.textField.text floatValue];
+			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
+			break;
+		case OPERATION_PERCENT:
+			break;
+	}
+}
 
 -(IBAction)digit:(UIButton *)sender
 {
+	NSLog(@"Digit: %i", sender.tag);
+	if(operation == OPERATION_EQUAL)
+	{
+		//also clear the accumulator
+		NSLog(@"Clearing accumulator");
+		accumulator = 0.0;
+		operation = OPERATION_CLEAR;
+	}
+	if(lastKeyWasOperation)
+	{
+		NSLog(@"Clearing textfield");
+		self.textField.text = @"";
+	}
 	if(sender.tag < 10)
 	{
 		if(sender.tag == 0)
@@ -60,38 +124,69 @@
 	}
 	else
 	{
-		if ([self.textField.text rangeOfString:@"."].location == NSNotFound)
+		if(sender.tag == DIGIT_BACK)
 		{
-			self.textField.text = [self.textField.text stringByAppendingString:@"."];
+			self.textField.text = [self.textField.text substringToIndex:self.textField.text.length - (self.textField.text.length > 0)];
+		}
+		else
+		{
+			if ([self.textField.text rangeOfString:@"."].location == NSNotFound)
+			{
+				self.textField.text = [self.textField.text stringByAppendingString:@"."];
+			}
 		}
 	}
-	//[self updateTextFieldContents];
+	lastKeyWasOperation = NO;
 	[self.delegate CalculatorValueChanged:self];
 }
 
 -(IBAction)operation:(UIButton *)sender
 {
+	NSLog(@"Operation %i", sender.tag);
 	switch (sender.tag)
 	{
 		case OPERATION_CLEAR:
 			self.textField.text = @"";
+			accumulator = 0.0;
+			lastKeyWasOperation = NO;
 			break;
-		case OPERATION_BACK:
-			self.textField.text = [self.textField.text substringToIndex:self.textField.text.length - (self.textField.text.length > 0)];
-			break;
+		//case OPERATION_BACK:
+			//self.textField.text = [self.textField.text substringToIndex:self.textField.text.length - (self.textField.text.length > 0)];
+			//lastKeyWasOperation = NO;
+			//break;
 		case OPERATION_DONE:
 			[self.delegate CalculatorDone:self];
+			lastKeyWasOperation = NO;
 			break;
 		case OPERATION_DIVIDE:
+			[self performLastOperation];
+			lastKeyWasOperation = YES;
+			break;
 		case OPERATION_EQUAL:
+			[self performLastOperation];
+			lastKeyWasOperation = YES;
+			break;
 		case OPERATION_MINUS:
+			[self performLastOperation];
+			lastKeyWasOperation = YES;
+			break;
 		case OPERATION_MULTIPLY:
+			[self performLastOperation];
+			lastKeyWasOperation = YES;
+			break;
 		case OPERATION_PLUS:
+			[self performLastOperation];
+			lastKeyWasOperation = YES;
+			break;
 		case OPERATION_PERCENT:
+			[self performLastOperation];
+			lastKeyWasOperation = YES;
 			break;
 			
 	}
-	//[self updateTextFieldContents];
+	operation = sender.tag;
+	
+	
 	[self.delegate CalculatorValueChanged:self];
 }
 
