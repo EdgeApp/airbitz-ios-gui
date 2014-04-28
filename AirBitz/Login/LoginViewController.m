@@ -416,6 +416,12 @@ typedef enum eLoginMode
 			mode = MODE_ENTERING_PASSWORD;
 		}
 	}
+
+    if (textField == self.userNameTextField)
+    {
+        // highlight all the text
+        [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
