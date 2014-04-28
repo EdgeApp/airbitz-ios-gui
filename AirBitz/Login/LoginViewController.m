@@ -420,9 +420,18 @@ typedef enum eLoginMode
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	[self animateToInitialPresentation];
-	[textField resignFirstResponder];
-	return YES;
+    [textField resignFirstResponder];
+    if (textField == self.userNameTextField)
+    {
+        [self.passwordTextField becomeFirstResponder];
+
+    }
+    else
+    {
+        [self animateToInitialPresentation];
+    }
+
+	return NO;
 }
 /*
 - (void)setRecoveryComplete
