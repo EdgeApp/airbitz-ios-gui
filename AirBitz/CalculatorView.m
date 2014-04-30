@@ -88,6 +88,7 @@
 			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
 			break;
 		case OPERATION_PERCENT:
+			//self.textField.text = [NSString stringWithFormat:@"%.2f", [self.textField.text floatValue] / 100.0];
 			break;
 	}
 }
@@ -179,12 +180,23 @@
 			lastKeyWasOperation = YES;
 			break;
 		case OPERATION_PERCENT:
-			[self performLastOperation];
+			//[self performLastOperation];
+			if(accumulator)
+			{
+				self.textField.text = [NSString stringWithFormat:@"%.8f", accumulator * ([self.textField.text floatValue] / 100.0)];
+			}
+			else
+			{
+				self.textField.text = [NSString stringWithFormat:@"%.2f", [self.textField.text floatValue] / 100.0];
+			}
 			lastKeyWasOperation = YES;
 			break;
 			
 	}
-	operation = sender.tag;
+	if(sender.tag != OPERATION_PERCENT)
+	{
+		operation = sender.tag;
+	}
 	
 	
 	[self.delegate CalculatorValueChanged:self];
