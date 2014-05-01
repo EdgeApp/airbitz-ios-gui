@@ -15,6 +15,7 @@
 #import "BooleanCell.h"
 #import "ButtonCell.h"
 #import "ButtonOnlyCell.h"
+#import "SignUpViewController.h"
 
 #define SECTION_BITCOIN_DENOMINATION    0
 #define SECTION_USERNAME                1
@@ -24,6 +25,10 @@
 #define SECTION_COUNT                   5
 
 #define DENOMINATION_CHOICES            3
+
+#define ROW_PASSWORD                    0
+#define ROW_PIN                         1
+#define ROW_RECOVERY_QUESTIONS          2
 
 typedef struct sDenomination
 {
@@ -44,11 +49,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 };
 
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate>
 {
 	tABC_AccountSettings    *_pAccountSettings;
 	TextFieldCell           *_activeTextFieldCell;
 	UITapGestureRecognizer  *_tapGesture;
+    SignUpViewController    *_signUpController;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -150,6 +156,31 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                                   &Error);
         [self printABC_Error:&Error];
     }
+}
+
+- (void)bringUpSignUpViewInMode:(tSignUpMode)mode
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    _signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
+
+    _signUpController.mode = mode;
+    _signUpController.delegate = self;
+
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _signUpController.view.frame = frame;
+    [self.view addSubview:_signUpController.view];
+
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         _signUpController.view.frame = self.view.bounds;
+     }
+                     completion:^(BOOL finished)
+     {
+     }];
 }
 
 - (void)printABC_Error:(const tABC_Error *)pError
@@ -607,6 +638,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_USERNAME:
+            if (indexPath.row == ROW_PASSWORD)
+            {
+                [self bringUpSignUpViewInMode:SignUpMode_ChangePassword];
+            }
+            else if (indexPath.row == ROW_PIN)
+            {
+                [self bringUpSignUpViewInMode:SignUpMode_ChangePIN];
+            }
             break;
 
         case SECTION_OPTIONS:
@@ -621,6 +660,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         default:
             break;
 	}
+}
+
+#pragma mark SignUpViewControllerDelegates
+
+-(void)signupViewControllerDidFinish:(SignUpViewController *)controller
+{
+	[controller.view removeFromSuperview];
+	_signUpController = nil;
 }
 
 @end

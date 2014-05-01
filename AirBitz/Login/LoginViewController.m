@@ -156,7 +156,8 @@ typedef enum eLoginMode
 	
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
-	
+
+    signUpController.mode = SignUpMode_SignUp;
 	signUpController.delegate = self;
 	
 	CGRect frame = self.view.bounds;

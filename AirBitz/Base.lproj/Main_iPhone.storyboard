@@ -2749,8 +2749,8 @@
                                     <action selector="Back:" destination="Ych-QR-sa0" eventType="touchUpInside" id="MmR-I4-OAb"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZkD-2s-BfP" customClass="MontserratLabel">
-                                <rect key="frame" x="124" y="32" width="73" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZkD-2s-BfP" userLabel="Label - Title" customClass="MontserratLabel">
+                                <rect key="frame" x="56" y="32" width="209" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2764,6 +2764,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NdY-co-ret" userLabel="Label - User Name" customClass="MontserratLabel">
+                                                <rect key="frame" x="46" y="52" width="234" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_up.png" id="caH-r0-Cnu">
                                                 <rect key="frame" x="15" y="25" width="292" height="349"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -2864,7 +2871,16 @@
                     </view>
                     <connections>
                         <outlet property="activityView" destination="LKm-fq-vQk" id="4rc-ya-L2b"/>
+                        <outlet property="buttonNextStep" destination="Det-Mr-8a9" id="TgL-qG-Sto"/>
                         <outlet property="contentView" destination="cuy-zk-xQO" id="0ck-ex-pvX"/>
+                        <outlet property="imagePIN" destination="2hT-bP-iup" id="5CN-Xi-PdM"/>
+                        <outlet property="imagePassword" destination="aGQ-vp-5oE" id="678-bi-Oux"/>
+                        <outlet property="imageReenterPassword" destination="yEs-dm-Tbm" id="tVO-n8-jn0"/>
+                        <outlet property="imageUserName" destination="jhW-dK-fVc" id="0dX-vS-KfB"/>
+                        <outlet property="labelPIN" destination="WB0-Ox-RAw" id="8eG-8O-dDl"/>
+                        <outlet property="labelPasswordInfo" destination="BED-Cf-F1n" id="1yB-qL-abu"/>
+                        <outlet property="labelTitle" destination="ZkD-2s-BfP" id="bGB-Os-kla"/>
+                        <outlet property="labelUserName" destination="NdY-co-ret" id="k2n-LR-tsF"/>
                         <outlet property="passwordTextField" destination="4ab-Wa-eS4" id="UX3-ed-lcQ"/>
                         <outlet property="pinTextField" destination="puA-fb-r0H" id="XGL-Ar-wHg"/>
                         <outlet property="reenterPasswordTextField" destination="QzV-Gk-Vrs" id="BBo-9o-lLA"/>
