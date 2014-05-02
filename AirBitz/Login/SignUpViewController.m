@@ -15,15 +15,16 @@
 #import "Config.h"
 #import "MontserratLabel.h"
 #import "LatoLabel.h"
+#import "User.h"
 
-#define KEYBOARD_MARGIN	10.0
+#define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
 
-@interface SignUpViewController () <UITextFieldDelegate, PasswordVerifyViewDelegate, PasswordRecoveryViewControllerDelegate>
+#define MIN_PIN_LENGTH          4
+
+@interface SignUpViewController () <UITextFieldDelegate, PasswordVerifyViewDelegate, PasswordRecoveryViewControllerDelegate, UIAlertViewDelegate>
 {
 	UITextField                     *_activeTextField;
-	BOOL                            _bSuccess;
-	NSString                        *_strReason;
 	PasswordVerifyView              *_passwordVerifyView;
 	float                           _keyboardFrameOriginY;
 	PasswordRecoveryViewController  *_passwordRecoveryController;
@@ -44,6 +45,11 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView    *activityView;
 @property (weak, nonatomic) IBOutlet LatoLabel                  *labelPasswordInfo;
 @property (weak, nonatomic) IBOutlet UIImageView                *imagePassword;
+
+
+@property (nonatomic, copy)     NSString                        *strReason;
+@property (nonatomic, assign)   BOOL                            bSuccess;
+@property (nonatomic, strong)   UIButton                        *buttonBlocker;
 
 @end
 
@@ -67,7 +73,15 @@
 	self.passwordTextField.delegate = self;
 	self.reenterPasswordTextField.delegate = self;
 	self.pinTextField.delegate = self;
-	self.pinTextField.minimumCharacters = 4;
+	self.pinTextField.minimumCharacters = MIN_PIN_LENGTH;
+
+    // set up our user blocking button
+    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.buttonBlocker.backgroundColor = [UIColor clearColor];
+    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
+    self.buttonBlocker.frame = self.view.bounds;
+    self.buttonBlocker.hidden = YES;
+    [self.view addSubview:self.buttonBlocker];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -113,77 +127,100 @@
 	 }
 	completion:^(BOOL finished)
 	 {
-		 [self.delegate signupViewControllerDidFinish:self];
+		 [self exit];
 	 }];
 }
 
--(IBAction)NextStep:(id)sender
+- (IBAction)NextStep:(id)sender
 {
 #if SKIP_PW_VALIDATION_CHECKS
 	[self showPasswordRecoveryController];
 #else
-	tABC_Error Error;
-	tABC_CC result;
+    // if they entered a valid username or old password
+    if ([self userNameFieldIsValid] == YES)
+    {
+        // check the new password fields
+        if ([self newPasswordFieldsAreValid] == YES)
+        {
+            // check the pin field
+            if ([self pinFieldIsValid] == YES)
+            {
+                tABC_Error Error;
+                tABC_CC result = ABC_CC_Ok;
 
-	if([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text])
-	{
-		if([self checkPassword] == YES)
-		{
-			if(self.pinTextField.text.length < 4)
-			{
-				UIAlertView *alert = [[UIAlertView alloc]
-									  initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signup error alert")
-									  message:@"Withdrawl PIN must be 4 digits"
-									  delegate:nil
-									  cancelButtonTitle:@"OK"
-									  otherButtonTitles:nil];
-				[alert show];
-			}
-			else
-			{
-				[self.activityView startAnimating];
-				result = ABC_CreateAccount([self.userNameTextField.text UTF8String],
-                                           [self.passwordTextField.text UTF8String],
-                                           [self.pinTextField.text UTF8String],
-                                           SignUp_Request_Callback,
-                                           (__bridge void *)self,
-                                           &Error);
-				[self printABC_Error:&Error];
+                // if we are signing up a new account
+                if (_mode == SignUpMode_SignUp)
+                {
+                    [self blockUser:YES];
+                    result = ABC_CreateAccount([self.userNameTextField.text UTF8String],
+                                               [self.passwordTextField.text UTF8String],
+                                               [self.pinTextField.text UTF8String],
+                                               ABC_SignUp_Request_Callback,
+                                               (__bridge void *)self,
+                                               &Error);
+                }
+                else if (_mode == SignUpMode_ChangePassword)
+                {
+                    // get their old pen
+                    char *szOldPIN = NULL;
+                    ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szOldPIN, nil);
 
-				if (ABC_CC_Ok == result)
-				{
+                    [self blockUser:YES];
+                    result = ABC_ChangePassword([[User Singleton].name UTF8String],
+                                                [[User Singleton].password UTF8String],
+                                                [self.passwordTextField.text UTF8String],
+                                                szOldPIN,
+                                                ABC_SignUp_Request_Callback,
+                                                (__bridge void *)self,
+                                                &Error);
 
-				}
-				else
-				{
-					[self.activityView stopAnimating];
-					UIAlertView *alert = [[UIAlertView alloc]
-										  initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signup error alert")
-										  message:[NSString stringWithFormat:@"Sign-up failed:\n%s", Error.szDescription]
-										  delegate:nil
-										  cancelButtonTitle:@"OK"
-										  otherButtonTitles:nil];
-					[alert show];
-					//NSLog(@"%@", [NSString stringWithFormat:@"Sign-up failed:\n%s", Error.szDescription]);
-				}
-			}
-		}
-		else
-		{
-			NSLog(@"Password check didn't fly");
-		}
-	}
-	else
-	{
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signup error alert")
-							  message:[NSString stringWithFormat:@"Sign-up failed:\n%@", @"Password does not match re-entered password"]
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-	}
+                    free(szOldPIN);
+                }
+                else
+                {
+                    result = ABC_SetPIN([[User Singleton].name UTF8String],
+                                        [[User Singleton].password UTF8String],
+                                        [self.pinTextField.text UTF8String],
+                                        &Error);
+                }
+
+                // if success
+                if (ABC_CC_Ok == result)
+                {
+                    if (_mode == SignUpMode_ChangePIN)
+                    {
+                        // no callback on this one so tell them it was a success
+                        UIAlertView *alert = [[UIAlertView alloc]
+                                              initWithTitle:self.labelTitle.text
+                                              message:NSLocalizedString(@"PIN successfully changed.", @"")
+                                              delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+                        [alert show];
+                    }
+                }
+                else
+                {
+                    [self.activityView stopAnimating];
+                    [self printABC_Error:&Error];
+                    UIAlertView *alert = [[UIAlertView alloc]
+                                          initWithTitle:self.labelTitle.text
+                                          message:[NSString stringWithFormat:@"%@ failed:\n%s",
+                                                   self.labelTitle.text,
+                                                   Error.szDescription]
+                                          delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+                    [alert show];
+                }
+            }
+        }
+    }
 #endif
+}
+
+- (IBAction)buttonBlockerTouched:(id)sender
+{
 }
 
 #pragma mark - Misc Methods
@@ -222,6 +259,9 @@
         self.pinTextField.hidden = NO;
         self.labelPasswordInfo.hidden = NO;
         self.imagePassword.hidden = NO;
+
+        self.reenterPasswordTextField.returnKeyType = UIReturnKeyNext;
+        self.userNameTextField.secureTextEntry = NO;
     }
     else if (mode == SignUpMode_ChangePassword)
     {
@@ -239,11 +279,15 @@
         self.reenterPasswordTextField.hidden = NO;
         self.labelPasswordInfo.hidden = NO;
         self.imagePassword.hidden = NO;
+
+        self.reenterPasswordTextField.returnKeyType = UIReturnKeyDone;
+
+        self.userNameTextField.secureTextEntry = YES;
     }
     else if (mode == SignUpMode_ChangePIN)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
-        self.labelTitle.text = NSLocalizedString(@"Change PIN", @"screen title");
+        self.labelTitle.text = NSLocalizedString(@"Change Withdrawal PIN", @"screen title");
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.pinTextField.placeholder = NSLocalizedString(@"New Pin", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"Password", @"");
@@ -253,50 +297,154 @@
         self.imagePIN.hidden = NO;
         self.imageUserName.hidden = NO;
         self.userNameTextField.hidden = NO; // used for old password in this case
+
+        self.reenterPasswordTextField.returnKeyType = UIReturnKeyNext;
+
+        self.userNameTextField.secureTextEntry = YES;
     }
 }
 
--(BOOL)checkPassword
+// checks the username field (non-blank or matches old password depending on the mode)
+// returns YES if field is good
+// if the field is bad, an appropriate message box is displayed
+// note: this function is aware of the 'mode' of the view controller and will check and display appropriately
+- (BOOL)userNameFieldIsValid
 {
-	BOOL passwordGood = YES;
-	double secondsToCrack;
-	 tABC_Error Error;
-	tABC_CC result;
-	unsigned int count = 0;
-	tABC_PasswordRule **aRules = NULL;
-	result = ABC_CheckPassword([self.passwordTextField.text UTF8String],
-                              &secondsToCrack,
-                              &aRules,
-                              &count,
-                              &Error);
-				
-	//printf("Password results:\n");
-	NSMutableString *message = [[NSMutableString alloc] init];
-	[message appendString:@"Your password is missing the following:\n"];
-    for (int i = 0; i < count; i++)
+    BOOL bUserNameFieldIsValid = YES;
+
+    // if we are signing up for a new account
+    if (_mode == SignUpMode_SignUp)
     {
-		tABC_PasswordRule *pRule = aRules[i];
-		if(!pRule->bPassed)
-		{
-			passwordGood = NO;
-			[message appendFormat:@"%s. ", pRule->szDescription];
-		}
-       
-        //printf("%s - %s\n", pRule->bPassed ? "pass" : "fail", pRule->szDescription);
+        // if nothing was entered
+        if ([self.userNameTextField.text length] == 0)
+        {
+            bUserNameFieldIsValid = NO;
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:self.labelTitle.text
+                                  message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                           self.labelTitle.text,
+                                           NSLocalizedString(@"You must entere a user name", @"")]
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
     }
-	
-    ABC_FreePasswordRuleArray(aRules, count);
-	if(passwordGood == NO)
-	{
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Insufficient Password", @"Title of password check popup alert")
-							  message:message
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-	}
-	return passwordGood;
+    else // the user name field is used for the old password in this case
+    {
+        // if the password is wrong
+        if ([[User Singleton].password isEqualToString:self.userNameTextField.text] == NO)
+        {
+            bUserNameFieldIsValid = NO;
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:self.labelTitle.text
+                                  message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                           self.labelTitle.text,
+                                           NSLocalizedString(@"Incorrect password", @"")]
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+
+    return bUserNameFieldIsValid;
+}
+
+// checks the password against the password rules
+// returns YES if new password fields are good, NO if the new password fields failed the checks
+// if the new password fields are bad, an appropriate message box is displayed
+// note: this function is aware of the 'mode' of the view controller and will check and display appropriately
+- (BOOL)newPasswordFieldsAreValid
+{
+	BOOL bNewPasswordFieldsAreValid = YES;
+
+    // if we are signing up for a new account or changing our password
+    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePassword))
+    {
+        double secondsToCrack;
+        tABC_Error Error;
+        tABC_CC result;
+        unsigned int count = 0;
+        tABC_PasswordRule **aRules = NULL;
+        result = ABC_CheckPassword([self.passwordTextField.text UTF8String],
+                                   &secondsToCrack,
+                                   &aRules,
+                                   &count,
+                                   &Error);
+
+        //printf("Password results:\n");
+        NSMutableString *message = [[NSMutableString alloc] init];
+        [message appendString:@"Your password...\n"];
+        for (int i = 0; i < count; i++)
+        {
+            tABC_PasswordRule *pRule = aRules[i];
+            if (!pRule->bPassed)
+            {
+                bNewPasswordFieldsAreValid = NO;
+                [message appendFormat:@"%s.\n", pRule->szDescription];
+            }
+
+            //printf("%s - %s\n", pRule->bPassed ? "pass" : "fail", pRule->szDescription);
+        }
+
+        ABC_FreePasswordRuleArray(aRules, count);
+        if (bNewPasswordFieldsAreValid == NO)
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Insufficient Password", @"Title of password check popup alert")
+                                  message:message
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+        else if ([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text] == NO)
+        {
+            bNewPasswordFieldsAreValid = NO;
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:self.labelTitle.text
+                                  message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                           self.labelTitle.text,
+                                           NSLocalizedString(@"Password does not match re-entered password", @"")]
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+
+	return bNewPasswordFieldsAreValid;
+}
+
+// checks the pin field
+// returns YES if field is good
+// if the field is bad, an appropriate message box is displayed
+// note: this function is aware of the 'mode' of the view controller and will check and display appropriately
+- (BOOL)pinFieldIsValid
+{
+    BOOL bpinNameFieldIsValid = YES;
+
+    // if we are signing up for a new account
+    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePIN))
+    {
+        // if the pin isn't long enough
+        if (self.pinTextField.text.length < MIN_PIN_LENGTH)
+        {
+            bpinNameFieldIsValid = NO;
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:self.labelTitle.text
+                                  message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                           self.labelTitle.text,
+                                           NSLocalizedString(@"Withdrawl PIN must be 4 digits", @"")]
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+
+    return bpinNameFieldIsValid;
 }
 
 -(void)showPasswordRecoveryController
@@ -327,19 +475,33 @@
 
 -(void)createFirstWallet
 {
+    [self blockUser:YES];
+
 	tABC_CC result;
 	tABC_Error Error;
 	result = ABC_CreateWallet([self.userNameTextField.text UTF8String],
-                             [self.passwordTextField.text UTF8String],
-                             [NSLocalizedString(@"My Wallet", @"Name of initial wallet") UTF8String],
-                             DOLLAR_CURRENCY_NUMBER,
-                             0,
-                             SignUp_Request_Callback,
-                             (__bridge void *)self,
-                             &Error);
+                              [self.passwordTextField.text UTF8String],
+                              [NSLocalizedString(@"My Wallet", @"Name of initial wallet") UTF8String],
+                              DOLLAR_CURRENCY_NUMBER,
+                              0,
+                              ABC_SignUp_Request_Callback,
+                              (__bridge void *)self,
+                              &Error);
 }
 
-
+- (void)blockUser:(BOOL)bBlock
+{
+    if (bBlock)
+    {
+        [self.activityView startAnimating];
+        self.buttonBlocker.hidden = NO;
+    }
+    else
+    {
+        [self.activityView stopAnimating];
+        self.buttonBlocker.hidden = YES;
+    }
+}
 
 - (void)printABC_Error:(const tABC_Error *)pError
 {
@@ -384,6 +546,11 @@
 	}
 }
 
+- (void)exit
+{
+	[self.delegate signupViewControllerDidFinish:self];
+}
+
 #pragma mark - keyboard callbacks
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -394,9 +561,9 @@
 		//NSLog(@"Keyboard will show for SignUpView");
 		NSDictionary *userInfo = [notification userInfo];
 		CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-				
+
 		_keyboardFrameOriginY = keyboardFrame.origin.y;
-		
+
 		[self scrollTextFieldAboveKeyboard:_activeTextField];
 	}
 }
@@ -410,22 +577,22 @@
 	}
 	_keyboardFrameOriginY = 0.0;
 	[UIView animateWithDuration:0.35
-	 delay:0.0
-	 options:UIViewAnimationOptionCurveEaseInOut
-	 animations:^
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
 	 {
 		 CGRect frame = self.contentView.frame;
 		 frame.origin.y = 0;
 		 self.contentView.frame = frame;
 	 }
-	 completion:^(BOOL finished)
+                     completion:^(BOOL finished)
 	 {
 	 }];
 }
 
 #pragma mark - UITextField delegates
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	//called when user taps on either search textField or location textField
 	
@@ -455,38 +622,52 @@
 	[self scrollTextFieldAboveKeyboard:textField];
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	UIView *view = [self.contentView viewWithTag:textField.tag + 1];
-	if(view)
-	{
-		[view becomeFirstResponder];
-	}
-	else
-	{
+    if ((_mode == SignUpMode_ChangePassword) && (textField == self.reenterPasswordTextField))
+    {
 		[textField resignFirstResponder];
-	}
+    }
+    else
+    {
+        UIView *view = [self.contentView viewWithTag:textField.tag + 1];
+        if (view)
+        {
+            if ((_mode == SignUpMode_ChangePIN) && (textField == self.userNameTextField))
+            {
+                // skip to the pin
+                view = self.pinTextField;
+            }
+
+            [view becomeFirstResponder];
+        }
+        else
+        {
+            [textField resignFirstResponder];
+        }
+    }
+    
 	return YES;
 }
 
--(void)pinTextFieldChanged:(UITextField *)textField
+- (void)pinTextFieldChanged:(UITextField *)textField
 {
-	if(textField.text.length == 4)
+	if (textField.text.length == 4)
 	{
 		[textField resignFirstResponder];
 	}
 }
 
--(void)passwordTextFieldChanged:(UITextField *)textField
+- (void)passwordTextFieldChanged:(UITextField *)textField
 {
-	if(_passwordVerifyView == nil)
+	if (_passwordVerifyView == nil)
 	{
 		_passwordVerifyView = [PasswordVerifyView CreateInsideView:self.contentView withDelegate:self];
 	}
 	_passwordVerifyView.password = textField.text;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	if(_activeTextField)
 	{
@@ -504,7 +685,7 @@
 
 #pragma mark - PasswordVerifyViewDelegates
 
--(void)PasswordVerifyViewDismissed:(PasswordVerifyView *)pv
+- (void)PasswordVerifyViewDismissed:(PasswordVerifyView *)pv
 {
 	[_passwordVerifyView removeFromSuperview];
 	_passwordVerifyView = nil;
@@ -512,18 +693,19 @@
 
 #pragma mark - PasswordRecoveryViewController Delegates
 
--(void)passwordRecoveryViewControllerDidFinish:(PasswordRecoveryViewController *)controller
+- (void)passwordRecoveryViewControllerDidFinish:(PasswordRecoveryViewController *)controller
 {
 	[controller.view removeFromSuperview];
 	_passwordRecoveryController = nil;
-	[self.delegate signupViewControllerDidFinish:self];
+    [self exit];
 }
 
 #pragma mark - ABC Callbacks
 
 - (void)createAccountComplete
 {
-	[self.activityView stopAnimating];
+    [self blockUser:NO];
+
     //NSLog(@"Account create complete");
     if (_bSuccess)
     {
@@ -531,10 +713,9 @@
 		//set username and password for app
 		[User Singleton].name = self.userNameTextField.text;
 		[User Singleton].password = self.passwordTextField.text;
-		
+
+        // now that the account is created, create the first wallet
 		[self createFirstWallet];
-		
-		[self showPasswordRecoveryController];
     }
     else
     {
@@ -552,11 +733,15 @@
 
 - (void)createWalletComplete
 {
-    NSLog(@"Wallet create complete");
+    [self blockUser:NO];
+
+    //NSLog(@"Wallet create complete");
     if (_bSuccess)
     {
         //self.labelStatus.text = [NSString stringWithFormat:@"Wallet created: %@", self.strWalletUUID];
-		NSLog(@"Successfully created wallet");
+		//NSLog(@"Successfully created wallet");
+
+        [self showPasswordRecoveryController];
     }
     else
     {
@@ -570,23 +755,53 @@
     }
 }
 
+- (void)changePasswordComplete
+{
+    [self blockUser:NO];
+
+    UIAlertView *alert;
+    if (_bSuccess)
+    {
+        // set up the user password to the new one
+        [[User Singleton] setPassword:self.passwordTextField.text];
+
+        alert = [[UIAlertView alloc]
+                 initWithTitle:self.labelTitle.text
+                 message:NSLocalizedString(@"Password successfully changed.", @"")
+                 delegate:self
+                 cancelButtonTitle:@"OK"
+                 otherButtonTitles:nil];
+    }
+    else
+    {
+        alert = [[UIAlertView alloc]
+                 initWithTitle:self.labelTitle.text
+                 message:[NSString stringWithFormat:@"Password change failed:\n%@", _strReason]
+                 delegate:nil
+                 cancelButtonTitle:@"OK"
+                 otherButtonTitles:nil];
+    }
+
+    [alert show];
+}
+
 #pragma mark - ABC Callbacks
 
-void SignUp_Request_Callback(const tABC_RequestResults *pResults)
+void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
 {
     //NSLog(@"Request callback");
-    
+
     if (pResults)
     {
         SignUpViewController *controller = (__bridge id)pResults->pData;
-        controller->_bSuccess = (BOOL)pResults->bSuccess;
-        controller->_strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
+        controller.bSuccess = (BOOL)pResults->bSuccess;
+        controller.strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
         if (pResults->requestType == ABC_RequestType_CreateAccount)
         {
            // NSLog(@"Create account completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
             [controller performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
         }
-		else if(pResults->requestType == ABC_RequestType_CreateWallet)
+		else if (pResults->requestType == ABC_RequestType_CreateWallet)
 		{
 			if (pResults->pRetData)
             {
@@ -597,10 +812,23 @@ void SignUp_Request_Callback(const tABC_RequestResults *pResults)
             {
                 //controller.strWalletUUID = @"(Unknown UUID)";
             }
-            NSLog(@"Create wallet completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
+            //NSLog(@"Create wallet completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
             [controller performSelectorOnMainThread:@selector(createWalletComplete) withObject:nil waitUntilDone:FALSE];
 		}
+        else if (pResults->requestType == ABC_RequestType_ChangePassword)
+        {
+            [controller performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
+        }
     }
+}
+
+#pragma mark - UIAlertView delegates
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    // we only use an alert view delegate when we are delaying the exit
+    // so we can exit now
+    [self performSelector:@selector(exit) withObject:nil afterDelay:0.0];
 }
 
 @end
