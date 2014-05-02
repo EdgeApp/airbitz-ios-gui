@@ -453,14 +453,14 @@
 	_passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];
 	
 	_passwordRecoveryController.delegate = self;
-	_passwordRecoveryController.userName = self.userNameTextField.text;
+	_passwordRecoveryController.mode = PassRecovMode_SignUp;
 	
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
 	_passwordRecoveryController.view.frame = frame;
 	[self.view addSubview:_passwordRecoveryController.view];
-	
-	
+
+
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -784,8 +784,6 @@
 
     [alert show];
 }
-
-#pragma mark - ABC Callbacks
 
 void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
 {

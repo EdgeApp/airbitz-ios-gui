@@ -2907,8 +2907,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Recovery" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9kf-YJ-8Zz" customClass="MontserratLabel">
-                                <rect key="frame" x="64" y="32" width="192" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Recovery Setup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9kf-YJ-8Zz" customClass="MontserratLabel">
+                                <rect key="frame" x="20" y="32" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2950,7 +2950,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gIX-pR-SaU">
-                                        <rect key="frame" x="36" y="382" width="251" height="41"/>
+                                        <rect key="frame" x="36" y="403" width="251" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Complete Signup" backgroundImage="btn_big_green.png">
@@ -2975,8 +2975,12 @@
                     </view>
                     <connections>
                         <outlet property="activityView" destination="KdO-iF-hlx" id="U2P-eH-Z61"/>
+                        <outlet property="buttonBack" destination="Nau-KH-Byu" id="AmM-MU-g2S"/>
+                        <outlet property="buttonSkip" destination="cix-f2-i3I" id="Ceu-G7-iBJ"/>
                         <outlet property="completeSignupButton" destination="gIX-pR-SaU" id="oee-cx-W2p"/>
                         <outlet property="embossImage" destination="Nle-7B-pV5" id="d3R-4B-prI"/>
+                        <outlet property="imageSkip" destination="B5d-ZE-zXF" id="TQF-fd-1iS"/>
+                        <outlet property="labelTitle" destination="9kf-YJ-8Zz" id="VeQ-yK-Mkd"/>
                         <outlet property="scrollView" destination="peD-fG-VAk" id="aIZ-za-GQs"/>
                     </connections>
                 </viewController>

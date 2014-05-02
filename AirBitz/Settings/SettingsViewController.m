@@ -16,6 +16,7 @@
 #import "ButtonCell.h"
 #import "ButtonOnlyCell.h"
 #import "SignUpViewController.h"
+#import "PasswordRecoveryViewController.h"
 
 #define SECTION_BITCOIN_DENOMINATION    0
 #define SECTION_USERNAME                1
@@ -49,12 +50,13 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 };
 
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate>
 {
-	tABC_AccountSettings    *_pAccountSettings;
-	TextFieldCell           *_activeTextFieldCell;
-	UITapGestureRecognizer  *_tapGesture;
-    SignUpViewController    *_signUpController;
+	tABC_AccountSettings            *_pAccountSettings;
+	TextFieldCell                   *_activeTextFieldCell;
+	UITapGestureRecognizer          *_tapGesture;
+    SignUpViewController            *_signUpController;
+    PasswordRecoveryViewController  *_passwordRecoveryController;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -181,6 +183,32 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                      completion:^(BOOL finished)
      {
      }];
+}
+
+- (void)bringUpRecoveryQuestionsView
+{
+	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+	_passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];
+
+	_passwordRecoveryController.delegate = self;
+	_passwordRecoveryController.mode = PassRecovMode_Change;
+
+	CGRect frame = self.view.bounds;
+	frame.origin.x = frame.size.width;
+	_passwordRecoveryController.view.frame = frame;
+	[self.view addSubview:_passwordRecoveryController.view];
+
+
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 _passwordRecoveryController.view.frame = self.view.bounds;
+	 }
+					 completion:^(BOOL finished)
+	 {
+	 }];
 }
 
 - (void)printABC_Error:(const tABC_Error *)pError
@@ -646,6 +674,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             {
                 [self bringUpSignUpViewInMode:SignUpMode_ChangePIN];
             }
+            else if (indexPath.row == ROW_RECOVERY_QUESTIONS)
+            {
+                [self bringUpRecoveryQuestionsView];
+            }
             break;
 
         case SECTION_OPTIONS:
@@ -668,6 +700,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
 	[controller.view removeFromSuperview];
 	_signUpController = nil;
+}
+
+#pragma mark - PasswordRecoveryViewController Delegates
+
+- (void)passwordRecoveryViewControllerDidFinish:(PasswordRecoveryViewController *)controller
+{
+	[controller.view removeFromSuperview];
+	_passwordRecoveryController = nil;
 }
 
 @end

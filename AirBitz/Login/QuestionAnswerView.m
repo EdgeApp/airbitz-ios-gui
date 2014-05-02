@@ -9,18 +9,25 @@
 #import "QuestionAnswerView.h"
 
 
-#define QA_TABLE_HEIGHT	200.0
+#define QA_TABLE_HEIGHT     200.0
 #define QA_TABLE_ROW_HEIGHT	30.0;
+
+#define QA_ANIM_TIME_SECS   0.35
 
 @interface QuestionAnswerView () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
-	BOOL questionExpanded;
-	UITableView *qaTable;
-	CGRect originalFrame;
+	BOOL            _bQuestionExpanded;
+	UITableView     *_qaTable;
+	CGRect          _originalFrame;
+    NSDictionary    *_dict;
 }
-@property (nonatomic, weak) IBOutlet UIButton *questionButton;
 
-@property (nonatomic, weak) IBOutlet UIImageView *expandCollapseImage;
+@property (weak, nonatomic) IBOutlet UILabel        *labelQuestion;
+@property (nonatomic, weak) IBOutlet UIButton       *questionButtonBig;
+@property (nonatomic, weak) IBOutlet UIImageView    *expandCollapseImage;
+
+@property (nonatomic, copy) NSString                *strPrevQuestion;
+
 @end
 
 @implementation QuestionAnswerView
@@ -31,11 +38,14 @@
     if (self)
 	{
         // Initialization code
+        self.strPrevQuestion = @"";
     }
     return self;
 }
 
-+(QuestionAnswerView *)CreateInsideView:(UIView *)parentView withDelegate:(id<QuestionAnswerViewDelegate>)delegate
+#pragma mark - static Methods
+
++ (QuestionAnswerView *)CreateInsideView:(UIView *)parentView withDelegate:(id<QuestionAnswerViewDelegate>)delegate
 {
 	QuestionAnswerView *qav;
 	
@@ -56,95 +66,56 @@
 	return qav;
 }
 
--(void)closeTable
+#pragma mark - Misc Methods
+
+- (void)closeTable
 {
-	if(questionExpanded)
+	if (_bQuestionExpanded)
 	{
 		[self QuestionButton];
 	}
 	[self.answerField resignFirstResponder];
 }
 
--(NSString *)question
+- (NSString *)question
 {
-	return self.questionButton.titleLabel.text;
+	return self.labelQuestion.text;
 }
 
--(NSString *)answer
+- (NSString *)answer
 {
 	return self.answerField.text;
 }
 
--(IBAction)QuestionButton
+- (void)showTable
 {
-	if(questionExpanded)
-	{
-		questionExpanded = NO;
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-			 self.expandCollapseImage.transform = CGAffineTransformRotate(self.expandCollapseImage.transform, M_PI);
-		 }
-		 completion:^(BOOL finished)
-		 {
-			 
-		 }];
-		 
-		 [self hideTable];
-	}
-	else
-	{
-		questionExpanded = YES;
-		
-		[self.superview bringSubviewToFront:self];
-		
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-			 self.expandCollapseImage.transform = CGAffineTransformRotate(self.expandCollapseImage.transform, -M_PI);
-		 }
-						 completion:^(BOOL finished)
-		 {
-			 
-		 }];
-		 
-		[self showTable];
-	}
-}
-
--(void)showTable
-{
-	float yOriginOffset = self.questionButton.frame.size.height / 2;
+	float yOriginOffset = self.questionButtonBig.frame.size.height / 2;
 	
-	CGRect tableFrame = self.questionButton.frame;
+	CGRect tableFrame = self.questionButtonBig.frame;
 	tableFrame.origin.x += 1.0;
 	tableFrame.size.width -= 2.0;
 	tableFrame.origin.y += yOriginOffset;
 	tableFrame.size.height = 0.0;
 	
-	qaTable = [[UITableView alloc] initWithFrame:tableFrame];
-	qaTable.delegate = self;
-	qaTable.dataSource = self;
-	qaTable.layer.cornerRadius = 6.0;
+	_qaTable = [[UITableView alloc] initWithFrame:tableFrame];
+	_qaTable.delegate = self;
+	_qaTable.dataSource = self;
+	_qaTable.layer.cornerRadius = 6.0;
 	
-	[self insertSubview:qaTable belowSubview:self.questionButton];
+	[self insertSubview:_qaTable belowSubview:self.questionButtonBig];
 	
-	originalFrame = self.frame;
+	_originalFrame = self.frame;
 	self.answerField.enabled = NO;
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 CGRect frame = qaTable.frame;
+		 CGRect frame = _qaTable.frame;
 		 frame.size.height = QA_TABLE_HEIGHT;
-		 qaTable.frame = frame;
+		 _qaTable.frame = frame;
 		 
-		 CGRect myFrame = originalFrame;
+		 CGRect myFrame = _originalFrame;
 		 myFrame.size.height = frame.origin.y + frame.size.height;
 		 self.frame = myFrame;
 		 
@@ -157,20 +128,20 @@
 	
 }
 
--(void)hideTable
+- (void)hideTable
 {
 	[self.delegate QuestionAnswerViewTableDismissed:self];
 	self.answerField.enabled = YES;
-	[UIView animateWithDuration:0.35
+	[UIView animateWithDuration:QA_ANIM_TIME_SECS
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 CGRect frame = qaTable.frame;
+		 CGRect frame = _qaTable.frame;
 		 frame.size.height = 0.0;
-		 qaTable.frame = frame;
+		 _qaTable.frame = frame;
 		 
-		 self.frame = originalFrame;
+		 self.frame = _originalFrame;
 		 
 	 }
 	 completion:^(BOOL finished)
@@ -179,7 +150,60 @@
 	 }];
 }
 
-#pragma mark UITextField delegates
+- (void)presentQuestionChoices
+{
+    [self QuestionButton];
+}
+
+#pragma mark - Action Methods
+
+- (IBAction)QuestionButton
+{
+	if (_bQuestionExpanded)
+	{
+		_bQuestionExpanded = NO;
+		[UIView animateWithDuration:QA_ANIM_TIME_SECS
+							  delay:0.0
+							options:UIViewAnimationOptionCurveEaseInOut
+						 animations:^
+		 {
+			 self.expandCollapseImage.transform = CGAffineTransformRotate(self.expandCollapseImage.transform, M_PI);
+		 }
+                         completion:^(BOOL finished)
+		 {
+
+		 }];
+
+        [self hideTable];
+	}
+	else
+	{
+		_bQuestionExpanded = YES;
+
+		[self.superview bringSubviewToFront:self];
+
+		[UIView animateWithDuration:0.35
+							  delay:0.0
+							options:UIViewAnimationOptionCurveEaseInOut
+						 animations:^
+		 {
+			 self.expandCollapseImage.transform = CGAffineTransformRotate(self.expandCollapseImage.transform, -M_PI);
+		 }
+						 completion:^(BOOL finished)
+		 {
+
+		 }];
+        
+		[self showTable];
+	}
+}
+
+- (void)notifyQuestionSelected
+{
+	[self.delegate QuestionAnswerView:self didSelectQuestion:_dict oldQuestion:self.strPrevQuestion];
+}
+
+#pragma mark - UITextField delegates
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -189,15 +213,16 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	[textField resignFirstResponder];
+    [self.delegate QuestionAnswerView:self didReturnOnAnswerField:textField];
 	return YES;
 }
 
-#pragma mark TableView delegates
+#pragma mark - TableView delegates
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 	//default section header color was gray.  Needed to add this in order to set the bkg color to white
-	UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, self.questionButton.frame.size.height / 2.0)];
+	UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, self.questionButtonBig.frame.size.height / 2.0)];
 	[headerView setBackgroundColor:[UIColor whiteColor]];
 	
 	return headerView;
@@ -205,7 +230,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	return self.questionButton.frame.size.height / 2.0;
+	return self.questionButtonBig.frame.size.height / 2.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -218,7 +243,7 @@
 	return QA_TABLE_ROW_HEIGHT;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	//NSInteger row = [indexPath row];
 	UITableViewCell *cell;
@@ -233,23 +258,28 @@
 	}
 	
 	NSDictionary *dict = [self.availableQuestions objectAtIndex:indexPath.row];
-	cell.textLabel.text = [dict objectForKey:@"question"];
-	cell.textLabel.minimumScaleFactor = 0.5;
+    [cell.textLabel setFont:[UIFont systemFontOfSize:12]];
+	//cell.textLabel.minimumScaleFactor = 0.5;
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
+    cell.textLabel.numberOfLines = 0;
+	cell.textLabel.text = [dict objectForKey:@"question"];
 	//NSLog(@"Row: %i, text: %@", indexPath.row, cell.textLabel.text);
 	return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	//NSLog(@"Selected row: %i", indexPath.row);
-	NSDictionary *dict = [self.availableQuestions objectAtIndex:indexPath.row];
-	[self.delegate QuestionAnswerView:self didSelectQuestion:dict oldQuestion:self.questionButton.titleLabel.text];
-	[self hideTable];
-	
-	[self.questionButton setTitle:[dict objectForKey:@"question" ] forState:UIControlStateNormal];
-	self.answerField.minimumCharacters = [[dict objectForKey:@"minLength"] intValue];
+	_dict = [self.availableQuestions objectAtIndex:indexPath.row];
+	//[self hideTable];
+    [self QuestionButton];
+
+    self.strPrevQuestion = self.labelQuestion.text;
+    self.labelQuestion.text = [_dict objectForKey:@"question"];
+	self.answerField.minimumCharacters = [[_dict objectForKey:@"minLength"] intValue];
 	_questionSelected = YES;
+
+    [self performSelector:@selector(notifyQuestionSelected) withObject:nil afterDelay:QA_ANIM_TIME_SECS];
 }
 
 @end
