@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -2651,7 +2651,7 @@
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="rdN-yz-NKb">
                                                 <rect key="frame" x="19" y="60" width="255" height="41"/>
@@ -2664,7 +2664,7 @@
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q2G-61-ExK">
                                                 <rect key="frame" x="21" y="109" width="251" height="41"/>
@@ -2749,8 +2749,8 @@
                                     <action selector="Back:" destination="Ych-QR-sa0" eventType="touchUpInside" id="MmR-I4-OAb"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZkD-2s-BfP" customClass="MontserratLabel">
-                                <rect key="frame" x="124" y="32" width="73" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZkD-2s-BfP" userLabel="Label - Title" customClass="MontserratLabel">
+                                <rect key="frame" x="56" y="32" width="209" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2764,6 +2764,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NdY-co-ret" userLabel="Label - User Name" customClass="MontserratLabel">
+                                                <rect key="frame" x="46" y="52" width="234" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_up.png" id="caH-r0-Cnu">
                                                 <rect key="frame" x="15" y="25" width="292" height="349"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -2864,7 +2871,16 @@
                     </view>
                     <connections>
                         <outlet property="activityView" destination="LKm-fq-vQk" id="4rc-ya-L2b"/>
+                        <outlet property="buttonNextStep" destination="Det-Mr-8a9" id="TgL-qG-Sto"/>
                         <outlet property="contentView" destination="cuy-zk-xQO" id="0ck-ex-pvX"/>
+                        <outlet property="imagePIN" destination="2hT-bP-iup" id="5CN-Xi-PdM"/>
+                        <outlet property="imagePassword" destination="aGQ-vp-5oE" id="678-bi-Oux"/>
+                        <outlet property="imageReenterPassword" destination="yEs-dm-Tbm" id="tVO-n8-jn0"/>
+                        <outlet property="imageUserName" destination="jhW-dK-fVc" id="0dX-vS-KfB"/>
+                        <outlet property="labelPIN" destination="WB0-Ox-RAw" id="8eG-8O-dDl"/>
+                        <outlet property="labelPasswordInfo" destination="BED-Cf-F1n" id="1yB-qL-abu"/>
+                        <outlet property="labelTitle" destination="ZkD-2s-BfP" id="bGB-Os-kla"/>
+                        <outlet property="labelUserName" destination="NdY-co-ret" id="k2n-LR-tsF"/>
                         <outlet property="passwordTextField" destination="4ab-Wa-eS4" id="UX3-ed-lcQ"/>
                         <outlet property="pinTextField" destination="puA-fb-r0H" id="XGL-Ar-wHg"/>
                         <outlet property="reenterPasswordTextField" destination="QzV-Gk-Vrs" id="BBo-9o-lLA"/>
@@ -2891,8 +2907,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Recovery" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9kf-YJ-8Zz" customClass="MontserratLabel">
-                                <rect key="frame" x="64" y="32" width="192" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Recovery Setup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9kf-YJ-8Zz" customClass="MontserratLabel">
+                                <rect key="frame" x="20" y="32" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2934,7 +2950,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gIX-pR-SaU">
-                                        <rect key="frame" x="36" y="382" width="251" height="41"/>
+                                        <rect key="frame" x="36" y="403" width="251" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Complete Signup" backgroundImage="btn_big_green.png">
@@ -2959,8 +2975,12 @@
                     </view>
                     <connections>
                         <outlet property="activityView" destination="KdO-iF-hlx" id="U2P-eH-Z61"/>
+                        <outlet property="buttonBack" destination="Nau-KH-Byu" id="AmM-MU-g2S"/>
+                        <outlet property="buttonSkip" destination="cix-f2-i3I" id="Ceu-G7-iBJ"/>
                         <outlet property="completeSignupButton" destination="gIX-pR-SaU" id="oee-cx-W2p"/>
                         <outlet property="embossImage" destination="Nle-7B-pV5" id="d3R-4B-prI"/>
+                        <outlet property="imageSkip" destination="B5d-ZE-zXF" id="TQF-fd-1iS"/>
+                        <outlet property="labelTitle" destination="9kf-YJ-8Zz" id="VeQ-yK-Mkd"/>
                         <outlet property="scrollView" destination="peD-fG-VAk" id="aIZ-za-GQs"/>
                     </connections>
                 </viewController>

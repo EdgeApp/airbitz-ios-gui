@@ -8,12 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum ePassRecovMode
+{
+    PassRecovMode_SignUp,
+    PassRecovMode_Change
+} tPassRecovMode;
+
 @protocol PasswordRecoveryViewControllerDelegate;
 
 @interface PasswordRecoveryViewController : UIViewController
 
-@property (assign) id<PasswordRecoveryViewControllerDelegate> delegate;
-@property (nonatomic, copy) NSString *userName;
+@property (assign)              id<PasswordRecoveryViewControllerDelegate>  delegate;
+@property (nonatomic, assign)   tPassRecovMode                              mode;
 
 @end
 

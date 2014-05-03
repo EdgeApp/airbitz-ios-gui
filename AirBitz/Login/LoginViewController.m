@@ -156,7 +156,8 @@ typedef enum eLoginMode
 	
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
-	
+
+    signUpController.mode = SignUpMode_SignUp;
 	signUpController.delegate = self;
 	
 	CGRect frame = self.view.bounds;
@@ -416,13 +417,28 @@ typedef enum eLoginMode
 			mode = MODE_ENTERING_PASSWORD;
 		}
 	}
+
+    if (textField == self.userNameTextField)
+    {
+        // highlight all the text
+        [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	[self animateToInitialPresentation];
-	[textField resignFirstResponder];
-	return YES;
+    [textField resignFirstResponder];
+    if (textField == self.userNameTextField)
+    {
+        [self.passwordTextField becomeFirstResponder];
+
+    }
+    else
+    {
+        [self animateToInitialPresentation];
+    }
+
+	return NO;
 }
 /*
 - (void)setRecoveryComplete

@@ -8,11 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum eSignUpMode
+{
+    SignUpMode_SignUp,
+    SignUpMode_ChangePassword,
+    SignUpMode_ChangePIN
+} tSignUpMode;
+
 @protocol SignUpViewControllerDelegate;
 
 @interface SignUpViewController : UIViewController
 
-@property (assign) id<SignUpViewControllerDelegate> delegate;
+@property (assign)            id<SignUpViewControllerDelegate> delegate;
+@property (nonatomic, assign) tSignUpMode                      mode;
 
 @end
 
@@ -20,5 +28,7 @@
 @protocol SignUpViewControllerDelegate <NSObject>
 
 @required
+
 -(void)signupViewControllerDidFinish:(SignUpViewController *)controller;
+
 @end
