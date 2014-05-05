@@ -45,6 +45,9 @@
 #define ROW_LANGUAGE                    1
 #define ROW_DEFAULT_CURRENCY            2
 
+#define ARRAY_LANG_CHOICES @[@"English", @"Spanish", @"German", @"French", @"Italian", @"Chinese", @"Portuguese", @"Japanese"]
+#define ARRAY_LANG_CODES   @[@"en",      @"es",      @"de",     @"fr",     @"it",      @"zh",      @"pt",         @"ja"      ]
+
 typedef struct sDenomination
 {
     char *szLabel;
@@ -670,7 +673,17 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		}
 		if (indexPath.row == 1)
 		{
+            NSInteger curChoice = 0;
 			cell.name.text = NSLocalizedString(@"Language", @"settings text");
+            if (_pAccountSettings->szLanguage)
+            {
+                curChoice = [ARRAY_LANG_CODES indexOfObject:[NSString stringWithUTF8String:_pAccountSettings->szLanguage]];
+                if (curChoice == NSNotFound)
+                {
+                    curChoice = 0;
+                }
+            }
+            [cell.button setTitle:[ARRAY_LANG_CHOICES objectAtIndex:curChoice] forState:UIControlStateNormal];
 		}
 		if (indexPath.row == 2)
 		{
@@ -982,24 +995,23 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         }
         else if (row == ROW_LANGUAGE)
         {
-            [self blockUser:YES];
+            NSInteger curChoice = [ARRAY_LANG_CODES indexOfObject:[NSString stringWithUTF8String:_pAccountSettings->szLanguage]];
+            if (curChoice == NSNotFound)
+            {
+                curChoice = -1;
+            }
+            [self blockUser:NO];
             self.popupPicker = [PopupPickerView CreateForView:self.viewMain
                                               relativeToFrame:cell.button.frame
                                                  viewForFrame:[cell.button superview]
                                                  withPosition:PopupPickerPosition_Left
-                                                  withStrings:@[@"English",
-                                                                @"Spanish",
-                                                                @"German",
-                                                                @"French",
-                                                                @"Italian",
-                                                                @"Chinese",
-                                                                @"Portuguese",
-                                                                @"Japanese"]
-                                                  selectedRow:-1
+                                                  withStrings:ARRAY_LANG_CHOICES
+                                                  selectedRow:curChoice
                                               maxCellsVisible:8
                                                     withWidth:150
                                                 andCellHeight:44
                                 ];
+            self.popupPicker.userData = cell;
             [self.popupPicker assignDelegate:self];
         }
         else if (row == ROW_DEFAULT_CURRENCY)
@@ -1013,7 +1025,33 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)PopupPickerViewExit:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
 {
+    UITableViewCell *cell = (UITableViewCell *)data;
+    NSInteger sectionCell = (cell.tag >> 8);
+    NSInteger rowCell = cell.tag & 0xff;
 
+    if (SECTION_OPTIONS == sectionCell)
+    {
+        if (rowCell == ROW_AUTO_LOG_OFF)
+        {
+
+        }
+        else if (rowCell == ROW_LANGUAGE)
+        {
+            [self replaceString:&(_pAccountSettings->szLanguage) withString:[[ARRAY_LANG_CODES objectAtIndex:row] UTF8String]];
+        }
+        else if (rowCell == ROW_DEFAULT_CURRENCY)
+        {
+
+        }
+
+        // update the settings in the core
+        [self saveSettings];
+
+        // update the display by reloading the table
+        [self.tableView reloadData];
+    }
+
+    [self dismissPopupPicker];
 }
 
 - (void)PopupPickerViewCancelled:(PopupPickerView *)view userData:(id)data
