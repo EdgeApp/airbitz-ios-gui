@@ -17,6 +17,7 @@
 #import "ButtonOnlyCell.h"
 #import "SignUpViewController.h"
 #import "PasswordRecoveryViewController.h"
+#import "PopupPickerView.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -40,6 +41,10 @@
 #define ROW_LAST_NAME                   2
 #define ROW_NICKNAME                    3
 
+#define ROW_AUTO_LOG_OFF                0
+#define ROW_LANGUAGE                    1
+#define ROW_DEFAULT_CURRENCY            2
+
 typedef struct sDenomination
 {
     char *szLabel;
@@ -59,7 +64,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 };
 
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate>
 {
 	tABC_AccountSettings            *_pAccountSettings;
 	TextFieldCell                   *_activeTextFieldCell;
@@ -71,7 +76,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     CGFloat                         _keyboardHeight;
 }
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableView    *tableView;
+@property (weak, nonatomic) IBOutlet UIView         *viewMain;
+
+@property (nonatomic, strong) PopupPickerView       *popupPicker;
+@property (nonatomic, strong) UIButton              *buttonBlocker;
 
 @end
 
@@ -108,6 +117,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	
     _frameStart = self.tableView.frame;
     _keyboardHeight = 0.0;
+
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -119,6 +129,13 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                                                object:nil];
     _bKeyboardIsShown = NO;
 
+    self.popupPicker = nil;
+    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.buttonBlocker.backgroundColor = [UIColor clearColor];
+    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
+    self.buttonBlocker.frame = self.view.bounds;
+    self.buttonBlocker.hidden = YES;
+    [self.view addSubview:self.buttonBlocker];
 }
 
 -(void)dealloc
@@ -318,6 +335,22 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     }
 }
 
+- (void)blockUser:(BOOL)bBlock
+{
+    self.buttonBlocker.hidden = !bBlock;
+}
+
+- (void)dismissPopupPicker
+{
+    if (self.popupPicker)
+    {
+        [self.popupPicker removeFromSuperview];
+        self.popupPicker = nil;
+    }
+
+    [self blockUser:NO];
+}
+
 - (void)printABC_Error:(const tABC_Error *)pError
 {
     if (pError)
@@ -337,6 +370,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 #pragma mark - Action Methods
 
+- (IBAction)buttonBlockerTouched:(id)sender
+{
+    [self dismissPopupPicker];
+}
+
 - (IBAction)Back
 {
 	[self.delegate SettingsViewControllerDone:self];
@@ -345,11 +383,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (IBAction)Info
 {
 	NSLog(@"Info button pressed");
-}
-
-- (void)buttonCellButtonPressed:(ButtonCell *)cell
-{
-	NSLog(@"Button was pressed");
 }
 
 - (void)buttonOnlyCellButtonPressed:(ButtonOnlyCell *)cell
@@ -932,6 +965,61 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         // update the display by reloading the table
         [self.tableView reloadData];
     }
+}
+
+#pragma mark - ButtonCell Delegate
+
+- (void)buttonCellButtonPressed:(ButtonCell *)cell
+{
+    NSInteger section = (cell.tag >> 8);
+    NSInteger row = cell.tag & 0xff;
+
+    if (SECTION_OPTIONS == section)
+    {
+        if (row == ROW_AUTO_LOG_OFF)
+        {
+
+        }
+        else if (row == ROW_LANGUAGE)
+        {
+            [self blockUser:YES];
+            self.popupPicker = [PopupPickerView CreateForView:self.viewMain
+                                              relativeToFrame:cell.button.frame
+                                                 viewForFrame:[cell.button superview]
+                                                 withPosition:PopupPickerPosition_Left
+                                                  withStrings:@[@"English",
+                                                                @"Spanish",
+                                                                @"German",
+                                                                @"French",
+                                                                @"Italian",
+                                                                @"Chinese",
+                                                                @"Portuguese",
+                                                                @"Japanese"]
+                                                  selectedRow:-1
+                                              maxCellsVisible:8
+                                                    withWidth:150
+                                                andCellHeight:44
+                                ];
+            [self.popupPicker assignDelegate:self];
+        }
+        else if (row == ROW_DEFAULT_CURRENCY)
+        {
+
+        }
+    }
+}
+
+#pragma mark - popup picker delegate methods
+
+- (void)PopupPickerViewExit:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
+{
+
+}
+
+- (void)PopupPickerViewCancelled:(PopupPickerView *)view userData:(id)data
+{
+    // dismiss the picker
+    [self dismissPopupPicker];
 }
 
 @end
