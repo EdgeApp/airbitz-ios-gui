@@ -18,18 +18,27 @@
 #import "SignUpViewController.h"
 #import "PasswordRecoveryViewController.h"
 
+#define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
+#define ANIMATION_DURATION_KEYBOARD_UP      0.30
+#define ANIMATION_DURATION_KEYBOARD_DOWN    0.25
+
 #define SECTION_BITCOIN_DENOMINATION    0
 #define SECTION_USERNAME                1
-#define SECTION_OPTIONS                 2
-#define SECTION_DEFAULT_EXCHANGE        3
-#define SECTION_LOGOUT                  4
-#define SECTION_COUNT                   5
+#define SECTION_NAME                    2
+#define SECTION_OPTIONS                 3
+#define SECTION_DEFAULT_EXCHANGE        4
+#define SECTION_LOGOUT                  5
+#define SECTION_COUNT                   6
 
 #define DENOMINATION_CHOICES            3
 
 #define ROW_PASSWORD                    0
 #define ROW_PIN                         1
 #define ROW_RECOVERY_QUESTIONS          2
+
+#define ROW_FIRST_NAME                  1
+#define ROW_LAST_NAME                   2
+#define ROW_NICKNAME                    3
 
 typedef struct sDenomination
 {
@@ -57,6 +66,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	UITapGestureRecognizer          *_tapGesture;
     SignUpViewController            *_signUpController;
     PasswordRecoveryViewController  *_passwordRecoveryController;
+    BOOL                            _bKeyboardIsShown;
+    CGRect                          _frameStart;
+    CGFloat                         _keyboardHeight;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -94,10 +106,19 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                             &Error);
     [self printABC_Error:&Error];
 	
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-	
+    _frameStart = self.tableView.frame;
+    _keyboardHeight = 0.0;
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    _bKeyboardIsShown = NO;
+
 }
 
 -(void)dealloc
@@ -116,6 +137,40 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 }
 
 #pragma mark - Misc Methods
+
+- (void)saveSettings
+{
+    // update the settings in the core
+    tABC_Error Error;
+    ABC_UpdateAccountSettings([[User Singleton].name UTF8String],
+                              [[User Singleton].password UTF8String],
+                              _pAccountSettings,
+                              &Error);
+    [self printABC_Error:&Error];
+}
+
+// replaces the string in the given variable with a duplicate of another
+- (void)replaceString:(char **)ppszValue withString:(const char *)szNewValue
+{
+    if (ppszValue)
+    {
+        if (*ppszValue)
+        {
+            free(*ppszValue);
+        }
+        *ppszValue = strdup(szNewValue);
+    }
+}
+
+// returns the cell for the given section and row in the table
+// Note: this can return nil if the row is not currently queued
+- (UITableViewCell *)cellForSection:(NSInteger)section andRow:(NSInteger)row
+{
+    NSIndexPath *cellPath = [NSIndexPath indexPathForRow:row inSection:section];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:cellPath];
+
+    return cell;
+}
 
 // looks for the denomination choice in the settings
 - (NSInteger)denominationChoice
@@ -144,19 +199,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         // set the new values
         _pAccountSettings->bitcoinDenomination.satoshi = gaDenominations[nChoice].satoshi;
-        if (_pAccountSettings->bitcoinDenomination.szLabel != NULL)
-        {
-            free(_pAccountSettings->bitcoinDenomination.szLabel);
-        }
-        _pAccountSettings->bitcoinDenomination.szLabel = strdup(gaDenominations[nChoice].szLabel);
+        [self replaceString:&(_pAccountSettings->bitcoinDenomination.szLabel) withString:gaDenominations[nChoice].szLabel];
 
         // update the settings in the core
-        tABC_Error Error;
-        ABC_UpdateAccountSettings([[User Singleton].name UTF8String],
-                                  [[User Singleton].password UTF8String],
-                                  _pAccountSettings,
-                                  &Error);
-        [self printABC_Error:&Error];
+        [self saveSettings];
     }
 }
 
@@ -211,6 +257,67 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	 }];
 }
 
+// returns how much the current first responder is obscured by the keyboard
+// negative means above the keyboad by that amount
+- (CGFloat)obscuredAmountFor:(UIView *)theView
+{
+    CGFloat obscureAmount = 0.0;
+
+    // determine how much we are obscured if any
+    if (theView)
+    {
+        UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+
+        CGPoint pointInWindow = [frontWindow.rootViewController.view convertPoint:theView.frame.origin fromView:self.tableView];
+
+        CGFloat distFromBottom = frontWindow.frame.size.height - pointInWindow.y;
+        obscureAmount = (_keyboardHeight + theView.frame.size.height) - distFromBottom;
+
+        //NSLog(@"y coord = %f", theView.frame.origin.y);
+        //NSLog(@"y coord in window = %f", pointInWindow.y);
+        //NSLog(@"dist from bottom = %f", distFromBottom);
+        //NSLog(@"amount Obscured = %f", obscureAmount);
+    }
+
+    return obscureAmount;
+}
+
+- (void)moveToClearKeyboardFor:(UIView *)theView withDuration:(CGFloat)duration
+{
+    CGRect newFrame = self.tableView.frame;
+
+    // determine how much we are obscured
+    CGFloat obscureAmount = [self obscuredAmountFor:theView];
+    obscureAmount += (CGFloat) DISTANCE_ABOVE_KEYBOARD;
+
+    // if obscured too much
+    //NSLog(@"obscure amount final = %f", obscureAmount);
+    if (obscureAmount != 0.0)
+    {
+        // it is obscured so move it to compensate
+        //NSLog(@"need to compensate");
+        newFrame.origin.y -= obscureAmount;
+    }
+
+    //NSLog(@"old origin: %f, new origin: %f", _frameStart.origin.y, newFrame.origin.y);
+
+    // if our new position puts us lower then we were originally
+    if (newFrame.origin.y > _frameStart.origin.y)
+    {
+        newFrame.origin.y = _frameStart.origin.y;
+    }
+
+    // if we need to move
+    if (self.tableView.frame.origin.y != newFrame.origin.y)
+    {
+        CGFloat offsetChangeY = _frameStart.origin.y - newFrame.origin.y;
+        CGFloat curOffsetY = self.tableView.contentOffset.y;
+        CGPoint p = CGPointMake(0, curOffsetY + offsetChangeY);
+
+		[self.tableView setContentOffset:p animated:YES];
+    }
+}
+
 - (void)printABC_Error:(const tABC_Error *)pError
 {
     if (pError)
@@ -240,11 +347,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	NSLog(@"Info button pressed");
 }
 
-- (void)booleanCell:(BooleanCell *)cell switchToggled:(UISwitch *)theSwitch
-{
-	NSLog(@"Switch toggled:%i", theSwitch.on);
-}
-
 - (void)buttonCellButtonPressed:(ButtonCell *)cell
 {
 	NSLog(@"Button was pressed");
@@ -260,18 +362,42 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 #pragma mark - textFieldCell delegates
 
+- (void)textFieldCellTextDidChange:(TextFieldCell *)cell
+{
+    NSInteger section = (cell.tag >> 8);
+    NSInteger row = cell.tag & 0xff;
+
+    if (section == SECTION_NAME)
+    {
+        if (row == ROW_FIRST_NAME)
+        {
+            [self replaceString:&(_pAccountSettings->szFirstName) withString:[cell.textField.text UTF8String]];
+        }
+        else if (row == ROW_LAST_NAME)
+        {
+            [self replaceString:&(_pAccountSettings->szLastName) withString:[cell.textField.text UTF8String]];
+        }
+        else if (row == ROW_NICKNAME)
+        {
+            [self replaceString:&(_pAccountSettings->szNickname) withString:[cell.textField.text UTF8String]];
+        }
+
+        [self saveSettings];
+    }
+}
+
 - (void)textFieldCellBeganEditing:(TextFieldCell *)cell
 {
 	//scroll the tableView so that this cell is above the keyboard
 	_activeTextFieldCell = cell;
-	if(!_tapGesture)
+	if (!_tapGesture)
 	{
 		_tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
 		[self.tableView	addGestureRecognizer:_tapGesture];
 	}
 }
 
-- (void) handleTapFrom: (UITapGestureRecognizer *)recognizer
+- (void)handleTapFrom:(UITapGestureRecognizer *)recognizer
 {
     //Code to handle the gesture
 	[self.view endEditing:YES];
@@ -279,36 +405,69 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	_tapGesture = nil;
 }
 
--(void)textFieldCellEndEditing:(TextFieldCell *)cell
+- (void)textFieldCellEndEditing:(TextFieldCell *)cell
 {
 	[_activeTextFieldCell resignFirstResponder];
 	_activeTextFieldCell = nil;
 }
 
-#pragma mark - keyboard callbacks
-
-- (void)keyboardWillShow:(NSNotification *)notification
+- (void)textFieldCellTextDidReturn:(TextFieldCell *)cell
 {
-	if (_activeTextFieldCell)
-	{
-		//NSDictionary *userInfo = [notification userInfo];
-		//CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-		
-		//CGRect ownFrame = [self.view.window convertRect:keyboardFrame toView:self.view];
-		//NSLog(@"Own frame: %f, %f, %f, %f", ownFrame.origin.x, ownFrame.origin.y, ownFrame.size.width, ownFrame.size.height);
-		//NSLog(@"Table frame: %f, %f, %f, %f", self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height);
-		CGPoint p = CGPointMake(0, 165.0);
-		
-		[self.tableView setContentOffset:p animated:YES];
-	}
+    NSInteger section = (cell.tag >> 8);
+    NSInteger row = cell.tag & 0xff;
+
+    if (section == SECTION_NAME)
+    {
+        if (row == ROW_FIRST_NAME)
+        {
+            TextFieldCell *nextCell = (TextFieldCell *) [self cellForSection:SECTION_NAME andRow:ROW_LAST_NAME];
+            if (nextCell)
+            {
+                [nextCell.textField becomeFirstResponder];
+            }
+        }
+        else if (row == ROW_LAST_NAME)
+        {
+            TextFieldCell *nextCell = (TextFieldCell *) [self cellForSection:SECTION_NAME andRow:ROW_NICKNAME];
+            if (nextCell)
+            {
+                [nextCell.textField becomeFirstResponder];
+            }
+        }
+    }
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification
+#pragma mark - Keyboard Notification Methods
+
+- (void)keyboardWillShow:(NSNotification *)n
 {
-	if (_activeTextFieldCell)
-	{
-		_activeTextFieldCell = nil;
-	}
+    if (!_activeTextFieldCell)
+    {
+        return;
+    }
+
+    // NOTE: The keyboard notification will fire even when the keyboard is already shown.
+    if (_bKeyboardIsShown)
+    {
+        return;
+    }
+
+    // get the height of the keyboard
+    NSDictionary* userInfo = [n userInfo];
+    NSValue* boundsValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGSize keyboardSize = [boundsValue CGRectValue].size;
+    _keyboardHeight = keyboardSize.height;
+
+    // move ourselves up to clear the keyboard
+    [self moveToClearKeyboardFor:_activeTextFieldCell withDuration:ANIMATION_DURATION_KEYBOARD_UP];
+
+    _bKeyboardIsShown = YES;
+}
+
+- (void)keyboardWillHide:(NSNotification *)n
+{
+    _bKeyboardIsShown = NO;
+    _keyboardHeight = 0.0;
 }
 
 #pragma mark - Custom Table Cells
@@ -338,6 +497,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		cell.name.text = NSLocalizedString(@"uBitcoin = (0.000001 Bitcoin)", @"settings text");
 	}
 	cell.radioButton.image = [UIImage imageNamed:(indexPath.row == [self denominationChoice] ? @"btn_selected" : @"btn_unselected")];
+
+    cell.tag = (indexPath.section << 8) | (indexPath.row);
+
 	return cell;
 }
 
@@ -369,6 +531,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		}
 	}
 	
+    cell.tag = (indexPath.section << 8) | (indexPath.row);
+
 	return cell;
 }
 
@@ -384,21 +548,45 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	cell.bkgImage.image = bkgImage;
 	cell.delegate = self;
-	if (indexPath.section == SECTION_USERNAME)
+	if (indexPath.section == SECTION_NAME)
 	{
-		if(indexPath.row == 3)
+		if (indexPath.row == 1)
 		{
-			cell.name.placeholder = NSLocalizedString(@"First Name (optional)", @"settings text");
+			cell.textField.placeholder = NSLocalizedString(@"First Name (optional)", @"settings text");
+            cell.textField.returnKeyType = UIReturnKeyNext;
+            if (_pAccountSettings->szFirstName)
+            {
+                cell.textField.text = [NSString stringWithUTF8String:_pAccountSettings->szFirstName];
+            }
 		}
-		if(indexPath.row == 4)
+		if (indexPath.row == 2)
 		{
-			cell.name.placeholder = NSLocalizedString(@"Last Name (optional)", @"settings text");
+			cell.textField.placeholder = NSLocalizedString(@"Last Name (optional)", @"settings text");
+            cell.textField.returnKeyType = UIReturnKeyNext;
+            if (_pAccountSettings->szLastName)
+            {
+                cell.textField.text = [NSString stringWithUTF8String:_pAccountSettings->szLastName];
+            }
 		}
-		if(indexPath.row == 5)
+		if (indexPath.row == 3)
 		{
-			cell.name.placeholder = NSLocalizedString(@"Nickname / handle", @"settings text");
+			cell.textField.placeholder = NSLocalizedString(@"Nickname / Handle", @"settings text");
+            cell.textField.returnKeyType = UIReturnKeyDone;
+            if (_pAccountSettings->szNickname)
+            {
+                cell.textField.text = [NSString stringWithUTF8String:_pAccountSettings->szNickname];
+            }
 		}
+
+        cell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        cell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+        cell.textField.spellCheckingType = UITextSpellCheckingTypeNo;
+
+        cell.textField.enabled = _pAccountSettings->bNameOnPayments;
+        cell.textField.textColor = cell.textField.enabled ? [UIColor blackColor] : [UIColor grayColor];
 	}
+
+    cell.tag = (indexPath.section << 8) | (indexPath.row);
 	
 	return cell;
 }
@@ -415,14 +603,17 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	cell.bkgImage.image = bkgImage;
 	cell.delegate = self;
-	if (indexPath.section == 2)
+	if (indexPath.section == SECTION_NAME)
 	{
-		if(indexPath.row == 0)
+		if (indexPath.row == 0)
 		{
 			cell.name.text = NSLocalizedString(@"Send name on payment", @"settings text");
+            [cell.state setOn:_pAccountSettings->bNameOnPayments animated:NO];
 		}
 	}
 	
+    cell.tag = (indexPath.section << 8) | (indexPath.row);
+
 	return cell;
 }
 
@@ -438,22 +629,22 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	cell.bkgImage.image = bkgImage;
 	cell.delegate = self;
-	if (indexPath.section == 2)
+	if (indexPath.section == SECTION_OPTIONS)
 	{
-		if (indexPath.row == 1)
+		if (indexPath.row == 0)
 		{
 			cell.name.text = NSLocalizedString(@"Auto log off after", @"settings text");
 		}
-		if (indexPath.row == 2)
+		if (indexPath.row == 1)
 		{
 			cell.name.text = NSLocalizedString(@"Language", @"settings text");
 		}
-		if (indexPath.row == 3)
+		if (indexPath.row == 2)
 		{
 			cell.name.text = NSLocalizedString(@"Default Currency", @"settings text");
 		}
 	}
-	if (indexPath.section == 3)
+	if (indexPath.section == SECTION_DEFAULT_EXCHANGE)
 	{
 		if (indexPath.row == 0)
 		{
@@ -476,6 +667,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			cell.name.text = NSLocalizedString(@"Yuan", @"settings text");
 		}
 	}
+
+    cell.tag = (indexPath.section << 8) | (indexPath.row);
+
 	return cell;
 }
 
@@ -493,6 +687,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	//[cell.button setTitle:NSLocalizedString(@"Change Categories", @"settings text") forState:UIControlStateNormal]; //cw temp replace this button with log out functionality
 	[cell.button setTitle:NSLocalizedString(@"Log Out", @"settings text") forState:UIControlStateNormal];
 	
+    cell.tag = (indexPath.section << 8) | (indexPath.row);
+
 	return cell;
 }
 
@@ -500,7 +696,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return 5;
+	return SECTION_COUNT;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -512,11 +708,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_USERNAME:
-            return 6;
+            return 3;
+            break;
+
+        case SECTION_NAME:
+            return 4;
             break;
 
         case SECTION_OPTIONS:
-            return 4;
+            return 3;
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
@@ -570,9 +770,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		label.text = NSLocalizedString(@"USERNAME", @"section header in settings table");
 	}
+    if (section == SECTION_NAME)
+	{
+		label.text = NSLocalizedString(@"NAME", @"section header in settings table");
+	}
 	if (section == SECTION_OPTIONS)
 	{
-		label.text = @" ";
+        label.text = @" ";
+		//label.text = NSLocalizedString(@"OPTIONS", @"section header in settings table");
 	}
 	if (section == SECTION_DEFAULT_EXCHANGE)
 	{
@@ -621,18 +826,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		{
 			cell = [self getRadioButtonCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
 		}
-		if (indexPath.section == SECTION_USERNAME)
+		else if (indexPath.section == SECTION_USERNAME)
 		{
-			if (indexPath.row < 3)
-			{
-				cell = [self getPlainCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
-			}
-			else
-			{
-				cell = [self getTextFieldCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
-			}
+            cell = [self getPlainCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
 		}
-		if (indexPath.section == SECTION_OPTIONS)
+        else if (indexPath.section == SECTION_NAME)
 		{
 			if (indexPath.row == 0)
 			{
@@ -640,10 +838,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			}
 			else
 			{
-				cell = [self getButtonCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
+				cell = [self getTextFieldCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
 			}
 		}
-		if (indexPath.section == SECTION_DEFAULT_EXCHANGE)
+		else if (indexPath.section == SECTION_OPTIONS)
+		{
+            cell = [self getButtonCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
+		}
+		else if (indexPath.section == SECTION_DEFAULT_EXCHANGE)
 		{
 			cell = [self getButtonCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
 		}
@@ -656,7 +858,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSLog(@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
+	//NSLog(@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
 
     switch (indexPath.section)
 	{
@@ -680,6 +882,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             }
             break;
 
+        case SECTION_NAME:
+            break;
+
         case SECTION_OPTIONS:
             break;
 
@@ -694,7 +899,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 }
 
-#pragma mark SignUpViewControllerDelegates
+#pragma mark - SignUpViewControllerDelegates
 
 -(void)signupViewControllerDidFinish:(SignUpViewController *)controller
 {
@@ -708,6 +913,25 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
 	[controller.view removeFromSuperview];
 	_passwordRecoveryController = nil;
+}
+
+#pragma mark - BooleanCell Delegate
+
+- (void)booleanCell:(BooleanCell *)cell switchToggled:(UISwitch *)theSwitch
+{
+    NSInteger section = (cell.tag >> 8);
+
+    // we only have one boolean cell and that's the name on payment option
+    if (section == SECTION_NAME)
+    {
+        _pAccountSettings->bNameOnPayments = theSwitch.on;
+
+        // update the settings in the core
+        [self saveSettings];
+
+        // update the display by reloading the table
+        [self.tableView reloadData];
+    }
 }
 
 @end

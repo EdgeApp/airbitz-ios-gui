@@ -2002,7 +2002,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="bkgImage" destination="Al7-xm-sPk" id="yhX-b4-SNR"/>
-                                            <outlet property="name" destination="tIh-1R-4zh" id="G4f-RW-kjM"/>
+                                            <outlet property="textField" destination="tIh-1R-4zh" id="WCO-7M-MJN"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BooleanCell" rowHeight="37" id="me5-hG-XVx" customClass="BooleanCell">

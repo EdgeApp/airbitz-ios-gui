@@ -17,20 +17,26 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
+    if (self)
+    {
+
     }
     return self;
 }
 
--(void)awakeFromNib
+- (void)awakeFromNib
 {
 	//prevent ugly gray box from appearing behind cell when selected
 	self.backgroundColor = [UIColor clearColor];
 	self.selectedBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
 	
-	self.name.delegate = self;
+	self.textField.delegate = self;
+
+    // Add a "textFieldDidChange" notification method to the text field control.
+    [self.textField addTarget:self
+                       action:@selector(textFieldDidChange:)
+             forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -42,25 +48,39 @@
 
 #pragma mark UITextField delegates
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)textFieldDidChange:(UITextField *)textField
 {
-	if([self.delegate respondsToSelector:@selector(textFieldCellBeganEditing:)])
+	if ([self.delegate respondsToSelector:@selector(textFieldCellTextDidChange:)])
+	{
+		[self.delegate textFieldCellTextDidChange:self];
+	}
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+	if ([self.delegate respondsToSelector:@selector(textFieldCellBeganEditing:)])
 	{
 		[self.delegate textFieldCellBeganEditing:self];
 	}
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
-	if([self.delegate respondsToSelector:@selector(textFieldCellEndEditing:)])
+	if ([self.delegate respondsToSelector:@selector(textFieldCellEndEditing:)])
 	{
 		[self.delegate textFieldCellEndEditing:self];
 	}
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	[textField resignFirstResponder];
+
+    if ([self.delegate respondsToSelector:@selector(textFieldCellTextDidReturn:)])
+	{
+		[self.delegate textFieldCellTextDidReturn:self];
+	}
+
 	return YES;
 }
 @end
