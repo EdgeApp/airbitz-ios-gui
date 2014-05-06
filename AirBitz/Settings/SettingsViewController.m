@@ -48,6 +48,10 @@
 #define ARRAY_LANG_CHOICES @[@"English", @"Spanish", @"German", @"French", @"Italian", @"Chinese", @"Portuguese", @"Japanese"]
 #define ARRAY_LANG_CODES   @[@"en",      @"es",      @"de",     @"fr",     @"it",      @"zh",      @"pt",         @"ja"      ]
 
+#define PICKER_MAX_CELLS_VISIBLE        8
+#define PICKER_WIDTH                    150
+#define PICKER_CELL_HEIGHT              44
+
 typedef struct sDenomination
 {
     char *szLabel;
@@ -69,6 +73,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate>
 {
+    tABC_Currency                   *_aCurrencies;
+    int                             _currencyCount;
 	tABC_AccountSettings            *_pAccountSettings;
 	TextFieldCell                   *_activeTextFieldCell;
 	UITapGestureRecognizer          *_tapGesture;
@@ -84,6 +90,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 @property (nonatomic, strong) PopupPickerView       *popupPicker;
 @property (nonatomic, strong) UIButton              *buttonBlocker;
+
+@property (nonatomic, strong) NSArray               *arrayCurrencyCodes;
+@property (nonatomic, strong) NSArray               *arrayCurrencyNums;
 
 @end
 
@@ -111,6 +120,23 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	tABC_Error Error;
     Error.code = ABC_CC_Ok;
 
+    // get the currencies
+    _aCurrencies = NULL;
+    ABC_GetCurrencies(&_aCurrencies, &_currencyCount, &Error);
+    [self printABC_Error:&Error];
+
+    // set up our internal currency arrays
+    NSMutableArray *arrayCurrencyCodes = [[NSMutableArray alloc] initWithCapacity:_currencyCount];
+    NSMutableArray *arrayCurrencyNums = [[NSMutableArray alloc] initWithCapacity:_currencyCount];
+    for (int i = 0; i < _currencyCount; i++)
+    {
+        [arrayCurrencyCodes addObject:[NSString stringWithUTF8String:_aCurrencies[i].szCode]];
+        [arrayCurrencyNums addObject:[NSNumber numberWithInt:_aCurrencies[i].num]];
+    }
+    self.arrayCurrencyCodes = arrayCurrencyCodes;
+    self.arrayCurrencyNums = arrayCurrencyNums;
+
+    // load the current account settings
     _pAccountSettings = NULL;
     ABC_LoadAccountSettings([[User Singleton].name UTF8String],
                             [[User Singleton].password UTF8String],
@@ -138,12 +164,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
     self.buttonBlocker.frame = self.view.bounds;
     self.buttonBlocker.hidden = YES;
-    [self.view addSubview:self.buttonBlocker];
+    [self.viewMain addSubview:self.buttonBlocker];
 }
 
 -(void)dealloc
 {
-	if(_pAccountSettings)
+	if (_pAccountSettings)
 	{
 		ABC_FreeAccountSettings(_pAccountSettings);
 	}
@@ -667,11 +693,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	cell.delegate = self;
 	if (indexPath.section == SECTION_OPTIONS)
 	{
-		if (indexPath.row == 0)
+		if (indexPath.row == ROW_AUTO_LOG_OFF)
 		{
 			cell.name.text = NSLocalizedString(@"Auto log off after", @"settings text");
 		}
-		if (indexPath.row == 1)
+		else if (indexPath.row == ROW_LANGUAGE)
 		{
             NSInteger curChoice = 0;
 			cell.name.text = NSLocalizedString(@"Language", @"settings text");
@@ -685,9 +711,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             }
             [cell.button setTitle:[ARRAY_LANG_CHOICES objectAtIndex:curChoice] forState:UIControlStateNormal];
 		}
-		if (indexPath.row == 2)
+		else if (indexPath.row == ROW_DEFAULT_CURRENCY)
 		{
 			cell.name.text = NSLocalizedString(@"Default Currency", @"settings text");
+            NSInteger indexCurrency = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
+            if (indexCurrency != NSNotFound)
+            {
+                [cell.button setTitle:[self.arrayCurrencyCodes objectAtIndex:indexCurrency] forState:UIControlStateNormal];
+            }
 		}
 	}
 	if (indexPath.section == SECTION_DEFAULT_EXCHANGE)
@@ -696,19 +727,19 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		{
 			cell.name.text = NSLocalizedString(@"US dollar", @"settings text");
 		}
-		if (indexPath.row == 1)
+		else if (indexPath.row == 1)
 		{
 			cell.name.text = NSLocalizedString(@"Canadian dollar", @"settings text");
 		}
-		if (indexPath.row == 2)
+		else if (indexPath.row == 2)
 		{
 			cell.name.text = NSLocalizedString(@"Euro", @"settings text");
 		}
-		if (indexPath.row == 3)
+		else if (indexPath.row == 3)
 		{
 			cell.name.text = NSLocalizedString(@"Mexican Peso", @"settings text");
 		}
-		if (indexPath.row == 4)
+		else if (indexPath.row == 4)
 		{
 			cell.name.text = NSLocalizedString(@"Yuan", @"settings text");
 		}
@@ -1000,23 +1031,40 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             {
                 curChoice = -1;
             }
-            [self blockUser:NO];
+            [self blockUser:YES];
             self.popupPicker = [PopupPickerView CreateForView:self.viewMain
                                               relativeToFrame:cell.button.frame
                                                  viewForFrame:[cell.button superview]
                                                  withPosition:PopupPickerPosition_Left
                                                   withStrings:ARRAY_LANG_CHOICES
                                                   selectedRow:curChoice
-                                              maxCellsVisible:8
-                                                    withWidth:150
-                                                andCellHeight:44
+                                              maxCellsVisible:PICKER_MAX_CELLS_VISIBLE
+                                                    withWidth:PICKER_WIDTH
+                                                andCellHeight:PICKER_CELL_HEIGHT
                                 ];
             self.popupPicker.userData = cell;
             [self.popupPicker assignDelegate:self];
         }
         else if (row == ROW_DEFAULT_CURRENCY)
         {
-
+            NSInteger curChoice = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
+            if (curChoice == NSNotFound)
+            {
+                curChoice = -1;
+            }
+            [self blockUser:YES];
+            self.popupPicker = [PopupPickerView CreateForView:self.viewMain
+                                              relativeToFrame:cell.button.frame
+                                                 viewForFrame:[cell.button superview]
+                                                 withPosition:PopupPickerPosition_Left
+                                                  withStrings:self.arrayCurrencyCodes
+                                                  selectedRow:curChoice
+                                              maxCellsVisible:PICKER_MAX_CELLS_VISIBLE
+                                                    withWidth:PICKER_WIDTH
+                                                andCellHeight:PICKER_CELL_HEIGHT
+                                ];
+            self.popupPicker.userData = cell;
+            [self.popupPicker assignDelegate:self];
         }
     }
 }
@@ -1041,7 +1089,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         }
         else if (rowCell == ROW_DEFAULT_CURRENCY)
         {
-
+            _pAccountSettings->currencyNum = [[self.arrayCurrencyNums objectAtIndex:row] intValue];
         }
 
         // update the settings in the core
