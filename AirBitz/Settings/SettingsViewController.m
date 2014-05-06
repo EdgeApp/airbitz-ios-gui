@@ -45,11 +45,25 @@
 #define ROW_LANGUAGE                    1
 #define ROW_DEFAULT_CURRENCY            2
 
-#define ARRAY_LANG_CHOICES @[@"English", @"Spanish", @"German", @"French", @"Italian", @"Chinese", @"Portuguese", @"Japanese"]
-#define ARRAY_LANG_CODES   @[@"en",      @"es",      @"de",     @"fr",     @"it",      @"zh",      @"pt",         @"ja"      ]
+#define ROW_US_DOLLAR                   0
+#define ROW_CANADIAN_DOLLAR             1
+#define ROW_EURO                        2
+#define ROW_MEXICAN_PESO                3
+#define ROW_YUAN                        4
 
-#define PICKER_MAX_CELLS_VISIBLE        8
-#define PICKER_WIDTH                    150
+#define ARRAY_LANG_CHOICES  @[@"English", @"Spanish", @"German", @"French", @"Italian", @"Chinese", @"Portuguese", @"Japanese"]
+#define ARRAY_LANG_CODES    @[@"en",      @"es",      @"de",     @"fr",     @"it",      @"zh",      @"pt",         @"ja"      ]
+
+#define ARRAY_CURRENCY_NUMS @[@840, @124, @978, @484, @156]
+#define ARRAY_EXCHANGES     @[@[@"Bitstamp", @"CoinMKT", @"Kraken", @"Coindesk", @"CampBX", @"Coinbase", @"BTC-e"], \
+                              @[@"Cavirtex", @"Vault of Satoshi"], \
+                              @[@"Bitcoin.de", @"Kraken", @"BTC-e"], \
+                              @[@"MEXBT", @"Bitso"], \
+                              @[@"Huobi", @"BTC China", @"OKcoin"] \
+                             ]
+
+#define PICKER_MAX_CELLS_VISIBLE        9
+#define PICKER_WIDTH                    160
 #define PICKER_CELL_HEIGHT              44
 
 typedef struct sDenomination
@@ -378,6 +392,71 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     }
 
     [self blockUser:NO];
+}
+
+// searches the exchanges in the settings for the exchange associated with the given currency number
+// NULL is returned if none can be found
+- (char *)exchangeForCurrencyNum:(int)currencyNum
+{
+    char *szRetVal = NULL;
+
+    if (_pAccountSettings)
+    {
+        // look through all the sources
+        for (int i = 0; i < _pAccountSettings->exchangeRateSources.numSources; i++)
+        {
+            if (_pAccountSettings->exchangeRateSources.aSources[i]->currencyNum == currencyNum)
+            {
+                szRetVal = _pAccountSettings->exchangeRateSources.aSources[i]->szSource;
+                break;
+            }
+        }
+    }
+
+    return szRetVal;
+}
+
+// sets the exchange for the given currency in the settings
+- (void)setExchange:(char *)szSourceSel forCurrencyNum:(int)currencyNum
+{
+    if (_pAccountSettings)
+    {
+        tABC_ExchangeRateSources *pSources = &(_pAccountSettings->exchangeRateSources);
+
+        // if there are currently any sources
+        if (pSources->numSources > 0)
+        {
+            BOOL bReplaced = NO;
+            // look through all the sources
+            for (int i = 0; i < pSources->numSources; i++)
+            {
+                if (pSources->aSources[i]->currencyNum == currencyNum)
+                {
+                    free(pSources->aSources[i]->szSource);
+                    pSources->aSources[i]->szSource = strdup(szSourceSel);
+                    bReplaced = YES;
+                    break;
+                }
+            }
+            if (bReplaced == NO)
+            {
+                pSources->numSources++;
+                pSources->aSources = realloc(pSources->aSources, pSources->numSources * sizeof(tABC_ExchangeRateSource *));
+                pSources->aSources[pSources->numSources - 1] = calloc(1, sizeof(tABC_ExchangeRateSource));
+                pSources->aSources[pSources->numSources - 1]->currencyNum = currencyNum;
+                pSources->aSources[pSources->numSources - 1]->szSource = strdup(szSourceSel);
+            }
+        }
+        else
+        {
+            // add our first and only source
+            pSources->numSources = 1;
+            pSources->aSources = calloc(1, sizeof(tABC_ExchangeRateSource *));
+            pSources->aSources[0] = calloc(1, sizeof(tABC_ExchangeRateSource));
+            pSources->aSources[0]->currencyNum = currencyNum;
+            pSources->aSources[0]->szSource = strdup(szSourceSel);
+        }
+    }
 }
 
 - (void)printABC_Error:(const tABC_Error *)pError
@@ -743,6 +822,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		{
 			cell.name.text = NSLocalizedString(@"Yuan", @"settings text");
 		}
+        char *szSource = [self exchangeForCurrencyNum:[[ARRAY_CURRENCY_NUMS objectAtIndex:indexPath.row] intValue]];
+        if (szSource)
+        {
+            [cell.button setTitle:[NSString stringWithUTF8String:szSource] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [cell.button setTitle:@"" forState:UIControlStateNormal];
+        }
 	}
 
     cell.tag = (indexPath.section << 8) | (indexPath.row);
@@ -1018,6 +1106,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     NSInteger section = (cell.tag >> 8);
     NSInteger row = cell.tag & 0xff;
 
+    NSInteger curChoice = -1;
+    NSArray *arrayPopupChoices = nil;
+
     if (SECTION_OPTIONS == section)
     {
         if (row == ROW_AUTO_LOG_OFF)
@@ -1026,46 +1117,54 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         }
         else if (row == ROW_LANGUAGE)
         {
-            NSInteger curChoice = [ARRAY_LANG_CODES indexOfObject:[NSString stringWithUTF8String:_pAccountSettings->szLanguage]];
+            curChoice = [ARRAY_LANG_CODES indexOfObject:[NSString stringWithUTF8String:_pAccountSettings->szLanguage]];
             if (curChoice == NSNotFound)
             {
                 curChoice = -1;
             }
-            [self blockUser:YES];
-            self.popupPicker = [PopupPickerView CreateForView:self.viewMain
-                                              relativeToFrame:cell.button.frame
-                                                 viewForFrame:[cell.button superview]
-                                                 withPosition:PopupPickerPosition_Left
-                                                  withStrings:ARRAY_LANG_CHOICES
-                                                  selectedRow:curChoice
-                                              maxCellsVisible:PICKER_MAX_CELLS_VISIBLE
-                                                    withWidth:PICKER_WIDTH
-                                                andCellHeight:PICKER_CELL_HEIGHT
-                                ];
-            self.popupPicker.userData = cell;
-            [self.popupPicker assignDelegate:self];
+            arrayPopupChoices = ARRAY_LANG_CHOICES;
         }
         else if (row == ROW_DEFAULT_CURRENCY)
         {
-            NSInteger curChoice = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
+            curChoice = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
             if (curChoice == NSNotFound)
             {
                 curChoice = -1;
             }
-            [self blockUser:YES];
-            self.popupPicker = [PopupPickerView CreateForView:self.viewMain
-                                              relativeToFrame:cell.button.frame
-                                                 viewForFrame:[cell.button superview]
-                                                 withPosition:PopupPickerPosition_Left
-                                                  withStrings:self.arrayCurrencyCodes
-                                                  selectedRow:curChoice
-                                              maxCellsVisible:PICKER_MAX_CELLS_VISIBLE
-                                                    withWidth:PICKER_WIDTH
-                                                andCellHeight:PICKER_CELL_HEIGHT
-                                ];
-            self.popupPicker.userData = cell;
-            [self.popupPicker assignDelegate:self];
+            arrayPopupChoices = self.arrayCurrencyCodes;
         }
+    }
+    else if (SECTION_DEFAULT_EXCHANGE == section)
+    {
+        curChoice = NSNotFound;
+        char *szSource = [self exchangeForCurrencyNum:[[ARRAY_CURRENCY_NUMS objectAtIndex:row] intValue]];
+        if (szSource)
+        {
+            curChoice = [[ARRAY_EXCHANGES objectAtIndex:row] indexOfObject:[NSString stringWithUTF8String:szSource]];
+        }
+        if (curChoice == NSNotFound)
+        {
+            curChoice = -1;
+        }
+        arrayPopupChoices = [ARRAY_EXCHANGES objectAtIndex:row];
+    }
+
+    // if we are supposed to bring up a default popup
+    if (arrayPopupChoices)
+    {
+        [self blockUser:YES];
+        self.popupPicker = [PopupPickerView CreateForView:self.viewMain
+                                          relativeToFrame:cell.button.frame
+                                             viewForFrame:[cell.button superview]
+                                             withPosition:PopupPickerPosition_Left
+                                              withStrings:arrayPopupChoices
+                                              selectedRow:curChoice
+                                          maxCellsVisible:PICKER_MAX_CELLS_VISIBLE
+                                                withWidth:PICKER_WIDTH
+                                            andCellHeight:PICKER_CELL_HEIGHT
+                            ];
+        self.popupPicker.userData = cell;
+        [self.popupPicker assignDelegate:self];
     }
 }
 
@@ -1091,13 +1190,18 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         {
             _pAccountSettings->currencyNum = [[self.arrayCurrencyNums objectAtIndex:row] intValue];
         }
-
-        // update the settings in the core
-        [self saveSettings];
-
-        // update the display by reloading the table
-        [self.tableView reloadData];
     }
+    else if (SECTION_DEFAULT_EXCHANGE == sectionCell)
+    {
+        char *szSourceSel = [[[ARRAY_EXCHANGES objectAtIndex:rowCell] objectAtIndex:row] UTF8String];
+        [self setExchange:szSourceSel forCurrencyNum:[[ARRAY_CURRENCY_NUMS objectAtIndex:rowCell] intValue]];
+    }
+
+    // update the settings in the core
+    [self saveSettings];
+
+    // update the display by reloading the table
+    [self.tableView reloadData];
 
     [self dismissPopupPicker];
 }
