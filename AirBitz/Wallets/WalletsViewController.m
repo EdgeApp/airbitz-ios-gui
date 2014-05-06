@@ -18,6 +18,7 @@
 
 #define DOLLAR_CURRENCY_NUM	840
 
+id iControllerRef = nil;
 @interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletMakerViewDelegate>
 {
 	BalanceView *balanceView;
@@ -47,7 +48,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -55,7 +55,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    iControllerRef = self;
 
     // retrieve the wallets from the server and put them in the two member arrays
     [self getWallets];
@@ -111,7 +111,7 @@
 	blockingButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
 	[self.view insertSubview:blockingButton belowSubview:self.walletMakerView];
 	blockingButton.alpha = 0.0;
-	
+
 	[blockingButton addTarget:self
 			   action:@selector(blockingButtonHit:)
 	 forControlEvents:UIControlEventTouchDown];
@@ -136,14 +136,14 @@
 						  delay:0.0
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
-	 {
-		 blockingButton.alpha = 0.0;
-	 }
-					 completion:^(BOOL finished)
-	 {
-		 [blockingButton removeFromSuperview];
-		 blockingButton = nil;
-	 }];
+    {
+        blockingButton.alpha = 0.0;
+    }
+    completion:^(BOOL finished)
+    {
+        [blockingButton removeFromSuperview];
+        blockingButton = nil;
+    }];
 }
 
 - (void)blockingButtonHit:(UIButton *)button
@@ -154,263 +154,62 @@
 // retrieves the wallets from the server and put them in the two member arrays
 - (void)getWallets
 {
+    tABC_Error Error;
+    tABC_WalletInfo **aWalletInfo = NULL;
+    unsigned int nCount;
+
     // alloc our version of the wallets
-    self.arrayWallets = [[NSMutableArray alloc] init];
-    self.arrayArchivedWallets = [[NSMutableArray alloc] init];
+    if (self.arrayWallets == nil) {
+        self.arrayWallets = [[NSMutableArray alloc] init];
+        self.arrayArchivedWallets = [[NSMutableArray alloc] init];
+    } else {
+        [self.arrayWallets removeAllObjects];
+        [self.arrayArchivedWallets removeAllObjects];
+    }
 
-    // TODO: get the wallets from the server
+    ABC_GetWallets([[User Singleton].name UTF8String], 
+                   [[User Singleton].password UTF8String], 
+                   &aWalletInfo, &nCount, &Error);
+    unsigned int i;
+    for (i = 0; i < nCount; ++i) {
+        Wallet *wallet;
+        NSMutableArray *arrayTransactions;
+        Transaction *transaction;
+        tABC_WalletInfo *pWalletInfo = aWalletInfo[i];
 
-    // temp: create mockup wallets
-    Wallet *wallet;
-    Transaction *transaction;
-    NSMutableArray *arrayTransactions;
+        wallet = [[Wallet alloc] init];
+        wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
+        wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
+        wallet.attributes = 0;
+        wallet.balance = pWalletInfo->balanceSatoshi;
+        wallet.currencyNum = pWalletInfo->currencyNum;
+        [self.arrayWallets addObject:wallet];
 
-    //////////// WALLET ///////////////////
-    wallet = [[Wallet alloc] init];
-    wallet.strUUID = @"EA9A2034-0630-48D2-BA80-A3EEB239429C";
-    wallet.strName = @"Baseball Team";
-    wallet.attributes = 0;
-    wallet.balance = 15.0;
-    wallet.currencyNum = 840;
-    arrayTransactions = [[NSMutableArray alloc] init];
-
-    // start add transactions
-	transaction = [[Transaction alloc] init];
-    transaction.strID = @"3";
-    transaction.strName = @"kelly@gmail.com";
-    transaction.date = [self dateFromString:@"01/15/2014"];
-    transaction.confirmations = 2;
-    transaction.bConfirmed = NO;
-    transaction.amountSatoshi = 25 * 100000000;
-    transaction.balance = 32.5;
-    transaction.strWalletName = wallet.strName;
-    transaction.strWalletUUID = wallet.strUUID;
-    transaction.strAddress = @"1zf76dh4TG";
-    [arrayTransactions addObject:transaction];
-
-    transaction = [[Transaction alloc] init];
-    transaction.strID = @"2";
-    transaction.strName = @"John Madden";
-    transaction.date = [self dateFromString:@"12/15/2013"];
-    transaction.confirmations = 4;
-    transaction.bConfirmed = YES;
-    transaction.amountSatoshi = -17.5 * 100000000;
-    transaction.balance = 7.5;
-    transaction.strWalletName = wallet.strName;
-    transaction.strWalletUUID = wallet.strUUID;
-    transaction.strAddress = @"1zf76dh4TG";
-    [arrayTransactions addObject:transaction];
-	
-	transaction = [[Transaction alloc] init];
-    transaction.strID = @"1";
-    transaction.strName = @"Matt Kemp";
-    transaction.date = [self dateFromString:@"12/10/2013"];
-    transaction.confirmations = 3;
-    transaction.bConfirmed = NO;
-    transaction.amountSatoshi = 5 * 100000000;
-    transaction.balance = 20;
-    transaction.strWalletName = wallet.strName;
-    transaction.strWalletUUID = wallet.strUUID;
-    transaction.strAddress = @"1zf76dh4TG";
-    [arrayTransactions addObject:transaction];
-
-    
-    // end add transactions
-
-    wallet.arrayTransactions = arrayTransactions;
-    [self.arrayWallets addObject:wallet];
-
-
-    //////////// WALLET ///////////////////
-    wallet = [[Wallet alloc] init];
-    wallet.strUUID = @"3B48EB14-6A59-41A0-9CA3-3AFE9223B18B";
-    wallet.strName = @"Fantasy Football";
-    wallet.attributes = 0;
-    wallet.balance = 10.0;
-    wallet.currencyNum = 840;
-    arrayTransactions = [[NSMutableArray alloc] init];
-
-    // start add transactions
-	
-	transaction = [[Transaction alloc] init];
-    transaction.strID = @"3";
-    transaction.strName = @"kelly@gmail.com";
-    transaction.date = [self dateFromString:@"01/15/2014"];
-    transaction.confirmations = 2;
-    transaction.bConfirmed = NO;
-    transaction.amountSatoshi = -.05593 * 100000000;
-    transaction.balance = 8.32177;
-    transaction.strWalletName = wallet.strName;
-    transaction.strWalletUUID = wallet.strUUID;
-    transaction.strAddress = @"1zf76dh4TG";
-    [arrayTransactions addObject:transaction];
-	
-	transaction = [[Transaction alloc] init];
-    transaction.strID = @"3";
-    transaction.strName = @"kelly@gmail.com";
-    transaction.date = [self dateFromString:@"01/15/2014"];
-    transaction.confirmations = 2;
-    transaction.bConfirmed = NO;
-    transaction.amountSatoshi = .1377 * 100000000;
-    transaction.balance = 8.3777;
-    transaction.strWalletName = wallet.strName;
-    transaction.strWalletUUID = wallet.strUUID;
-    transaction.strAddress = @"1zf76dh4TG";
-    [arrayTransactions addObject:transaction];
-	
-	transaction = [[Transaction alloc] init];
-    transaction.strID = @"2";
-    transaction.strName = @"John Madden";
-    transaction.date = [self dateFromString:@"12/15/2013"];
-    transaction.confirmations = 4;
-    transaction.bConfirmed = YES;
-    transaction.amountSatoshi = -4.12 * 100000000;
-    transaction.balance = 8.24;
-    transaction.strWalletName = wallet.strName;
-    transaction.strWalletUUID = wallet.strUUID;
-    transaction.strAddress = @"1zf76dh4TG";
-    [arrayTransactions addObject:transaction];
-	
-	transaction = [[Transaction alloc] init];
-    transaction.strID = @"1";
-    transaction.strName = @"Matt Kemp";
-    transaction.date = [self dateFromString:@"12/10/2013"];
-    transaction.confirmations = 3;
-    transaction.bConfirmed = NO;
-    transaction.amountSatoshi = 2.36 * 100000000;
-    transaction.balance = 12.36;
-    transaction.strWalletName = wallet.strName;
-    transaction.strWalletUUID = wallet.strUUID;
-    transaction.strAddress = @"kelly@gmail.com";
-    [arrayTransactions addObject:transaction];
-    // end add transactions
-
-    wallet.arrayTransactions = arrayTransactions;
-    [self.arrayWallets addObject:wallet];
-
-    //////////// WALLET ///////////////////
-    wallet = [[Wallet alloc] init];
-    wallet.strUUID = @"0DF082BA-1734-4C63-8ECF-026C6AAEC762";
-    wallet.strName = @"Shared";
-    wallet.attributes = WALLET_ATTRIBUTE_ARCHIVE_BIT;
-    wallet.balance = 0.0;
-    wallet.currencyNum = 840;
-    arrayTransactions = [[NSMutableArray alloc] init];
-
-    // start add transactions
-    // end add transactions
-
-    wallet.arrayTransactions = arrayTransactions;
-    [self.arrayArchivedWallets addObject:wallet];
-
-    //////////// WALLET ///////////////////
-    wallet = [[Wallet alloc] init];
-    wallet.strUUID = @"F94D06DF-5A66-4A80-AF5F-9B769FC517AE";
-    wallet.strName = @"Mexico";
-    wallet.attributes = WALLET_ATTRIBUTE_ARCHIVE_BIT;
-    wallet.balance = 0.0;
-    wallet.currencyNum = 840;
-    arrayTransactions = [[NSMutableArray alloc] init];
-
-    // start add transactions
-    // end add transactions
-
-    wallet.arrayTransactions = arrayTransactions;
-    [self.arrayArchivedWallets addObject:wallet];
-
-    //////////// WALLET ///////////////////
-    wallet = [[Wallet alloc] init];
-    wallet.strUUID = @"1386D0B0-99C4-43CF-91D5-841446E84C71";
-    wallet.strName = @"Other";
-    wallet.attributes = WALLET_ATTRIBUTE_ARCHIVE_BIT;
-    wallet.balance = 0.0;
-    wallet.currencyNum = 840;
-    arrayTransactions = [[NSMutableArray alloc] init];
-
-    // start add transactions
-    // end add transactions
-
-    wallet.arrayTransactions = arrayTransactions;
-    [self.arrayArchivedWallets addObject:wallet];
-
-    //////////// WALLET ///////////////////
-	wallet = [[Wallet alloc] init];
-    wallet.strUUID = @"BDCF6578-67C4-43CF-91D5-841446E84C72";
-    wallet.strName = @"Vacation";
-    wallet.attributes = WALLET_ATTRIBUTE_ARCHIVE_BIT;
-    wallet.balance = 0.00046;
-    wallet.currencyNum = 840;
-    arrayTransactions = [[NSMutableArray alloc] init];
-
-    // start add transactions
-    // end add transactions
-
-    wallet.arrayTransactions = arrayTransactions;
-    [self.arrayArchivedWallets addObject:wallet];
-
-    //////////// WALLET ///////////////////
-	wallet = [[Wallet alloc] init];
-    wallet.strUUID = @"1386D0B0-78C4-43CF-9235-841446E84C73";
-    wallet.strName = @"House Projects";
-    wallet.attributes = WALLET_ATTRIBUTE_ARCHIVE_BIT;
-    wallet.balance = 0.32;
-    wallet.currencyNum = 840;
-    arrayTransactions = [[NSMutableArray alloc] init];
-
-    // start add transactions
-    // end add transactions
-
-    wallet.arrayTransactions = arrayTransactions;
-    [self.arrayArchivedWallets addObject:wallet];
-
-    //////////// WALLET ///////////////////
-	wallet = [[Wallet alloc] init];
-    wallet.strUUID = @"1386D0B0-89C4-43CF-3EAD-841446E84C74";
-    wallet.strName = @"Rainy Day";
-    wallet.attributes = WALLET_ATTRIBUTE_ARCHIVE_BIT;
-    wallet.balance = 0.1857;
-    wallet.currencyNum = 840;
-    arrayTransactions = [[NSMutableArray alloc] init];
-
-    // start add transactions
-    // end add transactions
-
-    wallet.arrayTransactions = arrayTransactions;
-    [self.arrayArchivedWallets addObject:wallet];
-
-    //////////// WALLET ///////////////////
-	wallet = [[Wallet alloc] init];
-    wallet.strUUID = @"1386D0B0-90C4-43CF-7889-841446E84C75";
-    wallet.strName = @"Car Repair";
-    wallet.attributes = WALLET_ATTRIBUTE_ARCHIVE_BIT;
-    wallet.balance = 2.35689;
-    wallet.currencyNum = 840;
-    arrayTransactions = [[NSMutableArray alloc] init];
-
-    // start add transactions
-    // end add transactions
-
-    wallet.arrayTransactions = arrayTransactions;
-    [self.arrayArchivedWallets addObject:wallet];
-
-    //////////// WALLET ///////////////////
-	wallet = [[Wallet alloc] init];
-    wallet.strUUID = @"1386D0B0-05C4-44AF-9145-841446E84C76";
-    wallet.strName = @"Wal Mart";
-    wallet.attributes = WALLET_ATTRIBUTE_ARCHIVE_BIT;
-    wallet.balance = 0.28571;
-    wallet.currencyNum = 840;
-    arrayTransactions = [[NSMutableArray alloc] init];
-
-    // start add transactions
-    // end add transactions
-
-    wallet.arrayTransactions = arrayTransactions;
-    [self.arrayArchivedWallets addObject:wallet];
-
-	
-    //NSLog(@"Wallets: %@", self.arrayWallets);
-    //NSLog(@"Archived Wallets: %@", self.arrayArchivedWallets);
+        unsigned int tCount = 0;
+        tABC_TxInfo **aTransactions = NULL;
+        ABC_GetTransactions([[User Singleton].name UTF8String],
+                            [[User Singleton].password UTF8String],
+                            pWalletInfo->szUUID, &aTransactions,
+                            &tCount, &Error);
+        arrayTransactions = [[NSMutableArray alloc] init];
+        for (int j = 0; i < tCount; ++j) {
+            tABC_TxInfo *pTrans = aTransactions[i];
+            transaction = [[Transaction alloc] init];
+            transaction.strID = [NSString stringWithUTF8String: pTrans->szID];
+            transaction.strName = [NSString stringWithUTF8String: pTrans->pDetails->szName];
+            transaction.date = [self dateFromTimestamp: pTrans->timeCreation];
+            // transaction.confirmations = 3;
+            // transaction.bConfirmed = NO;
+            transaction.amountSatoshi = pTrans->pDetails->amountSatoshi;
+            transaction.balance = pTrans->pDetails->amountCurrency;
+            transaction.strWalletName = wallet.strName;
+            transaction.strWalletUUID = wallet.strUUID;
+            // transaction.strAddress = @"1zf76dh4TG";
+            [arrayTransactions addObject:transaction];
+        }
+        ABC_FreeTransactions(aTransactions, tCount);
+    }
+    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
 // creates an NSDate object given a string with mm/dd/yyyy
@@ -420,6 +219,11 @@
     [formatter setDateFormat:@"MM/dd/yyyy"];
     NSDate *date = [formatter dateFromString:strDate];
     return date;
+}
+
+- (NSDate *)dateFromTimestamp:(int64_t) intDate
+{
+    return [NSDate dateWithTimeIntervalSince1970: intDate];
 }
 
 -(void)updateBalanceView
@@ -480,8 +284,17 @@
 		 {
 			 self.walletMakerView.frame = frame;
 		 }
-						 completion:^(BOOL finished)
+         completion:^(BOOL finished)
 		 {
+             tABC_Error Error;
+             ABC_CreateWallet([[User Singleton].name UTF8String],
+                              [[User Singleton].password UTF8String], 
+                              [[self.walletMakerView textField].text UTF8String],
+                              840, // currency num
+                              0, // attributes
+                              ABC_WalletCreate_Callback,
+                              NULL,
+                              &Error);
 			 self.walletMakerView.hidden = YES;
 		 }];
 	}
@@ -810,6 +623,21 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[self hideWalletMaker];
 	[self removeBlockingButton];
+}
+
+#pragma mark Callbacks
+
+void ABC_WalletCreate_Callback(const tABC_RequestResults *pResults)
+{
+    NSLog(@"Got here 1\n");
+    [iControllerRef updateDisplay];
+}
+
+-(void)updateDisplay
+{
+    NSLog(@"Got here 2\n");
+    [self getWallets];
+    [self.walletsTable reloadData];
 }
 
 @end

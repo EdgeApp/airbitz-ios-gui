@@ -25,6 +25,7 @@
 @property (nonatomic, weak) IBOutlet UIView *balanceViewPlaceholder;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UITextField *searchTextField;
+@property (nonatomic, weak) IBOutlet UIButton *walletNameView;
 
 @end
 
@@ -49,7 +50,8 @@
 	[self.view addSubview:balanceView];
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
-	
+
+	[self.walletNameView setTitle:self.wallet.strName forState:UIControlStateNormal];
 	self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
 	
 	//[self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -1483,7 +1483,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="CHECKING" backgroundImage="btn_blue.png">
+                                <state key="normal" backgroundImage="btn_blue.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -1590,6 +1590,7 @@
                         <outlet property="balanceViewPlaceholder" destination="3Qw-an-knM" id="uWP-JF-vsP"/>
                         <outlet property="searchTextField" destination="WMa-Cy-YRr" id="QCQ-ep-s1L"/>
                         <outlet property="tableView" destination="1la-Es-fPE" id="4pj-UV-ux5"/>
+                        <outlet property="walletNameView" destination="BmF-p6-cfN" id="5dg-Ig-srV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6hJ-9Y-8wI" userLabel="First Responder" sceneMemberID="firstResponder"/>
