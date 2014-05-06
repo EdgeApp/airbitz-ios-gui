@@ -1,0 +1,8 @@
+.DS_Store
+build/
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
+Airbitz/ABC
