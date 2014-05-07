@@ -21,6 +21,9 @@
 		4C3C3092191834AC006923DE /* picker_up_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C308D191834AC006923DE /* picker_up_point.png */; };
 		4C3C3093191834AC006923DE /* PopupPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C308F191834AC006923DE /* PopupPickerView.m */; };
 		4C3C3094191834AC006923DE /* PopupPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C3090191834AC006923DE /* PopupPickerView.xib */; };
+		4C3C309819198B33006923DE /* PopupWheelPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C309619198B33006923DE /* PopupWheelPickerView.m */; };
+		4C3C309919198B33006923DE /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C309719198B33006923DE /* PopupWheelPickerView.xib */; };
+		4C3C309D19199AF7006923DE /* StrokeGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C309C19199AF7006923DE /* StrokeGradientButton.m */; };
 		4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
@@ -410,6 +413,12 @@
 		4C3C308E191834AC006923DE /* PopupPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopupPickerView.h; path = PopupPickerView/PopupPickerView.h; sourceTree = "<group>"; };
 		4C3C308F191834AC006923DE /* PopupPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopupPickerView.m; path = PopupPickerView/PopupPickerView.m; sourceTree = "<group>"; };
 		4C3C3090191834AC006923DE /* PopupPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopupPickerView.xib; path = PopupPickerView/PopupPickerView.xib; sourceTree = "<group>"; };
+		4C3C309519198B33006923DE /* PopupWheelPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopupWheelPickerView.h; path = PopupPickerView/PopupWheelPickerView.h; sourceTree = "<group>"; };
+		4C3C309619198B33006923DE /* PopupWheelPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopupWheelPickerView.m; path = PopupPickerView/PopupWheelPickerView.m; sourceTree = "<group>"; };
+		4C3C309719198B33006923DE /* PopupWheelPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopupWheelPickerView.xib; path = PopupPickerView/PopupWheelPickerView.xib; sourceTree = "<group>"; };
+		4C3C309B19199AF7006923DE /* StrokeGradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StrokeGradientButton.h; path = StrokeGradientButton/StrokeGradientButton.h; sourceTree = "<group>"; };
+		4C3C309C19199AF7006923DE /* StrokeGradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StrokeGradientButton.m; path = StrokeGradientButton/StrokeGradientButton.m; sourceTree = "<group>"; };
+		4C3C309E19199B4F006923DE /* CommonTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTypes.h; sourceTree = "<group>"; };
 		4C90461C18C91E5900179D9C /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h; sourceTree = "<group>"; };
 		4C90461D18C91E5900179D9C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Exception.h; sourceTree = "<group>"; };
 		4C90461E18C91E5900179D9C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Image.h; sourceTree = "<group>"; };
@@ -955,8 +964,20 @@
 				4C3C308E191834AC006923DE /* PopupPickerView.h */,
 				4C3C308F191834AC006923DE /* PopupPickerView.m */,
 				4C3C3090191834AC006923DE /* PopupPickerView.xib */,
+				4C3C309519198B33006923DE /* PopupWheelPickerView.h */,
+				4C3C309619198B33006923DE /* PopupWheelPickerView.m */,
+				4C3C309719198B33006923DE /* PopupWheelPickerView.xib */,
 			);
 			name = PopupPickerView;
+			sourceTree = "<group>";
+		};
+		4C3C309A19199AB6006923DE /* StrokeGradientButton */ = {
+			isa = PBXGroup;
+			children = (
+				4C3C309B19199AF7006923DE /* StrokeGradientButton.h */,
+				4C3C309C19199AF7006923DE /* StrokeGradientButton.m */,
+			);
+			name = StrokeGradientButton;
 			sourceTree = "<group>";
 		};
 		4C90461818C91DF200179D9C /* ZBarSDK */ = {
@@ -1155,7 +1176,6 @@
 		B5675B5118A17F6F002E0703 /* AirBitz */ = {
 			isa = PBXGroup;
 			children = (
-				4C90461818C91DF200179D9C /* ZBarSDK */,
 				4C08A6D118C29CDC0071B87C /* ABC */,
 				4C08A6E318C2B1B60071B87C /* ABC Data */,
 				B5675B5A18A17F6F002E0703 /* AppDelegate.h */,
@@ -1173,6 +1193,7 @@
 				B56553ED18ECC8E0005B35E1 /* CalculatorView.h */,
 				B56553EE18ECC8E0005B35E1 /* CalculatorView.m */,
 				B56553EB18ECC8C2005B35E1 /* CalculatorView~iphone.xib */,
+				4C3C309E19199B4F006923DE /* CommonTypes.h */,
 				B5C0A8D518E6228E008F302C /* Config.h */,
 				B561E1A918D2573F002DCDC2 /* DarkenView.h */,
 				B561E1AA18D2573F002DCDC2 /* DarkenView.m */,
@@ -1200,6 +1221,7 @@
 				B5C0A9AB18EA0D78008F302C /* Send */,
 				B5004A2618A5C755003560A4 /* Server.h */,
 				B5C0A9B218EA0D99008F302C /* Settings */,
+				4C3C309A19199AB6006923DE /* StrokeGradientButton */,
 				B5FD393218F06FD800BE2670 /* StylizedTextField.h */,
 				B5FD393318F06FD800BE2670 /* StylizedTextField.m */,
 				B59C161918C1436300AEA789 /* TabBarView.h */,
@@ -1210,6 +1232,7 @@
 				B5376E1B18B55D920099EF8F /* UIImage+Colorize.h */,
 				B5376E1C18B55D920099EF8F /* UIImage+Colorize.m */,
 				B5C0A9B618EA0DD8008F302C /* Wallets */,
+				4C90461818C91DF200179D9C /* ZBarSDK */,
 				B5675B6618A17F6F002E0703 /* Images.xcassets */,
 				B5675B8718A180D9002E0703 /* Resources */,
 				B5675B5218A17F6F002E0703 /* Supporting Files */,
@@ -1843,6 +1866,7 @@
 				B59C153318C012B500AEA789 /* password_dot~iphone.png in Resources */,
 				B59C14FC18C012B500AEA789 /* btn_plus@2x~iphone.png in Resources */,
 				B59C151418C012B500AEA789 /* icon_bitcoin_dark@2x~iphone.png in Resources */,
+				4C3C309919198B33006923DE /* PopupWheelPickerView.xib in Resources */,
 				B57C209A18C25042005D7245 /* BalanceView~ipad.xib in Resources */,
 				B5137C1218A40A8400DA4A34 /* Montserrat-Regular.ttf in Resources */,
 				B59C14FB18C012B500AEA789 /* btn_percent~iphone.png in Resources */,
@@ -2068,6 +2092,7 @@
 				B55A031D18EB569000845090 /* CategoriesViewController.m in Sources */,
 				B561E1A618D2572D002DCDC2 /* InfoView.m in Sources */,
 				B5FD392F18EFC30E00BE2670 /* WalletMakerView.m in Sources */,
+				4C3C309819198B33006923DE /* PopupWheelPickerView.m in Sources */,
 				B5376E1D18B55D920099EF8F /* UIImage+Colorize.m in Sources */,
 				B5C0A9C218EA0DD8008F302C /* TransactionDetailsViewController.m in Sources */,
 				B5C0A9B018EA0D78008F302C /* SendConfirmationViewController.m in Sources */,
@@ -2076,6 +2101,7 @@
 				B5C0A9C318EA0DD8008F302C /* TransactionsViewController.m in Sources */,
 				B5C0A98F18EA0B80008F302C /* CustomAnnotationView.m in Sources */,
 				B5F2E9C518DB4B23008ACF88 /* PasswordRecoveryViewController.m in Sources */,
+				4C3C309D19199AF7006923DE /* StrokeGradientButton.m in Sources */,
 				B5C0A9B518EA0D99008F302C /* SettingsViewController.m in Sources */,
 				B516C1E818C54B07008CC6A1 /* NSDate+Helper.m in Sources */,
 				4C3C3093191834AC006923DE /* PopupPickerView.m in Sources */,

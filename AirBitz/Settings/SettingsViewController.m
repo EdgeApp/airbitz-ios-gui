@@ -18,6 +18,7 @@
 #import "SignUpViewController.h"
 #import "PasswordRecoveryViewController.h"
 #import "PopupPickerView.h"
+#import "PopupWheelPickerView.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -62,9 +63,23 @@
                               @[@"Huobi", @"BTC China", @"OKcoin"] \
                              ]
 
+#define ARRAY_LOGOUT        @[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9", \
+                                @"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19", \
+                                @"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29", \
+                                @"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39", \
+                                @"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49", \
+                                @"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59", \
+                                @"60"], \
+                              @[@"minute(s)",@"hour(s)",@"day(s)"]]
+#define ARRAY_LOGOUT_MINUTES @[@1, @60, @1440] // how many minutes in each of the 'types'
+
+
+
 #define PICKER_MAX_CELLS_VISIBLE        9
 #define PICKER_WIDTH                    160
 #define PICKER_CELL_HEIGHT              44
+
+#define AUTO_LOGOUT_CONTENT_POSY        240 // what to scroll table view to when 'auto logoff' is picked
 
 typedef struct sDenomination
 {
@@ -85,7 +100,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 };
 
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate>
 {
     tABC_Currency                   *_aCurrencies;
     int                             _currencyCount;
@@ -103,6 +118,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 @property (weak, nonatomic) IBOutlet UIView         *viewMain;
 
 @property (nonatomic, strong) PopupPickerView       *popupPicker;
+@property (nonatomic, strong) PopupWheelPickerView  *popupWheelPicker;
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 
 @property (nonatomic, strong) NSArray               *arrayCurrencyCodes;
@@ -391,6 +407,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         self.popupPicker = nil;
     }
 
+    if (self.popupWheelPicker)
+    {
+        [self.popupWheelPicker removeFromSuperview];
+        self.popupWheelPicker = nil;
+    }
+
     [self blockUser:NO];
 }
 
@@ -417,7 +439,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 }
 
 // sets the exchange for the given currency in the settings
-- (void)setExchange:(char *)szSourceSel forCurrencyNum:(int)currencyNum
+- (void)setExchange:(const char *)szSourceSel forCurrencyNum:(int)currencyNum
 {
     if (_pAccountSettings)
     {
@@ -457,6 +479,81 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             pSources->aSources[0]->szSource = strdup(szSourceSel);
         }
     }
+}
+
+// gets the string for the 'auto log off after' button
+- (NSString *)logoutDisplay
+{
+    NSMutableString *strRetVal = [[NSMutableString alloc] init];
+
+    if (_pAccountSettings)
+    {
+        int amount = 0;
+        NSString *strType = @"";
+        NSInteger maxVal = [[[ARRAY_LOGOUT objectAtIndex:0] lastObject] intValue];
+        if (_pAccountSettings->minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:0] integerValue] * maxVal)
+        {
+            strType = @"minute";
+            amount = _pAccountSettings->minutesAutoLogout;
+        }
+        else if (_pAccountSettings->minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:1] integerValue] * maxVal)
+        {
+            strType = @"hour";
+            amount = _pAccountSettings->minutesAutoLogout / [[ARRAY_LOGOUT_MINUTES objectAtIndex:1] integerValue];
+        }
+        else
+        {
+            strType = @"day";
+            amount = _pAccountSettings->minutesAutoLogout / [[ARRAY_LOGOUT_MINUTES objectAtIndex:2] integerValue];
+        }
+
+        [strRetVal appendFormat:@"%d %@", amount, strType];
+        if (amount != 1)
+        {
+            [strRetVal appendString:@"s"];
+        }
+    }
+
+    return strRetVal;
+}
+
+// gets the array of selections for array of choices in 'auto log off after'
+- (NSArray *)logoutSelections
+{
+    int finalType = 0;
+    int finalAmount = 0;
+
+    NSMutableArray *arraySelections = [[NSMutableArray alloc] init];
+    NSInteger maxVal = [[[ARRAY_LOGOUT objectAtIndex:0] lastObject] intValue];
+
+    // go through each of the types
+    for (int type = 0; type < [[ARRAY_LOGOUT objectAtIndex:1] count]; type++)
+    {
+        // if the number is below or equal to this types maximum
+        if (_pAccountSettings->minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] integerValue] * maxVal)
+        {
+            finalType = type;
+            for (int amountIndex = 0; amountIndex < [[ARRAY_LOGOUT objectAtIndex:0] count]; amountIndex++)
+            {
+                int minutesBase = [[[ARRAY_LOGOUT objectAtIndex:0] objectAtIndex:amountIndex] intValue];
+                int minutesMult = [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] intValue];
+                if (_pAccountSettings->minutesAutoLogout >= (minutesBase * minutesMult))
+                {
+                    finalAmount = amountIndex;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            break;
+        }
+    }
+
+    [arraySelections addObject:[NSNumber numberWithInt:finalAmount]];
+    [arraySelections addObject:[NSNumber numberWithInt:finalType]];
+
+    return arraySelections;
 }
 
 - (void)printABC_Error:(const tABC_Error *)pError
@@ -775,6 +872,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		if (indexPath.row == ROW_AUTO_LOG_OFF)
 		{
 			cell.name.text = NSLocalizedString(@"Auto log off after", @"settings text");
+            [cell.button setTitle:[self logoutDisplay] forState:UIControlStateNormal];
 		}
 		else if (indexPath.row == ROW_LANGUAGE)
 		{
@@ -1113,7 +1211,22 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         if (row == ROW_AUTO_LOG_OFF)
         {
+            // move the table so the picker is not cut off
+            CGPoint curOffset = self.tableView.contentOffset;
+            curOffset.y = AUTO_LOGOUT_CONTENT_POSY;
+            [self.tableView setContentOffset:curOffset animated:NO];
 
+            // set up current selection
+            NSArray *arraySelections = [self logoutSelections];
+
+            [self blockUser:YES];
+            self.popupWheelPicker = [PopupWheelPickerView CreateForView:self.viewMain
+                                                     positionRelativeTo:cell.button
+                                                           withPosition:PopupWheelPickerPosition_Above
+                                                            withChoices:ARRAY_LOGOUT
+                                                     startingSelections:arraySelections
+                                                               userData:cell
+                                                            andDelegate:self];
         }
         else if (row == ROW_LANGUAGE)
         {
@@ -1149,7 +1262,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         arrayPopupChoices = [ARRAY_EXCHANGES objectAtIndex:row];
     }
 
-    // if we are supposed to bring up a default popup
+    // if we are supposed to bring up a popup picker
     if (arrayPopupChoices)
     {
         [self blockUser:YES];
@@ -1168,7 +1281,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     }
 }
 
-#pragma mark - popup picker delegate methods
+#pragma mark - Popup Picker Delegate Methods
 
 - (void)PopupPickerViewExit:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
 {
@@ -1178,11 +1291,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
     if (SECTION_OPTIONS == sectionCell)
     {
-        if (rowCell == ROW_AUTO_LOG_OFF)
-        {
-
-        }
-        else if (rowCell == ROW_LANGUAGE)
+        if (rowCell == ROW_LANGUAGE)
         {
             [self replaceString:&(_pAccountSettings->szLanguage) withString:[[ARRAY_LANG_CODES objectAtIndex:row] UTF8String]];
         }
@@ -1193,7 +1302,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     }
     else if (SECTION_DEFAULT_EXCHANGE == sectionCell)
     {
-        char *szSourceSel = [[[ARRAY_EXCHANGES objectAtIndex:rowCell] objectAtIndex:row] UTF8String];
+        const char *szSourceSel = [[[ARRAY_EXCHANGES objectAtIndex:rowCell] objectAtIndex:row] UTF8String];
         [self setExchange:szSourceSel forCurrencyNum:[[ARRAY_CURRENCY_NUMS objectAtIndex:rowCell] intValue]];
     }
 
@@ -1209,6 +1318,30 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)PopupPickerViewCancelled:(PopupPickerView *)view userData:(id)data
 {
     // dismiss the picker
+    [self dismissPopupPicker];
+}
+
+#pragma mark - Popup Wheel Picker Delegate Methods
+
+- (void)PopupWheelPickerViewExit:(PopupWheelPickerView *)view withSelections:(NSArray *)arraySelections userData:(id)data
+{
+    int amount = [[[ARRAY_LOGOUT objectAtIndex:0] objectAtIndex:[[arraySelections objectAtIndex:0] intValue]] intValue];
+    int type   = [[arraySelections objectAtIndex:1] intValue];
+
+    // set the amount of minutes
+    _pAccountSettings->minutesAutoLogout = amount * [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] intValue];
+
+    // update the settings in the core
+    [self saveSettings];
+
+    // update the display by reloading the table
+    [self.tableView reloadData];
+
+    [self dismissPopupPicker];
+}
+
+- (void)PopupWheelPickerViewCancelled:(PopupWheelPickerView *)view userData:(id)data
+{
     [self dismissPopupPicker];
 }
 
