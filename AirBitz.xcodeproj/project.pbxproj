@@ -25,6 +25,7 @@
 		4C3C309919198B33006923DE /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C309719198B33006923DE /* PopupWheelPickerView.xib */; };
 		4C3C309D19199AF7006923DE /* StrokeGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C309C19199AF7006923DE /* StrokeGradientButton.m */; };
 		4C3C30A1191B07C0006923DE /* CategoriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C30A0191B07C0006923DE /* CategoriesCell.m */; };
+		4C3C30A5191C1CAF006923DE /* PickerTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C30A4191C1CAF006923DE /* PickerTextView.m */; };
 		4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
@@ -424,6 +425,8 @@
 		4C3C309E19199B4F006923DE /* CommonTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTypes.h; sourceTree = "<group>"; };
 		4C3C309F191B07C0006923DE /* CategoriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesCell.h; sourceTree = "<group>"; };
 		4C3C30A0191B07C0006923DE /* CategoriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesCell.m; sourceTree = "<group>"; };
+		4C3C30A3191C1CAF006923DE /* PickerTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PickerTextView.h; path = PickerTextView/PickerTextView.h; sourceTree = "<group>"; };
+		4C3C30A4191C1CAF006923DE /* PickerTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PickerTextView.m; path = PickerTextView/PickerTextView.m; sourceTree = "<group>"; };
 		4C90461C18C91E5900179D9C /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h; sourceTree = "<group>"; };
 		4C90461D18C91E5900179D9C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Exception.h; sourceTree = "<group>"; };
 		4C90461E18C91E5900179D9C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Image.h; sourceTree = "<group>"; };
@@ -989,6 +992,15 @@
 			name = StrokeGradientButton;
 			sourceTree = "<group>";
 		};
+		4C3C30A2191C1C90006923DE /* PickerTextView */ = {
+			isa = PBXGroup;
+			children = (
+				4C3C30A3191C1CAF006923DE /* PickerTextView.h */,
+				4C3C30A4191C1CAF006923DE /* PickerTextView.m */,
+			);
+			name = PickerTextView;
+			sourceTree = "<group>";
+		};
 		4C90461818C91DF200179D9C /* ZBarSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1225,6 +1237,7 @@
 				B57C20AF18C5021A005D7245 /* Notifications.h */,
 				B516C1E618C54B06008CC6A1 /* NSDate+Helper.h */,
 				B516C1E718C54B06008CC6A1 /* NSDate+Helper.m */,
+				4C3C30A2191C1C90006923DE /* PickerTextView */,
 				4C3C308B1918347F006923DE /* PopupPickerView */,
 				B5C0A9A718EA0D09008F302C /* Request */,
 				B5C0A9AB18EA0D78008F302C /* Send */,
@@ -2156,6 +2169,7 @@
 				B5C0A97518EA0A42008F302C /* BD_Hours_Cell.m in Sources */,
 				B5C0A99F18EA0C10008F302C /* overviewCell.m in Sources */,
 				B57C207D18C15009005D7245 /* TabBarButton.m in Sources */,
+				4C3C30A5191C1CAF006923DE /* PickerTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

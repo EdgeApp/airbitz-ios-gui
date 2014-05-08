@@ -2191,15 +2191,11 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add New" minimumFontSize="17" clearButtonMode="always" id="Qcx-bY-He5">
+                                    <view contentMode="scaleToFill" id="GaA-K1-87Y" userLabel="View - PickerTextView - Add New" customClass="PickerTextView">
                                         <rect key="frame" x="20" y="106" width="244" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="sjK-gq-bVx" id="IcX-On-q7u"/>
-                                        </connections>
-                                    </textField>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="Y4L-Yj-AuS">
                                         <rect key="frame" x="11" y="68" width="298" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2306,20 +2302,16 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
                                                 </imageView>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="always" id="gJc-GS-Jhp">
+                                                <view contentMode="scaleToFill" id="Wy2-Sd-8S0" customClass="PickerTextView">
                                                     <rect key="frame" x="16" y="10" width="244" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="D1F-6W-k2p" id="o0u-g5-CI8"/>
-                                                    </connections>
-                                                </textField>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" red="0.81960784313725488" green="0.90196078431372551" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="textField" destination="gJc-GS-Jhp" id="CMG-F1-AH0"/>
+                                            <outlet property="pickerTextView" destination="Wy2-Sd-8S0" id="LsZ-cx-3yl"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2335,8 +2327,8 @@
                         <outlet property="cancelButton" destination="th1-bn-E4x" id="rLO-Xv-fCO"/>
                         <outlet property="doneButton" destination="LAg-aY-W5b" id="hnp-Er-jOQ"/>
                         <outlet property="imageBottomBar" destination="DLe-wl-2SZ" id="fiS-n0-Rzh"/>
+                        <outlet property="pickerTextNew" destination="GaA-K1-87Y" id="AG1-Vb-0tH"/>
                         <outlet property="tableView" destination="wfo-0v-1Fd" id="JaS-l8-Jhd"/>
-                        <outlet property="textNew" destination="Qcx-bY-He5" id="NPq-t6-7gl"/>
                         <outlet property="textSearch" destination="X6G-HD-WUv" id="4sG-5o-p0a"/>
                     </connections>
                 </viewController>

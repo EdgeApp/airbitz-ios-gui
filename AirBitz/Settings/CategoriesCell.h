@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PickerTextview.h"
 
 @protocol CategoriesCellDelegate;
 
 @interface CategoriesCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UITextField *textField;
+@property (nonatomic, weak) IBOutlet PickerTextView *pickerTextView;
 
 @property (assign) id<CategoriesCellDelegate> delegate;
 @end
