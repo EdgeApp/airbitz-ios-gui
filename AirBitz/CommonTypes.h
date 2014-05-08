@@ -30,3 +30,6 @@
 #define BIT6 0x40
 #define BIT7 0x80
 
+#define SCREEN_HEIGHT   ([[UIScreen mainScreen] bounds].size.height)
+#define TOOLBAR_HEIGHT  49
+

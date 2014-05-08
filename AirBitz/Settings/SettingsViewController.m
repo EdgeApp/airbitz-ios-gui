@@ -19,6 +19,8 @@
 #import "PasswordRecoveryViewController.h"
 #import "PopupPickerView.h"
 #import "PopupWheelPickerView.h"
+#import "CommonTypes.h"
+#import "CategoriesViewController.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -34,10 +36,15 @@
 
 #define DENOMINATION_CHOICES            3
 
+#define ROW_BITCOIN                     0
+#define ROW_MBITCOIN                    1
+#define ROW_UBITCOIN                    2
+
 #define ROW_PASSWORD                    0
 #define ROW_PIN                         1
 #define ROW_RECOVERY_QUESTIONS          2
 
+#define ROW_SEND_NAME                   0
 #define ROW_FIRST_NAME                  1
 #define ROW_LAST_NAME                   2
 #define ROW_NICKNAME                    3
@@ -45,6 +52,7 @@
 #define ROW_AUTO_LOG_OFF                0
 #define ROW_LANGUAGE                    1
 #define ROW_DEFAULT_CURRENCY            2
+#define ROW_CHANGE_CATEGORIES           3
 
 #define ROW_US_DOLLAR                   0
 #define ROW_CANADIAN_DOLLAR             1
@@ -75,7 +83,7 @@
 
 
 
-#define PICKER_MAX_CELLS_VISIBLE        9
+#define PICKER_MAX_CELLS_VISIBLE        (IS_IPHONE5 ? 9 : 8)
 #define PICKER_WIDTH                    160
 #define PICKER_CELL_HEIGHT              44
 
@@ -100,7 +108,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 };
 
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate>
 {
     tABC_Currency                   *_aCurrencies;
     int                             _currencyCount;
@@ -109,6 +117,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	UITapGestureRecognizer          *_tapGesture;
     SignUpViewController            *_signUpController;
     PasswordRecoveryViewController  *_passwordRecoveryController;
+    CategoriesViewController        *_categoriesController;
     BOOL                            _bKeyboardIsShown;
     CGRect                          _frameStart;
     CGFloat                         _keyboardHeight;
@@ -331,6 +340,32 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 					 completion:^(BOOL finished)
 	 {
 	 }];
+}
+
+- (void)bringUpCategoriesView
+{
+    {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        _categoriesController = [mainStoryboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
+
+        _categoriesController.delegate = self;
+
+        CGRect frame = self.view.bounds;
+        frame.origin.x = frame.size.width;
+        _categoriesController.view.frame = frame;
+        [self.view addSubview:_categoriesController.view];
+
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             _categoriesController.view.frame = self.view.bounds;
+         }
+                         completion:^(BOOL finished)
+         {
+         }];
+    }
 }
 
 // returns how much the current first responder is obscured by the keyboard
@@ -722,15 +757,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	cell.bkgImage.image = bkgImage;
 	
-	if (indexPath.row == 0)
+	if (indexPath.row == ROW_BITCOIN)
 	{
 		cell.name.text = NSLocalizedString(@"Bitcoin", @"settings text");
 	}
-	if (indexPath.row == 1)
+	if (indexPath.row == ROW_MBITCOIN)
 	{
 		cell.name.text = NSLocalizedString(@"mBitcoin = (0.001 Bitcoin)", @"settings text");
 	}
-	if (indexPath.row == 2)
+	if (indexPath.row == ROW_UBITCOIN)
 	{
 		cell.name.text = NSLocalizedString(@"uBitcoin = (0.000001 Bitcoin)", @"settings text");
 	}
@@ -755,19 +790,26 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	
 	if (indexPath.section == SECTION_USERNAME)
 	{
-		if (indexPath.row == 0)
+		if (indexPath.row == ROW_PASSWORD)
 		{
 			cell.name.text = NSLocalizedString(@"Change password", @"settings text");
 		}
-		if (indexPath.row == 1)
+		if (indexPath.row == ROW_PIN)
 		{
 			cell.name.text = NSLocalizedString(@"Change withdrawal PIN", @"settings text");
 		}
-		if (indexPath.row == 2)
+		if (indexPath.row == ROW_RECOVERY_QUESTIONS)
 		{
 			cell.name.text = NSLocalizedString(@"Change recovery questions", @"settings text");
 		}
 	}
+    else if (indexPath.section == SECTION_OPTIONS)
+    {
+        if (indexPath.row == ROW_CHANGE_CATEGORIES)
+        {
+			cell.name.text = NSLocalizedString(@"Change categories", @"settings text");
+        }
+    }
 	
     cell.tag = (indexPath.section << 8) | (indexPath.row);
 
@@ -955,7 +997,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	return cell;
 }
 
-#pragma mark - UITableView delegates
+#pragma mark - UITableView Delegates
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -979,7 +1021,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_OPTIONS:
-            return 3;
+            return 4;
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
@@ -1039,8 +1081,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	if (section == SECTION_OPTIONS)
 	{
-        label.text = @" ";
-		//label.text = NSLocalizedString(@"OPTIONS", @"section header in settings table");
+        //label.text = @" ";
+		label.text = NSLocalizedString(@"OPTIONS", @"section header in settings table");
 	}
 	if (section == SECTION_DEFAULT_EXCHANGE)
 	{
@@ -1056,7 +1098,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
     if (indexPath.section == SECTION_LOGOUT)
 	{
-		//show Change Categories button
+		// logout button
 		cell = [self getButtonOnlyCellForTableView:tableView withIndexPath:indexPath];
 	}
 	else
@@ -1106,7 +1148,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		}
 		else if (indexPath.section == SECTION_OPTIONS)
 		{
-            cell = [self getButtonCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
+            if (indexPath.row == ROW_CHANGE_CATEGORIES)
+            {
+                cell = [self getPlainCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+            }
+            else
+            {
+                cell = [self getButtonCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
+            }
 		}
 		else if (indexPath.section == SECTION_DEFAULT_EXCHANGE)
 		{
@@ -1122,6 +1171,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	//NSLog(@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
+
+    // NOTE: if it isn't handled in here it is probably handled in a cell callback (e.g., buttonCellButtonPressed)
 
     switch (indexPath.section)
 	{
@@ -1149,6 +1200,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_OPTIONS:
+            if (indexPath.row == ROW_CHANGE_CATEGORIES)
+            {
+                [self bringUpCategoriesView];
+            }
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
@@ -1170,12 +1225,20 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	_signUpController = nil;
 }
 
-#pragma mark - PasswordRecoveryViewController Delegates
+#pragma mark - PasswordRecoveryViewController Delegate
 
 - (void)passwordRecoveryViewControllerDidFinish:(PasswordRecoveryViewController *)controller
 {
 	[controller.view removeFromSuperview];
 	_passwordRecoveryController = nil;
+}
+
+#pragma mark - CategoriesViewController Delegate
+
+- (void)categoriesViewControllerDidFinish:(CategoriesViewController *)controller
+{
+	[controller.view removeFromSuperview];
+	_categoriesController = nil;
 }
 
 #pragma mark - BooleanCell Delegate
