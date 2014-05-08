@@ -26,6 +26,11 @@
 	self.backgroundColor = [UIColor clearColor];
 	self.selectedBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
+
+    // cause the font size on the button to adjust to fit
+    self.button.titleLabel.numberOfLines = 1;
+    self.button.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.button.titleLabel.lineBreakMode = NSLineBreakByClipping;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
