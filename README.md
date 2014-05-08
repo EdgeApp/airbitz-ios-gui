@@ -34,3 +34,15 @@ Set your `$REPO_DIR` to whatever you want.
     open airbitz-ios-gui/AirBitz.xcodeproj
 
 Once in xcode you can run Command-R to run it in an emulator.
+
+## Problems?
+
+I was missing certificate authorities on my box which caused the openssl
+download to fail, which, caused the wallet core to fail to build. The following
+steps fixed that problem for me.
+
+    sudo port install curl-ca-bundle
+    echo CA_CERTIFICATE=/opt/local/share/curl/curl-ca-bundle.crt >> ~/.wgetrc
+
+I then opened a new terminal and continued from the `make` in `walletcore/deps/`. 
+
