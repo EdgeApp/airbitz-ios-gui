@@ -28,5 +28,6 @@
 - (void)categoriesCellEndEditing:(CategoriesCell *)cell;
 - (void)categoriesCellTextDidChange:(CategoriesCell *)cell;
 - (void)categoriesCellTextDidReturn:(CategoriesCell *)cell;
+- (void)categoriesCellDeleteTouched:(CategoriesCell *)cell;
 
 @end

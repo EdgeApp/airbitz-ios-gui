@@ -2197,7 +2197,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                         <connections>
-                                            <outlet property="delegate" destination="vXZ-lx-hvc" id="yS2-da-9hA"/>
+                                            <outlet property="delegate" destination="sjK-gq-bVx" id="IcX-On-q7u"/>
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="Y4L-Yj-AuS">
@@ -2211,7 +2211,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
                                         <connections>
-                                            <outlet property="delegate" destination="vXZ-lx-hvc" id="AAD-TL-orv"/>
+                                            <outlet property="delegate" destination="sjK-gq-bVx" id="xOl-Cs-Za8"/>
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_search.png" id="bRt-yS-EhY">
@@ -2310,7 +2310,7 @@
                                                     <rect key="frame" x="16" y="10" width="244" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="D1F-6W-k2p" id="o0u-g5-CI8"/>
                                                     </connections>

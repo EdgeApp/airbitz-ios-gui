@@ -53,6 +53,10 @@
 
 - (IBAction)buttonDeleteTouched:(id)sender
 {
+    if ([self.delegate respondsToSelector:@selector(categoriesCellDeleteTouched:)])
+	{
+		[self.delegate categoriesCellDeleteTouched:self];
+	}
 }
 
 #pragma mark - UITextField delegates

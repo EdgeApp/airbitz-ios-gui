@@ -15,16 +15,20 @@
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y 3
 #define TABLE_SIZE_EXTRA_HEIGHT      5
 
-@interface CategoriesViewController () <UITableViewDataSource, UITableViewDelegate, CategoriesCellDelegate>
+@interface CategoriesViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate, CategoriesCellDelegate>
+{
+    char            **_aszCategories;
+    unsigned int    _count;
+}
 
-@property (nonatomic, weak) IBOutlet UITableView    *tableView;
-@property (nonatomic, weak) IBOutlet UIButton       *cancelButton;
-@property (nonatomic, weak) IBOutlet UIButton       *doneButton;
-@property (weak, nonatomic) IBOutlet UIImageView    *imageBottomBar;
-@property (weak, nonatomic) IBOutlet UITextField    *textNew;
-@property (weak, nonatomic) IBOutlet UITextField    *textSearch;
+@property (nonatomic, weak) IBOutlet    UITableView     *tableView;
+@property (nonatomic, weak) IBOutlet    UIButton        *cancelButton;
+@property (nonatomic, weak) IBOutlet    UIButton        *doneButton;
+@property (weak, nonatomic) IBOutlet    UIImageView     *imageBottomBar;
+@property (weak, nonatomic) IBOutlet    UITextField     *textNew;
+@property (weak, nonatomic) IBOutlet    UITextField     *textSearch;
 
-@property (nonatomic, strong) NSMutableArray    *arrayCategories;
+@property (nonatomic, strong)           NSMutableArray  *arrayCategories;
 
 @end
 
@@ -85,6 +89,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    [self freeStringArray:_aszCategories count:_count];
+}
+
 #pragma mark - Action Methods
 
 - (IBAction)AddCategory
@@ -101,11 +110,18 @@
 
 - (IBAction)Cancel
 {
-    [self animatedExit];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:NSLocalizedString(@"Cancel Changes", nil)
+                          message:NSLocalizedString(@"Are you sure you want to cancel any changes you've made?", nil)
+                          delegate:self
+                          cancelButtonTitle:@"No"
+                          otherButtonTitles:@"Yes", nil];
+    [alert show];
 }
 
 - (IBAction)Done
 {
+    [self saveCategories];
     [self animatedExit];
 }
 
@@ -135,33 +151,65 @@
 	return cell;
 }
 
+// load the categories from the core
 - (void)loadCategories
 {
-    char **aszCategories = NULL;
-    unsigned int count = 0;
+    _aszCategories = NULL;
+    _count = 0;
 
     // get the categories from the core
     tABC_Error Error;
     ABC_GetCategories([[User Singleton].name UTF8String],
-                      &aszCategories,
-                      &count,
+                      &_aszCategories,
+                      &_count,
                       &Error);
     [self printABC_Error:&Error];
 
     // store them in our own array
     self.arrayCategories = [[NSMutableArray alloc] init];
-    if (aszCategories)
+    if (_aszCategories)
     {
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < _count; i++)
         {
-            [self.arrayCategories addObject:[NSString stringWithUTF8String:aszCategories[i]]];
+            [self.arrayCategories addObject:[NSString stringWithUTF8String:_aszCategories[i]]];
         }
     }
 
-    // free the ones from the core
-    [self freeStringArray:aszCategories count:count];
-
     [self.tableView reloadData];
+}
+
+// saves the categories to the core
+- (void)saveCategories
+{
+    tABC_Error Error;
+
+    // got through the existing categories
+    for (int i = 0; i < _count; i++)
+    {
+        // create an NSString version of the category
+        NSString *strCategory = [NSString stringWithUTF8String:_aszCategories[i]];
+
+        // if this category is in our new list
+        if ([self.arrayCategories containsObject:strCategory])
+        {
+            // remove it from our new list since it is already there
+            [self.arrayCategories removeObject:strCategory];
+        }
+        else
+        {
+            // it doesn't exist in our new list so delete it from the core
+            ABC_RemoveCategory([[User Singleton].name UTF8String], _aszCategories[i], &Error);
+            [self printABC_Error:&Error];
+        }
+    }
+
+    // add any categories from our new list that didn't exist in the core list
+    for (int i = 0; i < [self.arrayCategories count]; i++)
+    {
+        NSString *strCategory = [self.arrayCategories objectAtIndex:i];
+        ABC_AddCategory([[User Singleton].name UTF8String], (char *)[strCategory UTF8String], &Error);
+        [self printABC_Error:&Error];
+    }
 }
 
 - (void)freeStringArray:(char **)aszStrings count:(unsigned int) count
@@ -209,8 +257,6 @@
 		 [self exit];
 	 }];
 }
-
-
 
 - (void)exit
 {
@@ -260,6 +306,51 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
+}
+
+#pragma mark - UIAlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	// if they said they wanted to exit without saving changes
+	if (buttonIndex == 1)
+	{
+        [self performSelector:@selector(animatedExit) withObject:nil afterDelay:0.0];
+	}
+}
+
+#pragma mark UITextField delegates
+
+- (void)textFieldDidChange:(UITextField *)textField
+{
+
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[textField resignFirstResponder];
+
+	return YES;
+}
+
+#pragma mark - CategoriesCell Delegates
+
+- (void)categoriesCellDeleteTouched:(CategoriesCell *)cell
+{
+    NSInteger row = cell.tag;
+
+    [self.arrayCategories removeObjectAtIndex:row];
+    [self.tableView reloadData];
 }
 
 @end
