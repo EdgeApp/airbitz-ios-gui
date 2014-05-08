@@ -11,6 +11,7 @@
 #import "CategoriesCell.h"
 #import "ABC.h"
 #import "User.h"
+#import "PickerTextView.h"
 
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y 3
 #define TABLE_SIZE_EXTRA_HEIGHT      5
@@ -25,7 +26,7 @@
 @property (nonatomic, weak) IBOutlet    UIButton        *cancelButton;
 @property (nonatomic, weak) IBOutlet    UIButton        *doneButton;
 @property (weak, nonatomic) IBOutlet    UIImageView     *imageBottomBar;
-@property (weak, nonatomic) IBOutlet    UITextField     *textNew;
+@property (weak, nonatomic) IBOutlet    PickerTextView  *pickerTextNew;
 @property (weak, nonatomic) IBOutlet    UITextField     *textSearch;
 
 @property (nonatomic, strong)           NSMutableArray  *arrayCategories;
@@ -85,6 +86,17 @@
 
     // get a callback when the search changes
     [self.textSearch addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+
+    // set up the specifics on our picker text view
+    self.pickerTextNew.textField.returnKeyType = UIReturnKeyDone;
+    self.pickerTextNew.textField.placeholder = NSLocalizedString(@"Add New", nil);
+    self.pickerTextNew.textField.borderStyle = UITextBorderStyleNone;
+    self.pickerTextNew.textField.backgroundColor = [UIColor clearColor];
+    self.pickerTextNew.textField.font = [UIFont systemFontOfSize:14];
+    self.pickerTextNew.textField.clearButtonMode = UITextFieldViewModeAlways;
+    self.pickerTextNew.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.pickerTextNew.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.pickerTextNew.textField.spellCheckingType = UITextSpellCheckingTypeNo;
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,11 +114,11 @@
 
 - (IBAction)AddCategory
 {
-    if (self.textNew.text)
+    if (self.pickerTextNew.textField.text)
     {
-        if ([self.textNew.text length])
+        if ([self.pickerTextNew.textField.text length])
         {
-            [self.arrayCategories addObject:self.textNew.text];
+            [self.arrayCategories addObject:self.pickerTextNew.textField.text];
             [self updateDisplay];
         }
     }
@@ -144,13 +156,18 @@
 
 	cell.delegate = self;
 
-    cell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    cell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
-    cell.textField.spellCheckingType = UITextSpellCheckingTypeNo;
+    cell.pickerTextView.textField.returnKeyType = UIReturnKeyDone;
+    cell.pickerTextView.textField.borderStyle = UITextBorderStyleNone;
+    cell.pickerTextView.textField.backgroundColor = [UIColor clearColor];
+    cell.pickerTextView.textField.font = [UIFont systemFontOfSize:14];
+    cell.pickerTextView.textField.clearButtonMode = UITextFieldViewModeAlways;
+    cell.pickerTextView.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    cell.pickerTextView.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    cell.pickerTextView.textField.spellCheckingType = UITextSpellCheckingTypeNo;
 
     cell.tag = indexPath.row;
 
-    cell.textField.text = [self.arrayDisplay objectAtIndex:indexPath.row];
+    cell.pickerTextView.textField.text = [self.arrayDisplay objectAtIndex:indexPath.row];
 
 	return cell;
 }

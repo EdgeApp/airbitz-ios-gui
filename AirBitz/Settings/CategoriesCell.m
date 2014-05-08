@@ -34,12 +34,12 @@
 	self.selectedBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
 	
-	self.textField.delegate = self;
+	self.pickerTextView.textField.delegate = self;
 
     // Add a "textFieldDidChange" notification method to the text field control.
-    [self.textField addTarget:self
-                       action:@selector(textFieldDidChange:)
-             forControlEvents:UIControlEventEditingChanged];
+    [self.pickerTextView.textField addTarget:self
+                                      action:@selector(textFieldDidChange:)
+                            forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
