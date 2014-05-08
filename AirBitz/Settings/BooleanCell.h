@@ -12,10 +12,12 @@
 
 @interface BooleanCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel *name;
-@property (nonatomic, weak) IBOutlet UIImageView *bkgImage;
-@property (nonatomic, weak) IBOutlet UISwitch *state;
+@property (nonatomic, weak) IBOutlet UILabel        *name;
+@property (nonatomic, weak) IBOutlet UIImageView    *bkgImage;
+@property (nonatomic, weak) IBOutlet UISwitch       *state;
+
 @property (assign) id<BooleanCellDelegate> delegate;
+
 @end
 
 
@@ -24,5 +26,7 @@
 @required
 
 @optional
--(void)booleanCell:(BooleanCell *)cell switchToggled:(UISwitch *)theSwitch;
+
+- (void)booleanCell:(BooleanCell *)cell switchToggled:(UISwitch *)theSwitch;
+
 @end

@@ -12,9 +12,10 @@
 
 @interface TextFieldCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UITextField *name;
+@property (nonatomic, weak) IBOutlet UITextField *textField;
 @property (nonatomic, weak) IBOutlet UIImageView *bkgImage;
 @property (nonatomic, weak) IBOutlet UIImageView *textFieldBkgImage;
+
 @property (assign) id<TextFieldCellDelegate> delegate;
 @end
 
@@ -24,6 +25,10 @@
 @required
 
 @optional
--(void)textFieldCellBeganEditing:(TextFieldCell *)cell;
--(void)textFieldCellEndEditing:(TextFieldCell *)cell;
+
+- (void)textFieldCellBeganEditing:(TextFieldCell *)cell;
+- (void)textFieldCellEndEditing:(TextFieldCell *)cell;
+- (void)textFieldCellTextDidChange:(TextFieldCell *)cell;
+- (void)textFieldCellTextDidReturn:(TextFieldCell *)cell;
+
 @end

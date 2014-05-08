@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CategoriesViewControllerDelegate;
+
 @interface CategoriesViewController : UIViewController
+
+@property (assign)            id<CategoriesViewControllerDelegate> delegate;
+
+@end
+
+@protocol CategoriesViewControllerDelegate <NSObject>
+
+@required
+
+- (void)categoriesViewControllerDidFinish:(CategoriesViewController *)controller;
 
 @end

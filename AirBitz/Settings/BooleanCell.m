@@ -34,9 +34,9 @@
     // Configure the view for the selected state
 }
 
--(IBAction)switchToggled
+- (IBAction)switchToggled
 {
-	if([self.delegate respondsToSelector:@selector(booleanCell:switchToggled:)])
+	if ([self.delegate respondsToSelector:@selector(booleanCell:switchToggled:)])
 	{
 		[self.delegate booleanCell:self switchToggled:self.state];
 	}

@@ -1,18 +1,21 @@
 //
-//  TextFieldCell.m
+//  CategoriesCell.m
 //  AirBitz
 //
-//  Created by Carson Whitsett on 3/31/14.
+//  Created by AdamHarris on 5/7/14.
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
-#import "TextFieldCell.h"
-@interface TextFieldCell () <UITextFieldDelegate>
+#import "CategoriesCell.h"
+
+@interface CategoriesCell () <UITextFieldDelegate>
+
 {
 }
+
 @end
 
-@implementation TextFieldCell
+@implementation CategoriesCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -46,29 +49,39 @@
     // Configure the view for the selected state
 }
 
-#pragma mark UITextField delegates
+#pragma mark - Action Methods
+
+- (IBAction)buttonDeleteTouched:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(categoriesCellDeleteTouched:)])
+	{
+		[self.delegate categoriesCellDeleteTouched:self];
+	}
+}
+
+#pragma mark - UITextField delegates
 
 - (void)textFieldDidChange:(UITextField *)textField
 {
-	if ([self.delegate respondsToSelector:@selector(textFieldCellTextDidChange:)])
+	if ([self.delegate respondsToSelector:@selector(categoriesCellTextDidChange:)])
 	{
-		[self.delegate textFieldCellTextDidChange:self];
+		[self.delegate categoriesCellTextDidChange:self];
 	}
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-	if ([self.delegate respondsToSelector:@selector(textFieldCellBeganEditing:)])
+	if ([self.delegate respondsToSelector:@selector(categoriesCellBeganEditing:)])
 	{
-		[self.delegate textFieldCellBeganEditing:self];
+		[self.delegate categoriesCellBeganEditing:self];
 	}
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-	if ([self.delegate respondsToSelector:@selector(textFieldCellEndEditing:)])
+	if ([self.delegate respondsToSelector:@selector(categoriesCellEndEditing:)])
 	{
-		[self.delegate textFieldCellEndEditing:self];
+		[self.delegate categoriesCellEndEditing:self];
 	}
 }
 
@@ -76,9 +89,9 @@
 {
 	[textField resignFirstResponder];
 
-    if ([self.delegate respondsToSelector:@selector(textFieldCellTextDidReturn:)])
+    if ([self.delegate respondsToSelector:@selector(categoriesCellTextDidReturn:)])
 	{
-		[self.delegate textFieldCellTextDidReturn:self];
+		[self.delegate categoriesCellTextDidReturn:self];
 	}
 
 	return YES;
