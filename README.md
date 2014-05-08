@@ -7,9 +7,9 @@ You will need Xcode to build the environment. First install it! Then run:
     xcode-select --install
 
 Next install [macports](http://www.macports.org/install.php) and then run the
-following.
+following to obtain all the needed tools.
 
-    port install wget autoconf automake libtool pkgconfig
+    sudo port install wget autoconf automake libtool pkgconfig git-core
 
 Lastly fix the certificate authorities for wget
 
