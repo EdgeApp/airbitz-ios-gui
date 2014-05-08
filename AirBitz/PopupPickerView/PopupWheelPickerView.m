@@ -12,7 +12,7 @@
 
 #define OFFSET_YPOS             45  // how much to offset the y position
 
-#define ARROW_INSET             2.0
+#define ARROW_INSET             1.0
 
 @interface PopupWheelPickerView () <UIPickerViewDataSource, UIPickerViewDelegate>
 {
