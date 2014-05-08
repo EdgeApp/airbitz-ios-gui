@@ -17,7 +17,7 @@
 
 #define MIN_CELLS_VISIBLE        2
 
-#define ARROW_INSET             2.0
+#define ARROW_INSET             1.0
 
 #define DATE_PICKER_HEIGHT      216
 
