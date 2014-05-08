@@ -170,7 +170,11 @@
         popup.frame = newFrame;
         
         // set up the pointer
-        popup.arrowImage.image = [UIImage imageNamed:@"picker_up_point.png"];
+        CGRect imageFrame = popup.arrowImage.frame;
+        UIImage *image = [UIImage imageNamed:@"picker_up_point.png"];
+        imageFrame.size = image.size;
+        popup.arrowImage.frame = imageFrame;
+        popup.arrowImage.image = image;
         CGRect arrowFrame = popup.arrowImage.frame;
         if (PopupPickerPosition_Below == position)
         {
@@ -231,7 +235,11 @@
         popup.frame = newFrame;
         
         // set up the pointer
-        popup.arrowImage.image = [UIImage imageNamed:@"picker_left_point.png"];
+        CGRect imageFrame = popup.arrowImage.frame;
+        UIImage *image = [UIImage imageNamed:@"picker_left_point.png"];
+        imageFrame.size = image.size;
+        popup.arrowImage.frame = imageFrame;
+        popup.arrowImage.image = image;
         CGRect arrowFrame = popup.arrowImage.frame;
         if (PopupPickerPosition_Right == position)
         {
