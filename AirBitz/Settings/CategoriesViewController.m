@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet    UITextField     *textSearch;
 
 @property (nonatomic, strong)           NSMutableArray  *arrayCategories;
+@property (nonatomic, strong)           NSArray         *arrayDisplay;
 
 @end
 
@@ -81,6 +82,9 @@
 
     // load the categories
     [self loadCategories];
+
+    // get a callback when the search changes
+    [self.textSearch addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,7 +107,7 @@
         if ([self.textNew.text length])
         {
             [self.arrayCategories addObject:self.textNew.text];
-            [self.tableView reloadData];
+            [self updateDisplay];
         }
     }
 }
@@ -146,7 +150,7 @@
 
     cell.tag = indexPath.row;
 
-    cell.textField.text = [self.arrayCategories objectAtIndex:indexPath.row];
+    cell.textField.text = [self.arrayDisplay objectAtIndex:indexPath.row];
 
 	return cell;
 }
@@ -175,7 +179,7 @@
         }
     }
 
-    [self.tableView reloadData];
+    [self updateDisplay];
 }
 
 // saves the categories to the core
@@ -210,6 +214,36 @@
         ABC_AddCategory([[User Singleton].name UTF8String], (char *)[strCategory UTF8String], &Error);
         [self printABC_Error:&Error];
     }
+}
+
+- (void)updateDisplay
+{
+    NSString *strSearch = self.textSearch.text;
+
+    // if there is a search string
+    if ([strSearch length])
+    {
+        // put those items in the display array that match the search criteria
+        NSMutableArray *arrayDisplay = [[NSMutableArray alloc] init];
+        for (int i = 0; i < [self.arrayCategories count]; i++)
+        {
+            NSString *strCategory = [self.arrayCategories objectAtIndex:i];
+
+            // if our search string is in the category
+            if ([strCategory rangeOfString:strSearch options:NSCaseInsensitiveSearch].location != NSNotFound)
+            {
+                [arrayDisplay addObject:strCategory];
+            }
+        }
+
+        self.arrayDisplay = arrayDisplay;
+    }
+    else
+    {
+        self.arrayDisplay = [NSArray arrayWithArray:self.arrayCategories];
+    }
+
+    [self.tableView reloadData];
 }
 
 - (void)freeStringArray:(char **)aszStrings count:(unsigned int) count
@@ -274,9 +308,9 @@
 {
     NSInteger count = 0;
 
-    if (self.arrayCategories)
+    if (self.arrayDisplay)
     {
-        count = [self.arrayCategories count];
+        count = [self.arrayDisplay count];
     }
 
     return count;
@@ -319,11 +353,14 @@
 	}
 }
 
-#pragma mark UITextField delegates
+#pragma mark - UITextField delegates
 
 - (void)textFieldDidChange:(UITextField *)textField
 {
-
+    if (textField == self.textSearch)
+    {
+        [self updateDisplay];
+    }
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -350,7 +387,7 @@
     NSInteger row = cell.tag;
 
     [self.arrayCategories removeObjectAtIndex:row];
-    [self.tableView reloadData];
+    [self updateDisplay];
 }
 
 @end
