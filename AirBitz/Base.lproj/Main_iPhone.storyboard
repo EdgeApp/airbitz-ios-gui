@@ -2195,7 +2195,7 @@
                                         <rect key="frame" x="20" y="106" width="244" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                         <connections>
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="yS2-da-9hA"/>
                                         </connections>
@@ -2278,10 +2278,55 @@
                                     <action selector="Done" destination="sjK-gq-bVx" eventType="touchUpInside" id="WgY-B9-rxo"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wfo-0v-1Fd">
-                                <rect key="frame" x="0.0" y="142" width="320" height="377"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="wfo-0v-1Fd">
+                                <rect key="frame" x="0.0" y="138" width="320" height="377"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.81960784310000001" green="0.90196078430000004" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoriesCell" id="D1F-6W-k2p" customClass="CategoriesCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D1F-6W-k2p" id="v5H-O1-tYI">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RSV-PH-JE9">
+                                                    <rect key="frame" x="272" y="9" width="38" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="btn_deleteCategory.png">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="buttonDeleteTouched:" destination="D1F-6W-k2p" eventType="touchUpInside" id="uru-Pe-fT9"/>
+                                                    </connections>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="VjU-w1-oiT">
+                                                    <rect key="frame" x="11" y="10" width="253" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
+                                                </imageView>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="always" id="gJc-GS-Jhp">
+                                                    <rect key="frame" x="16" y="10" width="244" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="D1F-6W-k2p" id="o0u-g5-CI8"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.81960784313725488" green="0.90196078431372551" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="gJc-GS-Jhp" id="CMG-F1-AH0"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="sjK-gq-bVx" id="zlW-4e-rAw"/>
+                                    <outlet property="delegate" destination="sjK-gq-bVx" id="HOw-P0-HmW"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -2291,6 +2336,8 @@
                         <outlet property="doneButton" destination="LAg-aY-W5b" id="hnp-Er-jOQ"/>
                         <outlet property="imageBottomBar" destination="DLe-wl-2SZ" id="fiS-n0-Rzh"/>
                         <outlet property="tableView" destination="wfo-0v-1Fd" id="JaS-l8-Jhd"/>
+                        <outlet property="textNew" destination="Qcx-bY-He5" id="NPq-t6-7gl"/>
+                        <outlet property="textSearch" destination="X6G-HD-WUv" id="4sG-5o-p0a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5x1-Ha-hUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3133,6 +3180,7 @@
         <image name="btn_cancel.png" width="143" height="41"/>
         <image name="btn_changeCategories.png" width="291" height="41"/>
         <image name="btn_collapse_expand.png" width="37" height="37"/>
+        <image name="btn_deleteCategory.png" width="38" height="31"/>
         <image name="btn_done.png" width="143" height="41"/>
         <image name="btn_email.png" width="61" height="66"/>
         <image name="btn_export.png" width="37" height="37"/>

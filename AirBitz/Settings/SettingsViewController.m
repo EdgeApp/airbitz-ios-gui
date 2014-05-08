@@ -807,7 +807,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         if (indexPath.row == ROW_CHANGE_CATEGORIES)
         {
-			cell.name.text = NSLocalizedString(@"Change categories", @"settings text");
+			cell.name.text = NSLocalizedString(@"Change Categories", @"settings text");
         }
     }
 	

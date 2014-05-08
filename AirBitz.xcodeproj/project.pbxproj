@@ -24,6 +24,7 @@
 		4C3C309819198B33006923DE /* PopupWheelPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C309619198B33006923DE /* PopupWheelPickerView.m */; };
 		4C3C309919198B33006923DE /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C309719198B33006923DE /* PopupWheelPickerView.xib */; };
 		4C3C309D19199AF7006923DE /* StrokeGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C309C19199AF7006923DE /* StrokeGradientButton.m */; };
+		4C3C30A1191B07C0006923DE /* CategoriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C30A0191B07C0006923DE /* CategoriesCell.m */; };
 		4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
@@ -419,6 +420,8 @@
 		4C3C309B19199AF7006923DE /* StrokeGradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StrokeGradientButton.h; path = StrokeGradientButton/StrokeGradientButton.h; sourceTree = "<group>"; };
 		4C3C309C19199AF7006923DE /* StrokeGradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StrokeGradientButton.m; path = StrokeGradientButton/StrokeGradientButton.m; sourceTree = "<group>"; };
 		4C3C309E19199B4F006923DE /* CommonTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTypes.h; sourceTree = "<group>"; };
+		4C3C309F191B07C0006923DE /* CategoriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesCell.h; sourceTree = "<group>"; };
+		4C3C30A0191B07C0006923DE /* CategoriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesCell.m; sourceTree = "<group>"; };
 		4C90461C18C91E5900179D9C /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h; sourceTree = "<group>"; };
 		4C90461D18C91E5900179D9C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Exception.h; sourceTree = "<group>"; };
 		4C90461E18C91E5900179D9C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Image.h; sourceTree = "<group>"; };
@@ -1651,6 +1654,8 @@
 				B55A031918EB485F00845090 /* CancelDoneCell.m */,
 				B55A031B18EB569000845090 /* CategoriesViewController.h */,
 				B55A031C18EB569000845090 /* CategoriesViewController.m */,
+				4C3C309F191B07C0006923DE /* CategoriesCell.h */,
+				4C3C30A0191B07C0006923DE /* CategoriesCell.m */,
 				B55A030918EA4C4400845090 /* PlainCell.h */,
 				B55A030A18EA4C4400845090 /* PlainCell.m */,
 				B55A030618EA210000845090 /* RadioButtonCell.h */,
@@ -2096,6 +2101,7 @@
 				B5376E1D18B55D920099EF8F /* UIImage+Colorize.m in Sources */,
 				B5C0A9C218EA0DD8008F302C /* TransactionDetailsViewController.m in Sources */,
 				B5C0A9B018EA0D78008F302C /* SendConfirmationViewController.m in Sources */,
+				4C3C30A1191B07C0006923DE /* CategoriesCell.m in Sources */,
 				B5C0A99018EA0B80008F302C /* MapView.m in Sources */,
 				B5137C1818A40F3900DA4A34 /* MontserratLabel.m in Sources */,
 				B5C0A9C318EA0DD8008F302C /* TransactionsViewController.m in Sources */,
@@ -2267,7 +2273,6 @@
 					./AirBitz/DL_URLServer,
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
-					"/Projects/Ditty\\ Labs/Clients/AirBitz/Project/AirBitz/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "EB9DCB2D-0BA5-40E2-A388-08C19EBD9D70";
@@ -2292,7 +2297,6 @@
 					./AirBitz/DL_URLServer,
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
-					"/Projects/Ditty\\ Labs/Clients/AirBitz/Project/AirBitz/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "EB9DCB2D-0BA5-40E2-A388-08C19EBD9D70";

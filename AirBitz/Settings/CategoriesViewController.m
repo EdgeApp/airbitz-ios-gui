@@ -8,16 +8,23 @@
 
 #import "CategoriesViewController.h"
 #import "CommonTypes.h"
+#import "CategoriesCell.h"
+#import "ABC.h"
+#import "User.h"
 
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y 3
 #define TABLE_SIZE_EXTRA_HEIGHT      5
 
-@interface CategoriesViewController ()
+@interface CategoriesViewController () <UITableViewDataSource, UITableViewDelegate, CategoriesCellDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView    *tableView;
 @property (nonatomic, weak) IBOutlet UIButton       *cancelButton;
 @property (nonatomic, weak) IBOutlet UIButton       *doneButton;
 @property (weak, nonatomic) IBOutlet UIImageView    *imageBottomBar;
+@property (weak, nonatomic) IBOutlet UITextField    *textNew;
+@property (weak, nonatomic) IBOutlet UITextField    *textSearch;
+
+@property (nonatomic, strong) NSMutableArray    *arrayCategories;
 
 @end
 
@@ -59,12 +66,17 @@
     frame.size.height = self.imageBottomBar.frame.origin.y - self.tableView.frame.origin.y + TABLE_SIZE_EXTRA_HEIGHT;
     self.tableView.frame = frame;
 
-#if 0
-	// make the screen the right height
-    CGRect frame = self.view.frame;
-    frame.size.height = SCREEN_HEIGHT - TOOLBAR_HEIGHT;
-    self.view.frame = frame;
-#endif
+    // This will remove extra separators from tableview
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
+    // make the seperator go across the entire row
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+
+    // load the categories
+    [self loadCategories];
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,6 +89,14 @@
 
 - (IBAction)AddCategory
 {
+    if (self.textNew.text)
+    {
+        if ([self.textNew.text length])
+        {
+            [self.arrayCategories addObject:self.textNew.text];
+            [self.tableView reloadData];
+        }
+    }
 }
 
 - (IBAction)Cancel
@@ -90,6 +110,88 @@
 }
 
 #pragma mark - Misc Methods
+
+- (CategoriesCell *)getCategoriesCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
+{
+	CategoriesCell *cell;
+	static NSString *cellIdentifier = @"CategoriesCell";
+
+	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (nil == cell)
+	{
+		cell = [[CategoriesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+	}
+
+	cell.delegate = self;
+
+    cell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    cell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    cell.textField.spellCheckingType = UITextSpellCheckingTypeNo;
+
+    cell.tag = indexPath.row;
+
+    cell.textField.text = [self.arrayCategories objectAtIndex:indexPath.row];
+
+	return cell;
+}
+
+- (void)loadCategories
+{
+    char **aszCategories = NULL;
+    unsigned int count = 0;
+
+    // get the categories from the core
+    tABC_Error Error;
+    ABC_GetCategories([[User Singleton].name UTF8String],
+                      &aszCategories,
+                      &count,
+                      &Error);
+    [self printABC_Error:&Error];
+
+    // store them in our own array
+    self.arrayCategories = [[NSMutableArray alloc] init];
+    if (aszCategories)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            [self.arrayCategories addObject:[NSString stringWithUTF8String:aszCategories[i]]];
+        }
+    }
+
+    // free the ones from the core
+    [self freeStringArray:aszCategories count:count];
+
+    [self.tableView reloadData];
+}
+
+- (void)freeStringArray:(char **)aszStrings count:(unsigned int) count
+{
+    if ((aszStrings != NULL) && (count > 0))
+    {
+        for (int i = 0; i < count; i++)
+        {
+            free(aszStrings[i]);
+        }
+        free(aszStrings);
+    }
+}
+
+- (void)printABC_Error:(const tABC_Error *)pError
+{
+    if (pError)
+    {
+        if (pError->code != ABC_CC_Ok)
+        {
+            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
+                   pError->code,
+                   pError->szDescription,
+                   pError->szSourceFunc,
+                   pError->szSourceFile,
+                   pError->nSourceLine
+                   );
+        }
+    }
+}
 
 - (void)animatedExit
 {
@@ -108,9 +210,56 @@
 	 }];
 }
 
+
+
 - (void)exit
 {
 	[self.delegate categoriesViewControllerDidFinish:self];
+}
+
+#pragma mark - UITableView Delegates
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+	return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger count = 0;
+
+    if (self.arrayCategories)
+    {
+        count = [self.arrayCategories count];
+    }
+
+    return count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return 49.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+	return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	UITableViewCell *cell;
+
+    cell = [self getCategoriesCellForTableView:tableView withIndexPath:indexPath];
+
+	//cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
+
+	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
 }
 
 @end
