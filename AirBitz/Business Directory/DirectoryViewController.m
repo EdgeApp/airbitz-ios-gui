@@ -1964,58 +1964,61 @@ typedef enum eMapDisplayState
 	NSError *myError;
 	NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
 	
-	if(object == self.locationTextfield)
+	if([dictFromServer objectForKey:@"results"] != (id)[NSNull null])
 	{
-		//NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
-		searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
-		[self pruneCachedLocationItemsFromSearchResults];
-		[self.searchCluesTableView reloadData];
-		
-	}
-	else if(object == self.searchTextfield)
-	{
-		//NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
-		searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
-		[self pruneCachedSearchItemsFromSearchResults];
-		[self.searchCluesTableView reloadData];
-		if(searchResultsArray.count)
+		if(object == self.locationTextfield)
 		{
+			//NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
+			searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
+			[self pruneCachedLocationItemsFromSearchResults];
+			[self.searchCluesTableView reloadData];
 			
+		}
+		else if(object == self.searchTextfield)
+		{
+			//NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
+			searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
+			[self pruneCachedSearchItemsFromSearchResults];
+			[self.searchCluesTableView reloadData];
+			if(searchResultsArray.count)
+			{
+				
+			}
+			else
+			{
+				NSLog(@"SEARCH RESULTS ARRAY IS EMPTY!");
+			}
 		}
 		else
 		{
-			NSLog(@"SEARCH RESULTS ARRAY IS EMPTY!");
+			//object is a page number (NSNumber)
+			if (DL_URLRequestStatus_Success == status)
+			{
+				//NSLog(@"Error: %@", myError);
+				//NSLog(@"Dictionary from server: %@", [dictFromServer allKeys]);
+				
+				//total number of results (in all pages)
+				totalResultsCount = [[dictFromServer objectForKey:@"count"] intValue];
+				
+				[self bufferBusinessResults:[dictFromServer objectForKey:@"results"] forPage:[object intValue]];
+				//NSLog(@"Businesses: %@", businessesArray);
+				//NSLog(@"Total results: %i", totalResultsCount);
+			}
+			else
+			{
+				NSLog(@"*** SERVER REQUEST STATUS FAILURE ***");
+				NSString *msg = NSLocalizedString(@"Can't connect to server.  Check your internet connection", nil);
+				UIAlertView *alert = [[UIAlertView alloc]
+									  initWithTitle:NSLocalizedString(@"No Connection", @"Alert title that warns user couldn't connect to server")
+									  message:msg
+									  delegate:nil
+									  cancelButtonTitle:@"OK"
+									  otherButtonTitles:nil];
+				[alert show];
+				
+			}
+			[self.tableView reloadData];
 		}
-	}
-	else
-	{
-		//object is a page number (NSNumber)
-		if (DL_URLRequestStatus_Success == status)
-		{
-			//NSLog(@"Error: %@", myError);
-			//NSLog(@"Dictionary from server: %@", [dictFromServer allKeys]);
-			
-			//total number of results (in all pages)
-			totalResultsCount = [[dictFromServer objectForKey:@"count"] intValue];
-			
-			[self bufferBusinessResults:[dictFromServer objectForKey:@"results"] forPage:[object intValue]];
-			//NSLog(@"Businesses: %@", businessesArray);
-			//NSLog(@"Total results: %i", totalResultsCount);
-		}
-		else
-		{
-			NSLog(@"*** SERVER REQUEST STATUS FAILURE ***");
-			NSString *msg = NSLocalizedString(@"Can't connect to server.  Check your internet connection", nil);
-			UIAlertView *alert = [[UIAlertView alloc]
-								  initWithTitle:NSLocalizedString(@"No Connection", @"Alert title that warns user couldn't connect to server")
-								  message:msg
-								  delegate:nil
-								  cancelButtonTitle:@"OK"
-								  otherButtonTitles:nil];
-			[alert show];
-			
-		}
-		[self.tableView reloadData];
 	}
 }
 
