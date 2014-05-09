@@ -36,13 +36,15 @@ typedef enum ePopupPickerPosition
 - (void)selectRow:(NSInteger)row;
 - (void)setCellHeight:(NSInteger)height;
 - (void)reloadTableData;
+- (void)disableBackgroundTouchDetect;
+- (void)updateStrings:(NSArray *)strings;
 
 @end
 
 @protocol PopupPickerViewDelegate <NSObject>
 
 @required
-- (void)PopupPickerViewExit:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data;
+- (void)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data;
 
 @optional
 - (void)PopupPickerViewCancelled:(PopupPickerView *)view userData:(id)data;

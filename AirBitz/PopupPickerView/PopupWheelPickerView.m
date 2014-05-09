@@ -10,8 +10,6 @@
 #import "PopupWheelPickerView.h"
 #import "CommonTypes.h"
 
-#define OFFSET_YPOS             45  // how much to offset the y position
-
 #define ARROW_INSET             1.0
 
 @interface PopupWheelPickerView () <UIPickerViewDataSource, UIPickerViewDelegate>
@@ -71,6 +69,13 @@
     // if this is above or below
     if ((PopupWheelPickerPosition_Below == position) || (PopupWheelPickerPosition_Above == position))
     {
+        // set up the image for the pointer
+        CGRect imageFrame = popup.m_arrowImage.frame;
+        UIImage *image = [UIImage imageNamed:@"picker_up_point.png"];
+        imageFrame.size = image.size;
+        popup.m_arrowImage.frame = imageFrame;
+        popup.m_arrowImage.image = image;
+
         // set the X position directly under the center of the positioning view
         newFrame.origin.x += (frame.size.width / 2);        // move to center of view
         newFrame.origin.x -= (popup.frame.size.width / 2);          // bring it left so the center is under the view 
@@ -102,12 +107,7 @@
         // set the new frame
         popup.frame = newFrame;
         
-        // set up the pointer
-        CGRect imageFrame = popup.m_arrowImage.frame;
-        UIImage *image = [UIImage imageNamed:@"picker_up_point.png"];
-        imageFrame.size = image.size;
-        popup.m_arrowImage.frame = imageFrame;
-        popup.m_arrowImage.image = image;
+        // set up the pointer position
         CGRect arrowFrame = popup.m_arrowImage.frame;
         if (PopupWheelPickerPosition_Below == position)
         {
@@ -134,7 +134,14 @@
         popup.m_arrowImage.frame = arrowFrame;
     }
     else // if ((PopupWheelPickerPosition_Left == position) || (PopupWheelPickerPosition_Right == position))
-    {      
+    {
+        // set up pointer image
+        CGRect imageFrame = popup.m_arrowImage.frame;
+        UIImage *image = [UIImage imageNamed:@"picker_left_point.png"];
+        imageFrame.size = image.size;
+        popup.m_arrowImage.frame = imageFrame;
+        popup.m_arrowImage.image = image;
+
         // set the Y position directly beside the center of the positioning view
         newFrame.origin.y += (frame.size.height / 2);        // move to center of frame
         newFrame.origin.y -= (popup.frame.size.height / 2);  // bring it up so the center is next to the view
@@ -167,12 +174,7 @@
         // set the new frame
         popup.frame = newFrame;
         
-        // set up the pointer
-        CGRect imageFrame = popup.m_arrowImage.frame;
-        UIImage *image = [UIImage imageNamed:@"picker_left_point.png"];
-        imageFrame.size = image.size;
-        popup.m_arrowImage.frame = imageFrame;
-        popup.m_arrowImage.image = image;
+        // set up the pointer position
         CGRect arrowFrame = popup.m_arrowImage.frame;
         if (PopupWheelPickerPosition_Right == position)
         {

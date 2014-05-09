@@ -24,16 +24,17 @@
 @interface PopupPickerView () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 {
     BOOL                        _bShowOptions;
+    BOOL                        _bDisableBackgroundTouch;
 	IBOutlet UITableView        *table;
 	IBOutlet UIView             *innerView;
     IBOutlet UIButton           *m_buttonBackground;
     IBOutlet UIView             *m_viewBorder;
 }
 
-@property (nonatomic, strong) IBOutlet UIImageView          *arrowImage;
-@property (weak, nonatomic) IBOutlet UIView                 *viewOptions;
-@property (weak, nonatomic) IBOutlet UIButton               *buttonKeyboard;
-@property (weak, nonatomic) IBOutlet UIButton               *buttonTrash;
+@property (nonatomic, strong)   IBOutlet UIImageView    *arrowImage;
+@property (weak, nonatomic)     IBOutlet UIView         *viewOptions;
+@property (weak, nonatomic)     IBOutlet UIButton       *buttonKeyboard;
+@property (weak, nonatomic)     IBOutlet UIButton       *buttonTrash;
 
 @property (nonatomic, assign) id<PopupPickerViewDelegate>   delegate;
 @property (nonatomic, strong) NSArray                       *strings;
@@ -138,6 +139,13 @@
     // if this is above or below
     if ((PopupPickerPosition_Below == position) || (PopupPickerPosition_Above == position))
     {
+        // set up point image
+        CGRect imageFrame = popup.arrowImage.frame;
+        UIImage *image = [UIImage imageNamed:@"picker_up_point.png"];
+        imageFrame.size = image.size;
+        popup.arrowImage.frame = imageFrame;
+        popup.arrowImage.image = image;
+
         // set the X position directly under the center of the positioning view
         newFrame.origin.x += (frame.size.width / 2);        // move to center of view
         newFrame.origin.x -= (popup.frame.size.width / 2);          // bring it left so the center is under the view 
@@ -169,12 +177,7 @@
         // set the new frame
         popup.frame = newFrame;
         
-        // set up the pointer
-        CGRect imageFrame = popup.arrowImage.frame;
-        UIImage *image = [UIImage imageNamed:@"picker_up_point.png"];
-        imageFrame.size = image.size;
-        popup.arrowImage.frame = imageFrame;
-        popup.arrowImage.image = image;
+        // set up the pointer position
         CGRect arrowFrame = popup.arrowImage.frame;
         if (PopupPickerPosition_Below == position)
         {
@@ -201,7 +204,14 @@
         popup.arrowImage.frame = arrowFrame;
     }
     else // if ((PopupPickerPosition_Left == position) || (PopupPickerPosition_Right == position))
-    {      
+    {
+        // set up pointer image
+        CGRect imageFrame = popup.arrowImage.frame;
+        UIImage *image = [UIImage imageNamed:@"picker_left_point.png"];
+        imageFrame.size = image.size;
+        popup.arrowImage.frame = imageFrame;
+        popup.arrowImage.image = image;
+
         // set the Y position directly beside the center of the positioning view
         newFrame.origin.y += (frame.size.height / 2);        // move to center of frame
         newFrame.origin.y -= (popup.frame.size.height / 2);  // bring it up so the center is next to the view
@@ -234,12 +244,7 @@
         // set the new frame
         popup.frame = newFrame;
         
-        // set up the pointer
-        CGRect imageFrame = popup.arrowImage.frame;
-        UIImage *image = [UIImage imageNamed:@"picker_left_point.png"];
-        imageFrame.size = image.size;
-        popup.arrowImage.frame = imageFrame;
-        popup.arrowImage.image = image;
+        // set up the pointer position
         CGRect arrowFrame = popup.arrowImage.frame;
         if (PopupPickerPosition_Right == position)
         {
@@ -412,6 +417,19 @@
 	[table selectRowAtIndexPath:selectPath animated:NO scrollPosition:UITableViewScrollPositionTop];
 }
 
+- (void)disableBackgroundTouchDetect
+{
+    m_buttonBackground.hidden = YES;
+    _bDisableBackgroundTouch = YES;
+}
+
+- (void)updateStrings:(NSArray *)strings
+{
+    self.strings = strings;
+
+    [self reloadTableData];
+}
+
 #pragma mark - Action
 
 - (IBAction)backgroundButtonTouched:(id)sender 
@@ -449,6 +467,8 @@
 
 #pragma mark - UIView delegate methods
 
+#if 0 // doesn't seem to be needed now
+
 // this is used to make sure our background button gets touch events outside our view
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
@@ -469,9 +489,16 @@
     {
         return self.viewOptions;
     }
-    
-    // everything else goes to background
-    return m_buttonBackground;
+
+    if (_bDisableBackgroundTouch)
+    {
+        return self;
+    }
+    else
+    {
+        // everything else goes to background
+        return m_buttonBackground;
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -483,9 +510,9 @@
 {
     return YES;
 }
+#endif
 
-
-#pragma mark - TableView Datasource methods
+#pragma mark - TableView Data Source methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -563,11 +590,14 @@
 {   
     if (self.delegate)
     {
-        if ([self.delegate respondsToSelector:@selector(PopupPickerViewExit:onRow: userData:)])
+        if ([self.delegate respondsToSelector:@selector(PopupPickerViewSelected:onRow: userData:)])
         {
-            [self.delegate PopupPickerViewExit:self onRow:indexPath.row userData:_userData];
+            [self.delegate PopupPickerViewSelected:self onRow:indexPath.row userData:_userData];
         }
     }
+
+    // remove the highlight on the selected row
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end

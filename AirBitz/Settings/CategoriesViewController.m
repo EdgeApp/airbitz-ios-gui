@@ -16,7 +16,11 @@
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y 3
 #define TABLE_SIZE_EXTRA_HEIGHT      5
 
-@interface CategoriesViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate, CategoriesCellDelegate>
+#define ARRAY_CATEGORY_PREFIXES     @[@"Expense:",@"Income:",@"Transfer:"]
+
+#define PICKER_MAX_CELLS_VISIBLE    (IS_IPHONE5 ? 3 : 2)
+
+@interface CategoriesViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate, CategoriesCellDelegate, PickerTextViewDelegate>
 {
     char            **_aszCategories;
     unsigned int    _count;
@@ -97,6 +101,9 @@
     self.pickerTextNew.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.pickerTextNew.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.pickerTextNew.textField.spellCheckingType = UITextSpellCheckingTypeNo;
+    [self.pickerTextNew setTopMostView:self.view];
+    self.pickerTextNew.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
+    self.pickerTextNew.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,6 +121,8 @@
 
 - (IBAction)AddCategory
 {
+    [self resignAllResponders];
+
     if (self.pickerTextNew.textField.text)
     {
         if ([self.pickerTextNew.textField.text length])
@@ -263,6 +272,81 @@
     [self.tableView reloadData];
 }
 
+// returns which prefix the given string starts with
+// returns nil in none of them
+- (NSString *)categoryPrefix:(NSString *)strCategory
+{
+    if (strCategory)
+    {
+        for (NSString *strPrefix in ARRAY_CATEGORY_PREFIXES)
+        {
+            if ([strCategory hasPrefix:strPrefix])
+            {
+                return strPrefix;
+            }
+        }
+    }
+    
+    return nil;
+}
+
+- (NSArray *)createNewCategoryChoices
+{
+    NSMutableString *strCurVal = [[NSMutableString alloc] initWithString:@""];
+
+    // put in what we have
+    if (self.pickerTextNew.textField.text)
+    {
+        if ([self.pickerTextNew.textField.text length])
+        {
+            [strCurVal setString:self.pickerTextNew.textField.text];
+        }
+    }
+
+    // remove the prefix if it exists
+    NSString *strPrefix = [self categoryPrefix:strCurVal];
+    if (strPrefix)
+    {
+        [strCurVal setString:[strCurVal substringFromIndex:[strPrefix length]]];
+    }
+
+    // create the array of choices by adding the prefix to each one
+    NSMutableArray *arrayChoices = [[NSMutableArray alloc] initWithCapacity:[ARRAY_CATEGORY_PREFIXES count]];
+    for (NSString *strPrefix in ARRAY_CATEGORY_PREFIXES)
+    {
+        [arrayChoices addObject:[NSString stringWithFormat:@"%@%@", strPrefix, strCurVal]];
+    }
+
+    return arrayChoices;
+}
+
+- (void)forceCategoryFieldValue:(UITextField *)textField
+{
+    NSMutableString *strNewVal = [[NSMutableString alloc] init];
+    [strNewVal appendString:textField.text];
+
+    NSString *strPrefix = [self categoryPrefix:textField.text];
+
+    // if it doesn't start with a prefix, make it
+    if (strPrefix == nil)
+    {
+        [strNewVal insertString:[ARRAY_CATEGORY_PREFIXES objectAtIndex:0] atIndex:0];
+    }
+
+    textField.text = strNewVal;
+
+    NSArray *arrayChoices = [self createNewCategoryChoices];
+
+    [self.pickerTextNew updateChoices:arrayChoices];
+}
+
+// resigns all the edit box responders
+- (void)resignAllResponders
+{
+    [self.textSearch resignFirstResponder];
+    [self.pickerTextNew.textField resignFirstResponder];
+}
+
 - (void)freeStringArray:(char **)aszStrings count:(unsigned int) count
 {
     if ((aszStrings != NULL) && (count > 0))
@@ -393,6 +477,60 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	[textField resignFirstResponder];
+
+	return YES;
+}
+
+#pragma mark - PickerTextView Delegates
+
+- (BOOL)pickerTextViewFieldShouldChange:(PickerTextView *)pickerTextView charactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    // create what the new value would look like
+    NSString *strNewVal = [pickerTextView.textField.text stringByReplacingCharactersInRange:range withString:string];
+
+    // if it still has a prefix
+    if ([self categoryPrefix:strNewVal])
+    {
+        // allow it
+        return YES;
+    }
+
+    return NO;
+}
+
+- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
+{
+    NSMutableString *strNewVal = [[NSMutableString alloc] init];
+    [strNewVal appendString:pickerTextView.textField.text];
+
+    NSString *strPrefix = [self categoryPrefix:pickerTextView.textField.text];
+
+    // if it doesn't start with a prefix, make it
+    if (strPrefix == nil)
+    {
+        [strNewVal insertString:[ARRAY_CATEGORY_PREFIXES objectAtIndex:0] atIndex:0];
+    }
+
+    pickerTextView.textField.text = strNewVal;
+
+    NSArray *arrayChoices = [self createNewCategoryChoices];
+
+    [pickerTextView updateChoices:arrayChoices];
+}
+
+- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
+{
+    [self forceCategoryFieldValue:pickerTextView.textField];
+}
+
+- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
+{
+    [self forceCategoryFieldValue:pickerTextView.textField];
+}
+
+- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
+{
+	[pickerTextView.textField resignFirstResponder];
 
 	return YES;
 }
