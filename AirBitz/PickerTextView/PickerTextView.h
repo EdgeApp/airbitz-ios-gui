@@ -11,8 +11,6 @@
 
 @protocol PickerTextViewDelegate;
 
-
-
 @interface PickerTextView : UIView
 
 @property (nonatomic, assign) id<PickerTextViewDelegate>    delegate;
@@ -22,6 +20,7 @@
 @property (nonatomic, assign) NSInteger                     pickerMaxChoicesVisible;
 @property (nonatomic, assign) NSInteger                     pickerWidth;
 @property (nonatomic, assign) NSInteger                     pickerCellHeight;
+@property (nonatomic, strong) NSArray                       *arrayChoices;
 
 - (void)setTextFieldObject:(UITextField *)newTextField;
 - (void)setTopMostView:(UIView *)topMostView;

@@ -18,7 +18,7 @@
     UIView *_viewTop;
 }
 
-@property (nonatomic, strong) NSArray *arrayChoices;
+
 
 @end
 
