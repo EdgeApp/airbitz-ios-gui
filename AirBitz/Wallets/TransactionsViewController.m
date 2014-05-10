@@ -10,6 +10,7 @@
 #import "BalanceView.h"
 #import "TransactionCell.h"
 #import "Transaction.h"
+#import "TransactionBridge.h"
 #import "NSDate+Helper.h"
 #import "TransactionDetailsViewController.h"
 #import "ABC.h"
@@ -26,6 +27,7 @@
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UITextField *searchTextField;
 @property (nonatomic, weak) IBOutlet UIButton *walletNameView;
+@property (nonatomic, strong) NSMutableArray *arraySearchTransactions;
 
 @end
 
@@ -53,8 +55,7 @@
 
 	[self.walletNameView setTitle:self.wallet.strName forState:UIControlStateNormal];
 	self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
-	
-	//[self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+	[self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)didReceiveMemoryWarning
@@ -135,6 +136,8 @@
 
 -(void)TransactionDetailsViewControllerDone:(TransactionsViewController *)controller
 {
+    [TransactionBridge reloadWallet: self.wallet];
+    [self.tableView reloadData];
 	[self dismissTransactionDetails];
 }
 
@@ -144,7 +147,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return self.wallet.arrayTransactions.count;
+    if ([self searchEnabled]) 
+    {
+        return self.arraySearchTransactions.count;
+    }
+    else 
+    {
+        return self.wallet.arrayTransactions.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -174,7 +184,15 @@
 	cell = [self getTransactionCellForTableView:tableView];
 	
 	
-	Transaction* transaction = [self.wallet.arrayTransactions objectAtIndex:indexPath.row];
+	Transaction* transaction = NULL;
+    if ([self searchEnabled]) 
+    {
+        transaction = [self.arraySearchTransactions objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        transaction = [self.wallet.arrayTransactions objectAtIndex:indexPath.row];
+    }
 	//date
 	cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
 	
@@ -230,9 +248,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//NSLog(@"Selected row %li", (long)indexPath.row);
-	//[self launchTransactions];
-	[self launchTransactionDetailsWithTransaction:[self.wallet.arrayTransactions objectAtIndex:indexPath.row]];
+    if ([self searchEnabled]) 
+    {
+        [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row]];
+    }
+    else
+    {
+        [self launchTransactionDetailsWithTransaction:[self.wallet.arrayTransactions objectAtIndex:indexPath.row]];
+    }
 	
 }
 
@@ -249,30 +272,39 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	//called when user taps on either search textField or location textField
-	
 }
-
-
-
-
 
 -(void)searchTextFieldChanged:(UITextField *)textField
 {
-	/*//http://107.170.22.83:80/api/v1/autocomplete-location/?term=sa
-	NSLog( @"location text changed: %@", textField.text);
-	NSString *paramDataString = [NSString stringWithFormat:@"%@/autocomplete-location?term=%@", SERVER_API, [textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-	[[DL_URLServer controller] issueRequestURL:paramDataString
-									withParams:nil
-									withObject:textField
-								  withDelegate:self
-							acceptableCacheAge:AGE_ACCEPT_CACHE_SECS
-								   cacheResult:YES];*/
+    NSString *search = textField.text;
+    if (search != NULL && search.length > 0)
+    {
+        if (self.arraySearchTransactions)
+        {
+            [self.arraySearchTransactions removeAllObjects];
+        } 
+        else
+        {
+            self.arraySearchTransactions = [[NSMutableArray alloc] init];
+        }
+        [TransactionBridge searchTransactionsIn:self.wallet query:textField.text addTo:self.arraySearchTransactions];
+        [self.tableView reloadData];
+    }
+    else if (![self searchEnabled])
+    {
+        [self.tableView reloadData];
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	[textField resignFirstResponder];
 	return YES;
+}
+
+-(BOOL)searchEnabled
+{
+    return self.searchTextField.text.length > 0;
 }
 
 @end

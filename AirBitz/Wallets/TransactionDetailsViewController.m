@@ -7,6 +7,7 @@
 //
 
 #import "TransactionDetailsViewController.h"
+#import "TransactionBridge.h"
 #import "User.h"
 #import "NSDate+Helper.h"
 #import "ABC.h"
@@ -83,8 +84,11 @@
 	 
 	// self.dateLabel.text = [NSDate stringForDisplayFromDate:self.transaction.date prefixed:NO alwaysDisplayTime:YES];
 	
+    NSLog(@("%@ %@ %@\n"), self.transaction.strName, self.transaction.strCategory, self.transaction.strNotes);
 	self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
 	self.nameTextField.text = self.transaction.strName;
+    self.notesTextField.text = self.transaction.strNotes;
+    self.categoryTextField.text = self.transaction.strCategory;
 	self.categoryTextField.arrayAutoCompleteStrings = [NSArray arrayWithObjects:@"Income:Salary", @"Income:Rent", @"Transfer:Bank Account", @"Transfer:Cash", @"Transfer:Wallet", @"Expense:Dining", @"Expense:Clothing", @"Expense:Computers", @"Expense:Electronics", @"Expense:Education", @"Expense:Entertainment", @"Expense:Rent", @"Expense:Insurance", @"Expense:Medical", @"Expense:Pets", @"Expense:Recreation", @"Expense:Tax", @"Expense:Vacation", @"Expense:Utilities",nil];
 	self.categoryTextField.tableAbove = YES;
 	//[self.addressButton setTitle:self.transaction.strAddress forState:UIControlStateNormal];
@@ -136,7 +140,6 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-	NSLog(@"View Did Disappear!");
 	[self.delegate TransactionDetailsViewControllerDone:self];
 }
 
@@ -210,6 +213,12 @@
 
 -(IBAction)Done
 {
+    self.transaction.strName = [self.nameTextField text];
+    self.transaction.strNotes = [self.notesTextField text];
+    self.transaction.strCategory = [self.categoryTextField text];
+    self.transaction.balance = [[self.fiatTextField text] doubleValue];
+
+    [TransactionBridge storeTransaction: self.transaction];
 	[self.delegate TransactionDetailsViewControllerDone:self];
 }
 

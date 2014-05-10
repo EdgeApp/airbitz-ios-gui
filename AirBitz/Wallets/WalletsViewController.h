@@ -10,4 +10,6 @@
 
 @interface WalletsViewController : UIViewController
 
+- (void)reloadWallets;
+
 @end

@@ -399,7 +399,7 @@
     ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
     [self printABC_Error:&Error];
 	
-    printf("Wallets:\n");
+    NSLog(@"Wallets:\n");
 	
 	if(nCount)
 	{
@@ -416,15 +416,6 @@
     for (int i = 0; i < nCount; i++)
     {
         tABC_WalletInfo *pInfo = aWalletInfo[i];
-		/*
-		 printf("Account: %s, UUID: %s, Name: %s, currency: %d, attributes: %u, balance: %lld\n",
-		 pInfo->szUserName,
-		 pInfo->szUUID,
-		 pInfo->szName,
-		 pInfo->currencyNum,
-		 pInfo->attributes,
-		 pInfo->balanceSatoshi);
-		 */
 		[walletsArray addObject:[NSString stringWithUTF8String:pInfo->szName]];
     }
 	
@@ -437,6 +428,8 @@
 -(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
 	NSLog(@"Selected item %i", itemIndex);
+    selectedWalletIndex = itemIndex;
+    [self setWalletButtonTitle];
 }
 
 #pragma mark ShowWalletQRViewController delegates

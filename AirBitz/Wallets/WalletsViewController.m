@@ -15,6 +15,7 @@
 #import "ABC.h"
 #import "User.h"
 #import "WalletMakerView.h"
+#import "TransactionBridge.h"
 
 #define DOLLAR_CURRENCY_NUM	840
 
@@ -58,7 +59,7 @@ id iControllerRef = nil;
     iControllerRef = self;
 
     // retrieve the wallets from the server and put them in the two member arrays
-    [self getWallets];
+    [self reloadWallets];
 
 	// Do any additional setup after loading the view.
 	balanceView = [BalanceView CreateWithDelegate:self];
@@ -152,13 +153,8 @@ id iControllerRef = nil;
 }
 
 // retrieves the wallets from the server and put them in the two member arrays
-- (void)getWallets
+- (void)reloadWallets
 {
-    tABC_Error Error;
-    tABC_WalletInfo **aWalletInfo = NULL;
-    unsigned int nCount;
-
-    // alloc our version of the wallets
     if (self.arrayWallets == nil) {
         self.arrayWallets = [[NSMutableArray alloc] init];
         self.arrayArchivedWallets = [[NSMutableArray alloc] init];
@@ -166,50 +162,7 @@ id iControllerRef = nil;
         [self.arrayWallets removeAllObjects];
         [self.arrayArchivedWallets removeAllObjects];
     }
-
-    ABC_GetWallets([[User Singleton].name UTF8String], 
-                   [[User Singleton].password UTF8String], 
-                   &aWalletInfo, &nCount, &Error);
-    unsigned int i;
-    for (i = 0; i < nCount; ++i) {
-        Wallet *wallet;
-        NSMutableArray *arrayTransactions;
-        Transaction *transaction;
-        tABC_WalletInfo *pWalletInfo = aWalletInfo[i];
-
-        wallet = [[Wallet alloc] init];
-        wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
-        wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
-        wallet.attributes = 0;
-        wallet.balance = pWalletInfo->balanceSatoshi;
-        wallet.currencyNum = pWalletInfo->currencyNum;
-        [self.arrayWallets addObject:wallet];
-
-        unsigned int tCount = 0;
-        tABC_TxInfo **aTransactions = NULL;
-        ABC_GetTransactions([[User Singleton].name UTF8String],
-                            [[User Singleton].password UTF8String],
-                            pWalletInfo->szUUID, &aTransactions,
-                            &tCount, &Error);
-        arrayTransactions = [[NSMutableArray alloc] init];
-        for (int j = 0; i < tCount; ++j) {
-            tABC_TxInfo *pTrans = aTransactions[i];
-            transaction = [[Transaction alloc] init];
-            transaction.strID = [NSString stringWithUTF8String: pTrans->szID];
-            transaction.strName = [NSString stringWithUTF8String: pTrans->pDetails->szName];
-            transaction.date = [self dateFromTimestamp: pTrans->timeCreation];
-            // transaction.confirmations = 3;
-            // transaction.bConfirmed = NO;
-            transaction.amountSatoshi = pTrans->pDetails->amountSatoshi;
-            transaction.balance = pTrans->pDetails->amountCurrency;
-            transaction.strWalletName = wallet.strName;
-            transaction.strWalletUUID = wallet.strUUID;
-            // transaction.strAddress = @"1zf76dh4TG";
-            [arrayTransactions addObject:transaction];
-        }
-        ABC_FreeTransactions(aTransactions, tCount);
-    }
-    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+    [TransactionBridge loadWallets: self.arrayWallets archived:self.arrayArchivedWallets];
 }
 
 // creates an NSDate object given a string with mm/dd/yyyy
@@ -598,7 +551,6 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//NSLog(@"Selected row %i", indexPath.row);
 	if(indexPath.section == 0)
 	{
 		[self launchTransactionsWithWallet:[self.arrayWallets objectAtIndex:indexPath.row]];
@@ -629,14 +581,12 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 
 void ABC_WalletCreate_Callback(const tABC_RequestResults *pResults)
 {
-    NSLog(@"Got here 1\n");
     [iControllerRef updateDisplay];
 }
 
 -(void)updateDisplay
 {
-    NSLog(@"Got here 2\n");
-    [self getWallets];
+    [self reloadWallets];
     [self.walletsTable reloadData];
 }
 
