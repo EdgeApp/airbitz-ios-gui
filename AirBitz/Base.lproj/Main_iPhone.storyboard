@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -1186,8 +1186,12 @@
                     <connections>
                         <outlet property="addressLabel" destination="4Li-R2-dUi" id="Ptt-kM-ccT"/>
                         <outlet property="amountLabel" destination="2FV-6E-gId" id="TuK-CX-L2B"/>
+                        <outlet property="buttonCancel" destination="810-FP-oTH" id="Igh-8p-sn2"/>
+                        <outlet property="buttonCopyAddress" destination="Qov-uI-G7t" id="Zp6-bx-jv8"/>
+                        <outlet property="imageBottomFrame" destination="dAj-d5-4ff" id="ec3-Mm-4p4"/>
                         <outlet property="qrCodeImageView" destination="0A5-KU-hj2" id="g0D-Lx-S59"/>
                         <outlet property="statusLabel" destination="O1G-gR-pT0" id="D6E-8w-Iqx"/>
+                        <outlet property="viewQRCodeFrame" destination="x8L-0b-Hbe" id="CNC-j6-IvN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKP-kx-08U" userLabel="First Responder" sceneMemberID="firstResponder"/>
