@@ -2289,7 +2289,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirBitz/AirBitz-Prefix.pch";
 				INFOPLIST_FILE = "AirBitz/AirBitz-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./AirBitz/DL_URLServer,
@@ -2313,7 +2313,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirBitz/AirBitz-Prefix.pch";
 				INFOPLIST_FILE = "AirBitz/AirBitz-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./AirBitz/DL_URLServer,
