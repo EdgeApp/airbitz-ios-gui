@@ -12,10 +12,10 @@
 
 @interface ButtonSelectorView () <UITableViewDataSource, UITableViewDelegate>
 {
-	CGRect originalButtonFrame;
-	UITableView *selectionTable;
-	CGRect originalFrame;
-	float amountToGrow;
+	CGRect      _originalButtonFrame;
+	UITableView *_selectionTable;
+	CGRect      _originalFrame;
+	float       _amountToGrow;
 }
 
 @end
@@ -32,7 +32,7 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder]))
 	{
@@ -43,22 +43,22 @@
 		[self.button setBackgroundImage:blue_button_image forState:UIControlStateSelected];
         [self addSubview:view];
 		
-		originalButtonFrame = self.button.frame;
-		originalFrame = self.frame;
+		_originalButtonFrame = self.button.frame;
+		_originalFrame = self.frame;
 		//cw temp
 		//self.arrayItemsToSelect = [NSArray arrayWithObjects:@"item 1", @"item 2", @"item 3", @"item 4", @"item 5", @"item 6", @"item 7", @"item 8", @"item 9", @"item 10", @"item 11", @"item 12" , nil];
     }
     return self;
 }
 
--(UIImage *)stretchableImage:(NSString *)imageName
+- (UIImage *)stretchableImage:(NSString *)imageName
 {
 	UIImage *img = [UIImage imageNamed:imageName];
 	UIImage *stretchable = [img resizableImageWithCapInsets:UIEdgeInsetsMake(28, 28, 28, 28)]; //top, left, bottom, right
 	return stretchable;
 }
 
--(void)close
+- (void)close
 {
 	if(self.button.selected)
 	{
@@ -66,7 +66,7 @@
 	}
 }
 
--(IBAction)ButtonPressed
+- (IBAction)ButtonPressed
 {
 	if(self.button.selected)
 	{
@@ -74,6 +74,9 @@
 	}
 	else
 	{
+        _originalButtonFrame = self.button.frame;
+        _originalFrame = self.frame;
+
 		//animate button width (wider)
 		self.button.selected = YES;
 		[UIView animateWithDuration:0.5
@@ -96,7 +99,7 @@
 	}
 }
 
--(void)showTable
+- (void)showTable
 {
 	float yOriginOffset = self.button.frame.size.height / 2;
 	
@@ -106,14 +109,14 @@
 	tableFrame.origin.y += yOriginOffset;
 	tableFrame.size.height = 0.0;
 	
-	selectionTable = [[UITableView alloc] initWithFrame:tableFrame];
-	selectionTable.delegate = self;
-	selectionTable.dataSource = self;
-	selectionTable.layer.cornerRadius = 6.0;
-	selectionTable.scrollEnabled = YES;
-	selectionTable.allowsSelection = YES;
-	selectionTable.userInteractionEnabled = YES;
-	[self.button.superview insertSubview:selectionTable belowSubview:self.button];
+	_selectionTable = [[UITableView alloc] initWithFrame:tableFrame];
+	_selectionTable.delegate = self;
+	_selectionTable.dataSource = self;
+	_selectionTable.layer.cornerRadius = 6.0;
+	_selectionTable.scrollEnabled = YES;
+	_selectionTable.allowsSelection = YES;
+	_selectionTable.userInteractionEnabled = YES;
+	[self.button.superview insertSubview:_selectionTable belowSubview:self.button];
 	
 	//make the table expand from the bottom of the button
 	[UIView animateWithDuration:0.35
@@ -122,14 +125,14 @@
 					 animations:^
 	 {
 		 
-		 CGRect frame = selectionTable.frame;
+		 CGRect frame = _selectionTable.frame;
 		 float originalHeight = frame.size.height;
 
 		 frame.size.height = self.arrayItemsToSelect.count * TABLE_ROW_HEIGHT + (self.button.frame.size.height / 2);
 		 
 		 
 		 //constrain frame to window (in cases when table has a ton of items) (centered vertically)
-		 CGRect frameInWindow = [selectionTable.superview convertRect:frame toView:self.window];
+		 CGRect frameInWindow = [_selectionTable.superview convertRect:frame toView:self.window];
 		 float highestY = self.window.frame.size.height - frameInWindow.origin.y;
 		 float diff = frameInWindow.origin.y + frameInWindow.size.height - highestY;
 		 if(diff > 0)
@@ -137,11 +140,11 @@
 			 frame.size.height -= diff;
 		 }
 		 
-		 amountToGrow = frame.size.height - originalHeight;
+		 _amountToGrow = frame.size.height - originalHeight;
 		 
-		 selectionTable.frame = frame;
+		 _selectionTable.frame = frame;
 		 
-		 CGRect myFrame = originalFrame;
+		 CGRect myFrame = _originalFrame;
 		 myFrame.size.height = frame.origin.y + frame.size.height;
 		 self.frame = myFrame;
 		 
@@ -149,13 +152,13 @@
 		 if(self.containerView)
 		 {
 			 frame = self.containerView.frame;
-			 frame.size.height += amountToGrow;
+			 frame.size.height += _amountToGrow;
 			 self.containerView.frame = frame;
 		 }
 	 }
 	 completion:^(BOOL finished)
 	 {
-		 [selectionTable reloadData];
+		 [_selectionTable reloadData];
 	 }];
 	
 }
@@ -169,16 +172,16 @@
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 CGRect frame = selectionTable.frame;
+		 CGRect frame = _selectionTable.frame;
 		 frame.size.height = 0.0;
-		 selectionTable.frame = frame;
+		 _selectionTable.frame = frame;
 		 
-		 self.frame = originalFrame;
+		 self.frame = _originalFrame;
 		 
-		 if(self.containerView)
+		 if (self.containerView)
 		 {
 			 frame = self.containerView.frame;
-			 frame.size.height -= amountToGrow;
+			 frame.size.height -= _amountToGrow;
 			 self.containerView.frame = frame;
 		 }
 		 
@@ -191,13 +194,13 @@
 							 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
 						  animations:^
 		  {
-			  self.button.frame = originalButtonFrame;
+			  self.button.frame = _originalButtonFrame;
 			  self.textLabel.alpha = 1.0;
 		  }
 						  completion:^(BOOL finished)
 		  {
-			  [selectionTable removeFromSuperview];
-			  selectionTable = nil;
+			  [_selectionTable removeFromSuperview];
+			  _selectionTable = nil;
 		  }];
 
 	 }];
