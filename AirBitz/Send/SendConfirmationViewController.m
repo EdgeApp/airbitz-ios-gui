@@ -329,7 +329,7 @@
 	frame.origin.x = frame.size.width;
 	transactionDetailsController.view.frame = frame;
 	
-	transactionDetailsController.nameLabel.text = self.nameLabel;
+	//transactionDetailsController.nameLabel.text = self.nameLabel;
 	transactionDetailsController.transactionDetailsMode = TD_MODE_SENT;
 	
 	[self.view addSubview:transactionDetailsController.view];
