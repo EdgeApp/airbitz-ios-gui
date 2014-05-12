@@ -16,6 +16,8 @@
 @property (nonatomic, weak) IBOutlet PickerTextView *pickerTextView;
 
 @property (assign) id<CategoriesCellDelegate> delegate;
+@property (nonatomic, assign) NSInteger       pickerMaxChoicesVisible;
+
 @end
 
 
@@ -25,10 +27,12 @@
 
 @optional
 
+- (BOOL)categoriesCellTextShouldChange:(CategoriesCell *)cell charactersInRange:(NSRange)range replacementString:(NSString *)string;
+- (void)categoriesCellTextDidChange:(CategoriesCell *)cell;
 - (void)categoriesCellBeganEditing:(CategoriesCell *)cell;
 - (void)categoriesCellEndEditing:(CategoriesCell *)cell;
-- (void)categoriesCellTextDidChange:(CategoriesCell *)cell;
-- (void)categoriesCellTextDidReturn:(CategoriesCell *)cell;
+- (BOOL)categoriesCellTextShouldReturn:(CategoriesCell *)cell;
+- (void)categoriesCellPopupSelected:(CategoriesCell *)cell onRow:(NSInteger)row;
 - (void)categoriesCellDeleteTouched:(CategoriesCell *)cell;
 
 @end

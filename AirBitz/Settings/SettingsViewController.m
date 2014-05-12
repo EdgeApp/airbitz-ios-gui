@@ -1346,7 +1346,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 #pragma mark - Popup Picker Delegate Methods
 
-- (void)PopupPickerViewExit:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
+- (void)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
 {
     UITableViewCell *cell = (UITableViewCell *)data;
     NSInteger sectionCell = (cell.tag >> 8);

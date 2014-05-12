@@ -8,7 +8,7 @@
 
 #import "CategoriesCell.h"
 
-@interface CategoriesCell () <UITextFieldDelegate>
+@interface CategoriesCell () <PickerTextViewDelegate>
 
 {
 }
@@ -33,13 +33,8 @@
 	self.backgroundColor = [UIColor clearColor];
 	self.selectedBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
-	
-	self.pickerTextView.textField.delegate = self;
 
-    // Add a "textFieldDidChange" notification method to the text field control.
-    [self.pickerTextView.textField addTarget:self
-                                      action:@selector(textFieldDidChange:)
-                            forControlEvents:UIControlEventEditingChanged];
+	self.pickerTextView.delegate = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -47,6 +42,12 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setPickerMaxChoicesVisible:(NSInteger)pickerMaxChoicesVisible
+{
+    _pickerMaxChoicesVisible = pickerMaxChoicesVisible;
+    self.pickerTextView.pickerMaxChoicesVisible = _pickerMaxChoicesVisible;
 }
 
 #pragma mark - Action Methods
@@ -59,9 +60,22 @@
 	}
 }
 
-#pragma mark - UITextField delegates
+#pragma mark - PickerTextView Delegates
 
-- (void)textFieldDidChange:(UITextField *)textField
+- (BOOL)pickerTextViewFieldShouldChange:(PickerTextView *)pickerTextView charactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (nil != self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(categoriesCellTextShouldChange:charactersInRange:replacementString:)])
+        {
+            return [self.delegate categoriesCellTextShouldChange:self charactersInRange:range replacementString:string];
+        }
+    }
+
+    return YES;
+}
+
+- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
 {
 	if ([self.delegate respondsToSelector:@selector(categoriesCellTextDidChange:)])
 	{
@@ -69,7 +83,7 @@
 	}
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
 {
 	if ([self.delegate respondsToSelector:@selector(categoriesCellBeganEditing:)])
 	{
@@ -77,7 +91,7 @@
 	}
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
 {
 	if ([self.delegate respondsToSelector:@selector(categoriesCellEndEditing:)])
 	{
@@ -85,15 +99,43 @@
 	}
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
 {
-	[textField resignFirstResponder];
+    if (nil != self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(categoriesCellTextShouldReturn:)])
+        {
+            return [self.delegate categoriesCellTextShouldReturn:self];
+        }
+    }
 
-    if ([self.delegate respondsToSelector:@selector(categoriesCellTextDidReturn:)])
-	{
-		[self.delegate categoriesCellTextDidReturn:self];
-	}
+    if (pickerTextView.textField.returnKeyType == UIReturnKeyDone)
+    {
+        [pickerTextView.textField resignFirstResponder];
+    }
 
 	return YES;
 }
+
+- (void)pickerTextViewPopupSelected:(PickerTextView *)view onRow:(NSInteger)row
+{
+    BOOL bHandled = NO;
+
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(categoriesCellPopupSelected: onRow:)])
+        {
+            [self.delegate categoriesCellPopupSelected:self onRow:row];
+            bHandled = YES;
+        }
+    }
+
+    // if it wasn't handled by our delegate
+    if (bHandled == NO)
+    {
+        // set the text field to the choice
+        view.textField.text = [view.arrayChoices objectAtIndex:row];
+    }
+}
+
 @end

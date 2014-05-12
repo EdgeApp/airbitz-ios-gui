@@ -9,10 +9,16 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PickerTextView.h"
 
-@interface PickerTextView () <UITextFieldDelegate>
-{
+#define PICKER_MAX_CELLS_VISIBLE        3
+#define PICKER_WIDTH                    320
+#define PICKER_CELL_HEIGHT              44
 
+@interface PickerTextView () <UITextFieldDelegate, PopupPickerViewDelegate>
+{
+    UIView *_viewTop;
 }
+
+
 
 @end
 
@@ -46,6 +52,27 @@
 
 #pragma mark - Public Methods
 
+- (void)setTextFieldObject:(UITextField *)newTextField
+{
+    self.textField = newTextField;
+
+    [self configTextField];
+}
+
+- (void)setTopMostView:(UIView *)topMostView
+{
+    _viewTop = topMostView;
+}
+
+- (void)updateChoices:(NSArray *)arrayChoices;
+{
+    self.arrayChoices = arrayChoices;
+    [self.popupPicker updateStrings:self.arrayChoices];
+}
+
+#pragma mark - Action Methods
+
+
 #pragma mark - Misc Methods
 
 - (void)initMyVariables
@@ -56,7 +83,150 @@
     frame.origin.y = 0;
     self.textField = [[UITextField alloc] initWithFrame:frame];
     [self addSubview:self.textField];
+
+    self.popupPickerPosition = PopupPickerPosition_Below;
+    self.popupPicker = nil;
+
+    self.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
+    self.pickerWidth = PICKER_WIDTH;
+    self.pickerCellHeight = PICKER_CELL_HEIGHT;
+
+    _viewTop = [self superview];
+
+    [self configTextField];
 }
 
+- (void)configTextField
+{
+    self.textField.delegate = self;
+
+    // get a callback when there are changes
+    [self.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+}
+
+- (void)dismissPopupPicker
+{
+    if (self.popupPicker)
+    {
+        [self.popupPicker removeFromSuperview];
+        self.popupPicker = nil;
+    }
+}
+
+- (void)createPopupPicker
+{
+    self.popupPicker = [PopupPickerView CreateForView:_viewTop
+                                      relativeToFrame:self.textField.frame
+                                         viewForFrame:self
+                                         withPosition:self.popupPickerPosition
+                                          withStrings:self.arrayChoices
+                                          selectedRow:-1
+                                      maxCellsVisible:_pickerMaxChoicesVisible
+                                            withWidth:_pickerWidth
+                                        andCellHeight:_pickerCellHeight
+                        ];
+    [self.popupPicker disableBackgroundTouchDetect];
+    [self.popupPicker assignDelegate:self];
+}
+
+#pragma mark - UITextField delegates
+
+- (BOOL)textField:(UITextField *)theTextField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (nil != self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(pickerTextViewFieldShouldChange:charactersInRange:replacementString:)])
+        {
+            return [self.delegate pickerTextViewFieldShouldChange:self charactersInRange:range replacementString:string];
+        }
+    }
+
+    return YES;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if (nil != self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(pickerTextViewFieldDidChange:)])
+        {
+            [self.delegate pickerTextViewFieldDidChange:self];
+        }
+    }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (nil != self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(pickerTextViewFieldDidBeginEditing:)])
+        {
+            [self.delegate pickerTextViewFieldDidBeginEditing:self];
+        }
+    }
+
+    [self createPopupPicker];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (nil != self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(pickerTextViewFieldDidEndEditing:)])
+        {
+            [self.delegate pickerTextViewFieldDidEndEditing:self];
+        }
+    }
+
+    [self dismissPopupPicker];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (nil != self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(pickerTextViewFieldShouldReturn:)])
+        {
+            return [self.delegate pickerTextViewFieldShouldReturn:self];
+        }
+    }
+
+    if (self.textField.returnKeyType == UIReturnKeyDone)
+    {
+        [textField resignFirstResponder];
+    }
+
+	return YES;
+}
+
+#pragma mark - Popup Picker Delegate Methods
+
+- (void)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
+{
+    BOOL bHandled = NO;
+
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(pickerTextViewPopupSelected: onRow:)])
+        {
+            [self.delegate pickerTextViewPopupSelected:self onRow:row];
+            bHandled = YES;
+        }
+    }
+
+    // if it wasn't handled by our delegate
+    if (bHandled == NO)
+    {
+        // set the text field to the choice
+        self.textField.text = [self.arrayChoices objectAtIndex:row];
+    }
+
+    //[self dismissPopupPicker];
+}
+
+- (void)PopupPickerViewCancelled:(PopupPickerView *)view userData:(id)data
+{
+    //[self dismissPopupPicker];
+}
 
 @end

@@ -33,18 +33,14 @@ Set your `$REPO_DIR` to whatever you want.
     cd deps
     make
 
-    DITTY_PATH=/Projects/Ditty\ Labs/Clients/AirBitz/Project/AirBitz/AirBitz/ABC
-    sudo mkdir -p $DITTY_PATH
-    sudo cp prefix/arm/armv7/lib/*.a $DITTY_PATH
-
 ## Build Airbitz iOS in xcode
 
     cd $REPO_DIR
     git clone git@github.com:Airbitz/airbitz-ios-gui.git
 
-    # copy headers 
-    mkdir airbitz-ios-gui/AirBiz/ABC
-    cp $WALLET_CORE/src/*.h airbitz-ios-gui/AirBiz/ABC
+    # Copy files into project
+    cp $WALLET_CORE/deps/build/prefix/arm/armv7/lib/*.a AirBitz/ABC/
+    cp $WALLET_CORE/deps/build/prefix/arm/armv7/includes/*.h AirBitz/ABC/
 
     # Fire up in xcode
     open airbitz-ios-gui/AirBitz.xcodeproj
