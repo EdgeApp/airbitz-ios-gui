@@ -532,6 +532,18 @@
 	return YES;
 }
 
+- (void)pickerTextViewPopupSelected:(PickerTextView *)view onRow:(NSInteger)row
+{
+    // set the text field to the choice
+    self.pickerTextNew.textField.text = [self.pickerTextNew.arrayChoices objectAtIndex:row];
+
+    // check and see if there is more text than just the prefix
+    if ([ARRAY_CATEGORY_PREFIXES indexOfObject:self.pickerTextNew.textField.text] == NSNotFound)
+    {
+        [view.textField resignFirstResponder];
+    }
+}
+
 #pragma mark - CategoriesCell Delegates
 
 - (void)categoriesCellDeleteTouched:(CategoriesCell *)cell
@@ -606,6 +618,18 @@
 	[cell.pickerTextView.textField resignFirstResponder];
 
 	return YES;
+}
+
+- (void)categoriesCellPopupSelected:(CategoriesCell *)cell onRow:(NSInteger)row
+{
+    // set the text field to the choice
+    cell.pickerTextView.textField.text = [cell.pickerTextView.arrayChoices objectAtIndex:row];
+
+    // check and see if there is more text than just the prefix
+    if ([ARRAY_CATEGORY_PREFIXES indexOfObject:cell.pickerTextView.textField.text] == NSNotFound)
+    {
+        [cell.pickerTextView.textField resignFirstResponder];
+    }
 }
 
 @end

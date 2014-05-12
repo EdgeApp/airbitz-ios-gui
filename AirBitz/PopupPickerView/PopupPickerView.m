@@ -289,12 +289,12 @@
     m_viewBorder.layer.borderWidth = 1;
     m_viewBorder.layer.borderColor = [[UIColor blackColor] CGColor];
     
-	//round the corners
+	// round the corners
 	self.layer.cornerRadius = 10;
 	innerView.layer.cornerRadius = 10;
     m_viewBorder.layer.cornerRadius = 10;
 	
-	//add drop shadow
+	// add drop shadow
 	self.layer.shadowColor = [UIColor blackColor].CGColor;
     self.layer.shadowOpacity = 0.5;
     self.layer.shadowRadius = 10;
@@ -308,6 +308,9 @@
     
     // start with the options hidden
     self.showOptions = NO;
+
+    // start with default style
+    self.tableViewCellStyle = UITableViewCellStyleDefault;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -565,19 +568,24 @@
         cell = [tableView dequeueReusableCellWithIdentifier:PickerTableIdentifier];
         if (nil == cell)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PickerTableIdentifier];
-            cell.textLabel.numberOfLines = 1;
+            cell = [[UITableViewCell alloc] initWithStyle:self.tableViewCellStyle reuseIdentifier:PickerTableIdentifier];
+
         }
-        
-        cell.textLabel.text = [_strings objectAtIndex:row];
-        cell.textLabel.textColor = [UIColor blackColor];
-        
+
+        BOOL bFormatted = NO;
         if (self.delegate)
         {
             if ([self.delegate respondsToSelector:@selector(PopupPickerViewFormatCell:onRow:withCell:userData:)])
             {
-                [self.delegate PopupPickerViewFormatCell:self onRow:row withCell:cell userData:_userData];
+                bFormatted = [self.delegate PopupPickerViewFormatCell:self onRow:row withCell:cell userData:_userData];
             }
+        }
+
+        if (!bFormatted)
+        {
+            cell.textLabel.numberOfLines = 1;
+            cell.textLabel.text = [_strings objectAtIndex:row];
+            cell.textLabel.textColor = [UIColor blackColor];
         }
     }
 	
