@@ -29,6 +29,8 @@ typedef enum eAppMode
 	APP_MODE_SETTINGS
 } tAppMode;
 
+id iMainRef = nil;
+
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate, LoginViewControllerDelegate>
 {
 	UIViewController *selectedViewController;
@@ -60,10 +62,11 @@ typedef enum eAppMode
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
+    [super viewDidLoad];
+    iMainRef = self;
 
-	[User initAll];
-	
+    [User initAll];
+
     NSMutableData *seedData = [[NSMutableData alloc] init];
     [self fillSeedData:seedData];
 #if !DIRECTORY_ONLY
@@ -435,12 +438,34 @@ typedef enum eAppMode
 	[self launchViewControllerBasedOnAppMode];
 }
 
+-(void)sendReceivedNotification:(NSString *)description
+{
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    localNotif.fireDate = nil; /* Fire meow! */
+    localNotif.alertBody = description;
+    localNotif.alertAction = NSLocalizedString(@"View Details", nil);
+    localNotif.soundName = UILocalNotificationDefaultSoundName;
+    localNotif.applicationIconBadgeNumber = 0;
+
+    // NSDictionary *infoDict = [NSDictionary dictionaryWithObject:item.eventName forKey:ToDoItemKey];
+    // localNotif.userInfo = infoDict;
+
+    NSLog(@("Scheduling local notification\n"));
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+}
+
 #pragma mark - ABC Callbacks
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
-	//two members in pInfo that are strings.  They will get freed by the core as soon as we exit this function
     NSLog(@"Async BitCoin event: %s", pInfo->szDescription);
+    if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin)
+    {
+        NSLog(@"Got here11111");
+        [iMainRef sendReceivedNotification: [NSString stringWithUTF8String: pInfo->szDescription]];
+    }
 }
 
 @end
