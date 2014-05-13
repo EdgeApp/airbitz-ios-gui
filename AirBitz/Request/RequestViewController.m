@@ -28,10 +28,10 @@
 
 @interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, ShowWalletQRViewControllerDelegate>
 {
-	UITextField *selectedTextField;
-	int selectedWalletIndex;
-	NSString *selectedWalletUUID;
-	ShowWalletQRViewController *qrViewController;
+	UITextField                 *selectedTextField;
+	int                         selectedWalletIndex;
+	NSString                    *selectedWalletUUID;
+	ShowWalletQRViewController  *qrViewController;
 }
 
 @property (nonatomic, weak) IBOutlet CalculatorView *keypadView;
@@ -99,9 +99,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
--(const char *)createReceiveRequest
+- (const char *)createReceiveRequest
 {
 	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
 	
@@ -119,7 +117,7 @@
 	
 	#warning TODO:  hard coded to DOLLAR right now
 	result = ABC_SatoshiToCurrency(details.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-	if(result == ABC_CC_Ok)
+	if (result == ABC_CC_Ok)
 	{
 		details.amountCurrency = currency;
 	}
@@ -130,14 +128,21 @@
                             &pAccountSettings,
                             &error);
 	
-	if(pAccountSettings->bNameOnPayments)
+	if (pAccountSettings->bNameOnPayments)
 	{
-		details.szName = pAccountSettings->szNickname;
+        if (pAccountSettings->szNickname)
+        {
+            details.szName = pAccountSettings->szNickname;
+        }
+        else
+        {
+            details.szName = "";
+        }
 	}
 	else
 	{
 		//cw should we change details.szName to a const char * (to fix warning)?
-		details.szName = [NSLocalizedString(@"Anonymous", @"Name on payment") UTF8String];
+		details.szName = (char *)[NSLocalizedString(@"Anonymous", @"Name on payment") UTF8String];
 	}
 	
 	#warning TODO: Need to set up category for this transaction
@@ -147,22 +152,24 @@
 	details.szNotes = "";
 	
 	details.attributes = 0x0; //for our own use (not used by the core)
-	
-	if(pAccountSettings)
+
+	char *pRequestID;
+
+    // create the request
+	result = ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
+                                      [[User Singleton].password UTF8String],
+                                      [selectedWalletUUID UTF8String],
+                                      &details,
+                                      &pRequestID,
+                                      &error);
+
+    // free the account setting structure we obtained
+	if (pAccountSettings)
 	{
 		ABC_FreeAccountSettings(pAccountSettings);
 	}
-	
-	char *pRequestID;
-	
-	result = ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
-											  [[User Singleton].password UTF8String],
-                                     [selectedWalletUUID UTF8String],
-                                     &details,
-                                     &pRequestID,
-                                     &error);
-				
-	if(result == ABC_CC_Ok)
+
+	if (result == ABC_CC_Ok)
 	{
 		return pRequestID;
 	}
@@ -172,7 +179,7 @@
 	}
 }
 
--(UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height
+- (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height
 {
 	//converts raw monochrome bitmap data (each byte is a 1 or a 0 representing a pixel) into a UIImage
 	char *pixels = malloc(4 * width * width);
@@ -252,27 +259,27 @@
 
 #pragma mark Actions
 
--(IBAction)info
+- (IBAction)info
 {
 	[self.view endEditing:YES];
 }
 
--(IBAction)ImportWallet
+- (IBAction)ImportWallet
 {
 	[self.view endEditing:YES];
 }
 
--(IBAction)email
+- (IBAction)email
 {
 	[self.view endEditing:YES];
 }
 
--(IBAction)SMS
+- (IBAction)SMS
 {
 	[self.view endEditing:YES];
 }
 
--(IBAction)QRCodeButton
+- (IBAction)QRCodeButton
 {
 	unsigned int width = 0;
     unsigned char *pData = NULL;
@@ -332,18 +339,18 @@
 
 #pragma mark calculator delegates
 
--(void)CalculatorDone:(CalculatorView *)calculator
+- (void)CalculatorDone:(CalculatorView *)calculator
 {
 	[self.BTC_TextField resignFirstResponder];
 	[self.USD_TextField resignFirstResponder];
 }
 
--(void)CalculatorValueChanged:(CalculatorView *)calculator
+- (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
 	[self updateTextFieldContents];
 }
 
--(void)updateTextFieldContents
+- (void)updateTextFieldContents
 {
 	if(selectedTextField == self.BTC_TextField)
 	{
@@ -391,7 +398,7 @@
     }
 }
 
--(void)setWalletButtonTitle
+- (void)setWalletButtonTitle
 {
 	tABC_WalletInfo **aWalletInfo = NULL;
     unsigned int nCount;
@@ -434,14 +441,14 @@
 
 
 #pragma mark ButtonSelectorView delegates
--(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
 	NSLog(@"Selected item %i", itemIndex);
 }
 
 #pragma mark ShowWalletQRViewController delegates
 
--(void)ShowWalletQRViewControllerDone:(ShowWalletQRViewController *)controller
+- (void)ShowWalletQRViewControllerDone:(ShowWalletQRViewController *)controller
 {
 	[controller.view removeFromSuperview];
 	qrViewController = nil;
