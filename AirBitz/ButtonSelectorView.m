@@ -60,7 +60,7 @@
 
 - (void)close
 {
-	if(self.button.selected)
+	if (self.button.selected)
 	{
 		[self hideTable];
 	}
@@ -68,12 +68,20 @@
 
 - (IBAction)ButtonPressed
 {
-	if(self.button.selected)
+	if (self.button.selected)
 	{
-		[self hideTable];
-	}
-	else
-	{
+        [self hideTable];
+    }
+    else
+    {
+        if (self.delegate)
+        {
+            if ([self.delegate respondsToSelector:@selector(ButtonSelectorWillShowTable:)])
+            {
+                [self.delegate ButtonSelectorWillShowTable:self];
+            }
+        }
+
         _originalButtonFrame = self.button.frame;
         _originalFrame = self.frame;
 
@@ -163,8 +171,16 @@
 	
 }
 
--(void)hideTable
+- (void)hideTable
 {
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(ButtonSelectorWillHideTable:)])
+        {
+            [self.delegate ButtonSelectorWillHideTable:self];
+        }
+    }
+
 	//shrink the table up under the button, then animate the button back to original size
 	self.button.selected = NO;
 	[UIView animateWithDuration:0.35
@@ -257,7 +273,7 @@
 {
 	[self hideTable];
 	
-	if([self.delegate respondsToSelector:@selector(ButtonSelector:willSetButtonTextToString:)])
+	if ([self.delegate respondsToSelector:@selector(ButtonSelector:willSetButtonTextToString:)])
 	{
 		NSString *desiredString = [self.arrayItemsToSelect objectAtIndex:indexPath.row ];
 		
@@ -267,6 +283,14 @@
 	{
 		[self.button setTitle:[self.arrayItemsToSelect objectAtIndex:indexPath.row ] forState:UIControlStateNormal];
 	}
+
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(ButtonSelector:selectedItem:)])
+        {
+            [self.delegate ButtonSelector:self selectedItem:indexPath.row];
+        }
+    }
 }
 
 @end

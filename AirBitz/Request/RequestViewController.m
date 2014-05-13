@@ -14,6 +14,7 @@
 #import "ABC.h"
 #import "User.h"
 #import "ShowWalletQRViewController.h"
+#import "CommonTypes.h"
 
 #define OPERATION_CLEAR		0
 #define OPERATION_BACK		1
@@ -24,8 +25,6 @@
 #define OPERATION_MULTIPLY	6
 #define OPERATION_PLUS		7
 #define OPERATION_PERCENT	8
-
-#define DOLLAR_CURRENCY_NUM	840
 
 @interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, ShowWalletQRViewControllerDelegate>
 {

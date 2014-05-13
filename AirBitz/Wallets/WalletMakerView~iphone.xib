@@ -12,6 +12,7 @@
                 <outlet property="labelOnline" destination="cuy-dv-38c" id="0rn-TF-mrd"/>
                 <outlet property="switchOnlineOffline" destination="yNW-iH-wHJ" id="MiJ-eS-X4S"/>
                 <outlet property="textField" destination="61J-35-M5b" id="4G4-Z1-tZd"/>
+                <outlet property="viewBlocker" destination="BKH-EF-tFM" id="48t-UO-cTs"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -88,6 +89,17 @@
                     <connections>
                         <outlet property="containerView" destination="-1" id="Lmg-VI-Thb"/>
                     </connections>
+                </view>
+                <view hidden="YES" alpha="0.74999999999999978" contentMode="scaleToFill" id="BKH-EF-tFM" userLabel="View - blocker">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="196"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="eUt-LF-9ma">
+                            <rect key="frame" x="142" y="79" width="37" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.47450980390000003" blue="0.72549019609999998" alpha="1" colorSpace="deviceRGB"/>
