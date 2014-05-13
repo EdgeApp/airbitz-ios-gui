@@ -189,13 +189,12 @@ id iControllerRef = nil;
 	}
 	
     double totalBitcoin = ABC_SatoshiToBitcoin(totalSatoshi);
-	balanceView.topAmount.text = [NSString stringWithFormat:@"B %.2f", totalBitcoin];
+	balanceView.topAmount.text = [TransactionBridge formatBitcoin: totalBitcoin];
 	
 	double currency;
 	tABC_Error error;
-	
 	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-	balanceView.botAmount.text = [NSString stringWithFormat:@"$ %.2f", currency];
+    balanceView.botAmount.text = [TransactionBridge formatCurrency: currency];
 	[balanceView refresh];
 }
 
@@ -268,11 +267,11 @@ id iControllerRef = nil;
 		tABC_Error error;
 		
 		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-		return [NSString stringWithFormat:@"$ %.2f", currency];
+		return [TransactionBridge formatCurrency: currency];
 	}
 	else
 	{
-		return [NSString stringWithFormat:@"B %.2f", bitcoin];
+		return [TransactionBridge formatBitcoin: bitcoin];
 	}
 }
 

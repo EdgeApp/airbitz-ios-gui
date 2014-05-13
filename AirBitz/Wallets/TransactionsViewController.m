@@ -73,13 +73,14 @@
 	}
 	
     double totalBitcoin = ABC_SatoshiToBitcoin(totalSatoshi);
-	balanceView.topAmount.text = [NSString stringWithFormat:@"B %.2f", totalBitcoin];
+	balanceView.topAmount.text = [TransactionBridge formatBitcoin: totalBitcoin];
 	
 	double currency;
 	tABC_Error error;
 	
 	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-	balanceView.botAmount.text = [NSString stringWithFormat:@"$ %.2f", currency];
+    balanceView.botAmount.text = [TransactionBridge formatCurrency: currency];
+
 	[balanceView refresh];
 }
 
@@ -103,11 +104,11 @@
 		tABC_Error error;
 		
 		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-		return [NSString stringWithFormat:@"$ %.2f", currency];
+		return [TransactionBridge formatCurrency:currency];
 	}
 	else
 	{
-		return [NSString stringWithFormat:@"B %.2f", bitcoin];
+		return [TransactionBridge formatBitcoin:bitcoin];
 	}
 }
 
@@ -161,6 +162,7 @@
 {
     [TransactionBridge reloadWallet: self.wallet];
     [self.tableView reloadData];
+    [self checkSearchArray];
 	[self dismissTransactionDetails];
 }
 
@@ -299,7 +301,12 @@
 
 -(void)searchTextFieldChanged:(UITextField *)textField
 {
-    NSString *search = textField.text;
+    [self checkSearchArray];
+}
+
+-(void)checkSearchArray
+{
+    NSString *search = self.searchTextField.text;
     if (search != NULL && search.length > 0)
     {
         if (self.arraySearchTransactions)
@@ -310,7 +317,7 @@
         {
             self.arraySearchTransactions = [[NSMutableArray alloc] init];
         }
-        [TransactionBridge searchTransactionsIn:self.wallet query:textField.text addTo:self.arraySearchTransactions];
+        [TransactionBridge searchTransactionsIn:self.wallet query:search addTo:self.arraySearchTransactions];
         [self.tableView reloadData];
     }
     else if (![self searchEnabled])

@@ -154,4 +154,20 @@
     return [NSDate dateWithTimeIntervalSince1970: intDate];
 }
 
++ (NSString *)formatCurrency: (double) currency
+{
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle: NSNumberFormatterCurrencyStyle];
+    [f setCurrencySymbol:@""];
+    return [f stringFromNumber:[NSNumber numberWithFloat:currency]];
+}
+
++ (NSString *)formatBitcoin: (double) bitcoin
+{
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle: NSNumberFormatterCurrencyStyle];
+    [f setCurrencySymbol:@""];
+    return [f stringFromNumber:[NSNumber numberWithFloat:bitcoin]];
+}
+
 @end
