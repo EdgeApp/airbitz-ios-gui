@@ -239,15 +239,6 @@ id iControllerRef = nil;
 		 }
          completion:^(BOOL finished)
 		 {
-             tABC_Error Error;
-             ABC_CreateWallet([[User Singleton].name UTF8String],
-                              [[User Singleton].password UTF8String], 
-                              [[self.walletMakerView textField].text UTF8String],
-                              840, // currency num
-                              0, // attributes
-                              ABC_WalletCreate_Callback,
-                              NULL,
-                              &Error);
 			 self.walletMakerView.hidden = YES;
 		 }];
 	}
@@ -574,19 +565,6 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[self hideWalletMaker];
 	[self removeBlockingButton];
-}
-
-#pragma mark Callbacks
-
-void ABC_WalletCreate_Callback(const tABC_RequestResults *pResults)
-{
-    [iControllerRef updateDisplay];
-}
-
--(void)updateDisplay
-{
-    [self reloadWallets];
-    [self.walletsTable reloadData];
 }
 
 @end
