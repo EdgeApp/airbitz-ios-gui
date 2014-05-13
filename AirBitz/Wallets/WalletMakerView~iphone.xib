@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletMakerView">
             <connections>
                 <outlet property="buttonSelectorView" destination="nZC-1B-QJw" id="nSP-C5-BFh"/>
+                <outlet property="imageEditBox" destination="31R-cB-dYy" id="XVz-Re-JIg"/>
                 <outlet property="labelOffline" destination="s0h-By-bTa" id="ZYV-XE-CxO"/>
                 <outlet property="labelOnline" destination="cuy-dv-38c" id="0rn-TF-mrd"/>
                 <outlet property="switchOnlineOffline" destination="yNW-iH-wHJ" id="MiJ-eS-X4S"/>

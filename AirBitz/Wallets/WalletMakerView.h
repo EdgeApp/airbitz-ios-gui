@@ -29,6 +29,7 @@
 @optional
 
 - (void)walletMakerViewExit:(WalletMakerView *)walletMakerView;
+- (void)walletMakerViewExitOffline:(WalletMakerView *)walletMakerView;
 
 
 @end
