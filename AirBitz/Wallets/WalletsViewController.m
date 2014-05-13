@@ -181,19 +181,20 @@ id iControllerRef = nil;
 
 -(void)updateBalanceView
 {
-	double totalBitcoin = 0;
+	int64_t totalSatoshi = 0.0;
 	
 	for(Wallet * wallet in self.arrayWallets)
 	{
-		totalBitcoin += wallet.balance;
+		totalSatoshi += wallet.balance;
 	}
 	
+    double totalBitcoin = ABC_SatoshiToBitcoin(totalSatoshi);
 	balanceView.topAmount.text = [NSString stringWithFormat:@"B %.2f", totalBitcoin];
 	
 	double currency;
 	tABC_Error error;
 	
-	ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(totalBitcoin), &currency, DOLLAR_CURRENCY_NUM, &error);
+	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 	balanceView.botAmount.text = [NSString stringWithFormat:@"$ %.2f", currency];
 	[balanceView refresh];
 }
@@ -258,21 +259,20 @@ id iControllerRef = nil;
 }
 
 //note this method duplicated in TransactionsViewController
-- (NSString *)conversion:(double)bitCoin
+-(NSString *)conversion:(double)satoshi
 {
-	if(balanceState == BALANCE_VIEW_DOWN)
+    double bitcoin = ABC_SatoshiToBitcoin(satoshi);
+	if (balanceState == BALANCE_VIEW_DOWN)
 	{
-		//dollars
 		double currency;
 		tABC_Error error;
 		
-		ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(bitCoin), &currency, DOLLAR_CURRENCY_NUM, &error);
+		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 		return [NSString stringWithFormat:@"$ %.2f", currency];
 	}
 	else
 	{
-		//bitcoin
-		return [NSString stringWithFormat:@"B %.2f", bitCoin];
+		return [NSString stringWithFormat:@"B %.2f", bitcoin];
 	}
 }
 

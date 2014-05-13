@@ -58,10 +58,34 @@
 	[self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+	[self updateBalanceView];
+}
+
+-(void)updateBalanceView
+{
+	int64_t totalSatoshi = 0.0;
+	
+	for(Transaction * tx in self.wallet.arrayTransactions)
+	{
+		totalSatoshi += tx.amountSatoshi;
+	}
+	
+    double totalBitcoin = ABC_SatoshiToBitcoin(totalSatoshi);
+	balanceView.topAmount.text = [NSString stringWithFormat:@"B %.2f", totalBitcoin];
+	
+	double currency;
+	tABC_Error error;
+	
+	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+	balanceView.botAmount.text = [NSString stringWithFormat:@"$ %.2f", currency];
+	[balanceView refresh];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(IBAction)Done
@@ -72,9 +96,9 @@
 //note this method duplicated in WalletsViewController
 -(NSString *)conversion:(int64_t)satoshi
 {
-	if(balanceState == BALANCE_VIEW_DOWN)
+    double bitcoin = ABC_SatoshiToBitcoin(satoshi);
+	if (balanceState == BALANCE_VIEW_DOWN)
 	{
-		//dollars
 		double currency;
 		tABC_Error error;
 		
@@ -83,8 +107,7 @@
 	}
 	else
 	{
-		//bitcoin
-		return [NSString stringWithFormat:@"B %.2f", ABC_SatoshiToBitcoin(satoshi)];
+		return [NSString stringWithFormat:@"B %.2f", bitcoin];
 	}
 }
 
