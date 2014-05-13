@@ -1356,7 +1356,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" id="Bzx-4y-6VM" customClass="WalletMakerView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="90"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="196"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>

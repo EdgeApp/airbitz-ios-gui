@@ -18,7 +18,7 @@
 
 #define DOLLAR_CURRENCY_NUM	840
 
-@interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate>
+@interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletMakerViewDelegate>
 {
 	BalanceView *balanceView;
 	TransactionsViewController *transactionsController;
@@ -77,11 +77,10 @@
 	frame.size.height = 0;
 	self.walletMakerView.frame = frame;
 	self.walletMakerView.hidden = YES;
-	self.walletMakerView.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
-	[self.walletMakerView.buttonSelectorView.button setTitle:@"USD" forState:UIControlStateNormal];
+    self.walletMakerView.delegate = self;
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
 	[self updateBalanceView];
 	
@@ -131,9 +130,8 @@
 	
 }
 
--(void)removeBlockingButton
+- (void)removeBlockingButton
 {
-	[self.walletMakerView.textField resignFirstResponder];
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveLinear
@@ -148,10 +146,9 @@
 	 }];
 }
 
--(void)blockingButtonHit:(UIButton *)button
+- (void)blockingButtonHit:(UIButton *)button
 {
-	[self hideWalletMaker];
-	[self removeBlockingButton];
+    [self.walletMakerView exit];
 }
 
 // retrieves the wallets from the server and put them in the two member arrays
@@ -446,8 +443,9 @@
 
 -(IBAction)addWallet
 {
-	if(walletMakerVisible == NO)
+	if (walletMakerVisible == NO)
 	{
+        [self.walletMakerView reset];
 		walletMakerVisible = YES;
 		self.walletMakerView.hidden = NO;
 		[[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
@@ -471,7 +469,7 @@
 	if(walletMakerVisible == YES)
 	{
 		walletMakerVisible = NO;
-		[self.walletMakerView.buttonSelectorView close];
+
 		
 		CGRect frame = self.walletMakerView.frame;
 		frame.size.height = 0;
@@ -489,12 +487,12 @@
 	}
 }
 
--(IBAction)info
+- (IBAction)info
 {
 }
 
 //note this method duplicated in TransactionsViewController
--(NSString *)conversion:(double)bitCoin
+- (NSString *)conversion:(double)bitCoin
 {
 	if(balanceState == BALANCE_VIEW_DOWN)
 	{
@@ -512,7 +510,7 @@
 	}
 }
 
--(IBAction)ExpandCollapseArchive:(UIButton *)sender
+- (IBAction)ExpandCollapseArchive:(UIButton *)sender
 {
 	if(archiveCollapsed)
 	{
@@ -569,9 +567,9 @@
 	}
 }
 
-#pragma mark Segue
+#pragma mark - Segue
 
--(void)launchTransactionsWithWallet:(Wallet *)wallet
+- (void)launchTransactionsWithWallet:(Wallet *)wallet
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	transactionsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
@@ -615,14 +613,14 @@
 	 }];
 }
 
-#pragma mark TransactionsViewControllerDelegates
+#pragma mark - TransactionsViewControllerDelegates
 
 -(void)TransactionsViewControllerDone:(TransactionsViewController *)controller
 {
 	[self dismissTransactions];
 }
 
-#pragma mark UITableView delegates
+#pragma mark - UITableView delegates
 
 
 - (BOOL)tableView:(UITableView *)tableView
@@ -798,12 +796,20 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	}
 }
 
-#pragma mark BalanceViewDelegates
+#pragma mark - BalanceView Delegates
 
 -(void)BalanceView:(BalanceView *)view changedStateTo:(tBalanceViewState)state
 {
 	balanceState = state;
 	[self.walletsTable reloadData];
+}
+
+#pragma mark - Wallet Maker View Delegates
+
+- (void)walletMakerViewExit:(WalletMakerView *)walletMakerView
+{
+	[self hideWalletMaker];
+	[self removeBlockingButton];
 }
 
 @end

@@ -36,7 +36,7 @@
     _originalFrame = self.frame;
     _bAwake = YES;
 }
-#if 1
+
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
@@ -63,7 +63,6 @@
         }
     }
 }
-#endif
 
 -(void)selectItem:(tFlashItem)flashType
 {

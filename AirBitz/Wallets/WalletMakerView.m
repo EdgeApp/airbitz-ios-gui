@@ -13,6 +13,14 @@
 {
 	CGRect originalFrame;
 }
+
+@property (nonatomic, weak) IBOutlet ButtonSelectorView     *buttonSelectorView;
+@property (nonatomic, weak) IBOutlet UITextField            *textField;
+@property (weak, nonatomic) IBOutlet UILabel                *labelOnline;
+@property (weak, nonatomic) IBOutlet UILabel                *labelOffline;
+@property (weak, nonatomic) IBOutlet UISwitch               *switchOnlineOffline;
+
+
 @end
 
 @implementation WalletMakerView
@@ -27,7 +35,7 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder]))
 	{
@@ -63,15 +71,76 @@
 			}
 			
 			self.buttonSelectorView.arrayItemsToSelect = arrayCurrencyStrings;
-			
 
 		}
-		
+
+        [self reset];
     }
     return self;
 }
 
-#pragma mark ButtonSelector delegates
+#pragma mark - Action Methods
+
+- (IBAction)switchValueChanged:(id)sender
+{
+    [self updateDisplay];
+}
+
+- (IBAction)buttonCancelTouched:(id)sender
+{
+
+    [self exit];
+}
+
+- (IBAction)buttonDoneTouched:(id)sender
+{
+
+}
+
+#pragma mark - Public Methods
+
+- (void)reset
+{
+    [self.textField resignFirstResponder];
+    self.textField.text = @"";
+    [self.switchOnlineOffline setOn:NO];
+    [self.buttonSelectorView close];
+    self.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
+	[self.buttonSelectorView.button setTitle:@"USD" forState:UIControlStateNormal];
+    [self updateDisplay];
+}
+
+#pragma mark - Misc Methods
+
+- (void)updateDisplay
+{
+    if ([self.switchOnlineOffline isOn])
+    {
+        self.labelOnline.textColor = [UIColor darkGrayColor];
+        self.labelOffline.textColor = [UIColor whiteColor];
+    }
+    else
+    {
+        self.labelOffline.textColor = [UIColor darkGrayColor];
+        self.labelOnline.textColor = [UIColor whiteColor];
+    }
+}
+
+- (void)exit
+{
+    [self.textField resignFirstResponder];
+    [self.buttonSelectorView close];
+    
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(walletMakerViewExit:)])
+        {
+            [self.delegate walletMakerViewExit:self];
+        }
+    }
+}
+
+#pragma mark - ButtonSelector Delegates
 
 -(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
