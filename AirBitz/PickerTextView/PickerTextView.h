@@ -15,15 +15,15 @@
 
 @property (nonatomic, assign) id<PickerTextViewDelegate>    delegate;
 @property (nonatomic, strong) UITextField                   *textField;
-@property (nonatomic, strong) PopupPickerView               *popupPicker;
+@property (nonatomic, strong) PopupPickerView               *popupPicker; //nil until picker actually appears
 @property (nonatomic, assign) tPopupPickerPosition          popupPickerPosition;
-@property (nonatomic, assign) NSInteger                     pickerMaxChoicesVisible;
+@property (nonatomic, assign) NSInteger                     pickerMaxChoicesVisible; //can constrain to a certain number of choices
 @property (nonatomic, assign) NSInteger                     pickerWidth;
 @property (nonatomic, assign) NSInteger                     pickerCellHeight;
 @property (nonatomic, strong) NSArray                       *arrayChoices;
 
 - (void)setTextFieldObject:(UITextField *)newTextField;
-- (void)setTopMostView:(UIView *)topMostView;
+- (void)setTopMostView:(UIView *)topMostView; //what view will the drop down selector be added to?
 - (void)updateChoices:(NSArray *)arrayChoices;
 
 @end
