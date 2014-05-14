@@ -10,6 +10,7 @@
 #import "CommonTypes.h"
 #import "ABC.h"
 
+
 /////// TEMP UNTIL WE GET FUNCTIONALITY IN THE CORE
 typedef struct {
 	int version;         ///< version of the symbol
@@ -99,7 +100,9 @@ extern void QRcode_free(QRcode *qrcode);
     QRcode_free(qr);
 
     // set the image to the qr code
-    self.imageQRCode.image = [self dataToImage:_pQRData withWidth:_QRWidth andHeight:_QRWidth];
+    UIImage *qrimage = [self dataToImage:_pQRData withWidth:_QRWidth andHeight:_QRWidth];
+    self.imageQRCode.layer.magnificationFilter = kCAFilterNearest;
+    self.imageQRCode.image = qrimage;
 
     // update display layout
     [self updateDisplayLayout];
