@@ -152,14 +152,52 @@ extern void QRcode_free(QRcode *qrcode);
 
 - (IBAction)buttonPrintTouched:(id)sender
 {
-    // TODO: add printing
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Offline Wallet", nil)
-                          message:@"TODO: bring up print"
-                          delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil];
-    [alert show];
+    if ([UIPrintInteractionController isPrintingAvailable])
+    {
+        NSMutableString *strBody = [[NSMutableString alloc] init];
+        [strBody appendString:@"Offline Wallet\n\n"];
+        [strBody appendString:@"Public Address:\n"];
+        [strBody appendString:self.strPublic];
+        [strBody appendString:@"\n\n"];
+        [strBody appendString:@"Private Key:\n"];
+        [strBody appendString:self.strPrivate];
+
+        UIPrintInteractionController *pc = [UIPrintInteractionController sharedPrintController];
+
+        UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+        printInfo.outputType = UIPrintInfoOutputGeneral;
+        printInfo.jobName = NSLocalizedString(@"Offline Wallet", nil);
+        pc.printInfo = printInfo;
+        pc.showsPageRange = YES;
+
+        UISimpleTextPrintFormatter *textFormatter = [[UISimpleTextPrintFormatter alloc] initWithText:strBody];
+        textFormatter.startPage = 0;
+        textFormatter.contentInsets = UIEdgeInsetsMake(72.0, 72.0, 72.0, 72.0); // 1 inch margins
+        textFormatter.maximumContentWidth = 6 * 72.0;
+        pc.printFormatter = textFormatter;
+        pc.showsPageRange = YES;
+
+        UIPrintInteractionCompletionHandler completionHandler =
+        ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
+            if(!completed && error){
+                NSLog(@"Print failed - domain: %@ error code %u", error.domain, (unsigned int)error.code);
+            }
+        };
+
+        [pc presentAnimated:YES completionHandler:completionHandler];
+    }
+    else
+    {
+        // not available
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"Offline Wallet", nil)
+                              message:@"AirPrint is not currently available"
+                              delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+    }
+
 }
 
 - (IBAction)buttonInfoTouched:(id)sender
