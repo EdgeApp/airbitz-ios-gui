@@ -158,7 +158,7 @@
 {
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle: NSNumberFormatterCurrencyStyle];
-    [f setCurrencySymbol:@""];
+    [f setCurrencySymbol:@"$ "];
     return [f stringFromNumber:[NSNumber numberWithFloat:currency]];
 }
 
@@ -166,7 +166,7 @@
 {
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle: NSNumberFormatterCurrencyStyle];
-    [f setCurrencySymbol:@""];
+    [f setCurrencySymbol:@"B "];
     return [f stringFromNumber:[NSNumber numberWithFloat:bitcoin]];
 }
 
