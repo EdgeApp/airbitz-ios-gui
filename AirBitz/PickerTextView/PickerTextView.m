@@ -95,6 +95,8 @@
     self.pickerWidth = PICKER_WIDTH;
     self.pickerCellHeight = PICKER_CELL_HEIGHT;
 
+    self.pickerTableViewCellStyle = UITableViewCellStyleDefault;
+
     _viewTop = [self superview];
 
     [self configTextField];
@@ -129,6 +131,7 @@
                                             withWidth:_pickerWidth
                                         andCellHeight:_pickerCellHeight
                         ];
+    self.popupPicker.tableViewCellStyle = self.pickerTableViewCellStyle;
     [self.popupPicker disableBackgroundTouchDetect];
     [self.popupPicker assignDelegate:self];
 }
@@ -203,7 +206,7 @@
 	return YES;
 }
 
-#pragma mark - Popup Picker Delegate Methods
+#pragma mark - Popup Picker Delegate Methods-
 
 - (void)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
 {
@@ -231,6 +234,51 @@
 - (void)PopupPickerViewCancelled:(PopupPickerView *)view userData:(id)data
 {
     //[self dismissPopupPicker];
+}
+
+- (BOOL)PopupPickerViewFormatCell:(PopupPickerView *)view onRow:(NSInteger)row withCell:(UITableViewCell *)cell userData:(id)data
+{
+    BOOL bFormatted = NO;
+
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(pickerTextViewPopupFormatCell: onRow: withCell:)])
+        {
+            bFormatted = [self.delegate pickerTextViewPopupFormatCell:view onRow:row withCell:cell];
+        }
+    }
+
+    return bFormatted;
+}
+
+- (NSInteger)PopupPickerViewNumberOfRows:(PopupPickerView *)view userData:(id)data
+{
+    NSInteger nRows = -1; // this allows picker view to use its own logic
+
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(pickerTextViewPopupNumberOfRows:)])
+        {
+            nRows = [self.delegate pickerTextViewPopupNumberOfRows:view];
+        }
+    }
+
+    return nRows;
+}
+
+- (UITableViewCell *)PopupPickerViewCellForRow:(PopupPickerView *)view forTableView:(UITableView *)tableView andRow:(NSInteger)row userData:(id)data
+{
+    UITableViewCell *cell = nil;
+
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(pickerTextViewPopupCellForRow: forTableView: andRow:)])
+        {
+            cell = [self.delegate pickerTextViewPopupCellForRow:view forTableView:tableView andRow:row];
+        }
+    }
+
+    return cell;
 }
 
 @end

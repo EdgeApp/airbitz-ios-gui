@@ -20,11 +20,14 @@
 @property (nonatomic, assign) NSInteger                     pickerMaxChoicesVisible; //can constrain to a certain number of choices
 @property (nonatomic, assign) NSInteger                     pickerWidth;
 @property (nonatomic, assign) NSInteger                     pickerCellHeight;
+@property (nonatomic, assign) UITableViewCellStyle          pickerTableViewCellStyle;
 @property (nonatomic, strong) NSArray                       *arrayChoices;
+
 
 - (void)setTextFieldObject:(UITextField *)newTextField;
 - (void)setTopMostView:(UIView *)topMostView; //what view will the drop down selector be added to?
 - (void)updateChoices:(NSArray *)arrayChoices;
+- (void)dismissPopupPicker;
 
 @end
 
@@ -41,5 +44,8 @@
 - (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView;
 - (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView;
 - (void)pickerTextViewPopupSelected:(PickerTextView *)view onRow:(NSInteger)row;
+- (BOOL)pickerTextViewPopupFormatCell:(PopupPickerView *)view onRow:(NSInteger)row withCell:(UITableViewCell *)cell;
+- (NSInteger)pickerTextViewPopupNumberOfRows:(PopupPickerView *)view;
+- (UITableViewCell *)pickerTextViewPopupCellForRow:(PopupPickerView *)view forTableView:(UITableView *)tableView andRow:(NSInteger)row;
 
 @end

@@ -23,16 +23,20 @@
 @property (nonatomic, readwrite) int selectedItemIndex;
 @property (nonatomic, strong) IBOutlet UIView *containerView;	/* if this is embedded within a containerView, specify it here and this will animate the containerView's frame to fit the table */
 
--(void)close; /* closes button table and shrinks button if open */
+- (void)close; /* closes button table and shrinks button if open */
+
 @end
-
-
-
 
 @protocol ButtonSelectorDelegate <NSObject>
 
 @required
--(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex;
+
+- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex;
+
 @optional
--(NSString *)ButtonSelector:(ButtonSelectorView *)view willSetButtonTextToString:(NSString *)desiredString; //allows delegate to alter the new desired button title
+
+- (NSString *)ButtonSelector:(ButtonSelectorView *)view willSetButtonTextToString:(NSString *)desiredString; //allows delegate to alter the new desired button title
+- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view;
+- (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view;
+
 @end

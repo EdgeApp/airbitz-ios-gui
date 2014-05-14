@@ -33,3 +33,5 @@
 #define SCREEN_HEIGHT   ([[UIScreen mainScreen] bounds].size.height)
 #define TOOLBAR_HEIGHT  49
 
+#define DOLLAR_CURRENCY_NUM	840
+

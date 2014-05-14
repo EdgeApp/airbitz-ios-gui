@@ -9,8 +9,27 @@
 #import <UIKit/UIKit.h>
 #import "ButtonSelectorView.h"
 
+@protocol WalletMakerViewDelegate;
+
 @interface WalletMakerView : UIView
 
-@property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelectorView;
-@property (nonatomic, weak) IBOutlet UITextField *textField;
+@property (nonatomic, assign) id<WalletMakerViewDelegate>   delegate;
+
+
+- (void)reset;
+- (void)exit;
+
+@end
+
+@protocol WalletMakerViewDelegate <NSObject>
+
+@required
+
+
+@optional
+
+- (void)walletMakerViewExit:(WalletMakerView *)walletMakerView;
+- (void)walletMakerViewExitOffline:(WalletMakerView *)walletMakerView;
+
+
 @end
