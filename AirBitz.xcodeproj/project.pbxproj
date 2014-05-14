@@ -33,7 +33,8 @@
 		4C90463918C9242100179D9C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463818C9242100179D9C /* CoreAudio.framework */; };
 		4C90463B18C9242700179D9C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463A18C9242700179D9C /* CoreVideo.framework */; };
 		4C90463D18C9244900179D9C /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463C18C9244900179D9C /* libiconv.dylib */; };
-		6880F7A6191EF0DF008ECF5B /* TransactionBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 6880F7A5191EF0DF008ECF5B /* TransactionBridge.m */; };
+		4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
+		4C9E919C1922B3C500F01423 /* comp_13-offline_wallet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */; };
 		B507ADAD191C21B400F51E1E /* picker_up_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B507ADAC191C21B400F51E1E /* picker_up_point@2x.png */; };
 		B507ADAF191C240E00F51E1E /* picker_left_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */; };
 		B5137C0718A40A8400DA4A34 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFA18A40A8400DA4A34 /* Lato-Black.ttf */; };
@@ -455,8 +456,9 @@
 		4C90463818C9242100179D9C /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		4C90463A18C9242700179D9C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		4C90463C18C9244900179D9C /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
-		6880F7A4191EF0DF008ECF5B /* TransactionBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionBridge.h; sourceTree = "<group>"; };
-		6880F7A5191EF0DF008ECF5B /* TransactionBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionBridge.m; sourceTree = "<group>"; };
+		4C9E91981922AB7400F01423 /* OfflineWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineWalletViewController.h; sourceTree = "<group>"; };
+		4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
+		4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_13-offline_wallet.jpg"; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		B507ADAC191C21B400F51E1E /* picker_up_point@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "picker_up_point@2x.png"; path = "PopupPickerView/picker_up_point@2x.png"; sourceTree = "<group>"; };
 		B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "picker_left_point@2x.png"; path = "PopupPickerView/picker_left_point@2x.png"; sourceTree = "<group>"; };
@@ -1392,6 +1394,7 @@
 				B55D0FE418E1F7FD0035DCC8 /* comp_9_transactions_details.jpg */,
 				B5FD392918EE33AD00BE2670 /* comp_09.4-sending.jpg */,
 				B5C0A95D18EA07F6008F302C /* comp_10.2-request_bitcoin.jpg */,
+				4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */,
 				B59C144218C012B500AEA789 /* bar_balance@2x~iphone.png */,
 				B59C144318C012B500AEA789 /* bar_balance~iphone.png */,
 				B59C144418C012B500AEA789 /* bkg_calculator@2x~iphone.png */,
@@ -1708,6 +1711,8 @@
 				B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */,
 				B5C0A9BF18EA0DD8008F302C /* WalletsViewController.h */,
 				B5C0A9C018EA0DD8008F302C /* WalletsViewController.m */,
+				4C9E91981922AB7400F01423 /* OfflineWalletViewController.h */,
+				4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */,
 			);
 			path = Wallets;
 			sourceTree = "<group>";
@@ -1911,6 +1916,7 @@
 				B55A030518EA206300845090 /* btn_unselected~iphone.png in Resources */,
 				B59C14CF18C012B500AEA789 /* btn_2~iphone.png in Resources */,
 				B59C150018C012B500AEA789 /* btn_request@2x~iphone.png in Resources */,
+				4C9E919C1922B3C500F01423 /* comp_13-offline_wallet.jpg in Resources */,
 				B5137C0B18A40A8400DA4A34 /* Lato-Hairline.ttf in Resources */,
 				B59C153F18C012B500AEA789 /* table_cell_bottom~iphone.png in Resources */,
 				B55A030218EA206300845090 /* btn_selected@2x~iphone.png in Resources */,
@@ -2164,6 +2170,7 @@
 				B5C0A9AA18EA0D09008F302C /* RequestViewController.m in Sources */,
 				B5C0A97418EA0A42008F302C /* BD_Details_Cell.m in Sources */,
 				B5C0A9C418EA0DD8008F302C /* WalletCell.m in Sources */,
+				4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */,
 				B55A031718EA5F5B00845090 /* ButtonOnlyCell.m in Sources */,
 				B5C0A99618EA0BE7008F302C /* categoryCell.m in Sources */,
 				B5137C3B18A435BD00DA4A34 /* CJSONSerializer.m in Sources */,

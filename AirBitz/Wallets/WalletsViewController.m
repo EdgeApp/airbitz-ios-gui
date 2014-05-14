@@ -16,31 +16,33 @@
 #import "User.h"
 #import "WalletMakerView.h"
 #import "TransactionBridge.h"
+#import "OfflineWalletViewController.h"
 
 #define DOLLAR_CURRENCY_NUM	840
 
 id iControllerRef = nil;
-@interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletMakerViewDelegate>
+@interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletMakerViewDelegate, OfflineWalletViewControllerDelegate>
 {
-	BalanceView *balanceView;
-	TransactionsViewController *transactionsController;
-	BOOL archiveCollapsed;
-	double currencyConversionFactor;
-	tBalanceViewState balanceState;
-	UIView *activeWalletsHeaderView;
-	UIView *archivedWalletsHeaderView;
-	CGRect originalWalletMakerFrame;
-	UIButton *blockingButton;
-	BOOL walletMakerVisible;
+	BalanceView                 *balanceView;
+	TransactionsViewController  *transactionsController;
+	BOOL                        archiveCollapsed;
+	double                      currencyConversionFactor;
+	tBalanceViewState           balanceState;
+	UIView                      *activeWalletsHeaderView;
+	UIView                      *archivedWalletsHeaderView;
+	CGRect                      originalWalletMakerFrame;
+	UIButton                    *blockingButton;
+	BOOL                        walletMakerVisible;
+    OfflineWalletViewController *_offlineWalletViewController;
 }
 
 @property (nonatomic, strong) NSMutableArray *arrayWallets;
 @property (nonatomic, strong) NSMutableArray *arrayArchivedWallets;
 
-@property (nonatomic, weak) IBOutlet WalletMakerView *walletMakerView;
-@property (nonatomic, weak) IBOutlet UIView *headerView;
-@property (nonatomic, weak) IBOutlet UIView *balanceViewPlaceholder;
-@property (nonatomic, weak) IBOutlet UITableView *walletsTable;
+@property (nonatomic, weak) IBOutlet WalletMakerView    *walletMakerView;
+@property (nonatomic, weak) IBOutlet UIView             *headerView;
+@property (nonatomic, weak) IBOutlet UIView             *balanceViewPlaceholder;
+@property (nonatomic, weak) IBOutlet UITableView        *walletsTable;
 @end
 
 @implementation WalletsViewController
@@ -323,6 +325,35 @@ id iControllerRef = nil;
 	}
 }
 
+- (void)bringUpOfflineWalletView
+{
+    {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        _offlineWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OfflineWalletViewController"];
+
+        _offlineWalletViewController.delegate = self;
+
+        CGRect frame = self.view.bounds;
+        frame.origin.x = frame.size.width;
+        _offlineWalletViewController.view.frame = frame;
+        [self.view addSubview:_offlineWalletViewController.view];
+
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             _offlineWalletViewController.view.frame = self.view.bounds;
+         }
+                         completion:^(BOOL finished)
+         {
+             [self hideWalletMaker];
+             [self removeBlockingButton];
+         }];
+    }
+}
+
+
 #pragma mark - Segue
 
 - (void)launchTransactionsWithWallet:(Wallet *)wallet
@@ -565,6 +596,19 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[self hideWalletMaker];
 	[self removeBlockingButton];
+}
+
+- (void)walletMakerViewExitOffline:(WalletMakerView *)walletMakerView
+{
+    [self bringUpOfflineWalletView];
+}
+
+#pragma mark - Offline Wallet Delegates
+
+- (void)offlineWalletViewControllerDidFinish:(OfflineWalletViewController *)controller
+{
+	[controller.view removeFromSuperview];
+	_offlineWalletViewController = nil;
 }
 
 @end

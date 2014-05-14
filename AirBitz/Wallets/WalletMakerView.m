@@ -10,20 +10,22 @@
 #import "ABC.h"
 #import "User.h"
 #import "CommonTypes.h"
+#import "OfflineWalletViewController.h"
 
 @interface WalletMakerView () <ButtonSelectorDelegate, UITextFieldDelegate>
 {
-    BOOL   _bCreatingWallet;
-	CGRect _originalFrame;
-    int    _currencyChoice;
+    BOOL                        _bCreatingWallet;
+	CGRect                      _originalFrame;
+    int                         _currencyChoice;
 }
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageEditBox;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView     *buttonSelectorView;
 @property (nonatomic, weak) IBOutlet UITextField            *textField;
 @property (weak, nonatomic) IBOutlet UILabel                *labelOnline;
 @property (weak, nonatomic) IBOutlet UILabel                *labelOffline;
 @property (weak, nonatomic) IBOutlet UISwitch               *switchOnlineOffline;
-@property (weak, nonatomic) IBOutlet UIView *viewBlocker;
+@property (weak, nonatomic) IBOutlet UIView                 *viewBlocker;
 
 @property (nonatomic, strong)   NSArray                     *arrayCurrencyNums;
 @property (nonatomic, strong)   NSArray                     *arrayCurrencyCodes;
@@ -102,6 +104,8 @@
 
 - (IBAction)switchValueChanged:(id)sender
 {
+    [self.buttonSelectorView close];
+    [self.textField resignFirstResponder];
     [self updateDisplay];
 }
 
@@ -130,7 +134,7 @@
     [self.buttonSelectorView close];
     self.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
 	[self.buttonSelectorView.button setTitle:@"USD" forState:UIControlStateNormal];
-    _currencyChoice = [self.arrayCurrencyCodes indexOfObject:@"USD"];
+    _currencyChoice = (int) [self.arrayCurrencyCodes indexOfObject:@"USD"];
     [self updateDisplay];
 }
 
@@ -138,34 +142,45 @@
 
 - (void)updateDisplay
 {
-    if ([self.switchOnlineOffline isOn])
+    if ([self onlineSelected])
     {
-        self.labelOnline.textColor = [UIColor darkGrayColor];
-        self.labelOffline.textColor = [UIColor whiteColor];
-    }
-    else
-    {
+        self.buttonSelectorView.hidden = NO;
+        self.textField.hidden = NO;
+        self.imageEditBox.hidden = NO;
         self.labelOffline.textColor = [UIColor darkGrayColor];
         self.labelOnline.textColor = [UIColor whiteColor];
     }
+    else
+    {
+        self.buttonSelectorView.hidden = YES;
+        self.textField.hidden = YES;
+        self.imageEditBox.hidden = YES;
+        self.labelOnline.textColor = [UIColor darkGrayColor];
+        self.labelOffline.textColor = [UIColor whiteColor];
+    }
+}
+
+- (BOOL)onlineSelected
+{
+    return ![self.switchOnlineOffline isOn];
 }
 
 - (void)createWallet
 {
-    if (self.textField.text)
+    if ([self onlineSelected])
     {
-        if ([self.textField.text length])
+        if (self.textField.text)
         {
-            if ([self.switchOnlineOffline isOn])
-            {
-                [self createOfflineWallet];
-            }
-            else
+            if ([self.textField.text length])
             {
                 [self createOnlineWallet];
+                [self exit];
             }
-            [self exit];
         }
+    }
+    else
+    {
+        [self createOfflineWallet];
     }
 }
 
@@ -204,7 +219,19 @@
 
 - (void)createOfflineWallet
 {
-    // TODO: create offline wallet
+    if (!_bCreatingWallet)
+    {
+        [self.textField resignFirstResponder];
+        [self.buttonSelectorView close];
+
+        if (self.delegate)
+        {
+            if ([self.delegate respondsToSelector:@selector(walletMakerViewExitOffline:)])
+            {
+                [self.delegate walletMakerViewExitOffline:self];
+            }
+        }
+    }
 }
 
 - (void)createWalletComplete
