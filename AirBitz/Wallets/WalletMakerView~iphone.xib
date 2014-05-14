@@ -39,6 +39,17 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N15-n9-yM5" userLabel="Button - Online">
+                    <rect key="frame" x="20" y="94" width="107" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="buttonOnlineTouched:" destination="-1" eventType="touchUpInside" id="RS4-0x-07W"/>
+                    </connections>
+                </button>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="yNW-iH-wHJ">
                     <rect key="frame" x="135" y="93" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -47,6 +58,17 @@
                         <action selector="switchValueChanged:" destination="-1" eventType="valueChanged" id="4dv-7k-L59"/>
                     </connections>
                 </switch>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X4f-Rt-LWZ" userLabel="Button - Offline">
+                    <rect key="frame" x="197" y="94" width="107" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="buttonOfflineTouched:" destination="-1" eventType="touchUpInside" id="dgj-SK-KIs"/>
+                    </connections>
+                </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ONLINE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cuy-dv-38c">
                     <rect key="frame" x="49" y="98" width="63" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -92,7 +114,7 @@
                     </connections>
                 </view>
                 <view hidden="YES" alpha="0.74999999999999978" contentMode="scaleToFill" id="BKH-EF-tFM" userLabel="View - blocker">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="196"/>
+                    <rect key="frame" x="1000" y="0.0" width="320" height="196"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="eUt-LF-9ma">
