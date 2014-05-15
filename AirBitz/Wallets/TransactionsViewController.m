@@ -15,6 +15,8 @@
 #import "TransactionDetailsViewController.h"
 #import "ABC.h"
 
+#import "User.h"
+
 #define DOLLAR_CURRENCY_NUM	840
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate>
@@ -60,6 +62,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [TransactionBridge reloadWallet: self.wallet];
 	[self updateBalanceView];
 }
 

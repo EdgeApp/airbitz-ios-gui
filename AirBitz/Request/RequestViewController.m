@@ -146,7 +146,7 @@
 	}
 	
 	#warning TODO: Need to set up category for this transaction
-	details.szCategory = "None";
+	details.szCategory = "";
 	
 	#warning TODO: Need to set up notes for this transaction
 	details.szNotes = "";
