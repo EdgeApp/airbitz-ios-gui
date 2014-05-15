@@ -109,6 +109,18 @@
     [self updateDisplay];
 }
 
+- (IBAction)buttonOnlineTouched:(id)sender
+{
+    [self.switchOnlineOffline setOn:NO animated:YES];
+    [self updateDisplay];
+}
+
+- (IBAction)buttonOfflineTouched:(id)sender
+{
+    [self.switchOnlineOffline setOn:YES animated:YES];
+    [self updateDisplay];
+}
+
 - (IBAction)buttonCancelTouched:(id)sender
 {
 
