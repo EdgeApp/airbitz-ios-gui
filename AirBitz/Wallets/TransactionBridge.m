@@ -164,11 +164,7 @@
                               [transaction.strWalletUUID UTF8String],
                               [transaction.strID UTF8String],
                               &pDetails, &Error);
-    if (ABC_CC_Ok == Error.code)
-    {
-        return true;
-    }
-    else 
+    if (ABC_CC_Ok != Error.code)
     {
         NSLog(@("Error: TransactionBridge.storeTransaction:  %s\n"), Error.szDescription);
         return false;

@@ -106,6 +106,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear: animated];
 	if(originalFrame.size.height == 0)
 	{
 		CGRect frame = self.view.frame;
@@ -122,16 +123,16 @@
 			self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.strWalletName];
 		}
 		
-		double currency;
-		tABC_CC result;
-		tABC_Error error;
+		// double currency;
+		// tABC_CC result;
+		// tABC_Error error;
 #warning TODO: hard coded for dollar currency right now
-		result = ABC_SatoshiToCurrency(self.transaction.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-		if(result == ABC_CC_Ok)
-		{
-			self.fiatTextField.text = [NSString stringWithFormat:@"$%.2f", currency ];
-		}
-		
+		// result = ABC_SatoshiToCurrency(self.transaction.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+		// if(result == ABC_CC_Ok)
+		// {
+		// }
+        self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.balance];
+
 		frame = self.keypadView.frame;
 		frame.origin.y = frame.origin.y + frame.size.height;
 		self.keypadView.frame = frame;
