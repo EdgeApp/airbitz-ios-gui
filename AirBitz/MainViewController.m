@@ -334,7 +334,6 @@ id iMainRef = nil;
 				{
 					[selectedViewController.view removeFromSuperview];
 					selectedViewController = walletsViewController;
-                    [walletsViewController reloadWallets];
 					[self.view insertSubview:selectedViewController.view belowSubview:self.tabBar];
 				}
 				else

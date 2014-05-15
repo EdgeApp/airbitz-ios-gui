@@ -20,7 +20,6 @@
 
 #define DOLLAR_CURRENCY_NUM	840
 
-id iControllerRef = nil;
 @interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletMakerViewDelegate, OfflineWalletViewControllerDelegate>
 {
 	BalanceView                 *balanceView;
@@ -58,11 +57,7 @@ id iControllerRef = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    iControllerRef = self;
-
-    // retrieve the wallets from the server and put them in the two member arrays
     [self reloadWallets];
-
 	// Do any additional setup after loading the view.
 	balanceView = [BalanceView CreateWithDelegate:self];
 	balanceView.frame = self.balanceViewPlaceholder.frame;
@@ -85,6 +80,7 @@ id iControllerRef = nil;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self reloadWallets];
 	[self updateBalanceView];
 	
 	NSString *CellIdentifier = @"WalletsHeader";
@@ -154,7 +150,7 @@ id iControllerRef = nil;
     [self.walletMakerView exit];
 }
 
-// retrieves the wallets from the server and put them in the two member arrays
+// retrieves the wallets from disk and put them in the two member arrays
 - (void)reloadWallets
 {
     if (self.arrayWallets == nil) {
@@ -596,6 +592,10 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[self hideWalletMaker];
 	[self removeBlockingButton];
+
+    [self reloadWallets];
+    [self.walletsTable reloadData];
+	[self updateBalanceView];
 }
 
 - (void)walletMakerViewExitOffline:(WalletMakerView *)walletMakerView
