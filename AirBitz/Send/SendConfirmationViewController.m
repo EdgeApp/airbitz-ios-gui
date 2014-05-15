@@ -249,9 +249,9 @@
 			Details.amountCurrency = currency;
 			Details.amountFeesAirbitzSatoshi = 0;
 			Details.amountFeesMinersSatoshi = 0;
-			Details.szName = "A Transaction";
-			Details.szCategory = "blah";
-			Details.szNotes = "NewNotes";
+			Details.szName = "Anonymous";
+			Details.szCategory = "";
+			Details.szNotes = "";
 			Details.attributes = 0x2;
 			
 			tABC_WalletInfo *info = aWalletInfo[self.selectedWalletIndex];
