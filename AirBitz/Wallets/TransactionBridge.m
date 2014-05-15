@@ -32,19 +32,26 @@
     ABC_GetWallets([[User Singleton].name UTF8String], 
                    [[User Singleton].password UTF8String], 
                    &aWalletInfo, &nCount, &Error);
-    unsigned int i;
-    for (i = 0; i < nCount; ++i) {
-        Wallet *wallet;
-        tABC_WalletInfo *pWalletInfo = aWalletInfo[i];
+    if (ABC_CC_Ok == Error.code)
+    {
+        unsigned int i;
+        for (i = 0; i < nCount; ++i) {
+            Wallet *wallet;
+            tABC_WalletInfo *pWalletInfo = aWalletInfo[i];
 
-        wallet = [[Wallet alloc] init];
-        wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
-        wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
-        wallet.attributes = 0;
-        wallet.balance = pWalletInfo->balanceSatoshi;
-        wallet.currencyNum = pWalletInfo->currencyNum;
-        [arrayWallets addObject:wallet];
-        [self loadTransactions: wallet];
+            wallet = [[Wallet alloc] init];
+            wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
+            wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
+            wallet.attributes = 0;
+            wallet.balance = pWalletInfo->balanceSatoshi;
+            wallet.currencyNum = pWalletInfo->currencyNum;
+            [arrayWallets addObject:wallet];
+            [self loadTransactions: wallet];
+        }
+    }
+    else
+    {
+        NSLog(@("Error: TransactionBridge.loadWallets:  %s\n"), Error.szDescription);
     }
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
@@ -57,12 +64,18 @@
                       [[User Singleton].password UTF8String], 
                       [wallet.strUUID UTF8String],
                       &pWalletInfo, &Error);
-    wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
-    wallet.attributes = 0;
-    wallet.balance = pWalletInfo->balanceSatoshi;
-    wallet.currencyNum = pWalletInfo->currencyNum;
-    [self loadTransactions: wallet];
-
+    if (ABC_CC_Ok == Error.code)
+    {
+        wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
+        wallet.attributes = 0;
+        wallet.balance = pWalletInfo->balanceSatoshi;
+        wallet.currencyNum = pWalletInfo->currencyNum;
+        [self loadTransactions: wallet];
+    }
+    else
+    {
+        NSLog(@("Error: TransactionBridge.reloadWallets:  %s\n"), Error.szDescription);
+    }
     ABC_FreeWalletInfo(pWalletInfo);
 }
 
@@ -76,14 +89,21 @@
                         [[User Singleton].password UTF8String],
                         [wallet.strUUID UTF8String], &aTransactions,
                         &tCount, &Error);
-    NSMutableArray *arrayTransactions = [[NSMutableArray alloc] init];
-    for (int j = tCount - 1; j >= 0; --j) {
-        tABC_TxInfo *pTrans = aTransactions[j];
-        transaction = [[Transaction alloc] init];
-        [TransactionBridge setTransaction: wallet transaction:transaction coreTx:pTrans];
-        [arrayTransactions addObject:transaction];
+    if (ABC_CC_Ok == Error.code)
+    {
+        NSMutableArray *arrayTransactions = [[NSMutableArray alloc] init];
+        for (int j = tCount - 1; j >= 0; --j) {
+            tABC_TxInfo *pTrans = aTransactions[j];
+            transaction = [[Transaction alloc] init];
+            [TransactionBridge setTransaction: wallet transaction:transaction coreTx:pTrans];
+            [arrayTransactions addObject:transaction];
+        }
+        wallet.arrayTransactions = arrayTransactions;
     }
-    wallet.arrayTransactions = arrayTransactions;
+    else
+    {
+        NSLog(@("Error: TransactionBridge.loadTransactions:  %s\n"), Error.szDescription);
+    }
     ABC_FreeTransactions(aTransactions, tCount);
 }
 
@@ -118,17 +138,24 @@
                            [[User Singleton].password UTF8String],
                            [wallet.strUUID UTF8String], [term UTF8String],
                            &aTransactions, &tCount, &Error);
-    for (int j = tCount - 1; j >= 0; --j) {
-        tABC_TxInfo *pTrans = aTransactions[j];
-        transaction = [[Transaction alloc] init];
-        [TransactionBridge setTransaction:wallet transaction:transaction coreTx:pTrans];
-        [arrayTransactions addObject:transaction];
+    if (ABC_CC_Ok == Error.code)
+    {
+        for (int j = tCount - 1; j >= 0; --j) {
+            tABC_TxInfo *pTrans = aTransactions[j];
+            transaction = [[Transaction alloc] init];
+            [TransactionBridge setTransaction:wallet transaction:transaction coreTx:pTrans];
+            [arrayTransactions addObject:transaction];
+        }
+    }
+    else 
+    {
+        NSLog(@("Error: TransactionBridge.searchTransactionsIn:  %s\n"), Error.szDescription);
     }
     ABC_FreeTransactions(aTransactions, tCount);
     return arrayTransactions;
 }
 
-+ (void)storeTransaction: (Transaction *) transaction
++ (bool)storeTransaction: (Transaction *) transaction
 {
     tABC_Error Error;
     tABC_TxDetails *pDetails;
@@ -137,16 +164,33 @@
                               [transaction.strWalletUUID UTF8String],
                               [transaction.strID UTF8String],
                               &pDetails, &Error);
+    if (ABC_CC_Ok == Error.code)
+    {
+        return true;
+    }
+    else 
+    {
+        NSLog(@("Error: TransactionBridge.storeTransaction:  %s\n"), Error.szDescription);
+        return false;
+    }
     pDetails->szName = (char *) [transaction.strName UTF8String];
     pDetails->szCategory = (char *) [transaction.strCategory UTF8String];
     pDetails->szNotes = (char *) [transaction.strNotes UTF8String];
     pDetails->amountCurrency = transaction.balance;
-    NSLog(@("%s %s %s\n"), pDetails->szName, pDetails->szCategory, pDetails->szNotes);
     ABC_SetTransactionDetails([[User Singleton].name UTF8String], 
-                              [[User Singleton].password UTF8String], 
-                              [transaction.strWalletUUID UTF8String],
-                              [transaction.strID UTF8String],
-                              pDetails, &Error);
+                            [[User Singleton].password UTF8String], 
+                            [transaction.strWalletUUID UTF8String],
+                            [transaction.strID UTF8String],
+                            pDetails, &Error);
+    if (ABC_CC_Ok == Error.code)
+    {
+        return true;
+    }
+    else 
+    {
+        NSLog(@("Error: TransactionBridge.storeTransaction:  %s\n"), Error.szDescription);
+        return false;
+    }
 }
 
 + (NSDate *)dateFromTimestamp:(int64_t) intDate
