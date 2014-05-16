@@ -66,7 +66,7 @@
 	autoCompleteTableView.allowsSelection = YES;
 	autoCompleteTableView.userInteractionEnabled = YES;
 	
-	[self.superview addSubview:autoCompleteTableView];
+	[self.superview.superview.superview addSubview:autoCompleteTableView];
 	[self hideTableViewAnimated:NO];
 	[self generateListOfContactNames];
 	
