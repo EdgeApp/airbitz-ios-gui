@@ -448,6 +448,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 		wallet.attributes |= WALLET_ATTRIBUTE_ARCHIVE_BIT;
 		[self.arrayArchivedWallets insertObject:wallet atIndex:destinationIndexPath.row];
 	}
+    [TransactionBridge setWalletAttributes:wallet];
 	[self updateBalanceView];
 	[self.walletsTable reloadData];
 }

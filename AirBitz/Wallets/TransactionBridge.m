@@ -42,10 +42,13 @@
             wallet = [[Wallet alloc] init];
             wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
             wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
-            wallet.attributes = 0;
+            wallet.attributes = pWalletInfo->attributes;
             wallet.balance = pWalletInfo->balanceSatoshi;
             wallet.currencyNum = pWalletInfo->currencyNum;
-            [arrayWallets addObject:wallet];
+            if (wallet.attributes & WALLET_ATTRIBUTE_ARCHIVE_BIT == 1)
+                [arrayArchivedWallets addObject:wallet];
+            else
+                [arrayWallets addObject:wallet];
             [self loadTransactions: wallet];
         }
     }
@@ -162,6 +165,25 @@
     }
     ABC_FreeTransactions(aTransactions, tCount);
     return arrayTransactions;
+}
+
++ (bool)setWalletAttributes: (Wallet *) wallet
+{
+    tABC_Error Error;
+    tABC_TxDetails *pDetails;
+    ABC_SetWalletAttributes([[User Singleton].name UTF8String], 
+                            [[User Singleton].password UTF8String], 
+                            [wallet.strUUID UTF8String],
+                            wallet.attributes, &Error);
+    if (ABC_CC_Ok != Error.code)
+    {
+        return true;
+    }
+    else
+    {
+        NSLog(@("Error: TransactionBridge.storeTransaction:  %s\n"), Error.szDescription);
+        return false;
+    }
 }
 
 + (bool)storeTransaction: (Transaction *) transaction
