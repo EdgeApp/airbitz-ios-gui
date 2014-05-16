@@ -19,7 +19,8 @@
 @property (nonatomic, assign)   BOOL            bConfirmed;
 @property (nonatomic, assign)   unsigned int    confirmations;
 @property (nonatomic, assign)   SInt64			amountSatoshi;
-@property (nonatomic, assign)   double          balance;
+@property (nonatomic, assign)   double          amountFiat;
+@property (nonatomic, assign)   SInt64          balance;
 @property (nonatomic, copy)     NSString        *strCategory;
 @property (nonatomic, copy)     NSString        *strNotes;
 

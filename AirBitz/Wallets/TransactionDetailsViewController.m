@@ -123,15 +123,7 @@
 			self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.strWalletName];
 		}
 		
-		// double currency;
-		// tABC_CC result;
-		// tABC_Error error;
-#warning TODO: hard coded for dollar currency right now
-		// result = ABC_SatoshiToCurrency(self.transaction.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-		// if(result == ABC_CC_Ok)
-		// {
-		// }
-        self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.balance];
+        self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.amountFiat];
 
 		frame = self.keypadView.frame;
 		frame.origin.y = frame.origin.y + frame.size.height;
@@ -217,7 +209,7 @@
     self.transaction.strName = [self.nameTextField text];
     self.transaction.strNotes = [self.notesTextField text];
     self.transaction.strCategory = [self.categoryTextField text];
-    self.transaction.balance = [[self.fiatTextField text] doubleValue];
+    self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
 
     [TransactionBridge storeTransaction: self.transaction];
 	[self.delegate TransactionDetailsViewControllerDone:self];

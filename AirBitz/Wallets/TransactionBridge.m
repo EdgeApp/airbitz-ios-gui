@@ -92,11 +92,20 @@
     if (ABC_CC_Ok == Error.code)
     {
         NSMutableArray *arrayTransactions = [[NSMutableArray alloc] init];
-        for (int j = tCount - 1; j >= 0; --j) {
+
+        for (int j = tCount - 1; j >= 0; --j)
+        {
             tABC_TxInfo *pTrans = aTransactions[j];
             transaction = [[Transaction alloc] init];
             [TransactionBridge setTransaction: wallet transaction:transaction coreTx:pTrans];
             [arrayTransactions addObject:transaction];
+        }
+        SInt64 bal = 0;
+        for (int j = arrayTransactions.count - 1; j >= 0; --j)
+        {
+            Transaction *t = arrayTransactions[j];
+            bal += t.amountSatoshi;
+            t.balance = bal;
         }
         wallet.arrayTransactions = arrayTransactions;
     }
@@ -115,7 +124,7 @@
     transaction.strCategory = [NSString stringWithUTF8String: pTrans->pDetails->szCategory];
     transaction.date = [self dateFromTimestamp: pTrans->timeCreation];
     transaction.amountSatoshi = pTrans->pDetails->amountSatoshi;
-    transaction.balance = pTrans->pDetails->amountCurrency;
+    transaction.amountFiat = pTrans->pDetails->amountCurrency;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
 #warning TODO: Hardcoded confirmations...Need to add the info to our structs or cut-it-out
@@ -172,7 +181,7 @@
     pDetails->szName = (char *) [transaction.strName UTF8String];
     pDetails->szCategory = (char *) [transaction.strCategory UTF8String];
     pDetails->szNotes = (char *) [transaction.strNotes UTF8String];
-    pDetails->amountCurrency = transaction.balance;
+    pDetails->amountCurrency = transaction.amountFiat;
     ABC_SetTransactionDetails([[User Singleton].name UTF8String], 
                             [[User Singleton].password UTF8String], 
                             [transaction.strWalletUUID UTF8String],

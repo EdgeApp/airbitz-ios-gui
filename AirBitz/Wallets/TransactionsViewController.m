@@ -248,7 +248,6 @@
 	{
 		cell.amountLabel.textColor = [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0];
 	}
-	//balance
 	cell.balanceLabel.text = [self conversion:transaction.balance];
 	
 	if((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
