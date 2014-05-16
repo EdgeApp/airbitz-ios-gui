@@ -20,6 +20,8 @@
 {
 	ZBarReaderView                  *reader;
 	NSTimer                         *startScannerTimer;
+	int                             selectedWalletIndex;
+	NSString                        *selectedWalletUUID;
 	SendConfirmationViewController  *sendConfirmationViewController;
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
@@ -154,10 +156,11 @@
 	
 	if(nCount)
 	{
-		tABC_WalletInfo *info = aWalletInfo[0];
+		tABC_WalletInfo *info = aWalletInfo[selectedWalletIndex];
 		
+		selectedWalletUUID = [NSString stringWithUTF8String:info->szUUID];
 		[self.buttonSelector.button setTitle:[NSString stringWithUTF8String:info->szName] forState:UIControlStateNormal];
-		self.buttonSelector.selectedItemIndex = 0;
+		self.buttonSelector.selectedItemIndex = selectedWalletIndex;
 	}
 	
     // assign list of wallets to buttonSelector
@@ -166,15 +169,6 @@
     for (int i = 0; i < nCount; i++)
     {
         tABC_WalletInfo *pInfo = aWalletInfo[i];
-		/*
-        printf("Account: %s, UUID: %s, Name: %s, currency: %d, attributes: %u, balance: %lld\n",
-               pInfo->szUserName,
-               pInfo->szUUID,
-               pInfo->szName,
-               pInfo->currencyNum,
-               pInfo->attributes,
-               pInfo->balanceSatoshi);
-		*/
 		[walletsArray addObject:[NSString stringWithUTF8String:pInfo->szName]];
     }
 	
@@ -434,6 +428,8 @@
 -(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
 	NSLog(@"Selected item %i", itemIndex);
+    selectedWalletIndex = itemIndex;
+    [self setWalletButtonTitle];
 }
 
 @end

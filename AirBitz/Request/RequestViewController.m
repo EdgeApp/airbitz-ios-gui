@@ -408,7 +408,7 @@
 	
     NSLog(@"Wallets:\n");
 	
-	if(nCount)
+	if (selectedWalletIndex <= nCount)
 	{
 		tABC_WalletInfo *info = aWalletInfo[selectedWalletIndex];
 		
