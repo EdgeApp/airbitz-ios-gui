@@ -123,7 +123,14 @@
 			self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.strWalletName];
 		}
 		
-        self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.amountFiat];
+        if (self.transaction.amountFiat == 0) {
+            double currency;
+            tABC_Error error;
+            ABC_SatoshiToCurrency(self.transaction.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+            self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
+        } else {
+            self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.amountFiat];
+        }
 
 		frame = self.keypadView.frame;
 		frame.origin.y = frame.origin.y + frame.size.height;
