@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
+#import <AddressBookUI/AddressBookUI.h>
+#import <MessageUI/MessageUI.h>
+#import <MobileCoreServices/UTCoreTypes.h>
 #import "RequestViewController.h"
 #import "Notifications.h"
 #import "Transaction.h"
@@ -15,6 +18,16 @@
 #import "User.h"
 #import "ShowWalletQRViewController.h"
 #import "CommonTypes.h"
+
+#define QR_CODE_TEMP_FILENAME @"qr_request.png"
+#define QR_CODE_SIZE          200.0
+
+
+typedef enum eAddressPickerType
+{
+    AddressPickerType_SMS,
+    AddressPickerType_EMail
+} tAddressPickerType;
 
 #define OPERATION_CLEAR		0
 #define OPERATION_BACK		1
@@ -26,19 +39,24 @@
 #define OPERATION_PLUS		7
 #define OPERATION_PERCENT	8
 
-@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, ShowWalletQRViewControllerDelegate>
+@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, ShowWalletQRViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate>
 {
-	UITextField                 *selectedTextField;
-	int                         selectedWalletIndex;
-	NSString                    *selectedWalletUUID;
-	ShowWalletQRViewController  *qrViewController;
+	UITextField                 *_selectedTextField;
+	int                         _selectedWalletIndex;
+	NSString                    *_selectedWalletUUID;
+	ShowWalletQRViewController  *_qrViewController;
+    tAddressPickerType          _addressPickerType;
 }
 
-@property (nonatomic, weak) IBOutlet CalculatorView *keypadView;
-@property (nonatomic, weak) IBOutlet UITextField *BTC_TextField;
-@property (nonatomic, weak) IBOutlet UITextField *USD_TextField;
+@property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
+@property (nonatomic, weak) IBOutlet UITextField        *BTC_TextField;
+@property (nonatomic, weak) IBOutlet UITextField        *USD_TextField;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector;
-@property (nonatomic, weak) IBOutlet UILabel *exchangeRateLabel;
+@property (nonatomic, weak) IBOutlet UILabel            *exchangeRateLabel;
+
+@property (nonatomic, copy) NSString *strFullName;
+@property (nonatomic, copy) NSString *strPhoneNumber;
+
 @end
 
 @implementation RequestViewController
@@ -99,6 +117,78 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Action Methods
+
+- (IBAction)info
+{
+	[self.view endEditing:YES];
+}
+
+- (IBAction)ImportWallet
+{
+	[self.view endEditing:YES];
+}
+
+- (IBAction)email
+{
+    [self showAddressPickerFor:AddressPickerType_EMail];
+}
+
+- (IBAction)SMS
+{
+    [self showAddressPickerFor:AddressPickerType_SMS];
+}
+
+- (IBAction)QRCodeButton
+{
+	unsigned int width = 0;
+    unsigned char *pData = NULL;
+	tABC_Error error;
+
+	[self.view endEditing:YES];
+
+	const char *requestID = [self createReceiveRequest];
+
+	if (requestID)
+	{
+		tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
+                                                   [[User Singleton].password UTF8String],
+                                                   [_selectedWalletUUID UTF8String],
+                                                   requestID,
+                                                   &pData,
+                                                   &width,
+                                                   &error);
+
+		if (result == ABC_CC_Ok)
+		{
+			//printf("QRCode width: %d\n", width);
+
+			UIImage *qrImage = [self dataToImage:pData withWidth:width andHeight:width];
+			char *requestAddress;
+
+			result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
+										   [[User Singleton].password UTF8String],
+										   [_selectedWalletUUID UTF8String],
+                                           requestID,
+                                           &requestAddress,
+                                           &error);
+			if (result == ABC_CC_Ok)
+			{
+				[self showQRCodeViewControllerWithQRImage:qrImage address:[NSString stringWithUTF8String:requestAddress]];
+				free(requestAddress);
+			}
+		}
+		else
+		{
+			[self printABC_Error:&error];
+		}
+		if (requestID) free((void*)requestID);
+	}
+    if (pData) free(pData);
+}
+
+#pragma mark - Misc Methods
+
 - (const char *)createReceiveRequest
 {
 	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
@@ -158,7 +248,7 @@
     // create the request
 	result = ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
                                       [[User Singleton].password UTF8String],
-                                      [selectedWalletUUID UTF8String],
+                                      [_selectedWalletUUID UTF8String],
                                       &details,
                                       &pRequestID,
                                       &error);
@@ -233,126 +323,107 @@
 -(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
+	_qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
 	
-	qrViewController.delegate = self;
-	qrViewController.qrCodeImage = image;
-	qrViewController.addressString = address;
-	qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
-	qrViewController.amountSatoshi = ABC_BitcoinToSatoshi([self.BTC_TextField.text doubleValue]);
+	_qrViewController.delegate = self;
+	_qrViewController.qrCodeImage = image;
+	_qrViewController.addressString = address;
+	_qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
+	_qrViewController.amountSatoshi = ABC_BitcoinToSatoshi([self.BTC_TextField.text doubleValue]);
 	CGRect frame = self.view.bounds;
-	qrViewController.view.frame = frame;
-	[self.view addSubview:qrViewController.view];
-	qrViewController.view.alpha = 0.0;
+	_qrViewController.view.frame = frame;
+	[self.view addSubview:_qrViewController.view];
+	_qrViewController.view.alpha = 0.0;
 	
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		qrViewController.view.alpha = 1.0;
+		_qrViewController.view.alpha = 1.0;
 	 }
 					 completion:^(BOOL finished)
 	 {
 	 }];
 }
 
-#pragma mark Actions
-
-- (IBAction)info
+- (void)showAddressPickerFor:(tAddressPickerType)type
 {
 	[self.view endEditing:YES];
+
+    _addressPickerType = type;
+
+    ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+
+    picker.peoplePickerDelegate = self;
+
+    if (type == AddressPickerType_SMS)
+    {
+        picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonPhoneProperty]];
+    }
+    else
+    {
+        picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonEmailProperty]];
+    }
+
+    [self presentViewController:picker animated:YES completion:nil];
+    //[self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
 }
 
-- (IBAction)ImportWallet
+// generates and returns a request qr image, stores request id in the given mutable string
+- (UIImage *)createRequestQRImage:(NSMutableString *)strRequestID
 {
-	[self.view endEditing:YES];
-}
 
-- (IBAction)email
-{
-	[self.view endEditing:YES];
-}
+    UIImage *qrImage = nil;
 
-- (IBAction)SMS
-{
-	[self.view endEditing:YES];
-}
-
-- (IBAction)QRCodeButton
-{
 	unsigned int width = 0;
     unsigned char *pData = NULL;
 	tABC_Error error;
-	
+
 	[self.view endEditing:YES];
-	
+
 	const char *requestID = [self createReceiveRequest];
-	
-	if(requestID)
+
+	if (requestID)
 	{
 		tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
-                                      [[User Singleton].password UTF8String],
-                                      [selectedWalletUUID UTF8String],
-                                      requestID,
-                                      &pData,
-                                      &width,
-                                      &error);
-	
-		if(result == ABC_CC_Ok)
+                                                   [[User Singleton].password UTF8String],
+                                                   [_selectedWalletUUID UTF8String],
+                                                   requestID,
+                                                   &pData,
+                                                   &width,
+                                                   &error);
+
+		if (result == ABC_CC_Ok)
 		{
-			//printf("QRCode width: %d\n", width);
-			
-			UIImage *qrImage = [self dataToImage:pData withWidth:width andHeight:width];
-			char *requestAddress;
-			
-			result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
-										   [[User Singleton].password UTF8String],
-										   [selectedWalletUUID UTF8String],
-										  requestID,
-										  &requestAddress,
-										  &error);
-			if(result == ABC_CC_Ok)
-			{
-				[self showQRCodeViewControllerWithQRImage:qrImage address:[NSString stringWithUTF8String:requestAddress]];
-				free(requestAddress);
-			}
+			qrImage = [self dataToImage:pData withWidth:width andHeight:width];
 		}
 		else
 		{
 			[self printABC_Error:&error];
 		}
-		if(requestID) free((void*)requestID);
 	}
-    if(pData) free(pData);
-}
 
-#pragma mark textfield delegates
+    if (requestID)
+    {
+        if (strRequestID)
+        {
+            [strRequestID appendFormat:@"%s", requestID];
+        }
+        free((void*)requestID);
+    }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-	selectedTextField = textField;
-	self.keypadView.textField = textField;
-	self.BTC_TextField.text = @"";
-	self.USD_TextField.text = @"";
-}
+    if (pData)
+    {
+        free(pData);
+    }
 
-#pragma mark calculator delegates
-
-- (void)CalculatorDone:(CalculatorView *)calculator
-{
-	[self.BTC_TextField resignFirstResponder];
-	[self.USD_TextField resignFirstResponder];
-}
-
-- (void)CalculatorValueChanged:(CalculatorView *)calculator
-{
-	[self updateTextFieldContents];
+    return qrImage;
 }
 
 - (void)updateTextFieldContents
 {
-	if(selectedTextField == self.BTC_TextField)
+	if (_selectedTextField == self.BTC_TextField)
 	{
 		double value = [self.BTC_TextField.text doubleValue];
 		
@@ -410,11 +481,11 @@
 	
 	if (selectedWalletIndex <= nCount)
 	{
-		tABC_WalletInfo *info = aWalletInfo[selectedWalletIndex];
+		tABC_WalletInfo *info = aWalletInfo[_selectedWalletIndex];
 		
-		selectedWalletUUID = [NSString stringWithUTF8String:info->szUUID];
+		_selectedWalletUUID = [NSString stringWithUTF8String:info->szUUID];
 		[self.buttonSelector.button setTitle:[NSString stringWithUTF8String:info->szName] forState:UIControlStateNormal];
-		self.buttonSelector.selectedItemIndex = selectedWalletIndex;
+		self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
 	}
 	
     // assign list of wallets to buttonSelector
@@ -430,8 +501,131 @@
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
+- (void)sendSMS
+{
+    //NSLog(@"sendSMS to: %@ / %@", self.strFullName, self.strPhoneNumber);
 
-#pragma mark ButtonSelectorView delegates
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+	if ([MFMessageComposeViewController canSendText] && [MFMessageComposeViewController canSendAttachments])
+	{
+        NSMutableString *strBody = [[NSMutableString alloc] init];
+        [strBody appendString:@"Bitcoin Request"];
+
+        // get the QR Code image
+        NSMutableString *strRequestID = [[NSMutableString alloc] init];
+        UIImage *image = [self createRequestQRImage:strRequestID];
+
+        // scale it up
+        UIGraphicsBeginImageContext(CGSizeMake(QR_CODE_SIZE, QR_CODE_SIZE));
+        CGContextRef c = UIGraphicsGetCurrentContext();
+        CGContextSetInterpolationQuality(c, kCGInterpolationNone);
+        [image drawInRect:CGRectMake(0, 0, QR_CODE_SIZE, QR_CODE_SIZE)];
+        UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+
+        // save it to a file so we can add it as an attachment
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:QR_CODE_TEMP_FILENAME];
+        [UIImagePNGRepresentation(scaledImage) writeToFile:filePath atomically:YES];
+
+        char *requestAddress = NULL;
+        ABC_GetRequestAddress([[User Singleton].name UTF8String],
+                              [[User Singleton].password UTF8String],
+                              [_selectedWalletUUID UTF8String],
+                              [strRequestID UTF8String],
+                              &requestAddress,
+                              NULL);
+        if (requestAddress)
+        {
+            [strBody appendFormat:@":\n%s", requestAddress];
+            free(requestAddress);
+        }
+
+        BOOL attached = [controller addAttachmentData:UIImagePNGRepresentation(scaledImage) typeIdentifier:(NSString*)kUTTypePNG filename:filePath];
+        if (attached)
+        {
+            NSLog(@"Attached qr code");
+        }
+        else
+        {
+            NSLog(@"Not attached qr code");
+        }
+
+		controller.body = strBody;
+
+        if (self.strPhoneNumber)
+        {
+            if ([self.strPhoneNumber length] != 0)
+            {
+                controller.recipients = @[self.strPhoneNumber];
+            }
+        }
+
+		controller.messageComposeDelegate = self;
+
+        [self presentViewController:controller animated:YES completion:nil];
+        //[self.view.window.rootViewController presentViewController:controller animated:YES completion:nil];
+	}
+
+}
+
+- (NSString *)getNameFromAddressRecord:(ABRecordRef)person
+{
+    NSString *strFirstName = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+    NSString *strMiddleName = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
+    NSString *strLastName  = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
+
+    NSMutableString *strFullName = [[NSMutableString alloc] init];
+    if (strFirstName)
+    {
+        [strFullName appendString:strFirstName];
+    }
+    if (strMiddleName)
+    {
+        if ([strFullName length])
+        {
+            [strFullName appendString:@" "];
+        }
+        [strFullName appendString:strMiddleName];
+    }
+    if (strLastName)
+    {
+        if ([strFullName length])
+        {
+            [strFullName appendString:@" "];
+        }
+        [strFullName appendString:strLastName];
+    }
+
+    // if we don't have a name yet, try the company
+    if ([strFullName length] == 0)
+    {
+        NSString *strCompanyName  = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonOrganizationProperty);
+        if (strCompanyName)
+        {
+            [strFullName appendString:strCompanyName];
+        }
+    }
+
+    return strFullName;
+}
+
+#pragma mark - calculator delegates
+
+- (void)CalculatorDone:(CalculatorView *)calculator
+{
+	[self.BTC_TextField resignFirstResponder];
+	[self.USD_TextField resignFirstResponder];
+}
+
+- (void)CalculatorValueChanged:(CalculatorView *)calculator
+{
+	[self updateTextFieldContents];
+}
+
+
+#pragma mark - ButtonSelectorView delegates
+
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
 	NSLog(@"Selected item %i", itemIndex);
@@ -439,11 +633,108 @@
     [self setWalletButtonTitle];
 }
 
-#pragma mark ShowWalletQRViewController delegates
+#pragma mark - ShowWalletQRViewController delegates
 
 - (void)ShowWalletQRViewControllerDone:(ShowWalletQRViewController *)controller
 {
 	[controller.view removeFromSuperview];
-	qrViewController = nil;
+	_qrViewController = nil;
 }
+
+#pragma mark - Address Book delegates
+
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
+{
+    [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+{
+    return YES;
+}
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+                                property:(ABPropertyID)property
+                              identifier:(ABMultiValueIdentifier)identifier
+{
+
+    self.strFullName = [self getNameFromAddressRecord:person];
+
+    if (_addressPickerType == AddressPickerType_SMS)
+    {
+        if (property == kABPersonPhoneProperty)
+        {
+            ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
+            for (CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++)
+            {
+                if (identifier == ABMultiValueGetIdentifierAtIndex(multiPhones, i))
+                {
+                    NSString *strPhoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(multiPhones, i);
+                    self.strPhoneNumber = strPhoneNumber;
+                    break;
+                }
+            }
+            CFRelease(multiPhones);
+        }
+
+        [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:^{
+            [self sendSMS];
+        }];
+    }
+
+
+    return NO;
+}
+
+#pragma mark - MFMessageComposeViewController delegate
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+	switch (result)
+    {
+		case MessageComposeResultCancelled:
+			NSLog(@"Cancelled");
+			break;
+		case MessageComposeResultFailed:
+        {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
+                                                            message:@"Error sending SMS"
+														   delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+			[alert show];
+        }
+			break;
+
+		case MessageComposeResultSent:
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
+                                                            message:@"Request sent"
+														   delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+			[alert show];
+        }
+			break;
+
+		default:
+			break;
+	}
+
+    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Textfield delegates
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+	_selectedTextField = textField;
+	self.keypadView.textField = textField;
+	self.BTC_TextField.text = @"";
+	self.USD_TextField.text = @"";
+}
+
+
 @end
