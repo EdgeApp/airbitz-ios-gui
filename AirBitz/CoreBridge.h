@@ -1,5 +1,5 @@
 //
-//  TransactionBridge.h
+//  CoreBridge.h
 //  AirBitz
 //
 
@@ -7,7 +7,7 @@
 #import "Wallet.h"
 
 
-@interface TransactionBridge : NSObject
+@interface CoreBridge : NSObject
 
 + (void)loadWallets: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (void)reloadWallet: (Wallet *) wallet;

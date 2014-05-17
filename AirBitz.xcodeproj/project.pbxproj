@@ -35,7 +35,7 @@
 		4C90463D18C9244900179D9C /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463C18C9244900179D9C /* libiconv.dylib */; };
 		4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
 		4C9E919C1922B3C500F01423 /* comp_13-offline_wallet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */; };
-		68A6383319231E6900E11257 /* TransactionBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A6383219231E6900E11257 /* TransactionBridge.m */; };
+		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
 		B507ADAD191C21B400F51E1E /* picker_up_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B507ADAC191C21B400F51E1E /* picker_up_point@2x.png */; };
 		B507ADAF191C240E00F51E1E /* picker_left_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */; };
 		B5137C0718A40A8400DA4A34 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFA18A40A8400DA4A34 /* Lato-Black.ttf */; };
@@ -460,8 +460,8 @@
 		4C9E91981922AB7400F01423 /* OfflineWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineWalletViewController.h; sourceTree = "<group>"; };
 		4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
 		4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_13-offline_wallet.jpg"; sourceTree = "<group>"; };
-		68A6383119231E6900E11257 /* TransactionBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionBridge.h; sourceTree = "<group>"; };
-		68A6383219231E6900E11257 /* TransactionBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionBridge.m; sourceTree = "<group>"; };
+		687C1B041927FF81003A83E8 /* CoreBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBridge.h; sourceTree = "<group>"; };
+		687C1B051927FF81003A83E8 /* CoreBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreBridge.m; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		B507ADAC191C21B400F51E1E /* picker_up_point@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "picker_up_point@2x.png"; path = "PopupPickerView/picker_up_point@2x.png"; sourceTree = "<group>"; };
 		B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "picker_left_point@2x.png"; path = "PopupPickerView/picker_left_point@2x.png"; sourceTree = "<group>"; };
@@ -1210,6 +1210,8 @@
 				B5675B5A18A17F6F002E0703 /* AppDelegate.h */,
 				B5C0A96218EA0A42008F302C /* Business Directory */,
 				B5675B5B18A17F6F002E0703 /* AppDelegate.m */,
+				687C1B041927FF81003A83E8 /* CoreBridge.h */,
+				687C1B051927FF81003A83E8 /* CoreBridge.m */,
 				B5FD394518F240E600BE2670 /* AutoCompleteTextField.h */,
 				B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */,
 				B57C209418C25011005D7245 /* BalanceView.h */,
@@ -1699,8 +1701,6 @@
 		B5C0A9B618EA0DD8008F302C /* Wallets */ = {
 			isa = PBXGroup;
 			children = (
-				68A6383119231E6900E11257 /* TransactionBridge.h */,
-				68A6383219231E6900E11257 /* TransactionBridge.m */,
 				B5C0A9B718EA0DD8008F302C /* TransactionCell.h */,
 				B5C0A9B818EA0DD8008F302C /* TransactionCell.m */,
 				B5C0A9B918EA0DD8008F302C /* TransactionDetailsViewController.h */,
@@ -2135,7 +2135,6 @@
 				4C3C309819198B33006923DE /* PopupWheelPickerView.m in Sources */,
 				B5376E1D18B55D920099EF8F /* UIImage+Colorize.m in Sources */,
 				B5C0A9C218EA0DD8008F302C /* TransactionDetailsViewController.m in Sources */,
-				68A6383319231E6900E11257 /* TransactionBridge.m in Sources */,
 				B5C0A9B018EA0D78008F302C /* SendConfirmationViewController.m in Sources */,
 				4C3C30A1191B07C0006923DE /* CategoriesCell.m in Sources */,
 				B5C0A99018EA0B80008F302C /* MapView.m in Sources */,
@@ -2166,6 +2165,7 @@
 				B5F2E9C218DA911A008ACF88 /* SignUpViewController.m in Sources */,
 				B5C0A9C818EA0E55008F302C /* FlashSelectView.m in Sources */,
 				B5C0A98118EA0B52008F302C /* Location.m in Sources */,
+				687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */,
 				B57C209618C25011005D7245 /* BalanceView.m in Sources */,
 				B55A031118EA538500845090 /* BooleanCell.m in Sources */,
 				B5C0A97318EA0A42008F302C /* BD_Address_Cell.m in Sources */,

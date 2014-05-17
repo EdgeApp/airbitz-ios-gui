@@ -10,7 +10,7 @@
 #import "BalanceView.h"
 #import "TransactionCell.h"
 #import "Transaction.h"
-#import "TransactionBridge.h"
+#import "CoreBridge.h"
 #import "NSDate+Helper.h"
 #import "TransactionDetailsViewController.h"
 #import "ABC.h"
@@ -63,7 +63,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [TransactionBridge reloadWallet: self.wallet];
+    [CoreBridge reloadWallet: self.wallet];
 	[self updateBalanceView];
 }
 
@@ -74,13 +74,13 @@
 	{
 		totalSatoshi += tx.amountSatoshi;
 	}
-	balanceView.topAmount.text = [TransactionBridge formatSatoshi: totalSatoshi];
+	balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
 	
 	double currency;
 	tABC_Error error;
 	
 	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-    balanceView.botAmount.text = [TransactionBridge formatCurrency: currency];
+    balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
     balanceView.topDenomination.text = [User Singleton].denominationLabel; 
 
 	[balanceView refresh];
@@ -105,11 +105,11 @@
 		tABC_Error error;
 		
 		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-		return [TransactionBridge formatCurrency:currency];
+		return [CoreBridge formatCurrency:currency];
 	}
 	else
 	{
-		return [TransactionBridge formatSatoshi:satoshi];
+		return [CoreBridge formatSatoshi:satoshi];
 	}
 }
 
@@ -161,7 +161,7 @@
 
 -(void)TransactionDetailsViewControllerDone:(TransactionsViewController *)controller
 {
-    [TransactionBridge reloadWallet: self.wallet];
+    [CoreBridge reloadWallet: self.wallet];
     [self.tableView reloadData];
     [self checkSearchArray];
 	[self dismissTransactionDetails];
@@ -317,7 +317,7 @@
         {
             self.arraySearchTransactions = [[NSMutableArray alloc] init];
         }
-        [TransactionBridge searchTransactionsIn:self.wallet query:search addTo:self.arraySearchTransactions];
+        [CoreBridge searchTransactionsIn:self.wallet query:search addTo:self.arraySearchTransactions];
         [self.tableView reloadData];
     }
     else if (![self searchEnabled])

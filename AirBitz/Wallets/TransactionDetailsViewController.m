@@ -7,7 +7,7 @@
 //
 
 #import "TransactionDetailsViewController.h"
-#import "TransactionBridge.h"
+#import "CoreBridge.h"
 #import "User.h"
 #import "NSDate+Helper.h"
 #import "ABC.h"
@@ -93,10 +93,8 @@
 	self.categoryTextField.arrayAutoCompleteStrings = [NSArray arrayWithObjects:@"Income:Salary", @"Income:Rent", @"Transfer:Bank Account", @"Transfer:Cash", @"Transfer:Wallet", @"Expense:Dining", @"Expense:Clothing", @"Expense:Computers", @"Expense:Electronics", @"Expense:Education", @"Expense:Entertainment", @"Expense:Rent", @"Expense:Insurance", @"Expense:Medical", @"Expense:Pets", @"Expense:Recreation", @"Expense:Tax", @"Expense:Vacation", @"Expense:Utilities",nil];
 	self.categoryTextField.tableAbove = YES;
 	//[self.addressButton setTitle:self.transaction.strAddress forState:UIControlStateNormal];
-	
-	
-	self.bitCoinLabel.text = [NSString stringWithFormat:@"B %.5f", ABC_SatoshiToBitcoin(self.transaction.amountSatoshi)];
-	
+    self.bitCoinLabel.text = [CoreBridge formatSatoshi:self.transaction.amountSatoshi];
+
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -219,7 +217,7 @@
     self.transaction.strCategory = [self.categoryTextField text];
     self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
 
-    [TransactionBridge storeTransaction: self.transaction];
+    [CoreBridge storeTransaction: self.transaction];
 	[self.delegate TransactionDetailsViewControllerDone:self];
 }
 

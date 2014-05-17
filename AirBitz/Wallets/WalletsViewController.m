@@ -15,7 +15,7 @@
 #import "ABC.h"
 #import "User.h"
 #import "WalletMakerView.h"
-#import "TransactionBridge.h"
+#import "CoreBridge.h"
 #import "OfflineWalletViewController.h"
 
 #define DOLLAR_CURRENCY_NUM	840
@@ -161,7 +161,7 @@
         [self.arrayWallets removeAllObjects];
         [self.arrayArchivedWallets removeAllObjects];
     }
-    [TransactionBridge loadWallets: self.arrayWallets archived:self.arrayArchivedWallets];
+    [CoreBridge loadWallets: self.arrayWallets archived:self.arrayArchivedWallets];
 }
 
 // creates an NSDate object given a string with mm/dd/yyyy
@@ -186,12 +186,12 @@
 	{
 		totalSatoshi += wallet.balance;
 	}
-	balanceView.topAmount.text = [TransactionBridge formatSatoshi: totalSatoshi];
+	balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
 	
 	double currency;
 	tABC_Error Error;
 	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &Error);
-    balanceView.botAmount.text = [TransactionBridge formatCurrency: currency];
+    balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
     balanceView.topDenomination.text = [User Singleton].denominationLabel; 
 	[balanceView refresh];
 }
@@ -255,11 +255,11 @@
 		tABC_Error error;
 		
 		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-		return [TransactionBridge formatCurrency: currency];
+		return [CoreBridge formatCurrency: currency];
 	}
 	else
 	{
-		return [TransactionBridge formatSatoshi: satoshi];
+		return [CoreBridge formatSatoshi: satoshi];
 	}
 }
 
@@ -446,7 +446,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 		wallet.attributes |= WALLET_ATTRIBUTE_ARCHIVE_BIT;
 		[self.arrayArchivedWallets insertObject:wallet atIndex:destinationIndexPath.row];
 	}
-    [TransactionBridge setWalletAttributes:wallet];
+    [CoreBridge setWalletAttributes:wallet];
 	[self updateBalanceView];
 	[self.walletsTable reloadData];
 }

@@ -6,9 +6,9 @@
 #import "ABC.h"
 #import "User.h"
 
-#import "TransactionBridge.h"
+#import "CoreBridge.h"
 
-@interface TransactionBridge ()
+@interface CoreBridge ()
 {
 }
 
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation TransactionBridge
+@implementation CoreBridge
 
 + (void)loadWallets: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets
 {
@@ -54,7 +54,7 @@
     }
     else
     {
-        NSLog(@("Error: TransactionBridge.loadWallets:  %s\n"), Error.szDescription);
+        NSLog(@("Error: CoreBridge.loadWallets:  %s\n"), Error.szDescription);
     }
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
@@ -77,7 +77,7 @@
     }
     else
     {
-        NSLog(@("Error: TransactionBridge.reloadWallets:  %s\n"), Error.szDescription);
+        NSLog(@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
     }
     ABC_FreeWalletInfo(pWalletInfo);
 }
@@ -100,7 +100,7 @@
         {
             tABC_TxInfo *pTrans = aTransactions[j];
             transaction = [[Transaction alloc] init];
-            [TransactionBridge setTransaction: wallet transaction:transaction coreTx:pTrans];
+            [CoreBridge setTransaction: wallet transaction:transaction coreTx:pTrans];
             [arrayTransactions addObject:transaction];
         }
         SInt64 bal = 0;
@@ -114,7 +114,7 @@
     }
     else
     {
-        NSLog(@("Error: TransactionBridge.loadTransactions:  %s\n"), Error.szDescription);
+        NSLog(@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
     }
     ABC_FreeTransactions(aTransactions, tCount);
 }
@@ -155,13 +155,13 @@
         for (int j = tCount - 1; j >= 0; --j) {
             tABC_TxInfo *pTrans = aTransactions[j];
             transaction = [[Transaction alloc] init];
-            [TransactionBridge setTransaction:wallet transaction:transaction coreTx:pTrans];
+            [CoreBridge setTransaction:wallet transaction:transaction coreTx:pTrans];
             [arrayTransactions addObject:transaction];
         }
     }
     else 
     {
-        NSLog(@("Error: TransactionBridge.searchTransactionsIn:  %s\n"), Error.szDescription);
+        NSLog(@("Error: CoreBridge.searchTransactionsIn:  %s\n"), Error.szDescription);
     }
     ABC_FreeTransactions(aTransactions, tCount);
     return arrayTransactions;
@@ -181,7 +181,7 @@
     }
     else
     {
-        NSLog(@("Error: TransactionBridge.storeTransaction:  %s\n"), Error.szDescription);
+        NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
         return false;
     }
 }
@@ -197,7 +197,7 @@
                               &pDetails, &Error);
     if (ABC_CC_Ok != Error.code)
     {
-        NSLog(@("Error: TransactionBridge.storeTransaction:  %s\n"), Error.szDescription);
+        NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
         return false;
     }
     pDetails->szName = (char *) [transaction.strName UTF8String];
@@ -215,7 +215,7 @@
     }
     else 
     {
-        NSLog(@("Error: TransactionBridge.storeTransaction:  %s\n"), Error.szDescription);
+        NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
         return false;
     }
 }
