@@ -242,4 +242,9 @@
     return [f stringFromNumber:[NSNumber numberWithFloat:converted]];
 }
 
++ (double) denominationToSatoshi: (double) coin
+{
+    return coin * [User Singleton].denomination;
+}
+
 @end

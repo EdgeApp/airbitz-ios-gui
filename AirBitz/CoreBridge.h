@@ -16,5 +16,6 @@
 + (bool)storeTransaction: (Transaction *) transaction;
 + (NSString *)formatCurrency: (double) currency;
 + (NSString *)formatSatoshi: (double) bitcoin;
++ (double) denominationToSatoshi: (double) coin;
 
 @end

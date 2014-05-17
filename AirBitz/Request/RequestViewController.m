@@ -18,6 +18,7 @@
 #import "User.h"
 #import "ShowWalletQRViewController.h"
 #import "CommonTypes.h"
+#import "CoreBridge.h"
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 #define QR_CODE_SIZE          200.0
@@ -49,7 +50,9 @@ typedef enum eAddressPickerType
 }
 
 @property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
+@property (nonatomic, weak) IBOutlet UILabel            *BTCLabel_TextField;
 @property (nonatomic, weak) IBOutlet UITextField        *BTC_TextField;
+@property (nonatomic, weak) IBOutlet UILabel            *USDLabel_TextField;
 @property (nonatomic, weak) IBOutlet UITextField        *USD_TextField;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector;
 @property (nonatomic, weak) IBOutlet UILabel            *exchangeRateLabel;
@@ -87,7 +90,10 @@ typedef enum eAddressPickerType
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+	self.BTCLabel_TextField.text = [User Singleton].denominationLabel; 
 	self.BTC_TextField.inputView = self.keypadView;
+	self.USDLabel_TextField.text = @"USD";
 	self.USD_TextField.inputView = self.keypadView;
 	self.BTC_TextField.delegate = self;
 	self.USD_TextField.delegate = self;
@@ -199,7 +205,7 @@ typedef enum eAddressPickerType
 	tABC_Error error;
 	
 	//first need to create a transaction details struct
-	details.amountSatoshi = ABC_BitcoinToSatoshi([self.BTC_TextField.text doubleValue]);
+    details.amountSatoshi = [CoreBridge denominationToSatoshi:[self.BTC_TextField.text doubleValue]];
 	
 	//the true fee values will be set by the core
 	details.amountFeesAirbitzSatoshi = 0;
@@ -426,11 +432,12 @@ typedef enum eAddressPickerType
 	if (_selectedTextField == self.BTC_TextField)
 	{
 		double value = [self.BTC_TextField.text doubleValue];
+        double satoshi = [CoreBridge denominationToSatoshi: value];
 		
 		double currency;
 		tABC_Error error;
 		
-		ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(value), &currency, DOLLAR_CURRENCY_NUM, &error);
+		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 		
 		self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", currency];
 	}
@@ -441,13 +448,11 @@ typedef enum eAddressPickerType
 		int64_t satoshi;
 		tABC_Error	error;
 		tABC_CC result;
-		double bitcoin;
 		
 		result = ABC_CurrencyToSatoshi(value, DOLLAR_CURRENCY_NUM, &satoshi, &error);
 		if(result == ABC_CC_Ok)
 		{
-			bitcoin = ABC_SatoshiToBitcoin(satoshi);
-			self.BTC_TextField.text = [NSString stringWithFormat:@"%.4f", bitcoin];
+            self.BTC_TextField.text = [CoreBridge formatSatoshi: satoshi];
 		}
 	}
 }
