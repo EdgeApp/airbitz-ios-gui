@@ -15,6 +15,6 @@
 + (bool)setWalletAttributes: (Wallet *) wallet;
 + (bool)storeTransaction: (Transaction *) transaction;
 + (NSString *)formatCurrency: (double) currency;
-+ (NSString *)formatBitcoin: (double) bitcoin;
++ (NSString *)formatSatoshi: (double) bitcoin;
 
 @end

@@ -233,12 +233,13 @@
     return [f stringFromNumber:[NSNumber numberWithFloat:currency]];
 }
 
-+ (NSString *)formatBitcoin: (double) bitcoin
++ (NSString *)formatSatoshi: (double) bitcoin
 {
+    double converted = bitcoin / [User Singleton].denomination;
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle: NSNumberFormatterCurrencyStyle];
     [f setCurrencySymbol:@"B "];
-    return [f stringFromNumber:[NSNumber numberWithFloat:bitcoin]];
+    return [f stringFromNumber:[NSNumber numberWithFloat:converted]];
 }
 
 @end

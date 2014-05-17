@@ -62,6 +62,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [TransactionBridge reloadWallet: self.wallet];
 	[self updateBalanceView];
 }
@@ -69,20 +70,18 @@
 -(void)updateBalanceView
 {
 	int64_t totalSatoshi = 0.0;
-	
 	for(Transaction * tx in self.wallet.arrayTransactions)
 	{
 		totalSatoshi += tx.amountSatoshi;
 	}
-	
-    double totalBitcoin = ABC_SatoshiToBitcoin(totalSatoshi);
-	balanceView.topAmount.text = [TransactionBridge formatBitcoin: totalBitcoin];
+	balanceView.topAmount.text = [TransactionBridge formatSatoshi: totalSatoshi];
 	
 	double currency;
 	tABC_Error error;
 	
 	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
     balanceView.botAmount.text = [TransactionBridge formatCurrency: currency];
+    balanceView.topDenomination.text = [User Singleton].denominationLabel; 
 
 	[balanceView refresh];
 }
@@ -100,7 +99,6 @@
 //note this method duplicated in WalletsViewController
 -(NSString *)conversion:(int64_t)satoshi
 {
-    double bitcoin = ABC_SatoshiToBitcoin(satoshi);
 	if (balanceState == BALANCE_VIEW_DOWN)
 	{
 		double currency;
@@ -111,7 +109,7 @@
 	}
 	else
 	{
-		return [TransactionBridge formatBitcoin:bitcoin];
+		return [TransactionBridge formatSatoshi:satoshi];
 	}
 }
 

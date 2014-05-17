@@ -49,14 +49,16 @@
 
 -(void)refresh
 {
-	if(barIsUp)
-	{
-		self.barAmount.text = self.topAmount.text;
-	}
-	else
-	{
-		self.barAmount.text = self.botAmount.text;
-	}
+    if(barIsUp)
+    {
+        self.barAmount.text = self.topAmount.text;
+        self.barDenomination.text = self.topDenomination.text;
+    }
+    else
+    {
+        self.barAmount.text = self.botAmount.text;
+        self.barDenomination.text = self.botDenomination.text;
+    }
 }
 
 + (BalanceView *)CreateWithDelegate:(id)del

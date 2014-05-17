@@ -97,13 +97,13 @@ typedef struct sDenomination
 
 tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
-        "Bitcoin", 100000000
+        "BTC", 100000000
     },
     {
-        "mBitcoin", 100000
+        "mBTC", 100000
     },
     {
-        "uBitcoin", 100
+        "uBTC", 100
     }
 };
 
@@ -231,6 +231,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                               [[User Singleton].password UTF8String],
                               _pAccountSettings,
                               &Error);
+    if (ABC_CC_Ok == Error.code)
+    {
+        [[User Singleton] loadSettings];
+    }
     [self printABC_Error:&Error];
 }
 

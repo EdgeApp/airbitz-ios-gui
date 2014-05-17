@@ -186,14 +186,13 @@
 	{
 		totalSatoshi += wallet.balance;
 	}
-	
-    double totalBitcoin = ABC_SatoshiToBitcoin(totalSatoshi);
-	balanceView.topAmount.text = [TransactionBridge formatBitcoin: totalBitcoin];
+	balanceView.topAmount.text = [TransactionBridge formatSatoshi: totalSatoshi];
 	
 	double currency;
-	tABC_Error error;
-	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+	tABC_Error Error;
+	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &Error);
     balanceView.botAmount.text = [TransactionBridge formatCurrency: currency];
+    balanceView.topDenomination.text = [User Singleton].denominationLabel; 
 	[balanceView refresh];
 }
 
@@ -250,7 +249,6 @@
 //note this method duplicated in TransactionsViewController
 -(NSString *)conversion:(double)satoshi
 {
-    double bitcoin = ABC_SatoshiToBitcoin(satoshi);
 	if (balanceState == BALANCE_VIEW_DOWN)
 	{
 		double currency;
@@ -261,7 +259,7 @@
 	}
 	else
 	{
-		return [TransactionBridge formatBitcoin: bitcoin];
+		return [TransactionBridge formatSatoshi: satoshi];
 	}
 }
 
@@ -373,7 +371,7 @@
 	 {
 		 transactionsController.view.frame = self.view.bounds;
 	 }
-					 completion:^(BOOL finished)
+        completion:^(BOOL finished)
 	 {
 	 }];
 	

@@ -479,7 +479,7 @@ typedef enum eAddressPickerType
 	
     NSLog(@"Wallets:\n");
 	
-	if (selectedWalletIndex <= nCount)
+	if (_selectedWalletIndex <= nCount)
 	{
 		tABC_WalletInfo *info = aWalletInfo[_selectedWalletIndex];
 		
@@ -629,7 +629,7 @@ typedef enum eAddressPickerType
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
 	NSLog(@"Selected item %i", itemIndex);
-    selectedWalletIndex = itemIndex;
+    _selectedWalletIndex = itemIndex;
     [self setWalletButtonTitle];
 }
 
