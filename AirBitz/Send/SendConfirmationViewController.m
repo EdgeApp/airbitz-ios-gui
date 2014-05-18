@@ -14,6 +14,7 @@
 #import "ButtonSelectorView.h"
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
+#import "CoreBridge.h"
 
 #define DOLLAR_CURRENCY_NUM 840
 
@@ -35,7 +36,9 @@
 
 @property (nonatomic, weak) IBOutlet UITextField *withdrawlPIN;
 @property (nonatomic, weak) IBOutlet UITextField *amountUSDTextField;
+@property (nonatomic, weak) IBOutlet UILabel     *amountUSDLabel;
 @property (nonatomic, weak) IBOutlet UITextField *amountBTCTextField;
+@property (nonatomic, weak) IBOutlet UILabel     *amountBTCLabel;
 @property (nonatomic, weak) IBOutlet UIButton *btn_alwaysConfirm;
 @property (nonatomic, weak) IBOutlet UIView *confirmSliderContainer;
 @property (nonatomic, weak) IBOutlet CalculatorView *keypadView;
@@ -106,7 +109,10 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-	self.amountBTCTextField.text = [NSString stringWithFormat:@"%f", ABC_SatoshiToBitcoin(self.amountToSendSatoshi)];
+    [super viewWillAppear:animated];
+	self.amountBTCLabel.text = [User Singleton].denominationLabel; 
+    self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi];
+    self.conversionLabel.text = [CoreBridge conversionString:DOLLAR_CURRENCY_NUM];
 	self.addressLabel.text = self.sendToAddress;
 	
 	tABC_CC result;
@@ -121,13 +127,7 @@
 		self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
 	}
 	
-	result = ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(1.0), &currency, DOLLAR_CURRENCY_NUM, &error);
-	if(result == ABC_CC_Ok)
-	{
-		self.conversionLabel.text = [NSString stringWithFormat:@"1.00 BTC = $%.2f USD", currency];
-	}
-	
-	if(self.amountToSendSatoshi)
+	if (self.amountToSendSatoshi)
 	{
 		[self.withdrawlPIN becomeFirstResponder];
 	}
@@ -237,7 +237,7 @@
     unsigned int nCount;
 	double currency;
 	
-	result = ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi([self.amountBTCTextField.text doubleValue]), &currency, DOLLAR_CURRENCY_NUM, &Error);
+	result = ABC_SatoshiToCurrency([self.amountBTCTextField.text doubleValue], &currency, DOLLAR_CURRENCY_NUM, &Error);
 	if(result == ABC_CC_Ok)
 	{
 		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
@@ -302,15 +302,6 @@
     for (int i = 0; i < nCount; i++)
     {
         tABC_WalletInfo *pInfo = aWalletInfo[i];
-		/*
-		 printf("Account: %s, UUID: %s, Name: %s, currency: %d, attributes: %u, balance: %lld\n",
-		 pInfo->szUserName,
-		 pInfo->szUUID,
-		 pInfo->szName,
-		 pInfo->currencyNum,
-		 pInfo->attributes,
-		 pInfo->balanceSatoshi);
-		 */
 		[walletsArray addObject:[NSString stringWithUTF8String:pInfo->szName]];
     }
 	
@@ -453,7 +444,8 @@
 	
 	if(selectedTextField == self.amountBTCTextField)
 	{
-		self.amountToSendSatoshi = ABC_BitcoinToSatoshi([self.amountBTCTextField.text doubleValue]);
+		double value = [self.amountBTCTextField.text doubleValue];
+        self.amountToSendSatoshi = [CoreBridge denominationToSatoshi: value];
 		result = ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 		if(result == ABC_CC_Ok)
 		{
@@ -467,8 +459,7 @@
 		if(result == ABC_CC_Ok)
 		{
 			self.amountToSendSatoshi = satoshi;
-			currency = ABC_SatoshiToBitcoin(satoshi);
-			self.amountBTCTextField.text = [NSString stringWithFormat:@"%.5f", currency];
+            self.amountBTCTextField.text = [CoreBridge formatSatoshi: satoshi];
 		}
 	}
 }

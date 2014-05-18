@@ -17,5 +17,6 @@
 + (NSString *)formatCurrency: (double) currency;
 + (NSString *)formatSatoshi: (double) bitcoin;
 + (double) denominationToSatoshi: (double) coin;
++ (NSString *)conversionString: (int) currencyNumber;
 
 @end

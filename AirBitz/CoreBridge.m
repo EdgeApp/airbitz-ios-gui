@@ -247,4 +247,19 @@
     return coin * [User Singleton].denomination;
 }
 
++ (NSString *)conversionString: (int) currencyNumber
+{
+    double currency;
+    tABC_Error error;
+
+    double denomination = [User Singleton].denomination;
+    NSString *denominationLabel = [User Singleton].denominationLabel;
+    NSString *currencyLabel = @"USD";
+    tABC_CC result = ABC_SatoshiToCurrency(denomination, &currency, currencyNumber, &error);
+    if (result == ABC_CC_Ok)
+        return [NSString stringWithFormat:@"1.00 %@ = $%.2f %@", denominationLabel, currency, currencyLabel];
+    else
+        return @"";
+}
+
 @end

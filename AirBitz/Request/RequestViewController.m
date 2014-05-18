@@ -97,14 +97,7 @@ typedef enum eAddressPickerType
 	self.USD_TextField.inputView = self.keypadView;
 	self.BTC_TextField.delegate = self;
 	self.USD_TextField.delegate = self;
-	
-	double currency;
-	tABC_Error error;
-	
-	ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(1.0), &currency, DOLLAR_CURRENCY_NUM, &error);
-	
-	//self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", currency];
-	self.exchangeRateLabel.text = [NSString stringWithFormat:@"1 BTC = $%.2f", currency];
+    self.exchangeRateLabel.text = [CoreBridge conversionString: DOLLAR_CURRENCY_NUM];
 	
 	CGRect frame = self.keypadView.frame;
 	frame.origin.y = frame.origin.y + frame.size.height;
