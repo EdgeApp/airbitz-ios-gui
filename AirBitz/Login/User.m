@@ -51,7 +51,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [self clear];
     }
     self.denomination = 100000000;
-    self.denominationLabel = @"Bitcoin";
+    self.denominationLabel = @"BTC";
     return self;
 }
 

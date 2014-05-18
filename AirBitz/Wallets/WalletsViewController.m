@@ -82,6 +82,7 @@
 {
     [super viewWillAppear: animated];
     [self reloadWallets];
+    [self.walletsTable reloadData];
 	[self updateBalanceView];
 	
 	NSString *CellIdentifier = @"WalletsHeader";
@@ -259,7 +260,7 @@
 	}
 	else
 	{
-		return [CoreBridge formatSatoshi: satoshi];
+		return [CoreBridge formatSatoshi:satoshi];
 	}
 }
 

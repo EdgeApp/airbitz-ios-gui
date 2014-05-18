@@ -64,6 +64,7 @@
 {
     [super viewWillAppear:animated];
     [CoreBridge reloadWallet: self.wallet];
+    [self.tableView reloadData];
 	[self updateBalanceView];
 }
 
