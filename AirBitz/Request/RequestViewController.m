@@ -19,6 +19,8 @@
 #import "User.h"
 #import "ShowWalletQRViewController.h"
 #import "CommonTypes.h"
+#import "Util.h"
+#import "ImportWalletViewController.h"
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 #define QR_CODE_SIZE          200.0
@@ -40,13 +42,14 @@ typedef enum eAddressPickerType
 #define OPERATION_PLUS		7
 #define OPERATION_PERCENT	8
 
-@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, ShowWalletQRViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
+@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, ShowWalletQRViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, ImportWalletViewControllerDelegate>
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
 	NSString                    *_selectedWalletUUID;
 	ShowWalletQRViewController  *_qrViewController;
     tAddressPickerType          _addressPickerType;
+    ImportWalletViewController  *_importWalletViewController;
 }
 
 @property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
@@ -129,6 +132,7 @@ typedef enum eAddressPickerType
 - (IBAction)ImportWallet
 {
 	[self.view endEditing:YES];
+    [self bringUpImportWalletView];
 }
 
 - (IBAction)email
@@ -358,7 +362,7 @@ typedef enum eAddressPickerType
 		}
 		else
 		{
-			[self printABC_Error:&error];
+			[Util printABC_Error:&error];
 		}
 	}
 
@@ -387,7 +391,7 @@ typedef enum eAddressPickerType
         }
         else
         {
-			[self printABC_Error:&error];
+			[Util printABC_Error:&error];
         }
 
         free((void*)szRequestID);
@@ -450,30 +454,13 @@ typedef enum eAddressPickerType
 	}
 }
 
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
-    }
-}
-
 - (void)setWalletButtonTitle
 {
 	tABC_WalletInfo **aWalletInfo = NULL;
     unsigned int nCount;
 	tABC_Error Error;
     ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 	
     printf("Wallets:\n");
 	
@@ -568,60 +555,6 @@ typedef enum eAddressPickerType
                                               otherButtonTitles:nil];
         [alert show];
     }
-
-#if 0
-    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
-	if ([MFMessageComposeViewController canSendText] && [MFMessageComposeViewController canSendAttachments])
-	{
-        NSMutableString *strBody = [[NSMutableString alloc] init];
-        [strBody appendString:@"Bitcoin Request"];
-
-        // get the QR Code image
-        NSMutableString *strRequestID = [[NSMutableString alloc] init];
-        NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
-        UIImage *image = [self createRequestQRImageFor:self.strFullName withNotes:self.strPhoneNumber storeRequestIDIn:strRequestID storeRequestAddressIn:strRequestAddress];
-
-        // if we have a request address
-        if ([strRequestAddress length])
-        {
-            [strBody appendFormat:@":\n%@", strRequestAddress];
-        }
-
-        // scale qr image up
-        UIGraphicsBeginImageContext(CGSizeMake(QR_CODE_SIZE, QR_CODE_SIZE));
-        CGContextRef c = UIGraphicsGetCurrentContext();
-        CGContextSetInterpolationQuality(c, kCGInterpolationNone);
-        [image drawInRect:CGRectMake(0, 0, QR_CODE_SIZE, QR_CODE_SIZE)];
-        UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-
-        // save it to a file so we can add it as an attachment
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:QR_CODE_TEMP_FILENAME];
-        [UIImagePNGRepresentation(scaledImage) writeToFile:filePath atomically:YES];
-
-        BOOL bAttached = [controller addAttachmentData:UIImagePNGRepresentation(scaledImage) typeIdentifier:(NSString*)kUTTypePNG filename:filePath];
-        if (!bAttached)
-        {
-            NSLog(@"Could not attach qr code");
-        }
-
-		controller.body = strBody;
-
-        if (self.strPhoneNumber)
-        {
-            if ([self.strPhoneNumber length] != 0)
-            {
-                controller.recipients = @[self.strPhoneNumber];
-            }
-        }
-
-		controller.messageComposeDelegate = self;
-
-        [self presentViewController:controller animated:YES completion:nil];
-        //[self.view.window.rootViewController presentViewController:controller animated:YES completion:nil];
-	}
-#endif
 }
 
 - (void)sendSMS
@@ -711,6 +644,33 @@ typedef enum eAddressPickerType
     }
 
     return strFullName;
+}
+
+- (void)bringUpImportWalletView
+{
+    {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        _importWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ImportWalletViewController"];
+
+        _importWalletViewController.delegate = self;
+
+        CGRect frame = self.view.bounds;
+        frame.origin.x = frame.size.width;
+        _importWalletViewController.view.frame = frame;
+        [self.view addSubview:_importWalletViewController.view];
+
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             _importWalletViewController.view.frame = self.view.bounds;
+         }
+                         completion:^(BOOL finished)
+         {
+
+         }];
+    }
 }
 
 #pragma mark - Calculator delegates
@@ -919,5 +879,14 @@ typedef enum eAddressPickerType
         [self performSelector:@selector(sendEMail) withObject:nil afterDelay:0.0];
     }
 }
+
+#pragma mark - Import Wallet Delegates
+
+- (void)importWalletViewControllerDidFinish:(ImportWalletViewController *)controller
+{
+	[controller.view removeFromSuperview];
+	_importWalletViewController = nil;
+}
+
 
 @end

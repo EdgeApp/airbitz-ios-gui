@@ -8,6 +8,7 @@
 
 #import "PasswordVerifyView.h"
 #import "ABC.h"
+#import "Util.h"
 
 @interface PasswordVerifyView ()
 
@@ -84,23 +85,6 @@
 	 }];
 }
 
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
-    }
-}
-
 -(void)setPassword:(NSString *)password
 {
 	_password = password;
@@ -115,7 +99,7 @@
                       &aRules,
                       &count,
                       &Error);
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 	
     printf("Password results:\n");
     printf("Time to crack: %lf seconds\n", secondsToCrack);

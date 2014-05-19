@@ -11,6 +11,7 @@
 #import "SignUpViewController.h"
 #import "User.h"
 #import "StylizedTextField.h"
+#import "Util.h"
 
 #define CONTENT_VIEW_SCALE_WITH_KEYBOARD	0.75
 #define LOGO_IMAGE_SHRINK_SCALE_FACTOR		0.5
@@ -97,23 +98,6 @@ typedef enum eLoginMode
     // Dispose of any resources that can be recreated.
 }
 
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
-    }
-}
-
 -(IBAction)SignIn
 {
 	[self.userNameTextField resignFirstResponder];
@@ -131,7 +115,7 @@ typedef enum eLoginMode
 				   ABC_Request_Callback,
 				   (__bridge void *)self,
 				   &Error);
-		[self printABC_Error:&Error];
+		[Util printABC_Error:&Error];
 		
 		if (ABC_CC_Ok == Error.code)
 		{
