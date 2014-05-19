@@ -9,6 +9,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
 #import <MobileCoreServices/UTCoreTypes.h>
+#import "DDData.h"
 #import "RequestViewController.h"
 #import "Notifications.h"
 #import "Transaction.h"
@@ -39,7 +40,7 @@ typedef enum eAddressPickerType
 #define OPERATION_PLUS		7
 #define OPERATION_PERCENT	8
 
-@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, ShowWalletQRViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate>
+@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, ShowWalletQRViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
@@ -56,6 +57,7 @@ typedef enum eAddressPickerType
 
 @property (nonatomic, copy) NSString *strFullName;
 @property (nonatomic, copy) NSString *strPhoneNumber;
+@property (nonatomic, copy) NSString *strEMail;
 
 @end
 
@@ -131,65 +133,52 @@ typedef enum eAddressPickerType
 
 - (IBAction)email
 {
-    [self showAddressPickerFor:AddressPickerType_EMail];
+    [self.view endEditing:YES];
+    self.strFullName = @"";
+    self.strEMail = @"";
+    _addressPickerType = AddressPickerType_EMail;
+
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:NSLocalizedString(@"Send Email", nil)
+                          message:NSLocalizedString(@"Select from contacts?", nil)
+                          delegate:self
+                          cancelButtonTitle:NSLocalizedString(@"Yes, Contacts", nil)
+                          otherButtonTitles:NSLocalizedString(@"No, Skip", nil), nil];
+    [alert show];
 }
 
 - (IBAction)SMS
 {
-    [self showAddressPickerFor:AddressPickerType_SMS];
+    [self.view endEditing:YES];
+    self.strPhoneNumber = @"";
+    self.strFullName = @"";
+    _addressPickerType = AddressPickerType_SMS;
+
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:NSLocalizedString(@"Send SMS", nil)
+                          message:NSLocalizedString(@"Select from contacts?", nil)
+                          delegate:self
+                          cancelButtonTitle:NSLocalizedString(@"Yes, Contacts", nil)
+                          otherButtonTitles:NSLocalizedString(@"No, Skip", nil), nil];
+    [alert show];
 }
 
 - (IBAction)QRCodeButton
 {
-	unsigned int width = 0;
-    unsigned char *pData = NULL;
-	tABC_Error error;
-
 	[self.view endEditing:YES];
 
-	const char *requestID = [self createReceiveRequest];
+    // get the QR Code image
+    NSMutableString *strRequestID = [[NSMutableString alloc] init];
+    NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
+    UIImage *qrImage = [self createRequestQRImageFor:@"" withNotes:@"" storeRequestIDIn:strRequestID storeRequestAddressIn:strRequestAddress scaleAndSave:NO];
 
-	if (requestID)
-	{
-		tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
-                                                   [[User Singleton].password UTF8String],
-                                                   [_selectedWalletUUID UTF8String],
-                                                   requestID,
-                                                   &pData,
-                                                   &width,
-                                                   &error);
-
-		if (result == ABC_CC_Ok)
-		{
-			//printf("QRCode width: %d\n", width);
-
-			UIImage *qrImage = [self dataToImage:pData withWidth:width andHeight:width];
-			char *requestAddress;
-
-			result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
-										   [[User Singleton].password UTF8String],
-										   [_selectedWalletUUID UTF8String],
-                                           requestID,
-                                           &requestAddress,
-                                           &error);
-			if (result == ABC_CC_Ok)
-			{
-				[self showQRCodeViewControllerWithQRImage:qrImage address:[NSString stringWithUTF8String:requestAddress]];
-				free(requestAddress);
-			}
-		}
-		else
-		{
-			[self printABC_Error:&error];
-		}
-		if (requestID) free((void*)requestID);
-	}
-    if (pData) free(pData);
+    // bring up the qr code view controller
+    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress];
 }
 
 #pragma mark - Misc Methods
 
-- (const char *)createReceiveRequest
+- (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes
 {
 	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
 	
@@ -197,7 +186,7 @@ typedef enum eAddressPickerType
 	tABC_CC result;
 	double currency;
 	tABC_Error error;
-	
+
 	//first need to create a transaction details struct
 	details.amountSatoshi = ABC_BitcoinToSatoshi([self.BTC_TextField.text doubleValue]);
 	
@@ -211,35 +200,13 @@ typedef enum eAddressPickerType
 	{
 		details.amountCurrency = currency;
 	}
-	
-	tABC_AccountSettings *pAccountSettings = NULL;
-    ABC_LoadAccountSettings([[User Singleton].name UTF8String],
-                            [[User Singleton].password UTF8String],
-                            &pAccountSettings,
-                            &error);
-	
-	if (pAccountSettings->bNameOnPayments)
-	{
-        if (pAccountSettings->szNickname)
-        {
-            details.szName = pAccountSettings->szNickname;
-        }
-        else
-        {
-            details.szName = "";
-        }
-	}
-	else
-	{
-		//cw should we change details.szName to a const char * (to fix warning)?
-		details.szName = (char *)[NSLocalizedString(@"Anonymous", @"Name on payment") UTF8String];
-	}
-	
+
+    details.szName = (char *) [strName UTF8String];
+    details.szNotes = (char *) [strNotes UTF8String];
+
 	#warning TODO: Need to set up category for this transaction
-	details.szCategory = "None";
-	
-	#warning TODO: Need to set up notes for this transaction
-	details.szNotes = "";
+	details.szCategory = "";
+
 	
 	details.attributes = 0x0; //for our own use (not used by the core)
 
@@ -252,12 +219,6 @@ typedef enum eAddressPickerType
                                       &details,
                                       &pRequestID,
                                       &error);
-
-    // free the account setting structure we obtained
-	if (pAccountSettings)
-	{
-		ABC_FreeAccountSettings(pAccountSettings);
-	}
 
 	if (result == ABC_CC_Ok)
 	{
@@ -347,17 +308,15 @@ typedef enum eAddressPickerType
 	 }];
 }
 
-- (void)showAddressPickerFor:(tAddressPickerType)type
+- (void)showAddressPicker
 {
 	[self.view endEditing:YES];
-
-    _addressPickerType = type;
 
     ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
 
     picker.peoplePickerDelegate = self;
 
-    if (type == AddressPickerType_SMS)
+    if (_addressPickerType == AddressPickerType_SMS)
     {
         picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonPhoneProperty]];
     }
@@ -371,25 +330,24 @@ typedef enum eAddressPickerType
 }
 
 // generates and returns a request qr image, stores request id in the given mutable string
-- (UIImage *)createRequestQRImage:(NSMutableString *)strRequestID
+- (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes storeRequestIDIn:(NSMutableString *)strRequestID storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave
 {
-
     UIImage *qrImage = nil;
+    [strRequestID setString:@""];
+    [strRequestAddress setString:@""];
 
 	unsigned int width = 0;
     unsigned char *pData = NULL;
 	tABC_Error error;
 
-	[self.view endEditing:YES];
+	const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes];
 
-	const char *requestID = [self createReceiveRequest];
-
-	if (requestID)
+	if (szRequestID)
 	{
 		tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
                                                    [[User Singleton].password UTF8String],
                                                    [_selectedWalletUUID UTF8String],
-                                                   requestID,
+                                                   szRequestID,
                                                    &pData,
                                                    &width,
                                                    &error);
@@ -404,13 +362,35 @@ typedef enum eAddressPickerType
 		}
 	}
 
-    if (requestID)
+    if (szRequestID)
     {
         if (strRequestID)
         {
-            [strRequestID appendFormat:@"%s", requestID];
+            [strRequestID appendFormat:@"%s", szRequestID];
         }
-        free((void*)requestID);
+        char *szRequestAddress = NULL;
+
+        tABC_CC result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
+                                               [[User Singleton].password UTF8String],
+                                               [_selectedWalletUUID UTF8String],
+                                               szRequestID,
+                                               &szRequestAddress,
+                                               &error);
+
+        if (result == ABC_CC_Ok)
+        {
+            if (szRequestAddress && strRequestAddress)
+            {
+                [strRequestAddress appendFormat:@"%s", szRequestAddress];
+                free(szRequestAddress);
+            }
+        }
+        else
+        {
+			[self printABC_Error:&error];
+        }
+
+        free((void*)szRequestID);
     }
 
     if (pData)
@@ -418,7 +398,25 @@ typedef enum eAddressPickerType
         free(pData);
     }
 
-    return qrImage;
+    UIImage *qrImageFinal = qrImage;
+
+    if (bScaleAndSave)
+    {
+        // scale qr image up
+        UIGraphicsBeginImageContext(CGSizeMake(QR_CODE_SIZE, QR_CODE_SIZE));
+        CGContextRef c = UIGraphicsGetCurrentContext();
+        CGContextSetInterpolationQuality(c, kCGInterpolationNone);
+        [qrImage drawInRect:CGRectMake(0, 0, QR_CODE_SIZE, QR_CODE_SIZE)];
+        qrImageFinal = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+
+        // save it to a file
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:QR_CODE_TEMP_FILENAME];
+        [UIImagePNGRepresentation(qrImageFinal) writeToFile:filePath atomically:YES];
+    }
+
+    return qrImageFinal;
 }
 
 - (void)updateTextFieldContents
@@ -510,10 +508,68 @@ typedef enum eAddressPickerType
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
-- (void)sendSMS
+- (void)sendEMail
 {
-    //NSLog(@"sendSMS to: %@ / %@", self.strFullName, self.strPhoneNumber);
+    //NSLog(@"sendEMail to: %@ / %@", self.strFullName, self.strEMail);
 
+    // if mail is available
+    if ([MFMailComposeViewController canSendMail])
+    {
+        NSMutableString *strBody = [[NSMutableString alloc] init];
+
+        [strBody appendString:@"<html><body>\n"];
+
+        [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
+        [strBody appendString:@"<br><br>\n"];
+
+        // create the request and get the QR Code image
+        NSMutableString *strRequestID = [[NSMutableString alloc] init];
+        NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
+        UIImage *image = [self createRequestQRImageFor:self.strFullName withNotes:self.strEMail storeRequestIDIn:strRequestID storeRequestAddressIn:strRequestAddress scaleAndSave:YES];
+
+        // if we have a request address
+        if ([strRequestAddress length])
+        {
+            [strBody appendFormat:@"%@", strRequestAddress];
+            [strBody appendString:@"<br><br>\n"];
+        }
+
+        NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)];
+        NSString *base64String = [imageData base64Encoded];
+        [strBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/jpeg;base64,%@'></b></p>", base64String]];
+
+        [strBody appendString:@"</body></html>\n"];
+
+
+
+
+        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+
+        if ([self.strEMail length])
+        {
+            [mailComposer setToRecipients:[NSArray arrayWithObject:self.strEMail]];
+        }
+
+        [mailComposer setSubject:NSLocalizedString(@"Bitcoin Request", nil)];
+
+        [mailComposer setMessageBody:strBody isHTML:YES];
+
+        mailComposer.mailComposeDelegate = self;
+
+        [self presentViewController:mailComposer animated:YES completion:nil];
+        //[self presentModalViewController:mailComposer animated:NO];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"Can't send e-mail"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+
+#if 0
     MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
 	if ([MFMessageComposeViewController canSendText] && [MFMessageComposeViewController canSendAttachments])
 	{
@@ -522,9 +578,16 @@ typedef enum eAddressPickerType
 
         // get the QR Code image
         NSMutableString *strRequestID = [[NSMutableString alloc] init];
-        UIImage *image = [self createRequestQRImage:strRequestID];
+        NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
+        UIImage *image = [self createRequestQRImageFor:self.strFullName withNotes:self.strPhoneNumber storeRequestIDIn:strRequestID storeRequestAddressIn:strRequestAddress];
 
-        // scale it up
+        // if we have a request address
+        if ([strRequestAddress length])
+        {
+            [strBody appendFormat:@":\n%@", strRequestAddress];
+        }
+
+        // scale qr image up
         UIGraphicsBeginImageContext(CGSizeMake(QR_CODE_SIZE, QR_CODE_SIZE));
         CGContextRef c = UIGraphicsGetCurrentContext();
         CGContextSetInterpolationQuality(c, kCGInterpolationNone);
@@ -537,27 +600,10 @@ typedef enum eAddressPickerType
         NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:QR_CODE_TEMP_FILENAME];
         [UIImagePNGRepresentation(scaledImage) writeToFile:filePath atomically:YES];
 
-        char *requestAddress = NULL;
-        ABC_GetRequestAddress([[User Singleton].name UTF8String],
-                              [[User Singleton].password UTF8String],
-                              [_selectedWalletUUID UTF8String],
-                              [strRequestID UTF8String],
-                              &requestAddress,
-                              NULL);
-        if (requestAddress)
+        BOOL bAttached = [controller addAttachmentData:UIImagePNGRepresentation(scaledImage) typeIdentifier:(NSString*)kUTTypePNG filename:filePath];
+        if (!bAttached)
         {
-            [strBody appendFormat:@":\n%s", requestAddress];
-            free(requestAddress);
-        }
-
-        BOOL attached = [controller addAttachmentData:UIImagePNGRepresentation(scaledImage) typeIdentifier:(NSString*)kUTTypePNG filename:filePath];
-        if (attached)
-        {
-            NSLog(@"Attached qr code");
-        }
-        else
-        {
-            NSLog(@"Not attached qr code");
+            NSLog(@"Could not attach qr code");
         }
 
 		controller.body = strBody;
@@ -575,9 +621,57 @@ typedef enum eAddressPickerType
         [self presentViewController:controller animated:YES completion:nil];
         //[self.view.window.rootViewController presentViewController:controller animated:YES completion:nil];
 	}
-
+#endif
 }
 
+- (void)sendSMS
+{
+    //NSLog(@"sendSMS to: %@ / %@", self.strFullName, self.strPhoneNumber);
+
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+	if ([MFMessageComposeViewController canSendText] && [MFMessageComposeViewController canSendAttachments])
+	{
+        NSMutableString *strBody = [[NSMutableString alloc] init];
+        [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
+
+        // create the request and get the QR Code image
+        NSMutableString *strRequestID = [[NSMutableString alloc] init];
+        NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
+        UIImage *image = [self createRequestQRImageFor:self.strFullName withNotes:self.strPhoneNumber storeRequestIDIn:strRequestID storeRequestAddressIn:strRequestAddress scaleAndSave:YES];
+
+        // if we have a request address
+        if ([strRequestAddress length])
+        {
+            [strBody appendFormat:@":\n%@", strRequestAddress];
+        }
+
+        // create the attachment
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:QR_CODE_TEMP_FILENAME];
+        BOOL bAttached = [controller addAttachmentData:UIImagePNGRepresentation(image) typeIdentifier:(NSString*)kUTTypePNG filename:filePath];
+        if (!bAttached)
+        {
+            NSLog(@"Could not attach qr code");
+        }
+
+		controller.body = strBody;
+
+        if (self.strPhoneNumber)
+        {
+            if ([self.strPhoneNumber length] != 0)
+            {
+                controller.recipients = @[self.strPhoneNumber];
+            }
+        }
+
+		controller.messageComposeDelegate = self;
+
+        [self presentViewController:controller animated:YES completion:nil];
+        //[self.view.window.rootViewController presentViewController:controller animated:YES completion:nil];
+	}
+}
+
+// creates the full name from an address book record
 - (NSString *)getNameFromAddressRecord:(ABRecordRef)person
 {
     NSString *strFirstName = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
@@ -619,7 +713,7 @@ typedef enum eAddressPickerType
     return strFullName;
 }
 
-#pragma mark - calculator delegates
+#pragma mark - Calculator delegates
 
 - (void)CalculatorDone:(CalculatorView *)calculator
 {
@@ -690,6 +784,27 @@ typedef enum eAddressPickerType
             [self sendSMS];
         }];
     }
+    else if (_addressPickerType == AddressPickerType_EMail)
+    {
+        if (property == kABPersonEmailProperty)
+        {
+            ABMultiValueRef multiEMails = ABRecordCopyValue(person, kABPersonEmailProperty);
+            for (CFIndex i = 0; i < ABMultiValueGetCount(multiEMails); i++)
+            {
+                if (identifier == ABMultiValueGetIdentifierAtIndex(multiEMails, i))
+                {
+                    NSString *strEMail = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(multiEMails, i);
+                    self.strEMail = strEMail;
+                    break;
+                }
+            }
+            CFRelease(multiEMails);
+        }
+
+        [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:^{
+            [self sendEMail];
+        }];
+    }
 
 
     return NO;
@@ -733,6 +848,47 @@ typedef enum eAddressPickerType
     [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Mail Compose Delegate Methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    NSString *strTitle = nil;
+    NSString *strMsg = nil;
+
+	switch (result)
+    {
+		case MFMailComposeResultCancelled:
+            strMsg = NSLocalizedString(@"Email cancelled.", nil);
+			break;
+
+		case MFMailComposeResultSaved:
+            strMsg = NSLocalizedString(@"Email saved to send later.", nil);
+			break;
+
+		case MFMailComposeResultSent:
+            strMsg = NSLocalizedString(@"Email sent.", nil);
+			break;
+
+		case MFMailComposeResultFailed:
+		{
+            strTitle = NSLocalizedString(@"Error sending Email.", nil);
+            strMsg = [error localizedDescription];
+			break;
+		}
+		default:
+			break;
+	}
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
+                                                    message:strMsg
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                          otherButtonTitles:nil];
+    [alert show];
+
+    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Textfield delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -743,5 +899,25 @@ typedef enum eAddressPickerType
 	self.USD_TextField.text = @"";
 }
 
+#pragma mark UIAlertView delegates
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	// we only use the alert for selecting from contacts or not
+
+    // if they wanted to select from contacts
+    if (buttonIndex == 0)
+    {
+        [self performSelector:@selector(showAddressPicker) withObject:nil afterDelay:0.0];
+    }
+    else if (_addressPickerType == AddressPickerType_SMS)
+    {
+        [self performSelector:@selector(sendSMS) withObject:nil afterDelay:0.0];
+    }
+    else if (_addressPickerType == AddressPickerType_EMail)
+    {
+        [self performSelector:@selector(sendEMail) withObject:nil afterDelay:0.0];
+    }
+}
 
 @end
