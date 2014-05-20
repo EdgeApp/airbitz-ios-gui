@@ -11,18 +11,8 @@
 
 @implementation StylizedTextField
 
-- (id)initWithFrame:(CGRect)frame
+-(void)initMyVariables
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
--(void)awakeFromNib
-{
-	[super awakeFromNib];
 	[self setTintColor:[UIColor whiteColor]];
 	[self setPlaceholderTextColor];
 	
@@ -32,11 +22,24 @@
 	[button setImage:[UIImage imageNamed:@"clearButton.png"] forState:UIControlStateNormal];
 	[button setFrame:CGRectMake(0.0f, 0.0f, 15.0f, 15.0f)]; // Required for iOS7
 	[button addTarget:self action:@selector(doClear) forControlEvents:UIControlEventTouchUpInside];
-	 self.rightView = button;
-	 self.rightViewMode = self.clearButtonMode;
-	 
-	//UIColor *color = [UIColor lightTextColor];
-	//YOURTEXTFIELD.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"PlaceHolder Text" attributes:@{NSForegroundColorAttributeName: color}];
+	self.rightView = button;
+	self.rightViewMode = self.clearButtonMode;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+	{
+        [self initMyVariables];
+    }
+    return self;
+}
+
+-(void)awakeFromNib
+{
+	[super awakeFromNib];
+	[self initMyVariables];
 }
 
 -(void)setPlaceholderTextColor

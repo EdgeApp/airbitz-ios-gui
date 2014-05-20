@@ -10,7 +10,7 @@
 #import "PopupWheelPickerView.h"
 #import "CommonTypes.h"
 
-#define ARROW_INSET             1.0
+#define ARROW_INSET             2.0
 
 @interface PopupWheelPickerView () <UIPickerViewDataSource, UIPickerViewDelegate>
 {

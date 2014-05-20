@@ -1083,7 +1083,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell;
-
+	//UIColor *backgroundColor;
     if (indexPath.section == SECTION_LOGOUT)
 	{
 		// logout button
@@ -1101,16 +1101,19 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			if (indexPath.row == 0)
 			{
 				cellImage = [UIImage imageNamed:@"bd_cell_top"];
+				//backgroundColor = [UIColor redColor];
 			}
 			else
 			{
 				if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1)
 				{
 					cellImage = [UIImage imageNamed:@"bd_cell_bottom"];
+					//backgroundColor = [UIColor greenColor];
 				}
 				else
 				{
 					cellImage = [UIImage imageNamed:@"bd_cell_middle"];
+					//backgroundColor = [UIColor blueColor];
 				}
 			}
 		}
@@ -1151,7 +1154,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		}
 	}
 
-	
+	//cell.backgroundColor = backgroundColor;
 	cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
 	return cell;
 }

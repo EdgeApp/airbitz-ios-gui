@@ -29,6 +29,9 @@
 		4C5D8C55192AA1A80015BB3C /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C54192AA1A80015BB3C /* DDData.m */; };
 		4C5D8C58192AB6C60015BB3C /* ImportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C57192AB6C60015BB3C /* ImportWalletViewController.m */; };
 		4C5D8C5B192AB8E70015BB3C /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C5A192AB8E70015BB3C /* Util.m */; };
+		4C5D8C5D192AC11C0015BB3C /* comp_12.1-import_wallet_v2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C5C192AC11C0015BB3C /* comp_12.1-import_wallet_v2.jpg */; };
+		4C5D8C60192AF4FF0015BB3C /* btn_camera~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C5E192AF4FF0015BB3C /* btn_camera~iphone.png */; };
+		4C5D8C61192AF4FF0015BB3C /* btn_camera@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C5F192AF4FF0015BB3C /* btn_camera@2x~iphone.png */; };
 		4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
@@ -439,6 +442,9 @@
 		4C5D8C57192AB6C60015BB3C /* ImportWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportWalletViewController.m; sourceTree = "<group>"; };
 		4C5D8C59192AB8E70015BB3C /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		4C5D8C5A192AB8E70015BB3C /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		4C5D8C5C192AC11C0015BB3C /* comp_12.1-import_wallet_v2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_12.1-import_wallet_v2.jpg"; sourceTree = "<group>"; };
+		4C5D8C5E192AF4FF0015BB3C /* btn_camera~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_camera~iphone.png"; sourceTree = "<group>"; };
+		4C5D8C5F192AF4FF0015BB3C /* btn_camera@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_camera@2x~iphone.png"; sourceTree = "<group>"; };
 		4C90461C18C91E5900179D9C /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h; sourceTree = "<group>"; };
 		4C90461D18C91E5900179D9C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Exception.h; sourceTree = "<group>"; };
 		4C90461E18C91E5900179D9C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Image.h; sourceTree = "<group>"; };
@@ -1407,6 +1413,8 @@
 		B59C144118C012B500AEA789 /* wallet */ = {
 			isa = PBXGroup;
 			children = (
+				4C5D8C5E192AF4FF0015BB3C /* btn_camera~iphone.png */,
+				4C5D8C5F192AF4FF0015BB3C /* btn_camera@2x~iphone.png */,
 				B5F2E9D418DCE475008ACF88 /* Green-check@2x~iphone.png */,
 				B5F2E9D518DCE475008ACF88 /* Green-check~iphone.png */,
 				B5F2E9D618DCE475008ACF88 /* Red-X@2x~iphone.png */,
@@ -1420,6 +1428,7 @@
 				B55D0FE418E1F7FD0035DCC8 /* comp_9_transactions_details.jpg */,
 				B5FD392918EE33AD00BE2670 /* comp_09.4-sending.jpg */,
 				B5C0A95D18EA07F6008F302C /* comp_10.2-request_bitcoin.jpg */,
+				4C5D8C5C192AC11C0015BB3C /* comp_12.1-import_wallet_v2.jpg */,
 				4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */,
 				B59C144218C012B500AEA789 /* bar_balance@2x~iphone.png */,
 				B59C144318C012B500AEA789 /* bar_balance~iphone.png */,
@@ -1919,6 +1928,7 @@
 				B59C151518C012B500AEA789 /* icon_bitcoin_dark~iphone.png in Resources */,
 				B561E1AE18D259CA002DCDC2 /* btn_close@2x~iphone.png in Resources */,
 				B516C1F418C802F6008CC6A1 /* bd_cell_bottom_white@2x~iphone.png in Resources */,
+				4C5D8C60192AF4FF0015BB3C /* btn_camera~iphone.png in Resources */,
 				B59C151C18C012B500AEA789 /* icon_request@2x~iphone.png in Resources */,
 				B59C14F918C012B500AEA789 /* btn_multiply~iphone.png in Resources */,
 				B5137C0F18A40A8400DA4A34 /* Lato-LightItalic.ttf in Resources */,
@@ -2013,6 +2023,7 @@
 				B59C14E318C012B500AEA789 /* btn_calc_back~iphone.png in Resources */,
 				B59C14F818C012B500AEA789 /* btn_multiply@2x~iphone.png in Resources */,
 				B59C154218C012B500AEA789 /* table_cell_top@2x~iphone.png in Resources */,
+				4C5D8C5D192AC11C0015BB3C /* comp_12.1-import_wallet_v2.jpg in Resources */,
 				B59C150A18C012B500AEA789 /* btn_td_done@2x~iphone.png in Resources */,
 				B5C0A8E118E644EE008F302C /* flash_auto~iphone.png in Resources */,
 				B55A032418EB597D00845090 /* btn_deleteCategory@2x~iphone.png in Resources */,
@@ -2025,6 +2036,7 @@
 				B5675B6718A17F6F002E0703 /* Images.xcassets in Resources */,
 				B5675BAE18A19A84002E0703 /* background~iphone.jpg in Resources */,
 				B59C143718C0129300AEA789 /* bd_cell_top@2x~iphone.png in Resources */,
+				4C5D8C61192AF4FF0015BB3C /* btn_camera@2x~iphone.png in Resources */,
 				B59C141E18C0113A00AEA789 /* divider@2x~iphone.png in Resources */,
 				B59C14F118C012B500AEA789 /* btn_equal~iphone.png in Resources */,
 				B53FD64418F6EA110001E00D /* clearButton~iphone.png in Resources */,
@@ -2339,7 +2351,7 @@
 					./AirBitz/ZBarSDK,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4B954471-ADD5-4A01-9B13-707BCC7DC74B";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2363,7 +2375,7 @@
 					./AirBitz/ZBarSDK,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4B954471-ADD5-4A01-9B13-707BCC7DC74B";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
