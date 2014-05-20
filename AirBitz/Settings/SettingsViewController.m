@@ -236,7 +236,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         [[User Singleton] loadSettings];
     }
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 }
 
 // replaces the string in the given variable with a duplicate of another
