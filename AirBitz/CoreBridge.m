@@ -238,7 +238,7 @@
     double converted = bitcoin / [User Singleton].denomination;
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle: NSNumberFormatterCurrencyStyle];
-    [f setCurrencySymbol:@"B "];
+    [f setCurrencySymbol: [User Singleton].denominationLabelShort];
     return [f stringFromNumber:[NSNumber numberWithFloat:converted]];
 }
 
