@@ -2380,6 +2380,10 @@
                                                             <color key="textColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_right.png" id="QnU-SQ-r7P">
+                                                            <rect key="frame" x="261" y="11" width="22" height="22"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
@@ -2444,7 +2448,7 @@
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="qLX-2g-fOr">
                                                             <rect key="frame" x="230" y="3" width="51" height="31"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                            <color key="onTintColor" red="0.14117647058823529" green="0.60392156862745094" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="onTintColor" red="0.45490196078431372" green="0.72156862745098038" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <connections>
                                                                 <action selector="switchToggled" destination="me5-hG-XVx" eventType="valueChanged" id="tfi-G0-FXr"/>
                                                             </connections>
