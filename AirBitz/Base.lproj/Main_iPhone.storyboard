@@ -1353,10 +1353,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" alpha="0.54999999999999993" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comp_12.1-import_wallet_v2.jpg" id="53v-He-STC">
-                                <rect key="frame" x="1000" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -3598,7 +3594,6 @@
         <image name="btn_td_done.png" width="251" height="41"/>
         <image name="comp_07-account_transactions2.jpg" width="640" height="1136"/>
         <image name="comp_09.2-send_bitcoin2.jpg" width="640" height="1136"/>
-        <image name="comp_12.1-import_wallet_v2.jpg" width="640" height="1136"/>
         <image name="darken_bottom_table_cell.png" width="320" height="111"/>
         <image name="divider.png" width="320" height="27"/>
         <image name="divider_thumb.png" width="16" height="4"/>
