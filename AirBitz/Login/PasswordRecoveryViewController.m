@@ -11,6 +11,7 @@
 #import "ABC.h"
 #import "User.h"
 #import "MontserratLabel.h"
+#import "Util.h"
 
 #define IS_IPHONE5                  (([[UIScreen mainScreen] bounds].size.height == 568) ? YES : NO)
 
@@ -97,7 +98,7 @@ typedef enum eAlertType
                            PW_ABC_Request_Callback,
                            (__bridge void *)self,
                            &Error);
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 
     if (ABC_CC_Ok != result)
     {
@@ -253,7 +254,7 @@ typedef enum eAlertType
                                              PW_ABC_Request_Callback,
                                              (__bridge void *)self,
                                              &Error);
-	[self printABC_Error:&Error];
+	[Util printABC_Error:&Error];
 
 	if (ABC_CC_Ok != result)
 	{
@@ -268,23 +269,6 @@ typedef enum eAlertType
 		//NSLog(@"%@", [NSString stringWithFormat:@"Sign-up failed:\n%s", Error.szDescription]);
 	}
 	
-}
-
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
-    }
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions

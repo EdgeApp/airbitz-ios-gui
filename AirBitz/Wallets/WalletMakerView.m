@@ -11,6 +11,7 @@
 #import "User.h"
 #import "CommonTypes.h"
 #import "OfflineWalletViewController.h"
+#import "Util.h"
 
 @interface WalletMakerView () <ButtonSelectorDelegate, UITextFieldDelegate>
 {
@@ -210,7 +211,7 @@
                               ABC_Wallet_Maker_Request_Callback,
                               (__bridge void *)self,
                               &Error);
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 
     if (result == ABC_CC_Ok)
     {
@@ -271,23 +272,6 @@
 - (void)blockUser:(BOOL)bBlock
 {
     self.viewBlocker.hidden = !bBlock;
-}
-
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
-    }
 }
 
 - (void)exit

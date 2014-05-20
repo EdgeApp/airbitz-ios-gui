@@ -21,6 +21,7 @@
 #import "PopupWheelPickerView.h"
 #import "CommonTypes.h"
 #import "CategoriesViewController.h"
+#import "Util.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -162,7 +163,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     // get the currencies
     _aCurrencies = NULL;
     ABC_GetCurrencies(&_aCurrencies, &_currencyCount, &Error);
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 
     // set up our internal currency arrays
     NSMutableArray *arrayCurrencyCodes = [[NSMutableArray alloc] initWithCapacity:_currencyCount];
@@ -181,7 +182,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                             [[User Singleton].password UTF8String],
                             &_pAccountSettings,
                             &Error);
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 	
     _frameStart = self.tableView.frame;
     _keyboardHeight = 0.0;
@@ -231,7 +232,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                               [[User Singleton].password UTF8String],
                               _pAccountSettings,
                               &Error);
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 }
 
 // replaces the string in the given variable with a duplicate of another
@@ -589,23 +590,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [arraySelections addObject:[NSNumber numberWithInt:finalType]];
 
     return arraySelections;
-}
-
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
-    }
 }
 
 #pragma mark - Action Methods

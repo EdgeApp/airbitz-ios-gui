@@ -12,6 +12,7 @@
 #import "ABC.h"
 #import "User.h"
 #import "PickerTextView.h"
+#import "Util.h"
 
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y    3
 #define TABLE_SIZE_EXTRA_HEIGHT         5
@@ -199,7 +200,7 @@
                       &_aszCategories,
                       &_count,
                       &Error);
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 
     // store them in our own array
     self.arrayCategories = [[NSMutableArray alloc] init];
@@ -235,7 +236,7 @@
         {
             // it doesn't exist in our new list so delete it from the core
             ABC_RemoveCategory([[User Singleton].name UTF8String], _aszCategories[i], &Error);
-            [self printABC_Error:&Error];
+            [Util printABC_Error:&Error];
         }
     }
 
@@ -244,7 +245,7 @@
     {
         NSString *strCategory = [self.arrayCategories objectAtIndex:i];
         ABC_AddCategory([[User Singleton].name UTF8String], (char *)[strCategory UTF8String], &Error);
-        [self printABC_Error:&Error];
+        [Util printABC_Error:&Error];
     }
 }
 
@@ -358,23 +359,6 @@
             free(aszStrings[i]);
         }
         free(aszStrings);
-    }
-}
-
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
     }
 }
 

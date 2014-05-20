@@ -18,6 +18,7 @@
 #import "SettingsViewController.h"
 #import "User.h"
 #import "Config.h"
+#import "Util.h"
 
 
 typedef enum eAppMode
@@ -80,7 +81,7 @@ typedef enum eAppMode
                    (unsigned int)[seedData length],
                    &Error);
     //NSLog(@"ABC_Initialize complete");
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 #endif
 
 	originalTabBarFrame = self.tabBar.frame;
@@ -129,22 +130,6 @@ typedef enum eAppMode
 
 #pragma mark - Misc Methods
 
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
-    }
-}
 
 - (void)fillSeedData:(NSMutableData *)data
 {
@@ -305,7 +290,7 @@ typedef enum eAppMode
 					}
 					else
 					{
-						[self printABC_Error:&error];
+						[Util printABC_Error:&error];
 						UIAlertView *alert = [[UIAlertView alloc]
 											  initWithTitle:NSLocalizedString(@"No Wallets", @"Alert title that warns user they have no wallets to send from")
 											  message:NSLocalizedString(@"You have no wallets from which to send funds.  First create a wallet by tapping on the Wallets tab and hitting the '+' button", nil)

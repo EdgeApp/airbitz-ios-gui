@@ -322,23 +322,6 @@ extern void QRcode_free(QRcode *qrcode);
 	return rawImage;
 }
 
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
-    }
-}
-
 - (void)animatedExit
 {
 	[UIView animateWithDuration:0.35

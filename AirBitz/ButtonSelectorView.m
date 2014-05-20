@@ -51,6 +51,24 @@
     return self;
 }
 
+- (void)setButtonWidth:(CGFloat)width
+{
+    CGFloat distFromButton = self.button.frame.origin.x - (self.textLabel.frame.origin.x + self.textLabel.frame.size.width);
+
+    CGRect frameLabel = self.textLabel.frame;
+    frameLabel.size.width += (self.button.frame.size.width - width);
+    self.textLabel.frame = frameLabel;
+
+    CGRect frameButton = self.button.frame;
+    frameButton.origin.x += (frameButton.size.width - width);
+    frameButton.size.width = width;
+
+    self.button.frame = frameButton;
+    _originalButtonFrame = frameButton;
+
+    distFromButton = self.button.frame.origin.x - (self.textLabel.frame.origin.x + self.textLabel.frame.size.width);
+}
+
 - (UIImage *)stretchableImage:(NSString *)imageName
 {
 	UIImage *img = [UIImage imageNamed:imageName];

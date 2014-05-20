@@ -15,6 +15,7 @@
 #import "User.h"
 #import "ButtonSelectorView.h"
 #import "CommonTypes.h"
+#import "Util.h"
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate>
 {
@@ -148,7 +149,7 @@
     unsigned int nCount;
 	tABC_Error Error;
     ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 	
     printf("Wallets:\n");
 	
@@ -245,23 +246,6 @@
 	}
 	
 	//[self.view endEditing:YES];
-}
-
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
-    }
 }
 
 #pragma mark - UITextField delegates
@@ -384,7 +368,7 @@
 		//printf("Parsing URI: %s\n", [text UTF8String]);
 		//ABC_ParseBitcoinURI("bitcoin:1585j6GvTMz6gkCgjK3kpm9SBkEZCdN5aW?amount=0.00000100&label=MyName&message=MyNotes", &uri, &Error);
 		ABC_ParseBitcoinURI([text UTF8String], &uri, &Error);
-		[self printABC_Error:&Error];
+		[Util printABC_Error:&Error];
 		
 		if (uri != NULL)
 		{

@@ -23,6 +23,7 @@
 @property (nonatomic, readwrite) int selectedItemIndex;
 @property (nonatomic, strong) IBOutlet UIView *containerView;	/* if this is embedded within a containerView, specify it here and this will animate the containerView's frame to fit the table */
 
+- (void)setButtonWidth:(CGFloat)width;
 - (void)close; /* closes button table and shrinks button if open */
 
 @end
