@@ -15,7 +15,8 @@
 #define SKIP_PW_VALIDATION_CHECKS		0	/* skip password signup validation (allows user to enter anything) */
 #define HARD_CODED_LOGIN				1	/* set to 1 to auto login with credientials below (used for testing) */
 
-#define HARD_CODED_LOGIN_NAME			@"201404062"
+//#define HARD_CODED_LOGIN_NAME			@"201404062" //simulator
+#define HARD_CODED_LOGIN_NAME			@"20140514" //carson iPhone
 #define HARD_CODED_LOGIN_PASSWORD		@"Carson Whitsett1"
 
 #endif
