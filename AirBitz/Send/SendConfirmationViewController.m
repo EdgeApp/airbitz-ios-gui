@@ -15,6 +15,7 @@
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
 #import "CoreBridge.h"
+#import "Util.h"
 
 #define DOLLAR_CURRENCY_NUM 840
 
@@ -145,23 +146,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
-    }
-}
-
 -(void)showSendStatus
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
@@ -270,7 +254,7 @@
 			}
 			else
 			{
-				[self printABC_Error:&Error];
+				[Util printABC_Error:&Error];
 			}
 			
 			ABC_FreeWalletInfoArray(aWalletInfo, nCount);
@@ -284,7 +268,7 @@
     unsigned int nCount;
 	tABC_Error Error;
     ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
-    [self printABC_Error:&Error];
+    [Util printABC_Error:&Error];
 	
     printf("Wallets:\n");
 	
@@ -384,7 +368,7 @@
 		char *szPIN = NULL;
 		
 		ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szPIN, &error);
-		[self printABC_Error:&error];
+		[Util printABC_Error:&error];
 		NSLog(@"current PIN: %s", szPIN);
 		if(szPIN)
 		{

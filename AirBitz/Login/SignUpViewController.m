@@ -16,6 +16,7 @@
 #import "MontserratLabel.h"
 #import "LatoLabel.h"
 #import "User.h"
+#import "Util.h"
 
 #define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
@@ -202,7 +203,7 @@
                 else
                 {
                     [self.activityView stopAnimating];
-                    [self printABC_Error:&Error];
+                    [Util printABC_Error:&Error];
                     UIAlertView *alert = [[UIAlertView alloc]
                                           initWithTitle:self.labelTitle.text
                                           message:[NSString stringWithFormat:@"%@ failed:\n%s",
@@ -500,23 +501,6 @@
     {
         [self.activityView stopAnimating];
         self.buttonBlocker.hidden = YES;
-    }
-}
-
-- (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine
-                   );
-        }
     }
 }
 
