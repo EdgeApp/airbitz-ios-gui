@@ -90,6 +90,12 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.name = nil;
     self.password = nil;
 #endif
+    tABC_Error Error;
+    ABC_ClearKeyCache(&Error);
+    if (ABC_CC_Ok != Error.code)
+    {
+#warning TODO: handle error
+    }
 }
 
 @end
