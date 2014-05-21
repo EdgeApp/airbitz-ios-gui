@@ -24,14 +24,23 @@
 
 #define READER_VIEW_TAG     99999999
 
-@interface ImportWalletViewController () <ButtonSelectorDelegate, UITextFieldDelegate, FlashSelectViewDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate, UIAlertViewDelegate>
+typedef enum eImportState
+{
+    ImportState_PrivateKey,
+    ImportState_EnterPassword,
+    ImportState_RetryPassword,
+    ImportState_Importing
+} tImportState;
+
+@interface ImportWalletViewController () <ButtonSelectorDelegate, UITextFieldDelegate, FlashSelectViewDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate>
 {
     ZBarReaderView          *_readerView;
     ZBarReaderController    *_readerPicker;
     NSTimer                 *_startScannerTimer;
     NSInteger               _selectedWallet;
     BOOL                    _bUsingImagePicker;
-    BOOL                    _bShowingPassword;
+    BOOL                    _bPasswordRequired;
+    tImportState            _state;
 }
 
 @property (weak, nonatomic) IBOutlet UIView             *viewHeader;
@@ -47,6 +56,10 @@
 @property (weak, nonatomic) IBOutlet UIView             *viewMiddle;
 @property (weak, nonatomic) IBOutlet UIView             *viewBottom;
 @property (weak, nonatomic) IBOutlet LatoLabel          *labelEnter;
+@property (weak, nonatomic) IBOutlet UIImageView        *imagePasswordEmboss;
+@property (weak, nonatomic) IBOutlet UIImageView        *imageApproved;
+@property (weak, nonatomic) IBOutlet UIImageView        *imageNotApproved;
+@property (weak, nonatomic) IBOutlet LatoLabel          *labelPasswordStatus;
 
 @property (nonatomic, strong) NSArray  *arrayWalletUUIDs;
 @property (nonatomic, copy)   NSString *strPassword;
@@ -70,7 +83,7 @@
     // Do any additional setup after loading the view.
 
     _bUsingImagePicker = NO;
-    _bShowingPassword = NO;
+    _state = ImportState_PrivateKey;
 
     self.flashSelector.delegate = self;
     self.textPrivateKey.delegate = self;
@@ -81,6 +94,16 @@
 
     // get a callback when the private key changes
     [self.textPrivateKey addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+
+    // move the dislay and password views to correct y, just in case the xib moved them for editing
+    CGRect frame = self.viewDisplay.frame;
+    frame.origin.y = self.viewHeader.frame.origin.y + self.viewHeader.frame.size.height;
+    frame.origin.x = 0;
+    self.viewDisplay.frame = frame;
+    frame = self.viewPassword.frame;
+    frame.origin.y = self.viewHeader.frame.origin.y + self.viewHeader.frame.size.height;
+    frame.origin.x = 0;
+    self.viewPassword.frame = frame;
 
     [self setWalletData];
 
@@ -157,18 +180,57 @@
 
     self.labelEnter.hidden = bHideEnter;
 
-    self.viewDisplay.hidden = _bShowingPassword;
-    self.viewPassword.hidden = !_bShowingPassword;
+    if (_state == ImportState_PrivateKey)
+    {
+        self.viewDisplay.hidden = NO;
+        self.viewPassword.hidden = YES;
+    }
+    else
+    {
+        self.viewDisplay.hidden = YES;
+        self.viewPassword.hidden = NO;
 
-    // move the dislay and password views to correct y, just in case the xib moved them for editing
-    CGRect frame = self.viewDisplay.frame;
-    frame.origin.y = self.viewHeader.frame.origin.y + self.viewHeader.frame.size.height;
-    frame.origin.x = 0;
-    self.viewDisplay.frame = frame;
-    frame = self.viewPassword.frame;
-    frame.origin.y = self.viewHeader.frame.origin.y + self.viewHeader.frame.size.height;
-    frame.origin.x = 0;
-    self.viewPassword.frame = frame;
+        self.imageApproved.hidden = YES;
+        self.imageNotApproved.hidden = YES;
+        self.textPassword.hidden = YES;
+        self.imagePasswordEmboss.hidden = YES;
+        self.textPassword.enabled = NO;
+
+        if (_bPasswordRequired)
+        {
+            self.textPassword.hidden = NO;
+            self.imagePasswordEmboss.hidden = NO;
+        }
+
+        if (_state == ImportState_EnterPassword)
+        {
+            self.textPassword.enabled = YES;
+            self.labelPasswordStatus.text = NSLocalizedString(@"Enter password to decode wallet:", nil);
+            self.textPassword.hidden = NO;
+            self.imagePasswordEmboss.hidden = NO;
+        }
+        else if (_state == ImportState_RetryPassword)
+        {
+            self.textPassword.enabled = YES;
+            self.labelPasswordStatus.text = NSLocalizedString(@"Incorrect password.\nTry again:", nil);
+            self.textPassword.hidden = NO;
+            self.imagePasswordEmboss.hidden = NO;
+            self.imageNotApproved.hidden = NO;
+        }
+        else if (_state == ImportState_Importing)
+        {
+            // TODO: core needs to provide the amount we are sweeping into wallet so we can put that in the text
+            if (_bPasswordRequired)
+            {
+                self.labelPasswordStatus.text = NSLocalizedString(@"Password Correct.\nSweeping B XX.XXXX into wallet...", nil);
+                self.imageApproved.hidden = NO;
+            }
+            else
+            {
+                self.labelPasswordStatus.text = NSLocalizedString(@"Sweeping B XX.XXXX into wallet...", nil);
+            }
+        }
+    }
 }
 
 - (void)updateDisplayLayout
@@ -199,7 +261,7 @@
 
 - (void)requestPassword
 {
-    _bShowingPassword = YES;
+    _state = ImportState_EnterPassword;
     [self updateDisplay];
     [self.textPassword becomeFirstResponder];
 }
@@ -244,8 +306,12 @@
 
     // TODO: core needs to check if password is correct
     // self.strPassword
-    // for now assume it is
+    // for now assume it is as long as it isn't blank
     BOOL bPasswordValid = YES;
+    if ([self.strPassword length] == 0)
+    {
+        bPasswordValid = NO;
+    }
 
     if (bPasswordValid)
     {
@@ -253,13 +319,8 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Import Failed", nil)
-                              message:NSLocalizedString(@"Invalid password", nil)
-                              delegate:nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
+        _state = ImportState_RetryPassword;
+        [self updateDisplay];
         [self.textPassword becomeFirstResponder];
     }
 }
@@ -270,14 +331,10 @@
     //strWalletUUID = [self.arrayWalletUUIDs objectAtIndex:_selectedWallet];
     //self.strPassword
     //self.strPrivateKey
+    // then bring up the transaction window representing the import
 
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Import Success", nil)
-                          message:NSLocalizedString(@"The wallet was succesfully imported", nil)
-                          delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil];
-    [alert show];
+    _state = ImportState_Importing;
+    [self updateDisplay];
 }
 
 - (void)triggerImportStart
@@ -290,8 +347,8 @@
     // TODO: core needs to check self.textPrivate.text for password requirement
 
     // for now assume a password is needed
-    BOOL bPasswordRequired = YES;
-    if (bPasswordRequired)
+    _bPasswordRequired = YES;
+    if (_bPasswordRequired)
     {
         [self requestPassword];
     }
@@ -322,6 +379,7 @@
 
 - (void)showImageScanner
 {
+#if !TARGET_IPHONE_SIMULATOR
     [self closeCameraScanner];
 
     _bUsingImagePicker = YES;
@@ -337,6 +395,7 @@
 
     [self presentViewController:_readerPicker animated:YES completion:nil];
     //[self presentModalViewController:_readerPicker animated: YES];
+#endif
 }
 
 - (void)startCameraScanner
@@ -411,7 +470,7 @@
 
 - (void)textFieldDidChange:(UITextField *)textField
 {
-    if (!_bShowingPassword)
+    if (_state == ImportState_PrivateKey)
     {
         [self updateDisplay];
     }
@@ -421,7 +480,7 @@
 {
 	[textField resignFirstResponder];
 
-    if (!_bShowingPassword)
+    if (_state == ImportState_PrivateKey)
     {
         [self updateDisplay];
 
@@ -437,7 +496,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (!_bShowingPassword)
+    if (_state == ImportState_PrivateKey)
     {
         [_readerView stop];
         [self.buttonSelector close];
@@ -448,7 +507,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (!_bShowingPassword)
+    if (_state == ImportState_PrivateKey)
     {
         [self updateDisplay];
     }
@@ -510,6 +569,8 @@
     [view stop];
 }
 
+#if !TARGET_IPHONE_SIMULATOR
+
 - (void)imagePickerController:(UIImagePickerController *)reader didFinishPickingMediaWithInfo:(NSDictionary*) info
 {
     id<NSFastEnumeration> results = [info objectForKey:ZBarReaderControllerResults];
@@ -531,19 +592,13 @@
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:NSLocalizedString(@"QR Code Scan Failure", nil)
                           message:NSLocalizedString(@"Unable to scan QR code", nil)
-                          delegate:self
+                          delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil];
     [alert show];
 }
 
-#pragma mark UIAlertView delegates
+#endif
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	// we only use an alert delegate when we have successfully imported
-
-    [self performSelector:@selector(animatedExit) withObject:nil afterDelay:0.0];
-}
 
 @end

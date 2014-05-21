@@ -32,6 +32,10 @@
 		4C5D8C5D192AC11C0015BB3C /* comp_12.1-import_wallet_v2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C5C192AC11C0015BB3C /* comp_12.1-import_wallet_v2.jpg */; };
 		4C5D8C60192AF4FF0015BB3C /* btn_camera~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C5E192AF4FF0015BB3C /* btn_camera~iphone.png */; };
 		4C5D8C61192AF4FF0015BB3C /* btn_camera@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C5F192AF4FF0015BB3C /* btn_camera@2x~iphone.png */; };
+		4C5D8C66192D1DE50015BB3C /* icon_not_approved~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C62192D1DE50015BB3C /* icon_not_approved~iphone.png */; };
+		4C5D8C67192D1DE50015BB3C /* icon_not_approved@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C63192D1DE50015BB3C /* icon_not_approved@2x~iphone.png */; };
+		4C5D8C68192D1DE50015BB3C /* icon_approved~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C64192D1DE50015BB3C /* icon_approved~iphone.png */; };
+		4C5D8C69192D1DE50015BB3C /* icon_approved@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C65192D1DE50015BB3C /* icon_approved@2x~iphone.png */; };
 		4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
@@ -445,6 +449,10 @@
 		4C5D8C5C192AC11C0015BB3C /* comp_12.1-import_wallet_v2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_12.1-import_wallet_v2.jpg"; sourceTree = "<group>"; };
 		4C5D8C5E192AF4FF0015BB3C /* btn_camera~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_camera~iphone.png"; sourceTree = "<group>"; };
 		4C5D8C5F192AF4FF0015BB3C /* btn_camera@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_camera@2x~iphone.png"; sourceTree = "<group>"; };
+		4C5D8C62192D1DE50015BB3C /* icon_not_approved~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_not_approved~iphone.png"; sourceTree = "<group>"; };
+		4C5D8C63192D1DE50015BB3C /* icon_not_approved@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_not_approved@2x~iphone.png"; sourceTree = "<group>"; };
+		4C5D8C64192D1DE50015BB3C /* icon_approved~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_approved~iphone.png"; sourceTree = "<group>"; };
+		4C5D8C65192D1DE50015BB3C /* icon_approved@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_approved@2x~iphone.png"; sourceTree = "<group>"; };
 		4C90461C18C91E5900179D9C /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h; sourceTree = "<group>"; };
 		4C90461D18C91E5900179D9C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Exception.h; sourceTree = "<group>"; };
 		4C90461E18C91E5900179D9C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Image.h; sourceTree = "<group>"; };
@@ -1534,6 +1542,10 @@
 				B5C0A8DF18E644EE008F302C /* flash_on~iphone.png */,
 				B59C149018C012B500AEA789 /* h_seperator@2x~iphone.png */,
 				B59C149118C012B500AEA789 /* h_seperator~iphone.png */,
+				4C5D8C62192D1DE50015BB3C /* icon_not_approved~iphone.png */,
+				4C5D8C63192D1DE50015BB3C /* icon_not_approved@2x~iphone.png */,
+				4C5D8C64192D1DE50015BB3C /* icon_approved~iphone.png */,
+				4C5D8C65192D1DE50015BB3C /* icon_approved@2x~iphone.png */,
 				B59C149218C012B500AEA789 /* icon_bitcoin_dark@2x~iphone.png */,
 				B59C149318C012B500AEA789 /* icon_bitcoin_dark~iphone.png */,
 				B59C149418C012B500AEA789 /* icon_bitcoin_light@2x~iphone.png */,
@@ -1857,6 +1869,7 @@
 				B516C1F118C7E7F2008CC6A1 /* btn_locateMe~iphone.png in Resources */,
 				B5675BB418A19A84002E0703 /* SearchBarBacking@2x~iphone.png in Resources */,
 				B59C150E18C012B500AEA789 /* emboss_down_deep~iphone.png in Resources */,
+				4C5D8C68192D1DE50015BB3C /* icon_approved~iphone.png in Resources */,
 				B59C14D218C012B500AEA789 /* btn_4@2x~iphone.png in Resources */,
 				B5F2EB1318DE01EE008ACF88 /* QuestionAnswerView~ipad.xib in Resources */,
 				B55A030318EA206300845090 /* btn_selected~iphone.png in Resources */,
@@ -1866,6 +1879,7 @@
 				B59C141A18C0113A00AEA789 /* bkg_categories@2x~iphone.png in Resources */,
 				B59C14D818C012B500AEA789 /* btn_7@2x~iphone.png in Resources */,
 				B59C152518C012B500AEA789 /* icon_settings_dark@2x~iphone.png in Resources */,
+				4C5D8C66192D1DE50015BB3C /* icon_not_approved~iphone.png in Resources */,
 				B59C152A18C012B500AEA789 /* icon_USD_light.png in Resources */,
 				B56553F418EDDD26005B35E1 /* ButtonSelectorView~iphone.xib in Resources */,
 				B59C151F18C012B500AEA789 /* icon_request~iphone.png in Resources */,
@@ -2038,6 +2052,7 @@
 				B59C143718C0129300AEA789 /* bd_cell_top@2x~iphone.png in Resources */,
 				4C5D8C61192AF4FF0015BB3C /* btn_camera@2x~iphone.png in Resources */,
 				B59C141E18C0113A00AEA789 /* divider@2x~iphone.png in Resources */,
+				4C5D8C69192D1DE50015BB3C /* icon_approved@2x~iphone.png in Resources */,
 				B59C14F118C012B500AEA789 /* btn_equal~iphone.png in Resources */,
 				B53FD64418F6EA110001E00D /* clearButton~iphone.png in Resources */,
 				B59C143818C0129300AEA789 /* bd_cell_top~iphone.png in Resources */,
@@ -2101,6 +2116,7 @@
 				B57C20AE18C2FBE7005D7245 /* bd_cell_single~iphone.png in Resources */,
 				B59C14C518C012B500AEA789 /* bar_balance~iphone.png in Resources */,
 				B59C14E018C012B500AEA789 /* btn_blue@2x~iphone.png in Resources */,
+				4C5D8C67192D1DE50015BB3C /* icon_not_approved@2x~iphone.png in Resources */,
 				B56553E718ECB2FE005B35E1 /* btn_slide_to_confirm@2x~iphone.png in Resources */,
 				B5675BB318A19A84002E0703 /* icon_search~iphone.png in Resources */,
 				B59C143418C0129300AEA789 /* bd_cell_bottom~iphone.png in Resources */,

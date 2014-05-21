@@ -1262,20 +1262,20 @@
                                 <rect key="frame" x="0.0" y="62" width="320" height="458"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter password to decode wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dYT-6O-aBD" customClass="LatoLabel">
-                                        <rect key="frame" x="20" y="45" width="280" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter password to decode wallet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dYT-6O-aBD" customClass="LatoLabel">
+                                        <rect key="frame" x="20" y="0.0" width="280" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="Xol-70-i3L">
-                                        <rect key="frame" x="84" y="87" width="152" height="35"/>
+                                        <rect key="frame" x="84" y="62" width="152" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="JT9-ng-h3L" customClass="StylizedTextField">
-                                        <rect key="frame" x="92" y="89" width="136" height="30"/>
+                                        <rect key="frame" x="92" y="64" width="136" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1285,11 +1285,19 @@
                                             <outlet property="delegate" destination="MbV-1q-ikJ" id="uz3-LQ-oJ8"/>
                                         </connections>
                                     </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_not_approved.png" id="dnh-Tx-cKC">
+                                        <rect key="frame" x="121" y="116" width="79" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_approved.png" id="UCo-ze-VCd">
+                                        <rect key="frame" x="121" y="116" width="79" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="c46-yk-GrZ" userLabel="View - Display">
-                                <rect key="frame" x="0.0" y="1162" width="320" height="458"/>
+                                <rect key="frame" x="0.0" y="1162" width="320" height="459"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="e0Y-s7-T6X" userLabel="View - Middle">
@@ -1324,7 +1332,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="t8h-iv-TGi" userLabel="View - Bottom">
-                                        <rect key="frame" x="0.0" y="136" width="320" height="324"/>
+                                        <rect key="frame" x="0.0" y="136" width="320" height="325"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="1Ab-Lx-n8L">
@@ -1332,11 +1340,11 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_flash_controls.png" id="jdY-n5-XnA">
-                                                <rect key="frame" x="0.0" y="252" width="320" height="70"/>
+                                                <rect key="frame" x="0.0" y="253" width="320" height="70"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" id="VVV-KZ-RL3" customClass="FlashSelectView">
-                                                <rect key="frame" x="85" y="263" width="149" height="48"/>
+                                                <rect key="frame" x="85" y="263" width="149" height="49"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
@@ -1401,8 +1409,12 @@
                     <connections>
                         <outlet property="buttonSelector" destination="NEk-qX-9fN" id="Oi0-Dc-1wE"/>
                         <outlet property="flashSelector" destination="VVV-KZ-RL3" id="Gbf-Hh-39U"/>
+                        <outlet property="imageApproved" destination="UCo-ze-VCd" id="DLN-0C-XNp"/>
                         <outlet property="imageFlashFrame" destination="jdY-n5-XnA" id="WV8-M7-7dH"/>
+                        <outlet property="imageNotApproved" destination="dnh-Tx-cKC" id="vGT-Rj-Lmw"/>
+                        <outlet property="imagePasswordEmboss" destination="Xol-70-i3L" id="N9N-Sx-j8j"/>
                         <outlet property="labelEnter" destination="HVK-hq-Jcu" id="Sxy-TP-lvl"/>
+                        <outlet property="labelPasswordStatus" destination="dYT-6O-aBD" id="r7S-AI-eSF"/>
                         <outlet property="scanFrame" destination="1Ab-Lx-n8L" id="Pus-WL-Wgv"/>
                         <outlet property="textPassword" destination="JT9-ng-h3L" id="iEO-9K-SPU"/>
                         <outlet property="textPrivateKey" destination="cPl-fB-Lm1" id="9ff-qp-mS1"/>
@@ -3662,9 +3674,11 @@
         <image name="emboss_up.png" width="291" height="193"/>
         <image name="h_seperator.png" width="192" height="5"/>
         <image name="icon_USD_light.png" width="20" height="21"/>
+        <image name="icon_approved.png" width="79" height="80"/>
         <image name="icon_bitcoin_light.png" width="20" height="21"/>
         <image name="icon_directory_dark.png" width="28" height="23"/>
         <image name="icon_location.png" width="9" height="17"/>
+        <image name="icon_not_approved.png" width="79" height="80"/>
         <image name="icon_request_dark.png" width="16" height="16"/>
         <image name="icon_rightArrow.png" width="13" height="15"/>
         <image name="icon_search.png" width="14" height="15"/>
