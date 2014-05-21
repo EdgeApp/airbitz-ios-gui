@@ -443,7 +443,7 @@
 		if(result == ABC_CC_Ok)
 		{
 			self.amountToSendSatoshi = satoshi;
-            self.amountBTCTextField.text = [CoreBridge formatSatoshi: satoshi];
+            self.amountBTCTextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
 		}
 	}
 }

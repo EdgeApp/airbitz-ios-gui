@@ -15,7 +15,9 @@
 + (bool)setWalletAttributes: (Wallet *) wallet;
 + (bool)storeTransaction: (Transaction *) transaction;
 + (NSString *)formatCurrency: (double) currency;
++ (NSString *)formatCurrency: (double) currency withSymbol:(bool) symbol;
 + (NSString *)formatSatoshi: (double) bitcoin;
++ (NSString *)formatSatoshi: (double) bitcoin withSymbol:(bool) symbol;
 + (double) denominationToSatoshi: (double) coin;
 + (NSString *)conversionString: (int) currencyNumber;
 

@@ -227,18 +227,35 @@
 
 + (NSString *)formatCurrency: (double) currency
 {
+    return [CoreBridge formatCurrency:currency withSymbol:true];
+}
+
++ (NSString *)formatCurrency: (double) currency withSymbol:(bool) symbol
+{
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle: NSNumberFormatterCurrencyStyle];
-    [f setCurrencySymbol:@"$ "];
+    if (symbol)
+        [f setCurrencySymbol:@"$ "];
+    else
+        [f setCurrencySymbol:@""];
     return [f stringFromNumber:[NSNumber numberWithFloat:currency]];
 }
 
 + (NSString *)formatSatoshi: (double) bitcoin
 {
+    return [CoreBridge formatSatoshi:bitcoin withSymbol:true];
+}
+
++ (NSString *)formatSatoshi: (double) bitcoin withSymbol:(bool) symbol
+{
     double converted = bitcoin / [User Singleton].denomination;
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle: NSNumberFormatterCurrencyStyle];
-    [f setCurrencySymbol: [User Singleton].denominationLabelShort];
+    if (symbol)
+        [f setCurrencySymbol: [User Singleton].denominationLabelShort];
+    else
+        [f setCurrencySymbol: @""];
+    [f setMaximumFractionDigits: 8];
     return [f stringFromNumber:[NSNumber numberWithFloat:converted]];
 }
 

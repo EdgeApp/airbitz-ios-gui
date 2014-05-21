@@ -447,7 +447,7 @@ typedef enum eAddressPickerType
 		result = ABC_CurrencyToSatoshi(value, DOLLAR_CURRENCY_NUM, &satoshi, &error);
 		if(result == ABC_CC_Ok)
 		{
-            self.BTC_TextField.text = [CoreBridge formatSatoshi: satoshi];
+            self.BTC_TextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
 		}
 	}
 }
