@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "PopupPickerView.h"
 
 @implementation AppDelegate
 
@@ -15,6 +16,7 @@
     // Override point for customization after application launch.
 	[application setStatusBarHidden:NO];
 	[application setStatusBarStyle:UIStatusBarStyleLightContent];
+	[PopupPickerView initAll];
     return YES;
 }
 							

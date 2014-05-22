@@ -122,9 +122,8 @@
 - (void)createPopupPicker
 {
     self.popupPicker = [PopupPickerView CreateForView:_viewTop
-                                      relativeToFrame:self.textField.frame
-                                         viewForFrame:self
-                                         withPosition:self.popupPickerPosition
+										 relativeToView:self.textField
+                                         relativePosition:self.popupPickerPosition
                                           withStrings:self.arrayChoices
                                           selectedRow:-1
                                       maxCellsVisible:_pickerMaxChoicesVisible

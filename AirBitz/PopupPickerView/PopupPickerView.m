@@ -44,7 +44,52 @@
 
 @implementation PopupPickerView
 
+CGRect usableFrame;
 
++(void)initAll
+{
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWasShown:)
+												 name:UIKeyboardDidShowNotification
+											   object:nil];
+	//For Later Use
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillHide:)
+												 name:UIKeyboardWillHideNotification
+											   object:nil];
+	UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+	usableFrame = window.frame;
+}
+
++(void)freeAll
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+
++ (void)keyboardWasShown:(NSNotification *)notification
+{
+	// Get the size of the keyboard.
+	CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+	UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+	
+	usableFrame = window.frame;
+	usableFrame.size.height -= keyboardFrame.size.height;
+	NSLog(@"SHOW: UsableFrame:%f, %f, %f, %f", usableFrame.origin.x, usableFrame.origin.y, usableFrame.size.width, usableFrame.size.height);
+}
+
++ (void)keyboardWillHide:(NSNotification *)notification
+{
+	// Get the size of the keyboard.
+	//CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+	UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+	
+	usableFrame = window.frame;
+	NSLog(@"HIDE: UsableFrame:%f, %f, %f, %f", usableFrame.origin.x, usableFrame.origin.y, usableFrame.size.width, usableFrame.size.height);
+	//usableFrame.size.height = keyboardFrame.origin.y;
+}
+/*
 + (PopupPickerView *)CreateForView:(UIView *)parentView positionRelativeTo:(UIView *)posView withPosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings selectedRow:(NSInteger)selectedRow maxCellsVisible:(NSInteger)maxCellsVisible
 {
 	return [PopupPickerView CreateForView:parentView
@@ -82,8 +127,9 @@
                                 withWidth:DEFAULT_WIDTH
                             andCellHeight:DEFAULT_CELL_HEIGHT];
 }
+*/
 
-+ (PopupPickerView *)CreateForView:(UIView *)parentView relativeToFrame:(CGRect)frame viewForFrame:(UIView *)frameView withPosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings selectedRow:(NSInteger)selectedRow maxCellsVisible:(NSInteger)maxCellsVisible withWidth:(NSInteger)width andCellHeight:(NSInteger)cellHeight
++ (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings selectedRow:(NSInteger)selectedRow maxCellsVisible:(NSInteger)maxCellsVisible withWidth:(NSInteger)width andCellHeight:(NSInteger)cellHeight
 {
     // create the picker from the xib
     PopupPickerView *popup = [[[NSBundle mainBundle] loadNibNamed:@"PopupPickerView" owner:nil options:nil] objectAtIndex:0];
@@ -134,7 +180,7 @@
     }
     
     // start the position to the upper-left corner of the positioning view
-    newFrame.origin = [frameView convertPoint:frame.origin toView:popup.superview];
+    newFrame.origin = [viewToPointTo.superview convertPoint:viewToPointTo.frame.origin toView:popup.superview];
     
     // if this is above or below
     if ((PopupPickerPosition_Below == position) || (PopupPickerPosition_Above == position))
@@ -147,13 +193,13 @@
         popup.arrowImage.image = image;
 
         // set the X position directly under the center of the positioning view
-        newFrame.origin.x += (frame.size.width / 2);        // move to center of view
+        newFrame.origin.x += (viewToPointTo.frame.size.width / 2);        // move to center of view
         newFrame.origin.x -= (popup.frame.size.width / 2);          // bring it left so the center is under the view 
         
         if (PopupPickerPosition_Below == position)
         {
             // put it under the positioning view control
-            newFrame.origin.y += frame.size.height;             
+            newFrame.origin.y += viewToPointTo.frame.size.height;
             newFrame.origin.y += popup.arrowImage.frame.size.height;  // offset by arrow height
         }
         else // if (PopupPickerPosition_Above == position)
@@ -174,6 +220,14 @@
             newFrame.origin.x = parentFrameSize.width - newFrame.size.width;
         }
         
+		float heightSubtract = 0.0;
+		CGRect frameInWindow = [viewToPointTo convertRect:newFrame toView:viewToPointTo.window];
+		if((frameInWindow.origin.y + frameInWindow.size.height) > (usableFrame.origin.y + usableFrame.size.height))
+		{
+			heightSubtract = (frameInWindow.origin.y + frameInWindow.size.height) - (usableFrame.origin.y + usableFrame.size.height);
+		}
+		newFrame.size.height -= heightSubtract;
+		
         // set the new frame
         popup.frame = newFrame;
         
@@ -195,7 +249,7 @@
         }
         
         // we need the arrow to be centered on the button, start with the pos view in parent coords
-        CGRect frameForArrowRef = [frameView convertRect:frame toView:popup];
+        CGRect frameForArrowRef = [viewToPointTo.superview convertRect:viewToPointTo.frame toView:popup];
         
         // put it in the center of the rect
         arrowFrame.origin.x = frameForArrowRef.origin.x + (frameForArrowRef.size.width / 2.0) - (arrowFrame.size.width / 2.0);
@@ -213,13 +267,13 @@
         popup.arrowImage.image = image;
 
         // set the Y position directly beside the center of the positioning view
-        newFrame.origin.y += (frame.size.height / 2);        // move to center of frame
+        newFrame.origin.y += (viewToPointTo.frame.size.height / 2);        // move to center of frame
         newFrame.origin.y -= (popup.frame.size.height / 2);  // bring it up so the center is next to the view
         
         if (PopupPickerPosition_Right == position)
         {
             // put it to the right of the positioning frame
-            newFrame.origin.x += frame.size.width;
+            newFrame.origin.x += viewToPointTo.frame.size.width;
             newFrame.origin.x += popup.arrowImage.frame.size.width;  // offset by arrow width
         }
         else // if (PopupPickerPosition_Left == position)
@@ -262,7 +316,7 @@
         }
         
         // we need the arrow to be centered on the button, start with the pos view in parent coords
-        CGRect frameForArrowRef = [frameView convertRect:frame toView:popup];
+        CGRect frameForArrowRef = [viewToPointTo.superview convertRect:viewToPointTo.frame toView:popup];
 
         // put it in the center of the rect
         arrowFrame.origin.y = frameForArrowRef.origin.y + (frameForArrowRef.size.height / 2.0) - (arrowFrame.size.height / 2.0);

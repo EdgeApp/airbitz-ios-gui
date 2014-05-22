@@ -1317,9 +1317,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         [self blockUser:YES];
         self.popupPicker = [PopupPickerView CreateForView:self.viewMain
-                                          relativeToFrame:cell.button.frame
-                                             viewForFrame:[cell.button superview]
-                                             withPosition:PopupPickerPosition_Left
+                                          //relativeToFrame:cell.button.frame
+                                             //viewForFrame:[cell.button superview]
+											 relativeToView:cell.button
+                                             relativePosition:PopupPickerPosition_Left
                                               withStrings:arrayPopupChoices
                                               selectedRow:curChoice
                                           maxCellsVisible:PICKER_MAX_CELLS_VISIBLE

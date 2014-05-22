@@ -89,6 +89,7 @@
 #else
 	//self.namePickerTextView.textField.delegate = self;
 	self.namePickerTextView.delegate = self;
+	self.namePickerTextView.pickerMaxChoicesVisible = 20;
 #endif
 	self.categoryTextField.delegate = self;
 	
