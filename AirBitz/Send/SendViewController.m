@@ -54,7 +54,7 @@
 {
 	[super viewDidLoad];
 
-    [self updateLayout];
+    [self updateDisplayLayout];
 	
 	self.flashSelector.delegate = self;
 	self.sendToTextField.delegate = self;
@@ -94,7 +94,7 @@
 
 #pragma mark - Misc Methods
 
-- (void)updateLayout
+- (void)updateDisplayLayout
 {
     // if we are on a smaller screen
     if (!IS_IPHONE5)

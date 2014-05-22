@@ -11,15 +11,15 @@
 #import "ConfirmationSliderView.h"
 #import "User.h"
 #import "CalculatorView.h"
-#import "ButtonSelectorView.h"
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
 #import "CoreBridge.h"
 #import "Util.h"
+#import "CommonTypes.h"
 
 #define DOLLAR_CURRENCY_NUM 840
 
-@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, TransactionDetailsViewControllerDelegate>
+@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate>
 {
 	ConfirmationSliderView              *_confirmationSlider;
 	UITextField                         *_selectedTextField;
@@ -33,18 +33,26 @@
 @property (nonatomic, weak) IBOutlet UIButton               *buttonBlocker;
 
 @property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
-@property (nonatomic, weak) IBOutlet UILabel                *addressLabel;
-@property (nonatomic, weak) IBOutlet UILabel                *conversionLabel;
 
-@property (nonatomic, weak) IBOutlet UITextField            *withdrawlPIN;
-@property (nonatomic, weak) IBOutlet UITextField            *amountUSDTextField;
-@property (nonatomic, weak) IBOutlet UILabel                *amountUSDLabel;
-@property (nonatomic, weak) IBOutlet UITextField            *amountBTCTextField;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageTopEmboss;
+@property (weak, nonatomic) IBOutlet UILabel                *labelSendFromTitle;
+@property (weak, nonatomic) IBOutlet UILabel                *labelSendFrom;
+@property (weak, nonatomic) IBOutlet UILabel                *labelSendToTitle;
+@property (nonatomic, weak) IBOutlet UILabel                *addressLabel;
+@property (weak, nonatomic) IBOutlet UIView                 *viewBTC;
 @property (nonatomic, weak) IBOutlet UILabel                *amountBTCLabel;
-@property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
+@property (nonatomic, weak) IBOutlet UITextField            *amountBTCTextField;
+@property (weak, nonatomic) IBOutlet UIView                 *viewUSD;
+@property (nonatomic, weak) IBOutlet UILabel                *amountUSDLabel;
+@property (nonatomic, weak) IBOutlet UITextField            *amountUSDTextField;
+@property (nonatomic, weak) IBOutlet UILabel                *conversionLabel;
+@property (weak, nonatomic) IBOutlet UILabel                *labelPINTitle;
+@property (weak, nonatomic) IBOutlet UIImageView            *imagePINEmboss;
+@property (nonatomic, weak) IBOutlet UITextField            *withdrawlPIN;
 @property (nonatomic, weak) IBOutlet UIView                 *confirmSliderContainer;
+@property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
+@property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
-@property (nonatomic, weak) IBOutlet ButtonSelectorView     *buttonSelector;
 
 @end
 
@@ -68,7 +76,6 @@
 	self.withdrawlPIN.delegate = self;
 	self.amountBTCTextField.delegate = self;
 	self.amountUSDTextField.delegate = self;
-	self.buttonSelector.delegate = self;
 	self.keypadView.delegate = self;
 	self.amountBTCTextField.inputView = self.keypadView;
 	self.amountUSDTextField.inputView = self.keypadView;
@@ -86,9 +93,7 @@
     [self.viewDisplayArea bringSubviewToFront:self.amountUSDTextField];
     [self.viewDisplayArea bringSubviewToFront:self.withdrawlPIN];
 
-	self.buttonSelector.textLabel.text = NSLocalizedString(@"Send From:", @"Label text on Send Bitcoin screen");
-	
-	[self setWalletButtonTitle];
+	[self setWalletLabel];
 	
 	CGRect frame = self.keypadView.frame;
 	frame.origin.y = self.view.frame.size.height;
@@ -100,6 +105,8 @@
 											   object:self.withdrawlPIN];
 				
 	_confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
+
+    [self updateDisplayLayout];
 }
 
 -(void)dealloc
@@ -214,6 +221,82 @@
     }
 }
 
+- (void)updateDisplayLayout
+{
+    // if we are on a smaller screen
+    if (!IS_IPHONE5)
+    {
+        // be prepared! lots and lots of magic numbers here to jam the controls to fit on a small screen
+
+        CGRect frame;
+
+        frame = self.imageTopEmboss.frame;
+        frame.size.height = 150;
+        frame.origin.y = 0;
+        self.imageTopEmboss.frame = frame;
+
+        frame = self.labelSendFromTitle.frame;
+        frame.origin.y = 2;
+        self.labelSendFromTitle.frame = frame;
+
+        frame = self.labelSendFrom.frame;
+        frame.origin.y = self.labelSendFromTitle.frame.origin.y;
+        self.labelSendFrom.frame = frame;
+
+        frame = self.labelSendToTitle.frame;
+        frame.origin.y = self.labelSendFromTitle.frame.origin.y + self.labelSendFromTitle.frame.size.height + 0;
+        self.labelSendToTitle.frame = frame;
+
+        frame = self.addressLabel.frame;
+        frame.origin.y = self.labelSendToTitle.frame.origin.y;
+        self.addressLabel.frame = frame;
+
+        frame = self.viewBTC.frame;
+        frame.origin.y = self.labelSendToTitle.frame.origin.y + self.labelSendToTitle.frame.size.height + 1;
+        self.viewBTC.frame = frame;
+
+        frame = self.amountBTCTextField.frame;
+        frame.origin.y = self.viewBTC.frame.origin.y + 7;
+        self.amountBTCTextField.frame = frame;
+
+        frame = self.viewUSD.frame;
+        frame.origin.y = self.viewBTC.frame.origin.y + self.viewBTC.frame.size.height + (-3);
+        self.viewUSD.frame = frame;
+
+        frame = self.amountUSDTextField.frame;
+        frame.origin.y = self.viewUSD.frame.origin.y + 7;
+        self.amountUSDTextField.frame = frame;
+
+        frame = self.conversionLabel.frame;
+        frame.origin.y = self.viewUSD.frame.origin.y + self.viewUSD.frame.size.height + (-6);
+        self.conversionLabel.frame = frame;
+
+        frame = self.imagePINEmboss.frame;
+        frame.origin.y = self.imageTopEmboss.frame.origin.y + self.imageTopEmboss.frame.size.height + 4;
+        self.imagePINEmboss.frame = frame;
+
+        frame = self.labelPINTitle.frame;
+        frame.origin.y = self.imagePINEmboss.frame.origin.y + 11;
+        self.labelPINTitle.frame = frame;
+
+        frame = self.withdrawlPIN.frame;
+        frame.origin.y = self.imagePINEmboss.frame.origin.y + 5;
+        self.withdrawlPIN.frame = frame;
+
+        frame = self.confirmSliderContainer.frame;
+        frame.origin.y = self.imagePINEmboss.frame.origin.y + self.imagePINEmboss.frame.size.height + 30;
+        self.confirmSliderContainer.frame = frame;
+
+        frame = self.btn_alwaysConfirm.frame;
+        frame.origin.y = self.confirmSliderContainer.frame.origin.y + self.confirmSliderContainer.frame.size.height + 25;
+        self.btn_alwaysConfirm.frame = frame;
+
+        frame = self.labelAlwaysConfirm.frame;
+        frame.origin.y = self.btn_alwaysConfirm.frame.origin.y + self.btn_alwaysConfirm.frame.size.height + 0;
+        self.labelAlwaysConfirm.frame = frame;
+    }
+}
+
 - (void)showSendStatus
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
@@ -291,34 +374,21 @@
 	}
 }
 
-- (void)setWalletButtonTitle
+- (void)setWalletLabel
 {
 	tABC_WalletInfo **aWalletInfo = NULL;
     unsigned int nCount;
 	tABC_Error Error;
+
     ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
     [Util printABC_Error:&Error];
-	
-    printf("Wallets:\n");
-	
-	if(nCount)
+
+	if (nCount > self.selectedWalletIndex)
 	{
-		tABC_WalletInfo *info = aWalletInfo[self.selectedWalletIndex];
-		
-		[self.buttonSelector.button setTitle:[NSString stringWithUTF8String:info->szName] forState:UIControlStateNormal];
-		self.buttonSelector.selectedItemIndex = self.selectedWalletIndex;
+		tABC_WalletInfo *pInfo = aWalletInfo[self.selectedWalletIndex];
+        self.labelSendFrom.text = [NSString stringWithUTF8String:pInfo->szName];
 	}
-	
-    // assign list of wallets to buttonSelector
-	NSMutableArray *walletsArray = [[NSMutableArray alloc] init];
-	
-    for (int i = 0; i < nCount; i++)
-    {
-        tABC_WalletInfo *pInfo = aWalletInfo[i];
-		[walletsArray addObject:[NSString stringWithUTF8String:pInfo->szName]];
-    }
-	
-	self.buttonSelector.arrayItemsToSelect = [walletsArray copy];
+
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
@@ -357,7 +427,7 @@
 
 - (void)showTransactionDetails:(NSString *)transactionID
 {
-	if(_callbackSuccess)
+	if (_callbackSuccess)
 	{
 		tABC_WalletInfo **aWalletInfo = NULL;
 		tABC_Error error;
@@ -367,7 +437,7 @@
 
 		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &error);
 
-		if(nCount)
+		if (nCount)
 		{
 			tABC_WalletInfo *walletInfo = aWalletInfo[self.selectedWalletIndex];
 
@@ -381,7 +451,7 @@
                                                 &txInfo,
                                                 &error);
 
-			if(result == ABC_CC_Ok)
+			if (result == ABC_CC_Ok)
 			{
 				_completedTransaction = [[Transaction alloc] init];
 				/*
@@ -544,13 +614,6 @@
             self.amountBTCTextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
 		}
 	}
-}
-
-#pragma mark - ButtonSelectorView delegates
-
-- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
-{
-	NSLog(@"Selected item %i", itemIndex);
 }
 
 #pragma mark - TransactionDetailsViewController delegates

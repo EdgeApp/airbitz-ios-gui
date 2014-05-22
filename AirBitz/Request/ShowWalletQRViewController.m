@@ -42,7 +42,7 @@
 
     // Do any additional setup after loading the view.
 
-    [self updateLayout];
+    [self updateDisplayLayout];
 
 	self.qrCodeImageView.layer.magnificationFilter = kCAFilterNearest;
 	self.qrCodeImageView.image = self.qrCodeImage;
@@ -85,7 +85,7 @@
 
 #pragma mark - Misc Methods
 
-- (void)updateLayout
+- (void)updateDisplayLayout
 {
     // if we are on a smaller screen
     if (!IS_IPHONE5)
