@@ -21,29 +21,30 @@
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, TransactionDetailsViewControllerDelegate>
 {
-	ConfirmationSliderView *confirmationSlider;
-	UITextField *selectedTextField;
-	SendStatusViewController *sendStatusController;
-	TransactionDetailsViewController *transactionDetailsController;
-	BOOL callbackSuccess;
-	NSString *strReason;
-	Transaction *completedTransaction;	// nil until sendTransaction is successfully completed
+	ConfirmationSliderView              *_confirmationSlider;
+	UITextField                         *_selectedTextField;
+	SendStatusViewController            *_sendStatusController;
+	TransactionDetailsViewController    *_transactionDetailsController;
+	BOOL                                _callbackSuccess;
+	NSString                            *_strReason;
+	Transaction                         *_completedTransaction;	// nil until sendTransaction is successfully completed
 }
 
-@property (nonatomic, weak) IBOutlet UIButton *blockingButton;
+@property (nonatomic, weak) IBOutlet UIButton               *buttonBlocker;
 
-@property (nonatomic, weak) IBOutlet UILabel *addressLabel;
-@property (nonatomic, weak) IBOutlet UILabel *conversionLabel;
+@property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
+@property (nonatomic, weak) IBOutlet UILabel                *addressLabel;
+@property (nonatomic, weak) IBOutlet UILabel                *conversionLabel;
 
-@property (nonatomic, weak) IBOutlet UITextField *withdrawlPIN;
-@property (nonatomic, weak) IBOutlet UITextField *amountUSDTextField;
-@property (nonatomic, weak) IBOutlet UILabel     *amountUSDLabel;
-@property (nonatomic, weak) IBOutlet UITextField *amountBTCTextField;
-@property (nonatomic, weak) IBOutlet UILabel     *amountBTCLabel;
-@property (nonatomic, weak) IBOutlet UIButton *btn_alwaysConfirm;
-@property (nonatomic, weak) IBOutlet UIView *confirmSliderContainer;
-@property (nonatomic, weak) IBOutlet CalculatorView *keypadView;
-@property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector;
+@property (nonatomic, weak) IBOutlet UITextField            *withdrawlPIN;
+@property (nonatomic, weak) IBOutlet UITextField            *amountUSDTextField;
+@property (nonatomic, weak) IBOutlet UILabel                *amountUSDLabel;
+@property (nonatomic, weak) IBOutlet UITextField            *amountBTCTextField;
+@property (nonatomic, weak) IBOutlet UILabel                *amountBTCLabel;
+@property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
+@property (nonatomic, weak) IBOutlet UIView                 *confirmSliderContainer;
+@property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
+@property (nonatomic, weak) IBOutlet ButtonSelectorView     *buttonSelector;
 
 @end
 
@@ -63,7 +64,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-	self.blockingButton.alpha = 0.0;
+
 	self.withdrawlPIN.delegate = self;
 	self.amountBTCTextField.delegate = self;
 	self.amountUSDTextField.delegate = self;
@@ -71,7 +72,20 @@
 	self.keypadView.delegate = self;
 	self.amountBTCTextField.inputView = self.keypadView;
 	self.amountUSDTextField.inputView = self.keypadView;
-	
+
+    // set up our user blocking button
+    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.buttonBlocker.backgroundColor = [UIColor clearColor];
+    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
+    self.buttonBlocker.frame = self.view.bounds;
+    self.buttonBlocker.hidden = YES;
+    [self.viewDisplayArea addSubview:self.buttonBlocker];
+
+    // make sure the edit fields are in front of the blocker
+    [self.viewDisplayArea bringSubviewToFront:self.amountBTCTextField];
+    [self.viewDisplayArea bringSubviewToFront:self.amountUSDTextField];
+    [self.viewDisplayArea bringSubviewToFront:self.withdrawlPIN];
+
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Send From:", @"Label text on Send Bitcoin screen");
 	
 	[self setWalletButtonTitle];
@@ -85,7 +99,7 @@
 												 name:UITextFieldTextDidChangeNotification
 											   object:self.withdrawlPIN];
 				
-	confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
+	_confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
 }
 
 -(void)dealloc
@@ -146,36 +160,10 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)showSendStatus
-{
-	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
-	
 
-	
-	CGRect frame = self.view.bounds;
-	//frame.origin.x = frame.size.width;
-	sendStatusController.view.frame = frame;
-	[self.view addSubview:sendStatusController.view];
-	sendStatusController.view.alpha = 0.0;
-	
-	sendStatusController.messageLabel.text = NSLocalizedString(@"Sending...", @"status message");
-	
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 sendStatusController.view.alpha = 1.0;
-	 }
-					 completion:^(BOOL finished)
-	 {
-	 }];
-}
+#pragma mark - Actions Methods
 
-#pragma mark Actions
-
--(IBAction)Back:(id)sender
+- (IBAction)Back:(id)sender
 {
 	[self.withdrawlPIN resignFirstResponder];
 	[UIView animateWithDuration:0.35
@@ -193,14 +181,14 @@
 	 }];
 }
 
--(IBAction)BlockingButton
+- (IBAction)buttonBlockerTouched:(id)sender
 {
 	[self.withdrawlPIN resignFirstResponder];
 	[self.amountUSDTextField resignFirstResponder];
 	[self.amountBTCTextField resignFirstResponder];
 }
 
--(IBAction)alwaysConfirm:(UIButton *)sender
+- (IBAction)alwaysConfirm:(UIButton *)sender
 {
 	if(sender.selected)
 	{
@@ -212,7 +200,48 @@
 	}
 }
 
--(void)initiateSendRequest
+#pragma mark - Misc Methods
+
+- (void)blockUser:(BOOL)bBlock
+{
+    if (bBlock)
+    {
+        self.buttonBlocker.hidden = NO;
+    }
+    else
+    {
+        self.buttonBlocker.hidden = YES;
+    }
+}
+
+- (void)showSendStatus
+{
+	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+	_sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
+
+
+
+	CGRect frame = self.view.bounds;
+	//frame.origin.x = frame.size.width;
+	_sendStatusController.view.frame = frame;
+	[self.view addSubview:_sendStatusController.view];
+	_sendStatusController.view.alpha = 0.0;
+
+	_sendStatusController.messageLabel.text = NSLocalizedString(@"Sending...", @"status message");
+
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 _sendStatusController.view.alpha = 1.0;
+	 }
+					 completion:^(BOOL finished)
+	 {
+	 }];
+}
+
+- (void)initiateSendRequest
 {
 	//[self showSendStatus];
 	tABC_Error Error;
@@ -262,7 +291,7 @@
 	}
 }
 
--(void)setWalletButtonTitle
+- (void)setWalletButtonTitle
 {
 	tABC_WalletInfo **aWalletInfo = NULL;
     unsigned int nCount;
@@ -293,27 +322,27 @@
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
--(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
+- (void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+	_transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
 	
-	transactionDetailsController.delegate = self;
-	transactionDetailsController.transaction = transaction;
+	_transactionDetailsController.delegate = self;
+	_transactionDetailsController.transaction = transaction;
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
-	transactionDetailsController.view.frame = frame;
+	_transactionDetailsController.view.frame = frame;
 	
 	//transactionDetailsController.nameLabel.text = self.nameLabel;
-	transactionDetailsController.transactionDetailsMode = TD_MODE_SENT;
+	_transactionDetailsController.transactionDetailsMode = TD_MODE_SENT;
 	
-	[self.view addSubview:transactionDetailsController.view];
+	[self.view addSubview:_transactionDetailsController.view];
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 transactionDetailsController.view.frame = self.view.bounds;
+		 _transactionDetailsController.view.frame = self.view.bounds;
 	 }
 					 completion:^(BOOL finished)
 	 {
@@ -321,43 +350,112 @@
 	
 }
 
-#pragma mark UITextField delegates
-
--(void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)sendBitcoinComplete:(NSString *)transactionID
 {
-	selectedTextField = textField;
+	[self performSelector:@selector(showTransactionDetails:) withObject:transactionID afterDelay:3.0]; //show sending screen for 3 seconds
+}
+
+- (void)showTransactionDetails:(NSString *)transactionID
+{
+	if(_callbackSuccess)
+	{
+		tABC_WalletInfo **aWalletInfo = NULL;
+		tABC_Error error;
+		tABC_TxInfo *txInfo;
+		//tABC_TxDetails *details;
+		unsigned int nCount;
+
+		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &error);
+
+		if(nCount)
+		{
+			tABC_WalletInfo *walletInfo = aWalletInfo[self.selectedWalletIndex];
+
+			NSLog(@"Transaction complete with Transaction ID: %@", transactionID);
+
+
+			tABC_CC result = ABC_GetTransaction([[User Singleton].name UTF8String],
+                                                [[User Singleton].password UTF8String],
+                                                walletInfo->szUUID,
+                                                [transactionID UTF8String],
+                                                &txInfo,
+                                                &error);
+
+			if(result == ABC_CC_Ok)
+			{
+				_completedTransaction = [[Transaction alloc] init];
+				/*
+				 @property (nonatomic, copy)     NSString        *strID;
+				 @property (nonatomic, copy)     NSString        *strWalletUUID;
+				 @property (nonatomic, copy)     NSString        *strWalletName;
+				 @property (nonatomic, copy)     NSString        *strName;
+				 @property (nonatomic, copy)     NSString        *strAddress;
+				 @property (nonatomic, strong)   NSDate          *date;
+				 @property (nonatomic, assign)   BOOL            bConfirmed;
+				 @property (nonatomic, assign)   unsigned int    confirmations;
+				 @property (nonatomic, assign)   double          amount;
+				 @property (nonatomic, assign)   double          balance;
+				 @property (nonatomic, copy)     NSString        *strCategory;
+				 @property (nonatomic, copy)     NSString        *strNotes;
+				 */
+
+				NSString *address;
+				if(txInfo->countAddresses)
+				{
+					address = [NSString stringWithUTF8String:txInfo->aAddresses[0]];
+				}
+				else
+				{
+					address = @"NO ADDRESS";
+				}
+
+				_completedTransaction.strID = transactionID;
+				_completedTransaction.strWalletUUID = [NSString stringWithUTF8String:walletInfo->szUUID];
+				_completedTransaction.strWalletName = [NSString stringWithUTF8String:walletInfo->szName];
+				_completedTransaction.strAddress = address;
+				_completedTransaction.date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)txInfo->timeCreation];
+#warning TODO: what do I do with bConfirmed and comfirmations?
+				_completedTransaction.bConfirmed = NO;
+				_completedTransaction.confirmations = 0;
+
+				_completedTransaction.amountSatoshi = txInfo->pDetails->amountSatoshi;
+#warning TODO: what do I do with balance?
+				_completedTransaction.balance = 0;
+
+				_completedTransaction.strCategory = [NSString stringWithUTF8String:txInfo->pDetails->szCategory];
+				_completedTransaction.strNotes = [NSString stringWithUTF8String:txInfo->pDetails->szNotes];
+
+				ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+				ABC_FreeTransaction(txInfo);
+				
+				[self launchTransactionDetailsWithTransaction:_completedTransaction];
+			}
+		}
+	}
+	else
+	{
+		NSLog(@"Error: %@", _strReason);
+	}
+	
+}
+
+#pragma mark - UITextField delegates
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+	_selectedTextField = textField;
 	self.keypadView.textField = textField;
-	[UIView animateWithDuration:0.1
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
-					 animations:^
-	 {
-		 self.blockingButton.alpha = 1.0;
-	 }
-	 completion:^(BOOL finished)
-	 {
-		 
-	 }];
+    [self blockUser:YES];
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
-	[UIView animateWithDuration:0.1
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
-					 animations:^
-	 {
-		 self.blockingButton.alpha = 0.0;
-	 }
-					 completion:^(BOOL finished)
-	 {
-		 
-	 }];
+    [self blockUser:NO];
 }
 
-#pragma mark ConfirmationSlider delegates
+#pragma mark - ConfirmationSlider delegates
 
--(void)ConfirmationSliderDidConfirm:(ConfirmationSliderView *)controller
+- (void)ConfirmationSliderDidConfirm:(ConfirmationSliderView *)controller
 {
 	//make sure PIN is good
 	
@@ -403,30 +501,30 @@
 		[alert show];
 		
 	}
-	[confirmationSlider resetIn:1.0];
+	[_confirmationSlider resetIn:1.0];
 }
 
-#pragma mark Calculator delegates
+#pragma mark - Calculator delegates
 
--(void)CalculatorDone:(CalculatorView *)calculator
+- (void)CalculatorDone:(CalculatorView *)calculator
 {
 	[self.amountUSDTextField resignFirstResponder];
 	[self.amountBTCTextField resignFirstResponder];
 	[self.withdrawlPIN becomeFirstResponder];
 }
 
--(void)CalculatorValueChanged:(CalculatorView *)calculator
+- (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
 	[self updateTextFieldContents];
 }
 
--(void)updateTextFieldContents
+- (void)updateTextFieldContents
 {
 	tABC_CC result;
 	double currency;
 	tABC_Error error;
 	
-	if(selectedTextField == self.amountBTCTextField)
+	if(_selectedTextField == self.amountBTCTextField)
 	{
 		double value = [self.amountBTCTextField.text doubleValue];
         self.amountToSendSatoshi = [CoreBridge denominationToSatoshi: value];
@@ -448,13 +546,27 @@
 	}
 }
 
-#pragma mark ButtonSelectorView delegates
--(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+#pragma mark - ButtonSelectorView delegates
+
+- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
 	NSLog(@"Selected item %i", itemIndex);
 }
 
-#pragma mark ABC Callbacks
+#pragma mark - TransactionDetailsViewController delegates
+
+- (void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
+{
+	[controller.view removeFromSuperview];
+	_transactionDetailsController = nil;
+
+	[_sendStatusController.view removeFromSuperview];
+	_sendStatusController = nil;
+
+	[self.delegate sendConfirmationViewControllerDidFinish:self];
+}
+
+#pragma mark - ABC Callbacks
 
 void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 {
@@ -463,8 +575,8 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
     if (pResults)
     {
         SendConfirmationViewController *controller = (__bridge id)pResults->pData;
-        controller->callbackSuccess = (BOOL)pResults->bSuccess;
-        controller->strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
+        controller->_callbackSuccess = (BOOL)pResults->bSuccess;
+        controller->_strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
 		
         if (pResults->requestType == ABC_RequestType_SendBitcoin)
         {
@@ -474,108 +586,6 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 			free(pResults->pRetData);
         }
     }
-}
-
--(void)sendBitcoinComplete:(NSString *)transactionID
-{
-	[self performSelector:@selector(showTransactionDetails:) withObject:transactionID afterDelay:3.0]; //show sending screen for 3 seconds
-}
-
--(void)showTransactionDetails:(NSString *)transactionID
-{
-	if(callbackSuccess)
-	{
-		tABC_WalletInfo **aWalletInfo = NULL;
-		tABC_Error error;
-		tABC_TxInfo *txInfo;
-		//tABC_TxDetails *details;
-		unsigned int nCount;
-		
-		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &error);
-		
-		if(nCount)
-		{
-			tABC_WalletInfo *walletInfo = aWalletInfo[self.selectedWalletIndex];
-			
-			NSLog(@"Transaction complete with Transaction ID: %@", transactionID);
-			
-			
-			tABC_CC result = ABC_GetTransaction([[User Singleton].name UTF8String],
-											  [[User Singleton].password UTF8String],
-											  walletInfo->szUUID,
-											  [transactionID UTF8String],
-											  &txInfo,
-											  &error);
-			
-			if(result == ABC_CC_Ok)
-			{
-				completedTransaction = [[Transaction alloc] init];
-				/*
-				 @property (nonatomic, copy)     NSString        *strID;
-				 @property (nonatomic, copy)     NSString        *strWalletUUID;
-				 @property (nonatomic, copy)     NSString        *strWalletName;
-				 @property (nonatomic, copy)     NSString        *strName;
-				 @property (nonatomic, copy)     NSString        *strAddress;
-				 @property (nonatomic, strong)   NSDate          *date;
-				 @property (nonatomic, assign)   BOOL            bConfirmed;
-				 @property (nonatomic, assign)   unsigned int    confirmations;
-				 @property (nonatomic, assign)   double          amount;
-				 @property (nonatomic, assign)   double          balance;
-				 @property (nonatomic, copy)     NSString        *strCategory;
-				 @property (nonatomic, copy)     NSString        *strNotes;
-				 */
-				 
-				NSString *address;
-				if(txInfo->countAddresses)
-				{
-					address = [NSString stringWithUTF8String:txInfo->aAddresses[0]];
-				}
-				else
-				{
-					address = @"NO ADDRESS";
-				}
-				 
-				completedTransaction.strID = transactionID;
-				completedTransaction.strWalletUUID = [NSString stringWithUTF8String:walletInfo->szUUID];
-				completedTransaction.strWalletName = [NSString stringWithUTF8String:walletInfo->szName];
-				completedTransaction.strAddress = address;
-				completedTransaction.date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)txInfo->timeCreation];
-				#warning TODO: what do I do with bConfirmed and comfirmations?
-				completedTransaction.bConfirmed = NO;
-				completedTransaction.confirmations = 0;
-				 
-				completedTransaction.amountSatoshi = txInfo->pDetails->amountSatoshi;
-				#warning TODO: what do I do with balance?
-				completedTransaction.balance = 0;
-				
-				completedTransaction.strCategory = [NSString stringWithUTF8String:txInfo->pDetails->szCategory];
-				completedTransaction.strNotes = [NSString stringWithUTF8String:txInfo->pDetails->szNotes];
-				
-				ABC_FreeWalletInfoArray(aWalletInfo, nCount);
-				ABC_FreeTransaction(txInfo);
-				
-				[self launchTransactionDetailsWithTransaction:completedTransaction];
-			}
-		}
-	}
-	else
-	{
-		NSLog(@"Error: %@", strReason);
-	}
-	
-}
-
-#pragma mark TransactionDetailsViewController delegates
-
--(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
-{
-	[controller.view removeFromSuperview];
-	transactionDetailsController = nil;
-	
-	[sendStatusController.view removeFromSuperview];
-	sendStatusController = nil;
-	
-	[self.delegate sendConfirmationViewControllerDidFinish:self];
 }
 
 @end
