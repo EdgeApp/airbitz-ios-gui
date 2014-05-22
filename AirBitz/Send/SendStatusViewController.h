@@ -9,10 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SendStatusViewController : UIViewController
-@property (nonatomic, weak) IBOutlet UILabel *messageLabel;
-@property (nonatomic, weak) IBOutlet UILabel *bitCoinLabel;
-@property (nonatomic, weak) IBOutlet UILabel *fiatLabel;
 
--(void)showCurrency;
+@property (nonatomic, weak) IBOutlet UILabel *messageLabel;
 
 @end

@@ -7,10 +7,17 @@
 //
 
 #import "SendStatusViewController.h"
+#import "CommonTypes.h"
 
 @interface SendStatusViewController ()
+{
+    
+}
 
-@property (nonatomic, weak) IBOutlet UIView *currencyView;
+@property (weak, nonatomic) IBOutlet UIImageView                *imageTopBar;
+@property (weak, nonatomic) IBOutlet UIView                     *viewDisplayArea;
+@property (weak, nonatomic) IBOutlet UIImageView                *imageBitcoin;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView    *indicator;
 
 @end
 
@@ -29,7 +36,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-	self.currencyView.alpha = 0.0;
+
+    [self updateDisplayLayout];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,19 +46,27 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)showCurrency
+
+#pragma mark - Misc Methods
+
+- (void)updateDisplayLayout
 {
-	[UIView animateWithDuration:0.25
-						  delay:0.0
-						options:UIViewAnimationOptionCurveLinear
-					 animations:^
-	 {
-		 self.currencyView.alpha = 1.0;
-	 }
-	 completion:^(BOOL finished)
-	 {
-		 
-	 }];
+    // center the bitcoin image
+    CGFloat spaceAboveAndBelow = (self.viewDisplayArea.frame.size.height - self.imageBitcoin.frame.size.height) / 2.0;
+    CGRect frame = self.imageBitcoin.frame;
+    frame.origin.y = spaceAboveAndBelow;
+    self.imageBitcoin.frame = frame;
+
+    // place the indicator in the center of the space above
+    frame = self.indicator.frame;
+    frame.origin.y = (spaceAboveAndBelow - self.indicator.frame.size.height) / 2.0;
+    self.indicator.frame = frame;
+
+    // place the 'sending' in the cetner of the space below
+    frame = self.messageLabel.frame;
+    frame.origin.y = self.imageBitcoin.frame.origin.y + self.imageBitcoin.frame.size.height;
+    frame.origin.y += (spaceAboveAndBelow - self.messageLabel.frame.size.height) / 2.0;
+    self.messageLabel.frame = frame;
 }
 
 
