@@ -22,6 +22,7 @@
 #import "CoreBridge.h"
 #import "Util.h"
 #import "ImportWalletViewController.h"
+#import "InfoView.h"
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 #define QR_CODE_SIZE          200.0
@@ -82,6 +83,10 @@ typedef enum eAddressPickerType
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
+    // resize ourselves to fit in area
+    [Util resizeView:self.view withDisplayView:nil];
+
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
@@ -126,6 +131,7 @@ typedef enum eAddressPickerType
 - (IBAction)info
 {
 	[self.view endEditing:YES];
+    [InfoView CreateWithHTML:@"infoRequest" forView:self.view];
 }
 
 - (IBAction)ImportWallet

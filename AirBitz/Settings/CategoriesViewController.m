@@ -60,26 +60,6 @@
 	[self.cancelButton setTitle:NSLocalizedString(@"Cancel", @"cancel button title") forState:UIControlStateNormal];
 	[self.doneButton setTitle:NSLocalizedString(@"Done", @"done button title") forState:UIControlStateNormal];
 
-    CGRect frame;
-
-    // change bottom bar to right above tab bar
-    frame = self.imageBottomBar.frame;
-    frame.origin.y = SCREEN_HEIGHT - TOOLBAR_HEIGHT - self.imageBottomBar.frame.size.height;
-    self.imageBottomBar.frame = frame;
-
-    // change the bottom buttons to center in the bottom bar
-    frame = self.cancelButton.frame;
-    frame.origin.y = self.imageBottomBar.frame.origin.y + ((self.imageBottomBar.frame.size.height - self.cancelButton.frame.size.height) / 2.0) + BOTTOM_BUTTON_EXTRA_OFFSET_Y;
-    self.cancelButton.frame = frame;
-    frame = self.doneButton.frame;
-    frame.origin.y = self.imageBottomBar.frame.origin.y + ((self.imageBottomBar.frame.size.height - self.doneButton.frame.size.height) / 2.0) + BOTTOM_BUTTON_EXTRA_OFFSET_Y;
-    self.doneButton.frame = frame;
-
-    // change the height of the table view
-    frame = self.tableView.frame;
-    frame.size.height = self.imageBottomBar.frame.origin.y - self.tableView.frame.origin.y + TABLE_SIZE_EXTRA_HEIGHT;
-    self.tableView.frame = frame;
-
     // This will remove extra separators from tableview
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 

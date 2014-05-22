@@ -14,22 +14,24 @@
 #import "NSDate+Helper.h"
 #import "TransactionDetailsViewController.h"
 #import "ABC.h"
-
+#import "Util.h"
 #import "User.h"
+#import "InfoView.h"
 
 #define DOLLAR_CURRENCY_NUM	840
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate>
 {
-	BalanceView *balanceView;
-	tBalanceViewState balanceState;
-	TransactionDetailsViewController *transactionDetailsController;
+	BalanceView                         *_balanceView;
+	tBalanceViewState                   _balanceState;
+	TransactionDetailsViewController    *_transactionDetailsController;
 }
-@property (nonatomic, weak) IBOutlet UIView *balanceViewPlaceholder;
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UITextField *searchTextField;
-@property (nonatomic, weak) IBOutlet UIButton *walletNameView;
-@property (nonatomic, strong) NSMutableArray *arraySearchTransactions;
+@property (nonatomic, weak) IBOutlet UIView         *balanceViewPlaceholder;
+@property (nonatomic, weak) IBOutlet UITableView    *tableView;
+@property (nonatomic, weak) IBOutlet UITextField    *searchTextField;
+@property (nonatomic, weak) IBOutlet UIButton       *walletNameView;
+
+@property (nonatomic, strong) NSMutableArray        *arraySearchTransactions;
 
 @end
 
@@ -48,10 +50,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	balanceView = [BalanceView CreateWithDelegate:self];
-	balanceView.frame = self.balanceViewPlaceholder.frame;
+
+    // resize ourselves to fit in area
+    [Util resizeView:self.view withDisplayView:nil];
+
+	_balanceView = [BalanceView CreateWithDelegate:self];
+	_balanceView.frame = self.balanceViewPlaceholder.frame;
 	[self.balanceViewPlaceholder removeFromSuperview];
-	[self.view addSubview:balanceView];
+	[self.view addSubview:_balanceView];
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 
@@ -75,16 +81,16 @@
 	{
 		totalSatoshi += tx.amountSatoshi;
 	}
-	balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
+	_balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
 	
 	double currency;
 	tABC_Error error;
 	
 	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-    balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
-    balanceView.topDenomination.text = [User Singleton].denominationLabel; 
+    _balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
+    _balanceView.topDenomination.text = [User Singleton].denominationLabel;
 
-	[balanceView refresh];
+	[_balanceView refresh];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,15 +98,25 @@
     [super didReceiveMemoryWarning];
 }
 
--(IBAction)Done
+#pragma mark - Action Methods
+
+- (IBAction)Done
 {
 	[self.delegate TransactionsViewControllerDone:self];
 }
 
+- (IBAction)info
+{
+    [InfoView CreateWithHTML:@"infoTransactions" forView:self.view];
+}
+
+
+#pragma mark - Misc Methods
+
 //note this method duplicated in WalletsViewController
 -(NSString *)conversion:(int64_t)satoshi
 {
-	if (balanceState == BALANCE_VIEW_DOWN)
+	if (_balanceState == BALANCE_VIEW_DOWN)
 	{
 		double currency;
 		tABC_Error error;
@@ -117,14 +133,14 @@
 -(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+	_transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
 	
-	transactionDetailsController.delegate = self;
-	transactionDetailsController.transaction = transaction;
+	_transactionDetailsController.delegate = self;
+	_transactionDetailsController.transaction = transaction;
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
-	transactionDetailsController.view.frame = frame;
-	[self.view addSubview:transactionDetailsController.view];
+	_transactionDetailsController.view.frame = frame;
+	[self.view addSubview:_transactionDetailsController.view];
 	
 	
 	[UIView animateWithDuration:0.35
@@ -132,7 +148,7 @@
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 transactionDetailsController.view.frame = self.view.bounds;
+		 _transactionDetailsController.view.frame = self.view.bounds;
 	 }
 					 completion:^(BOOL finished)
 	 {
@@ -149,16 +165,16 @@
 	 {
 		 CGRect frame = self.view.bounds;
 		 frame.origin.x = frame.size.width;
-		 transactionDetailsController.view.frame = frame;
+		 _transactionDetailsController.view.frame = frame;
 	 }
 					 completion:^(BOOL finished)
 	 {
-		 [transactionDetailsController.view removeFromSuperview];
-		 transactionDetailsController = nil;
+		 [_transactionDetailsController.view removeFromSuperview];
+		 _transactionDetailsController = nil;
 	 }];
 }
 
-#pragma mark TransactionDetailsViewControllerDelegates
+#pragma mark - TransactionDetailsViewControllerDelegates
 
 -(void)TransactionDetailsViewControllerDone:(TransactionsViewController *)controller
 {
@@ -168,9 +184,7 @@
 	[self dismissTransactionDetails];
 }
 
-#pragma mark UITableView delegates
-
-
+#pragma mark - UITableView delegates
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -285,15 +299,15 @@
 	
 }
 
-#pragma mark BalanceViewDelegates
+#pragma mark - BalanceViewDelegates
 
 -(void)BalanceView:(BalanceView *)view changedStateTo:(tBalanceViewState)state
 {
-	balanceState = state;
+	_balanceState = state;
 	[self.tableView reloadData];
 }
 
-#pragma mark UITextField delegates
+#pragma mark - UITextField delegates
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {

@@ -16,6 +16,7 @@
 #import "ButtonSelectorView.h"
 #import "CommonTypes.h"
 #import "Util.h"
+#import "InfoView.h"
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate>
 {
@@ -53,6 +54,9 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+
+    // resize ourselves to fit in area
+    [Util resizeView:self.view withDisplayView:nil];
 
     [self updateDisplayLayout];
 	
@@ -206,21 +210,18 @@
 	 }];
 }
 
-#pragma mark - Actions
-
-//- (IBAction)cameraButtonPushed:(id)sender
 -(void)startScanner:(NSTimer *)timer
 {
-	
+
 #if !TARGET_IPHONE_SIMULATOR
-   // NSLog(@"Scanning...");
+    // NSLog(@"Scanning...");
 
 	reader = [ZBarReaderView new];
 	[self.view insertSubview:reader belowSubview:self.scanFrame];
 	reader.frame = self.scanFrame.frame;
 	reader.readerDelegate = self;
 	reader.tracksSymbols = NO;
-	
+
 	reader.tag = 99999999;
 	if(self.sendToTextField.text.length)
 	{
@@ -238,9 +239,19 @@
 	{
 		[v removeFromSuperview];
 	}
-	
+
 	//[self.view endEditing:YES];
 }
+
+#pragma mark - Action Methods
+
+- (IBAction)info
+{
+	[self.view endEditing:YES];
+    [InfoView CreateWithHTML:@"infoSend" forView:self.view];
+}
+
+
 
 #pragma mark - UITextField delegates
 

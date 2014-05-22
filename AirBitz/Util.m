@@ -7,6 +7,7 @@
 //
 
 #import "Util.h"
+#import "CommonTypes.h"
 
 @implementation Util
 
@@ -24,6 +25,27 @@
                    pError->nSourceLine
                    );
         }
+    }
+}
+
+// resizes a view that is one of the tab bar screens to the approriate size to avoid the toolbar
+// display view is if the view has a sub-view that also does not include the top 'name of screen' bar
++ (void)resizeView:(UIView *)theView withDisplayView:(UIView *)theDisplayView
+{
+    CGRect frame;
+
+    if (theView)
+    {
+        frame = theView.frame;
+        frame.size.height = SUB_SCREEN_HEIGHT;
+        theView.frame = frame;
+    }
+
+    if (theDisplayView)
+    {
+        frame = theDisplayView.frame;
+        frame.size.height = DISPLAY_AREA_HEIGHT;
+        theDisplayView.frame = frame;
     }
 }
 

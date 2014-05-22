@@ -17,6 +17,8 @@
 #import "WalletMakerView.h"
 #import "CoreBridge.h"
 #import "OfflineWalletViewController.h"
+#import "InfoView.h"
+#import "Util.h"
 
 #define DOLLAR_CURRENCY_NUM	840
 
@@ -57,6 +59,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // resize ourselves to fit in area
+    [Util resizeView:self.view withDisplayView:nil];
+
     [self reloadWallets];
 	// Do any additional setup after loading the view.
 	balanceView = [BalanceView CreateWithDelegate:self];
@@ -192,6 +198,7 @@
 	double currency;
 	tABC_Error Error;
 	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &Error);
+    [Util printABC_Error:&Error];
     balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
     balanceView.topDenomination.text = [User Singleton].denominationLabel; 
 	[balanceView refresh];
@@ -245,6 +252,7 @@
 
 - (IBAction)info
 {
+    [InfoView CreateWithHTML:@"infoWallets" forView:self.view];
 }
 
 //note this method duplicated in TransactionsViewController
@@ -254,8 +262,8 @@
 	{
 		double currency;
 		tABC_Error error;
-		
 		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+        [Util printABC_Error:&error];
 		return [CoreBridge formatCurrency: currency];
 	}
 	else

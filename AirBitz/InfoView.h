@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *htmlInfoToDisplay;
 
 + (InfoView *)CreateWithDelegate:(id<InfoViewDelegate>)delegate;
++ (void)CreateWithHTML:(NSString *)strHTML forView:(UIView *)theView;
 
 -(void)enableScrolling:(BOOL)scrollEnabled;
 
@@ -24,8 +25,10 @@
 
 @protocol InfoViewDelegate <NSObject>
 
-@required
+@optional
 - (void) InfoViewFinished:(InfoView *)infoView;
+@required
+
 @optional
 
 @end

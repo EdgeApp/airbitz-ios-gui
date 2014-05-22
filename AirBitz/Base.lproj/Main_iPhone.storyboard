@@ -631,6 +631,9 @@
                                 <state key="normal" image="btn_info.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="info" destination="c1q-yF-WIr" eventType="touchUpInside" id="TiN-5F-dEF"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Bitcoin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ESa-8m-WoY" customClass="MontserratLabel">
                                 <rect key="frame" x="76" y="32" width="168" height="21"/>
@@ -1281,7 +1284,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="kXN-4v-fXN" userLabel="View - Password">
-                                <rect key="frame" x="0.0" y="62" width="320" height="457"/>
+                                <rect key="frame" x="0.0" y="1162" width="320" height="458"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter password to decode wallet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dYT-6O-aBD" customClass="LatoLabel">
@@ -1319,8 +1322,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="c46-yk-GrZ" userLabel="View - Display">
-                                <rect key="frame" x="0.0" y="1162" width="320" height="460"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="62" width="320" height="459"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="e0Y-s7-T6X" userLabel="View - Middle">
                                         <rect key="frame" x="0.0" y="108" width="320" height="32"/>
@@ -1354,19 +1357,19 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="t8h-iv-TGi" userLabel="View - Bottom">
-                                        <rect key="frame" x="0.0" y="137" width="320" height="325"/>
+                                        <rect key="frame" x="0.0" y="137" width="320" height="327"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="1Ab-Lx-n8L">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="247"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="249"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_flash_controls.png" id="jdY-n5-XnA">
-                                                <rect key="frame" x="0.0" y="253" width="320" height="70"/>
+                                                <rect key="frame" x="0.0" y="257" width="320" height="70"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" id="VVV-KZ-RL3" customClass="FlashSelectView">
-                                                <rect key="frame" x="85" y="262" width="149" height="50"/>
+                                                <rect key="frame" x="85" y="265" width="149" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
@@ -1508,7 +1511,7 @@
                                 <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="w7G-E8-m3C">
-                                <rect key="frame" x="13" y="223" width="294" height="296"/>
+                                <rect key="frame" x="13" y="223" width="294" height="336"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="1" green="0.01176470588" blue="0.01176470588" alpha="1" colorSpace="deviceRGB"/>
@@ -1699,7 +1702,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="info" destination="ZP6-jP-fb3" eventType="touchUpInside" id="djL-gw-7Mu"/>
+                                    <action selector="info" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="pSU-AJ-tUx"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SIO-sP-TjT">
@@ -1755,7 +1758,7 @@
                                 </state>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1la-Es-fPE">
-                                <rect key="frame" x="13" y="320" width="294" height="248"/>
+                                <rect key="frame" x="13" y="320" width="294" height="237"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -2329,7 +2332,7 @@
                 <viewController storyboardIdentifier="SettingsViewController" id="vmb-1I-cOo" customClass="SettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fko-Wq-jdw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" id="2i4-Bd-eEH">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -2641,6 +2644,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="tableView" destination="LpR-CU-fxh" id="1Np-yc-ip1"/>
                         <outlet property="viewMain" destination="3by-jV-Cix" id="xdv-vF-wkE"/>
@@ -2760,7 +2765,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="wfo-0v-1Fd">
-                                <rect key="frame" x="0.0" y="138" width="320" height="377"/>
+                                <rect key="frame" x="0.0" y="138" width="320" height="381"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.81960784310000001" green="0.90196078430000004" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

@@ -17,6 +17,7 @@
 #import "User.h"
 #import "LatoLabel.h"
 #import "ZBarSDK.h"
+#import "InfoView.h"
 
 #define WALLET_BUTTON_WIDTH 150
 
@@ -81,6 +82,10 @@ typedef enum eImportState
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    // resize ourselves to fit in area
+    [Util resizeView:self.view withDisplayView:self.viewDisplay];
+    [Util resizeView:nil withDisplayView:self.viewPassword];
 
     _bUsingImagePicker = NO;
     _state = ImportState_PrivateKey;
@@ -165,6 +170,7 @@ typedef enum eImportState
 
 - (IBAction)buttonInfoTouched:(id)sender
 {
+    [InfoView CreateWithHTML:@"infoImportWallet" forView:self.view];
 }
 
 #pragma mark - Misc Methods
@@ -247,8 +253,8 @@ typedef enum eImportState
         self.viewMiddle.frame = frame;
 
         frame = self.viewBottom.frame;
-        frame.origin.y = self.viewMiddle.frame.origin.y + self.viewMiddle.frame.size.height;
         frame.size.height = self.viewDisplay.frame.size.height - self.viewTop.frame.size.height - self.viewMiddle.frame.size.height;
+        frame.origin.y = self.viewDisplay.frame.size.height - frame.size.height + 4;
         self.viewBottom.frame = frame;
 
         frame = self.scanFrame.frame;
@@ -256,6 +262,11 @@ typedef enum eImportState
         frame.size.height = self.viewBottom.frame.size.height - self.imageFlashFrame.frame.size.height;
         frame.size.height -= 3; // some alpha at the top of the flash frame
         self.scanFrame.frame = frame;
+
+        frame = self.flashSelector.frame;
+        frame.size.height = 160; // magic: seems to work...sorry
+        frame.origin.y = 136; // magic: seems to work...sorry
+        self.flashSelector.frame = frame;
     }
 }
 

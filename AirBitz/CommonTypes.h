@@ -30,8 +30,11 @@
 #define BIT6 0x40
 #define BIT7 0x80
 
-#define SCREEN_HEIGHT   ([[UIScreen mainScreen] bounds].size.height)
-#define TOOLBAR_HEIGHT  49
+#define SCREEN_HEIGHT       ([[UIScreen mainScreen] bounds].size.height)
+#define TOOLBAR_HEIGHT      49
+#define SUB_SCREEN_HEIGHT   (SCREEN_HEIGHT - TOOLBAR_HEIGHT)
+#define HEADER_HEIGHT       64
+#define DISPLAY_AREA_HEIGHT (SUB_SCREEN_HEIGHT - HEADER_HEIGHT)
 
 #define DOLLAR_CURRENCY_NUM	840
 
