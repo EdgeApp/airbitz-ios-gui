@@ -17,6 +17,7 @@
 #import "Util.h"
 #import "User.h"
 #import "InfoView.h"
+#import "CommonTypes.h"
 
 #define DOLLAR_CURRENCY_NUM	840
 
@@ -27,6 +28,7 @@
 	TransactionDetailsViewController    *_transactionDetailsController;
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bSearchModeEnabled;
+    CGRect                              _searchShowingFrame;
 }
 
 @property (weak, nonatomic) IBOutlet UIView         *viewSearch;
@@ -38,9 +40,11 @@
 @property (weak, nonatomic) IBOutlet UIButton       *buttonRequest;
 @property (weak, nonatomic) IBOutlet UIButton       *buttonSend;
 @property (weak, nonatomic) IBOutlet UIImageView    *imageWalletNameEmboss;
+@property (weak, nonatomic) IBOutlet UIButton       *buttonSearch;
 
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray        *arraySearchTransactions;
+@property (nonatomic, strong) NSArray               *arrayNonSearchViews;
 
 
 @end
@@ -71,6 +75,8 @@
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 
+    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonForward, self.buttonRequest, self.buttonSend, self.imageWalletNameEmboss, self.buttonSearch, nil];
+
     self.textWalletName.text = self.wallet.strName;
 	self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
 	[self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -84,6 +90,36 @@
     self.buttonBlocker.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
     [self.view bringSubviewToFront:self.textWalletName];
+
+    _searchShowingFrame = self.viewSearch.frame;
+
+    if (IS_IPHONE5)
+    {
+        self.buttonSearch.hidden = YES;
+    }
+    else
+    {
+        // get the search frame out
+        CGRect frame = self.viewSearch.frame;
+        frame.origin.x = self.viewSearch.frame.size.width;
+        self.viewSearch.frame = frame;
+        [self.view bringSubviewToFront:self.viewSearch];
+
+        // move up the controls by the search frame amount
+        for (UIView *curView in self.arrayNonSearchViews)
+        {
+            CGRect frame = curView.frame;
+            frame.origin.y -= self.viewSearch.frame.size.height;
+            curView.frame = frame;
+        }
+
+        // change the table to compensate for now search screen
+        frame = self.tableView.frame;
+        frame.origin.y -= self.viewSearch.frame.size.height;
+        frame.size.height += self.viewSearch.frame.size.height;
+        self.tableView.frame = frame;
+
+    }
 
     _transactionTableStartFrame = self.tableView.frame;
 }
@@ -105,7 +141,15 @@
 
 - (IBAction)Done
 {
-	[self.delegate TransactionsViewControllerDone:self];
+    if (_bSearchModeEnabled)
+    {
+        [self resignAllResponders];
+        [self transitionToSearch:NO];
+    }
+    else
+    {
+        [self.delegate TransactionsViewControllerDone:self];
+    }
 }
 
 - (IBAction)info
@@ -119,6 +163,10 @@
     [self resignAllResponders];
 }
 
+- (IBAction)buttonSearchTouched:(id)sender
+{
+    [self transitionToSearch:YES];
+}
 
 #pragma mark - Misc Methods
 
@@ -144,23 +192,36 @@
 // transition two and from search
 - (void)transitionToSearch:(BOOL)bGoToSearch
 {
-    NSArray *arrayNonSearchViews = @[_balanceView, self.textWalletName, self.buttonForward, self.buttonRequest, self.buttonSend, self.imageWalletNameEmboss];
-
+    CGRect frameSearch = self.viewSearch.frame;
     CGRect frame = self.tableView.frame;
 
     if (bGoToSearch)
     {
         [self.view bringSubviewToFront:self.tableView];
-        frame.origin.y = self.viewSearch.frame.origin.y + self.viewSearch.frame.size.height;
+        frame.origin.y = _searchShowingFrame.origin.y + _searchShowingFrame.size.height;
         frame.size.height = self.view.frame.size.height - frame.origin.y - 10;
+
+        if (!IS_IPHONE5)
+        {
+            [self.searchTextField becomeFirstResponder];
+            frameSearch.origin.x = _searchShowingFrame.origin.x;
+        }
 
         _bSearchModeEnabled = YES;
     }
     else
     {
-        for (UIView *curView in arrayNonSearchViews)
+        for (UIView *curView in _arrayNonSearchViews)
         {
             curView.hidden = NO;
+        }
+        if (IS_IPHONE5)
+        {
+            self.buttonSearch.hidden = YES;
+        }
+        else
+        {
+            frameSearch.origin.x = _searchShowingFrame.size.width;
         }
         frame = _transactionTableStartFrame;
         _bSearchModeEnabled = NO;
@@ -172,12 +233,17 @@
 					 animations:^
 	 {
          self.tableView.frame = frame;
+
+         if (!IS_IPHONE5)
+         {
+             self.viewSearch.frame = frameSearch;
+         }
 	 }
                      completion:^(BOOL finished)
 	 {
          if (bGoToSearch)
          {
-             for (UIView *curView in arrayNonSearchViews)
+             for (UIView *curView in _arrayNonSearchViews)
              {
                  curView.hidden = YES;
              }
