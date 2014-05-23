@@ -10,7 +10,7 @@
 #import "PopupWheelPickerView.h"
 #import "CommonTypes.h"
 
-#define ARROW_INSET             2.0
+#define ARROW_INSET             9.0
 
 @interface PopupWheelPickerView () <UIPickerViewDataSource, UIPickerViewDelegate>
 {
@@ -71,7 +71,7 @@
     {
         // set up the image for the pointer
         CGRect imageFrame = popup.m_arrowImage.frame;
-        UIImage *image = [UIImage imageNamed:@"picker_up_point.png"];
+        UIImage *image = [UIImage imageNamed:@"picker_left_point.png"];
         imageFrame.size = image.size;
         popup.m_arrowImage.frame = imageFrame;
         popup.m_arrowImage.image = image;
@@ -113,14 +113,17 @@
         {
             // move the arrow to the arrow height above the frame
             arrowFrame.origin.y = 0.0 - (arrowFrame.size.height) + ARROW_INSET;
+			// rotate the image by 90 degrees CW
+            CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI * 0.5 );
+            [popup.m_arrowImage setTransform:rotate];
         }
         else // if (PopupWheelPickerPosition_Above == position)
         {
             // move the arrow to the bottom of the frame
             arrowFrame.origin.y = newFrame.size.height - ARROW_INSET;
             
-            // rotate the image by 180 degrees
-            CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI );
+            // rotate the image by 90 degrees CCW
+            CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI * 1.5 );
             [popup.m_arrowImage setTransform:rotate];
         }
         

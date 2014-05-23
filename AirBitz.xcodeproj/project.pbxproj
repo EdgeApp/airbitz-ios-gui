@@ -18,7 +18,6 @@
 		4C08A6E618C2B1D50071B87C /* Wallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C08A6E518C2B1D50071B87C /* Wallet.m */; };
 		4C08A6E918C53BDA0071B87C /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C08A6E818C53BDA0071B87C /* Transaction.m */; };
 		4C3C3091191834AC006923DE /* picker_left_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C308C191834AC006923DE /* picker_left_point.png */; };
-		4C3C3092191834AC006923DE /* picker_up_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C308D191834AC006923DE /* picker_up_point.png */; };
 		4C3C3093191834AC006923DE /* PopupPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C308F191834AC006923DE /* PopupPickerView.m */; };
 		4C3C3094191834AC006923DE /* PopupPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C3090191834AC006923DE /* PopupPickerView.xib */; };
 		4C3C309819198B33006923DE /* PopupWheelPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C309619198B33006923DE /* PopupWheelPickerView.m */; };
@@ -41,7 +40,6 @@
 		4C90463D18C9244900179D9C /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463C18C9244900179D9C /* libiconv.dylib */; };
 		4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
 		4C9E919C1922B3C500F01423 /* comp_13-offline_wallet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */; };
-		B507ADAD191C21B400F51E1E /* picker_up_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B507ADAC191C21B400F51E1E /* picker_up_point@2x.png */; };
 		B507ADAF191C240E00F51E1E /* picker_left_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */; };
 		B5137C0718A40A8400DA4A34 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFA18A40A8400DA4A34 /* Lato-Black.ttf */; };
 		B5137C0818A40A8400DA4A34 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFB18A40A8400DA4A34 /* Lato-BlackItalic.ttf */; };
@@ -421,7 +419,6 @@
 		4C08A6E718C53BDA0071B87C /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Transaction.h; path = "ABC Data/Transaction.h"; sourceTree = "<group>"; };
 		4C08A6E818C53BDA0071B87C /* Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Transaction.m; path = "ABC Data/Transaction.m"; sourceTree = "<group>"; };
 		4C3C308C191834AC006923DE /* picker_left_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = picker_left_point.png; path = PopupPickerView/picker_left_point.png; sourceTree = "<group>"; };
-		4C3C308D191834AC006923DE /* picker_up_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = picker_up_point.png; path = PopupPickerView/picker_up_point.png; sourceTree = "<group>"; };
 		4C3C308E191834AC006923DE /* PopupPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopupPickerView.h; path = PopupPickerView/PopupPickerView.h; sourceTree = "<group>"; };
 		4C3C308F191834AC006923DE /* PopupPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopupPickerView.m; path = PopupPickerView/PopupPickerView.m; sourceTree = "<group>"; };
 		4C3C3090191834AC006923DE /* PopupPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopupPickerView.xib; path = PopupPickerView/PopupPickerView.xib; sourceTree = "<group>"; };
@@ -475,7 +472,6 @@
 		4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
 		4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_13-offline_wallet.jpg"; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
-		B507ADAC191C21B400F51E1E /* picker_up_point@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "picker_up_point@2x.png"; path = "PopupPickerView/picker_up_point@2x.png"; sourceTree = "<group>"; };
 		B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "picker_left_point@2x.png"; path = "PopupPickerView/picker_left_point@2x.png"; sourceTree = "<group>"; };
 		B5137BFA18A40A8400DA4A34 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		B5137BFB18A40A8400DA4A34 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -991,8 +987,6 @@
 			children = (
 				4C3C308C191834AC006923DE /* picker_left_point.png */,
 				B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */,
-				4C3C308D191834AC006923DE /* picker_up_point.png */,
-				B507ADAC191C21B400F51E1E /* picker_up_point@2x.png */,
 				4C3C308E191834AC006923DE /* PopupPickerView.h */,
 				4C3C308F191834AC006923DE /* PopupPickerView.m */,
 				4C3C3090191834AC006923DE /* PopupPickerView.xib */,
@@ -1838,7 +1832,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5F2E9D318DCE09E008ACF88 /* PasswordVerifyView~ipad.xib in Resources */,
-				4C3C3092191834AC006923DE /* picker_up_point.png in Resources */,
 				B55A030118EA206300845090 /* btn_done~iphone.png in Resources */,
 				B59C14E618C012B500AEA789 /* btn_checkmark@2x~iphone.png in Resources */,
 				B59C14EA18C012B500AEA789 /* btn_collapse_expand@2x~iphone.png in Resources */,
@@ -2024,7 +2017,6 @@
 				B55A032418EB597D00845090 /* btn_deleteCategory@2x~iphone.png in Resources */,
 				B59C153718C012B500AEA789 /* tabbar_divider~iphone.png in Resources */,
 				B59C14F018C012B500AEA789 /* btn_equal@2x~iphone.png in Resources */,
-				B507ADAD191C21B400F51E1E /* picker_up_point@2x.png in Resources */,
 				B59C161E18C145D400AEA789 /* tabbar_bkg_selected@2x~iphone.png in Resources */,
 				B59C14DD18C012B500AEA789 /* btn_9~iphone.png in Resources */,
 				B59C152418C012B500AEA789 /* icon_settings@2x~iphone.png in Resources */,

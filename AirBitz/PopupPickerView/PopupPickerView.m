@@ -15,11 +15,11 @@
 
 #define OFFSET_YPOS             45  // how much to offset the y position
 
-#define MIN_CELLS_VISIBLE        2
-
-#define ARROW_INSET             2.0
+#define ARROW_INSET             10.0
 
 #define DATE_PICKER_HEIGHT      216
+
+#define POPUP_STROKE_WIDTH		1.0	//width of the thin border around the entire popup picker
 
 @interface PopupPickerView () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 {
@@ -107,6 +107,7 @@ CGRect keyboardFrame;
 				[self constrainToKeepoutsAnimated:animated];
 			break;
 			default:
+				NSLog(@"*** THIS CROP DIRECTION NOT SUPPORTED YET ***");
 				break;
 	}
 }
@@ -145,45 +146,6 @@ CGRect keyboardFrame;
 	 {
 	 }];
 }
-/*
-+ (PopupPickerView *)CreateForView:(UIView *)parentView positionRelativeTo:(UIView *)posView withPosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings selectedRow:(NSInteger)selectedRow maxCellsVisible:(NSInteger)maxCellsVisible
-{
-	return [PopupPickerView CreateForView:parentView
-                       positionRelativeTo:posView
-                             withPosition:position
-                              withStrings:strings
-                              selectedRow:selectedRow
-                          maxCellsVisible:maxCellsVisible
-                                withWidth:DEFAULT_WIDTH
-                            andCellHeight:DEFAULT_CELL_HEIGHT];
-}
-
-+ (PopupPickerView *)CreateForView:(UIView *)parentView positionRelativeTo:(UIView *)posView withPosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings selectedRow:(NSInteger)selectedRow maxCellsVisible:(NSInteger)maxCellsVisible withWidth:(NSInteger)width andCellHeight:(NSInteger)cellHeight
-{
-	return [PopupPickerView CreateForView:parentView
-                          relativeToFrame:posView.frame
-                             viewForFrame:[posView superview]
-                             withPosition:position
-                              withStrings:strings
-                              selectedRow:selectedRow
-                          maxCellsVisible:maxCellsVisible
-                                withWidth:width
-                            andCellHeight:cellHeight];
-}
-
-+ (PopupPickerView *)CreateForView:(UIView *)parentView relativeToFrame:(CGRect)frame viewForFrame:(UIView *)frameView withPosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings selectedRow:(NSInteger)selectedRow maxCellsVisible:(NSInteger)maxCellsVisible
-{
-    return [PopupPickerView CreateForView:parentView
-                          relativeToFrame:frame
-                             viewForFrame:frameView
-                             withPosition:position
-                              withStrings:strings
-                              selectedRow:selectedRow
-                          maxCellsVisible:maxCellsVisible
-                                withWidth:DEFAULT_WIDTH
-                            andCellHeight:DEFAULT_CELL_HEIGHT];
-}
-*/
 
 + (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings selectedRow:(NSInteger)selectedRow /*maxCellsVisible:(NSInteger)maxCellsVisible*/ withWidth:(NSInteger)width andCellHeight:(NSInteger)cellHeight
 {
@@ -209,17 +171,6 @@ CGRect keyboardFrame;
     CGRect newFrame = popup.frame;
     
     // give it enough height to handle the items
-	/*
-    NSInteger nCellsVisible = [strings count];
-    if (nCellsVisible < MIN_CELLS_VISIBLE)
-    {
-        nCellsVisible = MIN_CELLS_VISIBLE;
-    }
-    if (nCellsVisible > maxCellsVisible)
-    {
-        nCellsVisible = maxCellsVisible;
-    }
-    newFrame.size.height = (nCellsVisible * cellHeight) + (2 * borderThickness);*/
 	if(strings)
 	{
 		newFrame.size.height = strings.count * cellHeight + (2 * borderThickness);
@@ -250,16 +201,15 @@ CGRect keyboardFrame;
     // start the position to the upper-left corner of the positioning view
     newFrame.origin = [viewToPointTo.superview convertPoint:viewToPointTo.frame.origin toView:popup.superview];
     
+	CGRect imageFrame = popup.arrowImage.frame;
+	UIImage *image = [UIImage imageNamed:@"picker_left_point.png"];
+	imageFrame.size = image.size;
+	popup.arrowImage.frame = imageFrame;
+	popup.arrowImage.image = image;
+	
     // if this is above or below
     if ((PopupPickerPosition_Below == position) || (PopupPickerPosition_Above == position))
     {
-        // set up point image
-        CGRect imageFrame = popup.arrowImage.frame;
-        UIImage *image = [UIImage imageNamed:@"picker_up_point.png"];
-        imageFrame.size = image.size;
-        popup.arrowImage.frame = imageFrame;
-        popup.arrowImage.image = image;
-
         // set the X position directly under the center of the positioning view
         newFrame.origin.x += (viewToPointTo.frame.size.width / 2);        // move to center of view
         newFrame.origin.x -= (popup.frame.size.width / 2);          // bring it left so the center is under the view 
@@ -305,14 +255,18 @@ CGRect keyboardFrame;
         {
             // move the arrow to the arrow height above the frame
             arrowFrame.origin.y = 0.0 - (arrowFrame.size.height) + ARROW_INSET;
+			
+			// rotate the image by 90 degrees CW
+            CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI * 0.5 );
+            [popup.arrowImage setTransform:rotate];
         }
         else // if (PopupPickerPosition_Above == position)
         {
             // move the arrow to the bottom of the frame
             arrowFrame.origin.y = newFrame.size.height - ARROW_INSET;
             
-            // rotate the image by 180 degrees
-            CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI );
+            // rotate the image by 90 degrees CCW
+            CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI * 1.5 );
             [popup.arrowImage setTransform:rotate];
         }
         
@@ -327,13 +281,6 @@ CGRect keyboardFrame;
     }
     else // if ((PopupPickerPosition_Left == position) || (PopupPickerPosition_Right == position))
     {
-        // set up pointer image
-        CGRect imageFrame = popup.arrowImage.frame;
-        UIImage *image = [UIImage imageNamed:@"picker_left_point.png"];
-        imageFrame.size = image.size;
-        popup.arrowImage.frame = imageFrame;
-        popup.arrowImage.image = image;
-
         // set the Y position directly beside the center of the positioning view
         newFrame.origin.y += (viewToPointTo.frame.size.height / 2);        // move to center of frame
         newFrame.origin.y -= (popup.frame.size.height / 2);  // bring it up so the center is next to the view
@@ -348,7 +295,7 @@ CGRect keyboardFrame;
         {
             // put it to the left of the positioning frame
             newFrame.origin.x -= newFrame.size.width;             
-            newFrame.origin.x -= popup.arrowImage.frame.size.width;  // offset by arrow width
+            newFrame.origin.x -= (popup.arrowImage.frame.size.width - ARROW_INSET);  // offset by arrow width
         }
         
         // makes sure the picker is within the parents bounds
@@ -389,13 +336,21 @@ CGRect keyboardFrame;
         // put it in the center of the rect
         arrowFrame.origin.y = frameForArrowRef.origin.y + (frameForArrowRef.size.height / 2.0) - (arrowFrame.size.height / 2.0);
         
+		if((arrowFrame.origin.y + arrowFrame.size.height) > (newFrame.size.height - POPUP_STROKE_WIDTH))
+		{
+			arrowFrame.origin.y = (newFrame.size.height - arrowFrame.size.height - POPUP_STROKE_WIDTH);
+		}
+		
+		if(arrowFrame.origin.y < POPUP_STROKE_WIDTH)
+		{
+			arrowFrame.origin.y = POPUP_STROKE_WIDTH;
+		}
         // set the final arrow location
         popup.arrowImage.frame = arrowFrame;
     }
     
     // assign the delegate
 	popup.delegate = (id<PopupPickerViewDelegate>)parentView;
-    //[popup assignDelegate:(id<PopupPickerViewDelegate>)parentView];
     
     // select the row if one was specified
     if (selectedRow != -1) 
@@ -410,7 +365,7 @@ CGRect keyboardFrame;
 - (void)initMyVariables
 {
     // add a black border around the grey 'border'
-    m_viewBorder.layer.borderWidth = 1;
+    m_viewBorder.layer.borderWidth = POPUP_STROKE_WIDTH;
     m_viewBorder.layer.borderColor = [[UIColor blackColor] CGColor];
     
 	// round the corners
@@ -598,53 +553,6 @@ CGRect keyboardFrame;
         }
     }
 }
-
-#pragma mark - UIView delegate methods
-
-#if 0 // doesn't seem to be needed now
-
-// this is used to make sure our background button gets touch events outside our view
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
-    // if the touch was within our table view
-    if (CGRectContainsPoint(table.frame, point))
-    {
-        return table;
-    }
-    else if (CGRectContainsPoint(self.buttonKeyboard.frame, point))
-    {
-        return self.buttonKeyboard;
-    }
-    else if (CGRectContainsPoint(self.buttonTrash.frame, point))
-    {
-        return self.buttonTrash;
-    }
-    else if (CGRectContainsPoint(self.viewOptions.frame, point))
-    {
-        return self.viewOptions;
-    }
-
-    if (_bDisableBackgroundTouch)
-    {
-        return self;
-    }
-    else
-    {
-        // everything else goes to background
-        return m_buttonBackground;
-    }
-}
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	[super touchesBegan:touches withEvent:event];
-}
-
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
-{
-    return YES;
-}
-#endif
 
 #pragma mark - TableView Data Source methods
 
