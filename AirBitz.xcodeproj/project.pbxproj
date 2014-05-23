@@ -43,6 +43,8 @@
 		4C5D8C74192E7D4A0015BB3C /* infoTransactions.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6F192E7D4A0015BB3C /* infoTransactions.html */; };
 		4C5D8C75192E7D4A0015BB3C /* infoWallets.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C70192E7D4A0015BB3C /* infoWallets.html */; };
 		4C5D8C77192E86620015BB3C /* infoImportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C76192E86620015BB3C /* infoImportWallet.html */; };
+		4C5D8C7A192FCCE60015BB3C /* bd_highlighted_cell_top~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C78192FCCE60015BB3C /* bd_highlighted_cell_top~iphone.png */; };
+		4C5D8C7B192FCCE60015BB3C /* bd_highlighted_cell_top@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C79192FCCE60015BB3C /* bd_highlighted_cell_top@2x~iphone.png */; };
 		4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
@@ -467,6 +469,8 @@
 		4C5D8C6F192E7D4A0015BB3C /* infoTransactions.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoTransactions.html; sourceTree = "<group>"; };
 		4C5D8C70192E7D4A0015BB3C /* infoWallets.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoWallets.html; sourceTree = "<group>"; };
 		4C5D8C76192E86620015BB3C /* infoImportWallet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoImportWallet.html; sourceTree = "<group>"; };
+		4C5D8C78192FCCE60015BB3C /* bd_highlighted_cell_top~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bd_highlighted_cell_top~iphone.png"; path = "../../../../../../../AirBitz/AirBitz/Resources/Artwork/iPhone/Directory/BusinessDetails/bd_highlighted_cell_top~iphone.png"; sourceTree = "<group>"; };
+		4C5D8C79192FCCE60015BB3C /* bd_highlighted_cell_top@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bd_highlighted_cell_top@2x~iphone.png"; path = "../../../../../../../AirBitz/AirBitz/Resources/Artwork/iPhone/Directory/BusinessDetails/bd_highlighted_cell_top@2x~iphone.png"; sourceTree = "<group>"; };
 		4C90461C18C91E5900179D9C /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h; sourceTree = "<group>"; };
 		4C90461D18C91E5900179D9C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Exception.h; sourceTree = "<group>"; };
 		4C90461E18C91E5900179D9C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Image.h; sourceTree = "<group>"; };
@@ -1420,6 +1424,8 @@
 				B59C142818C0129300AEA789 /* bd_cell_middle~iphone.png */,
 				B59C142918C0129300AEA789 /* bd_cell_top@2x~iphone.png */,
 				B59C142A18C0129300AEA789 /* bd_cell_top~iphone.png */,
+				4C5D8C78192FCCE60015BB3C /* bd_highlighted_cell_top~iphone.png */,
+				4C5D8C79192FCCE60015BB3C /* bd_highlighted_cell_top@2x~iphone.png */,
 				B59C142B18C0129300AEA789 /* bd_icon_clock@2x~iphone.png */,
 				B59C142C18C0129300AEA789 /* bd_icon_clock~iphone.png */,
 				B59C142D18C0129300AEA789 /* bd_icon_location@2x~iphone.png */,
@@ -2126,6 +2132,7 @@
 				B55A030418EA206300845090 /* btn_unselected@2x~iphone.png in Resources */,
 				B5FD393618F0A67100BE2670 /* transactionDetails.html in Resources */,
 				B5E7F57D18E4EC4E009B5844 /* scan_frame@2x~iphone.png in Resources */,
+				4C5D8C7B192FCCE60015BB3C /* bd_highlighted_cell_top@2x~iphone.png in Resources */,
 				B59C150218C012B500AEA789 /* btn_send@2x~iphone.png in Resources */,
 				B59C14ED18C012B500AEA789 /* btn_dot~iphone.png in Resources */,
 				B59C141C18C0113A00AEA789 /* darken_bottom_table_cell@2x~iphone.png in Resources */,
@@ -2140,6 +2147,7 @@
 				B59C141918C0113A00AEA789 /* bitCoinAnnotation~iphone.png in Resources */,
 				B57C20AE18C2FBE7005D7245 /* bd_cell_single~iphone.png in Resources */,
 				B59C14C518C012B500AEA789 /* bar_balance~iphone.png in Resources */,
+				4C5D8C7A192FCCE60015BB3C /* bd_highlighted_cell_top~iphone.png in Resources */,
 				B59C14E018C012B500AEA789 /* btn_blue@2x~iphone.png in Resources */,
 				4C5D8C67192D1DE50015BB3C /* icon_not_approved@2x~iphone.png in Resources */,
 				B56553E718ECB2FE005B35E1 /* btn_slide_to_confirm@2x~iphone.png in Resources */,

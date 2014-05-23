@@ -560,7 +560,14 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	{
 		if(row == 0)
 		{
+            if (indexPath.section == 0)
+            {
+                cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_top"];
+            }
+            else
+            {
 			cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
+            }
 		}
 		else
 		if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
