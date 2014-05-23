@@ -20,8 +20,7 @@ typedef enum eTDMode
 @interface TransactionDetailsViewController : UIViewController
 
 @property (assign) id<TransactionDetailsViewControllerDelegate> delegate;
-@property (nonatomic, weak) Transaction *transaction;
-//@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, strong) Transaction *transaction;
 @property (nonatomic, assign) tTDMode transactionDetailsMode;
 
 @end

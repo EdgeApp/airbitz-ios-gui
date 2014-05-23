@@ -66,11 +66,20 @@
 	autoCompleteTableView.allowsSelection = YES;
 	autoCompleteTableView.userInteractionEnabled = YES;
 	
-	[self.superview addSubview:autoCompleteTableView];
+	[self.superview.superview.superview addSubview:autoCompleteTableView];
 	[self hideTableViewAnimated:NO];
 	[self generateListOfContactNames];
 	
 	//self.delegate = self;  <-- BAD!  App will hang
+}
+
+-(void)setTableBelow:(BOOL)tableBelow
+{
+	_tableBelow = tableBelow;
+	
+	CGRect frame = autoCompleteTableView.frame;
+	frame.origin.y = 130.0; // th hack
+	autoCompleteTableView.frame = frame;
 }
 
 -(void)setTableAbove:(BOOL)tableAbove
@@ -246,7 +255,7 @@
 									   cacheResult:YES];
 	}
 #else
-	[urlString appendString:[NSString stringWithFormat:@"%@/search/?term=%@&radius=1609&sort=1", SERVER_API, searchTerm]];
+	[urlString appendString:[NSString stringWithFormat:@"%@/search/?term=%@&radius=48283&sort=1", SERVER_API, searchTerm]];
 	
 	[self addLocationToQuery:urlString];
 	

@@ -631,6 +631,9 @@
                                 <state key="normal" image="btn_info.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="info" destination="c1q-yF-WIr" eventType="touchUpInside" id="TiN-5F-dEF"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Bitcoin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ESa-8m-WoY" customClass="MontserratLabel">
                                 <rect key="frame" x="76" y="32" width="168" height="21"/>
@@ -731,8 +734,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comp_09.2-send_bitcoin2.jpg" id="Z0K-80-AHq">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comp_09.2-send_bitcoin2.jpg" id="Z0K-80-AHq">
+                                <rect key="frame" x="1000" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="h4q-AN-hX1">
@@ -753,7 +756,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" id="aNY-oK-5F5">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="u9m-uV-m1e">
@@ -761,8 +764,24 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                     </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send From:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BW5-4o-QhE" customClass="LatoLabel">
+                                        <rect key="frame" x="43" y="37" width="80" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MUU-w2-x0B" customClass="LatoLabel">
+                                        <rect key="frame" x="130" y="37" width="163" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send To:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uak-ip-kgV" customClass="LatoLabel">
-                                        <rect key="frame" x="48" y="67" width="84" height="21"/>
+                                        <rect key="frame" x="61" y="67" width="63" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -770,45 +789,74 @@
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Smith" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nLx-fU-Gvx" customClass="LatoLabel">
-                                        <rect key="frame" x="140" y="68" width="148" height="21"/>
+                                        <rect key="frame" x="130" y="67" width="163" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="Bl7-v2-b3O">
+                                    <view contentMode="scaleToFill" id="G2v-QN-NpV" userLabel="View - bitcoin amount">
                                         <rect key="frame" x="30" y="104" width="260" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="brd-eX-Qaz">
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="Bl7-v2-b3O">
+                                                <rect key="frame" x="0.0" y="0.0" width="260" height="45"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_bitcoin_light.png" id="veL-oR-ZOb">
+                                                <rect key="frame" x="12" y="12" width="20" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fic-d9-oDx" customClass="MontserratLabel">
+                                                <rect key="frame" x="204" y="12" width="47" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" id="UHx-LD-t4M" userLabel="Stylized Text Field - BTC" customClass="StylizedTextField">
+                                        <rect key="frame" x="36" y="111" width="247" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" id="pdu-nu-njT" userLabel="View - USD amount">
                                         <rect key="frame" x="30" y="149" width="260" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_bitcoin_light.png" id="veL-oR-ZOb">
-                                        <rect key="frame" x="42" y="115" width="20" height="21"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="brd-eX-Qaz">
+                                                <rect key="frame" x="0.0" y="0.0" width="260" height="45"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_USD_light.png" id="tHN-tB-DeJ">
+                                                <rect key="frame" x="12" y="12" width="20" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HKk-4P-SL1" customClass="MontserratLabel">
+                                                <rect key="frame" x="204" y="12" width="47" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" id="aWm-mP-gxj" userLabel="Stylized Text Field - USD" customClass="StylizedTextField">
+                                        <rect key="frame" x="36" y="156" width="247" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_USD_light.png" id="tHN-tB-DeJ">
-                                        <rect key="frame" x="42" y="161" width="20" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fic-d9-oDx" customClass="MontserratLabel">
-                                        <rect key="frame" x="245" y="115" width="37" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HKk-4P-SL1" customClass="MontserratLabel">
-                                        <rect key="frame" x="245" y="161" width="37" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <inset key="insetFor6xAndEarlier" minX="-21" minY="0.0" maxX="21" maxY="0.0"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                                    </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.00 BTC - $876.13 USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9aX-Dw-7XD" customClass="LatoLabel">
                                         <rect key="frame" x="53" y="196" width="214" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -828,47 +876,14 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always confirm for future transactions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eoS-dN-sXy" customClass="LatoLabel">
-                                        <rect key="frame" x="52" y="408" width="216" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" red="0.050980392156862744" green="0.40784313725490196" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gFq-TF-jJi">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="BlockingButton" destination="mXe-0d-x2m" eventType="touchUpInside" id="xvs-v4-Z6s"/>
-                                        </connections>
-                                    </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" id="U0G-cH-iZC" customClass="StylizedTextField">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" id="U0G-cH-iZC" userLabel="Stylized Text Field - PIN" customClass="StylizedTextField">
                                         <rect key="frame" x="157" y="240" width="116" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" id="aWm-mP-gxj" customClass="StylizedTextField">
-                                        <rect key="frame" x="36" y="156" width="247" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <inset key="insetFor6xAndEarlier" minX="-21" minY="0.0" maxX="21" maxY="0.0"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" id="UHx-LD-t4M" customClass="StylizedTextField">
-                                        <rect key="frame" x="36" y="111" width="247" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done"/>
-                                    </textField>
-                                    <view contentMode="scaleToFill" id="9Zm-fv-MBe">
+                                    <view contentMode="scaleToFill" id="9Zm-fv-MBe" userLabel="View - slide to confirm">
                                         <rect key="frame" x="30" y="301" width="258" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -884,13 +899,15 @@
                                             <action selector="alwaysConfirm:" destination="mXe-0d-x2m" eventType="touchUpInside" id="IDK-7F-pwx"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always confirm for future transactions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eoS-dN-sXy" customClass="LatoLabel">
+                                        <rect key="frame" x="20" y="408" width="280" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.050980392156862744" green="0.40784313725490196" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" id="PdV-8v-hr7" customClass="CalculatorView">
                                         <rect key="frame" x="0.0" y="275" width="320" height="229"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="eye-R4-Zae" customClass="ButtonSelectorView">
-                                        <rect key="frame" x="28" y="24" width="264" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -902,14 +919,24 @@
                     </view>
                     <connections>
                         <outlet property="addressLabel" destination="nLx-fU-Gvx" id="8V1-iN-Kce"/>
+                        <outlet property="amountBTCLabel" destination="Fic-d9-oDx" id="bsC-oT-WdB"/>
                         <outlet property="amountBTCTextField" destination="UHx-LD-t4M" id="bG5-wk-HDI"/>
+                        <outlet property="amountUSDLabel" destination="HKk-4P-SL1" id="7dL-zU-cei"/>
                         <outlet property="amountUSDTextField" destination="aWm-mP-gxj" id="den-AN-otp"/>
-                        <outlet property="blockingButton" destination="gFq-TF-jJi" id="SUw-a3-5v9"/>
                         <outlet property="btn_alwaysConfirm" destination="69b-p5-Bpq" id="XTU-U2-bRN"/>
-                        <outlet property="buttonSelector" destination="eye-R4-Zae" id="B0L-A0-ZGM"/>
                         <outlet property="confirmSliderContainer" destination="9Zm-fv-MBe" id="q8o-md-9m0"/>
                         <outlet property="conversionLabel" destination="9aX-Dw-7XD" id="QVZ-z2-zJ9"/>
+                        <outlet property="imagePINEmboss" destination="1rZ-NY-P3J" id="Q8L-bj-2de"/>
+                        <outlet property="imageTopEmboss" destination="u9m-uV-m1e" id="jwq-lt-96g"/>
                         <outlet property="keypadView" destination="PdV-8v-hr7" id="PWp-9K-gti"/>
+                        <outlet property="labelAlwaysConfirm" destination="eoS-dN-sXy" id="fDL-7Y-9Qi"/>
+                        <outlet property="labelPINTitle" destination="ScE-Ny-R3i" id="d7T-ym-nOz"/>
+                        <outlet property="labelSendFrom" destination="MUU-w2-x0B" id="3Su-DO-d5t"/>
+                        <outlet property="labelSendFromTitle" destination="BW5-4o-QhE" id="MDS-KU-DaO"/>
+                        <outlet property="labelSendToTitle" destination="Uak-ip-kgV" id="G2P-zX-9ey"/>
+                        <outlet property="viewBTC" destination="G2v-QN-NpV" id="57P-MS-NCP"/>
+                        <outlet property="viewDisplayArea" destination="aNY-oK-5F5" id="qp6-FS-j8b"/>
+                        <outlet property="viewUSD" destination="pdu-nu-njT" id="bxp-He-pbU"/>
                         <outlet property="withdrawlPIN" destination="U0G-cH-iZC" id="Jph-5t-855"/>
                     </connections>
                 </viewController>
@@ -983,7 +1010,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hk5-ol-0gD" customClass="LatoLabel">
-                                <rect key="frame" x="235" y="131" width="36" height="21"/>
+                                <rect key="frame" x="220" y="131" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -992,7 +1019,7 @@
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rDW-FH-GD0" customClass="LatoLabel">
-                                <rect key="frame" x="235" y="170" width="36" height="21"/>
+                                <rect key="frame" x="220" y="170" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1072,7 +1099,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="BTCLabel_TextField" destination="Hk5-ol-0gD" id="hnn-be-cog"/>
                         <outlet property="BTC_TextField" destination="Ug3-Vw-VAD" id="wxA-0t-0gW"/>
+                        <outlet property="USDLabel_TextField" destination="rDW-FH-GD0" id="jof-3j-jNO"/>
                         <outlet property="USD_TextField" destination="dY3-MX-MNV" id="KN9-2s-2Cb"/>
                         <outlet property="buttonSelector" destination="TyS-sr-hRl" id="JcR-Jg-aYq"/>
                         <outlet property="exchangeRateLabel" destination="jwC-1c-veH" id="3U1-BI-cHp"/>
@@ -1254,23 +1283,61 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" id="c46-yk-GrZ" userLabel="View - Display">
-                                <rect key="frame" x="0.0" y="62" width="320" height="458"/>
+                            <view contentMode="scaleToFill" id="kXN-4v-fXN" userLabel="View - Password">
+                                <rect key="frame" x="0.0" y="1162" width="320" height="458"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter password to decode wallet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dYT-6O-aBD" customClass="LatoLabel">
+                                        <rect key="frame" x="20" y="0.0" width="280" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="Xol-70-i3L">
+                                        <rect key="frame" x="84" y="62" width="152" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="JT9-ng-h3L" customClass="StylizedTextField">
+                                        <rect key="frame" x="92" y="64" width="136" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="MbV-1q-ikJ" id="uz3-LQ-oJ8"/>
+                                        </connections>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_not_approved.png" id="dnh-Tx-cKC">
+                                        <rect key="frame" x="121" y="116" width="79" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_approved.png" id="UCo-ze-VCd">
+                                        <rect key="frame" x="121" y="116" width="79" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="c46-yk-GrZ" userLabel="View - Display">
+                                <rect key="frame" x="0.0" y="62" width="320" height="459"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="e0Y-s7-T6X" userLabel="View - Middle">
                                         <rect key="frame" x="0.0" y="108" width="320" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code or use photo" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OV6-ZE-mtN" customClass="LatoLabel">
-                                                <rect key="frame" x="12" y="7" width="225" height="21"/>
+                                                <rect key="frame" x="12" y="5" width="225" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yFK-Gw-Mzd">
-                                                <rect key="frame" x="245" y="7" width="23" height="23"/>
+                                                <rect key="frame" x="245" y="5" width="23" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="btn_camera.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1289,25 +1356,26 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" id="t8h-iv-TGi">
-                                        <rect key="frame" x="0.0" y="136" width="320" height="324"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                    <view contentMode="scaleToFill" id="t8h-iv-TGi" userLabel="View - Bottom">
+                                        <rect key="frame" x="0.0" y="137" width="320" height="327"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="1Ab-Lx-n8L">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="253"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="1Ab-Lx-n8L">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="249"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_flash_controls.png" id="jdY-n5-XnA">
-                                                <rect key="frame" x="0.0" y="252" width="320" height="70"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <rect key="frame" x="0.0" y="257" width="320" height="70"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" id="VVV-KZ-RL3" customClass="FlashSelectView">
-                                                <rect key="frame" x="85" y="263" width="149" height="48"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <rect key="frame" x="85" y="265" width="149" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="NVK-68-vgY" userLabel="View - Top">
                                         <rect key="frame" x="0.0" y="17" width="320" height="92"/>
@@ -1347,6 +1415,13 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter bitcoin address (optional)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HVK-hq-Jcu" customClass="LatoLabel">
+                                                <rect key="frame" x="153" y="48" width="115" height="32"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -1359,9 +1434,21 @@
                     <connections>
                         <outlet property="buttonSelector" destination="NEk-qX-9fN" id="Oi0-Dc-1wE"/>
                         <outlet property="flashSelector" destination="VVV-KZ-RL3" id="Gbf-Hh-39U"/>
+                        <outlet property="imageApproved" destination="UCo-ze-VCd" id="DLN-0C-XNp"/>
                         <outlet property="imageFlashFrame" destination="jdY-n5-XnA" id="WV8-M7-7dH"/>
+                        <outlet property="imageNotApproved" destination="dnh-Tx-cKC" id="vGT-Rj-Lmw"/>
+                        <outlet property="imagePasswordEmboss" destination="Xol-70-i3L" id="N9N-Sx-j8j"/>
+                        <outlet property="labelEnter" destination="HVK-hq-Jcu" id="Sxy-TP-lvl"/>
+                        <outlet property="labelPasswordStatus" destination="dYT-6O-aBD" id="r7S-AI-eSF"/>
                         <outlet property="scanFrame" destination="1Ab-Lx-n8L" id="Pus-WL-Wgv"/>
+                        <outlet property="textPassword" destination="JT9-ng-h3L" id="iEO-9K-SPU"/>
                         <outlet property="textPrivateKey" destination="cPl-fB-Lm1" id="9ff-qp-mS1"/>
+                        <outlet property="viewBottom" destination="t8h-iv-TGi" id="3D0-eR-4uM"/>
+                        <outlet property="viewDisplay" destination="c46-yk-GrZ" id="2DC-8a-amo"/>
+                        <outlet property="viewHeader" destination="zhg-Om-dQ6" id="2TB-YD-lDh"/>
+                        <outlet property="viewMiddle" destination="e0Y-s7-T6X" id="fNF-YV-PmL"/>
+                        <outlet property="viewPassword" destination="kXN-4v-fXN" id="AM9-dH-voe"/>
+                        <outlet property="viewTop" destination="NVK-68-vgY" id="afb-9f-MTZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yQB-cu-4nR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1424,7 +1511,7 @@
                                 <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="w7G-E8-m3C">
-                                <rect key="frame" x="13" y="223" width="294" height="296"/>
+                                <rect key="frame" x="13" y="223" width="294" height="336"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="1" green="0.01176470588" blue="0.01176470588" alpha="1" colorSpace="deviceRGB"/>
@@ -1551,49 +1638,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comp_07-account_transactions2.jpg" id="ndZ-KP-dyu">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_dark_header.png" id="cB6-hH-IXn">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" id="3Qw-an-knM">
-                                <rect key="frame" x="13" y="172" width="294" height="82"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                            </view>
                             <view contentMode="scaleToFill" id="fOc-BT-zsB">
-                                <rect key="frame" x="0.0" y="3" width="320" height="116"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="55"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SearchBarBacking.png" id="9BP-Kx-dhj">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TxSearchBarBacking.png" id="9BP-Kx-dhj">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <rect key="contentStretch" x="0.0" y="0.70999999999999996" width="0.0" height="0.0"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="YO2-SW-MOa">
-                                        <rect key="frame" x="11" y="68" width="298" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Location" minimumFontSize="17" clearButtonMode="always" id="ofv-Xb-5aQ">
-                                        <rect key="frame" x="40" y="69" width="269" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="vXZ-lx-hvc" id="2y9-3X-8JQ"/>
-                                        </connections>
-                                    </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_location.png" id="mti-sY-ftv">
-                                        <rect key="frame" x="21" y="74" width="9" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="AjN-aR-aWs">
-                                        <rect key="frame" x="11" y="68" width="298" height="30"/>
+                                        <rect key="frame" x="11" y="7" width="298" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" clearButtonMode="always" id="WMa-Cy-YRr">
-                                        <rect key="frame" x="40" y="69" width="269" height="30"/>
+                                        <rect key="frame" x="40" y="8" width="269" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
@@ -1602,23 +1666,30 @@
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_search.png" id="Xne-aV-9fb">
-                                        <rect key="frame" x="18" y="76" width="14" height="15"/>
+                                        <rect key="frame" x="18" y="15" width="14" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Bdj-9p-u5B">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transactions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k2v-Gd-mWv" userLabel="Montserrat Label - Title" customClass="MontserratLabel">
+                                <rect key="frame" x="86" y="32" width="148" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Bdj-9p-u5B" userLabel="Button - Info">
                                 <rect key="frame" x="280" y="23" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="btn_info.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="info" destination="ZP6-jP-fb3" eventType="touchUpInside" id="djL-gw-7Mu"/>
+                                    <action selector="info" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="pSU-AJ-tUx"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SIO-sP-TjT">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SIO-sP-TjT" userLabel="Button - Back">
                                 <rect key="frame" x="4" y="23" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="back_arrow.png">
@@ -1628,14 +1699,7 @@
                                     <action selector="Done" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="f5f-sE-UYa"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transactions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k2v-Gd-mWv" customClass="MontserratLabel">
-                                <rect key="frame" x="86" y="32" width="148" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MFx-OC-ubq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MFx-OC-ubq" userLabel="Button - Forward">
                                 <rect key="frame" x="12" y="123" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1643,15 +1707,37 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BmF-p6-cfN">
-                                <rect key="frame" x="99" y="125" width="123" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="W7N-ZQ-6wO">
+                                <rect key="frame" x="58" y="123" width="204" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="CHECKING" backgroundImage="btn_blue.png">
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="x1H-Vr-RsO" customClass="StylizedTextField">
+                                <rect key="frame" x="65" y="125" width="191" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="tIs-Cz-ZD5" id="ikk-Rt-0cG"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wMi-Kk-9gE" userLabel="Button - Search">
+                                <rect key="frame" x="275" y="125" width="33" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="btn_search.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="buttonSearchTouched:" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="5Cj-Va-fzz"/>
+                                </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="3Qw-an-knM">
+                                <rect key="frame" x="13" y="172" width="294" height="82"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W2g-GD-h4o">
                                 <rect key="frame" x="13" y="271" width="143" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1671,7 +1757,7 @@
                                 </state>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1la-Es-fPE">
-                                <rect key="frame" x="13" y="320" width="294" height="248"/>
+                                <rect key="frame" x="13" y="320" width="294" height="237"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1753,8 +1839,15 @@
                     </view>
                     <connections>
                         <outlet property="balanceViewPlaceholder" destination="3Qw-an-knM" id="uWP-JF-vsP"/>
+                        <outlet property="buttonForward" destination="MFx-OC-ubq" id="gKz-Ty-CSB"/>
+                        <outlet property="buttonRequest" destination="W2g-GD-h4o" id="BPi-fL-LIx"/>
+                        <outlet property="buttonSearch" destination="wMi-Kk-9gE" id="IZp-8z-djn"/>
+                        <outlet property="buttonSend" destination="Skp-Gb-ZuY" id="ZE9-Au-x5G"/>
+                        <outlet property="imageWalletNameEmboss" destination="W7N-ZQ-6wO" id="knp-Pl-OY1"/>
                         <outlet property="searchTextField" destination="WMa-Cy-YRr" id="QCQ-ep-s1L"/>
                         <outlet property="tableView" destination="1la-Es-fPE" id="4pj-UV-ux5"/>
+                        <outlet property="textWalletName" destination="x1H-Vr-RsO" id="13a-Km-nOc"/>
+                        <outlet property="viewSearch" destination="fOc-BT-zsB" id="DLd-54-Q4v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6hJ-9Y-8wI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2093,7 +2186,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ClG-um-kmI" customClass="MontserratLabel">
-                                                <rect key="frame" x="119" y="248" width="82" height="21"/>
+                                                <rect key="frame" x="39" y="249" width="82" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2113,7 +2206,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L8T-Xw-aVE" customClass="MontserratLabel">
-                                                <rect key="frame" x="119" y="309" width="82" height="21"/>
+                                                <rect key="frame" x="39" y="309" width="82" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2142,16 +2235,16 @@
                                                     <action selector="Done" destination="Gtr-aC-t0S" eventType="touchUpInside" id="MIr-Pc-lfn"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" id="XNd-9N-hLm" customClass="CalculatorView">
+                                                <rect key="frame" x="-1" y="277" width="320" height="229"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="XNd-9N-hLm" customClass="CalculatorView">
-                                <rect key="frame" x="0.0" y="339" width="320" height="229"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -2200,55 +2293,38 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" id="CRP-JF-TAp">
-                                <rect key="frame" x="97" y="185" width="126" height="165"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PY5-r2-zeB" customClass="LatoLabel">
-                                <rect key="frame" x="20" y="374" width="280" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <size key="shadowOffset" width="0.0" height="1"/>
-                            </label>
-                            <view contentMode="scaleToFill" id="mh2-Km-QgO">
-                                <rect key="frame" x="20" y="403" width="280" height="145"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" id="KyV-XH-vOM" userLabel="View - Display Area">
+                                <rect key="frame" x="0.0" y="62" width="320" height="450"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="h_seperator.png" id="bJZ-W0-sf0">
-                                        <rect key="frame" x="44" y="70" width="192" height="5"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="jvM-Wt-OU9">
+                                        <rect key="frame" x="142" y="44" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" id="CRP-JF-TAp">
+                                        <rect key="frame" x="97" y="123" width="126" height="165"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c7D-Vl-Pb7" customClass="LatoLabel">
-                                        <rect key="frame" x="44" y="41" width="192" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sending..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PY5-r2-zeB" customClass="LatoLabel">
+                                        <rect key="frame" x="20" y="312" width="280" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y63-cl-VMA" customClass="LatoLabel">
-                                        <rect key="frame" x="44" y="83" width="192" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="jvM-Wt-OU9">
-                                <rect key="frame" x="142" y="106" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="bitCoinLabel" destination="c7D-Vl-Pb7" id="Z9b-9P-bwW"/>
-                        <outlet property="currencyView" destination="mh2-Km-QgO" id="ClV-tX-dtA"/>
-                        <outlet property="fiatLabel" destination="y63-cl-VMA" id="93R-xN-iEo"/>
+                        <outlet property="imageBitcoin" destination="CRP-JF-TAp" id="U84-ys-YtG"/>
+                        <outlet property="imageTopBar" destination="gmt-c3-7j4" id="Orc-ew-HX1"/>
+                        <outlet property="indicator" destination="jvM-Wt-OU9" id="eaG-68-c0d"/>
                         <outlet property="messageLabel" destination="PY5-r2-zeB" id="jr7-Gk-xHS"/>
+                        <outlet property="viewDisplayArea" destination="KyV-XH-vOM" id="KpV-zS-tCq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akK-ti-Ibh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2261,7 +2337,7 @@
                 <viewController storyboardIdentifier="SettingsViewController" id="vmb-1I-cOo" customClass="SettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fko-Wq-jdw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" id="2i4-Bd-eEH">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -2693,7 +2769,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="wfo-0v-1Fd">
-                                <rect key="frame" x="0.0" y="138" width="320" height="377"/>
+                                <rect key="frame" x="0.0" y="138" width="320" height="381"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.81960784310000001" green="0.90196078430000004" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -3565,6 +3641,7 @@
     </scenes>
     <resources>
         <image name="SearchBarBacking.png" width="320" height="116"/>
+        <image name="TxSearchBarBacking.png" width="320" height="55"/>
         <image name="back_arrow.png" width="37" height="37"/>
         <image name="background.jpg" width="320" height="568"/>
         <image name="bd_cell_bottom.png" width="12" height="12"/>
@@ -3601,20 +3678,21 @@
         <image name="btn_locateMe.png" width="39" height="39"/>
         <image name="btn_request.png" width="143" height="41"/>
         <image name="btn_right.png" width="22" height="22"/>
+        <image name="btn_search.png" width="32" height="33"/>
         <image name="btn_send.png" width="143" height="41"/>
         <image name="btn_td_done.png" width="251" height="41"/>
-        <image name="comp_07-account_transactions2.jpg" width="640" height="1136"/>
         <image name="comp_09.2-send_bitcoin2.jpg" width="640" height="1136"/>
         <image name="darken_bottom_table_cell.png" width="320" height="111"/>
         <image name="divider.png" width="320" height="27"/>
         <image name="divider_thumb.png" width="16" height="4"/>
         <image name="emboss_down.png" width="20" height="21"/>
         <image name="emboss_up.png" width="291" height="193"/>
-        <image name="h_seperator.png" width="192" height="5"/>
         <image name="icon_USD_light.png" width="20" height="21"/>
+        <image name="icon_approved.png" width="79" height="80"/>
         <image name="icon_bitcoin_light.png" width="20" height="21"/>
         <image name="icon_directory_dark.png" width="28" height="23"/>
         <image name="icon_location.png" width="9" height="17"/>
+        <image name="icon_not_approved.png" width="79" height="80"/>
         <image name="icon_request_dark.png" width="16" height="16"/>
         <image name="icon_rightArrow.png" width="13" height="15"/>
         <image name="icon_search.png" width="14" height="15"/>

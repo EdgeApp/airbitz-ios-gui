@@ -61,10 +61,10 @@ typedef enum eAppMode
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
+    [super viewDidLoad];
 
-	[User initAll];
-	
+    [User initAll];
+
     NSMutableData *seedData = [[NSMutableData alloc] init];
     [self fillSeedData:seedData];
 #if !DIRECTORY_ONLY
@@ -423,8 +423,9 @@ typedef enum eAppMode
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
-	//two members in pInfo that are strings.  They will get freed by the core as soon as we exit this function
-    NSLog(@"Async BitCoin event: %s", pInfo->szDescription);
+    if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin)
+    {
+    }
 }
 
 @end

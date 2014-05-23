@@ -14,11 +14,17 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *password;
 
+// User Settings
+@property (nonatomic) int64_t denomination;
+@property (nonatomic, copy) NSString* denominationLabel;
+@property (nonatomic, copy) NSString* denominationLabelShort;
+
 + (void)initAll;
 + (void)freeAll;
 +(User *)Singleton;
 
 -(id)init;
 -(void)clear;
+-(void)loadSettings;
 
 @end

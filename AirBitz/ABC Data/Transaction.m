@@ -67,7 +67,7 @@
 // overriding the description - used in debugging
 - (NSString *)description
 {
-	return([NSString stringWithFormat:@"Transaction - ID: %@, WalletUUID: %@, WalletName: %@, Name: %@, Address: %@, Date: %@, Confirmed: %@, Confirmations: %u, AmountSatoshi: %lli, Balance: %lf, Category: %@, Notes: %@",
+    return([NSString stringWithFormat:@"Transaction - ID: %@, WalletUUID: %@, WalletName: %@, Name: %@, Address: %@, Date: %@, Confirmed: %@, Confirmations: %u, AmountSatoshi: %lli, AmountFiat: %lf, Balance: %lli, Category: %@, Notes: %@",
             self.strID,
             self.strWalletUUID,
             self.strWalletName,
@@ -77,6 +77,7 @@
             (self.bConfirmed == YES ? @"Yes" : @"No"),
             self.confirmations,
             self.amountSatoshi,
+            self.amountFiat,
             self.balance,
             self.strCategory,
             self.strNotes

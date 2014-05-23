@@ -22,6 +22,7 @@
 #import "CommonTypes.h"
 #import "CategoriesViewController.h"
 #import "Util.h"
+#import "InfoView.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -98,13 +99,13 @@ typedef struct sDenomination
 
 tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
-        "Bitcoin", 100000000
+        "BTC", 100000000
     },
     {
-        "mBitcoin", 100000
+        "mBTC", 100000
     },
     {
-        "uBitcoin", 100
+        "uBTC", 100
     }
 };
 
@@ -151,6 +152,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // resize ourselves to fit in area
+    [Util resizeView:self.view withDisplayView:self.viewMain];
 
 	// Do any additional setup after loading the view.
 	self.tableView.delegate = self;
@@ -232,6 +236,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                               [[User Singleton].password UTF8String],
                               _pAccountSettings,
                               &Error);
+    if (ABC_CC_Ok == Error.code)
+    {
+        [[User Singleton] loadSettings];
+    }
     [Util printABC_Error:&Error];
 }
 
@@ -606,12 +614,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (IBAction)Info
 {
-	NSLog(@"Info button pressed");
+    [InfoView CreateWithHTML:@"infoSettings" forView:self.view];
 }
 
 - (void)buttonOnlyCellButtonPressed:(ButtonOnlyCell *)cell
 {
-	NSLog(@"Change Categories");
 	//log out for now
 	[[User Singleton] clear];
 	[self.delegate SettingsViewControllerDone:self];

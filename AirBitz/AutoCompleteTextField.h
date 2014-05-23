@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) NSArray *arrayAutoCompleteStrings;  //if this is set, then built-in autocomplete of contacts and business names is disabled and this is used instead
 @property (nonatomic, assign) BOOL tableAbove;	//set if you want the table to appear above the textField
+@property (nonatomic, assign) BOOL tableBelow;	//set if you want the table to appear below the textField
 @property (assign) id<AutoCompleteTextFieldDelegate> autoTextFieldDelegate;
 
 -(void)autoCompleteTextFieldDidBeginEditing;

@@ -16,11 +16,14 @@
 #import "ButtonSelectorView.h"
 #import "CommonTypes.h"
 #import "Util.h"
+#import "InfoView.h"
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate>
 {
 	ZBarReaderView                  *reader;
 	NSTimer                         *startScannerTimer;
+	int                             selectedWalletIndex;
+	NSString                        *selectedWalletUUID;
 	SendConfirmationViewController  *sendConfirmationViewController;
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
@@ -52,7 +55,10 @@
 {
 	[super viewDidLoad];
 
-    [self updateLayout];
+    // resize ourselves to fit in area
+    [Util resizeView:self.view withDisplayView:nil];
+
+    [self updateDisplayLayout];
 	
 	self.flashSelector.delegate = self;
 	self.sendToTextField.delegate = self;
@@ -92,7 +98,7 @@
 
 #pragma mark - Misc Methods
 
-- (void)updateLayout
+- (void)updateDisplayLayout
 {
     // if we are on a smaller screen
     if (!IS_IPHONE5)
@@ -155,10 +161,11 @@
 	
 	if(nCount)
 	{
-		tABC_WalletInfo *info = aWalletInfo[0];
+		tABC_WalletInfo *info = aWalletInfo[selectedWalletIndex];
 		
+		selectedWalletUUID = [NSString stringWithUTF8String:info->szUUID];
 		[self.buttonSelector.button setTitle:[NSString stringWithUTF8String:info->szName] forState:UIControlStateNormal];
-		self.buttonSelector.selectedItemIndex = 0;
+		self.buttonSelector.selectedItemIndex = selectedWalletIndex;
 	}
 	
     // assign list of wallets to buttonSelector
@@ -167,15 +174,6 @@
     for (int i = 0; i < nCount; i++)
     {
         tABC_WalletInfo *pInfo = aWalletInfo[i];
-		/*
-        printf("Account: %s, UUID: %s, Name: %s, currency: %d, attributes: %u, balance: %lld\n",
-               pInfo->szUserName,
-               pInfo->szUUID,
-               pInfo->szName,
-               pInfo->currencyNum,
-               pInfo->attributes,
-               pInfo->balanceSatoshi);
-		*/
 		[walletsArray addObject:[NSString stringWithUTF8String:pInfo->szName]];
     }
 	
@@ -212,21 +210,18 @@
 	 }];
 }
 
-#pragma mark - Actions
-
-//- (IBAction)cameraButtonPushed:(id)sender
 -(void)startScanner:(NSTimer *)timer
 {
-	
+
 #if !TARGET_IPHONE_SIMULATOR
-   // NSLog(@"Scanning...");
+    // NSLog(@"Scanning...");
 
 	reader = [ZBarReaderView new];
 	[self.view insertSubview:reader belowSubview:self.scanFrame];
 	reader.frame = self.scanFrame.frame;
 	reader.readerDelegate = self;
 	reader.tracksSymbols = NO;
-	
+
 	reader.tag = 99999999;
 	if(self.sendToTextField.text.length)
 	{
@@ -244,9 +239,19 @@
 	{
 		[v removeFromSuperview];
 	}
-	
+
 	//[self.view endEditing:YES];
 }
+
+#pragma mark - Action Methods
+
+- (IBAction)info
+{
+	[self.view endEditing:YES];
+    [InfoView CreateWithHTML:@"infoSend" forView:self.view];
+}
+
+
 
 #pragma mark - UITextField delegates
 
@@ -418,6 +423,8 @@
 -(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
 	NSLog(@"Selected item %i", itemIndex);
+    selectedWalletIndex = itemIndex;
+    [self setWalletButtonTitle];
 }
 
 @end

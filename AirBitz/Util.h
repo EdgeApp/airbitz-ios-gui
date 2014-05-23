@@ -12,5 +12,6 @@
 @interface Util : NSObject
 
 + (void)printABC_Error:(const tABC_Error *)pError;
++ (void)resizeView:(UIView *)theView withDisplayView:(UIView *)theDisplayView;
 
 @end

@@ -121,6 +121,7 @@ typedef enum eLoginMode
 		{
 			[User Singleton].name = self.userNameTextField.text;
 			[User Singleton].password = self.passwordTextField.text;
+			[[User Singleton] loadSettings];
 		}
 		else
 		{

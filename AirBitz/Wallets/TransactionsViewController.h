@@ -14,7 +14,7 @@
 @interface TransactionsViewController : UIViewController
 
 @property (assign) id<TransactionsViewControllerDelegate> delegate;
-@property (nonatomic, weak) Wallet *wallet;
+@property (nonatomic, strong) Wallet *wallet;
 
 @end
 

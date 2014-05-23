@@ -37,6 +37,28 @@
 	return iv;
 }
 
++ (void)CreateWithHTML:(NSString *)strHTML forView:(UIView *)theView
+{
+	InfoView *iv;
+
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+	{
+		iv = [[[NSBundle mainBundle] loadNibNamed:@"InfoView~iphone" owner:nil options:nil] objectAtIndex:0];
+	}
+	else
+	{
+		iv = [[[NSBundle mainBundle] loadNibNamed:@"InfoView~ipad" owner:nil options:nil] objectAtIndex:0];
+
+	}
+
+	iv.delegate = nil;
+	iv.frame = theView.bounds;
+	[iv enableScrolling:NO];
+	NSString* path = [[NSBundle mainBundle] pathForResource:strHTML ofType:@"html"];
+	iv.htmlInfoToDisplay = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    [theView addSubview:iv];
+}
+
 - (void) initMyVariables
 {
 	self.webView.layer.cornerRadius = 4.0;
@@ -125,7 +147,20 @@
 	 }
 	 completion:^(BOOL finished)
 	 {
-		 [self.delegate InfoViewFinished:self];
+         BOOL bExitHandled = NO;
+         if (self.delegate)
+         {
+             if ([self.delegate respondsToSelector:@selector(InfoViewFinished:)])
+             {
+                  [self.delegate InfoViewFinished:self];
+                 bExitHandled = YES;
+             }
+         }
+
+         if (!bExitHandled)
+         {
+             [self removeFromSuperview];
+         }
 	 }];
 }
 

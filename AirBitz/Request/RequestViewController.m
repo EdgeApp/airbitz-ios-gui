@@ -19,8 +19,10 @@
 #import "User.h"
 #import "ShowWalletQRViewController.h"
 #import "CommonTypes.h"
+#import "CoreBridge.h"
 #import "Util.h"
 #import "ImportWalletViewController.h"
+#import "InfoView.h"
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 #define QR_CODE_SIZE          200.0
@@ -53,7 +55,9 @@ typedef enum eAddressPickerType
 }
 
 @property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
+@property (nonatomic, weak) IBOutlet UILabel            *BTCLabel_TextField;
 @property (nonatomic, weak) IBOutlet UITextField        *BTC_TextField;
+@property (nonatomic, weak) IBOutlet UILabel            *USDLabel_TextField;
 @property (nonatomic, weak) IBOutlet UITextField        *USD_TextField;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector;
 @property (nonatomic, weak) IBOutlet UILabel            *exchangeRateLabel;
@@ -79,6 +83,10 @@ typedef enum eAddressPickerType
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
+    // resize ourselves to fit in area
+    [Util resizeView:self.view withDisplayView:nil];
+
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
@@ -92,18 +100,14 @@ typedef enum eAddressPickerType
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+	self.BTCLabel_TextField.text = [User Singleton].denominationLabel; 
 	self.BTC_TextField.inputView = self.keypadView;
+	self.USDLabel_TextField.text = @"USD";
 	self.USD_TextField.inputView = self.keypadView;
 	self.BTC_TextField.delegate = self;
 	self.USD_TextField.delegate = self;
-	
-	double currency;
-	tABC_Error error;
-	
-	ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(1.0), &currency, DOLLAR_CURRENCY_NUM, &error);
-	
-	//self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", currency];
-	self.exchangeRateLabel.text = [NSString stringWithFormat:@"1 BTC = $%.2f", currency];
+    self.exchangeRateLabel.text = [CoreBridge conversionString: DOLLAR_CURRENCY_NUM];
 	
 	CGRect frame = self.keypadView.frame;
 	frame.origin.y = frame.origin.y + frame.size.height;
@@ -127,6 +131,7 @@ typedef enum eAddressPickerType
 - (IBAction)info
 {
 	[self.view endEditing:YES];
+    [InfoView CreateWithHTML:@"infoRequest" forView:self.view];
 }
 
 - (IBAction)ImportWallet
@@ -192,7 +197,7 @@ typedef enum eAddressPickerType
 	tABC_Error error;
 
 	//first need to create a transaction details struct
-	details.amountSatoshi = ABC_BitcoinToSatoshi([self.BTC_TextField.text doubleValue]);
+    details.amountSatoshi = [CoreBridge denominationToSatoshi:[self.BTC_TextField.text doubleValue]];
 	
 	//the true fee values will be set by the core
 	details.amountFeesAirbitzSatoshi = 0;
@@ -211,7 +216,6 @@ typedef enum eAddressPickerType
 	#warning TODO: Need to set up category for this transaction
 	details.szCategory = "";
 
-	
 	details.attributes = 0x0; //for our own use (not used by the core)
 
 	char *pRequestID;
@@ -294,7 +298,8 @@ typedef enum eAddressPickerType
 	_qrViewController.qrCodeImage = image;
 	_qrViewController.addressString = address;
 	_qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
-	_qrViewController.amountSatoshi = ABC_BitcoinToSatoshi([self.BTC_TextField.text doubleValue]);
+    double satoshi = [CoreBridge denominationToSatoshi:[self.BTC_TextField.text doubleValue]];
+    _qrViewController.amountSatoshi = [CoreBridge formatSatoshi: satoshi];
 	CGRect frame = self.view.bounds;
 	_qrViewController.view.frame = frame;
 	[self.view addSubview:_qrViewController.view];
@@ -307,9 +312,9 @@ typedef enum eAddressPickerType
 	 {
 		_qrViewController.view.alpha = 1.0;
 	 }
-					 completion:^(BOOL finished)
-	 {
-	 }];
+    completion:^(BOOL finished)
+    {
+    }];
 }
 
 - (void)showAddressPicker
@@ -428,11 +433,12 @@ typedef enum eAddressPickerType
 	if (_selectedTextField == self.BTC_TextField)
 	{
 		double value = [self.BTC_TextField.text doubleValue];
+        double satoshi = [CoreBridge denominationToSatoshi: value];
 		
 		double currency;
 		tABC_Error error;
 		
-		ABC_SatoshiToCurrency(ABC_BitcoinToSatoshi(value), &currency, DOLLAR_CURRENCY_NUM, &error);
+		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 		
 		self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", currency];
 	}
@@ -443,13 +449,11 @@ typedef enum eAddressPickerType
 		int64_t satoshi;
 		tABC_Error	error;
 		tABC_CC result;
-		double bitcoin;
 		
 		result = ABC_CurrencyToSatoshi(value, DOLLAR_CURRENCY_NUM, &satoshi, &error);
 		if(result == ABC_CC_Ok)
 		{
-			bitcoin = ABC_SatoshiToBitcoin(satoshi);
-			self.BTC_TextField.text = [NSString stringWithFormat:@"%.4f", bitcoin];
+            self.BTC_TextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
 		}
 	}
 }
@@ -462,9 +466,9 @@ typedef enum eAddressPickerType
     ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
     [Util printABC_Error:&Error];
 	
-    printf("Wallets:\n");
+    NSLog(@"Wallets:\n");
 	
-	if (nCount)
+	if (_selectedWalletIndex <= nCount)
 	{
 		tABC_WalletInfo *info = aWalletInfo[_selectedWalletIndex];
 		
@@ -479,15 +483,6 @@ typedef enum eAddressPickerType
     for (int i = 0; i < nCount; i++)
     {
         tABC_WalletInfo *pInfo = aWalletInfo[i];
-		/*
-		 printf("Account: %s, UUID: %s, Name: %s, currency: %d, attributes: %u, balance: %lld\n",
-		 pInfo->szUserName,
-		 pInfo->szUUID,
-		 pInfo->szName,
-		 pInfo->currencyNum,
-		 pInfo->attributes,
-		 pInfo->balanceSatoshi);
-		 */
 		[walletsArray addObject:[NSString stringWithUTF8String:pInfo->szName]];
     }
 	
@@ -692,6 +687,8 @@ typedef enum eAddressPickerType
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
 	NSLog(@"Selected item %i", itemIndex);
+    _selectedWalletIndex = itemIndex;
+    [self setWalletButtonTitle];
 }
 
 #pragma mark - ShowWalletQRViewController delegates
