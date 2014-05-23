@@ -41,14 +41,6 @@
     [self initMyVariables];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 #pragma mark - Public Methods
 
@@ -126,13 +118,12 @@
                                          relativePosition:self.popupPickerPosition
                                           withStrings:self.arrayChoices
                                           selectedRow:-1
-                                      maxCellsVisible:_pickerMaxChoicesVisible
                                             withWidth:_pickerWidth
                                         andCellHeight:_pickerCellHeight
                         ];
     self.popupPicker.tableViewCellStyle = self.pickerTableViewCellStyle;
     [self.popupPicker disableBackgroundTouchDetect];
-    [self.popupPicker assignDelegate:self];
+	self.popupPicker.delegate = self;
 }
 
 #pragma mark - UITextField delegates

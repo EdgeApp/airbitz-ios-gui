@@ -29,6 +29,7 @@
 	IBOutlet UIView             *innerView;
     IBOutlet UIButton           *m_buttonBackground;
     IBOutlet UIView             *m_viewBorder;
+	CGRect						availableSpace;	//space within which the popupPicker can be displayed (in screen coordinates)
 }
 
 @property (nonatomic, strong)   IBOutlet UIImageView    *arrowImage;
@@ -36,7 +37,6 @@
 @property (weak, nonatomic)     IBOutlet UIButton       *buttonKeyboard;
 @property (weak, nonatomic)     IBOutlet UIButton       *buttonTrash;
 
-@property (nonatomic, assign) id<PopupPickerViewDelegate>   delegate;
 @property (nonatomic, strong) NSArray                       *strings;
 @property (nonatomic, assign) tPopupPickerPosition          position;
 
@@ -45,6 +45,7 @@
 @implementation PopupPickerView
 
 CGRect usableFrame;
+CGRect keyboardFrame;
 
 +(void)initAll
 {
@@ -59,6 +60,7 @@ CGRect usableFrame;
 											   object:nil];
 	UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
 	usableFrame = window.frame;
+	keyboardFrame = CGRectMake(0, window.frame.origin.y + window.frame.size.height, 0, 0);
 }
 
 +(void)freeAll
@@ -71,23 +73,77 @@ CGRect usableFrame;
 + (void)keyboardWasShown:(NSNotification *)notification
 {
 	// Get the size of the keyboard.
-	CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-	UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-	
-	usableFrame = window.frame;
-	usableFrame.size.height -= keyboardFrame.size.height;
-	NSLog(@"SHOW: UsableFrame:%f, %f, %f, %f", usableFrame.origin.x, usableFrame.origin.y, usableFrame.size.width, usableFrame.size.height);
+	keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	//NSLog(@"SHOW: KeyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
 {
-	// Get the size of the keyboard.
-	//CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-	UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-	
-	usableFrame = window.frame;
-	NSLog(@"HIDE: UsableFrame:%f, %f, %f, %f", usableFrame.origin.x, usableFrame.origin.y, usableFrame.size.width, usableFrame.size.height);
-	//usableFrame.size.height = keyboardFrame.origin.y;
+	keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	//NSLog(@"HIDE: keyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
+}
+
+-(void)addCropLine:(CGPoint)pointOnScreen direction:(tPopupPickerPosition)cropDirection animated:(BOOL)animated
+{
+	float distance;
+	CGPoint newPoint = [self.superview convertPoint:pointOnScreen fromView:self.window];
+	switch(cropDirection)
+	{
+			case PopupPickerPosition_Above:
+				distance = newPoint.y - availableSpace.origin.y;
+				if(distance > 0)
+				{
+					availableSpace.origin.y += distance;
+					availableSpace.size.height -= distance;
+				}
+				[self constrainToKeepoutsAnimated:animated];
+			break;
+			case PopupPickerPosition_Below:
+				distance = (availableSpace.origin.y + availableSpace.size.height) - newPoint.y;
+				if(distance > 0)
+				{
+					availableSpace.size.height -= distance;
+				}
+				[self constrainToKeepoutsAnimated:animated];
+			break;
+			default:
+				break;
+	}
+}
+
+-(void)constrainToKeepoutsAnimated:(BOOL)animated
+{
+	float duration = 0.01;
+	if(animated)
+	{
+		duration = 0.35;
+	}
+	[UIView animateWithDuration:duration delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 CGRect frame = self.frame;
+		 
+		 if(frame.origin.y < availableSpace.origin.y)
+		 {
+			 frame.size.height += (availableSpace.origin.y - frame.origin.y);
+			 frame.origin.y -= (availableSpace.origin.y - frame.origin.y);
+		 }
+		 
+		 if((frame.origin.y + frame.size.height) > (availableSpace.origin.y + availableSpace.size.height))
+		 {
+			 frame.size.height -= ((frame.origin.y + frame.size.height) - (availableSpace.origin.y + availableSpace.size.height));
+		 }
+		 
+		 //also don't intersect keyboard
+		 if((frame.origin.y + frame.size.height) > keyboardFrame.origin.y)
+		 {
+			 frame.size.height -= ((frame.origin.y + frame.size.height) - keyboardFrame.origin.y);
+		 }
+		 self.frame = frame;
+	 }
+	 completion:^(BOOL finished)
+	 {
+	 }];
 }
 /*
 + (PopupPickerView *)CreateForView:(UIView *)parentView positionRelativeTo:(UIView *)posView withPosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings selectedRow:(NSInteger)selectedRow maxCellsVisible:(NSInteger)maxCellsVisible
@@ -129,12 +185,15 @@ CGRect usableFrame;
 }
 */
 
-+ (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings selectedRow:(NSInteger)selectedRow maxCellsVisible:(NSInteger)maxCellsVisible withWidth:(NSInteger)width andCellHeight:(NSInteger)cellHeight
++ (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings selectedRow:(NSInteger)selectedRow /*maxCellsVisible:(NSInteger)maxCellsVisible*/ withWidth:(NSInteger)width andCellHeight:(NSInteger)cellHeight
 {
     // create the picker from the xib
     PopupPickerView *popup = [[[NSBundle mainBundle] loadNibNamed:@"PopupPickerView" owner:nil options:nil] objectAtIndex:0];
     [popup setCellHeight:cellHeight];
     
+	UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+	popup->availableSpace = window.frame;
+	
     popup.position = position;
     
     // add the popup to the parent
@@ -150,6 +209,7 @@ CGRect usableFrame;
     CGRect newFrame = popup.frame;
     
     // give it enough height to handle the items
+	/*
     NSInteger nCellsVisible = [strings count];
     if (nCellsVisible < MIN_CELLS_VISIBLE)
     {
@@ -159,7 +219,15 @@ CGRect usableFrame;
     {
         nCellsVisible = maxCellsVisible;
     }
-    newFrame.size.height = (nCellsVisible * cellHeight) + (2 * borderThickness);
+    newFrame.size.height = (nCellsVisible * cellHeight) + (2 * borderThickness);*/
+	if(strings)
+	{
+		newFrame.size.height = strings.count * cellHeight + (2 * borderThickness);
+	}
+	else
+	{
+		newFrame.size.height = [popup.delegate PopupPickerViewNumberOfRows:popup userData:nil] * cellHeight + (2 * borderThickness);
+	}
     
     // change the width
     newFrame.size.width = width;
@@ -202,7 +270,7 @@ CGRect usableFrame;
             newFrame.origin.y += viewToPointTo.frame.size.height;
             newFrame.origin.y += popup.arrowImage.frame.size.height;  // offset by arrow height
         }
-        else // if (PopupPickerPosition_Above == position)
+        else //PopupPickerPosition_Above
         {
             // put it above the positioning view
             newFrame.origin.y -= newFrame.size.height;
@@ -326,12 +394,14 @@ CGRect usableFrame;
     }
     
     // assign the delegate
-    [popup assignDelegate:(id<PopupPickerViewDelegate>)parentView];
+	popup.delegate = (id<PopupPickerViewDelegate>)parentView;
+    //[popup assignDelegate:(id<PopupPickerViewDelegate>)parentView];
     
     // select the row if one was specified
     if (selectedRow != -1) 
     {
-        [popup selectRow:selectedRow];
+        //cw table wasn't scrolling to selected position because rows hadn't been filled in yet.  PerformSelector fixed it.
+		[popup performSelectorOnMainThread:@selector(selectRow2:) withObject:[NSNumber numberWithInt:selectedRow] waitUntilDone:NO];
     }
 
     return popup;
@@ -454,10 +524,17 @@ CGRect usableFrame;
     [table reloadData];
 }
 
+-(void)selectRow2:(NSNumber *)row
+{
+	[self selectRow:row.integerValue];
+}
+
 -(void)selectRow:(NSInteger)row
 {
+	NSLog(@"Select Row");
 	NSIndexPath *ip=[NSIndexPath indexPathForRow:row inSection:0];
 	[table selectRowAtIndexPath:ip animated:NO scrollPosition:UITableViewScrollPositionTop];
+	[table scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 }
 
 -(void)assignDelegate:(id<PopupPickerViewDelegate>)theDelegate
@@ -597,6 +674,7 @@ CGRect usableFrame;
         }
     }
 
+	NSLog(@"Number of rows: %i", nRows);
     return nRows;
 }
 
@@ -637,6 +715,7 @@ CGRect usableFrame;
 
         if (!bFormatted)
         {
+			cell.textLabel.font = [UIFont fontWithName:@"Lato-Black.ttf" size:17.0];
             cell.textLabel.numberOfLines = 1;
             cell.textLabel.text = [_strings objectAtIndex:row];
             cell.textLabel.textColor = [UIColor blackColor];

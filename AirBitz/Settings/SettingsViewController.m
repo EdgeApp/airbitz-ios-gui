@@ -1317,18 +1317,17 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         [self blockUser:YES];
         self.popupPicker = [PopupPickerView CreateForView:self.viewMain
-                                          //relativeToFrame:cell.button.frame
-                                             //viewForFrame:[cell.button superview]
 											 relativeToView:cell.button
                                              relativePosition:PopupPickerPosition_Left
                                               withStrings:arrayPopupChoices
                                               selectedRow:curChoice
-                                          maxCellsVisible:PICKER_MAX_CELLS_VISIBLE
                                                 withWidth:PICKER_WIDTH
                                             andCellHeight:PICKER_CELL_HEIGHT
                             ];
         self.popupPicker.userData = cell;
-        [self.popupPicker assignDelegate:self];
+		//prevent popup from extending behind tool bar
+		[self.popupPicker addCropLine:CGPointMake(0, self.view.window.frame.size.height - TOOLBAR_HEIGHT) direction:PopupPickerPosition_Below animated:NO];
+		self.popupPicker.delegate = self;
     }
 }
 
