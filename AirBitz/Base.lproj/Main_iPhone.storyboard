@@ -1647,11 +1647,6 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <rect key="contentStretch" x="0.0" y="0.70999999999999996" width="0.0" height="0.0"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="YO2-SW-MOa">
-                                        <rect key="frame" x="11" y="68" width="298" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
-                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_location.png" id="mti-sY-ftv">
                                         <rect key="frame" x="21" y="74" width="9" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1704,7 +1699,7 @@
                                     <action selector="Done" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="f5f-sE-UYa"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MFx-OC-ubq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MFx-OC-ubq" userLabel="Button - Forward">
                                 <rect key="frame" x="12" y="123" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1834,9 +1829,14 @@
                     </view>
                     <connections>
                         <outlet property="balanceViewPlaceholder" destination="3Qw-an-knM" id="uWP-JF-vsP"/>
+                        <outlet property="buttonForward" destination="MFx-OC-ubq" id="gKz-Ty-CSB"/>
+                        <outlet property="buttonRequest" destination="W2g-GD-h4o" id="BPi-fL-LIx"/>
+                        <outlet property="buttonSend" destination="Skp-Gb-ZuY" id="ZE9-Au-x5G"/>
+                        <outlet property="imageWalletNameEmboss" destination="W7N-ZQ-6wO" id="knp-Pl-OY1"/>
                         <outlet property="searchTextField" destination="WMa-Cy-YRr" id="QCQ-ep-s1L"/>
                         <outlet property="tableView" destination="1la-Es-fPE" id="4pj-UV-ux5"/>
                         <outlet property="textWalletName" destination="x1H-Vr-RsO" id="13a-Km-nOc"/>
+                        <outlet property="viewSearch" destination="fOc-BT-zsB" id="DLd-54-Q4v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6hJ-9Y-8wI" userLabel="First Responder" sceneMemberID="firstResponder"/>

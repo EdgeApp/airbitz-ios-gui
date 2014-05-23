@@ -25,15 +25,23 @@
 	BalanceView                         *_balanceView;
 	tBalanceViewState                   _balanceState;
 	TransactionDetailsViewController    *_transactionDetailsController;
+    CGRect                              _transactionTableStartFrame;
+    BOOL                                _bSearchModeEnabled;
 }
 
+@property (weak, nonatomic) IBOutlet UIView         *viewSearch;
 @property (weak, nonatomic) IBOutlet UITextField    *textWalletName;
 @property (nonatomic, weak) IBOutlet UIView         *balanceViewPlaceholder;
 @property (nonatomic, weak) IBOutlet UITableView    *tableView;
 @property (nonatomic, weak) IBOutlet UITextField    *searchTextField;
+@property (weak, nonatomic) IBOutlet UIButton       *buttonForward;
+@property (weak, nonatomic) IBOutlet UIButton       *buttonRequest;
+@property (weak, nonatomic) IBOutlet UIButton       *buttonSend;
+@property (weak, nonatomic) IBOutlet UIImageView    *imageWalletNameEmboss;
 
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray        *arraySearchTransactions;
+
 
 @end
 
@@ -76,33 +84,16 @@
     self.buttonBlocker.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
     [self.view bringSubviewToFront:self.textWalletName];
+
+    _transactionTableStartFrame = self.tableView.frame;
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [CoreBridge reloadWallet: self.wallet];
     [self.tableView reloadData];
 	[self updateBalanceView];
-}
-
--(void)updateBalanceView
-{
-	int64_t totalSatoshi = 0.0;
-	for(Transaction * tx in self.wallet.arrayTransactions)
-	{
-		totalSatoshi += tx.amountSatoshi;
-	}
-	_balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
-	
-	double currency;
-	tABC_Error error;
-	
-	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-    _balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
-    _balanceView.topDenomination.text = [User Singleton].denominationLabel;
-
-	[_balanceView refresh];
 }
 
 - (void)didReceiveMemoryWarning
@@ -130,6 +121,73 @@
 
 
 #pragma mark - Misc Methods
+
+- (void)updateBalanceView
+{
+	int64_t totalSatoshi = 0.0;
+	for(Transaction * tx in self.wallet.arrayTransactions)
+	{
+		totalSatoshi += tx.amountSatoshi;
+	}
+	_balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
+
+	double currency;
+	tABC_Error error;
+
+	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+    _balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
+    _balanceView.topDenomination.text = [User Singleton].denominationLabel;
+
+	[_balanceView refresh];
+}
+
+// transition two and from search
+- (void)transitionToSearch:(BOOL)bGoToSearch
+{
+    NSArray *arrayNonSearchViews = @[_balanceView, self.textWalletName, self.buttonForward, self.buttonRequest, self.buttonSend, self.imageWalletNameEmboss];
+
+    CGRect frame = self.tableView.frame;
+
+    if (bGoToSearch)
+    {
+        [self.view bringSubviewToFront:self.tableView];
+        frame.origin.y = self.viewSearch.frame.origin.y + self.viewSearch.frame.size.height;
+        frame.size.height = self.view.frame.size.height - frame.origin.y - 10;
+
+        _bSearchModeEnabled = YES;
+    }
+    else
+    {
+        for (UIView *curView in arrayNonSearchViews)
+        {
+            curView.hidden = NO;
+        }
+        frame = _transactionTableStartFrame;
+        _bSearchModeEnabled = NO;
+    }
+
+    [UIView animateWithDuration:0.35
+						  delay:0.0
+                        options:UIViewAnimationOptionCurveEaseOut
+					 animations:^
+	 {
+         self.tableView.frame = frame;
+	 }
+                     completion:^(BOOL finished)
+	 {
+         if (bGoToSearch)
+         {
+             for (UIView *curView in arrayNonSearchViews)
+             {
+                 curView.hidden = YES;
+             }
+         }
+	 }];
+
+
+
+    [self.tableView reloadData];
+}
 
 - (void)resignAllResponders
 {
@@ -267,7 +325,7 @@
 	return 72.0;
 }
 
--(TransactionCell *)getTransactionCellForTableView:(UITableView *)tableView
+- (TransactionCell *)getTransactionCellForTableView:(UITableView *)tableView
 {
 	TransactionCell *cell;
 	static NSString *cellIdentifier = @"TransactionCell";
@@ -280,7 +338,7 @@
 	return cell;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSInteger row = [indexPath row];
 	TransactionCell *cell;
@@ -378,6 +436,10 @@
 	if (textField == self.textWalletName)
     {
         [self blockUser:YES];
+    }
+    else if (textField == self.searchTextField)
+    {
+        [self transitionToSearch:YES];
     }
 }
 
