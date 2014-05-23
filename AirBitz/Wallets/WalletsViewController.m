@@ -24,16 +24,16 @@
 
 @interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletMakerViewDelegate, OfflineWalletViewControllerDelegate>
 {
-	BalanceView                 *balanceView;
-	TransactionsViewController  *transactionsController;
-	BOOL                        archiveCollapsed;
-	double                      currencyConversionFactor;
-	tBalanceViewState           balanceState;
-	UIView                      *activeWalletsHeaderView;
-	UIView                      *archivedWalletsHeaderView;
-	CGRect                      originalWalletMakerFrame;
-	UIButton                    *blockingButton;
-	BOOL                        walletMakerVisible;
+	BalanceView                 *_balanceView;
+	TransactionsViewController  *_transactionsController;
+	BOOL                        _archiveCollapsed;
+	double                      _currencyConversionFactor;
+	tBalanceViewState           _balanceState;
+	UIView                      *_activeWalletsHeaderView;
+	UIView                      *_archivedWalletsHeaderView;
+	CGRect                      _originalWalletMakerFrame;
+	UIButton                    *_blockingButton;
+	BOOL                        _walletMakerVisible;
     OfflineWalletViewController *_offlineWalletViewController;
 }
 
@@ -63,21 +63,19 @@
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:nil];
 
-    [self reloadWallets];
-	// Do any additional setup after loading the view.
-	balanceView = [BalanceView CreateWithDelegate:self];
-	balanceView.frame = self.balanceViewPlaceholder.frame;
+	_balanceView = [BalanceView CreateWithDelegate:self];
+	_balanceView.frame = self.balanceViewPlaceholder.frame;
 	[self.balanceViewPlaceholder removeFromSuperview];
-	[self.view addSubview:balanceView];
+	[self.view addSubview:_balanceView];
 	self.walletsTable.dataSource = self;
 	self.walletsTable.delegate = self;
 	self.walletsTable.editing = YES;
 	self.walletsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.walletsTable.allowsSelectionDuringEditing = YES;
-	currencyConversionFactor = 1.0;
+	_currencyConversionFactor = 1.0;
 	
 	CGRect frame = self.walletMakerView.frame;
-	originalWalletMakerFrame = frame;
+	_originalWalletMakerFrame = frame;
 	frame.size.height = 0;
 	self.walletMakerView.frame = frame;
 	self.walletMakerView.hidden = YES;
@@ -92,12 +90,12 @@
 	[self updateBalanceView];
 	
 	NSString *CellIdentifier = @"WalletsHeader";
-	activeWalletsHeaderView = [self.walletsTable dequeueReusableCellWithIdentifier:CellIdentifier];
-	((UITableViewCell *)activeWalletsHeaderView).contentView.layer.cornerRadius = 4.0;
+	_activeWalletsHeaderView = [self.walletsTable dequeueReusableCellWithIdentifier:CellIdentifier];
+	((UITableViewCell *)_activeWalletsHeaderView).contentView.layer.cornerRadius = 4.0;
 	
 	CellIdentifier = @"ArchiveHeader";
-	archivedWalletsHeaderView = [self.walletsTable dequeueReusableCellWithIdentifier:CellIdentifier];
-	((UITableViewCell *)archivedWalletsHeaderView).contentView.layer.cornerRadius = 4.0;
+	_archivedWalletsHeaderView = [self.walletsTable dequeueReusableCellWithIdentifier:CellIdentifier];
+	((UITableViewCell *)_archivedWalletsHeaderView).contentView.layer.cornerRadius = 4.0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,16 +108,16 @@
 
 -(void)createBlockingButtonUnderView:(UIView *)view
 {
-	blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	_blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	CGRect frame = self.view.bounds;
 	frame.origin.y = self.headerView.frame.origin.y + self.headerView.frame.size.height;
 	frame.size.height = self.view.bounds.size.height - frame.origin.y;
-	blockingButton.frame = frame;
-	blockingButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-	[self.view insertSubview:blockingButton belowSubview:self.walletMakerView];
-	blockingButton.alpha = 0.0;
+	_blockingButton.frame = frame;
+	_blockingButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+	[self.view insertSubview:_blockingButton belowSubview:self.walletMakerView];
+	_blockingButton.alpha = 0.0;
 
-	[blockingButton addTarget:self
+	[_blockingButton addTarget:self
 			   action:@selector(blockingButtonHit:)
 	 forControlEvents:UIControlEventTouchDown];
 	
@@ -128,7 +126,7 @@
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {
-		 blockingButton.alpha = 1.0;
+		 _blockingButton.alpha = 1.0;
 	 }
 	 completion:^(BOOL finished)
 	 {
@@ -144,12 +142,12 @@
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
     {
-        blockingButton.alpha = 0.0;
+        _blockingButton.alpha = 0.0;
     }
     completion:^(BOOL finished)
     {
-        [blockingButton removeFromSuperview];
-        blockingButton = nil;
+        [_blockingButton removeFromSuperview];
+        _blockingButton = nil;
     }];
 }
 
@@ -161,10 +159,13 @@
 // retrieves the wallets from disk and put them in the two member arrays
 - (void)reloadWallets
 {
-    if (self.arrayWallets == nil) {
+    if (self.arrayWallets == nil)
+    {
         self.arrayWallets = [[NSMutableArray alloc] init];
         self.arrayArchivedWallets = [[NSMutableArray alloc] init];
-    } else {
+    }
+    else
+    {
         [self.arrayWallets removeAllObjects];
         [self.arrayArchivedWallets removeAllObjects];
     }
@@ -185,7 +186,7 @@
     return [NSDate dateWithTimeIntervalSince1970: intDate];
 }
 
--(void)updateBalanceView
+- (void)updateBalanceView
 {
 	int64_t totalSatoshi = 0.0;
 	
@@ -193,45 +194,22 @@
 	{
 		totalSatoshi += wallet.balance;
 	}
-	balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
+	_balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
 	
 	double currency;
 	tABC_Error Error;
 	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &Error);
     [Util printABC_Error:&Error];
-    balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
-    balanceView.topDenomination.text = [User Singleton].denominationLabel; 
-	[balanceView refresh];
+    _balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
+    _balanceView.topDenomination.text = [User Singleton].denominationLabel;
+	[_balanceView refresh];
 }
 
--(IBAction)addWallet
+- (void)hideWalletMaker
 {
-	if (walletMakerVisible == NO)
+	if(_walletMakerVisible == YES)
 	{
-        [self.walletMakerView reset];
-		walletMakerVisible = YES;
-		self.walletMakerView.hidden = NO;
-		[[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
-		[self createBlockingButtonUnderView:self.walletMakerView];
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseOut
-						 animations:^
-		 {
-			 self.walletMakerView.frame = originalWalletMakerFrame;
-		 }
-		 completion:^(BOOL finished)
-		 {
-
-		 }];
-	}
-}
-
--(void)hideWalletMaker
-{
-	if(walletMakerVisible == YES)
-	{
-		walletMakerVisible = NO;
+		_walletMakerVisible = NO;
 
 		
 		CGRect frame = self.walletMakerView.frame;
@@ -250,15 +228,11 @@
 	}
 }
 
-- (IBAction)info
-{
-    [InfoView CreateWithHTML:@"infoWallets" forView:self.view];
-}
 
 //note this method duplicated in TransactionsViewController
--(NSString *)conversion:(double)satoshi
+- (NSString *)conversion:(double)satoshi
 {
-	if (balanceState == BALANCE_VIEW_DOWN)
+	if (_balanceState == BALANCE_VIEW_DOWN)
 	{
 		double currency;
 		tABC_Error error;
@@ -269,63 +243,6 @@
 	else
 	{
 		return [CoreBridge formatSatoshi:satoshi];
-	}
-}
-
-- (IBAction)ExpandCollapseArchive:(UIButton *)sender
-{
-	if(archiveCollapsed)
-	{
-		archiveCollapsed = NO;
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-			 sender.transform = CGAffineTransformRotate(sender.transform, M_PI);
-		 }
-		 completion:^(BOOL finished)
-		 {
-			 NSInteger countOfRowsToInsert = self.arrayArchivedWallets.count;
-			 NSMutableArray *indexPathsToInsert = [[NSMutableArray alloc] init];
-			 for (NSInteger i = 0; i < countOfRowsToInsert; i++)
-			 {
-				 [indexPathsToInsert addObject:[NSIndexPath indexPathForRow:i inSection:1]];
-			 }
-			 
-			 UITableViewRowAnimation insertAnimation = UITableViewRowAnimationTop;
-
-			 // apply the updates
-			 [self.walletsTable beginUpdates];
-			 [self.walletsTable insertRowsAtIndexPaths:indexPathsToInsert withRowAnimation:insertAnimation];
-			 [self.walletsTable endUpdates];
-
-		 }];
-	}
-	else
-	{
-		archiveCollapsed = YES;
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-			 sender.transform = CGAffineTransformRotate(sender.transform, -M_PI);
-		 }
-		completion:^(BOOL finished)
-		 {
-			 NSInteger countOfRowsToDelete = self.arrayArchivedWallets.count;
-			 
-			 if (countOfRowsToDelete > 0)
-			 {
-				 NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];
-				 for (NSInteger i = 0; i < countOfRowsToDelete; i++)
-				 {
-					 [indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:1]];
-				 }
-				 [self.walletsTable deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationTop];
-			 }
-		 }];
 	}
 }
 
@@ -357,20 +274,106 @@
     }
 }
 
+#pragma mark - Action Methods
+
+- (IBAction)addWallet
+{
+	if (_walletMakerVisible == NO)
+	{
+        [self.walletMakerView reset];
+		_walletMakerVisible = YES;
+		self.walletMakerView.hidden = NO;
+		[[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
+		[self createBlockingButtonUnderView:self.walletMakerView];
+		[UIView animateWithDuration:0.35
+							  delay:0.0
+							options:UIViewAnimationOptionCurveEaseOut
+						 animations:^
+		 {
+			 self.walletMakerView.frame = _originalWalletMakerFrame;
+		 }
+                         completion:^(BOOL finished)
+		 {
+
+		 }];
+	}
+}
+
+- (IBAction)info
+{
+    [InfoView CreateWithHTML:@"infoWallets" forView:self.view];
+}
+
+- (IBAction)ExpandCollapseArchive:(UIButton *)sender
+{
+	if(_archiveCollapsed)
+	{
+		_archiveCollapsed = NO;
+		[UIView animateWithDuration:0.35
+							  delay:0.0
+							options:UIViewAnimationOptionCurveEaseInOut
+						 animations:^
+		 {
+			 sender.transform = CGAffineTransformRotate(sender.transform, M_PI);
+		 }
+		 completion:^(BOOL finished)
+		 {
+			 NSInteger countOfRowsToInsert = self.arrayArchivedWallets.count;
+			 NSMutableArray *indexPathsToInsert = [[NSMutableArray alloc] init];
+			 for (NSInteger i = 0; i < countOfRowsToInsert; i++)
+			 {
+				 [indexPathsToInsert addObject:[NSIndexPath indexPathForRow:i inSection:1]];
+			 }
+			 
+			 UITableViewRowAnimation insertAnimation = UITableViewRowAnimationTop;
+
+			 // apply the updates
+			 [self.walletsTable beginUpdates];
+			 [self.walletsTable insertRowsAtIndexPaths:indexPathsToInsert withRowAnimation:insertAnimation];
+			 [self.walletsTable endUpdates];
+
+		 }];
+	}
+	else
+	{
+		_archiveCollapsed = YES;
+		[UIView animateWithDuration:0.35
+							  delay:0.0
+							options:UIViewAnimationOptionCurveEaseInOut
+						 animations:^
+		 {
+			 sender.transform = CGAffineTransformRotate(sender.transform, -M_PI);
+		 }
+		completion:^(BOOL finished)
+		 {
+			 NSInteger countOfRowsToDelete = self.arrayArchivedWallets.count;
+			 
+			 if (countOfRowsToDelete > 0)
+			 {
+				 NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];
+				 for (NSInteger i = 0; i < countOfRowsToDelete; i++)
+				 {
+					 [indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:1]];
+				 }
+				 [self.walletsTable deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationTop];
+			 }
+		 }];
+	}
+}
 
 #pragma mark - Segue
 
 - (void)launchTransactionsWithWallet:(Wallet *)wallet
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	transactionsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
+	_transactionsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
 	
-	transactionsController.delegate = self;
-	transactionsController.wallet = wallet;
+	_transactionsController.delegate = self;
+	_transactionsController.wallet = wallet;
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
-	transactionsController.view.frame = frame;
-	[self.view addSubview:transactionsController.view];
+	_transactionsController.view.frame = frame;
+	[self.view addSubview:_transactionsController.view];
 	
 	
 	[UIView animateWithDuration:0.35
@@ -378,7 +381,7 @@
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 transactionsController.view.frame = self.view.bounds;
+		 _transactionsController.view.frame = self.view.bounds;
 	 }
         completion:^(BOOL finished)
 	 {
@@ -386,7 +389,7 @@
 	
 }
 
--(void)dismissTransactions
+- (void)dismissTransactions
 {
 	[UIView animateWithDuration:0.35
 						  delay:0.0
@@ -395,19 +398,21 @@
 	 {
 		 CGRect frame = self.view.bounds;
 		 frame.origin.x = frame.size.width;
-		 transactionsController.view.frame = frame;
+		 _transactionsController.view.frame = frame;
 	 }
 					 completion:^(BOOL finished)
 	 {
-		 [transactionsController.view removeFromSuperview];
-		 transactionsController = nil;
+		 [_transactionsController.view removeFromSuperview];
+		 _transactionsController = nil;
 	 }];
 }
 
 #pragma mark - TransactionsViewControllerDelegates
 
--(void)TransactionsViewControllerDone:(TransactionsViewController *)controller
+- (void)TransactionsViewControllerDone:(TransactionsViewController *)controller
 {
+    [self reloadWallets];
+    [self.walletsTable reloadData];
 	[self dismissTransactions];
 }
 
@@ -474,12 +479,12 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	{
 		 //CellIdentifier = @"WalletsHeader";
 		 //NSLog(@"Active wallets header view: %@", activeWalletsHeaderView);
-		 return activeWalletsHeaderView;
+		 return _activeWalletsHeaderView;
 	}
 	else
 	{
 		//CellIdentifier = @"ArchiveHeader";
-		return archivedWalletsHeaderView;
+		return _archivedWalletsHeaderView;
 	}
     /*UITableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (headerView == nil)
@@ -502,7 +507,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	}
 	else
 	{
-		if(archiveCollapsed)
+		if(_archiveCollapsed)
 		{
 			return 0;
 		}
@@ -598,7 +603,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 
 -(void)BalanceView:(BalanceView *)view changedStateTo:(tBalanceViewState)state
 {
-	balanceState = state;
+	_balanceState = state;
 	[self.walletsTable reloadData];
 }
 

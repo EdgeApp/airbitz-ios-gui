@@ -5,6 +5,7 @@
 #import "Transaction.h"
 #import "ABC.h"
 #import "User.h"
+#import "Util.h"
 
 #import "CoreBridge.h"
 
@@ -29,10 +30,10 @@
     tABC_WalletInfo **aWalletInfo = NULL;
     unsigned int nCount;
 
-    ABC_GetWallets([[User Singleton].name UTF8String], 
-                   [[User Singleton].password UTF8String], 
-                   &aWalletInfo, &nCount, &Error);
-    if (ABC_CC_Ok == Error.code)
+    tABC_CC result = ABC_GetWallets([[User Singleton].name UTF8String],
+                                    [[User Singleton].password UTF8String],
+                                    &aWalletInfo, &nCount, &Error);
+    if (ABC_CC_Ok == result)
     {
         unsigned int i;
         for (i = 0; i < nCount; ++i) {
@@ -45,7 +46,7 @@
             wallet.attributes = pWalletInfo->attributes;
             wallet.balance = pWalletInfo->balanceSatoshi;
             wallet.currencyNum = pWalletInfo->currencyNum;
-            if (wallet.attributes & WALLET_ATTRIBUTE_ARCHIVE_BIT == 1)
+            if ((wallet.attributes & WALLET_ATTRIBUTE_ARCHIVE_BIT) == 1)
                 [arrayArchivedWallets addObject:wallet];
             else
                 [arrayWallets addObject:wallet];
@@ -55,6 +56,7 @@
     else
     {
         NSLog(@("Error: CoreBridge.loadWallets:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
     }
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
@@ -63,11 +65,11 @@
 {
     tABC_Error Error;
     tABC_WalletInfo *pWalletInfo = NULL;
-    ABC_GetWalletInfo([[User Singleton].name UTF8String], 
-                      [[User Singleton].password UTF8String], 
-                      [wallet.strUUID UTF8String],
-                      &pWalletInfo, &Error);
-    if (ABC_CC_Ok == Error.code)
+    tABC_CC result = ABC_GetWalletInfo([[User Singleton].name UTF8String],
+                                       [[User Singleton].password UTF8String],
+                                       [wallet.strUUID UTF8String],
+                                       &pWalletInfo, &Error);
+    if (ABC_CC_Ok == result)
     {
         wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
         wallet.attributes = 0;
@@ -78,6 +80,7 @@
     else
     {
         NSLog(@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
     }
     ABC_FreeWalletInfo(pWalletInfo);
 }
@@ -88,11 +91,11 @@
     unsigned int tCount = 0;
     Transaction *transaction;
     tABC_TxInfo **aTransactions = NULL;
-    ABC_GetTransactions([[User Singleton].name UTF8String],
-                        [[User Singleton].password UTF8String],
-                        [wallet.strUUID UTF8String], &aTransactions,
-                        &tCount, &Error);
-    if (ABC_CC_Ok == Error.code)
+    tABC_CC result = ABC_GetTransactions([[User Singleton].name UTF8String],
+                                         [[User Singleton].password UTF8String],
+                                         [wallet.strUUID UTF8String], &aTransactions,
+                                         &tCount, &Error);
+    if (ABC_CC_Ok == result)
     {
         NSMutableArray *arrayTransactions = [[NSMutableArray alloc] init];
 
@@ -104,7 +107,7 @@
             [arrayTransactions addObject:transaction];
         }
         SInt64 bal = 0;
-        for (int j = arrayTransactions.count - 1; j >= 0; --j)
+        for (int j = (int) arrayTransactions.count - 1; j >= 0; --j)
         {
             Transaction *t = arrayTransactions[j];
             bal += t.amountSatoshi;
@@ -115,6 +118,7 @@
     else
     {
         NSLog(@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
 }
@@ -146,11 +150,11 @@
     unsigned int tCount = 0;
     Transaction *transaction;
     tABC_TxInfo **aTransactions = NULL;
-    ABC_SearchTransactions([[User Singleton].name UTF8String],
-                           [[User Singleton].password UTF8String],
-                           [wallet.strUUID UTF8String], [term UTF8String],
-                           &aTransactions, &tCount, &Error);
-    if (ABC_CC_Ok == Error.code)
+    tABC_CC result = ABC_SearchTransactions([[User Singleton].name UTF8String],
+                                            [[User Singleton].password UTF8String],
+                                            [wallet.strUUID UTF8String], [term UTF8String],
+                                            &aTransactions, &tCount, &Error);
+    if (ABC_CC_Ok == result)
     {
         for (int j = tCount - 1; j >= 0; --j) {
             tABC_TxInfo *pTrans = aTransactions[j];
@@ -162,6 +166,7 @@
     else 
     {
         NSLog(@("Error: CoreBridge.searchTransactionsIn:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
     return arrayTransactions;
@@ -170,18 +175,18 @@
 + (bool)setWalletAttributes: (Wallet *) wallet
 {
     tABC_Error Error;
-    tABC_TxDetails *pDetails;
-    ABC_SetWalletAttributes([[User Singleton].name UTF8String], 
-                            [[User Singleton].password UTF8String], 
-                            [wallet.strUUID UTF8String],
-                            wallet.attributes, &Error);
-    if (ABC_CC_Ok != Error.code)
+    tABC_CC result = ABC_SetWalletAttributes([[User Singleton].name UTF8String],
+                                             [[User Singleton].password UTF8String],
+                                             [wallet.strUUID UTF8String],
+                                             wallet.attributes, &Error);
+    if (ABC_CC_Ok == result)
     {
         return true;
     }
     else
     {
-        NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
+        NSLog(@("Error: CoreBridge.setWalletAttributes:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
         return false;
     }
 }
@@ -190,14 +195,15 @@
 {
     tABC_Error Error;
     tABC_TxDetails *pDetails;
-    ABC_GetTransactionDetails([[User Singleton].name UTF8String], 
-                              [[User Singleton].password UTF8String], 
-                              [transaction.strWalletUUID UTF8String],
-                              [transaction.strID UTF8String],
-                              &pDetails, &Error);
-    if (ABC_CC_Ok != Error.code)
+    tABC_CC result = ABC_GetTransactionDetails([[User Singleton].name UTF8String],
+                                               [[User Singleton].password UTF8String],
+                                               [transaction.strWalletUUID UTF8String],
+                                               [transaction.strID UTF8String],
+                                               &pDetails, &Error);
+    if (ABC_CC_Ok == result)
     {
         NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
         return false;
     }
     pDetails->szName = (char *) [transaction.strName UTF8String];
@@ -216,6 +222,7 @@
     else 
     {
         NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
         return false;
     }
 }
@@ -273,6 +280,7 @@
     NSString *denominationLabel = [User Singleton].denominationLabel;
     NSString *currencyLabel = @"USD";
     tABC_CC result = ABC_SatoshiToCurrency(denomination, &currency, currencyNumber, &error);
+    [Util printABC_Error:&error];
     if (result == ABC_CC_Ok)
         return [NSString stringWithFormat:@"1.00 %@ = $%.2f %@", denominationLabel, currency, currencyLabel];
     else

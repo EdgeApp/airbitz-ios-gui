@@ -20,17 +20,19 @@
 
 #define DOLLAR_CURRENCY_NUM	840
 
-@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate>
+@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 {
 	BalanceView                         *_balanceView;
 	tBalanceViewState                   _balanceState;
 	TransactionDetailsViewController    *_transactionDetailsController;
 }
+
+@property (weak, nonatomic) IBOutlet UITextField    *textWalletName;
 @property (nonatomic, weak) IBOutlet UIView         *balanceViewPlaceholder;
 @property (nonatomic, weak) IBOutlet UITableView    *tableView;
 @property (nonatomic, weak) IBOutlet UITextField    *searchTextField;
-@property (nonatomic, weak) IBOutlet UIButton       *walletNameView;
 
+@property (nonatomic, strong) UIButton              *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray        *arraySearchTransactions;
 
 @end
@@ -61,9 +63,19 @@
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 
-	[self.walletNameView setTitle:self.wallet.strName forState:UIControlStateNormal];
+    self.textWalletName.text = self.wallet.strName;
 	self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
 	[self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    [self.textWalletName addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+
+    // set up our user blocking button
+    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.buttonBlocker.backgroundColor = [UIColor clearColor];
+    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
+    self.buttonBlocker.frame = self.view.bounds;
+    self.buttonBlocker.hidden = YES;
+    [self.view addSubview:self.buttonBlocker];
+    [self.view bringSubviewToFront:self.textWalletName];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -110,8 +122,32 @@
     [InfoView CreateWithHTML:@"infoTransactions" forView:self.view];
 }
 
+- (IBAction)buttonBlockerTouched:(id)sender
+{
+    [self blockUser:NO];
+    [self resignAllResponders];
+}
+
 
 #pragma mark - Misc Methods
+
+- (void)resignAllResponders
+{
+    [self.textWalletName resignFirstResponder];
+    [self.searchTextField resignFirstResponder];
+}
+
+- (void)blockUser:(BOOL)bBlock
+{
+    if (bBlock)
+    {
+        self.buttonBlocker.hidden = NO;
+    }
+    else
+    {
+        self.buttonBlocker.hidden = YES;
+    }
+}
 
 //note this method duplicated in WalletsViewController
 -(NSString *)conversion:(int64_t)satoshi
@@ -172,6 +208,34 @@
 		 [_transactionDetailsController.view removeFromSuperview];
 		 _transactionDetailsController = nil;
 	 }];
+}
+
+
+- (void)checkSearchArray
+{
+    NSString *search = self.searchTextField.text;
+    if (search != NULL && search.length > 0)
+    {
+        if (self.arraySearchTransactions)
+        {
+            [self.arraySearchTransactions removeAllObjects];
+        }
+        else
+        {
+            self.arraySearchTransactions = [[NSMutableArray alloc] init];
+        }
+        [CoreBridge searchTransactionsIn:self.wallet query:search addTo:self.arraySearchTransactions];
+        [self.tableView reloadData];
+    }
+    else if (![self searchEnabled])
+    {
+        [self.tableView reloadData];
+    }
+}
+
+- (BOOL)searchEnabled
+{
+    return self.searchTextField.text.length > 0;
 }
 
 #pragma mark - TransactionDetailsViewControllerDelegates
@@ -309,47 +373,69 @@
 
 #pragma mark - UITextField delegates
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-	//called when user taps on either search textField or location textField
-}
-
--(void)searchTextFieldChanged:(UITextField *)textField
-{
-    [self checkSearchArray];
-}
-
--(void)checkSearchArray
-{
-    NSString *search = self.searchTextField.text;
-    if (search != NULL && search.length > 0)
+	if (textField == self.textWalletName)
     {
-        if (self.arraySearchTransactions)
+        [self blockUser:YES];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ((textField == self.textWalletName) && ([textField.text length] == 0))
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"Invalid Wallet Name", nil)
+                              message:NSLocalizedString(@"You must provide a wallet name.", nil)
+                              delegate:self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+    }
+    else
+    {
+        [self blockUser:NO];
+    }
+}
+
+- (void)searchTextFieldChanged:(UITextField *)textField
+{
+    if (textField == self.searchTextField)
+    {
+        [self checkSearchArray];
+    }
+    else if (textField == self.textWalletName)
+    {
+        // need at least one character in a wallet name
+        if ([textField.text length])
         {
-            [self.arraySearchTransactions removeAllObjects];
-        } 
-        else
-        {
-            self.arraySearchTransactions = [[NSMutableArray alloc] init];
+            //NSLog(@"rename wallet to: %@", textField.text);
+            tABC_Error error;
+            ABC_RenameWallet([[User Singleton].name UTF8String],
+                             [[User Singleton].password UTF8String],
+                             [self.wallet.strUUID UTF8String],
+                             (char *)[textField.text UTF8String],
+                             &error);
+            [Util printABC_Error:&error];
         }
-        [CoreBridge searchTransactionsIn:self.wallet query:search addTo:self.arraySearchTransactions];
-        [self.tableView reloadData];
-    }
-    else if (![self searchEnabled])
-    {
-        [self.tableView reloadData];
     }
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	[textField resignFirstResponder];
+
 	return YES;
 }
 
--(BOOL)searchEnabled
+
+#pragma mark - UIAlertView delegates
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    return self.searchTextField.text.length > 0;
+	// the only alert we have that uses a delegate is the one that tells them they must provide a wallet name
+    [self.textWalletName becomeFirstResponder];
 }
 
 @end
