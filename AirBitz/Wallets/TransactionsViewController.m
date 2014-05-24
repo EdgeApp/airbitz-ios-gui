@@ -21,6 +21,10 @@
 
 #define DOLLAR_CURRENCY_NUM	840
 
+#define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
+#define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
+#define COLOR_BALANCE  [UIColor colorWithRed:83.0/255.0 green:90.0/255.0 blue:91.0/255.0 alpha:1.0];
+
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 {
 	BalanceView                         *_balanceView;
@@ -29,6 +33,7 @@
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bSearchModeEnabled;
     CGRect                              _searchShowingFrame;
+    BOOL                                _bWalletNameWarningDisplaying;
 }
 
 @property (weak, nonatomic) IBOutlet UIView         *viewSearch;
@@ -88,8 +93,10 @@
     [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
     self.buttonBlocker.frame = self.view.bounds;
     self.buttonBlocker.hidden = YES;
+    //self.buttonBlocker.backgroundColor = [UIColor greenColor];
     [self.view addSubview:self.buttonBlocker];
     [self.view bringSubviewToFront:self.textWalletName];
+    [self.view bringSubviewToFront:self.viewSearch];
 
     _searchShowingFrame = self.viewSearch.frame;
 
@@ -141,9 +148,10 @@
 
 - (IBAction)Done
 {
+    [self resignAllResponders];
     if (_bSearchModeEnabled)
     {
-        [self resignAllResponders];
+        self.searchTextField.text = @"";
         [self transitionToSearch:NO];
     }
     else
@@ -154,6 +162,7 @@
 
 - (IBAction)info
 {
+    [self resignAllResponders];
     [InfoView CreateWithHTML:@"infoTransactions" forView:self.view];
 }
 
@@ -265,6 +274,12 @@
 {
     if (bBlock)
     {
+        [self.view bringSubviewToFront:self.buttonBlocker];
+        if (!_bSearchModeEnabled)
+        {
+            [self.view bringSubviewToFront:self.textWalletName];
+        }
+        [self.view bringSubviewToFront:self.viewSearch];
         self.buttonBlocker.hidden = NO;
     }
     else
@@ -273,14 +288,17 @@
     }
 }
 
-//note this method duplicated in WalletsViewController
--(NSString *)conversion:(int64_t)satoshi
+// formats the satoshi amount based upon user's settings
+// if bFiat is YES, then the amount is shown in fiat, otherwise, bitcoin format as specified by user settings
+- (NSString *)formatSatoshi:(int64_t)satoshi useFiat:(BOOL)bFiat
 {
-	if (_balanceState == BALANCE_VIEW_DOWN)
+    // if they want it in fiat
+	if (bFiat)
 	{
 		double currency;
 		tABC_Error error;
-		
+
+        // TODO: need to switch to currency selected by user in settings
 		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 		return [CoreBridge formatCurrency:currency];
 	}
@@ -288,6 +306,12 @@
 	{
 		return [CoreBridge formatSatoshi:satoshi];
 	}
+}
+
+//note this method duplicated in WalletsViewController
+- (NSString *)conversion:(int64_t)satoshi
+{
+    return [self formatSatoshi:satoshi useFiat:_balanceState == BALANCE_VIEW_DOWN];
 }
 
 -(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
@@ -334,7 +358,6 @@
 	 }];
 }
 
-
 - (void)checkSearchArray
 {
     NSString *search = self.searchTextField.text;
@@ -360,6 +383,34 @@
 - (BOOL)searchEnabled
 {
     return self.searchTextField.text.length > 0;
+}
+
+// returns YES if the user can leave the wallet name field
+// otherwise, user is warned
+- (BOOL)canLeaveWalletNameField
+{
+    if ([self.textWalletName.text length] == 0)
+    {
+        [self.textWalletName becomeFirstResponder];
+        if (!_bWalletNameWarningDisplaying)
+        {
+            _bWalletNameWarningDisplaying = YES;
+
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Invalid Wallet Name", nil)
+                                  message:NSLocalizedString(@"You must provide a wallet name.", nil)
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
 }
 
 #pragma mark - TransactionDetailsViewControllerDelegates
@@ -409,11 +460,10 @@
 	NSInteger row = [indexPath row];
 	TransactionCell *cell;
 	
-	//wallet cell
+	// wallet cell
 	cell = [self getTransactionCellForTableView:tableView];
-	
-	
-	Transaction* transaction = NULL;
+
+	Transaction *transaction = NULL;
     if ([self searchEnabled]) 
     {
         transaction = [self.arraySearchTransactions objectAtIndex:indexPath.row];
@@ -422,36 +472,50 @@
     {
         transaction = [self.wallet.arrayTransactions objectAtIndex:indexPath.row];
     }
-	//date
+
+	// date
 	cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
 	
-	//address
+	// address
 	cell.addressLabel.text = transaction.strAddress;
+
+    // if we are in search  mode
+    if (_bSearchModeEnabled)
+    {
+        // confirmation becomes category
+        cell.confirmationLabel.text = transaction.strCategory;
+
+        // amount - always bitcoin
+        cell.amountLabel.text = [self formatSatoshi:transaction.amountSatoshi useFiat:NO];
+
+        // balance becomes fiat
+        cell.balanceLabel.text = [self formatSatoshi:transaction.amountSatoshi useFiat:YES];
+        cell.balanceLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
+    }
+    else
+    {
+        // confirmations
+        if (transaction.confirmations == 1)
+        {
+            cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmation", transaction.confirmations];
+        }
+        else
+        {
+            cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmations", transaction.confirmations];
+        }
+
+        //amount
+        cell.amountLabel.text = [self conversion:transaction.amountSatoshi];
+
+        // balance
+        cell.balanceLabel.text = [self conversion:transaction.balance];
+        cell.balanceLabel.textColor = COLOR_BALANCE;
+    }
+
+    // color amount
+    cell.amountLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
 	
-	//confirmations
-	if(transaction.confirmations == 1)
-	{
-		cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmation", transaction.confirmations];
-	}
-	else
-	{
-		cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmations", transaction.confirmations];
-	}
-	
-	//amount
-	//cell.amountLabel.text = [NSString stringWithFormat:@"%d"
-	cell.amountLabel.text = [self conversion:transaction.amountSatoshi];
-	if(transaction.amountSatoshi < 0)
-	{
-		cell.amountLabel.textColor = [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0];
-	}
-	else
-	{
-		cell.amountLabel.textColor = [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0];
-	}
-	cell.balanceLabel.text = [self conversion:transaction.balance];
-	
-	if((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
+	if ((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
 	{
 		cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
 	}
@@ -476,6 +540,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self resignAllResponders];
     if ([self searchEnabled]) 
     {
         [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row]];
@@ -505,21 +570,22 @@
     }
     else if (textField == self.searchTextField)
     {
-        [self transitionToSearch:YES];
+        if ([self canLeaveWalletNameField])
+        {
+            [self transitionToSearch:YES];
+            [self blockUser:YES];
+        }
     }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if ((textField == self.textWalletName) && ([textField.text length] == 0))
+    if (textField == self.textWalletName)
     {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Invalid Wallet Name", nil)
-                              message:NSLocalizedString(@"You must provide a wallet name.", nil)
-                              delegate:self
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
+        if (NO == [self canLeaveWalletNameField])
+        {
+            [self.textWalletName becomeFirstResponder];
+        }
     }
     else
     {
@@ -552,7 +618,10 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	[textField resignFirstResponder];
+    if ((textField != self.textWalletName) || ([self canLeaveWalletNameField]))
+    {
+        [textField resignFirstResponder];
+    }
 
 	return YES;
 }
@@ -564,6 +633,7 @@
 {
 	// the only alert we have that uses a delegate is the one that tells them they must provide a wallet name
     [self.textWalletName becomeFirstResponder];
+    _bWalletNameWarningDisplaying = NO;
 }
 
 @end
