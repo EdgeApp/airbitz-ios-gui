@@ -30,8 +30,6 @@
 	Transaction                         *_completedTransaction;	// nil until sendTransaction is successfully completed
 }
 
-@property (nonatomic, weak) IBOutlet UIButton               *buttonBlocker;
-
 @property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
 
 @property (weak, nonatomic) IBOutlet UIImageView            *imageTopEmboss;
@@ -53,6 +51,8 @@
 @property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
 @property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
+
+@property (nonatomic, strong) UIButton  *buttonBlocker;
 
 @end
 

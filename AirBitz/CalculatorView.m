@@ -95,7 +95,7 @@
 
 -(IBAction)digit:(UIButton *)sender
 {
-	NSLog(@"Digit: %i", sender.tag);
+	NSLog(@"Digit: %i", (int)sender.tag);
 	if(operation == OPERATION_EQUAL)
 	{
 		//also clear the accumulator
@@ -143,7 +143,7 @@
 
 -(IBAction)operation:(UIButton *)sender
 {
-	NSLog(@"Operation %i", sender.tag);
+	NSLog(@"Operation %i", (int)sender.tag);
 	switch (sender.tag)
 	{
 		case OPERATION_CLEAR:
@@ -195,7 +195,7 @@
 	}
 	if(sender.tag != OPERATION_PERCENT)
 	{
-		operation = sender.tag;
+		operation = (int)sender.tag;
 	}
 	
 	

@@ -35,8 +35,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView            *imageSendTo;
 @property (weak, nonatomic) IBOutlet UILabel                *labelScanQRCode;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
-@property (nonatomic, weak) IBOutlet UIButton               *buttonBlocker;
 
+@property (nonatomic, strong) UIButton  *buttonBlocker;
 
 @end
 
@@ -72,6 +72,8 @@
     self.buttonBlocker.frame = self.view.bounds;
     self.buttonBlocker.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
+    [self.view bringSubviewToFront:self.buttonBlocker];
+    [self.view bringSubviewToFront:self.sendToTextField];
 
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Send From:", @"Label text on Send Bitcoin screen");
 	
@@ -81,10 +83,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
 	//NSLog(@"Starting timer");
-	
+    
 	_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startScanner:) userInfo:nil repeats:NO];
 	
 	[self.flashSelector selectItem:FLASH_ITEM_AUTO];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -126,6 +129,8 @@
 {
     if (bBlock)
     {
+        [self.view bringSubviewToFront:self.buttonBlocker];
+        [self.view bringSubviewToFront:self.sendToTextField];
         self.buttonBlocker.hidden = NO;
     }
     else
@@ -193,7 +198,7 @@
     ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
     [Util printABC_Error:&Error];
 	
-    printf("Wallets:\n");
+    //printf("Wallets:\n");
 	
 	if(nCount)
 	{
@@ -252,18 +257,18 @@
 #if !TARGET_IPHONE_SIMULATOR
     // NSLog(@"Scanning...");
 
-	reader = [ZBarReaderView new];
-	[self.view insertSubview:reader belowSubview:self.scanFrame];
-	reader.frame = self.scanFrame.frame;
-	reader.readerDelegate = self;
-	reader.tracksSymbols = NO;
+	_reader = [ZBarReaderView new];
+	[self.view insertSubview:_reader belowSubview:self.scanFrame];
+	_reader.frame = self.scanFrame.frame;
+	_reader.readerDelegate = self;
+	_reader.tracksSymbols = NO;
 
-	reader.tag = 99999999;
+	_reader.tag = 99999999;
 	if(self.sendToTextField.text.length)
 	{
-		reader.alpha = 0.0;
+		_reader.alpha = 0.0;
 	}
-	[reader start];
+	[_reader start];
 	[self flashItemSelected:FLASH_ITEM_AUTO];
 #endif
 }
@@ -282,9 +287,8 @@
 
 #pragma mark - UITextField delegates
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self blockUser:YES];
 	[_reader stop];
 	[UIView animateWithDuration:1.0
 						  delay:0.0
@@ -297,18 +301,20 @@
 	 {
 
 	 }];
+    [self.view bringSubviewToFront:self.buttonBlocker];
+    [self blockUser:YES];
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self blockUser:NO];
 	[textField resignFirstResponder];
 	return YES;
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
-	if(textField.text.length)
+	if (textField.text.length)
 	{
 		[self showSendConfirmationWithAddress:textField.text amount:0.0 nameLabel:@" "];
 	}
@@ -331,7 +337,7 @@
 
 #pragma mark - Flash Select Delegates
 
--(void)flashItemSelected:(tFlashItem)flashType
+- (void)flashItemSelected:(tFlashItem)flashType
 {
 	//NSLog(@"Flash Item Selected: %i", flashType);
 	AVCaptureDevice *device = _reader.device;
@@ -378,7 +384,7 @@
 
 #pragma mark - SendConfirmationViewController Delegates
 
--(void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
+- (void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
 {
 	self.sendToTextField.text = nil;
 	[_reader start];
@@ -388,7 +394,7 @@
 }
 
 #pragma mark - ZBar's Delegate method
--(void) readerView: (ZBarReaderView*) view didReadSymbols: (ZBarSymbolSet*) syms fromImage: (UIImage*) img
+- (void)readerView: (ZBarReaderView*) view didReadSymbols: (ZBarSymbolSet*) syms fromImage: (UIImage*) img
 {
 	for(ZBarSymbol *sym in syms)
 	{
@@ -450,7 +456,7 @@
 
 #pragma mark - ButtonSelectorView delegates
 
--(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
 	//NSLog(@"Selected item %i", itemIndex);
     _selectedWalletIndex = itemIndex;

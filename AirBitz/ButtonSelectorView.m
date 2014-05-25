@@ -306,7 +306,7 @@
     {
         if ([self.delegate respondsToSelector:@selector(ButtonSelector:selectedItem:)])
         {
-            [self.delegate ButtonSelector:self selectedItem:indexPath.row];
+            [self.delegate ButtonSelector:self selectedItem:(int)indexPath.row];
         }
     }
 }
