@@ -20,11 +20,11 @@
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate>
 {
-	ZBarReaderView                  *reader;
-	NSTimer                         *startScannerTimer;
-	int                             selectedWalletIndex;
-	NSString                        *selectedWalletUUID;
-	SendConfirmationViewController  *sendConfirmationViewController;
+	ZBarReaderView                  *_reader;
+	NSTimer                         *_startScannerTimer;
+	int                             _selectedWalletIndex;
+	NSString                        *_selectedWalletUUID;
+	SendConfirmationViewController  *_sendConfirmationViewController;
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
@@ -35,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView            *imageSendTo;
 @property (weak, nonatomic) IBOutlet UILabel                *labelScanQRCode;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
+@property (nonatomic, weak) IBOutlet UIButton               *buttonBlocker;
 
 
 @end
@@ -63,7 +64,15 @@
 	self.flashSelector.delegate = self;
 	self.sendToTextField.delegate = self;
 	self.buttonSelector.delegate = self;
-	
+
+    // set up our user blocking button
+    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.buttonBlocker.backgroundColor = [UIColor clearColor];
+    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
+    self.buttonBlocker.frame = self.view.bounds;
+    self.buttonBlocker.hidden = YES;
+    [self.view addSubview:self.buttonBlocker];
+
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Send From:", @"Label text on Send Bitcoin screen");
 	
 	[self setWalletButtonTitle];
@@ -73,7 +82,7 @@
 {
 	//NSLog(@"Starting timer");
 	
-	startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startScanner:) userInfo:nil repeats:NO];
+	_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startScanner:) userInfo:nil repeats:NO];
 	
 	[self.flashSelector selectItem:FLASH_ITEM_AUTO];
 }
@@ -81,10 +90,10 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
 	//NSLog(@"Invalidating timer");
-	[startScannerTimer invalidate];
-	startScannerTimer = nil;
+	[_startScannerTimer invalidate];
+	_startScannerTimer = nil;
 	
-	[reader stop];
+	[_reader stop];
 	
 	[self closeCameraScanner];
 	
@@ -96,7 +105,34 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark - Action Methods
+
+- (IBAction)info
+{
+	[self.view endEditing:YES];
+    [InfoView CreateWithHTML:@"infoSend" forView:self.view];
+}
+
+- (IBAction)buttonBlockerTouched:(id)sender
+{
+	[self.sendToTextField resignFirstResponder];
+    [self blockUser:NO];
+}
+
 #pragma mark - Misc Methods
+
+- (void)blockUser:(BOOL)bBlock
+{
+    if (bBlock)
+    {
+        self.buttonBlocker.hidden = NO;
+    }
+    else
+    {
+        self.buttonBlocker.hidden = YES;
+    }
+}
 
 - (void)updateDisplayLayout
 {
@@ -161,11 +197,11 @@
 	
 	if(nCount)
 	{
-		tABC_WalletInfo *info = aWalletInfo[selectedWalletIndex];
+		tABC_WalletInfo *info = aWalletInfo[_selectedWalletIndex];
 		
-		selectedWalletUUID = [NSString stringWithUTF8String:info->szUUID];
+		_selectedWalletUUID = [NSString stringWithUTF8String:info->szUUID];
 		[self.buttonSelector.button setTitle:[NSString stringWithUTF8String:info->szName] forState:UIControlStateNormal];
-		self.buttonSelector.selectedItemIndex = selectedWalletIndex;
+		self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
 	}
 	
     // assign list of wallets to buttonSelector
@@ -184,18 +220,18 @@
 -(void)showSendConfirmationWithAddress:(NSString *)address amount:(long long)amount nameLabel:(NSString *)nameLabel
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
+	_sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
 	
-	sendConfirmationViewController.delegate = self;
-	sendConfirmationViewController.sendToAddress = address;
-	sendConfirmationViewController.amountToSendSatoshi = amount;
-	sendConfirmationViewController.selectedWalletIndex = self.buttonSelector.selectedItemIndex;
-	sendConfirmationViewController.nameLabel = nameLabel;
+	_sendConfirmationViewController.delegate = self;
+	_sendConfirmationViewController.sendToAddress = address;
+	_sendConfirmationViewController.amountToSendSatoshi = amount;
+	_sendConfirmationViewController.selectedWalletIndex = self.buttonSelector.selectedItemIndex;
+	_sendConfirmationViewController.nameLabel = nameLabel;
 	
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
-	sendConfirmationViewController.view.frame = frame;
-	[self.view addSubview:sendConfirmationViewController.view];
+	_sendConfirmationViewController.view.frame = frame;
+	[self.view addSubview:_sendConfirmationViewController.view];
 	
 	
 	[UIView animateWithDuration:0.35
@@ -203,7 +239,7 @@
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 sendConfirmationViewController.view.frame = self.view.bounds;
+		 _sendConfirmationViewController.view.frame = self.view.bounds;
 	 }
 	 completion:^(BOOL finished)
 	 {
@@ -243,27 +279,19 @@
 	//[self.view endEditing:YES];
 }
 
-#pragma mark - Action Methods
-
-- (IBAction)info
-{
-	[self.view endEditing:YES];
-    [InfoView CreateWithHTML:@"infoSend" forView:self.view];
-}
-
-
 
 #pragma mark - UITextField delegates
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-	[reader stop];
+    [self blockUser:YES];
+	[_reader stop];
 	[UIView animateWithDuration:1.0
 						  delay:0.0
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {
-		 reader.alpha = 0.0;
+		 _reader.alpha = 0.0;
 	 }
 	 completion:^(BOOL finished)
 	 {
@@ -273,6 +301,7 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [self blockUser:NO];
 	[textField resignFirstResponder];
 	return YES;
 }
@@ -285,13 +314,13 @@
 	}
 	else
 	{
-		[reader start];
+		[_reader start];
 		[UIView animateWithDuration:1.0
 							  delay:0.0
 							options:UIViewAnimationOptionCurveLinear
 						 animations:^
 		 {
-			 reader.alpha = 1.0;
+			 _reader.alpha = 1.0;
 		 }
 						 completion:^(BOOL finished)
 		 {
@@ -305,7 +334,7 @@
 -(void)flashItemSelected:(tFlashItem)flashType
 {
 	//NSLog(@"Flash Item Selected: %i", flashType);
-	AVCaptureDevice *device = reader.device;
+	AVCaptureDevice *device = _reader.device;
 	if(device)
 	{
 		switch(flashType)
@@ -352,9 +381,9 @@
 -(void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
 {
 	self.sendToTextField.text = nil;
-	[reader start];
-	[sendConfirmationViewController.view removeFromSuperview];
-	sendConfirmationViewController = nil;
+	[_reader start];
+	[_sendConfirmationViewController.view removeFromSuperview];
+	_sendConfirmationViewController = nil;
 	
 }
 
@@ -419,11 +448,12 @@
 	}
 }
 
-#pragma mark ButtonSelectorView delegates
+#pragma mark - ButtonSelectorView delegates
+
 -(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
-	NSLog(@"Selected item %i", itemIndex);
-    selectedWalletIndex = itemIndex;
+	//NSLog(@"Selected item %i", itemIndex);
+    _selectedWalletIndex = itemIndex;
     [self setWalletButtonTitle];
 }
 
