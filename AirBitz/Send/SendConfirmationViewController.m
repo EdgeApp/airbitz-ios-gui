@@ -73,6 +73,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    // resize ourselves to fit in area
+    [Util resizeView:self.view withDisplayView:self.viewDisplayArea];
+
 	self.withdrawlPIN.delegate = self;
 	self.amountBTCTextField.delegate = self;
 	self.amountUSDTextField.delegate = self;
