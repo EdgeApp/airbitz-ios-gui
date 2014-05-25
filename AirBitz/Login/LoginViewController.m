@@ -25,25 +25,25 @@ typedef enum eLoginMode
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpViewControllerDelegate>
 {
-	tLoginMode mode;
-	CGRect originalContentFrame;
-	CGRect originalLogoFrame;
-	CGRect originalSwipeArrowFrame;
-	CGPoint firstTouchPoint;
-	BOOL bSuccess;
-	NSString *strReason;
-	SignUpViewController *signUpController;
-	UITextField *activeTextField;
+	tLoginMode              _mode;
+	CGRect                  _originalContentFrame;
+	CGRect                  _originalLogoFrame;
+	CGRect                  _originalSwipeArrowFrame;
+	CGPoint                 _firstTouchPoint;
+	BOOL                    _bSuccess;
+	NSString                *_strReason;
+	SignUpViewController    *_signUpController;
+	UITextField             *_activeTextField;
 }
-@property (nonatomic, weak) IBOutlet UIView *contentView;
-@property (nonatomic, weak) IBOutlet StylizedTextField *userNameTextField;
-@property (nonatomic, weak) IBOutlet StylizedTextField *passwordTextField;
-@property (nonatomic, weak) IBOutlet UIImageView *swipeArrow;
-@property (nonatomic, weak) IBOutlet UILabel *swipeText;
-@property (nonatomic, weak) IBOutlet UILabel *titleText;
-@property (nonatomic, weak) IBOutlet UIImageView *logoImage;
-@property (nonatomic, weak) IBOutlet UIView *userEntryView;
-@property (nonatomic, weak) IBOutlet UILabel *invalidMessage;
+@property (nonatomic, weak) IBOutlet UIView             *contentView;
+@property (nonatomic, weak) IBOutlet StylizedTextField  *userNameTextField;
+@property (nonatomic, weak) IBOutlet StylizedTextField  *passwordTextField;
+@property (nonatomic, weak) IBOutlet UIImageView        *swipeArrow;
+@property (nonatomic, weak) IBOutlet UILabel            *swipeText;
+@property (nonatomic, weak) IBOutlet UILabel            *titleText;
+@property (nonatomic, weak) IBOutlet UIImageView        *logoImage;
+@property (nonatomic, weak) IBOutlet UIView             *userEntryView;
+@property (nonatomic, weak) IBOutlet UILabel            *invalidMessage;
 
 @end
 
@@ -62,17 +62,17 @@ typedef enum eLoginMode
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	mode = MODE_ENTERING_NEITHER;
-	originalContentFrame = self.contentView.frame;
-	originalLogoFrame = self.logoImage.frame;
-	originalSwipeArrowFrame = self.swipeArrow.frame;
+	_mode = MODE_ENTERING_NEITHER;
+	_originalContentFrame = self.contentView.frame;
+	_originalLogoFrame = self.logoImage.frame;
+	_originalSwipeArrowFrame = self.swipeArrow.frame;
 	
 	self.userNameTextField.delegate = self;
 	self.passwordTextField.delegate = self;
 	self.invalidMessage.hidden = YES;
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
 	//NSLog(@"Adding keyboard notification");
 	
@@ -98,14 +98,16 @@ typedef enum eLoginMode
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)SignIn
+#pragma mark - Action Methods
+
+- (IBAction)SignIn
 {
 	[self.userNameTextField resignFirstResponder];
 	[self.passwordTextField resignFirstResponder];
 	[self animateToInitialPresentation];
 	
 
-		bSuccess = NO;
+		_bSuccess = NO;
 		//NSLog(@"Calling sign-in");
 		//self.labelStatus.text = @"Calling sign-in";
 		//NSLog(@"Signing in");
@@ -133,22 +135,22 @@ typedef enum eLoginMode
 
 }
 
--(IBAction)SignUp
+- (IBAction)SignUp
 {
 	[self.userNameTextField resignFirstResponder];
 	[self.passwordTextField resignFirstResponder];
 	[self animateToInitialPresentation];
 	
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
+	_signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
 
-    signUpController.mode = SignUpMode_SignUp;
-	signUpController.delegate = self;
+    _signUpController.mode = SignUpMode_SignUp;
+	_signUpController.delegate = self;
 	
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
-	signUpController.view.frame = frame;
-	[self.view addSubview:signUpController.view];
+	_signUpController.view.frame = frame;
+	[self.view addSubview:_signUpController.view];
 	
 	
 	[UIView animateWithDuration:0.35
@@ -156,15 +158,16 @@ typedef enum eLoginMode
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 signUpController.view.frame = self.view.bounds;
+		 _signUpController.view.frame = self.view.bounds;
 	 }
 	 completion:^(BOOL finished)
 	 {
 	 }];
-	
 }
 
--(void)animateSwipeArrowWithRepetitions:(int)repetitions andDelay:(float)delay;
+#pragma mark - Misc Methods
+
+- (void)animateSwipeArrowWithRepetitions:(int)repetitions andDelay:(float)delay;
 {
 	static int repetitionCount;
 	
@@ -178,7 +181,7 @@ typedef enum eLoginMode
 					 animations:^
 	 {
 		 CGRect frame = self.swipeArrow.frame;
-		 frame.origin.x = originalSwipeArrowFrame.origin.x - originalSwipeArrowFrame.size.width;
+		 frame.origin.x = _originalSwipeArrowFrame.origin.x - _originalSwipeArrowFrame.size.width;
 		 self.swipeArrow.frame = frame;
 		 
 	 }
@@ -190,7 +193,7 @@ typedef enum eLoginMode
 						  animations:^
 		  {
 			  CGRect frame = self.swipeArrow.frame;
-			  frame.origin.x = originalSwipeArrowFrame.origin.x;
+			  frame.origin.x = _originalSwipeArrowFrame.origin.x;
 			  self.swipeArrow.frame = frame;
 			  
 		  }
@@ -206,42 +209,42 @@ typedef enum eLoginMode
 	 }];
 }
 
--(CGFloat)StatusBarHeight
+- (CGFloat)StatusBarHeight
 {
     CGSize statusBarSize = [[UIApplication sharedApplication] statusBarFrame].size;
     return MIN(statusBarSize.width, statusBarSize.height);
 }
 
--(void)animateToInitialPresentation
+- (void)animateToInitialPresentation
 {
 	[UIView animateWithDuration:0.35
 						  delay: 0.0
 						options: UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 self.contentView.frame = originalContentFrame;
+		 self.contentView.frame = _originalContentFrame;
 		 
 		 self.swipeArrow.alpha = 1.0;
 		 self.swipeText.alpha = 1.0;
 		 self.titleText.alpha = 1.0;
 		 
 		 self.logoImage.transform = CGAffineTransformMakeScale(1.0, 1.0);
-		 self.logoImage.frame = originalLogoFrame;
+		 self.logoImage.frame = _originalLogoFrame;
 		 self.logoImage.alpha = 1.0;
 	 }
 					 completion:^(BOOL finished)
 	 {
-		 mode = MODE_ENTERING_NEITHER;
+		 _mode = MODE_ENTERING_NEITHER;
 	 }];
 }
 
-#pragma mark keyboard callbacks
+#pragma mark - keyboard callbacks
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
 	BOOL shrinkLogo = NO;
 	//Get KeyboardFrame (in Window coordinates)
-	if(activeTextField)
+	if(_activeTextField)
 	{
 		//NSLog(@"Keyboard will show for Login View");
 		NSDictionary *userInfo = [notification userInfo];
@@ -275,7 +278,7 @@ typedef enum eLoginMode
 			 
 			 if(shrinkLogo)
 			 {
-				 frame.origin.y = 22.0 + originalLogoFrame.size.height * logoScaleFactor;
+				 frame.origin.y = 22.0 + _originalLogoFrame.size.height * logoScaleFactor;
 				 frame.size.height = keyboardFrame.origin.y - frame.origin.y;
 				 self.contentView.frame = frame;
 				 
@@ -302,22 +305,22 @@ typedef enum eLoginMode
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-	if(activeTextField)
+	if(_activeTextField)
 	{
-		 activeTextField = nil;
+		 _activeTextField = nil;
 	}
 }
 
-#pragma mark touch events (for swiping)
+#pragma mark - touch events (for swiping)
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	//NSLog(@"Touches Began");
 	UITouch *touch = [touches anyObject];
-	firstTouchPoint = [touch locationInView:self.view.window];
+	_firstTouchPoint = [touch locationInView:self.view.window];
 }
 
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	UITouch *touch = [touches anyObject];
 	CGPoint touchPoint = [touch locationInView:self.view.window];
@@ -325,17 +328,17 @@ typedef enum eLoginMode
 	CGRect frame = self.view.frame;
 	CGFloat xPos;
 	
-	xPos = touchPoint.x - firstTouchPoint.x;
+	xPos = touchPoint.x - _firstTouchPoint.x;
 	
 	frame.origin.x = xPos;
 	self.view.frame = frame;
 }
 
--(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
 }
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	float xOffset = self.view.frame.origin.x;
 	if(xOffset < 0) xOffset = -xOffset;
@@ -382,27 +385,28 @@ typedef enum eLoginMode
 	}
 }
 
-#pragma mark UITextField delegates
+#pragma mark - UITextField delegates
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	//called when user taps on either search textField or location textField
 	self.invalidMessage.hidden = YES;
-	activeTextField = textField;
+	_activeTextField = textField;
 	
 	//NSLog(@"TextField began editing");
-	if(mode == MODE_ENTERING_NEITHER)
+	if(_mode == MODE_ENTERING_NEITHER)
 	{
 		if(textField == self.userNameTextField)
 		{
-			mode = MODE_ENTERING_USERNAME;
+			_mode = MODE_ENTERING_USERNAME;
 		}
 		else
 		{
-			mode = MODE_ENTERING_PASSWORD;
+			_mode = MODE_ENTERING_PASSWORD;
 		}
 	}
 
+    // highlight all of the text
     if (textField == self.userNameTextField)
     {
         // highlight all the text
@@ -410,7 +414,7 @@ typedef enum eLoginMode
     }
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     if (textField == self.userNameTextField)
@@ -444,7 +448,7 @@ typedef enum eLoginMode
 {
     //[self blockUser:NO];
    // NSLog(@"SignIn complete");
-    if (bSuccess)
+    if (_bSuccess)
     {
        // NSLog(@"%@", @"Successfully Signed In");
 		[self.delegate loginViewControllerDidLogin];
@@ -452,27 +456,27 @@ typedef enum eLoginMode
     }
     else
     {
-        NSLog(@"%@", [NSString stringWithFormat:@"Sign-in failed\n%@", strReason]);
+        NSLog(@"%@", [NSString stringWithFormat:@"Sign-in failed\n%@", _strReason]);
 		self.invalidMessage.hidden = NO;
     }
 }
 
-#pragma mark SignUpViewControllerDelegates
+#pragma mark - SignUpViewControllerDelegates
 
--(void)signupViewControllerDidFinish:(SignUpViewController *)controller
+- (void)signupViewControllerDidFinish:(SignUpViewController *)controller
 {
 	[controller.view removeFromSuperview];
-	signUpController = nil;
+	_signUpController = nil;
 	//NSLog(@"Signup finished");
 	
 	if([User Singleton].name.length && [User Singleton].password.length)
 	{
-		bSuccess = YES;
+		_bSuccess = YES;
 		[self signInComplete];
 	}
 }
 
-#pragma mark ABC Callbacks
+#pragma mark - ABC Callbacks
 
 void ABC_Request_Callback(const tABC_RequestResults *pResults)
 {
@@ -481,8 +485,8 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
     if (pResults)
     {
         LoginViewController *controller = (__bridge id)pResults->pData;
-        controller->bSuccess = (BOOL)pResults->bSuccess;
-        controller->strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
+        controller->_bSuccess = (BOOL)pResults->bSuccess;
+        controller->_strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
  
         if (pResults->requestType == ABC_RequestType_AccountSignIn)
         {

@@ -567,6 +567,9 @@
 	if (textField == self.textWalletName)
     {
         [self blockUser:YES];
+
+        // highlight all the text
+        [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
     }
     else if (textField == self.searchTextField)
     {
@@ -624,6 +627,26 @@
     }
 
 	return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if (textField == self.textWalletName)
+    {
+        if (NO == [self canLeaveWalletNameField])
+        {
+            [self blockUser:YES];
+            return NO;
+        }
+        else
+        {
+            // unhighlight wallet name text
+            // note: for some reason, if we don't do this, the text won't select next time the user selects it
+            [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.beginningOfDocument]];
+        }
+    }
+
+    return YES;
 }
 
 
