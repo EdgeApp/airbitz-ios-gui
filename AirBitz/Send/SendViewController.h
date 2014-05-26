@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZBarSDK.h"
 
-@interface SendViewController : UIViewController <ZBarReaderViewDelegate>
+@interface SendViewController : UIViewController
 
 @end
