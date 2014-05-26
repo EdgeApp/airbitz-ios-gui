@@ -41,6 +41,7 @@
 - (BOOL)pickerTextViewFieldShouldChange:(PickerTextView *)pickerTextView charactersInRange:(NSRange)range replacementString:(NSString *)string;
 - (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView;
 - (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView;
+- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView;
 - (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView;
 - (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView;
 - (void)pickerTextViewPopupSelected:(PickerTextView *)view onRow:(NSInteger)row;

@@ -107,13 +107,13 @@
 {
     [self resignAllResponders];
 
-    if (self.pickerTextNew.textField.text)
+    // check and see if there is more text than just the prefix
+    if ([ARRAY_CATEGORY_PREFIXES indexOfObject:self.pickerTextNew.textField.text] == NSNotFound)
     {
-        if ([self.pickerTextNew.textField.text length])
-        {
-            [self.arrayCategories addObject:self.pickerTextNew.textField.text];
-            [self updateDisplay];
-        }
+        // add the category
+        [self.arrayCategories addObject:self.pickerTextNew.textField.text];
+        self.pickerTextNew.textField.text = @"";
+        [self updateDisplay];
     }
 }
 
@@ -482,15 +482,39 @@
 - (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
 {
     [self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
+
+    NSRange range = [pickerTextView.textField.text rangeOfString:@":"];
+    UITextPosition *startPosition = [pickerTextView.textField positionFromPosition:pickerTextView.textField.beginningOfDocument offset:range.location + 1];
+
+    // highlight all the text after the :
+    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:startPosition toPosition:pickerTextView.textField.endOfDocument]];
+}
+
+- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
+{
+    // unhighlight text
+    // note: for some reason, if we don't do this, the text won't select next time the user selects it
+    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.beginningOfDocument]];
+
+    return YES;
 }
 
 - (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
 {
-    [self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
+    //[self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
 }
 
 - (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
 {
+    // check and see if there is more text than just the prefix
+    if ([ARRAY_CATEGORY_PREFIXES indexOfObject:pickerTextView.textField.text] == NSNotFound)
+    {
+        // add the category
+        [self.arrayCategories addObject:pickerTextView.textField.text];
+        pickerTextView.textField.text = @"";
+        [self updateDisplay];
+    }
+
 	[pickerTextView.textField resignFirstResponder];
 
 	return YES;
@@ -500,12 +524,6 @@
 {
     // set the text field to the choice
     self.pickerTextNew.textField.text = [self.pickerTextNew.arrayChoices objectAtIndex:row];
-
-    // check and see if there is more text than just the prefix
-    if ([ARRAY_CATEGORY_PREFIXES indexOfObject:self.pickerTextNew.textField.text] == NSNotFound)
-    {
-        [view.textField resignFirstResponder];
-    }
 }
 
 #pragma mark - CategoriesCell Delegates

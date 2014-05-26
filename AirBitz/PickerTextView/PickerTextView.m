@@ -162,6 +162,21 @@
     }
 }
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    BOOL bShouldEnd = YES;
+
+    if (nil != self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(pickerTextViewShouldEndEditing:)])
+        {
+            bShouldEnd = [self.delegate pickerTextViewShouldEndEditing:self];
+        }
+    }
+
+    return bShouldEnd;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (nil != self.delegate)
