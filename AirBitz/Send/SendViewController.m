@@ -33,8 +33,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView            *imageTopFrame;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendTo;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageSendTo;
-@property (weak, nonatomic) IBOutlet UILabel                *labelScanQRCode;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
+@property (weak, nonatomic) IBOutlet UIView                 *viewMiddle;
 
 @property (nonatomic, strong) UIButton  *buttonBlocker;
 
@@ -123,6 +123,10 @@
     [self blockUser:NO];
 }
 
+- (IBAction)buttonCameraTouched:(id)sender
+{
+}
+
 #pragma mark - Misc Methods
 
 - (void)blockUser:(BOOL)bBlock
@@ -148,45 +152,21 @@
 
         CGRect frame;
 
-        frame = self.imageTopFrame.frame;
-        frame.origin.y = 64.0;
-        frame.size.height = 73.0;
-        self.imageTopFrame.frame = frame;
-
-        frame = self.buttonSelector.frame;
-        frame.origin.y = self.imageTopFrame.frame.origin.y + 0.0;
-        self.buttonSelector.frame = frame;
-
-        frame = self.imageSendTo.frame;
-        frame.origin.y = self.buttonSelector.frame.origin.y + self.buttonSelector.frame.size.height + 0.0;
-        self.imageSendTo.frame = frame;
-
-        frame = self.sendToTextField.frame;
-        frame.origin.y = self.imageSendTo.frame.origin.y + 2.0;
-        self.sendToTextField.frame = frame;
-
-        frame = self.labelSendTo.frame;
-        frame.origin.y = self.sendToTextField.frame.origin.y + 5.0;
-        self.labelSendTo.frame = frame;
-
-        //frame = self.labelScanQRCode.frame;
-        //frame.origin.y = self.imageTopFrame.frame.origin.y + self.imageTopFrame.frame.size.height + 0.0;
-        //self.labelScanQRCode.frame = frame;
-        self.labelScanQRCode.hidden = YES;
-
-        frame = self.scanFrame.frame;
-        frame.origin.y = self.imageTopFrame.frame.origin.y + self.imageTopFrame.frame.size.height + 0.0;
-        self.scanFrame.frame = frame;
-
+        // put the flash view at the bottom
         frame = self.imageFlashFrame.frame;
-        frame.origin.y = self.scanFrame.frame.origin.y + self.scanFrame.frame.size.height + 0.0;
-        frame.size.height = 41.0;
+        frame.size.height = 60;
+        frame.origin.y = self.view.frame.size.height - frame.size.height + 0.0;
         self.imageFlashFrame.frame = frame;
 
         frame = self.flashSelector.frame;
-        frame.origin.y = self.imageFlashFrame.frame.origin.y + 0.0;
-        frame.size.height = 40.0;
+        frame.origin.y = self.imageFlashFrame.frame.origin.y + 8.0;
+        frame.size.height = 48.0;
         self.flashSelector.frame = frame;
+
+        // put the scan frame bottom right to the top of the flash frame
+        frame = self.scanFrame.frame;
+        frame.size.height = self.imageFlashFrame.frame.origin.y - self.scanFrame.frame.origin.y + 0.0;
+        self.scanFrame.frame = frame;
     }
 }
 
