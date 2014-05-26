@@ -7,6 +7,7 @@
 //
 
 #import "TransactionsViewController.h"
+#import "ExportWalletViewController.h"
 #import "BalanceView.h"
 #import "TransactionCell.h"
 #import "Transaction.h"
@@ -19,13 +20,14 @@
 #import "InfoView.h"
 #import "CommonTypes.h"
 
+
 #define DOLLAR_CURRENCY_NUM	840
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
 #define COLOR_BALANCE  [UIColor colorWithRed:83.0/255.0 green:90.0/255.0 blue:91.0/255.0 alpha:1.0];
 
-@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate>
+@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate>
 {
 	BalanceView                         *_balanceView;
 	tBalanceViewState                   _balanceState;
@@ -34,6 +36,7 @@
     BOOL                                _bSearchModeEnabled;
     CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
+    ExportWalletViewController          *_exportWalletViewController;
 }
 
 @property (weak, nonatomic) IBOutlet UIView         *viewSearch;
@@ -210,7 +213,29 @@
     if (YES == [self canLeaveWalletNameField])
     {
         [self resignAllResponders];
-        // TODO: export button functionality here
+
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        _exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
+
+        _exportWalletViewController.delegate = self;
+        _exportWalletViewController.wallet = self.wallet;
+
+        CGRect frame = self.view.bounds;
+        frame.origin.x = frame.size.width;
+        _exportWalletViewController.view.frame = frame;
+        [self.view addSubview:_exportWalletViewController.view];
+
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             _exportWalletViewController.view.frame = self.view.bounds;
+         }
+                         completion:^(BOOL finished)
+         {
+
+         }];
     }
 }
 
@@ -697,6 +722,14 @@
 	// the only alert we have that uses a delegate is the one that tells them they must provide a wallet name
     [self.textWalletName becomeFirstResponder];
     _bWalletNameWarningDisplaying = NO;
+}
+
+#pragma mark - Export Wallet Delegates
+
+- (void)exportWalletViewControllerDidFinish:(ExportWalletViewController *)controller
+{
+	[controller.view removeFromSuperview];
+	_exportWalletViewController = nil;
 }
 
 @end
