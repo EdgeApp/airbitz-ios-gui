@@ -14,7 +14,7 @@
 @interface WalletMakerView : UIView
 
 @property (nonatomic, assign) id<WalletMakerViewDelegate>   delegate;
-
+@property (nonatomic, weak) IBOutlet UITextField            *textField;
 
 - (void)reset;
 - (void)exit;
