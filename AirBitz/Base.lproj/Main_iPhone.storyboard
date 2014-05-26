@@ -1699,13 +1699,16 @@
                                     <action selector="Done" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="f5f-sE-UYa"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MFx-OC-ubq" userLabel="Button - Forward">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MFx-OC-ubq" userLabel="Button - Export">
                                 <rect key="frame" x="12" y="123" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" backgroundImage="btn_export.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="buttonExportTouched:" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="Aq6-md-LtJ"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="W7N-ZQ-6wO">
                                 <rect key="frame" x="58" y="123" width="204" height="35"/>
@@ -1746,6 +1749,9 @@
                                 <state key="normal" title="Request" backgroundImage="btn_request.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="buttonRequestTouched:" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="VX1-ES-cjU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Skp-Gb-ZuY">
                                 <rect key="frame" x="164" y="271" width="143" height="41"/>
@@ -1755,6 +1761,9 @@
                                 <state key="normal" title="Send" backgroundImage="btn_send.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="buttonSendTouched:" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="wkw-LR-5iJ"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1la-Es-fPE">
                                 <rect key="frame" x="13" y="320" width="294" height="237"/>
@@ -1839,7 +1848,7 @@
                     </view>
                     <connections>
                         <outlet property="balanceViewPlaceholder" destination="3Qw-an-knM" id="uWP-JF-vsP"/>
-                        <outlet property="buttonForward" destination="MFx-OC-ubq" id="gKz-Ty-CSB"/>
+                        <outlet property="buttonExport" destination="MFx-OC-ubq" id="Wwq-5w-giJ"/>
                         <outlet property="buttonRequest" destination="W2g-GD-h4o" id="BPi-fL-LIx"/>
                         <outlet property="buttonSearch" destination="wMi-Kk-9gE" id="IZp-8z-djn"/>
                         <outlet property="buttonSend" destination="Skp-Gb-ZuY" id="ZE9-Au-x5G"/>

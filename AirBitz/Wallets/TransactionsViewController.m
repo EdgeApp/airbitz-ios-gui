@@ -41,7 +41,7 @@
 @property (nonatomic, weak) IBOutlet UIView         *balanceViewPlaceholder;
 @property (nonatomic, weak) IBOutlet UITableView    *tableView;
 @property (nonatomic, weak) IBOutlet UITextField    *searchTextField;
-@property (weak, nonatomic) IBOutlet UIButton       *buttonForward;
+@property (weak, nonatomic) IBOutlet UIButton       *buttonExport;
 @property (weak, nonatomic) IBOutlet UIButton       *buttonRequest;
 @property (weak, nonatomic) IBOutlet UIButton       *buttonSend;
 @property (weak, nonatomic) IBOutlet UIImageView    *imageWalletNameEmboss;
@@ -80,7 +80,7 @@
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 
-    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonForward, self.buttonRequest, self.buttonSend, self.imageWalletNameEmboss, self.buttonSearch, nil];
+    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonExport, self.buttonRequest, self.buttonSend, self.imageWalletNameEmboss, self.buttonSearch, nil];
 
     self.textWalletName.text = self.wallet.strName;
 	self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
@@ -148,22 +148,28 @@
 
 - (IBAction)Done
 {
-    [self resignAllResponders];
-    if (_bSearchModeEnabled)
+    if (YES == [self canLeaveWalletNameField])
     {
-        self.searchTextField.text = @"";
-        [self transitionToSearch:NO];
-    }
-    else
-    {
-        [self.delegate TransactionsViewControllerDone:self];
+        [self resignAllResponders];
+        if (_bSearchModeEnabled)
+        {
+            self.searchTextField.text = @"";
+            [self transitionToSearch:NO];
+        }
+        else
+        {
+            [self.delegate TransactionsViewControllerDone:self];
+        }
     }
 }
 
 - (IBAction)info
 {
-    [self resignAllResponders];
-    [InfoView CreateWithHTML:@"infoTransactions" forView:self.view];
+    if (YES == [self canLeaveWalletNameField])
+    {
+        [self resignAllResponders];
+        [InfoView CreateWithHTML:@"infoTransactions" forView:self.view];
+    }
 }
 
 - (IBAction)buttonBlockerTouched:(id)sender
@@ -174,7 +180,38 @@
 
 - (IBAction)buttonSearchTouched:(id)sender
 {
-    [self transitionToSearch:YES];
+    if (YES == [self canLeaveWalletNameField])
+    {
+        [self resignAllResponders];
+        [self transitionToSearch:YES];
+    }
+}
+
+- (IBAction)buttonRequestTouched:(id)sender
+{
+    if (YES == [self canLeaveWalletNameField])
+    {
+        [self resignAllResponders];
+        // TODO: request button functionality here
+    }
+}
+
+- (IBAction)buttonSendTouched:(id)sender
+{
+    if (YES == [self canLeaveWalletNameField])
+    {
+        [self resignAllResponders];
+        // TODO: send button functionality here
+    }
+}
+
+- (IBAction)buttonExportTouched:(id)sender
+{
+    if (YES == [self canLeaveWalletNameField])
+    {
+        [self resignAllResponders];
+        // TODO: export button functionality here
+    }
 }
 
 #pragma mark - Misc Methods
@@ -259,8 +296,6 @@
          }
 	 }];
 
-
-
     [self.tableView reloadData];
 }
 
@@ -272,6 +307,9 @@
 
 - (void)blockUser:(BOOL)bBlock
 {
+    // Paul doesn't want the 'touch background to dismiss keyboard' so for now we wil ignore this
+    return;
+
     if (bBlock)
     {
         [self.view bringSubviewToFront:self.buttonBlocker];
@@ -538,23 +576,25 @@
 	return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self resignAllResponders];
-    if ([self searchEnabled]) 
+    if (YES == [self canLeaveWalletNameField])
     {
-        [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row]];
-    }
-    else
-    {
-        [self launchTransactionDetailsWithTransaction:[self.wallet.arrayTransactions objectAtIndex:indexPath.row]];
-    }
-	
+        [self resignAllResponders];
+        if ([self searchEnabled])
+        {
+            [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row]];
+        }
+        else
+        {
+            [self launchTransactionDetailsWithTransaction:[self.wallet.arrayTransactions objectAtIndex:indexPath.row]];
+        }
+	}
 }
 
 #pragma mark - BalanceViewDelegates
 
--(void)BalanceView:(BalanceView *)view changedStateTo:(tBalanceViewState)state
+- (void)BalanceView:(BalanceView *)view changedStateTo:(tBalanceViewState)state
 {
 	_balanceState = state;
 	[self.tableView reloadData];

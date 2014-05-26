@@ -9,7 +9,7 @@
 #import "User.h"
 #import "Config.h"
 #import "ABC.h"
-
+#import "Util.h"
 
 
 static BOOL bInitialized = NO;
@@ -38,12 +38,12 @@ static User *singleton = nil;  // this will be the one and only object this stat
     }
 }
 
-+(User *)Singleton
++ (User *)Singleton
 {
     return singleton;
 }
 
--(id)init
+- (id)init
 {
     self = [super init];
     if(self)
@@ -56,15 +56,15 @@ static User *singleton = nil;  // this will be the one and only object this stat
     return self;
 }
 
--(void)loadSettings
+- (void)loadSettings
 {
     tABC_Error Error;
     tABC_AccountSettings *pSettings = NULL;
-    ABC_LoadAccountSettings([self.name UTF8String],
-                            [self.password UTF8String],
-                            &pSettings,
-                            &Error);
-    if (ABC_CC_Ok == Error.code)
+    tABC_CC result = ABC_LoadAccountSettings([self.name UTF8String],
+                                             [self.password UTF8String],
+                                             &pSettings,
+                                             &Error);
+    if (ABC_CC_Ok == result)
     {
         if (pSettings->bitcoinDenomination.satoshi > 0)
         {
@@ -78,10 +78,14 @@ static User *singleton = nil;  // this will be the one and only object this stat
                 self.denominationLabelShort = @"B ";
         }
     }
+    else
+    {
+        [Util printABC_Error:&Error];
+    }
     ABC_FreeAccountSettings(pSettings);
 }
 
--(void)clear
+- (void)clear
 {
 #if HARD_CODED_LOGIN
     self.name = HARD_CODED_LOGIN_NAME;
@@ -91,9 +95,10 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.password = nil;
 #endif
     tABC_Error Error;
-    ABC_ClearKeyCache(&Error);
-    if (ABC_CC_Ok != Error.code)
+    tABC_CC result = ABC_ClearKeyCache(&Error);
+    if (ABC_CC_Ok != result)
     {
+        [Util printABC_Error:&Error];
 #warning TODO: handle error
     }
 }
