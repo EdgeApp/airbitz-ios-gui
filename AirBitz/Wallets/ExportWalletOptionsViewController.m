@@ -37,6 +37,8 @@
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplay];
+
+    NSLog(@"type: %d", self.type);
 }
 
 - (void)didReceiveMemoryWarning

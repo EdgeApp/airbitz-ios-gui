@@ -12,8 +12,10 @@
 #import "Util.h"
 #import "ButtonSelectorView.h"
 #import "User.h"
+#import "CommonTypes.h"
 
-#define WALLET_BUTTON_WIDTH 110
+#define WALLET_BUTTON_WIDTH         110
+#define WALLET_TABLE_CONTENT_HEIGHT 225
 
 typedef enum eDatePeriod
 {
@@ -42,6 +44,7 @@ typedef enum eDatePeriod
 @property (weak, nonatomic) IBOutlet UIButton           *buttonTo;
 @property (weak, nonatomic) IBOutlet UILabel            *labelFromDate;
 @property (weak, nonatomic) IBOutlet UILabel            *labelToDate;
+@property (weak, nonatomic) IBOutlet UIScrollView       *scrollView;
 
 @property (nonatomic, strong) NSArray *arrayWalletUUIDs;
 
@@ -67,6 +70,8 @@ typedef enum eDatePeriod
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplay];
 
+    [self updateDisplayLayout];
+
     UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
     [self.buttonFrom setBackgroundImage:blue_button_image forState:UIControlStateNormal];
     [self.buttonFrom setBackgroundImage:blue_button_image forState:UIControlStateSelected];
@@ -77,6 +82,8 @@ typedef enum eDatePeriod
 
     _datePeriod = DatePeriod_None;
     [self updateDisplay];
+
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -126,6 +133,31 @@ typedef enum eDatePeriod
     [self updateDisplay];
 }
 
+- (IBAction)buttonCSVTouched:(id)sender
+{
+    [self showExportWalletOptionsWithType:WalletExportType_CSV];
+}
+
+- (IBAction)buttonQuickenTouched:(id)sender
+{
+    [self showExportWalletOptionsWithType:WalletExportType_Quicken];
+}
+
+- (IBAction)buttonQuickbooksTouched:(id)sender
+{
+    [self showExportWalletOptionsWithType:WalletExportType_Quickbooks];
+}
+
+- (IBAction)buttonPDFTouched:(id)sender
+{
+    [self showExportWalletOptionsWithType:WalletExportType_PDF];
+}
+
+- (IBAction)buttonPrivateSeedTouched:(id)sender
+{
+    [self showExportWalletOptionsWithType:WalletExportType_PrivateSeed];
+}
+
 #pragma mark - Misc Methods
 
 - (void)updateDisplay
@@ -133,6 +165,47 @@ typedef enum eDatePeriod
     self.imageButtonThisWeek.hidden = (DatePeriod_ThisWeek != _datePeriod);
     self.imageButtonThisMonth.hidden = (DatePeriod_ThisMonth != _datePeriod);
     self.imageButtonThisYear.hidden = (DatePeriod_ThisYear != _datePeriod);
+}
+
+- (void)updateDisplayLayout
+{
+    // update for iPhone 4
+    if (!IS_IPHONE5)
+    {
+        // warning: magic numbers for iphone layout
+
+        self.scrollView.contentSize = self.scrollView.frame.size;
+        CGRect frame = self.scrollView.frame;
+        frame.size.height = 140;
+        self.scrollView.frame = frame;
+
+    }
+}
+
+- (void)showExportWalletOptionsWithType:(tWalletExportType)type
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    _exportWalletOptionsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletOptionsViewController"];
+
+    _exportWalletOptionsViewController.delegate = self;
+    _exportWalletOptionsViewController.type = type;
+
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _exportWalletOptionsViewController.view.frame = frame;
+    [self.view addSubview:_exportWalletOptionsViewController.view];
+
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         _exportWalletOptionsViewController.view.frame = self.view.bounds;
+     }
+                     completion:^(BOOL finished)
+     {
+
+     }];
 }
 
 - (UIImage *)stretchableImage:(NSString *)imageName

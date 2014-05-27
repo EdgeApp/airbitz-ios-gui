@@ -59,6 +59,8 @@
 		4C7247A31934FC840091C286 /* btn_export_dates~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247A11934FC830091C286 /* btn_export_dates~iphone.png */; };
 		4C7247AA193516630091C286 /* icon_calendar~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247A8193516630091C286 /* icon_calendar~iphone.png */; };
 		4C7247AB193516630091C286 /* icon_calendar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247A9193516630091C286 /* icon_calendar@2x~iphone.png */; };
+		4C7247AE19351BFD0091C286 /* table_export~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247AC19351BFD0091C286 /* table_export~iphone.png */; };
+		4C7247AF19351BFD0091C286 /* table_export@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247AD19351BFD0091C286 /* table_export@2x~iphone.png */; };
 		4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
@@ -501,6 +503,8 @@
 		4C7247A11934FC830091C286 /* btn_export_dates~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_export_dates~iphone.png"; sourceTree = "<group>"; };
 		4C7247A8193516630091C286 /* icon_calendar~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_calendar~iphone.png"; sourceTree = "<group>"; };
 		4C7247A9193516630091C286 /* icon_calendar@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_calendar@2x~iphone.png"; sourceTree = "<group>"; };
+		4C7247AC19351BFD0091C286 /* table_export~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "table_export~iphone.png"; sourceTree = "<group>"; };
+		4C7247AD19351BFD0091C286 /* table_export@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "table_export@2x~iphone.png"; sourceTree = "<group>"; };
 		4C90461C18C91E5900179D9C /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h; sourceTree = "<group>"; };
 		4C90461D18C91E5900179D9C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Exception.h; sourceTree = "<group>"; };
 		4C90461E18C91E5900179D9C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Image.h; sourceTree = "<group>"; };
@@ -1664,6 +1668,8 @@
 				B59C14BF18C012B500AEA789 /* table_cell_middle~iphone.png */,
 				B59C14C018C012B500AEA789 /* table_cell_top@2x~iphone.png */,
 				B59C14C118C012B500AEA789 /* table_cell_top~iphone.png */,
+				4C7247AC19351BFD0091C286 /* table_export~iphone.png */,
+				4C7247AD19351BFD0091C286 /* table_export@2x~iphone.png */,
 				B59C14C218C012B500AEA789 /* thumb@2x~iphone.png */,
 				B59C14C318C012B500AEA789 /* thumb~iphone.png */,
 			);
@@ -2032,6 +2038,7 @@
 				B59C153318C012B500AEA789 /* password_dot~iphone.png in Resources */,
 				B59C14FC18C012B500AEA789 /* btn_plus@2x~iphone.png in Resources */,
 				B59C151418C012B500AEA789 /* icon_bitcoin_dark@2x~iphone.png in Resources */,
+				4C7247AF19351BFD0091C286 /* table_export@2x~iphone.png in Resources */,
 				4C3C309919198B33006923DE /* PopupWheelPickerView.xib in Resources */,
 				B57C209A18C25042005D7245 /* BalanceView~ipad.xib in Resources */,
 				B5137C1218A40A8400DA4A34 /* Montserrat-Regular.ttf in Resources */,
@@ -2085,6 +2092,7 @@
 				B5675BAF18A19A84002E0703 /* bkg_textfield@2x~iphone.png in Resources */,
 				B55A02FC18EA206300845090 /* btn_cancel@2x~iphone.png in Resources */,
 				B5F2E9AA18D4AF6C008ACF88 /* info.html in Resources */,
+				4C7247AE19351BFD0091C286 /* table_export~iphone.png in Resources */,
 				B59C143618C0129300AEA789 /* bd_cell_middle~iphone.png in Resources */,
 				B59C152C18C012B500AEA789 /* icon_wallet@2x~iphone.png in Resources */,
 				B5184B7D18E0F4DA0001712A /* btn_big_blue2_dark@2x~iphone.png in Resources */,
