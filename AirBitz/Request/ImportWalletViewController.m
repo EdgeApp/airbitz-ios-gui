@@ -302,7 +302,7 @@ typedef enum eImportState
     {
         tABC_WalletInfo *pInfo = aWalletInfo[i];
 		[walletsArray addObject:[NSString stringWithUTF8String:pInfo->szName]];
-        [arrayWalletUUIDs addObject:[NSString stringWithUTF8String:pInfo->szName]];
+        [arrayWalletUUIDs addObject:[NSString stringWithUTF8String:pInfo->szUUID]];
     }
 
 	self.buttonSelector.arrayItemsToSelect = [walletsArray copy];
