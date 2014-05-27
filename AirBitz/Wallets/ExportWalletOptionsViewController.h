@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Wallet.h"
 
 typedef enum eWalletExportType
 {
-    WalletExportType_CSV,
+    WalletExportType_CSV = 0,
     WalletExportType_Quicken,
     WalletExportType_Quickbooks,
     WalletExportType_PDF,
@@ -23,6 +24,7 @@ typedef enum eWalletExportType
 
 @property (assign)            id<ExportWalletOptionsViewControllerDelegate> delegate;
 @property (assign)            tWalletExportType                             type;
+@property (nonatomic, strong) Wallet                                        *wallet;
 
 @end
 

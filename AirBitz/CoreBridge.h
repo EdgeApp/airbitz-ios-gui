@@ -5,6 +5,7 @@
 
 #import "ABC.h"
 #import "Wallet.h"
+#import "Transaction.h"
 
 
 @interface CoreBridge : NSObject

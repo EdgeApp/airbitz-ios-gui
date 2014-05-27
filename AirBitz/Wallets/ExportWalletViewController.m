@@ -13,6 +13,7 @@
 #import "ButtonSelectorView.h"
 #import "User.h"
 #import "CommonTypes.h"
+#import "CoreBridge.h"
 
 #define WALLET_BUTTON_WIDTH         110
 #define WALLET_TABLE_CONTENT_HEIGHT 225
@@ -47,7 +48,7 @@ typedef enum eDatePeriod
 @property (weak, nonatomic) IBOutlet UIScrollView       *scrollView;
 
 @property (nonatomic, strong) NSArray *arrayWalletUUIDs;
-
+@property (nonatomic, strong) NSArray *arrayWallets;
 
 @end
 
@@ -184,11 +185,24 @@ typedef enum eDatePeriod
 
 - (void)showExportWalletOptionsWithType:(tWalletExportType)type
 {
+    // find the wallet to use
+    NSString *strUUID = [self.arrayWalletUUIDs objectAtIndex:_selectedWallet];
+    Wallet *wallet = nil;
+    for (wallet in self.arrayWallets)
+    {
+        if ([strUUID isEqualToString:wallet.strUUID])
+        {
+            // found it
+            break;
+        }
+    }
+
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
     _exportWalletOptionsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletOptionsViewController"];
 
     _exportWalletOptionsViewController.delegate = self;
     _exportWalletOptionsViewController.type = type;
+    _exportWalletOptionsViewController.wallet = wallet;
 
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
@@ -251,6 +265,13 @@ typedef enum eDatePeriod
 		[self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWallet] forState:UIControlStateNormal];
 		self.buttonSelector.selectedItemIndex = (int) _selectedWallet;
 	}
+
+    // get an array of all the wallets
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets];
+    [arrayWallets addObjectsFromArray:arrayArchivedWallets];
+    self.arrayWallets = arrayWallets;
 }
 
 - (void)animatedExit
