@@ -856,7 +856,7 @@ typedef enum eAddressPickerType
 	self.USD_TextField.text = @"";
 }
 
-#pragma mark UIAlertView delegates
+#pragma mark - UIAlertView delegates
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {

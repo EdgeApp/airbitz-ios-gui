@@ -20,9 +20,8 @@
     int                         _currencyChoice;
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageEditBox;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageEditBox;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView     *buttonSelectorView;
-@property (nonatomic, weak) IBOutlet UITextField            *textField;
 @property (weak, nonatomic) IBOutlet UILabel                *labelOnline;
 @property (weak, nonatomic) IBOutlet UILabel                *labelOffline;
 @property (weak, nonatomic) IBOutlet UISwitch               *switchOnlineOffline;
@@ -108,12 +107,20 @@
     [self.buttonSelectorView close];
     [self.textField resignFirstResponder];
     [self updateDisplay];
+    if ([self onlineSelected])
+    {
+        [self.textField becomeFirstResponder];
+    }
 }
 
 - (IBAction)buttonOnlineTouched:(id)sender
 {
     [self.switchOnlineOffline setOn:NO animated:YES];
     [self updateDisplay];
+    if ([self onlineSelected])
+    {
+        [self.textField becomeFirstResponder];
+    }
 }
 
 - (IBAction)buttonOfflineTouched:(id)sender

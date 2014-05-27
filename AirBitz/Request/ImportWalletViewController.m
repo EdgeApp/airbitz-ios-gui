@@ -117,13 +117,7 @@ typedef enum eImportState
     [self updateDisplay];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
 	//NSLog(@"Starting timer");
 
@@ -136,13 +130,19 @@ typedef enum eImportState
     }
 }
 
--(void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
 	//NSLog(@"Invalidating timer");
 	[_startScannerTimer invalidate];
 	_startScannerTimer = nil;
 
 	[self closeCameraScanner];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /*

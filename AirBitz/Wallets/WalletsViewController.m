@@ -207,10 +207,9 @@
 
 - (void)hideWalletMaker
 {
-	if(_walletMakerVisible == YES)
+	if (_walletMakerVisible == YES)
 	{
 		_walletMakerVisible = NO;
-
 		
 		CGRect frame = self.walletMakerView.frame;
 		frame.size.height = 0;
@@ -285,6 +284,7 @@
 		self.walletMakerView.hidden = NO;
 		[[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
 		[self createBlockingButtonUnderView:self.walletMakerView];
+        [self.walletMakerView.textField becomeFirstResponder];
 		[UIView animateWithDuration:0.35
 							  delay:0.0
 							options:UIViewAnimationOptionCurveEaseOut

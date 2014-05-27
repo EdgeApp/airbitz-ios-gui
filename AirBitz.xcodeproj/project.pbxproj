@@ -48,6 +48,12 @@
 		4C5D8C831930060F0015BB3C /* btn_search@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C811930060F0015BB3C /* btn_search@2x~iphone.png */; };
 		4C5D8C8619300CBD0015BB3C /* TxSearchBarBacking~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C8419300CBD0015BB3C /* TxSearchBarBacking~iphone.png */; };
 		4C5D8C8719300CBD0015BB3C /* TxSearchBarBacking@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C8519300CBD0015BB3C /* TxSearchBarBacking@2x~iphone.png */; };
+		4C5D8C8A1933C6FA0015BB3C /* comp_11.2-exporting_saving_options.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C881933C6FA0015BB3C /* comp_11.2-exporting_saving_options.jpg */; };
+		4C5D8C8B1933C6FA0015BB3C /* comp_11.1_export.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C891933C6FA0015BB3C /* comp_11.1_export.jpg */; };
+		4C5D8C8E1933C7DC0015BB3C /* ExportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C8D1933C7DC0015BB3C /* ExportWalletViewController.m */; };
+		4C5D8C911933C8040015BB3C /* ExportWalletOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C901933C8040015BB3C /* ExportWalletOptionsViewController.m */; };
+		4C72479E1933D3890091C286 /* infoExportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C72479C1933D3890091C286 /* infoExportWallet.html */; };
+		4C72479F1933D3890091C286 /* infoExportWalletOptions.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C72479D1933D3890091C286 /* infoExportWalletOptions.html */; };
 		4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
@@ -477,6 +483,14 @@
 		4C5D8C811930060F0015BB3C /* btn_search@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_search@2x~iphone.png"; sourceTree = "<group>"; };
 		4C5D8C8419300CBD0015BB3C /* TxSearchBarBacking~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TxSearchBarBacking~iphone.png"; sourceTree = "<group>"; };
 		4C5D8C8519300CBD0015BB3C /* TxSearchBarBacking@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TxSearchBarBacking@2x~iphone.png"; sourceTree = "<group>"; };
+		4C5D8C881933C6FA0015BB3C /* comp_11.2-exporting_saving_options.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_11.2-exporting_saving_options.jpg"; sourceTree = "<group>"; };
+		4C5D8C891933C6FA0015BB3C /* comp_11.1_export.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = comp_11.1_export.jpg; sourceTree = "<group>"; };
+		4C5D8C8C1933C7DC0015BB3C /* ExportWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportWalletViewController.h; sourceTree = "<group>"; };
+		4C5D8C8D1933C7DC0015BB3C /* ExportWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWalletViewController.m; sourceTree = "<group>"; };
+		4C5D8C8F1933C8040015BB3C /* ExportWalletOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportWalletOptionsViewController.h; sourceTree = "<group>"; };
+		4C5D8C901933C8040015BB3C /* ExportWalletOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWalletOptionsViewController.m; sourceTree = "<group>"; };
+		4C72479C1933D3890091C286 /* infoExportWallet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoExportWallet.html; sourceTree = "<group>"; };
+		4C72479D1933D3890091C286 /* infoExportWalletOptions.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoExportWalletOptions.html; sourceTree = "<group>"; };
 		4C90461C18C91E5900179D9C /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h; sourceTree = "<group>"; };
 		4C90461D18C91E5900179D9C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Exception.h; sourceTree = "<group>"; };
 		4C90461E18C91E5900179D9C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Image.h; sourceTree = "<group>"; };
@@ -1463,6 +1477,8 @@
 				B55D0FE418E1F7FD0035DCC8 /* comp_9_transactions_details.jpg */,
 				B5FD392918EE33AD00BE2670 /* comp_09.4-sending.jpg */,
 				B5C0A95D18EA07F6008F302C /* comp_10.2-request_bitcoin.jpg */,
+				4C5D8C891933C6FA0015BB3C /* comp_11.1_export.jpg */,
+				4C5D8C881933C6FA0015BB3C /* comp_11.2-exporting_saving_options.jpg */,
 				4C5D8C5C192AC11C0015BB3C /* comp_12.1-import_wallet_v2.jpg */,
 				4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */,
 				B59C144218C012B500AEA789 /* bar_balance@2x~iphone.png */,
@@ -1787,6 +1803,10 @@
 				B5C0A9C018EA0DD8008F302C /* WalletsViewController.m */,
 				4C9E91981922AB7400F01423 /* OfflineWalletViewController.h */,
 				4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */,
+				4C5D8C8C1933C7DC0015BB3C /* ExportWalletViewController.h */,
+				4C5D8C8D1933C7DC0015BB3C /* ExportWalletViewController.m */,
+				4C5D8C8F1933C8040015BB3C /* ExportWalletOptionsViewController.h */,
+				4C5D8C901933C8040015BB3C /* ExportWalletOptionsViewController.m */,
 			);
 			path = Wallets;
 			sourceTree = "<group>";
@@ -1795,6 +1815,8 @@
 			isa = PBXGroup;
 			children = (
 				B5F2E9A918D4AF6C008ACF88 /* info.html */,
+				4C72479C1933D3890091C286 /* infoExportWallet.html */,
+				4C72479D1933D3890091C286 /* infoExportWalletOptions.html */,
 				4C5D8C76192E86620015BB3C /* infoImportWallet.html */,
 				4C5D8C6C192E7D4A0015BB3C /* infoRequest.html */,
 				4C5D8C6D192E7D4A0015BB3C /* infoSend.html */,
@@ -1894,6 +1916,7 @@
 				B59C14E618C012B500AEA789 /* btn_checkmark@2x~iphone.png in Resources */,
 				B59C14EA18C012B500AEA789 /* btn_collapse_expand@2x~iphone.png in Resources */,
 				B59C150F18C012B500AEA789 /* emboss_down~iphone.png in Resources */,
+				4C72479E1933D3890091C286 /* infoExportWallet.html in Resources */,
 				B59C152918C012B500AEA789 /* icon_USD_dark~iphone.png in Resources */,
 				B5F2E9C918DCD638008ACF88 /* comp_09.1-send_bitcoin(2).jpg in Resources */,
 				B5675BAC18A19A84002E0703 /* back_arrow~iphone.png in Resources */,
@@ -1911,6 +1934,7 @@
 				B59C151D18C012B500AEA789 /* icon_request_dark@2x~iphone.png in Resources */,
 				B59C152818C012B500AEA789 /* icon_USD_dark@2x~iphone.png in Resources */,
 				B59C141A18C0113A00AEA789 /* bkg_categories@2x~iphone.png in Resources */,
+				4C5D8C8B1933C6FA0015BB3C /* comp_11.1_export.jpg in Resources */,
 				B59C14D818C012B500AEA789 /* btn_7@2x~iphone.png in Resources */,
 				B59C152518C012B500AEA789 /* icon_settings_dark@2x~iphone.png in Resources */,
 				4C5D8C66192D1DE50015BB3C /* icon_not_approved~iphone.png in Resources */,
@@ -1919,6 +1943,7 @@
 				B59C151F18C012B500AEA789 /* icon_request~iphone.png in Resources */,
 				B5FD393118EFC35A00BE2670 /* WalletMakerView~iphone.xib in Resources */,
 				B56553E018ECAFE8005B35E1 /* btn_alwaysConfirm_off~iphone.png in Resources */,
+				4C5D8C8A1933C6FA0015BB3C /* comp_11.2-exporting_saving_options.jpg in Resources */,
 				B55A02FE18EA206300845090 /* btn_changeCategories@2x~iphone.png in Resources */,
 				B59C14CD18C012B500AEA789 /* btn_1~iphone.png in Resources */,
 				B59C151818C012B500AEA789 /* icon_directory@2x~iphone.png in Resources */,
@@ -2082,6 +2107,7 @@
 				B59C150A18C012B500AEA789 /* btn_td_done@2x~iphone.png in Resources */,
 				B5C0A8E118E644EE008F302C /* flash_auto~iphone.png in Resources */,
 				B55A032418EB597D00845090 /* btn_deleteCategory@2x~iphone.png in Resources */,
+				4C72479F1933D3890091C286 /* infoExportWalletOptions.html in Resources */,
 				B59C153718C012B500AEA789 /* tabbar_divider~iphone.png in Resources */,
 				B59C14F018C012B500AEA789 /* btn_equal@2x~iphone.png in Resources */,
 				B59C161E18C145D400AEA789 /* tabbar_bkg_selected@2x~iphone.png in Resources */,
@@ -2275,9 +2301,11 @@
 				B55A031718EA5F5B00845090 /* ButtonOnlyCell.m in Sources */,
 				B5C0A99618EA0BE7008F302C /* categoryCell.m in Sources */,
 				B5137C3B18A435BD00DA4A34 /* CJSONSerializer.m in Sources */,
+				4C5D8C911933C8040015BB3C /* ExportWalletOptionsViewController.m in Sources */,
 				B5675B5818A17F6F002E0703 /* main.m in Sources */,
 				B55A030E18EA4ED400845090 /* TextFieldCell.m in Sources */,
 				4C5D8C5B192AB8E70015BB3C /* Util.m in Sources */,
+				4C5D8C8E1933C7DC0015BB3C /* ExportWalletViewController.m in Sources */,
 				B5137C1518A40EDA00DA4A34 /* LatoLabel.m in Sources */,
 				B56553EF18ECC8E0005B35E1 /* CalculatorView.m in Sources */,
 				B56553F218EDDCF8005B35E1 /* ButtonSelectorView.m in Sources */,
