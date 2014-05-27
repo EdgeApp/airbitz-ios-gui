@@ -14,7 +14,7 @@
 #import "InfoView.h"
 #import "AutoCompleteTextField.h"
 #import "CalculatorView.h"
-#import "PickerTextView.h"
+//#import "PickerTextView.h"
 #import "StylizedTextField.h"
 #import "DL_URLServer.h"
 #import "Server.h"
@@ -26,9 +26,11 @@
 
 #define DOLLAR_CURRENCY_NUM	840
 
-#define USE_NAME_TEXTFIELD	0
+#define USE_NAME_TEXTFIELD	1
 
-@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, AutoCompleteTextFieldDelegate, CalculatorViewDelegate, PickerTextViewDelegate, DL_URLRequestDelegate>
+#define TEXTFIELD_VERTICAL_SPACE_OFFSET	7.0 /* how much space between screen header and textField when textField is scrolled all the way to the top */
+
+@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, AutoCompleteTextFieldDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate>
 {
 	UITextField *activeTextField;
 	CGRect originalFrame;
@@ -40,6 +42,7 @@
 	NSMutableArray *foundContactsArray;	//list of found names from contacts search
 	NSArray *autoCompleteResults;	//found Contacts and found Businesses all merged together and sorted
 	NSArray *contactsArray;		//list of all names from contacts
+	UITableView *autoCompleteTable; //table of autoComplete search results (including address book entries)
 }
 
 @property (nonatomic, weak) IBOutlet UIView *headerView;
@@ -53,9 +56,9 @@
 @property (nonatomic, weak) IBOutlet UITextField *fiatTextField;
 @property (nonatomic, weak) IBOutlet UITextField *notesTextField;
 @property (nonatomic, weak) IBOutlet AutoCompleteTextField *categoryTextField;
-@property (nonatomic, weak) IBOutlet AutoCompleteTextField *nameTextField;
+@property (nonatomic, weak) IBOutlet StylizedTextField *nameTextField;
 @property (nonatomic, weak) IBOutlet CalculatorView *keypadView;
-@property (nonatomic, weak) IBOutlet PickerTextView *namePickerTextView;
+//@property (nonatomic, weak) IBOutlet StylizedTextField *namePickerTextView;
 @end
 
 @implementation TransactionDetailsViewController
@@ -86,7 +89,7 @@
 	self.notesTextField.delegate = self;
 #if	USE_NAME_TEXTFIELD
 	self.nameTextField.delegate = self;
-	self.nameTextField.autoTextFieldDelegate = self;
+	//self.nameTextField.autoTextFieldDelegate = self;
 #else
 	//self.namePickerTextView.textField.delegate = self;
 	self.namePickerTextView.delegate = self;
@@ -117,7 +120,7 @@
 	self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
 #if	USE_NAME_TEXTFIELD
 	self.nameTextField.text = self.transaction.strName;
-    [self.nameTextField setTableBelow:YES];
+    //[self.nameTextField setTableBelow:YES];
     self.notesTextField.text = self.transaction.strNotes;
     self.categoryTextField.text = self.transaction.strCategory;
 #endif
@@ -162,12 +165,15 @@
 			self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.strWalletName];
 		}
 		
-        if (self.transaction.amountFiat == 0) {
+        if (self.transaction.amountFiat == 0)
+		{
             double currency;
             tABC_Error error;
             ABC_SatoshiToCurrency(self.transaction.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
-        } else {
+        }
+		else
+		{
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.amountFiat];
         }
 
@@ -297,33 +303,68 @@
 - (void)keyboardWillShow:(NSNotification *)notification
 {
 	//Get KeyboardFrame (in Window coordinates)
+	NSLog(@"KEYBOARD WILL SHOW");
 	NSDictionary *userInfo = [notification userInfo];
 	CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 	
 	CGRect ownFrame = [self.view.window convertRect:keyboardFrame toView:self.view];
 	
-	//get textfield frame in window coordinates
-	CGRect textFieldFrame = [activeTextField.superview convertRect:activeTextField.frame toView:self.view];
-	
-	//calculate offset
-	float distanceToMove = (textFieldFrame.origin.y + textFieldFrame.size.height + 20.0) - ownFrame.origin.y;
-	
-	if(distanceToMove > 0)
+	if(activeTextField == self.nameTextField)
 	{
-		//need to scroll
-
+		//scroll textfield up to top of screen to make room for tableView.  Once scrolling is complete, spawn the tableView
 		[UIView animateWithDuration:0.35
 							  delay: 0.0
 							options: UIViewAnimationOptionCurveEaseOut
 						 animations:^
 		 {
-			 CGRect frame = originalFrame;
-			 frame.origin.y -= distanceToMove;
-			 self.view.frame = frame;
+			 CGRect frame = originalHeaderFrame;
+			 frame.size.height *= 0.6;
+			 self.headerView.frame = frame;
+			 
+			 CGRect contentFrame = originalContentFrame;
+			 contentFrame.origin.y = frame.origin.y + frame.size.height;
+			 contentFrame.size.height += (frame.size.height - originalHeaderFrame.size.height);
+			 self.contentView.frame = contentFrame;
+			 
+			 CGRect scrollFrame = originalScrollableContentFrame;
+			 scrollFrame.origin.y -= (activeTextField.frame.origin.y - TEXTFIELD_VERTICAL_SPACE_OFFSET);
+			 self.scrollableContentView.frame = scrollFrame;
 		 }
 		 completion:^(BOOL finished)
 		 {
+			 //calculate the tableView frame.  It should start a little below the textField and extend to the top of the keyboard.
+			 CGPoint locationInView = [self.view convertPoint:activeTextField.frame.origin fromView:self.scrollableContentView];
+			 CGRect frame = self.view.bounds;
+			 frame.origin.y = locationInView.y + TEXTFIELD_VERTICAL_SPACE_OFFSET + activeTextField.frame.size.height;
+			 frame.size.height = ownFrame.origin.y - frame.origin.y;
+			 [self spawnPayeeTableInFrame:frame];
 		 }];
+	}
+	else
+	{
+		//get textfield frame in window coordinates
+		CGRect textFieldFrame = [activeTextField.superview convertRect:activeTextField.frame toView:self.view];
+		
+		//calculate offset
+		float distanceToMove = (textFieldFrame.origin.y + textFieldFrame.size.height + 20.0) - ownFrame.origin.y;
+		
+		if(distanceToMove > 0)
+		{
+			//need to scroll
+
+			[UIView animateWithDuration:0.35
+								  delay: 0.0
+								options: UIViewAnimationOptionCurveEaseOut
+							 animations:^
+			 {
+				 CGRect frame = originalFrame;
+				 frame.origin.y -= distanceToMove;
+				 self.view.frame = frame;
+			 }
+			 completion:^(BOOL finished)
+			 {
+			 }];
+		}
 	}
 }
 
@@ -373,7 +414,7 @@
 		[self.categoryTextField becomeFirstResponder];
 	}
 }
-
+/*
 #pragma mark PickerTextView delegates
 
 - (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
@@ -444,28 +485,32 @@
 	//cw [self searchAutocompleteEntriesWithSubstring:searchStr];
 	return YES;
 }
-
+*/
 #pragma mark UITextField delegates
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-	if([textField isKindOfClass:[AutoCompleteTextField class]])
+	/*if([textField isKindOfClass:[AutoCompleteTextField class]])
 	{
 		[(AutoCompleteTextField *)textField autoCompleteTextFieldShouldChangeCharactersInRange:range replacementString:string];
-	}
+	}*/
+	[self kickOffSearchWithString:textField.text];
 	return YES;
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-	NSLog(@"textField class: %@", [textField class]);
+	//NSLog(@"textField class: %@", [textField class]);
+	NSLog(@"SETTING ACTIVE TEXTFIELD");
 	activeTextField = textField;
+	/*
+	
 	self.keypadView.textField = textField;
 	[self createBlockingButtonUnderView:textField];
 	if([textField isKindOfClass:[AutoCompleteTextField class]])
 	{
 		[(AutoCompleteTextField *)textField autoCompleteTextFieldDidBeginEditing];
-	}
+	}*/
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
@@ -484,6 +529,66 @@
 		[self.categoryTextField becomeFirstResponder];
 	}
 	return YES;
+}
+
+#pragma mark - Payee Table
+
+-(void)spawnPayeeTableInFrame:(CGRect)frame
+{
+	CGRect startingFrame = frame;
+	startingFrame.size.height = 0;
+	autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
+	[self.view addSubview:autoCompleteTable];
+	
+	autoCompleteTable.dataSource = self;
+	autoCompleteTable.delegate = self;
+	
+	[UIView animateWithDuration:0.25
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 autoCompleteTable.frame = frame;
+	 }
+	 completion:^(BOOL finished)
+	 {
+		 
+	 }];
+}
+
+#pragma mark table delegates
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [autoCompleteResults count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"PayeeCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    //5.1 you do not need this if you have set SettingsCell as identifier in the storyboard (else you can remove the comments on this code)
+    if (cell == nil)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    
+    cell.textLabel.text = [autoCompleteResults objectAtIndex:indexPath.row];
+    cell.backgroundColor = [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	/*self.text = [autoCompleteResults objectAtIndex:indexPath.row];
+    [self hideTableViewAnimated:YES];
+    [self resignFirstResponder];
+	if([self.autoTextFieldDelegate respondsToSelector:@selector(autoCompleteTextFieldDidSelectFromTable:)])
+	{
+		[self.autoTextFieldDelegate autoCompleteTextFieldDidSelectFromTable:self];
+	}*/
 }
 
 #pragma mark infoView delegates
@@ -543,6 +648,22 @@
 									   cacheResult:YES];
 	}
 #endif
+
+	[foundContactsArray removeAllObjects];
+	for(NSString *curString in contactsArray)
+	{
+		NSRange substringRange = [curString rangeOfString:searchStr options:NSCaseInsensitiveSearch];
+		//
+		if(substringRange.length > 1)
+		{
+			[foundContactsArray addObject:curString];
+		}
+		else if (substringRange.location == 0)
+		{
+			[foundContactsArray addObject:curString];
+		}
+	}
+	
 }
 
 -(void)addLocationToQuery:(NSMutableString *)query
@@ -568,8 +689,8 @@
 	[set addObjectsFromArray:foundBusinessNames];
 	
 	autoCompleteResults = [[set allObjects] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-	//[autoCompleteTableView reloadData];
-	self.namePickerTextView.arrayChoices = autoCompleteResults;
+	[autoCompleteTable reloadData];
+	//cw self.namePickerTextView.arrayChoices = autoCompleteResults;
 }
 
 - (void)generateListOfContactNames

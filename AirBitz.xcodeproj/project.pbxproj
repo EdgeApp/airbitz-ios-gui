@@ -64,7 +64,6 @@
 		4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
 		4C9E919C1922B3C500F01423 /* comp_13-offline_wallet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */; };
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
-		B507ADAD191C21B400F51E1E /* picker_up_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B507ADAC191C21B400F51E1E /* picker_up_point@2x.png */; };
 		B507ADAF191C240E00F51E1E /* picker_left_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */; };
 		B5137C0718A40A8400DA4A34 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFA18A40A8400DA4A34 /* Lato-Black.ttf */; };
 		B5137C0818A40A8400DA4A34 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFB18A40A8400DA4A34 /* Lato-BlackItalic.ttf */; };
@@ -173,6 +172,7 @@
 		B5675BB518A19A84002E0703 /* SearchBarBacking~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BAA18A19A84002E0703 /* SearchBarBacking~iphone.png */; };
 		B5675BBC18A1A1B7002E0703 /* btn_right@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BB818A1A1B7002E0703 /* btn_right@2x~iphone.png */; };
 		B5675BBD18A1A1B7002E0703 /* btn_right~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BB918A1A1B7002E0703 /* btn_right~iphone.png */; };
+		B57288F8193518F600417426 /* San Diego.gpx in Resources */ = {isa = PBXBuildFile; fileRef = B57288F7193518F600417426 /* San Diego.gpx */; };
 		B57C207A18C14687005D7245 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B57C207918C14687005D7245 /* MainViewController.m */; };
 		B57C207D18C15009005D7245 /* TabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B57C207C18C15009005D7245 /* TabBarButton.m */; };
 		B57C209618C25011005D7245 /* BalanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = B57C209518C25011005D7245 /* BalanceView.m */; };
@@ -663,6 +663,7 @@
 		B5675BAA18A19A84002E0703 /* SearchBarBacking~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SearchBarBacking~iphone.png"; sourceTree = "<group>"; };
 		B5675BB818A1A1B7002E0703 /* btn_right@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_right@2x~iphone.png"; sourceTree = "<group>"; };
 		B5675BB918A1A1B7002E0703 /* btn_right~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_right~iphone.png"; sourceTree = "<group>"; };
+		B57288F7193518F600417426 /* San Diego.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "San Diego.gpx"; path = "AirBitz/San Diego.gpx"; sourceTree = "<group>"; };
 		B57C207818C14687005D7245 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		B57C207918C14687005D7245 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		B57C207B18C15009005D7245 /* TabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarButton.h; sourceTree = "<group>"; };
@@ -1234,6 +1235,7 @@
 		B5675B3F18A17F6F002E0703 = {
 			isa = PBXGroup;
 			children = (
+				B57288F7193518F600417426 /* San Diego.gpx */,
 				B5675B5118A17F6F002E0703 /* AirBitz */,
 				B5675B4A18A17F6F002E0703 /* Frameworks */,
 				B5675B4918A17F6F002E0703 /* Products */,
@@ -2158,6 +2160,7 @@
 				B5675B5F18A17F6F002E0703 /* Main_iPhone.storyboard in Resources */,
 				B59C14DF18C012B500AEA789 /* btn_add~iphone.png in Resources */,
 				B59C142118C0113A00AEA789 /* divider~iphone.png in Resources */,
+				B57288F8193518F600417426 /* San Diego.gpx in Resources */,
 				B59C14CE18C012B500AEA789 /* btn_2@2x~iphone.png in Resources */,
 				B5C0A98E18EA0B80008F302C /* AnnotationContentView.xib in Resources */,
 				B59C143918C0129300AEA789 /* bd_icon_clock@2x~iphone.png in Resources */,

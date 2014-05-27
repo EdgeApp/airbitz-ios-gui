@@ -1376,7 +1376,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="t8h-iv-TGi" userLabel="View - Bottom">
-                                        <rect key="frame" x="0.0" y="137" width="320" height="327"/>
+                                        <rect key="frame" x="0.0" y="137.00000048887048" width="320" height="326.99999951112954"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="1Ab-Lx-n8L">
@@ -1384,11 +1384,11 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_flash_controls.png" id="jdY-n5-XnA">
-                                                <rect key="frame" x="0.0" y="257" width="320" height="70"/>
+                                                <rect key="frame" x="0.0" y="257" width="320" height="69.999999511129488"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" id="VVV-KZ-RL3" customClass="FlashSelectView">
-                                                <rect key="frame" x="85" y="265" width="149" height="50"/>
+                                                <rect key="frame" x="85" y="265" width="149" height="49.999999922401507"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
@@ -2348,7 +2348,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                             </textField>
-                                            <view contentMode="scaleToFill" id="Oh9-NW-Kli" customClass="PickerTextView">
+                                            <view contentMode="scaleToFill" id="Oh9-NW-Kli" customClass="StylizedTextField">
                                                 <rect key="frame" x="41" y="33" width="237" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2477,8 +2477,7 @@
                         <outlet property="fiatTextField" destination="s2W-q2-bds" id="1OR-cM-zzQ"/>
                         <outlet property="headerView" destination="ahZ-L3-08Q" id="bTO-Aw-qCZ"/>
                         <outlet property="keypadView" destination="XNd-9N-hLm" id="n96-xl-rlz"/>
-                        <outlet property="namePickerTextView" destination="Oh9-NW-Kli" id="qtk-pF-RMg"/>
-                        <outlet property="nameTextField" destination="OfO-P5-oOb" id="7EC-0C-tID"/>
+                        <outlet property="nameTextField" destination="Oh9-NW-Kli" id="vud-Pa-Zxs"/>
                         <outlet property="notesTextField" destination="Kch-gx-opX" id="IQ6-In-5GR"/>
                         <outlet property="scrollableContentView" destination="8ur-EV-QC9" id="brw-Ba-G3c"/>
                         <outlet property="walletLabel" destination="ZW8-Za-VVy" id="bUD-dm-roi"/>
@@ -2868,6 +2867,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="tableView" destination="LpR-CU-fxh" id="1Np-yc-ip1"/>
                         <outlet property="viewMain" destination="3by-jV-Cix" id="xdv-vF-wkE"/>
