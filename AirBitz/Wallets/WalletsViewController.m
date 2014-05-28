@@ -247,30 +247,28 @@
 
 - (void)bringUpOfflineWalletView
 {
-    {
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-        _offlineWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OfflineWalletViewController"];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    _offlineWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OfflineWalletViewController"];
 
-        _offlineWalletViewController.delegate = self;
+    _offlineWalletViewController.delegate = self;
 
-        CGRect frame = self.view.bounds;
-        frame.origin.x = frame.size.width;
-        _offlineWalletViewController.view.frame = frame;
-        [self.view addSubview:_offlineWalletViewController.view];
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _offlineWalletViewController.view.frame = frame;
+    [self.view addSubview:_offlineWalletViewController.view];
 
-        [UIView animateWithDuration:0.35
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^
-         {
-             _offlineWalletViewController.view.frame = self.view.bounds;
-         }
-                         completion:^(BOOL finished)
-         {
-             [self hideWalletMaker];
-             [self removeBlockingButton];
-         }];
-    }
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         _offlineWalletViewController.view.frame = self.view.bounds;
+     }
+                     completion:^(BOOL finished)
+     {
+         [self hideWalletMaker];
+         [self removeBlockingButton];
+     }];
 }
 
 #pragma mark - Action Methods
