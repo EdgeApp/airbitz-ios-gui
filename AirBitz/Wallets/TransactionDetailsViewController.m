@@ -37,7 +37,6 @@
 {
 	UITextField     *_activeTextField;
 	CGRect          _originalFrame;
-	UIButton        *_blockingButton;
 	CGRect          _originalHeaderFrame;
 	CGRect          _originalContentFrame;
 	CGRect          _originalScrollableContentFrame;
@@ -92,7 +91,9 @@
 	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateSelected];
 	
 	_foundBusinessNames = [[NSMutableArray alloc] init];
+    
 	self.keypadView.delegate = self;
+    self.keypadView.textField = self.fiatTextField;
 	
 	self.fiatTextField.delegate = self;
 	self.fiatTextField.inputView = self.keypadView;
@@ -174,7 +175,7 @@
 		frame.origin.y = 0;
 		_originalFrame = frame;
 		
-		if(_transactionDetailsMode == TD_MODE_SENT)
+		if (_transactionDetailsMode == TD_MODE_SENT)
 		{
 			self.walletLabel.text = [NSString stringWithFormat:@"From: %@", self.transaction.strWalletName];
 		}
@@ -195,6 +196,7 @@
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.amountFiat];
         }
 
+        // push the calculator keypad to below the bottom of the screen
 		frame = self.keypadView.frame;
 		frame.origin.y = frame.origin.y + frame.size.height;
 		self.keypadView.frame = frame;
@@ -212,65 +214,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - blocking button
-
-- (void)createBlockingButtonUnderView:(UIView *)view
-{
-	[[view superview] bringSubviewToFront:view];
-	
-	_blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	CGRect frame = self.view.bounds;
-	//frame.origin.y = self.headerView.frame.origin.y + self.headerView.frame.size.height;
-	//frame.size.height = self.view.bounds.size.height - frame.origin.y;
-	_blockingButton.frame = frame;
-	_blockingButton.backgroundColor = [UIColor clearColor]; //[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-	[self.view insertSubview:_blockingButton belowSubview:view];
-	_blockingButton.alpha = 0.0;
-	
-	[_blockingButton addTarget:self
-					   action:@selector(blockingButtonHit:)
-			 forControlEvents:UIControlEventTouchDown];
-	
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveLinear
-					 animations:^
-	 {
-		 _blockingButton.alpha = 1.0;
-	 }
-					 completion:^(BOOL finished)
-	 {
-		 
-	 }];
-	
-}
-
-- (void)removeBlockingButton
-{
-	//[self.walletMakerView.textField resignFirstResponder];
-	if(_blockingButton)
-	{
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveLinear
-						 animations:^
-		 {
-			 _blockingButton.alpha = 0.0;
-		 }
-						 completion:^(BOOL finished)
-		 {
-			 [_blockingButton removeFromSuperview];
-			 _blockingButton = nil;
-		 }];
-	}
-}
-
-- (void)blockingButtonHit:(UIButton *)button
-{
-	//[self hideWalletMaker];
-	[self.view endEditing:YES];
-	[self removeBlockingButton];
-}
 
 #pragma mark - Action Methods
 
@@ -426,7 +369,7 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-	if(_activeTextField)
+	if (_activeTextField)
 	{
 		/*if([activeTextField isKindOfClass:[AutoCompleteTextField class]])
 		{
@@ -434,13 +377,10 @@
 			[(AutoCompleteTextField *)activeTextField autoCompleteTextFieldShouldReturn];
 		}*/
 		_activeTextField = nil;
-		
-		 
-		 [self removeBlockingButton];
 	}
 }
 
-#pragma mark - calculator delegates
+#pragma mark - Calculator delegates
 
 - (void)CalculatorDone:(CalculatorView *)calculator
 {
@@ -449,6 +389,7 @@
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
+    NSLog(@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
 }
 
 
