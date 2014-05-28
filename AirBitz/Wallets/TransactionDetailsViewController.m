@@ -298,6 +298,23 @@
 	return stretchable;
 }
 
+-(void)scrollContentViewBackToOriginalPosition
+{
+	[UIView animateWithDuration:0.35
+						  delay: 0.0
+						options: UIViewAnimationOptionCurveEaseOut
+					 animations:^
+	 {
+		 self.view.frame = originalFrame;
+		 CGRect frame = self.scrollableContentView.frame;
+		 frame.origin.y = 0;
+		 self.scrollableContentView.frame = frame;
+	 }
+					 completion:^(BOOL finished)
+	 {
+	 }];
+}
+
 #pragma mark Keyboard callbacks
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -372,22 +389,13 @@
 {
 	if(activeTextField)
 	{
-		if([activeTextField isKindOfClass:[AutoCompleteTextField class]])
+		/*if([activeTextField isKindOfClass:[AutoCompleteTextField class]])
 		{
 			//hide autocomplete tableView if visible
 			[(AutoCompleteTextField *)activeTextField autoCompleteTextFieldShouldReturn];
-		}
+		}*/
 		activeTextField = nil;
-		[UIView animateWithDuration:0.35
-							  delay: 0.0
-							options: UIViewAnimationOptionCurveEaseOut
-						 animations:^
-		 {
-			 self.view.frame = originalFrame;
-		 }
-		 completion:^(BOOL finished)
-		 {
-		 }];
+		
 		 
 		 [self removeBlockingButton];
 	}
@@ -543,7 +551,7 @@
 	autoCompleteTable.dataSource = self;
 	autoCompleteTable.delegate = self;
 	
-	[UIView animateWithDuration:0.25
+	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
@@ -553,6 +561,27 @@
 	 completion:^(BOOL finished)
 	 {
 		 
+	 }];
+}
+
+-(void)dismissPayeeTable
+{
+	CGRect frame = autoCompleteTable.frame;
+	frame.size.height = 0.0;
+	frame.origin.y = 0.0;
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 autoCompleteTable.frame = frame;
+	 }
+					 completion:^(BOOL finished)
+	 {
+		 [autoCompleteTable removeFromSuperview];
+		 autoCompleteTable = nil;
+		 
+		 [self scrollContentViewBackToOriginalPosition];
 	 }];
 }
 
@@ -582,6 +611,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	self.nameTextField.text = [autoCompleteResults objectAtIndex:indexPath.row];
+	
+	//dismiss the tableView
+	[self dismissPayeeTable];
+	[self.nameTextField resignFirstResponder];
+	
 	/*self.text = [autoCompleteResults objectAtIndex:indexPath.row];
     [self hideTableViewAnimated:YES];
     [self resignFirstResponder];
