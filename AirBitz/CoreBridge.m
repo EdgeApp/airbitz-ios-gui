@@ -200,31 +200,32 @@
                                                [transaction.strWalletUUID UTF8String],
                                                [transaction.strID UTF8String],
                                                &pDetails, &Error);
-    if (ABC_CC_Ok == result)
+    if (ABC_CC_Ok != result)
     {
         NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
         [Util printABC_Error:&Error];
         return false;
     }
+
     pDetails->szName = (char *) [transaction.strName UTF8String];
     pDetails->szCategory = (char *) [transaction.strCategory UTF8String];
     pDetails->szNotes = (char *) [transaction.strNotes UTF8String];
     pDetails->amountCurrency = transaction.amountFiat;
-    ABC_SetTransactionDetails([[User Singleton].name UTF8String], 
-                            [[User Singleton].password UTF8String], 
-                            [transaction.strWalletUUID UTF8String],
-                            [transaction.strID UTF8String],
-                            pDetails, &Error);
-    if (ABC_CC_Ok == Error.code)
-    {
-        return true;
-    }
-    else 
+
+    result = ABC_SetTransactionDetails([[User Singleton].name UTF8String],
+                                       [[User Singleton].password UTF8String],
+                                       [transaction.strWalletUUID UTF8String],
+                                       [transaction.strID UTF8String],
+                                       pDetails, &Error);
+    
+    if (ABC_CC_Ok != result)
     {
         NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
         [Util printABC_Error:&Error];
         return false;
     }
+
+    return true;
 }
 
 + (NSDate *)dateFromTimestamp:(int64_t) intDate

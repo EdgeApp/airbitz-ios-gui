@@ -384,6 +384,9 @@
 	
 	_transactionDetailsController.delegate = self;
 	_transactionDetailsController.transaction = transaction;
+    _transactionDetailsController.bOldTransaction = YES;
+    _transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
+
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
 	_transactionDetailsController.view.frame = frame;

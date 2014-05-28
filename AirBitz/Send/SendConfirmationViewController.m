@@ -337,11 +337,11 @@
 	double currency;
 	
 	result = ABC_SatoshiToCurrency([self.amountBTCTextField.text doubleValue], &currency, DOLLAR_CURRENCY_NUM, &Error);
-	if(result == ABC_CC_Ok)
+	if (result == ABC_CC_Ok)
 	{
 		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
 		
-		if(nCount)
+		if (nCount)
 		{
 			tABC_TxDetails Details;
 			Details.amountSatoshi = self.amountToSendSatoshi;
@@ -363,7 +363,7 @@
 										ABC_SendConfirmation_Callback,
 										(__bridge void *)self,
 										&Error);
-			if(result == ABC_CC_Ok)
+			if (result == ABC_CC_Ok)
 			{
 				[self showSendStatus];
 			}
@@ -402,12 +402,14 @@
 	
 	_transactionDetailsController.delegate = self;
 	_transactionDetailsController.transaction = transaction;
+    _transactionDetailsController.bOldTransaction = NO;
+    _transactionDetailsController.transactionDetailsMode = TD_MODE_SENT;
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
 	_transactionDetailsController.view.frame = frame;
 	
 	//transactionDetailsController.nameLabel.text = self.nameLabel;
-	_transactionDetailsController.transactionDetailsMode = TD_MODE_SENT;
+
 	
 	[self.view addSubview:_transactionDetailsController.view];
 	[UIView animateWithDuration:0.35
@@ -512,6 +514,34 @@
 	
 }
 
+- (void)updateTextFieldContents
+{
+	tABC_CC result;
+	double currency;
+	tABC_Error error;
+
+	if(_selectedTextField == self.amountBTCTextField)
+	{
+		double value = [self.amountBTCTextField.text doubleValue];
+        self.amountToSendSatoshi = [CoreBridge denominationToSatoshi: value];
+		result = ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+		if(result == ABC_CC_Ok)
+		{
+			self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
+		}
+	}
+	else
+	{
+		int64_t satoshi;
+		result = ABC_CurrencyToSatoshi([self.amountUSDTextField.text doubleValue], DOLLAR_CURRENCY_NUM, &satoshi, &error);
+		if(result == ABC_CC_Ok)
+		{
+			self.amountToSendSatoshi = satoshi;
+            self.amountBTCTextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
+		}
+	}
+}
+
 #pragma mark - UITextField delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -532,7 +562,7 @@
 {
 	//make sure PIN is good
 	
-	if(self.withdrawlPIN.text.length)
+	if (self.withdrawlPIN.text.length)
 	{
 		//make sure the entered PIN matches the PIN stored in the Core
 		tABC_Error error;
@@ -541,10 +571,10 @@
 		ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szPIN, &error);
 		[Util printABC_Error:&error];
 		NSLog(@"current PIN: %s", szPIN);
-		if(szPIN)
+		if (szPIN)
 		{
 			NSString *storedPIN = [NSString stringWithUTF8String:szPIN];
-			if([self.withdrawlPIN.text isEqualToString:storedPIN])
+			if ([self.withdrawlPIN.text isEqualToString:storedPIN])
 			{
 				NSLog(@"SUCCESS!");
 				[self initiateSendRequest];
@@ -589,34 +619,6 @@
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
 	[self updateTextFieldContents];
-}
-
-- (void)updateTextFieldContents
-{
-	tABC_CC result;
-	double currency;
-	tABC_Error error;
-	
-	if(_selectedTextField == self.amountBTCTextField)
-	{
-		double value = [self.amountBTCTextField.text doubleValue];
-        self.amountToSendSatoshi = [CoreBridge denominationToSatoshi: value];
-		result = ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-		if(result == ABC_CC_Ok)
-		{
-			self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
-		}
-	}
-	else
-	{
-		int64_t satoshi;
-		result = ABC_CurrencyToSatoshi([self.amountUSDTextField.text doubleValue], DOLLAR_CURRENCY_NUM, &satoshi, &error);
-		if(result == ABC_CC_Ok)
-		{
-			self.amountToSendSatoshi = satoshi;
-            self.amountBTCTextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
-		}
-	}
 }
 
 #pragma mark - TransactionDetailsViewController delegates

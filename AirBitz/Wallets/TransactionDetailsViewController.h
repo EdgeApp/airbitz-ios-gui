@@ -19,15 +19,17 @@ typedef enum eTDMode
 
 @interface TransactionDetailsViewController : UIViewController
 
-@property (assign) id<TransactionDetailsViewControllerDelegate> delegate;
-@property (nonatomic, strong) Transaction *transaction;
-@property (nonatomic, assign) tTDMode transactionDetailsMode;
+@property (assign)            id<TransactionDetailsViewControllerDelegate>  delegate;
+@property (nonatomic, strong) Transaction                                   *transaction;
+@property (nonatomic, assign) tTDMode                                       transactionDetailsMode;
+@property (nonatomic, assign) BOOL                                          bOldTransaction;
 
 @end
 
 @protocol TransactionDetailsViewControllerDelegate <NSObject>
 
 @required
--(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller;
+- (void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller;
 @optional
+
 @end

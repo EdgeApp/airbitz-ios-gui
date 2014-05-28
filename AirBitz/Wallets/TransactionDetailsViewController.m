@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
+#import <AddressBook/AddressBook.h>
 #import "TransactionDetailsViewController.h"
 #import "CoreBridge.h"
 #import "User.h"
@@ -14,13 +15,15 @@
 #import "InfoView.h"
 #import "AutoCompleteTextField.h"
 #import "CalculatorView.h"
-//#import "PickerTextView.h"
+#import "PickerTextView.h"
 #import "StylizedTextField.h"
 #import "DL_URLServer.h"
 #import "Server.h"
 #import "Location.h"
 #import "CJSONDeserializer.h"
-#import <AddressBook/AddressBook.h>
+#import "Util.h"
+#import "CommonTypes.h"
+
 
 #define USE_AUTOCOMPLETE_QUERY 0
 
@@ -32,32 +35,32 @@
 
 @interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, AutoCompleteTextFieldDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate>
 {
-	UITextField *activeTextField;
-	CGRect originalFrame;
-	UIButton *blockingButton;
-	CGRect originalHeaderFrame;
-	CGRect originalContentFrame;
-	CGRect originalScrollableContentFrame;
-	NSMutableArray *foundBusinessNames;	//list of found names from business search
-	NSMutableArray *foundContactsArray;	//list of found names from contacts search
-	NSArray *autoCompleteResults;	//found Contacts and found Businesses all merged together and sorted
-	NSArray *contactsArray;		//list of all names from contacts
-	UITableView *autoCompleteTable; //table of autoComplete search results (including address book entries)
+	UITextField     *_activeTextField;
+	CGRect          _originalFrame;
+	UIButton        *_blockingButton;
+	CGRect          _originalHeaderFrame;
+	CGRect          _originalContentFrame;
+	CGRect          _originalScrollableContentFrame;
+	NSMutableArray  *_foundBusinessNames;	//list of found names from business search
+	NSMutableArray  *_foundContactsArray;	//list of found names from contacts search
+	NSArray         *_autoCompleteResults;	//found Contacts and found Businesses all merged together and sorted
+	NSArray         *_contactsArray;		//list of all names from contacts
+	UITableView     *_autoCompleteTable; //table of autoComplete search results (including address book entries)
 }
 
-@property (nonatomic, weak) IBOutlet UIView *headerView;
-@property (nonatomic, weak) IBOutlet UIView *contentView;
-@property (nonatomic, weak) IBOutlet UIView *scrollableContentView;
-@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
-@property (nonatomic, weak) IBOutlet UILabel *walletLabel;
-@property (nonatomic, weak) IBOutlet UILabel *bitCoinLabel;
-@property (nonatomic, weak) IBOutlet UIButton *advancedDetailsButton;
-@property (nonatomic, weak) IBOutlet UIButton *doneButton;
-@property (nonatomic, weak) IBOutlet UITextField *fiatTextField;
-@property (nonatomic, weak) IBOutlet UITextField *notesTextField;
-@property (nonatomic, weak) IBOutlet StylizedTextField *categoryTextField;
-@property (nonatomic, weak) IBOutlet StylizedTextField *nameTextField;
-@property (nonatomic, weak) IBOutlet CalculatorView *keypadView;
+@property (nonatomic, weak) IBOutlet UIView             *headerView;
+@property (nonatomic, weak) IBOutlet UIView             *contentView;
+@property (nonatomic, weak) IBOutlet UIView             *scrollableContentView;
+@property (nonatomic, weak) IBOutlet UILabel            *dateLabel;
+@property (nonatomic, weak) IBOutlet UILabel            *walletLabel;
+@property (nonatomic, weak) IBOutlet UILabel            *bitCoinLabel;
+@property (nonatomic, weak) IBOutlet UIButton           *advancedDetailsButton;
+@property (nonatomic, weak) IBOutlet UIButton           *doneButton;
+@property (nonatomic, weak) IBOutlet UITextField        *fiatTextField;
+@property (nonatomic, weak) IBOutlet UITextField        *notesTextField;
+@property (nonatomic, weak) IBOutlet StylizedTextField  *categoryTextField;
+@property (nonatomic, weak) IBOutlet StylizedTextField  *nameTextField;
+@property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
 //@property (nonatomic, weak) IBOutlet StylizedTextField *namePickerTextView;
 @end
 
@@ -75,13 +78,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 	// Do any additional setup after loading the view.
+
+    // set the keyboard return button based upon mode
+    self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
+    self.categoryTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
+    self.notesTextField.returnKeyType = UIReturnKeyDone;
+
 	[self generateListOfContactNames];
 	UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
 	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateNormal];
 	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateSelected];
 	
-	foundBusinessNames = [[NSMutableArray alloc] init];
+	_foundBusinessNames = [[NSMutableArray alloc] init];
 	self.keypadView.delegate = self;
 	
 	self.fiatTextField.delegate = self;
@@ -138,27 +148,31 @@
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 #if USE_NAME_TEXTFIELD
 	self.nameTextField.placeholder = NSLocalizedString(@"Payee or Business Name", nil);
-	[self.nameTextField becomeFirstResponder];
+    if (!self.bOldTransaction)
+    {
+        [self.nameTextField becomeFirstResponder];
+    }
 #else
 	
 	[self.namePickerTextView setTextFieldObject:[[StylizedTextField alloc] initWithFrame:self.namePickerTextView.textField.frame]];
 	self.namePickerTextView.textField.text = self.transaction.strName;
 	self.namePickerTextView.textField.placeholder = NSLocalizedString(@"Payee or Business Name", nil);
 #endif	
-	originalHeaderFrame = self.headerView.frame;
-	originalContentFrame = self.contentView.frame;
-	originalScrollableContentFrame = self.scrollableContentView.frame;
+	_originalHeaderFrame = self.headerView.frame;
+	_originalContentFrame = self.contentView.frame;
+	_originalScrollableContentFrame = self.scrollableContentView.frame;
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
-	if(originalFrame.size.height == 0)
+
+	if (_originalFrame.size.height == 0)
 	{
 		CGRect frame = self.view.frame;
 		frame.origin.x = 0;
 		frame.origin.y = 0;
-		originalFrame = frame;
+		_originalFrame = frame;
 		
 		if(_transactionDetailsMode == TD_MODE_SENT)
 		{
@@ -187,7 +201,7 @@
 	}
 }
 
--(void)viewDidDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
 	[self.delegate TransactionDetailsViewControllerDone:self];
 }
@@ -198,22 +212,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark blocking button
+#pragma mark - blocking button
 
--(void)createBlockingButtonUnderView:(UIView *)view
+- (void)createBlockingButtonUnderView:(UIView *)view
 {
 	[[view superview] bringSubviewToFront:view];
 	
-	blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	_blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	CGRect frame = self.view.bounds;
 	//frame.origin.y = self.headerView.frame.origin.y + self.headerView.frame.size.height;
 	//frame.size.height = self.view.bounds.size.height - frame.origin.y;
-	blockingButton.frame = frame;
-	blockingButton.backgroundColor = [UIColor clearColor]; //[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-	[self.view insertSubview:blockingButton belowSubview:view];
-	blockingButton.alpha = 0.0;
+	_blockingButton.frame = frame;
+	_blockingButton.backgroundColor = [UIColor clearColor]; //[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+	[self.view insertSubview:_blockingButton belowSubview:view];
+	_blockingButton.alpha = 0.0;
 	
-	[blockingButton addTarget:self
+	[_blockingButton addTarget:self
 					   action:@selector(blockingButtonHit:)
 			 forControlEvents:UIControlEventTouchDown];
 	
@@ -222,7 +236,7 @@
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {
-		 blockingButton.alpha = 1.0;
+		 _blockingButton.alpha = 1.0;
 	 }
 					 completion:^(BOOL finished)
 	 {
@@ -231,37 +245,39 @@
 	
 }
 
--(void)removeBlockingButton
+- (void)removeBlockingButton
 {
 	//[self.walletMakerView.textField resignFirstResponder];
-	if(blockingButton)
+	if(_blockingButton)
 	{
 		[UIView animateWithDuration:0.35
 							  delay:0.0
 							options:UIViewAnimationOptionCurveLinear
 						 animations:^
 		 {
-			 blockingButton.alpha = 0.0;
+			 _blockingButton.alpha = 0.0;
 		 }
 						 completion:^(BOOL finished)
 		 {
-			 [blockingButton removeFromSuperview];
-			 blockingButton = nil;
+			 [_blockingButton removeFromSuperview];
+			 _blockingButton = nil;
 		 }];
 	}
 }
 
--(void)blockingButtonHit:(UIButton *)button
+- (void)blockingButtonHit:(UIButton *)button
 {
 	//[self hideWalletMaker];
 	[self.view endEditing:YES];
 	[self removeBlockingButton];
 }
 
-#pragma mark actions
+#pragma mark - Action Methods
 
--(IBAction)Done
+- (IBAction)Done
 {
+    [self resignAllResponders];
+
     self.transaction.strName = [self.nameTextField text];
     self.transaction.strNotes = [self.notesTextField text];
     self.transaction.strCategory = [self.categoryTextField text];
@@ -271,8 +287,10 @@
 	[self.delegate TransactionDetailsViewControllerDone:self];
 }
 
--(IBAction)AdvancedDetails
+- (IBAction)AdvancedDetails
 {
+    [self resignAllResponders];
+
 	//spawn infoView
 	InfoView *iv = [InfoView CreateWithDelegate:self];
 	iv.frame = self.view.bounds;
@@ -295,21 +313,23 @@
 	[self.view addSubview:iv];
 }
 
--(UIImage *)stretchableImage:(NSString *)imageName
+#pragma mark - Misc Methods
+
+- (UIImage *)stretchableImage:(NSString *)imageName
 {
 	UIImage *img = [UIImage imageNamed:imageName];
 	UIImage *stretchable = [img resizableImageWithCapInsets:UIEdgeInsetsMake(28, 28, 28, 28)]; //top, left, bottom, right
 	return stretchable;
 }
 
--(void)scrollContentViewBackToOriginalPosition
+- (void)scrollContentViewBackToOriginalPosition
 {
 	[UIView animateWithDuration:0.35
 						  delay: 0.0
 						options: UIViewAnimationOptionCurveEaseOut
 					 animations:^
 	 {
-		 self.view.frame = originalFrame;
+		 self.view.frame = _originalFrame;
 		 CGRect frame = self.scrollableContentView.frame;
 		 frame.origin.y = 0;
 		 self.scrollableContentView.frame = frame;
@@ -319,7 +339,15 @@
 	 }];
 }
 
-#pragma mark Keyboard callbacks
+- (void)resignAllResponders
+{
+    [self.notesTextField resignFirstResponder];
+    [self.categoryTextField resignFirstResponder];
+    [self.nameTextField resignFirstResponder];
+    [self dismissPayeeTable];
+}
+
+#pragma mark - Keyboard callbacks
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
@@ -330,7 +358,7 @@
 	
 	CGRect ownFrame = [self.view.window convertRect:keyboardFrame toView:self.view];
 	
-	if((activeTextField == self.nameTextField) || (activeTextField == self.categoryTextField))
+	if((_activeTextField == self.nameTextField) || (_activeTextField == self.categoryTextField))
 	{
 		//scroll textfield up to top of screen to make room for tableView.  Once scrolling is complete, spawn the tableView
 		[UIView animateWithDuration:0.35
@@ -338,27 +366,27 @@
 							options: UIViewAnimationOptionCurveEaseOut
 						 animations:^
 		 {
-			 CGRect headerFrame = originalHeaderFrame;
+			 CGRect headerFrame = _originalHeaderFrame;
 			 headerFrame.size.height *= 0.6;
 			 self.headerView.frame = headerFrame;
 			 
-			 CGRect contentFrame = originalContentFrame;
+			 CGRect contentFrame = _originalContentFrame;
 			 contentFrame.origin.y = headerFrame.origin.y + headerFrame.size.height;
-			 contentFrame.size.height += (headerFrame.size.height - originalHeaderFrame.size.height);
+			 contentFrame.size.height += (headerFrame.size.height - _originalHeaderFrame.size.height);
 			 self.contentView.frame = contentFrame;
 			 
-			 CGRect scrollFrame = originalScrollableContentFrame;
-			 scrollFrame.origin.y -= (activeTextField.frame.origin.y - TEXTFIELD_VERTICAL_SPACE_OFFSET);
+			 CGRect scrollFrame = _originalScrollableContentFrame;
+			 scrollFrame.origin.y -= (_activeTextField.frame.origin.y - TEXTFIELD_VERTICAL_SPACE_OFFSET);
 			 self.scrollableContentView.frame = scrollFrame;
 		 }
 		 completion:^(BOOL finished)
 		 {
 			 //calculate the tableView frame.  It should start a little below the textField and extend to the top of the keyboard.
-			 CGPoint locationInView = [self.view convertPoint:activeTextField.frame.origin fromView:self.scrollableContentView];
+			 CGPoint locationInView = [self.view convertPoint:_activeTextField.frame.origin fromView:self.scrollableContentView];
 			 CGRect frame = self.view.bounds;
-			 frame.origin.y = locationInView.y + TEXTFIELD_VERTICAL_SPACE_OFFSET + activeTextField.frame.size.height;
+			 frame.origin.y = locationInView.y + TEXTFIELD_VERTICAL_SPACE_OFFSET + _activeTextField.frame.size.height;
 			 frame.size.height = ownFrame.origin.y - frame.origin.y;
-			 if(activeTextField == self.nameTextField)
+			 if(_activeTextField == self.nameTextField)
 			 {
 				 [self spawnPayeeTableInFrame:frame];
 			 }
@@ -398,35 +426,35 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-	if(activeTextField)
+	if(_activeTextField)
 	{
 		/*if([activeTextField isKindOfClass:[AutoCompleteTextField class]])
 		{
 			//hide autocomplete tableView if visible
 			[(AutoCompleteTextField *)activeTextField autoCompleteTextFieldShouldReturn];
 		}*/
-		activeTextField = nil;
+		_activeTextField = nil;
 		
 		 
 		 [self removeBlockingButton];
 	}
 }
 
-#pragma mark calculator delegates
+#pragma mark - calculator delegates
 
--(void)CalculatorDone:(CalculatorView *)calculator
+- (void)CalculatorDone:(CalculatorView *)calculator
 {
 	[self.fiatTextField resignFirstResponder];
 }
 
--(void)CalculatorValueChanged:(CalculatorView *)calculator
+- (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
 }
 
 
-#pragma mark AutoCompleteTextField delegates
+#pragma mark - AutoCompleteTextField delegates
 
--(void)autoCompleteTextFieldDidSelectFromTable:(AutoCompleteTextField *)textField
+- (void)autoCompleteTextFieldDidSelectFromTable:(AutoCompleteTextField *)textField
 {
 	if(textField == self.nameTextField)
 	{
@@ -505,7 +533,7 @@
 	return YES;
 }
 */
-#pragma mark UITextField delegates
+#pragma mark - UITextField delegates
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -513,15 +541,19 @@
 	{
 		[(AutoCompleteTextField *)textField autoCompleteTextFieldShouldChangeCharactersInRange:range replacementString:string];
 	}*/
-	[self kickOffSearchWithString:textField.text];
+
+    if (textField == self.nameTextField)
+    {
+        [self kickOffSearchWithString:textField.text];
+    }
 	return YES;
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	//NSLog(@"textField class: %@", [textField class]);
 	NSLog(@"SETTING ACTIVE TEXTFIELD");
-	activeTextField = textField;
+	_activeTextField = textField;
 	/*
 	
 	self.keypadView.textField = textField;
@@ -532,48 +564,59 @@
 	}*/
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	/*if([textField isKindOfClass:[AutoCompleteTextField class]])
 	{
 		[(AutoCompleteTextField *)textField autoCompleteTextFieldShouldReturn];
 	}*/
-	
+
 	[textField resignFirstResponder];
 	
-	if(textField == self.nameTextField)
+	if (textField == self.nameTextField)
 	{
 		[self dismissPayeeTable];
-		[self.categoryTextField becomeFirstResponder];
+        if (!self.bOldTransaction)
+        {
+            [self.categoryTextField becomeFirstResponder];
+        }
 	}
-	else
-	{
-		[self dismissPayeeTable];
-	}
+    else if (textField == self.categoryTextField)
+    {
+        // TODO: temp until we use a picker
+        [self dismissPayeeTable];
+
+        if (!self.bOldTransaction)
+        {
+            [self.notesTextField becomeFirstResponder];
+        }
+    }
+
 	return YES;
 }
 
 #pragma mark - Category Table
+
 -(void)spawnCategoryTableInFrame:(CGRect)frame
 {
 	CGRect startingFrame = frame;
 	startingFrame.size.height = 0;
-	autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
-	[self.view addSubview:autoCompleteTable];
+	_autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
+	[self.view addSubview:_autoCompleteTable];
 	
-	autoCompleteTable.dataSource = self;
-	autoCompleteTable.delegate = self;
+	_autoCompleteTable.dataSource = self;
+	_autoCompleteTable.delegate = self;
 	
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 autoCompleteTable.frame = frame;
+		 _autoCompleteTable.frame = frame;
 	 }
 					 completion:^(BOOL finished)
 	 {
@@ -583,22 +626,22 @@
 
 #pragma mark - Payee Table
 
--(void)spawnPayeeTableInFrame:(CGRect)frame
+- (void)spawnPayeeTableInFrame:(CGRect)frame
 {
 	CGRect startingFrame = frame;
 	startingFrame.size.height = 0;
-	autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
-	[self.view addSubview:autoCompleteTable];
+	_autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
+	[self.view addSubview:_autoCompleteTable];
 	
-	autoCompleteTable.dataSource = self;
-	autoCompleteTable.delegate = self;
+	_autoCompleteTable.dataSource = self;
+	_autoCompleteTable.delegate = self;
 	
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 autoCompleteTable.frame = frame;
+		 _autoCompleteTable.frame = frame;
 	 }
 	 completion:^(BOOL finished)
 	 {
@@ -606,11 +649,11 @@
 	 }];
 }
 
--(void)dismissPayeeTable
+- (void)dismissPayeeTable
 {
-	if(autoCompleteTable)
+	if (_autoCompleteTable)
 	{
-		CGRect frame = autoCompleteTable.frame;
+		CGRect frame = _autoCompleteTable.frame;
 		frame.size.height = 0.0;
 		frame.origin.y = 0.0;
 		[UIView animateWithDuration:0.35
@@ -618,23 +661,23 @@
 							options:UIViewAnimationOptionCurveEaseInOut
 						 animations:^
 		 {
-			 autoCompleteTable.frame = frame;
+			 _autoCompleteTable.frame = frame;
 		 }
 						 completion:^(BOOL finished)
 		 {
-			 [autoCompleteTable removeFromSuperview];
-			 autoCompleteTable = nil;
+			 [_autoCompleteTable removeFromSuperview];
+			 _autoCompleteTable = nil;
 			 
 			 [self scrollContentViewBackToOriginalPosition];
 		 }];
 	}
 }
 
-#pragma mark table delegates
+#pragma mark - UITableView delegates
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [autoCompleteResults count];
+    return [_autoCompleteResults count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -647,7 +690,7 @@
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     
-    cell.textLabel.text = [autoCompleteResults objectAtIndex:indexPath.row];
+    cell.textLabel.text = [_autoCompleteResults objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -656,7 +699,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	self.nameTextField.text = [autoCompleteResults objectAtIndex:indexPath.row];
+	self.nameTextField.text = [_autoCompleteResults objectAtIndex:indexPath.row];
 	
 	//dismiss the tableView
 	[self dismissPayeeTable];
@@ -671,7 +714,7 @@
 	}*/
 }
 
-#pragma mark infoView delegates
+#pragma mark - infoView delegates
 
 -(void)InfoViewFinished:(InfoView *)infoView
 {
@@ -729,24 +772,24 @@
 	}
 #endif
 
-	[foundContactsArray removeAllObjects];
-	for(NSString *curString in contactsArray)
+	[_foundContactsArray removeAllObjects];
+	for(NSString *curString in _contactsArray)
 	{
 		NSRange substringRange = [curString rangeOfString:searchStr options:NSCaseInsensitiveSearch];
 		//
 		if(substringRange.length > 1)
 		{
-			[foundContactsArray addObject:curString];
+			[_foundContactsArray addObject:curString];
 		}
 		else if (substringRange.location == 0)
 		{
-			[foundContactsArray addObject:curString];
+			[_foundContactsArray addObject:curString];
 		}
 	}
 	
 }
 
--(void)addLocationToQuery:(NSMutableString *)query
+- (void)addLocationToQuery:(NSMutableString *)query
 {
 	if ([query rangeOfString:@"&ll="].location == NSNotFound)
 	{
@@ -763,19 +806,19 @@
 	}
 }
 
--(void)mergeAutoCompleteResults
+- (void)mergeAutoCompleteResults
 {
-	NSMutableSet *set = [NSMutableSet setWithArray:foundContactsArray];
-	[set addObjectsFromArray:foundBusinessNames];
+	NSMutableSet *set = [NSMutableSet setWithArray:_foundContactsArray];
+	[set addObjectsFromArray:_foundBusinessNames];
 	
-	autoCompleteResults = [[set allObjects] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-	[autoCompleteTable reloadData];
+	_autoCompleteResults = [[set allObjects] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+	[_autoCompleteTable reloadData];
 	//cw self.namePickerTextView.arrayChoices = autoCompleteResults;
 }
 
 - (void)generateListOfContactNames
 {
-    foundContactsArray = [[NSMutableArray alloc]init];
+    _foundContactsArray = [[NSMutableArray alloc]init];
     
 	CFErrorRef error;
 	ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
@@ -817,9 +860,9 @@
 			[allNames addObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName]];
 		}
 		
-		contactsArray = allNames;
-		autoCompleteResults = allNames; //start autoCompleteResults with something (don't have business names at this point)
-		NSLog(@"All Email %@", contactsArray);
+		_contactsArray = allNames;
+		_autoCompleteResults = allNames; //start autoCompleteResults with something (don't have business names at this point)
+		NSLog(@"All Email %@", _contactsArray);
 	}
 }
 
@@ -841,7 +884,7 @@
 	searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
 	
 	//build array of business (prune categories out of list)
-	[foundBusinessNames removeAllObjects];
+	[_foundBusinessNames removeAllObjects];
 	
 	
 	for(NSDictionary *dict in searchResultsArray)
@@ -856,14 +899,14 @@
 		NSString *name = [dict objectForKey:@"name"];
 		if(name && name != (id)[NSNull null])
 		{
-			[foundBusinessNames addObject:name];
+			[_foundBusinessNames addObject:name];
 		}
 #endif
 	}
 	
-	if(searchResultsArray.count)
+	if (searchResultsArray.count)
 	{
-		NSLog(@"Results: %@", foundBusinessNames);
+		NSLog(@"Results: %@", _foundBusinessNames);
 	}
 	else
 	{
@@ -881,4 +924,5 @@
 	
 	[self mergeAutoCompleteResults];
 }
+
 @end
