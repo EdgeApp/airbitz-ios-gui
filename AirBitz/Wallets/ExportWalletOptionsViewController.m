@@ -10,6 +10,7 @@
 #import "InfoView.h"
 #import "Util.h"
 #import "ExportWalletOptionsCell.h"
+#import "CommonTypes.h"
 
 #define CELL_HEIGHT 37.0
 
@@ -77,6 +78,8 @@ typedef enum eExportOption
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplay];
 
+    [self updateDisplayLayout];
+
     self.labelWalletName.text = self.wallet.strName;
 
     //NSLog(@"type: %d", self.type);
@@ -112,6 +115,20 @@ typedef enum eExportOption
 }
 
 #pragma mark - Misc Methods
+
+- (void)updateDisplayLayout
+{
+    // update for iPhone 4
+    if (!IS_IPHONE5)
+    {
+        // warning: magic numbers for iphone layout
+
+        CGRect frame = self.tableView.frame;
+        frame.size.height = 200;
+        self.tableView.frame = frame;
+        
+    }
+}
 
 - (ExportWalletOptionsCell *)getOptionsCellForTableView:(UITableView *)tableView withImage:(UIImage *)bkgImage andIndexPath:(NSIndexPath *)indexPath
 {

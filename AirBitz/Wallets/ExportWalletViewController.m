@@ -14,6 +14,8 @@
 #import "User.h"
 #import "CommonTypes.h"
 #import "CoreBridge.h"
+#import "PopupWheelPickerView.h"
+#import "DateTime.h"
 
 #define WALLET_BUTTON_WIDTH         110
 #define WALLET_TABLE_CONTENT_HEIGHT 225
@@ -26,11 +28,12 @@ typedef enum eDatePeriod
     DatePeriod_ThisYear
 } tDatePeriod;
 
-@interface ExportWalletViewController () <ExportWalletOptionsViewControllerDelegate, ButtonSelectorDelegate>
+@interface ExportWalletViewController () <ExportWalletOptionsViewControllerDelegate, ButtonSelectorDelegate, PopupWheelPickerViewDelegate>
 {
     tDatePeriod                         _datePeriod; // chosen with the 3 buttons
     ExportWalletOptionsViewController   *_exportWalletOptionsViewController;
     NSInteger                           _selectedWallet;
+    CGRect                              _viewDisplayFrame;
 }
 
 @property (weak, nonatomic) IBOutlet UIView             *viewDisplay;
@@ -47,8 +50,13 @@ typedef enum eDatePeriod
 @property (weak, nonatomic) IBOutlet UILabel            *labelToDate;
 @property (weak, nonatomic) IBOutlet UIScrollView       *scrollView;
 
-@property (nonatomic, strong) NSArray *arrayWalletUUIDs;
-@property (nonatomic, strong) NSArray *arrayWallets;
+@property (nonatomic, strong) NSArray               *arrayWalletUUIDs;
+@property (nonatomic, strong) NSArray               *arrayWallets;
+@property (nonatomic, strong) PopupWheelPickerView  *popupWheelPicker;
+@property (nonatomic, strong) UIButton              *buttonBlocker;
+@property (nonatomic, strong) DateTime              *fromDateTime;
+@property (nonatomic, strong) DateTime              *toDateTime;
+
 
 @end
 
@@ -70,6 +78,7 @@ typedef enum eDatePeriod
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplay];
+    _viewDisplayFrame = self.viewDisplay.frame;
 
     [self updateDisplayLayout];
 
@@ -81,10 +90,20 @@ typedef enum eDatePeriod
 
     [self setWalletData];
 
+    self.fromDateTime = [[DateTime alloc] init];
+    [self.fromDateTime setWithCurrentDateAndTime];
+    self.toDateTime = [[DateTime alloc] init];
+    [self.toDateTime setWithCurrentDateAndTime];
+
     _datePeriod = DatePeriod_None;
     [self updateDisplay];
 
-
+    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.buttonBlocker.backgroundColor = [UIColor clearColor];
+    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
+    self.buttonBlocker.frame = self.view.bounds;
+    self.buttonBlocker.hidden = YES;
+    [self.view addSubview:self.buttonBlocker];
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,14 +125,31 @@ typedef enum eDatePeriod
 
 #pragma mark - Action Methods
 
+- (IBAction)buttonBlockerTouched:(id)sender
+{
+    [self dismissPopupPicker];
+}
+
 - (IBAction)buttonBackTouched:(id)sender
 {
+    [self dismissPopupPicker];
     [self animatedExit];
 }
 
 - (IBAction)buttonInfoTouched:(id)sender
 {
+    [self dismissPopupPicker];
     [InfoView CreateWithHTML:@"infoExportWallet" forView:self.view];
+}
+
+- (IBAction)buttonFromTouched:(id)sender
+{
+    [self showPopupPickerFor:sender];
+}
+
+- (IBAction)buttonToTouched:(id)sender
+{
+    [self showPopupPickerFor:sender];
 }
 
 - (IBAction)buttonDatePeriodTouched:(UIButton *)sender
@@ -166,6 +202,8 @@ typedef enum eDatePeriod
     self.imageButtonThisWeek.hidden = (DatePeriod_ThisWeek != _datePeriod);
     self.imageButtonThisMonth.hidden = (DatePeriod_ThisMonth != _datePeriod);
     self.imageButtonThisYear.hidden = (DatePeriod_ThisYear != _datePeriod);
+    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d", (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year];
+    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d", (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year];
 }
 
 - (void)updateDisplayLayout
@@ -181,6 +219,91 @@ typedef enum eDatePeriod
         self.scrollView.frame = frame;
 
     }
+}
+
+- (NSArray *)getPopupPickerChoices
+{
+    NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
+    NSMutableArray *arraySubChoices;
+
+    // month
+    arraySubChoices = [[NSMutableArray alloc] init];
+    for (int i = 1; i <= 12; i++)
+    {
+        [arraySubChoices addObject:[NSString stringWithFormat:@"%d", i]];
+    }
+    [arrayChoices addObject:arraySubChoices];
+
+    // day
+    arraySubChoices = [[NSMutableArray alloc] init];
+    for (int i = 1; i <= 31; i++)
+    {
+        [arraySubChoices addObject:[NSString stringWithFormat:@"%d", i]];
+    }
+    [arrayChoices addObject:arraySubChoices];
+
+    // year
+    arraySubChoices = [[NSMutableArray alloc] init];
+    for (int i = 2014; i <= 2100; i++)
+    {
+        [arraySubChoices addObject:[NSString stringWithFormat:@"%d", i]];
+    }
+    [arrayChoices addObject:arraySubChoices];
+
+    // hour
+    arraySubChoices = [[NSMutableArray alloc] init];
+    for (int i = 0; i <= 23; i++)
+    {
+        [arraySubChoices addObject:[NSString stringWithFormat:@"%d", i]];
+    }
+    [arrayChoices addObject:arraySubChoices];
+
+    // min
+    arraySubChoices = [[NSMutableArray alloc] init];
+    for (int i = 0; i <= 59; i++)
+    {
+        [arraySubChoices addObject:[NSString stringWithFormat:@"%.02d", i]];
+    }
+    [arrayChoices addObject:arraySubChoices];
+
+    // second
+    arraySubChoices = [[NSMutableArray alloc] init];
+    for (int i = 0; i <= 59; i++)
+    {
+        [arraySubChoices addObject:[NSString stringWithFormat:@"%.02d", i]];
+    }
+    [arrayChoices addObject:arraySubChoices];
+
+
+    return arrayChoices;
+}
+
+- (NSArray *)getPopupPickerSelectionsFor:(DateTime *)dateTime givenChoices:(NSArray *)arrayChoices
+{
+    // TODO: proper selections
+    return @[@0, @1, @2, @3, @4, @5];
+}
+
+- (void)showPopupPickerFor:(UIButton *)button
+{
+    [self blockUser:YES];
+    if (!IS_IPHONE5)
+    {
+        CGRect frame = self.viewDisplay.frame;
+        frame.origin.y -= button.frame.origin.y;
+        self.viewDisplay.frame = frame;
+    }
+
+    NSArray *arrayChoices = [self getPopupPickerChoices];
+    NSArray *arraySelections = [self getPopupPickerSelectionsFor:(button == self.buttonFrom ? self.fromDateTime : self.toDateTime)
+                                                    givenChoices:arrayChoices];
+    self.popupWheelPicker = [PopupWheelPickerView CreateForView:self.view
+                                             positionRelativeTo:button
+                                                   withPosition:PopupWheelPickerPosition_Below
+                                                    withChoices:arrayChoices
+                                             startingSelections:arraySelections
+                                                       userData:button
+                                                    andDelegate:self];
 }
 
 - (void)showExportWalletOptionsWithType:(tWalletExportType)type
@@ -274,6 +397,23 @@ typedef enum eDatePeriod
     self.arrayWallets = arrayWallets;
 }
 
+- (void)dismissPopupPicker
+{
+    [self blockUser:NO];
+    if (self.popupWheelPicker)
+    {
+        self.viewDisplay.frame = _viewDisplayFrame;
+        [self.popupWheelPicker removeFromSuperview];
+        self.popupWheelPicker = nil;
+    }
+}
+
+- (void)blockUser:(BOOL)bBlock
+{
+    self.buttonBlocker.hidden = !bBlock;
+}
+
+
 - (void)animatedExit
 {
 	[UIView animateWithDuration:0.35
@@ -310,6 +450,18 @@ typedef enum eDatePeriod
 {
 	//NSLog(@"Selected item %i", itemIndex);
     _selectedWallet = itemIndex;
+}
+
+#pragma mark - Popup Wheel Picker Delegate Methods
+
+- (void)PopupWheelPickerViewExit:(PopupWheelPickerView *)view withSelections:(NSArray *)arraySelections userData:(id)data
+{
+    [self dismissPopupPicker];
+}
+
+- (void)PopupWheelPickerViewCancelled:(PopupWheelPickerView *)view userData:(id)data
+{
+    [self dismissPopupPicker];
 }
 
 @end
