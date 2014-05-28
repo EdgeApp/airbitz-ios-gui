@@ -55,7 +55,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *doneButton;
 @property (nonatomic, weak) IBOutlet UITextField *fiatTextField;
 @property (nonatomic, weak) IBOutlet UITextField *notesTextField;
-@property (nonatomic, weak) IBOutlet AutoCompleteTextField *categoryTextField;
+@property (nonatomic, weak) IBOutlet StylizedTextField *categoryTextField;
 @property (nonatomic, weak) IBOutlet StylizedTextField *nameTextField;
 @property (nonatomic, weak) IBOutlet CalculatorView *keypadView;
 //@property (nonatomic, weak) IBOutlet StylizedTextField *namePickerTextView;
@@ -97,7 +97,7 @@
 #endif
 	self.categoryTextField.delegate = self;
 	
-	self.categoryTextField.autoTextFieldDelegate = self;
+	//self.categoryTextField.autoTextFieldDelegate = self;
 	
 	/*
 	 @property (nonatomic, copy)     NSString        *strID;
@@ -124,8 +124,12 @@
     self.notesTextField.text = self.transaction.strNotes;
     self.categoryTextField.text = self.transaction.strCategory;
 #endif
+	#warning TODO Put these in an array here and use it to source the auto-complete tableView  Look at AutoCompleteTextField.m (-searchAutocompleteEntriesWithSubstring) for code that ignores "Transfer:", "Expense:", etc.
+	#if 0
 	self.categoryTextField.arrayAutoCompleteStrings = [NSArray arrayWithObjects:@"Income:Salary", @"Income:Rent", @"Transfer:Bank Account", @"Transfer:Cash", @"Transfer:Wallet", @"Expense:Dining", @"Expense:Clothing", @"Expense:Computers", @"Expense:Electronics", @"Expense:Education", @"Expense:Entertainment", @"Expense:Rent", @"Expense:Insurance", @"Expense:Medical", @"Expense:Pets", @"Expense:Recreation", @"Expense:Tax", @"Expense:Vacation", @"Expense:Utilities",nil];
 	self.categoryTextField.tableAbove = YES;
+	#endif
+	
 	//[self.addressButton setTitle:self.transaction.strAddress forState:UIControlStateNormal];
     self.bitCoinLabel.text = [CoreBridge formatSatoshi:self.transaction.amountSatoshi];
 
@@ -310,7 +314,7 @@
 		 frame.origin.y = 0;
 		 self.scrollableContentView.frame = frame;
 	 }
-					 completion:^(BOOL finished)
+	 completion:^(BOOL finished)
 	 {
 	 }];
 }
@@ -326,7 +330,7 @@
 	
 	CGRect ownFrame = [self.view.window convertRect:keyboardFrame toView:self.view];
 	
-	if(activeTextField == self.nameTextField)
+	if((activeTextField == self.nameTextField) || (activeTextField == self.categoryTextField))
 	{
 		//scroll textfield up to top of screen to make room for tableView.  Once scrolling is complete, spawn the tableView
 		[UIView animateWithDuration:0.35
@@ -334,13 +338,13 @@
 							options: UIViewAnimationOptionCurveEaseOut
 						 animations:^
 		 {
-			 CGRect frame = originalHeaderFrame;
-			 frame.size.height *= 0.6;
-			 self.headerView.frame = frame;
+			 CGRect headerFrame = originalHeaderFrame;
+			 headerFrame.size.height *= 0.6;
+			 self.headerView.frame = headerFrame;
 			 
 			 CGRect contentFrame = originalContentFrame;
-			 contentFrame.origin.y = frame.origin.y + frame.size.height;
-			 contentFrame.size.height += (frame.size.height - originalHeaderFrame.size.height);
+			 contentFrame.origin.y = headerFrame.origin.y + headerFrame.size.height;
+			 contentFrame.size.height += (headerFrame.size.height - originalHeaderFrame.size.height);
 			 self.contentView.frame = contentFrame;
 			 
 			 CGRect scrollFrame = originalScrollableContentFrame;
@@ -354,10 +358,17 @@
 			 CGRect frame = self.view.bounds;
 			 frame.origin.y = locationInView.y + TEXTFIELD_VERTICAL_SPACE_OFFSET + activeTextField.frame.size.height;
 			 frame.size.height = ownFrame.origin.y - frame.origin.y;
-			 [self spawnPayeeTableInFrame:frame];
+			 if(activeTextField == self.nameTextField)
+			 {
+				 [self spawnPayeeTableInFrame:frame];
+			 }
+			 else
+			 {
+				 [self spawnCategoryTableInFrame:frame];
+			 }
 		 }];
 	}
-	else
+	/*else //category textField
 	{
 		//get textfield frame in window coordinates
 		CGRect textFieldFrame = [activeTextField.superview convertRect:activeTextField.frame toView:self.view];
@@ -382,7 +393,7 @@
 			 {
 			 }];
 		}
-	}
+	}*/
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -527,16 +538,47 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	if([textField isKindOfClass:[AutoCompleteTextField class]])
+	/*if([textField isKindOfClass:[AutoCompleteTextField class]])
 	{
 		[(AutoCompleteTextField *)textField autoCompleteTextFieldShouldReturn];
-	}
+	}*/
+	
 	[textField resignFirstResponder];
+	
 	if(textField == self.nameTextField)
 	{
+		[self dismissPayeeTable];
 		[self.categoryTextField becomeFirstResponder];
 	}
+	else
+	{
+		[self dismissPayeeTable];
+	}
 	return YES;
+}
+
+#pragma mark - Category Table
+-(void)spawnCategoryTableInFrame:(CGRect)frame
+{
+	CGRect startingFrame = frame;
+	startingFrame.size.height = 0;
+	autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
+	[self.view addSubview:autoCompleteTable];
+	
+	autoCompleteTable.dataSource = self;
+	autoCompleteTable.delegate = self;
+	
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 autoCompleteTable.frame = frame;
+	 }
+					 completion:^(BOOL finished)
+	 {
+		 
+	 }];
 }
 
 #pragma mark - Payee Table
@@ -566,23 +608,26 @@
 
 -(void)dismissPayeeTable
 {
-	CGRect frame = autoCompleteTable.frame;
-	frame.size.height = 0.0;
-	frame.origin.y = 0.0;
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 autoCompleteTable.frame = frame;
-	 }
-					 completion:^(BOOL finished)
-	 {
-		 [autoCompleteTable removeFromSuperview];
-		 autoCompleteTable = nil;
-		 
-		 [self scrollContentViewBackToOriginalPosition];
-	 }];
+	if(autoCompleteTable)
+	{
+		CGRect frame = autoCompleteTable.frame;
+		frame.size.height = 0.0;
+		frame.origin.y = 0.0;
+		[UIView animateWithDuration:0.35
+							  delay:0.0
+							options:UIViewAnimationOptionCurveEaseInOut
+						 animations:^
+		 {
+			 autoCompleteTable.frame = frame;
+		 }
+						 completion:^(BOOL finished)
+		 {
+			 [autoCompleteTable removeFromSuperview];
+			 autoCompleteTable = nil;
+			 
+			 [self scrollContentViewBackToOriginalPosition];
+		 }];
+	}
 }
 
 #pragma mark table delegates
@@ -616,7 +661,7 @@
 	//dismiss the tableView
 	[self dismissPayeeTable];
 	[self.nameTextField resignFirstResponder];
-	
+	[self.categoryTextField resignFirstResponder];
 	/*self.text = [autoCompleteResults objectAtIndex:indexPath.row];
     [self hideTableViewAnimated:YES];
     [self resignFirstResponder];
