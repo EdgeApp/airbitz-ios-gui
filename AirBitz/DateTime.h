@@ -17,6 +17,7 @@
 @property (nonatomic, assign) NSInteger minute;
 @property (nonatomic, assign) NSInteger second;
 
+- (void)setWithDate:(NSDate *)date;
 - (void)setWithCurrentDateAndTime;
 
 @end

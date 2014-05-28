@@ -17,8 +17,10 @@
 #import "PopupWheelPickerView.h"
 #import "DateTime.h"
 
-#define WALLET_BUTTON_WIDTH         110
+#define WALLET_BUTTON_WIDTH         160
 #define WALLET_TABLE_CONTENT_HEIGHT 225
+
+#define STARTING_YEAR               2014
 
 typedef enum eDatePeriod
 {
@@ -154,18 +156,50 @@ typedef enum eDatePeriod
 
 - (IBAction)buttonDatePeriodTouched:(UIButton *)sender
 {
+
     if (sender == self.buttonThisWeek)
     {
         _datePeriod = DatePeriod_ThisWeek;
+        NSDate *today = [NSDate date];
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+
+         // Get the weekday component of the current date
+         NSDateComponents *weekdayComponents = [gregorian components:NSWeekdayCalendarUnit fromDate:today];
+
+        /*
+         Create a date components to represent the number of days to subtract
+         from the current date.
+         The weekday value for Sunday in the Gregorian calendar is 1, so
+         subtract 1 from the number
+         of days to subtract from the date in question.  (If today's Sunday,
+         subtract 0 days.)
+         */
+         NSDateComponents *componentsToSubtract = [[NSDateComponents alloc]  init];
+         [componentsToSubtract setDay: - ([weekdayComponents weekday] - 1)];
+         
+         NSDate *beginningOfWeek = [gregorian dateByAddingComponents:componentsToSubtract toDate:today options:0];
+
+        [self.fromDateTime setWithDate:beginningOfWeek];
     }
     else if (sender == self.buttonThisMonth)
     {
         _datePeriod = DatePeriod_ThisMonth;
+        [self.fromDateTime setWithCurrentDateAndTime];
+        self.fromDateTime.day = 1;
     }
     else if (sender == self.buttonThisYear)
     {
+        [self.fromDateTime setWithCurrentDateAndTime];
+        self.fromDateTime.month = 1;
+        self.fromDateTime.day = 1;
         _datePeriod = DatePeriod_ThisYear;
     }
+
+    self.fromDateTime.hour = 0;
+    self.fromDateTime.minute = 0;
+    self.fromDateTime.second = 0;
+
+    [self.toDateTime setWithCurrentDateAndTime];
 
     [self updateDisplay];
 }
@@ -202,8 +236,12 @@ typedef enum eDatePeriod
     self.imageButtonThisWeek.hidden = (DatePeriod_ThisWeek != _datePeriod);
     self.imageButtonThisMonth.hidden = (DatePeriod_ThisMonth != _datePeriod);
     self.imageButtonThisYear.hidden = (DatePeriod_ThisYear != _datePeriod);
-    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d", (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year];
-    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d", (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year];
+    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d:%.02d",
+                               (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year,
+                               (int) self.fromDateTime.hour, (int) self.fromDateTime.minute, (int) self.fromDateTime.second];
+    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d:%.02d",
+                             (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year,
+                             (int) self.toDateTime.hour, (int) self.toDateTime.minute, (int) self.toDateTime.second];
 }
 
 - (void)updateDisplayLayout
@@ -244,7 +282,7 @@ typedef enum eDatePeriod
 
     // year
     arraySubChoices = [[NSMutableArray alloc] init];
-    for (int i = 2014; i <= 2100; i++)
+    for (int i = STARTING_YEAR; i <= 2100; i++)
     {
         [arraySubChoices addObject:[NSString stringWithFormat:@"%d", i]];
     }
@@ -278,10 +316,39 @@ typedef enum eDatePeriod
     return arrayChoices;
 }
 
+- (void)setDateTime:(DateTime *)dateTime fromPickerSelections:(NSArray *)arraySelections
+{
+    dateTime.month = [[arraySelections objectAtIndex:0] integerValue] + 1;
+    dateTime.day = [[arraySelections objectAtIndex:1] integerValue] + 1;
+    dateTime.year = [[arraySelections objectAtIndex:2] integerValue] + STARTING_YEAR;
+    dateTime.hour = [[arraySelections objectAtIndex:3] integerValue];
+    dateTime.minute = [[arraySelections objectAtIndex:4] integerValue];
+    dateTime.second = [[arraySelections objectAtIndex:5] integerValue];
+}
+
 - (NSArray *)getPopupPickerSelectionsFor:(DateTime *)dateTime givenChoices:(NSArray *)arrayChoices
 {
-    // TODO: proper selections
-    return @[@0, @1, @2, @3, @4, @5];
+    NSMutableArray *arraySelections = [[NSMutableArray alloc] init];
+
+    // month
+    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.month - 1]];
+
+    // day
+    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.day - 1]];
+
+    // year
+    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.year - STARTING_YEAR]];
+
+    // hour
+    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.hour]];
+
+    // minute
+    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.minute]];
+
+    // second
+    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.second]];
+
+    return arraySelections;
 }
 
 - (void)showPopupPickerFor:(UIButton *)button
@@ -326,6 +393,8 @@ typedef enum eDatePeriod
     _exportWalletOptionsViewController.delegate = self;
     _exportWalletOptionsViewController.type = type;
     _exportWalletOptionsViewController.wallet = wallet;
+    _exportWalletOptionsViewController.fromDateTime = self.fromDateTime;
+    _exportWalletOptionsViewController.toDateTime = self.toDateTime;
 
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
@@ -457,6 +526,10 @@ typedef enum eDatePeriod
 - (void)PopupWheelPickerViewExit:(PopupWheelPickerView *)view withSelections:(NSArray *)arraySelections userData:(id)data
 {
     [self dismissPopupPicker];
+
+    _datePeriod = DatePeriod_None;
+    [self setDateTime:(data == self.buttonFrom ? self.fromDateTime : self.toDateTime) fromPickerSelections:arraySelections];
+    [self updateDisplay];
 }
 
 - (void)PopupWheelPickerViewCancelled:(PopupWheelPickerView *)view userData:(id)data
