@@ -80,6 +80,9 @@
 
 	// Do any additional setup after loading the view.
 
+    // resize ourselves to fit in area
+    [Util resizeView:self.view withDisplayView:self.contentView];
+
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
     self.categoryTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
@@ -272,10 +275,9 @@
 						options: UIViewAnimationOptionCurveEaseOut
 					 animations:^
 	 {
-		 self.view.frame = _originalFrame;
-		 CGRect frame = self.scrollableContentView.frame;
-		 frame.origin.y = 0;
-		 self.scrollableContentView.frame = frame;
+         self.headerView.frame = _originalHeaderFrame;
+         self.contentView.frame = _originalContentFrame;
+         self.scrollableContentView.frame = _originalScrollableContentFrame;
 	 }
 	 completion:^(BOOL finished)
 	 {
@@ -287,97 +289,8 @@
     [self.notesTextField resignFirstResponder];
     [self.categoryTextField resignFirstResponder];
     [self.nameTextField resignFirstResponder];
+    [self.fiatTextField resignFirstResponder];
     [self dismissPayeeTable];
-}
-
-#pragma mark - Keyboard callbacks
-
-- (void)keyboardWillShow:(NSNotification *)notification
-{
-	//Get KeyboardFrame (in Window coordinates)
-	NSLog(@"KEYBOARD WILL SHOW");
-	NSDictionary *userInfo = [notification userInfo];
-	CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	
-	CGRect ownFrame = [self.view.window convertRect:keyboardFrame toView:self.view];
-	
-	if((_activeTextField == self.nameTextField) || (_activeTextField == self.categoryTextField))
-	{
-		//scroll textfield up to top of screen to make room for tableView.  Once scrolling is complete, spawn the tableView
-		[UIView animateWithDuration:0.35
-							  delay: 0.0
-							options: UIViewAnimationOptionCurveEaseOut
-						 animations:^
-		 {
-			 CGRect headerFrame = _originalHeaderFrame;
-			 headerFrame.size.height *= 0.6;
-			 self.headerView.frame = headerFrame;
-			 
-			 CGRect contentFrame = _originalContentFrame;
-			 contentFrame.origin.y = headerFrame.origin.y + headerFrame.size.height;
-			 contentFrame.size.height += (headerFrame.size.height - _originalHeaderFrame.size.height);
-			 self.contentView.frame = contentFrame;
-			 
-			 CGRect scrollFrame = _originalScrollableContentFrame;
-			 scrollFrame.origin.y -= (_activeTextField.frame.origin.y - TEXTFIELD_VERTICAL_SPACE_OFFSET);
-			 self.scrollableContentView.frame = scrollFrame;
-		 }
-		 completion:^(BOOL finished)
-		 {
-			 //calculate the tableView frame.  It should start a little below the textField and extend to the top of the keyboard.
-			 CGPoint locationInView = [self.view convertPoint:_activeTextField.frame.origin fromView:self.scrollableContentView];
-			 CGRect frame = self.view.bounds;
-			 frame.origin.y = locationInView.y + TEXTFIELD_VERTICAL_SPACE_OFFSET + _activeTextField.frame.size.height;
-			 frame.size.height = ownFrame.origin.y - frame.origin.y;
-			 if(_activeTextField == self.nameTextField)
-			 {
-				 [self spawnPayeeTableInFrame:frame];
-			 }
-			 else
-			 {
-				 [self spawnCategoryTableInFrame:frame];
-			 }
-		 }];
-	}
-	/*else //category textField
-	{
-		//get textfield frame in window coordinates
-		CGRect textFieldFrame = [activeTextField.superview convertRect:activeTextField.frame toView:self.view];
-		
-		//calculate offset
-		float distanceToMove = (textFieldFrame.origin.y + textFieldFrame.size.height + 20.0) - ownFrame.origin.y;
-		
-		if(distanceToMove > 0)
-		{
-			//need to scroll
-
-			[UIView animateWithDuration:0.35
-								  delay: 0.0
-								options: UIViewAnimationOptionCurveEaseOut
-							 animations:^
-			 {
-				 CGRect frame = originalFrame;
-				 frame.origin.y -= distanceToMove;
-				 self.view.frame = frame;
-			 }
-			 completion:^(BOOL finished)
-			 {
-			 }];
-		}
-	}*/
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification
-{
-	if (_activeTextField)
-	{
-		/*if([activeTextField isKindOfClass:[AutoCompleteTextField class]])
-		{
-			//hide autocomplete tableView if visible
-			[(AutoCompleteTextField *)activeTextField autoCompleteTextFieldShouldReturn];
-		}*/
-		_activeTextField = nil;
-	}
 }
 
 #pragma mark - Calculator delegates
@@ -389,9 +302,8 @@
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
-    NSLog(@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
+    //NSLog(@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
 }
-
 
 #pragma mark - AutoCompleteTextField delegates
 
@@ -474,71 +386,6 @@
 	return YES;
 }
 */
-#pragma mark - UITextField delegates
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-	/*if([textField isKindOfClass:[AutoCompleteTextField class]])
-	{
-		[(AutoCompleteTextField *)textField autoCompleteTextFieldShouldChangeCharactersInRange:range replacementString:string];
-	}*/
-
-    if (textField == self.nameTextField)
-    {
-        [self kickOffSearchWithString:textField.text];
-    }
-	return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-	//NSLog(@"textField class: %@", [textField class]);
-	NSLog(@"SETTING ACTIVE TEXTFIELD");
-	_activeTextField = textField;
-	/*
-	
-	self.keypadView.textField = textField;
-	[self createBlockingButtonUnderView:textField];
-	if([textField isKindOfClass:[AutoCompleteTextField class]])
-	{
-		[(AutoCompleteTextField *)textField autoCompleteTextFieldDidBeginEditing];
-	}*/
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-	/*if([textField isKindOfClass:[AutoCompleteTextField class]])
-	{
-		[(AutoCompleteTextField *)textField autoCompleteTextFieldShouldReturn];
-	}*/
-
-	[textField resignFirstResponder];
-	
-	if (textField == self.nameTextField)
-	{
-		[self dismissPayeeTable];
-        if (!self.bOldTransaction)
-        {
-            [self.categoryTextField becomeFirstResponder];
-        }
-	}
-    else if (textField == self.categoryTextField)
-    {
-        // TODO: temp until we use a picker
-        [self dismissPayeeTable];
-
-        if (!self.bOldTransaction)
-        {
-            [self.notesTextField becomeFirstResponder];
-        }
-    }
-
-	return YES;
-}
 
 #pragma mark - Category Table
 
@@ -596,7 +443,7 @@
 	{
 		CGRect frame = _autoCompleteTable.frame;
 		frame.size.height = 0.0;
-		frame.origin.y = 0.0;
+		frame.origin.y = frame.origin.y + 100;// (_originalScrollableContentFrame.origin.y - self.scrollableContentView.frame.origin.y);
 		[UIView animateWithDuration:0.35
 							  delay:0.0
 							options:UIViewAnimationOptionCurveEaseInOut
@@ -608,8 +455,6 @@
 		 {
 			 [_autoCompleteTable removeFromSuperview];
 			 _autoCompleteTable = nil;
-			 
-			 [self scrollContentViewBackToOriginalPosition];
 		 }];
 	}
 }
@@ -864,6 +709,114 @@
 	
 	
 	[self mergeAutoCompleteResults];
+}
+
+#pragma mark - UITextField delegates
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+	/*if([textField isKindOfClass:[AutoCompleteTextField class]])
+     {
+     [(AutoCompleteTextField *)textField autoCompleteTextFieldShouldChangeCharactersInRange:range replacementString:string];
+     }*/
+
+    if (textField == self.nameTextField)
+    {
+        [self kickOffSearchWithString:textField.text];
+    }
+	return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+	_activeTextField = textField;
+
+    CGRect scrollFrame = self.scrollableContentView.frame;
+
+    // WARNING: Lots of magic numbers - but we have to make this change quick for the demo
+    // Change some of these for iPhone 4
+
+    if (textField == self.nameTextField)
+    {
+        scrollFrame.origin.y = -30;
+
+        CGRect frame = self.view.bounds;
+        frame.origin.y = 100;
+        frame.size.height = 252;
+        [self spawnPayeeTableInFrame:frame];
+    }
+    else if (textField == self.categoryTextField)
+    {
+        scrollFrame.origin.y = -250;
+        [self dismissPayeeTable];
+    }
+    else if (textField == self.notesTextField)
+    {
+        scrollFrame.origin.y = -90;
+        [self dismissPayeeTable];
+    }
+    else
+    {
+        scrollFrame.origin.y = _originalScrollableContentFrame.origin.y;
+    }
+
+    [UIView animateWithDuration:0.35
+                          delay: 0.0
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         self.scrollableContentView.frame = scrollFrame;
+     }
+                     completion:^(BOOL finished)
+     {
+
+     }];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	/*if([textField isKindOfClass:[AutoCompleteTextField class]])
+     {
+     [(AutoCompleteTextField *)textField autoCompleteTextFieldShouldReturn];
+     }*/
+
+	[textField resignFirstResponder];
+
+	if (textField == self.nameTextField)
+	{
+		[self dismissPayeeTable];
+        if (!self.bOldTransaction)
+        {
+            [self.categoryTextField becomeFirstResponder];
+        }
+	}
+    else if (textField == self.categoryTextField)
+    {
+        if (!self.bOldTransaction)
+        {
+            [self.notesTextField becomeFirstResponder];
+        }
+    }
+    
+	return YES;
+}
+
+#pragma mark - Keyboard callbacks
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [self scrollContentViewBackToOriginalPosition];
+	_activeTextField = nil;
 }
 
 @end
