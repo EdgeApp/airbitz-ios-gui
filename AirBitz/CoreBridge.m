@@ -94,6 +94,7 @@
     if (ABC_CC_Ok == result)
     {
         wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
+        wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
         wallet.attributes = 0;
         wallet.balance = pWalletInfo->balanceSatoshi;
         wallet.currencyNum = pWalletInfo->currencyNum;
@@ -125,7 +126,7 @@
         {
             tABC_TxInfo *pTrans = aTransactions[j];
             transaction = [[Transaction alloc] init];
-            [CoreBridge setTransaction: wallet transaction:transaction coreTx:pTrans];
+            [CoreBridge setTransaction:wallet transaction:transaction coreTx:pTrans];
             [arrayTransactions addObject:transaction];
         }
         SInt64 bal = 0;
@@ -285,7 +286,12 @@
         [f setCurrencySymbol: [User Singleton].denominationLabelShort];
     else
         [f setCurrencySymbol: @""];
-    [f setMaximumFractionDigits: 8];
+    if ([[[User Singleton] denominationLabel] isEqualToString:@"uBTC"])
+        [f setMaximumFractionDigits: 2];
+    else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
+        [f setMaximumFractionDigits: 5];
+    else
+        [f setMaximumFractionDigits: 8];
     return [f stringFromNumber:[NSNumber numberWithFloat:converted]];
 }
 
