@@ -81,12 +81,12 @@ typedef enum eExportOption
     [self updateDisplayLayout];
 
     self.labelWalletName.text = self.wallet.strName;
-    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d:%.02d",
+    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d",
                                (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year,
-                               (int) self.fromDateTime.hour, (int) self.fromDateTime.minute, (int) self.fromDateTime.second];
-    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d:%.02d",
+                               (int) self.fromDateTime.hour, (int) self.fromDateTime.minute];
+    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d",
                              (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year,
-                             (int) self.toDateTime.hour, (int) self.toDateTime.minute, (int) self.toDateTime.second];
+                             (int) self.toDateTime.hour, (int) self.toDateTime.minute];
 
 
     //NSLog(@"type: %d", self.type);

@@ -236,12 +236,12 @@ typedef enum eDatePeriod
     self.imageButtonThisWeek.hidden = (DatePeriod_ThisWeek != _datePeriod);
     self.imageButtonThisMonth.hidden = (DatePeriod_ThisMonth != _datePeriod);
     self.imageButtonThisYear.hidden = (DatePeriod_ThisYear != _datePeriod);
-    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d:%.02d",
+    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d",
                                (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year,
-                               (int) self.fromDateTime.hour, (int) self.fromDateTime.minute, (int) self.fromDateTime.second];
-    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d:%.02d",
+                               (int) self.fromDateTime.hour, (int) self.fromDateTime.minute];
+    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d",
                              (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year,
-                             (int) self.toDateTime.hour, (int) self.toDateTime.minute, (int) self.toDateTime.second];
+                             (int) self.toDateTime.hour, (int) self.toDateTime.minute];
 }
 
 - (void)updateDisplayLayout
@@ -304,15 +304,6 @@ typedef enum eDatePeriod
     }
     [arrayChoices addObject:arraySubChoices];
 
-    // second
-    arraySubChoices = [[NSMutableArray alloc] init];
-    for (int i = 0; i <= 59; i++)
-    {
-        [arraySubChoices addObject:[NSString stringWithFormat:@"%.02d", i]];
-    }
-    [arrayChoices addObject:arraySubChoices];
-
-
     return arrayChoices;
 }
 
@@ -323,7 +314,7 @@ typedef enum eDatePeriod
     dateTime.year = [[arraySelections objectAtIndex:2] integerValue] + STARTING_YEAR;
     dateTime.hour = [[arraySelections objectAtIndex:3] integerValue];
     dateTime.minute = [[arraySelections objectAtIndex:4] integerValue];
-    dateTime.second = [[arraySelections objectAtIndex:5] integerValue];
+    dateTime.second = 0;
 }
 
 - (NSArray *)getPopupPickerSelectionsFor:(DateTime *)dateTime givenChoices:(NSArray *)arrayChoices
@@ -344,9 +335,6 @@ typedef enum eDatePeriod
 
     // minute
     [arraySelections addObject:[NSNumber numberWithInteger:dateTime.minute]];
-
-    // second
-    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.second]];
 
     return arraySelections;
 }
