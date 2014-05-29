@@ -61,29 +61,29 @@
 	{
 		case OPERATION_CLEAR:
 		case OPERATION_DONE:
-			NSLog(@"Performing loadAccumulator");
+			//NSLog(@"Performing loadAccumulator");
 			[self loadAccumulator];
 			break;
 		case OPERATION_DIVIDE:
-			NSLog(@"Performing Divide");
+			//NSLog(@"Performing Divide");
 			accumulator /= [self.textField.text floatValue];
 			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
 			break;
 		case OPERATION_EQUAL:
-			NSLog(@"Performing Equal");
+			//NSLog(@"Performing Equal");
 			break;
 		case OPERATION_MINUS:
-			NSLog(@"Performing Minus");
+			//NSLog(@"Performing Minus");
 			accumulator -= [self.textField.text floatValue];
 			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
 			break;
 		case OPERATION_MULTIPLY:
-			NSLog(@"Performing Multiply");
+			//NSLog(@"Performing Multiply");
 			accumulator *= [self.textField.text floatValue];
 			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
 			break;
 		case OPERATION_PLUS:
-			NSLog(@"Performing Plus");
+			//NSLog(@"Performing Plus");
 			accumulator += [self.textField.text floatValue];
 			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
 			break;
@@ -95,17 +95,17 @@
 
 -(IBAction)digit:(UIButton *)sender
 {
-	NSLog(@"Digit: %i", (int)sender.tag);
+	//NSLog(@"Digit: %i", (int)sender.tag);
 	if(operation == OPERATION_EQUAL)
 	{
 		//also clear the accumulator
-		NSLog(@"Clearing accumulator");
+		//NSLog(@"Clearing accumulator");
 		accumulator = 0.0;
 		operation = OPERATION_CLEAR;
 	}
 	if(lastKeyWasOperation)
 	{
-		NSLog(@"Clearing textfield");
+		//NSLog(@"Clearing textfield");
 		self.textField.text = @"";
 	}
 	if(sender.tag < 10)
@@ -143,7 +143,7 @@
 
 -(IBAction)operation:(UIButton *)sender
 {
-	NSLog(@"Operation %i", (int)sender.tag);
+	//NSLog(@"Operation %i", (int)sender.tag);
 	switch (sender.tag)
 	{
 		case OPERATION_CLEAR:

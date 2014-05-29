@@ -147,7 +147,7 @@
 	 
 	// self.dateLabel.text = [NSDate stringForDisplayFromDate:self.transaction.date prefixed:NO alwaysDisplayTime:YES];
 	
-    NSLog(@("%@ %@ %@\n"), self.transaction.strName, self.transaction.strCategory, self.transaction.strNotes);
+    //NSLog(@("%@ %@ %@\n"), self.transaction.strName, self.transaction.strCategory, self.transaction.strNotes);
 	self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
 	self.nameTextField.text = self.transaction.strName;
     self.notesTextField.text = self.transaction.strNotes;
@@ -445,6 +445,7 @@
     [self.nameTextField resignFirstResponder];
     [self.fiatTextField resignFirstResponder];
     [self dismissPayeeTable];
+    [self scrollContentViewBackToOriginalPosition];
 }
 
 - (void)loadCategories
@@ -493,20 +494,6 @@
             ABC_AddCategory([[User Singleton].name UTF8String], (char *)[strCategory UTF8String], &Error);
             [Util printABC_Error:&Error];
         }
-    }
-}
-
-// forces the size of the popup picker on the picker text view to a certain size
-- (void)forcePopupPickerFrameSize
-{
-    // Note: we have to do this because right now the size will start as max needed but as we dynamically
-    //       alter the choices, we may end up with more choices than we originally started with
-    //       so we want the table to always be as large as it can be
-    if (self.pickerTextCategory.popupPicker)
-    {
-        CGRect frame = self.pickerTextCategory.popupPicker.frame;
-        frame.size.height = 220; // magic number
-        self.pickerTextCategory.popupPicker.frame = frame;
     }
 }
 
@@ -971,10 +958,7 @@
 
 - (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
 {
-    // move the window up so that the category field is at the top
-    CGRect scrollFrame = self.scrollableContentView.frame;
-    scrollFrame.origin.y = -250; // magic number TODO: modify for iPhone4
-    [self scrollContentViewToFrame:scrollFrame];
+    _activeTextField = pickerTextView.textField;
 
     [self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
 
@@ -1029,19 +1013,59 @@
 
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
 {
-    [self forcePopupPickerFrameSize];
+    // forces the size of the popup picker on the picker text view to a certain size
+
+    // Note: we have to do this because right now the size will start as max needed but as we dynamically
+    //       alter the choices, we may end up with more choices than we originally started with
+    //       so we want the table to always be as large as it can be
+
+    // first start the popup pickerit right under the control and squished down
+    CGRect frame = self.pickerTextCategory.popupPicker.frame;
+    frame.size.height = 20;
+    //frame.size.height = 220; // magic number to make it as big as possible
+    CGPoint pickerLocationScreen = [pickerTextView.superview convertPoint:pickerTextView.frame.origin toView:nil];
+    frame.origin.y = pickerLocationScreen.y + pickerTextView.frame.size.height;
+    self.pickerTextCategory.popupPicker.frame = frame;
+
+    // now move the window up so that the category field is at the top
+    CGRect scrollFrame = self.scrollableContentView.frame;
+    scrollFrame.origin.y = -250; // magic number TODO: modify for iPhone4
+    [self scrollContentViewToFrame:scrollFrame];
+
+    // bring the picker up with it
+    [UIView animateWithDuration:0.35
+                          delay: 0.0
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         CGRect frame = self.pickerTextCategory.popupPicker.frame;
+         frame.origin.y = 130;
+         frame.size.height = 220; // magic number to make it as big as possible
+         self.pickerTextCategory.popupPicker.frame = frame;
+     }
+                     completion:^(BOOL finished)
+     {
+
+     }];
+
 }
 
 #pragma mark - Keyboard callbacks
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-
+    //NSLog(@"keyboard will show");
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    [self scrollContentViewBackToOriginalPosition];
+    //NSLog(@"keyboard will hide");
+
+    if (_activeTextField.returnKeyType == UIReturnKeyDone)
+    {
+        [self scrollContentViewBackToOriginalPosition];
+    }
+
 	_activeTextField = nil;
 }
 
