@@ -17,4 +17,8 @@
 #define SERVER_URL	@"https://api.airbitz.co"
 #define SERVER_API	@"https://api.airbitz.co/api/v1"
 
+//business search sort parameter can be one of these
+#define SORT_RESULT_BEST_MATCH	0
+#define SORT_RESULT_DISTANCE	1
+
 #endif

@@ -38,3 +38,4 @@
 
 #define DOLLAR_CURRENCY_NUM	840
 
+

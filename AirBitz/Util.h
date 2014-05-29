@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AddressBookUI/AddressBookUI.h>
 #import "ABC.h"
 
 @interface Util : NSObject
@@ -14,5 +15,6 @@
 + (void)printABC_Error:(const tABC_Error *)pError;
 + (void)resizeView:(UIView *)theView withDisplayView:(UIView *)theDisplayView;
 + (void)freeStringArray:(char **)aszStrings count:(unsigned int)count;
++ (NSString *)getNameFromAddressRecord:(ABRecordRef)person;
 
 @end

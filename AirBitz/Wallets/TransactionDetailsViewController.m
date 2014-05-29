@@ -13,7 +13,6 @@
 #import "NSDate+Helper.h"
 #import "ABC.h"
 #import "InfoView.h"
-#import "AutoCompleteTextField.h"
 #import "CalculatorView.h"
 #import "PickerTextView.h"
 #import "StylizedTextField.h"
@@ -34,7 +33,10 @@
 
 #define TEXTFIELD_VERTICAL_SPACE_OFFSET	7.0 /* how much space between screen header and textField when textField is scrolled all the way to the top */
 
-@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, AutoCompleteTextFieldDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
+#define SEARCH_RADIUS   16093
+#define CACHE_AGE_SECS  25
+
+@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
 {
 	UITextField     *_activeTextField;
 	CGRect          _originalFrame;
@@ -62,10 +64,10 @@
 @property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
 @property (weak, nonatomic) IBOutlet PickerTextView     *pickerTextCategory;
 
-@property (nonatomic, strong) NSArray           *arrayCategories;
-@property (nonatomic, strong) NSArray           *arrayCategoriesExpense;
-@property (nonatomic, strong) NSArray           *arrayCategoriesTransfer;
-@property (nonatomic, strong) NSArray           *arrayCategoriesIncome;
+@property (nonatomic, strong)        NSArray            *arrayCategories;
+@property (nonatomic, strong)        NSArray            *arrayContacts;
+@property (nonatomic, strong)        NSArray            *arrayBusinesses;
+@property (nonatomic, strong)        NSArray            *arrayAutoComplete;
 
 @end
 
@@ -89,6 +91,11 @@
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.contentView];
 
+    self.arrayAutoComplete = @[];
+
+    // get the list of businesses
+    [self generateListOfBusinesses];
+
     // update our array of categories
     [self loadCategories];
 
@@ -97,7 +104,9 @@
     self.pickerTextCategory.textField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
     self.notesTextField.returnKeyType = UIReturnKeyDone;
 
+    // load all the names from the address book
 	[self generateListOfContactNames];
+
 	UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
 	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateNormal];
 	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateSelected];
@@ -112,6 +121,8 @@
 	self.notesTextField.delegate = self;
 	self.nameTextField.delegate = self;
 
+    // get a callback when there are changes
+    [self.nameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 
     // set up the specifics on our picker text view
     self.pickerTextCategory.textField.borderStyle = UITextBorderStyleNone;
@@ -128,37 +139,11 @@
     self.pickerTextCategory.delegate = self;
 
 	
-	//self.categoryTextField.autoTextFieldDelegate = self;
-	
-	/*
-	 @property (nonatomic, copy)     NSString        *strID;
-	 @property (nonatomic, copy)     NSString        *strWalletUUID;
-	 @property (nonatomic, copy)     NSString        *strWalletName;
-	 @property (nonatomic, copy)     NSString        *strName;
-	 @property (nonatomic, copy)     NSString        *strAddress;
-	 @property (nonatomic, strong)   NSDate          *date;
-	 @property (nonatomic, assign)   BOOL            bConfirmed;
-	 @property (nonatomic, assign)   unsigned int    confirmations;
-	 @property (nonatomic, assign)   double          amount;
-	 @property (nonatomic, assign)   double          balance;
-	 @property (nonatomic, copy)     NSString        *strCategory;
-	 @property (nonatomic, copy)     NSString        *strNotes;
-	 */
-	 
-	// self.dateLabel.text = [NSDate stringForDisplayFromDate:self.transaction.date prefixed:NO alwaysDisplayTime:YES];
-	
-    //NSLog(@("%@ %@ %@\n"), self.transaction.strName, self.transaction.strCategory, self.transaction.strNotes);
-	self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
+    self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
 	self.nameTextField.text = self.transaction.strName;
     self.notesTextField.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
 
-#warning TODO Put these in an array here and use it to source the auto-complete tableView  Look at AutoCompleteTextField.m (-searchAutocompleteEntriesWithSubstring) for code that ignores "Transfer:", "Expense:", etc.
-#if 0
-	self.categoryTextField.arrayAutoCompleteStrings = [NSArray arrayWithObjects:@"Income:Salary", @"Income:Rent", @"Transfer:Bank Account", @"Transfer:Cash", @"Transfer:Wallet", @"Expense:Dining", @"Expense:Clothing", @"Expense:Computers", @"Expense:Electronics", @"Expense:Education", @"Expense:Entertainment", @"Expense:Rent", @"Expense:Insurance", @"Expense:Medical", @"Expense:Pets", @"Expense:Recreation", @"Expense:Tax", @"Expense:Vacation", @"Expense:Utilities",nil];
-	self.categoryTextField.tableAbove = YES;
-#endif
-	
     self.bitCoinLabel.text = [CoreBridge formatSatoshi:self.transaction.amountSatoshi];
 
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -223,6 +208,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [DL_URLServer cancelPreviousPerformRequestsWithTarget:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -266,7 +252,7 @@
 	//Total sent
 	content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[NSString stringWithFormat:@"BTC %.5f", ABC_SatoshiToBitcoin(self.transaction.amountSatoshi)]];
 	//source
-	#warning TODO: source and destination addresses are faked for now, so's miner's fee.
+#warning TODO: source and destination addresses are faked for now, so's miner's fee.
 	content = [content stringByReplacingOccurrencesOfString:@"*3" withString:@"1.002<BR>1K7iGspRyQsposdKCSbsoXZntsJ7DPNssN<BR>0.0345<BR>1z8fkj4igkh498thgkjERGG23fhD4gGaNSHa<BR>0.2342<BR>1Wfh8d9csf987gT7H6fjkhd0fkj4tkjhf8S4er3"];
 	//Destination
 	content = [content stringByReplacingOccurrencesOfString:@"*4" withString:@"1M6TCZJTdVX1xGC8iAcQLTDtRKF2zM6M38<BR>1.27059<BR>12HUD1dsrc9dhQgGtWxqy8dAM2XDgvKdzq<BR>0.00001"];
@@ -277,6 +263,99 @@
 }
 
 #pragma mark - Misc Methods
+
+
+- (void)generateListOfBusinesses
+{
+    // start with nothing
+    self.arrayBusinesses = @[];
+
+    // query the server
+    [[DL_URLServer controller] cancelAllRequestsForDelegate:self];
+
+	NSMutableString *strURL = [[NSMutableString alloc] init];
+
+    // create the search query
+    [strURL appendString:[NSString stringWithFormat:@"%@/search/?radius=%d&sort=%d", SERVER_API, SEARCH_RADIUS, SORT_RESULT_DISTANCE]];
+
+    // add our location
+    [self addLocationToQuery:strURL];
+
+    // run the search
+    NSLog(@"Query: %@", strURL);
+    [[DL_URLServer controller] issueRequestURL:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                    withParams:nil
+                                    withObject:self
+                                  withDelegate:self
+                            acceptableCacheAge:CACHE_AGE_SECS
+                                   cacheResult:YES];
+}
+
+- (void)generateListOfContactNames
+{
+    NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
+
+    _foundContactsArray = [[NSMutableArray alloc]init];
+
+	CFErrorRef error;
+	ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+
+	__block BOOL accessGranted = NO;
+
+	if (ABAddressBookRequestAccessWithCompletion != NULL)
+	{
+		// we're on iOS 6
+		dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+
+		ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+												 {
+													 accessGranted = granted;
+													 dispatch_semaphore_signal(sema);
+												 });
+
+		dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+		//dispatch_release(sema);
+	}
+	else
+	{
+		// we're on iOS 5 or older
+		accessGranted = YES;
+	}
+
+	if (accessGranted)
+	{
+		CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+		NSMutableArray *allNames = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(people)];
+		for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
+		{
+			ABRecordRef person = CFArrayGetValueAtIndex(people, i);
+
+			NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+			NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
+
+
+			[allNames addObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName]];
+
+            NSString *strFullName = [Util getNameFromAddressRecord:person];
+            if ([strFullName length])
+            {
+                if ([arrayContacts indexOfObject:strFullName] == NSNotFound)
+                {
+                    [arrayContacts addObject:strFullName];
+                }
+            }
+		}
+
+		_contactsArray = allNames;
+		_autoCompleteResults = allNames; //start autoCompleteResults with something (don't have business names at this point)
+		//NSLog(@"All Email %@", _contactsArray);
+	}
+
+    // store the final
+    //self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    self.arrayContacts = arrayContacts;
+    //NSLog(@"contacts: %@", self.arrayContacts);
+}
 
 - (UIImage *)stretchableImage:(NSString *)imageName
 {
@@ -398,13 +477,16 @@
         strSecondType = @"Expense:";
     }
 
+    NSArray *arrayTypes = @[strFirstType, strSecondType, strThirdType];
+
     // run through each type
-    [self addMatchesToArray:arrayChoices forCategoryType:strFirstType withMatchesFor:strCurVal inArray:self.arrayCategories];
-    [self addMatchesToArray:arrayChoices forCategoryType:strSecondType withMatchesFor:strCurVal inArray:self.arrayCategories];
-    [self addMatchesToArray:arrayChoices forCategoryType:strThirdType withMatchesFor:strCurVal inArray:self.arrayCategories];
+    for (NSString *strPrefix in arrayTypes)
+    {
+        [self addMatchesToArray:arrayChoices forCategoryType:strPrefix withMatchesFor:strCurVal inArray:self.arrayCategories];
+    }
 
     // add the choices constructed with the current string
-    for (NSString *strPrefix in ARRAY_CATEGORY_PREFIXES)
+    for (NSString *strPrefix in arrayTypes)
     {
         NSString *strCategory = [NSString stringWithFormat:@"%@%@", strPrefix, strCurVal];
 
@@ -497,6 +579,50 @@
     }
 }
 
+- (void)updateAutoCompleteArray
+{
+    if (_autoCompleteTable)
+    {
+        // if there is anything in the payee field
+        if ([self.nameTextField.text length])
+        {
+            NSString *strTerm = self.nameTextField.text;
+
+            NSMutableArray *arrayAutoComplete = [[NSMutableArray alloc] init];
+
+            // go through all the businesses
+            for (NSString *strBusiness in self.arrayBusinesses)
+            {
+                // if it is in there
+                if ([strBusiness rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound)
+                {
+                    [arrayAutoComplete addObject:strBusiness];
+                }
+            }
+
+            // go through all the contacts
+            for (NSString *strContact in self.arrayContacts)
+            {
+                // if it is in there
+                if ([strContact rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound)
+                {
+                    [arrayAutoComplete addObject:strContact];
+                }
+            }
+
+            self.arrayAutoComplete = [arrayAutoComplete sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        }
+        else
+        {
+            // since nothing in payee yet, just populate with businesses (already sorted by distance)
+            self.arrayAutoComplete = self.arrayBusinesses;
+        }
+        
+        
+        [_autoCompleteTable reloadData];
+    }
+}
+
 #pragma mark - Calculator delegates
 
 - (void)CalculatorDone:(CalculatorView *)calculator
@@ -507,20 +633,6 @@
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
     //NSLog(@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
-}
-
-#pragma mark - AutoCompleteTextField delegates
-
-- (void)autoCompleteTextFieldDidSelectFromTable:(AutoCompleteTextField *)textField
-{
-	if (textField == self.nameTextField)
-	{
-        [textField resignFirstResponder];
-        if (!self.bOldTransaction)
-        {
-            [self.pickerTextCategory.textField becomeFirstResponder];
-        }
-	}
 }
 
 #pragma mark - Category Table
@@ -599,7 +711,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_autoCompleteResults count];
+    return [self.arrayAutoComplete count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -610,9 +722,11 @@
     
     //5.1 you do not need this if you have set SettingsCell as identifier in the storyboard (else you can remove the comments on this code)
     if (cell == nil)
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
     
-    cell.textLabel.text = [_autoCompleteResults objectAtIndex:indexPath.row];
+    cell.textLabel.text = [self.arrayAutoComplete objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -621,11 +735,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	self.nameTextField.text = [_autoCompleteResults objectAtIndex:indexPath.row];
+	self.nameTextField.text = [self.arrayAutoComplete objectAtIndex:indexPath.row];
 	
 	//dismiss the tableView
 	//[self dismissPayeeTable];
 	[self.nameTextField resignFirstResponder];
+    [self dismissPayeeTable];
 	/*self.text = [autoCompleteResults objectAtIndex:indexPath.row];
     [self hideTableViewAnimated:YES];
     [self resignFirstResponder];
@@ -646,6 +761,8 @@
 
 -(void)kickOffSearchWithString:(NSString *)searchStr
 {
+    return; // temp: do nothing for now
+
 	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 	NSMutableString *urlString = [[NSMutableString alloc] init];
 	
@@ -737,55 +854,6 @@
 	//cw self.namePickerTextView.arrayChoices = autoCompleteResults;
 }
 
-- (void)generateListOfContactNames
-{
-    _foundContactsArray = [[NSMutableArray alloc]init];
-    
-	CFErrorRef error;
-	ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-	
-	__block BOOL accessGranted = NO;
-	
-	if (ABAddressBookRequestAccessWithCompletion != NULL)
-	{
-		// we're on iOS 6
-		dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-		
-		ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
-												 {
-													 accessGranted = granted;
-													 dispatch_semaphore_signal(sema);
-												 });
-		
-		dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-		//dispatch_release(sema);
-	}
-	else
-	{
-		// we're on iOS 5 or older
-		accessGranted = YES;
-	}
-	
-	if (accessGranted)
-	{
-		CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
-		NSMutableArray *allNames = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(people)];
-		for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
-		{
-			ABRecordRef person = CFArrayGetValueAtIndex(people, i);
-			
-			NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
-			NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
-			
-			
-			[allNames addObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName]];
-		}
-		
-		_contactsArray = allNames;
-		_autoCompleteResults = allNames; //start autoCompleteResults with something (don't have business names at this point)
-		NSLog(@"All Email %@", _contactsArray);
-	}
-}
 
 #pragma mark - DLURLServer Callbacks
 
@@ -803,6 +871,23 @@
 	NSArray *searchResultsArray;
 	//NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
 	searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
+
+    NSMutableArray *arrayBusinesses = [[NSMutableArray alloc] init];
+
+    for (NSDictionary *dict in searchResultsArray)
+	{
+		NSString *name = [dict objectForKey:@"name"];
+		if(name && name != (id)[NSNull null])
+		{
+			[arrayBusinesses addObject:name];
+		}
+	}
+
+    self.arrayBusinesses = arrayBusinesses;
+    //NSLog(@"Businesses: %@", arrayBusinesses);
+
+    [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
+#if 0
 	
 	//build array of business (prune categories out of list)
 	[_foundBusinessNames removeAllObjects];
@@ -844,6 +929,7 @@
 	
 	
 	[self mergeAutoCompleteResults];
+#endif
 }
 
 #pragma mark - UITextField delegates
@@ -855,10 +941,7 @@
      [(AutoCompleteTextField *)textField autoCompleteTextFieldShouldChangeCharactersInRange:range replacementString:string];
      }*/
 
-    if (textField == self.nameTextField)
-    {
-        [self kickOffSearchWithString:textField.text];
-    }
+
 	return YES;
 }
 
@@ -879,6 +962,7 @@
         frame.origin.y = 100;
         frame.size.height = 252;
         [self spawnPayeeTableInFrame:frame];
+        [self updateAutoCompleteArray];
     }
     else if (textField == self.notesTextField)
     {
@@ -917,6 +1001,14 @@
 	}
     
 	return YES;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if (textField == self.nameTextField)
+    {
+        [self updateAutoCompleteArray];
+    }
 }
 
 #pragma mark - PickerTextView Delegates

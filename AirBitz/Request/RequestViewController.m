@@ -599,47 +599,7 @@ typedef enum eAddressPickerType
 	}
 }
 
-// creates the full name from an address book record
-- (NSString *)getNameFromAddressRecord:(ABRecordRef)person
-{
-    NSString *strFirstName = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-    NSString *strMiddleName = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
-    NSString *strLastName  = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
 
-    NSMutableString *strFullName = [[NSMutableString alloc] init];
-    if (strFirstName)
-    {
-        [strFullName appendString:strFirstName];
-    }
-    if (strMiddleName)
-    {
-        if ([strFullName length])
-        {
-            [strFullName appendString:@" "];
-        }
-        [strFullName appendString:strMiddleName];
-    }
-    if (strLastName)
-    {
-        if ([strFullName length])
-        {
-            [strFullName appendString:@" "];
-        }
-        [strFullName appendString:strLastName];
-    }
-
-    // if we don't have a name yet, try the company
-    if ([strFullName length] == 0)
-    {
-        NSString *strCompanyName  = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonOrganizationProperty);
-        if (strCompanyName)
-        {
-            [strFullName appendString:strCompanyName];
-        }
-    }
-
-    return strFullName;
-}
 
 - (void)bringUpImportWalletView
 {
@@ -718,7 +678,7 @@ typedef enum eAddressPickerType
                               identifier:(ABMultiValueIdentifier)identifier
 {
 
-    self.strFullName = [self getNameFromAddressRecord:person];
+    self.strFullName = [Util getNameFromAddressRecord:person];
 
     if (_addressPickerType == AddressPickerType_SMS)
     {

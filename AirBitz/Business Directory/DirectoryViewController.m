@@ -24,6 +24,7 @@
 #import "CustomAnnotationView.h"
 #import "MoreCategoriesViewController.h"
 #import "InfoView.h"
+#import "CommonTypes.h"
 
 //server defines (uncomment one)
 #define SERVER_MESSAGES_TO_SHOW		VERBOSE_MESSAGES_OFF
@@ -44,9 +45,7 @@
 #define AGE_ACCEPT_CACHE_SECS	60.0 /* seconds */
 #define DEFAULT_RESULTS_PER_PAGE	50 /* how many results to request from the server at a time */
 
-//business search sort parameter can be one of these
-#define SORT_RESULT_BEST_MATCH	0
-#define SORT_RESULT_DISTANCE	1
+
 
 #define MILES_TO_METERS(a)	(a * 1609.34)
 
