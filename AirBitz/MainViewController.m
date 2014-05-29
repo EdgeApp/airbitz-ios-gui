@@ -463,7 +463,7 @@ typedef enum eAppMode
         }
         completion:^(BOOL finished)
         {
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC);
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 [self launchTransactionDetails:transaction];
                 [sendStatusController.view removeFromSuperview];
