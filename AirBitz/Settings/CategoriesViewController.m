@@ -98,7 +98,7 @@
 
 - (void)dealloc
 {
-    [self freeStringArray:_aszCategories count:_count];
+    [Util freeStringArray:_aszCategories count:_count];
 }
 
 #pragma mark - Action Methods
@@ -328,18 +328,6 @@
 {
     [self.textSearch resignFirstResponder];
     [self.pickerTextNew.textField resignFirstResponder];
-}
-
-- (void)freeStringArray:(char **)aszStrings count:(unsigned int) count
-{
-    if ((aszStrings != NULL) && (count > 0))
-    {
-        for (int i = 0; i < count; i++)
-        {
-            free(aszStrings[i]);
-        }
-        free(aszStrings);
-    }
 }
 
 - (void)animatedExit

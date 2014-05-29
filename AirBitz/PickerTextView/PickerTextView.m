@@ -64,6 +64,7 @@
 {
     self.arrayChoices = arrayChoices;
     [self.popupPicker updateStrings:self.arrayChoices];
+    [self setCropPoints];
 }
 
 #pragma mark - Action Methods
@@ -79,6 +80,9 @@
     frame.origin.y = 0;
     self.textField = [[UITextField alloc] initWithFrame:frame];
     [self addSubview:self.textField];
+
+    self.cropPointTop = -1;
+    self.cropPointBottom = -1;
 
     self.popupPickerPosition = PopupPickerPosition_Below;
     self.popupPicker = nil;
@@ -124,6 +128,27 @@
     self.popupPicker.tableViewCellStyle = self.pickerTableViewCellStyle;
     [self.popupPicker disableBackgroundTouchDetect];
 	self.popupPicker.delegate = self;
+    [self setCropPoints];
+
+    if ([self.delegate respondsToSelector:@selector(pickerTextViewFieldDidShowPopup:)])
+    {
+        return [self.delegate pickerTextViewFieldDidShowPopup:self];
+    }
+}
+
+- (void)setCropPoints
+{
+    if (self.popupPicker)
+    {
+        if (self.cropPointTop != -1)
+        {
+            [self.popupPicker addCropLine:CGPointMake(0, self.cropPointTop) direction:PopupPickerPosition_Above animated:NO];
+        }
+        if (self.cropPointBottom != -1)
+        {
+            [self.popupPicker addCropLine:CGPointMake(0, self.cropPointBottom) direction:PopupPickerPosition_Below animated:NO];
+        }
+    }
 }
 
 #pragma mark - UITextField delegates

@@ -24,16 +24,17 @@
 #import "Util.h"
 #import "CommonTypes.h"
 
+#define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:"]
+
+#define PICKER_MAX_CELLS_VISIBLE 4
 
 #define USE_AUTOCOMPLETE_QUERY 0
 
 #define DOLLAR_CURRENCY_NUM	840
 
-#define USE_NAME_TEXTFIELD	1
-
 #define TEXTFIELD_VERTICAL_SPACE_OFFSET	7.0 /* how much space between screen header and textField when textField is scrolled all the way to the top */
 
-@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, AutoCompleteTextFieldDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, AutoCompleteTextFieldDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
 {
 	UITextField     *_activeTextField;
 	CGRect          _originalFrame;
@@ -57,10 +58,15 @@
 @property (nonatomic, weak) IBOutlet UIButton           *doneButton;
 @property (nonatomic, weak) IBOutlet UITextField        *fiatTextField;
 @property (nonatomic, weak) IBOutlet UITextField        *notesTextField;
-@property (nonatomic, weak) IBOutlet StylizedTextField  *categoryTextField;
 @property (nonatomic, weak) IBOutlet StylizedTextField  *nameTextField;
 @property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
-//@property (nonatomic, weak) IBOutlet StylizedTextField *namePickerTextView;
+@property (weak, nonatomic) IBOutlet PickerTextView     *pickerTextCategory;
+
+@property (nonatomic, strong) NSArray           *arrayCategories;
+@property (nonatomic, strong) NSArray           *arrayCategoriesExpense;
+@property (nonatomic, strong) NSArray           *arrayCategoriesTransfer;
+@property (nonatomic, strong) NSArray           *arrayCategoriesIncome;
+
 @end
 
 @implementation TransactionDetailsViewController
@@ -83,9 +89,12 @@
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.contentView];
 
+    // update our array of categories
+    [self loadCategories];
+
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
-    self.categoryTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
+    self.pickerTextCategory.textField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
     self.notesTextField.returnKeyType = UIReturnKeyDone;
 
 	[self generateListOfContactNames];
@@ -101,15 +110,23 @@
 	self.fiatTextField.delegate = self;
 	self.fiatTextField.inputView = self.keypadView;
 	self.notesTextField.delegate = self;
-#if	USE_NAME_TEXTFIELD
 	self.nameTextField.delegate = self;
-	//self.nameTextField.autoTextFieldDelegate = self;
-#else
-	//self.namePickerTextView.textField.delegate = self;
-	self.namePickerTextView.delegate = self;
-	self.namePickerTextView.pickerMaxChoicesVisible = 20;
-#endif
-	self.categoryTextField.delegate = self;
+
+
+    // set up the specifics on our picker text view
+    self.pickerTextCategory.textField.borderStyle = UITextBorderStyleNone;
+    self.pickerTextCategory.textField.backgroundColor = [UIColor clearColor];
+    self.pickerTextCategory.textField.font = [UIFont systemFontOfSize:14];
+    self.pickerTextCategory.textField.clearButtonMode = UITextFieldViewModeAlways;
+    self.pickerTextCategory.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.pickerTextCategory.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.pickerTextCategory.textField.spellCheckingType = UITextSpellCheckingTypeNo;
+    self.pickerTextCategory.textField.textColor = [UIColor whiteColor];
+    [self.pickerTextCategory setTopMostView:self.view];
+    //self.pickerTextCategory.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
+    self.pickerTextCategory.cropPointBottom = 360; // magic number
+    self.pickerTextCategory.delegate = self;
+
 	
 	//self.categoryTextField.autoTextFieldDelegate = self;
 	
@@ -132,36 +149,28 @@
 	
     NSLog(@("%@ %@ %@\n"), self.transaction.strName, self.transaction.strCategory, self.transaction.strNotes);
 	self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
-#if	USE_NAME_TEXTFIELD
 	self.nameTextField.text = self.transaction.strName;
-    //[self.nameTextField setTableBelow:YES];
     self.notesTextField.text = self.transaction.strNotes;
-    self.categoryTextField.text = self.transaction.strCategory;
-#endif
-	#warning TODO Put these in an array here and use it to source the auto-complete tableView  Look at AutoCompleteTextField.m (-searchAutocompleteEntriesWithSubstring) for code that ignores "Transfer:", "Expense:", etc.
-	#if 0
+    self.pickerTextCategory.textField.text = self.transaction.strCategory;
+
+#warning TODO Put these in an array here and use it to source the auto-complete tableView  Look at AutoCompleteTextField.m (-searchAutocompleteEntriesWithSubstring) for code that ignores "Transfer:", "Expense:", etc.
+#if 0
 	self.categoryTextField.arrayAutoCompleteStrings = [NSArray arrayWithObjects:@"Income:Salary", @"Income:Rent", @"Transfer:Bank Account", @"Transfer:Cash", @"Transfer:Wallet", @"Expense:Dining", @"Expense:Clothing", @"Expense:Computers", @"Expense:Electronics", @"Expense:Education", @"Expense:Entertainment", @"Expense:Rent", @"Expense:Insurance", @"Expense:Medical", @"Expense:Pets", @"Expense:Recreation", @"Expense:Tax", @"Expense:Vacation", @"Expense:Utilities",nil];
 	self.categoryTextField.tableAbove = YES;
-	#endif
+#endif
 	
-	//[self.addressButton setTitle:self.transaction.strAddress forState:UIControlStateNormal];
     self.bitCoinLabel.text = [CoreBridge formatSatoshi:self.transaction.amountSatoshi];
 
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-#if USE_NAME_TEXTFIELD
+
 	self.nameTextField.placeholder = NSLocalizedString(@"Payee or Business Name", nil);
     if (!self.bOldTransaction)
     {
         [self.nameTextField becomeFirstResponder];
     }
-#else
-	
-	[self.namePickerTextView setTextFieldObject:[[StylizedTextField alloc] initWithFrame:self.namePickerTextView.textField.frame]];
-	self.namePickerTextView.textField.text = self.transaction.strName;
-	self.namePickerTextView.textField.placeholder = NSLocalizedString(@"Payee or Business Name", nil);
-#endif	
+
 	_originalHeaderFrame = self.headerView.frame;
 	_originalContentFrame = self.contentView.frame;
 	_originalScrollableContentFrame = self.scrollableContentView.frame;
@@ -211,6 +220,11 @@
 	[self.delegate TransactionDetailsViewControllerDone:self];
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -224,9 +238,12 @@
 {
     [self resignAllResponders];
 
+    // add the category if we didn't have it
+    [self addCategory:self.pickerTextCategory.textField.text];
+
     self.transaction.strName = [self.nameTextField text];
     self.transaction.strNotes = [self.notesTextField text];
-    self.transaction.strCategory = [self.categoryTextField text];
+    self.transaction.strCategory = [self.pickerTextCategory.textField text];
     self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
 
     [CoreBridge storeTransaction: self.transaction];
@@ -268,6 +285,21 @@
 	return stretchable;
 }
 
+- (void)scrollContentViewToFrame:(CGRect)newFrame
+{
+    [UIView animateWithDuration:0.35
+                          delay: 0.0
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         self.scrollableContentView.frame = newFrame;
+     }
+                     completion:^(BOOL finished)
+     {
+
+     }];
+}
+
 - (void)scrollContentViewBackToOriginalPosition
 {
 	[UIView animateWithDuration:0.35
@@ -284,13 +316,198 @@
 	 }];
 }
 
+// returns which prefix the given string starts with
+// returns nil in none of them
+- (NSString *)categoryPrefix:(NSString *)strCategory
+{
+    if (strCategory)
+    {
+        for (NSString *strPrefix in ARRAY_CATEGORY_PREFIXES)
+        {
+            if ([strCategory hasPrefix:strPrefix])
+            {
+                return strPrefix;
+            }
+        }
+    }
+
+    return nil;
+}
+
+- (void)addMatchesToArray:(NSMutableArray *)arrayMatches forCategoryType:(NSString *)strPrefix withMatchesFor:(NSString *)strMatch inArray:(NSArray *)arraySource
+{
+    for (NSString *strCategory in arraySource)
+    {
+        if ([strCategory hasPrefix:strPrefix])
+        {
+            BOOL bAddIt = YES;
+
+            if ([strMatch length])
+            {
+                bAddIt = NO;
+                // if the string is long enough
+                if ([strCategory length] >= [strPrefix length] + [strMatch length])
+                {
+                    // search for it
+                    NSRange searchRange;
+                    searchRange.location = [strPrefix length];
+                    searchRange.length = [strCategory length] - [strPrefix length];
+                    NSRange range = [strCategory rangeOfString:strMatch options:NSCaseInsensitiveSearch range:searchRange];
+                    if (range.location != NSNotFound)
+                    {
+                        bAddIt = YES;
+                    }
+                }
+            }
+            if (bAddIt)
+            {
+                [arrayMatches addObject:strCategory];
+            }
+        }
+    }
+}
+
+- (NSArray *)createNewCategoryChoices:(NSString *)strVal
+{
+    NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
+
+    // start with the value given
+    NSMutableString *strCurVal = [[NSMutableString alloc] initWithString:@""];
+    if (strVal)
+    {
+        if ([strVal length])
+        {
+            [strCurVal setString:strVal];
+        }
+    }
+
+    // remove the prefix if it exists
+    NSString *strPrefix = [self categoryPrefix:strCurVal];
+    if (strPrefix)
+    {
+        [strCurVal setString:[strCurVal substringFromIndex:[strPrefix length]]];
+    }
+
+    NSString *strFirstType = @"Expense:";
+    NSString *strSecondType = @"Income:";
+    NSString *strThirdType = @"Transfer";
+
+    if (self.transactionDetailsMode == TD_MODE_RECEIVED)
+    {
+        strFirstType = @"Income:";
+        strSecondType = @"Expense:";
+    }
+
+    // run through each type
+    [self addMatchesToArray:arrayChoices forCategoryType:strFirstType withMatchesFor:strCurVal inArray:self.arrayCategories];
+    [self addMatchesToArray:arrayChoices forCategoryType:strSecondType withMatchesFor:strCurVal inArray:self.arrayCategories];
+    [self addMatchesToArray:arrayChoices forCategoryType:strThirdType withMatchesFor:strCurVal inArray:self.arrayCategories];
+
+    // add the choices constructed with the current string
+    for (NSString *strPrefix in ARRAY_CATEGORY_PREFIXES)
+    {
+        NSString *strCategory = [NSString stringWithFormat:@"%@%@", strPrefix, strCurVal];
+
+        // if it isn't already in our array
+        if (NSNotFound == [arrayChoices indexOfObject:strCategory])
+        {
+            [arrayChoices addObject:strCategory];
+        }
+    }
+
+    return arrayChoices;
+}
+
+- (void)forceCategoryFieldValue:(UITextField *)textField forPickerView:(PickerTextView *)pickerTextView
+{
+    NSMutableString *strNewVal = [[NSMutableString alloc] init];
+    [strNewVal appendString:textField.text];
+
+    NSString *strPrefix = [self categoryPrefix:textField.text];
+
+    // if it doesn't start with a prefix, make it
+    if (strPrefix == nil)
+    {
+        [strNewVal insertString:[ARRAY_CATEGORY_PREFIXES objectAtIndex:0] atIndex:0];
+    }
+
+    textField.text = strNewVal;
+
+    NSArray *arrayChoices = [self createNewCategoryChoices:textField.text];
+
+    [pickerTextView updateChoices:arrayChoices];
+}
+
 - (void)resignAllResponders
 {
     [self.notesTextField resignFirstResponder];
-    [self.categoryTextField resignFirstResponder];
+    [self.pickerTextCategory.textField resignFirstResponder];
     [self.nameTextField resignFirstResponder];
     [self.fiatTextField resignFirstResponder];
     [self dismissPayeeTable];
+}
+
+- (void)loadCategories
+{
+    char            **aszCategories = NULL;
+    unsigned int    countCategories = 0;
+
+    // get the categories from the core
+    tABC_Error Error;
+    ABC_GetCategories([[User Singleton].name UTF8String],
+                      &aszCategories,
+                      &countCategories,
+                      &Error);
+    [Util printABC_Error:&Error];
+
+    // store them in our own array
+    NSMutableArray *arrayCategories = [[NSMutableArray alloc] init];
+    if (aszCategories)
+    {
+        for (int i = 0; i < countCategories; i++)
+        {
+            [arrayCategories addObject:[NSString stringWithUTF8String:aszCategories[i]]];
+        }
+    }
+
+    // store the final as storted
+    self.arrayCategories = [arrayCategories sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+
+    // free the core categories
+    if (aszCategories != NULL)
+    {
+        [Util freeStringArray:aszCategories count:countCategories];
+    }
+}
+
+- (void)addCategory:(NSString *)strCategory
+{
+    // check and see if there is more text than just the prefix
+    //if ([ARRAY_CATEGORY_PREFIXES indexOfObject:strCategory] == NSNotFound)
+    {
+        // check and see that it doesn't already exist
+        if ([self.arrayCategories indexOfObject:strCategory] == NSNotFound)
+        {
+            // add the category to the core
+            tABC_Error Error;
+            ABC_AddCategory([[User Singleton].name UTF8String], (char *)[strCategory UTF8String], &Error);
+            [Util printABC_Error:&Error];
+        }
+    }
+}
+
+// forces the size of the popup picker on the picker text view to a certain size
+- (void)forcePopupPickerFrameSize
+{
+    // Note: we have to do this because right now the size will start as max needed but as we dynamically
+    //       alter the choices, we may end up with more choices than we originally started with
+    //       so we want the table to always be as large as it can be
+    if (self.pickerTextCategory.popupPicker)
+    {
+        CGRect frame = self.pickerTextCategory.popupPicker.frame;
+        frame.size.height = 220; // magic number
+        self.pickerTextCategory.popupPicker.frame = frame;
+    }
 }
 
 #pragma mark - Calculator delegates
@@ -309,87 +526,19 @@
 
 - (void)autoCompleteTextFieldDidSelectFromTable:(AutoCompleteTextField *)textField
 {
-	if(textField == self.nameTextField)
+	if (textField == self.nameTextField)
 	{
-		[self.categoryTextField becomeFirstResponder];
+        [textField resignFirstResponder];
+        if (!self.bOldTransaction)
+        {
+            [self.pickerTextCategory.textField becomeFirstResponder];
+        }
 	}
 }
-/*
-#pragma mark PickerTextView delegates
-
-- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
-{
-	NSLog(@"DID BEGIN EDITING");
-	[UIView animateWithDuration:0.35
-						  delay: 0.0
-						options: UIViewAnimationOptionCurveEaseOut
-					 animations:^
-	 {
-		 CGRect frame = originalHeaderFrame;
-		 frame.size.height *= 0.6;
-		 self.headerView.frame = frame;
-		 
-		 CGRect contentFrame = originalContentFrame;
-		 contentFrame.origin.y = frame.origin.y + frame.size.height;
-		 contentFrame.size.height += (frame.size.height - originalHeaderFrame.size.height);
-		 self.contentView.frame = contentFrame;
-		 
-		 CGRect scrollFrame = originalScrollableContentFrame;
-		 scrollFrame.origin.y -= (pickerTextView.frame.origin.y - 7.0);
-		 self.scrollableContentView.frame = scrollFrame;
-	 }
-					 completion:^(BOOL finished)
-	 {
-	 }];
-}
-
-- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
-{
-	NSLog(@"DID END EDITING");
-	[UIView animateWithDuration:0.35
-						  delay: 0.0
-						options: UIViewAnimationOptionCurveEaseOut
-					 animations:^
-	 {
-		 self.headerView.frame = originalHeaderFrame;
-		 
-		 self.contentView.frame = originalContentFrame;
-		 
-		 self.scrollableContentView.frame = originalScrollableContentFrame;
-	 }
-	completion:^(BOOL finished)
-	 {
-	 }];
-}
-
-- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
-{
-	NSLog(@"SHOULD RETURN");
-	return YES;
-}
-
--(BOOL)pickerTextViewFieldShouldChange:(PickerTextView *)pickerTextView charactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-	NSString * searchStr = [pickerTextView.textField.text stringByReplacingCharactersInRange:range withString:string];
-    
-	//cw if(self.arrayAutoCompleteStrings.count)
-	{
-	//cw 	autoCompleteResults = self.arrayAutoCompleteStrings;
-	}
-	//cwelse
-	{
-		[self kickOffSearchWithString:searchStr];
-		
-		
-    }
-	//cw [self searchAutocompleteEntriesWithSubstring:searchStr];
-	return YES;
-}
-*/
 
 #pragma mark - Category Table
 
--(void)spawnCategoryTableInFrame:(CGRect)frame
+- (void)spawnCategoryTableInFrame:(CGRect)frame
 {
 	CGRect startingFrame = frame;
 	startingFrame.size.height = 0;
@@ -488,9 +637,8 @@
 	self.nameTextField.text = [_autoCompleteResults objectAtIndex:indexPath.row];
 	
 	//dismiss the tableView
-	[self dismissPayeeTable];
+	//[self dismissPayeeTable];
 	[self.nameTextField resignFirstResponder];
-	[self.categoryTextField resignFirstResponder];
 	/*self.text = [autoCompleteResults objectAtIndex:indexPath.row];
     [self hideTableViewAnimated:YES];
     [self resignFirstResponder];
@@ -673,7 +821,7 @@
 	[_foundBusinessNames removeAllObjects];
 	
 	
-	for(NSDictionary *dict in searchResultsArray)
+	for (NSDictionary *dict in searchResultsArray)
 	{
 #if USE_AUTOCOMPLETE_QUERY
 		NSString *type = [dict objectForKey:@"type"];
@@ -745,11 +893,6 @@
         frame.size.height = 252;
         [self spawnPayeeTableInFrame:frame];
     }
-    else if (textField == self.categoryTextField)
-    {
-        scrollFrame.origin.y = -250;
-        [self dismissPayeeTable];
-    }
     else if (textField == self.notesTextField)
     {
         scrollFrame.origin.y = -90;
@@ -760,17 +903,7 @@
         scrollFrame.origin.y = _originalScrollableContentFrame.origin.y;
     }
 
-    [UIView animateWithDuration:0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations:^
-     {
-         self.scrollableContentView.frame = scrollFrame;
-     }
-                     completion:^(BOOL finished)
-     {
-
-     }];
+    [self scrollContentViewToFrame:scrollFrame];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -792,18 +925,111 @@
 		[self dismissPayeeTable];
         if (!self.bOldTransaction)
         {
-            [self.categoryTextField becomeFirstResponder];
+            [self.pickerTextCategory.textField becomeFirstResponder];
         }
 	}
-    else if (textField == self.categoryTextField)
+    
+	return YES;
+}
+
+#pragma mark - PickerTextView Delegates
+
+- (BOOL)pickerTextViewFieldShouldChange:(PickerTextView *)pickerTextView charactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    // create what the new value would look like
+    NSString *strNewVal = [pickerTextView.textField.text stringByReplacingCharactersInRange:range withString:string];
+
+    // if it still has a prefix
+    if ([self categoryPrefix:strNewVal])
     {
+        // allow it
+        return YES;
+    }
+
+    return NO;
+}
+
+- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
+{
+    NSMutableString *strNewVal = [[NSMutableString alloc] init];
+    [strNewVal appendString:pickerTextView.textField.text];
+
+    NSString *strPrefix = [self categoryPrefix:pickerTextView.textField.text];
+
+    // if it doesn't start with a prefix, make it
+    if (strPrefix == nil)
+    {
+        [strNewVal insertString:[ARRAY_CATEGORY_PREFIXES objectAtIndex:0] atIndex:0];
+    }
+
+    pickerTextView.textField.text = strNewVal;
+
+    NSArray *arrayChoices = [self createNewCategoryChoices:pickerTextView.textField.text];
+
+    [pickerTextView updateChoices:arrayChoices];
+}
+
+- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
+{
+    // move the window up so that the category field is at the top
+    CGRect scrollFrame = self.scrollableContentView.frame;
+    scrollFrame.origin.y = -250; // magic number TODO: modify for iPhone4
+    [self scrollContentViewToFrame:scrollFrame];
+
+    [self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
+
+    // highlight all the text after the :
+    NSRange range = [pickerTextView.textField.text rangeOfString:@":"];
+    UITextPosition *startPosition = [pickerTextView.textField positionFromPosition:pickerTextView.textField.beginningOfDocument offset:range.location + 1];
+    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:startPosition toPosition:pickerTextView.textField.endOfDocument]];
+}
+
+- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
+{
+    // unhighlight text
+    // note: for some reason, if we don't do this, the text won't select next time the user selects it
+    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.beginningOfDocument]];
+
+    return YES;
+}
+
+- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
+{
+    //[self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
+}
+
+- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
+{
+	[pickerTextView.textField resignFirstResponder];
+
+    if (!self.bOldTransaction)
+    {
+        [self.notesTextField becomeFirstResponder];
+    }
+
+	return YES;
+}
+
+- (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
+{
+    // set the text field to the choice
+    pickerTextView.textField.text = [pickerTextView.arrayChoices objectAtIndex:row];
+
+    // check and see if there is more text than just the prefix
+    if ([ARRAY_CATEGORY_PREFIXES indexOfObject:pickerTextView.textField.text] == NSNotFound)
+    {
+        [pickerTextView.textField resignFirstResponder];
+
         if (!self.bOldTransaction)
         {
             [self.notesTextField becomeFirstResponder];
         }
     }
-    
-	return YES;
+}
+
+- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
+{
+    [self forcePopupPickerFrameSize];
 }
 
 #pragma mark - Keyboard callbacks

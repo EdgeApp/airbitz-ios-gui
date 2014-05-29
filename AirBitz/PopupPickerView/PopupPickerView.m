@@ -83,15 +83,15 @@ CGRect keyboardFrame;
 	//NSLog(@"HIDE: keyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 }
 
--(void)addCropLine:(CGPoint)pointOnScreen direction:(tPopupPickerPosition)cropDirection animated:(BOOL)animated
+- (void)addCropLine:(CGPoint)pointOnScreen direction:(tPopupPickerPosition)cropDirection animated:(BOOL)animated
 {
 	float distance;
 	CGPoint newPoint = [self.superview convertPoint:pointOnScreen fromView:self.window];
-	switch(cropDirection)
+	switch (cropDirection)
 	{
 			case PopupPickerPosition_Above:
 				distance = newPoint.y - availableSpace.origin.y;
-				if(distance > 0)
+				if (distance > 0)
 				{
 					availableSpace.origin.y += distance;
 					availableSpace.size.height -= distance;
@@ -100,7 +100,7 @@ CGRect keyboardFrame;
 			break;
 			case PopupPickerPosition_Below:
 				distance = (availableSpace.origin.y + availableSpace.size.height) - newPoint.y;
-				if(distance > 0)
+				if (distance > 0)
 				{
 					availableSpace.size.height -= distance;
 				}
@@ -112,10 +112,10 @@ CGRect keyboardFrame;
 	}
 }
 
--(void)constrainToKeepoutsAnimated:(BOOL)animated
+- (void)constrainToKeepoutsAnimated:(BOOL)animated
 {
 	float duration = 0.01;
-	if(animated)
+	if (animated)
 	{
 		duration = 0.35;
 	}
@@ -218,13 +218,13 @@ CGRect keyboardFrame;
         {
             // put it under the positioning view control
             newFrame.origin.y += viewToPointTo.frame.size.height;
-            newFrame.origin.y += popup.arrowImage.frame.size.height;  // offset by arrow height
+            newFrame.origin.y += popup.arrowImage.frame.size.height - 10;  // offset by arrow height
         }
         else //PopupPickerPosition_Above
         {
             // put it above the positioning view
             newFrame.origin.y -= newFrame.size.height;
-            newFrame.origin.y -= popup.arrowImage.frame.size.height;  // offset by arrow height
+            newFrame.origin.y -= popup.arrowImage.frame.size.height - 10;  // offset by arrow height
         }
         
         // makes sure the picker is within the parents bounds
@@ -254,7 +254,7 @@ CGRect keyboardFrame;
         if (PopupPickerPosition_Below == position)
         {
             // move the arrow to the arrow height above the frame
-            arrowFrame.origin.y = 0.0 - (arrowFrame.size.height) + ARROW_INSET;
+            arrowFrame.origin.y = 0.0 - (arrowFrame.size.height) + ARROW_INSET - 1;
 			
 			// rotate the image by 90 degrees CW
             CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI * 0.5 );
@@ -263,7 +263,7 @@ CGRect keyboardFrame;
         else // if (PopupPickerPosition_Above == position)
         {
             // move the arrow to the bottom of the frame
-            arrowFrame.origin.y = newFrame.size.height - ARROW_INSET;
+            arrowFrame.origin.y = newFrame.size.height - ARROW_INSET - 1;
             
             // rotate the image by 90 degrees CCW
             CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI * 1.5 );
@@ -356,7 +356,7 @@ CGRect keyboardFrame;
     if (selectedRow != -1) 
     {
         //cw table wasn't scrolling to selected position because rows hadn't been filled in yet.  PerformSelector fixed it.
-		[popup performSelectorOnMainThread:@selector(selectRow2:) withObject:[NSNumber numberWithInt:selectedRow] waitUntilDone:NO];
+		[popup performSelectorOnMainThread:@selector(selectRow2:) withObject:[NSNumber numberWithInt:(int)selectedRow] waitUntilDone:NO];
     }
 
     return popup;
@@ -390,6 +390,9 @@ CGRect keyboardFrame;
 
     // start with default style
     self.tableViewCellStyle = UITableViewCellStyleDefault;
+
+    // This will remove extra separators from tableview
+    table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -486,7 +489,7 @@ CGRect keyboardFrame;
 
 -(void)selectRow:(NSInteger)row
 {
-	NSLog(@"Select Row");
+	//NSLog(@"Select Row");
 	NSIndexPath *ip=[NSIndexPath indexPathForRow:row inSection:0];
 	[table selectRowAtIndexPath:ip animated:NO scrollPosition:UITableViewScrollPositionTop];
 	[table scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
@@ -582,7 +585,7 @@ CGRect keyboardFrame;
         }
     }
 
-	NSLog(@"Number of rows: %i", nRows);
+	//NSLog(@"Number of rows: %i", nRows);
     return nRows;
 }
 

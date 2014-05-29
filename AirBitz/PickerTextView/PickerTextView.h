@@ -22,6 +22,8 @@
 @property (nonatomic, assign) NSInteger                     pickerCellHeight;
 @property (nonatomic, assign) UITableViewCellStyle          pickerTableViewCellStyle;
 @property (nonatomic, strong) NSArray                       *arrayChoices;
+@property (nonatomic, assign) CGFloat                       cropPointTop;
+@property (nonatomic, assign) CGFloat                       cropPointBottom;
 
 
 - (void)setTextFieldObject:(UITextField *)newTextField;
@@ -48,5 +50,6 @@
 - (BOOL)pickerTextViewPopupFormatCell:(PopupPickerView *)view onRow:(NSInteger)row withCell:(UITableViewCell *)cell;
 - (NSInteger)pickerTextViewPopupNumberOfRows:(PopupPickerView *)view;
 - (UITableViewCell *)pickerTextViewPopupCellForRow:(PopupPickerView *)view forTableView:(UITableView *)tableView andRow:(NSInteger)row;
+- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView;
 
 @end

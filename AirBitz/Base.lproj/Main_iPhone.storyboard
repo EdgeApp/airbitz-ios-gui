@@ -2753,14 +2753,11 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="OKM-Nh-DUs" customClass="StylizedTextField">
+                                            <view contentMode="scaleToFill" id="bOm-nJ-2Ot" userLabel="View - PickerTextView - Category" customClass="PickerTextView">
                                                 <rect key="frame" x="43" y="274" width="234" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L8T-Xw-aVE" customClass="MontserratLabel">
                                                 <rect key="frame" x="39" y="309" width="82" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2808,7 +2805,6 @@
                     <connections>
                         <outlet property="advancedDetailsButton" destination="3Py-nn-1AR" id="PSa-ob-Oci"/>
                         <outlet property="bitCoinLabel" destination="OfK-AQ-g7A" id="8Ol-7T-Hkk"/>
-                        <outlet property="categoryTextField" destination="OKM-Nh-DUs" id="EyF-bl-BGJ"/>
                         <outlet property="contentView" destination="sWd-a3-a0e" id="sJN-ef-dQK"/>
                         <outlet property="dateLabel" destination="DFL-Hc-ld2" id="Zhq-Ua-blQ"/>
                         <outlet property="doneButton" destination="n7B-WE-395" id="k40-dR-UbY"/>
@@ -2817,6 +2813,7 @@
                         <outlet property="keypadView" destination="XNd-9N-hLm" id="n96-xl-rlz"/>
                         <outlet property="nameTextField" destination="lxC-qf-In1" id="Ikc-V4-hSU"/>
                         <outlet property="notesTextField" destination="Kch-gx-opX" id="IQ6-In-5GR"/>
+                        <outlet property="pickerTextCategory" destination="bOm-nJ-2Ot" id="zBf-0j-yyq"/>
                         <outlet property="scrollableContentView" destination="8ur-EV-QC9" id="brw-Ba-G3c"/>
                         <outlet property="walletLabel" destination="ZW8-Za-VVy" id="bUD-dm-roi"/>
                     </connections>
