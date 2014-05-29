@@ -453,6 +453,7 @@ typedef enum eAppMode
         [self.view addSubview:sendStatusController.view];
         sendStatusController.view.alpha = 0.0;
         sendStatusController.messageLabel.text = NSLocalizedString(@"Receiving...", @"status message");
+        sendStatusController.titleLabel.text = NSLocalizedString(@"Receive Status", @"status title");
         [UIView animateWithDuration:0.35
                             delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
