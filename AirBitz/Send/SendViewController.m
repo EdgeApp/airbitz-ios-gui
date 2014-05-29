@@ -18,8 +18,14 @@
 #import "Util.h"
 #import "InfoView.h"
 #import "ZBarSDK.h"
+#import "PickerTextView.h"
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate>
+#define WALLET_BUTTON_WIDTH         193
+
+#define POPUP_PICKER_LOWEST_POINT   360
+#define POPUP_PICKER_TABLE_HEIGHT   (IS_IPHONE5 ? 180 : 90)
+
+@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate, PickerTextViewDelegate>
 {
 	ZBarReaderView                  *_readerView;
     ZBarReaderController            *_readerPicker;
@@ -31,7 +37,7 @@
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
-@property (nonatomic, weak) IBOutlet UITextField            *sendToTextField;
+@property (weak, nonatomic) IBOutlet PickerTextView         *pickerTextSendTo;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView     *buttonSelector;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageTopFrame;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendTo;
@@ -39,7 +45,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
 @property (weak, nonatomic) IBOutlet UIView                 *viewMiddle;
 
-@property (nonatomic, strong) UIButton  *buttonBlocker;
+@property (nonatomic, strong) NSArray   *arrayWallets;
 
 @end
 
@@ -67,21 +73,27 @@
     _bUsingImagePicker = NO;
 	
 	self.flashSelector.delegate = self;
-	self.sendToTextField.delegate = self;
 	self.buttonSelector.delegate = self;
 
-    // set up our user blocking button
-    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.buttonBlocker.backgroundColor = [UIColor clearColor];
-    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
-    self.buttonBlocker.frame = self.view.bounds;
-    self.buttonBlocker.hidden = YES;
-    [self.view addSubview:self.buttonBlocker];
-    [self.view bringSubviewToFront:self.buttonBlocker];
-    [self.view bringSubviewToFront:self.sendToTextField];
+    // set up the specifics on our picker text view
+    self.pickerTextSendTo.textField.borderStyle = UITextBorderStyleNone;
+    self.pickerTextSendTo.textField.backgroundColor = [UIColor clearColor];
+    self.pickerTextSendTo.textField.font = [UIFont systemFontOfSize:14];
+    self.pickerTextSendTo.textField.clearButtonMode = UITextFieldViewModeAlways;
+    self.pickerTextSendTo.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.pickerTextSendTo.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.pickerTextSendTo.textField.spellCheckingType = UITextSpellCheckingTypeNo;
+    self.pickerTextSendTo.textField.textColor = [UIColor whiteColor];
+    self.pickerTextSendTo.textField.returnKeyType = UIReturnKeyDone;
+    self.pickerTextSendTo.textField.placeholder = NSLocalizedString(@"Bitcoin address or wallet", nil);
+    [self.pickerTextSendTo setTopMostView:self.view];
+    //self.pickerTextSendTo.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
+    self.pickerTextSendTo.cropPointBottom = POPUP_PICKER_LOWEST_POINT;
+    self.pickerTextSendTo.delegate = self;
 
-	self.buttonSelector.textLabel.text = NSLocalizedString(@"Send From:", @"Label text on Send Bitcoin screen");
-	
+	self.buttonSelector.textLabel.text = @"";
+    [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
+
 	[self setWalletButtonTitle];
 }
 
@@ -104,7 +116,6 @@
 	_startScannerTimer = nil;
 
 	[self closeCameraScanner];
-	
 }
 
 - (void)didReceiveMemoryWarning
@@ -119,34 +130,21 @@
 - (IBAction)info
 {
 	[self.view endEditing:YES];
+    [self resignAllResonders];
     [InfoView CreateWithHTML:@"infoSend" forView:self.view];
-}
-
-- (IBAction)buttonBlockerTouched:(id)sender
-{
-	[self.sendToTextField resignFirstResponder];
-    [self blockUser:NO];
 }
 
 - (IBAction)buttonCameraTouched:(id)sender
 {
+    [self resignAllResonders];
     [self showImageScanner];
 }
 
 #pragma mark - Misc Methods
 
-- (void)blockUser:(BOOL)bBlock
+- (void)resignAllResonders
 {
-    if (bBlock)
-    {
-        [self.view bringSubviewToFront:self.buttonBlocker];
-        [self.view bringSubviewToFront:self.sendToTextField];
-        self.buttonBlocker.hidden = NO;
-    }
-    else
-    {
-        self.buttonBlocker.hidden = YES;
-    }
+    [self.pickerTextSendTo.textField resignFirstResponder];
 }
 
 - (void)updateDisplayLayout
@@ -186,7 +184,7 @@
 	
     //printf("Wallets:\n");
 	
-	if(nCount)
+	if (nCount)
 	{
 		tABC_WalletInfo *info = aWalletInfo[_selectedWalletIndex];
 		
@@ -205,6 +203,7 @@
     }
 	
 	self.buttonSelector.arrayItemsToSelect = [walletsArray copy];
+    self.arrayWallets = walletsArray;
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
@@ -329,7 +328,7 @@
 	_readerView.tracksSymbols = NO;
 
 	_readerView.tag = 99999999;
-	if(self.sendToTextField.text.length)
+	if ([self.pickerTextSendTo.textField.text length])
 	{
 		_readerView.alpha = 0.0;
 	}
@@ -348,55 +347,46 @@
     }
 }
 
-
-#pragma mark - UITextField delegates
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+- (NSArray *)createNewSendToChoices:(NSString *)strCur
 {
-	[_readerView stop];
-	[UIView animateWithDuration:1.0
-						  delay:0.0
-						options:UIViewAnimationOptionCurveLinear
-					 animations:^
-	 {
-		 _readerView.alpha = 0.0;
-	 }
-	 completion:^(BOOL finished)
-	 {
+    BOOL bUseAll = YES;
 
-	 }];
-    [self.view bringSubviewToFront:self.buttonBlocker];
-    [self blockUser:YES];
-}
+    if (strCur)
+    {
+        if ([strCur length])
+        {
+            bUseAll = NO;
+        }
+    }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [self blockUser:NO];
-	[textField resignFirstResponder];
-	return YES;
-}
+    NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-	if (textField.text.length)
-	{
-		[self showSendConfirmationWithAddress:textField.text amount:0.0 nameLabel:@" "];
-	}
-	else
-	{
-		[_readerView start];
-		[UIView animateWithDuration:1.0
-							  delay:0.0
-							options:UIViewAnimationOptionCurveLinear
-						 animations:^
-		 {
-			 _readerView.alpha = 1.0;
-		 }
-						 completion:^(BOOL finished)
-		 {
-			 
-		 }];
-	}
+    if (bUseAll)
+    {
+        [arrayChoices addObjectsFromArray:self.arrayWallets];
+    }
+    else
+    {
+        for (NSString *strCurWallet in self.arrayWallets)
+        {
+            // if it is in there or we are adding all
+            if ([strCurWallet rangeOfString:strCur options:NSCaseInsensitiveSearch].location != NSNotFound)
+            {
+                [arrayChoices addObject:strCurWallet];
+            }
+
+        }
+    }
+
+    // remove our currently selected wallet
+    NSString *strCurWallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    NSInteger indexOfCurWalletInChoices = [arrayChoices indexOfObject:strCurWallet];
+    if (indexOfCurWalletInChoices != NSNotFound)
+    {
+        [arrayChoices removeObjectAtIndex:indexOfCurWalletInChoices];
+    }
+
+    return arrayChoices;
 }
 
 #pragma mark - Flash Select Delegates
@@ -450,8 +440,8 @@
 
 - (void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
 {
-	self.sendToTextField.text = nil;
-	[_readerView start];
+	self.pickerTextSendTo.textField.text = nil;
+    [self startCameraScanner:nil];
 	[_sendConfirmationViewController.view removeFromSuperview];
 	_sendConfirmationViewController = nil;
 }
@@ -462,6 +452,16 @@
 {
     _selectedWalletIndex = itemIndex;
     [self setWalletButtonTitle];
+}
+
+- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
+{
+    [self resignAllResonders];
+}
+
+- (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view
+{
+
 }
 
 #pragma mark - ZBar's Delegate methods
@@ -525,5 +525,74 @@
 
 #endif
 
+#pragma mark - PickerTextView Delegates
+
+- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
+{
+    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
+
+    [pickerTextView updateChoices:arrayChoices];
+}
+
+- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
+{
+    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
+
+    [pickerTextView updateChoices:arrayChoices];
+}
+
+- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
+{
+    // unhighlight text
+    // note: for some reason, if we don't do this, the text won't select next time the user selects it
+    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.beginningOfDocument]];
+
+    return YES;
+}
+
+- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
+{
+    //[self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
+}
+
+- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
+{
+	[pickerTextView.textField resignFirstResponder];
+
+    if (pickerTextView.textField.text.length)
+	{
+        [self closeCameraScanner];
+		[self showSendConfirmationWithAddress:pickerTextView.textField.text amount:0.0 nameLabel:@" "];
+	}
+
+	return YES;
+}
+
+- (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
+{
+    // set the text field to the choice
+    pickerTextView.textField.text = [pickerTextView.arrayChoices objectAtIndex:row];
+	[pickerTextView.textField resignFirstResponder];
+
+    if (pickerTextView.textField.text.length)
+	{
+        [self closeCameraScanner];
+		[self showSendConfirmationWithAddress:pickerTextView.textField.text amount:0.0 nameLabel:@" "];
+	}
+}
+
+- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
+{
+    // forces the size of the popup picker on the picker text view to a certain size
+
+    // Note: we have to do this because right now the size will start as max needed but as we dynamically
+    //       alter the choices, we may end up with more choices than we originally started with
+    //       so we want the table to always be as large as it can be
+
+    // first start the popup pickerit right under the control and squished down
+    CGRect frame = pickerTextView.popupPicker.frame;
+    frame.size.height = POPUP_PICKER_TABLE_HEIGHT;
+    pickerTextView.popupPicker.frame = frame;
+}
 
 @end
