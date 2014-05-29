@@ -34,8 +34,9 @@
 
 #define TEXTFIELD_VERTICAL_SPACE_OFFSET	7.0 /* how much space between screen header and textField when textField is scrolled all the way to the top */
 
-#define SEARCH_RADIUS   16093
-#define CACHE_AGE_SECS  25
+#define SEARCH_RADIUS        16093
+#define CACHE_AGE_SECS       25
+#define CACHE_IMAGE_AGE_SECS (60 * 60)
 
 @interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
 {
@@ -66,6 +67,7 @@
 @property (nonatomic, strong)        NSArray                *arrayBusinesses;
 @property (nonatomic, strong)        NSArray                *arrayAutoComplete;
 @property (nonatomic, strong)        NSMutableDictionary    *dictImages; // images for the contacts and businesses
+@property (nonatomic, strong)        NSDictionary           *dictThumbnailURLs; // urls for business thumbnails
 
 @end
 
@@ -91,6 +93,7 @@
 
     self.arrayAutoComplete = @[];
     self.dictImages = [[NSMutableDictionary alloc] init];
+    self.dictThumbnailURLs = [[NSDictionary alloc] init];
 
     // get the list of businesses
     [self generateListOfBusinesses];
@@ -279,10 +282,10 @@
     [self addLocationToQuery:strURL];
 
     // run the search
-    NSLog(@"Query: %@", strURL);
+    //NSLog(@"Query: %@", strURL);
     [[DL_URLServer controller] issueRequestURL:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                                     withParams:nil
-                                    withObject:self
+                                    withObject:nil
                                   withDelegate:self
                             acceptableCacheAge:CACHE_AGE_SECS
                                    cacheResult:YES];
@@ -460,7 +463,7 @@
 
     NSString *strFirstType = @"Expense:";
     NSString *strSecondType = @"Income:";
-    NSString *strThirdType = @"Transfer";
+    NSString *strThirdType = @"Transfer:";
 
     if (self.transactionDetailsMode == TD_MODE_RECEIVED)
     {
@@ -631,6 +634,42 @@
 	}
 }
 
+- (void)getBusinessThumbnails
+{
+    for (NSString *strKey in self.dictThumbnailURLs)
+    {
+        NSString *strThumbnailURL = [self.dictThumbnailURLs objectForKey:strKey];
+
+        NSMutableString *strURL = [[NSMutableString alloc] init];
+
+        // create the search query
+        [strURL appendString:[NSString stringWithFormat:@"%@%@", SERVER_URL, strThumbnailURL]];
+
+        // run the qurey
+        //NSLog(@"Query: %@", strURL);
+        [[DL_URLServer controller] issueRequestURL:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                        withParams:nil
+                                        withObject:strKey
+                                      withDelegate:self
+                                acceptableCacheAge:CACHE_IMAGE_AGE_SECS
+                                       cacheResult:YES];
+    }
+}
+
+- (UIImage *)imageByCroppingImage:(UIImage *)image toSize:(CGSize)size
+{
+    double x = (image.size.width - size.width) / 2.0;
+    double y = (image.size.height - size.height) / 2.0;
+
+    CGRect cropRect = CGRectMake(x, y, size.height, size.width);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
+
+    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+
+    return cropped;
+}
+
 #pragma mark - Calculator delegates
 
 - (void)CalculatorDone:(CalculatorView *)calculator
@@ -746,7 +785,7 @@
         UIGraphicsEndImageContext();
     }
     cell.imageView.image = imageForCell;
-    
+
     return cell;
 }
 
@@ -754,17 +793,9 @@
 {
 	self.nameTextField.text = [self.arrayAutoComplete objectAtIndex:indexPath.row];
 	
-	//dismiss the tableView
-	//[self dismissPayeeTable];
+	// dismiss the tableView
 	[self.nameTextField resignFirstResponder];
     [self dismissPayeeTable];
-	/*self.text = [autoCompleteResults objectAtIndex:indexPath.row];
-    [self hideTableViewAnimated:YES];
-    [self resignFirstResponder];
-	if([self.autoTextFieldDelegate respondsToSelector:@selector(autoCompleteTextFieldDidSelectFromTable:)])
-	{
-		[self.autoTextFieldDelegate autoCompleteTextFieldDidSelectFromTable:self];
-	}*/
 }
 
 #pragma mark - infoView delegates
@@ -778,34 +809,68 @@
 
 - (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
 {
-	NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-	
-	//NSLog(@"Results download returned: %@", jsonString );
-	
-	NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
-	NSError *myError;
-	NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
-	
-	
-	NSArray *searchResultsArray;
-	//NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
-	searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
+    if (DL_URLRequestStatus_Success == status)
+    {
+        // if this is a business listing query
+        if (nil == object)
+        {
+            NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
 
-    NSMutableArray *arrayBusinesses = [[NSMutableArray alloc] init];
+            //NSLog(@"Results download returned: %@", jsonString );
 
-    for (NSDictionary *dict in searchResultsArray)
-	{
-		NSString *name = [dict objectForKey:@"name"];
-		if(name && name != (id)[NSNull null])
-		{
-			[arrayBusinesses addObject:name];
-		}
-	}
+            NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
+            NSError *myError;
+            NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
 
-    self.arrayBusinesses = arrayBusinesses;
-    //NSLog(@"Businesses: %@", arrayBusinesses);
 
-    [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
+            NSArray *searchResultsArray;
+            //NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
+            searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
+
+            NSMutableArray *arrayBusinesses = [[NSMutableArray alloc] init];
+            NSMutableDictionary *dictThumbnailURLs = [[NSMutableDictionary alloc] init];
+
+            for (NSDictionary *dict in searchResultsArray)
+            {
+                NSString *name = [dict objectForKey:@"name"];
+                if (name && name != (id)[NSNull null])
+                {
+                    [arrayBusinesses addObject:name];
+
+                    // check if we can get a thumbnail
+                    NSDictionary *dictProfileImage = [dict objectForKey:@"profile_image"];
+                    if (dictProfileImage && dictProfileImage != (id)[NSNull null])
+                    {
+                        NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
+                        if (strThumbnail && strThumbnail != (id)[NSNull null])
+                        {
+                            //NSLog(@"thumbnail path: %@", strThumbnail);
+                            [dictThumbnailURLs setObject:strThumbnail forKey:name];
+                        }
+                    }
+                }
+            }
+            
+            self.arrayBusinesses = arrayBusinesses;
+            //NSLog(@"Businesses: %@", arrayBusinesses);
+            self.dictThumbnailURLs = dictThumbnailURLs;
+            
+            [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
+            [self performSelector:@selector(getBusinessThumbnails) withObject:nil afterDelay:0.0];
+        }
+        else
+        {
+            NSString *strNameForImage = (NSString *) object;
+            //NSLog(@"got image for %@", strNameForImage);
+            UIImage *srcImage = [UIImage imageWithData:data];
+            CGSize imageSize;
+            imageSize = srcImage.size;
+            imageSize.width = imageSize.height;
+            UIImage *croppedImage = [self imageByCroppingImage:srcImage toSize:imageSize];
+            [self.dictImages setObject:croppedImage forKey:strNameForImage];
+            [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
+        }
+    }
 }
 
 #pragma mark - UITextField delegates

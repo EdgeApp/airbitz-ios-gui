@@ -42,6 +42,8 @@
                                       cvf.size.height-1,
                                       cvf.size.height-1);
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    //self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    //self.imageView.contentMode = UIViewContentModeScaleToFill;
 
     CGRect frame = CGRectMake(cvf.size.height + MARGIN,
                               self.textLabel.frame.origin.y,
