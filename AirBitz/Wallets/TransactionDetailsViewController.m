@@ -43,10 +43,6 @@
 	CGRect          _originalHeaderFrame;
 	CGRect          _originalContentFrame;
 	CGRect          _originalScrollableContentFrame;
-	NSMutableArray  *_foundBusinessNames;	//list of found names from business search
-	NSMutableArray  *_foundContactsArray;	//list of found names from contacts search
-	NSArray         *_autoCompleteResults;	//found Contacts and found Businesses all merged together and sorted
-	NSArray         *_contactsArray;		//list of all names from contacts
 	UITableView     *_autoCompleteTable; //table of autoComplete search results (including address book entries)
 }
 
@@ -110,9 +106,7 @@
 	UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
 	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateNormal];
 	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateSelected];
-	
-	_foundBusinessNames = [[NSMutableArray alloc] init];
-    
+
 	self.keypadView.delegate = self;
     self.keypadView.textField = self.fiatTextField;
 	
@@ -295,8 +289,6 @@
 {
     NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
 
-    _foundContactsArray = [[NSMutableArray alloc]init];
-
 	CFErrorRef error;
 	ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 
@@ -325,16 +317,9 @@
 	if (accessGranted)
 	{
 		CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
-		NSMutableArray *allNames = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(people)];
 		for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
 		{
 			ABRecordRef person = CFArrayGetValueAtIndex(people, i);
-
-			NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
-			NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
-
-
-			[allNames addObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName]];
 
             NSString *strFullName = [Util getNameFromAddressRecord:person];
             if ([strFullName length])
@@ -345,14 +330,9 @@
                 }
             }
 		}
-
-		_contactsArray = allNames;
-		_autoCompleteResults = allNames; //start autoCompleteResults with something (don't have business names at this point)
-		//NSLog(@"All Email %@", _contactsArray);
 	}
 
     // store the final
-    //self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     self.arrayContacts = arrayContacts;
     //NSLog(@"contacts: %@", self.arrayContacts);
 }
@@ -623,6 +603,23 @@
     }
 }
 
+- (void)addLocationToQuery:(NSMutableString *)query
+{
+	if ([query rangeOfString:@"&ll="].location == NSNotFound)
+	{
+		CLLocation *location = [Location controller].curLocation;
+		if(location) //can be nil if user has locationServices turned off
+		{
+			NSString *locationString = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
+			[query appendFormat:@"&ll=%@", locationString];
+		}
+	}
+	else
+	{
+		//NSLog(@"string already contains ll");
+	}
+}
+
 #pragma mark - Calculator delegates
 
 - (void)CalculatorDone:(CalculatorView *)calculator
@@ -757,104 +754,6 @@
 	[infoView removeFromSuperview];
 }
 
-#pragma mark - AutoComplete search
-
--(void)kickOffSearchWithString:(NSString *)searchStr
-{
-    return; // temp: do nothing for now
-
-	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
-	NSMutableString *urlString = [[NSMutableString alloc] init];
-	
-	NSString *searchTerm = [searchStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-	if(searchTerm == nil)
-	{
-		//there are non ascii characters in the string
-		searchTerm = @" ";
-		
-	}
-	//else
-	//{
-	//searchTerm = searchStr;
-	//}
-	
-#if USE_AUTOCOMPLETE_QUERY
-	[urlString appendString:[NSString stringWithFormat:@"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm]];
-	
-	[self addLocationToQuery:urlString];
-	
-	if(urlString != (id)[NSNull null])
-	{
-		NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
-		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-										withParams:nil
-										withObject:self
-									  withDelegate:self
-								acceptableCacheAge:15.0
-									   cacheResult:YES];
-	}
-#else
-	[urlString appendString:[NSString stringWithFormat:@"%@/search/?term=%@&radius=1609&sort=1", SERVER_API, searchTerm]];
-	
-	[self addLocationToQuery:urlString];
-	
-	if(urlString != (id)[NSNull null])
-	{
-		NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
-		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-										withParams:nil
-										withObject:self
-									  withDelegate:self
-								acceptableCacheAge:15.0
-									   cacheResult:YES];
-	}
-#endif
-
-	[_foundContactsArray removeAllObjects];
-	for(NSString *curString in _contactsArray)
-	{
-		NSRange substringRange = [curString rangeOfString:searchStr options:NSCaseInsensitiveSearch];
-		//
-		if(substringRange.length > 1)
-		{
-			[_foundContactsArray addObject:curString];
-		}
-		else if (substringRange.location == 0)
-		{
-			[_foundContactsArray addObject:curString];
-		}
-	}
-	
-}
-
-- (void)addLocationToQuery:(NSMutableString *)query
-{
-	if ([query rangeOfString:@"&ll="].location == NSNotFound)
-	{
-		CLLocation *location = [Location controller].curLocation;
-		if(location) //can be nil if user has locationServices turned off
-		{
-			NSString *locationString = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
-			[query appendFormat:@"&ll=%@", locationString];
-		}
-	}
-	else
-	{
-		//NSLog(@"string already contains ll");
-	}
-}
-
-- (void)mergeAutoCompleteResults
-{
-	NSMutableSet *set = [NSMutableSet setWithArray:_foundContactsArray];
-	[set addObjectsFromArray:_foundBusinessNames];
-	
-	_autoCompleteResults = [[set allObjects] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-	[_autoCompleteTable reloadData];
-	//cw self.namePickerTextView.arrayChoices = autoCompleteResults;
-}
-
-
 #pragma mark - DLURLServer Callbacks
 
 - (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
@@ -887,61 +786,12 @@
     //NSLog(@"Businesses: %@", arrayBusinesses);
 
     [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
-#if 0
-	
-	//build array of business (prune categories out of list)
-	[_foundBusinessNames removeAllObjects];
-	
-	
-	for (NSDictionary *dict in searchResultsArray)
-	{
-#if USE_AUTOCOMPLETE_QUERY
-		NSString *type = [dict objectForKey:@"type"];
-		if([type isEqualToString:@"business"])
-		{
-			[foundBusinessNames addObject:[dict objectForKey:@"text"]];
-		}
-#else
-		NSString *name = [dict objectForKey:@"name"];
-		if(name && name != (id)[NSNull null])
-		{
-			[_foundBusinessNames addObject:name];
-		}
-#endif
-	}
-	
-	if (searchResultsArray.count)
-	{
-		NSLog(@"Results: %@", _foundBusinessNames);
-	}
-	else
-	{
-		NSLog(@"SEARCH RESULTS ARRAY IS EMPTY!");
-	}
-	//if (([foundContactsArray count] > 0) || (foundBusinessNames.count))
-    //{
-		//[self showTableViewAnimated:YES];
-    //}
-	/*else
-	 {
-	 [self hideTableViewAnimated:YES];
-	 }*/
-	
-	
-	[self mergeAutoCompleteResults];
-#endif
 }
 
 #pragma mark - UITextField delegates
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-	/*if([textField isKindOfClass:[AutoCompleteTextField class]])
-     {
-     [(AutoCompleteTextField *)textField autoCompleteTextFieldShouldChangeCharactersInRange:range replacementString:string];
-     }*/
-
-
 	return YES;
 }
 
@@ -984,11 +834,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	/*if([textField isKindOfClass:[AutoCompleteTextField class]])
-     {
-     [(AutoCompleteTextField *)textField autoCompleteTextFieldShouldReturn];
-     }*/
-
 	[textField resignFirstResponder];
 
 	if (textField == self.nameTextField)
