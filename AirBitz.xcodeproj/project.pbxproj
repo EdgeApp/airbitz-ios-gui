@@ -76,6 +76,7 @@
 		4C7247CD1935594F0091C286 /* background_header~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247CB1935594F0091C286 /* background_header~iphone.png */; };
 		4C7247CE1935594F0091C286 /* background_header@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247CC1935594F0091C286 /* background_header@2x~iphone.png */; };
 		4C7247D1193564D20091C286 /* DateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D0193564D20091C286 /* DateTime.m */; };
+		4C7247D41937A7520091C286 /* PayeeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D31937A7520091C286 /* PayeeCell.m */; };
 		4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
@@ -537,6 +538,8 @@
 		4C7247CC1935594F0091C286 /* background_header@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_header@2x~iphone.png"; sourceTree = "<group>"; };
 		4C7247CF193564D20091C286 /* DateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTime.h; sourceTree = "<group>"; };
 		4C7247D0193564D20091C286 /* DateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTime.m; sourceTree = "<group>"; };
+		4C7247D21937A7520091C286 /* PayeeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayeeCell.h; sourceTree = "<group>"; };
+		4C7247D31937A7520091C286 /* PayeeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayeeCell.m; sourceTree = "<group>"; };
 		4C90461C18C91E5900179D9C /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h; sourceTree = "<group>"; };
 		4C90461D18C91E5900179D9C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Exception.h; sourceTree = "<group>"; };
 		4C90461E18C91E5900179D9C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Image.h; sourceTree = "<group>"; };
@@ -1879,6 +1882,8 @@
 				4C5D8C901933C8040015BB3C /* ExportWalletOptionsViewController.m */,
 				4C7247B019352F720091C286 /* ExportWalletOptionsCell.h */,
 				4C7247B119352F730091C286 /* ExportWalletOptionsCell.m */,
+				4C7247D21937A7520091C286 /* PayeeCell.h */,
+				4C7247D31937A7520091C286 /* PayeeCell.m */,
 			);
 			path = Wallets;
 			sourceTree = "<group>";
@@ -2364,6 +2369,7 @@
 				B5C0A9B518EA0D99008F302C /* SettingsViewController.m in Sources */,
 				B516C1E818C54B07008CC6A1 /* NSDate+Helper.m in Sources */,
 				4C3C3093191834AC006923DE /* PopupPickerView.m in Sources */,
+				4C7247D41937A7520091C286 /* PayeeCell.m in Sources */,
 				B5C0A9A018EA0C10008F302C /* topOverviewCell.m in Sources */,
 				B5137C3818A435BD00DA4A34 /* NSDictionary_JSONExtensions.m in Sources */,
 				B5C0A98C18EA0B80008F302C /* Annotation.m in Sources */,

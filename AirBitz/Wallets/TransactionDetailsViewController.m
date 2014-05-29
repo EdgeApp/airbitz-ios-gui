@@ -22,6 +22,7 @@
 #import "CJSONDeserializer.h"
 #import "Util.h"
 #import "CommonTypes.h"
+#import "PayeeCell.h"
 
 #define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:"]
 
@@ -46,24 +47,25 @@
 	UITableView     *_autoCompleteTable; //table of autoComplete search results (including address book entries)
 }
 
-@property (nonatomic, weak) IBOutlet UIView             *headerView;
-@property (nonatomic, weak) IBOutlet UIView             *contentView;
-@property (nonatomic, weak) IBOutlet UIView             *scrollableContentView;
-@property (nonatomic, weak) IBOutlet UILabel            *dateLabel;
-@property (nonatomic, weak) IBOutlet UILabel            *walletLabel;
-@property (nonatomic, weak) IBOutlet UILabel            *bitCoinLabel;
-@property (nonatomic, weak) IBOutlet UIButton           *advancedDetailsButton;
-@property (nonatomic, weak) IBOutlet UIButton           *doneButton;
-@property (nonatomic, weak) IBOutlet UITextField        *fiatTextField;
-@property (nonatomic, weak) IBOutlet UITextField        *notesTextField;
-@property (nonatomic, weak) IBOutlet StylizedTextField  *nameTextField;
-@property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
-@property (weak, nonatomic) IBOutlet PickerTextView     *pickerTextCategory;
+@property (nonatomic, weak) IBOutlet UIView                 *headerView;
+@property (nonatomic, weak) IBOutlet UIView                 *contentView;
+@property (nonatomic, weak) IBOutlet UIView                 *scrollableContentView;
+@property (nonatomic, weak) IBOutlet UILabel                *dateLabel;
+@property (nonatomic, weak) IBOutlet UILabel                *walletLabel;
+@property (nonatomic, weak) IBOutlet UILabel                *bitCoinLabel;
+@property (nonatomic, weak) IBOutlet UIButton               *advancedDetailsButton;
+@property (nonatomic, weak) IBOutlet UIButton               *doneButton;
+@property (nonatomic, weak) IBOutlet UITextField            *fiatTextField;
+@property (nonatomic, weak) IBOutlet UITextField            *notesTextField;
+@property (nonatomic, weak) IBOutlet StylizedTextField      *nameTextField;
+@property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
+@property (weak, nonatomic) IBOutlet PickerTextView         *pickerTextCategory;
 
-@property (nonatomic, strong)        NSArray            *arrayCategories;
-@property (nonatomic, strong)        NSArray            *arrayContacts;
-@property (nonatomic, strong)        NSArray            *arrayBusinesses;
-@property (nonatomic, strong)        NSArray            *arrayAutoComplete;
+@property (nonatomic, strong)        NSArray                *arrayCategories;
+@property (nonatomic, strong)        NSArray                *arrayContacts;
+@property (nonatomic, strong)        NSArray                *arrayBusinesses;
+@property (nonatomic, strong)        NSArray                *arrayAutoComplete;
+@property (nonatomic, strong)        NSMutableDictionary    *dictImages; // images for the contacts and businesses
 
 @end
 
@@ -88,6 +90,7 @@
     [Util resizeView:self.view withDisplayView:self.contentView];
 
     self.arrayAutoComplete = @[];
+    self.dictImages = [[NSMutableDictionary alloc] init];
 
     // get the list of businesses
     [self generateListOfBusinesses];
@@ -326,7 +329,15 @@
             {
                 if ([arrayContacts indexOfObject:strFullName] == NSNotFound)
                 {
+                    // add this contact
                     [arrayContacts addObject:strFullName];
+
+                    // does this contact has an image
+                    if (ABPersonHasImageData(person))
+                    {
+                        NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
+                        [self.dictImages setObject:[UIImage imageWithData:data] forKey:strFullName];
+                    }
                 }
             }
 		}
@@ -720,12 +731,21 @@
     //5.1 you do not need this if you have set SettingsCell as identifier in the storyboard (else you can remove the comments on this code)
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        cell = [[PayeeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     
     cell.textLabel.text = [self.arrayAutoComplete objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    UIImage *imageForCell = [self.dictImages objectForKey:cell.textLabel.text];
+    if (imageForCell == nil)
+    {
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(1, 1), NO, 0.0);
+        imageForCell = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    cell.imageView.image = imageForCell;
     
     return cell;
 }
@@ -825,11 +845,16 @@
     }
 
     [self scrollContentViewToFrame:scrollFrame];
+
+    // highlight all the text
+    [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-
+    // unhighlight text
+    // note: for some reason, if we don't do this, the text won't select next time the user selects it
+    [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.beginningOfDocument]];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
