@@ -298,8 +298,7 @@ typedef enum eAddressPickerType
 	_qrViewController.qrCodeImage = image;
 	_qrViewController.addressString = address;
 	_qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
-    double satoshi = [CoreBridge denominationToSatoshi:[self.BTC_TextField.text doubleValue]];
-    _qrViewController.amountSatoshi = [CoreBridge formatSatoshi: satoshi];
+    _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi:[self.BTC_TextField.text doubleValue]];
 	CGRect frame = self.view.bounds;
 	_qrViewController.view.frame = frame;
 	[self.view addSubview:_qrViewController.view];
