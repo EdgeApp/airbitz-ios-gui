@@ -85,6 +85,61 @@
     ABC_FreeWalletInfo(pWalletInfo);
 }
 
++ (Wallet *)getWallet: (NSString *)walletUUID
+{
+    tABC_Error Error;
+    Wallet *wallet = nil;
+    tABC_WalletInfo *pWalletInfo = NULL;
+    tABC_CC result = ABC_GetWalletInfo([[User Singleton].name UTF8String],
+                                       [[User Singleton].password UTF8String],
+                                       [walletUUID UTF8String],
+                                       &pWalletInfo, &Error);
+    if (ABC_CC_Ok == result)
+    {
+        wallet = [[Wallet alloc] init];
+        wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
+        wallet.attributes = 0;
+        wallet.balance = pWalletInfo->balanceSatoshi;
+        wallet.currencyNum = pWalletInfo->currencyNum;
+    }
+    else
+    {
+        NSLog(@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
+    }
+    ABC_FreeWalletInfo(pWalletInfo);
+    return wallet;
+}
+
++ (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
+{
+    tABC_Error Error;
+    Transaction *transaction = nil;
+    tABC_TxInfo *pTrans = NULL;
+    Wallet *wallet = [CoreBridge getWallet: walletUUID];
+    if (wallet == nil)
+    {
+        NSLog(@("Could not find wallet for %@"), walletUUID);
+        return nil;
+    }
+    tABC_CC result = ABC_GetTransaction([[User Singleton].name UTF8String],
+                                        [[User Singleton].password UTF8String],
+                                        [walletUUID UTF8String], [szTxId UTF8String],
+                                        &pTrans, &Error);
+    if (ABC_CC_Ok == result)
+    {
+        transaction = [[Transaction alloc] init];
+        [CoreBridge setTransaction: wallet transaction:transaction coreTx:pTrans];
+    }
+    else
+    {
+        NSLog(@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
+    }
+    ABC_FreeTransaction(pTrans);
+    return transaction;
+}
+
 + (void) loadTransactions: (Wallet *) wallet
 {
     tABC_Error Error;
@@ -286,6 +341,60 @@
         return [NSString stringWithFormat:@"1.00 %@ = $%.2f %@", denominationLabel, currency, currencyLabel];
     else
         return @"";
+}
+
++ (void)logout
+{
+    [CoreBridge stopWatchers];
+
+    tABC_Error Error;
+    tABC_CC result = ABC_ClearKeyCache(&Error);
+    if (ABC_CC_Ok != result)
+    {
+        [Util printABC_Error:&Error];
+#warning TODO: handle error
+    }
+}
+
++ (void)startWatchers
+{
+    NSLog(@("startWatchers\n"));
+    tABC_Error Error;
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets: arrayWallets archived:arrayArchivedWallets];
+    for(Wallet * wallet in arrayWallets)
+    {
+        NSLog(@("ABC_WatcherStart(%@, %@, %@)\n"), [User Singleton].name, [User Singleton].password, wallet.strUUID);
+        ABC_WatcherStart([[User Singleton].name UTF8String],
+                         [[User Singleton].password UTF8String],
+                         [wallet.strUUID UTF8String], &Error);
+        [CoreBridge watchAddresses: wallet.strUUID];
+        [Util printABC_Error:&Error];
+    }
+}
+
++ (void)stopWatchers
+{
+    NSLog(@("stopWatchers\n"));
+    tABC_Error Error;
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets: arrayWallets archived:arrayArchivedWallets];
+    for(Wallet * wallet in arrayWallets)
+    {
+        ABC_WatcherStop([wallet.strUUID UTF8String], &Error);
+        [Util printABC_Error: &Error];
+    }
+}
+
++ (void)watchAddresses: (NSString *) walletUUID
+{
+    tABC_Error Error;
+    ABC_WatchAddresses([[User Singleton].name UTF8String],
+                       [[User Singleton].password UTF8String],
+                       [walletUUID UTF8String], &Error);
+    [Util printABC_Error: &Error];
 }
 
 @end

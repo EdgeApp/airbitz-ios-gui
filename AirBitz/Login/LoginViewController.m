@@ -12,6 +12,7 @@
 #import "User.h"
 #import "StylizedTextField.h"
 #import "Util.h"
+#import "CoreBridge.h"
 
 #define CONTENT_VIEW_SCALE_WITH_KEYBOARD	0.75
 #define LOGO_IMAGE_SHRINK_SCALE_FACTOR		0.5
@@ -124,6 +125,7 @@ typedef enum eLoginMode
 			[User Singleton].name = self.userNameTextField.text;
 			[User Singleton].password = self.passwordTextField.text;
 			[[User Singleton] loadSettings];
+            [CoreBridge startWatchers];
 		}
 		else
 		{

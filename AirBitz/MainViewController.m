@@ -16,10 +16,14 @@
 #import "LoginViewController.h"
 #import "Notifications.h"
 #import "SettingsViewController.h"
+#import "SendStatusViewController.h"
+#import "TransactionDetailsViewController.h"
 #import "User.h"
 #import "Config.h"
 #import "Util.h"
+#import "CoreBridge.h"
 
+id mainId;
 
 typedef enum eAppMode
 {
@@ -30,7 +34,7 @@ typedef enum eAppMode
 	APP_MODE_SETTINGS
 } tAppMode;
 
-@interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate, LoginViewControllerDelegate>
+@interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate, LoginViewControllerDelegate, TransactionDetailsViewControllerDelegate>
 {
 	UIViewController *selectedViewController;
 	DirectoryViewController *diretoryViewController;
@@ -39,6 +43,8 @@ typedef enum eAppMode
 	WalletsViewController *walletsViewController;
 	LoginViewController *loginViewController;
 	SettingsViewController *settingsViewController;
+	SendStatusViewController  *sendStatusController;
+    TransactionDetailsViewController *detailsController;
 	CGRect originalTabBarFrame;
 	CGRect originalViewFrame;
 	tAppMode appMode;
@@ -235,6 +241,7 @@ typedef enum eAppMode
 
 -(void)launchViewControllerBasedOnAppMode
 {
+    mainId = self;
 	switch(appMode)
 	{
 		case APP_MODE_DIRECTORY:
@@ -414,9 +421,98 @@ typedef enum eAppMode
 
 -(void)loginViewControllerDidLogin
 {
-	[loginViewController.view removeFromSuperview];
-	[self showTabBarAnimated:YES];
-	[self launchViewControllerBasedOnAppMode];
+    [loginViewController.view removeFromSuperview];
+    [self showTabBarAnimated:YES];
+    [self launchViewControllerBasedOnAppMode];
+}
+
+-(void)launchReceiving: (NSArray *) params
+{
+    NSString *walletUUID = params[0];
+    NSString *txId = params[1];
+    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    NSLog(@("launchReceiving: %@ %@ %@\n"), walletUUID, txId, transaction);
+    /* If we aren't on the selector view, then just notify the user */
+    if (selectedViewController != requestViewController)
+    {
+        NSLog(@("Showing Notification\n"));
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.alertBody = [NSString stringWithFormat:@"Received funds"];
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        localNotification.applicationIconBadgeNumber = 1;
+        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+    }
+    else
+    {
+        NSLog(@("Launching Receiving page\n"));
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+        sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
+
+        CGRect frame = self.view.bounds;
+        sendStatusController.view.frame = frame;
+        [self.view addSubview:sendStatusController.view];
+        sendStatusController.view.alpha = 0.0;
+        sendStatusController.messageLabel.text = NSLocalizedString(@"Receiving...", @"status message");
+        [UIView animateWithDuration:0.35
+                            delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                        animations:^
+        {
+            sendStatusController.view.alpha = 1.0;
+        }
+        completion:^(BOOL finished)
+        {
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self launchTransactionDetails:transaction];
+                [sendStatusController.view removeFromSuperview];
+                sendStatusController = nil;
+            });
+        }];
+    }
+}
+
+-(void) launchTransactionDetails: (Transaction *)transaction
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    detailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+    detailsController.transaction = transaction;
+    detailsController.delegate = self;
+    detailsController.bOldTransaction = YES;
+    detailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
+
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    detailsController.view.frame = frame;
+    [self.view addSubview:detailsController.view];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+    {
+        detailsController.view.frame = self.view.bounds;
+    }
+    completion:^(BOOL finished)
+    {
+    }];
+}
+
+-(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
+{
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+    {
+        CGRect frame = self.view.bounds;
+        frame.origin.x = frame.size.width;
+        detailsController.view.frame = frame;
+    }
+    completion:^(BOOL finished)
+    {
+        [detailsController.view removeFromSuperview];
+        detailsController = nil;
+    }];
 }
 
 #pragma mark - ABC Callbacks
@@ -425,6 +521,10 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
     if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin)
     {
+        NSString *walletUUID = [NSString stringWithUTF8String:pInfo->szWalletUUID];
+        NSString *txId = [NSString stringWithUTF8String:pInfo->szTxID];
+        NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
+        [mainId performSelectorOnMainThread:@selector(launchReceiving:) withObject:params waitUntilDone:NO];
     }
 }
 

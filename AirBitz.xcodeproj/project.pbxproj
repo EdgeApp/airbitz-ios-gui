@@ -86,6 +86,10 @@
 		4C90463D18C9244900179D9C /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463C18C9244900179D9C /* libiconv.dylib */; };
 		4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
 		4C9E919C1922B3C500F01423 /* comp_13-offline_wallet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */; };
+		684C0E521936B97000AB9807 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
+		686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
+		686C24851935605900F8E445 /* libobelisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24841935605900F8E445 /* libobelisk.a */; };
+		686C24871935608400F8E445 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
 		B507ADAF191C240E00F51E1E /* picker_left_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */; };
 		B5137C0718A40A8400DA4A34 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFA18A40A8400DA4A34 /* Lato-Black.ttf */; };
@@ -570,6 +574,10 @@
 		4C9E91981922AB7400F01423 /* OfflineWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineWalletViewController.h; sourceTree = "<group>"; };
 		4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
 		4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_13-offline_wallet.jpg"; sourceTree = "<group>"; };
+		684C0E511936B97000AB9807 /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = AirBitz/ABC/libsodium.a; sourceTree = "<group>"; };
+		686C24821935601400F8E445 /* libbitcoin-client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libbitcoin-client.a"; path = "AirBitz/ABC/libbitcoin-client.a"; sourceTree = "<group>"; };
+		686C24841935605900F8E445 /* libobelisk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libobelisk.a; path = AirBitz/ABC/libobelisk.a; sourceTree = "<group>"; };
+		686C24861935608400F8E445 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = AirBitz/ABC/libzmq.a; sourceTree = "<group>"; };
 		687C1B041927FF81003A83E8 /* CoreBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBridge.h; sourceTree = "<group>"; };
 		687C1B051927FF81003A83E8 /* CoreBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreBridge.m; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
@@ -1022,6 +1030,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				684C0E521936B97000AB9807 /* libsodium.a in Frameworks */,
+				686C24871935608400F8E445 /* libzmq.a in Frameworks */,
+				4C08A6E218C29CEF0071B87C /* libz.a in Frameworks */,
+				686C24851935605900F8E445 /* libobelisk.a in Frameworks */,
 				4C90463D18C9244900179D9C /* libiconv.dylib in Frameworks */,
 				B5F2E9A618D3BFEF008ACF88 /* libboost_system.a in Frameworks */,
 				4C90463B18C9242700179D9C /* CoreVideo.framework in Frameworks */,
@@ -1035,9 +1047,9 @@
 				B5137C2018A41ABA00DA4A34 /* libc++.dylib in Frameworks */,
 				B5137C1E18A41AAC00DA4A34 /* CFNetwork.framework in Frameworks */,
 				4C08A6E118C29CEF0071B87C /* libssl.a in Frameworks */,
-				4C08A6E218C29CEF0071B87C /* libz.a in Frameworks */,
 				B5675B4E18A17F6F002E0703 /* CoreGraphics.framework in Frameworks */,
 				B5675B5018A17F6F002E0703 /* UIKit.framework in Frameworks */,
+				686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */,
 				B5F2E9A718D3BFEF008ACF88 /* libwallet.a in Frameworks */,
 				4C08A6DE18C29CEF0071B87C /* libjansson.a in Frameworks */,
 				4C08A6DC18C29CEF0071B87C /* libcrypto.a in Frameworks */,
@@ -1302,6 +1314,10 @@
 		B5675B4A18A17F6F002E0703 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				684C0E511936B97000AB9807 /* libsodium.a */,
+				686C24861935608400F8E445 /* libzmq.a */,
+				686C24841935605900F8E445 /* libobelisk.a */,
+				686C24821935601400F8E445 /* libbitcoin-client.a */,
 				4C90463C18C9244900179D9C /* libiconv.dylib */,
 				4C90463A18C9242700179D9C /* CoreVideo.framework */,
 				4C90463818C9242100179D9C /* CoreAudio.framework */,
@@ -2539,6 +2555,7 @@
 					./AirBitz/DL_URLServer,
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
+					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2563,6 +2580,7 @@
 					./AirBitz/DL_URLServer,
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
+					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

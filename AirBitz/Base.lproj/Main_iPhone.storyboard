@@ -1376,7 +1376,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="t8h-iv-TGi" userLabel="View - Bottom">
-                                        <rect key="frame" x="0.0" y="137.00000048887048" width="320" height="326.99999951112954"/>
+                                        <rect key="frame" x="0.0" y="137.00000099636463" width="320" height="326.99999900363537"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="1Ab-Lx-n8L">
@@ -1384,11 +1384,11 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_flash_controls.png" id="jdY-n5-XnA">
-                                                <rect key="frame" x="0.0" y="257" width="320" height="69.999999511129488"/>
+                                                <rect key="frame" x="0.0" y="257" width="320" height="69.999999003635367"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" id="VVV-KZ-RL3" customClass="FlashSelectView">
-                                                <rect key="frame" x="85" y="265" width="149" height="49.999999922401507"/>
+                                                <rect key="frame" x="85" y="265" width="149" height="49.999999841846879"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>

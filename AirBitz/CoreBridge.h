@@ -12,6 +12,9 @@
 
 + (void)loadWallets: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (void)reloadWallet: (Wallet *) wallet;
++ (Wallet *)getWallet: (NSString *)walletUUID;
++ (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
+
 + (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions;
 + (bool)setWalletAttributes: (Wallet *) wallet;
 + (bool)storeTransaction: (Transaction *) transaction;
@@ -21,5 +24,9 @@
 + (NSString *)formatSatoshi: (double) bitcoin withSymbol:(bool) symbol;
 + (double) denominationToSatoshi: (double) coin;
 + (NSString *)conversionString: (int) currencyNumber;
++ (void)logout;
++ (void)startWatchers;
++ (void)stopWatchers;
++ (void)watchAddresses: (NSString *) walletUUID;
 
 @end
