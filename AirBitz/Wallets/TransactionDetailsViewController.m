@@ -796,6 +796,10 @@
 	// dismiss the tableView
 	[self.nameTextField resignFirstResponder];
     [self dismissPayeeTable];
+    if (!self.bOldTransaction)
+    {
+        [self.pickerTextCategory.textField becomeFirstResponder];
+    }
 }
 
 #pragma mark - infoView delegates
