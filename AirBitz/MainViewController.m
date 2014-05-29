@@ -479,8 +479,8 @@ typedef enum eAppMode
     detailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
     detailsController.transaction = transaction;
     detailsController.delegate = self;
-    detailsController.bOldTransaction = YES;
-    detailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
+    detailsController.bOldTransaction = NO;
+    detailsController.transactionDetailsMode = TD_MODE_RECEIVED;
 
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
