@@ -55,16 +55,28 @@
 @property (nonatomic, weak) IBOutlet UIView                 *headerView;
 @property (nonatomic, weak) IBOutlet UIView                 *contentView;
 @property (nonatomic, weak) IBOutlet UIView                 *scrollableContentView;
+
 @property (nonatomic, weak) IBOutlet UILabel                *dateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageNameEmboss;
+@property (nonatomic, weak) IBOutlet StylizedTextField      *nameTextField;
+@property (nonatomic, weak) IBOutlet UIButton               *advancedDetailsButton;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageAmountEmboss;
 @property (nonatomic, weak) IBOutlet UILabel                *walletLabel;
 @property (nonatomic, weak) IBOutlet UILabel                *bitCoinLabel;
-@property (nonatomic, weak) IBOutlet UIButton               *advancedDetailsButton;
-@property (nonatomic, weak) IBOutlet UIButton               *doneButton;
+@property (weak, nonatomic) IBOutlet UILabel                *labelFiatSign;
+@property (weak, nonatomic) IBOutlet UILabel                *labelFiatName;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageFiatEmboss;
 @property (nonatomic, weak) IBOutlet UITextField            *fiatTextField;
-@property (nonatomic, weak) IBOutlet UITextField            *notesTextField;
-@property (nonatomic, weak) IBOutlet StylizedTextField      *nameTextField;
-@property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageBottomEmboss;
+@property (weak, nonatomic) IBOutlet UILabel                *labelCategory;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageCategoryEmboss;
 @property (weak, nonatomic) IBOutlet PickerTextView         *pickerTextCategory;
+@property (weak, nonatomic) IBOutlet UILabel                *labelNotes;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageNotesEmboss;
+@property (nonatomic, weak) IBOutlet UITextField            *notesTextField;
+@property (nonatomic, weak) IBOutlet UIButton               *doneButton;
+
+@property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
 @property (weak, nonatomic) IBOutlet UIButton               *buttonBack;
 
 @property (nonatomic, strong)        NSArray                *arrayCategories;
@@ -96,6 +108,7 @@
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.contentView];
+    [self updateDisplayLayout];
 
     _bExiting = NO;
     _nOutstandingRequests = 0;
@@ -296,6 +309,95 @@
 
 #pragma mark - Misc Methods
 
+- (void)updateDisplayLayout
+{
+    // update for iPhone 4
+    if (!IS_IPHONE5)
+    {
+        // warning: magic numbers for iphone layout
+
+        CGRect frame;
+
+        frame = self.dateLabel.frame;
+        frame.origin.y = 0;
+        self.dateLabel.frame = frame;
+
+        frame = self.imageNameEmboss.frame;
+        frame.origin.y = self.dateLabel.frame.origin.y + self.dateLabel.frame.size.height + 0;
+        self.imageNameEmboss.frame = frame;
+
+        frame = self.nameTextField.frame;
+        frame.origin.y = self.imageNameEmboss.frame.origin.y + 2;
+        self.nameTextField.frame = frame;
+
+        frame = self.advancedDetailsButton.frame;
+        frame.origin.y = self.imageNameEmboss.frame.origin.y + self.imageNameEmboss.frame.size.height + 3;
+        self.advancedDetailsButton.frame = frame;
+
+        frame = self.imageAmountEmboss.frame;
+        frame.origin.y = self.advancedDetailsButton.frame.origin.y + self.advancedDetailsButton.frame.size.height + 3;
+        frame.size.height = 90;
+        self.imageAmountEmboss.frame = frame;
+
+        frame = self.walletLabel.frame;
+        frame.origin.y = self.imageAmountEmboss.frame.origin.y + 3;
+        self.walletLabel.frame = frame;
+
+        frame = self.bitCoinLabel.frame;
+        frame.origin.y = self.walletLabel.frame.origin.y + self.walletLabel.frame.size.height + 2;
+        self.bitCoinLabel.frame = frame;
+
+        frame = self.labelFiatSign.frame;
+        frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 4;
+        self.labelFiatSign.frame = frame;
+
+        frame = self.labelFiatName.frame;
+        frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 4;
+        self.labelFiatName.frame = frame;
+
+        frame = self.imageFiatEmboss.frame;
+        frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 2;
+        self.imageFiatEmboss.frame = frame;
+
+        frame = self.fiatTextField.frame;
+        frame.origin.y = self.imageFiatEmboss.frame.origin.y + 2;
+        self.fiatTextField.frame = frame;
+
+        frame = self.imageBottomEmboss.frame;
+        frame.origin.y = self.imageAmountEmboss.frame.origin.y + self.imageAmountEmboss.frame.size.height + 5;
+        frame.size.height = 132;
+        self.imageBottomEmboss.frame = frame;
+
+        frame = self.labelCategory.frame;
+        frame.origin.y = self.imageBottomEmboss.frame.origin.y + 2;
+        self.labelCategory.frame = frame;
+
+        frame = self.imageCategoryEmboss.frame;
+        frame.origin.y = self.labelCategory.frame.origin.y + self.labelCategory.frame.size.height + -2;
+        self.imageCategoryEmboss.frame = frame;
+
+        frame = self.pickerTextCategory.frame;
+        frame.origin.y = self.imageCategoryEmboss.frame.origin.y + 2;
+        self.pickerTextCategory.frame = frame;
+
+        frame = self.labelNotes.frame;
+        frame.origin.y = self.imageCategoryEmboss.frame.origin.y + self.imageCategoryEmboss.frame.size.height + 0;
+        self.labelNotes.frame = frame;
+
+        frame = self.imageNotesEmboss.frame;
+        frame.origin.y = self.labelNotes.frame.origin.y + self.labelNotes.frame.size.height + -2;
+        self.imageNotesEmboss.frame = frame;
+
+        frame = self.notesTextField.frame;
+        frame.origin.y = self.imageNotesEmboss.frame.origin.y + 0;
+        self.notesTextField.frame = frame;
+
+        frame = self.doneButton.frame;
+        frame.origin.y = self.imageBottomEmboss.frame.origin.y + self.imageBottomEmboss.frame.size.height + 4;
+        self.doneButton.frame = frame;
+
+    }
+}
 
 - (void)generateListOfBusinesses
 {
@@ -713,31 +815,6 @@
     //NSLog(@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
 }
 
-#pragma mark - Category Table
-
-- (void)spawnCategoryTableInFrame:(CGRect)frame
-{
-	CGRect startingFrame = frame;
-	startingFrame.size.height = 0;
-	_autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
-	[self.view addSubview:_autoCompleteTable];
-	
-	_autoCompleteTable.dataSource = self;
-	_autoCompleteTable.delegate = self;
-	
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 _autoCompleteTable.frame = frame;
-	 }
-					 completion:^(BOOL finished)
-	 {
-		 
-	 }];
-}
-
 #pragma mark - Payee Table
 
 - (void)spawnPayeeTableInFrame:(CGRect)frame
@@ -745,6 +822,8 @@
 	CGRect startingFrame = frame;
 	startingFrame.size.height = 0;
 	_autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
+    _autoCompleteTable.backgroundColor = TABLE_CELL_BACKGROUND_COLOR;
+    _autoCompleteTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];     // This will remove extra separators from tableview
 	[self.view addSubview:_autoCompleteTable];
 	
 	_autoCompleteTable.dataSource = self;
@@ -954,21 +1033,20 @@
     CGRect scrollFrame = self.scrollableContentView.frame;
 
     // WARNING: Lots of magic numbers - but we have to make this change quick for the demo
-    // Change some of these for iPhone 4
 
     if (textField == self.nameTextField)
     {
-        scrollFrame.origin.y = -30;
+        scrollFrame.origin.y = (IS_IPHONE5 ? -30 : -20);
 
         CGRect frame = self.view.bounds;
-        frame.origin.y = 100;
-        frame.size.height = 252;
+        frame.origin.y = (IS_IPHONE5 ? 100 : 95);
+        frame.size.height = (IS_IPHONE5 ? 252 : 169);
         [self spawnPayeeTableInFrame:frame];
         [self updateAutoCompleteArray];
     }
     else if (textField == self.notesTextField)
     {
-        scrollFrame.origin.y = -90;
+        scrollFrame.origin.y = (IS_IPHONE5 ? -90 : -115);
         [self dismissPayeeTable];
     }
     else
@@ -1123,7 +1201,7 @@
 
     // now move the window up so that the category field is at the top
     CGRect scrollFrame = self.scrollableContentView.frame;
-    scrollFrame.origin.y = -250; // magic number TODO: modify for iPhone4
+    scrollFrame.origin.y = (IS_IPHONE5 ? -250 : -190); // magic number
     [self scrollContentViewToFrame:scrollFrame];
 
     // bring the picker up with it
@@ -1133,8 +1211,8 @@
                      animations:^
      {
          CGRect frame = self.pickerTextCategory.popupPicker.frame;
-         frame.origin.y = 130;
-         frame.size.height = 220; // magic number to make it as big as possible
+         frame.origin.y = (IS_IPHONE5 ? 130 : 126);
+         frame.size.height = (IS_IPHONE5 ? 220 : 130); // magic number to make it as big as possible
          self.pickerTextCategory.popupPicker.frame = frame;
      }
                      completion:^(BOOL finished)

@@ -2828,7 +2828,17 @@
                         <outlet property="doneButton" destination="n7B-WE-395" id="k40-dR-UbY"/>
                         <outlet property="fiatTextField" destination="s2W-q2-bds" id="1OR-cM-zzQ"/>
                         <outlet property="headerView" destination="ahZ-L3-08Q" id="bTO-Aw-qCZ"/>
+                        <outlet property="imageAmountEmboss" destination="4kG-3B-dUD" id="W1e-vp-zFX"/>
+                        <outlet property="imageBottomEmboss" destination="xf4-3Y-ZYy" id="fPb-57-WCB"/>
+                        <outlet property="imageCategoryEmboss" destination="t11-qN-hef" id="hYx-oy-Xtd"/>
+                        <outlet property="imageFiatEmboss" destination="8rP-Iw-mIC" id="4NY-3J-Vwq"/>
+                        <outlet property="imageNameEmboss" destination="EEe-WW-4Vt" id="gbz-wQ-uqk"/>
+                        <outlet property="imageNotesEmboss" destination="RWm-5y-zN2" id="I5s-Ws-tTq"/>
                         <outlet property="keypadView" destination="XNd-9N-hLm" id="n96-xl-rlz"/>
+                        <outlet property="labelCategory" destination="ClG-um-kmI" id="aS1-Qa-7yc"/>
+                        <outlet property="labelFiatName" destination="EuE-s0-NQ2" id="bWW-ae-Umr"/>
+                        <outlet property="labelFiatSign" destination="JLi-Ko-jU5" id="I0L-wE-rfZ"/>
+                        <outlet property="labelNotes" destination="L8T-Xw-aVE" id="ntc-NZ-wGH"/>
                         <outlet property="nameTextField" destination="lxC-qf-In1" id="Ikc-V4-hSU"/>
                         <outlet property="notesTextField" destination="Kch-gx-opX" id="IQ6-In-5GR"/>
                         <outlet property="pickerTextCategory" destination="bOm-nJ-2Ot" id="zBf-0j-yyq"/>
