@@ -89,6 +89,8 @@
     self.pickerTextSendTo.textField.textColor = [UIColor whiteColor];
     self.pickerTextSendTo.textField.returnKeyType = UIReturnKeyDone;
     self.pickerTextSendTo.textField.placeholder = NSLocalizedString(@"Bitcoin address or wallet", nil);
+    self.pickerTextSendTo.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.pickerTextSendTo.textField.placeholder
+                                                                                            attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
     [self.pickerTextSendTo setTopMostView:self.view];
     //self.pickerTextSendTo.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
     self.pickerTextSendTo.cropPointBottom = POPUP_PICKER_LOWEST_POINT;
