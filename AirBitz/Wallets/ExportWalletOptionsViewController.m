@@ -81,12 +81,12 @@ typedef enum eExportOption
     [self updateDisplayLayout];
 
     self.labelWalletName.text = self.wallet.strName;
-    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d",
+    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
                                (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year,
-                               (int) self.fromDateTime.hour, (int) self.fromDateTime.minute];
-    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d",
+                               [self displayFor12From24:(int) self.fromDateTime.hour], (int) self.fromDateTime.minute, self.fromDateTime.hour > 11 ? @"pm" : @"am"];
+    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
                              (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year,
-                             (int) self.toDateTime.hour, (int) self.toDateTime.minute];
+                             [self displayFor12From24:(int) self.toDateTime.hour], (int) self.toDateTime.minute, self.toDateTime.hour > 11 ?  @"pm" : @"am"];
 
 
     //NSLog(@"type: %d", self.type);
@@ -135,6 +135,22 @@ typedef enum eExportOption
         self.tableView.frame = frame;
         
     }
+}
+
+- (int)displayFor12From24:(int)hour24
+{
+    int retHour = hour24;
+
+    if (hour24 == 0)
+    {
+        retHour = 12;
+    }
+    else if (hour24 > 12)
+    {
+        retHour -= 12;
+    }
+
+    return retHour;
 }
 
 - (ExportWalletOptionsCell *)getOptionsCellForTableView:(UITableView *)tableView withImage:(UIImage *)bkgImage andIndexPath:(NSIndexPath *)indexPath

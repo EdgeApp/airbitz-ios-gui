@@ -20,6 +20,8 @@ typedef enum ePopupWheelPickerPosition
 
 @interface PopupWheelPickerView : UIView
 
+@property (weak, nonatomic)     IBOutlet UIPickerView           *viewPicker;
+
 
 + (PopupWheelPickerView *)CreateForView:(UIView *)parentView positionRelativeTo:(UIView *)posView withPosition:(tPopupWheelPickerPosition)position withChoices:(NSArray *)arrayChoices startingSelections:(NSArray *)arraySelections userData:(id)data andDelegate:(id<PopupWheelPickerViewDelegate>)delegate;
 
@@ -30,10 +32,12 @@ typedef enum ePopupWheelPickerPosition
 @protocol PopupWheelPickerViewDelegate <NSObject>
 
 @required
+
 - (void)PopupWheelPickerViewExit:(PopupWheelPickerView *)view withSelections:(NSArray *)arraySelections userData:(id)data;
 - (void)PopupWheelPickerViewCancelled:(PopupWheelPickerView *)view userData:(id)data;
 
 @optional
 
+- (CGFloat)PopupWheelPickerView:(PopupWheelPickerView *)pickerView widthForComponent:(NSInteger)component userData:(id)data;
 
 @end
