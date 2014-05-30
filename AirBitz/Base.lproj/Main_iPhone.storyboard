@@ -2631,6 +2631,26 @@
                                         <rect key="frame" x="0.0" y="-2" width="320" height="64"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="641-u6-hek" userLabel="Button - back">
+                                        <rect key="frame" x="4" y="23" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="back_arrow.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="Done" destination="Gtr-aC-t0S" eventType="touchUpInside" id="0gc-g7-5aC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bKj-fa-9zB" userLabel="Button - info">
+                                        <rect key="frame" x="280" y="22" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="btn_info.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonInfoTouched:" destination="Gtr-aC-t0S" eventType="touchUpInside" id="fPQ-hK-55l"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S6o-KK-lbq" customClass="MontserratLabel">
                                         <rect key="frame" x="50" y="31" width="219" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -2802,6 +2822,7 @@
                     <connections>
                         <outlet property="advancedDetailsButton" destination="3Py-nn-1AR" id="PSa-ob-Oci"/>
                         <outlet property="bitCoinLabel" destination="OfK-AQ-g7A" id="8Ol-7T-Hkk"/>
+                        <outlet property="buttonBack" destination="641-u6-hek" id="F07-9N-zLr"/>
                         <outlet property="contentView" destination="sWd-a3-a0e" id="sJN-ef-dQK"/>
                         <outlet property="dateLabel" destination="DFL-Hc-ld2" id="Zhq-Ua-blQ"/>
                         <outlet property="doneButton" destination="n7B-WE-395" id="k40-dR-UbY"/>

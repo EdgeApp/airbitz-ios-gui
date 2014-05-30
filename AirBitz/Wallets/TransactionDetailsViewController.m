@@ -35,8 +35,10 @@
 #define TEXTFIELD_VERTICAL_SPACE_OFFSET	7.0 /* how much space between screen header and textField when textField is scrolled all the way to the top */
 
 #define SEARCH_RADIUS        16093
-#define CACHE_AGE_SECS       25
-#define CACHE_IMAGE_AGE_SECS (60 * 60)
+#define CACHE_AGE_SECS       (60 * 15) // 15 min
+#define CACHE_IMAGE_AGE_SECS (60 * 60) // 60 hour
+
+#define TABLE_CELL_BACKGROUND_COLOR [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0]
 
 @interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
 {
@@ -46,6 +48,8 @@
 	CGRect          _originalContentFrame;
 	CGRect          _originalScrollableContentFrame;
 	UITableView     *_autoCompleteTable; //table of autoComplete search results (including address book entries)
+    NSInteger       _nOutstandingRequests; // how many DL_URLServer requests to we have outstanding
+    BOOL            _bExiting;
 }
 
 @property (nonatomic, weak) IBOutlet UIView                 *headerView;
@@ -61,12 +65,14 @@
 @property (nonatomic, weak) IBOutlet StylizedTextField      *nameTextField;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
 @property (weak, nonatomic) IBOutlet PickerTextView         *pickerTextCategory;
+@property (weak, nonatomic) IBOutlet UIButton               *buttonBack;
 
 @property (nonatomic, strong)        NSArray                *arrayCategories;
 @property (nonatomic, strong)        NSArray                *arrayContacts;
 @property (nonatomic, strong)        NSArray                *arrayBusinesses;
 @property (nonatomic, strong)        NSArray                *arrayAutoComplete;
 @property (nonatomic, strong)        NSMutableDictionary    *dictImages; // images for the contacts and businesses
+@property (nonatomic, strong)        NSMutableDictionary    *dictAddresses; // addresses for the contacts and businesses
 @property (nonatomic, strong)        NSDictionary           *dictThumbnailURLs; // urls for business thumbnails
 
 @end
@@ -91,8 +97,14 @@
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.contentView];
 
+    _bExiting = NO;
+    _nOutstandingRequests = 0;
+
+    self.buttonBack.hidden = !self.bOldTransaction;
+
     self.arrayAutoComplete = @[];
     self.dictImages = [[NSMutableDictionary alloc] init];
+    self.dictAddresses = [[NSMutableDictionary alloc] init];
     self.dictThumbnailURLs = [[NSDictionary alloc] init];
 
     // get the list of businesses
@@ -223,18 +235,31 @@
 
 - (IBAction)Done
 {
-    [self resignAllResponders];
+    _bExiting = YES;
 
-    // add the category if we didn't have it
-    [self addCategory:self.pickerTextCategory.textField.text];
+    if (_nOutstandingRequests != 0)
+    {
+        // note: canceling requests should keep the window from getting callbacks but there seems to be an issue
+        // where that is not the case
+        NSLog(@"Transaction Details can not exit. Outstanding requests: %d", (int)_nOutstandingRequests);
+    }
+    else
+    {
+        [DL_URLServer cancelPreviousPerformRequestsWithTarget:self];
 
-    self.transaction.strName = [self.nameTextField text];
-    self.transaction.strNotes = [self.notesTextField text];
-    self.transaction.strCategory = [self.pickerTextCategory.textField text];
-    self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
+        [self resignAllResponders];
 
-    [CoreBridge storeTransaction: self.transaction];
-	[self.delegate TransactionDetailsViewControllerDone:self];
+        // add the category if we didn't have it
+        [self addCategory:self.pickerTextCategory.textField.text];
+
+        self.transaction.strName = [self.nameTextField text];
+        self.transaction.strNotes = [self.notesTextField text];
+        self.transaction.strCategory = [self.pickerTextCategory.textField text];
+        self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
+
+        [CoreBridge storeTransaction: self.transaction];
+        [self.delegate TransactionDetailsViewControllerDone:self];
+    }
 }
 
 - (IBAction)AdvancedDetails
@@ -263,6 +288,12 @@
 	[self.view addSubview:iv];
 }
 
+- (IBAction)buttonInfoTouched:(id)sender
+{
+    [self resignAllResponders];
+    [InfoView CreateWithHTML:@"infoTransactionDetails" forView:self.view];
+}
+
 #pragma mark - Misc Methods
 
 
@@ -270,9 +301,6 @@
 {
     // start with nothing
     self.arrayBusinesses = @[];
-
-    // query the server
-    [[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 
 	NSMutableString *strURL = [[NSMutableString alloc] init];
 
@@ -284,6 +312,7 @@
 
     // run the search
     //NSLog(@"Query: %@", strURL);
+    _nOutstandingRequests++;
     [[DL_URLServer controller] issueRequestURL:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                                     withParams:nil
                                     withObject:nil
@@ -648,6 +677,7 @@
 
         // run the qurey
         //NSLog(@"Query: %@", strURL);
+        _nOutstandingRequests++;
         [[DL_URLServer controller] issueRequestURL:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                                         withParams:nil
                                         withObject:strKey
@@ -775,9 +805,13 @@
     }
     
     cell.textLabel.text = [self.arrayAutoComplete objectAtIndex:indexPath.row];
-    cell.backgroundColor = [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0];
+    cell.backgroundColor = TABLE_CELL_BACKGROUND_COLOR;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
+    // address
+    cell.detailTextLabel.text = [self.dictAddresses objectForKey:cell.textLabel.text];
+
+    // image
     UIImage *imageForCell = [self.dictImages objectForKey:cell.textLabel.text];
     if (imageForCell == nil)
     {
@@ -814,6 +848,7 @@
 
 - (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
 {
+    _nOutstandingRequests--;
     if (DL_URLRequestStatus_Success == status)
     {
         // if this is a business listing query
@@ -842,6 +877,30 @@
                 {
                     [arrayBusinesses addObject:name];
 
+                    // create the address
+                    NSMutableString *strAddress = [[NSMutableString alloc] init];
+                    NSString *strField = nil;
+                    if (nil != (strField = [dict objectForKey:@"address"]))
+                    {
+                        [strAddress appendString:strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"city"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"state"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"postalcode"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @" " : @""), strField];
+                    }
+                    if ([strAddress length])
+                    {
+                        [self.dictAddresses setObject:strAddress forKey:name];
+                    }
+
                     // check if we can get a thumbnail
                     NSDictionary *dictProfileImage = [dict objectForKey:@"profile_image"];
                     if (dictProfileImage && dictProfileImage != (id)[NSNull null])
@@ -859,9 +918,12 @@
             self.arrayBusinesses = arrayBusinesses;
             //NSLog(@"Businesses: %@", arrayBusinesses);
             self.dictThumbnailURLs = dictThumbnailURLs;
-            
-            [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
-            [self performSelector:@selector(getBusinessThumbnails) withObject:nil afterDelay:0.0];
+
+            if (!_bExiting)
+            {
+                [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
+                [self performSelector:@selector(getBusinessThumbnails) withObject:nil afterDelay:0.0];
+            }
         }
         else
         {
