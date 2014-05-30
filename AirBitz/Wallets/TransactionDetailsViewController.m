@@ -133,6 +133,7 @@
     self.pickerTextCategory.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.pickerTextCategory.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     self.pickerTextCategory.textField.textColor = [UIColor whiteColor];
+    self.pickerTextCategory.textField.tintColor = [UIColor whiteColor];
     [self.pickerTextCategory setTopMostView:self.view];
     //self.pickerTextCategory.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
     self.pickerTextCategory.cropPointBottom = 360; // magic number
