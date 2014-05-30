@@ -18,6 +18,7 @@
 #import "LatoLabel.h"
 #import "ZBarSDK.h"
 #import "InfoView.h"
+#import "CoreBridge.h"
 
 #define WALLET_BUTTON_WIDTH 150
 
@@ -62,7 +63,7 @@ typedef enum eImportState
 @property (weak, nonatomic) IBOutlet UIImageView        *imageNotApproved;
 @property (weak, nonatomic) IBOutlet LatoLabel          *labelPasswordStatus;
 
-@property (nonatomic, strong) NSArray  *arrayWalletUUIDs;
+@property (nonatomic, strong) NSArray  *arrayWallets;
 @property (nonatomic, copy)   NSString *strPassword;
 
 @end
@@ -279,36 +280,27 @@ typedef enum eImportState
 
 - (void)setWalletData
 {
-	tABC_WalletInfo **aWalletInfo = NULL;
-    unsigned int nCount;
-	tABC_Error Error;
-    ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
-    [Util printABC_Error:&Error];
+    // load all the non-archive wallets
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets:arrayWallets archived:nil];
 
-	if (nCount)
-	{
-		tABC_WalletInfo *info = aWalletInfo[0];
-
-		[self.buttonSelector.button setTitle:[NSString stringWithUTF8String:info->szName] forState:UIControlStateNormal];
-		self.buttonSelector.selectedItemIndex = 0;
-        _selectedWallet = 0;
-	}
-
-    // assign list of wallets to buttonSelector
-	NSMutableArray *walletsArray = [[NSMutableArray alloc] init];
-    NSMutableArray *arrayWalletUUIDs = [[NSMutableArray alloc] init];
-
-    for (int i = 0; i < nCount; i++)
+    // create the array of wallet names
+    NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
+    for (int i = 0; i < [arrayWallets count]; i++)
     {
-        tABC_WalletInfo *pInfo = aWalletInfo[i];
-		[walletsArray addObject:[NSString stringWithUTF8String:pInfo->szName]];
-        [arrayWalletUUIDs addObject:[NSString stringWithUTF8String:pInfo->szUUID]];
+        Wallet *wallet = [arrayWallets objectAtIndex:i];
+        [arrayWalletNames addObject:wallet.strName];
     }
 
-	self.buttonSelector.arrayItemsToSelect = [walletsArray copy];
-    self.arrayWalletUUIDs = arrayWalletUUIDs;
+    if ([arrayWallets count] > 0)
+    {
+        _selectedWallet = 0;
+        self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
+        [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWallet] forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = (int) _selectedWallet;
+    }
 
-    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+    self.arrayWallets = arrayWallets;
 }
 
 - (void)checkEnteredPassword
@@ -339,7 +331,7 @@ typedef enum eImportState
 - (void)importWallet
 {
     // TODO: is here that the core needs to import the wallet given all the data:
-    //strWalletUUID = [self.arrayWalletUUIDs objectAtIndex:_selectedWallet];
+    // wallet.strUUID where wallet = [self.arrayWallets objectAtIndex:_selectedWallet];
     //self.strPassword
     //self.strPrivateKey
     // then bring up the transaction window representing the import

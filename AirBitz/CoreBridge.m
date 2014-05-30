@@ -64,7 +64,7 @@
     [CoreBridge loadWallets:arrayWallets];
 
     // go through all the wallets and seperate out the archived ones
-    for (int i = [arrayWallets count] - 1; i >= 0; i--)
+    for (int i = (int) [arrayWallets count] - 1; i >= 0; i--)
     {
         Wallet *wallet = [arrayWallets objectAtIndex:i];
 
