@@ -45,9 +45,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
 @property (weak, nonatomic) IBOutlet UIView                 *viewMiddle;
 
+@property (nonatomic, strong) NSArray   *arrayWallets;
 @property (nonatomic, strong) NSArray   *arrayWalletNames;
-@property (nonatomic, strong) NSArray   *arrayWalletBalances;
-@property (nonatomic, strong) NSArray   *arrayWalletUUIDs;
 @property (nonatomic, strong) NSArray   *arrayChoicesIndexes;
 
 @end
@@ -182,41 +181,29 @@
 
 - (void)loadWalletInfo
 {
-	tABC_WalletInfo **aWalletInfo = NULL;
-    unsigned int nCount;
-	tABC_Error Error;
-    ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
-    [Util printABC_Error:&Error];
-	
-    //printf("Wallets:\n");
-
-    if (_selectedWalletIndex >= nCount)
-    {
-        _selectedWalletIndex = 0;
-    }
+    // load all the non-archive wallets
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets:arrayWallets archived:nil];
 
     // create the arrays of wallet info
-    NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:nCount];
-    NSMutableArray *arrayWalletUUIDs = [[NSMutableArray alloc] initWithCapacity:nCount];
-    NSMutableArray *arrayWalletBalances = [[NSMutableArray alloc] initWithCapacity:nCount];
+    NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
 
-    for (int i = 0; i < nCount; i++)
+    for (int i = 0; i < [arrayWallets count]; i++)
     {
-        tABC_WalletInfo *pInfo = aWalletInfo[i];
-		[arrayWalletNames addObject:[NSString stringWithUTF8String:pInfo->szName]];
-        [arrayWalletUUIDs addObject:[NSString stringWithUTF8String:pInfo->szUUID]];
-        [arrayWalletBalances addObject:[NSNumber numberWithLongLong:pInfo->balanceSatoshi]];
+        Wallet *wallet = [arrayWallets objectAtIndex:i];
+        [arrayWalletNames addObject:wallet.strName];
     }
 
-    self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-    [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWalletIndex] forState:UIControlStateNormal];
-    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+    if ([arrayWallets count] > 0)
+    {
+        _selectedWalletIndex = 0;
+        self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
+        [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWalletIndex] forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+    }
 
-    self.arrayWalletBalances = arrayWalletBalances;
-    self.arrayWalletUUIDs = arrayWalletUUIDs;
+    self.arrayWallets = arrayWallets;
     self.arrayWalletNames = arrayWalletNames;
-
-    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
 // if bToIsUUID NO, then it is assumed the strTo is an address
@@ -225,14 +212,15 @@
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
 
-    //NSLog(@"Sending to: %@, isUUID: %@", strTo, (bToIsUUID ? @"YES" : @"NO"));
-
 	_sendConfirmationViewController.delegate = self;
 	_sendConfirmationViewController.sendToAddress = strTo;
     _sendConfirmationViewController.bAddressIsWalletUUID = bToIsUUID;
 	_sendConfirmationViewController.amountToSendSatoshi = amount;
-	_sendConfirmationViewController.selectedWalletIndex = self.buttonSelector.selectedItemIndex;
+    _sendConfirmationViewController.wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+	_sendConfirmationViewController.selectedWalletIndex = _selectedWalletIndex;
 	_sendConfirmationViewController.nameLabel = nameLabel;
+
+    NSLog(@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
 	
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
@@ -378,20 +366,19 @@
     NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
     NSMutableArray *arrayChoicesIndexes = [[NSMutableArray alloc] init];
 
-    for (int i = 0; i < [self.arrayWalletNames count]; i++)
+    for (int i = 0; i < [self.arrayWallets count]; i++)
     {
         // if this is not our currently selected wallet in the wallet selector
         // in other words, we can move funds from and to the same wallet
         if (_selectedWalletIndex != i)
         {
-            NSString *strCurWalletName = [self.arrayWalletNames objectAtIndex:i];
-            int64_t curBalanceSatoshi = [[self.arrayWalletBalances objectAtIndex:i] longLongValue];
+            Wallet *wallet = [self.arrayWallets objectAtIndex:i];
 
             BOOL bAddIt = bUseAll;
             if (!bAddIt)
             {
-                // if it is in there
-                if ([strCurWalletName rangeOfString:strCur options:NSCaseInsensitiveSearch].location != NSNotFound)
+                // if we can find our current string within this wallet name
+                if ([wallet.strName rangeOfString:strCur options:NSCaseInsensitiveSearch].location != NSNotFound)
                 {
                     bAddIt = YES;
                 }
@@ -399,7 +386,7 @@
 
             if (bAddIt)
             {
-                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (balance: %@)", strCurWalletName, [CoreBridge formatSatoshi:curBalanceSatoshi]]];
+                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (balance: %@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
                 [arrayChoicesIndexes addObject:[NSNumber numberWithInt:i]];
             }
         }
@@ -473,7 +460,8 @@
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
     _selectedWalletIndex = itemIndex;
-    [self.buttonSelector.button setTitle:[self.arrayWalletNames objectAtIndex:_selectedWalletIndex] forState:UIControlStateNormal];
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
     self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
 }
 
@@ -591,7 +579,9 @@
         if (index != NSNotFound)
         {
             bIsUUID = YES;
-            strTo = [self.arrayWalletUUIDs objectAtIndex:index];
+            Wallet *wallet = [self.arrayWallets objectAtIndex:index];
+            //NSLog(@"using UUID for wallet: %@", wallet.strName);
+            strTo = wallet.strUUID;
         }
         [self closeCameraScanner];
 		[self showSendConfirmationTo:strTo amount:0.0 nameLabel:@" " toIsUUID:bIsUUID];
@@ -604,15 +594,15 @@
 {
     // set the text field to the choice
     NSInteger index = [[self.arrayChoicesIndexes objectAtIndex:row] integerValue];
-    NSString *strName = [self.arrayWalletNames objectAtIndex:index];
-    NSString *strUUID = [self.arrayWalletUUIDs objectAtIndex:index];
-    pickerTextView.textField.text = strName;
+    Wallet *wallet = [self.arrayWallets objectAtIndex:index];
+    pickerTextView.textField.text = wallet.strName;
 	[pickerTextView.textField resignFirstResponder];
 
     if (pickerTextView.textField.text.length)
 	{
         [self closeCameraScanner];
-		[self showSendConfirmationTo:strUUID amount:0.0 nameLabel:@" " toIsUUID:YES];
+        //NSLog(@"using UUID for wallet: %@", wallet.strName);
+		[self showSendConfirmationTo:wallet.strUUID amount:0.0 nameLabel:@" " toIsUUID:YES];
 	}
 }
 
