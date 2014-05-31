@@ -617,13 +617,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [InfoView CreateWithHTML:@"infoSettings" forView:self.view];
 }
 
-- (void)buttonOnlyCellButtonPressed:(ButtonOnlyCell *)cell
-{
-	//log out for now
-	[[User Singleton] clear];
-	[self.delegate SettingsViewControllerDone:self];
-}
-
 #pragma mark - textFieldCell delegates
 
 - (void)textFieldCellTextDidChange:(TextFieldCell *)cell
@@ -1336,6 +1329,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		[self.popupPicker addCropLine:CGPointMake(0, self.view.window.frame.size.height - TOOLBAR_HEIGHT) direction:PopupPickerPosition_Below animated:NO];
 		self.popupPicker.delegate = self;
     }
+}
+
+#pragma mark - Button Only Cell Delegate
+
+- (void)buttonOnlyCellButtonPressed:(ButtonOnlyCell *)cell
+{
+	//log out for now
+	[[User Singleton] clear];
+	[self.delegate SettingsViewControllerDone:self];
 }
 
 #pragma mark - Popup Picker Delegate Methods

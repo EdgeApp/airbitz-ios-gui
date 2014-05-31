@@ -138,4 +138,15 @@
     }
 }
 
+- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
+{
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(categoriesCellDidShowPopup:)])
+        {
+            [self.delegate categoriesCellDidShowPopup:self];
+        }
+    }
+}
+
 @end

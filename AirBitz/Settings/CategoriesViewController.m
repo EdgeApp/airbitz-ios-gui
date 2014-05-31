@@ -13,6 +13,7 @@
 #import "User.h"
 #import "PickerTextView.h"
 #import "Util.h"
+#import "CommonTypes.h"
 
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y    3
 #define TABLE_SIZE_EXTRA_HEIGHT         5
@@ -27,6 +28,7 @@
 {
     char            **_aszCategories;
     unsigned int    _count;
+    CGRect          _frameTableOriginal;
 }
 
 @property (nonatomic, weak) IBOutlet    UITableView     *tableView;
@@ -56,7 +58,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
 	[self.cancelButton setTitle:NSLocalizedString(@"Cancel", @"cancel button title") forState:UIControlStateNormal];
 	[self.doneButton setTitle:NSLocalizedString(@"Done", @"done button title") forState:UIControlStateNormal];
 
@@ -68,6 +70,8 @@
     {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
+
+    _frameTableOriginal = self.tableView.frame;
 
     // load the categories
     [self loadCategories];
@@ -87,6 +91,7 @@
     self.pickerTextNew.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     [self.pickerTextNew setTopMostView:self.view];
     self.pickerTextNew.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
+    self.pickerTextNew.cropPointBottom = (IS_IPHONE5 ? 351 : 263); // magic number
     self.pickerTextNew.delegate = self;
 }
 
@@ -600,6 +605,18 @@
     {
         [cell.pickerTextView.textField resignFirstResponder];
     }
+}
+
+- (void)categoriesCellDidShowPopup:(CategoriesCell *)cell
+{
+#if 0
+    NSLog(@"Did show show cell popup");
+
+    CGRect frame = _frameTableOriginal;
+    frame.size.height = 40;
+    frame.origin.y = 300;
+    self.tableView.frame = frame;
+#endif
 }
 
 @end
