@@ -21,10 +21,13 @@ typedef enum ePopupPickerPosition
 
 @interface PopupPickerView : UIView
 
-@property (nonatomic, assign) id                    userData;
-@property (nonatomic, assign) BOOL                  showOptions;
-@property (nonatomic, assign) UITableViewCellStyle  tableViewCellStyle;
-@property (nonatomic, assign)	id <PopupPickerViewDelegate>delegate;
+@property (nonatomic, strong)   IBOutlet UIImageView            *arrowImage;
+
+@property (nonatomic, assign)   id                              userData;
+@property (nonatomic, assign)   BOOL                            showOptions;
+@property (nonatomic, assign)   UITableViewCellStyle            tableViewCellStyle;
+@property (nonatomic, assign)   id <PopupPickerViewDelegate>    delegate;
+
 +(void)initAll;
 +(void)freeAll;
 

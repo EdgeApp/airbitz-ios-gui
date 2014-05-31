@@ -35,6 +35,8 @@
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
 
 	self.pickerTextView.delegate = self;
+
+    self.pickerTextView.popupPickerPosition = PopupPickerPosition_Above;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

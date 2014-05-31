@@ -32,7 +32,7 @@
 	CGRect						availableSpace;	//space within which the popupPicker can be displayed (in screen coordinates)
 }
 
-@property (nonatomic, strong)   IBOutlet UIImageView    *arrowImage;
+
 @property (weak, nonatomic)     IBOutlet UIView         *viewOptions;
 @property (weak, nonatomic)     IBOutlet UIButton       *buttonKeyboard;
 @property (weak, nonatomic)     IBOutlet UIButton       *buttonTrash;

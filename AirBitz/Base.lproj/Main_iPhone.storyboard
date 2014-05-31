@@ -3349,6 +3349,11 @@
                                     <action selector="Done" destination="sjK-gq-bVx" eventType="touchUpInside" id="WgY-B9-rxo"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="5RH-YC-xKK">
+                                <rect key="frame" x="0.0" y="138" width="320" height="381"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.81960784310000001" green="0.90196078430000004" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="wfo-0v-1Fd">
                                 <rect key="frame" x="0.0" y="138" width="320" height="381"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
