@@ -83,6 +83,9 @@
     self.buttonBlocker.frame = self.view.bounds;
     self.buttonBlocker.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
+
+    // put the cursor in the user name field
+    [self.userNameTextField becomeFirstResponder];
 }
 
 -(void)viewWillAppear:(BOOL)animated
