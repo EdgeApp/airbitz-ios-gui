@@ -77,6 +77,8 @@
 		4C7247CE1935594F0091C286 /* background_header@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247CC1935594F0091C286 /* background_header@2x~iphone.png */; };
 		4C7247D1193564D20091C286 /* DateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D0193564D20091C286 /* DateTime.m */; };
 		4C7247D41937A7520091C286 /* PayeeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D31937A7520091C286 /* PayeeCell.m */; };
+		4C7C1256193D2CFC0096338D /* WalletExportPDF.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4C7C1254193D2CFC0096338D /* WalletExportPDF.pdf */; };
+		4C7C1257193D2CFC0096338D /* WalletExportQuicken.QIF in Resources */ = {isa = PBXBuildFile; fileRef = 4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */; };
 		4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
@@ -542,6 +544,8 @@
 		4C7247D0193564D20091C286 /* DateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTime.m; sourceTree = "<group>"; };
 		4C7247D21937A7520091C286 /* PayeeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayeeCell.h; sourceTree = "<group>"; };
 		4C7247D31937A7520091C286 /* PayeeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayeeCell.m; sourceTree = "<group>"; };
+		4C7C1254193D2CFC0096338D /* WalletExportPDF.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = WalletExportPDF.pdf; path = Resources/MockData/WalletExportPDF.pdf; sourceTree = "<group>"; };
+		4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WalletExportQuicken.QIF; path = Resources/MockData/WalletExportQuicken.QIF; sourceTree = "<group>"; };
 		4C90461C18C91E5900179D9C /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h; sourceTree = "<group>"; };
 		4C90461D18C91E5900179D9C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Exception.h; sourceTree = "<group>"; };
 		4C90461E18C91E5900179D9C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Image.h; sourceTree = "<group>"; };
@@ -1131,6 +1135,15 @@
 			name = DDData;
 			sourceTree = "<group>";
 		};
+		4C7C1253193D2CBD0096338D /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				4C7C1254193D2CFC0096338D /* WalletExportPDF.pdf */,
+				4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */,
+			);
+			name = MockData;
+			sourceTree = "<group>";
+		};
 		4C90461818C91DF200179D9C /* ZBarSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1414,6 +1427,7 @@
 		B5675B8718A180D9002E0703 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4C7C1253193D2CBD0096338D /* MockData */,
 				B5F2E9A818D4AF6C008ACF88 /* html */,
 				B5137BF818A4085700DA4A34 /* Fonts */,
 				B5675B8818A18100002E0703 /* Artwork */,
@@ -1997,6 +2011,7 @@
 			files = (
 				4C5D8C821930060F0015BB3C /* btn_search~iphone.png in Resources */,
 				B5F2E9D318DCE09E008ACF88 /* PasswordVerifyView~ipad.xib in Resources */,
+				4C7C1257193D2CFC0096338D /* WalletExportQuicken.QIF in Resources */,
 				B55A030118EA206300845090 /* btn_done~iphone.png in Resources */,
 				B59C14E618C012B500AEA789 /* btn_checkmark@2x~iphone.png in Resources */,
 				B59C14EA18C012B500AEA789 /* btn_collapse_expand@2x~iphone.png in Resources */,
@@ -2183,6 +2198,7 @@
 				4C5D8C6B192E6BC30015BB3C /* infoSettings.html in Resources */,
 				B59C151E18C012B500AEA789 /* icon_request_dark~iphone.png in Resources */,
 				B5F2E9B218D92C1C008ACF88 /* swipe-arrow~iphone.png in Resources */,
+				4C7C1256193D2CFC0096338D /* WalletExportPDF.pdf in Resources */,
 				B5C0A8D918E63FE6008F302C /* bkg_flash_controls~iphone.png in Resources */,
 				B59C150418C012B500AEA789 /* btn_slash@2x~iphone.png in Resources */,
 				B5E7F58318E51048009B5844 /* comp_09.2-send_bitcoin2.jpg in Resources */,
