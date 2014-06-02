@@ -127,7 +127,7 @@ typedef enum eImportState
         [self performSelector:@selector(startCameraScanner) withObject:nil afterDelay:SCANNER_DELAY_SECS];
         //_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:SCANNER_DELAY_SECS target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 
-        [self.flashSelector selectItem:FLASH_ITEM_AUTO];
+        [self.flashSelector selectItem:FLASH_ITEM_OFF];
     }
 }
 
@@ -420,7 +420,7 @@ typedef enum eImportState
 	}
 
 	[_readerView start];
-	[self flashItemSelected:FLASH_ITEM_AUTO];
+	[self flashItemSelected:FLASH_ITEM_OFF];
 #endif
 }
 
