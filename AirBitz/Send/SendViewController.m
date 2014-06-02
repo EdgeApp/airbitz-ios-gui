@@ -110,7 +110,7 @@
     {
         _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 
-        [self.flashSelector selectItem:FLASH_ITEM_AUTO];
+        [self.flashSelector selectItem:FLASH_ITEM_OFF];
     }
 }
 
@@ -338,7 +338,7 @@
 		_readerView.alpha = 0.0;
 	}
 	[_readerView start];
-	[self flashItemSelected:FLASH_ITEM_AUTO];
+	[self flashItemSelected:FLASH_ITEM_OFF];
 #endif
 }
 
