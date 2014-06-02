@@ -114,6 +114,49 @@
 
 #pragma mark - Misc Methods
 
+// select the wallet with the given UUID
+- (void)selectWalletWithUUID:(NSString *)strUUID
+{
+    if (strUUID)
+    {
+        if ([strUUID length])
+        {
+            [self reloadWallets];
+            
+            Wallet *wallet = nil;
+
+            // look for the wallet in our arrays
+            for (Wallet *curWallet in self.arrayWallets)
+            {
+                if ([strUUID isEqualToString:curWallet.strUUID])
+                {
+                    wallet = curWallet;
+                    break;
+                }
+            }
+
+            // if we haven't found it yet, try the archived wallets
+            if (nil == wallet)
+            {
+                for (Wallet *curWallet in self.arrayArchivedWallets)
+                {
+                    if ([strUUID isEqualToString:curWallet.strUUID])
+                    {
+                        wallet = curWallet;
+                        break;
+                    }
+                }
+            }
+            
+            // if we found it
+            if (nil != wallet)
+            {
+                [self launchTransactionsWithWallet:wallet animated:NO];
+            }
+        }
+    }
+}
+
 -(void)createBlockingButtonUnderView:(UIView *)view
 {
 	_blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -351,7 +394,7 @@
 
 #pragma mark - Segue
 
-- (void)launchTransactionsWithWallet:(Wallet *)wallet
+- (void)launchTransactionsWithWallet:(Wallet *)wallet animated:(BOOL)bAnimated
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_transactionsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
@@ -363,17 +406,23 @@
 	_transactionsController.view.frame = frame;
 	[self.view addSubview:_transactionsController.view];
 	
-	
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 _transactionsController.view.frame = self.view.bounds;
-	 }
-        completion:^(BOOL finished)
-	 {
-	 }];
+	if (bAnimated)
+    {
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             _transactionsController.view.frame = self.view.bounds;
+         }
+                         completion:^(BOOL finished)
+         {
+         }];
+    }
+    else
+    {
+        _transactionsController.view.frame = self.view.bounds;
+    }
 	
 }
 
@@ -583,11 +632,11 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if(indexPath.section == 0)
 	{
-		[self launchTransactionsWithWallet:[self.arrayWallets objectAtIndex:indexPath.row]];
+		[self launchTransactionsWithWallet:[self.arrayWallets objectAtIndex:indexPath.row] animated:YES];
 	}
 	else
 	{
-		[self launchTransactionsWithWallet:[self.arrayArchivedWallets objectAtIndex:indexPath.row]];
+		[self launchTransactionsWithWallet:[self.arrayArchivedWallets objectAtIndex:indexPath.row] animated:YES];
 	}
 }
 

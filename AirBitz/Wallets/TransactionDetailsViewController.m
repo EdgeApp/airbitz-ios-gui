@@ -230,12 +230,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    // if we haven't closed already
-    if (!_bDoneSentToDelegate)
-    {
-        _bDoneSentToDelegate = YES;
-        [self.delegate TransactionDetailsViewControllerDone:self];
-    }
+    [self exit];
 }
 
 - (void)dealloc
@@ -278,11 +273,8 @@
         self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
 
         [CoreBridge storeTransaction: self.transaction];
-        if (!_bDoneSentToDelegate)
-        {
-            _bDoneSentToDelegate = YES;
-            [self.delegate TransactionDetailsViewControllerDone:self];
-        }
+
+        [self exit];
     }
 }
 
@@ -812,6 +804,32 @@
     CGImageRelease(imageRef);
 
     return cropped;
+}
+
+- (void)exit
+{
+    // if we haven't closed already
+    if (!_bDoneSentToDelegate)
+    {
+        _bDoneSentToDelegate = YES;
+        [self.delegate TransactionDetailsViewControllerDone:self];
+
+        // notify everyone interested that the details screen has exited
+#if 0
+        NSDictionary *dictNotification = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                          self.transaction,                 KEY_TX_DETAILS_EXITED_TX,
+                                          self.transaction.strWalletUUID,   KEY_TX_DETAILS_EXITED_WALLET_UUID,
+                                          self.transaction.strWalletName,   KEY_TX_DETAILS_EXITED_WALLET_NAME,
+                                          self.transaction.strID,           KEY_TX_DETAILS_EXITED_TX_ID,
+                                          nil];
+#endif
+        NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_TX            : self.transaction,
+                                            KEY_TX_DETAILS_EXITED_WALLET_UUID   : self.transaction.strWalletUUID,
+                                            KEY_TX_DETAILS_EXITED_WALLET_NAME   : self.transaction.strWalletName,
+                                            KEY_TX_DETAILS_EXITED_TX_ID         : self.transaction.strID
+                                            };
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:self userInfo:dictNotification];
+    }
 }
 
 #pragma mark - Calculator delegates
