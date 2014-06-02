@@ -321,6 +321,7 @@
 
 - (void)startCameraScanner:(NSTimer *)timer
 {
+    [self closeCameraScanner];
 
 #if !TARGET_IPHONE_SIMULATOR
     // NSLog(@"Scanning...");

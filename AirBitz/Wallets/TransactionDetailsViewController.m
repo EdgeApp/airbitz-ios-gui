@@ -50,6 +50,7 @@
 	UITableView     *_autoCompleteTable; //table of autoComplete search results (including address book entries)
     NSInteger       _nOutstandingRequests; // how many DL_URLServer requests to we have outstanding
     BOOL            _bExiting;
+    BOOL            _bDoneSentToDelegate;
 }
 
 @property (nonatomic, weak) IBOutlet UIView                 *headerView;
@@ -110,6 +111,7 @@
     [Util resizeView:self.view withDisplayView:self.contentView];
     [self updateDisplayLayout];
 
+    _bDoneSentToDelegate = NO;
     _bExiting = NO;
     _nOutstandingRequests = 0;
 
@@ -228,7 +230,12 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-	[self.delegate TransactionDetailsViewControllerDone:self];
+    // if we haven't closed already
+    if (!_bDoneSentToDelegate)
+    {
+        _bDoneSentToDelegate = YES;
+        [self.delegate TransactionDetailsViewControllerDone:self];
+    }
 }
 
 - (void)dealloc
@@ -271,7 +278,11 @@
         self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
 
         [CoreBridge storeTransaction: self.transaction];
-        [self.delegate TransactionDetailsViewControllerDone:self];
+        if (!_bDoneSentToDelegate)
+        {
+            _bDoneSentToDelegate = YES;
+            [self.delegate TransactionDetailsViewControllerDone:self];
+        }
     }
 }
 
