@@ -19,18 +19,18 @@
 #import "OfflineWalletViewController.h"
 #import "InfoView.h"
 #import "Util.h"
+#import "WalletHeaderView.h"
 
 #define DOLLAR_CURRENCY_NUM	840
 
-@interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletMakerViewDelegate, OfflineWalletViewControllerDelegate>
+@interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletMakerViewDelegate, OfflineWalletViewControllerDelegate, WalletHeaderViewDelegate>
 {
 	BalanceView                 *_balanceView;
 	TransactionsViewController  *_transactionsController;
 	BOOL                        _archiveCollapsed;
 	double                      _currencyConversionFactor;
 	tBalanceViewState           _balanceState;
-	UIView                      *_activeWalletsHeaderView;
-	UIView                      *_archivedWalletsHeaderView;
+	
 	CGRect                      _originalWalletMakerFrame;
 	UIButton                    *_blockingButton;
 	BOOL                        _walletMakerVisible;
@@ -39,7 +39,8 @@
 
 @property (nonatomic, strong) NSMutableArray *arrayWallets;
 @property (nonatomic, strong) NSMutableArray *arrayArchivedWallets;
-
+@property (nonatomic, strong) WalletHeaderView         *activeWalletsHeaderView;
+@property (nonatomic, strong) WalletHeaderView         *archivedWalletsHeaderView;
 @property (nonatomic, weak) IBOutlet WalletMakerView    *walletMakerView;
 @property (nonatomic, weak) IBOutlet UIView             *headerView;
 @property (nonatomic, weak) IBOutlet UIView             *balanceViewPlaceholder;
@@ -80,6 +81,13 @@
 	self.walletMakerView.frame = frame;
 	self.walletMakerView.hidden = YES;
     self.walletMakerView.delegate = self;
+	
+	self.activeWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"WALLETS", @"title of active wallets table")];
+	self.activeWalletsHeaderView.btn_expandCollapse.hidden = YES;
+	
+	self.archivedWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"ARCHIVE", @"title of archived wallets table")];
+	self.archivedWalletsHeaderView.delegate = self;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -89,13 +97,13 @@
     [self.walletsTable reloadData];
 	[self updateBalanceView];
 	
-	NSString *CellIdentifier = @"WalletsHeader";
+/*	NSString *CellIdentifier = @"WalletsHeader";
 	_activeWalletsHeaderView = [self.walletsTable dequeueReusableCellWithIdentifier:CellIdentifier];
 	((UITableViewCell *)_activeWalletsHeaderView).contentView.layer.cornerRadius = 4.0;
 	
 	CellIdentifier = @"ArchiveHeader";
 	_archivedWalletsHeaderView = [self.walletsTable dequeueReusableCellWithIdentifier:CellIdentifier];
-	((UITableViewCell *)_archivedWalletsHeaderView).contentView.layer.cornerRadius = 4.0;
+	((UITableViewCell *)_archivedWalletsHeaderView).contentView.layer.cornerRadius = 4.0;*/
 }
 
 - (void)didReceiveMemoryWarning
@@ -302,60 +310,42 @@
     [InfoView CreateWithHTML:@"infoWallets" forView:self.view];
 }
 
-- (IBAction)ExpandCollapseArchive:(UIButton *)sender
+#pragma mark - WalletHeaderViewDelegates
+
+//- (IBAction)ExpandCollapseArchive:(UIButton *)sender
+-(void)walletHeaderView:(WalletHeaderView *)walletHeaderView Expanded:(BOOL)expanded
 {
-	if(_archiveCollapsed)
+	if(expanded)
 	{
 		_archiveCollapsed = NO;
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-			 sender.transform = CGAffineTransformRotate(sender.transform, M_PI);
-		 }
-		 completion:^(BOOL finished)
-		 {
-			 NSInteger countOfRowsToInsert = self.arrayArchivedWallets.count;
-			 NSMutableArray *indexPathsToInsert = [[NSMutableArray alloc] init];
-			 for (NSInteger i = 0; i < countOfRowsToInsert; i++)
-			 {
-				 [indexPathsToInsert addObject:[NSIndexPath indexPathForRow:i inSection:1]];
-			 }
-			 
-			 UITableViewRowAnimation insertAnimation = UITableViewRowAnimationTop;
+		NSInteger countOfRowsToInsert = self.arrayArchivedWallets.count;
+		NSMutableArray *indexPathsToInsert = [[NSMutableArray alloc] init];
+		for (NSInteger i = 0; i < countOfRowsToInsert; i++)
+		{
+			[indexPathsToInsert addObject:[NSIndexPath indexPathForRow:i inSection:1]];
+		}
+		 
+		UITableViewRowAnimation insertAnimation = UITableViewRowAnimationTop;
 
-			 // apply the updates
-			 [self.walletsTable beginUpdates];
-			 [self.walletsTable insertRowsAtIndexPaths:indexPathsToInsert withRowAnimation:insertAnimation];
-			 [self.walletsTable endUpdates];
-
-		 }];
+		// apply the updates
+		[self.walletsTable beginUpdates];
+		[self.walletsTable insertRowsAtIndexPaths:indexPathsToInsert withRowAnimation:insertAnimation];
+		[self.walletsTable endUpdates];
 	}
 	else
 	{
 		_archiveCollapsed = YES;
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-			 sender.transform = CGAffineTransformRotate(sender.transform, -M_PI);
-		 }
-		completion:^(BOOL finished)
-		 {
-			 NSInteger countOfRowsToDelete = self.arrayArchivedWallets.count;
-			 
-			 if (countOfRowsToDelete > 0)
-			 {
-				 NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];
-				 for (NSInteger i = 0; i < countOfRowsToDelete; i++)
-				 {
-					 [indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:1]];
-				 }
-				 [self.walletsTable deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationTop];
-			 }
-		 }];
+		NSInteger countOfRowsToDelete = self.arrayArchivedWallets.count;
+		NSLog(@"Rows to collapse: %i", countOfRowsToDelete);
+		if (countOfRowsToDelete > 0)
+		{
+			NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];
+			for (NSInteger i = 0; i < countOfRowsToDelete; i++)
+			{
+				[indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:1]];
+			}
+			[self.walletsTable deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationTop];
+		}
 	}
 }
 
@@ -471,7 +461,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 	
-   // static NSString *CellIdentifier;
+    //NSString *CellIdentifier;
 	
 	if(section == 0)
 	{
@@ -489,6 +479,9 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	{
         [NSException raise:@"headerView == nil.." format:@"No cells with matching CellIdentifier loaded from your storyboard"];
     }
+	
+	((UITableViewCell *)headerView).contentView.layer.cornerRadius = 4.0;
+	
     return headerView;*/
 }
 
@@ -501,6 +494,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if(section == 0)
 	{
+		NSLog(@"Section 0 rows: %i", self.arrayWallets.count);
 		return self.arrayWallets.count;
 	}
 	else

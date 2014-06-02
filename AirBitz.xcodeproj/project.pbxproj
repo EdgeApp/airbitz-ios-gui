@@ -162,6 +162,8 @@
 		B561E1AF18D259CA002DCDC2 /* btn_close~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B561E1AD18D259CA002DCDC2 /* btn_close~iphone.png */; };
 		B561E1B218D25CC1002DCDC2 /* btn_info@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B561E1B018D25CC1002DCDC2 /* btn_info@2x~iphone.png */; };
 		B561E1B318D25CC1002DCDC2 /* btn_info~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B561E1B118D25CC1002DCDC2 /* btn_info~iphone.png */; };
+		B5635A25193D0F8700345AEE /* WalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5635A24193D0F8700345AEE /* WalletHeaderView.m */; };
+		B5635A27193D0FB200345AEE /* WalletHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5635A26193D0FB200345AEE /* WalletHeaderView~iphone.xib */; };
 		B56553DA18ECAEF7005B35E1 /* ConfirmationSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B56553D918ECAEF7005B35E1 /* ConfirmationSliderView.m */; };
 		B56553DF18ECAFE8005B35E1 /* btn_alwaysConfirm_off@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B56553DB18ECAFE8005B35E1 /* btn_alwaysConfirm_off@2x~iphone.png */; };
 		B56553E018ECAFE8005B35E1 /* btn_alwaysConfirm_off~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B56553DC18ECAFE8005B35E1 /* btn_alwaysConfirm_off~iphone.png */; };
@@ -671,6 +673,9 @@
 		B561E1AD18D259CA002DCDC2 /* btn_close~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close~iphone.png"; sourceTree = "<group>"; };
 		B561E1B018D25CC1002DCDC2 /* btn_info@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_info@2x~iphone.png"; sourceTree = "<group>"; };
 		B561E1B118D25CC1002DCDC2 /* btn_info~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_info~iphone.png"; sourceTree = "<group>"; };
+		B5635A23193D0F8700345AEE /* WalletHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletHeaderView.h; sourceTree = "<group>"; };
+		B5635A24193D0F8700345AEE /* WalletHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletHeaderView.m; sourceTree = "<group>"; };
+		B5635A26193D0FB200345AEE /* WalletHeaderView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "WalletHeaderView~iphone.xib"; sourceTree = "<group>"; };
 		B56553D818ECAEF7005B35E1 /* ConfirmationSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationSliderView.h; sourceTree = "<group>"; };
 		B56553D918ECAEF7005B35E1 /* ConfirmationSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationSliderView.m; sourceTree = "<group>"; };
 		B56553DB18ECAFE8005B35E1 /* btn_alwaysConfirm_off@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_alwaysConfirm_off@2x~iphone.png"; sourceTree = "<group>"; };
@@ -1872,6 +1877,9 @@
 				B5FD392D18EFC30E00BE2670 /* WalletMakerView.h */,
 				B5FD392E18EFC30E00BE2670 /* WalletMakerView.m */,
 				B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */,
+				B5635A23193D0F8700345AEE /* WalletHeaderView.h */,
+				B5635A24193D0F8700345AEE /* WalletHeaderView.m */,
+				B5635A26193D0FB200345AEE /* WalletHeaderView~iphone.xib */,
 				B5C0A9BF18EA0DD8008F302C /* WalletsViewController.h */,
 				B5C0A9C018EA0DD8008F302C /* WalletsViewController.m */,
 				4C9E91981922AB7400F01423 /* OfflineWalletViewController.h */,
@@ -2170,6 +2178,7 @@
 				B59C14F518C012B500AEA789 /* btn_import_wallet~iphone.png in Resources */,
 				B56553E118ECAFE8005B35E1 /* btn_alwaysConfirm_on@2x~iphone.png in Resources */,
 				B5F2EB1A18DE06B7008ACF88 /* img_collapseExpandBlueDown@2x~iphone.png in Resources */,
+				B5635A27193D0FB200345AEE /* WalletHeaderView~iphone.xib in Resources */,
 				B59C154018C012B500AEA789 /* table_cell_middle@2x~iphone.png in Resources */,
 				4C5D8C6B192E6BC30015BB3C /* infoSettings.html in Resources */,
 				B59C151E18C012B500AEA789 /* icon_request_dark~iphone.png in Resources */,
@@ -2357,6 +2366,7 @@
 				B5FD392F18EFC30E00BE2670 /* WalletMakerView.m in Sources */,
 				4C3C309819198B33006923DE /* PopupWheelPickerView.m in Sources */,
 				B5376E1D18B55D920099EF8F /* UIImage+Colorize.m in Sources */,
+				B5635A25193D0F8700345AEE /* WalletHeaderView.m in Sources */,
 				B5C0A9C218EA0DD8008F302C /* TransactionDetailsViewController.m in Sources */,
 				B5C0A9B018EA0D78008F302C /* SendConfirmationViewController.m in Sources */,
 				4C3C30A1191B07C0006923DE /* CategoriesCell.m in Sources */,
