@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 #import "ExportWalletOptionsViewController.h"
 #import "InfoView.h"
 #import "Util.h"
@@ -35,18 +36,18 @@ typedef enum eExportOption
     ExportOption_View = 5
 } tExportOption;
 
-@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 {
 
 }
 
-@property (weak, nonatomic) IBOutlet UIView     *viewDisplay;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UILabel    *labelWalletName;
-@property (weak, nonatomic) IBOutlet UILabel    *labelFromDate;
-@property (weak, nonatomic) IBOutlet UILabel    *labelToDate;
+@property (weak, nonatomic) IBOutlet UIView         *viewDisplay;
+@property (weak, nonatomic) IBOutlet UITableView    *tableView;
+@property (weak, nonatomic) IBOutlet UILabel        *labelWalletName;
+@property (weak, nonatomic) IBOutlet UILabel        *labelFromDate;
+@property (weak, nonatomic) IBOutlet UILabel        *labelToDate;
 
-@property (nonatomic, strong) NSArray           *arrayChoices;
+@property (nonatomic, strong) NSArray               *arrayChoices;
 
 @end
 
@@ -174,6 +175,247 @@ typedef enum eExportOption
 	return cell;
 }
 
+- (void)exportUsing:(tExportOption)option
+{
+    switch (option)
+    {
+        case ExportOption_AirPrint:
+        {
+            [self exportWithAirPrint];
+        }
+            break;
+
+        case ExportOption_SDCard:
+        {
+            NSLog(@"Unsupported export option");
+        }
+            break;
+
+        case ExportOption_Email:
+        {
+            [self exportWithEMail];
+        }
+            break;
+
+        case ExportOption_GoogleDrive:
+        {
+            [self exportWithGoogle];
+        }
+            break;
+
+        case ExportOption_Dropbox:
+        {
+            [self exportWithDropbox];
+        }
+            break;
+
+        case ExportOption_View:
+        {
+            [self exportView];
+        }
+            break;
+
+        default:
+            NSLog(@"Unknown export type");
+            break;
+    }
+}
+
+- (void)exportWithAirPrint
+{
+
+}
+
+- (void)exportWithEMail
+{
+    //NSData *dataAttachment = [self getExportDataInForm:self.type];
+
+
+    // if mail is available
+    if ([MFMailComposeViewController canSendMail])
+    {
+        NSMutableString *strBody = [[NSMutableString alloc] init];
+
+        [strBody appendString:@"<html><body>\n"];
+
+        [strBody appendString:NSLocalizedString(@"Attached are the transactions for the AirBitz Bitcoin Wallet: ", nil)];
+        [strBody appendString:self.wallet.strName];
+        [strBody appendString:@"\n"];
+        [strBody appendString:@"<br><br>\n"];
+
+        [strBody appendString:@"</body></html>\n"];
+
+
+        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+
+        [mailComposer setSubject:NSLocalizedString(@"AirBitz Bitcoin Wallet Transactions", nil)];
+
+        [mailComposer setMessageBody:strBody isHTML:YES];
+
+        // set up the attachment
+        NSData *dataExport = [self getExportDataInForm:self.type];
+        NSString *strFilename = [NSString stringWithFormat:@"%@.%@", self.wallet.strName, [self suffixFor:self.type]];
+        NSString *strMimeType = [self mimeTypeFor:self.type];
+        [mailComposer addAttachmentData:dataExport mimeType:strMimeType fileName:strFilename];
+
+        mailComposer.mailComposeDelegate = self;
+
+        [self presentViewController:mailComposer animated:YES completion:nil];
+        //[self presentModalViewController:mailComposer animated:NO];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"Can't send e-mail"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+- (void)exportWithGoogle
+{
+
+}
+
+- (void)exportWithDropbox
+{
+
+}
+
+- (void)exportView
+{
+    if (self.type ==  WalletExportType_PDF)
+    {
+        
+    }
+    else
+    {
+        NSLog(@"Only PDF is supported for viewing");
+    }
+}
+
+- (NSData *)getExportDataInForm:(tWalletExportType)type
+{
+    NSData *dataExport = nil;
+
+    // TODO: create the proper export in the proper from using self.wallet
+
+    // for now just hard code
+    switch (type)
+    {
+        case WalletExportType_CSV:
+        {
+            NSString* str = @"[CSV Data Here]";
+            dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+        }
+            break;
+
+        case WalletExportType_Quicken:
+        {
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"WalletExportQuicken" ofType:@"QIF"];
+            dataExport = [NSData dataWithContentsOfFile:filePath];
+        }
+            break;
+
+        case WalletExportType_Quickbooks:
+        {
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"WalletExportQuicken" ofType:@"QIF"];
+            dataExport = [NSData dataWithContentsOfFile:filePath];
+        }
+            break;
+
+        case WalletExportType_PDF:
+        {
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"WalletExportPDF" ofType:@"pdf"];
+            dataExport = [NSData dataWithContentsOfFile:filePath];
+        }
+            break;
+
+        case WalletExportType_PrivateSeed:
+        {
+            NSString* str = @"[Private Seed Here]";
+            dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+        }
+            break;
+
+        default:
+            NSLog(@"Unknown export option");
+            break;
+    }
+
+    return dataExport;
+}
+
+- (NSString *)suffixFor:(tWalletExportType)type
+{
+    NSString *strSuffix = @"???";
+
+    switch (type)
+    {
+        case WalletExportType_CSV:
+            strSuffix = @"csv";
+            break;
+
+        case WalletExportType_Quicken:
+            strSuffix = @"QIF";
+            break;
+
+        case WalletExportType_Quickbooks:
+            strSuffix = @"QIF";
+            break;
+
+        case WalletExportType_PDF:
+            strSuffix = @"pdf";
+            break;
+
+        case WalletExportType_PrivateSeed:
+            strSuffix = @"txt";
+            break;
+
+        default:
+            NSLog(@"Unknown export type");
+            break;
+    }
+
+    return strSuffix;
+}
+
+- (NSString *)mimeTypeFor:(tWalletExportType)type
+{
+    NSString *strMimeType = @"???";
+
+    switch (type)
+    {
+        case WalletExportType_CSV:
+            strMimeType = @"text/plain";
+            break;
+
+        case WalletExportType_Quicken:
+            strMimeType = @"application/qif";
+            break;
+
+        case WalletExportType_Quickbooks:
+            strMimeType = @"application/qbooks";
+            break;
+
+        case WalletExportType_PDF:
+            strMimeType = @"application/pdf";
+            break;
+
+        case WalletExportType_PrivateSeed:
+            strMimeType = @"text/plain";
+            break;
+
+        default:
+            NSLog(@"Unknown export type");
+            break;
+    }
+    
+    return strMimeType;
+}
+
 - (void)animatedExit
 {
 	[UIView animateWithDuration:0.35
@@ -245,7 +487,54 @@ typedef enum eExportOption
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSLog(@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
+	//NSLog(@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
+
+    tExportOption exportOption = (tExportOption) [[self.arrayChoices objectAtIndex:indexPath.row] intValue];
+
+    //NSLog(@"Export option: %d", exportOption);
+
+    [self exportUsing:exportOption];
+}
+
+#pragma mark - Mail Compose Delegate Methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    NSString *strTitle = nil;
+    NSString *strMsg = nil;
+
+	switch (result)
+    {
+		case MFMailComposeResultCancelled:
+            strMsg = NSLocalizedString(@"Email cancelled.", nil);
+			break;
+
+		case MFMailComposeResultSaved:
+            strMsg = NSLocalizedString(@"Email saved to send later.", nil);
+			break;
+
+		case MFMailComposeResultSent:
+            strMsg = NSLocalizedString(@"Email sent.", nil);
+			break;
+
+		case MFMailComposeResultFailed:
+		{
+            strTitle = NSLocalizedString(@"Error sending Email.", nil);
+            strMsg = [error localizedDescription];
+			break;
+		}
+		default:
+			break;
+	}
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
+                                                    message:strMsg
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                          otherButtonTitles:nil];
+    [alert show];
+
+    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
