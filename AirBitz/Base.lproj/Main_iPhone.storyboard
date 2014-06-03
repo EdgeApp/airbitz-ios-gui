@@ -2346,6 +2346,81 @@
             </objects>
             <point key="canvasLocation" x="1158" y="2201"/>
         </scene>
+        <!--Export WalletPDF View Controller-->
+        <scene sceneID="YnI-my-v4p">
+            <objects>
+                <viewController storyboardIdentifier="ExportWalletPDFViewController" id="dqi-Ml-wZA" customClass="ExportWalletPDFViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TCI-Zu-1Y5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" id="4e8-sd-JC3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" id="Sy6-wB-Odo" userLabel="View - Header">
+                                <rect key="frame" x="0.0" y="-2" width="320" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_dark_header.png" id="p16-vj-4IL">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TmV-sb-8bZ" userLabel="Button - Back">
+                                        <rect key="frame" x="4" y="23" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="back_arrow.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonBackTouched:" destination="dqi-Ml-wZA" eventType="touchUpInside" id="7ND-VW-aLP"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UaX-Px-MTJ" userLabel="Button - info">
+                                        <rect key="frame" x="280" y="22" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="btn_info.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Export" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HzM-6V-ckO" customClass="MontserratLabel">
+                                        <rect key="frame" x="50" y="33" width="219" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="FHv-9X-Uze" userLabel="View - Display">
+                                <rect key="frame" x="0.0" y="62" width="320" height="459"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <webView contentMode="scaleToFill" id="XO0-ET-lNg">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="459"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="dqi-Ml-wZA" id="pE5-Yb-vkI"/>
+                                        </connections>
+                                    </webView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="viewDisplay" destination="FHv-9X-Uze" id="Fc0-lH-Ibs"/>
+                        <outlet property="webView" destination="XO0-ET-lNg" id="BSs-0t-fky"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qq7-eS-g7x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1597" y="2203"/>
+        </scene>
         <!--Offline Wallet View Controller-->
         <scene sceneID="efQ-r7-YT4">
             <objects>
@@ -2561,7 +2636,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kO8-H4-3f3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1531" y="2199"/>
+            <point key="canvasLocation" x="2023" y="2203"/>
         </scene>
         <!--Transaction Details View Controller-->
         <scene sceneID="HCj-Hj-Wof">

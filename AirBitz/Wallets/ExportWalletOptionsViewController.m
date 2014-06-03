@@ -8,6 +8,7 @@
 
 #import <MessageUI/MessageUI.h>
 #import "ExportWalletOptionsViewController.h"
+#import "ExportWalletPDFViewController.h"
 #import "InfoView.h"
 #import "Util.h"
 #import "ExportWalletOptionsCell.h"
@@ -36,9 +37,9 @@ typedef enum eExportOption
     ExportOption_View = 5
 } tExportOption;
 
-@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
+@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, ExportWalletPDFViewControllerDelegate>
 {
-
+    ExportWalletPDFViewController   *_exportWalletPDFViewController;
 }
 
 @property (weak, nonatomic) IBOutlet UIView         *viewDisplay;
@@ -345,7 +346,28 @@ typedef enum eExportOption
 {
     if (self.type ==  WalletExportType_PDF)
     {
-        
+
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        _exportWalletPDFViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletPDFViewController"];
+        _exportWalletPDFViewController.delegate = self;
+        _exportWalletPDFViewController.dataPDF = [self getExportDataInForm:self.type];
+
+        CGRect frame = self.view.bounds;
+        frame.origin.x = frame.size.width;
+        _exportWalletPDFViewController.view.frame = frame;
+        [self.view addSubview:_exportWalletPDFViewController.view];
+
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             _exportWalletPDFViewController.view.frame = self.view.bounds;
+         }
+                         completion:^(BOOL finished)
+         {
+             
+         }];
     }
     else
     {
@@ -592,6 +614,14 @@ typedef enum eExportOption
     [alert show];
 
     [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Export Wallet PDF Delegates
+
+- (void)exportWalletPDFViewControllerDidFinish:(ExportWalletPDFViewController *)controller
+{
+	[controller.view removeFromSuperview];
+	_exportWalletPDFViewController = nil;
 }
 
 @end
