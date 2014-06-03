@@ -223,14 +223,71 @@ typedef enum eExportOption
 
 - (void)exportWithAirPrint
 {
+    if ([UIPrintInteractionController isPrintingAvailable])
+    {
+        UIPrintInteractionController *pc = [UIPrintInteractionController sharedPrintController];
+        UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+        printInfo.outputType = UIPrintInfoOutputGeneral;
+        printInfo.jobName = NSLocalizedString(@"Wallet Export", nil);
+        pc.printInfo = printInfo;
+        pc.showsPageRange = YES;
+        NSData *dataExport = [self getExportDataInForm:self.type];
 
+        if (self.type == WalletExportType_PrivateSeed)
+        {
+
+            NSString *strPrivateSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
+            NSMutableString *strBody = [[NSMutableString alloc] init];
+            [strBody appendFormat:@"Wallet: %@\n\n", self.wallet.strName];
+            [strBody appendString:@"Private Seed:\n"];
+            [strBody appendString:strPrivateSeed];
+            [strBody appendString:@"\n\n"];
+
+            UISimpleTextPrintFormatter *textFormatter = [[UISimpleTextPrintFormatter alloc] initWithText:strBody];
+            textFormatter.startPage = 0;
+            textFormatter.contentInsets = UIEdgeInsetsMake(72.0, 72.0, 72.0, 72.0); // 1 inch margins
+            textFormatter.maximumContentWidth = 6 * 72.0;
+            pc.printFormatter = textFormatter;
+        }
+        else if (self.type == WalletExportType_PDF)
+        {
+            if ([UIPrintInteractionController canPrintData:dataExport])
+            {
+                pc.delegate = nil;
+                pc.printingItem = dataExport;
+            }
+        }
+        else
+        {
+            NSLog(@"unsupported type for AirPrint");
+            return;
+        }
+
+        UIPrintInteractionCompletionHandler completionHandler =
+        ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
+            if(!completed && error){
+                NSLog(@"Print failed - domain: %@ error code %u", error.domain, (unsigned int)error.code);
+            }
+        };
+
+        [pc presentAnimated:YES completionHandler:completionHandler];
+    }
+    else
+    {
+        // not available
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"Export Wallet Transactions", nil)
+                              message:@"AirPrint is not currently available"
+                              delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+    }
+    
 }
 
 - (void)exportWithEMail
 {
-    //NSData *dataAttachment = [self getExportDataInForm:self.type];
-
-
     // if mail is available
     if ([MFMailComposeViewController canSendMail])
     {
