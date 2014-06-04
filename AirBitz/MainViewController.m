@@ -547,6 +547,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     // if the wallet tab is not already open, bring it up with this wallet
     if (APP_MODE_WALLETS != _appMode)
     {
+        [_requestViewController resetViews];
         NSDictionary *dictData = [notification userInfo];
         self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];

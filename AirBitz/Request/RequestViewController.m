@@ -646,6 +646,11 @@ typedef enum eAddressPickerType
     _selectedWalletIndex = itemIndex;
 }
 
+-(void) resetViews
+{
+    [_qrViewController Back];
+}
+
 #pragma mark - ShowWalletQRViewController delegates
 
 - (void)ShowWalletQRViewControllerDone:(ShowWalletQRViewController *)controller

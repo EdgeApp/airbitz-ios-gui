@@ -14,6 +14,8 @@
 
 @property (assign) id<RequestViewControllerDelegate> delegate;
 
+-(void) resetViews;
+
 @end
 
 
