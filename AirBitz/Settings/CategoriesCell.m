@@ -35,6 +35,8 @@
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
 
 	self.pickerTextView.delegate = self;
+
+    self.pickerTextView.popupPickerPosition = PopupPickerPosition_Above;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -135,6 +137,17 @@
     {
         // set the text field to the choice
         view.textField.text = [view.arrayChoices objectAtIndex:row];
+    }
+}
+
+- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
+{
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(categoriesCellDidShowPopup:)])
+        {
+            [self.delegate categoriesCellDidShowPopup:self];
+        }
     }
 }
 

@@ -11,5 +11,6 @@
 @interface WalletsViewController : UIViewController
 
 - (void)reloadWallets;
+- (void)selectWalletWithUUID:(NSString *)strUUID;
 
 @end

@@ -22,6 +22,17 @@
 
 #define STARTING_YEAR               2014
 
+#define PICKER_COL_MONTH        0
+#define PICKER_COL_DAY          1
+#define PICKER_COL_YEAR         2
+#define PICKER_COL_SPACER       3
+#define PICKER_COL_HOUR         4
+#define PICKER_COL_COLON        5
+#define PICKER_COL_MINUTE       6
+#define PICKER_COL_AM_PM        7
+#define PICKER_COL_COUNT        8
+
+
 typedef enum eDatePeriod
 {
     DatePeriod_None,
@@ -94,8 +105,10 @@ typedef enum eDatePeriod
 
     self.fromDateTime = [[DateTime alloc] init];
     [self.fromDateTime setWithCurrentDateAndTime];
+    self.fromDateTime.second = 0;
     self.toDateTime = [[DateTime alloc] init];
     [self.toDateTime setWithCurrentDateAndTime];
+    self.fromDateTime.second = 0;
 
     _datePeriod = DatePeriod_None;
     [self updateDisplay];
@@ -236,12 +249,28 @@ typedef enum eDatePeriod
     self.imageButtonThisWeek.hidden = (DatePeriod_ThisWeek != _datePeriod);
     self.imageButtonThisMonth.hidden = (DatePeriod_ThisMonth != _datePeriod);
     self.imageButtonThisYear.hidden = (DatePeriod_ThisYear != _datePeriod);
-    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d:%.02d",
+    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
                                (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year,
-                               (int) self.fromDateTime.hour, (int) self.fromDateTime.minute, (int) self.fromDateTime.second];
-    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d:%.02d",
+                               [self displayFor12From24:(int) self.fromDateTime.hour], (int) self.fromDateTime.minute, self.fromDateTime.hour > 11 ? @"pm" : @"am"];
+    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
                              (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year,
-                             (int) self.toDateTime.hour, (int) self.toDateTime.minute, (int) self.toDateTime.second];
+                             [self displayFor12From24:(int) self.toDateTime.hour], (int) self.toDateTime.minute, self.toDateTime.hour > 11 ?  @"pm" : @"am"];
+}
+
+- (int)displayFor12From24:(int)hour24
+{
+    int retHour = hour24;
+
+    if (hour24 == 0)
+    {
+        retHour = 12;
+    }
+    else if (hour24 > 12)
+    {
+        retHour -= 12;
+    }
+
+    return retHour;
 }
 
 - (void)updateDisplayLayout
@@ -265,12 +294,7 @@ typedef enum eDatePeriod
     NSMutableArray *arraySubChoices;
 
     // month
-    arraySubChoices = [[NSMutableArray alloc] init];
-    for (int i = 1; i <= 12; i++)
-    {
-        [arraySubChoices addObject:[NSString stringWithFormat:@"%d", i]];
-    }
-    [arrayChoices addObject:arraySubChoices];
+    [arrayChoices addObject:@[@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Nov", @"Dec"]];
 
     // day
     arraySubChoices = [[NSMutableArray alloc] init];
@@ -288,13 +312,18 @@ typedef enum eDatePeriod
     }
     [arrayChoices addObject:arraySubChoices];
 
+    // spacer
+    [arrayChoices addObject:@[@""]];
+
     // hour
     arraySubChoices = [[NSMutableArray alloc] init];
-    for (int i = 0; i <= 23; i++)
+    for (int i = 1; i <= 12; i++)
     {
-        [arraySubChoices addObject:[NSString stringWithFormat:@"%d", i]];
+        [arraySubChoices addObject:[NSString stringWithFormat:@"%@%d", (i < 10 ? @"  " : @""), i]];
     }
     [arrayChoices addObject:arraySubChoices];
+
+    [arrayChoices addObject:@[@":"]];
 
     // min
     arraySubChoices = [[NSMutableArray alloc] init];
@@ -304,31 +333,102 @@ typedef enum eDatePeriod
     }
     [arrayChoices addObject:arraySubChoices];
 
-    // second
-    arraySubChoices = [[NSMutableArray alloc] init];
-    for (int i = 0; i <= 59; i++)
-    {
-        [arraySubChoices addObject:[NSString stringWithFormat:@"%.02d", i]];
-    }
-    [arrayChoices addObject:arraySubChoices];
-
+    // am/pm
+    [arrayChoices addObject:@[@"AM", @"PM"]];
 
     return arrayChoices;
 }
 
 - (void)setDateTime:(DateTime *)dateTime fromPickerSelections:(NSArray *)arraySelections
 {
-    dateTime.month = [[arraySelections objectAtIndex:0] integerValue] + 1;
-    dateTime.day = [[arraySelections objectAtIndex:1] integerValue] + 1;
-    dateTime.year = [[arraySelections objectAtIndex:2] integerValue] + STARTING_YEAR;
-    dateTime.hour = [[arraySelections objectAtIndex:3] integerValue];
-    dateTime.minute = [[arraySelections objectAtIndex:4] integerValue];
-    dateTime.second = [[arraySelections objectAtIndex:5] integerValue];
+    for (int nCol = 0; nCol < PICKER_COL_COUNT; nCol++)
+    {
+        NSInteger value = [[arraySelections objectAtIndex:nCol] integerValue];
+
+        if (PICKER_COL_MONTH == nCol)
+        {
+            dateTime.month = value + 1;
+        }
+        else if (PICKER_COL_DAY == nCol)
+        {
+            dateTime.day = value + 1;
+        }
+        else if (PICKER_COL_YEAR == nCol)
+        {
+            dateTime.year = value + STARTING_YEAR;
+        }
+        else if (PICKER_COL_HOUR == nCol)
+        {
+            BOOL bPM = ([[arraySelections objectAtIndex:PICKER_COL_AM_PM] integerValue] == 1);
+            dateTime.hour = value + 1;
+            if (bPM)
+            {
+                dateTime.hour += 12;
+            }
+            else if (value == 11)
+            {
+                dateTime.hour = 0;
+            }
+        }
+        else if (PICKER_COL_MINUTE == nCol)
+        {
+            dateTime.minute = value;
+        }
+    }
+
+    dateTime.second = 0;
 }
 
 - (NSArray *)getPopupPickerSelectionsFor:(DateTime *)dateTime givenChoices:(NSArray *)arrayChoices
 {
     NSMutableArray *arraySelections = [[NSMutableArray alloc] init];
+
+    for (int nCol = 0; nCol < PICKER_COL_COUNT; nCol++)
+    {
+        NSInteger selection = 0;
+
+        if (PICKER_COL_MONTH == nCol)
+        {
+            selection = dateTime.month - 1;
+        }
+        else if (PICKER_COL_DAY == nCol)
+        {
+            selection = dateTime.day - 1;
+        }
+        else if (PICKER_COL_YEAR == nCol)
+        {
+            selection = dateTime.year - STARTING_YEAR;
+        }
+        else if (PICKER_COL_HOUR == nCol)
+        {
+            selection = dateTime.hour - 1;
+            if (selection > 11)
+            {
+                selection -= 12;
+            }
+            else if (selection < 0)
+            {
+                selection = 11;
+            }
+        }
+        else if (PICKER_COL_MINUTE == nCol)
+        {
+            selection = dateTime.minute;
+        }
+        else if (PICKER_COL_AM_PM == nCol)
+        {
+            if (dateTime.hour > 11)
+            {
+                selection = 1; // PM
+            }
+            else
+            {
+                selection = 0; // AM
+            }
+        }
+
+        [arraySelections addObject:[NSNumber numberWithInteger:selection]];
+    }
 
     // month
     [arraySelections addObject:[NSNumber numberWithInteger:dateTime.month - 1]];
@@ -344,9 +444,6 @@ typedef enum eDatePeriod
 
     // minute
     [arraySelections addObject:[NSNumber numberWithInteger:dateTime.minute]];
-
-    // second
-    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.second]];
 
     return arraySelections;
 }
@@ -505,7 +602,7 @@ typedef enum eDatePeriod
 	[self.delegate exportWalletViewControllerDidFinish:self];
 }
 
-#pragma mark - Export Wallet Optinos Delegates
+#pragma mark - Export Wallet Options Delegates
 
 - (void)exportWalletOptionsViewControllerDidFinish:(ExportWalletOptionsViewController *)controller
 {
@@ -535,6 +632,34 @@ typedef enum eDatePeriod
 - (void)PopupWheelPickerViewCancelled:(PopupWheelPickerView *)view userData:(id)data
 {
     [self dismissPopupPicker];
+}
+
+- (CGFloat)PopupWheelPickerView:(PopupWheelPickerView *)view widthForComponent:(NSInteger)component userData:(id)data
+{
+    CGFloat retVal = 20; // default
+
+    if (component == PICKER_COL_MONTH)
+    {
+        retVal = 40;
+    }
+    else if (component == PICKER_COL_YEAR)
+    {
+        retVal = 40;
+    }
+    else if (component == PICKER_COL_SPACER)
+    {
+        retVal = 10;
+    }
+    else if (component == PICKER_COL_COLON)
+    {
+        retVal = 5;
+    }
+    else if (component == PICKER_COL_AM_PM)
+    {
+        retVal = 30;
+    }
+
+    return retVal;
 }
 
 @end

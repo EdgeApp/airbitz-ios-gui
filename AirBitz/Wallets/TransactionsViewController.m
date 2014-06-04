@@ -27,6 +27,8 @@
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
 #define COLOR_BALANCE  [UIColor colorWithRed:83.0/255.0 green:90.0/255.0 blue:91.0/255.0 alpha:1.0];
 
+#define TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD 160
+
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate>
 {
 	BalanceView                         *_balanceView;
@@ -37,6 +39,7 @@
     CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
     ExportWalletViewController          *_exportWalletViewController;
+    CGRect                              _frameTableWithSearchNoKeyboard;
 }
 
 @property (weak, nonatomic) IBOutlet UIView         *viewSearch;
@@ -271,6 +274,8 @@
         [self.view bringSubviewToFront:self.tableView];
         frame.origin.y = _searchShowingFrame.origin.y + _searchShowingFrame.size.height;
         frame.size.height = self.view.frame.size.height - frame.origin.y - 10;
+        _frameTableWithSearchNoKeyboard = frame;
+        frame.size.height -= TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD; // compensate for keyboard
 
         if (!IS_IPHONE5)
         {
@@ -658,8 +663,13 @@
             [self.textWalletName becomeFirstResponder];
         }
     }
-    else
+    else if (textField == self.searchTextField)
     {
+        if (_bSearchModeEnabled)
+        {
+            self.tableView.frame = _frameTableWithSearchNoKeyboard;
+        }
+
         [self blockUser:NO];
     }
 }

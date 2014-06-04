@@ -34,5 +34,6 @@
 - (BOOL)categoriesCellTextShouldReturn:(CategoriesCell *)cell;
 - (void)categoriesCellPopupSelected:(CategoriesCell *)cell onRow:(NSInteger)row;
 - (void)categoriesCellDeleteTouched:(CategoriesCell *)cell;
+- (void)categoriesCellDidShowPopup:(CategoriesCell *)cell;
 
 @end

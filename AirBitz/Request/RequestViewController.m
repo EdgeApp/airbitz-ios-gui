@@ -48,7 +48,6 @@ typedef enum eAddressPickerType
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
-	NSString                    *_selectedWalletUUID;
 	ShowWalletQRViewController  *_qrViewController;
     tAddressPickerType          _addressPickerType;
     ImportWalletViewController  *_importWalletViewController;
@@ -62,9 +61,10 @@ typedef enum eAddressPickerType
 @property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector;
 @property (nonatomic, weak) IBOutlet UILabel            *exchangeRateLabel;
 
-@property (nonatomic, copy) NSString *strFullName;
-@property (nonatomic, copy) NSString *strPhoneNumber;
-@property (nonatomic, copy) NSString *strEMail;
+@property (nonatomic, copy)   NSString *strFullName;
+@property (nonatomic, copy)   NSString *strPhoneNumber;
+@property (nonatomic, copy)   NSString *strEMail;
+@property (nonatomic, strong) NSArray  *arrayWallets;
 
 @end
 
@@ -90,7 +90,7 @@ typedef enum eAddressPickerType
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
-	[self setWalletButtonTitle];
+	[self loadWalletInfo];
 }
 
 -(void)awakeFromNib
@@ -221,9 +221,10 @@ typedef enum eAddressPickerType
 	char *pRequestID;
 
     // create the request
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 	result = ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
                                       [[User Singleton].password UTF8String],
-                                      [_selectedWalletUUID UTF8String],
+                                      [wallet.strUUID UTF8String],
                                       &details,
                                       &pRequestID,
                                       &error);
@@ -299,6 +300,8 @@ typedef enum eAddressPickerType
 	_qrViewController.addressString = address;
 	_qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
     _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi:[self.BTC_TextField.text doubleValue]];
+    double satoshi = [CoreBridge denominationToSatoshi:[self.BTC_TextField.text doubleValue]];
+    _qrViewController.amountSatoshi = satoshi;
 	CGRect frame = self.view.bounds;
 	_qrViewController.view.frame = frame;
 	[self.view addSubview:_qrViewController.view];
@@ -352,9 +355,10 @@ typedef enum eAddressPickerType
 
 	if (szRequestID)
 	{
+        Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 		tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
                                                    [[User Singleton].password UTF8String],
-                                                   [_selectedWalletUUID UTF8String],
+                                                   [wallet.strUUID UTF8String],
                                                    szRequestID,
                                                    &pData,
                                                    &width,
@@ -378,9 +382,10 @@ typedef enum eAddressPickerType
         }
         char *szRequestAddress = NULL;
 
+        Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
         tABC_CC result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
                                                [[User Singleton].password UTF8String],
-                                               [_selectedWalletUUID UTF8String],
+                                               [wallet.strUUID UTF8String],
                                                szRequestID,
                                                &szRequestAddress,
                                                &error);
@@ -457,36 +462,29 @@ typedef enum eAddressPickerType
 	}
 }
 
-- (void)setWalletButtonTitle
+- (void)loadWalletInfo
 {
-	tABC_WalletInfo **aWalletInfo = NULL;
-    unsigned int nCount;
-	tABC_Error Error;
-    ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
-    [Util printABC_Error:&Error];
-	
-    NSLog(@"Wallets:\n");
-	
-	if (_selectedWalletIndex <= nCount)
-	{
-		tABC_WalletInfo *info = aWalletInfo[_selectedWalletIndex];
-		
-		_selectedWalletUUID = [NSString stringWithUTF8String:info->szUUID];
-		[self.buttonSelector.button setTitle:[NSString stringWithUTF8String:info->szName] forState:UIControlStateNormal];
-		self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
-	}
-	
-    // assign list of wallets to buttonSelector
-	NSMutableArray *walletsArray = [[NSMutableArray alloc] init];
-	
-    for (int i = 0; i < nCount; i++)
+    // load all the non-archive wallets
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets:arrayWallets archived:nil];
+
+    // create the array of wallet names
+    NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
+    for (int i = 0; i < [arrayWallets count]; i++)
     {
-        tABC_WalletInfo *pInfo = aWalletInfo[i];
-		[walletsArray addObject:[NSString stringWithUTF8String:pInfo->szName]];
+        Wallet *wallet = [arrayWallets objectAtIndex:i];
+        [arrayWalletNames addObject:wallet.strName];
     }
-	
-	self.buttonSelector.arrayItemsToSelect = [walletsArray copy];
-    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+
+    if ([arrayWallets count] > 0)
+    {
+        _selectedWalletIndex = 0;
+        self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
+        [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWalletIndex] forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
+    }
+
+    self.arrayWallets = arrayWallets;
 }
 
 - (void)sendEMail
@@ -645,9 +643,7 @@ typedef enum eAddressPickerType
 
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
-	NSLog(@"Selected item %i", itemIndex);
     _selectedWalletIndex = itemIndex;
-    [self setWalletButtonTitle];
 }
 
 #pragma mark - ShowWalletQRViewController delegates

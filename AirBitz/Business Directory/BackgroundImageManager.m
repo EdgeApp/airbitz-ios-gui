@@ -38,7 +38,7 @@
 -(void)loadImageForBusiness:(NSDictionary *)business
 {
 	NSDictionary *imageInfo = [business objectForKey:@"profile_image"];
-	[DL_URLServer cancelPreviousPerformRequestsWithTarget:self];
+	//[DL_URLServer.controller cancelAllRequestsForDelegate:self]; // Note: not sure why this was being done before
 	if(imageInfo)
 	{
 		if(imageInfo.count)

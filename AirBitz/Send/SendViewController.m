@@ -18,20 +18,26 @@
 #import "Util.h"
 #import "InfoView.h"
 #import "ZBarSDK.h"
+#import "PickerTextView.h"
+#import "CoreBridge.h"
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate>
+#define WALLET_BUTTON_WIDTH         193
+
+#define POPUP_PICKER_LOWEST_POINT   360
+#define POPUP_PICKER_TABLE_HEIGHT   (IS_IPHONE5 ? 180 : 90)
+
+@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate, PickerTextViewDelegate>
 {
 	ZBarReaderView                  *_readerView;
     ZBarReaderController            *_readerPicker;
 	NSTimer                         *_startScannerTimer;
 	int                             _selectedWalletIndex;
-	NSString                        *_selectedWalletUUID;
 	SendConfirmationViewController  *_sendConfirmationViewController;
     BOOL                            _bUsingImagePicker;
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
-@property (nonatomic, weak) IBOutlet UITextField            *sendToTextField;
+@property (weak, nonatomic) IBOutlet PickerTextView         *pickerTextSendTo;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView     *buttonSelector;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageTopFrame;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendTo;
@@ -39,7 +45,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
 @property (weak, nonatomic) IBOutlet UIView                 *viewMiddle;
 
-@property (nonatomic, strong) UIButton  *buttonBlocker;
+@property (nonatomic, strong) NSArray   *arrayWallets;
+@property (nonatomic, strong) NSArray   *arrayWalletNames;
+@property (nonatomic, strong) NSArray   *arrayChoicesIndexes;
 
 @end
 
@@ -67,22 +75,31 @@
     _bUsingImagePicker = NO;
 	
 	self.flashSelector.delegate = self;
-	self.sendToTextField.delegate = self;
 	self.buttonSelector.delegate = self;
 
-    // set up our user blocking button
-    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.buttonBlocker.backgroundColor = [UIColor clearColor];
-    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
-    self.buttonBlocker.frame = self.view.bounds;
-    self.buttonBlocker.hidden = YES;
-    [self.view addSubview:self.buttonBlocker];
-    [self.view bringSubviewToFront:self.buttonBlocker];
-    [self.view bringSubviewToFront:self.sendToTextField];
+    // set up the specifics on our picker text view
+    self.pickerTextSendTo.textField.borderStyle = UITextBorderStyleNone;
+    self.pickerTextSendTo.textField.backgroundColor = [UIColor clearColor];
+    self.pickerTextSendTo.textField.font = [UIFont systemFontOfSize:14];
+    self.pickerTextSendTo.textField.clearButtonMode = UITextFieldViewModeAlways;
+    self.pickerTextSendTo.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.pickerTextSendTo.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.pickerTextSendTo.textField.spellCheckingType = UITextSpellCheckingTypeNo;
+    self.pickerTextSendTo.textField.textColor = [UIColor whiteColor];
+    self.pickerTextSendTo.textField.returnKeyType = UIReturnKeyDone;
+    self.pickerTextSendTo.textField.placeholder = NSLocalizedString(@"Bitcoin address or wallet", nil);
+    self.pickerTextSendTo.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.pickerTextSendTo.textField.placeholder
+                                                                                            attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
+    [self.pickerTextSendTo setTopMostView:self.view];
+    //self.pickerTextSendTo.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
+    self.pickerTextSendTo.cropPointBottom = POPUP_PICKER_LOWEST_POINT;
+    self.pickerTextSendTo.delegate = self;
 
-	self.buttonSelector.textLabel.text = NSLocalizedString(@"Send From:", @"Label text on Send Bitcoin screen");
-	
-	[self setWalletButtonTitle];
+	self.buttonSelector.textLabel.text = @"";
+    [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
+
+    _selectedWalletIndex = 0;
+	[self loadWalletInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -93,7 +110,7 @@
     {
         _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 
-        [self.flashSelector selectItem:FLASH_ITEM_AUTO];
+        [self.flashSelector selectItem:FLASH_ITEM_OFF];
     }
 }
 
@@ -104,7 +121,6 @@
 	_startScannerTimer = nil;
 
 	[self closeCameraScanner];
-	
 }
 
 - (void)didReceiveMemoryWarning
@@ -119,34 +135,21 @@
 - (IBAction)info
 {
 	[self.view endEditing:YES];
+    [self resignAllResonders];
     [InfoView CreateWithHTML:@"infoSend" forView:self.view];
-}
-
-- (IBAction)buttonBlockerTouched:(id)sender
-{
-	[self.sendToTextField resignFirstResponder];
-    [self blockUser:NO];
 }
 
 - (IBAction)buttonCameraTouched:(id)sender
 {
+    [self resignAllResonders];
     [self showImageScanner];
 }
 
 #pragma mark - Misc Methods
 
-- (void)blockUser:(BOOL)bBlock
+- (void)resignAllResonders
 {
-    if (bBlock)
-    {
-        [self.view bringSubviewToFront:self.buttonBlocker];
-        [self.view bringSubviewToFront:self.sendToTextField];
-        self.buttonBlocker.hidden = NO;
-    }
-    else
-    {
-        self.buttonBlocker.hidden = YES;
-    }
+    [self.pickerTextSendTo.textField resignFirstResponder];
 }
 
 - (void)updateDisplayLayout
@@ -176,48 +179,48 @@
     }
 }
 
-- (void)setWalletButtonTitle
+- (void)loadWalletInfo
 {
-	tABC_WalletInfo **aWalletInfo = NULL;
-    unsigned int nCount;
-	tABC_Error Error;
-    ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
-    [Util printABC_Error:&Error];
-	
-    //printf("Wallets:\n");
-	
-	if(nCount)
-	{
-		tABC_WalletInfo *info = aWalletInfo[_selectedWalletIndex];
-		
-		_selectedWalletUUID = [NSString stringWithUTF8String:info->szUUID];
-		[self.buttonSelector.button setTitle:[NSString stringWithUTF8String:info->szName] forState:UIControlStateNormal];
-		self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
-	}
-	
-    // assign list of wallets to buttonSelector
-	NSMutableArray *walletsArray = [[NSMutableArray alloc] init];
-	
-    for (int i = 0; i < nCount; i++)
+    // load all the non-archive wallets
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets:arrayWallets archived:nil];
+
+    // create the arrays of wallet info
+    NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
+
+    for (int i = 0; i < [arrayWallets count]; i++)
     {
-        tABC_WalletInfo *pInfo = aWalletInfo[i];
-		[walletsArray addObject:[NSString stringWithUTF8String:pInfo->szName]];
+        Wallet *wallet = [arrayWallets objectAtIndex:i];
+        [arrayWalletNames addObject:wallet.strName];
     }
-	
-	self.buttonSelector.arrayItemsToSelect = [walletsArray copy];
-    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+
+    if ([arrayWallets count] > 0)
+    {
+        _selectedWalletIndex = 0;
+        self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
+        [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWalletIndex] forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+    }
+
+    self.arrayWallets = arrayWallets;
+    self.arrayWalletNames = arrayWalletNames;
 }
 
-- (void)showSendConfirmationWithAddress:(NSString *)address amount:(long long)amount nameLabel:(NSString *)nameLabel
+// if bToIsUUID NO, then it is assumed the strTo is an address
+- (void)showSendConfirmationTo:(NSString *)strTo amount:(long long)amount nameLabel:(NSString *)nameLabel toIsUUID:(BOOL)bToIsUUID
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
-	
+
 	_sendConfirmationViewController.delegate = self;
-	_sendConfirmationViewController.sendToAddress = address;
+	_sendConfirmationViewController.sendToAddress = strTo;
+    _sendConfirmationViewController.bAddressIsWalletUUID = bToIsUUID;
 	_sendConfirmationViewController.amountToSendSatoshi = amount;
-	_sendConfirmationViewController.selectedWalletIndex = self.buttonSelector.selectedItemIndex;
+    _sendConfirmationViewController.wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+	_sendConfirmationViewController.selectedWalletIndex = _selectedWalletIndex;
 	_sendConfirmationViewController.nameLabel = nameLabel;
+
+    NSLog(@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
 	
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
@@ -272,8 +275,8 @@
 				{
                     printf("    message: %s\n", uri->szMessage);
 				}
-                    bSuccess = YES;
-                    [self showSendConfirmationWithAddress:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label];
+                bSuccess = YES;
+                [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label toIsUUID:NO];
 			}
 			else
 			{
@@ -318,6 +321,7 @@
 
 - (void)startCameraScanner:(NSTimer *)timer
 {
+    [self closeCameraScanner];
 
 #if !TARGET_IPHONE_SIMULATOR
     // NSLog(@"Scanning...");
@@ -329,12 +333,12 @@
 	_readerView.tracksSymbols = NO;
 
 	_readerView.tag = 99999999;
-	if(self.sendToTextField.text.length)
+	if ([self.pickerTextSendTo.textField.text length])
 	{
 		_readerView.alpha = 0.0;
 	}
 	[_readerView start];
-	[self flashItemSelected:FLASH_ITEM_AUTO];
+	[self flashItemSelected:FLASH_ITEM_OFF];
 #endif
 }
 
@@ -348,55 +352,50 @@
     }
 }
 
-
-#pragma mark - UITextField delegates
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+- (NSArray *)createNewSendToChoices:(NSString *)strCur
 {
-	[_readerView stop];
-	[UIView animateWithDuration:1.0
-						  delay:0.0
-						options:UIViewAnimationOptionCurveLinear
-					 animations:^
-	 {
-		 _readerView.alpha = 0.0;
-	 }
-	 completion:^(BOOL finished)
-	 {
+    BOOL bUseAll = YES;
 
-	 }];
-    [self.view bringSubviewToFront:self.buttonBlocker];
-    [self blockUser:YES];
-}
+    if (strCur)
+    {
+        if ([strCur length])
+        {
+            bUseAll = NO;
+        }
+    }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [self blockUser:NO];
-	[textField resignFirstResponder];
-	return YES;
-}
+    NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
+    NSMutableArray *arrayChoicesIndexes = [[NSMutableArray alloc] init];
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-	if (textField.text.length)
-	{
-		[self showSendConfirmationWithAddress:textField.text amount:0.0 nameLabel:@" "];
-	}
-	else
-	{
-		[_readerView start];
-		[UIView animateWithDuration:1.0
-							  delay:0.0
-							options:UIViewAnimationOptionCurveLinear
-						 animations:^
-		 {
-			 _readerView.alpha = 1.0;
-		 }
-						 completion:^(BOOL finished)
-		 {
-			 
-		 }];
-	}
+    for (int i = 0; i < [self.arrayWallets count]; i++)
+    {
+        // if this is not our currently selected wallet in the wallet selector
+        // in other words, we can move funds from and to the same wallet
+        if (_selectedWalletIndex != i)
+        {
+            Wallet *wallet = [self.arrayWallets objectAtIndex:i];
+
+            BOOL bAddIt = bUseAll;
+            if (!bAddIt)
+            {
+                // if we can find our current string within this wallet name
+                if ([wallet.strName rangeOfString:strCur options:NSCaseInsensitiveSearch].location != NSNotFound)
+                {
+                    bAddIt = YES;
+                }
+            }
+
+            if (bAddIt)
+            {
+                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+                [arrayChoicesIndexes addObject:[NSNumber numberWithInt:i]];
+            }
+        }
+    }
+
+    self.arrayChoicesIndexes = arrayChoicesIndexes;
+
+    return arrayChoices;
 }
 
 #pragma mark - Flash Select Delegates
@@ -450,8 +449,9 @@
 
 - (void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
 {
-	self.sendToTextField.text = nil;
-	[_readerView start];
+    [self loadWalletInfo];
+	self.pickerTextSendTo.textField.text = @"";
+    [self startCameraScanner:nil];
 	[_sendConfirmationViewController.view removeFromSuperview];
 	_sendConfirmationViewController = nil;
 }
@@ -461,7 +461,19 @@
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
     _selectedWalletIndex = itemIndex;
-    [self setWalletButtonTitle];
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+}
+
+- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
+{
+    [self resignAllResonders];
+}
+
+- (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view
+{
+
 }
 
 #pragma mark - ZBar's Delegate methods
@@ -525,5 +537,88 @@
 
 #endif
 
+#pragma mark - PickerTextView Delegates
+
+- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
+{
+    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
+
+    [pickerTextView updateChoices:arrayChoices];
+}
+
+- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
+{
+    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
+
+    [pickerTextView updateChoices:arrayChoices];
+}
+
+- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
+{
+    // unhighlight text
+    // note: for some reason, if we don't do this, the text won't select next time the user selects it
+    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.beginningOfDocument]];
+
+    return YES;
+}
+
+- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
+{
+    //[self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
+}
+
+- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
+{
+	[pickerTextView.textField resignFirstResponder];
+
+    if (pickerTextView.textField.text.length)
+	{
+        // see if the text corresponds to one of the wallets
+        BOOL bIsUUID = NO;
+        NSString *strTo = pickerTextView.textField.text;
+        NSInteger index = [self.arrayWalletNames indexOfObject:pickerTextView.textField.text];
+        if (index != NSNotFound)
+        {
+            bIsUUID = YES;
+            Wallet *wallet = [self.arrayWallets objectAtIndex:index];
+            //NSLog(@"using UUID for wallet: %@", wallet.strName);
+            strTo = wallet.strUUID;
+        }
+        [self closeCameraScanner];
+		[self showSendConfirmationTo:strTo amount:0.0 nameLabel:@" " toIsUUID:bIsUUID];
+	}
+
+	return YES;
+}
+
+- (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
+{
+    // set the text field to the choice
+    NSInteger index = [[self.arrayChoicesIndexes objectAtIndex:row] integerValue];
+    Wallet *wallet = [self.arrayWallets objectAtIndex:index];
+    pickerTextView.textField.text = wallet.strName;
+	[pickerTextView.textField resignFirstResponder];
+
+    if (pickerTextView.textField.text.length)
+	{
+        [self closeCameraScanner];
+        //NSLog(@"using UUID for wallet: %@", wallet.strName);
+		[self showSendConfirmationTo:wallet.strUUID amount:0.0 nameLabel:@" " toIsUUID:YES];
+	}
+}
+
+- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
+{
+    // forces the size of the popup picker on the picker text view to a certain size
+
+    // Note: we have to do this because right now the size will start as max needed but as we dynamically
+    //       alter the choices, we may end up with more choices than we originally started with
+    //       so we want the table to always be as large as it can be
+
+    // first start the popup pickerit right under the control and squished down
+    CGRect frame = pickerTextView.popupPicker.frame;
+    frame.size.height = POPUP_PICKER_TABLE_HEIGHT;
+    pickerTextView.popupPicker.frame = frame;
+}
 
 @end

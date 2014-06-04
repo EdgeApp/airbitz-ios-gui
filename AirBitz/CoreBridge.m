@@ -24,7 +24,7 @@
 
 @implementation CoreBridge
 
-+ (void)loadWallets: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets
++ (void)loadWallets:(NSMutableArray *)arrayWallets
 {
     tABC_Error Error;
     tABC_WalletInfo **aWalletInfo = NULL;
@@ -36,7 +36,8 @@
     if (ABC_CC_Ok == result)
     {
         unsigned int i;
-        for (i = 0; i < nCount; ++i) {
+        for (i = 0; i < nCount; ++i)
+        {
             Wallet *wallet;
             tABC_WalletInfo *pWalletInfo = aWalletInfo[i];
 
@@ -46,10 +47,7 @@
             wallet.attributes = pWalletInfo->attributes;
             wallet.balance = pWalletInfo->balanceSatoshi;
             wallet.currencyNum = pWalletInfo->currencyNum;
-            if ((wallet.attributes & WALLET_ATTRIBUTE_ARCHIVE_BIT) == 1)
-                [arrayArchivedWallets addObject:wallet];
-            else
-                [arrayWallets addObject:wallet];
+            [arrayWallets addObject:wallet];
             [self loadTransactions: wallet];
         }
     }
@@ -59,6 +57,30 @@
         [Util printABC_Error:&Error];
     }
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+}
+
++ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *) arrayArchivedWallets
+{
+    [CoreBridge loadWallets:arrayWallets];
+
+    // go through all the wallets and seperate out the archived ones
+    for (int i = (int) [arrayWallets count] - 1; i >= 0; i--)
+    {
+        Wallet *wallet = [arrayWallets objectAtIndex:i];
+
+        // if this is an archived wallet
+        if ((wallet.attributes & WALLET_ATTRIBUTE_ARCHIVE_BIT) == 1)
+        {
+            // add it to the archive wallet
+            if (arrayArchivedWallets != nil)
+            {
+                [arrayArchivedWallets insertObject:wallet atIndex:0];
+            }
+
+            // remove it from the standard wallets
+            [arrayWallets removeObjectAtIndex:i];
+        }
+    }
 }
 
 + (void)reloadWallet: (Wallet *) wallet;

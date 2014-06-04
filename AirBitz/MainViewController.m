@@ -22,6 +22,7 @@
 #import "Config.h"
 #import "Util.h"
 #import "CoreBridge.h"
+#import "CommonTypes.h"
 
 id mainId;
 
@@ -36,21 +37,23 @@ typedef enum eAppMode
 
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate, LoginViewControllerDelegate, TransactionDetailsViewControllerDelegate>
 {
-	UIViewController *selectedViewController;
-	DirectoryViewController *diretoryViewController;
-	RequestViewController *requestViewController;
-	SendViewController *sendViewController;
-	WalletsViewController *walletsViewController;
-	LoginViewController *loginViewController;
-	SettingsViewController *settingsViewController;
-	SendStatusViewController  *sendStatusController;
-    TransactionDetailsViewController *txDetailsController;
-	CGRect originalTabBarFrame;
-	CGRect originalViewFrame;
-	tAppMode appMode;
+	UIViewController            *_selectedViewController;
+	DirectoryViewController     *_diretoryViewController;
+	RequestViewController       *_requestViewController;
+	SendViewController          *_sendViewController;
+	WalletsViewController       *_walletsViewController;
+	LoginViewController         *_loginViewController;
+	SettingsViewController      *_settingsViewController;
+	SendStatusViewController    *_sendStatusController;
+    TransactionDetailsViewController *_txDetailsController;
+	CGRect                      _originalTabBarFrame;
+	CGRect                      _originalViewFrame;
+	tAppMode                    _appMode;
 }
 
 @property (nonatomic, weak) IBOutlet TabBarView *tabBar;
+
+@property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 
 @end
 
@@ -90,41 +93,32 @@ typedef enum eAppMode
     [Util printABC_Error:&Error];
 #endif
 
-	originalTabBarFrame = self.tabBar.frame;
-	originalViewFrame = self.view.frame;
+	_originalTabBarFrame = self.tabBar.frame;
+	_originalViewFrame = self.view.frame;
 	// Do any additional setup after loading the view.
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	diretoryViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
-	requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
-	requestViewController.delegate = self;
+	_diretoryViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
+	_requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
+	_requestViewController.delegate = self;
 
-	sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
+	_sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
 
-	walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
+	_walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
 
-	loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-	loginViewController.delegate = self;
-	settingsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
-	settingsViewController.delegate = self;
-	
+	_loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+	_loginViewController.delegate = self;
+	_settingsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+	_settingsViewController.delegate = self;
 
+    // resgister for transaction details screen complete notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit:) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
 }
 
--(void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
 	self.tabBar.delegate = self;
-	
+
 	//originalTabBarPosition = self.tabBar.frame.origin;
 #if DIRECTORY_ONLY
 	[self hideTabBarAnimated:NO];
@@ -132,6 +126,18 @@ typedef enum eAppMode
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHideTabBar:) name:NOTIFICATION_SHOW_TAB_BAR object:nil];
 #endif
 	[self.tabBar selectButtonAtIndex:0];
+}
+
+- (void)dealloc
+{
+    //remove all notifications associated with self
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Misc Methods
@@ -172,16 +178,16 @@ typedef enum eAppMode
 
 -(void)showLogin
 {
-	loginViewController.view.frame = self.view.bounds;
-	[self.view insertSubview:loginViewController.view belowSubview:self.tabBar];
-	loginViewController.view.alpha = 0.0;
+	_loginViewController.view.frame = self.view.bounds;
+	[self.view insertSubview:_loginViewController.view belowSubview:self.tabBar];
+	_loginViewController.view.alpha = 0.0;
 	[self hideTabBarAnimated:YES];
 	[UIView animateWithDuration:0.25
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseIn
 					 animations:^
 	 {
-		 loginViewController.view.alpha = 1.0;
+		 _loginViewController.view.alpha = 1.0;
 	 }
 					 completion:^(BOOL finished)
 	 {
@@ -190,9 +196,9 @@ typedef enum eAppMode
 
 -(void)updateChildViewSizeForTabBar
 {
-	if([selectedViewController respondsToSelector:@selector(viewBottom:)])
+	if([_selectedViewController respondsToSelector:@selector(viewBottom:)])
 	{
-		[(id)selectedViewController viewBottom:self.tabBar.frame.origin.y + 5.0];	/* 5.0 covers transparent area at top of tab bar */
+		[(id)_selectedViewController viewBottom:self.tabBar.frame.origin.y + 5.0];	/* 5.0 covers transparent area at top of tab bar */
 	}
 }
 
@@ -219,10 +225,10 @@ typedef enum eAppMode
 						 animations:^
 		 {
 			 CGRect frame = self.tabBar.frame;
-			 frame.origin.y = originalTabBarFrame.origin.y + frame.size.height;
+			 frame.origin.y = _originalTabBarFrame.origin.y + frame.size.height;
 			 self.tabBar.frame = frame;
 			 
-			 selectedViewController.view.frame = self.view.bounds;
+			 _selectedViewController.view.frame = self.view.bounds;
 		 }
 		completion:^(BOOL finished)
 		 {
@@ -232,37 +238,37 @@ typedef enum eAppMode
 	else
 	{
 		CGRect frame = self.tabBar.frame;
-		frame.origin.y = originalTabBarFrame.origin.y + frame.size.height;
+		frame.origin.y = _originalTabBarFrame.origin.y + frame.size.height;
 		self.tabBar.frame = frame;
 		
-		selectedViewController.view.frame = self.view.bounds;
+		_selectedViewController.view.frame = self.view.bounds;
 	}
 }
 
 -(void)launchViewControllerBasedOnAppMode
 {
     mainId = self;
-	switch(appMode)
+	switch(_appMode)
 	{
 		case APP_MODE_DIRECTORY:
 		{
-			if(selectedViewController != diretoryViewController)
+			if (_selectedViewController != _diretoryViewController)
 			{
-				[selectedViewController.view removeFromSuperview];
-				selectedViewController = diretoryViewController;
-				[self.view insertSubview:selectedViewController.view belowSubview:self.tabBar];
+				[_selectedViewController.view removeFromSuperview];
+				_selectedViewController = _diretoryViewController;
+				[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
 			}
 			break;
 		}
 		case APP_MODE_REQUEST:
 		{
-			if(selectedViewController != requestViewController)
+			if (_selectedViewController != _requestViewController)
 			{
 				if(([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
 				{
-					[selectedViewController.view removeFromSuperview];
-					selectedViewController = requestViewController;
-					[self.view insertSubview:selectedViewController.view belowSubview:self.tabBar];
+					[_selectedViewController.view removeFromSuperview];
+					_selectedViewController = _requestViewController;
+					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
 				}
 				else
 				{
@@ -274,7 +280,7 @@ typedef enum eAppMode
 			break;
 		case APP_MODE_SEND:
 		{
-			if(selectedViewController != sendViewController)
+			if (_selectedViewController != _sendViewController)
 			{
 				if(([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
 				{
@@ -291,9 +297,9 @@ typedef enum eAppMode
 					
 					if(1) //numWallets)
 					{
-						[selectedViewController.view removeFromSuperview];
-						selectedViewController = sendViewController;
-						[self.view insertSubview:selectedViewController.view belowSubview:self.tabBar];
+						[_selectedViewController.view removeFromSuperview];
+						_selectedViewController = _sendViewController;
+						[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
 					}
 					else
 					{
@@ -317,13 +323,14 @@ typedef enum eAppMode
 		}
 		case APP_MODE_WALLETS:
 		{
-			if(selectedViewController != walletsViewController)
+			if (_selectedViewController != _walletsViewController)
 			{
-				if(([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
+				if (([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
 				{
-					[selectedViewController.view removeFromSuperview];
-					selectedViewController = walletsViewController;
-					[self.view insertSubview:selectedViewController.view belowSubview:self.tabBar];
+					[_selectedViewController.view removeFromSuperview];
+					_selectedViewController = _walletsViewController;
+					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+                    [_walletsViewController selectWalletWithUUID:self.strWalletUUID];
 				}
 				else
 				{
@@ -333,13 +340,13 @@ typedef enum eAppMode
 			break;
 		}
 		case APP_MODE_SETTINGS:
-			if(selectedViewController != settingsViewController)
+			if (_selectedViewController != _settingsViewController)
 			{
-				if(([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
+				if (([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
 				{
-					[selectedViewController.view removeFromSuperview];
-					selectedViewController = settingsViewController;
-					[self.view insertSubview:selectedViewController.view belowSubview:self.tabBar];
+					[_selectedViewController.view removeFromSuperview];
+					_selectedViewController = _settingsViewController;
+					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
 				}
 				else
 				{
@@ -359,10 +366,10 @@ typedef enum eAppMode
 							options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
 		 {
-			 self.tabBar.frame = originalTabBarFrame;
+			 self.tabBar.frame = _originalTabBarFrame;
 			 CGRect frame = self.view.bounds;
-			 frame.size.height -= (originalTabBarFrame.size.height - 5.0);
-			 selectedViewController.view.frame = frame;
+			 frame.size.height -= (_originalTabBarFrame.size.height - 5.0);
+			 _selectedViewController.view.frame = frame;
 		 }
 		 completion:^(BOOL finished)
 		 {
@@ -372,26 +379,29 @@ typedef enum eAppMode
 	}
 	else
 	{
-		self.tabBar.frame = originalTabBarFrame;
+		self.tabBar.frame = _originalTabBarFrame;
 		
 		CGRect frame = self.view.bounds;
-		frame.size.height -= (originalTabBarFrame.size.height - 5.0);
-		selectedViewController.view.frame = frame;
+		frame.size.height -= (_originalTabBarFrame.size.height - 5.0);
+		_selectedViewController.view.frame = frame;
 	}
 }
 
-#pragma mark TabBarView delegates
+#pragma mark - TabBarView delegates
 
 -(void)tabVarView:(TabBarView *)view selectedSubview:(UIView *)subview
 {
 	//NSLog(@"Selecting view %i", (int) subview.tag);
-	appMode = (tAppMode)(subview.tag);
+	_appMode = (tAppMode)(subview.tag);
 
 	[self launchViewControllerBasedOnAppMode]; //will show login if necessary
 	[self updateChildViewSizeForTabBar];
+
+    // reset any data designed to drive the selection
+    self.strWalletUUID = nil;
 }
 
-#pragma mark RequestViewControllerDelegates
+#pragma mark - RequestViewControllerDelegates
 
 -(void)RequestViewControllerDone:(RequestViewController *)vc
 {
@@ -401,29 +411,29 @@ typedef enum eAppMode
 	//[self.tabBar selectButtonAtIndex:0];
 }
 
-#pragma mark SettingsViewControllerDelegates
+#pragma mark - SettingsViewControllerDelegates
 
 -(void)SettingsViewControllerDone:(SettingsViewController *)controller
 {
-	appMode = APP_MODE_DIRECTORY;
+	_appMode = APP_MODE_DIRECTORY;
 	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
 }
 
-#pragma mark LoginViewControllerDelegates
+#pragma mark - LoginViewControllerDelegates
 
 -(void)loginViewControllerDidAbort
 {
-	appMode = APP_MODE_DIRECTORY;
+	_appMode = APP_MODE_DIRECTORY;
 	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
 	[self showTabBarAnimated:YES];
-	[loginViewController.view removeFromSuperview];
+	[_loginViewController.view removeFromSuperview];
 }
 
 -(void)loginViewControllerDidLogin
 {
-    [loginViewController.view removeFromSuperview];
-    [self showTabBarAnimated:YES];
-    [self launchViewControllerBasedOnAppMode];
+	[_loginViewController.view removeFromSuperview];
+	[self showTabBarAnimated:YES];
+	[self launchViewControllerBasedOnAppMode];
 }
 
 -(void)launchReceiving: (NSArray *) params
@@ -433,7 +443,7 @@ typedef enum eAppMode
     Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
     NSLog(@("launchReceiving: %@ %@ %@\n"), walletUUID, txId, transaction);
     /* If we aren't on the selector view, then just notify the user */
-    if (selectedViewController != requestViewController && txDetailsController == nil)
+    if (_selectedViewController != _requestViewController && _txDetailsController == nil)
     {
         NSLog(@("Showing Notification\n"));
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
@@ -446,28 +456,28 @@ typedef enum eAppMode
     {
         NSLog(@("Launching Receiving page\n"));
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-        sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
+        _sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
 
         CGRect frame = self.view.bounds;
-        sendStatusController.view.frame = frame;
-        [self.view addSubview:sendStatusController.view];
-        sendStatusController.view.alpha = 0.0;
-        sendStatusController.messageLabel.text = NSLocalizedString(@"Receiving...", @"status message");
-        sendStatusController.titleLabel.text = NSLocalizedString(@"Receive Status", @"status title");
+        _sendStatusController.view.frame = frame;
+        [self.view addSubview:_sendStatusController.view];
+        _sendStatusController.view.alpha = 0.0;
+        _sendStatusController.messageLabel.text = NSLocalizedString(@"Receiving...", @"status message");
+        _sendStatusController.titleLabel.text = NSLocalizedString(@"Receive Status", @"status title");
         [UIView animateWithDuration:0.35
                             delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                         animations:^
         {
-            sendStatusController.view.alpha = 1.0;
+            _sendStatusController.view.alpha = 1.0;
         }
         completion:^(BOOL finished)
         {
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 [self launchTransactionDetails:transaction];
-                [sendStatusController.view removeFromSuperview];
-                sendStatusController = nil;
+                [_sendStatusController.view removeFromSuperview];
+                _sendStatusController = nil;
             });
         }];
     }
@@ -476,22 +486,22 @@ typedef enum eAppMode
 -(void) launchTransactionDetails: (Transaction *)transaction
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    txDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
-    txDetailsController.transaction = transaction;
-    txDetailsController.delegate = self;
-    txDetailsController.bOldTransaction = NO;
-    txDetailsController.transactionDetailsMode = TD_MODE_RECEIVED;
+    _txDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+    _txDetailsController.transaction = transaction;
+    _txDetailsController.delegate = self;
+    _txDetailsController.bOldTransaction = NO;
+    _txDetailsController.transactionDetailsMode = TD_MODE_RECEIVED;
 
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
-    txDetailsController.view.frame = frame;
-    [self.view addSubview:txDetailsController.view];
+    _txDetailsController.view.frame = frame;
+    [self.view addSubview:_txDetailsController.view];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
     {
-        txDetailsController.view.frame = self.view.bounds;
+        _txDetailsController.view.frame = self.view.bounds;
     }
     completion:^(BOOL finished)
     {
@@ -507,12 +517,12 @@ typedef enum eAppMode
     {
         CGRect frame = self.view.bounds;
         frame.origin.x = frame.size.width;
-        txDetailsController.view.frame = frame;
+        _txDetailsController.view.frame = frame;
     }
     completion:^(BOOL finished)
     {
-        [txDetailsController.view removeFromSuperview];
-        txDetailsController = nil;
+        [_txDetailsController.view removeFromSuperview];
+        _txDetailsController = nil;
     }];
 }
 
@@ -526,6 +536,20 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         NSString *txId = [NSString stringWithUTF8String:pInfo->szTxID];
         NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
         [mainId performSelectorOnMainThread:@selector(launchReceiving:) withObject:params waitUntilDone:NO];
+    }
+}
+
+#pragma mark - Custom Notification Handlers
+
+// called when the stats have been updated
+- (void)transactionDetailsExit:(NSNotification *)notification
+{
+    // if the wallet tab is not already open, bring it up with this wallet
+    if (APP_MODE_WALLETS != _appMode)
+    {
+        NSDictionary *dictData = [notification userInfo];
+        self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
     }
 }
 

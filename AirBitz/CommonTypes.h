@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-// comment added to test subvsion
-
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -36,6 +34,14 @@
 #define HEADER_HEIGHT       64
 #define DISPLAY_AREA_HEIGHT (SUB_SCREEN_HEIGHT - HEADER_HEIGHT)
 
+#define KEYBOARD_HEIGHT     216
+
 #define DOLLAR_CURRENCY_NUM	840
 
+// notifications
 
+#define NOTIFICATION_TRANSACTION_DETAILS_EXITED         @"Notification_Transaction_Details_Exited"     // sent when the user has finished using a transaction details screen
+#define KEY_TX_DETAILS_EXITED_TX                        @"transaction"
+#define KEY_TX_DETAILS_EXITED_WALLET_UUID               @"walletUUID"
+#define KEY_TX_DETAILS_EXITED_WALLET_NAME               @"walletName"
+#define KEY_TX_DETAILS_EXITED_TX_ID                     @"transactionID"

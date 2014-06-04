@@ -13,6 +13,7 @@
 #import "User.h"
 #import "PickerTextView.h"
 #import "Util.h"
+#import "CommonTypes.h"
 
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y    3
 #define TABLE_SIZE_EXTRA_HEIGHT         5
@@ -27,6 +28,8 @@
 {
     char            **_aszCategories;
     unsigned int    _count;
+    CGRect          _frameTableOriginal;
+    CGPoint         _offsetTableOriginal;
 }
 
 @property (nonatomic, weak) IBOutlet    UITableView     *tableView;
@@ -56,7 +59,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
 	[self.cancelButton setTitle:NSLocalizedString(@"Cancel", @"cancel button title") forState:UIControlStateNormal];
 	[self.doneButton setTitle:NSLocalizedString(@"Done", @"done button title") forState:UIControlStateNormal];
 
@@ -68,6 +71,8 @@
     {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
+
+    _frameTableOriginal = self.tableView.frame;
 
     // load the categories
     [self loadCategories];
@@ -87,7 +92,16 @@
     self.pickerTextNew.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     [self.pickerTextNew setTopMostView:self.view];
     self.pickerTextNew.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
+    self.pickerTextNew.cropPointBottom = (IS_IPHONE5 ? 351 : 263); // magic number
     self.pickerTextNew.delegate = self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    _frameTableOriginal = self.tableView.frame;
+    _offsetTableOriginal = self.tableView.contentOffset;
 }
 
 - (void)didReceiveMemoryWarning
@@ -561,8 +575,8 @@
 
 - (void)categoriesCellBeganEditing:(CategoriesCell *)cell
 {
-    CGPoint pos = [cell.pickerTextView.textField convertPoint:cell.pickerTextView.textField.frame.origin toView:nil];
-    cell.pickerTextView.pickerMaxChoicesVisible = pos.y < POS_THRESHOLD_TO_GET_3_CHOICES ? 2 : 3;
+    //CGPoint pos = [cell.pickerTextView.textField convertPoint:cell.pickerTextView.textField.frame.origin toView:nil];
+    //cell.pickerTextView.pickerMaxChoicesVisible = pos.y < POS_THRESHOLD_TO_GET_3_CHOICES ? 2 : 3;
 
     //[self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     self.tableView.scrollEnabled = NO;
@@ -579,6 +593,22 @@
     [self.arrayCategories replaceObjectAtIndex:[[self.arrayDisplayPositions objectAtIndex:indexPath.row] integerValue] withObject:strNewVal];
 
     self.tableView.scrollEnabled = YES;
+
+    // animate it all
+    [UIView animateWithDuration:0.35
+                          delay: 0.0
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         // return the table to previous position and scroll position
+         self.tableView.frame = _frameTableOriginal;
+         [self.tableView setContentOffset:_offsetTableOriginal];
+     }
+                     completion:^(BOOL finished)
+     {
+         
+     }];
+
 
     [self updateDisplay];
 }
@@ -600,6 +630,49 @@
     {
         [cell.pickerTextView.textField resignFirstResponder];
     }
+}
+
+- (void)categoriesCellDidShowPopup:(CategoriesCell *)cell
+{
+    //NSLog(@"Did show show cell popup");
+
+    // So the popup has now appear on the screen, here is what we will do
+    // (beware the magic numbers!)
+
+    // save the current scroll
+    _offsetTableOriginal = self.tableView.contentOffset;
+
+    // animate it all
+    [UIView animateWithDuration:0.35
+                          delay: 0.0
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         // make the table the size of a single cell and put it right above the keyboard
+         CGRect frame = _frameTableOriginal;
+         frame.size.height = (IS_IPHONE5 ? 40 : 40);
+         frame.origin.y = (IS_IPHONE5 ? 305 : 217);
+         self.tableView.frame = frame;
+
+         // scroll the table to the cell that was selected
+         NSIndexPath *pathOfTheCell = [self.tableView indexPathForCell:cell];
+         [self.tableView scrollToRowAtIndexPath:pathOfTheCell atScrollPosition:UITableViewScrollPositionTop animated:NO];
+
+         // move the selection picker to the right place and at the right size
+         frame = cell.pickerTextView.popupPicker.frame;
+         frame.size.height = (IS_IPHONE5 ? 250 : 162);
+         frame.origin.y = (IS_IPHONE5 ? 50 : 50);
+         cell.pickerTextView.popupPicker.frame = frame;
+
+         // move the arrow to the right spot
+         frame = cell.pickerTextView.popupPicker.arrowImage.frame;
+         frame.origin.y = cell.pickerTextView.popupPicker.frame.size.height - 9;
+         cell.pickerTextView.popupPicker.arrowImage.frame = frame;
+     }
+                     completion:^(BOOL finished)
+     {
+
+     }];
 }
 
 @end

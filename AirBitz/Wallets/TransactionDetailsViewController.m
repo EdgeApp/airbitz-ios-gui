@@ -35,8 +35,10 @@
 #define TEXTFIELD_VERTICAL_SPACE_OFFSET	7.0 /* how much space between screen header and textField when textField is scrolled all the way to the top */
 
 #define SEARCH_RADIUS        16093
-#define CACHE_AGE_SECS       25
-#define CACHE_IMAGE_AGE_SECS (60 * 60)
+#define CACHE_AGE_SECS       (60 * 15) // 15 min
+#define CACHE_IMAGE_AGE_SECS (60 * 60) // 60 hour
+
+#define TABLE_CELL_BACKGROUND_COLOR [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0]
 
 @interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
 {
@@ -46,27 +48,42 @@
 	CGRect          _originalContentFrame;
 	CGRect          _originalScrollableContentFrame;
 	UITableView     *_autoCompleteTable; //table of autoComplete search results (including address book entries)
+    BOOL            _bDoneSentToDelegate;
 }
 
 @property (nonatomic, weak) IBOutlet UIView                 *headerView;
 @property (nonatomic, weak) IBOutlet UIView                 *contentView;
 @property (nonatomic, weak) IBOutlet UIView                 *scrollableContentView;
+
 @property (nonatomic, weak) IBOutlet UILabel                *dateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageNameEmboss;
+@property (nonatomic, weak) IBOutlet StylizedTextField      *nameTextField;
+@property (nonatomic, weak) IBOutlet UIButton               *advancedDetailsButton;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageAmountEmboss;
 @property (nonatomic, weak) IBOutlet UILabel                *walletLabel;
 @property (nonatomic, weak) IBOutlet UILabel                *bitCoinLabel;
-@property (nonatomic, weak) IBOutlet UIButton               *advancedDetailsButton;
-@property (nonatomic, weak) IBOutlet UIButton               *doneButton;
+@property (weak, nonatomic) IBOutlet UILabel                *labelFiatSign;
+@property (weak, nonatomic) IBOutlet UILabel                *labelFiatName;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageFiatEmboss;
 @property (nonatomic, weak) IBOutlet UITextField            *fiatTextField;
-@property (nonatomic, weak) IBOutlet UITextField            *notesTextField;
-@property (nonatomic, weak) IBOutlet StylizedTextField      *nameTextField;
-@property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageBottomEmboss;
+@property (weak, nonatomic) IBOutlet UILabel                *labelCategory;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageCategoryEmboss;
 @property (weak, nonatomic) IBOutlet PickerTextView         *pickerTextCategory;
+@property (weak, nonatomic) IBOutlet UILabel                *labelNotes;
+@property (weak, nonatomic) IBOutlet UIImageView            *imageNotesEmboss;
+@property (nonatomic, weak) IBOutlet UITextField            *notesTextField;
+@property (nonatomic, weak) IBOutlet UIButton               *doneButton;
+
+@property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
+@property (weak, nonatomic) IBOutlet UIButton               *buttonBack;
 
 @property (nonatomic, strong)        NSArray                *arrayCategories;
 @property (nonatomic, strong)        NSArray                *arrayContacts;
 @property (nonatomic, strong)        NSArray                *arrayBusinesses;
 @property (nonatomic, strong)        NSArray                *arrayAutoComplete;
 @property (nonatomic, strong)        NSMutableDictionary    *dictImages; // images for the contacts and businesses
+@property (nonatomic, strong)        NSMutableDictionary    *dictAddresses; // addresses for the contacts and businesses
 @property (nonatomic, strong)        NSDictionary           *dictThumbnailURLs; // urls for business thumbnails
 
 @end
@@ -90,9 +107,15 @@
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.contentView];
+    [self updateDisplayLayout];
+
+    _bDoneSentToDelegate = NO;
+
+    self.buttonBack.hidden = !self.bOldTransaction;
 
     self.arrayAutoComplete = @[];
     self.dictImages = [[NSMutableDictionary alloc] init];
+    self.dictAddresses = [[NSMutableDictionary alloc] init];
     self.dictThumbnailURLs = [[NSDictionary alloc] init];
 
     // get the list of businesses
@@ -133,6 +156,7 @@
     self.pickerTextCategory.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.pickerTextCategory.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     self.pickerTextCategory.textField.textColor = [UIColor whiteColor];
+    self.pickerTextCategory.textField.tintColor = [UIColor whiteColor];
     [self.pickerTextCategory setTopMostView:self.view];
     //self.pickerTextCategory.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
     self.pickerTextCategory.cropPointBottom = 360; // magic number
@@ -202,13 +226,13 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-	[self.delegate TransactionDetailsViewControllerDone:self];
+    [self exit];
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [DL_URLServer cancelPreviousPerformRequestsWithTarget:self];
+	[DL_URLServer.controller cancelAllRequestsForDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -222,6 +246,8 @@
 
 - (IBAction)Done
 {
+    [DL_URLServer.controller cancelAllRequestsForDelegate:self];
+
     [self resignAllResponders];
 
     // add the category if we didn't have it
@@ -233,7 +259,8 @@
     self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
 
     [CoreBridge storeTransaction: self.transaction];
-	[self.delegate TransactionDetailsViewControllerDone:self];
+
+    [self exit];
 }
 
 - (IBAction)AdvancedDetails
@@ -262,16 +289,108 @@
 	[self.view addSubview:iv];
 }
 
+- (IBAction)buttonInfoTouched:(id)sender
+{
+    [self resignAllResponders];
+    [InfoView CreateWithHTML:@"infoTransactionDetails" forView:self.view];
+}
+
 #pragma mark - Misc Methods
 
+- (void)updateDisplayLayout
+{
+    // update for iPhone 4
+    if (!IS_IPHONE5)
+    {
+        // warning: magic numbers for iphone layout
+
+        CGRect frame;
+
+        frame = self.dateLabel.frame;
+        frame.origin.y = 0;
+        self.dateLabel.frame = frame;
+
+        frame = self.imageNameEmboss.frame;
+        frame.origin.y = self.dateLabel.frame.origin.y + self.dateLabel.frame.size.height + 0;
+        self.imageNameEmboss.frame = frame;
+
+        frame = self.nameTextField.frame;
+        frame.origin.y = self.imageNameEmboss.frame.origin.y + 2;
+        self.nameTextField.frame = frame;
+
+        frame = self.advancedDetailsButton.frame;
+        frame.origin.y = self.imageNameEmboss.frame.origin.y + self.imageNameEmboss.frame.size.height + 3;
+        self.advancedDetailsButton.frame = frame;
+
+        frame = self.imageAmountEmboss.frame;
+        frame.origin.y = self.advancedDetailsButton.frame.origin.y + self.advancedDetailsButton.frame.size.height + 3;
+        frame.size.height = 90;
+        self.imageAmountEmboss.frame = frame;
+
+        frame = self.walletLabel.frame;
+        frame.origin.y = self.imageAmountEmboss.frame.origin.y + 3;
+        self.walletLabel.frame = frame;
+
+        frame = self.bitCoinLabel.frame;
+        frame.origin.y = self.walletLabel.frame.origin.y + self.walletLabel.frame.size.height + 2;
+        self.bitCoinLabel.frame = frame;
+
+        frame = self.labelFiatSign.frame;
+        frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 4;
+        self.labelFiatSign.frame = frame;
+
+        frame = self.labelFiatName.frame;
+        frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 4;
+        self.labelFiatName.frame = frame;
+
+        frame = self.imageFiatEmboss.frame;
+        frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 2;
+        self.imageFiatEmboss.frame = frame;
+
+        frame = self.fiatTextField.frame;
+        frame.origin.y = self.imageFiatEmboss.frame.origin.y + 2;
+        self.fiatTextField.frame = frame;
+
+        frame = self.imageBottomEmboss.frame;
+        frame.origin.y = self.imageAmountEmboss.frame.origin.y + self.imageAmountEmboss.frame.size.height + 5;
+        frame.size.height = 132;
+        self.imageBottomEmboss.frame = frame;
+
+        frame = self.labelCategory.frame;
+        frame.origin.y = self.imageBottomEmboss.frame.origin.y + 2;
+        self.labelCategory.frame = frame;
+
+        frame = self.imageCategoryEmboss.frame;
+        frame.origin.y = self.labelCategory.frame.origin.y + self.labelCategory.frame.size.height + -2;
+        self.imageCategoryEmboss.frame = frame;
+
+        frame = self.pickerTextCategory.frame;
+        frame.origin.y = self.imageCategoryEmboss.frame.origin.y + 2;
+        self.pickerTextCategory.frame = frame;
+
+        frame = self.labelNotes.frame;
+        frame.origin.y = self.imageCategoryEmboss.frame.origin.y + self.imageCategoryEmboss.frame.size.height + 0;
+        self.labelNotes.frame = frame;
+
+        frame = self.imageNotesEmboss.frame;
+        frame.origin.y = self.labelNotes.frame.origin.y + self.labelNotes.frame.size.height + -2;
+        self.imageNotesEmboss.frame = frame;
+
+        frame = self.notesTextField.frame;
+        frame.origin.y = self.imageNotesEmboss.frame.origin.y + 0;
+        self.notesTextField.frame = frame;
+
+        frame = self.doneButton.frame;
+        frame.origin.y = self.imageBottomEmboss.frame.origin.y + self.imageBottomEmboss.frame.size.height + 4;
+        self.doneButton.frame = frame;
+
+    }
+}
 
 - (void)generateListOfBusinesses
 {
     // start with nothing
     self.arrayBusinesses = @[];
-
-    // query the server
-    [[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 
 	NSMutableString *strURL = [[NSMutableString alloc] init];
 
@@ -670,6 +789,32 @@
     return cropped;
 }
 
+- (void)exit
+{
+    // if we haven't closed already
+    if (!_bDoneSentToDelegate)
+    {
+        _bDoneSentToDelegate = YES;
+        [self.delegate TransactionDetailsViewControllerDone:self];
+
+        // notify everyone interested that the details screen has exited
+#if 0
+        NSDictionary *dictNotification = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                          self.transaction,                 KEY_TX_DETAILS_EXITED_TX,
+                                          self.transaction.strWalletUUID,   KEY_TX_DETAILS_EXITED_WALLET_UUID,
+                                          self.transaction.strWalletName,   KEY_TX_DETAILS_EXITED_WALLET_NAME,
+                                          self.transaction.strID,           KEY_TX_DETAILS_EXITED_TX_ID,
+                                          nil];
+#endif
+        NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_TX            : self.transaction,
+                                            KEY_TX_DETAILS_EXITED_WALLET_UUID   : self.transaction.strWalletUUID,
+                                            KEY_TX_DETAILS_EXITED_WALLET_NAME   : self.transaction.strWalletName,
+                                            KEY_TX_DETAILS_EXITED_TX_ID         : self.transaction.strID
+                                            };
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:self userInfo:dictNotification];
+    }
+}
+
 #pragma mark - Calculator delegates
 
 - (void)CalculatorDone:(CalculatorView *)calculator
@@ -682,31 +827,6 @@
     //NSLog(@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
 }
 
-#pragma mark - Category Table
-
-- (void)spawnCategoryTableInFrame:(CGRect)frame
-{
-	CGRect startingFrame = frame;
-	startingFrame.size.height = 0;
-	_autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
-	[self.view addSubview:_autoCompleteTable];
-	
-	_autoCompleteTable.dataSource = self;
-	_autoCompleteTable.delegate = self;
-	
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 _autoCompleteTable.frame = frame;
-	 }
-					 completion:^(BOOL finished)
-	 {
-		 
-	 }];
-}
-
 #pragma mark - Payee Table
 
 - (void)spawnPayeeTableInFrame:(CGRect)frame
@@ -714,6 +834,8 @@
 	CGRect startingFrame = frame;
 	startingFrame.size.height = 0;
 	_autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
+    _autoCompleteTable.backgroundColor = TABLE_CELL_BACKGROUND_COLOR;
+    _autoCompleteTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];     // This will remove extra separators from tableview
 	[self.view addSubview:_autoCompleteTable];
 	
 	_autoCompleteTable.dataSource = self;
@@ -774,9 +896,13 @@
     }
     
     cell.textLabel.text = [self.arrayAutoComplete objectAtIndex:indexPath.row];
-    cell.backgroundColor = [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0];
+    cell.backgroundColor = TABLE_CELL_BACKGROUND_COLOR;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
+    // address
+    cell.detailTextLabel.text = [self.dictAddresses objectForKey:cell.textLabel.text];
+
+    // image
     UIImage *imageForCell = [self.dictImages objectForKey:cell.textLabel.text];
     if (imageForCell == nil)
     {
@@ -841,6 +967,30 @@
                 {
                     [arrayBusinesses addObject:name];
 
+                    // create the address
+                    NSMutableString *strAddress = [[NSMutableString alloc] init];
+                    NSString *strField = nil;
+                    if (nil != (strField = [dict objectForKey:@"address"]))
+                    {
+                        [strAddress appendString:strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"city"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"state"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"postalcode"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @" " : @""), strField];
+                    }
+                    if ([strAddress length])
+                    {
+                        [self.dictAddresses setObject:strAddress forKey:name];
+                    }
+
                     // check if we can get a thumbnail
                     NSDictionary *dictProfileImage = [dict objectForKey:@"profile_image"];
                     if (dictProfileImage && dictProfileImage != (id)[NSNull null])
@@ -858,7 +1008,7 @@
             self.arrayBusinesses = arrayBusinesses;
             //NSLog(@"Businesses: %@", arrayBusinesses);
             self.dictThumbnailURLs = dictThumbnailURLs;
-            
+
             [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
             [self performSelector:@selector(getBusinessThumbnails) withObject:nil afterDelay:0.0];
         }
@@ -891,21 +1041,20 @@
     CGRect scrollFrame = self.scrollableContentView.frame;
 
     // WARNING: Lots of magic numbers - but we have to make this change quick for the demo
-    // Change some of these for iPhone 4
 
     if (textField == self.nameTextField)
     {
-        scrollFrame.origin.y = -30;
+        scrollFrame.origin.y = (IS_IPHONE5 ? -30 : -20);
 
         CGRect frame = self.view.bounds;
-        frame.origin.y = 100;
-        frame.size.height = 252;
+        frame.origin.y = (IS_IPHONE5 ? 100 : 95);
+        frame.size.height = (IS_IPHONE5 ? 252 : 169);
         [self spawnPayeeTableInFrame:frame];
         [self updateAutoCompleteArray];
     }
     else if (textField == self.notesTextField)
     {
-        scrollFrame.origin.y = -90;
+        scrollFrame.origin.y = (IS_IPHONE5 ? -90 : -115);
         [self dismissPayeeTable];
     }
     else
@@ -1060,7 +1209,7 @@
 
     // now move the window up so that the category field is at the top
     CGRect scrollFrame = self.scrollableContentView.frame;
-    scrollFrame.origin.y = -250; // magic number TODO: modify for iPhone4
+    scrollFrame.origin.y = (IS_IPHONE5 ? -250 : -190); // magic number
     [self scrollContentViewToFrame:scrollFrame];
 
     // bring the picker up with it
@@ -1070,8 +1219,8 @@
                      animations:^
      {
          CGRect frame = self.pickerTextCategory.popupPicker.frame;
-         frame.origin.y = 130;
-         frame.size.height = 220; // magic number to make it as big as possible
+         frame.origin.y = (IS_IPHONE5 ? 130 : 126);
+         frame.size.height = (IS_IPHONE5 ? 220 : 130); // magic number to make it as big as possible
          self.pickerTextCategory.popupPicker.frame = frame;
      }
                      completion:^(BOOL finished)

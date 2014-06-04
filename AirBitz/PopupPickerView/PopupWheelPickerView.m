@@ -20,7 +20,7 @@
 }
 
 @property (nonatomic, retain)   IBOutlet UIImageView            *m_arrowImage;
-@property (weak, nonatomic)     IBOutlet UIPickerView           *viewPicker;
+
 
 
 @property (nonatomic, assign) id<PopupWheelPickerViewDelegate>  delegate;
@@ -349,5 +349,22 @@
     return label;
 }
 
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
+{
+    CGFloat retVal = 0;
+
+    if ([self.delegate respondsToSelector:@selector(PopupWheelPickerView: widthForComponent: userData:)])
+    {
+        retVal = [self.delegate PopupWheelPickerView:self widthForComponent:component userData:_userData];
+    }
+    else
+    {
+        NSInteger componentCount = [self.arrayChoices count];
+        retVal = self.viewPicker.frame.size.width / componentCount;
+        retVal -= 4;
+    }
+
+    return retVal;
+}
 
 @end

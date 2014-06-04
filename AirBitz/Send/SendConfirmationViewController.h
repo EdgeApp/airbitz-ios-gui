@@ -7,17 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Wallet.h"
 
 @protocol SendConfirmationViewControllerDelegate;
 
 @interface SendConfirmationViewController : UIViewController
 
 
-@property (assign) id<SendConfirmationViewControllerDelegate> delegate;
-@property (nonatomic, copy) NSString *sendToAddress;
-@property (nonatomic, copy) NSString *nameLabel;
-@property (nonatomic, assign) int64_t amountToSendSatoshi;
-@property (nonatomic, assign) int selectedWalletIndex;
+@property (assign)              id<SendConfirmationViewControllerDelegate>  delegate;
+@property (nonatomic, copy)     NSString                                    *sendToAddress;
+@property (nonatomic, copy)     NSString                                    *nameLabel;
+@property (nonatomic, assign)   int64_t                                     amountToSendSatoshi;
+@property (nonatomic, assign)   int                                         selectedWalletIndex;
+@property (nonatomic, strong)   Wallet                                      *wallet;
+@property (nonatomic, assign)   BOOL                                        bAddressIsWalletUUID;
+
 @end
 
 
