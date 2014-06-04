@@ -648,10 +648,24 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 		
         if (pResults->requestType == ABC_RequestType_SendBitcoin)
         {
-			
-            //NSLog(@"Sign-in completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
-            [controller performSelectorOnMainThread:@selector(sendBitcoinComplete:) withObject:[NSString stringWithUTF8String:pResults->pRetData] waitUntilDone:FALSE];
-			free(pResults->pRetData);
+            if (pResults->bSuccess)
+            {
+                [controller performSelectorOnMainThread:@selector(sendBitcoinComplete:) withObject:[NSString stringWithUTF8String:pResults->pRetData] waitUntilDone:FALSE];
+                free(pResults->pRetData);
+            }
+            else
+            {
+                free(pResults->pRetData);
+                [controller.view removeFromSuperview];
+                controller = nil;
+                UIAlertView *alert = [[UIAlertView alloc]
+                                        initWithTitle:NSLocalizedString(@"Error during send", @"Unable to send the funds")
+                                        message:NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil)
+                                        delegate:nil
+                                        cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil];
+                [alert show];
+            }
         }
     }
 }

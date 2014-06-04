@@ -44,7 +44,7 @@ typedef enum eAppMode
 	LoginViewController *loginViewController;
 	SettingsViewController *settingsViewController;
 	SendStatusViewController  *sendStatusController;
-    TransactionDetailsViewController *detailsController;
+    TransactionDetailsViewController *txDetailsController;
 	CGRect originalTabBarFrame;
 	CGRect originalViewFrame;
 	tAppMode appMode;
@@ -433,7 +433,7 @@ typedef enum eAppMode
     Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
     NSLog(@("launchReceiving: %@ %@ %@\n"), walletUUID, txId, transaction);
     /* If we aren't on the selector view, then just notify the user */
-    if (selectedViewController != requestViewController)
+    if (selectedViewController != requestViewController && txDetailsController == nil)
     {
         NSLog(@("Showing Notification\n"));
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
@@ -476,22 +476,22 @@ typedef enum eAppMode
 -(void) launchTransactionDetails: (Transaction *)transaction
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    detailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
-    detailsController.transaction = transaction;
-    detailsController.delegate = self;
-    detailsController.bOldTransaction = NO;
-    detailsController.transactionDetailsMode = TD_MODE_RECEIVED;
+    txDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+    txDetailsController.transaction = transaction;
+    txDetailsController.delegate = self;
+    txDetailsController.bOldTransaction = NO;
+    txDetailsController.transactionDetailsMode = TD_MODE_RECEIVED;
 
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
-    detailsController.view.frame = frame;
-    [self.view addSubview:detailsController.view];
+    txDetailsController.view.frame = frame;
+    [self.view addSubview:txDetailsController.view];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
     {
-        detailsController.view.frame = self.view.bounds;
+        txDetailsController.view.frame = self.view.bounds;
     }
     completion:^(BOOL finished)
     {
@@ -507,12 +507,12 @@ typedef enum eAppMode
     {
         CGRect frame = self.view.bounds;
         frame.origin.x = frame.size.width;
-        detailsController.view.frame = frame;
+        txDetailsController.view.frame = frame;
     }
     completion:^(BOOL finished)
     {
-        [detailsController.view removeFromSuperview];
-        detailsController = nil;
+        [txDetailsController.view removeFromSuperview];
+        txDetailsController = nil;
     }];
 }
 
