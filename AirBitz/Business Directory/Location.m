@@ -120,7 +120,7 @@ static Location *singleton = nil;  // this will be the one and only object this 
         if (!self.locationManager)
         {
             self.locationManager = [[CLLocationManager alloc] init];
-            self.locationManager.purpose = @"Your location is used to find businesses in your area.";
+            //self.locationManager.purpose = @"Your location is used to find businesses in your area.";
             self.locationManager.delegate = self;
             self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 			self.locationManager.distanceFilter = 500; //meters
