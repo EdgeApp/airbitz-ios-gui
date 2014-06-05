@@ -602,7 +602,7 @@ typedef enum eDatePeriod
 	[self.delegate exportWalletViewControllerDidFinish:self];
 }
 
-#pragma mark - Export Wallet Optinos Delegates
+#pragma mark - Export Wallet Options Delegates
 
 - (void)exportWalletOptionsViewControllerDidFinish:(ExportWalletOptionsViewController *)controller
 {

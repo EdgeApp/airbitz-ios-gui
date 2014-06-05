@@ -48,8 +48,6 @@
 	CGRect          _originalContentFrame;
 	CGRect          _originalScrollableContentFrame;
 	UITableView     *_autoCompleteTable; //table of autoComplete search results (including address book entries)
-    NSInteger       _nOutstandingRequests; // how many DL_URLServer requests to we have outstanding
-    BOOL            _bExiting;
     BOOL            _bDoneSentToDelegate;
 }
 
@@ -112,8 +110,6 @@
     [self updateDisplayLayout];
 
     _bDoneSentToDelegate = NO;
-    _bExiting = NO;
-    _nOutstandingRequests = 0;
 
     self.buttonBack.hidden = !self.bOldTransaction;
 
@@ -236,7 +232,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [DL_URLServer cancelPreviousPerformRequestsWithTarget:self];
+	[DL_URLServer.controller cancelAllRequestsForDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -250,32 +246,21 @@
 
 - (IBAction)Done
 {
-    _bExiting = YES;
+    [DL_URLServer.controller cancelAllRequestsForDelegate:self];
 
-    if (_nOutstandingRequests != 0)
-    {
-        // note: canceling requests should keep the window from getting callbacks but there seems to be an issue
-        // where that is not the case
-        NSLog(@"Transaction Details can not exit. Outstanding requests: %d", (int)_nOutstandingRequests);
-    }
-    else
-    {
-        [DL_URLServer cancelPreviousPerformRequestsWithTarget:self];
+    [self resignAllResponders];
 
-        [self resignAllResponders];
+    // add the category if we didn't have it
+    [self addCategory:self.pickerTextCategory.textField.text];
 
-        // add the category if we didn't have it
-        [self addCategory:self.pickerTextCategory.textField.text];
+    self.transaction.strName = [self.nameTextField text];
+    self.transaction.strNotes = [self.notesTextField text];
+    self.transaction.strCategory = [self.pickerTextCategory.textField text];
+    self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
 
-        self.transaction.strName = [self.nameTextField text];
-        self.transaction.strNotes = [self.notesTextField text];
-        self.transaction.strCategory = [self.pickerTextCategory.textField text];
-        self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
+    [CoreBridge storeTransaction: self.transaction];
 
-        [CoreBridge storeTransaction: self.transaction];
-
-        [self exit];
-    }
+    [self exit];
 }
 
 - (IBAction)AdvancedDetails
@@ -417,7 +402,6 @@
 
     // run the search
     //NSLog(@"Query: %@", strURL);
-    _nOutstandingRequests++;
     [[DL_URLServer controller] issueRequestURL:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                                     withParams:nil
                                     withObject:nil
@@ -782,7 +766,6 @@
 
         // run the qurey
         //NSLog(@"Query: %@", strURL);
-        _nOutstandingRequests++;
         [[DL_URLServer controller] issueRequestURL:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                                         withParams:nil
                                         withObject:strKey
@@ -956,7 +939,6 @@
 
 - (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
 {
-    _nOutstandingRequests--;
     if (DL_URLRequestStatus_Success == status)
     {
         // if this is a business listing query
@@ -1027,11 +1009,8 @@
             //NSLog(@"Businesses: %@", arrayBusinesses);
             self.dictThumbnailURLs = dictThumbnailURLs;
 
-            if (!_bExiting)
-            {
-                [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
-                [self performSelector:@selector(getBusinessThumbnails) withObject:nil afterDelay:0.0];
-            }
+            [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
+            [self performSelector:@selector(getBusinessThumbnails) withObject:nil afterDelay:0.0];
         }
         else
         {

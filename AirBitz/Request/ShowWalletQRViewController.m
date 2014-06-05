@@ -10,6 +10,7 @@
 #import "Notifications.h"
 #import "ABC.h"
 #import "CommonTypes.h"
+#import "CoreBridge.h"
 
 @interface ShowWalletQRViewController ()
 
@@ -48,7 +49,8 @@
 	self.qrCodeImageView.image = self.qrCodeImage;
 	self.statusLabel.text = self.statusString;
 	self.addressLabel.text = self.addressString;
-	self.amountLabel.text = [NSString stringWithFormat:@"B %.5f", ABC_SatoshiToBitcoin(self.amountSatoshi)];
+    NSLog(@("%ld\n"), self.amountSatoshi);
+    self.amountLabel.text = [CoreBridge formatSatoshi: self.amountSatoshi];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:NO]];
 }

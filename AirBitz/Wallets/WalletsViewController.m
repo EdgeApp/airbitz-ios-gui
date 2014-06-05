@@ -379,7 +379,7 @@
 	{
 		_archiveCollapsed = YES;
 		NSInteger countOfRowsToDelete = self.arrayArchivedWallets.count;
-		NSLog(@"Rows to collapse: %i", countOfRowsToDelete);
+		//NSLog(@"Rows to collapse: %i", countOfRowsToDelete);
 		if (countOfRowsToDelete > 0)
 		{
 			NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];
@@ -498,6 +498,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 		[self.arrayArchivedWallets insertObject:wallet atIndex:destinationIndexPath.row];
 	}
     [CoreBridge setWalletAttributes:wallet];
+    [CoreBridge setWalletOrder: self.arrayWallets archived: self.arrayArchivedWallets];
 	[self updateBalanceView];
 	[self.walletsTable reloadData];
 }
@@ -543,7 +544,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if(section == 0)
 	{
-		NSLog(@"Section 0 rows: %i", self.arrayWallets.count);
+		//NSLog(@"Section 0 rows: %i", self.arrayWallets.count);
 		return self.arrayWallets.count;
 	}
 	else

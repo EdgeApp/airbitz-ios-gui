@@ -94,6 +94,7 @@
     if (ABC_CC_Ok == result)
     {
         wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
+        wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
         wallet.attributes = 0;
         wallet.balance = pWalletInfo->balanceSatoshi;
         wallet.currencyNum = pWalletInfo->currencyNum;
@@ -125,7 +126,7 @@
         {
             tABC_TxInfo *pTrans = aTransactions[j];
             transaction = [[Transaction alloc] init];
-            [CoreBridge setTransaction: wallet transaction:transaction coreTx:pTrans];
+            [CoreBridge setTransaction:wallet transaction:transaction coreTx:pTrans];
             [arrayTransactions addObject:transaction];
         }
         SInt64 bal = 0;
@@ -192,6 +193,34 @@
     }
     ABC_FreeTransactions(aTransactions, tCount);
     return arrayTransactions;
+}
+
++ (void)setWalletOrder: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets
+{
+    tABC_Error Error;
+    int i = 0;
+    unsigned int walletCount = [arrayWallets count] + [arrayArchivedWallets count];
+    const char **paUUIDS = malloc(sizeof(char *) * walletCount);
+    for (Wallet *w in arrayWallets)
+    {
+        paUUIDS[i] = [w.strUUID UTF8String];
+        i++;
+    }
+    for (Wallet *w in arrayArchivedWallets)
+    {
+        paUUIDS[i] = [w.strUUID UTF8String];
+        i++;
+    }
+    if (ABC_SetWalletOrder([[User Singleton].name UTF8String],
+                           [[User Singleton].password UTF8String],
+                           paUUIDS,
+                           walletCount,
+                           &Error) != ABC_CC_Ok)
+    {
+        NSLog(@("Error: CoreBridge.setWalletOrder:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
+    }
+    free(paUUIDS);
 }
 
 + (bool)setWalletAttributes: (Wallet *) wallet
@@ -285,7 +314,12 @@
         [f setCurrencySymbol: [User Singleton].denominationLabelShort];
     else
         [f setCurrencySymbol: @""];
-    [f setMaximumFractionDigits: 8];
+    if ([[[User Singleton] denominationLabel] isEqualToString:@"uBTC"])
+        [f setMaximumFractionDigits: 2];
+    else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
+        [f setMaximumFractionDigits: 5];
+    else
+        [f setMaximumFractionDigits: 8];
     return [f stringFromNumber:[NSNumber numberWithFloat:converted]];
 }
 
