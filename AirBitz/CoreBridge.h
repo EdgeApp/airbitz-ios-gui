@@ -12,9 +12,12 @@
 
 + (void)loadWallets: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (void)reloadWallet: (Wallet *) wallet;
-+ (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions;
++ (void)setWalletOrder: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (bool)setWalletAttributes: (Wallet *) wallet;
+
++ (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions;
 + (bool)storeTransaction: (Transaction *) transaction;
+
 + (NSString *)formatCurrency: (double) currency;
 + (NSString *)formatCurrency: (double) currency withSymbol:(bool) symbol;
 + (NSString *)formatSatoshi: (double) bitcoin;

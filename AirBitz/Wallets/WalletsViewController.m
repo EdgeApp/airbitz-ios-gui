@@ -498,6 +498,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 		[self.arrayArchivedWallets insertObject:wallet atIndex:destinationIndexPath.row];
 	}
     [CoreBridge setWalletAttributes:wallet];
+    [CoreBridge setWalletOrder: self.arrayWallets archived: self.arrayArchivedWallets];
 	[self updateBalanceView];
 	[self.walletsTable reloadData];
 }
