@@ -94,6 +94,7 @@
     if (ABC_CC_Ok == result)
     {
         wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
+        wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
         wallet.attributes = 0;
         wallet.balance = pWalletInfo->balanceSatoshi;
         wallet.currencyNum = pWalletInfo->currencyNum;
@@ -248,6 +249,34 @@
     }
     ABC_FreeTransactions(aTransactions, tCount);
     return arrayTransactions;
+}
+
++ (void)setWalletOrder: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets
+{
+    tABC_Error Error;
+    int i = 0;
+    unsigned int walletCount = [arrayWallets count] + [arrayArchivedWallets count];
+    const char **paUUIDS = malloc(sizeof(char *) * walletCount);
+    for (Wallet *w in arrayWallets)
+    {
+        paUUIDS[i] = [w.strUUID UTF8String];
+        i++;
+    }
+    for (Wallet *w in arrayArchivedWallets)
+    {
+        paUUIDS[i] = [w.strUUID UTF8String];
+        i++;
+    }
+    if (ABC_SetWalletOrder([[User Singleton].name UTF8String],
+                           [[User Singleton].password UTF8String],
+                           paUUIDS,
+                           walletCount,
+                           &Error) != ABC_CC_Ok)
+    {
+        NSLog(@("Error: CoreBridge.setWalletOrder:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
+    }
+    free(paUUIDS);
 }
 
 + (bool)setWalletAttributes: (Wallet *) wallet

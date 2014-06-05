@@ -1381,7 +1381,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="t8h-iv-TGi" userLabel="View - Bottom">
-                                        <rect key="frame" x="0.0" y="137.00000048887051" width="320" height="326.99999951112949"/>
+                                        <rect key="frame" x="0.0" y="137.00000048887048" width="320" height="326.99999951112954"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="1Ab-Lx-n8L">
