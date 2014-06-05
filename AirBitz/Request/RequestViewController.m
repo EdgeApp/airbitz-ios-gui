@@ -279,7 +279,7 @@ typedef enum eAddressPickerType
 								8,
 								width * 4,
 								colorSpace,
-								kCGImageAlphaPremultipliedLast );
+								(CGBitmapInfo)kCGImageAlphaPremultipliedLast ); //documentation says this is OK
 	CGColorSpaceRelease(colorSpace);
 	imageRef = CGBitmapContextCreateImage (ctx);
 	UIImage* rawImage = [UIImage imageWithCGImage:imageRef];
