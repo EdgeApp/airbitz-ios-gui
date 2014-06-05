@@ -10,7 +10,7 @@
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTLDrive.h"
 
-static NSString *const kKeychainItemName = @"Google Drive AirBitz 4";
+static NSString *const kKeychainItemName = @"Google Drive AirBitz";
 static NSString *const kClientID = @"23790723117-ae9hg18f53mqk0gr6ufu5mbflsuu442o.apps.googleusercontent.com";
 static NSString *const kClientSecret = @"2aTGAtZEjPN-WxYFFYSEwoYD";
 
