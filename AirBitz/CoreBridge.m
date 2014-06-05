@@ -199,7 +199,7 @@
 {
     tABC_Error Error;
     int i = 0;
-    unsigned int walletCount = [arrayWallets count] + [arrayArchivedWallets count];
+    unsigned int walletCount = (unsigned int) [arrayWallets count] + (unsigned int)[arrayArchivedWallets count];
     const char **paUUIDS = malloc(sizeof(char *) * walletCount);
     for (Wallet *w in arrayWallets)
     {
@@ -213,7 +213,7 @@
     }
     if (ABC_SetWalletOrder([[User Singleton].name UTF8String],
                            [[User Singleton].password UTF8String],
-                           paUUIDS,
+                           (char **)paUUIDS,
                            walletCount,
                            &Error) != ABC_CC_Ok)
     {
