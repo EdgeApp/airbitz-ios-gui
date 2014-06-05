@@ -12,6 +12,7 @@
 #import "Util.h"
 #import "ExportWalletOptionsCell.h"
 #import "CommonTypes.h"
+#import "GDrive.h"
 
 #define CELL_HEIGHT 37.0
 
@@ -36,9 +37,9 @@ typedef enum eExportOption
     ExportOption_View = 5
 } tExportOption;
 
-@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
+@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, GDriveDelegate>
 {
-
+	GDrive *drive;
 }
 
 @property (weak, nonatomic) IBOutlet UIView         *viewDisplay;
@@ -46,6 +47,7 @@ typedef enum eExportOption
 @property (weak, nonatomic) IBOutlet UILabel        *labelWalletName;
 @property (weak, nonatomic) IBOutlet UILabel        *labelFromDate;
 @property (weak, nonatomic) IBOutlet UILabel        *labelToDate;
+@property (weak, nonatomic) IBOutlet UIView			*viewHeader;
 
 @property (nonatomic, strong) NSArray               *arrayChoices;
 
@@ -91,6 +93,11 @@ typedef enum eExportOption
 
 
     //NSLog(@"type: %d", self.type);
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+	//[drive dismissAuthenticationController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -333,7 +340,7 @@ typedef enum eExportOption
 
 - (void)exportWithGoogle
 {
-
+	 drive = [GDrive CreateForViewController:self];
 }
 
 - (void)exportWithDropbox
@@ -495,6 +502,29 @@ typedef enum eExportOption
 	[self.delegate exportWalletOptionsViewControllerDidFinish:self];
 }
 
+#pragma mark - GDrive Delegates
+-(void)GDrive:(GDrive *)gDrive isAuthenticated:(BOOL)authenticated
+{
+	if(authenticated)
+	{
+		NSData *dataExport = [self getExportDataInForm:self.type];
+		NSString *strFilename = [NSString stringWithFormat:@"%@.%@", self.wallet.strName, [self suffixFor:self.type]];
+		NSString *strMimeType = [self mimeTypeFor:self.type];
+		
+		[gDrive uploadFile:dataExport name:strFilename mimeType:strMimeType];
+	}
+}
+
+-(void)GDrive:(GDrive *)gDrive uploadSuccessful:(BOOL)success
+{
+	gDrive = nil;
+}
+
+-(void)GDriveAuthControllerPresented
+{
+	NSLog(@"Auth Controller Presented");
+	[self.view bringSubviewToFront:self.viewHeader];
+}
 #pragma mark - UITableView Delegates
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
