@@ -38,8 +38,9 @@ typedef enum eExportOption
     ExportOption_View = 5
 } tExportOption;
 
-@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, GDriveDelegate>
+@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, ExportWalletPDFViewControllerDelegate, GDriveDelegate>
 {
+    ExportWalletPDFViewController   *_exportWalletPDFViewController;
 	GDrive *drive;
 }
 

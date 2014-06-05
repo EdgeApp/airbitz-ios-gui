@@ -2518,6 +2518,7 @@
 				B5137C3A18A435BD00DA4A34 /* CJSONScanner.m in Sources */,
 				B5C0A97E18EA0A7F008F302C /* DividerView.m in Sources */,
 				B57C207A18C14687005D7245 /* MainViewController.m in Sources */,
+				4C7C125A193E7C510096338D /* ExportWalletPDFViewController.m in Sources */,
 				B5050569193FD014007D4960 /* GDrive.m in Sources */,
 				B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */,
 				B5C0A97618EA0A42008F302C /* BD_Phone_Cell.m in Sources */,
@@ -2675,7 +2676,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(SRCROOT)/../../Google Drive/google-api-objectivec-client-read-only/Source\"/**",
+					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
 				);
 				INFOPLIST_FILE = "AirBitz/AirBitz-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -2707,7 +2708,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(SRCROOT)/../../Google Drive/google-api-objectivec-client-read-only/Source\"/**",
+					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
 				);
 				INFOPLIST_FILE = "AirBitz/AirBitz-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
