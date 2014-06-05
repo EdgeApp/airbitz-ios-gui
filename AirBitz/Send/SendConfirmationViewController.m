@@ -656,11 +656,24 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
             else
             {
                 free(pResults->pRetData);
+
                 [controller.view removeFromSuperview];
                 controller = nil;
+
+                NSString *title = NSLocalizedString(@"Error during send", nil);
+                NSString *message;
+                if (pResults->errorInfo.code == ABC_CC_InsufficientFunds)
+                    message =
+                        NSLocalizedString(@"You do not have enough funds to send this transaction.", nil);
+                else if (pResults->errorInfo.code == ABC_CC_ServerError)
+                    message =
+                        NSLocalizedString(@"An error occurred when sending the transaction to the server.", nil);
+                else
+                    message =
+                        NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);
                 UIAlertView *alert = [[UIAlertView alloc]
-                                        initWithTitle:NSLocalizedString(@"Error during send", @"Unable to send the funds")
-                                        message:NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil)
+                                        initWithTitle:title
+                                        message:message
                                         delegate:nil
                                         cancelButtonTitle:@"OK"
                                         otherButtonTitles:nil];

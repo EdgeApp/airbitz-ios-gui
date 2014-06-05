@@ -442,8 +442,9 @@ typedef enum eAppMode
     NSString *txId = params[1];
     Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
     NSLog(@("launchReceiving: %@ %@ %@\n"), walletUUID, txId, transaction);
+
     /* If we aren't on the selector view, then just notify the user */
-    if (_selectedViewController != _requestViewController && _txDetailsController == nil)
+    if (_selectedViewController != _requestViewController || _txDetailsController != nil)
     {
         NSLog(@("Showing Notification\n"));
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
@@ -478,6 +479,7 @@ typedef enum eAppMode
                 [self launchTransactionDetails:transaction];
                 [_sendStatusController.view removeFromSuperview];
                 _sendStatusController = nil;
+                [_requestViewController resetViews];
             });
         }];
     }
@@ -547,7 +549,6 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     // if the wallet tab is not already open, bring it up with this wallet
     if (APP_MODE_WALLETS != _appMode)
     {
-        [_requestViewController resetViews];
         NSDictionary *dictData = [notification userInfo];
         self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];

@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.47</string>
+	<string>1.0.48</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.47</string>
+	<string>1.0.48</string>
 	<key>DL_LibKey</key>
 	<string>1e7bfeb9f52c57ee37542cd0c074074fd2ab</string>
 	<key>LSRequiresIPhoneOS</key>
