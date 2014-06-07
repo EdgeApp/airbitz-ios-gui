@@ -94,6 +94,10 @@
 		686C24851935605900F8E445 /* libobelisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24841935605900F8E445 /* libobelisk.a */; };
 		686C24871935608400F8E445 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
+		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
+		B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */; };
+		B5050569193FD014007D4960 /* GDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050568193FD014007D4960 /* GDrive.m */; };
 		B507ADAF191C240E00F51E1E /* picker_left_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */; };
 		B5137C0718A40A8400DA4A34 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFA18A40A8400DA4A34 /* Lato-Black.ttf */; };
 		B5137C0818A40A8400DA4A34 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFB18A40A8400DA4A34 /* Lato-BlackItalic.ttf */; };
@@ -461,6 +465,37 @@
 		B5FD394718F240E600BE2670 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B50504F6193F7AC4007D4960 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B505FB4B193F7AC1007D4960 /* GTL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F38F6A60B66E91D00B24B81;
+			remoteInfo = GTLFramework;
+		};
+		B50504F8193F7AC4007D4960 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B505FB4B193F7AC1007D4960 /* GTL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F12027C11A4CA2F00BEB470;
+			remoteInfo = GTLTouchStaticLib;
+		};
+		B50504FA193F7AC4007D4960 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B505FB4B193F7AC1007D4960 /* GTL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F12027D11A4CA2F00BEB470;
+			remoteInfo = GTLUnitTests;
+		};
+		B50504FC193F7AC4007D4960 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B505FB4B193F7AC1007D4960 /* GTL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F1AD9020B71603F00DC0485;
+			remoteInfo = DevelopmentTestTool;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		4C08A6D218C29CEF0071B87C /* ABC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABC.h; path = ABC/ABC.h; sourceTree = "<group>"; };
 		4C08A6D318C29CEF0071B87C /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = ABC/libabc.a; sourceTree = "<group>"; };
@@ -590,6 +625,13 @@
 		687C1B041927FF81003A83E8 /* CoreBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBridge.h; sourceTree = "<group>"; };
 		687C1B051927FF81003A83E8 /* CoreBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreBridge.m; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
+		B5050549193F7D2B007D4960 /* GTLDrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLDrive.h; sourceTree = "<group>"; };
+		B5050567193FD014007D4960 /* GDrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDrive.h; sourceTree = "<group>"; };
+		B5050568193FD014007D4960 /* GDrive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDrive.m; sourceTree = "<group>"; };
+		B505FB4A193F7AC1007D4960 /* DriveLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = DriveLib.a; sourceTree = "<group>"; };
+		B505FB4B193F7AC1007D4960 /* GTL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GTL.xcodeproj; sourceTree = "<group>"; };
+		B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "picker_left_point@2x.png"; path = "PopupPickerView/picker_left_point@2x.png"; sourceTree = "<group>"; };
 		B5137BFA18A40A8400DA4A34 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		B5137BFB18A40A8400DA4A34 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -1051,6 +1093,7 @@
 				4C90463B18C9242700179D9C /* CoreVideo.framework in Frameworks */,
 				4C90463918C9242100179D9C /* CoreAudio.framework in Frameworks */,
 				4C90463718C9241200179D9C /* CoreMedia.framework in Frameworks */,
+				B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */,
 				4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */,
 				4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */,
 				B5B19BCF18ABFCDF00CF04A4 /* MapKit.framework in Frameworks */,
@@ -1209,6 +1252,31 @@
 				4C90462418C91E5900179D9C /* Window.h */,
 			);
 			name = zbar;
+			sourceTree = "<group>";
+		};
+		B505FB49193F7AC1007D4960 /* Google Drive */ = {
+			isa = PBXGroup;
+			children = (
+				B5050567193FD014007D4960 /* GDrive.h */,
+				B5050568193FD014007D4960 /* GDrive.m */,
+				B505FB4A193F7AC1007D4960 /* DriveLib.a */,
+				B505FB4B193F7AC1007D4960 /* GTL.xcodeproj */,
+				B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */,
+				B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */,
+				B5050549193F7D2B007D4960 /* GTLDrive.h */,
+			);
+			path = "Google Drive";
+			sourceTree = "<group>";
+		};
+		B505FB4C193F7AC1007D4960 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B50504F7193F7AC4007D4960 /* GTL.framework */,
+				B50504F9193F7AC4007D4960 /* libGTLTouchStaticLib.a */,
+				B50504FB193F7AC4007D4960 /* GTLUnitTests.octest */,
+				B50504FD193F7AC4007D4960 /* DevelopmentTestTool */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B5137BF818A4085700DA4A34 /* Fonts */ = {
@@ -1384,6 +1452,7 @@
 				B561E1A918D2573F002DCDC2 /* DarkenView.h */,
 				B561E1AA18D2573F002DCDC2 /* DarkenView.m */,
 				4C7247CF193564D20091C286 /* DateTime.h */,
+				B505FB49193F7AC1007D4960 /* Google Drive */,
 				4C7247D0193564D20091C286 /* DateTime.m */,
 				4C5D8C52192AA1940015BB3C /* DDData */,
 				B5137C1918A41A4E00DA4A34 /* DL_URLServer */,
@@ -2018,12 +2087,49 @@
 			mainGroup = B5675B3F18A17F6F002E0703;
 			productRefGroup = B5675B4918A17F6F002E0703 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B505FB4C193F7AC1007D4960 /* Products */;
+					ProjectRef = B505FB4B193F7AC1007D4960 /* GTL.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B5675B4718A17F6F002E0703 /* Airbitz */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B50504F7193F7AC4007D4960 /* GTL.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GTL.framework;
+			remoteRef = B50504F6193F7AC4007D4960 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B50504F9193F7AC4007D4960 /* libGTLTouchStaticLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGTLTouchStaticLib.a;
+			remoteRef = B50504F8193F7AC4007D4960 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B50504FB193F7AC4007D4960 /* GTLUnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GTLUnitTests.octest;
+			remoteRef = B50504FA193F7AC4007D4960 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B50504FD193F7AC4007D4960 /* DevelopmentTestTool */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = DevelopmentTestTool;
+			remoteRef = B50504FC193F7AC4007D4960 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B5675B4618A17F6F002E0703 /* Resources */ = {
@@ -2074,6 +2180,7 @@
 				B561E1B218D25CC1002DCDC2 /* btn_info@2x~iphone.png in Resources */,
 				B5675BB518A19A84002E0703 /* SearchBarBacking~iphone.png in Resources */,
 				B5184B7E18E0F4DA0001712A /* btn_big_blue2_dark~iphone.png in Resources */,
+				B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */,
 				B59C153918C012B500AEA789 /* tabbar_popup_left~iphone.png in Resources */,
 				B55A032318EB597D00845090 /* btn_addCategory~iphone.png in Resources */,
 				B59C151018C012B500AEA789 /* emboss_up@2x~iphone.png in Resources */,
@@ -2428,6 +2535,8 @@
 				B5C0A97E18EA0A7F008F302C /* DividerView.m in Sources */,
 				B57C207A18C14687005D7245 /* MainViewController.m in Sources */,
 				4C7C125A193E7C510096338D /* ExportWalletPDFViewController.m in Sources */,
+				B5050569193FD014007D4960 /* GDrive.m in Sources */,
+				B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */,
 				B5C0A97618EA0A42008F302C /* BD_Phone_Cell.m in Sources */,
 				B5C0A99318EA0BAC008F302C /* MoreCategoriesViewController.m in Sources */,
 				B5137C3718A435BD00DA4A34 /* CDataScanner_Extensions.m in Sources */,
@@ -2580,6 +2689,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirBitz/AirBitz-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
+				);
 				INFOPLIST_FILE = "AirBitz/AirBitz-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -2587,8 +2701,10 @@
 					./AirBitz/DL_URLServer,
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
-					"$(PROJECT_DIR)/AirBitz/ABC",
+					"$(PROJECT_DIR)/AirBitz/Google",
+					Drive,
 				);
+				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2605,6 +2721,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirBitz/AirBitz-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
+				);
 				INFOPLIST_FILE = "AirBitz/AirBitz-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -2612,8 +2733,10 @@
 					./AirBitz/DL_URLServer,
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
-					"$(PROJECT_DIR)/AirBitz/ABC",
+					"$(PROJECT_DIR)/AirBitz/Google",
+					Drive,
 				);
+				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

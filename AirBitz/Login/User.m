@@ -7,7 +7,6 @@
 //
 
 #import "User.h"
-#import "Config.h"
 #import "ABC.h"
 #import "Util.h"
 #import "CoreBridge.h"
@@ -91,13 +90,8 @@ static User *singleton = nil;  // this will be the one and only object this stat
     {
         [CoreBridge logout];
     }
-#if HARD_CODED_LOGIN
-    self.name = HARD_CODED_LOGIN_NAME;
-    self.password = HARD_CODED_LOGIN_PASSWORD;
-#else
     self.name = nil;
     self.password = nil;
-#endif
 }
 
 @end

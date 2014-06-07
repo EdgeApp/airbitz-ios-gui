@@ -13,6 +13,7 @@
 #import "StylizedTextField.h"
 #import "Util.h"
 #import "CoreBridge.h"
+#import "Config.h"
 
 #define CONTENT_VIEW_SCALE_WITH_KEYBOARD	0.75
 #define LOGO_IMAGE_SHRINK_SCALE_FACTOR		0.5
@@ -71,6 +72,13 @@ typedef enum eLoginMode
 	self.userNameTextField.delegate = self;
 	self.passwordTextField.delegate = self;
 	self.invalidMessage.hidden = YES;
+	
+	#if HARD_CODED_LOGIN
+	
+	self.userNameTextField.text = HARD_CODED_LOGIN_NAME;
+	self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
+	#endif
+	
 }
 
 - (void)viewWillAppear:(BOOL)animated

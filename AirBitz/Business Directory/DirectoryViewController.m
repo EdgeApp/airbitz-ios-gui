@@ -235,10 +235,11 @@ typedef enum eMapDisplayState
 
 -(void)viewDidAppear:(BOOL)animated
 {
-	if(homeTableViewFrame.origin.y == 0)
+	if(homeTableViewFrame.size.width == 0)
 	{
 		//only set it once
 		homeTableViewFrame = self.tableView.frame;
+		//NSLog(@"Home TableView Frame: %f, %f, %f, %f", homeTableViewFrame.origin.x, homeTableViewFrame.origin.y, homeTableViewFrame.size.width, homeTableViewFrame.size.height);
 	}
 }
 
