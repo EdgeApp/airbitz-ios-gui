@@ -667,7 +667,7 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
                         NSLocalizedString(@"You do not have enough funds to send this transaction.", nil);
                 else if (pResults->errorInfo.code == ABC_CC_ServerError)
                     message =
-                        NSLocalizedString(@"An error occurred when sending the transaction to the server.", nil);
+                        NSLocalizedString([NSString stringWithUTF8String:pResults->errorInfo.szDescription], nil);
                 else
                     message =
                         NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);
