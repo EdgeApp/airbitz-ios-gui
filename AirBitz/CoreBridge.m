@@ -300,32 +300,70 @@
     return [f stringFromNumber:[NSNumber numberWithFloat:currency]];
 }
 
-+ (NSString *)formatSatoshi: (double) bitcoin
++ (NSString *)formatSatoshi: (int64_t) amount
 {
-    return [CoreBridge formatSatoshi:bitcoin withSymbol:true];
+    return [CoreBridge formatSatoshi:amount withSymbol:true];
 }
 
-+ (NSString *)formatSatoshi: (double) bitcoin withSymbol:(bool) symbol
++ (int) denominationDecimals
 {
-    double converted = bitcoin / [User Singleton].denomination;
-    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    [f setNumberStyle: NSNumberFormatterCurrencyStyle];
-    if (symbol)
-        [f setCurrencySymbol: [User Singleton].denominationLabelShort];
-    else
-        [f setCurrencySymbol: @""];
+    int decimalPlaces = 8;
     if ([[[User Singleton] denominationLabel] isEqualToString:@"uBTC"])
-        [f setMaximumFractionDigits: 2];
+        decimalPlaces = 2;
     else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
-        [f setMaximumFractionDigits: 5];
-    else
-        [f setMaximumFractionDigits: 8];
-    return [f stringFromNumber:[NSNumber numberWithFloat:converted]];
+        decimalPlaces = 5;
+    return decimalPlaces;
 }
 
-+ (double) denominationToSatoshi: (double) coin
++ (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol
 {
-    return coin * [User Singleton].denomination;
+    tABC_Error error;
+    char *pFormatted = NULL;
+    int decimalPlaces = [self denominationDecimals];
+    bool negative = amount < 0;
+    amount = llabs(amount);
+    if (ABC_FormatAmount(amount, &pFormatted, decimalPlaces, &error) != ABC_CC_Ok)
+    {
+        return nil;
+    }
+    else
+    {
+        NSMutableString *formatted = [[NSMutableString alloc] init];
+        if (negative)
+            [formatted appendString: @"("];
+        if (symbol)
+        {
+            [formatted appendString: [User Singleton].denominationLabelShort];
+            [formatted appendString: @" "];
+        }
+        const char *p = pFormatted;
+        const char *decimal = strstr(pFormatted, ".");
+        int offset = (decimal - pFormatted) % 3;
+        for (int i = 0; i < strlen(pFormatted); ++i, ++p)
+        {
+            if (p != pFormatted 
+                    && p < decimal 
+                    && (i - offset) % 3 == 0)
+                [formatted appendString:@","];
+            [formatted appendFormat: @"%c", *p];
+        }
+        if (negative)
+            [formatted appendString: @")"];
+        NSLog(@("%ld - %s - %@\n"), amount, pFormatted, formatted);
+        free(pFormatted);
+        return formatted;
+    }
+}
+
++ (int64_t) denominationToSatoshi: (NSString *) amount
+{
+    int64_t parsedAmount;
+    int decimalPlaces = [self denominationDecimals];
+    if (ABC_ParseAmount([amount UTF8String], &parsedAmount, decimalPlaces) != ABC_CC_Ok)
+    {
+#warning TODO handle error
+    }
+    return parsedAmount;
 }
 
 + (NSString *)conversionString: (int) currencyNumber
