@@ -198,7 +198,9 @@
     if (YES == [self canLeaveWalletNameField])
     {
         [self resignAllResponders];
-        // TODO: request button functionality here
+        NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: self.wallet.strUUID };
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET
+                                                            object:self userInfo:dictNotification];
     }
 }
 
@@ -207,7 +209,9 @@
     if (YES == [self canLeaveWalletNameField])
     {
         [self resignAllResponders];
-        // TODO: send button functionality here
+        NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: self.wallet.strUUID };
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_SEND_FOR_WALLET
+                                                            object:self userInfo:dictNotification];
     }
 }
 

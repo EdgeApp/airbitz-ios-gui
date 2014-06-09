@@ -106,6 +106,8 @@ typedef enum eAppMode
 
     // resgister for transaction details screen complete notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit:) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchSend:) name:NOTIFICATION_LAUNCH_SEND_FOR_WALLET object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRequest:) name:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET object:nil];
 }
 
 
@@ -259,6 +261,7 @@ typedef enum eAppMode
 			{
 				if(([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
 				{
+                    _requestViewController.walletUUID = self.strWalletUUID;
 					[_selectedViewController.view removeFromSuperview];
 					_selectedViewController = _requestViewController;
 					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
@@ -290,6 +293,7 @@ typedef enum eAppMode
 					
 					if(1) //numWallets)
 					{
+                        _sendViewController.walletUUID = self.strWalletUUID;
 						[_selectedViewController.view removeFromSuperview];
 						_selectedViewController = _sendViewController;
 						[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
@@ -449,6 +453,26 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         NSDictionary *dictData = [notification userInfo];
         self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
+    }
+}
+
+- (void)launchSend:(NSNotification *)notification
+{
+    if (APP_MODE_SEND != _appMode)
+    {
+        NSDictionary *dictData = [notification userInfo];
+        self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
+    }
+}
+
+- (void)launchRequest:(NSNotification *)notification
+{
+    if (APP_MODE_REQUEST != _appMode)
+    {
+        NSDictionary *dictData = [notification userInfo];
+        self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        [self.tabBar selectButtonAtIndex:APP_MODE_REQUEST];
     }
 }
 

@@ -10,4 +10,6 @@
 
 @interface SendViewController : UIViewController
 
+@property (nonatomic, strong) NSString  *walletUUID;
+
 @end
