@@ -99,13 +99,11 @@
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 
     _selectedWalletIndex = 0;
-	[self loadWalletInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	//NSLog(@"Starting timer");
-
+	[self loadWalletInfo];
     if (_bUsingImagePicker == NO)
     {
         _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
@@ -116,7 +114,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	//NSLog(@"Invalidating timer");
 	[_startScannerTimer invalidate];
 	_startScannerTimer = nil;
 
@@ -186,17 +183,18 @@
     [CoreBridge loadWallets:arrayWallets archived:nil];
 
     // create the arrays of wallet info
+    _selectedWalletIndex = 0;
     NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
-
     for (int i = 0; i < [arrayWallets count]; i++)
     {
         Wallet *wallet = [arrayWallets objectAtIndex:i];
         [arrayWalletNames addObject:wallet.strName];
+        if ([_walletUUID isEqualToString: wallet.strUUID])
+            _selectedWalletIndex = i;
     }
 
-    if ([arrayWallets count] > 0)
+    if (_selectedWalletIndex < [arrayWallets count])
     {
-        _selectedWalletIndex = 0;
         self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
         [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWalletIndex] forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
@@ -464,6 +462,7 @@
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
     [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
     self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+    _walletUUID = wallet.strUUID;
 }
 
 - (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
