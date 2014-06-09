@@ -166,6 +166,12 @@
     } else {
         transaction.strAddress = @"1zf76dh4TG";
     }
+    NSMutableArray *addresses = [[NSMutableArray alloc] init];
+    for (int i = 0; i < pTrans->countAddresses; ++i)
+    {
+        [addresses addObject:[NSString stringWithUTF8String: pTrans->aAddresses[i]]];
+    }
+    transaction.addresses = addresses;
 }
 
 + (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions 

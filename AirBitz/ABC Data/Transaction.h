@@ -25,5 +25,6 @@
 @property (nonatomic, assign)   SInt64          balance;
 @property (nonatomic, copy)     NSString        *strCategory;
 @property (nonatomic, copy)     NSString        *strNotes;
+@property (nonatomic, strong)   NSArray         *addresses;
 
 @end
