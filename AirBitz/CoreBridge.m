@@ -314,7 +314,7 @@
         [f setCurrencySymbol: [User Singleton].denominationLabelShort];
     else
         [f setCurrencySymbol: @""];
-    if ([[[User Singleton] denominationLabel] isEqualToString:@"uBTC"])
+    if ([[[User Singleton] denominationLabel] isEqualToString:@"μBTC"])
         [f setMaximumFractionDigits: 2];
     else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
         [f setMaximumFractionDigits: 5];
