@@ -432,29 +432,20 @@ typedef enum eAddressPickerType
 
 - (void)updateTextFieldContents
 {
+    tABC_Error error;
 	if (_selectedTextField == self.BTC_TextField)
 	{
-        int64_t satoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
-		
 		double currency;
-		tABC_Error error;
-		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-		
-		self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", currency];
+        int64_t satoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
+		if (ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
+            self.USD_TextField.text = [CoreBridge formatCurrency:currency withSymbol:false];
 	}
 	else
 	{
-		double value = [self.USD_TextField.text doubleValue];
-
 		int64_t satoshi;
-		tABC_Error	error;
-		tABC_CC result;
-		
-		result = ABC_CurrencyToSatoshi(value, DOLLAR_CURRENCY_NUM, &satoshi, &error);
-		if(result == ABC_CC_Ok)
-		{
+		double currency = [self.USD_TextField.text doubleValue];
+		if (ABC_CurrencyToSatoshi(currency, DOLLAR_CURRENCY_NUM, &satoshi, &error) == ABC_CC_Ok)
             self.BTC_TextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
-		}
 	}
 }
 
@@ -807,6 +798,11 @@ typedef enum eAddressPickerType
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	_selectedTextField = textField;
+    if (_selectedTextField == self.BTC_TextField)
+        self.keypadView.calcMode = CALC_MODE_COIN;
+    else if (_selectedTextField == self.USD_TextField)
+        self.keypadView.calcMode = CALC_MODE_FIAT;
+
 	self.keypadView.textField = textField;
 	self.BTC_TextField.text = @"";
 	self.USD_TextField.text = @"";

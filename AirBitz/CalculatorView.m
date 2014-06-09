@@ -7,6 +7,7 @@
 //
 
 #import "CalculatorView.h"
+#import "CoreBridge.h"
 
 #define DIGIT_BACK			11
 
@@ -36,6 +37,7 @@
     if (self)
 	{
         // Initialization code
+        _calcMode = CALC_MODE_COIN;
     }
     return self;
 }
@@ -44,7 +46,7 @@
 {
     if ((self = [super initWithCoder:aDecoder]))
 	{
-		
+        _calcMode = CALC_MODE_COIN;
         [self addSubview:[[[NSBundle mainBundle] loadNibNamed:@"CalculatorView~iphone" owner:self options:nil] objectAtIndex:0]];
     }
     return self;
@@ -53,6 +55,17 @@
 -(void)loadAccumulator
 {
 	accumulator = [self.textField.text floatValue];
+}
+
+-(NSString *)formattedAcc: (float) acc
+{
+    if (_calcMode == CALC_MODE_COIN)
+    {
+        int64_t satoshi = [CoreBridge denominationToSatoshi:[NSString stringWithFormat:@"%f", acc]];
+        return [CoreBridge formatSatoshi:satoshi withSymbol:false];
+    }
+    else
+        return [CoreBridge formatCurrency:acc withSymbol:false];
 }
 
 -(void)performLastOperation
@@ -67,7 +80,7 @@
 		case OPERATION_DIVIDE:
 			//NSLog(@"Performing Divide");
 			accumulator /= [self.textField.text floatValue];
-			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
+            self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_EQUAL:
 			//NSLog(@"Performing Equal");
@@ -75,17 +88,17 @@
 		case OPERATION_MINUS:
 			//NSLog(@"Performing Minus");
 			accumulator -= [self.textField.text floatValue];
-			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
+            self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_MULTIPLY:
 			//NSLog(@"Performing Multiply");
 			accumulator *= [self.textField.text floatValue];
-			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
+            self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_PLUS:
 			//NSLog(@"Performing Plus");
 			accumulator += [self.textField.text floatValue];
-			self.textField.text = [NSString stringWithFormat:@"%8.8f", accumulator];
+            self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_PERCENT:
 			//self.textField.text = [NSString stringWithFormat:@"%.2f", [self.textField.text floatValue] / 100.0];
@@ -183,11 +196,11 @@
 			//[self performLastOperation];
 			if(accumulator)
 			{
-				self.textField.text = [NSString stringWithFormat:@"%.8f", accumulator * ([self.textField.text floatValue] / 100.0)];
+                self.textField.text = [self formattedAcc:(accumulator * ([self.textField.text floatValue] / 100.0))];
 			}
 			else
 			{
-				self.textField.text = [NSString stringWithFormat:@"%.2f", [self.textField.text floatValue] / 100.0];
+                self.textField.text = [self formattedAcc:[self.textField.text floatValue] / 100.0];
 			}
 			lastKeyWasOperation = YES;
 			break;

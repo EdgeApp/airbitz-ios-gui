@@ -516,24 +516,20 @@
 
 - (void)updateTextFieldContents
 {
-	tABC_CC result;
 	double currency;
 	tABC_Error error;
 
 	if(_selectedTextField == self.amountBTCTextField)
 	{
         self.amountToSendSatoshi = [CoreBridge denominationToSatoshi: self.amountBTCTextField.text];
-		result = ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-		if(result == ABC_CC_Ok)
-		{
+		if (ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
 			self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
-		}
 	}
 	else
 	{
 		int64_t satoshi;
-		result = ABC_CurrencyToSatoshi([self.amountUSDTextField.text doubleValue], DOLLAR_CURRENCY_NUM, &satoshi, &error);
-		if(result == ABC_CC_Ok)
+        double currency = [self.amountUSDTextField.text doubleValue];
+		if (ABC_CurrencyToSatoshi(currency, DOLLAR_CURRENCY_NUM, &satoshi, &error) == ABC_CC_Ok)
 		{
 			self.amountToSendSatoshi = satoshi;
             self.amountBTCTextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
@@ -546,6 +542,10 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	_selectedTextField = textField;
+    if (_selectedTextField == self.amountBTCTextField)
+        self.keypadView.calcMode = CALC_MODE_COIN;
+    else if (_selectedTextField == self.amountUSDTextField)
+        self.keypadView.calcMode = CALC_MODE_FIAT;
 	self.keypadView.textField = textField;
     [self blockUser:YES];
 }
