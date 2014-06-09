@@ -168,7 +168,13 @@
     self.notesTextField.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
 
-    self.bitCoinLabel.text = [CoreBridge formatSatoshi:self.transaction.amountSatoshi];
+    NSMutableString *coinFormatted = [CoreBridge formatSatoshi:self.transaction.amountSatoshi];
+    if (self.transaction.amountSatoshi < 0)
+    {
+        [coinFormatted appendFormat:@" + %@ fee",
+            [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
+    }
+    self.bitCoinLabel.text = coinFormatted;
 
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
