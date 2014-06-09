@@ -15,7 +15,7 @@
 #import "CommonTypes.h"
 #import "GDrive.h"
 
-#define CELL_HEIGHT 37.0
+#define CELL_HEIGHT 45.0
 
 #define ARRAY_CHOICES_FOR_TYPES @[ \
                                     @[@2, @3, @4],          /* CSV */\
@@ -138,10 +138,10 @@ typedef enum eExportOption
     // update for iPhone 4
     if (!IS_IPHONE5)
     {
-        // warning: magic numbers for iphone layout
+        // warning: magic numbers for iphone4 layout
 
         CGRect frame = self.tableView.frame;
-        frame.size.height = 200;
+        frame.size.height = 185;
         self.tableView.frame = frame;
         
     }
