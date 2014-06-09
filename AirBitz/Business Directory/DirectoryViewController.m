@@ -912,6 +912,7 @@ typedef enum eMapDisplayState
 	//NSLog(@"Setting map state to INIT");
 	mapDisplayState = MAP_DISPLAY_INIT;
 	
+	self.mapView.showsUserLocation = YES;
 	self.dividerView.userControllable = YES;
 	[self removeBusinessListingHeader];
 	[self showBackButtonAnimated:YES];

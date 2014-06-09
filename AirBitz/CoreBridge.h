@@ -23,9 +23,9 @@
 
 + (NSString *)formatCurrency: (double) currency;
 + (NSString *)formatCurrency: (double) currency withSymbol:(bool) symbol;
-+ (NSString *)formatSatoshi: (double) bitcoin;
-+ (NSString *)formatSatoshi: (double) bitcoin withSymbol:(bool) symbol;
-+ (double) denominationToSatoshi: (double) coin;
++ (NSString *)formatSatoshi: (int64_t) bitcoin;
++ (NSString *)formatSatoshi: (int64_t) bitcoin withSymbol:(bool) symbol;
++ (int64_t) denominationToSatoshi: (NSString *) amount;
 + (NSString *)conversionString: (int) currencyNumber;
 + (void)logout;
 + (void)startWatchers;

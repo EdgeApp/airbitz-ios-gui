@@ -522,8 +522,7 @@
 
 	if(_selectedTextField == self.amountBTCTextField)
 	{
-		double value = [self.amountBTCTextField.text doubleValue];
-        self.amountToSendSatoshi = [CoreBridge denominationToSatoshi: value];
+        self.amountToSendSatoshi = [CoreBridge denominationToSatoshi: self.amountBTCTextField.text];
 		result = ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 		if(result == ABC_CC_Ok)
 		{

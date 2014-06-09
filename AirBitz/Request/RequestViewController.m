@@ -197,7 +197,7 @@ typedef enum eAddressPickerType
 	tABC_Error error;
 
 	//first need to create a transaction details struct
-    details.amountSatoshi = [CoreBridge denominationToSatoshi:[self.BTC_TextField.text doubleValue]];
+    details.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
 	
 	//the true fee values will be set by the core
 	details.amountFeesAirbitzSatoshi = 0;
@@ -299,7 +299,7 @@ typedef enum eAddressPickerType
 	_qrViewController.qrCodeImage = image;
 	_qrViewController.addressString = address;
 	_qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
-    _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi:[self.BTC_TextField.text doubleValue]];
+    _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
 	CGRect frame = self.view.bounds;
 	_qrViewController.view.frame = frame;
 	[self.view addSubview:_qrViewController.view];
@@ -434,12 +434,10 @@ typedef enum eAddressPickerType
 {
 	if (_selectedTextField == self.BTC_TextField)
 	{
-		double value = [self.BTC_TextField.text doubleValue];
-        double satoshi = [CoreBridge denominationToSatoshi: value];
+        int64_t satoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
 		
 		double currency;
 		tABC_Error error;
-		
 		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
 		
 		self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", currency];

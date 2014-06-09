@@ -280,7 +280,7 @@
 
 
 //note this method duplicated in TransactionsViewController
-- (NSString *)conversion:(double)satoshi
+- (NSString *)conversion:(int64_t)satoshi
 {
 	if (_balanceState == BALANCE_VIEW_DOWN)
 	{
