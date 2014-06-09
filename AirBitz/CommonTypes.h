@@ -41,6 +41,8 @@
 // notifications
 
 #define NOTIFICATION_TRANSACTION_DETAILS_EXITED         @"Notification_Transaction_Details_Exited"     // sent when the user has finished using a transaction details screen
+#define NOTIFICATION_LAUNCH_SEND_FOR_WALLET             @"Notification_Launch_Send_For_Wallet"
+#define NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET          @"Notification_Launch_Request_For_Wallet"
 #define KEY_TX_DETAILS_EXITED_TX                        @"transaction"
 #define KEY_TX_DETAILS_EXITED_WALLET_UUID               @"walletUUID"
 #define KEY_TX_DETAILS_EXITED_WALLET_NAME               @"walletName"

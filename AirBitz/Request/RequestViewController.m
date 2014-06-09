@@ -90,7 +90,6 @@ typedef enum eAddressPickerType
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
-	[self loadWalletInfo];
 }
 
 -(void)awakeFromNib
@@ -101,6 +100,7 @@ typedef enum eAddressPickerType
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+	[self loadWalletInfo];
 	self.BTCLabel_TextField.text = [User Singleton].denominationLabel; 
 	self.BTC_TextField.inputView = self.keypadView;
 	self.USDLabel_TextField.text = @"USD";
@@ -465,21 +465,22 @@ typedef enum eAddressPickerType
     [CoreBridge loadWallets:arrayWallets archived:nil];
 
     // create the array of wallet names
+    _selectedWalletIndex = 0;
     NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
     for (int i = 0; i < [arrayWallets count]; i++)
     {
         Wallet *wallet = [arrayWallets objectAtIndex:i];
         [arrayWalletNames addObject:wallet.strName];
+        if ([_walletUUID isEqualToString: wallet.strUUID])
+            _selectedWalletIndex = i;
     }
 
-    if ([arrayWallets count] > 0)
+    if (_selectedWalletIndex < [arrayWallets count])
     {
-        _selectedWalletIndex = 0;
         self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
         [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWalletIndex] forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
     }
-
     self.arrayWallets = arrayWallets;
 }
 
@@ -640,6 +641,10 @@ typedef enum eAddressPickerType
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
     _selectedWalletIndex = itemIndex;
+
+    // Update wallet UUID
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    _walletUUID = wallet.strUUID;
 }
 
 -(void) resetViews

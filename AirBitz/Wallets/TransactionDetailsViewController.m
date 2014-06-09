@@ -168,7 +168,13 @@
     self.notesTextField.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
 
-    self.bitCoinLabel.text = [CoreBridge formatSatoshi:self.transaction.amountSatoshi];
+    NSMutableString *coinFormatted = [CoreBridge formatSatoshi:self.transaction.amountSatoshi];
+    if (self.transaction.amountSatoshi < 0)
+    {
+        [coinFormatted appendFormat:@" + %@ fee",
+            [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
+    }
+    self.bitCoinLabel.text = coinFormatted;
 
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -273,18 +279,23 @@
 	
 	NSString* path = [[NSBundle mainBundle] pathForResource:@"transactionDetails" ofType:@"html"];
 	NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-	
+
+	NSMutableString *addresses = [[NSMutableString alloc] init];
+    for (NSString *s in self.transaction.addresses)
+    {
+        [addresses appendFormat: @("%@<BR>"), s];
+    }
 	//transaction ID
 	content = [content stringByReplacingOccurrencesOfString:@"*1" withString:self.transaction.strID];
 	//Total sent
-	content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[NSString stringWithFormat:@"BTC %.5f", ABC_SatoshiToBitcoin(self.transaction.amountSatoshi)]];
+	content = [content stringByReplacingOccurrencesOfString:@"*2" withString: [CoreBridge formatSatoshi:self.transaction.amountSatoshi]];
 	//source
-#warning TODO: source and destination addresses are faked for now, so's miner's fee.
-	content = [content stringByReplacingOccurrencesOfString:@"*3" withString:@"1.002<BR>1K7iGspRyQsposdKCSbsoXZntsJ7DPNssN<BR>0.0345<BR>1z8fkj4igkh498thgkjERGG23fhD4gGaNSHa<BR>0.2342<BR>1Wfh8d9csf987gT7H6fjkhd0fkj4tkjhf8S4er3"];
+	content = [content stringByReplacingOccurrencesOfString:@"*3" withString:addresses];
 	//Destination
-	content = [content stringByReplacingOccurrencesOfString:@"*4" withString:@"1M6TCZJTdVX1xGC8iAcQLTDtRKF2zM6M38<BR>1.27059<BR>12HUD1dsrc9dhQgGtWxqy8dAM2XDgvKdzq<BR>0.00001"];
+	content = [content stringByReplacingOccurrencesOfString:@"*4" withString:addresses];
 	//Miner Fee
-	content = [content stringByReplacingOccurrencesOfString:@"*5" withString:@"0.0001"];
+    NSString * fees = [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false];
+	content = [content stringByReplacingOccurrencesOfString:@"*5" withString:fees];
 	iv.htmlInfoToDisplay = content;
 	[self.view addSubview:iv];
 }

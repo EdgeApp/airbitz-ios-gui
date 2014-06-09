@@ -20,8 +20,11 @@
 @property (nonatomic, assign)   unsigned int    confirmations;
 @property (nonatomic, assign)   SInt64			amountSatoshi;
 @property (nonatomic, assign)   double          amountFiat;
+@property (nonatomic, assign)   SInt64			minerFees;
+@property (nonatomic, assign)   SInt64			abFees;
 @property (nonatomic, assign)   SInt64          balance;
 @property (nonatomic, copy)     NSString        *strCategory;
 @property (nonatomic, copy)     NSString        *strNotes;
+@property (nonatomic, strong)   NSArray         *addresses;
 
 @end
