@@ -402,17 +402,22 @@
         const char *p = pFormatted;
         const char *decimal = strstr(pFormatted, ".");
         int offset = (decimal - pFormatted) % 3;
-        for (int i = 0; i < strlen(pFormatted); ++i, ++p)
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        for (int i = 0; i < strlen(pFormatted) || p - decimal <= decimalPlaces; ++i, ++p)
         {
-            if (p != pFormatted 
-                    && p < decimal 
-                    && (i - offset) % 3 == 0)
-                [formatted appendString:@","];
-            [formatted appendFormat: @"%c", *p];
+            if (p < decimal)
+            {
+                if ((i - offset) % 3 == 0)
+                    [formatted appendString:[f groupingSeparator]];
+                [formatted appendFormat: @"%c", *p];
+            }
+            else if (p == decimal)
+                [formatted appendString:[f currencyDecimalSeparator]];
+            else
+                [formatted appendFormat: @"%c", *p];
         }
         if (negative)
             [formatted appendString: @")"];
-        NSLog(@("%ld - %s - %@\n"), amount, pFormatted, formatted);
         free(pFormatted);
         return formatted;
     }
