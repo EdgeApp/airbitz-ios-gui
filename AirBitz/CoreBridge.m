@@ -401,13 +401,14 @@
         }
         const char *p = pFormatted;
         const char *decimal = strstr(pFormatted, ".");
-        int offset = (decimal - pFormatted) % 3;
+        const char *start = (decimal == NULL) ? p + strlen(p) : decimal;
+        int offset = (start - pFormatted) % 3;
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         for (int i = 0; i < strlen(pFormatted) || p - decimal <= decimalPlaces; ++i, ++p)
         {
             if (p < decimal)
             {
-                if ((i - offset) % 3 == 0)
+                if (i != 0 && (i - offset) % 3 == 0)
                     [formatted appendString:[f groupingSeparator]];
                 [formatted appendFormat: @"%c", *p];
             }
