@@ -45,6 +45,7 @@
 @property (nonatomic, weak) IBOutlet UITextField            *amountUSDTextField;
 @property (nonatomic, weak) IBOutlet UILabel                *conversionLabel;
 @property (weak, nonatomic) IBOutlet UILabel                *labelPINTitle;
+@property (weak, nonatomic) IBOutlet UILabel                *txFeesLabel;
 @property (weak, nonatomic) IBOutlet UIImageView            *imagePINEmboss;
 @property (nonatomic, weak) IBOutlet UITextField            *withdrawlPIN;
 @property (nonatomic, weak) IBOutlet UIView                 *confirmSliderContainer;
@@ -517,6 +518,7 @@
 - (void)updateTextFieldContents
 {
 	double currency;
+    int64_t satoshi;
 	tABC_Error error;
 
 	if(_selectedTextField == self.amountBTCTextField)
@@ -527,14 +529,23 @@
 	}
 	else
 	{
-		int64_t satoshi;
-        double currency = [self.amountUSDTextField.text doubleValue];
+        currency = [self.amountUSDTextField.text doubleValue];
 		if (ABC_CurrencyToSatoshi(currency, DOLLAR_CURRENCY_NUM, &satoshi, &error) == ABC_CC_Ok)
 		{
 			self.amountToSendSatoshi = satoshi;
             self.amountBTCTextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
 		}
 	}
+    // Calculate fees
+    int64_t fees = self.amountToSendSatoshi * 0.01;
+    NSMutableString *feeString = [[NSMutableString alloc] init];
+    [feeString appendString:[CoreBridge formatSatoshi:fees]];
+    if (ABC_SatoshiToCurrency(fees, &currency, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
+    {
+        [feeString appendString:@" - "];
+        [feeString appendString:[CoreBridge formatCurrency: currency]];
+    }
+    self.txFeesLabel.text = feeString;
 }
 
 #pragma mark - UITextField delegates

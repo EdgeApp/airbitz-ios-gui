@@ -307,11 +307,6 @@
     return [f stringFromNumber:[NSNumber numberWithFloat:currency]];
 }
 
-+ (NSString *)formatSatoshi: (int64_t) amount
-{
-    return [CoreBridge formatSatoshi:amount withSymbol:true];
-}
-
 + (int) denominationDecimals
 {
     int decimalPlaces = 8;
@@ -320,6 +315,11 @@
     else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
         decimalPlaces = 5;
     return decimalPlaces;
+}
+
++ (NSString *)formatSatoshi: (int64_t) amount
+{
+    return [CoreBridge formatSatoshi:amount withSymbol:true];
 }
 
 + (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol
