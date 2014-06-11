@@ -17,6 +17,7 @@
 #import "LatoLabel.h"
 #import "User.h"
 #import "Util.h"
+#import "CoreBridge.h"
 
 #define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
@@ -700,6 +701,8 @@
 		//set username and password for app
 		[User Singleton].name = self.userNameTextField.text;
 		[User Singleton].password = self.passwordTextField.text;
+        [[User Singleton] loadSettings];
+        [CoreBridge startWatchers];
 
         // now that the account is created, create the first wallet
 		[self createFirstWallet];
