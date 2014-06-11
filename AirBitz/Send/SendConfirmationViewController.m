@@ -43,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UIView                 *viewUSD;
 @property (nonatomic, weak) IBOutlet UILabel                *amountUSDLabel;
 @property (nonatomic, weak) IBOutlet UITextField            *amountUSDTextField;
+@property (nonatomic, weak) IBOutlet UIButton               *maxAmountButton;
 @property (nonatomic, weak) IBOutlet UILabel                *conversionLabel;
 @property (weak, nonatomic) IBOutlet UILabel                *labelPINTitle;
 @property (weak, nonatomic) IBOutlet UILabel                *txFeesLabel;
@@ -209,6 +210,13 @@
 	{
 		sender.selected = YES;
 	}
+}
+
+- (IBAction)selectMaxAmount
+{
+    self.amountBTCTextField.text = @"1000";
+    self.amountUSDTextField.text = @"1000";
+    [self updateTextFieldContents];
 }
 
 #pragma mark - Misc Methods
@@ -543,24 +551,34 @@
                     amountToSend:self.amountToSendSatoshi
                   storeResultsIn:&fees])
     {
-        self.txFeesLabel.textColor = [UIColor whiteColor];
+        double currencyFees = 0.0;
+        self.conversionLabel.textColor = [UIColor redColor];
         self.amountBTCTextField.textColor = [UIColor whiteColor];
         self.amountUSDTextField.textColor = [UIColor whiteColor];
 
-        NSMutableString *feeString = [[NSMutableString alloc] init];
-        [feeString appendString:[CoreBridge formatSatoshi:fees]];
-        if (ABC_SatoshiToCurrency(fees, &currency, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
+        NSMutableString *coinFeeString = [[NSMutableString alloc] init];
+        NSMutableString *fiatFeeString = [[NSMutableString alloc] init];
+        [coinFeeString appendString:@"+ "];
+        [coinFeeString appendString:[CoreBridge formatSatoshi:fees withSymbol:false]];
+        [coinFeeString appendString:@" "];
+        [coinFeeString appendString:[User Singleton].denominationLabel];
+
+        if (ABC_SatoshiToCurrency(fees, &currencyFees, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
         {
-            [feeString appendString:@" - "];
-            [feeString appendString:[CoreBridge formatCurrency: currency]];
+            [fiatFeeString appendString:@"+ "];
+            [fiatFeeString appendString:[CoreBridge formatCurrency: currency withSymbol:false]];
+            [fiatFeeString appendString:@" "];
+            [fiatFeeString appendString:@"USD"];
         }
-        self.txFeesLabel.text = feeString;
+        self.amountBTCLabel.text = coinFeeString; 
+        self.amountUSDLabel.text = fiatFeeString;
+        self.conversionLabel.text = [CoreBridge conversionString:DOLLAR_CURRENCY_NUM];
     }
     else
     {
         NSString *message = NSLocalizedString(@"Insufficient funds.", nil);
-        self.txFeesLabel.text = message;
-        self.txFeesLabel.textColor = [UIColor redColor];
+        self.conversionLabel.text = message;
+        self.conversionLabel.textColor = [UIColor redColor];
         self.amountBTCTextField.textColor = [UIColor redColor];
         self.amountUSDTextField.textColor = [UIColor redColor];
     }
