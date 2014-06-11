@@ -537,16 +537,35 @@
 		}
 	}
     // Calculate fees
-    int64_t fees = self.amountToSendSatoshi * 0.01;
-    NSMutableString *feeString = [[NSMutableString alloc] init];
-    [feeString appendString:[CoreBridge formatSatoshi:fees]];
-    if (ABC_SatoshiToCurrency(fees, &currency, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
+    int64_t fees = 0;
+    if ([CoreBridge calcSendFees:self.wallet.strUUID
+                          sendTo:self.sendToAddress
+                    amountToSend:self.amountToSendSatoshi
+                  storeResultsIn:&fees])
     {
-        [feeString appendString:@" - "];
-        [feeString appendString:[CoreBridge formatCurrency: currency]];
+        self.txFeesLabel.textColor = [UIColor whiteColor];
+        self.amountBTCTextField.textColor = [UIColor whiteColor];
+        self.amountUSDTextField.textColor = [UIColor whiteColor];
+
+        NSMutableString *feeString = [[NSMutableString alloc] init];
+        [feeString appendString:[CoreBridge formatSatoshi:fees]];
+        if (ABC_SatoshiToCurrency(fees, &currency, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
+        {
+            [feeString appendString:@" - "];
+            [feeString appendString:[CoreBridge formatCurrency: currency]];
+        }
+        self.txFeesLabel.text = feeString;
     }
-    self.txFeesLabel.text = feeString;
+    else
+    {
+        NSString *message = NSLocalizedString(@"Insufficient funds.", nil);
+        self.txFeesLabel.text = message;
+        self.txFeesLabel.textColor = [UIColor redColor];
+        self.amountBTCTextField.textColor = [UIColor redColor];
+        self.amountUSDTextField.textColor = [UIColor redColor];
+    }
 }
+
 
 #pragma mark - UITextField delegates
 

@@ -484,7 +484,6 @@
 
 + (void)stopWatchers
 {
-    NSLog(@("stopWatchers\n"));
     tABC_Error Error;
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
     NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
@@ -503,6 +502,38 @@
                        [[User Singleton].password UTF8String],
                        [walletUUID UTF8String], &Error);
     [Util printABC_Error: &Error];
+}
+
++ (bool)calcSendFees:(NSString *) walletUUID 
+                 sendTo:(NSString *) destAddr
+           amountToSend:(int64_t) sendAmount
+         storeResultsIn:(int64_t *) totalFees
+{
+    tABC_Error error;
+    tABC_TxDetails details;
+    details.amountSatoshi = sendAmount;
+    details.amountCurrency = 0;
+    details.amountFeesAirbitzSatoshi = 0;
+    details.amountFeesMinersSatoshi = 0;
+    details.szName = "";
+    details.szCategory = "";
+    details.szNotes = "";
+    details.attributes = 0;
+    if (ABC_CalcSendFees([[User Singleton].name UTF8String],
+                         [[User Singleton].password UTF8String],
+                         [walletUUID UTF8String],
+                         [destAddr UTF8String],
+                         &details,
+                         totalFees,
+                         &error) != ABC_CC_Ok)
+    {
+        if (error.code != ABC_CC_InsufficientFunds)
+        {
+            [Util printABC_Error: &error];
+        }
+        return false;
+    }
+    return true;
 }
 
 @end

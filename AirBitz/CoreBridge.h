@@ -30,6 +30,10 @@
 + (void)logout;
 + (void)startWatchers;
 + (void)stopWatchers;
-+ (void)watchAddresses: (NSString *) walletUUID;
++ (void)watchAddresses:(NSString *) walletUUID;
++ (bool)calcSendFees:(NSString *) walletUUID 
+                 sendTo:(NSString *) destAddr 
+           amountToSend:(int64_t) sendAmount
+         storeResultsIn:(int64_t *) totalFees;
 
 @end
