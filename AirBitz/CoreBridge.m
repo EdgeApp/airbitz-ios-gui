@@ -315,7 +315,7 @@
 + (int) denominationDecimals
 {
     int decimalPlaces = 8;
-    if ([[[User Singleton] denominationLabel] isEqualToString:@"uBTC"])
+    if ([[[User Singleton] denominationLabel] isEqualToString:@"µBTC"])
         decimalPlaces = 2;
     else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
         decimalPlaces = 5;
