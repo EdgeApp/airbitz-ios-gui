@@ -43,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UIView                 *viewUSD;
 @property (nonatomic, weak) IBOutlet UILabel                *amountUSDLabel;
 @property (nonatomic, weak) IBOutlet UITextField            *amountUSDTextField;
+@property (nonatomic, weak) IBOutlet UIButton               *maxAmountButton;
 @property (nonatomic, weak) IBOutlet UILabel                *conversionLabel;
 @property (weak, nonatomic) IBOutlet UILabel                *labelPINTitle;
 @property (weak, nonatomic) IBOutlet UIImageView            *imagePINEmboss;
@@ -208,6 +209,13 @@
 	{
 		sender.selected = YES;
 	}
+}
+
+- (IBAction)selectMaxAmount
+{
+    self.amountBTCTextField.text = @"1000";
+    self.amountUSDTextField.text = @"1000";
+    [self updateTextFieldContents];
 }
 
 #pragma mark - Misc Methods
@@ -517,6 +525,7 @@
 - (void)updateTextFieldContents
 {
 	double currency;
+    int64_t satoshi;
 	tABC_Error error;
 
 	if(_selectedTextField == self.amountBTCTextField)
@@ -527,14 +536,32 @@
 	}
 	else
 	{
-		int64_t satoshi;
-        double currency = [self.amountUSDTextField.text doubleValue];
+        currency = [self.amountUSDTextField.text doubleValue];
 		if (ABC_CurrencyToSatoshi(currency, DOLLAR_CURRENCY_NUM, &satoshi, &error) == ABC_CC_Ok)
 		{
 			self.amountToSendSatoshi = satoshi;
             self.amountBTCTextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
 		}
 	}
+    // Calculate fees
+    int64_t fees = self.amountToSendSatoshi * 0.01;
+    double currencyFees = 0.0;
+    NSMutableString *coinFeeString = [[NSMutableString alloc] init];
+    NSMutableString *fiatFeeString = [[NSMutableString alloc] init];
+    [coinFeeString appendString:@"+ "];
+    [coinFeeString appendString:[CoreBridge formatSatoshi:fees withSymbol:false]];
+    [coinFeeString appendString:@" "];
+    [coinFeeString appendString:[User Singleton].denominationLabel];
+
+    if (ABC_SatoshiToCurrency(fees, &currencyFees, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
+    {
+        [fiatFeeString appendString:@"+ "];
+        [fiatFeeString appendString:[CoreBridge formatCurrency: currency withSymbol:false]];
+        [fiatFeeString appendString:@" "];
+        [fiatFeeString appendString:@"USD"];
+    }
+	self.amountBTCLabel.text = coinFeeString; 
+    self.amountUSDLabel.text = fiatFeeString;
 }
 
 #pragma mark - UITextField delegates

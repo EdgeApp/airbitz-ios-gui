@@ -307,11 +307,6 @@
     return [f stringFromNumber:[NSNumber numberWithFloat:currency]];
 }
 
-+ (NSString *)formatSatoshi: (int64_t) amount
-{
-    return [CoreBridge formatSatoshi:amount withSymbol:true];
-}
-
 + (int) denominationDecimals
 {
     int decimalPlaces = 8;
@@ -320,6 +315,11 @@
     else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
         decimalPlaces = 5;
     return decimalPlaces;
+}
+
++ (NSString *)formatSatoshi: (int64_t) amount
+{
+    return [CoreBridge formatSatoshi:amount withSymbol:true];
 }
 
 + (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol
@@ -345,18 +345,24 @@
         }
         const char *p = pFormatted;
         const char *decimal = strstr(pFormatted, ".");
-        int offset = (decimal - pFormatted) % 3;
-        for (int i = 0; i < strlen(pFormatted); ++i, ++p)
+        const char *start = (decimal == NULL) ? p + strlen(p) : decimal;
+        int offset = (start - pFormatted) % 3;
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        for (int i = 0; i < strlen(pFormatted) || p - decimal <= decimalPlaces; ++i, ++p)
         {
-            if (p != pFormatted 
-                    && p < decimal 
-                    && (i - offset) % 3 == 0)
-                [formatted appendString:@","];
-            [formatted appendFormat: @"%c", *p];
+            if (p < decimal)
+            {
+                if (i != 0 && (i - offset) % 3 == 0)
+                    [formatted appendString:[f groupingSeparator]];
+                [formatted appendFormat: @"%c", *p];
+            }
+            else if (p == decimal)
+                [formatted appendString:[f currencyDecimalSeparator]];
+            else
+                [formatted appendFormat: @"%c", *p];
         }
         if (negative)
             [formatted appendString: @")"];
-        NSLog(@("%ld - %s - %@\n"), amount, pFormatted, formatted);
         free(pFormatted);
         return formatted;
     }
