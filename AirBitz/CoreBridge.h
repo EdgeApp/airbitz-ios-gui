@@ -18,10 +18,13 @@
 + (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions;
 + (bool)storeTransaction: (Transaction *) transaction;
 
++ (int) currencyDecimalPlaces;
++ (int) maxDecimalPlaces;
 + (NSString *)formatCurrency: (double) currency;
 + (NSString *)formatCurrency: (double) currency withSymbol:(bool) symbol;
 + (NSString *)formatSatoshi: (int64_t) bitcoin;
 + (NSString *)formatSatoshi: (int64_t) bitcoin withSymbol:(bool) symbol;
++ (NSString *)formatSatoshi: (int64_t) bitcoin withSymbol:(bool) symbol overrideDecimals:(int) decimals;
 + (int64_t) denominationToSatoshi: (NSString *) amount;
 + (NSString *)conversionString: (int) currencyNumber;
 

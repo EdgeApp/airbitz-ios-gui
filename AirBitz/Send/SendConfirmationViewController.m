@@ -219,7 +219,9 @@
     {
         _selectedTextField = self.amountBTCTextField;
         self.amountToSendSatoshi = MAX(self.wallet.balance, 0);
-        self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
+        self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi 
+                                                      withSymbol:false
+                                                overrideDecimals:[CoreBridge currencyDecimalPlaces]];
     }
     [self updateTextFieldContents];
 }
@@ -546,11 +548,13 @@
 		if (ABC_CurrencyToSatoshi(currency, DOLLAR_CURRENCY_NUM, &satoshi, &error) == ABC_CC_Ok)
 		{
 			self.amountToSendSatoshi = satoshi;
-            self.amountBTCTextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
+            self.amountBTCTextField.text = [CoreBridge formatSatoshi:satoshi
+                                                          withSymbol:false
+                                                    overrideDecimals:[CoreBridge currencyDecimalPlaces]];
 		}
 	}
     // Calculate fees
-    int64_t fees = MIN(30000, (int64_t) ((double) self.amountToSendSatoshi * 0.0001));
+    int64_t fees = MAX(10000, MIN(30000, (int64_t) ((double) self.amountToSendSatoshi * 0.0001)));
     double currencyFees = 0.0;
     NSMutableString *coinFeeString = [[NSMutableString alloc] init];
     NSMutableString *fiatFeeString = [[NSMutableString alloc] init];

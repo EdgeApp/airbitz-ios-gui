@@ -445,7 +445,9 @@ typedef enum eAddressPickerType
 		int64_t satoshi;
 		double currency = [self.USD_TextField.text doubleValue];
 		if (ABC_CurrencyToSatoshi(currency, DOLLAR_CURRENCY_NUM, &satoshi, &error) == ABC_CC_Ok)
-            self.BTC_TextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
+            self.BTC_TextField.text = [CoreBridge formatSatoshi:satoshi
+                                                     withSymbol:false
+                                               overrideDecimals:[CoreBridge currencyDecimalPlaces]];
 	}
 }
 

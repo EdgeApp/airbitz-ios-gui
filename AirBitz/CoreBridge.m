@@ -307,7 +307,17 @@
     return [f stringFromNumber:[NSNumber numberWithFloat:currency]];
 }
 
-+ (int) denominationDecimals
++ (int) currencyDecimalPlaces
+{
+    int decimalPlaces = 5;
+    if ([[[User Singleton] denominationLabel] isEqualToString:@"uBTC"])
+        decimalPlaces = 2;
+    else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
+        decimalPlaces = 3;
+    return decimalPlaces;
+}
+
++ (int) maxDecimalPlaces
 {
     int decimalPlaces = 8;
     if ([[[User Singleton] denominationLabel] isEqualToString:@"uBTC"])
@@ -324,9 +334,14 @@
 
 + (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol
 {
+    return [CoreBridge formatSatoshi:amount withSymbol:symbol overrideDecimals:-1];
+}
+
++ (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol overrideDecimals:(int) decimals
+{
     tABC_Error error;
     char *pFormatted = NULL;
-    int decimalPlaces = [self denominationDecimals];
+    int decimalPlaces = [self maxDecimalPlaces];
     bool negative = amount < 0;
     amount = llabs(amount);
     if (ABC_FormatAmount(amount, &pFormatted, decimalPlaces, &error) != ABC_CC_Ok)
@@ -335,6 +350,7 @@
     }
     else
     {
+        decimalPlaces = decimals > -1 ? decimals : decimalPlaces;
         NSMutableString *formatted = [[NSMutableString alloc] init];
         if (negative)
             [formatted appendString: @"("];
@@ -348,7 +364,7 @@
         const char *start = (decimal == NULL) ? p + strlen(p) : decimal;
         int offset = (start - pFormatted) % 3;
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        for (int i = 0; i < strlen(pFormatted); ++i, ++p)
+        for (int i = 0; i < strlen(pFormatted) && p - start <= decimalPlaces; ++i, ++p)
         {
             if (p < start)
             {
@@ -371,7 +387,7 @@
 + (int64_t) denominationToSatoshi: (NSString *) amount
 {
     int64_t parsedAmount;
-    int decimalPlaces = [self denominationDecimals];
+    int decimalPlaces = [self maxDecimalPlaces];
     if (ABC_ParseAmount([amount UTF8String], &parsedAmount, decimalPlaces) != ABC_CC_Ok)
     {
 #warning TODO handle error
