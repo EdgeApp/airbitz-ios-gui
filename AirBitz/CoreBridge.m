@@ -348,9 +348,9 @@
         const char *start = (decimal == NULL) ? p + strlen(p) : decimal;
         int offset = (start - pFormatted) % 3;
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        for (int i = 0; i < strlen(pFormatted) || p - decimal <= decimalPlaces; ++i, ++p)
+        for (int i = 0; i < strlen(pFormatted); ++i, ++p)
         {
-            if (p < decimal)
+            if (p < start)
             {
                 if (i != 0 && (i - offset) % 3 == 0)
                     [formatted appendString:[f groupingSeparator]];
