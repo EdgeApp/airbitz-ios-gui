@@ -168,7 +168,8 @@
     self.notesTextField.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
 
-    NSMutableString *coinFormatted = [CoreBridge formatSatoshi:self.transaction.amountSatoshi];
+    NSMutableString *coinFormatted = 
+        [CoreBridge formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees)];
     if (self.transaction.amountSatoshi < 0)
     {
         [coinFormatted appendFormat:@" + %@ fee",

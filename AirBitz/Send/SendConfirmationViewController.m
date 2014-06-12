@@ -362,8 +362,8 @@
 			tABC_TxDetails Details;
 			Details.amountSatoshi = self.amountToSendSatoshi;
 			Details.amountCurrency = currency;
-			Details.amountFeesAirbitzSatoshi = 0;
-			Details.amountFeesMinersSatoshi = 0;
+			Details.amountFeesAirbitzSatoshi = 5000;
+			Details.amountFeesMinersSatoshi = 10000;
 			Details.szName = "Anonymous";
 			Details.szCategory = "";
 			Details.szNotes = "";
