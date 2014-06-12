@@ -139,7 +139,7 @@
 {
     [super viewWillAppear:animated];
 	self.amountBTCLabel.text = [User Singleton].denominationLabel; 
-    self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi];
+    self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
     self.conversionLabel.text = [CoreBridge conversionString:DOLLAR_CURRENCY_NUM];
 	self.addressLabel.text = self.sendToAddress;
 	
