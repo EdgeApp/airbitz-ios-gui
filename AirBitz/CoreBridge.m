@@ -154,7 +154,8 @@
     transaction.strCategory = [NSString stringWithUTF8String: pTrans->pDetails->szCategory];
     transaction.date = [self dateFromTimestamp: pTrans->timeCreation];
     transaction.amountSatoshi = pTrans->pDetails->amountSatoshi;
-    transaction.amountFiat = pTrans->pDetails->amountFeesAirbitzSatoshi;
+    transaction.amountFiat = pTrans->pDetails->amountCurrency;
+    transaction.abFees = pTrans->pDetails->amountFeesAirbitzSatoshi;
     transaction.minerFees = pTrans->pDetails->amountFeesMinersSatoshi;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
