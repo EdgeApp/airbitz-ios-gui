@@ -580,14 +580,15 @@
 - (void)alineTextFields:(UILabel *)child alignWith:(UITextField *)parent
 {
     NSDictionary *attributes = @{NSFontAttributeName: parent.font};
-    CGSize textWidth = [parent.text sizeWithAttributes:attributes];
-    if (textWidth.width <= 20.0)
-        return;
-    textWidth.width -= 20.0;
+    CGSize parentText = [parent.text sizeWithAttributes:attributes];
 
+    NSDictionary *childAttr = @{NSFontAttributeName:child.font};
+    CGSize childText = [child.text sizeWithAttributes:childAttr];
+
+    CGRect parentField = parent.frame;
     CGRect childField = child.frame;
     int origX = childField.origin.x;
-    int newX = parent.frame.origin.x + textWidth.width;
+    int newX = parentField.origin.x + parentText.width;
     int newWidth = childField.size.width + (origX - newX);
     childField.origin.x = newX;
     childField.size.width = newWidth;
