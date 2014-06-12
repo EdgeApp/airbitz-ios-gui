@@ -38,9 +38,11 @@
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendToTitle;
 @property (nonatomic, weak) IBOutlet UILabel                *addressLabel;
 @property (weak, nonatomic) IBOutlet UIView                 *viewBTC;
+@property (nonatomic, weak) IBOutlet UILabel                *amountBTCSymbol;
 @property (nonatomic, weak) IBOutlet UILabel                *amountBTCLabel;
 @property (nonatomic, weak) IBOutlet UITextField            *amountBTCTextField;
 @property (weak, nonatomic) IBOutlet UIView                 *viewUSD;
+@property (nonatomic, weak) IBOutlet UILabel                *amountUSDSymbol;
 @property (nonatomic, weak) IBOutlet UILabel                *amountUSDLabel;
 @property (nonatomic, weak) IBOutlet UITextField            *amountUSDTextField;
 @property (nonatomic, weak) IBOutlet UIButton               *maxAmountButton;
@@ -213,8 +215,12 @@
 
 - (IBAction)selectMaxAmount
 {
-    self.amountBTCTextField.text = @"1000";
-    self.amountUSDTextField.text = @"1000";
+    if (self.wallet != nil)
+    {
+        _selectedTextField = self.amountBTCTextField;
+        self.amountToSendSatoshi = MAX(self.wallet.balance, 0);
+        self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
+    }
     [self updateTextFieldContents];
 }
 
@@ -544,24 +550,44 @@
 		}
 	}
     // Calculate fees
-    int64_t fees = self.amountToSendSatoshi * 0.01;
+    int64_t fees = MIN(30000, (int64_t) ((double) self.amountToSendSatoshi * 0.0001));
     double currencyFees = 0.0;
     NSMutableString *coinFeeString = [[NSMutableString alloc] init];
     NSMutableString *fiatFeeString = [[NSMutableString alloc] init];
     [coinFeeString appendString:@"+ "];
     [coinFeeString appendString:[CoreBridge formatSatoshi:fees withSymbol:false]];
-    [coinFeeString appendString:@" "];
+    [coinFeeString appendString:@" fees "];
     [coinFeeString appendString:[User Singleton].denominationLabel];
 
     if (ABC_SatoshiToCurrency(fees, &currencyFees, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
     {
         [fiatFeeString appendString:@"+ "];
-        [fiatFeeString appendString:[CoreBridge formatCurrency: currency withSymbol:false]];
-        [fiatFeeString appendString:@" "];
+        [fiatFeeString appendString:[CoreBridge formatCurrency: currencyFees withSymbol:false]];
+        [fiatFeeString appendString:@" fees "];
         [fiatFeeString appendString:@"USD"];
     }
 	self.amountBTCLabel.text = coinFeeString; 
     self.amountUSDLabel.text = fiatFeeString;
+
+    [self alineTextFields:self.amountBTCLabel alignWith:self.amountBTCTextField];
+    [self alineTextFields:self.amountUSDLabel alignWith:self.amountUSDTextField];
+}
+
+- (void)alineTextFields:(UILabel *)child alignWith:(UITextField *)parent
+{
+    NSDictionary *attributes = @{NSFontAttributeName: parent.font};
+    CGSize textWidth = [parent.text sizeWithAttributes:attributes];
+    if (textWidth.width <= 20.0)
+        return;
+    textWidth.width -= 20.0;
+
+    CGRect childField = child.frame;
+    int origX = childField.origin.x;
+    int newX = parent.frame.origin.x + textWidth.width;
+    int newWidth = childField.size.width + (origX - newX);
+    childField.origin.x = newX;
+    childField.size.width = newWidth;
+    child.frame = childField;
 }
 
 #pragma mark - UITextField delegates
