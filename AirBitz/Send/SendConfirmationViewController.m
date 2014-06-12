@@ -552,7 +552,7 @@
                   storeResultsIn:&fees])
     {
         double currencyFees = 0.0;
-        self.conversionLabel.textColor = [UIColor redColor];
+        self.conversionLabel.textColor = [UIColor whiteColor];
         self.amountBTCTextField.textColor = [UIColor whiteColor];
         self.amountUSDTextField.textColor = [UIColor whiteColor];
 
@@ -566,7 +566,7 @@
         if (ABC_SatoshiToCurrency(fees, &currencyFees, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
         {
             [fiatFeeString appendString:@"+ "];
-            [fiatFeeString appendString:[CoreBridge formatCurrency: currency withSymbol:false]];
+            [fiatFeeString appendString:[CoreBridge formatCurrency: currencyFees withSymbol:false]];
             [fiatFeeString appendString:@" "];
             [fiatFeeString appendString:@"USD"];
         }
@@ -576,7 +576,7 @@
     }
     else
     {
-        NSString *message = NSLocalizedString(@"Insufficient funds.", nil);
+        NSString *message = NSLocalizedString(@"Insufficient funds", nil);
         self.conversionLabel.text = message;
         self.conversionLabel.textColor = [UIColor redColor];
         self.amountBTCTextField.textColor = [UIColor redColor];
