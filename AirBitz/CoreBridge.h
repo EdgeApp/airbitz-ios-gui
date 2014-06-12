@@ -20,6 +20,7 @@
 
 + (int) currencyDecimalPlaces;
 + (int) maxDecimalPlaces;
++ (int64_t) cleanNumString:(NSString *) value;
 + (NSString *)formatCurrency: (double) currency;
 + (NSString *)formatCurrency: (double) currency withSymbol:(bool) symbol;
 + (NSString *)formatSatoshi: (int64_t) bitcoin;

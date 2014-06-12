@@ -328,6 +328,13 @@
     return decimalPlaces;
 }
 
++ (int64_t) cleanNumString:(NSString *) value
+{
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    NSNumber *num = [f numberFromString:value];
+    return [num longLongValue];
+}
+
 + (NSString *)formatSatoshi: (int64_t) amount
 {
     return [CoreBridge formatSatoshi:amount withSymbol:true];
@@ -389,7 +396,9 @@
 {
     int64_t parsedAmount;
     int decimalPlaces = [self maxDecimalPlaces];
-    if (ABC_ParseAmount([amount UTF8String], &parsedAmount, decimalPlaces) != ABC_CC_Ok)
+#warning TODO this should be handled by the ABC_ParseAmount...maybe
+    NSString *cleanAmount = [amount stringByReplacingOccurrencesOfString:@"," withString:@""];
+    if (ABC_ParseAmount([cleanAmount UTF8String], &parsedAmount, decimalPlaces) != ABC_CC_Ok)
     {
 #warning TODO handle error
     }
