@@ -352,7 +352,7 @@
     unsigned int nCount;
 	double currency;
 	
-	result = ABC_SatoshiToCurrency([self.amountBTCTextField.text doubleValue], &currency, DOLLAR_CURRENCY_NUM, &Error);
+	result = ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &Error);
 	if (result == ABC_CC_Ok)
 	{
 		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
