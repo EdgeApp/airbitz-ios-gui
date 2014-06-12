@@ -38,9 +38,11 @@
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendToTitle;
 @property (nonatomic, weak) IBOutlet UILabel                *addressLabel;
 @property (weak, nonatomic) IBOutlet UIView                 *viewBTC;
+@property (nonatomic, weak) IBOutlet UILabel                *amountBTCSymbol;
 @property (nonatomic, weak) IBOutlet UILabel                *amountBTCLabel;
 @property (nonatomic, weak) IBOutlet UITextField            *amountBTCTextField;
 @property (weak, nonatomic) IBOutlet UIView                 *viewUSD;
+@property (nonatomic, weak) IBOutlet UILabel                *amountUSDSymbol;
 @property (nonatomic, weak) IBOutlet UILabel                *amountUSDLabel;
 @property (nonatomic, weak) IBOutlet UITextField            *amountUSDTextField;
 @property (nonatomic, weak) IBOutlet UIButton               *maxAmountButton;
@@ -138,7 +140,7 @@
 {
     [super viewWillAppear:animated];
 	self.amountBTCLabel.text = [User Singleton].denominationLabel; 
-    self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi];
+    self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
     self.conversionLabel.text = [CoreBridge conversionString:DOLLAR_CURRENCY_NUM];
 	self.addressLabel.text = self.sendToAddress;
 	
@@ -214,8 +216,14 @@
 
 - (IBAction)selectMaxAmount
 {
-    self.amountBTCTextField.text = @"1000";
-    self.amountUSDTextField.text = @"1000";
+    if (self.wallet != nil)
+    {
+        _selectedTextField = self.amountBTCTextField;
+        self.amountToSendSatoshi = MAX(self.wallet.balance, 0);
+        self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi 
+                                                      withSymbol:false
+                                                overrideDecimals:[CoreBridge currencyDecimalPlaces]];
+    }
     [self updateTextFieldContents];
 }
 
@@ -345,7 +353,7 @@
     unsigned int nCount;
 	double currency;
 	
-	result = ABC_SatoshiToCurrency([self.amountBTCTextField.text doubleValue], &currency, DOLLAR_CURRENCY_NUM, &Error);
+	result = ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &Error);
 	if (result == ABC_CC_Ok)
 	{
 		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
@@ -355,8 +363,8 @@
 			tABC_TxDetails Details;
 			Details.amountSatoshi = self.amountToSendSatoshi;
 			Details.amountCurrency = currency;
-			Details.amountFeesAirbitzSatoshi = 0;
-			Details.amountFeesMinersSatoshi = 0;
+			Details.amountFeesAirbitzSatoshi = 5000;
+			Details.amountFeesMinersSatoshi = 10000;
 			Details.szName = "Anonymous";
 			Details.szCategory = "";
 			Details.szNotes = "";
@@ -541,7 +549,9 @@
 		if (ABC_CurrencyToSatoshi(currency, DOLLAR_CURRENCY_NUM, &satoshi, &error) == ABC_CC_Ok)
 		{
 			self.amountToSendSatoshi = satoshi;
-            self.amountBTCTextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
+            self.amountBTCTextField.text = [CoreBridge formatSatoshi:satoshi
+                                                          withSymbol:false
+                                                    overrideDecimals:[CoreBridge currencyDecimalPlaces]];
 		}
 	}
     // Calculate fees
@@ -582,6 +592,25 @@
         self.amountBTCTextField.textColor = [UIColor redColor];
         self.amountUSDTextField.textColor = [UIColor redColor];
     }
+    [self alineTextFields:self.amountBTCLabel alignWith:self.amountBTCTextField];
+    [self alineTextFields:self.amountUSDLabel alignWith:self.amountUSDTextField];
+}
+
+- (void)alineTextFields:(UILabel *)child alignWith:(UITextField *)parent
+{
+    NSDictionary *attributes = @{NSFontAttributeName: parent.font};
+    CGSize textWidth = [parent.text sizeWithAttributes:attributes];
+    if (textWidth.width <= 20.0)
+        return;
+    textWidth.width -= 20.0;
+
+    CGRect childField = child.frame;
+    int origX = childField.origin.x;
+    int newX = parent.frame.origin.x + textWidth.width;
+    int newWidth = childField.size.width + (origX - newX);
+    childField.origin.x = newX;
+    childField.size.width = newWidth;
+    child.frame = childField;
 }
 
 

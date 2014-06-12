@@ -210,7 +210,8 @@
     transaction.strCategory = [NSString stringWithUTF8String: pTrans->pDetails->szCategory];
     transaction.date = [self dateFromTimestamp: pTrans->timeCreation];
     transaction.amountSatoshi = pTrans->pDetails->amountSatoshi;
-    transaction.amountFiat = pTrans->pDetails->amountFeesAirbitzSatoshi;
+    transaction.amountFiat = pTrans->pDetails->amountCurrency;
+    transaction.abFees = pTrans->pDetails->amountFeesAirbitzSatoshi;
     transaction.minerFees = pTrans->pDetails->amountFeesMinersSatoshi;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
@@ -363,14 +364,31 @@
     return [f stringFromNumber:[NSNumber numberWithFloat:currency]];
 }
 
-+ (int) denominationDecimals
++ (int) currencyDecimalPlaces
+{
+    int decimalPlaces = 5;
+    if ([[[User Singleton] denominationLabel] isEqualToString:@"uBTC"])
+        decimalPlaces = 2;
+    else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
+        decimalPlaces = 3;
+    return decimalPlaces;
+}
+
++ (int) maxDecimalPlaces
 {
     int decimalPlaces = 8;
-    if ([[[User Singleton] denominationLabel] isEqualToString:@"uBTC"])
+    if ([[[User Singleton] denominationLabel] isEqualToString:@"µBTC"])
         decimalPlaces = 2;
     else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
         decimalPlaces = 5;
     return decimalPlaces;
+}
+
++ (int64_t) cleanNumString:(NSString *) value
+{
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    NSNumber *num = [f numberFromString:value];
+    return [num longLongValue];
 }
 
 + (NSString *)formatSatoshi: (int64_t) amount
@@ -380,9 +398,14 @@
 
 + (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol
 {
+    return [CoreBridge formatSatoshi:amount withSymbol:symbol overrideDecimals:-1];
+}
+
++ (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol overrideDecimals:(int) decimals
+{
     tABC_Error error;
     char *pFormatted = NULL;
-    int decimalPlaces = [self denominationDecimals];
+    int decimalPlaces = [self maxDecimalPlaces];
     bool negative = amount < 0;
     amount = llabs(amount);
     if (ABC_FormatAmount(amount, &pFormatted, decimalPlaces, &error) != ABC_CC_Ok)
@@ -391,6 +414,7 @@
     }
     else
     {
+        decimalPlaces = decimals > -1 ? decimals : decimalPlaces;
         NSMutableString *formatted = [[NSMutableString alloc] init];
         if (negative)
             [formatted appendString: @"("];
@@ -404,9 +428,9 @@
         const char *start = (decimal == NULL) ? p + strlen(p) : decimal;
         int offset = (start - pFormatted) % 3;
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        for (int i = 0; i < strlen(pFormatted) || p - decimal <= decimalPlaces; ++i, ++p)
+        for (int i = 0; i < strlen(pFormatted) && p - start <= decimalPlaces; ++i, ++p)
         {
-            if (p < decimal)
+            if (p < start)
             {
                 if (i != 0 && (i - offset) % 3 == 0)
                     [formatted appendString:[f groupingSeparator]];
@@ -427,8 +451,10 @@
 + (int64_t) denominationToSatoshi: (NSString *) amount
 {
     int64_t parsedAmount;
-    int decimalPlaces = [self denominationDecimals];
-    if (ABC_ParseAmount([amount UTF8String], &parsedAmount, decimalPlaces) != ABC_CC_Ok)
+    int decimalPlaces = [self maxDecimalPlaces];
+#warning TODO this should be handled by the ABC_ParseAmount...maybe
+    NSString *cleanAmount = [amount stringByReplacingOccurrencesOfString:@"," withString:@""];
+    if (ABC_ParseAmount([cleanAmount UTF8String], &parsedAmount, decimalPlaces) != ABC_CC_Ok)
     {
 #warning TODO handle error
     }

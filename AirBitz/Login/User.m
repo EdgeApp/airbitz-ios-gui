@@ -71,8 +71,8 @@ static User *singleton = nil;  // this will be the one and only object this stat
             self.denominationLabel = [NSString stringWithUTF8String: pSettings->bitcoinDenomination.szLabel];
             if ([self.denominationLabel isEqualToString:@"mBTC"])
                 self.denominationLabelShort = @"mB ";
-            else if ([self.denominationLabel isEqualToString:@"uBTC"])
-                self.denominationLabelShort = @"uB ";
+            else if ([self.denominationLabel isEqualToString:@"μBTC"])
+                self.denominationLabelShort = @"μB ";
             else
                 self.denominationLabelShort = @"B ";
         }

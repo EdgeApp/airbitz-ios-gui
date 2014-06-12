@@ -105,7 +105,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         "mBTC", 100000
     },
     {
-        "uBTC", 100
+        "μBTC", 100
     }
 };
 
@@ -751,7 +751,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	if (indexPath.row == ROW_UBITCOIN)
 	{
-		cell.name.text = NSLocalizedString(@"uBitcoin = (0.000001 Bitcoin)", @"settings text");
+		cell.name.text = NSLocalizedString(@"μBitcoin = (0.000001 Bitcoin)", @"settings text");
 	}
 	cell.radioButton.image = [UIImage imageNamed:(indexPath.row == [self denominationChoice] ? @"btn_selected" : @"btn_unselected")];
 
@@ -834,7 +834,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		}
 		if (indexPath.row == 3)
 		{
-			cell.textField.placeholder = NSLocalizedString(@"Nickname / Handle", @"settings text");
+			cell.textField.placeholder = NSLocalizedString(@"Nickname / Handle (optional)", @"settings text");
             cell.textField.returnKeyType = UIReturnKeyDone;
             if (_pAccountSettings->szNickname)
             {
@@ -871,7 +871,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		if (indexPath.row == 0)
 		{
-			cell.name.text = NSLocalizedString(@"Send name on payment", @"settings text");
+			cell.name.text = NSLocalizedString(@"Send name on payment request", @"settings text");
             [cell.state setOn:_pAccountSettings->bNameOnPayments animated:NO];
 		}
 	}
@@ -1057,7 +1057,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	if (section == SECTION_USERNAME)
 	{
-		label.text = NSLocalizedString(@"USERNAME", @"section header in settings table");
+		label.text = NSLocalizedString(@"ACCOUNT:", @"section header in settings table");
 	}
     if (section == SECTION_NAME)
 	{
