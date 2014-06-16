@@ -11,6 +11,7 @@
 @interface Transaction : NSObject
 
 @property (nonatomic, copy)     NSString        *strID;
+@property (nonatomic, copy)     NSString        *strMallealbeID;
 @property (nonatomic, copy)     NSString        *strWalletUUID;
 @property (nonatomic, copy)     NSString        *strWalletName;
 @property (nonatomic, copy)     NSString        *strName;

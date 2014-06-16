@@ -215,13 +215,15 @@
     transaction.minerFees = pTrans->pDetails->amountFeesMinersSatoshi;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
-#warning TODO: Hardcoded confirmations...Need to add the info to our structs or cut-it-out
-    transaction.confirmations = 3;
     transaction.bConfirmed = NO;
+    if (pTrans->szMalleableTxId) {
+        transaction.strMallealbeID = [NSString stringWithUTF8String: pTrans->szMalleableTxId];
+    }
+    transaction.confirmations = [self calcTxConfirmations:wallet withTxId:transaction.strMallealbeID];
     if (transaction.strName) {
         transaction.strAddress = transaction.strName;
     } else {
-        transaction.strAddress = @"1zf76dh4TG";
+        transaction.strAddress = @"";
     }
     NSMutableArray *addresses = [[NSMutableArray alloc] init];
     for (int i = 0; i < pTrans->countAddresses; ++i)
@@ -229,6 +231,32 @@
         [addresses addObject:[NSString stringWithUTF8String: pTrans->aAddresses[i]]];
     }
     transaction.addresses = addresses;
+}
+
++ (unsigned int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId
+{
+    tABC_Error Error;
+    unsigned int txHeight = 0;
+    unsigned int blockHeight = 0;
+    if ([wallet.strUUID length] == 0 || [txId length] == 0)
+    {
+        return 0;
+    }
+    if (ABC_TxHeight([wallet.strUUID UTF8String], [txId UTF8String], &txHeight, &Error) != ABC_CC_Ok)
+    {
+        NSLog(@("Error: CoreBridge.calcTxConfirmations:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
+        return 0;
+    }
+    if (ABC_BlockHeight([wallet.strUUID UTF8String], &blockHeight, &Error) != ABC_CC_Ok)
+    {
+        NSLog(@("Error: CoreBridge.calcTxConfirmations:  %s\n"), Error.szDescription);
+        [Util printABC_Error:&Error];
+        return 0;
+    }
+    if (txHeight == 0 || blockHeight == 0)
+        return 0;
+    return (blockHeight - txHeight) + 1;
 }
 
 + (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions 
