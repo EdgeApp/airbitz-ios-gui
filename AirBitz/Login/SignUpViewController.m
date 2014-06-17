@@ -702,7 +702,6 @@
 		[User Singleton].name = self.userNameTextField.text;
 		[User Singleton].password = self.passwordTextField.text;
         [[User Singleton] loadSettings];
-        [CoreBridge startWatchers];
 
         // now that the account is created, create the first wallet
 		[self createFirstWallet];
@@ -791,6 +790,7 @@ void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
         }
 		else if (pResults->requestType == ABC_RequestType_CreateWallet)
 		{
+            [CoreBridge startWatchers];
 			if (pResults->pRetData)
             {
                 //controller.strWalletUUID = [NSString stringWithFormat:@"%s", (char *)pResults->pRetData];
