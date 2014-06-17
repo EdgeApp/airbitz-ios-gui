@@ -266,7 +266,7 @@ typedef enum eAppMode
 		{
 			if (_selectedViewController != _requestViewController)
 			{
-				if(([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
+				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
                     _requestViewController.walletUUID = self.strWalletUUID;
 					[_selectedViewController.view removeFromSuperview];
@@ -285,7 +285,7 @@ typedef enum eAppMode
 		{
 			if (_selectedViewController != _sendViewController)
 			{
-				if(([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
+				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
 					tABC_CC result;
 					tABC_WalletInfo **walletInfo;
@@ -329,7 +329,7 @@ typedef enum eAppMode
 		{
 			if (_selectedViewController != _walletsViewController)
 			{
-				if (([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
+				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
 					[_selectedViewController.view removeFromSuperview];
 					_selectedViewController = _walletsViewController;
@@ -346,7 +346,7 @@ typedef enum eAppMode
 		case APP_MODE_SETTINGS:
 			if (_selectedViewController != _settingsViewController)
 			{
-				if (([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
+				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
 					[_selectedViewController.view removeFromSuperview];
 					_selectedViewController = _settingsViewController;

@@ -42,6 +42,11 @@ static User *singleton = nil;  // this will be the one and only object this stat
     return singleton;
 }
 
++(bool) isLoggedIn
+{
+    return [User Singleton].name.length && [User Singleton].password.length;
+}
+
 - (id)init
 {
     self = [super init];

@@ -139,6 +139,9 @@ typedef enum eLoginMode
 		{
 			NSLog(@"%@", [NSString stringWithFormat:@"Sign-in failed:\n%s", Error.szDescription]);
 			self.invalidMessage.hidden = NO;
+
+            [User Singleton].name = nil;
+            [User Singleton].password = nil; 
 		}
 		
 		//NSLog(@"Done calling sign-in");
@@ -463,11 +466,17 @@ typedef enum eLoginMode
        // NSLog(@"%@", @"Successfully Signed In");
 		[self.delegate loginViewControllerDidLogin];
 		self.invalidMessage.hidden = YES;
+
+        [User Singleton].name = self.userNameTextField.text;
+        [User Singleton].password = self.passwordTextField.text;
     }
     else
     {
         NSLog(@"%@", [NSString stringWithFormat:@"Sign-in failed\n%@", _strReason]);
 		self.invalidMessage.hidden = NO;
+
+        [User Singleton].name = nil;
+        [User Singleton].password = nil; 
     }
 }
 
