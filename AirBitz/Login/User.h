@@ -22,6 +22,7 @@
 + (void)initAll;
 + (void)freeAll;
 +(User *)Singleton;
++(bool) isLoggedIn;
 
 -(id)init;
 -(void)clear;
