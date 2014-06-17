@@ -155,6 +155,7 @@
 	{
 		self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
 	}
+    [self updateFeeFieldContents];
 	
 	if (self.amountToSendSatoshi)
 	{
@@ -339,14 +340,29 @@
 	 {
 		 _sendStatusController.view.alpha = 1.0;
 	 }
-					 completion:^(BOOL finished)
+     completion:^(BOOL finished)
 	 {
 	 }];
 }
 
+- (void)hideSendStatus
+{
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+    {
+        _sendStatusController.view.alpha = 0.0;
+    }
+    completion:^(BOOL finished)
+    {
+        [_sendStatusController.view removeFromSuperview];
+        _sendStatusController = nil;
+    }];
+}
+
 - (void)initiateSendRequest
 {
-	//[self showSendStatus];
 	tABC_Error Error;
 	tABC_CC result;
 	tABC_WalletInfo **aWalletInfo = NULL;
@@ -440,6 +456,20 @@
 	 {
 	 }];
 	
+}
+
+- (void)failedToSend:(NSArray *)params
+{
+    NSString *title = params[0];
+    NSString *message = params[1];
+    UIAlertView *alert = [[UIAlertView alloc]
+                            initWithTitle:title
+                            message:message
+                            delegate:nil
+                            cancelButtonTitle:@"OK"
+                            otherButtonTitles:nil];
+    [alert show];
+    [self hideSendStatus];
 }
 
 - (void)sendBitcoinComplete:(NSString *)transactionID
@@ -554,8 +584,13 @@
                                                     overrideDecimals:[CoreBridge currencyDecimalPlaces]];
 		}
 	}
-    // Calculate fees
+    [self updateFeeFieldContents];
+}
+
+- (void)updateFeeFieldContents
+{
     int64_t fees = 0;
+	tABC_Error error;
     if ([CoreBridge calcSendFees:self.wallet.strUUID
                           sendTo:self.sendToAddress
                     amountToSend:self.amountToSendSatoshi
@@ -715,8 +750,6 @@
 
 void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 {
-	// NSLog(@"Request callback");
-    
     if (pResults)
     {
         SendConfirmationViewController *controller = (__bridge id)pResults->pData;
@@ -727,34 +760,28 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
         {
             if (pResults->bSuccess)
             {
-                [controller performSelectorOnMainThread:@selector(sendBitcoinComplete:) withObject:[NSString stringWithUTF8String:pResults->pRetData] waitUntilDone:FALSE];
+                [controller performSelectorOnMainThread:@selector(sendBitcoinComplete:)
+                                             withObject:[NSString stringWithUTF8String:pResults->pRetData]
+                                          waitUntilDone:FALSE];
                 free(pResults->pRetData);
-            }
-            else
-            {
+            } else {
                 free(pResults->pRetData);
-
-                [controller.view removeFromSuperview];
-                controller = nil;
-
                 NSString *title = NSLocalizedString(@"Error during send", nil);
                 NSString *message;
-                if (pResults->errorInfo.code == ABC_CC_InsufficientFunds)
+                if (pResults->errorInfo.code == ABC_CC_InsufficientFunds) {
                     message =
                         NSLocalizedString(@"You do not have enough funds to send this transaction.", nil);
-                else if (pResults->errorInfo.code == ABC_CC_ServerError)
+                } else if (pResults->errorInfo.code == ABC_CC_ServerError) {
                     message =
                         NSLocalizedString([NSString stringWithUTF8String:pResults->errorInfo.szDescription], nil);
-                else
+                } else {
                     message =
                         NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);
-                UIAlertView *alert = [[UIAlertView alloc]
-                                        initWithTitle:title
-                                        message:message
-                                        delegate:nil
-                                        cancelButtonTitle:@"OK"
-                                        otherButtonTitles:nil];
-                [alert show];
+                }
+                NSArray *params = [NSArray arrayWithObjects: title, message, nil];
+                [controller performSelectorOnMainThread:@selector(failedToSend:) 
+                                             withObject:params
+                                          waitUntilDone:FALSE];
             }
         }
     }
