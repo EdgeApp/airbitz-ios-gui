@@ -702,10 +702,11 @@
 		[User Singleton].name = self.userNameTextField.text;
 		[User Singleton].password = self.passwordTextField.text;
         [[User Singleton] loadSettings];
-        [CoreBridge startWatchers];
 
         // now that the account is created, create the first wallet
 		[self createFirstWallet];
+
+        [CoreBridge startWatchers];
     }
     else
     {
