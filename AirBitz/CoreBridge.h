@@ -33,6 +33,7 @@
 + (NSString *)conversionString: (int) currencyNumber;
 + (void)logout;
 + (void)startWatchers;
++ (void)startWatcher: (NSString *) walletUUID;
 + (void)stopWatchers;
 + (void)watchAddresses:(NSString *) walletUUID;
 + (bool)calcSendFees:(NSString *) walletUUID 

@@ -521,19 +521,24 @@
 + (void)startWatchers
 {
     NSLog(@("startWatchers\n"));
-    tABC_Error Error;
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
     NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
     [CoreBridge loadWallets: arrayWallets archived:arrayArchivedWallets];
-    for(Wallet * wallet in arrayWallets)
+    for (Wallet * wallet in arrayWallets)
     {
-        NSLog(@("ABC_WatcherStart(%@, %@, %@)\n"), [User Singleton].name, [User Singleton].password, wallet.strUUID);
-        ABC_WatcherStart([[User Singleton].name UTF8String],
-                         [[User Singleton].password UTF8String],
-                         [wallet.strUUID UTF8String], &Error);
-        [CoreBridge watchAddresses: wallet.strUUID];
-        [Util printABC_Error:&Error];
+        [self startWatcher:wallet.strUUID];
     }
+}
+
++ (void)startWatcher: (NSString *) walletUUID
+{
+    tABC_Error Error;
+    NSLog(@("ABC_WatcherStart(%@)\n"), walletUUID);
+    ABC_WatcherStart([[User Singleton].name UTF8String],
+                     [[User Singleton].password UTF8String],
+                     [walletUUID UTF8String], &Error);
+    [CoreBridge watchAddresses: walletUUID];
+    [Util printABC_Error:&Error];
 }
 
 + (void)stopWatchers

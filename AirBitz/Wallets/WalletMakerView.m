@@ -12,6 +12,7 @@
 #import "CommonTypes.h"
 #import "OfflineWalletViewController.h"
 #import "Util.h"
+#import "CoreBridge.h"
 
 @interface WalletMakerView () <ButtonSelectorDelegate, UITextFieldDelegate>
 {
@@ -337,25 +338,18 @@
 
 void ABC_Wallet_Maker_Request_Callback(const tABC_RequestResults *pResults)
 {
-    //NSLog(@"Request callback");
-
     if (pResults)
     {
-        WalletMakerView *controller = (__bridge id)pResults->pData;
-        controller.bSuccess = (BOOL)pResults->bSuccess;
+        WalletMakerView *controller = (__bridge id) pResults->pData;
+        controller.bSuccess = (BOOL) pResults->bSuccess;
         controller.strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
         if (pResults->requestType == ABC_RequestType_CreateWallet)
 		{
-			if (pResults->pRetData)
+			if (pResults->pRetData && controller.bSuccess)
             {
-                //controller.strWalletUUID = [NSString stringWithFormat:@"%s", (char *)pResults->pRetData];
+                [CoreBridge startWatcher:[NSString stringWithFormat:@"%s", (char *) pResults->pRetData]];
                 free(pResults->pRetData);
             }
-            else
-            {
-                //controller.strWalletUUID = @"(Unknown UUID)";
-            }
-            //NSLog(@"Create wallet completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
             [controller performSelectorOnMainThread:@selector(createWalletComplete) withObject:nil waitUntilDone:FALSE];
 		}
     }
