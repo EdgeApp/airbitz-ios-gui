@@ -705,6 +705,8 @@
 
         // now that the account is created, create the first wallet
 		[self createFirstWallet];
+
+        [CoreBridge startWatchers];
     }
     else
     {
