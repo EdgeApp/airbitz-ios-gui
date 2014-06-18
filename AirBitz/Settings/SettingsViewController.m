@@ -1384,7 +1384,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)buttonOnlyCellButtonPressed:(ButtonOnlyCell *)cell
 {
     NSInteger section = (cell.tag >> 8);
-    NSLog(@"section: %d \n", section);
     if (section == SECTION_LOGOUT) {
         [[User Singleton] clear];
         [self.delegate SettingsViewControllerDone:self];

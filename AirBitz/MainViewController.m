@@ -450,7 +450,7 @@ typedef enum eAppMode
     /* If we aren't on the selector view, then just notify the user */
     if (_selectedViewController != _requestViewController || _txDetailsController != nil)
     {
-        NSLog(@("Showing Notification\n"));
+        NSLog(@"Showing Notification\n");
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         localNotification.alertBody = [NSString stringWithFormat:@"Received funds"];
         localNotification.soundName = UILocalNotificationDefaultSoundName;
@@ -459,7 +459,7 @@ typedef enum eAppMode
     }
     else
     {
-        NSLog(@("Launching Receiving page\n"));
+        NSLog(@"Launching Receiving page\n");
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
         _sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
 
