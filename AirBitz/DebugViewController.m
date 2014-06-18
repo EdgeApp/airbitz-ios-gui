@@ -15,6 +15,9 @@
 {
 }
 
+@property (nonatomic, weak) IBOutlet UILabel *versionLabel;
+@property (nonatomic, weak) IBOutlet UILabel *networkLabel;
+
 @end
 
 @implementation DebugViewController
@@ -30,6 +33,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
+    self.versionLabel.text = infoDictionary[(NSString*)kCFBundleVersionKey];
+#if NETWORK_FAKE
+    self.networkLabel.text = @"Fake";
+#else
+    self.networkLabel.text = @"Mainnet";
+#endif
 }
 
 - (void)didReceiveMemoryWarning

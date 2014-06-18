@@ -12,7 +12,6 @@
 
 @interface DebugViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet UIButton *clearWatcherButton;
 @property (assign)          id<DebugViewControllerDelegate>  delegate;
 
 @end
