@@ -3,6 +3,7 @@
 #import "ABC.h"
 #import "Wallet.h"
 #import "Transaction.h"
+#import "TxOutput.h"
 #import "ABC.h"
 #import "User.h"
 #import "Util.h"
@@ -225,12 +226,17 @@
     } else {
         transaction.strAddress = @"";
     }
-    NSMutableArray *addresses = [[NSMutableArray alloc] init];
-    for (int i = 0; i < pTrans->countAddresses; ++i)
+    NSMutableArray *outputs = [[NSMutableArray alloc] init];
+    for (int i = 0; i < pTrans->countOutputs; ++i)
     {
-        [addresses addObject:[NSString stringWithUTF8String: pTrans->aAddresses[i]]];
+        TxOutput *output = [[TxOutput alloc] init];
+        output.strAddress = [NSString stringWithUTF8String: pTrans->aOutputs[i]->szAddress];
+        output.bInput = pTrans->aOutputs[i]->input;
+        output.value = pTrans->aOutputs[i]->value;
+
+        [outputs addObject:output];
     }
-    transaction.addresses = addresses;
+    transaction.outputs = outputs;
 }
 
 + (unsigned int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId

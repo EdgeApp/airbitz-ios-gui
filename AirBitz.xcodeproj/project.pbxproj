@@ -90,6 +90,7 @@
 		4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
 		4C9E919C1922B3C500F01423 /* comp_13-offline_wallet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */; };
 		684C0E521936B97000AB9807 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
+		6861FE681950DFB100CDF24E /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861FE671950DFB100CDF24E /* TxOutput.m */; };
 		686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
 		686C24851935605900F8E445 /* libobelisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24841935605900F8E445 /* libobelisk.a */; };
 		686C24871935608400F8E445 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
@@ -619,6 +620,8 @@
 		4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
 		4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_13-offline_wallet.jpg"; sourceTree = "<group>"; };
 		684C0E511936B97000AB9807 /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = AirBitz/ABC/libsodium.a; sourceTree = "<group>"; };
+		6861FE661950DFB100CDF24E /* TxOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TxOutput.h; path = "ABC Data/TxOutput.h"; sourceTree = "<group>"; };
+		6861FE671950DFB100CDF24E /* TxOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TxOutput.m; path = "ABC Data/TxOutput.m"; sourceTree = "<group>"; };
 		686C24821935601400F8E445 /* libbitcoin-client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libbitcoin-client.a"; path = "AirBitz/ABC/libbitcoin-client.a"; sourceTree = "<group>"; };
 		686C24841935605900F8E445 /* libobelisk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libobelisk.a; path = AirBitz/ABC/libobelisk.a; sourceTree = "<group>"; };
 		686C24861935608400F8E445 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = AirBitz/ABC/libzmq.a; sourceTree = "<group>"; };
@@ -1143,6 +1146,8 @@
 		4C08A6E318C2B1B60071B87C /* ABC Data */ = {
 			isa = PBXGroup;
 			children = (
+				6861FE661950DFB100CDF24E /* TxOutput.h */,
+				6861FE671950DFB100CDF24E /* TxOutput.m */,
 				4C08A6E418C2B1D50071B87C /* Wallet.h */,
 				4C08A6E518C2B1D50071B87C /* Wallet.m */,
 				4C08A6E718C53BDA0071B87C /* Transaction.h */,
@@ -2538,6 +2543,7 @@
 				B5050569193FD014007D4960 /* GDrive.m in Sources */,
 				B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */,
 				B5C0A97618EA0A42008F302C /* BD_Phone_Cell.m in Sources */,
+				6861FE681950DFB100CDF24E /* TxOutput.m in Sources */,
 				B5C0A99318EA0BAC008F302C /* MoreCategoriesViewController.m in Sources */,
 				B5137C3718A435BD00DA4A34 /* CDataScanner_Extensions.m in Sources */,
 				B5C0A97818EA0A42008F302C /* BusinessDetailsViewController.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import <AddressBook/AddressBook.h>
 #import "TransactionDetailsViewController.h"
+#import "TxOutput.h"
 #import "CoreBridge.h"
 #import "User.h"
 #import "NSDate+Helper.h"
@@ -281,19 +282,24 @@
 	NSString* path = [[NSBundle mainBundle] pathForResource:@"transactionDetails" ofType:@"html"];
 	NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
 
-	NSMutableString *addresses = [[NSMutableString alloc] init];
-    for (NSString *s in self.transaction.addresses)
-    {
-        [addresses appendFormat: @("%@<BR>"), s];
+	NSMutableString *inAddresses = [[NSMutableString alloc] init];
+	NSMutableString *outAddresses = [[NSMutableString alloc] init];
+    for (TxOutput *t in self.transaction.outputs) {
+        NSString *val = [CoreBridge formatSatoshi:t.value];
+        if (t.bInput) {
+            [inAddresses appendFormat: @("%@<BR>%@<BR>"), t.strAddress, val];
+        } else {
+            [outAddresses appendFormat: @("%@<BR>%@<BR>"), t.strAddress, val];
+        }
     }
 	//transaction ID
 	content = [content stringByReplacingOccurrencesOfString:@"*1" withString:self.transaction.strID];
 	//Total sent
-	content = [content stringByReplacingOccurrencesOfString:@"*2" withString: [CoreBridge formatSatoshi:self.transaction.amountSatoshi]];
+	content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[CoreBridge formatSatoshi:self.transaction.amountSatoshi]];
 	//source
-	content = [content stringByReplacingOccurrencesOfString:@"*3" withString:addresses];
+	content = [content stringByReplacingOccurrencesOfString:@"*3" withString:inAddresses];
 	//Destination
-	content = [content stringByReplacingOccurrencesOfString:@"*4" withString:addresses];
+	content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
 	//Miner Fee
     NSString * fees = [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false];
 	content = [content stringByReplacingOccurrencesOfString:@"*5" withString:fees];

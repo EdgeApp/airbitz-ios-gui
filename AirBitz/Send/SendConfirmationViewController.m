@@ -522,9 +522,9 @@
 				 */
 
 				NSString *address;
-				if(txInfo->countAddresses)
+				if(txInfo->countOutputs)
 				{
-					address = [NSString stringWithUTF8String:txInfo->aAddresses[0]];
+					address = [NSString stringWithUTF8String:txInfo->aOutputs[0]->szAddress];
 				}
 				else
 				{
