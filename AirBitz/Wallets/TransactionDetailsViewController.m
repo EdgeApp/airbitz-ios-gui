@@ -286,14 +286,18 @@
 	NSMutableString *outAddresses = [[NSMutableString alloc] init];
     for (TxOutput *t in self.transaction.outputs) {
         NSString *val = [CoreBridge formatSatoshi:t.value];
+        NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"https://blockchain.info/address/%@\">%@</a></div><div>%@</div>"),
+                t.strAddress, t.strAddress, val];
         if (t.bInput) {
-            [inAddresses appendFormat: @("%@<BR>%@<BR>"), t.strAddress, val];
+            [inAddresses appendString:html];
         } else {
-            [outAddresses appendFormat: @("%@<BR>%@<BR>"), t.strAddress, val];
+            [outAddresses appendString:html];
         }
     }
+    NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"https://blockchain.info/tx/%@\">%@</a></div>",
+                                self.transaction.strMallealbeID, self.transaction.strMallealbeID];
 	//transaction ID
-	content = [content stringByReplacingOccurrencesOfString:@"*1" withString:self.transaction.strMallealbeID];
+	content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
 	//Total sent
 	content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[CoreBridge formatSatoshi:self.transaction.amountSatoshi]];
 	//source
@@ -301,7 +305,7 @@
 	//Destination
 	content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
 	//Miner Fee
-    NSString * fees = [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false];
+    NSString * fees = [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees];
 	content = [content stringByReplacingOccurrencesOfString:@"*5" withString:fees];
 	iv.htmlInfoToDisplay = content;
 	[self.view addSubview:iv];
