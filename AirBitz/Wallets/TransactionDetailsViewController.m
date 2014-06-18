@@ -293,7 +293,7 @@
         }
     }
 	//transaction ID
-	content = [content stringByReplacingOccurrencesOfString:@"*1" withString:self.transaction.strID];
+	content = [content stringByReplacingOccurrencesOfString:@"*1" withString:self.transaction.strMallealbeID];
 	//Total sent
 	content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[CoreBridge formatSatoshi:self.transaction.amountSatoshi]];
 	//source
