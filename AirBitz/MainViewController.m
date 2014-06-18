@@ -542,6 +542,8 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         NSString *txId = [NSString stringWithUTF8String:pInfo->szTxID];
         NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
         [mainId performSelectorOnMainThread:@selector(launchReceiving:) withObject:params waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:mainId];
     }
 }
 
