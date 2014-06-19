@@ -421,4 +421,67 @@
         return @"";
 }
 
+// gets the recover questions for a given account
+// nil is returned if there were no questions for this account
++ (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName
+{
+    NSMutableArray *arrayQuestions = nil;
+    char *szQuestions = NULL;
+
+    tABC_Error Error;
+    tABC_CC result = ABC_GetRecoveryQuestions([strUserName UTF8String],
+                                              &szQuestions,
+                                              &Error);
+    if (ABC_CC_Ok == result)
+    {
+        if (szQuestions)
+        {
+            if (strlen(szQuestions))
+            {
+                // create an array of strings by pulling each question that is seperated by a newline
+                arrayQuestions = [[NSMutableArray alloc] initWithArray:[[NSString stringWithUTF8String:szQuestions] componentsSeparatedByString: @"\n"]];
+                // remove empties
+                [arrayQuestions removeObject:@""];
+            }
+        }
+    }
+    else
+    {
+        [Util printABC_Error:&Error];
+    }
+
+    if (szQuestions)
+    {
+        free(szQuestions);
+    }
+
+    return arrayQuestions;
+}
+
++ (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName
+{
+    BOOL bValid = NO;
+    bool bABCValid = false;
+
+    tABC_Error Error;
+    tABC_CC result = ABC_CheckRecoveryAnswers([strUserName UTF8String],
+                                              [strAnswers UTF8String],
+                                              &bABCValid,
+                                              &Error);
+    if (ABC_CC_Ok == result)
+    {
+        if (bABCValid == true)
+        {
+            bValid = YES;
+        }
+    }
+    else
+    {
+        [Util printABC_Error:&Error];
+    }
+
+    return bValid;
+}
+
+
 @end

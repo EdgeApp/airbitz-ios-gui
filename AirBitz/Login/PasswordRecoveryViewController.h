@@ -11,7 +11,8 @@
 typedef enum ePassRecovMode
 {
     PassRecovMode_SignUp,
-    PassRecovMode_Change
+    PassRecovMode_Change,
+    PassRecovMode_Recover
 } tPassRecovMode;
 
 @protocol PasswordRecoveryViewControllerDelegate;
@@ -20,6 +21,8 @@ typedef enum ePassRecovMode
 
 @property (assign)              id<PasswordRecoveryViewControllerDelegate>  delegate;
 @property (nonatomic, assign)   tPassRecovMode                              mode;
+@property (nonatomic, strong)   NSArray                                     *arrayQuestions; // used for recover only
+@property (nonatomic, copy)     NSString                                    *strUserName;    // used for recover only
 
 @end
 

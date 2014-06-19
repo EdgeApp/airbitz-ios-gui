@@ -28,5 +28,8 @@
 + (NSString *)formatSatoshi: (int64_t) bitcoin withSymbol:(bool) symbol overrideDecimals:(int) decimals;
 + (int64_t) denominationToSatoshi: (NSString *) amount;
 + (NSString *)conversionString: (int) currencyNumber;
++ (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName;
++ (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName;
+
 
 @end

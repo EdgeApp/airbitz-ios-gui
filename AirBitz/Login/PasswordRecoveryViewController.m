@@ -12,6 +12,7 @@
 #import "User.h"
 #import "MontserratLabel.h"
 #import "Util.h"
+#import "CoreBridge.h"
 
 #define IS_IPHONE5                  (([[UIScreen mainScreen] bounds].size.height == 568) ? YES : NO)
 
@@ -91,19 +92,27 @@ typedef enum eAlertType
     self.buttonBlocker.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
 
-    // get the questions
-    [self blockUser:YES];
-    tABC_Error Error;
-    tABC_CC result = ABC_GetQuestionChoices([[User Singleton].name UTF8String],
-                           PW_ABC_Request_Callback,
-                           (__bridge void *)self,
-                           &Error);
-    [Util printABC_Error:&Error];
-
-    if (ABC_CC_Ok != result)
+    if ((self.mode == PassRecovMode_SignUp) || (self.mode == PassRecovMode_Change))
     {
-        [self blockUser:NO];
-        NSLog(@"%@",  [NSString stringWithFormat:@"GetQuestionChoices failed:\n%s", Error.szDescription]);
+        // get the questions
+        [self blockUser:YES];
+        tABC_Error Error;
+        tABC_CC result = ABC_GetQuestionChoices([[User Singleton].name UTF8String],
+                                                PW_ABC_Request_Callback,
+                                                (__bridge void *)self,
+                                                &Error);
+        [Util printABC_Error:&Error];
+
+        if (ABC_CC_Ok != result)
+        {
+            [self blockUser:NO];
+            NSLog(@"%@",  [NSString stringWithFormat:@"GetQuestionChoices failed:\n%s", Error.szDescription]);
+        }
+    }
+    else
+    {
+        _bSuccess = YES;
+        [self getPasswordRecoveryQuestionsComplete];
     }
 }
 
@@ -165,13 +174,13 @@ typedef enum eAlertType
 		if ([view isKindOfClass:[QuestionAnswerView class]])
 		{
 			QuestionAnswerView *qaView = (QuestionAnswerView *)view;
-			if (qaView.questionSelected == NO)
+			if ((self.mode != PassRecovMode_Recover) && (qaView.questionSelected == NO))
 			{
 				allQuestionsSelected = NO;
 				break;
 			}
 			//verify that all six answers have achieved their minimum character limit
-			if (qaView.answerField.satisfiesMinimumCharacters == NO)
+			if ((self.mode != PassRecovMode_Recover) && (qaView.answerField.satisfiesMinimumCharacters == NO))
 			{
 				allAnswersValid = NO;
 			}
@@ -186,14 +195,21 @@ typedef enum eAlertType
 				[questions appendString:[qaView question]];
 				[answers appendString:[qaView answer]];
 			}
+            count++;
 		}
-		count++;
 	}
 	if (allQuestionsSelected)
 	{
 		if (allAnswersValid)
 		{
-			[self commitQuestions:questions andAnswersToABC:answers];
+            if (self.mode == PassRecovMode_Recover)
+            {
+                [self recoverWithAnswers:answers];
+            }
+            else
+            {
+                [self commitQuestions:questions andAnswersToABC:answers];
+            }
 		}
 		else
 		{
@@ -232,6 +248,7 @@ typedef enum eAlertType
         self.imageSkip.hidden = NO;
         self.buttonBack.hidden = YES;
         [self.completeSignupButton setTitle:NSLocalizedString(@"Complete Signup", @"") forState:UIControlStateNormal];
+        [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
     }
     else if (mode == PassRecovMode_Change)
     {
@@ -239,11 +256,39 @@ typedef enum eAlertType
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
         [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
+        [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
+    }
+    else if (mode == PassRecovMode_Recover)
+    {
+        self.buttonSkip.hidden = YES;
+        self.imageSkip.hidden = YES;
+        self.buttonBack.hidden = NO;
+        [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
+        [self.labelTitle setText:NSLocalizedString(@"Password Recovery", @"")];
+    }
+}
+
+- (void)recoverWithAnswers:(NSString *)strAnswers
+{
+    NSLog(@"checking answers: %s", [strAnswers UTF8String]);
+    if ([CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName])
+    {
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
+							  message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
+							  delegate:nil
+							  cancelButtonTitle:@"OK"
+							  otherButtonTitles:nil];
+		[alert show];
     }
 }
 
 - (void)commitQuestions:(NSString *)strQuestions andAnswersToABC:(NSString *)strAnswers
 {
+    NSLog(@"commiting answers: %s", [strAnswers UTF8String]);
     [self blockUser:YES];
 	tABC_Error Error;
 	tABC_CC result;
@@ -424,6 +469,15 @@ typedef enum eAlertType
 		for(int i = 0; i < NUM_QUESTION_ANSWER_BLOCKS; i++)
 		{
 			QuestionAnswerView *qav = [QuestionAnswerView CreateInsideView:self.scrollView withDelegate:self];
+
+            if (self.mode == PassRecovMode_Recover)
+            {
+                [qav disableSelecting];
+                if ([self.arrayQuestions count] > i)
+                {
+                    qav.labelQuestion.text = [self.arrayQuestions objectAtIndex:i];
+                }
+            }
 			
 			CGRect frame = qav.frame;
 			frame.origin.x = (self.scrollView.frame.size.width - frame.size.width ) / 2;
@@ -653,7 +707,15 @@ void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
 
     if (viewNext != NULL)
     {
-        [viewNext presentQuestionChoices];
+        if (self.mode == PassRecovMode_Recover)
+        {
+            // place the cursor in the answer
+            [viewNext.answerField becomeFirstResponder];
+        }
+        else
+        {
+            [viewNext presentQuestionChoices];
+        }
     }
 }
 
