@@ -30,7 +30,7 @@
         self.date = [NSDate date];
         self.strCategory = @"";
         self.strNotes = @"";
-        self.addresses = [[NSArray alloc] init];
+        self.outputs = [[NSArray alloc] init];
     }
     return self;
 }

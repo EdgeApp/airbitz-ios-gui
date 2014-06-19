@@ -640,6 +640,11 @@ typedef enum eAddressPickerType
     _walletUUID = wallet.strUUID;
 }
 
+-(void) resetViews
+{
+    [_qrViewController Back];
+}
+
 #pragma mark - ShowWalletQRViewController delegates
 
 - (void)ShowWalletQRViewControllerDone:(ShowWalletQRViewController *)controller

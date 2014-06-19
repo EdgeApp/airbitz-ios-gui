@@ -16,6 +16,7 @@
 #import "ButtonCell.h"
 #import "ButtonOnlyCell.h"
 #import "SignUpViewController.h"
+#import "DebugViewController.h"
 #import "PasswordRecoveryViewController.h"
 #import "PopupPickerView.h"
 #import "PopupWheelPickerView.h"
@@ -34,7 +35,14 @@
 #define SECTION_OPTIONS                 3
 #define SECTION_DEFAULT_EXCHANGE        4
 #define SECTION_LOGOUT                  5
+#define SECTION_DEBUG                   6
+
+// If we are in debug include the DEBUG section in settings
+#if DEBUG
+#define SECTION_COUNT                   7
+#else 
 #define SECTION_COUNT                   6
+#endif
 
 #define DENOMINATION_CHOICES            3
 
@@ -110,7 +118,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 };
 
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate, DebugViewControllerDelegate>
 {
     tABC_Currency                   *_aCurrencies;
     int                             _currencyCount;
@@ -120,6 +128,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     SignUpViewController            *_signUpController;
     PasswordRecoveryViewController  *_passwordRecoveryController;
     CategoriesViewController        *_categoriesController;
+    DebugViewController             *_debugViewController;
     BOOL                            _bKeyboardIsShown;
     CGRect                          _frameStart;
     CGFloat                         _keyboardHeight;
@@ -375,6 +384,28 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
          {
          }];
     }
+}
+
+- (void)bringUpDebugView
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    _debugViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DebugViewController"];
+    _debugViewController.delegate = self;
+
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _debugViewController.view.frame = frame;
+    [self.view addSubview:_debugViewController.view];
+
+    [UIView animateWithDuration:0.35
+                            delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                        animations:^
+    {
+        _debugViewController.view.frame = self.view.bounds;
+    }
+    completion:^(BOOL finished) {
+    }];
 }
 
 // returns how much the current first responder is obscured by the keyboard
@@ -964,20 +995,31 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (ButtonOnlyCell *)getButtonOnlyCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
 {
-	ButtonOnlyCell *cell;
-	static NSString *cellIdentifier = @"ButtonOnlyCell";
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (nil == cell)
-	{
-		cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	cell.delegate = self;
-	//[cell.button setTitle:NSLocalizedString(@"Change Categories", @"settings text") forState:UIControlStateNormal]; //cw temp replace this button with log out functionality
-	[cell.button setTitle:NSLocalizedString(@"Log Out", @"settings text") forState:UIControlStateNormal];
-	
+    ButtonOnlyCell *cell;
+    static NSString *cellIdentifier = @"ButtonOnlyCell";
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.delegate = self;
+    [cell.button setTitle:NSLocalizedString(@"Log Out", @"settings text") forState:UIControlStateNormal];
     cell.tag = (indexPath.section << 8) | (indexPath.row);
+    return cell;
+}
 
+- (ButtonOnlyCell *)getDebugButton:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
+{
+    ButtonOnlyCell *cell;
+    static NSString *cellIdentifier = @"ButtonOnlyCell";
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.delegate = self;
+    [cell.button setTitle:NSLocalizedString(@"Debug", @"debug text") forState:UIControlStateNormal];
+    cell.tag = (indexPath.section << 8) | (indexPath.row);
 	return cell;
 }
 
@@ -1015,6 +1057,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         case SECTION_LOGOUT:
             return 1;
             break;
+
+        case SECTION_DEBUG:
+            return 1;
+            break;
             
         default:
             return 0;
@@ -1024,7 +1070,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if ((indexPath.section == SECTION_OPTIONS) || (indexPath.section == SECTION_LOGOUT))
+	if ((indexPath.section == SECTION_OPTIONS) 
+            || (indexPath.section == SECTION_LOGOUT)
+            || (indexPath.section == SECTION_DEBUG))
 	{
 		return 47.0;
 	}
@@ -1034,7 +1082,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	if (section == SECTION_LOGOUT)
+	if (section == SECTION_LOGOUT || section == SECTION_DEBUG)
 	{
 		return 0.0;
 	}
@@ -1065,25 +1113,22 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	if (section == SECTION_OPTIONS)
 	{
-        //label.text = @" ";
 		label.text = NSLocalizedString(@"OPTIONS", @"section header in settings table");
 	}
 	if (section == SECTION_DEFAULT_EXCHANGE)
 	{
 		label.text = NSLocalizedString(@"DEFAULT EXCHANGE", @"section header in settings table");
 	}
-	
 	return cell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell;
-	//UIColor *backgroundColor;
-    if (indexPath.section == SECTION_LOGOUT)
-	{
-		// logout button
+    if (indexPath.section == SECTION_LOGOUT) {
 		cell = [self getButtonOnlyCellForTableView:tableView withIndexPath:indexPath];
+	} else if (indexPath.section == SECTION_DEBUG) {
+		cell = [self getDebugButton:tableView withIndexPath:indexPath];
 	}
 	else
 	{
@@ -1197,6 +1242,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_LOGOUT:
+            break;
+
+        case SECTION_DEBUG:
             break;
 
         default:
@@ -1335,9 +1383,13 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)buttonOnlyCellButtonPressed:(ButtonOnlyCell *)cell
 {
-	//log out for now
-	[[User Singleton] clear];
-	[self.delegate SettingsViewControllerDone:self];
+    NSInteger section = (cell.tag >> 8);
+    if (section == SECTION_LOGOUT) {
+        [[User Singleton] clear];
+        [self.delegate SettingsViewControllerDone:self];
+    } else if (section == SECTION_DEBUG) {
+        [self bringUpDebugView];
+    }
 }
 
 #pragma mark - Popup Picker Delegate Methods
@@ -1402,6 +1454,13 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)PopupWheelPickerViewCancelled:(PopupWheelPickerView *)view userData:(id)data
 {
     [self dismissPopupPicker];
+}
+
+
+-(void) sendDebugViewControllerDidFinish:(DebugViewController *)controller
+{
+	[controller.view removeFromSuperview];
+	_debugViewController = nil;
 }
 
 @end

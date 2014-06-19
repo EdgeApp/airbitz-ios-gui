@@ -89,6 +89,12 @@
 		4C90463D18C9244900179D9C /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463C18C9244900179D9C /* libiconv.dylib */; };
 		4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
 		4C9E919C1922B3C500F01423 /* comp_13-offline_wallet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */; };
+		684C0E521936B97000AB9807 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
+		6861FE681950DFB100CDF24E /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861FE671950DFB100CDF24E /* TxOutput.m */; };
+		6868AD1319516D7A006C3716 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6868AD1219516D7A006C3716 /* DebugViewController.m */; };
+		686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
+		686C24851935605900F8E445 /* libobelisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24841935605900F8E445 /* libobelisk.a */; };
+		686C24871935608400F8E445 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
@@ -614,6 +620,14 @@
 		4C9E91981922AB7400F01423 /* OfflineWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineWalletViewController.h; sourceTree = "<group>"; };
 		4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
 		4C9E919B1922B3C500F01423 /* comp_13-offline_wallet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "comp_13-offline_wallet.jpg"; sourceTree = "<group>"; };
+		684C0E511936B97000AB9807 /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = AirBitz/ABC/libsodium.a; sourceTree = "<group>"; };
+		6861FE661950DFB100CDF24E /* TxOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TxOutput.h; path = "ABC Data/TxOutput.h"; sourceTree = "<group>"; };
+		6861FE671950DFB100CDF24E /* TxOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TxOutput.m; path = "ABC Data/TxOutput.m"; sourceTree = "<group>"; };
+		6868AD1119516D7A006C3716 /* DebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugViewController.h; sourceTree = "<group>"; };
+		6868AD1219516D7A006C3716 /* DebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugViewController.m; sourceTree = "<group>"; };
+		686C24821935601400F8E445 /* libbitcoin-client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libbitcoin-client.a"; path = "AirBitz/ABC/libbitcoin-client.a"; sourceTree = "<group>"; };
+		686C24841935605900F8E445 /* libobelisk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libobelisk.a; path = AirBitz/ABC/libobelisk.a; sourceTree = "<group>"; };
+		686C24861935608400F8E445 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = AirBitz/ABC/libzmq.a; sourceTree = "<group>"; };
 		687C1B041927FF81003A83E8 /* CoreBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBridge.h; sourceTree = "<group>"; };
 		687C1B051927FF81003A83E8 /* CoreBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreBridge.m; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
@@ -1076,6 +1090,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				684C0E521936B97000AB9807 /* libsodium.a in Frameworks */,
+				686C24871935608400F8E445 /* libzmq.a in Frameworks */,
+				4C08A6E218C29CEF0071B87C /* libz.a in Frameworks */,
+				686C24851935605900F8E445 /* libobelisk.a in Frameworks */,
 				4C90463D18C9244900179D9C /* libiconv.dylib in Frameworks */,
 				B5F2E9A618D3BFEF008ACF88 /* libboost_system.a in Frameworks */,
 				4C90463B18C9242700179D9C /* CoreVideo.framework in Frameworks */,
@@ -1090,9 +1108,9 @@
 				B5137C2018A41ABA00DA4A34 /* libc++.dylib in Frameworks */,
 				B5137C1E18A41AAC00DA4A34 /* CFNetwork.framework in Frameworks */,
 				4C08A6E118C29CEF0071B87C /* libssl.a in Frameworks */,
-				4C08A6E218C29CEF0071B87C /* libz.a in Frameworks */,
 				B5675B4E18A17F6F002E0703 /* CoreGraphics.framework in Frameworks */,
 				B5675B5018A17F6F002E0703 /* UIKit.framework in Frameworks */,
+				686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */,
 				B5F2E9A718D3BFEF008ACF88 /* libwallet.a in Frameworks */,
 				4C08A6DE18C29CEF0071B87C /* libjansson.a in Frameworks */,
 				4C08A6DC18C29CEF0071B87C /* libcrypto.a in Frameworks */,
@@ -1131,6 +1149,8 @@
 		4C08A6E318C2B1B60071B87C /* ABC Data */ = {
 			isa = PBXGroup;
 			children = (
+				6861FE661950DFB100CDF24E /* TxOutput.h */,
+				6861FE671950DFB100CDF24E /* TxOutput.m */,
 				4C08A6E418C2B1D50071B87C /* Wallet.h */,
 				4C08A6E518C2B1D50071B87C /* Wallet.m */,
 				4C08A6E718C53BDA0071B87C /* Transaction.h */,
@@ -1391,6 +1411,10 @@
 		B5675B4A18A17F6F002E0703 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				684C0E511936B97000AB9807 /* libsodium.a */,
+				686C24861935608400F8E445 /* libzmq.a */,
+				686C24841935605900F8E445 /* libobelisk.a */,
+				686C24821935601400F8E445 /* libbitcoin-client.a */,
 				4C90463C18C9244900179D9C /* libiconv.dylib */,
 				4C90463A18C9242700179D9C /* CoreVideo.framework */,
 				4C90463818C9242100179D9C /* CoreAudio.framework */,
@@ -1436,6 +1460,8 @@
 				B561E1A918D2573F002DCDC2 /* DarkenView.h */,
 				B561E1AA18D2573F002DCDC2 /* DarkenView.m */,
 				4C7247CF193564D20091C286 /* DateTime.h */,
+				6868AD1119516D7A006C3716 /* DebugViewController.h */,
+				6868AD1219516D7A006C3716 /* DebugViewController.m */,
 				B505FB49193F7AC1007D4960 /* Google Drive */,
 				4C7247D0193564D20091C286 /* DateTime.m */,
 				4C5D8C52192AA1940015BB3C /* DDData */,
@@ -2511,6 +2537,7 @@
 				B5C0A9A018EA0C10008F302C /* topOverviewCell.m in Sources */,
 				B5137C3818A435BD00DA4A34 /* NSDictionary_JSONExtensions.m in Sources */,
 				B5C0A98C18EA0B80008F302C /* Annotation.m in Sources */,
+				6868AD1319516D7A006C3716 /* DebugViewController.m in Sources */,
 				B5C0A97718EA0A42008F302C /* BD_Website_Cell.m in Sources */,
 				B55A031418EA55C700845090 /* ButtonCell.m in Sources */,
 				B5137C3618A435BD00DA4A34 /* CDataScanner.m in Sources */,
@@ -2522,6 +2549,7 @@
 				B5050569193FD014007D4960 /* GDrive.m in Sources */,
 				B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */,
 				B5C0A97618EA0A42008F302C /* BD_Phone_Cell.m in Sources */,
+				6861FE681950DFB100CDF24E /* TxOutput.m in Sources */,
 				B5C0A99318EA0BAC008F302C /* MoreCategoriesViewController.m in Sources */,
 				B5137C3718A435BD00DA4A34 /* CDataScanner_Extensions.m in Sources */,
 				B5C0A97818EA0A42008F302C /* BusinessDetailsViewController.m in Sources */,

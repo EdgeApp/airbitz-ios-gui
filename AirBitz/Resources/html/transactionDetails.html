@@ -5,26 +5,37 @@
 <title>Airbitz Info</title>
 <style type="text/css">
 <!--
-.style1 {font-family: Verdana, Arial, Helvetica, sans-serif}
-.style2 {font-size: 12px}
+* {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px}
+.container { padding: 5px; }
+.wrapped { width: 100%; word-wrap:break-word; }
+.header { font-weight: bold; }
+.section { margin-bottom: 20px; }
 -->
 </style>
 </head>
 
-<body class="style1">
-<p class="style2"><strong>Transaction ID</strong><BR />
-  *1<BR />
-  <BR />
-  <strong>Total Sent</strong><BR />
-  *2<BR />
-  <BR />
-  <strong>Source</strong><BR />
-  *3<BR />
-  <BR />
-  <strong>Destination</strong><BR />
-  *4<BR />
-  <BR />
-  <strong>Miner Fee</strong><BR />
-  *5</p>
+<body>
+    <div class="container">
+        <div class="section">
+            <div class="header">Transaction ID</div>
+            *1
+        </div>
+        <div class="section">
+            <div class="header">Total Sent</div>
+            *2
+        </div>
+        <div class="section">
+            <div class="header">Source</div>
+            *3
+        </div>
+        <div class="section">
+            <div class="header">Destination</div>
+            *4
+        </div>
+        <div class="section">
+            <div class="header">Miner Fee</div>
+            *5
+        </div>
+    </div>
 </body>
 </html>

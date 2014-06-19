@@ -48,6 +48,7 @@
 @property (nonatomic, weak) IBOutlet UIButton               *maxAmountButton;
 @property (nonatomic, weak) IBOutlet UILabel                *conversionLabel;
 @property (weak, nonatomic) IBOutlet UILabel                *labelPINTitle;
+@property (weak, nonatomic) IBOutlet UILabel                *txFeesLabel;
 @property (weak, nonatomic) IBOutlet UIImageView            *imagePINEmboss;
 @property (nonatomic, weak) IBOutlet UITextField            *withdrawlPIN;
 @property (nonatomic, weak) IBOutlet UIView                 *confirmSliderContainer;
@@ -154,6 +155,7 @@
 	{
 		self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
 	}
+    [self updateFeeFieldContents];
 	
 	if (self.amountToSendSatoshi)
 	{
@@ -338,14 +340,29 @@
 	 {
 		 _sendStatusController.view.alpha = 1.0;
 	 }
-					 completion:^(BOOL finished)
+     completion:^(BOOL finished)
 	 {
 	 }];
 }
 
+- (void)hideSendStatus
+{
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+    {
+        _sendStatusController.view.alpha = 0.0;
+    }
+    completion:^(BOOL finished)
+    {
+        [_sendStatusController.view removeFromSuperview];
+        _sendStatusController = nil;
+    }];
+}
+
 - (void)initiateSendRequest
 {
-	//[self showSendStatus];
 	tABC_Error Error;
 	tABC_CC result;
 	tABC_WalletInfo **aWalletInfo = NULL;
@@ -441,6 +458,20 @@
 	
 }
 
+- (void)failedToSend:(NSArray *)params
+{
+    NSString *title = params[0];
+    NSString *message = params[1];
+    UIAlertView *alert = [[UIAlertView alloc]
+                            initWithTitle:title
+                            message:message
+                            delegate:nil
+                            cancelButtonTitle:@"OK"
+                            otherButtonTitles:nil];
+    [alert show];
+    [self hideSendStatus];
+}
+
 - (void)sendBitcoinComplete:(NSString *)transactionID
 {
 	[self performSelector:@selector(showTransactionDetails:) withObject:transactionID afterDelay:3.0]; //show sending screen for 3 seconds
@@ -491,9 +522,9 @@
 				 */
 
 				NSString *address;
-				if(txInfo->countAddresses)
+				if(txInfo->countOutputs)
 				{
-					address = [NSString stringWithUTF8String:txInfo->aAddresses[0]];
+					address = [NSString stringWithUTF8String:txInfo->aOutputs[0]->szAddress];
 				}
 				else
 				{
@@ -553,26 +584,49 @@
                                                     overrideDecimals:[CoreBridge currencyDecimalPlaces]];
 		}
 	}
-    // Calculate fees
-    int64_t fees = MAX(10000, MIN(30000, (int64_t) ((double) self.amountToSendSatoshi * 0.0001)));
-    double currencyFees = 0.0;
-    NSMutableString *coinFeeString = [[NSMutableString alloc] init];
-    NSMutableString *fiatFeeString = [[NSMutableString alloc] init];
-    [coinFeeString appendString:@"+ "];
-    [coinFeeString appendString:[CoreBridge formatSatoshi:fees withSymbol:false]];
-    [coinFeeString appendString:@" fees "];
-    [coinFeeString appendString:[User Singleton].denominationLabel];
+    [self updateFeeFieldContents];
+}
 
-    if (ABC_SatoshiToCurrency(fees, &currencyFees, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
+- (void)updateFeeFieldContents
+{
+    int64_t fees = 0;
+	tABC_Error error;
+    if ([CoreBridge calcSendFees:self.wallet.strUUID
+                          sendTo:self.sendToAddress
+                    amountToSend:self.amountToSendSatoshi
+                  storeResultsIn:&fees])
     {
-        [fiatFeeString appendString:@"+ "];
-        [fiatFeeString appendString:[CoreBridge formatCurrency: currencyFees withSymbol:false]];
-        [fiatFeeString appendString:@" fees "];
-        [fiatFeeString appendString:@"USD"];
-    }
-	self.amountBTCLabel.text = coinFeeString; 
-    self.amountUSDLabel.text = fiatFeeString;
+        double currencyFees = 0.0;
+        self.conversionLabel.textColor = [UIColor whiteColor];
+        self.amountBTCTextField.textColor = [UIColor whiteColor];
+        self.amountUSDTextField.textColor = [UIColor whiteColor];
 
+        NSMutableString *coinFeeString = [[NSMutableString alloc] init];
+        NSMutableString *fiatFeeString = [[NSMutableString alloc] init];
+        [coinFeeString appendString:@"+ "];
+        [coinFeeString appendString:[CoreBridge formatSatoshi:fees withSymbol:false]];
+        [coinFeeString appendString:@" "];
+        [coinFeeString appendString:[User Singleton].denominationLabel];
+
+        if (ABC_SatoshiToCurrency(fees, &currencyFees, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
+        {
+            [fiatFeeString appendString:@"+ "];
+            [fiatFeeString appendString:[CoreBridge formatCurrency: currencyFees withSymbol:false]];
+            [fiatFeeString appendString:@" "];
+            [fiatFeeString appendString:@"USD"];
+        }
+        self.amountBTCLabel.text = coinFeeString; 
+        self.amountUSDLabel.text = fiatFeeString;
+        self.conversionLabel.text = [CoreBridge conversionString:DOLLAR_CURRENCY_NUM];
+    }
+    else
+    {
+        NSString *message = NSLocalizedString(@"Insufficient funds", nil);
+        self.conversionLabel.text = message;
+        self.conversionLabel.textColor = [UIColor redColor];
+        self.amountBTCTextField.textColor = [UIColor redColor];
+        self.amountUSDTextField.textColor = [UIColor redColor];
+    }
     [self alineTextFields:self.amountBTCLabel alignWith:self.amountBTCTextField];
     [self alineTextFields:self.amountUSDLabel alignWith:self.amountUSDTextField];
 }
@@ -594,6 +648,7 @@
     childField.size.width = newWidth;
     child.frame = childField;
 }
+
 
 #pragma mark - UITextField delegates
 
@@ -695,8 +750,6 @@
 
 void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 {
-	// NSLog(@"Request callback");
-    
     if (pResults)
     {
         SendConfirmationViewController *controller = (__bridge id)pResults->pData;
@@ -705,10 +758,31 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
 		
         if (pResults->requestType == ABC_RequestType_SendBitcoin)
         {
-			
-            //NSLog(@"Sign-in completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
-            [controller performSelectorOnMainThread:@selector(sendBitcoinComplete:) withObject:[NSString stringWithUTF8String:pResults->pRetData] waitUntilDone:FALSE];
-			free(pResults->pRetData);
+            if (pResults->bSuccess)
+            {
+                [controller performSelectorOnMainThread:@selector(sendBitcoinComplete:)
+                                             withObject:[NSString stringWithUTF8String:pResults->pRetData]
+                                          waitUntilDone:FALSE];
+                free(pResults->pRetData);
+            } else {
+                free(pResults->pRetData);
+                NSString *title = NSLocalizedString(@"Error during send", nil);
+                NSString *message;
+                if (pResults->errorInfo.code == ABC_CC_InsufficientFunds) {
+                    message =
+                        NSLocalizedString(@"You do not have enough funds to send this transaction.", nil);
+                } else if (pResults->errorInfo.code == ABC_CC_ServerError) {
+                    message =
+                        NSLocalizedString([NSString stringWithUTF8String:pResults->errorInfo.szDescription], nil);
+                } else {
+                    message =
+                        NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);
+                }
+                NSArray *params = [NSArray arrayWithObjects: title, message, nil];
+                [controller performSelectorOnMainThread:@selector(failedToSend:) 
+                                             withObject:params
+                                          waitUntilDone:FALSE];
+            }
         }
     }
 }

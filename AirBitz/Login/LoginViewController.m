@@ -12,6 +12,7 @@
 #import "User.h"
 #import "StylizedTextField.h"
 #import "Util.h"
+#import "CoreBridge.h"
 #import "Config.h"
 #import "PasswordRecoveryViewController.h"
 #import "CoreBridge.h"
@@ -135,6 +136,7 @@ typedef enum eLoginMode
 			[User Singleton].name = self.userNameTextField.text;
 			[User Singleton].password = self.passwordTextField.text;
 			[[User Singleton] loadSettings];
+            [CoreBridge startWatchers];
 		}
 		else
 		{

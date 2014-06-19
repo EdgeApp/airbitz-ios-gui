@@ -7,11 +7,15 @@
 #import "Wallet.h"
 #import "Transaction.h"
 
+#define CONFIRMED_CONFIRMATION_COUNT 6
 
 @interface CoreBridge : NSObject
 
 + (void)loadWallets: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (void)reloadWallet: (Wallet *) wallet;
++ (Wallet *)getWallet: (NSString *)walletUUID;
++ (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
+
 + (void)setWalletOrder: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (bool)setWalletAttributes: (Wallet *) wallet;
 
@@ -30,6 +34,14 @@
 + (NSString *)conversionString: (int) currencyNumber;
 + (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName;
 + (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName;
-
++ (void)logout;
++ (void)startWatchers;
++ (void)startWatcher: (NSString *) walletUUID;
++ (void)stopWatchers;
++ (void)watchAddresses:(NSString *) walletUUID;
++ (bool)calcSendFees:(NSString *) walletUUID 
+                 sendTo:(NSString *) destAddr 
+           amountToSend:(int64_t) sendAmount
+         storeResultsIn:(int64_t *) totalFees;
 
 @end

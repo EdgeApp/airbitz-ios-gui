@@ -8,6 +8,7 @@
 
 #import <AddressBook/AddressBook.h>
 #import "TransactionDetailsViewController.h"
+#import "TxOutput.h"
 #import "CoreBridge.h"
 #import "User.h"
 #import "NSDate+Helper.h"
@@ -168,8 +169,9 @@
     self.notesTextField.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
 
-    NSMutableString *coinFormatted = 
-        [CoreBridge formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees)];
+	NSMutableString *coinFormatted = [[NSMutableString alloc] init];
+    [coinFormatted appendString:
+        [CoreBridge formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees)]];
     if (self.transaction.amountSatoshi < 0)
     {
         [coinFormatted appendFormat:@" + %@ fee",
@@ -281,21 +283,30 @@
 	NSString* path = [[NSBundle mainBundle] pathForResource:@"transactionDetails" ofType:@"html"];
 	NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
 
-	NSMutableString *addresses = [[NSMutableString alloc] init];
-    for (NSString *s in self.transaction.addresses)
-    {
-        [addresses appendFormat: @("%@<BR>"), s];
+	NSMutableString *inAddresses = [[NSMutableString alloc] init];
+	NSMutableString *outAddresses = [[NSMutableString alloc] init];
+    for (TxOutput *t in self.transaction.outputs) {
+        NSString *val = [CoreBridge formatSatoshi:t.value];
+        NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"https://blockchain.info/address/%@\">%@</a></div><div>%@</div>"),
+                t.strAddress, t.strAddress, val];
+        if (t.bInput) {
+            [inAddresses appendString:html];
+        } else {
+            [outAddresses appendString:html];
+        }
     }
+    NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"https://blockchain.info/tx/%@\">%@</a></div>",
+                                self.transaction.strMallealbeID, self.transaction.strMallealbeID];
 	//transaction ID
-	content = [content stringByReplacingOccurrencesOfString:@"*1" withString:self.transaction.strID];
+	content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
 	//Total sent
-	content = [content stringByReplacingOccurrencesOfString:@"*2" withString: [CoreBridge formatSatoshi:self.transaction.amountSatoshi]];
+	content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[CoreBridge formatSatoshi:self.transaction.amountSatoshi]];
 	//source
-	content = [content stringByReplacingOccurrencesOfString:@"*3" withString:addresses];
+	content = [content stringByReplacingOccurrencesOfString:@"*3" withString:inAddresses];
 	//Destination
-	content = [content stringByReplacingOccurrencesOfString:@"*4" withString:addresses];
+	content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
 	//Miner Fee
-    NSString * fees = [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false];
+    NSString * fees = [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees];
 	content = [content stringByReplacingOccurrencesOfString:@"*5" withString:fees];
 	iv.htmlInfoToDisplay = content;
 	[self.view addSubview:iv];

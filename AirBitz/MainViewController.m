@@ -16,11 +16,15 @@
 #import "LoginViewController.h"
 #import "Notifications.h"
 #import "SettingsViewController.h"
+#import "SendStatusViewController.h"
+#import "TransactionDetailsViewController.h"
 #import "User.h"
 #import "Config.h"
 #import "Util.h"
+#import "CoreBridge.h"
 #import "CommonTypes.h"
 
+id mainId;
 
 typedef enum eAppMode
 {
@@ -31,7 +35,7 @@ typedef enum eAppMode
 	APP_MODE_SETTINGS
 } tAppMode;
 
-@interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate, LoginViewControllerDelegate>
+@interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate, LoginViewControllerDelegate, TransactionDetailsViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_diretoryViewController;
@@ -40,6 +44,8 @@ typedef enum eAppMode
 	WalletsViewController       *_walletsViewController;
 	LoginViewController         *_loginViewController;
 	SettingsViewController      *_settingsViewController;
+	SendStatusViewController    *_sendStatusController;
+    TransactionDetailsViewController *_txDetailsController;
 	CGRect                      _originalTabBarFrame;
 	CGRect                      _originalViewFrame;
 	tAppMode                    _appMode;
@@ -243,6 +249,7 @@ typedef enum eAppMode
 
 -(void)launchViewControllerBasedOnAppMode
 {
+    mainId = self;
 	switch(_appMode)
 	{
 		case APP_MODE_DIRECTORY:
@@ -433,12 +440,110 @@ typedef enum eAppMode
 	[self launchViewControllerBasedOnAppMode];
 }
 
+-(void)launchReceiving: (NSArray *) params
+{
+    NSString *walletUUID = params[0];
+    NSString *txId = params[1];
+    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    NSLog(@("launchReceiving: %@ %@ %@\n"), walletUUID, txId, transaction);
+
+    /* If we aren't on the selector view, then just notify the user */
+    if (_selectedViewController != _requestViewController || _txDetailsController != nil)
+    {
+        NSLog(@"Showing Notification\n");
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.alertBody = [NSString stringWithFormat:@"Received funds"];
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        localNotification.applicationIconBadgeNumber = 1;
+        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+    }
+    else
+    {
+        NSLog(@"Launching Receiving page\n");
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+        _sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
+
+        CGRect frame = self.view.bounds;
+        _sendStatusController.view.frame = frame;
+        [self.view addSubview:_sendStatusController.view];
+        _sendStatusController.view.alpha = 0.0;
+        _sendStatusController.messageLabel.text = NSLocalizedString(@"Receiving...", @"status message");
+        _sendStatusController.titleLabel.text = NSLocalizedString(@"Receive Status", @"status title");
+        [UIView animateWithDuration:0.35
+                            delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                        animations:^
+        {
+            _sendStatusController.view.alpha = 1.0;
+        }
+        completion:^(BOOL finished)
+        {
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self launchTransactionDetails:transaction];
+                [_sendStatusController.view removeFromSuperview];
+                _sendStatusController = nil;
+                [_requestViewController resetViews];
+            });
+        }];
+    }
+}
+
+-(void) launchTransactionDetails: (Transaction *)transaction
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    _txDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+    _txDetailsController.transaction = transaction;
+    _txDetailsController.delegate = self;
+    _txDetailsController.bOldTransaction = NO;
+    _txDetailsController.transactionDetailsMode = TD_MODE_RECEIVED;
+
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _txDetailsController.view.frame = frame;
+    [self.view addSubview:_txDetailsController.view];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+    {
+        _txDetailsController.view.frame = self.view.bounds;
+    }
+    completion:^(BOOL finished)
+    {
+    }];
+}
+
+-(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
+{
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+    {
+        CGRect frame = self.view.bounds;
+        frame.origin.x = frame.size.width;
+        _txDetailsController.view.frame = frame;
+    }
+    completion:^(BOOL finished)
+    {
+        [_txDetailsController.view removeFromSuperview];
+        _txDetailsController = nil;
+    }];
+}
+
 #pragma mark - ABC Callbacks
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
     if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin)
     {
+        NSString *walletUUID = [NSString stringWithUTF8String:pInfo->szWalletUUID];
+        NSString *txId = [NSString stringWithUTF8String:pInfo->szTxID];
+        NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
+        [mainId performSelectorOnMainThread:@selector(launchReceiving:) withObject:params waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:mainId];
     }
 }
 

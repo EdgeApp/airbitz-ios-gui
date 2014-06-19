@@ -15,6 +15,8 @@
 @property (assign) id<RequestViewControllerDelegate> delegate;
 @property (nonatomic, strong) NSString  *walletUUID;
 
+-(void) resetViews;
+
 @end
 
 

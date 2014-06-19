@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSString *addressString;
 @property (nonatomic, assign) int64_t amountSatoshi;
 
+- (IBAction)Back;
+
 @end
 
 
