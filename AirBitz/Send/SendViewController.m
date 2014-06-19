@@ -126,6 +126,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)resetViews
+{
+    if (_sendConfirmationViewController)
+    {
+        [_sendConfirmationViewController.view removeFromSuperview];
+        _sendConfirmationViewController = nil;
+    }
+}
 
 #pragma mark - Action Methods
 

@@ -126,6 +126,16 @@ typedef enum eAddressPickerType
     // Dispose of any resources that can be recreated.
 }
 
+- (void)resetViews
+{
+    if (_importWalletViewController)
+    {
+        [_importWalletViewController.view removeFromSuperview];
+        _importWalletViewController = nil;
+    }
+}
+
+
 #pragma mark - Action Methods
 
 - (IBAction)info
@@ -638,11 +648,6 @@ typedef enum eAddressPickerType
     // Update wallet UUID
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
     _walletUUID = wallet.strUUID;
-}
-
--(void) resetViews
-{
-    [_qrViewController Back];
 }
 
 #pragma mark - ShowWalletQRViewController delegates

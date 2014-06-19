@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSString  *walletUUID;
 
+- (void)resetViews;
+
 @end

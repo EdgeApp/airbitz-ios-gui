@@ -501,7 +501,7 @@ typedef enum eAppMode
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
     _txDetailsController.view.frame = frame;
-    [self.view addSubview:_txDetailsController.view];
+    [self.view insertSubview:_txDetailsController.view belowSubview:self.tabBar];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
@@ -557,6 +557,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     {
         NSDictionary *dictData = [notification userInfo];
         self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        [_walletsViewController resetViews];
         [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
     }
 }
@@ -567,6 +568,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     {
         NSDictionary *dictData = [notification userInfo];
         self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        [_sendViewController resetViews];
         [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
     }
 }
@@ -577,6 +579,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     {
         NSDictionary *dictData = [notification userInfo];
         self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        [_requestViewController resetViews];
         [self.tabBar selectButtonAtIndex:APP_MODE_REQUEST];
     }
 }

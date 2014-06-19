@@ -112,6 +112,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)resetViews
+{
+    if (_transactionsController)
+    {
+		 [_transactionsController.view removeFromSuperview];
+		 _transactionsController = nil;
+    }
+}
+
 #pragma mark - Misc Methods
 
 // select the wallet with the given UUID
@@ -121,8 +130,10 @@
     {
         if ([strUUID length])
         {
+            [self resetViews];
             [self reloadWallets];
-            
+            // If the transaction view is open, close it
+
             Wallet *wallet = nil;
 
             // look for the wallet in our arrays
@@ -398,9 +409,9 @@
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_transactionsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
-	
 	_transactionsController.delegate = self;
 	_transactionsController.wallet = wallet;
+
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
 	_transactionsController.view.frame = frame;
@@ -412,18 +423,17 @@
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
-         {
-             _transactionsController.view.frame = self.view.bounds;
-         }
-                         completion:^(BOOL finished)
-         {
-         }];
+        {
+            _transactionsController.view.frame = self.view.bounds;
+        }
+        completion:^(BOOL finished)
+        {
+        }];
     }
     else
     {
         _transactionsController.view.frame = self.view.bounds;
     }
-	
 }
 
 - (void)dismissTransactions
