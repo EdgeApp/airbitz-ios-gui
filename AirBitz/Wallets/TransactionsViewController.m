@@ -763,6 +763,7 @@
 
 - (void)blockHeightChanged:(NSNotification *)notification
 {
+    [CoreBridge reloadWallet: self.wallet];
     [self.tableView reloadData];
 }
 
