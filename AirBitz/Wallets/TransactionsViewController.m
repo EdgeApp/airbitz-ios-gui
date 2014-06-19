@@ -578,9 +578,15 @@
         {
             cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmation", transaction.confirmations];
         }
+        else if (transaction.confirmations >= CONFIRMED_CONFIRMATION_COUNT)
+        {
+            cell.confirmationLabel.textColor = COLOR_POSITIVE;
+            cell.confirmationLabel.text = NSLocalizedString(@"Confirmed", nil);
+        }
         else
         {
             cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmations", transaction.confirmations];
+            cell.confirmationLabel.textColor = COLOR_BALANCE;
         }
 
         //amount

@@ -216,11 +216,11 @@
     transaction.minerFees = pTrans->pDetails->amountFeesMinersSatoshi;
     transaction.strWalletName = wallet.strName;
     transaction.strWalletUUID = wallet.strUUID;
-    transaction.bConfirmed = NO;
     if (pTrans->szMalleableTxId) {
         transaction.strMallealbeID = [NSString stringWithUTF8String: pTrans->szMalleableTxId];
     }
     transaction.confirmations = [self calcTxConfirmations:wallet withTxId:transaction.strMallealbeID];
+    transaction.bConfirmed = transaction.confirmations >= CONFIRMED_CONFIRMATION_COUNT;
     if (transaction.strName) {
         transaction.strAddress = transaction.strName;
     } else {

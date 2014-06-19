@@ -7,6 +7,7 @@
 #import "Wallet.h"
 #import "Transaction.h"
 
+#define CONFIRMED_CONFIRMATION_COUNT 6
 
 @interface CoreBridge : NSObject
 
