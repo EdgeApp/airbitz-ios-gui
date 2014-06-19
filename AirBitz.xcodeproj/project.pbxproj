@@ -2713,8 +2713,6 @@
 					./AirBitz/DL_URLServer,
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
-					"$(PROJECT_DIR)/AirBitz/Google",
-					Drive,
 				);
 				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2745,8 +2743,6 @@
 					./AirBitz/DL_URLServer,
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
-					"$(PROJECT_DIR)/AirBitz/Google",
-					Drive,
 				);
 				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
