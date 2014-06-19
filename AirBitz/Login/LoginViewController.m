@@ -546,7 +546,7 @@ typedef enum eLoginMode
 
 #pragma mark - SignUpViewControllerDelegates
 
-- (void)signupViewControllerDidFinish:(SignUpViewController *)controller
+- (void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
 {
 	[controller.view removeFromSuperview];
 	_signUpController = nil;

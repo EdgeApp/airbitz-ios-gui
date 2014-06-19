@@ -132,7 +132,7 @@
 	 }
 	completion:^(BOOL finished)
 	 {
-		 [self exit];
+		 [self exitWithBackButton:YES];
 	 }];
 }
 
@@ -171,6 +171,7 @@
                     ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szOldPIN, nil);
 
                     [self blockUser:YES];
+
                     result = ABC_ChangePassword([[User Singleton].name UTF8String],
                                                 [[User Singleton].password UTF8String],
                                                 [self.passwordTextField.text UTF8String],
@@ -179,7 +180,20 @@
                                                 (__bridge void *)self,
                                                 &Error);
 
+
+
                     free(szOldPIN);
+                }
+                else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
+                {
+                    [self blockUser:YES];
+                    result = ABC_ChangePasswordWithRecoveryAnswers([self.strUserName UTF8String],
+                                                                   [self.strAnswers UTF8String],
+                                                                   [self.passwordTextField.text UTF8String],
+                                                                   [self.pinTextField.text UTF8String],
+                                                                   ABC_SignUp_Request_Callback,
+                                                                   (__bridge void *)self,
+                                                                   &Error);
                 }
                 else
                 {
@@ -206,6 +220,7 @@
                 }
                 else
                 {
+                    [self blockUser:NO];
                     [self.activityView stopAnimating];
                     [Util printABC_Error:&Error];
                     UIAlertView *alert = [[UIAlertView alloc]
@@ -289,6 +304,26 @@
 
         self.userNameTextField.secureTextEntry = YES;
     }
+    else if (mode == SignUpMode_ChangePasswordUsingAnswers)
+    {
+        self.labelTitle.text = NSLocalizedString(@"Change Password", @"screen title");
+        [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
+        self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
+        self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
+
+        self.labelPIN.hidden = NO;
+        self.pinTextField.hidden = NO;
+        self.imagePIN.hidden = NO;
+        self.imageReenterPassword.hidden = NO;
+        self.passwordTextField.hidden = NO;
+        self.reenterPasswordTextField.hidden = NO;
+        self.labelPasswordInfo.hidden = NO;
+        self.imagePassword.hidden = NO;
+
+        self.reenterPasswordTextField.returnKeyType = UIReturnKeyNext;
+
+        self.userNameTextField.secureTextEntry = YES;
+    }
     else if (mode == SignUpMode_ChangePIN)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
@@ -335,7 +370,7 @@
             [alert show];
         }
     }
-    else // the user name field is used for the old password in this case
+    else if (_mode != SignUpMode_ChangePasswordUsingAnswers) // the user name field is used for the old password in this case
     {
         // if the password is wrong
         if ([[User Singleton].password isEqualToString:self.userNameTextField.text] == NO)
@@ -365,7 +400,7 @@
 	BOOL bNewPasswordFieldsAreValid = YES;
 
     // if we are signing up for a new account or changing our password
-    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePassword))
+    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePassword) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
         double secondsToCrack;
         tABC_Error Error;
@@ -431,7 +466,7 @@
     BOOL bpinNameFieldIsValid = YES;
 
     // if we are signing up for a new account
-    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePIN))
+    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
         // if the pin isn't long enough
         if (self.pinTextField.text.length < MIN_PIN_LENGTH)
@@ -536,7 +571,12 @@
 
 - (void)exit
 {
-	[self.delegate signupViewControllerDidFinish:self];
+    [self exitWithBackButton:NO];
+}
+
+- (void)exitWithBackButton:(BOOL)bBack
+{
+	[self.delegate signupViewControllerDidFinish:self withBackButton:bBack];
 }
 
 #pragma mark - keyboard callbacks

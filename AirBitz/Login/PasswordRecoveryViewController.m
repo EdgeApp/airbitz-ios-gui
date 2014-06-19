@@ -13,6 +13,7 @@
 #import "MontserratLabel.h"
 #import "Util.h"
 #import "CoreBridge.h"
+#import "SignUpViewController.h"
 
 #define IS_IPHONE5                  (([[UIScreen mainScreen] bounds].size.height == 568) ? YES : NO)
 
@@ -28,12 +29,13 @@ typedef enum eAlertType
 	ALERT_TYPE_SKIP_THIS_STEP
 } tAlertType;
 
-@interface PasswordRecoveryViewController () <UIScrollViewDelegate, QuestionAnswerViewDelegate, UIAlertViewDelegate>
+@interface PasswordRecoveryViewController () <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate, UIAlertViewDelegate>
 {
-	float           _completeButtonToEmbossImageDistance;
-	UITextField     *_activeTextField;
-	CGSize          _defaultContentSize;
-	tAlertType      _alertType;
+	float                   _completeButtonToEmbossImageDistance;
+	UITextField             *_activeTextField;
+	CGSize                  _defaultContentSize;
+	tAlertType              _alertType;
+    SignUpViewController    *_signUpController;
 }
 
 @property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
@@ -106,7 +108,7 @@ typedef enum eAlertType
         if (ABC_CC_Ok != result)
         {
             [self blockUser:NO];
-            NSLog(@"%@",  [NSString stringWithFormat:@"GetQuestionChoices failed:\n%s", Error.szDescription]);
+            //NSLog(@"%@",  [NSString stringWithFormat:@"GetQuestionChoices failed:\n%s", Error.szDescription]);
         }
     }
     else
@@ -270,9 +272,10 @@ typedef enum eAlertType
 
 - (void)recoverWithAnswers:(NSString *)strAnswers
 {
-    NSLog(@"checking answers: %s", [strAnswers UTF8String]);
     if ([CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName])
     {
+        // bring up the controller to change the password
+        [self bringUpSignUpViewWithAnswers:strAnswers];
     }
     else
     {
@@ -288,7 +291,6 @@ typedef enum eAlertType
 
 - (void)commitQuestions:(NSString *)strQuestions andAnswersToABC:(NSString *)strAnswers
 {
-    NSLog(@"commiting answers: %s", [strAnswers UTF8String]);
     [self blockUser:YES];
 	tABC_Error Error;
 	tABC_CC result;
@@ -378,6 +380,33 @@ typedef enum eAlertType
     }
 
     return retVal;
+}
+
+- (void)bringUpSignUpViewWithAnswers:(NSString *)strAnswers
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    _signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
+
+    _signUpController.mode = SignUpMode_ChangePasswordUsingAnswers;
+    _signUpController.strUserName = self.strUserName;
+    _signUpController.strAnswers = strAnswers;
+    _signUpController.delegate = self;
+
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _signUpController.view.frame = frame;
+    [self.view addSubview:_signUpController.view];
+
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         _signUpController.view.frame = self.view.bounds;
+     }
+                     completion:^(BOOL finished)
+     {
+     }];
 }
 
 - (void)exit
@@ -716,6 +745,21 @@ void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
         {
             [viewNext presentQuestionChoices];
         }
+    }
+}
+
+#pragma mark - SignUpViewControllerDelegates
+
+-(void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
+{
+	[controller.view removeFromSuperview];
+	_signUpController = nil;
+
+    // if they didn't just hit the back button
+    if (!bBack)
+    {
+        // then we are all done
+        [self exit];
     }
 }
 
