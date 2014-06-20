@@ -90,6 +90,8 @@ typedef enum eAddressPickerType
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
+
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
 }
 
 -(void)awakeFromNib
@@ -103,15 +105,15 @@ typedef enum eAddressPickerType
 	[self loadWalletInfo];
 	self.BTCLabel_TextField.text = [User Singleton].denominationLabel; 
 	self.BTC_TextField.inputView = self.keypadView;
-	self.USDLabel_TextField.text = @"USD";
 	self.USD_TextField.inputView = self.keypadView;
 	self.BTC_TextField.delegate = self;
 	self.USD_TextField.delegate = self;
-    self.exchangeRateLabel.text = [CoreBridge conversionString: DOLLAR_CURRENCY_NUM];
-	
+
 	CGRect frame = self.keypadView.frame;
 	frame.origin.y = frame.origin.y + frame.size.height;
 	self.keypadView.frame = frame;
+
+    [self exchangeRateUpdate:nil]; 
 }
 
 
@@ -124,6 +126,11 @@ typedef enum eAddressPickerType
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)resetViews
@@ -195,17 +202,28 @@ typedef enum eAddressPickerType
     [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress];
 }
 
+#pragma mark - Notification Handlers
+
+- (void)exchangeRateUpdate: (NSNotification *)notification
+{
+    NSLog(@"Updating exchangeRateUpdate");
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+	[self updateTextFieldContents];
+
+    [CoreBridge requestExchangeRateUpdate:wallet.currencyNum];
+}
+
 #pragma mark - Misc Methods
 
 - (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes
 {
 	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
-	
 	tABC_TxDetails details;
 	tABC_CC result;
 	double currency;
 	tABC_Error error;
 
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 	//first need to create a transaction details struct
     details.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
 	
@@ -213,8 +231,8 @@ typedef enum eAddressPickerType
 	details.amountFeesAirbitzSatoshi = 0;
 	details.amountFeesMinersSatoshi = 0;
 	
-	#warning TODO:  hard coded to DOLLAR right now
-	result = ABC_SatoshiToCurrency(details.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+	result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                   details.amountSatoshi, &currency, wallet.currencyNum, &error);
 	if (result == ABC_CC_Ok)
 	{
 		details.amountCurrency = currency;
@@ -222,16 +240,12 @@ typedef enum eAddressPickerType
 
     details.szName = (char *) [strName UTF8String];
     details.szNotes = (char *) [strNotes UTF8String];
-
-	#warning TODO: Need to set up category for this transaction
 	details.szCategory = "";
-
 	details.attributes = 0x0; //for our own use (not used by the core)
 
 	char *pRequestID;
 
     // create the request
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 	result = ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
                                       [[User Singleton].password UTF8String],
                                       [wallet.strUUID UTF8String],
@@ -443,18 +457,23 @@ typedef enum eAddressPickerType
 - (void)updateTextFieldContents
 {
     tABC_Error error;
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    self.exchangeRateLabel.text = [CoreBridge conversionString:wallet];
+    self.USDLabel_TextField.text = wallet.currencySymbol;
 	if (_selectedTextField == self.BTC_TextField)
 	{
 		double currency;
         int64_t satoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
-		if (ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
+		if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                  satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
             self.USD_TextField.text = [CoreBridge formatCurrency:currency withSymbol:false];
 	}
 	else
 	{
 		int64_t satoshi;
 		double currency = [self.USD_TextField.text doubleValue];
-		if (ABC_CurrencyToSatoshi(currency, DOLLAR_CURRENCY_NUM, &satoshi, &error) == ABC_CC_Ok)
+		if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                  currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
             self.BTC_TextField.text = [CoreBridge formatSatoshi:satoshi
                                                      withSymbol:false
                                                overrideDecimals:[CoreBridge currencyDecimalPlaces]];
@@ -648,6 +667,8 @@ typedef enum eAddressPickerType
     // Update wallet UUID
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
     _walletUUID = wallet.strUUID;
+
+    [self updateTextFieldContents];
 }
 
 #pragma mark - ShowWalletQRViewController delegates

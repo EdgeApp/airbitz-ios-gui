@@ -20,8 +20,6 @@
 #import "InfoView.h"
 #import "CommonTypes.h"
 
-#define DOLLAR_CURRENCY_NUM    840
-
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
 #define COLOR_BALANCE  [UIColor colorWithRed:83.0/255.0 green:90.0/255.0 blue:91.0/255.0 alpha:1.0];
@@ -83,6 +81,8 @@
 
     _balanceView = [BalanceView CreateWithDelegate:self];
     _balanceView.frame = self.balanceViewPlaceholder.frame;
+    _balanceView.botDenomination.text = self.wallet.currencySymbol;
+
     [self.balanceViewPlaceholder removeFromSuperview];
     [self.view addSubview:_balanceView];
     self.tableView.delegate = self;
@@ -271,7 +271,8 @@
     double currency;
     tABC_Error error;
 
-    ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+    ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
+                          totalSatoshi, &currency, self.wallet.currencyNum, &error);
     _balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
     _balanceView.topDenomination.text = [User Singleton].denominationLabel;
 
@@ -382,7 +383,8 @@
         tABC_Error error;
 
         // TODO: need to switch to currency selected by user in settings
-        ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+        ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                              satoshi, &currency, self.wallet.currencyNum, &error);
         return [CoreBridge formatCurrency:currency];
     }
     else
@@ -399,11 +401,15 @@
 
 -(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
 {
+    if (_transactionDetailsController) {
+        return;
+    }
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
     _transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
     
     _transactionDetailsController.delegate = self;
     _transactionDetailsController.transaction = transaction;
+    _transactionDetailsController.wallet = self.wallet;
     _transactionDetailsController.bOldTransaction = YES;
     _transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
 
@@ -411,7 +417,6 @@
     frame.origin.x = frame.size.width;
     _transactionDetailsController.view.frame = frame;
     [self.view addSubview:_transactionDetailsController.view];
-    
     
     [UIView animateWithDuration:0.35
                           delay:0.0

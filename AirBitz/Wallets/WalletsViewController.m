@@ -260,7 +260,9 @@
 	
 	double currency;
 	tABC_Error Error;
-	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &Error);
+	ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
+                          [[User Singleton].password UTF8String],
+                          totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &Error);
     [Util printABC_Error:&Error];
     _balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
     _balanceView.topDenomination.text = [User Singleton].denominationLabel;
@@ -297,7 +299,9 @@
 	{
 		double currency;
 		tABC_Error error;
-		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+		ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
+                              [[User Singleton].password UTF8String],
+                              satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
         [Util printABC_Error:&error];
 		return [CoreBridge formatCurrency: currency];
 	}
@@ -407,6 +411,9 @@
 
 - (void)launchTransactionsWithWallet:(Wallet *)wallet animated:(BOOL)bAnimated
 {
+    if (_transactionsController) {
+        return;
+    }
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_transactionsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
 	_transactionsController.delegate = self;

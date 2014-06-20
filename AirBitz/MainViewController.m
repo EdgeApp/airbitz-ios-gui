@@ -444,9 +444,10 @@ typedef enum eAppMode
 {
     NSString *walletUUID = params[0];
     NSString *txId = params[1];
+    Wallet *wallet = [CoreBridge getWallet:walletUUID];
     Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
-    NSLog(@("launchReceiving: %@ %@ %@\n"), walletUUID, txId, transaction);
 
+    NSLog(@("launchReceiving: %@ %@ %@\n"), walletUUID, txId, transaction);
     /* If we aren't on the selector view, then just notify the user */
     if (_selectedViewController != _requestViewController || _txDetailsController != nil)
     {
@@ -465,7 +466,7 @@ typedef enum eAppMode
 
         CGRect frame = self.view.bounds;
         _sendStatusController.view.frame = frame;
-        [self.view addSubview:_sendStatusController.view];
+        [self.view insertSubview:_sendStatusController.view belowSubview:self.tabBar];
         _sendStatusController.view.alpha = 0.0;
         _sendStatusController.messageLabel.text = NSLocalizedString(@"Receiving...", @"status message");
         _sendStatusController.titleLabel.text = NSLocalizedString(@"Receive Status", @"status title");
@@ -480,7 +481,7 @@ typedef enum eAppMode
         {
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self launchTransactionDetails:transaction];
+                [self launchTransactionDetails:wallet withTx:transaction];
                 [_sendStatusController.view removeFromSuperview];
                 _sendStatusController = nil;
                 [_requestViewController resetViews];
@@ -489,10 +490,11 @@ typedef enum eAppMode
     }
 }
 
--(void) launchTransactionDetails: (Transaction *)transaction
+-(void) launchTransactionDetails: (Wallet *)wallet withTx:(Transaction *)transaction
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     _txDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+    _txDetailsController.wallet = wallet;
     _txDetailsController.transaction = transaction;
     _txDetailsController.delegate = self;
     _txDetailsController.bOldTransaction = NO;
@@ -511,6 +513,7 @@ typedef enum eAppMode
     }
     completion:^(BOOL finished)
     {
+        [self showTabBarAnimated:YES];
     }];
 }
 
@@ -544,6 +547,9 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         [mainId performSelectorOnMainThread:@selector(launchReceiving:) withObject:params waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:mainId];
+    } else if (pInfo->eventType == ABC_AsyncEventType_ExchangeRateUpdate) {
+        NSLog(@"Exchange rate change fired!!!!!!!!!!!");
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:mainId];
     }
 }
 

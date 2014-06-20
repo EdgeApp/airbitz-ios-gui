@@ -17,8 +17,6 @@
 #import "Util.h"
 #import "CommonTypes.h"
 
-#define DOLLAR_CURRENCY_NUM 840
-
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate>
 {
 	ConfirmationSliderView              *_confirmationSlider;
@@ -110,6 +108,10 @@
 											 selector:@selector(myTextDidChange:)
 												 name:UITextFieldTextDidChangeNotification
 											   object:self.withdrawlPIN];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(exchangeRateUpdate:)
+                                                 name:NOTIFICATION_EXCHANGE_RATE_CHANGE
+                                               object:nil];
 				
 	_confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
 
@@ -141,15 +143,15 @@
     [super viewWillAppear:animated];
 	self.amountBTCLabel.text = [User Singleton].denominationLabel; 
     self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
-    self.conversionLabel.text = [CoreBridge conversionString:DOLLAR_CURRENCY_NUM];
+    self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
 	self.addressLabel.text = self.sendToAddress;
 	
 	tABC_CC result;
 	double currency;
 	tABC_Error error;
 	
-#warning TODO: eventually pull currency number from the wallet.  Wallet specifies what currency it's in
-	result = ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+	result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                   self.amountToSendSatoshi, &currency, self.wallet.currencyNum, &error);
 				
 	if(result == ABC_CC_Ok)
 	{
@@ -167,14 +169,22 @@
 		self.amountBTCTextField.text = nil;
 		[self.amountUSDTextField becomeFirstResponder];
 	}
+    [self exchangeRateUpdate:nil]; 
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Notification Handlers
+
+- (void)exchangeRateUpdate: (NSNotification *)notification
+{
+    NSLog(@"Updating exchangeRateUpdate");
+	[self updateTextFieldContents];
+    [CoreBridge requestExchangeRateUpdate:self.wallet.currencyNum];
+}
 
 #pragma mark - Actions Methods
 
@@ -369,7 +379,8 @@
     unsigned int nCount;
 	double currency;
 	
-	result = ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &Error);
+	result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                   self.amountToSendSatoshi, &currency, self.wallet.currencyNum, &Error);
 	if (result == ABC_CC_Ok)
 	{
 		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
@@ -435,6 +446,7 @@
 	
 	_transactionDetailsController.delegate = self;
 	_transactionDetailsController.transaction = transaction;
+	_transactionDetailsController.wallet = self.wallet;
     _transactionDetailsController.bOldTransaction = NO;
     _transactionDetailsController.transactionDetailsMode = TD_MODE_SENT;
 	CGRect frame = self.view.bounds;
@@ -506,20 +518,6 @@
 			if (result == ABC_CC_Ok)
 			{
 				_completedTransaction = [[Transaction alloc] init];
-				/*
-				 @property (nonatomic, copy)     NSString        *strID;
-				 @property (nonatomic, copy)     NSString        *strWalletUUID;
-				 @property (nonatomic, copy)     NSString        *strWalletName;
-				 @property (nonatomic, copy)     NSString        *strName;
-				 @property (nonatomic, copy)     NSString        *strAddress;
-				 @property (nonatomic, strong)   NSDate          *date;
-				 @property (nonatomic, assign)   BOOL            bConfirmed;
-				 @property (nonatomic, assign)   unsigned int    confirmations;
-				 @property (nonatomic, assign)   double          amount;
-				 @property (nonatomic, assign)   double          balance;
-				 @property (nonatomic, copy)     NSString        *strCategory;
-				 @property (nonatomic, copy)     NSString        *strNotes;
-				 */
 
 				NSString *address;
 				if(txInfo->countOutputs)
@@ -536,14 +534,11 @@
 				_completedTransaction.strWalletName = [NSString stringWithUTF8String:walletInfo->szName];
 				_completedTransaction.strAddress = address;
 				_completedTransaction.date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)txInfo->timeCreation];
-#warning TODO: what do I do with bConfirmed and comfirmations?
 				_completedTransaction.bConfirmed = NO;
 				_completedTransaction.confirmations = 0;
 
 				_completedTransaction.amountSatoshi = txInfo->pDetails->amountSatoshi;
-#warning TODO: what do I do with balance?
 				_completedTransaction.balance = 0;
-
 				_completedTransaction.strCategory = [NSString stringWithUTF8String:txInfo->pDetails->szCategory];
 				_completedTransaction.strNotes = [NSString stringWithUTF8String:txInfo->pDetails->szNotes];
 
@@ -570,13 +565,15 @@
 	if(_selectedTextField == self.amountBTCTextField)
 	{
         self.amountToSendSatoshi = [CoreBridge denominationToSatoshi: self.amountBTCTextField.text];
-		if (ABC_SatoshiToCurrency(self.amountToSendSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
+		if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                  self.amountToSendSatoshi, &currency, self.wallet.currencyNum, &error) == ABC_CC_Ok)
 			self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
 	}
 	else
 	{
         currency = [self.amountUSDTextField.text doubleValue];
-		if (ABC_CurrencyToSatoshi(currency, DOLLAR_CURRENCY_NUM, &satoshi, &error) == ABC_CC_Ok)
+		if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                  currency, self.wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
 		{
 			self.amountToSendSatoshi = satoshi;
             self.amountBTCTextField.text = [CoreBridge formatSatoshi:satoshi
@@ -608,16 +605,17 @@
         [coinFeeString appendString:@" "];
         [coinFeeString appendString:[User Singleton].denominationLabel];
 
-        if (ABC_SatoshiToCurrency(fees, &currencyFees, DOLLAR_CURRENCY_NUM, &error) == ABC_CC_Ok)
+        if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
+                                  fees, &currencyFees, self.wallet.currencyNum, &error) == ABC_CC_Ok)
         {
             [fiatFeeString appendString:@"+ "];
             [fiatFeeString appendString:[CoreBridge formatCurrency: currencyFees withSymbol:false]];
             [fiatFeeString appendString:@" "];
-            [fiatFeeString appendString:@"USD"];
+            [fiatFeeString appendString:self.wallet.currencySymbol];
         }
         self.amountBTCLabel.text = coinFeeString; 
         self.amountUSDLabel.text = fiatFeeString;
-        self.conversionLabel.text = [CoreBridge conversionString:DOLLAR_CURRENCY_NUM];
+        self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
     }
     else
     {
@@ -635,9 +633,6 @@
 {
     NSDictionary *attributes = @{NSFontAttributeName: parent.font};
     CGSize parentText = [parent.text sizeWithAttributes:attributes];
-
-    NSDictionary *childAttr = @{NSFontAttributeName:child.font};
-    CGSize childText = [child.text sizeWithAttributes:childAttr];
 
     CGRect parentField = parent.frame;
     CGRect childField = child.frame;

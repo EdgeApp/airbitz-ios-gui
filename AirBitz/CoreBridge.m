@@ -10,6 +10,12 @@
 
 #import "CoreBridge.h"
 
+#define CURRENCY_NUM_CAD                124
+#define CURRENCY_NUM_CNY                156
+#define CURRENCY_NUM_MXN                484
+#define CURRENCY_NUM_USD                840
+#define CURRENCY_NUM_EUR                978
+
 @interface CoreBridge ()
 {
 }
@@ -43,11 +49,7 @@
             tABC_WalletInfo *pWalletInfo = aWalletInfo[i];
 
             wallet = [[Wallet alloc] init];
-            wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
-            wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
-            wallet.attributes = pWalletInfo->attributes;
-            wallet.balance = pWalletInfo->balanceSatoshi;
-            wallet.currencyNum = pWalletInfo->currencyNum;
+            [CoreBridge setWallet:wallet withInfo:pWalletInfo];
             [arrayWallets addObject:wallet];
             [self loadTransactions: wallet];
         }
@@ -121,11 +123,7 @@
     if (ABC_CC_Ok == result)
     {
         wallet = [[Wallet alloc] init];
-        wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
-        wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
-        wallet.attributes = 0;
-        wallet.balance = pWalletInfo->balanceSatoshi;
-        wallet.currencyNum = pWalletInfo->currencyNum;
+        [CoreBridge setWallet:wallet withInfo:pWalletInfo];
     }
     else
     {
@@ -201,6 +199,29 @@
         [Util printABC_Error:&Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
+}
+
++ (void)setWallet:(Wallet *) wallet withInfo:(tABC_WalletInfo *) pWalletInfo
+{
+    wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
+    wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
+    wallet.attributes = pWalletInfo->attributes;
+    wallet.balance = pWalletInfo->balanceSatoshi;
+    wallet.currencyNum = pWalletInfo->currencyNum;
+#warning TODO move this to the core
+    if (wallet.currencyNum == CURRENCY_NUM_USD) {
+        wallet.currencySymbol = @"USD";
+    } else if (wallet.currencyNum == CURRENCY_NUM_CAD) {
+        wallet.currencySymbol = @"CAD";
+    } else if (wallet.currencyNum == CURRENCY_NUM_MXN) {
+        wallet.currencySymbol = @"MXN";
+    } else if (wallet.currencyNum == CURRENCY_NUM_CNY) {
+        wallet.currencySymbol = @"CNY";
+    } else if (wallet.currencyNum == CURRENCY_NUM_EUR) {
+        wallet.currencySymbol = @"EUR";
+    } else {
+        wallet.currencySymbol = @"USD";
+    }
 }
 
 + (void)setTransaction:(Wallet *) wallet transaction:(Transaction *) transaction coreTx:(tABC_TxInfo *) pTrans
@@ -495,18 +516,18 @@
     return parsedAmount;
 }
 
-+ (NSString *)conversionString: (int) currencyNumber
++ (NSString *)conversionString:(Wallet *) wallet
 {
     double currency;
     tABC_Error error;
 
     double denomination = [User Singleton].denomination;
     NSString *denominationLabel = [User Singleton].denominationLabel;
-    NSString *currencyLabel = @"USD";
-    tABC_CC result = ABC_SatoshiToCurrency(denomination, &currency, currencyNumber, &error);
+    tABC_CC result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                           denomination, &currency, wallet.currencyNum, &error);
     [Util printABC_Error:&error];
     if (result == ABC_CC_Ok)
-        return [NSString stringWithFormat:@"1.00 %@ = $%.2f %@", denominationLabel, currency, currencyLabel];
+        return [NSString stringWithFormat:@"1.00 %@ = $%.2f %@", denominationLabel, currency, wallet.currencySymbol];
     else
         return @"";
 }
@@ -662,6 +683,18 @@
         return false;
     }
     return true;
+}
+
++ (void)requestExchangeRateUpdate:(int) currencyNum
+{
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        tABC_Error error;
+        ABC_RequestExchangeRateUpdate([[User Singleton].name UTF8String],
+                                      [[User Singleton].password UTF8String],
+                                      currencyNum, &error);
+        [Util printABC_Error: &error];
+    });
 }
 
 @end

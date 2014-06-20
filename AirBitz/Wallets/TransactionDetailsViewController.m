@@ -113,6 +113,9 @@
     _bDoneSentToDelegate = NO;
 
     self.buttonBack.hidden = !self.bOldTransaction;
+    if (_wallet) {
+        _labelFiatName.text = _wallet.currencySymbol;
+    }
 
     self.arrayAutoComplete = @[];
     self.dictImages = [[NSMutableDictionary alloc] init];
@@ -218,7 +221,9 @@
 		{
             double currency;
             tABC_Error error;
-            ABC_SatoshiToCurrency(self.transaction.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+            ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
+                                  [[User Singleton].password UTF8String], 
+                                  self.transaction.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
 		else
