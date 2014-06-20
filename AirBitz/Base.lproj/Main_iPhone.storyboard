@@ -1737,32 +1737,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W2g-GD-h4o">
-                                <rect key="frame" x="13" y="271" width="143" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="27" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Request" backgroundImage="btn_request.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonRequestTouched:" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="VX1-ES-cjU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Skp-Gb-ZuY">
-                                <rect key="frame" x="164" y="271" width="143" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Send" backgroundImage="btn_send.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonSendTouched:" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="wkw-LR-5iJ"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1la-Es-fPE">
-                                <rect key="frame" x="13" y="320" width="294" height="237"/>
+                                <rect key="frame" x="13" y="262" width="294" height="295"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1845,9 +1821,7 @@
                     <connections>
                         <outlet property="balanceViewPlaceholder" destination="3Qw-an-knM" id="uWP-JF-vsP"/>
                         <outlet property="buttonExport" destination="MFx-OC-ubq" id="Wwq-5w-giJ"/>
-                        <outlet property="buttonRequest" destination="W2g-GD-h4o" id="BPi-fL-LIx"/>
                         <outlet property="buttonSearch" destination="wMi-Kk-9gE" id="IZp-8z-djn"/>
-                        <outlet property="buttonSend" destination="Skp-Gb-ZuY" id="ZE9-Au-x5G"/>
                         <outlet property="imageWalletNameEmboss" destination="W7N-ZQ-6wO" id="knp-Pl-OY1"/>
                         <outlet property="searchTextField" destination="WMa-Cy-YRr" id="QCQ-ep-s1L"/>
                         <outlet property="tableView" destination="1la-Es-fPE" id="4pj-UV-ux5"/>
@@ -4414,10 +4388,8 @@
         <image name="btn_import_wallet.png" width="61" height="66"/>
         <image name="btn_info.png" width="25" height="25"/>
         <image name="btn_locateMe.png" width="39" height="39"/>
-        <image name="btn_request.png" width="143" height="41"/>
         <image name="btn_right.png" width="22" height="22"/>
         <image name="btn_search.png" width="32" height="33"/>
-        <image name="btn_send.png" width="143" height="41"/>
         <image name="btn_td_done.png" width="251" height="41"/>
         <image name="comp_09.2-send_bitcoin2.jpg" width="640" height="1136"/>
         <image name="darken_bottom_table_cell.png" width="320" height="111"/>

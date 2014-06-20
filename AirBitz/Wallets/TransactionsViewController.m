@@ -20,7 +20,6 @@
 #import "InfoView.h"
 #import "CommonTypes.h"
 
-
 #define DOLLAR_CURRENCY_NUM    840
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
@@ -28,6 +27,9 @@
 #define COLOR_BALANCE  [UIColor colorWithRed:83.0/255.0 green:90.0/255.0 blue:91.0/255.0 alpha:1.0];
 
 #define TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD 160
+
+#define TABLE_HEADER_HEIGHT 46.0
+#define TABLE_CELL_HEIGHT   72.0
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate>
 {
@@ -86,7 +88,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
-    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonExport, self.buttonRequest, self.buttonSend, self.imageWalletNameEmboss, self.buttonSearch, nil];
+    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonExport, self.imageWalletNameEmboss, self.buttonSearch, nil];
 
     self.textWalletName.text = self.wallet.strName;
     self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
@@ -509,21 +511,52 @@
 
 #pragma mark - UITableView delegates
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([self searchEnabled]) 
+    if (section == 1)
     {
-        return self.arraySearchTransactions.count;
+        if ([self searchEnabled])
+        {
+            return self.arraySearchTransactions.count;
+        }
+        else
+        {
+            return self.wallet.arrayTransactions.count;
+        }
     }
-    else 
+    else
     {
-        return self.wallet.arrayTransactions.count;
+
+        return _bSearchModeEnabled ? 0 : 1;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 72.0;
+    CGFloat height;
+
+    if (indexPath.section == 0)
+    {
+        if (_bSearchModeEnabled)
+        {
+            height = 0.0;
+        }
+        else
+        {
+            height = TABLE_HEADER_HEIGHT;
+        }
+    }
+    else
+    {
+        height = TABLE_CELL_HEIGHT;
+    }
+
+    return height;
 }
 
 - (TransactionCell *)getTransactionCellForTableView:(UITableView *)tableView
@@ -541,105 +574,145 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *finalCell;
     NSInteger row = [indexPath row];
-    TransactionCell *cell;
-    
-    // wallet cell
-    cell = [self getTransactionCellForTableView:tableView];
+    NSInteger section = [indexPath section];
 
-    Transaction *transaction = NULL;
-    if ([self searchEnabled]) 
+    if (section == 0)
     {
-        transaction = [self.arraySearchTransactions objectAtIndex:indexPath.row];
-    }
-    else
-    {
-        transaction = [self.wallet.arrayTransactions objectAtIndex:indexPath.row];
-    }
+        static NSString *cellIdentifier = @"TransactionHeaderCell";
 
-    // date
-    cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
-    
-    // address
-    cell.addressLabel.text = transaction.strAddress;
-
-    // if we are in search  mode
-    if (_bSearchModeEnabled)
-    {
-        // confirmation becomes category
-        cell.confirmationLabel.text = transaction.strCategory;
-
-        // amount - always bitcoin
-        cell.amountLabel.text = [self formatSatoshi:transaction.amountSatoshi useFiat:NO];
-
-        // balance becomes fiat
-        cell.balanceLabel.text = [self formatSatoshi:transaction.amountSatoshi useFiat:YES];
-        cell.balanceLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
-    }
-    else
-    {
-        // confirmations
-        if (transaction.confirmations == 1)
+        finalCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (nil == finalCell)
         {
-            cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmation", transaction.confirmations];
+            finalCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            finalCell.backgroundColor = [UIColor clearColor];
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(0, 0, 143.0, 41.0);
+            [button setBackgroundImage:[UIImage imageNamed:@"btn_request.png"] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
+            [finalCell addSubview:button];
+            [button setTitle:@"      Request" forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+            self.buttonRequest = button;
+
+            button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(151.0, 0, 143.0, 41.0);
+            [button setBackgroundImage:[UIImage imageNamed:@"btn_send.png"] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
+            [finalCell addSubview:button];
+            [button setTitle:@"      Send" forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+            self.buttonSend = button;
         }
-        else if (transaction.confirmations >= CONFIRMED_CONFIRMATION_COUNT)
+    }
+    else
+    {
+        TransactionCell *cell;
+
+        // wallet cell
+        cell = [self getTransactionCellForTableView:tableView];
+
+        Transaction *transaction = NULL;
+        if ([self searchEnabled])
         {
-            cell.confirmationLabel.textColor = COLOR_POSITIVE;
-            cell.confirmationLabel.text = NSLocalizedString(@"Confirmed", nil);
+            transaction = [self.arraySearchTransactions objectAtIndex:indexPath.row];
         }
         else
         {
-            cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmations", transaction.confirmations];
-            cell.confirmationLabel.textColor = COLOR_BALANCE;
+            transaction = [self.wallet.arrayTransactions objectAtIndex:indexPath.row];
         }
 
-        //amount
-        cell.amountLabel.text = [self conversion:transaction.amountSatoshi];
+        // date
+        cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
 
-        // balance
-        cell.balanceLabel.text = [self conversion:transaction.balance];
-        cell.balanceLabel.textColor = COLOR_BALANCE;
-    }
+        // address
+        cell.addressLabel.text = transaction.strAddress;
 
-    // color amount
-    cell.amountLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
-    
-    if ((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
-    {
-        cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
-    }
-    else
-    {
-        if(row == 0)
+        // if we are in search  mode
+        if (_bSearchModeEnabled)
         {
-            cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
+            // confirmation becomes category
+            cell.confirmationLabel.text = transaction.strCategory;
+
+            // amount - always bitcoin
+            cell.amountLabel.text = [self formatSatoshi:transaction.amountSatoshi useFiat:NO];
+
+            // balance becomes fiat
+            cell.balanceLabel.text = [self formatSatoshi:transaction.amountSatoshi useFiat:YES];
+            cell.balanceLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
         }
         else
-            if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
+        {
+            // confirmations
+            if (transaction.confirmations == 1)
             {
-                cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_bottom"];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmation", transaction.confirmations];
+            }
+            else if (transaction.confirmations >= CONFIRMED_CONFIRMATION_COUNT)
+            {
+                cell.confirmationLabel.textColor = COLOR_POSITIVE;
+                cell.confirmationLabel.text = NSLocalizedString(@"Confirmed", nil);
             }
             else
             {
-                cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_middle"];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmations", transaction.confirmations];
+                cell.confirmationLabel.textColor = COLOR_BALANCE;
             }
+
+            //amount
+            cell.amountLabel.text = [self conversion:transaction.amountSatoshi];
+
+            // balance
+            cell.balanceLabel.text = [self conversion:transaction.balance];
+            cell.balanceLabel.textColor = COLOR_BALANCE;
+        }
+
+        // color amount
+        cell.amountLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
+
+        if ((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
+        {
+            cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
+        }
+        else
+        {
+            if(row == 0)
+            {
+                cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
+            }
+            else
+                if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
+                {
+                    cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_bottom"];
+                }
+                else
+                {
+                    cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_middle"];
+                }
+        }
+
+        finalCell = cell;
     }
-    return cell;
+
+    return finalCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (YES == [self canLeaveWalletNameField])
+    if (indexPath.section == 1)
     {
-        [self resignAllResponders];
-        if ([self searchEnabled])
+        if (YES == [self canLeaveWalletNameField])
         {
-            [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row]];
-        }
-        else
-        {
-            [self launchTransactionDetailsWithTransaction:[self.wallet.arrayTransactions objectAtIndex:indexPath.row]];
+            [self resignAllResponders];
+            if ([self searchEnabled])
+            {
+                [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row]];
+            }
+            else
+            {
+                [self launchTransactionDetailsWithTransaction:[self.wallet.arrayTransactions objectAtIndex:indexPath.row]];
+            }
         }
     }
 }
