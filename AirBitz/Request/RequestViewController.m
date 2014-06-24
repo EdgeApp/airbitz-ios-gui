@@ -140,6 +140,11 @@ typedef enum eAddressPickerType
         [_importWalletViewController.view removeFromSuperview];
         _importWalletViewController = nil;
     }
+    if (_qrViewController)
+    {
+        [_qrViewController.view removeFromSuperview];
+        _qrViewController = nil;
+    }
 }
 
 
