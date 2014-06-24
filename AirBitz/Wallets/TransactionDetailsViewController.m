@@ -240,7 +240,6 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [self exit];
 }
 
 - (void)dealloc
@@ -824,16 +823,6 @@
     {
         _bDoneSentToDelegate = YES;
         [self.delegate TransactionDetailsViewControllerDone:self];
-
-        // notify everyone interested that the details screen has exited
-#if 0
-        NSDictionary *dictNotification = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                          self.transaction,                 KEY_TX_DETAILS_EXITED_TX,
-                                          self.transaction.strWalletUUID,   KEY_TX_DETAILS_EXITED_WALLET_UUID,
-                                          self.transaction.strWalletName,   KEY_TX_DETAILS_EXITED_WALLET_NAME,
-                                          self.transaction.strID,           KEY_TX_DETAILS_EXITED_TX_ID,
-                                          nil];
-#endif
         NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_TX            : self.transaction,
                                             KEY_TX_DETAILS_EXITED_WALLET_UUID   : self.transaction.strWalletUUID,
                                             KEY_TX_DETAILS_EXITED_WALLET_NAME   : self.transaction.strWalletName,
