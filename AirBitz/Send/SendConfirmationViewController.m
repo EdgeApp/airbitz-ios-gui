@@ -562,14 +562,14 @@
     int64_t satoshi;
 	tABC_Error error;
 
-	if(_selectedTextField == self.amountBTCTextField)
+	if (_selectedTextField == self.amountBTCTextField)
 	{
         self.amountToSendSatoshi = [CoreBridge denominationToSatoshi: self.amountBTCTextField.text];
 		if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                   self.amountToSendSatoshi, &currency, self.wallet.currencyNum, &error) == ABC_CC_Ok)
 			self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
 	}
-	else
+	else if (_selectedTextField == self.amountUSDTextField)
 	{
         currency = [self.amountUSDTextField.text doubleValue];
 		if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],

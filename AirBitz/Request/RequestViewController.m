@@ -473,7 +473,7 @@ typedef enum eAddressPickerType
                                   satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
             self.USD_TextField.text = [CoreBridge formatCurrency:currency withSymbol:false];
 	}
-	else
+	else if (_selectedTextField == self.USD_TextField)
 	{
 		int64_t satoshi;
 		double currency = [self.USD_TextField.text doubleValue];
