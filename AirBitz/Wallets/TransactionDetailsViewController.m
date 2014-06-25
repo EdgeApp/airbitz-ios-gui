@@ -289,18 +289,24 @@
 
 	NSMutableString *inAddresses = [[NSMutableString alloc] init];
 	NSMutableString *outAddresses = [[NSMutableString alloc] init];
+    NSMutableString *baseUrl = [[NSMutableString alloc] init];
+    if ([CoreBridge isTestNet]) {
+        [baseUrl appendString:@"https://blockexplorer.com/testnet"];
+    } else {
+        [baseUrl appendString:@"https://blockchain.info"];
+    }
     for (TxOutput *t in self.transaction.outputs) {
         NSString *val = [CoreBridge formatSatoshi:t.value];
-        NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"https://blockchain.info/address/%@\">%@</a></div><div>%@</div>"),
-                t.strAddress, t.strAddress, val];
+        NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
+                baseUrl, t.strAddress, t.strAddress, val];
         if (t.bInput) {
             [inAddresses appendString:html];
         } else {
             [outAddresses appendString:html];
         }
     }
-    NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"https://blockchain.info/tx/%@\">%@</a></div>",
-                                self.transaction.strMallealbeID, self.transaction.strMallealbeID];
+    NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
+                                baseUrl, self.transaction.strMallealbeID, self.transaction.strMallealbeID];
 	//transaction ID
 	content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
 	//Total sent

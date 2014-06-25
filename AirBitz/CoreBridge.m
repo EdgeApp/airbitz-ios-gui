@@ -697,4 +697,15 @@
     });
 }
 
++ (bool)isTestNet
+{
+    bool result = false;
+    tABC_Error Error;
+
+    if (ABC_IsTestNet(&result, &Error) != ABC_CC_Ok) {
+        [Util printABC_Error: &Error];
+    }
+    return result;
+}
+
 @end

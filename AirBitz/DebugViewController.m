@@ -40,7 +40,11 @@
 #if NETWORK_FAKE
     self.networkLabel.text = @"Fake";
 #else
-    self.networkLabel.text = @"Mainnet";
+    if ([CoreBridge isTestNet]) {
+        self.networkLabel.text = @"Testnet";
+    } else {
+        self.networkLabel.text = @"Mainnet";
+    }
 #endif
 }
 

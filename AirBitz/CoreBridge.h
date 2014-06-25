@@ -44,5 +44,6 @@
            amountToSend:(int64_t) sendAmount
          storeResultsIn:(int64_t *) totalFees;
 + (void)requestExchangeRateUpdate:(int) currencyNum;
++ (bool)isTestNet;
 
 @end
