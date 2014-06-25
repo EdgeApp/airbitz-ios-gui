@@ -85,14 +85,6 @@
 	self.amountBTCTextField.inputView = self.keypadView;
 	self.amountUSDTextField.inputView = self.keypadView;
 
-    // set up our user blocking button
-    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.buttonBlocker.backgroundColor = [UIColor clearColor];
-    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
-    self.buttonBlocker.frame = self.view.bounds;
-    self.buttonBlocker.hidden = YES;
-    [self.viewDisplayArea addSubview:self.buttonBlocker];
-
     // make sure the edit fields are in front of the blocker
     [self.viewDisplayArea bringSubviewToFront:self.amountBTCTextField];
     [self.viewDisplayArea bringSubviewToFront:self.amountUSDTextField];
@@ -236,20 +228,6 @@
                                                 overrideDecimals:[CoreBridge currencyDecimalPlaces]];
     }
     [self updateTextFieldContents];
-}
-
-#pragma mark - Misc Methods
-
-- (void)blockUser:(BOOL)bBlock
-{
-    if (bBlock)
-    {
-        self.buttonBlocker.hidden = NO;
-    }
-    else
-    {
-        self.buttonBlocker.hidden = YES;
-    }
 }
 
 - (void)updateDisplayLayout
@@ -655,12 +633,10 @@
     else if (_selectedTextField == self.amountUSDTextField)
         self.keypadView.calcMode = CALC_MODE_FIAT;
 	self.keypadView.textField = textField;
-    [self blockUser:YES];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [self blockUser:NO];
 }
 
 #pragma mark - ConfirmationSlider delegates
