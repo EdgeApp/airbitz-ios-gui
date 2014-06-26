@@ -21,6 +21,7 @@ typedef enum eCalcMode
 @property (nonatomic, assign) id<CalculatorViewDelegate> delegate;
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, assign) tCalcMode calcMode;
+@property (nonatomic, assign) int currencyNum;
 
 @end
 

@@ -70,6 +70,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
                                              &Error);
     if (ABC_CC_Ok == result)
     {
+        self.defaultCurrencyNum = pSettings->currencyNum;
         if (pSettings->bitcoinDenomination.satoshi > 0)
         {
             self.denomination = pSettings->bitcoinDenomination.satoshi;

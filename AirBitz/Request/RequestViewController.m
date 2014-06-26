@@ -464,14 +464,16 @@ typedef enum eAddressPickerType
     tABC_Error error;
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
     self.exchangeRateLabel.text = [CoreBridge conversionString:wallet];
-    self.USDLabel_TextField.text = wallet.currencySymbol;
+    self.USDLabel_TextField.text = wallet.currencyAbbrev;
 	if (_selectedTextField == self.BTC_TextField)
 	{
 		double currency;
         int64_t satoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
 		if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                   satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
-            self.USD_TextField.text = [CoreBridge formatCurrency:currency withSymbol:false];
+            self.USD_TextField.text = [CoreBridge formatCurrency:currency
+                                                 withCurrencyNum:wallet.currencyNum
+                                                      withSymbol:false];
 	}
 	else if (_selectedTextField == self.USD_TextField)
 	{
@@ -504,6 +506,9 @@ typedef enum eAddressPickerType
 
     if (_selectedWalletIndex < [arrayWallets count])
     {
+        Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
+        self.keypadView.currencyNum = wallet.currencyNum;
+
         self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
         [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWalletIndex] forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
@@ -673,6 +678,7 @@ typedef enum eAddressPickerType
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
     _walletUUID = wallet.strUUID;
 
+    self.keypadView.currencyNum = wallet.currencyNum;
     [self updateTextFieldContents];
 }
 

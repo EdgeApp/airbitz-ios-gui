@@ -15,6 +15,7 @@
 @property (nonatomic, copy) NSString *password;
 
 // User Settings
+@property (nonatomic) int defaultCurrencyNum;
 @property (nonatomic) int64_t denomination;
 @property (nonatomic, copy) NSString* denominationLabel;
 @property (nonatomic, copy) NSString* denominationLabelShort;

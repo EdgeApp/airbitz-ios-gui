@@ -404,13 +404,13 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [self.view addSubview:_debugViewController.view];
 
     [UIView animateWithDuration:0.35
-                            delay:0.0
+                          delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
-                        animations:^
+                     animations:^
     {
         _debugViewController.view.frame = self.view.bounds;
     }
-    completion:^(BOOL finished) {
+                     completion:^(BOOL finished) {
     }];
 }
 

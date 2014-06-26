@@ -25,11 +25,11 @@
 + (int) currencyDecimalPlaces;
 + (int) maxDecimalPlaces;
 + (int64_t) cleanNumString:(NSString *) value;
-+ (NSString *)formatCurrency: (double) currency;
-+ (NSString *)formatCurrency: (double) currency withSymbol:(bool) symbol;
-+ (NSString *)formatSatoshi: (int64_t) bitcoin;
-+ (NSString *)formatSatoshi: (int64_t) bitcoin withSymbol:(bool) symbol;
-+ (NSString *)formatSatoshi: (int64_t) bitcoin withSymbol:(bool) symbol overrideDecimals:(int) decimals;
++ (NSString *)formatCurrency:(double) currency withCurrencyNum:(int)currencyNum;
++ (NSString *)formatCurrency:(double) currency withCurrencyNum:(int)currencyNum withSymbol:(bool)symbol;
++ (NSString *)formatSatoshi:(int64_t) bitcoin;
++ (NSString *)formatSatoshi:(int64_t) bitcoin withSymbol:(bool) symbol;
++ (NSString *)formatSatoshi:(int64_t) bitcoin withSymbol:(bool) symbol overrideDecimals:(int) decimals;
 + (int64_t) denominationToSatoshi: (NSString *) amount;
 + (NSString *)conversionString: (Wallet *) wallet;
 + (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName;
@@ -45,5 +45,7 @@
          storeResultsIn:(int64_t *) totalFees;
 + (void)requestExchangeRateUpdate:(int) currencyNum;
 + (bool)isTestNet;
++ (NSString *)currencyAbbrevLookup:(int) currencyNum;
++ (NSString *)currencySymbolLookup:(int) currencyNum;
 
 @end

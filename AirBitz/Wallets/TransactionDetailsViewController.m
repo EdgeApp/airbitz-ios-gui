@@ -114,7 +114,7 @@
 
     self.buttonBack.hidden = !self.bOldTransaction;
     if (_wallet) {
-        _labelFiatName.text = _wallet.currencySymbol;
+        _labelFiatName.text = _wallet.currencyAbbrev;
     }
 
     self.arrayAutoComplete = @[];

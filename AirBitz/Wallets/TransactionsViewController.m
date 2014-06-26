@@ -81,7 +81,7 @@
 
     _balanceView = [BalanceView CreateWithDelegate:self];
     _balanceView.frame = self.balanceViewPlaceholder.frame;
-    _balanceView.botDenomination.text = self.wallet.currencySymbol;
+    _balanceView.botDenomination.text = self.wallet.currencyAbbrev;
 
     [self.balanceViewPlaceholder removeFromSuperview];
     [self.view addSubview:_balanceView];
@@ -273,7 +273,8 @@
 
     ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
                           totalSatoshi, &currency, self.wallet.currencyNum, &error);
-    _balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
+    _balanceView.botAmount.text = [CoreBridge formatCurrency:currency 
+                                             withCurrencyNum:self.wallet.currencyNum];
     _balanceView.topDenomination.text = [User Singleton].denominationLabel;
 
     [_balanceView refresh];
@@ -381,11 +382,10 @@
     {
         double currency;
         tABC_Error error;
-
-        // TODO: need to switch to currency selected by user in settings
-        ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+        ABC_SatoshiToCurrency([[User Singleton].name UTF8String],[[User Singleton].password UTF8String],
                               satoshi, &currency, self.wallet.currencyNum, &error);
-        return [CoreBridge formatCurrency:currency];
+        return [CoreBridge formatCurrency:currency
+                          withCurrencyNum:self.wallet.currencyNum];
     }
     else
     {

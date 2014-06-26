@@ -12,7 +12,9 @@
 
 #define CURRENCY_NUM_CAD                124
 #define CURRENCY_NUM_CNY                156
+#define CURRENCY_NUM_CUP                192
 #define CURRENCY_NUM_MXN                484
+#define CURRENCY_NUM_GBP                826
 #define CURRENCY_NUM_USD                840
 #define CURRENCY_NUM_EUR                978
 
@@ -208,20 +210,8 @@
     wallet.attributes = pWalletInfo->attributes;
     wallet.balance = pWalletInfo->balanceSatoshi;
     wallet.currencyNum = pWalletInfo->currencyNum;
-#warning TODO move this to the core
-    if (wallet.currencyNum == CURRENCY_NUM_USD) {
-        wallet.currencySymbol = @"USD";
-    } else if (wallet.currencyNum == CURRENCY_NUM_CAD) {
-        wallet.currencySymbol = @"CAD";
-    } else if (wallet.currencyNum == CURRENCY_NUM_MXN) {
-        wallet.currencySymbol = @"MXN";
-    } else if (wallet.currencyNum == CURRENCY_NUM_CNY) {
-        wallet.currencySymbol = @"CNY";
-    } else if (wallet.currencyNum == CURRENCY_NUM_EUR) {
-        wallet.currencySymbol = @"EUR";
-    } else {
-        wallet.currencySymbol = @"USD";
-    }
+    wallet.currencyAbbrev = [CoreBridge currencyAbbrevLookup:wallet.currencyNum];
+    wallet.currencySymbol = [CoreBridge currencySymbolLookup:wallet.currencyNum];
 }
 
 + (void)setTransaction:(Wallet *) wallet transaction:(Transaction *) transaction coreTx:(tABC_TxInfo *) pTrans
@@ -403,19 +393,21 @@
     return [NSDate dateWithTimeIntervalSince1970: intDate];
 }
 
-+ (NSString *)formatCurrency: (double) currency
++ (NSString *)formatCurrency:(double) currency withCurrencyNum:(int) currencyNum
 {
-    return [CoreBridge formatCurrency:currency withSymbol:true];
+    return [CoreBridge formatCurrency:currency withCurrencyNum:currencyNum withSymbol:true];
 }
 
-+ (NSString *)formatCurrency: (double) currency withSymbol:(bool) symbol
++ (NSString *)formatCurrency:(double) currency withCurrencyNum:(int) currencyNum withSymbol:(bool) symbol
 {
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle: NSNumberFormatterCurrencyStyle];
-    if (symbol)
-        [f setCurrencySymbol:@"$ "];
-    else
+    if (symbol) {
+        NSString *symbol = [CoreBridge currencySymbolLookup:currencyNum];
+        [f setCurrencySymbol:[NSString stringWithFormat:@"%@ ", symbol]];
+    } else {
         [f setCurrencySymbol:@""];
+    }
     return [f stringFromNumber:[NSNumber numberWithFloat:currency]];
 }
 
@@ -523,11 +515,12 @@
 
     double denomination = [User Singleton].denomination;
     NSString *denominationLabel = [User Singleton].denominationLabel;
-    tABC_CC result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+    tABC_CC result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
+                                           [[User Singleton].password UTF8String],
                                            denomination, &currency, wallet.currencyNum, &error);
     [Util printABC_Error:&error];
     if (result == ABC_CC_Ok)
-        return [NSString stringWithFormat:@"1.00 %@ = $%.2f %@", denominationLabel, currency, wallet.currencySymbol];
+        return [NSString stringWithFormat:@"1.00 %@ = %@ %.2f %@", denominationLabel, wallet.currencySymbol, currency, wallet.currencyAbbrev];
     else
         return @"";
 }
@@ -706,6 +699,44 @@
         [Util printABC_Error: &Error];
     }
     return result;
+}
+
++ (NSString *)currencyAbbrevLookup:(int) currencyNum
+{
+#warning TODO move this to the core
+    if (currencyNum == CURRENCY_NUM_USD) {
+        return @"USD";
+    } else if (currencyNum == CURRENCY_NUM_CAD) {
+        return @"CAD";
+    } else if (currencyNum == CURRENCY_NUM_MXN) {
+        return @"MXN";
+    } else if (currencyNum == CURRENCY_NUM_GBP) {
+        return @"GDB";
+    } else if (currencyNum == CURRENCY_NUM_CUP) {
+        return @"CUP";
+    } else if (currencyNum == CURRENCY_NUM_CNY) {
+        return @"CNY";
+    } else if (currencyNum == CURRENCY_NUM_EUR) {
+        return @"EUR";
+    } else {
+        return @"USD";
+    }
+}
+
++ (NSString *)currencySymbolLookup:(int) currencyNum
+{
+    switch (currencyNum) {
+        case CURRENCY_NUM_CNY:
+            return @"¥";
+        case CURRENCY_NUM_EUR:
+            return @"€";
+        case CURRENCY_NUM_GBP:
+            return @"£";
+        case CURRENCY_NUM_CUP:
+            return @"₱";
+        default:
+            return @"$";
+    }
 }
 
 @end

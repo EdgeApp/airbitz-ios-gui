@@ -21,8 +21,6 @@
 #import "Util.h"
 #import "WalletHeaderView.h"
 
-#define DOLLAR_CURRENCY_NUM	840
-
 @interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletMakerViewDelegate, OfflineWalletViewControllerDelegate, WalletHeaderViewDelegate>
 {
 	BalanceView                 *_balanceView;
@@ -262,10 +260,13 @@
 	tABC_Error Error;
 	ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
                           [[User Singleton].password UTF8String],
-                          totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &Error);
+                          totalSatoshi, &currency,
+                          [[User Singleton] defaultCurrencyNum], &Error);
     [Util printABC_Error:&Error];
-    _balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
+    _balanceView.botAmount.text = [CoreBridge formatCurrency:currency 
+                                             withCurrencyNum:[[User Singleton] defaultCurrencyNum]];
     _balanceView.topDenomination.text = [User Singleton].denominationLabel;
+    _balanceView.botDenomination.text = [CoreBridge currencyAbbrevLookup:[User Singleton].defaultCurrencyNum];
 	[_balanceView refresh];
 }
 
@@ -301,9 +302,11 @@
 		tABC_Error error;
 		ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
                               [[User Singleton].password UTF8String],
-                              satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+                              satoshi, &currency,
+                              [[User Singleton] defaultCurrencyNum], &error);
         [Util printABC_Error:&error];
-		return [CoreBridge formatCurrency: currency];
+        return [CoreBridge formatCurrency:currency
+                          withCurrencyNum:[[User Singleton] defaultCurrencyNum]];
 	}
 	else
 	{

@@ -84,6 +84,7 @@
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplayArea];
 
+    self.keypadView.currencyNum = self.wallet.currencyNum;
 	self.withdrawlPIN.delegate = self;
 	self.amountBTCTextField.delegate = self;
 	self.amountUSDTextField.delegate = self;
@@ -593,9 +594,11 @@
                                   fees, &currencyFees, self.wallet.currencyNum, &error) == ABC_CC_Ok)
         {
             [fiatFeeString appendString:@"+ "];
-            [fiatFeeString appendString:[CoreBridge formatCurrency: currencyFees withSymbol:false]];
+            [fiatFeeString appendString:[CoreBridge formatCurrency:currencyFees
+                                                   withCurrencyNum:self.wallet.currencyNum
+                                                        withSymbol:false]];
             [fiatFeeString appendString:@" "];
-            [fiatFeeString appendString:self.wallet.currencySymbol];
+            [fiatFeeString appendString:self.wallet.currencyAbbrev];
         }
         self.amountBTCLabel.text = coinFeeString; 
         self.amountUSDLabel.text = fiatFeeString;

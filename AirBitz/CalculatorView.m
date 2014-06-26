@@ -65,7 +65,9 @@
         return [CoreBridge formatSatoshi:satoshi withSymbol:false];
     }
     else
-        return [CoreBridge formatCurrency:acc withSymbol:false];
+        return [CoreBridge formatCurrency:acc
+                          withCurrencyNum:self.currencyNum
+                               withSymbol:false];
 }
 
 -(void)performLastOperation
