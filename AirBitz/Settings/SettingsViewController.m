@@ -119,7 +119,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         "mBTC", 100000
     },
     {
-        "μBTC", 100
+        "µBTC", 100
     }
 };
 

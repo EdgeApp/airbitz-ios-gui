@@ -422,7 +422,7 @@
 + (int) currencyDecimalPlaces
 {
     int decimalPlaces = 5;
-    if ([[[User Singleton] denominationLabel] isEqualToString:@"μBTC"])
+    if ([[[User Singleton] denominationLabel] isEqualToString:@"µBTC"])
         decimalPlaces = 2;
     else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
         decimalPlaces = 3;
