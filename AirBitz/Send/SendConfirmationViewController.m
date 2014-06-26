@@ -74,6 +74,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] 
+        initWithTarget:self
+                action:@selector(dismissKeyboard)];
+
+    [self.view addGestureRecognizer:tap];
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplayArea];
@@ -198,13 +204,6 @@
 	 }];
 }
 
-- (IBAction)buttonBlockerTouched:(id)sender
-{
-	[self.withdrawlPIN resignFirstResponder];
-	[self.amountUSDTextField resignFirstResponder];
-	[self.amountBTCTextField resignFirstResponder];
-}
-
 - (IBAction)alwaysConfirm:(UIButton *)sender
 {
 	if(sender.selected)
@@ -228,6 +227,13 @@
                                                 overrideDecimals:[CoreBridge currencyDecimalPlaces]];
     }
     [self updateTextFieldContents];
+}
+
+- (void)dismissKeyboard
+{
+	[self.withdrawlPIN resignFirstResponder];
+	[self.amountUSDTextField resignFirstResponder];
+	[self.amountBTCTextField resignFirstResponder];
 }
 
 - (void)updateDisplayLayout
