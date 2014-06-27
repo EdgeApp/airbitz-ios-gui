@@ -663,6 +663,7 @@
                  sendTo:(NSString *) destAddr
            amountToSend:(int64_t) sendAmount
          storeResultsIn:(int64_t *) totalFees
+         walletTransfer:(BOOL) bTransfer
 {
     tABC_Error error;
     tABC_TxDetails details;
@@ -678,6 +679,7 @@
                          [[User Singleton].password UTF8String],
                          [walletUUID UTF8String],
                          [destAddr UTF8String],
+                         bTransfer,
                          &details,
                          totalFees,
                          &error) != ABC_CC_Ok)

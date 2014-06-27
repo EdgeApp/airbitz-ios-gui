@@ -42,7 +42,8 @@
 + (bool)calcSendFees:(NSString *) walletUUID 
                  sendTo:(NSString *) destAddr 
            amountToSend:(int64_t) sendAmount
-         storeResultsIn:(int64_t *) totalFees;
+         storeResultsIn:(int64_t *) totalFees
+         walletTransfer:(bool)bTransfer;
 + (void)requestExchangeRateUpdate:(id)object;
 + (bool)isTestNet;
 + (NSString *)currencyAbbrevLookup:(int) currencyNum;

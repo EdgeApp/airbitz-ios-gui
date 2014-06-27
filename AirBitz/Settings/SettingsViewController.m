@@ -1387,7 +1387,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     if (section == SECTION_LOGOUT) {
         [self blockUser:YES];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [cell.button setTitle:@"Please Wait..." forState:UIControlStateNormal];
+            [cell.button setTitle:@"Please Wait..." forState:UIControlStateNormal];
             [[User Singleton] clear];
 
             dispatch_async(dispatch_get_main_queue(), ^(void){
