@@ -231,8 +231,12 @@
     if (pTrans->szMalleableTxId) {
         transaction.strMallealbeID = [NSString stringWithUTF8String: pTrans->szMalleableTxId];
     }
-    transaction.confirmations = [self calcTxConfirmations:wallet withTxId:transaction.strMallealbeID];
+    bool bSyncing = NO;
+    transaction.confirmations = [self calcTxConfirmations:wallet
+                                                 withTxId:transaction.strMallealbeID
+                                                isSyncing:&bSyncing];
     transaction.bConfirmed = transaction.confirmations >= CONFIRMED_CONFIRMATION_COUNT;
+    transaction.bSyncing = bSyncing;
     if (transaction.strName) {
         transaction.strAddress = transaction.strName;
     } else {
@@ -251,29 +255,26 @@
     transaction.outputs = outputs;
 }
 
-+ (unsigned int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId
++ (unsigned int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId isSyncing:(bool *)syncing
 {
     tABC_Error Error;
     unsigned int txHeight = 0;
     unsigned int blockHeight = 0;
-    if ([wallet.strUUID length] == 0 || [txId length] == 0)
-    {
+    *syncing = NO;
+    if ([wallet.strUUID length] == 0 || [txId length] == 0) {
         return 0;
     }
-    if (ABC_TxHeight([wallet.strUUID UTF8String], [txId UTF8String], &txHeight, &Error) != ABC_CC_Ok)
-    {
-        NSLog(@("Error: CoreBridge.calcTxConfirmations:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
+    if (ABC_TxHeight([wallet.strUUID UTF8String], [txId UTF8String], &txHeight, &Error) != ABC_CC_Ok) {
+        *syncing = YES;
         return 0;
     }
-    if (ABC_BlockHeight([wallet.strUUID UTF8String], &blockHeight, &Error) != ABC_CC_Ok)
-    {
-        NSLog(@("Error: CoreBridge.calcTxConfirmations:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
+    if (ABC_BlockHeight([wallet.strUUID UTF8String], &blockHeight, &Error) != ABC_CC_Ok) {
+        *syncing = YES;
         return 0;
     }
-    if (txHeight == 0 || blockHeight == 0)
+    if (txHeight == 0 || blockHeight == 0) {
         return 0;
+    }
     return (blockHeight - txHeight) + 1;
 }
 
@@ -704,7 +705,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:object];
         [Util printABC_Error: &error];
 
-        Wallet *wallets = [[NSMutableArray alloc] init];
+        NSMutableArray *wallets = [[NSMutableArray alloc] init];
         [CoreBridge loadWallets:wallets];
         // Check each wallet is up to date
         for (Wallet *w in wallets)
