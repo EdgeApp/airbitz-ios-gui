@@ -7,6 +7,7 @@
 #import "ABC.h"
 #import "User.h"
 #import "Util.h"
+#import "CommonTypes.h"
 
 #import "CoreBridge.h"
 
@@ -678,16 +679,44 @@
     return true;
 }
 
-+ (void)requestExchangeRateUpdate:(int) currencyNum
++ (void)requestExchangeRateUpdate:(id)object
 {
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [CoreBridge requestExchangeUpdateBlocking:object];
+
+        // Lets wait and do it again
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            [CoreBridge requestExchangeRateUpdate:object];
+        });
+    });
+}
+
++ (void)requestExchangeUpdateBlocking:(id)object
+{
+    if ([User isLoggedIn])
+    {
         tABC_Error error;
+        // Check the default currency for updates
         ABC_RequestExchangeRateUpdate([[User Singleton].name UTF8String],
                                       [[User Singleton].password UTF8String],
-                                      currencyNum, &error);
+                                      [User Singleton].defaultCurrencyNum, NULL, NULL, &error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:object];
         [Util printABC_Error: &error];
-    });
+
+        Wallet *wallets = [[NSMutableArray alloc] init];
+        [CoreBridge loadWallets:wallets];
+        // Check each wallet is up to date
+        for (Wallet *w in wallets)
+        {
+            // We pass no callback so this call is blocking
+            ABC_RequestExchangeRateUpdate([[User Singleton].name UTF8String],
+                                        [[User Singleton].password UTF8String],
+                                        w.currencyNum, NULL, NULL, &error);
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:object];
+            [Util printABC_Error: &error];
+        }
+    }
 }
 
 + (bool)isTestNet

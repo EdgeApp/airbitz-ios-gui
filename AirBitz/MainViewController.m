@@ -82,15 +82,15 @@ typedef enum eAppMode
 
     tABC_Error Error;
     Error.code = ABC_CC_Ok;
-   // NSLog(@"Calling ABC_Initialize...");
     ABC_Initialize([docs_dir UTF8String],
                    ABC_BitCoin_Event_Callback,
                    (__bridge void *) self,
                    (unsigned char *)[seedData bytes],
                    (unsigned int)[seedData length],
                    &Error);
-    //NSLog(@"ABC_Initialize complete");
     [Util printABC_Error:&Error];
+    // Initialize the exchange rates queue
+    [CoreBridge requestExchangeRateUpdate:self];
 #endif
 
 	_originalTabBarFrame = self.tabBar.frame;
@@ -548,7 +548,6 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:mainId];
     } else if (pInfo->eventType == ABC_AsyncEventType_ExchangeRateUpdate) {
-        NSLog(@"Exchange rate change fired!!!!!!!!!!!");
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:mainId];
     }
 }

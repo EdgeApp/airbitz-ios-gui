@@ -43,7 +43,7 @@
                  sendTo:(NSString *) destAddr 
            amountToSend:(int64_t) sendAmount
          storeResultsIn:(int64_t *) totalFees;
-+ (void)requestExchangeRateUpdate:(int) currencyNum;
++ (void)requestExchangeRateUpdate:(id)object;
 + (bool)isTestNet;
 + (NSString *)currencyAbbrevLookup:(int) currencyNum;
 + (NSString *)currencySymbolLookup:(int) currencyNum;
