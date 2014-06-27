@@ -92,6 +92,8 @@
 		684C0E521936B97000AB9807 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
 		6861FE681950DFB100CDF24E /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861FE671950DFB100CDF24E /* TxOutput.m */; };
 		6868AD1319516D7A006C3716 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6868AD1219516D7A006C3716 /* DebugViewController.m */; };
+		686BED9E195D5A7C0053A09E /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BED9D195D5A7C0053A09E /* libsecp256k1.a */; };
+		686BEDA4195D5A970053A09E /* libbitcoin-watcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BEDA3195D5A970053A09E /* libbitcoin-watcher.a */; };
 		686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
 		686C24851935605900F8E445 /* libobelisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24841935605900F8E445 /* libobelisk.a */; };
 		686C24871935608400F8E445 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
@@ -625,6 +627,8 @@
 		6861FE671950DFB100CDF24E /* TxOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TxOutput.m; path = "ABC Data/TxOutput.m"; sourceTree = "<group>"; };
 		6868AD1119516D7A006C3716 /* DebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugViewController.h; sourceTree = "<group>"; };
 		6868AD1219516D7A006C3716 /* DebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugViewController.m; sourceTree = "<group>"; };
+		686BED9D195D5A7C0053A09E /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsecp256k1.a; path = AirBitz/ABC/libsecp256k1.a; sourceTree = "<group>"; };
+		686BEDA3195D5A970053A09E /* libbitcoin-watcher.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libbitcoin-watcher.a"; path = "AirBitz/ABC/libbitcoin-watcher.a"; sourceTree = "<group>"; };
 		686C24821935601400F8E445 /* libbitcoin-client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libbitcoin-client.a"; path = "AirBitz/ABC/libbitcoin-client.a"; sourceTree = "<group>"; };
 		686C24841935605900F8E445 /* libobelisk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libobelisk.a; path = AirBitz/ABC/libobelisk.a; sourceTree = "<group>"; };
 		686C24861935608400F8E445 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = AirBitz/ABC/libzmq.a; sourceTree = "<group>"; };
@@ -1090,6 +1094,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				686BEDA4195D5A970053A09E /* libbitcoin-watcher.a in Frameworks */,
+				686BED9E195D5A7C0053A09E /* libsecp256k1.a in Frameworks */,
 				684C0E521936B97000AB9807 /* libsodium.a in Frameworks */,
 				686C24871935608400F8E445 /* libzmq.a in Frameworks */,
 				4C08A6E218C29CEF0071B87C /* libz.a in Frameworks */,
@@ -1411,6 +1417,8 @@
 		B5675B4A18A17F6F002E0703 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				686BEDA3195D5A970053A09E /* libbitcoin-watcher.a */,
+				686BED9D195D5A7C0053A09E /* libsecp256k1.a */,
 				684C0E511936B97000AB9807 /* libsodium.a */,
 				686C24861935608400F8E445 /* libzmq.a */,
 				686C24841935605900F8E445 /* libobelisk.a */,
@@ -2713,6 +2721,7 @@
 					./AirBitz/DL_URLServer,
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
+					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2743,6 +2752,7 @@
 					./AirBitz/DL_URLServer,
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
+					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
