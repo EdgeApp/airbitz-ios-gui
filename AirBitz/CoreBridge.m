@@ -7,6 +7,7 @@
 #import "ABC.h"
 #import "User.h"
 #import "Util.h"
+#import "CommonTypes.h"
 
 #import "CoreBridge.h"
 
@@ -230,8 +231,12 @@
     if (pTrans->szMalleableTxId) {
         transaction.strMallealbeID = [NSString stringWithUTF8String: pTrans->szMalleableTxId];
     }
-    transaction.confirmations = [self calcTxConfirmations:wallet withTxId:transaction.strMallealbeID];
+    bool bSyncing = NO;
+    transaction.confirmations = [self calcTxConfirmations:wallet
+                                                 withTxId:transaction.strMallealbeID
+                                                isSyncing:&bSyncing];
     transaction.bConfirmed = transaction.confirmations >= CONFIRMED_CONFIRMATION_COUNT;
+    transaction.bSyncing = bSyncing;
     if (transaction.strName) {
         transaction.strAddress = transaction.strName;
     } else {
@@ -250,29 +255,26 @@
     transaction.outputs = outputs;
 }
 
-+ (unsigned int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId
++ (unsigned int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId isSyncing:(bool *)syncing
 {
     tABC_Error Error;
     unsigned int txHeight = 0;
     unsigned int blockHeight = 0;
-    if ([wallet.strUUID length] == 0 || [txId length] == 0)
-    {
+    *syncing = NO;
+    if ([wallet.strUUID length] == 0 || [txId length] == 0) {
         return 0;
     }
-    if (ABC_TxHeight([wallet.strUUID UTF8String], [txId UTF8String], &txHeight, &Error) != ABC_CC_Ok)
-    {
-        NSLog(@("Error: CoreBridge.calcTxConfirmations:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
+    if (ABC_TxHeight([wallet.strUUID UTF8String], [txId UTF8String], &txHeight, &Error) != ABC_CC_Ok) {
+        *syncing = YES;
         return 0;
     }
-    if (ABC_BlockHeight([wallet.strUUID UTF8String], &blockHeight, &Error) != ABC_CC_Ok)
-    {
-        NSLog(@("Error: CoreBridge.calcTxConfirmations:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
+    if (ABC_BlockHeight([wallet.strUUID UTF8String], &blockHeight, &Error) != ABC_CC_Ok) {
+        *syncing = YES;
         return 0;
     }
-    if (txHeight == 0 || blockHeight == 0)
+    if (txHeight == 0 || blockHeight == 0) {
         return 0;
+    }
     return (blockHeight - txHeight) + 1;
 }
 
@@ -692,16 +694,44 @@
     return true;
 }
 
-+ (void)requestExchangeRateUpdate:(int) currencyNum
++ (void)requestExchangeRateUpdate:(id)object
 {
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [CoreBridge requestExchangeUpdateBlocking:object];
+
+        // Lets wait and do it again
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            [CoreBridge requestExchangeRateUpdate:object];
+        });
+    });
+}
+
++ (void)requestExchangeUpdateBlocking:(id)object
+{
+    if ([User isLoggedIn])
+    {
         tABC_Error error;
+        // Check the default currency for updates
         ABC_RequestExchangeRateUpdate([[User Singleton].name UTF8String],
                                       [[User Singleton].password UTF8String],
-                                      currencyNum, &error);
+                                      [User Singleton].defaultCurrencyNum, NULL, NULL, &error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:object];
         [Util printABC_Error: &error];
-    });
+
+        NSMutableArray *wallets = [[NSMutableArray alloc] init];
+        [CoreBridge loadWallets:wallets];
+        // Check each wallet is up to date
+        for (Wallet *w in wallets)
+        {
+            // We pass no callback so this call is blocking
+            ABC_RequestExchangeRateUpdate([[User Singleton].name UTF8String],
+                                        [[User Singleton].password UTF8String],
+                                        w.currencyNum, NULL, NULL, &error);
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:object];
+            [Util printABC_Error: &error];
+        }
+    }
 }
 
 + (bool)isTestNet

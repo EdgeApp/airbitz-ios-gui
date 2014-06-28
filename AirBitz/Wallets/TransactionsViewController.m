@@ -649,8 +649,12 @@
         }
         else
         {
-            // confirmations
-            if (transaction.confirmations == 1)
+            if (transaction.bSyncing)
+            {
+                cell.confirmationLabel.text = NSLocalizedString(@"Synchronizing", nil);
+                cell.confirmationLabel.textColor = COLOR_BALANCE;
+            }
+            else if (transaction.confirmations == 1)
             {
                 cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmation", transaction.confirmations];
             }

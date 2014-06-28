@@ -114,6 +114,7 @@ typedef enum eAddressPickerType
 	self.keypadView.frame = frame;
 
     [self exchangeRateUpdate:nil]; 
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 }
 
 
@@ -214,8 +215,6 @@ typedef enum eAddressPickerType
     NSLog(@"Updating exchangeRateUpdate");
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 	[self updateTextFieldContents];
-
-    [CoreBridge requestExchangeRateUpdate:wallet.currencyNum];
 }
 
 #pragma mark - Misc Methods

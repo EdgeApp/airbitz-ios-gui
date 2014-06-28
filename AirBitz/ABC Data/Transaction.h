@@ -18,6 +18,7 @@
 @property (nonatomic, copy)     NSString        *strAddress;
 @property (nonatomic, strong)   NSDate          *date;
 @property (nonatomic, assign)   BOOL            bConfirmed;
+@property (nonatomic, assign)   BOOL            bSyncing;
 @property (nonatomic, assign)   unsigned int    confirmations;
 @property (nonatomic, assign)   SInt64			amountSatoshi;
 @property (nonatomic, assign)   double          amountFiat;

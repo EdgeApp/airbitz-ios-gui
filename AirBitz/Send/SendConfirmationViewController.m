@@ -182,7 +182,6 @@
 {
     NSLog(@"Updating exchangeRateUpdate");
 	[self updateTextFieldContents];
-    [CoreBridge requestExchangeRateUpdate:self.wallet.currencyNum];
 }
 
 #pragma mark - Actions Methods
