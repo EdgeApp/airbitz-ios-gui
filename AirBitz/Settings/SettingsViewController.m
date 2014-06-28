@@ -113,13 +113,13 @@ typedef struct sDenomination
 
 tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
-        "BTC", 100000000
+        "BTC", 100000000 // ABC_DENOMINATION_BTC = 0
     },
     {
-        "mBTC", 100000
+        "mBTC", 100000 // ABC_DENOMINATION_MBTC = 1
     },
     {
-        "µBTC", 100
+        "µBTC", 100 // ABC_DENOMINATION_UBTC = 2
     }
 };
 
@@ -288,14 +288,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
     if (_pAccountSettings)
     {
-        for (int i = 0; i < DENOMINATION_CHOICES; i++)
-        {
-            if (_pAccountSettings->bitcoinDenomination.satoshi == gaDenominations[i].satoshi)
-            {
-                retVal = i;
-                break;
-            }
-        }
+        retVal = (NSInteger) _pAccountSettings->bitcoinDenomination.denominationType;
     }
 
     return retVal;
@@ -308,8 +301,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         // set the new values
         _pAccountSettings->bitcoinDenomination.satoshi = gaDenominations[nChoice].satoshi;
-        [self replaceString:&(_pAccountSettings->bitcoinDenomination.szLabel) withString:gaDenominations[nChoice].szLabel];
-
+        _pAccountSettings->bitcoinDenomination.denominationType = (int) nChoice;
+        
         // update the settings in the core
         [self saveSettings];
     }

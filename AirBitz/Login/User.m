@@ -55,8 +55,9 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [self clear];
     }
     self.denomination = 100000000;
+    self.denominationType = ABC_DENOMINATION_BTC;
     self.denominationLabel = @"BTC";
-    self.denominationLabelShort = @"B ";
+    self.denominationLabelShort = @"฿ ";
     return self;
 }
 
@@ -74,13 +75,23 @@ static User *singleton = nil;  // this will be the one and only object this stat
         if (pSettings->bitcoinDenomination.satoshi > 0)
         {
             self.denomination = pSettings->bitcoinDenomination.satoshi;
-            self.denominationLabel = [NSString stringWithUTF8String: pSettings->bitcoinDenomination.szLabel];
-            if ([self.denominationLabel isEqualToString:@"mBTC"])
-                self.denominationLabelShort = @"mB ";
-            else if ([self.denominationLabel isEqualToString:@"μBTC"])
-                self.denominationLabelShort = @"μB ";
-            else
-                self.denominationLabelShort = @"B ";
+            self.denominationType = pSettings->bitcoinDenomination.denominationType;
+
+            switch (self.denominationType) {
+                case ABC_DENOMINATION_BTC:
+                    self.denominationLabel = @"BTC";
+                    self.denominationLabelShort = @"฿ ";
+                    break;
+                case ABC_DENOMINATION_MBTC:
+                    self.denominationLabel = @"mBTC";
+                    self.denominationLabelShort = @"m฿ ";
+                    break;
+                case ABC_DENOMINATION_UBTC:
+                    self.denominationLabel = @"μBTC";
+                    self.denominationLabelShort = @"μ฿ ";
+                    break;
+
+            }
         }
     }
     else

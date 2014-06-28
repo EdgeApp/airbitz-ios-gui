@@ -18,6 +18,7 @@
 @property (nonatomic) int defaultCurrencyNum;
 @property (nonatomic) int64_t denomination;
 @property (nonatomic, copy) NSString* denominationLabel;
+@property (nonatomic) int denominationType;
 @property (nonatomic, copy) NSString* denominationLabelShort;
 
 + (void)initAll;

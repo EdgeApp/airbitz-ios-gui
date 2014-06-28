@@ -414,20 +414,34 @@
 + (int) currencyDecimalPlaces
 {
     int decimalPlaces = 5;
-    if ([[[User Singleton] denominationLabel] isEqualToString:@"µBTC"])
-        decimalPlaces = 2;
-    else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
-        decimalPlaces = 3;
+    switch ([[User Singleton] denominationType]) {
+        case ABC_DENOMINATION_BTC:
+            decimalPlaces = 5;
+            break;
+        case ABC_DENOMINATION_MBTC:
+            decimalPlaces = 3;
+            break;
+        case ABC_DENOMINATION_UBTC:
+            decimalPlaces = 2;
+            break;
+    }
     return decimalPlaces;
 }
 
 + (int) maxDecimalPlaces
 {
     int decimalPlaces = 8;
-    if ([[[User Singleton] denominationLabel] isEqualToString:@"µBTC"])
-        decimalPlaces = 2;
-    else if ([[[User Singleton] denominationLabel] isEqualToString:@"mBTC"])
-        decimalPlaces = 5;
+    switch ([[User Singleton] denominationType]) {
+        case ABC_DENOMINATION_BTC:
+            decimalPlaces = 8;
+            break;
+        case ABC_DENOMINATION_MBTC:
+            decimalPlaces = 5;
+            break;
+        case ABC_DENOMINATION_UBTC:
+            decimalPlaces = 2;
+            break;
+    }
     return decimalPlaces;
 }
 
