@@ -480,7 +480,7 @@
         decimalPlaces = decimals > -1 ? decimals : decimalPlaces;
         NSMutableString *formatted = [[NSMutableString alloc] init];
         if (negative)
-            [formatted appendString: @"("];
+            [formatted appendString: @"-"];
         if (symbol)
         {
             [formatted appendString: [User Singleton].denominationLabelShort];
@@ -504,8 +504,6 @@
             else
                 [formatted appendFormat: @"%c", *p];
         }
-        if (negative)
-            [formatted appendString: @")"];
         free(pFormatted);
         return formatted;
     }
@@ -536,7 +534,7 @@
                                            denomination, &currency, wallet.currencyNum, &error);
     [Util printABC_Error:&error];
     if (result == ABC_CC_Ok)
-        return [NSString stringWithFormat:@"1.00 %@ = %@ %.2f %@", denominationLabel, wallet.currencySymbol, currency, wallet.currencyAbbrev];
+        return [NSString stringWithFormat:@"1.00 %@ = %@ %.3f %@", denominationLabel, wallet.currencySymbol, currency, wallet.currencyAbbrev];
     else
         return @"";
 }

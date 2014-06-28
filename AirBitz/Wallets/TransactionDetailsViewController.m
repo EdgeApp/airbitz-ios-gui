@@ -63,7 +63,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView            *imageAmountEmboss;
 @property (nonatomic, weak) IBOutlet UILabel                *walletLabel;
 @property (nonatomic, weak) IBOutlet UILabel                *bitCoinLabel;
-@property (weak, nonatomic) IBOutlet UILabel                *labelFiatSign;
+@property (weak, nonatomic) IBOutlet UILabel                *labelBTC;
+@property (weak, nonatomic) IBOutlet UILabel                *labelFee;
+//@property (weak, nonatomic) IBOutlet UILabel                *labelFiatSign;
 @property (weak, nonatomic) IBOutlet UILabel                *labelFiatName;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageFiatEmboss;
 @property (nonatomic, weak) IBOutlet UITextField            *fiatTextField;
@@ -174,13 +176,18 @@
 
 	NSMutableString *coinFormatted = [[NSMutableString alloc] init];
     [coinFormatted appendString:
-        [CoreBridge formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees)]];
+        [CoreBridge formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
+    self.bitCoinLabel.text = coinFormatted;
+    self.labelBTC.text = [User Singleton].denominationLabel;
+
+	NSMutableString *feeFormatted = [[NSMutableString alloc] init];
+
     if (self.transaction.amountSatoshi < 0)
     {
-        [coinFormatted appendFormat:@" + %@ fee",
-            [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
+        [feeFormatted appendFormat:@"+%@ fee",
+         [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
     }
-    self.bitCoinLabel.text = coinFormatted;
+    self.labelFee.text = feeFormatted;
 
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -371,10 +378,6 @@
         frame = self.bitCoinLabel.frame;
         frame.origin.y = self.walletLabel.frame.origin.y + self.walletLabel.frame.size.height + 2;
         self.bitCoinLabel.frame = frame;
-
-        frame = self.labelFiatSign.frame;
-        frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 4;
-        self.labelFiatSign.frame = frame;
 
         frame = self.labelFiatName.frame;
         frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 4;

@@ -417,7 +417,13 @@
 	if (nCount > self.selectedWalletIndex)
 	{
 		tABC_WalletInfo *pInfo = aWalletInfo[self.selectedWalletIndex];
-        self.labelSendFrom.text = [NSString stringWithUTF8String:pInfo->szName];
+        
+        NSMutableString *coinFormatted = [[NSMutableString alloc] init];
+        [coinFormatted appendFormat:@"%@ (%@)",
+         [NSString stringWithUTF8String:pInfo->szName],
+         [CoreBridge formatSatoshi:pInfo->balanceSatoshi]];
+
+        self.labelSendFrom.text = coinFormatted;
 	}
 
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
