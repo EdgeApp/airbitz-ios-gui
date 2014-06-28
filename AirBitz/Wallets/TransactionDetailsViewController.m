@@ -187,6 +187,10 @@
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
 	self.nameTextField.placeholder = NSLocalizedString(@"Payee or Business Name", nil);
+    self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    self.nameTextField.font = [UIFont systemFontOfSize:18];
+    self.nameTextField.textAlignment = NSTextAlignmentCenter;
+    
     if (!self.bOldTransaction)
     {
         [self.nameTextField becomeFirstResponder];
