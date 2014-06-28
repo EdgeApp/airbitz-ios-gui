@@ -534,7 +534,7 @@
                                            denomination, &currency, wallet.currencyNum, &error);
     [Util printABC_Error:&error];
     if (result == ABC_CC_Ok)
-        return [NSString stringWithFormat:@"1.00 %@ = %@ %.3f %@", denominationLabel, wallet.currencySymbol, currency, wallet.currencyAbbrev];
+        return [NSString stringWithFormat:@"1 %@ = %@ %.3f %@", denominationLabel, wallet.currencySymbol, currency, wallet.currencyAbbrev];
     else
         return @"";
 }
