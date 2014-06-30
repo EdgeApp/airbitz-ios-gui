@@ -103,22 +103,14 @@
 	frame.origin.y = self.view.frame.size.height;
 	self.keypadView.frame = frame;
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(myTextDidChange:)
-												 name:UITextFieldTextDidChangeNotification
-											   object:self.withdrawlPIN];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(exchangeRateUpdate:)
-                                                 name:NOTIFICATION_EXCHANGE_RATE_CHANGE
-                                               object:nil];
-				
 	_confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
 
     [self updateDisplayLayout];
 }
 
--(void)dealloc
+- (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -168,6 +160,14 @@
 		self.amountBTCTextField.text = nil;
 		[self.amountUSDTextField becomeFirstResponder];
 	}
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(myTextDidChange:)
+												 name:UITextFieldTextDidChangeNotification
+											   object:self.withdrawlPIN];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(exchangeRateUpdate:)
+                                                 name:NOTIFICATION_EXCHANGE_RATE_CHANGE
+                                               object:nil];
     [self exchangeRateUpdate:nil]; 
 }
 

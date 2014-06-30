@@ -90,8 +90,6 @@ typedef enum eAddressPickerType
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
-
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
 }
 
 -(void)awakeFromNib
@@ -113,8 +111,8 @@ typedef enum eAddressPickerType
 	frame.origin.y = frame.origin.y + frame.size.height;
 	self.keypadView.frame = frame;
 
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
     [self exchangeRateUpdate:nil]; 
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 }
 
 
@@ -129,8 +127,9 @@ typedef enum eAddressPickerType
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
+- (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -213,7 +212,6 @@ typedef enum eAddressPickerType
 - (void)exchangeRateUpdate: (NSNotification *)notification
 {
     NSLog(@"Updating exchangeRateUpdate");
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 	[self updateTextFieldContents];
 }
 
