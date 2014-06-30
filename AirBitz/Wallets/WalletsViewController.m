@@ -85,7 +85,6 @@
 	
 	self.archivedWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"ARCHIVE", @"title of archived wallets table")];
 	self.archivedWalletsHeaderView.delegate = self;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated

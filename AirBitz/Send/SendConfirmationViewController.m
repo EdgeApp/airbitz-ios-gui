@@ -26,6 +26,7 @@
 	BOOL                                _callbackSuccess;
 	NSString                            *_strReason;
 	Transaction                         *_completedTransaction;	// nil until sendTransaction is successfully completed
+    UITapGestureRecognizer              *tap;
 }
 
 @property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
@@ -74,12 +75,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] 
+    // Added gesture recognizer to control keyboard
+    tap = [[UITapGestureRecognizer alloc] 
         initWithTarget:self
                 action:@selector(dismissKeyboard)];
-
-    [self.view addGestureRecognizer:tap];
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplayArea];
@@ -103,22 +102,15 @@
 	frame.origin.y = self.view.frame.size.height;
 	self.keypadView.frame = frame;
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(myTextDidChange:)
-												 name:UITextFieldTextDidChangeNotification
-											   object:self.withdrawlPIN];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(exchangeRateUpdate:)
-                                                 name:NOTIFICATION_EXCHANGE_RATE_CHANGE
-                                               object:nil];
-				
 	_confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
 
     [self updateDisplayLayout];
 }
 
--(void)dealloc
+- (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+    [self.view removeGestureRecognizer:tap];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -140,6 +132,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.view addGestureRecognizer:tap];
 	self.amountBTCLabel.text = [User Singleton].denominationLabel; 
     self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
     self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
@@ -184,6 +177,14 @@
 		self.amountBTCTextField.text = nil;
 		[self.amountUSDTextField becomeFirstResponder];
 	}
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(myTextDidChange:)
+												 name:UITextFieldTextDidChangeNotification
+											   object:self.withdrawlPIN];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(exchangeRateUpdate:)
+                                                 name:NOTIFICATION_EXCHANGE_RATE_CHANGE
+                                               object:nil];
     [self exchangeRateUpdate:nil]; 
 }
 
@@ -447,6 +448,8 @@
 
 - (void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
 {
+    [self.view removeGestureRecognizer:tap];
+
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
 	
@@ -458,9 +461,6 @@
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
 	_transactionDetailsController.view.frame = frame;
-	
-	//transactionDetailsController.nameLabel.text = self.nameLabel;
-
 	
 	[self.view addSubview:_transactionDetailsController.view];
 	[UIView animateWithDuration:0.35

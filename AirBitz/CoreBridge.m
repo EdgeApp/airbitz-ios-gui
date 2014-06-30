@@ -714,11 +714,11 @@
         ABC_RequestExchangeRateUpdate([[User Singleton].name UTF8String],
                                       [[User Singleton].password UTF8String],
                                       [User Singleton].defaultCurrencyNum, NULL, NULL, &error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:object];
         [Util printABC_Error: &error];
 
         NSMutableArray *wallets = [[NSMutableArray alloc] init];
         [CoreBridge loadWallets:wallets];
+
         // Check each wallet is up to date
         for (Wallet *w in wallets)
         {
@@ -726,9 +726,9 @@
             ABC_RequestExchangeRateUpdate([[User Singleton].name UTF8String],
                                         [[User Singleton].password UTF8String],
                                         w.currencyNum, NULL, NULL, &error);
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:object];
             [Util printABC_Error: &error];
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:object];
     }
 }
 

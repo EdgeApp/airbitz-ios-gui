@@ -31,9 +31,9 @@
 
 #define USE_AUTOCOMPLETE_QUERY 0
 
-#define DOLLAR_CURRENCY_NUM	840
+#define DOLLAR_CURRENCY_NUM    840
 
-#define TEXTFIELD_VERTICAL_SPACE_OFFSET	7.0 /* how much space between screen header and textField when textField is scrolled all the way to the top */
+#define TEXTFIELD_VERTICAL_SPACE_OFFSET    7.0 /* how much space between screen header and textField when textField is scrolled all the way to the top */
 
 #define SEARCH_RADIUS        16093
 #define CACHE_AGE_SECS       (60 * 15) // 15 min
@@ -43,12 +43,12 @@
 
 @interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
 {
-	UITextField     *_activeTextField;
-	CGRect          _originalFrame;
-	CGRect          _originalHeaderFrame;
-	CGRect          _originalContentFrame;
-	CGRect          _originalScrollableContentFrame;
-	UITableView     *_autoCompleteTable; //table of autoComplete search results (including address book entries)
+    UITextField     *_activeTextField;
+    CGRect          _originalFrame;
+    CGRect          _originalHeaderFrame;
+    CGRect          _originalContentFrame;
+    CGRect          _originalScrollableContentFrame;
+    UITableView     *_autoCompleteTable; //table of autoComplete search results (including address book entries)
     BOOL            _bDoneSentToDelegate;
 }
 
@@ -106,7 +106,7 @@
 {
     [super viewDidLoad];
 
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.contentView];
@@ -136,19 +136,19 @@
     self.notesTextField.returnKeyType = UIReturnKeyDone;
 
     // load all the names from the address book
-	[self generateListOfContactNames];
+    [self generateListOfContactNames];
 
-	UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
-	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateNormal];
-	[self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateSelected];
+    UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
+    [self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateNormal];
+    [self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateSelected];
 
-	self.keypadView.delegate = self;
+    self.keypadView.delegate = self;
     self.keypadView.textField = self.fiatTextField;
-	
-	self.fiatTextField.delegate = self;
-	self.fiatTextField.inputView = self.keypadView;
-	self.notesTextField.delegate = self;
-	self.nameTextField.delegate = self;
+    
+    self.fiatTextField.delegate = self;
+    self.fiatTextField.inputView = self.keypadView;
+    self.notesTextField.delegate = self;
+    self.nameTextField.delegate = self;
 
     // get a callback when there are changes
     [self.nameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
@@ -168,19 +168,19 @@
     self.pickerTextCategory.cropPointBottom = 360; // magic number
     self.pickerTextCategory.delegate = self;
 
-	
+    
     self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
-	self.nameTextField.text = self.transaction.strName;
+    self.nameTextField.text = self.transaction.strName;
     self.notesTextField.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
 
-	NSMutableString *coinFormatted = [[NSMutableString alloc] init];
+    NSMutableString *coinFormatted = [[NSMutableString alloc] init];
     [coinFormatted appendString:
         [CoreBridge formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
     self.bitCoinLabel.text = coinFormatted;
     self.labelBTC.text = [User Singleton].denominationLabel;
 
-	NSMutableString *feeFormatted = [[NSMutableString alloc] init];
+    NSMutableString *feeFormatted = [[NSMutableString alloc] init];
 
     if (self.transaction.amountSatoshi < 0)
     {
@@ -189,11 +189,11 @@
     }
     self.labelFee.text = feeFormatted;
 
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
-	self.nameTextField.placeholder = NSLocalizedString(@"Payee or Business Name", nil);
+    self.nameTextField.placeholder = NSLocalizedString(@"Payee or Business Name", nil);
     self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.nameTextField.font = [UIFont systemFontOfSize:18];
     self.nameTextField.textAlignment = NSTextAlignmentCenter;
@@ -203,33 +203,33 @@
         [self.nameTextField becomeFirstResponder];
     }
 
-	_originalHeaderFrame = self.headerView.frame;
-	_originalContentFrame = self.contentView.frame;
-	_originalScrollableContentFrame = self.scrollableContentView.frame;
+    _originalHeaderFrame = self.headerView.frame;
+    _originalContentFrame = self.contentView.frame;
+    _originalScrollableContentFrame = self.scrollableContentView.frame;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
 
-	if (_originalFrame.size.height == 0)
-	{
-		CGRect frame = self.view.frame;
-		frame.origin.x = 0;
-		frame.origin.y = 0;
-		_originalFrame = frame;
-		
-		if (_transactionDetailsMode == TD_MODE_SENT)
-		{
-			self.walletLabel.text = [NSString stringWithFormat:@"From: %@", self.transaction.strWalletName];
-		}
-		else
-		{
-			self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.strWalletName];
-		}
-		
+    if (_originalFrame.size.height == 0)
+    {
+        CGRect frame = self.view.frame;
+        frame.origin.x = 0;
+        frame.origin.y = 0;
+        _originalFrame = frame;
+        
+        if (_transactionDetailsMode == TD_MODE_SENT)
+        {
+            self.walletLabel.text = [NSString stringWithFormat:@"From: %@", self.transaction.strWalletName];
+        }
+        else
+        {
+            self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.strWalletName];
+        }
+        
         if (self.transaction.amountFiat == 0)
-		{
+        {
             double currency;
             tABC_Error error;
             ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
@@ -237,16 +237,16 @@
                                   self.transaction.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
-		else
-		{
+        else
+        {
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.amountFiat];
         }
 
         // push the calculator keypad to below the bottom of the screen
-		frame = self.keypadView.frame;
-		frame.origin.y = frame.origin.y + frame.size.height;
-		self.keypadView.frame = frame;
-	}
+        frame = self.keypadView.frame;
+        frame.origin.y = frame.origin.y + frame.size.height;
+        self.keypadView.frame = frame;
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -256,7 +256,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-	[DL_URLServer.controller cancelAllRequestsForDelegate:self];
+    [DL_URLServer.controller cancelAllRequestsForDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -291,15 +291,15 @@
 {
     [self resignAllResponders];
 
-	//spawn infoView
-	InfoView *iv = [InfoView CreateWithDelegate:self];
-	iv.frame = self.view.bounds;
-	
-	NSString* path = [[NSBundle mainBundle] pathForResource:@"transactionDetails" ofType:@"html"];
-	NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    //spawn infoView
+    InfoView *iv = [InfoView CreateWithDelegate:self];
+    iv.frame = self.view.bounds;
+    
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"transactionDetails" ofType:@"html"];
+    NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
 
-	NSMutableString *inAddresses = [[NSMutableString alloc] init];
-	NSMutableString *outAddresses = [[NSMutableString alloc] init];
+    NSMutableString *inAddresses = [[NSMutableString alloc] init];
+    NSMutableString *outAddresses = [[NSMutableString alloc] init];
     NSMutableString *baseUrl = [[NSMutableString alloc] init];
     if ([CoreBridge isTestNet]) {
         [baseUrl appendString:@"https://blockexplorer.com/testnet"];
@@ -318,19 +318,19 @@
     }
     NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
                                 baseUrl, self.transaction.strMallealbeID, self.transaction.strMallealbeID];
-	//transaction ID
-	content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
-	//Total sent
-	content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[CoreBridge formatSatoshi:self.transaction.amountSatoshi]];
-	//source
-	content = [content stringByReplacingOccurrencesOfString:@"*3" withString:inAddresses];
-	//Destination
-	content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
-	//Miner Fee
+    //transaction ID
+    content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
+    //Total sent
+    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[CoreBridge formatSatoshi:self.transaction.amountSatoshi]];
+    //source
+    content = [content stringByReplacingOccurrencesOfString:@"*3" withString:inAddresses];
+    //Destination
+    content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
+    //Miner Fee
     NSString * fees = [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees];
-	content = [content stringByReplacingOccurrencesOfString:@"*5" withString:fees];
-	iv.htmlInfoToDisplay = content;
-	[self.view addSubview:iv];
+    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:fees];
+    iv.htmlInfoToDisplay = content;
+    [self.view addSubview:iv];
 }
 
 - (IBAction)buttonInfoTouched:(id)sender
@@ -432,7 +432,7 @@
     // start with nothing
     self.arrayBusinesses = @[];
 
-	NSMutableString *strURL = [[NSMutableString alloc] init];
+    NSMutableString *strURL = [[NSMutableString alloc] init];
 
     // create the search query
     [strURL appendString:[NSString stringWithFormat:@"%@/search/?radius=%d&sort=%d", SERVER_API, SEARCH_RADIUS, SORT_RESULT_DISTANCE]];
@@ -454,37 +454,37 @@
 {
     NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
 
-	CFErrorRef error;
-	ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+    CFErrorRef error;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 
-	__block BOOL accessGranted = NO;
+    __block BOOL accessGranted = NO;
 
-	if (ABAddressBookRequestAccessWithCompletion != NULL)
-	{
-		// we're on iOS 6
-		dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    if (ABAddressBookRequestAccessWithCompletion != NULL)
+    {
+        // we're on iOS 6
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
 
-		ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
-												 {
-													 accessGranted = granted;
-													 dispatch_semaphore_signal(sema);
-												 });
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+                                                 {
+                                                     accessGranted = granted;
+                                                     dispatch_semaphore_signal(sema);
+                                                 });
 
-		dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-		//dispatch_release(sema);
-	}
-	else
-	{
-		// we're on iOS 5 or older
-		accessGranted = YES;
-	}
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        //dispatch_release(sema);
+    }
+    else
+    {
+        // we're on iOS 5 or older
+        accessGranted = YES;
+    }
 
-	if (accessGranted)
-	{
-		CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
-		for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
-		{
-			ABRecordRef person = CFArrayGetValueAtIndex(people, i);
+    if (accessGranted)
+    {
+        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+        for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
+        {
+            ABRecordRef person = CFArrayGetValueAtIndex(people, i);
 
             NSString *strFullName = [Util getNameFromAddressRecord:person];
             if ([strFullName length])
@@ -502,8 +502,8 @@
                     }
                 }
             }
-		}
-	}
+        }
+    }
 
     // store the final
     self.arrayContacts = arrayContacts;
@@ -512,9 +512,9 @@
 
 - (UIImage *)stretchableImage:(NSString *)imageName
 {
-	UIImage *img = [UIImage imageNamed:imageName];
-	UIImage *stretchable = [img resizableImageWithCapInsets:UIEdgeInsetsMake(28, 28, 28, 28)]; //top, left, bottom, right
-	return stretchable;
+    UIImage *img = [UIImage imageNamed:imageName];
+    UIImage *stretchable = [img resizableImageWithCapInsets:UIEdgeInsetsMake(28, 28, 28, 28)]; //top, left, bottom, right
+    return stretchable;
 }
 
 - (void)scrollContentViewToFrame:(CGRect)newFrame
@@ -534,18 +534,18 @@
 
 - (void)scrollContentViewBackToOriginalPosition
 {
-	[UIView animateWithDuration:0.35
-						  delay: 0.0
-						options: UIViewAnimationOptionCurveEaseOut
-					 animations:^
-	 {
+    [UIView animateWithDuration:0.35
+                          delay: 0.0
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
          self.headerView.frame = _originalHeaderFrame;
          self.contentView.frame = _originalContentFrame;
          self.scrollableContentView.frame = _originalScrollableContentFrame;
-	 }
-	 completion:^(BOOL finished)
-	 {
-	 }];
+     }
+     completion:^(BOOL finished)
+     {
+     }];
 }
 
 // returns which prefix the given string starts with
@@ -778,19 +778,19 @@
 
 - (void)addLocationToQuery:(NSMutableString *)query
 {
-	if ([query rangeOfString:@"&ll="].location == NSNotFound)
-	{
-		CLLocation *location = [Location controller].curLocation;
-		if(location) //can be nil if user has locationServices turned off
-		{
-			NSString *locationString = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
-			[query appendFormat:@"&ll=%@", locationString];
-		}
-	}
-	else
-	{
-		//NSLog(@"string already contains ll");
-	}
+    if ([query rangeOfString:@"&ll="].location == NSNotFound)
+    {
+        CLLocation *location = [Location controller].curLocation;
+        if(location) //can be nil if user has locationServices turned off
+        {
+            NSString *locationString = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
+            [query appendFormat:@"&ll=%@", locationString];
+        }
+    }
+    else
+    {
+        //NSLog(@"string already contains ll");
+    }
 }
 
 - (void)getBusinessThumbnails
@@ -849,7 +849,7 @@
 
 - (void)CalculatorDone:(CalculatorView *)calculator
 {
-	[self.fiatTextField resignFirstResponder];
+    [self.fiatTextField resignFirstResponder];
 }
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
@@ -861,49 +861,49 @@
 
 - (void)spawnPayeeTableInFrame:(CGRect)frame
 {
-	CGRect startingFrame = frame;
-	startingFrame.size.height = 0;
-	_autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
+    CGRect startingFrame = frame;
+    startingFrame.size.height = 0;
+    _autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
     _autoCompleteTable.backgroundColor = TABLE_CELL_BACKGROUND_COLOR;
     _autoCompleteTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];     // This will remove extra separators from tableview
-	[self.view addSubview:_autoCompleteTable];
-	
-	_autoCompleteTable.dataSource = self;
-	_autoCompleteTable.delegate = self;
-	
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 _autoCompleteTable.frame = frame;
-	 }
-	 completion:^(BOOL finished)
-	 {
-		 
-	 }];
+    [self.view addSubview:_autoCompleteTable];
+    
+    _autoCompleteTable.dataSource = self;
+    _autoCompleteTable.delegate = self;
+    
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         _autoCompleteTable.frame = frame;
+     }
+     completion:^(BOOL finished)
+     {
+         
+     }];
 }
 
 - (void)dismissPayeeTable
 {
-	if (_autoCompleteTable)
-	{
-		CGRect frame = _autoCompleteTable.frame;
-		frame.size.height = 0.0;
-		frame.origin.y = frame.origin.y + 100;// (_originalScrollableContentFrame.origin.y - self.scrollableContentView.frame.origin.y);
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-			 _autoCompleteTable.frame = frame;
-		 }
-						 completion:^(BOOL finished)
-		 {
-			 [_autoCompleteTable removeFromSuperview];
-			 _autoCompleteTable = nil;
-		 }];
-	}
+    if (_autoCompleteTable)
+    {
+        CGRect frame = _autoCompleteTable.frame;
+        frame.size.height = 0.0;
+        frame.origin.y = frame.origin.y + 100;// (_originalScrollableContentFrame.origin.y - self.scrollableContentView.frame.origin.y);
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             _autoCompleteTable.frame = frame;
+         }
+                         completion:^(BOOL finished)
+         {
+             [_autoCompleteTable removeFromSuperview];
+             _autoCompleteTable = nil;
+         }];
+    }
 }
 
 #pragma mark - UITableView delegates
@@ -947,10 +947,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	self.nameTextField.text = [self.arrayAutoComplete objectAtIndex:indexPath.row];
-	
-	// dismiss the tableView
-	[self.nameTextField resignFirstResponder];
+    self.nameTextField.text = [self.arrayAutoComplete objectAtIndex:indexPath.row];
+    
+    // dismiss the tableView
+    [self.nameTextField resignFirstResponder];
     [self dismissPayeeTable];
     if (!self.bOldTransaction)
     {
@@ -962,7 +962,7 @@
 
 -(void)InfoViewFinished:(InfoView *)infoView
 {
-	[infoView removeFromSuperview];
+    [infoView removeFromSuperview];
 }
 
 #pragma mark - DLURLServer Callbacks
@@ -1061,12 +1061,12 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-	return YES;
+    return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-	_activeTextField = textField;
+    _activeTextField = textField;
 
     CGRect scrollFrame = self.scrollableContentView.frame;
 
@@ -1107,18 +1107,18 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	[textField resignFirstResponder];
+    [textField resignFirstResponder];
 
-	if (textField == self.nameTextField)
-	{
-		[self dismissPayeeTable];
+    if (textField == self.nameTextField)
+    {
+        [self dismissPayeeTable];
         if (!self.bOldTransaction)
         {
             [self.pickerTextCategory.textField becomeFirstResponder];
         }
-	}
+    }
     
-	return YES;
+    return YES;
 }
 
 - (void)textFieldDidChange:(UITextField *)textField
@@ -1194,14 +1194,14 @@
 
 - (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
 {
-	[pickerTextView.textField resignFirstResponder];
+    [pickerTextView.textField resignFirstResponder];
 
     if (!self.bOldTransaction)
     {
         [self.notesTextField becomeFirstResponder];
     }
 
-	return YES;
+    return YES;
 }
 
 - (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
@@ -1276,7 +1276,7 @@
         [self scrollContentViewBackToOriginalPosition];
     }
 
-	_activeTextField = nil;
+    _activeTextField = nil;
 }
 
 @end
