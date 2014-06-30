@@ -1104,7 +1104,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	if (section == SECTION_USERNAME)
 	{
-		label.text = NSLocalizedString(@"ACCOUNT:", @"section header in settings table");
+		label.text = NSLocalizedString(@"ACCOUNT: ", @"section header in settings table");
+        label.text = [NSString stringWithFormat:@"%@ %s", label.text, [[User Singleton].name UTF8String]];
 	}
     if (section == SECTION_NAME)
 	{
