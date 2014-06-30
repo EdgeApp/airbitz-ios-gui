@@ -27,6 +27,7 @@
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 #define QR_CODE_SIZE          200.0
 
+#define WALLET_BUTTON_WIDTH         200
 
 typedef enum eAddressPickerType
 {
@@ -90,6 +91,7 @@ typedef enum eAddressPickerType
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
+    [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
 }

@@ -21,7 +21,7 @@
 #import "PickerTextView.h"
 #import "CoreBridge.h"
 
-#define WALLET_BUTTON_WIDTH         193
+#define WALLET_BUTTON_WIDTH         210
 
 #define POPUP_PICKER_LOWEST_POINT   360
 #define POPUP_PICKER_TABLE_HEIGHT   (IS_IPHONE5 ? 180 : 90)
@@ -95,7 +95,7 @@
     self.pickerTextSendTo.cropPointBottom = POPUP_PICKER_LOWEST_POINT;
     self.pickerTextSendTo.delegate = self;
 
-	self.buttonSelector.textLabel.text = @"";
+	self.buttonSelector.textLabel.text = NSLocalizedString(@"From:", @"From: text on Send Bitcoin screen");
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 
     _selectedWalletIndex = 0;

@@ -20,7 +20,7 @@
 #import "InfoView.h"
 #import "CoreBridge.h"
 
-#define WALLET_BUTTON_WIDTH 150
+#define WALLET_BUTTON_WIDTH 210
 
 #define SCANNER_DELAY_SECS  0
 
@@ -95,7 +95,7 @@ typedef enum eImportState
     self.textPrivateKey.delegate = self;
 
 	self.buttonSelector.delegate = self;
-	self.buttonSelector.textLabel.text = NSLocalizedString(@"Import Wallet:", nil);
+	self.buttonSelector.textLabel.text = NSLocalizedString(@"To:", nil);
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 
     // get a callback when the private key changes
