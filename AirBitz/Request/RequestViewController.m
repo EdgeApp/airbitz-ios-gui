@@ -498,7 +498,8 @@ typedef enum eAddressPickerType
     for (int i = 0; i < [arrayWallets count]; i++)
     {
         Wallet *wallet = [arrayWallets objectAtIndex:i];
-        [arrayWalletNames addObject:wallet.strName];
+        [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+
         if ([_walletUUID isEqualToString: wallet.strUUID])
             _selectedWalletIndex = i;
     }
