@@ -143,7 +143,23 @@
 	self.amountBTCLabel.text = [User Singleton].denominationLabel; 
     self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
     self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
-	self.addressLabel.text = self.sendToAddress;
+    
+    NSString *prefix;
+    NSString *suffix;
+    
+    if ([self.sendToAddress length] > 10)
+    {
+        prefix = [self.sendToAddress substringToIndex:5];
+        suffix = [self.sendToAddress substringFromIndex: [self.sendToAddress length] - 5];
+        self.addressLabel.text = [NSString stringWithFormat:@"%@...%@", prefix, suffix];
+    }
+    else
+    {
+        self.addressLabel.text = self.sendToAddress;
+    }
+    
+    
+    
 	
 	tABC_CC result;
 	double currency;
