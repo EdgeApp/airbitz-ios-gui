@@ -28,6 +28,7 @@
 
 #define TABLE_HEADER_HEIGHT 46.0
 #define TABLE_CELL_HEIGHT   72.0
+#define NO_SEARCHBAR 1
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate>
 {
@@ -110,7 +111,7 @@
 
     _searchShowingFrame = self.viewSearch.frame;
 
-    if (IS_IPHONE5)
+    if (IS_IPHONE5 && !NO_SEARCHBAR)
     {
         self.buttonSearch.hidden = YES;
     }
@@ -296,7 +297,7 @@
         _frameTableWithSearchNoKeyboard = frame;
         frame.size.height -= TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD; // compensate for keyboard
 
-        if (!IS_IPHONE5)
+        if (!IS_IPHONE5 || NO_SEARCHBAR)
         {
             [self.searchTextField becomeFirstResponder];
             frameSearch.origin.x = _searchShowingFrame.origin.x;
@@ -310,7 +311,7 @@
         {
             curView.hidden = NO;
         }
-        if (IS_IPHONE5)
+        if (IS_IPHONE5 && !NO_SEARCHBAR)
         {
             self.buttonSearch.hidden = YES;
         }
@@ -329,7 +330,7 @@
      {
          self.tableView.frame = frame;
 
-         if (!IS_IPHONE5)
+         if (!IS_IPHONE5 || NO_SEARCHBAR)
          {
              self.viewSearch.frame = frameSearch;
          }

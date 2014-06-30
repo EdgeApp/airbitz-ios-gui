@@ -27,6 +27,7 @@
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 #define QR_CODE_SIZE          200.0
 
+#define WALLET_BUTTON_WIDTH         200
 
 typedef enum eAddressPickerType
 {
@@ -90,6 +91,7 @@ typedef enum eAddressPickerType
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
+    [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 }
 
 -(void)awakeFromNib
@@ -496,7 +498,8 @@ typedef enum eAddressPickerType
     for (int i = 0; i < [arrayWallets count]; i++)
     {
         Wallet *wallet = [arrayWallets objectAtIndex:i];
-        [arrayWalletNames addObject:wallet.strName];
+        [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+
         if ([_walletUUID isEqualToString: wallet.strUUID])
             _selectedWalletIndex = i;
     }
