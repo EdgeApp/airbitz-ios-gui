@@ -87,6 +87,7 @@
     self.pickerTextSendTo.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     self.pickerTextSendTo.textField.textColor = [UIColor whiteColor];
     self.pickerTextSendTo.textField.returnKeyType = UIReturnKeyDone;
+    self.pickerTextSendTo.textField.textAlignment = NSTextAlignmentCenter;
     self.pickerTextSendTo.textField.placeholder = NSLocalizedString(@"Bitcoin address or wallet", nil);
     self.pickerTextSendTo.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.pickerTextSendTo.textField.placeholder
                                                                                             attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
