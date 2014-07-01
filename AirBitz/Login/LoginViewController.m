@@ -86,8 +86,6 @@ typedef enum eLoginMode
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	//NSLog(@"Adding keyboard notification");
-	
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -96,9 +94,6 @@ typedef enum eLoginMode
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-   // NSLog(@"%s", __FUNCTION__);
-    
-	//NSLog(@"Removing keyboard notification");
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewWillDisappear:animated];
 }
@@ -117,38 +112,15 @@ typedef enum eLoginMode
 	[self.userNameTextField resignFirstResponder];
 	[self.passwordTextField resignFirstResponder];
 	[self animateToInitialPresentation];
-	
 
-		_bSuccess = NO;
-		//NSLog(@"Calling sign-in");
-		//self.labelStatus.text = @"Calling sign-in";
-		//NSLog(@"Signing in");
-		tABC_Error Error;
-		ABC_SignIn([self.userNameTextField.text UTF8String],
-				   [self.passwordTextField.text UTF8String],
-				   ABC_Request_Callback,
-				   (__bridge void *)self,
-				   &Error);
-		[Util printABC_Error:&Error];
-		
-		if (ABC_CC_Ok == Error.code)
-		{
-			[User Singleton].name = self.userNameTextField.text;
-			[User Singleton].password = self.passwordTextField.text;
-			[[User Singleton] loadSettings];
-            [CoreBridge startWatchers];
-		}
-		else
-		{
-			NSLog(@"%@", [NSString stringWithFormat:@"Sign-in failed:\n%s", Error.szDescription]);
-			self.invalidMessage.hidden = NO;
-
-            [User Singleton].name = nil;
-            [User Singleton].password = nil; 
-		}
-		
-		//NSLog(@"Done calling sign-in");
-
+    _bSuccess = NO;
+    tABC_Error Error;
+    ABC_SignIn([self.userNameTextField.text UTF8String],
+               [self.passwordTextField.text UTF8String],
+               ABC_Request_Callback,
+               (__bridge void *)self,
+               &Error);
+    [Util printABC_Error:&Error];
 }
 
 - (IBAction)SignUp
@@ -323,7 +295,6 @@ typedef enum eLoginMode
 	//Get KeyboardFrame (in Window coordinates)
 	if(_activeTextField)
 	{
-		//NSLog(@"Keyboard will show for Login View");
 		NSDictionary *userInfo = [notification userInfo];
 		CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 		
@@ -331,12 +302,9 @@ typedef enum eLoginMode
 		
 		float remainingSpace = ownFrame.origin.y - [self StatusBarHeight];
 		
-		//NSLog(@"Remaining space: %f, user entry height: %f", remainingSpace, self.userEntryView.frame.size.height);
 		remainingSpace -= self.userEntryView.frame.size.height;
 		
-		//NSLog(@"Remaining space: %f, logo height: %f", remainingSpace, self.logoImage.frame.size.height);
 		float logoScaleFactor = remainingSpace / self.logoImage.frame.size.height;
-		//NSLog(@"Logo scale factor: %f", logoScaleFactor);
 		if(logoScaleFactor >= LOGO_IMAGE_SHRINK_SCALE_FACTOR)
 		{
 			shrinkLogo = YES;
@@ -392,7 +360,6 @@ typedef enum eLoginMode
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	//NSLog(@"Touches Began");
 	UITouch *touch = [touches anyObject];
 	_firstTouchPoint = [touch locationInView:self.view.window];
 }
@@ -470,7 +437,6 @@ typedef enum eLoginMode
 	self.invalidMessage.hidden = YES;
 	_activeTextField = textField;
 	
-	//NSLog(@"TextField began editing");
 	if(_mode == MODE_ENTERING_NEITHER)
 	{
 		if(textField == self.userNameTextField)
@@ -506,33 +472,18 @@ typedef enum eLoginMode
 
 	return NO;
 }
-/*
-- (void)setRecoveryComplete
-{
-    //[self blockUser:NO];
-    NSLog(@"Recovery set complete");
-    if (bSuccess)
-    {
-        NSLog(@"%@", @"Recovery set");
-    }
-    else
-    {
-        NSLog(@"%@", [NSString stringWithFormat:@"Set recovery failed\n%@", strReason]);
-    }
-}*/
 
 - (void)signInComplete
 {
-    //[self blockUser:NO];
-   // NSLog(@"SignIn complete");
     if (_bSuccess)
     {
-       // NSLog(@"%@", @"Successfully Signed In");
-		[self.delegate loginViewControllerDidLogin];
-		self.invalidMessage.hidden = YES;
-
         [User Singleton].name = self.userNameTextField.text;
         [User Singleton].password = self.passwordTextField.text;
+        [[User Singleton] loadSettings];
+        [CoreBridge startWatchers];
+
+        [self.delegate loginViewControllerDidLogin];
+        self.invalidMessage.hidden = YES;
     }
     else
     {
@@ -550,12 +501,13 @@ typedef enum eLoginMode
 {
 	[controller.view removeFromSuperview];
 	_signUpController = nil;
-	//NSLog(@"Signup finished");
-	
-	if([User Singleton].name.length && [User Singleton].password.length)
+
+	if([User isLoggedIn])
 	{
 		_bSuccess = YES;
-		[self signInComplete];
+
+		[self.delegate loginViewControllerDidLogin];
+		self.invalidMessage.hidden = YES;
 	}
 }
 
@@ -563,8 +515,6 @@ typedef enum eLoginMode
 
 void ABC_Request_Callback(const tABC_RequestResults *pResults)
 {
-   // NSLog(@"Request callback");
-    
     if (pResults)
     {
         LoginViewController *controller = (__bridge id)pResults->pData;
@@ -573,7 +523,6 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
  
         if (pResults->requestType == ABC_RequestType_AccountSignIn)
         {
-            //NSLog(@"Sign-in completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
             [controller performSelectorOnMainThread:@selector(signInComplete) withObject:nil waitUntilDone:FALSE];
         }
     }

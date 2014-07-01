@@ -734,12 +734,34 @@
 - (void)createAccountComplete
 {
     [self blockUser:NO];
-
-    //NSLog(@"Account create complete");
     if (_bSuccess)
     {
-		//NSLog(@"Account created");
-		//set username and password for app
+        tABC_Error Error;
+        ABC_SignIn([self.userNameTextField.text UTF8String],
+                   [self.passwordTextField.text UTF8String],
+                   ABC_SignUp_Request_Callback,
+                   (__bridge void *)self,
+                   &Error);
+        [Util printABC_Error:&Error];
+    }
+    else
+    {
+		UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:NSLocalizedString(@"Unable to Sign Up", @"Title of account signup error alert")
+							  message:[NSString stringWithFormat:@"Sign-up failed:\n%@", _strReason]
+							  delegate:nil
+							  cancelButtonTitle:@"OK"
+							  otherButtonTitles:nil];
+		[alert show];
+
+    }
+}
+
+- (void)signInComplete
+{
+    [self blockUser:NO];
+    if (_bSuccess)
+    {
 		[User Singleton].name = self.userNameTextField.text;
 		[User Singleton].password = self.passwordTextField.text;
         [[User Singleton] loadSettings];
@@ -897,33 +919,24 @@
 
         // now that the account is created, create the first wallet
 		[self createFirstWallet];
-
-        [CoreBridge startWatchers];
     }
     else
     {
-        //NSLog(@"%@", [NSString stringWithFormat:@"Account creation failed\n%@", strReason]);
 		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signup error alert")
-							  message:[NSString stringWithFormat:@"Sign-up failed:\n%@", _strReason]
+							  initWithTitle:NSLocalizedString(@"Account Sign In", @"Title of account signin error alert")
+							  message:[NSString stringWithFormat:@"Sign-in failed:\n%@", _strReason]
 							  delegate:nil
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
 		[alert show];
-
     }
 }
 
 - (void)createWalletComplete
 {
     [self blockUser:NO];
-
-    //NSLog(@"Wallet create complete");
     if (_bSuccess)
     {
-        //self.labelStatus.text = [NSString stringWithFormat:@"Wallet created: %@", self.strWalletUUID];
-		//NSLog(@"Successfully created wallet");
-
         [self showPasswordRecoveryController];
     }
     else
@@ -979,8 +992,11 @@ void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
         controller.strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
         if (pResults->requestType == ABC_RequestType_CreateAccount)
         {
-           // NSLog(@"Create account completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
             [controller performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
+        }
+        else if (pResults->requestType == ABC_RequestType_AccountSignIn)
+        {
+            [controller performSelectorOnMainThread:@selector(signInComplete) withObject:nil waitUntilDone:FALSE];
         }
 		else if (pResults->requestType == ABC_RequestType_CreateWallet)
 		{
@@ -994,7 +1010,6 @@ void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
             {
                 //controller.strWalletUUID = @"(Unknown UUID)";
             }
-            //NSLog(@"Create wallet completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
             [controller performSelectorOnMainThread:@selector(createWalletComplete) withObject:nil waitUntilDone:FALSE];
 		}
         else if (pResults->requestType == ABC_RequestType_ChangePassword)
