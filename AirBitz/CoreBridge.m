@@ -611,7 +611,6 @@
     if (ABC_CC_Ok != result)
     {
         [Util printABC_Error:&Error];
-#warning TODO: handle error
     }
 }
 
