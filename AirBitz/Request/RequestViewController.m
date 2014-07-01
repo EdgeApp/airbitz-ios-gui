@@ -29,12 +29,6 @@
 
 #define WALLET_BUTTON_WIDTH         200
 
-typedef enum eAddressPickerType
-{
-    AddressPickerType_SMS,
-    AddressPickerType_EMail
-} tAddressPickerType;
-
 #define OPERATION_CLEAR		0
 #define OPERATION_BACK		1
 #define OPERATION_DONE		2
@@ -45,12 +39,12 @@ typedef enum eAddressPickerType
 #define OPERATION_PLUS		7
 #define OPERATION_PERCENT	8
 
-@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, ShowWalletQRViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, ImportWalletViewControllerDelegate>
+@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, 
+                                     ShowWalletQRViewControllerDelegate, ImportWalletViewControllerDelegate>
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
 	ShowWalletQRViewController  *_qrViewController;
-    tAddressPickerType          _addressPickerType;
     ImportWalletViewController  *_importWalletViewController;
 }
 
@@ -162,38 +156,6 @@ typedef enum eAddressPickerType
 {
 	[self.view endEditing:YES];
     [self bringUpImportWalletView];
-}
-
-- (IBAction)email
-{
-    [self.view endEditing:YES];
-    self.strFullName = @"";
-    self.strEMail = @"";
-    _addressPickerType = AddressPickerType_EMail;
-
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Send Email", nil)
-                          message:NSLocalizedString(@"Select from contacts?", nil)
-                          delegate:self
-                          cancelButtonTitle:NSLocalizedString(@"Yes, Contacts", nil)
-                          otherButtonTitles:NSLocalizedString(@"No, Skip", nil), nil];
-    [alert show];
-}
-
-- (IBAction)SMS
-{
-    [self.view endEditing:YES];
-    self.strPhoneNumber = @"";
-    self.strFullName = @"";
-    _addressPickerType = AddressPickerType_SMS;
-
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Send SMS", nil)
-                          message:NSLocalizedString(@"Select from contacts?", nil)
-                          delegate:self
-                          cancelButtonTitle:NSLocalizedString(@"Yes, Contacts", nil)
-                          otherButtonTitles:NSLocalizedString(@"No, Skip", nil), nil];
-    [alert show];
 }
 
 - (IBAction)QRCodeButton
@@ -343,27 +305,6 @@ typedef enum eAddressPickerType
     completion:^(BOOL finished)
     {
     }];
-}
-
-- (void)showAddressPicker
-{
-	[self.view endEditing:YES];
-
-    ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-
-    picker.peoplePickerDelegate = self;
-
-    if (_addressPickerType == AddressPickerType_SMS)
-    {
-        picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonPhoneProperty]];
-    }
-    else
-    {
-        picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonEmailProperty]];
-    }
-
-    [self presentViewController:picker animated:YES completion:nil];
-    //[self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
 }
 
 // generates and returns a request qr image, stores request id in the given mutable string
@@ -519,117 +460,6 @@ typedef enum eAddressPickerType
     self.arrayWallets = arrayWallets;
 }
 
-- (void)sendEMail
-{
-    //NSLog(@"sendEMail to: %@ / %@", self.strFullName, self.strEMail);
-
-    // if mail is available
-    if ([MFMailComposeViewController canSendMail])
-    {
-        NSMutableString *strBody = [[NSMutableString alloc] init];
-
-        [strBody appendString:@"<html><body>\n"];
-
-        [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
-        [strBody appendString:@"<br><br>\n"];
-
-        // create the request and get the QR Code image
-        NSMutableString *strRequestID = [[NSMutableString alloc] init];
-        NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
-        UIImage *image = [self createRequestQRImageFor:self.strFullName withNotes:self.strEMail storeRequestIDIn:strRequestID storeRequestAddressIn:strRequestAddress scaleAndSave:YES];
-
-        // if we have a request address
-        if ([strRequestAddress length])
-        {
-            [strBody appendFormat:@"%@", strRequestAddress];
-            [strBody appendString:@"<br><br>\n"];
-        }
-
-        NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)];
-        NSString *base64String = [imageData base64Encoded];
-        [strBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/jpeg;base64,%@'></b></p>", base64String]];
-
-        [strBody appendString:@"</body></html>\n"];
-
-
-
-
-        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
-
-        if ([self.strEMail length])
-        {
-            [mailComposer setToRecipients:[NSArray arrayWithObject:self.strEMail]];
-        }
-
-        [mailComposer setSubject:NSLocalizedString(@"Bitcoin Request", nil)];
-
-        [mailComposer setMessageBody:strBody isHTML:YES];
-
-        mailComposer.mailComposeDelegate = self;
-
-        [self presentViewController:mailComposer animated:YES completion:nil];
-        //[self presentModalViewController:mailComposer animated:NO];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"Can't send e-mail"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    }
-}
-
-- (void)sendSMS
-{
-    //NSLog(@"sendSMS to: %@ / %@", self.strFullName, self.strPhoneNumber);
-
-    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
-	if ([MFMessageComposeViewController canSendText] && [MFMessageComposeViewController canSendAttachments])
-	{
-        NSMutableString *strBody = [[NSMutableString alloc] init];
-        [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
-
-        // create the request and get the QR Code image
-        NSMutableString *strRequestID = [[NSMutableString alloc] init];
-        NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
-        UIImage *image = [self createRequestQRImageFor:self.strFullName withNotes:self.strPhoneNumber storeRequestIDIn:strRequestID storeRequestAddressIn:strRequestAddress scaleAndSave:YES];
-
-        // if we have a request address
-        if ([strRequestAddress length])
-        {
-            [strBody appendFormat:@":\n%@", strRequestAddress];
-        }
-
-        // create the attachment
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:QR_CODE_TEMP_FILENAME];
-        BOOL bAttached = [controller addAttachmentData:UIImagePNGRepresentation(image) typeIdentifier:(NSString*)kUTTypePNG filename:filePath];
-        if (!bAttached)
-        {
-            NSLog(@"Could not attach qr code");
-        }
-
-		controller.body = strBody;
-
-        if (self.strPhoneNumber)
-        {
-            if ([self.strPhoneNumber length] != 0)
-            {
-                controller.recipients = @[self.strPhoneNumber];
-            }
-        }
-
-		controller.messageComposeDelegate = self;
-
-        [self presentViewController:controller animated:YES completion:nil];
-        //[self.view.window.rootViewController presentViewController:controller animated:YES completion:nil];
-	}
-}
-
-
-
 - (void)bringUpImportWalletView
 {
     {
@@ -696,153 +526,6 @@ typedef enum eAddressPickerType
 	_qrViewController = nil;
 }
 
-#pragma mark - Address Book delegates
-
-- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
-{
-    [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
-      shouldContinueAfterSelectingPerson:(ABRecordRef)person
-{
-    return YES;
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
-      shouldContinueAfterSelectingPerson:(ABRecordRef)person
-                                property:(ABPropertyID)property
-                              identifier:(ABMultiValueIdentifier)identifier
-{
-
-    self.strFullName = [Util getNameFromAddressRecord:person];
-
-    if (_addressPickerType == AddressPickerType_SMS)
-    {
-        if (property == kABPersonPhoneProperty)
-        {
-            ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
-            for (CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++)
-            {
-                if (identifier == ABMultiValueGetIdentifierAtIndex(multiPhones, i))
-                {
-                    NSString *strPhoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(multiPhones, i);
-                    self.strPhoneNumber = strPhoneNumber;
-                    break;
-                }
-            }
-            CFRelease(multiPhones);
-        }
-
-        [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:^{
-            [self sendSMS];
-        }];
-    }
-    else if (_addressPickerType == AddressPickerType_EMail)
-    {
-        if (property == kABPersonEmailProperty)
-        {
-            ABMultiValueRef multiEMails = ABRecordCopyValue(person, kABPersonEmailProperty);
-            for (CFIndex i = 0; i < ABMultiValueGetCount(multiEMails); i++)
-            {
-                if (identifier == ABMultiValueGetIdentifierAtIndex(multiEMails, i))
-                {
-                    NSString *strEMail = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(multiEMails, i);
-                    self.strEMail = strEMail;
-                    break;
-                }
-            }
-            CFRelease(multiEMails);
-        }
-
-        [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:^{
-            [self sendEMail];
-        }];
-    }
-
-
-    return NO;
-}
-
-#pragma mark - MFMessageComposeViewController delegate
-
-- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
-{
-	switch (result)
-    {
-		case MessageComposeResultCancelled:
-			NSLog(@"Cancelled");
-			break;
-		case MessageComposeResultFailed:
-        {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
-                                                            message:@"Error sending SMS"
-														   delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles: nil];
-			[alert show];
-        }
-			break;
-
-		case MessageComposeResultSent:
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
-                                                            message:@"Request sent"
-														   delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles: nil];
-			[alert show];
-        }
-			break;
-
-		default:
-			break;
-	}
-
-    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - Mail Compose Delegate Methods
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    NSString *strTitle = nil;
-    NSString *strMsg = nil;
-
-	switch (result)
-    {
-		case MFMailComposeResultCancelled:
-            strMsg = NSLocalizedString(@"Email cancelled.", nil);
-			break;
-
-		case MFMailComposeResultSaved:
-            strMsg = NSLocalizedString(@"Email saved to send later.", nil);
-			break;
-
-		case MFMailComposeResultSent:
-            strMsg = NSLocalizedString(@"Email sent.", nil);
-			break;
-
-		case MFMailComposeResultFailed:
-		{
-            strTitle = NSLocalizedString(@"Error sending Email.", nil);
-            strMsg = [error localizedDescription];
-			break;
-		}
-		default:
-			break;
-	}
-
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
-                                                    message:strMsg
-                                                   delegate:nil
-                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                          otherButtonTitles:nil];
-    [alert show];
-
-    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
 #pragma mark - Textfield delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -856,27 +539,6 @@ typedef enum eAddressPickerType
 	self.keypadView.textField = textField;
 	self.BTC_TextField.text = @"";
 	self.USD_TextField.text = @"";
-}
-
-#pragma mark - UIAlertView delegates
-
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	// we only use the alert for selecting from contacts or not
-
-    // if they wanted to select from contacts
-    if (buttonIndex == 0)
-    {
-        [self performSelector:@selector(showAddressPicker) withObject:nil afterDelay:0.0];
-    }
-    else if (_addressPickerType == AddressPickerType_SMS)
-    {
-        [self performSelector:@selector(sendSMS) withObject:nil afterDelay:0.0];
-    }
-    else if (_addressPickerType == AddressPickerType_EMail)
-    {
-        [self performSelector:@selector(sendEMail) withObject:nil afterDelay:0.0];
-    }
 }
 
 #pragma mark - Import Wallet Delegates
