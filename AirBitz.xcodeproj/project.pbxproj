@@ -467,6 +467,8 @@
 		B5FD393418F06FD800BE2670 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD393318F06FD800BE2670 /* StylizedTextField.m */; };
 		B5FD393618F0A67100BE2670 /* transactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393518F0A67100BE2670 /* transactionDetails.html */; };
 		B5FD394718F240E600BE2670 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */; };
+		DAAC216019633FFB00CC0F1E /* btn_expand@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC215E19633FFB00CC0F1E /* btn_expand@2x~iphone.png */; };
+		DAAC216119633FFB00CC0F1E /* btn_expand~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC215F19633FFB00CC0F1E /* btn_expand~iphone.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1087,6 +1089,8 @@
 		B5FD393518F0A67100BE2670 /* transactionDetails.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = transactionDetails.html; sourceTree = "<group>"; };
 		B5FD394518F240E600BE2670 /* AutoCompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCompleteTextField.h; sourceTree = "<group>"; };
 		B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCompleteTextField.m; sourceTree = "<group>"; };
+		DAAC215E19633FFB00CC0F1E /* btn_expand@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_expand@2x~iphone.png"; sourceTree = "<group>"; };
+		DAAC215F19633FFB00CC0F1E /* btn_expand~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_expand~iphone.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1669,6 +1673,8 @@
 				B59C144718C012B500AEA789 /* bkg_dark_header~iphone.png */,
 				B5C0A8D618E63FE6008F302C /* bkg_flash_controls@2x~iphone.png */,
 				B5C0A8D718E63FE6008F302C /* bkg_flash_controls~iphone.png */,
+				DAAC215E19633FFB00CC0F1E /* btn_expand@2x~iphone.png */,
+				DAAC215F19633FFB00CC0F1E /* btn_expand~iphone.png */,
 				B59C144818C012B500AEA789 /* btn_0@2x~iphone.png */,
 				B59C144918C012B500AEA789 /* btn_0~iphone.png */,
 				B59C144A18C012B500AEA789 /* btn_1@2x~iphone.png */,
@@ -2200,6 +2206,7 @@
 				B5184B7E18E0F4DA0001712A /* btn_big_blue2_dark~iphone.png in Resources */,
 				B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */,
 				B59C153918C012B500AEA789 /* tabbar_popup_left~iphone.png in Resources */,
+				DAAC216119633FFB00CC0F1E /* btn_expand~iphone.png in Resources */,
 				B55A032318EB597D00845090 /* btn_addCategory~iphone.png in Resources */,
 				B59C151018C012B500AEA789 /* emboss_up@2x~iphone.png in Resources */,
 				B59C153D18C012B500AEA789 /* tabbar_popup_right~iphone.png in Resources */,
@@ -2280,6 +2287,7 @@
 				B59C14E918C012B500AEA789 /* btn_clear~iphone.png in Resources */,
 				B59C153618C012B500AEA789 /* tabbar_divider@2x~iphone.png in Resources */,
 				B57C20AD18C2FBE7005D7245 /* bd_cell_single@2x~iphone.png in Resources */,
+				DAAC216019633FFB00CC0F1E /* btn_expand@2x~iphone.png in Resources */,
 				B5675BBC18A1A1B7002E0703 /* btn_right@2x~iphone.png in Resources */,
 				4C7247AB193516630091C286 /* icon_calendar@2x~iphone.png in Resources */,
 				B55A030518EA206300845090 /* btn_unselected~iphone.png in Resources */,
