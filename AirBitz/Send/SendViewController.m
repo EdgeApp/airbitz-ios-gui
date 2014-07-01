@@ -201,8 +201,6 @@
         if ([_walletUUID isEqualToString: wallet.strUUID])
             _selectedWalletIndex = i;
     }
-    // Doesn't seem like this will ever be non-zero
-    assert(_selectedWalletIndex == 0);
     
     if (_selectedWalletIndex < [arrayWallets count])
     {
