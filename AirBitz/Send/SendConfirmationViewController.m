@@ -197,7 +197,6 @@
 
 - (void)exchangeRateUpdate: (NSNotification *)notification
 {
-    NSLog(@"Updating exchangeRateUpdate");
 	[self updateTextFieldContents];
 }
 
@@ -391,23 +390,52 @@
 			tABC_TxDetails Details;
 			Details.amountSatoshi = self.amountToSendSatoshi;
 			Details.amountCurrency = currency;
-			Details.amountFeesAirbitzSatoshi = 5000;
-			Details.amountFeesMinersSatoshi = 10000;
-			Details.szName = "Anonymous";
-			Details.szCategory = "";
-			Details.szNotes = "";
+            // These will be calculated for us
+			Details.amountFeesAirbitzSatoshi = 0;
+			Details.amountFeesMinersSatoshi = 0;
+            // If this is a transfer, populate the comments
+            Details.szName = "Anonymous";
+            Details.szCategory = "";
+            Details.szNotes = "";
 			Details.attributes = 0x2;
 			
 			tABC_WalletInfo *info = aWalletInfo[self.selectedWalletIndex];
 			
-			result = ABC_InitiateSendRequest([[User Singleton].name UTF8String],
-										[[User Singleton].password UTF8String],
-										info->szUUID,
-										[self.sendToAddress UTF8String],
-										&Details,
-										ABC_SendConfirmation_Callback,
-										(__bridge void *)self,
-										&Error);
+            if (self.bAddressIsWalletUUID)
+            {
+                NSString *categoryText = NSLocalizedString(@"Transfer:Wallet:", nil);
+                tABC_TransferDetails Transfer;
+                Transfer.szSrcWalletUUID = strdup(info->szUUID);
+                Transfer.szSrcName = strdup([self.destWallet.strName UTF8String]);
+                Transfer.szSrcCategory = strdup([[NSString stringWithFormat:@"%@%@", categoryText, self.destWallet.strName] UTF8String]);
+
+                Transfer.szDestWalletUUID = strdup([self.destWallet.strUUID UTF8String]);
+                Transfer.szDestName = strdup([self.wallet.strName UTF8String]);
+                Transfer.szDestCategory = strdup([[NSString stringWithFormat:@"%@%@", categoryText, self.wallet.strName] UTF8String]);
+
+                result = ABC_InitiateTransfer([[User Singleton].name UTF8String],
+                                            [[User Singleton].password UTF8String],
+                                            &Transfer, &Details,
+                                            ABC_SendConfirmation_Callback,
+                                            (__bridge void *)self,
+                                            &Error);
+
+                free(Transfer.szSrcWalletUUID);
+                free(Transfer.szSrcName);
+                free(Transfer.szSrcCategory);
+                free(Transfer.szDestWalletUUID);
+                free(Transfer.szDestName);
+                free(Transfer.szDestCategory);
+            } else {
+                result = ABC_InitiateSendRequest([[User Singleton].name UTF8String],
+                                            [[User Singleton].password UTF8String],
+                                            info->szUUID,
+                                            [self.sendToAddress UTF8String],
+                                            &Details,
+                                            ABC_SendConfirmation_Callback,
+                                            (__bridge void *)self,
+                                            &Error);
+            }
 			if (result == ABC_CC_Ok)
 			{
 				[self showSendStatus];
@@ -446,7 +474,7 @@
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
-- (void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
+- (void)launchTransactionDetailsWithTransaction:(Wallet *)wallet withTx:(Transaction *)transaction
 {
     [self.view removeGestureRecognizer:tap];
 
@@ -490,70 +518,24 @@
     [self hideSendStatus];
 }
 
-- (void)sendBitcoinComplete:(NSString *)transactionID
+- (void)sendBitcoinComplete:(NSArray *)params
 {
-	[self performSelector:@selector(showTransactionDetails:) withObject:transactionID afterDelay:3.0]; //show sending screen for 3 seconds
+	[self performSelector:@selector(showTransactionDetails:) withObject:params afterDelay:3.0]; //show sending screen for 3 seconds
 }
 
-- (void)showTransactionDetails:(NSString *)transactionID
+- (void)showTransactionDetails:(NSArray *)params
 {
+    if ([params count] < 2) {
+        NSLog(@"Not enought args\n");
+        return;
+    }
+    NSString *walletUUID = params[0];
+    NSString *txId = params[1];
+    Wallet *wallet = [CoreBridge getWallet:walletUUID];
+    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
 	if (_callbackSuccess)
 	{
-		tABC_WalletInfo **aWalletInfo = NULL;
-		tABC_Error error;
-		tABC_TxInfo *txInfo;
-		//tABC_TxDetails *details;
-		unsigned int nCount;
-
-		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &error);
-
-		if (nCount)
-		{
-			tABC_WalletInfo *walletInfo = aWalletInfo[self.selectedWalletIndex];
-
-			NSLog(@"Transaction complete with Transaction ID: %@", transactionID);
-
-
-			tABC_CC result = ABC_GetTransaction([[User Singleton].name UTF8String],
-                                                [[User Singleton].password UTF8String],
-                                                walletInfo->szUUID,
-                                                [transactionID UTF8String],
-                                                &txInfo,
-                                                &error);
-
-			if (result == ABC_CC_Ok)
-			{
-				_completedTransaction = [[Transaction alloc] init];
-
-				NSString *address;
-				if(txInfo->countOutputs)
-				{
-					address = [NSString stringWithUTF8String:txInfo->aOutputs[0]->szAddress];
-				}
-				else
-				{
-					address = @"NO ADDRESS";
-				}
-
-				_completedTransaction.strID = transactionID;
-				_completedTransaction.strWalletUUID = [NSString stringWithUTF8String:walletInfo->szUUID];
-				_completedTransaction.strWalletName = [NSString stringWithUTF8String:walletInfo->szName];
-				_completedTransaction.strAddress = address;
-				_completedTransaction.date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)txInfo->timeCreation];
-				_completedTransaction.bConfirmed = NO;
-				_completedTransaction.confirmations = 0;
-
-				_completedTransaction.amountSatoshi = txInfo->pDetails->amountSatoshi;
-				_completedTransaction.balance = 0;
-				_completedTransaction.strCategory = [NSString stringWithUTF8String:txInfo->pDetails->szCategory];
-				_completedTransaction.strNotes = [NSString stringWithUTF8String:txInfo->pDetails->szNotes];
-
-				ABC_FreeWalletInfoArray(aWalletInfo, nCount);
-				ABC_FreeTransaction(txInfo);
-				
-				[self launchTransactionDetailsWithTransaction:_completedTransaction];
-			}
-		}
+        [self launchTransactionDetailsWithTransaction:wallet withTx:transaction];
 	}
 	else
 	{
@@ -594,10 +576,17 @@
 {
     int64_t fees = 0;
 	tABC_Error error;
+    NSString *dest = NULL;
+    if (self.bAddressIsWalletUUID) {
+        dest = self.destWallet.strUUID;
+    } else {
+        dest = self.sendToAddress;
+    }
     if ([CoreBridge calcSendFees:self.wallet.strUUID
-                          sendTo:self.sendToAddress
+                          sendTo:dest
                     amountToSend:self.amountToSendSatoshi
-                  storeResultsIn:&fees])
+                  storeResultsIn:&fees
+                  walletTransfer:self.bAddressIsWalletUUID])
     {
         double currencyFees = 0.0;
         self.conversionLabel.textColor = [UIColor whiteColor];
@@ -756,13 +745,17 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
         SendConfirmationViewController *controller = (__bridge id)pResults->pData;
         controller->_callbackSuccess = (BOOL)pResults->bSuccess;
         controller->_strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
-		
+
         if (pResults->requestType == ABC_RequestType_SendBitcoin)
         {
             if (pResults->bSuccess)
             {
+                NSString *walletUUID = [NSString stringWithUTF8String:pResults->szWalletUUID];
+                NSString *txId = [NSString stringWithUTF8String:pResults->pRetData];
+                NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
+
                 [controller performSelectorOnMainThread:@selector(sendBitcoinComplete:)
-                                             withObject:[NSString stringWithUTF8String:pResults->pRetData]
+                                             withObject:params
                                           waitUntilDone:FALSE];
                 free(pResults->pRetData);
             } else {

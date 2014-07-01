@@ -364,7 +364,7 @@
                                   initWithTitle:self.labelTitle.text
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                            self.labelTitle.text,
-                                           NSLocalizedString(@"You must entere a user name", @"")]
+                                           NSLocalizedString(@"You must enter a user name", @"")]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];

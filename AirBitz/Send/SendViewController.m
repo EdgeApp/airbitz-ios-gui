@@ -226,6 +226,12 @@
     _sendConfirmationViewController.bAddressIsWalletUUID = bToIsUUID;
 	_sendConfirmationViewController.amountToSendSatoshi = amount;
     _sendConfirmationViewController.wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    if (bToIsUUID)
+    {
+        Wallet *destWallet = [CoreBridge getWallet:strTo];
+        _sendConfirmationViewController.destWallet = destWallet;
+        _sendConfirmationViewController.sendToAddress = destWallet.strName;
+    }
 	_sendConfirmationViewController.selectedWalletIndex = _selectedWalletIndex;
 	_sendConfirmationViewController.nameLabel = nameLabel;
 

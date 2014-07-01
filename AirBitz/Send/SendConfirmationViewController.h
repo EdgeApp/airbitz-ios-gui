@@ -20,6 +20,7 @@
 @property (nonatomic, assign)   int64_t                                     amountToSendSatoshi;
 @property (nonatomic, assign)   int                                         selectedWalletIndex;
 @property (nonatomic, strong)   Wallet                                      *wallet;
+@property (nonatomic, strong)   Wallet                                      *destWallet;
 @property (nonatomic, assign)   BOOL                                        bAddressIsWalletUUID;
 
 @end
