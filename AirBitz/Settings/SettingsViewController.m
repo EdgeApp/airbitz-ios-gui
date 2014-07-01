@@ -1385,8 +1385,16 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
     NSInteger section = (cell.tag >> 8);
     if (section == SECTION_LOGOUT) {
-        [[User Singleton] clear];
-        [self.delegate SettingsViewControllerDone:self];
+        [self blockUser:YES];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [cell.button setTitle:@"Please Wait..." forState:UIControlStateNormal];
+            [[User Singleton] clear];
+
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self blockUser:NO];
+                [self.delegate SettingsViewControllerDone:self];
+            });
+        });
     } else if (section == SECTION_DEBUG) {
         [self bringUpDebugView];
     }
