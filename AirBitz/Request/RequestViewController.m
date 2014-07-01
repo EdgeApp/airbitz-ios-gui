@@ -498,19 +498,22 @@ typedef enum eAddressPickerType
     for (int i = 0; i < [arrayWallets count]; i++)
     {
         Wallet *wallet = [arrayWallets objectAtIndex:i];
+ 
         [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
-
+ 
         if ([_walletUUID isEqualToString: wallet.strUUID])
             _selectedWalletIndex = i;
     }
-
+    // Doesn't seem like this will ever be non-zero
+    assert(_selectedWalletIndex == 0);
+    
     if (_selectedWalletIndex < [arrayWallets count])
     {
         Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
         self.keypadView.currencyNum = wallet.currencyNum;
 
         self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-        [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWalletIndex] forState:UIControlStateNormal];
+        [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
     }
     self.arrayWallets = arrayWallets;
@@ -676,6 +679,9 @@ typedef enum eAddressPickerType
 
     // Update wallet UUID
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+    
     _walletUUID = wallet.strUUID;
 
     self.keypadView.currencyNum = wallet.currencyNum;

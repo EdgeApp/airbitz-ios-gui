@@ -295,9 +295,10 @@ typedef enum eImportState
 
     if ([arrayWallets count] > 0)
     {
+        Wallet *wallet = [arrayWallets objectAtIndex:0];
         _selectedWallet = 0;
         self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-        [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWallet] forState:UIControlStateNormal];
+        [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = (int) _selectedWallet;
     }
 
