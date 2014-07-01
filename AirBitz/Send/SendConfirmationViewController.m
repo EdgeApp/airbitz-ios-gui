@@ -140,7 +140,7 @@
     NSString *prefix;
     NSString *suffix;
     
-    if ([self.sendToAddress length] > 10)
+    if ([self.sendToAddress length] > 10 && !self.bAddressIsWalletUUID)
     {
         prefix = [self.sendToAddress substringToIndex:5];
         suffix = [self.sendToAddress substringFromIndex: [self.sendToAddress length] - 5];
