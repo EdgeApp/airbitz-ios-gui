@@ -40,6 +40,7 @@
 
 // notifications
 
+#define NOTIFICATION_MAIN_RESET                         @"Main_Views_Reset"
 #define NOTIFICATION_BLOCK_HEIGHT_CHANGE                @"Block_Height_Change"
 #define NOTIFICATION_EXCHANGE_RATE_CHANGE               @"Exchange_Rate_Change"
 #define NOTIFICATION_TRANSACTION_DETAILS_EXITED         @"Notification_Transaction_Details_Exited"     // sent when the user has finished using a transaction details screen

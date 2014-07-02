@@ -9,6 +9,7 @@
 #import "User.h"
 #import "ABC.h"
 #import "Util.h"
+#import "CommonTypes.h"
 #import "CoreBridge.h"
 
 static BOOL bInitialized = NO;
@@ -42,9 +43,17 @@ static User *singleton = nil;  // this will be the one and only object this stat
     return singleton;
 }
 
-+(bool) isLoggedIn
++ (bool)isLoggedIn
 {
     return [User Singleton].name.length && [User Singleton].password.length;
+}
+
++ (void)checkAutoLogout
+{
+    if ([User isLoggedIn])
+    {
+        [[User Singleton] checkLoginExpired];
+    }
 }
 
 - (id)init
@@ -63,6 +72,9 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 - (void)loadSettings
 {
+    if (!self.loginTime) {
+        self.loginTime = [NSDate date];
+    }
     tABC_Error Error;
     tABC_AccountSettings *pSettings = NULL;
     tABC_CC result = ABC_LoadAccountSettings([self.name UTF8String],
@@ -71,6 +83,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
                                              &Error);
     if (ABC_CC_Ok == result)
     {
+        self.minutesAutoLogout = pSettings->minutesAutoLogout;
         self.defaultCurrencyNum = pSettings->currencyNum;
         if (pSettings->bitcoinDenomination.satoshi > 0)
         {
@@ -101,6 +114,19 @@ static User *singleton = nil;  // this will be the one and only object this stat
     ABC_FreeAccountSettings(pSettings);
 }
 
+- (void)checkLoginExpired
+{
+    if (!self.loginTime) {
+        return;
+    }
+    NSDate *now = [NSDate date];
+    int minutes = [now timeIntervalSinceDate:self.loginTime] / 60.0;
+    if (minutes >= self.minutesAutoLogout) {
+        [[User Singleton] clear];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
+    }
+}
+
 - (void)clear
 {
     if (self.password != nil)
@@ -108,6 +134,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [CoreBridge logout];
     }
     self.password = nil;
+    self.loginTime = nil;
 }
 
 @end

@@ -93,6 +93,7 @@ typedef enum eAppMode
                    (unsigned int)[seedData length],
                    &Error);
     [Util printABC_Error:&Error];
+
     // Initialize the exchange rates queue
     [CoreBridge requestExchangeRateUpdate:self];
 #endif
@@ -111,6 +112,7 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit:) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchSend:) name:NOTIFICATION_LAUNCH_SEND_FOR_WALLET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRequest:) name:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetViews:) name:NOTIFICATION_MAIN_RESET object:nil];
 }
 
 /**
@@ -431,10 +433,10 @@ typedef enum eAppMode
 
 -(void)SettingsViewControllerDone:(SettingsViewController *)controller
 {
+    [self loadAdditionalViews];
+
 	_appMode = APP_MODE_DIRECTORY;
 	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
-
-    [self loadAdditionalViews];
 }
 
 #pragma mark - LoginViewControllerDelegates
@@ -635,6 +637,13 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         [_requestViewController resetViews];
         [self.tabBar selectButtonAtIndex:APP_MODE_REQUEST];
     }
+}
+
+- (void)resetViews:(NSNotification *)notification
+{
+    // Force the tabs to redraw the selected view
+    _selectedViewController = nil;
+    [self launchViewControllerBasedOnAppMode];
 }
 
 @end
