@@ -663,47 +663,17 @@
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="IsP-NR-ytZ">
-                                <rect key="frame" x="0.0" y="197" width="320" height="253"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="IsP-NR-ytZ">
+                                <rect key="frame" x="-1" y="169" width="320" height="353"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="2RA-mg-ye2" userLabel="View - Middle">
                                 <rect key="frame" x="0.0" y="167" width="320" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code or use photo" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xGm-o9-j7u" customClass="LatoLabel">
-                                        <rect key="frame" x="12" y="3" width="225" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k8T-3x-9qh">
-                                        <rect key="frame" x="245" y="3" width="23" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="btn_camera.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="viy-8N-Bpq">
-                                        <rect key="frame" x="235" y="0.0" width="46" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonCameraTouched:" destination="c1q-yF-WIr" eventType="touchUpInside" id="OFN-ge-5n3"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_flash_controls.png" id="SeT-1Q-ObK">
-                                <rect key="frame" x="0.0" y="450" width="320" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <view contentMode="scaleToFill" id="P8E-fr-7ke" customClass="FlashSelectView">
-                                <rect key="frame" x="86" y="461" width="149" height="48"/>
+                                <rect key="frame" x="240" y="293" width="45" height="95"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -717,6 +687,32 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code or use photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xGm-o9-j7u" customClass="LatoLabel">
+                                <rect key="frame" x="0.0" y="178" width="317" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="-1" height="-1"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k8T-3x-9qh">
+                                <rect key="frame" x="34" y="294" width="36" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="btn_album.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="viy-8N-Bpq">
+                                <rect key="frame" x="26" y="287" width="53" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonCameraTouched:" destination="c1q-yF-WIr" eventType="touchUpInside" id="OFN-ge-5n3"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" id="1GV-VN-mhP" customClass="ButtonSelectorView">
                                 <rect key="frame" x="26" y="88" width="273" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -728,7 +724,6 @@
                     <connections>
                         <outlet property="buttonSelector" destination="1GV-VN-mhP" id="udC-AU-ER5"/>
                         <outlet property="flashSelector" destination="P8E-fr-7ke" id="N5Z-qc-wEU"/>
-                        <outlet property="imageFlashFrame" destination="SeT-1Q-ObK" id="VG6-DL-4Pa"/>
                         <outlet property="imageSendTo" destination="eg7-WO-FJq" id="fdP-k8-W4Z"/>
                         <outlet property="imageTopFrame" destination="Z4x-IZ-QSd" id="S48-MA-MxZ"/>
                         <outlet property="labelSendTo" destination="k2x-c8-HxP" id="oRd-bI-DYt"/>
@@ -918,7 +913,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="69b-p5-Bpq">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="69b-p5-Bpq">
                                         <rect key="frame" x="141" y="371" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="btn_alwaysConfirm_off.png">
@@ -929,7 +924,7 @@
                                             <action selector="alwaysConfirm:" destination="mXe-0d-x2m" eventType="touchUpInside" id="IDK-7F-pwx"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always confirm for future transactions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eoS-dN-sXy" customClass="LatoLabel">
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always confirm for future transactions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eoS-dN-sXy" customClass="LatoLabel">
                                         <rect key="frame" x="20" y="408" width="280" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -1394,22 +1389,34 @@
                                         <rect key="frame" x="0.0" y="108" width="320" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code or use photo" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OV6-ZE-mtN" customClass="LatoLabel">
-                                                <rect key="frame" x="12" y="5" width="225" height="21"/>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code or use photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OV6-ZE-mtN" customClass="LatoLabel">
+                                                <rect key="frame" x="0.0" y="10" width="320" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
+                                                <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <size key="shadowOffset" width="-1" height="-1"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yFK-Gw-Mzd">
-                                                <rect key="frame" x="245" y="5" width="23" height="23"/>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="t8h-iv-TGi" userLabel="View - Bottom">
+                                        <rect key="frame" x="0.0" y="137" width="320" height="327"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="1Ab-Lx-n8L">
+                                                <rect key="frame" x="0.0" y="-30" width="320" height="357"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" id="VVV-KZ-RL3" customClass="FlashSelectView">
+                                                <rect key="frame" x="240" y="100" width="45" height="95"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="btn_camera.png">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                            </button>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="tintColor" red="0.1333333333" green="0.45882352939999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ARW-Dc-rRh">
-                                                <rect key="frame" x="235" y="0.0" width="46" height="32"/>
+                                                <rect key="frame" x="31" y="79" width="57" height="51"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1418,26 +1425,13 @@
                                                     <action selector="buttonCameraTouched:" destination="MbV-1q-ikJ" eventType="touchUpInside" id="Z8i-Cg-NNa"/>
                                                 </connections>
                                             </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="t8h-iv-TGi" userLabel="View - Bottom">
-                                        <rect key="frame" x="0.0" y="137.00000048887048" width="320" height="326.99999951112954"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="1Ab-Lx-n8L">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="249"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_flash_controls.png" id="jdY-n5-XnA">
-                                                <rect key="frame" x="0.0" y="257" width="320" height="69.999999511129488"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                            </imageView>
-                                            <view contentMode="scaleToFill" id="VVV-KZ-RL3" customClass="FlashSelectView">
-                                                <rect key="frame" x="85" y="265" width="149" height="49.999999922401507"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yFK-Gw-Mzd">
+                                                <rect key="frame" x="38" y="83" width="43" height="42"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="btn_album.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1500,7 +1494,6 @@
                         <outlet property="buttonSelector" destination="NEk-qX-9fN" id="Oi0-Dc-1wE"/>
                         <outlet property="flashSelector" destination="VVV-KZ-RL3" id="Gbf-Hh-39U"/>
                         <outlet property="imageApproved" destination="UCo-ze-VCd" id="DLN-0C-XNp"/>
-                        <outlet property="imageFlashFrame" destination="jdY-n5-XnA" id="WV8-M7-7dH"/>
                         <outlet property="imageNotApproved" destination="dnh-Tx-cKC" id="vGT-Rj-Lmw"/>
                         <outlet property="imagePasswordEmboss" destination="Xol-70-i3L" id="N9N-Sx-j8j"/>
                         <outlet property="labelEnter" destination="HVK-hq-Jcu" id="Sxy-TP-lvl"/>
@@ -1518,7 +1511,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yQB-cu-4nR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="852" y="683"/>
+            <point key="canvasLocation" x="-433" y="1437"/>
         </scene>
         <!--Wallets View Controller-->
         <scene sceneID="Vil-Xp-bQm">
@@ -4399,17 +4392,16 @@
         <image name="bd_icon_web.png" width="15" height="16"/>
         <image name="bkg_categories.png" width="320" height="209"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
-        <image name="bkg_flash_controls.png" width="320" height="70"/>
         <image name="bkg_textfield.png" width="13" height="15"/>
         <image name="btn_SMS.png" width="61" height="66"/>
         <image name="btn_add.png" width="37" height="37"/>
         <image name="btn_addCategory.png" width="38" height="31"/>
+        <image name="btn_album.png" width="32" height="32"/>
         <image name="btn_alwaysConfirm_off.png" width="36" height="36"/>
         <image name="btn_alwaysConfirm_on.png" width="36" height="36"/>
         <image name="btn_big_blue.png" width="251" height="41"/>
         <image name="btn_big_green.png" width="251" height="41"/>
         <image name="btn_blue.png" width="110" height="26"/>
-        <image name="btn_camera.png" width="23" height="23"/>
         <image name="btn_cancel.png" width="143" height="41"/>
         <image name="btn_changeCategories.png" width="291" height="41"/>
         <image name="btn_deleteCategory.png" width="38" height="31"/>

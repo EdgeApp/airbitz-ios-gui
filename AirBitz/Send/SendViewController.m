@@ -445,17 +445,6 @@
 						}
 					}
 					break;
-				case FLASH_ITEM_AUTO:
-					if ([device isTorchModeSupported:AVCaptureTorchModeAuto])
-					{
-						NSError *error = nil;
-						if ([device lockForConfiguration:&error])
-						{
-							device.torchMode = AVCaptureTorchModeAuto;
-							[device unlockForConfiguration];
-						}
-					}
-					break;
 		}
 	}
 }

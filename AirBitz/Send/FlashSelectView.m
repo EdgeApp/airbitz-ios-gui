@@ -31,7 +31,7 @@
 {
 	_buttonImage = [[UIImageView alloc] initWithFrame:self.bounds];
 	[self addSubview:_buttonImage];
-	_buttonImage.image = [UIImage imageNamed:@"flash_auto"];
+	_buttonImage.image = [UIImage imageNamed:@"flash_off"];
 	self.backgroundColor = [UIColor clearColor];
     _originalFrame = self.frame;
     _bAwake = YES;
@@ -69,37 +69,27 @@
 	switch(flashType)
 	{
 		case FLASH_ITEM_ON:
-			_buttonImage.image = [UIImage imageNamed:@"flash_on"];
-			break;
-		case FLASH_ITEM_AUTO:
-			_buttonImage.image = [UIImage imageNamed:@"flash_auto"];
+			_buttonImage.image = [UIImage imageNamed:@"flash-on"];
 			break;
 		case FLASH_ITEM_OFF:
-			_buttonImage.image = [UIImage imageNamed:@"flash_off"];
+			_buttonImage.image = [UIImage imageNamed:@"flash-off"];
 			break;
 	}
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	UITouch *touch = [touches anyObject];
-	CGPoint touchPoint = [touch locationInView:self];
 	
-	if (touchPoint.x < self.frame.size.width * 0.33333333)
-	{
-		_buttonImage.image = [UIImage imageNamed:@"flash_on"];
-		[self.delegate flashItemSelected:FLASH_ITEM_ON];
-	}
-	else if (touchPoint.x < self.frame.size.width * 0.66666666)
-	{
-		_buttonImage.image = [UIImage imageNamed:@"flash_auto"];
-		[self.delegate flashItemSelected:FLASH_ITEM_AUTO];
-	}
-	else
-	{
-		_buttonImage.image = [UIImage imageNamed:@"flash_off"];
+    if (_buttonImage.image == [UIImage imageNamed:@"flash-on"])
+    {
+		_buttonImage.image = [UIImage imageNamed:@"flash-off"];
 		[self.delegate flashItemSelected:FLASH_ITEM_OFF];
-	}
+    }
+    else
+    {
+		_buttonImage.image = [UIImage imageNamed:@"flash-on"];
+		[self.delegate flashItemSelected:FLASH_ITEM_ON];
+    }
 }
 
 
