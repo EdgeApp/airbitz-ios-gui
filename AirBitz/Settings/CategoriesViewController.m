@@ -588,28 +588,33 @@
     // change the value
     [self forceCategoryFieldValue:cell.pickerTextView.textField forPickerView:cell.pickerTextView];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NSString *strNewVal = [NSString stringWithString:cell.pickerTextView.textField.text];
-    [self.arrayDisplay replaceObjectAtIndex:indexPath.row withObject:strNewVal];
-    [self.arrayCategories replaceObjectAtIndex:[[self.arrayDisplayPositions objectAtIndex:indexPath.row] integerValue] withObject:strNewVal];
+    if (indexPath.row < [self.arrayCategories count])
+    {
+        NSString *strNewVal = [NSString stringWithString:cell.pickerTextView.textField.text];
+        [self.arrayDisplay replaceObjectAtIndex:indexPath.row withObject:strNewVal];
+        [self.arrayCategories replaceObjectAtIndex:[[self.arrayDisplayPositions objectAtIndex:indexPath.row] integerValue] withObject:strNewVal];
 
-    self.tableView.scrollEnabled = YES;
+        self.tableView.scrollEnabled = YES;
 
-    // animate it all
-    [UIView animateWithDuration:0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations:^
-     {
-         // return the table to previous position and scroll position
-         self.tableView.frame = _frameTableOriginal;
-         [self.tableView setContentOffset:_offsetTableOriginal];
-     }
-                     completion:^(BOOL finished)
-     {
-         
-     }];
-
-
+        // animate it all
+        [UIView animateWithDuration:0.35
+                            delay: 0.0
+                            options: UIViewAnimationOptionCurveEaseOut
+                        animations:^
+        {
+            // return the table to previous position and scroll position
+            self.tableView.frame = _frameTableOriginal;
+            [self.tableView setContentOffset:_offsetTableOriginal];
+        }
+                        completion:^(BOOL finished)
+        {
+        }];
+    }
+    else
+    {
+        self.tableView.frame = _frameTableOriginal;
+        [self.tableView setContentOffset:_offsetTableOriginal];
+    }
     [self updateDisplay];
 }
 
