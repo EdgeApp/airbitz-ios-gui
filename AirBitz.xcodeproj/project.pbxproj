@@ -91,7 +91,6 @@
 		686BED9E195D5A7C0053A09E /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BED9D195D5A7C0053A09E /* libsecp256k1.a */; };
 		686BEDA4195D5A970053A09E /* libbitcoin-watcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BEDA3195D5A970053A09E /* libbitcoin-watcher.a */; };
 		686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
-		686C24851935605900F8E445 /* libobelisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24841935605900F8E445 /* libobelisk.a */; };
 		686C24871935608400F8E445 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -1089,7 +1088,6 @@
 				684C0E521936B97000AB9807 /* libsodium.a in Frameworks */,
 				686C24871935608400F8E445 /* libzmq.a in Frameworks */,
 				4C08A6E218C29CEF0071B87C /* libz.a in Frameworks */,
-				686C24851935605900F8E445 /* libobelisk.a in Frameworks */,
 				4C90463D18C9244900179D9C /* libiconv.dylib in Frameworks */,
 				B5F2E9A618D3BFEF008ACF88 /* libboost_system.a in Frameworks */,
 				4C90463B18C9242700179D9C /* CoreVideo.framework in Frameworks */,
