@@ -243,7 +243,7 @@ typedef enum eImportState
 - (void)updateDisplayLayout
 {
     // update for iPhone 4
-    if (!IS_IPHONE5)
+    if (!IS_IPHONE5 && 0)
     {
         CGRect frame = self.viewTop.frame;
         frame.origin.y = 0;

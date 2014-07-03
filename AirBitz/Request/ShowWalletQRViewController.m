@@ -158,6 +158,13 @@ typedef enum eAddressPickerType
 
         CGRect frame;
 
+        frame = self.imageBottomFrame.frame;
+        frame.size.height = 135.0;
+        self.imageBottomFrame.frame = frame;
+
+        self.buttonCancel.hidden = YES;
+        /*
+         
         frame = self.viewQRCodeFrame.frame;
         frame.origin.y = 67.0;
         self.viewQRCodeFrame.frame = frame;
@@ -190,7 +197,7 @@ typedef enum eAddressPickerType
         frame = self.buttonCopyAddress.frame;
         frame.origin.y = self.buttonCancel.frame.origin.y + self.buttonCancel.frame.size.height + 3.0;
         self.buttonCopyAddress.frame = frame;
-
+*/
     }
 }
 

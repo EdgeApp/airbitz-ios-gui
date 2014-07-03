@@ -167,6 +167,7 @@
 
         CGRect frame;
 
+        /*
         // put the flash view at the bottom
         frame = self.imageFlashFrame.frame;
         frame.size.height = 60;
@@ -177,10 +178,10 @@
         frame.origin.y = self.imageFlashFrame.frame.origin.y + 8.0;
         frame.size.height = 48.0;
         self.flashSelector.frame = frame;
-
+*/
         // put the scan frame bottom right to the top of the flash frame
         frame = self.scanFrame.frame;
-        frame.size.height = self.imageFlashFrame.frame.origin.y - self.scanFrame.frame.origin.y + 0.0;
+        frame.size.height = 275;
         self.scanFrame.frame = frame;
     }
 }
