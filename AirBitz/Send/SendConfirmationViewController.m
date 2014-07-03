@@ -258,64 +258,69 @@
     {
         // be prepared! lots and lots of magic numbers here to jam the controls to fit on a small screen
 
+        int topShift = 22;
+        int valueShift = 47;
+        int pinShift = 67;
         CGRect frame;
 
-        frame = self.imageTopEmboss.frame;
-        frame.size.height = 150;
-        frame.origin.y = 0;
-        self.imageTopEmboss.frame = frame;
-
+        self.imageTopEmboss.hidden = YES;
+        
         frame = self.labelSendFromTitle.frame;
-        frame.origin.y = 2;
+        frame.origin.y -= topShift;
         self.labelSendFromTitle.frame = frame;
-
+        
         frame = self.labelSendFrom.frame;
-        frame.origin.y = self.labelSendFromTitle.frame.origin.y;
+        frame.origin.y -= topShift;
         self.labelSendFrom.frame = frame;
-
+        
         frame = self.labelSendToTitle.frame;
-        frame.origin.y = self.labelSendFromTitle.frame.origin.y + self.labelSendFromTitle.frame.size.height + 0;
+        frame.origin.y -= topShift;
         self.labelSendToTitle.frame = frame;
-
+        
         frame = self.addressLabel.frame;
-        frame.origin.y = self.labelSendToTitle.frame.origin.y;
+        frame.origin.y -= topShift;
         self.addressLabel.frame = frame;
+        
+        frame = self.conversionLabel.frame;
+        frame.origin.y -= (topShift + 2);
+        self.conversionLabel.frame = frame;
 
+        frame = self.maxAmountButton.frame;
+        frame.origin.y -= (topShift + 2);
+        self.maxAmountButton.frame = frame;
+        
         frame = self.viewBTC.frame;
-        frame.origin.y = self.labelSendToTitle.frame.origin.y + self.labelSendToTitle.frame.size.height + 1;
+        frame.origin.y -= valueShift;
         self.viewBTC.frame = frame;
 
-        frame = self.amountBTCTextField.frame;
-        frame.origin.y = self.viewBTC.frame.origin.y + 7;
-        self.amountBTCTextField.frame = frame;
-
         frame = self.viewUSD.frame;
-        frame.origin.y = self.viewBTC.frame.origin.y + self.viewBTC.frame.size.height + (-3);
+        frame.origin.y -= (valueShift + 2);
         self.viewUSD.frame = frame;
 
+        frame = self.imagePINEmboss.frame;
+        frame.origin.y -= pinShift;
+        self.imagePINEmboss.frame = frame;
+        
+        frame = self.labelPINTitle.frame;
+        frame.origin.y -= pinShift;
+        self.labelPINTitle.frame = frame;
+        
+        frame = self.withdrawlPIN.frame;
+        frame.origin.y -= pinShift;
+        self.withdrawlPIN.frame = frame;
+        
+        frame = self.confirmSliderContainer.frame;
+        frame.origin.y -= pinShift;
+        self.confirmSliderContainer.frame = frame;
+
+        /*
+        frame = self.amountBTCTextField.frame;
+        frame.origin.y -= 5;
+        self.amountBTCTextField.frame = frame;
         frame = self.amountUSDTextField.frame;
         frame.origin.y = self.viewUSD.frame.origin.y + 7;
         self.amountUSDTextField.frame = frame;
 
-        frame = self.conversionLabel.frame;
-        frame.origin.y = self.viewUSD.frame.origin.y + self.viewUSD.frame.size.height + (-6);
-        self.conversionLabel.frame = frame;
-
-        frame = self.imagePINEmboss.frame;
-        frame.origin.y = self.imageTopEmboss.frame.origin.y + self.imageTopEmboss.frame.size.height + 4;
-        self.imagePINEmboss.frame = frame;
-
-        frame = self.labelPINTitle.frame;
-        frame.origin.y = self.imagePINEmboss.frame.origin.y + 11;
-        self.labelPINTitle.frame = frame;
-
-        frame = self.withdrawlPIN.frame;
-        frame.origin.y = self.imagePINEmboss.frame.origin.y + 5;
-        self.withdrawlPIN.frame = frame;
-
-        frame = self.confirmSliderContainer.frame;
-        frame.origin.y = self.imagePINEmboss.frame.origin.y + self.imagePINEmboss.frame.size.height + 30;
-        self.confirmSliderContainer.frame = frame;
 
         frame = self.btn_alwaysConfirm.frame;
         frame.origin.y = self.confirmSliderContainer.frame.origin.y + self.confirmSliderContainer.frame.size.height + 25;
@@ -324,6 +329,7 @@
         frame = self.labelAlwaysConfirm.frame;
         frame.origin.y = self.btn_alwaysConfirm.frame.origin.y + self.btn_alwaysConfirm.frame.size.height + 0;
         self.labelAlwaysConfirm.frame = frame;
+         */
     }
 }
 
