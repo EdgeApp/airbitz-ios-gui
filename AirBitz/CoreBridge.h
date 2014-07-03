@@ -39,6 +39,9 @@
 + (void)startWatcher: (NSString *) walletUUID;
 + (void)stopWatchers;
 + (void)watchAddresses:(NSString *) walletUUID;
++ (uint64_t)maxSpendable:(NSString *)walletUUID
+               toAddress:(NSString *)destAddress
+              isTransfer:(BOOL)bTransfer;
 + (bool)calcSendFees:(NSString *) walletUUID 
                  sendTo:(NSString *) destAddr 
            amountToSend:(int64_t) sendAmount

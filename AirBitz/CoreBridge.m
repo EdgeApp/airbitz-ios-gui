@@ -659,6 +659,22 @@
     [Util printABC_Error: &Error];
 }
 
++ (uint64_t)maxSpendable:(NSString *)walletUUID
+               toAddress:(NSString *)destAddress
+              isTransfer:(BOOL)bTransfer
+{
+    tABC_Error Error;
+    uint64_t result = 0;
+    ABC_MaxSpendable([[User Singleton].name UTF8String],
+                     [[User Singleton].password UTF8String],
+                     [walletUUID UTF8String],
+                     [destAddress UTF8String],
+                     bTransfer, &result, &Error);
+    [Util printABC_Error: &Error];
+    NSLog(@("******* %ld\n"), result);
+    return result;
+}
+
 + (bool)calcSendFees:(NSString *) walletUUID 
                  sendTo:(NSString *) destAddr
            amountToSend:(int64_t) sendAmount
@@ -725,11 +741,14 @@
         {
             // We pass no callback so this call is blocking
             ABC_RequestExchangeRateUpdate([[User Singleton].name UTF8String],
-                                        [[User Singleton].password UTF8String],
-                                        w.currencyNum, NULL, NULL, &error);
+                                          [[User Singleton].password UTF8String],
+                                          w.currencyNum, NULL, NULL, &error);
             [Util printABC_Error: &error];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:object];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:object];
+        });
     }
 }
 

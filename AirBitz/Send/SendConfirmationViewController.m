@@ -237,9 +237,10 @@
     if (self.wallet != nil)
     {
         _selectedTextField = self.amountBTCTextField;
-        self.amountToSendSatoshi = MAX(self.wallet.balance, 0);
-        self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi 
-                                                      withSymbol:false];
+        self.amountToSendSatoshi = [CoreBridge maxSpendable:self.wallet.strUUID
+                                                  toAddress:[self getDestAddress]
+                                                 isTransfer:self.bAddressIsWalletUUID];
+        self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
     }
     [self updateTextFieldContents];
 }
@@ -560,7 +561,9 @@
         self.amountToSendSatoshi = [CoreBridge denominationToSatoshi: self.amountBTCTextField.text];
 		if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                   self.amountToSendSatoshi, &currency, self.wallet.currencyNum, &error) == ABC_CC_Ok)
+        {
 			self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
+        }
 	}
 	else if (_selectedTextField == self.amountUSDTextField)
 	{
@@ -582,12 +585,7 @@
     int64_t fees = 0;
     
 	tABC_Error error;
-    NSString *dest = NULL;
-    if (self.bAddressIsWalletUUID) {
-        dest = self.destWallet.strUUID;
-    } else {
-        dest = self.sendToAddress;
-    }
+    NSString *dest = [self getDestAddress];
     if ([CoreBridge calcSendFees:self.wallet.strUUID
                           sendTo:dest
                     amountToSend:self.amountToSendSatoshi
@@ -784,6 +782,15 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
                                           waitUntilDone:FALSE];
             }
         }
+    }
+}
+
+- (NSString *)getDestAddress
+{
+    if (self.bAddressIsWalletUUID) {
+        return self.destWallet.strUUID;
+    } else {
+        return self.sendToAddress;
     }
 }
 
