@@ -1469,11 +1469,6 @@
                                                     <outlet property="delegate" destination="MbV-1q-ikJ" id="FYI-6l-95I"/>
                                                 </connections>
                                             </textField>
-                                            <view contentMode="scaleToFill" id="NEk-qX-9fN" customClass="ButtonSelectorView">
-                                                <rect key="frame" x="32" y="7" width="255" height="34"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            </view>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter bitcoin address (optional)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HVK-hq-Jcu" customClass="LatoLabel">
                                                 <rect key="frame" x="153" y="48" width="115" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1481,6 +1476,11 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" id="NEk-qX-9fN" customClass="ButtonSelectorView">
+                                                <rect key="frame" x="32" y="7" width="255" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
