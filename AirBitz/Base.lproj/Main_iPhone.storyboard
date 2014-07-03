@@ -1220,10 +1220,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qov-uI-G7t">
-                                <rect key="frame" x="25" y="412" width="85" height="41"/>
+                                <rect key="frame" x="34" y="411" width="80" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
-                                <state key="normal" title="Copy" backgroundImage="btn_td_done.png">
+                                <state key="normal" backgroundImage="copy_btn.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1253,10 +1253,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WwW-Ho-MLl">
-                                <rect key="frame" x="118" y="412" width="84" height="41"/>
+                                <rect key="frame" x="119" y="411" width="80" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Email" backgroundImage="btn_td_done.png">
+                                <state key="normal" backgroundImage="email_btn.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1264,10 +1264,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Uhf-Lo-dxk">
-                                <rect key="frame" x="210" y="413" width="84" height="40"/>
+                                <rect key="frame" x="205" y="411" width="80" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="SMS" backgroundImage="btn_td_done.png">
+                                <state key="normal" backgroundImage="sms_btn.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -4416,9 +4416,11 @@
         <image name="btn_search.png" width="32" height="33"/>
         <image name="btn_td_done.png" width="251" height="41"/>
         <image name="comp_09.2-send_bitcoin2.jpg" width="640" height="1136"/>
+        <image name="copy_btn.png" width="80" height="42"/>
         <image name="darken_bottom_table_cell.png" width="320" height="111"/>
         <image name="divider.png" width="320" height="27"/>
         <image name="divider_thumb.png" width="16" height="4"/>
+        <image name="email_btn.png" width="80" height="42"/>
         <image name="emboss_down.png" width="20" height="21"/>
         <image name="emboss_up.png" width="291" height="193"/>
         <image name="icon_approved.png" width="79" height="80"/>
@@ -4437,6 +4439,7 @@
         <image name="logo_bitcoin.png" width="126" height="165"/>
         <image name="logo_large.png" width="205" height="106"/>
         <image name="scan_frame.png" width="271" height="226"/>
+        <image name="sms_btn.png" width="80" height="42"/>
         <image name="swipe-arrow.png" width="21" height="12"/>
         <image name="tabbar_base.png" width="320" height="54"/>
         <image name="tabbar_bkg_selected.png" width="64" height="54"/>
