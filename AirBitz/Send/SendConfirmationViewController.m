@@ -239,8 +239,7 @@
         _selectedTextField = self.amountBTCTextField;
         self.amountToSendSatoshi = MAX(self.wallet.balance, 0);
         self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi 
-                                                      withSymbol:false
-                                                overrideDecimals:[CoreBridge currencyDecimalPlaces]];
+                                                      withSymbol:false];
     }
     [self updateTextFieldContents];
 }
@@ -575,6 +574,7 @@
 - (void)updateFeeFieldContents
 {
     int64_t fees = 0;
+    
 	tABC_Error error;
     NSString *dest = NULL;
     if (self.bAddressIsWalletUUID) {
