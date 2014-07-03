@@ -10,7 +10,9 @@
 #import "ExportWalletOptionsViewController.h"
 #import "ExportWalletPDFViewController.h"
 #import "InfoView.h"
+#import "User.h"
 #import "Util.h"
+#import "CoreBridge.h"
 #import "ExportWalletOptionsCell.h"
 #import "CommonTypes.h"
 #import "GDrive.h"
@@ -422,8 +424,12 @@ typedef enum eExportOption
 
         case WalletExportType_PrivateSeed:
         {
-            NSString* str = @"[Private Seed Here]";
-            dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+            tABC_Error Error;
+            char *szSeed;
+            ABC_ExportWalletSeed([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], [self.wallet.strUUID UTF8String], &szSeed, &Error);
+            NSData *data = [[NSData alloc] initWithBytes:szSeed length:strlen(szSeed)];
+            free(szSeed);
+            return data;
         }
             break;
 
