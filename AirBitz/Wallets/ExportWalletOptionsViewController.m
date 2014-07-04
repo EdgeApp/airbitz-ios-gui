@@ -24,7 +24,7 @@
                                     @[@2, @3, @4],          /* Quicken */\
                                     @[@2, @3, @4],          /* Quickbooks */\
                                     @[@0, @2, @3, @4, @5],  /* PDF */\
-                                    @[@0]                   /* PrivateSeed */\
+                                    @[@0, @2, @5]                   /* PrivateSeed */\
                                 ]
 #define ARRAY_NAMES_FOR_OPTIONS @[@"AirPrint", @"Save to SD card", @"Email", @"Google Drive", @"Dropbox", @"View"]
 #define ARRAY_IMAGES_FOR_OPTIONS @[@"icon_export_printer", @"icon_export_sdcard", @"icon_export_email", @"icon_export_google", @"icon_export_dropbox", @"icon_export_view"]
