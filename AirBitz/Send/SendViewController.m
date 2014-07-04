@@ -43,7 +43,6 @@
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendTo;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageSendTo;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
-@property (weak, nonatomic) IBOutlet UIView                 *viewMiddle;
 
 @property (nonatomic, strong) NSArray   *arrayWallets;
 @property (nonatomic, strong) NSArray   *arrayWalletNames;
@@ -81,7 +80,7 @@
     self.pickerTextSendTo.textField.borderStyle = UITextBorderStyleNone;
     self.pickerTextSendTo.textField.backgroundColor = [UIColor clearColor];
     self.pickerTextSendTo.textField.font = [UIFont systemFontOfSize:14];
-    self.pickerTextSendTo.textField.clearButtonMode = UITextFieldViewModeAlways;
+    self.pickerTextSendTo.textField.clearButtonMode = UITextFieldViewModeNever;
     self.pickerTextSendTo.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.pickerTextSendTo.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.pickerTextSendTo.textField.spellCheckingType = UITextSpellCheckingTypeNo;
