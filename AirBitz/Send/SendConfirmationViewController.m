@@ -274,19 +274,19 @@
         self.labelSendFrom.frame = frame;
         
         frame = self.labelSendToTitle.frame;
-        frame.origin.y -= topShift;
+        frame.origin.y -= topShift + 10;
         self.labelSendToTitle.frame = frame;
         
         frame = self.addressLabel.frame;
-        frame.origin.y -= topShift;
+        frame.origin.y -= topShift + 10;
         self.addressLabel.frame = frame;
         
         frame = self.conversionLabel.frame;
-        frame.origin.y -= (topShift + 2);
+        frame.origin.y -= (topShift + 22);
         self.conversionLabel.frame = frame;
 
         frame = self.maxAmountButton.frame;
-        frame.origin.y -= (topShift + 2);
+        frame.origin.y -= (topShift + 22);
         self.maxAmountButton.frame = frame;
         
         frame = self.viewBTC.frame;
