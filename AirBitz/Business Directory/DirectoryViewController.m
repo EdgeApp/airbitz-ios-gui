@@ -131,6 +131,7 @@ typedef enum eMapDisplayState
 }
 
 @property (nonatomic, weak) IBOutlet DividerView *dividerView;
+@property (nonatomic, weak) IBOutlet UIView *spinnerView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UITextField *searchTextfield;
 @property (nonatomic, weak) IBOutlet UITextField *locationTextfield;
@@ -193,6 +194,7 @@ typedef enum eMapDisplayState
 	//[self businessListingQueryForPage:currentPage];
 	//[self businessListingQueryForPage:currentPage + 1];
 	
+    self.spinnerView.hidden = NO;
 	
 	self.searchCluesTableView.hidden = YES;
 	[self hideMapView];
@@ -2021,6 +2023,7 @@ typedef enum eMapDisplayState
 			[self.tableView reloadData];
 		}
 	}
+    self.spinnerView.hidden = YES;
 }
 
 #pragma mark DividerView

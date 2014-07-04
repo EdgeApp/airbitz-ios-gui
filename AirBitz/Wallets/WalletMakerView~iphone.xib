@@ -113,8 +113,8 @@
                         <outlet property="containerView" destination="-1" id="Lmg-VI-Thb"/>
                     </connections>
                 </view>
-                <view hidden="YES" alpha="0.74999999999999978" contentMode="scaleToFill" id="BKH-EF-tFM" userLabel="View - blocker">
-                    <rect key="frame" x="1000" y="0.0" width="320" height="196"/>
+                <view hidden="YES" alpha="0.39999999999999963" contentMode="scaleToFill" id="BKH-EF-tFM" userLabel="View - blocker">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="196"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="eUt-LF-9ma">

@@ -86,15 +86,18 @@ typedef enum eLoginMode
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-	[self animateSwipeArrowWithRepetitions:3 andDelay:1.0];
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [self animateSwipeArrowWithRepetitions:3 andDelay:1.0];
+
+    self.userNameTextField.text = [User Singleton].name;
+    self.passwordTextField.text = [User Singleton].password;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewWillDisappear:animated];
 }
 
@@ -102,7 +105,6 @@ typedef enum eLoginMode
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Action Methods
