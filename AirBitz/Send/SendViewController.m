@@ -306,6 +306,17 @@
             bSuccess = NO;
 		}
 
+        if (!bSuccess)
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Invalid Bitcoin Address", nil)
+                                  message:NSLocalizedString(@"", nil)
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+
 		ABC_FreeURIInfo(uri);
         
 		break; //just grab first one
@@ -575,13 +586,20 @@
 
 - (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
 {
+    BOOL bSuccess = YES;
+    tABC_BitcoinURIInfo *uri = NULL;
+
 	[pickerTextView.textField resignFirstResponder];
 
     if (pickerTextView.textField.text.length)
 	{
-        // see if the text corresponds to one of the wallets
         BOOL bIsUUID = NO;
+        
+        
+        NSString *label;
         NSString *strTo = pickerTextView.textField.text;
+
+        // see if the text corresponds to one of the wallets
         NSInteger index = [self.arrayWalletNames indexOfObject:pickerTextView.textField.text];
         if (index != NSNotFound)
         {
@@ -589,11 +607,78 @@
             Wallet *wallet = [self.arrayWallets objectAtIndex:index];
             //NSLog(@"using UUID for wallet: %@", wallet.strName);
             strTo = wallet.strUUID;
+
+            [self closeCameraScanner];
+            [self showSendConfirmationTo:strTo amount:0.0 nameLabel:@" " toIsUUID:bIsUUID];
+
         }
-        [self closeCameraScanner];
-		[self showSendConfirmationTo:strTo amount:0.0 nameLabel:@" " toIsUUID:bIsUUID];
+        else
+        {
+            tABC_Error Error;
+            ABC_ParseBitcoinURI([strTo UTF8String], &uri, &Error);
+            [Util printABC_Error:&Error];
+            
+            if (uri != NULL)
+            {
+                if (uri->szAddress)
+                {
+                    printf("    address: %s\n", uri->szAddress);
+                    
+                    printf("    amount: %lld\n", uri->amountSatoshi);
+                    
+                    if (uri->szLabel)
+                    {
+                        printf("    label: %s\n", uri->szLabel);
+                        label = [NSString stringWithUTF8String:uri->szLabel];
+                    }
+                    else
+                    {
+                        label = NSLocalizedString(@"Anonymous", nil);
+                    }
+                    if (uri->szMessage)
+                    {
+                        printf("    message: %s\n", uri->szMessage);
+                    }
+                }
+                else
+                {
+                    printf("No address!");
+                    bSuccess = NO;
+                }
+            }
+            else
+            {
+                printf("URI parse failed!");
+                bSuccess = NO;
+            }
+            
+        }
+
+        if (!bSuccess)
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Invalid Bitcoin Address", nil)
+                                  message:NSLocalizedString(@"", nil)
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+        else
+        {
+            [self closeCameraScanner];
+            [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label toIsUUID:NO];
+            
+        }
+        
+        
 	}
 
+    if (uri)
+    {
+        ABC_FreeURIInfo(uri);
+    }
+    
 	return YES;
 }
 
