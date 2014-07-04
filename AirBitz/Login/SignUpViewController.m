@@ -139,9 +139,6 @@
 
 - (IBAction)NextStep:(id)sender
 {
-#if SKIP_PW_VALIDATION_CHECKS
-	[self showPasswordRecoveryController];
-#else
     // if they entered a valid username or old password
     if ([self userNameFieldIsValid] == YES)
     {
@@ -237,7 +234,6 @@
             }
         }
     }
-#endif
 }
 
 - (IBAction)buttonBlockerTouched:(id)sender
