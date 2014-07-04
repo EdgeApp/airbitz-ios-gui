@@ -633,7 +633,7 @@
                     }
                     else
                     {
-                        label = NSLocalizedString(@"Anonymous", nil);
+                        label = NSLocalizedString(@"", nil);
                     }
                     if (uri->szMessage)
                     {

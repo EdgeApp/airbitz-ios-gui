@@ -400,7 +400,7 @@
 			Details.amountFeesAirbitzSatoshi = 0;
 			Details.amountFeesMinersSatoshi = 0;
             // If this is a transfer, populate the comments
-            Details.szName = "Anonymous";
+            Details.szName = "";
             Details.szCategory = "";
             Details.szNotes = "";
 			Details.attributes = 0x2;

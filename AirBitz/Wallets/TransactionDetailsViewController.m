@@ -198,11 +198,6 @@
     self.nameTextField.font = [UIFont systemFontOfSize:18];
     self.nameTextField.textAlignment = NSTextAlignmentCenter;
     
-    if (!self.bOldTransaction)
-    {
-        [self.nameTextField becomeFirstResponder];
-    }
-
     _originalHeaderFrame = self.headerView.frame;
     _originalContentFrame = self.contentView.frame;
     _originalScrollableContentFrame = self.scrollableContentView.frame;
