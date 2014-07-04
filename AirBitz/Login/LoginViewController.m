@@ -91,8 +91,11 @@ typedef enum eLoginMode
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0];
 
+#if !HARD_CODED_LOGIN
     self.userNameTextField.text = [User Singleton].name;
     self.passwordTextField.text = [User Singleton].password;
+#endif
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
