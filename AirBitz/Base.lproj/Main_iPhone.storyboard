@@ -453,6 +453,17 @@
                                             <action selector="LocateMe:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="qgO-mf-K44"/>
                                         </connections>
                                     </button>
+                                    <view opaque="NO" alpha="0.69999999999999973" contentMode="scaleToFill" id="JMV-gs-E3H" userLabel="Spinner View">
+                                        <rect key="frame" x="0.0" y="221" width="320" height="239"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="9ws-q3-jPv">
+                                                <rect key="frame" x="142" y="49" width="37" height="37"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
                                     <view contentMode="scaleToFill" id="d8k-A8-ona" customClass="DividerView">
                                         <rect key="frame" x="0.0" y="212" width="320" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -479,7 +490,7 @@
                                             <outlet property="titleLabel" destination="dJQ-W9-yUR" id="ZPI-44-Rs4"/>
                                         </connections>
                                     </view>
-                                    <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Czb-sM-HHv">
+                                    <tableView hidden="YES" clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Czb-sM-HHv">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.81176470590000005" green="0.92941176469999998" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -602,6 +613,7 @@
                         <outlet property="searchCluesTableView" destination="Czb-sM-HHv" id="JdA-Mx-H14"/>
                         <outlet property="searchTextfield" destination="3S0-VF-OIs" id="HsP-bo-EbD"/>
                         <outlet property="searchView" destination="yHc-zO-am9" id="Nia-tc-aR3"/>
+                        <outlet property="spinnerView" destination="JMV-gs-E3H" id="Bxl-B0-Dn7"/>
                         <outlet property="tableView" destination="nIF-qC-v9Y" id="RU9-mM-O5f"/>
                     </connections>
                 </viewController>
