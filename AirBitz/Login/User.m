@@ -103,11 +103,10 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 - (void)clear
 {
-    if (self.name != nil || self.password != nil)
+    if (self.password != nil)
     {
         [CoreBridge logout];
     }
-    self.name = nil;
     self.password = nil;
 }
 
