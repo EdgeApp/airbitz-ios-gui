@@ -425,11 +425,22 @@ typedef enum eExportOption
         case WalletExportType_PrivateSeed:
         {
             tABC_Error Error;
-            char *szSeed;
-            ABC_ExportWalletSeed([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], [self.wallet.strUUID UTF8String], &szSeed, &Error);
-            NSData *data = [[NSData alloc] initWithBytes:szSeed length:strlen(szSeed)];
+            char *szSeed = NULL;
+            tABC_CC result = ABC_ExportWalletSeed([[User Singleton].name UTF8String],
+                                                  [[User Singleton].password UTF8String],
+                                                  [self.wallet.strUUID UTF8String],
+                                                  &szSeed, &Error);
+            if (ABC_CC_Ok == result)
+            {
+                dataExport = [[NSData alloc] initWithBytes:szSeed length:strlen(szSeed)];
+            }
+            else
+            {
+                [Util printABC_Error:&Error];
+                NSString* str = @"Error exporting private seed!";
+                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+            }
             free(szSeed);
-            return data;
         }
             break;
 
