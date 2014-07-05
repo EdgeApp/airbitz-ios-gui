@@ -642,6 +642,7 @@
         {
             // confirmation becomes category
             cell.confirmationLabel.text = transaction.strCategory;
+            cell.confirmationLabel.textColor = COLOR_BALANCE;
 
             // amount - always bitcoin
             cell.amountLabel.text = [self formatSatoshi:transaction.amountSatoshi useFiat:NO];
@@ -657,9 +658,15 @@
                 cell.confirmationLabel.text = NSLocalizedString(@"Synchronizing", nil);
                 cell.confirmationLabel.textColor = COLOR_BALANCE;
             }
+            else if (transaction.confirmations == 0)
+            {
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"Unconfirmed"];
+                cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+            }
             else if (transaction.confirmations == 1)
             {
                 cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmation", transaction.confirmations];
+                cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
             else if (transaction.confirmations >= CONFIRMED_CONFIRMATION_COUNT)
             {
@@ -669,7 +676,7 @@
             else
             {
                 cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmations", transaction.confirmations];
-                cell.confirmationLabel.textColor = COLOR_BALANCE;
+                cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
 
             //amount
