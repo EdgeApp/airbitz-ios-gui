@@ -175,19 +175,24 @@
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
 
     NSMutableString *coinFormatted = [[NSMutableString alloc] init];
-    [coinFormatted appendString:
-        [CoreBridge formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
-    self.bitCoinLabel.text = coinFormatted;
-    self.labelBTC.text = [User Singleton].denominationLabel;
-
     NSMutableString *feeFormatted = [[NSMutableString alloc] init];
 
     if (self.transaction.amountSatoshi < 0)
     {
+        [coinFormatted appendString:
+            [CoreBridge formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
+
         [feeFormatted appendFormat:@"+%@ fee",
          [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
     }
+    else
+    {
+        [coinFormatted appendString:
+            [CoreBridge formatSatoshi:self.transaction.amountSatoshi withSymbol:false]];
+    }
     self.labelFee.text = feeFormatted;
+    self.bitCoinLabel.text = coinFormatted;
+    self.labelBTC.text = [User Singleton].denominationLabel;
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
