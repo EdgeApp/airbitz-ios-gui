@@ -129,6 +129,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (BOOL)showingQRCode
+{
+    return _qrViewController != nil;
+}
+
 - (void)resetViews
 {
     if (_importWalletViewController)

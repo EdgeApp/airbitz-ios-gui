@@ -35,7 +35,9 @@ typedef enum eAppMode
 	APP_MODE_SETTINGS
 } tAppMode;
 
-@interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate, LoginViewControllerDelegate, TransactionDetailsViewControllerDelegate>
+@interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
+                                  LoginViewControllerDelegate, TransactionDetailsViewControllerDelegate,
+                                  UIAlertViewDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_diretoryViewController;
@@ -46,6 +48,7 @@ typedef enum eAppMode
 	SettingsViewController      *_settingsViewController;
 	SendStatusViewController    *_sendStatusController;
     TransactionDetailsViewController *_txDetailsController;
+    UIAlertView                 *_receivedAlert;
 	CGRect                      _originalTabBarFrame;
 	CGRect                      _originalViewFrame;
 	tAppMode                    _appMode;
@@ -54,6 +57,7 @@ typedef enum eAppMode
 @property (nonatomic, weak) IBOutlet TabBarView *tabBar;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
+@property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
 
 @end
 
@@ -341,7 +345,7 @@ typedef enum eAppMode
 					[_selectedViewController.view removeFromSuperview];
 					_selectedViewController = _walletsViewController;
 					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-                    [_walletsViewController selectWalletWithUUID:self.strWalletUUID];
+                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
 				}
 				else
 				{
@@ -409,7 +413,8 @@ typedef enum eAppMode
 	[self updateChildViewSizeForTabBar];
 
     // reset any data designed to drive the selection
-    self.strWalletUUID = nil;
+    _strWalletUUID = nil;
+    _strTxID = nil;
 }
 
 #pragma mark - RequestViewControllerDelegates
@@ -434,7 +439,7 @@ typedef enum eAppMode
 
 #pragma mark - LoginViewControllerDelegates
 
--(void)loginViewControllerDidAbort
+- (void)loginViewControllerDidAbort
 {
 	_appMode = APP_MODE_DIRECTORY;
 	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
@@ -442,65 +447,78 @@ typedef enum eAppMode
 	[_loginViewController.view removeFromSuperview];
 }
 
--(void)loginViewControllerDidLogin
+- (void)loginViewControllerDidLogin
 {
 	[_loginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];
 }
 
--(void)launchReceiving: (NSArray *) params
+- (void)launchReceiving:(NSArray *)params
 {
-    NSString *walletUUID = params[0];
-    NSString *txId = params[1];
-    Wallet *wallet = [CoreBridge getWallet:walletUUID];
-    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    _strWalletUUID = params[0];
+    _strTxID = params[1];
 
-    NSLog(@("launchReceiving: %@ %@ %@\n"), walletUUID, txId, transaction);
-    /* If we aren't on the selector view, then just notify the user */
-    if (_selectedViewController != _requestViewController || _txDetailsController != nil)
+    /* If showing QR code, launch receiving screen*/
+    if (_selectedViewController == _requestViewController && [_requestViewController showingQRCode])
     {
-        NSLog(@"Showing Notification\n");
-        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        localNotification.alertBody = [NSString stringWithFormat:@"Received funds"];
-        localNotification.soundName = UILocalNotificationDefaultSoundName;
-        localNotification.applicationIconBadgeNumber = 1;
-        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+        [self launchSendStatus:_strWalletUUID withTx:_strTxID];
     }
     else
     {
-        NSLog(@"Launching Receiving page\n");
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-        _sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
-
-        CGRect frame = self.view.bounds;
-        _sendStatusController.view.frame = frame;
-        [self.view insertSubview:_sendStatusController.view belowSubview:self.tabBar];
-        _sendStatusController.view.alpha = 0.0;
-        _sendStatusController.messageLabel.text = NSLocalizedString(@"Receiving...", @"status message");
-        _sendStatusController.titleLabel.text = NSLocalizedString(@"Receive Status", @"status title");
-        [UIView animateWithDuration:0.35
-                            delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                        animations:^
-        {
-            _sendStatusController.view.alpha = 1.0;
-        }
-        completion:^(BOOL finished)
-        {
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self launchTransactionDetails:wallet withTx:transaction];
-                [_sendStatusController.view removeFromSuperview];
-                _sendStatusController = nil;
-                [_requestViewController resetViews];
-            });
-        }];
+        _receivedAlert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Received Funds", nil)
+                                message:NSLocalizedString(@"Bitcoin received. Tap for details.", nil)
+                                delegate:self
+                                cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        [_receivedAlert show];
+        // Wait 5 seconds and dimiss
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+            if (_receivedAlert)
+            {
+                [_receivedAlert dismissWithClickedButtonIndex:0 animated:YES];
+            }
+        });
     }
 }
 
--(void) launchTransactionDetails: (Wallet *)wallet withTx:(Transaction *)transaction
+- (void)launchSendStatus:(NSString *)walletUUID withTx:(NSString *)txId
 {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    _sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
+
+    CGRect frame = self.view.bounds;
+    _sendStatusController.view.frame = frame;
+    [self.view insertSubview:_sendStatusController.view belowSubview:self.tabBar];
+    _sendStatusController.view.alpha = 0.0;
+    _sendStatusController.messageLabel.text = NSLocalizedString(@"Receiving...", nil);
+    _sendStatusController.titleLabel.text = NSLocalizedString(@"Receive Status", nil);
+    [UIView animateWithDuration:0.35
+                        delay:0.0
+                    options:UIViewAnimationOptionCurveEaseInOut
+                    animations:^
+    {
+        _sendStatusController.view.alpha = 1.0;
+    }
+    completion:^(BOOL finished)
+    {
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
+            [_sendStatusController.view removeFromSuperview];
+            _sendStatusController = nil;
+            [_requestViewController resetViews];
+        });
+    }];
+}
+
+- (void)launchTransactionDetails:(NSString *)walletUUID withTx:(NSString *)txId
+{
+    Wallet *wallet = [CoreBridge getWallet:walletUUID];
+    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     _txDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
     _txDetailsController.wallet = wallet;
@@ -544,6 +562,27 @@ typedef enum eAppMode
     }];
 }
 
+#pragma mark - ABC Alert delegate 
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	if (_receivedAlert == alertView && buttonIndex == 1)
+	{
+        [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
+        _receivedAlert = nil;
+	}
+}
+
+- (void)alertViewCancel:(UIAlertView *)alertView
+{
+    if (_receivedAlert == alertView)
+    {
+        _strWalletUUID = @"";
+        _strTxID = @"";
+        _receivedAlert = nil;
+    }
+}
+
 #pragma mark - ABC Callbacks
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
@@ -570,7 +609,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     if (APP_MODE_WALLETS != _appMode)
     {
         NSDictionary *dictData = [notification userInfo];
-        self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [_walletsViewController resetViews];
         [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
     }
@@ -581,7 +620,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     if (APP_MODE_SEND != _appMode)
     {
         NSDictionary *dictData = [notification userInfo];
-        self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [_sendViewController resetViews];
         [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
     }
@@ -592,7 +631,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     if (APP_MODE_REQUEST != _appMode)
     {
         NSDictionary *dictData = [notification userInfo];
-        self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [_requestViewController resetViews];
         [self.tabBar selectButtonAtIndex:APP_MODE_REQUEST];
     }
