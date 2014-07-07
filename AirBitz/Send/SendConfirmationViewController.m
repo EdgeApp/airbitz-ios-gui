@@ -407,7 +407,7 @@
             if (self.nameLabel) {
                 Details.szName = [self.nameLabel UTF8String];
             } else {
-                Details.szName = @"";
+                Details.szName = "";
             }
             Details.szCategory = "";
             Details.szNotes = "";
