@@ -167,16 +167,20 @@
 	}
     [self updateFeeFieldContents];
 	
-	if (self.amountToSendSatoshi)
-	{
-		[self.withdrawlPIN becomeFirstResponder];
-	}
-	else
-	{
-		self.amountUSDTextField.text = nil;
-		self.amountBTCTextField.text = nil;
-		[self.amountUSDTextField becomeFirstResponder];
-	}
+    if (self.amountToSendSatoshi)
+    {
+        // If the PIN is empty, then focus
+        if ([self.withdrawlPIN.text length] <= 0)
+        {
+            [self.withdrawlPIN becomeFirstResponder];
+        }
+    }
+    else
+    {
+        self.amountUSDTextField.text = nil;
+        self.amountBTCTextField.text = nil;
+        [self.amountUSDTextField becomeFirstResponder];
+    }
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(myTextDidChange:)
 												 name:UITextFieldTextDidChangeNotification
