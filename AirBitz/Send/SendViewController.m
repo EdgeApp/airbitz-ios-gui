@@ -18,7 +18,6 @@
 #import "Util.h"
 #import "InfoView.h"
 #import "ZBarSDK.h"
-#import "PickerTextView.h"
 #import "CoreBridge.h"
 
 #define WALLET_BUTTON_WIDTH         210
@@ -37,7 +36,6 @@
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
-@property (weak, nonatomic) IBOutlet PickerTextView         *pickerTextSendTo;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView     *buttonSelector;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageTopFrame;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendTo;
@@ -586,21 +584,26 @@
 
 - (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
 {
+	[pickerTextView.textField resignFirstResponder];
+    [self processURI];
+    return YES;
+}
+
+- (void)processURI
+{
     BOOL bSuccess = YES;
     tABC_BitcoinURIInfo *uri = NULL;
 
-	[pickerTextView.textField resignFirstResponder];
-
-    if (pickerTextView.textField.text.length)
+    if (_pickerTextSendTo.textField.text.length)
 	{
         BOOL bIsUUID = NO;
         
         
         NSString *label;
-        NSString *strTo = pickerTextView.textField.text;
+        NSString *strTo = _pickerTextSendTo.textField.text;
 
         // see if the text corresponds to one of the wallets
-        NSInteger index = [self.arrayWalletNames indexOfObject:pickerTextView.textField.text];
+        NSInteger index = [self.arrayWalletNames indexOfObject:_pickerTextSendTo.textField.text];
         if (index != NSNotFound)
         {
             bIsUUID = YES;
@@ -670,16 +673,12 @@
             [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label toIsUUID:NO];
             
         }
-        
-        
 	}
 
     if (uri)
     {
         ABC_FreeURIInfo(uri);
     }
-    
-	return YES;
 }
 
 - (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row

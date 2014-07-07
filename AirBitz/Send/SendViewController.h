@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PickerTextView.h"
 
 @interface SendViewController : UIViewController
 
-@property (nonatomic, strong) NSString  *walletUUID;
+@property (nonatomic, strong) NSString              *walletUUID;
+@property (nonatomic, weak) IBOutlet PickerTextView *pickerTextSendTo;
 
+- (void)processURI;
 - (void)resetViews;
 
 @end

@@ -112,6 +112,7 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit:) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchSend:) name:NOTIFICATION_LAUNCH_SEND_FOR_WALLET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRequest:) name:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBitcoinUri:) name:NOTIFICATION_HANDLE_BITCOIN_URI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetViews:) name:NOTIFICATION_MAIN_RESET object:nil];
 }
 
@@ -637,6 +638,19 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         [_requestViewController resetViews];
         [self.tabBar selectButtonAtIndex:APP_MODE_REQUEST];
     }
+}
+
+- (void)handleBitcoinUri:(NSNotification *)notification
+{
+    [_sendViewController resetViews];
+    [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
+
+    NSDictionary *dictData = [notification userInfo];
+    NSURL *uri = [dictData objectForKey:KEY_URL];
+    _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
+    // NOTE: If we want to jump directly to the Payment Confirmation screen, we can
+    // uncomment the following
+    // [_sendViewController processURI];
 }
 
 - (void)resetViews:(NSNotification *)notification

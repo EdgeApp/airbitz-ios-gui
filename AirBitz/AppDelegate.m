@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ABC.h"
 #import "User.h"
+#import "CommonTypes.h"
 #import "PopupPickerView.h"
 
 @implementation AppDelegate
@@ -36,6 +37,8 @@
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     NSLog(@"url recieved: %@", url);
+    NSDictionary *d = @{ KEY_URL: url };
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HANDLE_BITCOIN_URI object:self userInfo:d];
     
     return YES;
 }

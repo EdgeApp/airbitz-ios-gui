@@ -111,6 +111,7 @@
 {
     [super viewWillDisappear:animated];
     [self.view removeGestureRecognizer:tap];
+    [self dismissKeyboard];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
