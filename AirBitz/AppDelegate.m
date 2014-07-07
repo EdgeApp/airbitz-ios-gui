@@ -19,7 +19,16 @@
 	[application setStatusBarHidden:NO];
 	[application setStatusBarStyle:UIStatusBarStyleLightContent];
 	[PopupPickerView initAll];
+
+    // Reset badges to 0
+    application.applicationIconBadgeNumber = 0;
     return YES;
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    // Reset badges to 0
+    application.applicationIconBadgeNumber = 0;
 }
 
 //  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
