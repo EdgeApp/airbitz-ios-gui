@@ -38,7 +38,7 @@
 #define SECTION_DEBUG                   6
 
 // If we are in debug include the DEBUG section in settings
-#if DEBUG
+#if (DEBUG || 1) // Always enable debug section for now
 #define SECTION_COUNT                   7
 #else 
 #define SECTION_COUNT                   6
