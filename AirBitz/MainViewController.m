@@ -648,9 +648,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     NSDictionary *dictData = [notification userInfo];
     NSURL *uri = [dictData objectForKey:KEY_URL];
     _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
-    // NOTE: If we want to jump directly to the Payment Confirmation screen, we can
-    // uncomment the following
-    // [_sendViewController processURI];
+    [_sendViewController processURI];
 }
 
 - (void)resetViews:(NSNotification *)notification
