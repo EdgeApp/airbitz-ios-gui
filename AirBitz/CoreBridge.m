@@ -50,6 +50,11 @@
         {
             Wallet *wallet;
             tABC_WalletInfo *pWalletInfo = aWalletInfo[i];
+            // If entry is NULL skip it
+            if (!pWalletInfo)
+            {
+                continue;
+            }
 
             wallet = [[Wallet alloc] init];
             [CoreBridge setWallet:wallet withInfo:pWalletInfo];
