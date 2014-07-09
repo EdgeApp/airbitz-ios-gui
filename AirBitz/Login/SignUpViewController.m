@@ -955,7 +955,12 @@
     if (_bSuccess)
     {
         // set up the user password to the new one
-        [[User Singleton] setPassword:self.passwordTextField.text];
+        if (self.strUserName)
+        {
+            [User Singleton].name = self.strUserName;
+        }
+        [User Singleton].password = self.passwordTextField.text;
+        [[User Singleton] loadSettings];
 
         alert = [[UIAlertView alloc]
                  initWithTitle:self.labelTitle.text

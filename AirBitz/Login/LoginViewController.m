@@ -504,16 +504,10 @@ typedef enum eLoginMode
 
 - (void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
 {
-	[controller.view removeFromSuperview];
-	_signUpController = nil;
+    [controller.view removeFromSuperview];
+    _signUpController = nil;
 
-	if([User isLoggedIn])
-	{
-		_bSuccess = YES;
-
-		[self.delegate loginViewControllerDidLogin];
-		self.invalidMessage.hidden = YES;
-	}
+    [self finishIfLoggedIn];
 }
 
 #pragma mark - ABC Callbacks
@@ -536,8 +530,23 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
 
 - (void)passwordRecoveryViewControllerDidFinish:(PasswordRecoveryViewController *)controller
 {
-	[controller.view removeFromSuperview];
-	_passwordRecoveryController = nil;
+    [controller.view removeFromSuperview];
+    _passwordRecoveryController = nil;
+
+    [self finishIfLoggedIn];
+}
+
+#pragma mark - Exit when already logged in
+
+- (void)finishIfLoggedIn
+{
+    if([User isLoggedIn])
+    {
+        _bSuccess = YES;
+
+        [self.delegate loginViewControllerDidLogin];
+        self.invalidMessage.hidden = YES;
+    }
 }
 
 @end
