@@ -379,8 +379,16 @@
         frame.origin.y = self.walletLabel.frame.origin.y + self.walletLabel.frame.size.height + 2;
         self.bitCoinLabel.frame = frame;
 
+        frame = self.labelBTC.frame;
+        frame.origin.y = self.walletLabel.frame.origin.y + self.walletLabel.frame.size.height + 2;
+        self.labelBTC.frame = frame;
+
+        frame = self.labelFee.frame;
+        frame.origin.y = self.walletLabel.frame.origin.y + self.walletLabel.frame.size.height + 2;
+        self.labelFee.frame = frame;
+
         frame = self.labelFiatName.frame;
-        frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 4;
+        frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 5;
         self.labelFiatName.frame = frame;
 
         frame = self.imageFiatEmboss.frame;
@@ -388,7 +396,7 @@
         self.imageFiatEmboss.frame = frame;
 
         frame = self.fiatTextField.frame;
-        frame.origin.y = self.imageFiatEmboss.frame.origin.y + 2;
+        frame.origin.y = self.imageFiatEmboss.frame.origin.y + 1;
         self.fiatTextField.frame = frame;
 
         frame = self.imageBottomEmboss.frame;
