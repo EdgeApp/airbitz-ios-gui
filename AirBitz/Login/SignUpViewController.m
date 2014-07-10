@@ -758,9 +758,8 @@
     [self blockUser:NO];
     if (_bSuccess)
     {
-		[User Singleton].name = self.userNameTextField.text;
-		[User Singleton].password = self.passwordTextField.text;
-        [[User Singleton] loadSettings];
+        [User login:self.userNameTextField.text
+           password:self.passwordTextField.text];
 
         //
         // Add default categories to core

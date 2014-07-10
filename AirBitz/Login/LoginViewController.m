@@ -482,10 +482,8 @@ typedef enum eLoginMode
 {
     if (_bSuccess)
     {
-        [User Singleton].name = self.userNameTextField.text;
-        [User Singleton].password = self.passwordTextField.text;
-        [[User Singleton] loadSettings];
-        [CoreBridge startWatchers];
+        [User login:self.userNameTextField.text
+           password:self.passwordTextField.text];
 
         [self.delegate loginViewControllerDidLogin];
         self.invalidMessage.hidden = YES;

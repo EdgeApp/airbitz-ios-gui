@@ -95,7 +95,7 @@ typedef enum eAppMode
     [Util printABC_Error:&Error];
 
     // Initialize the exchange rates queue
-    [CoreBridge requestExchangeRateUpdate:self];
+    [CoreBridge requestExchangeRateUpdate:self recursive:YES];
 #endif
 
 	_originalTabBarFrame = self.tabBar.frame;

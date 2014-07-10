@@ -26,6 +26,7 @@
 + (void)freeAll;
 + (User *)Singleton;
 + (bool)isLoggedIn;
++ (void)login:(NSString *)user password:(NSString *)pword;
 
 - (id)init;
 - (void)clear;

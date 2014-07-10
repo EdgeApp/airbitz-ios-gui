@@ -48,6 +48,15 @@ static User *singleton = nil;  // this will be the one and only object this stat
     return [User Singleton].name.length && [User Singleton].password.length;
 }
 
++ (void)login:(NSString *)name password:(NSString *)pword
+{
+    [User Singleton].name = name;
+    [User Singleton].password = pword;
+    [[User Singleton] loadSettings];
+    [CoreBridge requestExchangeRateUpdate:self recursive:NO];
+    [CoreBridge startWatchers];
+}
+
 - (id)init
 {
     self = [super init];

@@ -714,15 +714,19 @@
     return true;
 }
 
-+ (void)requestExchangeRateUpdate:(id)object
++ (void)requestExchangeRateUpdate:(id)object recursive:(BOOL)isRecursive
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [CoreBridge requestExchangeUpdateBlocking:object];
 
-        // Lets wait and do it again
+        if (!isRecursive)
+        {
+            return;
+        }
+
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            [CoreBridge requestExchangeRateUpdate:object];
+            [CoreBridge requestExchangeRateUpdate:object recursive:YES];
         });
     });
 }
