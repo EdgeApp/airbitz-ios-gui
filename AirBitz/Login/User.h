@@ -16,8 +16,6 @@
 
 // User Settings
 @property (nonatomic) int minutesAutoLogout;
-@property (nonatomic) NSDate *loginTime;
-
 @property (nonatomic) int defaultCurrencyNum;
 @property (nonatomic) int64_t denomination;
 @property (nonatomic, copy) NSString* denominationLabel;
@@ -28,11 +26,9 @@
 + (void)freeAll;
 + (User *)Singleton;
 + (bool)isLoggedIn;
-+ (void)checkAutoLogout;
 
 - (id)init;
 - (void)clear;
 - (void)loadSettings;
-- (void)checkLoginExpired;
 
 @end
