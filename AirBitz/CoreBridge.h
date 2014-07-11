@@ -32,7 +32,9 @@
 + (NSString *)formatSatoshi:(int64_t) bitcoin withSymbol:(bool) symbol overrideDecimals:(int) decimals;
 + (int64_t) denominationToSatoshi: (NSString *) amount;
 + (NSString *)conversionString: (Wallet *) wallet;
-+ (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName;
++ (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName
+                                   isSuccess:(BOOL *)bSuccess
+                                    errorMsg:(NSMutableString *)error;
 + (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName;
 + (void)logout;
 + (void)startWatchers;

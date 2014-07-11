@@ -547,10 +547,13 @@
 // gets the recover questions for a given account
 // nil is returned if there were no questions for this account
 + (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName
+                                   isSuccess:(BOOL *)bSuccess
+                                    errorMsg:(NSMutableString *)error
 {
     NSMutableArray *arrayQuestions = nil;
     char *szQuestions = NULL;
 
+    *bSuccess = NO; 
     tABC_Error Error;
     tABC_CC result = ABC_GetRecoveryQuestions([strUserName UTF8String],
                                               &szQuestions,
@@ -566,10 +569,13 @@
                 // remove empties
                 [arrayQuestions removeObject:@""];
             }
+            *bSuccess = YES; 
         }
+        [error appendString:NSLocalizedString(@"No questions are linked to you account", nil)];
     }
     else
     {
+        [error appendString:NSLocalizedString(@"We were unable to find your account. Be sure your username is correct.", nil)];
         [Util printABC_Error:&Error];
     }
 

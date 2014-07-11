@@ -166,46 +166,19 @@ typedef enum eLoginMode
     // if they have a username
     if ([self.userNameTextField.text length])
     {
-        NSArray *arrayQuestions = [CoreBridge getRecoveryQuestionsForUserName:self.userNameTextField.text];
-
-        if (arrayQuestions)
-        {
-
-            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-            _passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];
-
-            _passwordRecoveryController.delegate = self;
-            _passwordRecoveryController.mode = PassRecovMode_Recover;
-            _passwordRecoveryController.arrayQuestions = arrayQuestions;
-            _passwordRecoveryController.strUserName = self.userNameTextField.text;
-
-            CGRect frame = self.view.bounds;
-            frame.origin.x = frame.size.width;
-            _passwordRecoveryController.view.frame = frame;
-            [self.view addSubview:_passwordRecoveryController.view];
-
-
-            [UIView animateWithDuration:0.35
-                                  delay:0.0
-                                options:UIViewAnimationOptionCurveEaseInOut
-                             animations:^
-             {
-                 _passwordRecoveryController.view.frame = self.view.bounds;
-             }
-                             completion:^(BOOL finished)
-             {
-             }];
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"No Recovery Questions", nil)
-                                  message:NSLocalizedString(@"Unable to find recovery questions for the specified User Name", nil)
-                                  delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-            [alert show];
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            BOOL bSuccess = NO;
+            NSMutableString *error = [[NSMutableString alloc] init];
+            NSArray *arrayQuestions = [CoreBridge getRecoveryQuestionsForUserName:self.userNameTextField.text
+                                                                        isSuccess:&bSuccess
+                                                                         errorMsg:error];
+            NSArray *params = [NSArray arrayWithObjects:arrayQuestions, nil];
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                _bSuccess = bSuccess;
+                _strReason = error;
+                [self performSelectorOnMainThread:@selector(launchQuestionRecovery:) withObject:params waitUntilDone:NO];
+            });
+        });
     }
     else
     {
@@ -215,6 +188,48 @@ typedef enum eLoginMode
                               delegate:nil
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+- (void)launchQuestionRecovery:(NSArray *)params
+{
+    if (_bSuccess)
+    {
+        NSArray *arrayQuestions = params[0];
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        _passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];
+
+        _passwordRecoveryController.delegate = self;
+        _passwordRecoveryController.mode = PassRecovMode_Recover;
+        _passwordRecoveryController.arrayQuestions = arrayQuestions;
+        _passwordRecoveryController.strUserName = self.userNameTextField.text;
+
+        CGRect frame = self.view.bounds;
+        frame.origin.x = frame.size.width;
+        _passwordRecoveryController.view.frame = frame;
+        [self.view addSubview:_passwordRecoveryController.view];
+
+
+        [UIView animateWithDuration:0.35
+                                delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                            animations:^
+            {
+                _passwordRecoveryController.view.frame = self.view.bounds;
+            }
+                            completion:^(BOOL finished)
+            {
+            }];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"No Recovery Questions", nil)
+                                message:_strReason
+                                delegate:nil
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
         [alert show];
     }
 }

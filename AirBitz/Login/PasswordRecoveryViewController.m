@@ -272,9 +272,22 @@ typedef enum eAlertType
 
 - (void)recoverWithAnswers:(NSString *)strAnswers
 {
-    if ([CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName])
+    _bSuccess = NO;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        BOOL bSuccess = [CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName];
+        NSArray *params = [NSArray arrayWithObjects:strAnswers, nil];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            _bSuccess = bSuccess;
+            [self performSelectorOnMainThread:@selector(checkRecoveryAnswersResponse:) withObject:params waitUntilDone:NO];
+        });
+    });
+}
+
+- (void)checkRecoveryAnswersResponse:(NSArray *)params
+{
+    if (_bSuccess)
     {
-        // bring up the controller to change the password
+        NSString *strAnswers = params[0];
         [self bringUpSignUpViewWithAnswers:strAnswers];
     }
     else
