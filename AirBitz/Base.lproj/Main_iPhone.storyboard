@@ -468,6 +468,10 @@
                                         <rect key="frame" x="0.0" y="212" width="320" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drag_bar.png" id="4V6-Vv-Ai6">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="33"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="divider.png" id="zbt-1j-Pmw">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="27"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -479,14 +483,11 @@
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="divider_thumb.png" id="T1v-LW-Gn9">
-                                                <rect key="frame" x="152" y="16" width="16" height="4"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="thumbView" destination="T1v-LW-Gn9" id="mBv-Wg-AIO"/>
+                                            <outlet property="dividerbarView" destination="zbt-1j-Pmw" id="Ghm-lr-WNY"/>
+                                            <outlet property="dragbarView" destination="4V6-Vv-Ai6" id="nmM-Uf-ecx"/>
                                             <outlet property="titleLabel" destination="dJQ-W9-yUR" id="ZPI-44-Rs4"/>
                                         </connections>
                                     </view>
@@ -4403,7 +4404,7 @@
         <image name="copy_btn.png" width="80" height="42"/>
         <image name="darken_bottom_table_cell.png" width="320" height="111"/>
         <image name="divider.png" width="320" height="27"/>
-        <image name="divider_thumb.png" width="16" height="4"/>
+        <image name="drag_bar.png" width="320" height="33"/>
         <image name="email_btn.png" width="80" height="42"/>
         <image name="emboss_down.png" width="20" height="21"/>
         <image name="emboss_up.png" width="291" height="193"/>

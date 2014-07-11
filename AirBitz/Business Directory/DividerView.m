@@ -24,7 +24,8 @@
 
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UIImageView *thumbView;
+@property (nonatomic, weak) IBOutlet UIImageView *dragbarView;
+@property (nonatomic, weak) IBOutlet UIImageView *dividerbarView;
 
 @end
 @implementation DividerView
@@ -41,7 +42,8 @@
 -(void)awakeFromNib
 {
 	self.titleLabel.alpha = 1.0;
-	self.thumbView.alpha = 0.0;
+             self.dragbarView.hidden = true;
+             self.dividerbarView.hidden = false;
 	self.userInteractionEnabled = NO;
 }
 
@@ -57,7 +59,9 @@
 						 animations:^
 		 {
 			 self.titleLabel.alpha = 0.0;
-			 self.thumbView.alpha = 1.0;
+                         self.dragbarView.hidden = false;
+                         self.dividerbarView.hidden = true;
+
 		 }
 		 completion:^(BOOL finished)
 		 {
@@ -73,7 +77,8 @@
 						 animations:^
 		 {
 			 self.titleLabel.alpha = 1.0;
-			 self.thumbView.alpha = 0.0;
+             self.dragbarView.hidden = true;
+             self.dividerbarView.hidden = false;
 		 }
 		 completion:^(BOOL finished)
 		 {
