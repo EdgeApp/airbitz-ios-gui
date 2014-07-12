@@ -1732,7 +1732,10 @@ typedef enum eMapDisplayState
 		if(mostRecentSearchTag == TAG_LOCATION_SEARCH)
 		{
 			//show results for location textfield
-			
+			            // Reset the font first.
+            UIFont *myFont = [UIFont systemFontOfSize:18.0f];
+            cell.textLabel.font = myFont;
+
 			unsigned long cacheSize = 0;
 			if(self.locationTextfield.text.length == 0)
 			{
@@ -1754,7 +1757,7 @@ typedef enum eMapDisplayState
 			else if(indexPath.row == cacheSize + 1)
 			{
 				cell.textLabel.text = ON_THE_WEB_STRING;
-				cell.textLabel.textColor = [UIColor purpleColor];
+				cell.textLabel.textColor = [UIColor blueColor];
 				cell.textLabel.backgroundColor = [UIColor clearColor];
 			}
 			else
@@ -1768,6 +1771,11 @@ typedef enum eMapDisplayState
 		else if(mostRecentSearchTag == TAG_BUSINESS_SEARCH)
 		{
 			unsigned long cacheSize = 0;
+            
+            // Reset the font first.
+            UIFont *myFont = [UIFont systemFontOfSize:18.0f];
+            cell.textLabel.font = myFont;
+
 			if(self.searchTextfield.text.length == 0)
 			{
 				cacheSize = searchTermCache.count;
@@ -1787,6 +1795,19 @@ typedef enum eMapDisplayState
 				if([object isKindOfClass:[NSDictionary class]])
 				{
 					cell.textLabel.text = [(NSDictionary*)object objectForKey:@"text"];
+                    NSString *type = [(NSDictionary*)object objectForKey:@"type"];
+                    
+                    if ([type isEqualToString: @"category"])
+                    {
+                        UIFont *myFont = [UIFont italicSystemFontOfSize:18.0f];
+                        cell.textLabel.font = myFont;
+                    }
+                    else
+                    {
+                        UIFont *myFont = [UIFont boldSystemFontOfSize:18.0f];
+                        cell.textLabel.font = myFont;
+                        
+                    }
 				}
 				else
 				{
