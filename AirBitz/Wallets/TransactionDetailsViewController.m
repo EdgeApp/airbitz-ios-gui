@@ -41,9 +41,10 @@
 
 #define TABLE_CELL_BACKGROUND_COLOR [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0]
 
-@interface TransactionDetailsViewController () <UITextFieldDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
+@interface TransactionDetailsViewController () <UITextFieldDelegate, UITextViewDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
 {
     UITextField     *_activeTextField;
+    UITextView      *_activeTextView;
     CGRect          _originalFrame;
     CGRect          _originalHeaderFrame;
     CGRect          _originalContentFrame;
@@ -75,7 +76,7 @@
 @property (weak, nonatomic) IBOutlet PickerTextView         *pickerTextCategory;
 @property (weak, nonatomic) IBOutlet UILabel                *labelNotes;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageNotesEmboss;
-@property (nonatomic, weak) IBOutlet UITextField            *notesTextField;
+@property (nonatomic, weak) IBOutlet UITextView             *notesTextView;
 @property (nonatomic, weak) IBOutlet UIButton               *doneButton;
 
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
@@ -133,7 +134,7 @@
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
     self.pickerTextCategory.textField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
-    self.notesTextField.returnKeyType = UIReturnKeyDone;
+    self.notesTextView.returnKeyType = UIReturnKeyDone;
 
     // load all the names from the address book
     [self generateListOfContactNames];
@@ -147,7 +148,7 @@
     
     self.fiatTextField.delegate = self;
     self.fiatTextField.inputView = self.keypadView;
-    self.notesTextField.delegate = self;
+    self.notesTextView.delegate = self;
     self.nameTextField.delegate = self;
 
     // get a callback when there are changes
@@ -171,7 +172,7 @@
     
     self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
     self.nameTextField.text = self.transaction.strName;
-    self.notesTextField.text = self.transaction.strNotes;
+    self.notesTextView.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
 
     NSMutableString *coinFormatted = [[NSMutableString alloc] init];
@@ -202,6 +203,7 @@
     self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.nameTextField.font = [UIFont systemFontOfSize:18];
     self.nameTextField.textAlignment = NSTextAlignmentCenter;
+    self.nameTextField.tintColor = [UIColor whiteColor];
     
     _originalHeaderFrame = self.headerView.frame;
     _originalContentFrame = self.contentView.frame;
@@ -278,7 +280,7 @@
     [self addCategory:self.pickerTextCategory.textField.text];
 
     self.transaction.strName = [self.nameTextField text];
-    self.transaction.strNotes = [self.notesTextField text];
+    self.transaction.strNotes = [self.notesTextView text];
     self.transaction.strCategory = [self.pickerTextCategory.textField text];
     self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
 
@@ -424,9 +426,9 @@
         frame.origin.y = self.labelNotes.frame.origin.y + self.labelNotes.frame.size.height + -2;
         self.imageNotesEmboss.frame = frame;
 
-        frame = self.notesTextField.frame;
-        frame.origin.y = self.imageNotesEmboss.frame.origin.y + 0;
-        self.notesTextField.frame = frame;
+        frame = self.notesTextView.frame;
+        frame.origin.y = self.imageNotesEmboss.frame.origin.y + 4;
+        self.notesTextView.frame = frame;
 
         frame = self.doneButton.frame;
         frame.origin.y = self.imageBottomEmboss.frame.origin.y + self.imageBottomEmboss.frame.size.height + 4;
@@ -683,7 +685,7 @@
 
 - (void)resignAllResponders
 {
-    [self.notesTextField resignFirstResponder];
+    [self.notesTextView resignFirstResponder];
     [self.pickerTextCategory.textField resignFirstResponder];
     [self.nameTextField resignFirstResponder];
     [self.fiatTextField resignFirstResponder];
@@ -1065,12 +1067,42 @@
     }
 }
 
+#pragma mark - UITextView delegates
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:(NSString *) @"\n"])
+    {
+        CGRect scrollFrame = self.scrollableContentView.frame;
+
+        [self scrollContentViewToFrame:scrollFrame];
+        [textView resignFirstResponder];
+    }
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    _activeTextView = textView;
+    
+    CGRect scrollFrame = self.scrollableContentView.frame;
+    
+    if (textView == self.notesTextView)
+    {
+        scrollFrame.origin.y = (IS_IPHONE5 ? -90 : -115);
+        [self dismissPayeeTable];
+    }
+    
+    [self scrollContentViewToFrame:scrollFrame];
+}
+
 #pragma mark - UITextField delegates
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     return YES;
 }
+
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -1089,11 +1121,6 @@
         frame.size.height = (IS_IPHONE5 ? 252 : 169);
         [self spawnPayeeTableInFrame:frame];
         [self updateAutoCompleteArray];
-    }
-    else if (textField == self.notesTextField)
-    {
-        scrollFrame.origin.y = (IS_IPHONE5 ? -90 : -115);
-        [self dismissPayeeTable];
     }
     else
     {
@@ -1206,7 +1233,7 @@
 
     if (!self.bOldTransaction)
     {
-        [self.notesTextField becomeFirstResponder];
+        [self.notesTextView becomeFirstResponder];
     }
 
     return YES;
@@ -1224,7 +1251,7 @@
 
         if (!self.bOldTransaction)
         {
-            [self.notesTextField becomeFirstResponder];
+            [self.notesTextView becomeFirstResponder];
         }
     }
 }
@@ -1283,7 +1310,12 @@
     {
         [self scrollContentViewBackToOriginalPosition];
     }
-
+    
+    if (_activeTextView == self.notesTextView)
+    {
+        [self scrollContentViewBackToOriginalPosition];
+    }
+    _activeTextView = nil;
     _activeTextField = nil;
 }
 
