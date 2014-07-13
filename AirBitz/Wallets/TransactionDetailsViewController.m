@@ -280,12 +280,40 @@
 
     [self resignAllResponders];
 
-    // add the category if we didn't have it
-    [self addCategory:self.pickerTextCategory.textField.text];
+    //
+    // Check if category is only one of the sub categories (ie. Income, Expense, Transfer, Exchange)
+    // If so, do not add it
+    //
 
+    NSArray *arrayTypes = ARRAY_CATEGORY_PREFIXES;
+
+    bool doAddCategory = true;
+    // run through each type
+    for (NSString *strPrefix in arrayTypes)
+    {
+        if ([strPrefix isEqualToString: self.pickerTextCategory.textField.text]) 
+        {
+            doAddCategory = false;
+            break;
+        }
+    }
+
+    if ([self.pickerTextCategory.textField.text isEqualToString: @""])
+    {
+        doAddCategory = false;
+    }
+
+    if (doAddCategory)
+    {
+        // add the category if we didn't have it
+        [self addCategory: self.pickerTextCategory.textField.text]; 
+        self.transaction.strCategory = [self.pickerTextCategory.textField text]; 
+    } else {
+        self.transaction.strCategory = @"";
+    }
+    
     self.transaction.strName = [self.nameTextField text];
     self.transaction.strNotes = [self.notesTextView text];
-    self.transaction.strCategory = [self.pickerTextCategory.textField text];
     self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
 
     [CoreBridge storeTransaction: self.transaction];
