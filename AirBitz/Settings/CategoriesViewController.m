@@ -18,7 +18,7 @@
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y    3
 #define TABLE_SIZE_EXTRA_HEIGHT         5
 
-#define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:"]
+#define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
 
 #define PICKER_MAX_CELLS_VISIBLE        (IS_IPHONE5 ? 3 : 2)
 

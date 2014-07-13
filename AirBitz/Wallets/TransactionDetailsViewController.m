@@ -25,7 +25,7 @@
 #import "CommonTypes.h"
 #import "PayeeCell.h"
 
-#define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:"]
+#define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
 
 #define PICKER_MAX_CELLS_VISIBLE 4
 
@@ -633,6 +633,7 @@
     NSString *strFirstType = @"Expense:";
     NSString *strSecondType = @"Income:";
     NSString *strThirdType = @"Transfer:";
+    NSString *strFourthType = @"Exchange:"; 
 
     if (self.transactionDetailsMode == TD_MODE_RECEIVED)
     {
@@ -640,7 +641,7 @@
         strSecondType = @"Expense:";
     }
 
-    NSArray *arrayTypes = @[strFirstType, strSecondType, strThirdType];
+    NSArray *arrayTypes = @[strFirstType, strSecondType, strThirdType, strFourthType];
 
     // run through each type
     for (NSString *strPrefix in arrayTypes)

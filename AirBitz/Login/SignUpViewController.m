@@ -882,27 +882,36 @@
         [self.arrayCategories addObject:NSLocalizedString(@"Income:Sales", @"default category Income:Sales")];
         
         //
+        // Exchange Categories
+        //
+        [self.arrayCategories addObject: NSLocalizedString(@"Exchange:Buy Bitcoin", @"default category Exchange:Buy Bitcoin")]; 
+        [self.arrayCategories addObject: NSLocalizedString(@"Exchange:Sell Bitcoin", @"default category Exchange:Sell Bitcoin")]; 
+
+        //
         // Transfer Categories
         //
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Airbitz", @"default category Transfer:Airbitz")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Bitcoin.de", @"default category Transfer:Bitcoin.de")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Bitfinex", @"default category Transfer:Bitfinex")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Bitstamp", @"default category Transfer:Bitstamp")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Blockchain Wallet", @"default category Transfer:Blockchain Wallet")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:BTC-e", @"default category Transfer:BTC-e")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:BTCChina", @"default category Transfer:BTCChina")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Bter", @"default category Transfer:Bter")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Buy Bitcoin", @"default category Transfer:Buy Bitcoin")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:CAVirtex", @"default category Transfer:CAVirtex")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Coinbase", @"default category Transfer:Coinbase")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:CoinMKT", @"default category Transfer:CoinMKT")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Huobi", @"default category Transfer:Huobi")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Kraken", @"default category Transfer:Kraken")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:MintPal", @"default category Transfer:MintPal")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Mycelium", @"default category Transfer:Mycelium")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:OKCoin", @"default category Transfer:OKCoin")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Sell Bitcoin", @"default category Transfer:Sell Bitcoin")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Transfer:Vault of Satoshi", @"default category Transfer:Vault of Satoshi")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bitcoin.de", @"default category Transfer:Bitcoin.de")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bitfinex", @"default category Transfer:Bitfinex")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bitstamp", @"default category Transfer:Bitstamp")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:BTC-e", @"default category Transfer:BTC-e")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:BTCChina", @"default category Transfer:BTCChina")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bter", @"default category Transfer:Bter")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:CAVirtex", @"default category Transfer:CAVirtex")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Coinbase", @"default category Transfer:Coinbase")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:CoinMKT", @"default category Transfer:CoinMKT")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Huobi", @"default category Transfer:Huobi")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Kraken", @"default category Transfer:Kraken")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:MintPal", @"default category Transfer:MintPal")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:OKCoin", @"default category Transfer:OKCoin")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Vault of Satoshi", @"default category Transfer:Vault of Satoshi")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Airbitz", @"default category Transfer:Wallet:Airbitz")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Armory", @"default category Transfer:Wallet:Armory")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Bitcoin Core", @"default category Transfer:Wallet:Bitcoin Core")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Blockchain", @"default category Transfer:Wallet:Blockchain")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Electrum", @"default category Transfer:Wallet:Electrum")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Multibit", @"default category Transfer:Wallet:Multibit")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Mycelium", @"default category Transfer:Wallet:Mycelium")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Dark Wallet", @"default category Transfer:Wallet:Dark Wallet")]; 
         
         // add default categories to core
         for (int i = 0; i < [self.arrayCategories count]; i++)
