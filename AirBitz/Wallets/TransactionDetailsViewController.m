@@ -26,6 +26,10 @@
 #import "PayeeCell.h"
 
 #define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
+#define ARRAY_CATEGORY_PREFIX_EXPENSE    0
+#define ARRAY_CATEGORY_PREFIX_INCOME     1
+#define ARRAY_CATEGORY_PREFIX_TRANSFER   2
+#define ARRAY_CATEGORY_PREFIX_EXCHANGE   3
 
 #define PICKER_MAX_CELLS_VISIBLE 4
 
@@ -674,7 +678,14 @@
     // if it doesn't start with a prefix, make it
     if (strPrefix == nil)
     {
-        [strNewVal insertString:[ARRAY_CATEGORY_PREFIXES objectAtIndex:0] atIndex:0];
+        if (self.transactionDetailsMode == TD_MODE_SENT)
+        {
+            [strNewVal insertString: [ARRAY_CATEGORY_PREFIXES objectAtIndex: ARRAY_CATEGORY_PREFIX_EXPENSE] atIndex: 0];
+        }
+        else
+        {
+            [strNewVal insertString: [ARRAY_CATEGORY_PREFIXES objectAtIndex: ARRAY_CATEGORY_PREFIX_INCOME ] atIndex: 0];
+        }
     }
 
     textField.text = strNewVal;
