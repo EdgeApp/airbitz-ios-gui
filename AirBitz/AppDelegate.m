@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ABC.h"
 #import "User.h"
+#import "CoreBridge.h"
 #import "CommonTypes.h"
 #import "PopupPickerView.h"
 
@@ -21,9 +22,9 @@ bool IN_BACKGROUND   = false;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-	[application setStatusBarHidden:NO];
-	[application setStatusBarStyle:UIStatusBarStyleLightContent];
-	[PopupPickerView initAll];
+    [application setStatusBarHidden:NO];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
+    [PopupPickerView initAll];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
@@ -50,8 +51,11 @@ bool IN_BACKGROUND   = false;
 {
     if ([User isLoggedIn])
     {
+        NSLog(@("Settings background fetch interval to %d\n"), [User Singleton].minutesAutoLogout * 60);
+        [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
+
         bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
-            [self autoLogout];
+            [self bgCleanup];
         }];
         logoutTimer = [NSTimer scheduledTimerWithTimeInterval:[User Singleton].minutesAutoLogout * 60
                                                        target:self
@@ -62,24 +66,34 @@ bool IN_BACKGROUND   = false;
     IN_BACKGROUND = YES;
 }
 
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
+{
+    NSLog(@"Calling fetch!!!!");
+    [self autoLogout];
+    completionHandler(UIBackgroundFetchResultNoData);
+}
+
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     IN_BACKGROUND = YES;
+    if ([User isLoggedIn])
+    {
+        [CoreBridge stopWatchers];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     IN_BACKGROUND = NO;
+    if ([User isLoggedIn])
+    {
+        [CoreBridge startWatchers];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    if (logoutTimer)
-    {
-        [logoutTimer invalidate];
-    }
-    [application endBackgroundTask:bgLogoutTask];
-    bgLogoutTask = UIBackgroundTaskInvalid;
+    [self bgCleanup];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -88,15 +102,25 @@ bool IN_BACKGROUND   = false;
     ABC_Terminate();
 }
 
+- (void)bgCleanup
+{
+    if (logoutTimer)
+    {
+        [logoutTimer invalidate];
+    }
+    [[UIApplication sharedApplication] endBackgroundTask:bgLogoutTask];
+    bgLogoutTask = UIBackgroundTaskInvalid;
+}
+
 - (void)autoLogout
 {
+    NSLog(@"**********Autologout**********");
     if (IN_BACKGROUND)
     {
         [[User Singleton] clear];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
+        [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval: UIApplicationBackgroundFetchIntervalNever];
     }
-    [[UIApplication sharedApplication] endBackgroundTask:bgLogoutTask];
-    bgLogoutTask = UIBackgroundTaskInvalid;
 }
 
 @end

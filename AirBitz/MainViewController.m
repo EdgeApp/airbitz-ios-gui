@@ -455,6 +455,9 @@ typedef enum eAppMode
 
 - (void)loginViewControllerDidLogin
 {
+    // After login, reset all the main views
+    [self loadAdditionalViews];
+
 	[_loginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];
