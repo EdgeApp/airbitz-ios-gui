@@ -969,6 +969,8 @@
         }
         [User Singleton].password = self.passwordTextField.text;
         [[User Singleton] loadSettings];
+        [CoreBridge stopWatchers];
+        [CoreBridge startWatchers];
 
         alert = [[UIAlertView alloc]
                  initWithTitle:self.labelTitle.text
