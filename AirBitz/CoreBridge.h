@@ -50,6 +50,7 @@
          storeResultsIn:(int64_t *) totalFees
          walletTransfer:(bool)bTransfer;
 + (void)requestExchangeRateUpdate:(id)object recursive:(BOOL)isRecursive;
++ (void)requestSyncData:(id)object recursive:(BOOL)isRecursive;
 + (bool)isTestNet;
 + (NSString *)currencyAbbrevLookup:(int) currencyNum;
 + (NSString *)currencySymbolLookup:(int) currencyNum;

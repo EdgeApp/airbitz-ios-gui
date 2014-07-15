@@ -96,6 +96,9 @@ typedef enum eAppMode
 
     // Initialize the exchange rates queue
     [CoreBridge requestExchangeRateUpdate:self recursive:YES];
+
+    // Initialize data sync queue
+    [CoreBridge requestSyncData:self recursive:YES];
 #endif
 
 	_originalTabBarFrame = self.tabBar.frame;

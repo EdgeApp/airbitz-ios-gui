@@ -767,6 +767,34 @@
     }
 }
 
++ (void)requestSyncData:(id)object recursive:(BOOL)isRecursive
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // Request Data
+        [CoreBridge syncAllData:object];
+
+        if (!isRecursive)
+        {
+            return;
+        }
+
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * 60 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            [CoreBridge requestSyncData:object recursive:YES];
+        });
+    });
+}
+
++ (void)syncAllData:(id)object
+{
+    if ([User isLoggedIn])
+    {
+        tABC_Error error;
+        ABC_DataSyncAll([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &error);
+        [Util printABC_Error: &error];
+    }
+}
+
 + (bool)isTestNet
 {
     bool result = false;
