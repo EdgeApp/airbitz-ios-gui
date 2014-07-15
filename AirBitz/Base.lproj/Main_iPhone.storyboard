@@ -3787,7 +3787,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" id="YZe-mr-te9" userLabel="Spinner View">
+                            <view alpha="0.29999999999999999" contentMode="scaleToFill" id="YZe-mr-te9" userLabel="Spinner View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -4067,6 +4067,17 @@
                                     <outlet property="delegate" destination="8PZ-sh-cHM" id="9fH-OS-njE"/>
                                 </connections>
                             </scrollView>
+                            <view hidden="YES" alpha="0.30000001192092896" contentMode="scaleToFill" id="gpK-tF-oyh" userLabel="Spinner View">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="t2d-P5-mkj">
+                                        <rect key="frame" x="142" y="265" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -4079,6 +4090,7 @@
                         <outlet property="imageSkip" destination="B5d-ZE-zXF" id="TQF-fd-1iS"/>
                         <outlet property="labelTitle" destination="9kf-YJ-8Zz" id="VeQ-yK-Mkd"/>
                         <outlet property="scrollView" destination="peD-fG-VAk" id="aIZ-za-GQs"/>
+                        <outlet property="spinnerView" destination="gpK-tF-oyh" id="gpt-wX-Nhq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pEL-dB-Vc6" userLabel="First Responder" sceneMemberID="firstResponder"/>

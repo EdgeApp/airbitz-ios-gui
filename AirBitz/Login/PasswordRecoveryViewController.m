@@ -46,6 +46,7 @@ typedef enum eAlertType
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonBack;
 @property (weak, nonatomic) IBOutlet MontserratLabel            *labelTitle;
 @property (weak, nonatomic) IBOutlet UIImageView                *imageSkip;
+@property (nonatomic, weak) IBOutlet UIView                     *spinnerView;
 
 @property (nonatomic, strong) UIButton        *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray  *arrayCategoryString;
@@ -92,6 +93,7 @@ typedef enum eAlertType
     [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
     self.buttonBlocker.frame = self.view.bounds;
     self.buttonBlocker.hidden = YES;
+    self.spinnerView.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
 
     if ((self.mode == PassRecovMode_SignUp) || (self.mode == PassRecovMode_Change))
@@ -242,6 +244,11 @@ typedef enum eAlertType
 
 #pragma mark - Misc Methods
 
+- (void)showSpinner:(BOOL)bShow
+{
+    self.spinnerView.hidden = !bShow;
+}
+
 - (void)updateDisplayForMode:(tPassRecovMode)mode
 {
     if (mode == PassRecovMode_SignUp)
@@ -273,6 +280,7 @@ typedef enum eAlertType
 - (void)recoverWithAnswers:(NSString *)strAnswers
 {
     _bSuccess = NO;
+    [self showSpinner:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         BOOL bSuccess = [CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName];
         NSArray *params = [NSArray arrayWithObjects:strAnswers, nil];
@@ -285,6 +293,7 @@ typedef enum eAlertType
 
 - (void)checkRecoveryAnswersResponse:(NSArray *)params
 {
+    [self showSpinner:NO];
     if (_bSuccess)
     {
         NSString *strAnswers = params[0];
