@@ -49,6 +49,7 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet UIImageView        *logoImage;
 @property (nonatomic, weak) IBOutlet UIView             *userEntryView;
 @property (nonatomic, weak) IBOutlet UILabel            *invalidMessage;
+@property (nonatomic, weak) IBOutlet UIView             *spinnerView;
 
 @end
 
@@ -75,6 +76,7 @@ typedef enum eLoginMode
 	self.userNameTextField.delegate = self;
 	self.passwordTextField.delegate = self;
 	self.invalidMessage.hidden = YES;
+    self.spinnerView.hidden = YES;
 	
 	#if HARD_CODED_LOGIN
 	
@@ -126,6 +128,7 @@ typedef enum eLoginMode
                (__bridge void *)self,
                &Error);
     [Util printABC_Error:&Error];
+    [self showSpinner:YES];
 }
 
 - (IBAction)SignUp
@@ -166,6 +169,7 @@ typedef enum eLoginMode
     // if they have a username
     if ([self.userNameTextField.text length])
     {
+        [self showSpinner:YES];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             BOOL bSuccess = NO;
             NSMutableString *error = [[NSMutableString alloc] init];
@@ -174,6 +178,7 @@ typedef enum eLoginMode
                                                                          errorMsg:error];
             NSArray *params = [NSArray arrayWithObjects:arrayQuestions, nil];
             dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [self showSpinner:NO];
                 _bSuccess = bSuccess;
                 _strReason = error;
                 [self performSelectorOnMainThread:@selector(launchQuestionRecovery:) withObject:params waitUntilDone:NO];
@@ -495,6 +500,7 @@ typedef enum eLoginMode
 
 - (void)signInComplete
 {
+    [self showSpinner:NO];
     if (_bSuccess)
     {
         [User login:self.userNameTextField.text
@@ -549,7 +555,12 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
     [self finishIfLoggedIn];
 }
 
-#pragma mark - Exit when already logged in
+#pragma mark - Misc
+
+- (void)showSpinner:(BOOL)bShow
+{
+    self.spinnerView.hidden = !bShow;
+}
 
 - (void)finishIfLoggedIn
 {

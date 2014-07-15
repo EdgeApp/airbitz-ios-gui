@@ -3787,6 +3787,17 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" id="YZe-mr-te9" userLabel="Spinner View">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="jxB-Sf-1qJ">
+                                        <rect key="frame" x="142" y="265" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -3796,6 +3807,7 @@
                         <outlet property="invalidMessage" destination="bZ3-GO-iZS" id="Qja-Kw-oCU"/>
                         <outlet property="logoImage" destination="LqE-iy-sKS" id="cmm-Yx-nMh"/>
                         <outlet property="passwordTextField" destination="V5e-1n-K9Z" id="iwd-kF-klp"/>
+                        <outlet property="spinnerView" destination="YZe-mr-te9" id="IDf-eC-kyH"/>
                         <outlet property="swipeArrow" destination="GJL-fK-J6d" id="Y5A-BT-fhM"/>
                         <outlet property="swipeText" destination="8XB-1A-1hO" id="yBH-JD-yZ2"/>
                         <outlet property="titleText" destination="nae-d6-xoW" id="2iX-DH-tAT"/>
