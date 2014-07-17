@@ -16,8 +16,9 @@
 #import "CoreBridge.h"
 #import "Util.h"
 #import "CommonTypes.h"
+#import "SyncView.h"
 
-@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate>
+@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate, SyncViewDelegate>
 {
 	ConfirmationSliderView              *_confirmationSlider;
 	UITextField                         *_selectedTextField;
@@ -26,6 +27,7 @@
 	BOOL                                _callbackSuccess;
 	NSString                            *_strReason;
 	Transaction                         *_completedTransaction;	// nil until sendTransaction is successfully completed
+	SyncView                            *_syncingView;
     UITapGestureRecognizer              *tap;
 }
 
@@ -54,8 +56,6 @@
 @property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
 @property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
-
-@property (nonatomic, strong) UIView    *syncingView;
 
 @end
 
@@ -191,67 +191,19 @@
                                                  name:NOTIFICATION_EXCHANGE_RATE_CHANGE
                                                object:nil];
     [self exchangeRateUpdate:nil]; 
-
-    if (![CoreBridge watcherIsReady:self.wallet.strUUID] 
-            && _syncingView == nil)
-    {
-        [self dismissKeyboard];
-        // show yellow alert
-		_syncingView = [[[NSBundle mainBundle] loadNibNamed:@"SyncView~iphone" owner:nil options:nil] objectAtIndex:0];
-
-        CGRect frame = _syncingView.frame;
-        CGRect parent = _viewDisplayArea.frame;
-        frame.origin.x = 0;
-        frame.origin.y = 0;
-        frame.size.width = parent.size.width;
-        frame.size.height = parent.size.height;
-        _syncingView.frame = frame;
-
-        [_viewDisplayArea addSubview:_syncingView];
-
-        _syncingView.alpha = 0.0;
-        [UIView animateWithDuration:0.35
-                            delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                        animations:^
-        {
-            _syncingView.alpha = 1.0;
-        }
-                        completion:^(BOOL finished)
-        {
-            [self checkSyncView];
-        }];
-    }
+    [self syncTest];
 }
 
-- (void)checkSyncView
+- (void)syncTest
 {
-    if (!_syncingView)
+    if (![CoreBridge watcherIsReady:self.wallet.strUUID] && !_syncingView)
     {
-        return;
+        _syncingView = [SyncView createView:_viewDisplayArea forWallet:self.wallet.strUUID];
+        _syncingView.delegate = self;
     }
-    if ([CoreBridge watcherIsReady:self.wallet.strUUID])
+    if (_syncingView)
     {
-        _syncingView.alpha = 1.0;
-        [UIView animateWithDuration:0.35
-                            delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                        animations:^
-        {
-            _syncingView.alpha = 0.0;
-        }
-        completion:^(BOOL finished)
-        {
-            [_syncingView removeFromSuperview];
-            _syncingView = nil;
-        }];
-    }
-    else
-    {
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-            [self checkSyncView];
-        });
+        [self dismissKeyboard];
     }
 }
 
@@ -808,6 +760,14 @@
 	_sendStatusController = nil;
 
 	[self.delegate sendConfirmationViewControllerDidFinish:self];
+}
+
+#pragma mark - SyncView delegates
+
+- (void)SyncViewDismissed:(SyncView *)sv
+{
+    [_syncingView removeFromSuperview];
+    _syncingView = nil;
 }
 
 #pragma mark - ABC Callbacks
