@@ -606,6 +606,15 @@
 - (void)updateFeeFieldContents
 {
     int64_t fees = 0;
+    // Don't caculate fees until there is a value
+    if (self.amountToSendSatoshi == 0)
+    {
+        self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
+        self.conversionLabel.textColor = [UIColor whiteColor];
+        self.amountBTCTextField.textColor = [UIColor whiteColor];
+        self.amountUSDTextField.textColor = [UIColor whiteColor];
+        return;
+    }
     
 	tABC_Error error;
     NSString *dest = [self getDestAddress];
