@@ -55,7 +55,7 @@
 @property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
 
-@property (nonatomic, strong) UIButton  *buttonBlocker;
+@property (nonatomic, strong) UIView    *syncingView;
 
 @end
 
@@ -191,6 +191,68 @@
                                                  name:NOTIFICATION_EXCHANGE_RATE_CHANGE
                                                object:nil];
     [self exchangeRateUpdate:nil]; 
+
+    if (![CoreBridge watcherIsReady:self.wallet.strUUID] 
+            && _syncingView == nil)
+    {
+        [self dismissKeyboard];
+        // show yellow alert
+		_syncingView = [[[NSBundle mainBundle] loadNibNamed:@"SyncView~iphone" owner:nil options:nil] objectAtIndex:0];
+
+        CGRect frame = _syncingView.frame;
+        CGRect parent = _viewDisplayArea.frame;
+        frame.origin.x = 0;
+        frame.origin.y = 0;
+        frame.size.width = parent.size.width;
+        frame.size.height = parent.size.height;
+        _syncingView.frame = frame;
+
+        [_viewDisplayArea addSubview:_syncingView];
+
+        _syncingView.alpha = 0.0;
+        [UIView animateWithDuration:0.35
+                            delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                        animations:^
+        {
+            _syncingView.alpha = 1.0;
+        }
+                        completion:^(BOOL finished)
+        {
+            [self checkSyncView];
+        }];
+    }
+}
+
+- (void)checkSyncView
+{
+    if (!_syncingView)
+    {
+        return;
+    }
+    if ([CoreBridge watcherIsReady:self.wallet.strUUID])
+    {
+        _syncingView.alpha = 1.0;
+        [UIView animateWithDuration:0.35
+                            delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                        animations:^
+        {
+            _syncingView.alpha = 0.0;
+        }
+        completion:^(BOOL finished)
+        {
+            [_syncingView removeFromSuperview];
+            _syncingView = nil;
+        }];
+    }
+    else
+    {
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+            [self checkSyncView];
+        });
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -676,8 +738,7 @@
 - (void)ConfirmationSliderDidConfirm:(ConfirmationSliderView *)controller
 {
 	//make sure PIN is good
-	
-	if (self.withdrawlPIN.text.length)
+    if (self.withdrawlPIN.text.length)
 	{
 		//make sure the entered PIN matches the PIN stored in the Core
 		tABC_Error error;

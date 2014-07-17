@@ -37,6 +37,7 @@
                                     errorMsg:(NSMutableString *)error;
 + (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName;
 + (void)logout;
++ (BOOL)watcherIsReady:(NSString *)UUID;
 + (void)startWatchers;
 + (void)startWatcher: (NSString *) walletUUID;
 + (void)stopWatchers;

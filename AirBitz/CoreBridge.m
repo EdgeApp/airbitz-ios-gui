@@ -625,6 +625,14 @@
     }
 }
 
++ (BOOL)watcherIsReady:(NSString *)UUID
+{
+    tABC_Error Error;
+    BOOL result = ABC_WatcherStatus([UUID UTF8String], &Error) == ABC_CC_Ok;
+    [Util printABC_Error:&Error];
+    return result;
+}
+
 + (void)startWatchers
 {
     NSLog(@"startWatchers\n");
