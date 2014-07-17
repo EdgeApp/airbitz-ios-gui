@@ -16,8 +16,9 @@
 #import "CoreBridge.h"
 #import "Util.h"
 #import "CommonTypes.h"
+#import "SyncView.h"
 
-@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate>
+@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate, SyncViewDelegate>
 {
 	ConfirmationSliderView              *_confirmationSlider;
 	UITextField                         *_selectedTextField;
@@ -26,6 +27,7 @@
 	BOOL                                _callbackSuccess;
 	NSString                            *_strReason;
 	Transaction                         *_completedTransaction;	// nil until sendTransaction is successfully completed
+	SyncView                            *_syncingView;
     UITapGestureRecognizer              *tap;
 }
 
@@ -54,8 +56,6 @@
 @property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
 @property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
-
-@property (nonatomic, strong) UIButton  *buttonBlocker;
 
 @end
 
@@ -191,6 +191,20 @@
                                                  name:NOTIFICATION_EXCHANGE_RATE_CHANGE
                                                object:nil];
     [self exchangeRateUpdate:nil]; 
+    [self syncTest];
+}
+
+- (void)syncTest
+{
+    if (![CoreBridge watcherIsReady:self.wallet.strUUID] && !_syncingView)
+    {
+        _syncingView = [SyncView createView:_viewDisplayArea forWallet:self.wallet.strUUID];
+        _syncingView.delegate = self;
+    }
+    if (_syncingView)
+    {
+        [self dismissKeyboard];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -676,8 +690,7 @@
 - (void)ConfirmationSliderDidConfirm:(ConfirmationSliderView *)controller
 {
 	//make sure PIN is good
-	
-	if (self.withdrawlPIN.text.length)
+    if (self.withdrawlPIN.text.length)
 	{
 		//make sure the entered PIN matches the PIN stored in the Core
 		tABC_Error error;
@@ -747,6 +760,14 @@
 	_sendStatusController = nil;
 
 	[self.delegate sendConfirmationViewControllerDidFinish:self];
+}
+
+#pragma mark - SyncView delegates
+
+- (void)SyncViewDismissed:(SyncView *)sv
+{
+    [_syncingView removeFromSuperview];
+    _syncingView = nil;
 }
 
 #pragma mark - ABC Callbacks

@@ -94,6 +94,8 @@
 		686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
 		686C24871935608400F8E445 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
+		6893E6C21978330A0092DA04 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6893E6C11978330A0092DA04 /* SyncView~iphone.xib */; };
+		6893E6CA19783FED0092DA04 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6893E6C919783FED0092DA04 /* SyncView.m */; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
 		B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */; };
@@ -626,6 +628,9 @@
 		686C24861935608400F8E445 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = AirBitz/ABC/libzmq.a; sourceTree = "<group>"; };
 		687C1B041927FF81003A83E8 /* CoreBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBridge.h; sourceTree = "<group>"; };
 		687C1B051927FF81003A83E8 /* CoreBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreBridge.m; sourceTree = "<group>"; };
+		6893E6C11978330A0092DA04 /* SyncView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SyncView~iphone.xib"; path = "../SyncView~iphone.xib"; sourceTree = "<group>"; };
+		6893E6C819783FED0092DA04 /* SyncView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncView.h; sourceTree = "<group>"; };
+		6893E6C919783FED0092DA04 /* SyncView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncView.m; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
 		B5050549193F7D2B007D4960 /* GTLDrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLDrive.h; sourceTree = "<group>"; };
@@ -1493,6 +1498,9 @@
 				4C3C309A19199AB6006923DE /* StrokeGradientButton */,
 				B5FD393218F06FD800BE2670 /* StylizedTextField.h */,
 				B5FD393318F06FD800BE2670 /* StylizedTextField.m */,
+				6893E6C11978330A0092DA04 /* SyncView~iphone.xib */,
+				6893E6C819783FED0092DA04 /* SyncView.h */,
+				6893E6C919783FED0092DA04 /* SyncView.m */,
 				B59C161918C1436300AEA789 /* TabBarView.h */,
 				B59C161A18C1436300AEA789 /* TabBarView.m */,
 				B57C207B18C15009005D7245 /* TabBarButton.h */,
@@ -2458,6 +2466,7 @@
 				B5675B5618A17F6F002E0703 /* InfoPlist.strings in Resources */,
 				B59C161F18C145D400AEA789 /* tabbar_bkg_selected~iphone.png in Resources */,
 				B55A032218EB597D00845090 /* btn_addCategory@2x~iphone.png in Resources */,
+				6893E6C21978330A0092DA04 /* SyncView~iphone.xib in Resources */,
 				B5E7F57E18E4EC4E009B5844 /* scan_frame~iphone.png in Resources */,
 				B59C14D918C012B500AEA789 /* btn_7~iphone.png in Resources */,
 				B55A02FD18EA206300845090 /* btn_cancel~iphone.png in Resources */,
@@ -2571,6 +2580,7 @@
 				B56553F218EDDCF8005B35E1 /* ButtonSelectorView.m in Sources */,
 				B5C0A97518EA0A42008F302C /* BD_Hours_Cell.m in Sources */,
 				B5C0A99F18EA0C10008F302C /* overviewCell.m in Sources */,
+				6893E6CA19783FED0092DA04 /* SyncView.m in Sources */,
 				B57C207D18C15009005D7245 /* TabBarButton.m in Sources */,
 				4C3C30A5191C1CAF006923DE /* PickerTextView.m in Sources */,
 			);
