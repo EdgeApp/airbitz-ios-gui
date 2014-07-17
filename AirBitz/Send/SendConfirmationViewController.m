@@ -253,6 +253,7 @@
 
 - (IBAction)selectMaxAmount
 {
+    UITextField *_holder = _selectedTextField;
     if (self.wallet != nil)
     {
         _selectedTextField = self.amountBTCTextField;
@@ -262,6 +263,7 @@
         self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
     }
     [self updateTextFieldContents];
+    _selectedTextField = _holder;
 }
 
 - (void)dismissKeyboard
