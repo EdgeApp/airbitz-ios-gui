@@ -397,26 +397,26 @@ typedef enum eAddressPickerType
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    NSString *strTitle = nil;
+    NSString *strTitle = NSLocalizedString(@"AirBitz", nil);
     NSString *strMsg = nil;
 
 	switch (result)
     {
 		case MFMailComposeResultCancelled:
-            strMsg = NSLocalizedString(@"Email cancelled.", nil);
+            strMsg = NSLocalizedString(@"Email cancelled", nil);
 			break;
 
 		case MFMailComposeResultSaved:
-            strMsg = NSLocalizedString(@"Email saved to send later.", nil);
+            strMsg = NSLocalizedString(@"Email saved to send later", nil);
 			break;
 
 		case MFMailComposeResultSent:
-            strMsg = NSLocalizedString(@"Email sent.", nil);
+            strMsg = NSLocalizedString(@"Email sent", nil);
 			break;
 
 		case MFMailComposeResultFailed:
 		{
-            strTitle = NSLocalizedString(@"Error sending Email.", nil);
+            strTitle = NSLocalizedString(@"Error sending Email", nil);
             strMsg = [error localizedDescription];
 			break;
 		}
