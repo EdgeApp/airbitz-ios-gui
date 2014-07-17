@@ -659,6 +659,9 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 
 - (void)resetViews:(NSNotification *)notification
 {
+    // Hide the keyboard
+    [self.view endEditing:NO];
+
     // Force the tabs to redraw the selected view
     _selectedViewController = nil;
     [self launchViewControllerBasedOnAppMode];
