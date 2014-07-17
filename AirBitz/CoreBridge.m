@@ -625,6 +625,22 @@
     }
 }
 
++ (BOOL)allWatchersReady
+{
+    NSLog(@"startWatchers\n");
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets: arrayWallets archived:arrayArchivedWallets];
+    for (Wallet * wallet in arrayWallets)
+    {
+        if (![CoreBridge watcherIsReady:wallet.strUUID])
+        {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 + (BOOL)watcherIsReady:(NSString *)UUID
 {
     tABC_Error Error;
