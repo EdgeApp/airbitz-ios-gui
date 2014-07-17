@@ -18,6 +18,7 @@
 #define CURRENCY_NUM_GBP                826
 #define CURRENCY_NUM_USD                840
 #define CURRENCY_NUM_EUR                978
+#define FILE_SYNC_FREQUENCY_SECONDS     5
 
 @interface CoreBridge ()
 {
@@ -778,7 +779,7 @@
             return;
         }
 
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * 60 * NSEC_PER_SEC);
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * FILE_SYNC_FREQUENCY_SECONDS * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             [CoreBridge requestSyncData:object recursive:YES];
         });
