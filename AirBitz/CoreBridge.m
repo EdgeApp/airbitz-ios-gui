@@ -628,7 +628,7 @@
 
 + (BOOL)allWatchersReady
 {
-    NSLog(@"startWatchers\n");
+    NSLog(@"watchersReady?\n");
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
     NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
     [CoreBridge loadWallets: arrayWallets archived:arrayArchivedWallets];
