@@ -963,14 +963,13 @@
     if (_bSuccess)
     {
         // set up the user password to the new one
+        NSString *username = [User Singleton].name;
         if (self.strUserName)
         {
-            [User Singleton].name = self.strUserName;
+            username = self.strUserName;
         }
-        [User Singleton].password = self.passwordTextField.text;
-        [[User Singleton] loadSettings];
         [CoreBridge stopWatchers];
-        [CoreBridge startWatchers];
+        [User login:username password:self.passwordTextField.text];
 
         alert = [[UIAlertView alloc]
                  initWithTitle:self.labelTitle.text
