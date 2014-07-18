@@ -44,7 +44,7 @@
     tABC_CC result = ABC_GetWallets([[User Singleton].name UTF8String],
                                     [[User Singleton].password UTF8String],
                                     &aWalletInfo, &nCount, &Error);
-    if (ABC_CC_Ok == result)
+    if (ABC_CC_Ok == result && aWalletInfo != NULL)
     {
         unsigned int i;
         for (i = 0; i < nCount; ++i)
@@ -103,7 +103,7 @@
                                        [[User Singleton].password UTF8String],
                                        [wallet.strUUID UTF8String],
                                        &pWalletInfo, &Error);
-    if (ABC_CC_Ok == result)
+    if (ABC_CC_Ok == result && pWalletInfo != NULL)
     {
         wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
         wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
@@ -129,7 +129,7 @@
                                        [[User Singleton].password UTF8String],
                                        [walletUUID UTF8String],
                                        &pWalletInfo, &Error);
-    if (ABC_CC_Ok == result)
+    if (ABC_CC_Ok == result && pWalletInfo != NULL)
     {
         wallet = [[Wallet alloc] init];
         [CoreBridge setWallet:wallet withInfo:pWalletInfo];
