@@ -606,6 +606,8 @@ typedef enum eAppMode
 
 - (void)notifyDataSync:(NSArray *)params
 {
+    [CoreBridge stopWatchers];
+    [CoreBridge startWatchers];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:mainId];
 }
 
