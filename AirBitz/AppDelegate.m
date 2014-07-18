@@ -48,11 +48,30 @@ NSTimer *logoutTimer = NULL;
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    NSLog(@"Resign Active background!!!!");
     if ([User isLoggedIn])
     {
         NSLog(@("Settings background fetch interval to %d\n"), [User Singleton].minutesAutoLogout * 60);
         [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
+    }
 
+}
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
+{
+    NSLog(@"Calling fetch!!!!");
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive)
+    {
+        [self autoLogout];
+    }
+    completionHandler(UIBackgroundFetchResultNoData);
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    NSLog(@"Entered background!!!!");
+    if ([User isLoggedIn])
+    {
         bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
             [self bgCleanup];
         }];
@@ -77,28 +96,19 @@ NSTimer *logoutTimer = NULL;
     }
 }
 
-- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
-{
-    NSLog(@"Calling fetch!!!!");
-    [self autoLogout];
-    completionHandler(UIBackgroundFetchResultNoData);
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-}
-
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
+    NSLog(@"Entered Foreground!!!!");
     [self bgCleanup];
     if ([User isLoggedIn])
     {
         [CoreBridge startWatchers];
     }
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    NSLog(@"applicationDidBecomeActive!!!!");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
