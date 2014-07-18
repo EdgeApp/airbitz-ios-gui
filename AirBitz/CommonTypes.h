@@ -43,6 +43,7 @@
 #define NOTIFICATION_MAIN_RESET                         @"Main_Views_Reset"
 #define NOTIFICATION_BLOCK_HEIGHT_CHANGE                @"Block_Height_Change"
 #define NOTIFICATION_EXCHANGE_RATE_CHANGE               @"Exchange_Rate_Change"
+#define NOTIFICATION_DATA_SYNC_UPDATE                   @"Data_Sync_Update"
 #define NOTIFICATION_HANDLE_BITCOIN_URI                 @"Handle_Bitcoin_URI"
 #define NOTIFICATION_TRANSACTION_DETAILS_EXITED         @"Notification_Transaction_Details_Exited"     // sent when the user has finished using a transaction details screen
 #define NOTIFICATION_LAUNCH_SEND_FOR_WALLET             @"Notification_Launch_Send_For_Wallet"

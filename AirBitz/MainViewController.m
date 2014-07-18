@@ -594,6 +594,21 @@ typedef enum eAppMode
 
 #pragma mark - ABC Callbacks
 
+- (void)notifyBlockHeight:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:mainId];
+}
+
+- (void)notifyExchangeRate:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:mainId];
+}
+
+- (void)notifyDataSync:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:mainId];
+}
+
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
     if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin)
@@ -603,9 +618,11 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
         [mainId performSelectorOnMainThread:@selector(launchReceiving:) withObject:params waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:mainId];
+        [mainId performSelectorOnMainThread:@selector(notifyBlockHeight:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_ExchangeRateUpdate) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:mainId];
+        [mainId performSelectorOnMainThread:@selector(notifyExchangeRate:) withObject:nil waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_DataSyncUpdate) {
+        [mainId performSelectorOnMainThread:@selector(notifyDataSync:) withObject:nil waitUntilDone:NO];
     }
 }
 

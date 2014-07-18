@@ -14,6 +14,7 @@
 #import "Transaction.h"
 #import "ABC.h"
 #import "User.h"
+#import "CommonTypes.h"
 #import "WalletMakerView.h"
 #import "CoreBridge.h"
 #import "OfflineWalletViewController.h"
@@ -85,6 +86,15 @@
 	
 	self.archivedWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"ARCHIVE", @"title of archived wallets table")];
 	self.archivedWalletsHeaderView.delegate = self;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(dataUpdated:)
+                                                 name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -691,6 +701,16 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[controller.view removeFromSuperview];
 	_offlineWalletViewController = nil;
+}
+
+#pragma mark - Data Sync Update
+
+- (void)dataUpdated:(NSNotification *)notification
+{
+    [self reloadWallets];
+    [self.walletsTable reloadData];
+    [self updateBalanceView];
+    [self.view setNeedsDisplay];
 }
 
 @end

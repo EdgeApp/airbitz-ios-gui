@@ -142,8 +142,11 @@
     _transactionTableStartFrame = self.tableView.frame;
 
     [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(blockHeightChanged:)
+                                             selector:@selector(dataUpdated:)
                                                  name:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(dataUpdated:)
+                                                 name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -858,10 +861,12 @@
 
 #pragma mark - Block Height Change
 
-- (void)blockHeightChanged:(NSNotification *)notification
+- (void)dataUpdated:(NSNotification *)notification
 {
     [CoreBridge reloadWallet: self.wallet];
     [self.tableView reloadData];
+    [self updateBalanceView];
+    [self.view setNeedsDisplay];
 }
 
 @end

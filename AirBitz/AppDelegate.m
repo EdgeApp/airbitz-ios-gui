@@ -60,7 +60,7 @@ NSTimer *logoutTimer = NULL;
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
     NSLog(@"Calling fetch!!!!");
-    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive)
+    if (![self isAppActive])
     {
         [self autoLogout];
     }
@@ -91,9 +91,18 @@ NSTimer *logoutTimer = NULL;
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
                 while (![CoreBridge allWatchersReady])
                 {
-                    sleep(30);
+                    // if app is active, break out of loop
+                    if ([self isAppActive])
+                    {
+                        break;
+                    }
+                    sleep(5);
                 }
-                [CoreBridge stopWatchers];
+                // if the app *is not* active, stop watchers
+                if (![self isAppActive])
+                {
+                    [CoreBridge stopWatchers];
+                }
                 if (![logoutTimer isValid])
                 {
                     [self bgCleanup];
@@ -136,14 +145,19 @@ NSTimer *logoutTimer = NULL;
 
 - (void)autoLogout
 {
-    NSLog(@"**********Autologout**********");
-    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive)
+    if (![self isAppActive])
     {
+        NSLog(@"**********Autologout**********");
         [[User Singleton] clear];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval: UIApplicationBackgroundFetchIntervalNever];
     }
     [self bgCleanup];
+}
+
+- (BOOL)isAppActive
+{
+    return [UIApplication sharedApplication].applicationState == UIApplicationStateActive;
 }
 
 @end
