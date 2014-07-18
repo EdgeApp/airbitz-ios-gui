@@ -56,7 +56,7 @@
 
 //geometry
 #define EXTRA_SEARCH_BAR_HEIGHT	37.0
-#define DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT	9.0	/* the divider bar image has some transparency above the actual bar */
+#define DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT	10.0	/* the divider bar image has some transparency above the actual bar */
 #define DIVIDER_DOWN_MARGIN		12.0			/* Limit how far off bottom of screen divider bar can be dragged to */
 #define LOCATE_ME_BUTTON_OFFSET_FROM_MAP_BOTTOM	58.0
 #define MINIMUM_LOCATE_ME_BUTTON_OFFSET_Y	120.0
