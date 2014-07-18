@@ -283,7 +283,7 @@
 				}
 				else
 				{
-					label = @" ";
+					label = @"";
 				}
 				if (uri->szMessage)
 				{
