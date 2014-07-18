@@ -22,4 +22,6 @@
 @property (nonatomic, assign)   double          balance;
 @property (nonatomic, strong)   NSArray         *arrayTransactions;
 
+- (BOOL)isArchived;
+
 @end

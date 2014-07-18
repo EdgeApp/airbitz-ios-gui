@@ -7,6 +7,7 @@
 //
 
 #import "Wallet.h"
+#import "ABC.h";
 
 @interface Wallet ()
 
@@ -58,6 +59,11 @@
 - (NSUInteger)hash
 {
     return([self.strUUID hash]);
+}
+
+- (BOOL)isArchived
+{
+    return (self.attributes & WALLET_ATTRIBUTE_ARCHIVE_BIT) != 0 ? YES: NO;
 }
 
 // overriding the description - used in debugging
