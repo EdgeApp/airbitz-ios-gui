@@ -81,18 +81,25 @@ NSTimer *logoutTimer = NULL;
                                                        selector:@selector(autoLogout)
                                                        userInfo:application
                                                        repeats:NO];
-        // If the watchers aren't finished, let them finish
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            while (![CoreBridge allWatchersReady])
-            {
-                sleep(30);
-            }
+        if ([CoreBridge allWatchersReady])
+        {
             [CoreBridge stopWatchers];
-            if (![logoutTimer isValid])
-            {
-                [self bgCleanup];
-            }
-        });
+        }
+        else
+        {
+            // If the watchers aren't finished, let them finish
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                while (![CoreBridge allWatchersReady])
+                {
+                    sleep(30);
+                }
+                [CoreBridge stopWatchers];
+                if (![logoutTimer isValid])
+                {
+                    [self bgCleanup];
+                }
+            });
+        }
     }
 }
 
