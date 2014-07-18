@@ -654,8 +654,7 @@
 {
     NSLog(@"startWatchers\n");
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets: arrayWallets archived:arrayArchivedWallets];
+    [CoreBridge loadWallets: arrayWallets];
     for (Wallet * wallet in arrayWallets)
     {
         [self startWatcher:wallet.strUUID];
@@ -677,8 +676,7 @@
 {
     tABC_Error Error;
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets: arrayWallets archived:arrayArchivedWallets];
+    [CoreBridge loadWallets: arrayWallets];
     for(Wallet * wallet in arrayWallets)
     {
         ABC_WatcherStop([wallet.strUUID UTF8String], &Error);
