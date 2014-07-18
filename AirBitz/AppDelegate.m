@@ -24,6 +24,7 @@ NSTimer *logoutTimer = NULL;
     [application setStatusBarHidden:NO];
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     [PopupPickerView initAll];
+    [CoreBridge initAll];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;

@@ -11,6 +11,9 @@
 
 @interface CoreBridge : NSObject
 
++ (void)initAll;
++ (void)freeAll;
+
 + (void)loadWallets: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (void)reloadWallet: (Wallet *) wallet;
 + (Wallet *)getWallet: (NSString *)walletUUID;

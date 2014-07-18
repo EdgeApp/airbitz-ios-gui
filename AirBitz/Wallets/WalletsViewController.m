@@ -501,6 +501,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
     return UITableViewCellEditingStyleNone;
 }
 
+
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
 	Wallet *wallet;
@@ -530,7 +531,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
     [CoreBridge setWalletOrder: self.arrayWallets archived: self.arrayArchivedWallets];
 	[self updateBalanceView];
 	[self.walletsTable reloadData];
-
+    // Restart watchers
     [CoreBridge stopWatchers];
     [CoreBridge startWatchers];
 }

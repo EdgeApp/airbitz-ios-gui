@@ -1,5 +1,4 @@
 
-
 #import "ABC.h"
 #import "Wallet.h"
 #import "Transaction.h"
@@ -20,6 +19,9 @@
 #define CURRENCY_NUM_EUR                978
 #define FILE_SYNC_FREQUENCY_SECONDS     5
 
+static BOOL bInitialized = NO;
+static dispatch_queue_t watcherQueue;
+
 @interface CoreBridge ()
 {
 }
@@ -34,6 +36,24 @@
 @end
 
 @implementation CoreBridge
+
++ (void)initAll
+{
+    if (NO == bInitialized)
+    {
+        watcherQueue = dispatch_queue_create("co.airbitz.ios.watcherqueue", NULL);
+        bInitialized = YES;
+    }
+}
+
++ (void)freeAll
+{
+    if (YES == bInitialized)
+    {
+        watcherQueue = nil;
+        bInitialized = NO;
+    }
+}
 
 + (void)loadWallets:(NSMutableArray *)arrayWallets
 {
@@ -652,36 +672,43 @@
 
 + (void)startWatchers
 {
-    NSLog(@"startWatchers\n");
-    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets: arrayWallets];
-    for (Wallet * wallet in arrayWallets)
-    {
-        [self startWatcher:wallet.strUUID];
-    }
+    dispatch_async(watcherQueue, ^{
+        NSLog(@"startWatchers\n");
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        [CoreBridge loadWallets: arrayWallets];
+        for (Wallet * wallet in arrayWallets)
+        {
+            [self startWatcher:wallet.strUUID];
+        }
+    });
 }
 
 + (void)startWatcher: (NSString *) walletUUID
 {
-    tABC_Error Error;
-    NSLog(@("ABC_WatcherStart(%@)\n"), walletUUID);
-    ABC_WatcherStart([[User Singleton].name UTF8String],
-                     [[User Singleton].password UTF8String],
-                     [walletUUID UTF8String], &Error);
-    [CoreBridge watchAddresses: walletUUID];
-    [Util printABC_Error:&Error];
+    dispatch_async(watcherQueue, ^{
+        NSLog(@"startWatchers\n");
+        tABC_Error Error;
+        NSLog(@("ABC_WatcherStart(%@)\n"), walletUUID);
+        ABC_WatcherStart([[User Singleton].name UTF8String],
+                        [[User Singleton].password UTF8String],
+                        [walletUUID UTF8String], &Error);
+        [CoreBridge watchAddresses: walletUUID];
+        [Util printABC_Error:&Error];
+    });
 }
 
 + (void)stopWatchers
 {
-    tABC_Error Error;
-    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets: arrayWallets];
-    for(Wallet * wallet in arrayWallets)
-    {
-        ABC_WatcherStop([wallet.strUUID UTF8String], &Error);
-        [Util printABC_Error: &Error];
-    }
+    dispatch_async(watcherQueue, ^{
+        tABC_Error Error;
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        [CoreBridge loadWallets: arrayWallets];
+        for(Wallet * wallet in arrayWallets)
+        {
+            ABC_WatcherStop([wallet.strUUID UTF8String], &Error);
+            [Util printABC_Error: &Error];
+        }
+    });
 }
 
 + (void)watchAddresses: (NSString *) walletUUID
