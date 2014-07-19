@@ -41,6 +41,7 @@
 // notifications
 
 #define NOTIFICATION_MAIN_RESET                         @"Main_Views_Reset"
+#define NOTIFICATION_REMOTE_PASSWORD_CHANGE             @"Remote_Password_Change"
 #define NOTIFICATION_BLOCK_HEIGHT_CHANGE                @"Block_Height_Change"
 #define NOTIFICATION_EXCHANGE_RATE_CHANGE               @"Exchange_Rate_Change"
 #define NOTIFICATION_DATA_SYNC_UPDATE                   @"Data_Sync_Update"

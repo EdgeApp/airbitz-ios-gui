@@ -25,6 +25,11 @@
                    pError->nSourceLine
                    );
         }
+        if (pError->code == ABC_CC_DecryptError
+                    || pError->code == ABC_CC_DecryptFailure)
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
+        }
     }
 }
 

@@ -49,6 +49,7 @@ typedef enum eAppMode
 	SendStatusViewController    *_sendStatusController;
     TransactionDetailsViewController *_txDetailsController;
     UIAlertView                 *_receivedAlert;
+    UIAlertView                 *_passwordChangeAlert;
 	CGRect                      _originalTabBarFrame;
 	CGRect                      _originalViewFrame;
 	tAppMode                    _appMode;
@@ -111,6 +112,7 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRequest:) name:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBitcoinUri:) name:NOTIFICATION_HANDLE_BITCOIN_URI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetViews:) name:NOTIFICATION_MAIN_RESET object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
 }
 
 /**
@@ -574,6 +576,10 @@ typedef enum eAppMode
         [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
         _receivedAlert = nil;
 	}
+    else if (_passwordChangeAlert == alertView)
+    {
+        _passwordChangeAlert = nil;
+    }
 }
 
 - (void)alertViewCancel:(UIAlertView *)alertView
@@ -605,6 +611,25 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:mainId];
 }
 
+- (void)notifyRemotePasswordChange:(NSArray *)params
+{
+    NSLog(@"********** notifyRemotePasswordChange *********");
+    if (_passwordChangeAlert == nil)
+    {
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        [[User Singleton] clear];
+        [self resetViews:nil];
+        _passwordChangeAlert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Password Change", nil)
+                                message:NSLocalizedString(@"The password to this account was changed by another device. Please login using the new credentials.", nil)
+                                delegate:self
+                    cancelButtonTitle:nil
+                    otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        [_passwordChangeAlert show];
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    }
+}
+
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
     if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin)
@@ -619,6 +644,8 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         [mainId performSelectorOnMainThread:@selector(notifyExchangeRate:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_DataSyncUpdate) {
         [mainId performSelectorOnMainThread:@selector(notifyDataSync:) withObject:nil waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_RemotePasswordChange) {
+        [mainId performSelectorOnMainThread:@selector(notifyRemotePasswordChange:) withObject:nil waitUntilDone:NO];
     }
 }
 

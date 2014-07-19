@@ -848,7 +848,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		{
 			cell.textField.placeholder = NSLocalizedString(@"First Name (optional)", @"settings text");
             cell.textField.returnKeyType = UIReturnKeyNext;
-            if (_pAccountSettings->szFirstName)
+            if (_pAccountSettings && _pAccountSettings->szFirstName)
             {
                 cell.textField.text = [NSString stringWithUTF8String:_pAccountSettings->szFirstName];
             }
@@ -857,7 +857,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		{
 			cell.textField.placeholder = NSLocalizedString(@"Last Name (optional)", @"settings text");
             cell.textField.returnKeyType = UIReturnKeyNext;
-            if (_pAccountSettings->szLastName)
+            if (_pAccountSettings && _pAccountSettings->szLastName)
             {
                 cell.textField.text = [NSString stringWithUTF8String:_pAccountSettings->szLastName];
             }
@@ -866,7 +866,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		{
 			cell.textField.placeholder = NSLocalizedString(@"Nickname / Handle (optional)", @"settings text");
             cell.textField.returnKeyType = UIReturnKeyDone;
-            if (_pAccountSettings->szNickname)
+            if (_pAccountSettings && _pAccountSettings->szNickname)
             {
                 cell.textField.text = [NSString stringWithUTF8String:_pAccountSettings->szNickname];
             }
@@ -902,7 +902,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		if (indexPath.row == 0)
 		{
 			cell.name.text = NSLocalizedString(@"Send name on payment request", @"settings text");
-            [cell.state setOn:_pAccountSettings->bNameOnPayments animated:NO];
+            if (_pAccountSettings)
+            {
+                [cell.state setOn:_pAccountSettings->bNameOnPayments animated:NO];
+            }
 		}
 	}
 	
@@ -934,7 +937,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		{
             NSInteger curChoice = 0;
 			cell.name.text = NSLocalizedString(@"Language", @"settings text");
-            if (_pAccountSettings->szLanguage)
+            if (_pAccountSettings && _pAccountSettings->szLanguage)
             {
                 curChoice = [ARRAY_LANG_CODES indexOfObject:[NSString stringWithUTF8String:_pAccountSettings->szLanguage]];
                 if (curChoice == NSNotFound)
@@ -947,10 +950,13 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		else if (indexPath.row == ROW_DEFAULT_CURRENCY)
 		{
 			cell.name.text = NSLocalizedString(@"Default Currency", @"settings text");
-            NSInteger indexCurrency = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
-            if (indexCurrency != NSNotFound)
+            if (_pAccountSettings)
             {
-                [cell.button setTitle:[self.arrayCurrencyCodes objectAtIndex:indexCurrency] forState:UIControlStateNormal];
+                NSInteger indexCurrency = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
+                if (indexCurrency != NSNotFound)
+                {
+                    [cell.button setTitle:[self.arrayCurrencyCodes objectAtIndex:indexCurrency] forState:UIControlStateNormal];
+                }
             }
 		}
 	}
@@ -1285,7 +1291,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     // we only have one boolean cell and that's the name on payment option
     if (section == SECTION_NAME)
     {
-        _pAccountSettings->bNameOnPayments = theSwitch.on;
+        if (_pAccountSettings)
+        {
+            _pAccountSettings->bNameOnPayments = theSwitch.on;
+        }
 
         // update the settings in the core
         [self saveSettings];
@@ -1328,19 +1337,25 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         }
         else if (row == ROW_LANGUAGE)
         {
-            curChoice = [ARRAY_LANG_CODES indexOfObject:[NSString stringWithUTF8String:_pAccountSettings->szLanguage]];
-            if (curChoice == NSNotFound)
+            if (_pAccountSettings)
             {
-                curChoice = -1;
+                curChoice = [ARRAY_LANG_CODES indexOfObject:[NSString stringWithUTF8String:_pAccountSettings->szLanguage]];
+                if (curChoice == NSNotFound)
+                {
+                    curChoice = -1;
+                }
             }
             arrayPopupChoices = ARRAY_LANG_CHOICES;
         }
         else if (row == ROW_DEFAULT_CURRENCY)
         {
-            curChoice = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
-            if (curChoice == NSNotFound)
+            if (_pAccountSettings)
             {
-                curChoice = -1;
+                curChoice = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
+                if (curChoice == NSNotFound)
+                {
+                    curChoice = -1;
+                }
             }
             arrayPopupChoices = self.arrayCurrencyCodes;
         }
@@ -1412,11 +1427,17 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         if (rowCell == ROW_LANGUAGE)
         {
-            [self replaceString:&(_pAccountSettings->szLanguage) withString:[[ARRAY_LANG_CODES objectAtIndex:row] UTF8String]];
+            if (_pAccountSettings)
+            {
+                [self replaceString:&(_pAccountSettings->szLanguage) withString:[[ARRAY_LANG_CODES objectAtIndex:row] UTF8String]];
+            }
         }
         else if (rowCell == ROW_DEFAULT_CURRENCY)
         {
-            _pAccountSettings->currencyNum = [[self.arrayCurrencyNums objectAtIndex:row] intValue];
+            if (_pAccountSettings)
+            {
+                _pAccountSettings->currencyNum = [[self.arrayCurrencyNums objectAtIndex:row] intValue];
+            }
         }
     }
     else if (SECTION_DEFAULT_EXCHANGE == sectionCell)
@@ -1448,7 +1469,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     int type   = [[arraySelections objectAtIndex:1] intValue];
 
     // set the amount of minutes
-    _pAccountSettings->minutesAutoLogout = amount * [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] intValue];
+    if (_pAccountSettings)
+    {
+        _pAccountSettings->minutesAutoLogout = amount * [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] intValue];
+    }
 
     // update the settings in the core
     [self saveSettings];
