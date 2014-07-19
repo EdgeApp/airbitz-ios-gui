@@ -93,12 +93,6 @@ typedef enum eAppMode
                    (unsigned int)[seedData length],
                    &Error);
     [Util printABC_Error:&Error];
-
-    // Initialize the exchange rates queue
-    [CoreBridge requestExchangeRateUpdate:self recursive:YES];
-
-    // Initialize data sync queue
-    [CoreBridge requestSyncData:self recursive:YES];
 #endif
 
 	_originalTabBarFrame = self.tabBar.frame;
@@ -606,7 +600,7 @@ typedef enum eAppMode
 
 - (void)notifyDataSync:(NSArray *)params
 {
-    [CoreBridge stopWatchers];
+    // if there are new wallets, we need to start their watchers
     [CoreBridge startWatchers];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:mainId];
 }

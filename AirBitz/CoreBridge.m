@@ -21,6 +21,8 @@
 
 static BOOL bInitialized = NO;
 static dispatch_queue_t watcherQueue;
+static dispatch_queue_t exchangeQueue;
+static dispatch_queue_t dataQueue;
 
 @interface CoreBridge ()
 {
@@ -41,7 +43,9 @@ static dispatch_queue_t watcherQueue;
 {
     if (NO == bInitialized)
     {
-        watcherQueue = dispatch_queue_create("co.airbitz.ios.watcherqueue", NULL);
+        watcherQueue = dispatch_queue_create("co.airbitz.ios.Watcherqueue", NULL);
+        exchangeQueue = dispatch_queue_create("co.airbitz.ios.ExchangeQueue", NULL);
+        dataQueue = dispatch_queue_create("co.airbitz.ios.DataQueue", NULL);
         bInitialized = YES;
     }
 }
@@ -51,8 +55,31 @@ static dispatch_queue_t watcherQueue;
     if (YES == bInitialized)
     {
         watcherQueue = nil;
+        exchangeQueue = nil;
+        dataQueue = nil;
         bInitialized = NO;
     }
+}
+
++ (void)startQueues
+{
+    // Initialize the exchange rates queue
+    [CoreBridge requestExchangeRateUpdate:self recursive:YES];
+
+    // Initialize data sync queue
+    [CoreBridge requestSyncData:self recursive:YES];
+}
+
++ (void)suspendQueues
+{
+    dispatch_suspend(exchangeQueue);
+    dispatch_suspend(dataQueue);
+}
+
++ (void)resumeQueues
+{
+    dispatch_resume(exchangeQueue);
+    dispatch_resume(dataQueue);
 }
 
 + (void)loadWallets:(NSMutableArray *)arrayWallets
@@ -772,7 +799,7 @@ static dispatch_queue_t watcherQueue;
 
 + (void)requestExchangeRateUpdate:(id)object recursive:(BOOL)isRecursive
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(exchangeQueue, ^{
         [CoreBridge requestExchangeUpdateBlocking:object];
 
         if (!isRecursive)
@@ -819,7 +846,7 @@ static dispatch_queue_t watcherQueue;
 
 + (void)requestSyncData:(id)object recursive:(BOOL)isRecursive
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(dataQueue, ^{
         // Request Data
         [CoreBridge syncAllData:object];
 
@@ -829,7 +856,7 @@ static dispatch_queue_t watcherQueue;
         }
 
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * FILE_SYNC_FREQUENCY_SECONDS * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        dispatch_after(popTime, dataQueue, ^(void) {
             [CoreBridge requestSyncData:object recursive:YES];
         });
     });

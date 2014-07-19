@@ -24,7 +24,9 @@ NSTimer *logoutTimer = NULL;
     [application setStatusBarHidden:NO];
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     [PopupPickerView initAll];
+
     [CoreBridge initAll];
+    [CoreBridge startQueues];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
@@ -55,7 +57,7 @@ NSTimer *logoutTimer = NULL;
         NSLog(@("Settings background fetch interval to %d\n"), [User Singleton].minutesAutoLogout * 60);
         [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
     }
-
+    [CoreBridge suspendQueues];
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
@@ -121,6 +123,7 @@ NSTimer *logoutTimer = NULL;
     {
         [CoreBridge startWatchers];
     }
+    [CoreBridge resumeQueues];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

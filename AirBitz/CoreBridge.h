@@ -13,6 +13,9 @@
 
 + (void)initAll;
 + (void)freeAll;
++ (void)startQueues;
++ (void)suspendQueues;
++ (void)resumeQueues;
 
 + (void)loadWallets: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (void)reloadWallet: (Wallet *) wallet;
