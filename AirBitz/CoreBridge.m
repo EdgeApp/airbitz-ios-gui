@@ -790,7 +790,7 @@ static NSTimer *_dataSyncTimer;
                  sendTo:(NSString *) destAddr
            amountToSend:(int64_t) sendAmount
          storeResultsIn:(int64_t *) totalFees
-         walletTransfer:(BOOL) bTransfer
+         walletTransfer:(bool) bTransfer
 {
     tABC_Error error;
     tABC_TxDetails details;

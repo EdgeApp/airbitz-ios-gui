@@ -406,7 +406,7 @@
 			Details.amountFeesMinersSatoshi = 0;
             // If this is a transfer, populate the comments
             if (self.nameLabel) {
-                Details.szName = [self.nameLabel UTF8String];
+                Details.szName = (char *)[self.nameLabel UTF8String];
             } else {
                 Details.szName = "";
             }
