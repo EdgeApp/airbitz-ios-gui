@@ -378,7 +378,7 @@ typedef enum eAddressPickerType
 		case MessageComposeResultSent:
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
-                                                            message:@"Request sent"
+                                                            message:@"SMS sent"
 														   delegate:self
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles: nil];
