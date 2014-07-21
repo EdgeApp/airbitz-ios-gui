@@ -707,6 +707,8 @@ static dispatch_queue_t dataQueue;
         {
             [self startWatcher:wallet.strUUID];
         }
+        // Once watchers start, tell views to redraw
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:mainId];
     });
 }
 
