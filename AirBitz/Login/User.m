@@ -54,7 +54,6 @@ static User *singleton = nil;  // this will be the one and only object this stat
     [User Singleton].password = pword;
     [[User Singleton] loadSettings];
     [CoreBridge startQueues];
-    [CoreBridge requestExchangeRateUpdate:self recursive:NO];
     [CoreBridge startWatchers];
 }
 

@@ -56,7 +56,7 @@ NSTimer *logoutTimer = NULL;
         NSLog(@("Settings background fetch interval to %d\n"), [User Singleton].minutesAutoLogout * 60);
         [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
     }
-    [CoreBridge suspendQueues];
+    [CoreBridge stopQueues];
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
@@ -121,8 +121,8 @@ NSTimer *logoutTimer = NULL;
     if ([User isLoggedIn])
     {
         [CoreBridge startWatchers];
+        [CoreBridge startQueues];
     }
-    [CoreBridge resumeQueues];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

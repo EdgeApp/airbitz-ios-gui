@@ -39,6 +39,9 @@ static dispatch_queue_t dataQueue;
 
 @implementation CoreBridge
 
+static NSTimer *_exchangeTimer;
+static NSTimer *_dataSyncTimer;
+
 + (void)initAll
 {
     if (NO == bInitialized)
@@ -63,23 +66,36 @@ static dispatch_queue_t dataQueue;
 
 + (void)startQueues
 {
-    // Initialize the exchange rates queue
-    [CoreBridge requestExchangeRateUpdate:self recursive:YES];
+    if ([User isLoggedIn])
+    {
+        // Initialize the exchange rates queue
+        _exchangeTimer = [NSTimer scheduledTimerWithTimeInterval:ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
+            target:self
+            selector:@selector(requestExchangeRateUpdate:)
+            userInfo:nil
+            repeats:YES];
 
-    // Initialize data sync queue
-    [CoreBridge requestSyncData:self recursive:YES];
+        // Initialize data sync queue
+        _dataSyncTimer = [NSTimer scheduledTimerWithTimeInterval:FILE_SYNC_FREQUENCY_SECONDS
+            target:self
+            selector:@selector(requestSyncData:)
+            userInfo:nil
+            repeats:YES];
+    }
 }
 
-+ (void)suspendQueues
++ (void)stopQueues
 {
-    dispatch_suspend(exchangeQueue);
-    dispatch_suspend(dataQueue);
-}
-
-+ (void)resumeQueues
-{
-    dispatch_resume(exchangeQueue);
-    dispatch_resume(dataQueue);
+    if (_exchangeTimer)
+    {
+        [_exchangeTimer invalidate];
+        _exchangeTimer = nil;
+    }
+    if (_dataSyncTimer)
+    {
+        [_dataSyncTimer invalidate];
+        _dataSyncTimer = nil;
+    }
 }
 
 + (void)loadWallets:(NSMutableArray *)arrayWallets
@@ -664,6 +680,7 @@ static dispatch_queue_t dataQueue;
 + (void)logout
 {
     [CoreBridge stopWatchers];
+    [CoreBridge stopQueues];
 
     tABC_Error Error;
     tABC_CC result = ABC_ClearKeyCache(&Error);
@@ -803,24 +820,14 @@ static dispatch_queue_t dataQueue;
     return true;
 }
 
-+ (void)requestExchangeRateUpdate:(id)object recursive:(BOOL)isRecursive
++ (void)requestExchangeRateUpdate:(NSTimer *)object
 {
     dispatch_async(exchangeQueue, ^{
-        [CoreBridge requestExchangeUpdateBlocking:object];
-
-        if (!isRecursive)
-        {
-            return;
-        }
-
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            [CoreBridge requestExchangeRateUpdate:object recursive:YES];
-        });
+        [CoreBridge requestExchangeUpdateBlocking];
     });
 }
 
-+ (void)requestExchangeUpdateBlocking:(id)object
++ (void)requestExchangeUpdateBlocking
 {
     if ([User isLoggedIn])
     {
@@ -845,30 +852,19 @@ static dispatch_queue_t dataQueue;
         }
 
         dispatch_async(dispatch_get_main_queue(),^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:object];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:self];
         });
     }
 }
 
-+ (void)requestSyncData:(id)object recursive:(BOOL)isRecursive
++ (void)requestSyncData:(NSTimer *)object
 {
     dispatch_async(dataQueue, ^{
-        // Request Data
-        [CoreBridge syncAllData:object];
-
-        if (!isRecursive)
-        {
-            return;
-        }
-
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * FILE_SYNC_FREQUENCY_SECONDS * NSEC_PER_SEC);
-        dispatch_after(popTime, dataQueue, ^(void) {
-            [CoreBridge requestSyncData:object recursive:YES];
-        });
+        [CoreBridge syncAllData];
     });
 }
 
-+ (void)syncAllData:(id)object
++ (void)syncAllData
 {
     if ([User isLoggedIn])
     {
