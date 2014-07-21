@@ -493,7 +493,8 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return YES;
+    // If there is only 1 wallet left in the active wallts table, prohibit moving
+    return !(indexPath.section == 0 && indexPath.row == 0 && [_arrayWallets count] == 1);
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
