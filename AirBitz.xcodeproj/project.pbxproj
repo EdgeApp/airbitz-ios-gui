@@ -87,6 +87,10 @@
 		4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
 		6809FB9A196F9EEB0076CA4D /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809FB99196F9EEB0076CA4D /* libgit2.a */; };
 		684C0E521936B97000AB9807 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
+		685E6DE7197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DE5197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png */; };
+		685E6DE8197DC9ED00EC95F8 /* btn_use_max~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DE6197DC9ED00EC95F8 /* btn_use_max~iphone.png */; };
+		685E6DEF197DCB7800EC95F8 /* btn_max@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DED197DCB7800EC95F8 /* btn_max@2x~iphone.png */; };
+		685E6DF0197DCB7800EC95F8 /* btn_max~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DEE197DCB7800EC95F8 /* btn_max~iphone.png */; };
 		6861FE681950DFB100CDF24E /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861FE671950DFB100CDF24E /* TxOutput.m */; };
 		6868AD1319516D7A006C3716 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6868AD1219516D7A006C3716 /* DebugViewController.m */; };
 		686BED9E195D5A7C0053A09E /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BED9D195D5A7C0053A09E /* libsecp256k1.a */; };
@@ -617,6 +621,10 @@
 		4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
 		6809FB99196F9EEB0076CA4D /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = AirBitz/ABC/libgit2.a; sourceTree = "<group>"; };
 		684C0E511936B97000AB9807 /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = AirBitz/ABC/libsodium.a; sourceTree = "<group>"; };
+		685E6DE5197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_use_max@2x~iphone.png"; sourceTree = "<group>"; };
+		685E6DE6197DC9ED00EC95F8 /* btn_use_max~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_use_max~iphone.png"; sourceTree = "<group>"; };
+		685E6DED197DCB7800EC95F8 /* btn_max@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_max@2x~iphone.png"; sourceTree = "<group>"; };
+		685E6DEE197DCB7800EC95F8 /* btn_max~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_max~iphone.png"; sourceTree = "<group>"; };
 		6861FE661950DFB100CDF24E /* TxOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TxOutput.h; path = "ABC Data/TxOutput.h"; sourceTree = "<group>"; };
 		6861FE671950DFB100CDF24E /* TxOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TxOutput.m; path = "ABC Data/TxOutput.m"; sourceTree = "<group>"; };
 		6868AD1119516D7A006C3716 /* DebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugViewController.h; sourceTree = "<group>"; };
@@ -1636,6 +1644,10 @@
 		B59C144118C012B500AEA789 /* wallet */ = {
 			isa = PBXGroup;
 			children = (
+				685E6DED197DCB7800EC95F8 /* btn_max@2x~iphone.png */,
+				685E6DEE197DCB7800EC95F8 /* btn_max~iphone.png */,
+				685E6DE5197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png */,
+				685E6DE6197DC9ED00EC95F8 /* btn_use_max~iphone.png */,
 				DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */,
 				DA7693831964FE8A0022EE64 /* copy_btn~iphone.png */,
 				DA7693841964FE8A0022EE64 /* email_btn@2x~iphone.png */,
@@ -2158,6 +2170,7 @@
 				B59C150F18C012B500AEA789 /* emboss_down~iphone.png in Resources */,
 				4C72479E1933D3890091C286 /* infoExportWallet.html in Resources */,
 				B59C152918C012B500AEA789 /* icon_USD_dark~iphone.png in Resources */,
+				685E6DE8197DC9ED00EC95F8 /* btn_use_max~iphone.png in Resources */,
 				B5675BAC18A19A84002E0703 /* back_arrow~iphone.png in Resources */,
 				4C7247C119353BD50091C286 /* icon_export_dropbox~iphone.png in Resources */,
 				B5F2E9D818DCE475008ACF88 /* Green-check@2x~iphone.png in Resources */,
@@ -2183,6 +2196,7 @@
 				B5FD393118EFC35A00BE2670 /* WalletMakerView~iphone.xib in Resources */,
 				B56553E018ECAFE8005B35E1 /* btn_alwaysConfirm_off~iphone.png in Resources */,
 				B55A02FE18EA206300845090 /* btn_changeCategories@2x~iphone.png in Resources */,
+				685E6DF0197DCB7800EC95F8 /* btn_max~iphone.png in Resources */,
 				B59C14CD18C012B500AEA789 /* btn_1~iphone.png in Resources */,
 				DA76938D1964FE8A0022EE64 /* sms_btn~iphone.png in Resources */,
 				B59C151818C012B500AEA789 /* icon_directory@2x~iphone.png in Resources */,
@@ -2399,6 +2413,7 @@
 				B59C153418C012B500AEA789 /* tabbar_base@2x~iphone.png in Resources */,
 				B59C14D618C012B500AEA789 /* btn_6@2x~iphone.png in Resources */,
 				B5F2E9D918DCE475008ACF88 /* Green-check~iphone.png in Resources */,
+				685E6DEF197DCB7800EC95F8 /* btn_max@2x~iphone.png in Resources */,
 				B5F2EB0B18DDE73A008ACF88 /* icon_rightArrow@2x~iphone.png in Resources */,
 				B5F2EB1118DE01CB008ACF88 /* QuestionAnswerView~iphone.xib in Resources */,
 				B59C14DA18C012B500AEA789 /* btn_8@2x~iphone.png in Resources */,
@@ -2412,6 +2427,7 @@
 				B5675B5F18A17F6F002E0703 /* Main_iPhone.storyboard in Resources */,
 				B59C14DF18C012B500AEA789 /* btn_add~iphone.png in Resources */,
 				B59C142118C0113A00AEA789 /* divider~iphone.png in Resources */,
+				685E6DE7197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png in Resources */,
 				B57288F8193518F600417426 /* San Diego.gpx in Resources */,
 				B59C14CE18C012B500AEA789 /* btn_2@2x~iphone.png in Resources */,
 				B5C0A98E18EA0B80008F302C /* AnnotationContentView.xib in Resources */,

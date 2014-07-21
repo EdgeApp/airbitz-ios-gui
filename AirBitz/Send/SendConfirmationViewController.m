@@ -24,6 +24,7 @@
 	SendStatusViewController            *_sendStatusController;
 	TransactionDetailsViewController    *_transactionDetailsController;
 	BOOL                                _callbackSuccess;
+    int64_t                             _maxAmount;
 	NSString                            *_strReason;
 	Transaction                         *_completedTransaction;	// nil until sendTransaction is successfully completed
     UITapGestureRecognizer              *tap;
@@ -246,6 +247,7 @@
                                                toAddress:[self getDestAddress]
                                               isTransfer:self.bAddressIsWalletUUID];
             dispatch_async(dispatch_get_main_queue(), ^{
+                _maxAmount = maxAmount;
                 self.amountToSendSatoshi = maxAmount;
                 self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
 
@@ -628,13 +630,28 @@
 
 - (void)updateFeeFieldContents:(int64_t)txFees hasEnough:(BOOL)sufficientFunds
 {
+    UIColor *color;
+    _maxAmountButton.selected = NO;
+    if (_maxAmount > 0 && _maxAmount == self.amountToSendSatoshi)
+    {
+        color = [UIColor colorWithRed:255/255.0f green:166/255.0f blue:52/255.0f alpha:1.0f];
+        [_maxAmountButton setBackgroundImage:[UIImage imageNamed:@"btn_use_max.png"]
+                                    forState:UIControlStateNormal];
+
+    }
+    else
+    {
+        color = [UIColor whiteColor];
+        [_maxAmountButton setBackgroundImage:[UIImage imageNamed:@"btn_max.png"]
+                                    forState:UIControlStateNormal];
+    }
     if (sufficientFunds)
     {
         tABC_Error error;
         double currencyFees = 0.0;
-        self.conversionLabel.textColor = [UIColor whiteColor];
-        self.amountBTCTextField.textColor = [UIColor whiteColor];
-        self.amountUSDTextField.textColor = [UIColor whiteColor];
+        self.conversionLabel.textColor = color;
+        self.amountBTCTextField.textColor = color;
+        self.amountUSDTextField.textColor = color;
 
         NSMutableString *coinFeeString = [[NSMutableString alloc] init];
         NSMutableString *fiatFeeString = [[NSMutableString alloc] init];
