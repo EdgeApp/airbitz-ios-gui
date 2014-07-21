@@ -164,7 +164,7 @@
 	{
 		self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
 	}
-    [self updateFeeFieldContents];
+    [self startCalcFees];
 	
     if (self.amountToSendSatoshi)
     {
@@ -241,13 +241,19 @@
     if (self.wallet != nil)
     {
         _selectedTextField = self.amountBTCTextField;
-        self.amountToSendSatoshi = [CoreBridge maxSpendable:self.wallet.strUUID
-                                                  toAddress:[self getDestAddress]
-                                                 isTransfer:self.bAddressIsWalletUUID];
-        self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            int64_t maxAmount = [CoreBridge maxSpendable:self.wallet.strUUID
+                                               toAddress:[self getDestAddress]
+                                              isTransfer:self.bAddressIsWalletUUID];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.amountToSendSatoshi = maxAmount;
+                self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
+
+                [self updateTextFieldContents];
+                _selectedTextField = _holder;
+            });
+        });
     }
-    [self updateTextFieldContents];
-    _selectedTextField = _holder;
 }
 
 - (void)dismissKeyboard
@@ -586,12 +592,11 @@
                                                     overrideDecimals:[CoreBridge currencyDecimalPlaces]];
 		}
 	}
-    [self updateFeeFieldContents];
+    [self startCalcFees];
 }
 
-- (void)updateFeeFieldContents
+- (void)startCalcFees
 {
-    int64_t fees = 0;
     // Don't caculate fees until there is a value
     if (self.amountToSendSatoshi == 0)
     {
@@ -601,15 +606,31 @@
         self.amountUSDTextField.textColor = [UIColor whiteColor];
         return;
     }
-    
-	tABC_Error error;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        [self calcFees];
+    });
+}
+
+- (void)calcFees
+{
+    int64_t fees = 0;
     NSString *dest = [self getDestAddress];
-    if ([CoreBridge calcSendFees:self.wallet.strUUID
+    BOOL sufficent =
+        [CoreBridge calcSendFees:self.wallet.strUUID
                           sendTo:dest
                     amountToSend:self.amountToSendSatoshi
                   storeResultsIn:&fees
-                  walletTransfer:self.bAddressIsWalletUUID])
+                  walletTransfer:self.bAddressIsWalletUUID];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateFeeFieldContents:fees hasEnough:sufficent];
+    });
+}
+
+- (void)updateFeeFieldContents:(int64_t)txFees hasEnough:(BOOL)sufficientFunds
+{
+    if (sufficientFunds)
     {
+        tABC_Error error;
         double currencyFees = 0.0;
         self.conversionLabel.textColor = [UIColor whiteColor];
         self.amountBTCTextField.textColor = [UIColor whiteColor];
@@ -618,12 +639,12 @@
         NSMutableString *coinFeeString = [[NSMutableString alloc] init];
         NSMutableString *fiatFeeString = [[NSMutableString alloc] init];
         [coinFeeString appendString:@"+ "];
-        [coinFeeString appendString:[CoreBridge formatSatoshi:fees withSymbol:false]];
+        [coinFeeString appendString:[CoreBridge formatSatoshi:txFees withSymbol:false]];
         [coinFeeString appendString:@" "];
         [coinFeeString appendString:[User Singleton].denominationLabel];
 
         if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
-                                  fees, &currencyFees, self.wallet.currencyNum, &error) == ABC_CC_Ok)
+                                  txFees, &currencyFees, self.wallet.currencyNum, &error) == ABC_CC_Ok)
         {
             [fiatFeeString appendString:@"+ "];
             [fiatFeeString appendString:[CoreBridge formatCurrency:currencyFees
