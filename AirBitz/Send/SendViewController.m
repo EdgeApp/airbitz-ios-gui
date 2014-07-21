@@ -19,13 +19,14 @@
 #import "InfoView.h"
 #import "ZBarSDK.h"
 #import "CoreBridge.h"
+#import "SyncView.h"
 
 #define WALLET_BUTTON_WIDTH         210
 
 #define POPUP_PICKER_LOWEST_POINT   360
 #define POPUP_PICKER_TABLE_HEIGHT   (IS_IPHONE5 ? 180 : 90)
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate, PickerTextViewDelegate>
+@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate, PickerTextViewDelegate, SyncViewDelegate>
 {
 	ZBarReaderView                  *_readerView;
     ZBarReaderController            *_readerPicker;
@@ -33,6 +34,7 @@
 	int                             _selectedWalletIndex;
 	SendConfirmationViewController  *_sendConfirmationViewController;
     BOOL                            _bUsingImagePicker;
+	SyncView                        *_syncingView;
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
@@ -109,6 +111,7 @@
 
         [self.flashSelector selectItem:FLASH_ITEM_OFF];
     }
+    [self syncTest];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -710,5 +713,28 @@
     frame.size.height = POPUP_PICKER_TABLE_HEIGHT;
     pickerTextView.popupPicker.frame = frame;
 }
+
+#pragma - Sync View methods
+
+- (void)SyncViewDismissed:(SyncView *)sv
+{
+    [_syncingView removeFromSuperview];
+    _syncingView = nil;
+}
+
+- (void)syncTest
+{
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    if (![CoreBridge watcherIsReady:wallet.strUUID] && !_syncingView)
+    {
+        _syncingView = [SyncView createView:self.view forWallet:wallet.strUUID];
+        _syncingView.delegate = self;
+    }
+    if (_syncingView)
+    {
+        [self resignAllResonders];
+    }
+}
+
 
 @end

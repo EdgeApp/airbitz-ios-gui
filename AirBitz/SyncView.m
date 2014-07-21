@@ -13,6 +13,7 @@
 @interface SyncView ()
 
 @property (nonatomic, weak) IBOutlet UIView *alertView;
+@property (nonatomic, weak) IBOutlet UIView *backgroundView;
 @property (nonatomic, weak) IBOutlet NSString *walletUUID;
 
 @end
@@ -42,6 +43,10 @@
     frame.size.width = parent.size.width;
     frame.size.height = parent.size.height;
     sv.frame = frame;
+
+    sv.backgroundView.frame = frame;
+
+    NSLog(@("%d %d %d %d"), frame.origin.x, frame.origin.y, frame.size.width, frame.size.height); 
 
     // Round those corners and add shadows
     sv.alertView.layer.cornerRadius = 8.0;
