@@ -10,11 +10,14 @@
 #import "CoreBridge.h"
 #import "Util.h"
 
+#define SYNC_CHECK_INTERVAL 1.0 // second
+
 @interface SyncView ()
 
 @property (nonatomic, weak) IBOutlet UIView *alertView;
 @property (nonatomic, weak) IBOutlet UIView *backgroundView;
-@property (nonatomic, weak) IBOutlet NSString *walletUUID;
+@property (nonatomic, strong) IBOutlet NSString *walletUUID;
+@property (nonatomic, weak) NSTimer *syncTimer;
 
 @end
 
@@ -46,8 +49,6 @@
 
     sv.backgroundView.frame = frame;
 
-    NSLog(@("%d %d %d %d"), frame.origin.x, frame.origin.y, frame.size.width, frame.size.height); 
-
     // Round those corners and add shadows
     sv.alertView.layer.cornerRadius = 8.0;
     sv.alertView.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -67,28 +68,33 @@
     }
                     completion:^(BOOL finished)
     {
-        [sv checkSyncView];
+        [sv startTimer];
     }];
     return sv;
 }
 
-- (void)checkSyncView
+- (void)startTimer
+{
+    _syncTimer = [NSTimer scheduledTimerWithTimeInterval:SYNC_CHECK_INTERVAL
+        target:self
+        selector:@selector(checkSyncView:)
+        userInfo:nil
+        repeats:YES];
+}
+
+- (void)checkSyncView:(NSNotification *)notification
 {
     if ([CoreBridge watcherIsReady:_walletUUID])
     {
         [self dismiss];
     }
-    else
-    {
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-            [self checkSyncView];
-        });
-    }
 }
 
 - (void)dismiss
 {
+    [_syncTimer invalidate];
+    _syncTimer = nil;
+
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut

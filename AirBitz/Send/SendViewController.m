@@ -105,13 +105,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[self loadWalletInfo];
+    [self syncTest];
     if (_bUsingImagePicker == NO)
     {
         _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 
         [self.flashSelector selectItem:FLASH_ITEM_OFF];
     }
-    [self syncTest];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
