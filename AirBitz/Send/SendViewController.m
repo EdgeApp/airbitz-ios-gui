@@ -106,7 +106,7 @@
 {
 	[self loadWalletInfo];
     [self syncTest];
-    if (_bUsingImagePicker == NO)
+    if (_bUsingImagePicker == NO && !_syncingView)
     {
         _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 
@@ -720,6 +720,8 @@
 {
     [_syncingView removeFromSuperview];
     _syncingView = nil;
+
+    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 }
 
 - (void)syncTest
@@ -733,6 +735,7 @@
     if (_syncingView)
     {
         [self resignAllResonders];
+        [self closeCameraScanner];
     }
 }
 
