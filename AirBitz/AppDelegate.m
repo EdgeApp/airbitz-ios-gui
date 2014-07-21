@@ -26,7 +26,6 @@ NSTimer *logoutTimer = NULL;
     [PopupPickerView initAll];
 
     [CoreBridge initAll];
-    [CoreBridge startQueues];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
