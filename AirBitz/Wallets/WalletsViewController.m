@@ -22,6 +22,8 @@
 #import "Util.h"
 #import "WalletHeaderView.h"
 
+#define ARCHIVE_COLLAPSED @"archive_collapsed"
+
 @interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletMakerViewDelegate, OfflineWalletViewControllerDelegate, WalletHeaderViewDelegate>
 {
 	BalanceView                 *_balanceView;
@@ -81,10 +83,13 @@
 	self.walletMakerView.hidden = YES;
     self.walletMakerView.delegate = self;
 	
-	self.activeWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"WALLETS", @"title of active wallets table")];
+    self.activeWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"WALLETS", @"title of active wallets table")
+                                                            collapse:NO];
 	self.activeWalletsHeaderView.btn_expandCollapse.hidden = YES;
 	
-	self.archivedWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"ARCHIVE", @"title of archived wallets table")];
+    _archiveCollapsed = [[NSUserDefaults standardUserDefaults] boolForKey:ARCHIVE_COLLAPSED];
+    self.archivedWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"ARCHIVE", @"title of archived wallets table")
+                                                              collapse:_archiveCollapsed];
 	self.archivedWalletsHeaderView.delegate = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -388,6 +393,7 @@
 	if(expanded)
 	{
 		_archiveCollapsed = NO;
+
 		NSInteger countOfRowsToInsert = self.arrayArchivedWallets.count;
 		NSMutableArray *indexPathsToInsert = [[NSMutableArray alloc] init];
 		for (NSInteger i = 0; i < countOfRowsToInsert; i++)
@@ -414,9 +420,16 @@
 			{
 				[indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:1]];
 			}
-			[self.walletsTable deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationTop];
+            if ([indexPathsToDelete count] > 0)
+            {
+                [self.walletsTable deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationTop];
+            }
 		}
 	}
+    // persist _archiveCollapsed
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] setBool:_archiveCollapsed forKey:ARCHIVE_COLLAPSED];
+    [userDefaults synchronize];
 }
 
 #pragma mark - Segue

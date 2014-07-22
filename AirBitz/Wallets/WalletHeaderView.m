@@ -26,7 +26,7 @@
     return self;
 }
 
-+(WalletHeaderView *)CreateWithTitle:(NSString *)title
++(WalletHeaderView *)CreateWithTitle:(NSString *)title collapse:(BOOL)bCollapsed
 {
 	WalletHeaderView *whv = nil;
 	
@@ -41,7 +41,11 @@
 	 }*/
 	whv.layer.cornerRadius = 4.0;
 	whv.titleLabel.text = title;
-	
+    whv->headerCollapsed = bCollapsed;
+    if (whv->headerCollapsed)
+    {
+        whv.btn_expandCollapse.transform = CGAffineTransformRotate(whv.btn_expandCollapse.transform, M_PI);
+    }
 	return whv;
 }
 

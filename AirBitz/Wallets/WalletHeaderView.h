@@ -20,7 +20,7 @@
 @property(nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *btn_expandCollapse;
 @property (nonatomic, assign) id<WalletHeaderViewDelegate>   delegate;
-+(WalletHeaderView *)CreateWithTitle:(NSString *)title;
++(WalletHeaderView *)CreateWithTitle:(NSString *)title collapse:(BOOL)bCollapsed;
 
 @end
 
