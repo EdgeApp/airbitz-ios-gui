@@ -15,6 +15,7 @@
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 NSTimer *logoutTimer = NULL;
+NSDate *logoutDate = NULL;
 
 @implementation AppDelegate
 
@@ -48,17 +49,6 @@ NSTimer *logoutTimer = NULL;
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    NSLog(@"Resign Active background!!!!");
-    if ([User isLoggedIn])
-    {
-        NSLog(@("Settings background fetch interval to %d\n"), [User Singleton].minutesAutoLogout * 60);
-        [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
-    }
-    [CoreBridge stopQueues];
-}
-
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
     NSLog(@"Calling fetch!!!!");
@@ -69,11 +59,23 @@ NSTimer *logoutTimer = NULL;
     completionHandler(UIBackgroundFetchResultNoData);
 }
 
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    NSLog(@"Resign Active background!!!!");
+    if ([User isLoggedIn])
+    {
+        NSLog(@("Settings background fetch interval to %d\n"), [User Singleton].minutesAutoLogout * 60);
+        logoutDate = [NSDate date];
+        [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
+    }
+}
+
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     NSLog(@"Entered background!!!!");
     if ([User isLoggedIn])
     {
+        [CoreBridge stopQueues];
         bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
             [self bgCleanup];
         }];
@@ -118,6 +120,7 @@ NSTimer *logoutTimer = NULL;
 {
     NSLog(@"Entered Foreground!!!!");
     [self bgCleanup];
+    [self checkLoginExpired];
     if ([User isLoggedIn])
     {
         [CoreBridge startWatchers];
@@ -136,6 +139,10 @@ NSTimer *logoutTimer = NULL;
     ABC_Terminate();
 }
 
+- (void)watchStatus
+{
+}
+
 - (void)bgCleanup
 {
     if (logoutTimer)
@@ -146,6 +153,22 @@ NSTimer *logoutTimer = NULL;
     bgLogoutTask = UIBackgroundTaskInvalid;
 }
 
+// This is a fallback for auto logout. It is better to have the background task
+// or network fetch log the user out
+- (void)checkLoginExpired
+{
+    if (!logoutDate || ![User isLoggedIn])
+    {
+        return;
+    }
+    NSDate *now = [NSDate date];
+    int minutes = [now timeIntervalSinceDate:logoutDate] / 60.0;
+    if (minutes >= [User Singleton].minutesAutoLogout) {
+        [self autoLogout];
+    }
+}
+
+// If the app is *not* active, log the user out
 - (void)autoLogout
 {
     if (![self isAppActive])
