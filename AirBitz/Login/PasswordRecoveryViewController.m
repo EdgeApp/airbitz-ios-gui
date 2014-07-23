@@ -100,6 +100,7 @@ typedef enum eAlertType
     {
         // get the questions
         [self blockUser:YES];
+        [self showSpinner:YES];
         tABC_Error Error;
         tABC_CC result = ABC_GetQuestionChoices([[User Singleton].name UTF8String],
                                                 PW_ABC_Request_Callback,
@@ -110,7 +111,7 @@ typedef enum eAlertType
         if (ABC_CC_Ok != result)
         {
             [self blockUser:NO];
-            //NSLog(@"%@",  [NSString stringWithFormat:@"GetQuestionChoices failed:\n%s", Error.szDescription]);
+            [self showSpinner:NO];
         }
     }
     else
@@ -314,6 +315,7 @@ typedef enum eAlertType
 - (void)commitQuestions:(NSString *)strQuestions andAnswersToABC:(NSString *)strAnswers
 {
     [self blockUser:YES];
+    [self showSpinner:YES];
 	tABC_Error Error;
 	tABC_CC result;
     result = ABC_SetAccountRecoveryQuestions([[User Singleton].name UTF8String],
@@ -328,6 +330,7 @@ typedef enum eAlertType
 	if (ABC_CC_Ok != result)
 	{
         [self blockUser:NO];
+        [self showSpinner:NO];
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:self.labelTitle.text
 							  message:[NSString stringWithFormat:@"%@ failed:\n%s", self.labelTitle.text, Error.szDescription]
@@ -335,9 +338,7 @@ typedef enum eAlertType
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
 		[alert show];
-		//NSLog(@"%@", [NSString stringWithFormat:@"Sign-up failed:\n%s", Error.szDescription]);
 	}
-	
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions
@@ -507,6 +508,7 @@ typedef enum eAlertType
 - (void)getPasswordRecoveryQuestionsComplete
 {
     [self blockUser:NO];
+    [self showSpinner:NO];
 
     //NSLog(@"Get Questions complete");
     if (_bSuccess)
@@ -628,8 +630,8 @@ typedef enum eAlertType
 
 - (void)setRecoveryComplete
 {
-   // NSLog(@"Recovery set complete");
 	[self blockUser:NO];
+    [self showSpinner:NO];
     if (_bSuccess)
     {
 		_alertType = ALERT_TYPE_SETUP_COMPLETE;
@@ -675,7 +677,6 @@ void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
         }
 		else if (pResults->requestType == ABC_RequestType_SetAccountRecoveryQuestions)
 		{
-			//NSLog(@"Set recovery completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
             [controller performSelectorOnMainThread:@selector(setRecoveryComplete) withObject:nil waitUntilDone:FALSE];
 		}
     }

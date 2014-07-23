@@ -732,6 +732,7 @@
     [self blockUser:NO];
     if (_bSuccess)
     {
+        [self blockUser:YES];
         tABC_Error Error;
         ABC_SignIn([self.userNameTextField.text UTF8String],
                    [self.passwordTextField.text UTF8String],
@@ -758,6 +759,7 @@
     [self blockUser:NO];
     if (_bSuccess)
     {
+        [self blockUser:YES];
         [User login:self.userNameTextField.text
            password:self.passwordTextField.text];
 
