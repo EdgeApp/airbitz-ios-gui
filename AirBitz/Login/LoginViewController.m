@@ -127,8 +127,16 @@ typedef enum eLoginMode
                ABC_Request_Callback,
                (__bridge void *)self,
                &Error);
-    [Util printABC_Error:&Error];
-    [self showSpinner:YES];
+    if (Error.code != ABC_CC_Ok)
+    {
+        [Util printABC_Error:&Error];
+		self.invalidMessage.hidden = NO;
+    }
+    else
+    {
+        [self showSpinner:YES];
+		self.invalidMessage.hidden = YES;
+    }
 }
 
 - (IBAction)SignUp
@@ -511,7 +519,6 @@ typedef enum eLoginMode
     }
     else
     {
-        NSLog(@"%@", [NSString stringWithFormat:@"Sign-in failed\n%@", _strReason]);
 		self.invalidMessage.hidden = NO;
 
         [User Singleton].name = nil;
