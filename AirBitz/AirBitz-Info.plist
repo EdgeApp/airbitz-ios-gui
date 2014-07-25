@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.79</string>
+	<string>1.0.81</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2014-07-22</string>
+	<string>2014-07-25</string>
 	<key>DL_LibKey</key>
 	<string>1e7bfeb9f52c57ee37542cd0c074074fd2ab</string>
 	<key>LSRequiresIPhoneOS</key>
