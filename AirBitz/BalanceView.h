@@ -12,8 +12,8 @@
 
 typedef enum eBalanceViewState
 {
-	BALANCE_VIEW_UP,
-	BALANCE_VIEW_DOWN
+    BALANCE_VIEW_UP,
+    BALANCE_VIEW_DOWN
 }tBalanceViewState;
 
 @interface BalanceView : UIView
