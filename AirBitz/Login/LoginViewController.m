@@ -32,7 +32,8 @@ typedef enum eLoginMode
     tLoginMode                      _mode;
     CGRect                          _originalContentFrame;
     CGRect                          _originalLogoFrame;
-    CGRect                          _originalSwipeArrowFrame;
+    CGRect                          _originalLeftSwipeArrowFrame;
+    CGRect                          _originalRightSwipeArrowFrame;
     CGPoint                         _firstTouchPoint;
     BOOL                            _bSuccess;
     NSString                        *_strReason;
@@ -43,7 +44,8 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
 @property (nonatomic, weak) IBOutlet StylizedTextField  *userNameTextField;
 @property (nonatomic, weak) IBOutlet StylizedTextField  *passwordTextField;
-@property (nonatomic, weak) IBOutlet UIImageView        *swipeArrow;
+@property (nonatomic, weak) IBOutlet UIImageView        *swipeLeftArrow;
+@property (nonatomic, weak) IBOutlet UIImageView        *swipeRightArrow;
 @property (nonatomic, weak) IBOutlet UILabel            *swipeText;
 @property (nonatomic, weak) IBOutlet UILabel            *titleText;
 @property (nonatomic, weak) IBOutlet UIImageView        *logoImage;
@@ -71,7 +73,8 @@ typedef enum eLoginMode
     _mode = MODE_ENTERING_NEITHER;
     _originalContentFrame = self.contentView.frame;
     _originalLogoFrame = self.logoImage.frame;
-    _originalSwipeArrowFrame = self.swipeArrow.frame;
+    _originalLeftSwipeArrowFrame = _swipeLeftArrow.frame;
+    _originalRightSwipeArrowFrame = _swipeRightArrow.frame;
     
     self.userNameTextField.delegate = self;
     self.passwordTextField.delegate = self;
@@ -84,6 +87,7 @@ typedef enum eLoginMode
     self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
     #endif
     
+    _swipeRightArrow.transform = CGAffineTransformRotate(_swipeRightArrow.transform, M_PI);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -91,7 +95,9 @@ typedef enum eLoginMode
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    [self animateSwipeArrowWithRepetitions:3 andDelay:1.0];
+
+    [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:-1 arrow:_swipeLeftArrow origFrame:_originalLeftSwipeArrowFrame];
+    [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1 arrow:_swipeRightArrow origFrame:_originalRightSwipeArrowFrame];
 
 #if !HARD_CODED_LOGIN
     self.userNameTextField.text = [User Singleton].name;
@@ -249,22 +255,27 @@ typedef enum eLoginMode
 
 #pragma mark - Misc Methods
 
-- (void)animateSwipeArrowWithRepetitions:(int)repetitions andDelay:(float)delay;
+- (void)animateSwipeArrowWithRepetitions:(int)repetitions 
+                                andDelay:(float)delay 
+                               direction:(int)dir
+                                   arrow:(UIView *)swipeArrow 
+                               origFrame:(CGRect)originalFrame
 {
-    static int repetitionCount;
-    
-    if(repetitions)
+    if (!repetitions)
     {
-        repetitionCount = repetitions;
+        return;
     }
     [UIView animateWithDuration:0.35
                           delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
-         CGRect frame = self.swipeArrow.frame;
-         frame.origin.x = _originalSwipeArrowFrame.origin.x - _originalSwipeArrowFrame.size.width;
-         self.swipeArrow.frame = frame;
+         CGRect frame = swipeArrow.frame;
+         if (dir > 0)
+            frame.origin.x = originalFrame.origin.x + originalFrame.size.width;
+         else
+            frame.origin.x = originalFrame.origin.x - originalFrame.size.width;
+         swipeArrow.frame = frame;
          
      }
      completion:^(BOOL finished)
@@ -274,19 +285,18 @@ typedef enum eLoginMode
                              options:UIViewAnimationOptionCurveEaseInOut
                           animations:^
           {
-              CGRect frame = self.swipeArrow.frame;
-              frame.origin.x = _originalSwipeArrowFrame.origin.x;
-              self.swipeArrow.frame = frame;
+              CGRect frame = swipeArrow.frame;
+              frame.origin.x = originalFrame.origin.x;
+              swipeArrow.frame = frame;
               
           }
                           completion:^(BOOL finished)
           {
-              //self.dividerView.alpha = 0.0;
-              repetitionCount--;
-              if(repetitionCount)
-              {
-                  [self animateSwipeArrowWithRepetitions:0 andDelay:0];
-              }
+            [self animateSwipeArrowWithRepetitions:repetitions - 1
+                                          andDelay:0
+                                         direction:dir
+                                             arrow:swipeArrow
+                                         origFrame:originalFrame];
           }];
      }];
 }
@@ -306,9 +316,10 @@ typedef enum eLoginMode
      {
          self.contentView.frame = _originalContentFrame;
          
-         self.swipeArrow.alpha = 1.0;
-         self.swipeText.alpha = 1.0;
-         self.titleText.alpha = 1.0;
+         _swipeLeftArrow.alpha = 1.0;
+         _swipeRightArrow.alpha = 1.0;
+         _swipeText.alpha = 1.0;
+         _titleText.alpha = 1.0;
          
          self.logoImage.transform = CGAffineTransformMakeScale(1.0, 1.0);
          self.logoImage.frame = _originalLogoFrame;
@@ -350,9 +361,10 @@ typedef enum eLoginMode
              CGRect frame = self.contentView.frame;
              
              
-             self.swipeArrow.alpha = 0.0;
-             self.swipeText.alpha = 0.0;
-             self.titleText.alpha = 0.0;
+             _swipeLeftArrow.alpha = 0.0;
+             _swipeRightArrow.alpha = 0.0;
+             _swipeText.alpha = 0.0;
+             _titleText.alpha = 0.0;
              
              if(shrinkLogo)
              {

@@ -3693,16 +3693,20 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to View Business Directory" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8XB-1A-1hO" customClass="LatoLabel">
-                                        <rect key="frame" x="49" y="65" width="224" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to View Business Directory" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="8XB-1A-1hO" customClass="LatoLabel">
+                                        <rect key="frame" x="53" y="65" width="186" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe-arrow.png" id="GJL-fK-J6d">
                                         <rect key="frame" x="21" y="71" width="21" height="12"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe-arrow.png" id="jLL-vF-Vbd">
+                                        <rect key="frame" x="245" y="70" width="21" height="12"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid User Name or Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bZ3-GO-iZS" customClass="LatoLabel">
@@ -3809,7 +3813,8 @@
                         <outlet property="logoImage" destination="LqE-iy-sKS" id="cmm-Yx-nMh"/>
                         <outlet property="passwordTextField" destination="V5e-1n-K9Z" id="iwd-kF-klp"/>
                         <outlet property="spinnerView" destination="YZe-mr-te9" id="IDf-eC-kyH"/>
-                        <outlet property="swipeArrow" destination="GJL-fK-J6d" id="Y5A-BT-fhM"/>
+                        <outlet property="swipeLeftArrow" destination="GJL-fK-J6d" id="ZRe-Fu-p7V"/>
+                        <outlet property="swipeRightArrow" destination="jLL-vF-Vbd" id="1py-kB-hez"/>
                         <outlet property="swipeText" destination="8XB-1A-1hO" id="yBH-JD-yZ2"/>
                         <outlet property="titleText" destination="nae-d6-xoW" id="2iX-DH-tAT"/>
                         <outlet property="userEntryView" destination="bUp-i4-uHt" id="dJP-E5-WVa"/>
