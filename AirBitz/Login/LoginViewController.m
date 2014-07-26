@@ -578,7 +578,15 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
 
 - (void)showSpinner:(BOOL)bShow
 {
-    self.spinnerView.hidden = !bShow;
+    _spinnerView.hidden = !bShow;
+    if (_spinnerView.hidden)
+    {
+        self.view.userInteractionEnabled = YES;
+    }
+    else
+    {
+        self.view.userInteractionEnabled = NO;
+    }
 }
 
 - (void)finishIfLoggedIn
@@ -588,7 +596,7 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
         _bSuccess = YES;
 
         [self.delegate loginViewControllerDidLogin];
-        self.invalidMessage.hidden = YES;
+        _invalidMessage.hidden = YES;
     }
 }
 
