@@ -124,10 +124,10 @@ typedef enum eAddressPickerType
 
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:NSLocalizedString(@"Send Email", nil)
-                          message:NSLocalizedString(@"Select from contacts?", nil)
+                          message:NSLocalizedString(@"Select Email from Contact List?", nil)
                           delegate:self
-                          cancelButtonTitle:NSLocalizedString(@"Yes, Contacts", nil)
-                          otherButtonTitles:NSLocalizedString(@"No, Skip", nil), nil];
+                          cancelButtonTitle:NSLocalizedString(@"Yes", nil)
+                          otherButtonTitles:NSLocalizedString(@"No, I'll type it manually", nil), nil];
     [alert show];
 }
 
@@ -139,10 +139,10 @@ typedef enum eAddressPickerType
 
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:NSLocalizedString(@"Send SMS", nil)
-                          message:NSLocalizedString(@"Select from contacts?", nil)
+                          message:NSLocalizedString(@"Select from Contact List?", nil)
                           delegate:self
                           cancelButtonTitle:NSLocalizedString(@"Yes, Contacts", nil)
-                          otherButtonTitles:NSLocalizedString(@"No, Skip", nil), nil];
+                          otherButtonTitles:NSLocalizedString(@"No, I'll type in manually", nil), nil];
     [alert show];
 }
 
@@ -209,15 +209,32 @@ typedef enum eAddressPickerType
     if ([MFMailComposeViewController canSendMail])
     {
         NSMutableString *strBody = [[NSMutableString alloc] init];
+        NSString *amount = [CoreBridge formatSatoshi:self.amountSatoshi
+                                          withSymbol:false
+                                    overrideDecimals:8];
+        // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
         [strBody appendString:@"<html><body>\n"];
 
         [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
-        [strBody appendString:@"<br><br>\n"];
+        [strBody appendString:@"<br>\n"];
+        [strBody appendString:@"<br>\n"];
+        [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the link below to pay<br>\n",nil)];
+        [strBody appendString:@"<br>\n"];
+        [strBody appendFormat:@"<a href=\"%@\">", self.uriString];
+        [strBody appendString:NSLocalizedString(@"Click to Pay",nil)];
+        [strBody appendFormat:@"</a>"];
+        [strBody appendString:@"<br>\n"];
+        [strBody appendString:@"<br>\n"];
+        [strBody appendString:NSLocalizedString(@"Address: ",nil)];
         [strBody appendFormat:@"%@", self.addressString];
+        [strBody appendString:@"<br>\n"];
+        [strBody appendString:@"<br>\n"];
+        [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
+        [strBody appendFormat:@"%@", amount];
         [strBody appendString:@"<br><br>\n"];
 
-        NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(self.qrCodeImage, 1.0)];
+        NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(self.qrCodeImage, 5.0)];
         NSString *base64String = [imageData base64Encoded];
         [strBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/jpeg;base64,%@'></b></p>", base64String]];
 
@@ -258,8 +275,42 @@ typedef enum eAddressPickerType
 	if ([MFMessageComposeViewController canSendText] && [MFMessageComposeViewController canSendAttachments])
 	{
         NSMutableString *strBody = [[NSMutableString alloc] init];
+        NSString *amount = [CoreBridge formatSatoshi:self.amountSatoshi
+                                          withSymbol:false
+                                    overrideDecimals:8];
+        // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
+
+        [strBody appendString:@"<html><body>\n"];
+
         [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
-        [strBody appendFormat:@":\n%@", self.addressString];
+        [strBody appendString:@"\n"];
+        [strBody appendString:@"\n"];
+        [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the link below to pay<br>\n",nil)];
+        [strBody appendString:@"\n"];
+        [strBody appendFormat:@"%@", self.uriString];
+        [strBody appendString:NSLocalizedString(@"Click to Pay",nil)];
+        [strBody appendString:@"\n"];
+        [strBody appendString:@"\n"];
+        [strBody appendString:NSLocalizedString(@"Address: ",nil)];
+        [strBody appendFormat:@"%@", self.addressString];
+        [strBody appendString:@"\n"];
+        [strBody appendString:@"\n"];
+        [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
+        [strBody appendFormat:@"%@", amount];
+        [strBody appendString:@"\n"];
+        [strBody appendString:@"\n"];
+
+        /*
+        [strBody appendString:NSLocalizedString(@"Bitcoin Request:\n", nil)];
+        [strBody appendFormat:@"\n"];
+        [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the link below to pay<br>\n",nil)];
+        [strBody appendFormat:@"\n"];
+        [strBody appendFormat:@"%@", self.uriString];
+        [strBody appendFormat:@"\n"];
+        [strBody appendFormat:@"\n"];
+        [strBody appendFormat:@"%@", self.addressString];
+        [strBody appendFormat:@"\n"];
+        */
 
         // create the attachment
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

@@ -170,10 +170,11 @@
     // get the QR Code image
     NSMutableString *strRequestID = [[NSMutableString alloc] init];
     NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
-    UIImage *qrImage = [self createRequestQRImageFor:@"" withNotes:@"" storeRequestIDIn:strRequestID storeRequestAddressIn:strRequestAddress scaleAndSave:NO];
+    NSMutableString *strRequestURI = [[NSMutableString alloc] init];
+    UIImage *qrImage = [self createRequestQRImageFor:@"" withNotes:@"" storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress scaleAndSave:NO];
 
     // bring up the qr code view controller
-    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress];
+    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress requestURI:strRequestURI];
 }
 
 #pragma mark - Notification Handlers
@@ -285,7 +286,7 @@
 	return rawImage;
 }
 
--(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address
+-(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address requestURI:(NSString *)strRequestURI
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
@@ -293,6 +294,7 @@
 	_qrViewController.delegate = self;
 	_qrViewController.qrCodeImage = image;
 	_qrViewController.addressString = address;
+	_qrViewController.uriString = strRequestURI;
 	_qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
     _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
 	CGRect frame = self.view.bounds;
@@ -313,38 +315,48 @@
 }
 
 // generates and returns a request qr image, stores request id in the given mutable string
-- (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes storeRequestIDIn:(NSMutableString *)strRequestID storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave
+- (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes storeRequestIDIn:(NSMutableString *)strRequestID storeRequestURI:(NSMutableString *)strRequestURI storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave
 {
     UIImage *qrImage = nil;
     [strRequestID setString:@""];
     [strRequestAddress setString:@""];
+    [strRequestURI setString:@""];
 
-	unsigned int width = 0;
+    unsigned int width = 0;
     unsigned char *pData = NULL;
-	tABC_Error error;
+    char *pszURI = NULL;
+    tABC_Error error;
 
-	const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes];
+    const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes];
 
-	if (szRequestID)
-	{
+    if (szRequestID)
+    {
         Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-		tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
-                                                   [[User Singleton].password UTF8String],
-                                                   [wallet.strUUID UTF8String],
+        tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
+                                           [[User Singleton].password UTF8String],
+                                           [wallet.strUUID UTF8String],
                                                    szRequestID,
+                                                   &pszURI,
                                                    &pData,
                                                    &width,
                                                    &error);
 
-		if (result == ABC_CC_Ok)
-		{
-			qrImage = [self dataToImage:pData withWidth:width andHeight:width];
-		}
-		else
-		{
-			[Util printABC_Error:&error];
-		}
-	}
+        if (result == ABC_CC_Ok)
+        {
+                qrImage = [self dataToImage:pData withWidth:width andHeight:width];
+
+            if (pszURI && strRequestURI)
+            {
+                [strRequestURI appendFormat:@"%s", pszURI];
+                free(pszURI);
+            }
+            
+        }
+        else
+        {
+                [Util printABC_Error:&error];
+        }
+    }
 
     if (szRequestID)
     {
@@ -372,7 +384,7 @@
         }
         else
         {
-			[Util printABC_Error:&error];
+            [Util printABC_Error:&error];
         }
 
         free((void*)szRequestID);
@@ -382,7 +394,7 @@
     {
         free(pData);
     }
-
+    
     UIImage *qrImageFinal = qrImage;
 
     if (bScaleAndSave)

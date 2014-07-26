@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UIImage *qrCodeImage;
 @property (nonatomic, strong) NSString *statusString;
 @property (nonatomic, strong) NSString *addressString;
+@property (nonatomic, strong) NSString *uriString;
 @property (nonatomic, assign) int64_t amountSatoshi;
 
 - (IBAction)Back;
