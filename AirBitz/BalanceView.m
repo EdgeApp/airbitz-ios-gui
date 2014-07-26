@@ -8,6 +8,8 @@
 
 #import "BalanceView.h"
 
+#define BAR_UP @"Balance_View_Bar_Up"
+
 @interface BalanceView ()
 {
 	BOOL barIsUp;
@@ -40,8 +42,9 @@
 
 -(void)initMyVariables
 {
-	barIsUp = YES;
-	originalBarPosition = self.bar.frame.origin;
+    [self refresh];
+
+	originalBarPosition = self.frame.origin;
 	self.barAmount.text = self.topAmount.text;
 	self.barDenomination.text = self.topDenomination.text;
 	self.barIcon.image = [UIImage imageNamed:@"icon_bitcoin_light"];
@@ -49,15 +52,18 @@
 
 -(void)refresh
 {
+    barIsUp = [[NSUserDefaults standardUserDefaults] boolForKey:BAR_UP];
     if(barIsUp)
     {
         self.barAmount.text = self.topAmount.text;
         self.barDenomination.text = self.topDenomination.text;
+        [self moveBarUp];
     }
     else
     {
         self.barAmount.text = self.botAmount.text;
         self.barDenomination.text = self.botDenomination.text;
+        [self moveBarDown];
     }
 }
 
@@ -93,12 +99,7 @@
 							options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
 		 {
-			 CGRect frame = self.bar.frame;
-			 frame.origin.y = originalBarPosition.y + frame.size.height;
-			 self.bar.frame = frame;
-			 self.barAmount.text = self.botAmount.text;
-			 self.barDenomination.text = self.botDenomination.text;
-			 self.barIcon.image = [UIImage imageNamed:@"icon_USD_light"];
+             [self moveBarDown];
 		 }
 		 completion:^(BOOL finished)
 		 {
@@ -116,12 +117,7 @@
 							options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
 		 {
-			 CGRect frame = self.bar.frame;
-			 frame.origin.y = originalBarPosition.y;
-			 self.bar.frame = frame;
-			 self.barAmount.text = self.topAmount.text;
-			 self.barDenomination.text = self.topDenomination.text;
-			 self.barIcon.image = [UIImage imageNamed:@"icon_bitcoin_light"];
+             [self moveBarUp];
 		 }
 		completion:^(BOOL finished)
 		 {
@@ -131,6 +127,30 @@
 			 }
 		 }];
 	}
+    // Store bar position
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] setBool:barIsUp forKey:BAR_UP];
+    [userDefaults synchronize];
+}
+
+- (void)moveBarUp
+{
+    CGRect frame = self.bar.frame;
+    frame.origin.y = originalBarPosition.y;
+    self.bar.frame = frame;
+    self.barAmount.text = self.topAmount.text;
+    self.barDenomination.text = self.topDenomination.text;
+    self.barIcon.image = [UIImage imageNamed:@"icon_bitcoin_light"];
+}
+
+- (void)moveBarDown
+{
+    CGRect frame = self.bar.frame;
+    frame.origin.y = frame.size.height;
+    self.bar.frame = frame;
+    self.barAmount.text = self.botAmount.text;
+    self.barDenomination.text = self.botDenomination.text;
+    self.barIcon.image = [UIImage imageNamed:@"icon_USD_light"];
 }
 
 @end

@@ -492,6 +492,7 @@
 {
     [self reloadWallets];
     [self.walletsTable reloadData];
+    [self updateBalanceView];
 	[self dismissTransactions];
 }
 
