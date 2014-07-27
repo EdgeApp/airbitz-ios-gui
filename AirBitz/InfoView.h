@@ -1,8 +1,9 @@
 //
 //  InfoView.h
 //
-//  Created by Carson Whitsett on 1/17/14.
-//  Copyright (c) 2014 AirBitz, Inc.  All rights reserved.
+//  See LICENSE for copy, modification, and use permissions
+//
+//  See AUTHORS for contributing developers
 //
 
 #import <UIKit/UIKit.h>

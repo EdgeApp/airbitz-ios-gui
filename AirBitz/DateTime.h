@@ -2,8 +2,9 @@
 //  DateTime.h
 //  AirBitz
 //
-//  Created by Adam Harris on 5/27/14.
-//  Copyright (c) 2014 AirBitz. All rights reserved.
+//  See LICENSE for copy, modification, and use permissions
+//
+//  See AUTHORS for contributing developers
 //
 
 #import <Foundation/Foundation.h>
