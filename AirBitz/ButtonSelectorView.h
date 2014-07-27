@@ -2,9 +2,8 @@
 //  ButtonSelectorView.h
 //  AirBitz
 //
-//  See LICENSE for copy, modification, and use permissions
-//
-//  See AUTHORS for contributing developers
+//  Created by Carson Whitsett on 4/3/14.
+//  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 //	Set the delegate
 //	Set arrayItemsToSelect

@@ -2,9 +2,8 @@
 //  CommonTypes.h
 //  AirBitz
 //
-//  See LICENSE for copy, modification, and use permissions
-//
-//  See AUTHORS for contributing developers
+//  Created by Adam Harris on 5/6/14.
+//  Copyright (c) 2014 Adam Harris. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

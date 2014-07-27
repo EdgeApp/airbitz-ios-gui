@@ -1,9 +1,8 @@
 //
 //  InfoView.m
 //
-//  See LICENSE for copy, modification, and use permissions
-//
-//  See AUTHORS for contributing developers
+//  Created by Carson Whitsett on 1/17/14.
+//  Copyright (c) 2014 AirBitz, Inc.  All rights reserved.
 //
 
 #import "InfoView.h"

@@ -1,7 +1,10 @@
 //
 //  ShowWalletQRViewController.m
-//$$
-
+//  AirBitz
+//
+//  Created by Carson Whitsett on 3/31/14.
+//  Copyright (c) 2014 AirBitz. All rights reserved.
+//
 
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
