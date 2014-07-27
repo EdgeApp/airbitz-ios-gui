@@ -214,6 +214,17 @@ typedef enum eAddressPickerType
                                     overrideDecimals:8];
         // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
+        NSMutableString *tempURI = [[NSMutableString alloc] init];
+
+        tempURI = [self.uriString copy];
+
+        NSRange tempRange = [tempURI rangeOfString:@"bitcoin:"];
+
+        if (tempRange.location != NSNotFound) 
+        {
+            tempURI = [tempURI stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
+        }
+
         [strBody appendString:@"<html><body>\n"];
 
         [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
@@ -221,7 +232,7 @@ typedef enum eAddressPickerType
         [strBody appendString:@"<br>\n"];
         [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the link below to pay<br>\n",nil)];
         [strBody appendString:@"<br>\n"];
-        [strBody appendFormat:@"<a href=\"%@\">", self.uriString];
+        [strBody appendFormat:@"<a href=\"%@\">", tempURI];
         [strBody appendString:NSLocalizedString(@"Click to Pay",nil)];
         [strBody appendFormat:@"</a>"];
         [strBody appendString:@"<br>\n"];
@@ -280,15 +291,24 @@ typedef enum eAddressPickerType
                                     overrideDecimals:8];
         // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
-        [strBody appendString:@"<html><body>\n"];
+        NSMutableString *tempURI = [[NSMutableString alloc] init];
+        
+        tempURI = [self.uriString copy];
+        
+        NSRange tempRange = [tempURI rangeOfString:@"bitcoin:"];
+        
+        if (tempRange.location != NSNotFound)
+        {
+            tempURI = [tempURI stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
+        }
+        
 
         [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
         [strBody appendString:@"\n"];
         [strBody appendString:@"\n"];
-        [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the link below to pay<br>\n",nil)];
+        [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the link below to pay\n",nil)];
         [strBody appendString:@"\n"];
-        [strBody appendFormat:@"%@", self.uriString];
-        [strBody appendString:NSLocalizedString(@"Click to Pay",nil)];
+        [strBody appendFormat:@"%@", tempURI];
         [strBody appendString:@"\n"];
         [strBody appendString:@"\n"];
         [strBody appendString:NSLocalizedString(@"Address: ",nil)];
