@@ -331,6 +331,7 @@
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
          self.tableView.frame = frame;
 
          if (!IS_IPHONE5 || NO_SEARCHBAR)
@@ -347,6 +348,7 @@
                  curView.hidden = YES;
              }
          }
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
      }];
 
     [self.tableView reloadData];
