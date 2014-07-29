@@ -20,6 +20,11 @@
 @property (nonatomic) int64_t denomination;
 @property (nonatomic, copy) NSString* denominationLabel;
 @property (nonatomic) int denominationType;
+@property (nonatomic, copy) NSString* firstName;
+@property (nonatomic, copy) NSString* lastName;
+@property (nonatomic, copy) NSString* nickName;
+@property (nonatomic, copy) NSString* fullName;
+@property (nonatomic) bool bNameOnPayments;
 @property (nonatomic, copy) NSString* denominationLabelShort;
 
 + (void)initAll;

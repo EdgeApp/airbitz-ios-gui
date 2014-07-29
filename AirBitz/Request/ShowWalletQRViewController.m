@@ -14,6 +14,7 @@
 #import "Notifications.h"
 #import "ABC.h"
 #import "Util.h"
+#import "User.h"
 #import "CommonTypes.h"
 #import "CoreBridge.h"
 
@@ -227,7 +228,15 @@ typedef enum eAddressPickerType
 
         [strBody appendString:@"<html><body>\n"];
 
-        [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
+        if ([User Singleton].bNameOnPayments)
+        {
+            [strBody appendString:NSLocalizedString(@"Bitcoin Request from ", nil)];
+            [strBody appendFormat:@"%@", [User Singleton].fullName];
+        }
+        else
+        {
+            [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
+        }
         [strBody appendString:@"<br>\n"];
         [strBody appendString:@"<br>\n"];
         [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the link below to pay<br>\n",nil)];
@@ -245,7 +254,7 @@ typedef enum eAddressPickerType
         [strBody appendFormat:@"%@", amount];
         [strBody appendString:@"<br><br>\n"];
 
-        NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(self.qrCodeImage, 5.0)];
+        NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(self.qrCodeImage, 1.0)];
         NSString *base64String = [imageData base64Encoded];
         [strBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/jpeg;base64,%@'></b></p>", base64String]];
 
@@ -301,9 +310,18 @@ typedef enum eAddressPickerType
         {
             tempURI = [tempURI stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
         }
-        
 
-        [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
+        
+        if ([User Singleton].bNameOnPayments)
+        {
+            [strBody appendString:NSLocalizedString(@"Bitcoin Request from ", nil)];
+            [strBody appendFormat:@"%@", [User Singleton].fullName];
+        }
+        else
+        {
+            [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
+        }
+
         [strBody appendString:@"\n"];
         [strBody appendString:@"\n"];
         [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the link below to pay\n",nil)];
@@ -319,18 +337,6 @@ typedef enum eAddressPickerType
         [strBody appendFormat:@"%@", amount];
         [strBody appendString:@"\n"];
         [strBody appendString:@"\n"];
-
-        /*
-        [strBody appendString:NSLocalizedString(@"Bitcoin Request:\n", nil)];
-        [strBody appendFormat:@"\n"];
-        [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the link below to pay<br>\n",nil)];
-        [strBody appendFormat:@"\n"];
-        [strBody appendFormat:@"%@", self.uriString];
-        [strBody appendFormat:@"\n"];
-        [strBody appendFormat:@"\n"];
-        [strBody appendFormat:@"%@", self.addressString];
-        [strBody appendFormat:@"\n"];
-        */
 
         // create the attachment
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
