@@ -111,7 +111,7 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchSend:) name:NOTIFICATION_LAUNCH_SEND_FOR_WALLET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRequest:) name:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBitcoinUri:) name:NOTIFICATION_HANDLE_BITCOIN_URI object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetViews:) name:NOTIFICATION_MAIN_RESET object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
 }
 
@@ -695,6 +695,12 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     NSURL *uri = [dictData objectForKey:KEY_URL];
     _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
     [_sendViewController processURI];
+}
+
+- (void)loggedOffRedirect:(NSNotification *)notification
+{
+    _appMode = APP_MODE_DIRECTORY;
+    [self resetViews:notification];
 }
 
 - (void)resetViews:(NSNotification *)notification
