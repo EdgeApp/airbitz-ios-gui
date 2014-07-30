@@ -475,6 +475,8 @@ static NSTimer *_dataSyncTimer;
     [f setNumberStyle: NSNumberFormatterCurrencyStyle];
     if (symbol) {
         NSString *symbol = [CoreBridge currencySymbolLookup:currencyNum];
+        [f setNegativePrefix:[NSString stringWithFormat:@"-%@ ",symbol]];
+        [f setNegativeSuffix:@""];
         [f setCurrencySymbol:[NSString stringWithFormat:@"%@ ", symbol]];
     } else {
         [f setCurrencySymbol:@""];
