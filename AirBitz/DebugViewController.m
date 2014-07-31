@@ -35,8 +35,10 @@
 {
     [super viewDidLoad];
 
-    NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
-    self.versionLabel.text = infoDictionary[(NSString*)kCFBundleVersionKey];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+
+    self.versionLabel.text = [NSString stringWithFormat:@"%@ %@", version, build];
 #if NETWORK_FAKE
     self.networkLabel.text = @"Fake";
 #else
