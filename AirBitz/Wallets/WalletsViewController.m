@@ -533,13 +533,13 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	
 	if(destinationIndexPath.section == 0)
 	{
-		wallet.attributes &= ~WALLET_ATTRIBUTE_ARCHIVE_BIT;
+		wallet.archived = 0;
 		[self.arrayWallets insertObject:wallet atIndex:destinationIndexPath.row];
 		
 	}
 	else
 	{
-		wallet.attributes |= WALLET_ATTRIBUTE_ARCHIVE_BIT;
+		wallet.archived = 1;
 		[self.arrayArchivedWallets insertObject:wallet atIndex:destinationIndexPath.row];
 	}
     [CoreBridge setWalletAttributes:wallet];

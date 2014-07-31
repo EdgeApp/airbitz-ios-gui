@@ -191,6 +191,7 @@
     // get the categories from the core
     tABC_Error Error;
     ABC_GetCategories([[User Singleton].name UTF8String],
+                      [[User Singleton].password UTF8String],
                       &_aszCategories,
                       &_count,
                       &Error);
@@ -229,7 +230,7 @@
         else
         {
             // it doesn't exist in our new list so delete it from the core
-            ABC_RemoveCategory([[User Singleton].name UTF8String], _aszCategories[i], &Error);
+            ABC_RemoveCategory([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], _aszCategories[i], &Error);
             [Util printABC_Error:&Error];
         }
     }
@@ -238,7 +239,7 @@
     for (int i = 0; i < [self.arrayCategories count]; i++)
     {
         NSString *strCategory = [self.arrayCategories objectAtIndex:i];
-        ABC_AddCategory([[User Singleton].name UTF8String], (char *)[strCategory UTF8String], &Error);
+        ABC_AddCategory([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], (char *)[strCategory UTF8String], &Error);
         [Util printABC_Error:&Error];
     }
 }

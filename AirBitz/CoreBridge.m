@@ -107,7 +107,8 @@ static NSTimer *_dataSyncTimer;
     tABC_CC result = ABC_GetWallets([[User Singleton].name UTF8String],
                                     [[User Singleton].password UTF8String],
                                     &aWalletInfo, &nCount, &Error);
-    if (ABC_CC_Ok == result && aWalletInfo != NULL)
+    NSLog(@("%d\n"), nCount);
+    if (ABC_CC_Ok == result)
     {
         unsigned int i;
         for (i = 0; i < nCount; ++i)
@@ -144,7 +145,7 @@ static NSTimer *_dataSyncTimer;
         Wallet *wallet = [arrayWallets objectAtIndex:i];
 
         // if this is an archived wallet
-        if ((wallet.attributes & WALLET_ATTRIBUTE_ARCHIVE_BIT) == 1)
+        if ([wallet isArchived])
         {
             // add it to the archive wallet
             if (arrayArchivedWallets != nil)
@@ -170,7 +171,7 @@ static NSTimer *_dataSyncTimer;
     {
         wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
         wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
-        wallet.attributes = 0;
+        wallet.archived = pWalletInfo->archived;
         wallet.balance = pWalletInfo->balanceSatoshi;
         wallet.currencyNum = pWalletInfo->currencyNum;
         [self loadTransactions: wallet];
@@ -277,7 +278,7 @@ static NSTimer *_dataSyncTimer;
 {
     wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
     wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
-    wallet.attributes = pWalletInfo->attributes;
+    wallet.archived = pWalletInfo->archived;
     wallet.balance = pWalletInfo->balanceSatoshi;
     wallet.currencyNum = pWalletInfo->currencyNum;
     wallet.currencyAbbrev = [CoreBridge currencyAbbrevLookup:wallet.currencyNum];
@@ -406,10 +407,10 @@ static NSTimer *_dataSyncTimer;
 + (bool)setWalletAttributes: (Wallet *) wallet
 {
     tABC_Error Error;
-    tABC_CC result = ABC_SetWalletAttributes([[User Singleton].name UTF8String],
-                                             [[User Singleton].password UTF8String],
-                                             [wallet.strUUID UTF8String],
-                                             wallet.attributes, &Error);
+    tABC_CC result = ABC_SetWalletArchived([[User Singleton].name UTF8String],
+                                           [[User Singleton].password UTF8String],
+                                           [wallet.strUUID UTF8String],
+                                           wallet.archived, &Error);
     if (ABC_CC_Ok == result)
     {
         return true;

@@ -84,10 +84,12 @@ typedef enum eAppMode
 #if !DIRECTORY_ONLY
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docs_dir = [paths objectAtIndex:0];
+    NSString *ca_path = [[NSBundle mainBundle] pathForResource:@"ca-certificates" ofType:@"crt"];
 
     tABC_Error Error;
     Error.code = ABC_CC_Ok;
     ABC_Initialize([docs_dir UTF8String],
+                   [ca_path UTF8String],
                    ABC_BitCoin_Event_Callback,
                    (__bridge void *) self,
                    (unsigned char *)[seedData bytes],

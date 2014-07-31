@@ -741,6 +741,7 @@
     // get the categories from the core
     tABC_Error Error;
     ABC_GetCategories([[User Singleton].name UTF8String],
+                      [[User Singleton].password UTF8String],
                       &aszCategories,
                       &countCategories,
                       &Error);
@@ -776,7 +777,9 @@
         {
             // add the category to the core
             tABC_Error Error;
-            ABC_AddCategory([[User Singleton].name UTF8String], (char *)[strCategory UTF8String], &Error);
+            ABC_AddCategory([[User Singleton].name UTF8String],
+                            [[User Singleton].password UTF8String],
+                            (char *)[strCategory UTF8String], &Error);
             [Util printABC_Error:&Error];
         }
     }

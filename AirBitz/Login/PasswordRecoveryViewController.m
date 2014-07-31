@@ -101,18 +101,24 @@ typedef enum eAlertType
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
-        tABC_Error Error;
-        tABC_CC result = ABC_GetQuestionChoices([[User Singleton].name UTF8String],
-                                                PW_ABC_Request_Callback,
-                                                (__bridge void *)self,
-                                                &Error);
-        [Util printABC_Error:&Error];
-
-        if (ABC_CC_Ok != result)
-        {
-            [self blockUser:NO];
-            [self showSpinner:NO];
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            tABC_Error Error;
+            tABC_QuestionChoices *pQuestionChoices = NULL;
+            tABC_CC result = ABC_GetQuestionChoices(&pQuestionChoices, &Error);
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [self blockUser:NO];
+                [self showSpinner:NO];
+                if (result == ABC_CC_Ok)
+                {
+                    _bSuccess = YES;
+                    [self categorizeQuestionChoices:pQuestionChoices];
+                    ABC_FreeQuestionChoices(pQuestionChoices);
+                } else {
+                    _bSuccess = NO;
+                }
+                [self performSelectorOnMainThread:@selector(getPasswordRecoveryQuestionsComplete) withObject:nil waitUntilDone:FALSE];
+            });
+        });
     }
     else
     {
@@ -657,25 +663,12 @@ typedef enum eAlertType
 
 void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
 {
-   // NSLog(@"Request callback");
-    
     if (pResults)
     {
         PasswordRecoveryViewController *controller = (__bridge id)pResults->pData;
         controller.bSuccess = (BOOL)pResults->bSuccess;
         controller.strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
-        if (pResults->requestType == ABC_RequestType_GetQuestionChoices)
-        {
-			//NSLog(@"GetQuestionChoices completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
-            if (pResults->bSuccess)
-            {
-                tABC_QuestionChoices *pQuestionChoices = (tABC_QuestionChoices *)pResults->pRetData;
-                [controller categorizeQuestionChoices:pQuestionChoices];
-                ABC_FreeQuestionChoices(pQuestionChoices);
-            }
-            [controller performSelectorOnMainThread:@selector(getPasswordRecoveryQuestionsComplete) withObject:nil waitUntilDone:FALSE];
-        }
-		else if (pResults->requestType == ABC_RequestType_SetAccountRecoveryQuestions)
+		if (pResults->requestType == ABC_RequestType_SetAccountRecoveryQuestions)
 		{
             [controller performSelectorOnMainThread:@selector(setRecoveryComplete) withObject:nil waitUntilDone:FALSE];
 		}

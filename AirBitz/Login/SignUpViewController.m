@@ -919,7 +919,9 @@
         for (int i = 0; i < [self.arrayCategories count]; i++)
         {
             NSString *strCategory = [self.arrayCategories objectAtIndex:i];
-            ABC_AddCategory([[User Singleton].name UTF8String], (char *)[strCategory UTF8String], &Error);
+            ABC_AddCategory([[User Singleton].name UTF8String],
+                            [[User Singleton].password UTF8String],
+                            (char *)[strCategory UTF8String], &Error);
             [Util printABC_Error:&Error];
         }
 
