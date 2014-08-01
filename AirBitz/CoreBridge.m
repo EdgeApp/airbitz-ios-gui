@@ -98,6 +98,12 @@ static NSTimer *_dataSyncTimer;
     }
 }
 
++ (void)postToSyncQueue:(void(^)(void))cb;
+{
+    dispatch_async(dataQueue, cb);
+}
+
+
 + (void)loadWallets:(NSMutableArray *)arrayWallets
 {
     tABC_Error Error;

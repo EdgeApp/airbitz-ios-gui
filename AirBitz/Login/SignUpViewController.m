@@ -164,22 +164,32 @@
                 else if (_mode == SignUpMode_ChangePassword)
                 {
                     // get their old pen
-                    char *szOldPIN = NULL;
-                    ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szOldPIN, nil);
-
                     [self blockUser:YES];
 
-                    result = ABC_ChangePassword([[User Singleton].name UTF8String],
-                                                [[User Singleton].password UTF8String],
-                                                [self.passwordTextField.text UTF8String],
-                                                szOldPIN,
-                                                ABC_SignUp_Request_Callback,
-                                                (__bridge void *)self,
-                                                &Error);
+                    result = ABC_CC_Ok;
+                    // We post this to the Data Sync queue, so password is updated in between sync's
+                    [CoreBridge postToSyncQueue:^(void) {
+                        [CoreBridge stopWatchers];
+                        [CoreBridge stopQueues];
 
+                        char *szOldPIN = NULL;
+                        ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szOldPIN, nil);
+                        tABC_CC result = ABC_ChangePassword([[User Singleton].name UTF8String],
+                                                    [[User Singleton].password UTF8String],
+                                                    [self.passwordTextField.text UTF8String],
+                                                    szOldPIN,
+                                                    NULL,
+                                                    NULL,
+                                                    &Error);
+                        free(szOldPIN);
 
+                        _bSuccess = result == ABC_CC_Ok;
+                        _strReason = [NSString stringWithFormat:@"%s", Error.szDescription];
 
-                    free(szOldPIN);
+                        [CoreBridge startWatchers];
+                        [CoreBridge startQueues];
+                        [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
+                    }];
                 }
                 else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
                 {
