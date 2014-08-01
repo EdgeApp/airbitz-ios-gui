@@ -57,6 +57,7 @@
          storeResultsIn:(int64_t *) totalFees
          walletTransfer:(bool)bTransfer;
 + (bool)isTestNet;
++ (NSString *)coreVersion;
 + (NSString *)currencyAbbrevLookup:(int) currencyNum;
 + (NSString *)currencySymbolLookup:(int) currencyNum;
 

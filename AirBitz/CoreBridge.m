@@ -886,6 +886,16 @@ static NSTimer *_dataSyncTimer;
     return result;
 }
 
++ (NSString *)coreVersion
+{
+    NSString *version;
+    char *szVersion = NULL;
+    ABC_Version(&szVersion, NULL);
+    version = [NSString stringWithUTF8String:szVersion];
+    free(szVersion);
+    return version;
+}
+
 + (NSString *)currencyAbbrevLookup:(int) currencyNum
 {
 #warning TODO move this to the core
