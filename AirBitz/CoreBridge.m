@@ -627,18 +627,16 @@ static NSTimer *_dataSyncTimer;
                                               &Error);
     if (ABC_CC_Ok == result)
     {
-        if (szQuestions)
+        if (szQuestions && strlen(szQuestions))
         {
-            if (strlen(szQuestions))
-            {
-                // create an array of strings by pulling each question that is seperated by a newline
-                arrayQuestions = [[NSMutableArray alloc] initWithArray:[[NSString stringWithUTF8String:szQuestions] componentsSeparatedByString: @"\n"]];
-                // remove empties
-                [arrayQuestions removeObject:@""];
-            }
+            // create an array of strings by pulling each question that is seperated by a newline
+            arrayQuestions = [[NSMutableArray alloc] initWithArray:[[NSString stringWithUTF8String:szQuestions] componentsSeparatedByString: @"\n"]];
+            // remove empties
+            [arrayQuestions removeObject:@""];
             *bSuccess = YES; 
         }
-        [error appendString:NSLocalizedString(@"No questions are linked to you account", nil)];
+        [error appendString:NSLocalizedString(@"This user does not have any recovery questions set!", nil)];
+        *bSuccess = NO; 
     }
     else
     {
