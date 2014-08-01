@@ -534,17 +534,17 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	
 	if(destinationIndexPath.section == 0)
 	{
-		wallet.archived = 0;
+		wallet.archived = NO;
 		[self.arrayWallets insertObject:wallet atIndex:destinationIndexPath.row];
 		
 	}
 	else
 	{
-		wallet.archived = 1;
+		wallet.archived = YES;
 		[self.arrayArchivedWallets insertObject:wallet atIndex:destinationIndexPath.row];
 	}
     [CoreBridge setWalletAttributes:wallet];
-    [CoreBridge setWalletOrder: self.arrayWallets archived: self.arrayArchivedWallets];
+    [CoreBridge setWalletOrder: self.arrayWallets archived:self.arrayArchivedWallets];
 	[self updateBalanceView];
 	[self.walletsTable reloadData];
     // Restart watchers
@@ -638,14 +638,12 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	if(indexPath.section == 0)
 	{
 		Wallet *wallet = [self.arrayWallets objectAtIndex:row];
-        wallet.archived = 0;
 		cell.name.text = wallet.strName;
 		cell.amount.text = [self conversion:wallet.balance];
 	}
 	else
 	{
 		Wallet *wallet = [self.arrayArchivedWallets objectAtIndex:row];
-        wallet.archived = 1;
 		cell.name.text = wallet.strName;
 		cell.amount.text = [self conversion:wallet.balance];
 	}
