@@ -280,6 +280,7 @@
 - (void)blockUser:(BOOL)bBlock
 {
     self.viewBlocker.hidden = !bBlock;
+    [self.textField resignFirstResponder];
 }
 
 - (void)exit
