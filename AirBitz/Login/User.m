@@ -104,10 +104,14 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
             }
         }
-        self.firstName = [NSString stringWithUTF8String:pSettings->szFirstName];
-        self.lastName = [NSString stringWithUTF8String:pSettings->szLastName];
-        self.nickName = [NSString stringWithUTF8String:pSettings->szNickname];
-        self.fullName = [NSString stringWithUTF8String:pSettings->szFullName];
+        if (pSettings->szFirstName)
+            self.firstName = [NSString stringWithUTF8String:pSettings->szFirstName];
+        if (pSettings->szLastName)
+            self.lastName = [NSString stringWithUTF8String:pSettings->szLastName];
+        if (pSettings->szNickname)
+            self.nickName = [NSString stringWithUTF8String:pSettings->szNickname];
+        if (pSettings->szFullName)
+            self.fullName = [NSString stringWithUTF8String:pSettings->szFullName];
         self.bNameOnPayments = pSettings->bNameOnPayments;
     }
     else
