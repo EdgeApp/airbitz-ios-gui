@@ -12,7 +12,6 @@
 
 @interface BalanceView ()
 {
-    BOOL barIsUp;
     CGPoint originalBarPosition;
 }
 @property (nonatomic, weak) IBOutlet UIView *bar;
@@ -52,8 +51,8 @@
 
 -(void)refresh
 {
-    barIsUp = [[NSUserDefaults standardUserDefaults] boolForKey:BAR_UP];
-    if(barIsUp)
+    _barIsUp = [[NSUserDefaults standardUserDefaults] boolForKey:BAR_UP];
+    if(_barIsUp)
     {
         self.barAmount.text = self.topAmount.text;
         self.barDenomination.text = self.topDenomination.text;
@@ -90,10 +89,10 @@
 
 - (void)BalanceViewTapped:(UITapGestureRecognizer *)recognizer
 {
-    if(barIsUp)
+    if(_barIsUp)
     {
         //move bar down
-        barIsUp = NO;
+        _barIsUp = NO;
         [UIView animateWithDuration:0.1
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
@@ -111,7 +110,7 @@
     }
     else
     {
-        barIsUp = YES;
+        _barIsUp = YES;
         [UIView animateWithDuration:0.1
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
@@ -129,7 +128,7 @@
     }
     // Store bar position
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [[NSUserDefaults standardUserDefaults] setBool:barIsUp forKey:BAR_UP];
+    [[NSUserDefaults standardUserDefaults] setBool:_barIsUp forKey:BAR_UP];
     [userDefaults synchronize];
 }
 
