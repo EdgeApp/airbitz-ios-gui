@@ -15,14 +15,12 @@
 #import "Config.h"
 #import "MontserratLabel.h"
 #import "LatoLabel.h"
-#import "User.h"
 #import "Util.h"
 #import "CoreBridge.h"
+#import "MinCharTextField.h"
 
 #define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
-
-#define MIN_PIN_LENGTH          4
 
 @interface SignUpViewController () <UITextFieldDelegate, PasswordVerifyViewDelegate, PasswordRecoveryViewControllerDelegate, UIAlertViewDelegate>
 {
@@ -39,7 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView                *imageReenterPassword;
 @property (weak, nonatomic) IBOutlet MontserratLabel            *labelPIN;
 @property (weak, nonatomic) IBOutlet UIImageView                *imagePIN;
-@property (nonatomic, weak) IBOutlet UITextField                *userNameTextField;
+@property (nonatomic, weak) IBOutlet MinCharTextField           *userNameTextField;
 @property (nonatomic, weak) IBOutlet UITextField                *passwordTextField;
 @property (nonatomic, weak) IBOutlet UITextField                *reenterPasswordTextField;
 @property (nonatomic, weak) IBOutlet MinCharTextField           *pinTextField;
@@ -76,7 +74,8 @@
 	self.passwordTextField.delegate = self;
 	self.reenterPasswordTextField.delegate = self;
 	self.pinTextField.delegate = self;
-	self.pinTextField.minimumCharacters = MIN_PIN_LENGTH;
+	self.pinTextField.minimumCharacters = ABC_MIN_PIN_LENGTH;
+    self.userNameTextField.minimumCharacters = ABC_MIN_USERNAME_LENGTH;
 
     // set up our user blocking button
     self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -145,8 +144,8 @@
         // check the new password fields
         if ([self newPasswordFieldsAreValid] == YES)
         {
-            // check the pin field
-            if ([self pinFieldIsValid] == YES)
+            // check the username and pin field
+            if ([self fieldsAreValid] == YES)
             {
                 tABC_Error Error;
                 tABC_CC result = ABC_CC_Ok;
@@ -458,22 +457,35 @@
 // returns YES if field is good
 // if the field is bad, an appropriate message box is displayed
 // note: this function is aware of the 'mode' of the view controller and will check and display appropriately
-- (BOOL)pinFieldIsValid
+- (BOOL)fieldsAreValid
 {
-    BOOL bpinNameFieldIsValid = YES;
+    BOOL valid = YES;
 
     // if we are signing up for a new account
     if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        // if the pin isn't long enough
-        if (self.pinTextField.text.length < MIN_PIN_LENGTH)
+        if (self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
         {
-            bpinNameFieldIsValid = NO;
+            valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:self.labelTitle.text
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                            self.labelTitle.text,
-                                           NSLocalizedString(@"Withdrawl PIN must be 4 digits", @"")]
+                                           [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), ABC_MIN_USERNAME_LENGTH]]
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+        // if the pin isn't long enough
+        else if (self.pinTextField.text.length < ABC_MIN_PIN_LENGTH)
+        {
+            valid = NO;
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:self.labelTitle.text
+                                  message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                           self.labelTitle.text,
+                                           [NSString stringWithFormat:NSLocalizedString(@"Withdrawl PIN must be 4 digits", @""), ABC_MIN_PIN_LENGTH]]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
@@ -481,7 +493,7 @@
         }
     }
 
-    return bpinNameFieldIsValid;
+    return valid;
 }
 
 -(void)showPasswordRecoveryController
