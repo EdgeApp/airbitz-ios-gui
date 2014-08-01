@@ -17,6 +17,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *clearWatcherButton;
 @property (nonatomic, weak) IBOutlet UILabel *versionLabel;
+@property (nonatomic, weak) IBOutlet UILabel *coreLabel;
 @property (nonatomic, weak) IBOutlet UILabel *networkLabel;
 
 @end
@@ -39,6 +40,7 @@
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 
     self.versionLabel.text = [NSString stringWithFormat:@"%@ %@", version, build];
+    self.coreLabel.text = [NSString stringWithFormat:@"%@", [CoreBridge coreVersion]];
 #if NETWORK_FAKE
     self.networkLabel.text = @"Fake";
 #else

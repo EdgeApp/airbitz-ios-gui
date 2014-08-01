@@ -33,7 +33,6 @@
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate>
 {
     BalanceView                         *_balanceView;
-    tBalanceViewState                   _balanceState;
     TransactionDetailsViewController    *_transactionDetailsController;
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bSearchModeEnabled;
@@ -139,6 +138,7 @@
 
     }
 
+    [_balanceView refresh];
     _transactionTableStartFrame = self.tableView.frame;
 
     [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -404,7 +404,7 @@
 //note this method duplicated in WalletsViewController
 - (NSString *)conversion:(int64_t)satoshi
 {
-    return [self formatSatoshi:satoshi useFiat:_balanceState == BALANCE_VIEW_DOWN];
+    return [self formatSatoshi:satoshi useFiat:!_balanceView.barIsUp];
 }
 
 -(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
@@ -745,7 +745,6 @@
 
 - (void)BalanceView:(BalanceView *)view changedStateTo:(tBalanceViewState)state
 {
-    _balanceState = state;
     [self.tableView reloadData];
 }
 

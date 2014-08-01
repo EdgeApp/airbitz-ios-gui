@@ -98,6 +98,12 @@ static NSTimer *_dataSyncTimer;
     }
 }
 
++ (void)postToSyncQueue:(void(^)(void))cb;
+{
+    dispatch_async(dataQueue, cb);
+}
+
+
 + (void)loadWallets:(NSMutableArray *)arrayWallets
 {
     tABC_Error Error;
@@ -627,18 +633,16 @@ static NSTimer *_dataSyncTimer;
                                               &Error);
     if (ABC_CC_Ok == result)
     {
-        if (szQuestions)
+        if (szQuestions && strlen(szQuestions))
         {
-            if (strlen(szQuestions))
-            {
-                // create an array of strings by pulling each question that is seperated by a newline
-                arrayQuestions = [[NSMutableArray alloc] initWithArray:[[NSString stringWithUTF8String:szQuestions] componentsSeparatedByString: @"\n"]];
-                // remove empties
-                [arrayQuestions removeObject:@""];
-            }
+            // create an array of strings by pulling each question that is seperated by a newline
+            arrayQuestions = [[NSMutableArray alloc] initWithArray:[[NSString stringWithUTF8String:szQuestions] componentsSeparatedByString: @"\n"]];
+            // remove empties
+            [arrayQuestions removeObject:@""];
             *bSuccess = YES; 
         }
-        [error appendString:NSLocalizedString(@"No questions are linked to you account", nil)];
+        [error appendString:NSLocalizedString(@"This user does not have any recovery questions set!", nil)];
+        *bSuccess = NO; 
     }
     else
     {
@@ -886,6 +890,16 @@ static NSTimer *_dataSyncTimer;
         [Util printABC_Error: &Error];
     }
     return result;
+}
+
++ (NSString *)coreVersion
+{
+    NSString *version;
+    char *szVersion = NULL;
+    ABC_Version(&szVersion, NULL);
+    version = [NSString stringWithUTF8String:szVersion];
+    free(szVersion);
+    return version;
 }
 
 + (NSString *)currencyAbbrevLookup:(int) currencyNum

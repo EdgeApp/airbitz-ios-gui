@@ -15,6 +15,7 @@
 + (void)freeAll;
 + (void)startQueues;
 + (void)stopQueues;
++ (void)postToSyncQueue:(void(^)(void))cb;
 
 + (void)loadWallets: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (void)reloadWallet: (Wallet *) wallet;
@@ -57,6 +58,7 @@
          storeResultsIn:(int64_t *) totalFees
          walletTransfer:(bool)bTransfer;
 + (bool)isTestNet;
++ (NSString *)coreVersion;
 + (NSString *)currencyAbbrevLookup:(int) currencyNum;
 + (NSString *)currencySymbolLookup:(int) currencyNum;
 
