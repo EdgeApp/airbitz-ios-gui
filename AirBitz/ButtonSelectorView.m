@@ -105,7 +105,7 @@
 
 		//animate button width (wider)
 		self.button.selected = YES;
-		[UIView animateWithDuration:0.5
+		[UIView animateWithDuration:0.25
 							  delay:0.0
 							options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
@@ -223,7 +223,7 @@
 					 completion:^(BOOL finished)
 	 {
 		 //animate button back to original size
-		 [UIView animateWithDuration:0.5
+		 [UIView animateWithDuration:0.25
 							   delay:0.0
 							 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
 						  animations:^
