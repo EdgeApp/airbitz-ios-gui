@@ -113,24 +113,26 @@ static NSTimer *_dataSyncTimer;
     tABC_CC result = ABC_GetWallets([[User Singleton].name UTF8String],
                                     [[User Singleton].password UTF8String],
                                     &aWalletInfo, &nCount, &Error);
-    NSLog(@("%d\n"), nCount);
     if (ABC_CC_Ok == result)
     {
-        unsigned int i;
-        for (i = 0; i < nCount; ++i)
+        if (aWalletInfo)
         {
-            Wallet *wallet;
-            tABC_WalletInfo *pWalletInfo = aWalletInfo[i];
-            // If entry is NULL skip it
-            if (!pWalletInfo)
+            unsigned int i;
+            for (i = 0; i < nCount; ++i)
             {
-                continue;
-            }
+                Wallet *wallet;
+                tABC_WalletInfo *pWalletInfo = aWalletInfo[i];
+                // If entry is NULL skip it
+                if (!pWalletInfo)
+                {
+                    continue;
+                }
 
-            wallet = [[Wallet alloc] init];
-            [CoreBridge setWallet:wallet withInfo:pWalletInfo];
-            [arrayWallets addObject:wallet];
-            [self loadTransactions: wallet];
+                wallet = [[Wallet alloc] init];
+                [CoreBridge setWallet:wallet withInfo:pWalletInfo];
+                [arrayWallets addObject:wallet];
+                [self loadTransactions: wallet];
+            }
         }
     }
     else
