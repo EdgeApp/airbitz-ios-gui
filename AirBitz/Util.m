@@ -7,9 +7,62 @@
 //
 
 #import "Util.h"
+#import "ABC.h"
 #import "CommonTypes.h"
 
 @implementation Util
+
++ (NSString *)errorCodeMap:(int)code
+{
+    switch (code)
+    {
+        case ABC_CC_AccountAlreadyExists:
+            return NSLocalizedString(@"This account already exists.", nil);
+        case ABC_CC_AccountDoesNotExist:
+            return NSLocalizedString(@"This account does not exist.", nil);
+        case ABC_CC_BadPassword:
+            return NSLocalizedString(@"Incorrect password.", nil);
+        case ABC_CC_WalletAlreadyExists:
+            return NSLocalizedString(@"Wallet already exists.", nil);
+        case ABC_CC_InvalidWalletID:
+            return NSLocalizedString(@"Wallet does not exist.", nil);
+        case ABC_CC_URLError:
+        case ABC_CC_ServerError:
+            return NSLocalizedString(@"Unable to connect to airbitz server. Please try again later.", nil);
+        case ABC_CC_NoRecoveryQuestions:
+            return NSLocalizedString(@"No recovery questions are available for this user", nil);
+        case ABC_CC_NotSupported:
+            return NSLocalizedString(@"This operation is not supported.", nil);
+        case ABC_CC_InsufficientFunds:
+            return NSLocalizedString(@"Insufficient funds", nil);
+        case ABC_CC_Synchronizing:
+            return NSLocalizedString(@"Synchronizing with the network.", nil);
+        case ABC_CC_Error:
+        case ABC_CC_NULLPtr:
+        case ABC_CC_NoAvailAccountSpace:
+        case ABC_CC_DirReadError:
+        case ABC_CC_FileOpenError:
+        case ABC_CC_FileReadError:
+        case ABC_CC_FileWriteError:
+        case ABC_CC_FileDoesNotExist:
+        case ABC_CC_UnknownCryptoType:
+        case ABC_CC_InvalidCryptoType:
+        case ABC_CC_DecryptError:
+        case ABC_CC_DecryptFailure:
+        case ABC_CC_EncryptError:
+        case ABC_CC_ScryptError:
+        case ABC_CC_SysError:
+        case ABC_CC_NotInitialized:
+        case ABC_CC_Reinitialization:
+        case ABC_CC_JSONError:
+        case ABC_CC_MutexError:
+        case ABC_CC_NoTransaction:
+        case ABC_CC_ParseError:
+        case ABC_CC_NoRequest:
+        default:
+            return NSLocalizedString(@"An error has occurred.", nil);
+    }
+}
 
 + (void)printABC_Error:(const tABC_Error *)pError
 {

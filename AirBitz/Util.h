@@ -12,6 +12,7 @@
 
 @interface Util : NSObject
 
++ (NSString *)errorCodeMap:(int)code;
 + (void)printABC_Error:(const tABC_Error *)pError;
 + (void)resizeView:(UIView *)theView withDisplayView:(UIView *)theDisplayView;
 + (void)freeStringArray:(char **)aszStrings count:(unsigned int)count;
