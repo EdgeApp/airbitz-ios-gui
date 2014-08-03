@@ -61,7 +61,7 @@
 
 - (void) initMyVariables
 {
-	self.webView.layer.cornerRadius = 4.0;
+	self.webView.layer.cornerRadius = 0.0;
 	self.webView.clipsToBounds = YES;
 	self.webView.delegate = self;
 	
