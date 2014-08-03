@@ -469,6 +469,7 @@
 		DAAC2169196399F400CC0F1E /* flash-on~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2165196399F400CC0F1E /* flash-on~iphone.png */; };
 		DAAC216C1963A35900CC0F1E /* btn_album@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */; };
 		DAAC216D1963A35900CC0F1E /* btn_album~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */; };
+		DABA3486198DFEE300EFAB13 /* infoRequestQR.html in Resources */ = {isa = PBXBuildFile; fileRef = DABA3485198DFEE300EFAB13 /* infoRequestQR.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1093,6 +1094,7 @@
 		DAAC2165196399F400CC0F1E /* flash-on~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-on~iphone.png"; sourceTree = "<group>"; };
 		DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album@2x~iphone.png"; sourceTree = "<group>"; };
 		DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album~iphone.png"; sourceTree = "<group>"; };
+		DABA3485198DFEE300EFAB13 /* infoRequestQR.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoRequestQR.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2045,6 +2047,7 @@
 				4C72479D1933D3890091C286 /* infoExportWalletOptions.html */,
 				4C5D8C76192E86620015BB3C /* infoImportWallet.html */,
 				4C5D8C6C192E7D4A0015BB3C /* infoRequest.html */,
+				DABA3485198DFEE300EFAB13 /* infoRequestQR.html */,
 				4C5D8C6D192E7D4A0015BB3C /* infoSend.html */,
 				4C5D8C6A192E6BC30015BB3C /* infoSettings.html */,
 				4C5D8C6F192E7D4A0015BB3C /* infoTransactions.html */,
@@ -2372,6 +2375,7 @@
 				4C7C1256193D2CFC0096338D /* WalletExportPDF.pdf in Resources */,
 				B5C0A8D918E63FE6008F302C /* bkg_flash_controls~iphone.png in Resources */,
 				B59C150418C012B500AEA789 /* btn_slash@2x~iphone.png in Resources */,
+				DABA3486198DFEE300EFAB13 /* infoRequestQR.html in Resources */,
 				B59C151118C012B500AEA789 /* emboss_up~iphone.png in Resources */,
 				B59C143A18C0129300AEA789 /* bd_icon_clock~iphone.png in Resources */,
 				B59C14F418C012B500AEA789 /* btn_import_wallet@2x~iphone.png in Resources */,
