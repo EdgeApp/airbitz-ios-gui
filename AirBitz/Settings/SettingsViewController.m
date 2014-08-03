@@ -171,7 +171,33 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 	self.tableView.delaysContentTouches = NO;
-	
+
+    self.popupPicker = nil;
+    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.buttonBlocker.backgroundColor = [UIColor clearColor];
+    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
+    self.buttonBlocker.frame = self.view.bounds;
+    self.buttonBlocker.hidden = YES;
+    [self.viewMain addSubview:self.buttonBlocker];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(refresh:)
+                                                 name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
+    [self refresh:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)refresh:(NSNotification *)notification
+{	
 	tABC_Error Error;
     Error.code = ABC_CC_Ok;
 
@@ -213,13 +239,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                                                object:nil];
     _bKeyboardIsShown = NO;
 
-    self.popupPicker = nil;
-    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.buttonBlocker.backgroundColor = [UIColor clearColor];
-    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
-    self.buttonBlocker.frame = self.view.bounds;
-    self.buttonBlocker.hidden = YES;
-    [self.viewMain addSubview:self.buttonBlocker];
+    [_tableView reloadData];
 }
 
 -(void)dealloc
