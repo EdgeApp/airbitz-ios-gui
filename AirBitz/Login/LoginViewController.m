@@ -556,7 +556,7 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
     {
         LoginViewController *controller = (__bridge id)pResults->pData;
         controller->_bSuccess = (BOOL)pResults->bSuccess;
-        controller->_strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
+        controller->_strReason = [Util errorMap:&(pResults->errorInfo)];
         if (pResults->requestType == ABC_RequestType_AccountSignIn)
         {
             [controller performSelectorOnMainThread:@selector(signInComplete) withObject:nil waitUntilDone:FALSE];

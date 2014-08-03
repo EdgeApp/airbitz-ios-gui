@@ -12,9 +12,9 @@
 
 @implementation Util
 
-+ (NSString *)errorCodeMap:(int)code
++ (NSString *)errorMap:(const tABC_Error *)pError
 {
-    switch (code)
+    switch (pError->code)
     {
         case ABC_CC_AccountAlreadyExists:
             return NSLocalizedString(@"This account already exists.", nil);

@@ -69,23 +69,15 @@
 		tABC_CC result = ABC_GetCurrencies(&currencyArray, &numCurrencies, &error);
 		if(result == ABC_CC_Ok)
 		{
-			/*
-			 typedef struct sABC_Currency
-			 {
-			 char    *szCode;		// currency ISO 4217 code
-			 int     num;			// currency ISO 4217 num
-			 char    *szDescription; // currency description
-			 char    *szCountries;	// currency countries
-			 } tABC_Currency;
-			 */
-
             NSMutableArray *arrayCurrencyCodes = [[NSMutableArray alloc] init];
             NSMutableArray *arrayCurrencyNums = [[NSMutableArray alloc] init];
 			NSMutableArray *arrayCurrencyStrings = [[NSMutableArray alloc] init];
 			for(int i = 0; i < numCurrencies; i++)
 			{
 				//populate with currency code and description
-				[arrayCurrencyStrings addObject:[NSString stringWithFormat:@"%s - %@", currencyArray[i].szCode, [NSString stringWithUTF8String:currencyArray[i].szDescription]]];
+				[arrayCurrencyStrings addObject:[NSString stringWithFormat:@"%s - %@",
+                                                currencyArray[i].szCode,
+                                                [NSString stringWithUTF8String:currencyArray[i].szDescription]]];
 
                 [arrayCurrencyNums addObject:[NSNumber numberWithInt:currencyArray[i].num]];
                 [arrayCurrencyCodes addObject:[NSString stringWithUTF8String:currencyArray[i].szCode]];
@@ -230,7 +222,7 @@
     {
         UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Create Wallet", nil)
-							  message:[NSString stringWithFormat:@"Wallet creation failed:\n%s", Error.szDescription]
+                                    message:[NSString stringWithFormat:@"Wallet creation failed:\n%s", [Util errorMap:&Error]]
 							  delegate:nil
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
@@ -343,7 +335,7 @@ void ABC_Wallet_Maker_Request_Callback(const tABC_RequestResults *pResults)
     {
         WalletMakerView *controller = (__bridge id) pResults->pData;
         controller.bSuccess = (BOOL) pResults->bSuccess;
-        controller.strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
+        controller.strReason = [Util errorMap:&(pResults->errorInfo)];
         if (pResults->requestType == ABC_RequestType_CreateWallet)
 		{
 			if (pResults->pRetData && controller.bSuccess)

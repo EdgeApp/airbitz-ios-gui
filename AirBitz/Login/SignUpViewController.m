@@ -184,7 +184,7 @@
                         free(szOldPIN);
 
                         _bSuccess = result == ABC_CC_Ok;
-                        _strReason = [NSString stringWithFormat:@"%s", Error.szDescription];
+                        _strReason = [NSString stringWithFormat:@"%s", [Util errorMap:&Error]];
 
                         [CoreBridge startWatchers];
                         [CoreBridge startQueues];
@@ -234,7 +234,7 @@
                                           initWithTitle:self.labelTitle.text
                                           message:[NSString stringWithFormat:@"%@ failed:\n%s",
                                                    self.labelTitle.text,
-                                                   Error.szDescription]
+                                                   [Util errorMap:&Error]]
                                           delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -1019,13 +1019,11 @@
 
 void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
 {
-    //NSLog(@"Request callback");
-
     if (pResults)
     {
         SignUpViewController *controller = (__bridge id)pResults->pData;
         controller.bSuccess = (BOOL)pResults->bSuccess;
-        controller.strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
+        controller.strReason = [Util errorMap:&(pResults->errorInfo)];
         if (pResults->requestType == ABC_RequestType_CreateAccount)
         {
             [controller performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];

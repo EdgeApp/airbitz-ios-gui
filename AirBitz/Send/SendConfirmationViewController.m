@@ -803,8 +803,7 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
     {
         SendConfirmationViewController *controller = (__bridge id)pResults->pData;
         controller->_callbackSuccess = (BOOL)pResults->bSuccess;
-        controller->_strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
-
+        controller->_strReason = [Util errorMap:&(pResults->errorInfo)];
         if (pResults->requestType == ABC_RequestType_SendBitcoin)
         {
             if (pResults->bSuccess)
@@ -825,8 +824,7 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
                     message =
                         NSLocalizedString(@"You do not have enough funds to send this transaction.", nil);
                 } else if (pResults->errorInfo.code == ABC_CC_ServerError) {
-                    message =
-                        NSLocalizedString([NSString stringWithUTF8String:pResults->errorInfo.szDescription], nil);
+                    message = [Util errorMap:&(pResults->errorInfo)];
                 } else {
                     message =
                         NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);

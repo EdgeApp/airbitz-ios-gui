@@ -339,7 +339,7 @@ typedef enum eAlertType
         [self showSpinner:NO];
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:self.labelTitle.text
-							  message:[NSString stringWithFormat:@"%@ failed:\n%s", self.labelTitle.text, Error.szDescription]
+                                    message:[NSString stringWithFormat:@"%@ failed:\n%s", self.labelTitle.text, [Util errorMap:&Error]]
 							  delegate:nil
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
@@ -667,7 +667,7 @@ void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
     {
         PasswordRecoveryViewController *controller = (__bridge id)pResults->pData;
         controller.bSuccess = (BOOL)pResults->bSuccess;
-        controller.strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
+        controller.strReason = [Util errorMap:&(pResults->errorInfo)];
 		if (pResults->requestType == ABC_RequestType_SetAccountRecoveryQuestions)
 		{
             [controller performSelectorOnMainThread:@selector(setRecoveryComplete) withObject:nil waitUntilDone:FALSE];
