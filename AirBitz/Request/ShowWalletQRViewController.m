@@ -17,6 +17,7 @@
 #import "User.h"
 #import "CommonTypes.h"
 #import "CoreBridge.h"
+#import "InfoView.h"
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 
@@ -114,6 +115,8 @@ typedef enum eAddressPickerType
 
 - (IBAction)Info
 {
+	[self.view endEditing:YES];
+    [InfoView CreateWithHTML:@"infoRequestQR" forView:self.view];
 
 }
 
