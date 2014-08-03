@@ -149,7 +149,7 @@
     self.bar.frame = frame;
     self.barAmount.text = self.botAmount.text;
     self.barDenomination.text = self.botDenomination.text;
-    self.barIcon.image = [UIImage imageNamed:@"icon_USD_light"];
+    self.barIcon.image = [UIImage imageNamed:@""];
 }
 
 @end
