@@ -17,7 +17,7 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view alpha="0.49999999999999961" contentMode="scaleToFill" id="2NU-VG-WLr">
-                    <rect key="frame" x="8" y="18" width="304" height="465"/>
+                    <rect key="frame" x="8" y="21" width="304" height="465"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="8zR-Wo-WM3">
