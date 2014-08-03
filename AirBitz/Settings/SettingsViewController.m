@@ -60,18 +60,14 @@
 #define ROW_NICKNAME                    3
 
 #define ROW_AUTO_LOG_OFF                0
-#define ROW_LANGUAGE                    1
-#define ROW_DEFAULT_CURRENCY            2
-#define ROW_CHANGE_CATEGORIES           3
+#define ROW_DEFAULT_CURRENCY            1
+#define ROW_CHANGE_CATEGORIES           2
 
 #define ROW_US_DOLLAR                   0
 #define ROW_CANADIAN_DOLLAR             1
 #define ROW_EURO                        2
 #define ROW_MEXICAN_PESO                3
 #define ROW_YUAN                        4
-
-#define ARRAY_LANG_CHOICES  @[@"English", @"Spanish", @"German", @"French", @"Italian", @"Chinese", @"Portuguese", @"Japanese"]
-#define ARRAY_LANG_CODES    @[@"en",      @"es",      @"de",     @"fr",     @"it",      @"zh",      @"pt",         @"ja"      ]
 
 #define ARRAY_CURRENCY_NUMS @[@840, @124, @978, @484, @156]
 // #define ARRAY_EXCHANGES     @[@[@"Bitstamp", @"CoinMKT", @"Kraken", @"Coindesk", @"CampBX", @"Coinbase", @"BTC-e"], \
@@ -933,20 +929,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			cell.name.text = NSLocalizedString(@"Auto log off after", @"settings text");
             [cell.button setTitle:[self logoutDisplay] forState:UIControlStateNormal];
 		}
-		else if (indexPath.row == ROW_LANGUAGE)
-		{
-            NSInteger curChoice = 0;
-			cell.name.text = NSLocalizedString(@"Language", @"settings text");
-            if (_pAccountSettings && _pAccountSettings->szLanguage)
-            {
-                curChoice = [ARRAY_LANG_CODES indexOfObject:[NSString stringWithUTF8String:_pAccountSettings->szLanguage]];
-                if (curChoice == NSNotFound)
-                {
-                    curChoice = 0;
-                }
-            }
-            [cell.button setTitle:[ARRAY_LANG_CHOICES objectAtIndex:curChoice] forState:UIControlStateNormal];
-		}
 		else if (indexPath.row == ROW_DEFAULT_CURRENCY)
 		{
 			cell.name.text = NSLocalizedString(@"Default Currency", @"settings text");
@@ -1052,7 +1034,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_OPTIONS:
-            return 4;
+            return 3;
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
@@ -1335,18 +1317,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                                                                userData:cell
                                                             andDelegate:self];
         }
-        else if (row == ROW_LANGUAGE)
-        {
-            if (_pAccountSettings)
-            {
-                curChoice = [ARRAY_LANG_CODES indexOfObject:[NSString stringWithUTF8String:_pAccountSettings->szLanguage]];
-                if (curChoice == NSNotFound)
-                {
-                    curChoice = -1;
-                }
-            }
-            arrayPopupChoices = ARRAY_LANG_CHOICES;
-        }
         else if (row == ROW_DEFAULT_CURRENCY)
         {
             if (_pAccountSettings)
@@ -1425,14 +1395,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
     if (SECTION_OPTIONS == sectionCell)
     {
-        if (rowCell == ROW_LANGUAGE)
-        {
-            if (_pAccountSettings)
-            {
-                [self replaceString:&(_pAccountSettings->szLanguage) withString:[[ARRAY_LANG_CODES objectAtIndex:row] UTF8String]];
-            }
-        }
-        else if (rowCell == ROW_DEFAULT_CURRENCY)
+        if (rowCell == ROW_DEFAULT_CURRENCY)
         {
             if (_pAccountSettings)
             {
