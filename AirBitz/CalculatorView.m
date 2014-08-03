@@ -90,6 +90,7 @@
 		case OPERATION_MINUS:
 			//NSLog(@"Performing Minus");
 			accumulator -= [self.textField.text floatValue];
+            if (accumulator < 0) accumulator = 0;
             self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_MULTIPLY:
