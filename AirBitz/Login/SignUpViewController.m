@@ -755,33 +755,6 @@
     if (_bSuccess)
     {
         [self blockUser:YES];
-        tABC_Error Error;
-        ABC_SignIn([self.userNameTextField.text UTF8String],
-                   [self.passwordTextField.text UTF8String],
-                   ABC_SignUp_Request_Callback,
-                   (__bridge void *)self,
-                   &Error);
-        [Util printABC_Error:&Error];
-    }
-    else
-    {
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Unable to Sign Up", @"Title of account signup error alert")
-							  message:[NSString stringWithFormat:@"Sign-up failed:\n%@", _strReason]
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-
-    }
-}
-
-- (void)signInComplete
-{
-    [self blockUser:NO];
-    if (_bSuccess)
-    {
-        [self blockUser:YES];
         [User login:self.userNameTextField.text
            password:self.passwordTextField.text];
 
@@ -1027,10 +1000,6 @@ void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
         if (pResults->requestType == ABC_RequestType_CreateAccount)
         {
             [controller performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
-        }
-        else if (pResults->requestType == ABC_RequestType_AccountSignIn)
-        {
-            [controller performSelectorOnMainThread:@selector(signInComplete) withObject:nil waitUntilDone:FALSE];
         }
 		else if (pResults->requestType == ABC_RequestType_CreateWallet)
 		{
