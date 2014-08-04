@@ -2747,6 +2747,7 @@
                         <outlet property="imageTopBar" destination="gmt-c3-7j4" id="Orc-ew-HX1"/>
                         <outlet property="indicator" destination="jvM-Wt-OU9" id="eaG-68-c0d"/>
                         <outlet property="messageLabel" destination="PY5-r2-zeB" id="jr7-Gk-xHS"/>
+                        <outlet property="titleLabel" destination="XxH-iI-cot" id="6ap-sI-ug7"/>
                         <outlet property="viewDisplayArea" destination="KyV-XH-vOM" id="KpV-zS-tCq"/>
                     </connections>
                 </viewController>
