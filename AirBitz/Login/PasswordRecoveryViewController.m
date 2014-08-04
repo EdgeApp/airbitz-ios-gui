@@ -51,7 +51,7 @@ typedef enum eAlertType
 @property (nonatomic, strong) UIButton        *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray  *arrayCategoryString;
 @property (nonatomic, strong) NSMutableArray  *arrayCategoryNumeric;
-@property (nonatomic, strong) NSMutableArray  *arrayCategoryAddress;
+//@property (nonatomic, strong) NSMutableArray  *arrayCategoryAddress;
 @property (nonatomic, strong) NSMutableArray  *arrayChosenQuestions;
 @property (nonatomic, copy)   NSString        *strReason;
 @property (nonatomic, assign) BOOL            bSuccess;
@@ -77,7 +77,7 @@ typedef enum eAlertType
 
 	self.arrayCategoryString	= [[NSMutableArray alloc] init];
 	self.arrayCategoryNumeric	= [[NSMutableArray alloc] init];
-	self.arrayCategoryAddress	= [[NSMutableArray alloc] init];
+//	self.arrayCategoryAddress	= [[NSMutableArray alloc] init];
 	self.arrayChosenQuestions	= [[NSMutableArray alloc] init];
 
 	//NSLog(@"Adding keyboard notification");
@@ -625,10 +625,10 @@ typedef enum eAlertType
 				{
 					[self.arrayCategoryNumeric addObject:dict];
 				}
-				else if([category isEqualToString:@"address"])
-				{
-					[self.arrayCategoryAddress addObject:dict];
-				}
+//				else if([category isEqualToString:@"address"])
+//				{
+//					[self.arrayCategoryAddress addObject:dict];
+//				}
             }
         }
     }
@@ -696,18 +696,18 @@ void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
 	}
 	
 	//populate available questions
-	if (view.tag < 2)
+	if (view.tag < 4)
 	{
 		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryString];
 	}
-	else if (view.tag < 4)
+	else
 	{
 		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryNumeric];
 	}
-	else
-	{
-		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryAddress];
-	}
+//	else
+//	{
+//		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryAddress];
+//	}
 	CGSize contentSize = self.scrollView.contentSize;
 	
 	if ((frame.origin.y + frame.size.height) > self.scrollView.contentSize.height)
