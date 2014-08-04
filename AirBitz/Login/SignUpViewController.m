@@ -76,6 +76,10 @@
 	self.pinTextField.delegate = self;
 	self.pinTextField.minimumCharacters = ABC_MIN_PIN_LENGTH;
     self.userNameTextField.minimumCharacters = ABC_MIN_USERNAME_LENGTH;
+    if (self.strUserName)
+    {
+        self.userNameTextField.text = self.strUserName;
+    }
 
     // set up our user blocking button
     self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];

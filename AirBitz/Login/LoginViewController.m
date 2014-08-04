@@ -213,7 +213,7 @@ typedef enum eLoginMode
 
 - (void)launchQuestionRecovery:(NSArray *)params
 {
-    if (_bSuccess && [params[0] length] > 0)
+    if (_bSuccess && [params count] > 0)
     {
         NSArray *arrayQuestions = params[0];
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];

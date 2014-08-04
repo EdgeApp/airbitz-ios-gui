@@ -643,8 +643,11 @@ static NSTimer *_dataSyncTimer;
             [arrayQuestions removeObject:@""];
             *bSuccess = YES; 
         }
-        [error appendString:NSLocalizedString(@"This user does not have any recovery questions set!", nil)];
-        *bSuccess = NO; 
+        else
+        {
+            [error appendString:NSLocalizedString(@"This user does not have any recovery questions set!", nil)];
+            *bSuccess = NO; 
+        }
     }
     else
     {
