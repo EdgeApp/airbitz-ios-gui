@@ -19,7 +19,7 @@
         case ABC_CC_AccountAlreadyExists:
             return NSLocalizedString(@"This account already exists.", nil);
         case ABC_CC_AccountDoesNotExist:
-            return NSLocalizedString(@"This account does not exist.", nil);
+            return NSLocalizedString(@"We were unable to find your account. Be sure your username is correct.", nil);
         case ABC_CC_BadPassword:
             return NSLocalizedString(@"Incorrect password.", nil);
         case ABC_CC_WalletAlreadyExists:
@@ -28,7 +28,7 @@
             return NSLocalizedString(@"Wallet does not exist.", nil);
         case ABC_CC_URLError:
         case ABC_CC_ServerError:
-            return NSLocalizedString(@"Unable to connect to airbitz server. Please try again later.", nil);
+            return NSLocalizedString(@"Unable to connect to Airbitz server. Please try again later.", nil);
         case ABC_CC_NoRecoveryQuestions:
             return NSLocalizedString(@"No recovery questions are available for this user", nil);
         case ABC_CC_NotSupported:

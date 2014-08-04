@@ -651,7 +651,7 @@ static NSTimer *_dataSyncTimer;
     }
     else
     {
-        [error appendString:NSLocalizedString(@"We were unable to find your account. Be sure your username is correct.", nil)];
+        [error appendString:[Util errorMap:&Error]];
         [Util printABC_Error:&Error];
     }
 
