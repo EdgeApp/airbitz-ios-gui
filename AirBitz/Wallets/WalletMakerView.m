@@ -222,7 +222,7 @@
     {
         UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Create Wallet", nil)
-                                    message:[NSString stringWithFormat:@"Wallet creation failed:\n%s", [Util errorMap:&Error]]
+                                    message:[NSString stringWithFormat:@"Wallet creation failed:\n%@", [Util errorMap:&Error]]
 							  delegate:nil
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];

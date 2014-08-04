@@ -339,7 +339,7 @@ typedef enum eAlertType
         [self showSpinner:NO];
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:self.labelTitle.text
-                                    message:[NSString stringWithFormat:@"%@ failed:\n%s", self.labelTitle.text, [Util errorMap:&Error]]
+                                    message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, [Util errorMap:&Error]]
 							  delegate:nil
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
