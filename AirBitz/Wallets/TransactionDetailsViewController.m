@@ -163,8 +163,8 @@
     self.pickerTextCategory.textField.backgroundColor = [UIColor clearColor];
     self.pickerTextCategory.textField.font = [UIFont systemFontOfSize:14];
     self.pickerTextCategory.textField.clearButtonMode = UITextFieldViewModeAlways;
-    self.pickerTextCategory.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.pickerTextCategory.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.pickerTextCategory.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    self.pickerTextCategory.textField.autocorrectionType = UITextAutocorrectionTypeDefault;
     self.pickerTextCategory.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     self.pickerTextCategory.textField.textColor = [UIColor whiteColor];
     self.pickerTextCategory.textField.tintColor = [UIColor whiteColor];

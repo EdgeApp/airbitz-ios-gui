@@ -87,8 +87,8 @@
     self.pickerTextNew.textField.backgroundColor = [UIColor clearColor];
     self.pickerTextNew.textField.font = [UIFont systemFontOfSize:14];
     self.pickerTextNew.textField.clearButtonMode = UITextFieldViewModeAlways;
-    self.pickerTextNew.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.pickerTextNew.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.pickerTextNew.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    self.pickerTextNew.textField.autocorrectionType = UITextAutocorrectionTypeDefault;
     self.pickerTextNew.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     [self.pickerTextNew setTopMostView:self.view];
     self.pickerTextNew.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
