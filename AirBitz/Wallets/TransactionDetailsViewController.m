@@ -332,6 +332,9 @@
     NSString* path = [[NSBundle mainBundle] pathForResource:@"transactionDetails" ofType:@"html"];
     NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
 
+    uint64_t totalSent = 0;
+    uint64_t fees = self.transaction.minerFees + self.transaction.abFees;
+
     NSMutableString *inAddresses = [[NSMutableString alloc] init];
     NSMutableString *outAddresses = [[NSMutableString alloc] init];
     NSMutableString *baseUrl = [[NSMutableString alloc] init];
@@ -346,23 +349,24 @@
                 baseUrl, t.strAddress, t.strAddress, val];
         if (t.bInput) {
             [inAddresses appendString:html];
+            totalSent += t.value;
         } else {
             [outAddresses appendString:html];
         }
     }
+    totalSent -= fees;
     NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
                                 baseUrl, self.transaction.strMallealbeID, self.transaction.strMallealbeID];
     //transaction ID
     content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
     //Total sent
-    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[CoreBridge formatSatoshi:self.transaction.amountSatoshi]];
+    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[CoreBridge formatSatoshi:totalSent]];
     //source
     content = [content stringByReplacingOccurrencesOfString:@"*3" withString:inAddresses];
     //Destination
     content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
     //Miner Fee
-    NSString * fees = [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees];
-    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:fees];
+    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[CoreBridge formatSatoshi:fees]];
     iv.htmlInfoToDisplay = content;
     [self.view addSubview:iv];
 }
