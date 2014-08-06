@@ -271,7 +271,17 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         [[User Singleton] loadSettings];
     }
-    [Util printABC_Error:&Error];
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                            initWithTitle:NSLocalizedString(@"Unable to save Settings", nil)
+                            message:[NSString stringWithFormat:@"%@", [Util errorMap:&Error]]
+                            delegate:self
+                            cancelButtonTitle:@"Cancel"
+                            otherButtonTitles:@"OK", nil];
+        [alert show];
+        [Util printABC_Error:&Error];
+    }
 }
 
 // replaces the string in the given variable with a duplicate of another
