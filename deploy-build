@@ -63,3 +63,10 @@ run ./deploy-tf "$1$lettert" "$build" "$2" "$3" "$4" "testnet"
 
 echo $stridx > $BUILDDATE
 #run /usr/bin/open "https://testflightapp.com/dashboard/builds/"
+
+##
+## Tag the commit ID with the build version
+##
+run git tag -a "${1}_${build}_ios" -m ""
+run git push --tags
+
