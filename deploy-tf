@@ -19,7 +19,9 @@ function logger {
 }
 
 net="Mainnet: USES REAL BITCOIN"
+list="Internal"
 if [ "$6" = "testnet" ]; then
+  list="Internal"
   net="Testnet"
 fi
 
@@ -40,6 +42,8 @@ for f in "$dir"/*; do
   profile="$f"
   echo "Found Provisioning Profile: $profile"
 done
+
+notes=$(< "./relnotes.txt")
 
 #/usr/bin/open -a /Applications/Utilities/Console.app $LOG
  
@@ -69,7 +73,8 @@ run /usr/bin/curl "http://testflightapp.com/api/builds.json" \
   -F dsym=@"/tmp/${PRODUCT_NAME}.dSYM.zip" \
   -F api_token="${API_TOKEN}" \
   -F team_token="${TEAM_TOKEN}" \
-  -F notes="Airbitz Wallet & Business Directory\n v $1 \($2)\n$net"
+  -F distribution_lists="${list}" \
+  -F notes="Airbitz Wallet & Business Directory\n\nv $1 ($2)\n\n$net\n\n$notes"
  
 #echo "done." >> $LOG
 logger "Uploaded to TestFlight" 

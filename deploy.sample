@@ -6,6 +6,8 @@
 ## Copy this file to "deploy"
 ## Complete the API_TOKEN, TEAM_TOKEN, and SIGNING_IDENTITY values below
 ##
+## Create and edit relnotes.txt and put in release notes into that file.
+##
 ## Run using the command below. "clean" is an optional arguement to clean the entire
 ## walletcore deps build (est 60-90 minutes to rebuild after clean. Without clean, script will
 ## always clean the ABC build with 'make abc.clean'
