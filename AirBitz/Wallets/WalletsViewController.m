@@ -91,10 +91,13 @@
                                                               collapse:_archiveCollapsed];
 	self.archivedWalletsHeaderView.delegate = self;
 
-    [[NSNotificationCenter defaultCenter] addObserver:self 
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(dataUpdated:)
                                                  name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
-
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(dataUpdated:)
+                                                 name:NOTIFICATION_EXCHANGE_RATE_CHANGE
+                                               object:nil];
     [_balanceView refresh];
 }
 
