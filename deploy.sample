@@ -4,13 +4,13 @@
 ## Usage
 ##
 ## Copy this file to "deploy"
-## Complete the API_TOKEN, TEAM_TOKEN, SIGNING_IDENTITY, PROVISIONING_PROFILE values below
+## Complete the API_TOKEN, TEAM_TOKEN, and SIGNING_IDENTITY values below
 ##
 ## Run using the command below. "clean" is an optional arguement to clean the entire
 ## walletcore deps build (est 60-90 minutes to rebuild after clean. Without clean, script will
 ## always clean the ABC build with 'make abc.clean'
 ##
-## ./deploy [VERSION] [BUILD] [clean]
+## ./deploy [VERSION] [clean]
 ## ie "./deploy 1.1.2 2014080501" or "./deploy 1.1.2 2014080501"
 ##
 
@@ -27,10 +27,6 @@ if [ "$1" == "" ]; then
 	exit 1
 fi
 
-if [ "$2" = "" ]; then
-	exit 1
-fi
-
 PRODUCT_NAME=Airbitz
 
 # https://testflightapp.com/account/
@@ -40,9 +36,6 @@ API_TOKEN=
 TEAM_TOKEN=
 
 # ie. "iPhone Developer: Joe Montana (GT76D6B8NA)"
-SIGNING_IDENTITY=
+SIGNING_IDENTITY=""
 
-# Find in ${HOME}/Library/MobileDevice/Provisioning Profiles/ as *.mobileprovision
-PROVISIONING_PROFILE="${HOME}/Library/MobileDevice/Provisioning Profiles/your provisioning profile.mobileprovision"
-
-run ./deploy-build "$1" "$2" "${API_TOKEN}" "${TEAM_TOKEN}" "${SIGNING_IDENTITY}" "${PROVISIONING_PROFILE}" "$3"
+run ./deploy-build "$1" "${API_TOKEN}" "${TEAM_TOKEN}" "${SIGNING_IDENTITY}" "$2"

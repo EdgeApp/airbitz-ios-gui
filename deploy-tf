@@ -19,7 +19,7 @@ function logger {
 }
 
 net="Mainnet: USES REAL BITCOIN"
-if [ "$7" = "testnet" ]; then
+if [ "$6" = "testnet" ]; then
   net="Testnet"
 fi
 
@@ -35,13 +35,19 @@ ARCHIVE=$( /bin/ls -t "${HOME}/Library/Developer/Xcode/Archives/${DATE}" | /usr/
 DSYM="${HOME}/Library/Developer/Xcode/Archives/${DATE}/${ARCHIVE}/dSYMs/${PRODUCT_NAME}.app.dSYM"
 APP="${HOME}/Library/Developer/Xcode/Archives/${DATE}/${ARCHIVE}/Products/Applications/${PRODUCT_NAME}.app"
  
+dir="${HOME}/Library/MobileDevice/Provisioning Profiles"
+for f in "$dir"/*; do
+  profile="$f"
+  echo "Found Provisioning Profile: $profile"
+done
+
 #/usr/bin/open -a /Applications/Utilities/Console.app $LOG
  
-logger "Creating .ipa for ${PRODUCT_NAME} --sign ${SIGNING_IDENTITY} --embed ${PROVISIONING_PROFILE} ... "
+logger "Creating .ipa for ${PRODUCT_NAME} --sign ${SIGNING_IDENTITY} --embed $profile ... "
 #echo "Creating .ipa for ${PRODUCT_NAME}"
- 
+
 /bin/rm "/tmp/${PRODUCT_NAME}.ipa"
-run /usr/bin/xcrun -sdk iphoneos PackageApplication -v "${APP}" -o "/tmp/${PRODUCT_NAME}.ipa" --sign "${SIGNING_IDENTITY}" --embed "${PROVISIONING_PROFILE}"
+run /usr/bin/xcrun -sdk iphoneos PackageApplication -v "${APP}" -o "/tmp/${PRODUCT_NAME}.ipa" --sign "${SIGNING_IDENTITY}" --embed "$profile"
  
 #echo "done." >> $LOG
 logger "Created .ipa for ${PRODUCT_NAME}"

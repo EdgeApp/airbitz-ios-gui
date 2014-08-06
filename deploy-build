@@ -14,9 +14,7 @@ lettert="t"
 BUILDDATE=$( /bin/date +"%Y%m%d" )
 if [ -e "./$BUILDDATE" ]; then
 	idx=$(< ./$BUILDDATE)
-	echo $idx
 	((idx++))
-	echo $idx
 	printf -v build "%s%03d" $BUILDDATE $idx
 	printf -v stridx "%d" $idx
 else
@@ -30,7 +28,7 @@ run cd ../airbitz-walletcore
 run git pull
 run cd deps
 run make abc.clean
-if [ "$6" = "clean" ]; then
+if [ "$5" = "clean" ]; then
 	run make clean
 fi
 run make abc
@@ -39,7 +37,7 @@ run cd ../../airbitz-walletcore-testnet
 run git pull
 run cd deps
 run make abc.clean
-if [ "$6" = "clean" ]; then
+if [ "$5" = "clean" ]; then
 	run make clean
 fi
 run make abc
@@ -53,7 +51,7 @@ run cp -a ../airbitz-walletcore/deps/build/abc/abc-ios-universal/lib/* AirBitz/A
 run agvtool new-marketing-version $1
 run agvtool new-version -all $build
 run xcodebuild -scheme Airbitz archive
-run ./deploy-tf "$1" "$build" "$2" "$3" "$4" "$5"
+run ./deploy-tf "$1" "$build" "$2" "$3" "$4"
 
 rm -rf Airbitz/ABC/*
 run cp -a ../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
@@ -61,7 +59,7 @@ run cp -a ../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/lib/* A
 run agvtool new-marketing-version $1$lettert
 run agvtool new-version -all $build
 run xcodebuild -scheme Airbitz archive
-run ./deploy-tf "$1$lettert" "$build" "$2" "$3" "$4" "$5" "testnet"
+run ./deploy-tf "$1$lettert" "$build" "$2" "$3" "$4" "testnet"
 
 echo $stridx > $BUILDDATE
-run /usr/bin/open "https://testflightapp.com/dashboard/builds/"
+#run /usr/bin/open "https://testflightapp.com/dashboard/builds/"
