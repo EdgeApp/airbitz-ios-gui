@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -1563,7 +1563,7 @@
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="TJ3-SX-hen" customClass="MontserratLabel">
-                                                    <rect key="frame" x="12" y="11" width="150" height="13"/>
+                                                    <rect key="frame" x="81" y="11" width="81" height="13"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.090196078431372548" green="0.4392156862745098" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
@@ -1572,7 +1572,7 @@
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="iE3-Jv-3vs" customClass="MontserratLabel">
-                                                    <rect key="frame" x="11" y="26" width="150" height="21"/>
+                                                    <rect key="frame" x="81" y="26" width="175" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.25490196078431371" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
@@ -1581,7 +1581,7 @@
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a3J-4E-YSl" customClass="LatoLabel">
-                                                    <rect key="frame" x="11" y="43" width="150" height="21"/>
+                                                    <rect key="frame" x="81" y="43" width="92" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.32549019607843138" green="0.3529411764705882" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
@@ -1600,7 +1600,7 @@
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" id="6qu-Co-pyz" customClass="LatoLabel">
-                                                    <rect key="frame" x="169" y="40" width="90" height="21"/>
+                                                    <rect key="frame" x="181" y="40" width="78" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.32549019610000002" green="0.35294117650000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1608,6 +1608,17 @@
                                                     <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" id="tH2-55-aGZ" userLabel="View - Photo">
+                                                    <rect key="frame" x="1" y="1" width="70" height="70"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" id="eY0-zc-Tda" userLabel="Image View - photo">
+                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
@@ -1619,6 +1630,8 @@
                                             <outlet property="bkgImage" destination="G0y-XL-Bp2" id="WAJ-Uf-JNa"/>
                                             <outlet property="confirmationLabel" destination="a3J-4E-YSl" id="K4R-UD-LQe"/>
                                             <outlet property="dateLabel" destination="TJ3-SX-hen" id="hrO-GV-he8"/>
+                                            <outlet property="imagePhoto" destination="eY0-zc-Tda" id="cjk-H4-3VD"/>
+                                            <outlet property="viewPhoto" destination="tH2-55-aGZ" id="hSO-8x-vRh"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2648,6 +2661,17 @@
                                                 <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <size key="shadowOffset" width="0.0" height="1"/>
                                             </label>
+                                            <view contentMode="scaleToFill" id="vVP-r3-rch" userLabel="View - Image">
+                                                <rect key="frame" x="9" y="26" width="45" height="45"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" id="bWb-oS-cFc">
+                                                        <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -2676,6 +2700,7 @@
                         <outlet property="imageFiatEmboss" destination="8rP-Iw-mIC" id="4NY-3J-Vwq"/>
                         <outlet property="imageNameEmboss" destination="EEe-WW-4Vt" id="gbz-wQ-uqk"/>
                         <outlet property="imageNotesEmboss" destination="RWm-5y-zN2" id="I5s-Ws-tTq"/>
+                        <outlet property="imagePhoto" destination="bWb-oS-cFc" id="SpQ-Qr-ONQ"/>
                         <outlet property="keypadView" destination="XNd-9N-hLm" id="n96-xl-rlz"/>
                         <outlet property="labelBTC" destination="0WP-4K-TNl" id="RE5-d7-dey"/>
                         <outlet property="labelCategory" destination="ClG-um-kmI" id="aS1-Qa-7yc"/>
@@ -2686,6 +2711,7 @@
                         <outlet property="notesTextView" destination="Dh6-PA-WGi" id="HW2-e2-2iR"/>
                         <outlet property="pickerTextCategory" destination="bOm-nJ-2Ot" id="zBf-0j-yyq"/>
                         <outlet property="scrollableContentView" destination="8ur-EV-QC9" id="brw-Ba-G3c"/>
+                        <outlet property="viewPhoto" destination="vVP-r3-rch" id="mwp-BO-WyI"/>
                         <outlet property="walletLabel" destination="ZW8-Za-VVy" id="bUD-dm-roi"/>
                     </connections>
                 </viewController>

@@ -169,7 +169,7 @@ static NSTimer *_dataSyncTimer;
     }
 }
 
-+ (void)reloadWallet: (Wallet *) wallet;
++ (void)reloadWallet:(Wallet *) wallet;
 {
     tABC_Error Error;
     tABC_WalletInfo *pWalletInfo = NULL;
@@ -184,7 +184,7 @@ static NSTimer *_dataSyncTimer;
         wallet.archived = pWalletInfo->archived;
         wallet.balance = pWalletInfo->balanceSatoshi;
         wallet.currencyNum = pWalletInfo->currencyNum;
-        [self loadTransactions: wallet];
+        [self loadTransactions:wallet];
     }
     else
     {
@@ -333,6 +333,7 @@ static NSTimer *_dataSyncTimer;
         [outputs addObject:output];
     }
     transaction.outputs = outputs;
+    transaction.bizId = pTrans->pDetails->bizId;
 }
 
 + (unsigned int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId isSyncing:(bool *)syncing
@@ -453,6 +454,7 @@ static NSTimer *_dataSyncTimer;
     pDetails->szCategory = (char *) [transaction.strCategory UTF8String];
     pDetails->szNotes = (char *) [transaction.strNotes UTF8String];
     pDetails->amountCurrency = transaction.amountFiat;
+    pDetails->bizId = transaction.bizId;
 
     result = ABC_SetTransactionDetails([[User Singleton].name UTF8String],
                                        [[User Singleton].password UTF8String],

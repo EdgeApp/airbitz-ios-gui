@@ -25,6 +25,7 @@ typedef enum eTDMode
 @property (nonatomic, strong) Wallet                                        *wallet;
 @property (nonatomic, assign) tTDMode                                       transactionDetailsMode;
 @property (nonatomic, assign) BOOL                                          bOldTransaction;
+@property (nonatomic, strong) UIImage                                       *photo;
 
 @end
 

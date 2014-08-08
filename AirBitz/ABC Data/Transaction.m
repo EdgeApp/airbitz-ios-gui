@@ -31,6 +31,7 @@
         self.strCategory = @"";
         self.strNotes = @"";
         self.outputs = [[NSArray alloc] init];
+        self.bizId = 0;
     }
     return self;
 }
