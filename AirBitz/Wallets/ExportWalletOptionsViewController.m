@@ -398,19 +398,20 @@ typedef enum eExportOption
         case WalletExportType_CSV:
         {
             NSString* str = @"[CSV Data Here]";
-            
-            tABC_TxInfo **pTransactions;
-            int iTxnCount;
-            char *szCsvData;
-            tABC_Error Error;
-            
-            tABC_CC cc = ABC_CC_Ok;
-            cc = ABC_FilterExportData([self.wallet.strUUID UTF8String], 1375361223, 1407502061, &pTransactions, &iTxnCount, &Error);
-            cc = ABC_ExportFormatCsv(pTransactions, iTxnCount, &szCsvData, &Error);
-            
-            str = [NSString stringWithCString:szCsvData encoding:NSASCIIStringEncoding];
+/*
+            // tABC_TxInfo **pTransactions;
+            // int iTxnCount;
+            // char *szCsvData;
+            // tABC_Error Error;
+            // 
+            // tABC_CC cc = ABC_CC_Ok;
+            // cc = ABC_FilterExportData([self.wallet.strUUID UTF8String], 1375361223, 1407502061, &pTransactions, &iTxnCount, &Error);
+            // cc = ABC_ExportFormatCsv(pTransactions, iTxnCount, &szCsvData, &Error);
+            // 
+            // str = [NSString stringWithCString:szCsvData encoding:NSASCIIStringEncoding];
             
             dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+ */
         }
             break;
 
