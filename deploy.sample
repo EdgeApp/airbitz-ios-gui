@@ -1,0 +1,43 @@
+#!/bin/bash
+
+##
+## Usage
+##
+## Copy this file to "deploy"
+## Complete the API_TOKEN, TEAM_TOKEN, and SIGNING_IDENTITY values below
+##
+## Create and edit relnotes.txt and put in release notes into that file.
+##
+## Run using the command below. "clean" is an optional arguement to clean the entire
+## walletcore deps build (est 60-90 minutes to rebuild after clean. Without clean, script will
+## always clean the ABC build with 'make abc.clean'
+##
+## ./deploy [VERSION] [clean]
+## ie "./deploy 1.1.2 2014080501" or "./deploy 1.1.2 2014080501"
+##
+
+function run {
+    "$@"
+    local status=$?
+    if [ $status -ne 0 ]; then
+        echo "error with $1" >&2
+        exit 1
+    fi
+    return $status
+}
+if [ "$1" == "" ]; then
+	exit 1
+fi
+
+PRODUCT_NAME=Airbitz
+
+# https://testflightapp.com/account/
+API_TOKEN=
+
+# https://testflightapp.com/dashboard/team/edit/
+TEAM_TOKEN=
+
+# ie. "iPhone Developer: Joe Montana (GT76D6B8NA)"
+SIGNING_IDENTITY=""
+
+run ./deploy-build "$1" "${API_TOKEN}" "${TEAM_TOKEN}" "${SIGNING_IDENTITY}" "$2"

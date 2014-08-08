@@ -173,6 +173,7 @@
                     result = ABC_CC_Ok;
                     // We post this to the Data Sync queue, so password is updated in between sync's
                     [CoreBridge postToSyncQueue:^(void) {
+                        tABC_Error Error;
                         [CoreBridge stopWatchers];
                         [CoreBridge stopQueues];
 
@@ -188,7 +189,7 @@
                         free(szOldPIN);
 
                         _bSuccess = result == ABC_CC_Ok;
-                        _strReason = [NSString stringWithFormat:@"%s", [Util errorMap:&Error]];
+                        _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&Error]];
 
                         [CoreBridge startWatchers];
                         [CoreBridge startQueues];
@@ -236,7 +237,7 @@
                     [Util printABC_Error:&Error];
                     UIAlertView *alert = [[UIAlertView alloc]
                                           initWithTitle:self.labelTitle.text
-                                          message:[NSString stringWithFormat:@"%@ failed:\n%s",
+                                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                                    self.labelTitle.text,
                                                    [Util errorMap:&Error]]
                                           delegate:nil

@@ -701,7 +701,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 
 - (void)loggedOffRedirect:(NSNotification *)notification
 {
-    _appMode = APP_MODE_DIRECTORY;
+	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
     [self resetViews:notification];
 }
 

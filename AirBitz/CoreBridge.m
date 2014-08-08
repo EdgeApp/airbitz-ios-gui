@@ -74,6 +74,8 @@ static NSTimer *_dataSyncTimer;
             selector:@selector(requestExchangeRateUpdate:)
             userInfo:nil
             repeats:YES];
+        // Request one right now
+        [self requestExchangeRateUpdate:nil];
 
         // Initialize data sync queue
         _dataSyncTimer = [NSTimer scheduledTimerWithTimeInterval:FILE_SYNC_FREQUENCY_SECONDS

@@ -37,6 +37,8 @@
             return NSLocalizedString(@"Insufficient funds", nil);
         case ABC_CC_Synchronizing:
             return NSLocalizedString(@"Synchronizing with the network.", nil);
+        case ABC_CC_NonNumericPin:
+            return NSLocalizedString(@"Pin must be a numeric value.", nil);
         case ABC_CC_Error:
         case ABC_CC_NULLPtr:
         case ABC_CC_NoAvailAccountSpace:
