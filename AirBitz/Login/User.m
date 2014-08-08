@@ -9,7 +9,8 @@
 #import "User.h"
 #import "ABC.h"
 #import "Util.h"
-
+#import "CommonTypes.h"
+#import "CoreBridge.h"
 
 static BOOL bInitialized = NO;
 
@@ -42,6 +43,20 @@ static User *singleton = nil;  // this will be the one and only object this stat
     return singleton;
 }
 
++ (bool)isLoggedIn
+{
+    return [User Singleton].name.length && [User Singleton].password.length;
+}
+
++ (void)login:(NSString *)name password:(NSString *)pword
+{
+    [User Singleton].name = name;
+    [User Singleton].password = pword;
+    [[User Singleton] loadSettings];
+    [CoreBridge startQueues];
+    [CoreBridge startWatchers];
+}
+
 - (id)init
 {
     self = [super init];
@@ -50,8 +65,9 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [self clear];
     }
     self.denomination = 100000000;
+    self.denominationType = ABC_DENOMINATION_BTC;
     self.denominationLabel = @"BTC";
-    self.denominationLabelShort = @"B ";
+    self.denominationLabelShort = @"฿ ";
     return self;
 }
 
@@ -65,17 +81,38 @@ static User *singleton = nil;  // this will be the one and only object this stat
                                              &Error);
     if (ABC_CC_Ok == result)
     {
+        self.minutesAutoLogout = pSettings->minutesAutoLogout;
+        self.defaultCurrencyNum = pSettings->currencyNum;
         if (pSettings->bitcoinDenomination.satoshi > 0)
         {
             self.denomination = pSettings->bitcoinDenomination.satoshi;
-            self.denominationLabel = [NSString stringWithUTF8String: pSettings->bitcoinDenomination.szLabel];
-            if ([self.denominationLabel isEqualToString:@"mBTC"])
-                self.denominationLabelShort = @"mB ";
-            else if ([self.denominationLabel isEqualToString:@"uBTC"])
-                self.denominationLabelShort = @"uB ";
-            else
-                self.denominationLabelShort = @"B ";
+            self.denominationType = pSettings->bitcoinDenomination.denominationType;
+
+            switch (self.denominationType) {
+                case ABC_DENOMINATION_BTC:
+                    self.denominationLabel = @"BTC";
+                    self.denominationLabelShort = @"฿ ";
+                    break;
+                case ABC_DENOMINATION_MBTC:
+                    self.denominationLabel = @"mBTC";
+                    self.denominationLabelShort = @"m฿ ";
+                    break;
+                case ABC_DENOMINATION_UBTC:
+                    self.denominationLabel = @"μBTC";
+                    self.denominationLabelShort = @"μ฿ ";
+                    break;
+
+            }
         }
+        if (pSettings->szFirstName)
+            self.firstName = [NSString stringWithUTF8String:pSettings->szFirstName];
+        if (pSettings->szLastName)
+            self.lastName = [NSString stringWithUTF8String:pSettings->szLastName];
+        if (pSettings->szNickname)
+            self.nickName = [NSString stringWithUTF8String:pSettings->szNickname];
+        if (pSettings->szFullName)
+            self.fullName = [NSString stringWithUTF8String:pSettings->szFullName];
+        self.bNameOnPayments = pSettings->bNameOnPayments;
     }
     else
     {
@@ -86,16 +123,11 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 - (void)clear
 {
-    self.name = nil;
-    self.password = nil;
-
-    tABC_Error Error;
-    tABC_CC result = ABC_ClearKeyCache(&Error);
-    if (ABC_CC_Ok != result)
+    if (self.password != nil)
     {
-        [Util printABC_Error:&Error];
-#warning TODO: handle error
+        [CoreBridge logout];
     }
+    self.password = nil;
 }
 
 @end

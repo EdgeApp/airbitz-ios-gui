@@ -1,0 +1,72 @@
+#!/bin/bash
+
+function run {
+    "$@"
+    local status=$?
+    if [ $status -ne 0 ]; then
+        echo "error with $1" >&2
+        exit 1
+    fi
+    return $status
+}
+lettert="t"
+
+BUILDDATE=$( /bin/date +"%Y%m%d" )
+if [ -e "./$BUILDDATE" ]; then
+	idx=$(< ./$BUILDDATE)
+	((idx++))
+	printf -v build "%s%03d" $BUILDDATE $idx
+	printf -v stridx "%d" $idx
+else
+	printf -v build "%s%03d" $BUILDDATE 1
+	stridx="1"
+fi
+
+echo $build
+
+run cd ../airbitz-walletcore
+run git pull
+run cd deps
+run make abc.clean
+if [ "$5" = "clean" ]; then
+	run make clean
+fi
+run make abc
+
+run cd ../../airbitz-walletcore-testnet
+run git pull
+run cd deps
+run make abc.clean
+if [ "$5" = "clean" ]; then
+	run make clean
+fi
+run make abc
+
+run cd ../../airbitz-ios-gui/
+run git pull
+
+rm -rf Airbitz/ABC/*
+run cp -a ../airbitz-walletcore/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
+run cp -a ../airbitz-walletcore/deps/build/abc/abc-ios-universal/lib/* AirBitz/ABC/
+run agvtool new-marketing-version $1
+run agvtool new-version -all $build
+run xcodebuild -scheme Airbitz archive
+run ./deploy-tf "$1" "$build" "$2" "$3" "$4"
+
+rm -rf Airbitz/ABC/*
+run cp -a ../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
+run cp -a ../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/lib/* AirBitz/ABC/
+run agvtool new-marketing-version $1$lettert
+run agvtool new-version -all $build
+run xcodebuild -scheme Airbitz archive
+run ./deploy-tf "$1$lettert" "$build" "$2" "$3" "$4" "testnet"
+
+echo $stridx > $BUILDDATE
+#run /usr/bin/open "https://testflightapp.com/dashboard/builds/"
+
+##
+## Tag the commit ID with the build version
+##
+run git tag -a "${1}_${build}_ios" -m ""
+run git push --tags
+

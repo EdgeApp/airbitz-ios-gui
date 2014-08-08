@@ -16,6 +16,7 @@
 #import "ButtonCell.h"
 #import "ButtonOnlyCell.h"
 #import "SignUpViewController.h"
+#import "DebugViewController.h"
 #import "PasswordRecoveryViewController.h"
 #import "PopupPickerView.h"
 #import "PopupWheelPickerView.h"
@@ -34,7 +35,14 @@
 #define SECTION_OPTIONS                 3
 #define SECTION_DEFAULT_EXCHANGE        4
 #define SECTION_LOGOUT                  5
+#define SECTION_DEBUG                   6
+
+// If we are in debug include the DEBUG section in settings
+#if (DEBUG || 1) // Always enable debug section for now
+#define SECTION_COUNT                   7
+#else 
 #define SECTION_COUNT                   6
+#endif
 
 #define DENOMINATION_CHOICES            3
 
@@ -52,9 +60,8 @@
 #define ROW_NICKNAME                    3
 
 #define ROW_AUTO_LOG_OFF                0
-#define ROW_LANGUAGE                    1
-#define ROW_DEFAULT_CURRENCY            2
-#define ROW_CHANGE_CATEGORIES           3
+#define ROW_DEFAULT_CURRENCY            1
+#define ROW_CHANGE_CATEGORIES           2
 
 #define ROW_US_DOLLAR                   0
 #define ROW_CANADIAN_DOLLAR             1
@@ -62,15 +69,18 @@
 #define ROW_MEXICAN_PESO                3
 #define ROW_YUAN                        4
 
-#define ARRAY_LANG_CHOICES  @[@"English", @"Spanish", @"German", @"French", @"Italian", @"Chinese", @"Portuguese", @"Japanese"]
-#define ARRAY_LANG_CODES    @[@"en",      @"es",      @"de",     @"fr",     @"it",      @"zh",      @"pt",         @"ja"      ]
-
 #define ARRAY_CURRENCY_NUMS @[@840, @124, @978, @484, @156]
-#define ARRAY_EXCHANGES     @[@[@"Bitstamp", @"CoinMKT", @"Kraken", @"Coindesk", @"CampBX", @"Coinbase", @"BTC-e"], \
-                              @[@"Cavirtex", @"Vault of Satoshi"], \
-                              @[@"Bitcoin.de", @"Kraken", @"BTC-e"], \
-                              @[@"MEXBT", @"Bitso"], \
-                              @[@"Huobi", @"BTC China", @"OKcoin"] \
+// #define ARRAY_EXCHANGES     @[@[@"Bitstamp", @"CoinMKT", @"Kraken", @"Coindesk", @"CampBX", @"Coinbase", @"BTC-e"], \
+//                               @[@"Cavirtex", @"Vault of Satoshi"], \
+//                               @[@"Bitcoin.de", @"Kraken", @"BTC-e"], \
+//                               @[@"MEXBT", @"Bitso"], \
+//                               @[@"Huobi", @"BTC China", @"OKcoin"] \
+//                              ]
+#define ARRAY_EXCHANGES     @[@[@"Bitstamp", @"Coinbase"], \
+                              @[@"Coinbase"], \
+                              @[@"Coinbase"], \
+                              @[@"Coinbase"], \
+                              @[@"Coinbase"] \
                              ]
 
 #define ARRAY_LOGOUT        @[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9", \
@@ -99,18 +109,18 @@ typedef struct sDenomination
 
 tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
-        "BTC", 100000000
+        "BTC", 100000000 // ABC_DENOMINATION_BTC = 0
     },
     {
-        "mBTC", 100000
+        "mBTC", 100000 // ABC_DENOMINATION_MBTC = 1
     },
     {
-        "uBTC", 100
+        "µBTC", 100 // ABC_DENOMINATION_UBTC = 2
     }
 };
 
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate, DebugViewControllerDelegate>
 {
     tABC_Currency                   *_aCurrencies;
     int                             _currencyCount;
@@ -120,6 +130,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     SignUpViewController            *_signUpController;
     PasswordRecoveryViewController  *_passwordRecoveryController;
     CategoriesViewController        *_categoriesController;
+    DebugViewController             *_debugViewController;
     BOOL                            _bKeyboardIsShown;
     CGRect                          _frameStart;
     CGFloat                         _keyboardHeight;
@@ -160,7 +171,33 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 	self.tableView.delaysContentTouches = NO;
-	
+
+    self.popupPicker = nil;
+    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.buttonBlocker.backgroundColor = [UIColor clearColor];
+    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
+    self.buttonBlocker.frame = self.view.bounds;
+    self.buttonBlocker.hidden = YES;
+    [self.viewMain addSubview:self.buttonBlocker];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(refresh:)
+                                                 name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
+    [self refresh:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)refresh:(NSNotification *)notification
+{	
 	tABC_Error Error;
     Error.code = ABC_CC_Ok;
 
@@ -202,13 +239,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                                                object:nil];
     _bKeyboardIsShown = NO;
 
-    self.popupPicker = nil;
-    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.buttonBlocker.backgroundColor = [UIColor clearColor];
-    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
-    self.buttonBlocker.frame = self.view.bounds;
-    self.buttonBlocker.hidden = YES;
-    [self.viewMain addSubview:self.buttonBlocker];
+    [_tableView reloadData];
 }
 
 -(void)dealloc
@@ -240,7 +271,17 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         [[User Singleton] loadSettings];
     }
-    [Util printABC_Error:&Error];
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                            initWithTitle:NSLocalizedString(@"Unable to save Settings", nil)
+                            message:[NSString stringWithFormat:@"%@", [Util errorMap:&Error]]
+                            delegate:self
+                            cancelButtonTitle:@"Cancel"
+                            otherButtonTitles:@"OK", nil];
+        [alert show];
+        [Util printABC_Error:&Error];
+    }
 }
 
 // replaces the string in the given variable with a duplicate of another
@@ -273,14 +314,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
     if (_pAccountSettings)
     {
-        for (int i = 0; i < DENOMINATION_CHOICES; i++)
-        {
-            if (_pAccountSettings->bitcoinDenomination.satoshi == gaDenominations[i].satoshi)
-            {
-                retVal = i;
-                break;
-            }
-        }
+        retVal = (NSInteger) _pAccountSettings->bitcoinDenomination.denominationType;
     }
 
     return retVal;
@@ -293,8 +327,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         // set the new values
         _pAccountSettings->bitcoinDenomination.satoshi = gaDenominations[nChoice].satoshi;
-        [self replaceString:&(_pAccountSettings->bitcoinDenomination.szLabel) withString:gaDenominations[nChoice].szLabel];
-
+        _pAccountSettings->bitcoinDenomination.denominationType = (int) nChoice;
+        
         // update the settings in the core
         [self saveSettings];
     }
@@ -375,6 +409,28 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
          {
          }];
     }
+}
+
+- (void)bringUpDebugView
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    _debugViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DebugViewController"];
+    _debugViewController.delegate = self;
+
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _debugViewController.view.frame = frame;
+    [self.view addSubview:_debugViewController.view];
+
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+    {
+        _debugViewController.view.frame = self.view.bounds;
+    }
+                     completion:^(BOOL finished) {
+    }];
 }
 
 // returns how much the current first responder is obscured by the keyboard
@@ -751,7 +807,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	if (indexPath.row == ROW_UBITCOIN)
 	{
-		cell.name.text = NSLocalizedString(@"uBitcoin = (0.000001 Bitcoin)", @"settings text");
+		cell.name.text = NSLocalizedString(@"μBitcoin = (0.000001 Bitcoin)", @"settings text");
 	}
 	cell.radioButton.image = [UIImage imageNamed:(indexPath.row == [self denominationChoice] ? @"btn_selected" : @"btn_unselected")];
 
@@ -818,7 +874,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		{
 			cell.textField.placeholder = NSLocalizedString(@"First Name (optional)", @"settings text");
             cell.textField.returnKeyType = UIReturnKeyNext;
-            if (_pAccountSettings->szFirstName)
+            if (_pAccountSettings && _pAccountSettings->szFirstName)
             {
                 cell.textField.text = [NSString stringWithUTF8String:_pAccountSettings->szFirstName];
             }
@@ -827,16 +883,16 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		{
 			cell.textField.placeholder = NSLocalizedString(@"Last Name (optional)", @"settings text");
             cell.textField.returnKeyType = UIReturnKeyNext;
-            if (_pAccountSettings->szLastName)
+            if (_pAccountSettings && _pAccountSettings->szLastName)
             {
                 cell.textField.text = [NSString stringWithUTF8String:_pAccountSettings->szLastName];
             }
 		}
 		if (indexPath.row == 3)
 		{
-			cell.textField.placeholder = NSLocalizedString(@"Nickname / Handle", @"settings text");
+			cell.textField.placeholder = NSLocalizedString(@"Nickname / Handle (optional)", @"settings text");
             cell.textField.returnKeyType = UIReturnKeyDone;
-            if (_pAccountSettings->szNickname)
+            if (_pAccountSettings && _pAccountSettings->szNickname)
             {
                 cell.textField.text = [NSString stringWithUTF8String:_pAccountSettings->szNickname];
             }
@@ -871,8 +927,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		if (indexPath.row == 0)
 		{
-			cell.name.text = NSLocalizedString(@"Send name on payment", @"settings text");
-            [cell.state setOn:_pAccountSettings->bNameOnPayments animated:NO];
+			cell.name.text = NSLocalizedString(@"Send name on payment request", @"settings text");
+            if (_pAccountSettings)
+            {
+                [cell.state setOn:_pAccountSettings->bNameOnPayments animated:NO];
+            }
 		}
 	}
 	
@@ -900,27 +959,16 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			cell.name.text = NSLocalizedString(@"Auto log off after", @"settings text");
             [cell.button setTitle:[self logoutDisplay] forState:UIControlStateNormal];
 		}
-		else if (indexPath.row == ROW_LANGUAGE)
-		{
-            NSInteger curChoice = 0;
-			cell.name.text = NSLocalizedString(@"Language", @"settings text");
-            if (_pAccountSettings->szLanguage)
-            {
-                curChoice = [ARRAY_LANG_CODES indexOfObject:[NSString stringWithUTF8String:_pAccountSettings->szLanguage]];
-                if (curChoice == NSNotFound)
-                {
-                    curChoice = 0;
-                }
-            }
-            [cell.button setTitle:[ARRAY_LANG_CHOICES objectAtIndex:curChoice] forState:UIControlStateNormal];
-		}
 		else if (indexPath.row == ROW_DEFAULT_CURRENCY)
 		{
 			cell.name.text = NSLocalizedString(@"Default Currency", @"settings text");
-            NSInteger indexCurrency = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
-            if (indexCurrency != NSNotFound)
+            if (_pAccountSettings)
             {
-                [cell.button setTitle:[self.arrayCurrencyCodes objectAtIndex:indexCurrency] forState:UIControlStateNormal];
+                NSInteger indexCurrency = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
+                if (indexCurrency != NSNotFound)
+                {
+                    [cell.button setTitle:[self.arrayCurrencyCodes objectAtIndex:indexCurrency] forState:UIControlStateNormal];
+                }
             }
 		}
 	}
@@ -964,20 +1012,31 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (ButtonOnlyCell *)getButtonOnlyCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
 {
-	ButtonOnlyCell *cell;
-	static NSString *cellIdentifier = @"ButtonOnlyCell";
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (nil == cell)
-	{
-		cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	cell.delegate = self;
-	//[cell.button setTitle:NSLocalizedString(@"Change Categories", @"settings text") forState:UIControlStateNormal]; //cw temp replace this button with log out functionality
-	[cell.button setTitle:NSLocalizedString(@"Log Out", @"settings text") forState:UIControlStateNormal];
-	
+    ButtonOnlyCell *cell;
+    static NSString *cellIdentifier = @"ButtonOnlyCell";
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.delegate = self;
+    [cell.button setTitle:NSLocalizedString(@"Log Out", @"settings text") forState:UIControlStateNormal];
     cell.tag = (indexPath.section << 8) | (indexPath.row);
+    return cell;
+}
 
+- (ButtonOnlyCell *)getDebugButton:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
+{
+    ButtonOnlyCell *cell;
+    static NSString *cellIdentifier = @"ButtonOnlyCell";
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.delegate = self;
+    [cell.button setTitle:NSLocalizedString(@"Debug", @"debug text") forState:UIControlStateNormal];
+    cell.tag = (indexPath.section << 8) | (indexPath.row);
 	return cell;
 }
 
@@ -1005,7 +1064,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_OPTIONS:
-            return 4;
+            return 3;
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
@@ -1013,6 +1072,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_LOGOUT:
+            return 1;
+            break;
+
+        case SECTION_DEBUG:
             return 1;
             break;
             
@@ -1024,7 +1087,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if ((indexPath.section == SECTION_OPTIONS) || (indexPath.section == SECTION_LOGOUT))
+	if ((indexPath.section == SECTION_OPTIONS) 
+            || (indexPath.section == SECTION_LOGOUT)
+            || (indexPath.section == SECTION_DEBUG))
 	{
 		return 47.0;
 	}
@@ -1034,7 +1099,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	if (section == SECTION_LOGOUT)
+	if (section == SECTION_LOGOUT || section == SECTION_DEBUG)
 	{
 		return 0.0;
 	}
@@ -1057,7 +1122,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	if (section == SECTION_USERNAME)
 	{
-		label.text = NSLocalizedString(@"USERNAME", @"section header in settings table");
+		label.text = NSLocalizedString(@"ACCOUNT: ", @"section header in settings table");
+        label.text = [NSString stringWithFormat:@"%@ %s", label.text, [[User Singleton].name UTF8String]];
 	}
     if (section == SECTION_NAME)
 	{
@@ -1065,25 +1131,22 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	if (section == SECTION_OPTIONS)
 	{
-        //label.text = @" ";
 		label.text = NSLocalizedString(@"OPTIONS", @"section header in settings table");
 	}
 	if (section == SECTION_DEFAULT_EXCHANGE)
 	{
 		label.text = NSLocalizedString(@"DEFAULT EXCHANGE", @"section header in settings table");
 	}
-	
 	return cell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell;
-	//UIColor *backgroundColor;
-    if (indexPath.section == SECTION_LOGOUT)
-	{
-		// logout button
+    if (indexPath.section == SECTION_LOGOUT) {
 		cell = [self getButtonOnlyCellForTableView:tableView withIndexPath:indexPath];
+	} else if (indexPath.section == SECTION_DEBUG) {
+		cell = [self getDebugButton:tableView withIndexPath:indexPath];
 	}
 	else
 	{
@@ -1199,6 +1262,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         case SECTION_LOGOUT:
             break;
 
+        case SECTION_DEBUG:
+            break;
+
         default:
             break;
 	}
@@ -1206,7 +1272,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 #pragma mark - SignUpViewControllerDelegates
 
--(void)signupViewControllerDidFinish:(SignUpViewController *)controller
+-(void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
 {
 	[controller.view removeFromSuperview];
 	_signUpController = nil;
@@ -1237,7 +1303,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     // we only have one boolean cell and that's the name on payment option
     if (section == SECTION_NAME)
     {
-        _pAccountSettings->bNameOnPayments = theSwitch.on;
+        if (_pAccountSettings)
+        {
+            _pAccountSettings->bNameOnPayments = theSwitch.on;
+        }
 
         // update the settings in the core
         [self saveSettings];
@@ -1278,21 +1347,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                                                                userData:cell
                                                             andDelegate:self];
         }
-        else if (row == ROW_LANGUAGE)
-        {
-            curChoice = [ARRAY_LANG_CODES indexOfObject:[NSString stringWithUTF8String:_pAccountSettings->szLanguage]];
-            if (curChoice == NSNotFound)
-            {
-                curChoice = -1;
-            }
-            arrayPopupChoices = ARRAY_LANG_CHOICES;
-        }
         else if (row == ROW_DEFAULT_CURRENCY)
         {
-            curChoice = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
-            if (curChoice == NSNotFound)
+            if (_pAccountSettings)
             {
-                curChoice = -1;
+                curChoice = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
+                if (curChoice == NSNotFound)
+                {
+                    curChoice = -1;
+                }
             }
             arrayPopupChoices = self.arrayCurrencyCodes;
         }
@@ -1335,9 +1398,21 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)buttonOnlyCellButtonPressed:(ButtonOnlyCell *)cell
 {
-	//log out for now
-	[[User Singleton] clear];
-	[self.delegate SettingsViewControllerDone:self];
+    NSInteger section = (cell.tag >> 8);
+    if (section == SECTION_LOGOUT) {
+        [self blockUser:YES];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [cell.button setTitle:@"Please Wait..." forState:UIControlStateNormal];
+            [[User Singleton] clear];
+
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self blockUser:NO];
+                [self.delegate SettingsViewControllerDone:self];
+            });
+        });
+    } else if (section == SECTION_DEBUG) {
+        [self bringUpDebugView];
+    }
 }
 
 #pragma mark - Popup Picker Delegate Methods
@@ -1350,13 +1425,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
     if (SECTION_OPTIONS == sectionCell)
     {
-        if (rowCell == ROW_LANGUAGE)
+        if (rowCell == ROW_DEFAULT_CURRENCY)
         {
-            [self replaceString:&(_pAccountSettings->szLanguage) withString:[[ARRAY_LANG_CODES objectAtIndex:row] UTF8String]];
-        }
-        else if (rowCell == ROW_DEFAULT_CURRENCY)
-        {
-            _pAccountSettings->currencyNum = [[self.arrayCurrencyNums objectAtIndex:row] intValue];
+            if (_pAccountSettings)
+            {
+                _pAccountSettings->currencyNum = [[self.arrayCurrencyNums objectAtIndex:row] intValue];
+            }
         }
     }
     else if (SECTION_DEFAULT_EXCHANGE == sectionCell)
@@ -1388,7 +1462,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     int type   = [[arraySelections objectAtIndex:1] intValue];
 
     // set the amount of minutes
-    _pAccountSettings->minutesAutoLogout = amount * [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] intValue];
+    if (_pAccountSettings)
+    {
+        _pAccountSettings->minutesAutoLogout = amount * [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] intValue];
+    }
 
     // update the settings in the core
     [self saveSettings];
@@ -1402,6 +1479,13 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)PopupWheelPickerViewCancelled:(PopupWheelPickerView *)view userData:(id)data
 {
     [self dismissPopupPicker];
+}
+
+
+-(void) sendDebugViewControllerDidFinish:(DebugViewController *)controller
+{
+	[controller.view removeFromSuperview];
+	_debugViewController = nil;
 }
 
 @end

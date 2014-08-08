@@ -15,13 +15,12 @@
 #import "Config.h"
 #import "MontserratLabel.h"
 #import "LatoLabel.h"
-#import "User.h"
 #import "Util.h"
+#import "CoreBridge.h"
+#import "MinCharTextField.h"
 
 #define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
-
-#define MIN_PIN_LENGTH          4
 
 @interface SignUpViewController () <UITextFieldDelegate, PasswordVerifyViewDelegate, PasswordRecoveryViewControllerDelegate, UIAlertViewDelegate>
 {
@@ -38,7 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView                *imageReenterPassword;
 @property (weak, nonatomic) IBOutlet MontserratLabel            *labelPIN;
 @property (weak, nonatomic) IBOutlet UIImageView                *imagePIN;
-@property (nonatomic, weak) IBOutlet UITextField                *userNameTextField;
+@property (nonatomic, weak) IBOutlet MinCharTextField           *userNameTextField;
 @property (nonatomic, weak) IBOutlet UITextField                *passwordTextField;
 @property (nonatomic, weak) IBOutlet UITextField                *reenterPasswordTextField;
 @property (nonatomic, weak) IBOutlet MinCharTextField           *pinTextField;
@@ -51,6 +50,7 @@
 @property (nonatomic, copy)     NSString                        *strReason;
 @property (nonatomic, assign)   BOOL                            bSuccess;
 @property (nonatomic, strong)   UIButton                        *buttonBlocker;
+@property (nonatomic, strong)   NSMutableArray                  *arrayCategories;
 
 @end
 
@@ -74,7 +74,12 @@
 	self.passwordTextField.delegate = self;
 	self.reenterPasswordTextField.delegate = self;
 	self.pinTextField.delegate = self;
-	self.pinTextField.minimumCharacters = MIN_PIN_LENGTH;
+	self.pinTextField.minimumCharacters = ABC_MIN_PIN_LENGTH;
+    self.userNameTextField.minimumCharacters = ABC_MIN_USERNAME_LENGTH;
+    if (self.strUserName)
+    {
+        self.userNameTextField.text = self.strUserName;
+    }
 
     // set up our user blocking button
     self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -131,23 +136,20 @@
 	 }
 	completion:^(BOOL finished)
 	 {
-		 [self exit];
+		 [self exitWithBackButton:YES];
 	 }];
 }
 
 - (IBAction)NextStep:(id)sender
 {
-#if SKIP_PW_VALIDATION_CHECKS
-	[self showPasswordRecoveryController];
-#else
     // if they entered a valid username or old password
     if ([self userNameFieldIsValid] == YES)
     {
         // check the new password fields
         if ([self newPasswordFieldsAreValid] == YES)
         {
-            // check the pin field
-            if ([self pinFieldIsValid] == YES)
+            // check the username and pin field
+            if ([self fieldsAreValid] == YES)
             {
                 tABC_Error Error;
                 tABC_CC result = ABC_CC_Ok;
@@ -166,19 +168,44 @@
                 else if (_mode == SignUpMode_ChangePassword)
                 {
                     // get their old pen
-                    char *szOldPIN = NULL;
-                    ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szOldPIN, nil);
-
                     [self blockUser:YES];
-                    result = ABC_ChangePassword([[User Singleton].name UTF8String],
-                                                [[User Singleton].password UTF8String],
-                                                [self.passwordTextField.text UTF8String],
-                                                szOldPIN,
-                                                ABC_SignUp_Request_Callback,
-                                                (__bridge void *)self,
-                                                &Error);
 
-                    free(szOldPIN);
+                    result = ABC_CC_Ok;
+                    // We post this to the Data Sync queue, so password is updated in between sync's
+                    [CoreBridge postToSyncQueue:^(void) {
+                        tABC_Error Error;
+                        [CoreBridge stopWatchers];
+                        [CoreBridge stopQueues];
+
+                        char *szOldPIN = NULL;
+                        ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szOldPIN, nil);
+                        tABC_CC result = ABC_ChangePassword([[User Singleton].name UTF8String],
+                                                    [[User Singleton].password UTF8String],
+                                                    [self.passwordTextField.text UTF8String],
+                                                    szOldPIN,
+                                                    NULL,
+                                                    NULL,
+                                                    &Error);
+                        free(szOldPIN);
+
+                        _bSuccess = result == ABC_CC_Ok;
+                        _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&Error]];
+
+                        [CoreBridge startWatchers];
+                        [CoreBridge startQueues];
+                        [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
+                    }];
+                }
+                else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
+                {
+                    [self blockUser:YES];
+                    result = ABC_ChangePasswordWithRecoveryAnswers([self.strUserName UTF8String],
+                                                                   [self.strAnswers UTF8String],
+                                                                   [self.passwordTextField.text UTF8String],
+                                                                   [self.pinTextField.text UTF8String],
+                                                                   ABC_SignUp_Request_Callback,
+                                                                   (__bridge void *)self,
+                                                                   &Error);
                 }
                 else
                 {
@@ -205,13 +232,14 @@
                 }
                 else
                 {
+                    [self blockUser:NO];
                     [self.activityView stopAnimating];
                     [Util printABC_Error:&Error];
                     UIAlertView *alert = [[UIAlertView alloc]
                                           initWithTitle:self.labelTitle.text
-                                          message:[NSString stringWithFormat:@"%@ failed:\n%s",
+                                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                                    self.labelTitle.text,
-                                                   Error.szDescription]
+                                                   [Util errorMap:&Error]]
                                           delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -220,7 +248,6 @@
             }
         }
     }
-#endif
 }
 
 - (IBAction)buttonBlockerTouched:(id)sender
@@ -288,6 +315,26 @@
 
         self.userNameTextField.secureTextEntry = YES;
     }
+    else if (mode == SignUpMode_ChangePasswordUsingAnswers)
+    {
+        self.labelTitle.text = NSLocalizedString(@"Change Password", @"screen title");
+        [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
+        self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
+        self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
+
+        self.labelPIN.hidden = NO;
+        self.pinTextField.hidden = NO;
+        self.imagePIN.hidden = NO;
+        self.imageReenterPassword.hidden = NO;
+        self.passwordTextField.hidden = NO;
+        self.reenterPasswordTextField.hidden = NO;
+        self.labelPasswordInfo.hidden = NO;
+        self.imagePassword.hidden = NO;
+
+        self.reenterPasswordTextField.returnKeyType = UIReturnKeyNext;
+
+        self.userNameTextField.secureTextEntry = YES;
+    }
     else if (mode == SignUpMode_ChangePIN)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
@@ -327,14 +374,14 @@
                                   initWithTitle:self.labelTitle.text
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                            self.labelTitle.text,
-                                           NSLocalizedString(@"You must entere a user name", @"")]
+                                           NSLocalizedString(@"You must enter a user name", @"")]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
             [alert show];
         }
     }
-    else // the user name field is used for the old password in this case
+    else if (_mode != SignUpMode_ChangePasswordUsingAnswers) // the user name field is used for the old password in this case
     {
         // if the password is wrong
         if ([[User Singleton].password isEqualToString:self.userNameTextField.text] == NO)
@@ -364,7 +411,7 @@
 	BOOL bNewPasswordFieldsAreValid = YES;
 
     // if we are signing up for a new account or changing our password
-    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePassword))
+    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePassword) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
         double secondsToCrack;
         tABC_Error Error;
@@ -425,22 +472,35 @@
 // returns YES if field is good
 // if the field is bad, an appropriate message box is displayed
 // note: this function is aware of the 'mode' of the view controller and will check and display appropriately
-- (BOOL)pinFieldIsValid
+- (BOOL)fieldsAreValid
 {
-    BOOL bpinNameFieldIsValid = YES;
+    BOOL valid = YES;
 
     // if we are signing up for a new account
-    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePIN))
+    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        // if the pin isn't long enough
-        if (self.pinTextField.text.length < MIN_PIN_LENGTH)
+        if (self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
         {
-            bpinNameFieldIsValid = NO;
+            valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:self.labelTitle.text
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                            self.labelTitle.text,
-                                           NSLocalizedString(@"Withdrawl PIN must be 4 digits", @"")]
+                                           [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), ABC_MIN_USERNAME_LENGTH]]
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+        // if the pin isn't long enough
+        else if (self.pinTextField.text.length < ABC_MIN_PIN_LENGTH)
+        {
+            valid = NO;
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:self.labelTitle.text
+                                  message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                           self.labelTitle.text,
+                                           [NSString stringWithFormat:NSLocalizedString(@"Withdrawl PIN must be 4 digits", @""), ABC_MIN_PIN_LENGTH]]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
@@ -448,7 +508,7 @@
         }
     }
 
-    return bpinNameFieldIsValid;
+    return valid;
 }
 
 -(void)showPasswordRecoveryController
@@ -535,7 +595,12 @@
 
 - (void)exit
 {
-	[self.delegate signupViewControllerDidFinish:self];
+    [self exitWithBackButton:NO];
+}
+
+- (void)exitWithBackButton:(BOOL)bBack
+{
+	[self.delegate signupViewControllerDidFinish:self withBackButton:bBack];
 }
 
 #pragma mark - keyboard callbacks
@@ -692,42 +757,194 @@
 - (void)createAccountComplete
 {
     [self blockUser:NO];
-
-    //NSLog(@"Account create complete");
     if (_bSuccess)
     {
-		//NSLog(@"Account created");
-		//set username and password for app
-		[User Singleton].name = self.userNameTextField.text;
-		[User Singleton].password = self.passwordTextField.text;
+        [self blockUser:YES];
+        [User login:self.userNameTextField.text
+           password:self.passwordTextField.text];
+
+        //
+        // Add default categories to core
+        //
+        tABC_Error Error;
+
+        self.arrayCategories = [[NSMutableArray alloc] init];
+        
+        //
+        // Should these go in a header file of some sort? -pvp
+        //
+        
+        //
+        // Expense categories
+        //
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Air Travel", @"default category Expense:Air Travel")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Alcohol & Bars", @"default category Expense:Alcohol & Bars")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Allowance", @"default category Expense:Allowance")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Amusement", @"default category Expense:Amusement")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Arts", @"default category Expense:Arts")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:ATM Fee", @"default category Expense:ATM Fee")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Auto & Transport", @"default category Expense:Auto & Transport")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Auto Insurance", @"default category Expense:Auto Insurance")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Auto Payment", @"default category Expense:Auto Payment")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Baby Supplies", @"default category Expense:Baby Supplies")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Babysitter & Daycare", @"default category Expense:Babysitter & Daycare")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Bank Fee", @"default category Expense:Bank Fee")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Bills & Utilities", @"default category Expense:Bills & Utilities")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Books", @"default category Expense:Books")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Books & Supplies", @"default category Expense:Books & Supplies")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Car Wash", @"default category Expense:Car Wash")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Cash & ATM", @"default category Expense:Cash & ATM")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Charity", @"default category Expense:Charity")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Clothing", @"default category Expense:Clothing")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Coffee Shops", @"default category Expense:Coffee Shops")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Credit Card Payment", @"default category Expense:Credit Card Payment")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Dentist", @"default category Expense:Dentist")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Deposit to Savings", @"default category Expense:Deposit to Savings")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Doctor", @"default category Expense:Doctor")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Education", @"default category Expense:Education")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Electronics & Software", @"default category Expense:Electronics & Software")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Entertainment", @"default category Expense:Entertainment")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Eyecare", @"default category Expense:Eyecare")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Fast Food", @"default category Expense:Fast Food")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Fees & Charges", @"default category Expense:Fees & Charges")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Financial", @"default category Expense:Financial")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Financial Advisor", @"default category Expense:Financial Advisor")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Food & Dining", @"default category Expense:Food & Dining")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Furnishings", @"default category Expense:Furnishings")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Gas & Fuel", @"default category Expense:Gas & Fuel")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Gift", @"default category Expense:Gift")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Gifts & Donations", @"default category Expense:Gifts & Donations")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Groceries", @"default category Expense:Groceries")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Gym", @"default category Expense:Gym")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Hair", @"default category Expense:Hair")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Health & Fitness", @"default category Expense:Health & Fitness")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:HOA Dues", @"default category Expense:HOA Dues")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Hobbies", @"default category Expense:Hobbies")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home", @"default category Expense:Home")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home Improvement", @"default category Expense:Home Improvement")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home Insurance", @"default category Expense:Home Insurance")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home Phone", @"default category Expense:Home Phone")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home Services", @"default category Expense:Home Services")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home Supplies", @"default category Expense:Home Supplies")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Hotel", @"default category Expense:Hotel")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Interest Exp", @"default category Expense:Interest Exp")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Internet", @"default category Expense:Internet")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:IRA Contribution", @"default category Expense:IRA Contribution")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Kids", @"default category Expense:Kids")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Kids Activities", @"default category Expense:Kids Activities")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Late Fee", @"default category Expense:Late Fee")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Laundry", @"default category Expense:Laundry")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Lawn & Garden", @"default category Expense:Lawn & Garden")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Life Insurance", @"default category Expense:Life Insurance")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Misc.", @"default category Expense:Misc.")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Mobile Phone", @"default category Expense:Mobile Phone")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Mortgage & Rent", @"default category Expense:Mortgage & Rent")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Mortgage Interest", @"default category Expense:Mortgage Interest")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Movies & DVDs", @"default category Expense:Movies & DVDs")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Music", @"default category Expense:Music")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Newspaper & Magazines", @"default category Expense:Newspaper & Magazines")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Not Sure", @"default category Expense:Not Sure")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Parking", @"default category Expense:Parking")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Personal Care", @"default category Expense:Personal Care")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Pet Food & Supplies", @"default category Expense:Pet Food & Supplies")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Pet Grooming", @"default category Expense:Pet Grooming")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Pets", @"default category Expense:Pets")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Pharmacy", @"default category Expense:Pharmacy")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Property", @"default category Expense:Property")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Public Transportation", @"default category Expense:Public Transportation")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Registration", @"default category Expense:Registration")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Rental Car & Taxi", @"default category Expense:Rental Car & Taxi")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Restaurants", @"default category Expense:Restaurants")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Service & Parts", @"default category Expense:Service & Parts")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Service Fee", @"default category Expense:Service Fee")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Shopping", @"default category Expense:Shopping")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Spa & Massage", @"default category Expense:Spa & Massage")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Sporting Goods", @"default category Expense:Sporting Goods")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Sports", @"default category Expense:Sports")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Student Loan", @"default category Expense:Student Loan")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Tax", @"default category Expense:Tax")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Television", @"default category Expense:Television")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Tolls", @"default category Expense:Tolls")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Toys", @"default category Expense:Toys")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Trade Commissions", @"default category Expense:Trade Commissions")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Travel", @"default category Expense:Travel")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Tuition", @"default category Expense:Tuition")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Utilities", @"default category Expense:Utilities")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Vacation", @"default category Expense:Vacation")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Vet", @"default category Expense:Vet")];
+        
+        //
+        // Income categories
+        //
+        [self.arrayCategories addObject:NSLocalizedString(@"Income:Consulting Income", @"default category Income:Consulting Income")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Income:Div Income", @"default category Income:Div Income")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Income:Net Salary", @"default category Income:Net Salary")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Income:Other Income", @"default category Income:Other Income")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Income:Rent", @"default category Income:Rent")];
+        [self.arrayCategories addObject:NSLocalizedString(@"Income:Sales", @"default category Income:Sales")];
+        
+        //
+        // Exchange Categories
+        //
+        [self.arrayCategories addObject: NSLocalizedString(@"Exchange:Buy Bitcoin", @"default category Exchange:Buy Bitcoin")]; 
+        [self.arrayCategories addObject: NSLocalizedString(@"Exchange:Sell Bitcoin", @"default category Exchange:Sell Bitcoin")]; 
+
+        //
+        // Transfer Categories
+        //
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bitcoin.de", @"default category Transfer:Bitcoin.de")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bitfinex", @"default category Transfer:Bitfinex")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bitstamp", @"default category Transfer:Bitstamp")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:BTC-e", @"default category Transfer:BTC-e")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:BTCChina", @"default category Transfer:BTCChina")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bter", @"default category Transfer:Bter")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:CAVirtex", @"default category Transfer:CAVirtex")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Coinbase", @"default category Transfer:Coinbase")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:CoinMKT", @"default category Transfer:CoinMKT")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Huobi", @"default category Transfer:Huobi")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Kraken", @"default category Transfer:Kraken")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:MintPal", @"default category Transfer:MintPal")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:OKCoin", @"default category Transfer:OKCoin")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Vault of Satoshi", @"default category Transfer:Vault of Satoshi")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Airbitz", @"default category Transfer:Wallet:Airbitz")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Armory", @"default category Transfer:Wallet:Armory")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Bitcoin Core", @"default category Transfer:Wallet:Bitcoin Core")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Blockchain", @"default category Transfer:Wallet:Blockchain")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Electrum", @"default category Transfer:Wallet:Electrum")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Multibit", @"default category Transfer:Wallet:Multibit")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Mycelium", @"default category Transfer:Wallet:Mycelium")];
+        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Dark Wallet", @"default category Transfer:Wallet:Dark Wallet")]; 
+        
+        // add default categories to core
+        for (int i = 0; i < [self.arrayCategories count]; i++)
+        {
+            NSString *strCategory = [self.arrayCategories objectAtIndex:i];
+            ABC_AddCategory([[User Singleton].name UTF8String],
+                            [[User Singleton].password UTF8String],
+                            (char *)[strCategory UTF8String], &Error);
+            [Util printABC_Error:&Error];
+        }
 
         // now that the account is created, create the first wallet
 		[self createFirstWallet];
     }
     else
     {
-        //NSLog(@"%@", [NSString stringWithFormat:@"Account creation failed\n%@", strReason]);
 		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signup error alert")
-							  message:[NSString stringWithFormat:@"Sign-up failed:\n%@", _strReason]
+							  initWithTitle:NSLocalizedString(@"Account Sign In", @"Title of account signin error alert")
+							  message:[NSString stringWithFormat:@"Sign-in failed:\n%@", _strReason]
 							  delegate:nil
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
 		[alert show];
-
     }
 }
 
 - (void)createWalletComplete
 {
     [self blockUser:NO];
-
-    //NSLog(@"Wallet create complete");
     if (_bSuccess)
     {
-        //self.labelStatus.text = [NSString stringWithFormat:@"Wallet created: %@", self.strWalletUUID];
-		//NSLog(@"Successfully created wallet");
-
         [self showPasswordRecoveryController];
     }
     else
@@ -750,7 +967,13 @@
     if (_bSuccess)
     {
         // set up the user password to the new one
-        [[User Singleton] setPassword:self.passwordTextField.text];
+        NSString *username = [User Singleton].name;
+        if (self.strUserName)
+        {
+            username = self.strUserName;
+        }
+        [CoreBridge stopWatchers];
+        [User login:username password:self.passwordTextField.text];
 
         alert = [[UIAlertView alloc]
                  initWithTitle:self.labelTitle.text
@@ -774,20 +997,18 @@
 
 void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
 {
-    //NSLog(@"Request callback");
-
     if (pResults)
     {
         SignUpViewController *controller = (__bridge id)pResults->pData;
         controller.bSuccess = (BOOL)pResults->bSuccess;
-        controller.strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
+        controller.strReason = [Util errorMap:&(pResults->errorInfo)];
         if (pResults->requestType == ABC_RequestType_CreateAccount)
         {
-           // NSLog(@"Create account completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
             [controller performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
         }
 		else if (pResults->requestType == ABC_RequestType_CreateWallet)
 		{
+            [CoreBridge startWatchers];
 			if (pResults->pRetData)
             {
                 //controller.strWalletUUID = [NSString stringWithFormat:@"%s", (char *)pResults->pRetData];
@@ -797,7 +1018,6 @@ void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
             {
                 //controller.strWalletUUID = @"(Unknown UUID)";
             }
-            //NSLog(@"Create wallet completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
             [controller performSelectorOnMainThread:@selector(createWalletComplete) withObject:nil waitUntilDone:FALSE];
 		}
         else if (pResults->requestType == ABC_RequestType_ChangePassword)

@@ -12,6 +12,8 @@
 #import "User.h"
 #import "MontserratLabel.h"
 #import "Util.h"
+#import "CoreBridge.h"
+#import "SignUpViewController.h"
 
 #define IS_IPHONE5                  (([[UIScreen mainScreen] bounds].size.height == 568) ? YES : NO)
 
@@ -27,12 +29,13 @@ typedef enum eAlertType
 	ALERT_TYPE_SKIP_THIS_STEP
 } tAlertType;
 
-@interface PasswordRecoveryViewController () <UIScrollViewDelegate, QuestionAnswerViewDelegate, UIAlertViewDelegate>
+@interface PasswordRecoveryViewController () <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate, UIAlertViewDelegate>
 {
-	float           _completeButtonToEmbossImageDistance;
-	UITextField     *_activeTextField;
-	CGSize          _defaultContentSize;
-	tAlertType      _alertType;
+	float                   _completeButtonToEmbossImageDistance;
+	UITextField             *_activeTextField;
+	CGSize                  _defaultContentSize;
+	tAlertType              _alertType;
+    SignUpViewController    *_signUpController;
 }
 
 @property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
@@ -43,11 +46,12 @@ typedef enum eAlertType
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonBack;
 @property (weak, nonatomic) IBOutlet MontserratLabel            *labelTitle;
 @property (weak, nonatomic) IBOutlet UIImageView                *imageSkip;
+@property (nonatomic, weak) IBOutlet UIView                     *spinnerView;
 
 @property (nonatomic, strong) UIButton        *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray  *arrayCategoryString;
 @property (nonatomic, strong) NSMutableArray  *arrayCategoryNumeric;
-@property (nonatomic, strong) NSMutableArray  *arrayCategoryAddress;
+//@property (nonatomic, strong) NSMutableArray  *arrayCategoryAddress;
 @property (nonatomic, strong) NSMutableArray  *arrayChosenQuestions;
 @property (nonatomic, copy)   NSString        *strReason;
 @property (nonatomic, assign) BOOL            bSuccess;
@@ -73,7 +77,7 @@ typedef enum eAlertType
 
 	self.arrayCategoryString	= [[NSMutableArray alloc] init];
 	self.arrayCategoryNumeric	= [[NSMutableArray alloc] init];
-	self.arrayCategoryAddress	= [[NSMutableArray alloc] init];
+//	self.arrayCategoryAddress	= [[NSMutableArray alloc] init];
 	self.arrayChosenQuestions	= [[NSMutableArray alloc] init];
 
 	//NSLog(@"Adding keyboard notification");
@@ -89,21 +93,37 @@ typedef enum eAlertType
     [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
     self.buttonBlocker.frame = self.view.bounds;
     self.buttonBlocker.hidden = YES;
+    self.spinnerView.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
 
-    // get the questions
-    [self blockUser:YES];
-    tABC_Error Error;
-    tABC_CC result = ABC_GetQuestionChoices([[User Singleton].name UTF8String],
-                           PW_ABC_Request_Callback,
-                           (__bridge void *)self,
-                           &Error);
-    [Util printABC_Error:&Error];
-
-    if (ABC_CC_Ok != result)
+    if ((self.mode == PassRecovMode_SignUp) || (self.mode == PassRecovMode_Change))
     {
-        [self blockUser:NO];
-        NSLog(@"%@",  [NSString stringWithFormat:@"GetQuestionChoices failed:\n%s", Error.szDescription]);
+        // get the questions
+        [self blockUser:YES];
+        [self showSpinner:YES];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            tABC_Error Error;
+            tABC_QuestionChoices *pQuestionChoices = NULL;
+            tABC_CC result = ABC_GetQuestionChoices(&pQuestionChoices, &Error);
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [self blockUser:NO];
+                [self showSpinner:NO];
+                if (result == ABC_CC_Ok)
+                {
+                    _bSuccess = YES;
+                    [self categorizeQuestionChoices:pQuestionChoices];
+                    ABC_FreeQuestionChoices(pQuestionChoices);
+                } else {
+                    _bSuccess = NO;
+                }
+                [self performSelectorOnMainThread:@selector(getPasswordRecoveryQuestionsComplete) withObject:nil waitUntilDone:FALSE];
+            });
+        });
+    }
+    else
+    {
+        _bSuccess = YES;
+        [self getPasswordRecoveryQuestionsComplete];
     }
 }
 
@@ -165,13 +185,13 @@ typedef enum eAlertType
 		if ([view isKindOfClass:[QuestionAnswerView class]])
 		{
 			QuestionAnswerView *qaView = (QuestionAnswerView *)view;
-			if (qaView.questionSelected == NO)
+			if ((self.mode != PassRecovMode_Recover) && (qaView.questionSelected == NO))
 			{
 				allQuestionsSelected = NO;
 				break;
 			}
 			//verify that all six answers have achieved their minimum character limit
-			if (qaView.answerField.satisfiesMinimumCharacters == NO)
+			if ((self.mode != PassRecovMode_Recover) && (qaView.answerField.satisfiesMinimumCharacters == NO))
 			{
 				allAnswersValid = NO;
 			}
@@ -186,14 +206,21 @@ typedef enum eAlertType
 				[questions appendString:[qaView question]];
 				[answers appendString:[qaView answer]];
 			}
+            count++;
 		}
-		count++;
 	}
 	if (allQuestionsSelected)
 	{
 		if (allAnswersValid)
 		{
-			[self commitQuestions:questions andAnswersToABC:answers];
+            if (self.mode == PassRecovMode_Recover)
+            {
+                [self recoverWithAnswers:answers];
+            }
+            else
+            {
+                [self commitQuestions:questions andAnswersToABC:answers];
+            }
 		}
 		else
 		{
@@ -224,6 +251,11 @@ typedef enum eAlertType
 
 #pragma mark - Misc Methods
 
+- (void)showSpinner:(BOOL)bShow
+{
+    self.spinnerView.hidden = !bShow;
+}
+
 - (void)updateDisplayForMode:(tPassRecovMode)mode
 {
     if (mode == PassRecovMode_SignUp)
@@ -232,6 +264,7 @@ typedef enum eAlertType
         self.imageSkip.hidden = NO;
         self.buttonBack.hidden = YES;
         [self.completeSignupButton setTitle:NSLocalizedString(@"Complete Signup", @"") forState:UIControlStateNormal];
+        [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
     }
     else if (mode == PassRecovMode_Change)
     {
@@ -239,12 +272,56 @@ typedef enum eAlertType
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
         [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
+        [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
+    }
+    else if (mode == PassRecovMode_Recover)
+    {
+        self.buttonSkip.hidden = YES;
+        self.imageSkip.hidden = YES;
+        self.buttonBack.hidden = NO;
+        [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
+        [self.labelTitle setText:NSLocalizedString(@"Password Recovery", @"")];
+    }
+}
+
+- (void)recoverWithAnswers:(NSString *)strAnswers
+{
+    _bSuccess = NO;
+    [self showSpinner:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        BOOL bSuccess = [CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName];
+        NSArray *params = [NSArray arrayWithObjects:strAnswers, nil];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            _bSuccess = bSuccess;
+            [self performSelectorOnMainThread:@selector(checkRecoveryAnswersResponse:) withObject:params waitUntilDone:NO];
+        });
+    });
+}
+
+- (void)checkRecoveryAnswersResponse:(NSArray *)params
+{
+    [self showSpinner:NO];
+    if (_bSuccess)
+    {
+        NSString *strAnswers = params[0];
+        [self bringUpSignUpViewWithAnswers:strAnswers];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
+							  message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
+							  delegate:nil
+							  cancelButtonTitle:@"OK"
+							  otherButtonTitles:nil];
+		[alert show];
     }
 }
 
 - (void)commitQuestions:(NSString *)strQuestions andAnswersToABC:(NSString *)strAnswers
 {
     [self blockUser:YES];
+    [self showSpinner:YES];
 	tABC_Error Error;
 	tABC_CC result;
     result = ABC_SetAccountRecoveryQuestions([[User Singleton].name UTF8String],
@@ -259,16 +336,15 @@ typedef enum eAlertType
 	if (ABC_CC_Ok != result)
 	{
         [self blockUser:NO];
+        [self showSpinner:NO];
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:self.labelTitle.text
-							  message:[NSString stringWithFormat:@"%@ failed:\n%s", self.labelTitle.text, Error.szDescription]
+                                    message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, [Util errorMap:&Error]]
 							  delegate:nil
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
 		[alert show];
-		//NSLog(@"%@", [NSString stringWithFormat:@"Sign-up failed:\n%s", Error.szDescription]);
 	}
-	
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions
@@ -333,6 +409,33 @@ typedef enum eAlertType
     }
 
     return retVal;
+}
+
+- (void)bringUpSignUpViewWithAnswers:(NSString *)strAnswers
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    _signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
+
+    _signUpController.mode = SignUpMode_ChangePasswordUsingAnswers;
+    _signUpController.strUserName = self.strUserName;
+    _signUpController.strAnswers = strAnswers;
+    _signUpController.delegate = self;
+
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _signUpController.view.frame = frame;
+    [self.view addSubview:_signUpController.view];
+
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         _signUpController.view.frame = self.view.bounds;
+     }
+                     completion:^(BOOL finished)
+     {
+     }];
 }
 
 - (void)exit
@@ -411,6 +514,7 @@ typedef enum eAlertType
 - (void)getPasswordRecoveryQuestionsComplete
 {
     [self blockUser:NO];
+    [self showSpinner:NO];
 
     //NSLog(@"Get Questions complete");
     if (_bSuccess)
@@ -424,6 +528,15 @@ typedef enum eAlertType
 		for(int i = 0; i < NUM_QUESTION_ANSWER_BLOCKS; i++)
 		{
 			QuestionAnswerView *qav = [QuestionAnswerView CreateInsideView:self.scrollView withDelegate:self];
+
+            if (self.mode == PassRecovMode_Recover)
+            {
+                [qav disableSelecting];
+                if ([self.arrayQuestions count] > i)
+                {
+                    qav.labelQuestion.text = [self.arrayQuestions objectAtIndex:i];
+                }
+            }
 			
 			CGRect frame = qav.frame;
 			frame.origin.x = (self.scrollView.frame.size.width - frame.size.width ) / 2;
@@ -512,10 +625,10 @@ typedef enum eAlertType
 				{
 					[self.arrayCategoryNumeric addObject:dict];
 				}
-				else if([category isEqualToString:@"address"])
-				{
-					[self.arrayCategoryAddress addObject:dict];
-				}
+//				else if([category isEqualToString:@"address"])
+//				{
+//					[self.arrayCategoryAddress addObject:dict];
+//				}
             }
         }
     }
@@ -523,8 +636,8 @@ typedef enum eAlertType
 
 - (void)setRecoveryComplete
 {
-   // NSLog(@"Recovery set complete");
 	[self blockUser:NO];
+    [self showSpinner:NO];
     if (_bSuccess)
     {
 		_alertType = ALERT_TYPE_SETUP_COMPLETE;
@@ -550,27 +663,13 @@ typedef enum eAlertType
 
 void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
 {
-   // NSLog(@"Request callback");
-    
     if (pResults)
     {
         PasswordRecoveryViewController *controller = (__bridge id)pResults->pData;
         controller.bSuccess = (BOOL)pResults->bSuccess;
-        controller.strReason = [NSString stringWithFormat:@"%s", pResults->errorInfo.szDescription];
-        if (pResults->requestType == ABC_RequestType_GetQuestionChoices)
-        {
-			//NSLog(@"GetQuestionChoices completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
-            if (pResults->bSuccess)
-            {
-                tABC_QuestionChoices *pQuestionChoices = (tABC_QuestionChoices *)pResults->pRetData;
-                [controller categorizeQuestionChoices:pQuestionChoices];
-                ABC_FreeQuestionChoices(pQuestionChoices);
-            }
-            [controller performSelectorOnMainThread:@selector(getPasswordRecoveryQuestionsComplete) withObject:nil waitUntilDone:FALSE];
-        }
-		else if (pResults->requestType == ABC_RequestType_SetAccountRecoveryQuestions)
+        controller.strReason = [Util errorMap:&(pResults->errorInfo)];
+		if (pResults->requestType == ABC_RequestType_SetAccountRecoveryQuestions)
 		{
-			//NSLog(@"Set recovery completed with cc: %ld (%s)", (unsigned long) pResults->errorInfo.code, pResults->errorInfo.szDescription);
             [controller performSelectorOnMainThread:@selector(setRecoveryComplete) withObject:nil waitUntilDone:FALSE];
 		}
     }
@@ -597,18 +696,18 @@ void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
 	}
 	
 	//populate available questions
-	if (view.tag < 2)
+	if (view.tag < 4)
 	{
 		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryString];
 	}
-	else if (view.tag < 4)
+	else
 	{
 		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryNumeric];
 	}
-	else
-	{
-		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryAddress];
-	}
+//	else
+//	{
+//		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryAddress];
+//	}
 	CGSize contentSize = self.scrollView.contentSize;
 	
 	if ((frame.origin.y + frame.size.height) > self.scrollView.contentSize.height)
@@ -653,7 +752,30 @@ void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
 
     if (viewNext != NULL)
     {
-        [viewNext presentQuestionChoices];
+        if (self.mode == PassRecovMode_Recover)
+        {
+            // place the cursor in the answer
+            [viewNext.answerField becomeFirstResponder];
+        }
+        else
+        {
+            [viewNext presentQuestionChoices];
+        }
+    }
+}
+
+#pragma mark - SignUpViewControllerDelegates
+
+-(void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
+{
+	[controller.view removeFromSuperview];
+	_signUpController = nil;
+
+    // if they didn't just hit the back button
+    if (!bBack)
+    {
+        // then we are all done
+        [self exit];
     }
 }
 

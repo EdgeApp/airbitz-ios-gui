@@ -18,7 +18,7 @@
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y    3
 #define TABLE_SIZE_EXTRA_HEIGHT         5
 
-#define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:"]
+#define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
 
 #define PICKER_MAX_CELLS_VISIBLE        (IS_IPHONE5 ? 3 : 2)
 
@@ -87,8 +87,8 @@
     self.pickerTextNew.textField.backgroundColor = [UIColor clearColor];
     self.pickerTextNew.textField.font = [UIFont systemFontOfSize:14];
     self.pickerTextNew.textField.clearButtonMode = UITextFieldViewModeAlways;
-    self.pickerTextNew.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.pickerTextNew.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.pickerTextNew.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    self.pickerTextNew.textField.autocorrectionType = UITextAutocorrectionTypeDefault;
     self.pickerTextNew.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     [self.pickerTextNew setTopMostView:self.view];
     self.pickerTextNew.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
@@ -191,6 +191,7 @@
     // get the categories from the core
     tABC_Error Error;
     ABC_GetCategories([[User Singleton].name UTF8String],
+                      [[User Singleton].password UTF8String],
                       &_aszCategories,
                       &_count,
                       &Error);
@@ -229,7 +230,7 @@
         else
         {
             // it doesn't exist in our new list so delete it from the core
-            ABC_RemoveCategory([[User Singleton].name UTF8String], _aszCategories[i], &Error);
+            ABC_RemoveCategory([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], _aszCategories[i], &Error);
             [Util printABC_Error:&Error];
         }
     }
@@ -238,7 +239,7 @@
     for (int i = 0; i < [self.arrayCategories count]; i++)
     {
         NSString *strCategory = [self.arrayCategories objectAtIndex:i];
-        ABC_AddCategory([[User Singleton].name UTF8String], (char *)[strCategory UTF8String], &Error);
+        ABC_AddCategory([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], (char *)[strCategory UTF8String], &Error);
         [Util printABC_Error:&Error];
     }
 }
@@ -588,28 +589,33 @@
     // change the value
     [self forceCategoryFieldValue:cell.pickerTextView.textField forPickerView:cell.pickerTextView];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NSString *strNewVal = [NSString stringWithString:cell.pickerTextView.textField.text];
-    [self.arrayDisplay replaceObjectAtIndex:indexPath.row withObject:strNewVal];
-    [self.arrayCategories replaceObjectAtIndex:[[self.arrayDisplayPositions objectAtIndex:indexPath.row] integerValue] withObject:strNewVal];
+    if (indexPath.row < [self.arrayCategories count])
+    {
+        NSString *strNewVal = [NSString stringWithString:cell.pickerTextView.textField.text];
+        [self.arrayDisplay replaceObjectAtIndex:indexPath.row withObject:strNewVal];
+        [self.arrayCategories replaceObjectAtIndex:[[self.arrayDisplayPositions objectAtIndex:indexPath.row] integerValue] withObject:strNewVal];
 
-    self.tableView.scrollEnabled = YES;
+        self.tableView.scrollEnabled = YES;
 
-    // animate it all
-    [UIView animateWithDuration:0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations:^
-     {
-         // return the table to previous position and scroll position
-         self.tableView.frame = _frameTableOriginal;
-         [self.tableView setContentOffset:_offsetTableOriginal];
-     }
-                     completion:^(BOOL finished)
-     {
-         
-     }];
-
-
+        // animate it all
+        [UIView animateWithDuration:0.35
+                            delay: 0.0
+                            options: UIViewAnimationOptionCurveEaseOut
+                        animations:^
+        {
+            // return the table to previous position and scroll position
+            self.tableView.frame = _frameTableOriginal;
+            [self.tableView setContentOffset:_offsetTableOriginal];
+        }
+                        completion:^(BOOL finished)
+        {
+        }];
+    }
+    else
+    {
+        self.tableView.frame = _frameTableOriginal;
+        [self.tableView setContentOffset:_offsetTableOriginal];
+    }
     [self updateDisplay];
 }
 

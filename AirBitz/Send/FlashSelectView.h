@@ -11,7 +11,6 @@
 typedef enum eFlashItem
 {
 	FLASH_ITEM_ON,
-	FLASH_ITEM_AUTO,
 	FLASH_ITEM_OFF
 }tFlashItem;
 

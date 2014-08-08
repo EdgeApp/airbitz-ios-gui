@@ -27,12 +27,7 @@
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 #define QR_CODE_SIZE          200.0
 
-
-typedef enum eAddressPickerType
-{
-    AddressPickerType_SMS,
-    AddressPickerType_EMail
-} tAddressPickerType;
+#define WALLET_BUTTON_WIDTH         200
 
 #define OPERATION_CLEAR		0
 #define OPERATION_BACK		1
@@ -44,12 +39,12 @@ typedef enum eAddressPickerType
 #define OPERATION_PLUS		7
 #define OPERATION_PERCENT	8
 
-@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, ShowWalletQRViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, ImportWalletViewControllerDelegate>
+@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, 
+                                     ShowWalletQRViewControllerDelegate, ImportWalletViewControllerDelegate>
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
 	ShowWalletQRViewController  *_qrViewController;
-    tAddressPickerType          _addressPickerType;
     ImportWalletViewController  *_importWalletViewController;
 }
 
@@ -90,7 +85,7 @@ typedef enum eAddressPickerType
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
-	[self loadWalletInfo];
+    [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 }
 
 -(void)awakeFromNib
@@ -101,17 +96,19 @@ typedef enum eAddressPickerType
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+	[self loadWalletInfo];
 	self.BTCLabel_TextField.text = [User Singleton].denominationLabel; 
 	self.BTC_TextField.inputView = self.keypadView;
-	self.USDLabel_TextField.text = @"USD";
 	self.USD_TextField.inputView = self.keypadView;
 	self.BTC_TextField.delegate = self;
 	self.USD_TextField.delegate = self;
-    self.exchangeRateLabel.text = [CoreBridge conversionString: DOLLAR_CURRENCY_NUM];
-	
+
 	CGRect frame = self.keypadView.frame;
 	frame.origin.y = frame.origin.y + frame.size.height;
 	self.keypadView.frame = frame;
+
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
+    [self exchangeRateUpdate:nil]; 
 }
 
 
@@ -125,6 +122,32 @@ typedef enum eAddressPickerType
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (BOOL)showingQRCode
+{
+    return _qrViewController != nil;
+}
+
+- (void)resetViews
+{
+    if (_importWalletViewController)
+    {
+        [_importWalletViewController.view removeFromSuperview];
+        _importWalletViewController = nil;
+    }
+    if (_qrViewController)
+    {
+        [_qrViewController.view removeFromSuperview];
+        _qrViewController = nil;
+    }
+}
+
 
 #pragma mark - Action Methods
 
@@ -140,38 +163,6 @@ typedef enum eAddressPickerType
     [self bringUpImportWalletView];
 }
 
-- (IBAction)email
-{
-    [self.view endEditing:YES];
-    self.strFullName = @"";
-    self.strEMail = @"";
-    _addressPickerType = AddressPickerType_EMail;
-
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Send Email", nil)
-                          message:NSLocalizedString(@"Select from contacts?", nil)
-                          delegate:self
-                          cancelButtonTitle:NSLocalizedString(@"Yes, Contacts", nil)
-                          otherButtonTitles:NSLocalizedString(@"No, Skip", nil), nil];
-    [alert show];
-}
-
-- (IBAction)SMS
-{
-    [self.view endEditing:YES];
-    self.strPhoneNumber = @"";
-    self.strFullName = @"";
-    _addressPickerType = AddressPickerType_SMS;
-
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Send SMS", nil)
-                          message:NSLocalizedString(@"Select from contacts?", nil)
-                          delegate:self
-                          cancelButtonTitle:NSLocalizedString(@"Yes, Contacts", nil)
-                          otherButtonTitles:NSLocalizedString(@"No, Skip", nil), nil];
-    [alert show];
-}
-
 - (IBAction)QRCodeButton
 {
 	[self.view endEditing:YES];
@@ -179,10 +170,19 @@ typedef enum eAddressPickerType
     // get the QR Code image
     NSMutableString *strRequestID = [[NSMutableString alloc] init];
     NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
-    UIImage *qrImage = [self createRequestQRImageFor:@"" withNotes:@"" storeRequestIDIn:strRequestID storeRequestAddressIn:strRequestAddress scaleAndSave:NO];
+    NSMutableString *strRequestURI = [[NSMutableString alloc] init];
+    UIImage *qrImage = [self createRequestQRImageFor:@"" withNotes:@"" storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress scaleAndSave:NO];
 
     // bring up the qr code view controller
-    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress];
+    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress requestURI:strRequestURI];
+}
+
+#pragma mark - Notification Handlers
+
+- (void)exchangeRateUpdate: (NSNotification *)notification
+{
+    NSLog(@"Updating exchangeRateUpdate");
+	[self updateTextFieldContents];
 }
 
 #pragma mark - Misc Methods
@@ -190,21 +190,21 @@ typedef enum eAddressPickerType
 - (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes
 {
 	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
-	
 	tABC_TxDetails details;
 	tABC_CC result;
 	double currency;
 	tABC_Error error;
 
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 	//first need to create a transaction details struct
-    details.amountSatoshi = [CoreBridge denominationToSatoshi:[self.BTC_TextField.text doubleValue]];
+    details.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
 	
 	//the true fee values will be set by the core
 	details.amountFeesAirbitzSatoshi = 0;
 	details.amountFeesMinersSatoshi = 0;
 	
-	#warning TODO:  hard coded to DOLLAR right now
-	result = ABC_SatoshiToCurrency(details.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+	result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                   details.amountSatoshi, &currency, wallet.currencyNum, &error);
 	if (result == ABC_CC_Ok)
 	{
 		details.amountCurrency = currency;
@@ -212,16 +212,12 @@ typedef enum eAddressPickerType
 
     details.szName = (char *) [strName UTF8String];
     details.szNotes = (char *) [strNotes UTF8String];
-
-	#warning TODO: Need to set up category for this transaction
 	details.szCategory = "";
-
 	details.attributes = 0x0; //for our own use (not used by the core)
 
 	char *pRequestID;
 
     // create the request
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 	result = ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
                                       [[User Singleton].password UTF8String],
                                       [wallet.strUUID UTF8String],
@@ -290,7 +286,7 @@ typedef enum eAddressPickerType
 	return rawImage;
 }
 
--(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address
+-(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address requestURI:(NSString *)strRequestURI
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
@@ -298,8 +294,9 @@ typedef enum eAddressPickerType
 	_qrViewController.delegate = self;
 	_qrViewController.qrCodeImage = image;
 	_qrViewController.addressString = address;
+	_qrViewController.uriString = strRequestURI;
 	_qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
-    _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi:[self.BTC_TextField.text doubleValue]];
+    _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
 	CGRect frame = self.view.bounds;
 	_qrViewController.view.frame = frame;
 	[self.view addSubview:_qrViewController.view];
@@ -317,60 +314,49 @@ typedef enum eAddressPickerType
     }];
 }
 
-- (void)showAddressPicker
-{
-	[self.view endEditing:YES];
-
-    ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-
-    picker.peoplePickerDelegate = self;
-
-    if (_addressPickerType == AddressPickerType_SMS)
-    {
-        picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonPhoneProperty]];
-    }
-    else
-    {
-        picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonEmailProperty]];
-    }
-
-    [self presentViewController:picker animated:YES completion:nil];
-    //[self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
-}
-
 // generates and returns a request qr image, stores request id in the given mutable string
-- (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes storeRequestIDIn:(NSMutableString *)strRequestID storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave
+- (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes storeRequestIDIn:(NSMutableString *)strRequestID storeRequestURI:(NSMutableString *)strRequestURI storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave
 {
     UIImage *qrImage = nil;
     [strRequestID setString:@""];
     [strRequestAddress setString:@""];
+    [strRequestURI setString:@""];
 
-	unsigned int width = 0;
+    unsigned int width = 0;
     unsigned char *pData = NULL;
-	tABC_Error error;
+    char *pszURI = NULL;
+    tABC_Error error;
 
-	const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes];
+    const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes];
 
-	if (szRequestID)
-	{
+    if (szRequestID)
+    {
         Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-		tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
-                                                   [[User Singleton].password UTF8String],
-                                                   [wallet.strUUID UTF8String],
+        tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
+                                           [[User Singleton].password UTF8String],
+                                           [wallet.strUUID UTF8String],
                                                    szRequestID,
+                                                   &pszURI,
                                                    &pData,
                                                    &width,
                                                    &error);
 
-		if (result == ABC_CC_Ok)
-		{
-			qrImage = [self dataToImage:pData withWidth:width andHeight:width];
-		}
-		else
-		{
-			[Util printABC_Error:&error];
-		}
-	}
+        if (result == ABC_CC_Ok)
+        {
+                qrImage = [self dataToImage:pData withWidth:width andHeight:width];
+
+            if (pszURI && strRequestURI)
+            {
+                [strRequestURI appendFormat:@"%s", pszURI];
+                free(pszURI);
+            }
+            
+        }
+        else
+        {
+                [Util printABC_Error:&error];
+        }
+    }
 
     if (szRequestID)
     {
@@ -398,7 +384,7 @@ typedef enum eAddressPickerType
         }
         else
         {
-			[Util printABC_Error:&error];
+            [Util printABC_Error:&error];
         }
 
         free((void*)szRequestID);
@@ -408,7 +394,7 @@ typedef enum eAddressPickerType
     {
         free(pData);
     }
-
+    
     UIImage *qrImageFinal = qrImage;
 
     if (bScaleAndSave)
@@ -432,31 +418,29 @@ typedef enum eAddressPickerType
 
 - (void)updateTextFieldContents
 {
+    tABC_Error error;
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    self.exchangeRateLabel.text = [CoreBridge conversionString:wallet];
+    self.USDLabel_TextField.text = wallet.currencyAbbrev;
 	if (_selectedTextField == self.BTC_TextField)
 	{
-		double value = [self.BTC_TextField.text doubleValue];
-        double satoshi = [CoreBridge denominationToSatoshi: value];
-		
 		double currency;
-		tABC_Error error;
-		
-		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-		
-		self.USD_TextField.text = [NSString stringWithFormat:@"%.2f", currency];
+        int64_t satoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
+		if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                  satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
+            self.USD_TextField.text = [CoreBridge formatCurrency:currency
+                                                 withCurrencyNum:wallet.currencyNum
+                                                      withSymbol:false];
 	}
-	else
+	else if (_selectedTextField == self.USD_TextField)
 	{
-		double value = [self.USD_TextField.text doubleValue];
-
 		int64_t satoshi;
-		tABC_Error	error;
-		tABC_CC result;
-		
-		result = ABC_CurrencyToSatoshi(value, DOLLAR_CURRENCY_NUM, &satoshi, &error);
-		if(result == ABC_CC_Ok)
-		{
-            self.BTC_TextField.text = [CoreBridge formatSatoshi: satoshi withSymbol:false];
-		}
+		double currency = [self.USD_TextField.text doubleValue];
+		if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                  currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
+            self.BTC_TextField.text = [CoreBridge formatSatoshi:satoshi
+                                                     withSymbol:false
+                                               overrideDecimals:[CoreBridge currencyDecimalPlaces]];
 	}
 }
 
@@ -467,134 +451,29 @@ typedef enum eAddressPickerType
     [CoreBridge loadWallets:arrayWallets archived:nil];
 
     // create the array of wallet names
+    _selectedWalletIndex = 0;
     NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
     for (int i = 0; i < [arrayWallets count]; i++)
     {
         Wallet *wallet = [arrayWallets objectAtIndex:i];
-        [arrayWalletNames addObject:wallet.strName];
+ 
+        [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+ 
+        if ([_walletUUID isEqualToString: wallet.strUUID])
+            _selectedWalletIndex = i;
     }
-
-    if ([arrayWallets count] > 0)
+    
+    if (_selectedWalletIndex < [arrayWallets count])
     {
-        _selectedWalletIndex = 0;
+        Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
+        self.keypadView.currencyNum = wallet.currencyNum;
+
         self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-        [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWalletIndex] forState:UIControlStateNormal];
+        [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
     }
-
     self.arrayWallets = arrayWallets;
 }
-
-- (void)sendEMail
-{
-    //NSLog(@"sendEMail to: %@ / %@", self.strFullName, self.strEMail);
-
-    // if mail is available
-    if ([MFMailComposeViewController canSendMail])
-    {
-        NSMutableString *strBody = [[NSMutableString alloc] init];
-
-        [strBody appendString:@"<html><body>\n"];
-
-        [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
-        [strBody appendString:@"<br><br>\n"];
-
-        // create the request and get the QR Code image
-        NSMutableString *strRequestID = [[NSMutableString alloc] init];
-        NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
-        UIImage *image = [self createRequestQRImageFor:self.strFullName withNotes:self.strEMail storeRequestIDIn:strRequestID storeRequestAddressIn:strRequestAddress scaleAndSave:YES];
-
-        // if we have a request address
-        if ([strRequestAddress length])
-        {
-            [strBody appendFormat:@"%@", strRequestAddress];
-            [strBody appendString:@"<br><br>\n"];
-        }
-
-        NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)];
-        NSString *base64String = [imageData base64Encoded];
-        [strBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/jpeg;base64,%@'></b></p>", base64String]];
-
-        [strBody appendString:@"</body></html>\n"];
-
-
-
-
-        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
-
-        if ([self.strEMail length])
-        {
-            [mailComposer setToRecipients:[NSArray arrayWithObject:self.strEMail]];
-        }
-
-        [mailComposer setSubject:NSLocalizedString(@"Bitcoin Request", nil)];
-
-        [mailComposer setMessageBody:strBody isHTML:YES];
-
-        mailComposer.mailComposeDelegate = self;
-
-        [self presentViewController:mailComposer animated:YES completion:nil];
-        //[self presentModalViewController:mailComposer animated:NO];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"Can't send e-mail"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    }
-}
-
-- (void)sendSMS
-{
-    //NSLog(@"sendSMS to: %@ / %@", self.strFullName, self.strPhoneNumber);
-
-    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
-	if ([MFMessageComposeViewController canSendText] && [MFMessageComposeViewController canSendAttachments])
-	{
-        NSMutableString *strBody = [[NSMutableString alloc] init];
-        [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
-
-        // create the request and get the QR Code image
-        NSMutableString *strRequestID = [[NSMutableString alloc] init];
-        NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
-        UIImage *image = [self createRequestQRImageFor:self.strFullName withNotes:self.strPhoneNumber storeRequestIDIn:strRequestID storeRequestAddressIn:strRequestAddress scaleAndSave:YES];
-
-        // if we have a request address
-        if ([strRequestAddress length])
-        {
-            [strBody appendFormat:@":\n%@", strRequestAddress];
-        }
-
-        // create the attachment
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:QR_CODE_TEMP_FILENAME];
-        BOOL bAttached = [controller addAttachmentData:UIImagePNGRepresentation(image) typeIdentifier:(NSString*)kUTTypePNG filename:filePath];
-        if (!bAttached)
-        {
-            NSLog(@"Could not attach qr code");
-        }
-
-		controller.body = strBody;
-
-        if (self.strPhoneNumber)
-        {
-            if ([self.strPhoneNumber length] != 0)
-            {
-                controller.recipients = @[self.strPhoneNumber];
-            }
-        }
-
-		controller.messageComposeDelegate = self;
-
-        [self presentViewController:controller animated:YES completion:nil];
-        //[self.view.window.rootViewController presentViewController:controller animated:YES completion:nil];
-	}
-}
-
-
 
 - (void)bringUpImportWalletView
 {
@@ -642,6 +521,16 @@ typedef enum eAddressPickerType
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
     _selectedWalletIndex = itemIndex;
+
+    // Update wallet UUID
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+    
+    _walletUUID = wallet.strUUID;
+
+    self.keypadView.currencyNum = wallet.currencyNum;
+    [self updateTextFieldContents];
 }
 
 #pragma mark - ShowWalletQRViewController delegates
@@ -652,182 +541,19 @@ typedef enum eAddressPickerType
 	_qrViewController = nil;
 }
 
-#pragma mark - Address Book delegates
-
-- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
-{
-    [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
-      shouldContinueAfterSelectingPerson:(ABRecordRef)person
-{
-    return YES;
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
-      shouldContinueAfterSelectingPerson:(ABRecordRef)person
-                                property:(ABPropertyID)property
-                              identifier:(ABMultiValueIdentifier)identifier
-{
-
-    self.strFullName = [Util getNameFromAddressRecord:person];
-
-    if (_addressPickerType == AddressPickerType_SMS)
-    {
-        if (property == kABPersonPhoneProperty)
-        {
-            ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
-            for (CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++)
-            {
-                if (identifier == ABMultiValueGetIdentifierAtIndex(multiPhones, i))
-                {
-                    NSString *strPhoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(multiPhones, i);
-                    self.strPhoneNumber = strPhoneNumber;
-                    break;
-                }
-            }
-            CFRelease(multiPhones);
-        }
-
-        [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:^{
-            [self sendSMS];
-        }];
-    }
-    else if (_addressPickerType == AddressPickerType_EMail)
-    {
-        if (property == kABPersonEmailProperty)
-        {
-            ABMultiValueRef multiEMails = ABRecordCopyValue(person, kABPersonEmailProperty);
-            for (CFIndex i = 0; i < ABMultiValueGetCount(multiEMails); i++)
-            {
-                if (identifier == ABMultiValueGetIdentifierAtIndex(multiEMails, i))
-                {
-                    NSString *strEMail = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(multiEMails, i);
-                    self.strEMail = strEMail;
-                    break;
-                }
-            }
-            CFRelease(multiEMails);
-        }
-
-        [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:^{
-            [self sendEMail];
-        }];
-    }
-
-
-    return NO;
-}
-
-#pragma mark - MFMessageComposeViewController delegate
-
-- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
-{
-	switch (result)
-    {
-		case MessageComposeResultCancelled:
-			NSLog(@"Cancelled");
-			break;
-		case MessageComposeResultFailed:
-        {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
-                                                            message:@"Error sending SMS"
-														   delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles: nil];
-			[alert show];
-        }
-			break;
-
-		case MessageComposeResultSent:
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
-                                                            message:@"Request sent"
-														   delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles: nil];
-			[alert show];
-        }
-			break;
-
-		default:
-			break;
-	}
-
-    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - Mail Compose Delegate Methods
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    NSString *strTitle = nil;
-    NSString *strMsg = nil;
-
-	switch (result)
-    {
-		case MFMailComposeResultCancelled:
-            strMsg = NSLocalizedString(@"Email cancelled.", nil);
-			break;
-
-		case MFMailComposeResultSaved:
-            strMsg = NSLocalizedString(@"Email saved to send later.", nil);
-			break;
-
-		case MFMailComposeResultSent:
-            strMsg = NSLocalizedString(@"Email sent.", nil);
-			break;
-
-		case MFMailComposeResultFailed:
-		{
-            strTitle = NSLocalizedString(@"Error sending Email.", nil);
-            strMsg = [error localizedDescription];
-			break;
-		}
-		default:
-			break;
-	}
-
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
-                                                    message:strMsg
-                                                   delegate:nil
-                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                          otherButtonTitles:nil];
-    [alert show];
-
-    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
 #pragma mark - Textfield delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	_selectedTextField = textField;
+    if (_selectedTextField == self.BTC_TextField)
+        self.keypadView.calcMode = CALC_MODE_COIN;
+    else if (_selectedTextField == self.USD_TextField)
+        self.keypadView.calcMode = CALC_MODE_FIAT;
+
 	self.keypadView.textField = textField;
 	self.BTC_TextField.text = @"";
 	self.USD_TextField.text = @"";
-}
-
-#pragma mark - UIAlertView delegates
-
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	// we only use the alert for selecting from contacts or not
-
-    // if they wanted to select from contacts
-    if (buttonIndex == 0)
-    {
-        [self performSelector:@selector(showAddressPicker) withObject:nil afterDelay:0.0];
-    }
-    else if (_addressPickerType == AddressPickerType_SMS)
-    {
-        [self performSelector:@selector(sendSMS) withObject:nil afterDelay:0.0];
-    }
-    else if (_addressPickerType == AddressPickerType_EMail)
-    {
-        [self performSelector:@selector(sendEMail) withObject:nil afterDelay:0.0];
-    }
 }
 
 #pragma mark - Import Wallet Delegates

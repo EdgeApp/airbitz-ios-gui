@@ -8,44 +8,182 @@
 
 #import "AppDelegate.h"
 #import "ABC.h"
+#import "User.h"
+#import "CoreBridge.h"
+#import "CommonTypes.h"
 #import "PopupPickerView.h"
+
+UIBackgroundTaskIdentifier bgLogoutTask;
+NSTimer *logoutTimer = NULL;
+NSDate *logoutDate = NULL;
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-	[application setStatusBarHidden:NO];
-	[application setStatusBarStyle:UIStatusBarStyleLightContent];
-	[PopupPickerView initAll];
+    [application setStatusBarHidden:NO];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
+    [PopupPickerView initAll];
+
+    [CoreBridge initAll];
+
+    // Reset badges to 0
+    application.applicationIconBadgeNumber = 0;
     return YES;
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    // Reset badges to 0
+    application.applicationIconBadgeNumber = 0;
+}
+
+//  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    NSDictionary *d = @{ KEY_URL: url };
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HANDLE_BITCOIN_URI object:self userInfo:d];
+    
+    return YES;
+}
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
+{
+    NSLog(@"Calling fetch!!!!");
+    if (![self isAppActive])
+    {
+        [self autoLogout];
+    }
+    completionHandler(UIBackgroundFetchResultNoData);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    NSLog(@"Resign Active background!!!!");
+    if ([User isLoggedIn])
+    {
+        NSLog(@("Settings background fetch interval to %d\n"), [User Singleton].minutesAutoLogout * 60);
+        logoutDate = [NSDate date];
+        [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
+    }
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    NSLog(@"Entered background!!!!");
+    if ([User isLoggedIn])
+    {
+        [CoreBridge stopQueues];
+        bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
+            [self bgCleanup];
+        }];
+        // start a logout timer
+        logoutTimer = [NSTimer scheduledTimerWithTimeInterval:[User Singleton].minutesAutoLogout * 60
+                                                       target:self
+                                                       selector:@selector(autoLogout)
+                                                       userInfo:application
+                                                       repeats:NO];
+        if ([CoreBridge allWatchersReady])
+        {
+            [CoreBridge stopWatchers];
+        }
+        else
+        {
+            // If the watchers aren't finished, let them finish
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                while (![CoreBridge allWatchersReady])
+                {
+                    // if app is active, break out of loop
+                    if ([self isAppActive])
+                    {
+                        break;
+                    }
+                    sleep(5);
+                }
+                // if the app *is not* active, stop watchers
+                if (![self isAppActive])
+                {
+                    [CoreBridge stopWatchers];
+                }
+                if (![logoutTimer isValid])
+                {
+                    [self bgCleanup];
+                }
+            });
+        }
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    NSLog(@"Entered Foreground!!!!");
+    [self bgCleanup];
+    [self checkLoginExpired];
+    if ([User isLoggedIn])
+    {
+        [CoreBridge startWatchers];
+        [CoreBridge startQueues];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSLog(@"applicationDidBecomeActive!!!!");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    [[User Singleton] clear];
     ABC_Terminate();
+}
+
+- (void)watchStatus
+{
+}
+
+- (void)bgCleanup
+{
+    if (logoutTimer)
+    {
+        [logoutTimer invalidate];
+    }
+    [[UIApplication sharedApplication] endBackgroundTask:bgLogoutTask];
+    bgLogoutTask = UIBackgroundTaskInvalid;
+}
+
+// This is a fallback for auto logout. It is better to have the background task
+// or network fetch log the user out
+- (void)checkLoginExpired
+{
+    if (!logoutDate || ![User isLoggedIn])
+    {
+        return;
+    }
+    NSDate *now = [NSDate date];
+    int minutes = [now timeIntervalSinceDate:logoutDate] / 60.0;
+    if (minutes >= [User Singleton].minutesAutoLogout) {
+        [self autoLogout];
+    }
+}
+
+// If the app is *not* active, log the user out
+- (void)autoLogout
+{
+    if (![self isAppActive])
+    {
+        NSLog(@"**********Autologout**********");
+        [[User Singleton] clear];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
+        [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval: UIApplicationBackgroundFetchIntervalNever];
+    }
+    [self bgCleanup];
+}
+
+- (BOOL)isAppActive
+{
+    return [UIApplication sharedApplication].applicationState == UIApplicationStateActive;
 }
 
 @end

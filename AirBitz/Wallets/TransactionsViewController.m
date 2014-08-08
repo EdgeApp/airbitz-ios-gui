@@ -20,20 +20,20 @@
 #import "InfoView.h"
 #import "CommonTypes.h"
 
-
-#define DOLLAR_CURRENCY_NUM	840
-
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
 #define COLOR_BALANCE  [UIColor colorWithRed:83.0/255.0 green:90.0/255.0 blue:91.0/255.0 alpha:1.0];
 
 #define TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD 160
 
+#define TABLE_HEADER_HEIGHT 46.0
+#define TABLE_CELL_HEIGHT   72.0
+#define NO_SEARCHBAR 1
+
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate>
 {
-	BalanceView                         *_balanceView;
-	tBalanceViewState                   _balanceState;
-	TransactionDetailsViewController    *_transactionDetailsController;
+    BalanceView                         *_balanceView;
+    TransactionDetailsViewController    *_transactionDetailsController;
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bSearchModeEnabled;
     CGRect                              _searchShowingFrame;
@@ -74,23 +74,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:nil];
 
-	_balanceView = [BalanceView CreateWithDelegate:self];
-	_balanceView.frame = self.balanceViewPlaceholder.frame;
-	[self.balanceViewPlaceholder removeFromSuperview];
-	[self.view addSubview:_balanceView];
-	self.tableView.delegate = self;
-	self.tableView.dataSource = self;
+    _balanceView = [BalanceView CreateWithDelegate:self];
+    _balanceView.frame = self.balanceViewPlaceholder.frame;
+    _balanceView.botDenomination.text = self.wallet.currencyAbbrev;
 
-    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonExport, self.buttonRequest, self.buttonSend, self.imageWalletNameEmboss, self.buttonSearch, nil];
+    [self.balanceViewPlaceholder removeFromSuperview];
+    [self.view addSubview:_balanceView];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+
+    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonExport, self.imageWalletNameEmboss, self.buttonSearch, nil];
 
     self.textWalletName.text = self.wallet.strName;
-	self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
-	[self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    self.textWalletName.font = [UIFont systemFontOfSize:18];
+    self.textWalletName.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
+    [self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.textWalletName addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
 
     // set up our user blocking button
@@ -106,7 +110,7 @@
 
     _searchShowingFrame = self.viewSearch.frame;
 
-    if (IS_IPHONE5)
+    if (IS_IPHONE5 && !NO_SEARCHBAR)
     {
         self.buttonSearch.hidden = YES;
     }
@@ -134,7 +138,15 @@
 
     }
 
+    [_balanceView refresh];
     _transactionTableStartFrame = self.tableView.frame;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(dataUpdated:)
+                                                 name:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(dataUpdated:)
+                                                 name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -142,7 +154,12 @@
     [super viewWillAppear:animated];
     [CoreBridge reloadWallet: self.wallet];
     [self.tableView reloadData];
-	[self updateBalanceView];
+    [self updateBalanceView];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -198,7 +215,9 @@
     if (YES == [self canLeaveWalletNameField])
     {
         [self resignAllResponders];
-        // TODO: request button functionality here
+        NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: self.wallet.strUUID };
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET
+                                                            object:self userInfo:dictNotification];
     }
 }
 
@@ -207,7 +226,9 @@
     if (YES == [self canLeaveWalletNameField])
     {
         [self resignAllResponders];
-        // TODO: send button functionality here
+        NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: self.wallet.strUUID };
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_SEND_FOR_WALLET
+                                                            object:self userInfo:dictNotification];
     }
 }
 
@@ -246,21 +267,23 @@
 
 - (void)updateBalanceView
 {
-	int64_t totalSatoshi = 0.0;
-	for(Transaction * tx in self.wallet.arrayTransactions)
-	{
-		totalSatoshi += tx.amountSatoshi;
-	}
-	_balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
+    int64_t totalSatoshi = 0.0;
+    for(Transaction * tx in self.wallet.arrayTransactions)
+    {
+        totalSatoshi += tx.amountSatoshi;
+    }
+    _balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
 
-	double currency;
-	tABC_Error error;
+    double currency;
+    tABC_Error error;
 
-	ABC_SatoshiToCurrency(totalSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-    _balanceView.botAmount.text = [CoreBridge formatCurrency: currency];
+    ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
+                          totalSatoshi, &currency, self.wallet.currencyNum, &error);
+    _balanceView.botAmount.text = [CoreBridge formatCurrency:currency 
+                                             withCurrencyNum:self.wallet.currencyNum];
     _balanceView.topDenomination.text = [User Singleton].denominationLabel;
 
-	[_balanceView refresh];
+    [_balanceView refresh];
 }
 
 // transition two and from search
@@ -277,7 +300,7 @@
         _frameTableWithSearchNoKeyboard = frame;
         frame.size.height -= TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD; // compensate for keyboard
 
-        if (!IS_IPHONE5)
+        if (!IS_IPHONE5 || NO_SEARCHBAR)
         {
             [self.searchTextField becomeFirstResponder];
             frameSearch.origin.x = _searchShowingFrame.origin.x;
@@ -291,7 +314,7 @@
         {
             curView.hidden = NO;
         }
-        if (IS_IPHONE5)
+        if (IS_IPHONE5 && !NO_SEARCHBAR)
         {
             self.buttonSearch.hidden = YES;
         }
@@ -304,19 +327,20 @@
     }
 
     [UIView animateWithDuration:0.35
-						  delay:0.0
+                          delay:0.0
                         options:UIViewAnimationOptionCurveEaseOut
-					 animations:^
-	 {
+                     animations:^
+     {
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
          self.tableView.frame = frame;
 
-         if (!IS_IPHONE5)
+         if (!IS_IPHONE5 || NO_SEARCHBAR)
          {
              self.viewSearch.frame = frameSearch;
          }
-	 }
+     }
                      completion:^(BOOL finished)
-	 {
+     {
          if (bGoToSearch)
          {
              for (UIView *curView in _arrayNonSearchViews)
@@ -324,7 +348,8 @@
                  curView.hidden = YES;
              }
          }
-	 }];
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+     }];
 
     [self.tableView reloadData];
 }
@@ -361,72 +386,75 @@
 - (NSString *)formatSatoshi:(int64_t)satoshi useFiat:(BOOL)bFiat
 {
     // if they want it in fiat
-	if (bFiat)
-	{
-		double currency;
-		tABC_Error error;
-
-        // TODO: need to switch to currency selected by user in settings
-		ABC_SatoshiToCurrency(satoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
-		return [CoreBridge formatCurrency:currency];
-	}
-	else
-	{
-		return [CoreBridge formatSatoshi:satoshi];
-	}
+    if (bFiat)
+    {
+        double currency;
+        tABC_Error error;
+        ABC_SatoshiToCurrency([[User Singleton].name UTF8String],[[User Singleton].password UTF8String],
+                              satoshi, &currency, self.wallet.currencyNum, &error);
+        return [CoreBridge formatCurrency:currency
+                          withCurrencyNum:self.wallet.currencyNum];
+    }
+    else
+    {
+        return [CoreBridge formatSatoshi:satoshi];
+    }
 }
 
 //note this method duplicated in WalletsViewController
 - (NSString *)conversion:(int64_t)satoshi
 {
-    return [self formatSatoshi:satoshi useFiat:_balanceState == BALANCE_VIEW_DOWN];
+    return [self formatSatoshi:satoshi useFiat:!_balanceView.barIsUp];
 }
 
 -(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
 {
-	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	_transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
-	
-	_transactionDetailsController.delegate = self;
-	_transactionDetailsController.transaction = transaction;
+    if (_transactionDetailsController) {
+        return;
+    }
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    _transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+    
+    _transactionDetailsController.delegate = self;
+    _transactionDetailsController.transaction = transaction;
+    _transactionDetailsController.wallet = self.wallet;
     _transactionDetailsController.bOldTransaction = YES;
     _transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
 
-	CGRect frame = self.view.bounds;
-	frame.origin.x = frame.size.width;
-	_transactionDetailsController.view.frame = frame;
-	[self.view addSubview:_transactionDetailsController.view];
-	
-	
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 _transactionDetailsController.view.frame = self.view.bounds;
-	 }
-					 completion:^(BOOL finished)
-	 {
-	 }];
-	
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _transactionDetailsController.view.frame = frame;
+    [self.view addSubview:_transactionDetailsController.view];
+    
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         _transactionDetailsController.view.frame = self.view.bounds;
+     }
+                     completion:^(BOOL finished)
+     {
+     }];
+    
 }
 
 -(void)dismissTransactionDetails
 {
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 CGRect frame = self.view.bounds;
-		 frame.origin.x = frame.size.width;
-		 _transactionDetailsController.view.frame = frame;
-	 }
-					 completion:^(BOOL finished)
-	 {
-		 [_transactionDetailsController.view removeFromSuperview];
-		 _transactionDetailsController = nil;
-	 }];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         CGRect frame = self.view.bounds;
+         frame.origin.x = frame.size.width;
+         _transactionDetailsController.view.frame = frame;
+     }
+                     completion:^(BOOL finished)
+     {
+         [_transactionDetailsController.view removeFromSuperview];
+         _transactionDetailsController = nil;
+     }];
 }
 
 - (void)checkSearchArray
@@ -491,153 +519,240 @@
     [CoreBridge reloadWallet: self.wallet];
     [self.tableView reloadData];
     [self checkSearchArray];
-	[self dismissTransactionDetails];
+    [self dismissTransactionDetails];
 }
 
 #pragma mark - UITableView delegates
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([self searchEnabled]) 
+    if (section == 1)
     {
-        return self.arraySearchTransactions.count;
+        if ([self searchEnabled])
+        {
+            return self.arraySearchTransactions.count;
+        }
+        else
+        {
+            return self.wallet.arrayTransactions.count;
+        }
     }
-    else 
+    else
     {
-        return self.wallet.arrayTransactions.count;
+
+        return _bSearchModeEnabled ? 0 : 1;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 72.0;
+    CGFloat height;
+
+    if (indexPath.section == 0)
+    {
+        if (_bSearchModeEnabled)
+        {
+            height = 0.0;
+        }
+        else
+        {
+            height = TABLE_HEADER_HEIGHT;
+        }
+    }
+    else
+    {
+        height = TABLE_CELL_HEIGHT;
+    }
+
+    return height;
 }
 
 - (TransactionCell *)getTransactionCellForTableView:(UITableView *)tableView
 {
-	TransactionCell *cell;
-	static NSString *cellIdentifier = @"TransactionCell";
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (nil == cell)
-	{
-		cell = [[TransactionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	return cell;
+    TransactionCell *cell;
+    static NSString *cellIdentifier = @"TransactionCell";
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[TransactionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    return cell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSInteger row = [indexPath row];
-	TransactionCell *cell;
-	
-	// wallet cell
-	cell = [self getTransactionCellForTableView:tableView];
+    UITableViewCell *finalCell;
+    NSInteger row = [indexPath row];
+    NSInteger section = [indexPath section];
 
-	Transaction *transaction = NULL;
-    if ([self searchEnabled]) 
+    if (section == 0)
     {
-        transaction = [self.arraySearchTransactions objectAtIndex:indexPath.row];
-    }
-    else
-    {
-        transaction = [self.wallet.arrayTransactions objectAtIndex:indexPath.row];
-    }
+        static NSString *cellIdentifier = @"TransactionHeaderCell";
 
-	// date
-	cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
-	
-	// address
-	cell.addressLabel.text = transaction.strAddress;
-
-    // if we are in search  mode
-    if (_bSearchModeEnabled)
-    {
-        // confirmation becomes category
-        cell.confirmationLabel.text = transaction.strCategory;
-
-        // amount - always bitcoin
-        cell.amountLabel.text = [self formatSatoshi:transaction.amountSatoshi useFiat:NO];
-
-        // balance becomes fiat
-        cell.balanceLabel.text = [self formatSatoshi:transaction.amountSatoshi useFiat:YES];
-        cell.balanceLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
-    }
-    else
-    {
-        // confirmations
-        if (transaction.confirmations == 1)
+        finalCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (nil == finalCell)
         {
-            cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmation", transaction.confirmations];
+            finalCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            finalCell.backgroundColor = [UIColor clearColor];
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(0, 0, 143.0, 41.0);
+            [button setBackgroundImage:[UIImage imageNamed:@"btn_request.png"] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
+            [finalCell addSubview:button];
+            [button setTitle:@"      Request" forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+            self.buttonRequest = button;
+
+            button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(151.0, 0, 143.0, 41.0);
+            [button setBackgroundImage:[UIImage imageNamed:@"btn_send.png"] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
+            [finalCell addSubview:button];
+            [button setTitle:@"      Send" forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+            self.buttonSend = button;
+        }
+    }
+    else
+    {
+        TransactionCell *cell;
+
+        // wallet cell
+        cell = [self getTransactionCellForTableView:tableView];
+
+        Transaction *transaction = NULL;
+        if ([self searchEnabled])
+        {
+            transaction = [self.arraySearchTransactions objectAtIndex:indexPath.row];
         }
         else
         {
-            cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmations", transaction.confirmations];
+            transaction = [self.wallet.arrayTransactions objectAtIndex:indexPath.row];
         }
 
-        //amount
-        cell.amountLabel.text = [self conversion:transaction.amountSatoshi];
+        // date
+        cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
 
-        // balance
-        cell.balanceLabel.text = [self conversion:transaction.balance];
-        cell.balanceLabel.textColor = COLOR_BALANCE;
+        // address
+        cell.addressLabel.text = transaction.strAddress;
+
+        // if we are in search  mode
+        if (_bSearchModeEnabled)
+        {
+            // confirmation becomes category
+            cell.confirmationLabel.text = transaction.strCategory;
+            cell.confirmationLabel.textColor = COLOR_BALANCE;
+
+            // amount - always bitcoin
+            cell.amountLabel.text = [self formatSatoshi:transaction.amountSatoshi useFiat:NO];
+
+            // balance becomes fiat
+            cell.balanceLabel.text = [self formatSatoshi:transaction.amountSatoshi useFiat:YES];
+            cell.balanceLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
+        }
+        else
+        {
+            if (transaction.bSyncing)
+            {
+                cell.confirmationLabel.text = NSLocalizedString(@"Synchronizing", nil);
+                cell.confirmationLabel.textColor = COLOR_BALANCE;
+            }
+            else if (transaction.confirmations == 0)
+            {
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"Unconfirmed"];
+                cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+            }
+            else if (transaction.confirmations == 1)
+            {
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmation", transaction.confirmations];
+                cell.confirmationLabel.textColor = COLOR_POSITIVE;
+            }
+            else if (transaction.confirmations >= CONFIRMED_CONFIRMATION_COUNT)
+            {
+                cell.confirmationLabel.textColor = COLOR_POSITIVE;
+                cell.confirmationLabel.text = NSLocalizedString(@"Confirmed", nil);
+            }
+            else
+            {
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmations", transaction.confirmations];
+                cell.confirmationLabel.textColor = COLOR_POSITIVE;
+            }
+
+            //amount
+            cell.amountLabel.text = [self conversion:transaction.amountSatoshi];
+
+            // balance
+            cell.balanceLabel.text = [self conversion:transaction.balance];
+            cell.balanceLabel.textColor = COLOR_BALANCE;
+        }
+
+        // color amount
+        cell.amountLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
+
+        if ((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
+        {
+            cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
+        }
+        else
+        {
+            if(row == 0)
+            {
+                cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
+            }
+            else
+                if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
+                {
+                    cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_bottom"];
+                }
+                else
+                {
+                    cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_middle"];
+                }
+        }
+
+        finalCell = cell;
     }
 
-    // color amount
-    cell.amountLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
-	
-	if ((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
-	{
-		cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
-	}
-	else
-	{
-		if(row == 0)
-		{
-			cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
-		}
-		else
-			if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
-			{
-				cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_bottom"];
-			}
-			else
-			{
-				cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_middle"];
-			}
-	}
-	return cell;
+    return finalCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (YES == [self canLeaveWalletNameField])
+    if (indexPath.section == 1)
     {
-        [self resignAllResponders];
-        if ([self searchEnabled])
+        if (YES == [self canLeaveWalletNameField])
         {
-            [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row]];
+            [self resignAllResponders];
+            if ([self searchEnabled])
+            {
+                [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row]];
+            }
+            else
+            {
+                [self launchTransactionDetailsWithTransaction:[self.wallet.arrayTransactions objectAtIndex:indexPath.row]];
+            }
         }
-        else
-        {
-            [self launchTransactionDetailsWithTransaction:[self.wallet.arrayTransactions objectAtIndex:indexPath.row]];
-        }
-	}
+    }
 }
 
 #pragma mark - BalanceViewDelegates
 
 - (void)BalanceView:(BalanceView *)view changedStateTo:(tBalanceViewState)state
 {
-	_balanceState = state;
-	[self.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITextField delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-	if (textField == self.textWalletName)
+    if (textField == self.textWalletName)
     {
         [self blockUser:YES];
 
@@ -704,7 +819,7 @@
         [textField resignFirstResponder];
     }
 
-	return YES;
+    return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
@@ -732,7 +847,7 @@
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	// the only alert we have that uses a delegate is the one that tells them they must provide a wallet name
+    // the only alert we have that uses a delegate is the one that tells them they must provide a wallet name
     [self.textWalletName becomeFirstResponder];
     _bWalletNameWarningDisplaying = NO;
 }
@@ -741,8 +856,18 @@
 
 - (void)exportWalletViewControllerDidFinish:(ExportWalletViewController *)controller
 {
-	[controller.view removeFromSuperview];
-	_exportWalletViewController = nil;
+    [controller.view removeFromSuperview];
+    _exportWalletViewController = nil;
+}
+
+#pragma mark - Block Height Change
+
+- (void)dataUpdated:(NSNotification *)notification
+{
+    [CoreBridge reloadWallet: self.wallet];
+    [self.tableView reloadData];
+    [self updateBalanceView];
+    [self.view setNeedsDisplay];
 }
 
 @end

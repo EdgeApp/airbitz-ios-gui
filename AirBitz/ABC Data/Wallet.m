@@ -7,6 +7,7 @@
 //
 
 #import "Wallet.h"
+#import "ABC.h"
 
 @interface Wallet ()
 
@@ -60,15 +61,20 @@
     return([self.strUUID hash]);
 }
 
+- (BOOL)isArchived
+{
+    return self.archived == 1;
+}
+
 // overriding the description - used in debugging
 - (NSString *)description
 {
-	return([NSString stringWithFormat:@"Wallet - UUID: %@, Name: %@, UserName: %@, CurrencyNum: %d, Attributes: 0x%0x, Balance: %lf, Transactions: %@",
+	return([NSString stringWithFormat:@"Wallet - UUID: %@, Name: %@, UserName: %@, CurrencyNum: %d, Attributes: %d, Balance: %lf, Transactions: %@",
             self.strUUID,
             self.strName,
             self.strUserName,
             self.currencyNum,
-            self.attributes,
+            self.archived,
             self.balance,
             self.arrayTransactions
             ]);

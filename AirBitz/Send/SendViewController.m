@@ -18,15 +18,15 @@
 #import "Util.h"
 #import "InfoView.h"
 #import "ZBarSDK.h"
-#import "PickerTextView.h"
 #import "CoreBridge.h"
+#import "SyncView.h"
 
-#define WALLET_BUTTON_WIDTH         193
+#define WALLET_BUTTON_WIDTH         210
 
 #define POPUP_PICKER_LOWEST_POINT   360
 #define POPUP_PICKER_TABLE_HEIGHT   (IS_IPHONE5 ? 180 : 90)
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate, PickerTextViewDelegate>
+@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate, PickerTextViewDelegate, SyncViewDelegate>
 {
 	ZBarReaderView                  *_readerView;
     ZBarReaderController            *_readerPicker;
@@ -34,16 +34,15 @@
 	int                             _selectedWalletIndex;
 	SendConfirmationViewController  *_sendConfirmationViewController;
     BOOL                            _bUsingImagePicker;
+	SyncView                        *_syncingView;
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
-@property (weak, nonatomic) IBOutlet PickerTextView         *pickerTextSendTo;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView     *buttonSelector;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageTopFrame;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendTo;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageSendTo;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
-@property (weak, nonatomic) IBOutlet UIView                 *viewMiddle;
 
 @property (nonatomic, strong) NSArray   *arrayWallets;
 @property (nonatomic, strong) NSArray   *arrayWalletNames;
@@ -81,12 +80,14 @@
     self.pickerTextSendTo.textField.borderStyle = UITextBorderStyleNone;
     self.pickerTextSendTo.textField.backgroundColor = [UIColor clearColor];
     self.pickerTextSendTo.textField.font = [UIFont systemFontOfSize:14];
-    self.pickerTextSendTo.textField.clearButtonMode = UITextFieldViewModeAlways;
+    self.pickerTextSendTo.textField.clearButtonMode = UITextFieldViewModeNever;
     self.pickerTextSendTo.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.pickerTextSendTo.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.pickerTextSendTo.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     self.pickerTextSendTo.textField.textColor = [UIColor whiteColor];
     self.pickerTextSendTo.textField.returnKeyType = UIReturnKeyDone;
+    self.pickerTextSendTo.textField.tintColor = [UIColor whiteColor];
+    self.pickerTextSendTo.textField.textAlignment = NSTextAlignmentCenter;
     self.pickerTextSendTo.textField.placeholder = NSLocalizedString(@"Bitcoin address or wallet", nil);
     self.pickerTextSendTo.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.pickerTextSendTo.textField.placeholder
                                                                                             attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
@@ -95,18 +96,17 @@
     self.pickerTextSendTo.cropPointBottom = POPUP_PICKER_LOWEST_POINT;
     self.pickerTextSendTo.delegate = self;
 
-	self.buttonSelector.textLabel.text = @"";
+	self.buttonSelector.textLabel.text = NSLocalizedString(@"From:", @"From: text on Send Bitcoin screen");
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 
     _selectedWalletIndex = 0;
-	[self loadWalletInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	//NSLog(@"Starting timer");
-
-    if (_bUsingImagePicker == NO)
+	[self loadWalletInfo];
+    [self syncTest];
+    if (_bUsingImagePicker == NO && !_syncingView)
     {
         _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 
@@ -116,7 +116,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	//NSLog(@"Invalidating timer");
 	[_startScannerTimer invalidate];
 	_startScannerTimer = nil;
 
@@ -129,6 +128,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)resetViews
+{
+    if (_sendConfirmationViewController)
+    {
+        [_sendConfirmationViewController.view removeFromSuperview];
+        _sendConfirmationViewController = nil;
+    }
+}
 
 #pragma mark - Action Methods
 
@@ -161,6 +168,7 @@
 
         CGRect frame;
 
+        /*
         // put the flash view at the bottom
         frame = self.imageFlashFrame.frame;
         frame.size.height = 60;
@@ -171,10 +179,10 @@
         frame.origin.y = self.imageFlashFrame.frame.origin.y + 8.0;
         frame.size.height = 48.0;
         self.flashSelector.frame = frame;
-
+*/
         // put the scan frame bottom right to the top of the flash frame
         frame = self.scanFrame.frame;
-        frame.size.height = self.imageFlashFrame.frame.origin.y - self.scanFrame.frame.origin.y + 0.0;
+        frame.size.height = 275;
         self.scanFrame.frame = frame;
     }
 }
@@ -186,22 +194,25 @@
     [CoreBridge loadWallets:arrayWallets archived:nil];
 
     // create the arrays of wallet info
+    _selectedWalletIndex = 0;
     NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
-
     for (int i = 0; i < [arrayWallets count]; i++)
     {
         Wallet *wallet = [arrayWallets objectAtIndex:i];
-        [arrayWalletNames addObject:wallet.strName];
+        [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+        
+        if ([_walletUUID isEqualToString: wallet.strUUID])
+            _selectedWalletIndex = i;
     }
-
-    if ([arrayWallets count] > 0)
+    
+    if (_selectedWalletIndex < [arrayWallets count])
     {
-        _selectedWalletIndex = 0;
+        Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
+        
         self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-        [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWalletIndex] forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+        [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
     }
-
     self.arrayWallets = arrayWallets;
     self.arrayWalletNames = arrayWalletNames;
 }
@@ -217,6 +228,12 @@
     _sendConfirmationViewController.bAddressIsWalletUUID = bToIsUUID;
 	_sendConfirmationViewController.amountToSendSatoshi = amount;
     _sendConfirmationViewController.wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    if (bToIsUUID)
+    {
+        Wallet *destWallet = [CoreBridge getWallet:strTo];
+        _sendConfirmationViewController.destWallet = destWallet;
+        _sendConfirmationViewController.sendToAddress = destWallet.strName;
+    }
 	_sendConfirmationViewController.selectedWalletIndex = _selectedWalletIndex;
 	_sendConfirmationViewController.nameLabel = nameLabel;
 
@@ -269,7 +286,7 @@
 				}
 				else
 				{
-					label = NSLocalizedString(@"Anonymous", nil);
+					label = @"";
 				}
 				if (uri->szMessage)
 				{
@@ -289,6 +306,17 @@
 			printf("URI parse failed!");
             bSuccess = NO;
 		}
+
+        if (!bSuccess)
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Invalid Bitcoin Address", nil)
+                                  message:NSLocalizedString(@"", nil)
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
 
 		ABC_FreeURIInfo(uri);
         
@@ -430,17 +458,6 @@
 						}
 					}
 					break;
-				case FLASH_ITEM_AUTO:
-					if ([device isTorchModeSupported:AVCaptureTorchModeAuto])
-					{
-						NSError *error = nil;
-						if ([device lockForConfiguration:&error])
-						{
-							device.torchMode = AVCaptureTorchModeAuto;
-							[device unlockForConfiguration];
-						}
-					}
-					break;
 		}
 	}
 }
@@ -464,6 +481,7 @@
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
     [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
     self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+    _walletUUID = wallet.strUUID;
 }
 
 - (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
@@ -570,25 +588,100 @@
 - (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
 {
 	[pickerTextView.textField resignFirstResponder];
+    [self processURI];
+    return YES;
+}
 
-    if (pickerTextView.textField.text.length)
+- (void)processURI
+{
+    BOOL bSuccess = YES;
+    tABC_BitcoinURIInfo *uri = NULL;
+
+    if (_pickerTextSendTo.textField.text.length)
 	{
-        // see if the text corresponds to one of the wallets
         BOOL bIsUUID = NO;
-        NSString *strTo = pickerTextView.textField.text;
-        NSInteger index = [self.arrayWalletNames indexOfObject:pickerTextView.textField.text];
+        
+        
+        NSString *label;
+        NSString *strTo = _pickerTextSendTo.textField.text;
+
+        // see if the text corresponds to one of the wallets
+        NSInteger index = [self.arrayWalletNames indexOfObject:_pickerTextSendTo.textField.text];
         if (index != NSNotFound)
         {
             bIsUUID = YES;
             Wallet *wallet = [self.arrayWallets objectAtIndex:index];
             //NSLog(@"using UUID for wallet: %@", wallet.strName);
             strTo = wallet.strUUID;
+
+            [self closeCameraScanner];
+            [self showSendConfirmationTo:strTo amount:0.0 nameLabel:@" " toIsUUID:bIsUUID];
+
         }
-        [self closeCameraScanner];
-		[self showSendConfirmationTo:strTo amount:0.0 nameLabel:@" " toIsUUID:bIsUUID];
+        else
+        {
+            tABC_Error Error;
+            ABC_ParseBitcoinURI([strTo UTF8String], &uri, &Error);
+            [Util printABC_Error:&Error];
+            
+            if (uri != NULL)
+            {
+                if (uri->szAddress)
+                {
+                    printf("    address: %s\n", uri->szAddress);
+                    
+                    printf("    amount: %lld\n", uri->amountSatoshi);
+                    
+                    if (uri->szLabel)
+                    {
+                        printf("    label: %s\n", uri->szLabel);
+                        label = [NSString stringWithUTF8String:uri->szLabel];
+                    }
+                    else
+                    {
+                        label = NSLocalizedString(@"", nil);
+                    }
+                    if (uri->szMessage)
+                    {
+                        printf("    message: %s\n", uri->szMessage);
+                    }
+                }
+                else
+                {
+                    printf("No address!");
+                    bSuccess = NO;
+                }
+            }
+            else
+            {
+                printf("URI parse failed!");
+                bSuccess = NO;
+            }
+            
+        }
+
+        if (!bSuccess)
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Invalid Bitcoin Address", nil)
+                                  message:NSLocalizedString(@"", nil)
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+        else
+        {
+            [self closeCameraScanner];
+            [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label toIsUUID:NO];
+            
+        }
 	}
 
-	return YES;
+    if (uri)
+    {
+        ABC_FreeURIInfo(uri);
+    }
 }
 
 - (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
@@ -620,5 +713,31 @@
     frame.size.height = POPUP_PICKER_TABLE_HEIGHT;
     pickerTextView.popupPicker.frame = frame;
 }
+
+#pragma - Sync View methods
+
+- (void)SyncViewDismissed:(SyncView *)sv
+{
+    [_syncingView removeFromSuperview];
+    _syncingView = nil;
+
+    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+}
+
+- (void)syncTest
+{
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    if (![CoreBridge watcherIsReady:wallet.strUUID] && !_syncingView)
+    {
+        _syncingView = [SyncView createView:self.view forWallet:wallet.strUUID];
+        _syncingView.delegate = self;
+    }
+    if (_syncingView)
+    {
+        [self resignAllResonders];
+        [self closeCameraScanner];
+    }
+}
+
 
 @end

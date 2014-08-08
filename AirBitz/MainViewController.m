@@ -16,11 +16,15 @@
 #import "LoginViewController.h"
 #import "Notifications.h"
 #import "SettingsViewController.h"
+#import "SendStatusViewController.h"
+#import "TransactionDetailsViewController.h"
 #import "User.h"
 #import "Config.h"
 #import "Util.h"
+#import "CoreBridge.h"
 #import "CommonTypes.h"
 
+id mainId;
 
 typedef enum eAppMode
 {
@@ -31,7 +35,9 @@ typedef enum eAppMode
 	APP_MODE_SETTINGS
 } tAppMode;
 
-@interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate, LoginViewControllerDelegate>
+@interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
+                                  LoginViewControllerDelegate, TransactionDetailsViewControllerDelegate,
+                                  UIAlertViewDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_diretoryViewController;
@@ -40,6 +46,10 @@ typedef enum eAppMode
 	WalletsViewController       *_walletsViewController;
 	LoginViewController         *_loginViewController;
 	SettingsViewController      *_settingsViewController;
+	SendStatusViewController    *_sendStatusController;
+    TransactionDetailsViewController *_txDetailsController;
+    UIAlertView                 *_receivedAlert;
+    UIAlertView                 *_passwordChangeAlert;
 	CGRect                      _originalTabBarFrame;
 	CGRect                      _originalViewFrame;
 	tAppMode                    _appMode;
@@ -48,6 +58,7 @@ typedef enum eAppMode
 @property (nonatomic, weak) IBOutlet TabBarView *tabBar;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
+@property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
 
 @end
 
@@ -73,17 +84,17 @@ typedef enum eAppMode
 #if !DIRECTORY_ONLY
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docs_dir = [paths objectAtIndex:0];
+    NSString *ca_path = [[NSBundle mainBundle] pathForResource:@"ca-certificates" ofType:@"crt"];
 
     tABC_Error Error;
     Error.code = ABC_CC_Ok;
-   // NSLog(@"Calling ABC_Initialize...");
     ABC_Initialize([docs_dir UTF8String],
+                   [ca_path UTF8String],
                    ABC_BitCoin_Event_Callback,
                    (__bridge void *) self,
                    (unsigned char *)[seedData bytes],
                    (unsigned int)[seedData length],
                    &Error);
-    //NSLog(@"ABC_Initialize complete");
     [Util printABC_Error:&Error];
 #endif
 
@@ -92,20 +103,32 @@ typedef enum eAppMode
 	// Do any additional setup after loading the view.
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_diretoryViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
-	_requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
-	_requestViewController.delegate = self;
-
-	_sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
-
-	_walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
-
 	_loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
 	_loginViewController.delegate = self;
-	_settingsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
-	_settingsViewController.delegate = self;
+
+    [self loadAdditionalViews];
 
     // resgister for transaction details screen complete notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit:) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchSend:) name:NOTIFICATION_LAUNCH_SEND_FOR_WALLET object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRequest:) name:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBitcoinUri:) name:NOTIFICATION_HANDLE_BITCOIN_URI object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
+}
+
+/**
+ * These views need to be cleaned out after a login
+ */
+- (void)loadAdditionalViews
+{
+	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+	_requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
+	_requestViewController.delegate = self;
+	_sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
+	_walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
+	_settingsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+	_settingsViewController.delegate = self;
 }
 
 
@@ -241,6 +264,7 @@ typedef enum eAppMode
 
 -(void)launchViewControllerBasedOnAppMode
 {
+    mainId = self;
 	switch(_appMode)
 	{
 		case APP_MODE_DIRECTORY:
@@ -257,8 +281,9 @@ typedef enum eAppMode
 		{
 			if (_selectedViewController != _requestViewController)
 			{
-				if(([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
+				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
+                    _requestViewController.walletUUID = self.strWalletUUID;
 					[_selectedViewController.view removeFromSuperview];
 					_selectedViewController = _requestViewController;
 					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
@@ -275,7 +300,7 @@ typedef enum eAppMode
 		{
 			if (_selectedViewController != _sendViewController)
 			{
-				if(([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
+				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
 					tABC_CC result;
 					tABC_WalletInfo **walletInfo;
@@ -290,6 +315,7 @@ typedef enum eAppMode
 					
 					if(1) //numWallets)
 					{
+                        _sendViewController.walletUUID = self.strWalletUUID;
 						[_selectedViewController.view removeFromSuperview];
 						_selectedViewController = _sendViewController;
 						[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
@@ -318,12 +344,12 @@ typedef enum eAppMode
 		{
 			if (_selectedViewController != _walletsViewController)
 			{
-				if (([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
+				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
 					[_selectedViewController.view removeFromSuperview];
 					_selectedViewController = _walletsViewController;
 					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-                    [_walletsViewController selectWalletWithUUID:self.strWalletUUID];
+                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
 				}
 				else
 				{
@@ -335,7 +361,7 @@ typedef enum eAppMode
 		case APP_MODE_SETTINGS:
 			if (_selectedViewController != _settingsViewController)
 			{
-				if (([User Singleton].name.length && [User Singleton].password.length) || (DIRECTORY_ONLY == 1))
+				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
 					[_selectedViewController.view removeFromSuperview];
 					_selectedViewController = _settingsViewController;
@@ -391,7 +417,8 @@ typedef enum eAppMode
 	[self updateChildViewSizeForTabBar];
 
     // reset any data designed to drive the selection
-    self.strWalletUUID = nil;
+    _strWalletUUID = nil;
+    _strTxID = nil;
 }
 
 #pragma mark - RequestViewControllerDelegates
@@ -408,13 +435,15 @@ typedef enum eAppMode
 
 -(void)SettingsViewControllerDone:(SettingsViewController *)controller
 {
+    [self loadAdditionalViews];
+
 	_appMode = APP_MODE_DIRECTORY;
 	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
 }
 
 #pragma mark - LoginViewControllerDelegates
 
--(void)loginViewControllerDidAbort
+- (void)loginViewControllerDidAbort
 {
 	_appMode = APP_MODE_DIRECTORY;
 	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
@@ -422,19 +451,203 @@ typedef enum eAppMode
 	[_loginViewController.view removeFromSuperview];
 }
 
--(void)loginViewControllerDidLogin
+- (void)loginViewControllerDidLogin
 {
+    // After login, reset all the main views
+    [self loadAdditionalViews];
+
 	[_loginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];
 }
 
+- (void)launchReceiving:(NSArray *)params
+{
+    _strWalletUUID = params[0];
+    _strTxID = params[1];
+
+    /* If showing QR code, launch receiving screen*/
+    if (_selectedViewController == _requestViewController && [_requestViewController showingQRCode])
+    {
+        [self launchSendStatus:_strWalletUUID withTx:_strTxID];
+    }
+    else
+    {
+        _receivedAlert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Received Funds", nil)
+                                message:NSLocalizedString(@"Bitcoin received. Tap for details.", nil)
+                                delegate:self
+                                cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        [_receivedAlert show];
+        // Wait 5 seconds and dimiss
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+            if (_receivedAlert)
+            {
+                [_receivedAlert dismissWithClickedButtonIndex:0 animated:YES];
+            }
+        });
+    }
+}
+
+- (void)launchSendStatus:(NSString *)walletUUID withTx:(NSString *)txId
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    _sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
+
+    CGRect frame = self.view.bounds;
+    _sendStatusController.view.frame = frame;
+    [self.view insertSubview:_sendStatusController.view belowSubview:self.tabBar];
+    _sendStatusController.view.alpha = 0.0;
+    _sendStatusController.messageLabel.text = NSLocalizedString(@"Receiving...", nil);
+    _sendStatusController.titleLabel.text = NSLocalizedString(@"Receive Status", nil);
+    [UIView animateWithDuration:0.35
+                        delay:0.0
+                    options:UIViewAnimationOptionCurveEaseInOut
+                    animations:^
+    {
+        _sendStatusController.view.alpha = 1.0;
+    }
+    completion:^(BOOL finished)
+    {
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
+            [_sendStatusController.view removeFromSuperview];
+            _sendStatusController = nil;
+            [_requestViewController resetViews];
+        });
+    }];
+}
+
+- (void)launchTransactionDetails:(NSString *)walletUUID withTx:(NSString *)txId
+{
+    Wallet *wallet = [CoreBridge getWallet:walletUUID];
+    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    _txDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+    _txDetailsController.wallet = wallet;
+    _txDetailsController.transaction = transaction;
+    _txDetailsController.delegate = self;
+    _txDetailsController.bOldTransaction = NO;
+    _txDetailsController.transactionDetailsMode = TD_MODE_RECEIVED;
+
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _txDetailsController.view.frame = frame;
+    [self.view insertSubview:_txDetailsController.view belowSubview:self.tabBar];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+    {
+        _txDetailsController.view.frame = self.view.bounds;
+    }
+    completion:^(BOOL finished)
+    {
+        [self showTabBarAnimated:YES];
+    }];
+}
+
+-(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
+{
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+    {
+        CGRect frame = self.view.bounds;
+        frame.origin.x = frame.size.width;
+        _txDetailsController.view.frame = frame;
+    }
+    completion:^(BOOL finished)
+    {
+        [_txDetailsController.view removeFromSuperview];
+        _txDetailsController = nil;
+    }];
+}
+
+#pragma mark - ABC Alert delegate 
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	if (_receivedAlert == alertView && buttonIndex == 1)
+	{
+        [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
+        _receivedAlert = nil;
+	}
+    else if (_passwordChangeAlert == alertView)
+    {
+        _passwordChangeAlert = nil;
+    }
+}
+
+- (void)alertViewCancel:(UIAlertView *)alertView
+{
+    if (_receivedAlert == alertView)
+    {
+        _strWalletUUID = @"";
+        _strTxID = @"";
+        _receivedAlert = nil;
+    }
+}
+
 #pragma mark - ABC Callbacks
+
+- (void)notifyBlockHeight:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:mainId];
+}
+
+- (void)notifyExchangeRate:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:mainId];
+}
+
+- (void)notifyDataSync:(NSArray *)params
+{
+    // if there are new wallets, we need to start their watchers
+    [CoreBridge startWatchers];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:mainId];
+}
+
+- (void)notifyRemotePasswordChange:(NSArray *)params
+{
+    NSLog(@"********** notifyRemotePasswordChange *********");
+    if (_passwordChangeAlert == nil)
+    {
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        [[User Singleton] clear];
+        [self resetViews:nil];
+        _passwordChangeAlert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Password Change", nil)
+                                message:NSLocalizedString(@"The password to this account was changed by another device. Please login using the new credentials.", nil)
+                                delegate:self
+                    cancelButtonTitle:nil
+                    otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        [_passwordChangeAlert show];
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    }
+}
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
     if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin)
     {
+        NSString *walletUUID = [NSString stringWithUTF8String:pInfo->szWalletUUID];
+        NSString *txId = [NSString stringWithUTF8String:pInfo->szTxID];
+        NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
+        [mainId performSelectorOnMainThread:@selector(launchReceiving:) withObject:params waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
+        [mainId performSelectorOnMainThread:@selector(notifyBlockHeight:) withObject:nil waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_ExchangeRateUpdate) {
+        [mainId performSelectorOnMainThread:@selector(notifyExchangeRate:) withObject:nil waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_DataSyncUpdate) {
+        [mainId performSelectorOnMainThread:@selector(notifyDataSync:) withObject:nil waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_RemotePasswordChange) {
+        [mainId performSelectorOnMainThread:@selector(notifyRemotePasswordChange:) withObject:nil waitUntilDone:NO];
     }
 }
 
@@ -447,9 +660,59 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     if (APP_MODE_WALLETS != _appMode)
     {
         NSDictionary *dictData = [notification userInfo];
-        self.strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        [_walletsViewController resetViews];
         [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
     }
+}
+
+- (void)launchSend:(NSNotification *)notification
+{
+    if (APP_MODE_SEND != _appMode)
+    {
+        NSDictionary *dictData = [notification userInfo];
+        _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        [_sendViewController resetViews];
+        [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
+    }
+}
+
+- (void)launchRequest:(NSNotification *)notification
+{
+    if (APP_MODE_REQUEST != _appMode)
+    {
+        NSDictionary *dictData = [notification userInfo];
+        _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        [_requestViewController resetViews];
+        [self.tabBar selectButtonAtIndex:APP_MODE_REQUEST];
+    }
+}
+
+- (void)handleBitcoinUri:(NSNotification *)notification
+{
+    [_sendViewController resetViews];
+    [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
+
+    NSDictionary *dictData = [notification userInfo];
+    NSURL *uri = [dictData objectForKey:KEY_URL];
+    _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
+    [_sendViewController processURI];
+}
+
+- (void)loggedOffRedirect:(NSNotification *)notification
+{
+	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
+    [self resetViews:notification];
+}
+
+- (void)resetViews:(NSNotification *)notification
+{
+    // Hide the keyboard
+    [self.view endEditing:NO];
+
+    // Force the tabs to redraw the selected view
+    _selectedViewController = nil;
+    [self launchViewControllerBasedOnAppMode];
 }
 
 @end

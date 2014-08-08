@@ -62,9 +62,12 @@
     region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
     region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.2; // Add a little extra space on the sides
     region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.2; // Add a little extra space on the sides
-	
     region = [self regionThatFits:region];
-    [self setRegion:region animated:YES];
+
+    if (CLLocationCoordinate2DIsValid(region.center))
+    {
+        [self setRegion:region animated:YES];
+    }
 }
 
 

@@ -13,6 +13,10 @@
 @interface RequestViewController : UIViewController
 
 @property (assign) id<RequestViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSString  *walletUUID;
+
+- (BOOL)showingQRCode;
+- (void)resetViews;
 
 @end
 

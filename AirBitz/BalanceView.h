@@ -12,18 +12,18 @@
 
 typedef enum eBalanceViewState
 {
-	BALANCE_VIEW_UP,
-	BALANCE_VIEW_DOWN
+    BALANCE_VIEW_UP,
+    BALANCE_VIEW_DOWN
 }tBalanceViewState;
 
 @interface BalanceView : UIView
 
 @property (assign) id<BalanceViewDelegate> delegate;
+@property BOOL barIsUp;
 
 + (BalanceView *)CreateWithDelegate:(id)del;
 
--(void)refresh;
-
+- (void)refresh;
 @property (nonatomic, weak) IBOutlet UIImageView *topIcon;
 @property (nonatomic, weak) IBOutlet UILabel *topAmount;
 @property (nonatomic, weak) IBOutlet UILabel *topDenomination;

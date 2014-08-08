@@ -20,7 +20,7 @@
 #import "InfoView.h"
 #import "CoreBridge.h"
 
-#define WALLET_BUTTON_WIDTH 150
+#define WALLET_BUTTON_WIDTH 210
 
 #define SCANNER_DELAY_SECS  0
 
@@ -45,7 +45,6 @@ typedef enum eImportState
     tImportState            _state;
 }
 
-@property (weak, nonatomic) IBOutlet UIView             *viewHeader;
 @property (weak, nonatomic) IBOutlet UIView             *viewPassword;
 @property (weak, nonatomic) IBOutlet StylizedTextField  *textPassword;
 @property (weak, nonatomic) IBOutlet ButtonSelectorView *buttonSelector;
@@ -54,9 +53,6 @@ typedef enum eImportState
 @property (weak, nonatomic) IBOutlet UIImageView        *imageFlashFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView    *flashSelector;
 @property (weak, nonatomic) IBOutlet UIView             *viewDisplay;
-@property (weak, nonatomic) IBOutlet UIView             *viewTop;
-@property (weak, nonatomic) IBOutlet UIView             *viewMiddle;
-@property (weak, nonatomic) IBOutlet UIView             *viewBottom;
 @property (weak, nonatomic) IBOutlet LatoLabel          *labelEnter;
 @property (weak, nonatomic) IBOutlet UIImageView        *imagePasswordEmboss;
 @property (weak, nonatomic) IBOutlet UIImageView        *imageApproved;
@@ -95,22 +91,12 @@ typedef enum eImportState
     self.textPrivateKey.delegate = self;
 
 	self.buttonSelector.delegate = self;
-	self.buttonSelector.textLabel.text = NSLocalizedString(@"Import Wallet:", nil);
+	self.buttonSelector.textLabel.text = NSLocalizedString(@"To:", nil);
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 
     // get a callback when the private key changes
     [self.textPrivateKey addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-
-    // move the dislay and password views to correct y, just in case the xib moved them for editing
-    CGRect frame = self.viewDisplay.frame;
-    frame.origin.y = self.viewHeader.frame.origin.y + self.viewHeader.frame.size.height;
-    frame.origin.x = 0;
-    self.viewDisplay.frame = frame;
-    frame = self.viewPassword.frame;
-    frame.origin.y = self.viewHeader.frame.origin.y + self.viewHeader.frame.size.height;
-    frame.origin.x = 0;
-    self.viewPassword.frame = frame;
-
+    
     [self setWalletData];
 
     [self updateDisplayLayout];
@@ -212,14 +198,14 @@ typedef enum eImportState
         if (_state == ImportState_EnterPassword)
         {
             self.textPassword.enabled = YES;
-            self.labelPasswordStatus.text = NSLocalizedString(@"Enter password to decode wallet:", nil);
+            self.labelPasswordStatus.text = NSLocalizedString(@"Enter password to decode wallet", nil);
             self.textPassword.hidden = NO;
             self.imagePasswordEmboss.hidden = NO;
         }
         else if (_state == ImportState_RetryPassword)
         {
             self.textPassword.enabled = YES;
-            self.labelPasswordStatus.text = NSLocalizedString(@"Incorrect password.\nTry again:", nil);
+            self.labelPasswordStatus.text = NSLocalizedString(@"Incorrect password.\nTry again", nil);
             self.textPassword.hidden = NO;
             self.imagePasswordEmboss.hidden = NO;
             self.imageNotApproved.hidden = NO;
@@ -245,30 +231,15 @@ typedef enum eImportState
     // update for iPhone 4
     if (!IS_IPHONE5)
     {
-        CGRect frame = self.viewTop.frame;
-        frame.origin.y = 0;
-        self.viewTop.frame = frame;
+        CGRect frame;
 
-        frame = self.viewMiddle.frame;
-        frame.origin.y = self.viewTop.frame.origin.y + self.viewTop.frame.size.height;
-        self.viewMiddle.frame = frame;
-
-        frame = self.viewBottom.frame;
-        frame.size.height = self.viewDisplay.frame.size.height - self.viewTop.frame.size.height - self.viewMiddle.frame.size.height;
-        frame.origin.y = self.viewDisplay.frame.size.height - frame.size.height + 4;
-        self.viewBottom.frame = frame;
-
+        // put the scan frame bottom right to the top of the flash frame
         frame = self.scanFrame.frame;
-        frame.origin.y = 0;
-        frame.size.height = self.viewBottom.frame.size.height - self.imageFlashFrame.frame.size.height;
-        frame.size.height -= 3; // some alpha at the top of the flash frame
+        frame.size.height = 275;
         self.scanFrame.frame = frame;
-
-        frame = self.flashSelector.frame;
-        frame.size.height = 160; // magic: seems to work...sorry
-        frame.origin.y = 136; // magic: seems to work...sorry
-        self.flashSelector.frame = frame;
     }
+ 
+
 }
 
 - (void)requestPassword
@@ -289,14 +260,16 @@ typedef enum eImportState
     for (int i = 0; i < [arrayWallets count]; i++)
     {
         Wallet *wallet = [arrayWallets objectAtIndex:i];
-        [arrayWalletNames addObject:wallet.strName];
+        [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+
     }
 
     if ([arrayWallets count] > 0)
     {
+        Wallet *wallet = [arrayWallets objectAtIndex:0];
         _selectedWallet = 0;
         self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-        [self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWallet] forState:UIControlStateNormal];
+        [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = (int) _selectedWallet;
     }
 
@@ -407,7 +380,7 @@ typedef enum eImportState
     // NSLog(@"Scanning...");
 
 	_readerView = [ZBarReaderView new];
-	[self.viewBottom insertSubview:_readerView belowSubview:self.scanFrame];
+	[self.viewDisplay insertSubview:_readerView belowSubview:self.scanFrame];
 	_readerView.frame = self.scanFrame.frame;
 	_readerView.readerDelegate = self;
 	_readerView.tracksSymbols = NO;
@@ -544,17 +517,6 @@ typedef enum eImportState
                     if ([device lockForConfiguration:&error])
                     {
                         device.torchMode = AVCaptureTorchModeOn;
-                        [device unlockForConfiguration];
-                    }
-                }
-                break;
-            case FLASH_ITEM_AUTO:
-                if ([device isTorchModeSupported:AVCaptureTorchModeAuto])
-                {
-                    NSError *error = nil;
-                    if ([device lockForConfiguration:&error])
-                    {
-                        device.torchMode = AVCaptureTorchModeAuto;
                         [device unlockForConfiguration];
                     }
                 }

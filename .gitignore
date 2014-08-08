@@ -3,9 +3,11 @@ build/
 xcuserdata
 profile
 *.moved-aside
+*.swp
 DerivedData
 .idea/
 Airbitz/ABC
 
 xcuserdata
 project.xcworkspace
+deploy

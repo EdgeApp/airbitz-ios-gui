@@ -12,5 +12,6 @@
 
 - (void)reloadWallets;
 - (void)selectWalletWithUUID:(NSString *)strUUID;
+- (void)resetViews;
 
 @end

@@ -17,13 +17,15 @@
 @property (nonatomic, strong)   NSArray                         *availableQuestions; /* these show up in the table */
 @property (nonatomic, readonly) BOOL                            questionSelected;
 
-@property (nonatomic, weak) IBOutlet MinCharTextField *answerField;
+@property (weak, nonatomic) IBOutlet UILabel            *labelQuestion;
+@property (nonatomic, weak) IBOutlet MinCharTextField   *answerField;
 
 + (QuestionAnswerView *)CreateInsideView:(UIView *)parentView withDelegate:(id<QuestionAnswerViewDelegate>)delegate;
 - (void)closeTable;
 - (NSString *)question;
 - (NSString *)answer;
 - (void)presentQuestionChoices;
+- (void)disableSelecting;
 
 @end
 

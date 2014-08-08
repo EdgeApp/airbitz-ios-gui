@@ -60,11 +60,23 @@
     _viewTop = topMostView;
 }
 
-- (void)updateChoices:(NSArray *)arrayChoices;
+- (void)updateChoices:(NSArray *)arrayChoices
 {
     self.arrayChoices = arrayChoices;
     [self.popupPicker updateStrings:self.arrayChoices];
     [self setCropPoints];
+
+    if ([arrayChoices count] > 0)
+    {
+        if (!self.popupPicker)
+        {
+            [self createPopupPicker];
+        }
+    }
+    else
+    {
+        [self dismissPopupPicker];
+    }
 }
 
 #pragma mark - Action Methods
@@ -117,6 +129,14 @@
 
 - (void)createPopupPicker
 {
+    // No arrayChoices? Don't show a popup
+    if ([self.arrayChoices count] <= 0)
+        return;
+
+    // We already have one open
+    if (self.popupPicker)
+        return;
+
     self.popupPicker = [PopupPickerView CreateForView:_viewTop
 										 relativeToView:self.textField
                                          relativePosition:self.popupPickerPosition

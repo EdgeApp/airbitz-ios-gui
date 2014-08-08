@@ -10,7 +10,7 @@
 
 @interface WalletHeaderView ()
 {
-	BOOL headerCollapsed;
+    BOOL headerCollapsed;
 }
 
 @end
@@ -26,61 +26,62 @@
     return self;
 }
 
-+(WalletHeaderView *)CreateWithTitle:(NSString *)title
++(WalletHeaderView *)CreateWithTitle:(NSString *)title collapse:(BOOL)bCollapsed
 {
-	WalletHeaderView *whv = nil;
-	
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-	{
-		whv = [[[NSBundle mainBundle] loadNibNamed:@"WalletHeaderView~iphone" owner:nil options:nil] objectAtIndex:0];
-	}
-	/*else
-	 {
-	 av = [[[NSBundle mainBundle] loadNibNamed:@"HowToPlayView~ipad" owner:nil options:nil] objectAtIndex:0];
-	 
-	 }*/
-	whv.layer.cornerRadius = 4.0;
-	whv.titleLabel.text = title;
-	
-	return whv;
+    WalletHeaderView *whv = nil;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        whv = [[[NSBundle mainBundle] loadNibNamed:@"WalletHeaderView~iphone" owner:nil options:nil] objectAtIndex:0];
+    }
+    /*else
+     {
+     av = [[[NSBundle mainBundle] loadNibNamed:@"HowToPlayView~ipad" owner:nil options:nil] objectAtIndex:0];
+     
+     }*/
+    whv.layer.cornerRadius = 4.0;
+    whv.titleLabel.text = title;
+    whv->headerCollapsed = bCollapsed;
+    if (whv->headerCollapsed)
+    {
+        whv.btn_expandCollapse.transform = CGAffineTransformRotate(whv.btn_expandCollapse.transform, M_PI);
+    }
+    return whv;
 }
 
 - (IBAction)ExpandCollapse
 {
-	if(headerCollapsed)
-	{
-		headerCollapsed = NO;
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-			 self.btn_expandCollapse.transform = CGAffineTransformRotate(self.btn_expandCollapse.transform, M_PI);
-		 }
-						 completion:^(BOOL finished)
-		 {
-			 
-			 [self.delegate walletHeaderView:self Expanded:YES];
-		 }];
-	}
-	else
-	{
-		headerCollapsed = YES;
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-			 self.btn_expandCollapse.transform = CGAffineTransformRotate(self.btn_expandCollapse.transform, -M_PI);
-		 }
-						 completion:^(BOOL finished)
-		 {
-			 [self.delegate walletHeaderView:self Expanded:NO];
-		 }];
-	}
+    if(headerCollapsed)
+    {
+        headerCollapsed = NO;
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             self.btn_expandCollapse.transform = CGAffineTransformRotate(self.btn_expandCollapse.transform, M_PI);
+         }
+                         completion:^(BOOL finished)
+         {
+             
+             [self.delegate walletHeaderView:self Expanded:YES];
+         }];
+    }
+    else
+    {
+        headerCollapsed = YES;
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             self.btn_expandCollapse.transform = CGAffineTransformRotate(self.btn_expandCollapse.transform, -M_PI);
+         }
+                         completion:^(BOOL finished)
+         {
+             [self.delegate walletHeaderView:self Expanded:NO];
+         }];
+    }
 }
-
-
-
 
 @end

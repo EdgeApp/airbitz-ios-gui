@@ -20,9 +20,9 @@
 	UITableView     *_qaTable;
 	CGRect          _originalFrame;
     NSDictionary    *_dict;
+    BOOL            _bDisableSelecting;
 }
 
-@property (weak, nonatomic) IBOutlet UILabel        *labelQuestion;
 @property (nonatomic, weak) IBOutlet UIButton       *questionButtonBig;
 @property (nonatomic, weak) IBOutlet UIImageView    *expandCollapseImage;
 
@@ -155,47 +155,56 @@
     [self QuestionButton];
 }
 
+- (void)disableSelecting
+{
+    _bDisableSelecting = YES;
+    self.expandCollapseImage.hidden = YES;
+}
+
 #pragma mark - Action Methods
 
 - (IBAction)QuestionButton
 {
-	if (_bQuestionExpanded)
-	{
-		_bQuestionExpanded = NO;
-		[UIView animateWithDuration:QA_ANIM_TIME_SECS
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-			 self.expandCollapseImage.transform = CGAffineTransformRotate(self.expandCollapseImage.transform, M_PI);
-		 }
-                         completion:^(BOOL finished)
-		 {
+    if (_bDisableSelecting == NO)
+    {
+        if (_bQuestionExpanded)
+        {
+            _bQuestionExpanded = NO;
+            [UIView animateWithDuration:QA_ANIM_TIME_SECS
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^
+             {
+                 self.expandCollapseImage.transform = CGAffineTransformRotate(self.expandCollapseImage.transform, M_PI);
+             }
+                             completion:^(BOOL finished)
+             {
 
-		 }];
+             }];
 
-        [self hideTable];
-	}
-	else
-	{
-		_bQuestionExpanded = YES;
+            [self hideTable];
+        }
+        else
+        {
+            _bQuestionExpanded = YES;
 
-		[self.superview bringSubviewToFront:self];
+            [self.superview bringSubviewToFront:self];
 
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseInOut
-						 animations:^
-		 {
-			 self.expandCollapseImage.transform = CGAffineTransformRotate(self.expandCollapseImage.transform, -M_PI);
-		 }
-						 completion:^(BOOL finished)
-		 {
-
-		 }];
-        
-		[self showTable];
-	}
+            [UIView animateWithDuration:0.35
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^
+             {
+                 self.expandCollapseImage.transform = CGAffineTransformRotate(self.expandCollapseImage.transform, -M_PI);
+             }
+                             completion:^(BOOL finished)
+             {
+                 
+             }];
+            
+            [self showTable];
+        }
+    }
 }
 
 - (void)notifyQuestionSelected

@@ -10,7 +10,9 @@
 #import "ExportWalletOptionsViewController.h"
 #import "ExportWalletPDFViewController.h"
 #import "InfoView.h"
+#import "User.h"
 #import "Util.h"
+#import "CoreBridge.h"
 #import "ExportWalletOptionsCell.h"
 #import "CommonTypes.h"
 #import "GDrive.h"
@@ -22,7 +24,7 @@
                                     @[@2, @3, @4],          /* Quicken */\
                                     @[@2, @3, @4],          /* Quickbooks */\
                                     @[@0, @2, @3, @4, @5],  /* PDF */\
-                                    @[@0]                   /* PrivateSeed */\
+                                    @[@0, @2, @5]                   /* PrivateSeed */\
                                 ]
 #define ARRAY_NAMES_FOR_OPTIONS @[@"AirPrint", @"Save to SD card", @"Email", @"Google Drive", @"Dropbox", @"View"]
 #define ARRAY_IMAGES_FOR_OPTIONS @[@"icon_export_printer", @"icon_export_sdcard", @"icon_export_email", @"icon_export_google", @"icon_export_dropbox", @"icon_export_view"]
@@ -422,8 +424,23 @@ typedef enum eExportOption
 
         case WalletExportType_PrivateSeed:
         {
-            NSString* str = @"[Private Seed Here]";
-            dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+            tABC_Error Error;
+            char *szSeed = NULL;
+            tABC_CC result = ABC_ExportWalletSeed([[User Singleton].name UTF8String],
+                                                  [[User Singleton].password UTF8String],
+                                                  [self.wallet.strUUID UTF8String],
+                                                  &szSeed, &Error);
+            if (ABC_CC_Ok == result)
+            {
+                dataExport = [[NSData alloc] initWithBytes:szSeed length:strlen(szSeed)];
+            }
+            else
+            {
+                [Util printABC_Error:&Error];
+                NSString* str = @"Error exporting private seed!";
+                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+            }
+            free(szSeed);
         }
             break;
 

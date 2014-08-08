@@ -53,7 +53,7 @@
 
 	iv.delegate = nil;
 	iv.frame = theView.bounds;
-	[iv enableScrolling:NO];
+	[iv enableScrolling:YES];
 	NSString* path = [[NSBundle mainBundle] pathForResource:strHTML ofType:@"html"];
 	iv.htmlInfoToDisplay = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
     [theView addSubview:iv];
@@ -61,7 +61,7 @@
 
 - (void) initMyVariables
 {
-	self.webView.layer.cornerRadius = 4.0;
+	self.webView.layer.cornerRadius = 0.0;
 	self.webView.clipsToBounds = YES;
 	self.webView.delegate = self;
 	

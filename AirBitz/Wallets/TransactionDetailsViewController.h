@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Transaction.h"
+#import "Wallet.h"
 
 typedef enum eTDMode
 {
@@ -21,6 +22,7 @@ typedef enum eTDMode
 
 @property (assign)            id<TransactionDetailsViewControllerDelegate>  delegate;
 @property (nonatomic, strong) Transaction                                   *transaction;
+@property (nonatomic, strong) Wallet                                        *wallet;
 @property (nonatomic, assign) tTDMode                                       transactionDetailsMode;
 @property (nonatomic, assign) BOOL                                          bOldTransaction;
 

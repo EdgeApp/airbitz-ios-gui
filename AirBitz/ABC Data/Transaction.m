@@ -21,7 +21,7 @@
 {
     self = [super init];
     if (self) 
-	{
+    {
         self.strID = @"";
         self.strWalletUUID = @"";
         self.strWalletName = @"";
@@ -30,6 +30,7 @@
         self.date = [NSDate date];
         self.strCategory = @"";
         self.strNotes = @"";
+        self.outputs = [[NSArray alloc] init];
     }
     return self;
 }
@@ -43,18 +44,18 @@
 // allows us to call things like removeObject in array's of these
 - (BOOL)isEqual:(id)object
 {
-	if ([object isKindOfClass:[Transaction class]])
-	{
-		Transaction *transactionOther = object;
-		
+    if ([object isKindOfClass:[Transaction class]])
+    {
+        Transaction *transactionOther = object;
+
         if ([self.strID isEqualToString:transactionOther.strID])
         {
-			return YES;
-		}
-	}
-    
-	// if we got this far then they are not equal
-	return NO;
+            return YES;
+        }
+    }
+
+    // if we got this far then they are not equal
+    return NO;
 }
 
 // overriding the NSObject hash
