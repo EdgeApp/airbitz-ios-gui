@@ -30,7 +30,7 @@
 #define TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD 160
 
 #define TABLE_HEADER_HEIGHT 46.0
-#define TABLE_CELL_HEIGHT   72.0
+#define TABLE_CELL_HEIGHT   55.0
 #define NO_SEARCHBAR 1
 
 #define CACHE_IMAGE_AGE_SECS (60 * 60) // 60 hour
@@ -774,7 +774,7 @@
             finalCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             finalCell.backgroundColor = [UIColor clearColor];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(0, 0, 143.0, 41.0);
+            button.frame = CGRectMake(15, 0, 143.0, 41.0);
             [button setBackgroundImage:[UIImage imageNamed:@"btn_request.png"] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
             [finalCell addSubview:button];
@@ -783,7 +783,7 @@
             self.buttonRequest = button;
 
             button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(151.0, 0, 143.0, 41.0);
+            button.frame = CGRectMake(163.0, 0, 143.0, 41.0);
             [button setBackgroundImage:[UIImage imageNamed:@"btn_send.png"] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
             [finalCell addSubview:button];
