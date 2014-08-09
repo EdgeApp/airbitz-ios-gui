@@ -7,16 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ABC.h"
 
 @protocol ShowWalletQRViewControllerDelegate;
 
 @interface ShowWalletQRViewController : UIViewController
+
+@property (assign) tABC_TxDetails txDetails;
+@property (assign) int currencyNum;
 
 @property (assign) id<ShowWalletQRViewControllerDelegate> delegate;
 @property (nonatomic, strong) UIImage *qrCodeImage;
 @property (nonatomic, strong) NSString *statusString;
 @property (nonatomic, strong) NSString *addressString;
 @property (nonatomic, strong) NSString *uriString;
+@property (nonatomic, strong) NSString *requestID;
+@property (nonatomic, strong) NSString *walletUUID;
 @property (nonatomic, assign) int64_t amountSatoshi;
 
 - (IBAction)Back;

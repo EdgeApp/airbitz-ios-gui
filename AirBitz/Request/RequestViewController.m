@@ -46,6 +46,8 @@
 	int                         _selectedWalletIndex;
 	ShowWalletQRViewController  *_qrViewController;
     ImportWalletViewController  *_importWalletViewController;
+    tABC_TxDetails              details;
+    NSString                    *requestID;
 }
 
 @property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
@@ -190,7 +192,6 @@
 - (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes
 {
 	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
-	tABC_TxDetails details;
 	tABC_CC result;
 	double currency;
 	tABC_Error error;
@@ -214,6 +215,7 @@
     details.szNotes = (char *) [strNotes UTF8String];
 	details.szCategory = "";
 	details.attributes = 0x0; //for our own use (not used by the core)
+    details.bizId = 0;
 
 	char *pRequestID;
 
@@ -290,13 +292,18 @@
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
-	
+
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 	_qrViewController.delegate = self;
 	_qrViewController.qrCodeImage = image;
 	_qrViewController.addressString = address;
 	_qrViewController.uriString = strRequestURI;
 	_qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
     _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
+    _qrViewController.requestID = requestID;
+    _qrViewController.walletUUID = wallet.strUUID;
+    _qrViewController.txDetails = details;
+    _qrViewController.currencyNum = wallet.currencyNum;
 	CGRect frame = self.view.bounds;
 	_qrViewController.view.frame = frame;
 	[self.view addSubview:_qrViewController.view];
@@ -328,6 +335,7 @@
     tABC_Error error;
 
     const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes];
+    requestID = [NSString stringWithUTF8String:szRequestID];
 
     if (szRequestID)
     {

@@ -259,7 +259,7 @@ typedef enum eAddressPickerType
 
         NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(self.qrCodeImage, 1.0)];
         NSString *base64String = [imageData base64Encoded];
-        [strBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/jpeg;base64,%@'></b></p>", base64String]];
+        [strBody appendString:[NSString stringWithFormat:@"<p><b><img alt='QRCode' title='QRCode' src='data:image/jpeg;base64,%@' /></b></p>", base64String]];
 
         [strBody appendString:@"</body></html>\n"];
 
@@ -277,7 +277,7 @@ typedef enum eAddressPickerType
         mailComposer.mailComposeDelegate = self;
 
         [self presentViewController:mailComposer animated:YES completion:nil];
-        //[self presentModalViewController:mailComposer animated:NO];
+        [self finalizeRequest:@"EMail"];
     }
     else
     {
@@ -363,7 +363,7 @@ typedef enum eAddressPickerType
 		controller.messageComposeDelegate = self;
 
         [self presentViewController:controller animated:YES completion:nil];
-        //[self.view.window.rootViewController presentViewController:controller animated:YES completion:nil];
+        [self finalizeRequest:@"SMS"];
 	}
 }
 
@@ -430,9 +430,49 @@ typedef enum eAddressPickerType
             [self sendEMail];
         }];
     }
-
-
     return NO;
+}
+
+- (void)finalizeRequest:(NSString *)type
+{
+    if (_strFullName) {
+        _txDetails.szName = (char *)[_strFullName UTF8String];
+    } else if (_strEMail) {
+        _txDetails.szName = (char *)[_strEMail UTF8String];
+    } else if (_strPhoneNumber) {
+        _txDetails.szName = (char *)[_strPhoneNumber UTF8String];
+    }
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    NSDate *now = [NSDate date];
+
+    NSMutableString *notes = [[NSMutableString alloc] init];
+    [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ On %@.", nil),
+                        [CoreBridge formatSatoshi:_txDetails.amountSatoshi],
+                        [CoreBridge formatCurrency:_txDetails.amountCurrency withCurrencyNum:_currencyNum],
+                        type,
+                        [dateFormatter stringFromDate:now]];
+    _txDetails.szNotes = (char *)[notes UTF8String];
+    tABC_Error Error;
+    // Update the Details
+    if (ABC_CC_Ok != ABC_ModifyReceiveRequest([[User Singleton].name UTF8String],
+                                              [[User Singleton].password UTF8String],
+                                              [_walletUUID UTF8String],
+                                              [_requestID UTF8String],
+                                              &_txDetails,
+                                              &Error))
+    {
+        [Util printABC_Error:&Error];
+    }
+    // Finalize this request so it isn't used elsewhere
+    if (ABC_CC_Ok != ABC_FinalizeReceiveRequest([[User Singleton].name UTF8String],
+                                                [[User Singleton].password UTF8String],
+                                                [_walletUUID UTF8String],
+                                                [_requestID UTF8String],
+                                                &Error))
+    {
+        [Util printABC_Error:&Error];
+    }
 }
 
 #pragma mark - MFMessageComposeViewController delegate
