@@ -19,37 +19,44 @@
 
 @implementation RibbonView
 
-+(NSString *)metersToDistance:(float)meters
++ (NSString *)metersToDistance:(float)meters
 {
-	//used to generate string that is displayed in distance ribbon
-	float feet = meters * 3.28084;
-	NSString *resultString = nil;
-	
-	if(feet < 1000.0)
-	{
-		//give result in feet
-		if((int)feet == 1)
-		{
-			resultString = @"1 foot";
-		}
-		else
-		{
-			resultString = [NSString stringWithFormat:@"%.0f feet", feet];
-		}
-	}
-	else
-	{
-		//give result in miles
-		if((int)feet == 5280)
-		{
-			resultString = @"1 mile";
-		}
-		else
-		{
-			resultString = [NSString stringWithFormat:@"%.2f miles", feet / 5280.0];
-		}
-	}
-	return resultString;
+    NSLocale *locale = [NSLocale currentLocale];
+    BOOL isMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
+    NSString *resultString = nil;
+
+    if (isMetric) {
+        if (meters < 1000.0) {
+            if ((int) meters == 1) {
+                resultString = @"1 meter";
+            } else {
+                resultString = [NSString stringWithFormat:@"%.0f meters", meters];
+            }
+        } else {
+            float km = meters / 1000.0;
+            if ((int)km == 1) {
+                resultString = @"1 km";
+            } else {
+                resultString = [NSString stringWithFormat:@"%.2f km", km];
+            }
+        }
+    } else {
+        float feet = meters * 3.28084;
+        if (feet < 1000.0) {
+            if ((int)feet == 1) {
+                resultString = @"1 foot";
+            } else {
+                resultString = [NSString stringWithFormat:@"%.0f feet", feet];
+            }
+        } else {
+            if ((int)feet == 5280) {
+                resultString = @"1 mile";
+            } else {
+                resultString = [NSString stringWithFormat:@"%.2f miles", feet / 5280.0];
+            }
+        }
+    }
+    return resultString;
 }
 
 - (id)initWithFrame:(CGRect)frame
