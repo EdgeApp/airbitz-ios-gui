@@ -37,7 +37,7 @@ if grep -Fq "enable-testnet" recipes/libbitcoin/libbitcoin ; then
 	run sed -i -e 's/--enable-testnet //g' recipes/libbitcoin/libbitcoin
 fi
 
-#run make abc.clean
+run make abc.clean
 if [ "$5" = "clean" ]; then
 	run make clean
 fi
@@ -58,7 +58,7 @@ if ! grep -Fq "enable-testnet" recipes/libbitcoin/libbitcoin ; then
 	run sed -i -e 's/--disable-shared/--disable-shared --enable-testnet/g' recipes/libbitcoin/libbitcoin
 fi
 
-#run make abc.clean
+run make abc.clean
 if [ "$5" = "clean" ]; then
 	run make clean
 fi
@@ -130,10 +130,10 @@ fi
 run mkdir "../build-archives/ios/walletcore/${build}_${1}_ios_testnet"
 
 
-run cp -a "../airbitz-walletcore/deps/build/abc/abc-ios-universal/include/* ../build-archives/ios/walletcore/${build}_${1}_ios/"
-run cp -a "../airbitz-walletcore/deps/build/abc/abc-ios-universal/lib/* ../build-archives/ios/walletcore/${build}_${1}_ios/"
+run cp -a "../airbitz-walletcore/deps/build/abc/abc-ios-universal/include/*" "../build-archives/ios/walletcore/${build}_${1}_ios/"
+run cp -a "../airbitz-walletcore/deps/build/abc/abc-ios-universal/lib/*" "../build-archives/ios/walletcore/${build}_${1}_ios/"
 
-run cp -a "../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/include/* ../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
-run cp -a "../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/lib/* ../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
+run cp -a "../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/include/*" "../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
+run cp -a "../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/lib/*" "../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
 
 
