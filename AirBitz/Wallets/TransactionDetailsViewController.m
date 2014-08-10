@@ -197,7 +197,10 @@
     self.pickerTextCategory.delegate = self;
 
     _bizId = self.transaction.bizId;
-    self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    self.dateLabel.text = [dateFormatter stringFromDate:self.transaction.date];
     self.nameTextField.text = self.transaction.strName;
     self.notesTextView.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
