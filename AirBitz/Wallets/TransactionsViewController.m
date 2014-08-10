@@ -29,8 +29,12 @@
 
 #define TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD 160
 
+#define PHOTO_BORDER_WIDTH          2.0f
+#define PHOTO_BORDER_COLOR          [UIColor lightGrayColor]
+#define PHOTO_BORDER_CORNER_RADIUS  5.0
+
 #define TABLE_HEADER_HEIGHT 46.0
-#define TABLE_CELL_HEIGHT   55.0
+#define TABLE_CELL_HEIGHT   72.0
 #define NO_SEARCHBAR 1
 
 #define CACHE_IMAGE_AGE_SECS (60 * 60) // 60 hour
@@ -892,7 +896,28 @@
         // set the photo
         cell.imagePhoto.image = [self imageForTransaction:transaction];
         cell.viewPhoto.hidden = (cell.imagePhoto.image == nil);
-
+    
+        CGRect dateFrame = cell.dateLabel.frame;
+        CGRect addressFrame = cell.addressLabel.frame;
+        CGRect confirmationFrame = cell.confirmationLabel.frame;
+        
+        if (cell.imagePhoto.image == nil)
+        {
+            dateFrame.origin.x = addressFrame.origin.x = confirmationFrame.origin.x = 10;
+        }
+        else
+        {
+            dateFrame.origin.x = addressFrame.origin.x = confirmationFrame.origin.x = 63;
+        }
+        
+        cell.dateLabel.frame = dateFrame;
+        cell.addressLabel.frame = addressFrame;
+        cell.confirmationLabel.frame = confirmationFrame;
+        
+        CGFloat borderWidth = PHOTO_BORDER_WIDTH;
+        cell.viewPhoto.layer.borderColor = [PHOTO_BORDER_COLOR CGColor];
+        cell.viewPhoto.layer.borderWidth = borderWidth;
+        cell.viewPhoto.layer.cornerRadius = PHOTO_BORDER_CORNER_RADIUS;
         finalCell = cell;
     }
 

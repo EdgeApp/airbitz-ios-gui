@@ -206,7 +206,7 @@
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
-    self.nameTextField.placeholder = NSLocalizedString(@"Payee or Business Name", nil);
+    self.nameTextField.placeholder = NSLocalizedString(@"Enter Payee", nil);
     self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.nameTextField.font = [UIFont systemFontOfSize:18];
     self.nameTextField.textAlignment = NSTextAlignmentCenter;
