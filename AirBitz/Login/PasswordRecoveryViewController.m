@@ -549,6 +549,7 @@ typedef enum eAlertType
             if (i == (NUM_QUESTION_ANSWER_BLOCKS - 1))
             {
                 qav.answerField.returnKeyType = UIReturnKeyDone;
+                qav.isLastQuestion = YES;
             }
             else
             {
