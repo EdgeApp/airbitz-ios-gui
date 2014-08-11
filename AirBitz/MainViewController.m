@@ -40,7 +40,7 @@ typedef enum eAppMode
                                   UIAlertViewDelegate>
 {
 	UIViewController            *_selectedViewController;
-	DirectoryViewController     *_diretoryViewController;
+	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
 	SendViewController          *_sendViewController;
 	WalletsViewController       *_walletsViewController;
@@ -102,7 +102,7 @@ typedef enum eAppMode
 	_originalViewFrame = self.view.frame;
 	// Do any additional setup after loading the view.
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	_diretoryViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
+	_directoryViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
 	_loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
 	_loginViewController.delegate = self;
 
@@ -269,10 +269,10 @@ typedef enum eAppMode
 	{
 		case APP_MODE_DIRECTORY:
 		{
-			if (_selectedViewController != _diretoryViewController)
+			if (_selectedViewController != _directoryViewController)
 			{
 				[_selectedViewController.view removeFromSuperview];
-				_selectedViewController = _diretoryViewController;
+				_selectedViewController = _directoryViewController;
 				[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
 			}
 			break;
