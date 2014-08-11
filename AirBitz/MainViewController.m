@@ -106,7 +106,7 @@ typedef enum eAppMode
 	_loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
 	_loginViewController.delegate = self;
 
-    [self loadAdditionalViews];
+    [self loadUserViews];
 
     // resgister for transaction details screen complete notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit:) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
@@ -120,7 +120,7 @@ typedef enum eAppMode
 /**
  * These views need to be cleaned out after a login
  */
-- (void)loadAdditionalViews
+- (void)loadUserViews
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
@@ -435,7 +435,7 @@ typedef enum eAppMode
 
 -(void)SettingsViewControllerDone:(SettingsViewController *)controller
 {
-    [self loadAdditionalViews];
+    [self loadUserViews];
 
 	_appMode = APP_MODE_DIRECTORY;
 	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
@@ -454,7 +454,7 @@ typedef enum eAppMode
 - (void)loginViewControllerDidLogin
 {
     // After login, reset all the main views
-    [self loadAdditionalViews];
+    [self loadUserViews];
 
 	[_loginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];
