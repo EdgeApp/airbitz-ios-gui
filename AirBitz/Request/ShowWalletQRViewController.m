@@ -277,7 +277,7 @@ typedef enum eAddressPickerType
         mailComposer.mailComposeDelegate = self;
 
         [self presentViewController:mailComposer animated:YES completion:nil];
-        [self finalizeRequest:@"EMail"];
+        [self finalizeRequest:@"Email"];
     }
     else
     {
@@ -447,7 +447,7 @@ typedef enum eAddressPickerType
     NSDate *now = [NSDate date];
 
     NSMutableString *notes = [[NSMutableString alloc] init];
-    [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ On %@.", nil),
+    [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ on %@.", nil),
                         [CoreBridge formatSatoshi:_txDetails.amountSatoshi],
                         [CoreBridge formatCurrency:_txDetails.amountCurrency withCurrencyNum:_currencyNum],
                         type,
