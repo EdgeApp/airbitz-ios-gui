@@ -497,7 +497,7 @@ typedef enum eAddressPickerType
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
                                                             message:@"SMS cancelled"
-														   delegate:self
+														   delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles: nil];
 			[alert show];
@@ -508,7 +508,7 @@ typedef enum eAddressPickerType
         {
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
                                                             message:@"Error sending SMS"
-														   delegate:self
+														   delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles: nil];
 			[alert show];
@@ -519,7 +519,7 @@ typedef enum eAddressPickerType
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
                                                             message:@"SMS sent"
-														   delegate:self
+														   delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles: nil];
 			[alert show];
