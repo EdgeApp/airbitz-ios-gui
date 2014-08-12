@@ -4078,6 +4078,28 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" id="Ptv-FV-w86">
+                                        <rect key="frame" x="15" y="9" width="291" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="j41-Le-sFr">
+                                                <rect key="frame" x="18" y="-2" width="255" height="41"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                            </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" minimumFontSize="17" clearButtonMode="whileEditing" id="PI3-NW-bVF" customClass="MinCharTextField">
+                                                <rect key="frame" x="33" y="4" width="225" height="29"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="8PZ-sh-cHM" id="MKp-uy-N1D"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cix-f2-i3I">
                                         <rect key="frame" x="96" y="13" width="132" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -4137,6 +4159,8 @@
                         <outlet property="embossImage" destination="Nle-7B-pV5" id="d3R-4B-prI"/>
                         <outlet property="imageSkip" destination="B5d-ZE-zXF" id="TQF-fd-1iS"/>
                         <outlet property="labelTitle" destination="9kf-YJ-8Zz" id="VeQ-yK-Mkd"/>
+                        <outlet property="passwordField" destination="PI3-NW-bVF" id="edO-Rm-rog"/>
+                        <outlet property="passwordView" destination="Ptv-FV-w86" id="Rqg-e3-JJO"/>
                         <outlet property="scrollView" destination="peD-fG-VAk" id="aIZ-za-GQs"/>
                         <outlet property="spinnerView" destination="gpK-tF-oyh" id="gpt-wX-Nhq"/>
                     </connections>

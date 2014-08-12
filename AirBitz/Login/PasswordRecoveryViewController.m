@@ -47,6 +47,8 @@ typedef enum eAlertType
 @property (weak, nonatomic) IBOutlet MontserratLabel            *labelTitle;
 @property (weak, nonatomic) IBOutlet UIImageView                *imageSkip;
 @property (nonatomic, weak) IBOutlet UIView                     *spinnerView;
+@property (nonatomic, weak) IBOutlet UIView                     *passwordView;
+@property (nonatomic, weak) IBOutlet StylizedTextField          *passwordField;
 
 @property (nonatomic, strong) UIButton        *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray  *arrayCategoryString;
@@ -262,6 +264,7 @@ typedef enum eAlertType
     {
         self.buttonSkip.hidden = NO;
         self.imageSkip.hidden = NO;
+        self.passwordView.hidden = YES;
         self.buttonBack.hidden = YES;
         [self.completeSignupButton setTitle:NSLocalizedString(@"Complete Signup", @"") forState:UIControlStateNormal];
         [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
@@ -271,6 +274,7 @@ typedef enum eAlertType
         self.buttonSkip.hidden = YES;
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
+        self.passwordView.hidden = NO;
         [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
     }
@@ -279,6 +283,7 @@ typedef enum eAlertType
         self.buttonSkip.hidden = YES;
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
+        self.passwordView.hidden = YES;
         [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         [self.labelTitle setText:NSLocalizedString(@"Password Recovery", @"")];
     }
@@ -320,12 +325,19 @@ typedef enum eAlertType
 
 - (void)commitQuestions:(NSString *)strQuestions andAnswersToABC:(NSString *)strAnswers
 {
+    // Check Password
+    NSString *password = nil;
+    if (self.mode == PassRecovMode_Change) {
+        password = _passwordField.text;
+    } else {
+        password = [User Singleton].password;
+    }
     [self blockUser:YES];
     [self showSpinner:YES];
 	tABC_Error Error;
 	tABC_CC result;
     result = ABC_SetAccountRecoveryQuestions([[User Singleton].name UTF8String],
-                                             [[User Singleton].password UTF8String],
+                                             [password UTF8String],
                                              [strQuestions UTF8String],
                                              [strAnswers UTF8String],
                                              PW_ABC_Request_Callback,
@@ -516,10 +528,8 @@ typedef enum eAlertType
     [self blockUser:NO];
     [self showSpinner:NO];
 
-    //NSLog(@"Get Questions complete");
     if (_bSuccess)
     {
-		//NSLog(@"Got questions");
 		float posY = QA_STARTING_Y_POSITION;
 		CGSize size = self.scrollView.contentSize;
 		size.height = posY;
@@ -674,6 +684,22 @@ void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
             [controller performSelectorOnMainThread:@selector(setRecoveryComplete) withObject:nil waitUntilDone:FALSE];
 		}
     }
+}
+
+#pragma Password field delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == _passwordField) {
+        [_passwordField resignFirstResponder];
+
+        QuestionAnswerView *viewNext = NULL;
+        viewNext = [self findQAViewWithTag:0];
+        if (viewNext != NULL) {
+            [viewNext presentQuestionChoices];
+        }
+    }
+    return NO;
 }
 
 #pragma mark - QuestionAnswerView delegates
