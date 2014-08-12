@@ -482,8 +482,16 @@ typedef enum eAddressPickerType
 	switch (result)
     {
 		case MessageComposeResultCancelled:
-			NSLog(@"Cancelled");
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
+                                                            message:@"SMS cancelled"
+														   delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+			[alert show];
+        }
 			break;
+
 		case MessageComposeResultFailed:
         {
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
