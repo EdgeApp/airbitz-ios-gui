@@ -84,6 +84,8 @@
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:nil];
 
+
+
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
@@ -98,16 +100,30 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    // create a dummy view to replace the keyboard if we are on a 4.5" screen
+    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+
 	[self loadWalletInfo];
+
 	self.BTCLabel_TextField.text = [User Singleton].denominationLabel; 
-	self.BTC_TextField.inputView = self.keypadView;
-	self.USD_TextField.inputView = self.keypadView;
+	self.BTC_TextField.inputView = IS_IPHONE5 ? dummyView : self.keypadView;
+	self.USD_TextField.inputView = IS_IPHONE5 ? dummyView : self.keypadView;
 	self.BTC_TextField.delegate = self;
 	self.USD_TextField.delegate = self;
 
-	CGRect frame = self.keypadView.frame;
-	frame.origin.y = frame.origin.y + frame.size.height;
-	self.keypadView.frame = frame;
+    // if they are on a 4" screen then move the calculator below the bottom of the screen
+    if (!IS_IPHONE5)
+    {
+        CGRect frame = self.keypadView.frame;
+        frame.origin.y = frame.origin.y + frame.size.height;
+        self.keypadView.frame = frame;
+    }
+    else
+    {
+        // no need for the done button
+        [self.keypadView hideDoneButton];
+    }
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
     [self exchangeRateUpdate:nil]; 

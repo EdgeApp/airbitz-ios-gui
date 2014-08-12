@@ -23,6 +23,8 @@ typedef enum eCalcMode
 @property (nonatomic, assign) tCalcMode calcMode;
 @property (nonatomic, assign) int currencyNum;
 
+- (void)hideDoneButton;
+
 @end
 
 
