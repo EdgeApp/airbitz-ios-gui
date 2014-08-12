@@ -21,6 +21,8 @@
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 
+#define QR_ATTACHMENT_WIDTH 100
+
 typedef enum eAddressPickerType
 {
     AddressPickerType_SMS,
@@ -218,9 +220,7 @@ typedef enum eAddressPickerType
                                     overrideDecimals:8];
         // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
-        NSMutableString *tempURI = [[NSMutableString alloc] init];
-
-        tempURI = [self.uriString copy];
+        NSString *tempURI = self.uriString;
 
         NSRange tempRange = [tempURI rangeOfString:@"bitcoin:"];
 
@@ -257,7 +257,8 @@ typedef enum eAddressPickerType
         [strBody appendFormat:@"%@", amount];
         [strBody appendString:@"<br><br>\n"];
 
-        NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(self.qrCodeImage, 1.0)];
+        UIImage *imageAttachment = [self imageWithImage:self.qrCodeImage scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
+        NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(imageAttachment, 1.0)];
         NSString *base64String = [imageData base64Encoded];
         [strBody appendString:[NSString stringWithFormat:@"<p><b><img alt='QRCode' title='QRCode' src='data:image/jpeg;base64,%@' /></b></p>", base64String]];
 
@@ -303,17 +304,14 @@ typedef enum eAddressPickerType
                                     overrideDecimals:8];
         // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
-        NSMutableString *tempURI = [[NSMutableString alloc] init];
-        
-        tempURI = [self.uriString copy];
-        
+        NSString *tempURI = self.uriString;
+
         NSRange tempRange = [tempURI rangeOfString:@"bitcoin:"];
-        
+
         if (tempRange.location != NSNotFound)
         {
             tempURI = [tempURI stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
         }
-
         
         if ([User Singleton].bNameOnPayments)
         {
@@ -342,9 +340,10 @@ typedef enum eAddressPickerType
         [strBody appendString:@"\n"];
 
         // create the attachment
+        UIImage *imageAttachment = [self imageWithImage:self.qrCodeImage scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:QR_CODE_TEMP_FILENAME];
-        BOOL bAttached = [controller addAttachmentData:UIImagePNGRepresentation(self.qrCodeImage) typeIdentifier:(NSString*)kUTTypePNG filename:filePath];
+        BOOL bAttached = [controller addAttachmentData:UIImagePNGRepresentation(imageAttachment) typeIdentifier:(NSString*)kUTTypePNG filename:filePath];
         if (!bAttached)
         {
             NSLog(@"Could not attach qr code");
@@ -365,6 +364,19 @@ typedef enum eAddressPickerType
         [self presentViewController:controller animated:YES completion:nil];
         [self finalizeRequest:@"SMS"];
 	}
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
+{
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    CGContextSetInterpolationQuality(UIGraphicsGetCurrentContext(), kCGInterpolationNone);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 #pragma mark - Address Book delegates
