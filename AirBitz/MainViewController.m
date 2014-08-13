@@ -96,6 +96,8 @@ typedef enum eAppMode
                    (unsigned int)[seedData length],
                    &Error);
     [Util printABC_Error:&Error];
+
+    [CoreBridge startBouncer];
 #endif
 
 	_originalTabBarFrame = self.tabBar.frame;

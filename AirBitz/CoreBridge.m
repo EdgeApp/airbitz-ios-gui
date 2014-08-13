@@ -23,6 +23,7 @@ static BOOL bInitialized = NO;
 static dispatch_queue_t watcherQueue;
 static dispatch_queue_t exchangeQueue;
 static dispatch_queue_t dataQueue;
+static dispatch_queue_t bouncerQueue;
 
 @interface CoreBridge ()
 {
@@ -49,6 +50,7 @@ static NSTimer *_dataSyncTimer;
         watcherQueue = dispatch_queue_create("co.airbitz.ios.Watcherqueue", NULL);
         exchangeQueue = dispatch_queue_create("co.airbitz.ios.ExchangeQueue", NULL);
         dataQueue = dispatch_queue_create("co.airbitz.ios.DataQueue", NULL);
+        bouncerQueue = dispatch_queue_create("co.airbitz.ios.BouncerQueue", NULL);
         bInitialized = YES;
     }
 }
@@ -105,6 +107,34 @@ static NSTimer *_dataSyncTimer;
     dispatch_async(dataQueue, cb);
 }
 
++ (void)startBouncer
+{
+    dispatch_async(bouncerQueue, ^{
+        tABC_Error error;
+        ABC_EventBegin(&error);
+        [Util printABC_Error:&error];
+
+        while (ABC_EventWait()) {
+            dispatch_async(dispatch_get_main_queue(),^{
+                tABC_Error error;
+                ABC_EventUpdate(&error);
+                [Util printABC_Error:&error];
+            });
+        }
+        ABC_EventEnd();
+    });
+}
+
++ (void)stopBouncer
+{
+    tABC_Error error;
+    ABC_EventStop(&error);
+    [Util printABC_Error:&error];
+
+    dispatch_sync(bouncerQueue, ^{
+        // Wait for stop to complete
+    });
+}
 
 + (void)loadWallets:(NSMutableArray *)arrayWallets
 {
