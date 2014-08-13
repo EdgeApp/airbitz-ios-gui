@@ -90,6 +90,8 @@
 - (void)showTable
 {
 	float yOriginOffset = self.questionButtonBig.frame.size.height / 2;
+
+    CGRect parentFrame = self.superview.superview.frame;
 	
 	CGRect tableFrame = self.questionButtonBig.frame;
 	tableFrame.origin.x += 1.0;
@@ -101,6 +103,17 @@
 	_qaTable.delegate = self;
 	_qaTable.dataSource = self;
 	_qaTable.layer.cornerRadius = 6.0;
+
+
+    int tableHeight = QA_TABLE_HEIGHT;
+    if (_isLastQuestion) {
+        CGPoint withinParent = [self convertPoint:tableFrame.origin toView:self.superview.superview];
+        int localHeight = withinParent.y + tableHeight;
+        int parentHeight = parentFrame.origin.y + parentFrame.size.height;
+        if (localHeight > parentHeight) {
+            tableHeight = MAX(tableHeight - (localHeight - parentHeight + 5.0), 50);
+        }
+    }
 	
 	[self insertSubview:_qaTable belowSubview:self.questionButtonBig];
 	
@@ -112,7 +125,7 @@
 					 animations:^
 	 {
 		 CGRect frame = _qaTable.frame;
-		 frame.size.height = QA_TABLE_HEIGHT;
+		 frame.size.height = tableHeight;
 		 _qaTable.frame = frame;
 		 
 		 CGRect myFrame = _originalFrame;

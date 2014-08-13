@@ -51,7 +51,6 @@ NSDate *logoutDate = NULL;
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
-    NSLog(@"Calling fetch!!!!");
     if (![self isAppActive])
     {
         [self autoLogout];
@@ -61,10 +60,8 @@ NSDate *logoutDate = NULL;
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    NSLog(@"Resign Active background!!!!");
     if ([User isLoggedIn])
     {
-        NSLog(@("Settings background fetch interval to %d\n"), [User Singleton].minutesAutoLogout * 60);
         logoutDate = [NSDate date];
         [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
     }
@@ -72,7 +69,6 @@ NSDate *logoutDate = NULL;
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    NSLog(@"Entered background!!!!");
     if ([User isLoggedIn])
     {
         [CoreBridge stopQueues];
@@ -118,7 +114,6 @@ NSDate *logoutDate = NULL;
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    NSLog(@"Entered Foreground!!!!");
     [self bgCleanup];
     [self checkLoginExpired];
     if ([User isLoggedIn])
@@ -130,7 +125,6 @@ NSDate *logoutDate = NULL;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    NSLog(@"applicationDidBecomeActive!!!!");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -173,7 +167,6 @@ NSDate *logoutDate = NULL;
 {
     if (![self isAppActive])
     {
-        NSLog(@"**********Autologout**********");
         [[User Singleton] clear];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval: UIApplicationBackgroundFetchIntervalNever];

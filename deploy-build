@@ -30,13 +30,21 @@ echo $build
 run cd ../airbitz-walletcore
 run git pull
 run cd deps
-run sed -i -e 's/--enable-testnet //g' recipes/libbitcoin/libbitcoin
+
+## Remove testnet string if it's still there
+if grep -Fq "enable-testnet" recipes/libbitcoin/libbitcoin ; then
+	echo "removing testnet"
+	run sed -i -e 's/--enable-testnet //g' recipes/libbitcoin/libbitcoin
+fi
+
 run make abc.clean
 if [ "$5" = "clean" ]; then
 	run make clean
 fi
+
 run make abc
-run git checkout recipes/libbitcoin/libbitcoin
+
+##run git checkout recipes/libbitcoin/libbitcoin
 
 ##
 ## Make testnet ABC build
@@ -44,7 +52,12 @@ run git checkout recipes/libbitcoin/libbitcoin
 run cd ../../airbitz-walletcore-testnet
 run git pull
 run cd deps
-run touch recipes/libbitcoin/libbitcoin
+
+## Add testnet string if it's not there
+if ! grep -Fq "enable-testnet" recipes/libbitcoin/libbitcoin ; then
+	run sed -i -e 's/--disable-shared/--disable-shared --enable-testnet/g' recipes/libbitcoin/libbitcoin
+fi
+
 run make abc.clean
 if [ "$5" = "clean" ]; then
 	run make clean
@@ -82,46 +95,45 @@ run ./deploy-tf "$1$lettert" "$build" "$2" "$3" "$4" "testnet"
 #run git checkout Airbitz/Airbitz-Info.plist
 #run git checkout Airbitz.xcodeproj/project.pbxproj
 
-
-
 echo $stridx > $BUILDDATE
 #run /usr/bin/open "https://testflightapp.com/dashboard/builds/"
-
-##
-## Copy builds to build archives
-##
-if [ ! -d "../build-archives" ] then;
-	run mkdir ../build-archives
-fi
-
-if [ ! -d "../build-archives/ios" ] then;
-	run mkdir ../build-archives/ios
-fi
-
-if [ ! -d "../build-archives/ios/walletcore" ] then;
-	run mkdir ../build-archives/ios/walletcore
-fi
-
-if [ -e "../build-archives/ios/walletcore/${build}_${1}_ios" ]
-	exit 1
-fi
-run mkdir "../build-archives/ios/walletcore/${build}_${1}_ios"
-
-if [ -e "../build-archives/ios/walletcore/${build}_${1}_ios_testnet" ]
-	exit 1
-fi
-run mkdir "../build-archives/ios/walletcore/${build}_${1}_ios_testnet"
-
-
-run cp -a "../airbitz-walletcore/deps/build/abc/abc-ios-universal/include/* ../build-archives/ios/walletcore/${build}_${1}_ios/"
-run cp -a "../airbitz-walletcore/deps/build/abc/abc-ios-universal/lib/* ../build-archives/ios/walletcore/${build}_${1}_ios/"
-
-run cp -a "../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/include/* ../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
-run cp -a "../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/lib/* ../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
 
 ##
 ## Tag the commit ID with the build version
 ##
 run git tag -a "${1}_${build}_ios" -m ""
 run git push --tags
+
+##
+## Copy builds to build archives
+##
+if [ ! -d "../build-archives" ]; then
+	run mkdir ../build-archives
+fi
+
+if [ ! -d "../build-archives/ios" ]; then
+	run mkdir ../build-archives/ios
+fi
+
+if [ ! -d "../build-archives/ios/walletcore" ]; then
+	run mkdir ../build-archives/ios/walletcore
+fi
+
+if [ -e "../build-archives/ios/walletcore/${build}_${1}_ios" ]; then
+	exit 1
+fi
+run mkdir "../build-archives/ios/walletcore/${build}_${1}_ios"
+
+if [ -e "../build-archives/ios/walletcore/${build}_${1}_ios_testnet" ]; then
+	exit 1
+fi
+run mkdir "../build-archives/ios/walletcore/${build}_${1}_ios_testnet"
+
+
+run cp -a "../airbitz-walletcore/deps/build/abc/abc-ios-universal/include/*" "../build-archives/ios/walletcore/${build}_${1}_ios/"
+run cp -a "../airbitz-walletcore/deps/build/abc/abc-ios-universal/lib/*" "../build-archives/ios/walletcore/${build}_${1}_ios/"
+
+run cp -a "../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/include/*" "../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
+run cp -a "../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/lib/*" "../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
+
 

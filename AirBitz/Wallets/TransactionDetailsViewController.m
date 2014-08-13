@@ -45,6 +45,11 @@
 
 #define TABLE_CELL_BACKGROUND_COLOR [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0]
 
+#define PHOTO_BORDER_WIDTH          2.0f
+#define PHOTO_BORDER_COLOR          [UIColor lightGrayColor]
+#define PHOTO_BORDER_CORNER_RADIUS  5.0
+
+
 @interface TransactionDetailsViewController () <UITextFieldDelegate, UITextViewDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
 {
     UITextField     *_activeTextField;
@@ -55,12 +60,15 @@
     CGRect          _originalScrollableContentFrame;
     UITableView     *_autoCompleteTable; //table of autoComplete search results (including address book entries)
     BOOL            _bDoneSentToDelegate;
+    unsigned int    _bizId;
 }
 
 @property (nonatomic, weak) IBOutlet UIView                 *headerView;
 @property (nonatomic, weak) IBOutlet UIView                 *contentView;
 @property (nonatomic, weak) IBOutlet UIView                 *scrollableContentView;
 
+@property (weak, nonatomic) IBOutlet UIView                 *viewPhoto;
+@property (weak, nonatomic) IBOutlet UIImageView            *imagePhoto;
 @property (nonatomic, weak) IBOutlet UILabel                *dateLabel;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageNameEmboss;
 @property (nonatomic, weak) IBOutlet StylizedTextField      *nameTextField;
@@ -93,6 +101,7 @@
 @property (nonatomic, strong)        NSMutableDictionary    *dictImages; // images for the contacts and businesses
 @property (nonatomic, strong)        NSMutableDictionary    *dictAddresses; // addresses for the contacts and businesses
 @property (nonatomic, strong)        NSDictionary           *dictThumbnailURLs; // urls for business thumbnails
+@property (nonatomic, strong)        NSMutableDictionary    *dictBizIds; // bizIds for the businesses
 
 @end
 
@@ -120,7 +129,8 @@
     _bDoneSentToDelegate = NO;
 
     self.buttonBack.hidden = !self.bOldTransaction;
-    if (_wallet) {
+    if (_wallet)
+    {
         _labelFiatName.text = _wallet.currencyAbbrev;
     }
 
@@ -128,6 +138,19 @@
     self.dictImages = [[NSMutableDictionary alloc] init];
     self.dictAddresses = [[NSMutableDictionary alloc] init];
     self.dictThumbnailURLs = [[NSDictionary alloc] init];
+    self.dictBizIds = [[NSMutableDictionary alloc] init];
+
+    // if there is a photo, then add it as the first photo in our images
+    if (self.photo)
+    {
+        [self.dictImages setObject:self.photo forKey:self.transaction.strName];
+    }
+
+    // add this biz as the first bizid
+    if (self.transaction.bizId)
+    {
+        [self.dictBizIds setObject:[NSNumber numberWithInt:self.transaction.bizId] forKey:self.transaction.strName];
+    }
 
     // get the list of businesses
     [self generateListOfBusinesses];
@@ -173,8 +196,11 @@
     self.pickerTextCategory.cropPointBottom = 360; // magic number
     self.pickerTextCategory.delegate = self;
 
-    
-    self.dateLabel.text = [NSDate stringFromDate:self.transaction.date withFormat:[NSDate timestampFormatString]];
+    _bizId = self.transaction.bizId;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    self.dateLabel.text = [dateFormatter stringFromDate:self.transaction.date];
     self.nameTextField.text = self.transaction.strName;
     self.notesTextView.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
@@ -183,7 +209,7 @@
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
-    self.nameTextField.placeholder = NSLocalizedString(@"Payee or Business Name", nil);
+    self.nameTextField.placeholder = NSLocalizedString(@"Enter Payee", nil);
     self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.nameTextField.font = [UIFont systemFontOfSize:18];
     self.nameTextField.textAlignment = NSTextAlignmentCenter;
@@ -192,6 +218,15 @@
     _originalHeaderFrame = self.headerView.frame;
     _originalContentFrame = self.contentView.frame;
     _originalScrollableContentFrame = self.scrollableContentView.frame;
+
+    // set up the photo view
+    CGFloat borderWidth = PHOTO_BORDER_WIDTH;
+    self.viewPhoto.frame = CGRectInset(self.viewPhoto.frame, -borderWidth, -borderWidth);
+    self.viewPhoto.layer.borderColor = [PHOTO_BORDER_COLOR CGColor];
+    self.viewPhoto.layer.borderWidth = borderWidth;
+    self.viewPhoto.layer.cornerRadius = PHOTO_BORDER_CORNER_RADIUS;
+    self.viewPhoto.layer.masksToBounds = YES;
+    [self updatePhoto];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -308,13 +343,15 @@
         // add the category if we didn't have it
         [self addCategory: self.pickerTextCategory.textField.text]; 
         self.transaction.strCategory = [self.pickerTextCategory.textField text]; 
-    } else {
+    } else
+    {
         self.transaction.strCategory = @"";
     }
     
     self.transaction.strName = [self.nameTextField text];
     self.transaction.strNotes = [self.notesTextView text];
     self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
+    self.transaction.bizId = _bizId;
 
     [CoreBridge storeTransaction: self.transaction];
 
@@ -470,6 +507,32 @@
         frame.origin.y = self.imageBottomEmboss.frame.origin.y + self.imageBottomEmboss.frame.size.height + 4;
         self.doneButton.frame = frame;
 
+    }
+}
+
+- (void)updatePhoto
+{
+    BOOL bHavePhoto = NO;
+
+    // look for the name in our images
+    UIImage *imageForPhoto = [self.dictImages objectForKey:self.nameTextField.text];
+    if (imageForPhoto)
+    {
+        self.imagePhoto.image = imageForPhoto;
+        bHavePhoto = YES;
+    }
+
+    self.viewPhoto.hidden = !bHavePhoto;
+    self.photo = imageForPhoto;
+}
+
+- (void)updateBizId
+{
+    _bizId = 0;
+    NSNumber *numBizId = [self.dictBizIds objectForKey:self.nameTextField.text];
+    if (numBizId)
+    {
+        _bizId = [numBizId intValue];
     }
 }
 
@@ -1013,6 +1076,9 @@
     {
         [self.pickerTextCategory.textField becomeFirstResponder];
     }
+
+    [self updateBizId];
+    [self updatePhoto];
 }
 
 #pragma mark - infoView delegates
@@ -1033,7 +1099,7 @@
         {
             NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
 
-            //NSLog(@"Results download returned: %@", jsonString );
+            NSLog(@"Results download returned: %@", jsonString );
 
             NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
             NSError *myError;
@@ -1078,8 +1144,15 @@
                         [self.dictAddresses setObject:strAddress forKey:name];
                     }
 
+                    // set the biz id if available
+                    NSNumber *numField = nil;
+                    if (nil != (numField = [dict objectForKey:@"bizId"]))
+                    {
+                        [self.dictBizIds setObject:[NSNumber numberWithInt:[numField intValue]] forKey:name];
+                    }
+
                     // check if we can get a thumbnail
-                    NSDictionary *dictProfileImage = [dict objectForKey:@"profile_image"];
+                    NSDictionary *dictProfileImage = [dict objectForKey:@"square_image"];
                     if (dictProfileImage && dictProfileImage != (id)[NSNull null])
                     {
                         NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
@@ -1098,18 +1171,27 @@
 
             [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
             [self performSelector:@selector(getBusinessThumbnails) withObject:nil afterDelay:0.0];
+            [self performSelector:@selector(updateBizId) withObject:nil afterDelay:0.0];
         }
         else
         {
             NSString *strNameForImage = (NSString *) object;
             //NSLog(@"got image for %@", strNameForImage);
-            UIImage *srcImage = [UIImage imageWithData:data];
-            CGSize imageSize;
-            imageSize = srcImage.size;
-            imageSize.width = imageSize.height;
-            UIImage *croppedImage = [self imageByCroppingImage:srcImage toSize:imageSize];
-            [self.dictImages setObject:croppedImage forKey:strNameForImage];
-            [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
+
+            // if we don't have an image for this yet
+            if (nil == [self.dictImages objectForKey:strNameForImage])
+            {
+                UIImage *srcImage = [UIImage imageWithData:data];
+                [self.dictImages setObject:srcImage forKey:strNameForImage];
+                [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
+
+                // if this matches our name
+                if ([self.nameTextField.text isEqualToString:strNameForImage])
+                {
+                    // update the photo
+                    [self performSelector:@selector(updatePhoto) withObject:nil afterDelay:0.0];
+                }
+            }
         }
     }
 }
@@ -1208,6 +1290,8 @@
     if (textField == self.nameTextField)
     {
         [self updateAutoCompleteArray];
+        [self updateBizId];
+        [self updatePhoto];
     }
 }
 

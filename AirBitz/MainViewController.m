@@ -40,7 +40,7 @@ typedef enum eAppMode
                                   UIAlertViewDelegate>
 {
 	UIViewController            *_selectedViewController;
-	DirectoryViewController     *_diretoryViewController;
+	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
 	SendViewController          *_sendViewController;
 	WalletsViewController       *_walletsViewController;
@@ -102,11 +102,11 @@ typedef enum eAppMode
 	_originalViewFrame = self.view.frame;
 	// Do any additional setup after loading the view.
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	_diretoryViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
+	_directoryViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
 	_loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
 	_loginViewController.delegate = self;
 
-    [self loadAdditionalViews];
+    [self loadUserViews];
 
     // resgister for transaction details screen complete notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit:) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
@@ -120,7 +120,7 @@ typedef enum eAppMode
 /**
  * These views need to be cleaned out after a login
  */
-- (void)loadAdditionalViews
+- (void)loadUserViews
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
@@ -269,10 +269,10 @@ typedef enum eAppMode
 	{
 		case APP_MODE_DIRECTORY:
 		{
-			if (_selectedViewController != _diretoryViewController)
+			if (_selectedViewController != _directoryViewController)
 			{
 				[_selectedViewController.view removeFromSuperview];
-				_selectedViewController = _diretoryViewController;
+				_selectedViewController = _directoryViewController;
 				[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
 			}
 			break;
@@ -435,7 +435,7 @@ typedef enum eAppMode
 
 -(void)SettingsViewControllerDone:(SettingsViewController *)controller
 {
-    [self loadAdditionalViews];
+    [self loadUserViews];
 
 	_appMode = APP_MODE_DIRECTORY;
 	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
@@ -454,7 +454,7 @@ typedef enum eAppMode
 - (void)loginViewControllerDidLogin
 {
     // After login, reset all the main views
-    [self loadAdditionalViews];
+    [self loadUserViews];
 
 	[_loginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];

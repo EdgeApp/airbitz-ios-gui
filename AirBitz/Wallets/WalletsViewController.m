@@ -250,20 +250,6 @@
     [CoreBridge loadWallets: self.arrayWallets archived:self.arrayArchivedWallets];
 }
 
-// creates an NSDate object given a string with mm/dd/yyyy
-- (NSDate *)dateFromString:(NSString *)strDate
-{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM/dd/yyyy"];
-    NSDate *date = [formatter dateFromString:strDate];
-    return date;
-}
-
-- (NSDate *)dateFromTimestamp:(int64_t) intDate
-{
-    return [NSDate dateWithTimeIntervalSince1970: intDate];
-}
-
 - (void)updateBalanceView
 {
 	int64_t totalSatoshi = 0.0;

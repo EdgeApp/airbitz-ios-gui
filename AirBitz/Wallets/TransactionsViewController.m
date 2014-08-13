@@ -19,6 +19,9 @@
 #import "User.h"
 #import "InfoView.h"
 #import "CommonTypes.h"
+#import "DL_URLServer.h"
+#import "Server.h"
+#import "CJSONDeserializer.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
@@ -26,11 +29,17 @@
 
 #define TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD 160
 
+#define PHOTO_BORDER_WIDTH          2.0f
+#define PHOTO_BORDER_COLOR          [UIColor lightGrayColor]
+#define PHOTO_BORDER_CORNER_RADIUS  5.0
+
 #define TABLE_HEADER_HEIGHT 46.0
 #define TABLE_CELL_HEIGHT   72.0
 #define NO_SEARCHBAR 1
 
-@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate>
+#define CACHE_IMAGE_AGE_SECS (60 * 60) // 60 hour
+
+@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate>
 {
     BalanceView                         *_balanceView;
     TransactionDetailsViewController    *_transactionDetailsController;
@@ -56,6 +65,9 @@
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray        *arraySearchTransactions;
 @property (nonatomic, strong) NSArray               *arrayNonSearchViews;
+@property (nonatomic, strong) NSMutableDictionary   *dictContactImages; // images for the contacts
+@property (nonatomic, strong) NSMutableDictionary   *dictBizImages; // images for businesses
+@property (nonatomic, strong) NSMutableDictionary   *dictImageRequests;
 
 
 @end
@@ -78,6 +90,9 @@
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:nil];
+
+    // load all the names from the address book
+    [self addContactToImages];
 
     _balanceView = [BalanceView CreateWithDelegate:self];
     _balanceView.frame = self.balanceViewPlaceholder.frame;
@@ -152,7 +167,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [CoreBridge reloadWallet: self.wallet];
+    [CoreBridge reloadWallet:self.wallet];
+    [self getBizImagesForWallet:self.wallet];
     [self.tableView reloadData];
     [self updateBalanceView];
 }
@@ -160,6 +176,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [DL_URLServer.controller cancelAllRequestsForDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -420,6 +437,7 @@
     _transactionDetailsController.wallet = self.wallet;
     _transactionDetailsController.bOldTransaction = YES;
     _transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
+    _transactionDetailsController.photo = [self imageForTransaction:transaction];
 
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
@@ -512,10 +530,169 @@
     }
 }
 
+- (void)addContactToImages
+{
+    NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
+
+    CFErrorRef error;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+
+    __block BOOL accessGranted = NO;
+
+    if (ABAddressBookRequestAccessWithCompletion != NULL)
+    {
+        // we're on iOS 6
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+                                                 {
+                                                     accessGranted = granted;
+                                                     dispatch_semaphore_signal(sema);
+                                                 });
+
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        //dispatch_release(sema);
+    }
+    else
+    {
+        // we're on iOS 5 or older
+        accessGranted = YES;
+    }
+
+    if (accessGranted)
+    {
+        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+        for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
+        {
+            ABRecordRef person = CFArrayGetValueAtIndex(people, i);
+
+            NSString *strFullName = [Util getNameFromAddressRecord:person];
+            if ([strFullName length])
+            {
+                if ([arrayContacts indexOfObject:strFullName] == NSNotFound)
+                {
+                    // add this contact
+                    [arrayContacts addObject:strFullName];
+
+                    // does this contact has an image
+                    if (ABPersonHasImageData(person))
+                    {
+                        NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
+
+                        if (self.dictContactImages == nil)
+                        {
+                            self.dictContactImages = [[NSMutableDictionary alloc] init];
+                        }
+                        [self.dictContactImages setObject:[UIImage imageWithData:data] forKey:strFullName];
+                    }
+                }
+            }
+        }
+    }
+}
+
+- (UIImage *)imageForTransaction:(Transaction *)transaction
+{
+    UIImage *image = nil;
+
+    if (transaction)
+    {
+        // if this transaction has a biz id
+        if (transaction.bizId)
+        {
+            // get the image for this bizId
+            if (self.dictBizImages)
+            {
+                image = [self.dictBizImages objectForKey:[NSNumber numberWithInt:transaction.bizId]];
+            }
+        }
+        else
+        {
+            // find the image from the contacts
+            if (self.dictContactImages)
+            {
+                image = [self.dictContactImages objectForKey:transaction.strName];
+            }
+        }
+    }
+
+    return image;
+}
+
+- (void)getBizImagesForWallet:(Wallet *)wallet
+{
+    if (!self.dictBizImages)
+    {
+        self.dictBizImages = [[NSMutableDictionary alloc] init];
+    }
+
+    if (!self.dictImageRequests)
+    {
+        self.dictImageRequests = [[NSMutableDictionary alloc] init];
+    }
+
+    for (Transaction *transaction in wallet.arrayTransactions)
+    {
+        // if this transaction has a biz id
+        if (transaction.bizId)
+        {
+            // if we don't have an image for this biz id
+            if (nil == [self.dictBizImages objectForKey:[NSNumber numberWithInt:transaction.bizId]])
+            {
+                // start by getting the biz details...this will kick of a retreive of the images
+                [self getBizDetailsForTransaction:transaction];
+            }
+        }
+    }
+}
+
+- (void)getBizDetailsForTransaction:(Transaction *)transaction
+{
+    //get business details
+	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, transaction.bizId];
+	//NSLog(@"Requesting: %@", requestURL);
+	[[DL_URLServer controller] issueRequestURL:requestURL
+									withParams:nil
+									withObject:nil
+								  withDelegate:self
+							acceptableCacheAge:CACHE_24_HOURS
+								   cacheResult:YES];
+}
+
+// issue any image requests we have
+- (void)performImageRequests
+{
+
+    for (NSNumber *numBizId in [self.dictImageRequests allKeys])
+    {
+        NSString *strThumbnailURL = [self.dictImageRequests objectForKey:numBizId];
+
+        // remove this request
+        [self.dictImageRequests removeObjectForKey:numBizId];
+
+        // create the url string
+        NSString *strURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, strThumbnailURL];
+
+        // run the qurey
+        [[DL_URLServer controller] issueRequestURL:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                        withParams:nil
+                                        withObject:numBizId
+                                      withDelegate:self
+                                acceptableCacheAge:CACHE_IMAGE_AGE_SECS
+                                       cacheResult:YES];
+    }
+}
+
 #pragma mark - TransactionDetailsViewControllerDelegates
 
--(void)TransactionDetailsViewControllerDone:(TransactionsViewController *)controller
+-(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
 {
+    // if we got a new photo
+    if (controller.transaction.bizId && controller.photo)
+    {
+        [self.dictBizImages setObject:controller.photo forKey:[NSNumber numberWithInt:controller.transaction.bizId]];
+    }
+    
     [CoreBridge reloadWallet: self.wallet];
     [self.tableView reloadData];
     [self checkSearchArray];
@@ -601,7 +778,7 @@
             finalCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             finalCell.backgroundColor = [UIColor clearColor];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(0, 0, 143.0, 41.0);
+            button.frame = CGRectMake(15, 0, 143.0, 41.0);
             [button setBackgroundImage:[UIImage imageNamed:@"btn_request.png"] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
             [finalCell addSubview:button];
@@ -610,7 +787,7 @@
             self.buttonRequest = button;
 
             button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(151.0, 0, 143.0, 41.0);
+            button.frame = CGRectMake(163.0, 0, 143.0, 41.0);
             [button setBackgroundImage:[UIImage imageNamed:@"btn_send.png"] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
             [finalCell addSubview:button];
@@ -716,6 +893,31 @@
                 }
         }
 
+        // set the photo
+        cell.imagePhoto.image = [self imageForTransaction:transaction];
+        cell.viewPhoto.hidden = (cell.imagePhoto.image == nil);
+    
+        CGRect dateFrame = cell.dateLabel.frame;
+        CGRect addressFrame = cell.addressLabel.frame;
+        CGRect confirmationFrame = cell.confirmationLabel.frame;
+        
+        if (cell.imagePhoto.image == nil)
+        {
+            dateFrame.origin.x = addressFrame.origin.x = confirmationFrame.origin.x = 10;
+        }
+        else
+        {
+            dateFrame.origin.x = addressFrame.origin.x = confirmationFrame.origin.x = 63;
+        }
+        
+        cell.dateLabel.frame = dateFrame;
+        cell.addressLabel.frame = addressFrame;
+        cell.confirmationLabel.frame = confirmationFrame;
+        
+        CGFloat borderWidth = PHOTO_BORDER_WIDTH;
+        cell.viewPhoto.layer.borderColor = [PHOTO_BORDER_COLOR CGColor];
+        cell.viewPhoto.layer.borderWidth = borderWidth;
+        cell.viewPhoto.layer.cornerRadius = PHOTO_BORDER_CORNER_RADIUS;
         finalCell = cell;
     }
 
@@ -842,6 +1044,51 @@
     return YES;
 }
 
+#pragma mark - DLURLServer Callbacks
+
+- (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
+{
+	if (data)
+	{
+        if (DL_URLRequestStatus_Success == status)
+        {
+            // if this is a business details query
+            if (nil == object)
+            {
+                NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+
+				//NSLog(@"Results download returned: %@", jsonString );
+
+                NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
+                NSError *myError;
+                NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
+
+                NSNumber *numBizId = [dictFromServer objectForKey:@"bizId"];
+                if (numBizId)
+                {
+                    NSDictionary *dictSquareImage = [dictFromServer objectForKey:@"square_image"];
+                    if (dictSquareImage)
+                    {
+                        NSString *strImageURL = [dictSquareImage objectForKey:@"thumbnail"];
+                        if (strImageURL)
+                        {
+                            // at the request to our dictionary and issue code to perform them
+                            [self.dictImageRequests setObject:strImageURL forKey:numBizId];
+                            [self performSelector:@selector(performImageRequests) withObject:nil afterDelay:0.0];
+                        }
+                    }
+                }
+            }
+            else
+            {
+                NSNumber *numBizId = (NSNumber *) object;
+                UIImage *srcImage = [UIImage imageWithData:data];
+                [self.dictBizImages setObject:srcImage forKey:numBizId];
+                [self.tableView reloadData];
+            }
+        }
+    }
+}
 
 #pragma mark - UIAlertView delegates
 

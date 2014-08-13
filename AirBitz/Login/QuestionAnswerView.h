@@ -16,6 +16,7 @@
 @property (nonatomic, assign)   id<QuestionAnswerViewDelegate>  delegate;
 @property (nonatomic, strong)   NSArray                         *availableQuestions; /* these show up in the table */
 @property (nonatomic, readonly) BOOL                            questionSelected;
+@property (nonatomic, assign)   BOOL                            isLastQuestion;
 
 @property (weak, nonatomic) IBOutlet UILabel            *labelQuestion;
 @property (nonatomic, weak) IBOutlet MinCharTextField   *answerField;

@@ -12,10 +12,13 @@
 
 @interface TransactionCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet MontserratLabel *dateLabel;
-@property (nonatomic, weak) IBOutlet MontserratLabel *addressLabel;
-@property (nonatomic, weak) IBOutlet LatoLabel *confirmationLabel;
-@property (nonatomic, weak) IBOutlet LatoLabel *amountLabel;
-@property (nonatomic, weak) IBOutlet LatoLabel *balanceLabel;
-@property (nonatomic, weak) IBOutlet UIImageView *bkgImage;
+@property (nonatomic, weak) IBOutlet MontserratLabel    *dateLabel;
+@property (nonatomic, weak) IBOutlet MontserratLabel    *addressLabel;
+@property (nonatomic, weak) IBOutlet LatoLabel          *confirmationLabel;
+@property (nonatomic, weak) IBOutlet LatoLabel          *amountLabel;
+@property (nonatomic, weak) IBOutlet LatoLabel          *balanceLabel;
+@property (nonatomic, weak) IBOutlet UIImageView        *bkgImage;
+@property (weak, nonatomic) IBOutlet UIView             *viewPhoto;
+@property (weak, nonatomic) IBOutlet UIImageView        *imagePhoto;
+
 @end

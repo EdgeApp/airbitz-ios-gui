@@ -28,5 +28,6 @@
 @property (nonatomic, copy)     NSString        *strCategory;
 @property (nonatomic, copy)     NSString        *strNotes;
 @property (nonatomic, strong)   NSArray         *outputs;
+@property (nonatomic, assign)   unsigned int    bizId;
 
 @end

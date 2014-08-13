@@ -27,6 +27,8 @@
 	BOOL lastKeyWasOperation;
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *buttonDone;
+
 @end
 
 @implementation CalculatorView
@@ -52,64 +54,9 @@
     return self;
 }
 
--(void)loadAccumulator
-{
-	accumulator = [self.textField.text floatValue];
-}
+#pragma mark - Action Methods
 
--(NSString *)formattedAcc: (float) acc
-{
-    if (_calcMode == CALC_MODE_COIN)
-    {
-        int64_t satoshi = [CoreBridge denominationToSatoshi:[NSString stringWithFormat:@"%f", acc]];
-        return [CoreBridge formatSatoshi:satoshi withSymbol:false];
-    }
-    else
-        return [CoreBridge formatCurrency:acc
-                          withCurrencyNum:self.currencyNum
-                               withSymbol:false];
-}
-
--(void)performLastOperation
-{
-	switch(operation)
-	{
-		case OPERATION_CLEAR:
-		case OPERATION_DONE:
-			//NSLog(@"Performing loadAccumulator");
-			[self loadAccumulator];
-			break;
-		case OPERATION_DIVIDE:
-			//NSLog(@"Performing Divide");
-			accumulator /= [self.textField.text floatValue];
-            self.textField.text = [self formattedAcc:accumulator];
-			break;
-		case OPERATION_EQUAL:
-			//NSLog(@"Performing Equal");
-			break;
-		case OPERATION_MINUS:
-			//NSLog(@"Performing Minus");
-			accumulator -= [self.textField.text floatValue];
-            if (accumulator < 0) accumulator = 0;
-            self.textField.text = [self formattedAcc:accumulator];
-			break;
-		case OPERATION_MULTIPLY:
-			//NSLog(@"Performing Multiply");
-			accumulator *= [self.textField.text floatValue];
-            self.textField.text = [self formattedAcc:accumulator];
-			break;
-		case OPERATION_PLUS:
-			//NSLog(@"Performing Plus");
-			accumulator += [self.textField.text floatValue];
-            self.textField.text = [self formattedAcc:accumulator];
-			break;
-		case OPERATION_PERCENT:
-			//self.textField.text = [NSString stringWithFormat:@"%.2f", [self.textField.text floatValue] / 100.0];
-			break;
-	}
-}
-
--(IBAction)digit:(UIButton *)sender
+- (IBAction)digit:(UIButton *)sender
 {
 	//NSLog(@"Digit: %i", (int)sender.tag);
 	if(operation == OPERATION_EQUAL)
@@ -157,7 +104,7 @@
 	[self.delegate CalculatorValueChanged:self];
 }
 
--(IBAction)operation:(UIButton *)sender
+- (IBAction)operation:(UIButton *)sender
 {
 	//NSLog(@"Operation %i", (int)sender.tag);
 	switch (sender.tag)
@@ -167,7 +114,7 @@
 			accumulator = 0.0;
 			lastKeyWasOperation = NO;
 			break;
-		//case OPERATION_BACK:
+            //case OPERATION_BACK:
 			//self.textField.text = [self.textField.text substringToIndex:self.textField.text.length - (self.textField.text.length > 0)];
 			//lastKeyWasOperation = NO;
 			//break;
@@ -207,15 +154,81 @@
 			}
 			lastKeyWasOperation = YES;
 			break;
-			
+
 	}
 	if(sender.tag != OPERATION_PERCENT)
 	{
 		operation = (int)sender.tag;
 	}
-	
-	
+
+
 	[self.delegate CalculatorValueChanged:self];
+}
+
+#pragma mark - Public Methods
+
+- (void)hideDoneButton
+{
+    self.buttonDone.hidden = YES;
+}
+
+#pragma mark - Misc Methods
+
+- (void)loadAccumulator
+{
+	accumulator = [self.textField.text floatValue];
+}
+
+- (NSString *)formattedAcc: (float) acc
+{
+    if (_calcMode == CALC_MODE_COIN)
+    {
+        int64_t satoshi = [CoreBridge denominationToSatoshi:[NSString stringWithFormat:@"%f", acc]];
+        return [CoreBridge formatSatoshi:satoshi withSymbol:false];
+    }
+    else
+        return [CoreBridge formatCurrency:acc
+                          withCurrencyNum:self.currencyNum
+                               withSymbol:false];
+}
+
+- (void)performLastOperation
+{
+	switch(operation)
+	{
+		case OPERATION_CLEAR:
+		case OPERATION_DONE:
+			//NSLog(@"Performing loadAccumulator");
+			[self loadAccumulator];
+			break;
+		case OPERATION_DIVIDE:
+			//NSLog(@"Performing Divide");
+			accumulator /= [self.textField.text floatValue];
+            self.textField.text = [self formattedAcc:accumulator];
+			break;
+		case OPERATION_EQUAL:
+			//NSLog(@"Performing Equal");
+			break;
+		case OPERATION_MINUS:
+			//NSLog(@"Performing Minus");
+			accumulator -= [self.textField.text floatValue];
+            if (accumulator < 0) accumulator = 0;
+            self.textField.text = [self formattedAcc:accumulator];
+			break;
+		case OPERATION_MULTIPLY:
+			//NSLog(@"Performing Multiply");
+			accumulator *= [self.textField.text floatValue];
+            self.textField.text = [self formattedAcc:accumulator];
+			break;
+		case OPERATION_PLUS:
+			//NSLog(@"Performing Plus");
+			accumulator += [self.textField.text floatValue];
+            self.textField.text = [self formattedAcc:accumulator];
+			break;
+		case OPERATION_PERCENT:
+			//self.textField.text = [NSString stringWithFormat:@"%.2f", [self.textField.text floatValue] / 100.0];
+			break;
+	}
 }
 
 @end

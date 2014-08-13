@@ -46,6 +46,8 @@
 	int                         _selectedWalletIndex;
 	ShowWalletQRViewController  *_qrViewController;
     ImportWalletViewController  *_importWalletViewController;
+    tABC_TxDetails              details;
+    NSString                    *requestID;
 }
 
 @property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
@@ -82,6 +84,8 @@
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:nil];
 
+
+
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
@@ -96,16 +100,30 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    // create a dummy view to replace the keyboard if we are on a 4.5" screen
+    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+
 	[self loadWalletInfo];
+
 	self.BTCLabel_TextField.text = [User Singleton].denominationLabel; 
-	self.BTC_TextField.inputView = self.keypadView;
-	self.USD_TextField.inputView = self.keypadView;
+	self.BTC_TextField.inputView = IS_IPHONE5 ? dummyView : self.keypadView;
+	self.USD_TextField.inputView = IS_IPHONE5 ? dummyView : self.keypadView;
 	self.BTC_TextField.delegate = self;
 	self.USD_TextField.delegate = self;
 
-	CGRect frame = self.keypadView.frame;
-	frame.origin.y = frame.origin.y + frame.size.height;
-	self.keypadView.frame = frame;
+    // if they are on a 4" screen then move the calculator below the bottom of the screen
+    if (!IS_IPHONE5)
+    {
+        CGRect frame = self.keypadView.frame;
+        frame.origin.y = frame.origin.y + frame.size.height;
+        self.keypadView.frame = frame;
+    }
+    else
+    {
+        // no need for the done button
+        [self.keypadView hideDoneButton];
+    }
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
     [self exchangeRateUpdate:nil]; 
@@ -190,7 +208,6 @@
 - (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes
 {
 	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
-	tABC_TxDetails details;
 	tABC_CC result;
 	double currency;
 	tABC_Error error;
@@ -214,6 +231,7 @@
     details.szNotes = (char *) [strNotes UTF8String];
 	details.szCategory = "";
 	details.attributes = 0x0; //for our own use (not used by the core)
+    details.bizId = 0;
 
 	char *pRequestID;
 
@@ -290,13 +308,18 @@
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
-	
+
+    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 	_qrViewController.delegate = self;
 	_qrViewController.qrCodeImage = image;
 	_qrViewController.addressString = address;
 	_qrViewController.uriString = strRequestURI;
 	_qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
     _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
+    _qrViewController.requestID = requestID;
+    _qrViewController.walletUUID = wallet.strUUID;
+    _qrViewController.txDetails = details;
+    _qrViewController.currencyNum = wallet.currencyNum;
 	CGRect frame = self.view.bounds;
 	_qrViewController.view.frame = frame;
 	[self.view addSubview:_qrViewController.view];
@@ -328,6 +351,7 @@
     tABC_Error error;
 
     const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes];
+    requestID = [NSString stringWithUTF8String:szRequestID];
 
     if (szRequestID)
     {
