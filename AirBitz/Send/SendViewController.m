@@ -20,13 +20,15 @@
 #import "ZBarSDK.h"
 #import "CoreBridge.h"
 #import "SyncView.h"
+#import "TransferService.h"
+#import "BLEScanCell.h"
 
 #define WALLET_BUTTON_WIDTH         210
 
 #define POPUP_PICKER_LOWEST_POINT   360
 #define POPUP_PICKER_TABLE_HEIGHT   (IS_IPHONE5 ? 180 : 90)
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate, PickerTextViewDelegate, SyncViewDelegate>
+@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate, PickerTextViewDelegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
 {
 	ZBarReaderView                  *_readerView;
     ZBarReaderController            *_readerPicker;
@@ -35,6 +37,8 @@
 	SendConfirmationViewController  *_sendConfirmationViewController;
     BOOL                            _bUsingImagePicker;
 	SyncView                        *_syncingView;
+	NSTimeInterval					lastUpdateTime;	//used to remove BLE devices from table when they're no longer around
+	NSTimer							*peripheralCleanupTimer; //used to remove BLE devices from table when they're no longer around
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
@@ -43,11 +47,24 @@
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendTo;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageSendTo;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
+@property (weak, nonatomic) IBOutlet UIView					*bleView;
+@property (weak, nonatomic) IBOutlet UIView					*qrView;
+@property (nonatomic, weak)	IBOutlet UITableView			*tableView;
 
 @property (nonatomic, strong) NSArray   *arrayWallets;
 @property (nonatomic, strong) NSArray   *arrayWalletNames;
 @property (nonatomic, strong) NSArray   *arrayChoicesIndexes;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *scanningSpinner;
+@property (nonatomic, weak) IBOutlet UILabel				*scanningLabel;
 
+@property (strong, nonatomic) CBCentralManager      *centralManager;
+@property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
+@property (strong, nonatomic) NSMutableData         *data;
+@property (strong, nonatomic)  NSMutableArray		*peripheralContainers;
+
+@end
+
+@implementation PeripheralContainer
 @end
 
 @implementation SendViewController
@@ -100,26 +117,46 @@
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 
     _selectedWalletIndex = 0;
+	
+	// Start up the CBCentralManager
+    _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    
+    // And somewhere to store the incoming data
+    _data = [[NSMutableData alloc] init];
+	
+	//kick off peripheral cleanup timer (removes peripherals from table when they're no longer in range)
+	peripheralCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(cleanupPeripherals:) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[self loadWalletInfo];
-    [self syncTest];
+	[self syncTest];
+	self.peripheralContainers = nil;
+	/* cw
     if (_bUsingImagePicker == NO && !_syncingView)
     {
         _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 
         [self.flashSelector selectItem:FLASH_ITEM_OFF];
     }
+	*/
+	//default to BLE view
+	self.bleView.hidden = NO;
+	self.qrView.hidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[_startScannerTimer invalidate];
-	_startScannerTimer = nil;
-
+	//cw [_startScannerTimer invalidate];
+	//cw _startScannerTimer = nil;
+	
 	[self closeCameraScanner];
+	
+	// Don't keep it going while we're not showing.
+    [self stopBLE];
+	
+    NSLog(@"Scanning stopped");
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,7 +174,56 @@
     }
 }
 
+-(void)cleanupPeripherals:(NSTimer *)timer
+{
+	//gets called periodically by a timer to check when we last heard from each peripheral.  If it's been too long, we remove it from the list.
+	NSTimeInterval currentTime = CACurrentMediaTime();
+	NSInteger numPeripherals = [self.peripheralContainers count];
+	
+	if(numPeripherals)
+	{
+		for (NSInteger i = numPeripherals - 1; i>= 0; i--)
+		{
+			PeripheralContainer *pc = [self.peripheralContainers objectAtIndex:i];
+			//NSLog(@"Last: %f Current: %f", [pc.lastAdvertisingTime floatValue], currentTime);
+			if(currentTime - [pc.lastAdvertisingTime doubleValue] > 1.0)
+			{
+				//haven't heard from this peripheral in a while.  Kill it.
+				//NSLog(@"Removing peripheral");
+				[self.peripheralContainers removeObjectAtIndex:i];
+				[self updateTable];
+			}
+		}
+	}
+}
+
 #pragma mark - Action Methods
+
+- (IBAction)scanQRCode
+{
+#if !TARGET_IPHONE_SIMULATOR
+    // NSLog(@"Scanning...");
+	
+	[self stopBLE];
+	
+	_readerView = [ZBarReaderView new];
+	[self.qrView insertSubview:_readerView belowSubview:self.scanFrame];
+	_readerView.frame = self.scanFrame.frame;
+	_readerView.readerDelegate = self;
+	_readerView.tracksSymbols = NO;
+	
+	_readerView.tag = 99999999;
+	if ([self.pickerTextSendTo.textField.text length])
+	{
+		_readerView.alpha = 0.0;
+	}
+	[_readerView start];
+	[self flashItemSelected:FLASH_ITEM_OFF];
+	
+	self.bleView.hidden = YES;
+	self.qrView.hidden = NO;
+#endif
+}
 
 - (IBAction)info
 {
@@ -150,6 +236,522 @@
 {
     [self resignAllResonders];
     [self showImageScanner];
+}
+
+#pragma mark - BLE Central Methods
+
+-(void)stopBLE
+{
+	[self.centralManager stopScan];
+	NSLog(@"Getting rid of timer");
+	[peripheralCleanupTimer invalidate];
+}
+
+/** centralManagerDidUpdateState is a required protocol method.
+ *  Usually, you'd check for other states to make sure the current device supports LE, is powered on, etc.
+ *  In this instance, we're just using it to wait for CBCentralManagerStatePoweredOn, which indicates
+ *  the Central is ready to be used.
+ */
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central
+{
+    if (central.state != CBCentralManagerStatePoweredOn)
+	{
+        // In a real app, you'd deal with all the states correctly
+        return;
+    }
+    
+    // The state must be CBCentralManagerStatePoweredOn...
+	
+    // ... so start scanning
+    [self scan];
+    
+}
+
+
+/** Scan for peripherals - specifically for our service's 128bit CBUUID
+ */
+- (void)scan
+{
+	self.peripheralContainers = nil;
+    //[self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]] options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
+	[self.centralManager scanForPeripheralsWithServices:nil options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
+    
+    NSLog(@"Scanning started");
+}
+
+/*
+ *  @method UUIDSAreEqual:
+ *
+ *  @param u1 CFUUIDRef 1 to compare
+ *  @param u2 CFUUIDRef 2 to compare
+ *
+ *  @returns 1 (equal) 0 (not equal)
+ *
+ *  @discussion compares two CFUUIDRef's
+ *
+ */
+
+- (int) UUIDSAreEqual:(CFUUIDRef)u1 u2:(CFUUIDRef)u2
+{
+    CFUUIDBytes b1 = CFUUIDGetUUIDBytes(u1);
+    CFUUIDBytes b2 = CFUUIDGetUUIDBytes(u2);
+    if (memcmp(&b1, &b2, 16) == 0)
+	{
+        return 1;
+    }
+    else return 0;
+}
+
+/** This callback comes whenever a peripheral that is advertising the TRANSFER_SERVICE_UUID is discovered.
+ *  We check the RSSI, to make sure it's close enough that we're interested in it, and if it is,
+ *  we start the connection process
+ */
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+{
+	PeripheralContainer *pc = [[PeripheralContainer alloc] init];
+	pc.peripheral = peripheral;
+	pc.advertisingData = advertisementData;
+	pc.rssi = [RSSI copy];
+	pc.lastAdvertisingTime = [NSNumber numberWithDouble:CACurrentMediaTime()];
+	
+    if (!self.peripheralContainers)
+	{
+		self.peripheralContainers = [[NSMutableArray alloc] initWithObjects:pc, nil];
+	}
+    else
+	{
+		BOOL replacedExistingObject = NO;
+		
+        for(int i = 0; i < self.peripheralContainers.count; i++)
+		{
+            PeripheralContainer *container = [self.peripheralContainers objectAtIndex:i];
+            if ([self UUIDSAreEqual:container.peripheral.UUID u2:peripheral.UUID])
+			{
+                [self.peripheralContainers replaceObjectAtIndex:i withObject:pc];
+				// printf("Duplicate UUID found updating ...\r\n");
+				replacedExistingObject = YES;
+                break;
+            }
+        }
+		if(!replacedExistingObject)
+		{
+			[self.peripheralContainers addObject:pc];
+		}
+		// printf("New UUID, adding\r\n");
+    }
+	
+	NSTimeInterval newUpdateTime = CACurrentMediaTime();
+	if((newUpdateTime - lastUpdateTime) > 0.5)
+	{
+		lastUpdateTime = newUpdateTime;
+		[self updateTable];
+	}
+    
+    //NSLog(@"Discovered %@ at %@ with adv data: %@", peripheral.name, RSSI, advertisementData);
+    
+    // Ok, it's in range - have we already seen it?
+	/* if (self.discoveredPeripheral != peripheral)
+	 {
+	 
+	 // Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it
+	 self.discoveredPeripheral = peripheral;
+	 
+	 // And connect
+	 NSLog(@"Connecting to peripheral %@", peripheral);
+	 [self.centralManager connectPeripheral:peripheral options:nil];
+	 }*/
+}
+
+
+/** If the connection fails for whatever reason, we need to deal with it.
+ */
+- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    NSLog(@"Failed to connect to %@. (%@)", peripheral, [error localizedDescription]);
+    [self cleanup];
+}
+
+
+/** We've connected to the peripheral, now we need to discover the services and characteristics to find the 'transfer' characteristic.
+ */
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
+{
+    NSLog(@"Peripheral Connected");
+    
+    // Stop scanning
+    [self.centralManager stopScan];
+    NSLog(@"Scanning stopped");
+    
+    // Clear the data that we may already have
+    [self.data setLength:0];
+	
+    // Make sure we get the discovery callbacks
+    peripheral.delegate = self;
+    
+    // Search only for services that match our UUID
+    [peripheral discoverServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]]];
+}
+
+
+/** The Transfer Service was discovered
+ */
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
+{
+    if (error)
+	{
+        NSLog(@"Error discovering services: %@", [error localizedDescription]);
+        [self cleanup];
+        return;
+    }
+    
+    // Discover the characteristic we want...
+    
+    // Loop through the newly filled peripheral.services array, just in case there's more than one.
+    for (CBService *service in peripheral.services)
+	{
+        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]] forService:service];
+    }
+}
+
+
+/** The Transfer characteristic was discovered.
+ *  Once this has been found, we want to subscribe to it, which lets the peripheral know we want the data it contains
+ */
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
+{
+    // Deal with errors (if any)
+    if (error) {
+        NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
+        [self cleanup];
+        return;
+    }
+    
+    // Again, we loop through the array, just in case.
+    for (CBCharacteristic *characteristic in service.characteristics)
+	{
+        
+        // And check if it's the right one
+        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
+		{
+			
+            // If it is, subscribe to it
+            [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+        }
+    }
+    
+    // Once this is complete, we just need to wait for the data to come in.
+}
+
+
+/** This callback lets us know more data has arrived via notification on the characteristic
+ */
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if (error)
+	{
+        NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
+        return;
+    }
+    
+    NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+    
+    // Have we got everything we need?
+    if ([stringFromData isEqualToString:@"EOM"])
+	{
+        // We have, process the data,
+		NSString *stringFromRequestor = [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
+		NSArray *components = [stringFromRequestor componentsSeparatedByString:@"."];
+		//first component is address
+		//second component is amount in Satoshi
+		
+		//NSLog(@"############## Address: %@",[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]);
+//cw        [self.receivedAddressLabel setText:[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]];
+        
+        // Cancel our subscription to the characteristic
+        [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+        
+        // and disconnect from the peripehral
+        [self.centralManager cancelPeripheralConnection:peripheral];
+		
+		//show the results
+		NSLog(@"Address: %@", [components objectAtIndex:0]);
+		NSLog(@"Amount Satoshi: %@", [components objectAtIndex:1]);
+		
+		[self showSendConfirmationTo:[components objectAtIndex:0] amount:[[components objectAtIndex:1] integerValue] nameLabel:nil toIsUUID:NO];
+	}
+	
+    // Otherwise, just add the data on to what we already have
+    [self.data appendData:characteristic.value];
+    
+    // Log it
+    NSLog(@"Received: %@", stringFromData);
+}
+
+
+/** The peripheral letting us know whether our subscribe/unsubscribe happened or not
+ */
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if (error)
+	{
+        NSLog(@"Error changing notification state: %@", error.localizedDescription);
+    }
+    
+    // Exit if it's not the transfer characteristic
+    if (![characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
+	{
+        return;
+    }
+    
+    // Notification has started
+    if (characteristic.isNotifying)
+	{
+        NSLog(@"Notification began on %@", characteristic);
+    }
+    
+    // Notification has stopped
+    else
+	{
+        // so disconnect from the peripheral
+        NSLog(@"Notification stopped on %@.  Disconnecting", characteristic);
+        [self.centralManager cancelPeripheralConnection:peripheral];
+    }
+}
+
+-(void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
+{
+	NSLog(@"Did Modify Services: %@", invalidatedServices);
+}
+
+/** Once the disconnection happens, we need to clean up our local copy of the peripheral
+ */
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    NSLog(@"Did disconnect because: %@", error.description);
+	self.peripheralContainers = nil;
+    self.discoveredPeripheral = nil;
+    
+    // We're disconnected, so start scanning again
+    [self scan];
+}
+
+
+/** Call this when things either go wrong, or you're done with the connection.
+ *  This cancels any subscriptions if there are any, or straight disconnects if not.
+ *  (didUpdateNotificationStateForCharacteristic will cancel the connection if a subscription is involved)
+ */
+- (void)cleanup
+{
+    // Don't do anything if we're not connected
+    if (self.discoveredPeripheral.state != CBPeripheralStateConnected)
+	{
+        return;
+    }
+    
+    // See if we are subscribed to a characteristic on the peripheral
+    if (self.discoveredPeripheral.services != nil)
+	{
+        for (CBService *service in self.discoveredPeripheral.services)
+		{
+            if (service.characteristics != nil)
+			{
+                for (CBCharacteristic *characteristic in service.characteristics)
+				{
+                    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
+					{
+                        if (characteristic.isNotifying)
+						{
+                            // It is notifying, so unsubscribe
+                            [self.discoveredPeripheral setNotifyValue:NO forCharacteristic:characteristic];
+                            
+                            // And we're done.
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // If we've got this far, we're connected, but we're not subscribed, so we just disconnect
+    [self.centralManager cancelPeripheralConnection:self.discoveredPeripheral];
+}
+
+/*!
+ *  @method printKnownPeripherals:
+ *
+ *  @discussion printKnownPeripherals prints all curenntly known peripherals stored in the peripherals array of ForeheadSensor class
+ *
+ */
+- (void) printKnownPeripherals
+{
+    int i;
+    printf("List of currently known peripherals : \r\n");
+    for (i=0; i < self.peripheralContainers.count; i++)
+    {
+        PeripheralContainer *p = [self.peripheralContainers objectAtIndex:i];
+		
+        CFStringRef s = CFUUIDCreateString(NULL, p.peripheral.UUID);
+        printf("%d  |  %s\r\n",i,CFStringGetCStringPtr(s, 0));
+        [self printPeripheralInfo:p];
+    }
+}
+
+/*
+ *  @method printPeripheralInfo:
+ *
+ *  @param peripheral Peripheral to print info of
+ *
+ *  @discussion printPeripheralInfo prints detailed info about peripheral
+ *
+ */
+- (void) printPeripheralInfo:(PeripheralContainer*)peripheralContainer
+{
+    CFStringRef s = CFUUIDCreateString(NULL, peripheralContainer.peripheral.UUID);
+    printf("------------------------------------\r\n");
+    printf("Peripheral Info :\r\n");
+    printf("UUID : %s\r\n",CFStringGetCStringPtr(s, 0));
+    printf("RSSI : %d\r\n",[peripheralContainer.peripheral.RSSI intValue]);
+    NSLog(@"Name : %@\r\n",peripheralContainer.peripheral.name);
+	BOOL connected = NO;
+	if(peripheralContainer.peripheral.state == CBPeripheralStateConnected)
+	{
+		connected = YES;
+	}
+    printf("isConnected : %d\r\n", connected);
+	//UInt32 serialNum
+	//printf("serial number:
+    printf("-------------------------------------\r\n");
+    
+}
+
+#pragma mark TableView
+
+-(void)updateTable
+{
+	if(self.peripheralContainers.count == 0)
+	{
+		self.scanningLabel.hidden = NO;
+		[self.scanningSpinner startAnimating];
+	}
+	else
+	{
+		self.scanningLabel.hidden = YES;
+		[self.scanningSpinner stopAnimating];
+	}
+	[self.tableView reloadData];
+}
+
+-(BLEScanCell *)getScanCellForTableView:(UITableView *)tableView
+{
+	BLEScanCell *cell;
+	static NSString *cellIdentifier = @"ScanCell";
+	
+	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (nil == cell)
+	{
+		cell = [[BLEScanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+	}
+	return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	return [self.peripheralContainers count];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	BLEScanCell *scanCell = [self getScanCellForTableView:tableView];
+	PeripheralContainer *pc = [self.peripheralContainers objectAtIndex:indexPath.row];
+	
+	int rssi = [pc.rssi intValue];
+	
+	if(rssi >= -41)
+	{
+		scanCell.signalImage.image = [UIImage imageNamed:@"5-bars.png"];
+	}
+	else if(rssi >= -53)
+	{
+		scanCell.signalImage.image = [UIImage imageNamed:@"4-bars.png"];
+	}
+	else if(rssi >= -65)
+	{
+		scanCell.signalImage.image = [UIImage imageNamed:@"3-bars.png"];
+	}
+	else if(rssi >= -77)
+	{
+		scanCell.signalImage.image = [UIImage imageNamed:@"2-bars.png"];
+	}
+	else if(rssi >= -89)
+	{
+		scanCell.signalImage.image = [UIImage imageNamed:@"1-bar.png"];
+	}
+	else
+	{
+		scanCell.signalImage.image = [UIImage imageNamed:@"0-bars.png"];
+	}
+	
+	//pairingCell.RSSI_Label.text = [NSString stringWithFormat:@"%i", rssi];
+	NSString *advData = [pc.advertisingData objectForKey:CBAdvertisementDataLocalNameKey];
+	if(advData.length >= 10)
+	{
+		scanCell.contactBitcoinAddress.text = [advData substringToIndex:10];
+		if(advData.length > 10)
+		{
+			scanCell.contactName.text = [advData substringFromIndex:10];
+		}
+	}
+	
+	return scanCell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return 47.0;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	
+	//lastSelectedRow = indexPath.row;
+	//
+	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+	
+	NSLog(@"Selecting row: %li", (long)indexPath.row);
+	
+	//cell.textLabel.font = [UIFont fontWithName:@"Stratum2-Bold" size:21.0];
+	//cell.textLabel.textColor = [UIColor whiteColor];
+	//cell.backgroundColor = BLUE_HIGHLIGHT;
+	//cell.contentView.backgroundColor = BLUE_HIGHLIGHT;
+	
+	//
+	
+	//attempt to connect to this peripheral
+	//[self.sensor cancelScanningForPeripherals];
+	PeripheralContainer *pc = [self.peripheralContainers objectAtIndex:indexPath.row];
+	
+	/*if ([pc.peripheral.name rangeOfString:@"BrainStation"].location != NSNotFound)
+	 {
+	 NSData *manufData = [pc.advertisingData objectForKey:@"kCBAdvDataManufacturerData"];
+	 NSRange snRange = {3, 4};
+	 [manufData getBytes:&serialNumber range:snRange];
+	 self.sensorName = pc.peripheral.name;
+	 [self.sensor connectPeripheral:pc.peripheral];
+	 NSLog(@"Connecting to %@\n", pc.peripheral.name);
+	 }
+	 else
+	 {
+	 NSLog(@"Peripheral not a BrainStation (it was a %@) or callback was not because of a ScanResponse\n", pc.peripheral.name);
+	 [self.sensor.CM cancelPeripheralConnection:pc.peripheral];
+	 }*/
+	
+	// Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it
+	self.discoveredPeripheral = pc.peripheral;
+	
+	// And connect
+	NSLog(@"Connecting to peripheral %@", pc.peripheral);
+	[self.centralManager connectPeripheral:pc.peripheral options:nil];
 }
 
 #pragma mark - Misc Methods
@@ -468,9 +1070,12 @@
 {
     [self loadWalletInfo];
 	self.pickerTextSendTo.textField.text = @"";
-    [self startCameraScanner:nil];
+    //[self startCameraScanner:nil];
 	[_sendConfirmationViewController.view removeFromSuperview];
 	_sendConfirmationViewController = nil;
+	
+	self.bleView.hidden = NO;
+	self.qrView.hidden = YES;
 }
 
 #pragma mark - ButtonSelectorView delegates
@@ -674,7 +1279,6 @@
         {
             [self closeCameraScanner];
             [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label toIsUUID:NO];
-            
         }
 	}
 
@@ -721,7 +1325,7 @@
     [_syncingView removeFromSuperview];
     _syncingView = nil;
 
-    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+    //cw _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 }
 
 - (void)syncTest

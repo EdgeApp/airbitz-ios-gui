@@ -677,14 +677,137 @@
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="IsP-NR-ytZ">
+                            <view contentMode="scaleToFill" id="V8c-6o-ibr">
+                                <rect key="frame" x="0.0" y="186" width="320" height="382"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9C3-ej-2l9">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="312"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ScanCell" rowHeight="47" id="lQK-wC-hur" customClass="BLEScanCell">
+                                                <rect key="frame" x="0.0" y="22" width="320" height="47"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lQK-wC-hur" id="vNw-m0-R4u">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="RIr-2j-jnF">
+                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="46"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Tb9-gC-0YS">
+                                                            <rect key="frame" x="50" y="12" width="23" height="23"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gHX-Xq-QLY" customClass="MontserratLabel">
+                                                            <rect key="frame" x="80" y="0.0" width="240" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ASx-id-nUc" customClass="MontserratLabel">
+                                                            <rect key="frame" x="80" y="21" width="240" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" id="cuz-AA-HVh">
+                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="0.87058830261230469" green="0.93333339691162109" blue="0.96078437566757202" alpha="1" colorSpace="deviceRGB"/>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" id="Qi2-4w-G1j">
+                                                            <rect key="frame" x="0.0" y="47" width="320" height="1"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            <color key="backgroundColor" red="0.57254904508590698" green="0.62352943420410156" blue="0.65490198135375977" alpha="1" colorSpace="deviceRGB"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.62745100259780884" green="0.80392163991928101" blue="0.88235300779342651" alpha="1" colorSpace="deviceRGB"/>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <outlet property="contactBitcoinAddress" destination="ASx-id-nUc" id="crc-zG-oZ1"/>
+                                                    <outlet property="contactImage" destination="RIr-2j-jnF" id="Tb5-62-T2l"/>
+                                                    <outlet property="contactName" destination="gHX-Xq-QLY" id="r9g-a0-tRB"/>
+                                                    <outlet property="signalImage" destination="Tb9-gC-0YS" id="4IK-wv-8ld"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="c1q-yF-WIr" id="Mv7-qK-O6b"/>
+                                            <outlet property="delegate" destination="c1q-yF-WIr" id="S9R-lO-EGn"/>
+                                        </connections>
+                                    </tableView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scanning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="21p-YC-LN1" customClass="LatoLabel">
+                                        <rect key="frame" x="90" y="96" width="139" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="3RJ-XE-aQd">
+                                        <rect key="frame" x="141" y="139" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="krf-ke-awm">
+                                        <rect key="frame" x="39" y="331" width="241" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <state key="normal" backgroundImage="btn_scan_qr_code.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="scanQRCode" destination="c1q-yF-WIr" eventType="touchUpInside" id="xZU-dw-q9n"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="5Ou-tE-PMO">
                                 <rect key="frame" x="0.0" y="169" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" id="P8E-fr-7ke" customClass="FlashSelectView">
-                                <rect key="frame" x="238" y="254" width="45" height="95"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_frame.png" id="IsP-NR-ytZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" id="P8E-fr-7ke" customClass="FlashSelectView">
+                                        <rect key="frame" x="238" y="85" width="45" height="95"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code or use photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xGm-o9-j7u" customClass="LatoLabel">
+                                        <rect key="frame" x="1" y="9" width="317" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="-1" height="-1"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k8T-3x-9qh">
+                                        <rect key="frame" x="40" y="85" width="36" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="btn_album.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="viy-8N-Bpq">
+                                        <rect key="frame" x="32" y="78" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonCameraTouched:" destination="c1q-yF-WIr" eventType="touchUpInside" id="OFN-ge-5n3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="eg7-WO-FJq">
                                 <rect key="frame" x="76" y="126" width="224" height="35"/>
@@ -696,32 +819,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code or use photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xGm-o9-j7u" customClass="LatoLabel">
-                                <rect key="frame" x="0.0" y="178" width="317" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="shadowOffset" width="-1" height="-1"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k8T-3x-9qh">
-                                <rect key="frame" x="40" y="254" width="36" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="btn_album.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="viy-8N-Bpq">
-                                <rect key="frame" x="32" y="247" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonCameraTouched:" destination="c1q-yF-WIr" eventType="touchUpInside" id="OFN-ge-5n3"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" id="1GV-VN-mhP" customClass="ButtonSelectorView">
                                 <rect key="frame" x="26" y="88" width="273" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -731,13 +828,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="bleView" destination="V8c-6o-ibr" id="tep-Iz-jGD"/>
                         <outlet property="buttonSelector" destination="1GV-VN-mhP" id="udC-AU-ER5"/>
                         <outlet property="flashSelector" destination="P8E-fr-7ke" id="N5Z-qc-wEU"/>
                         <outlet property="imageSendTo" destination="eg7-WO-FJq" id="fdP-k8-W4Z"/>
                         <outlet property="imageTopFrame" destination="Z4x-IZ-QSd" id="S48-MA-MxZ"/>
                         <outlet property="labelSendTo" destination="k2x-c8-HxP" id="oRd-bI-DYt"/>
                         <outlet property="pickerTextSendTo" destination="D0r-lc-Dze" id="Jnu-gv-ph8"/>
+                        <outlet property="qrView" destination="5Ou-tE-PMO" id="jON-MR-S5r"/>
                         <outlet property="scanFrame" destination="IsP-NR-ytZ" id="WAe-eF-Ooy"/>
+                        <outlet property="scanningLabel" destination="21p-YC-LN1" id="Fgw-7k-CvJ"/>
+                        <outlet property="scanningSpinner" destination="3RJ-XE-aQd" id="la7-Nl-RmL"/>
+                        <outlet property="tableView" destination="9C3-ej-2l9" id="sGK-l5-2nZ"/>
                         <outlet property="view" destination="of2-42-Lef" id="I0w-Df-2dv"/>
                     </connections>
                 </viewController>
@@ -1242,8 +1344,12 @@
                                     <action selector="CopyAddress" destination="Nhq-ts-4tB" eventType="touchUpInside" id="xFw-bz-B3y"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O1G-gR-pT0" customClass="LatoLabel">
-                                <rect key="frame" x="34" y="342" width="251" height="21"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BLE_Logo.png" id="gOB-df-rnx">
+                                <rect key="frame" x="20" y="342" width="21" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="O1G-gR-pT0" customClass="LatoLabel">
+                                <rect key="frame" x="49" y="342" width="220" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1256,8 +1362,15 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Li-R2-dUi" customClass="LatoLabel">
-                                <rect key="frame" x="34" y="388" width="251" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1WWM5ZWX" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KUE-S9-d9J" customClass="LatoLabel">
+                                <rect key="frame" x="37" y="388" width="82" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="4Li-R2-dUi" customClass="LatoLabel">
+                                <rect key="frame" x="119" y="388" width="166" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1289,7 +1402,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="addressLabel" destination="4Li-R2-dUi" id="Ptt-kM-ccT"/>
+                        <outlet property="BLE_LogoImageView" destination="gOB-df-rnx" id="uvh-3P-3m6"/>
+                        <outlet property="addressLabel1" destination="KUE-S9-d9J" id="Yhh-qY-l2u"/>
+                        <outlet property="addressLabel2" destination="4Li-R2-dUi" id="NZU-wU-fsP"/>
                         <outlet property="amountLabel" destination="2FV-6E-gId" id="TuK-CX-L2B"/>
                         <outlet property="buttonCancel" destination="810-FP-oTH" id="Igh-8p-sn2"/>
                         <outlet property="buttonCopyAddress" destination="Qov-uI-G7t" id="Zp6-bx-jv8"/>
@@ -4458,6 +4573,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BLE_Logo.png" width="21" height="29"/>
         <image name="SearchBarBacking.png" width="320" height="116"/>
         <image name="TxSearchBarBacking.png" width="320" height="55"/>
         <image name="back_arrow.png" width="37" height="37"/>
@@ -4496,6 +4612,7 @@
         <image name="btn_locateMe.png" width="39" height="39"/>
         <image name="btn_max.png" width="251" height="41"/>
         <image name="btn_right.png" width="22" height="22"/>
+        <image name="btn_scan_qr_code.png" width="241" height="37"/>
         <image name="btn_search.png" width="32" height="33"/>
         <image name="btn_td_done.png" width="251" height="41"/>
         <image name="comp_09.2-send_bitcoin2.jpg" width="640" height="1136"/>

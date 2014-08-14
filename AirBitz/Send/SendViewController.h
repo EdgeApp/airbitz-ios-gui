@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PickerTextView.h"
+#import <CoreBluetooth/CoreBluetooth.h>
 
 @interface SendViewController : UIViewController
 
@@ -17,4 +18,12 @@
 - (void)processURI;
 - (void)resetViews;
 
+@end
+
+@interface PeripheralContainer : NSObject
+
+@property (nonatomic, strong) CBPeripheral *peripheral;
+@property (nonatomic, strong) NSDictionary *advertisingData;
+@property (nonatomic, strong) NSNumber *rssi;
+@property (nonatomic, strong) NSNumber *lastAdvertisingTime; //used for identifying peripherals that dropped out
 @end

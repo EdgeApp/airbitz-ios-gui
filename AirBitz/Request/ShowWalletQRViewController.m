@@ -18,10 +18,14 @@
 #import "CommonTypes.h"
 #import "CoreBridge.h"
 #import "InfoView.h"
+#import <CoreBluetooth/CoreBluetooth.h>
+#import "TransferService.h"
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 
 #define QR_ATTACHMENT_WIDTH 100
+
+#define NOTIFY_MTU      20
 
 typedef enum eAddressPickerType
 {
@@ -30,7 +34,7 @@ typedef enum eAddressPickerType
 } tAddressPickerType;
 
 @interface ShowWalletQRViewController () <ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate,
-                                          UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
+                                          UIAlertViewDelegate, MFMailComposeViewControllerDelegate, CBPeripheralManagerDelegate>
 {
     tAddressPickerType          _addressPickerType;
 }
@@ -38,15 +42,22 @@ typedef enum eAddressPickerType
 @property (nonatomic, weak) IBOutlet UIImageView    *qrCodeImageView;
 @property (nonatomic, weak) IBOutlet UILabel        *statusLabel;
 @property (nonatomic, weak) IBOutlet UILabel        *amountLabel;
-@property (nonatomic, weak) IBOutlet UILabel        *addressLabel;
+@property (nonatomic, weak) IBOutlet UILabel        *addressLabel1;
+@property (nonatomic, weak) IBOutlet UILabel        *addressLabel2;
 @property (weak, nonatomic) IBOutlet UIView         *viewQRCodeFrame;
 @property (weak, nonatomic) IBOutlet UIImageView    *imageBottomFrame;
 @property (weak, nonatomic) IBOutlet UIButton       *buttonCancel;
 @property (weak, nonatomic) IBOutlet UIButton       *buttonCopyAddress;
+@property (nonatomic, weak) IBOutlet UIImageView	*BLE_LogoImageView;
 
 @property (nonatomic, copy)   NSString *strFullName;
 @property (nonatomic, copy)   NSString *strPhoneNumber;
 @property (nonatomic, copy)   NSString *strEMail;
+
+@property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
+@property (strong, nonatomic) CBMutableCharacteristic   *transferCharacteristic;
+@property (strong, nonatomic) NSData                    *dataToSend;
+@property (nonatomic, readwrite) NSInteger              sendDataIndex;
 
 @end
 
@@ -73,10 +84,33 @@ typedef enum eAddressPickerType
 	self.qrCodeImageView.layer.magnificationFilter = kCAFilterNearest;
 	self.qrCodeImageView.image = self.qrCodeImage;
 	self.statusLabel.text = self.statusString;
-	self.addressLabel.text = self.addressString;
+	//show first eight characters of address larger than rest
+	if(self.addressString.length >= 8)
+	{
+		self.addressLabel1.text = [self.addressString substringToIndex:8];
+		[self.addressLabel1 sizeToFit];
+		if(self.addressString.length > 8)
+		{
+			self.addressLabel2.text = [self.addressString substringFromIndex:8];
+			
+			CGRect frame = self.addressLabel2.frame;
+			float endX = frame.origin.x + frame.size.width;
+			frame.origin.x = self.addressLabel1.frame.origin.x + self.addressLabel1.frame.size.width;
+			frame.size.width = endX - frame.origin.x;
+			self.addressLabel2.frame = frame;
+		}
+	}
+	else
+	{
+		self.addressLabel1.text = self.addressString;
+	}
+	
     self.amountLabel.text = [CoreBridge formatSatoshi: self.amountSatoshi];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:NO]];
+	
+	// Start up the CBPeripheralManager
+    _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,12 +119,220 @@ typedef enum eAddressPickerType
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+	// Don't keep it going while we're not showing.
+    [self.peripheralManager stopAdvertising];
+}
+
+#pragma mark - CBPeripheral methods
+
+#pragma mark - Peripheral Methods
+
+/** Required protocol method.  A full app should take care of all the possible states,
+ *  but we're just waiting for  to know when the CBPeripheralManager is ready
+ */
+- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
+{
+    // Opt out from any other state
+    //if (peripheral.state != CBPeripheralManagerStatePoweredOn)
+	//{
+	//return;
+    //}
+	switch(peripheral.state)
+	{
+		case CBPeripheralManagerStatePoweredOn:
+		{
+			// We're in CBPeripheralManagerStatePoweredOn state...
+			NSLog(@"self.peripheralManager powered on.");
+			
+			// ... so build our service.
+			
+			// Start with the CBMutableCharacteristic
+			self.transferCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]
+																			 properties:CBCharacteristicPropertyNotify
+																				  value:nil
+																			permissions:CBAttributePermissionsReadable];
+			
+			// Then the service
+			CBMutableService *transferService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]
+																			   primary:YES];
+			
+			// Add the characteristic to the service
+			transferService.characteristics = @[self.transferCharacteristic];
+			
+			// And add it to the peripheral manager
+			[self.peripheralManager addService:transferService];
+			
+			//now start advertising (UUID and username)
+			
+			//make 10-character address
+			NSString *address;
+			if(self.addressString.length >= 10)
+			{
+				address = [self.addressString substringToIndex:10];
+			}
+			else
+			{
+				address = self.addressString;
+			}
+			
+			//broadcast first 10 digits of bitcoin address followed by first name last name (up to 28 bytes total)
+			[self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]], CBAdvertisementDataLocalNameKey : [NSString stringWithFormat:@"%@%@ %@", address, [User Singleton].firstName , [User Singleton].lastName]}];
+						
+			break;
+		}
+		case CBPeripheralManagerStateUnknown:
+			NSLog(@"Unknown peripheral state");
+			break;
+		case CBPeripheralManagerStateResetting:
+			NSLog(@"Peripheral state resetting");
+			break;
+		case CBPeripheralManagerStateUnsupported:
+			NSLog(@"Peripheral state unsupported");
+			break;
+		case CBPeripheralManagerStateUnauthorized:
+			NSLog(@"Peripheral state unauthorized");
+			break;
+		case CBPeripheralManagerStatePoweredOff:
+			NSLog(@"Peripheral state powered off");
+			break;
+	}
+}
+
+
+/** Catch when someone subscribes to our characteristic, then start sending them data
+ */
+- (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic
+{
+    NSLog(@"Central subscribed to characteristic");
+    
+    // Send the bitcoin address and the amount in Satoshi
+	NSString *stringToSend = [NSString stringWithFormat:@"%@.%lli", self.addressString, self.amountSatoshi];
+    self.dataToSend = [stringToSend dataUsingEncoding:NSUTF8StringEncoding];
+    
+    // Reset the index
+    self.sendDataIndex = 0;
+    
+    // Start sending
+    [self sendData];
+}
+
+
+/** Recognise when the central unsubscribes
+ */
+- (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic
+{
+    NSLog(@"Central unsubscribed from characteristic");
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
+
+/** Sends the next amount of data to the connected central
+ */
+- (void)sendData
+{
+    // First up, check if we're meant to be sending an EOM
+    static BOOL sendingEOM = NO;
+    
+    if (sendingEOM)
+	{
+        // send it
+        BOOL didSend = [self.peripheralManager updateValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:self.transferCharacteristic onSubscribedCentrals:nil];
+        
+        // Did it send?
+        if (didSend)
+		{
+            // It did, so mark it as sent
+            sendingEOM = NO;
+            
+            NSLog(@"Sent: EOM");
+        }
+        
+        // It didn't send, so we'll exit and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendData again
+        return;
+    }
+    
+    // We're not sending an EOM, so we're sending data
+    
+    // Is there any left to send?
+    
+    if (self.sendDataIndex >= self.dataToSend.length)
+	{
+        // No data left.  Do nothing
+        return;
+    }
+    
+    // There's data left, so send until the callback fails, or we're done.
+    
+    BOOL didSend = YES;
+    
+    while (didSend)
+	{
+        // Make the next chunk
+        
+        // Work out how big it should be
+        NSInteger amountToSend = self.dataToSend.length - self.sendDataIndex;
+        
+        // Can't be longer than 20 bytes
+        if (amountToSend > NOTIFY_MTU) amountToSend = NOTIFY_MTU;
+        
+        // Copy out the data we want
+        NSData *chunk = [NSData dataWithBytes:self.dataToSend.bytes+self.sendDataIndex length:amountToSend];
+        
+        // Send it
+        didSend = [self.peripheralManager updateValue:chunk forCharacteristic:self.transferCharacteristic onSubscribedCentrals:nil];
+        
+        // If it didn't work, drop out and wait for the callback
+        if (!didSend)
+		{
+            return;
+        }
+        
+        NSString *stringFromData = [[NSString alloc] initWithData:chunk encoding:NSUTF8StringEncoding];
+        NSLog(@"Sent: %@", stringFromData);
+        
+        // It did send, so update our index
+        self.sendDataIndex += amountToSend;
+        
+        // Was it the last one?
+        if (self.sendDataIndex >= self.dataToSend.length)
+		{
+            // It was - send an EOM
+            
+            // Set this so if the send fails, we'll send it next time
+            sendingEOM = YES;
+            
+            // Send it
+            BOOL eomSent = [self.peripheralManager updateValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:self.transferCharacteristic onSubscribedCentrals:nil];
+            
+            if (eomSent)
+			{
+                // It sent, we're all done
+                sendingEOM = NO;
+                NSLog(@"Sent: EOM");
+            }
+            return;
+        }
+    }
+}
+
+
+/** This callback comes in when the PeripheralManager is ready to send the next chunk of data.
+ *  This is to ensure that packets will arrive in the order they are sent
+ */
+- (void)peripheralManagerIsReadyToUpdateSubscribers:(CBPeripheralManager *)peripheral
+{
+    // Start sending again
+    [self sendData];
+}
+
 #pragma mark - Action Methods
 
 - (IBAction)CopyAddress
 {
 	UIPasteboard *pb = [UIPasteboard generalPasteboard];
-	[pb setString:self.addressLabel.text];
+	[pb setString:self.addressString];
 }
 
 - (IBAction)Cancel
