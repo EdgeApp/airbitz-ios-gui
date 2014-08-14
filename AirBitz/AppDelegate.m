@@ -129,6 +129,8 @@ NSDate *logoutDate = NULL;
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    [CoreBridge stopBouncer];
+
     [[User Singleton] clear];
     ABC_Terminate();
 }

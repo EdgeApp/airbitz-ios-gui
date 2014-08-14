@@ -16,6 +16,9 @@
 + (void)startQueues;
 + (void)stopQueues;
 + (void)postToSyncQueue:(void(^)(void))cb;
++ (void)startBouncer;
++ (void)stopBouncer;
+
 
 + (void)loadWallets: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (void)reloadWallet: (Wallet *) wallet;
