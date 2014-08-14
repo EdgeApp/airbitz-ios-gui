@@ -699,7 +699,8 @@
 		scanCell.signalImage.image = [UIImage imageNamed:@"0-bars.png"];
 	}
 	
-	//pairingCell.RSSI_Label.text = [NSString stringWithFormat:@"%i", rssi];
+	scanCell.contactImage.image = [UIImage imageNamed:@"BLE_photo.png"];
+	
 	NSString *advData = [pc.advertisingData objectForKey:CBAdvertisementDataLocalNameKey];
 	if(advData.length >= 10)
 	{
