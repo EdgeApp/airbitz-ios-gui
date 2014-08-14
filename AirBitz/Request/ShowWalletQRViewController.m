@@ -59,6 +59,9 @@ typedef enum eAddressPickerType
 @property (strong, nonatomic) NSData                    *dataToSend;
 @property (nonatomic, readwrite) NSInteger              sendDataIndex;
 
+@property (nonatomic, weak) IBOutlet UIView				*connectedView;
+@property (nonatomic, weak) IBOutlet UIImageView		*connectedPhoto;
+@property (nonatomic, weak) IBOutlet UILabel			*connectedName;
 @end
 
 @implementation ShowWalletQRViewController
@@ -111,6 +114,10 @@ typedef enum eAddressPickerType
 	
 	// Start up the CBPeripheralManager
     _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+	
+	self.connectedView.alpha = 0.0;
+	self.connectedPhoto.layer.cornerRadius = 8.0;
+	self.connectedPhoto.layer.masksToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -123,6 +130,25 @@ typedef enum eAddressPickerType
 {
 	// Don't keep it going while we're not showing.
     [self.peripheralManager stopAdvertising];
+}
+
+-(void)showConnectedPopup
+{
+	self.connectedView.alpha = 1.0;
+	self.qrCodeImageView.alpha = 0.0;
+	
+	[UIView animateWithDuration:4.0
+						  delay:1.0
+						options:UIViewAnimationOptionCurveLinear
+					 animations:^
+	 {
+		 self.connectedView.alpha = 0.0;
+		 self.qrCodeImageView.alpha = 1.0;
+	 }
+	 completion:^(BOOL finished)
+	 {
+		 
+	 }];
 }
 
 #pragma mark - CBPeripheral methods
@@ -207,6 +233,8 @@ typedef enum eAddressPickerType
 {
     NSLog(@"Central subscribed to characteristic");
     
+	[self showConnectedPopup];
+	
     // Send the bitcoin address and the amount in Satoshi
 	NSString *stringToSend = [NSString stringWithFormat:@"%@.%lli", self.addressString, self.amountSatoshi];
     self.dataToSend = [stringToSend dataUsingEncoding:NSUTF8StringEncoding];

@@ -233,6 +233,7 @@
 		B57C20AD18C2FBE7005D7245 /* bd_cell_single@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B57C20AB18C2FBE7005D7245 /* bd_cell_single@2x~iphone.png */; };
 		B57C20AE18C2FBE7005D7245 /* bd_cell_single~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B57C20AC18C2FBE7005D7245 /* bd_cell_single~iphone.png */; };
 		B58FF739199C3D7B002C3D45 /* BLE_photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B58FF738199C3D7B002C3D45 /* BLE_photo@2x.png */; };
+		B58FF73F199C4234002C3D45 /* BLE_connected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B58FF73E199C4234002C3D45 /* BLE_connected@2x.png */; };
 		B59C141818C0113A00AEA789 /* bitCoinAnnotation@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C140C18C0113A00AEA789 /* bitCoinAnnotation@2x~iphone.png */; };
 		B59C141918C0113A00AEA789 /* bitCoinAnnotation~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C140D18C0113A00AEA789 /* bitCoinAnnotation~iphone.png */; };
 		B59C141A18C0113A00AEA789 /* bkg_categories@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C140E18C0113A00AEA789 /* bkg_categories@2x~iphone.png */; };
@@ -828,6 +829,7 @@
 		B57C20AC18C2FBE7005D7245 /* bd_cell_single~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_cell_single~iphone.png"; sourceTree = "<group>"; };
 		B57C20AF18C5021A005D7245 /* Notifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		B58FF738199C3D7B002C3D45 /* BLE_photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BLE_photo@2x.png"; sourceTree = "<group>"; };
+		B58FF73E199C4234002C3D45 /* BLE_connected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BLE_connected@2x.png"; sourceTree = "<group>"; };
 		B59C140C18C0113A00AEA789 /* bitCoinAnnotation@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bitCoinAnnotation@2x~iphone.png"; sourceTree = "<group>"; };
 		B59C140D18C0113A00AEA789 /* bitCoinAnnotation~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bitCoinAnnotation~iphone.png"; sourceTree = "<group>"; };
 		B59C140E18C0113A00AEA789 /* bkg_categories@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_categories@2x~iphone.png"; sourceTree = "<group>"; };
@@ -1691,6 +1693,7 @@
 			children = (
 				685E6DED197DCB7800EC95F8 /* btn_max@2x~iphone.png */,
 				B5628BF6199C035F0077DA1C /* BLE_Logo@2x.png */,
+				B58FF73E199C4234002C3D45 /* BLE_connected@2x.png */,
 				B58FF738199C3D7B002C3D45 /* BLE_photo@2x.png */,
 				B5628BE7199BD6320077DA1C /* 0-bars@2x.png */,
 				B5628BE8199BD6320077DA1C /* 1-bar@2x.png */,
@@ -2384,6 +2387,7 @@
 				B5F2E9B618DA0F9E008ACF88 /* logo_large~iphone.png in Resources */,
 				B59C14F318C012B500AEA789 /* btn_export~iphone.png in Resources */,
 				B59C14E418C012B500AEA789 /* btn_calc_done@2x~iphone.png in Resources */,
+				B58FF73F199C4234002C3D45 /* BLE_connected@2x.png in Resources */,
 				B59C14EC18C012B500AEA789 /* btn_dot@2x~iphone.png in Resources */,
 				B55A032518EB597D00845090 /* btn_deleteCategory~iphone.png in Resources */,
 				B59C154118C012B500AEA789 /* table_cell_middle~iphone.png in Resources */,

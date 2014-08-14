@@ -1398,6 +1398,35 @@
                                     <action selector="SMS" destination="Nhq-ts-4tB" eventType="touchUpInside" id="kOg-Ul-bO2"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="vnX-Jp-a7F">
+                                <rect key="frame" x="60" y="113" width="200" height="168"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BLE_connected.png" id="KpQ-eK-ekw">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="168"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BLE_photo.png" id="Enn-T7-Jij">
+                                        <rect key="frame" x="77" y="27" width="45" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="MKi-zS-5GZ" customClass="LatoLabel">
+                                        <rect key="frame" x="20" y="94" width="160" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B9X-O3-QF3" customClass="LatoLabel">
+                                        <rect key="frame" x="25" y="125" width="148" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1408,6 +1437,9 @@
                         <outlet property="amountLabel" destination="2FV-6E-gId" id="TuK-CX-L2B"/>
                         <outlet property="buttonCancel" destination="810-FP-oTH" id="Igh-8p-sn2"/>
                         <outlet property="buttonCopyAddress" destination="Qov-uI-G7t" id="Zp6-bx-jv8"/>
+                        <outlet property="connectedName" destination="MKi-zS-5GZ" id="EEp-BP-JOg"/>
+                        <outlet property="connectedPhoto" destination="Enn-T7-Jij" id="l16-Xe-SfZ"/>
+                        <outlet property="connectedView" destination="vnX-Jp-a7F" id="kdM-X3-OaU"/>
                         <outlet property="imageBottomFrame" destination="dAj-d5-4ff" id="ec3-Mm-4p4"/>
                         <outlet property="qrCodeImageView" destination="0A5-KU-hj2" id="g0D-Lx-S59"/>
                         <outlet property="statusLabel" destination="O1G-gR-pT0" id="D6E-8w-Iqx"/>
@@ -4574,6 +4606,8 @@
     </scenes>
     <resources>
         <image name="BLE_Logo.png" width="21" height="29"/>
+        <image name="BLE_connected.png" width="200" height="168"/>
+        <image name="BLE_photo.png" width="45" height="45"/>
         <image name="SearchBarBacking.png" width="320" height="116"/>
         <image name="TxSearchBarBacking.png" width="320" height="55"/>
         <image name="back_arrow.png" width="37" height="37"/>
