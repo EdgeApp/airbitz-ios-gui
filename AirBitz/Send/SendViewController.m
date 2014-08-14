@@ -40,6 +40,7 @@
 	NSTimeInterval					lastUpdateTime;	//used to remove BLE devices from table when they're no longer around
 	NSTimer							*peripheralCleanupTimer; //used to remove BLE devices from table when they're no longer around
 	BOOL							inBLEMode;
+	float							originalFrameHeight;
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
@@ -126,6 +127,9 @@
     // And somewhere to store the incoming data
     _data = [[NSMutableData alloc] init];
 	
+	//for some reason, dismissing the image picker resizes our view's frame to full screen which places the orange QR button behind the tool bar.
+	//Remember our original height so we can force it back to that in viewWillAppear.
+	originalFrameHeight = self.view.frame.size.height;
 	
 }
 
@@ -134,19 +138,17 @@
 	[self loadWalletInfo];
 	[self syncTest];
 	self.peripheralContainers = nil;
-	/* cw
-    if (_bUsingImagePicker == NO && !_syncingView)
-    {
-        _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 
-        [self.flashSelector selectItem:FLASH_ITEM_OFF];
-    }
-	*/
-	//default to BLE view
-	//self.bleView.hidden = NO;
-	//self.qrView.hidden = YES;
-	//[self startBLE];
+	if(!_syncingView)
+	{
+		_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+	}
 	[self enableBLEMode];
+	
+	//reset our frame's height in case it got changed by the image picker view controller
+	CGRect frame = self.view.frame;
+	frame.size.height = originalFrameHeight;
+	self.view.frame = frame;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -154,7 +156,7 @@
 	//cw [_startScannerTimer invalidate];
 	//cw _startScannerTimer = nil;
 	
-	[self closeCameraScanner];
+	[self stopQRReader];
 	
 	// Don't keep it going while we're not showing.
     [self stopBLE];
@@ -207,7 +209,7 @@
 		inBLEMode = YES;
 		self.bleView.hidden = NO;
 		self.qrView.hidden = YES;
-		[self closeCameraScanner];
+		[self stopQRReader];
 		[self startBLE];
 	}
 }
@@ -220,23 +222,38 @@
 		//turns on QR code scanner.  Disables BLE
 		[self stopBLE];
 		
-		_readerView = [ZBarReaderView new];
-		[self.qrView insertSubview:_readerView belowSubview:self.scanFrame];
-		_readerView.frame = self.scanFrame.frame;
-		_readerView.readerDelegate = self;
-		_readerView.tracksSymbols = NO;
-		
-		_readerView.tag = 99999999;
-		if ([self.pickerTextSendTo.textField.text length])
-		{
-			_readerView.alpha = 0.0;
-		}
-		[_readerView start];
-		[self flashItemSelected:FLASH_ITEM_OFF];
+		[self startQRReader];
 		
 		self.bleView.hidden = YES;
 		self.qrView.hidden = NO;
 	}
+}
+
+-(void)startQRReader
+{
+	_readerView = [ZBarReaderView new];
+	[self.qrView insertSubview:_readerView belowSubview:self.scanFrame];
+	_readerView.frame = self.scanFrame.frame;
+	_readerView.readerDelegate = self;
+	_readerView.tracksSymbols = NO;
+	
+	_readerView.tag = 99999999;
+	if ([self.pickerTextSendTo.textField.text length])
+	{
+		_readerView.alpha = 0.0;
+	}
+	[_readerView start];
+	[self flashItemSelected:FLASH_ITEM_OFF];
+}
+
+- (void)stopQRReader
+{
+    if (_readerView)
+    {
+        [_readerView stop];
+        [_readerView removeFromSuperview];
+        _readerView = nil;
+    }
 }
 
 #pragma mark - Action Methods
@@ -749,38 +766,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	
-	//lastSelectedRow = indexPath.row;
-	//
-	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-	
-	NSLog(@"Selecting row: %li", (long)indexPath.row);
-	
-	//cell.textLabel.font = [UIFont fontWithName:@"Stratum2-Bold" size:21.0];
-	//cell.textLabel.textColor = [UIColor whiteColor];
-	//cell.backgroundColor = BLUE_HIGHLIGHT;
-	//cell.contentView.backgroundColor = BLUE_HIGHLIGHT;
-	
-	//
-	
+	//NSLog(@"Selecting row: %li", (long)indexPath.row);
+
 	//attempt to connect to this peripheral
-	//[self.sensor cancelScanningForPeripherals];
 	PeripheralContainer *pc = [self.peripheralContainers objectAtIndex:indexPath.row];
 	
-	/*if ([pc.peripheral.name rangeOfString:@"BrainStation"].location != NSNotFound)
-	 {
-	 NSData *manufData = [pc.advertisingData objectForKey:@"kCBAdvDataManufacturerData"];
-	 NSRange snRange = {3, 4};
-	 [manufData getBytes:&serialNumber range:snRange];
-	 self.sensorName = pc.peripheral.name;
-	 [self.sensor connectPeripheral:pc.peripheral];
-	 NSLog(@"Connecting to %@\n", pc.peripheral.name);
-	 }
-	 else
-	 {
-	 NSLog(@"Peripheral not a BrainStation (it was a %@) or callback was not because of a ScanResponse\n", pc.peripheral.name);
-	 [self.sensor.CM cancelPeripheralConnection:pc.peripheral];
-	 }*/
 	
 	// Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it
 	self.discoveredPeripheral = pc.peripheral;
@@ -967,7 +957,7 @@
 - (void)showImageScanner
 {
 #if !TARGET_IPHONE_SIMULATOR
-    [self closeCameraScanner];
+    [self stopQRReader];
 
     _bUsingImagePicker = YES;
 
@@ -981,41 +971,16 @@
     _readerPicker.showsHelpOnFail = NO;
 
     [self presentViewController:_readerPicker animated:YES completion:nil];
-    //[self presentModalViewController:_readerPicker animated: YES];
 #endif
 }
 
 - (void)startCameraScanner:(NSTimer *)timer
 {
-    [self closeCameraScanner];
-
-#if !TARGET_IPHONE_SIMULATOR
-    // NSLog(@"Scanning...");
-
-	_readerView = [ZBarReaderView new];
-	[self.view insertSubview:_readerView belowSubview:self.scanFrame];
-	_readerView.frame = self.scanFrame.frame;
-	_readerView.readerDelegate = self;
-	_readerView.tracksSymbols = NO;
-
-	_readerView.tag = 99999999;
-	if ([self.pickerTextSendTo.textField.text length])
+	//will only switch to QR mode if there are no found BLE devices
+	if(self.peripheralContainers.count == 0)
 	{
-		_readerView.alpha = 0.0;
+		[self enableQRMode];
 	}
-	[_readerView start];
-	[self flashItemSelected:FLASH_ITEM_OFF];
-#endif
-}
-
-- (void)closeCameraScanner
-{
-    if (_readerView)
-    {
-        [_readerView stop];
-        [_readerView removeFromSuperview];
-        _readerView = nil;
-    }
 }
 
 - (NSArray *)createNewSendToChoices:(NSString *)strCur
@@ -1110,8 +1075,6 @@
 	[_sendConfirmationViewController.view removeFromSuperview];
 	_sendConfirmationViewController = nil;
 	
-	//self.bleView.hidden = NO;
-	//self.qrView.hidden = YES;
 	[self enableBLEMode];
 }
 
@@ -1156,7 +1119,8 @@
 {
     [reader dismissViewControllerAnimated:YES completion:nil];
     _bUsingImagePicker = NO;
-    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+	
+	//cw viewWillAppear will get called which will switch us back into BLE mode
 }
 
 - (void)imagePickerController:(UIImagePickerController *)reader didFinishPickingMediaWithInfo:(NSDictionary*) info
@@ -1174,7 +1138,8 @@
 
     if (!bSuccess)
     {
-        _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+        //_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+		[self startQRReader];
     }
 }
 
@@ -1192,7 +1157,8 @@
     [alert show];
 
     _bUsingImagePicker = NO;
-    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+   // _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+   [self startQRReader];
 }
 
 #endif
@@ -1256,7 +1222,7 @@
             //NSLog(@"using UUID for wallet: %@", wallet.strName);
             strTo = wallet.strUUID;
 
-            [self closeCameraScanner];
+            [self stopQRReader];
             [self showSendConfirmationTo:strTo amount:0.0 nameLabel:@"" toIsUUID:bIsUUID];
 
         }
@@ -1314,7 +1280,7 @@
         }
         else
         {
-            [self closeCameraScanner];
+            [self stopQRReader];
             [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label toIsUUID:NO];
         }
 	}
@@ -1335,7 +1301,7 @@
 
     if (pickerTextView.textField.text.length)
 	{
-        [self closeCameraScanner];
+        [self stopQRReader];
         //NSLog(@"using UUID for wallet: %@", wallet.strName);
 		[self showSendConfirmationTo:wallet.strUUID amount:0.0 nameLabel:@"" toIsUUID:YES];
 	}
@@ -1362,7 +1328,7 @@
     [_syncingView removeFromSuperview];
     _syncingView = nil;
 
-    //cw _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 }
 
 - (void)syncTest
@@ -1376,7 +1342,7 @@
     if (_syncingView)
     {
         [self resignAllResonders];
-        [self closeCameraScanner];
+        [self stopQRReader];
     }
 }
 
