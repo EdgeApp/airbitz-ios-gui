@@ -31,7 +31,7 @@
 {
 	_buttonImage = [[UIImageView alloc] initWithFrame:self.bounds];
 	[self addSubview:_buttonImage];
-	_buttonImage.image = [UIImage imageNamed:@"flash_off"];
+	_buttonImage.image = [UIImage imageNamed:@"flash-off"];
 	self.backgroundColor = [UIColor clearColor];
     _originalFrame = self.frame;
     _bAwake = YES;

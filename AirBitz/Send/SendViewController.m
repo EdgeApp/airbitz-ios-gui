@@ -39,6 +39,7 @@
 	SyncView                        *_syncingView;
 	NSTimeInterval					lastUpdateTime;	//used to remove BLE devices from table when they're no longer around
 	NSTimer							*peripheralCleanupTimer; //used to remove BLE devices from table when they're no longer around
+	BOOL							inBLEMode;
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
@@ -89,6 +90,7 @@
     [self updateDisplayLayout];
 
     _bUsingImagePicker = NO;
+	inBLEMode = NO;
 	
 	self.flashSelector.delegate = self;
 	self.buttonSelector.delegate = self;
@@ -141,9 +143,10 @@
     }
 	*/
 	//default to BLE view
-	self.bleView.hidden = NO;
-	self.qrView.hidden = YES;
-	[self startBLE];
+	//self.bleView.hidden = NO;
+	//self.qrView.hidden = YES;
+	//[self startBLE];
+	[self enableBLEMode];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -197,31 +200,51 @@
 	}
 }
 
+-(void)enableBLEMode
+{
+	if(inBLEMode == NO)
+	{
+		inBLEMode = YES;
+		self.bleView.hidden = NO;
+		self.qrView.hidden = YES;
+		[self closeCameraScanner];
+		[self startBLE];
+	}
+}
+
+-(void)enableQRMode
+{
+	if(inBLEMode == YES)
+	{
+		inBLEMode = NO;
+		//turns on QR code scanner.  Disables BLE
+		[self stopBLE];
+		
+		_readerView = [ZBarReaderView new];
+		[self.qrView insertSubview:_readerView belowSubview:self.scanFrame];
+		_readerView.frame = self.scanFrame.frame;
+		_readerView.readerDelegate = self;
+		_readerView.tracksSymbols = NO;
+		
+		_readerView.tag = 99999999;
+		if ([self.pickerTextSendTo.textField.text length])
+		{
+			_readerView.alpha = 0.0;
+		}
+		[_readerView start];
+		[self flashItemSelected:FLASH_ITEM_OFF];
+		
+		self.bleView.hidden = YES;
+		self.qrView.hidden = NO;
+	}
+}
+
 #pragma mark - Action Methods
 
 - (IBAction)scanQRCode
 {
 #if !TARGET_IPHONE_SIMULATOR
-    // NSLog(@"Scanning...");
-	
-	[self stopBLE];
-	
-	_readerView = [ZBarReaderView new];
-	[self.qrView insertSubview:_readerView belowSubview:self.scanFrame];
-	_readerView.frame = self.scanFrame.frame;
-	_readerView.readerDelegate = self;
-	_readerView.tracksSymbols = NO;
-	
-	_readerView.tag = 99999999;
-	if ([self.pickerTextSendTo.textField.text length])
-	{
-		_readerView.alpha = 0.0;
-	}
-	[_readerView start];
-	[self flashItemSelected:FLASH_ITEM_OFF];
-	
-	self.bleView.hidden = YES;
-	self.qrView.hidden = NO;
+    [self enableQRMode];
 #endif
 }
 
@@ -236,6 +259,11 @@
 {
     [self resignAllResonders];
     [self showImageScanner];
+}
+
+-(IBAction)BLE_button_touched
+{
+	[self enableBLEMode];
 }
 
 #pragma mark - BLE Central Methods
@@ -1082,8 +1110,9 @@
 	[_sendConfirmationViewController.view removeFromSuperview];
 	_sendConfirmationViewController = nil;
 	
-	self.bleView.hidden = NO;
-	self.qrView.hidden = YES;
+	//self.bleView.hidden = NO;
+	//self.qrView.hidden = YES;
+	[self enableBLEMode];
 }
 
 #pragma mark - ButtonSelectorView delegates

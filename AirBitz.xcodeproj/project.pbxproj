@@ -234,6 +234,7 @@
 		B57C20AE18C2FBE7005D7245 /* bd_cell_single~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B57C20AC18C2FBE7005D7245 /* bd_cell_single~iphone.png */; };
 		B58FF739199C3D7B002C3D45 /* BLE_photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B58FF738199C3D7B002C3D45 /* BLE_photo@2x.png */; };
 		B58FF73F199C4234002C3D45 /* BLE_connected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B58FF73E199C4234002C3D45 /* BLE_connected@2x.png */; };
+		B58FF741199D1540002C3D45 /* BLE_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B58FF740199D1540002C3D45 /* BLE_Button@2x.png */; };
 		B59C141818C0113A00AEA789 /* bitCoinAnnotation@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C140C18C0113A00AEA789 /* bitCoinAnnotation@2x~iphone.png */; };
 		B59C141918C0113A00AEA789 /* bitCoinAnnotation~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C140D18C0113A00AEA789 /* bitCoinAnnotation~iphone.png */; };
 		B59C141A18C0113A00AEA789 /* bkg_categories@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C140E18C0113A00AEA789 /* bkg_categories@2x~iphone.png */; };
@@ -830,6 +831,7 @@
 		B57C20AF18C5021A005D7245 /* Notifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		B58FF738199C3D7B002C3D45 /* BLE_photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BLE_photo@2x.png"; sourceTree = "<group>"; };
 		B58FF73E199C4234002C3D45 /* BLE_connected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BLE_connected@2x.png"; sourceTree = "<group>"; };
+		B58FF740199D1540002C3D45 /* BLE_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BLE_Button@2x.png"; sourceTree = "<group>"; };
 		B59C140C18C0113A00AEA789 /* bitCoinAnnotation@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bitCoinAnnotation@2x~iphone.png"; sourceTree = "<group>"; };
 		B59C140D18C0113A00AEA789 /* bitCoinAnnotation~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bitCoinAnnotation~iphone.png"; sourceTree = "<group>"; };
 		B59C140E18C0113A00AEA789 /* bkg_categories@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_categories@2x~iphone.png"; sourceTree = "<group>"; };
@@ -1693,6 +1695,7 @@
 			children = (
 				685E6DED197DCB7800EC95F8 /* btn_max@2x~iphone.png */,
 				B5628BF6199C035F0077DA1C /* BLE_Logo@2x.png */,
+				B58FF740199D1540002C3D45 /* BLE_Button@2x.png */,
 				B58FF73E199C4234002C3D45 /* BLE_connected@2x.png */,
 				B58FF738199C3D7B002C3D45 /* BLE_photo@2x.png */,
 				B5628BE7199BD6320077DA1C /* 0-bars@2x.png */,
@@ -2449,6 +2452,7 @@
 				B55A032418EB597D00845090 /* btn_deleteCategory@2x~iphone.png in Resources */,
 				4C72479F1933D3890091C286 /* infoExportWalletOptions.html in Resources */,
 				B59C153718C012B500AEA789 /* tabbar_divider~iphone.png in Resources */,
+				B58FF741199D1540002C3D45 /* BLE_Button@2x.png in Resources */,
 				B59C14F018C012B500AEA789 /* btn_equal@2x~iphone.png in Resources */,
 				B59C161E18C145D400AEA789 /* tabbar_bkg_selected@2x~iphone.png in Resources */,
 				4C7247CD1935594F0091C286 /* background_header~iphone.png in Resources */,
