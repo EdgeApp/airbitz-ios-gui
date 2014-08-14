@@ -203,8 +203,8 @@ typedef enum eAddressPickerType
 				address = self.addressString;
 			}
 			
-			//broadcast first 10 digits of bitcoin address followed by first name last name (up to 28 bytes total)
-			[self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]], CBAdvertisementDataLocalNameKey : [NSString stringWithFormat:@"%@%@ %@", address, [User Singleton].firstName , [User Singleton].lastName]}];
+			//broadcast first 10 digits of bitcoin address followed by full name (up to 28 bytes total)
+			[self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]], CBAdvertisementDataLocalNameKey : [NSString stringWithFormat:@"%@%@", address, [User Singleton].fullName]}];
 						
 			break;
 		}
@@ -236,7 +236,7 @@ typedef enum eAddressPickerType
 	[self showConnectedPopup];
 	
     // Send the bitcoin address and the amount in Satoshi
-	NSString *stringToSend = [NSString stringWithFormat:@"%@.%lli", self.addressString, self.amountSatoshi];
+	NSString *stringToSend = [NSString stringWithFormat:@"%@", self.uriString];
     self.dataToSend = [stringToSend dataUsingEncoding:NSUTF8StringEncoding];
     
     // Reset the index

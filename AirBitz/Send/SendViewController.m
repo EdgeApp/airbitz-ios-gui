@@ -467,7 +467,7 @@
 	{
         // We have, process the data,
 		NSString *stringFromRequestor = [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
-		NSArray *components = [stringFromRequestor componentsSeparatedByString:@"."];
+//		NSArray *components = [stringFromRequestor componentsSeparatedByString:@"."];
 		//first component is address
 		//second component is amount in Satoshi
 		
@@ -481,10 +481,12 @@
         [self.centralManager cancelPeripheralConnection:peripheral];
 		
 		//show the results
-		NSLog(@"Address: %@", [components objectAtIndex:0]);
-		NSLog(@"Amount Satoshi: %@", [components objectAtIndex:1]);
-		
-		[self showSendConfirmationTo:[components objectAtIndex:0] amount:[[components objectAtIndex:1] integerValue] nameLabel:nil toIsUUID:NO];
+//		NSLog(@"Address: %@", [components objectAtIndex:0]);
+//		NSLog(@"Amount Satoshi: %@", [components objectAtIndex:1]);
+        
+        self.pickerTextSendTo.textField.text = stringFromRequestor;
+        [self processURI];
+        
 	}
 	
     // Otherwise, just add the data on to what we already have
