@@ -124,8 +124,7 @@
     // And somewhere to store the incoming data
     _data = [[NSMutableData alloc] init];
 	
-	//kick off peripheral cleanup timer (removes peripherals from table when they're no longer in range)
-	peripheralCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(cleanupPeripherals:) userInfo:nil repeats:YES];
+	
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -144,6 +143,7 @@
 	//default to BLE view
 	self.bleView.hidden = NO;
 	self.qrView.hidden = YES;
+	[self startBLE];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -239,6 +239,13 @@
 }
 
 #pragma mark - BLE Central Methods
+
+-(void)startBLE
+{
+	[self scan];
+	//kick off peripheral cleanup timer (removes peripherals from table when they're no longer in range)
+	peripheralCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(cleanupPeripherals:) userInfo:nil repeats:YES];
+}
 
 -(void)stopBLE
 {
