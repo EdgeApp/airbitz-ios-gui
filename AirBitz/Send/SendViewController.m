@@ -17,7 +17,9 @@
 #import "CommonTypes.h"
 #import "Util.h"
 #import "InfoView.h"
+#if !TARGET_IPHONE_SIMULATOR
 #import "ZBarSDK.h"
+#endif
 #import "CoreBridge.h"
 #import "SyncView.h"
 #import "TransferService.h"
@@ -28,10 +30,16 @@
 #define POPUP_PICKER_LOWEST_POINT   360
 #define POPUP_PICKER_TABLE_HEIGHT   (IS_IPHONE5 ? 180 : 90)
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate, PickerTextViewDelegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, PickerTextViewDelegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
+#if !TARGET_IPHONE_SIMULATOR
+ ,ZBarReaderDelegate, ZBarReaderViewDelegate
+#endif
+>
 {
+#if !TARGET_IPHONE_SIMULATOR
 	ZBarReaderView                  *_readerView;
     ZBarReaderController            *_readerPicker;
+#endif
 	NSTimer                         *_startScannerTimer;
 	int                             _selectedWalletIndex;
 	SendConfirmationViewController  *_sendConfirmationViewController;
@@ -155,8 +163,9 @@
 {
 	//cw [_startScannerTimer invalidate];
 	//cw _startScannerTimer = nil;
-	
+#if !TARGET_IPHONE_SIMULATOR
 	[self stopQRReader];
+#endif
 	
 	// Don't keep it going while we're not showing.
     [self stopBLE];
@@ -209,7 +218,9 @@
 		inBLEMode = YES;
 		self.bleView.hidden = NO;
 		self.qrView.hidden = YES;
+#if !TARGET_IPHONE_SIMULATOR
 		[self stopQRReader];
+#endif
 		[self startBLE];
 	}
 }
@@ -221,16 +232,21 @@
 		inBLEMode = NO;
 		//turns on QR code scanner.  Disables BLE
 		[self stopBLE];
-		
+
+#if !TARGET_IPHONE_SIMULATOR
 		[self startQRReader];
+#endif
 		
 		self.bleView.hidden = YES;
 		self.qrView.hidden = NO;
 	}
 }
 
+#if !TARGET_IPHONE_SIMULATOR
+
 -(void)startQRReader
 {
+
 	_readerView = [ZBarReaderView new];
 	[self.qrView insertSubview:_readerView belowSubview:self.scanFrame];
 	_readerView.frame = self.scanFrame.frame;
@@ -255,6 +271,8 @@
         _readerView = nil;
     }
 }
+
+#endif
 
 #pragma mark - Action Methods
 
@@ -887,6 +905,7 @@
 	 }];
 }
 
+#if !TARGET_IPHONE_SIMULATOR
 - (BOOL)processZBarResults:(ZBarSymbolSet *)syms
 {
     BOOL bSuccess = YES;
@@ -955,6 +974,7 @@
 
     return bSuccess;
 }
+#endif
 
 - (void)showImageScanner
 {
@@ -1035,6 +1055,7 @@
 
 - (void)flashItemSelected:(tFlashItem)flashType
 {
+#if !TARGET_IPHONE_SIMULATOR
 	//NSLog(@"Flash Item Selected: %i", flashType);
 	AVCaptureDevice *device = _readerView.device;
 	if(device)
@@ -1065,6 +1086,7 @@
 					break;
 		}
 	}
+#endif
 }
 
 #pragma mark - SendConfirmationViewController Delegates
@@ -1103,8 +1125,10 @@
 
 #pragma mark - ZBar's Delegate methods
 
+#if !TARGET_IPHONE_SIMULATOR
 - (void)readerView: (ZBarReaderView*) view didReadSymbols: (ZBarSymbolSet*) syms fromImage: (UIImage*) img
 {
+
     if ([self processZBarResults:syms])
     {
         [view stop];
@@ -1113,7 +1137,9 @@
     {
         [view start];
     }
+
 }
+#endif
 
 #if !TARGET_IPHONE_SIMULATOR
 
@@ -1141,7 +1167,9 @@
     if (!bSuccess)
     {
         //_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+#if !TARGET_IPHONE_SIMULATOR
 		[self startQRReader];
+#endif
     }
 }
 
@@ -1223,8 +1251,9 @@
             Wallet *wallet = [self.arrayWallets objectAtIndex:index];
             //NSLog(@"using UUID for wallet: %@", wallet.strName);
             strTo = wallet.strUUID;
-
+#if !TARGET_IPHONE_SIMULATOR
             [self stopQRReader];
+#endif
             [self showSendConfirmationTo:strTo amount:0.0 nameLabel:@"" toIsUUID:bIsUUID];
 
         }
@@ -1282,7 +1311,9 @@
         }
         else
         {
+#if !TARGET_IPHONE_SIMULATOR
             [self stopQRReader];
+#endif
             [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label toIsUUID:NO];
         }
 	}
@@ -1303,7 +1334,9 @@
 
     if (pickerTextView.textField.text.length)
 	{
+#if !TARGET_IPHONE_SIMULATOR
         [self stopQRReader];
+#endif
         //NSLog(@"using UUID for wallet: %@", wallet.strName);
 		[self showSendConfirmationTo:wallet.strUUID amount:0.0 nameLabel:@"" toIsUUID:YES];
 	}
@@ -1344,7 +1377,9 @@
     if (_syncingView)
     {
         [self resignAllResonders];
+#if !TARGET_IPHONE_SIMULATOR
         [self stopQRReader];
+#endif
     }
 }
 
