@@ -121,7 +121,7 @@
     }
     else
     {
-        // no need for the done button
+        // no need for the done button since the calculator is always up
         [self.keypadView hideDoneButton];
     }
 
@@ -133,6 +133,8 @@
 -(void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
+
+    [self setFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -204,6 +206,20 @@
 }
 
 #pragma mark - Misc Methods
+
+- (void)setFirstResponder
+{
+    // if this is a 4.5" screen then the calculator is up so we need to always have one of the edit boxes selected
+    if (IS_IPHONE5)
+    {
+        // if the BTC is not the first responder
+        if (![self.BTC_TextField isFirstResponder])
+        {
+            // make the USD the first responder
+            [self.USD_TextField becomeFirstResponder];
+        }
+    }
+}
 
 - (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes
 {
@@ -563,6 +579,8 @@
 {
 	[controller.view removeFromSuperview];
 	_qrViewController = nil;
+
+    [self setFirstResponder];
 }
 
 #pragma mark - Textfield delegates
@@ -586,6 +604,8 @@
 {
 	[controller.view removeFromSuperview];
 	_importWalletViewController = nil;
+
+    [self setFirstResponder];
 }
 
 

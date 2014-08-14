@@ -49,6 +49,15 @@
 #define PHOTO_BORDER_COLOR          [UIColor lightGrayColor]
 #define PHOTO_BORDER_CORNER_RADIUS  5.0
 
+#define MIN_AUTOCOMPLETE    3 // if there are less than this in the autocomplete, then include all businesses
+
+typedef enum eRequestType
+{
+    RequestType_BusinessesNear,
+    RequestType_BusinessesAuto,
+    RequestType_BusinessDetails
+} tRequestType;
+
 
 @interface TransactionDetailsViewController () <UITextFieldDelegate, UITextViewDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
 {
@@ -96,12 +105,16 @@
 
 @property (nonatomic, strong)        NSArray                *arrayCategories;
 @property (nonatomic, strong)        NSArray                *arrayContacts;
-@property (nonatomic, strong)        NSArray                *arrayBusinesses;
-@property (nonatomic, strong)        NSArray                *arrayAutoComplete;
+@property (nonatomic, strong)        NSMutableArray         *arrayNearBusinesses; // businesses that match distance criteria
+@property (nonatomic, strong)        NSMutableArray         *arrayOtherBusinesses;    // businesses found using auto complete
+@property (nonatomic, strong)        NSArray                *arrayAutoComplete; // array displayed in the drop-down table when user is entering a name
 @property (nonatomic, strong)        NSMutableDictionary    *dictImages; // images for the contacts and businesses
 @property (nonatomic, strong)        NSMutableDictionary    *dictAddresses; // addresses for the contacts and businesses
-@property (nonatomic, strong)        NSDictionary           *dictThumbnailURLs; // urls for business thumbnails
+@property (nonatomic, strong)        NSMutableDictionary    *dictThumbnailURLs; // urls for business thumbnails
 @property (nonatomic, strong)        NSMutableDictionary    *dictBizIds; // bizIds for the businesses
+@property (nonatomic, strong)        NSMutableArray         *arrayThumbnailsToRetrieve; // array of names of businesses for which images need to be retrieved
+@property (nonatomic, strong)        NSMutableArray         *arrayThumbnailsRetrieving; // array of names of businesses for which images are currently being retrieved
+@property (nonatomic, strong)        NSMutableArray         *arrayAutoCompleteQueries; // array of names for which autocomplete queries have been made
 
 @end
 
@@ -120,7 +133,29 @@
 {
     [super viewDidLoad];
 
-    // Do any additional setup after loading the view.
+    // initialize arrays
+    self.arrayNearBusinesses = [[NSMutableArray alloc] init];
+    self.arrayOtherBusinesses = [[NSMutableArray alloc] init];
+    self.arrayAutoComplete = @[];
+    self.dictImages = [[NSMutableDictionary alloc] init];
+    self.dictAddresses = [[NSMutableDictionary alloc] init];
+    self.dictThumbnailURLs = [[NSMutableDictionary alloc] init];
+    self.dictBizIds = [[NSMutableDictionary alloc] init];
+    self.arrayThumbnailsToRetrieve = [[NSMutableArray alloc] init];
+    self.arrayThumbnailsRetrieving = [[NSMutableArray alloc] init];
+    self.arrayAutoCompleteQueries = [[NSMutableArray alloc] init];
+
+    // if there is a photo, then add it as the first photo in our images
+    if (self.photo)
+    {
+        [self.dictImages setObject:self.photo forKey:self.transaction.strName];
+    }
+
+    // if there is a biz id, add this biz as the first bizid
+    if (self.transaction.bizId)
+    {
+        [self.dictBizIds setObject:[NSNumber numberWithInt:self.transaction.bizId] forKey:self.transaction.strName];
+    }
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.contentView];
@@ -134,26 +169,8 @@
         _labelFiatName.text = _wallet.currencyAbbrev;
     }
 
-    self.arrayAutoComplete = @[];
-    self.dictImages = [[NSMutableDictionary alloc] init];
-    self.dictAddresses = [[NSMutableDictionary alloc] init];
-    self.dictThumbnailURLs = [[NSDictionary alloc] init];
-    self.dictBizIds = [[NSMutableDictionary alloc] init];
-
-    // if there is a photo, then add it as the first photo in our images
-    if (self.photo)
-    {
-        [self.dictImages setObject:self.photo forKey:self.transaction.strName];
-    }
-
-    // add this biz as the first bizid
-    if (self.transaction.bizId)
-    {
-        [self.dictBizIds setObject:[NSNumber numberWithInt:self.transaction.bizId] forKey:self.transaction.strName];
-    }
-
     // get the list of businesses
-    [self generateListOfBusinesses];
+    [self generateListOfNearBusinesses];
 
     // update our array of categories
     [self loadCategories];
@@ -536,27 +553,17 @@
     }
 }
 
-- (void)generateListOfBusinesses
+- (void)generateListOfNearBusinesses
 {
-    // start with nothing
-    self.arrayBusinesses = @[];
-
-    NSMutableString *strURL = [[NSMutableString alloc] init];
-
     // create the search query
+    NSMutableString *strURL = [[NSMutableString alloc] init];
     [strURL appendString:[NSString stringWithFormat:@"%@/search/?radius=%d&sort=%d", SERVER_API, SEARCH_RADIUS, SORT_RESULT_DISTANCE]];
 
     // add our location
     [self addLocationToQuery:strURL];
 
     // run the search
-    //NSLog(@"Query: %@", strURL);
-    [[DL_URLServer controller] issueRequestURL:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-                                    withParams:nil
-                                    withObject:nil
-                                  withDelegate:self
-                            acceptableCacheAge:CACHE_AGE_SECS
-                                   cacheResult:YES];
+    [self issueRequests:@{strURL : [NSNumber numberWithInt:RequestType_BusinessesNear]} ];
 }
 
 - (void)generateListOfContactNames
@@ -863,36 +870,127 @@
 
             NSMutableArray *arrayAutoComplete = [[NSMutableArray alloc] init];
 
-            // go through all the businesses
-            for (NSString *strBusiness in self.arrayBusinesses)
+            // go through all the near businesses
+            for (NSString *strBusiness in self.arrayNearBusinesses)
             {
-                // if it is in there
+                // if it matches what the user has currently typed
                 if ([strBusiness rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound)
                 {
+                    // add this business to the auto complete array
                     [arrayAutoComplete addObject:strBusiness];
+
+                    // make sure we have the thumbnail
+                    [self ifNeededResolveThumbnailForBusiness:strBusiness];
                 }
             }
 
             // go through all the contacts
             for (NSString *strContact in self.arrayContacts)
             {
-                // if it is in there
+                // if it matches what the user has currently typed
                 if ([strContact rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound)
                 {
                     [arrayAutoComplete addObject:strContact];
                 }
             }
 
+            // check if we have less than the minimum
+            if ([arrayAutoComplete count] < MIN_AUTOCOMPLETE)
+            {
+                // add the matches from other busineses
+                for (NSString *strBusiness in self.arrayOtherBusinesses)
+                {
+                    // if it matches what the user has currently typed
+                    if ([strBusiness rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound)
+                    {
+                        // if it isn't already in the near array
+                        if (![self.arrayNearBusinesses containsObject:strBusiness])
+                        {
+                            // add this business to the auto complete array
+                            [arrayAutoComplete addObject:strBusiness];
+
+                            // make sure we have the thumbnail
+                            [self ifNeededResolveThumbnailForBusiness:strBusiness];
+                        }
+                    }
+                }
+
+                // issue an auto-complete request for it
+                [self getAutoCompleteResultsFor:strTerm];
+            }
+
             self.arrayAutoComplete = [arrayAutoComplete sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         }
         else
         {
-            // since nothing in payee yet, just populate with businesses (already sorted by distance)
-            self.arrayAutoComplete = self.arrayBusinesses;
+            if (self.transactionDetailsMode == TD_MODE_RECEIVED)
+            {
+                // this is a receive so use the address book
+                self.arrayAutoComplete = self.arrayContacts;
+            }
+            else
+            {
+                // this is a sent so we must be looking for businesses
+
+                // since nothing in payee yet, just populate with businesses (already sorted by distance)
+                self.arrayAutoComplete = self.arrayNearBusinesses;
+
+                // make sure we have the thumbnails for all of these businesses
+                for (NSString *strName in self.arrayNearBusinesses)
+                {
+                    [self ifNeededResolveThumbnailForBusiness:strName];
+                }
+            }
         }
-        
-        
-        [_autoCompleteTable reloadData];
+
+        // initiate any thumbnail resolves
+        [self resolveOutstandingThumbnails];
+
+        // force the table to reload itself
+        [self reloadAutoCompleteTable];
+    }
+}
+
+- (void)reloadAutoCompleteTable
+{
+    [_autoCompleteTable reloadData];
+}
+
+- (void)resolveOutstandingThumbnails
+{
+    for (int i = (int) [self.arrayThumbnailsToRetrieve count] - 1; i >= 0; i--)
+    {
+        NSString *strName = [self.arrayThumbnailsToRetrieve objectAtIndex:i];
+        [self getThumbnailForBusiness:strName];
+        [self.arrayThumbnailsToRetrieve removeObjectAtIndex:i];
+    }
+}
+
+- (void)ifNeededResolveThumbnailForBusiness:(NSString *)strName
+{
+    // if we don't already have it, it isn't being resolved and it isn't queued to be resolved
+    if ((nil == [self.dictImages objectForKey:strName]) &&
+        (NO == [self.arrayThumbnailsRetrieving containsObject:strName]) &&
+        (NO == [self.arrayThumbnailsToRetrieve containsObject:strName]))
+    {
+        // add it to those to retrieve
+        [self.arrayThumbnailsToRetrieve addObject:strName];
+    }
+}
+
+- (void)getThumbnailForBusiness:(NSString *)strName
+{
+    NSString *strThumbnailURL = [self.dictThumbnailURLs objectForKey:strName];
+
+    if (strThumbnailURL)
+    {
+        [self.arrayThumbnailsRetrieving addObject:strName];
+
+        // create the search query
+        NSString *strURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, strThumbnailURL];
+
+        // run the query - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
+        [self performSelector:@selector(issueRequests:) withObject:@{ strURL : strName } afterDelay:0.0];
     }
 }
 
@@ -913,40 +1011,52 @@
     }
 }
 
-- (void)getBusinessThumbnails
+- (void)getAutoCompleteResultsFor:(NSString *)strName
 {
-    for (NSString *strKey in self.dictThumbnailURLs)
+    // if we haven't already run this query
+    if (NO == [self.arrayAutoCompleteQueries containsObject:strName])
     {
-        NSString *strThumbnailURL = [self.dictThumbnailURLs objectForKey:strKey];
-
-        NSMutableString *strURL = [[NSMutableString alloc] init];
+        [self.arrayAutoCompleteQueries addObject:strName];
 
         // create the search query
-        [strURL appendString:[NSString stringWithFormat:@"%@%@", SERVER_URL, strThumbnailURL]];
+        NSString *strURL = [NSString stringWithFormat: @"%@/autocomplete-business/?term=%@", SERVER_API, strName];
+        //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\nIssuing autocomplete query: %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", strURL);
 
-        // run the qurey
-        //NSLog(@"Query: %@", strURL);
-        [[DL_URLServer controller] issueRequestURL:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-                                        withParams:nil
-                                        withObject:strKey
-                                      withDelegate:self
-                                acceptableCacheAge:CACHE_IMAGE_AGE_SECS
-                                       cacheResult:YES];
+        // run the search - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
+        [self performSelector:@selector(issueRequests:) withObject:@{strURL : [NSNumber numberWithInt:RequestType_BusinessesAuto]} afterDelay:0.0];
     }
 }
 
-- (UIImage *)imageByCroppingImage:(UIImage *)image toSize:(CGSize)size
+- (void)getBizDetailsForBizId:(unsigned int)bizId
 {
-    double x = (image.size.width - size.width) / 2.0;
-    double y = (image.size.height - size.height) / 2.0;
+    // create the search query
+	NSString *strURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, bizId];
+    //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\nIssuing biz details query: %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", strURL);
 
-    CGRect cropRect = CGRectMake(x, y, size.height, size.width);
-    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
+    // run the search - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
+    [self performSelector:@selector(issueRequests:) withObject:@{strURL : [NSNumber numberWithInt:RequestType_BusinessDetails]} afterDelay:0.0];
+}
 
-    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
+- (void)issueRequests:(NSDictionary *)dictRequest
+{
+    if (dictRequest)
+    {
+        // the requests are stored in a dictionary where the key is the URL and the value for the key is the object for callback
+        for (NSString *strKey in dictRequest)
+        {
+            id value = [dictRequest objectForKey:strKey];
 
-    return cropped;
+            // run the search
+            NSString *strURL = [strKey stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\nRequest: %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", strURL);
+            [[DL_URLServer controller] issueRequestURL:strURL
+                                            withParams:nil
+                                            withObject:value
+                                          withDelegate:self
+                                    acceptableCacheAge:CACHE_AGE_SECS
+                                           cacheResult:YES];
+        }
+    }
 }
 
 - (void)exit
@@ -1095,95 +1205,126 @@
     if (DL_URLRequestStatus_Success == status)
     {
         // if this is a business listing query
-        if (nil == object)
+        if ([object isKindOfClass:[NSNumber class]])
         {
+            NSNumber *numRequestType = (NSNumber *)object;
+            tRequestType requestType = (tRequestType) [numRequestType intValue];
+
             NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
 
-            NSLog(@"Results download returned: %@", jsonString );
+            //NSLog(@"Results download returned: %@", jsonString );
 
             NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
             NSError *myError;
             NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
 
-
-            NSArray *searchResultsArray;
-            //NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
-            searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
-
-            NSMutableArray *arrayBusinesses = [[NSMutableArray alloc] init];
-            NSMutableDictionary *dictThumbnailURLs = [[NSMutableDictionary alloc] init];
-
-            for (NSDictionary *dict in searchResultsArray)
+            NSArray *searchResultsArray = [dictFromServer objectForKey:@"results"];
+            //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\nGot search results: %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", searchResultsArray);
+            if (searchResultsArray && searchResultsArray != (id)[NSNull null])
             {
-                NSString *name = [dict objectForKey:@"name"];
-                if (name && name != (id)[NSNull null])
+                if (requestType == RequestType_BusinessesAuto)
                 {
-                    [arrayBusinesses addObject:name];
-
-                    // create the address
-                    NSMutableString *strAddress = [[NSMutableString alloc] init];
-                    NSString *strField = nil;
-                    if (nil != (strField = [dict objectForKey:@"address"]))
+                    //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\nGot search results: %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", searchResultsArray);
+                    for (NSDictionary *dict in searchResultsArray)
                     {
-                        [strAddress appendString:strField];
-                    }
-                    if (nil != (strField = [dict objectForKey:@"city"]))
-                    {
-                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
-                    }
-                    if (nil != (strField = [dict objectForKey:@"state"]))
-                    {
-                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
-                    }
-                    if (nil != (strField = [dict objectForKey:@"postalcode"]))
-                    {
-                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @" " : @""), strField];
-                    }
-                    if ([strAddress length])
-                    {
-                        [self.dictAddresses setObject:strAddress forKey:name];
-                    }
-
-                    // set the biz id if available
-                    NSNumber *numField = nil;
-                    if (nil != (numField = [dict objectForKey:@"bizId"]))
-                    {
-                        [self.dictBizIds setObject:[NSNumber numberWithInt:[numField intValue]] forKey:name];
-                    }
-
-                    // check if we can get a thumbnail
-                    NSDictionary *dictProfileImage = [dict objectForKey:@"square_image"];
-                    if (dictProfileImage && dictProfileImage != (id)[NSNull null])
-                    {
-                        NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
-                        if (strThumbnail && strThumbnail != (id)[NSNull null])
+                        NSString *strName = [dict objectForKey:@"text"];
+                        if (strName && strName != (id)[NSNull null])
                         {
-                            //NSLog(@"thumbnail path: %@", strThumbnail);
-                            [dictThumbnailURLs setObject:strThumbnail forKey:name];
+                            // if it doesn't exist in the other, add it
+                            if (NO == [self.arrayOtherBusinesses containsObject:strName])
+                            {
+                                [self.arrayOtherBusinesses addObject:strName];
+                            }
+
+                            // set the biz id if available
+                            NSNumber *numBizId = [dict objectForKey:@"bizId"];
+                            if (numBizId && numBizId != (id)[NSNull null])
+                            {
+                                [self.dictBizIds setObject:[NSNumber numberWithInt:[numBizId intValue]] forKey:strName];
+                            }
                         }
                     }
                 }
-            }
-            
-            self.arrayBusinesses = arrayBusinesses;
-            //NSLog(@"Businesses: %@", arrayBusinesses);
-            self.dictThumbnailURLs = dictThumbnailURLs;
+                else if (requestType == RequestType_BusinessesNear)
+                {
+                    NSMutableArray *arrayBusinesses = self.arrayNearBusinesses;
 
-            [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
-            [self performSelector:@selector(getBusinessThumbnails) withObject:nil afterDelay:0.0];
-            [self performSelector:@selector(updateBizId) withObject:nil afterDelay:0.0];
+                    for (NSDictionary *dict in searchResultsArray)
+                    {
+                        NSString *strName = [dict objectForKey:@"name"];
+                        if (strName && strName != (id)[NSNull null])
+                        {
+                            [arrayBusinesses addObject:strName];
+
+                            // create the address
+                            NSMutableString *strAddress = [[NSMutableString alloc] init];
+                            NSString *strField = nil;
+                            if (nil != (strField = [dict objectForKey:@"address"]))
+                            {
+                                [strAddress appendString:strField];
+                            }
+                            if (nil != (strField = [dict objectForKey:@"city"]))
+                            {
+                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
+                            }
+                            if (nil != (strField = [dict objectForKey:@"state"]))
+                            {
+                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
+                            }
+                            if (nil != (strField = [dict objectForKey:@"postalcode"]))
+                            {
+                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @" " : @""), strField];
+                            }
+                            if ([strAddress length])
+                            {
+                                [self.dictAddresses setObject:strAddress forKey:strName];
+                            }
+
+                            // set the biz id if available
+                            NSNumber *numBizId = [dict objectForKey:@"bizId"];
+                            if (numBizId && numBizId != (id)[NSNull null])
+                            {
+                                [self.dictBizIds setObject:[NSNumber numberWithInt:[numBizId intValue]] forKey:strName];
+                            }
+
+                            // check if we can get a thumbnail
+                            NSDictionary *dictProfileImage = [dict objectForKey:@"square_image"];
+                            if (dictProfileImage && dictProfileImage != (id)[NSNull null])
+                            {
+                                NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
+                                if (strThumbnail && strThumbnail != (id)[NSNull null])
+                                {
+                                    //NSLog(@"thumbnail path: %@", strThumbnail);
+                                    [self.dictThumbnailURLs setObject:strThumbnail forKey:strName];
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // update the auto complete array because we just added new businesses
+                [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
+
+                // update the biz id (in case we found one for our business)
+                [self performSelector:@selector(updateBizId) withObject:nil afterDelay:0.0];
+            }
         }
-        else
+        else if ([object isKindOfClass:[NSString class]])
         {
             NSString *strNameForImage = (NSString *) object;
-            //NSLog(@"got image for %@", strNameForImage);
+            //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\ngot image for %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", strNameForImage);
+            
+            // remove it from our array of thumbnails we are currently retrieving
+            [self.arrayThumbnailsRetrieving removeObject:strNameForImage];
 
             // if we don't have an image for this yet
             if (nil == [self.dictImages objectForKey:strNameForImage])
             {
                 UIImage *srcImage = [UIImage imageWithData:data];
                 [self.dictImages setObject:srcImage forKey:strNameForImage];
-                [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
+
+                // reload the table so it can get at the image if it needs it
+                [self performSelector:@selector(reloadAutoCompleteTable) withObject:nil afterDelay:0.0];
 
                 // if this matches our name
                 if ([self.nameTextField.text isEqualToString:strNameForImage])

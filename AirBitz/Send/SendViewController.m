@@ -1220,7 +1220,7 @@
             strTo = wallet.strUUID;
 
             [self closeCameraScanner];
-            [self showSendConfirmationTo:strTo amount:0.0 nameLabel:@" " toIsUUID:bIsUUID];
+            [self showSendConfirmationTo:strTo amount:0.0 nameLabel:@"" toIsUUID:bIsUUID];
 
         }
         else
@@ -1300,7 +1300,7 @@
 	{
         [self closeCameraScanner];
         //NSLog(@"using UUID for wallet: %@", wallet.strName);
-		[self showSendConfirmationTo:wallet.strUUID amount:0.0 nameLabel:@" " toIsUUID:YES];
+		[self showSendConfirmationTo:wallet.strUUID amount:0.0 nameLabel:@"" toIsUUID:YES];
 	}
 }
 

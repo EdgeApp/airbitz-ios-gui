@@ -694,6 +694,7 @@
     }
     
     [CoreBridge reloadWallet: self.wallet];
+    [self getBizImagesForWallet:self.wallet];
     [self.tableView reloadData];
     [self checkSearchArray];
     [self dismissTransactionDetails];
