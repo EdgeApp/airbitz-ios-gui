@@ -20,6 +20,7 @@
 #import "InfoView.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "TransferService.h"
+#import "RecipientViewController.h"
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 
@@ -34,7 +35,8 @@ typedef enum eAddressPickerType
 } tAddressPickerType;
 
 @interface ShowWalletQRViewController () <ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate,
-                                          UIAlertViewDelegate, MFMailComposeViewControllerDelegate, CBPeripheralManagerDelegate>
+                                          UIAlertViewDelegate, MFMailComposeViewControllerDelegate, CBPeripheralManagerDelegate,
+                                          RecipientViewControllerDelegate>
 {
     tAddressPickerType          _addressPickerType;
 }
@@ -62,6 +64,9 @@ typedef enum eAddressPickerType
 @property (nonatomic, weak) IBOutlet UIView				*connectedView;
 @property (nonatomic, weak) IBOutlet UIImageView		*connectedPhoto;
 @property (nonatomic, weak) IBOutlet UILabel			*connectedName;
+
+@property (nonatomic, strong) RecipientViewController   *recipientViewController;
+
 @end
 
 @implementation ShowWalletQRViewController
@@ -396,6 +401,9 @@ typedef enum eAddressPickerType
 {
     self.strFullName = @"";
     self.strEMail = @"";
+
+    //[self launchRecipientWithMode:RecipientMode_Email];
+#if 1
     _addressPickerType = AddressPickerType_EMail;
 
     UIAlertView *alert = [[UIAlertView alloc]
@@ -405,12 +413,16 @@ typedef enum eAddressPickerType
                           cancelButtonTitle:NSLocalizedString(@"Yes", nil)
                           otherButtonTitles:NSLocalizedString(@"No, I'll type it manually", nil), nil];
     [alert show];
+#endif
 }
 
 - (IBAction)SMS
 {
     self.strPhoneNumber = @"";
     self.strFullName = @"";
+
+    //[self launchRecipientWithMode:RecipientMode_SMS];
+#if 1
     _addressPickerType = AddressPickerType_SMS;
 
     UIAlertView *alert = [[UIAlertView alloc]
@@ -420,6 +432,7 @@ typedef enum eAddressPickerType
                           cancelButtonTitle:NSLocalizedString(@"Yes, Contacts", nil)
                           otherButtonTitles:NSLocalizedString(@"No, I'll type in manually", nil), nil];
     [alert show];
+#endif
 }
 
 
@@ -647,6 +660,41 @@ typedef enum eAddressPickerType
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+
+- (void)launchRecipientWithMode:(tRecipientMode)mode
+{
+    if (self.recipientViewController)
+    {
+        return;
+    }
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    self.recipientViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RecipientViewController"];
+
+    self.recipientViewController.delegate = self;
+    self.recipientViewController.mode = mode;
+
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    self.recipientViewController.view.frame = frame;
+    [self.view addSubview:self.recipientViewController.view];
+
+    [UIView animateWithDuration:ENTER_ANIM_TIME_SECS
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         self.recipientViewController.view.frame = self.view.bounds;
+     }
+                     completion:^(BOOL finished)
+     {
+     }];
+}
+
+- (void)dismissRecipient
+{
+    [self.recipientViewController.view removeFromSuperview];
+    self.recipientViewController = nil;
 }
 
 #pragma mark - Address Book delegates
@@ -885,6 +933,13 @@ typedef enum eAddressPickerType
 
     [self presentViewController:picker animated:YES completion:nil];
     //[self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
+}
+
+#pragma mark - RecipientViewControllerDelegates
+
+- (void)RecipientViewControllerDone:(RecipientViewController *)controller withFullName:(NSString *)strFullName andTarget:(NSString *)strTarget
+{
+    [self dismissRecipient];
 }
 
 

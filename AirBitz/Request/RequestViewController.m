@@ -336,8 +336,8 @@
     _qrViewController.walletUUID = wallet.strUUID;
     _qrViewController.txDetails = details;
     _qrViewController.currencyNum = wallet.currencyNum;
-	CGRect frame = self.view.bounds;
-	_qrViewController.view.frame = frame;
+	//CGRect frame = self.view.bounds;
+	//_qrViewController.view.frame = frame;
 	[self.view addSubview:_qrViewController.view];
 	_qrViewController.view.alpha = 0.0;
 	

@@ -38,6 +38,9 @@
 
 #define DOLLAR_CURRENCY_NUM	840
 
+#define ENTER_ANIM_TIME_SECS    0.35                    // duration when animating a view controller as it slides on screen
+#define EXIT_ANIM_TIME_SECS     ENTER_ANIM_TIME_SECS    // duration when animating a view controller as it slides off screen to reveal the calling view
+
 // notifications
 
 #define NOTIFICATION_MAIN_RESET                         @"Main_Views_Reset"

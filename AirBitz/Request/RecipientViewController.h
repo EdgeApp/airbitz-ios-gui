@@ -27,7 +27,7 @@ typedef enum eRecipientMode
 
 @required
 
-- (void)RecipientViewControllerDone:(RecipientViewController *)controller withRecipient:(NSString *)strRecipient;
+- (void)RecipientViewControllerDone:(RecipientViewController *)controller withFullName:(NSString *)strFullName andTarget:(NSString *)strTarget;
 
 @optional
 

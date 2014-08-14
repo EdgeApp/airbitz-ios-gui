@@ -7,8 +7,24 @@
 //
 
 #import "RecipientViewController.h"
+#import "CommonTypes.h"
+#import "Util.h"
+#import "StylizedTextField.h"
+#import "InfoView.h"
+#import "MontserratLabel.h"
 
-@interface RecipientViewController ()
+#define KEYBOARD_APPEAR_TIME_SECS 0.3
+
+@interface RecipientViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIView             *viewDisplay;
+@property (weak, nonatomic) IBOutlet MontserratLabel    *labelTitle;
+@property (weak, nonatomic) IBOutlet StylizedTextField  *textFieldRecipient;
+@property (weak, nonatomic) IBOutlet UITableView        *tableContacts;
+
+@property (nonatomic, copy)   NSString                  *strFullName;
+@property (nonatomic, copy)   NSString                  *strTarget;
+@property (nonatomic, strong) NSArray                   *arrayAutoComplete;
 
 @end
 
@@ -26,13 +42,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    self.arrayAutoComplete = @[];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+    // resize ourselves to fit in area
+    [Util resizeView:self.view withDisplayView:self.viewDisplay];
+    [self updateDisplayLayout];
+
+    // set the title based on why we were brought up
+    self.labelTitle.text = (self.mode == RecipientMode_Email ? @"Email Recipient" : @"SMS Recipient");
+
+    [self.textFieldRecipient becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
 /*
@@ -45,5 +79,116 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Action Methods
+
+- (IBAction)buttonBackTouched:(id)sender
+{
+    [self animatedExit];
+}
+
+- (IBAction)buttonInfoTouched:(id)sender
+{
+    [InfoView CreateWithHTML:@"infoRecipient" forView:self.view];
+}
+
+#pragma mark - Misc Methods
+
+- (void)updateDisplayLayout
+{
+    // update for iPhone 4
+    if (!IS_IPHONE5)
+    {
+
+        
+    }
+}
+
+- (void)animatedExit
+{
+    [self.textFieldRecipient resignFirstResponder];
+
+	[UIView animateWithDuration:EXIT_ANIM_TIME_SECS
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 CGRect frame = self.view.frame;
+		 frame.origin.x = frame.size.width;
+		 self.view.frame = frame;
+	 }
+                     completion:^(BOOL finished)
+	 {
+		 [self exit];
+	 }];
+}
+
+- (void)exit
+{
+    [self.delegate RecipientViewControllerDone:self withFullName:self.strFullName andTarget:self.strFullName];
+}
+
+#pragma mark - UITableView delegates
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.arrayAutoComplete count];
+}
+
+#pragma mark - UITextField delegates
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self animatedExit];
+
+    return YES;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField
+{
+
+}
+
+#pragma mark - Keyboard Notifications
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    CGRect keyboardRect;
+    [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardRect];
+
+    [UIView animateWithDuration:KEYBOARD_APPEAR_TIME_SECS
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 CGRect frame = self.tableContacts.frame;
+		 frame.size.height -= keyboardRect.size.height;
+		 self.tableContacts.frame = frame;
+	 }
+                     completion:^(BOOL finished)
+	 {
+
+	 }];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    CGRect keyboardRect;
+    [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardRect];
+
+    [UIView animateWithDuration:KEYBOARD_APPEAR_TIME_SECS
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 CGRect frame = self.tableContacts.frame;
+		 frame.size.height += keyboardRect.size.height;
+		 self.tableContacts.frame = frame;
+	 }
+                     completion:^(BOOL finished)
+	 {
+
+	 }];
+}
 
 @end
