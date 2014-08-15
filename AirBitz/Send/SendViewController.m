@@ -24,57 +24,13 @@
 #import "SyncView.h"
 #import "TransferService.h"
 #import "BLEScanCell.h"
+#import "Contact.h"
 
 #define WALLET_BUTTON_WIDTH         210
 
 #define POPUP_PICKER_LOWEST_POINT   360
 #define POPUP_PICKER_TABLE_HEIGHT   (IS_IPHONE5 ? 180 : 90)
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-@interface ABContact : NSObject
-
-@property (nonatomic, copy)     NSString *strName;
-@property (nonatomic, copy)     NSString *strData;
-@property (nonatomic, copy)     NSString *strDataLabel;
-@property (nonatomic, strong)   UIImage  *imagePhoto;
-
-@end
-
-@implementation ABContact
-
-- (id)init
-{
-    self = [super init];
-    if (self)
-	{
-        self.strName = @"";
-        self.strData = @"";
-        self.strDataLabel = @"";
-        self.imagePhoto = nil;
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-	
-}
-
-// overriding the description - used in debugging
-- (NSString *)description
-{
-	return([NSString stringWithFormat:@"ABContact: %@ - %@: %@", self.strName, self.strDataLabel, self.strData]);
-}
-
-- (NSComparisonResult)compare:(ABContact *)otherObject
-{
-    return [self.strName compare:otherObject.strName];
-}
-
-@end
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, PickerTextViewDelegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
 #if !TARGET_IPHONE_SIMULATOR
@@ -425,7 +381,7 @@
         //CFStringRef labelStingRef = ABMultiValueCopyLabelAtIndex(arrayData, i);
         //NSString *strDataLabel  = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABAddressBookCopyLocalizedLabel(labelStingRef)];
 		
-        ABContact *contact = [[ABContact alloc] init];
+        Contact *contact = [[Contact alloc] init];
         contact.strName = strName;
         //contact.strData = strData;
         //contact.strDataLabel = strDataLabel;
@@ -914,7 +870,7 @@
 				NSString *firstName = [arrayComponents objectAtIndex:0];
 				NSString *lastName = [arrayComponents objectAtIndex:1];
 				NSString *name = [NSString stringWithFormat:@"%@ %@", firstName, lastName ];
-				for (ABContact *contact in self.arrayContacts)
+				for (Contact *contact in self.arrayContacts)
 				{
 					if([[name uppercaseString] isEqualToString:[contact.strName uppercaseString]])
 					{

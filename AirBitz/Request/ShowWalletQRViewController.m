@@ -21,6 +21,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "TransferService.h"
 #import "RecipientViewController.h"
+#import "Contact.h"
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 
@@ -66,6 +67,7 @@ typedef enum eAddressPickerType
 @property (nonatomic, weak) IBOutlet UILabel			*connectedName;
 
 @property (nonatomic, strong) RecipientViewController   *recipientViewController;
+@property (nonatomic, strong) NSArray                   *arrayContacts;
 
 @end
 
@@ -123,6 +125,10 @@ typedef enum eAddressPickerType
 	self.connectedView.alpha = 0.0;
 	self.connectedPhoto.layer.cornerRadius = 8.0;
 	self.connectedPhoto.layer.masksToBounds = YES;
+	
+	 self.arrayContacts = @[];
+	// load all the names from the address book
+    [self generateListOfContactNames];
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,8 +148,36 @@ typedef enum eAddressPickerType
 	self.connectedView.alpha = 1.0;
 	self.qrCodeImageView.alpha = 0.0;
 	
-	[UIView animateWithDuration:4.0
-						  delay:1.0
+	//see if there is a match between advertised name and name in contacts.  If so, use the photo from contacts
+	BOOL imageIsFromContacts = NO;
+	//NSString *advData = [pc.advertisingData objectForKey:CBAdvertisementDataLocalNameKey];
+	
+	NSArray *arrayComponents = [self.connectedName.text componentsSeparatedByString:@" "];
+	if(arrayComponents.count >= 2)
+	{
+		//filter off the nickname.  We just want first name and last name
+		NSString *firstName = [arrayComponents objectAtIndex:0];
+		NSString *lastName = [arrayComponents objectAtIndex:1];
+		NSString *name = [NSString stringWithFormat:@"%@ %@", firstName, lastName ];
+		for (Contact *contact in self.arrayContacts)
+		{
+			if([[name uppercaseString] isEqualToString:[contact.strName uppercaseString]])
+			{
+				self.connectedPhoto.image = contact.imagePhoto;
+				imageIsFromContacts = YES;
+				break;
+			}
+		}
+	}
+		
+	
+	if(imageIsFromContacts == NO)
+	{
+		self.connectedPhoto.image = [UIImage imageNamed:@"BLE_photo.png"];
+	}
+	
+	[UIView animateWithDuration:3.0
+						  delay:2.0
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {
@@ -156,9 +190,91 @@ typedef enum eAddressPickerType
 	 }];
 }
 
-#pragma mark - CBPeripheral methods
+#pragma mark address book
 
-#pragma mark - Peripheral Methods
+- (void)generateListOfContactNames
+{
+    NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
+	
+    CFErrorRef error;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+	
+    __block BOOL accessGranted = NO;
+	
+    if (ABAddressBookRequestAccessWithCompletion != NULL)
+    {
+        // we're on iOS 6
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+		
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+                                                 {
+                                                     accessGranted = granted;
+                                                     dispatch_semaphore_signal(sema);
+                                                 });
+		
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        //dispatch_release(sema);
+    }
+    else
+    {
+        // we're on iOS 5 or older
+        accessGranted = YES;
+    }
+	
+    if (accessGranted)
+    {
+        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+        for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
+        {
+            ABRecordRef person = CFArrayGetValueAtIndex(people, i);
+			
+            NSString *strFullName = [Util getNameFromAddressRecord:person];
+            if ([strFullName length])
+            {
+                // add this contact
+                [self addContactInfo:person withName:strFullName toArray:arrayContacts];
+            }
+        }
+    }
+	
+    // assign final
+    self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];
+    NSLog(@"contacts: %@", self.arrayContacts);
+}
+
+- (void)addContactInfo:(ABRecordRef)person withName:(NSString *)strName toArray:(NSMutableArray *)arrayContacts
+{
+    UIImage *imagePhoto = nil;
+	
+    // does this contact has an image
+    if (ABPersonHasImageData(person))
+    {
+        NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
+        imagePhoto = [UIImage imageWithData:data];
+    }
+	
+    // get the array of phone numbers or e-mail
+    /*ABMultiValueRef arrayData = (__bridge ABMultiValueRef)((__bridge NSString *)ABRecordCopyValue(person,
+	 self.mode == RecipientMode_SMS ? kABPersonPhoneProperty : kABPersonEmailProperty));*/
+	
+    // go through each element in the array
+    //for (CFIndex i = 0; i < ABMultiValueGetCount(arrayData); i++)
+    {
+        //NSString *strData = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABMultiValueCopyValueAtIndex(arrayData, i)];
+        //CFStringRef labelStingRef = ABMultiValueCopyLabelAtIndex(arrayData, i);
+        //NSString *strDataLabel  = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABAddressBookCopyLocalizedLabel(labelStingRef)];
+		
+        Contact *contact = [[Contact alloc] init];
+        contact.strName = strName;
+        //contact.strData = strData;
+        //contact.strDataLabel = strDataLabel;
+        contact.imagePhoto = imagePhoto;
+		
+        [arrayContacts addObject:contact];
+    }
+}
+
+#pragma mark - CBPeripheral methods
 
 /** Required protocol method.  A full app should take care of all the possible states,
  *  but we're just waiting for  to know when the CBPeripheralManager is ready

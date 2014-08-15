@@ -13,55 +13,10 @@
 #import "InfoView.h"
 #import "MontserratLabel.h"
 #import "PayeeCell.h"
+#import "Contact.h"
 
 #define KEYBOARD_APPEAR_TIME_SECS   0.3
 #define TABLE_CELL_BACKGROUND_COLOR [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0]
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-@interface Contact : NSObject
-
-@property (nonatomic, copy)     NSString *strName;
-@property (nonatomic, copy)     NSString *strData;
-@property (nonatomic, copy)     NSString *strDataLabel;
-@property (nonatomic, strong)   UIImage  *imagePhoto;
-
-@end
-
-@implementation Contact
-
-- (id)init
-{
-    self = [super init];
-    if (self)
-	{
-        self.strName = @"";
-        self.strData = @"";
-        self.strDataLabel = @"";
-        self.imagePhoto = nil;
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-
-}
-
-// overriding the description - used in debugging
-- (NSString *)description
-{
-	return([NSString stringWithFormat:@"Contact: %@ - %@: %@", self.strName, self.strDataLabel, self.strData]);
-}
-
-- (NSComparisonResult)compare:(Contact *)otherObject
-{
-    return [self.strName compare:otherObject.strName];
-}
-
-@end
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @interface RecipientViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 
