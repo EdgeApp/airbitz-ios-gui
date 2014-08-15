@@ -87,16 +87,8 @@
     self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        for (Wallet *w in wallets) {
-            NSLog(@"Restarting %@\n", w.strName);
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                self.clearWatcherButton.titleLabel.text = [NSString stringWithFormat:@"Restarting %@", w.strName];
-            });
-            tABC_Error Error;
-            ABC_WatcherRestart([[User Singleton].name UTF8String],
-                               [[User Singleton].password UTF8String],
-                               [w.strUUID UTF8String], true, &Error);
-        }
+        [CoreBridge stopWatchers];
+        [CoreBridge startWatchers];
         dispatch_async(dispatch_get_main_queue(), ^(void){
             self.clearWatcherButton.titleLabel.text = buttonText;
         });
