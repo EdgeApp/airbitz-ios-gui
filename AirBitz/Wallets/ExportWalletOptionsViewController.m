@@ -41,9 +41,9 @@ typedef enum eExportOption
     ExportOption_View = 5
 } tExportOption;
 
-@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, ExportWalletPDFViewControllerDelegate, GDriveDelegate>
+@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, ExportWalletPDFViewControllerDelegate, GDriveDelegate, UIGestureRecognizerDelegate>
 {
-    ExportWalletPDFViewController   *_exportWalletPDFViewController;
+
 	GDrive *drive;
 }
 
@@ -54,7 +54,8 @@ typedef enum eExportOption
 @property (weak, nonatomic) IBOutlet UILabel        *labelToDate;
 @property (weak, nonatomic) IBOutlet UIView			*viewHeader;
 
-@property (nonatomic, strong) NSArray               *arrayChoices;
+@property (nonatomic, strong) ExportWalletPDFViewController *exportWalletPDFViewController;
+@property (nonatomic, strong) NSArray                       *arrayChoices;
 
 @end
 
@@ -98,6 +99,9 @@ typedef enum eExportOption
 
 
     //NSLog(@"type: %d", self.type);
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -359,21 +363,21 @@ typedef enum eExportOption
     {
 
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-        _exportWalletPDFViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletPDFViewController"];
-        _exportWalletPDFViewController.delegate = self;
-        _exportWalletPDFViewController.dataPDF = [self getExportDataInForm:self.type];
+        self.exportWalletPDFViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletPDFViewController"];
+        self.exportWalletPDFViewController.delegate = self;
+        self.exportWalletPDFViewController.dataPDF = [self getExportDataInForm:self.type];
 
         CGRect frame = self.view.bounds;
         frame.origin.x = frame.size.width;
-        _exportWalletPDFViewController.view.frame = frame;
-        [self.view addSubview:_exportWalletPDFViewController.view];
+        self.exportWalletPDFViewController.view.frame = frame;
+        [self.view addSubview:self.exportWalletPDFViewController.view];
 
         [UIView animateWithDuration:0.35
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
-             _exportWalletPDFViewController.view.frame = self.view.bounds;
+             self.exportWalletPDFViewController.view.frame = self.view.bounds;
          }
                          completion:^(BOOL finished)
          {
@@ -534,6 +538,19 @@ typedef enum eExportOption
     return strMimeType;
 }
 
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return (self.exportWalletPDFViewController != nil);
+}
+
 - (void)animatedExit
 {
 	[UIView animateWithDuration:0.35
@@ -683,7 +700,17 @@ typedef enum eExportOption
 - (void)exportWalletPDFViewControllerDidFinish:(ExportWalletPDFViewController *)controller
 {
 	[controller.view removeFromSuperview];
-	_exportWalletPDFViewController = nil;
+	self.exportWalletPDFViewController = nil;
+}
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self buttonBackTouched:nil];
+    }
 }
 
 @end

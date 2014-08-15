@@ -39,15 +39,13 @@
 
 #define CACHE_IMAGE_AGE_SECS (60 * 60) // 60 hour
 
-@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate>
+@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate, UIGestureRecognizerDelegate>
 {
     BalanceView                         *_balanceView;
-    TransactionDetailsViewController    *_transactionDetailsController;
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bSearchModeEnabled;
     CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
-    ExportWalletViewController          *_exportWalletViewController;
     CGRect                              _frameTableWithSearchNoKeyboard;
 }
 
@@ -68,6 +66,9 @@
 @property (nonatomic, strong) NSMutableDictionary   *dictContactImages; // images for the contacts
 @property (nonatomic, strong) NSMutableDictionary   *dictBizImages; // images for businesses
 @property (nonatomic, strong) NSMutableDictionary   *dictImageRequests;
+
+@property (nonatomic, strong) TransactionDetailsViewController    *transactionDetailsController;
+@property (nonatomic, strong) ExportWalletViewController          *exportWalletViewController;
 
 
 @end
@@ -168,6 +169,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(dataUpdated:)
                                                  name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -262,22 +266,22 @@
         [self resignAllResponders];
 
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-        _exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
+        self.exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
 
-        _exportWalletViewController.delegate = self;
-        _exportWalletViewController.wallet = self.wallet;
+        self.exportWalletViewController.delegate = self;
+        self.exportWalletViewController.wallet = self.wallet;
 
         CGRect frame = self.view.bounds;
         frame.origin.x = frame.size.width;
-        _exportWalletViewController.view.frame = frame;
-        [self.view addSubview:_exportWalletViewController.view];
+        self.exportWalletViewController.view.frame = frame;
+        [self.view addSubview:self.exportWalletViewController.view];
 
         [UIView animateWithDuration:0.35
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
-             _exportWalletViewController.view.frame = self.view.bounds;
+             self.exportWalletViewController.view.frame = self.view.bounds;
          }
                          completion:^(BOOL finished)
          {
@@ -432,30 +436,30 @@
 
 -(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
 {
-    if (_transactionDetailsController) {
+    if (self.transactionDetailsController) {
         return;
     }
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-    _transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+    self.transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
     
-    _transactionDetailsController.delegate = self;
-    _transactionDetailsController.transaction = transaction;
-    _transactionDetailsController.wallet = self.wallet;
-    _transactionDetailsController.bOldTransaction = YES;
-    _transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
-    _transactionDetailsController.photo = [self imageForTransaction:transaction];
+    self.transactionDetailsController.delegate = self;
+    self.transactionDetailsController.transaction = transaction;
+    self.transactionDetailsController.wallet = self.wallet;
+    self.transactionDetailsController.bOldTransaction = YES;
+    self.transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
+    self.transactionDetailsController.photo = [self imageForTransaction:transaction];
 
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
-    _transactionDetailsController.view.frame = frame;
-    [self.view addSubview:_transactionDetailsController.view];
+    self.transactionDetailsController.view.frame = frame;
+    [self.view addSubview:self.transactionDetailsController.view];
     
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
-         _transactionDetailsController.view.frame = self.view.bounds;
+         self.transactionDetailsController.view.frame = self.view.bounds;
      }
                      completion:^(BOOL finished)
      {
@@ -472,12 +476,12 @@
      {
          CGRect frame = self.view.bounds;
          frame.origin.x = frame.size.width;
-         _transactionDetailsController.view.frame = frame;
+         self.transactionDetailsController.view.frame = frame;
      }
                      completion:^(BOOL finished)
      {
-         [_transactionDetailsController.view removeFromSuperview];
-         _transactionDetailsController = nil;
+         [self.transactionDetailsController.view removeFromSuperview];
+         self.transactionDetailsController = nil;
      }];
 }
 
@@ -652,6 +656,18 @@
                                 acceptableCacheAge:CACHE_IMAGE_AGE_SECS
                                        cacheResult:YES];
     }
+}
+
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+- (BOOL)haveSubViewsShowing
+{
+    return (self.transactionDetailsController != nil || self.exportWalletViewController != nil);
 }
 
 #pragma mark - TransactionDetailsViewControllerDelegates
@@ -1076,7 +1092,7 @@
 - (void)exportWalletViewControllerDidFinish:(ExportWalletViewController *)controller
 {
     [controller.view removeFromSuperview];
-    _exportWalletViewController = nil;
+    self.exportWalletViewController = nil;
 }
 
 #pragma mark - Block Height Change
@@ -1087,6 +1103,16 @@
     [self.tableView reloadData];
     [self updateBalanceView];
     [self.view setNeedsDisplay];
+}
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self Done];
+    }
 }
 
 @end

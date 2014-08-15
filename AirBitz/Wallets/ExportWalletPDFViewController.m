@@ -11,7 +11,7 @@
 #import "CommonTypes.h"
 
 
-@interface ExportWalletPDFViewController () <UIWebViewDelegate>
+@interface ExportWalletPDFViewController () <UIWebViewDelegate, UIGestureRecognizerDelegate>
 {
 
 }
@@ -44,6 +44,9 @@
     self.webView.opaque = NO;
     self.webView.backgroundColor = [UIColor clearColor];
     [self.webView loadData:self.dataPDF MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,6 +75,19 @@
 
 #pragma mark - Misc Methods
 
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return NO;
+}
+
 - (void)animatedExit
 {
 	[UIView animateWithDuration:0.35
@@ -92,6 +108,16 @@
 - (void)exit
 {
 	[self.delegate exportWalletPDFViewControllerDidFinish:self];
+}
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self buttonBackTouched:nil];
+    }
 }
 
 @end

@@ -81,7 +81,7 @@
 	
 	//get business details
 	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/?ll=%f,%f", SERVER_API, self.bizId, self.latLong.latitude, self.latLong.longitude];
-	NSLog(@"Requesting: %@", requestURL);
+	//NSLog(@"Requesting: %@", requestURL);
 	[[DL_URLServer controller] issueRequestURL:requestURL
 									withParams:nil
 									withObject:nil
