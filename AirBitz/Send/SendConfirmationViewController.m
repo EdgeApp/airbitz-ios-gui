@@ -25,6 +25,7 @@
 	TransactionDetailsViewController    *_transactionDetailsController;
 	BOOL                                _callbackSuccess;
     int64_t                             _maxAmount;
+    BOOL                                _maxLocked;
 	NSString                            *_strReason;
 	Transaction                         *_completedTransaction;	// nil until sendTransaction is successfully completed
     UITapGestureRecognizer              *tap;
@@ -102,6 +103,7 @@
 	self.keypadView.frame = frame;
 	
 	_confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
+    _maxLocked = NO;
 
     [self updateDisplayLayout];
 }
@@ -239,14 +241,17 @@
 - (IBAction)selectMaxAmount
 {
     UITextField *_holder = _selectedTextField;
-    if (self.wallet != nil)
+    if (self.wallet != nil && _maxLocked == NO)
     {
+        _maxLocked = YES;
         _selectedTextField = self.amountBTCTextField;
-        dispatch_async(dispatch_get_main_queue(), ^{
+        // We use a serial queue for this calculation
+        [CoreBridge postToSyncQueue:^{
             int64_t maxAmount = [CoreBridge maxSpendable:self.wallet.strUUID
                                                toAddress:[self getDestAddress]
                                               isTransfer:self.bAddressIsWalletUUID];
             dispatch_async(dispatch_get_main_queue(), ^{
+                _maxLocked = NO;
                 _maxAmount = maxAmount;
                 self.amountToSendSatoshi = maxAmount;
                 self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
@@ -254,7 +259,7 @@
                 [self updateTextFieldContents];
                 _selectedTextField = _holder;
             });
-        });
+        }];
     }
 }
 
