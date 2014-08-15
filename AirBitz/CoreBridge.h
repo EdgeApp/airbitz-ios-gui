@@ -17,7 +17,10 @@
 + (void)stopQueues;
 + (void)postToSyncQueue:(void(^)(void))cb;
 
-+ (void)loadWallets: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
++ (void)loadWallets:(NSMutableArray *)arrayWallets;
++ (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx;
++ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx;
++ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets;
 + (void)reloadWallet: (Wallet *) wallet;
 + (Wallet *)getWallet: (NSString *)walletUUID;
 + (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;

@@ -137,7 +137,7 @@ static NSTimer *_dataSyncTimer;
     }
 }
 
-+ (void)loadWallets:(NSMutableArray *)arrayWallets
++ (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx
 {
     tABC_Error Error;
     tABC_WalletInfo **aWalletInfo = NULL;
@@ -164,7 +164,9 @@ static NSTimer *_dataSyncTimer;
                 wallet = [[Wallet alloc] init];
                 [CoreBridge setWallet:wallet withInfo:pWalletInfo];
                 [arrayWallets addObject:wallet];
-                [self loadTransactions: wallet];
+                if (bWithTx) {
+                    [self loadTransactions: wallet];
+                }
             }
         }
     }
@@ -176,9 +178,14 @@ static NSTimer *_dataSyncTimer;
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
-+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *) arrayArchivedWallets
++ (void)loadWallets:(NSMutableArray *)arrayWallets
 {
-    [CoreBridge loadWallets:arrayWallets];
+    [CoreBridge loadWallets:arrayWallets withTxs:YES];
+}
+
++ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx
+{
+    [CoreBridge loadWallets:arrayWallets withTxs:bWithTx];
 
     // go through all the wallets and seperate out the archived ones
     for (int i = (int) [arrayWallets count] - 1; i >= 0; i--)
@@ -198,6 +205,11 @@ static NSTimer *_dataSyncTimer;
             [arrayWallets removeObjectAtIndex:i];
         }
     }
+}
+
++ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets
+{
+    [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets withTxs:YES];
 }
 
 + (void)reloadWallet:(Wallet *) wallet;
@@ -919,7 +931,7 @@ static NSTimer *_dataSyncTimer;
         [Util printABC_Error: &error];
 
         NSMutableArray *wallets = [[NSMutableArray alloc] init];
-        [CoreBridge loadWallets:wallets];
+        [CoreBridge loadWallets:wallets withTxs:NO];
 
         // Check each wallet is up to date
         for (Wallet *w in wallets)
