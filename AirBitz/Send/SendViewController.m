@@ -30,6 +30,52 @@
 #define POPUP_PICKER_LOWEST_POINT   360
 #define POPUP_PICKER_TABLE_HEIGHT   (IS_IPHONE5 ? 180 : 90)
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@interface ABContact : NSObject
+
+@property (nonatomic, copy)     NSString *strName;
+@property (nonatomic, copy)     NSString *strData;
+@property (nonatomic, copy)     NSString *strDataLabel;
+@property (nonatomic, strong)   UIImage  *imagePhoto;
+
+@end
+
+@implementation ABContact
+
+- (id)init
+{
+    self = [super init];
+    if (self)
+	{
+        self.strName = @"";
+        self.strData = @"";
+        self.strDataLabel = @"";
+        self.imagePhoto = nil;
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+	
+}
+
+// overriding the description - used in debugging
+- (NSString *)description
+{
+	return([NSString stringWithFormat:@"ABContact: %@ - %@: %@", self.strName, self.strDataLabel, self.strData]);
+}
+
+- (NSComparisonResult)compare:(ABContact *)otherObject
+{
+    return [self.strName compare:otherObject.strName];
+}
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 @interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, PickerTextViewDelegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
 #if !TARGET_IPHONE_SIMULATOR
  ,ZBarReaderDelegate, ZBarReaderViewDelegate
@@ -71,6 +117,7 @@
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
 @property (strong, nonatomic) NSMutableData         *data;
 @property (strong, nonatomic)  NSMutableArray		*peripheralContainers;
+@property (nonatomic, strong) NSArray                   *arrayContacts;
 
 @end
 
@@ -139,6 +186,9 @@
 	//Remember our original height so we can force it back to that in viewWillAppear.
 	originalFrameHeight = self.view.frame.size.height;
 	
+	self.arrayContacts = @[];
+	// load all the names from the address book
+    [self generateListOfContactNames];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -299,6 +349,90 @@
 -(IBAction)BLE_button_touched
 {
 	[self enableBLEMode];
+}
+
+#pragma mark address book
+
+- (void)generateListOfContactNames
+{
+    NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
+	
+    CFErrorRef error;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+	
+    __block BOOL accessGranted = NO;
+	
+    if (ABAddressBookRequestAccessWithCompletion != NULL)
+    {
+        // we're on iOS 6
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+		
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+                                                 {
+                                                     accessGranted = granted;
+                                                     dispatch_semaphore_signal(sema);
+                                                 });
+		
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        //dispatch_release(sema);
+    }
+    else
+    {
+        // we're on iOS 5 or older
+        accessGranted = YES;
+    }
+	
+    if (accessGranted)
+    {
+        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+        for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
+        {
+            ABRecordRef person = CFArrayGetValueAtIndex(people, i);
+			
+            NSString *strFullName = [Util getNameFromAddressRecord:person];
+            if ([strFullName length])
+            {
+                // add this contact
+                [self addContactInfo:person withName:strFullName toArray:arrayContacts];
+            }
+        }
+    }
+	
+    // assign final
+    self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];
+    NSLog(@"contacts: %@", self.arrayContacts);
+}
+
+- (void)addContactInfo:(ABRecordRef)person withName:(NSString *)strName toArray:(NSMutableArray *)arrayContacts
+{
+    UIImage *imagePhoto = nil;
+	
+    // does this contact has an image
+    if (ABPersonHasImageData(person))
+    {
+        NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
+        imagePhoto = [UIImage imageWithData:data];
+    }
+	
+    // get the array of phone numbers or e-mail
+    /*ABMultiValueRef arrayData = (__bridge ABMultiValueRef)((__bridge NSString *)ABRecordCopyValue(person,
+																								  self.mode == RecipientMode_SMS ? kABPersonPhoneProperty : kABPersonEmailProperty));*/
+	
+    // go through each element in the array
+    //for (CFIndex i = 0; i < ABMultiValueGetCount(arrayData); i++)
+    {
+        //NSString *strData = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABMultiValueCopyValueAtIndex(arrayData, i)];
+        //CFStringRef labelStingRef = ABMultiValueCopyLabelAtIndex(arrayData, i);
+        //NSString *strDataLabel  = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABAddressBookCopyLocalizedLabel(labelStingRef)];
+		
+        ABContact *contact = [[ABContact alloc] init];
+        contact.strName = strName;
+        //contact.strData = strData;
+        //contact.strDataLabel = strDataLabel;
+        contact.imagePhoto = imagePhoto;
+		
+        [arrayContacts addObject:contact];
+    }
 }
 
 #pragma mark - BLE Central Methods
@@ -764,8 +898,8 @@
 		scanCell.signalImage.image = [UIImage imageNamed:@"0-bars.png"];
 	}
 	
-	scanCell.contactImage.image = [UIImage imageNamed:@"BLE_photo.png"];
-	
+	//see if there is a match between advertised name and name in contacts.  If so, use the photo from contacts
+	BOOL imageIsFromContacts = NO;
 	NSString *advData = [pc.advertisingData objectForKey:CBAdvertisementDataLocalNameKey];
 	if(advData.length >= 10)
 	{
@@ -773,9 +907,29 @@
 		if(advData.length > 10)
 		{
 			scanCell.contactName.text = [advData substringFromIndex:10];
+			NSArray *arrayComponents = [scanCell.contactName.text componentsSeparatedByString:@" "];
+			if(arrayComponents.count >= 2)
+			{
+				//filter off the nickname.  We just want first name and last name
+				NSString *firstName = [arrayComponents objectAtIndex:0];
+				NSString *lastName = [arrayComponents objectAtIndex:1];
+				NSString *name = [NSString stringWithFormat:@"%@ %@", firstName, lastName ];
+				for (ABContact *contact in self.arrayContacts)
+				{
+					if([[name uppercaseString] isEqualToString:[contact.strName uppercaseString]])
+					{
+						scanCell.contactImage.image = contact.imagePhoto;
+						imageIsFromContacts = YES;
+						break;
+					}
+				}
+			}
 		}
 	}
-	
+	if(imageIsFromContacts == NO)
+	{
+		scanCell.contactImage.image = [UIImage imageNamed:@"BLE_photo.png"];
+	}
 	return scanCell;
 }
 
