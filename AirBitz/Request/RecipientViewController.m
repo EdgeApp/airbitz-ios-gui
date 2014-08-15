@@ -146,8 +146,8 @@
 
 - (IBAction)buttonBackTouched:(id)sender
 {
-    self.strFullName = self.textFieldRecipient.text;
-    self.strTarget = self.textFieldRecipient.text;
+    self.strFullName = @"";
+    self.strTarget = @"";
     [self animatedExit];
 }
 

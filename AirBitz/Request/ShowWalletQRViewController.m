@@ -941,19 +941,32 @@ typedef enum eAddressPickerType
 
 - (void)RecipientViewControllerDone:(RecipientViewController *)controller withFullName:(NSString *)strFullName andTarget:(NSString *)strTarget
 {
-    self.strFullName = strFullName;
-    self.strEMail = strTarget;
-    self.strPhoneNumber = strTarget;
-
-    //NSLog(@"name: %@, target: %@", strFullName, strTarget);
-
-    if (controller.mode == RecipientMode_SMS)
+    // if they selected a target
+    if ([strTarget length])
     {
-        [self performSelector:@selector(sendSMS) withObject:nil afterDelay:0.0];
+        self.strFullName = strFullName;
+        self.strEMail = strTarget;
+        self.strPhoneNumber = strTarget;
+
+        //NSLog(@"name: %@, target: %@", strFullName, strTarget);
+
+        if (controller.mode == RecipientMode_SMS)
+        {
+            [self performSelector:@selector(sendSMS) withObject:nil afterDelay:0.0];
+        }
+        else if (controller.mode == RecipientMode_Email)
+        {
+            [self performSelector:@selector(sendEMail) withObject:nil afterDelay:0.0];
+        }
     }
-    else if (controller.mode == RecipientMode_Email)
+    else
     {
-        [self performSelector:@selector(sendEMail) withObject:nil afterDelay:0.0];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
+                                                        message:(controller.mode == RecipientMode_SMS ? @"SMS cancelled" : @"Email cancelled")
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
     }
 
     [self dismissRecipient];
