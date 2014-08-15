@@ -12,8 +12,56 @@
 #import "StylizedTextField.h"
 #import "InfoView.h"
 #import "MontserratLabel.h"
+#import "PayeeCell.h"
 
-#define KEYBOARD_APPEAR_TIME_SECS 0.3
+#define KEYBOARD_APPEAR_TIME_SECS   0.3
+#define TABLE_CELL_BACKGROUND_COLOR [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0]
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@interface Contact : NSObject
+
+@property (nonatomic, copy)     NSString *strName;
+@property (nonatomic, copy)     NSString *strData;
+@property (nonatomic, copy)     NSString *strDataLabel;
+@property (nonatomic, strong)   UIImage  *imagePhoto;
+
+@end
+
+@implementation Contact
+
+- (id)init
+{
+    self = [super init];
+    if (self)
+	{
+        self.strName = @"";
+        self.strData = @"";
+        self.strDataLabel = @"";
+        self.imagePhoto = nil;
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+
+}
+
+// overriding the description - used in debugging
+- (NSString *)description
+{
+	return([NSString stringWithFormat:@"Contact: %@ - %@: %@", self.strName, self.strDataLabel, self.strData]);
+}
+
+- (NSComparisonResult)compare:(Contact *)otherObject
+{
+    return [self.strName compare:otherObject.strName];
+}
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @interface RecipientViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -24,7 +72,8 @@
 
 @property (nonatomic, copy)   NSString                  *strFullName;
 @property (nonatomic, copy)   NSString                  *strTarget;
-@property (nonatomic, strong) NSArray                   *arrayAutoComplete;
+@property (nonatomic, strong) NSArray                   *arrayAutoComplete; // array of NSNumber's representing indexes to nams, data, etc
+@property (nonatomic, strong) NSArray                   *arrayContacts;
 
 @end
 
@@ -44,18 +93,31 @@
     [super viewDidLoad];
 
     self.arrayAutoComplete = @[];
+    self.arrayContacts = @[];
 
+    // get keyboard events so we can resize our table based on top of keyboard
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
+    // get a callback when there are changes
+    [self.textFieldRecipient addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplay];
-    [self updateDisplayLayout];
+
+    self.tableContacts.backgroundColor = TABLE_CELL_BACKGROUND_COLOR;
+    self.tableContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];     // This will remove extra separators from tableview
 
     // set the title based on why we were brought up
     self.labelTitle.text = (self.mode == RecipientMode_Email ? @"Email Recipient" : @"SMS Recipient");
 
     [self.textFieldRecipient becomeFirstResponder];
+
+    // load all the names from the address book
+    [self generateListOfContactNames];
+
+    // update the autocomplete array
+    [self updateAutoCompleteArray];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,6 +146,8 @@
 
 - (IBAction)buttonBackTouched:(id)sender
 {
+    self.strFullName = self.textFieldRecipient.text;
+    self.strTarget = self.textFieldRecipient.text;
     [self animatedExit];
 }
 
@@ -94,14 +158,126 @@
 
 #pragma mark - Misc Methods
 
-- (void)updateDisplayLayout
-{
-    // update for iPhone 4
-    if (!IS_IPHONE5)
-    {
 
-        
+- (void)generateListOfContactNames
+{
+    NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
+
+    CFErrorRef error;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+
+    __block BOOL accessGranted = NO;
+
+    if (ABAddressBookRequestAccessWithCompletion != NULL)
+    {
+        // we're on iOS 6
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+                                                 {
+                                                     accessGranted = granted;
+                                                     dispatch_semaphore_signal(sema);
+                                                 });
+
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        //dispatch_release(sema);
     }
+    else
+    {
+        // we're on iOS 5 or older
+        accessGranted = YES;
+    }
+
+    if (accessGranted)
+    {
+        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+        for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
+        {
+            ABRecordRef person = CFArrayGetValueAtIndex(people, i);
+
+            NSString *strFullName = [Util getNameFromAddressRecord:person];
+            if ([strFullName length])
+            {
+                // add this contact
+                [self addContactInfo:person withName:strFullName toArray:arrayContacts];
+            }
+        }
+    }
+
+    // assign final
+    self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];
+    //NSLog(@"contacts: %@", self.arrayContacts);
+}
+
+- (void)addContactInfo:(ABRecordRef)person withName:(NSString *)strName toArray:(NSMutableArray *)arrayContacts
+{
+    UIImage *imagePhoto = nil;
+
+    // does this contact has an image
+    if (ABPersonHasImageData(person))
+    {
+        NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
+        imagePhoto = [UIImage imageWithData:data];
+    }
+
+    // get the array of phone numbers or e-mail
+    ABMultiValueRef arrayData = (__bridge ABMultiValueRef)((__bridge NSString *)ABRecordCopyValue(person,
+                                                                                                   self.mode == RecipientMode_SMS ? kABPersonPhoneProperty : kABPersonEmailProperty));
+
+    // go through each element in the array
+    for (CFIndex i = 0; i < ABMultiValueGetCount(arrayData); i++)
+    {
+        NSString *strData = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABMultiValueCopyValueAtIndex(arrayData, i)];
+        CFStringRef labelStingRef = ABMultiValueCopyLabelAtIndex(arrayData, i);
+        NSString *strDataLabel  = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABAddressBookCopyLocalizedLabel(labelStingRef)];
+
+        Contact *contact = [[Contact alloc] init];
+        contact.strName = strName;
+        contact.strData = strData;
+        contact.strDataLabel = strDataLabel;
+        contact.imagePhoto = imagePhoto;
+
+        [arrayContacts addObject:contact];
+    }
+}
+
+- (void)updateAutoCompleteArray
+{
+    if (self.tableContacts)
+    {
+        // if there is anything in the text field
+        if ([self.textFieldRecipient.text length])
+        {
+            NSString *strTerm = self.textFieldRecipient.text;
+
+            NSMutableArray *arrayAutoComplete = [[NSMutableArray alloc] init];
+
+            // go through all the contacts
+            for (Contact *contact in self.arrayContacts)
+            {
+                // if it matches what the user has currently typed
+                if ([contact.strName rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound)
+                {
+                    // add this contact to the auto complete array
+                    [arrayAutoComplete addObject:contact];
+                }
+            }
+
+            self.arrayAutoComplete = [arrayAutoComplete sortedArrayUsingSelector:@selector(compare:)];
+        }
+        else
+        {
+            self.arrayAutoComplete = self.arrayContacts;
+        }
+
+        // force the table to reload itself
+        [self reloadAutoCompleteTable];
+    }
+}
+
+- (void)reloadAutoCompleteTable
+{
+    [self.tableContacts reloadData];
 }
 
 - (void)animatedExit
@@ -125,7 +301,7 @@
 
 - (void)exit
 {
-    [self.delegate RecipientViewControllerDone:self withFullName:self.strFullName andTarget:self.strFullName];
+    [self.delegate RecipientViewControllerDone:self withFullName:self.strFullName andTarget:self.strTarget];
 }
 
 #pragma mark - UITableView delegates
@@ -135,10 +311,62 @@
     return [self.arrayAutoComplete count];
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"PayeeCell";
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
+    if (cell == nil)
+    {
+        cell = [[PayeeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
+
+    Contact *contact = [self.arrayAutoComplete objectAtIndex:indexPath.row];
+
+    cell.textLabel.text = contact.strName;
+    cell.backgroundColor = TABLE_CELL_BACKGROUND_COLOR;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    // data
+    if ([contact.strDataLabel length])
+    {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@: %@", contact.strDataLabel, contact.strData];
+    }
+    else
+    {
+        cell.detailTextLabel.text = contact.strData;
+    }
+
+    // image
+    UIImage *imageForCell = contact.imagePhoto;
+    if (imageForCell == nil)
+    {
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(1, 1), NO, 0.0);
+        imageForCell = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    cell.imageView.image = imageForCell;
+
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Contact *contact = [self.arrayAutoComplete objectAtIndex:indexPath.row];
+
+    self.strFullName = contact.strName;
+    self.strTarget = contact.strData;
+
+    [self animatedExit];
+}
+
 #pragma mark - UITextField delegates
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    self.strFullName = self.textFieldRecipient.text;
+    self.strTarget = self.textFieldRecipient.text;
     [self animatedExit];
 
     return YES;
@@ -146,7 +374,7 @@
 
 - (void)textFieldDidChange:(UITextField *)textField
 {
-
+    [self updateAutoCompleteArray];
 }
 
 #pragma mark - Keyboard Notifications
@@ -158,7 +386,7 @@
 
     [UIView animateWithDuration:KEYBOARD_APPEAR_TIME_SECS
 						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
+						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {
 		 CGRect frame = self.tableContacts.frame;
@@ -178,7 +406,7 @@
 
     [UIView animateWithDuration:KEYBOARD_APPEAR_TIME_SECS
 						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
+						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {
 		 CGRect frame = self.tableContacts.frame;

@@ -402,8 +402,9 @@ typedef enum eAddressPickerType
     self.strFullName = @"";
     self.strEMail = @"";
 
-    //[self launchRecipientWithMode:RecipientMode_Email];
-#if 1
+    [self launchRecipientWithMode:RecipientMode_Email];
+
+#if 0 // old method
     _addressPickerType = AddressPickerType_EMail;
 
     UIAlertView *alert = [[UIAlertView alloc]
@@ -421,8 +422,9 @@ typedef enum eAddressPickerType
     self.strPhoneNumber = @"";
     self.strFullName = @"";
 
-    //[self launchRecipientWithMode:RecipientMode_SMS];
-#if 1
+    [self launchRecipientWithMode:RecipientMode_SMS];
+
+#if 0 // old method
     _addressPickerType = AddressPickerType_SMS;
 
     UIAlertView *alert = [[UIAlertView alloc]
@@ -939,6 +941,21 @@ typedef enum eAddressPickerType
 
 - (void)RecipientViewControllerDone:(RecipientViewController *)controller withFullName:(NSString *)strFullName andTarget:(NSString *)strTarget
 {
+    self.strFullName = strFullName;
+    self.strEMail = strTarget;
+    self.strPhoneNumber = strTarget;
+
+    //NSLog(@"name: %@, target: %@", strFullName, strTarget);
+
+    if (controller.mode == RecipientMode_SMS)
+    {
+        [self performSelector:@selector(sendSMS) withObject:nil afterDelay:0.0];
+    }
+    else if (controller.mode == RecipientMode_Email)
+    {
+        [self performSelector:@selector(sendEMail) withObject:nil afterDelay:0.0];
+    }
+
     [self dismissRecipient];
 }
 
