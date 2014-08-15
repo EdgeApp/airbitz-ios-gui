@@ -764,6 +764,7 @@
         if (nil == finalCell)
         {
             finalCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            finalCell.selectionStyle = UITableViewCellSelectionStyleNone;
             finalCell.backgroundColor = [UIColor clearColor];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(15, 0, 143.0, 41.0);

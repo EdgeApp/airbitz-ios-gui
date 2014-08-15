@@ -488,7 +488,7 @@
 {
     // load all the non-archive wallets
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets:arrayWallets archived:nil];
+    [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
 
     // create the array of wallet names
     _selectedWalletIndex = 0;
