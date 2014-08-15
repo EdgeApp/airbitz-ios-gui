@@ -34,9 +34,7 @@ typedef enum eAddressPickerType
     AddressPickerType_EMail
 } tAddressPickerType;
 
-@interface ShowWalletQRViewController () <ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate,
-                                          UIAlertViewDelegate, MFMailComposeViewControllerDelegate, CBPeripheralManagerDelegate,
-                                          RecipientViewControllerDelegate>
+@interface ShowWalletQRViewController () <ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, CBPeripheralManagerDelegate, RecipientViewControllerDelegate, UIGestureRecognizerDelegate>
 {
     tAddressPickerType          _addressPickerType;
 }
@@ -123,6 +121,9 @@ typedef enum eAddressPickerType
 	self.connectedView.alpha = 0.0;
 	self.connectedPhoto.layer.cornerRadius = 8.0;
 	self.connectedPhoto.layer.masksToBounds = YES;
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 - (void)didReceiveMemoryWarning
@@ -699,6 +700,19 @@ typedef enum eAddressPickerType
     self.recipientViewController = nil;
 }
 
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return (self.recipientViewController != nil);
+}
+
 #pragma mark - Address Book delegates
 
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
@@ -972,5 +986,14 @@ typedef enum eAddressPickerType
     [self dismissRecipient];
 }
 
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self Back];
+    }
+}
 
 @end

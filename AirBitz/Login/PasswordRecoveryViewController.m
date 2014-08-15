@@ -466,6 +466,7 @@ typedef enum eAlertType
 	[self.view addGestureRecognizer:gesture];
 }
 
+// used by the guesture recognizer to ignore exit
 - (BOOL)haveSubViewsShowing
 {
     return (self.signUpController != nil);
