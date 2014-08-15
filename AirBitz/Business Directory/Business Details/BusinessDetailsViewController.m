@@ -9,6 +9,7 @@
 #import "BusinessDetailsViewController.h"
 #import "DL_URLServer.h"
 #import "Server.h"
+#import "Util.h"
 #import "BD_Address_Cell.h"
 #import "BD_Phone_Cell.h"
 #import "BD_Website_Cell.h"
@@ -301,10 +302,10 @@
 	}
 }
 
--(void)callTelephoneNumber
+-(void)callBusinessNumber
 {
 	NSString *telNum = [NSString stringWithFormat:@"tel://%@", [self.businessDetails objectForKey:@"phone"]];
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum]];
+    [Util callTelephoneNumber:telNum];
 }
 
 -(void)hideDiscountLabel
@@ -891,7 +892,7 @@
 							  otherButtonTitles:@"Yes", nil];
 		[alert show];
 		#else
-		[self callTelephoneNumber];
+		[self callBusinessNumber];
 		#endif
 	}
 	else if([self cellTypeForRow:indexPath.row] == WEBSITE_CELL_ROW)
@@ -908,7 +909,7 @@
 	//NSLog(@"Clicked button %li", (long)buttonIndex);
 	if(buttonIndex == 1)
 	{
-		[self callTelephoneNumber];
+		[self callBusinessNumber];
 	}
 }
 

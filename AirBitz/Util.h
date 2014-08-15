@@ -17,5 +17,6 @@
 + (void)resizeView:(UIView *)theView withDisplayView:(UIView *)theDisplayView;
 + (void)freeStringArray:(char **)aszStrings count:(unsigned int)count;
 + (NSString *)getNameFromAddressRecord:(ABRecordRef)person;
++ (void)callTelephoneNumber:(NSString *)telNum;
 
 @end
