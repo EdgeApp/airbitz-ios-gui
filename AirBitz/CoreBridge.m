@@ -10,6 +10,8 @@
 
 #import "CoreBridge.h"
 
+#import <pthread.h>
+
 #define CURRENCY_NUM_CAD                124
 #define CURRENCY_NUM_CNY                156
 #define CURRENCY_NUM_CUP                192
@@ -23,6 +25,7 @@ static BOOL bInitialized = NO;
 static dispatch_queue_t watcherQueue;
 static dispatch_queue_t exchangeQueue;
 static dispatch_queue_t dataQueue;
+static NSMutableDictionary *watchers;
 
 @interface CoreBridge ()
 {
@@ -732,46 +735,80 @@ static NSTimer *_dataSyncTimer;
 
 + (void)startWatchers
 {
-    dispatch_async(watcherQueue, ^{
-        NSLog(@"startWatchers\n");
+    // Reset the watchers dictionary
+    dispatch_async(watcherQueue, ^(void) {
+        watchers = [[NSMutableDictionary alloc] init];
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
         [CoreBridge loadWallets: arrayWallets];
-        for (Wallet * wallet in arrayWallets)
-        {
-            [self startWatcher:wallet.strUUID];
+        for (Wallet *wallet in arrayWallets) {
+            [CoreBridge startWatcher:wallet.strUUID];
         }
-        // Once watchers start, tell views to redraw
-        dispatch_async(watcherQueue, ^{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:self];
-            });
+        dispatch_async(watcherQueue, ^(void) {
+            [[NSNotificationCenter defaultCenter]
+                postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE 
+                            object:self];
         });
     });
 }
 
-+ (void)startWatcher: (NSString *) walletUUID
++ (void)startWatcher:(NSString *) walletUUID
 {
-    dispatch_async(watcherQueue, ^{
-        NSLog(@"startWatchers\n");
+    dispatch_async(watcherQueue, ^(void) {
+        const char *szUUID = [walletUUID UTF8String];
+
         tABC_Error Error;
-        NSLog(@("ABC_WatcherStart(%@)\n"), walletUUID);
         ABC_WatcherStart([[User Singleton].name UTF8String],
                         [[User Singleton].password UTF8String],
-                        [walletUUID UTF8String], &Error);
-        [CoreBridge watchAddresses: walletUUID];
+                        szUUID, &Error);
+        [Util printABC_Error: &Error];
+
+        ABC_WatchAddresses([[User Singleton].name UTF8String],
+                        [[User Singleton].password UTF8String],
+                        szUUID, &Error);
         [Util printABC_Error:&Error];
+
+        if ([watchers objectForKey:walletUUID] == nil)
+        {
+            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+            [watchers setObject:queue forKey:walletUUID];
+            [queue addOperationWithBlock:^{
+                tABC_Error Error;
+                ABC_WatcherLoop([walletUUID UTF8String], &Error);
+                [Util printABC_Error:&Error];
+            }];
+        }
     });
 }
 
 + (void)stopWatchers
 {
-    dispatch_async(watcherQueue, ^{
-        tABC_Error Error;
+    dispatch_async(watcherQueue, ^(void) {
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
         [CoreBridge loadWallets: arrayWallets];
-        for(Wallet * wallet in arrayWallets)
+        // stop watchers
+        for (Wallet *wallet in arrayWallets)
         {
+            tABC_Error Error;
             ABC_WatcherStop([wallet.strUUID UTF8String], &Error);
+        }
+        // wait for threads to finish
+        for (Wallet *wallet in arrayWallets)
+        {
+            tABC_Error Error;
+            NSOperationQueue *queue = [watchers objectForKey:wallet.strUUID];
+            if (queue == nil) {
+                continue;
+            }
+            // Wait until operations complete
+            [queue waitUntilAllOperationsAreFinished];
+            // Remove the watcher from the dictionary
+            [watchers removeObjectForKey:wallet.strUUID];
+        }
+        // Destroy watchers
+        for (Wallet *wallet in arrayWallets)
+        {
+            tABC_Error Error;
+            ABC_WatcherDelete([wallet.strUUID UTF8String], &Error);
             [Util printABC_Error: &Error];
         }
     });

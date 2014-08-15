@@ -536,9 +536,6 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
     [CoreBridge setWalletOrder: self.arrayWallets archived:self.arrayArchivedWallets];
 	[self updateBalanceView];
 	[self.walletsTable reloadData];
-    // Restart watchers
-    [CoreBridge stopWatchers];
-    [CoreBridge startWatchers];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
