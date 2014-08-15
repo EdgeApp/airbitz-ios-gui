@@ -22,12 +22,11 @@
 #define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
 
-@interface SignUpViewController () <UITextFieldDelegate, PasswordVerifyViewDelegate, PasswordRecoveryViewControllerDelegate, UIAlertViewDelegate>
+@interface SignUpViewController () <UITextFieldDelegate, PasswordVerifyViewDelegate, PasswordRecoveryViewControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
 {
 	UITextField                     *_activeTextField;
 	PasswordVerifyView              *_passwordVerifyView;
 	float                           _keyboardFrameOriginY;
-	PasswordRecoveryViewController  *_passwordRecoveryController;
 }
 
 @property (weak, nonatomic) IBOutlet MontserratLabel            *labelTitle;
@@ -46,7 +45,7 @@
 @property (weak, nonatomic) IBOutlet LatoLabel                  *labelPasswordInfo;
 @property (weak, nonatomic) IBOutlet UIImageView                *imagePassword;
 
-
+@property (nonatomic, strong)   PasswordRecoveryViewController  *passwordRecoveryController;
 @property (nonatomic, copy)     NSString                        *strReason;
 @property (nonatomic, assign)   BOOL                            bSuccess;
 @property (nonatomic, strong)   UIButton                        *buttonBlocker;
@@ -93,6 +92,9 @@
 
     // put the cursor in the user name field
     [self.userNameTextField becomeFirstResponder];
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -516,15 +518,15 @@
 -(void)showPasswordRecoveryController
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	_passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];
+	self.passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];
 	
-	_passwordRecoveryController.delegate = self;
-	_passwordRecoveryController.mode = PassRecovMode_SignUp;
+	self.passwordRecoveryController.delegate = self;
+	self.passwordRecoveryController.mode = PassRecovMode_SignUp;
 	
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
-	_passwordRecoveryController.view.frame = frame;
-	[self.view addSubview:_passwordRecoveryController.view];
+	self.passwordRecoveryController.view.frame = frame;
+	[self.view addSubview:self.passwordRecoveryController.view];
 
 
 	[UIView animateWithDuration:0.35
@@ -532,7 +534,7 @@
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 _passwordRecoveryController.view.frame = self.view.bounds;
+		 self.passwordRecoveryController.view.frame = self.view.bounds;
 	 }
 					 completion:^(BOOL finished)
 	 {
@@ -593,6 +595,18 @@
 			 }];
 		}
 	}
+}
+
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+- (BOOL)haveSubViewsShowing
+{
+    return (self.passwordRecoveryController != nil);
 }
 
 - (void)exit
@@ -750,7 +764,7 @@
 - (void)passwordRecoveryViewControllerDidFinish:(PasswordRecoveryViewController *)controller
 {
 	[controller.view removeFromSuperview];
-	_passwordRecoveryController = nil;
+	self.passwordRecoveryController = nil;
     [self exit];
 }
 
@@ -1036,6 +1050,16 @@ void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
     // we only use an alert view delegate when we are delaying the exit
     // so we can exit now
     [self performSelector:@selector(exit) withObject:nil afterDelay:0.0];
+}
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self Back:nil];
+    }
 }
 
 @end
