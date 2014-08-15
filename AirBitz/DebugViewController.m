@@ -11,7 +11,7 @@
 #import "User.h"
 #import "CoreBridge.h"
 
-@interface DebugViewController ()
+@interface DebugViewController ()  <UIGestureRecognizerDelegate>
 {
 }
 
@@ -50,6 +50,9 @@
         self.networkLabel.text = @"Mainnet";
     }
 #endif
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,6 +96,30 @@
             self.clearWatcherButton.titleLabel.text = buttonText;
         });
     });
+}
+
+#pragma mark - Misc Methods
+
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+- (BOOL)haveSubViewsShowing
+{
+    return NO;
+}
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self back:nil];
+    }
 }
 
 @end
