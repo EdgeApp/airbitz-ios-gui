@@ -105,6 +105,12 @@
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplay];
 
+    // set up our edit field
+    self.textFieldRecipient.font = [UIFont systemFontOfSize:18];
+    self.textFieldRecipient.textAlignment = NSTextAlignmentCenter;
+    self.textFieldRecipient.tintColor = [UIColor whiteColor];
+
+    // change visusals on table
     self.tableContacts.backgroundColor = TABLE_CELL_BACKGROUND_COLOR;
     self.tableContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];     // This will remove extra separators from tableview
 
@@ -256,7 +262,8 @@
             for (Contact *contact in self.arrayContacts)
             {
                 // if it matches what the user has currently typed
-                if ([contact.strName rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound)
+                if (([contact.strName rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound) ||
+                    ([contact.strData rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound))
                 {
                     // add this contact to the auto complete array
                     [arrayAutoComplete addObject:contact];
