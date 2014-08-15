@@ -91,8 +91,14 @@
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:nil];
 
+    // alloc the arrays
+    self.arraySearchTransactions = [[NSMutableArray alloc] init];
+    self.dictContactImages = [[NSMutableDictionary alloc] init];
+    self.dictBizImages = [[NSMutableDictionary alloc] init];
+    self.dictImageRequests = [[NSMutableDictionary alloc] init];
+
     // load all the names from the address book
-    [self addContactToImages];
+    [self loadContactImages];
 
     _balanceView = [BalanceView CreateWithDelegate:self];
     _balanceView.frame = self.balanceViewPlaceholder.frame;
@@ -480,14 +486,7 @@
     NSString *search = self.searchTextField.text;
     if (search != NULL && search.length > 0)
     {
-        if (self.arraySearchTransactions)
-        {
-            [self.arraySearchTransactions removeAllObjects];
-        }
-        else
-        {
-            self.arraySearchTransactions = [[NSMutableArray alloc] init];
-        }
+        [self.arraySearchTransactions removeAllObjects];
         [CoreBridge searchTransactionsIn:self.wallet query:search addTo:self.arraySearchTransactions];
         [self.tableView reloadData];
     }
@@ -530,10 +529,8 @@
     }
 }
 
-- (void)addContactToImages
+- (void)loadContactImages
 {
-    NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
-
     CFErrorRef error;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 
@@ -569,22 +566,11 @@
             NSString *strFullName = [Util getNameFromAddressRecord:person];
             if ([strFullName length])
             {
-                if ([arrayContacts indexOfObject:strFullName] == NSNotFound)
+                // if this contact has an image and we don't have one yet
+                if ((ABPersonHasImageData(person)) && (nil == [self.dictContactImages objectForKey:strFullName]))
                 {
-                    // add this contact
-                    [arrayContacts addObject:strFullName];
-
-                    // does this contact has an image
-                    if (ABPersonHasImageData(person))
-                    {
-                        NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
-
-                        if (self.dictContactImages == nil)
-                        {
-                            self.dictContactImages = [[NSMutableDictionary alloc] init];
-                        }
-                        [self.dictContactImages setObject:[UIImage imageWithData:data] forKey:strFullName];
-                    }
+                    NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
+                    [self.dictContactImages setObject:[UIImage imageWithData:data] forKey:strFullName];
                 }
             }
         }
@@ -601,18 +587,13 @@
         if (transaction.bizId)
         {
             // get the image for this bizId
-            if (self.dictBizImages)
-            {
-                image = [self.dictBizImages objectForKey:[NSNumber numberWithInt:transaction.bizId]];
-            }
+            image = [self.dictBizImages objectForKey:[NSNumber numberWithInt:transaction.bizId]];
         }
-        else
+
+        if (image == nil)
         {
             // find the image from the contacts
-            if (self.dictContactImages)
-            {
-                image = [self.dictContactImages objectForKey:transaction.strName];
-            }
+            image = [self.dictContactImages objectForKey:transaction.strName];
         }
     }
 
@@ -621,16 +602,6 @@
 
 - (void)getBizImagesForWallet:(Wallet *)wallet
 {
-    if (!self.dictBizImages)
-    {
-        self.dictBizImages = [[NSMutableDictionary alloc] init];
-    }
-
-    if (!self.dictImageRequests)
-    {
-        self.dictImageRequests = [[NSMutableDictionary alloc] init];
-    }
-
     for (Transaction *transaction in wallet.arrayTransactions)
     {
         // if this transaction has a biz id
