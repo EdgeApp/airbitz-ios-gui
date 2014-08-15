@@ -38,8 +38,8 @@
 @property (weak, nonatomic) IBOutlet MontserratLabel            *labelPIN;
 @property (weak, nonatomic) IBOutlet UIImageView                *imagePIN;
 @property (nonatomic, weak) IBOutlet MinCharTextField           *userNameTextField;
-@property (nonatomic, weak) IBOutlet UITextField                *passwordTextField;
-@property (nonatomic, weak) IBOutlet UITextField                *reenterPasswordTextField;
+@property (nonatomic, weak) IBOutlet MinCharTextField           *passwordTextField;
+@property (nonatomic, weak) IBOutlet MinCharTextField           *reenterPasswordTextField;
 @property (nonatomic, weak) IBOutlet MinCharTextField           *pinTextField;
 @property (nonatomic, weak) IBOutlet UIView                     *contentView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView    *activityView;
@@ -71,11 +71,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.userNameTextField.delegate = self;
+    self.userNameTextField.minimumCharacters = ABC_MIN_USERNAME_LENGTH;
 	self.passwordTextField.delegate = self;
+    self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
 	self.reenterPasswordTextField.delegate = self;
+    self.reenterPasswordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
 	self.pinTextField.delegate = self;
 	self.pinTextField.minimumCharacters = ABC_MIN_PIN_LENGTH;
-    self.userNameTextField.minimumCharacters = ABC_MIN_USERNAME_LENGTH;
     if (self.strUserName)
     {
         self.userNameTextField.text = self.strUserName;
