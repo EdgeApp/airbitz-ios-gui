@@ -346,7 +346,7 @@ typedef enum eRequestType
     // run through each type
     for (NSString *strPrefix in arrayTypes)
     {
-        if ([strPrefix isEqualToString: self.pickerTextCategory.textField.text]) 
+        if ([strPrefix isEqualToString: self.pickerTextCategory.textField.text])
         {
             doAddCategory = false;
             break;
@@ -361,13 +361,13 @@ typedef enum eRequestType
     if (doAddCategory)
     {
         // add the category if we didn't have it
-        [self addCategory: self.pickerTextCategory.textField.text]; 
-        self.transaction.strCategory = [self.pickerTextCategory.textField text]; 
+        [self addCategory: self.pickerTextCategory.textField.text];
+        self.transaction.strCategory = [self.pickerTextCategory.textField text];
     } else
     {
         self.transaction.strCategory = @"";
     }
-    
+
     self.transaction.strName = [self.nameTextField text];
     self.transaction.strNotes = [self.notesTextView text];
     self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
@@ -1613,7 +1613,10 @@ typedef enum eRequestType
 {
     if (![self haveSubViewsShowing])
     {
-        [self Done];
+        if (!self.buttonBack.hidden)
+        {
+            [self Done];
+        }
     }
 }
 

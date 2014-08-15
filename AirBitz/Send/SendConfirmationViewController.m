@@ -17,12 +17,10 @@
 #import "Util.h"
 #import "CommonTypes.h"
 
-@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate>
+@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate>
 {
 	ConfirmationSliderView              *_confirmationSlider;
 	UITextField                         *_selectedTextField;
-	SendStatusViewController            *_sendStatusController;
-	TransactionDetailsViewController    *_transactionDetailsController;
 	BOOL                                _callbackSuccess;
     int64_t                             _maxAmount;
     BOOL                                _maxLocked;
@@ -56,6 +54,9 @@
 @property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
 @property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
+
+@property (nonatomic, strong) SendStatusViewController          *sendStatusController;
+@property (nonatomic, strong) TransactionDetailsViewController  *transactionDetailsController;
 
 @end
 
@@ -106,6 +107,9 @@
     _maxLocked = NO;
 
     [self updateDisplayLayout];
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -263,6 +267,8 @@
     }
 }
 
+#pragma mark - Misc Methods
+
 - (void)dismissKeyboard
 {
 	[self.withdrawlPIN resignFirstResponder];
@@ -355,24 +361,24 @@
 - (void)showSendStatus
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	_sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
+	self.sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
 
 
 
 	CGRect frame = self.view.bounds;
 	//frame.origin.x = frame.size.width;
-	_sendStatusController.view.frame = frame;
-	[self.view addSubview:_sendStatusController.view];
-	_sendStatusController.view.alpha = 0.0;
+	self.sendStatusController.view.frame = frame;
+	[self.view addSubview:self.sendStatusController.view];
+	self.sendStatusController.view.alpha = 0.0;
 
-	_sendStatusController.messageLabel.text = NSLocalizedString(@"Sending...", @"status message");
+	self.sendStatusController.messageLabel.text = NSLocalizedString(@"Sending...", @"status message");
 
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 _sendStatusController.view.alpha = 1.0;
+		 self.sendStatusController.view.alpha = 1.0;
 	 }
      completion:^(BOOL finished)
 	 {
@@ -386,12 +392,12 @@
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
     {
-        _sendStatusController.view.alpha = 0.0;
+        self.sendStatusController.view.alpha = 0.0;
     }
     completion:^(BOOL finished)
     {
-        [_sendStatusController.view removeFromSuperview];
-        _sendStatusController = nil;
+        [self.sendStatusController.view removeFromSuperview];
+        self.sendStatusController = nil;
     }];
 }
 
@@ -507,24 +513,24 @@
     [self.view removeGestureRecognizer:tap];
 
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	_transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+	self.transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
 	
-	_transactionDetailsController.delegate = self;
-	_transactionDetailsController.transaction = transaction;
-	_transactionDetailsController.wallet = self.wallet;
-    _transactionDetailsController.bOldTransaction = NO;
-    _transactionDetailsController.transactionDetailsMode = TD_MODE_SENT;
+	self.transactionDetailsController.delegate = self;
+	self.transactionDetailsController.transaction = transaction;
+	self.transactionDetailsController.wallet = self.wallet;
+    self.transactionDetailsController.bOldTransaction = NO;
+    self.transactionDetailsController.transactionDetailsMode = TD_MODE_SENT;
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
-	_transactionDetailsController.view.frame = frame;
+	self.transactionDetailsController.view.frame = frame;
 	
-	[self.view addSubview:_transactionDetailsController.view];
+	[self.view addSubview:self.transactionDetailsController.view];
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
-		 _transactionDetailsController.view.frame = self.view.bounds;
+		 self.transactionDetailsController.view.frame = self.view.bounds;
 	 }
 					 completion:^(BOOL finished)
 	 {
@@ -706,6 +712,19 @@
     child.frame = childField;
 }
 
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return (self.sendStatusController != nil || self.transactionDetailsController != nil);
+}
+
 
 #pragma mark - UITextField delegates
 
@@ -792,10 +811,10 @@
 - (void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
 {
 	[controller.view removeFromSuperview];
-	_transactionDetailsController = nil;
+	self.transactionDetailsController = nil;
 
-	[_sendStatusController.view removeFromSuperview];
-	_sendStatusController = nil;
+	[self.sendStatusController.view removeFromSuperview];
+	self.sendStatusController = nil;
 
 	[self.delegate sendConfirmationViewControllerDidFinish:self];
 }
@@ -849,6 +868,17 @@ void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
         return self.destWallet.strUUID;
     } else {
         return self.sendToAddress;
+    }
+}
+
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self Back:nil];
     }
 }
 
