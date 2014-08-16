@@ -573,9 +573,6 @@
                 // if this contact has an image and we don't have one yet
                 if ((ABPersonHasImageData(person)) && (nil == [self.dictContactImages objectForKey:strFullName]))
                 {
-                    // add this contact
-                    [arrayContacts addObject:strFullName];
-
                     // does this contact has an image
                     if (ABPersonHasImageData(person))
                     {
