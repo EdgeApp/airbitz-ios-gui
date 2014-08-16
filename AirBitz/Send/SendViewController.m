@@ -44,6 +44,7 @@
 #import "TransferService.h"
 #import "BLEScanCell.h"
 #import "Contact.h"
+#import "LocalSettings.h"
 
 #define WALLET_BUTTON_WIDTH         210
 
@@ -81,6 +82,7 @@
 @property (weak, nonatomic) IBOutlet UIView					*bleView;
 @property (weak, nonatomic) IBOutlet UIView					*qrView;
 @property (nonatomic, weak)	IBOutlet UITableView			*tableView;
+@property (nonatomic, weak) IBOutlet UIButton				*ble_button;
 
 @property (nonatomic, strong) NSArray   *arrayWallets;
 @property (nonatomic, strong) NSArray   *arrayWalletNames;
@@ -150,9 +152,11 @@
 
     _selectedWalletIndex = 0;
 	
-	// Start up the CBCentralManager
-    _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-    
+	//if([LocalSettings controller].bDisableBLE == NO)
+	{
+		// Start up the CBCentralManager
+		//_centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    }
     // And somewhere to store the incoming data
     _data = [[NSMutableData alloc] init];
 	
@@ -175,7 +179,21 @@
 	{
 		_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 	}
-	[self enableBLEMode];
+	
+	if([LocalSettings controller].bDisableBLE == NO)
+	{
+		// Start up the CBCentralManager
+		_centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+		[self enableBLEMode];
+		self.ble_button.hidden = NO;
+    }
+	else
+	{
+		self.bleView.hidden = YES;
+		self.qrView.hidden = NO;
+		inBLEMode = YES; //so we'll switch to QR when timer fires
+		self.ble_button.hidden = YES;
+	}
 	
 	//reset our frame's height in case it got changed by the image picker view controller
 	CGRect frame = self.view.frame;
@@ -193,8 +211,11 @@
 #endif
 	
 	// Don't keep it going while we're not showing.
-    [self stopBLE];
-	
+	if([LocalSettings controller].bDisableBLE == NO)
+	{
+		[self stopBLE];
+		_centralManager = nil;
+	}
     //NSLog(@"Scanning stopped");
 }
 

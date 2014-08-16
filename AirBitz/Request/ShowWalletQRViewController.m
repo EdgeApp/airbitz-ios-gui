@@ -42,6 +42,7 @@
 #import "TransferService.h"
 #import "RecipientViewController.h"
 #import "Contact.h"
+#import "LocalSettings.h"
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 
@@ -138,8 +139,15 @@ typedef enum eAddressPickerType
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:NO]];
 	
-	// Start up the CBPeripheralManager
-    _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+	if([LocalSettings controller].bDisableBLE)
+	{
+		self.BLE_LogoImageView.hidden = YES;
+	}
+	else
+	{
+		// Start up the CBPeripheralManager
+		_peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+	}
 	
 	self.connectedView.alpha = 0.0;
 	self.connectedPhoto.layer.cornerRadius = 8.0;
@@ -161,8 +169,11 @@ typedef enum eAddressPickerType
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-	// Don't keep it going while we're not showing.
-    [self.peripheralManager stopAdvertising];
+	if([LocalSettings controller].bDisableBLE == NO)
+	{
+		// Don't keep it going while we're not showing.
+		[self.peripheralManager stopAdvertising];
+	}
 }
 
 -(void)showConnectedPopup
