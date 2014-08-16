@@ -144,6 +144,9 @@ typedef enum eAddressPickerType
 	self.connectedView.alpha = 0.0;
 	self.connectedPhoto.layer.cornerRadius = 8.0;
 	self.connectedPhoto.layer.masksToBounds = YES;
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 	
 	 self.arrayContacts = @[];
 	// load all the names from the address book

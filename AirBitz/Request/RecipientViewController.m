@@ -18,7 +18,9 @@
 #define KEYBOARD_APPEAR_TIME_SECS   0.3
 #define TABLE_CELL_BACKGROUND_COLOR [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0]
 
-@interface RecipientViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
+
+
+@interface RecipientViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView             *viewDisplay;
 @property (weak, nonatomic) IBOutlet MontserratLabel    *labelTitle;

@@ -573,23 +573,11 @@
                 // if this contact has an image and we don't have one yet
                 if ((ABPersonHasImageData(person)) && (nil == [self.dictContactImages objectForKey:strFullName]))
                 {
-                    // add this contact
-                    [arrayContacts addObject:strFullName];
-
-                    // does this contact has an image
-                    if (ABPersonHasImageData(person))
-                    {
-                        NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
-
-                        if (self.dictContactImages == nil)
-                        {
-                            self.dictContactImages = [[NSMutableDictionary alloc] init];
-                        }
-						if(data)
-						{
-							[self.dictContactImages setObject:[UIImage imageWithData:data] forKey:strFullName];
-						}
-                    }
+                    NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
+					if(data)
+					{
+						[self.dictContactImages setObject:[UIImage imageWithData:data] forKey:strFullName];
+					}
                 }
             }
         }
