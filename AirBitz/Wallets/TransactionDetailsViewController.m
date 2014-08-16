@@ -614,7 +614,10 @@ typedef enum eRequestType
                     if (ABPersonHasImageData(person))
                     {
                         NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
-                        [self.dictImages setObject:[UIImage imageWithData:data] forKey:strFullName];
+						if(data)
+						{
+							[self.dictImages setObject:[UIImage imageWithData:data] forKey:strFullName];
+						}
                     }
                 }
             }

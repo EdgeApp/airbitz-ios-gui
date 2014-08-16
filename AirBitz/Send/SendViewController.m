@@ -5,6 +5,25 @@
 //  Created by Carson Whitsett on 2/28/14.
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
+/* BLE flow:
+ Request Bitcoin: Peripheral
+ Build table of services and characteristics.
+ Start advertising
+ Once connected:
+ receive first and last name from Central
+ show “connected” popup
+ when read request comes in:
+ Write entire bit coin address and amount to characteristic
+ 
+ 
+ Send Bitcoin (this file): Central
+ Once connected:
+ write first and last name to characteristic
+ wait for -peripheral:didWriteValueForCharacteristic callback
+ Request a read of the characteristic
+ wait to receive bit coin address and amount from peripheral
+ When it comes in, disconnect and transition to send confirmation screen
+ */
 
 #import <AVFoundation/AVFoundation.h>
 #import "SendViewController.h"
@@ -102,7 +121,6 @@
     [self updateDisplayLayout];
 
     _bUsingImagePicker = NO;
-	inBLEMode = NO;
 	
 	self.flashSelector.delegate = self;
 	self.buttonSelector.delegate = self;
@@ -149,10 +167,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+	inBLEMode = NO;
 	[self loadWalletInfo];
 	[self syncTest];
-	self.peripheralContainers = nil;
-
+	
 	if(!_syncingView)
 	{
 		_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
@@ -167,8 +185,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	//cw [_startScannerTimer invalidate];
-	//cw _startScannerTimer = nil;
+	[_startScannerTimer invalidate];
+	_startScannerTimer = nil;
+	self.peripheralContainers = nil;
 #if !TARGET_IPHONE_SIMULATOR
 	[self stopQRReader];
 #endif
@@ -176,7 +195,7 @@
 	// Don't keep it going while we're not showing.
     [self stopBLE];
 	
-    NSLog(@"Scanning stopped");
+    //NSLog(@"Scanning stopped");
 }
 
 - (void)didReceiveMemoryWarning
@@ -356,7 +375,7 @@
 	
     // assign final
     self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];
-    NSLog(@"contacts: %@", self.arrayContacts);
+   // NSLog(@"contacts: %@", self.arrayContacts);
 }
 
 - (void)addContactInfo:(ABRecordRef)person withName:(NSString *)strName toArray:(NSMutableArray *)arrayContacts
@@ -370,25 +389,13 @@
         imagePhoto = [UIImage imageWithData:data];
     }
 	
-    // get the array of phone numbers or e-mail
-    /*ABMultiValueRef arrayData = (__bridge ABMultiValueRef)((__bridge NSString *)ABRecordCopyValue(person,
-																								  self.mode == RecipientMode_SMS ? kABPersonPhoneProperty : kABPersonEmailProperty));*/
+	Contact *contact = [[Contact alloc] init];
+	contact.strName = strName;
+	//contact.strData = strData;
+	//contact.strDataLabel = strDataLabel;
+	contact.imagePhoto = imagePhoto;
 	
-    // go through each element in the array
-    //for (CFIndex i = 0; i < ABMultiValueGetCount(arrayData); i++)
-    {
-        //NSString *strData = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABMultiValueCopyValueAtIndex(arrayData, i)];
-        //CFStringRef labelStingRef = ABMultiValueCopyLabelAtIndex(arrayData, i);
-        //NSString *strDataLabel  = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABAddressBookCopyLocalizedLabel(labelStingRef)];
-		
-        Contact *contact = [[Contact alloc] init];
-        contact.strName = strName;
-        //contact.strData = strData;
-        //contact.strDataLabel = strDataLabel;
-        contact.imagePhoto = imagePhoto;
-		
-        [arrayContacts addObject:contact];
-    }
+	[arrayContacts addObject:contact];
 }
 
 #pragma mark - BLE Central Methods
@@ -403,7 +410,7 @@
 -(void)stopBLE
 {
 	[self.centralManager stopScan];
-	NSLog(@"Getting rid of timer");
+	//NSLog(@"Getting rid of timer");
 	[peripheralCleanupTimer invalidate];
 }
 
@@ -436,7 +443,7 @@
     //[self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]] options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
 	[self.centralManager scanForPeripheralsWithServices:nil options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
     
-    NSLog(@"Scanning started");
+    //NSLog(@"Scanning started");
 }
 
 /*
@@ -508,18 +515,6 @@
 	}
     
     //NSLog(@"Discovered %@ at %@ with adv data: %@", peripheral.name, RSSI, advertisementData);
-    
-    // Ok, it's in range - have we already seen it?
-	/* if (self.discoveredPeripheral != peripheral)
-	 {
-	 
-	 // Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it
-	 self.discoveredPeripheral = peripheral;
-	 
-	 // And connect
-	 NSLog(@"Connecting to peripheral %@", peripheral);
-	 [self.centralManager connectPeripheral:peripheral options:nil];
-	 }*/
 }
 
 
@@ -536,11 +531,11 @@
  */
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-    NSLog(@"Peripheral Connected");
+   // NSLog(@"Peripheral Connected");
     
     // Stop scanning
     [self.centralManager stopScan];
-    NSLog(@"Scanning stopped");
+   // NSLog(@"Scanning stopped");
     
     // Clear the data that we may already have
     [self.data setLength:0];
@@ -591,17 +586,28 @@
 	{
         
         // And check if it's the right one
-        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
+        /*if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_BITCOIN_URI_CHARACTERISTIC_UUID]])
 		{
 			
             // If it is, subscribe to it
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+        }*/
+		
+		if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
+		{
+			
+            // Write username to this characteristic
+			NSString *fullName = [User Singleton].fullName;
+			
+			[peripheral writeValue:[fullName dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+			
+			
+			//NSLog(@"Writing: %@ to peripheral", fullName);
         }
     }
     
     // Once this is complete, we just need to wait for the data to come in.
 }
-
 
 /** This callback lets us know more data has arrived via notification on the characteristic
  */
@@ -615,45 +621,21 @@
     
     NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
     
-    // Have we got everything we need?
-    if ([stringFromData isEqualToString:@"EOM"])
-	{
-        // We have, process the data,
-		NSString *stringFromRequestor = [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
-//		NSArray *components = [stringFromRequestor componentsSeparatedByString:@"."];
-		//first component is address
-		//second component is amount in Satoshi
-		
-		//NSLog(@"############## Address: %@",[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]);
-//cw        [self.receivedAddressLabel setText:[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]];
-        
-        // Cancel our subscription to the characteristic
-        [peripheral setNotifyValue:NO forCharacteristic:characteristic];
-        
-        // and disconnect from the peripehral
-        [self.centralManager cancelPeripheralConnection:peripheral];
-		
-		//show the results
-//		NSLog(@"Address: %@", [components objectAtIndex:0]);
-//		NSLog(@"Amount Satoshi: %@", [components objectAtIndex:1]);
-        
-        self.pickerTextSendTo.textField.text = stringFromRequestor;
-        [self processURI];
-        
-	}
+	// and disconnect from the peripehral
+	[self.centralManager cancelPeripheralConnection:peripheral];
 	
-    // Otherwise, just add the data on to what we already have
-    [self.data appendData:characteristic.value];
-    
-    // Log it
-    NSLog(@"Received: %@", stringFromData);
+
+	self.pickerTextSendTo.textField.text = stringFromData;
+	[self processURI];
 }
 
 
 /** The peripheral letting us know whether our subscribe/unsubscribe happened or not
  */
+ /*
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
+	//cw no longer need this method
     if (error)
 	{
         NSLog(@"Error changing notification state: %@", error.localizedDescription);
@@ -679,22 +661,31 @@
         [self.centralManager cancelPeripheralConnection:peripheral];
     }
 }
-
+*/
+/*
 -(void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
 {
 	NSLog(@"Did Modify Services: %@", invalidatedServices);
 }
+*/
 
 /** Once the disconnection happens, we need to clean up our local copy of the peripheral
  */
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    NSLog(@"Did disconnect because: %@", error.description);
+    //NSLog(@"Did disconnect because: %@", error.description);
 	self.peripheralContainers = nil;
     self.discoveredPeripheral = nil;
     
     // We're disconnected, so start scanning again
     [self scan];
+}
+
+-(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+	//NSLog(@"Did write value for characteristic: %@", characteristic);
+	
+	[peripheral readValueForCharacteristic:characteristic];
 }
 
 
@@ -906,7 +897,7 @@
 	self.discoveredPeripheral = pc.peripheral;
 	
 	// And connect
-	NSLog(@"Connecting to peripheral %@", pc.peripheral);
+	//NSLog(@"Connecting to peripheral %@", pc.peripheral);
 	[self.centralManager connectPeripheral:pc.peripheral options:nil];
 }
 
@@ -995,7 +986,7 @@
 	_sendConfirmationViewController.selectedWalletIndex = _selectedWalletIndex;
 	_sendConfirmationViewController.nameLabel = nameLabel;
 
-    NSLog(@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
+    //NSLog(@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
 	
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;

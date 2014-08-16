@@ -583,7 +583,10 @@
                         {
                             self.dictContactImages = [[NSMutableDictionary alloc] init];
                         }
-                        [self.dictContactImages setObject:[UIImage imageWithData:data] forKey:strFullName];
+						if(data)
+						{
+							[self.dictContactImages setObject:[UIImage imageWithData:data] forKey:strFullName];
+						}
                     }
                 }
             }

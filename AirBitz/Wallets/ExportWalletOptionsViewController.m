@@ -397,8 +397,8 @@ typedef enum eExportOption
     {
         case WalletExportType_CSV:
         {
-            NSString* str = @"[CSV Data Here]";
-/*
+ /*           NSString* str = @"[CSV Data Here]";
+
             // tABC_TxInfo **pTransactions;
             // int iTxnCount;
             // char *szCsvData;

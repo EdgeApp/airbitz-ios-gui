@@ -6,6 +6,26 @@
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
+/* BLE flow:
+ Request Bitcoin (this file): Peripheral
+ Build table of services and characteristics.
+ Start advertising
+ Once connected:
+ receive first and last name from Central
+ show “connected” popup
+ when read request comes in:
+ Write entire bit coin address and amount to characteristic
+ 
+ 
+ Send Bitcoin: Central
+ Once connected:
+ write first and last name to characteristic
+ wait for -peripheral:didWriteValueForCharacteristic callback
+ Request a read of the characteristic
+ wait to receive bit coin address and amount from peripheral
+ When it comes in, disconnect and transition to send confirmation screen
+ */
+
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
 #import <MobileCoreServices/UTCoreTypes.h>
@@ -58,9 +78,10 @@ typedef enum eAddressPickerType
 @property (nonatomic, copy)   NSString *strEMail;
 
 @property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
-@property (strong, nonatomic) CBMutableCharacteristic   *transferCharacteristic;
+@property (strong, nonatomic) CBMutableCharacteristic   *bitcoinURICharacteristic;
+@property (strong, nonatomic) CBMutableCharacteristic   *userNameCharacteristic;
 @property (strong, nonatomic) NSData                    *dataToSend;
-@property (nonatomic, readwrite) NSInteger              sendDataIndex;
+//@property (nonatomic, readwrite) NSInteger              sendDataIndex;
 
 @property (nonatomic, weak) IBOutlet UIView				*connectedView;
 @property (nonatomic, weak) IBOutlet UIImageView		*connectedPhoto;
@@ -150,7 +171,6 @@ typedef enum eAddressPickerType
 	
 	//see if there is a match between advertised name and name in contacts.  If so, use the photo from contacts
 	BOOL imageIsFromContacts = NO;
-	//NSString *advData = [pc.advertisingData objectForKey:CBAdvertisementDataLocalNameKey];
 	
 	NSArray *arrayComponents = [self.connectedName.text componentsSeparatedByString:@" "];
 	if(arrayComponents.count >= 2)
@@ -239,7 +259,7 @@ typedef enum eAddressPickerType
 	
     // assign final
     self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];
-    NSLog(@"contacts: %@", self.arrayContacts);
+    //NSLog(@"contacts: %@", self.arrayContacts);
 }
 
 - (void)addContactInfo:(ABRecordRef)person withName:(NSString *)strName toArray:(NSMutableArray *)arrayContacts
@@ -252,26 +272,14 @@ typedef enum eAddressPickerType
         NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
         imagePhoto = [UIImage imageWithData:data];
     }
+
+	Contact *contact = [[Contact alloc] init];
+	contact.strName = strName;
+	//contact.strData = strData;
+	//contact.strDataLabel = strDataLabel;
+	contact.imagePhoto = imagePhoto;
 	
-    // get the array of phone numbers or e-mail
-    /*ABMultiValueRef arrayData = (__bridge ABMultiValueRef)((__bridge NSString *)ABRecordCopyValue(person,
-	 self.mode == RecipientMode_SMS ? kABPersonPhoneProperty : kABPersonEmailProperty));*/
-	
-    // go through each element in the array
-    //for (CFIndex i = 0; i < ABMultiValueGetCount(arrayData); i++)
-    {
-        //NSString *strData = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABMultiValueCopyValueAtIndex(arrayData, i)];
-        //CFStringRef labelStingRef = ABMultiValueCopyLabelAtIndex(arrayData, i);
-        //NSString *strDataLabel  = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABAddressBookCopyLocalizedLabel(labelStingRef)];
-		
-        Contact *contact = [[Contact alloc] init];
-        contact.strName = strName;
-        //contact.strData = strData;
-        //contact.strDataLabel = strDataLabel;
-        contact.imagePhoto = imagePhoto;
-		
-        [arrayContacts addObject:contact];
-    }
+	[arrayContacts addObject:contact];
 }
 
 #pragma mark - CBPeripheral methods
@@ -281,32 +289,28 @@ typedef enum eAddressPickerType
  */
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
-    // Opt out from any other state
-    //if (peripheral.state != CBPeripheralManagerStatePoweredOn)
-	//{
-	//return;
-    //}
 	switch(peripheral.state)
 	{
 		case CBPeripheralManagerStatePoweredOn:
 		{
 			// We're in CBPeripheralManagerStatePoweredOn state...
-			NSLog(@"self.peripheralManager powered on.");
+			//NSLog(@"self.peripheralManager powered on.");
 			
 			// ... so build our service.
 			
 			// Start with the CBMutableCharacteristic
-			self.transferCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]
-																			 properties:CBCharacteristicPropertyNotify
+			self.bitcoinURICharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]
+																			 properties:CBCharacteristicPropertyRead | CBCharacteristicPropertyWrite
 																				  value:nil
-																			permissions:CBAttributePermissionsReadable];
-			
+																			permissions:CBAttributePermissionsReadable | CBAttributePermissionsWriteable];
+												
+												
 			// Then the service
 			CBMutableService *transferService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]
 																			   primary:YES];
 			
 			// Add the characteristic to the service
-			transferService.characteristics = @[self.transferCharacteristic];
+			transferService.characteristics = @[self.bitcoinURICharacteristic];
 			
 			// And add it to the peripheral manager
 			[self.peripheralManager addService:transferService];
@@ -350,11 +354,12 @@ typedef enum eAddressPickerType
 
 /** Catch when someone subscribes to our characteristic, then start sending them data
  */
+ /*
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic
 {
     NSLog(@"Central subscribed to characteristic");
     
-	[self showConnectedPopup];
+	//[self showConnectedPopup];
 	
     // Send the bitcoin address and the amount in Satoshi
 	NSString *stringToSend = [NSString stringWithFormat:@"%@", self.uriString];
@@ -365,20 +370,22 @@ typedef enum eAddressPickerType
     
     // Start sending
     [self sendData];
-}
+}*/
 
 
 /** Recognise when the central unsubscribes
  */
+ /*
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic
 {
     NSLog(@"Central unsubscribed from characteristic");
 	[self.navigationController popViewControllerAnimated:YES];
 }
-
+*/
 
 /** Sends the next amount of data to the connected central
  */
+ /*
 - (void)sendData
 {
     // First up, check if we're meant to be sending an EOM
@@ -387,7 +394,8 @@ typedef enum eAddressPickerType
     if (sendingEOM)
 	{
         // send it
-        BOOL didSend = [self.peripheralManager updateValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:self.transferCharacteristic onSubscribedCentrals:nil];
+		
+        BOOL didSend = [self.peripheralManager updateValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:self.bitcoinURICharacteristic onSubscribedCentrals:nil];
         
         // Did it send?
         if (didSend)
@@ -430,7 +438,7 @@ typedef enum eAddressPickerType
         NSData *chunk = [NSData dataWithBytes:self.dataToSend.bytes+self.sendDataIndex length:amountToSend];
         
         // Send it
-        didSend = [self.peripheralManager updateValue:chunk forCharacteristic:self.transferCharacteristic onSubscribedCentrals:nil];
+        didSend = [self.peripheralManager updateValue:chunk forCharacteristic:self.bitcoinURICharacteristic onSubscribedCentrals:nil];
         
         // If it didn't work, drop out and wait for the callback
         if (!didSend)
@@ -453,7 +461,7 @@ typedef enum eAddressPickerType
             sendingEOM = YES;
             
             // Send it
-            BOOL eomSent = [self.peripheralManager updateValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:self.transferCharacteristic onSubscribedCentrals:nil];
+            BOOL eomSent = [self.peripheralManager updateValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:self.bitcoinURICharacteristic onSubscribedCentrals:nil];
             
             if (eomSent)
 			{
@@ -465,15 +473,47 @@ typedef enum eAddressPickerType
         }
     }
 }
-
+*/
 
 /** This callback comes in when the PeripheralManager is ready to send the next chunk of data.
  *  This is to ensure that packets will arrive in the order they are sent
  */
+ /*
 - (void)peripheralManagerIsReadyToUpdateSubscribers:(CBPeripheralManager *)peripheral
 {
     // Start sending again
     [self sendData];
+}*/
+
+-(void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests
+{
+	//NSLog(@"didReceiveWriteRequests");
+	for(CBATTRequest *request in requests)
+	{
+		if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
+		{
+			NSString *userName = [[NSString alloc] initWithData:request.value encoding:NSUTF8StringEncoding];
+			//NSLog(@"Received new string: %@", userName);
+			
+			self.connectedName.text = userName;
+		}
+	}
+	[self showConnectedPopup];
+	[self.peripheralManager respondToRequest:[requests objectAtIndex:0] withResult:CBATTErrorSuccess];
+}
+
+-(void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request
+{
+	//NSLog(@"didReceiveReadRequests");
+
+	if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
+	{
+		// Send the bitcoin address and the amount in Satoshi
+		NSString *stringToSend = [NSString stringWithFormat:@"%@", self.uriString];
+		self.dataToSend = [stringToSend dataUsingEncoding:NSUTF8StringEncoding];
+		request.value = self.dataToSend;
+		[peripheral respondToRequest:request withResult:CBATTErrorSuccess];
+	}
 }
 
 #pragma mark - Action Methods
@@ -510,7 +550,6 @@ typedef enum eAddressPickerType
 {
 	[self.view endEditing:YES];
     [InfoView CreateWithHTML:@"infoRequestQR" forView:self.view];
-
 }
 
 - (IBAction)email
