@@ -176,4 +176,14 @@
     return strFullName;
 }
 
++ (void)callTelephoneNumber:(NSString *)telNum
+{
+    static UIWebView *webView = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        webView = [UIWebView new];
+    });
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNum]]];
+}
+
 @end

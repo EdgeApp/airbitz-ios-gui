@@ -29,13 +29,12 @@ typedef enum eAlertType
 	ALERT_TYPE_SKIP_THIS_STEP
 } tAlertType;
 
-@interface PasswordRecoveryViewController () <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate, UIAlertViewDelegate>
+@interface PasswordRecoveryViewController () <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
 {
 	float                   _completeButtonToEmbossImageDistance;
 	UITextField             *_activeTextField;
 	CGSize                  _defaultContentSize;
 	tAlertType              _alertType;
-    SignUpViewController    *_signUpController;
 }
 
 @property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
@@ -50,13 +49,16 @@ typedef enum eAlertType
 @property (nonatomic, weak) IBOutlet UIView                     *passwordView;
 @property (nonatomic, weak) IBOutlet StylizedTextField          *passwordField;
 
-@property (nonatomic, strong) UIButton        *buttonBlocker;
-@property (nonatomic, strong) NSMutableArray  *arrayCategoryString;
-@property (nonatomic, strong) NSMutableArray  *arrayCategoryNumeric;
-//@property (nonatomic, strong) NSMutableArray  *arrayCategoryAddress;
-@property (nonatomic, strong) NSMutableArray  *arrayChosenQuestions;
-@property (nonatomic, copy)   NSString        *strReason;
-@property (nonatomic, assign) BOOL            bSuccess;
+@property (nonatomic, strong) SignUpViewController  *signUpController;
+@property (nonatomic, strong) UIButton              *buttonBlocker;
+@property (nonatomic, strong) NSMutableArray        *arrayCategoryString;
+@property (nonatomic, strong) NSMutableArray        *arrayCategoryNumeric;
+//@property (nonatomic, strong) NSMutableArray      *arrayCategoryAddress;
+@property (nonatomic, strong) NSMutableArray        *arrayChosenQuestions;
+@property (nonatomic, copy)   NSString              *strReason;
+@property (nonatomic, assign) BOOL                  bSuccess;
+
+
 
 @end
 
@@ -127,6 +129,9 @@ typedef enum eAlertType
         _bSuccess = YES;
         [self getPasswordRecoveryQuestionsComplete];
     }
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 -(void)dealloc
@@ -144,19 +149,22 @@ typedef enum eAlertType
 
 - (IBAction)Back
 {
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 CGRect frame = self.view.frame;
-		 frame.origin.x = frame.size.width;
-		 self.view.frame = frame;
-	 }
-	 completion:^(BOOL finished)
-	 {
-         [self exit];
-	 }];
+    if (!self.buttonBack.hidden)
+    {
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             CGRect frame = self.view.frame;
+             frame.origin.x = frame.size.width;
+             self.view.frame = frame;
+         }
+                         completion:^(BOOL finished)
+         {
+             [self exit];
+         }];
+    }
 }
 
 - (IBAction)SkipThisStep
@@ -426,29 +434,44 @@ typedef enum eAlertType
 - (void)bringUpSignUpViewWithAnswers:(NSString *)strAnswers
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-    _signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
+    self.signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
 
-    _signUpController.mode = SignUpMode_ChangePasswordUsingAnswers;
-    _signUpController.strUserName = self.strUserName;
-    _signUpController.strAnswers = strAnswers;
-    _signUpController.delegate = self;
+    self.signUpController.mode = SignUpMode_ChangePasswordUsingAnswers;
+    self.signUpController.strUserName = self.strUserName;
+    self.signUpController.strAnswers = strAnswers;
+    self.signUpController.delegate = self;
 
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
-    _signUpController.view.frame = frame;
-    [self.view addSubview:_signUpController.view];
+    self.signUpController.view.frame = frame;
+    [self.view addSubview:self.signUpController.view];
 
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
-         _signUpController.view.frame = self.view.bounds;
+         self.signUpController.view.frame = self.view.bounds;
      }
                      completion:^(BOOL finished)
      {
      }];
 }
+
+
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return (self.signUpController != nil);
+}
+
 
 - (void)exit
 {
@@ -796,13 +819,23 @@ void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
 -(void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
 {
 	[controller.view removeFromSuperview];
-	_signUpController = nil;
+	self.signUpController = nil;
 
     // if they didn't just hit the back button
     if (!bBack)
     {
         // then we are all done
         [self exit];
+    }
+}
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self Back];
     }
 }
 

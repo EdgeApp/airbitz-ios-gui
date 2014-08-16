@@ -39,15 +39,13 @@
 
 #define CACHE_IMAGE_AGE_SECS (60 * 60) // 60 hour
 
-@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate>
+@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate, UIGestureRecognizerDelegate>
 {
     BalanceView                         *_balanceView;
-    TransactionDetailsViewController    *_transactionDetailsController;
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bSearchModeEnabled;
     CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
-    ExportWalletViewController          *_exportWalletViewController;
     CGRect                              _frameTableWithSearchNoKeyboard;
 }
 
@@ -68,6 +66,9 @@
 @property (nonatomic, strong) NSMutableDictionary   *dictContactImages; // images for the contacts
 @property (nonatomic, strong) NSMutableDictionary   *dictBizImages; // images for businesses
 @property (nonatomic, strong) NSMutableDictionary   *dictImageRequests;
+
+@property (nonatomic, strong) TransactionDetailsViewController    *transactionDetailsController;
+@property (nonatomic, strong) ExportWalletViewController          *exportWalletViewController;
 
 
 @end
@@ -91,8 +92,14 @@
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:nil];
 
+    // alloc the arrays
+    self.arraySearchTransactions = [[NSMutableArray alloc] init];
+    self.dictContactImages = [[NSMutableDictionary alloc] init];
+    self.dictBizImages = [[NSMutableDictionary alloc] init];
+    self.dictImageRequests = [[NSMutableDictionary alloc] init];
+
     // load all the names from the address book
-    [self addContactToImages];
+    [self loadContactImages];
 
     _balanceView = [BalanceView CreateWithDelegate:self];
     _balanceView.frame = self.balanceViewPlaceholder.frame;
@@ -162,6 +169,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(dataUpdated:)
                                                  name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -256,22 +266,22 @@
         [self resignAllResponders];
 
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-        _exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
+        self.exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
 
-        _exportWalletViewController.delegate = self;
-        _exportWalletViewController.wallet = self.wallet;
+        self.exportWalletViewController.delegate = self;
+        self.exportWalletViewController.wallet = self.wallet;
 
         CGRect frame = self.view.bounds;
         frame.origin.x = frame.size.width;
-        _exportWalletViewController.view.frame = frame;
-        [self.view addSubview:_exportWalletViewController.view];
+        self.exportWalletViewController.view.frame = frame;
+        [self.view addSubview:self.exportWalletViewController.view];
 
         [UIView animateWithDuration:0.35
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
-             _exportWalletViewController.view.frame = self.view.bounds;
+             self.exportWalletViewController.view.frame = self.view.bounds;
          }
                          completion:^(BOOL finished)
          {
@@ -426,30 +436,30 @@
 
 -(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
 {
-    if (_transactionDetailsController) {
+    if (self.transactionDetailsController) {
         return;
     }
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-    _transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+    self.transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
     
-    _transactionDetailsController.delegate = self;
-    _transactionDetailsController.transaction = transaction;
-    _transactionDetailsController.wallet = self.wallet;
-    _transactionDetailsController.bOldTransaction = YES;
-    _transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
-    _transactionDetailsController.photo = [self imageForTransaction:transaction];
+    self.transactionDetailsController.delegate = self;
+    self.transactionDetailsController.transaction = transaction;
+    self.transactionDetailsController.wallet = self.wallet;
+    self.transactionDetailsController.bOldTransaction = YES;
+    self.transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
+    self.transactionDetailsController.photo = [self imageForTransaction:transaction];
 
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
-    _transactionDetailsController.view.frame = frame;
-    [self.view addSubview:_transactionDetailsController.view];
+    self.transactionDetailsController.view.frame = frame;
+    [self.view addSubview:self.transactionDetailsController.view];
     
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
-         _transactionDetailsController.view.frame = self.view.bounds;
+         self.transactionDetailsController.view.frame = self.view.bounds;
      }
                      completion:^(BOOL finished)
      {
@@ -466,12 +476,12 @@
      {
          CGRect frame = self.view.bounds;
          frame.origin.x = frame.size.width;
-         _transactionDetailsController.view.frame = frame;
+         self.transactionDetailsController.view.frame = frame;
      }
                      completion:^(BOOL finished)
      {
-         [_transactionDetailsController.view removeFromSuperview];
-         _transactionDetailsController = nil;
+         [self.transactionDetailsController.view removeFromSuperview];
+         self.transactionDetailsController = nil;
      }];
 }
 
@@ -480,14 +490,7 @@
     NSString *search = self.searchTextField.text;
     if (search != NULL && search.length > 0)
     {
-        if (self.arraySearchTransactions)
-        {
-            [self.arraySearchTransactions removeAllObjects];
-        }
-        else
-        {
-            self.arraySearchTransactions = [[NSMutableArray alloc] init];
-        }
+        [self.arraySearchTransactions removeAllObjects];
         [CoreBridge searchTransactionsIn:self.wallet query:search addTo:self.arraySearchTransactions];
         [self.tableView reloadData];
     }
@@ -530,10 +533,8 @@
     }
 }
 
-- (void)addContactToImages
+- (void)loadContactImages
 {
-    NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
-
     CFErrorRef error;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 
@@ -569,7 +570,8 @@
             NSString *strFullName = [Util getNameFromAddressRecord:person];
             if ([strFullName length])
             {
-                if ([arrayContacts indexOfObject:strFullName] == NSNotFound)
+                // if this contact has an image and we don't have one yet
+                if ((ABPersonHasImageData(person)) && (nil == [self.dictContactImages objectForKey:strFullName]))
                 {
                     // add this contact
                     [arrayContacts addObject:strFullName];
@@ -604,18 +606,13 @@
         if (transaction.bizId)
         {
             // get the image for this bizId
-            if (self.dictBizImages)
-            {
-                image = [self.dictBizImages objectForKey:[NSNumber numberWithInt:transaction.bizId]];
-            }
+            image = [self.dictBizImages objectForKey:[NSNumber numberWithInt:transaction.bizId]];
         }
-        else
+
+        if (image == nil)
         {
             // find the image from the contacts
-            if (self.dictContactImages)
-            {
-                image = [self.dictContactImages objectForKey:transaction.strName];
-            }
+            image = [self.dictContactImages objectForKey:transaction.strName];
         }
     }
 
@@ -624,16 +621,6 @@
 
 - (void)getBizImagesForWallet:(Wallet *)wallet
 {
-    if (!self.dictBizImages)
-    {
-        self.dictBizImages = [[NSMutableDictionary alloc] init];
-    }
-
-    if (!self.dictImageRequests)
-    {
-        self.dictImageRequests = [[NSMutableDictionary alloc] init];
-    }
-
     for (Transaction *transaction in wallet.arrayTransactions)
     {
         // if this transaction has a biz id
@@ -684,6 +671,19 @@
                                 acceptableCacheAge:CACHE_IMAGE_AGE_SECS
                                        cacheResult:YES];
     }
+}
+
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return (self.transactionDetailsController != nil || self.exportWalletViewController != nil);
 }
 
 #pragma mark - TransactionDetailsViewControllerDelegates
@@ -780,6 +780,7 @@
         if (nil == finalCell)
         {
             finalCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            finalCell.selectionStyle = UITableViewCellSelectionStyleNone;
             finalCell.backgroundColor = [UIColor clearColor];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(15, 0, 143.0, 41.0);
@@ -1108,7 +1109,7 @@
 - (void)exportWalletViewControllerDidFinish:(ExportWalletViewController *)controller
 {
     [controller.view removeFromSuperview];
-    _exportWalletViewController = nil;
+    self.exportWalletViewController = nil;
 }
 
 #pragma mark - Block Height Change
@@ -1119,6 +1120,16 @@
     [self.tableView reloadData];
     [self updateBalanceView];
     [self.view setNeedsDisplay];
+}
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self Done];
+    }
 }
 
 @end

@@ -79,6 +79,9 @@
 
     // update the autocomplete array
     [self updateAutoCompleteArray];
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 - (void)didReceiveMemoryWarning
@@ -242,6 +245,18 @@
     [self.tableContacts reloadData];
 }
 
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+- (BOOL)haveSubViewsShowing
+{
+    return NO;
+}
+
 - (void)animatedExit
 {
     [self.textFieldRecipient resignFirstResponder];
@@ -379,6 +394,16 @@
 	 {
 
 	 }];
+}
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self buttonBackTouched:nil];
+    }
 }
 
 @end

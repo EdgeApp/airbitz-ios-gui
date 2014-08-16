@@ -34,7 +34,7 @@ typedef enum eImportState
     ImportState_Importing
 } tImportState;
 
-@interface ImportWalletViewController () <ButtonSelectorDelegate, UITextFieldDelegate, FlashSelectViewDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate>
+@interface ImportWalletViewController () <ButtonSelectorDelegate, UITextFieldDelegate, FlashSelectViewDelegate, ZBarReaderDelegate, ZBarReaderViewDelegate, UIGestureRecognizerDelegate>
 {
     ZBarReaderView          *_readerView;
     ZBarReaderController    *_readerPicker;
@@ -102,6 +102,9 @@ typedef enum eImportState
     [self updateDisplayLayout];
 
     [self updateDisplay];
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -143,7 +146,7 @@ typedef enum eImportState
 }
 */
 
-#pragma - Action Methods
+#pragma mark - Action Methods
 
 - (IBAction)buttonBackTouched:(id)sender
 {
@@ -407,6 +410,19 @@ typedef enum eImportState
     }
 }
 
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return NO;
+}
+
 - (void)animatedExit
 {
 	[UIView animateWithDuration:0.35
@@ -565,5 +581,15 @@ typedef enum eImportState
 
 #endif
 
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self buttonBackTouched:nil];
+    }
+}
 
 @end

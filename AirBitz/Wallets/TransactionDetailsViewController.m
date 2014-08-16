@@ -59,7 +59,7 @@ typedef enum eRequestType
 } tRequestType;
 
 
-@interface TransactionDetailsViewController () <UITextFieldDelegate, UITextViewDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate>
+@interface TransactionDetailsViewController () <UITextFieldDelegate, UITextViewDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate, UIGestureRecognizerDelegate>
 {
     UITextField     *_activeTextField;
     UITextView      *_activeTextView;
@@ -244,6 +244,9 @@ typedef enum eRequestType
     self.viewPhoto.layer.cornerRadius = PHOTO_BORDER_CORNER_RADIUS;
     self.viewPhoto.layer.masksToBounds = YES;
     [self updatePhoto];
+    
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -343,7 +346,7 @@ typedef enum eRequestType
     // run through each type
     for (NSString *strPrefix in arrayTypes)
     {
-        if ([strPrefix isEqualToString: self.pickerTextCategory.textField.text]) 
+        if ([strPrefix isEqualToString: self.pickerTextCategory.textField.text])
         {
             doAddCategory = false;
             break;
@@ -358,13 +361,13 @@ typedef enum eRequestType
     if (doAddCategory)
     {
         // add the category if we didn't have it
-        [self addCategory: self.pickerTextCategory.textField.text]; 
-        self.transaction.strCategory = [self.pickerTextCategory.textField text]; 
+        [self addCategory: self.pickerTextCategory.textField.text];
+        self.transaction.strCategory = [self.pickerTextCategory.textField text];
     } else
     {
         self.transaction.strCategory = @"";
     }
-    
+
     self.transaction.strName = [self.nameTextField text];
     self.transaction.strNotes = [self.notesTextView text];
     self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
@@ -1062,6 +1065,19 @@ typedef enum eRequestType
     }
 }
 
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return NO;
+}
+
 - (void)exit
 {
     // if we haven't closed already
@@ -1592,6 +1608,19 @@ typedef enum eRequestType
     }
     _activeTextView = nil;
     _activeTextField = nil;
+}
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        if (!self.buttonBack.hidden)
+        {
+            [self Done];
+        }
+    }
 }
 
 @end

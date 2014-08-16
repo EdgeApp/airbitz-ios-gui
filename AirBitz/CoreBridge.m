@@ -108,8 +108,36 @@ static NSTimer *_dataSyncTimer;
     dispatch_async(dataQueue, cb);
 }
 
++ (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs
+{
+    tABC_Error Error;
+    char **aUUIDS = NULL;
+    unsigned int nCount;
 
-+ (void)loadWallets:(NSMutableArray *)arrayWallets
+    tABC_CC result = ABC_GetWalletUUIDs([[User Singleton].name UTF8String],
+                                        [[User Singleton].password UTF8String],
+                                        &aUUIDS, &nCount, &Error);
+    if (ABC_CC_Ok == result)
+    {
+        if (aUUIDS)
+        {
+            unsigned int i;
+            for (i = 0; i < nCount; ++i)
+            {
+                char *szUUID = aUUIDS[i];
+                // If entry is NULL skip it
+                if (!szUUID) {
+                    continue;
+                }
+                [arrayUUIDs addObject:[NSString stringWithUTF8String:szUUID]];
+                free(szUUID);
+            }
+            free(aUUIDS);
+        }
+    }
+}
+
++ (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx
 {
     tABC_Error Error;
     tABC_WalletInfo **aWalletInfo = NULL;
@@ -136,7 +164,9 @@ static NSTimer *_dataSyncTimer;
                 wallet = [[Wallet alloc] init];
                 [CoreBridge setWallet:wallet withInfo:pWalletInfo];
                 [arrayWallets addObject:wallet];
-                [self loadTransactions: wallet];
+                if (bWithTx) {
+                    [self loadTransactions: wallet];
+                }
             }
         }
     }
@@ -148,9 +178,14 @@ static NSTimer *_dataSyncTimer;
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
-+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *) arrayArchivedWallets
++ (void)loadWallets:(NSMutableArray *)arrayWallets
 {
-    [CoreBridge loadWallets:arrayWallets];
+    [CoreBridge loadWallets:arrayWallets withTxs:YES];
+}
+
++ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx
+{
+    [CoreBridge loadWallets:arrayWallets withTxs:bWithTx];
 
     // go through all the wallets and seperate out the archived ones
     for (int i = (int) [arrayWallets count] - 1; i >= 0; i--)
@@ -170,6 +205,11 @@ static NSTimer *_dataSyncTimer;
             [arrayWallets removeObjectAtIndex:i];
         }
     }
+}
+
++ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets
+{
+    [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets withTxs:YES];
 }
 
 + (void)reloadWallet:(Wallet *) wallet;
@@ -713,11 +753,10 @@ static NSTimer *_dataSyncTimer;
 {
     NSLog(@"watchersReady?\n");
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets: arrayWallets archived:arrayArchivedWallets];
-    for (Wallet * wallet in arrayWallets)
+    [CoreBridge loadWalletUUIDs:arrayWallets];
+    for (NSString *uuid in arrayWallets)
     {
-        if (![CoreBridge watcherIsReady:wallet.strUUID])
+        if (![CoreBridge watcherIsReady:uuid])
         {
             return NO;
         }
@@ -739,9 +778,9 @@ static NSTimer *_dataSyncTimer;
     dispatch_async(watcherQueue, ^(void) {
         watchers = [[NSMutableDictionary alloc] init];
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-        [CoreBridge loadWallets: arrayWallets];
-        for (Wallet *wallet in arrayWallets) {
-            [CoreBridge startWatcher:wallet.strUUID];
+        [CoreBridge loadWalletUUIDs: arrayWallets];
+        for (NSString *uuid in arrayWallets) {
+            [CoreBridge startWatcher:uuid];
         }
         dispatch_async(watcherQueue, ^(void) {
             [[NSNotificationCenter defaultCenter]
@@ -784,31 +823,31 @@ static NSTimer *_dataSyncTimer;
 {
     dispatch_async(watcherQueue, ^(void) {
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-        [CoreBridge loadWallets: arrayWallets];
+        [CoreBridge loadWalletUUIDs: arrayWallets];
         // stop watchers
-        for (Wallet *wallet in arrayWallets)
+        for (NSString *uuid in arrayWallets)
         {
             tABC_Error Error;
-            ABC_WatcherStop([wallet.strUUID UTF8String], &Error);
+            ABC_WatcherStop([uuid UTF8String], &Error);
         }
         // wait for threads to finish
-        for (Wallet *wallet in arrayWallets)
+        for (NSString *uuid in arrayWallets)
         {
             tABC_Error Error;
-            NSOperationQueue *queue = [watchers objectForKey:wallet.strUUID];
+            NSOperationQueue *queue = [watchers objectForKey:uuid];
             if (queue == nil) {
                 continue;
             }
             // Wait until operations complete
             [queue waitUntilAllOperationsAreFinished];
             // Remove the watcher from the dictionary
-            [watchers removeObjectForKey:wallet.strUUID];
+            [watchers removeObjectForKey:uuid];
         }
         // Destroy watchers
-        for (Wallet *wallet in arrayWallets)
+        for (NSString *uuid in arrayWallets)
         {
             tABC_Error Error;
-            ABC_WatcherDelete([wallet.strUUID UTF8String], &Error);
+            ABC_WatcherDelete([uuid UTF8String], &Error);
             [Util printABC_Error: &Error];
         }
     });
@@ -892,7 +931,7 @@ static NSTimer *_dataSyncTimer;
         [Util printABC_Error: &error];
 
         NSMutableArray *wallets = [[NSMutableArray alloc] init];
-        [CoreBridge loadWallets:wallets];
+        [CoreBridge loadWallets:wallets withTxs:NO];
 
         // Check each wallet is up to date
         for (Wallet *w in wallets)

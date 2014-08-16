@@ -41,10 +41,9 @@ typedef enum eDatePeriod
     DatePeriod_ThisYear
 } tDatePeriod;
 
-@interface ExportWalletViewController () <ExportWalletOptionsViewControllerDelegate, ButtonSelectorDelegate, PopupWheelPickerViewDelegate>
+@interface ExportWalletViewController () <ExportWalletOptionsViewControllerDelegate, ButtonSelectorDelegate, PopupWheelPickerViewDelegate, UIGestureRecognizerDelegate>
 {
     tDatePeriod                         _datePeriod; // chosen with the 3 buttons
-    ExportWalletOptionsViewController   *_exportWalletOptionsViewController;
     NSInteger                           _selectedWallet;
     CGRect                              _viewDisplayFrame;
 }
@@ -69,6 +68,8 @@ typedef enum eDatePeriod
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 @property (nonatomic, strong) DateTime              *fromDateTime;
 @property (nonatomic, strong) DateTime              *toDateTime;
+
+@property (nonatomic, strong) ExportWalletOptionsViewController   *exportWalletOptionsViewController;
 
 
 @end
@@ -119,6 +120,9 @@ typedef enum eDatePeriod
     self.buttonBlocker.frame = self.view.bounds;
     self.buttonBlocker.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
 }
 
 - (void)didReceiveMemoryWarning
@@ -485,25 +489,25 @@ typedef enum eDatePeriod
     }
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-    _exportWalletOptionsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletOptionsViewController"];
+    self.exportWalletOptionsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletOptionsViewController"];
 
-    _exportWalletOptionsViewController.delegate = self;
-    _exportWalletOptionsViewController.type = type;
-    _exportWalletOptionsViewController.wallet = wallet;
-    _exportWalletOptionsViewController.fromDateTime = self.fromDateTime;
-    _exportWalletOptionsViewController.toDateTime = self.toDateTime;
+    self.exportWalletOptionsViewController.delegate = self;
+    self.exportWalletOptionsViewController.type = type;
+    self.exportWalletOptionsViewController.wallet = wallet;
+    self.exportWalletOptionsViewController.fromDateTime = self.fromDateTime;
+    self.exportWalletOptionsViewController.toDateTime = self.toDateTime;
 
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
-    _exportWalletOptionsViewController.view.frame = frame;
-    [self.view addSubview:_exportWalletOptionsViewController.view];
+    self.exportWalletOptionsViewController.view.frame = frame;
+    [self.view addSubview:self.exportWalletOptionsViewController.view];
 
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
-         _exportWalletOptionsViewController.view.frame = self.view.bounds;
+         self.exportWalletOptionsViewController.view.frame = self.view.bounds;
      }
                      completion:^(BOOL finished)
      {
@@ -579,6 +583,18 @@ typedef enum eDatePeriod
     self.buttonBlocker.hidden = !bBlock;
 }
 
+- (void)installLeftToRightSwipeDetection
+{
+	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+	gesture.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return (self.exportWalletOptionsViewController != nil);
+}
 
 - (void)animatedExit
 {
@@ -607,7 +623,7 @@ typedef enum eDatePeriod
 - (void)exportWalletOptionsViewControllerDidFinish:(ExportWalletOptionsViewController *)controller
 {
 	[controller.view removeFromSuperview];
-	_exportWalletOptionsViewController = nil;
+	self.exportWalletOptionsViewController = nil;
 }
 
 #pragma mark - ButtonSelectorView delegate
@@ -660,6 +676,16 @@ typedef enum eDatePeriod
     }
 
     return retVal;
+}
+
+#pragma mark - GestureReconizer methods
+
+- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self buttonBackTouched:nil];
+    }
 }
 
 @end
