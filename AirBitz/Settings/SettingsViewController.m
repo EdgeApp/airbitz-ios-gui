@@ -24,6 +24,7 @@
 #import "CategoriesViewController.h"
 #import "Util.h"
 #import "InfoView.h"
+#import "LocalSettings.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -62,6 +63,7 @@
 #define ROW_AUTO_LOG_OFF                0
 #define ROW_DEFAULT_CURRENCY            1
 #define ROW_CHANGE_CATEGORIES           2
+#define ROW_BLE                         3
 
 #define ROW_US_DOLLAR                   0
 #define ROW_CANADIAN_DOLLAR             1
@@ -925,7 +927,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	cell.delegate = self;
 	if (indexPath.section == SECTION_NAME)
 	{
-		if (indexPath.row == 0)
+		if (indexPath.row == ROW_SEND_NAME)
 		{
 			cell.name.text = NSLocalizedString(@"Send name on payment request", @"settings text");
             if (_pAccountSettings)
@@ -934,6 +936,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             }
 		}
 	}
+    else if (indexPath.section == SECTION_OPTIONS)
+    {
+        if (indexPath.row == ROW_BLE)
+        {
+			cell.name.text = NSLocalizedString(@"Bluetooth", @"settings text");
+            [cell.state setOn:!LocalSettings.controller.bDisableBLE animated:NO];
+        }
+    }
 	
     cell.tag = (indexPath.section << 8) | (indexPath.row);
 
@@ -1064,7 +1074,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_OPTIONS:
-            return 3;
+            return 4;
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
@@ -1187,7 +1197,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		}
         else if (indexPath.section == SECTION_NAME)
 		{
-			if (indexPath.row == 0)
+			if (indexPath.row == ROW_SEND_NAME)
 			{
 				cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
 			}
@@ -1201,6 +1211,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             if (indexPath.row == ROW_CHANGE_CATEGORIES)
             {
                 cell = [self getPlainCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+            }
+            else if (indexPath.row == ROW_BLE)
+            {
+				cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
             }
             else
             {
@@ -1299,9 +1313,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)booleanCell:(BooleanCell *)cell switchToggled:(UISwitch *)theSwitch
 {
     NSInteger section = (cell.tag >> 8);
+    NSInteger row = cell.tag & 0xff;
 
     // we only have one boolean cell and that's the name on payment option
-    if (section == SECTION_NAME)
+    if ((section == SECTION_NAME) && (row == ROW_SEND_NAME))
     {
         if (_pAccountSettings)
         {
@@ -1313,6 +1328,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
         // update the display by reloading the table
         [self.tableView reloadData];
+    }
+    else if ((section == SECTION_OPTIONS) && (row == ROW_BLE))
+    {
+        LocalSettings.controller.bDisableBLE = !theSwitch.on;
+        [LocalSettings saveAll];
     }
 }
 
