@@ -12,6 +12,7 @@
 #import "CoreBridge.h"
 #import "CommonTypes.h"
 #import "PopupPickerView.h"
+#import "LocalSettings.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 NSTimer *logoutTimer = NULL;
@@ -24,6 +25,9 @@ NSDate *logoutDate = NULL;
     // Override point for customization after application launch.
     [application setStatusBarHidden:NO];
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
+
+    [LocalSettings initAll];
+
     [PopupPickerView initAll];
 
     [CoreBridge initAll];
@@ -69,6 +73,8 @@ NSDate *logoutDate = NULL;
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [LocalSettings saveAll];
+
     if ([User isLoggedIn])
     {
         [CoreBridge stopQueues];
@@ -102,6 +108,8 @@ NSDate *logoutDate = NULL;
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    [LocalSettings freeAll];
+    
     [[User Singleton] clear];
     ABC_Terminate();
 }

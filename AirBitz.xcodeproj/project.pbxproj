@@ -86,6 +86,7 @@
 		4C90463D18C9244900179D9C /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463C18C9244900179D9C /* libiconv.dylib */; };
 		4C98CAEC199D53A2000009B5 /* RecipientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98CAEB199D53A2000009B5 /* RecipientViewController.m */; };
 		4C98CAEE199D6914000009B5 /* infoRecipient.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C98CAED199D6914000009B5 /* infoRecipient.html */; };
+		4C98CAF8199FB545000009B5 /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98CAF7199FB545000009B5 /* LocalSettings.m */; };
 		4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
 		6809FB9A196F9EEB0076CA4D /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809FB99196F9EEB0076CA4D /* libgit2.a */; };
 		683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
@@ -639,6 +640,8 @@
 		4C98CAEA199D53A2000009B5 /* RecipientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipientViewController.h; sourceTree = "<group>"; };
 		4C98CAEB199D53A2000009B5 /* RecipientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipientViewController.m; sourceTree = "<group>"; };
 		4C98CAED199D6914000009B5 /* infoRecipient.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoRecipient.html; sourceTree = "<group>"; };
+		4C98CAF6199FB545000009B5 /* LocalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalSettings.h; sourceTree = "<group>"; };
+		4C98CAF7199FB545000009B5 /* LocalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalSettings.m; sourceTree = "<group>"; };
 		4C9E91981922AB7400F01423 /* OfflineWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineWalletViewController.h; sourceTree = "<group>"; };
 		4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
 		6809FB99196F9EEB0076CA4D /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = AirBitz/ABC/libgit2.a; sourceTree = "<group>"; };
@@ -2050,6 +2053,8 @@
 				B55A031C18EB569000845090 /* CategoriesViewController.m */,
 				4C3C309F191B07C0006923DE /* CategoriesCell.h */,
 				4C3C30A0191B07C0006923DE /* CategoriesCell.m */,
+				4C98CAF6199FB545000009B5 /* LocalSettings.h */,
+				4C98CAF7199FB545000009B5 /* LocalSettings.m */,
 				B55A030918EA4C4400845090 /* PlainCell.h */,
 				B55A030A18EA4C4400845090 /* PlainCell.m */,
 				B55A030618EA210000845090 /* RadioButtonCell.h */,
@@ -2637,6 +2642,7 @@
 				B5F2E9C518DB4B23008ACF88 /* PasswordRecoveryViewController.m in Sources */,
 				4C3C309D19199AF7006923DE /* StrokeGradientButton.m in Sources */,
 				B5C0A9B518EA0D99008F302C /* SettingsViewController.m in Sources */,
+				4C98CAF8199FB545000009B5 /* LocalSettings.m in Sources */,
 				B516C1E818C54B07008CC6A1 /* NSDate+Helper.m in Sources */,
 				4C3C3093191834AC006923DE /* PopupPickerView.m in Sources */,
 				4C7247D41937A7520091C286 /* PayeeCell.m in Sources */,
