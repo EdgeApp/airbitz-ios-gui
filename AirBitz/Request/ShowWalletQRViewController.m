@@ -153,12 +153,13 @@ typedef enum eAddressPickerType
 	self.connectedPhoto.layer.cornerRadius = 8.0;
 	self.connectedPhoto.layer.masksToBounds = YES;
 
-    // add left to right swipe detection for going back
-    [self installLeftToRightSwipeDetection];
-	
 	 self.arrayContacts = @[];
 	// load all the names from the address book
     [self generateListOfContactNames];
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -1155,6 +1156,17 @@ typedef enum eAddressPickerType
 #pragma mark - GestureReconizer methods
 
 - (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self Back];
+    }
+}
+
+#pragma mark - Custom Notification Handlers
+
+// called when a tab bar button that is already selected, is reselected again
+- (void)tabBarButtonReselect:(NSNotification *)notification
 {
     if (![self haveSubViewsShowing])
     {

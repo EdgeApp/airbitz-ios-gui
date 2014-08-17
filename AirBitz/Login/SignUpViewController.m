@@ -18,6 +18,7 @@
 #import "Util.h"
 #import "CoreBridge.h"
 #import "MinCharTextField.h"
+#import "CommonTypes.h"
 
 #define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
@@ -95,6 +96,7 @@
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -1056,6 +1058,17 @@ void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
 #pragma mark - GestureReconizer methods
 
 - (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self Back:nil];
+    }
+}
+
+#pragma mark - Custom Notification Handlers
+
+// called when a tab bar button that is already selected, is reselected again
+- (void)tabBarButtonReselect:(NSNotification *)notification
 {
     if (![self haveSubViewsShowing])
     {

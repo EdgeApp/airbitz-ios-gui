@@ -41,6 +41,15 @@
 #define ENTER_ANIM_TIME_SECS    0.35                    // duration when animating a view controller as it slides on screen
 #define EXIT_ANIM_TIME_SECS     ENTER_ANIM_TIME_SECS    // duration when animating a view controller as it slides off screen to reveal the calling view
 
+typedef enum eTabBarButton
+{
+	TAB_BAR_BUTTON_DIRECTORY = 0,
+	TAB_BAR_BUTTON_APP_MODE_REQUEST,
+	TAB_BAR_BUTTON_APP_MODE_SEND,
+	TAB_BAR_BUTTON_APP_MODE_WALLETS,
+	TAB_BAR_BUTTON_APP_MODE_SETTINGS
+} tTabBarButton;
+
 // notifications
 
 #define NOTIFICATION_MAIN_RESET                         @"Main_Views_Reset"
@@ -52,8 +61,14 @@
 #define NOTIFICATION_TRANSACTION_DETAILS_EXITED         @"Notification_Transaction_Details_Exited"     // sent when the user has finished using a transaction details screen
 #define NOTIFICATION_LAUNCH_SEND_FOR_WALLET             @"Notification_Launch_Send_For_Wallet"
 #define NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET          @"Notification_Launch_Request_For_Wallet"
+#define NOTIFICATION_TAB_BAR_BUTTON_RESELECT            @"Notification_Tab_Bar_Button_Reselected"
+
+
 #define KEY_TX_DETAILS_EXITED_TX                        @"transaction"
 #define KEY_TX_DETAILS_EXITED_WALLET_UUID               @"walletUUID"
 #define KEY_TX_DETAILS_EXITED_WALLET_NAME               @"walletName"
 #define KEY_TX_DETAILS_EXITED_TX_ID                     @"transactionID"
+
+#define KEY_TAB_BAR_BUTTON_RESELECT_ID                  @"tabBarButtonID"
+
 #define KEY_URL                                         @"url"
