@@ -1764,7 +1764,7 @@ typedef enum eMapDisplayState
                 cell.textLabel.text = [self stringForObjectInCache: searchTermCache atIndex: indexPath.row]; //[searchTermCache objectAtIndex:indexPath.row];
                 cell.textLabel.textColor = [UIColor colorWithRed: 0.5020 green: 0.7647 blue: 0.2549 alpha: 1.0];
                 cell.textLabel.backgroundColor = [UIColor clearColor];
-            } else if (searchResultsArray.count)
+            } else if (searchResultsArray.count && searchResultsArray.count > indexPath.row)
             {
                 NSObject *object = [searchResultsArray objectAtIndex: indexPath.row - cacheSize];
                 if ([object isKindOfClass: [NSDictionary class]])
