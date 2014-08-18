@@ -177,7 +177,7 @@ typedef enum eRequestType
 
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
-    self.pickerTextCategory.textField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
+    self.pickerTextCategory.textField.returnKeyType = UIReturnKeyDone;
     self.notesTextView.returnKeyType = UIReturnKeyDone;
 
     // load all the names from the address book
@@ -1525,7 +1525,8 @@ typedef enum eRequestType
 
     if (!self.bOldTransaction)
     {
-        [self.notesTextView becomeFirstResponder];
+        // XX Don't go to notes. Feels like most users don't use notes most often
+//        [self.notesTextView becomeFirstResponder];
     }
 
     return YES;
@@ -1543,7 +1544,8 @@ typedef enum eRequestType
 
         if (!self.bOldTransaction)
         {
-            [self.notesTextView becomeFirstResponder];
+            // XX Don't go to notes. Feels like most users don't use notes most often
+//            [self.notesTextView becomeFirstResponder];
         }
     }
 }

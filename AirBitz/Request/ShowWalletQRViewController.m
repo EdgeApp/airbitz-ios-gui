@@ -699,7 +699,8 @@ typedef enum eAddressPickerType
         [strBody appendString:@"<br>\n"];
         [strBody appendFormat:@"<a href=\"%@\">", tempURI];
         [strBody appendString:NSLocalizedString(@"Click to Pay",nil)];
-        [strBody appendFormat:@"</a>"];
+        [strBody appendFormat:@"</a><br>"];
+        [strBody appendFormat:@"%@", tempURI];
         [strBody appendString:@"<br>\n"];
         [strBody appendString:@"<br>\n"];
         [strBody appendString:NSLocalizedString(@"Address: ",nil)];
@@ -707,7 +708,7 @@ typedef enum eAddressPickerType
         [strBody appendString:@"<br>\n"];
         [strBody appendString:@"<br>\n"];
         [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
-        [strBody appendFormat:@"%@", amount];
+        [strBody appendFormat:@"%@ BTC", amount];
         [strBody appendString:@"<br><br>\n"];
 
         UIImage *imageAttachment = [self imageWithImage:self.qrCodeImage scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
@@ -788,7 +789,7 @@ typedef enum eAddressPickerType
         [strBody appendString:@"\n"];
         [strBody appendString:@"\n"];
         [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
-        [strBody appendFormat:@"%@", amount];
+        [strBody appendFormat:@"%@ BTC", amount];
         [strBody appendString:@"\n"];
         [strBody appendString:@"\n"];
 
