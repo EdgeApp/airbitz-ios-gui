@@ -496,45 +496,50 @@
  */
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-	PeripheralContainer *pc = [[PeripheralContainer alloc] init];
-	pc.peripheral = peripheral;
-	pc.advertisingData = advertisementData;
-	pc.rssi = [RSSI copy];
-	pc.lastAdvertisingTime = [NSNumber numberWithDouble:CACurrentMediaTime()];
-	
-    if (!self.peripheralContainers)
+	//only interested in peripherals advertising TRANSFER_SERVICE_UUID
+	NSArray *array = [advertisementData objectForKey:CBAdvertisementDataServiceUUIDsKey];
+	CBUUID *uuid = [array objectAtIndex:0];
+	if([[uuid UUIDString] isEqualToString:TRANSFER_SERVICE_UUID])
 	{
-		self.peripheralContainers = [[NSMutableArray alloc] initWithObjects:pc, nil];
-	}
-    else
-	{
-		BOOL replacedExistingObject = NO;
+		PeripheralContainer *pc = [[PeripheralContainer alloc] init];
+		pc.peripheral = peripheral;
+		pc.advertisingData = advertisementData;
+		pc.rssi = [RSSI copy];
+		pc.lastAdvertisingTime = [NSNumber numberWithDouble:CACurrentMediaTime()];
 		
-        for(int i = 0; i < self.peripheralContainers.count; i++)
+		if (!self.peripheralContainers)
 		{
-            PeripheralContainer *container = [self.peripheralContainers objectAtIndex:i];
-            if ([self UUIDSAreEqual:container.peripheral.UUID u2:peripheral.UUID])
-			{
-                [self.peripheralContainers replaceObjectAtIndex:i withObject:pc];
-				// printf("Duplicate UUID found updating ...\r\n");
-				replacedExistingObject = YES;
-                break;
-            }
-        }
-		if(!replacedExistingObject)
-		{
-			[self.peripheralContainers addObject:pc];
+			self.peripheralContainers = [[NSMutableArray alloc] initWithObjects:pc, nil];
 		}
-		// printf("New UUID, adding\r\n");
+		else
+		{
+			BOOL replacedExistingObject = NO;
+			
+			for(int i = 0; i < self.peripheralContainers.count; i++)
+			{
+				PeripheralContainer *container = [self.peripheralContainers objectAtIndex:i];
+				if ([self UUIDSAreEqual:container.peripheral.UUID u2:peripheral.UUID])
+				{
+					[self.peripheralContainers replaceObjectAtIndex:i withObject:pc];
+					// printf("Duplicate UUID found updating ...\r\n");
+					replacedExistingObject = YES;
+					break;
+				}
+			}
+			if(!replacedExistingObject)
+			{
+				[self.peripheralContainers addObject:pc];
+			}
+			// printf("New UUID, adding\r\n");
+		}
+		
+		NSTimeInterval newUpdateTime = CACurrentMediaTime();
+		if((newUpdateTime - lastUpdateTime) > 0.5)
+		{
+			lastUpdateTime = newUpdateTime;
+			[self updateTable];
+		}
     }
-	
-	NSTimeInterval newUpdateTime = CACurrentMediaTime();
-	if((newUpdateTime - lastUpdateTime) > 0.5)
-	{
-		lastUpdateTime = newUpdateTime;
-		[self updateTable];
-	}
-    
     //NSLog(@"Discovered %@ at %@ with adv data: %@", peripheral.name, RSSI, advertisementData);
 }
 
