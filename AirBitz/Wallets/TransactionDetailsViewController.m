@@ -214,7 +214,7 @@ typedef enum eRequestType
     self.pickerTextCategory.delegate = self;
 
     _bizId = self.transaction.bizId;
-	//cw NSLog(@"Biz ID: %i", _bizId);
+	// NSLog(@"Biz ID: %i", _bizId);
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
@@ -374,7 +374,7 @@ typedef enum eRequestType
     self.transaction.strNotes = [self.notesTextView text];
     self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
     self.transaction.bizId = _bizId;
-	//cw NSLog(@"Biz ID: %i", _bizId);
+	//NSLog(@"Biz ID: %i", _bizId);
     [CoreBridge storeTransaction: self.transaction];
 
     [self exit];
@@ -556,7 +556,7 @@ typedef enum eRequestType
     {
         _bizId = [numBizId intValue];
     }
-	//cw NSLog(@"Biz ID: %i", _bizId);
+	//NSLog(@"Biz ID: %i", _bizId);
 }
 
 - (void)generateListOfNearBusinesses

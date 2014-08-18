@@ -377,6 +377,7 @@ static NSTimer *_dataSyncTimer;
     }
     transaction.outputs = outputs;
     transaction.bizId = pTrans->pDetails->bizId;
+	//cw NSLog(@"************ Transaction Biz ID: %i", transaction.bizId);
 }
 
 + (unsigned int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId isSyncing:(bool *)syncing
