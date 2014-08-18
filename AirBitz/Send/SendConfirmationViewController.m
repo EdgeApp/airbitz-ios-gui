@@ -605,7 +605,7 @@
 			self.amountToSendSatoshi = satoshi;
             self.amountBTCTextField.text = [CoreBridge formatSatoshi:satoshi
                                                           withSymbol:false
-                                                    overrideDecimals:[CoreBridge currencyDecimalPlaces]];
+                                                    cropDecimals:[CoreBridge currencyDecimalPlaces]];
 		}
 	}
     [self startCalcFees];

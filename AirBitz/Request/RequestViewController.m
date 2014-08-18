@@ -481,7 +481,7 @@
                                   currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
             self.BTC_TextField.text = [CoreBridge formatSatoshi:satoshi
                                                      withSymbol:false
-                                               overrideDecimals:[CoreBridge currencyDecimalPlaces]];
+                                               cropDecimals:[CoreBridge currencyDecimalPlaces]];
 	}
 }
 

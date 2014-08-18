@@ -588,16 +588,41 @@ static NSTimer *_dataSyncTimer;
 
 + (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol
 {
-    return [CoreBridge formatSatoshi:amount withSymbol:symbol overrideDecimals:-1];
+    return [CoreBridge formatSatoshi:amount withSymbol:symbol cropDecimals:-1];
 }
 
-+ (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol overrideDecimals:(int) decimals
++ (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol forceDecimals:(int) forcedecimals
+{
+    return [CoreBridge formatSatoshi:amount withSymbol:symbol cropDecimals:-1 forceDecimals:forcedecimals];
+}
+
++ (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol cropDecimals:(int) decimals
+{
+    return [CoreBridge formatSatoshi:amount withSymbol:symbol cropDecimals:decimals forceDecimals:-1];
+}
+
+/** 
+ * formatSatoshi 
+ *  
+ * forceDecimals specifies the number of decimals to shift to 
+ * the left when converting from satoshi to BTC/mBTC/uBTC etc. 
+ * ie. for BTC decimals = 8 
+ *  
+ * formatSatoshi will use the settings by default if 
+ * forceDecimals is not supplied 
+ *  
+ * cropDecimals will crop the maximum number of digits to the 
+ * right of the decimal. cropDecimals = 3 will make 
+ * "1234.12345" -> "1234.123"
+ *  
+**/
+
++ (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol cropDecimals:(int) decimals forceDecimals:(int) forcedecimals
 {
     tABC_Error error;
     char *pFormatted = NULL;
-    int decimalPlaces;
+    int decimalPlaces = forcedecimals > -1 ? forcedecimals : [self maxDecimalPlaces];
     bool negative = amount < 0;
-    decimalPlaces = decimals > -1 ? decimals : [self maxDecimalPlaces];
     amount = llabs(amount);
     if (ABC_FormatAmount(amount, &pFormatted, decimalPlaces, &error) != ABC_CC_Ok)
     {
@@ -605,6 +630,7 @@ static NSTimer *_dataSyncTimer;
     }
     else
     {
+        decimalPlaces = decimals > -1 ? decimals : decimalPlaces;
         NSMutableString *formatted = [[NSMutableString alloc] init];
         if (negative)
             [formatted appendString: @"-"];

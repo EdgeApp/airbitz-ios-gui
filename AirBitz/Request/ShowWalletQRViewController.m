@@ -670,7 +670,7 @@ typedef enum eAddressPickerType
         NSMutableString *strBody = [[NSMutableString alloc] init];
         NSString *amount = [CoreBridge formatSatoshi:self.amountSatoshi
                                           withSymbol:false
-                                    overrideDecimals:8];
+                                    forceDecimals:8];
         // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
         NSString *tempURI = self.uriString;
@@ -755,7 +755,7 @@ typedef enum eAddressPickerType
         NSMutableString *strBody = [[NSMutableString alloc] init];
         NSString *amount = [CoreBridge formatSatoshi:self.amountSatoshi
                                           withSymbol:false
-                                    overrideDecimals:8];
+                                    forceDecimals:8];
         // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
         NSString *tempURI = self.uriString;
