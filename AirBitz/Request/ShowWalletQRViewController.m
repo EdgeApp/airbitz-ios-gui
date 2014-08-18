@@ -351,8 +351,39 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 			address = self.addressString;
 		}
 		
+		tABC_AccountSettings            *pAccountSettings;
+		tABC_Error Error;
+		Error.code = ABC_CC_Ok;
+		
+		// load the current account settings
+		pAccountSettings = NULL;
+		ABC_LoadAccountSettings([[User Singleton].name UTF8String],
+								[[User Singleton].password UTF8String],
+								&pAccountSettings,
+								&Error);
+		[Util printABC_Error:&Error];
+		
+		BOOL sendName = NO;
+		if (pAccountSettings)
+		{
+			if(pAccountSettings->bNameOnPayments)
+			{
+				sendName = YES;
+			}
+			ABC_FreeAccountSettings(pAccountSettings);
+		}
+		
+		NSString *name;
+		if(sendName)
+		{
+			name = [User Singleton].fullName ;
+		}
+		else
+		{
+			name = @" ";
+		}
 		//broadcast first 10 digits of bitcoin address followed by full name (up to 28 bytes total)
-		[self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]], CBAdvertisementDataLocalNameKey : [NSString stringWithFormat:@"%@%@", address, [User Singleton].fullName]}];
+		[self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]], CBAdvertisementDataLocalNameKey : [NSString stringWithFormat:@"%@%@", address, name]}];
 		self.BLE_LogoImageView.hidden = NO;
 	}
 	else
