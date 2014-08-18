@@ -420,6 +420,7 @@
 		if (nCount)
 		{
 			tABC_TxDetails Details;
+            memset(&Details, 0, sizeof(tABC_TxDetails));
 			Details.amountSatoshi = self.amountToSendSatoshi;
 			Details.amountCurrency = currency;
             // These will be calculated for us

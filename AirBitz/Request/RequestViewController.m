@@ -46,7 +46,7 @@
 	int                         _selectedWalletIndex;
 	ShowWalletQRViewController  *_qrViewController;
     ImportWalletViewController  *_importWalletViewController;
-    tABC_TxDetails              details;
+    tABC_TxDetails              _details;
     NSString                    *requestID;
 }
 
@@ -83,8 +83,6 @@
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:nil];
-
-
 
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
@@ -229,25 +227,28 @@
 	tABC_Error error;
 
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+
 	//first need to create a transaction details struct
-    details.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
+    memset(&_details, 0, sizeof(tABC_TxDetails));
+
+    _details.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
 	
 	//the true fee values will be set by the core
-	details.amountFeesAirbitzSatoshi = 0;
-	details.amountFeesMinersSatoshi = 0;
+	_details.amountFeesAirbitzSatoshi = 0;
+	_details.amountFeesMinersSatoshi = 0;
 	
 	result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                   details.amountSatoshi, &currency, wallet.currencyNum, &error);
+                                   _details.amountSatoshi, &currency, wallet.currencyNum, &error);
 	if (result == ABC_CC_Ok)
 	{
-		details.amountCurrency = currency;
+		_details.amountCurrency = currency;
 	}
 
-    details.szName = (char *) [strName UTF8String];
-    details.szNotes = (char *) [strNotes UTF8String];
-	details.szCategory = "";
-	details.attributes = 0x0; //for our own use (not used by the core)
-    details.bizId = 0;
+    _details.szName = (char *) [strName UTF8String];
+    _details.szNotes = (char *) [strNotes UTF8String];
+	_details.szCategory = "";
+	_details.attributes = 0x0; //for our own use (not used by the core)
+    _details.bizId = 0;
 
 	char *pRequestID;
 
@@ -255,7 +256,7 @@
 	result = ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
                                       [[User Singleton].password UTF8String],
                                       [wallet.strUUID UTF8String],
-                                      &details,
+                                      &_details,
                                       &pRequestID,
                                       &error);
 
@@ -334,7 +335,7 @@
     _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
     _qrViewController.requestID = requestID;
     _qrViewController.walletUUID = wallet.strUUID;
-    _qrViewController.txDetails = details;
+    _qrViewController.txDetails = _details;
     _qrViewController.currencyNum = wallet.currencyNum;
 	//CGRect frame = self.view.bounds;
 	//_qrViewController.view.frame = frame;
