@@ -153,12 +153,13 @@ typedef enum eAddressPickerType
 	self.connectedPhoto.layer.cornerRadius = 8.0;
 	self.connectedPhoto.layer.masksToBounds = YES;
 
-    // add left to right swipe detection for going back
-    [self installLeftToRightSwipeDetection];
-	
 	 self.arrayContacts = @[];
 	// load all the names from the address book
     [self generateListOfContactNames];
+
+    // add left to right swipe detection for going back
+    [self installLeftToRightSwipeDetection];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -698,7 +699,8 @@ typedef enum eAddressPickerType
         [strBody appendString:@"<br>\n"];
         [strBody appendFormat:@"<a href=\"%@\">", tempURI];
         [strBody appendString:NSLocalizedString(@"Click to Pay",nil)];
-        [strBody appendFormat:@"</a>"];
+        [strBody appendFormat:@"</a><br>"];
+        [strBody appendFormat:@"%@", tempURI];
         [strBody appendString:@"<br>\n"];
         [strBody appendString:@"<br>\n"];
         [strBody appendString:NSLocalizedString(@"Address: ",nil)];
@@ -706,7 +708,7 @@ typedef enum eAddressPickerType
         [strBody appendString:@"<br>\n"];
         [strBody appendString:@"<br>\n"];
         [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
-        [strBody appendFormat:@"%@", amount];
+        [strBody appendFormat:@"%@ BTC", amount];
         [strBody appendString:@"<br><br>\n"];
 
         UIImage *imageAttachment = [self imageWithImage:self.qrCodeImage scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
@@ -787,7 +789,7 @@ typedef enum eAddressPickerType
         [strBody appendString:@"\n"];
         [strBody appendString:@"\n"];
         [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
-        [strBody appendFormat:@"%@", amount];
+        [strBody appendFormat:@"%@ BTC", amount];
         [strBody appendString:@"\n"];
         [strBody appendString:@"\n"];
 
@@ -1155,6 +1157,17 @@ typedef enum eAddressPickerType
 #pragma mark - GestureReconizer methods
 
 - (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        [self Back];
+    }
+}
+
+#pragma mark - Custom Notification Handlers
+
+// called when a tab bar button that is already selected, is reselected again
+- (void)tabBarButtonReselect:(NSNotification *)notification
 {
     if (![self haveSubViewsShowing])
     {

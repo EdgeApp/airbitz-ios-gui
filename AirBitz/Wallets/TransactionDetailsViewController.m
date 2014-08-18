@@ -177,7 +177,7 @@ typedef enum eRequestType
 
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
-    self.pickerTextCategory.textField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
+    self.pickerTextCategory.textField.returnKeyType = UIReturnKeyDone;
     self.notesTextView.returnKeyType = UIReturnKeyDone;
 
     // load all the names from the address book
@@ -247,6 +247,7 @@ typedef enum eRequestType
     
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -1524,7 +1525,8 @@ typedef enum eRequestType
 
     if (!self.bOldTransaction)
     {
-        [self.notesTextView becomeFirstResponder];
+        // XX Don't go to notes. Feels like most users don't use notes most often
+//        [self.notesTextView becomeFirstResponder];
     }
 
     return YES;
@@ -1542,7 +1544,8 @@ typedef enum eRequestType
 
         if (!self.bOldTransaction)
         {
-            [self.notesTextView becomeFirstResponder];
+            // XX Don't go to notes. Feels like most users don't use notes most often
+//            [self.notesTextView becomeFirstResponder];
         }
     }
 }
@@ -1613,6 +1616,20 @@ typedef enum eRequestType
 #pragma mark - GestureReconizer methods
 
 - (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (![self haveSubViewsShowing])
+    {
+        if (!self.buttonBack.hidden)
+        {
+            [self Done];
+        }
+    }
+}
+
+#pragma mark - Custom Notification Handlers
+
+// called when a tab bar button that is already selected, is reselected again
+- (void)tabBarButtonReselect:(NSNotification *)notification
 {
     if (![self haveSubViewsShowing])
     {

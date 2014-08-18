@@ -28,11 +28,11 @@ id mainId;
 
 typedef enum eAppMode
 {
-	APP_MODE_DIRECTORY,
-	APP_MODE_REQUEST,
-	APP_MODE_SEND,
-	APP_MODE_WALLETS,
-	APP_MODE_SETTINGS
+	APP_MODE_DIRECTORY = TAB_BAR_BUTTON_DIRECTORY,
+	APP_MODE_REQUEST = TAB_BAR_BUTTON_APP_MODE_REQUEST,
+	APP_MODE_SEND = TAB_BAR_BUTTON_APP_MODE_SEND,
+	APP_MODE_WALLETS = TAB_BAR_BUTTON_APP_MODE_WALLETS,
+	APP_MODE_SETTINGS = TAB_BAR_BUTTON_APP_MODE_SETTINGS
 } tAppMode;
 
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
@@ -408,17 +408,27 @@ typedef enum eAppMode
 
 #pragma mark - TabBarView delegates
 
--(void)tabVarView:(TabBarView *)view selectedSubview:(UIView *)subview
+-(void)tabVarView:(TabBarView *)view selectedSubview:(UIView *)subview reselected:(BOOL)bReselected
 {
 	//NSLog(@"Selecting view %i", (int) subview.tag);
+    tTabBarButton tabBarButton = (tTabBarButton) (subview.tag);
 	_appMode = (tAppMode)(subview.tag);
 
-	[self launchViewControllerBasedOnAppMode]; //will show login if necessary
-	[self updateChildViewSizeForTabBar];
+    if (bReselected)
+    {
+        NSDictionary *dictNotification = @{ KEY_TAB_BAR_BUTTON_RESELECT_ID : [NSNumber numberWithInt:tabBarButton] };
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:self userInfo:dictNotification];
+        //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\Tab Bar Button tapped while already selected\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎");
+    }
+    else
+    {
+        [self launchViewControllerBasedOnAppMode]; //will show login if necessary
+        [self updateChildViewSizeForTabBar];
 
-    // reset any data designed to drive the selection
-    _strWalletUUID = nil;
-    _strTxID = nil;
+        // reset any data designed to drive the selection
+        _strWalletUUID = nil;
+        _strTxID = nil;
+    }
 }
 
 #pragma mark - RequestViewControllerDelegates

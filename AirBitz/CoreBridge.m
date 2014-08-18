@@ -595,8 +595,9 @@ static NSTimer *_dataSyncTimer;
 {
     tABC_Error error;
     char *pFormatted = NULL;
-    int decimalPlaces = [self maxDecimalPlaces];
+    int decimalPlaces;
     bool negative = amount < 0;
+    decimalPlaces = decimals > -1 ? decimals : [self maxDecimalPlaces];
     amount = llabs(amount);
     if (ABC_FormatAmount(amount, &pFormatted, decimalPlaces, &error) != ABC_CC_Ok)
     {
@@ -604,7 +605,6 @@ static NSTimer *_dataSyncTimer;
     }
     else
     {
-        decimalPlaces = decimals > -1 ? decimals : decimalPlaces;
         NSMutableString *formatted = [[NSMutableString alloc] init];
         if (negative)
             [formatted appendString: @"-"];

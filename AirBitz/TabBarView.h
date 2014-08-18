@@ -23,5 +23,5 @@
 @required
 
 @optional
-	-(void)tabVarView:(TabBarView *)view selectedSubview:(UIView *)subview;
+- (void)tabVarView:(TabBarView *)view selectedSubview:(UIView *)subview reselected:(BOOL)bReselected;
 @end
