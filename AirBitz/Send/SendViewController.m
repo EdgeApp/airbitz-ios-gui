@@ -245,6 +245,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
 {
+#if !TARGET_IPHONE_SIMULATOR
 	//NSLog(@"&&&&&&&&&&& APP BECAME ACTIVE &&&&&&&&&&&&&");
 	if(scanMode == SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND)
 	{
@@ -252,6 +253,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		scanMode = SCAN_MODE_QR;
 		[self startQRReader];
 	}
+#endif
 }
 
 - (void)resetViews
