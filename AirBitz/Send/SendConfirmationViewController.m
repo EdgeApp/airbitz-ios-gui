@@ -245,13 +245,13 @@
 
 - (IBAction)selectMaxAmount
 {
-    UITextField *_holder = _selectedTextField;
     if (self.wallet != nil && _maxLocked == NO)
     {
         _maxLocked = YES;
         _selectedTextField = self.amountBTCTextField;
+
         // We use a serial queue for this calculation
-        [CoreBridge postToSyncQueue:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             int64_t maxAmount = [CoreBridge maxSpendable:self.wallet.strUUID
                                                toAddress:[self getDestAddress]
                                               isTransfer:self.bAddressIsWalletUUID];
@@ -262,9 +262,10 @@
                 self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
 
                 [self updateTextFieldContents];
-                _selectedTextField = _holder;
+                _selectedTextField = self.withdrawlPIN;
+                [self.withdrawlPIN becomeFirstResponder];
             });
-        }];
+        });
     }
 }
 
@@ -594,7 +595,7 @@
 			self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
 	}
-	else if (_selectedTextField == self.amountUSDTextField)
+	else
 	{
         currency = [self.amountUSDTextField.text doubleValue];
 		if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
