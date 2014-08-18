@@ -51,6 +51,15 @@
 #define POPUP_PICKER_LOWEST_POINT   360
 #define POPUP_PICKER_TABLE_HEIGHT   (IS_IPHONE5 ? 180 : 90)
 
+typedef enum eScanMode
+{
+	SCAN_MODE_UNINITIALIZED,
+	SCAN_MODE_BLE,
+	SCAN_MODE_QR,
+	SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND
+}tScanMode;
+
+static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, PickerTextViewDelegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
 #if !TARGET_IPHONE_SIMULATOR
@@ -69,7 +78,7 @@
 	SyncView                        *_syncingView;
 	NSTimeInterval					lastUpdateTime;	//used to remove BLE devices from table when they're no longer around
 	NSTimer							*peripheralCleanupTimer; //used to remove BLE devices from table when they're no longer around
-	BOOL							inBLEMode;
+	tScanMode						scanMode;
 	float							originalFrameHeight;
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
@@ -152,11 +161,6 @@
 
     _selectedWalletIndex = 0;
 	
-	//if([LocalSettings controller].bDisableBLE == NO)
-	{
-		// Start up the CBCentralManager
-		//_centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-    }
     // And somewhere to store the incoming data
     _data = [[NSMutableData alloc] init];
 	
@@ -171,7 +175,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	inBLEMode = NO;
+	scanMode = SCAN_MODE_UNINITIALIZED;
 	[self loadWalletInfo];
 	[self syncTest];
 	
@@ -182,16 +186,20 @@
 	
 	if([LocalSettings controller].bDisableBLE == NO)
 	{
-		// Start up the CBCentralManager
-		_centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-		[self enableBLEMode];
-		self.ble_button.hidden = NO;
+		// Start up the CBCentralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
+		 NSTimeInterval curTime = CACurrentMediaTime();
+		 if((curTime - lastCentralBLEPowerOffNotificationTime) > 86400.0) //24 hours
+		 {
+			 _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
+		 }
+		 else
+		 {
+			 _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(NO)}];
+		 }
+		lastCentralBLEPowerOffNotificationTime = curTime;
     }
 	else
 	{
-		self.bleView.hidden = YES;
-		self.qrView.hidden = NO;
-		inBLEMode = YES; //so we'll switch to QR when timer fires
 		self.ble_button.hidden = YES;
 	}
 	
@@ -199,6 +207,12 @@
 	CGRect frame = self.view.frame;
 	frame.size.height = originalFrameHeight;
 	self.view.frame = frame;
+	
+	[[NSNotificationCenter defaultCenter]
+	 addObserver:self
+	 selector:@selector(applicationDidBecomeActiveNotification:)
+	 name:UIApplicationDidBecomeActiveNotification
+	 object:[UIApplication sharedApplication]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -216,13 +230,28 @@
 		[self stopBLE];
 		_centralManager = nil;
 	}
+	scanMode = SCAN_MODE_UNINITIALIZED;
     //NSLog(@"Scanning stopped");
+	
+	//remove our app did become active notification listener
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
+{
+	//NSLog(@"&&&&&&&&&&& APP BECAME ACTIVE &&&&&&&&&&&&&");
+	if(scanMode == SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND)
+	{
+		//NSLog(@"&&&&&&&&&&&&& STARTING QR READER &&&&&&&&&&&&&&&&");
+		scanMode = SCAN_MODE_QR;
+		[self startQRReader];
+	}
 }
 
 - (void)resetViews
@@ -259,9 +288,9 @@
 
 -(void)enableBLEMode
 {
-	if(inBLEMode == NO)
+	if(scanMode != SCAN_MODE_BLE)
 	{
-		inBLEMode = YES;
+		scanMode = SCAN_MODE_BLE;
 		self.bleView.hidden = NO;
 		self.qrView.hidden = YES;
 #if !TARGET_IPHONE_SIMULATOR
@@ -273,18 +302,28 @@
 
 -(void)enableQRMode
 {
-	if(inBLEMode == YES)
+	if(scanMode != SCAN_MODE_QR)
 	{
-		inBLEMode = NO;
+		scanMode = SCAN_MODE_QR;
+		self.bleView.hidden = YES;
+		self.qrView.hidden = NO;
 		//turns on QR code scanner.  Disables BLE
 		[self stopBLE];
 
 #if !TARGET_IPHONE_SIMULATOR
-		[self startQRReader];
+		if([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive)
+		{
+			//NSLog(@" ^^^^^^^^^^^^^^^^ SPECIAL SCAN MODE.  WAIT UNTIL IN FOREGROUND ^^^^^^^^^^^^^^^^");
+			scanMode = SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND;
+		}
+		else
+		{
+			//NSLog(@" ^^^^^^^^^^^^^^^^ NORMAL SCAN MODE.  START QR NOW ^^^^^^^^^^^^^^^^");
+			[self startQRReader];
+		}
 #endif
 		
-		self.bleView.hidden = YES;
-		self.qrView.hidden = NO;
+		
 	}
 }
 
@@ -306,6 +345,7 @@
 	}
 	[_readerView start];
 	[self flashItemSelected:FLASH_ITEM_OFF];
+	//NSLog(@"################## QR READER STARTED ######################");
 }
 
 - (void)stopQRReader
@@ -315,6 +355,7 @@
         [_readerView stop];
         [_readerView removeFromSuperview];
         _readerView = nil;
+		//NSLog(@"################## QR READER STOPPED ######################");
     }
 }
 
@@ -423,6 +464,7 @@
 
 -(void)startBLE
 {
+	//NSLog(@"################## STARTED BLE ######################");
 	[self scan];
 	//kick off peripheral cleanup timer (removes peripherals from table when they're no longer in range)
 	peripheralCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(cleanupPeripherals:) userInfo:nil repeats:YES];
@@ -430,6 +472,7 @@
 
 -(void)stopBLE
 {
+	//NSLog(@"################## STOPPED BLE ######################");
 	[self.centralManager stopScan];
 	//NSLog(@"Getting rid of timer");
 	[peripheralCleanupTimer invalidate];
@@ -442,17 +485,20 @@
  */
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
+	//NSLog(@"DID UPDATE STATE");
+
     if (central.state != CBCentralManagerStatePoweredOn)
 	{
-        // In a real app, you'd deal with all the states correctly
-        return;
+		self.ble_button.hidden = YES;
+		[self enableQRMode];
     }
-    
-    // The state must be CBCentralManagerStatePoweredOn...
-	
-    // ... so start scanning
-    [self scan];
-    
+	else
+	{
+		NSLog(@"POWERED ON");
+
+		[self enableBLEMode];
+		self.ble_button.hidden = NO;
+    }
 }
 
 
@@ -460,6 +506,7 @@
  */
 - (void)scan
 {
+	//NSLog(@"################## BLE SCAN STARTED ######################");
 	self.peripheralContainers = nil;
     //[self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]] options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
 	[self.centralManager scanForPeripheralsWithServices:nil options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
@@ -1126,6 +1173,7 @@
 - (void)startCameraScanner:(NSTimer *)timer
 {
 	//will only switch to QR mode if there are no found BLE devices
+	//NSLog(@"################## SCAN TIMER FIRED ######################");
 	if(self.peripheralContainers.count == 0)
 	{
 		[self enableQRMode];

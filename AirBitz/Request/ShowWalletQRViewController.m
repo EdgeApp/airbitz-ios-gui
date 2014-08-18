@@ -56,6 +56,8 @@ typedef enum eAddressPickerType
     AddressPickerType_EMail
 } tAddressPickerType;
 
+static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
+
 @interface ShowWalletQRViewController () <ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, CBPeripheralManagerDelegate, RecipientViewControllerDelegate, UIGestureRecognizerDelegate>
 {
     tAddressPickerType          _addressPickerType;
@@ -145,8 +147,17 @@ typedef enum eAddressPickerType
 	}
 	else
 	{
-		// Start up the CBPeripheralManager
-		_peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+		// Start up the CBPeripheralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
+		NSTimeInterval curTime = CACurrentMediaTime();
+		if((curTime - lastPeripheralBLEPowerOffNotificationTime) > 86400.0) //24 hours
+		{
+			_peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(YES)}];
+		}
+		else
+		{
+			_peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(NO)}];
+		}
+		lastPeripheralBLEPowerOffNotificationTime = curTime;
 	}
 	
 	self.connectedView.alpha = 0.0;
@@ -302,66 +313,53 @@ typedef enum eAddressPickerType
  */
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
-	switch(peripheral.state)
+	if(peripheral.state == CBPeripheralManagerStatePoweredOn)
 	{
-		case CBPeripheralManagerStatePoweredOn:
+
+		// We're in CBPeripheralManagerStatePoweredOn state...
+		//NSLog(@"self.peripheralManager powered on.");
+		
+		// ... so build our service.
+		
+		// Start with the CBMutableCharacteristic
+		self.bitcoinURICharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]
+																		 properties:CBCharacteristicPropertyRead | CBCharacteristicPropertyWrite
+																			  value:nil
+																		permissions:CBAttributePermissionsReadable | CBAttributePermissionsWriteable];
+											
+											
+		// Then the service
+		CBMutableService *transferService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]
+																		   primary:YES];
+		
+		// Add the characteristic to the service
+		transferService.characteristics = @[self.bitcoinURICharacteristic];
+		
+		// And add it to the peripheral manager
+		[self.peripheralManager addService:transferService];
+		
+		//now start advertising (UUID and username)
+		
+		//make 10-character address
+		NSString *address;
+		if(self.addressString.length >= 10)
 		{
-			// We're in CBPeripheralManagerStatePoweredOn state...
-			//NSLog(@"self.peripheralManager powered on.");
-			
-			// ... so build our service.
-			
-			// Start with the CBMutableCharacteristic
-			self.bitcoinURICharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]
-																			 properties:CBCharacteristicPropertyRead | CBCharacteristicPropertyWrite
-																				  value:nil
-																			permissions:CBAttributePermissionsReadable | CBAttributePermissionsWriteable];
-												
-												
-			// Then the service
-			CBMutableService *transferService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]
-																			   primary:YES];
-			
-			// Add the characteristic to the service
-			transferService.characteristics = @[self.bitcoinURICharacteristic];
-			
-			// And add it to the peripheral manager
-			[self.peripheralManager addService:transferService];
-			
-			//now start advertising (UUID and username)
-			
-			//make 10-character address
-			NSString *address;
-			if(self.addressString.length >= 10)
-			{
-				address = [self.addressString substringToIndex:10];
-			}
-			else
-			{
-				address = self.addressString;
-			}
-			
-			//broadcast first 10 digits of bitcoin address followed by full name (up to 28 bytes total)
-			[self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]], CBAdvertisementDataLocalNameKey : [NSString stringWithFormat:@"%@%@", address, [User Singleton].fullName]}];
-						
-			break;
+			address = [self.addressString substringToIndex:10];
 		}
-		case CBPeripheralManagerStateUnknown:
-			NSLog(@"Unknown peripheral state");
-			break;
-		case CBPeripheralManagerStateResetting:
-			NSLog(@"Peripheral state resetting");
-			break;
-		case CBPeripheralManagerStateUnsupported:
-			NSLog(@"Peripheral state unsupported");
-			break;
-		case CBPeripheralManagerStateUnauthorized:
-			NSLog(@"Peripheral state unauthorized");
-			break;
-		case CBPeripheralManagerStatePoweredOff:
-			NSLog(@"Peripheral state powered off");
-			break;
+		else
+		{
+			address = self.addressString;
+		}
+		
+		//broadcast first 10 digits of bitcoin address followed by full name (up to 28 bytes total)
+		[self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]], CBAdvertisementDataLocalNameKey : [NSString stringWithFormat:@"%@%@", address, [User Singleton].fullName]}];
+		self.BLE_LogoImageView.hidden = NO;
 	}
+	else
+	{
+		self.BLE_LogoImageView.hidden = YES;
+	}
+
 }
 
 
