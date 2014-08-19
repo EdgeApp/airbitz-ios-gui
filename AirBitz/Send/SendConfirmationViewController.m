@@ -208,7 +208,11 @@
 
 - (void)exchangeRateUpdate: (NSNotification *)notification
 {
-	[self updateTextFieldContents];
+    // only update if on the BTC field
+    if (_selectedTextField == self.amountBTCTextField)
+    {
+        [self updateTextFieldContents];
+    }
 }
 
 #pragma mark - Actions Methods
@@ -262,7 +266,6 @@
                 self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
 
                 [self updateTextFieldContents];
-                _selectedTextField = self.withdrawlPIN;
                 [self.withdrawlPIN becomeFirstResponder];
             });
         });
@@ -596,7 +599,7 @@
 			self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
 	}
-	else
+	else if (_selectedTextField == self.amountUSDTextField.text)
 	{
         currency = [self.amountUSDTextField.text doubleValue];
 		if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
