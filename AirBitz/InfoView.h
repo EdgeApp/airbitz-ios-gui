@@ -16,9 +16,10 @@
 @property (nonatomic, strong) NSString *htmlInfoToDisplay;
 
 + (InfoView *)CreateWithDelegate:(id<InfoViewDelegate>)delegate;
-+ (void)CreateWithHTML:(NSString *)strHTML forView:(UIView *)theView;
++ (InfoView *)CreateWithHTML:(NSString *)strHTML forView:(UIView *)theView;
 
 -(void)enableScrolling:(BOOL)scrollEnabled;
+-(void)dismiss;
 
 @end
 

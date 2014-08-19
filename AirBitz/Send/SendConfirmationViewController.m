@@ -18,7 +18,7 @@
 #import "Util.h"
 #import "CommonTypes.h"
 
-@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
 {
 	ConfirmationSliderView              *_confirmationSlider;
 	UITextField                         *_selectedTextField;
@@ -58,6 +58,7 @@
 
 @property (nonatomic, strong) SendStatusViewController          *sendStatusController;
 @property (nonatomic, strong) TransactionDetailsViewController  *transactionDetailsController;
+@property (nonatomic, strong) InfoView                          *infoView;
 
 @end
 
@@ -121,6 +122,7 @@
 {
     [super viewWillDisappear:animated];
     [self.view removeGestureRecognizer:tap];
+    [self.infoView dismiss];
     [self dismissKeyboard];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -223,9 +225,10 @@
 
 - (IBAction)info
 {
-	[self.view endEditing:YES];
+    [self.view endEditing:YES];
     [self dismissKeyboard];
-    [InfoView CreateWithHTML:@"infoSendConfirmation" forView:self.view];
+    [self setInfoView:[InfoView CreateWithHTML:@"infoSendConfirmation" forView:self.view]];
+    [self.infoView setDelegate:self];
 }
 
 - (IBAction)Back:(id)sender
@@ -741,6 +744,14 @@
 - (BOOL)haveSubViewsShowing
 {
     return (self.sendStatusController != nil || self.transactionDetailsController != nil);
+}
+
+#pragma mark infoView Delegates
+
+- (void)InfoViewFinished:(InfoView *)infoView
+{
+    [infoView removeFromSuperview];
+    self.infoView = nil;
 }
 
 

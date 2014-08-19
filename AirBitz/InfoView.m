@@ -37,7 +37,7 @@
 	return iv;
 }
 
-+ (void)CreateWithHTML:(NSString *)strHTML forView:(UIView *)theView
++ (InfoView *)CreateWithHTML:(NSString *)strHTML forView:(UIView *)theView
 {
 	InfoView *iv;
 
@@ -57,6 +57,7 @@
 	NSString* path = [[NSBundle mainBundle] pathForResource:strHTML ofType:@"html"];
 	iv.htmlInfoToDisplay = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
     [theView addSubview:iv];
+	return iv;
 }
 
 - (void) initMyVariables
@@ -147,22 +148,28 @@
 	 }
 	 completion:^(BOOL finished)
 	 {
-         BOOL bExitHandled = NO;
-         if (self.delegate)
-         {
-             if ([self.delegate respondsToSelector:@selector(InfoViewFinished:)])
-             {
-                  [self.delegate InfoViewFinished:self];
-                 bExitHandled = YES;
-             }
-         }
-
-         if (!bExitHandled)
-         {
-             [self removeFromSuperview];
-         }
+         [self dismiss];
 	 }];
 }
+
+-(void)dismiss
+{
+     BOOL bExitHandled = NO;
+     if (self.delegate)
+     {
+         if ([self.delegate respondsToSelector:@selector(InfoViewFinished:)])
+         {
+             [self.delegate InfoViewFinished:self];
+             bExitHandled = YES;
+         }
+     }
+     
+     if (!bExitHandled)
+     {
+         [self removeFromSuperview];
+     }
+}
+
 
 -(void)DarkenViewTapped:(DarkenView *)view
 {
