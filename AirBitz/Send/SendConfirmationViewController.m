@@ -8,6 +8,7 @@
 
 #import "SendConfirmationViewController.h"
 #import "ABC.h"
+#import "InfoView.h"
 #import "ConfirmationSliderView.h"
 #import "User.h"
 #import "CalculatorView.h"
@@ -219,6 +220,13 @@
 }
 
 #pragma mark - Actions Methods
+
+- (IBAction)info
+{
+	[self.view endEditing:YES];
+    [self dismissKeyboard];
+    [InfoView CreateWithHTML:@"infoSendConfirmation" forView:self.view];
+}
 
 - (IBAction)Back:(id)sender
 {
