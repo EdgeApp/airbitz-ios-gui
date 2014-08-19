@@ -599,7 +599,7 @@
 			self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
 	}
-	else if (_selectedTextField == self.amountUSDTextField.text)
+	else if (_selectedTextField == self.amountUSDTextField)
 	{
         currency = [self.amountUSDTextField.text doubleValue];
 		if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
