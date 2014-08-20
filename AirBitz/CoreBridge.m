@@ -23,8 +23,8 @@
 
 static BOOL bInitialized = NO;
 static dispatch_queue_t watcherQueue;
-static dispatch_queue_t exchangeQueue;
-static dispatch_queue_t dataQueue;
+static NSOperationQueue *exchangeQueue;
+static NSOperationQueue *dataQueue;
 static NSMutableDictionary *watchers;
 
 @interface CoreBridge ()
@@ -50,8 +50,10 @@ static NSTimer *_dataSyncTimer;
     if (NO == bInitialized)
     {
         watcherQueue = dispatch_queue_create("co.airbitz.ios.Watcherqueue", NULL);
-        exchangeQueue = dispatch_queue_create("co.airbitz.ios.ExchangeQueue", NULL);
-        dataQueue = dispatch_queue_create("co.airbitz.ios.DataQueue", NULL);
+        exchangeQueue = [[NSOperationQueue alloc] init];
+        [exchangeQueue setMaxConcurrentOperationCount:1];
+        dataQueue = [[NSOperationQueue alloc] init];
+        [dataQueue setMaxConcurrentOperationCount:1];
         bInitialized = YES;
     }
 }
@@ -101,11 +103,15 @@ static NSTimer *_dataSyncTimer;
         [_dataSyncTimer invalidate];
         _dataSyncTimer = nil;
     }
+    if (dataQueue)
+    {
+        [dataQueue cancelAllOperations];
+    }
 }
 
 + (void)postToSyncQueue:(void(^)(void))cb;
 {
-    dispatch_async(dataQueue, cb);
+    [dataQueue addOperationWithBlock:cb];
 }
 
 + (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs
@@ -941,9 +947,9 @@ static NSTimer *_dataSyncTimer;
 
 + (void)requestExchangeRateUpdate:(NSTimer *)object
 {
-    dispatch_async(exchangeQueue, ^{
+    [exchangeQueue addOperationWithBlock:^{
         [CoreBridge requestExchangeUpdateBlocking];
-    });
+    }];
 }
 
 + (void)requestExchangeUpdateBlocking
@@ -978,9 +984,9 @@ static NSTimer *_dataSyncTimer;
 
 + (void)requestSyncData:(NSTimer *)object
 {
-    dispatch_async(dataQueue, ^{
+    [dataQueue addOperationWithBlock:^{
         [CoreBridge syncAllData];
-    });
+    }];
 }
 
 + (void)syncAllData
