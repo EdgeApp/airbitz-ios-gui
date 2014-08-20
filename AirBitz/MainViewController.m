@@ -477,7 +477,8 @@ typedef enum eAppMode
     _strTxID = params[1];
 
     /* If showing QR code, launch receiving screen*/
-    if (_selectedViewController == _requestViewController && [_requestViewController showingQRCode])
+    if (_selectedViewController == _requestViewController 
+            && [_requestViewController showingQRCode:_strWalletUUID withTx:_strTxID])
     {
         [self launchSendStatus:_strWalletUUID withTx:_strTxID];
     }

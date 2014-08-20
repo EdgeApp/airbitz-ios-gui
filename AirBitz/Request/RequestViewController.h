@@ -15,7 +15,7 @@
 @property (assign) id<RequestViewControllerDelegate> delegate;
 @property (nonatomic, strong) NSString  *walletUUID;
 
-- (BOOL)showingQRCode;
+- (BOOL)showingQRCode:(NSString *)walletUUID withTx:(NSString *)txId;
 - (void)resetViews;
 
 @end

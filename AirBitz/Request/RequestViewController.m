@@ -13,6 +13,7 @@
 #import "RequestViewController.h"
 #import "Notifications.h"
 #import "Transaction.h"
+#import "TxOutput.h"
 #import "CalculatorView.h"
 #import "ButtonSelectorView.h"
 #import "ABC.h"
@@ -147,9 +148,22 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (BOOL)showingQRCode
+- (BOOL)showingQRCode:(NSString *)walletUUID withTx:(NSString *)txId
 {
-    return _qrViewController != nil;
+    if (_qrViewController == nil || _qrViewController.addressString == nil)
+    {
+        return NO;
+    }
+    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    for (TxOutput *output in transaction.outputs)
+    {
+        if (!output.bInput 
+            && [_qrViewController.addressString isEqualToString:output.strAddress])
+        {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (void)resetViews
