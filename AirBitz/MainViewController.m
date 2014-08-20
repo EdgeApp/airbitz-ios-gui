@@ -625,7 +625,6 @@ typedef enum eAppMode
 
 - (void)notifyRemotePasswordChange:(NSArray *)params
 {
-    NSLog(@"********** notifyRemotePasswordChange *********");
     if (_passwordChangeAlert == nil)
     {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
@@ -642,10 +641,21 @@ typedef enum eAppMode
     }
 }
 
+- (void)notifyTxSendSuccess:(NSDictionary *)params
+{
+    NSLog(@"notifyTxSendSuccess");
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_SEND_SUCESS object:mainId userInfo:params];
+}
+
+- (void)notifyTxSendFailed:(NSArray *)params
+{
+    NSLog(@"notifyTxSendFailed");
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_SEND_FAILED object:mainId];
+}
+
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
-    if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin)
-    {
+    if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin) {
         NSString *walletUUID = [NSString stringWithUTF8String:pInfo->szWalletUUID];
         NSString *txId = [NSString stringWithUTF8String:pInfo->szTxID];
         NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
@@ -658,6 +668,16 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         [mainId performSelectorOnMainThread:@selector(notifyDataSync:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_RemotePasswordChange) {
         [mainId performSelectorOnMainThread:@selector(notifyRemotePasswordChange:) withObject:nil waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_SentFunds) {
+        if (pInfo->status.code == ABC_CC_Ok) {
+            NSDictionary *params = @{
+                KEY_TX_DETAILS_EXITED_WALLET_UUID:[NSString stringWithUTF8String:pInfo->szWalletUUID],
+                KEY_TX_DETAILS_EXITED_TX_ID:[NSString stringWithUTF8String:pInfo->szTxID],
+            };
+            [mainId performSelectorOnMainThread:@selector(notifyTxSendSuccess:) withObject:params waitUntilDone:NO];
+        } else {
+            [mainId performSelectorOnMainThread:@selector(notifyTxSendFailed:) withObject:nil waitUntilDone:NO];
+        }
     }
 }
 

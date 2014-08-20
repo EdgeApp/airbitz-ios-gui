@@ -21,10 +21,10 @@
 {
 	ConfirmationSliderView              *_confirmationSlider;
 	UITextField                         *_selectedTextField;
-	BOOL                                _callbackSuccess;
     int64_t                             _maxAmount;
     BOOL                                _maxLocked;
 	NSString                            *_strReason;
+    int                                 _callbackTimestamp;
 	Transaction                         *_completedTransaction;	// nil until sendTransaction is successfully completed
     UITapGestureRecognizer              *tap;
 }
@@ -111,6 +111,9 @@
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(txSendSuccess:) name:NOTIFICATION_TX_SEND_SUCESS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(txSendFailed:) name:NOTIFICATION_TX_SEND_FAILED object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -456,8 +459,8 @@
                 result = ABC_InitiateTransfer([[User Singleton].name UTF8String],
                                             [[User Singleton].password UTF8String],
                                             &Transfer, &Details,
-                                            ABC_SendConfirmation_Callback,
-                                            (__bridge void *)self,
+                                            NULL,
+                                            NULL,
                                             &Error);
 
                 free(Transfer.szSrcWalletUUID);
@@ -472,17 +475,31 @@
                                             info->szUUID,
                                             [self.sendToAddress UTF8String],
                                             &Details,
-                                            ABC_SendConfirmation_Callback,
-                                            (__bridge void *)self,
+                                            NULL,
+                                            NULL,
                                             &Error);
             }
 			if (result == ABC_CC_Ok)
 			{
 				[self showSendStatus];
+                _callbackTimestamp = [[NSDate date] timeIntervalSince1970];
 			}
 			else
 			{
 				[Util printABC_Error:&Error];
+                NSString *title = NSLocalizedString(@"Error during send", nil);
+                NSString *message;
+
+                if (Error.code == ABC_CC_InsufficientFunds) {
+                    message = NSLocalizedString(@"You do not have enough funds to send this transaction.", nil);
+                } else if (Error.code == ABC_CC_ServerError) {
+                    message = [Util errorMap:&Error];
+                } else {
+                    message =
+                        NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);
+                }
+                NSArray *params = [NSArray arrayWithObjects: title, message, nil];
+                [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
 			}
 			
 			ABC_FreeWalletInfoArray(aWalletInfo, nCount);
@@ -558,11 +575,6 @@
     [self hideSendStatus];
 }
 
-- (void)sendBitcoinComplete:(NSArray *)params
-{
-	[self performSelector:@selector(showTransactionDetails:) withObject:params afterDelay:3.0]; //show sending screen for 3 seconds
-}
-
 - (void)showTransactionDetails:(NSArray *)params
 {
     if ([params count] < 2) {
@@ -573,15 +585,7 @@
     NSString *txId = params[1];
     Wallet *wallet = [CoreBridge getWallet:walletUUID];
     Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
-	if (_callbackSuccess)
-	{
-        [self launchTransactionDetailsWithTransaction:wallet withTx:transaction];
-	}
-	else
-	{
-		NSLog(@"Error: %@", _strReason);
-	}
-	
+    [self launchTransactionDetailsWithTransaction:wallet withTx:transaction];
 }
 
 - (void)updateTextFieldContents
@@ -827,45 +831,28 @@
 
 #pragma mark - ABC Callbacks
 
-void ABC_SendConfirmation_Callback(const tABC_RequestResults *pResults)
+- (void)txSendSuccess:(NSNotification *)notification
 {
-    if (pResults)
-    {
-        SendConfirmationViewController *controller = (__bridge id)pResults->pData;
-        controller->_callbackSuccess = (BOOL)pResults->bSuccess;
-        controller->_strReason = [Util errorMap:&(pResults->errorInfo)];
-        if (pResults->requestType == ABC_RequestType_SendBitcoin)
-        {
-            if (pResults->bSuccess)
-            {
-                NSString *walletUUID = [NSString stringWithUTF8String:pResults->szWalletUUID];
-                NSString *txId = [NSString stringWithUTF8String:pResults->pRetData];
-                NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
+    NSDictionary *data = [notification userInfo];
+    NSString *walletUUID = [data objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+    NSString *txId = [data objectForKey:KEY_TX_DETAILS_EXITED_TX_ID];
+    NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
 
-                [controller performSelectorOnMainThread:@selector(sendBitcoinComplete:)
-                                             withObject:params
-                                          waitUntilDone:FALSE];
-                free(pResults->pRetData);
-            } else {
-                free(pResults->pRetData);
-                NSString *title = NSLocalizedString(@"Error during send", nil);
-                NSString *message;
-                if (pResults->errorInfo.code == ABC_CC_InsufficientFunds) {
-                    message =
-                        NSLocalizedString(@"You do not have enough funds to send this transaction.", nil);
-                } else if (pResults->errorInfo.code == ABC_CC_ServerError) {
-                    message = [Util errorMap:&(pResults->errorInfo)];
-                } else {
-                    message =
-                        NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);
-                }
-                NSArray *params = [NSArray arrayWithObjects: title, message, nil];
-                [controller performSelectorOnMainThread:@selector(failedToSend:) 
-                                             withObject:params
-                                          waitUntilDone:FALSE];
-            }
-        }
-    }
+    int maxDelay = 3;
+    int delay = MIN(maxDelay, MAX(0, maxDelay - ([[NSDate date] timeIntervalSince1970] - _callbackTimestamp)));
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+        [self showTransactionDetails:params];
+    });
+}
+
+- (void)txSendFailed:(NSNotification *)notification
+{
+    NSString *title = NSLocalizedString(@"Error during send", nil);
+    NSString *message =
+            NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);
+    NSArray *params = [NSArray arrayWithObjects: title, message, nil];
+    [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
 }
 
 - (NSString *)getDestAddress
