@@ -25,6 +25,7 @@
 #import "Util.h"
 #import "InfoView.h"
 #import "LocalSettings.h"
+#import <CoreBluetooth/CoreBluetooth.h>
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -122,7 +123,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 };
 
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate, DebugViewControllerDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate, DebugViewControllerDelegate, CBCentralManagerDelegate>
 {
     tABC_Currency                   *_aCurrencies;
     int                             _currencyCount;
@@ -134,6 +135,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     CategoriesViewController        *_categoriesController;
     DebugViewController             *_debugViewController;
     BOOL                            _bKeyboardIsShown;
+	BOOL							_showBluetoothOption;
     CGRect                          _frameStart;
     CGFloat                         _keyboardHeight;
 }
@@ -147,7 +149,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 @property (nonatomic, strong) NSArray               *arrayCurrencyCodes;
 @property (nonatomic, strong) NSArray               *arrayCurrencyNums;
-
+@property (nonatomic, strong) CBCentralManager		*centralManager;
 @end
 
 @implementation SettingsViewController
@@ -189,13 +191,17 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(refresh:)
                                                  name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
+	_showBluetoothOption = NO;
     [self refresh:nil];
+	
+	 _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(NO)}];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+	self.centralManager = nil;
 }
 
 - (void)refresh:(NSNotification *)notification
@@ -257,6 +263,17 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - BLE
+
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central
+{
+	if (central.state == CBCentralManagerStatePoweredOn)
+	{
+		_showBluetoothOption = YES;
+		[_tableView reloadData];
+	}
 }
 
 #pragma mark - Misc Methods
@@ -1074,7 +1091,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_OPTIONS:
-            return 4;
+			//assumes bluetooth option is last of the options.
+			if(_showBluetoothOption)
+			{
+				return 4;
+			}
+			else
+			{
+				return 3; //return 3 to not show the Bluetooth cell.
+			}
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
