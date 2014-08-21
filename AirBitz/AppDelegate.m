@@ -78,7 +78,6 @@ NSDate *logoutDate = NULL;
     if ([User isLoggedIn])
     {
         [CoreBridge stopQueues];
-        [CoreBridge stopWatchers];
         bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
             [self bgCleanup];
         }];
@@ -88,6 +87,34 @@ NSDate *logoutDate = NULL;
                                                        selector:@selector(autoLogout)
                                                        userInfo:application
                                                        repeats:NO];
+        if ([CoreBridge allWatchersReady])
+        {
+            [CoreBridge stopWatchers];
+        }
+        else
+        {
+            // If the watchers aren't finished, let them finish
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                while (![CoreBridge allWatchersReady])
+                {
+                    // if app is active, break out of loop
+                    if ([self isAppActive])
+                    {
+                        break;
+                    }
+                    sleep(5);
+                }
+                // if the app *is not* active, stop watchers
+                if (![self isAppActive])
+                {
+                    [CoreBridge stopWatchers];
+                }
+                if (![logoutTimer isValid])
+                {
+                    [self bgCleanup];
+                }
+            });
+        }
     }
 }
 
