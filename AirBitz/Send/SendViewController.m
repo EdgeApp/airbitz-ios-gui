@@ -784,6 +784,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     
     // We're disconnected, so start scanning again
     [self scan];
+	
+	//allow tableView selection after some time has gone by because we typically disconnect before the sendConfirmation view has fully slid onscreen
+	[self performSelector:@selector(enableTableSelection) withObject:nil afterDelay:1.0];
+}
+
+-(void)enableTableSelection
+{
+	self.tableView.allowsSelection = YES;
 }
 
 -(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
@@ -803,6 +811,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     // Don't do anything if we're not connected
     if (self.discoveredPeripheral.state != CBPeripheralStateConnected)
 	{
+		self.discoveredPeripheral = nil;
         return;
     }
     
@@ -992,11 +1001,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//NSLog(@"Selecting row: %li", (long)indexPath.row);
 
+	//NSLog(@"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Selecting row: %li", (long)indexPath.row);
+	
+	tableView.allowsSelection = NO;
 	//attempt to connect to this peripheral
 	PeripheralContainer *pc = [self.peripheralContainers objectAtIndex:indexPath.row];
-	
 	
 	// Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it
 	self.discoveredPeripheral = pc.peripheral;
