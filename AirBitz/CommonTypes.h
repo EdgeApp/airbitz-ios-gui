@@ -64,6 +64,7 @@ typedef enum eTabBarButton
 #define NOTIFICATION_TAB_BAR_BUTTON_RESELECT            @"Notification_Tab_Bar_Button_Reselected"
 #define NOTIFICATION_TX_SEND_SUCESS                     @"Transaction_Sent_Success"
 #define NOTIFICATION_TX_SEND_FAILED                     @"Transaction_Send_Failed"
+#define NOTIFICATION_TX_RECEIVED                        @"Transaction_Received"
 
 
 #define KEY_TX_DETAILS_EXITED_TX                        @"transaction"

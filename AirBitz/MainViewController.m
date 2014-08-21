@@ -24,8 +24,6 @@
 #import "CoreBridge.h"
 #import "CommonTypes.h"
 
-id mainId;
-
 typedef enum eAppMode
 {
 	APP_MODE_DIRECTORY = TAB_BAR_BUTTON_DIRECTORY,
@@ -90,8 +88,6 @@ typedef enum eAppMode
     Error.code = ABC_CC_Ok;
     ABC_Initialize([docs_dir UTF8String],
                    [ca_path UTF8String],
-                   ABC_BitCoin_Event_Callback,
-                   (__bridge void *) self,
                    (unsigned char *)[seedData bytes],
                    (unsigned int)[seedData length],
                    &Error);
@@ -115,6 +111,7 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBitcoinUri:) name:NOTIFICATION_HANDLE_BITCOIN_URI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:NOTIFICATION_TX_RECEIVED object:nil];
 }
 
 /**
@@ -264,7 +261,6 @@ typedef enum eAppMode
 
 -(void)launchViewControllerBasedOnAppMode
 {
-    mainId = self;
 	switch(_appMode)
 	{
 		case APP_MODE_DIRECTORY:
@@ -471,10 +467,11 @@ typedef enum eAppMode
 	[self launchViewControllerBasedOnAppMode];
 }
 
-- (void)launchReceiving:(NSArray *)params
+- (void)launchReceiving:(NSNotification *)notification
 {
-    _strWalletUUID = params[0];
-    _strTxID = params[1];
+    NSDictionary *data = [notification userInfo];
+    _strWalletUUID = [data objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+    _strTxID = [data objectForKey:KEY_TX_DETAILS_EXITED_TX_ID];
 
     /* If showing QR code, launch receiving screen*/
     if (_selectedViewController == _requestViewController 
@@ -605,24 +602,7 @@ typedef enum eAppMode
     }
 }
 
-#pragma mark - ABC Callbacks
-
-- (void)notifyBlockHeight:(NSArray *)params
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:mainId];
-}
-
-- (void)notifyExchangeRate:(NSArray *)params
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:mainId];
-}
-
-- (void)notifyDataSync:(NSArray *)params
-{
-    // if there are new wallets, we need to start their watchers
-    [CoreBridge startWatchers];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:mainId];
-}
+#pragma mark - Custom Notification Handlers
 
 - (void)notifyRemotePasswordChange:(NSArray *)params
 {
@@ -641,48 +621,6 @@ typedef enum eAppMode
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }
 }
-
-- (void)notifyTxSendSuccess:(NSDictionary *)params
-{
-    NSLog(@"notifyTxSendSuccess");
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_SEND_SUCESS object:mainId userInfo:params];
-}
-
-- (void)notifyTxSendFailed:(NSArray *)params
-{
-    NSLog(@"notifyTxSendFailed");
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_SEND_FAILED object:mainId];
-}
-
-void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
-{
-    if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin) {
-        NSString *walletUUID = [NSString stringWithUTF8String:pInfo->szWalletUUID];
-        NSString *txId = [NSString stringWithUTF8String:pInfo->szTxID];
-        NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
-        [mainId performSelectorOnMainThread:@selector(launchReceiving:) withObject:params waitUntilDone:NO];
-    } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
-        [mainId performSelectorOnMainThread:@selector(notifyBlockHeight:) withObject:nil waitUntilDone:NO];
-    } else if (pInfo->eventType == ABC_AsyncEventType_ExchangeRateUpdate) {
-        [mainId performSelectorOnMainThread:@selector(notifyExchangeRate:) withObject:nil waitUntilDone:NO];
-    } else if (pInfo->eventType == ABC_AsyncEventType_DataSyncUpdate) {
-        [mainId performSelectorOnMainThread:@selector(notifyDataSync:) withObject:nil waitUntilDone:NO];
-    } else if (pInfo->eventType == ABC_AsyncEventType_RemotePasswordChange) {
-        [mainId performSelectorOnMainThread:@selector(notifyRemotePasswordChange:) withObject:nil waitUntilDone:NO];
-    } else if (pInfo->eventType == ABC_AsyncEventType_SentFunds) {
-        if (pInfo->status.code == ABC_CC_Ok) {
-            NSDictionary *params = @{
-                KEY_TX_DETAILS_EXITED_WALLET_UUID:[NSString stringWithUTF8String:pInfo->szWalletUUID],
-                KEY_TX_DETAILS_EXITED_TX_ID:[NSString stringWithUTF8String:pInfo->szTxID],
-            };
-            [mainId performSelectorOnMainThread:@selector(notifyTxSendSuccess:) withObject:params waitUntilDone:NO];
-        } else {
-            [mainId performSelectorOnMainThread:@selector(notifyTxSendFailed:) withObject:nil waitUntilDone:NO];
-        }
-    }
-}
-
-#pragma mark - Custom Notification Handlers
 
 // called when the stats have been updated
 - (void)transactionDetailsExit:(NSNotification *)notification
