@@ -927,6 +927,36 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	return [self.peripheralContainers count];
 }
 
+-(BOOL)nameIsDuplicate:(NSString *)name
+{
+	//looks at all peripheral containers and sees if there are two that have the name contained in this one.
+	BOOL hasDuplicate = NO;
+	int nameCount = 0;
+	
+	for(PeripheralContainer *pci in self.peripheralContainers)
+	{
+		NSString *advData = [pci.advertisingData objectForKey:CBAdvertisementDataLocalNameKey];
+		if(advData.length > 10)
+		{
+			NSString *fullName = [advData substringFromIndex:10];
+			NSArray *arrayComponents = [fullName componentsSeparatedByString:@" "];
+			NSString *firstName = [arrayComponents objectAtIndex:0];
+			NSString *lastName = [arrayComponents objectAtIndex:1];
+			NSString *otherName = [NSString stringWithFormat:@"%@ %@", firstName, lastName ];
+			
+			if([otherName isEqualToString:name])
+			{
+				nameCount++;
+			}
+		}
+	}
+	if(nameCount > 1)
+	{
+		hasDuplicate = YES;
+	}
+	return hasDuplicate;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	BLEScanCell *scanCell = [self getScanCellForTableView:tableView];
@@ -983,6 +1013,18 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 						imageIsFromContacts = YES;
 						break;
 					}
+				}
+				if([self nameIsDuplicate:name])
+				{
+					scanCell.duplicateNamesLabel.hidden = NO;
+					scanCell.contactName.textColor = scanCell.duplicateNamesLabel.textColor;
+					scanCell.contactBitcoinAddress.textColor = scanCell.duplicateNamesLabel.textColor;
+				}
+				else
+				{
+					scanCell.duplicateNamesLabel.hidden = YES;
+					scanCell.contactName.textColor = [UIColor blackColor];
+					scanCell.contactBitcoinAddress.textColor = [UIColor blackColor];
 				}
 			}
 		}

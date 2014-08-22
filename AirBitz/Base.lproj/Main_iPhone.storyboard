@@ -703,17 +703,24 @@
                                                             <rect key="frame" x="50" y="12" width="23" height="23"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gHX-Xq-QLY" customClass="MontserratLabel">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="gHX-Xq-QLY" customClass="MontserratLabel">
                                                             <rect key="frame" x="80" y="0.0" width="240" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ASx-id-nUc" customClass="MontserratLabel">
-                                                            <rect key="frame" x="80" y="21" width="240" height="21"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ASx-id-nUc" customClass="MontserratLabel">
+                                                            <rect key="frame" x="80" y="21" width="123" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Duplicate Names)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Hba-dd-to8" customClass="MontserratLabel">
+                                                            <rect key="frame" x="211" y="14" width="109" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.95294123888015747" green="0.4745098352432251" blue="0.14901961386203766" alpha="1" colorSpace="deviceRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" id="cuz-AA-HVh">
@@ -734,6 +741,7 @@
                                                     <outlet property="contactBitcoinAddress" destination="ASx-id-nUc" id="crc-zG-oZ1"/>
                                                     <outlet property="contactImage" destination="RIr-2j-jnF" id="Tb5-62-T2l"/>
                                                     <outlet property="contactName" destination="gHX-Xq-QLY" id="r9g-a0-tRB"/>
+                                                    <outlet property="duplicateNamesLabel" destination="Hba-dd-to8" id="T53-XX-Llj"/>
                                                     <outlet property="signalImage" destination="Tb9-gC-0YS" id="4IK-wv-8ld"/>
                                                 </connections>
                                             </tableViewCell>

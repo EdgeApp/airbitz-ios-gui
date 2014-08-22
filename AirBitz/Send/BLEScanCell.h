@@ -14,4 +14,5 @@
 @property (nonatomic, weak) IBOutlet UIImageView *signalImage;
 @property (nonatomic, weak) IBOutlet UILabel *contactName;
 @property (nonatomic, weak) IBOutlet UILabel *contactBitcoinAddress;
+@property (nonatomic, weak) IBOutlet UILabel *duplicateNamesLabel;
 @end
