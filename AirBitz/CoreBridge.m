@@ -26,13 +26,11 @@ static dispatch_queue_t watcherQueue;
 static NSOperationQueue *exchangeQueue;
 static NSOperationQueue *dataQueue;
 static NSMutableDictionary *watchers;
+static User *singleton = nil;
 
 @interface CoreBridge ()
 {
 }
-
-@property (nonatomic, strong) NSMutableArray *arrayWallets;
-@property (nonatomic, strong) NSMutableArray *arrayArchivedWallets;
 
 + (void)loadTransactions:(Wallet *) wallet;
 + (void)setTransaction:(Wallet *) wallet transaction:(Transaction *) transaction coreTx:(tABC_TxInfo *) pTrans;
@@ -54,6 +52,8 @@ static NSTimer *_dataSyncTimer;
         [exchangeQueue setMaxConcurrentOperationCount:1];
         dataQueue = [[NSOperationQueue alloc] init];
         [dataQueue setMaxConcurrentOperationCount:1];
+
+        singleton = [[CoreBridge alloc] init];
         bInitialized = YES;
     }
 }
@@ -65,6 +65,7 @@ static NSTimer *_dataSyncTimer;
         watcherQueue = nil;
         exchangeQueue = nil;
         dataQueue = nil;
+        singleton = nil;
         bInitialized = NO;
     }
 }
@@ -383,7 +384,6 @@ static NSTimer *_dataSyncTimer;
     }
     transaction.outputs = outputs;
     transaction.bizId = pTrans->pDetails->bizId;
-	//cw NSLog(@"************ Transaction Biz ID: %i", transaction.bizId);
 }
 
 + (unsigned int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId isSyncing:(bool *)syncing
@@ -845,7 +845,10 @@ static NSTimer *_dataSyncTimer;
             [watchers setObject:queue forKey:walletUUID];
             [queue addOperationWithBlock:^{
                 tABC_Error Error;
-                ABC_WatcherLoop([walletUUID UTF8String], &Error);
+                ABC_WatcherLoop([walletUUID UTF8String],
+                        ABC_BitCoin_Event_Callback,
+                        (__bridge void *) singleton,
+                        &Error);
                 [Util printABC_Error:&Error];
             }];
         }
@@ -866,7 +869,6 @@ static NSTimer *_dataSyncTimer;
         // wait for threads to finish
         for (NSString *uuid in arrayWallets)
         {
-            tABC_Error Error;
             NSOperationQueue *queue = [watchers objectForKey:uuid];
             if (queue == nil) {
                 continue;
@@ -994,7 +996,11 @@ static NSTimer *_dataSyncTimer;
     if ([User isLoggedIn])
     {
         tABC_Error error;
-        ABC_DataSyncAll([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &error);
+        ABC_DataSyncAll([[User Singleton].name UTF8String],
+                        [[User Singleton].password UTF8String],
+                        ABC_BitCoin_Event_Callback,
+                        (__bridge void *) singleton,
+                        &error);
         [Util printABC_Error: &error];
     }
 }
@@ -1055,6 +1061,82 @@ static NSTimer *_dataSyncTimer;
             return @"₱";
         default:
             return @"$";
+    }
+}
+
+#pragma mark - ABC Callbacks
+
+- (void)notifyReceiving:(NSArray *)params
+{
+    if ([params count] > 0)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_RECEIVED object:self userInfo:params[0]];
+    }
+
+}
+
+- (void)notifyBlockHeight:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:self];
+}
+
+- (void)notifyExchangeRate:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:self];
+}
+
+- (void)notifyDataSync:(NSArray *)params
+{
+    // if there are new wallets, we need to start their watchers
+    [CoreBridge startWatchers];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:self];
+}
+
+- (void)notifyRemotePasswordChange:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:self];
+}
+
+- (void)notifyTxSendSuccess:(NSDictionary *)params
+{
+    NSLog(@"notifyTxSendSuccess");
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_SEND_SUCESS object:self userInfo:params];
+}
+
+- (void)notifyTxSendFailed:(NSArray *)params
+{
+    NSLog(@"notifyTxSendFailed");
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_SEND_FAILED object:self];
+}
+
+void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
+{
+    CoreBridge *coreBridge = (__bridge id) pInfo->pData;
+    if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin) {
+        NSDictionary *data = @{
+            KEY_TX_DETAILS_EXITED_WALLET_UUID: [NSString stringWithUTF8String:pInfo->szWalletUUID],
+            KEY_TX_DETAILS_EXITED_TX_ID: [NSString stringWithUTF8String:pInfo->szTxID]
+        };
+        NSArray *params = [NSArray arrayWithObjects: data, nil];
+        [coreBridge performSelectorOnMainThread:@selector(notifyReceiving:) withObject:params waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
+        [coreBridge performSelectorOnMainThread:@selector(notifyBlockHeight:) withObject:nil waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_ExchangeRateUpdate) {
+        [coreBridge performSelectorOnMainThread:@selector(notifyExchangeRate:) withObject:nil waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_DataSyncUpdate) {
+        [coreBridge performSelectorOnMainThread:@selector(notifyDataSync:) withObject:nil waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_RemotePasswordChange) {
+        [coreBridge performSelectorOnMainThread:@selector(notifyRemotePasswordChange:) withObject:nil waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_SentFunds) {
+        if (pInfo->status.code == ABC_CC_Ok) {
+            NSDictionary *params = @{
+                KEY_TX_DETAILS_EXITED_WALLET_UUID:[NSString stringWithUTF8String:pInfo->szWalletUUID],
+                KEY_TX_DETAILS_EXITED_TX_ID:[NSString stringWithUTF8String:pInfo->szTxID],
+            };
+            [coreBridge performSelectorOnMainThread:@selector(notifyTxSendSuccess:) withObject:params waitUntilDone:NO];
+        } else {
+            [coreBridge performSelectorOnMainThread:@selector(notifyTxSendFailed:) withObject:nil waitUntilDone:NO];
+        }
     }
 }
 
