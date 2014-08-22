@@ -108,6 +108,492 @@
 		7D6EDB8219A66C9F007C33AE /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7E19A66C9F007C33AE /* HockeySDK.framework */; };
 		7D6EDB8319A66C9F007C33AE /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7D6EDB8019A66C9F007C33AE /* HockeySDK.xcconfig */; };
 		7D6EDB8419A66C9F007C33AE /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D6EDB8119A66C9F007C33AE /* HockeySDKResources.bundle */; };
+		7D98ACAD19A7C550003D2BF6 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9A418EA0C4E008F302C /* SMCalloutView.m */; };
+		7D98ACAE19A7C550003D2BF6 /* QuestionAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EB0E18DE018E008ACF88 /* QuestionAnswerView.m */; };
+		7D98ACAF19A7C550003D2BF6 /* DateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D0193564D20091C286 /* DateTime.m */; };
+		7D98ACB019A7C550003D2BF6 /* ImportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C57192AB6C60015BB3C /* ImportWalletViewController.m */; };
+		7D98ACB119A7C550003D2BF6 /* PlainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A030A18EA4C4400845090 /* PlainCell.m */; };
+		7D98ACB219A7C550003D2BF6 /* CancelDoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031918EB485F00845090 /* CancelDoneCell.m */; };
+		7D98ACB319A7C550003D2BF6 /* TransactionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9B818EA0DD8008F302C /* TransactionCell.m */; };
+		7D98ACB419A7C550003D2BF6 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = B58FF764199DC879002C3D45 /* Contact.m */; };
+		7D98ACB519A7C550003D2BF6 /* Wallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C08A6E518C2B1D50071B87C /* Wallet.m */; };
+		7D98ACB619A7C550003D2BF6 /* BackgroundImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96418EA0A42008F302C /* BackgroundImageManager.m */; };
+		7D98ACB719A7C550003D2BF6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2E9BE18DA911A008ACF88 /* LoginViewController.m */; };
+		7D98ACB819A7C550003D2BF6 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A97A18EA0A7F008F302C /* DirectoryViewController.m */; };
+		7D98ACB919A7C550003D2BF6 /* ShowWalletQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9CA18EA0FF0008F302C /* ShowWalletQRViewController.m */; };
+		7D98ACBA19A7C550003D2BF6 /* ExportWalletOptionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247B119352F730091C286 /* ExportWalletOptionsCell.m */; };
+		7D98ACBB19A7C550003D2BF6 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E7F57918E4AAD5009B5844 /* User.m */; };
+		7D98ACBC19A7C550003D2BF6 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */; };
+		7D98ACBD19A7C550003D2BF6 /* BLEScanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5628BE5199BD44D0077DA1C /* BLEScanCell.m */; };
+		7D98ACBE19A7C550003D2BF6 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9AF18EA0D78008F302C /* SendViewController.m */; };
+		7D98ACBF19A7C550003D2BF6 /* AnnotationContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A98618EA0B80008F302C /* AnnotationContentView.m */; };
+		7D98ACC019A7C550003D2BF6 /* WalletsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9C018EA0DD8008F302C /* WalletsViewController.m */; };
+		7D98ACC119A7C550003D2BF6 /* ConfirmationSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B56553D918ECAEF7005B35E1 /* ConfirmationSliderView.m */; };
+		7D98ACC219A7C550003D2BF6 /* DarkenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B561E1AA18D2573F002DCDC2 /* DarkenView.m */; };
+		7D98ACC319A7C550003D2BF6 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD393318F06FD800BE2670 /* StylizedTextField.m */; };
+		7D98ACC419A7C550003D2BF6 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C08A6E818C53BDA0071B87C /* Transaction.m */; };
+		7D98ACC519A7C550003D2BF6 /* PasswordVerifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2E9CE18DCDFB0008ACF88 /* PasswordVerifyView.m */; };
+		7D98ACC619A7C550003D2BF6 /* RadioButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A030718EA210000845090 /* RadioButtonCell.m */; };
+		7D98ACC719A7C550003D2BF6 /* TabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B59C161A18C1436300AEA789 /* TabBarView.m */; };
+		7D98ACC819A7C550003D2BF6 /* CommonOverviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A99918EA0C10008F302C /* CommonOverviewCell.m */; };
+		7D98ACC919A7C550003D2BF6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B5675B5B18A17F6F002E0703 /* AppDelegate.m */; };
+		7D98ACCA19A7C550003D2BF6 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031C18EB569000845090 /* CategoriesViewController.m */; };
+		7D98ACCB19A7C550003D2BF6 /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B561E1A318D2572D002DCDC2 /* InfoView.m */; };
+		7D98ACCC19A7C550003D2BF6 /* WalletMakerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD392E18EFC30E00BE2670 /* WalletMakerView.m */; };
+		7D98ACCD19A7C550003D2BF6 /* PopupWheelPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C309619198B33006923DE /* PopupWheelPickerView.m */; };
+		7D98ACCE19A7C550003D2BF6 /* UIImage+Colorize.m in Sources */ = {isa = PBXBuildFile; fileRef = B5376E1C18B55D920099EF8F /* UIImage+Colorize.m */; };
+		7D98ACCF19A7C550003D2BF6 /* WalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5635A24193D0F8700345AEE /* WalletHeaderView.m */; };
+		7D98ACD019A7C550003D2BF6 /* RecipientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98CAEB199D53A2000009B5 /* RecipientViewController.m */; };
+		7D98ACD119A7C550003D2BF6 /* TransactionDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9BA18EA0DD8008F302C /* TransactionDetailsViewController.m */; };
+		7D98ACD219A7C550003D2BF6 /* SendConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9AD18EA0D78008F302C /* SendConfirmationViewController.m */; };
+		7D98ACD319A7C550003D2BF6 /* CategoriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C30A0191B07C0006923DE /* CategoriesCell.m */; };
+		7D98ACD419A7C550003D2BF6 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A98B18EA0B80008F302C /* MapView.m */; };
+		7D98ACD519A7C550003D2BF6 /* MontserratLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C1718A40F3900DA4A34 /* MontserratLabel.m */; };
+		7D98ACD619A7C550003D2BF6 /* TransactionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9BC18EA0DD8008F302C /* TransactionsViewController.m */; };
+		7D98ACD719A7C550003D2BF6 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A98918EA0B80008F302C /* CustomAnnotationView.m */; };
+		7D98ACD819A7C550003D2BF6 /* PasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2E9C418DB4B23008ACF88 /* PasswordRecoveryViewController.m */; };
+		7D98ACD919A7C550003D2BF6 /* StrokeGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C309C19199AF7006923DE /* StrokeGradientButton.m */; };
+		7D98ACDA19A7C550003D2BF6 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9B418EA0D99008F302C /* SettingsViewController.m */; };
+		7D98ACDB19A7C550003D2BF6 /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98CAF7199FB545000009B5 /* LocalSettings.m */; };
+		7D98ACDC19A7C550003D2BF6 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B516C1E718C54B06008CC6A1 /* NSDate+Helper.m */; };
+		7D98ACDD19A7C550003D2BF6 /* PopupPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C308F191834AC006923DE /* PopupPickerView.m */; };
+		7D98ACDE19A7C550003D2BF6 /* PayeeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D31937A7520091C286 /* PayeeCell.m */; };
+		7D98ACDF19A7C550003D2BF6 /* topOverviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A99D18EA0C10008F302C /* topOverviewCell.m */; };
+		7D98ACE019A7C550003D2BF6 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C2C18A435BD00DA4A34 /* NSDictionary_JSONExtensions.m */; };
+		7D98ACE119A7C550003D2BF6 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A98418EA0B80008F302C /* Annotation.m */; };
+		7D98ACE219A7C550003D2BF6 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6868AD1219516D7A006C3716 /* DebugViewController.m */; };
+		7D98ACE319A7C550003D2BF6 /* BD_Website_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96F18EA0A42008F302C /* BD_Website_Cell.m */; };
+		7D98ACE419A7C550003D2BF6 /* ButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031318EA55C700845090 /* ButtonCell.m */; };
+		7D98ACE519A7C550003D2BF6 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C2718A435BD00DA4A34 /* CDataScanner.m */; };
+		7D98ACE619A7C550003D2BF6 /* SendStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */; };
+		7D98ACE719A7C550003D2BF6 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C3118A435BD00DA4A34 /* CJSONScanner.m */; };
+		7D98ACE819A7C550003D2BF6 /* DividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A97C18EA0A7F008F302C /* DividerView.m */; };
+		7D98ACE919A7C550003D2BF6 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B57C207918C14687005D7245 /* MainViewController.m */; };
+		7D98ACEA19A7C550003D2BF6 /* ExportWalletPDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7C1259193E7C510096338D /* ExportWalletPDFViewController.m */; };
+		7D98ACEB19A7C550003D2BF6 /* GDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050568193FD014007D4960 /* GDrive.m */; };
+		7D98ACEC19A7C550003D2BF6 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */; };
+		7D98ACED19A7C550003D2BF6 /* BD_Phone_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96D18EA0A42008F302C /* BD_Phone_Cell.m */; };
+		7D98ACEE19A7C550003D2BF6 /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861FE671950DFB100CDF24E /* TxOutput.m */; };
+		7D98ACEF19A7C550003D2BF6 /* MoreCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A99218EA0BAC008F302C /* MoreCategoriesViewController.m */; };
+		7D98ACF019A7C550003D2BF6 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C2A18A435BD00DA4A34 /* CDataScanner_Extensions.m */; };
+		7D98ACF119A7C550003D2BF6 /* BusinessDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A97118EA0A42008F302C /* BusinessDetailsViewController.m */; };
+		7D98ACF219A7C550003D2BF6 /* RibbonView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9A218EA0C4E008F302C /* RibbonView.m */; };
+		7D98ACF319A7C550003D2BF6 /* MinCharTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B55D0FE718E233A80035DCC8 /* MinCharTextField.m */; };
+		7D98ACF419A7C550003D2BF6 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C54192AA1A80015BB3C /* DDData.m */; };
+		7D98ACF519A7C550003D2BF6 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2E9C018DA911A008ACF88 /* SignUpViewController.m */; };
+		7D98ACF619A7C550003D2BF6 /* FlashSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9C718EA0E55008F302C /* FlashSelectView.m */; };
+		7D98ACF719A7C550003D2BF6 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A98018EA0B52008F302C /* Location.m */; };
+		7D98ACF819A7C550003D2BF6 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
+		7D98ACF919A7C550003D2BF6 /* BalanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = B57C209518C25011005D7245 /* BalanceView.m */; };
+		7D98ACFA19A7C550003D2BF6 /* BooleanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031018EA538500845090 /* BooleanCell.m */; };
+		7D98ACFB19A7C550003D2BF6 /* BD_Address_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96718EA0A42008F302C /* BD_Address_Cell.m */; };
+		7D98ACFC19A7C550003D2BF6 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C2F18A435BD00DA4A34 /* CJSONDeserializer.m */; };
+		7D98ACFD19A7C550003D2BF6 /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9A918EA0D09008F302C /* RequestViewController.m */; };
+		7D98ACFE19A7C550003D2BF6 /* BD_Details_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96918EA0A42008F302C /* BD_Details_Cell.m */; };
+		7D98ACFF19A7C550003D2BF6 /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9BE18EA0DD8008F302C /* WalletCell.m */; };
+		7D98AD0019A7C550003D2BF6 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
+		7D98AD0119A7C550003D2BF6 /* ButtonOnlyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031618EA5F5B00845090 /* ButtonOnlyCell.m */; };
+		7D98AD0219A7C550003D2BF6 /* categoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A99518EA0BE7008F302C /* categoryCell.m */; };
+		7D98AD0319A7C550003D2BF6 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C3318A435BD00DA4A34 /* CJSONSerializer.m */; };
+		7D98AD0419A7C550003D2BF6 /* ExportWalletOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C901933C8040015BB3C /* ExportWalletOptionsViewController.m */; };
+		7D98AD0519A7C550003D2BF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5675B5718A17F6F002E0703 /* main.m */; };
+		7D98AD0619A7C550003D2BF6 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A030D18EA4ED400845090 /* TextFieldCell.m */; };
+		7D98AD0719A7C550003D2BF6 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C5A192AB8E70015BB3C /* Util.m */; };
+		7D98AD0819A7C550003D2BF6 /* ExportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C8D1933C7DC0015BB3C /* ExportWalletViewController.m */; };
+		7D98AD0919A7C550003D2BF6 /* LatoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C1418A40EDA00DA4A34 /* LatoLabel.m */; };
+		7D98AD0A19A7C550003D2BF6 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B56553EE18ECC8E0005B35E1 /* CalculatorView.m */; };
+		7D98AD0B19A7C550003D2BF6 /* ButtonSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B56553F118EDDCF8005B35E1 /* ButtonSelectorView.m */; };
+		7D98AD0C19A7C550003D2BF6 /* BD_Hours_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96B18EA0A42008F302C /* BD_Hours_Cell.m */; };
+		7D98AD0D19A7C550003D2BF6 /* overviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A99B18EA0C10008F302C /* overviewCell.m */; };
+		7D98AD0E19A7C550003D2BF6 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6893E6C919783FED0092DA04 /* SyncView.m */; };
+		7D98AD0F19A7C550003D2BF6 /* TabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B57C207C18C15009005D7245 /* TabBarButton.m */; };
+		7D98AD1019A7C550003D2BF6 /* PickerTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C30A4191C1CAF006923DE /* PickerTextView.m */; };
+		7D98AD1219A7C550003D2BF6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7B19A66C82007C33AE /* CoreText.framework */; };
+		7D98AD1319A7C550003D2BF6 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5628BF3199BE87B0077DA1C /* CoreBluetooth.framework */; };
+		7D98AD1419A7C550003D2BF6 /* libcsv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C40BC5D4199479CF00149E12 /* libcsv.a */; };
+		7D98AD1519A7C550003D2BF6 /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809FB99196F9EEB0076CA4D /* libgit2.a */; };
+		7D98AD1619A7C550003D2BF6 /* libbitcoin-watcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BEDA3195D5A970053A09E /* libbitcoin-watcher.a */; };
+		7D98AD1719A7C550003D2BF6 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BED9D195D5A7C0053A09E /* libsecp256k1.a */; };
+		7D98AD1819A7C550003D2BF6 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
+		7D98AD1919A7C550003D2BF6 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7E19A66C9F007C33AE /* HockeySDK.framework */; };
+		7D98AD1A19A7C550003D2BF6 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
+		7D98AD1B19A7C550003D2BF6 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6DA18C29CEF0071B87C /* libz.a */; };
+		7D98AD1C19A7C550003D2BF6 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463C18C9244900179D9C /* libiconv.dylib */; };
+		7D98AD1D19A7C550003D2BF6 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A318D3BFEF008ACF88 /* libboost_system.a */; };
+		7D98AD1E19A7C550003D2BF6 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463A18C9242700179D9C /* CoreVideo.framework */; };
+		7D98AD1F19A7C550003D2BF6 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463818C9242100179D9C /* CoreAudio.framework */; };
+		7D98AD2019A7C550003D2BF6 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463618C9241200179D9C /* CoreMedia.framework */; };
+		7D98AD2119A7C550003D2BF6 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		7D98AD2219A7C550003D2BF6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
+		7D98AD2319A7C550003D2BF6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
+		7D98AD2419A7C550003D2BF6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B19BCE18ABFCDF00CF04A4 /* MapKit.framework */; };
+		7D98AD2519A7C550003D2BF6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C2118A41ACE00DA4A34 /* SystemConfiguration.framework */; };
+		7D98AD2619A7C550003D2BF6 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D718C29CEF0071B87C /* libqrencode.a */; };
+		7D98AD2719A7C550003D2BF6 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1F18A41ABA00DA4A34 /* libc++.dylib */; };
+		7D98AD2819A7C550003D2BF6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1D18A41AAC00DA4A34 /* CFNetwork.framework */; };
+		7D98AD2919A7C550003D2BF6 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D918C29CEF0071B87C /* libssl.a */; };
+		7D98AD2A19A7C550003D2BF6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4D18A17F6F002E0703 /* CoreGraphics.framework */; };
+		7D98AD2B19A7C550003D2BF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4F18A17F6F002E0703 /* UIKit.framework */; };
+		7D98AD2C19A7C550003D2BF6 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
+		7D98AD2D19A7C550003D2BF6 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A418D3BFEF008ACF88 /* libwallet.a */; };
+		7D98AD2E19A7C550003D2BF6 /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D618C29CEF0071B87C /* libjansson.a */; };
+		7D98AD2F19A7C550003D2BF6 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D418C29CEF0071B87C /* libcrypto.a */; };
+		7D98AD3019A7C550003D2BF6 /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D318C29CEF0071B87C /* libabc.a */; };
+		7D98AD3119A7C550003D2BF6 /* libbitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A218D3BFEF008ACF88 /* libbitcoin.a */; };
+		7D98AD3219A7C550003D2BF6 /* DL_URLServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1A18A41A4E00DA4A34 /* DL_URLServer.a */; };
+		7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4B18A17F6F002E0703 /* Foundation.framework */; };
+		7D98AD3419A7C550003D2BF6 /* libscrypt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D818C29CEF0071B87C /* libscrypt.a */; };
+		7D98AD3519A7C550003D2BF6 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D518C29CEF0071B87C /* libcurl.a */; };
+		7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
+		7D98AD3819A7C550003D2BF6 /* btn_search~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C801930060F0015BB3C /* btn_search~iphone.png */; };
+		7D98AD3919A7C550003D2BF6 /* PasswordVerifyView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9D218DCE09E008ACF88 /* PasswordVerifyView~ipad.xib */; };
+		7D98AD3A19A7C550003D2BF6 /* WalletExportQuicken.QIF in Resources */ = {isa = PBXBuildFile; fileRef = 4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */; };
+		7D98AD3B19A7C550003D2BF6 /* btn_done~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02F718EA206300845090 /* btn_done~iphone.png */; };
+		7D98AD3C19A7C550003D2BF6 /* btn_checkmark@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146418C012B500AEA789 /* btn_checkmark@2x~iphone.png */; };
+		7D98AD3D19A7C550003D2BF6 /* btn_collapse_expand@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146818C012B500AEA789 /* btn_collapse_expand@2x~iphone.png */; };
+		7D98AD3E19A7C550003D2BF6 /* emboss_down~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148D18C012B500AEA789 /* emboss_down~iphone.png */; };
+		7D98AD3F19A7C550003D2BF6 /* infoExportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C72479C1933D3890091C286 /* infoExportWallet.html */; };
+		7D98AD4019A7C550003D2BF6 /* icon_USD_dark~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A718C012B500AEA789 /* icon_USD_dark~iphone.png */; };
+		7D98AD4119A7C550003D2BF6 /* btn_use_max~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DE6197DC9ED00EC95F8 /* btn_use_max~iphone.png */; };
+		7D98AD4219A7C550003D2BF6 /* back_arrow~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BA118A19A84002E0703 /* back_arrow~iphone.png */; };
+		7D98AD4319A7C550003D2BF6 /* icon_export_dropbox~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247B519353BD50091C286 /* icon_export_dropbox~iphone.png */; };
+		7D98AD4419A7C550003D2BF6 /* Green-check@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9D418DCE475008ACF88 /* Green-check@2x~iphone.png */; };
+		7D98AD4519A7C550003D2BF6 /* logo_bitcoin@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14AE18C012B500AEA789 /* logo_bitcoin@2x~iphone.png */; };
+		7D98AD4619A7C550003D2BF6 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5675B6018A17F6F002E0703 /* Main_iPad.storyboard */; };
+		7D98AD4719A7C550003D2BF6 /* 0-bars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5628BE7199BD6320077DA1C /* 0-bars@2x.png */; };
+		7D98AD4819A7C550003D2BF6 /* btn_locateMe~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B516C1EF18C7E7F2008CC6A1 /* btn_locateMe~iphone.png */; };
+		7D98AD4919A7C550003D2BF6 /* SearchBarBacking@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BA918A19A84002E0703 /* SearchBarBacking@2x~iphone.png */; };
+		7D98AD4A19A7C550003D2BF6 /* emboss_down_deep~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148C18C012B500AEA789 /* emboss_down_deep~iphone.png */; };
+		7D98AD4B19A7C550003D2BF6 /* icon_approved~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C64192D1DE50015BB3C /* icon_approved~iphone.png */; };
+		7D98AD4C19A7C550003D2BF6 /* btn_4@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145018C012B500AEA789 /* btn_4@2x~iphone.png */; };
+		7D98AD4D19A7C550003D2BF6 /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
+		7D98AD4E19A7C550003D2BF6 /* 3-bars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5628BEA199BD6320077DA1C /* 3-bars@2x.png */; };
+		7D98AD4F19A7C550003D2BF6 /* QuestionAnswerView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB1218DE01EE008ACF88 /* QuestionAnswerView~ipad.xib */; };
+		7D98AD5019A7C550003D2BF6 /* btn_selected~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02F918EA206300845090 /* btn_selected~iphone.png */; };
+		7D98AD5119A7C550003D2BF6 /* icon_bitcoin_light~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149518C012B500AEA789 /* icon_bitcoin_light~iphone.png */; };
+		7D98AD5219A7C550003D2BF6 /* icon_request_dark@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149B18C012B500AEA789 /* icon_request_dark@2x~iphone.png */; };
+		7D98AD5319A7C550003D2BF6 /* icon_USD_dark@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A618C012B500AEA789 /* icon_USD_dark@2x~iphone.png */; };
+		7D98AD5419A7C550003D2BF6 /* bkg_categories@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C140E18C0113A00AEA789 /* bkg_categories@2x~iphone.png */; };
+		7D98AD5519A7C550003D2BF6 /* btn_7@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145618C012B500AEA789 /* btn_7@2x~iphone.png */; };
+		7D98AD5619A7C550003D2BF6 /* icon_settings_dark@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A318C012B500AEA789 /* icon_settings_dark@2x~iphone.png */; };
+		7D98AD5719A7C550003D2BF6 /* icon_not_approved~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C62192D1DE50015BB3C /* icon_not_approved~iphone.png */; };
+		7D98AD5819A7C550003D2BF6 /* icon_USD_light.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A818C012B500AEA789 /* icon_USD_light.png */; };
+		7D98AD5919A7C550003D2BF6 /* ButtonSelectorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56553F318EDDD26005B35E1 /* ButtonSelectorView~iphone.xib */; };
+		7D98AD5A19A7C550003D2BF6 /* icon_request~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149D18C012B500AEA789 /* icon_request~iphone.png */; };
+		7D98AD5B19A7C550003D2BF6 /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */; };
+		7D98AD5C19A7C550003D2BF6 /* btn_alwaysConfirm_off~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B56553DC18ECAFE8005B35E1 /* btn_alwaysConfirm_off~iphone.png */; };
+		7D98AD5D19A7C550003D2BF6 /* btn_changeCategories@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02F418EA206300845090 /* btn_changeCategories@2x~iphone.png */; };
+		7D98AD5E19A7C550003D2BF6 /* btn_max~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DEE197DCB7800EC95F8 /* btn_max~iphone.png */; };
+		7D98AD5F19A7C550003D2BF6 /* btn_1~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144B18C012B500AEA789 /* btn_1~iphone.png */; };
+		7D98AD6019A7C550003D2BF6 /* sms_btn~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693871964FE8A0022EE64 /* sms_btn~iphone.png */; };
+		7D98AD6119A7C550003D2BF6 /* icon_directory@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149618C012B500AEA789 /* icon_directory@2x~iphone.png */; };
+		7D98AD6219A7C550003D2BF6 /* icon_directory_dark@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149718C012B500AEA789 /* icon_directory_dark@2x~iphone.png */; };
+		7D98AD6319A7C550003D2BF6 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFA18A40A8400DA4A34 /* Lato-Black.ttf */; };
+		7D98AD6419A7C550003D2BF6 /* btn_info@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B561E1B018D25CC1002DCDC2 /* btn_info@2x~iphone.png */; };
+		7D98AD6519A7C550003D2BF6 /* SearchBarBacking~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BAA18A19A84002E0703 /* SearchBarBacking~iphone.png */; };
+		7D98AD6619A7C550003D2BF6 /* btn_big_blue2_dark~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5184B7C18E0F4DA0001712A /* btn_big_blue2_dark~iphone.png */; };
+		7D98AD6719A7C550003D2BF6 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
+		7D98AD6819A7C550003D2BF6 /* tabbar_popup_left~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B718C012B500AEA789 /* tabbar_popup_left~iphone.png */; };
+		7D98AD6919A7C550003D2BF6 /* flash-off~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2163196399F400CC0F1E /* flash-off~iphone.png */; };
+		7D98AD6A19A7C550003D2BF6 /* btn_expand~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC215F19633FFB00CC0F1E /* btn_expand~iphone.png */; };
+		7D98AD6B19A7C550003D2BF6 /* btn_addCategory~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A031F18EB597D00845090 /* btn_addCategory~iphone.png */; };
+		7D98AD6C19A7C550003D2BF6 /* emboss_up@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148E18C012B500AEA789 /* emboss_up@2x~iphone.png */; };
+		7D98AD6D19A7C550003D2BF6 /* tabbar_popup_right~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14BB18C012B500AEA789 /* tabbar_popup_right~iphone.png */; };
+		7D98AD6E19A7C550003D2BF6 /* back_arrow@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BA018A19A84002E0703 /* back_arrow@2x~iphone.png */; };
+		7D98AD6F19A7C550003D2BF6 /* bitCoinAnnotation@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C140C18C0113A00AEA789 /* bitCoinAnnotation@2x~iphone.png */; };
+		7D98AD7019A7C550003D2BF6 /* bd_icon_web@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C143118C0129300AEA789 /* bd_icon_web@2x~iphone.png */; };
+		7D98AD7119A7C550003D2BF6 /* btn_big_blue~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9AC18D8F18E008ACF88 /* btn_big_blue~iphone.png */; };
+		7D98AD7219A7C550003D2BF6 /* InfoView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B561E1A418D2572D002DCDC2 /* InfoView~ipad.xib */; };
+		7D98AD7319A7C550003D2BF6 /* tabbar_popup_middle@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B818C012B500AEA789 /* tabbar_popup_middle@2x~iphone.png */; };
+		7D98AD7419A7C550003D2BF6 /* btn_minus@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147418C012B500AEA789 /* btn_minus@2x~iphone.png */; };
+		7D98AD7519A7C550003D2BF6 /* bd_highlighted_cell_top@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C7C192FE8A30015BB3C /* bd_highlighted_cell_top@2x~iphone.png */; };
+		7D98AD7619A7C550003D2BF6 /* bkg_calculator~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144518C012B500AEA789 /* bkg_calculator~iphone.png */; };
+		7D98AD7719A7C550003D2BF6 /* btn_alwaysConfirm_off@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B56553DB18ECAFE8005B35E1 /* btn_alwaysConfirm_off@2x~iphone.png */; };
+		7D98AD7819A7C550003D2BF6 /* icon_USD_light@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A918C012B500AEA789 /* icon_USD_light@2x~iphone.png */; };
+		7D98AD7919A7C550003D2BF6 /* bkg_calculator@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144418C012B500AEA789 /* bkg_calculator@2x~iphone.png */; };
+		7D98AD7A19A7C550003D2BF6 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7D6EDB8019A66C9F007C33AE /* HockeySDK.xcconfig */; };
+		7D98AD7B19A7C550003D2BF6 /* icon_settings_dark~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A418C012B500AEA789 /* icon_settings_dark~iphone.png */; };
+		7D98AD7C19A7C550003D2BF6 /* background@2x~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5675BA218A19A84002E0703 /* background@2x~iphone.jpg */; };
+		7D98AD7D19A7C550003D2BF6 /* btn_QR~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147D18C012B500AEA789 /* btn_QR~iphone.png */; };
+		7D98AD7E19A7C550003D2BF6 /* bar_balance@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144218C012B500AEA789 /* bar_balance@2x~iphone.png */; };
+		7D98AD7F19A7C550003D2BF6 /* btn_close~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B561E1AD18D259CA002DCDC2 /* btn_close~iphone.png */; };
+		7D98AD8019A7C550003D2BF6 /* icon_send_dark@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149F18C012B500AEA789 /* icon_send_dark@2x~iphone.png */; };
+		7D98AD8119A7C550003D2BF6 /* icon_export_sdcard~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247BB19353BD50091C286 /* icon_export_sdcard~iphone.png */; };
+		7D98AD8219A7C550003D2BF6 /* tabbar_popup_middle~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B918C012B500AEA789 /* tabbar_popup_middle~iphone.png */; };
+		7D98AD8319A7C550003D2BF6 /* infoTransactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6E192E7D4A0015BB3C /* infoTransactionDetails.html */; };
+		7D98AD8419A7C550003D2BF6 /* icon_export_printer~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247BD19353BD50091C286 /* icon_export_printer~iphone.png */; };
+		7D98AD8519A7C550003D2BF6 /* PopupPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C3090191834AC006923DE /* PopupPickerView.xib */; };
+		7D98AD8619A7C550003D2BF6 /* btn_album~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */; };
+		7D98AD8719A7C550003D2BF6 /* btn_QR@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147C18C012B500AEA789 /* btn_QR@2x~iphone.png */; };
+		7D98AD8819A7C550003D2BF6 /* ribbon@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C141618C0113A00AEA789 /* ribbon@2x~iphone.png */; };
+		7D98AD8919A7C550003D2BF6 /* ribbon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C141718C0113A00AEA789 /* ribbon~iphone.png */; };
+		7D98AD8A19A7C550003D2BF6 /* thumb~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14C318C012B500AEA789 /* thumb~iphone.png */; };
+		7D98AD8B19A7C550003D2BF6 /* icon_location~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5137C4118A487C500DA4A34 /* icon_location~iphone.png */; };
+		7D98AD8C19A7C550003D2BF6 /* btn_slide_to_confirm~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B56553E618ECB2FE005B35E1 /* btn_slide_to_confirm~iphone.png */; };
+		7D98AD8D19A7C550003D2BF6 /* tabbar_popup_left@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B618C012B500AEA789 /* tabbar_popup_left@2x~iphone.png */; };
+		7D98AD8E19A7C550003D2BF6 /* btn_minus~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147518C012B500AEA789 /* btn_minus~iphone.png */; };
+		7D98AD8F19A7C550003D2BF6 /* icon_settings~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A518C012B500AEA789 /* icon_settings~iphone.png */; };
+		7D98AD9019A7C550003D2BF6 /* flash-on@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2164196399F400CC0F1E /* flash-on@2x~iphone.png */; };
+		7D98AD9119A7C550003D2BF6 /* btn_td_done~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148918C012B500AEA789 /* btn_td_done~iphone.png */; };
+		7D98AD9219A7C550003D2BF6 /* btn_SMS~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148718C012B500AEA789 /* btn_SMS~iphone.png */; };
+		7D98AD9319A7C550003D2BF6 /* icon_rightArrow~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB0A18DDE739008ACF88 /* icon_rightArrow~iphone.png */; };
+		7D98AD9419A7C550003D2BF6 /* swipe-arrow@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9AF18D92C1C008ACF88 /* swipe-arrow@2x~iphone.png */; };
+		7D98AD9519A7C550003D2BF6 /* icon_export_google@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247B819353BD50091C286 /* icon_export_google@2x~iphone.png */; };
+		7D98AD9619A7C550003D2BF6 /* icon_send@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149E18C012B500AEA789 /* icon_send@2x~iphone.png */; };
+		7D98AD9719A7C550003D2BF6 /* 2-bars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5628BE9199BD6320077DA1C /* 2-bars@2x.png */; };
+		7D98AD9819A7C550003D2BF6 /* emboss_down@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148A18C012B500AEA789 /* emboss_down@2x~iphone.png */; };
+		7D98AD9919A7C550003D2BF6 /* Red-X@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9D618DCE475008ACF88 /* Red-X@2x~iphone.png */; };
+		7D98AD9A19A7C550003D2BF6 /* btn_light@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB1418DE0523008ACF88 /* btn_light@2x~iphone.png */; };
+		7D98AD9B19A7C550003D2BF6 /* icon_wallet_dark@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14AB18C012B500AEA789 /* icon_wallet_dark@2x~iphone.png */; };
+		7D98AD9C19A7C550003D2BF6 /* btn_export_dates~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247A11934FC830091C286 /* btn_export_dates~iphone.png */; };
+		7D98AD9D19A7C550003D2BF6 /* TxSearchBarBacking@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C8519300CBD0015BB3C /* TxSearchBarBacking@2x~iphone.png */; };
+		7D98AD9E19A7C550003D2BF6 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137C0318A40A8400DA4A34 /* Lato-Regular.ttf */; };
+		7D98AD9F19A7C550003D2BF6 /* darken_bottom_table_cell~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C141118C0113A00AEA789 /* darken_bottom_table_cell~iphone.png */; };
+		7D98ADA019A7C550003D2BF6 /* btn_send~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148118C012B500AEA789 /* btn_send~iphone.png */; };
+		7D98ADA119A7C550003D2BF6 /* icon_bitcoin_dark~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149318C012B500AEA789 /* icon_bitcoin_dark~iphone.png */; };
+		7D98ADA219A7C550003D2BF6 /* icon_export_printer@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247BE19353BD50091C286 /* icon_export_printer@2x~iphone.png */; };
+		7D98ADA319A7C550003D2BF6 /* btn_close@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B561E1AC18D259CA002DCDC2 /* btn_close@2x~iphone.png */; };
+		7D98ADA419A7C550003D2BF6 /* icon_export_email~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247B919353BD50091C286 /* icon_export_email~iphone.png */; };
+		7D98ADA519A7C550003D2BF6 /* bd_cell_bottom_white@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B516C1F218C802F6008CC6A1 /* bd_cell_bottom_white@2x~iphone.png */; };
+		7D98ADA619A7C550003D2BF6 /* btn_camera~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C5E192AF4FF0015BB3C /* btn_camera~iphone.png */; };
+		7D98ADA719A7C550003D2BF6 /* icon_request@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149A18C012B500AEA789 /* icon_request@2x~iphone.png */; };
+		7D98ADA819A7C550003D2BF6 /* btn_multiply~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147718C012B500AEA789 /* btn_multiply~iphone.png */; };
+		7D98ADA919A7C550003D2BF6 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137C0218A40A8400DA4A34 /* Lato-LightItalic.ttf */; };
+		7D98ADAA19A7C550003D2BF6 /* infoTransactions.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6F192E7D4A0015BB3C /* infoTransactions.html */; };
+		7D98ADAB19A7C550003D2BF6 /* btn_calc_back@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146018C012B500AEA789 /* btn_calc_back@2x~iphone.png */; };
+		7D98ADAC19A7C550003D2BF6 /* password_dot~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B118C012B500AEA789 /* password_dot~iphone.png */; };
+		7D98ADAD19A7C550003D2BF6 /* btn_plus@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147A18C012B500AEA789 /* btn_plus@2x~iphone.png */; };
+		7D98ADAE19A7C550003D2BF6 /* icon_bitcoin_dark@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149218C012B500AEA789 /* icon_bitcoin_dark@2x~iphone.png */; };
+		7D98ADAF19A7C550003D2BF6 /* table_export@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247AD19351BFD0091C286 /* table_export@2x~iphone.png */; };
+		7D98ADB019A7C550003D2BF6 /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C309719198B33006923DE /* PopupWheelPickerView.xib */; };
+		7D98ADB119A7C550003D2BF6 /* BalanceView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57C209918C25042005D7245 /* BalanceView~ipad.xib */; };
+		7D98ADB219A7C550003D2BF6 /* icon_export_view@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247B419353BD50091C286 /* icon_export_view@2x~iphone.png */; };
+		7D98ADB319A7C550003D2BF6 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137C0618A40A8400DA4A34 /* Montserrat-Regular.ttf */; };
+		7D98ADB419A7C550003D2BF6 /* btn_percent~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147918C012B500AEA789 /* btn_percent~iphone.png */; };
+		7D98ADB519A7C550003D2BF6 /* icon_directory~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149918C012B500AEA789 /* icon_directory~iphone.png */; };
+		7D98ADB619A7C550003D2BF6 /* btn_done@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02F618EA206300845090 /* btn_done@2x~iphone.png */; };
+		7D98ADB719A7C550003D2BF6 /* btn_info~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B561E1B118D25CC1002DCDC2 /* btn_info~iphone.png */; };
+		7D98ADB819A7C550003D2BF6 /* bd_icon_phone~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C143018C0129300AEA789 /* bd_icon_phone~iphone.png */; };
+		7D98ADB919A7C550003D2BF6 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFC18A40A8400DA4A34 /* Lato-Bold.ttf */; };
+		7D98ADBA19A7C550003D2BF6 /* btn_clear~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146718C012B500AEA789 /* btn_clear~iphone.png */; };
+		7D98ADBB19A7C550003D2BF6 /* tabbar_divider@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B418C012B500AEA789 /* tabbar_divider@2x~iphone.png */; };
+		7D98ADBC19A7C550003D2BF6 /* bd_cell_single@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B57C20AB18C2FBE7005D7245 /* bd_cell_single@2x~iphone.png */; };
+		7D98ADBD19A7C550003D2BF6 /* btn_expand@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC215E19633FFB00CC0F1E /* btn_expand@2x~iphone.png */; };
+		7D98ADBE19A7C550003D2BF6 /* btn_right@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BB818A1A1B7002E0703 /* btn_right@2x~iphone.png */; };
+		7D98ADBF19A7C550003D2BF6 /* icon_calendar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247A9193516630091C286 /* icon_calendar@2x~iphone.png */; };
+		7D98ADC019A7C550003D2BF6 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D6EDB8119A66C9F007C33AE /* HockeySDKResources.bundle */; };
+		7D98ADC119A7C550003D2BF6 /* btn_unselected~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02FB18EA206300845090 /* btn_unselected~iphone.png */; };
+		7D98ADC219A7C550003D2BF6 /* sms_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693861964FE8A0022EE64 /* sms_btn@2x~iphone.png */; };
+		7D98ADC319A7C550003D2BF6 /* btn_2~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144D18C012B500AEA789 /* btn_2~iphone.png */; };
+		7D98ADC419A7C550003D2BF6 /* btn_request@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147E18C012B500AEA789 /* btn_request@2x~iphone.png */; };
+		7D98ADC519A7C550003D2BF6 /* copy_btn~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693831964FE8A0022EE64 /* copy_btn~iphone.png */; };
+		7D98ADC619A7C550003D2BF6 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFE18A40A8400DA4A34 /* Lato-Hairline.ttf */; };
+		7D98ADC719A7C550003D2BF6 /* table_cell_bottom~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14BD18C012B500AEA789 /* table_cell_bottom~iphone.png */; };
+		7D98ADC819A7C550003D2BF6 /* TxSearchBarBacking~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C8419300CBD0015BB3C /* TxSearchBarBacking~iphone.png */; };
+		7D98ADC919A7C550003D2BF6 /* btn_selected@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02F818EA206300845090 /* btn_selected@2x~iphone.png */; };
+		7D98ADCA19A7C550003D2BF6 /* icon_location@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5137C4018A487C500DA4A34 /* icon_location@2x~iphone.png */; };
+		7D98ADCB19A7C550003D2BF6 /* clearButton@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B53FD64118F6EA110001E00D /* clearButton@2x~iphone.png */; };
+		7D98ADCC19A7C550003D2BF6 /* tabbar_popup_right@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14BA18C012B500AEA789 /* tabbar_popup_right@2x~iphone.png */; };
+		7D98ADCD19A7C550003D2BF6 /* img_collapseExpandBlueDown~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB1918DE06B7008ACF88 /* img_collapseExpandBlueDown~iphone.png */; };
+		7D98ADCE19A7C550003D2BF6 /* btn_big_green~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5184B7418E0D5E90001712A /* btn_big_green~iphone.png */; };
+		7D98ADCF19A7C550003D2BF6 /* btn_right~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BB918A1A1B7002E0703 /* btn_right~iphone.png */; };
+		7D98ADD019A7C550003D2BF6 /* picker_left_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C308C191834AC006923DE /* picker_left_point.png */; };
+		7D98ADD119A7C550003D2BF6 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137C0518A40A8400DA4A34 /* Montserrat-Bold.ttf */; };
+		7D98ADD219A7C550003D2BF6 /* picker_left_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B507ADAE191C240E00F51E1E /* picker_left_point@2x.png */; };
+		7D98ADD319A7C550003D2BF6 /* email_btn~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693851964FE8A0022EE64 /* email_btn~iphone.png */; };
+		7D98ADD419A7C550003D2BF6 /* icon_wallet_dark~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14AC18C012B500AEA789 /* icon_wallet_dark~iphone.png */; };
+		7D98ADD519A7C550003D2BF6 /* btn_export_dates@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247A01934FC830091C286 /* btn_export_dates@2x~iphone.png */; };
+		7D98ADD619A7C550003D2BF6 /* infoSend.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6D192E7D4A0015BB3C /* infoSend.html */; };
+		7D98ADD719A7C550003D2BF6 /* BLE_photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B58FF738199C3D7B002C3D45 /* BLE_photo@2x.png */; };
+		7D98ADD819A7C550003D2BF6 /* btn_locateMe@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B516C1EE18C7E7F2008CC6A1 /* btn_locateMe@2x~iphone.png */; };
+		7D98ADD919A7C550003D2BF6 /* Red-X~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9D718DCE475008ACF88 /* Red-X~iphone.png */; };
+		7D98ADDA19A7C550003D2BF6 /* icon_export_dropbox@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247B619353BD50091C286 /* icon_export_dropbox@2x~iphone.png */; };
+		7D98ADDB19A7C550003D2BF6 /* bkg_dark_header~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144718C012B500AEA789 /* bkg_dark_header~iphone.png */; };
+		7D98ADDC19A7C550003D2BF6 /* btn_slider~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148518C012B500AEA789 /* btn_slider~iphone.png */; };
+		7D98ADDD19A7C550003D2BF6 /* logo_large~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9B418DA0F9E008ACF88 /* logo_large~iphone.png */; };
+		7D98ADDE19A7C550003D2BF6 /* btn_export~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147118C012B500AEA789 /* btn_export~iphone.png */; };
+		7D98ADDF19A7C550003D2BF6 /* btn_calc_done@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146218C012B500AEA789 /* btn_calc_done@2x~iphone.png */; };
+		7D98ADE019A7C550003D2BF6 /* BLE_connected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B58FF73E199C4234002C3D45 /* BLE_connected@2x.png */; };
+		7D98ADE119A7C550003D2BF6 /* btn_dot@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146A18C012B500AEA789 /* btn_dot@2x~iphone.png */; };
+		7D98ADE219A7C550003D2BF6 /* btn_deleteCategory~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A032118EB597D00845090 /* btn_deleteCategory~iphone.png */; };
+		7D98ADE319A7C550003D2BF6 /* table_cell_middle~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14BF18C012B500AEA789 /* table_cell_middle~iphone.png */; };
+		7D98ADE419A7C550003D2BF6 /* btn_big_green@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5184B7318E0D5E90001712A /* btn_big_green@2x~iphone.png */; };
+		7D98ADE519A7C550003D2BF6 /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B561E1A518D2572D002DCDC2 /* InfoView~iphone.xib */; };
+		7D98ADE619A7C550003D2BF6 /* btn_big_blue@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9AB18D8F18E008ACF88 /* btn_big_blue@2x~iphone.png */; };
+		7D98ADE719A7C550003D2BF6 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56553EB18ECC8C2005B35E1 /* CalculatorView~iphone.xib */; };
+		7D98ADE819A7C550003D2BF6 /* bkg_textfield@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BA418A19A84002E0703 /* bkg_textfield@2x~iphone.png */; };
+		7D98ADE919A7C550003D2BF6 /* btn_cancel@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02F218EA206300845090 /* btn_cancel@2x~iphone.png */; };
+		7D98ADEA19A7C550003D2BF6 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9A918D4AF6C008ACF88 /* info.html */; };
+		7D98ADEB19A7C550003D2BF6 /* table_export~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247AC19351BFD0091C286 /* table_export~iphone.png */; };
+		7D98ADEC19A7C550003D2BF6 /* bd_cell_middle~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C142818C0129300AEA789 /* bd_cell_middle~iphone.png */; };
+		7D98ADED19A7C550003D2BF6 /* BLE_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5628BF6199C035F0077DA1C /* BLE_Logo@2x.png */; };
+		7D98ADEE19A7C550003D2BF6 /* infoSendConfirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = 7DAE1F4719A3C6A400BF5C60 /* infoSendConfirmation.html */; };
+		7D98ADEF19A7C550003D2BF6 /* icon_wallet@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14AA18C012B500AEA789 /* icon_wallet@2x~iphone.png */; };
+		7D98ADF019A7C550003D2BF6 /* btn_big_blue2_dark@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5184B7B18E0F4DA0001712A /* btn_big_blue2_dark@2x~iphone.png */; };
+		7D98ADF119A7C550003D2BF6 /* btn_9@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145A18C012B500AEA789 /* btn_9@2x~iphone.png */; };
+		7D98ADF219A7C550003D2BF6 /* btn_clear@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146618C012B500AEA789 /* btn_clear@2x~iphone.png */; };
+		7D98ADF319A7C550003D2BF6 /* copy_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */; };
+		7D98ADF419A7C550003D2BF6 /* btn_slider@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148418C012B500AEA789 /* btn_slider@2x~iphone.png */; };
+		7D98ADF519A7C550003D2BF6 /* bd_icon_web~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C143218C0129300AEA789 /* bd_icon_web~iphone.png */; };
+		7D98ADF619A7C550003D2BF6 /* logo~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5137C3D18A4529500DA4A34 /* logo~iphone.png */; };
+		7D98ADF719A7C550003D2BF6 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */; };
+		7D98ADF819A7C550003D2BF6 /* btn_5@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145218C012B500AEA789 /* btn_5@2x~iphone.png */; };
+		7D98ADF919A7C550003D2BF6 /* btn_add@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145C18C012B500AEA789 /* btn_add@2x~iphone.png */; };
+		7D98ADFA19A7C550003D2BF6 /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56553E918ECB687005B35E1 /* ConfirmationSliderView.xib */; };
+		7D98ADFB19A7C550003D2BF6 /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFD18A40A8400DA4A34 /* Lato-BoldItalic.ttf */; };
+		7D98ADFC19A7C550003D2BF6 /* 5-bars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5628BEC199BD6320077DA1C /* 5-bars@2x.png */; };
+		7D98ADFD19A7C550003D2BF6 /* icon_send~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A118C012B500AEA789 /* icon_send~iphone.png */; };
+		7D98ADFE19A7C550003D2BF6 /* btn_import_wallet~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147318C012B500AEA789 /* btn_import_wallet~iphone.png */; };
+		7D98ADFF19A7C550003D2BF6 /* btn_alwaysConfirm_on@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B56553DD18ECAFE8005B35E1 /* btn_alwaysConfirm_on@2x~iphone.png */; };
+		7D98AE0019A7C550003D2BF6 /* img_collapseExpandBlueDown@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB1818DE06B7008ACF88 /* img_collapseExpandBlueDown@2x~iphone.png */; };
+		7D98AE0119A7C550003D2BF6 /* WalletHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5635A26193D0FB200345AEE /* WalletHeaderView~iphone.xib */; };
+		7D98AE0219A7C550003D2BF6 /* table_cell_middle@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14BE18C012B500AEA789 /* table_cell_middle@2x~iphone.png */; };
+		7D98AE0319A7C550003D2BF6 /* infoSettings.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6A192E6BC30015BB3C /* infoSettings.html */; };
+		7D98AE0419A7C550003D2BF6 /* icon_request_dark~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149C18C012B500AEA789 /* icon_request_dark~iphone.png */; };
+		7D98AE0519A7C550003D2BF6 /* swipe-arrow~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9B018D92C1C008ACF88 /* swipe-arrow~iphone.png */; };
+		7D98AE0619A7C550003D2BF6 /* WalletExportPDF.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4C7C1254193D2CFC0096338D /* WalletExportPDF.pdf */; };
+		7D98AE0719A7C550003D2BF6 /* bkg_flash_controls~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5C0A8D718E63FE6008F302C /* bkg_flash_controls~iphone.png */; };
+		7D98AE0819A7C550003D2BF6 /* btn_slash@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148218C012B500AEA789 /* btn_slash@2x~iphone.png */; };
+		7D98AE0919A7C550003D2BF6 /* infoRequestQR.html in Resources */ = {isa = PBXBuildFile; fileRef = DABA3485198DFEE300EFAB13 /* infoRequestQR.html */; };
+		7D98AE0A19A7C550003D2BF6 /* emboss_up~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148F18C012B500AEA789 /* emboss_up~iphone.png */; };
+		7D98AE0B19A7C550003D2BF6 /* bd_icon_clock~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C142C18C0129300AEA789 /* bd_icon_clock~iphone.png */; };
+		7D98AE0C19A7C550003D2BF6 /* btn_import_wallet@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147218C012B500AEA789 /* btn_import_wallet@2x~iphone.png */; };
+		7D98AE0D19A7C550003D2BF6 /* btn_4~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145118C012B500AEA789 /* btn_4~iphone.png */; };
+		7D98AE0E19A7C550003D2BF6 /* bkg_categories~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C140F18C0113A00AEA789 /* bkg_categories~iphone.png */; };
+		7D98AE0F19A7C550003D2BF6 /* icon_wallet~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14AD18C012B500AEA789 /* icon_wallet~iphone.png */; };
+		7D98AE1019A7C550003D2BF6 /* Lato-HairlineItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFF18A40A8400DA4A34 /* Lato-HairlineItalic.ttf */; };
+		7D98AE1119A7C550003D2BF6 /* emboss_down_deep@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148B18C012B500AEA789 /* emboss_down_deep@2x~iphone.png */; };
+		7D98AE1219A7C550003D2BF6 /* icon_bitcoin_light@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149418C012B500AEA789 /* icon_bitcoin_light@2x~iphone.png */; };
+		7D98AE1319A7C550003D2BF6 /* btn_6~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145518C012B500AEA789 /* btn_6~iphone.png */; };
+		7D98AE1419A7C550003D2BF6 /* background_header@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247CC1935594F0091C286 /* background_header@2x~iphone.png */; };
+		7D98AE1519A7C550003D2BF6 /* logo_bitcoin~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14AF18C012B500AEA789 /* logo_bitcoin~iphone.png */; };
+		7D98AE1619A7C550003D2BF6 /* btn_calc_back~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146118C012B500AEA789 /* btn_calc_back~iphone.png */; };
+		7D98AE1719A7C550003D2BF6 /* btn_multiply@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147618C012B500AEA789 /* btn_multiply@2x~iphone.png */; };
+		7D98AE1819A7C550003D2BF6 /* table_cell_top@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14C018C012B500AEA789 /* table_cell_top@2x~iphone.png */; };
+		7D98AE1919A7C550003D2BF6 /* flash-off@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2162196399F400CC0F1E /* flash-off@2x~iphone.png */; };
+		7D98AE1A19A7C550003D2BF6 /* btn_td_done@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148818C012B500AEA789 /* btn_td_done@2x~iphone.png */; };
+		7D98AE1B19A7C550003D2BF6 /* btn_scan_qr_code@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5628BDE199BCCEA0077DA1C /* btn_scan_qr_code@2x~iphone.png */; };
+		7D98AE1C19A7C550003D2BF6 /* btn_deleteCategory@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A032018EB597D00845090 /* btn_deleteCategory@2x~iphone.png */; };
+		7D98AE1D19A7C550003D2BF6 /* infoExportWalletOptions.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C72479D1933D3890091C286 /* infoExportWalletOptions.html */; };
+		7D98AE1E19A7C550003D2BF6 /* tabbar_divider~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B518C012B500AEA789 /* tabbar_divider~iphone.png */; };
+		7D98AE1F19A7C550003D2BF6 /* BLE_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B58FF740199D1540002C3D45 /* BLE_Button@2x.png */; };
+		7D98AE2019A7C550003D2BF6 /* btn_equal@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146E18C012B500AEA789 /* btn_equal@2x~iphone.png */; };
+		7D98AE2119A7C550003D2BF6 /* infoRecipient.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C98CAED199D6914000009B5 /* infoRecipient.html */; };
+		7D98AE2219A7C550003D2BF6 /* tabbar_bkg_selected@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C161C18C145D400AEA789 /* tabbar_bkg_selected@2x~iphone.png */; };
+		7D98AE2319A7C550003D2BF6 /* background_header~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247CB1935594F0091C286 /* background_header~iphone.png */; };
+		7D98AE2419A7C550003D2BF6 /* btn_9~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145B18C012B500AEA789 /* btn_9~iphone.png */; };
+		7D98AE2519A7C550003D2BF6 /* icon_settings@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A218C012B500AEA789 /* icon_settings@2x~iphone.png */; };
+		7D98AE2619A7C550003D2BF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5675B6618A17F6F002E0703 /* Images.xcassets */; };
+		7D98AE2719A7C550003D2BF6 /* bd_highlighted_cell_top~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C7D192FE8A30015BB3C /* bd_highlighted_cell_top~iphone.png */; };
+		7D98AE2819A7C550003D2BF6 /* background~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5675BA318A19A84002E0703 /* background~iphone.jpg */; };
+		7D98AE2919A7C550003D2BF6 /* bd_cell_top@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C142918C0129300AEA789 /* bd_cell_top@2x~iphone.png */; };
+		7D98AE2A19A7C550003D2BF6 /* icon_export_sdcard@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247BC19353BD50091C286 /* icon_export_sdcard@2x~iphone.png */; };
+		7D98AE2B19A7C550003D2BF6 /* btn_camera@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C5F192AF4FF0015BB3C /* btn_camera@2x~iphone.png */; };
+		7D98AE2C19A7C550003D2BF6 /* divider@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C141218C0113A00AEA789 /* divider@2x~iphone.png */; };
+		7D98AE2D19A7C550003D2BF6 /* icon_approved@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C65192D1DE50015BB3C /* icon_approved@2x~iphone.png */; };
+		7D98AE2E19A7C550003D2BF6 /* btn_equal~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146F18C012B500AEA789 /* btn_equal~iphone.png */; };
+		7D98AE2F19A7C550003D2BF6 /* clearButton~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B53FD64218F6EA110001E00D /* clearButton~iphone.png */; };
+		7D98AE3019A7C550003D2BF6 /* bd_cell_top~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C142A18C0129300AEA789 /* bd_cell_top~iphone.png */; };
+		7D98AE3119A7C550003D2BF6 /* PasswordVerifyView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9D018DCDFE7008ACF88 /* PasswordVerifyView~iphone.xib */; };
+		7D98AE3219A7C550003D2BF6 /* logo@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5137C3C18A4529500DA4A34 /* logo@2x~iphone.png */; };
+		7D98AE3319A7C550003D2BF6 /* bd_cell_bottom_white~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B516C1F318C802F6008CC6A1 /* bd_cell_bottom_white~iphone.png */; };
+		7D98AE3419A7C550003D2BF6 /* 1-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5628BE8199BD6320077DA1C /* 1-bar@2x.png */; };
+		7D98AE3519A7C550003D2BF6 /* btn_big_blue2@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5184B7718E0EDD70001712A /* btn_big_blue2@2x~iphone.png */; };
+		7D98AE3619A7C550003D2BF6 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137C0118A40A8400DA4A34 /* Lato-Light.ttf */; };
+		7D98AE3719A7C550003D2BF6 /* icon_send_dark~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A018C012B500AEA789 /* icon_send_dark~iphone.png */; };
+		7D98AE3819A7C550003D2BF6 /* btn_album@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */; };
+		7D98AE3919A7C550003D2BF6 /* btn_0@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144818C012B500AEA789 /* btn_0@2x~iphone.png */; };
+		7D98AE3A19A7C550003D2BF6 /* btn_email@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146C18C012B500AEA789 /* btn_email@2x~iphone.png */; };
+		7D98AE3B19A7C550003D2BF6 /* btn_changeCategories~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02F518EA206300845090 /* btn_changeCategories~iphone.png */; };
+		7D98AE3C19A7C550003D2BF6 /* 4-bars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5628BEB199BD6320077DA1C /* 4-bars@2x.png */; };
+		7D98AE3D19A7C550003D2BF6 /* bd_icon_location~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C142E18C0129300AEA789 /* bd_icon_location~iphone.png */; };
+		7D98AE3E19A7C550003D2BF6 /* icon_directory_dark~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149818C012B500AEA789 /* icon_directory_dark~iphone.png */; };
+		7D98AE3F19A7C550003D2BF6 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137C0018A40A8400DA4A34 /* Lato-Italic.ttf */; };
+		7D98AE4019A7C550003D2BF6 /* btn_plus~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147B18C012B500AEA789 /* btn_plus~iphone.png */; };
+		7D98AE4119A7C550003D2BF6 /* btn_big_blue2~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5184B7818E0EDD70001712A /* btn_big_blue2~iphone.png */; };
+		7D98AE4219A7C550003D2BF6 /* btn_blue~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145F18C012B500AEA789 /* btn_blue~iphone.png */; };
+		7D98AE4319A7C550003D2BF6 /* tabbar_base@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B218C012B500AEA789 /* tabbar_base@2x~iphone.png */; };
+		7D98AE4419A7C550003D2BF6 /* btn_6@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145418C012B500AEA789 /* btn_6@2x~iphone.png */; };
+		7D98AE4519A7C550003D2BF6 /* Green-check~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9D518DCE475008ACF88 /* Green-check~iphone.png */; };
+		7D98AE4619A7C550003D2BF6 /* btn_max@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DED197DCB7800EC95F8 /* btn_max@2x~iphone.png */; };
+		7D98AE4719A7C550003D2BF6 /* icon_rightArrow@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB0918DDE739008ACF88 /* icon_rightArrow@2x~iphone.png */; };
+		7D98AE4819A7C550003D2BF6 /* QuestionAnswerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB1018DE01CB008ACF88 /* QuestionAnswerView~iphone.xib */; };
+		7D98AE4919A7C550003D2BF6 /* btn_8@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145818C012B500AEA789 /* btn_8@2x~iphone.png */; };
+		7D98AE4A19A7C550003D2BF6 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFB18A40A8400DA4A34 /* Lato-BlackItalic.ttf */; };
+		7D98AE4B19A7C550003D2BF6 /* password_dot@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B018C012B500AEA789 /* password_dot@2x~iphone.png */; };
+		7D98AE4C19A7C550003D2BF6 /* btn_3@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144E18C012B500AEA789 /* btn_3@2x~iphone.png */; };
+		7D98AE4D19A7C550003D2BF6 /* btn_0~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144918C012B500AEA789 /* btn_0~iphone.png */; };
+		7D98AE4E19A7C550003D2BF6 /* btn_SMS@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148618C012B500AEA789 /* btn_SMS@2x~iphone.png */; };
+		7D98AE4F19A7C550003D2BF6 /* icon_export_view~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247B319353BD50091C286 /* icon_export_view~iphone.png */; };
+		7D98AE5019A7C550003D2BF6 /* bkg_flash_controls@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5C0A8D618E63FE6008F302C /* bkg_flash_controls@2x~iphone.png */; };
+		7D98AE5119A7C550003D2BF6 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5675B5D18A17F6F002E0703 /* Main_iPhone.storyboard */; };
+		7D98AE5219A7C550003D2BF6 /* btn_add~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145D18C012B500AEA789 /* btn_add~iphone.png */; };
+		7D98AE5319A7C550003D2BF6 /* divider~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C141518C0113A00AEA789 /* divider~iphone.png */; };
+		7D98AE5419A7C550003D2BF6 /* btn_use_max@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DE5197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png */; };
+		7D98AE5519A7C550003D2BF6 /* San Diego.gpx in Resources */ = {isa = PBXBuildFile; fileRef = B57288F7193518F600417426 /* San Diego.gpx */; };
+		7D98AE5619A7C550003D2BF6 /* btn_2@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144C18C012B500AEA789 /* btn_2@2x~iphone.png */; };
+		7D98AE5719A7C550003D2BF6 /* AnnotationContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C0A98718EA0B80008F302C /* AnnotationContentView.xib */; };
+		7D98AE5819A7C550003D2BF6 /* bd_icon_clock@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C142B18C0129300AEA789 /* bd_icon_clock@2x~iphone.png */; };
+		7D98AE5919A7C550003D2BF6 /* bd_icon_location@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C142D18C0129300AEA789 /* bd_icon_location@2x~iphone.png */; };
+		7D98AE5A19A7C550003D2BF6 /* icon_search@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BA718A19A84002E0703 /* icon_search@2x~iphone.png */; };
+		7D98AE5B19A7C550003D2BF6 /* bd_cell_bottom@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C142518C0129300AEA789 /* bd_cell_bottom@2x~iphone.png */; };
+		7D98AE5C19A7C550003D2BF6 /* icon_export_email@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247BA19353BD50091C286 /* icon_export_email@2x~iphone.png */; };
+		7D98AE5D19A7C550003D2BF6 /* btn_email~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146D18C012B500AEA789 /* btn_email~iphone.png */; };
+		7D98AE5E19A7C550003D2BF6 /* btn_unselected@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02FA18EA206300845090 /* btn_unselected@2x~iphone.png */; };
+		7D98AE5F19A7C550003D2BF6 /* email_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693841964FE8A0022EE64 /* email_btn@2x~iphone.png */; };
+		7D98AE6019A7C550003D2BF6 /* transactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393518F0A67100BE2670 /* transactionDetails.html */; };
+		7D98AE6119A7C550003D2BF6 /* scan_frame@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E7F57B18E4EC4E009B5844 /* scan_frame@2x~iphone.png */; };
+		7D98AE6219A7C550003D2BF6 /* btn_send@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148018C012B500AEA789 /* btn_send@2x~iphone.png */; };
+		7D98AE6319A7C550003D2BF6 /* btn_dot~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146B18C012B500AEA789 /* btn_dot~iphone.png */; };
+		7D98AE6419A7C550003D2BF6 /* darken_bottom_table_cell@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C141018C0113A00AEA789 /* darken_bottom_table_cell@2x~iphone.png */; };
+		7D98AE6519A7C550003D2BF6 /* btn_search@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C811930060F0015BB3C /* btn_search@2x~iphone.png */; };
+		7D98AE6619A7C550003D2BF6 /* btn_1@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144A18C012B500AEA789 /* btn_1@2x~iphone.png */; };
+		7D98AE6719A7C550003D2BF6 /* btn_calc_done~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146318C012B500AEA789 /* btn_calc_done~iphone.png */; };
+		7D98AE6819A7C550003D2BF6 /* bkg_textfield~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BA518A19A84002E0703 /* bkg_textfield~iphone.png */; };
+		7D98AE6919A7C550003D2BF6 /* BalanceView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57C209718C2502D005D7245 /* BalanceView~iphone.xib */; };
+		7D98AE6A19A7C550003D2BF6 /* btn_request~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147F18C012B500AEA789 /* btn_request~iphone.png */; };
+		7D98AE6B19A7C550003D2BF6 /* table_cell_bottom@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14BC18C012B500AEA789 /* table_cell_bottom@2x~iphone.png */; };
+		7D98AE6C19A7C550003D2BF6 /* icon_export_google~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247B719353BD50091C286 /* icon_export_google~iphone.png */; };
+		7D98AE6D19A7C550003D2BF6 /* bkg_dark_header@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144618C012B500AEA789 /* bkg_dark_header@2x~iphone.png */; };
+		7D98AE6E19A7C550003D2BF6 /* btn_alwaysConfirm_on~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B56553DE18ECAFE8005B35E1 /* btn_alwaysConfirm_on~iphone.png */; };
+		7D98AE6F19A7C550003D2BF6 /* bitCoinAnnotation~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C140D18C0113A00AEA789 /* bitCoinAnnotation~iphone.png */; };
+		7D98AE7019A7C550003D2BF6 /* bd_cell_single~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B57C20AC18C2FBE7005D7245 /* bd_cell_single~iphone.png */; };
+		7D98AE7119A7C550003D2BF6 /* bar_balance~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144318C012B500AEA789 /* bar_balance~iphone.png */; };
+		7D98AE7219A7C550003D2BF6 /* btn_blue@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145E18C012B500AEA789 /* btn_blue@2x~iphone.png */; };
+		7D98AE7319A7C550003D2BF6 /* icon_not_approved@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C63192D1DE50015BB3C /* icon_not_approved@2x~iphone.png */; };
+		7D98AE7419A7C550003D2BF6 /* btn_slide_to_confirm@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B56553E518ECB2FE005B35E1 /* btn_slide_to_confirm@2x~iphone.png */; };
+		7D98AE7519A7C550003D2BF6 /* icon_search~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BA818A19A84002E0703 /* icon_search~iphone.png */; };
+		7D98AE7619A7C550003D2BF6 /* infoImportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C76192E86620015BB3C /* infoImportWallet.html */; };
+		7D98AE7719A7C550003D2BF6 /* bd_cell_bottom~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C142618C0129300AEA789 /* bd_cell_bottom~iphone.png */; };
+		7D98AE7819A7C550003D2BF6 /* btn_slash~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148318C012B500AEA789 /* btn_slash~iphone.png */; };
+		7D98AE7919A7C550003D2BF6 /* btn_light~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EB1518DE0523008ACF88 /* btn_light~iphone.png */; };
+		7D98AE7A19A7C550003D2BF6 /* infoRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6C192E7D4A0015BB3C /* infoRequest.html */; };
+		7D98AE7B19A7C550003D2BF6 /* flash-on~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2165196399F400CC0F1E /* flash-on~iphone.png */; };
+		7D98AE7C19A7C550003D2BF6 /* btn_checkmark~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146518C012B500AEA789 /* btn_checkmark~iphone.png */; };
+		7D98AE7D19A7C550003D2BF6 /* logo_large@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9B318DA0F9E008ACF88 /* logo_large@2x~iphone.png */; };
+		7D98AE7E19A7C550003D2BF6 /* btn_3~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144F18C012B500AEA789 /* btn_3~iphone.png */; };
+		7D98AE7F19A7C550003D2BF6 /* icon_calendar~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247A8193516630091C286 /* icon_calendar~iphone.png */; };
+		7D98AE8019A7C550003D2BF6 /* btn_5~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145318C012B500AEA789 /* btn_5~iphone.png */; };
+		7D98AE8119A7C550003D2BF6 /* h_seperator~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149118C012B500AEA789 /* h_seperator~iphone.png */; };
+		7D98AE8219A7C550003D2BF6 /* drag_bar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */; };
+		7D98AE8319A7C550003D2BF6 /* bd_cell_middle@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C142718C0129300AEA789 /* bd_cell_middle@2x~iphone.png */; };
+		7D98AE8419A7C550003D2BF6 /* table_cell_top~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14C118C012B500AEA789 /* table_cell_top~iphone.png */; };
+		7D98AE8519A7C550003D2BF6 /* h_seperator@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C149018C012B500AEA789 /* h_seperator@2x~iphone.png */; };
+		7D98AE8619A7C550003D2BF6 /* btn_percent@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147818C012B500AEA789 /* btn_percent@2x~iphone.png */; };
+		7D98AE8719A7C550003D2BF6 /* btn_collapse_expand~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C146918C012B500AEA789 /* btn_collapse_expand~iphone.png */; };
+		7D98AE8819A7C550003D2BF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5675B5418A17F6F002E0703 /* InfoPlist.strings */; };
+		7D98AE8919A7C550003D2BF6 /* tabbar_bkg_selected~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C161D18C145D400AEA789 /* tabbar_bkg_selected~iphone.png */; };
+		7D98AE8A19A7C550003D2BF6 /* btn_addCategory@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A031E18EB597D00845090 /* btn_addCategory@2x~iphone.png */; };
+		7D98AE8B19A7C550003D2BF6 /* scan_frame~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E7F57C18E4EC4E009B5844 /* scan_frame~iphone.png */; };
+		7D98AE8C19A7C550003D2BF6 /* btn_7~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145718C012B500AEA789 /* btn_7~iphone.png */; };
+		7D98AE8D19A7C550003D2BF6 /* btn_cancel~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02F318EA206300845090 /* btn_cancel~iphone.png */; };
+		7D98AE8E19A7C550003D2BF6 /* bd_icon_phone@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C142F18C0129300AEA789 /* bd_icon_phone@2x~iphone.png */; };
+		7D98AE8F19A7C550003D2BF6 /* thumb@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14C218C012B500AEA789 /* thumb@2x~iphone.png */; };
+		7D98AE9019A7C550003D2BF6 /* btn_8~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C145918C012B500AEA789 /* btn_8~iphone.png */; };
+		7D98AE9119A7C550003D2BF6 /* infoWallets.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C70192E7D4A0015BB3C /* infoWallets.html */; };
+		7D98AE9219A7C550003D2BF6 /* drag_bar~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */; };
+		7D98AE9319A7C550003D2BF6 /* tabbar_base~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B318C012B500AEA789 /* tabbar_base~iphone.png */; };
+		7D98AE9419A7C550003D2BF6 /* btn_export@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147018C012B500AEA789 /* btn_export@2x~iphone.png */; };
 		7DAE1F4819A3C6A400BF5C60 /* infoSendConfirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = 7DAE1F4719A3C6A400BF5C60 /* infoSendConfirmation.html */; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
@@ -673,6 +1159,8 @@
 		7D6EDB7E19A66C9F007C33AE /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		7D6EDB8019A66C9F007C33AE /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
 		7D6EDB8119A66C9F007C33AE /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		7D98AE9919A7C550003D2BF6 /* Airbitz Testnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Testnet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D98AE9A19A7C551003D2BF6 /* Airbitz-Testnet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Airbitz-Testnet-Info.plist"; path = "/Users/awrightiv/airbitz-ios-gui/Airbitz-Testnet-Info.plist"; sourceTree = "<absolute>"; };
 		7DAE1F4719A3C6A400BF5C60 /* infoSendConfirmation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoSendConfirmation.html; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
@@ -1148,6 +1636,50 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7D98AD1119A7C550003D2BF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D98AD1219A7C550003D2BF6 /* CoreText.framework in Frameworks */,
+				7D98AD1319A7C550003D2BF6 /* CoreBluetooth.framework in Frameworks */,
+				7D98AD1419A7C550003D2BF6 /* libcsv.a in Frameworks */,
+				7D98AD1519A7C550003D2BF6 /* libgit2.a in Frameworks */,
+				7D98AD1619A7C550003D2BF6 /* libbitcoin-watcher.a in Frameworks */,
+				7D98AD1719A7C550003D2BF6 /* libsecp256k1.a in Frameworks */,
+				7D98AD1819A7C550003D2BF6 /* libsodium.a in Frameworks */,
+				7D98AD1919A7C550003D2BF6 /* HockeySDK.framework in Frameworks */,
+				7D98AD1A19A7C550003D2BF6 /* libzmq.a in Frameworks */,
+				7D98AD1B19A7C550003D2BF6 /* libz.a in Frameworks */,
+				7D98AD1C19A7C550003D2BF6 /* libiconv.dylib in Frameworks */,
+				7D98AD1D19A7C550003D2BF6 /* libboost_system.a in Frameworks */,
+				7D98AD1E19A7C550003D2BF6 /* CoreVideo.framework in Frameworks */,
+				7D98AD1F19A7C550003D2BF6 /* CoreAudio.framework in Frameworks */,
+				7D98AD2019A7C550003D2BF6 /* CoreMedia.framework in Frameworks */,
+				7D98AD2119A7C550003D2BF6 /* DriveLib.a in Frameworks */,
+				7D98AD2219A7C550003D2BF6 /* AVFoundation.framework in Frameworks */,
+				7D98AD2319A7C550003D2BF6 /* QuartzCore.framework in Frameworks */,
+				7D98AD2419A7C550003D2BF6 /* MapKit.framework in Frameworks */,
+				7D98AD2519A7C550003D2BF6 /* SystemConfiguration.framework in Frameworks */,
+				7D98AD2619A7C550003D2BF6 /* libqrencode.a in Frameworks */,
+				7D98AD2719A7C550003D2BF6 /* libc++.dylib in Frameworks */,
+				7D98AD2819A7C550003D2BF6 /* CFNetwork.framework in Frameworks */,
+				7D98AD2919A7C550003D2BF6 /* libssl.a in Frameworks */,
+				7D98AD2A19A7C550003D2BF6 /* CoreGraphics.framework in Frameworks */,
+				7D98AD2B19A7C550003D2BF6 /* UIKit.framework in Frameworks */,
+				7D98AD2C19A7C550003D2BF6 /* libbitcoin-client.a in Frameworks */,
+				7D98AD2D19A7C550003D2BF6 /* libwallet.a in Frameworks */,
+				7D98AD2E19A7C550003D2BF6 /* libjansson.a in Frameworks */,
+				7D98AD2F19A7C550003D2BF6 /* libcrypto.a in Frameworks */,
+				7D98AD3019A7C550003D2BF6 /* libabc.a in Frameworks */,
+				7D98AD3119A7C550003D2BF6 /* libbitcoin.a in Frameworks */,
+				7D98AD3219A7C550003D2BF6 /* DL_URLServer.a in Frameworks */,
+				7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */,
+				7D98AD3419A7C550003D2BF6 /* libscrypt.a in Frameworks */,
+				7D98AD3519A7C550003D2BF6 /* libcurl.a in Frameworks */,
+				7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5675B4518A17F6F002E0703 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1500,6 +2032,7 @@
 			isa = PBXGroup;
 			children = (
 				B5675B4818A17F6F002E0703 /* Airbitz.app */,
+				7D98AE9919A7C550003D2BF6 /* Airbitz Testnet.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1623,6 +2156,7 @@
 			isa = PBXGroup;
 			children = (
 				B5675B5318A17F6F002E0703 /* AirBitz-Info.plist */,
+				7D98AE9A19A7C551003D2BF6 /* Airbitz-Testnet-Info.plist */,
 				B5675B5418A17F6F002E0703 /* InfoPlist.strings */,
 				B5675B5718A17F6F002E0703 /* main.m */,
 				B5675B5918A17F6F002E0703 /* AirBitz-Prefix.pch */,
@@ -2183,6 +2717,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7D98ACAB19A7C550003D2BF6 /* Airbitz-Testnet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D98AE9619A7C550003D2BF6 /* Build configuration list for PBXNativeTarget "Airbitz-Testnet" */;
+			buildPhases = (
+				7D98ACAC19A7C550003D2BF6 /* Sources */,
+				7D98AD1119A7C550003D2BF6 /* Frameworks */,
+				7D98AD3719A7C550003D2BF6 /* Resources */,
+				7D98AE9519A7C550003D2BF6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Airbitz-Testnet";
+			productName = AirBitz;
+			productReference = 7D98AE9919A7C550003D2BF6 /* Airbitz Testnet.app */;
+			productType = "com.apple.product-type.application";
+		};
 		B5675B4718A17F6F002E0703 /* Airbitz */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5675B7D18A17F6F002E0703 /* Build configuration list for PBXNativeTarget "Airbitz" */;
@@ -2210,6 +2762,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = AirBitz;
 				TargetAttributes = {
+					7D98ACAB19A7C550003D2BF6 = {
+						DevelopmentTeam = G5LQ7MERPK;
+					};
 					B5675B4718A17F6F002E0703 = {
 						DevelopmentTeam = G5LQ7MERPK;
 					};
@@ -2235,6 +2790,7 @@
 			projectRoot = "";
 			targets = (
 				B5675B4718A17F6F002E0703 /* Airbitz */,
+				7D98ACAB19A7C550003D2BF6 /* Airbitz-Testnet */,
 			);
 		};
 /* End PBXProject section */
@@ -2271,6 +2827,362 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7D98AD3719A7C550003D2BF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D98AD3819A7C550003D2BF6 /* btn_search~iphone.png in Resources */,
+				7D98AD3919A7C550003D2BF6 /* PasswordVerifyView~ipad.xib in Resources */,
+				7D98AD3A19A7C550003D2BF6 /* WalletExportQuicken.QIF in Resources */,
+				7D98AD3B19A7C550003D2BF6 /* btn_done~iphone.png in Resources */,
+				7D98AD3C19A7C550003D2BF6 /* btn_checkmark@2x~iphone.png in Resources */,
+				7D98AD3D19A7C550003D2BF6 /* btn_collapse_expand@2x~iphone.png in Resources */,
+				7D98AD3E19A7C550003D2BF6 /* emboss_down~iphone.png in Resources */,
+				7D98AD3F19A7C550003D2BF6 /* infoExportWallet.html in Resources */,
+				7D98AD4019A7C550003D2BF6 /* icon_USD_dark~iphone.png in Resources */,
+				7D98AD4119A7C550003D2BF6 /* btn_use_max~iphone.png in Resources */,
+				7D98AD4219A7C550003D2BF6 /* back_arrow~iphone.png in Resources */,
+				7D98AD4319A7C550003D2BF6 /* icon_export_dropbox~iphone.png in Resources */,
+				7D98AD4419A7C550003D2BF6 /* Green-check@2x~iphone.png in Resources */,
+				7D98AD4519A7C550003D2BF6 /* logo_bitcoin@2x~iphone.png in Resources */,
+				7D98AD4619A7C550003D2BF6 /* Main_iPad.storyboard in Resources */,
+				7D98AD4719A7C550003D2BF6 /* 0-bars@2x.png in Resources */,
+				7D98AD4819A7C550003D2BF6 /* btn_locateMe~iphone.png in Resources */,
+				7D98AD4919A7C550003D2BF6 /* SearchBarBacking@2x~iphone.png in Resources */,
+				7D98AD4A19A7C550003D2BF6 /* emboss_down_deep~iphone.png in Resources */,
+				7D98AD4B19A7C550003D2BF6 /* icon_approved~iphone.png in Resources */,
+				7D98AD4C19A7C550003D2BF6 /* btn_4@2x~iphone.png in Resources */,
+				7D98AD4D19A7C550003D2BF6 /* ca-certificates.crt in Resources */,
+				7D98AD4E19A7C550003D2BF6 /* 3-bars@2x.png in Resources */,
+				7D98AD4F19A7C550003D2BF6 /* QuestionAnswerView~ipad.xib in Resources */,
+				7D98AD5019A7C550003D2BF6 /* btn_selected~iphone.png in Resources */,
+				7D98AD5119A7C550003D2BF6 /* icon_bitcoin_light~iphone.png in Resources */,
+				7D98AD5219A7C550003D2BF6 /* icon_request_dark@2x~iphone.png in Resources */,
+				7D98AD5319A7C550003D2BF6 /* icon_USD_dark@2x~iphone.png in Resources */,
+				7D98AD5419A7C550003D2BF6 /* bkg_categories@2x~iphone.png in Resources */,
+				7D98AD5519A7C550003D2BF6 /* btn_7@2x~iphone.png in Resources */,
+				7D98AD5619A7C550003D2BF6 /* icon_settings_dark@2x~iphone.png in Resources */,
+				7D98AD5719A7C550003D2BF6 /* icon_not_approved~iphone.png in Resources */,
+				7D98AD5819A7C550003D2BF6 /* icon_USD_light.png in Resources */,
+				7D98AD5919A7C550003D2BF6 /* ButtonSelectorView~iphone.xib in Resources */,
+				7D98AD5A19A7C550003D2BF6 /* icon_request~iphone.png in Resources */,
+				7D98AD5B19A7C550003D2BF6 /* WalletMakerView~iphone.xib in Resources */,
+				7D98AD5C19A7C550003D2BF6 /* btn_alwaysConfirm_off~iphone.png in Resources */,
+				7D98AD5D19A7C550003D2BF6 /* btn_changeCategories@2x~iphone.png in Resources */,
+				7D98AD5E19A7C550003D2BF6 /* btn_max~iphone.png in Resources */,
+				7D98AD5F19A7C550003D2BF6 /* btn_1~iphone.png in Resources */,
+				7D98AD6019A7C550003D2BF6 /* sms_btn~iphone.png in Resources */,
+				7D98AD6119A7C550003D2BF6 /* icon_directory@2x~iphone.png in Resources */,
+				7D98AD6219A7C550003D2BF6 /* icon_directory_dark@2x~iphone.png in Resources */,
+				7D98AD6319A7C550003D2BF6 /* Lato-Black.ttf in Resources */,
+				7D98AD6419A7C550003D2BF6 /* btn_info@2x~iphone.png in Resources */,
+				7D98AD6519A7C550003D2BF6 /* SearchBarBacking~iphone.png in Resources */,
+				7D98AD6619A7C550003D2BF6 /* btn_big_blue2_dark~iphone.png in Resources */,
+				7D98AD6719A7C550003D2BF6 /* GTMOAuth2ViewTouch.xib in Resources */,
+				7D98AD6819A7C550003D2BF6 /* tabbar_popup_left~iphone.png in Resources */,
+				7D98AD6919A7C550003D2BF6 /* flash-off~iphone.png in Resources */,
+				7D98AD6A19A7C550003D2BF6 /* btn_expand~iphone.png in Resources */,
+				7D98AD6B19A7C550003D2BF6 /* btn_addCategory~iphone.png in Resources */,
+				7D98AD6C19A7C550003D2BF6 /* emboss_up@2x~iphone.png in Resources */,
+				7D98AD6D19A7C550003D2BF6 /* tabbar_popup_right~iphone.png in Resources */,
+				7D98AD6E19A7C550003D2BF6 /* back_arrow@2x~iphone.png in Resources */,
+				7D98AD6F19A7C550003D2BF6 /* bitCoinAnnotation@2x~iphone.png in Resources */,
+				7D98AD7019A7C550003D2BF6 /* bd_icon_web@2x~iphone.png in Resources */,
+				7D98AD7119A7C550003D2BF6 /* btn_big_blue~iphone.png in Resources */,
+				7D98AD7219A7C550003D2BF6 /* InfoView~ipad.xib in Resources */,
+				7D98AD7319A7C550003D2BF6 /* tabbar_popup_middle@2x~iphone.png in Resources */,
+				7D98AD7419A7C550003D2BF6 /* btn_minus@2x~iphone.png in Resources */,
+				7D98AD7519A7C550003D2BF6 /* bd_highlighted_cell_top@2x~iphone.png in Resources */,
+				7D98AD7619A7C550003D2BF6 /* bkg_calculator~iphone.png in Resources */,
+				7D98AD7719A7C550003D2BF6 /* btn_alwaysConfirm_off@2x~iphone.png in Resources */,
+				7D98AD7819A7C550003D2BF6 /* icon_USD_light@2x~iphone.png in Resources */,
+				7D98AD7919A7C550003D2BF6 /* bkg_calculator@2x~iphone.png in Resources */,
+				7D98AD7A19A7C550003D2BF6 /* HockeySDK.xcconfig in Resources */,
+				7D98AD7B19A7C550003D2BF6 /* icon_settings_dark~iphone.png in Resources */,
+				7D98AD7C19A7C550003D2BF6 /* background@2x~iphone.jpg in Resources */,
+				7D98AD7D19A7C550003D2BF6 /* btn_QR~iphone.png in Resources */,
+				7D98AD7E19A7C550003D2BF6 /* bar_balance@2x~iphone.png in Resources */,
+				7D98AD7F19A7C550003D2BF6 /* btn_close~iphone.png in Resources */,
+				7D98AD8019A7C550003D2BF6 /* icon_send_dark@2x~iphone.png in Resources */,
+				7D98AD8119A7C550003D2BF6 /* icon_export_sdcard~iphone.png in Resources */,
+				7D98AD8219A7C550003D2BF6 /* tabbar_popup_middle~iphone.png in Resources */,
+				7D98AD8319A7C550003D2BF6 /* infoTransactionDetails.html in Resources */,
+				7D98AD8419A7C550003D2BF6 /* icon_export_printer~iphone.png in Resources */,
+				7D98AD8519A7C550003D2BF6 /* PopupPickerView.xib in Resources */,
+				7D98AD8619A7C550003D2BF6 /* btn_album~iphone.png in Resources */,
+				7D98AD8719A7C550003D2BF6 /* btn_QR@2x~iphone.png in Resources */,
+				7D98AD8819A7C550003D2BF6 /* ribbon@2x~iphone.png in Resources */,
+				7D98AD8919A7C550003D2BF6 /* ribbon~iphone.png in Resources */,
+				7D98AD8A19A7C550003D2BF6 /* thumb~iphone.png in Resources */,
+				7D98AD8B19A7C550003D2BF6 /* icon_location~iphone.png in Resources */,
+				7D98AD8C19A7C550003D2BF6 /* btn_slide_to_confirm~iphone.png in Resources */,
+				7D98AD8D19A7C550003D2BF6 /* tabbar_popup_left@2x~iphone.png in Resources */,
+				7D98AD8E19A7C550003D2BF6 /* btn_minus~iphone.png in Resources */,
+				7D98AD8F19A7C550003D2BF6 /* icon_settings~iphone.png in Resources */,
+				7D98AD9019A7C550003D2BF6 /* flash-on@2x~iphone.png in Resources */,
+				7D98AD9119A7C550003D2BF6 /* btn_td_done~iphone.png in Resources */,
+				7D98AD9219A7C550003D2BF6 /* btn_SMS~iphone.png in Resources */,
+				7D98AD9319A7C550003D2BF6 /* icon_rightArrow~iphone.png in Resources */,
+				7D98AD9419A7C550003D2BF6 /* swipe-arrow@2x~iphone.png in Resources */,
+				7D98AD9519A7C550003D2BF6 /* icon_export_google@2x~iphone.png in Resources */,
+				7D98AD9619A7C550003D2BF6 /* icon_send@2x~iphone.png in Resources */,
+				7D98AD9719A7C550003D2BF6 /* 2-bars@2x.png in Resources */,
+				7D98AD9819A7C550003D2BF6 /* emboss_down@2x~iphone.png in Resources */,
+				7D98AD9919A7C550003D2BF6 /* Red-X@2x~iphone.png in Resources */,
+				7D98AD9A19A7C550003D2BF6 /* btn_light@2x~iphone.png in Resources */,
+				7D98AD9B19A7C550003D2BF6 /* icon_wallet_dark@2x~iphone.png in Resources */,
+				7D98AD9C19A7C550003D2BF6 /* btn_export_dates~iphone.png in Resources */,
+				7D98AD9D19A7C550003D2BF6 /* TxSearchBarBacking@2x~iphone.png in Resources */,
+				7D98AD9E19A7C550003D2BF6 /* Lato-Regular.ttf in Resources */,
+				7D98AD9F19A7C550003D2BF6 /* darken_bottom_table_cell~iphone.png in Resources */,
+				7D98ADA019A7C550003D2BF6 /* btn_send~iphone.png in Resources */,
+				7D98ADA119A7C550003D2BF6 /* icon_bitcoin_dark~iphone.png in Resources */,
+				7D98ADA219A7C550003D2BF6 /* icon_export_printer@2x~iphone.png in Resources */,
+				7D98ADA319A7C550003D2BF6 /* btn_close@2x~iphone.png in Resources */,
+				7D98ADA419A7C550003D2BF6 /* icon_export_email~iphone.png in Resources */,
+				7D98ADA519A7C550003D2BF6 /* bd_cell_bottom_white@2x~iphone.png in Resources */,
+				7D98ADA619A7C550003D2BF6 /* btn_camera~iphone.png in Resources */,
+				7D98ADA719A7C550003D2BF6 /* icon_request@2x~iphone.png in Resources */,
+				7D98ADA819A7C550003D2BF6 /* btn_multiply~iphone.png in Resources */,
+				7D98ADA919A7C550003D2BF6 /* Lato-LightItalic.ttf in Resources */,
+				7D98ADAA19A7C550003D2BF6 /* infoTransactions.html in Resources */,
+				7D98ADAB19A7C550003D2BF6 /* btn_calc_back@2x~iphone.png in Resources */,
+				7D98ADAC19A7C550003D2BF6 /* password_dot~iphone.png in Resources */,
+				7D98ADAD19A7C550003D2BF6 /* btn_plus@2x~iphone.png in Resources */,
+				7D98ADAE19A7C550003D2BF6 /* icon_bitcoin_dark@2x~iphone.png in Resources */,
+				7D98ADAF19A7C550003D2BF6 /* table_export@2x~iphone.png in Resources */,
+				7D98ADB019A7C550003D2BF6 /* PopupWheelPickerView.xib in Resources */,
+				7D98ADB119A7C550003D2BF6 /* BalanceView~ipad.xib in Resources */,
+				7D98ADB219A7C550003D2BF6 /* icon_export_view@2x~iphone.png in Resources */,
+				7D98ADB319A7C550003D2BF6 /* Montserrat-Regular.ttf in Resources */,
+				7D98ADB419A7C550003D2BF6 /* btn_percent~iphone.png in Resources */,
+				7D98ADB519A7C550003D2BF6 /* icon_directory~iphone.png in Resources */,
+				7D98ADB619A7C550003D2BF6 /* btn_done@2x~iphone.png in Resources */,
+				7D98ADB719A7C550003D2BF6 /* btn_info~iphone.png in Resources */,
+				7D98ADB819A7C550003D2BF6 /* bd_icon_phone~iphone.png in Resources */,
+				7D98ADB919A7C550003D2BF6 /* Lato-Bold.ttf in Resources */,
+				7D98ADBA19A7C550003D2BF6 /* btn_clear~iphone.png in Resources */,
+				7D98ADBB19A7C550003D2BF6 /* tabbar_divider@2x~iphone.png in Resources */,
+				7D98ADBC19A7C550003D2BF6 /* bd_cell_single@2x~iphone.png in Resources */,
+				7D98ADBD19A7C550003D2BF6 /* btn_expand@2x~iphone.png in Resources */,
+				7D98ADBE19A7C550003D2BF6 /* btn_right@2x~iphone.png in Resources */,
+				7D98ADBF19A7C550003D2BF6 /* icon_calendar@2x~iphone.png in Resources */,
+				7D98ADC019A7C550003D2BF6 /* HockeySDKResources.bundle in Resources */,
+				7D98ADC119A7C550003D2BF6 /* btn_unselected~iphone.png in Resources */,
+				7D98ADC219A7C550003D2BF6 /* sms_btn@2x~iphone.png in Resources */,
+				7D98ADC319A7C550003D2BF6 /* btn_2~iphone.png in Resources */,
+				7D98ADC419A7C550003D2BF6 /* btn_request@2x~iphone.png in Resources */,
+				7D98ADC519A7C550003D2BF6 /* copy_btn~iphone.png in Resources */,
+				7D98ADC619A7C550003D2BF6 /* Lato-Hairline.ttf in Resources */,
+				7D98ADC719A7C550003D2BF6 /* table_cell_bottom~iphone.png in Resources */,
+				7D98ADC819A7C550003D2BF6 /* TxSearchBarBacking~iphone.png in Resources */,
+				7D98ADC919A7C550003D2BF6 /* btn_selected@2x~iphone.png in Resources */,
+				7D98ADCA19A7C550003D2BF6 /* icon_location@2x~iphone.png in Resources */,
+				7D98ADCB19A7C550003D2BF6 /* clearButton@2x~iphone.png in Resources */,
+				7D98ADCC19A7C550003D2BF6 /* tabbar_popup_right@2x~iphone.png in Resources */,
+				7D98ADCD19A7C550003D2BF6 /* img_collapseExpandBlueDown~iphone.png in Resources */,
+				7D98ADCE19A7C550003D2BF6 /* btn_big_green~iphone.png in Resources */,
+				7D98ADCF19A7C550003D2BF6 /* btn_right~iphone.png in Resources */,
+				7D98ADD019A7C550003D2BF6 /* picker_left_point.png in Resources */,
+				7D98ADD119A7C550003D2BF6 /* Montserrat-Bold.ttf in Resources */,
+				7D98ADD219A7C550003D2BF6 /* picker_left_point@2x.png in Resources */,
+				7D98ADD319A7C550003D2BF6 /* email_btn~iphone.png in Resources */,
+				7D98ADD419A7C550003D2BF6 /* icon_wallet_dark~iphone.png in Resources */,
+				7D98ADD519A7C550003D2BF6 /* btn_export_dates@2x~iphone.png in Resources */,
+				7D98ADD619A7C550003D2BF6 /* infoSend.html in Resources */,
+				7D98ADD719A7C550003D2BF6 /* BLE_photo@2x.png in Resources */,
+				7D98ADD819A7C550003D2BF6 /* btn_locateMe@2x~iphone.png in Resources */,
+				7D98ADD919A7C550003D2BF6 /* Red-X~iphone.png in Resources */,
+				7D98ADDA19A7C550003D2BF6 /* icon_export_dropbox@2x~iphone.png in Resources */,
+				7D98ADDB19A7C550003D2BF6 /* bkg_dark_header~iphone.png in Resources */,
+				7D98ADDC19A7C550003D2BF6 /* btn_slider~iphone.png in Resources */,
+				7D98ADDD19A7C550003D2BF6 /* logo_large~iphone.png in Resources */,
+				7D98ADDE19A7C550003D2BF6 /* btn_export~iphone.png in Resources */,
+				7D98ADDF19A7C550003D2BF6 /* btn_calc_done@2x~iphone.png in Resources */,
+				7D98ADE019A7C550003D2BF6 /* BLE_connected@2x.png in Resources */,
+				7D98ADE119A7C550003D2BF6 /* btn_dot@2x~iphone.png in Resources */,
+				7D98ADE219A7C550003D2BF6 /* btn_deleteCategory~iphone.png in Resources */,
+				7D98ADE319A7C550003D2BF6 /* table_cell_middle~iphone.png in Resources */,
+				7D98ADE419A7C550003D2BF6 /* btn_big_green@2x~iphone.png in Resources */,
+				7D98ADE519A7C550003D2BF6 /* InfoView~iphone.xib in Resources */,
+				7D98ADE619A7C550003D2BF6 /* btn_big_blue@2x~iphone.png in Resources */,
+				7D98ADE719A7C550003D2BF6 /* CalculatorView~iphone.xib in Resources */,
+				7D98ADE819A7C550003D2BF6 /* bkg_textfield@2x~iphone.png in Resources */,
+				7D98ADE919A7C550003D2BF6 /* btn_cancel@2x~iphone.png in Resources */,
+				7D98ADEA19A7C550003D2BF6 /* info.html in Resources */,
+				7D98ADEB19A7C550003D2BF6 /* table_export~iphone.png in Resources */,
+				7D98ADEC19A7C550003D2BF6 /* bd_cell_middle~iphone.png in Resources */,
+				7D98ADED19A7C550003D2BF6 /* BLE_Logo@2x.png in Resources */,
+				7D98ADEE19A7C550003D2BF6 /* infoSendConfirmation.html in Resources */,
+				7D98ADEF19A7C550003D2BF6 /* icon_wallet@2x~iphone.png in Resources */,
+				7D98ADF019A7C550003D2BF6 /* btn_big_blue2_dark@2x~iphone.png in Resources */,
+				7D98ADF119A7C550003D2BF6 /* btn_9@2x~iphone.png in Resources */,
+				7D98ADF219A7C550003D2BF6 /* btn_clear@2x~iphone.png in Resources */,
+				7D98ADF319A7C550003D2BF6 /* copy_btn@2x~iphone.png in Resources */,
+				7D98ADF419A7C550003D2BF6 /* btn_slider@2x~iphone.png in Resources */,
+				7D98ADF519A7C550003D2BF6 /* bd_icon_web~iphone.png in Resources */,
+				7D98ADF619A7C550003D2BF6 /* logo~iphone.png in Resources */,
+				7D98ADF719A7C550003D2BF6 /* SyncView~iphone.xib in Resources */,
+				7D98ADF819A7C550003D2BF6 /* btn_5@2x~iphone.png in Resources */,
+				7D98ADF919A7C550003D2BF6 /* btn_add@2x~iphone.png in Resources */,
+				7D98ADFA19A7C550003D2BF6 /* ConfirmationSliderView.xib in Resources */,
+				7D98ADFB19A7C550003D2BF6 /* Lato-BoldItalic.ttf in Resources */,
+				7D98ADFC19A7C550003D2BF6 /* 5-bars@2x.png in Resources */,
+				7D98ADFD19A7C550003D2BF6 /* icon_send~iphone.png in Resources */,
+				7D98ADFE19A7C550003D2BF6 /* btn_import_wallet~iphone.png in Resources */,
+				7D98ADFF19A7C550003D2BF6 /* btn_alwaysConfirm_on@2x~iphone.png in Resources */,
+				7D98AE0019A7C550003D2BF6 /* img_collapseExpandBlueDown@2x~iphone.png in Resources */,
+				7D98AE0119A7C550003D2BF6 /* WalletHeaderView~iphone.xib in Resources */,
+				7D98AE0219A7C550003D2BF6 /* table_cell_middle@2x~iphone.png in Resources */,
+				7D98AE0319A7C550003D2BF6 /* infoSettings.html in Resources */,
+				7D98AE0419A7C550003D2BF6 /* icon_request_dark~iphone.png in Resources */,
+				7D98AE0519A7C550003D2BF6 /* swipe-arrow~iphone.png in Resources */,
+				7D98AE0619A7C550003D2BF6 /* WalletExportPDF.pdf in Resources */,
+				7D98AE0719A7C550003D2BF6 /* bkg_flash_controls~iphone.png in Resources */,
+				7D98AE0819A7C550003D2BF6 /* btn_slash@2x~iphone.png in Resources */,
+				7D98AE0919A7C550003D2BF6 /* infoRequestQR.html in Resources */,
+				7D98AE0A19A7C550003D2BF6 /* emboss_up~iphone.png in Resources */,
+				7D98AE0B19A7C550003D2BF6 /* bd_icon_clock~iphone.png in Resources */,
+				7D98AE0C19A7C550003D2BF6 /* btn_import_wallet@2x~iphone.png in Resources */,
+				7D98AE0D19A7C550003D2BF6 /* btn_4~iphone.png in Resources */,
+				7D98AE0E19A7C550003D2BF6 /* bkg_categories~iphone.png in Resources */,
+				7D98AE0F19A7C550003D2BF6 /* icon_wallet~iphone.png in Resources */,
+				7D98AE1019A7C550003D2BF6 /* Lato-HairlineItalic.ttf in Resources */,
+				7D98AE1119A7C550003D2BF6 /* emboss_down_deep@2x~iphone.png in Resources */,
+				7D98AE1219A7C550003D2BF6 /* icon_bitcoin_light@2x~iphone.png in Resources */,
+				7D98AE1319A7C550003D2BF6 /* btn_6~iphone.png in Resources */,
+				7D98AE1419A7C550003D2BF6 /* background_header@2x~iphone.png in Resources */,
+				7D98AE1519A7C550003D2BF6 /* logo_bitcoin~iphone.png in Resources */,
+				7D98AE1619A7C550003D2BF6 /* btn_calc_back~iphone.png in Resources */,
+				7D98AE1719A7C550003D2BF6 /* btn_multiply@2x~iphone.png in Resources */,
+				7D98AE1819A7C550003D2BF6 /* table_cell_top@2x~iphone.png in Resources */,
+				7D98AE1919A7C550003D2BF6 /* flash-off@2x~iphone.png in Resources */,
+				7D98AE1A19A7C550003D2BF6 /* btn_td_done@2x~iphone.png in Resources */,
+				7D98AE1B19A7C550003D2BF6 /* btn_scan_qr_code@2x~iphone.png in Resources */,
+				7D98AE1C19A7C550003D2BF6 /* btn_deleteCategory@2x~iphone.png in Resources */,
+				7D98AE1D19A7C550003D2BF6 /* infoExportWalletOptions.html in Resources */,
+				7D98AE1E19A7C550003D2BF6 /* tabbar_divider~iphone.png in Resources */,
+				7D98AE1F19A7C550003D2BF6 /* BLE_Button@2x.png in Resources */,
+				7D98AE2019A7C550003D2BF6 /* btn_equal@2x~iphone.png in Resources */,
+				7D98AE2119A7C550003D2BF6 /* infoRecipient.html in Resources */,
+				7D98AE2219A7C550003D2BF6 /* tabbar_bkg_selected@2x~iphone.png in Resources */,
+				7D98AE2319A7C550003D2BF6 /* background_header~iphone.png in Resources */,
+				7D98AE2419A7C550003D2BF6 /* btn_9~iphone.png in Resources */,
+				7D98AE2519A7C550003D2BF6 /* icon_settings@2x~iphone.png in Resources */,
+				7D98AE2619A7C550003D2BF6 /* Images.xcassets in Resources */,
+				7D98AE2719A7C550003D2BF6 /* bd_highlighted_cell_top~iphone.png in Resources */,
+				7D98AE2819A7C550003D2BF6 /* background~iphone.jpg in Resources */,
+				7D98AE2919A7C550003D2BF6 /* bd_cell_top@2x~iphone.png in Resources */,
+				7D98AE2A19A7C550003D2BF6 /* icon_export_sdcard@2x~iphone.png in Resources */,
+				7D98AE2B19A7C550003D2BF6 /* btn_camera@2x~iphone.png in Resources */,
+				7D98AE2C19A7C550003D2BF6 /* divider@2x~iphone.png in Resources */,
+				7D98AE2D19A7C550003D2BF6 /* icon_approved@2x~iphone.png in Resources */,
+				7D98AE2E19A7C550003D2BF6 /* btn_equal~iphone.png in Resources */,
+				7D98AE2F19A7C550003D2BF6 /* clearButton~iphone.png in Resources */,
+				7D98AE3019A7C550003D2BF6 /* bd_cell_top~iphone.png in Resources */,
+				7D98AE3119A7C550003D2BF6 /* PasswordVerifyView~iphone.xib in Resources */,
+				7D98AE3219A7C550003D2BF6 /* logo@2x~iphone.png in Resources */,
+				7D98AE3319A7C550003D2BF6 /* bd_cell_bottom_white~iphone.png in Resources */,
+				7D98AE3419A7C550003D2BF6 /* 1-bar@2x.png in Resources */,
+				7D98AE3519A7C550003D2BF6 /* btn_big_blue2@2x~iphone.png in Resources */,
+				7D98AE3619A7C550003D2BF6 /* Lato-Light.ttf in Resources */,
+				7D98AE3719A7C550003D2BF6 /* icon_send_dark~iphone.png in Resources */,
+				7D98AE3819A7C550003D2BF6 /* btn_album@2x~iphone.png in Resources */,
+				7D98AE3919A7C550003D2BF6 /* btn_0@2x~iphone.png in Resources */,
+				7D98AE3A19A7C550003D2BF6 /* btn_email@2x~iphone.png in Resources */,
+				7D98AE3B19A7C550003D2BF6 /* btn_changeCategories~iphone.png in Resources */,
+				7D98AE3C19A7C550003D2BF6 /* 4-bars@2x.png in Resources */,
+				7D98AE3D19A7C550003D2BF6 /* bd_icon_location~iphone.png in Resources */,
+				7D98AE3E19A7C550003D2BF6 /* icon_directory_dark~iphone.png in Resources */,
+				7D98AE3F19A7C550003D2BF6 /* Lato-Italic.ttf in Resources */,
+				7D98AE4019A7C550003D2BF6 /* btn_plus~iphone.png in Resources */,
+				7D98AE4119A7C550003D2BF6 /* btn_big_blue2~iphone.png in Resources */,
+				7D98AE4219A7C550003D2BF6 /* btn_blue~iphone.png in Resources */,
+				7D98AE4319A7C550003D2BF6 /* tabbar_base@2x~iphone.png in Resources */,
+				7D98AE4419A7C550003D2BF6 /* btn_6@2x~iphone.png in Resources */,
+				7D98AE4519A7C550003D2BF6 /* Green-check~iphone.png in Resources */,
+				7D98AE4619A7C550003D2BF6 /* btn_max@2x~iphone.png in Resources */,
+				7D98AE4719A7C550003D2BF6 /* icon_rightArrow@2x~iphone.png in Resources */,
+				7D98AE4819A7C550003D2BF6 /* QuestionAnswerView~iphone.xib in Resources */,
+				7D98AE4919A7C550003D2BF6 /* btn_8@2x~iphone.png in Resources */,
+				7D98AE4A19A7C550003D2BF6 /* Lato-BlackItalic.ttf in Resources */,
+				7D98AE4B19A7C550003D2BF6 /* password_dot@2x~iphone.png in Resources */,
+				7D98AE4C19A7C550003D2BF6 /* btn_3@2x~iphone.png in Resources */,
+				7D98AE4D19A7C550003D2BF6 /* btn_0~iphone.png in Resources */,
+				7D98AE4E19A7C550003D2BF6 /* btn_SMS@2x~iphone.png in Resources */,
+				7D98AE4F19A7C550003D2BF6 /* icon_export_view~iphone.png in Resources */,
+				7D98AE5019A7C550003D2BF6 /* bkg_flash_controls@2x~iphone.png in Resources */,
+				7D98AE5119A7C550003D2BF6 /* Main_iPhone.storyboard in Resources */,
+				7D98AE5219A7C550003D2BF6 /* btn_add~iphone.png in Resources */,
+				7D98AE5319A7C550003D2BF6 /* divider~iphone.png in Resources */,
+				7D98AE5419A7C550003D2BF6 /* btn_use_max@2x~iphone.png in Resources */,
+				7D98AE5519A7C550003D2BF6 /* San Diego.gpx in Resources */,
+				7D98AE5619A7C550003D2BF6 /* btn_2@2x~iphone.png in Resources */,
+				7D98AE5719A7C550003D2BF6 /* AnnotationContentView.xib in Resources */,
+				7D98AE5819A7C550003D2BF6 /* bd_icon_clock@2x~iphone.png in Resources */,
+				7D98AE5919A7C550003D2BF6 /* bd_icon_location@2x~iphone.png in Resources */,
+				7D98AE5A19A7C550003D2BF6 /* icon_search@2x~iphone.png in Resources */,
+				7D98AE5B19A7C550003D2BF6 /* bd_cell_bottom@2x~iphone.png in Resources */,
+				7D98AE5C19A7C550003D2BF6 /* icon_export_email@2x~iphone.png in Resources */,
+				7D98AE5D19A7C550003D2BF6 /* btn_email~iphone.png in Resources */,
+				7D98AE5E19A7C550003D2BF6 /* btn_unselected@2x~iphone.png in Resources */,
+				7D98AE5F19A7C550003D2BF6 /* email_btn@2x~iphone.png in Resources */,
+				7D98AE6019A7C550003D2BF6 /* transactionDetails.html in Resources */,
+				7D98AE6119A7C550003D2BF6 /* scan_frame@2x~iphone.png in Resources */,
+				7D98AE6219A7C550003D2BF6 /* btn_send@2x~iphone.png in Resources */,
+				7D98AE6319A7C550003D2BF6 /* btn_dot~iphone.png in Resources */,
+				7D98AE6419A7C550003D2BF6 /* darken_bottom_table_cell@2x~iphone.png in Resources */,
+				7D98AE6519A7C550003D2BF6 /* btn_search@2x~iphone.png in Resources */,
+				7D98AE6619A7C550003D2BF6 /* btn_1@2x~iphone.png in Resources */,
+				7D98AE6719A7C550003D2BF6 /* btn_calc_done~iphone.png in Resources */,
+				7D98AE6819A7C550003D2BF6 /* bkg_textfield~iphone.png in Resources */,
+				7D98AE6919A7C550003D2BF6 /* BalanceView~iphone.xib in Resources */,
+				7D98AE6A19A7C550003D2BF6 /* btn_request~iphone.png in Resources */,
+				7D98AE6B19A7C550003D2BF6 /* table_cell_bottom@2x~iphone.png in Resources */,
+				7D98AE6C19A7C550003D2BF6 /* icon_export_google~iphone.png in Resources */,
+				7D98AE6D19A7C550003D2BF6 /* bkg_dark_header@2x~iphone.png in Resources */,
+				7D98AE6E19A7C550003D2BF6 /* btn_alwaysConfirm_on~iphone.png in Resources */,
+				7D98AE6F19A7C550003D2BF6 /* bitCoinAnnotation~iphone.png in Resources */,
+				7D98AE7019A7C550003D2BF6 /* bd_cell_single~iphone.png in Resources */,
+				7D98AE7119A7C550003D2BF6 /* bar_balance~iphone.png in Resources */,
+				7D98AE7219A7C550003D2BF6 /* btn_blue@2x~iphone.png in Resources */,
+				7D98AE7319A7C550003D2BF6 /* icon_not_approved@2x~iphone.png in Resources */,
+				7D98AE7419A7C550003D2BF6 /* btn_slide_to_confirm@2x~iphone.png in Resources */,
+				7D98AE7519A7C550003D2BF6 /* icon_search~iphone.png in Resources */,
+				7D98AE7619A7C550003D2BF6 /* infoImportWallet.html in Resources */,
+				7D98AE7719A7C550003D2BF6 /* bd_cell_bottom~iphone.png in Resources */,
+				7D98AE7819A7C550003D2BF6 /* btn_slash~iphone.png in Resources */,
+				7D98AE7919A7C550003D2BF6 /* btn_light~iphone.png in Resources */,
+				7D98AE7A19A7C550003D2BF6 /* infoRequest.html in Resources */,
+				7D98AE7B19A7C550003D2BF6 /* flash-on~iphone.png in Resources */,
+				7D98AE7C19A7C550003D2BF6 /* btn_checkmark~iphone.png in Resources */,
+				7D98AE7D19A7C550003D2BF6 /* logo_large@2x~iphone.png in Resources */,
+				7D98AE7E19A7C550003D2BF6 /* btn_3~iphone.png in Resources */,
+				7D98AE7F19A7C550003D2BF6 /* icon_calendar~iphone.png in Resources */,
+				7D98AE8019A7C550003D2BF6 /* btn_5~iphone.png in Resources */,
+				7D98AE8119A7C550003D2BF6 /* h_seperator~iphone.png in Resources */,
+				7D98AE8219A7C550003D2BF6 /* drag_bar@2x~iphone.png in Resources */,
+				7D98AE8319A7C550003D2BF6 /* bd_cell_middle@2x~iphone.png in Resources */,
+				7D98AE8419A7C550003D2BF6 /* table_cell_top~iphone.png in Resources */,
+				7D98AE8519A7C550003D2BF6 /* h_seperator@2x~iphone.png in Resources */,
+				7D98AE8619A7C550003D2BF6 /* btn_percent@2x~iphone.png in Resources */,
+				7D98AE8719A7C550003D2BF6 /* btn_collapse_expand~iphone.png in Resources */,
+				7D98AE8819A7C550003D2BF6 /* InfoPlist.strings in Resources */,
+				7D98AE8919A7C550003D2BF6 /* tabbar_bkg_selected~iphone.png in Resources */,
+				7D98AE8A19A7C550003D2BF6 /* btn_addCategory@2x~iphone.png in Resources */,
+				7D98AE8B19A7C550003D2BF6 /* scan_frame~iphone.png in Resources */,
+				7D98AE8C19A7C550003D2BF6 /* btn_7~iphone.png in Resources */,
+				7D98AE8D19A7C550003D2BF6 /* btn_cancel~iphone.png in Resources */,
+				7D98AE8E19A7C550003D2BF6 /* bd_icon_phone@2x~iphone.png in Resources */,
+				7D98AE8F19A7C550003D2BF6 /* thumb@2x~iphone.png in Resources */,
+				7D98AE9019A7C550003D2BF6 /* btn_8~iphone.png in Resources */,
+				7D98AE9119A7C550003D2BF6 /* infoWallets.html in Resources */,
+				7D98AE9219A7C550003D2BF6 /* drag_bar~iphone.png in Resources */,
+				7D98AE9319A7C550003D2BF6 /* tabbar_base~iphone.png in Resources */,
+				7D98AE9419A7C550003D2BF6 /* btn_export@2x~iphone.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5675B4618A17F6F002E0703 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2643,9 +3555,129 @@
 			shellPath = /bin/sh;
 			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
 		};
+		7D98AE9519A7C550003D2BF6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7D98ACAC19A7C550003D2BF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D98ACAD19A7C550003D2BF6 /* SMCalloutView.m in Sources */,
+				7D98ACAE19A7C550003D2BF6 /* QuestionAnswerView.m in Sources */,
+				7D98ACAF19A7C550003D2BF6 /* DateTime.m in Sources */,
+				7D98ACB019A7C550003D2BF6 /* ImportWalletViewController.m in Sources */,
+				7D98ACB119A7C550003D2BF6 /* PlainCell.m in Sources */,
+				7D98ACB219A7C550003D2BF6 /* CancelDoneCell.m in Sources */,
+				7D98ACB319A7C550003D2BF6 /* TransactionCell.m in Sources */,
+				7D98ACB419A7C550003D2BF6 /* Contact.m in Sources */,
+				7D98ACB519A7C550003D2BF6 /* Wallet.m in Sources */,
+				7D98ACB619A7C550003D2BF6 /* BackgroundImageManager.m in Sources */,
+				7D98ACB719A7C550003D2BF6 /* LoginViewController.m in Sources */,
+				7D98ACB819A7C550003D2BF6 /* DirectoryViewController.m in Sources */,
+				7D98ACB919A7C550003D2BF6 /* ShowWalletQRViewController.m in Sources */,
+				7D98ACBA19A7C550003D2BF6 /* ExportWalletOptionsCell.m in Sources */,
+				7D98ACBB19A7C550003D2BF6 /* User.m in Sources */,
+				7D98ACBC19A7C550003D2BF6 /* AutoCompleteTextField.m in Sources */,
+				7D98ACBD19A7C550003D2BF6 /* BLEScanCell.m in Sources */,
+				7D98ACBE19A7C550003D2BF6 /* SendViewController.m in Sources */,
+				7D98ACBF19A7C550003D2BF6 /* AnnotationContentView.m in Sources */,
+				7D98ACC019A7C550003D2BF6 /* WalletsViewController.m in Sources */,
+				7D98ACC119A7C550003D2BF6 /* ConfirmationSliderView.m in Sources */,
+				7D98ACC219A7C550003D2BF6 /* DarkenView.m in Sources */,
+				7D98ACC319A7C550003D2BF6 /* StylizedTextField.m in Sources */,
+				7D98ACC419A7C550003D2BF6 /* Transaction.m in Sources */,
+				7D98ACC519A7C550003D2BF6 /* PasswordVerifyView.m in Sources */,
+				7D98ACC619A7C550003D2BF6 /* RadioButtonCell.m in Sources */,
+				7D98ACC719A7C550003D2BF6 /* TabBarView.m in Sources */,
+				7D98ACC819A7C550003D2BF6 /* CommonOverviewCell.m in Sources */,
+				7D98ACC919A7C550003D2BF6 /* AppDelegate.m in Sources */,
+				7D98ACCA19A7C550003D2BF6 /* CategoriesViewController.m in Sources */,
+				7D98ACCB19A7C550003D2BF6 /* InfoView.m in Sources */,
+				7D98ACCC19A7C550003D2BF6 /* WalletMakerView.m in Sources */,
+				7D98ACCD19A7C550003D2BF6 /* PopupWheelPickerView.m in Sources */,
+				7D98ACCE19A7C550003D2BF6 /* UIImage+Colorize.m in Sources */,
+				7D98ACCF19A7C550003D2BF6 /* WalletHeaderView.m in Sources */,
+				7D98ACD019A7C550003D2BF6 /* RecipientViewController.m in Sources */,
+				7D98ACD119A7C550003D2BF6 /* TransactionDetailsViewController.m in Sources */,
+				7D98ACD219A7C550003D2BF6 /* SendConfirmationViewController.m in Sources */,
+				7D98ACD319A7C550003D2BF6 /* CategoriesCell.m in Sources */,
+				7D98ACD419A7C550003D2BF6 /* MapView.m in Sources */,
+				7D98ACD519A7C550003D2BF6 /* MontserratLabel.m in Sources */,
+				7D98ACD619A7C550003D2BF6 /* TransactionsViewController.m in Sources */,
+				7D98ACD719A7C550003D2BF6 /* CustomAnnotationView.m in Sources */,
+				7D98ACD819A7C550003D2BF6 /* PasswordRecoveryViewController.m in Sources */,
+				7D98ACD919A7C550003D2BF6 /* StrokeGradientButton.m in Sources */,
+				7D98ACDA19A7C550003D2BF6 /* SettingsViewController.m in Sources */,
+				7D98ACDB19A7C550003D2BF6 /* LocalSettings.m in Sources */,
+				7D98ACDC19A7C550003D2BF6 /* NSDate+Helper.m in Sources */,
+				7D98ACDD19A7C550003D2BF6 /* PopupPickerView.m in Sources */,
+				7D98ACDE19A7C550003D2BF6 /* PayeeCell.m in Sources */,
+				7D98ACDF19A7C550003D2BF6 /* topOverviewCell.m in Sources */,
+				7D98ACE019A7C550003D2BF6 /* NSDictionary_JSONExtensions.m in Sources */,
+				7D98ACE119A7C550003D2BF6 /* Annotation.m in Sources */,
+				7D98ACE219A7C550003D2BF6 /* DebugViewController.m in Sources */,
+				7D98ACE319A7C550003D2BF6 /* BD_Website_Cell.m in Sources */,
+				7D98ACE419A7C550003D2BF6 /* ButtonCell.m in Sources */,
+				7D98ACE519A7C550003D2BF6 /* CDataScanner.m in Sources */,
+				7D98ACE619A7C550003D2BF6 /* SendStatusViewController.m in Sources */,
+				7D98ACE719A7C550003D2BF6 /* CJSONScanner.m in Sources */,
+				7D98ACE819A7C550003D2BF6 /* DividerView.m in Sources */,
+				7D98ACE919A7C550003D2BF6 /* MainViewController.m in Sources */,
+				7D98ACEA19A7C550003D2BF6 /* ExportWalletPDFViewController.m in Sources */,
+				7D98ACEB19A7C550003D2BF6 /* GDrive.m in Sources */,
+				7D98ACEC19A7C550003D2BF6 /* GTLDrive_Sources.m in Sources */,
+				7D98ACED19A7C550003D2BF6 /* BD_Phone_Cell.m in Sources */,
+				7D98ACEE19A7C550003D2BF6 /* TxOutput.m in Sources */,
+				7D98ACEF19A7C550003D2BF6 /* MoreCategoriesViewController.m in Sources */,
+				7D98ACF019A7C550003D2BF6 /* CDataScanner_Extensions.m in Sources */,
+				7D98ACF119A7C550003D2BF6 /* BusinessDetailsViewController.m in Sources */,
+				7D98ACF219A7C550003D2BF6 /* RibbonView.m in Sources */,
+				7D98ACF319A7C550003D2BF6 /* MinCharTextField.m in Sources */,
+				7D98ACF419A7C550003D2BF6 /* DDData.m in Sources */,
+				7D98ACF519A7C550003D2BF6 /* SignUpViewController.m in Sources */,
+				7D98ACF619A7C550003D2BF6 /* FlashSelectView.m in Sources */,
+				7D98ACF719A7C550003D2BF6 /* Location.m in Sources */,
+				7D98ACF819A7C550003D2BF6 /* CoreBridge.m in Sources */,
+				7D98ACF919A7C550003D2BF6 /* BalanceView.m in Sources */,
+				7D98ACFA19A7C550003D2BF6 /* BooleanCell.m in Sources */,
+				7D98ACFB19A7C550003D2BF6 /* BD_Address_Cell.m in Sources */,
+				7D98ACFC19A7C550003D2BF6 /* CJSONDeserializer.m in Sources */,
+				7D98ACFD19A7C550003D2BF6 /* RequestViewController.m in Sources */,
+				7D98ACFE19A7C550003D2BF6 /* BD_Details_Cell.m in Sources */,
+				7D98ACFF19A7C550003D2BF6 /* WalletCell.m in Sources */,
+				7D98AD0019A7C550003D2BF6 /* OfflineWalletViewController.m in Sources */,
+				7D98AD0119A7C550003D2BF6 /* ButtonOnlyCell.m in Sources */,
+				7D98AD0219A7C550003D2BF6 /* categoryCell.m in Sources */,
+				7D98AD0319A7C550003D2BF6 /* CJSONSerializer.m in Sources */,
+				7D98AD0419A7C550003D2BF6 /* ExportWalletOptionsViewController.m in Sources */,
+				7D98AD0519A7C550003D2BF6 /* main.m in Sources */,
+				7D98AD0619A7C550003D2BF6 /* TextFieldCell.m in Sources */,
+				7D98AD0719A7C550003D2BF6 /* Util.m in Sources */,
+				7D98AD0819A7C550003D2BF6 /* ExportWalletViewController.m in Sources */,
+				7D98AD0919A7C550003D2BF6 /* LatoLabel.m in Sources */,
+				7D98AD0A19A7C550003D2BF6 /* CalculatorView.m in Sources */,
+				7D98AD0B19A7C550003D2BF6 /* ButtonSelectorView.m in Sources */,
+				7D98AD0C19A7C550003D2BF6 /* BD_Hours_Cell.m in Sources */,
+				7D98AD0D19A7C550003D2BF6 /* overviewCell.m in Sources */,
+				7D98AD0E19A7C550003D2BF6 /* SyncView.m in Sources */,
+				7D98AD0F19A7C550003D2BF6 /* TabBarButton.m in Sources */,
+				7D98AD1019A7C550003D2BF6 /* PickerTextView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5675B4418A17F6F002E0703 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2783,6 +3815,76 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7D98AE9719A7C550003D2BF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirBitz/AirBitz-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
+				);
+				INFOPLIST_FILE = "Airbitz-Testnet-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					./AirBitz/DL_URLServer,
+					./AirBitz/ABC,
+					./AirBitz/ZBarSDK,
+					"$(PROJECT_DIR)/AirBitz/ABC",
+				);
+				OTHER_LDFLAGS = "-ObjC ";
+				PRODUCT_NAME = "Airbitz Testnet";
+				PROVISIONING_PROFILE = "a96b4ed5-f7e7-427d-aca6-39edc252f231";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7D98AE9819A7C550003D2BF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirBitz/AirBitz-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
+				);
+				INFOPLIST_FILE = "Airbitz-Testnet-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					./AirBitz/DL_URLServer,
+					./AirBitz/ABC,
+					./AirBitz/ZBarSDK,
+					"$(PROJECT_DIR)/AirBitz/ABC",
+				);
+				OTHER_LDFLAGS = "-ObjC ";
+				PRODUCT_NAME = "Airbitz Testnet";
+				PROVISIONING_PROFILE = "a96b4ed5-f7e7-427d-aca6-39edc252f231";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		B5675B7B18A17F6F002E0703 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2932,6 +4034,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7D98AE9619A7C550003D2BF6 /* Build configuration list for PBXNativeTarget "Airbitz-Testnet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D98AE9719A7C550003D2BF6 /* Debug */,
+				7D98AE9819A7C550003D2BF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B5675B4318A17F6F002E0703 /* Build configuration list for PBXProject "AirBitz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
