@@ -697,9 +697,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if ([MFMailComposeViewController canSendMail])
     {
         NSMutableString *strBody = [[NSMutableString alloc] init];
-        NSString *amount = [CoreBridge formatSatoshi:self.amountSatoshi
-                                          withSymbol:false
-                                    forceDecimals:8];
+        NSString *amountBTC = [CoreBridge formatSatoshi:self.amountSatoshi
+                                             withSymbol:false
+                                          forceDecimals:8];
+        NSString *amountMBTC = [CoreBridge formatSatoshi:self.amountSatoshi
+                                              withSymbol:false
+                                           forceDecimals:5];
         // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
         NSString *tempURI = self.uriString;
@@ -737,26 +740,30 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [strBody appendString:@"<br>\n"];
         [strBody appendString:@"<br>\n"];
         [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
-        [strBody appendFormat:@"%@ BTC", amount];
+        [strBody appendFormat:@"%@ BTC", amountBTC];
+        [strBody appendString:@"<br><br>\n"];
+        [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
+        [strBody appendFormat:@"%@ mBTC", amountMBTC];
         [strBody appendString:@"<br><br>\n"];
 
         UIImage *imageAttachment = [self imageWithImage:self.qrCodeImage scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
         NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(imageAttachment, 1.0)];
-        NSString *base64String = [imageData base64Encoded];
-        [strBody appendString:[NSString stringWithFormat:@"<p><b><img alt='QRCode' title='QRCode' src='data:image/jpeg;base64,%@' /></b></p>", base64String]];
-
+        
+        [strBody appendString:[NSString stringWithFormat:@"<p><b><img src='cid:qrcode.jpg' /></b></p>"]];
+        
         [strBody appendString:@"</body></html>\n"];
-
+        
         MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
-
+        
         if ([self.strEMail length])
         {
             [mailComposer setToRecipients:[NSArray arrayWithObject:self.strEMail]];
         }
-
+        
         [mailComposer setSubject:NSLocalizedString(@"Bitcoin Request", nil)];
-
+        
         [mailComposer setMessageBody:strBody isHTML:YES];
+        [mailComposer addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"qrcode.jpg"];
 
         mailComposer.mailComposeDelegate = self;
 
@@ -782,9 +789,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	if ([MFMessageComposeViewController canSendText] && [MFMessageComposeViewController canSendAttachments])
 	{
         NSMutableString *strBody = [[NSMutableString alloc] init];
-        NSString *amount = [CoreBridge formatSatoshi:self.amountSatoshi
-                                          withSymbol:false
-                                    forceDecimals:8];
+        NSString *amountBTC = [CoreBridge formatSatoshi:self.amountSatoshi
+                                             withSymbol:false
+                                          forceDecimals:8];
+        NSString *amountMBTC = [CoreBridge formatSatoshi:self.amountSatoshi
+                                              withSymbol:false
+                                           forceDecimals:5];
         // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
         NSString *tempURI = self.uriString;
@@ -818,7 +828,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [strBody appendString:@"\n"];
         [strBody appendString:@"\n"];
         [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
-        [strBody appendFormat:@"%@ BTC", amount];
+        [strBody appendFormat:@"%@ BTC", amountBTC];
+        [strBody appendString:@"\n"];
+        [strBody appendString:@"\n"];
+        [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
+        [strBody appendFormat:@"%@ mBTC", amountMBTC];
         [strBody appendString:@"\n"];
         [strBody appendString:@"\n"];
 
