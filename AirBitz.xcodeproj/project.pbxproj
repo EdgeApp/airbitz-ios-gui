@@ -3838,13 +3838,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./AirBitz/DL_URLServer,
-					./AirBitz/ABC,
+					"./AirBitz/ABC-testnet",
 					./AirBitz/ZBarSDK,
-					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "Airbitz Testnet";
-				PROVISIONING_PROFILE = "a96b4ed5-f7e7-427d-aca6-39edc252f231";
+				PROVISIONING_PROFILE = "164250f6-d825-438b-9ee8-cdf3ade4f988";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -3873,13 +3872,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./AirBitz/DL_URLServer,
-					./AirBitz/ABC,
+					"./AirBitz/ABC-testnet",
 					./AirBitz/ZBarSDK,
-					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "Airbitz Testnet";
-				PROVISIONING_PROFILE = "a96b4ed5-f7e7-427d-aca6-39edc252f231";
+				PROVISIONING_PROFILE = "164250f6-d825-438b-9ee8-cdf3ade4f988";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

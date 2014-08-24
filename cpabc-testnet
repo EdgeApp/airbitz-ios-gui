@@ -1,1 +1,1 @@
-cp -a ../airbitz-walletcore-testnet/deps/build/abc/ios-universal/lib/* AirBitz/ABC/
+cp -a ../airbitz-walletcore/deps/build-testnet/abc/ios-universal/lib/* AirBitz/ABC-testnet/
