@@ -479,7 +479,8 @@ typedef enum eAppMode
     {
         [self launchSendStatus:_strWalletUUID withTx:_strTxID];
     }
-    else
+    // Prevent displaying multiple alerts
+    else if (_receivedAlert == nil)
     {
         _receivedAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Received Funds", nil)
