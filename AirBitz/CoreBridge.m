@@ -26,7 +26,7 @@ static dispatch_queue_t watcherQueue;
 static NSOperationQueue *exchangeQueue;
 static NSOperationQueue *dataQueue;
 static NSMutableDictionary *watchers;
-static User *singleton = nil;
+static CoreBridge *singleton = nil;
 
 @interface CoreBridge ()
 {
