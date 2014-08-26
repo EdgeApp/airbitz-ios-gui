@@ -535,6 +535,7 @@ static NSTimer *_dataSyncTimer;
 + (NSString *)formatCurrency:(double) currency withCurrencyNum:(int) currencyNum withSymbol:(bool) symbol
 {
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    [f setLocale:[NSLocale localeWithLocaleIdentifier:@"USD"]];
     [f setNumberStyle: NSNumberFormatterCurrencyStyle];
     if (symbol) {
         NSString *symbol = [CoreBridge currencySymbolLookup:currencyNum];
@@ -584,6 +585,8 @@ static NSTimer *_dataSyncTimer;
 + (int64_t) cleanNumString:(NSString *) value
 {
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    [f setLocale:[NSLocale localeWithLocaleIdentifier:@"USD"]];
+
     NSNumber *num = [f numberFromString:value];
     return [num longLongValue];
 }
@@ -651,6 +654,8 @@ static NSTimer *_dataSyncTimer;
         const char *start = (decimal == NULL) ? p + strlen(p) : decimal;
         int offset = (start - pFormatted) % 3;
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        [f setLocale:[NSLocale localeWithLocaleIdentifier:@"USD"]];
+
         for (int i = 0; i < strlen(pFormatted) && p - start <= decimalPlaces; ++i, ++p)
         {
             if (p < start)
