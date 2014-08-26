@@ -113,9 +113,21 @@
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(txSendSuccess:) name:NOTIFICATION_TX_SEND_SUCESS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(txSendFailed:) name:NOTIFICATION_TX_SEND_FAILED object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(myTextDidChange:)
+												 name:UITextFieldTextDidChangeNotification
+											   object:self.withdrawlPIN];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(exchangeRateUpdate:)
+                                                 name:NOTIFICATION_EXCHANGE_RATE_CHANGE
+                                               object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -124,7 +136,6 @@
     [self.view removeGestureRecognizer:tap];
     [self.infoView dismiss];
     [self dismissKeyboard];
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)myTextDidChange:(NSNotification *)notification
@@ -194,14 +205,6 @@
         self.amountBTCTextField.text = nil;
         [self.amountUSDTextField becomeFirstResponder];
     }
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(myTextDidChange:)
-												 name:UITextFieldTextDidChangeNotification
-											   object:self.withdrawlPIN];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(exchangeRateUpdate:)
-                                                 name:NOTIFICATION_EXCHANGE_RATE_CHANGE
-                                               object:nil];
     [self exchangeRateUpdate:nil]; 
 }
 
