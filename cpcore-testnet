@@ -1,3 +1,3 @@
-rm -rf Airbitz/ABC-testnet/*
-cp -a ../airbitz-walletcore/deps/build-testnet/abc/abc-ios-universal/include/* AirBitz/ABC-testnet/
-cp -a ../airbitz-walletcore/deps/build-testnet/abc/abc-ios-universal/lib/* AirBitz/ABC-testnet/
+rm -rf Airbitz/ABC/*
+cp -a ../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
+cp -a ../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/lib/* AirBitz/ABC/
