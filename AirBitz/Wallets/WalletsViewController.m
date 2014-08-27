@@ -247,7 +247,9 @@
         [self.arrayWallets removeAllObjects];
         [self.arrayArchivedWallets removeAllObjects];
     }
-    [CoreBridge loadWallets: self.arrayWallets archived:self.arrayArchivedWallets];
+    [CoreBridge loadWallets:self.arrayWallets
+                   archived:self.arrayArchivedWallets
+                    withTxs:NO];
 }
 
 - (void)updateBalanceView
