@@ -104,6 +104,17 @@
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
 		6893E6CA19783FED0092DA04 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6893E6C919783FED0092DA04 /* SyncView.m */; };
 		68C3285719804BFE007DA4C2 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */; };
+		7D5E1CD819AFB2D400943A81 /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CBE19AFB2D400943A81 /* libabc.a */; };
+		7D5E1CDB19AFB2D400943A81 /* libbitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CC119AFB2D400943A81 /* libbitcoin.a */; };
+		7D5E1CE319AFB2D400943A81 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CC919AFB2D400943A81 /* libboost_system.a */; };
+		7D5E1CE519AFB2D400943A81 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CCB19AFB2D400943A81 /* libcrypto.a */; };
+		7D5E1CE719AFB2D400943A81 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CCD19AFB2D400943A81 /* libcurl.a */; };
+		7D5E1CE919AFB2D400943A81 /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CCF19AFB2D400943A81 /* libjansson.a */; };
+		7D5E1CEA19AFB2D400943A81 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD019AFB2D400943A81 /* libqrencode.a */; };
+		7D5E1CEB19AFB2D400943A81 /* libscrypt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD119AFB2D400943A81 /* libscrypt.a */; };
+		7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD519AFB2D400943A81 /* libwallet.a */; };
+		7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD619AFB2D400943A81 /* libz.a */; };
+		7D5E1CF419AFB34C00943A81 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CF319AFB34C00943A81 /* libssl.a */; };
 		7D6EDB7C19A66C82007C33AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7B19A66C82007C33AE /* CoreText.framework */; };
 		7D6EDB8219A66C9F007C33AE /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7E19A66C9F007C33AE /* HockeySDK.framework */; };
 		7D6EDB8319A66C9F007C33AE /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7D6EDB8019A66C9F007C33AE /* HockeySDK.xcconfig */; };
@@ -217,9 +228,7 @@
 		7D98AD1819A7C550003D2BF6 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
 		7D98AD1919A7C550003D2BF6 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7E19A66C9F007C33AE /* HockeySDK.framework */; };
 		7D98AD1A19A7C550003D2BF6 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
-		7D98AD1B19A7C550003D2BF6 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6DA18C29CEF0071B87C /* libz.a */; };
 		7D98AD1C19A7C550003D2BF6 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463C18C9244900179D9C /* libiconv.dylib */; };
-		7D98AD1D19A7C550003D2BF6 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A318D3BFEF008ACF88 /* libboost_system.a */; };
 		7D98AD1E19A7C550003D2BF6 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463A18C9242700179D9C /* CoreVideo.framework */; };
 		7D98AD1F19A7C550003D2BF6 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463818C9242100179D9C /* CoreAudio.framework */; };
 		7D98AD2019A7C550003D2BF6 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463618C9241200179D9C /* CoreMedia.framework */; };
@@ -228,22 +237,13 @@
 		7D98AD2319A7C550003D2BF6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		7D98AD2419A7C550003D2BF6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B19BCE18ABFCDF00CF04A4 /* MapKit.framework */; };
 		7D98AD2519A7C550003D2BF6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C2118A41ACE00DA4A34 /* SystemConfiguration.framework */; };
-		7D98AD2619A7C550003D2BF6 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D718C29CEF0071B87C /* libqrencode.a */; };
 		7D98AD2719A7C550003D2BF6 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1F18A41ABA00DA4A34 /* libc++.dylib */; };
 		7D98AD2819A7C550003D2BF6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1D18A41AAC00DA4A34 /* CFNetwork.framework */; };
-		7D98AD2919A7C550003D2BF6 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D918C29CEF0071B87C /* libssl.a */; };
 		7D98AD2A19A7C550003D2BF6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4D18A17F6F002E0703 /* CoreGraphics.framework */; };
 		7D98AD2B19A7C550003D2BF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4F18A17F6F002E0703 /* UIKit.framework */; };
 		7D98AD2C19A7C550003D2BF6 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
-		7D98AD2D19A7C550003D2BF6 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A418D3BFEF008ACF88 /* libwallet.a */; };
-		7D98AD2E19A7C550003D2BF6 /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D618C29CEF0071B87C /* libjansson.a */; };
-		7D98AD2F19A7C550003D2BF6 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D418C29CEF0071B87C /* libcrypto.a */; };
-		7D98AD3019A7C550003D2BF6 /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D318C29CEF0071B87C /* libabc.a */; };
-		7D98AD3119A7C550003D2BF6 /* libbitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A218D3BFEF008ACF88 /* libbitcoin.a */; };
 		7D98AD3219A7C550003D2BF6 /* DL_URLServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1A18A41A4E00DA4A34 /* DL_URLServer.a */; };
 		7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4B18A17F6F002E0703 /* Foundation.framework */; };
-		7D98AD3419A7C550003D2BF6 /* libscrypt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D818C29CEF0071B87C /* libscrypt.a */; };
-		7D98AD3519A7C550003D2BF6 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D518C29CEF0071B87C /* libcurl.a */; };
 		7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		7D98AD3819A7C550003D2BF6 /* btn_search~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C801930060F0015BB3C /* btn_search~iphone.png */; };
 		7D98AD3919A7C550003D2BF6 /* PasswordVerifyView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9D218DCE09E008ACF88 /* PasswordVerifyView~ipad.xib */; };
@@ -1155,6 +1155,18 @@
 		6893E6C819783FED0092DA04 /* SyncView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncView.h; sourceTree = "<group>"; };
 		6893E6C919783FED0092DA04 /* SyncView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncView.m; sourceTree = "<group>"; };
 		68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SyncView~iphone.xib"; sourceTree = "<group>"; };
+		7D5E1CBE19AFB2D400943A81 /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = "ABC-testnet/libabc.a"; sourceTree = "<group>"; };
+		7D5E1CC119AFB2D400943A81 /* libbitcoin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbitcoin.a; path = "ABC-testnet/libbitcoin.a"; sourceTree = "<group>"; };
+		7D5E1CC919AFB2D400943A81 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = "ABC-testnet/libboost_system.a"; sourceTree = "<group>"; };
+		7D5E1CCB19AFB2D400943A81 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "ABC-testnet/libcrypto.a"; sourceTree = "<group>"; };
+		7D5E1CCD19AFB2D400943A81 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = "ABC-testnet/libcurl.a"; sourceTree = "<group>"; };
+		7D5E1CCF19AFB2D400943A81 /* libjansson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjansson.a; path = "ABC-testnet/libjansson.a"; sourceTree = "<group>"; };
+		7D5E1CD019AFB2D400943A81 /* libqrencode.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libqrencode.a; path = "ABC-testnet/libqrencode.a"; sourceTree = "<group>"; };
+		7D5E1CD119AFB2D400943A81 /* libscrypt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libscrypt.a; path = "ABC-testnet/libscrypt.a"; sourceTree = "<group>"; };
+		7D5E1CD519AFB2D400943A81 /* libwallet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwallet.a; path = "ABC-testnet/libwallet.a"; sourceTree = "<group>"; };
+		7D5E1CD619AFB2D400943A81 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = "ABC-testnet/libz.a"; sourceTree = "<group>"; };
+		7D5E1CF219AFB2E300943A81 /* ABC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABC.h; path = "ABC-testnet/ABC.h"; sourceTree = "<group>"; };
+		7D5E1CF319AFB34C00943A81 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "ABC-testnet/libssl.a"; sourceTree = "<group>"; };
 		7D6EDB7B19A66C82007C33AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		7D6EDB7E19A66C9F007C33AE /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		7D6EDB8019A66C9F007C33AE /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
@@ -1641,6 +1653,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D98AD1219A7C550003D2BF6 /* CoreText.framework in Frameworks */,
+				7D5E1CDB19AFB2D400943A81 /* libbitcoin.a in Frameworks */,
 				7D98AD1319A7C550003D2BF6 /* CoreBluetooth.framework in Frameworks */,
 				7D98AD1419A7C550003D2BF6 /* libcsv.a in Frameworks */,
 				7D98AD1519A7C550003D2BF6 /* libgit2.a in Frameworks */,
@@ -1649,34 +1662,33 @@
 				7D98AD1819A7C550003D2BF6 /* libsodium.a in Frameworks */,
 				7D98AD1919A7C550003D2BF6 /* HockeySDK.framework in Frameworks */,
 				7D98AD1A19A7C550003D2BF6 /* libzmq.a in Frameworks */,
-				7D98AD1B19A7C550003D2BF6 /* libz.a in Frameworks */,
 				7D98AD1C19A7C550003D2BF6 /* libiconv.dylib in Frameworks */,
-				7D98AD1D19A7C550003D2BF6 /* libboost_system.a in Frameworks */,
 				7D98AD1E19A7C550003D2BF6 /* CoreVideo.framework in Frameworks */,
+				7D5E1CEA19AFB2D400943A81 /* libqrencode.a in Frameworks */,
+				7D5E1CE719AFB2D400943A81 /* libcurl.a in Frameworks */,
+				7D5E1CEB19AFB2D400943A81 /* libscrypt.a in Frameworks */,
 				7D98AD1F19A7C550003D2BF6 /* CoreAudio.framework in Frameworks */,
 				7D98AD2019A7C550003D2BF6 /* CoreMedia.framework in Frameworks */,
 				7D98AD2119A7C550003D2BF6 /* DriveLib.a in Frameworks */,
+				7D5E1CD819AFB2D400943A81 /* libabc.a in Frameworks */,
 				7D98AD2219A7C550003D2BF6 /* AVFoundation.framework in Frameworks */,
 				7D98AD2319A7C550003D2BF6 /* QuartzCore.framework in Frameworks */,
 				7D98AD2419A7C550003D2BF6 /* MapKit.framework in Frameworks */,
 				7D98AD2519A7C550003D2BF6 /* SystemConfiguration.framework in Frameworks */,
-				7D98AD2619A7C550003D2BF6 /* libqrencode.a in Frameworks */,
 				7D98AD2719A7C550003D2BF6 /* libc++.dylib in Frameworks */,
 				7D98AD2819A7C550003D2BF6 /* CFNetwork.framework in Frameworks */,
-				7D98AD2919A7C550003D2BF6 /* libssl.a in Frameworks */,
 				7D98AD2A19A7C550003D2BF6 /* CoreGraphics.framework in Frameworks */,
 				7D98AD2B19A7C550003D2BF6 /* UIKit.framework in Frameworks */,
 				7D98AD2C19A7C550003D2BF6 /* libbitcoin-client.a in Frameworks */,
-				7D98AD2D19A7C550003D2BF6 /* libwallet.a in Frameworks */,
-				7D98AD2E19A7C550003D2BF6 /* libjansson.a in Frameworks */,
-				7D98AD2F19A7C550003D2BF6 /* libcrypto.a in Frameworks */,
-				7D98AD3019A7C550003D2BF6 /* libabc.a in Frameworks */,
-				7D98AD3119A7C550003D2BF6 /* libbitcoin.a in Frameworks */,
+				7D5E1CF419AFB34C00943A81 /* libssl.a in Frameworks */,
+				7D5E1CE319AFB2D400943A81 /* libboost_system.a in Frameworks */,
+				7D5E1CE919AFB2D400943A81 /* libjansson.a in Frameworks */,
+				7D5E1CE519AFB2D400943A81 /* libcrypto.a in Frameworks */,
+				7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */,
 				7D98AD3219A7C550003D2BF6 /* DL_URLServer.a in Frameworks */,
 				7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */,
-				7D98AD3419A7C550003D2BF6 /* libscrypt.a in Frameworks */,
-				7D98AD3519A7C550003D2BF6 /* libcurl.a in Frameworks */,
 				7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */,
+				7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1869,6 +1881,25 @@
 			);
 			name = Certs;
 			path = Resources/Certs;
+			sourceTree = "<group>";
+		};
+		7D5E1CB919AFB21F00943A81 /* ABC-testnet */ = {
+			isa = PBXGroup;
+			children = (
+				7D5E1CC119AFB2D400943A81 /* libbitcoin.a */,
+				7D5E1CC919AFB2D400943A81 /* libboost_system.a */,
+				7D5E1CD519AFB2D400943A81 /* libwallet.a */,
+				7D5E1CF219AFB2E300943A81 /* ABC.h */,
+				7D5E1CBE19AFB2D400943A81 /* libabc.a */,
+				7D5E1CCB19AFB2D400943A81 /* libcrypto.a */,
+				7D5E1CCD19AFB2D400943A81 /* libcurl.a */,
+				7D5E1CCF19AFB2D400943A81 /* libjansson.a */,
+				7D5E1CD019AFB2D400943A81 /* libqrencode.a */,
+				7D5E1CD119AFB2D400943A81 /* libscrypt.a */,
+				7D5E1CF319AFB34C00943A81 /* libssl.a */,
+				7D5E1CD619AFB2D400943A81 /* libz.a */,
+			);
+			name = "ABC-testnet";
 			sourceTree = "<group>";
 		};
 		7D6EDB7D19A66C9F007C33AE /* HockeySDK.embeddedframework */ = {
@@ -2071,6 +2102,7 @@
 		B5675B5118A17F6F002E0703 /* AirBitz */ = {
 			isa = PBXGroup;
 			children = (
+				7D5E1CB919AFB21F00943A81 /* ABC-testnet */,
 				4C08A6D118C29CDC0071B87C /* ABC */,
 				4C08A6E318C2B1B60071B87C /* ABC Data */,
 				B5675B5A18A17F6F002E0703 /* AppDelegate.h */,
@@ -3840,6 +3872,7 @@
 					./AirBitz/DL_URLServer,
 					"./AirBitz/ABC-testnet",
 					./AirBitz/ZBarSDK,
+					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "Airbitz Testnet";
@@ -3874,6 +3907,7 @@
 					./AirBitz/DL_URLServer,
 					"./AirBitz/ABC-testnet",
 					./AirBitz/ZBarSDK,
+					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "Airbitz Testnet";
