@@ -380,7 +380,7 @@
     }
 }
 
-- (void)showSendStatus
+- (void)showSendStatus:(NSArray *)params
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	self.sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
@@ -439,84 +439,67 @@
 		
 		if (nCount)
 		{
-			tABC_TxDetails Details;
-            memset(&Details, 0, sizeof(tABC_TxDetails));
-			Details.amountSatoshi = self.amountToSendSatoshi;
-			Details.amountCurrency = currency;
-            // These will be calculated for us
-			Details.amountFeesAirbitzSatoshi = 0;
-			Details.amountFeesMinersSatoshi = 0;
-            // If this is a transfer, populate the comments
-            if (self.nameLabel) {
-                Details.szName = (char *)[self.nameLabel UTF8String];
-            } else {
-                Details.szName = "";
-            }
-            Details.szCategory = "";
-            Details.szNotes = "";
-			Details.attributes = 0x2;
-			
-			tABC_WalletInfo *info = aWalletInfo[self.selectedWalletIndex];
-			
-            if (self.bAddressIsWalletUUID)
-            {
-                NSString *categoryText = NSLocalizedString(@"Transfer:Wallet:", nil);
-                tABC_TransferDetails Transfer;
-                Transfer.szSrcWalletUUID = strdup(info->szUUID);
-                Transfer.szSrcName = strdup([self.destWallet.strName UTF8String]);
-                Transfer.szSrcCategory = strdup([[NSString stringWithFormat:@"%@%@", categoryText, self.destWallet.strName] UTF8String]);
+            [self performSelectorOnMainThread:@selector(showSendStatus:) withObject:nil waitUntilDone:FALSE];
+            _callbackTimestamp = [[NSDate date] timeIntervalSince1970];
 
-                Transfer.szDestWalletUUID = strdup([self.destWallet.strUUID UTF8String]);
-                Transfer.szDestName = strdup([self.wallet.strName UTF8String]);
-                Transfer.szDestCategory = strdup([[NSString stringWithFormat:@"%@%@", categoryText, self.wallet.strName] UTF8String]);
-
-                result = ABC_InitiateTransfer([[User Singleton].name UTF8String],
-                                            [[User Singleton].password UTF8String],
-                                            &Transfer, &Details,
-                                            NULL,
-                                            NULL,
-                                            &Error);
-
-                free(Transfer.szSrcWalletUUID);
-                free(Transfer.szSrcName);
-                free(Transfer.szSrcCategory);
-                free(Transfer.szDestWalletUUID);
-                free(Transfer.szDestName);
-                free(Transfer.szDestCategory);
-            } else {
-                result = ABC_InitiateSendRequest([[User Singleton].name UTF8String],
-                                            [[User Singleton].password UTF8String],
-                                            info->szUUID,
-                                            [self.sendToAddress UTF8String],
-                                            &Details,
-                                            NULL,
-                                            NULL,
-                                            &Error);
-            }
-			if (result == ABC_CC_Ok)
-			{
-				[self showSendStatus];
-                _callbackTimestamp = [[NSDate date] timeIntervalSince1970];
-			}
-			else
-			{
-				[Util printABC_Error:&Error];
-                NSString *title = NSLocalizedString(@"Error during send", nil);
-                NSString *message;
-
-                if (Error.code == ABC_CC_InsufficientFunds) {
-                    message = NSLocalizedString(@"You do not have enough funds to send this transaction.", nil);
-                } else if (Error.code == ABC_CC_ServerError) {
-                    message = [Util errorMap:&Error];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                tABC_Error Error;
+                tABC_CC result;
+                tABC_TxDetails Details;
+                memset(&Details, 0, sizeof(tABC_TxDetails));
+                Details.amountSatoshi = self.amountToSendSatoshi;
+                Details.amountCurrency = currency;
+                // These will be calculated for us
+                Details.amountFeesAirbitzSatoshi = 0;
+                Details.amountFeesMinersSatoshi = 0;
+                // If this is a transfer, populate the comments
+                if (self.nameLabel) {
+                    Details.szName = (char *)[self.nameLabel UTF8String];
                 } else {
-                    message =
-                        NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);
+                    Details.szName = "";
                 }
-                NSArray *params = [NSArray arrayWithObjects: title, message, nil];
-                [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
-			}
-			
-			ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+                Details.szCategory = "";
+                Details.szNotes = "";
+                Details.attributes = 0x2;
+                tABC_WalletInfo *info = aWalletInfo[self.selectedWalletIndex];
+
+                if (self.bAddressIsWalletUUID)
+                {
+                    NSString *categoryText = NSLocalizedString(@"Transfer:Wallet:", nil);
+                    tABC_TransferDetails Transfer;
+                    Transfer.szSrcWalletUUID = strdup(info->szUUID);
+                    Transfer.szSrcName = strdup([self.destWallet.strName UTF8String]);
+                    Transfer.szSrcCategory = strdup([[NSString stringWithFormat:@"%@%@", categoryText, self.destWallet.strName] UTF8String]);
+
+                    Transfer.szDestWalletUUID = strdup([self.destWallet.strUUID UTF8String]);
+                    Transfer.szDestName = strdup([self.wallet.strName UTF8String]);
+                    Transfer.szDestCategory = strdup([[NSString stringWithFormat:@"%@%@", categoryText, self.wallet.strName] UTF8String]);
+
+                    result = ABC_InitiateTransfer([[User Singleton].name UTF8String],
+                                                [[User Singleton].password UTF8String],
+                                                &Transfer, &Details,
+                                                NULL,
+                                                NULL,
+                                                &Error);
+
+                    free(Transfer.szSrcWalletUUID);
+                    free(Transfer.szSrcName);
+                    free(Transfer.szSrcCategory);
+                    free(Transfer.szDestWalletUUID);
+                    free(Transfer.szDestName);
+                    free(Transfer.szDestCategory);
+                } else {
+                    result = ABC_InitiateSendRequest([[User Singleton].name UTF8String],
+                                                [[User Singleton].password UTF8String],
+                                                info->szUUID,
+                                                [self.sendToAddress UTF8String],
+                                                &Details,
+                                                NULL,
+                                                NULL,
+                                                &Error);
+                }
+                ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+            });
 		}
 	}
 }
