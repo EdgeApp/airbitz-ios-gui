@@ -6,13 +6,14 @@ set -e
 CURRENT_DIR=$( /bin/pwd )
 
 mkdir -m 0775 -p AirBitz/ABC/
+mkdir -m 0775 -p AirBitz/ABC-testnet/
 
 if [ "${1-}" = "testnet" ]; then
     shift
     ( cd ../airbitz-walletcore/deps; make BUILD_DIR=${CURRENT_DIR}/../airbitz-walletcore/deps/build-testnet ENABLE_TESTNET=1 $@ )
-    rm -rf Airbitz/ABC/*
-    cp -a ../airbitz-walletcore/deps/build-testnet/abc/abc-ios-universal/include/* AirBitz/ABC/
-    cp -a ../airbitz-walletcore/deps/build-testnet/abc/abc-ios-universal/lib/* AirBitz/ABC/
+    rm -rf Airbitz/ABC-testnet/*
+    cp -a ../airbitz-walletcore/deps/build-testnet/abc/abc-ios-universal/include/* AirBitz/ABC-testnet/
+    cp -a ../airbitz-walletcore/deps/build-testnet/abc/abc-ios-universal/lib/* AirBitz/ABC-testnet/
 else
     ( cd ../airbitz-walletcore/deps; make BUILD_DIR=${CURRENT_DIR}/../airbitz-walletcore/deps/build $@ )
     rm -rf Airbitz/ABC/*
