@@ -177,6 +177,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
 	scanMode = SCAN_MODE_UNINITIALIZED;
 	[self loadWalletInfo];
+	[self updateTable];
 	[self syncTest];
 	
 	if(!_syncingView)
