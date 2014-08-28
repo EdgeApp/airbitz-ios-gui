@@ -38,6 +38,7 @@
 
 #define CURRENT_LOCATION_STRING	NSLocalizedString(@"Current Location", nil)
 #define ON_THE_WEB_STRING	NSLocalizedString(@"On The Web", nil)
+#define NUM_PROGRAMMATIC_RESULTS 2
 
 //#define DEFAULT_SEARCH_RADIUS_MILES	50
 
@@ -1737,12 +1738,14 @@ typedef enum eMapDisplayState
                 cell.textLabel.text = ON_THE_WEB_STRING;
                 cell.textLabel.textColor = [UIColor blueColor];
                 cell.textLabel.backgroundColor = [UIColor clearColor];
-            } else
+            } else if (searchResultsArray != nil)
             {
-                //NSLog(@"Row: %li", (long)indexPath.row);
-                //NSLog(@"Results array: %@", searchResultsArray);
-                cell.textLabel.text = [searchResultsArray objectAtIndex: indexPath.row - (2 + cacheSize)];
-                cell.textLabel.textColor = [UIColor darkGrayColor];
+                unsigned long index = indexPath.row - (NUM_PROGRAMMATIC_RESULTS + cacheSize);
+                if (index < [searchResultsArray count])
+                {
+                    cell.textLabel.text = [searchResultsArray objectAtIndex:index];
+                    cell.textLabel.textColor = [UIColor darkGrayColor];
+                }
             }
         } else if (mostRecentSearchTag == TAG_BUSINESS_SEARCH)
         {
