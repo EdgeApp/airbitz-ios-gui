@@ -16,6 +16,7 @@
 #import "ExportWalletOptionsCell.h"
 #import "CommonTypes.h"
 #import "GDrive.h"
+#import "ABC.h"
 
 
 #define CELL_HEIGHT 45.0
@@ -402,23 +403,28 @@ typedef enum eExportOption
     {
         case WalletExportType_CSV:
         {
- /*           NSString* str = @"[CSV Data Here]";
+            NSString* str = @"[CSV Data Here]";
 
-            // tABC_TxInfo **pTransactions;
-            // int iTxnCount;
-            // char *szCsvData;
-            // tABC_Error Error;
-            // 
-            // tABC_CC cc = ABC_CC_Ok;
-            // cc = ABC_FilterExportData([self.wallet.strUUID UTF8String], 1375361223, 1407502061, &pTransactions, &iTxnCount, &Error);
-            // cc = ABC_ExportFormatCsv(pTransactions, iTxnCount, &szCsvData, &Error);
-            // 
-            // str = [NSString stringWithCString:szCsvData encoding:NSASCIIStringEncoding];
+            tABC_TxInfo **pTransactions;
+            unsigned int iCount;
+            char *szCsvData;
+            tABC_Error Error;
+            int64_t startTime = 0; // Need to pull this from GUI
+            int64_t endTime = 0x0FFFFFFFFFFFFFFF; // Need to pull this from GUI
+
+            tABC_CC cc = ABC_CC_Ok;
+            cc = ABC_GetTransactions([[User Singleton].name UTF8String],
+                                     [[User Singleton].password UTF8String],
+                                     [self.wallet.strUUID UTF8String], 
+                                     startTime, endTime, &pTransactions, &iCount, &Error);
+
+            cc = ABC_ExportFormatCsv(pTransactions, iCount, &szCsvData, &Error);
+            
+            str = [NSString stringWithCString:szCsvData encoding:NSASCIIStringEncoding];
             
             dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
- */
         }
-            break;
+        break;
 
         case WalletExportType_Quicken:
         {

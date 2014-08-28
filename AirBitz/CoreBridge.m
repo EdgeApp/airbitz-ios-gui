@@ -304,7 +304,10 @@ static NSTimer *_dataSyncTimer;
     tABC_TxInfo **aTransactions = NULL;
     tABC_CC result = ABC_GetTransactions([[User Singleton].name UTF8String],
                                          [[User Singleton].password UTF8String],
-                                         [wallet.strUUID UTF8String], &aTransactions,
+                                         [wallet.strUUID UTF8String],
+                                         ABC_GET_TX_ALL_TIMES,
+                                         ABC_GET_TX_ALL_TIMES, 
+                                         &aTransactions,
                                          &tCount, &Error);
     if (ABC_CC_Ok == result)
     {
