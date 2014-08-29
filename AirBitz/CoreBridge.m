@@ -842,11 +842,6 @@ static NSTimer *_dataSyncTimer;
                         szUUID, &Error);
         [Util printABC_Error: &Error];
 
-        ABC_WatchAddresses([[User Singleton].name UTF8String],
-                        [[User Singleton].password UTF8String],
-                        szUUID, &Error);
-        [Util printABC_Error:&Error];
-
         if ([watchers objectForKey:walletUUID] == nil)
         {
             NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -859,6 +854,15 @@ static NSTimer *_dataSyncTimer;
                         &Error);
                 [Util printABC_Error:&Error];
             }];
+
+            ABC_WatchAddresses([[User Singleton].name UTF8String],
+                               [[User Singleton].password UTF8String],
+                               szUUID, &Error);
+            [Util printABC_Error:&Error];
+
+            ABC_WatcherConnect(szUUID, &Error);
+            [Util printABC_Error:&Error];
+
         }
     });
 }
