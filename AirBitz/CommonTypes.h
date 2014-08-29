@@ -66,7 +66,7 @@ typedef enum eTabBarButton
 #define NOTIFICATION_TX_SEND_FAILED                     @"Transaction_Send_Failed"
 #define NOTIFICATION_TX_RECEIVED                        @"Transaction_Received"
 
-
+#define KEY_ERROR_CODE                                  @"Error_Code"
 #define KEY_TX_DETAILS_EXITED_TX                        @"transaction"
 #define KEY_TX_DETAILS_EXITED_WALLET_UUID               @"walletUUID"
 #define KEY_TX_DETAILS_EXITED_WALLET_NAME               @"walletName"

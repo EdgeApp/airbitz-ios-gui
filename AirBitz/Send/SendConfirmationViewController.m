@@ -499,6 +499,15 @@
                                                 &Error);
                 }
                 ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+                if (result != ABC_CC_Ok)
+                {
+                    NSNumber *errorCode = [[NSNumber alloc] initWithInt:Error.code];
+                    NSDictionary *data = @{ KEY_ERROR_CODE:errorCode };
+                    NSNotification *notification = [[NSNotification alloc] initWithName:@"Error"
+                                                                                 object:self
+                                                                               userInfo:data];
+                    [self txSendFailed:notification];
+                }
             });
 		}
 	}
@@ -854,8 +863,16 @@
 - (void)txSendFailed:(NSNotification *)notification
 {
     NSString *title = NSLocalizedString(@"Error during send", nil);
-    NSString *message =
-            NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);
+    NSString *message;
+    if (notification)
+    {
+        tABC_Error Error;
+        NSDictionary *dict = [notification userInfo];
+        Error.code = [[dict objectForKey:KEY_ERROR_CODE] intValue];
+        message = [Util errorMap:&Error];
+    } else {
+        message = NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);
+    }
     NSArray *params = [NSArray arrayWithObjects: title, message, nil];
     [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
 }
