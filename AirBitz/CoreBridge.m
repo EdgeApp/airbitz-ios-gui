@@ -900,6 +900,22 @@ static NSTimer *_dataSyncTimer;
     });
 }
 
++ (void)prioritizeAddress:(NSString *)address inWallet:(NSString *)walletUUID
+{
+    char *szAddress = NULL;
+    if (address)
+    {
+        szAddress = (char *)[address UTF8String];
+    }
+    tABC_Error Error;
+    ABC_PrioritizeAddress([[User Singleton].name UTF8String],
+                          [[User Singleton].password UTF8String],
+                          [walletUUID UTF8String],
+                          [address UTF8String],
+                          &Error);
+    [Util printABC_Error: &Error];
+}
+
 + (void)watchAddresses: (NSString *) walletUUID
 {
     tABC_Error Error;
