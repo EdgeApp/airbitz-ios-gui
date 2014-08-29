@@ -1167,12 +1167,12 @@
 		7D5E1CD619AFB2D400943A81 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = "ABC-testnet/libz.a"; sourceTree = "<group>"; };
 		7D5E1CF219AFB2E300943A81 /* ABC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABC.h; path = "ABC-testnet/ABC.h"; sourceTree = "<group>"; };
 		7D5E1CF319AFB34C00943A81 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "ABC-testnet/libssl.a"; sourceTree = "<group>"; };
+		7D687D8819AFFBF20077BD5A /* Airbitz-Testnet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Airbitz-Testnet-Info.plist"; sourceTree = "<group>"; };
 		7D6EDB7B19A66C82007C33AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		7D6EDB7E19A66C9F007C33AE /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		7D6EDB8019A66C9F007C33AE /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
 		7D6EDB8119A66C9F007C33AE /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		7D98AE9919A7C550003D2BF6 /* Airbitz Testnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Testnet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D98AE9A19A7C551003D2BF6 /* Airbitz-Testnet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Airbitz-Testnet-Info.plist"; path = "/Users/awrightiv/airbitz-ios-gui/Airbitz-Testnet-Info.plist"; sourceTree = "<absolute>"; };
 		7DAE1F4719A3C6A400BF5C60 /* infoSendConfirmation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoSendConfirmation.html; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
@@ -2188,7 +2188,7 @@
 			isa = PBXGroup;
 			children = (
 				B5675B5318A17F6F002E0703 /* AirBitz-Info.plist */,
-				7D98AE9A19A7C551003D2BF6 /* Airbitz-Testnet-Info.plist */,
+				7D687D8819AFFBF20077BD5A /* Airbitz-Testnet-Info.plist */,
 				B5675B5418A17F6F002E0703 /* InfoPlist.strings */,
 				B5675B5718A17F6F002E0703 /* main.m */,
 				B5675B5918A17F6F002E0703 /* AirBitz-Prefix.pch */,
