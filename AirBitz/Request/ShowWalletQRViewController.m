@@ -179,6 +179,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [CoreBridge prioritizeAddress:_addressString inWallet:_walletUUID];
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
 	if([LocalSettings controller].bDisableBLE == NO)
@@ -186,6 +192,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 		// Don't keep it going while we're not showing.
 		[self.peripheralManager stopAdvertising];
 	}
+    [CoreBridge prioritizeAddress:nil inWallet:_walletUUID];
 }
 
 -(void)showConnectedPopup

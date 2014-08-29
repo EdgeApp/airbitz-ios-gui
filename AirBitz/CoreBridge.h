@@ -53,6 +53,7 @@
 + (void)startWatchers;
 + (void)startWatcher:(NSString *)walletUUID;
 + (void)stopWatchers;
++ (void)prioritizeAddress:(NSString *)address inWallet:(NSString *)walletUUID;
 + (uint64_t)maxSpendable:(NSString *)walletUUID
                toAddress:(NSString *)destAddress
               isTransfer:(BOOL)bTransfer;
