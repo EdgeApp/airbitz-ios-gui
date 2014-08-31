@@ -17,6 +17,7 @@
 }
 
 @property (nonatomic, weak) IBOutlet UIButton *clearWatcherButton;
+@property (nonatomic, weak) IBOutlet UIButton *uploadLogsButton;
 @property (nonatomic, weak) IBOutlet UILabel *versionLabel;
 @property (nonatomic, weak) IBOutlet UILabel *coreLabel;
 @property (nonatomic, weak) IBOutlet UILabel *networkLabel;
@@ -79,6 +80,23 @@
      {
          [self.delegate sendDebugViewControllerDidFinish:self];
      }];
+}
+
+- (IBAction)uploadLogs:(id)sender
+{
+    NSLog(@"Uploading Logs\n");
+    NSString *buttonText = self.uploadLogsButton.titleLabel.text;
+    self.uploadLogsButton.titleLabel.text = @"Restarting watcher service";
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        tABC_Error Error;
+        ABC_UploadLogs([[User Singleton].name UTF8String],
+                       [[User Singleton].password UTF8String],
+                       &Error);
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            self.uploadLogsButton.titleLabel.text = buttonText;
+        });
+    });
 }
 
 - (IBAction)clearWatcher:(id)sender
