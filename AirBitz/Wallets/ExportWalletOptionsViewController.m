@@ -405,22 +405,32 @@ typedef enum eExportOption
         {
             NSString* str = @"[CSV Data Here]";
 
-            tABC_TxInfo **pTransactions;
-            unsigned int iCount;
-            char *szCsvData;
+            char *szCsvData = nil;
             tABC_Error Error;
             int64_t startTime = 0; // Need to pull this from GUI
             int64_t endTime = 0x0FFFFFFFFFFFFFFF; // Need to pull this from GUI
 
             tABC_CC cc = ABC_CC_Ok;
-            cc = ABC_GetTransactions([[User Singleton].name UTF8String],
-                                     [[User Singleton].password UTF8String],
-                                     [self.wallet.strUUID UTF8String], 
-                                     startTime, endTime, &pTransactions, &iCount, &Error);
-
-            cc = ABC_ExportFormatCsv(pTransactions, iCount, &szCsvData, &Error);
-            
-            str = [NSString stringWithCString:szCsvData encoding:NSASCIIStringEncoding];
+            cc = ABC_CsvExport([[User Singleton].name UTF8String],
+                               [[User Singleton].password UTF8String],
+                               [self.wallet.strUUID UTF8String], 
+                               startTime, endTime, &szCsvData, &Error);
+            if (ABC_CC_Ok != cc)
+            {
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:NSLocalizedString(@"Export Wallet Transactions error", nil)
+                                      message:@"ABC_CsvExport failed"
+                                      delegate:nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+                [alert show];
+                [Util printABC_Error:&Error];
+                str = @"Error exporting transactions!";
+            } 
+            else
+            {
+                str = [NSString stringWithCString:szCsvData encoding:NSASCIIStringEncoding];
+            }
             
             dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
         }
