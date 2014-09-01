@@ -637,7 +637,7 @@ static NSTimer *_dataSyncTimer;
     int decimalPlaces = forcedecimals > -1 ? forcedecimals : [self maxDecimalPlaces];
     bool negative = amount < 0;
     amount = llabs(amount);
-    if (ABC_FormatAmount(amount, &pFormatted, decimalPlaces, &error) != ABC_CC_Ok)
+    if (ABC_FormatAmount(amount, &pFormatted, decimalPlaces, false, &error) != ABC_CC_Ok)
     {
         return nil;
     }
