@@ -22,10 +22,10 @@
 #define CELL_HEIGHT 45.0
 
 #define ARRAY_CHOICES_FOR_TYPES @[ \
-                                    @[@2, @3, @4],          /* CSV */\
-                                    @[@2, @3, @4],          /* Quicken */\
-                                    @[@2, @3, @4],          /* Quickbooks */\
-                                    @[@0, @2, @3, @4, @5],  /* PDF */\
+                                    @[@2, @3],          /* CSV */\
+                                    @[@2, @3],          /* Quicken */\
+                                    @[@2, @3],          /* Quickbooks */\
+                                    @[@0, @2, @5],  /* PDF */\
                                     @[@0, @2, @5]                   /* PrivateSeed */\
                                 ]
 #define ARRAY_NAMES_FOR_OPTIONS @[@"AirPrint", @"Save to SD card", @"Email", @"Google Drive", @"Dropbox", @"View"]
@@ -386,7 +386,18 @@ typedef enum eExportOption
              
          }];
     }
-    else
+    
+    else if (self.type == WalletExportType_PrivateSeed)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"Wallet Private Seed", nil)
+                              message:@"TODO"
+                              delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+    } 
+    else 
     {
         NSLog(@"Only PDF is supported for viewing");
     }
