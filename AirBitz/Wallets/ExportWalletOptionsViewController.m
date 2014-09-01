@@ -361,13 +361,15 @@ typedef enum eExportOption
 
 - (void)exportView
 {
+    NSData *dataExport = [self getExportDataInForm:self.type];
+
     if (self.type ==  WalletExportType_PDF)
     {
 
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         self.exportWalletPDFViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletPDFViewController"];
         self.exportWalletPDFViewController.delegate = self;
-        self.exportWalletPDFViewController.dataPDF = [self getExportDataInForm:self.type];
+        self.exportWalletPDFViewController.dataPDF = dataExport;
 
         CGRect frame = self.view.bounds;
         frame.origin.x = frame.size.width;
@@ -389,17 +391,19 @@ typedef enum eExportOption
     
     else if (self.type == WalletExportType_PrivateSeed)
     {
+        NSString *strPrivateSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
+
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle:NSLocalizedString(@"Wallet Private Seed", nil)
-                              message:@"TODO"
-                              delegate:nil
+                                    message:strPrivateSeed
+                                   delegate:nil
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
         [alert show];
     } 
     else 
     {
-        NSLog(@"Only PDF is supported for viewing");
+        NSLog(@"Only PDF and Wallet Seed are supported for viewing");
     }
 }
 
