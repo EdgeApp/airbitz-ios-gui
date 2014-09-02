@@ -8,7 +8,7 @@ DerivedData
 .idea/
 Airbitz/ABC
 Airbitz/ABC-testnet
-
+AirBitz.xcodeproj/xcshareddata
 xcuserdata
 project.xcworkspace
 deploy
