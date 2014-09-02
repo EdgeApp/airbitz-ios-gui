@@ -1271,6 +1271,11 @@ typedef enum eMapDisplayState
 
 - (void)launchMoreCategories
 {
+    // prevent >1 instances
+    if (moreCategoriesController) {
+        return;
+    }
+
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName: @"Main_iPhone" bundle: nil];
     moreCategoriesController = [mainStoryboard instantiateViewControllerWithIdentifier: @"MoreCategoriesViewController"];
 
