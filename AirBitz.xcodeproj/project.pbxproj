@@ -1013,7 +1013,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4C08A6D218C29CEF0071B87C /* ABC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABC.h; path = ABC/ABC.h; sourceTree = "<group>"; };
 		4C08A6D318C29CEF0071B87C /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = ABC/libabc.a; sourceTree = "<group>"; };
 		4C08A6D418C29CEF0071B87C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ABC/libcrypto.a; sourceTree = "<group>"; };
 		4C08A6D518C29CEF0071B87C /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ABC/libcurl.a; sourceTree = "<group>"; };
@@ -1165,7 +1164,6 @@
 		7D5E1CD119AFB2D400943A81 /* libscrypt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libscrypt.a; path = "ABC-testnet/libscrypt.a"; sourceTree = "<group>"; };
 		7D5E1CD519AFB2D400943A81 /* libwallet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwallet.a; path = "ABC-testnet/libwallet.a"; sourceTree = "<group>"; };
 		7D5E1CD619AFB2D400943A81 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = "ABC-testnet/libz.a"; sourceTree = "<group>"; };
-		7D5E1CF219AFB2E300943A81 /* ABC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABC.h; path = "ABC-testnet/ABC.h"; sourceTree = "<group>"; };
 		7D5E1CF319AFB34C00943A81 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "ABC-testnet/libssl.a"; sourceTree = "<group>"; };
 		7D687D8819AFFBF20077BD5A /* Airbitz-Testnet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Airbitz-Testnet-Info.plist"; sourceTree = "<group>"; };
 		7D6EDB7B19A66C82007C33AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -1745,7 +1743,6 @@
 				B5F2E9A218D3BFEF008ACF88 /* libbitcoin.a */,
 				B5F2E9A318D3BFEF008ACF88 /* libboost_system.a */,
 				B5F2E9A418D3BFEF008ACF88 /* libwallet.a */,
-				4C08A6D218C29CEF0071B87C /* ABC.h */,
 				4C08A6D318C29CEF0071B87C /* libabc.a */,
 				4C08A6D418C29CEF0071B87C /* libcrypto.a */,
 				4C08A6D518C29CEF0071B87C /* libcurl.a */,
@@ -3864,6 +3861,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
+					"./AirBitz/ABC-testnet",
 				);
 				INFOPLIST_FILE = "AirBitz/Airbitz-Testnet-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -3899,6 +3897,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
+					"./AirBitz/ABC-testnet",
 				);
 				INFOPLIST_FILE = "AirBitz/Airbitz-Testnet-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -4010,6 +4009,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
+					./AirBitz/ABC,
 				);
 				INFOPLIST_FILE = "AirBitz/AirBitz-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -4045,6 +4045,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
+					./AirBitz/ABC,
 				);
 				INFOPLIST_FILE = "AirBitz/AirBitz-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
