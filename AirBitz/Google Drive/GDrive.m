@@ -1,3 +1,4 @@
+
 //
 //  GDrive.m
 //  AirBitz
@@ -16,8 +17,8 @@ static NSString *const kClientSecret = @"2aTGAtZEjPN-WxYFFYSEwoYD";
 
 @interface GDrive () <GTMOAuth2ViewControllerTouchDelegate>
 {
-	UIViewController *parentViewController;
-	GTMOAuth2ViewControllerTouch *authController;
+    UIViewController *parentViewController;
+    GTMOAuth2ViewControllerTouch *authController;
 }
 
 @property (nonatomic, retain) GTLServiceDrive *driveService;
@@ -29,50 +30,49 @@ static NSString *const kClientSecret = @"2aTGAtZEjPN-WxYFFYSEwoYD";
 
 +(id)CreateForViewController:(UIViewController *)vc
 {
-	GDrive *drive = [[GDrive alloc] initForViewController:vc];
-	
-	drive.delegate = (id<GDriveDelegate>)vc;
-	
-	if([drive isAuthorized])
-	{
-		if([drive.delegate respondsToSelector:@selector(GDrive:isAuthenticated:)])
-		{
-			[drive.delegate GDrive:drive isAuthenticated:YES];
-		}
-	}
-	else
-	{
-		//bring up credential dialog
-		[vc presentViewController:[drive createAuthController] animated:YES completion:^
-		 {
-			 if([drive.delegate respondsToSelector:@selector(GDriveAuthControllerPresented)])
-			 {
-				 [drive.delegate GDriveAuthControllerPresented];
-			 }
-			 CGRect frame = (drive->authController).view.frame;
-			 frame.size.height -= 49.0; //make room for tab bar at bottom
-			 (drive->authController).view.frame = frame;
-			 
-		 }];
-	}
-	return drive;
+    GDrive *drive = [[GDrive alloc] initForViewController:vc];
+
+    drive.delegate = (id<GDriveDelegate>)vc;
+
+    if([drive isAuthorized])
+    {
+        if([drive.delegate respondsToSelector:@selector(GDrive:isAuthenticated:)])
+        {
+                [drive.delegate GDrive:drive isAuthenticated:YES];
+        }
+    }
+    else
+    {
+        //bring up credential dialog
+        [vc presentViewController:[drive createAuthController] animated:YES completion:^
+         {
+            if([drive.delegate respondsToSelector:@selector(GDriveAuthControllerPresented)])
+            {
+                [drive.delegate GDriveAuthControllerPresented];
+            }
+            CGRect frame = (drive->authController).view.frame;
+            frame.size.height -= 49.0; //make room for tab bar at bottom
+            (drive->authController).view.frame = frame;
+
+        }];
+    }
+    return drive;
 }
 
 -(id)initForViewController:(UIViewController *)vc
 {
-	self = [super init];
-	if(self)
-	{
-		// Initialize the drive service & load existing credentials from the keychain if available
-		parentViewController = vc;
-		self.driveService = [[GTLServiceDrive alloc] init];
-		self.driveService.authorizer = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
-			clientID:kClientID
-			clientSecret:kClientSecret];
-			
-		
-	}
-	return self;
+    self = [super init];
+    if(self)
+    {
+            // Initialize the drive service & load existing credentials from the keychain if available
+            parentViewController = vc;
+            self.driveService = [[GTLServiceDrive alloc] init];
+            self.driveService.authorizer = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
+                                                                                                 clientID:kClientID
+                                                                                             clientSecret:kClientSecret
+                                            ];
+    }
+    return self;
 }
 
 
@@ -106,24 +106,24 @@ static NSString *const kClientSecret = @"2aTGAtZEjPN-WxYFFYSEwoYD";
     {
         [self showAlert:@"Authentication Error" message:error.localizedDescription];
         self.driveService.authorizer = nil;
-		if([self.delegate respondsToSelector:@selector(GDrive:isAuthenticated:)])
-		{
-			[self.delegate GDrive:self isAuthenticated:NO];
-		}
+        if([self.delegate respondsToSelector:@selector(GDrive:isAuthenticated:)])
+        {
+                [self.delegate GDrive:self isAuthenticated:NO];
+        }
     }
     else
     {
-		NSLog(@"Finished authentication successfully");
+        NSLog(@"Finished authentication successfully");
         self.driveService.authorizer = authResult;
-		
-		//dismiss the login credentials view controller
-		[self->parentViewController dismissViewControllerAnimated:NO completion:nil];
+
+        //dismiss the login credentials view controller
+        [self->parentViewController dismissViewControllerAnimated:NO completion:nil];
         [viewController removeFromParentViewController];
-		
-		if([self.delegate respondsToSelector:@selector(GDrive:isAuthenticated:)])
-		{
-			[self.delegate GDrive:self isAuthenticated:YES];
-		}
+
+        if([self.delegate respondsToSelector:@selector(GDrive:isAuthenticated:)])
+        {
+            [self.delegate GDrive:self isAuthenticated:YES];
+        }
     }
 }
 
@@ -132,10 +132,10 @@ static NSString *const kClientSecret = @"2aTGAtZEjPN-WxYFFYSEwoYD";
 {
     UIAlertView *alert;
     alert = [[UIAlertView alloc] initWithTitle: title
-									   message: message
-									  delegate: nil
-							 cancelButtonTitle: @"OK"
-							 otherButtonTitles: nil];
+                                       message: message
+                                      delegate: nil
+                             cancelButtonTitle: @"OK"
+                             otherButtonTitles: nil];
     [alert show];
 }
 
@@ -178,40 +178,40 @@ static NSString *const kClientSecret = @"2aTGAtZEjPN-WxYFFYSEwoYD";
     UIAlertView *waitIndicator = [self showWaitIndicator:@"Uploading to Google Drive"];
 	
     [self.driveService executeQuery:query
-				  completionHandler:^(GTLServiceTicket *ticket,
-					GTLDriveFile *insertedFile, NSError *error)
-		{
-			[waitIndicator dismissWithClickedButtonIndex:0 animated:YES];
-			if (error == nil)
-			{
-				NSLog(@"File ID: %@", insertedFile.identifier);
-				[self showAlert:@"Google Drive" message:@"File saved!"];
-				if([self.delegate respondsToSelector:@selector(GDrive:uploadSuccessful:)])
-				{
-					[self.delegate GDrive:self uploadSuccessful:YES];
-				}
-			}
-			else
-			{
-				NSLog(@"An error occurred: %@", error);
-				[self showAlert:@"Google Drive" message:@"Sorry, an error occurred!"];
-				if([self.delegate respondsToSelector:@selector(GDrive:uploadSuccessful:)])
-				{
-					[self.delegate GDrive:self uploadSuccessful:NO];
-				}
-			}
-		}];
+                  completionHandler:^(GTLServiceTicket *ticket,
+                                      GTLDriveFile *insertedFile, NSError *error)
+     {
+        [waitIndicator dismissWithClickedButtonIndex:0 animated:YES];
+        if (error == nil)
+        {
+            NSLog(@"File ID: %@", insertedFile.identifier);
+            [self showAlert:@"Google Drive" message:@"File saved!"];
+            if([self.delegate respondsToSelector:@selector(GDrive:uploadSuccessful:)])
+            {
+                [self.delegate GDrive:self uploadSuccessful:YES];
+            }
+        }
+        else
+        {
+            NSLog(@"An error occurred: %@", error);
+            [self showAlert:@"Google Drive" message:@"Sorry, an error occurred!"];
+            if([self.delegate respondsToSelector:@selector(GDrive:uploadSuccessful:)])
+            {
+                [self.delegate GDrive:self uploadSuccessful:NO];
+            }
+        }
+    }];
 }
 
 -(void)dismissAuthenticationController
 {
-	//dismiss the login credentials view controller
-	if(authController)
-	{
-		[self->parentViewController dismissViewControllerAnimated:NO completion:nil];
-		[authController removeFromParentViewController];
-		authController = nil;
-	}
+    //dismiss the login credentials view controller
+    if(authController)
+    {
+        [self->parentViewController dismissViewControllerAnimated:NO completion:nil];
+        [authController removeFromParentViewController];
+        authController = nil;
+    }
 }
 
 -(void)dealloc
