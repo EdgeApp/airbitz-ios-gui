@@ -11,10 +11,11 @@
 #define AirBitz_Config_h
 
 /* These should be 0 for deployment */
-#define DIRECTORY_ONLY					0	/* set to 0 for wallet and directory, set to 1 for just directory */
-#define HARD_CODED_LOGIN				0	/* set to 1 to auto login with credientials below (used for testing) */
+#define AIRBITZ_IOS_DEBUG               0   /* set to 1 while debugging */
+#define DIRECTORY_ONLY                  0   /* set to 0 for wallet and directory, set to 1 for just directory */
+#define HARD_CODED_LOGIN                0   /* set to 1 to auto login with credientials below (used for testing) */
 
-#define HARD_CODED_LOGIN_NAME			@"201404062"
-#define HARD_CODED_LOGIN_PASSWORD		@"Carson Whitsett1"
+#define HARD_CODED_LOGIN_NAME           @"201404062"
+#define HARD_CODED_LOGIN_PASSWORD       @"Carson Whitsett1"
 
 #endif
