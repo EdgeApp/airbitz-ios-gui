@@ -281,6 +281,7 @@ typedef enum eDatePeriod
 - (void)updateDisplayLayout
 {
     // update for iPhone 4
+    /*
     if (!IS_IPHONE5)
     {
         // warning: magic numbers for iphone layout
@@ -291,6 +292,7 @@ typedef enum eDatePeriod
         self.scrollView.frame = frame;
 
     }
+    */
 }
 
 - (NSArray *)getPopupPickerChoices
