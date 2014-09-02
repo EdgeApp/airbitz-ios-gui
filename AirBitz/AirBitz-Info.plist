@@ -33,8 +33,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>20140902-01</string>
-	<key>DL_LibKey</key>
-	<string>1e7bfeb9f52c57ee37542cd0c074074fd2ab</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationUsageDescription</key>

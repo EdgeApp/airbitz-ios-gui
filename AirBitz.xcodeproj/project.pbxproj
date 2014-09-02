@@ -88,6 +88,8 @@
 		4C98CAEE199D6914000009B5 /* infoRecipient.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C98CAED199D6914000009B5 /* infoRecipient.html */; };
 		4C98CAF8199FB545000009B5 /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98CAF7199FB545000009B5 /* LocalSettings.m */; };
 		4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
+		4CA4672B19B604CA004F9923 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4672A19B604CA004F9923 /* DL_URLServer.m */; };
+		4CA4672C19B604CA004F9923 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4672A19B604CA004F9923 /* DL_URLServer.m */; };
 		6809FB9A196F9EEB0076CA4D /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809FB99196F9EEB0076CA4D /* libgit2.a */; };
 		683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
 		684C0E521936B97000AB9807 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
@@ -242,7 +244,6 @@
 		7D98AD2A19A7C550003D2BF6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4D18A17F6F002E0703 /* CoreGraphics.framework */; };
 		7D98AD2B19A7C550003D2BF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4F18A17F6F002E0703 /* UIKit.framework */; };
 		7D98AD2C19A7C550003D2BF6 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
-		7D98AD3219A7C550003D2BF6 /* DL_URLServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1A18A41A4E00DA4A34 /* DL_URLServer.a */; };
 		7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4B18A17F6F002E0703 /* Foundation.framework */; };
 		7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		7D98AD3819A7C550003D2BF6 /* btn_search~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C801930060F0015BB3C /* btn_search~iphone.png */; };
@@ -614,7 +615,6 @@
 		B5137C1218A40A8400DA4A34 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137C0618A40A8400DA4A34 /* Montserrat-Regular.ttf */; };
 		B5137C1518A40EDA00DA4A34 /* LatoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C1418A40EDA00DA4A34 /* LatoLabel.m */; };
 		B5137C1818A40F3900DA4A34 /* MontserratLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C1718A40F3900DA4A34 /* MontserratLabel.m */; };
-		B5137C1C18A41A4E00DA4A34 /* DL_URLServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1A18A41A4E00DA4A34 /* DL_URLServer.a */; };
 		B5137C1E18A41AAC00DA4A34 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1D18A41AAC00DA4A34 /* CFNetwork.framework */; };
 		B5137C2018A41ABA00DA4A34 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1F18A41ABA00DA4A34 /* libc++.dylib */; };
 		B5137C2218A41ACE00DA4A34 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C2118A41ACE00DA4A34 /* SystemConfiguration.framework */; };
@@ -1134,6 +1134,7 @@
 		4C98CAF7199FB545000009B5 /* LocalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalSettings.m; sourceTree = "<group>"; };
 		4C9E91981922AB7400F01423 /* OfflineWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineWalletViewController.h; sourceTree = "<group>"; };
 		4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
+		4CA4672A19B604CA004F9923 /* DL_URLServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DL_URLServer.m; sourceTree = "<group>"; };
 		6809FB99196F9EEB0076CA4D /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = AirBitz/ABC/libgit2.a; sourceTree = "<group>"; };
 		683D95B71989F14B0082BC1A /* ca-certificates.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ca-certificates.crt"; sourceTree = "<group>"; };
 		684C0E511936B97000AB9807 /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = AirBitz/ABC/libsodium.a; sourceTree = "<group>"; };
@@ -1197,7 +1198,6 @@
 		B5137C1418A40EDA00DA4A34 /* LatoLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LatoLabel.m; sourceTree = "<group>"; };
 		B5137C1618A40F3900DA4A34 /* MontserratLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MontserratLabel.h; sourceTree = "<group>"; };
 		B5137C1718A40F3900DA4A34 /* MontserratLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MontserratLabel.m; sourceTree = "<group>"; };
-		B5137C1A18A41A4E00DA4A34 /* DL_URLServer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = DL_URLServer.a; sourceTree = "<group>"; };
 		B5137C1B18A41A4E00DA4A34 /* DL_URLServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DL_URLServer.h; sourceTree = "<group>"; };
 		B5137C1D18A41AAC00DA4A34 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B5137C1F18A41ABA00DA4A34 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -1683,7 +1683,6 @@
 				7D5E1CE919AFB2D400943A81 /* libjansson.a in Frameworks */,
 				7D5E1CE519AFB2D400943A81 /* libcrypto.a in Frameworks */,
 				7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */,
-				7D98AD3219A7C550003D2BF6 /* DL_URLServer.a in Frameworks */,
 				7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */,
 				7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */,
 				7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */,
@@ -1726,7 +1725,6 @@
 				4C08A6DC18C29CEF0071B87C /* libcrypto.a in Frameworks */,
 				4C08A6DB18C29CEF0071B87C /* libabc.a in Frameworks */,
 				B5F2E9A518D3BFEF008ACF88 /* libbitcoin.a in Frameworks */,
-				B5137C1C18A41A4E00DA4A34 /* DL_URLServer.a in Frameworks */,
 				B5675B4C18A17F6F002E0703 /* Foundation.framework in Frameworks */,
 				4C08A6E018C29CEF0071B87C /* libscrypt.a in Frameworks */,
 				4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */,
@@ -1982,8 +1980,8 @@
 		B5137C1918A41A4E00DA4A34 /* DL_URLServer */ = {
 			isa = PBXGroup;
 			children = (
-				B5137C1A18A41A4E00DA4A34 /* DL_URLServer.a */,
 				B5137C1B18A41A4E00DA4A34 /* DL_URLServer.h */,
+				4CA4672A19B604CA004F9923 /* DL_URLServer.m */,
 			);
 			path = DL_URLServer;
 			sourceTree = "<group>";
@@ -3615,6 +3613,7 @@
 				7D98ACB619A7C550003D2BF6 /* BackgroundImageManager.m in Sources */,
 				7D98ACB719A7C550003D2BF6 /* LoginViewController.m in Sources */,
 				7D98ACB819A7C550003D2BF6 /* DirectoryViewController.m in Sources */,
+				4CA4672C19B604CA004F9923 /* DL_URLServer.m in Sources */,
 				7D98ACB919A7C550003D2BF6 /* ShowWalletQRViewController.m in Sources */,
 				7D98ACBA19A7C550003D2BF6 /* ExportWalletOptionsCell.m in Sources */,
 				7D98ACBB19A7C550003D2BF6 /* User.m in Sources */,
@@ -3722,6 +3721,7 @@
 				B5C0A97218EA0A42008F302C /* BackgroundImageManager.m in Sources */,
 				B5F2E9C118DA911A008ACF88 /* LoginViewController.m in Sources */,
 				B5C0A97D18EA0A7F008F302C /* DirectoryViewController.m in Sources */,
+				4CA4672B19B604CA004F9923 /* DL_URLServer.m in Sources */,
 				B5C0A9CB18EA0FF0008F302C /* ShowWalletQRViewController.m in Sources */,
 				4C7247B219352F730091C286 /* ExportWalletOptionsCell.m in Sources */,
 				B5E7F57A18E4AAD5009B5844 /* User.m in Sources */,
