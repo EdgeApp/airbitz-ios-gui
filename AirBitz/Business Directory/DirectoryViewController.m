@@ -1746,7 +1746,10 @@ typedef enum eMapDisplayState
             } else if (searchResultsArray != nil)
             {
                 unsigned long index = indexPath.row - (NUM_PROGRAMMATIC_RESULTS + cacheSize);
-                if (index < [searchResultsArray count])
+                // some of this error checking could be eliminated by splitting
+                // searchResultsArray in two: one for locations and one for
+                // businesses/categories
+                if (index < [searchResultsArray count] && [[searchResultsArray objectAtIndex:index] isKindOfClass:[NSString class]])
                 {
                     cell.textLabel.text = [searchResultsArray objectAtIndex:index];
                     cell.textLabel.textColor = [UIColor darkGrayColor];
