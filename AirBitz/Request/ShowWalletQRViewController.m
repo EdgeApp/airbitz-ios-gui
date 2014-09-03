@@ -44,6 +44,10 @@
 #import "Contact.h"
 #import "LocalSettings.h"
 
+//This allows you to test the case when the advertisied bitcoin address (first 10 digits) doesn't match the actual bitcoin address.  This is to catch the rare condition where someone could try to spoof someone else's bitcoin request.
+#define TEST_SEND_BOGUS_BITCOIN_ADDRESS	0 /* should be 0 for deployment */
+#define BOGUS_BITCOIN_ADDRESS_STRING	@"bitcoin:cwHpX8DTZ2dSf12bntRHNarGoJJTri8ZG5?label=Carson%20Whitsett%20-%20Hello"
+
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 
 #define QR_ATTACHMENT_WIDTH 100
@@ -558,7 +562,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
 	{
 		// Send the bitcoin address and the amount in Satoshi
+#if TEST_SEND_BOGUS_BITCOIN_ADDRESS
+		NSString *stringToSend = BOGUS_BITCOIN_ADDRESS_STRING;
+#else
 		NSString *stringToSend = [NSString stringWithFormat:@"%@", self.uriString];
+#endif
 		self.dataToSend = [stringToSend dataUsingEncoding:NSUTF8StringEncoding];
 		request.value = self.dataToSend;
 		[peripheral respondToRequest:request withResult:CBATTErrorSuccess];
