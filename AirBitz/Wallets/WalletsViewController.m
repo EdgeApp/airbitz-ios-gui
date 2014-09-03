@@ -298,9 +298,7 @@
 	}
 }
 
-
-//note this method duplicated in TransactionsViewController
-- (NSString *)conversion:(int64_t)satoshi
+- (NSString *)conversion:(Wallet *)wallet
 {
 	if (!_balanceView.barIsUp)
 	{
@@ -308,15 +306,15 @@
 		tABC_Error error;
 		ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
                               [[User Singleton].password UTF8String],
-                              satoshi, &currency,
-                              [[User Singleton] defaultCurrencyNum], &error);
+                              wallet.balance, &currency,
+                              wallet.currencyNum, &error);
         [Util printABC_Error:&error];
         return [CoreBridge formatCurrency:currency
-                          withCurrencyNum:[[User Singleton] defaultCurrencyNum]];
+                          withCurrencyNum:wallet.currencyNum];
 	}
 	else
 	{
-		return [CoreBridge formatSatoshi:satoshi];
+		return [CoreBridge formatSatoshi:wallet.balance];
 	}
 }
 
@@ -623,18 +621,12 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	//wallet cell
 	cell = [self getWalletCellForTableView:tableView];
 
-	if(indexPath.section == 0)
-	{
-		Wallet *wallet = [self.arrayWallets objectAtIndex:row];
-		cell.name.text = wallet.strName;
-		cell.amount.text = [self conversion:wallet.balance];
-	}
-	else
-	{
-		Wallet *wallet = [self.arrayArchivedWallets objectAtIndex:row];
-		cell.name.text = wallet.strName;
-		cell.amount.text = [self conversion:wallet.balance];
-	}
+    Wallet *wallet = (indexPath.section == 0 ?
+                      [self.arrayWallets objectAtIndex:row] :
+                      [self.arrayArchivedWallets objectAtIndex:row]);
+
+    cell.name.text = wallet.strName;
+    cell.amount.text = [self conversion:wallet];
 	
 	if((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
 	{
