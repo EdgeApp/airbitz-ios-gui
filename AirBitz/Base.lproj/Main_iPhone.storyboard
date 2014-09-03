@@ -954,8 +954,8 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D9Y-q9-3fh">
-                                                <rect key="frame" x="9" y="6" width="17" height="33"/>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="D9Y-q9-3fh" customClass="MontserratLabel">
+                                                <rect key="frame" x="5" y="6" width="35" height="33"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -987,8 +987,8 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GNf-rJ-hJ5">
-                                                <rect key="frame" x="9" y="7" width="17" height="32"/>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="GNf-rJ-hJ5" customClass="MontserratLabel">
+                                                <rect key="frame" x="5" y="7" width="35" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1092,9 +1092,9 @@
                         <outlet property="amountBTCLabel" destination="Fic-d9-oDx" id="0zi-c0-bPK"/>
                         <outlet property="amountBTCSymbol" destination="D9Y-q9-3fh" id="4PF-OZ-Wpa"/>
                         <outlet property="amountBTCTextField" destination="UHx-LD-t4M" id="bG5-wk-HDI"/>
-                        <outlet property="amountUSDLabel" destination="HKk-4P-SL1" id="IXl-fo-Wau"/>
-                        <outlet property="amountUSDSymbol" destination="GNf-rJ-hJ5" id="9ZN-2R-T1c"/>
-                        <outlet property="amountUSDTextField" destination="aWm-mP-gxj" id="den-AN-otp"/>
+                        <outlet property="amountFiatLabel" destination="HKk-4P-SL1" id="86m-wb-Dy2"/>
+                        <outlet property="amountFiatSymbol" destination="GNf-rJ-hJ5" id="Gvr-fh-JGc"/>
+                        <outlet property="amountFiatTextField" destination="aWm-mP-gxj" id="hLw-58-m9s"/>
                         <outlet property="btn_alwaysConfirm" destination="69b-p5-Bpq" id="XTU-U2-bRN"/>
                         <outlet property="confirmSliderContainer" destination="9Zm-fv-MBe" id="q8o-md-9m0"/>
                         <outlet property="conversionLabel" destination="9aX-Dw-7XD" id="QVZ-z2-zJ9"/>
@@ -1109,7 +1109,7 @@
                         <outlet property="maxAmountButton" destination="shF-7X-2GL" id="YYH-eJ-tCd"/>
                         <outlet property="viewBTC" destination="G2v-QN-NpV" id="57P-MS-NCP"/>
                         <outlet property="viewDisplayArea" destination="aNY-oK-5F5" id="qp6-FS-j8b"/>
-                        <outlet property="viewUSD" destination="pdu-nu-njT" id="bxp-He-pbU"/>
+                        <outlet property="viewFiat" destination="pdu-nu-njT" id="l0U-KN-b2l"/>
                         <outlet property="withdrawlPIN" destination="U0G-cH-iZC" id="Jph-5t-855"/>
                     </connections>
                 </viewController>

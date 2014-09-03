@@ -41,10 +41,10 @@
 @property (nonatomic, weak) IBOutlet UILabel                *amountBTCSymbol;
 @property (nonatomic, weak) IBOutlet UILabel                *amountBTCLabel;
 @property (nonatomic, weak) IBOutlet UITextField            *amountBTCTextField;
-@property (weak, nonatomic) IBOutlet UIView                 *viewUSD;
-@property (nonatomic, weak) IBOutlet UILabel                *amountUSDSymbol;
-@property (nonatomic, weak) IBOutlet UILabel                *amountUSDLabel;
-@property (nonatomic, weak) IBOutlet UITextField            *amountUSDTextField;
+@property (weak, nonatomic) IBOutlet UIView                 *viewFiat;
+@property (nonatomic, weak) IBOutlet UILabel                *amountFiatSymbol;
+@property (nonatomic, weak) IBOutlet UILabel                *amountFiatLabel;
+@property (nonatomic, weak) IBOutlet UITextField            *amountFiatTextField;
 @property (nonatomic, weak) IBOutlet UIButton               *maxAmountButton;
 @property (nonatomic, weak) IBOutlet UILabel                *conversionLabel;
 @property (weak, nonatomic) IBOutlet UILabel                *labelPINTitle;
@@ -89,14 +89,14 @@
     self.keypadView.currencyNum = self.wallet.currencyNum;
 	self.withdrawlPIN.delegate = self;
 	self.amountBTCTextField.delegate = self;
-	self.amountUSDTextField.delegate = self;
+	self.amountFiatTextField.delegate = self;
 	self.keypadView.delegate = self;
 	self.amountBTCTextField.inputView = self.keypadView;
-	self.amountUSDTextField.inputView = self.keypadView;
+	self.amountFiatTextField.inputView = self.keypadView;
 
     // make sure the edit fields are in front of the blocker
     [self.viewDisplayArea bringSubviewToFront:self.amountBTCTextField];
-    [self.viewDisplayArea bringSubviewToFront:self.amountUSDTextField];
+    [self.viewDisplayArea bringSubviewToFront:self.amountFiatTextField];
     [self.viewDisplayArea bringSubviewToFront:self.withdrawlPIN];
 
 	[self setWalletLabel];
@@ -157,8 +157,11 @@
 {
     [super viewWillAppear:animated];
     [self.view addGestureRecognizer:tap];
-	self.amountBTCLabel.text = [User Singleton].denominationLabel; 
+	self.amountBTCSymbol.text = [User Singleton].denominationLabelShort;
+	self.amountBTCLabel.text = [User Singleton].denominationLabel;
     self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
+	self.amountFiatSymbol.text = [CoreBridge currencySymbolLookup:self.wallet.currencyNum];
+	self.amountFiatLabel.text = [CoreBridge currencyAbbrevLookup:self.wallet.currencyNum];
     self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
     
     NSString *prefix;
@@ -187,7 +190,7 @@
 				
 	if(result == ABC_CC_Ok)
 	{
-		self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
+		self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
 	}
     [self startCalcFees];
 	
@@ -201,9 +204,9 @@
     }
     else
     {
-        self.amountUSDTextField.text = nil;
+        self.amountFiatTextField.text = nil;
         self.amountBTCTextField.text = nil;
-        [self.amountUSDTextField becomeFirstResponder];
+        [self.amountFiatTextField becomeFirstResponder];
     }
     [self exchangeRateUpdate:nil]; 
 }
@@ -294,7 +297,7 @@
 - (void)dismissKeyboard
 {
 	[self.withdrawlPIN resignFirstResponder];
-	[self.amountUSDTextField resignFirstResponder];
+	[self.amountFiatTextField resignFirstResponder];
 	[self.amountBTCTextField resignFirstResponder];
 }
 
@@ -340,9 +343,9 @@
         frame.origin.y -= valueShift;
         self.viewBTC.frame = frame;
 
-        frame = self.viewUSD.frame;
+        frame = self.viewFiat.frame;
         frame.origin.y -= (valueShift + 2);
-        self.viewUSD.frame = frame;
+        self.viewFiat.frame = frame;
 
         frame = self.imagePINEmboss.frame;
         frame.origin.y -= pinShift;
@@ -364,9 +367,9 @@
         frame = self.amountBTCTextField.frame;
         frame.origin.y -= 5;
         self.amountBTCTextField.frame = frame;
-        frame = self.amountUSDTextField.frame;
-        frame.origin.y = self.viewUSD.frame.origin.y + 7;
-        self.amountUSDTextField.frame = frame;
+        frame = self.amountFiatTextField.frame;
+        frame.origin.y = self.viewFiat.frame.origin.y + 7;
+        self.amountFiatTextField.frame = frame;
 
 
         frame = self.btn_alwaysConfirm.frame;
@@ -606,12 +609,12 @@
 		if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                   self.amountToSendSatoshi, &currency, self.wallet.currencyNum, &error) == ABC_CC_Ok)
         {
-			self.amountUSDTextField.text = [NSString stringWithFormat:@"%.2f", currency];
+			self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
 	}
-	else if (_selectedTextField == self.amountUSDTextField)
+	else if (_selectedTextField == self.amountFiatTextField)
 	{
-        currency = [self.amountUSDTextField.text doubleValue];
+        currency = [self.amountFiatTextField.text doubleValue];
 		if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                   currency, self.wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
 		{
@@ -632,7 +635,7 @@
         self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
         self.conversionLabel.textColor = [UIColor whiteColor];
         self.amountBTCTextField.textColor = [UIColor whiteColor];
-        self.amountUSDTextField.textColor = [UIColor whiteColor];
+        self.amountFiatTextField.textColor = [UIColor whiteColor];
         return;
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
@@ -678,7 +681,7 @@
         double currencyFees = 0.0;
         self.conversionLabel.textColor = color;
         self.amountBTCTextField.textColor = color;
-        self.amountUSDTextField.textColor = color;
+        self.amountFiatTextField.textColor = color;
 
         NSMutableString *coinFeeString = [[NSMutableString alloc] init];
         NSMutableString *fiatFeeString = [[NSMutableString alloc] init];
@@ -698,7 +701,7 @@
             [fiatFeeString appendString:self.wallet.currencyAbbrev];
         }
         self.amountBTCLabel.text = coinFeeString; 
-        self.amountUSDLabel.text = fiatFeeString;
+        self.amountFiatLabel.text = fiatFeeString;
         self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
     }
     else
@@ -707,10 +710,10 @@
         self.conversionLabel.text = message;
         self.conversionLabel.textColor = [UIColor redColor];
         self.amountBTCTextField.textColor = [UIColor redColor];
-        self.amountUSDTextField.textColor = [UIColor redColor];
+        self.amountFiatTextField.textColor = [UIColor redColor];
     }
     [self alineTextFields:self.amountBTCLabel alignWith:self.amountBTCTextField];
-    [self alineTextFields:self.amountUSDLabel alignWith:self.amountUSDTextField];
+    [self alineTextFields:self.amountFiatLabel alignWith:self.amountFiatTextField];
 }
 
 - (void)alineTextFields:(UILabel *)child alignWith:(UITextField *)parent
@@ -757,7 +760,7 @@
 	_selectedTextField = textField;
     if (_selectedTextField == self.amountBTCTextField)
         self.keypadView.calcMode = CALC_MODE_COIN;
-    else if (_selectedTextField == self.amountUSDTextField)
+    else if (_selectedTextField == self.amountFiatTextField)
         self.keypadView.calcMode = CALC_MODE_FIAT;
 	self.keypadView.textField = textField;
 }
@@ -820,7 +823,7 @@
 
 - (void)CalculatorDone:(CalculatorView *)calculator
 {
-	[self.amountUSDTextField resignFirstResponder];
+	[self.amountFiatTextField resignFirstResponder];
 	[self.amountBTCTextField resignFirstResponder];
 	[self.withdrawlPIN becomeFirstResponder];
 }
