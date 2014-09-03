@@ -104,7 +104,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 @property (strong, nonatomic) NSMutableData         *data;
 @property (strong, nonatomic)  NSMutableArray		*peripheralContainers;
 @property (nonatomic, strong) NSArray                   *arrayContacts;
-
+@property (nonatomic, copy)	NSString				*advertisedPartialBitcoinAddress;
 @end
 
 @implementation PeripheralContainer
@@ -725,14 +725,29 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         return;
     }
     
+	
     NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
     
 	// and disconnect from the peripehral
 	[self.centralManager cancelPeripheralConnection:peripheral];
 	
-
-	self.pickerTextSendTo.textField.text = stringFromData;
-	[self processURI];
+	//make sure partial bitcoin address that was advertized is contained within the actual full bitcoin address
+	if ([stringFromData rangeOfString:self.advertisedPartialBitcoinAddress].location == NSNotFound)
+	{
+		//start at index 9 to skip over "bitcoin:".  Partial address is 10 characters long
+		UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:NSLocalizedString(@"Bitcoin address mismatch", nil)
+							  message:[NSString stringWithFormat:@"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@", [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
+							  delegate:nil
+							  cancelButtonTitle:@"OK"
+							  otherButtonTitles:nil];
+		[alert show];
+	}
+	else
+	{
+		self.pickerTextSendTo.textField.text = stringFromData;
+		[self processURI];
+	}
 }
 
 
@@ -1051,6 +1066,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	//attempt to connect to this peripheral
 	PeripheralContainer *pc = [self.peripheralContainers objectAtIndex:indexPath.row];
 	
+	NSString *advData = [pc.advertisingData objectForKey:CBAdvertisementDataLocalNameKey];
+	if(advData.length >= 10)
+	{
+		self.advertisedPartialBitcoinAddress = [advData substringToIndex:10];
+	}
 	// Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it
 	self.discoveredPeripheral = pc.peripheral;
 	
