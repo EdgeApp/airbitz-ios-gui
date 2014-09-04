@@ -789,25 +789,12 @@ static NSTimer *_dataSyncTimer;
 
 + (BOOL)allWatchersReady
 {
-    NSLog(@"watchersReady?\n");
-    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWalletUUIDs:arrayWallets];
-    for (NSString *uuid in arrayWallets)
-    {
-        if (![CoreBridge watcherIsReady:uuid])
-        {
-            return NO;
-        }
-    }
     return YES;
 }
 
 + (BOOL)watcherIsReady:(NSString *)UUID
 {
-    tABC_Error Error;
-    BOOL result = ABC_WatcherStatus([UUID UTF8String], &Error) == ABC_CC_Ok;
-    [Util printABC_Error:&Error];
-    return result;
+    return YES;
 }
 
 + (void)startWatchers
