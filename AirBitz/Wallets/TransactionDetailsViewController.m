@@ -628,6 +628,7 @@ typedef enum eRequestType
                 }
             }
         }
+        CFRelease(people);
     }
 
     // store the final

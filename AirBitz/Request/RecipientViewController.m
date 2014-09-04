@@ -169,6 +169,7 @@
                 [self addContactInfo:person withName:strFullName toArray:arrayContacts];
             }
         }
+        CFRelease(people);
     }
 
     // assign final
@@ -194,9 +195,18 @@
     // go through each element in the array
     for (CFIndex i = 0; i < ABMultiValueGetCount(arrayData); i++)
     {
-        NSString *strData = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABMultiValueCopyValueAtIndex(arrayData, i)];
+        NSString *tempStrData = (__bridge NSString *)ABMultiValueCopyValueAtIndex(arrayData, i);
+        NSString *strData = [NSString stringWithFormat:@"%@", tempStrData];
+        CFRelease((__bridge CFTypeRef)tempStrData);
+
         CFStringRef labelStingRef = ABMultiValueCopyLabelAtIndex(arrayData, i);
-        NSString *strDataLabel  = [NSString stringWithFormat:@"%@", (__bridge NSString *)ABAddressBookCopyLocalizedLabel(labelStingRef)];
+
+        NSString *tempStrDataLabel = (__bridge NSString *)ABAddressBookCopyLocalizedLabel(labelStingRef);
+        CFRelease(labelStingRef);
+
+        NSString *strDataLabel  = [NSString stringWithFormat:@"%@", tempStrDataLabel];
+        CFRelease((__bridge CFTypeRef)tempStrDataLabel);
+
 
         Contact *contact = [[Contact alloc] init];
         contact.strName = strName;
@@ -206,6 +216,7 @@
 
         [arrayContacts addObject:contact];
     }
+    CFRelease(arrayData);
 }
 
 - (void)updateAutoCompleteArray

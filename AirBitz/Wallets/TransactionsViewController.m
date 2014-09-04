@@ -582,6 +582,7 @@
                 }
             }
         }
+        CFRelease(people);
     }
 }
 
