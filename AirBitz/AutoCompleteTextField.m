@@ -141,7 +141,10 @@
 			
 			
 			[allNames addObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName]];
+            CFRelease((__bridge CFTypeRef)firstName);
+            CFRelease((__bridge CFTypeRef)lastName);
 		}
+        CFRelease(people);
 		
 		contactsArray = allNames;
 		autoCompleteResults = allNames; //start autoCompleteResults with something (don't have business names at this point)

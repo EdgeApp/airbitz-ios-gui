@@ -436,6 +436,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 [self addContactInfo:person withName:strFullName toArray:arrayContacts];
             }
         }
+        CFRelease(people);
     }
 	
     // assign final
@@ -876,6 +877,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		
         CFStringRef s = CFUUIDCreateString(NULL, p.peripheral.UUID);
         printf("%d  |  %s\r\n",i,CFStringGetCStringPtr(s, 0));
+        CFRelease(s);
         [self printPeripheralInfo:p];
     }
 }
@@ -894,6 +896,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     printf("------------------------------------\r\n");
     printf("Peripheral Info :\r\n");
     printf("UUID : %s\r\n",CFStringGetCStringPtr(s, 0));
+    CFRelease(s);
     printf("RSSI : %d\r\n",[peripheralContainer.peripheral.RSSI intValue]);
     NSLog(@"Name : %@\r\n",peripheralContainer.peripheral.name);
 	BOOL connected = NO;
@@ -1594,11 +1597,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #if !TARGET_IPHONE_SIMULATOR
             [self stopQRReader];
 #endif
-            [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label toIsUUID:NO];
+            if (uri != NULL)
+            {
+                [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label toIsUUID:NO];
+            }
         }
 	}
 
-    if (uri)
+    if (uri != NULL)
     {
         ABC_FreeURIInfo(uri);
     }

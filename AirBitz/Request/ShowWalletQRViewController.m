@@ -290,6 +290,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                 [self addContactInfo:person withName:strFullName toArray:arrayContacts];
             }
         }
+        CFRelease(people);
     }
 	
     // assign final
