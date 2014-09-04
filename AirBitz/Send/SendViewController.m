@@ -549,7 +549,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	//only interested in peripherals advertising TRANSFER_SERVICE_UUID
 	NSArray *array = [advertisementData objectForKey:CBAdvertisementDataServiceUUIDsKey];
 	CBUUID *uuid = [array objectAtIndex:0];
-	if([[uuid UUIDString] isEqualToString:TRANSFER_SERVICE_UUID])
+	//if([[uuid UUIDString] isEqualToString:TRANSFER_SERVICE_UUID])
+	if ([uuid isEqual:[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]])
 	{
 		PeripheralContainer *pc = [[PeripheralContainer alloc] init];
 		pc.peripheral = peripheral;
