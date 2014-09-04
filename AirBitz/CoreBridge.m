@@ -51,6 +51,7 @@ static NSTimer *_dataSyncTimer;
         dataQueue = [[NSOperationQueue alloc] init];
         [dataQueue setMaxConcurrentOperationCount:1];
 
+        watchers = [[NSMutableDictionary alloc] init];
         singleton = [[CoreBridge alloc] init];
         bInitialized = YES;
     }
@@ -799,7 +800,6 @@ static NSTimer *_dataSyncTimer;
 
 + (void)startWatchers
 {
-    watchers = [[NSMutableDictionary alloc] init];
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
     [CoreBridge loadWalletUUIDs: arrayWallets];
     for (NSString *uuid in arrayWallets) {
@@ -811,17 +811,19 @@ static NSTimer *_dataSyncTimer;
 {
     const char *szUUID = [walletUUID UTF8String];
 
-    tABC_Error Error;
-    ABC_WatcherStart([[User Singleton].name UTF8String],
-                    [[User Singleton].password UTF8String],
-                    szUUID, &Error);
-    [Util printABC_Error: &Error];
-
     if ([watchers objectForKey:walletUUID] == nil)
     {
+        tABC_Error Error;
+        ABC_WatcherStart([[User Singleton].name UTF8String],
+                        [[User Singleton].password UTF8String],
+                        szUUID, &Error);
+        [Util printABC_Error: &Error];
+
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [watchers setObject:queue forKey:walletUUID];
+
         [queue addOperationWithBlock:^{
+            [dataQueue setName:walletUUID];
             tABC_Error Error;
             ABC_WatcherLoop([walletUUID UTF8String],
                     ABC_BitCoin_Event_Callback,
@@ -837,7 +839,6 @@ static NSTimer *_dataSyncTimer;
 
         ABC_WatcherConnect(szUUID, &Error);
         [Util printABC_Error:&Error];
-
     }
 }
 
@@ -950,6 +951,7 @@ static NSTimer *_dataSyncTimer;
 + (void)requestExchangeRateUpdate:(NSTimer *)object
 {
     [exchangeQueue addOperationWithBlock:^{
+        [[NSThread currentThread] setName:@"Exchange Rate Update"];
         [CoreBridge requestExchangeUpdateBlocking];
     }];
 }
@@ -987,6 +989,7 @@ static NSTimer *_dataSyncTimer;
 + (void)requestSyncData:(NSTimer *)object
 {
     [dataQueue addOperationWithBlock:^{
+        [[NSThread currentThread] setName:@"Data Sync"];
         [CoreBridge syncAllData];
     }];
 }
