@@ -960,8 +960,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		{
 			NSString *fullName = [advData substringFromIndex:10];
 			NSArray *arrayComponents = [fullName componentsSeparatedByString:@" "];
-			NSString *firstName = [arrayComponents objectAtIndex:0];
-			NSString *lastName = [arrayComponents objectAtIndex:1];
+			NSString *firstName = @"";
+			if([arrayComponents count])
+			{
+				firstName = [arrayComponents objectAtIndex:0];
+			}
+			NSString *lastName = @"";
+			if([arrayComponents count] > 1)
+			{
+				lastName = [arrayComponents objectAtIndex:1];
+			}
 			NSString *otherName = [NSString stringWithFormat:@"%@ %@", firstName, lastName ];
 			
 			if([otherName isEqualToString:name])
