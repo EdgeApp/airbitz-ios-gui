@@ -816,6 +816,33 @@ static NSTimer *_dataSyncTimer;
     }
 }
 
++ (void)connectWatchers
+{
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWalletUUIDs: arrayWallets];
+    for (NSString *uuid in arrayWallets) {
+        const char *szUUID = [uuid UTF8String];
+        tABC_Error Error;
+        ABC_WatcherConnect(szUUID, &Error);
+        [Util printABC_Error:&Error];
+    }
+}
+
++ (void)disconnectWatchers
+{
+    if ([CoreBridge allWatchersReady])
+    {
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        [CoreBridge loadWalletUUIDs: arrayWallets];
+        for (NSString *uuid in arrayWallets) {
+            const char *szUUID = [uuid UTF8String];
+            tABC_Error Error;
+            ABC_WatcherDisconnect(szUUID, &Error);
+            [Util printABC_Error:&Error];
+        }
+    }
+}
+
 + (void)startWatcher:(NSString *) walletUUID
 {
     const char *szUUID = [walletUUID UTF8String];

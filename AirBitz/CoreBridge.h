@@ -51,6 +51,8 @@
 + (void)logout;
 + (BOOL)allWatchersReady;
 + (BOOL)watcherIsReady:(NSString *)UUID;
++ (void)connectWatchers;
++ (void)disconnectWatchers;
 + (void)startWatchers;
 + (void)startWatcher:(NSString *)walletUUID;
 + (void)stopWatchers;

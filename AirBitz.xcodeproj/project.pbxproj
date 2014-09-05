@@ -106,6 +106,8 @@
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
 		6893E6CA19783FED0092DA04 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6893E6C919783FED0092DA04 /* SyncView.m */; };
 		68C3285719804BFE007DA4C2 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */; };
+		7D021AF819BA5D3400B870B9 /* MTReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D021AF719BA5D3400B870B9 /* MTReachabilityManager.m */; };
+		7D021AF919BA5D3400B870B9 /* MTReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D021AF719BA5D3400B870B9 /* MTReachabilityManager.m */; };
 		7D5E1CD819AFB2D400943A81 /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CBE19AFB2D400943A81 /* libabc.a */; };
 		7D5E1CDB19AFB2D400943A81 /* libbitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CC119AFB2D400943A81 /* libbitcoin.a */; };
 		7D5E1CE319AFB2D400943A81 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CC919AFB2D400943A81 /* libboost_system.a */; };
@@ -596,6 +598,8 @@
 		7DBD87A619B97F6F0069D62A /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7DBD87A119B97F6F0069D62A /* HockeySDK.xcconfig */; };
 		7DBD87A719B97F6F0069D62A /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DBD87A219B97F6F0069D62A /* HockeySDKResources.bundle */; };
 		7DBD87A819B97F6F0069D62A /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DBD87A219B97F6F0069D62A /* HockeySDKResources.bundle */; };
+		7DBD87EE19B988390069D62A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBD87CF19B988390069D62A /* Reachability.m */; };
+		7DBD87EF19B988390069D62A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBD87CF19B988390069D62A /* Reachability.m */; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
 		B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */; };
@@ -1155,6 +1159,8 @@
 		6893E6C819783FED0092DA04 /* SyncView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncView.h; sourceTree = "<group>"; };
 		6893E6C919783FED0092DA04 /* SyncView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncView.m; sourceTree = "<group>"; };
 		68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SyncView~iphone.xib"; sourceTree = "<group>"; };
+		7D021AF619BA5D3400B870B9 /* MTReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTReachabilityManager.h; sourceTree = "<group>"; };
+		7D021AF719BA5D3400B870B9 /* MTReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTReachabilityManager.m; sourceTree = "<group>"; };
 		7D5E1CBE19AFB2D400943A81 /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = "ABC-testnet/libabc.a"; sourceTree = "<group>"; };
 		7D5E1CC119AFB2D400943A81 /* libbitcoin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbitcoin.a; path = "ABC-testnet/libbitcoin.a"; sourceTree = "<group>"; };
 		7D5E1CC919AFB2D400943A81 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = "ABC-testnet/libboost_system.a"; sourceTree = "<group>"; };
@@ -1173,6 +1179,8 @@
 		7DBD879F19B97F6F0069D62A /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		7DBD87A119B97F6F0069D62A /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
 		7DBD87A219B97F6F0069D62A /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		7DBD87CE19B988390069D62A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		7DBD87CF19B988390069D62A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
 		B5050549193F7D2B007D4960 /* GTLDrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLDrive.h; sourceTree = "<group>"; };
@@ -1915,6 +1923,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		7DBD87AB19B988390069D62A /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				7DBD87CE19B988390069D62A /* Reachability.h */,
+				7DBD87CF19B988390069D62A /* Reachability.m */,
+				7D021AF619BA5D3400B870B9 /* MTReachabilityManager.h */,
+				7D021AF719BA5D3400B870B9 /* MTReachabilityManager.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		B505FB49193F7AC1007D4960 /* Google Drive */ = {
 			isa = PBXGroup;
 			children = (
@@ -2149,6 +2168,7 @@
 				B516C1E718C54B06008CC6A1 /* NSDate+Helper.m */,
 				4C3C30A2191C1C90006923DE /* PickerTextView */,
 				4C3C308B1918347F006923DE /* PopupPickerView */,
+				7DBD87AB19B988390069D62A /* Reachability */,
 				B5C0A9A718EA0D09008F302C /* Request */,
 				B5C0A9AB18EA0D78008F302C /* Send */,
 				B5004A2618A5C755003560A4 /* Server.h */,
@@ -3616,6 +3636,7 @@
 				4CA4672C19B604CA004F9923 /* DL_URLServer.m in Sources */,
 				7D98ACB919A7C550003D2BF6 /* ShowWalletQRViewController.m in Sources */,
 				7D98ACBA19A7C550003D2BF6 /* ExportWalletOptionsCell.m in Sources */,
+				7DBD87EF19B988390069D62A /* Reachability.m in Sources */,
 				7D98ACBB19A7C550003D2BF6 /* User.m in Sources */,
 				7D98ACBC19A7C550003D2BF6 /* AutoCompleteTextField.m in Sources */,
 				7D98ACBD19A7C550003D2BF6 /* BLEScanCell.m in Sources */,
@@ -3683,6 +3704,7 @@
 				7D98ACFB19A7C550003D2BF6 /* BD_Address_Cell.m in Sources */,
 				7D98ACFC19A7C550003D2BF6 /* CJSONDeserializer.m in Sources */,
 				7D98ACFD19A7C550003D2BF6 /* RequestViewController.m in Sources */,
+				7D021AF919BA5D3400B870B9 /* MTReachabilityManager.m in Sources */,
 				7D98ACFE19A7C550003D2BF6 /* BD_Details_Cell.m in Sources */,
 				7D98ACFF19A7C550003D2BF6 /* WalletCell.m in Sources */,
 				7D98AD0019A7C550003D2BF6 /* OfflineWalletViewController.m in Sources */,
@@ -3724,6 +3746,7 @@
 				4CA4672B19B604CA004F9923 /* DL_URLServer.m in Sources */,
 				B5C0A9CB18EA0FF0008F302C /* ShowWalletQRViewController.m in Sources */,
 				4C7247B219352F730091C286 /* ExportWalletOptionsCell.m in Sources */,
+				7DBD87EE19B988390069D62A /* Reachability.m in Sources */,
 				B5E7F57A18E4AAD5009B5844 /* User.m in Sources */,
 				B5FD394718F240E600BE2670 /* AutoCompleteTextField.m in Sources */,
 				B5628BE6199BD44D0077DA1C /* BLEScanCell.m in Sources */,
@@ -3791,6 +3814,7 @@
 				B5C0A97318EA0A42008F302C /* BD_Address_Cell.m in Sources */,
 				B5137C3918A435BD00DA4A34 /* CJSONDeserializer.m in Sources */,
 				B5C0A9AA18EA0D09008F302C /* RequestViewController.m in Sources */,
+				7D021AF819BA5D3400B870B9 /* MTReachabilityManager.m in Sources */,
 				B5C0A97418EA0A42008F302C /* BD_Details_Cell.m in Sources */,
 				B5C0A9C418EA0DD8008F302C /* WalletCell.m in Sources */,
 				4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */,
