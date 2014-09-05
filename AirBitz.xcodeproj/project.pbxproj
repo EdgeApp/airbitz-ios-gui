@@ -118,9 +118,6 @@
 		7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD619AFB2D400943A81 /* libz.a */; };
 		7D5E1CF419AFB34C00943A81 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CF319AFB34C00943A81 /* libssl.a */; };
 		7D6EDB7C19A66C82007C33AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7B19A66C82007C33AE /* CoreText.framework */; };
-		7D6EDB8219A66C9F007C33AE /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7E19A66C9F007C33AE /* HockeySDK.framework */; };
-		7D6EDB8319A66C9F007C33AE /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7D6EDB8019A66C9F007C33AE /* HockeySDK.xcconfig */; };
-		7D6EDB8419A66C9F007C33AE /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D6EDB8119A66C9F007C33AE /* HockeySDKResources.bundle */; };
 		7D98ACAD19A7C550003D2BF6 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9A418EA0C4E008F302C /* SMCalloutView.m */; };
 		7D98ACAE19A7C550003D2BF6 /* QuestionAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EB0E18DE018E008ACF88 /* QuestionAnswerView.m */; };
 		7D98ACAF19A7C550003D2BF6 /* DateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D0193564D20091C286 /* DateTime.m */; };
@@ -228,7 +225,6 @@
 		7D98AD1619A7C550003D2BF6 /* libbitcoin-watcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BEDA3195D5A970053A09E /* libbitcoin-watcher.a */; };
 		7D98AD1719A7C550003D2BF6 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BED9D195D5A7C0053A09E /* libsecp256k1.a */; };
 		7D98AD1819A7C550003D2BF6 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
-		7D98AD1919A7C550003D2BF6 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7E19A66C9F007C33AE /* HockeySDK.framework */; };
 		7D98AD1A19A7C550003D2BF6 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
 		7D98AD1C19A7C550003D2BF6 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463C18C9244900179D9C /* libiconv.dylib */; };
 		7D98AD1E19A7C550003D2BF6 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463A18C9242700179D9C /* CoreVideo.framework */; };
@@ -312,7 +308,6 @@
 		7D98AD7719A7C550003D2BF6 /* btn_alwaysConfirm_off@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B56553DB18ECAFE8005B35E1 /* btn_alwaysConfirm_off@2x~iphone.png */; };
 		7D98AD7819A7C550003D2BF6 /* icon_USD_light@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A918C012B500AEA789 /* icon_USD_light@2x~iphone.png */; };
 		7D98AD7919A7C550003D2BF6 /* bkg_calculator@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144418C012B500AEA789 /* bkg_calculator@2x~iphone.png */; };
-		7D98AD7A19A7C550003D2BF6 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7D6EDB8019A66C9F007C33AE /* HockeySDK.xcconfig */; };
 		7D98AD7B19A7C550003D2BF6 /* icon_settings_dark~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14A418C012B500AEA789 /* icon_settings_dark~iphone.png */; };
 		7D98AD7C19A7C550003D2BF6 /* background@2x~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5675BA218A19A84002E0703 /* background@2x~iphone.jpg */; };
 		7D98AD7D19A7C550003D2BF6 /* btn_QR~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147D18C012B500AEA789 /* btn_QR~iphone.png */; };
@@ -382,7 +377,6 @@
 		7D98ADBD19A7C550003D2BF6 /* btn_expand@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC215E19633FFB00CC0F1E /* btn_expand@2x~iphone.png */; };
 		7D98ADBE19A7C550003D2BF6 /* btn_right@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5675BB818A1A1B7002E0703 /* btn_right@2x~iphone.png */; };
 		7D98ADBF19A7C550003D2BF6 /* icon_calendar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247A9193516630091C286 /* icon_calendar@2x~iphone.png */; };
-		7D98ADC019A7C550003D2BF6 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D6EDB8119A66C9F007C33AE /* HockeySDKResources.bundle */; };
 		7D98ADC119A7C550003D2BF6 /* btn_unselected~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B55A02FB18EA206300845090 /* btn_unselected~iphone.png */; };
 		7D98ADC219A7C550003D2BF6 /* sms_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693861964FE8A0022EE64 /* sms_btn@2x~iphone.png */; };
 		7D98ADC319A7C550003D2BF6 /* btn_2~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144D18C012B500AEA789 /* btn_2~iphone.png */; };
@@ -596,6 +590,12 @@
 		7D98AE9319A7C550003D2BF6 /* tabbar_base~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B318C012B500AEA789 /* tabbar_base~iphone.png */; };
 		7D98AE9419A7C550003D2BF6 /* btn_export@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147018C012B500AEA789 /* btn_export@2x~iphone.png */; };
 		7DAE1F4819A3C6A400BF5C60 /* infoSendConfirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = 7DAE1F4719A3C6A400BF5C60 /* infoSendConfirmation.html */; };
+		7DBD87A319B97F6F0069D62A /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DBD879F19B97F6F0069D62A /* HockeySDK.framework */; };
+		7DBD87A419B97F6F0069D62A /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DBD879F19B97F6F0069D62A /* HockeySDK.framework */; };
+		7DBD87A519B97F6F0069D62A /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7DBD87A119B97F6F0069D62A /* HockeySDK.xcconfig */; };
+		7DBD87A619B97F6F0069D62A /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7DBD87A119B97F6F0069D62A /* HockeySDK.xcconfig */; };
+		7DBD87A719B97F6F0069D62A /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DBD87A219B97F6F0069D62A /* HockeySDKResources.bundle */; };
+		7DBD87A819B97F6F0069D62A /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DBD87A219B97F6F0069D62A /* HockeySDKResources.bundle */; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
 		B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */; };
@@ -1168,11 +1168,11 @@
 		7D5E1CF319AFB34C00943A81 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "ABC-testnet/libssl.a"; sourceTree = "<group>"; };
 		7D687D8819AFFBF20077BD5A /* Airbitz-Testnet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Airbitz-Testnet-Info.plist"; sourceTree = "<group>"; };
 		7D6EDB7B19A66C82007C33AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		7D6EDB7E19A66C9F007C33AE /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
-		7D6EDB8019A66C9F007C33AE /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
-		7D6EDB8119A66C9F007C33AE /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		7D98AE9919A7C550003D2BF6 /* Airbitz Testnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Testnet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DAE1F4719A3C6A400BF5C60 /* infoSendConfirmation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoSendConfirmation.html; sourceTree = "<group>"; };
+		7DBD879F19B97F6F0069D62A /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
+		7DBD87A119B97F6F0069D62A /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
+		7DBD87A219B97F6F0069D62A /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
 		B5050549193F7D2B007D4960 /* GTLDrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLDrive.h; sourceTree = "<group>"; };
@@ -1658,7 +1658,6 @@
 				7D98AD1619A7C550003D2BF6 /* libbitcoin-watcher.a in Frameworks */,
 				7D98AD1719A7C550003D2BF6 /* libsecp256k1.a in Frameworks */,
 				7D98AD1819A7C550003D2BF6 /* libsodium.a in Frameworks */,
-				7D98AD1919A7C550003D2BF6 /* HockeySDK.framework in Frameworks */,
 				7D98AD1A19A7C550003D2BF6 /* libzmq.a in Frameworks */,
 				7D98AD1C19A7C550003D2BF6 /* libiconv.dylib in Frameworks */,
 				7D98AD1E19A7C550003D2BF6 /* CoreVideo.framework in Frameworks */,
@@ -1683,6 +1682,7 @@
 				7D5E1CE919AFB2D400943A81 /* libjansson.a in Frameworks */,
 				7D5E1CE519AFB2D400943A81 /* libcrypto.a in Frameworks */,
 				7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */,
+				7DBD87A419B97F6F0069D62A /* HockeySDK.framework in Frameworks */,
 				7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */,
 				7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */,
 				7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */,
@@ -1700,7 +1700,6 @@
 				686BEDA4195D5A970053A09E /* libbitcoin-watcher.a in Frameworks */,
 				686BED9E195D5A7C0053A09E /* libsecp256k1.a in Frameworks */,
 				684C0E521936B97000AB9807 /* libsodium.a in Frameworks */,
-				7D6EDB8219A66C9F007C33AE /* HockeySDK.framework in Frameworks */,
 				686C24871935608400F8E445 /* libzmq.a in Frameworks */,
 				4C08A6E218C29CEF0071B87C /* libz.a in Frameworks */,
 				4C90463D18C9244900179D9C /* libiconv.dylib in Frameworks */,
@@ -1726,6 +1725,7 @@
 				4C08A6DB18C29CEF0071B87C /* libabc.a in Frameworks */,
 				B5F2E9A518D3BFEF008ACF88 /* libbitcoin.a in Frameworks */,
 				B5675B4C18A17F6F002E0703 /* Foundation.framework in Frameworks */,
+				7DBD87A319B97F6F0069D62A /* HockeySDK.framework in Frameworks */,
 				4C08A6E018C29CEF0071B87C /* libscrypt.a in Frameworks */,
 				4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */,
 				4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */,
@@ -1896,21 +1896,21 @@
 			name = "ABC-testnet";
 			sourceTree = "<group>";
 		};
-		7D6EDB7D19A66C9F007C33AE /* HockeySDK.embeddedframework */ = {
+		7DBD879E19B97F6F0069D62A /* HockeySDK.embeddedframework */ = {
 			isa = PBXGroup;
 			children = (
-				7D6EDB7E19A66C9F007C33AE /* HockeySDK.framework */,
-				7D6EDB7F19A66C9F007C33AE /* Resources */,
+				7DBD879F19B97F6F0069D62A /* HockeySDK.framework */,
+				7DBD87A019B97F6F0069D62A /* Resources */,
 			);
 			name = HockeySDK.embeddedframework;
-			path = "HockeySDK-iOS/HockeySDK.embeddedframework";
+			path = "AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework";
 			sourceTree = "<group>";
 		};
-		7D6EDB7F19A66C9F007C33AE /* Resources */ = {
+		7DBD87A019B97F6F0069D62A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7D6EDB8019A66C9F007C33AE /* HockeySDK.xcconfig */,
-				7D6EDB8119A66C9F007C33AE /* HockeySDKResources.bundle */,
+				7DBD87A119B97F6F0069D62A /* HockeySDK.xcconfig */,
+				7DBD87A219B97F6F0069D62A /* HockeySDKResources.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2065,7 +2065,7 @@
 		B5675B4A18A17F6F002E0703 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7D6EDB7D19A66C9F007C33AE /* HockeySDK.embeddedframework */,
+				7DBD879E19B97F6F0069D62A /* HockeySDK.embeddedframework */,
 				7D6EDB7B19A66C82007C33AE /* CoreText.framework */,
 				B5628BF3199BE87B0077DA1C /* CoreBluetooth.framework */,
 				C40BC5D4199479CF00149E12 /* libcsv.a */,
@@ -2923,7 +2923,7 @@
 				7D98AD7719A7C550003D2BF6 /* btn_alwaysConfirm_off@2x~iphone.png in Resources */,
 				7D98AD7819A7C550003D2BF6 /* icon_USD_light@2x~iphone.png in Resources */,
 				7D98AD7919A7C550003D2BF6 /* bkg_calculator@2x~iphone.png in Resources */,
-				7D98AD7A19A7C550003D2BF6 /* HockeySDK.xcconfig in Resources */,
+				7DBD87A619B97F6F0069D62A /* HockeySDK.xcconfig in Resources */,
 				7D98AD7B19A7C550003D2BF6 /* icon_settings_dark~iphone.png in Resources */,
 				7D98AD7C19A7C550003D2BF6 /* background@2x~iphone.jpg in Resources */,
 				7D98AD7D19A7C550003D2BF6 /* btn_QR~iphone.png in Resources */,
@@ -2993,7 +2993,7 @@
 				7D98ADBD19A7C550003D2BF6 /* btn_expand@2x~iphone.png in Resources */,
 				7D98ADBE19A7C550003D2BF6 /* btn_right@2x~iphone.png in Resources */,
 				7D98ADBF19A7C550003D2BF6 /* icon_calendar@2x~iphone.png in Resources */,
-				7D98ADC019A7C550003D2BF6 /* HockeySDKResources.bundle in Resources */,
+				7DBD87A819B97F6F0069D62A /* HockeySDKResources.bundle in Resources */,
 				7D98ADC119A7C550003D2BF6 /* btn_unselected~iphone.png in Resources */,
 				7D98ADC219A7C550003D2BF6 /* sms_btn@2x~iphone.png in Resources */,
 				7D98ADC319A7C550003D2BF6 /* btn_2~iphone.png in Resources */,
@@ -3279,7 +3279,7 @@
 				B56553DF18ECAFE8005B35E1 /* btn_alwaysConfirm_off@2x~iphone.png in Resources */,
 				B59C152B18C012B500AEA789 /* icon_USD_light@2x~iphone.png in Resources */,
 				B59C14C618C012B500AEA789 /* bkg_calculator@2x~iphone.png in Resources */,
-				7D6EDB8319A66C9F007C33AE /* HockeySDK.xcconfig in Resources */,
+				7DBD87A519B97F6F0069D62A /* HockeySDK.xcconfig in Resources */,
 				B59C152618C012B500AEA789 /* icon_settings_dark~iphone.png in Resources */,
 				B5675BAD18A19A84002E0703 /* background@2x~iphone.jpg in Resources */,
 				B59C14FF18C012B500AEA789 /* btn_QR~iphone.png in Resources */,
@@ -3349,7 +3349,7 @@
 				DAAC216019633FFB00CC0F1E /* btn_expand@2x~iphone.png in Resources */,
 				B5675BBC18A1A1B7002E0703 /* btn_right@2x~iphone.png in Resources */,
 				4C7247AB193516630091C286 /* icon_calendar@2x~iphone.png in Resources */,
-				7D6EDB8419A66C9F007C33AE /* HockeySDKResources.bundle in Resources */,
+				7DBD87A719B97F6F0069D62A /* HockeySDKResources.bundle in Resources */,
 				B55A030518EA206300845090 /* btn_unselected~iphone.png in Resources */,
 				DA76938C1964FE8A0022EE64 /* sms_btn@2x~iphone.png in Resources */,
 				B59C14CF18C012B500AEA789 /* btn_2~iphone.png in Resources */,
@@ -3579,7 +3579,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+			shellScript = "FILE=\"${SRCROOT}/AirBitz/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
 		};
 		7D98AE9519A7C550003D2BF6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3592,7 +3592,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+			shellScript = "FILE=\"${SRCROOT}/AirBitz/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3853,6 +3853,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirBitz/AirBitz-Prefix.pch";
@@ -3889,6 +3890,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirBitz/AirBitz-Prefix.pch";
@@ -4000,7 +4002,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirBitz/AirBitz-Prefix.pch";
@@ -4036,7 +4038,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirBitz/AirBitz-Prefix.pch";
