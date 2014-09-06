@@ -21,6 +21,7 @@
 @property (nonatomic, assign)   unsigned int    archived;
 @property (nonatomic, assign)   double          balance;
 @property (nonatomic, strong)   NSArray         *arrayTransactions;
+@property (nonatomic, assign)   BOOL            *loaded;
 
 - (BOOL)isArchived;
 

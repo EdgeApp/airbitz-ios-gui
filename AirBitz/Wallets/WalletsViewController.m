@@ -624,8 +624,14 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
     Wallet *wallet = (indexPath.section == 0 ?
                       [self.arrayWallets objectAtIndex:row] :
                       [self.arrayArchivedWallets objectAtIndex:row]);
+    if (wallet.loaded) {
+        cell.userInteractionEnabled = YES;
+        cell.name.text = wallet.strName;
+    } else {
+        cell.userInteractionEnabled = NO;
+        cell.name.text = NSLocalizedString(@"Loading...", @"");
+    }
 
-    cell.name.text = wallet.strName;
     cell.amount.text = [self conversion:wallet];
 	
 	if((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))

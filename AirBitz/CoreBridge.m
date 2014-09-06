@@ -22,6 +22,7 @@
 #define FILE_SYNC_FREQUENCY_SECONDS     5
 
 static BOOL bInitialized = NO;
+static BOOL bDataFetched = NO;
 static NSOperationQueue *exchangeQueue;
 static NSOperationQueue *dataQueue;
 static NSMutableDictionary *watchers;
@@ -87,6 +88,7 @@ static NSTimer *_dataSyncTimer;
             selector:@selector(requestSyncData:)
             userInfo:nil
             repeats:YES];
+        [self requestSyncData:nil];
     }
 }
 
@@ -148,6 +150,7 @@ static NSTimer *_dataSyncTimer;
     tABC_WalletInfo **aWalletInfo = NULL;
     unsigned int nCount;
 
+    NSLog(@"CoreBridge.LoadWallets\n");
     tABC_CC result = ABC_GetWallets([[User Singleton].name UTF8String],
                                     [[User Singleton].password UTF8String],
                                     &aWalletInfo, &nCount, &Error);
@@ -344,6 +347,7 @@ static NSTimer *_dataSyncTimer;
     wallet.currencyNum = pWalletInfo->currencyNum;
     wallet.currencyAbbrev = [CoreBridge currencyAbbrevLookup:wallet.currencyNum];
     wallet.currencySymbol = [CoreBridge currencySymbolLookup:wallet.currencyNum];
+    wallet.loaded = wallet.currencyNum == -1 ? NO : YES;
 }
 
 + (void)setTransaction:(Wallet *) wallet transaction:(Transaction *) transaction coreTx:(tABC_TxInfo *) pTrans
@@ -774,6 +778,11 @@ static NSTimer *_dataSyncTimer;
     return bValid;
 }
 
++ (void)login
+{
+    bDataFetched = NO;
+    [CoreBridge startQueues];
+}
 
 + (void)logout
 {
@@ -823,7 +832,7 @@ static NSTimer *_dataSyncTimer;
         [watchers setObject:queue forKey:walletUUID];
 
         [queue addOperationWithBlock:^{
-            [dataQueue setName:walletUUID];
+            [queue setName:walletUUID];
             tABC_Error Error;
             ABC_WatcherLoop([walletUUID UTF8String],
                     ABC_BitCoin_Event_Callback,
@@ -988,24 +997,49 @@ static NSTimer *_dataSyncTimer;
 
 + (void)requestSyncData:(NSTimer *)object
 {
+    // Do not request a sync one is currently in progress
+    if ([dataQueue operationCount] > 0) {
+        return;
+    }
+    // Sync Account
     [dataQueue addOperationWithBlock:^{
         [[NSThread currentThread] setName:@"Data Sync"];
-        [CoreBridge syncAllData];
-    }];
-}
-
-+ (void)syncAllData
-{
-    if ([User isLoggedIn])
-    {
         tABC_Error error;
-        ABC_DataSyncAll([[User Singleton].name UTF8String],
-                        [[User Singleton].password UTF8String],
-                        ABC_BitCoin_Event_Callback,
-                        (__bridge void *) singleton,
-                        &error);
+        ABC_DataSyncAccount([[User Singleton].name UTF8String],
+                            [[User Singleton].password UTF8String],
+                            ABC_BitCoin_Event_Callback,
+                            (__bridge void *) singleton,
+                            &error);
         [Util printABC_Error: &error];
+    }];
+    // Sync Wallets
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWalletUUIDs: arrayWallets];
+    for (NSString *uuid in arrayWallets) {
+        [dataQueue addOperationWithBlock:^{
+            tABC_Error error;
+            ABC_DataSyncWallet([[User Singleton].name UTF8String],
+                            [[User Singleton].password UTF8String],
+                            [uuid UTF8String],
+                            ABC_BitCoin_Event_Callback,
+                            (__bridge void *) singleton,
+                            &error);
+            [Util printABC_Error: &error];
+
+            // Start watcher if the data has not been fetch
+            dispatch_async(dispatch_get_main_queue(),^{
+                if (!bDataFetched) {
+                    [CoreBridge startWatcher:uuid];
+                }
+            });
+        }];
     }
+    // Mark data as sync'd
+    [dataQueue addOperationWithBlock:^{
+        dispatch_async(dispatch_get_main_queue(),^{
+            bDataFetched = YES;
+        });
+    }];
 }
 
 + (bool)isTestNet
