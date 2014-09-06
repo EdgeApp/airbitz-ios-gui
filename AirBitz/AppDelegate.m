@@ -218,7 +218,7 @@ NSDate *logoutDate = NULL;
     } else {
         NSLog(@"Unreachable");
         [CoreBridge disconnectWatchers];
-        [CoreBridge stopWatchers];
+        [CoreBridge stopQueues];
     }
 }
 
