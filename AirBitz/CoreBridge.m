@@ -782,6 +782,7 @@ static NSTimer *_dataSyncTimer;
 {
     bDataFetched = NO;
     [CoreBridge startQueues];
+    [CoreBridge startWatchers];
 }
 
 + (void)logout
@@ -814,13 +815,25 @@ static NSTimer *_dataSyncTimer;
     for (NSString *uuid in arrayWallets) {
         [CoreBridge startWatcher:uuid];
     }
+    if (bDataFetched) {
+        [CoreBridge connectWatchers];
+    }
 }
 
 + (void)connectWatchers
 {
-    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWalletUUIDs: arrayWallets];
-    for (NSString *uuid in arrayWallets) {
+    if ([User isLoggedIn]) {
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        [CoreBridge loadWalletUUIDs: arrayWallets];
+        for (NSString *uuid in arrayWallets) {
+            [CoreBridge connectWatcher:uuid];
+        }
+    }
+}
+
++ (void)connectWatcher:(NSString *)uuid
+{
+    if ([User isLoggedIn]) {
         const char *szUUID = [uuid UTF8String];
         tABC_Error Error;
         ABC_WatcherConnect(szUUID, &Error);
@@ -830,7 +843,7 @@ static NSTimer *_dataSyncTimer;
 
 + (void)disconnectWatchers
 {
-    if ([CoreBridge allWatchersReady])
+    if ([User isLoggedIn])
     {
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
         [CoreBridge loadWalletUUIDs: arrayWallets];
@@ -846,7 +859,6 @@ static NSTimer *_dataSyncTimer;
 + (void)startWatcher:(NSString *) walletUUID
 {
     const char *szUUID = [walletUUID UTF8String];
-
     if ([watchers objectForKey:walletUUID] == nil)
     {
         tABC_Error Error;
@@ -871,9 +883,6 @@ static NSTimer *_dataSyncTimer;
         ABC_WatchAddresses([[User Singleton].name UTF8String],
                             [[User Singleton].password UTF8String],
                             szUUID, &Error);
-        [Util printABC_Error:&Error];
-
-        ABC_WatcherConnect(szUUID, &Error);
         [Util printABC_Error:&Error];
     }
 }
@@ -1056,7 +1065,7 @@ static NSTimer *_dataSyncTimer;
             // Start watcher if the data has not been fetch
             dispatch_async(dispatch_get_main_queue(),^{
                 if (!bDataFetched) {
-                    [CoreBridge startWatcher:uuid];
+                    [CoreBridge connectWatcher:uuid];
                 }
             });
         }];

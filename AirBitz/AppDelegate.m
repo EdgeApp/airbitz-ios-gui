@@ -107,7 +107,7 @@ NSDate *logoutDate = NULL;
                                                        repeats:NO];
         if ([CoreBridge allWatchersReady])
         {
-            [CoreBridge stopWatchers];
+            [CoreBridge disconnectWatchers];
         }
         else
         {
@@ -125,7 +125,7 @@ NSDate *logoutDate = NULL;
                 // if the app *is not* active, stop watchers
                 if (![self isAppActive])
                 {
-                    [CoreBridge stopWatchers];
+                    [CoreBridge disconnectWatchers];
                 }
                 if (![logoutTimer isValid])
                 {
@@ -142,7 +142,7 @@ NSDate *logoutDate = NULL;
     [self checkLoginExpired];
     if ([User isLoggedIn])
     {
-        [CoreBridge startWatchers];
+        [CoreBridge connectWatchers];
         [CoreBridge startQueues];
     }
 }
