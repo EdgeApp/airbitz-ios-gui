@@ -195,23 +195,35 @@
     // go through each element in the array
     for (CFIndex i = 0; i < ABMultiValueGetCount(arrayData); i++)
     {
+        Contact *contact = [[Contact alloc] init];
+
         NSString *tempStrData = (__bridge NSString *)ABMultiValueCopyValueAtIndex(arrayData, i);
-        NSString *strData = [NSString stringWithFormat:@"%@", tempStrData];
-        CFRelease((__bridge CFTypeRef)tempStrData);
+        if (tempStrData)
+        {
+            NSString *strData = [NSString stringWithFormat:@"%@", tempStrData];
+            CFRelease((__bridge CFTypeRef)tempStrData);
+            contact.strData = strData;
+        }
+        else
+        {
+            contact.strData = [NSString stringWithFormat:@""];
+        }
 
         CFStringRef labelStingRef = ABMultiValueCopyLabelAtIndex(arrayData, i);
 
-        NSString *tempStrDataLabel = (__bridge NSString *)ABAddressBookCopyLocalizedLabel(labelStingRef);
-        CFRelease(labelStingRef);
+        if (labelStingRef != nil)
+        {
+            NSString *tempStrDataLabel = (__bridge NSString *)ABAddressBookCopyLocalizedLabel(labelStingRef);
+            NSString *strDataLabel  = [NSString stringWithFormat:@"%@", tempStrDataLabel];
+            CFRelease((__bridge CFTypeRef)tempStrDataLabel);
+            contact.strDataLabel = strDataLabel;
+        }
+        else
+        {
+            contact.strDataLabel = [NSString stringWithFormat:@""];
+        }
 
-        NSString *strDataLabel  = [NSString stringWithFormat:@"%@", tempStrDataLabel];
-        CFRelease((__bridge CFTypeRef)tempStrDataLabel);
-
-
-        Contact *contact = [[Contact alloc] init];
         contact.strName = strName;
-        contact.strData = strData;
-        contact.strDataLabel = strDataLabel;
         contact.imagePhoto = imagePhoto;
 
         [arrayContacts addObject:contact];
