@@ -835,10 +835,10 @@ static NSTimer *_dataSyncTimer;
 + (void)connectWatcher:(NSString *)uuid
 {
     if ([User isLoggedIn]) {
-        const char *szUUID = [uuid UTF8String];
         tABC_Error Error;
-        ABC_WatcherConnect(szUUID, &Error);
+        ABC_WatcherConnect([uuid UTF8String], &Error);
         [Util printABC_Error:&Error];
+        [self watchAddresses:uuid];
     }
 }
 
@@ -1039,16 +1039,18 @@ static NSTimer *_dataSyncTimer;
         return;
     }
     // Sync Account
-    [dataQueue addOperationWithBlock:^{
-        [[NSThread currentThread] setName:@"Data Sync"];
-        tABC_Error error;
-        ABC_DataSyncAccount([[User Singleton].name UTF8String],
-                            [[User Singleton].password UTF8String],
-                            ABC_BitCoin_Event_Callback,
-                            (__bridge void *) singleton,
-                            &error);
-        [Util printABC_Error: &error];
-    }];
+    if (bDataFetched) {
+        [dataQueue addOperationWithBlock:^{
+            [[NSThread currentThread] setName:@"Data Sync"];
+            tABC_Error error;
+            ABC_DataSyncAccount([[User Singleton].name UTF8String],
+                                [[User Singleton].password UTF8String],
+                                ABC_BitCoin_Event_Callback,
+                                (__bridge void *) singleton,
+                                &error);
+            [Util printABC_Error: &error];
+        }];
+    }
     // Sync Wallets
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
     [CoreBridge loadWalletUUIDs: arrayWallets];
