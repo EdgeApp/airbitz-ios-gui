@@ -108,6 +108,8 @@
 		68C3285719804BFE007DA4C2 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */; };
 		7D021AF819BA5D3400B870B9 /* MTReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D021AF719BA5D3400B870B9 /* MTReachabilityManager.m */; };
 		7D021AF919BA5D3400B870B9 /* MTReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D021AF719BA5D3400B870B9 /* MTReachabilityManager.m */; };
+		7D23D56319BD612F0042B87A /* background-errormessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D23D56219BD612F0042B87A /* background-errormessage@2x.png */; };
+		7D23D56419BD612F0042B87A /* background-errormessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D23D56219BD612F0042B87A /* background-errormessage@2x.png */; };
 		7D5E1CD819AFB2D400943A81 /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CBE19AFB2D400943A81 /* libabc.a */; };
 		7D5E1CDB19AFB2D400943A81 /* libbitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CC119AFB2D400943A81 /* libbitcoin.a */; };
 		7D5E1CE319AFB2D400943A81 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CC919AFB2D400943A81 /* libboost_system.a */; };
@@ -1161,6 +1163,7 @@
 		68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SyncView~iphone.xib"; sourceTree = "<group>"; };
 		7D021AF619BA5D3400B870B9 /* MTReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTReachabilityManager.h; sourceTree = "<group>"; };
 		7D021AF719BA5D3400B870B9 /* MTReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTReachabilityManager.m; sourceTree = "<group>"; };
+		7D23D56219BD612F0042B87A /* background-errormessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-errormessage@2x.png"; sourceTree = "<group>"; };
 		7D5E1CBE19AFB2D400943A81 /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = "ABC-testnet/libabc.a"; sourceTree = "<group>"; };
 		7D5E1CC119AFB2D400943A81 /* libbitcoin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbitcoin.a; path = "ABC-testnet/libbitcoin.a"; sourceTree = "<group>"; };
 		7D5E1CC919AFB2D400943A81 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = "ABC-testnet/libboost_system.a"; sourceTree = "<group>"; };
@@ -2238,6 +2241,7 @@
 				B5675BA018A19A84002E0703 /* back_arrow@2x~iphone.png */,
 				B5675BA118A19A84002E0703 /* back_arrow~iphone.png */,
 				B5675BA218A19A84002E0703 /* background@2x~iphone.jpg */,
+				7D23D56219BD612F0042B87A /* background-errormessage@2x.png */,
 				B5675BA318A19A84002E0703 /* background~iphone.jpg */,
 				B5675BA418A19A84002E0703 /* bkg_textfield@2x~iphone.png */,
 				B5675BA518A19A84002E0703 /* bkg_textfield~iphone.png */,
@@ -2881,6 +2885,7 @@
 				7D98AD3919A7C550003D2BF6 /* PasswordVerifyView~ipad.xib in Resources */,
 				7D98AD3A19A7C550003D2BF6 /* WalletExportQuicken.QIF in Resources */,
 				7D98AD3B19A7C550003D2BF6 /* btn_done~iphone.png in Resources */,
+				7D23D56419BD612F0042B87A /* background-errormessage@2x.png in Resources */,
 				7D98AD3C19A7C550003D2BF6 /* btn_checkmark@2x~iphone.png in Resources */,
 				7D98AD3D19A7C550003D2BF6 /* btn_collapse_expand@2x~iphone.png in Resources */,
 				7D98AD3E19A7C550003D2BF6 /* emboss_down~iphone.png in Resources */,
@@ -3237,6 +3242,7 @@
 				B5F2E9D318DCE09E008ACF88 /* PasswordVerifyView~ipad.xib in Resources */,
 				4C7C1257193D2CFC0096338D /* WalletExportQuicken.QIF in Resources */,
 				B55A030118EA206300845090 /* btn_done~iphone.png in Resources */,
+				7D23D56319BD612F0042B87A /* background-errormessage@2x.png in Resources */,
 				B59C14E618C012B500AEA789 /* btn_checkmark@2x~iphone.png in Resources */,
 				B59C14EA18C012B500AEA789 /* btn_collapse_expand@2x~iphone.png in Resources */,
 				B59C150F18C012B500AEA789 /* emboss_down~iphone.png in Resources */,
