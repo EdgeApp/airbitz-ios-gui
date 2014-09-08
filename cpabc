@@ -1,1 +1,2 @@
+mkdir -p Airbitz/ABC
 cp -a ../airbitz-walletcore/deps/build/abc/ios-universal/lib/* AirBitz/ABC/
