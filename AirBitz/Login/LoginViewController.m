@@ -36,6 +36,7 @@ typedef enum eLoginMode
     CGRect                          _originalRightSwipeArrowFrame;
     CGPoint                         _firstTouchPoint;
     BOOL                            _bSuccess;
+    BOOL                            _bTouchesEnabled;
     NSString                        *_strReason;
     SignUpViewController            *_signUpController;
     UITextField                     *_activeTextField;
@@ -98,6 +99,8 @@ typedef enum eLoginMode
 
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:-1 arrow:_swipeLeftArrow origFrame:_originalLeftSwipeArrowFrame];
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1 arrow:_swipeRightArrow origFrame:_originalRightSwipeArrowFrame];
+
+    _bTouchesEnabled = YES;
 
 #if !HARD_CODED_LOGIN
     self.userNameTextField.text = [User Singleton].name;
@@ -405,12 +408,20 @@ typedef enum eLoginMode
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!_bTouchesEnabled) {
+        return;
+    }
+
     UITouch *touch = [touches anyObject];
     _firstTouchPoint = [touch locationInView:self.view.window];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!_bTouchesEnabled) {
+        return;
+    }
+    
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInView:self.view.window];
     
@@ -429,6 +440,10 @@ typedef enum eLoginMode
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!_bTouchesEnabled) {
+        return;
+    }
+    
     float xOffset = self.view.frame.origin.x;
     if(xOffset < 0) xOffset = -xOffset;
     if(xOffset < self.view.frame.size.width / 2)
@@ -579,14 +594,9 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
 - (void)showSpinner:(BOOL)bShow
 {
     _spinnerView.hidden = !bShow;
-    if (_spinnerView.hidden)
-    {
-        self.view.userInteractionEnabled = YES;
-    }
-    else
-    {
-        self.view.userInteractionEnabled = NO;
-    }
+    
+    // disable touches while the spinner is visible
+    _bTouchesEnabled = _spinnerView.hidden;
 }
 
 - (void)finishIfLoggedIn
