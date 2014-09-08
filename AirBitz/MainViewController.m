@@ -607,7 +607,7 @@ typedef enum eAppMode
 
 - (void)notifyRemotePasswordChange:(NSArray *)params
 {
-    if (_passwordChangeAlert == nil)
+    if (_passwordChangeAlert == nil && [User isLoggedIn])
     {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [[User Singleton] clear];
