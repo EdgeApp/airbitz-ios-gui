@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MinCharTextField.h"
 
+#define QA_TABLE_ROW_HEIGHT	30.0;
+
 @protocol QuestionAnswerViewDelegate;
 
 @interface QuestionAnswerView : UIView
