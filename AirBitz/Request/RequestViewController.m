@@ -166,6 +166,21 @@
     return NO;
 }
 
+- (SInt64)transactionDifference:(NSString *)walletUUID withTx:(NSString *) txId
+{
+    // If the request was 0 then there is no difference since it's up to payer to
+    // determine amount to send
+    if (_details.amountSatoshi > 0)
+    {
+        Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+        return transaction.amountSatoshi - _details.amountSatoshi;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 - (void)resetViews
 {
     if (_importWalletViewController)
@@ -197,16 +212,38 @@
 
 - (IBAction)QRCodeButton
 {
-	[self.view endEditing:YES];
+    [self.view endEditing:YES];
+    [self LaunchQRCodeScreen:0];
+}
+
+- (void)LaunchQRCodeScreen: (SInt64)amountSatoshi
+{
+    [self.view endEditing:YES];
+
+    //
+    // XXX Hack warning. If amountSatoshi is passed in, assume we are coming from a partial payment
+    // and the amountSatoshi is the remainder request amount.
+    //
 
     // get the QR Code image
     NSMutableString *strRequestID = [[NSMutableString alloc] init];
     NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
     NSMutableString *strRequestURI = [[NSMutableString alloc] init];
-    UIImage *qrImage = [self createRequestQRImageFor:@"" withNotes:@"" storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress scaleAndSave:NO];
+    UIImage *qrImage = [self createRequestQRImageFor:@"" withNotes:@"" storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress scaleAndSave:NO withAmount:amountSatoshi];
 
+    ShowWalletQRViewController *tempQRViewController = NULL;
+    if (_qrViewController)
+    {
+        tempQRViewController = _qrViewController;
+    }
     // bring up the qr code view controller
-    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress requestURI:strRequestURI];
+    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress requestURI:strRequestURI withAmount:amountSatoshi];
+
+    if (tempQRViewController)
+    {
+        [tempQRViewController.view removeFromSuperview];
+    }
+
 }
 
 #pragma mark - Notification Handlers
@@ -233,7 +270,7 @@
     }
 }
 
-- (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes
+- (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes withAmount:(SInt64)amountSatoshi
 {
 	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
 	tABC_CC result;
@@ -245,7 +282,19 @@
 	//first need to create a transaction details struct
     memset(&_details, 0, sizeof(tABC_TxDetails));
 
-    _details.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
+    //
+    // XXX Hack warning. If amountSatoshi is passed in, assume we are coming from a partial payment
+    // and the amountSatoshi is the remainder request amount.
+    //
+    if (amountSatoshi)
+    {
+        _details.amountSatoshi = amountSatoshi;
+    }
+    else
+    {
+        _details.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
+        self.originalAmountSatoshi = _details.amountSatoshi;
+    }
 	
 	//the true fee values will be set by the core
 	_details.amountFeesAirbitzSatoshi = 0;
@@ -335,18 +384,40 @@
 	return rawImage;
 }
 
--(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address requestURI:(NSString *)strRequestURI
+-(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address requestURI:(NSString *)strRequestURI withAmount:(SInt64)amountSatoshi
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	_qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
+
+    _qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
 
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 	_qrViewController.delegate = self;
 	_qrViewController.qrCodeImage = image;
 	_qrViewController.addressString = address;
 	_qrViewController.uriString = strRequestURI;
-	_qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
-    _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
+
+    //
+    // XXX Hack warning. If amountSatoshi is passed in, assume we are coming from a partial payment
+    // and the amountSatoshi is the remainder request amount.
+    //
+    if (amountSatoshi)
+    {
+        NSMutableString *strBody = [[NSMutableString alloc] init];
+        
+        [strBody appendString:NSLocalizedString(@"Partial Payment from ",nil)];
+        [strBody appendFormat:@"%@ ", [CoreBridge formatSatoshi:self.originalAmountSatoshi withSymbol:true]];
+        [strBody appendString:NSLocalizedString(@"Request ",nil)];
+
+        _qrViewController.statusString = [NSString stringWithFormat:@"%@", strBody];
+        _qrViewController.amountSatoshi = amountSatoshi;
+        _qrViewController.bPartial = true;
+    }
+    else
+    {
+        _qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
+        _qrViewController.amountSatoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
+        _qrViewController.bPartial = false;
+    }
     _qrViewController.requestID = requestID;
     _qrViewController.walletUUID = wallet.strUUID;
     _qrViewController.txDetails = _details;
@@ -369,7 +440,7 @@
 }
 
 // generates and returns a request qr image, stores request id in the given mutable string
-- (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes storeRequestIDIn:(NSMutableString *)strRequestID storeRequestURI:(NSMutableString *)strRequestURI storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave
+- (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes storeRequestIDIn:(NSMutableString *)strRequestID storeRequestURI:(NSMutableString *)strRequestURI storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave withAmount:(SInt64)amountSatoshi
 {
     UIImage *qrImage = nil;
     [strRequestID setString:@""];
@@ -381,7 +452,7 @@
     char *pszURI = NULL;
     tABC_Error error;
 
-    const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes];
+    const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes withAmount:amountSatoshi];
     requestID = [NSString stringWithUTF8String:szRequestID];
 
     if (szRequestID)

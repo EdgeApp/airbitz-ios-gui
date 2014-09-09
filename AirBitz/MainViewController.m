@@ -477,7 +477,23 @@ typedef enum eAppMode
     if (_selectedViewController == _requestViewController 
             && [_requestViewController showingQRCode:_strWalletUUID withTx:_strTxID])
     {
-        [self launchSendStatus:_strWalletUUID withTx:_strTxID];
+        SInt64 txDiff = [_requestViewController transactionDifference:_strWalletUUID withTx:_strTxID];
+        if (txDiff == 0)
+        {
+            // Sender paid exact amount
+            [self launchSendStatus:_strWalletUUID withTx:_strTxID];
+        }
+        else if (txDiff > 0)
+        {
+            // Sender paid too much. Should notify the user somehow
+            [self launchSendStatus:_strWalletUUID withTx:_strTxID];
+        }
+        else if (txDiff < 0)
+        {
+            // Sender didn't pay enough
+            txDiff = fabs(txDiff);
+            [_requestViewController LaunchQRCodeScreen:txDiff];
+        }
     }
     // Prevent displaying multiple alerts
     else if (_receivedAlert == nil)

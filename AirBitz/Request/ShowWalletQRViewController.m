@@ -141,7 +141,14 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 		self.addressLabel1.text = self.addressString;
 	}
 	
-    self.amountLabel.text = [CoreBridge formatSatoshi: self.amountSatoshi];
+    if (self.bPartial)
+    {
+        self.amountLabel.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi: self.amountSatoshi],@"Remaining..."];
+    }
+    else
+    {
+        self.amountLabel.text = [CoreBridge formatSatoshi: self.amountSatoshi];
+    }
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:NO]];
 	
