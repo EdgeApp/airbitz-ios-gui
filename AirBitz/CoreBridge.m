@@ -1070,7 +1070,7 @@ static NSTimer *_dataSyncTimer;
             dispatch_async(dispatch_get_main_queue(),^{
                 if (!bDataFetched) {
                     [CoreBridge connectWatcher:uuid];
-                    [CoreBridge requestExchangeRateUpdate];
+                    [CoreBridge requestExchangeRateUpdate:nil];
                 }
             });
         }];
