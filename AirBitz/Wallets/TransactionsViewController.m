@@ -47,6 +47,7 @@
     CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
     CGRect                              _frameTableWithSearchNoKeyboard;
+    NSInteger                           _highlightedRow;
 }
 
 @property (weak, nonatomic) IBOutlet UIView         *viewSearch;
@@ -177,6 +178,9 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    // reset highlight
+    _highlightedRow = -1;
+    
     [super viewWillAppear:animated];
     [CoreBridge reloadWallet:self.wallet];
     [self getBizImagesForWallet:self.wallet];
@@ -680,6 +684,9 @@
 
 -(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
 {
+    // reset highlight
+    _highlightedRow = -1;
+
     // if we got a new photo
     if (controller.transaction.bizId && controller.photo)
     {
@@ -869,22 +876,50 @@
 
         if ((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
         {
-            cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
+            if (row == _highlightedRow)
+            {
+                cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_single"];
+            }
+            else
+            {
+                cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
+            }
         }
         else
         {
             if(row == 0)
             {
-                cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
+                if (row == _highlightedRow)
+                {
+                    cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_top"];
+                }
+                else
+                {
+                    cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
+                }
             }
             else
                 if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
                 {
-                    cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_bottom"];
+                    if (row == _highlightedRow)
+                    {
+                        cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_bottom"];
+                    }
+                    else
+                    {
+                        cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_bottom"];
+                    }
                 }
                 else
                 {
-                    cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_middle"];
+                    if (row == _highlightedRow)
+                    {
+                        cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_middle"];
+                    }
+                    else
+                    {
+                        cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_middle"];
+                    }
                 }
         }
 
@@ -921,6 +956,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    _highlightedRow = indexPath.row;
+    [self.tableView reloadData];
+
     if (indexPath.section == 1)
     {
         if (YES == [self canLeaveWalletNameField])
