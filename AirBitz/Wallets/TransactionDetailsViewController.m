@@ -453,7 +453,7 @@ typedef enum eRequestType
 - (void)updateDisplayLayout
 {
     // update for iPhone 4
-    if (!IS_IPHONE5)
+    if (IS_IPHONE4 )
     {
         // warning: magic numbers for iphone layout
 
@@ -1410,7 +1410,7 @@ typedef enum eRequestType
     
     if (textView == self.notesTextView)
     {
-        scrollFrame.origin.y = (IS_IPHONE5 ? -90 : -115);
+        scrollFrame.origin.y = (!IS_IPHONE4 ? -90 : -115);
         [self dismissPayeeTable];
     }
     
@@ -1435,11 +1435,11 @@ typedef enum eRequestType
 
     if (textField == self.nameTextField)
     {
-        scrollFrame.origin.y = (IS_IPHONE5 ? -30 : -20);
+        scrollFrame.origin.y = (!IS_IPHONE4 ? -30 : -20);
 
         CGRect frame = self.view.bounds;
-        frame.origin.y = (IS_IPHONE5 ? 100 : 95);
-        frame.size.height = (IS_IPHONE5 ? 252 : 169);
+        frame.origin.y = (!IS_IPHONE4 ? 100 : 95);
+        frame.size.height = (!IS_IPHONE4 ? 252 : 169);
         [self spawnPayeeTableInFrame:frame];
         [self updateAutoCompleteArray];
     }
@@ -1599,7 +1599,7 @@ typedef enum eRequestType
 
     // now move the window up so that the category field is at the top
     CGRect scrollFrame = self.scrollableContentView.frame;
-    scrollFrame.origin.y = (IS_IPHONE5 ? -250 : -190); // magic number
+    scrollFrame.origin.y = (!IS_IPHONE4 ? -250 : -190); // magic number
     [self scrollContentViewToFrame:scrollFrame];
 
     // bring the picker up with it
@@ -1609,8 +1609,8 @@ typedef enum eRequestType
                      animations:^
      {
          CGRect frame = self.pickerTextCategory.popupPicker.frame;
-         frame.origin.y = (IS_IPHONE5 ? 130 : 126);
-         frame.size.height = (IS_IPHONE5 ? 220 : 130); // magic number to make it as big as possible
+         frame.origin.y = (!IS_IPHONE4 ? 130 : 126);
+         frame.size.height = (!IS_IPHONE4 ? 220 : 130); // magic number to make it as big as possible
          self.pickerTextCategory.popupPicker.frame = frame;
      }
                      completion:^(BOOL finished)

@@ -304,7 +304,7 @@
 - (void)updateDisplayLayout
 {
     // if we are on a smaller screen
-    if (!IS_IPHONE5)
+    if (IS_IPHONE4 )
     {
         // be prepared! lots and lots of magic numbers here to jam the controls to fit on a small screen
 

@@ -282,7 +282,7 @@ typedef enum eDatePeriod
 {
     // update for iPhone 4
     /*
-    if (!IS_IPHONE5)
+    if (IS_IPHONE4 )
     {
         // warning: magic numbers for iphone layout
 
@@ -458,7 +458,7 @@ typedef enum eDatePeriod
 - (void)showPopupPickerFor:(UIButton *)button
 {
     [self blockUser:YES];
-    if (!IS_IPHONE5)
+    if (IS_IPHONE4 )
     {
         CGRect frame = self.viewDisplay.frame;
         frame.origin.y -= button.frame.origin.y;

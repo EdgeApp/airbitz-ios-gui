@@ -106,13 +106,13 @@
 	[self loadWalletInfo];
 
 	self.BTCLabel_TextField.text = [User Singleton].denominationLabel; 
-	self.BTC_TextField.inputView = IS_IPHONE5 ? dummyView : self.keypadView;
-	self.USD_TextField.inputView = IS_IPHONE5 ? dummyView : self.keypadView;
+	self.BTC_TextField.inputView = !IS_IPHONE4 ? dummyView : self.keypadView;
+	self.USD_TextField.inputView = !IS_IPHONE4 ? dummyView : self.keypadView;
 	self.BTC_TextField.delegate = self;
 	self.USD_TextField.delegate = self;
 
     // if they are on a 4" screen then move the calculator below the bottom of the screen
-    if (!IS_IPHONE5)
+    if (IS_IPHONE4 )
     {
         CGRect frame = self.keypadView.frame;
         frame.origin.y = frame.origin.y + frame.size.height;
@@ -262,7 +262,7 @@
 - (void)setFirstResponder
 {
     // if this is a 4.5" screen then the calculator is up so we need to always have one of the edit boxes selected
-    if (IS_IPHONE5)
+    if (!IS_IPHONE4)
     {
         // if the BTC is not the first responder
         if (![self.BTC_TextField isFirstResponder])

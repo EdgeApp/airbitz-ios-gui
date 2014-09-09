@@ -216,7 +216,7 @@ extern void QRcode_free(QRcode *qrcode);
 - (void)updateDisplayLayout
 {
     // update for iPhone 4
-    if (!IS_IPHONE5)
+    if (IS_IPHONE4 )
     {
         // take all our major controls sections and space them evenly across the area we have
 

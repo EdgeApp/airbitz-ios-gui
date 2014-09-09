@@ -145,7 +145,7 @@ typedef enum eExportOption
 - (void)updateDisplayLayout
 {
     // update for iPhone 4
-    if (!IS_IPHONE5)
+    if (IS_IPHONE4 )
     {
         // warning: magic numbers for iphone4 layout
 

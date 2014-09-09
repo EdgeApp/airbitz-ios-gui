@@ -20,7 +20,7 @@
 
 #define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
 
-#define PICKER_MAX_CELLS_VISIBLE        (IS_IPHONE5 ? 3 : 2)
+#define PICKER_MAX_CELLS_VISIBLE        (!IS_IPHONE4 ? 3 : 2)
 
 #define POS_THRESHOLD_TO_GET_3_CHOICES  180.0
 
@@ -92,7 +92,7 @@
     self.pickerTextNew.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     [self.pickerTextNew setTopMostView:self.view];
     self.pickerTextNew.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
-    self.pickerTextNew.cropPointBottom = (IS_IPHONE5 ? 351 : 263); // magic number
+    self.pickerTextNew.cropPointBottom = (!IS_IPHONE4 ? 351 : 263); // magic number
     self.pickerTextNew.delegate = self;
 }
 
@@ -656,8 +656,8 @@
      {
          // make the table the size of a single cell and put it right above the keyboard
          CGRect frame = _frameTableOriginal;
-         frame.size.height = (IS_IPHONE5 ? 40 : 40);
-         frame.origin.y = (IS_IPHONE5 ? 305 : 217);
+         frame.size.height = (!IS_IPHONE4 ? 40 : 40);
+         frame.origin.y = (!IS_IPHONE4 ? 305 : 217);
          self.tableView.frame = frame;
 
          // scroll the table to the cell that was selected
@@ -666,8 +666,8 @@
 
          // move the selection picker to the right place and at the right size
          frame = cell.pickerTextView.popupPicker.frame;
-         frame.size.height = (IS_IPHONE5 ? 250 : 162);
-         frame.origin.y = (IS_IPHONE5 ? 50 : 50);
+         frame.size.height = (!IS_IPHONE4 ? 250 : 162);
+         frame.origin.y = (!IS_IPHONE4 ? 50 : 50);
          cell.pickerTextView.popupPicker.frame = frame;
 
          // move the arrow to the right spot

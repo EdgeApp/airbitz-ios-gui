@@ -133,7 +133,7 @@
 
     _searchShowingFrame = self.viewSearch.frame;
 
-    if (IS_IPHONE5 && !NO_SEARCHBAR)
+    if (!IS_IPHONE4 && !NO_SEARCHBAR)
     {
         self.buttonSearch.hidden = YES;
     }
@@ -332,7 +332,7 @@
         _frameTableWithSearchNoKeyboard = frame;
         frame.size.height -= TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD; // compensate for keyboard
 
-        if (!IS_IPHONE5 || NO_SEARCHBAR)
+        if (IS_IPHONE4  || NO_SEARCHBAR)
         {
             [self.searchTextField becomeFirstResponder];
             frameSearch.origin.x = _searchShowingFrame.origin.x;
@@ -346,7 +346,7 @@
         {
             curView.hidden = NO;
         }
-        if (IS_IPHONE5 && !NO_SEARCHBAR)
+        if (!IS_IPHONE4 && !NO_SEARCHBAR)
         {
             self.buttonSearch.hidden = YES;
         }
@@ -366,7 +366,7 @@
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
          self.tableView.frame = frame;
 
-         if (!IS_IPHONE5 || NO_SEARCHBAR)
+         if (IS_IPHONE4  || NO_SEARCHBAR)
          {
              self.viewSearch.frame = frameSearch;
          }

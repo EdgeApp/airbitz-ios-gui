@@ -99,7 +99,7 @@
 
 
 
-#define PICKER_MAX_CELLS_VISIBLE        (IS_IPHONE5 ? 9 : 8)
+#define PICKER_MAX_CELLS_VISIBLE        (!IS_IPHONE4 ? 9 : 8)
 #define PICKER_WIDTH                    160
 #define PICKER_CELL_HEIGHT              44
 

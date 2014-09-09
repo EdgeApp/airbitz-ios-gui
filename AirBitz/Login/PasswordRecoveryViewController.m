@@ -16,8 +16,6 @@
 #import "SignUpViewController.h"
 #import "CommonTypes.h"
 
-#define IS_IPHONE5                  (([[UIScreen mainScreen] bounds].size.height == 568) ? YES : NO)
-
 #define NUM_QUESTION_ANSWER_BLOCKS	6
 #define QA_STARTING_Y_POSITION      67.0
 
@@ -609,7 +607,7 @@ typedef enum eAlertType
         }
 
         // add more if not iPhone5
-        if (NO == IS_IPHONE5)
+        if (NO == !IS_IPHONE4)
         {
             size.height += EXTRA_HEGIHT_FOR_IPHONE4;
         }
