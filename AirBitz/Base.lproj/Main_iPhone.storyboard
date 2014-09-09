@@ -1433,16 +1433,16 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="MKi-zS-5GZ" customClass="LatoLabel">
-                                        <rect key="frame" x="20" y="94" width="160" height="21"/>
+                                        <rect key="frame" x="20" y="92" width="160" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B9X-O3-QF3" customClass="LatoLabel">
-                                        <rect key="frame" x="25" y="125" width="148" height="21"/>
+                                        <rect key="frame" x="20" y="125" width="160" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1459,6 +1459,7 @@
                         <outlet property="amountLabel" destination="2FV-6E-gId" id="TuK-CX-L2B"/>
                         <outlet property="buttonCancel" destination="810-FP-oTH" id="Igh-8p-sn2"/>
                         <outlet property="buttonCopyAddress" destination="Qov-uI-G7t" id="Zp6-bx-jv8"/>
+                        <outlet property="connectedLine2" destination="B9X-O3-QF3" id="YkX-DI-qOt"/>
                         <outlet property="connectedName" destination="MKi-zS-5GZ" id="EEp-BP-JOg"/>
                         <outlet property="connectedPhoto" destination="Enn-T7-Jij" id="l16-Xe-SfZ"/>
                         <outlet property="connectedView" destination="vnX-Jp-a7F" id="kdM-X3-OaU"/>
@@ -1719,7 +1720,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionCell" rowHeight="72" id="VE0-S6-Hzh" customClass="TransactionCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionCell" rowHeight="72" id="VE0-S6-Hzh" customClass="TransactionCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VE0-S6-Hzh" id="w2k-NV-yYC">
@@ -4028,13 +4029,6 @@
                                         <rect key="frame" x="245" y="70" width="21" height="12"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid User Name or Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bZ3-GO-iZS" customClass="LatoLabel">
-                                        <rect key="frame" x="17" y="114" width="258" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="0.015686275440000001" blue="0.074509806930000005" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <view contentMode="scaleToFill" id="bUp-i4-uHt">
                                         <rect key="frame" x="0.0" y="154" width="293" height="228"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -4122,13 +4116,32 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" id="whJ-vw-6PG" userLabel="ErrorMessageView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-errormessage.png" id="GW4-rc-pP7">
+                                        <rect key="frame" x="60" y="200" width="200" height="168"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid user name or password" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5wy-Mi-whP" userLabel="ErrorMessageText" customClass="LatoLabel">
+                                        <rect key="frame" x="85" y="215" width="150" height="139"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="contentView" destination="eTI-9q-uu0" id="9Og-HH-DYd"/>
-                        <outlet property="invalidMessage" destination="bZ3-GO-iZS" id="Qja-Kw-oCU"/>
+                        <outlet property="errorMessageText" destination="5wy-Mi-whP" id="oh9-gY-loy"/>
+                        <outlet property="errorMessageView" destination="whJ-vw-6PG" id="T37-ad-SID"/>
                         <outlet property="logoImage" destination="LqE-iy-sKS" id="cmm-Yx-nMh"/>
                         <outlet property="passwordTextField" destination="V5e-1n-K9Z" id="iwd-kF-klp"/>
                         <outlet property="spinnerView" destination="YZe-mr-te9" id="IDf-eC-kyH"/>
@@ -4346,7 +4359,7 @@
                                     <action selector="Back" destination="8PZ-sh-cHM" eventType="touchUpInside" id="DBO-e0-zh0"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" id="peD-fG-VAk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" id="peD-fG-VAk">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                 <subviews>
@@ -4742,6 +4755,7 @@
         <image name="SearchBarBacking.png" width="320" height="116"/>
         <image name="TxSearchBarBacking.png" width="320" height="55"/>
         <image name="back_arrow.png" width="37" height="37"/>
+        <image name="background-errormessage.png" width="200" height="168"/>
         <image name="background.jpg" width="320" height="568"/>
         <image name="background_header.png" width="320" height="568"/>
         <image name="bd_cell_bottom.png" width="12" height="12"/>

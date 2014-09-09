@@ -15,6 +15,8 @@
 #import "LocalSettings.h"
 #import "Config.h"
 #import <HockeySDK/HockeySDK.h>
+#import "MTReachabilityManager.h"
+#import "Reachability.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 NSTimer *logoutTimer = NULL;
@@ -36,6 +38,13 @@ NSDate *logoutDate = NULL;
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
+
+    // Instantiate Reachability singleton
+    [MTReachabilityManager sharedManager];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityDidChange:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
 
 #if (!AIRBITZ_IOS_DEBUG) || (0 == AIRBITZ_IOS_DEBUG)
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"***REMOVED***"];
@@ -98,7 +107,7 @@ NSDate *logoutDate = NULL;
                                                        repeats:NO];
         if ([CoreBridge allWatchersReady])
         {
-            [CoreBridge stopWatchers];
+            [CoreBridge disconnectWatchers];
         }
         else
         {
@@ -116,7 +125,7 @@ NSDate *logoutDate = NULL;
                 // if the app *is not* active, stop watchers
                 if (![self isAppActive])
                 {
-                    [CoreBridge stopWatchers];
+                    [CoreBridge disconnectWatchers];
                 }
                 if (![logoutTimer isValid])
                 {
@@ -133,7 +142,7 @@ NSDate *logoutDate = NULL;
     [self checkLoginExpired];
     if ([User isLoggedIn])
     {
-        [CoreBridge startWatchers];
+        [CoreBridge connectWatchers];
         [CoreBridge startQueues];
     }
 }
@@ -194,6 +203,23 @@ NSDate *logoutDate = NULL;
 - (BOOL)isAppActive
 {
     return [UIApplication sharedApplication].applicationState == UIApplicationStateActive;
+}
+
+#pragma mark - Notification handlers
+
+- (void)reachabilityDidChange:(NSNotification *)notification
+{
+    Reachability *reachability = (Reachability *)[notification object];
+
+    if ([reachability isReachable]) {
+        NSLog(@"Reachable");
+        [CoreBridge connectWatchers];
+        [CoreBridge startQueues];
+    } else {
+        NSLog(@"Unreachable");
+        [CoreBridge disconnectWatchers];
+        [CoreBridge stopQueues];
+    }
 }
 
 @end

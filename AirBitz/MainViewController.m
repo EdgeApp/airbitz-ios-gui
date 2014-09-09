@@ -23,6 +23,7 @@
 #import "Util.h"
 #import "CoreBridge.h"
 #import "CommonTypes.h"
+#import "LocalSettings.h"
 
 typedef enum eAppMode
 {
@@ -477,7 +478,23 @@ typedef enum eAppMode
     if (_selectedViewController == _requestViewController 
             && [_requestViewController showingQRCode:_strWalletUUID withTx:_strTxID])
     {
-        [self launchSendStatus:_strWalletUUID withTx:_strTxID];
+        SInt64 txDiff = [_requestViewController transactionDifference:_strWalletUUID withTx:_strTxID];
+        if (txDiff == 0)
+        {
+            // Sender paid exact amount
+            [self launchSendStatus:_strWalletUUID withTx:_strTxID];
+        }
+        else if (txDiff > 0)
+        {
+            // Sender paid too much. Should notify the user somehow
+            [self launchSendStatus:_strWalletUUID withTx:_strTxID];
+        }
+        else if (txDiff < 0)
+        {
+            // Sender didn't pay enough
+            txDiff = fabs(txDiff);
+            [_requestViewController LaunchQRCodeScreen:txDiff];
+        }
     }
     // Prevent displaying multiple alerts
     else if (_receivedAlert == nil)
@@ -522,7 +539,35 @@ typedef enum eAppMode
     {
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
+            
+            if([LocalSettings controller].bMerchantMode == NO)
+            {
+                [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
+            }
+            else
+            {
+                _receivedAlert = [[UIAlertView alloc]
+                                        initWithTitle:NSLocalizedString(@"** Payment Received **", nil)
+                                              message:@"" 
+                                             delegate:self 
+                                    cancelButtonTitle:@"OK" 
+                                    otherButtonTitles:nil];
+
+                [_receivedAlert show];
+                // Wait 10 seconds and dismiss
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+                    if (_receivedAlert)
+                    {
+                        [_receivedAlert dismissWithClickedButtonIndex:0 animated:YES];
+                    }
+                });
+
+                _appMode = APP_MODE_REQUEST;
+                [self launchViewControllerBasedOnAppMode];
+                [self showTabBarAnimated:YES];
+
+            }
             [_sendStatusController.view removeFromSuperview];
             _sendStatusController = nil;
             [_requestViewController resetViews];
@@ -607,7 +652,7 @@ typedef enum eAppMode
 
 - (void)notifyRemotePasswordChange:(NSArray *)params
 {
-    if (_passwordChangeAlert == nil)
+    if (_passwordChangeAlert == nil && [User isLoggedIn])
     {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [[User Singleton] clear];

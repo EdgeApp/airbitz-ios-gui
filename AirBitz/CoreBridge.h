@@ -47,9 +47,12 @@
                                    isSuccess:(BOOL *)bSuccess
                                     errorMsg:(NSMutableString *)error;
 + (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName;
++ (void)login;
 + (void)logout;
 + (BOOL)allWatchersReady;
 + (BOOL)watcherIsReady:(NSString *)UUID;
++ (void)connectWatchers;
++ (void)disconnectWatchers;
 + (void)startWatchers;
 + (void)startWatcher:(NSString *)walletUUID;
 + (void)stopWatchers;

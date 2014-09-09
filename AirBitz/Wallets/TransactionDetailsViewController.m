@@ -365,14 +365,26 @@ typedef enum eRequestType
         // add the category if we didn't have it
         [self addCategory: self.pickerTextCategory.textField.text];
         self.transaction.strCategory = [self.pickerTextCategory.textField text];
-    } else
+    }
+    else
     {
         self.transaction.strCategory = @"";
     }
 
     self.transaction.strName = [self.nameTextField text];
     self.transaction.strNotes = [self.notesTextView text];
-    self.transaction.amountFiat = [[self.fiatTextField text] doubleValue];
+    
+    double amountFiat = [[self.fiatTextField text] doubleValue];
+
+    if (_transactionDetailsMode == TD_MODE_SENT)
+    {
+        if (amountFiat > 0)
+        {
+            // Make amount negative since calculator cant work with negative values
+            amountFiat *= -1;
+        }
+    }
+    self.transaction.amountFiat = amountFiat;
     self.transaction.bizId = _bizId;
 	//NSLog(@"Biz ID: %i", _bizId);
     [CoreBridge storeTransaction: self.transaction];
@@ -1103,11 +1115,27 @@ typedef enum eRequestType
 - (void)CalculatorDone:(CalculatorView *)calculator
 {
     [self.fiatTextField resignFirstResponder];
+
+    double amountFiat = [[self.fiatTextField text] doubleValue];
+    
+    if (_transactionDetailsMode == TD_MODE_SENT)
+    {
+        if (amountFiat > 0)
+        {
+            // Make amount negative since calculator cant work with negative values
+            amountFiat *= -1;
+            self.fiatTextField.text = [NSString stringWithFormat:@"%f", amountFiat];
+        }
+    }
+    
+    
+
 }
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
-    //NSLog(@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
+//    NSLog(@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
+
 }
 
 #pragma mark - Payee Table

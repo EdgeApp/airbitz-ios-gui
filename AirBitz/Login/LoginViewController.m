@@ -18,7 +18,10 @@
 #import "CoreBridge.h"
 
 #define CONTENT_VIEW_SCALE_WITH_KEYBOARD    0.75
-#define LOGO_IMAGE_SHRINK_SCALE_FACTOR        0.5
+#define LOGO_IMAGE_SHRINK_SCALE_FACTOR      0.5
+#define ERROR_MESSAGE_FADE_DURATION         3.0
+#define ERROR_MESSAGE_FADE_DELAY            2.0
+#define ERROR_MESSAGE_FADE_DISMISS          0.1
 
 typedef enum eLoginMode
 {
@@ -36,6 +39,7 @@ typedef enum eLoginMode
     CGRect                          _originalRightSwipeArrowFrame;
     CGPoint                         _firstTouchPoint;
     BOOL                            _bSuccess;
+    BOOL                            _bTouchesEnabled;
     NSString                        *_strReason;
     SignUpViewController            *_signUpController;
     UITextField                     *_activeTextField;
@@ -50,8 +54,10 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet UILabel            *titleText;
 @property (nonatomic, weak) IBOutlet UIImageView        *logoImage;
 @property (nonatomic, weak) IBOutlet UIView             *userEntryView;
-@property (nonatomic, weak) IBOutlet UILabel            *invalidMessage;
 @property (nonatomic, weak) IBOutlet UIView             *spinnerView;
+
+@property (nonatomic, weak) IBOutlet UIView				*errorMessageView;
+@property (nonatomic, weak) IBOutlet UILabel			*errorMessageText;
 
 @end
 
@@ -78,7 +84,6 @@ typedef enum eLoginMode
     
     self.userNameTextField.delegate = self;
     self.passwordTextField.delegate = self;
-    self.invalidMessage.hidden = YES;
     self.spinnerView.hidden = YES;
     
     #if HARD_CODED_LOGIN
@@ -86,7 +91,9 @@ typedef enum eLoginMode
     self.userNameTextField.text = HARD_CODED_LOGIN_NAME;
     self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
     #endif
-    
+
+	self.errorMessageView.alpha = 0.0;
+
     _swipeRightArrow.transform = CGAffineTransformRotate(_swipeRightArrow.transform, M_PI);
 }
 
@@ -99,6 +106,8 @@ typedef enum eLoginMode
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:-1 arrow:_swipeLeftArrow origFrame:_originalLeftSwipeArrowFrame];
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1 arrow:_swipeRightArrow origFrame:_originalRightSwipeArrowFrame];
 
+    _bTouchesEnabled = YES;
+
 #if !HARD_CODED_LOGIN
     self.userNameTextField.text = [User Singleton].name;
     self.passwordTextField.text = [User Singleton].password;
@@ -108,6 +117,7 @@ typedef enum eLoginMode
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [self dismissErrorMessage];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewWillDisappear:animated];
 }
@@ -136,17 +146,17 @@ typedef enum eLoginMode
     if (Error.code != ABC_CC_Ok)
     {
         [Util printABC_Error:&Error];
-        self.invalidMessage.hidden = NO;
     }
     else
     {
         [self showSpinner:YES];
-        self.invalidMessage.hidden = YES;
     }
 }
 
 - (IBAction)SignUp
 {
+    [self dismissErrorMessage];
+
     [self.userNameTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     [self animateToInitialPresentation];
@@ -177,6 +187,8 @@ typedef enum eLoginMode
 
 - (IBAction)buttonForgotTouched:(id)sender
 {
+    [self dismissErrorMessage];
+
     [self.userNameTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
 
@@ -405,12 +417,20 @@ typedef enum eLoginMode
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!_bTouchesEnabled) {
+        return;
+    }
+
     UITouch *touch = [touches anyObject];
     _firstTouchPoint = [touch locationInView:self.view.window];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!_bTouchesEnabled) {
+        return;
+    }
+    
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInView:self.view.window];
     
@@ -429,6 +449,10 @@ typedef enum eLoginMode
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!_bTouchesEnabled) {
+        return;
+    }
+    
     float xOffset = self.view.frame.origin.x;
     if(xOffset < 0) xOffset = -xOffset;
     if(xOffset < self.view.frame.size.width / 2)
@@ -468,7 +492,6 @@ typedef enum eLoginMode
          }
          completion:^(BOOL finished)
          {
-             self.invalidMessage.hidden = YES;
              [self.delegate loginViewControllerDidAbort];
          }];
     }
@@ -478,8 +501,9 @@ typedef enum eLoginMode
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    [self dismissErrorMessage];
+    
     //called when user taps on either search textField or location textField
-    self.invalidMessage.hidden = YES;
     _activeTextField = textField;
     
     if(_mode == MODE_ENTERING_NEITHER)
@@ -527,15 +551,30 @@ typedef enum eLoginMode
            password:self.passwordTextField.text];
 
         [self.delegate loginViewControllerDidLogin];
-        self.invalidMessage.hidden = YES;
     }
     else
     {
-        self.invalidMessage.hidden = NO;
+        self.errorMessageView.alpha = 1.0;
+        [UIView animateWithDuration:ERROR_MESSAGE_FADE_DURATION
+                              delay:ERROR_MESSAGE_FADE_DELAY
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^
+         {
+             self.errorMessageView.alpha = 0.0;
+         }
+         completion:^(BOOL finished)
+         {
+             
+         }];
 
         [User Singleton].name = nil;
         [User Singleton].password = nil; 
     }
+}
+
+- (void)dismissErrorMessage
+{
+    [self.errorMessageView.layer removeAllAnimations];
 }
 
 #pragma mark - SignUpViewControllerDelegates
@@ -574,19 +613,18 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
     [self finishIfLoggedIn];
 }
 
+#pragma mark - Error Message
+
+
+
 #pragma mark - Misc
 
 - (void)showSpinner:(BOOL)bShow
 {
     _spinnerView.hidden = !bShow;
-    if (_spinnerView.hidden)
-    {
-        self.view.userInteractionEnabled = YES;
-    }
-    else
-    {
-        self.view.userInteractionEnabled = NO;
-    }
+    
+    // disable touches while the spinner is visible
+    _bTouchesEnabled = _spinnerView.hidden;
 }
 
 - (void)finishIfLoggedIn
@@ -596,7 +634,6 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
         _bSuccess = YES;
 
         [self.delegate loginViewControllerDidLogin];
-        _invalidMessage.hidden = YES;
     }
 }
 

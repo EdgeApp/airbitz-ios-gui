@@ -108,7 +108,8 @@ typedef enum eMapDisplayState
 {
     int totalResultsCount;          //total number of items in business listings search results (could be more than number of items actually returned due to pages)
     int currentPage;
-    NSMutableArray *searchResultsArray;
+    NSMutableArray *businessAutoCorrectArray;
+    NSMutableArray *locationAutoCorrectArray;
     int mostRecentSearchTag;
     CGPoint dividerBarStartTouchPoint;
     float dividerBarPositionWithMap;
@@ -606,7 +607,7 @@ typedef enum eMapDisplayState
     {
         BOOL foundMatch = NO;
         int index = 0;
-        for (NSString *result in searchResultsArray)
+        for (NSString *result in locationAutoCorrectArray)
         {
             if ([string isEqualToString: result])
             {
@@ -617,7 +618,7 @@ typedef enum eMapDisplayState
         }
         if (foundMatch)
         {
-            [searchResultsArray removeObjectAtIndex: index];
+            [locationAutoCorrectArray removeObjectAtIndex: index];
         }
     }
 }
@@ -632,9 +633,9 @@ typedef enum eMapDisplayState
         string = [self stringForObjectInCache: searchTermCache atIndex: i];
 
         int j;
-        for (j = 0; j < searchResultsArray.count; j++)
+        for (j = 0; j < businessAutoCorrectArray.count; j++)
         {
-            NSString *result = [self stringForObjectInCache: searchResultsArray atIndex: j];
+            NSString *result = [self stringForObjectInCache: businessAutoCorrectArray atIndex: j];
 
             if ([string isEqualToString: result])
             {
@@ -645,7 +646,7 @@ typedef enum eMapDisplayState
         if (foundMatch)
         {
             //NSLog(@"Pruning From Results: %@", [searchResultsArray objectAtIndex:j]);
-            [searchResultsArray removeObjectAtIndex: j];
+            [businessAutoCorrectArray removeObjectAtIndex: j];
         }
     }
 }
@@ -1428,12 +1429,16 @@ typedef enum eMapDisplayState
     if (textField == self.locationTextfield)
     {
         mostRecentSearchTag = TAG_LOCATION_SEARCH;
+        [self pruneCachedSearchItemsFromSearchResults];
+        [self.searchCluesTableView reloadData];
         //NSLog(@"Most Recent Search Tag: TAG_LOCATION_SEARCH");
         [self locationTextFieldChanged: textField];
     }
     if (textField == self.searchTextfield)
     {
         mostRecentSearchTag = TAG_BUSINESS_SEARCH;
+        [self pruneCachedLocationItemsFromSearchResults];
+        [self.searchCluesTableView reloadData];
         //NSLog(@"Most Recent Search Tag: TAG_BUSINESS_SEARCH");
         [self searchTextFieldChanged: textField];
     }
@@ -1576,19 +1581,19 @@ typedef enum eMapDisplayState
         {
             if (self.searchTextfield.text.length == 0)
             {
-                return [searchResultsArray count] + [searchTermCache count];
+                return [businessAutoCorrectArray count] + [searchTermCache count];
             } else
             {
-                return [searchResultsArray count];
+                return [businessAutoCorrectArray count];
             }
         } else //(mostRecentSearchTag == TAG_LOCATION_SEARCH)
         {
             if (self.locationTextfield.text.length == 0)
             {
-                return [searchResultsArray count] + 2 + [searchLocationCache count];
+                return [locationAutoCorrectArray count] + 2 + [searchLocationCache count];
             } else
             {
-                return [searchResultsArray count] + 2;
+                return [locationAutoCorrectArray count] + 2;
             }
         }
     }
@@ -1743,15 +1748,12 @@ typedef enum eMapDisplayState
                 cell.textLabel.text = ON_THE_WEB_STRING;
                 cell.textLabel.textColor = [UIColor blueColor];
                 cell.textLabel.backgroundColor = [UIColor clearColor];
-            } else if (searchResultsArray != nil)
+            } else if (locationAutoCorrectArray != nil)
             {
                 unsigned long index = indexPath.row - (NUM_PROGRAMMATIC_RESULTS + cacheSize);
-                // some of this error checking could be eliminated by splitting
-                // searchResultsArray in two: one for locations and one for
-                // businesses/categories
-                if (index < [searchResultsArray count] && [[searchResultsArray objectAtIndex:index] isKindOfClass:[NSString class]])
+                if (index < [locationAutoCorrectArray count] && [[locationAutoCorrectArray objectAtIndex:index] isKindOfClass:[NSString class]])
                 {
-                    cell.textLabel.text = [searchResultsArray objectAtIndex:index];
+                    cell.textLabel.text = [locationAutoCorrectArray objectAtIndex:index];
                     cell.textLabel.textColor = [UIColor darkGrayColor];
                 }
             }
@@ -1769,15 +1771,15 @@ typedef enum eMapDisplayState
             }
             //show results for business search field
             //NSLog(@"Row: %li", (long)indexPath.row);
-            //NSLog(@"Results array: %@", searchResultsArray);
+            //NSLog(@"Results array: %@", businessAutoCorrectArray);
             if (indexPath.row < cacheSize)
             {
                 cell.textLabel.text = [self stringForObjectInCache: searchTermCache atIndex: indexPath.row]; //[searchTermCache objectAtIndex:indexPath.row];
                 cell.textLabel.textColor = [UIColor colorWithRed: 0.5020 green: 0.7647 blue: 0.2549 alpha: 1.0];
                 cell.textLabel.backgroundColor = [UIColor clearColor];
-            } else if (searchResultsArray.count && searchResultsArray.count > indexPath.row)
+            } else if (businessAutoCorrectArray.count && businessAutoCorrectArray.count > indexPath.row)
             {
-                NSObject *object = [searchResultsArray objectAtIndex: indexPath.row - cacheSize];
+                NSObject *object = [businessAutoCorrectArray objectAtIndex: indexPath.row - cacheSize];
                 if ([object isKindOfClass: [NSDictionary class]])
                 {
                     cell.textLabel.text = [(NSDictionary *)object objectForKey: @"text"];
@@ -1840,9 +1842,9 @@ typedef enum eMapDisplayState
             if (indexPath.row < cacheSize)
             {
                 dict = [searchTermCache objectAtIndex: indexPath.row];
-            } else
+            } else if (0 < [businessAutoCorrectArray count])
             {
-                dict = [searchResultsArray objectAtIndex: indexPath.row - cacheSize];
+                dict = [businessAutoCorrectArray objectAtIndex: indexPath.row - cacheSize];
                 //add to search cache
                 if ([searchTermCache containsObject: dict] == NO)
                 {
@@ -1901,7 +1903,7 @@ typedef enum eMapDisplayState
 
                 [self.locationTextfield becomeFirstResponder];
 
-                searchResultsArray = nil;
+                businessAutoCorrectArray = nil;
                 [self.searchCluesTableView reloadData];
                 //[self transitionSearchToMap];
             }
@@ -1922,7 +1924,7 @@ typedef enum eMapDisplayState
             }
             [self.searchTextfield becomeFirstResponder];
 
-            searchResultsArray = nil;
+            locationAutoCorrectArray = nil;
             [self.searchCluesTableView reloadData];
         }
     } else
@@ -1971,17 +1973,17 @@ typedef enum eMapDisplayState
         if (object == self.locationTextfield)
         {
             //NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
-            searchResultsArray = [[dictFromServer objectForKey: @"results"] mutableCopy];
+            locationAutoCorrectArray = [[dictFromServer objectForKey: @"results"] mutableCopy];
             [self pruneCachedLocationItemsFromSearchResults];
             [self.searchCluesTableView reloadData];
 
         } else if (object == self.searchTextfield)
         {
             //NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
-            searchResultsArray = [[dictFromServer objectForKey: @"results"] mutableCopy];
+            businessAutoCorrectArray = [[dictFromServer objectForKey: @"results"] mutableCopy];
             [self pruneCachedSearchItemsFromSearchResults];
             [self.searchCluesTableView reloadData];
-            if (searchResultsArray.count)
+            if (businessAutoCorrectArray.count)
             {
 
             } else

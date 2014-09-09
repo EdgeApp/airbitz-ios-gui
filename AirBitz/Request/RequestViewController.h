@@ -14,8 +14,11 @@
 
 @property (assign) id<RequestViewControllerDelegate> delegate;
 @property (nonatomic, strong) NSString  *walletUUID;
+@property (nonatomic, readwrite) SInt64 originalAmountSatoshi;
 
 - (BOOL)showingQRCode:(NSString *)walletUUID withTx:(NSString *)txId;
+- (SInt64)transactionDifference:(NSString *)walletUUID withTx:(NSString *)txId;
+- (void)LaunchQRCodeScreen: (SInt64)amountSatoshi;
 - (void)resetViews;
 
 @end

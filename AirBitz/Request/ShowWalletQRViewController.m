@@ -91,6 +91,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, weak) IBOutlet UIView				*connectedView;
 @property (nonatomic, weak) IBOutlet UIImageView		*connectedPhoto;
 @property (nonatomic, weak) IBOutlet UILabel			*connectedName;
+@property (nonatomic, weak) IBOutlet UILabel			*connectedLine2;
 
 @property (nonatomic, strong) RecipientViewController   *recipientViewController;
 @property (nonatomic, strong) NSArray                   *arrayContacts;
@@ -141,7 +142,14 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 		self.addressLabel1.text = self.addressString;
 	}
 	
-    self.amountLabel.text = [CoreBridge formatSatoshi: self.amountSatoshi];
+    if (self.bPartial)
+    {
+        self.amountLabel.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi: self.amountSatoshi],@"Remaining..."];
+    }
+    else
+    {
+        self.amountLabel.text = [CoreBridge formatSatoshi: self.amountSatoshi];
+    }
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:NO]];
 	
@@ -172,6 +180,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	// load all the names from the address book
     [self generateListOfContactNames];
 
+    if (self.bPartial)
+    {
+        [self showPartialPaymentPopup];
+    }
+    
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
@@ -203,6 +216,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
 	self.connectedView.alpha = 1.0;
 	self.qrCodeImageView.alpha = 0.0;
+    self.connectedLine2.text = @"Connected";
 	
 	//see if there is a match between advertised name and name in contacts.  If so, use the photo from contacts
 	BOOL imageIsFromContacts = NO;
@@ -240,6 +254,29 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 		 self.qrCodeImageView.alpha = 1.0;
 	 }
 	 completion:^(BOOL finished)
+	 {
+		 
+	 }];
+}
+
+-(void)showPartialPaymentPopup
+{
+	self.connectedView.alpha = 1.0;
+	self.qrCodeImageView.alpha = 0.0;
+    self.connectedName.text = @"** Warning **";
+    self.connectedLine2.text = @"Partial Payment";
+	
+    self.connectedPhoto.image = [UIImage imageNamed:@"Warning_icon.png"];
+	
+	[UIView animateWithDuration:4.0
+						  delay:2.0
+						options:UIViewAnimationOptionCurveLinear
+					 animations:^
+	 {
+		 self.connectedView.alpha = 0.0;
+		 self.qrCodeImageView.alpha = 1.0;
+	 }
+                     completion:^(BOOL finished)
 	 {
 		 
 	 }];

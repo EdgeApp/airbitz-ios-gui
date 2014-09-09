@@ -10,7 +10,6 @@
 
 
 #define QA_TABLE_HEIGHT     200.0
-#define QA_TABLE_ROW_HEIGHT	30.0;
 
 #define QA_ANIM_TIME_SECS   0.35
 
@@ -139,6 +138,17 @@
 		 
 	 }];
 	
+}
+
+// hide table upon scroll
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    if (_qaTable && ![_qaTable pointInside:point withEvent:event])
+    {
+        [self closeTable];
+    }
+    
+    return [super hitTest:point withEvent:event];
 }
 
 - (void)hideTable

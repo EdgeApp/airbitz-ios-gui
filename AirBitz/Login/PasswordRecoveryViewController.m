@@ -767,10 +767,11 @@ void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
 		contentSize.height = frame.origin.y + frame.size.height;
 		self.scrollView.contentSize = contentSize;
 	}
-	
-	if ((frame.origin.y + frame.size.height) > (self.scrollView.contentOffset.y + self.scrollView.frame.size.height))
+    
+    CGFloat questionsHeight = [view.availableQuestions count] * QA_TABLE_ROW_HEIGHT;
+	if ((frame.origin.y + frame.size.height + questionsHeight) > (self.scrollView.contentOffset.y + self.scrollView.frame.size.height))
 	{
-		[self.scrollView setContentOffset:CGPointMake(0, frame.origin.y + frame.size.height - self.scrollView.frame.size.height) animated:YES];
+		[self.scrollView setContentOffset:CGPointMake(0, frame.origin.y + frame.size.height + questionsHeight - self.scrollView.frame.size.height) animated:YES];
 	}
 }
 
