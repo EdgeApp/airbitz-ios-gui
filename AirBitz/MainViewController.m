@@ -546,6 +546,23 @@ typedef enum eAppMode
             }
             else
             {
+                _receivedAlert = [[UIAlertView alloc]
+                                        initWithTitle:NSLocalizedString(@"** Payment Received **", nil)
+                                              message:@"" 
+                                             delegate:self 
+                                    cancelButtonTitle:@"OK" 
+                                    otherButtonTitles:nil];
+
+                [_receivedAlert show];
+                // Wait 10 seconds and dismiss
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+                    if (_receivedAlert)
+                    {
+                        [_receivedAlert dismissWithClickedButtonIndex:0 animated:YES];
+                    }
+                });
+
                 _appMode = APP_MODE_REQUEST;
                 [self launchViewControllerBasedOnAppMode];
                 [self showTabBarAnimated:YES];
