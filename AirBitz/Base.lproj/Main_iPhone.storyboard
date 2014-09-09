@@ -1433,16 +1433,16 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="MKi-zS-5GZ" customClass="LatoLabel">
-                                        <rect key="frame" x="20" y="94" width="160" height="21"/>
+                                        <rect key="frame" x="20" y="92" width="160" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B9X-O3-QF3" customClass="LatoLabel">
-                                        <rect key="frame" x="25" y="125" width="148" height="21"/>
+                                        <rect key="frame" x="20" y="125" width="160" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1459,6 +1459,7 @@
                         <outlet property="amountLabel" destination="2FV-6E-gId" id="TuK-CX-L2B"/>
                         <outlet property="buttonCancel" destination="810-FP-oTH" id="Igh-8p-sn2"/>
                         <outlet property="buttonCopyAddress" destination="Qov-uI-G7t" id="Zp6-bx-jv8"/>
+                        <outlet property="connectedLine2" destination="B9X-O3-QF3" id="YkX-DI-qOt"/>
                         <outlet property="connectedName" destination="MKi-zS-5GZ" id="EEp-BP-JOg"/>
                         <outlet property="connectedPhoto" destination="Enn-T7-Jij" id="l16-Xe-SfZ"/>
                         <outlet property="connectedView" destination="vnX-Jp-a7F" id="kdM-X3-OaU"/>
