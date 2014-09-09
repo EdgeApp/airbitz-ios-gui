@@ -23,6 +23,7 @@
 #import "WalletHeaderView.h"
 
 #define ARCHIVE_COLLAPSED @"archive_collapsed"
+#define HIGHLIGHTED @"_highlighted"
 
 @interface WalletsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletMakerViewDelegate, OfflineWalletViewControllerDelegate, WalletHeaderViewDelegate>
 {
@@ -35,6 +36,7 @@
 	UIButton                    *_blockingButton;
 	BOOL                        _walletMakerVisible;
     OfflineWalletViewController *_offlineWalletViewController;
+    NSInteger                   _highlightedRow;
 }
 
 @property (nonatomic, strong) NSMutableArray *arrayWallets;
@@ -108,11 +110,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    // reset highlight
+    _highlightedRow = -1;
+    
     [super viewWillAppear: animated];
     [self reloadWallets];
     [self.walletsTable reloadData];
 	[self updateBalanceView];
-	
+
 /*	NSString *CellIdentifier = @"WalletsHeader";
 	_activeWalletsHeaderView = [self.walletsTable dequeueReusableCellWithIdentifier:CellIdentifier];
 	((UITableViewCell *)_activeWalletsHeaderView).contentView.layer.cornerRadius = 4.0;
@@ -480,6 +485,9 @@
 
 - (void)TransactionsViewControllerDone:(TransactionsViewController *)controller
 {
+    // reset highlight
+    _highlightedRow = -1;
+
     [self reloadWallets];
     [self.walletsTable reloadData];
     [self updateBalanceView];
@@ -636,29 +644,49 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	
 	if((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
 	{
-		cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
+        if (row == _highlightedRow)
+        {
+            cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_single"];
+        }
+        else
+        {
+            cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
+        }
 	}
 	else
 	{
 		if(row == 0)
 		{
-            if (indexPath.section == 0)
+            if (row == _highlightedRow)
             {
                 cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_top"];
             }
             else
             {
-			cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
+                cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
+            }
+		}
+		else if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
+		{
+            if (row == _highlightedRow)
+            {
+                cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_bottom"];
+            }
+            else
+            {
+                cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_bottom"];
             }
 		}
 		else
-		if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
 		{
-			cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_bottom"];
-		}
-		else
-		{
-			cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_middle"];
+            if (row == _highlightedRow)
+            {
+                cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_middle"];
+            }
+            else
+            {
+                cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_middle"];
+            }
 		}
 	}
 	return cell;
@@ -666,6 +694,9 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    _highlightedRow = indexPath.row;
+    [self.walletsTable reloadData];
+
 	if(indexPath.section == 0)
 	{
 		[self launchTransactionsWithWallet:[self.arrayWallets objectAtIndex:indexPath.row] animated:YES];
