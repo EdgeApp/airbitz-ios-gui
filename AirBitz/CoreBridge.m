@@ -886,6 +886,10 @@ static NSTimer *_dataSyncTimer;
                             [[User Singleton].password UTF8String],
                             szUUID, &Error);
         [Util printABC_Error:&Error];
+
+        if (bDataFetched) {
+            [CoreBridge connectWatcher:walletUUID];
+        }
     }
 }
 
