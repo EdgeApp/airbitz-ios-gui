@@ -697,14 +697,17 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 				ABC_FreeAccountSettings(pAccountSettings);
 			}
 			
-			NSString *fullName;
+			
+			NSString *fullName = @" ";
 			if(sendName)
 			{
-				fullName = [User Singleton].fullName;
-			}
-			else
-			{
-				fullName = @" ";
+				if([User Singleton].fullName)
+				{
+					if([User Singleton].fullName.length)
+					{
+						fullName = [User Singleton].fullName;
+					}
+				}
 			}
 			
 			[peripheral writeValue:[fullName dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
