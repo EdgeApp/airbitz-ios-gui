@@ -14,6 +14,7 @@
 @interface LocalSettings : NSObject
 
 @property (nonatomic, assign)   BOOL   bDisableBLE;
+@property (nonatomic, assign)   BOOL   bMerchantMode;
 
 
 + (void)initAll;

@@ -64,7 +64,8 @@
 #define ROW_AUTO_LOG_OFF                0
 #define ROW_DEFAULT_CURRENCY            1
 #define ROW_CHANGE_CATEGORIES           2
-#define ROW_BLE                         3
+#define ROW_MERCHANT_MODE               3
+#define ROW_BLE                         4
 
 #define ROW_US_DOLLAR                   0
 #define ROW_CANADIAN_DOLLAR             1
@@ -960,6 +961,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			cell.name.text = NSLocalizedString(@"Bluetooth", @"settings text");
             [cell.state setOn:!LocalSettings.controller.bDisableBLE animated:NO];
         }
+        else if (indexPath.row == ROW_MERCHANT_MODE)
+        {
+			cell.name.text = NSLocalizedString(@"Merchant Mode", @"settings text");
+            [cell.state setOn:LocalSettings.controller.bMerchantMode animated:NO];
+        }
     }
 	
     cell.tag = (indexPath.section << 8) | (indexPath.row);
@@ -1094,11 +1100,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			//assumes bluetooth option is last of the options.
 			if(_showBluetoothOption)
 			{
-				return 4;
+				return 5;
 			}
 			else
 			{
-				return 3; //return 3 to not show the Bluetooth cell.
+				return 4; //return 3 to not show the Bluetooth cell.
 			}
             break;
 
@@ -1237,6 +1243,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             {
                 cell = [self getPlainCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
             }
+            else if (indexPath.row == ROW_MERCHANT_MODE)
+            {
+				cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+            }
             else if (indexPath.row == ROW_BLE)
             {
 				cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
@@ -1357,6 +1367,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     else if ((section == SECTION_OPTIONS) && (row == ROW_BLE))
     {
         LocalSettings.controller.bDisableBLE = !theSwitch.on;
+        [LocalSettings saveAll];
+    }
+    else if ((section == SECTION_OPTIONS) && (row == ROW_MERCHANT_MODE))
+    {
+        LocalSettings.controller.bMerchantMode = theSwitch.on;
         [LocalSettings saveAll];
     }
 }

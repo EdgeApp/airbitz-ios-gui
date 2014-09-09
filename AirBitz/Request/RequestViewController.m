@@ -193,6 +193,9 @@
         [_qrViewController.view removeFromSuperview];
         _qrViewController = nil;
     }
+    self.BTC_TextField.text = @"";
+	self.USD_TextField.text = @"";
+
 }
 
 

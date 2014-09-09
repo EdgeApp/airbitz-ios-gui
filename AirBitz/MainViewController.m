@@ -23,6 +23,7 @@
 #import "Util.h"
 #import "CoreBridge.h"
 #import "CommonTypes.h"
+#import "LocalSettings.h"
 
 typedef enum eAppMode
 {
@@ -538,7 +539,18 @@ typedef enum eAppMode
     {
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
+            
+            if([LocalSettings controller].bMerchantMode == NO)
+            {
+                [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
+            }
+            else
+            {
+                _appMode = APP_MODE_REQUEST;
+                [self launchViewControllerBasedOnAppMode];
+                [self showTabBarAnimated:YES];
+
+            }
             [_sendStatusController.view removeFromSuperview];
             _sendStatusController = nil;
             [_requestViewController resetViews];
