@@ -1185,7 +1185,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         _sendConfirmationViewController.destWallet = destWallet;
         _sendConfirmationViewController.sendToAddress = destWallet.strName;
     }
-	_sendConfirmationViewController.selectedWalletIndex = _selectedWalletIndex;
 	_sendConfirmationViewController.nameLabel = nameLabel;
 
     //NSLog(@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);

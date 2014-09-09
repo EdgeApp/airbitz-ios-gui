@@ -438,9 +438,7 @@
                                    self.amountToSendSatoshi, &currency, self.wallet.currencyNum, &Error);
 	if (result == ABC_CC_Ok)
 	{
-		ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
-		
-		if (nCount)
+		if (self.wallet)
 		{
             [self performSelectorOnMainThread:@selector(showSendStatus:) withObject:nil waitUntilDone:FALSE];
             _callbackTimestamp = [[NSDate date] timeIntervalSince1970];
@@ -464,13 +462,12 @@
                 Details.szCategory = "";
                 Details.szNotes = "";
                 Details.attributes = 0x2;
-                tABC_WalletInfo *info = aWalletInfo[self.selectedWalletIndex];
 
                 if (self.bAddressIsWalletUUID)
                 {
                     NSString *categoryText = NSLocalizedString(@"Transfer:Wallet:", nil);
                     tABC_TransferDetails Transfer;
-                    Transfer.szSrcWalletUUID = strdup(info->szUUID);
+                    Transfer.szSrcWalletUUID = strdup([self.wallet.strUUID UTF8String]);
                     Transfer.szSrcName = strdup([self.destWallet.strName UTF8String]);
                     Transfer.szSrcCategory = strdup([[NSString stringWithFormat:@"%@%@", categoryText, self.destWallet.strName] UTF8String]);
 
@@ -494,14 +491,13 @@
                 } else {
                     result = ABC_InitiateSendRequest([[User Singleton].name UTF8String],
                                                 [[User Singleton].password UTF8String],
-                                                info->szUUID,
+                                                [self.wallet.strUUID UTF8String],
                                                 [self.sendToAddress UTF8String],
                                                 &Details,
                                                 NULL,
                                                 NULL,
                                                 &Error);
                 }
-                ABC_FreeWalletInfoArray(aWalletInfo, nCount);
                 if (result != ABC_CC_Ok)
                 {
                     NSNumber *errorCode = [[NSNumber alloc] initWithInt:Error.code];
@@ -518,26 +514,13 @@
 
 - (void)setWalletLabel
 {
-	tABC_WalletInfo **aWalletInfo = NULL;
-    unsigned int nCount;
-	tABC_Error Error;
-
-    ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
-    [Util printABC_Error:&Error];
-
-	if (nCount > self.selectedWalletIndex)
+	if (self.wallet)
 	{
-		tABC_WalletInfo *pInfo = aWalletInfo[self.selectedWalletIndex];
-        
-        NSMutableString *coinFormatted = [[NSMutableString alloc] init];
-        [coinFormatted appendFormat:@"%@ (%@)",
-         [NSString stringWithUTF8String:pInfo->szName],
-         [CoreBridge formatSatoshi:pInfo->balanceSatoshi]];
-
-        self.labelSendFrom.text = coinFormatted;
+        NSMutableString *label = [[NSMutableString alloc] init];
+        [label appendFormat:@"%@ (%d)", self.wallet.strName,
+            [CoreBridge formatSatoshi:self.wallet.balance]];
+        self.labelSendFrom.text = label;
 	}
-
-    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
 - (void)launchTransactionDetailsWithTransaction:(Wallet *)wallet withTx:(Transaction *)transaction
