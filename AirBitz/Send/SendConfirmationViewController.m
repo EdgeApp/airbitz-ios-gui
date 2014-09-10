@@ -20,13 +20,13 @@
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
 {
-	ConfirmationSliderView              *_confirmationSlider;
-	UITextField                         *_selectedTextField;
+    ConfirmationSliderView              *_confirmationSlider;
+    UITextField                         *_selectedTextField;
     int64_t                             _maxAmount;
     BOOL                                _maxLocked;
-	NSString                            *_strReason;
+    NSString                            *_strReason;
     int                                 _callbackTimestamp;
-	Transaction                         *_completedTransaction;	// nil until sendTransaction is successfully completed
+    Transaction                         *_completedTransaction;    // nil until sendTransaction is successfully completed
     UITapGestureRecognizer              *tap;
 }
 
@@ -68,7 +68,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
-	{
+    {
         // Custom initialization
     }
     return self;
@@ -87,25 +87,25 @@
     [Util resizeView:self.view withDisplayView:self.viewDisplayArea];
 
     self.keypadView.currencyNum = self.wallet.currencyNum;
-	self.withdrawlPIN.delegate = self;
-	self.amountBTCTextField.delegate = self;
-	self.amountFiatTextField.delegate = self;
-	self.keypadView.delegate = self;
-	self.amountBTCTextField.inputView = self.keypadView;
-	self.amountFiatTextField.inputView = self.keypadView;
+    self.withdrawlPIN.delegate = self;
+    self.amountBTCTextField.delegate = self;
+    self.amountFiatTextField.delegate = self;
+    self.keypadView.delegate = self;
+    self.amountBTCTextField.inputView = self.keypadView;
+    self.amountFiatTextField.inputView = self.keypadView;
 
     // make sure the edit fields are in front of the blocker
     [self.viewDisplayArea bringSubviewToFront:self.amountBTCTextField];
     [self.viewDisplayArea bringSubviewToFront:self.amountFiatTextField];
     [self.viewDisplayArea bringSubviewToFront:self.withdrawlPIN];
 
-	[self setWalletLabel];
-	
-	CGRect frame = self.keypadView.frame;
-	frame.origin.y = self.view.frame.size.height;
-	self.keypadView.frame = frame;
-	
-	_confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
+    [self setWalletLabel];
+    
+    CGRect frame = self.keypadView.frame;
+    frame.origin.y = self.view.frame.size.height;
+    self.keypadView.frame = frame;
+    
+    _confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
     _maxLocked = NO;
 
     [self updateDisplayLayout];
@@ -115,11 +115,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(txSendSuccess:) name:NOTIFICATION_TX_SEND_SUCESS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(txSendFailed:) name:NOTIFICATION_TX_SEND_FAILED object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(myTextDidChange:)
-												 name:UITextFieldTextDidChangeNotification
-											   object:self.withdrawlPIN];
-	[[NSNotificationCenter defaultCenter] addObserver:self
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(myTextDidChange:)
+                                                 name:UITextFieldTextDidChangeNotification
+                                               object:self.withdrawlPIN];
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(exchangeRateUpdate:)
                                                  name:NOTIFICATION_EXCHANGE_RATE_CHANGE
                                                object:nil];
@@ -140,28 +140,28 @@
 
 - (void)myTextDidChange:(NSNotification *)notification
 {
-	if(notification.object == self.withdrawlPIN)
-	{
-		if(self.withdrawlPIN.text.length == 4)
-		{
-			[self.withdrawlPIN resignFirstResponder];
-		}
-	}
-	else
-	{
-		NSLog(@"Text changed for some field");
-	}
+    if(notification.object == self.withdrawlPIN)
+    {
+        if(self.withdrawlPIN.text.length == 4)
+        {
+            [self.withdrawlPIN resignFirstResponder];
+        }
+    }
+    else
+    {
+        NSLog(@"Text changed for some field");
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.view addGestureRecognizer:tap];
-	self.amountBTCSymbol.text = [User Singleton].denominationLabelShort;
-	self.amountBTCLabel.text = [User Singleton].denominationLabel;
+    self.amountBTCSymbol.text = [User Singleton].denominationLabelShort;
+    self.amountBTCLabel.text = [User Singleton].denominationLabel;
     self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
-	self.amountFiatSymbol.text = [CoreBridge currencySymbolLookup:self.wallet.currencyNum];
-	self.amountFiatLabel.text = [CoreBridge currencyAbbrevLookup:self.wallet.currencyNum];
+    self.amountFiatSymbol.text = [CoreBridge currencySymbolLookup:self.wallet.currencyNum];
+    self.amountFiatLabel.text = [CoreBridge currencyAbbrevLookup:self.wallet.currencyNum];
     self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
     
     NSString *prefix;
@@ -180,20 +180,20 @@
     
     
     
-	
-	tABC_CC result;
-	double currency;
-	tABC_Error error;
-	
-	result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+    
+    tABC_CC result;
+    double currency;
+    tABC_Error error;
+    
+    result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                    self.amountToSendSatoshi, &currency, self.wallet.currencyNum, &error);
-				
-	if(result == ABC_CC_Ok)
-	{
-		self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
-	}
+                
+    if(result == ABC_CC_Ok)
+    {
+        self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
+    }
     [self startCalcFees];
-	
+    
     if (self.amountToSendSatoshi)
     {
         // If the PIN is empty, then focus
@@ -239,32 +239,32 @@
 
 - (IBAction)Back:(id)sender
 {
-	[self.withdrawlPIN resignFirstResponder];
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 CGRect frame = self.view.frame;
-		 frame.origin.x = frame.size.width;
-		 self.view.frame = frame;
-	 }
-	 completion:^(BOOL finished)
-	 {
-		 [self.delegate sendConfirmationViewControllerDidFinish:self];
-	 }];
+    [self.withdrawlPIN resignFirstResponder];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         CGRect frame = self.view.frame;
+         frame.origin.x = frame.size.width;
+         self.view.frame = frame;
+     }
+     completion:^(BOOL finished)
+     {
+         [self.delegate sendConfirmationViewControllerDidFinish:self];
+     }];
 }
 
 - (IBAction)alwaysConfirm:(UIButton *)sender
 {
-	if(sender.selected)
-	{
-		sender.selected = NO;
-	}
-	else
-	{
-		sender.selected = YES;
-	}
+    if(sender.selected)
+    {
+        sender.selected = NO;
+    }
+    else
+    {
+        sender.selected = YES;
+    }
 }
 
 - (IBAction)selectMaxAmount
@@ -296,9 +296,9 @@
 
 - (void)dismissKeyboard
 {
-	[self.withdrawlPIN resignFirstResponder];
-	[self.amountFiatTextField resignFirstResponder];
-	[self.amountBTCTextField resignFirstResponder];
+    [self.withdrawlPIN resignFirstResponder];
+    [self.amountFiatTextField resignFirstResponder];
+    [self.amountBTCTextField resignFirstResponder];
 }
 
 - (void)updateDisplayLayout
@@ -385,37 +385,37 @@
 
 - (void)showSendStatus:(NSArray *)params
 {
-	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	self.sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    self.sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
 
 
 
-	CGRect frame = self.view.bounds;
-	//frame.origin.x = frame.size.width;
-	self.sendStatusController.view.frame = frame;
-	[self.view addSubview:self.sendStatusController.view];
-	self.sendStatusController.view.alpha = 0.0;
+    CGRect frame = self.view.bounds;
+    //frame.origin.x = frame.size.width;
+    self.sendStatusController.view.frame = frame;
+    [self.view addSubview:self.sendStatusController.view];
+    self.sendStatusController.view.alpha = 0.0;
 
-	self.sendStatusController.messageLabel.text = NSLocalizedString(@"Sending...", @"status message");
+    self.sendStatusController.messageLabel.text = NSLocalizedString(@"Sending...", @"status message");
 
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 self.sendStatusController.view.alpha = 1.0;
-	 }
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         self.sendStatusController.view.alpha = 1.0;
+     }
      completion:^(BOOL finished)
-	 {
-	 }];
+     {
+     }];
 }
 
 - (void)hideSendStatus
 {
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
     {
         self.sendStatusController.view.alpha = 0.0;
     }
@@ -428,16 +428,16 @@
 
 - (void)initiateSendRequest
 {
-	tABC_Error Error;
-	tABC_CC result;
-	double currency;
-	
-	result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+    tABC_Error Error;
+    tABC_CC result;
+    double currency;
+    
+    result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                    self.amountToSendSatoshi, &currency, self.wallet.currencyNum, &Error);
-	if (result == ABC_CC_Ok)
-	{
-		if (self.wallet)
-		{
+    if (result == ABC_CC_Ok)
+    {
+        if (self.wallet)
+        {
             [self performSelectorOnMainThread:@selector(showSendStatus:) withObject:nil waitUntilDone:FALSE];
             _callbackTimestamp = [[NSDate date] timeIntervalSince1970];
 
@@ -506,49 +506,49 @@
                     [self txSendFailed:notification];
                 }
             });
-		}
-	}
+        }
+    }
 }
 
 - (void)setWalletLabel
 {
-	if (self.wallet)
-	{
+    if (self.wallet)
+    {
         NSMutableString *label = [[NSMutableString alloc] init];
         [label appendFormat:@"%@ (%@)", self.wallet.strName,
             [CoreBridge formatSatoshi:self.wallet.balance]];
         self.labelSendFrom.text = label;
-	}
+    }
 }
 
 - (void)launchTransactionDetailsWithTransaction:(Wallet *)wallet withTx:(Transaction *)transaction
 {
     [self.view removeGestureRecognizer:tap];
 
-	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	self.transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
-	
-	self.transactionDetailsController.delegate = self;
-	self.transactionDetailsController.transaction = transaction;
-	self.transactionDetailsController.wallet = self.wallet;
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    self.transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
+    
+    self.transactionDetailsController.delegate = self;
+    self.transactionDetailsController.transaction = transaction;
+    self.transactionDetailsController.wallet = self.wallet;
     self.transactionDetailsController.bOldTransaction = NO;
     self.transactionDetailsController.transactionDetailsMode = TD_MODE_SENT;
-	CGRect frame = self.view.bounds;
-	frame.origin.x = frame.size.width;
-	self.transactionDetailsController.view.frame = frame;
-	
-	[self.view addSubview:self.transactionDetailsController.view];
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 self.transactionDetailsController.view.frame = self.view.bounds;
-	 }
-					 completion:^(BOOL finished)
-	 {
-	 }];
-	
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    self.transactionDetailsController.view.frame = frame;
+    
+    [self.view addSubview:self.transactionDetailsController.view];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         self.transactionDetailsController.view.frame = self.view.bounds;
+     }
+                     completion:^(BOOL finished)
+     {
+     }];
+    
 }
 
 - (void)failedToSend:(NSArray *)params
@@ -580,31 +580,31 @@
 
 - (void)updateTextFieldContents
 {
-	double currency;
+    double currency;
     int64_t satoshi;
-	tABC_Error error;
+    tABC_Error error;
 
-	if (_selectedTextField == self.amountBTCTextField)
-	{
+    if (_selectedTextField == self.amountBTCTextField)
+    {
         self.amountToSendSatoshi = [CoreBridge denominationToSatoshi: self.amountBTCTextField.text];
-		if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+        if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                   self.amountToSendSatoshi, &currency, self.wallet.currencyNum, &error) == ABC_CC_Ok)
         {
-			self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
+            self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
-	}
-	else if (_selectedTextField == self.amountFiatTextField)
-	{
+    }
+    else if (_selectedTextField == self.amountFiatTextField)
+    {
         currency = [self.amountFiatTextField.text doubleValue];
-		if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+        if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                   currency, self.wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
-		{
-			self.amountToSendSatoshi = satoshi;
+        {
+            self.amountToSendSatoshi = satoshi;
             self.amountBTCTextField.text = [CoreBridge formatSatoshi:satoshi
                                                           withSymbol:false
                                                     cropDecimals:[CoreBridge currencyDecimalPlaces]];
-		}
-	}
+        }
+    }
     [self startCalcFees];
 }
 
@@ -714,9 +714,9 @@
 
 - (void)installLeftToRightSwipeDetection
 {
-	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
-	gesture.direction = UISwipeGestureRecognizerDirectionRight;
-	[self.view addGestureRecognizer:gesture];
+    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+    gesture.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:gesture];
 }
 
 // used by the guesture recognizer to ignore exit
@@ -738,12 +738,12 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-	_selectedTextField = textField;
+    _selectedTextField = textField;
     if (_selectedTextField == self.amountBTCTextField)
         self.keypadView.calcMode = CALC_MODE_COIN;
     else if (_selectedTextField == self.amountFiatTextField)
         self.keypadView.calcMode = CALC_MODE_FIAT;
-	self.keypadView.textField = textField;
+    self.keypadView.textField = textField;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -754,77 +754,77 @@
 
 - (void)ConfirmationSliderDidConfirm:(ConfirmationSliderView *)controller
 {
-	//make sure PIN is good
+    //make sure PIN is good
     if (self.withdrawlPIN.text.length)
-	{
-		//make sure the entered PIN matches the PIN stored in the Core
-		tABC_Error error;
-		char *szPIN = NULL;
-		
-		ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szPIN, &error);
-		[Util printABC_Error:&error];
-		NSLog(@"current PIN: %s", szPIN);
-		if (szPIN)
-		{
-			NSString *storedPIN = [NSString stringWithUTF8String:szPIN];
-			if ([self.withdrawlPIN.text isEqualToString:storedPIN])
-			{
-				NSLog(@"SUCCESS!");
-				[self initiateSendRequest];
-			}
-			else
-			{
-				UIAlertView *alert = [[UIAlertView alloc]
-									  initWithTitle:NSLocalizedString(@"Incorrect PIN", nil)
-									  message:NSLocalizedString(@"You must enter the correct withdrawl PIN in order to proceed", nil)
-									  delegate:self
-									  cancelButtonTitle:@"OK"
-									  otherButtonTitles:nil];
-				[alert show];
-			}
-			free(szPIN);
-		}
-		
-	}
-	else
-	{
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Incorrect PIN", nil)
-							  message:NSLocalizedString(@"You must enter your withdrawl PIN in order to proceed", nil)
-							  delegate:self
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-		
-	}
-	[_confirmationSlider resetIn:1.0];
+    {
+        //make sure the entered PIN matches the PIN stored in the Core
+        tABC_Error error;
+        char *szPIN = NULL;
+        
+        ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szPIN, &error);
+        [Util printABC_Error:&error];
+        NSLog(@"current PIN: %s", szPIN);
+        if (szPIN)
+        {
+            NSString *storedPIN = [NSString stringWithUTF8String:szPIN];
+            if ([self.withdrawlPIN.text isEqualToString:storedPIN])
+            {
+                NSLog(@"SUCCESS!");
+                [self initiateSendRequest];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:NSLocalizedString(@"Incorrect PIN", nil)
+                                      message:NSLocalizedString(@"You must enter the correct withdrawl PIN in order to proceed", nil)
+                                      delegate:self
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+                [alert show];
+            }
+            free(szPIN);
+        }
+        
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"Incorrect PIN", nil)
+                              message:NSLocalizedString(@"You must enter your withdrawl PIN in order to proceed", nil)
+                              delegate:self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+        
+    }
+    [_confirmationSlider resetIn:1.0];
 }
 
 #pragma mark - Calculator delegates
 
 - (void)CalculatorDone:(CalculatorView *)calculator
 {
-	[self.amountFiatTextField resignFirstResponder];
-	[self.amountBTCTextField resignFirstResponder];
-	[self.withdrawlPIN becomeFirstResponder];
+    [self.amountFiatTextField resignFirstResponder];
+    [self.amountBTCTextField resignFirstResponder];
+    [self.withdrawlPIN becomeFirstResponder];
 }
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
-	[self updateTextFieldContents];
+    [self updateTextFieldContents];
 }
 
 #pragma mark - TransactionDetailsViewController delegates
 
 - (void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
 {
-	[controller.view removeFromSuperview];
-	self.transactionDetailsController = nil;
+    [controller.view removeFromSuperview];
+    self.transactionDetailsController = nil;
 
-	[self.sendStatusController.view removeFromSuperview];
-	self.sendStatusController = nil;
+    [self.sendStatusController.view removeFromSuperview];
+    self.sendStatusController = nil;
 
-	[self.delegate sendConfirmationViewControllerDidFinish:self];
+    [self.delegate sendConfirmationViewControllerDidFinish:self];
 }
 
 #pragma mark - ABC Callbacks
