@@ -7,7 +7,6 @@
 #import "User.h"
 #import "Util.h"
 #import "CommonTypes.h"
-#import "MTReachabilityManager.h"
 
 #import "CoreBridge.h"
 
@@ -48,6 +47,11 @@ static NSTimer *_dataSyncTimer;
 {
     if (NO == bInitialized)
     {
+        exchangeQueue = [[NSOperationQueue alloc] init];
+        [exchangeQueue setMaxConcurrentOperationCount:1];
+        dataQueue = [[NSOperationQueue alloc] init];
+        [dataQueue setMaxConcurrentOperationCount:1];
+
         watchers = [[NSMutableDictionary alloc] init];
         singleton = [[CoreBridge alloc] init];
         bInitialized = YES;
@@ -67,11 +71,8 @@ static NSTimer *_dataSyncTimer;
 
 + (void)startQueues
 {
-    if ([User isLoggedIn] && [MTReachabilityManager isReachable])
+    if ([User isLoggedIn])
     {
-        exchangeQueue = [[NSOperationQueue alloc] init];
-        [exchangeQueue setMaxConcurrentOperationCount:1];
-
         // Initialize the exchange rates queue
         _exchangeTimer = [NSTimer scheduledTimerWithTimeInterval:ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
             target:self
@@ -80,9 +81,6 @@ static NSTimer *_dataSyncTimer;
             repeats:YES];
         // Request one right now
         [self requestExchangeRateUpdate:nil];
-
-        dataQueue = [[NSOperationQueue alloc] init];
-        [dataQueue setMaxConcurrentOperationCount:1];
 
         // Initialize data sync queue
         _dataSyncTimer = [NSTimer scheduledTimerWithTimeInterval:FILE_SYNC_FREQUENCY_SECONDS
@@ -109,6 +107,7 @@ static NSTimer *_dataSyncTimer;
     if (dataQueue)
     {
         [dataQueue cancelAllOperations];
+        [dataQueue waitUntilAllOperationsAreFinished];
     }
 }
 
@@ -835,7 +834,7 @@ static NSTimer *_dataSyncTimer;
 
 + (void)connectWatcher:(NSString *)uuid
 {
-    if ([User isLoggedIn] && [MTReachabilityManager isReachable]) {
+    if ([User isLoggedIn]) {
         tABC_Error Error;
         ABC_WatcherConnect([uuid UTF8String], &Error);
         [Util printABC_Error:&Error];
