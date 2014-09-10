@@ -430,8 +430,6 @@
 {
 	tABC_Error Error;
 	tABC_CC result;
-	tABC_WalletInfo **aWalletInfo = NULL;
-    unsigned int nCount;
 	double currency;
 	
 	result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
@@ -517,7 +515,7 @@
 	if (self.wallet)
 	{
         NSMutableString *label = [[NSMutableString alloc] init];
-        [label appendFormat:@"%@ (%d)", self.wallet.strName,
+        [label appendFormat:@"%@ (%@)", self.wallet.strName,
             [CoreBridge formatSatoshi:self.wallet.balance]];
         self.labelSendFrom.text = label;
 	}
