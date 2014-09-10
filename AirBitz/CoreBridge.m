@@ -48,12 +48,6 @@ static NSTimer *_dataSyncTimer;
 {
     if (NO == bInitialized)
     {
-        exchangeQueue = [[NSOperationQueue alloc] init];
-        [exchangeQueue setMaxConcurrentOperationCount:1];
-
-        dataQueue = [[NSOperationQueue alloc] init];
-        [dataQueue setMaxConcurrentOperationCount:1];
-
         watchers = [[NSMutableDictionary alloc] init];
         singleton = [[CoreBridge alloc] init];
         bInitialized = YES;
@@ -75,6 +69,9 @@ static NSTimer *_dataSyncTimer;
 {
     if ([User isLoggedIn] && [MTReachabilityManager isReachable])
     {
+        exchangeQueue = [[NSOperationQueue alloc] init];
+        [exchangeQueue setMaxConcurrentOperationCount:1];
+
         // Initialize the exchange rates queue
         _exchangeTimer = [NSTimer scheduledTimerWithTimeInterval:ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
             target:self
@@ -83,6 +80,9 @@ static NSTimer *_dataSyncTimer;
             repeats:YES];
         // Request one right now
         [self requestExchangeRateUpdate:nil];
+
+        dataQueue = [[NSOperationQueue alloc] init];
+        [dataQueue setMaxConcurrentOperationCount:1];
 
         // Initialize data sync queue
         _dataSyncTimer = [NSTimer scheduledTimerWithTimeInterval:FILE_SYNC_FREQUENCY_SECONDS
