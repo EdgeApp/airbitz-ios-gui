@@ -996,7 +996,7 @@
 
         alert = [[UIAlertView alloc]
                  initWithTitle:self.labelTitle.text
-                 message:NSLocalizedString(@"Password successfully changed.", @"")
+                 message:NSLocalizedString(@"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!", @"")
                  delegate:self
                  cancelButtonTitle:@"OK"
                  otherButtonTitles:nil];

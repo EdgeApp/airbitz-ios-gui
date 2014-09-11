@@ -173,9 +173,9 @@ typedef enum eAlertType
 	
 	UIAlertView *alert = [[UIAlertView alloc]
 						  initWithTitle:NSLocalizedString(@"Skip this step", @"Title of Skip this step alert")
-						  message:NSLocalizedString(@"Warning: You will never be able to recover your password if it is forgotten.", @"")
+						  message:NSLocalizedString(@"**WARNING** You will NEVER be able to recover your password if it is forgotten!!", @"")
 						  delegate:self
-						  cancelButtonTitle:@"Cancel"
+						  cancelButtonTitle:@"Go Back"
 						  otherButtonTitles:@"OK", nil];
 	[alert show];
 }
@@ -236,7 +236,7 @@ typedef enum eAlertType
 		{
 			UIAlertView *alert = [[UIAlertView alloc]
 								  initWithTitle:self.labelTitle.text
-								  message:@"You must answer all six questions.  Make sure your answers are long enough."
+								  message:@"You must answer all six questions. Make sure your answers are long enough."
 								  delegate:nil
 								  cancelButtonTitle:@"OK"
 								  otherButtonTitles:nil];
@@ -677,7 +677,7 @@ typedef enum eAlertType
 		_alertType = ALERT_TYPE_SETUP_COMPLETE;
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Recovery Questions Set", @"Title of recovery questions setup complete alert")
-							  message:@"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly in order to succeed."
+							  message:@"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!"
 							  delegate:self
 							  cancelButtonTitle:(_mode == PassRecovMode_SignUp ? @"Back" : nil)
 							  otherButtonTitles:@"OK", nil];
