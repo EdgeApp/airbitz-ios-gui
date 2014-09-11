@@ -758,15 +758,27 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                                            forceDecimals:5];
         // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
-        NSString *tempURI = self.uriString;
+        NSString *iosURL;
+        NSString *redirectURI = [NSString stringWithString: self.uriString];
+        NSString *paramsURI;
+        NSString *paramsURIEnc;
 
-        NSRange tempRange = [tempURI rangeOfString:@"bitcoin:"];
+        NSRange tempRange = [self.uriString rangeOfString:@"bitcoin:"];
 
         if (tempRange.location != NSNotFound) 
         {
-            tempURI = [tempURI stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
+            iosURL = [self.uriString stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
+            paramsURI = [self.uriString stringByReplacingCharactersInRange:tempRange withString:@""];
+            paramsURIEnc = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                           NULL,
+                                                                                           (CFStringRef)paramsURI,
+                                                                                           NULL,
+                                                                                           (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                           kCFStringEncodingUTF8 ));
+            redirectURI = [NSString stringWithFormat:@"%@%@",@"https://airbitz.co/blf/?address=", paramsURIEnc ];
+            
         }
-
+        
         [strBody appendString:@"<html><body>\n"];
 
         if ([User Singleton].bNameOnPayments)
@@ -780,13 +792,19 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         [strBody appendString:@"<br>\n"];
         [strBody appendString:@"<br>\n"];
-        [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the link below to pay<br>\n",nil)];
+        [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the links below to pay<br>\n",nil)];
         [strBody appendString:@"<br>\n"];
-        [strBody appendFormat:@"<a href=\"%@\">", tempURI];
-        [strBody appendString:NSLocalizedString(@"Click to Pay",nil)];
-        [strBody appendFormat:@"</a><br>"];
-        [strBody appendFormat:@"%@", tempURI];
+        [strBody appendFormat:@"<a href=\"%@\">", iosURL];
+        [strBody appendString:NSLocalizedString(@"Click to Pay on iOS/Mac",nil)];
+        [strBody appendFormat:@"</a><br><br>"];
+
+        [strBody appendFormat:@"<a href=\"%@\">", redirectURI];
+        [strBody appendString:NSLocalizedString(@"Click to Pay on Android/Desktop",nil)];
+        [strBody appendFormat:@"</a><br><br>\n"];
+
+        [strBody appendFormat:@"%@", self.uriString];
         [strBody appendString:@"<br>\n"];
+        
         [strBody appendString:@"<br>\n"];
         [strBody appendString:NSLocalizedString(@"Address: ",nil)];
         [strBody appendFormat:@"%@", self.addressString];
