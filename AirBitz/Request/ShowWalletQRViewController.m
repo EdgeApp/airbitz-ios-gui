@@ -749,7 +749,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     // if mail is available
     if ([MFMailComposeViewController canSendMail])
     {
-        NSMutableString *strBody = [[NSMutableString alloc] init];
+//        NSMutableString *strBody = [[NSMutableString alloc] init];
         NSString *amountBTC = [CoreBridge formatSatoshi:self.amountSatoshi
                                              withSymbol:false
                                           forceDecimals:8];
@@ -759,7 +759,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
         NSString *iosURL;
-        NSString *redirectURI = [NSString stringWithString: self.uriString];
+        NSString *redirectURL = [NSString stringWithString: self.uriString];
         NSString *paramsURI;
         NSString *paramsURIEnc;
 
@@ -775,10 +775,45 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                                                                                            NULL,
                                                                                            (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                                                                            kCFStringEncodingUTF8 ));
-            redirectURI = [NSString stringWithFormat:@"%@%@",@"https://airbitz.co/blf/?address=", paramsURIEnc ];
+            redirectURL = [NSString stringWithFormat:@"%@%@",@"https://airbitz.co/blf/?address=", paramsURIEnc ];
             
         }
         
+        NSError* error = nil;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"emailTemplate" ofType:@"html"];
+        NSString* content = [NSString stringWithContentsOfFile:path
+                                                      encoding:NSUTF8StringEncoding
+                                                         error:&error];
+        assert(content);
+
+        NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
+                                       @"<abtag FROM>",
+                                       @"<abtag BITCOIN_URL>",
+                                       @"<abtag REDIRECT_URL>",
+                                       @"<abtag BITCOIN_URI>",
+                                       @"<abtag ADDRESS>",
+                                       @"<abtag AMOUNT_BTC>",
+                                       @"<abtag AMOUNT_MBTC>",
+                                       @"<abtag QRCODE>",
+                                       nil];
+        
+        NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
+                                       [User Singleton].fullName,
+                                       iosURL,
+                                       redirectURL,
+                                       self.uriString,
+                                       self.addressString,
+                                       amountBTC,
+                                       amountMBTC,
+                                       @"cid:qrcode.jpg",
+                                       nil];
+        
+        for (int i=0; i<[searchList count];i++)
+        {
+            content = [content stringByReplacingOccurrencesOfString:[searchList objectAtIndex:i]
+                                                         withString:[replaceList objectAtIndex:i]];
+        }
+/*
         [strBody appendString:@"<html><body>\n"];
 
         if ([User Singleton].bNameOnPayments)
@@ -816,14 +851,14 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
         [strBody appendFormat:@"%@ mBTC", amountMBTC];
         [strBody appendString:@"<br><br>\n"];
-
+*/
         UIImage *imageAttachment = [self imageWithImage:self.qrCodeImage scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
         NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(imageAttachment, 1.0)];
-        
+/*
         [strBody appendString:[NSString stringWithFormat:@"<p><b><img src='cid:qrcode.jpg' /></b></p>"]];
         
         [strBody appendString:@"</body></html>\n"];
-        
+  */
         MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
         
         if ([self.strEMail length])
@@ -833,7 +868,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         
         [mailComposer setSubject:NSLocalizedString(@"Bitcoin Request", nil)];
         
-        [mailComposer setMessageBody:strBody isHTML:YES];
+        [mailComposer setMessageBody:content isHTML:YES];
         [mailComposer addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"qrcode.jpg"];
 
         mailComposer.mailComposeDelegate = self;

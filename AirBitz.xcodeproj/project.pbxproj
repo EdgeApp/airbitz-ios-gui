@@ -988,6 +988,8 @@
 		DAA5782419BF55F600E972FC /* Warning_icon@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782119BF55F600E972FC /* Warning_icon@2x~iphone.png */; };
 		DAA5782519BF55F600E972FC /* Warning_icon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782219BF55F600E972FC /* Warning_icon~iphone.png */; };
 		DAA5782619BF55F600E972FC /* Warning_icon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782219BF55F600E972FC /* Warning_icon~iphone.png */; };
+		DAA5782919C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
+		DAA5782A19C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
 		DAAC216019633FFB00CC0F1E /* btn_expand@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC215E19633FFB00CC0F1E /* btn_expand@2x~iphone.png */; };
 		DAAC216119633FFB00CC0F1E /* btn_expand~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC215F19633FFB00CC0F1E /* btn_expand~iphone.png */; };
 		DAAC2166196399F400CC0F1E /* flash-off@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2162196399F400CC0F1E /* flash-off@2x~iphone.png */; };
@@ -1661,6 +1663,7 @@
 		DA7693871964FE8A0022EE64 /* sms_btn~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms_btn~iphone.png"; sourceTree = "<group>"; };
 		DAA5782119BF55F600E972FC /* Warning_icon@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warning_icon@2x~iphone.png"; sourceTree = "<group>"; };
 		DAA5782219BF55F600E972FC /* Warning_icon~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warning_icon~iphone.png"; sourceTree = "<group>"; };
+		DAA5782819C1632000E972FC /* emailTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = emailTemplate.html; sourceTree = "<group>"; };
 		DAAC215E19633FFB00CC0F1E /* btn_expand@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_expand@2x~iphone.png"; sourceTree = "<group>"; };
 		DAAC215F19633FFB00CC0F1E /* btn_expand~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_expand~iphone.png"; sourceTree = "<group>"; };
 		DAAC2162196399F400CC0F1E /* flash-off@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-off@2x~iphone.png"; sourceTree = "<group>"; };
@@ -2734,6 +2737,7 @@
 		B5F2E9A818D4AF6C008ACF88 /* html */ = {
 			isa = PBXGroup;
 			children = (
+				DAA5782819C1632000E972FC /* emailTemplate.html */,
 				B5F2E9A918D4AF6C008ACF88 /* info.html */,
 				4C72479C1933D3890091C286 /* infoExportWallet.html */,
 				4C72479D1933D3890091C286 /* infoExportWalletOptions.html */,
@@ -3175,6 +3179,7 @@
 				7D98AE4819A7C550003D2BF6 /* QuestionAnswerView~iphone.xib in Resources */,
 				7D98AE4919A7C550003D2BF6 /* btn_8@2x~iphone.png in Resources */,
 				7D98AE4A19A7C550003D2BF6 /* Lato-BlackItalic.ttf in Resources */,
+				DAA5782A19C1632000E972FC /* emailTemplate.html in Resources */,
 				7D98AE4B19A7C550003D2BF6 /* password_dot@2x~iphone.png in Resources */,
 				7D98AE4C19A7C550003D2BF6 /* btn_3@2x~iphone.png in Resources */,
 				7D98AE4D19A7C550003D2BF6 /* btn_0~iphone.png in Resources */,
@@ -3540,6 +3545,7 @@
 				B5F2EB1118DE01CB008ACF88 /* QuestionAnswerView~iphone.xib in Resources */,
 				B59C14DA18C012B500AEA789 /* btn_8@2x~iphone.png in Resources */,
 				B5137C0818A40A8400DA4A34 /* Lato-BlackItalic.ttf in Resources */,
+				DAA5782919C1632000E972FC /* emailTemplate.html in Resources */,
 				B59C153218C012B500AEA789 /* password_dot@2x~iphone.png in Resources */,
 				B59C14D018C012B500AEA789 /* btn_3@2x~iphone.png in Resources */,
 				B59C14CB18C012B500AEA789 /* btn_0~iphone.png in Resources */,
@@ -3999,7 +4005,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "2d8dfe52-fe61-477c-895e-3e9d869c1f2c";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4032,7 +4037,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PROVISIONING_PROFILE = "2d8dfe52-fe61-477c-895e-3e9d869c1f2c";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
