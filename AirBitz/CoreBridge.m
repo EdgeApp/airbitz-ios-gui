@@ -107,7 +107,6 @@ static NSTimer *_dataSyncTimer;
     if (dataQueue)
     {
         [dataQueue cancelAllOperations];
-        [dataQueue waitUntilAllOperationsAreFinished];
     }
 }
 
