@@ -852,8 +852,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [strBody appendFormat:@"%@ mBTC", amountMBTC];
         [strBody appendString:@"<br><br>\n"];
 */
-        UIImage *imageAttachment = [self imageWithImage:self.qrCodeImage scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
-        NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(imageAttachment, 1.0)];
 /*
         [strBody appendString:[NSString stringWithFormat:@"<p><b><img src='cid:qrcode.jpg' /></b></p>"]];
         
@@ -866,10 +864,17 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             [mailComposer setToRecipients:[NSArray arrayWithObject:self.strEMail]];
         }
         
-        [mailComposer setSubject:NSLocalizedString(@"Bitcoin Request", nil)];
+        NSString *subject = [NSString stringWithFormat:@"Airbitz Bitcoin Request from %@", [User Singleton].fullName];
+        
+        [mailComposer setSubject:NSLocalizedString(subject, nil)];
         
         [mailComposer setMessageBody:content isHTML:YES];
-        [mailComposer addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"qrcode.jpg"];
+
+        NSData *imgData;
+
+        UIImage *imageAttachment = [self imageWithImage:self.qrCodeImage scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
+        imgData = [NSData dataWithData:UIImageJPEGRepresentation(imageAttachment, 1.0)];
+        [mailComposer addAttachmentData:imgData mimeType:@"image/jpeg" fileName:@"qrcode.jpg"];
 
         mailComposer.mailComposeDelegate = self;
 
