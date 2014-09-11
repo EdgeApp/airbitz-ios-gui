@@ -798,7 +798,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                                        nil];
         
         NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
-                                       [User Singleton].fullName,
+                                       [User Singleton].fullName ? [User Singleton].fullName : @"",
                                        iosURL,
                                        redirectURL,
                                        self.uriString,
