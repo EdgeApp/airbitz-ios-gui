@@ -1178,6 +1178,11 @@ typedef enum eMapDisplayState
 
 - (void)launchBusinessDetailsWithBizID: (NSString *)bizId andLocation: (CLLocationCoordinate2D)location animated: (BOOL)animated
 {
+    if (businessDetailsController)
+    {
+        return;
+    }
+
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName: @"Main_iPhone" bundle: nil];
     businessDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier: @"BusinessDetailsViewController"];
 
@@ -1210,6 +1215,11 @@ typedef enum eMapDisplayState
 
 - (void)animateBusinessDetailsOnScreen
 {
+    if (businessDetailsController)
+    {
+        return;
+    }
+    
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration: 0.35
                           delay: 0.0
