@@ -1192,6 +1192,7 @@ typedef enum eMapDisplayState
 
     if (animated)
     {
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [UIView animateWithDuration: 0.35
                               delay: 0.0
                             options: UIViewAnimationOptionCurveEaseInOut
@@ -1201,6 +1202,7 @@ typedef enum eMapDisplayState
         }
                          completion: ^(BOOL finished)
         {
+            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
             //self.dividerView.alpha = 0.0;
         }];
     }
@@ -1208,6 +1210,7 @@ typedef enum eMapDisplayState
 
 - (void)animateBusinessDetailsOnScreen
 {
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration: 0.35
                           delay: 0.0
                         options: UIViewAnimationOptionCurveEaseInOut
@@ -1217,6 +1220,7 @@ typedef enum eMapDisplayState
     }
                      completion: ^(BOOL finished)
     {
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }];
 }
 
