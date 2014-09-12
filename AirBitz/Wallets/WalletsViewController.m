@@ -335,6 +335,7 @@
     _offlineWalletViewController.view.frame = frame;
     [self.view addSubview:_offlineWalletViewController.view];
 
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
@@ -346,6 +347,7 @@
      {
          [self hideWalletMaker];
          [self removeBlockingButton];
+         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
      }];
 }
 
@@ -446,6 +448,7 @@
 	
 	if (bAnimated)
     {
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [UIView animateWithDuration:0.35
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
@@ -455,6 +458,7 @@
         }
         completion:^(BOOL finished)
         {
+            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
         }];
     }
     else
@@ -465,6 +469,7 @@
 
 - (void)dismissTransactions
 {
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -478,6 +483,7 @@
 	 {
 		 [_transactionsController.view removeFromSuperview];
 		 _transactionsController = nil;
+         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 	 }];
 }
 

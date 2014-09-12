@@ -281,6 +281,7 @@
         self.exportWalletViewController.view.frame = frame;
         [self.view addSubview:self.exportWalletViewController.view];
 
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [UIView animateWithDuration:0.35
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
@@ -290,7 +291,7 @@
          }
                          completion:^(BOOL finished)
          {
-
+             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
          }];
     }
 }
@@ -358,12 +359,12 @@
         _bSearchModeEnabled = NO;
     }
 
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
          self.tableView.frame = frame;
 
          if (IS_IPHONE4  || NO_SEARCHBAR)

@@ -505,6 +505,7 @@ typedef enum eDatePeriod
     self.exportWalletOptionsViewController.view.frame = frame;
     [self.view addSubview:self.exportWalletOptionsViewController.view];
 
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
@@ -514,7 +515,7 @@ typedef enum eDatePeriod
      }
                      completion:^(BOOL finished)
      {
-
+         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
      }];
 }
 

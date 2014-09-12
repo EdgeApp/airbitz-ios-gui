@@ -1195,6 +1195,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	[self.view addSubview:_sendConfirmationViewController.view];
 	
 	
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -1204,6 +1205,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	 }
 	 completion:^(BOOL finished)
 	 {
+         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 	 }];
 }
 

@@ -73,7 +73,7 @@
 	self.contentView.transform = CGAffineTransformMakeScale(0.7, 0.7);
 	self.contentView.layer.cornerRadius = 7.0;
 
-
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[UIView animateWithDuration:0.25
 						  delay:0.0
 						options:UIViewAnimationOptionCurveLinear
@@ -102,7 +102,7 @@
 			   }
 				completion:^(BOOL finished)
 			   {
-				   
+                   [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 			   }];
 		  }];
 	 }];
