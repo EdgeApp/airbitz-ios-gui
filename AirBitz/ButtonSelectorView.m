@@ -105,6 +105,8 @@
 
 		//animate button width (wider)
 		self.button.selected = YES;
+
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 		[UIView animateWithDuration:0.25
 							  delay:0.0
 							options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
@@ -120,6 +122,7 @@
 		 }
 						 completion:^(BOOL finished)
 		 {
+             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 			 [self showTable];
 		 }];
 	}
@@ -144,6 +147,7 @@
 	_selectionTable.userInteractionEnabled = YES;
 	[self.button.superview insertSubview:_selectionTable belowSubview:self.button];
 	
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	//make the table expand from the bottom of the button
 	[UIView animateWithDuration:0.35
 						  delay:0.0
@@ -184,6 +188,7 @@
 	 }
 	 completion:^(BOOL finished)
 	 {
+         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 		 [_selectionTable reloadData];
 	 }];
 	

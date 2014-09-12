@@ -19,7 +19,7 @@
 #define CURRENCY_NUM_GBP                826
 #define CURRENCY_NUM_USD                840
 #define CURRENCY_NUM_EUR                978
-#define FILE_SYNC_FREQUENCY_SECONDS     5
+#define FILE_SYNC_FREQUENCY_SECONDS     10
 
 static BOOL bInitialized = NO;
 static BOOL bDataFetched = NO;

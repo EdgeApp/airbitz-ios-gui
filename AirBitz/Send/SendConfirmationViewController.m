@@ -28,6 +28,7 @@
     int                                 _callbackTimestamp;
     Transaction                         *_completedTransaction;    // nil until sendTransaction is successfully completed
     UITapGestureRecognizer              *tap;
+    UIAlertView                         *_alert;
 }
 
 @property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
@@ -553,16 +554,18 @@
 
 - (void)failedToSend:(NSArray *)params
 {
-    NSString *title = params[0];
-    NSString *message = params[1];
-    UIAlertView *alert = [[UIAlertView alloc]
-                            initWithTitle:title
-                            message:message
-                            delegate:nil
-                            cancelButtonTitle:@"OK"
-                            otherButtonTitles:nil];
-    [alert show];
-    [self hideSendStatus];
+    if (!_alert) {
+        NSString *title = params[0];
+        NSString *message = params[1];
+        _alert = [[UIAlertView alloc]
+                                initWithTitle:title
+                                message:message
+                                delegate:nil
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+        [_alert show];
+        [self hideSendStatus];
+    }
 }
 
 - (void)showTransactionDetails:(NSArray *)params

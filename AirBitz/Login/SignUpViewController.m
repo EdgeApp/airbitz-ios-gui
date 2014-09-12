@@ -197,8 +197,6 @@
                         _bSuccess = result == ABC_CC_Ok;
                         _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&Error]];
 
-                        [CoreBridge startWatchers];
-                        [CoreBridge startQueues];
                         [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
                     }];
                 }
@@ -1009,6 +1007,8 @@
                  delegate:nil
                  cancelButtonTitle:@"OK"
                  otherButtonTitles:nil];
+        [CoreBridge startWatchers];
+        [CoreBridge startQueues];
     }
 
     [alert show];

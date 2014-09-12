@@ -367,6 +367,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _signUpController.view.frame = frame;
     [self.view addSubview:_signUpController.view];
 
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
@@ -376,6 +377,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
      }
                      completion:^(BOOL finished)
      {
+         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
      }];
 }
 
@@ -392,7 +394,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	_passwordRecoveryController.view.frame = frame;
 	[self.view addSubview:_passwordRecoveryController.view];
 
-
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -402,6 +404,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	 }
 					 completion:^(BOOL finished)
 	 {
+         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 	 }];
 }
 
@@ -418,6 +421,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         _categoriesController.view.frame = frame;
         [self.view addSubview:_categoriesController.view];
 
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [UIView animateWithDuration:0.35
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
@@ -427,6 +431,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
          }
                          completion:^(BOOL finished)
          {
+             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
          }];
     }
 }
@@ -442,6 +447,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _debugViewController.view.frame = frame;
     [self.view addSubview:_debugViewController.view];
 
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
@@ -450,6 +456,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         _debugViewController.view.frame = self.view.bounds;
     }
                      completion:^(BOOL finished) {
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }];
 }
 

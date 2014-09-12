@@ -430,6 +430,7 @@
 	[self.view addSubview:_qrViewController.view];
 	_qrViewController.view.alpha = 0.0;
 	
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[UIView animateWithDuration:0.35
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -439,6 +440,7 @@
 	 }
     completion:^(BOOL finished)
     {
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }];
 }
 
