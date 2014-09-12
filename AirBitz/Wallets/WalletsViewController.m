@@ -37,6 +37,7 @@
 	BOOL                        _walletMakerVisible;
     OfflineWalletViewController *_offlineWalletViewController;
     NSInteger                   _highlightedRow;
+    NSInteger                   _highlightedSection;
 }
 
 @property (nonatomic, strong) NSMutableArray *arrayWallets;
@@ -112,6 +113,7 @@
 {
     // reset highlight
     _highlightedRow = -1;
+    _highlightedSection = -1;
     
     [super viewWillAppear: animated];
     [self reloadWallets];
@@ -493,6 +495,7 @@
 {
     // reset highlight
     _highlightedRow = -1;
+    _highlightedSection = -1;
 
     [self reloadWallets];
     [self.walletsTable reloadData];
@@ -650,7 +653,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	
 	if((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
 	{
-        if (row == _highlightedRow)
+        if (row == _highlightedRow && indexPath.section == _highlightedSection)
         {
             cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_single"];
         }
@@ -663,7 +666,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	{
 		if(row == 0)
 		{
-            if (row == _highlightedRow)
+            if (row == _highlightedRow && indexPath.section == _highlightedSection)
             {
                 cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_top"];
             }
@@ -674,7 +677,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 		}
 		else if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
 		{
-            if (row == _highlightedRow)
+            if (row == _highlightedRow && indexPath.section == _highlightedSection)
             {
                 cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_bottom"];
             }
@@ -685,7 +688,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 		}
 		else
 		{
-            if (row == _highlightedRow)
+            if (row == _highlightedRow && indexPath.section == _highlightedSection)
             {
                 cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_middle"];
             }
@@ -701,6 +704,7 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     _highlightedRow = indexPath.row;
+    _highlightedSection = indexPath.section;
     [self.walletsTable reloadData];
 
 	if(indexPath.section == 0)
