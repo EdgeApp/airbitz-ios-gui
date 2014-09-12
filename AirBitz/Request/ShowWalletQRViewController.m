@@ -742,129 +742,113 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
 }
 
+- (void)replaceRequestTags:(NSString **) strContent
+{
+    NSString *amountBTC = [CoreBridge formatSatoshi:self.amountSatoshi
+                                         withSymbol:false
+                                      forceDecimals:8];
+    NSString *amountMBTC = [CoreBridge formatSatoshi:self.amountSatoshi
+                                          withSymbol:false
+                                       forceDecimals:5];
+    // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
+    
+    NSString *iosURL;
+    NSString *redirectURL = [NSString stringWithString: self.uriString];
+    NSString *paramsURI;
+    NSString *paramsURIEnc;
+    
+    NSRange tempRange = [self.uriString rangeOfString:@"bitcoin:"];
+    
+    if (*strContent == NULL)
+    {
+        return;
+    }
+    
+    if (tempRange.location != NSNotFound)
+    {
+        iosURL = [self.uriString stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
+        paramsURI = [self.uriString stringByReplacingCharactersInRange:tempRange withString:@""];
+        paramsURIEnc = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                             NULL,
+                                                                                             (CFStringRef)paramsURI,
+                                                                                             NULL,
+                                                                                             (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                             kCFStringEncodingUTF8 ));
+        redirectURL = [NSString stringWithFormat:@"%@%@",@"https://airbitz.co/blf/?address=", paramsURIEnc ];
+        
+    }
+    NSString *name;
+    
+    if ([User Singleton].bNameOnPayments && [User Singleton].fullName)
+    {
+        name = [NSString stringWithString:[User Singleton].fullName];
+    }
+    else
+    {
+        name = nil;
+    }
+        
+    NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
+                                   @"<abtag FROM>",
+                                   @"<abtag BITCOIN_URL>",
+                                   @"<abtag REDIRECT_URL>",
+                                   @"<abtag BITCOIN_URI>",
+                                   @"<abtag ADDRESS>",
+                                   @"<abtag AMOUNT_BTC>",
+                                   @"<abtag AMOUNT_MBTC>",
+                                   @"<abtag QRCODE>",
+                                   nil];
+    
+    NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
+                                   name ? name : @"Unknown User",
+                                   iosURL,
+                                   redirectURL,
+                                   self.uriString,
+                                   self.addressString,
+                                   amountBTC,
+                                   amountMBTC,
+                                   @"cid:qrcode.jpg",
+                                   nil];
+    
+    for (int i=0; i<[searchList count];i++)
+    {
+        *strContent = [*strContent stringByReplacingOccurrencesOfString:[searchList objectAtIndex:i]
+                                                           withString:[replaceList objectAtIndex:i]];
+    }
+
+}
+
 - (void)sendEMail
 {
-    //NSLog(@"sendEMail to: %@ / %@", self.strFullName, self.strEMail);
 
     // if mail is available
     if ([MFMailComposeViewController canSendMail])
     {
-//        NSMutableString *strBody = [[NSMutableString alloc] init];
-        NSString *amountBTC = [CoreBridge formatSatoshi:self.amountSatoshi
-                                             withSymbol:false
-                                          forceDecimals:8];
-        NSString *amountMBTC = [CoreBridge formatSatoshi:self.amountSatoshi
-                                              withSymbol:false
-                                           forceDecimals:5];
-        // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
-
-        NSString *iosURL;
-        NSString *redirectURL = [NSString stringWithString: self.uriString];
-        NSString *paramsURI;
-        NSString *paramsURIEnc;
-
-        NSRange tempRange = [self.uriString rangeOfString:@"bitcoin:"];
-
-        if (tempRange.location != NSNotFound) 
-        {
-            iosURL = [self.uriString stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
-            paramsURI = [self.uriString stringByReplacingCharactersInRange:tempRange withString:@""];
-            paramsURIEnc = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
-                                                                                           NULL,
-                                                                                           (CFStringRef)paramsURI,
-                                                                                           NULL,
-                                                                                           (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                           kCFStringEncodingUTF8 ));
-            redirectURL = [NSString stringWithFormat:@"%@%@",@"https://airbitz.co/blf/?address=", paramsURIEnc ];
-            
-        }
         
         NSError* error = nil;
         NSString *path = [[NSBundle mainBundle] pathForResource:@"emailTemplate" ofType:@"html"];
         NSString* content = [NSString stringWithContentsOfFile:path
                                                       encoding:NSUTF8StringEncoding
                                                          error:&error];
-        assert(content);
-
-        NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
-                                       @"<abtag FROM>",
-                                       @"<abtag BITCOIN_URL>",
-                                       @"<abtag REDIRECT_URL>",
-                                       @"<abtag BITCOIN_URI>",
-                                       @"<abtag ADDRESS>",
-                                       @"<abtag AMOUNT_BTC>",
-                                       @"<abtag AMOUNT_MBTC>",
-                                       @"<abtag QRCODE>",
-                                       nil];
+        [self replaceRequestTags:&content];
         
-        NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
-                                       [User Singleton].fullName ? [User Singleton].fullName : @"",
-                                       iosURL,
-                                       redirectURL,
-                                       self.uriString,
-                                       self.addressString,
-                                       amountBTC,
-                                       amountMBTC,
-                                       @"cid:qrcode.jpg",
-                                       nil];
-        
-        for (int i=0; i<[searchList count];i++)
-        {
-            content = [content stringByReplacingOccurrencesOfString:[searchList objectAtIndex:i]
-                                                         withString:[replaceList objectAtIndex:i]];
-        }
-/*
-        [strBody appendString:@"<html><body>\n"];
-
-        if ([User Singleton].bNameOnPayments)
-        {
-            [strBody appendString:NSLocalizedString(@"Bitcoin Request from ", nil)];
-            [strBody appendFormat:@"%@", [User Singleton].fullName];
-        }
-        else
-        {
-            [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
-        }
-        [strBody appendString:@"<br>\n"];
-        [strBody appendString:@"<br>\n"];
-        [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the links below to pay<br>\n",nil)];
-        [strBody appendString:@"<br>\n"];
-        [strBody appendFormat:@"<a href=\"%@\">", iosURL];
-        [strBody appendString:NSLocalizedString(@"Click to Pay on iOS/Mac",nil)];
-        [strBody appendFormat:@"</a><br><br>"];
-
-        [strBody appendFormat:@"<a href=\"%@\">", redirectURI];
-        [strBody appendString:NSLocalizedString(@"Click to Pay on Android/Desktop",nil)];
-        [strBody appendFormat:@"</a><br><br>\n"];
-
-        [strBody appendFormat:@"%@", self.uriString];
-        [strBody appendString:@"<br>\n"];
-        
-        [strBody appendString:@"<br>\n"];
-        [strBody appendString:NSLocalizedString(@"Address: ",nil)];
-        [strBody appendFormat:@"%@", self.addressString];
-        [strBody appendString:@"<br>\n"];
-        [strBody appendString:@"<br>\n"];
-        [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
-        [strBody appendFormat:@"%@ BTC", amountBTC];
-        [strBody appendString:@"<br><br>\n"];
-        [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
-        [strBody appendFormat:@"%@ mBTC", amountMBTC];
-        [strBody appendString:@"<br><br>\n"];
-*/
-/*
-        [strBody appendString:[NSString stringWithFormat:@"<p><b><img src='cid:qrcode.jpg' /></b></p>"]];
-        
-        [strBody appendString:@"</body></html>\n"];
-  */
         MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
         
         if ([self.strEMail length])
         {
             [mailComposer setToRecipients:[NSArray arrayWithObject:self.strEMail]];
         }
+
+        NSString *subject;
         
-        NSString *subject = [NSString stringWithFormat:@"Airbitz Bitcoin Request from %@", [User Singleton].fullName];
+        if ([User Singleton].bNameOnPayments && [User Singleton].fullName)
+        {
+            subject = [NSString stringWithFormat:@"Airbitz Bitcoin Request from %@", [User Singleton].fullName];
+        }
+        else
+        {
+            subject = [NSString stringWithFormat:@"Airbitz Bitcoin Request"];
+        }
         
         [mailComposer setSubject:NSLocalizedString(subject, nil)];
         
@@ -899,53 +883,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
 	if ([MFMessageComposeViewController canSendText] && [MFMessageComposeViewController canSendAttachments])
 	{
-        NSMutableString *strBody = [[NSMutableString alloc] init];
-        NSString *amountBTC = [CoreBridge formatSatoshi:self.amountSatoshi
-                                             withSymbol:false
-                                          forceDecimals:8];
-        NSString *amountMBTC = [CoreBridge formatSatoshi:self.amountSatoshi
-                                              withSymbol:false
-                                           forceDecimals:5];
-        // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
-
-        NSString *tempURI = self.uriString;
-
-        NSRange tempRange = [tempURI rangeOfString:@"bitcoin:"];
-
-        if (tempRange.location != NSNotFound)
-        {
-            tempURI = [tempURI stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
-        }
         
-        if ([User Singleton].bNameOnPayments)
-        {
-            [strBody appendString:NSLocalizedString(@"Bitcoin Request from ", nil)];
-            [strBody appendFormat:@"%@", [User Singleton].fullName];
-        }
-        else
-        {
-            [strBody appendString:NSLocalizedString(@"Bitcoin Request", nil)];
-        }
-
-        [strBody appendString:@"\n"];
-        [strBody appendString:@"\n"];
-        [strBody appendString:NSLocalizedString(@"Please scan QR code or click on the link below to pay\n",nil)];
-        [strBody appendString:@"\n"];
-        [strBody appendFormat:@"%@", tempURI];
-        [strBody appendString:@"\n"];
-        [strBody appendString:@"\n"];
-        [strBody appendString:NSLocalizedString(@"Address: ",nil)];
-        [strBody appendFormat:@"%@", self.addressString];
-        [strBody appendString:@"\n"];
-        [strBody appendString:@"\n"];
-        [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
-        [strBody appendFormat:@"%@ BTC", amountBTC];
-        [strBody appendString:@"\n"];
-        [strBody appendString:@"\n"];
-        [strBody appendString:NSLocalizedString(@"Amount: ",nil)];
-        [strBody appendFormat:@"%@ mBTC", amountMBTC];
-        [strBody appendString:@"\n"];
-        [strBody appendString:@"\n"];
+        NSError* error = nil;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"SMSTemplate" ofType:@"txt"];
+        NSString* content = [NSString stringWithContentsOfFile:path
+                                                      encoding:NSUTF8StringEncoding
+                                                         error:&error];
+        [self replaceRequestTags:&content];
 
         // create the attachment
         UIImage *imageAttachment = [self imageWithImage:self.qrCodeImage scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
@@ -957,7 +901,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             NSLog(@"Could not attach qr code");
         }
 
-		controller.body = strBody;
+		controller.body = content;
 
         if (self.strPhoneNumber)
         {

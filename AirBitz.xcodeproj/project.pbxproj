@@ -990,6 +990,8 @@
 		DAA5782619BF55F600E972FC /* Warning_icon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782219BF55F600E972FC /* Warning_icon~iphone.png */; };
 		DAA5782919C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
 		DAA5782A19C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
+		DAA5784D19C272C400E972FC /* SMSTemplate.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAA5784C19C272C400E972FC /* SMSTemplate.txt */; };
+		DAA5784E19C272C400E972FC /* SMSTemplate.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAA5784C19C272C400E972FC /* SMSTemplate.txt */; };
 		DAAC216019633FFB00CC0F1E /* btn_expand@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC215E19633FFB00CC0F1E /* btn_expand@2x~iphone.png */; };
 		DAAC216119633FFB00CC0F1E /* btn_expand~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC215F19633FFB00CC0F1E /* btn_expand~iphone.png */; };
 		DAAC2166196399F400CC0F1E /* flash-off@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2162196399F400CC0F1E /* flash-off@2x~iphone.png */; };
@@ -1664,6 +1666,7 @@
 		DAA5782119BF55F600E972FC /* Warning_icon@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warning_icon@2x~iphone.png"; sourceTree = "<group>"; };
 		DAA5782219BF55F600E972FC /* Warning_icon~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warning_icon~iphone.png"; sourceTree = "<group>"; };
 		DAA5782819C1632000E972FC /* emailTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = emailTemplate.html; sourceTree = "<group>"; };
+		DAA5784C19C272C400E972FC /* SMSTemplate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SMSTemplate.txt; path = Resources/Text/SMSTemplate.txt; sourceTree = "<group>"; };
 		DAAC215E19633FFB00CC0F1E /* btn_expand@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_expand@2x~iphone.png"; sourceTree = "<group>"; };
 		DAAC215F19633FFB00CC0F1E /* btn_expand~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_expand~iphone.png"; sourceTree = "<group>"; };
 		DAAC2162196399F400CC0F1E /* flash-off@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-off@2x~iphone.png"; sourceTree = "<group>"; };
@@ -2223,6 +2226,7 @@
 		B5675B8718A180D9002E0703 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DAA5784819C23C8200E972FC /* Text */,
 				683D95B61989F14B0082BC1A /* Certs */,
 				4C7C1253193D2CBD0096338D /* MockData */,
 				B5F2E9A818D4AF6C008ACF88 /* html */,
@@ -2780,6 +2784,14 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		DAA5784819C23C8200E972FC /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				DAA5784C19C272C400E972FC /* SMSTemplate.txt */,
+			);
+			name = Text;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3245,6 +3257,7 @@
 				7D23D57319BE8E130042B87A /* bd_highlighted_cell_bottom~iphone.png in Resources */,
 				7D98AE8819A7C550003D2BF6 /* InfoPlist.strings in Resources */,
 				7D98AE8919A7C550003D2BF6 /* tabbar_bkg_selected~iphone.png in Resources */,
+				DAA5784E19C272C400E972FC /* SMSTemplate.txt in Resources */,
 				7D98AE8A19A7C550003D2BF6 /* btn_addCategory@2x~iphone.png in Resources */,
 				7D98AE8B19A7C550003D2BF6 /* scan_frame~iphone.png in Resources */,
 				7D98AE8C19A7C550003D2BF6 /* btn_7~iphone.png in Resources */,
@@ -3611,6 +3624,7 @@
 				7D23D57219BE8E130042B87A /* bd_highlighted_cell_bottom~iphone.png in Resources */,
 				B5675B5618A17F6F002E0703 /* InfoPlist.strings in Resources */,
 				B59C161F18C145D400AEA789 /* tabbar_bkg_selected~iphone.png in Resources */,
+				DAA5784D19C272C400E972FC /* SMSTemplate.txt in Resources */,
 				B55A032218EB597D00845090 /* btn_addCategory@2x~iphone.png in Resources */,
 				B5E7F57E18E4EC4E009B5844 /* scan_frame~iphone.png in Resources */,
 				B59C14D918C012B500AEA789 /* btn_7~iphone.png in Resources */,

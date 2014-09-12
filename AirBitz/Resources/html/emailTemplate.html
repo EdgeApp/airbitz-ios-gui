@@ -1,58 +1,377 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Airbitz Bitcoin Request</title>
-<style type="text/css">
-<!--
-* {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px}
-.body {max-width: 320px}
-.h2 {font-size:14;}
-.address {font-size: 8px}
-.amount {font-size: 13px; font-weight: bold;}
-.container { padding: 3px; }
-.wrapped { width: 60%; word-wrap:break-word; font-size: 8px}
-.header { font-weight: bold; }
-.section { margin-bottom: 10px; }
--->
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Airbitz Bitcoin Request</title>
 </head>
 
+<style>
+* {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+body {
+  background: #eee;
+}
+a {
+  color: #2291cf;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.green {
+  color: #80c341;
+}
+.blue {
+  color: #2291cf;
+}
+#header-table {
+  margin-top: 40px;
+  background: #2291cf;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  line-height: 135%;
+  box-shadow: 0 0 10px #AAA;
+}
+#header-table .Logo {
+  padding: 15px 5px;
+  text-align: center;
+}
+#header-table .Logo .logo-white {
+  width: 100px;
+  height: 55px;
+}
+#body-table {
+  border: 1px solid #ccc;
+  border-top: none;
+  line-height: 135%;
+  background: #fcfcfc;
+  font-size: 18px;
+  box-shadow: 0 0 10px #AAA;
+}
+#body-table .transaction-details {
+  width: 98% !important;
+  font-size: 14px;
+  border: 1px solid #eee;
+}
+#body-table .transaction-details td {
+  padding: 5px 10px;
+  border: 1px solid #efefef;
+}
+@media only screen and (min-width: 250px) and (max-width: 480px) {
+  #body-table .transaction-details td {
+    padding: 2px 5px;
+    font-size: 10px;
+  }
+}
+#body-table .transaction-details .label {
+  width: 90px;
+  font-weight: bold;
+}
+#body-table .payment-instructions {
+  width: 98% !important;
+  background: #80c341;
+  color: #fff;
+  border: 1px dashed #80c341;
+}
+#body-table .payment-instructions td {
+  padding: 10px 0;
+}
+@media only screen and (min-width: 250px) and (max-width: 480px) {
+  #body-table .payment-instructions {
+    font-size: 14px;
+  }
+}
+#body-table .button-pay {
+  width: 45% !important;
+  line-height: 16px;
+}
+#body-table .button-pay em {
+  font-size: 10px;
+}
+@media only screen and (min-width: 250px) and (max-width: 480px) {
+  #body-table .button-pay {
+    font-size: 14px;
+  }
+}
+#body-table .app-store {
+  height: 149px;
+  height: 50px;
+}
+#body-table .bottom-section {
+  padding-top: 30px;
+  border-top: 1px solid #ddd;
+}
+#body-table .viewWebsite p {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #555555;
+}
+@media only screen and (max-width: 640px) {
+  table[class="container"] {
+    width: 98% !important;
+  }
+  [class="topDiv"] img {
+    width: 95% !important;
+  }
+  td[class="spacer"] {
+    display: none !important;
+  }
+  td[class="belowFeature"] {
+    width: 95% !important;
+    display: inline-block;
+    padding-left: 15px;
+    margin-bottom: 20px;
+  }
+  td[class="belowFeature"] img {
+    float: left;
+    margin-right: 15px;
+  }
+  td[class="featuredImage"] {
+    width: 95% !important;
+  }
+  td[class="featuredImage"] img {
+    width: 100% !important;
+  }
+  [class="bottomImages"] img {
+    width: 48% !important;
+  }
+}
+@media only screen and (min-width: 481px) and (max-width: 570px) {
+  td[class="viewWebsite"] {
+    width: 560px !important;
+    height: inherit !important;
+    text-align: center;
+  }
+  td[class="viewWebsite"] {
+    display: none;
+  }
+}
+@media only screen and (min-width: 250px) and (max-width: 480px) {
+  td[class="viewWebsite"] {
+    display: none;
+  }
+  td[class="topDiv"] {
+    display: none;
+  }
+  td[class="bodyCopy"] p {
+    padding: 0 15px !important;
+    text-align: left !important;
+  }
+  td[class="bodyCopy"] h1 {
+    padding: 0 10px !important;
+  }
+  h1,
+  h2 {
+    line-height: 120% !important;
+  }
+  [class="imageWrapper"] {
+    display: inline-block;
+  }
+  td[class="belowFeature"] p,
+  td[class="belowFeature"] h3 {
+    padding-right: 15px;
+  }
+  [class="bottomImages"] {
+    text-align: center !important;
+  }
+  [class="bottomImages"] img {
+    width: 275px !important;
+    margin-bottom: 15px;
+    float: none;
+  }
+}
+</style>
+
 <body>
-<center>
-<a href="https://airbitz.co"><img src="https://go.airbitz.co/wp-content/uploads/2014/09/logo-final-100w.jpg" alt="Airbitz Logo"></a><br>
-<h2>Bitcoin Payment Request</h2>
-<b>From: <abtag FROM></b><br><br>
 
-Please scan QR code or<br>
-click on the links to pay<br><br>
 
-<center>
-<h4>
-<b><a href="<abtag BITCOIN_URL>"><img src="https://go.airbitz.co/wp-content/uploads/2014/09/Click-to-Pay-Apple-Mac-150w.png" alt="Click to Pay on iOS/Mac"></a>
+<table id="header-table" class="container" width="630" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="Logo">
+      <img class="logo-white" src="https://airbitz.co/static/img/logo-nav.png" alt="Airbitz Wallet">
+    </td>
+  </tr>
+</table><!-- /#header-table -->
 
-<a href="<abtag REDIRECT_URL>"><img src="https://go.airbitz.co/wp-content/uploads/2014/09/Click-to-Pay-android-150w.png" alt="Click to Pay on Android/Desktop"></a><br><br>
-</b>
-</h4>
-</center>
 
-<span class="address"><abtag BITCOIN_URI></span><br><br>
+<table id="body-table" class="container" width="630" align="center" cellpadding="0" cellspacing="0">
 
-<div.wrapped>
-Address: <span class="address"><abtag ADDRESS></span><br>
-Amount: <span class="amount"><abtag AMOUNT_BTC></span> BTC<br>
-Amount: <span class="amount"><abtag AMOUNT_MBTC></span> mBTC<br><br>
-</div>
+  <tr>
+    <td bgcolor="#fcfcfc" colspan="3" width="100%" height="10">&nbsp;</td>
+  </tr>
 
-<center>
-<img src=""><br>
-<h2>Sent from the Airbitz Mobile<br>
-Bitcoin Wallet + Business Directory<br><br>
-Download Airbitz for iOS and Android<br></h2>
+  <tr>
+    <td width="30"></td>
+    <td width="350" bgcolor="#fcfcfc" align="center" class="featuredImage">
+      <h2>Bitcoin Payment Request</h2>
 
-<a href="https://itunes.apple.com/us/app/airbitz/id843536046"><img src="https://airbitz.co/static/wp/assets/img/available-on-apple-app-store.png" alt="Airbitz on iOS"></a>
-<a href="https://play.google.com/store/apps/details?id=com.airbitz"><img src="https://airbitz.co/static/wp/assets/img/available-on-android.png" alt="Airbitz on Android"></a><br>
+      <!-- 2 column layout with 10px spacing -->
+      <table class="" cellpadding="0" cellspacing="0" align="center">
+        <tr>
+          <td colspan="3">
+            <table class="transaction-details" cellpadding="0" cellspacing="0" align="center">
+              <tr>
+                <td class="label">From:</td>
+                <td class="address right"><abtag FROM></td>
+              </tr>
 
-</center>
+              <tr>
+                <td class="label">Amount:</td>
+                <td class="green right"><abtag AMOUNT_BTC></td>
+              </tr>
+
+              <tr>
+                <td class="label">Amount:</td>
+                <td class="green right"><abtag AMOUNT_MBTC></td>
+              </tr>
+
+              <tr>
+                <td class="label">Address:</td>
+                <td class="address right"><abtag ADDRESS></td>
+              </tr>
+
+              <tr>
+                <td class="label">Full URI:</td>
+                <td class="address right"><abtag BITCOIN_URI></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3" height="15">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <table class="payment-instructions" cellpadding="0" cellspacing="0" align="center">
+              <tr>
+                <td class="center" colspan="3" height="15">
+                  Please <strong>scan QR code</strong> or <strong>click</strong> on the links below to pay
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3" height="15">&nbsp;</td>
+        </tr>
+
+      </table>
+
+      <table style="margin-left: 5px; float: left;" class="button-pay" cellpadding="0" cellspacing="0" width="200" height="47" >
+        <tr>
+          <td width="6" height="47" valign="bottom">
+            <img src="https://airbitz.co/static/img/email/blue/button-left.png"
+                 width="6" height="47" border="0" alt=""
+                 style="margin:0;padding:0;display:block;">
+          </td>
+          <td style="background-color:#2291cf;color:#ffffff;" align="center">
+            <a href="<abtag BITCOIN_URL>" style="color:#ffffff;">
+              Pay with iOS/Mac<br>
+              <em>Click Here</em>
+            </a>
+          </td>
+          <td width="6" height="47" valign="bottom">
+            <img src="https://airbitz.co/static/img/email/blue/button-right.png"
+                 width="6" height="47" border="0" alt=""
+                 style="margin:0;padding:0;display:block;">
+          </td>
+        </tr>
+      </table>
+
+      <table style="margin-right: 5px; float: right" class="button-pay" cellpadding="0" cellspacing="0" width="200" height="47" >
+        <tr>
+          <td width="6" height="47" valign="bottom">
+            <img src="https://airbitz.co/static/img/email/blue/button-left.png"
+                 width="6" height="47" border="0" alt=""
+                 style="margin:0;padding:0;display:block;">
+          </td>
+          <td style="background-color:#2291cf;color:#ffffff;" align="center">
+            <a href="<abtag REDIRECT_URL>" style="color:#ffffff;">
+              Pay with Android<br>
+              <em>Click Here</em>
+            </a>
+          </td>
+          <td width="6" height="47" valign="bottom">
+            <img src="https://airbitz.co/static/img/email/blue/button-right.png"
+                 width="6" height="47" border="0" alt=""
+                 style="margin:0;padding:0;display:block;">
+          </td>
+        </tr>
+      </table>
+
+    </td>
+    <td width="30"></td>
+  </tr>
+
+  <tr>
+    <td colspan="3" height="30">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td></td>
+    <td class="bottom-section center">
+      Sent from the Airbitz Mobile<br>
+      Bitcoin Wallet + Business Directory<br>
+
+      <table>
+        <tr>
+          <td colspan="3" height="15">&nbsp;</td>
+        </tr>
+      </table>
+
+      <a href="https://itunes.apple.com/us/app/airbitz/id843536046">
+        <img class="app-store" src="https://airbitz.co/static/wp/assets/img/available-on-apple-app-store.png" alt="Airbitz on iOS">
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.airbitz">
+        <img class="app-store" src="https://airbitz.co/static/wp/assets/img/available-on-android.png" alt="Airbitz on Android">
+      </a>
+
+      <table>
+        <tr>
+          <td colspan="3" height="15">&nbsp;</td>
+        </tr>
+      </table>
+      <a href="https://airbitz.co/app/">Download Airbitz for iOS and Android</a>
+
+    </td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td colspan="3" height="15">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td></td>
+    <td width="600" class="bottomImages"></td>
+    <td></td>
+  </tr>
+
+</table><!-- /#body-table -->
+
+
+<table class="contact-us container" align="center" cellpadding="0" cellspacing="0" align="right">
+  <tr>
+    <td height="70" class="viewWebsite">
+      <p>Questions or Problems? <a href="mailto:info@airbitz.co?subject=Airbitz+Bitcoin+Email+Request">Contact Us</a>.</p>
+    </td>
+  </tr>
+</table><!-- /.contact-us -->
+
+
 </body>
 </html>
