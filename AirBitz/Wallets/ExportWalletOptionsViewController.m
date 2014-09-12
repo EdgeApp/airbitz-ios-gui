@@ -46,6 +46,7 @@ typedef enum eExportOption
 {
 
 	GDrive *drive;
+    MFMailComposeViewController *_mailComposer;
 }
 
 @property (weak, nonatomic) IBOutlet UIView         *viewDisplay;
@@ -321,22 +322,21 @@ typedef enum eExportOption
         [strBody appendString:@"</body></html>\n"];
 
 
-        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+        _mailComposer = [[MFMailComposeViewController alloc] init];
 
-        [mailComposer setSubject:NSLocalizedString(@"AirBitz Bitcoin Wallet Transactions", nil)];
+        [_mailComposer setSubject:NSLocalizedString(@"AirBitz Bitcoin Wallet Transactions", nil)];
 
-        [mailComposer setMessageBody:strBody isHTML:YES];
+        [_mailComposer setMessageBody:strBody isHTML:YES];
 
         // set up the attachment
         NSData *dataExport = [self getExportDataInForm:self.type];
         NSString *strFilename = [NSString stringWithFormat:@"%@.%@", self.wallet.strName, [self suffixFor:self.type]];
         NSString *strMimeType = [self mimeTypeFor:self.type];
-        [mailComposer addAttachmentData:dataExport mimeType:strMimeType fileName:strFilename];
+        [_mailComposer addAttachmentData:dataExport mimeType:strMimeType fileName:strFilename];
 
-        mailComposer.mailComposeDelegate = self;
+        _mailComposer.mailComposeDelegate = self;
 
-        [self presentViewController:mailComposer animated:YES completion:nil];
-        //[self presentModalViewController:mailComposer animated:NO];
+        [self presentViewController:_mailComposer animated:YES completion:nil];
     }
     else
     {
@@ -603,6 +603,7 @@ typedef enum eExportOption
 
 - (void)exit
 {
+    [_mailComposer.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 	[self.delegate exportWalletOptionsViewControllerDidFinish:self];
 }
 
