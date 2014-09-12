@@ -313,7 +313,7 @@ typedef enum eExportOption
 
         [strBody appendString:@"<html><body>\n"];
 
-        [strBody appendString:NSLocalizedString(@"Attached are the transactions for the AirBitz Bitcoin Wallet: ", nil)];
+//        [strBody appendString:NSLocalizedString(@"Attached are the transactions for the AirBitz Bitcoin Wallet: ", nil)];
         [strBody appendString:self.wallet.strName];
         [strBody appendString:@"\n"];
         [strBody appendString:@"<br><br>\n"];
