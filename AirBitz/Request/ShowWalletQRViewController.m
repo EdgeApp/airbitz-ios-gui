@@ -789,14 +789,14 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
         
     NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
-                                   @"<abtag FROM>",
-                                   @"<abtag BITCOIN_URL>",
-                                   @"<abtag REDIRECT_URL>",
-                                   @"<abtag BITCOIN_URI>",
-                                   @"<abtag ADDRESS>",
-                                   @"<abtag AMOUNT_BTC>",
-                                   @"<abtag AMOUNT_MBTC>",
-                                   @"<abtag QRCODE>",
+                                   @"[[abtag FROM]]",
+                                   @"[[abtag BITCOIN_URL]]",
+                                   @"[[abtag REDIRECT_URL]]",
+                                   @"[[abtag BITCOIN_URI]]",
+                                   @"[[abtag ADDRESS]]",
+                                   @"[[abtag AMOUNT_BTC]]",
+                                   @"[[abtag AMOUNT_MBTC]]",
+                                   @"[[abtag QRCODE]]",
                                    nil];
     
     NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
