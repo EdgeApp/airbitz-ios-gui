@@ -767,16 +767,9 @@
         ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szPIN, &error);
         [Util printABC_Error:&error];
         NSLog(@"current PIN: %s", szPIN);
-        if (szPIN)
-        {
+        if (szPIN) {
             NSString *storedPIN = [NSString stringWithUTF8String:szPIN];
-            if ([self.withdrawlPIN.text isEqualToString:storedPIN])
-            {
-                NSLog(@"SUCCESS!");
-                [self initiateSendRequest];
-            }
-            else
-            {
+            if (![self.withdrawlPIN.text isEqualToString:storedPIN]) {
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle:NSLocalizedString(@"Incorrect PIN", nil)
                                       message:NSLocalizedString(@"You must enter the correct withdrawl PIN in order to proceed", nil)
@@ -784,10 +777,20 @@
                                       cancelButtonTitle:@"OK"
                                       otherButtonTitles:nil];
                 [alert show];
+            } else if (self.amountToSendSatoshi == 0) {
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:NSLocalizedString(@"Enter an amount", nil)
+                                      message:NSLocalizedString(@"Please enter an amount to send", nil)
+                                      delegate:self
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+                [alert show];
+            } else {
+                NSLog(@"SUCCESS!");
+                [self initiateSendRequest];
             }
             free(szPIN);
         }
-        
     }
     else
     {
