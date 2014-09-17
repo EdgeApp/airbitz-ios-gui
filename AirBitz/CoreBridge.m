@@ -1177,18 +1177,6 @@ static NSTimer *_dataSyncTimer;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:self];
 }
 
-- (void)notifyTxSendSuccess:(NSDictionary *)params
-{
-    NSLog(@"notifyTxSendSuccess");
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_SEND_SUCESS object:self userInfo:params];
-}
-
-- (void)notifyTxSendFailed:(NSArray *)params
-{
-    NSLog(@"notifyTxSendFailed");
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_SEND_FAILED object:self];
-}
-
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
     CoreBridge *coreBridge = (__bridge id) pInfo->pData;
@@ -1207,16 +1195,6 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         [coreBridge performSelectorOnMainThread:@selector(notifyDataSync:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_RemotePasswordChange) {
         [coreBridge performSelectorOnMainThread:@selector(notifyRemotePasswordChange:) withObject:nil waitUntilDone:NO];
-    } else if (pInfo->eventType == ABC_AsyncEventType_SentFunds) {
-        if (pInfo->status.code == ABC_CC_Ok) {
-            NSDictionary *params = @{
-                KEY_TX_DETAILS_EXITED_WALLET_UUID:[NSString stringWithUTF8String:pInfo->szWalletUUID],
-                KEY_TX_DETAILS_EXITED_TX_ID:[NSString stringWithUTF8String:pInfo->szTxID],
-            };
-            [coreBridge performSelectorOnMainThread:@selector(notifyTxSendSuccess:) withObject:params waitUntilDone:NO];
-        } else {
-            [coreBridge performSelectorOnMainThread:@selector(notifyTxSendFailed:) withObject:nil waitUntilDone:NO];
-        }
     }
 }
 

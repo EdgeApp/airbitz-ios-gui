@@ -114,8 +114,6 @@
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(txSendSuccess:) name:NOTIFICATION_TX_SEND_SUCESS object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(txSendFailed:) name:NOTIFICATION_TX_SEND_FAILED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(myTextDidChange:)
                                                  name:UITextFieldTextDidChangeNotification
@@ -443,6 +441,7 @@
             _callbackTimestamp = [[NSDate date] timeIntervalSince1970];
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                char *szTxId = NULL;
                 tABC_Error Error;
                 tABC_CC result;
                 tABC_TxDetails Details;
@@ -477,8 +476,7 @@
                     result = ABC_InitiateTransfer([[User Singleton].name UTF8String],
                                                 [[User Singleton].password UTF8String],
                                                 &Transfer, &Details,
-                                                NULL,
-                                                NULL,
+                                                &szTxId,
                                                 &Error);
 
                     free(Transfer.szSrcWalletUUID);
@@ -493,19 +491,15 @@
                                                 [self.wallet.strUUID UTF8String],
                                                 [self.sendToAddress UTF8String],
                                                 &Details,
-                                                NULL,
-                                                NULL,
+                                                &szTxId,
                                                 &Error);
                 }
-                if (result != ABC_CC_Ok)
-                {
-                    NSNumber *errorCode = [[NSNumber alloc] initWithInt:Error.code];
-                    NSDictionary *data = @{ KEY_ERROR_CODE:errorCode };
-                    NSNotification *notification = [[NSNotification alloc] initWithName:@"Error"
-                                                                                 object:self
-                                                                               userInfo:data];
-                    [self txSendFailed:notification];
+                if (result == ABC_CC_Ok) {
+                    [self txSendSuccess:self.wallet.strUUID withTx:[NSString stringWithUTF8String:szTxId]];
+                } else {
+                    [self txSendFailed:Error];
                 }
+                free(szTxId);
             });
         }
     }
@@ -835,11 +829,8 @@
 
 #pragma mark - ABC Callbacks
 
-- (void)txSendSuccess:(NSNotification *)notification
+- (void)txSendSuccess:(NSString *)walletUUID withTx:(NSString *)txId
 {
-    NSDictionary *data = [notification userInfo];
-    NSString *walletUUID = [data objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
-    NSString *txId = [data objectForKey:KEY_TX_DETAILS_EXITED_TX_ID];
     NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
 
     int maxDelay = 3;
@@ -850,19 +841,10 @@
     });
 }
 
-- (void)txSendFailed:(NSNotification *)notification
+- (void)txSendFailed:(tABC_Error)Error
 {
     NSString *title = NSLocalizedString(@"Error during send", nil);
-    NSString *message;
-    if (notification)
-    {
-        tABC_Error Error;
-        NSDictionary *dict = [notification userInfo];
-        Error.code = [[dict objectForKey:KEY_ERROR_CODE] intValue];
-        message = [Util errorMap:&Error];
-    } else {
-        message = NSLocalizedString(@"There was an error when we were trying to send the funds. Please try again later.", nil);
-    }
+    NSString *message = [Util errorMap:&Error];
     NSArray *params = [NSArray arrayWithObjects: title, message, nil];
     [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
 }
