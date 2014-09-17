@@ -37,6 +37,8 @@
 	<true/>
 	<key>NSLocationUsageDescription</key>
 	<string>Your location is used to find businesses in your area.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location is used to find businesses in your area.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-Black.ttf</string>
