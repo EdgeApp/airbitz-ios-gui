@@ -8,7 +8,6 @@
 
 #import "Location.h"
 #import "AppDelegate.h"
-#import "CommonTypes.h"
 
 #define ACCURACY_METERS 100
 
@@ -125,10 +124,6 @@ static Location *singleton = nil;  // this will be the one and only object this 
             self.locationManager.delegate = self;
             self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 			self.locationManager.distanceFilter = 500; //meters
-            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
-            {
-                [self.locationManager requestWhenInUseAuthorization];
-            }
         }
         [self.locationManager startUpdatingLocation];
     }
