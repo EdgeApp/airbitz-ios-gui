@@ -1116,7 +1116,7 @@ static NSTimer *_dataSyncTimer;
     } else if (currencyNum == CURRENCY_NUM_MXN) {
         return @"MXN";
     } else if (currencyNum == CURRENCY_NUM_GBP) {
-        return @"GDB";
+        return @"GBP";
     } else if (currencyNum == CURRENCY_NUM_CUP) {
         return @"CUP";
     } else if (currencyNum == CURRENCY_NUM_CNY) {
