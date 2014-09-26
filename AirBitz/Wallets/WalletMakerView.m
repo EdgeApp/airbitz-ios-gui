@@ -137,6 +137,8 @@
 
 - (void)reset
 {
+    int currencyNum;
+    NSString *currencyString;
     CGRect frame = self.viewBlocker.frame;
     frame.origin.x = 0;
     frame.origin.y = 0;
@@ -146,8 +148,12 @@
     [self.switchOnlineOffline setOn:NO];
     [self.buttonSelectorView close];
     self.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
-	[self.buttonSelectorView.button setTitle:@"USD" forState:UIControlStateNormal];
-    _currencyChoice = (int) [self.arrayCurrencyCodes indexOfObject:@"USD"];
+    
+    // Default currency for new wallets should be the currency set in the account settings
+    currencyNum = [[User Singleton] defaultCurrencyNum];
+    currencyString = [CoreBridge currencyAbbrevLookup:currencyNum];
+	[self.buttonSelectorView.button setTitle:currencyString forState:UIControlStateNormal];
+    _currencyChoice = (int) [self.arrayCurrencyCodes indexOfObject:currencyString];
     [self updateDisplay];
 }
 
