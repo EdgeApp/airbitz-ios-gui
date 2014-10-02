@@ -52,6 +52,7 @@ typedef enum eAppMode
 	CGRect                      _originalTabBarFrame;
 	CGRect                      _originalViewFrame;
 	tAppMode                    _appMode;
+    NSURL                       *_uri;
 }
 
 @property (nonatomic, weak) IBOutlet TabBarView *tabBar;
@@ -466,6 +467,12 @@ typedef enum eAppMode
 	[_loginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];
+
+    if (_uri)
+    {
+        [self processBitcoinURI:_uri];
+        _uri = nil;
+    }
 }
 
 - (void)launchReceiving:(NSNotification *)notification
@@ -705,13 +712,24 @@ typedef enum eAppMode
 
 - (void)handleBitcoinUri:(NSNotification *)notification
 {
-    [_sendViewController resetViews];
-    [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
-
     NSDictionary *dictData = [notification userInfo];
     NSURL *uri = [dictData objectForKey:KEY_URL];
-    _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
-    [_sendViewController processURI];
+    [self processBitcoinURI:uri];
+}
+
+- (void)processBitcoinURI:(NSURL *)uri
+{
+    if ([User isLoggedIn]) {
+        [_sendViewController resetViews];
+        
+        _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
+        [_sendViewController processURI];
+    }
+    else {
+        _uri = uri;
+    }
+    
+    [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
 }
 
 - (void)loggedOffRedirect:(NSNotification *)notification
