@@ -7,6 +7,7 @@
 //
 
 #import "WalletCell.h"
+#import "CommonTypes.h"
 
 @interface WalletCell ()
 
@@ -49,7 +50,12 @@
                     if ([subview isKindOfClass: [UIImageView class]])
 					{
                         ((UIImageView *)subview).image = [UIImage imageNamed: @"thumb"];
-						((UIImageView*)subview).frame = CGRectMake(0.0, 0.0, 14.0, 11.0);
+//                        if (SYSTEM_VERSION_LESS_THAN(@"8.0"))
+//                        {
+//                            ((UIImageView*)subview).frame = CGRectMake(0.0, 0.0, 14.0, 11.0);
+//                        } else {
+                        [((UIImageView*)subview) setBounds:CGRectMake(0.0, 0.0, 14.0, 11.0)];
+//                        }
                     }
                 }
             }
@@ -66,8 +72,13 @@
 					if ([subview isKindOfClass: [UIImageView class]])
 					{
 						((UIImageView *)subview).image = [UIImage imageNamed: @"thumb"];
-						((UIImageView*)subview).frame = CGRectMake(0.0, 0.0, 14.0, 11.0);
-					}
+//                        if (SYSTEM_VERSION_LESS_THAN(@"8.0"))
+//                        {
+//                            ((UIImageView*)subview).frame = CGRectMake(0.0, 0.0, 14.0, 11.0);
+//                        } else {
+                        [((UIImageView*)subview) setBounds:CGRectMake(0.0, 0.0, 14.0, 11.0)];
+//                        }
+                    }
 				}
 			}
 		}
