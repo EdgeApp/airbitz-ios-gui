@@ -518,6 +518,16 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
     return !(indexPath.section == 0 && indexPath.row == 0 && [_arrayWallets count] == 1);
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    // If there is only 1 wallet left in the active wallets table, prohibit moving
+    if (sourceIndexPath.section == 0 && sourceIndexPath.row == 0 && [_arrayWallets count] == 1)
+    {
+        return sourceIndexPath;
+    }
+    return proposedDestinationIndexPath;
+}
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewCellEditingStyleNone;
@@ -651,6 +661,13 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 
     cell.amount.text = [self conversion:wallet];
 	
+    // If there is only 1 wallet left in the active wallets table, prohibit moving
+    if (indexPath.section == 0 && [_arrayWallets count] == 1)
+    {
+        [cell setEditing:NO];
+//        [cell setShowsReorderControl:NO];
+    }
+
 	if((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
 	{
         if (row == _highlightedRow && indexPath.section == _highlightedSection)
