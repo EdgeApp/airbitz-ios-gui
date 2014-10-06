@@ -140,17 +140,6 @@
 	
 }
 
-// hide table upon scroll
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
-    if (_qaTable && ![_qaTable pointInside:point withEvent:event])
-    {
-        [self closeTable];
-    }
-    
-    return [super hitTest:point withEvent:event];
-}
-
 - (void)hideTable
 {
 	[self.delegate QuestionAnswerViewTableDismissed:self];
