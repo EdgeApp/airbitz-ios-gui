@@ -79,7 +79,7 @@ typedef enum eDL_URLRequestStatus
 //call with bitmask to turn desired messages on.  Defaults to 0
 - (void)verbose:(int)messageMask;
 
-//allows user to specify additional requests to go into the header such as an API key (for ex. key = @"API-Key" value = @"***REMOVED***")
+//allows user to specify additional requests to go into the header such as an API key
 - (void)setHeaderRequestValue:(NSString *)value forKey:(NSString *)key;
 
 @end

@@ -9,6 +9,7 @@
 #import "OfflineWalletViewController.h"
 #import "CommonTypes.h"
 #import "ABC.h"
+#import "Config.h"
 
 
 /////// TEMP UNTIL WE GET FUNCTIONALITY IN THE CORE
@@ -37,8 +38,6 @@ typedef enum {
 extern QRcode *QRcode_encodeString(const char *string, int version, QRecLevel level, QRencodeMode hint, int casesensitive);
 extern void QRcode_free(QRcode *qrcode);
 
-#define PRIVATE_KEY     @"***REMOVED***"
-#define PUBLIC_ADDRESS  @"***REMOVED***"
 //////// END TEMP
 
 @interface OfflineWalletViewController ()

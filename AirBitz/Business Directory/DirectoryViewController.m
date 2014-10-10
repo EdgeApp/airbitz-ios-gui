@@ -26,6 +26,7 @@
 #import "MoreCategoriesViewController.h"
 #import "InfoView.h"
 #import "CommonTypes.h"
+#import "Config.h"
 
 //server defines (uncomment one)
 #define SERVER_MESSAGES_TO_SHOW		VERBOSE_MESSAGES_OFF
@@ -162,7 +163,8 @@ typedef enum eMapDisplayState
 
     [DL_URLServer initAll];
     //set API key
-    [[DL_URLServer controller] setHeaderRequestValue: @"Token ***REMOVED***" forKey: @"Authorization"];
+    NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
+    [[DL_URLServer controller] setHeaderRequestValue:token forKey: @"Authorization"];
 
     [Location initAllWithDelegate: self];
 

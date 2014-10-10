@@ -38,7 +38,7 @@ NSDate *logoutDate = NULL;
     application.applicationIconBadgeNumber = 0;
 
 #if (!AIRBITZ_IOS_DEBUG) || (0 == AIRBITZ_IOS_DEBUG)
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"***REMOVED***"];
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:HOCKEY_MANAGER_ID];
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 #endif

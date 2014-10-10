@@ -392,8 +392,6 @@ __strong static DL_URLServer *singleton = nil;  // this will be the one and only
 				[req addValue:[self.headerRequests objectForKey:key] forHTTPHeaderField:key];
 			}
 		}
-		//[req addValue:@"Token ***REMOVED***" forHTTPHeaderField:@"Authorization"]; //iOS
-		//[req addValue:@"b24805c59bf8ded704c659de3aa1be966f3065bc" forHTTPHeaderField:@"Authorization: Token "]; //android
 		//NSLog(@"Added API Key");
 		
         // old
