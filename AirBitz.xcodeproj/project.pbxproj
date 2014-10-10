@@ -1316,7 +1316,6 @@
 		B5628BEB199BD6320077DA1C /* 4-bars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4-bars@2x.png"; sourceTree = "<group>"; };
 		B5628BEC199BD6320077DA1C /* 5-bars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5-bars@2x.png"; sourceTree = "<group>"; };
 		B5628BF3199BE87B0077DA1C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		B5628BF5199BEC7C0077DA1C /* TransferService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferService.h; sourceTree = "<group>"; };
 		B5628BF6199C035F0077DA1C /* BLE_Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BLE_Logo@2x.png"; sourceTree = "<group>"; };
 		B5635A23193D0F8700345AEE /* WalletHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletHeaderView.h; sourceTree = "<group>"; };
 		B5635A24193D0F8700345AEE /* WalletHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletHeaderView.m; sourceTree = "<group>"; };
@@ -2192,7 +2191,6 @@
 				68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */,
 				6893E6C819783FED0092DA04 /* SyncView.h */,
 				6893E6C919783FED0092DA04 /* SyncView.m */,
-				B5628BF5199BEC7C0077DA1C /* TransferService.h */,
 				B59C161918C1436300AEA789 /* TabBarView.h */,
 				B59C161A18C1436300AEA789 /* TabBarView.m */,
 				B57C207B18C15009005D7245 /* TabBarButton.h */,
