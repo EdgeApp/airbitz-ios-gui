@@ -39,7 +39,7 @@
 #import "CoreBridge.h"
 #import "InfoView.h"
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "Config.h"
+#import "TransferService.h"
 #import "RecipientViewController.h"
 #import "Contact.h"
 #import "LocalSettings.h"

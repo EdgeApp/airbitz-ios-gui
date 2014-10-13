@@ -41,11 +41,10 @@
 #endif
 #import "CoreBridge.h"
 #import "SyncView.h"
-#import "Config.h"
+#import "TransferService.h"
 #import "BLEScanCell.h"
 #import "Contact.h"
 #import "LocalSettings.h"
-
 
 #define WALLET_BUTTON_WIDTH         210
 
