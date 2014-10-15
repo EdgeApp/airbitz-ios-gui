@@ -697,6 +697,7 @@
         self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
         
         self.helpButton.hidden = YES;
+        self.conversionLabel.layer.shadowOpacity = 0.0f;
     }
     else
     {
@@ -714,6 +715,11 @@
         helpRect.origin.y = convRect.origin.y - helpRect.size.height / 4;
         [self.helpButton setFrame:helpRect];
         self.helpButton.hidden = NO;
+        self.conversionLabel.layer.shadowColor = [[UIColor whiteColor] CGColor];
+        self.conversionLabel.layer.shadowRadius = 5.0f;
+        self.conversionLabel.layer.shadowOpacity = 1.0f;
+        self.conversionLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+        self.conversionLabel.layer.masksToBounds = NO;
 
         self.amountBTCTextField.textColor = [UIColor redColor];
         self.amountFiatTextField.textColor = [UIColor redColor];
