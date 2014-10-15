@@ -1235,14 +1235,16 @@
                                     <action selector="SMS" destination="Int-ih-AH6" eventType="touchUpInside" id="N7C-1J-dGc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="e3p-Sp-KAc">
-                                <rect key="frame" x="233" y="126" width="65" height="67"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="tailTruncation" id="e3p-Sp-KAc">
+                                <rect key="frame" x="233" y="124" width="68" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="57" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" backgroundImage="btn_expand.png">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="6"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="22"/>
+                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                <state key="normal" title="Next" backgroundImage="btn_expand.png">
+                                    <color key="titleColor" cyan="0.59999999999999998" magenta="0.37" yellow="0.34000000000000002" black="0.11" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
+                                    <color key="titleShadowColor" red="0.92156869173049927" green="0.93333339691162109" blue="0.93725496530532837" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="QRCodeButton" destination="Int-ih-AH6" eventType="touchUpInside" id="cMO-PG-ymx"/>
@@ -1278,6 +1280,7 @@
                         <outlet property="buttonSelector" destination="TyS-sr-hRl" id="JcR-Jg-aYq"/>
                         <outlet property="exchangeRateLabel" destination="jwC-1c-veH" id="3U1-BI-cHp"/>
                         <outlet property="keypadView" destination="FS5-S0-Rqp" id="Xh1-wc-LVQ"/>
+                        <outlet property="nextButton" destination="e3p-Sp-KAc" id="76l-BL-fyB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2bB-r5-X2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4783,7 +4786,7 @@
         <image name="btn_deleteCategory.png" width="38" height="31"/>
         <image name="btn_done.png" width="143" height="41"/>
         <image name="btn_email.png" width="61" height="66"/>
-        <image name="btn_expand.png" width="44" height="47"/>
+        <image name="btn_expand.png" width="100" height="106"/>
         <image name="btn_export.png" width="37" height="37"/>
         <image name="btn_export_dates.png" width="94" height="36"/>
         <image name="btn_info.png" width="25" height="25"/>
