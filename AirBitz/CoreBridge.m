@@ -527,6 +527,15 @@ static NSTimer *_dataSyncTimer;
     return true;
 }
 
++ (NSNumberFormatter *)generateNumberFormatter
+{
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    [f setMinimumFractionDigits:3];
+    [f setMaximumFractionDigits:3];
+    [f setLocale:[NSLocale localeWithLocaleIdentifier:@"USD"]];
+    return f;
+}
+
 + (NSDate *)dateFromTimestamp:(int64_t) intDate
 {
     return [NSDate dateWithTimeIntervalSince1970: intDate];
@@ -539,8 +548,7 @@ static NSTimer *_dataSyncTimer;
 
 + (NSString *)formatCurrency:(double) currency withCurrencyNum:(int) currencyNum withSymbol:(bool) symbol
 {
-    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    [f setLocale:[NSLocale localeWithLocaleIdentifier:@"USD"]];
+    NSNumberFormatter *f = [CoreBridge generateNumberFormatter];
     [f setNumberStyle: NSNumberFormatterCurrencyStyle];
     if (symbol) {
         NSString *symbol = [CoreBridge currencySymbolLookup:currencyNum];
@@ -589,9 +597,7 @@ static NSTimer *_dataSyncTimer;
 
 + (int64_t) cleanNumString:(NSString *) value
 {
-    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    [f setLocale:[NSLocale localeWithLocaleIdentifier:@"USD"]];
-
+    NSNumberFormatter *f = [CoreBridge generateNumberFormatter];
     NSNumber *num = [f numberFromString:value];
     return [num longLongValue];
 }
@@ -658,8 +664,7 @@ static NSTimer *_dataSyncTimer;
         const char *decimal = strstr(pFormatted, ".");
         const char *start = (decimal == NULL) ? p + strlen(p) : decimal;
         int offset = (start - pFormatted) % 3;
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        [f setLocale:[NSLocale localeWithLocaleIdentifier:@"USD"]];
+        NSNumberFormatter *f = [CoreBridge generateNumberFormatter];
 
         for (int i = 0; i < strlen(pFormatted) && p - start <= decimalPlaces; ++i, ++p)
         {
