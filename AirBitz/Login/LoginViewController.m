@@ -550,7 +550,7 @@ typedef enum eLoginMode
         [User login:self.userNameTextField.text
            password:self.passwordTextField.text];
 
-        [self.delegate loginViewControllerDidLogin];
+        [self.delegate loginViewControllerDidLogin:NO];
     }
     else
     {
@@ -584,7 +584,7 @@ typedef enum eLoginMode
     [controller.view removeFromSuperview];
     _signUpController = nil;
 
-    [self finishIfLoggedIn];
+    [self finishIfLoggedIn:YES];
 }
 
 #pragma mark - ABC Callbacks
@@ -610,7 +610,7 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
     [controller.view removeFromSuperview];
     _passwordRecoveryController = nil;
 
-    [self finishIfLoggedIn];
+    [self finishIfLoggedIn:NO];
 }
 
 #pragma mark - Error Message
@@ -627,13 +627,13 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
     _bTouchesEnabled = _spinnerView.hidden;
 }
 
-- (void)finishIfLoggedIn
+- (void)finishIfLoggedIn:(BOOL)bNewAccount
 {
     if([User isLoggedIn])
     {
         _bSuccess = YES;
 
-        [self.delegate loginViewControllerDidLogin];
+        [self.delegate loginViewControllerDidLogin:bNewAccount];
     }
 }
 
