@@ -681,12 +681,19 @@
         self.amountBTCLabel.text = coinFeeString; 
         self.amountFiatLabel.text = fiatFeeString;
         self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
+        self.conversionLabel.layer.shadowOpacity = 0.0f;
     }
     else
     {
         NSString *message = NSLocalizedString(@"Insufficient funds", nil);
         self.conversionLabel.text = message;
         self.conversionLabel.textColor = [UIColor redColor];
+        self.conversionLabel.layer.shadowColor = [[UIColor whiteColor] CGColor];
+        self.conversionLabel.layer.shadowRadius = 5.0f;
+        self.conversionLabel.layer.shadowOpacity = 1.0f;
+        self.conversionLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+        self.conversionLabel.layer.masksToBounds = NO;
+
         self.amountBTCTextField.textColor = [UIColor redColor];
         self.amountFiatTextField.textColor = [UIColor redColor];
     }
