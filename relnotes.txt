@@ -2,8 +2,8 @@
 ### IMPORTANT NOTICE REGARDING VERSION 1.2.x!!
 * **IMPORTANT! As of version 1.2.0, all old accounts made on v1.1.x are no longer accessible. Use versions 1.1.x or lower to access accounts made with those versions. Accounts made with 1.2.0 or later are hosted on new production servers for our final release and are completely separate. 1.1.x accounts will be deprecated in 1 month. Please move your funds.**
 
-### Airbitz iOS Change Log v1.2.4
-* Add new beta tester devices to provisioning profile
+### Airbitz iOS Change Log v1.2.5
+* XXX
 
 ### Outstanding Issues
 * Occasional but rare crash on logout
