@@ -342,7 +342,7 @@
     else if (mode == SignUpMode_ChangePIN)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
-        self.labelTitle.text = NSLocalizedString(@"Change Withdrawal PIN", @"screen title");
+        self.labelTitle.text = NSLocalizedString(@"Change PIN", @"screen title");
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.pinTextField.placeholder = NSLocalizedString(@"New Pin", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"Password", @"");
