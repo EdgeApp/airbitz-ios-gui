@@ -58,6 +58,7 @@
 @property (nonatomic, weak) IBOutlet UITextField        *USD_TextField;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector;
 @property (nonatomic, weak) IBOutlet UILabel            *exchangeRateLabel;
+@property (nonatomic, weak) IBOutlet UIButton           *nextButton;
 
 @property (nonatomic, copy)   NSString *strFullName;
 @property (nonatomic, copy)   NSString *strPhoneNumber;
@@ -89,6 +90,8 @@
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
+    
+    self.confirmRequestButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
 }
 
 -(void)awakeFromNib
