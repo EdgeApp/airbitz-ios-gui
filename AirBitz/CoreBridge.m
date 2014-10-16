@@ -21,6 +21,9 @@
 #define CURRENCY_NUM_EUR                978
 #define FILE_SYNC_FREQUENCY_SECONDS     10
 
+const int64_t RECOVERY_REMINDER_AMOUNT = 2000000;
+const int RECOVERY_REMINDER_COUNT = 2;
+
 static BOOL bInitialized = NO;
 static BOOL bDataFetched = NO;
 static NSOperationQueue *exchangeQueue;
@@ -781,6 +784,40 @@ static NSTimer *_dataSyncTimer;
     }
 
     return bValid;
+}
+
++ (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet
+{
+    tABC_CC cc = ABC_CC_Ok;
+    tABC_Error Error;
+    tABC_AccountSettings *pSettings = NULL;
+    BOOL bResult = NO;
+
+    cc = ABC_LoadAccountSettings([[User Singleton].name UTF8String],
+                                 [[User Singleton].password UTF8String],
+                                 &pSettings,
+                                 &Error);
+    if (cc == ABC_CC_Ok) {
+        if (wallet.balance > RECOVERY_REMINDER_AMOUNT && pSettings->recoveryReminderCount < RECOVERY_REMINDER_COUNT) {
+            bool bQuestions = NO;
+            NSMutableString *errorMsg = [[NSMutableString alloc] init];
+            [CoreBridge getRecoveryQuestionsForUserName:[User Singleton].name
+                                              isSuccess:&bQuestions
+                                               errorMsg:errorMsg];
+            if (!bQuestions) {
+                pSettings->recoveryReminderCount++;
+                ABC_UpdateAccountSettings([[User Singleton].name UTF8String],
+                                          [[User Singleton].password UTF8String],
+                                          pSettings,
+                                          &Error);
+                bResult = YES;
+            }
+        }
+    } else {
+        [Util printABC_Error:&Error];
+    }
+    ABC_FreeAccountSettings(pSettings);
+    return bResult;
 }
 
 + (void)login
