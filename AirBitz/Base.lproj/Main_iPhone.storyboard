@@ -4005,6 +4005,17 @@
                                 <rect key="frame" x="57" y="28" width="205" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ypw-4p-DZr">
+                                <rect key="frame" x="3" y="24" width="92" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" image="back_arrow.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="Back" destination="zLx-xG-j1m" eventType="touchUpInside" id="Dko-mN-FWJ"/>
+                                </connections>
+                            </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" id="eTI-9q-uu0">
                                 <rect key="frame" x="14" y="156" width="293" height="389"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
@@ -4016,20 +4027,16 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to View Business Directory" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="8XB-1A-1hO" customClass="LatoLabel">
-                                        <rect key="frame" x="53" y="65" width="186" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to View Business Directory" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="8XB-1A-1hO" customClass="LatoLabel">
+                                        <rect key="frame" x="10" y="60" width="233" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe-arrow.png" id="GJL-fK-J6d">
-                                        <rect key="frame" x="21" y="71" width="21" height="12"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe-arrow.png" id="jLL-vF-Vbd">
-                                        <rect key="frame" x="245" y="70" width="21" height="12"/>
+                                        <rect key="frame" x="248" y="70" width="21" height="12"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" id="bUp-i4-uHt">
@@ -4142,13 +4149,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="backButton" destination="Ypw-4p-DZr" id="Gdl-4p-iBe"/>
                         <outlet property="contentView" destination="eTI-9q-uu0" id="9Og-HH-DYd"/>
                         <outlet property="errorMessageText" destination="5wy-Mi-whP" id="oh9-gY-loy"/>
                         <outlet property="errorMessageView" destination="whJ-vw-6PG" id="T37-ad-SID"/>
                         <outlet property="logoImage" destination="LqE-iy-sKS" id="cmm-Yx-nMh"/>
                         <outlet property="passwordTextField" destination="V5e-1n-K9Z" id="iwd-kF-klp"/>
                         <outlet property="spinnerView" destination="YZe-mr-te9" id="IDf-eC-kyH"/>
-                        <outlet property="swipeLeftArrow" destination="GJL-fK-J6d" id="ZRe-Fu-p7V"/>
                         <outlet property="swipeRightArrow" destination="jLL-vF-Vbd" id="1py-kB-hez"/>
                         <outlet property="swipeText" destination="8XB-1A-1hO" id="yBH-JD-yZ2"/>
                         <outlet property="titleText" destination="nae-d6-xoW" id="2iX-DH-tAT"/>
