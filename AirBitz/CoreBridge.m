@@ -798,7 +798,7 @@ static NSTimer *_dataSyncTimer;
                                  &pSettings,
                                  &Error);
     if (cc == ABC_CC_Ok) {
-        if (wallet.balance > RECOVERY_REMINDER_AMOUNT && pSettings->recoveryReminderCount < RECOVERY_REMINDER_COUNT) {
+        if (wallet.balance >= RECOVERY_REMINDER_AMOUNT && pSettings->recoveryReminderCount < RECOVERY_REMINDER_COUNT) {
             bool bQuestions = NO;
             NSMutableString *errorMsg = [[NSMutableString alloc] init];
             [CoreBridge getRecoveryQuestionsForUserName:[User Singleton].name
