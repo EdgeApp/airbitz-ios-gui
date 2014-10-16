@@ -14,6 +14,8 @@
 
 @property (assign) id<SettingsViewControllerDelegate> delegate;
 
+- (void)bringUpRecoveryQuestionsView;
+
 @end
 
 

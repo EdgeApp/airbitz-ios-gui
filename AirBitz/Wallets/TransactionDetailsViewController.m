@@ -59,7 +59,9 @@ typedef enum eRequestType
 } tRequestType;
 
 
-@interface TransactionDetailsViewController () <UITextFieldDelegate, UITextViewDelegate, InfoViewDelegate, CalculatorViewDelegate, DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate, UIGestureRecognizerDelegate>
+@interface TransactionDetailsViewController () <UITextFieldDelegate, UITextViewDelegate, InfoViewDelegate, CalculatorViewDelegate,
+                                                DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate,
+                                                UIGestureRecognizerDelegate, UIAlertViewDelegate>
 {
     UITextField     *_activeTextField;
     UITextView      *_activeTextView;
@@ -70,6 +72,7 @@ typedef enum eRequestType
     UITableView     *_autoCompleteTable; //table of autoComplete search results (including address book entries)
     BOOL            _bDoneSentToDelegate;
     unsigned int    _bizId;
+    UIAlertView     *_recoveryAlert;
 }
 
 @property (nonatomic, weak) IBOutlet UIView                 *headerView;
@@ -145,16 +148,6 @@ typedef enum eRequestType
     self.arrayThumbnailsRetrieving = [[NSMutableArray alloc] init];
     self.arrayAutoCompleteQueries = [[NSMutableArray alloc] init];
 
-    if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                            initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
-                            message:NSLocalizedString(@"Consider entering Recovery Questions in the Settings tab in case you forget your password!", nil)
-                            delegate:nil
-                            cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                            otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
-        [alert show];
-    }
-
     // if there is a photo, then add it as the first photo in our images
     if (self.photo)
     {
@@ -224,7 +217,7 @@ typedef enum eRequestType
     self.pickerTextCategory.delegate = self;
 
     _bizId = self.transaction.bizId;
-	// NSLog(@"Biz ID: %i", _bizId);
+
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
@@ -396,10 +389,19 @@ typedef enum eRequestType
     }
     self.transaction.amountFiat = amountFiat;
     self.transaction.bizId = _bizId;
-	//NSLog(@"Biz ID: %i", _bizId);
     [CoreBridge storeTransaction: self.transaction];
 
-    [self exit];
+    if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
+        _recoveryAlert = [[UIAlertView alloc]
+                            initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
+                            message:NSLocalizedString(@"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.", nil)
+                            delegate:self
+                            cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                            otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        [_recoveryAlert show];
+    } else {
+        [self exit:YES];
+    }
 }
 
 - (IBAction)AdvancedDetails
@@ -578,7 +580,6 @@ typedef enum eRequestType
     {
         _bizId = [numBizId intValue];
     }
-	//NSLog(@"Biz ID: %i", _bizId);
 }
 
 - (void)generateListOfNearBusinesses
@@ -642,10 +643,10 @@ typedef enum eRequestType
                     if (ABPersonHasImageData(person))
                     {
                         NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
-						if(data)
-						{
-							[self.dictImages setObject:[UIImage imageWithData:data] forKey:strFullName];
-						}
+                        if(data)
+                        {
+                            [self.dictImages setObject:[UIImage imageWithData:data] forKey:strFullName];
+                        }
                     }
                 }
             }
@@ -1059,7 +1060,7 @@ typedef enum eRequestType
 - (void)getBizDetailsForBizId:(unsigned int)bizId
 {
     // create the search query
-	NSString *strURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, bizId];
+    NSString *strURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, bizId];
 
     // run the search - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
     [self performSelector:@selector(issueRequests:) withObject:@{strURL : [NSNumber numberWithInt:RequestType_BusinessDetails]} afterDelay:0.0];
@@ -1076,7 +1077,6 @@ typedef enum eRequestType
 
             // run the search
             NSString *strURL = [strKey stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\nRequest: %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", strURL);
             [[DL_URLServer controller] issueRequestURL:strURL
                                             withParams:nil
                                             withObject:value
@@ -1089,9 +1089,9 @@ typedef enum eRequestType
 
 - (void)installLeftToRightSwipeDetection
 {
-	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
-	gesture.direction = UISwipeGestureRecognizerDirectionRight;
-	[self.view addGestureRecognizer:gesture];
+    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+    gesture.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:gesture];
 }
 
 // used by the guesture recognizer to ignore exit
@@ -1100,19 +1100,21 @@ typedef enum eRequestType
     return NO;
 }
 
-- (void)exit
+- (void)exit:(BOOL)bNotifyExit
 {
     // if we haven't closed already
     if (!_bDoneSentToDelegate)
     {
         _bDoneSentToDelegate = YES;
         [self.delegate TransactionDetailsViewControllerDone:self];
-        NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_TX            : self.transaction,
-                                            KEY_TX_DETAILS_EXITED_WALLET_UUID   : self.transaction.strWalletUUID,
-                                            KEY_TX_DETAILS_EXITED_WALLET_NAME   : self.transaction.strWalletName,
-                                            KEY_TX_DETAILS_EXITED_TX_ID         : self.transaction.strID
-                                            };
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:self userInfo:dictNotification];
+        if (bNotifyExit) {
+            NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_TX            : self.transaction,
+                                                KEY_TX_DETAILS_EXITED_WALLET_UUID   : self.transaction.strWalletUUID,
+                                                KEY_TX_DETAILS_EXITED_WALLET_NAME   : self.transaction.strWalletName,
+                                                KEY_TX_DETAILS_EXITED_TX_ID         : self.transaction.strID
+                                                };
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:self userInfo:dictNotification];
+        }
     }
 }
 
@@ -1675,6 +1677,23 @@ typedef enum eRequestType
             [self Done];
         }
     }
+}
+
+#pragma mark - ABC Alert delegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_RECOVERY_QUESTIONS object:self];
+        [self exit:NO];
+    } else {
+        [self exit:YES];
+    }
+}
+
+- (void)alertViewCancel:(UIAlertView *)alertView
+{
+    [self exit:YES];
 }
 
 @end
