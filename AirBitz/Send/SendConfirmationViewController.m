@@ -557,18 +557,20 @@
 
 - (void)failedToSend:(NSArray *)params
 {
-    if (!_alert) {
-        NSString *title = params[0];
-        NSString *message = params[1];
-        _alert = [[UIAlertView alloc]
-                                initWithTitle:title
-                                message:message
-                                delegate:nil
-                                cancelButtonTitle:@"OK"
-                                otherButtonTitles:nil];
-        [_alert show];
-        [self hideSendStatus];
+    if (_alert != nil) {
+        [_alert dismissWithClickedButtonIndex:1 animated:NO];
+        _alert = nil;
     }
+    NSString *title = params[0];
+    NSString *message = params[1];
+    _alert = [[UIAlertView alloc]
+                            initWithTitle:title
+                            message:message
+                            delegate:nil
+                            cancelButtonTitle:@"OK"
+                            otherButtonTitles:nil];
+    [_alert show];
+    [self hideSendStatus];
 }
 
 - (void)showTransactionDetails:(NSArray *)params
@@ -786,7 +788,6 @@
         
         ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szPIN, &error);
         [Util printABC_Error:&error];
-        NSLog(@"current PIN: %s", szPIN);
         if (szPIN) {
             NSString *storedPIN = [NSString stringWithUTF8String:szPIN];
             if (![self.withdrawlPIN.text isEqualToString:storedPIN]) {
