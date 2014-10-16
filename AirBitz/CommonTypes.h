@@ -61,6 +61,7 @@ typedef enum eTabBarButton
 #define NOTIFICATION_TRANSACTION_DETAILS_EXITED         @"Notification_Transaction_Details_Exited"     // sent when the user has finished using a transaction details screen
 #define NOTIFICATION_LAUNCH_SEND_FOR_WALLET             @"Notification_Launch_Send_For_Wallet"
 #define NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET          @"Notification_Launch_Request_For_Wallet"
+#define NOTIFICATION_LAUNCH_RECOVERY_QUESTIONS          @"Notification_Launch_Recovery_Questions"
 #define NOTIFICATION_TAB_BAR_BUTTON_RESELECT            @"Notification_Tab_Bar_Button_Reselected"
 #define NOTIFICATION_TX_RECEIVED                        @"Transaction_Received"
 

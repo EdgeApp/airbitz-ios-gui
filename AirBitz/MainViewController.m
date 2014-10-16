@@ -110,6 +110,7 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit:) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchSend:) name:NOTIFICATION_LAUNCH_SEND_FOR_WALLET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRequest:) name:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRecoveryQuestions:) name:NOTIFICATION_LAUNCH_RECOVERY_QUESTIONS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBitcoinUri:) name:NOTIFICATION_HANDLE_BITCOIN_URI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
@@ -712,6 +713,14 @@ typedef enum eAppMode
         [_requestViewController resetViews];
         [self.tabBar selectButtonAtIndex:APP_MODE_REQUEST];
     }
+}
+
+- (void)launchRecoveryQuestions:(NSNotification *)notification
+{
+    if (APP_MODE_SETTINGS != _appMode) {
+        [self.tabBar selectButtonAtIndex:APP_MODE_SETTINGS];
+    }
+    [_settingsViewController bringUpRecoveryQuestionsView];
 }
 
 - (void)handleBitcoinUri:(NSNotification *)notification
