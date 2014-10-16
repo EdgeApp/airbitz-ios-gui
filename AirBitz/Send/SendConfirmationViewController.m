@@ -779,6 +779,7 @@
                                       otherButtonTitles:nil];
                 [alert show];
                 [_withdrawlPIN becomeFirstResponder];
+                [_withdrawlPIN selectAll:nil];
             } else if (self.amountToSendSatoshi == 0) {
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle:NSLocalizedString(@"Enter an amount", nil)
