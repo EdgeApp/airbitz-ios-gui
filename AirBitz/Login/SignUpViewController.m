@@ -9,7 +9,6 @@
 #import "SignUpViewController.h"
 #import "ABC.h"
 #import "PasswordVerifyView.h"
-#import "PasswordRecoveryViewController.h"
 #import "MinCharTextField.h"
 #import "User.h"
 #import "Config.h"
@@ -23,7 +22,7 @@
 #define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
 
-@interface SignUpViewController () <UITextFieldDelegate, PasswordVerifyViewDelegate, PasswordRecoveryViewControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
+@interface SignUpViewController () <UITextFieldDelegate, PasswordVerifyViewDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
 {
 	UITextField                     *_activeTextField;
 	PasswordVerifyView              *_passwordVerifyView;
@@ -46,7 +45,6 @@
 @property (weak, nonatomic) IBOutlet LatoLabel                  *labelPasswordInfo;
 @property (weak, nonatomic) IBOutlet UIImageView                *imagePassword;
 
-@property (nonatomic, strong)   PasswordRecoveryViewController  *passwordRecoveryController;
 @property (nonatomic, copy)     NSString                        *strReason;
 @property (nonatomic, assign)   BOOL                            bSuccess;
 @property (nonatomic, strong)   UIButton                        *buttonBlocker;
@@ -515,32 +513,6 @@
     return valid;
 }
 
--(void)showPasswordRecoveryController
-{
-	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	self.passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];
-	
-	self.passwordRecoveryController.delegate = self;
-	self.passwordRecoveryController.mode = PassRecovMode_SignUp;
-	
-	CGRect frame = self.view.bounds;
-	frame.origin.x = frame.size.width;
-	self.passwordRecoveryController.view.frame = frame;
-	[self.view addSubview:self.passwordRecoveryController.view];
-
-
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 self.passwordRecoveryController.view.frame = self.view.bounds;
-	 }
-					 completion:^(BOOL finished)
-	 {
-	 }];
-}
-
 -(void)createFirstWallet
 {
     [self blockUser:YES];
@@ -602,12 +574,6 @@
 	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
 	gesture.direction = UISwipeGestureRecognizerDirectionRight;
 	[self.view addGestureRecognizer:gesture];
-}
-
-// used by the guesture recognizer to ignore exit
-- (BOOL)haveSubViewsShowing
-{
-    return (self.passwordRecoveryController != nil);
 }
 
 - (void)exit
@@ -758,15 +724,6 @@
 {
 	[_passwordVerifyView removeFromSuperview];
 	_passwordVerifyView = nil;
-}
-
-#pragma mark - PasswordRecoveryViewController Delegates
-
-- (void)passwordRecoveryViewControllerDidFinish:(PasswordRecoveryViewController *)controller
-{
-	[controller.view removeFromSuperview];
-	self.passwordRecoveryController = nil;
-    [self exit];
 }
 
 #pragma mark - ABC Callbacks
@@ -962,7 +919,7 @@
     [self blockUser:NO];
     if (_bSuccess)
     {
-        [self showPasswordRecoveryController];
+        [self exit];
     }
     else
     {
@@ -1059,10 +1016,7 @@ void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
 
 - (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
 {
-    if (![self haveSubViewsShowing])
-    {
-        [self Back:nil];
-    }
+    [self Back:nil];
 }
 
 #pragma mark - Custom Notification Handlers
@@ -1070,10 +1024,7 @@ void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
 // called when a tab bar button that is already selected, is reselected again
 - (void)tabBarButtonReselect:(NSNotification *)notification
 {
-    if (![self haveSubViewsShowing])
-    {
-        [self Back:nil];
-    }
+    [self Back:nil];
 }
 
 @end

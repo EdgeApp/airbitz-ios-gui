@@ -145,6 +145,16 @@ typedef enum eRequestType
     self.arrayThumbnailsRetrieving = [[NSMutableArray alloc] init];
     self.arrayAutoCompleteQueries = [[NSMutableArray alloc] init];
 
+    if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                            initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
+                            message:NSLocalizedString(@"Consider entering Recovery Questions in the Settings tab in case you forget your password!", nil)
+                            delegate:nil
+                            cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                            otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        [alert show];
+    }
+
     // if there is a photo, then add it as the first photo in our images
     if (self.photo)
     {
@@ -1040,10 +1050,7 @@ typedef enum eRequestType
     {
         [self.arrayAutoCompleteQueries addObject:strName];
 
-        // create the search query
         NSString *strURL = [NSString stringWithFormat: @"%@/autocomplete-business/?term=%@", SERVER_API, strName];
-        //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\nIssuing autocomplete query: %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", strURL);
-
         // run the search - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
         [self performSelector:@selector(issueRequests:) withObject:@{strURL : [NSNumber numberWithInt:RequestType_BusinessesAuto]} afterDelay:0.0];
     }
@@ -1053,7 +1060,6 @@ typedef enum eRequestType
 {
     // create the search query
 	NSString *strURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, bizId];
-    //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\nIssuing biz details query: %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", strURL);
 
     // run the search - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
     [self performSelector:@selector(issueRequests:) withObject:@{strURL : [NSNumber numberWithInt:RequestType_BusinessDetails]} afterDelay:0.0];
