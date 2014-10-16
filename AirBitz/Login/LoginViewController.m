@@ -35,7 +35,6 @@ typedef enum eLoginMode
     tLoginMode                      _mode;
     CGRect                          _originalContentFrame;
     CGRect                          _originalLogoFrame;
-    CGRect                          _originalLeftSwipeArrowFrame;
     CGRect                          _originalRightSwipeArrowFrame;
     CGPoint                         _firstTouchPoint;
     BOOL                            _bSuccess;
@@ -48,7 +47,7 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
 @property (nonatomic, weak) IBOutlet StylizedTextField  *userNameTextField;
 @property (nonatomic, weak) IBOutlet StylizedTextField  *passwordTextField;
-@property (nonatomic, weak) IBOutlet UIImageView        *swipeLeftArrow;
+@property (nonatomic, weak) IBOutlet UIButton           *backButton;
 @property (nonatomic, weak) IBOutlet UIImageView        *swipeRightArrow;
 @property (nonatomic, weak) IBOutlet UILabel            *swipeText;
 @property (nonatomic, weak) IBOutlet UILabel            *titleText;
@@ -79,7 +78,6 @@ typedef enum eLoginMode
     _mode = MODE_ENTERING_NEITHER;
     _originalContentFrame = self.contentView.frame;
     _originalLogoFrame = self.logoImage.frame;
-    _originalLeftSwipeArrowFrame = _swipeLeftArrow.frame;
     _originalRightSwipeArrowFrame = _swipeRightArrow.frame;
     
     self.userNameTextField.delegate = self;
@@ -103,7 +101,6 @@ typedef enum eLoginMode
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
-    [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:-1 arrow:_swipeLeftArrow origFrame:_originalLeftSwipeArrowFrame];
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1 arrow:_swipeRightArrow origFrame:_originalRightSwipeArrowFrame];
 
     _bTouchesEnabled = YES;
@@ -129,6 +126,31 @@ typedef enum eLoginMode
 }
 
 #pragma mark - Action Methods
+
+- (IBAction)Back
+{
+    //spring out
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         CGRect frame = self.view.frame;
+         if(frame.origin.x < 0)
+         {
+             frame.origin.x = -frame.size.width;
+         }
+         else
+         {
+             frame.origin.x = frame.size.width;
+         }
+         self.view.frame = frame;
+     }
+                     completion:^(BOOL finished)
+     {
+         [self.delegate loginViewControllerDidAbort];
+     }];
+}
 
 - (IBAction)SignIn
 {
@@ -328,7 +350,7 @@ typedef enum eLoginMode
      {
          self.contentView.frame = _originalContentFrame;
          
-         _swipeLeftArrow.alpha = 1.0;
+         _backButton.alpha = 1.0;
          _swipeRightArrow.alpha = 1.0;
          _swipeText.alpha = 1.0;
          _titleText.alpha = 1.0;
@@ -372,8 +394,7 @@ typedef enum eLoginMode
          {
              CGRect frame = self.contentView.frame;
              
-             
-             _swipeLeftArrow.alpha = 0.0;
+             _backButton.alpha = 0.0;
              _swipeRightArrow.alpha = 0.0;
              _swipeText.alpha = 0.0;
              _titleText.alpha = 0.0;
