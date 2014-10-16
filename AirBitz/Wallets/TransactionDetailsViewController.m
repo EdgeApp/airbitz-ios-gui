@@ -1301,6 +1301,11 @@ typedef enum eRequestType
                             {
                                 [self.dictBizIds setObject:[NSNumber numberWithInt:[numBizId intValue]] forKey:strName];
                             }
+
+                            NSString *strThumbnail = [dict objectForKey:@"square_image"];
+                            if (strThumbnail && strThumbnail != (id)[NSNull null]) {
+                                [self.dictThumbnailURLs setObject:strThumbnail forKey:strName];
+                            }
                         }
                     }
                 }
