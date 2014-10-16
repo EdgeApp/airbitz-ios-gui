@@ -1278,12 +1278,10 @@ typedef enum eRequestType
             NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
 
             NSArray *searchResultsArray = [dictFromServer objectForKey:@"results"];
-            //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\nGot search results: %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", searchResultsArray);
             if (searchResultsArray && searchResultsArray != (id)[NSNull null])
             {
                 if (requestType == RequestType_BusinessesAuto)
                 {
-                    //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\nGot search results: %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", searchResultsArray);
                     for (NSDictionary *dict in searchResultsArray)
                     {
                         NSString *strName = [dict objectForKey:@"text"];
