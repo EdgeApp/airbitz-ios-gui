@@ -340,6 +340,16 @@ typedef enum eAlertType
     } else {
         password = [User Singleton].password;
     }
+    if (![password isEqualToString:[User Singleton].password]) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                             initWithTitle:NSLocalizedString(@"Password mismatch", nil)
+                             message:NSLocalizedString(@"Please enter your correct password.", nil)
+                             delegate:nil
+                             cancelButtonTitle:@"OK"
+                             otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     [self blockUser:YES];
     [self showSpinner:YES];
 	tABC_Error Error;
