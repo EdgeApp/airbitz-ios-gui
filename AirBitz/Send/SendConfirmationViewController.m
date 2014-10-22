@@ -47,6 +47,7 @@
 @property (nonatomic, weak) IBOutlet UILabel                *amountFiatLabel;
 @property (nonatomic, weak) IBOutlet UITextField            *amountFiatTextField;
 @property (nonatomic, weak) IBOutlet UIButton               *maxAmountButton;
+@property (nonatomic, weak) IBOutlet UIButton               *helpButton;
 @property (nonatomic, weak) IBOutlet UILabel                *conversionLabel;
 @property (weak, nonatomic) IBOutlet UILabel                *labelPINTitle;
 @property (weak, nonatomic) IBOutlet UILabel                *txFeesLabel;
@@ -233,6 +234,14 @@
     [self.view endEditing:YES];
     [self dismissKeyboard];
     [self setInfoView:[InfoView CreateWithHTML:@"infoSendConfirmation" forView:self.view]];
+    [self.infoView setDelegate:self];
+}
+
+- (IBAction)fundsInfo
+{
+    [self.view endEditing:YES];
+    [self dismissKeyboard];
+    [self setInfoView:[InfoView CreateWithHTML:@"infoInsufficientFunds" forView:self.view]];
     [self.infoView setDelegate:self];
 }
 
@@ -614,6 +623,9 @@
         self.conversionLabel.textColor = [UIColor whiteColor];
         self.amountBTCTextField.textColor = [UIColor whiteColor];
         self.amountFiatTextField.textColor = [UIColor whiteColor];
+
+        // hide the help button next to insufficient funds if we don't call calcFees
+        self.helpButton.hidden = YES;
         return;
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
@@ -681,12 +693,26 @@
         self.amountBTCLabel.text = coinFeeString; 
         self.amountFiatLabel.text = fiatFeeString;
         self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
+        
+        self.helpButton.hidden = YES;
     }
     else
     {
         NSString *message = NSLocalizedString(@"Insufficient funds", nil);
         self.conversionLabel.text = message;
         self.conversionLabel.textColor = [UIColor redColor];
+
+        NSDictionary *labelAttr = @{NSFontAttributeName:self.conversionLabel.font};
+        CGSize labelRect = [self.conversionLabel.text sizeWithAttributes:labelAttr];
+
+        CGRect convRect = self.conversionLabel.frame;
+        CGRect helpRect;
+        helpRect.size = self.helpButton.frame.size;
+        helpRect.origin.x = convRect.origin.x + labelRect.width;
+        helpRect.origin.y = convRect.origin.y - helpRect.size.height / 4;
+        [self.helpButton setFrame:helpRect];
+        self.helpButton.hidden = NO;
+
         self.amountBTCTextField.textColor = [UIColor redColor];
         self.amountFiatTextField.textColor = [UIColor redColor];
     }

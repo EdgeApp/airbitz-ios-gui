@@ -612,6 +612,8 @@
 		7DBD87A819B97F6F0069D62A /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DBD87A219B97F6F0069D62A /* HockeySDKResources.bundle */; };
 		7DE6D9D819EDFF6700C6FB8E /* btn_expand~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE6D9D719EDFF6700C6FB8E /* btn_expand~iphone.png */; };
 		7DE6D9D919EDFF6700C6FB8E /* btn_expand~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE6D9D719EDFF6700C6FB8E /* btn_expand~iphone.png */; };
+		7DEE7DF519F8645200FD2FB6 /* infoInsufficientFunds.html in Resources */ = {isa = PBXBuildFile; fileRef = 7DEE7DF419F8645200FD2FB6 /* infoInsufficientFunds.html */; };
+		7DEE7DF619F8645200FD2FB6 /* infoInsufficientFunds.html in Resources */ = {isa = PBXBuildFile; fileRef = 7DEE7DF419F8645200FD2FB6 /* infoInsufficientFunds.html */; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
 		B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */; };
@@ -1204,6 +1206,7 @@
 		7DBD87A119B97F6F0069D62A /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
 		7DBD87A219B97F6F0069D62A /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		7DE6D9D719EDFF6700C6FB8E /* btn_expand~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_expand~iphone.png"; sourceTree = "<group>"; };
+		7DEE7DF419F8645200FD2FB6 /* infoInsufficientFunds.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoInsufficientFunds.html; sourceTree = "<group>"; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
 		B5050549193F7D2B007D4960 /* GTLDrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLDrive.h; sourceTree = "<group>"; };
@@ -2745,6 +2748,7 @@
 				B5F2E9A918D4AF6C008ACF88 /* info.html */,
 				4C72479C1933D3890091C286 /* infoExportWallet.html */,
 				4C72479D1933D3890091C286 /* infoExportWalletOptions.html */,
+				7DEE7DF419F8645200FD2FB6 /* infoInsufficientFunds.html */,
 				4C5D8C76192E86620015BB3C /* infoImportWallet.html */,
 				4C98CAED199D6914000009B5 /* infoRecipient.html */,
 				4C5D8C6C192E7D4A0015BB3C /* infoRequest.html */,
@@ -3095,6 +3099,7 @@
 				7D98ADE919A7C550003D2BF6 /* btn_cancel@2x~iphone.png in Resources */,
 				7D98ADEA19A7C550003D2BF6 /* info.html in Resources */,
 				7D98ADEB19A7C550003D2BF6 /* table_export~iphone.png in Resources */,
+				7DEE7DF619F8645200FD2FB6 /* infoInsufficientFunds.html in Resources */,
 				7D98ADEC19A7C550003D2BF6 /* bd_cell_middle~iphone.png in Resources */,
 				7D98ADED19A7C550003D2BF6 /* BLE_Logo@2x.png in Resources */,
 				7D98ADEE19A7C550003D2BF6 /* infoSendConfirmation.html in Resources */,
@@ -3462,6 +3467,7 @@
 				B55A02FC18EA206300845090 /* btn_cancel@2x~iphone.png in Resources */,
 				B5F2E9AA18D4AF6C008ACF88 /* info.html in Resources */,
 				4C7247AE19351BFD0091C286 /* table_export~iphone.png in Resources */,
+				7DEE7DF519F8645200FD2FB6 /* infoInsufficientFunds.html in Resources */,
 				B59C143618C0129300AEA789 /* bd_cell_middle~iphone.png in Resources */,
 				B5628BF7199C035F0077DA1C /* BLE_Logo@2x.png in Resources */,
 				7DAE1F4819A3C6A400BF5C60 /* infoSendConfirmation.html in Resources */,

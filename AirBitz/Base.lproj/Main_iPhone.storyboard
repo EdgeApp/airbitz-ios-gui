@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
@@ -938,6 +937,13 @@
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.00 BTC - $876.13 USD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9aX-Dw-7XD" customClass="LatoLabel">
+                                        <rect key="frame" x="37" y="92" width="159" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" id="G2v-QN-NpV" userLabel="View - bitcoin amount">
                                         <rect key="frame" x="30" y="119" width="260" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1071,6 +1077,16 @@
                                             <action selector="selectMaxAmount" destination="mXe-0d-x2m" eventType="touchUpInside" id="Aoh-Br-5Q9"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G7c-5d-j1M">
+                                        <rect key="frame" x="188" y="85" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="btn_info.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="fundsInfo" destination="mXe-0d-x2m" eventType="touchUpInside" id="x4g-d0-n1b"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -1098,6 +1114,7 @@
                         <outlet property="btn_alwaysConfirm" destination="69b-p5-Bpq" id="XTU-U2-bRN"/>
                         <outlet property="confirmSliderContainer" destination="9Zm-fv-MBe" id="q8o-md-9m0"/>
                         <outlet property="conversionLabel" destination="9aX-Dw-7XD" id="QVZ-z2-zJ9"/>
+                        <outlet property="helpButton" destination="G7c-5d-j1M" id="qse-9V-0xm"/>
                         <outlet property="imagePINEmboss" destination="1rZ-NY-P3J" id="Q8L-bj-2de"/>
                         <outlet property="imageTopEmboss" destination="u9m-uV-m1e" id="jwq-lt-96g"/>
                         <outlet property="keypadView" destination="PdV-8v-hr7" id="PWp-9K-gti"/>
