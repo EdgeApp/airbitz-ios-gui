@@ -91,8 +91,6 @@ typedef enum eLoginMode
     #endif
 
 	self.errorMessageView.alpha = 0.0;
-
-    _swipeRightArrow.transform = CGAffineTransformRotate(_swipeRightArrow.transform, M_PI);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -306,9 +304,9 @@ typedef enum eLoginMode
      {
          CGRect frame = swipeArrow.frame;
          if (dir > 0)
-            frame.origin.x = originalFrame.origin.x + originalFrame.size.width;
+            frame.origin.x = originalFrame.origin.x + originalFrame.size.width * 0.5;
          else
-            frame.origin.x = originalFrame.origin.x - originalFrame.size.width;
+            frame.origin.x = originalFrame.origin.x - originalFrame.size.width * 0.5;
          swipeArrow.frame = frame;
          
      }
@@ -369,61 +367,7 @@ typedef enum eLoginMode
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    BOOL shrinkLogo = NO;
-    //Get KeyboardFrame (in Window coordinates)
-    if(_activeTextField)
-    {
-        NSDictionary *userInfo = [notification userInfo];
-        CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        
-        CGRect ownFrame = [self.view.window convertRect:keyboardFrame toView:self.view];
-        
-        float remainingSpace = ownFrame.origin.y - [self StatusBarHeight];
-        
-        remainingSpace -= self.userEntryView.frame.size.height;
-        
-        float logoScaleFactor = remainingSpace / self.logoImage.frame.size.height;
-        if(logoScaleFactor >= LOGO_IMAGE_SHRINK_SCALE_FACTOR)
-        {
-            shrinkLogo = YES;
-        }
-        [UIView animateWithDuration:0.35
-                              delay: 0.0
-                            options: UIViewAnimationOptionCurveEaseInOut
-                         animations:^
-         {
-             CGRect frame = self.contentView.frame;
-             
-             _backButton.alpha = 0.0;
-             _swipeRightArrow.alpha = 0.0;
-             _swipeText.alpha = 0.0;
-             _titleText.alpha = 0.0;
-             
-             if(shrinkLogo)
-             {
-                 frame.origin.y = 22.0 + _originalLogoFrame.size.height * logoScaleFactor;
-                 frame.size.height = keyboardFrame.origin.y - frame.origin.y;
-                 self.contentView.frame = frame;
-                 
-                 self.logoImage.transform = CGAffineTransformMakeScale(logoScaleFactor, logoScaleFactor);
-                 frame = self.logoImage.frame;
-                 frame.origin.y = 22.0;
-                 self.logoImage.frame = frame;
-            }
-            else
-            {
-                frame.origin.y = [self StatusBarHeight];
-                frame.size.height = keyboardFrame.origin.y - frame.origin.y;
-                self.contentView.frame = frame;
-
-                self.logoImage.alpha = 0.0;
-            }
-         }
-                         completion:^(BOOL finished)
-         {
-             
-         }];
-    }
+    // Logic to move login page elements above keyboard removed. -Allan Wright
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
