@@ -4019,7 +4019,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_large.png" id="LqE-iy-sKS">
-                                <rect key="frame" x="57" y="28" width="205" height="106"/>
+                                <rect key="frame" x="57" y="38" width="205" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ypw-4p-DZr">
@@ -4034,98 +4034,103 @@
                                 </connections>
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" id="eTI-9q-uu0">
-                                <rect key="frame" x="14" y="156" width="293" height="389"/>
+                                <rect key="frame" x="0.0" y="156" width="320" height="409"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Digital Currency Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nae-d6-xoW" customClass="MontserratLabel">
-                                        <rect key="frame" x="53" y="4" width="186" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Digital Currency Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nae-d6-xoW" customClass="LatoLabel">
+                                        <rect key="frame" x="67" y="2" width="186" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.094117647058823528" green="0.49803921568627452" blue="0.72941176470588232" alpha="1" colorSpace="deviceRGB"/>
+                                        <size key="shadowOffset" width="0.0" height="2"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to View Business Directory" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="8XB-1A-1hO" customClass="LatoLabel">
-                                        <rect key="frame" x="10" y="60" width="233" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <size key="shadowOffset" width="0.0" height="1"/>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe-arrow.png" id="jLL-vF-Vbd">
-                                        <rect key="frame" x="248" y="70" width="21" height="12"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <view contentMode="scaleToFill" id="bUp-i4-uHt">
-                                        <rect key="frame" x="0.0" y="154" width="293" height="228"/>
+                                        <rect key="frame" x="0.0" y="34" width="320" height="378"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="Qh1-g9-gbH">
-                                                <rect key="frame" x="19" y="15" width="255" height="41"/>
+                                                <rect key="frame" x="32" y="8" width="255" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" minimumFontSize="17" clearButtonMode="whileEditing" id="TCB-w9-Wgd" customClass="StylizedTextField">
-                                                <rect key="frame" x="34" y="20" width="225" height="29"/>
+                                                <rect key="frame" x="47" y="15" width="225" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="rdN-yz-NKb">
-                                                <rect key="frame" x="19" y="60" width="255" height="41"/>
+                                                <rect key="frame" x="32" y="54" width="255" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" id="V5e-1n-K9Z" customClass="StylizedTextField">
-                                                <rect key="frame" x="34" y="66" width="225" height="29"/>
+                                                <rect key="frame" x="47" y="61" width="225" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q2G-61-ExK">
-                                                <rect key="frame" x="21" y="109" width="251" height="41"/>
+                                                <rect key="frame" x="34" y="100" width="251" height="43"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
-                                                <state key="normal" title="Sign In" backgroundImage="btn_td_done.png">
+                                                <state key="normal" title="Log In" backgroundImage="btn_td_green.png">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="SignIn" destination="zLx-xG-j1m" eventType="touchUpInside" id="fkv-vb-uDc"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to View Business Directory" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="8XB-1A-1hO" customClass="LatoLabel">
+                                                <rect key="frame" x="-3" y="189" width="283" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" red="0.11372549831867218" green="0.49411767721176147" blue="0.72156864404678345" alpha="1" colorSpace="deviceRGB"/>
+                                                <size key="shadowOffset" width="0.0" height="2"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe-arrow.png" id="jLL-vF-Vbd">
+                                                <rect key="frame" x="258" y="195" width="36" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8iz-Uc-LTS">
-                                                <rect key="frame" x="22" y="157" width="251" height="41"/>
+                                                <rect key="frame" x="34" y="281" width="252" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
-                                                <state key="normal" title="Sign Up" backgroundImage="btn_big_blue.png">
+                                                <state key="normal" title="Create Account" backgroundImage="btn_td_red.png">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="SignUp" destination="zLx-xG-j1m" eventType="touchUpInside" id="BMw-Co-GHv"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0OP-dl-dRU" customClass="LatoLabel">
-                                                <rect key="frame" x="78" y="203" width="139" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RVo-M5-ZXk" userLabel="Button - Forgot">
-                                                <rect key="frame" x="100" y="204" width="95" height="20"/>
+                                                <rect key="frame" x="45" y="329" width="210" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
-                                                <state key="normal" title="Forgot Password" backgroundImage="btn_blue.png"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <size key="titleShadowOffset" width="0.0" height="2"/>
+                                                <state key="normal" title="Forgot Password">
+                                                    <color key="titleShadowColor" red="0.047058823529411764" green="0.42352941176470588" blue="0.67450980392156867" alpha="1" colorSpace="deviceRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="buttonForgotTouched:" destination="zLx-xG-j1m" eventType="touchUpInside" id="9gd-h8-7we"/>
                                                 </connections>
                                             </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_forgot_password_arrow.png" id="Xe2-m8-X3A">
+                                                <rect key="frame" x="220" y="337" width="24" height="25"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -4813,6 +4818,7 @@
         <image name="btn_expand.png" width="100" height="106"/>
         <image name="btn_export.png" width="37" height="37"/>
         <image name="btn_export_dates.png" width="94" height="36"/>
+        <image name="btn_forgot_password_arrow.png" width="24" height="25"/>
         <image name="btn_info.png" width="25" height="25"/>
         <image name="btn_light.png" width="252" height="38"/>
         <image name="btn_locateMe.png" width="39" height="39"/>
@@ -4821,6 +4827,8 @@
         <image name="btn_scan_qr_code.png" width="241" height="37"/>
         <image name="btn_search.png" width="32" height="33"/>
         <image name="btn_td_done.png" width="251" height="41"/>
+        <image name="btn_td_green.png" width="255" height="44"/>
+        <image name="btn_td_red.png" width="255" height="44"/>
         <image name="comp_09.2-send_bitcoin2.jpg" width="640" height="1136"/>
         <image name="copy_btn.png" width="80" height="42"/>
         <image name="darken_bottom_table_cell.png" width="320" height="111"/>
@@ -4843,10 +4851,10 @@
         <image name="icon_wallet_dark.png" width="21" height="22"/>
         <image name="logo.png" width="64" height="36"/>
         <image name="logo_bitcoin.png" width="126" height="165"/>
-        <image name="logo_large.png" width="205" height="106"/>
+        <image name="logo_large.png" width="208" height="106"/>
         <image name="scan_frame.png" width="271" height="226"/>
         <image name="sms_btn.png" width="80" height="42"/>
-        <image name="swipe-arrow.png" width="21" height="12"/>
+        <image name="swipe-arrow.png" width="35" height="18"/>
         <image name="tabbar_base.png" width="320" height="54"/>
         <image name="tabbar_bkg_selected.png" width="64" height="54"/>
         <image name="tabbar_divider.png" width="1" height="54"/>
