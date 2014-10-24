@@ -91,7 +91,7 @@
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
     
-    self.confirmRequestButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
+    self.nextButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
 }
 
 -(void)awakeFromNib
