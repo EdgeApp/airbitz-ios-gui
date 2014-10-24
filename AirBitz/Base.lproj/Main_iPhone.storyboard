@@ -4018,10 +4018,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_large.png" id="LqE-iy-sKS">
-                                <rect key="frame" x="57" y="38" width="205" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ypw-4p-DZr">
                                 <rect key="frame" x="3" y="24" width="92" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -4034,29 +4030,33 @@
                                 </connections>
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" id="eTI-9q-uu0">
-                                <rect key="frame" x="0.0" y="156" width="320" height="409"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="565"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_large.png" id="LqE-iy-sKS">
+                                        <rect key="frame" x="57" y="34" width="205" height="106"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Digital Currency Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nae-d6-xoW" customClass="LatoLabel">
-                                        <rect key="frame" x="67" y="2" width="186" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="67" y="164" width="186" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" red="0.094117647058823528" green="0.49803921568627452" blue="0.72941176470588232" alpha="1" colorSpace="deviceRGB"/>
                                         <size key="shadowOffset" width="0.0" height="2"/>
                                     </label>
-                                    <view contentMode="scaleToFill" id="bUp-i4-uHt">
-                                        <rect key="frame" x="0.0" y="34" width="320" height="378"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <view contentMode="scaleToFill" id="kpH-FO-ztL">
+                                        <rect key="frame" x="0.0" y="210" width="320" height="147"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="Qh1-g9-gbH">
-                                                <rect key="frame" x="32" y="8" width="255" height="41"/>
+                                                <rect key="frame" x="32" y="0.0" width="255" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" minimumFontSize="17" clearButtonMode="whileEditing" id="TCB-w9-Wgd" customClass="StylizedTextField">
-                                                <rect key="frame" x="47" y="15" width="225" height="29"/>
+                                                <rect key="frame" x="47" y="7" width="225" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4064,12 +4064,12 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="rdN-yz-NKb">
-                                                <rect key="frame" x="32" y="54" width="255" height="41"/>
+                                                <rect key="frame" x="32" y="48" width="255" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" id="V5e-1n-K9Z" customClass="StylizedTextField">
-                                                <rect key="frame" x="47" y="61" width="225" height="29"/>
+                                                <rect key="frame" x="47" y="55" width="225" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4077,7 +4077,7 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q2G-61-ExK">
-                                                <rect key="frame" x="34" y="100" width="251" height="43"/>
+                                                <rect key="frame" x="34" y="98" width="251" height="43"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
@@ -4089,21 +4089,28 @@
                                                     <action selector="SignIn" destination="zLx-xG-j1m" eventType="touchUpInside" id="fkv-vb-uDc"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to View Business Directory" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="8XB-1A-1hO" customClass="LatoLabel">
-                                                <rect key="frame" x="-3" y="189" width="283" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <color key="shadowColor" red="0.11372549831867218" green="0.49411767721176147" blue="0.72156864404678345" alpha="1" colorSpace="deviceRGB"/>
-                                                <size key="shadowOffset" width="0.0" height="2"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe-arrow.png" id="jLL-vF-Vbd">
-                                                <rect key="frame" x="258" y="195" width="36" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to View Business Directory" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="8XB-1A-1hO" customClass="LatoLabel">
+                                        <rect key="frame" x="12" y="385" width="255" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.11372549831867218" green="0.49411767721176147" blue="0.72156864404678345" alpha="1" colorSpace="deviceRGB"/>
+                                        <size key="shadowOffset" width="0.0" height="2"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe-arrow.png" id="jLL-vF-Vbd">
+                                        <rect key="frame" x="259" y="390" width="36" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" id="bUp-i4-uHt">
+                                        <rect key="frame" x="0.0" y="461" width="320" height="107"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8iz-Uc-LTS">
-                                                <rect key="frame" x="34" y="281" width="252" height="44"/>
+                                                <rect key="frame" x="34" y="10" width="252" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
@@ -4116,7 +4123,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RVo-M5-ZXk" userLabel="Button - Forgot">
-                                                <rect key="frame" x="45" y="329" width="210" height="40"/>
+                                                <rect key="frame" x="45" y="58" width="210" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="2"/>
@@ -4128,7 +4135,7 @@
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_forgot_password_arrow.png" id="Xe2-m8-X3A">
-                                                <rect key="frame" x="220" y="337" width="24" height="25"/>
+                                                <rect key="frame" x="220" y="66" width="24" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                         </subviews>
