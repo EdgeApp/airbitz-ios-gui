@@ -21,7 +21,7 @@
         case ABC_CC_AccountDoesNotExist:
             return NSLocalizedString(@"We were unable to find your account. Be sure your username is correct.", nil);
         case ABC_CC_BadPassword:
-            return NSLocalizedString(@"Incorrect password.", nil);
+            return NSLocalizedString(@"Invalid user name or password", nil);
         case ABC_CC_WalletAlreadyExists:
             return NSLocalizedString(@"Wallet already exists.", nil);
         case ABC_CC_InvalidWalletID:
