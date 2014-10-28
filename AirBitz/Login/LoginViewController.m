@@ -519,6 +519,7 @@ typedef enum eLoginMode
     }
     else
     {
+        self.errorMessageText.text = _strReason;
         self.errorMessageView.alpha = 1.0;
         [UIView animateWithDuration:ERROR_MESSAGE_FADE_DURATION
                               delay:ERROR_MESSAGE_FADE_DELAY
