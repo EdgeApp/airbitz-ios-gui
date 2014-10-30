@@ -720,26 +720,38 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	int cellType = [self cellTypeForRow:indexPath.row];
 	
 	UIImage *cellImage;
-	//if((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
-	if([tableView numberOfRowsInSection:indexPath.section] == 1)
+	if ([tableView numberOfRowsInSection:indexPath.section] == 1)
 	{
 		cellImage = [UIImage imageNamed:@"bd_cell_single"];
 	}
 	else
 	{
-		if(row == 0)
+		if (row == 0)
 		{
 			cellImage = [UIImage imageNamed:@"bd_cell_top"];
 		}
-		else
-			if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
-			{
-				cellImage = [UIImage imageNamed:@"bd_cell_bottom"];
-			}
-			else
-			{
-				cellImage = [UIImage imageNamed:@"bd_cell_middle"];
-			}
+		else if (row == [tableView numberOfRowsInSection:indexPath.section] - 1)
+        {
+            if (cellType == kHours | cellType == kDetails)
+            {
+                cellImage = [UIImage imageNamed:@"bd_cell_bottom_white"];
+            }
+            else
+            {
+                cellImage = [UIImage imageNamed:@"bd_cell_bottom"];
+            }
+        }
+        else
+        {
+            if (cellType == kHours | cellType == kDetails)
+            {
+                cellImage = [UIImage imageNamed:@"bd_cell_middle_white"];
+            }
+            else
+            {
+                cellImage = [UIImage imageNamed:@"bd_cell_middle"];
+            }
+        }
 	}
 	
 	if (cellType == kAddress)
