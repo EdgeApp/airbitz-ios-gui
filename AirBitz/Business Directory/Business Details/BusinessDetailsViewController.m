@@ -15,6 +15,8 @@
 #import "BD_Website_Cell.h"
 #import "BD_Hours_Cell.h"
 #import "BD_Details_Cell.h"
+#import "BD_Social_Cell.h"
+#import "BD_Share_Cell.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "RibbonView.h"
@@ -23,12 +25,15 @@
 
 #define SHOW_PHONE_CALL_ARE_YOU_SURE_ALERT 0	/* set to 1 to show are you sure alert before dialing */
 
-#define ADDRESS_CELL_ROW	0
-#define PHONE_CELL_ROW		1
-#define WEBSITE_CELL_ROW	2
-#define HOURS_CELL_ROW		3
-#define DETAILS_CELL_ROW	4
-#define MAX_NUM_ROWS		5
+typedef NS_ENUM(NSUInteger, CellType) {
+    kAddress,
+    kPhone,
+    kWebsite,
+    kShare,
+    kHours,
+    kDetails,
+    kSocial
+};
 
 #define SINGLE_ROW_CELL_HEIGHT	44
 
@@ -41,7 +46,8 @@
 	CGFloat detailsLabelWidth;
 	BOOL needToLoadImageInfo;
 	NSMutableArray *imageURLs;
-	BOOL rowVisible[MAX_NUM_ROWS];
+    NSMutableArray *rowTypes;
+    NSMutableArray *socialRows;
 }
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
@@ -73,6 +79,8 @@
 {
     [super viewDidLoad];
 	imageURLs = [[NSMutableArray alloc] init];
+    rowTypes = [[NSMutableArray alloc] init];
+    socialRows = [[NSMutableArray alloc] init];
 	hoursCellHeight = SINGLE_ROW_CELL_HEIGHT;
 	detailsCellHeight = SINGLE_ROW_CELL_HEIGHT;
 	
@@ -322,58 +330,67 @@
 
 -(void)determineVisibleRows
 {
-	//look at business details data.  If data is missing for certain rows, mark those rows as invisible
-	
-	//Address (must have at least city and state)
-	NSString *city = [self.businessDetails objectForKey:@"city"];
-	NSString *state = [self.businessDetails objectForKey:@"state"];
-	
-	if((city != nil) && (city != (id)[NSNull null]))
-	{
-		if(city.length)
-		{
-			if((state != nil) && (state != (id)[NSNull null]))
-			{
-				if(state.length)
-				{
-					rowVisible[ADDRESS_CELL_ROW] = YES;
-				}
-			}
-		}
-	}
-	
-	//phone (must have length)
-	NSString *phone = [self.businessDetails objectForKey:@"phone"];
-	if((phone != nil) && (phone != (id)[NSNull null]))
-	{
-		if(phone.length)
-		{
-			rowVisible[PHONE_CELL_ROW] = YES;
-		}
-	}
-	
-	//web (must have length)
-	NSString *web = [self.businessDetails objectForKey:@"website"];
-	if((web != nil) && (web != (id)[NSNull null]))
-	{
-		if(web.length)
-		{
-			rowVisible[WEBSITE_CELL_ROW] = YES;
-		}
-	}
-	
-	//hours (must have at least one item)
-	NSArray *daysOfOperation = [self.businessDetails objectForKey:@"hours"];
-	if((daysOfOperation != nil) && (daysOfOperation != (id)[NSNull null]))
-	{
-		if(daysOfOperation.count)
-		{
-			rowVisible[HOURS_CELL_ROW] = YES;
-		}
-	}
-	
-	//description always visible
-	rowVisible[DETAILS_CELL_ROW] = YES;
+    [rowTypes removeAllObjects];
+
+    // If business detail data is available for row type, increment count
+    
+    //Address (must have at least city and state)
+    NSString *city = [self.businessDetails objectForKey:@"city"];
+    NSString *state = [self.businessDetails objectForKey:@"state"];
+    
+    if((city != nil) && (city != (id)[NSNull null]) && city.length)
+    {
+        if((state != nil) && (state != (id)[NSNull null]) && state.length)
+        {
+            [rowTypes addObject:[NSNumber numberWithInt:kAddress]];
+        }
+    }
+    
+    //phone (must have length)
+    NSString *phone = [self.businessDetails objectForKey:@"phone"];
+    if((phone != nil) && (phone != (id)[NSNull null]) && phone.length)
+    {
+        [rowTypes addObject:[NSNumber numberWithInt:kPhone]];
+    }
+    
+    //web (must have length)
+    NSString *web = [self.businessDetails objectForKey:@"website"];
+    if((web != nil) && (web != (id)[NSNull null]) && web.length)
+    {
+        [rowTypes addObject:[NSNumber numberWithInt:kWebsite]];
+    }
+    
+    //share always visible
+    [rowTypes addObject:[NSNumber numberWithInt:kShare]];
+
+    //hours (must have at least one item)
+    NSArray *daysOfOperation = [self.businessDetails objectForKey:@"hours"];
+    if((daysOfOperation != nil) && (daysOfOperation != (id)[NSNull null]) && daysOfOperation.count)
+    {
+        [rowTypes addObject:[NSNumber numberWithInt:kHours]];
+    }
+    
+    //details always visible
+    [rowTypes addObject:[NSNumber numberWithInt:kDetails]];
+
+    //social
+    NSArray *social = [self.businessDetails objectForKey:@"social"];
+    if((social != nil) && (social != (id)[NSNull null]))
+    {
+        for (NSDictionary *data in social)
+        {
+            // store row index and social type for later retrieval
+            NSString *type = [data objectForKey:@"social_type"];
+            NSNumber *typeEnum = [BD_Social_Cell getSocialTypeAsEnum:type];
+            if (typeEnum != [NSNumber numberWithInt:kNull])
+            {
+                NSDictionary *rowData = @{[NSNumber numberWithInt:[rowTypes count]] : typeEnum};
+                [socialRows addObject:rowData];
+
+                [rowTypes addObject:[NSNumber numberWithInt:kSocial]];
+            }
+        }
+    }
 }
 
 -(NSDictionary *)primaryImage:(NSArray *)arrayImageResults
@@ -599,17 +616,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	NSInteger numVisibleRows = 0;
-	
-	for(int i=0; i<MAX_NUM_ROWS; i++)
-	{
-		if(rowVisible[i])
-		{
-			numVisibleRows++;
-		}
-	}
-	//NSLog(@"Number of table rows: %i", numVisibleRows);
-	return numVisibleRows;
+    return [rowTypes count];
 }
 
 -(BD_Address_Cell *)getAddressCellForTableView:(UITableView *)tableView
@@ -647,6 +654,32 @@
 	if (nil == cell)
 	{
 		cell = [[BD_Website_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+	}
+	return cell;
+}
+
+-(BD_Social_Cell *)getSocialCellForTableView:(UITableView *)tableView
+{
+	BD_Social_Cell *cell;
+	static NSString *cellIdentifier = @"BD_Social_Cell";
+	
+	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (nil == cell)
+	{
+		cell = [[BD_Social_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+	}
+	return cell;
+}
+
+-(BD_Share_Cell *)getShareCellForTableView:(UITableView *)tableView
+{
+	BD_Share_Cell *cell;
+	static NSString *cellIdentifier = @"BD_Share_Cell";
+	
+	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (nil == cell)
+	{
+		cell = [[BD_Share_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 	}
 	return cell;
 }
@@ -701,7 +734,7 @@
 		else
 			if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
 			{
-				cellImage = [UIImage imageNamed:@"bd_cell_bottom_white"];
+				cellImage = [UIImage imageNamed:@"bd_cell_bottom"];
 			}
 			else
 			{
@@ -709,7 +742,7 @@
 			}
 	}
 	
-	if (cellType == ADDRESS_CELL_ROW)
+	if (cellType == kAddress)
 	{
 		//address cell
 		BD_Address_Cell *addressCell = [self getAddressCellForTableView:tableView];
@@ -721,7 +754,7 @@
 		}
 		cell = addressCell;
 	}
-	else if(cellType == PHONE_CELL_ROW)
+	else if(cellType == kPhone)
 	{
 		//phone cell
 		BD_Phone_Cell *phoneCell = [self getPhoneCellForTableView:tableView];
@@ -729,7 +762,7 @@
 		phoneCell.bkg_image.image = cellImage;
 		cell = phoneCell;
 	}
-	else if(cellType == WEBSITE_CELL_ROW)
+	else if(cellType == kWebsite)
 	{
 		//website cell
 		BD_Website_Cell *websiteCell = [self getWebsiteCellForTableView:tableView];
@@ -737,7 +770,15 @@
 		websiteCell.bkg_image.image = cellImage;
 		cell = websiteCell;
 	}
-	else if(cellType == HOURS_CELL_ROW)
+	else if(cellType == kShare)
+	{
+		//phone cell
+		BD_Share_Cell *shareCell = [self getShareCellForTableView:tableView];
+//		shareCell.shareLabel.text = [self.businessDetails objectForKey:@"share"];
+		shareCell.bkg_image.image = cellImage;
+		cell = shareCell;
+	}
+	else if(cellType == kHours)
 	{
 		BD_Hours_Cell *hoursCell = [self getHoursCellForTableView:tableView];
 		hoursCell.bkg_image.image = cellImage;
@@ -795,7 +836,7 @@
 		}
 		cell = hoursCell;
 	}
-	else if(cellType == DETAILS_CELL_ROW)
+	else if(cellType == kDetails)
 	{
 		//details cell
 		BD_Details_Cell *detailsCell = [self getDetailsCellForTableView:tableView];
@@ -808,42 +849,47 @@
 		}
 		cell = detailsCell;
 	}
+	else if(cellType == kSocial)
+	{
+		BD_Social_Cell *socialCell = [self getSocialCellForTableView:tableView];
+        for (NSDictionary *pair in socialRows)
+        {
+            NSNumber *socialType = [pair objectForKey:[NSNumber numberWithInt:row]];
+            if (socialType)
+            {
+                socialCell.socialLabel.text = [BD_Social_Cell getSocialTypeAsString:socialType];
+                socialCell.socialIcon.image = [BD_Social_Cell getSocialTypeImage:socialType];
+                break;
+            }
+        }
+		socialCell.bkg_image.image = cellImage;
+		cell = socialCell;
+	}
 	
 	return cell;
 }
 
 -(int)cellTypeForRow:(NSInteger)row
 {
-	int cellType;
-	int count = 0;
-	for(cellType = 0; cellType < MAX_NUM_ROWS; cellType++)
-	{
-		if(rowVisible[cellType])
-		{
-			if(count == row)
-			{
-				break;
-			}
-			count++;
-		}
-	}
-	return cellType;
+    if (row < [rowTypes count])
+        return [((NSNumber*)[rowTypes objectAtIndex:row]) intValue];
+	return kSocial;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	int cellType = [self cellTypeForRow:indexPath.row];
 	
-	if(cellType == HOURS_CELL_ROW)
+	if(cellType == kHours)
 	{
 		return hoursCellHeight;
 	}
-	else if(cellType == DETAILS_CELL_ROW)
+	else if(cellType == kDetails)
 	{
 		//NSLog(@"returning details cell height of %f", detailsCellHeight);
 		return detailsCellHeight;
 	}
-	else if(cellType == WEBSITE_CELL_ROW)
+	else if(cellType == kWebsite)
 	{
 		NSString *website = [self.businessDetails objectForKey:@"website"];
 		if(website.length)
@@ -855,7 +901,7 @@
 			return 0;
 		}
 	}
-	else if(cellType == PHONE_CELL_ROW)
+	else if(cellType == kPhone)
 	{
 		NSString *phone = [self.businessDetails objectForKey:@"phone"];
 		if(phone.length)
@@ -875,31 +921,78 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if([self cellTypeForRow:indexPath.row] == ADDRESS_CELL_ROW)
-	{
-		[self launchMapApp];
-	}
-	else if([self cellTypeForRow:indexPath.row] == PHONE_CELL_ROW)
-	{
-		#if SHOW_PHONE_CALL_ARE_YOU_SURE_ALERT
-		NSString *msg = NSLocalizedString(@"Are you sure you want to call", nil);
-		
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Place Call", nil)
-							  message:[NSString stringWithFormat:@"%@ %@?", msg, [self.businessGeneralInfo objectForKey:@"phone"]]
-							  delegate:self
-							  cancelButtonTitle:@"No"
-							  otherButtonTitles:@"Yes", nil];
-		[alert show];
-		#else
-		[self callBusinessNumber];
-		#endif
-	}
-	else if([self cellTypeForRow:indexPath.row] == WEBSITE_CELL_ROW)
-	{
-		NSURL *url = [[NSURL alloc] initWithString:[self.businessDetails objectForKey:@"website"] ];
-		[[UIApplication sharedApplication] openURL:url];
-	}
+//    NSURL *url = [[NSURL alloc] initWithString:[self.businessDetails objectForKey:@"website"] ];
+//    [[UIApplication sharedApplication] openURL:url];
+
+    switch ([self cellTypeForRow:indexPath.row]) {
+        case kAddress:
+        {
+            [self launchMapApp];
+            break;
+        }
+        case kPhone:
+        {
+#if SHOW_PHONE_CALL_ARE_YOU_SURE_ALERT
+            NSString *msg = NSLocalizedString(@"Are you sure you want to call", nil);
+            
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Place Call", nil)
+                                  message:[NSString stringWithFormat:@"%@ %@?", msg, [self.businessGeneralInfo objectForKey:@"phone"]]
+                                  delegate:self
+                                  cancelButtonTitle:@"No"
+                                  otherButtonTitles:@"Yes", nil];
+            [alert show];
+#else
+            [self callBusinessNumber];
+#endif
+            break;
+        }
+        case kWebsite:
+        {
+            NSURL *url = [[NSURL alloc] initWithString:[self.businessDetails objectForKey:@"website"] ];
+            [[UIApplication sharedApplication] openURL:url];
+            break;
+        }
+        case kShare:
+        {
+            NSString *msg = [NSString stringWithFormat:@"%@ - %@ %@ https://airbitz.co/biz/%@",
+                                [self.businessDetails objectForKey:@"name"],
+                                [self.businessDetails objectForKey:@"city"],
+                                NSLocalizedString(@"Bitcoin | Airbitz", nil),
+                                [self.businessDetails objectForKey:@"bizId"]
+            ];
+            NSArray *activityItems = [NSArray arrayWithObjects: msg, nil, nil];
+            UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+            [self presentViewController:activityController animated:YES completion:nil];
+            break;
+        }
+        case kSocial:
+        {
+            NSArray *social = [self.businessDetails objectForKey:@"social"];
+            if((social != nil) && (social != (id)[NSNull null]))
+            {
+                // TODO : refactor, possibly by including the URL into socialRows
+                for (NSDictionary *data in social)
+                {
+                    NSString *type = [data objectForKey:@"social_type"];
+                    NSNumber *typeEnum = [BD_Social_Cell getSocialTypeAsEnum:type];
+                    for (NSDictionary *pair in socialRows)
+                    {
+                        NSNumber *socialType = [pair objectForKey:[NSNumber numberWithInt:indexPath.row]];
+                        if (typeEnum == socialType)
+                        {
+                            NSString *urlStr = [data objectForKey:@"social_url"];
+                            NSURL *url = [[NSURL alloc] initWithString:urlStr];
+                            [[UIApplication sharedApplication] openURL:url];
+                        }
+                    }
+                }
+            }
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark UIAlertView delegates
