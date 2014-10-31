@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -3874,45 +3874,8 @@
                                             <outlet property="websiteLabel" destination="XeE-e1-pX7" id="2Zj-fx-KeF"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Social_Cell" id="sWa-ap-3if" customClass="BD_Social_Cell">
-                                        <rect key="frame" x="0.0" y="169" width="288" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sWa-ap-3if" id="T8J-dY-QhV">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="DqH-FQ-kgn">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_right.png" id="aSd-yz-xwL">
-                                                    <rect key="frame" x="255" y="11" width="22" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MT9-P3-r5I" customClass="LatoLabel">
-                                                    <rect key="frame" x="42" y="14" width="203" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.47450980390000003" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_facebook.png" id="Kwg-pF-xhd">
-                                                    <rect key="frame" x="8" y="14" width="15" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="bkg_image" destination="DqH-FQ-kgn" id="T2S-ZO-fDa"/>
-                                            <outlet property="socialIcon" destination="Kwg-pF-xhd" id="84L-CR-Wkf"/>
-                                            <outlet property="socialLabel" destination="MT9-P3-r5I" id="y5P-vE-6ID"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Share_Cell" id="gJM-N8-kcO" customClass="BD_Share_Cell">
-                                        <rect key="frame" x="0.0" y="213" width="288" height="44"/>
+                                        <rect key="frame" x="0.0" y="169" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gJM-N8-kcO" id="v7e-Cq-Jz4">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
@@ -3948,13 +3911,13 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Hours_Cell" id="WPR-t8-qaK" customClass="BD_Hours_Cell">
-                                        <rect key="frame" x="0.0" y="257" width="288" height="44"/>
+                                        <rect key="frame" x="0.0" y="213" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WPR-t8-qaK" id="GS5-4a-wtJ">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="866-tQ-bOR">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle_white.png" id="866-tQ-bOR">
                                                     <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
@@ -3996,13 +3959,13 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Details_Cell" id="IFa-yF-0Do" customClass="BD_Details_Cell">
-                                        <rect key="frame" x="0.0" y="301" width="288" height="44"/>
+                                        <rect key="frame" x="0.0" y="257" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IFa-yF-0Do" id="SsV-v1-k0W">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_bottom_white.png" id="ED4-SO-l2Q">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle_white.png" id="ED4-SO-l2Q">
                                                     <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
@@ -4026,6 +3989,43 @@
                                             <outlet property="activityView" destination="3Rh-Cn-OCX" id="Q18-m2-w9i"/>
                                             <outlet property="bkg_image" destination="ED4-SO-l2Q" id="3f0-eT-fxF"/>
                                             <outlet property="detailsLabel" destination="Kgm-MH-DvG" id="0Tb-Bf-gxO"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Social_Cell" id="sWa-ap-3if" customClass="BD_Social_Cell">
+                                        <rect key="frame" x="0.0" y="301" width="288" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sWa-ap-3if" id="T8J-dY-QhV">
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_bottom.png" id="DqH-FQ-kgn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_right.png" id="aSd-yz-xwL">
+                                                    <rect key="frame" x="255" y="11" width="22" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MT9-P3-r5I" customClass="LatoLabel">
+                                                    <rect key="frame" x="42" y="14" width="203" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.47450980390000003" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_facebook.png" id="Kwg-pF-xhd">
+                                                    <rect key="frame" x="8" y="14" width="15" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="bkg_image" destination="DqH-FQ-kgn" id="T2S-ZO-fDa"/>
+                                            <outlet property="socialIcon" destination="Kwg-pF-xhd" id="84L-CR-Wkf"/>
+                                            <outlet property="socialLabel" destination="MT9-P3-r5I" id="y5P-vE-6ID"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -4080,7 +4080,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" id="BDl-O7-uIN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login.jpg" id="BDl-O7-uIN">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -4564,6 +4564,26 @@
             </objects>
             <point key="canvasLocation" x="837" y="-740"/>
         </scene>
+        <!--View Controller - PIN Login View Controller-->
+        <scene sceneID="eRa-qy-qsK">
+            <objects>
+                <viewController storyboardIdentifier="PINLoginViewController" title="PIN Login View Controller" id="ObX-Wd-u7G" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bg1-dC-kHd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login.jpg" id="agP-lq-X4H">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ppn-mZ-QMu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1253" y="-740"/>
+        </scene>
         <!--More Categories View Controller-->
         <scene sceneID="Bv4-6J-pso">
             <objects>
@@ -4900,9 +4920,10 @@
         <image name="background-errormessage.png" width="200" height="168"/>
         <image name="background.jpg" width="320" height="568"/>
         <image name="background_header.png" width="320" height="568"/>
+        <image name="background_login.jpg" width="320" height="568"/>
         <image name="bd_cell_bottom.png" width="12" height="12"/>
-        <image name="bd_cell_bottom_white.png" width="12" height="12"/>
         <image name="bd_cell_middle.png" width="6" height="6"/>
+        <image name="bd_cell_middle_white.png" width="6" height="6"/>
         <image name="bd_cell_top.png" width="12" height="12"/>
         <image name="bd_icon_clock.png" width="15" height="16"/>
         <image name="bd_icon_facebook.png" width="16" height="16"/>
