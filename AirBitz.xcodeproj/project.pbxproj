@@ -91,6 +91,7 @@
 		4CA4672B19B604CA004F9923 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4672A19B604CA004F9923 /* DL_URLServer.m */; };
 		4CA4672C19B604CA004F9923 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4672A19B604CA004F9923 /* DL_URLServer.m */; };
 		6809FB9A196F9EEB0076CA4D /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809FB99196F9EEB0076CA4D /* libgit2.a */; };
+		68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */; };
 		683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
 		684C0E521936B97000AB9807 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
 		685E6DE7197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DE5197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png */; };
@@ -1207,6 +1208,8 @@
 		4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
 		4CA4672A19B604CA004F9923 /* DL_URLServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DL_URLServer.m; sourceTree = "<group>"; };
 		6809FB99196F9EEB0076CA4D /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = AirBitz/ABC/libgit2.a; sourceTree = "<group>"; };
+		68390DB51A0406D600D3789F /* SpendingLimitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendingLimitsViewController.h; sourceTree = "<group>"; };
+		68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendingLimitsViewController.m; sourceTree = "<group>"; };
 		683D95B71989F14B0082BC1A /* ca-certificates.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ca-certificates.crt"; sourceTree = "<group>"; };
 		684C0E511936B97000AB9807 /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = AirBitz/ABC/libsodium.a; sourceTree = "<group>"; };
 		685E6DE5197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_use_max@2x~iphone.png"; sourceTree = "<group>"; };
@@ -2780,6 +2783,8 @@
 		B5C0A9B218EA0D99008F302C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				68390DB51A0406D600D3789F /* SpendingLimitsViewController.h */,
+				68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */,
 				B55A030F18EA538500845090 /* BooleanCell.h */,
 				B55A031018EA538500845090 /* BooleanCell.m */,
 				B55A031218EA55C700845090 /* ButtonCell.h */,
@@ -4015,6 +4020,7 @@
 				B57C209618C25011005D7245 /* BalanceView.m in Sources */,
 				B55A031118EA538500845090 /* BooleanCell.m in Sources */,
 				B5C0A97318EA0A42008F302C /* BD_Address_Cell.m in Sources */,
+				68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */,
 				B5137C3918A435BD00DA4A34 /* CJSONDeserializer.m in Sources */,
 				B5C0A9AA18EA0D09008F302C /* RequestViewController.m in Sources */,
 				B5C0A97418EA0A42008F302C /* BD_Details_Cell.m in Sources */,

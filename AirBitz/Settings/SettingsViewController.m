@@ -22,6 +22,7 @@
 #import "PopupWheelPickerView.h"
 #import "CommonTypes.h"
 #import "CategoriesViewController.h"
+#import "SpendingLimitsViewController.h"
 #import "Util.h"
 #import "InfoView.h"
 #import "LocalSettings.h"
@@ -64,8 +65,9 @@
 #define ROW_AUTO_LOG_OFF                0
 #define ROW_DEFAULT_CURRENCY            1
 #define ROW_CHANGE_CATEGORIES           2
-#define ROW_MERCHANT_MODE               3
-#define ROW_BLE                         4
+#define ROW_SPEND_LIMITS                3
+#define ROW_MERCHANT_MODE               4
+#define ROW_BLE                         5
 
 #define ROW_US_DOLLAR                   0
 #define ROW_CANADIAN_DOLLAR             1
@@ -124,7 +126,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 };
 
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate, DebugViewControllerDelegate, CBCentralManagerDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate, SpendingLimitsViewControllerDelegate, DebugViewControllerDelegate, CBCentralManagerDelegate>
 {
     tABC_Currency                   *_aCurrencies;
     int                             _currencyCount;
@@ -134,6 +136,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     SignUpViewController            *_signUpController;
     PasswordRecoveryViewController  *_passwordRecoveryController;
     CategoriesViewController        *_categoriesController;
+    SpendingLimitsViewController    *_spendLimitsController;
     DebugViewController             *_debugViewController;
     BOOL                            _bKeyboardIsShown;
 	BOOL							_showBluetoothOption;
@@ -428,6 +431,33 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                          animations:^
          {
              _categoriesController.view.frame = self.view.bounds;
+         }
+                         completion:^(BOOL finished)
+         {
+             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+         }];
+    }
+}
+
+- (void)bringUpSpendingLimits
+{
+    {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        _spendLimitsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SpendingLimitsViewController"];
+        _spendLimitsController.delegate = self;
+
+        CGRect frame = self.view.bounds;
+        frame.origin.x = frame.size.width;
+        _spendLimitsController.view.frame = frame;
+        [self.view addSubview:_spendLimitsController.view];
+
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             _spendLimitsController.view.frame = self.view.bounds;
          }
                          completion:^(BOOL finished)
          {
@@ -875,6 +905,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         if (indexPath.row == ROW_CHANGE_CATEGORIES)
         {
 			cell.name.text = NSLocalizedString(@"Change Categories", @"settings text");
+        } else if (indexPath.row == ROW_SPEND_LIMITS)
+        {
+			cell.name.text = NSLocalizedString(@"Spending Limits", @"spending limits text");
         }
     }
 	
@@ -1107,11 +1140,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			//assumes bluetooth option is last of the options.
 			if(_showBluetoothOption)
 			{
-				return 5;
+				return 6;
 			}
 			else
 			{
-				return 4; //return 3 to not show the Bluetooth cell.
+				return 5; //return 5 to not show the Bluetooth cell.
 			}
             break;
 
@@ -1246,7 +1279,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		}
 		else if (indexPath.section == SECTION_OPTIONS)
 		{
-            if (indexPath.row == ROW_CHANGE_CATEGORIES)
+            if (indexPath.row == ROW_CHANGE_CATEGORIES || indexPath.row == ROW_SPEND_LIMITS)
             {
                 cell = [self getPlainCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
             }
@@ -1310,6 +1343,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             {
                 [self bringUpCategoriesView];
             }
+            else if (indexPath.row == ROW_SPEND_LIMITS)
+            {
+                [self bringUpSpendingLimits];
+            }
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
@@ -1348,6 +1385,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
 	[controller.view removeFromSuperview];
 	_categoriesController = nil;
+}
+
+#pragma mark - SpendingLimitsViewController Delegate
+
+- (void)spendingLimitsViewControllerDone:(SpendingLimitsViewController *)controller withBackButton:(BOOL)bBack
+{
+	[controller.view removeFromSuperview];
+	_spendLimitsController = nil;
 }
 
 #pragma mark - BooleanCell Delegate
