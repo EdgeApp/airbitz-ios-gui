@@ -1391,8 +1391,22 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)spendingLimitsViewControllerDone:(SpendingLimitsViewController *)controller withBackButton:(BOOL)bBack
 {
-	[controller.view removeFromSuperview];
-	_spendLimitsController = nil;
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 CGRect frame = self.view.bounds;
+		 frame.origin.x = frame.size.width;
+		 _spendLimitsController.view.frame = frame;
+	 }
+					 completion:^(BOOL finished)
+	 {
+		 [_spendLimitsController.view removeFromSuperview];
+		 _spendLimitsController = nil;
+         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+	 }];
 }
 
 #pragma mark - BooleanCell Delegate

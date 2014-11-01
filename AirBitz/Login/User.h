@@ -26,6 +26,10 @@
 @property (nonatomic, copy) NSString* fullName;
 @property (nonatomic) bool bNameOnPayments;
 @property (nonatomic, copy) NSString* denominationLabelShort;
+@property (nonatomic) bool bDailySpendLimit;
+@property (nonatomic) int64_t dailySpendLimitSatoshis;
+@property (nonatomic) bool bSpendRequirePin;
+@property (nonatomic) int64_t spendRequirePinSatoshis;
 
 + (void)initAll;
 + (void)freeAll;

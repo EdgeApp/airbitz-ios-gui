@@ -300,6 +300,37 @@ static NSTimer *_dataSyncTimer;
     return transaction;
 }
 
++ (int64_t)getTotalSentToday:(Wallet *)wallet
+{
+    tABC_Error Error;
+    unsigned int tCount = 0;
+    int64_t total = 0;
+    tABC_TxInfo **aTransactions = NULL;
+
+    NSDate *date = [NSDate date];
+    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSUInteger preservedComponents = (NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit);
+    NSDate *thisMorning = [calendar dateFromComponents:[calendar components:preservedComponents fromDate:date]];
+    
+    tABC_CC result = ABC_GetTransactions([[User Singleton].name UTF8String],
+                                         [[User Singleton].password UTF8String],
+                                         [wallet.strUUID UTF8String],
+                                         [thisMorning timeIntervalSince1970],
+                                         [thisMorning timeIntervalSince1970] + 1000 * 60 * 60 * 24,
+                                         &aTransactions,
+                                         &tCount, &Error);
+    if (ABC_CC_Ok == result) {
+        for (int j = tCount - 1; j >= 0; --j) {
+            tABC_TxInfo *pTrans = aTransactions[j];
+            total += pTrans->pDetails->amountSatoshi;
+        }
+    } else {
+        [Util printABC_Error:&Error];
+    }
+    ABC_FreeTransactions(aTransactions, tCount);
+    return total;
+}
+
 + (void) loadTransactions: (Wallet *) wallet
 {
     tABC_Error Error;
@@ -820,6 +851,23 @@ static NSTimer *_dataSyncTimer;
     return bResult;
 }
 
++ (NSString *)getPIN
+{
+    tABC_Error error;
+    char *szPIN = NULL;
+    NSString *storedPIN = nil;
+
+    ABC_GetPIN([[User Singleton].name UTF8String],
+               [[User Singleton].password UTF8String],
+               &szPIN, &error);
+    [Util printABC_Error:&error];
+    if (szPIN) {
+        storedPIN = [NSString stringWithUTF8String:szPIN];
+    }
+    free(szPIN);
+    return storedPIN;
+}
+
 + (void)login
 {
     bDataFetched = NO;
@@ -1001,7 +1049,6 @@ static NSTimer *_dataSyncTimer;
                      [destAddress UTF8String],
                      bTransfer, &result, &Error);
     [Util printABC_Error: &Error];
-    NSLog(@("******* %ld\n"), result);
     return result;
 }
 

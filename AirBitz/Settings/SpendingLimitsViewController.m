@@ -57,23 +57,25 @@
                             &Error);
     [Util printABC_Error:&Error];
 
-    if (_pAccountSettings->bDailySpendLimit > 0) {
-        _dailySpendLimitField.text = [CoreBridge formatSatoshi:_pAccountSettings->dailySpendLimitSatoshis withSymbol:false];
-        _dailySpendLimitSwitch.on = YES;
-    } else {
-        _dailySpendLimitSwitch.on = NO;
-    }
-    if (_pAccountSettings->bDailySpendLimit > 0) {
-        _pinSpendLimitField.text = [CoreBridge formatSatoshi:_pAccountSettings->spendRequirePinSatoshis withSymbol:false];
-        _pinSpendLimitSwitch.on = YES;
-    } else {
-        _pinSpendLimitSwitch.on = NO;
-    }
-    _dailySpendLimitField.enabled = _dailySpendLimitSwitch.on;
-    _pinSpendLimitField.enabled = _pinSpendLimitSwitch.on;
-
+    _dailySpendLimitSwitch.on = _pAccountSettings->bDailySpendLimit > 0;
+    _dailySpendLimitField.text = [CoreBridge formatSatoshi:_pAccountSettings->dailySpendLimitSatoshis withSymbol:false];
+    _dailySpendLimitField.keyboardType = UIKeyboardTypeNumberPad;
     _dailyDenomination.text = [User Singleton].denominationLabelShort;
+
+    _pinSpendLimitSwitch.on = _pAccountSettings->bSpendRequirePin > 0;
+    _pinSpendLimitField.text = [CoreBridge formatSatoshi:_pAccountSettings->spendRequirePinSatoshis withSymbol:false];
+    _pinSpendLimitField.keyboardType = UIKeyboardTypeNumberPad;
     _pinDenomination.text = [User Singleton].denominationLabelShort;
+
+    [self switchFlipped:_dailySpendLimitSwitch];
+    [self switchFlipped:_pinSpendLimitSwitch];
+
+    _passwordTextField.delegate = self;
+    _passwordTextField.returnKeyType = UIReturnKeyDone;
+    _dailySpendLimitField.delegate = self;
+    _dailySpendLimitField.returnKeyType = UIReturnKeyDone;
+    _pinSpendLimitField.delegate = self;
+    _pinSpendLimitField.returnKeyType = UIReturnKeyDone;
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,7 +83,34 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - Keyboard Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark - Action Methods
+
+-(IBAction)switchFlipped:(UISwitch *)uiSwitch
+{
+    UITextField *field = nil;
+    UILabel *denom = nil;
+    UIColor *color = uiSwitch.on ? [UIColor whiteColor] : [UIColor lightGrayColor];
+    if (uiSwitch == _pinSpendLimitSwitch) {
+        field = _pinSpendLimitField;
+        denom = _pinDenomination;
+    } else if (uiSwitch == _dailySpendLimitSwitch) {
+        field = _dailySpendLimitField;
+        denom = _dailyDenomination;
+    }
+    if (field) {
+        field.enabled = uiSwitch.on;
+        field.textColor = color;
+        denom.textColor = color;
+    }
+}
 
 -(IBAction)Back:(id)sender
 {
@@ -134,6 +163,7 @@
             [alert show];
             [Util printABC_Error:&Error];
         }
+        [self exitWithBackButton:YES];
     } else {
         UIAlertView *alert = [[UIAlertView alloc]
                             initWithTitle:NSLocalizedString(@"Incorrect password", nil)

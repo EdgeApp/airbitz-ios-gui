@@ -112,6 +112,11 @@ static User *singleton = nil;  // this will be the one and only object this stat
         if (pSettings->szFullName)
             self.fullName = [NSString stringWithUTF8String:pSettings->szFullName];
         self.bNameOnPayments = pSettings->bNameOnPayments;
+
+        self.bDailySpendLimit = pSettings->bDailySpendLimit;
+        self.dailySpendLimitSatoshis = pSettings->dailySpendLimitSatoshis;
+        self.bSpendRequirePin = pSettings->bSpendRequirePin;
+        self.spendRequirePinSatoshis = pSettings->spendRequirePinSatoshis;
     }
     else
     {

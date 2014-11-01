@@ -24,6 +24,7 @@
 + (void)reloadWallet: (Wallet *) wallet;
 + (Wallet *)getWallet: (NSString *)walletUUID;
 + (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
++ (int64_t)getTotalSentToday:(Wallet *)wallet;
 
 + (void)setWalletOrder: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (bool)setWalletAttributes: (Wallet *) wallet;
@@ -48,6 +49,7 @@
                                     errorMsg:(NSMutableString *)error;
 + (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName;
 + (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet;
++ (NSString *)getPIN;
 + (void)login;
 + (void)logout;
 + (BOOL)allWatchersReady;

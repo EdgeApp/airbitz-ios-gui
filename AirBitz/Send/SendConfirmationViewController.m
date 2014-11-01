@@ -24,6 +24,9 @@
     UITextField                         *_selectedTextField;
     int64_t                             _maxAmount;
     BOOL                                _maxLocked;
+    int64_t                             _totalSentToday;
+    BOOL                                _pinRequired;
+    BOOL                                _passwordRequired;
     NSString                            *_strReason;
     int                                 _callbackTimestamp;
     Transaction                         *_completedTransaction;    // nil until sendTransaction is successfully completed
@@ -110,7 +113,11 @@
     _confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
     _maxLocked = NO;
 
+    // Should this be threaded?
+    _totalSentToday = [CoreBridge getTotalSentToday:self.wallet];
+
     [self updateDisplayLayout];
+    [self checkAuthorization];
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
@@ -199,7 +206,9 @@
         // If the PIN is empty, then focus
         if ([self.withdrawlPIN.text length] <= 0)
         {
-            [self.withdrawlPIN becomeFirstResponder];
+            if (_pinRequired || _passwordRequired) {
+                [self.withdrawlPIN becomeFirstResponder];
+            }
         }
     }
     else
@@ -294,7 +303,9 @@
                 self.amountBTCTextField.text = [CoreBridge formatSatoshi:self.amountToSendSatoshi withSymbol:false];
 
                 [self updateTextFieldContents];
-                [self.withdrawlPIN becomeFirstResponder];
+                if (_pinRequired || _passwordRequired) {
+                    [self.withdrawlPIN becomeFirstResponder];
+                }
             });
         });
     }
@@ -613,7 +624,37 @@
                                                     cropDecimals:[CoreBridge currencyDecimalPlaces]];
         }
     }
+    [self checkAuthorization];
     [self startCalcFees];
+}
+
+- (void)checkAuthorization
+{
+    _passwordRequired = NO;
+    _pinRequired = NO;
+
+    if ([User Singleton].bDailySpendLimit 
+            && self.amountToSendSatoshi + _totalSentToday >= [User Singleton].dailySpendLimitSatoshis) {
+        // Show password
+        _passwordRequired = YES;
+        _labelPINTitle.hidden = NO;
+        _labelPINTitle.text = NSLocalizedString(@"Password", nil);
+        _withdrawlPIN.hidden = NO;
+        _withdrawlPIN.keyboardType = UIKeyboardTypeDefault;
+        _imagePINEmboss.hidden = NO;
+    } else if ([User Singleton].bSpendRequirePin && self.amountToSendSatoshi >= [User Singleton].spendRequirePinSatoshis) {
+        // Show PIN pad
+        _pinRequired = YES;
+        _labelPINTitle.hidden = NO;
+        _labelPINTitle.text = NSLocalizedString(@"4 Digit PIN", nil);
+        _withdrawlPIN.hidden = NO;
+        _withdrawlPIN.keyboardType = UIKeyboardTypeNumberPad;
+        _imagePINEmboss.hidden = NO;
+    } else {
+        _labelPINTitle.hidden = YES;
+        _withdrawlPIN.hidden = YES;
+        _imagePINEmboss.hidden = YES;
+    }
 }
 
 - (void)startCalcFees
@@ -786,43 +827,7 @@
 - (void)ConfirmationSliderDidConfirm:(ConfirmationSliderView *)controller
 {
     //make sure PIN is good
-    if (self.withdrawlPIN.text.length)
-    {
-        //make sure the entered PIN matches the PIN stored in the Core
-        tABC_Error error;
-        char *szPIN = NULL;
-        
-        ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szPIN, &error);
-        [Util printABC_Error:&error];
-        if (szPIN) {
-            NSString *storedPIN = [NSString stringWithUTF8String:szPIN];
-            if (![self.withdrawlPIN.text isEqualToString:storedPIN]) {
-                UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle:NSLocalizedString(@"Incorrect PIN", nil)
-                                      message:NSLocalizedString(@"You must enter the correct withdrawl PIN in order to proceed", nil)
-                                      delegate:self
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil];
-                [alert show];
-                [_withdrawlPIN becomeFirstResponder];
-                [_withdrawlPIN selectAll:nil];
-            } else if (self.amountToSendSatoshi == 0) {
-                UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle:NSLocalizedString(@"Enter an amount", nil)
-                                      message:NSLocalizedString(@"Please enter an amount to send", nil)
-                                      delegate:self
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil];
-                [alert show];
-            } else {
-                NSLog(@"SUCCESS!");
-                [self initiateSendRequest];
-            }
-            free(szPIN);
-        }
-    }
-    else
-    {
+    if (_pinRequired && !self.withdrawlPIN.text.length) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle:NSLocalizedString(@"Incorrect PIN", nil)
                               message:NSLocalizedString(@"You must enter your withdrawl PIN in order to proceed", nil)
@@ -830,7 +835,44 @@
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
         [alert show];
-        
+        [_withdrawlPIN becomeFirstResponder];
+        [_withdrawlPIN selectAll:nil];
+        [_confirmationSlider resetIn:1.0];
+        return;
+    }
+
+    NSString *PIN = [CoreBridge getPIN];
+    if (_pinRequired && ![self.withdrawlPIN.text isEqualToString:PIN]) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Incorrect PIN", nil)
+                                message:NSLocalizedString(@"You must enter the correct withdrawl PIN in order to proceed", nil)
+                                delegate:self
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+        [alert show];
+        [_withdrawlPIN becomeFirstResponder];
+        [_withdrawlPIN selectAll:nil];
+    } else if (_passwordRequired && ![self.withdrawlPIN.text isEqualToString:[User Singleton].password]) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
+                                message:NSLocalizedString(@"You must enter the correct password in order to proceed", nil)
+                                delegate:self
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+        [alert show];
+        [_withdrawlPIN becomeFirstResponder];
+        [_withdrawlPIN selectAll:nil];
+    } else if (self.amountToSendSatoshi == 0) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Enter an amount", nil)
+                                message:NSLocalizedString(@"Please enter an amount to send", nil)
+                                delegate:self
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+        [alert show];
+    } else {
+        NSLog(@"SUCCESS!");
+        [self initiateSendRequest];
     }
     [_confirmationSlider resetIn:1.0];
 }
@@ -841,7 +883,9 @@
 {
     [self.amountFiatTextField resignFirstResponder];
     [self.amountBTCTextField resignFirstResponder];
-    [self.withdrawlPIN becomeFirstResponder];
+    if (_pinRequired || _passwordRequired) {
+        [self.withdrawlPIN becomeFirstResponder];
+    }
 }
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
