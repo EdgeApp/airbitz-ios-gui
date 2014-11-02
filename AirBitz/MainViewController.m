@@ -14,6 +14,7 @@
 #import "SendViewController.h"
 #import "WalletsViewController.h"
 #import "LoginViewController.h"
+#import "PINReLoginViewController.h"
 #import "Notifications.h"
 #import "SettingsViewController.h"
 #import "SendStatusViewController.h"
@@ -35,8 +36,8 @@ typedef enum eAppMode
 } tAppMode;
 
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
-                                  LoginViewControllerDelegate, TransactionDetailsViewControllerDelegate,
-                                  UIAlertViewDelegate>
+                                  LoginViewControllerDelegate, APPinViewControllerDelegate,
+                                  TransactionDetailsViewControllerDelegate, UIAlertViewDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_directoryViewController;
@@ -44,6 +45,7 @@ typedef enum eAppMode
 	SendViewController          *_sendViewController;
 	WalletsViewController       *_walletsViewController;
 	LoginViewController         *_loginViewController;
+    PINReLoginViewController    *_PINReLoginViewController;
 	SettingsViewController      *_settingsViewController;
 	SendStatusViewController    *_sendStatusController;
     TransactionDetailsViewController *_txDetailsController;
@@ -103,6 +105,8 @@ typedef enum eAppMode
 	_directoryViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
 	_loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
 	_loginViewController.delegate = self;
+	_PINReLoginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PINReLoginViewController"];
+	_PINReLoginViewController.delegate = self;
 
     [self loadUserViews];
 
@@ -205,6 +209,24 @@ typedef enum eAppMode
 					 animations:^
 	 {
 		 _loginViewController.view.alpha = 1.0;
+	 }
+					 completion:^(BOOL finished)
+	 {
+	 }];
+}
+
+-(void)showPINLogin
+{
+	_PINReLoginViewController.view.frame = self.view.bounds;
+	[self.view insertSubview:_PINReLoginViewController.view belowSubview:self.tabBar];
+	_PINReLoginViewController.view.alpha = 0.0;
+	[self hideTabBarAnimated:YES];
+	[UIView animateWithDuration:0.25
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseIn
+					 animations:^
+	 {
+		 _PINReLoginViewController.view.alpha = 1.0;
 	 }
 					 completion:^(BOOL finished)
 	 {

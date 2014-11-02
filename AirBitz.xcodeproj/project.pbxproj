@@ -138,6 +138,18 @@
 		7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD519AFB2D400943A81 /* libwallet.a */; };
 		7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD619AFB2D400943A81 /* libz.a */; };
 		7D5E1CF419AFB34C00943A81 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CF319AFB34C00943A81 /* libssl.a */; };
+		7D624B711A059BB600CAC6D3 /* PINReLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D624B701A059BB600CAC6D3 /* PINReLoginViewController.m */; };
+		7D624B721A059BB600CAC6D3 /* PINReLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D624B701A059BB600CAC6D3 /* PINReLoginViewController.m */; };
+		7D64938D1A05FEA60002E64C /* ABPINView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64938C1A05FEA60002E64C /* ABPINView.m */; };
+		7D64938E1A05FEA60002E64C /* ABPINView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64938C1A05FEA60002E64C /* ABPINView.m */; };
+		7D6493961A060F1E0002E64C /* large-digit-input_selected@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6493921A060F1E0002E64C /* large-digit-input_selected@2x~iphone.png */; };
+		7D6493971A060F1E0002E64C /* large-digit-input_selected@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6493921A060F1E0002E64C /* large-digit-input_selected@2x~iphone.png */; };
+		7D6493981A060F1E0002E64C /* large-digit-input_selected~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6493931A060F1E0002E64C /* large-digit-input_selected~iphone.png */; };
+		7D6493991A060F1E0002E64C /* large-digit-input_selected~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6493931A060F1E0002E64C /* large-digit-input_selected~iphone.png */; };
+		7D64939A1A060F1E0002E64C /* large-digit-input@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6493941A060F1E0002E64C /* large-digit-input@2x~iphone.png */; };
+		7D64939B1A060F1E0002E64C /* large-digit-input@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6493941A060F1E0002E64C /* large-digit-input@2x~iphone.png */; };
+		7D64939C1A060F1E0002E64C /* large-digit-input~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6493951A060F1E0002E64C /* large-digit-input~iphone.png */; };
+		7D64939D1A060F1E0002E64C /* large-digit-input~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6493951A060F1E0002E64C /* large-digit-input~iphone.png */; };
 		7D6EDB7C19A66C82007C33AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7B19A66C82007C33AE /* CoreText.framework */; };
 		7D8270B119F8976E003F275D /* btn_td_green@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D8270AD19F8976E003F275D /* btn_td_green@2x~iphone.png */; };
 		7D8270B219F8976E003F275D /* btn_td_green@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D8270AD19F8976E003F275D /* btn_td_green@2x~iphone.png */; };
@@ -1051,6 +1063,7 @@
 		DAAC216C1963A35900CC0F1E /* btn_album@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */; };
 		DAAC216D1963A35900CC0F1E /* btn_album~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */; };
 		DABA3486198DFEE300EFAB13 /* infoRequestQR.html in Resources */ = {isa = PBXBuildFile; fileRef = DABA3485198DFEE300EFAB13 /* infoRequestQR.html */; };
+		FFEC8152435348527E2B0D42 /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C529B378C9B458E735AEAFF /* libPods-Airbitz.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1085,6 +1098,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C529B378C9B458E735AEAFF /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2617060DC650ACC033E3F439 /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; };
 		4C08A6D318C29CEF0071B87C /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = ABC/libabc.a; sourceTree = "<group>"; };
 		4C08A6D418C29CEF0071B87C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ABC/libcrypto.a; sourceTree = "<group>"; };
 		4C08A6D518C29CEF0071B87C /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ABC/libcurl.a; sourceTree = "<group>"; };
@@ -1250,6 +1265,14 @@
 		7D5E1CD519AFB2D400943A81 /* libwallet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwallet.a; path = "ABC-testnet/libwallet.a"; sourceTree = "<group>"; };
 		7D5E1CD619AFB2D400943A81 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = "ABC-testnet/libz.a"; sourceTree = "<group>"; };
 		7D5E1CF319AFB34C00943A81 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "ABC-testnet/libssl.a"; sourceTree = "<group>"; };
+		7D624B6F1A059BB600CAC6D3 /* PINReLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINReLoginViewController.h; sourceTree = "<group>"; };
+		7D624B701A059BB600CAC6D3 /* PINReLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINReLoginViewController.m; sourceTree = "<group>"; };
+		7D64938B1A05FEA60002E64C /* ABPINView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABPINView.h; path = AirBitz/ABPINView.h; sourceTree = SOURCE_ROOT; };
+		7D64938C1A05FEA60002E64C /* ABPINView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ABPINView.m; path = AirBitz/ABPINView.m; sourceTree = SOURCE_ROOT; };
+		7D6493921A060F1E0002E64C /* large-digit-input_selected@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "large-digit-input_selected@2x~iphone.png"; sourceTree = "<group>"; };
+		7D6493931A060F1E0002E64C /* large-digit-input_selected~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "large-digit-input_selected~iphone.png"; sourceTree = "<group>"; };
+		7D6493941A060F1E0002E64C /* large-digit-input@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "large-digit-input@2x~iphone.png"; sourceTree = "<group>"; };
+		7D6493951A060F1E0002E64C /* large-digit-input~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "large-digit-input~iphone.png"; sourceTree = "<group>"; };
 		7D687D8819AFFBF20077BD5A /* Airbitz-Testnet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Airbitz-Testnet-Info.plist"; sourceTree = "<group>"; };
 		7D6EDB7B19A66C82007C33AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		7D8270AD19F8976E003F275D /* btn_td_green@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_td_green@2x~iphone.png"; sourceTree = "<group>"; };
@@ -1755,6 +1778,7 @@
 		DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album@2x~iphone.png"; sourceTree = "<group>"; };
 		DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album~iphone.png"; sourceTree = "<group>"; };
 		DABA3485198DFEE300EFAB13 /* infoRequestQR.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoRequestQR.html; sourceTree = "<group>"; };
+		ECF12C46398049B3811FEA2E /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1842,6 +1866,7 @@
 				4C08A6E018C29CEF0071B87C /* libscrypt.a in Frameworks */,
 				4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */,
 				4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */,
+				FFEC8152435348527E2B0D42 /* libPods-Airbitz.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1980,6 +2005,15 @@
 				4C90462418C91E5900179D9C /* Window.h */,
 			);
 			name = zbar;
+			sourceTree = "<group>";
+		};
+		533C32ACCCC474A6AEC5F4B9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ECF12C46398049B3811FEA2E /* Pods-Airbitz.debug.xcconfig */,
+				2617060DC650ACC033E3F439 /* Pods-Airbitz.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		683D95B61989F14B0082BC1A /* Certs */ = {
@@ -2163,6 +2197,7 @@
 				B5675B5118A17F6F002E0703 /* AirBitz */,
 				B5675B4A18A17F6F002E0703 /* Frameworks */,
 				B5675B4918A17F6F002E0703 /* Products */,
+				533C32ACCCC474A6AEC5F4B9 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2203,6 +2238,7 @@
 				B5675B4D18A17F6F002E0703 /* CoreGraphics.framework */,
 				B5675B4F18A17F6F002E0703 /* UIKit.framework */,
 				B5675B6D18A17F6F002E0703 /* XCTest.framework */,
+				0C529B378C9B458E735AEAFF /* libPods-Airbitz.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2213,6 +2249,8 @@
 				7D5E1CB919AFB21F00943A81 /* ABC-testnet */,
 				4C08A6D118C29CDC0071B87C /* ABC */,
 				4C08A6E318C2B1B60071B87C /* ABC Data */,
+				7D64938B1A05FEA60002E64C /* ABPINView.h */,
+				7D64938C1A05FEA60002E64C /* ABPINView.m */,
 				B5675B5A18A17F6F002E0703 /* AppDelegate.h */,
 				B5675B5B18A17F6F002E0703 /* AppDelegate.m */,
 				B5C0A96218EA0A42008F302C /* Business Directory */,
@@ -2328,6 +2366,10 @@
 		B5675B9F18A19A84002E0703 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				7D6493921A060F1E0002E64C /* large-digit-input_selected@2x~iphone.png */,
+				7D6493931A060F1E0002E64C /* large-digit-input_selected~iphone.png */,
+				7D6493941A060F1E0002E64C /* large-digit-input@2x~iphone.png */,
+				7D6493951A060F1E0002E64C /* large-digit-input~iphone.png */,
 				7DB9DD7D1A03187D00AD35ED /* background@2x~iphone.jpg */,
 				7DB9DD7E1A03187D00AD35ED /* background~iphone.jpg */,
 				7DFAF0C11A03119D00D33198 /* background_login@2x~iphone.jpg */,
@@ -2881,6 +2923,8 @@
 				B5F2E9D218DCE09E008ACF88 /* PasswordVerifyView~ipad.xib */,
 				B5F2E9C318DB4B23008ACF88 /* PasswordRecoveryViewController.h */,
 				B5F2E9C418DB4B23008ACF88 /* PasswordRecoveryViewController.m */,
+				7D624B6F1A059BB600CAC6D3 /* PINReLoginViewController.h */,
+				7D624B701A059BB600CAC6D3 /* PINReLoginViewController.m */,
 				B5F2EB0D18DE018E008ACF88 /* QuestionAnswerView.h */,
 				B5F2EB0E18DE018E008ACF88 /* QuestionAnswerView.m */,
 				B5F2EB1018DE01CB008ACF88 /* QuestionAnswerView~iphone.xib */,
@@ -2926,10 +2970,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5675B7D18A17F6F002E0703 /* Build configuration list for PBXNativeTarget "Airbitz" */;
 			buildPhases = (
+				1C839CF84ABF8D37A48A27B8 /* Check Pods Manifest.lock */,
 				B5675B4418A17F6F002E0703 /* Sources */,
 				B5675B4518A17F6F002E0703 /* Frameworks */,
 				B5675B4618A17F6F002E0703 /* Resources */,
 				7D6EDB7619A66C50007C33AE /* ShellScript */,
+				D97C59B607DA4D2550968263 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3183,6 +3229,7 @@
 				7D98ADD319A7C550003D2BF6 /* email_btn~iphone.png in Resources */,
 				7D98ADD419A7C550003D2BF6 /* icon_wallet_dark~iphone.png in Resources */,
 				7D23D57719BE8E130042B87A /* bd_highlighted_cell_middle~iphone.png in Resources */,
+				7D64939B1A060F1E0002E64C /* large-digit-input@2x~iphone.png in Resources */,
 				7D98ADD519A7C550003D2BF6 /* btn_export_dates@2x~iphone.png in Resources */,
 				7D98ADD619A7C550003D2BF6 /* infoSend.html in Resources */,
 				7DB9DD821A03187D00AD35ED /* background~iphone.jpg in Resources */,
@@ -3217,6 +3264,7 @@
 				7D98ADEE19A7C550003D2BF6 /* infoSendConfirmation.html in Resources */,
 				7D98ADEF19A7C550003D2BF6 /* icon_wallet@2x~iphone.png in Resources */,
 				7D98ADF019A7C550003D2BF6 /* btn_big_blue2_dark@2x~iphone.png in Resources */,
+				7D6493991A060F1E0002E64C /* large-digit-input_selected~iphone.png in Resources */,
 				7D98ADF119A7C550003D2BF6 /* btn_9@2x~iphone.png in Resources */,
 				7D8270C519F89C8B003F275D /* btn_forgot_password_arrow@2x.png in Resources */,
 				7D98ADF219A7C550003D2BF6 /* btn_clear@2x~iphone.png in Resources */,
@@ -3386,6 +3434,7 @@
 				7D98AE8819A7C550003D2BF6 /* InfoPlist.strings in Resources */,
 				7D98AE8919A7C550003D2BF6 /* tabbar_bkg_selected~iphone.png in Resources */,
 				DAA5784E19C272C400E972FC /* SMSTemplate.txt in Resources */,
+				7D64939D1A060F1E0002E64C /* large-digit-input~iphone.png in Resources */,
 				7D98AE8A19A7C550003D2BF6 /* btn_addCategory@2x~iphone.png in Resources */,
 				7D8270B419F8976E003F275D /* btn_td_green~iphone.png in Resources */,
 				7D98AE8B19A7C550003D2BF6 /* scan_frame~iphone.png in Resources */,
@@ -3396,6 +3445,7 @@
 				7D98AE8F19A7C550003D2BF6 /* thumb@2x~iphone.png in Resources */,
 				7D98AE9019A7C550003D2BF6 /* btn_8~iphone.png in Resources */,
 				7D98AE9119A7C550003D2BF6 /* infoWallets.html in Resources */,
+				7D6493971A060F1E0002E64C /* large-digit-input_selected@2x~iphone.png in Resources */,
 				7D98AE9219A7C550003D2BF6 /* drag_bar~iphone.png in Resources */,
 				7D98AE9319A7C550003D2BF6 /* tabbar_base~iphone.png in Resources */,
 				7DB9DD801A03187D00AD35ED /* background@2x~iphone.jpg in Resources */,
@@ -3572,6 +3622,7 @@
 				DA76938B1964FE8A0022EE64 /* email_btn~iphone.png in Resources */,
 				B59C152E18C012B500AEA789 /* icon_wallet_dark~iphone.png in Resources */,
 				7D23D57619BE8E130042B87A /* bd_highlighted_cell_middle~iphone.png in Resources */,
+				7D64939A1A060F1E0002E64C /* large-digit-input@2x~iphone.png in Resources */,
 				4C7247A21934FC840091C286 /* btn_export_dates@2x~iphone.png in Resources */,
 				4C5D8C72192E7D4A0015BB3C /* infoSend.html in Resources */,
 				7DB9DD811A03187D00AD35ED /* background~iphone.jpg in Resources */,
@@ -3606,6 +3657,7 @@
 				7DAE1F4819A3C6A400BF5C60 /* infoSendConfirmation.html in Resources */,
 				B59C152C18C012B500AEA789 /* icon_wallet@2x~iphone.png in Resources */,
 				B5184B7D18E0F4DA0001712A /* btn_big_blue2_dark@2x~iphone.png in Resources */,
+				7D6493981A060F1E0002E64C /* large-digit-input_selected~iphone.png in Resources */,
 				B59C14DC18C012B500AEA789 /* btn_9@2x~iphone.png in Resources */,
 				7D8270C419F89C8B003F275D /* btn_forgot_password_arrow@2x.png in Resources */,
 				B59C14E818C012B500AEA789 /* btn_clear@2x~iphone.png in Resources */,
@@ -3775,6 +3827,7 @@
 				B5675B5618A17F6F002E0703 /* InfoPlist.strings in Resources */,
 				B59C161F18C145D400AEA789 /* tabbar_bkg_selected~iphone.png in Resources */,
 				DAA5784D19C272C400E972FC /* SMSTemplate.txt in Resources */,
+				7D64939C1A060F1E0002E64C /* large-digit-input~iphone.png in Resources */,
 				B55A032218EB597D00845090 /* btn_addCategory@2x~iphone.png in Resources */,
 				7D8270B319F8976E003F275D /* btn_td_green~iphone.png in Resources */,
 				B5E7F57E18E4EC4E009B5844 /* scan_frame~iphone.png in Resources */,
@@ -3785,6 +3838,7 @@
 				B59C154418C012B500AEA789 /* thumb@2x~iphone.png in Resources */,
 				B59C14DB18C012B500AEA789 /* btn_8~iphone.png in Resources */,
 				4C5D8C75192E7D4A0015BB3C /* infoWallets.html in Resources */,
+				7D6493961A060F1E0002E64C /* large-digit-input_selected@2x~iphone.png in Resources */,
 				DA4CFE46196F897B002CFD49 /* drag_bar~iphone.png in Resources */,
 				B59C153518C012B500AEA789 /* tabbar_base~iphone.png in Resources */,
 				7DB9DD7F1A03187D00AD35ED /* background@2x~iphone.jpg in Resources */,
@@ -3795,6 +3849,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1C839CF84ABF8D37A48A27B8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		7D6EDB7619A66C50007C33AE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3820,6 +3889,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "FILE=\"${SRCROOT}/AirBitz/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+		};
+		D97C59B607DA4D2550968263 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3904,6 +3988,7 @@
 				7D98ACF319A7C550003D2BF6 /* MinCharTextField.m in Sources */,
 				7D98ACF419A7C550003D2BF6 /* DDData.m in Sources */,
 				7D98ACF519A7C550003D2BF6 /* SignUpViewController.m in Sources */,
+				7D64938E1A05FEA60002E64C /* ABPINView.m in Sources */,
 				7D98ACF619A7C550003D2BF6 /* FlashSelectView.m in Sources */,
 				7D98ACF719A7C550003D2BF6 /* Location.m in Sources */,
 				7D98ACF819A7C550003D2BF6 /* CoreBridge.m in Sources */,
@@ -3927,6 +4012,7 @@
 				7D98AD0A19A7C550003D2BF6 /* CalculatorView.m in Sources */,
 				7D98AD0B19A7C550003D2BF6 /* ButtonSelectorView.m in Sources */,
 				7D98AD0C19A7C550003D2BF6 /* BD_Hours_Cell.m in Sources */,
+				7D624B721A059BB600CAC6D3 /* PINReLoginViewController.m in Sources */,
 				7D98AD0D19A7C550003D2BF6 /* overviewCell.m in Sources */,
 				7D98AD0E19A7C550003D2BF6 /* SyncView.m in Sources */,
 				7D98AD0F19A7C550003D2BF6 /* TabBarButton.m in Sources */,
@@ -3988,6 +4074,7 @@
 				B5C0A9B518EA0D99008F302C /* SettingsViewController.m in Sources */,
 				7DB1354C19FF13BA007D23CE /* BD_Social_Cell.m in Sources */,
 				4C98CAF8199FB545000009B5 /* LocalSettings.m in Sources */,
+				7D624B711A059BB600CAC6D3 /* PINReLoginViewController.m in Sources */,
 				B516C1E818C54B07008CC6A1 /* NSDate+Helper.m in Sources */,
 				4C3C3093191834AC006923DE /* PopupPickerView.m in Sources */,
 				4C7247D41937A7520091C286 /* PayeeCell.m in Sources */,
@@ -4032,6 +4119,7 @@
 				4C5D8C911933C8040015BB3C /* ExportWalletOptionsViewController.m in Sources */,
 				B5675B5818A17F6F002E0703 /* main.m in Sources */,
 				B55A030E18EA4ED400845090 /* TextFieldCell.m in Sources */,
+				7D64938D1A05FEA60002E64C /* ABPINView.m in Sources */,
 				4C5D8C5B192AB8E70015BB3C /* Util.m in Sources */,
 				4C5D8C8E1933C7DC0015BB3C /* ExportWalletViewController.m in Sources */,
 				B5137C1518A40EDA00DA4A34 /* LatoLabel.m in Sources */,
@@ -4102,7 +4190,6 @@
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "Airbitz Testnet";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -4136,7 +4223,6 @@
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "Airbitz Testnet";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -4217,6 +4303,7 @@
 		};
 		B5675B7E18A17F6F002E0703 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECF12C46398049B3811FEA2E /* Pods-Airbitz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -4241,7 +4328,6 @@
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
-				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -4250,6 +4336,7 @@
 		};
 		B5675B7F18A17F6F002E0703 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2617060DC650ACC033E3F439 /* Pods-Airbitz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -4274,7 +4361,6 @@
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
-				OTHER_LDFLAGS = "-ObjC ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
