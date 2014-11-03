@@ -12,3 +12,4 @@ AirBitz.xcodeproj/xcshareddata
 xcuserdata
 project.xcworkspace
 deploy
+/Pods/
