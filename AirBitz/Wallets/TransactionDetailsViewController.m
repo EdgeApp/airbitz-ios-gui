@@ -24,6 +24,9 @@
 #import "Util.h"
 #import "CommonTypes.h"
 #import "PayeeCell.h"
+#import "BusinessDetailsViewController.h"
+#import "Location.h"
+#import "CommonTypes.h"
 
 #define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
 #define ARRAY_CATEGORY_PREFIX_EXPENSE    0
@@ -61,7 +64,8 @@ typedef enum eRequestType
 
 @interface TransactionDetailsViewController () <UITextFieldDelegate, UITextViewDelegate, InfoViewDelegate, CalculatorViewDelegate,
                                                 DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate,
-                                                UIGestureRecognizerDelegate, UIAlertViewDelegate>
+                                                UIGestureRecognizerDelegate, UIAlertViewDelegate,
+                                                LocationDelegate, BusinessDetailsViewControllerDelegate>
 {
     UITextField     *_activeTextField;
     UITextView      *_activeTextView;
@@ -73,6 +77,7 @@ typedef enum eRequestType
     BOOL            _bDoneSentToDelegate;
     unsigned int    _bizId;
     UIAlertView     *_recoveryAlert;
+    BusinessDetailsViewController *businessDetailsController;
 }
 
 @property (nonatomic, weak) IBOutlet UIView                 *headerView;
@@ -80,6 +85,7 @@ typedef enum eRequestType
 @property (nonatomic, weak) IBOutlet UIView                 *scrollableContentView;
 
 @property (weak, nonatomic) IBOutlet UIView                 *viewPhoto;
+@property (weak, nonatomic) IBOutlet UIButton               *imagePhotoButton;
 @property (weak, nonatomic) IBOutlet UIImageView            *imagePhoto;
 @property (nonatomic, weak) IBOutlet UILabel                *dateLabel;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageNameEmboss;
@@ -252,6 +258,13 @@ typedef enum eRequestType
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+    
+    [Location initAllWithDelegate: self];
+}
+
+- (void)viewDidUnload
+{
+    [Location freeAll];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -313,6 +326,14 @@ typedef enum eRequestType
     self.labelFee.text = feeFormatted;
     self.bitCoinLabel.text = coinFormatted;
     self.labelBTC.text = [User Singleton].denominationLabel;
+    
+    [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [Location stopLocating];
+    [self dismissBusinessDetails];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -458,6 +479,78 @@ typedef enum eRequestType
 {
     [self resignAllResponders];
     [InfoView CreateWithHTML:@"infoTransactionDetails" forView:self.view];
+}
+
+- (IBAction)imagePhotoTouched:(id)sender
+{
+    if (0 != _bizId)
+    {
+        NSString *biz = [NSString stringWithFormat:@"%u", _bizId];
+        CLLocation *location = [Location controller].curLocation;
+        [self launchBusinessDetailsWithBizID:biz andLocation:location.coordinate animated:YES];
+    }
+}
+
+- (void)launchBusinessDetailsWithBizID: (NSString *)bizId andLocation: (CLLocationCoordinate2D)location animated: (BOOL)animated
+{
+    if (businessDetailsController)
+    {
+        return;
+    }
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName: @"Main_iPhone" bundle: nil];
+    businessDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier: @"BusinessDetailsViewController"];
+    
+    businessDetailsController.bizId = bizId;
+    businessDetailsController.latLong = location;
+    businessDetailsController.delegate = self;
+    
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    businessDetailsController.view.frame = frame;
+    [self.view addSubview: businessDetailsController.view];
+    
+    if (animated)
+    {
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        [UIView animateWithDuration: 0.35
+                              delay: 0.0
+                            options: UIViewAnimationOptionCurveEaseInOut
+                         animations: ^
+         {
+             businessDetailsController.view.frame = self.view.bounds;
+         }
+                         completion: ^(BOOL finished)
+         {
+             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+             //self.dividerView.alpha = 0.0;
+         }];
+    }
+}
+
+- (void)dismissBusinessDetails
+{
+     [businessDetailsController.view removeFromSuperview];
+     businessDetailsController = nil;
+}
+
+#pragma mark BusinessDetailsViewControllerDelegates
+
+- (void)businessDetailsViewControllerDone: (BusinessDetailsViewController *)controller
+{
+    [UIView animateWithDuration: 0.35
+                          delay: 0.0
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations: ^
+     {
+         CGRect frame = self.view.bounds;
+         frame.origin.x = frame.size.width;
+         businessDetailsController.view.frame = frame;
+     }
+                     completion: ^(BOOL finished)
+     {
+         [self dismissBusinessDetails];
+     }];
 }
 
 #pragma mark - Misc Methods

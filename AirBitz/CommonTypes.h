@@ -19,6 +19,8 @@
 #define ERROR_MESSAGE_FADE_DELAY            2.0
 #define ERROR_MESSAGE_FADE_DISMISS          0.1
 
+#define LOCATION_UPDATE_PERIOD	60 /* seconds */
+
 #define COLOR_BAR_TINT          [UIColor colorWithRed:0.0 / 255.0 green:94.0 / 255.0 blue:155.0 / 255.0 alpha:1.0]
 #define COLOR_GRADIENT_TOP      [UIColor colorWithRed:80.0 / 255.0 green:181.0 / 255.0 blue:224.0 / 255.0 alpha:1.0]
 #define COLOR_GRADIENT_BOTTOM   [UIColor colorWithRed:17.0 / 255.0 green:128.0 / 255.0 blue:178.0 / 255.0 alpha:1.0]

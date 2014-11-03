@@ -2965,6 +2965,16 @@
                                                 <rect key="frame" x="17" y="26" width="45" height="45"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="emF-lj-aya">
+                                                        <rect key="frame" x="-41" y="-60" width="126" height="165"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <state key="normal">
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="imagePhotoTouched:" destination="Gtr-aC-t0S" eventType="touchUpInside" id="x0R-0X-158"/>
+                                                        </connections>
+                                                    </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" id="bWb-oS-cFc">
                                                         <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3001,6 +3011,7 @@
                         <outlet property="imageNameEmboss" destination="EEe-WW-4Vt" id="gbz-wQ-uqk"/>
                         <outlet property="imageNotesEmboss" destination="RWm-5y-zN2" id="I5s-Ws-tTq"/>
                         <outlet property="imagePhoto" destination="bWb-oS-cFc" id="SpQ-Qr-ONQ"/>
+                        <outlet property="imagePhotoButton" destination="emF-lj-aya" id="pHD-8K-KEH"/>
                         <outlet property="keypadView" destination="XNd-9N-hLm" id="n96-xl-rlz"/>
                         <outlet property="labelBTC" destination="0WP-4K-TNl" id="RE5-d7-dey"/>
                         <outlet property="labelCategory" destination="ClG-um-kmI" id="aS1-Qa-7yc"/>

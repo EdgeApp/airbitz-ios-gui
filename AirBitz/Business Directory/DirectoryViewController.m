@@ -35,8 +35,6 @@
 
 #define MAX_SEARCH_CACHE_SIZE	2 /* each cache can hold this many items */
 
-#define LOCATION_UPDATE_PERIOD	60 /* seconds */
-
 #define CURRENT_LOCATION_STRING	NSLocalizedString(@"Current Location", nil)
 #define ON_THE_WEB_STRING	NSLocalizedString(@"On The Web", nil)
 #define NUM_PROGRAMMATIC_RESULTS 2
