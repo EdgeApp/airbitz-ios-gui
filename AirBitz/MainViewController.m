@@ -588,8 +588,8 @@ typedef enum eAppMode
                                     otherButtonTitles:nil];
 
                 [_receivedAlert show];
-                // Wait 10 seconds and dismiss
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC);
+                // Wait and dismiss
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, MERCHANT_RECEIVED_DURATION * NSEC_PER_SEC);
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
                     if (_receivedAlert)
                     {

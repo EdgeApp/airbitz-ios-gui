@@ -15,6 +15,8 @@
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 #define IS_IPHONE4                                  (([[UIScreen mainScreen] bounds].size.height < 568) ? YES : NO)
 
+#define MERCHANT_RECEIVED_DURATION 20
+
 #define ERROR_MESSAGE_FADE_DURATION         3.0
 #define ERROR_MESSAGE_FADE_DELAY            2.0
 #define ERROR_MESSAGE_FADE_DISMISS          0.1
