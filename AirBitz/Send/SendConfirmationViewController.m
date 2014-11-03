@@ -168,7 +168,7 @@ static NSString *kTimerStart = @"start";
 
 - (void)myTextDidChange:(NSNotification *)notification
 {
-    if(notification.object == self.withdrawlPIN)
+    if(_pinRequired && notification.object == self.withdrawlPIN)
     {
         if(self.withdrawlPIN.text.length == 4)
         {
@@ -179,6 +179,11 @@ static NSString *kTimerStart = @"start";
     {
         NSLog(@"Text changed for some field");
     }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
