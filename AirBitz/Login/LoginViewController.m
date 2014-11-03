@@ -16,12 +16,10 @@
 #import "Config.h"
 #import "PasswordRecoveryViewController.h"
 #import "CoreBridge.h"
+#import "CommonTypes.h"
 
 #define CONTENT_VIEW_SCALE_WITH_KEYBOARD    0.75
 #define LOGO_IMAGE_SHRINK_SCALE_FACTOR      0.5
-#define ERROR_MESSAGE_FADE_DURATION         3.0
-#define ERROR_MESSAGE_FADE_DELAY            2.0
-#define ERROR_MESSAGE_FADE_DISMISS          0.1
 
 typedef enum eLoginMode
 {

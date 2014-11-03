@@ -1093,6 +1093,24 @@
                                     <action selector="info" destination="mXe-0d-x2m" eventType="touchUpInside" id="fXt-Cu-kne"/>
                                 </connections>
                             </button>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" id="3Uu-Ec-Dag" userLabel="ErrorMessageView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-errormessage.png" id="xRd-Sk-BzN">
+                                        <rect key="frame" x="60" y="200" width="200" height="168"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid user name or password" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G7O-8m-b61" userLabel="ErrorMessageText" customClass="LatoLabel">
+                                        <rect key="frame" x="85" y="215" width="150" height="139"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1107,6 +1125,8 @@
                         <outlet property="btn_alwaysConfirm" destination="69b-p5-Bpq" id="XTU-U2-bRN"/>
                         <outlet property="confirmSliderContainer" destination="9Zm-fv-MBe" id="q8o-md-9m0"/>
                         <outlet property="conversionLabel" destination="9aX-Dw-7XD" id="QVZ-z2-zJ9"/>
+                        <outlet property="errorMessageText" destination="G7O-8m-b61" id="P4x-i2-pJO"/>
+                        <outlet property="errorMessageView" destination="3Uu-Ec-Dag" id="1KD-YK-ngc"/>
                         <outlet property="helpButton" destination="G7c-5d-j1M" id="qse-9V-0xm"/>
                         <outlet property="imagePINEmboss" destination="1rZ-NY-P3J" id="Q8L-bj-2de"/>
                         <outlet property="imageTopEmboss" destination="u9m-uV-m1e" id="jwq-lt-96g"/>

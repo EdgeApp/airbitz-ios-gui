@@ -18,6 +18,15 @@
 #import "Util.h"
 #import "CommonTypes.h"
 
+typedef NS_ENUM(NSUInteger, SendViewState) {
+    kNormal,
+    kInvalidEntryWait,
+};
+
+#define INVALID_ENTRY_COUNT_MAX 3
+#define INVALID_ENTRY_WAIT 30.0
+static NSString *kTimerStart = @"start";
+
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
 {
     ConfirmationSliderView              *_confirmationSlider;
@@ -32,6 +41,10 @@
     Transaction                         *_completedTransaction;    // nil until sendTransaction is successfully completed
     UITapGestureRecognizer              *tap;
     UIAlertView                         *_alert;
+    NSUInteger                          _invalidEntryCount;
+    NSUInteger                          _viewState;
+    NSRunLoop                           *_runLoop;
+    NSTimer                             *_InvalidEntryTimer;
 }
 
 @property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
@@ -60,6 +73,8 @@
 @property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
 @property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
+@property (nonatomic, weak) IBOutlet UIView                 *errorMessageView;
+@property (nonatomic, weak) IBOutlet UILabel                *errorMessageText;
 
 @property (nonatomic, strong) SendStatusViewController          *sendStatusController;
 @property (nonatomic, strong) TransactionDetailsViewController  *transactionDetailsController;
@@ -130,6 +145,12 @@
                                              selector:@selector(exchangeRateUpdate:)
                                                  name:NOTIFICATION_EXCHANGE_RATE_CHANGE
                                                object:nil];
+    
+    self.errorMessageView.alpha = 0.0;
+
+    _viewState = kNormal;
+    _invalidEntryCount = 0;
+    _runLoop = [NSRunLoop currentRunLoop];
 }
 
 - (void)dealloc
@@ -797,6 +818,58 @@
     return (self.sendStatusController != nil || self.transactionDetailsController != nil);
 }
 
+- (void)showFadingError:(NSString *)message
+{
+    self.errorMessageText.text = message;
+    self.errorMessageView.alpha = 1.0;
+    [UIView animateWithDuration:ERROR_MESSAGE_FADE_DURATION
+                          delay:ERROR_MESSAGE_FADE_DELAY
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^
+     {
+         self.errorMessageView.alpha = 0.0;
+     }
+     completion:^(BOOL finished)
+     {
+     }];
+}
+
+- (void)startInvalidEntryWait
+{
+    if (kInvalidEntryWait == _viewState)
+    {
+        return;
+    }
+
+    _viewState = kInvalidEntryWait;
+    _invalidEntryCount = 0;
+    _InvalidEntryTimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:INVALID_ENTRY_WAIT]
+                                         interval:INVALID_ENTRY_WAIT
+                                           target:self
+                                         selector:@selector(endInvalidEntryWait)
+                                         userInfo:@{kTimerStart : [NSDate date]}
+                                          repeats:NO];
+    [_runLoop addTimer:_InvalidEntryTimer forMode:NSDefaultRunLoopMode];
+}
+
+- (void)endInvalidEntryWait
+{
+    if (self)
+    {
+        _viewState = kNormal;
+    }
+}
+
+- (NSTimeInterval)getRemainingInvalidEntryWait
+{
+    if (!_InvalidEntryTimer || ![_InvalidEntryTimer isValid]) {
+        return 0;
+    }
+    NSDate *start = [[_InvalidEntryTimer userInfo] objectForKey:kTimerStart];
+    NSDate *current = [NSDate date];
+    return INVALID_ENTRY_WAIT - [current timeIntervalSinceDate:start];
+}
+
 #pragma mark infoView Delegates
 
 - (void)InfoViewFinished:(InfoView *)infoView
@@ -826,53 +899,62 @@
 
 - (void)ConfirmationSliderDidConfirm:(ConfirmationSliderView *)controller
 {
-    //make sure PIN is good
-    if (_pinRequired && !self.withdrawlPIN.text.length) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Incorrect PIN", nil)
-                              message:NSLocalizedString(@"You must enter your withdrawl PIN in order to proceed", nil)
-                              delegate:self
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
-        [_withdrawlPIN becomeFirstResponder];
-        [_withdrawlPIN selectAll:nil];
-        [_confirmationSlider resetIn:1.0];
-        return;
+    if (kInvalidEntryWait == _viewState)
+    {
+        NSTimeInterval remaining = [self getRemainingInvalidEntryWait];
+        NSString *entry = _pinRequired ? @"PIN" : @"password";
+        [self showFadingError:[NSString stringWithFormat:
+                NSLocalizedString(@"Please wait %.0f seconds before retrying %@",
+                nil),
+                remaining,
+                entry]];
     }
+    else
+    {
+        //make sure PIN is good
+        if (_pinRequired && !self.withdrawlPIN.text.length) {
+            [self showFadingError:NSLocalizedString(@"Please enter your PIN", nil)];
+            [_withdrawlPIN becomeFirstResponder];
+            [_withdrawlPIN selectAll:nil];
+            [_confirmationSlider resetIn:1.0];
+            return;
+        }
 
-    NSString *PIN = [CoreBridge getPIN];
-    if (_pinRequired && ![self.withdrawlPIN.text isEqualToString:PIN]) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Incorrect PIN", nil)
-                                message:NSLocalizedString(@"You must enter the correct withdrawl PIN in order to proceed", nil)
-                                delegate:self
-                                cancelButtonTitle:@"OK"
-                                otherButtonTitles:nil];
-        [alert show];
-        [_withdrawlPIN becomeFirstResponder];
-        [_withdrawlPIN selectAll:nil];
-    } else if (_passwordRequired && ![self.withdrawlPIN.text isEqualToString:[User Singleton].password]) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
-                                message:NSLocalizedString(@"You must enter the correct password in order to proceed", nil)
-                                delegate:self
-                                cancelButtonTitle:@"OK"
-                                otherButtonTitles:nil];
-        [alert show];
-        [_withdrawlPIN becomeFirstResponder];
-        [_withdrawlPIN selectAll:nil];
-    } else if (self.amountToSendSatoshi == 0) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Enter an amount", nil)
-                                message:NSLocalizedString(@"Please enter an amount to send", nil)
-                                delegate:self
-                                cancelButtonTitle:@"OK"
-                                otherButtonTitles:nil];
-        [alert show];
-    } else {
-        NSLog(@"SUCCESS!");
-        [self initiateSendRequest];
+        NSString *PIN = [CoreBridge getPIN];
+        if (_pinRequired && ![self.withdrawlPIN.text isEqualToString:PIN]) {
+            ++_invalidEntryCount;
+            if (INVALID_ENTRY_COUNT_MAX <= _invalidEntryCount)
+            {
+                [self startInvalidEntryWait];
+                NSTimeInterval remaining = [self getRemainingInvalidEntryWait];
+                [self showFadingError:[NSString stringWithFormat:NSLocalizedString(@"Incorrect PIN. Please wait %.0f seconds and try again.", nil), remaining]];
+            }
+            else
+            {
+                [self showFadingError:NSLocalizedString(@"Incorrect PIN", nil)];
+            }
+            [_withdrawlPIN becomeFirstResponder];
+            [_withdrawlPIN selectAll:nil];
+        } else if (_passwordRequired && ![self.withdrawlPIN.text isEqualToString:[User Singleton].password]) {
+            ++_invalidEntryCount;
+            if (INVALID_ENTRY_COUNT_MAX <= _invalidEntryCount)
+            {
+                [self startInvalidEntryWait];
+                NSTimeInterval remaining = [self getRemainingInvalidEntryWait];
+                [self showFadingError:[NSString stringWithFormat:NSLocalizedString(@"Incorrect password. Please wait %.0f seconds and try again.", nil), remaining]];
+            }
+            else
+            {
+                [self showFadingError:NSLocalizedString(@"Incorrect password", nil)];
+            }
+            [_withdrawlPIN becomeFirstResponder];
+            [_withdrawlPIN selectAll:nil];
+        } else if (self.amountToSendSatoshi == 0) {
+            [self showFadingError:NSLocalizedString(@"Please enter an amount to send", nil)];
+        } else {
+            NSLog(@"SUCCESS!");
+            [self initiateSendRequest];
+        }
     }
     [_confirmationSlider resetIn:1.0];
 }
