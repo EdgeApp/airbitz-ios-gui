@@ -9,7 +9,6 @@
 #import "User.h"
 #import "ABC.h"
 #import "Util.h"
-#import "CommonTypes.h"
 #import "CoreBridge.h"
 
 static BOOL bInitialized = NO;
@@ -67,6 +66,10 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.denominationType = ABC_DENOMINATION_BTC;
     self.denominationLabel = @"BTC";
     self.denominationLabelShort = @"฿ ";
+    self.sendInvalidEntryCount = 0;
+    self.sendState = kNormal;
+    self.runLoop = [NSRunLoop currentRunLoop];
+
     return self;
 }
 
@@ -132,6 +135,52 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [CoreBridge logout];
     }
     self.password = nil;
+}
+
+- (SendViewState)invalidEntry
+{
+    ++self.sendInvalidEntryCount;
+    if (INVALID_ENTRY_COUNT_MAX <= self.sendInvalidEntryCount)
+    {
+        [self startInvalidEntryWait];
+    }
+    return self.sendState;
+}
+
+- (void)startInvalidEntryWait
+{
+    if (kInvalidEntryWait == self.sendState)
+    {
+        return;
+    }
+    
+    self.sendState = kInvalidEntryWait;
+    self.sendInvalidEntryCount = 0;
+    self.sendInvalidEntryTimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:INVALID_ENTRY_WAIT]
+                                                  interval:INVALID_ENTRY_WAIT
+                                                    target:self
+                                                  selector:@selector(endInvalidEntryWait)
+                                                  userInfo:@{kTimerStart : [NSDate date]}
+                                                   repeats:NO];
+    [self.runLoop addTimer:self.sendInvalidEntryTimer forMode:NSDefaultRunLoopMode];
+}
+
+- (void)endInvalidEntryWait
+{
+    if (self)
+    {
+        self.sendState = kNormal;
+    }
+}
+
+- (NSTimeInterval)getRemainingInvalidEntryWait
+{
+    if (!self.sendInvalidEntryTimer || ![self.sendInvalidEntryTimer isValid]) {
+        return 0;
+    }
+    NSDate *start = [[self.sendInvalidEntryTimer userInfo] objectForKey:kTimerStart];
+    NSDate *current = [NSDate date];
+    return INVALID_ENTRY_WAIT - [current timeIntervalSinceDate:start];
 }
 
 @end

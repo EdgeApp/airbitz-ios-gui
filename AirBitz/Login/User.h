@@ -8,6 +8,7 @@
 //  master user object that other modules can access in order to get userName and password
 
 #import <Foundation/Foundation.h>
+#import "CommonTypes.h"
 
 @interface User : NSObject
 
@@ -30,6 +31,10 @@
 @property (nonatomic) int64_t dailySpendLimitSatoshis;
 @property (nonatomic) bool bSpendRequirePin;
 @property (nonatomic) int64_t spendRequirePinSatoshis;
+@property (nonatomic) NSUInteger sendInvalidEntryCount;
+@property (nonatomic) NSUInteger sendState;
+@property (nonatomic) NSRunLoop *runLoop;
+@property (nonatomic) NSTimer *sendInvalidEntryTimer;
 
 + (void)initAll;
 + (void)freeAll;
@@ -40,5 +45,9 @@
 - (id)init;
 - (void)clear;
 - (void)loadSettings;
+- (SendViewState)invalidEntry;
+- (void)startInvalidEntryWait;
+- (void)endInvalidEntryWait;
+- (NSTimeInterval)getRemainingInvalidEntryWait;
 
 @end

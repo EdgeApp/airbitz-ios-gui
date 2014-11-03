@@ -18,14 +18,6 @@
 #import "Util.h"
 #import "CommonTypes.h"
 
-typedef NS_ENUM(NSUInteger, SendViewState) {
-    kNormal,
-    kInvalidEntryWait,
-};
-
-#define INVALID_ENTRY_COUNT_MAX 3
-#define INVALID_ENTRY_WAIT 30.0
-static NSString *kTimerStart = @"start";
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
 {
@@ -41,10 +33,6 @@ static NSString *kTimerStart = @"start";
     Transaction                         *_completedTransaction;    // nil until sendTransaction is successfully completed
     UITapGestureRecognizer              *tap;
     UIAlertView                         *_alert;
-    NSUInteger                          _invalidEntryCount;
-    NSUInteger                          _viewState;
-    NSRunLoop                           *_runLoop;
-    NSTimer                             *_InvalidEntryTimer;
 }
 
 @property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
@@ -89,7 +77,6 @@ static NSString *kTimerStart = @"start";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        // Custom initialization
     }
     return self;
 }
@@ -147,10 +134,6 @@ static NSString *kTimerStart = @"start";
                                                object:nil];
     
     self.errorMessageView.alpha = 0.0;
-
-    _viewState = kNormal;
-    _invalidEntryCount = 0;
-    _runLoop = [NSRunLoop currentRunLoop];
 }
 
 - (void)dealloc
@@ -839,42 +822,6 @@ static NSString *kTimerStart = @"start";
      }];
 }
 
-- (void)startInvalidEntryWait
-{
-    if (kInvalidEntryWait == _viewState)
-    {
-        return;
-    }
-
-    _viewState = kInvalidEntryWait;
-    _invalidEntryCount = 0;
-    _InvalidEntryTimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:INVALID_ENTRY_WAIT]
-                                         interval:INVALID_ENTRY_WAIT
-                                           target:self
-                                         selector:@selector(endInvalidEntryWait)
-                                         userInfo:@{kTimerStart : [NSDate date]}
-                                          repeats:NO];
-    [_runLoop addTimer:_InvalidEntryTimer forMode:NSDefaultRunLoopMode];
-}
-
-- (void)endInvalidEntryWait
-{
-    if (self)
-    {
-        _viewState = kNormal;
-    }
-}
-
-- (NSTimeInterval)getRemainingInvalidEntryWait
-{
-    if (!_InvalidEntryTimer || ![_InvalidEntryTimer isValid]) {
-        return 0;
-    }
-    NSDate *start = [[_InvalidEntryTimer userInfo] objectForKey:kTimerStart];
-    NSDate *current = [NSDate date];
-    return INVALID_ENTRY_WAIT - [current timeIntervalSinceDate:start];
-}
-
 #pragma mark infoView Delegates
 
 - (void)InfoViewFinished:(InfoView *)infoView
@@ -904,9 +851,11 @@ static NSString *kTimerStart = @"start";
 
 - (void)ConfirmationSliderDidConfirm:(ConfirmationSliderView *)controller
 {
-    if (kInvalidEntryWait == _viewState)
+    User *user = [User Singleton];
+
+    if (kInvalidEntryWait == [User Singleton].sendState)
     {
-        NSTimeInterval remaining = [self getRemainingInvalidEntryWait];
+        NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
         NSString *entry = _pinRequired ? @"PIN" : @"password";
         [self showFadingError:[NSString stringWithFormat:
                 NSLocalizedString(@"Please wait %.0f seconds before retrying %@",
@@ -927,11 +876,9 @@ static NSString *kTimerStart = @"start";
 
         NSString *PIN = [CoreBridge getPIN];
         if (_pinRequired && ![self.withdrawlPIN.text isEqualToString:PIN]) {
-            ++_invalidEntryCount;
-            if (INVALID_ENTRY_COUNT_MAX <= _invalidEntryCount)
+            if (kInvalidEntryWait == [user invalidEntry])
             {
-                [self startInvalidEntryWait];
-                NSTimeInterval remaining = [self getRemainingInvalidEntryWait];
+                NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
                 [self showFadingError:[NSString stringWithFormat:NSLocalizedString(@"Incorrect PIN. Please wait %.0f seconds and try again.", nil), remaining]];
             }
             else
@@ -941,11 +888,9 @@ static NSString *kTimerStart = @"start";
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
         } else if (_passwordRequired && ![self.withdrawlPIN.text isEqualToString:[User Singleton].password]) {
-            ++_invalidEntryCount;
-            if (INVALID_ENTRY_COUNT_MAX <= _invalidEntryCount)
+            if (kInvalidEntryWait == [user invalidEntry])
             {
-                [self startInvalidEntryWait];
-                NSTimeInterval remaining = [self getRemainingInvalidEntryWait];
+                NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
                 [self showFadingError:[NSString stringWithFormat:NSLocalizedString(@"Incorrect password. Please wait %.0f seconds and try again.", nil), remaining]];
             }
             else

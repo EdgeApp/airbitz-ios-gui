@@ -23,6 +23,15 @@
 
 #define LOCATION_UPDATE_PERIOD	60 /* seconds */
 
+// invalid send confirmation PIN and password entry
+typedef NS_ENUM(NSUInteger, SendViewState) {
+    kNormal,
+    kInvalidEntryWait,
+};
+#define INVALID_ENTRY_COUNT_MAX 3
+#define INVALID_ENTRY_WAIT 30.0
+static NSString *kTimerStart = @"start";
+
 #define COLOR_BAR_TINT          [UIColor colorWithRed:0.0 / 255.0 green:94.0 / 255.0 blue:155.0 / 255.0 alpha:1.0]
 #define COLOR_GRADIENT_TOP      [UIColor colorWithRed:80.0 / 255.0 green:181.0 / 255.0 blue:224.0 / 255.0 alpha:1.0]
 #define COLOR_GRADIENT_BOTTOM   [UIColor colorWithRed:17.0 / 255.0 green:128.0 / 255.0 blue:178.0 / 255.0 alpha:1.0]
