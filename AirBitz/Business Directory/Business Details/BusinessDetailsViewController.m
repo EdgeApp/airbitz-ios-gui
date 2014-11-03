@@ -562,7 +562,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 					BD_Details_Cell *detailsCell = [self getDetailsCellForTableView:self.tableView];
 					
 					//calculate height of details cell
-					CGSize size = [ [self.businessDetails objectForKey:@"description"] sizeWithFont:detailsCell.detailsLabel.font constrainedToSize:CGSizeMake(detailsLabelWidth, 999) lineBreakMode:NSLineBreakByWordWrapping];
+					CGSize size = [ [self.businessDetails objectForKey:@"description"] sizeWithFont:detailsCell.detailsLabel.font constrainedToSize:CGSizeMake(detailsLabelWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
 					detailsCellHeight = size.height + 28.0;
 
 					
