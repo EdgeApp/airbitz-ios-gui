@@ -27,9 +27,8 @@ Set your `$REPO_DIR` to whatever you want.
 ## Setting up airbitz walletcore
 
     cd $REPO_DIR
-    git clone git@github.com:Airbitz/airbitz-walletcore.git
+    git clone git@github.com:Airbitz/airbitz-core.git
     cd airbitz-walletcore
-    WALLET_CORE=`pwd`
     cd deps
     make
 
@@ -38,12 +37,14 @@ Set your `$REPO_DIR` to whatever you want.
     cd $REPO_DIR
     git clone git@github.com:Airbitz/airbitz-ios-gui.git
 
-    # Copy files into project
-    cp $WALLET_CORE/deps/build/prefix/arm/armv7/lib/*.a AirBitz/ABC/
-    cp $WALLET_CORE/deps/build/prefix/arm/armv7/includes/*.h AirBitz/ABC/
+    # Build and Copy files into project
+    ./mkabc
 
-    # Fire up in xcode
-    open airbitz-ios-gui/AirBitz.xcodeproj
+    # Install the pods
+    pod install
+
+    # Fire the xcode project
+    open airbitz-ios-gui/AirBitz.xcworkspace
 
 Once in xcode you can run Command-R to run it in an emulator.
 
