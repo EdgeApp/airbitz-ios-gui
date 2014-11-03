@@ -967,14 +967,17 @@ typedef NS_ENUM(NSUInteger, CellType) {
         }
         case kShare:
         {
-            NSString *msg = [NSString stringWithFormat:@"%@ - %@ %@ https://airbitz.co/biz/%@",
-                                [self.businessDetails objectForKey:@"name"],
-                                [self.businessDetails objectForKey:@"city"],
-                                NSLocalizedString(@"Bitcoin | Airbitz", nil),
-                                [self.businessDetails objectForKey:@"bizId"]
+            NSString *subject = [NSString stringWithFormat:@"%@ - %@ %@",
+                             [self.businessDetails objectForKey:@"name"],
+                             [self.businessDetails objectForKey:@"city"],
+                             NSLocalizedString(@"Bitcoin | Airbitz", nil)
+                             ];
+            NSString *msg = [NSString stringWithFormat:@"%@ https://airbitz.co/biz/%@",
+                                subject, [self.businessDetails objectForKey:@"bizId"]
             ];
             NSArray *activityItems = [NSArray arrayWithObjects: msg, nil, nil];
             UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+            [activityController setValue:subject forKey:@"subject"];
             [self presentViewController:activityController animated:YES completion:nil];
             break;
         }
