@@ -36,7 +36,7 @@ typedef enum eAppMode
 } tAppMode;
 
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
-                                  LoginViewControllerDelegate, APPinViewControllerDelegate,
+                                  LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate>
 {
 	UIViewController            *_selectedViewController;
@@ -197,6 +197,18 @@ typedef enum eAppMode
     [data appendBytes:&rand length:sizeof(u_int32_t)];
 }
 
+-(void)showFastestLogin
+{
+    if ([CoreBridge PINLoginExists])
+    {
+        [self showPINLogin];
+    }
+    else
+    {
+        [self showLogin];
+    }
+}
+
 -(void)showLogin
 {
 	_loginViewController.view.frame = self.view.bounds;
@@ -311,12 +323,11 @@ typedef enum eAppMode
 				}
 				else
 				{
-					[self showLogin];
+					[self showFastestLogin];
 				}
 			}
 			break;
 		}
-			break;
 		case APP_MODE_SEND:
 		{
 			if (_selectedViewController != _sendViewController)
@@ -356,7 +367,7 @@ typedef enum eAppMode
 				}
 				else
 				{
-					[self showLogin];
+					[self showFastestLogin];
 				}
 			}
 			break;
@@ -374,7 +385,7 @@ typedef enum eAppMode
 				}
 				else
 				{
-					[self showLogin];
+					[self showFastestLogin];
 				}
 			}
 			break;
@@ -390,7 +401,7 @@ typedef enum eAppMode
 				}
 				else
 				{
-					[self showLogin];
+					[self showFastestLogin];
 				}
 			}
 			break;
@@ -657,7 +668,39 @@ typedef enum eAppMode
     }];
 }
 
-#pragma mark - ABC Alert delegate 
+#pragma mark - PINReLoginViewControllerDelegates
+
+- (void)PINReLoginViewControllerDidSwitchUser
+{
+    [self PINReLoginViewControllerDidAbort];
+    [self showLogin];
+}
+
+- (void)PINReLoginViewControllerDidAbort
+{
+	_appMode = APP_MODE_DIRECTORY;
+	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
+	[self showTabBarAnimated:YES];
+	[_PINReLoginViewController.view removeFromSuperview];
+}
+
+- (void)PINReLoginViewControllerDidLogin
+{
+    // After login, reset all the main views
+    [self loadUserViews];
+    
+	[_PINReLoginViewController.view removeFromSuperview];
+	[self showTabBarAnimated:YES];
+	[self launchViewControllerBasedOnAppMode];
+    
+    if (_uri)
+    {
+        [self processBitcoinURI:_uri];
+        _uri = nil;
+    }
+}
+
+#pragma mark - ABC Alert delegate
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {

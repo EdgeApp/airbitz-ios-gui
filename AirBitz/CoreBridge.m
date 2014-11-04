@@ -7,6 +7,7 @@
 #import "User.h"
 #import "Util.h"
 #import "CommonTypes.h"
+#import "LocalSettings.h"
 
 #import "CoreBridge.h"
 
@@ -871,8 +872,84 @@ static NSTimer *_dataSyncTimer;
     return storedPIN;
 }
 
++ (bool)PINLoginExists
+{
+    const char *username = [[LocalSettings controller].cachedUsername UTF8String];
+    bool exists = NO;
+    if (username)
+    {
+        tABC_Error error;
+        tABC_CC result = ABC_PinLoginExists(username,
+                                            &exists,
+                                            &error);
+        if (ABC_CC_Ok != result)
+        {
+            [Util printABC_Error:&error];
+        }
+    }
+    return exists;
+}
+
++ (void)deletePINLogin
+{
+    const char *username;
+    if ([User isLoggedIn])
+    {
+        username = [[User Singleton].name UTF8String];
+    }
+    else
+    {
+        username = [[LocalSettings controller].cachedUsername UTF8String];
+    }
+    tABC_Error error;
+    tABC_CC result = ABC_PinLoginDelete(username,
+                                        &error);
+    if (ABC_CC_Ok != result)
+    {
+        [Util printABC_Error:&error];
+    }
+}
+
++ (void)setupLoginPIN
+{
+    const char *username = [[User Singleton].name UTF8String];
+    const char *password = [[User Singleton].password UTF8String];
+    if (username && password)
+    {
+        // retrieve the user's settings to check whether PIN logins are disabled
+        tABC_CC cc = ABC_CC_Ok;
+        tABC_Error Error;
+        tABC_AccountSettings *pSettings = NULL;
+        
+        cc = ABC_LoadAccountSettings(username,
+                                     password,
+                                     &pSettings,
+                                     &Error);
+        if (cc == ABC_CC_Ok) {
+            if (!pSettings->bDisablePINLogin)
+            {
+                // attempt to setup the PIN package on disk
+                tABC_Error error;
+                tABC_CC result = ABC_PinSetup(username,
+                                              password,
+                                              &error);
+                if (ABC_CC_Ok != result)
+                {
+                    [Util printABC_Error:&error];
+                }
+            }
+        } else {
+            [Util printABC_Error:&Error];
+        }
+        ABC_FreeAccountSettings(pSettings);
+    }
+}
+
 + (void)login
 {
+    [LocalSettings controller].cachedUsername = [User Singleton].name;
+    [LocalSettings saveAll];
+    [CoreBridge setupLoginPIN];
     bDataFetched = NO;
     [CoreBridge startQueues];
     [CoreBridge startWatchers];

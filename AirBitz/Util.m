@@ -38,7 +38,9 @@
         case ABC_CC_Synchronizing:
             return NSLocalizedString(@"Synchronizing with the network.", nil);
         case ABC_CC_NonNumericPin:
-            return NSLocalizedString(@"Pin must be a numeric value.", nil);
+            return NSLocalizedString(@"PIN must be a numeric value.", nil);
+        case ABC_CC_PinExpired:
+            return NSLocalizedString(@"PIN login cancelled", nil);
         case ABC_CC_Error:
         case ABC_CC_NULLPtr:
         case ABC_CC_NoAvailAccountSpace:
@@ -61,6 +63,7 @@
         case ABC_CC_NoTransaction:
         case ABC_CC_ParseError:
         case ABC_CC_NoRequest:
+        case ABC_CC_NoAvailableAddress:
         default:
             return NSLocalizedString(@"An error has occurred.", nil);
     }

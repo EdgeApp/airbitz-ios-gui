@@ -15,6 +15,8 @@
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 #define IS_IPHONE4                                  (([[UIScreen mainScreen] bounds].size.height < 568) ? YES : NO)
 
+#define LOGIN_INVALID_ENTRY_COUNT_MAX 3
+
 #define MERCHANT_RECEIVED_DURATION 20
 
 #define ERROR_MESSAGE_FADE_DURATION         3.0
@@ -28,7 +30,7 @@ typedef NS_ENUM(NSUInteger, SendViewState) {
     kNormal,
     kInvalidEntryWait,
 };
-#define INVALID_ENTRY_COUNT_MAX 3
+#define SEND_INVALID_ENTRY_COUNT_MAX 3
 #define INVALID_ENTRY_WAIT 30.0
 static NSString *kTimerStart = @"start";
 

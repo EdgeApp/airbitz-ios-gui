@@ -34,6 +34,8 @@ NSDate *logoutDate = NULL;
 
     [CoreBridge initAll];
 
+    [self checkLoginExpired];
+
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
 
@@ -76,6 +78,8 @@ NSDate *logoutDate = NULL;
     if ([User isLoggedIn])
     {
         logoutDate = [NSDate date];
+
+        // multiply to get the time in seconds
         [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
     }
 }
@@ -91,6 +95,7 @@ NSDate *logoutDate = NULL;
             [self bgCleanup];
         }];
         // start a logout timer
+        // multiply to get the time in seconds
         logoutTimer = [NSTimer scheduledTimerWithTimeInterval:[User Singleton].minutesAutoLogout * 60
                                                        target:self
                                                        selector:@selector(autoLogout)
@@ -173,6 +178,7 @@ NSDate *logoutDate = NULL;
         return;
     }
     NSDate *now = [NSDate date];
+    // divide to get the time in minutes
     int minutes = [now timeIntervalSinceDate:logoutDate] / 60.0;
     if (minutes >= [User Singleton].minutesAutoLogout) {
         [self autoLogout];

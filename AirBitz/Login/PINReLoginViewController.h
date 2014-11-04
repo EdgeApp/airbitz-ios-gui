@@ -2,15 +2,22 @@
 //  PINReLoginViewController.h
 //  AirBitz
 //
-//  Created by Allan Wright on 11/1/14.
+//  Created by Allan on 11/3/14.
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <APPinViewController.h>
-#import "LoginViewController.h"
+@protocol PINReLoginViewControllerDelegate;
 
-@interface PINReLoginViewController : APPinViewController
+@interface PINReLoginViewController : UIViewController
 
+@property (assign) id<PINReLoginViewControllerDelegate> delegate;
 
+@end
+
+@protocol PINReLoginViewControllerDelegate <NSObject>
+
+@required
+-(void)PINReLoginViewControllerDidSwitchUser;
+-(void)PINReLoginViewControllerDidAbort;
+-(void)PINReLoginViewControllerDidLogin;
 @end

@@ -18,9 +18,6 @@
 #import "CoreBridge.h"
 #import "CommonTypes.h"
 
-#define CONTENT_VIEW_SCALE_WITH_KEYBOARD    0.75
-#define LOGO_IMAGE_SHRINK_SCALE_FACTOR      0.5
-
 typedef enum eLoginMode
 {
     MODE_ENTERING_NEITHER,
@@ -231,13 +228,7 @@ typedef enum eLoginMode
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"User Name Required", nil)
-                              message:NSLocalizedString(@"Please enter a User Name", nil)
-                              delegate:nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
+        [self showFadingError:NSLocalizedString(@"Please enter a User Name", nil)];
     }
 }
 
@@ -273,13 +264,7 @@ typedef enum eLoginMode
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"No Recovery Questions", nil)
-                                message:_strReason
-                                delegate:nil
-                                cancelButtonTitle:@"OK"
-                                otherButtonTitles:nil];
-        [alert show];
+        [self showFadingError:_strReason];
     }
 }
 
@@ -517,28 +502,10 @@ typedef enum eLoginMode
     }
     else
     {
-        self.errorMessageText.text = _strReason;
-        self.errorMessageView.alpha = 1.0;
-        [UIView animateWithDuration:ERROR_MESSAGE_FADE_DURATION
-                              delay:ERROR_MESSAGE_FADE_DELAY
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^
-         {
-             self.errorMessageView.alpha = 0.0;
-         }
-         completion:^(BOOL finished)
-         {
-             
-         }];
-
+        [self showFadingError:_strReason];
         [User Singleton].name = nil;
         [User Singleton].password = nil; 
     }
-}
-
-- (void)dismissErrorMessage
-{
-    [self.errorMessageView.layer removeAllAnimations];
 }
 
 #pragma mark - SignUpViewControllerDelegates
@@ -579,7 +546,26 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
 
 #pragma mark - Error Message
 
+- (void)dismissErrorMessage
+{
+    [self.errorMessageView.layer removeAllAnimations];
+}
 
+- (void)showFadingError:(NSString *)message
+{
+    self.errorMessageText.text = message;
+    self.errorMessageView.alpha = 1.0;
+    [UIView animateWithDuration:ERROR_MESSAGE_FADE_DURATION
+                          delay:ERROR_MESSAGE_FADE_DELAY
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^
+     {
+         self.errorMessageView.alpha = 0.0;
+     }
+                     completion:^(BOOL finished)
+     {
+     }];
+}
 
 #pragma mark - Misc
 

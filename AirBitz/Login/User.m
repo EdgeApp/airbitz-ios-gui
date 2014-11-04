@@ -44,7 +44,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 + (bool)isLoggedIn
 {
-    return [User Singleton].name.length && [User Singleton].password.length;
+    return [User Singleton].name.length;// && [User Singleton].password.length;
 }
 
 + (void)login:(NSString *)name password:(NSString *)pword
@@ -52,6 +52,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     [User Singleton].name = name;
     [User Singleton].password = pword;
     [[User Singleton] loadSettings];
+    
     [CoreBridge login];
 }
 
@@ -69,6 +70,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.sendInvalidEntryCount = 0;
     self.sendState = kNormal;
     self.runLoop = [NSRunLoop currentRunLoop];
+    self.PINLoginInvalidEntryCount = 0;
 
     return self;
 }
@@ -120,6 +122,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
         self.dailySpendLimitSatoshis = pSettings->dailySpendLimitSatoshis;
         self.bSpendRequirePin = pSettings->bSpendRequirePin;
         self.spendRequirePinSatoshis = pSettings->spendRequirePinSatoshis;
+        self.bDisablePINLogin = pSettings->bDisablePINLogin;
     }
     else
     {
@@ -135,12 +138,13 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [CoreBridge logout];
     }
     self.password = nil;
+    [CoreBridge deletePINLogin];
 }
 
-- (SendViewState)invalidEntry
+- (SendViewState)sendInvalidEntry
 {
     ++self.sendInvalidEntryCount;
-    if (INVALID_ENTRY_COUNT_MAX <= self.sendInvalidEntryCount)
+    if (SEND_INVALID_ENTRY_COUNT_MAX <= self.sendInvalidEntryCount)
     {
         [self startInvalidEntryWait];
     }
@@ -181,6 +185,24 @@ static User *singleton = nil;  // this will be the one and only object this stat
     NSDate *start = [[self.sendInvalidEntryTimer userInfo] objectForKey:kTimerStart];
     NSDate *current = [NSDate date];
     return INVALID_ENTRY_WAIT - [current timeIntervalSinceDate:start];
+}
+
+/* Increment the count of invalid entries and return true if the maximum has
+ * been exceeded.
+ */
+- (bool)haveExceededPINLoginInvalidEntries
+{
+    ++self.PINLoginInvalidEntryCount;
+    if (LOGIN_INVALID_ENTRY_COUNT_MAX <= self.PINLoginInvalidEntryCount)
+    {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)resetPINLoginInvalidEntryCount
+{
+    self.PINLoginInvalidEntryCount = 0;
 }
 
 @end

@@ -143,6 +143,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [self dismissErrorMessage];
     [super viewWillDisappear:animated];
     [self.view removeGestureRecognizer:tap];
     [self.infoView dismiss];
@@ -249,6 +250,7 @@
 
 - (IBAction)info
 {
+    [self dismissErrorMessage];
     [self.view endEditing:YES];
     [self dismissKeyboard];
     [self setInfoView:[InfoView CreateWithHTML:@"infoSendConfirmation" forView:self.view]];
@@ -257,6 +259,7 @@
 
 - (IBAction)fundsInfo
 {
+    [self dismissErrorMessage];
     [self.view endEditing:YES];
     [self dismissKeyboard];
     [self setInfoView:[InfoView CreateWithHTML:@"infoInsufficientFunds" forView:self.view]];
@@ -265,6 +268,8 @@
 
 - (IBAction)Back:(id)sender
 {
+    [self dismissErrorMessage];
+
     [self.withdrawlPIN resignFirstResponder];
     [UIView animateWithDuration:0.35
                           delay:0.0
@@ -295,6 +300,7 @@
 
 - (IBAction)selectMaxAmount
 {
+    [self dismissErrorMessage];
     if (self.wallet != nil && _maxLocked == NO)
     {
         _maxLocked = YES;
@@ -822,6 +828,11 @@
      }];
 }
 
+- (void)dismissErrorMessage
+{
+    [self.errorMessageView.layer removeAllAnimations];
+}
+
 #pragma mark infoView Delegates
 
 - (void)InfoViewFinished:(InfoView *)infoView
@@ -835,6 +846,8 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    [self dismissErrorMessage];
+
     _selectedTextField = textField;
     if (_selectedTextField == self.amountBTCTextField)
         self.keypadView.calcMode = CALC_MODE_COIN;
@@ -851,6 +864,8 @@
 
 - (void)ConfirmationSliderDidConfirm:(ConfirmationSliderView *)controller
 {
+    [self dismissErrorMessage];
+
     User *user = [User Singleton];
 
     if (kInvalidEntryWait == [User Singleton].sendState)
@@ -876,7 +891,7 @@
 
         NSString *PIN = [CoreBridge getPIN];
         if (_pinRequired && ![self.withdrawlPIN.text isEqualToString:PIN]) {
-            if (kInvalidEntryWait == [user invalidEntry])
+            if (kInvalidEntryWait == [user sendInvalidEntry])
             {
                 NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
                 [self showFadingError:[NSString stringWithFormat:NSLocalizedString(@"Incorrect PIN. Please wait %.0f seconds and try again.", nil), remaining]];
@@ -888,15 +903,7 @@
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
         } else if (_passwordRequired && ![self.withdrawlPIN.text isEqualToString:[User Singleton].password]) {
-            if (kInvalidEntryWait == [user invalidEntry])
-            {
-                NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
-                [self showFadingError:[NSString stringWithFormat:NSLocalizedString(@"Incorrect password. Please wait %.0f seconds and try again.", nil), remaining]];
-            }
-            else
-            {
-                [self showFadingError:NSLocalizedString(@"Incorrect password", nil)];
-            }
+            [self showFadingError:NSLocalizedString(@"Incorrect password", nil)];
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
         } else if (self.amountToSendSatoshi == 0) {

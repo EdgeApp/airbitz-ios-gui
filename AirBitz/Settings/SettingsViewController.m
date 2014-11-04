@@ -26,6 +26,7 @@
 #import "Util.h"
 #import "InfoView.h"
 #import "LocalSettings.h"
+#import "CoreBridge.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
@@ -68,6 +69,7 @@
 #define ROW_SPEND_LIMITS                3
 #define ROW_MERCHANT_MODE               4
 #define ROW_BLE                         5
+#define ROW_PIN_RELOGIN                 6
 
 #define ROW_US_DOLLAR                   0
 #define ROW_CANADIAN_DOLLAR             1
@@ -1006,6 +1008,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			cell.name.text = NSLocalizedString(@"Merchant Mode", @"settings text");
             [cell.state setOn:LocalSettings.controller.bMerchantMode animated:NO];
         }
+        else if (indexPath.row == ROW_PIN_RELOGIN)
+        {
+			cell.name.text = NSLocalizedString(@"PIN Re-Login", @"settings text");
+            [cell.state setOn:!_pAccountSettings->bDisablePINLogin animated:NO];
+        }
     }
 	
     cell.tag = (indexPath.section << 8) | (indexPath.row);
@@ -1140,11 +1147,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			//assumes bluetooth option is last of the options.
 			if(_showBluetoothOption)
 			{
-				return 6;
+				return 7;
 			}
 			else
 			{
-				return 5; //return 5 to not show the Bluetooth cell.
+				return 6; //return 5 to not show the Bluetooth cell.
 			}
             break;
 
@@ -1291,6 +1298,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             {
 				cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
             }
+            else if (indexPath.row == ROW_PIN_RELOGIN)
+            {
+				cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+            }
             else
             {
                 cell = [self getButtonCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
@@ -1416,7 +1427,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     NSInteger section = (cell.tag >> 8);
     NSInteger row = cell.tag & 0xff;
 
-    // we only have one boolean cell and that's the name on payment option
     if ((section == SECTION_NAME) && (row == ROW_SEND_NAME))
     {
         if (_pAccountSettings)
@@ -1439,6 +1449,23 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         LocalSettings.controller.bMerchantMode = theSwitch.on;
         [LocalSettings saveAll];
+    }
+    else if ((section == SECTION_OPTIONS) && (row == ROW_PIN_RELOGIN))
+    {
+        _pAccountSettings->bDisablePINLogin = !theSwitch.on;
+        [self saveSettings];
+        
+        // update the display by reloading the table
+        [self.tableView reloadData];
+
+        if (theSwitch.on)
+        {
+            [CoreBridge setupLoginPIN];
+        }
+        else
+        {
+            [CoreBridge deletePINLogin];
+        }
     }
 }
 
@@ -1600,6 +1627,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [self.tableView reloadData];
 
     [self dismissPopupPicker];
+
+    [CoreBridge setupLoginPIN];
 }
 
 - (void)PopupWheelPickerViewCancelled:(PopupWheelPickerView *)view userData:(id)data

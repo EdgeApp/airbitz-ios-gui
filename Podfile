@@ -4,7 +4,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'Airbitz' do
 
-pod 'APPinViewController', '~> 1.0'
+#pod 'APPinViewController', '~> 1.0'
 
 end
 

@@ -10,6 +10,7 @@
 
 #define KEY_LOCAL_SETTINGS_DISABLE_BLE			@"disableBLE"
 #define KEY_LOCAL_SETTINGS_MERCHANT_MODE    	@"merchantMode"
+#define KEY_LOCAL_SETTINGS_CACHED_USERNAME      @"cachedUsername"
 
 static BOOL bInitialized = NO;
 
@@ -53,6 +54,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
 
     singleton.bDisableBLE = [defaults boolForKey:KEY_LOCAL_SETTINGS_DISABLE_BLE];
     singleton.bMerchantMode = [defaults boolForKey:KEY_LOCAL_SETTINGS_MERCHANT_MODE];
+    singleton.cachedUsername = [defaults stringForKey:KEY_LOCAL_SETTINGS_CACHED_USERNAME];
 }
 
 // saves all the settings to persistant memory
@@ -62,6 +64,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
 
     [defaults setBool:[singleton bDisableBLE] forKey:KEY_LOCAL_SETTINGS_DISABLE_BLE];
     [defaults setBool:[singleton bMerchantMode] forKey:KEY_LOCAL_SETTINGS_MERCHANT_MODE];
+    [defaults setValue:[singleton cachedUsername] forKey:KEY_LOCAL_SETTINGS_CACHED_USERNAME];
 
 	// flush the buffer
 	[defaults synchronize];
@@ -84,6 +87,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
         // init all here
         self.bDisableBLE = NO;
         self.bMerchantMode = NO;
+        self.cachedUsername = nil;
     }
     return self;
 }

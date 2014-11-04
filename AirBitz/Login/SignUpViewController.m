@@ -280,7 +280,7 @@
         self.passwordTextField.placeholder = NSLocalizedString(@"Password", @"");
         self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter Password", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"User Name", @"");
-        self.pinTextField.placeholder = NSLocalizedString(@"Create Pin", @"");
+        self.pinTextField.placeholder = NSLocalizedString(@"Create PIN", @"");
 
         self.imageUserName.hidden = NO;
         self.imageReenterPassword.hidden = NO;
@@ -342,7 +342,7 @@
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
         self.labelTitle.text = NSLocalizedString(@"Change PIN", @"screen title");
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
-        self.pinTextField.placeholder = NSLocalizedString(@"New Pin", @"");
+        self.pinTextField.placeholder = NSLocalizedString(@"New PIN", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"Password", @"");
 
         self.labelPIN.hidden = NO;
@@ -502,7 +502,7 @@
                                   initWithTitle:self.labelTitle.text
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                            self.labelTitle.text,
-                                           [NSString stringWithFormat:NSLocalizedString(@"Withdrawl PIN must be 4 digits", @""), ABC_MIN_PIN_LENGTH]]
+                                           [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), ABC_MIN_PIN_LENGTH]]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];

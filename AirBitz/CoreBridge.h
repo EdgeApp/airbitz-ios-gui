@@ -50,6 +50,9 @@
 + (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName;
 + (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet;
 + (NSString *)getPIN;
++ (bool)PINLoginExists;
++ (void)deletePINLogin;
++ (void)setupLoginPIN;
 + (void)login;
 + (void)logout;
 + (BOOL)allWatchersReady;

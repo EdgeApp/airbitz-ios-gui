@@ -31,10 +31,12 @@
 @property (nonatomic) int64_t dailySpendLimitSatoshis;
 @property (nonatomic) bool bSpendRequirePin;
 @property (nonatomic) int64_t spendRequirePinSatoshis;
+@property (nonatomic) bool bDisablePINLogin;
 @property (nonatomic) NSUInteger sendInvalidEntryCount;
 @property (nonatomic) NSUInteger sendState;
 @property (nonatomic) NSRunLoop *runLoop;
 @property (nonatomic) NSTimer *sendInvalidEntryTimer;
+@property (nonatomic) NSUInteger PINLoginInvalidEntryCount;
 
 + (void)initAll;
 + (void)freeAll;
@@ -45,9 +47,11 @@
 - (id)init;
 - (void)clear;
 - (void)loadSettings;
-- (SendViewState)invalidEntry;
+- (SendViewState)sendInvalidEntry;
 - (void)startInvalidEntryWait;
 - (void)endInvalidEntryWait;
 - (NSTimeInterval)getRemainingInvalidEntryWait;
+- (bool)haveExceededPINLoginInvalidEntries;
+- (void)resetPINLoginInvalidEntryCount;
 
 @end
