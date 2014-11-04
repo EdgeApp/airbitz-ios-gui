@@ -10,7 +10,7 @@
 
 @interface SpendingLimitsViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
 {
-	tABC_AccountSettings            *_pAccountSettings;
+    tABC_AccountSettings            *_pAccountSettings;
 }
 
 @property (nonatomic, weak) IBOutlet MinCharTextField           *passwordTextField;
@@ -18,6 +18,7 @@
 @property (nonatomic, weak) IBOutlet UISwitch                   *dailySpendLimitSwitch;
 @property (nonatomic, weak) IBOutlet UITextField                *dailySpendLimitField;
 @property (nonatomic, weak) IBOutlet UILabel                    *dailyDenomination;
+@property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
 
 @property (nonatomic, weak) IBOutlet UISwitch                   *pinSpendLimitSwitch;
 @property (nonatomic, weak) IBOutlet UITextField                *pinSpendLimitField;
@@ -31,7 +32,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
-	{
+    {
         // Custom initialization
     }
     return self;
@@ -40,8 +41,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.passwordTextField.delegate = self;
+    self.passwordTextField.delegate = self;
     self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+
+    CGSize size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
+    self.scrollView.contentSize = size;
+
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
     // put the cursor in the user name field
     [self.passwordTextField becomeFirstResponder];
@@ -84,6 +92,29 @@
     [super didReceiveMemoryWarning];
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Keyboard Notifications
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
+    CGSize size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
+    size.height += keyboardFrame.size.height;
+    self.scrollView.contentSize = size;
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    CGSize size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
+    self.scrollView.contentSize = size;
+}
+
 #pragma mark - Keyboard Delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -115,19 +146,19 @@
 
 -(IBAction)Back:(id)sender
 {
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 CGRect frame = self.view.frame;
-		 frame.origin.x = frame.size.width;
-		 self.view.frame = frame;
-	 }
-	completion:^(BOOL finished)
-	 {
-		 [self exitWithBackButton:YES];
-	 }];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         CGRect frame = self.view.frame;
+         frame.origin.x = frame.size.width;
+         self.view.frame = frame;
+     }
+    completion:^(BOOL finished)
+     {
+         [self exitWithBackButton:YES];
+     }];
 }
 
 - (IBAction)Complete:(id)sender
@@ -186,9 +217,9 @@
 
 - (void)installLeftToRightSwipeDetection
 {
-	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
-	gesture.direction = UISwipeGestureRecognizerDirectionRight;
-	[self.view addGestureRecognizer:gesture];
+    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+    gesture.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:gesture];
 }
 
 - (void)exit
@@ -202,7 +233,7 @@
     {
         ABC_FreeAccountSettings(_pAccountSettings);
     }
-	[self.delegate spendingLimitsViewControllerDone:self withBackButton:bBack];
+    [self.delegate spendingLimitsViewControllerDone:self withBackButton:bBack];
 }
 
 #pragma mark - GestureReconizer methods
