@@ -322,7 +322,10 @@ static NSTimer *_dataSyncTimer;
     if (ABC_CC_Ok == result) {
         for (int j = tCount - 1; j >= 0; --j) {
             tABC_TxInfo *pTrans = aTransactions[j];
-            total += pTrans->pDetails->amountSatoshi;
+            // Is this a spend?
+            if (pTrans->pDetails->amountSatoshi < 0) {
+                total += pTrans->pDetails->amountSatoshi * -1;
+            }
         }
     } else {
         [Util printABC_Error:&Error];
