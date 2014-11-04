@@ -17,7 +17,7 @@ if [ "${1-}" = "testnet" ]; then
     cp -a ../airbitz-core/deps/build-testnet/abc/abc-ios-universal/include/* AirBitz/ABC-testnet/
     cp -a ../airbitz-core/deps/build-testnet/abc/abc-ios-universal/lib/* AirBitz/ABC-testnet/
 else
-    ( cd ../airbitz-core/deps; make BUILD_DIR=${CURRENT_DIR}/../airbitz-walletcore/deps/build $@ )
+    ( cd ../airbitz-core/deps; make BUILD_DIR=${CURRENT_DIR}/../airbitz-core/deps/build $@ )
     rm -rf Airbitz/ABC/*
     cp -a ../airbitz-core/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
     cp -a ../airbitz-core/deps/build/abc/abc-ios-universal/lib/* AirBitz/ABC/
