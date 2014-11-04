@@ -105,6 +105,7 @@
 		686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
 		686C24871935608400F8E445 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
+		687D2E7C1A09638200F1F9D1 /* infoSpendingLimits.html in Resources */ = {isa = PBXBuildFile; fileRef = 687D2E7B1A09638200F1F9D1 /* infoSpendingLimits.html */; };
 		6893E6CA19783FED0092DA04 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6893E6C919783FED0092DA04 /* SyncView.m */; };
 		68C3285719804BFE007DA4C2 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */; };
 		7D05AB821A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D05AB801A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png */; };
@@ -1241,6 +1242,7 @@
 		686C24861935608400F8E445 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = AirBitz/ABC/libzmq.a; sourceTree = "<group>"; };
 		687C1B041927FF81003A83E8 /* CoreBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBridge.h; sourceTree = "<group>"; };
 		687C1B051927FF81003A83E8 /* CoreBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreBridge.m; sourceTree = "<group>"; };
+		687D2E7B1A09638200F1F9D1 /* infoSpendingLimits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoSpendingLimits.html; sourceTree = "<group>"; };
 		6893E6C819783FED0092DA04 /* SyncView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncView.h; sourceTree = "<group>"; };
 		6893E6C919783FED0092DA04 /* SyncView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncView.m; sourceTree = "<group>"; };
 		68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SyncView~iphone.xib"; sourceTree = "<group>"; };
@@ -2891,6 +2893,7 @@
 		B5F2E9A818D4AF6C008ACF88 /* html */ = {
 			isa = PBXGroup;
 			children = (
+				687D2E7B1A09638200F1F9D1 /* infoSpendingLimits.html */,
 				DAA5782819C1632000E972FC /* emailTemplate.html */,
 				B5F2E9A918D4AF6C008ACF88 /* info.html */,
 				4C72479C1933D3890091C286 /* infoExportWallet.html */,
@@ -3558,6 +3561,7 @@
 				B59C152018C012B500AEA789 /* icon_send@2x~iphone.png in Resources */,
 				B5628BEF199BD6320077DA1C /* 2-bars@2x.png in Resources */,
 				B59C150C18C012B500AEA789 /* emboss_down@2x~iphone.png in Resources */,
+				687D2E7C1A09638200F1F9D1 /* infoSpendingLimits.html in Resources */,
 				B5F2E9DA18DCE475008ACF88 /* Red-X@2x~iphone.png in Resources */,
 				B5F2EB1618DE0523008ACF88 /* btn_light@2x~iphone.png in Resources */,
 				B59C152D18C012B500AEA789 /* icon_wallet_dark@2x~iphone.png in Resources */,

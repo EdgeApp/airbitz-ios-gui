@@ -3,11 +3,12 @@
 #import "MinCharTextField.h"
 #import "CommonTypes.h"
 #import "CoreBridge.h"
+#import "InfoView.h"
 #import "User.h"
 #import "Util.h"
 #import "ABC.h"
 
-@interface SpendingLimitsViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
+@interface SpendingLimitsViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
 {
 	tABC_AccountSettings            *_pAccountSettings;
 }
@@ -173,6 +174,12 @@
                             otherButtonTitles:@"OK", nil];
         [alert show];
     }
+}
+
+- (IBAction)info
+{
+	[self.view endEditing:YES];
+    [InfoView CreateWithHTML:@"infoSpendingLimits" forView:self.view];
 }
 
 #pragma mark - Misc Methods
