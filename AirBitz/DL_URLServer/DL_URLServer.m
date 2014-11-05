@@ -20,12 +20,48 @@
                                 } \
                              }
 
+NSString *AB_BASE_64 = @"\
+MIIGIzCCBQugAwIBAgIQbFrWzccAuO7zNhQqj/c9XjANBgkqhkiG9w0BAQUFADCB\
+jjELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4G\
+A1UEBxMHU2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQxNDAyBgNV\
+BAMTK0NPTU9ETyBFeHRlbmRlZCBWYWxpZGF0aW9uIFNlY3VyZSBTZXJ2ZXIgQ0Ew\
+HhcNMTQwMzEzMDAwMDAwWhcNMTUwMjI1MjM1OTU5WjCCARkxETAPBgNVBAUTCEMz\
+NjI0NDI0MRMwEQYLKwYBBAGCNzwCAQMTAlVTMRswGQYLKwYBBAGCNzwCAQITCkNh\
+bGlmb3JuaWExHTAbBgNVBA8TFFByaXZhdGUgT3JnYW5pemF0aW9uMQswCQYDVQQG\
+EwJVUzEOMAwGA1UEERMFOTIxMDQxEzARBgNVBAgTCkNhbGlmb3JuaWExEjAQBgNV\
+BAcTCVNhbiBEaWVnbzEcMBoGA1UECRMTMzA2MCBVbml2ZXJzaXR5IEF2ZTEVMBMG\
+A1UEChMMQWlyYml0eiBJbmMuMSMwIQYDVQQLExpDT01PRE8gRVYgTXVsdGktRG9t\
+YWluIFNTTDETMBEGA1UEAxMKYWlyYml0ei5jbzCCASIwDQYJKoZIhvcNAQEBBQAD\
+ggEPADCCAQoCggEBAMWOPaNdgEDbxmWSb3w42tPcWeWOUpqaEmONyv5GNG6qYH2H\
+VyISZwWUS/k274IwBQlBEsvMijxtLCe/z+I5eNRqVBhHBkwnTZqO7kC3EevrP/ND\
+QhbDZh7du8OweeQKaeITxed0Cu087CMlQR9mD03Pln78cC7Jhhaa7l7CvZtgqsxw\
+5Vv2/h5iFHNvoPnBUe1135mXmYikipPGKMZOkV8mqVdd9nv0/NfBqjsoJvI3bjbA\
+C9hLPpPVvi99eihDyQ1XBDkwlNwlyUBGGinbURiUu/8b49awN2w2USjiDv5Dcj//\
+iYvW5Ds/TXrVQeVl3GGgWOGmwI91df95UIhF8f0CAwEAAaOCAe0wggHpMB8GA1Ud\
+IwQYMBaAFIhEUf9QKmleLYj0IbrZDPLOy+p8MB0GA1UdDgQWBBQAgCgCMmBJmpVT\
+vFMbwiTJqqBOTTAOBgNVHQ8BAf8EBAMCBaAwDAYDVR0TAQH/BAIwADAdBgNVHSUE\
+FjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwRgYDVR0gBD8wPTA7BgwrBgEEAbIxAQIB\
+BQEwKzApBggrBgEFBQcCARYdaHR0cHM6Ly9zZWN1cmUuY29tb2RvLmNvbS9DUFMw\
+UwYDVR0fBEwwSjBIoEagRIZCaHR0cDovL2NybC5jb21vZG9jYS5jb20vQ09NT0RP\
+RXh0ZW5kZWRWYWxpZGF0aW9uU2VjdXJlU2VydmVyQ0EuY3JsMIGEBggrBgEFBQcB\
+AQR4MHYwTgYIKwYBBQUHMAKGQmh0dHA6Ly9jcnQuY29tb2RvY2EuY29tL0NPTU9E\
+T0V4dGVuZGVkVmFsaWRhdGlvblNlY3VyZVNlcnZlckNBLmNydDAkBggrBgEFBQcw\
+AYYYaHR0cDovL29jc3AuY29tb2RvY2EuY29tMEYGA1UdEQQ/MD2CCmFpcmJpdHou\
+Y2+CEGFkbWluLmFpcmJpdHouY2+CDmFwaS5haXJiaXR6LmNvgg1nby5haXJiaXR6\
+LmNvMA0GCSqGSIb3DQEBBQUAA4IBAQAtMbNcVlKKpz4FR6ftDPh2VJxoHPt3M85w\
+dyYtdDtvB/cBi13fhGo1FxIWKSIurjMI6Gm/k6zO/ajeC8moKil+O3zodYWMSHwM\
+Huh+InwPgCaGKgKo8dJ+PmfGuCB2AIwxNEBdf8TrV3jy8WdQMCS6XZsYkMdpP9iE\
+FgwcJCfJpOVuWpnOhSG3QP9U2kelnpVI1q3iVKXefq9olum2AKQzZBktFPWmQhHK\
+DtfGNe09lqTfslY/j/RP63QcNdWxbO113AIEABPISmOgxTiB2mSHsUzQLC6cgmlj\
+ljfC/NjvjaRdVSpmX9YmUPj2jl0W/3El5SgF8fz/dqyyThQxsUNY";
+
 typedef enum eRequestType
 {
     RequestType_HTTP
 } tRequestType;
 
 static BOOL bInitialized = NO;
+static NSData *PINNED_CERT;
 
 __strong static DL_URLServer *singleton = nil;  // this will be the one and only object this static singleton class has
 
@@ -141,6 +177,7 @@ __strong static DL_URLServer *singleton = nil;  // this will be the one and only
 	if (NO == bInitialized)
 	{
         singleton = [[DL_URLServer alloc] init];
+        PINNED_CERT = [[NSData alloc] initWithBase64EncodedString:AB_BASE_64 options:0];;
         bInitialized = YES;
 	}
     //NSLog(@"%@", singleton);
@@ -541,7 +578,7 @@ __strong static DL_URLServer *singleton = nil;  // this will be the one and only
     BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
 	BOOL nonWiFi = flags & kSCNetworkReachabilityFlagsTransientConnection;
 	
-	NSURL *testURL = [NSURL URLWithString:@"http://www.apple.com/"];
+	NSURL *testURL = [NSURL URLWithString:@"https://www.airbitz.co/"];
 	NSURLRequest *testRequest = [NSURLRequest requestWithURL:testURL  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:20.0];
 	NSURLConnection *testConnection = [[NSURLConnection alloc] initWithRequest:testRequest delegate:self];
 	BOOL testConnectionSuccess = NO;
@@ -731,6 +768,50 @@ __strong static DL_URLServer *singleton = nil;  // this will be the one and only
         //[self queueUpdate];
         [self update];
     }
+}
+
+#pragma mark NSURLConnection Pinning methods
+
+#define PIN_ASSERT(assert) \
+    { \
+        if (!(assert)) \
+        { \
+            goto _out; \
+        } \
+    } \
+
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)space
+{
+    return [[space authenticationMethod] isEqualToString: NSURLAuthenticationMethodServerTrust];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+    NSString *authMethod = [[challenge protectionSpace] authenticationMethod];
+    if ([authMethod isEqualToString: NSURLAuthenticationMethodServerTrust]) {
+        SecTrustRef serverTrust = [[challenge protectionSpace] serverTrust];
+        PIN_ASSERT(nil != serverTrust);
+
+        OSStatus status = SecTrustEvaluate(serverTrust, NULL);
+        PIN_ASSERT(errSecSuccess == status);
+
+        SecCertificateRef serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0);
+        PIN_ASSERT(nil != serverCertificate);
+        
+        CFDataRef serverCertificateData = SecCertificateCopyData(serverCertificate);
+        PIN_ASSERT(nil != serverCertificateData);
+
+        const UInt8* const data = CFDataGetBytePtr(serverCertificateData);
+        const CFIndex size = CFDataGetLength(serverCertificateData);
+        NSData* cert = [NSData dataWithBytes:data length:(NSUInteger)size];
+        PIN_ASSERT(NO != [cert isEqualToData:PINNED_CERT]);
+
+        [[challenge sender] useCredential:[NSURLCredential credentialForTrust:serverTrust]
+               forAuthenticationChallenge:challenge];
+        return;
+    }
+_out:
+    [[challenge sender] cancelAuthenticationChallenge:challenge];
 }
 
 @end
