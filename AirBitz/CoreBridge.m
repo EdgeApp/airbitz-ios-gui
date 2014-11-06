@@ -13,13 +13,18 @@
 
 #import <pthread.h>
 
+#define CURRENCY_NUM_AUD                 36
 #define CURRENCY_NUM_CAD                124
 #define CURRENCY_NUM_CNY                156
 #define CURRENCY_NUM_CUP                192
+#define CURRENCY_NUM_HKD                344
 #define CURRENCY_NUM_MXN                484
+#define CURRENCY_NUM_NZD                554
+#define CURRENCY_NUM_PHP                608
 #define CURRENCY_NUM_GBP                826
 #define CURRENCY_NUM_USD                840
 #define CURRENCY_NUM_EUR                978
+
 #define FILE_SYNC_FREQUENCY_SECONDS     10
 
 #define DOLLAR_CURRENCY_NUMBER	840
@@ -1294,6 +1299,14 @@ static NSTimer *_dataSyncTimer;
         return @"CNY";
     } else if (currencyNum == CURRENCY_NUM_EUR) {
         return @"EUR";
+    } else if (currencyNum == CURRENCY_NUM_AUD) {
+        return @"AUD";
+    } else if (currencyNum == CURRENCY_NUM_HKD) {
+        return @"HKD";
+    } else if (currencyNum == CURRENCY_NUM_NZD) {
+        return @"NZD";
+    } else if (currencyNum == CURRENCY_NUM_PHP) {
+        return @"PHP";
     } else {
         return @"USD";
     }
@@ -1309,6 +1322,8 @@ static NSTimer *_dataSyncTimer;
         case CURRENCY_NUM_GBP:
             return @"£";
         case CURRENCY_NUM_CUP:
+        case CURRENCY_NUM_PHP:
+            return @"₱";
             return @"₱";
         default:
             return @"$";
