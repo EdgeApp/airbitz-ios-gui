@@ -91,12 +91,14 @@
 		4CA4672B19B604CA004F9923 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4672A19B604CA004F9923 /* DL_URLServer.m */; };
 		4CA4672C19B604CA004F9923 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4672A19B604CA004F9923 /* DL_URLServer.m */; };
 		6809FB9A196F9EEB0076CA4D /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809FB99196F9EEB0076CA4D /* libgit2.a */; };
-		682903DB1A0B22A8004D83DC /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 682903D81A0B22A8004D83DC /* FadingAlertView.m */; };
-		682903DC1A0B22A8004D83DC /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 682903D81A0B22A8004D83DC /* FadingAlertView.m */; };
-		682903DD1A0B22A8004D83DC /* FadingAlertView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682903D91A0B22A8004D83DC /* FadingAlertView~iphone.xib */; };
-		682903DE1A0B22A8004D83DC /* FadingAlertView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682903D91A0B22A8004D83DC /* FadingAlertView~iphone.xib */; };
+		682903DB1A0B22A8004D83DC /* (null) in Sources */ = {isa = PBXBuildFile; };
+		682903DC1A0B22A8004D83DC /* (null) in Sources */ = {isa = PBXBuildFile; };
+		682903DD1A0B22A8004D83DC /* (null) in Resources */ = {isa = PBXBuildFile; };
+		682903DE1A0B22A8004D83DC /* (null) in Resources */ = {isa = PBXBuildFile; };
 		68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */; };
 		683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
+		684861AC1A0C01C5008E53F8 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C4AA221A0B4DD70010C837 /* FadingAlertView.m */; };
+		684861B11A0C01D7008E53F8 /* FadingAlertView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView~iphone.xib */; };
 		684C0E521936B97000AB9807 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
 		685E6DE7197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DE5197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png */; };
 		685E6DE8197DC9ED00EC95F8 /* btn_use_max~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DE6197DC9ED00EC95F8 /* btn_use_max~iphone.png */; };
@@ -3229,7 +3231,7 @@
 				7D98ADC619A7C550003D2BF6 /* Lato-Hairline.ttf in Resources */,
 				7D98ADC719A7C550003D2BF6 /* table_cell_bottom~iphone.png in Resources */,
 				7D8270C319F89C8B003F275D /* btn_forgot_password_arrow.png in Resources */,
-				682903DE1A0B22A8004D83DC /* FadingAlertView~iphone.xib in Resources */,
+				682903DE1A0B22A8004D83DC /* (null) in Resources */,
 				7D98A0071A0206960094512B /* bd_icon_yelp@2x~iphone.png in Resources */,
 				7D98ADC819A7C550003D2BF6 /* TxSearchBarBacking~iphone.png in Resources */,
 				7D98ADC919A7C550003D2BF6 /* btn_selected@2x~iphone.png in Resources */,
@@ -3355,6 +3357,7 @@
 				7D98AE3019A7C550003D2BF6 /* bd_cell_top~iphone.png in Resources */,
 				7D98A0011A0206960094512B /* bd_icon_foursquare~iphone.png in Resources */,
 				7D98AE3119A7C550003D2BF6 /* PasswordVerifyView~iphone.xib in Resources */,
+				684861B11A0C01D7008E53F8 /* FadingAlertView~iphone.xib in Resources */,
 				7D98AE3219A7C550003D2BF6 /* logo@2x~iphone.png in Resources */,
 				7D98AE3319A7C550003D2BF6 /* bd_cell_bottom_white~iphone.png in Resources */,
 				7D98AE3419A7C550003D2BF6 /* 1-bar@2x.png in Resources */,
@@ -3750,7 +3753,7 @@
 				B59C143818C0129300AEA789 /* bd_cell_top~iphone.png in Resources */,
 				7D98A0001A0206960094512B /* bd_icon_foursquare~iphone.png in Resources */,
 				B5F2E9D118DCDFE7008ACF88 /* PasswordVerifyView~iphone.xib in Resources */,
-				682903DD1A0B22A8004D83DC /* FadingAlertView~iphone.xib in Resources */,
+				682903DD1A0B22A8004D83DC /* (null) in Resources */,
 				B5137C3E18A4529500DA4A34 /* logo@2x~iphone.png in Resources */,
 				B516C1F518C802F6008CC6A1 /* bd_cell_bottom_white~iphone.png in Resources */,
 				B5628BEE199BD6320077DA1C /* 1-bar@2x.png in Resources */,
@@ -3962,11 +3965,12 @@
 				7D98ACE319A7C550003D2BF6 /* BD_Website_Cell.m in Sources */,
 				7D98ACE419A7C550003D2BF6 /* ButtonCell.m in Sources */,
 				7D98ACE519A7C550003D2BF6 /* CDataScanner.m in Sources */,
+				684861AC1A0C01C5008E53F8 /* FadingAlertView.m in Sources */,
 				7D98ACE619A7C550003D2BF6 /* SendStatusViewController.m in Sources */,
 				7D98ACE719A7C550003D2BF6 /* CJSONScanner.m in Sources */,
 				7D98ACE819A7C550003D2BF6 /* DividerView.m in Sources */,
 				7D98ACE919A7C550003D2BF6 /* MainViewController.m in Sources */,
-				682903DC1A0B22A8004D83DC /* FadingAlertView.m in Sources */,
+				682903DC1A0B22A8004D83DC /* (null) in Sources */,
 				7D98ACEA19A7C550003D2BF6 /* ExportWalletPDFViewController.m in Sources */,
 				7D98ACEB19A7C550003D2BF6 /* GDrive.m in Sources */,
 				7D98ACEC19A7C550003D2BF6 /* GTLDrive_Sources.m in Sources */,
@@ -4077,7 +4081,7 @@
 				B5C0A97718EA0A42008F302C /* BD_Website_Cell.m in Sources */,
 				B55A031418EA55C700845090 /* ButtonCell.m in Sources */,
 				B5137C3618A435BD00DA4A34 /* CDataScanner.m in Sources */,
-				682903DB1A0B22A8004D83DC /* FadingAlertView.m in Sources */,
+				682903DB1A0B22A8004D83DC /* (null) in Sources */,
 				B5FD392818EE2DFD00BE2670 /* SendStatusViewController.m in Sources */,
 				B5137C3A18A435BD00DA4A34 /* CJSONScanner.m in Sources */,
 				B5C0A97E18EA0A7F008F302C /* DividerView.m in Sources */,
