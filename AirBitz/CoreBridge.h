@@ -6,6 +6,7 @@
 #import "ABC.h"
 #import "Wallet.h"
 #import "Transaction.h"
+#import "FadingAlertView.h"
 
 #define CONFIRMED_CONFIRMATION_COUNT 6
 
@@ -17,6 +18,7 @@
 + (void)stopQueues;
 + (void)postToSyncQueue:(void(^)(void))cb;
 
++ (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs;
 + (void)loadWallets:(NSMutableArray *)arrayWallets;
 + (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx;
 + (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx;
@@ -75,7 +77,7 @@
 + (NSString *)coreVersion;
 + (NSString *)currencyAbbrevLookup:(int) currencyNum;
 + (NSString *)currencySymbolLookup:(int) currencyNum;
-+ (void)setupNewAccount;
++ (void)setupNewAccount:(FadingAlertView *)fadingAlert;
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo);
 

@@ -25,6 +25,7 @@
 #import "CoreBridge.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
+#import "FadingAlertView.h"
 
 typedef enum eAppMode
 {
@@ -37,7 +38,7 @@ typedef enum eAppMode
 
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
-                                  TransactionDetailsViewControllerDelegate, UIAlertViewDelegate>
+                                  TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_directoryViewController;
@@ -51,6 +52,7 @@ typedef enum eAppMode
     TransactionDetailsViewController *_txDetailsController;
     UIAlertView                 *_receivedAlert;
     UIAlertView                 *_passwordChangeAlert;
+    FadingAlertView             *_fadingAlert;
 	CGRect                      _originalTabBarFrame;
 	CGRect                      _originalViewFrame;
 	tAppMode                    _appMode;
@@ -495,8 +497,17 @@ typedef enum eAppMode
 
 - (void)loginViewControllerDidLogin:(BOOL)bNewAccount
 {
-    if (bNewAccount) {
-        [CoreBridge setupNewAccount];
+    NSMutableArray *wallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWalletUUIDs:wallets];
+    if (bNewAccount || [wallets count] == 0) {
+        _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+        _fadingAlert.message = NSLocalizedString(@"Creating and securing wallet", nil);
+        _fadingAlert.fadeDuration = 2;
+        _fadingAlert.fadeDelay = 0;
+        [_fadingAlert blockButtons:YES];
+        [_fadingAlert showSpinner:YES];
+        [_fadingAlert show];
+        [CoreBridge setupNewAccount:_fadingAlert];
     }
 
     // After login, reset all the main views
@@ -515,6 +526,11 @@ typedef enum eAppMode
         [self processBitcoinURI:_uri];
         _uri = nil;
     }
+}
+
+- (void)fadingAlertDismissed:(FadingAlertView *)view
+{
+    _fadingAlert = nil;
 }
 
 - (void)launchReceiving:(NSNotification *)notification

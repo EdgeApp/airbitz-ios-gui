@@ -1315,7 +1315,7 @@ static NSTimer *_dataSyncTimer;
     }
 }
 
-+ (void)setupNewAccount
++ (void)setupNewAccount:(FadingAlertView *)fadingAlert
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         tABC_CC result;
@@ -1327,6 +1327,7 @@ static NSTimer *_dataSyncTimer;
                                   0, NULL, &szUUID, &Error);
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
+            [fadingAlert dismiss:YES];
         });
         free(szUUID);
         [CoreBridge startWatchers];
