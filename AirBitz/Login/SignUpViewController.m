@@ -18,14 +18,16 @@
 #import "CoreBridge.h"
 #import "MinCharTextField.h"
 #import "CommonTypes.h"
+#import "FadingAlertView.h"
 
 #define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
 
-@interface SignUpViewController () <UITextFieldDelegate, PasswordVerifyViewDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
+@interface SignUpViewController () <UITextFieldDelegate, PasswordVerifyViewDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, FadingAlertViewDelegate>
 {
 	UITextField                     *_activeTextField;
 	PasswordVerifyView              *_passwordVerifyView;
+	FadingAlertView                 *_fadingAlert;
 	float                           _keyboardFrameOriginY;
 }
 
@@ -161,7 +163,13 @@
                 // if we are signing up a new account
                 if (_mode == SignUpMode_SignUp)
                 {
-                    [self blockUser:YES];
+                    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+                    _fadingAlert.message = NSLocalizedString(@"Creating and securing account", nil);
+                    _fadingAlert.fadeDuration = 0;
+                    _fadingAlert.fadeDelay = 0;
+                    [_fadingAlert blockButtons:YES];
+                    [_fadingAlert showSpinner:YES];
+                    [_fadingAlert show];
                     result = ABC_CreateAccount([self.userNameTextField.text UTF8String],
                                                [self.passwordTextField.text UTF8String],
                                                [self.pinTextField.text UTF8String],
@@ -254,6 +262,13 @@
 
 - (IBAction)buttonBlockerTouched:(id)sender
 {
+}
+
+#pragma mark - Fading Alert Delegate
+
+- (void)fadingAlertDismissed:(FadingAlertView *)view
+{
+    _fadingAlert = nil;
 }
 
 #pragma mark - Misc Methods
@@ -714,16 +729,11 @@
 
 - (void)createAccountComplete
 {
-    [self blockUser:NO];
-    if (_bSuccess)
-    {
-        [self blockUser:YES];
+    if (_bSuccess) {
         [User login:self.userNameTextField.text
            password:self.passwordTextField.text];
         [self exit];
-    }
-    else
-    {
+    } else {
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Account Sign In", @"Title of account signin error alert")
 							  message:[NSString stringWithFormat:@"Sign-in failed:\n%@", _strReason]
@@ -732,6 +742,8 @@
 							  otherButtonTitles:nil];
 		[alert show];
     }
+    [_fadingAlert dismiss:NO];
+    [self blockUser:NO];
 }
 
 - (void)changePasswordComplete
