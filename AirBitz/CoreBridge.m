@@ -950,6 +950,26 @@ static NSTimer *_dataSyncTimer;
         }
         ABC_FreeAccountSettings(pSettings);
     }
+
++ (tABC_CC)PINLoginWithPIN:(NSString *)PIN
+{
+    if ([CoreBridge PINLoginExists])
+    {
+        NSString *username = [LocalSettings controller].cachedUsername;
+        tABC_Error error;
+        tABC_CC result = ABC_PinLogin([username UTF8String],
+                                      [PIN UTF8String],
+                                      &error);
+        if (ABC_CC_Ok == result)
+        {
+            [User login:[LocalSettings controller].cachedUsername password:NULL];
+        }
+        return result;
+    }
+    else
+    {
+        return ABC_CC_PinExpired;
+    }
 }
 
 + (void)login

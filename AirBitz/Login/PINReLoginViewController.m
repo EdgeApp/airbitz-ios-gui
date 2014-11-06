@@ -87,8 +87,8 @@
 
 - (void)PINCodeView:(APPINView *)view didEnterPIN:(NSString *)PINCode
 {
+    [self showSpinner:YES];
     [self signIn:PINCode];
-    [self PINCodeView].PINCode = nil;
 }
 
 #pragma mark - Action Methods
@@ -349,55 +349,54 @@
 - (void)signIn:(NSString *)PINCode
 {
     [self animateToInitialPresentation];
-    
-    if ([CoreBridge PINLoginExists])
-    {
-        const char *username = [[LocalSettings controller].cachedUsername UTF8String];
-        tABC_Error error;
-        tABC_CC result = ABC_PinLogin(username,
-                                      [PINCode UTF8String],
-                                      &error);
 
-        switch (result)
-        {
-            case ABC_CC_Ok:
-            {
-                [User login:[LocalSettings controller].cachedUsername password:NULL];
-                [self.delegate PINReLoginViewControllerDidLogin];
-                break;
-            }
-            case ABC_CC_BadPassword:
-            {
-                if ([[User Singleton] haveExceededPINLoginInvalidEntries])
-                {
-                    [[User Singleton] resetPINLoginInvalidEntryCount];
-                    [self abortPermanently];
-                }
-                break;
-            }
-            case ABC_CC_PinExpired:
-            {
-                [self abortPermanently];
-                break;
-            }
-            default:
-            {
-                [self showFadingError:[Util errorMap:&(error)]];
-                break;
-            }
-            self.PINCodeView.PINCode = nil;
-        }
-    }
-    else
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
     {
-        [self abortPermanently];
-    }
+        __block tABC_CC result = [CoreBridge PINLoginWithPIN:PINCode];
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            switch (result)
+            {
+                case ABC_CC_Ok:
+                {
+                    [User login:[LocalSettings controller].cachedUsername password:NULL];
+                    [self.delegate PINReLoginViewControllerDidLogin];
+                    break;
+                }
+                case ABC_CC_BadPassword:
+                {
+                    if ([[User Singleton] haveExceededPINLoginInvalidEntries])
+                    {
+                        [[User Singleton] resetPINLoginInvalidEntryCount];
+                        [self abortPermanently];
+                    }
+                    break;
+                }
+                case ABC_CC_PinExpired:
+                {
+                    [self abortPermanently];
+                    break;
+                }
+                default:
+                {
+                    tABC_Error temp;
+                    temp.code = result;
+                    [self showFadingError:[Util errorMap:&temp]];
+                    break;
+                }
+                [self showSpinner:NO];
+                self.PINCodeView.PINCode = nil;
+            }
+        });
+    });
 }
 
 - (void)abortPermanently
 {
     [CoreBridge deletePINLogin];
-    [self.delegate PINReLoginViewControllerDidSwitchUser];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self.delegate PINReLoginViewControllerDidSwitchUser];
+    }];
 }
 
 - (void)showSpinner:(BOOL)bShow
