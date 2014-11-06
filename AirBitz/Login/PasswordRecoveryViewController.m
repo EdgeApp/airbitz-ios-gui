@@ -340,7 +340,7 @@ typedef enum eAlertType
     } else {
         password = [User Singleton].password;
     }
-    if (![password isEqualToString:[User Singleton].password]) {
+    if (![CoreBridge passwordOk:password]) {
         UIAlertView *alert = [[UIAlertView alloc]
                              initWithTitle:NSLocalizedString(@"Password mismatch", nil)
                              message:NSLocalizedString(@"Please enter your correct password.", nil)

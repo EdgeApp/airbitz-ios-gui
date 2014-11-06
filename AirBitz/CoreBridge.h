@@ -57,6 +57,7 @@
 + (void)setupLoginPIN;
 + (void)login;
 + (void)logout;
++ (BOOL)passwordOk:(NSString *)password;
 + (BOOL)allWatchersReady;
 + (BOOL)watcherIsReady:(NSString *)UUID;
 + (void)connectWatchers;

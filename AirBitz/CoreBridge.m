@@ -975,6 +975,17 @@ static NSTimer *_dataSyncTimer;
     }
 }
 
++ (BOOL)passwordOk:(NSString *)password
+{
+    bool ok = false;
+    tABC_Error Error;
+    ABC_PasswordOk([[User Singleton].name UTF8String],
+                   [password UTF8String], &ok, &Error);
+    [Util printABC_Error:&Error];
+
+    return ok == true ? YES : NO;
+}
+
 + (BOOL)allWatchersReady
 {
     return YES;

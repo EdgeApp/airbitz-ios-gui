@@ -163,7 +163,7 @@
 
 - (IBAction)Complete:(id)sender
 {
-    if ([[User Singleton].password isEqualToString:_passwordTextField.text]) {
+    if ([CoreBridge passwordOk:_passwordTextField.text]) {
         if (_dailySpendLimitSwitch.on) {
             _pAccountSettings->bDailySpendLimit = 1;
             _pAccountSettings->dailySpendLimitSatoshis = [CoreBridge denominationToSatoshi:_dailySpendLimitField.text];

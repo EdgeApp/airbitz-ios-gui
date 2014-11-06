@@ -902,7 +902,7 @@
             }
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
-        } else if (_passwordRequired && ![self.withdrawlPIN.text isEqualToString:[User Singleton].password]) {
+        } else if (_passwordRequired && ![CoreBridge passwordOk:self.withdrawlPIN.text]) {
             [self showFadingError:NSLocalizedString(@"Incorrect password", nil)];
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];

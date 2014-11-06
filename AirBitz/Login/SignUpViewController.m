@@ -190,9 +190,10 @@
                         [CoreBridge stopQueues];
 
                         char *szOldPIN = NULL;
-                        ABC_GetPIN([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &szOldPIN, nil);
+                        // NOTE: userNameTextField is repurposed for current password
+                        ABC_GetPIN([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String], &szOldPIN, nil);
                         tABC_CC result = ABC_ChangePassword([[User Singleton].name UTF8String],
-                                                    [[User Singleton].password UTF8String],
+                                                    [self.userNameTextField.text UTF8String],
                                                     [self.passwordTextField.text UTF8String],
                                                     szOldPIN,
                                                     NULL,
@@ -220,7 +221,7 @@
                 else
                 {
                     result = ABC_SetPIN([[User Singleton].name UTF8String],
-                                        [[User Singleton].password UTF8String],
+                                        [self.userNameTextField.text UTF8String],
                                         [self.pinTextField.text UTF8String],
                                         &Error);
                 }
@@ -401,7 +402,7 @@
     else if (_mode != SignUpMode_ChangePasswordUsingAnswers) // the user name field is used for the old password in this case
     {
         // if the password is wrong
-        if ([[User Singleton].password isEqualToString:self.userNameTextField.text] == NO)
+        if ([CoreBridge passwordOk:self.userNameTextField.text] == NO)
         {
             bUserNameFieldIsValid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
