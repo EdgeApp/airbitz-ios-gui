@@ -495,6 +495,10 @@ typedef enum eAppMode
 
 - (void)loginViewControllerDidLogin:(BOOL)bNewAccount
 {
+    if (bNewAccount) {
+        [CoreBridge setupNewAccount];
+    }
+
     // After login, reset all the main views
     [self loadUserViews];
 

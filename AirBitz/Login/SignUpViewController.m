@@ -513,22 +513,6 @@
     return valid;
 }
 
--(void)createFirstWallet
-{
-    [self blockUser:YES];
-
-	tABC_CC result;
-	tABC_Error Error;
-	result = ABC_CreateWallet([self.userNameTextField.text UTF8String],
-                              [self.passwordTextField.text UTF8String],
-                              [NSLocalizedString(@"My Wallet", @"Name of initial wallet") UTF8String],
-                              DOLLAR_CURRENCY_NUMBER,
-                              0,
-                              ABC_SignUp_Request_Callback,
-                              (__bridge void *)self,
-                              &Error);
-}
-
 - (void)blockUser:(BOOL)bBlock
 {
     if (bBlock)
@@ -736,196 +720,13 @@
         [self blockUser:YES];
         [User login:self.userNameTextField.text
            password:self.passwordTextField.text];
-
-        //
-        // Add default categories to core
-        //
-        tABC_Error Error;
-
-        self.arrayCategories = [[NSMutableArray alloc] init];
-        
-        //
-        // Should these go in a header file of some sort? -pvp
-        //
-        
-        //
-        // Expense categories
-        //
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Air Travel", @"default category Expense:Air Travel")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Alcohol & Bars", @"default category Expense:Alcohol & Bars")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Allowance", @"default category Expense:Allowance")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Amusement", @"default category Expense:Amusement")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Arts", @"default category Expense:Arts")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:ATM Fee", @"default category Expense:ATM Fee")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Auto & Transport", @"default category Expense:Auto & Transport")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Auto Insurance", @"default category Expense:Auto Insurance")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Auto Payment", @"default category Expense:Auto Payment")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Baby Supplies", @"default category Expense:Baby Supplies")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Babysitter & Daycare", @"default category Expense:Babysitter & Daycare")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Bank Fee", @"default category Expense:Bank Fee")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Bills & Utilities", @"default category Expense:Bills & Utilities")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Books", @"default category Expense:Books")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Books & Supplies", @"default category Expense:Books & Supplies")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Car Wash", @"default category Expense:Car Wash")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Cash & ATM", @"default category Expense:Cash & ATM")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Charity", @"default category Expense:Charity")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Clothing", @"default category Expense:Clothing")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Coffee Shops", @"default category Expense:Coffee Shops")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Credit Card Payment", @"default category Expense:Credit Card Payment")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Dentist", @"default category Expense:Dentist")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Deposit to Savings", @"default category Expense:Deposit to Savings")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Doctor", @"default category Expense:Doctor")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Education", @"default category Expense:Education")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Electronics & Software", @"default category Expense:Electronics & Software")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Entertainment", @"default category Expense:Entertainment")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Eyecare", @"default category Expense:Eyecare")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Fast Food", @"default category Expense:Fast Food")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Fees & Charges", @"default category Expense:Fees & Charges")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Financial", @"default category Expense:Financial")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Financial Advisor", @"default category Expense:Financial Advisor")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Food & Dining", @"default category Expense:Food & Dining")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Furnishings", @"default category Expense:Furnishings")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Gas & Fuel", @"default category Expense:Gas & Fuel")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Gift", @"default category Expense:Gift")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Gifts & Donations", @"default category Expense:Gifts & Donations")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Groceries", @"default category Expense:Groceries")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Gym", @"default category Expense:Gym")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Hair", @"default category Expense:Hair")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Health & Fitness", @"default category Expense:Health & Fitness")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:HOA Dues", @"default category Expense:HOA Dues")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Hobbies", @"default category Expense:Hobbies")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home", @"default category Expense:Home")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home Improvement", @"default category Expense:Home Improvement")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home Insurance", @"default category Expense:Home Insurance")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home Phone", @"default category Expense:Home Phone")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home Services", @"default category Expense:Home Services")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Home Supplies", @"default category Expense:Home Supplies")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Hotel", @"default category Expense:Hotel")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Interest Exp", @"default category Expense:Interest Exp")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Internet", @"default category Expense:Internet")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:IRA Contribution", @"default category Expense:IRA Contribution")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Kids", @"default category Expense:Kids")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Kids Activities", @"default category Expense:Kids Activities")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Late Fee", @"default category Expense:Late Fee")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Laundry", @"default category Expense:Laundry")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Lawn & Garden", @"default category Expense:Lawn & Garden")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Life Insurance", @"default category Expense:Life Insurance")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Misc.", @"default category Expense:Misc.")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Mobile Phone", @"default category Expense:Mobile Phone")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Mortgage & Rent", @"default category Expense:Mortgage & Rent")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Mortgage Interest", @"default category Expense:Mortgage Interest")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Movies & DVDs", @"default category Expense:Movies & DVDs")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Music", @"default category Expense:Music")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Newspaper & Magazines", @"default category Expense:Newspaper & Magazines")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Not Sure", @"default category Expense:Not Sure")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Parking", @"default category Expense:Parking")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Personal Care", @"default category Expense:Personal Care")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Pet Food & Supplies", @"default category Expense:Pet Food & Supplies")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Pet Grooming", @"default category Expense:Pet Grooming")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Pets", @"default category Expense:Pets")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Pharmacy", @"default category Expense:Pharmacy")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Property", @"default category Expense:Property")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Public Transportation", @"default category Expense:Public Transportation")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Registration", @"default category Expense:Registration")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Rental Car & Taxi", @"default category Expense:Rental Car & Taxi")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Restaurants", @"default category Expense:Restaurants")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Service & Parts", @"default category Expense:Service & Parts")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Service Fee", @"default category Expense:Service Fee")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Shopping", @"default category Expense:Shopping")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Spa & Massage", @"default category Expense:Spa & Massage")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Sporting Goods", @"default category Expense:Sporting Goods")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Sports", @"default category Expense:Sports")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Student Loan", @"default category Expense:Student Loan")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Tax", @"default category Expense:Tax")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Television", @"default category Expense:Television")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Tolls", @"default category Expense:Tolls")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Toys", @"default category Expense:Toys")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Trade Commissions", @"default category Expense:Trade Commissions")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Travel", @"default category Expense:Travel")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Tuition", @"default category Expense:Tuition")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Utilities", @"default category Expense:Utilities")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Vacation", @"default category Expense:Vacation")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Expense:Vet", @"default category Expense:Vet")];
-        
-        //
-        // Income categories
-        //
-        [self.arrayCategories addObject:NSLocalizedString(@"Income:Consulting Income", @"default category Income:Consulting Income")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Income:Div Income", @"default category Income:Div Income")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Income:Net Salary", @"default category Income:Net Salary")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Income:Other Income", @"default category Income:Other Income")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Income:Rent", @"default category Income:Rent")];
-        [self.arrayCategories addObject:NSLocalizedString(@"Income:Sales", @"default category Income:Sales")];
-        
-        //
-        // Exchange Categories
-        //
-        [self.arrayCategories addObject: NSLocalizedString(@"Exchange:Buy Bitcoin", @"default category Exchange:Buy Bitcoin")]; 
-        [self.arrayCategories addObject: NSLocalizedString(@"Exchange:Sell Bitcoin", @"default category Exchange:Sell Bitcoin")]; 
-
-        //
-        // Transfer Categories
-        //
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bitcoin.de", @"default category Transfer:Bitcoin.de")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bitfinex", @"default category Transfer:Bitfinex")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bitstamp", @"default category Transfer:Bitstamp")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:BTC-e", @"default category Transfer:BTC-e")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:BTCChina", @"default category Transfer:BTCChina")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Bter", @"default category Transfer:Bter")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:CAVirtex", @"default category Transfer:CAVirtex")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Coinbase", @"default category Transfer:Coinbase")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:CoinMKT", @"default category Transfer:CoinMKT")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Huobi", @"default category Transfer:Huobi")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Kraken", @"default category Transfer:Kraken")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:MintPal", @"default category Transfer:MintPal")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:OKCoin", @"default category Transfer:OKCoin")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Vault of Satoshi", @"default category Transfer:Vault of Satoshi")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Airbitz", @"default category Transfer:Wallet:Airbitz")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Armory", @"default category Transfer:Wallet:Armory")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Bitcoin Core", @"default category Transfer:Wallet:Bitcoin Core")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Blockchain", @"default category Transfer:Wallet:Blockchain")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Electrum", @"default category Transfer:Wallet:Electrum")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Multibit", @"default category Transfer:Wallet:Multibit")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Mycelium", @"default category Transfer:Wallet:Mycelium")];
-        [self.arrayCategories addObject: NSLocalizedString(@"Transfer:Wallet:Dark Wallet", @"default category Transfer:Wallet:Dark Wallet")]; 
-        
-        // add default categories to core
-        for (int i = 0; i < [self.arrayCategories count]; i++)
-        {
-            NSString *strCategory = [self.arrayCategories objectAtIndex:i];
-            ABC_AddCategory([[User Singleton].name UTF8String],
-                            [[User Singleton].password UTF8String],
-                            (char *)[strCategory UTF8String], &Error);
-            [Util printABC_Error:&Error];
-        }
-
-        // now that the account is created, create the first wallet
-		[self createFirstWallet];
+        [self exit];
     }
     else
     {
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Account Sign In", @"Title of account signin error alert")
 							  message:[NSString stringWithFormat:@"Sign-in failed:\n%@", _strReason]
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-    }
-}
-
-- (void)createWalletComplete
-{
-    [self blockUser:NO];
-    if (_bSuccess)
-    {
-        [self exit];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signup error alert")
-							  message:[NSString stringWithFormat:@"Wallet creation failed:\n%@", _strReason]
 							  delegate:nil
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
@@ -982,20 +783,6 @@ void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
         {
             [controller performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
         }
-		else if (pResults->requestType == ABC_RequestType_CreateWallet)
-		{
-            [CoreBridge startWatchers];
-			if (pResults->pRetData)
-            {
-                //controller.strWalletUUID = [NSString stringWithFormat:@"%s", (char *)pResults->pRetData];
-                free(pResults->pRetData);
-            }
-            else
-            {
-                //controller.strWalletUUID = @"(Unknown UUID)";
-            }
-            [controller performSelectorOnMainThread:@selector(createWalletComplete) withObject:nil waitUntilDone:FALSE];
-		}
         else if (pResults->requestType == ABC_RequestType_ChangePassword)
         {
             [controller performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
