@@ -37,6 +37,7 @@
     alert.fadeDuration = ALERT_MESSAGE_FADE_DURATION;
     alert.buttonBlocker.hidden = YES;
     alert.activityIndicator.hidden = YES;
+    alert.delegate = delegate;
 	[parentView addSubview:alert];
 	return alert;
 }
@@ -75,9 +76,11 @@
         }
         completion:^(BOOL finished)
         {
+            [self.delegate fadingAlertDismissed:self];
         }];
     } else {
         self.alpha = 0.0;
+        [self.delegate fadingAlertDismissed:self];
     }
 }
 
