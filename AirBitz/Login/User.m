@@ -138,6 +138,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [CoreBridge logout];
     }
     self.password = nil;
+    self.name = nil;
     [CoreBridge deletePINLogin];
 }
 
