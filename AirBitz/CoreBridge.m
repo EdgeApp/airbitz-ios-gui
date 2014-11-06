@@ -950,6 +950,7 @@ static NSTimer *_dataSyncTimer;
         }
         ABC_FreeAccountSettings(pSettings);
     }
+}
 
 + (tABC_CC)PINLoginWithPIN:(NSString *)PIN
 {
