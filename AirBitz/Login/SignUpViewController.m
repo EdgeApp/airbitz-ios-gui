@@ -239,6 +239,7 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
                         [alert show];
+                        [CoreBridge setupLoginPIN];
                     }
                 }
                 else
