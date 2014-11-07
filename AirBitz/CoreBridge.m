@@ -868,10 +868,17 @@ static NSTimer *_dataSyncTimer;
     char *szPIN = NULL;
     NSString *storedPIN = nil;
 
-    ABC_GetPIN([[User Singleton].name UTF8String],
-               [[User Singleton].password UTF8String],
-               &szPIN, &error);
-    [Util printABC_Error:&error];
+    NSString *name = [User Singleton].name;
+    if (name)
+    {
+        NSString *pass = [User Singleton].password;
+        const char *password = (nil == pass ? NULL : [pass UTF8String]);
+        const char *username = [name UTF8String];
+        ABC_GetPIN(username,
+                   password,
+                   &szPIN, &error);
+        [Util printABC_Error:&error];
+    }
     if (szPIN) {
         storedPIN = [NSString stringWithUTF8String:szPIN];
     }
@@ -881,12 +888,12 @@ static NSTimer *_dataSyncTimer;
 
 + (bool)PINLoginExists
 {
-    const char *username = [[LocalSettings controller].cachedUsername UTF8String];
+    NSString *username = [LocalSettings controller].cachedUsername;
     bool exists = NO;
     if (username)
     {
         tABC_Error error;
-        tABC_CC result = ABC_PinLoginExists(username,
+        tABC_CC result = ABC_PinLoginExists([username UTF8String],
                                             &exists,
                                             &error);
         if (ABC_CC_Ok != result)
@@ -899,21 +906,21 @@ static NSTimer *_dataSyncTimer;
 
 + (void)deletePINLogin
 {
-    const char *username = NULL;
+    NSString *username = NULL;
     if ([User isLoggedIn])
     {
-        username = [[User Singleton].name UTF8String];
+        username = [User Singleton].name;
     }
 
     if (!username)
     {
-        username = [[LocalSettings controller].cachedUsername UTF8String];
+        username = [LocalSettings controller].cachedUsername;
     }
 
     tABC_Error error;
     if (username)
     {
-        tABC_CC result = ABC_PinLoginDelete(username,
+        tABC_CC result = ABC_PinLoginDelete([username UTF8String],
                                             &error);
         if (ABC_CC_Ok != result)
         {
@@ -924,10 +931,12 @@ static NSTimer *_dataSyncTimer;
 
 + (void)setupLoginPIN
 {
-    const char *username = [[User Singleton].name UTF8String];
-    if (username)
+    NSString *name = [User Singleton].name;
+    if (name)
     {
-        const char *password = [[User Singleton].password UTF8String];
+        const char *username = [name UTF8String];
+        NSString *pass = [User Singleton].password;
+        const char *password = (nil == pass ? NULL : [pass UTF8String]);
 
         // retrieve the user's settings to check whether PIN logins are disabled
         tABC_CC cc = ABC_CC_Ok;
@@ -1004,12 +1013,19 @@ static NSTimer *_dataSyncTimer;
 
 + (BOOL)passwordOk:(NSString *)password
 {
+    NSString *name = [User Singleton].name;
     bool ok = false;
-    tABC_Error Error;
-    ABC_PasswordOk([[User Singleton].name UTF8String],
-                   [password UTF8String], &ok, &Error);
-    [Util printABC_Error:&Error];
-
+    if (name)
+    {
+        NSString *pass = [User Singleton].password;
+        const char *password = (nil == pass ? NULL : [pass UTF8String]);
+        const char *username = [name UTF8String];
+        
+        tABC_Error Error;
+        ABC_PasswordOk(username,
+                       password, &ok, &Error);
+        [Util printABC_Error:&Error];
+    }
     return ok == true ? YES : NO;
 }
 
