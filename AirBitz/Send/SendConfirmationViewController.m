@@ -17,9 +17,11 @@
 #import "CoreBridge.h"
 #import "Util.h"
 #import "CommonTypes.h"
+#import "FadingAlertView.h"
 
-
-@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
+@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
+                                              TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate,
+                                              InfoViewDelegate, FadingAlertViewDelegate>
 {
     ConfirmationSliderView              *_confirmationSlider;
     UITextField                         *_selectedTextField;
@@ -33,6 +35,7 @@
     Transaction                         *_completedTransaction;    // nil until sendTransaction is successfully completed
     UITapGestureRecognizer              *tap;
     UIAlertView                         *_alert;
+    FadingAlertView                     *_fadingAlert;
 }
 
 @property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
@@ -61,8 +64,6 @@
 @property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
 @property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
-@property (nonatomic, weak) IBOutlet UIView                 *errorMessageView;
-@property (nonatomic, weak) IBOutlet UILabel                *errorMessageText;
 
 @property (nonatomic, strong) SendStatusViewController          *sendStatusController;
 @property (nonatomic, strong) TransactionDetailsViewController  *transactionDetailsController;
@@ -132,8 +133,6 @@
                                              selector:@selector(exchangeRateUpdate:)
                                                  name:NOTIFICATION_EXCHANGE_RATE_CHANGE
                                                object:nil];
-    
-    self.errorMessageView.alpha = 0.0;
 }
 
 - (void)dealloc
@@ -814,23 +813,22 @@
 
 - (void)showFadingError:(NSString *)message
 {
-    self.errorMessageText.text = message;
-    self.errorMessageView.alpha = 1.0;
-    [UIView animateWithDuration:ERROR_MESSAGE_FADE_DURATION
-                          delay:ERROR_MESSAGE_FADE_DELAY
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^
-     {
-         self.errorMessageView.alpha = 0.0;
-     }
-     completion:^(BOOL finished)
-     {
-     }];
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert.message = message;
+    _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
+    _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
+    [_fadingAlert showFading];
 }
 
 - (void)dismissErrorMessage
 {
-    [self.errorMessageView.layer removeAllAnimations];
+    [_fadingAlert dismiss:NO];
+    _fadingAlert = nil;
+}
+
+- (void)fadingAlertDismissed:(FadingAlertView *)view
+{
+    _fadingAlert = nil;
 }
 
 #pragma mark infoView Delegates
