@@ -899,7 +899,7 @@ static NSTimer *_dataSyncTimer;
 
 + (void)deletePINLogin
 {
-    const char *username;
+    const char *username = NULL;
     if ([User isLoggedIn])
     {
         username = [[User Singleton].name UTF8String];
@@ -925,9 +925,10 @@ static NSTimer *_dataSyncTimer;
 + (void)setupLoginPIN
 {
     const char *username = [[User Singleton].name UTF8String];
-    const char *password = [[User Singleton].password UTF8String];
-    if (username && password)
+    if (username)
     {
+        const char *password = [[User Singleton].password UTF8String];
+
         // retrieve the user's settings to check whether PIN logins are disabled
         tABC_CC cc = ABC_CC_Ok;
         tABC_Error Error;
