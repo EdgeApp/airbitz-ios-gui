@@ -895,7 +895,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		}
 		if (indexPath.row == ROW_PIN)
 		{
-			cell.name.text = NSLocalizedString(@"Change withdrawal PIN", @"settings text");
+			cell.name.text = NSLocalizedString(@"Change PIN", @"settings text");
 		}
 		if (indexPath.row == ROW_RECOVERY_QUESTIONS)
 		{
