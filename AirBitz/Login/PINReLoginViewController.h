@@ -17,7 +17,7 @@
 @protocol PINReLoginViewControllerDelegate <NSObject>
 
 @required
--(void)PINReLoginViewControllerDidSwitchUser;
+-(void)PINReLoginViewControllerDidSwitchUserWithMessage:(NSString *)message;
 -(void)PINReLoginViewControllerDidAbort;
 -(void)PINReLoginViewControllerDidLogin;
 @end

@@ -690,10 +690,18 @@ typedef enum eAppMode
 
 #pragma mark - PINReLoginViewControllerDelegates
 
-- (void)PINReLoginViewControllerDidSwitchUser
+- (void)PINReLoginViewControllerDidSwitchUserWithMessage:(NSString *)message
 {
     [self PINReLoginViewControllerDidAbort];
     [self showLogin];
+    if (message)
+    {
+        _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+        _fadingAlert.message = message;
+        _fadingAlert.fadeDuration = 2;
+        _fadingAlert.fadeDelay = 0;
+        [_fadingAlert showFading];
+    }
 }
 
 - (void)PINReLoginViewControllerDidAbort

@@ -123,13 +123,13 @@
 - (IBAction)buttonSwitchUserTouched:(id)sender
 {
     [self dismissErrorMessage];
-    [self.delegate PINReLoginViewControllerDidSwitchUser];
+    [self.delegate PINReLoginViewControllerDidSwitchUserWithMessage:nil];
 }
 
 - (IBAction)buttonForgotTouched:(id)sender
 {
     [self dismissErrorMessage];
-    [self.delegate PINReLoginViewControllerDidSwitchUser];
+    [self.delegate PINReLoginViewControllerDidSwitchUserWithMessage:nil];
 }
 
 #pragma mark - Misc Methods
@@ -376,7 +376,6 @@
                 }
                 case ABC_CC_PinExpired:
                 {
-                    [self showFadingError:NSLocalizedString(@"PIN login cancelled", nil)];
                     [[User Singleton] resetPINLoginInvalidEntryCount];
                     [self abortPermanently];
                     break;
@@ -398,8 +397,9 @@
 - (void)abortPermanently
 {
     [CoreBridge deletePINLogin];
+    NSString *PINExpired = NSLocalizedString(@"Invalid PIN. Please log in.", nil);
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self.delegate PINReLoginViewControllerDidSwitchUser];
+        [self.delegate PINReLoginViewControllerDidSwitchUserWithMessage:PINExpired];
     }];
 }
 
