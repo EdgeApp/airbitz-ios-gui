@@ -360,11 +360,13 @@
                 case ABC_CC_Ok:
                 {
                     [User login:[LocalSettings controller].cachedUsername password:NULL];
+                    [[User Singleton] resetPINLoginInvalidEntryCount];
                     [self.delegate PINReLoginViewControllerDidLogin];
                     break;
                 }
                 case ABC_CC_BadPassword:
                 {
+                    [self showFadingError:NSLocalizedString(@"Invalid PIN", nil)];
                     if ([[User Singleton] haveExceededPINLoginInvalidEntries])
                     {
                         [[User Singleton] resetPINLoginInvalidEntryCount];
@@ -374,6 +376,8 @@
                 }
                 case ABC_CC_PinExpired:
                 {
+                    [self showFadingError:NSLocalizedString(@"PIN login cancelled", nil)];
+                    [[User Singleton] resetPINLoginInvalidEntryCount];
                     [self abortPermanently];
                     break;
                 }
@@ -384,9 +388,9 @@
                     [self showFadingError:[Util errorMap:&temp]];
                     break;
                 }
-                [self showSpinner:NO];
-                self.PINCodeView.PINCode = nil;
             }
+            [self showSpinner:NO];
+            self.PINCodeView.PINCode = nil;
         });
     });
 }

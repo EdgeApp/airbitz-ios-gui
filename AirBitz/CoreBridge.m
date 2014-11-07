@@ -904,16 +904,21 @@ static NSTimer *_dataSyncTimer;
     {
         username = [[User Singleton].name UTF8String];
     }
-    else
+
+    if (!username)
     {
         username = [[LocalSettings controller].cachedUsername UTF8String];
     }
+
     tABC_Error error;
-    tABC_CC result = ABC_PinLoginDelete(username,
-                                        &error);
-    if (ABC_CC_Ok != result)
+    if (username)
     {
-        [Util printABC_Error:&error];
+        tABC_CC result = ABC_PinLoginDelete(username,
+                                            &error);
+        if (ABC_CC_Ok != result)
+        {
+            [Util printABC_Error:&error];
+        }
     }
 }
 
