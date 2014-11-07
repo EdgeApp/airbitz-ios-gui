@@ -1458,14 +1458,17 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         // update the display by reloading the table
         [self.tableView reloadData];
 
-        if (theSwitch.on)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
         {
-            [CoreBridge setupLoginPIN];
-        }
-        else
-        {
-            [CoreBridge deletePINLogin];
-        }
+            if (theSwitch.on)
+            {
+                [CoreBridge setupLoginPIN];
+            }
+            else
+            {
+                [CoreBridge deletePINLogin];
+            }
+        });
     }
 }
 
@@ -1628,7 +1631,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
     [self dismissPopupPicker];
 
-    [CoreBridge setupLoginPIN];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
+        [CoreBridge setupLoginPIN];
+    });
 }
 
 - (void)PopupWheelPickerViewCancelled:(PopupWheelPickerView *)view userData:(id)data

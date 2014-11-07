@@ -201,14 +201,21 @@ typedef enum eAppMode
 
 -(void)showFastestLogin
 {
-    if ([CoreBridge PINLoginExists])
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
     {
-        [self showPINLogin];
-    }
-    else
-    {
-        [self showLogin];
-    }
+        bool exists = [CoreBridge PINLoginExists];
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            if (exists)
+            {
+                [self showPINLogin];
+            }
+            else
+            {
+                [self showLogin];
+            }
+        });
+    });
 }
 
 -(void)showLogin
