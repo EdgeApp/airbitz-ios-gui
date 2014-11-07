@@ -566,7 +566,6 @@ typedef enum eMapDisplayState
             {
                 if ([[self.locationTextfield.text uppercaseString] isEqualToString: [CURRENT_LOCATION_STRING uppercaseString]])
                 {
-                    //CLLocation *location = [Location controller].curLocation;
                     //NSString *locationString = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
                     //[query appendFormat:@"&ll=%@", locationString];
                 } else
@@ -574,9 +573,10 @@ typedef enum eMapDisplayState
                     [query appendFormat: @"&location=%@", self.locationTextfield.text];
                 }
             }
+        } else {
+            [query appendFormat: @"&location=%@", self.locationTextfield.text];
         }
-    } else
-    {
+    } else {
         //NSLog(@"string already contains ll");
     }
 }
