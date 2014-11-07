@@ -69,6 +69,8 @@
 #define TAG_CATEGORY_COFFEE			2
 #define TAG_CATEGORY_MORE			3
 
+#define LOCATION_WAIT_SECONDS       8.0
+
 //modes
 /*
 
@@ -216,6 +218,19 @@ typedef enum eMapDisplayState
     UIPanGestureRecognizer *panRec = [[UIPanGestureRecognizer alloc] initWithTarget: self action: @selector(didDragMap:)];
     [panRec setDelegate: self];
     [self.mapView addGestureRecognizer: panRec];
+
+    // If location services aren't enabled, just make a query
+    if (NO == [CLLocationManager locationServicesEnabled]) {
+        [self businessListingQueryForPage:0];
+    } else {
+        // If we haven't receive a location after LOCATION_WAIT_SECONDS seconds, just make a query
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, LOCATION_WAIT_SECONDS * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            if (receivedInitialLocation == NO) {
+                [self businessListingQueryForPage:0];
+            }
+        });
+    }
 }
 
 - (BOOL)gestureRecognizer: (UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer: (UIGestureRecognizer *)otherGestureRecognizer
