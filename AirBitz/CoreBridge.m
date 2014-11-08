@@ -869,7 +869,7 @@ static NSTimer *_dataSyncTimer;
     NSString *storedPIN = nil;
 
     NSString *name = [User Singleton].name;
-    if (name)
+    if (name && 0 < name.length)
     {
         NSString *pass = [User Singleton].password;
         const char *password = (nil == pass ? NULL : [pass UTF8String]);
@@ -890,7 +890,7 @@ static NSTimer *_dataSyncTimer;
 {
     NSString *username = [LocalSettings controller].cachedUsername;
     bool exists = NO;
-    if (username)
+    if (username && 0 < username.length)
     {
         tABC_Error error;
         tABC_CC result = ABC_PinLoginExists([username UTF8String],
@@ -912,13 +912,13 @@ static NSTimer *_dataSyncTimer;
         username = [User Singleton].name;
     }
 
-    if (!username)
+    if (!username || 0 == username.length)
     {
         username = [LocalSettings controller].cachedUsername;
     }
 
     tABC_Error error;
-    if (username)
+    if (username && 0 < username.length)
     {
         tABC_CC result = ABC_PinLoginDelete([username UTF8String],
                                             &error);
@@ -932,7 +932,7 @@ static NSTimer *_dataSyncTimer;
 + (void)setupLoginPIN
 {
     NSString *name = [User Singleton].name;
-    if (name)
+    if (name && 0 < name.length)
     {
         const char *username = [name UTF8String];
         NSString *pass = [User Singleton].password;
@@ -990,7 +990,12 @@ static NSTimer *_dataSyncTimer;
 
 + (void)login
 {
-    [LocalSettings controller].cachedUsername = [User Singleton].name;
+    NSString *username = [User Singleton].name;
+    if (username && 0 < username.length)
+    {
+        [LocalSettings controller].cachedUsername = [User Singleton].name;
+    }
+
     [LocalSettings saveAll];
     [CoreBridge setupLoginPIN];
     bDataFetched = NO;
@@ -1015,7 +1020,7 @@ static NSTimer *_dataSyncTimer;
 {
     NSString *name = [User Singleton].name;
     bool ok = false;
-    if (name)
+    if (name && 0 < name.length)
     {
         const char *username = [name UTF8String];
 
