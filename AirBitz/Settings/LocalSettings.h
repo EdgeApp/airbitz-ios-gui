@@ -15,7 +15,7 @@
 
 @property (nonatomic, assign)   BOOL        bDisableBLE;
 @property (nonatomic, assign)   BOOL        bMerchantMode;
-@property (nonatomic, assign)   NSString    *cachedUsername;
+@property (nonatomic, retain)   NSString    *cachedUsername;
 
 
 + (void)initAll;
