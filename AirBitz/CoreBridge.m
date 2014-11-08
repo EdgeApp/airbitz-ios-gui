@@ -1017,13 +1017,10 @@ static NSTimer *_dataSyncTimer;
     bool ok = false;
     if (name)
     {
-        NSString *pass = [User Singleton].password;
-        const char *password = (nil == pass ? NULL : [pass UTF8String]);
         const char *username = [name UTF8String];
-        
+
         tABC_Error Error;
-        ABC_PasswordOk(username,
-                       password, &ok, &Error);
+        ABC_PasswordOk(username, [password UTF8String], &ok, &Error);
         [Util printABC_Error:&Error];
     }
     return ok == true ? YES : NO;
