@@ -29,6 +29,8 @@
 
 #define DOLLAR_CURRENCY_NUMBER	840
 
+static NSDictionary *_localeAsCurrencyNum;
+
 const int64_t RECOVERY_REMINDER_AMOUNT = 2000000;
 const int RECOVERY_REMINDER_COUNT = 2;
 
@@ -64,6 +66,21 @@ static NSTimer *_dataSyncTimer;
         [dataQueue setMaxConcurrentOperationCount:1];
 
         watchers = [[NSMutableDictionary alloc] init];
+
+        _localeAsCurrencyNum = @{
+            @"AUD" : @CURRENCY_NUM_AUD,
+            @"CAD" : @CURRENCY_NUM_CAD,
+            @"CNY" : @CURRENCY_NUM_CNY,
+            @"CUP" : @CURRENCY_NUM_CUP,
+            @"HKD" : @CURRENCY_NUM_HKD,
+            @"MXN" : @CURRENCY_NUM_MXN,
+            @"NZD" : @CURRENCY_NUM_NZD,
+            @"PHP" : @CURRENCY_NUM_PHP,
+            @"GBP" : @CURRENCY_NUM_GBP,
+            @"USD" : @CURRENCY_NUM_USD,
+            @"EUR" : @CURRENCY_NUM_EUR,
+        };
+
         singleton = [[CoreBridge alloc] init];
         bInitialized = YES;
     }
@@ -1386,15 +1403,64 @@ static NSTimer *_dataSyncTimer;
     }
 }
 
+/*
+ * determine currency based on locale
+ */
++ (int)getCurrencyNumOfLocale
+{
+    NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
+    NSString *localCurrency = [locale objectForKey:NSLocaleCurrencyCode];
+    NSNumber *currencyNum = [_localeAsCurrencyNum objectForKey:localCurrency];
+    return [currencyNum intValue];
+}
+
+/*
+ * set a new default currency for the account based on the parameter
+ */
++ (bool)setDefaultCurrencyNum:(int)currencyNum
+{
+    tABC_CC cc = ABC_CC_Ok;
+    tABC_Error Error;
+    tABC_AccountSettings *pSettings = NULL;
+    cc = ABC_LoadAccountSettings([[User Singleton].name UTF8String],
+                                 [[User Singleton].password UTF8String],
+                                 &pSettings,
+                                 &Error);
+    if (cc == ABC_CC_Ok) {
+        pSettings->currencyNum = currencyNum;
+        ABC_UpdateAccountSettings([[User Singleton].name UTF8String],
+                                  [[User Singleton].password UTF8String],
+                                  pSettings,
+                                  &Error);
+        if (cc == ABC_CC_Ok)
+        {
+            [[User Singleton] loadSettings];
+        }
+        else
+        {
+            [Util printABC_Error:&Error];
+        }
+    } else {
+        [Util printABC_Error:&Error];
+    }
+    ABC_FreeAccountSettings(pSettings);
+    return cc == ABC_CC_Ok;
+}
+
 + (void)setupNewAccount:(FadingAlertView *)fadingAlert
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // update user's default currency num to match their locale
+        int currencyNum = [CoreBridge getCurrencyNumOfLocale];
+        [CoreBridge setDefaultCurrencyNum:currencyNum];
+
+        // create first wallet
         tABC_CC result;
         tABC_Error Error;
         char **szUUID = NULL;
         result = ABC_CreateWallet([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                   [NSLocalizedString(@"My Wallet", @"Name of initial wallet") UTF8String],
-                                  DOLLAR_CURRENCY_NUMBER,
+                                  currencyNum,
                                   0, NULL, &szUUID, &Error);
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:nil];

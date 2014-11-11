@@ -79,6 +79,8 @@
 + (NSString *)coreVersion;
 + (NSString *)currencyAbbrevLookup:(int) currencyNum;
 + (NSString *)currencySymbolLookup:(int) currencyNum;
++ (int)getCurrencyNumOfLocale;
++ (bool)setDefaultCurrencyNum:(int)currencyNum;
 + (void)setupNewAccount:(FadingAlertView *)fadingAlert;
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo);
