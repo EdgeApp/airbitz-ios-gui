@@ -38,8 +38,6 @@
 
 #define USE_AUTOCOMPLETE_QUERY 0
 
-#define DOLLAR_CURRENCY_NUM    840
-
 #define TEXTFIELD_VERTICAL_SPACE_OFFSET    7.0 /* how much space between screen header and textField when textField is scrolled all the way to the top */
 
 #define SEARCH_RADIUS        16093
@@ -293,7 +291,7 @@ typedef enum eRequestType
             tABC_Error error;
             ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
                                   [[User Singleton].password UTF8String], 
-                                  self.transaction.amountSatoshi, &currency, DOLLAR_CURRENCY_NUM, &error);
+                                  self.transaction.amountSatoshi, &currency, _wallet.currencyNum, &error);
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
         else
