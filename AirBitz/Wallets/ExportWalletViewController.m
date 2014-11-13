@@ -17,9 +17,6 @@
 #import "PopupWheelPickerView.h"
 #import "DateTime.h"
 
-#define WALLET_BUTTON_WIDTH         160
-#define WALLET_TABLE_CONTENT_HEIGHT 225
-
 #define STARTING_YEAR               2014
 
 #define PICKER_COL_MONTH        0

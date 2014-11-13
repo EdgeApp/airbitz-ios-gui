@@ -15,6 +15,8 @@
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 #define IS_IPHONE4                                  (([[UIScreen mainScreen] bounds].size.height < 568) ? YES : NO)
 
+#define WALLET_BUTTON_WIDTH         160
+
 #define LOGIN_INVALID_ENTRY_COUNT_MAX 3
 
 #define MERCHANT_RECEIVED_DURATION 20

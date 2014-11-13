@@ -7,6 +7,7 @@
 //
 
 #import <MessageUI/MessageUI.h>
+#import "MinCharTextField.h"
 #import "ExportWalletOptionsViewController.h"
 #import "ExportWalletPDFViewController.h"
 #import "InfoView.h"
@@ -16,6 +17,9 @@
 #import "ExportWalletOptionsCell.h"
 #import "CommonTypes.h"
 #import "GDrive.h"
+#import "ButtonSelectorView.h"
+#import "CommonTypes.h"
+#import "FadingAlertView.h"
 #import "ABC.h"
 
 
@@ -42,22 +46,29 @@ typedef enum eExportOption
     ExportOption_View = 5
 } tExportOption;
 
-@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, ExportWalletPDFViewControllerDelegate, GDriveDelegate, UIGestureRecognizerDelegate>
+@interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate,
+                                                 ExportWalletPDFViewControllerDelegate, GDriveDelegate, FadingAlertViewDelegate,
+                                                 UIGestureRecognizerDelegate, ButtonSelectorDelegate, UITextFieldDelegate>
 {
-
+    NSInteger _selectedWallet;
 	GDrive *drive;
     MFMailComposeViewController *_mailComposer;
+    FadingAlertView *_fadingAlert;
 }
 
 @property (weak, nonatomic) IBOutlet UIView         *viewDisplay;
+@property (weak, nonatomic) IBOutlet UIView         *viewPassword;
 @property (weak, nonatomic) IBOutlet UITableView    *tableView;
-@property (weak, nonatomic) IBOutlet UILabel        *labelWalletName;
 @property (weak, nonatomic) IBOutlet UILabel        *labelFromDate;
 @property (weak, nonatomic) IBOutlet UILabel        *labelToDate;
 @property (weak, nonatomic) IBOutlet UIView			*viewHeader;
+@property (weak, nonatomic) IBOutlet ButtonSelectorView *buttonSelector;
+@property (nonatomic, weak) IBOutlet MinCharTextField   *passwordTextField;
 
 @property (nonatomic, strong) ExportWalletPDFViewController *exportWalletPDFViewController;
 @property (nonatomic, strong) NSArray                       *arrayChoices;
+@property (nonatomic, strong) NSArray                       *arrayWalletUUIDs;
+@property (nonatomic, strong) NSArray                       *arrayWallets;
 
 @end
 
@@ -77,7 +88,16 @@ typedef enum eExportOption
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    self.passwordTextField.delegate = self;
+    self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+
     self.arrayChoices = [ARRAY_CHOICES_FOR_TYPES objectAtIndex:(NSUInteger) self.type];
+
+    if (WalletExportType_PrivateSeed == self.type)
+    {
+        self.viewPassword.hidden = NO;
+        [self.passwordTextField becomeFirstResponder];
+    }
 
     // This will remove extra separators from tableview
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -91,7 +111,8 @@ typedef enum eExportOption
 
     [self updateDisplayLayout];
 
-    self.labelWalletName.text = self.wallet.strName;
+    [self setWalletData];
+    
     self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
                                (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year,
                                [self displayFor12From24:(int) self.fromDateTime.hour], (int) self.fromDateTime.minute, self.fromDateTime.hour > 11 ? @"pm" : @"am"];
@@ -128,6 +149,59 @@ typedef enum eExportOption
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)setWalletData
+{
+    self.buttonSelector.delegate = self;
+	self.buttonSelector.textLabel.text = @"";
+    [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
+    self.buttonSelector.button.titleLabel.font = [UIFont systemFontOfSize:12];
+    self.buttonSelector.button.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:15];
+    
+	tABC_WalletInfo **aWalletInfo = NULL;
+    unsigned int nCount;
+	tABC_Error Error;
+    ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
+    [Util printABC_Error:&Error];
+    
+    // assign list of wallets to buttonSelector
+	NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] init];
+    NSMutableArray *arrayWalletUUIDs = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < nCount; i++)
+    {
+        tABC_WalletInfo *pInfo = aWalletInfo[i];
+		[arrayWalletNames addObject:[NSString stringWithUTF8String:pInfo->szName]];
+        [arrayWalletUUIDs addObject:[NSString stringWithUTF8String:pInfo->szUUID]];
+    }
+    
+	self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
+    self.arrayWalletUUIDs = arrayWalletUUIDs;
+    
+    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
+    
+    _selectedWallet = [arrayWalletUUIDs indexOfObject:self.wallet.strUUID];
+    if (_selectedWallet != NSNotFound)
+	{
+		[self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWallet] forState:UIControlStateNormal];
+		self.buttonSelector.selectedItemIndex = (int) _selectedWallet;
+	}
+    
+    // get an array of all the wallets
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets];
+    [arrayWallets addObjectsFromArray:arrayArchivedWallets];
+    self.arrayWallets = arrayWallets;
+}
+
+#pragma mark - Keyboard Notifications
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 #pragma mark - Action Methods
 
@@ -685,8 +759,53 @@ typedef enum eExportOption
 
     //NSLog(@"Export option: %d", exportOption);
 
-    [self exportUsing:exportOption];
+    if (WalletExportType_PrivateSeed != self.type)
+    {
+        [self exportUsing:exportOption];
+    }
+    else
+    {
+        if (![CoreBridge passwordOk:self.passwordTextField.text])
+        {
+            [self showFadingError:NSLocalizedString(@"Incorrect password", nil)];
+            [self.passwordTextField becomeFirstResponder];
+            [self.passwordTextField selectAll:nil];
+        }
+        else
+        {
+            [self exportUsing:exportOption];
+        }
+    }
 }
+
+- (void)showFadingError:(NSString *)message
+{
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert.message = message;
+    _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
+    _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
+    [_fadingAlert showFading];
+}
+
+- (void)dismissErrorMessage
+{
+    [_fadingAlert dismiss:NO];
+    _fadingAlert = nil;
+}
+
+- (void)fadingAlertDismissed:(FadingAlertView *)view
+{
+    _fadingAlert = nil;
+}
+
+#pragma mark - ButtonSelectorView delegate
+
+- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+{
+    //NSLog(@"Selected item %i", itemIndex);
+    _selectedWallet = itemIndex;
+}
+
 
 #pragma mark - Mail Compose Delegate Methods
 
