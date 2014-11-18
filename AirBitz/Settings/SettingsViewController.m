@@ -1380,6 +1380,17 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
 	[controller.view removeFromSuperview];
 	_signUpController = nil;
+
+    // re-load the current account settings
+    _pAccountSettings = NULL;
+	tABC_Error Error;
+    Error.code = ABC_CC_Ok;
+    ABC_LoadAccountSettings([[User Singleton].name UTF8String],
+                            [[User Singleton].password UTF8String],
+                            &_pAccountSettings,
+                            &Error);
+
+    [_tableView reloadData];
 }
 
 #pragma mark - PasswordRecoveryViewController Delegate
