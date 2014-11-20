@@ -17,6 +17,7 @@
 #import "PasswordRecoveryViewController.h"
 #import "CoreBridge.h"
 #import "CommonTypes.h"
+#import "LocalSettings.h"
 
 typedef enum eLoginMode
 {
@@ -99,7 +100,11 @@ typedef enum eLoginMode
     _bTouchesEnabled = YES;
 
 #if !HARD_CODED_LOGIN
-    self.userNameTextField.text = [User Singleton].name;
+    NSString *username = [LocalSettings controller].cachedUsername;
+    if (username && 0 < username.length)
+    {
+        self.userNameTextField.text = username;
+    }
     self.passwordTextField.text = [User Singleton].password;
 #endif
     
