@@ -34,8 +34,6 @@ NSDate *logoutDate = NULL;
 
     [CoreBridge initAll];
 
-    [self checkLoginExpired];
-
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
 
