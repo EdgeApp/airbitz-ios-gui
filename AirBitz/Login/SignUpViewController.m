@@ -239,11 +239,13 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
                         [alert show];
+
+                        // all other modes must wait for callback before PIN login setup
+                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+                                       {
+                                           [CoreBridge setupLoginPIN];
+                                       });
                     }
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-                    {
-                        [CoreBridge setupLoginPIN];
-                    });
                 }
                 else
                 {
@@ -737,6 +739,10 @@
     if (_bSuccess) {
         [User login:self.userNameTextField.text
            password:self.passwordTextField.text];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+        {
+            [CoreBridge setupLoginPIN];
+        });
         [self exit];
     } else {
 		UIAlertView *alert = [[UIAlertView alloc]
@@ -773,6 +779,11 @@
                  delegate:self
                  cancelButtonTitle:@"OK"
                  otherButtonTitles:nil];
+        
+        if (self.mode == SignUpMode_ChangePasswordUsingAnswers)
+        {
+            [self changePIN];
+        }
     }
     else
     {
@@ -787,6 +798,41 @@
     }
 
     [alert show];
+}
+
+- (void)changePIN
+{
+    tABC_Error Error;
+    tABC_CC result = ABC_CC_Ok;
+    
+    result = ABC_SetPIN([self.strUserName UTF8String],
+                        [self.passwordTextField.text UTF8String],
+                        [self.pinTextField.text UTF8String],
+                        &Error);
+    // if success
+    if (ABC_CC_Ok == result)
+    {
+        // all other modes must wait for callback before PIN login setup
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+        {
+            [CoreBridge setupLoginPIN];
+        });
+    }
+    else
+    {
+        [self blockUser:NO];
+        [self.activityView stopAnimating];
+        [Util printABC_Error:&Error];
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:self.labelTitle.text
+                              message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                       self.labelTitle.text,
+                                       [Util errorMap:&Error]]
+                              delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
