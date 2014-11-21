@@ -1571,6 +1571,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [cell.button setTitle:@"Please Wait..." forState:UIControlStateNormal];
             [[User Singleton] clear];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+            {
+                [CoreBridge deletePINLogin];
+            });
 
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [self blockUser:NO];

@@ -139,10 +139,6 @@ static User *singleton = nil;  // this will be the one and only object this stat
     }
     self.password = nil;
     self.name = nil;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-    {
-        [CoreBridge deletePINLogin];
-    });
 }
 
 - (SendViewState)sendInvalidEntry
