@@ -15,6 +15,7 @@
 #import "LocalSettings.h"
 #import "Config.h"
 #import <HockeySDK/HockeySDK.h>
+#import <SDWebImage/SDImageCache.h>
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 NSTimer *logoutTimer = NULL;
@@ -27,6 +28,10 @@ NSDate *logoutDate = NULL;
     // Override point for customization after application launch.
     [application setStatusBarHidden:NO];
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
+
+    [[SDImageCache sharedImageCache] clearDisk];
+    [[SDImageCache sharedImageCache] cleanDisk];
+    [[SDImageCache sharedImageCache] clearMemory];
 
     [LocalSettings initAll];
 

@@ -684,6 +684,12 @@
 		7DFAF0C41A03119D00D33198 /* background_login@2x~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7DFAF0C11A03119D00D33198 /* background_login@2x~iphone.jpg */; };
 		7DFAF0C51A03119D00D33198 /* background_login~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7DFAF0C21A03119D00D33198 /* background_login~iphone.jpg */; };
 		7DFAF0C61A03119D00D33198 /* background_login~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7DFAF0C21A03119D00D33198 /* background_login~iphone.jpg */; };
+		7DFD22E31A1E716C008C43FB /* UIPhotoGalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22DE1A1E716C008C43FB /* UIPhotoGalleryView.m */; };
+		7DFD22E41A1E716C008C43FB /* UIPhotoGalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22DE1A1E716C008C43FB /* UIPhotoGalleryView.m */; };
+		7DFD22E51A1E716C008C43FB /* UIPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E01A1E716C008C43FB /* UIPhotoGalleryViewController.m */; };
+		7DFD22E61A1E716C008C43FB /* UIPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E01A1E716C008C43FB /* UIPhotoGalleryViewController.m */; };
+		7DFD22E71A1E716C008C43FB /* UIPhotoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */; };
+		7DFD22E81A1E716C008C43FB /* UIPhotoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */; };
 		7DFF2F8B1A02E50E00813733 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFF2F8A1A02E50E00813733 /* MessageUI.framework */; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
@@ -1049,6 +1055,7 @@
 		B5FD393618F0A67100BE2670 /* transactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393518F0A67100BE2670 /* transactionDetails.html */; };
 		B5FD394718F240E600BE2670 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */; };
 		C40BC5D5199479CF00149E12 /* libcsv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C40BC5D4199479CF00149E12 /* libcsv.a */; };
+		D54D390FAB5348F82AFF440D /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2930E7DAA76EC51E127C9D79 /* libPods-Airbitz.a */; };
 		DA4CFE45196F897B002CFD49 /* drag_bar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */; };
 		DA4CFE46196F897B002CFD49 /* drag_bar~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */; };
 		DA7693881964FE8A0022EE64 /* copy_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */; };
@@ -1106,6 +1113,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2930E7DAA76EC51E127C9D79 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C08A6D318C29CEF0071B87C /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = ABC/libabc.a; sourceTree = "<group>"; };
 		4C08A6D418C29CEF0071B87C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ABC/libcrypto.a; sourceTree = "<group>"; };
 		4C08A6D518C29CEF0071B87C /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ABC/libcurl.a; sourceTree = "<group>"; };
@@ -1228,6 +1236,7 @@
 		4C9E91981922AB7400F01423 /* OfflineWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineWalletViewController.h; sourceTree = "<group>"; };
 		4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
 		4CA4672A19B604CA004F9923 /* DL_URLServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DL_URLServer.m; sourceTree = "<group>"; };
+		601ACAEB7587DBB95DF1206E /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; };
 		6809FB99196F9EEB0076CA4D /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = AirBitz/ABC/libgit2.a; sourceTree = "<group>"; };
 		68390DB51A0406D600D3789F /* SpendingLimitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendingLimitsViewController.h; sourceTree = "<group>"; };
 		68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendingLimitsViewController.m; sourceTree = "<group>"; };
@@ -1254,6 +1263,7 @@
 		68C4AA211A0B4DD70010C837 /* FadingAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FadingAlertView.h; path = AirBitz/FadingAlert/FadingAlertView.h; sourceTree = SOURCE_ROOT; };
 		68C4AA221A0B4DD70010C837 /* FadingAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FadingAlertView.m; path = AirBitz/FadingAlert/FadingAlertView.m; sourceTree = SOURCE_ROOT; };
 		68C4AA231A0B4DD70010C837 /* FadingAlertView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "FadingAlertView~iphone.xib"; path = "AirBitz/FadingAlert/FadingAlertView~iphone.xib"; sourceTree = SOURCE_ROOT; };
+		6BECB1B8C9CE1002526F24AB /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; };
 		7D05AB801A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_cell_middle_white@2x~iphone.png"; sourceTree = "<group>"; };
 		7D05AB811A0304DD00AFA5F7 /* bd_cell_middle_white~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_cell_middle_white~iphone.png"; sourceTree = "<group>"; };
 		7D23D56219BD612F0042B87A /* background-errormessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-errormessage@2x.png"; sourceTree = "<group>"; };
@@ -1317,6 +1327,12 @@
 		7DEE7DF419F8645200FD2FB6 /* infoInsufficientFunds.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoInsufficientFunds.html; sourceTree = "<group>"; };
 		7DFAF0C11A03119D00D33198 /* background_login@2x~iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background_login@2x~iphone.jpg"; sourceTree = "<group>"; };
 		7DFAF0C21A03119D00D33198 /* background_login~iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background_login~iphone.jpg"; sourceTree = "<group>"; };
+		7DFD22DD1A1E716C008C43FB /* UIPhotoGalleryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPhotoGalleryView.h; sourceTree = "<group>"; };
+		7DFD22DE1A1E716C008C43FB /* UIPhotoGalleryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPhotoGalleryView.m; sourceTree = "<group>"; };
+		7DFD22DF1A1E716C008C43FB /* UIPhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPhotoGalleryViewController.h; sourceTree = "<group>"; };
+		7DFD22E01A1E716C008C43FB /* UIPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPhotoGalleryViewController.m; sourceTree = "<group>"; };
+		7DFD22E11A1E716C008C43FB /* UIPhotoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPhotoItemView.h; sourceTree = "<group>"; };
+		7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPhotoItemView.m; sourceTree = "<group>"; };
 		7DFF2F8A1A02E50E00813733 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
@@ -1875,6 +1891,7 @@
 				4C08A6E018C29CEF0071B87C /* libscrypt.a in Frameworks */,
 				4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */,
 				4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */,
+				D54D390FAB5348F82AFF440D /* libPods-Airbitz.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2082,6 +2099,20 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		7DFD22DC1A1E716C008C43FB /* UIPhotoGallery */ = {
+			isa = PBXGroup;
+			children = (
+				7DFD22DD1A1E716C008C43FB /* UIPhotoGalleryView.h */,
+				7DFD22DE1A1E716C008C43FB /* UIPhotoGalleryView.m */,
+				7DFD22DF1A1E716C008C43FB /* UIPhotoGalleryViewController.h */,
+				7DFD22E01A1E716C008C43FB /* UIPhotoGalleryViewController.m */,
+				7DFD22E11A1E716C008C43FB /* UIPhotoItemView.h */,
+				7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */,
+			);
+			name = UIPhotoGallery;
+			path = AirBitz/UIPhotoGallery/UIPhotoGallery;
+			sourceTree = SOURCE_ROOT;
+		};
 		B505FB49193F7AC1007D4960 /* Google Drive */ = {
 			isa = PBXGroup;
 			children = (
@@ -2217,6 +2248,7 @@
 				B5675B5118A17F6F002E0703 /* AirBitz */,
 				B5675B4A18A17F6F002E0703 /* Frameworks */,
 				B5675B4918A17F6F002E0703 /* Products */,
+				E9B30ECB4BB83AB9C4A56899 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2257,6 +2289,7 @@
 				B5675B4D18A17F6F002E0703 /* CoreGraphics.framework */,
 				B5675B4F18A17F6F002E0703 /* UIKit.framework */,
 				B5675B6D18A17F6F002E0703 /* XCTest.framework */,
+				2930E7DAA76EC51E127C9D79 /* libPods-Airbitz.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2755,6 +2788,7 @@
 		B5C0A96518EA0A42008F302C /* Business Details */ = {
 			isa = PBXGroup;
 			children = (
+				7DFD22DC1A1E716C008C43FB /* UIPhotoGallery */,
 				B5C0A96618EA0A42008F302C /* BD_Address_Cell.h */,
 				B5C0A96718EA0A42008F302C /* BD_Address_Cell.m */,
 				B5C0A96818EA0A42008F302C /* BD_Details_Cell.h */,
@@ -2964,6 +2998,15 @@
 			name = Text;
 			sourceTree = "<group>";
 		};
+		E9B30ECB4BB83AB9C4A56899 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6BECB1B8C9CE1002526F24AB /* Pods-Airbitz.debug.xcconfig */,
+				601ACAEB7587DBB95DF1206E /* Pods-Airbitz.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2989,10 +3032,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5675B7D18A17F6F002E0703 /* Build configuration list for PBXNativeTarget "Airbitz" */;
 			buildPhases = (
+				EEB62753E3848E9451D39D40 /* Check Pods Manifest.lock */,
 				B5675B4418A17F6F002E0703 /* Sources */,
 				B5675B4518A17F6F002E0703 /* Frameworks */,
 				B5675B4618A17F6F002E0703 /* Resources */,
 				7D6EDB7619A66C50007C33AE /* ShellScript */,
+				AB35436AC4AF35BB26BEAB95 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3897,6 +3942,36 @@
 			shellPath = /bin/sh;
 			shellScript = "FILE=\"${SRCROOT}/AirBitz/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
 		};
+		AB35436AC4AF35BB26BEAB95 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEB62753E3848E9451D39D40 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -3930,6 +4005,7 @@
 				7DB1354919FF10E5007D23CE /* BD_Share_Cell.m in Sources */,
 				7D98ACC319A7C550003D2BF6 /* StylizedTextField.m in Sources */,
 				7D98ACC419A7C550003D2BF6 /* Transaction.m in Sources */,
+				7DFD22E81A1E716C008C43FB /* UIPhotoItemView.m in Sources */,
 				7D98ACC519A7C550003D2BF6 /* PasswordVerifyView.m in Sources */,
 				7D98ACC619A7C550003D2BF6 /* RadioButtonCell.m in Sources */,
 				7D98ACC719A7C550003D2BF6 /* TabBarView.m in Sources */,
@@ -3949,12 +4025,14 @@
 				7D98ACD519A7C550003D2BF6 /* MontserratLabel.m in Sources */,
 				7D98ACD619A7C550003D2BF6 /* TransactionsViewController.m in Sources */,
 				7D98ACD719A7C550003D2BF6 /* CustomAnnotationView.m in Sources */,
+				7DFD22E61A1E716C008C43FB /* UIPhotoGalleryViewController.m in Sources */,
 				7D98ACD819A7C550003D2BF6 /* PasswordRecoveryViewController.m in Sources */,
 				7D98ACD919A7C550003D2BF6 /* StrokeGradientButton.m in Sources */,
 				7D98ACDA19A7C550003D2BF6 /* SettingsViewController.m in Sources */,
 				7DB1354D19FF13BA007D23CE /* BD_Social_Cell.m in Sources */,
 				7D7783F31A07875E0043806B /* APPINView.m in Sources */,
 				7D98ACDB19A7C550003D2BF6 /* LocalSettings.m in Sources */,
+				7DFD22E41A1E716C008C43FB /* UIPhotoGalleryView.m in Sources */,
 				7D98ACDC19A7C550003D2BF6 /* NSDate+Helper.m in Sources */,
 				7D98ACDD19A7C550003D2BF6 /* PopupPickerView.m in Sources */,
 				7D98ACDE19A7C550003D2BF6 /* PayeeCell.m in Sources */,
@@ -4031,6 +4109,7 @@
 				B5F2E9C118DA911A008ACF88 /* LoginViewController.m in Sources */,
 				B5C0A97D18EA0A7F008F302C /* DirectoryViewController.m in Sources */,
 				4CA4672B19B604CA004F9923 /* DL_URLServer.m in Sources */,
+				7DFD22E31A1E716C008C43FB /* UIPhotoGalleryView.m in Sources */,
 				B5C0A9CB18EA0FF0008F302C /* ShowWalletQRViewController.m in Sources */,
 				4C7247B219352F730091C286 /* ExportWalletOptionsCell.m in Sources */,
 				B5E7F57A18E4AAD5009B5844 /* User.m in Sources */,
@@ -4094,6 +4173,7 @@
 				B5C0A99318EA0BAC008F302C /* MoreCategoriesViewController.m in Sources */,
 				B5137C3718A435BD00DA4A34 /* CDataScanner_Extensions.m in Sources */,
 				B5C0A97818EA0A42008F302C /* BusinessDetailsViewController.m in Sources */,
+				7DFD22E71A1E716C008C43FB /* UIPhotoItemView.m in Sources */,
 				B5C0A9A518EA0C4E008F302C /* RibbonView.m in Sources */,
 				B55D0FE818E233A80035DCC8 /* MinCharTextField.m in Sources */,
 				4C5D8C55192AA1A80015BB3C /* DDData.m in Sources */,
@@ -4123,6 +4203,7 @@
 				B56553F218EDDCF8005B35E1 /* ButtonSelectorView.m in Sources */,
 				B5C0A97518EA0A42008F302C /* BD_Hours_Cell.m in Sources */,
 				B5C0A99F18EA0C10008F302C /* overviewCell.m in Sources */,
+				7DFD22E51A1E716C008C43FB /* UIPhotoGalleryViewController.m in Sources */,
 				6893E6CA19783FED0092DA04 /* SyncView.m in Sources */,
 				B57C207D18C15009005D7245 /* TabBarButton.m in Sources */,
 				4C3C30A5191C1CAF006923DE /* PickerTextView.m in Sources */,
@@ -4299,6 +4380,7 @@
 		};
 		B5675B7E18A17F6F002E0703 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BECB1B8C9CE1002526F24AB /* Pods-Airbitz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -4331,6 +4413,7 @@
 		};
 		B5675B7F18A17F6F002E0703 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 601ACAEB7587DBB95DF1206E /* Pods-Airbitz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -5,6 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'Airbitz' do
 
 #pod 'APPinViewController', '~> 1.0'
+pod 'SDWebImage', '~>3.6'
 
 end
 

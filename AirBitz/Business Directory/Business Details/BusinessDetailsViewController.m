@@ -20,6 +20,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "RibbonView.h"
+#import "UIPhotoGalleryView.h"
+#import "UIPhotoGalleryViewController.h"
 
 #import "CJSONDeserializer.h"
 
@@ -39,19 +41,23 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 #define CLOSED_STRING	@"closed"
 
-@interface BusinessDetailsViewController () <DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface BusinessDetailsViewController () <DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate,
+                                             UIAlertViewDelegate, UIPhotoGalleryDataSource, UIPhotoGalleryDelegate>
 {
 	CGFloat hoursCellHeight;
 	CGFloat detailsCellHeight;
 	CGFloat detailsLabelWidth;
 	BOOL needToLoadImageInfo;
+    NSArray *businesses;
+    UIPhotoGalleryViewController *galleryController;
+    UIActivityIndicatorView *gallerySpinner;
 	NSMutableArray *imageURLs;
     NSMutableArray *rowTypes;
     NSMutableArray *socialRows;
 }
 
-@property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UIImageView *darkenImageView;
+@property (nonatomic, weak) IBOutlet UIPhotoGalleryView *galleryView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *imageLoadActivityView;
@@ -70,7 +76,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -78,6 +83,13 @@ typedef NS_ENUM(NSUInteger, CellType) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.galleryView.dataSource = self;
+    self.galleryView.delegate = self;
+    self.galleryView.galleryMode = UIPhotoGalleryModeCustomView;
+    self.galleryView.subviewGap = 0;
+    self.galleryView.photoItemContentMode = UIViewContentModeScaleAspectFill;
+
+    businesses = nil;
 	imageURLs = [[NSMutableArray alloc] init];
     rowTypes = [[NSMutableArray alloc] init];
     socialRows = [[NSMutableArray alloc] init];
@@ -85,8 +97,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	detailsCellHeight = SINGLE_ROW_CELL_HEIGHT;
 	
 	self.darkenImageView.hidden = YES; //hide until business image gets loaded
-	
-	[self.imageLoadActivityView startAnimating];
 	
 	//get business details
 	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/?ll=%f,%f", SERVER_API, self.bizId, self.latLong.latitude, self.latLong.longitude];
@@ -97,19 +107,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 								  withDelegate:self
 							acceptableCacheAge:CACHE_24_HOURS
 								   cacheResult:YES];
-	
-	//get Image URLs
-	//http://api.airbitz.co:80/api/v1/business/2939/photos/
-	/*requestURL = [NSString stringWithFormat:@"%@/business/%@/photos/", SERVER_API, self.bizId];
-	//NSLog(@"Requesting: %@ for row: %i", requestURL, row);
-	[[DL_URLServer controller] issueRequestURL:requestURL
-									withParams:nil
-									withObject:imageURLs
-								  withDelegate:self
-							acceptableCacheAge:CACHE_24_HOURS
-								   cacheResult:YES];*/
-				
-	//self.businessTitleLabel.text = [self.businessGeneralInfo objectForKey:@"name"];
 	
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	[self.activityView startAnimating];
@@ -122,42 +119,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 -(void)didSwipe:(UIGestureRecognizer *)gestureRecognizer
 {
 	[self Back:nil];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-	
-	
-	/*if(self.businessGeneralInfo)
-	{
-		//load the image for this business
-		self.bizId = [self.businessGeneralInfo objectForKey:@"bizId"];
-		NSDictionary *imageInfo = [self.businessGeneralInfo objectForKey:@"profile_image"];
-		NSString *imageURL = [imageInfo objectForKey:@"image"];
-		if(imageURL)
-		{
-			NSString *requestURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, imageURL];
-			NSLog(@"Requesting: %@", requestURL);
-			[[DL_URLServer controller] issueRequestURL:requestURL
-											withParams:nil
-											withObject:self.imageView
-										  withDelegate:self
-									acceptableCacheAge:CACHE_24_HOURS
-										   cacheResult:YES];
-		}
-	}
-	if(self.bizId)
-	{
-		needToLoadImageInfo = YES;
-		NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/", SERVER_API, self.bizId];
-		//NSLog(@"Requesting: %@ for row: %i", requestURL, row);
-		[[DL_URLServer controller] issueRequestURL:requestURL
-										withParams:nil
-										withObject:nil
-									  withDelegate:self
-								acceptableCacheAge:CACHE_24_HOURS
-									   cacheResult:YES];
-	}*/
 }
 
 -(void)dealloc
@@ -393,10 +354,10 @@ typedef NS_ENUM(NSUInteger, CellType) {
     }
 }
 
--(NSDictionary *)primaryImage:(NSArray *)arrayImageResults
+-(NSUInteger)primaryImage:(NSArray *)arrayImageResults
 {
-	NSDictionary *primaryImage = nil;
-	int count = 0;
+	NSUInteger primaryImage = 0;
+	NSUInteger count = 0;
 	for(NSDictionary *dict in arrayImageResults)
 	{
 		NSArray *tags = [dict objectForKey:@"tags"];
@@ -408,7 +369,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 				{
 					//found primary image
 					//NSLog(@"Found primary tag at object index: %i", count);
-					primaryImage = dict;
+					primaryImage = count;
 					break;
 				}
 			}
@@ -418,11 +379,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 			}
 		}
 		count++;
-	}
-	if(primaryImage == nil)
-	{
-		//NSLog(@"No primary tag.  Grabbing object zero");
-		primaryImage = [arrayImageResults objectAtIndex:0];
 	}
 	return primaryImage;
 }
@@ -435,10 +391,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	{
         if (DL_URLRequestStatus_Success == status)
         {
-			//UIImageView *imageView = (UIImageView *)self.backgroundView;
-			//imageView.image = [self darkenImage:[UIImage imageWithData:data] toLevel:0.5];
-			//imageView.image = [UIImage imageWithData:data];
-			//[images setObject:[UIImage imageWithData:data] forKey:object];
 			if(object == imageURLs)
 			{
 				NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
@@ -449,28 +401,16 @@ typedef NS_ENUM(NSUInteger, CellType) {
 				NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
 				NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
 				
-				NSArray *results = [dict objectForKey:@"results"];
-				NSDictionary *imageInfo = [self primaryImage:results];
-				
-				//load image thumbnail
-				NSString *imageRequest = [NSString stringWithFormat:@"%@%@", SERVER_URL, [imageInfo objectForKey:@"thumbnail"]];
-				//NSLog(@"%@", imageRequest);
-				[[DL_URLServer controller] issueRequestURL:imageRequest
-												withParams:nil
-												withObject:self.imageView
-											  withDelegate:self
-										acceptableCacheAge:CACHE_24_HOURS
-											   cacheResult:YES];
-			}
-			else if(object == self.imageView)
-			{
-				((UIImageView *)object).image = [UIImage imageWithData:data];
+				businesses = [dict objectForKey:@"results"];
+//                self.galleryView.initialIndex = [self primaryImage:businesses];
+                self.galleryView.galleryMode = UIPhotoGalleryModeImageRemote;
+                self.galleryView.photoItemContentMode = UIViewContentModeScaleAspectFill;
+                [self.galleryView layoutSubviews];
+
 				self.darkenImageView.hidden = NO;
-				[self.imageLoadActivityView stopAnimating];
+                [gallerySpinner stopAnimating];
 				
 				//create the distance ribbon
-				//NSString *distance = [self.businessDetails objectForKey:@"distance"];
-				//if(distance && (distance != (id)[NSNull null]))
 				NSNumber *distance = [self.businessDetails objectForKey:@"distance"];
 				if(distance && distance != (id)[NSNull null])
 				{
@@ -506,7 +446,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 						((UIImageView *)object).image = [UIImage imageWithData:data];
 						self.darkenImageView.hidden = NO;
 					}
-					[self.imageLoadActivityView stopAnimating];
+                    [gallerySpinner stopAnimating];
 					
 					//create the distance ribbon
 					NSString *distance = [self.businessDetails objectForKey:@"distance"];
@@ -565,35 +505,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 					CGSize size = [ [self.businessDetails objectForKey:@"description"] sizeWithFont:detailsCell.detailsLabel.font constrainedToSize:CGSizeMake(detailsLabelWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
 					detailsCellHeight = size.height + 28.0;
 
-					
-					//cause table to reload hours and details cells to adjust for new heights
-					//NSLog(@"business details loaded");
-					
-					/*
-					[self.tableView beginUpdates];
-					[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:ADDRESS_CELL_ROW inSection:0], [NSIndexPath indexPathForRow:PHONE_CELL_ROW inSection:0], [NSIndexPath indexPathForRow:WEBSITE_CELL_ROW inSection:0], [NSIndexPath indexPathForRow:HOURS_CELL_ROW inSection:0], [NSIndexPath indexPathForRow:DETAILS_CELL_ROW inSection:0], nil] withRowAnimation:UITableViewRowAnimationAutomatic];
-					//[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:HOURS_CELL_ROW inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-					
-					[self.tableView endUpdates];*/
 					[self.tableView reloadData];
-					/*
-					if(needToLoadImageInfo)
-					{
-						needToLoadImageInfo = NO;
-						NSDictionary *imageInfo = [self.businessGeneralInfo objectForKey:@"profile_image"];
-						NSString *imageURL = [imageInfo objectForKey:@"image"];
-						if(imageURL)
-						{
-							NSString *requestURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, imageURL];
-							NSLog(@"Requesting: %@", requestURL);
-							[[DL_URLServer controller] issueRequestURL:requestURL
-															withParams:nil
-															withObject:self.imageView
-														  withDelegate:self
-													acceptableCacheAge:CACHE_24_HOURS
-														   cacheResult:YES];
-						}
-					}*/
 					
 					//Get image URLs
 					NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/photos/", SERVER_API, self.bizId];
@@ -1019,6 +931,60 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	{
 		[self callBusinessNumber];
 	}
+}
+
+#pragma UIPhotoGalleryDataSource methods
+- (NSInteger)numberOfViewsInPhotoGallery:(UIPhotoGalleryView *)photoGallery {
+    if (businesses)
+    {
+        return [businesses count];
+    }
+    return 1;
+}
+
+- (NSURL*)photoGallery:(UIPhotoGalleryView *)photoGallery remoteImageURLAtIndex:(NSInteger)index {
+    if (businesses)
+    {
+        NSDictionary *bizData = [businesses objectAtIndex:index % [businesses count]];
+        NSString *imageRequest = [NSString stringWithFormat:@"%@%@", SERVER_URL, [bizData objectForKey:@"thumbnail"]];
+        return [NSURL URLWithString:imageRequest];
+    }
+    return nil;
+}
+
+- (UIView*)photoGallery:(UIPhotoGalleryView *)photoGallery customViewAtIndex:(NSInteger)index {
+    if (!gallerySpinner)
+    {
+        CGRect frame = CGRectMake(0, 0, photoGallery.frame.size.width, photoGallery.frame.size.height);
+        gallerySpinner = [[UIActivityIndicatorView alloc] initWithFrame:frame];
+        [gallerySpinner setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    }
+    [gallerySpinner startAnimating];
+    return gallerySpinner;
+}
+
+#pragma UIPhotoGalleryDelegate methods
+- (void)photoGallery:(UIPhotoGalleryView *)photoGallery didTapAtIndex:(NSInteger)index {
+    if (NO)//businesses)
+    {
+        if (!galleryController) {
+            galleryController = [[UIPhotoGalleryViewController alloc] init];
+            galleryController.dataSource = self;
+            galleryController.showStatusBar = YES;
+            galleryController.galleryMode = UIPhotoGalleryModeImageRemote;
+        }
+        
+        if (self.navigationController)
+            [self.navigationController pushViewController:galleryController animated:YES];
+        else {
+            galleryController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self presentViewController:galleryController animated:YES completion:NULL];
+        }
+    }
+}
+
+- (UIPhotoGalleryDoubleTapHandler)photoGallery:(UIPhotoGalleryView *)photoGallery doubleTapHandlerAtIndex:(NSInteger)index {
+    return UIPhotoGalleryDoubleTapHandlerNone;
 }
 
 @end

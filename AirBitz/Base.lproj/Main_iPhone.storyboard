@@ -3736,11 +3736,11 @@
                                 <rect key="frame" x="0.0" y="68" width="320" height="142"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="9G8-09-5rg">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" id="6fq-Gv-OdB" customClass="UIPhotoGalleryView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="142"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </imageView>
+                                    </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="darken_bottom_table_cell.png" id="PLV-qj-cYH">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="142"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -4088,9 +4088,9 @@
                         <outlet property="businessTitleLabel" destination="Pa6-PK-SvP" id="jml-Fx-gep"/>
                         <outlet property="categoriesLabel" destination="HIT-3i-9iw" id="Jy6-8B-xOz"/>
                         <outlet property="darkenImageView" destination="PLV-qj-cYH" id="YSr-lZ-pSV"/>
+                        <outlet property="galleryView" destination="6fq-Gv-OdB" id="sHH-nE-tbj"/>
                         <outlet property="imageArea" destination="9h3-Kj-nNy" id="GNN-CX-lH1"/>
                         <outlet property="imageLoadActivityView" destination="Qyb-1i-ay9" id="njG-H6-XY0"/>
-                        <outlet property="imageView" destination="9G8-09-5rg" id="ntp-JL-yG4"/>
                         <outlet property="tableView" destination="fW9-fV-Lwx" id="Bfv-my-bnY"/>
                     </connections>
                 </viewController>
