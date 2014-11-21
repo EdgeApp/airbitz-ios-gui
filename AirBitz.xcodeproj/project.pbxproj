@@ -689,7 +689,6 @@
 		7DFD22E71A1E716C008C43FB /* UIPhotoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */; };
 		7DFD22E81A1E716C008C43FB /* UIPhotoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */; };
 		7DFD22F01A1ED1F5008C43FB /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */; };
-		7DFD22F61A1ED22E008C43FB /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFD22F51A1ED22E008C43FB /* libPods-Airbitz.a */; };
 		7DFF2F8B1A02E50E00813733 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFF2F8A1A02E50E00813733 /* MessageUI.framework */; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
@@ -1055,7 +1054,6 @@
 		B5FD393618F0A67100BE2670 /* transactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393518F0A67100BE2670 /* transactionDetails.html */; };
 		B5FD394718F240E600BE2670 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */; };
 		C40BC5D5199479CF00149E12 /* libcsv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C40BC5D4199479CF00149E12 /* libcsv.a */; };
-		D54D390FAB5348F82AFF440D /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2930E7DAA76EC51E127C9D79 /* libPods-Airbitz.a */; };
 		DA4CFE45196F897B002CFD49 /* drag_bar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */; };
 		DA4CFE46196F897B002CFD49 /* drag_bar~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */; };
 		DA7693881964FE8A0022EE64 /* copy_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */; };
@@ -1851,7 +1849,6 @@
 				7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */,
 				7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */,
 				7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */,
-				7DFD22F61A1ED22E008C43FB /* libPods-Airbitz.a in Frameworks */,
 				17C92258FEBAD8A39BBFD0FC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1897,7 +1894,6 @@
 				4C08A6E018C29CEF0071B87C /* libscrypt.a in Frameworks */,
 				4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */,
 				4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */,
-				D54D390FAB5348F82AFF440D /* libPods-Airbitz.a in Frameworks */,
 				6A587502F675B6C6ECA2BB1B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
