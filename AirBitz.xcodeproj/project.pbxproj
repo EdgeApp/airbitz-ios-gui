@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17C92258FEBAD8A39BBFD0FC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E47C0EC32EE29D34C5A03A0B /* libPods.a */; };
 		4C08A6DB18C29CEF0071B87C /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D318C29CEF0071B87C /* libabc.a */; };
 		4C08A6DC18C29CEF0071B87C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D418C29CEF0071B87C /* libcrypto.a */; };
 		4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D518C29CEF0071B87C /* libcurl.a */; };
@@ -91,10 +92,6 @@
 		4CA4672B19B604CA004F9923 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4672A19B604CA004F9923 /* DL_URLServer.m */; };
 		4CA4672C19B604CA004F9923 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4672A19B604CA004F9923 /* DL_URLServer.m */; };
 		6809FB9A196F9EEB0076CA4D /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809FB99196F9EEB0076CA4D /* libgit2.a */; };
-		682903DB1A0B22A8004D83DC /* (null) in Sources */ = {isa = PBXBuildFile; };
-		682903DC1A0B22A8004D83DC /* (null) in Sources */ = {isa = PBXBuildFile; };
-		682903DD1A0B22A8004D83DC /* (null) in Resources */ = {isa = PBXBuildFile; };
-		682903DE1A0B22A8004D83DC /* (null) in Resources */ = {isa = PBXBuildFile; };
 		68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */; };
 		683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
 		684861AC1A0C01C5008E53F8 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C4AA221A0B4DD70010C837 /* FadingAlertView.m */; };
@@ -116,6 +113,7 @@
 		68C3285719804BFE007DA4C2 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */; };
 		68C4AA241A0B4DD70010C837 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C4AA221A0B4DD70010C837 /* FadingAlertView.m */; };
 		68C4AA251A0B4DD70010C837 /* FadingAlertView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView~iphone.xib */; };
+		6A587502F675B6C6ECA2BB1B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E47C0EC32EE29D34C5A03A0B /* libPods.a */; };
 		7D05AB821A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D05AB801A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png */; };
 		7D05AB831A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D05AB801A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png */; };
 		7D05AB841A0304DD00AFA5F7 /* bd_cell_middle_white~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D05AB811A0304DD00AFA5F7 /* bd_cell_middle_white~iphone.png */; };
@@ -690,6 +688,8 @@
 		7DFD22E61A1E716C008C43FB /* UIPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E01A1E716C008C43FB /* UIPhotoGalleryViewController.m */; };
 		7DFD22E71A1E716C008C43FB /* UIPhotoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */; };
 		7DFD22E81A1E716C008C43FB /* UIPhotoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */; };
+		7DFD22F01A1ED1F5008C43FB /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */; };
+		7DFD22F61A1ED22E008C43FB /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFD22F51A1ED22E008C43FB /* libPods-Airbitz.a */; };
 		7DFF2F8B1A02E50E00813733 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFF2F8A1A02E50E00813733 /* MessageUI.framework */; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
@@ -1113,7 +1113,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		188D8A965DB464149F922F3B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2930E7DAA76EC51E127C9D79 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4C08A6D318C29CEF0071B87C /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = ABC/libabc.a; sourceTree = "<group>"; };
 		4C08A6D418C29CEF0071B87C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ABC/libcrypto.a; sourceTree = "<group>"; };
 		4C08A6D518C29CEF0071B87C /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ABC/libcurl.a; sourceTree = "<group>"; };
@@ -1333,6 +1335,7 @@
 		7DFD22E01A1E716C008C43FB /* UIPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPhotoGalleryViewController.m; sourceTree = "<group>"; };
 		7DFD22E11A1E716C008C43FB /* UIPhotoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPhotoItemView.h; sourceTree = "<group>"; };
 		7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPhotoItemView.m; sourceTree = "<group>"; };
+		7DFD22F51A1ED22E008C43FB /* libPods-Airbitz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Airbitz.a"; path = "Pods/build/Debug-iphoneos/libPods-Airbitz.a"; sourceTree = "<group>"; };
 		7DFF2F8A1A02E50E00813733 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
@@ -1804,6 +1807,7 @@
 		DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album@2x~iphone.png"; sourceTree = "<group>"; };
 		DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album~iphone.png"; sourceTree = "<group>"; };
 		DABA3485198DFEE300EFAB13 /* infoRequestQR.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoRequestQR.html; sourceTree = "<group>"; };
+		E47C0EC32EE29D34C5A03A0B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1847,6 +1851,8 @@
 				7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */,
 				7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */,
 				7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */,
+				7DFD22F61A1ED22E008C43FB /* libPods-Airbitz.a in Frameworks */,
+				17C92258FEBAD8A39BBFD0FC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1892,6 +1898,7 @@
 				4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */,
 				4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */,
 				D54D390FAB5348F82AFF440D /* libPods-Airbitz.a in Frameworks */,
+				6A587502F675B6C6ECA2BB1B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2264,6 +2271,7 @@
 		B5675B4A18A17F6F002E0703 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7DFD22F51A1ED22E008C43FB /* libPods-Airbitz.a */,
 				7DFF2F8A1A02E50E00813733 /* MessageUI.framework */,
 				7DBD879E19B97F6F0069D62A /* HockeySDK.embeddedframework */,
 				7D6EDB7B19A66C82007C33AE /* CoreText.framework */,
@@ -2290,6 +2298,7 @@
 				B5675B4F18A17F6F002E0703 /* UIKit.framework */,
 				B5675B6D18A17F6F002E0703 /* XCTest.framework */,
 				2930E7DAA76EC51E127C9D79 /* libPods-Airbitz.a */,
+				E47C0EC32EE29D34C5A03A0B /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3003,6 +3012,8 @@
 			children = (
 				6BECB1B8C9CE1002526F24AB /* Pods-Airbitz.debug.xcconfig */,
 				601ACAEB7587DBB95DF1206E /* Pods-Airbitz.release.xcconfig */,
+				3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */,
+				188D8A965DB464149F922F3B /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -3014,10 +3025,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D98AE9619A7C550003D2BF6 /* Build configuration list for PBXNativeTarget "Airbitz-Testnet" */;
 			buildPhases = (
+				7DFD22ED1A1ECC2F008C43FB /* Check Pods Manifest.lock */,
 				7D98ACAC19A7C550003D2BF6 /* Sources */,
 				7D98AD1119A7C550003D2BF6 /* Frameworks */,
 				7D98AD3719A7C550003D2BF6 /* Resources */,
 				7D98AE9519A7C550003D2BF6 /* ShellScript */,
+				7DFD22EE1A1ECC59008C43FB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3276,7 +3289,6 @@
 				7D98ADC619A7C550003D2BF6 /* Lato-Hairline.ttf in Resources */,
 				7D98ADC719A7C550003D2BF6 /* table_cell_bottom~iphone.png in Resources */,
 				7D8270C319F89C8B003F275D /* btn_forgot_password_arrow.png in Resources */,
-				682903DE1A0B22A8004D83DC /* (null) in Resources */,
 				7D98A0071A0206960094512B /* bd_icon_yelp@2x~iphone.png in Resources */,
 				7D98ADC819A7C550003D2BF6 /* TxSearchBarBacking~iphone.png in Resources */,
 				7D98ADC919A7C550003D2BF6 /* btn_selected@2x~iphone.png in Resources */,
@@ -3798,7 +3810,6 @@
 				B59C143818C0129300AEA789 /* bd_cell_top~iphone.png in Resources */,
 				7D98A0001A0206960094512B /* bd_icon_foursquare~iphone.png in Resources */,
 				B5F2E9D118DCDFE7008ACF88 /* PasswordVerifyView~iphone.xib in Resources */,
-				682903DD1A0B22A8004D83DC /* (null) in Resources */,
 				B5137C3E18A4529500DA4A34 /* logo@2x~iphone.png in Resources */,
 				B516C1F518C802F6008CC6A1 /* bd_cell_bottom_white~iphone.png in Resources */,
 				B5628BEE199BD6320077DA1C /* 1-bar@2x.png in Resources */,
@@ -3942,6 +3953,36 @@
 			shellPath = /bin/sh;
 			shellScript = "FILE=\"${SRCROOT}/AirBitz/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
 		};
+		7DFD22ED1A1ECC2F008C43FB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\ncat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\nexit 1\nfi";
+			showEnvVarsInLog = 0;
+		};
+		7DFD22EE1A1ECC59008C43FB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		AB35436AC4AF35BB26BEAB95 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3954,7 +3995,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EEB62753E3848E9451D39D40 /* Check Pods Manifest.lock */ = {
@@ -3979,6 +4020,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DFD22F01A1ED1F5008C43FB /* SpendingLimitsViewController.m in Sources */,
 				7D98ACAD19A7C550003D2BF6 /* SMCalloutView.m in Sources */,
 				7D98ACAE19A7C550003D2BF6 /* QuestionAnswerView.m in Sources */,
 				7D98ACAF19A7C550003D2BF6 /* DateTime.m in Sources */,
@@ -4048,7 +4090,6 @@
 				7D98ACE719A7C550003D2BF6 /* CJSONScanner.m in Sources */,
 				7D98ACE819A7C550003D2BF6 /* DividerView.m in Sources */,
 				7D98ACE919A7C550003D2BF6 /* MainViewController.m in Sources */,
-				682903DC1A0B22A8004D83DC /* (null) in Sources */,
 				7D98ACEA19A7C550003D2BF6 /* ExportWalletPDFViewController.m in Sources */,
 				7D98ACEB19A7C550003D2BF6 /* GDrive.m in Sources */,
 				7D98ACEC19A7C550003D2BF6 /* GTLDrive_Sources.m in Sources */,
@@ -4160,7 +4201,6 @@
 				B5C0A97718EA0A42008F302C /* BD_Website_Cell.m in Sources */,
 				B55A031418EA55C700845090 /* ButtonCell.m in Sources */,
 				B5137C3618A435BD00DA4A34 /* CDataScanner.m in Sources */,
-				682903DB1A0B22A8004D83DC /* (null) in Sources */,
 				B5FD392818EE2DFD00BE2670 /* SendStatusViewController.m in Sources */,
 				B5137C3A18A435BD00DA4A34 /* CJSONScanner.m in Sources */,
 				B5C0A97E18EA0A7F008F302C /* DividerView.m in Sources */,
@@ -4242,6 +4282,7 @@
 /* Begin XCBuildConfiguration section */
 		7D98AE9719A7C550003D2BF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -4266,6 +4307,7 @@
 					"./AirBitz/ABC-testnet",
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "Airbitz Testnet";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4275,6 +4317,7 @@
 		};
 		7D98AE9819A7C550003D2BF6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -4299,6 +4342,7 @@
 					"./AirBitz/ABC-testnet",
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "Airbitz Testnet";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4380,7 +4424,7 @@
 		};
 		B5675B7E18A17F6F002E0703 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6BECB1B8C9CE1002526F24AB /* Pods-Airbitz.debug.xcconfig */;
+			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -4413,7 +4457,7 @@
 		};
 		B5675B7F18A17F6F002E0703 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 601ACAEB7587DBB95DF1206E /* Pods-Airbitz.release.xcconfig */;
+			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
