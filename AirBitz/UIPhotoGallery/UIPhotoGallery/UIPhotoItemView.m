@@ -228,7 +228,7 @@
 
 - (void)resetOptions {
     UIPhotoGalleryView *photoGallery = (UIPhotoGalleryView*)_galleryDelegate;
-    self.contentMode = photoGallery.photoItemContentMode;
+    mainImageView.contentMode = photoGallery.photoItemContentMode;
 }
 
 #pragma UIScrollViewDelegate methods

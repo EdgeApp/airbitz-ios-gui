@@ -689,6 +689,14 @@
 		7DFD22E71A1E716C008C43FB /* UIPhotoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */; };
 		7DFD22E81A1E716C008C43FB /* UIPhotoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */; };
 		7DFD22F01A1ED1F5008C43FB /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */; };
+		7DFD230F1A1FF98A008C43FB /* UIPhotoGallerySliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD230D1A1FF98A008C43FB /* UIPhotoGallerySliderView.m */; };
+		7DFD23101A1FF98A008C43FB /* UIPhotoGallerySliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD230D1A1FF98A008C43FB /* UIPhotoGallerySliderView.m */; };
+		7DFD23111A1FF98A008C43FB /* UIPhotoGallerySliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFD230E1A1FF98A008C43FB /* UIPhotoGallerySliderView.xib */; };
+		7DFD23121A1FF98A008C43FB /* UIPhotoGallerySliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFD230E1A1FF98A008C43FB /* UIPhotoGallerySliderView.xib */; };
+		7DFD23151A200F8F008C43FB /* bd_sliderbubble@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DFD23131A200F8F008C43FB /* bd_sliderbubble@2x~iphone.png */; };
+		7DFD23161A200F8F008C43FB /* bd_sliderbubble@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DFD23131A200F8F008C43FB /* bd_sliderbubble@2x~iphone.png */; };
+		7DFD23171A200F8F008C43FB /* bd_sliderbubble~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DFD23141A200F8F008C43FB /* bd_sliderbubble~iphone.png */; };
+		7DFD23181A200F8F008C43FB /* bd_sliderbubble~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DFD23141A200F8F008C43FB /* bd_sliderbubble~iphone.png */; };
 		7DFF2F8B1A02E50E00813733 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFF2F8A1A02E50E00813733 /* MessageUI.framework */; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
@@ -1334,6 +1342,11 @@
 		7DFD22E11A1E716C008C43FB /* UIPhotoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPhotoItemView.h; sourceTree = "<group>"; };
 		7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPhotoItemView.m; sourceTree = "<group>"; };
 		7DFD22F51A1ED22E008C43FB /* libPods-Airbitz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Airbitz.a"; path = "Pods/build/Debug-iphoneos/libPods-Airbitz.a"; sourceTree = "<group>"; };
+		7DFD230C1A1FF98A008C43FB /* UIPhotoGallerySliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPhotoGallerySliderView.h; sourceTree = "<group>"; };
+		7DFD230D1A1FF98A008C43FB /* UIPhotoGallerySliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPhotoGallerySliderView.m; sourceTree = "<group>"; };
+		7DFD230E1A1FF98A008C43FB /* UIPhotoGallerySliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIPhotoGallerySliderView.xib; sourceTree = "<group>"; };
+		7DFD23131A200F8F008C43FB /* bd_sliderbubble@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_sliderbubble@2x~iphone.png"; sourceTree = "<group>"; };
+		7DFD23141A200F8F008C43FB /* bd_sliderbubble~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_sliderbubble~iphone.png"; sourceTree = "<group>"; };
 		7DFF2F8A1A02E50E00813733 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B5004A2618A5C755003560A4 /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
@@ -2111,6 +2124,9 @@
 				7DFD22E01A1E716C008C43FB /* UIPhotoGalleryViewController.m */,
 				7DFD22E11A1E716C008C43FB /* UIPhotoItemView.h */,
 				7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */,
+				7DFD230C1A1FF98A008C43FB /* UIPhotoGallerySliderView.h */,
+				7DFD230D1A1FF98A008C43FB /* UIPhotoGallerySliderView.m */,
+				7DFD230E1A1FF98A008C43FB /* UIPhotoGallerySliderView.xib */,
 			);
 			name = UIPhotoGallery;
 			path = AirBitz/UIPhotoGallery/UIPhotoGallery;
@@ -2485,6 +2501,8 @@
 		B59C142418C0129300AEA789 /* BusinessDetails */ = {
 			isa = PBXGroup;
 			children = (
+				7DFD23131A200F8F008C43FB /* bd_sliderbubble@2x~iphone.png */,
+				7DFD23141A200F8F008C43FB /* bd_sliderbubble~iphone.png */,
 				7D05AB801A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png */,
 				7D05AB811A0304DD00AFA5F7 /* bd_cell_middle_white~iphone.png */,
 				B516C1F218C802F6008CC6A1 /* bd_cell_bottom_white@2x~iphone.png */,
@@ -3205,6 +3223,7 @@
 				7D98AD7819A7C550003D2BF6 /* icon_USD_light@2x~iphone.png in Resources */,
 				7D98AD7919A7C550003D2BF6 /* bkg_calculator@2x~iphone.png in Resources */,
 				7DBD87A619B97F6F0069D62A /* HockeySDK.xcconfig in Resources */,
+				7DFD23181A200F8F008C43FB /* bd_sliderbubble~iphone.png in Resources */,
 				7D98AD7B19A7C550003D2BF6 /* icon_settings_dark~iphone.png in Resources */,
 				DAA5782619BF55F600E972FC /* Warning_icon~iphone.png in Resources */,
 				7D98AD7D19A7C550003D2BF6 /* btn_QR~iphone.png in Resources */,
@@ -3243,6 +3262,7 @@
 				7D98AD9D19A7C550003D2BF6 /* TxSearchBarBacking@2x~iphone.png in Resources */,
 				7D98AD9E19A7C550003D2BF6 /* Lato-Regular.ttf in Resources */,
 				7D98AD9F19A7C550003D2BF6 /* darken_bottom_table_cell~iphone.png in Resources */,
+				7DFD23121A1FF98A008C43FB /* UIPhotoGallerySliderView.xib in Resources */,
 				7D98ADA019A7C550003D2BF6 /* btn_send~iphone.png in Resources */,
 				7D98ADA119A7C550003D2BF6 /* icon_bitcoin_dark~iphone.png in Resources */,
 				7D98ADA219A7C550003D2BF6 /* icon_export_printer@2x~iphone.png in Resources */,
@@ -3489,6 +3509,7 @@
 				7D98AE7A19A7C550003D2BF6 /* infoRequest.html in Resources */,
 				7D98AE7B19A7C550003D2BF6 /* flash-on~iphone.png in Resources */,
 				7D98AE7C19A7C550003D2BF6 /* btn_checkmark~iphone.png in Resources */,
+				7DFD23161A200F8F008C43FB /* bd_sliderbubble@2x~iphone.png in Resources */,
 				7D98AE7D19A7C550003D2BF6 /* logo_large@2x~iphone.png in Resources */,
 				7D98AE7E19A7C550003D2BF6 /* btn_3~iphone.png in Resources */,
 				7D98AE7F19A7C550003D2BF6 /* icon_calendar~iphone.png in Resources */,
@@ -3646,6 +3667,7 @@
 				B516C1F418C802F6008CC6A1 /* bd_cell_bottom_white@2x~iphone.png in Resources */,
 				4C5D8C60192AF4FF0015BB3C /* btn_camera~iphone.png in Resources */,
 				B59C151C18C012B500AEA789 /* icon_request@2x~iphone.png in Resources */,
+				7DFD23111A1FF98A008C43FB /* UIPhotoGallerySliderView.xib in Resources */,
 				B59C14F918C012B500AEA789 /* btn_multiply~iphone.png in Resources */,
 				B5137C0F18A40A8400DA4A34 /* Lato-LightItalic.ttf in Resources */,
 				4C5D8C74192E7D4A0015BB3C /* infoTransactions.html in Resources */,
@@ -3751,6 +3773,7 @@
 				B5F2EB1A18DE06B7008ACF88 /* img_collapseExpandBlueDown@2x~iphone.png in Resources */,
 				B5635A27193D0FB200345AEE /* WalletHeaderView~iphone.xib in Resources */,
 				B59C154018C012B500AEA789 /* table_cell_middle@2x~iphone.png in Resources */,
+				7DFD23151A200F8F008C43FB /* bd_sliderbubble@2x~iphone.png in Resources */,
 				4C5D8C6B192E6BC30015BB3C /* infoSettings.html in Resources */,
 				B59C151E18C012B500AEA789 /* icon_request_dark~iphone.png in Resources */,
 				B5F2E9B218D92C1C008ACF88 /* swipe-arrow~iphone.png in Resources */,
@@ -3884,6 +3907,7 @@
 				4C5D8C71192E7D4A0015BB3C /* infoRequest.html in Resources */,
 				DAAC2169196399F400CC0F1E /* flash-on~iphone.png in Resources */,
 				B59C14E718C012B500AEA789 /* btn_checkmark~iphone.png in Resources */,
+				7DFD23171A200F8F008C43FB /* bd_sliderbubble~iphone.png in Resources */,
 				B5F2E9B518DA0F9E008ACF88 /* logo_large@2x~iphone.png in Resources */,
 				B59C14D118C012B500AEA789 /* btn_3~iphone.png in Resources */,
 				4C7247AA193516630091C286 /* icon_calendar~iphone.png in Resources */,
@@ -4089,6 +4113,7 @@
 				7D98ACEA19A7C550003D2BF6 /* ExportWalletPDFViewController.m in Sources */,
 				7D98ACEB19A7C550003D2BF6 /* GDrive.m in Sources */,
 				7D98ACEC19A7C550003D2BF6 /* GTLDrive_Sources.m in Sources */,
+				7DFD23101A1FF98A008C43FB /* UIPhotoGallerySliderView.m in Sources */,
 				7D98ACED19A7C550003D2BF6 /* BD_Phone_Cell.m in Sources */,
 				7D98ACEE19A7C550003D2BF6 /* TxOutput.m in Sources */,
 				7D98ACEF19A7C550003D2BF6 /* MoreCategoriesViewController.m in Sources */,
@@ -4206,6 +4231,7 @@
 				B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */,
 				B5C0A97618EA0A42008F302C /* BD_Phone_Cell.m in Sources */,
 				6861FE681950DFB100CDF24E /* TxOutput.m in Sources */,
+				7DFD230F1A1FF98A008C43FB /* UIPhotoGallerySliderView.m in Sources */,
 				B5C0A99318EA0BAC008F302C /* MoreCategoriesViewController.m in Sources */,
 				B5137C3718A435BD00DA4A34 /* CDataScanner_Extensions.m in Sources */,
 				B5C0A97818EA0A42008F302C /* BusinessDetailsViewController.m in Sources */,

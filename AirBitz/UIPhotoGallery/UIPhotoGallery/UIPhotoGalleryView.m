@@ -31,9 +31,9 @@
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-//        self.autoresizingMask =
-//        UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin |
-//        UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.autoresizingMask =
+        UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin |
+        UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.autoresizingMask =
         UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin |
         UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

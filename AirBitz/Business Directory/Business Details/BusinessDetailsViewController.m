@@ -20,8 +20,10 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "RibbonView.h"
+#import "CommonTypes.h"
 #import "UIPhotoGalleryView.h"
 #import "UIPhotoGalleryViewController.h"
+#import "UIPhotoGallerySliderView.h"
 
 #import "CJSONDeserializer.h"
 
@@ -48,7 +50,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	CGFloat detailsCellHeight;
 	CGFloat detailsLabelWidth;
 	BOOL needToLoadImageInfo;
-    NSArray *businesses;
+    NSArray *details;
     UIPhotoGalleryViewController *galleryController;
     UIActivityIndicatorView *gallerySpinner;
 	NSMutableArray *imageURLs;
@@ -89,7 +91,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
     self.galleryView.subviewGap = 0;
     self.galleryView.photoItemContentMode = UIViewContentModeScaleAspectFill;
 
-    businesses = nil;
+    details = nil;
 	imageURLs = [[NSMutableArray alloc] init];
     rowTypes = [[NSMutableArray alloc] init];
     socialRows = [[NSMutableArray alloc] init];
@@ -401,8 +403,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
 				NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
 				NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
 				
-				businesses = [dict objectForKey:@"results"];
-//                self.galleryView.initialIndex = [self primaryImage:businesses];
+				details = [dict objectForKey:@"results"];
+//                self.galleryView.initialIndex = [self primaryImage:details];
                 self.galleryView.galleryMode = UIPhotoGalleryModeImageRemote;
                 self.galleryView.photoItemContentMode = UIViewContentModeScaleAspectFill;
                 [self.galleryView layoutSubviews];
@@ -935,17 +937,17 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 #pragma UIPhotoGalleryDataSource methods
 - (NSInteger)numberOfViewsInPhotoGallery:(UIPhotoGalleryView *)photoGallery {
-    if (businesses)
+    if (details)
     {
-        return [businesses count];
+        return [details count];
     }
     return 1;
 }
 
 - (NSURL*)photoGallery:(UIPhotoGalleryView *)photoGallery remoteImageURLAtIndex:(NSInteger)index {
-    if (businesses)
+    if (details)
     {
-        NSDictionary *bizData = [businesses objectAtIndex:index % [businesses count]];
+        NSDictionary *bizData = [details objectAtIndex:index % [details count]];
         NSString *imageRequest = [NSString stringWithFormat:@"%@%@", SERVER_URL, [bizData objectForKey:@"thumbnail"]];
         return [NSURL URLWithString:imageRequest];
     }
@@ -963,23 +965,89 @@ typedef NS_ENUM(NSUInteger, CellType) {
     return gallerySpinner;
 }
 
+- (UIView*)customTopViewForGalleryViewController:(UIPhotoGalleryViewController *)galleryViewController {
+    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+    CGRect topFrame = CGRectMake(0, 0,
+                                 self.view.frame.size.width, statusBarHeight + MINIMUM_BUTTON_SIZE);
+    UIView *topView = [[UIView alloc] initWithFrame:topFrame];
+    topView.backgroundColor = [UIColor clearColor];
+    
+    UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGRect btnFrame = CGRectMake(self.view.frame.size.width - MINIMUM_BUTTON_SIZE, statusBarHeight,
+                                 MINIMUM_BUTTON_SIZE, MINIMUM_BUTTON_SIZE);
+    btnDone.frame = btnFrame;
+    [btnDone setBackgroundImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
+    [btnDone addTarget:self
+                action:@selector(returnFromGallery)
+      forControlEvents:UIControlEventTouchUpInside];
+    [topView addSubview:btnDone];
+    return topView;
+}
+
+- (void)returnFromGallery {
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+	[UIView animateWithDuration:0.35
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^
+	 {
+		 CGRect frame = self.view.bounds;
+		 frame.origin.x = frame.size.width;
+		 galleryController.view.frame = frame;
+	 }
+					 completion:^(BOOL finished)
+	 {
+		 [galleryController.view removeFromSuperview];
+		 galleryController = nil;
+         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+	 }];
+}
+
+//- (UIView*)customBottomViewForGalleryViewController:(UIPhotoGalleryViewController *)galleryViewController {
+////    CGRect bottomFrame = CGRectMake(0, self.view.frame.size.height - GALLERY_FOOTER_HEIGHT,
+////                                    self.view.frame.size.width, GALLERY_FOOTER_HEIGHT);
+////    UIView *bottomView = [[UIView alloc] initWithFrame:bottomFrame];
+////    bottomView.backgroundColor = [UIColor magentaColor];//[UIColor clearColor];
+////
+////    CGRect sliderFrame = CGRectMake(MINIMUM_BUTTON_SIZE, 0,
+////                                    self.view.frame.size.width - MINIMUM_BUTTON_SIZE*2, GALLERY_FOOTER_HEIGHT);
+////    UISlider *slider = [[UISlider alloc] initWithFrame:sliderFrame];
+////    [bottomView addSubview:slider];
+//    UIPhotoGallerySliderView *bottomView = [[[NSBundle mainBundle] loadNibNamed:@"UIPhotoGallerySliderView"
+//                                                                         owner:galleryViewController
+//                                                                       options:nil] objectAtIndex:0];
+//    return bottomView;
+//}
+
 #pragma UIPhotoGalleryDelegate methods
 - (void)photoGallery:(UIPhotoGalleryView *)photoGallery didTapAtIndex:(NSInteger)index {
-    if (NO)//businesses)
+    if (details)
     {
         if (!galleryController) {
             galleryController = [[UIPhotoGalleryViewController alloc] init];
             galleryController.dataSource = self;
             galleryController.showStatusBar = YES;
             galleryController.galleryMode = UIPhotoGalleryModeImageRemote;
+            galleryController.initialIndex = index;
         }
         
-        if (self.navigationController)
-            [self.navigationController pushViewController:galleryController animated:YES];
-        else {
-            galleryController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-            [self presentViewController:galleryController animated:YES completion:NULL];
-        }
+        CGRect frame = self.view.bounds;
+        frame.origin.x = frame.size.width;
+        galleryController.view.frame = frame;
+        [self.view addSubview:galleryController.view];
+        
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             galleryController.view.frame = self.view.bounds;
+         }
+                         completion:^(BOOL finished)
+         {
+             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+         }];
     }
 }
 
