@@ -1411,7 +1411,11 @@ static NSTimer *_dataSyncTimer;
     NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
     NSString *localCurrency = [locale objectForKey:NSLocaleCurrencyCode];
     NSNumber *currencyNum = [_localeAsCurrencyNum objectForKey:localCurrency];
-    return [currencyNum intValue];
+    if (currencyNum)
+    {
+        return [currencyNum intValue];
+    }
+    return CURRENCY_NUM_USD;
 }
 
 /*
