@@ -935,7 +935,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	}
 }
 
-#pragma UIPhotoGalleryDataSource methods
+#pragma mark UIPhotoGalleryDataSource methods
 - (NSInteger)numberOfViewsInPhotoGallery:(UIPhotoGalleryView *)photoGallery {
     if (details)
     {
@@ -1021,7 +1021,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 //    return bottomView;
 //}
 
-#pragma UIPhotoGalleryDelegate methods
+#pragma mark UIPhotoGalleryDelegate methods
 - (void)photoGallery:(UIPhotoGalleryView *)photoGallery didTapAtIndex:(NSInteger)index {
     if (details)
     {

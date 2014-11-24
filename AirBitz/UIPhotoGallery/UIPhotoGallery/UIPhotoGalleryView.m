@@ -58,6 +58,7 @@
 #pragma get-set methods
 - (void)setGalleryMode:(UIPhotoGalleryMode)galleryMode {
     _galleryMode = galleryMode;
+    currentPage = 0;
     [self layoutSubviews];
 }
 
@@ -230,6 +231,7 @@
     _showsScrollIndicator = YES;
     _verticalGallery = NO;
     _initialIndex = 0;
+    currentPage = 0;
 }
 
 - (void)initMainScrollView {
@@ -254,7 +256,6 @@
     [self addSubview:mainScrollView];
     
     reusableViews = [NSMutableSet set];
-    currentPage = 0;
 }
 
 - (void)setupMainScrollView {
