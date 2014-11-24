@@ -945,10 +945,12 @@ typedef NS_ENUM(NSUInteger, CellType) {
 }
 
 - (NSURL*)photoGallery:(UIPhotoGalleryView *)photoGallery remoteImageURLAtIndex:(NSInteger)index {
+    NSString *imageKey;
     if (details)
     {
+        imageKey = galleryController ? @"image" : @"thumbnail";
         NSDictionary *bizData = [details objectAtIndex:index % [details count]];
-        NSString *imageRequest = [NSString stringWithFormat:@"%@%@", SERVER_URL, [bizData objectForKey:@"thumbnail"]];
+        NSString *imageRequest = [NSString stringWithFormat:@"%@%@", SERVER_URL, [bizData objectForKey:imageKey]];
         return [NSURL URLWithString:imageRequest];
     }
     return nil;
