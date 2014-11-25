@@ -13,6 +13,7 @@
 #import "LocalSettings.h"
 #import "CJSONDeserializer.h"
 
+#define NOTIFICATION_SEEN_KEY @"viewed"
 static BOOL bInitialized = NO;
 static NotificationChecker *singleton = nil;
 
@@ -45,22 +46,63 @@ static NotificationChecker *singleton = nil;
     }
 }
 
-+ (NSDictionary *)firstNotification:(BOOL)viewed
++ (void)requestNotifications
 {
-    return [singleton getNextNotification:viewed];
+    [singleton checkNotifications:nil];
+}
+
++ (NSDictionary *)haveNotifications
+{
+    return [singleton haveNotifications];
+}
+
++ (NSDictionary *)firstNotification
+{
+    return [singleton getNextNotification];
+}
+
++ (NSDictionary *)unseenNotification
+{
+    return [singleton getFirstUnseenNotification];
 }
 
 #pragma mark Private Methods
 
-- (NSDictionary *)getNextNotification:(BOOL)viewed
+- (NSDictionary *)haveNotifications
+{
+    return [[LocalSettings controller].notifications firstObject];
+}
+
+- (NSDictionary *)getNextNotification
 {
     NSDictionary *notif = [[LocalSettings controller].notifications firstObject];
-    if (notif && viewed)
+    if (notif)
     {
         [[LocalSettings controller].notifications removeObject:notif];
         [LocalSettings saveAll];
     }
     return notif;
+}
+
+- (NSDictionary *)getFirstUnseenNotification
+{
+    for (NSDictionary *notif in [LocalSettings controller].notifications) {
+        NSNumber *seen = [notif objectForKey:NOTIFICATION_SEEN_KEY];
+        if (nil == seen || ![seen boolValue])
+        {
+            // add the seen key to the dictionary
+            NSMutableDictionary *temp = [notif mutableCopy];
+            [[LocalSettings controller].notifications removeObject:notif];
+
+            [temp setValue:[NSNumber numberWithBool:YES] forKey:NOTIFICATION_SEEN_KEY];
+            [[LocalSettings controller].notifications addObject:temp];
+
+            [LocalSettings saveAll];
+
+            return temp;
+        }
+    }
+    return nil;
 }
 
 - (void)start

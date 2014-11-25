@@ -20,6 +20,7 @@
 #import "NSString+StripHTML.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
+UIBackgroundTaskIdentifier bgNotificationTask;
 NSTimer *logoutTimer = NULL;
 NSDate *logoutDate = NULL;
 
@@ -43,6 +44,8 @@ NSDate *logoutDate = NULL;
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNotifications) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
 
 #if (!AIRBITZ_IOS_DEBUG) || (0 == AIRBITZ_IOS_DEBUG)
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:HOCKEY_MANAGER_ID];
@@ -71,35 +74,45 @@ NSDate *logoutDate = NULL;
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
+    [self showNotifications];
     if (![self isAppActive])
     {
+        [self autoLogout];
         [self checkLoginExpired];
-        [self checkNotifications];
     }
     completionHandler(UIBackgroundFetchResultNoData);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    [[SDImageCache sharedImageCache] clearDisk];
+    [[SDImageCache sharedImageCache] cleanDisk];
+    [[SDImageCache sharedImageCache] clearMemory];
+
     if ([User isLoggedIn])
     {
         logoutDate = [NSDate date];
+        
+        // multiply to get the time in seconds
+        [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
     }
-
-    [application setMinimumBackgroundFetchInterval:BACKGROUND_NOTIF_PULL_REFRESH_INTERVAL_MINUTES * 60];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [LocalSettings saveAll];
 
-    bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
-        [self bgCleanup];
+    bgNotificationTask = [application beginBackgroundTaskWithExpirationHandler:^{
+        [self bgNotificationCleanup];
     }];
+    [NotificationChecker requestNotifications];
 
     if ([User isLoggedIn])
     {
         [CoreBridge stopQueues];
+        bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
+            [self bgLogoutCleanup];
+        }];
         // start a logout timer
         // multiply to get the time in seconds
         logoutTimer = [NSTimer scheduledTimerWithTimeInterval:[User Singleton].minutesAutoLogout * 60
@@ -129,6 +142,10 @@ NSDate *logoutDate = NULL;
                 {
                     [CoreBridge disconnectWatchers];
                 }
+                if (![logoutTimer isValid])
+                {
+                    [self bgLogoutCleanup];
+                }
             });
         }
     }
@@ -136,7 +153,8 @@ NSDate *logoutDate = NULL;
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [self bgCleanup];
+    [self bgNotificationCleanup];
+    [self bgLogoutCleanup];
     [self checkLoginExpired];
     if ([User isLoggedIn])
     {
@@ -147,6 +165,7 @@ NSDate *logoutDate = NULL;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [self bringNotificationsToForeground];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -161,7 +180,7 @@ NSDate *logoutDate = NULL;
 {
 }
 
-- (void)bgCleanup
+- (void)bgLogoutCleanup
 {
     if (logoutTimer)
     {
@@ -169,6 +188,12 @@ NSDate *logoutDate = NULL;
     }
     [[UIApplication sharedApplication] endBackgroundTask:bgLogoutTask];
     bgLogoutTask = UIBackgroundTaskInvalid;
+}
+
+- (void)bgNotificationCleanup
+{
+    [[UIApplication sharedApplication] endBackgroundTask:bgNotificationTask];
+    bgNotificationTask = UIBackgroundTaskInvalid;
 }
 
 // This is a fallback for auto logout. It is better to have the background task
@@ -196,7 +221,7 @@ NSDate *logoutDate = NULL;
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval: UIApplicationBackgroundFetchIntervalNever];
     }
-    [self bgCleanup];
+    [self bgLogoutCleanup];
 }
 
 - (BOOL)isAppActive
@@ -204,24 +229,38 @@ NSDate *logoutDate = NULL;
     return [UIApplication sharedApplication].applicationState == UIApplicationStateActive;
 }
 
-- (void)checkNotifications
+- (void)showNotifications
 {
-    NSDictionary *notif = [NotificationChecker firstNotification:NO];
-    if (notif)
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
     {
-        UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+        NSDictionary *notif = [NotificationChecker unseenNotification];
+        while (notif)
+        {
+            UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+            
+            NSString *title = [notif objectForKey:@"title"];
+            NSString *strippedTitle = [title stringByStrippingHTML];
+            [localNotif setAlertAction:strippedTitle];
+            
+            NSString *message = [notif objectForKey:@"message"];
+            NSString *strippedMessage = [message stringByStrippingHTML];
+            [localNotif setAlertBody:strippedMessage];
+            
+            // fire the notification now
+            [localNotif setFireDate:[NSDate date]];
+            [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+            
+            // get the next one
+            notif = [NotificationChecker unseenNotification];
+        };
+    }
+}
 
-        NSString *title = [notif objectForKey:@"title"];
-        NSString *strippedTitle = [title stringByStrippingHTML];
-        [localNotif setAlertAction:strippedTitle];
-
-        NSString *message = [notif objectForKey:@"message"];
-        NSString *strippedMessage = [message stringByStrippingHTML];
-        [localNotif setAlertBody:strippedMessage];
-
-        // fire the notification now
-        [localNotif setFireDate:[NSDate date]];
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+- (void)bringNotificationsToForeground
+{
+    if ([NotificationChecker haveNotifications])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NOTIFICATION_RECEIVED object:self];
     }
 }
 

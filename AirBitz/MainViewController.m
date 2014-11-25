@@ -464,21 +464,15 @@ typedef enum eAppMode
 
 - (void)displayNextNotification
 {
-    if (!_notificationInfoView)
+    if (!_notificationInfoView && [[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
     {
-        NSDictionary *notif = [NotificationChecker firstNotification:YES];
+        NSDictionary *notif = [NotificationChecker firstNotification];
         if (notif)
         {
-            NSString *notifHTML = [NSString stringWithFormat:@"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\
-            <html xmlns=\"http://www.w3.org/1999/xhtml\">\
-                <head>\
-                    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\
-                    <style type=\"text/css\">\
-                    </style>\
-                </head>\
+            NSString *notifHTML = [NSString stringWithFormat:@"<!DOCTYPE html>\
+            <html>\
                 <body>\
-                    <div class=\"style1\"><strong><center>%@</center></strong><BR />\
-                    <BR />\
+                    <div><strong><center>%@</center></strong><BR />\
                     %@\
                     </div>\
                 </body>\
@@ -487,7 +481,9 @@ typedef enum eAppMode
                                    [notif objectForKey:@"message"]];
             _notificationInfoView = [InfoView CreateWithDelegate:self];
             [_notificationInfoView enableScrolling:YES];
-            [_notificationInfoView setFrame:self.view.bounds];
+            CGRect frame = self.view.bounds;
+            frame.size.height = frame.size.height - self.tabBar.frame.size.height;
+            [_notificationInfoView setFrame:frame];
             [_notificationInfoView setHtmlInfoToDisplay:notifHTML];
             [self.view addSubview:_notificationInfoView];
         }

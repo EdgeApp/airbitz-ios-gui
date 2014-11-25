@@ -12,5 +12,8 @@
 {
 }
 + (void)initAll;
-+ (NSDictionary *)firstNotification:(BOOL)seen;
++ (NSDictionary *)haveNotifications;
++ (NSDictionary *)firstNotification;
++ (NSDictionary *)unseenNotification;
++ (void)requestNotifications;
 @end
