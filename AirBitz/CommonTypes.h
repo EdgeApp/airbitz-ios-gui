@@ -15,6 +15,9 @@
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 #define IS_IPHONE4                                  (([[UIScreen mainScreen] bounds].size.height < 568) ? YES : NO)
 
+#define NOTIF_PULL_REFRESH_INTERVAL_SECONDS 60
+#define SERVER_MESSAGES_TO_SHOW VERBOSE_MESSAGES_OFF
+
 #define GALLERY_FOOTER_HEIGHT       255
 #define MINIMUM_BUTTON_SIZE         44
 

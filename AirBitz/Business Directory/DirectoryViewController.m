@@ -161,11 +161,6 @@ typedef enum eMapDisplayState
     backgroundImages = [[BackgroundImageManager alloc] init];
     backgroundImages.delegate = self;
 
-    [DL_URLServer initAll];
-    //set API key
-    NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
-    [[DL_URLServer controller] setHeaderRequestValue:token forKey: @"Authorization"];
-
     [Location initAllWithDelegate: self];
 
     searchTermCache = [[NSMutableArray alloc] init];
@@ -190,8 +185,6 @@ typedef enum eMapDisplayState
 
 
     //NSString *paramDataString = [self createSearchParamString];
-
-    [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
 
     currentPage = 0;
     //[self loadSearchResultsPage:currentPage];

@@ -25,7 +25,11 @@
 #import "CoreBridge.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
+#import "Server.h"
+#import "DL_URLServer.h"
+#import "CJSONDeserializer.h"
 #import "FadingAlertView.h"
+#import "InfoView.h"
 
 typedef enum eAppMode
 {
@@ -38,7 +42,8 @@ typedef enum eAppMode
 
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
-                                  TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate>
+                                  TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate,
+                                  DL_URLRequestDelegate, InfoViewDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_directoryViewController;
@@ -57,6 +62,9 @@ typedef enum eAppMode
 	CGRect                      _originalViewFrame;
 	tAppMode                    _appMode;
     NSURL                       *_uri;
+    NSTimer                     *_notificationTimer;
+    NSMutableArray              *_notifications;
+    InfoView                    *_notificationInfoView;
 }
 
 @property (nonatomic, weak) IBOutlet TabBarView *tabBar;
@@ -121,6 +129,21 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:NOTIFICATION_TX_RECEIVED object:nil];
+
+    _notifications = [[NSMutableArray alloc] init];
+    _notificationTimer = [NSTimer scheduledTimerWithTimeInterval:NOTIF_PULL_REFRESH_INTERVAL_SECONDS
+                                                          target:self
+                                                        selector:@selector(checkNotifications:)
+                                                        userInfo:nil
+                                                         repeats:YES];
+
+    // init and set API key
+    [DL_URLServer initAll];
+    NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
+    [[DL_URLServer controller] setHeaderRequestValue:token forKey: @"Authorization"];
+    [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
+
+    [_notificationTimer fire];
 }
 
 /**
@@ -155,6 +178,7 @@ typedef enum eAppMode
 {
     //remove all notifications associated with self
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -445,6 +469,39 @@ typedef enum eAppMode
 		frame.size.height -= (_originalTabBarFrame.size.height - 5.0);
 		_selectedViewController.view.frame = frame;
 	}
+}
+
+- (void)displayNextNotification
+{
+    if (!_notificationInfoView)
+    {
+        NSDictionary *notif = [_notifications firstObject];
+        if (notif)
+        {
+            [_notifications removeObject:notif];
+            NSString *notifHTML = [NSString stringWithFormat:@"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\
+            <html xmlns=\"http://www.w3.org/1999/xhtml\">\
+                <head>\
+                    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\
+                    <style type=\"text/css\">\
+                    </style>\
+                </head>\
+                <body>\
+                    <div class=\"style1\"><strong><center>%@</center></strong><BR />\
+                    <BR />\
+                    %@\
+                    </div>\
+                </body>\
+            </html>",
+                                   [notif objectForKey:@"title"],
+                                   [notif objectForKey:@"message"]];
+            _notificationInfoView = [InfoView CreateWithDelegate:self];
+            [_notificationInfoView enableScrolling:YES];
+            [_notificationInfoView setFrame:self.view.bounds];
+            [_notificationInfoView setHtmlInfoToDisplay:notifHTML];
+            [self.view addSubview:_notificationInfoView];
+        }
+    }
 }
 
 #pragma mark - TabBarView delegates
@@ -762,6 +819,20 @@ typedef enum eAppMode
 
 #pragma mark - Custom Notification Handlers
 
+- (void)checkNotifications:(NSTimer *)timer
+{
+    NSInteger prevNotifID = [LocalSettings controller].previousNotificationID;
+    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *serverQuery = [NSString stringWithFormat:@"%@/notifications/?since_id=%d&ios_build=%@",
+                             SERVER_API, prevNotifID, build];
+    [[DL_URLServer controller] issueRequestURL:serverQuery
+                                    withParams:nil
+                                    withObject:nil
+                                  withDelegate:self
+                            acceptableCacheAge:60
+                                   cacheResult:YES];
+}
+
 - (void)notifyRemotePasswordChange:(NSArray *)params
 {
     if (_passwordChangeAlert == nil && [User isLoggedIn])
@@ -863,6 +934,50 @@ typedef enum eAppMode
     // Force the tabs to redraw the selected view
     _selectedViewController = nil;
     [self launchViewControllerBasedOnAppMode];
+}
+
+#pragma mark - DLURLServer Callbacks
+
+- (void)onDL_URLRequestCompleteWithStatus: (tDL_URLRequestStatus)status resultData: (NSData *)data resultObj: (id)object
+{
+    NSString *jsonString = [[NSString alloc] initWithBytes: [data bytes] length: [data length] encoding: NSUTF8StringEncoding];
+    
+//    NSLog(@"Results download returned: %@", jsonString );
+
+    NSData *jsonData = [jsonString dataUsingEncoding: NSUTF32BigEndianStringEncoding];
+    NSError *myError;
+    NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary: jsonData error: &myError];
+
+    if ([dictFromServer objectForKey: @"results"] != (id)[NSNull null])
+    {
+        NSArray *notifsArray;
+        notifsArray = [[dictFromServer objectForKey:@"results"] copy];
+        
+        NSInteger highestNotifID = 0;
+        for(NSDictionary *dict in notifsArray)
+        {
+            NSInteger notifID = [[dict objectForKey:@"id"] intValue];
+            if (highestNotifID < notifID)
+            {
+                highestNotifID = notifID;
+            }
+            [_notifications addObject:dict];
+        }
+    
+        [LocalSettings controller].previousNotificationID = highestNotifID;
+        [LocalSettings saveAll];
+        
+        [self displayNextNotification];
+    }
+}
+
+#pragma mark infoView Delegates
+
+- (void)InfoViewFinished:(InfoView *)infoView
+{
+    [_notificationInfoView removeFromSuperview];
+    _notificationInfoView = nil;
+    [self displayNextNotification];
 }
 
 @end
