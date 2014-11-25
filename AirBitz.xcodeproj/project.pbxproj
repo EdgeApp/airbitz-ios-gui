@@ -172,6 +172,8 @@
 		7D8270C319F89C8B003F275D /* btn_forgot_password_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D8270C019F89C8B003F275D /* btn_forgot_password_arrow.png */; };
 		7D8270C419F89C8B003F275D /* btn_forgot_password_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D8270C119F89C8B003F275D /* btn_forgot_password_arrow@2x.png */; };
 		7D8270C519F89C8B003F275D /* btn_forgot_password_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D8270C119F89C8B003F275D /* btn_forgot_password_arrow@2x.png */; };
+		7D89E8C51A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8C41A2436480067F660 /* UIPhotoGalleryViewController+Slider.m */; };
+		7D89E8C61A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8C41A2436480067F660 /* UIPhotoGalleryViewController+Slider.m */; };
 		7D989FFA1A0206960094512B /* bd_icon_facebook@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D989FF21A0206960094512B /* bd_icon_facebook@2x~iphone.png */; };
 		7D989FFB1A0206960094512B /* bd_icon_facebook@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D989FF21A0206960094512B /* bd_icon_facebook@2x~iphone.png */; };
 		7D989FFC1A0206960094512B /* bd_icon_facebook~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D989FF31A0206960094512B /* bd_icon_facebook~iphone.png */; };
@@ -1310,6 +1312,8 @@
 		7D8270BD19F89A9A003F275D /* btn_forgot_password_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_forgot_password_arrow.png; sourceTree = "<group>"; };
 		7D8270C019F89C8B003F275D /* btn_forgot_password_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_forgot_password_arrow.png; sourceTree = "<group>"; };
 		7D8270C119F89C8B003F275D /* btn_forgot_password_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_forgot_password_arrow@2x.png"; sourceTree = "<group>"; };
+		7D89E8C31A2436480067F660 /* UIPhotoGalleryViewController+Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIPhotoGalleryViewController+Slider.h"; path = "AirBitz/Business Directory/Business Details/UIPhotoGalleryViewController+Slider.h"; sourceTree = SOURCE_ROOT; };
+		7D89E8C41A2436480067F660 /* UIPhotoGalleryViewController+Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIPhotoGalleryViewController+Slider.m"; path = "AirBitz/Business Directory/Business Details/UIPhotoGalleryViewController+Slider.m"; sourceTree = SOURCE_ROOT; };
 		7D989FF21A0206960094512B /* bd_icon_facebook@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_icon_facebook@2x~iphone.png"; sourceTree = "<group>"; };
 		7D989FF31A0206960094512B /* bd_icon_facebook~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_icon_facebook~iphone.png"; sourceTree = "<group>"; };
 		7D989FF41A0206960094512B /* bd_icon_foursquare@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_icon_foursquare@2x~iphone.png"; sourceTree = "<group>"; };
@@ -2124,6 +2128,8 @@
 				7DFD22E01A1E716C008C43FB /* UIPhotoGalleryViewController.m */,
 				7DFD22E11A1E716C008C43FB /* UIPhotoItemView.h */,
 				7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */,
+				7D89E8C31A2436480067F660 /* UIPhotoGalleryViewController+Slider.h */,
+				7D89E8C41A2436480067F660 /* UIPhotoGalleryViewController+Slider.m */,
 				7DFD230C1A1FF98A008C43FB /* UIPhotoGallerySliderView.h */,
 				7DFD230D1A1FF98A008C43FB /* UIPhotoGallerySliderView.m */,
 				7DFD230E1A1FF98A008C43FB /* UIPhotoGallerySliderView.xib */,
@@ -4096,6 +4102,7 @@
 				7D98ACDB19A7C550003D2BF6 /* LocalSettings.m in Sources */,
 				7DFD22E41A1E716C008C43FB /* UIPhotoGalleryView.m in Sources */,
 				7D98ACDC19A7C550003D2BF6 /* NSDate+Helper.m in Sources */,
+				7D89E8C61A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				7D98ACDD19A7C550003D2BF6 /* PopupPickerView.m in Sources */,
 				7D98ACDE19A7C550003D2BF6 /* PayeeCell.m in Sources */,
 				7D98ACDF19A7C550003D2BF6 /* topOverviewCell.m in Sources */,
@@ -4214,6 +4221,7 @@
 				7D7FB25D1A0847B300E4BB44 /* PINReLoginViewController.m in Sources */,
 				B516C1E818C54B07008CC6A1 /* NSDate+Helper.m in Sources */,
 				4C3C3093191834AC006923DE /* PopupPickerView.m in Sources */,
+				7D89E8C51A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				4C7247D41937A7520091C286 /* PayeeCell.m in Sources */,
 				B5C0A9A018EA0C10008F302C /* topOverviewCell.m in Sources */,
 				B5137C3818A435BD00DA4A34 /* NSDictionary_JSONExtensions.m in Sources */,

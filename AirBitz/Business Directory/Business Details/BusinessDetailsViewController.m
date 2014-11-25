@@ -24,6 +24,7 @@
 #import "UIPhotoGalleryView.h"
 #import "UIPhotoGalleryViewController.h"
 #import "UIPhotoGallerySliderView.h"
+#import "UIPhotoGalleryViewController+Slider.h"
 
 #import "CJSONDeserializer.h"
 
@@ -1005,21 +1006,12 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	 }];
 }
 
-//- (UIView*)customBottomViewForGalleryViewController:(UIPhotoGalleryViewController *)galleryViewController {
-////    CGRect bottomFrame = CGRectMake(0, self.view.frame.size.height - GALLERY_FOOTER_HEIGHT,
-////                                    self.view.frame.size.width, GALLERY_FOOTER_HEIGHT);
-////    UIView *bottomView = [[UIView alloc] initWithFrame:bottomFrame];
-////    bottomView.backgroundColor = [UIColor magentaColor];//[UIColor clearColor];
-////
-////    CGRect sliderFrame = CGRectMake(MINIMUM_BUTTON_SIZE, 0,
-////                                    self.view.frame.size.width - MINIMUM_BUTTON_SIZE*2, GALLERY_FOOTER_HEIGHT);
-////    UISlider *slider = [[UISlider alloc] initWithFrame:sliderFrame];
-////    [bottomView addSubview:slider];
-//    UIPhotoGallerySliderView *bottomView = [[[NSBundle mainBundle] loadNibNamed:@"UIPhotoGallerySliderView"
-//                                                                         owner:galleryViewController
-//                                                                       options:nil] objectAtIndex:0];
-//    return bottomView;
-//}
+- (UIView*)customBottomViewForGalleryViewController:(UIPhotoGalleryViewController *)galleryViewController {
+    UIPhotoGallerySliderView *bottomView = [UIPhotoGallerySliderView CreateWithPhotoCount:[details count]
+                                                                          andCurrentIndex:[galleryViewController initialIndex]+1];
+    bottomView.delegate = galleryViewController;
+    return bottomView;
+}
 
 #pragma mark UIPhotoGalleryDelegate methods
 - (void)photoGallery:(UIPhotoGalleryView *)photoGallery didTapAtIndex:(NSInteger)index {
@@ -1027,10 +1019,10 @@ typedef NS_ENUM(NSUInteger, CellType) {
     {
         if (!galleryController) {
             galleryController = [[UIPhotoGalleryViewController alloc] init];
-            galleryController.dataSource = self;
+            galleryController.initialIndex = index;
             galleryController.showStatusBar = YES;
             galleryController.galleryMode = UIPhotoGalleryModeImageRemote;
-            galleryController.initialIndex = index;
+            galleryController.dataSource = self;
         }
         
         CGRect frame = self.view.bounds;

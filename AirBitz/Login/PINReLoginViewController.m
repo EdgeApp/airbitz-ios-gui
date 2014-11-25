@@ -2,7 +2,7 @@
 //  PINReLoginViewController.m
 //  AirBitz
 //
-//  Created by Allan on 11/3/14.
+//  Created by Allan Wright on 11/3/14.
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
