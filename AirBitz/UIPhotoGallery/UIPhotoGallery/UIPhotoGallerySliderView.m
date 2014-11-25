@@ -23,8 +23,8 @@
                                                 owner:nil
                                               options:nil]
                   objectAtIndex:0];
-    sliderView.slider.minimumValue = 1;
-    sliderView.slider.maximumValue = MAX(1, count);
+    sliderView.slider.minimumValue = 0;
+    sliderView.slider.maximumValue = count-1;
     sliderView.slider.value = index;
     [sliderView updateSliderBubble:sliderView.slider];
 	return sliderView;
@@ -33,8 +33,8 @@
 - (void)updateSliderBubble:(UISlider *)slider
 {
     self.pageCountLabel.text = [NSString stringWithFormat:@"%.0f/%.0f",
-                                      self.slider.value,
-                                      self.slider.maximumValue];
+                                      self.slider.value+1,
+                                      self.slider.maximumValue+1];
 
     // attach count view to the slider thumb
     CGRect trackRect = [self.slider trackRectForBounds:self.slider.bounds];
@@ -52,7 +52,7 @@
     [self updateSliderBubble:sender];
     if (_delegate)
     {
-        [_delegate sliderValueChangedToIndex:(NSUInteger)sender.value-1];
+        [_delegate sliderValueChangedToIndex:(NSUInteger)sender.value];
     }
 }
 

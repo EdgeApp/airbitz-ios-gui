@@ -1010,7 +1010,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 - (UIView*)customBottomViewForGalleryViewController:(UIPhotoGalleryViewController *)galleryViewController {
     UIPhotoGallerySliderView *bottomView = [UIPhotoGallerySliderView CreateWithPhotoCount:[details count]
-                                                                          andCurrentIndex:[galleryViewController initialIndex]+1];
+                                                                          andCurrentIndex:[galleryViewController initialIndex]];
     bottomView.delegate = galleryViewController;
     return bottomView;
 }
