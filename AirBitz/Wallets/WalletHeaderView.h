@@ -19,6 +19,7 @@
 
 @property(nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *btn_expandCollapse;
+@property (nonatomic, weak) IBOutlet UIButton *btn_addWallet;
 @property (nonatomic, assign) id<WalletHeaderViewDelegate>   delegate;
 +(WalletHeaderView *)CreateWithTitle:(NSString *)title collapse:(BOOL)bCollapsed;
 
@@ -29,6 +30,7 @@
 
 @required
 - (void)walletHeaderView:(WalletHeaderView *)walletHeaderView Expanded:(BOOL)expanded;
+- (void)addWallet;
 
 @optional
 

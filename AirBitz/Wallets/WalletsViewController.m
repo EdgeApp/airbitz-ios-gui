@@ -88,10 +88,12 @@
     self.activeWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"WALLETS", @"title of active wallets table")
                                                             collapse:NO];
 	self.activeWalletsHeaderView.btn_expandCollapse.hidden = YES;
+    self.activeWalletsHeaderView.delegate = self;
 	
     _archiveCollapsed = [[NSUserDefaults standardUserDefaults] boolForKey:ARCHIVE_COLLAPSED];
     self.archivedWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"ARCHIVE", @"title of archived wallets table")
                                                               collapse:_archiveCollapsed];
+	self.archivedWalletsHeaderView.btn_addWallet.hidden = YES;
 	self.archivedWalletsHeaderView.delegate = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -355,30 +357,6 @@
 
 #pragma mark - Action Methods
 
-- (IBAction)addWallet
-{
-	if (_walletMakerVisible == NO)
-	{
-        [self.walletMakerView reset];
-		_walletMakerVisible = YES;
-		self.walletMakerView.hidden = NO;
-		[[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
-		[self createBlockingButtonUnderView:self.walletMakerView];
-        [self.walletMakerView.textField becomeFirstResponder];
-		[UIView animateWithDuration:0.35
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseOut
-						 animations:^
-		 {
-			 self.walletMakerView.frame = _originalWalletMakerFrame;
-		 }
-                         completion:^(BOOL finished)
-		 {
-
-		 }];
-	}
-}
-
 - (IBAction)info
 {
     [InfoView CreateWithHTML:@"infoWallets" forView:self.view];
@@ -429,6 +407,30 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [[NSUserDefaults standardUserDefaults] setBool:_archiveCollapsed forKey:ARCHIVE_COLLAPSED];
     [userDefaults synchronize];
+}
+
+- (void)addWallet
+{
+	if (_walletMakerVisible == NO)
+	{
+        [self.walletMakerView reset];
+		_walletMakerVisible = YES;
+		self.walletMakerView.hidden = NO;
+		[[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
+		[self createBlockingButtonUnderView:self.walletMakerView];
+        [self.walletMakerView.textField becomeFirstResponder];
+		[UIView animateWithDuration:0.35
+							  delay:0.0
+							options:UIViewAnimationOptionCurveEaseOut
+						 animations:^
+		 {
+			 self.walletMakerView.frame = _originalWalletMakerFrame;
+		 }
+                         completion:^(BOOL finished)
+		 {
+             
+		 }];
+	}
 }
 
 #pragma mark - Segue

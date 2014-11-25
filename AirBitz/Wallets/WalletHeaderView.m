@@ -84,4 +84,9 @@
     }
 }
 
+- (IBAction)addWallet
+{
+    [self.delegate addWallet];
+}
+
 @end
