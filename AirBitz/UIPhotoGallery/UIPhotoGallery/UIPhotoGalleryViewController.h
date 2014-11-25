@@ -18,6 +18,7 @@
 @property (nonatomic, assign) UIPhotoGalleryMode galleryMode;
 @property (nonatomic, assign) UIPhotoCaptionStyle captionStyle;
 @property (nonatomic, assign) BOOL circleScroll;
+@property (nonatomic, assign) BOOL scrollIndicator;
 @property (nonatomic, assign) BOOL showStatusBar;
 @property (nonatomic, assign) BOOL peakSubView;
 @property (nonatomic, assign) BOOL verticalGallery;

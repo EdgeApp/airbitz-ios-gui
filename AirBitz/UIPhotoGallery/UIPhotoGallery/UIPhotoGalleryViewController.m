@@ -104,6 +104,11 @@
     vPhotoGallery.circleScroll = _circleScroll;
 }
 
+- (void)setScrollIndicator:(BOOL)scrollIndicator {
+    _scrollIndicator = scrollIndicator;
+    vPhotoGallery.showsScrollIndicator = _scrollIndicator;
+}
+
 - (void)setPeakSubView:(BOOL)peakSubView {
     _peakSubView = peakSubView;
     vPhotoGallery.peakSubView = _peakSubView;
