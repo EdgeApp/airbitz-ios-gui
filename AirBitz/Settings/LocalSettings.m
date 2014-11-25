@@ -12,6 +12,7 @@
 #define KEY_LOCAL_SETTINGS_MERCHANT_MODE    	@"merchantMode"
 #define KEY_LOCAL_SETTINGS_CACHED_USERNAME      @"cachedUsername"
 #define KEY_LOCAL_SETTINGS_PREV_NOTIF_ID        @"previousNotificationID"
+#define KEY_LOCAL_SETTINGS_CLIENT_ID            @"clientID"
 
 static BOOL bInitialized = NO;
 
@@ -30,6 +31,10 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
         
 		// load the settings
 		[LocalSettings loadAll];
+        if (!singleton.clientID) {
+            singleton.clientID = [[NSUUID UUID] UUIDString];
+            [LocalSettings saveAll];
+        }
 
 		bInitialized = YES;
 	}
@@ -57,6 +62,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     singleton.bMerchantMode = [defaults boolForKey:KEY_LOCAL_SETTINGS_MERCHANT_MODE];
     singleton.cachedUsername = [defaults stringForKey:KEY_LOCAL_SETTINGS_CACHED_USERNAME];
     singleton.previousNotificationID = [defaults integerForKey:KEY_LOCAL_SETTINGS_PREV_NOTIF_ID];
+    singleton.clientID = [defaults stringForKey:KEY_LOCAL_SETTINGS_CLIENT_ID];
 }
 
 // saves all the settings to persistant memory
@@ -68,6 +74,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     [defaults setBool:[singleton bMerchantMode] forKey:KEY_LOCAL_SETTINGS_MERCHANT_MODE];
     [defaults setValue:[singleton cachedUsername] forKey:KEY_LOCAL_SETTINGS_CACHED_USERNAME];
     [defaults setInteger:[singleton previousNotificationID] forKey:KEY_LOCAL_SETTINGS_PREV_NOTIF_ID];
+    [defaults setValue:[singleton clientID] forKey:KEY_LOCAL_SETTINGS_CLIENT_ID];
 
 	// flush the buffer
 	[defaults synchronize];

@@ -141,6 +141,7 @@ typedef enum eAppMode
     [DL_URLServer initAll];
     NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
     [[DL_URLServer controller] setHeaderRequestValue:token forKey: @"Authorization"];
+    [[DL_URLServer controller] setHeaderRequestValue:[LocalSettings controller].clientID forKey:@"X-Client-ID"];
     [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
 
     [_notificationTimer fire];

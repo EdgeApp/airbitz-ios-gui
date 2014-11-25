@@ -27,6 +27,7 @@
 #import "InfoView.h"
 #import "CommonTypes.h"
 #import "Config.h"
+#import "LocalSettings.h"
 
 //server defines (uncomment one)
 #define SERVER_MESSAGES_TO_SHOW		VERBOSE_MESSAGES_OFF
