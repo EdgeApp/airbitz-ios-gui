@@ -206,7 +206,7 @@ NSDate *logoutDate = NULL;
 
 - (void)checkNotifications
 {
-    NSDictionary *notif = [NotificationChecker firstNotification];
+    NSDictionary *notif = [NotificationChecker firstNotification:NO];
     if (notif)
     {
         UILocalNotification *localNotif = [[UILocalNotification alloc] init];

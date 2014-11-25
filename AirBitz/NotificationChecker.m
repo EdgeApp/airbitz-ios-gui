@@ -46,17 +46,17 @@ static NotificationChecker *singleton = nil;
     }
 }
 
-+ (NSDictionary *)firstNotification
++ (NSDictionary *)firstNotification:(BOOL)viewed
 {
-    return [singleton getNextNotification];
+    return [singleton getNextNotification:viewed];
 }
 
 #pragma mark Private Methods
 
-- (NSDictionary *)getNextNotification
+- (NSDictionary *)getNextNotification:(BOOL)viewed
 {
     NSDictionary *notif = [_notifications firstObject];
-    if (notif)
+    if (notif && viewed)
     {
         [_notifications removeObject:notif];
     }
@@ -81,8 +81,8 @@ static NotificationChecker *singleton = nil;
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     build = [build stringByReplacingOccurrencesOfString:@"." withString:@""];
     build = [build stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    NSString *serverQuery = [NSString stringWithFormat:@"%@/notifications/?since_id=%d&ios_build=%@",
-                             SERVER_API, prevNotifID, build];
+    NSString *serverQuery = [NSString stringWithFormat:@"%@/notifications/?since_id=%ld&ios_build=%@",
+                             SERVER_API, (long)prevNotifID, build];
     [[DL_URLServer controller] issueRequestURL:serverQuery
                                     withParams:nil
                                     withObject:nil
