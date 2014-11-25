@@ -121,7 +121,10 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 -(void)didSwipe:(UIGestureRecognizer *)gestureRecognizer
 {
-	[self Back:nil];
+    if (!galleryController)
+    {
+        [self Back:nil];
+    }
 }
 
 -(void)dealloc
@@ -405,7 +408,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 				NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
 				
 				details = [dict objectForKey:@"results"];
-//                self.galleryView.initialIndex = [self primaryImage:details];
                 self.galleryView.galleryMode = UIPhotoGalleryModeImageRemote;
                 self.galleryView.photoItemContentMode = UIViewContentModeScaleAspectFill;
                 [self.galleryView layoutSubviews];
