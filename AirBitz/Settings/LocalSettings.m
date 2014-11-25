@@ -12,6 +12,7 @@
 #define KEY_LOCAL_SETTINGS_MERCHANT_MODE    	@"merchantMode"
 #define KEY_LOCAL_SETTINGS_CACHED_USERNAME      @"cachedUsername"
 #define KEY_LOCAL_SETTINGS_PREV_NOTIF_ID        @"previousNotificationID"
+#define KEY_LOCAL_SETTINGS_NOTIFICATION_DATA    @"notificationData"
 #define KEY_LOCAL_SETTINGS_CLIENT_ID            @"clientID"
 
 static BOOL bInitialized = NO;
@@ -62,6 +63,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     singleton.bMerchantMode = [defaults boolForKey:KEY_LOCAL_SETTINGS_MERCHANT_MODE];
     singleton.cachedUsername = [defaults stringForKey:KEY_LOCAL_SETTINGS_CACHED_USERNAME];
     singleton.previousNotificationID = [defaults integerForKey:KEY_LOCAL_SETTINGS_PREV_NOTIF_ID];
+    singleton.notifications = [defaults mutableArrayValueForKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
     singleton.clientID = [defaults stringForKey:KEY_LOCAL_SETTINGS_CLIENT_ID];
 }
 
@@ -74,6 +76,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     [defaults setBool:[singleton bMerchantMode] forKey:KEY_LOCAL_SETTINGS_MERCHANT_MODE];
     [defaults setValue:[singleton cachedUsername] forKey:KEY_LOCAL_SETTINGS_CACHED_USERNAME];
     [defaults setInteger:[singleton previousNotificationID] forKey:KEY_LOCAL_SETTINGS_PREV_NOTIF_ID];
+    [defaults setObject:singleton.notifications forKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
     [defaults setValue:[singleton clientID] forKey:KEY_LOCAL_SETTINGS_CLIENT_ID];
 
 	// flush the buffer
@@ -98,6 +101,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
         self.bDisableBLE = NO;
         self.bMerchantMode = NO;
         self.cachedUsername = nil;
+        self.notifications = nil;
         self.previousNotificationID = 0;
     }
     return self;

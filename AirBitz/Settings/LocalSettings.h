@@ -13,11 +13,12 @@
 
 @interface LocalSettings : NSObject
 
-@property (nonatomic, assign)   BOOL        bDisableBLE;
-@property (nonatomic, assign)   BOOL        bMerchantMode;
-@property (nonatomic, retain)   NSString    *cachedUsername;
-@property (nonatomic, assign)   NSInteger   previousNotificationID;
-@property (nonatomic, retain)   NSString    *clientID;
+@property (nonatomic, assign)   BOOL            bDisableBLE;
+@property (nonatomic, assign)   BOOL            bMerchantMode;
+@property (nonatomic, retain)   NSString        *cachedUsername;
+@property (nonatomic, assign)   NSInteger       previousNotificationID;
+@property (nonatomic, retain)   NSMutableArray  *notifications;
+@property (nonatomic, retain)   NSString        *clientID;
 
 + (void)initAll;
 + (void)freeAll;

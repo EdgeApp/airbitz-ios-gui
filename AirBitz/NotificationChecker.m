@@ -19,7 +19,6 @@ static NotificationChecker *singleton = nil;
 @interface NotificationChecker () <DL_URLRequestDelegate>
 {
     NSTimer *_notificationTimer;
-    NSMutableArray *_notifications;
 }
 @end
 
@@ -55,17 +54,21 @@ static NotificationChecker *singleton = nil;
 
 - (NSDictionary *)getNextNotification:(BOOL)viewed
 {
-    NSDictionary *notif = [_notifications firstObject];
+    NSDictionary *notif = [[LocalSettings controller].notifications firstObject];
     if (notif && viewed)
     {
-        [_notifications removeObject:notif];
+        [[LocalSettings controller].notifications removeObject:notif];
+        [LocalSettings saveAll];
     }
     return notif;
 }
 
 - (void)start
 {
-    _notifications = [[NSMutableArray alloc] init];
+    if (nil == [LocalSettings controller].notifications)
+    {
+        [LocalSettings controller].notifications = [[NSMutableArray alloc] init];
+    }
     _notificationTimer = [NSTimer scheduledTimerWithTimeInterval:NOTIF_PULL_REFRESH_INTERVAL_SECONDS
                                                           target:self
                                                         selector:@selector(checkNotifications:)
@@ -116,7 +119,7 @@ static NotificationChecker *singleton = nil;
             {
                 highestNotifID = notifID;
             }
-            [_notifications addObject:dict];
+            [[LocalSettings controller].notifications addObject:dict];
         }
         
         [LocalSettings controller].previousNotificationID = highestNotifID;
