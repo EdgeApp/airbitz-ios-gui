@@ -15,6 +15,7 @@
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 #define IS_IPHONE4                                  (([[UIScreen mainScreen] bounds].size.height < 568) ? YES : NO)
 
+#define BACKGROUND_NOTIF_PULL_REFRESH_INTERVAL_MINUTES 5
 #define NOTIF_PULL_REFRESH_INTERVAL_SECONDS 60
 #define SERVER_MESSAGES_TO_SHOW VERBOSE_MESSAGES_OFF
 
@@ -91,6 +92,7 @@ typedef enum eTabBarButton
 #define NOTIFICATION_LAUNCH_RECOVERY_QUESTIONS          @"Notification_Launch_Recovery_Questions"
 #define NOTIFICATION_TAB_BAR_BUTTON_RESELECT            @"Notification_Tab_Bar_Button_Reselected"
 #define NOTIFICATION_TX_RECEIVED                        @"Transaction_Received"
+#define NOTIFICATION_NOTIFICATION_RECEIVED              @"Notification_Received"
 
 #define KEY_ERROR_CODE                                  @"Error_Code"
 #define KEY_TX_DETAILS_EXITED_TX                        @"transaction"

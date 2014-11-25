@@ -6,7 +6,6 @@
 #import "ABC.h"
 #import "User.h"
 #import "Util.h"
-#import "CommonTypes.h"
 #import "LocalSettings.h"
 
 #import "CoreBridge.h"

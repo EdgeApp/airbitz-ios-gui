@@ -174,6 +174,10 @@
 		7D8270C519F89C8B003F275D /* btn_forgot_password_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D8270C119F89C8B003F275D /* btn_forgot_password_arrow@2x.png */; };
 		7D89E8C51A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8C41A2436480067F660 /* UIPhotoGalleryViewController+Slider.m */; };
 		7D89E8C61A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8C41A2436480067F660 /* UIPhotoGalleryViewController+Slider.m */; };
+		7D89E8CE1A245FC20067F660 /* NotificationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8CD1A245FC20067F660 /* NotificationChecker.m */; };
+		7D89E8CF1A245FC20067F660 /* NotificationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8CD1A245FC20067F660 /* NotificationChecker.m */; };
+		7D89E8DA1A2465FB0067F660 /* NSString+StripHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8D91A2465FB0067F660 /* NSString+StripHTML.m */; };
+		7D89E8DB1A2465FB0067F660 /* NSString+StripHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8D91A2465FB0067F660 /* NSString+StripHTML.m */; };
 		7D989FFA1A0206960094512B /* bd_icon_facebook@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D989FF21A0206960094512B /* bd_icon_facebook@2x~iphone.png */; };
 		7D989FFB1A0206960094512B /* bd_icon_facebook@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D989FF21A0206960094512B /* bd_icon_facebook@2x~iphone.png */; };
 		7D989FFC1A0206960094512B /* bd_icon_facebook~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D989FF31A0206960094512B /* bd_icon_facebook~iphone.png */; };
@@ -1314,6 +1318,10 @@
 		7D8270C119F89C8B003F275D /* btn_forgot_password_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_forgot_password_arrow@2x.png"; sourceTree = "<group>"; };
 		7D89E8C31A2436480067F660 /* UIPhotoGalleryViewController+Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIPhotoGalleryViewController+Slider.h"; path = "AirBitz/Business Directory/Business Details/UIPhotoGalleryViewController+Slider.h"; sourceTree = SOURCE_ROOT; };
 		7D89E8C41A2436480067F660 /* UIPhotoGalleryViewController+Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIPhotoGalleryViewController+Slider.m"; path = "AirBitz/Business Directory/Business Details/UIPhotoGalleryViewController+Slider.m"; sourceTree = SOURCE_ROOT; };
+		7D89E8CC1A245FC20067F660 /* NotificationChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationChecker.h; sourceTree = "<group>"; };
+		7D89E8CD1A245FC20067F660 /* NotificationChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationChecker.m; sourceTree = "<group>"; };
+		7D89E8D81A2465FB0067F660 /* NSString+StripHTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StripHTML.h"; sourceTree = "<group>"; };
+		7D89E8D91A2465FB0067F660 /* NSString+StripHTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StripHTML.m"; sourceTree = "<group>"; };
 		7D989FF21A0206960094512B /* bd_icon_facebook@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_icon_facebook@2x~iphone.png"; sourceTree = "<group>"; };
 		7D989FF31A0206960094512B /* bd_icon_facebook~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_icon_facebook~iphone.png"; sourceTree = "<group>"; };
 		7D989FF41A0206960094512B /* bd_icon_foursquare@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_icon_foursquare@2x~iphone.png"; sourceTree = "<group>"; };
@@ -2373,9 +2381,13 @@
 				B57C207918C14687005D7245 /* MainViewController.m */,
 				B55D0FE618E233A80035DCC8 /* MinCharTextField.h */,
 				B55D0FE718E233A80035DCC8 /* MinCharTextField.m */,
+				7D89E8CC1A245FC20067F660 /* NotificationChecker.h */,
+				7D89E8CD1A245FC20067F660 /* NotificationChecker.m */,
 				B57C20AF18C5021A005D7245 /* Notifications.h */,
 				B516C1E618C54B06008CC6A1 /* NSDate+Helper.h */,
 				B516C1E718C54B06008CC6A1 /* NSDate+Helper.m */,
+				7D89E8D81A2465FB0067F660 /* NSString+StripHTML.h */,
+				7D89E8D91A2465FB0067F660 /* NSString+StripHTML.m */,
 				4C3C30A2191C1C90006923DE /* PickerTextView */,
 				4C3C308B1918347F006923DE /* PopupPickerView */,
 				B5C0A9A718EA0D09008F302C /* Request */,
@@ -4071,6 +4083,7 @@
 				7D98ACC119A7C550003D2BF6 /* ConfirmationSliderView.m in Sources */,
 				7D98ACC219A7C550003D2BF6 /* DarkenView.m in Sources */,
 				7DB1354919FF10E5007D23CE /* BD_Share_Cell.m in Sources */,
+				7D89E8DB1A2465FB0067F660 /* NSString+StripHTML.m in Sources */,
 				7D98ACC319A7C550003D2BF6 /* StylizedTextField.m in Sources */,
 				7D98ACC419A7C550003D2BF6 /* Transaction.m in Sources */,
 				7DFD22E81A1E716C008C43FB /* UIPhotoItemView.m in Sources */,
@@ -4102,6 +4115,7 @@
 				7D98ACDB19A7C550003D2BF6 /* LocalSettings.m in Sources */,
 				7DFD22E41A1E716C008C43FB /* UIPhotoGalleryView.m in Sources */,
 				7D98ACDC19A7C550003D2BF6 /* NSDate+Helper.m in Sources */,
+				7D89E8CF1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C61A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				7D98ACDD19A7C550003D2BF6 /* PopupPickerView.m in Sources */,
 				7D98ACDE19A7C550003D2BF6 /* PayeeCell.m in Sources */,
@@ -4190,6 +4204,7 @@
 				B56553DA18ECAEF7005B35E1 /* ConfirmationSliderView.m in Sources */,
 				B561E1AB18D2573F002DCDC2 /* DarkenView.m in Sources */,
 				7D7783F21A07875E0043806B /* APPINView.m in Sources */,
+				7D89E8DA1A2465FB0067F660 /* NSString+StripHTML.m in Sources */,
 				7DB1354819FF10E5007D23CE /* BD_Share_Cell.m in Sources */,
 				B5FD393418F06FD800BE2670 /* StylizedTextField.m in Sources */,
 				4C08A6E918C53BDA0071B87C /* Transaction.m in Sources */,
@@ -4221,6 +4236,7 @@
 				7D7FB25D1A0847B300E4BB44 /* PINReLoginViewController.m in Sources */,
 				B516C1E818C54B07008CC6A1 /* NSDate+Helper.m in Sources */,
 				4C3C3093191834AC006923DE /* PopupPickerView.m in Sources */,
+				7D89E8CE1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C51A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				4C7247D41937A7520091C286 /* PayeeCell.m in Sources */,
 				B5C0A9A018EA0C10008F302C /* topOverviewCell.m in Sources */,

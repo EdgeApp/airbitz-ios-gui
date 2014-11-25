@@ -16,6 +16,8 @@
 #import "Config.h"
 #import <HockeySDK/HockeySDK.h>
 #import <SDWebImage/SDImageCache.h>
+#import "NotificationChecker.h"
+#import "NSString+StripHTML.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 NSTimer *logoutTimer = NULL;
@@ -71,7 +73,8 @@ NSDate *logoutDate = NULL;
 {
     if (![self isAppActive])
     {
-        [self autoLogout];
+        [self checkLoginExpired];
+        [self checkNotifications];
     }
     completionHandler(UIBackgroundFetchResultNoData);
 }
@@ -81,22 +84,22 @@ NSDate *logoutDate = NULL;
     if ([User isLoggedIn])
     {
         logoutDate = [NSDate date];
-
-        // multiply to get the time in seconds
-        [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
     }
+
+    [application setMinimumBackgroundFetchInterval:BACKGROUND_NOTIF_PULL_REFRESH_INTERVAL_MINUTES * 60];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [LocalSettings saveAll];
 
+    bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
+        [self bgCleanup];
+    }];
+
     if ([User isLoggedIn])
     {
         [CoreBridge stopQueues];
-        bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
-            [self bgCleanup];
-        }];
         // start a logout timer
         // multiply to get the time in seconds
         logoutTimer = [NSTimer scheduledTimerWithTimeInterval:[User Singleton].minutesAutoLogout * 60
@@ -125,10 +128,6 @@ NSDate *logoutDate = NULL;
                 if (![self isAppActive])
                 {
                     [CoreBridge disconnectWatchers];
-                }
-                if (![logoutTimer isValid])
-                {
-                    [self bgCleanup];
                 }
             });
         }
@@ -203,6 +202,27 @@ NSDate *logoutDate = NULL;
 - (BOOL)isAppActive
 {
     return [UIApplication sharedApplication].applicationState == UIApplicationStateActive;
+}
+
+- (void)checkNotifications
+{
+    NSDictionary *notif = [NotificationChecker firstNotification];
+    if (notif)
+    {
+        UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+
+        NSString *title = [notif objectForKey:@"title"];
+        NSString *strippedTitle = [title stringByStrippingHTML];
+        [localNotif setAlertAction:strippedTitle];
+
+        NSString *message = [notif objectForKey:@"message"];
+        NSString *strippedMessage = [message stringByStrippingHTML];
+        [localNotif setAlertBody:strippedMessage];
+
+        // fire the notification now
+        [localNotif setFireDate:[NSDate date]];
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+    }
 }
 
 @end

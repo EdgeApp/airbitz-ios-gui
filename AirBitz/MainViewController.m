@@ -25,11 +25,10 @@
 #import "CoreBridge.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
-#import "Server.h"
-#import "DL_URLServer.h"
-#import "CJSONDeserializer.h"
 #import "FadingAlertView.h"
 #import "InfoView.h"
+#import "DL_URLServer.h"
+#import "NotificationChecker.h"
 
 typedef enum eAppMode
 {
@@ -43,7 +42,7 @@ typedef enum eAppMode
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate,
-                                  DL_URLRequestDelegate, InfoViewDelegate>
+                                  InfoViewDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_directoryViewController;
@@ -62,8 +61,6 @@ typedef enum eAppMode
 	CGRect                      _originalViewFrame;
 	tAppMode                    _appMode;
     NSURL                       *_uri;
-    NSTimer                     *_notificationTimer;
-    NSMutableArray              *_notifications;
     InfoView                    *_notificationInfoView;
 }
 
@@ -129,13 +126,7 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:NOTIFICATION_TX_RECEIVED object:nil];
-
-    _notifications = [[NSMutableArray alloc] init];
-    _notificationTimer = [NSTimer scheduledTimerWithTimeInterval:NOTIF_PULL_REFRESH_INTERVAL_SECONDS
-                                                          target:self
-                                                        selector:@selector(checkNotifications:)
-                                                        userInfo:nil
-                                                         repeats:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
 
     // init and set API key
     [DL_URLServer initAll];
@@ -143,8 +134,8 @@ typedef enum eAppMode
     [[DL_URLServer controller] setHeaderRequestValue:token forKey: @"Authorization"];
     [[DL_URLServer controller] setHeaderRequestValue:[LocalSettings controller].clientID forKey:@"X-Client-ID"];
     [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
-
-    [_notificationTimer fire];
+    
+    [NotificationChecker initAll];
 }
 
 /**
@@ -179,7 +170,6 @@ typedef enum eAppMode
 {
     //remove all notifications associated with self
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -476,10 +466,9 @@ typedef enum eAppMode
 {
     if (!_notificationInfoView)
     {
-        NSDictionary *notif = [_notifications firstObject];
+        NSDictionary *notif = [NotificationChecker firstNotification];
         if (notif)
         {
-            [_notifications removeObject:notif];
             NSString *notifHTML = [NSString stringWithFormat:@"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\
             <html xmlns=\"http://www.w3.org/1999/xhtml\">\
                 <head>\
@@ -820,21 +809,6 @@ typedef enum eAppMode
 
 #pragma mark - Custom Notification Handlers
 
-- (void)checkNotifications:(NSTimer *)timer
-{
-    NSInteger prevNotifID = [LocalSettings controller].previousNotificationID;
-    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSString *buildNum = [build stringByReplacingOccurrencesOfString:@"." withString:@""];
-    NSString *serverQuery = [NSString stringWithFormat:@"%@/notifications/?since_id=%d&ios_build=%@",
-                             SERVER_API, prevNotifID, buildNum];
-    [[DL_URLServer controller] issueRequestURL:serverQuery
-                                    withParams:nil
-                                    withObject:nil
-                                  withDelegate:self
-                            acceptableCacheAge:60
-                                   cacheResult:YES];
-}
-
 - (void)notifyRemotePasswordChange:(NSArray *)params
 {
     if (_passwordChangeAlert == nil && [User isLoggedIn])
@@ -936,41 +910,6 @@ typedef enum eAppMode
     // Force the tabs to redraw the selected view
     _selectedViewController = nil;
     [self launchViewControllerBasedOnAppMode];
-}
-
-#pragma mark - DLURLServer Callbacks
-
-- (void)onDL_URLRequestCompleteWithStatus: (tDL_URLRequestStatus)status resultData: (NSData *)data resultObj: (id)object
-{
-    NSString *jsonString = [[NSString alloc] initWithBytes: [data bytes] length: [data length] encoding: NSUTF8StringEncoding];
-    
-//    NSLog(@"Results download returned: %@", jsonString );
-
-    NSData *jsonData = [jsonString dataUsingEncoding: NSUTF32BigEndianStringEncoding];
-    NSError *myError;
-    NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary: jsonData error: &myError];
-
-    if ([dictFromServer objectForKey: @"results"] != (id)[NSNull null])
-    {
-        NSArray *notifsArray;
-        notifsArray = [[dictFromServer objectForKey:@"results"] copy];
-        
-        NSInteger highestNotifID = 0;
-        for(NSDictionary *dict in notifsArray)
-        {
-            NSInteger notifID = [[dict objectForKey:@"id"] intValue];
-            if (highestNotifID < notifID)
-            {
-                highestNotifID = notifID;
-            }
-            [_notifications addObject:dict];
-        }
-    
-        [LocalSettings controller].previousNotificationID = highestNotifID;
-        [LocalSettings saveAll];
-        
-        [self displayNextNotification];
-    }
 }
 
 #pragma mark infoView Delegates
