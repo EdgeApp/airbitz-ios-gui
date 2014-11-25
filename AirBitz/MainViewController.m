@@ -824,8 +824,9 @@ typedef enum eAppMode
 {
     NSInteger prevNotifID = [LocalSettings controller].previousNotificationID;
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *buildNum = [build stringByReplacingOccurrencesOfString:@"." withString:@""];
     NSString *serverQuery = [NSString stringWithFormat:@"%@/notifications/?since_id=%d&ios_build=%@",
-                             SERVER_API, prevNotifID, build];
+                             SERVER_API, prevNotifID, buildNum];
     [[DL_URLServer controller] issueRequestURL:serverQuery
                                     withParams:nil
                                     withObject:nil
