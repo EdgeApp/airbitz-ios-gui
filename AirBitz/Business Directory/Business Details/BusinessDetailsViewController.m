@@ -1021,9 +1021,9 @@ typedef NS_ENUM(NSUInteger, CellType) {
     {
         if (!galleryController) {
             galleryController = [[UIPhotoGalleryViewController alloc] init];
+            galleryController.galleryMode = UIPhotoGalleryModeImageRemote;
             galleryController.initialIndex = index;
             galleryController.showStatusBar = YES;
-            galleryController.galleryMode = UIPhotoGalleryModeImageRemote;
             galleryController.dataSource = self;
         }
         
