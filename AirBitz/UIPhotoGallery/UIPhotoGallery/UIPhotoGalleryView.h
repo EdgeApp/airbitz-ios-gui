@@ -47,6 +47,11 @@ typedef enum UIPhotoGalleryDoubleTapHandlerEnum {
 
 @end
 
+@protocol UIPhotoGalleryBottomViewDelegate <NSObject>
+@optional
+- (void)photoGalleryChangedToIndex:(NSInteger)index;
+@end
+
 @protocol UIPhotoGalleryDelegate <UIScrollViewDelegate>
 
 @optional

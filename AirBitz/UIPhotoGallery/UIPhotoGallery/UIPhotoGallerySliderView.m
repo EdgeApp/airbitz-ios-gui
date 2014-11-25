@@ -7,8 +7,9 @@
 //
 
 #import "UIPhotoGallerySliderView.h"
+#import "UIPhotoGalleryView.h"
 
-@interface UIPhotoGallerySliderView ()
+@interface UIPhotoGallerySliderView () <UIPhotoGalleryBottomViewDelegate>
 @property (nonatomic, strong) IBOutlet UISlider *slider;
 @property (nonatomic, strong) IBOutlet UIView *pageCountView;
 @property (nonatomic, strong) IBOutlet UILabel *pageCountLabel;
@@ -46,6 +47,8 @@
                                             self.pageCountView.center.y);
 }
 
+#pragma mark UIPhotoGallerySliderViewDelegate Methods
+
 - (IBAction)sliderValueChanged:(UISlider *)sender
 {
     [sender setValue:(int)sender.value animated:NO];
@@ -54,6 +57,14 @@
     {
         [_delegate sliderValueChangedToIndex:(NSUInteger)sender.value];
     }
+}
+
+#pragma mark UIPhotoGalleryBottomViewDelegate Methods
+
+- (void)photoGalleryChangedToIndex:(NSInteger)index
+{
+    self.slider.value = index;
+    [self updateSliderBubble:self.slider];
 }
 
 @end

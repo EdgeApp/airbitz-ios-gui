@@ -939,7 +939,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
 }
 
 #pragma mark UIPhotoGalleryDataSource methods
-- (NSInteger)numberOfViewsInPhotoGallery:(UIPhotoGalleryView *)photoGallery {
+- (NSInteger)numberOfViewsInPhotoGallery:(UIPhotoGalleryView *)photoGallery
+{
     if (details)
     {
         return [details count];
@@ -947,7 +948,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
     return 1;
 }
 
-- (NSURL*)photoGallery:(UIPhotoGalleryView *)photoGallery remoteImageURLAtIndex:(NSInteger)index {
+- (NSURL*)photoGallery:(UIPhotoGalleryView *)photoGallery remoteImageURLAtIndex:(NSInteger)index
+{
     NSString *imageKey;
     if (details)
     {
@@ -959,7 +961,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
     return nil;
 }
 
-- (UIView*)photoGallery:(UIPhotoGalleryView *)photoGallery customViewAtIndex:(NSInteger)index {
+- (UIView*)photoGallery:(UIPhotoGalleryView *)photoGallery customViewAtIndex:(NSInteger)index
+{
     if (!gallerySpinner)
     {
         CGRect frame = CGRectMake(0, 0, photoGallery.frame.size.width, photoGallery.frame.size.height);
@@ -970,7 +973,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
     return gallerySpinner;
 }
 
-- (UIView*)customTopViewForGalleryViewController:(UIPhotoGalleryViewController *)galleryViewController {
+- (UIView*)customTopViewForGalleryViewController:(UIPhotoGalleryViewController *)galleryViewController
+{
     CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     CGRect topFrame = CGRectMake(0, 0,
                                  self.view.frame.size.width, statusBarHeight + MINIMUM_BUTTON_SIZE);
@@ -989,7 +993,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
     return topView;
 }
 
-- (void)returnFromGallery {
+- (void)returnFromGallery
+{
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[UIView animateWithDuration:0.35
 						  delay:0.0
@@ -1008,7 +1013,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	 }];
 }
 
-- (UIView*)customBottomViewForGalleryViewController:(UIPhotoGalleryViewController *)galleryViewController {
+- (UIView*)customBottomViewForGalleryViewController:(UIPhotoGalleryViewController *)galleryViewController
+{
     UIPhotoGallerySliderView *bottomView = [UIPhotoGallerySliderView CreateWithPhotoCount:[details count]
                                                                           andCurrentIndex:[galleryViewController initialIndex]];
     bottomView.delegate = galleryViewController;
@@ -1016,17 +1022,17 @@ typedef NS_ENUM(NSUInteger, CellType) {
 }
 
 #pragma mark UIPhotoGalleryDelegate methods
-- (void)photoGallery:(UIPhotoGalleryView *)photoGallery didTapAtIndex:(NSInteger)index {
-    if (details)
+
+- (void)photoGallery:(UIPhotoGalleryView *)photoGallery didTapAtIndex:(NSInteger)index
+{
+    if (details && !galleryController)
     {
-        if (!galleryController) {
-            galleryController = [[UIPhotoGalleryViewController alloc] init];
-            [galleryController setScrollIndicator:NO];
-            galleryController.galleryMode = UIPhotoGalleryModeImageRemote;
-            galleryController.initialIndex = index;
-            galleryController.showStatusBar = YES;
-            galleryController.dataSource = self;
-        }
+        galleryController = [[UIPhotoGalleryViewController alloc] init];
+        [galleryController setScrollIndicator:NO];
+        galleryController.galleryMode = UIPhotoGalleryModeImageRemote;
+        galleryController.initialIndex = index;
+        galleryController.showStatusBar = YES;
+        galleryController.dataSource = self;
         
         CGRect frame = self.view.bounds;
         frame.origin.x = frame.size.width;
@@ -1048,7 +1054,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
     }
 }
 
-- (UIPhotoGalleryDoubleTapHandler)photoGallery:(UIPhotoGalleryView *)photoGallery doubleTapHandlerAtIndex:(NSInteger)index {
+- (UIPhotoGalleryDoubleTapHandler)photoGallery:(UIPhotoGalleryView *)photoGallery doubleTapHandlerAtIndex:(NSInteger)index
+{
     return UIPhotoGalleryDoubleTapHandlerNone;
 }
 

@@ -13,7 +13,7 @@
     BOOL controlViewHidden;
     
     UIView *topView;
-    UIView *bottomView;
+    UIView<UIPhotoGalleryBottomViewDelegate> *bottomView;
 }
 
 - (void)setupTopBar;
@@ -148,6 +148,13 @@
 }
 
 #pragma UIPhotoGalleryDelegate methods
+- (void)photoGallery:(UIPhotoGalleryView *)photoGallery didMoveToIndex:(NSInteger)index {
+    if ([bottomView respondsToSelector:@selector(photoGalleryChangedToIndex:)])
+    {
+        [bottomView photoGalleryChangedToIndex:index];
+    }
+}
+
 - (void)photoGallery:(UIPhotoGalleryView *)photoGallery didTapAtIndex:(NSInteger)index {
     controlViewHidden = !controlViewHidden;
     
