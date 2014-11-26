@@ -57,6 +57,11 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
 {	
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
+    // prevent crash due to uncaught exception 'NSRangeException'
+    // reason: '*** -[NSKeyValueSlowMutableArray getObjects:range:]:
+    // value for key notificationData of object 0x17005d4f0 is nil
+    [defaults setObject:[[NSMutableArray alloc]init] forKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
+
     [defaults synchronize];
 
     singleton.bDisableBLE = [defaults boolForKey:KEY_LOCAL_SETTINGS_DISABLE_BLE];
