@@ -57,19 +57,23 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
 {	
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-    // prevent crash due to uncaught exception 'NSRangeException'
-    // reason: '*** -[NSKeyValueSlowMutableArray getObjects:range:]:
-    // value for key notificationData of object 0x17005d4f0 is nil
-    [defaults setObject:[[NSMutableArray alloc]init] forKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
-
     [defaults synchronize];
 
     singleton.bDisableBLE = [defaults boolForKey:KEY_LOCAL_SETTINGS_DISABLE_BLE];
     singleton.bMerchantMode = [defaults boolForKey:KEY_LOCAL_SETTINGS_MERCHANT_MODE];
     singleton.cachedUsername = [defaults stringForKey:KEY_LOCAL_SETTINGS_CACHED_USERNAME];
     singleton.previousNotificationID = [defaults integerForKey:KEY_LOCAL_SETTINGS_PREV_NOTIF_ID];
-    singleton.notifications = [defaults mutableArrayValueForKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
     singleton.clientID = [defaults stringForKey:KEY_LOCAL_SETTINGS_CLIENT_ID];
+
+    NSData *notifsData = [defaults objectForKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
+    if (notifsData)
+    {
+        singleton.notifications = [NSKeyedUnarchiver unarchiveObjectWithData:notifsData];
+    }
+    else
+    {
+        singleton.notifications = [[NSMutableArray alloc] init];
+    }
 }
 
 // saves all the settings to persistant memory
@@ -81,8 +85,10 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     [defaults setBool:[singleton bMerchantMode] forKey:KEY_LOCAL_SETTINGS_MERCHANT_MODE];
     [defaults setValue:[singleton cachedUsername] forKey:KEY_LOCAL_SETTINGS_CACHED_USERNAME];
     [defaults setInteger:[singleton previousNotificationID] forKey:KEY_LOCAL_SETTINGS_PREV_NOTIF_ID];
-    [defaults setObject:singleton.notifications forKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
     [defaults setValue:[singleton clientID] forKey:KEY_LOCAL_SETTINGS_CLIENT_ID];
+
+    NSData *notifsData = [NSKeyedArchiver archivedDataWithRootObject:singleton.notifications];
+    [defaults setObject:notifsData forKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
 
 	// flush the buffer
 	[defaults synchronize];
