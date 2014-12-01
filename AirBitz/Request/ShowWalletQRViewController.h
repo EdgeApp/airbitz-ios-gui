@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ABC.h"
+#import "CommonTypes.h"
 
 @protocol ShowWalletQRViewControllerDelegate;
 
@@ -24,7 +25,8 @@
 @property (nonatomic, strong) NSString *requestID;
 @property (nonatomic, strong) NSString *walletUUID;
 @property (nonatomic, assign) int64_t  amountSatoshi;
-@property (nonatomic, assign) BOOL     bPartial;
+@property (nonatomic, assign) int64_t  donation;
+@property (nonatomic, assign) RequestState state;
 
 
 - (IBAction)Back;

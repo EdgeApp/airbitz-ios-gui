@@ -15,14 +15,19 @@
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 #define IS_IPHONE4                                  (([[UIScreen mainScreen] bounds].size.height < 568) ? YES : NO)
 
+typedef NS_ENUM(NSUInteger, RequestState) {
+    kNone,    // waiting for the user to input new request data
+    kRequest, // request a new, full amount
+    kPartial, // request the remainder of a previous request
+    kDonation,// request with no specified amount
+};
+
 #define BACKGROUND_NOTIF_PULL_REFRESH_INTERVAL_MINUTES 5
 #define NOTIF_PULL_REFRESH_INTERVAL_SECONDS 60
 #define SERVER_MESSAGES_TO_SHOW VERBOSE_MESSAGES_OFF
 
 #define GALLERY_FOOTER_HEIGHT       255
 #define MINIMUM_BUTTON_SIZE         44
-
-#define WALLET_BUTTON_WIDTH         160
 
 #define LOGIN_INVALID_ENTRY_COUNT_MAX 3
 

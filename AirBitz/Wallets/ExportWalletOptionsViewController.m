@@ -22,6 +22,7 @@
 #import "FadingAlertView.h"
 #import "ABC.h"
 
+#define WALLET_BUTTON_WIDTH         160
 
 #define CELL_HEIGHT 45.0
 

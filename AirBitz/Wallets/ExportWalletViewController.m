@@ -19,6 +19,8 @@
 
 #define STARTING_YEAR               2014
 
+#define WALLET_BUTTON_WIDTH         160
+
 #define PICKER_COL_MONTH        0
 #define PICKER_COL_DAY          1
 #define PICKER_COL_YEAR         2

@@ -593,6 +593,14 @@ typedef enum eAppMode
     if (_selectedViewController == _requestViewController 
             && [_requestViewController showingQRCode:_strWalletUUID withTx:_strTxID])
     {
+        if ([_requestViewController transactionWasDonation])
+        {
+            // launch the next QR view with the donation amount
+            Transaction *transaction = [CoreBridge getTransaction:_strWalletUUID withTx:_strTxID];
+            [_requestViewController LaunchQRCodeScreen:transaction.amountSatoshi withRequestState:kDonation];
+            return;
+        }
+
         SInt64 txDiff = [_requestViewController transactionDifference:_strWalletUUID withTx:_strTxID];
         if (txDiff == 0)
         {
@@ -608,7 +616,7 @@ typedef enum eAppMode
         {
             // Sender didn't pay enough
             txDiff = fabs(txDiff);
-            [_requestViewController LaunchQRCodeScreen:txDiff];
+            [_requestViewController LaunchQRCodeScreen:txDiff withRequestState:kPartial];
         }
     }
     // Prevent displaying multiple alerts

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonTypes.h"
 
 @protocol RequestViewControllerDelegate;
 
@@ -17,8 +18,9 @@
 @property (nonatomic, readwrite) SInt64 originalAmountSatoshi;
 
 - (BOOL)showingQRCode:(NSString *)walletUUID withTx:(NSString *)txId;
+- (BOOL)transactionWasDonation;
 - (SInt64)transactionDifference:(NSString *)walletUUID withTx:(NSString *)txId;
-- (void)LaunchQRCodeScreen: (SInt64)amountSatoshi;
+- (void)LaunchQRCodeScreen: (SInt64)amountSatoshi withRequestState:(RequestState)state;
 - (void)resetViews;
 
 @end

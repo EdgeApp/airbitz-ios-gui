@@ -35,7 +35,6 @@
 #import "ABC.h"
 #import "Util.h"
 #import "User.h"
-#import "CommonTypes.h"
 #import "CoreBridge.h"
 #import "InfoView.h"
 #import <CoreBluetooth/CoreBluetooth.h>
@@ -141,14 +140,18 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	{
 		self.addressLabel1.text = self.addressString;
 	}
-	
-    if (self.bPartial)
-    {
-        self.amountLabel.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi: self.amountSatoshi],@"Remaining..."];
-    }
-    else
-    {
-        self.amountLabel.text = [CoreBridge formatSatoshi: self.amountSatoshi];
+
+    switch (self.state) {
+        case kPartial:
+        {
+            self.amountLabel.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi: self.amountSatoshi],@"Remaining..."];
+            break;
+        }
+        default:
+        {
+            self.amountLabel.text = [CoreBridge formatSatoshi: self.amountSatoshi];
+            break;
+        }
     }
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:NO]];
@@ -180,9 +183,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	// load all the names from the address book
     [self generateListOfContactNames];
 
-    if (self.bPartial)
+    if (kPartial == self.state || (kDonation == self.state && 0 < _donation))
     {
-        [self showPartialPaymentPopup];
+        [self showPaymentPopup];
     }
     
     // add left to right swipe detection for going back
@@ -259,27 +262,69 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	 }];
 }
 
--(void)showPartialPaymentPopup
+-(void)showPaymentPopup
 {
-	self.connectedView.alpha = 1.0;
-	self.qrCodeImageView.alpha = 0.0;
-    self.connectedName.text = @"** Warning **";
-    self.connectedLine2.text = @"Partial Payment";
-	
-    self.connectedPhoto.image = [UIImage imageNamed:@"Warning_icon.png"];
-	
-	[UIView animateWithDuration:4.0
-						  delay:2.0
-						options:UIViewAnimationOptionCurveLinear
-					 animations:^
-	 {
-		 self.connectedView.alpha = 0.0;
-		 self.qrCodeImageView.alpha = 1.0;
-	 }
-                     completion:^(BOOL finished)
-	 {
-		 
-	 }];
+    self.connectedView.alpha = 1.0;
+    self.qrCodeImageView.alpha = 0.0;
+    switch (self.state) {
+        case kPartial:
+        {
+            self.connectedName.text = @"** Warning **";
+            self.connectedLine2.text = @"Partial Payment";
+            self.connectedPhoto.image = [UIImage imageNamed:@"Warning_icon.png"];
+            
+            [UIView animateWithDuration:4.0
+                                  delay:2.0
+                                options:UIViewAnimationOptionCurveLinear
+                             animations:^
+             {
+                 self.connectedView.alpha = 0.0;
+                 self.qrCodeImageView.alpha = 1.0;
+             }
+                             completion:^(BOOL finished)
+             {
+             }];
+            break;
+        }
+        case kDonation:
+        {
+            self.connectedName.text = @"Payment received";
+            tABC_Error error;
+            double currency;
+            Wallet *wallet = [CoreBridge getWallet:self.walletUUID];
+            if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                      _donation, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
+            {
+                NSString *fiatAmount = [CoreBridge currencySymbolLookup:wallet.currencyNum];
+                NSString *fiatSymbol = [NSString stringWithFormat:@"%.2f", currency];
+                NSString *fiat = [fiatAmount stringByAppendingString:fiatSymbol];
+                self.connectedLine2.text = [NSString stringWithFormat:@"%@ / %@",
+                                            [CoreBridge formatSatoshi:_donation],
+                                            fiat];
+            }
+            else
+            {
+                self.connectedLine2.text = [CoreBridge formatSatoshi:self.amountSatoshi];
+            }
+
+            [UIView animateWithDuration:5.0
+                                  delay:2.0
+                                options:UIViewAnimationOptionCurveLinear
+                             animations:^
+            {
+                self.connectedView.alpha = 0.0;
+                self.qrCodeImageView.alpha = 1.0;
+            }
+                            completion:^(BOOL finished)
+            {
+            }];
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
 }
 
 #pragma mark address book
