@@ -264,38 +264,26 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 -(void)showPaymentPopup
 {
-    self.connectedView.alpha = 1.0;
-    self.qrCodeImageView.alpha = 0.0;
+    NSTimeInterval duration;
     switch (self.state) {
         case kPartial:
         {
+            duration = 4.0;
             self.connectedName.text = @"** Warning **";
             self.connectedLine2.text = @"Partial Payment";
             self.connectedPhoto.image = [UIImage imageNamed:@"Warning_icon.png"];
-            
-            [UIView animateWithDuration:4.0
-                                  delay:2.0
-                                options:UIViewAnimationOptionCurveLinear
-                             animations:^
-             {
-                 self.connectedView.alpha = 0.0;
-                 self.qrCodeImageView.alpha = 1.0;
-             }
-                             completion:^(BOOL finished)
-             {
-             }];
             break;
         }
         case kDonation:
         {
+            duration = 5.0;
             self.connectedName.text = @"Payment received";
             tABC_Error error;
             double currency;
-            Wallet *wallet = [CoreBridge getWallet:self.walletUUID];
             if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                      _donation, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
+                                      _donation, &currency, _currencyNum, &error) == ABC_CC_Ok)
             {
-                NSString *fiatAmount = [CoreBridge currencySymbolLookup:wallet.currencyNum];
+                NSString *fiatAmount = [CoreBridge currencySymbolLookup:_currencyNum];
                 NSString *fiatSymbol = [NSString stringWithFormat:@"%.2f", currency];
                 NSString *fiat = [fiatAmount stringByAppendingString:fiatSymbol];
                 self.connectedLine2.text = [NSString stringWithFormat:@"%@ / %@",
@@ -306,25 +294,27 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             {
                 self.connectedLine2.text = [CoreBridge formatSatoshi:self.amountSatoshi];
             }
-
-            [UIView animateWithDuration:5.0
-                                  delay:2.0
-                                options:UIViewAnimationOptionCurveLinear
-                             animations:^
-            {
-                self.connectedView.alpha = 0.0;
-                self.qrCodeImageView.alpha = 1.0;
-            }
-                            completion:^(BOOL finished)
-            {
-            }];
             break;
         }
         default:
         {
-            break;
+            return;
         }
     }
+    
+    self.connectedView.alpha = 1.0;
+    self.qrCodeImageView.alpha = 0.0;
+    [UIView animateWithDuration:duration
+                          delay:2.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^
+     {
+         self.connectedView.alpha = 0.0;
+         self.qrCodeImageView.alpha = 1.0;
+     }
+                     completion:^(BOOL finished)
+     {
+     }];
 }
 
 #pragma mark address book
