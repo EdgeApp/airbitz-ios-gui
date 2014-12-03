@@ -116,6 +116,18 @@
 }
 
 #pragma mark - Keyboard Delegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (nil != self.delegate)
+    {
+        if (NSOrderedSame == [string compare:@"."] && [textField.text containsString:@"."])
+        {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
