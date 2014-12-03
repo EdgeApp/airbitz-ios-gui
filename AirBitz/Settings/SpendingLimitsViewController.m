@@ -68,12 +68,12 @@
 
     _dailySpendLimitSwitch.on = _pAccountSettings->bDailySpendLimit > 0;
     _dailySpendLimitField.text = [CoreBridge formatSatoshi:_pAccountSettings->dailySpendLimitSatoshis withSymbol:false];
-    _dailySpendLimitField.keyboardType = UIKeyboardTypeNumberPad;
+    _dailySpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
     _dailyDenomination.text = [User Singleton].denominationLabelShort;
 
     _pinSpendLimitSwitch.on = _pAccountSettings->bSpendRequirePin > 0;
     _pinSpendLimitField.text = [CoreBridge formatSatoshi:_pAccountSettings->spendRequirePinSatoshis withSymbol:false];
-    _pinSpendLimitField.keyboardType = UIKeyboardTypeNumberPad;
+    _pinSpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
     _pinDenomination.text = [User Singleton].denominationLabelShort;
 
     [self switchFlipped:_dailySpendLimitSwitch];
