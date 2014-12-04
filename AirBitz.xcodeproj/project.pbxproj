@@ -78,7 +78,6 @@
 		4C7C1256193D2CFC0096338D /* WalletExportPDF.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4C7C1254193D2CFC0096338D /* WalletExportPDF.pdf */; };
 		4C7C1257193D2CFC0096338D /* WalletExportQuicken.QIF in Resources */ = {isa = PBXBuildFile; fileRef = 4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */; };
 		4C7C125A193E7C510096338D /* ExportWalletPDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7C1259193E7C510096338D /* ExportWalletPDFViewController.m */; };
-		4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		4C90463318C923E800179D9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463218C923E800179D9C /* QuartzCore.framework */; };
 		4C90463518C923FF00179D9C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463418C923FF00179D9C /* AVFoundation.framework */; };
 		4C90463718C9241200179D9C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463618C9241200179D9C /* CoreMedia.framework */; };
@@ -317,7 +316,6 @@
 		7D98AD2B19A7C550003D2BF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4F18A17F6F002E0703 /* UIKit.framework */; };
 		7D98AD2C19A7C550003D2BF6 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
 		7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4B18A17F6F002E0703 /* Foundation.framework */; };
-		7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		7D98AD3819A7C550003D2BF6 /* btn_search~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C801930060F0015BB3C /* btn_search~iphone.png */; };
 		7D98AD3919A7C550003D2BF6 /* PasswordVerifyView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9D218DCE09E008ACF88 /* PasswordVerifyView~ipad.xib */; };
 		7D98AD3A19A7C550003D2BF6 /* WalletExportQuicken.QIF in Resources */ = {isa = PBXBuildFile; fileRef = 4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */; };
@@ -1126,7 +1124,6 @@
 
 /* Begin PBXFileReference section */
 		188D8A965DB464149F922F3B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		2930E7DAA76EC51E127C9D79 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4C08A6D318C29CEF0071B87C /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = ABC/libabc.a; sourceTree = "<group>"; };
 		4C08A6D418C29CEF0071B87C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ABC/libcrypto.a; sourceTree = "<group>"; };
@@ -1215,27 +1212,6 @@
 		4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WalletExportQuicken.QIF; path = Resources/MockData/WalletExportQuicken.QIF; sourceTree = "<group>"; };
 		4C7C1258193E7C510096338D /* ExportWalletPDFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportWalletPDFViewController.h; sourceTree = "<group>"; };
 		4C7C1259193E7C510096338D /* ExportWalletPDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWalletPDFViewController.m; sourceTree = "<group>"; };
-		4C90461C18C91E5900179D9C /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Decoder.h; sourceTree = "<group>"; };
-		4C90461D18C91E5900179D9C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Exception.h; sourceTree = "<group>"; };
-		4C90461E18C91E5900179D9C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Image.h; sourceTree = "<group>"; };
-		4C90461F18C91E5900179D9C /* ImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageScanner.h; path = ZBarSDK/Headers/ZBarSDK/zbar/ImageScanner.h; sourceTree = "<group>"; };
-		4C90462018C91E5900179D9C /* Processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Processor.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Processor.h; sourceTree = "<group>"; };
-		4C90462118C91E5900179D9C /* Scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scanner.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Scanner.h; sourceTree = "<group>"; };
-		4C90462218C91E5900179D9C /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Symbol.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Symbol.h; sourceTree = "<group>"; };
-		4C90462318C91E5900179D9C /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Video.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Video.h; sourceTree = "<group>"; };
-		4C90462418C91E5900179D9C /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Window.h; path = ZBarSDK/Headers/ZBarSDK/zbar/Window.h; sourceTree = "<group>"; };
-		4C90462518C91E6B00179D9C /* zbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zbar.h; path = ZBarSDK/Headers/ZBarSDK/zbar.h; sourceTree = "<group>"; };
-		4C90462618C91E6B00179D9C /* ZBarCameraSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZBarCameraSimulator.h; path = ZBarSDK/Headers/ZBarSDK/ZBarCameraSimulator.h; sourceTree = "<group>"; };
-		4C90462718C91E6B00179D9C /* ZBarCaptureReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZBarCaptureReader.h; path = ZBarSDK/Headers/ZBarSDK/ZBarCaptureReader.h; sourceTree = "<group>"; };
-		4C90462818C91E6B00179D9C /* ZBarHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZBarHelpController.h; path = ZBarSDK/Headers/ZBarSDK/ZBarHelpController.h; sourceTree = "<group>"; };
-		4C90462918C91E6B00179D9C /* ZBarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZBarImage.h; path = ZBarSDK/Headers/ZBarSDK/ZBarImage.h; sourceTree = "<group>"; };
-		4C90462A18C91E6B00179D9C /* ZBarImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZBarImageScanner.h; path = ZBarSDK/Headers/ZBarSDK/ZBarImageScanner.h; sourceTree = "<group>"; };
-		4C90462B18C91E6B00179D9C /* ZBarReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZBarReaderController.h; path = ZBarSDK/Headers/ZBarSDK/ZBarReaderController.h; sourceTree = "<group>"; };
-		4C90462C18C91E6B00179D9C /* ZBarReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZBarReaderView.h; path = ZBarSDK/Headers/ZBarSDK/ZBarReaderView.h; sourceTree = "<group>"; };
-		4C90462D18C91E6B00179D9C /* ZBarReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZBarReaderViewController.h; path = ZBarSDK/Headers/ZBarSDK/ZBarReaderViewController.h; sourceTree = "<group>"; };
-		4C90462E18C91E6B00179D9C /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZBarSDK.h; path = ZBarSDK/Headers/ZBarSDK/ZBarSDK.h; sourceTree = "<group>"; };
-		4C90462F18C91E6B00179D9C /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZBarSymbol.h; path = ZBarSDK/Headers/ZBarSDK/ZBarSymbol.h; sourceTree = "<group>"; };
-		4C90463018C91E7A00179D9C /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzbar.a; path = ZBarSDK/libzbar.a; sourceTree = "<group>"; };
 		4C90463218C923E800179D9C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4C90463418C923FF00179D9C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4C90463618C9241200179D9C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -1353,7 +1329,6 @@
 		7DFD22E01A1E716C008C43FB /* UIPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPhotoGalleryViewController.m; sourceTree = "<group>"; };
 		7DFD22E11A1E716C008C43FB /* UIPhotoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPhotoItemView.h; sourceTree = "<group>"; };
 		7DFD22E21A1E716C008C43FB /* UIPhotoItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPhotoItemView.m; sourceTree = "<group>"; };
-		7DFD22F51A1ED22E008C43FB /* libPods-Airbitz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Airbitz.a"; path = "Pods/build/Debug-iphoneos/libPods-Airbitz.a"; sourceTree = "<group>"; };
 		7DFD230C1A1FF98A008C43FB /* UIPhotoGallerySliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPhotoGallerySliderView.h; sourceTree = "<group>"; };
 		7DFD230D1A1FF98A008C43FB /* UIPhotoGallerySliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPhotoGallerySliderView.m; sourceTree = "<group>"; };
 		7DFD230E1A1FF98A008C43FB /* UIPhotoGallerySliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIPhotoGallerySliderView.xib; sourceTree = "<group>"; };
@@ -1872,7 +1847,6 @@
 				7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */,
 				7DBD87A419B97F6F0069D62A /* HockeySDK.framework in Frameworks */,
 				7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */,
-				7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */,
 				7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */,
 				17C92258FEBAD8A39BBFD0FC /* libPods.a in Frameworks */,
 			);
@@ -1918,7 +1892,6 @@
 				7DBD87A319B97F6F0069D62A /* HockeySDK.framework in Frameworks */,
 				4C08A6E018C29CEF0071B87C /* libscrypt.a in Frameworks */,
 				4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */,
-				4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */,
 				6A587502F675B6C6ECA2BB1B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2006,58 +1979,6 @@
 				4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */,
 			);
 			name = MockData;
-			sourceTree = "<group>";
-		};
-		4C90461818C91DF200179D9C /* ZBarSDK */ = {
-			isa = PBXGroup;
-			children = (
-				4C90463018C91E7A00179D9C /* libzbar.a */,
-				4C90461918C91E1700179D9C /* Headers */,
-			);
-			name = ZBarSDK;
-			sourceTree = "<group>";
-		};
-		4C90461918C91E1700179D9C /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				4C90461A18C91E3100179D9C /* ZBarSDK */,
-			);
-			name = Headers;
-			sourceTree = "<group>";
-		};
-		4C90461A18C91E3100179D9C /* ZBarSDK */ = {
-			isa = PBXGroup;
-			children = (
-				4C90462518C91E6B00179D9C /* zbar.h */,
-				4C90462618C91E6B00179D9C /* ZBarCameraSimulator.h */,
-				4C90462718C91E6B00179D9C /* ZBarCaptureReader.h */,
-				4C90462818C91E6B00179D9C /* ZBarHelpController.h */,
-				4C90462918C91E6B00179D9C /* ZBarImage.h */,
-				4C90462A18C91E6B00179D9C /* ZBarImageScanner.h */,
-				4C90462B18C91E6B00179D9C /* ZBarReaderController.h */,
-				4C90462C18C91E6B00179D9C /* ZBarReaderView.h */,
-				4C90462D18C91E6B00179D9C /* ZBarReaderViewController.h */,
-				4C90462E18C91E6B00179D9C /* ZBarSDK.h */,
-				4C90462F18C91E6B00179D9C /* ZBarSymbol.h */,
-				4C90461B18C91E4100179D9C /* zbar */,
-			);
-			name = ZBarSDK;
-			sourceTree = "<group>";
-		};
-		4C90461B18C91E4100179D9C /* zbar */ = {
-			isa = PBXGroup;
-			children = (
-				4C90461C18C91E5900179D9C /* Decoder.h */,
-				4C90461D18C91E5900179D9C /* Exception.h */,
-				4C90461E18C91E5900179D9C /* Image.h */,
-				4C90461F18C91E5900179D9C /* ImageScanner.h */,
-				4C90462018C91E5900179D9C /* Processor.h */,
-				4C90462118C91E5900179D9C /* Scanner.h */,
-				4C90462218C91E5900179D9C /* Symbol.h */,
-				4C90462318C91E5900179D9C /* Video.h */,
-				4C90462418C91E5900179D9C /* Window.h */,
-			);
-			name = zbar;
 			sourceTree = "<group>";
 		};
 		683D95B61989F14B0082BC1A /* Certs */ = {
@@ -2297,7 +2218,6 @@
 		B5675B4A18A17F6F002E0703 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7DFD22F51A1ED22E008C43FB /* libPods-Airbitz.a */,
 				7DFF2F8A1A02E50E00813733 /* MessageUI.framework */,
 				7DBD879E19B97F6F0069D62A /* HockeySDK.embeddedframework */,
 				7D6EDB7B19A66C82007C33AE /* CoreText.framework */,
@@ -2323,7 +2243,6 @@
 				B5675B4D18A17F6F002E0703 /* CoreGraphics.framework */,
 				B5675B4F18A17F6F002E0703 /* UIKit.framework */,
 				B5675B6D18A17F6F002E0703 /* XCTest.framework */,
-				2930E7DAA76EC51E127C9D79 /* libPods-Airbitz.a */,
 				E47C0EC32EE29D34C5A03A0B /* libPods.a */,
 			);
 			name = Frameworks;
@@ -2411,7 +2330,6 @@
 				B5C0A9B618EA0DD8008F302C /* Wallets */,
 				4C5D8C59192AB8E70015BB3C /* Util.h */,
 				4C5D8C5A192AB8E70015BB3C /* Util.m */,
-				4C90461818C91DF200179D9C /* ZBarSDK */,
 				B5675B6618A17F6F002E0703 /* Images.xcassets */,
 				B5675B8718A180D9002E0703 /* Resources */,
 				B5675B5218A17F6F002E0703 /* Supporting Files */,
