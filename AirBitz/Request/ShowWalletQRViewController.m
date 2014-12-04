@@ -91,6 +91,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, weak) IBOutlet UIImageView		*connectedPhoto;
 @property (nonatomic, weak) IBOutlet UILabel			*connectedName;
 @property (nonatomic, weak) IBOutlet UILabel			*connectedLine2;
+@property (nonatomic, weak) IBOutlet UILabel			*connectedLine3;
 
 @property (nonatomic, strong) RecipientViewController   *recipientViewController;
 @property (nonatomic, strong) NSArray                   *arrayContacts;
@@ -220,6 +221,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	self.connectedView.alpha = 1.0;
 	self.qrCodeImageView.alpha = 0.0;
     self.connectedLine2.text = @"Connected";
+    self.connectedLine3.text = @"";
 	
 	//see if there is a match between advertised name and name in contacts.  If so, use the photo from contacts
 	BOOL imageIsFromContacts = NO;
@@ -273,6 +275,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             duration = 4.0;
             self.connectedName.text = @"** Warning **";
             self.connectedLine2.text = @"Partial Payment";
+            self.connectedLine3.text = @"";
             self.connectedPhoto.image = [UIImage imageNamed:@"Warning_icon.png"];
             break;
         }
@@ -289,13 +292,14 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                 NSString *fiatAmount = [CoreBridge currencySymbolLookup:_currencyNum];
                 NSString *fiatSymbol = [NSString stringWithFormat:@"%.2f", currency];
                 NSString *fiat = [fiatAmount stringByAppendingString:fiatSymbol];
-                self.connectedLine2.text = [NSString stringWithFormat:@"%@ / %@",
-                                            [CoreBridge formatSatoshi:_donation],
-                                            fiat];
+                self.connectedLine2.text = [CoreBridge formatSatoshi:_donation];
+                self.connectedLine3.text = fiat;
             }
             else
             {
+                // failed to look up the wallet's fiat currency
                 self.connectedLine2.text = [CoreBridge formatSatoshi:self.amountSatoshi];
+                self.connectedLine3.text = @"";
             }
             break;
         }
