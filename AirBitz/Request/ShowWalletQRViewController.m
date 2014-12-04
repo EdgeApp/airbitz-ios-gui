@@ -264,10 +264,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 -(void)showPaymentPopup
 {
+    NSTimeInterval delay;
     NSTimeInterval duration;
     switch (self.state) {
         case kPartial:
         {
+            delay = 2.0;
             duration = 4.0;
             self.connectedName.text = @"** Warning **";
             self.connectedLine2.text = @"Partial Payment";
@@ -276,7 +278,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         case kDonation:
         {
-            duration = 5.0;
+            delay = 7.0;
+            duration = 2.0;
             self.connectedName.text = @"Payment received";
             tABC_Error error;
             double currency;
@@ -305,7 +308,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.connectedView.alpha = 1.0;
     self.qrCodeImageView.alpha = 0.0;
     [UIView animateWithDuration:duration
-                          delay:2.0
+                          delay:delay
                         options:UIViewAnimationOptionCurveLinear
                      animations:^
      {
