@@ -120,7 +120,7 @@
 {
     if (nil != self.delegate)
     {
-        if (NSOrderedSame == [string compare:@"."] && [textField.text containsString:@"."])
+        if (NSOrderedSame == [string compare:@"."] && [textField.text rangeOfString:@"."].location != NSNotFound)
         {
             return NO;
         }
