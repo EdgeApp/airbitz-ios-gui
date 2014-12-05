@@ -98,6 +98,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, strong) NSArray   *arrayChoicesIndexes;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *scanningSpinner;
 @property (nonatomic, weak) IBOutlet UILabel				*scanningLabel;
+@property (nonatomic, weak) IBOutlet UILabel				*scanningErrorLabel;
 
 @property (strong, nonatomic) CBCentralManager      *centralManager;
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
@@ -334,8 +335,19 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 -(void)startQRReader
 {
-
 	_readerView = [ZBarReaderView new];
+    if ([_readerView isDeviceAvailable])
+    {
+        [self.scanningErrorLabel setHidden:YES];
+        [self.flashSelector setHidden:NO];
+    }
+    else
+    {
+        self.scanningErrorLabel.text = NSLocalizedString(@"Camera unavailable", @"");
+        [self.scanningErrorLabel setHidden:NO];
+        [self.flashSelector setHidden:YES];
+    }
+
 	[self.qrView insertSubview:_readerView belowSubview:self.scanFrame];
 	_readerView.frame = self.scanFrame.frame;
 	_readerView.readerDelegate = self;
