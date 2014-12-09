@@ -18,6 +18,7 @@
 #import <SDWebImage/SDImageCache.h>
 #import "NotificationChecker.h"
 #import "NSString+StripHTML.h"
+#import "Reachability.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
@@ -44,6 +45,13 @@ NSDate *logoutDate = NULL;
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
+
+    Reachability *reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
+    [reachability startNotifier];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                            selector:@selector(reachabilityDidChange:)
+                                                name:kReachabilityChangedNotification
+                                            object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNotifications) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
 
@@ -156,8 +164,10 @@ NSDate *logoutDate = NULL;
     [self bgNotificationCleanup];
     [self bgLogoutCleanup];
     [self checkLoginExpired];
+    NSLog(@("connectWatchers:"));
     if ([User isLoggedIn])
     {
+        NSLog(@("isLoggedIn:"));
         [CoreBridge connectWatchers];
         [CoreBridge startQueues];
     }
@@ -261,6 +271,17 @@ NSDate *logoutDate = NULL;
     if ([NotificationChecker haveNotifications])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NOTIFICATION_RECEIVED object:self];
+    }
+}
+
+#pragma mark - Notification handlers
+
+- (void)reachabilityDidChange:(NSNotification *)notification
+{
+    Reachability *reachability = (Reachability *)[notification object];
+    if ([reachability isReachable]) {
+        [CoreBridge connectWatchers];
+        [CoreBridge startQueues];
     }
 }
 
