@@ -27,7 +27,7 @@ echo $build
 ##
 ## Make mainnet ABC build
 ##
-run cd ../airbitz-walletcore
+run cd ../airbitz-core
 run git pull
 run cd deps
 
@@ -49,7 +49,7 @@ run make abc
 ##
 ## Make testnet ABC build
 ##
-run cd ../../airbitz-walletcore-testnet
+run cd ../../airbitz-core-testnet
 run git pull
 run cd deps
 
@@ -68,8 +68,8 @@ run cd ../../airbitz-ios-gui/
 run git pull
 
 rm -rf Airbitz/ABC/*
-run cp -a ../airbitz-walletcore/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
-run cp -a ../airbitz-walletcore/deps/build/abc/abc-ios-universal/lib/* AirBitz/ABC/
+run cp -a ../airbitz-core/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
+run cp -a ../airbitz-core/deps/build/abc/abc-ios-universal/lib/* AirBitz/ABC/
 run agvtool new-marketing-version $1
 run agvtool new-version -all $build
 run xcodebuild -scheme Airbitz archive
@@ -82,8 +82,8 @@ run ./deploy-tf "$1" "$build" "$2" "$3" "$4"
 #run git checkout Airbitz.xcodeproj/project.pbxproj
 
 rm -rf Airbitz/ABC/*
-run cp -a ../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
-run cp -a ../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/lib/* AirBitz/ABC/
+run cp -a ../airbitz-core-testnet/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
+run cp -a ../airbitz-core-testnet/deps/build/abc/abc-ios-universal/lib/* AirBitz/ABC/
 run agvtool new-marketing-version $1$lettert
 run agvtool new-version -all $build
 run xcodebuild -scheme Airbitz archive
@@ -130,10 +130,10 @@ fi
 run mkdir "../build-archives/ios/walletcore/${build}_${1}_ios_testnet"
 
 
-run cp -a "../airbitz-walletcore/deps/build/abc/abc-ios-universal/include/*" "../build-archives/ios/walletcore/${build}_${1}_ios/"
-run cp -a "../airbitz-walletcore/deps/build/abc/abc-ios-universal/lib/*" "../build-archives/ios/walletcore/${build}_${1}_ios/"
+run cp -a "../airbitz-core/deps/build/abc/abc-ios-universal/include/*" "../build-archives/ios/walletcore/${build}_${1}_ios/"
+run cp -a "../airbitz-core/deps/build/abc/abc-ios-universal/lib/*" "../build-archives/ios/walletcore/${build}_${1}_ios/"
 
-run cp -a "../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/include/*" "../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
-run cp -a "../airbitz-walletcore-testnet/deps/build/abc/abc-ios-universal/lib/*" "../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
+run cp -a "../airbitz-core-testnet/deps/build/abc/abc-ios-universal/include/*" "../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
+run cp -a "../airbitz-core-testnet/deps/build/abc/abc-ios-universal/lib/*" "../build-archives/ios/walletcore/${build}_${1}_ios_testnet/"
 
 

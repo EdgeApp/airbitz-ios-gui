@@ -28,7 +28,7 @@ Set your `$REPO_DIR` to whatever you want.
 
     cd $REPO_DIR
     git clone git@github.com:Airbitz/airbitz-core.git
-    cd airbitz-walletcore
+    cd airbitz-core
     cd deps
     make
 

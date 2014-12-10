@@ -2,6 +2,6 @@
 <Workspace Version="10.0" VendorName="SlickEdit">
 	<Projects>
 		<Project File="Airbitz-iOS.vpj"/>
-		<Project File="../airbitz-walletcore/src/Airbitz-Wallet-Core.vpj"/>
+		<Project File="../airbitz-core/src/Airbitz-Wallet-Core.vpj"/>
 	</Projects>
 </Workspace>
