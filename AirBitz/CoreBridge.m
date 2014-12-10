@@ -1654,6 +1654,28 @@ static NSTimer *_dataSyncTimer;
     });
 }
 
++ (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID withCallback:(tABC_Sweep_Done_Callback)callback
+{
+    tABC_CC result = ABC_CC_Ok;
+    tABC_Error Error;
+    char *pszAddress = NULL;
+    void *pData = NULL;
+    result = ABC_SweepKey([[User Singleton].name UTF8String],
+                  [[User Singleton].password UTF8String],
+                  [walletUUID UTF8String],
+                  [privateKey UTF8String],
+                  &pszAddress,
+                  callback,
+                  pData,
+                  &Error);
+    if (ABC_CC_Ok == result && pszAddress)
+    {
+        NSString *address = [NSString stringWithUTF8String:pszAddress];
+        free(pszAddress);
+        return address;
+    }
+    return nil;
+}
 
 #pragma mark - ABC Callbacks
 
@@ -1707,6 +1729,17 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     } else if (pInfo->eventType == ABC_AsyncEventType_RemotePasswordChange) {
         [coreBridge performSelectorOnMainThread:@selector(notifyRemotePasswordChange:) withObject:nil waitUntilDone:NO];
     }
+}
+
+void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
+{
+    // broadcast message out that the sweep is done
+    NSDictionary *sweepData = @{ KEY_SWEEP_CORE_CONDITION_CODE:[NSNumber numberWithInt:cc],
+                                 KEY_SWEEP_TX_ID:[NSString stringWithUTF8String:szID],
+                                 KEY_SWEEP_TX_AMOUNT:[NSNumber numberWithUnsignedLongLong:amount]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HANDLE_BITCOIN_URI
+                                                        object:nil
+                                                      userInfo:sweepData];
 }
 
 @end

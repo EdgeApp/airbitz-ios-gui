@@ -15,6 +15,14 @@
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 #define IS_IPHONE4                                  (([[UIScreen mainScreen] bounds].size.height < 568) ? YES : NO)
 
+typedef NS_ENUM(NSUInteger, ImportDataModel) {
+    kWIF,
+    kEWIF,
+    kHBURI,
+};
+#define HIDDEN_BITZ_URI_SCHEME @"hbits"
+#define BITCOIN_URI_SCHEME @"bitcoin"
+
 typedef NS_ENUM(NSUInteger, RequestState) {
     kNone,    // waiting for the user to input new request data
     kRequest, // request a new, full amount
@@ -98,12 +106,17 @@ typedef enum eTabBarButton
 #define NOTIFICATION_TAB_BAR_BUTTON_RESELECT            @"Notification_Tab_Bar_Button_Reselected"
 #define NOTIFICATION_TX_RECEIVED                        @"Transaction_Received"
 #define NOTIFICATION_NOTIFICATION_RECEIVED              @"Notification_Received"
+#define NOTIFICATION_SWEEP                              @"Notification_Sweep"
 
 #define KEY_ERROR_CODE                                  @"Error_Code"
 #define KEY_TX_DETAILS_EXITED_TX                        @"transaction"
 #define KEY_TX_DETAILS_EXITED_WALLET_UUID               @"walletUUID"
 #define KEY_TX_DETAILS_EXITED_WALLET_NAME               @"walletName"
 #define KEY_TX_DETAILS_EXITED_TX_ID                     @"transactionID"
+
+#define KEY_SWEEP_CORE_CONDITION_CODE                   @"tABC_CC"
+#define KEY_SWEEP_TX_ID                                 @"transactionID"
+#define KEY_SWEEP_TX_AMOUNT                             @"transactionAmount"
 
 #define KEY_TAB_BAR_BUTTON_RESELECT_ID                  @"tabBarButtonID"
 

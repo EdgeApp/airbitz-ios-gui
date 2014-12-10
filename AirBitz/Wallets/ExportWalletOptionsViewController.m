@@ -794,6 +794,8 @@ typedef enum eExportOption
     _fadingAlert = nil;
 }
 
+#pragma mark - FadingAlertView delegate
+
 - (void)fadingAlertDismissed:(FadingAlertView *)view
 {
     _fadingAlert = nil;

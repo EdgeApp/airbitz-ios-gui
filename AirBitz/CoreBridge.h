@@ -83,7 +83,9 @@
 + (int)getCurrencyNumOfLocale;
 + (bool)setDefaultCurrencyNum:(int)currencyNum;
 + (void)setupNewAccount:(FadingAlertView *)fadingAlert;
++ (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID withCallback:(tABC_Sweep_Done_Callback)callback;
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo);
+void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
 
 @end
