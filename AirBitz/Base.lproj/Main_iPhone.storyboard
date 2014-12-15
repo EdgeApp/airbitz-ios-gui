@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Main View Controller-->
@@ -1339,6 +1340,20 @@
                                     <action selector="Info" destination="Nhq-ts-4tB" eventType="touchUpInside" id="iQq-lT-gnf"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" id="Ibr-dx-7hh">
+                                <rect key="frame" x="254" y="32" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KDA-iU-G6k">
+                                <rect key="frame" x="245" y="23" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="UIButtonBarRefresh.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="Refresh" destination="Nhq-ts-4tB" eventType="touchUpInside" id="Sx7-xe-Lg3"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CrZ-BT-uK1">
                                 <rect key="frame" x="4" y="23" width="90" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1495,6 +1510,8 @@
                         <outlet property="connectedView" destination="vnX-Jp-a7F" id="kdM-X3-OaU"/>
                         <outlet property="imageBottomFrame" destination="dAj-d5-4ff" id="ec3-Mm-4p4"/>
                         <outlet property="qrCodeImageView" destination="0A5-KU-hj2" id="g0D-Lx-S59"/>
+                        <outlet property="refreshButton" destination="KDA-iU-G6k" id="x1N-am-pQA"/>
+                        <outlet property="refreshSpinner" destination="Ibr-dx-7hh" id="EK6-ty-JvK"/>
                         <outlet property="statusLabel" destination="O1G-gR-pT0" id="D6E-8w-Iqx"/>
                         <outlet property="viewQRCodeFrame" destination="x8L-0b-Hbe" id="CNC-j6-IvN"/>
                     </connections>
@@ -5269,6 +5286,7 @@
         <image name="BLE_photo.png" width="45" height="45"/>
         <image name="SearchBarBacking.png" width="320" height="116"/>
         <image name="TxSearchBarBacking.png" width="320" height="55"/>
+        <image name="UIButtonBarRefresh.png" width="18" height="22"/>
         <image name="back_arrow.png" width="37" height="37"/>
         <image name="background-errormessage.png" width="200" height="168"/>
         <image name="background.jpg" width="320" height="568"/>

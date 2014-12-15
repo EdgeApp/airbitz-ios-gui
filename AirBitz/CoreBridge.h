@@ -24,6 +24,7 @@
 + (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx;
 + (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets;
 + (void)reloadWallet: (Wallet *) wallet;
++ (void)refreshWallet:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb;
 + (Wallet *)getWallet: (NSString *)walletUUID;
 + (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
 + (int64_t)getTotalSentToday:(Wallet *)wallet;

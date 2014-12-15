@@ -93,6 +93,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, weak) IBOutlet UILabel			*connectedLine2;
 @property (nonatomic, weak) IBOutlet UILabel			*connectedLine3;
 
+@property (nonatomic, weak) IBOutlet UIButton                *refreshButton;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *refreshSpinner;
+
 @property (nonatomic, strong) RecipientViewController   *recipientViewController;
 @property (nonatomic, strong) NSArray                   *arrayContacts;
 
@@ -654,6 +657,16 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 }
 
 #pragma mark - Action Methods
+
+- (IBAction)Refresh
+{
+    _refreshButton.hidden = YES;
+    _refreshSpinner.hidden = NO;
+    [CoreBridge refreshWallet:_walletUUID refreshData:NO notify:^{
+        _refreshSpinner.hidden = YES;
+        _refreshButton.hidden = NO;
+    }];
+}
 
 - (IBAction)CopyAddress
 {

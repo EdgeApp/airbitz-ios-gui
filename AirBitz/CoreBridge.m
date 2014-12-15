@@ -272,6 +272,35 @@ static NSTimer *_dataSyncTimer;
     ABC_FreeWalletInfo(pWalletInfo);
 }
 
++ (void)refreshWallet:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // Reconnect the watcher for this wallet
+        [CoreBridge connectWatcher:walletUUID];
+        if (bData) {
+                // Clear data sync queue and sync the current wallet immediately
+                [dataQueue cancelAllOperations];
+                [dataQueue addOperationWithBlock:^{
+                tABC_Error error;
+                ABC_DataSyncWallet([[User Singleton].name UTF8String],
+                            [[User Singleton].password UTF8String],
+                            [walletUUID UTF8String],
+                            ABC_BitCoin_Event_Callback,
+                            (__bridge void *) singleton,
+                            &error);
+                [Util printABC_Error: &error];
+                dispatch_async(dispatch_get_main_queue(),^{
+                    cb();
+                });
+            }];
+        } else {
+            dispatch_async(dispatch_get_main_queue(),^{
+                cb();
+            });
+        }
+    });
+}
+
 + (Wallet *)getWallet: (NSString *)walletUUID
 {
     tABC_Error Error;

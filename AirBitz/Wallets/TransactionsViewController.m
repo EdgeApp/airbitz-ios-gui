@@ -161,6 +161,13 @@
 
     }
 
+    UITableViewController *tableViewController = [[UITableViewController alloc] init];
+    tableViewController.tableView = self.tableView;
+    tableViewController.refreshControl = [[UIRefreshControl alloc] init];
+    [tableViewController.refreshControl addTarget:self
+                                           action:@selector(refresh:)
+                                 forControlEvents:UIControlEventValueChanged];
+
     [_balanceView refresh];
     _transactionTableStartFrame = self.tableView.frame;
 
@@ -1170,6 +1177,15 @@
     {
         [self Done];
     }
+}
+
+#pragma mark - Refresh control
+
+- (void)refresh:(id)sender
+{
+    [CoreBridge refreshWallet:_wallet.strUUID refreshData:NO notify:^{
+        [(UIRefreshControl *)sender endRefreshing];
+    }];
 }
 
 @end

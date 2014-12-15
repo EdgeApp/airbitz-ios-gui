@@ -110,6 +110,8 @@
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
 		687D2E7C1A09638200F1F9D1 /* infoSpendingLimits.html in Resources */ = {isa = PBXBuildFile; fileRef = 687D2E7B1A09638200F1F9D1 /* infoSpendingLimits.html */; };
 		6893E6CA19783FED0092DA04 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6893E6C919783FED0092DA04 /* SyncView.m */; };
+		68BC31CB1A3F745900ECDA97 /* UIButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BC31C91A3F745900ECDA97 /* UIButtonBarRefresh.png */; };
+		68BC31CC1A3F745900ECDA97 /* UIButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BC31CA1A3F745900ECDA97 /* UIButtonBarRefresh@2x.png */; };
 		68C3285719804BFE007DA4C2 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */; };
 		68C4AA241A0B4DD70010C837 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C4AA221A0B4DD70010C837 /* FadingAlertView.m */; };
 		68C4AA251A0B4DD70010C837 /* FadingAlertView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView~iphone.xib */; };
@@ -1277,6 +1279,8 @@
 		687D2E7B1A09638200F1F9D1 /* infoSpendingLimits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoSpendingLimits.html; sourceTree = "<group>"; };
 		6893E6C819783FED0092DA04 /* SyncView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncView.h; sourceTree = "<group>"; };
 		6893E6C919783FED0092DA04 /* SyncView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncView.m; sourceTree = "<group>"; };
+		68BC31C91A3F745900ECDA97 /* UIButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarRefresh.png; sourceTree = "<group>"; };
+		68BC31CA1A3F745900ECDA97 /* UIButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
 		68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SyncView~iphone.xib"; sourceTree = "<group>"; };
 		68C4AA211A0B4DD70010C837 /* FadingAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FadingAlertView.h; path = AirBitz/FadingAlert/FadingAlertView.h; sourceTree = SOURCE_ROOT; };
 		68C4AA221A0B4DD70010C837 /* FadingAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FadingAlertView.m; path = AirBitz/FadingAlert/FadingAlertView.m; sourceTree = SOURCE_ROOT; };
@@ -2464,6 +2468,8 @@
 		B5675B9F18A19A84002E0703 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				68BC31C91A3F745900ECDA97 /* UIButtonBarRefresh.png */,
+				68BC31CA1A3F745900ECDA97 /* UIButtonBarRefresh@2x.png */,
 				7D6493921A060F1E0002E64C /* large-digit-input_selected@2x~iphone.png */,
 				7D6493931A060F1E0002E64C /* large-digit-input_selected~iphone.png */,
 				7D6493941A060F1E0002E64C /* large-digit-input@2x~iphone.png */,
@@ -3833,6 +3839,7 @@
 				7D8270B119F8976E003F275D /* btn_td_green@2x~iphone.png in Resources */,
 				B59C153718C012B500AEA789 /* tabbar_divider~iphone.png in Resources */,
 				B58FF741199D1540002C3D45 /* BLE_Button@2x.png in Resources */,
+				68BC31CB1A3F745900ECDA97 /* UIButtonBarRefresh.png in Resources */,
 				B59C14F018C012B500AEA789 /* btn_equal@2x~iphone.png in Resources */,
 				4C98CAEE199D6914000009B5 /* infoRecipient.html in Resources */,
 				B59C161E18C145D400AEA789 /* tabbar_bkg_selected@2x~iphone.png in Resources */,
@@ -3846,6 +3853,7 @@
 				7D989FFA1A0206960094512B /* bd_icon_facebook@2x~iphone.png in Resources */,
 				B59C143718C0129300AEA789 /* bd_cell_top@2x~iphone.png in Resources */,
 				4C7247C819353BD50091C286 /* icon_export_sdcard@2x~iphone.png in Resources */,
+				68BC31CC1A3F745900ECDA97 /* UIButtonBarRefresh@2x.png in Resources */,
 				4C5D8C61192AF4FF0015BB3C /* btn_camera@2x~iphone.png in Resources */,
 				7DFAF0C31A03119D00D33198 /* background_login@2x~iphone.jpg in Resources */,
 				B59C141E18C0113A00AEA789 /* divider@2x~iphone.png in Resources */,
