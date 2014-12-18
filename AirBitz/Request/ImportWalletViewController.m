@@ -334,8 +334,9 @@ typedef enum eImportState
 
 - (void)expireImport
 {
-    [self showFadingError:NSLocalizedString(@"Import failed. Please check your internet connection", nil)];
+    [self showFadingError:NSLocalizedString(@"Import failed. Please check your connection", nil)];
     [self updateState];
+    _callbackTimer = nil;
 }
 
 - (void)cancelImportExpirationTimer
@@ -394,7 +395,7 @@ typedef enum eImportState
                     [self updateDisplay];
                     
                     // handle the case that the sweep callback is not triggered in a timely manner
-                    _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:30 * 60
+                    _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:30
                                                                       target:self
                                                                     selector:@selector(expireImport)
                                                                     userInfo:nil
