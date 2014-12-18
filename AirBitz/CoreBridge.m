@@ -1733,10 +1733,20 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 
 void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 {
+    NSMutableDictionary *sweepData = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        [NSNumber numberWithInt:cc], KEY_SWEEP_CORE_CONDITION_CODE,
+                                        [NSNumber numberWithUnsignedLongLong:amount], KEY_SWEEP_TX_AMOUNT,
+                                      nil];
+    if (szID)
+    {
+        [sweepData setValue:[NSString stringWithUTF8String:szID] forKey:KEY_SWEEP_TX_ID];
+    }
+    else
+    {
+        [sweepData setValue:@"" forKey:KEY_SWEEP_TX_ID];
+    }
+
     // broadcast message out that the sweep is done
-    NSDictionary *sweepData = @{ KEY_SWEEP_CORE_CONDITION_CODE:[NSNumber numberWithInt:cc],
-                                 KEY_SWEEP_TX_ID:[NSString stringWithUTF8String:szID],
-                                 KEY_SWEEP_TX_AMOUNT:[NSNumber numberWithUnsignedLongLong:amount]};
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HANDLE_BITCOIN_URI
                                                         object:nil
                                                       userInfo:sweepData];

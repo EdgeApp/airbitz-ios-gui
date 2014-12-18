@@ -23,6 +23,8 @@ typedef NS_ENUM(NSUInteger, ImportDataModel) {
 #define HIDDEN_BITZ_URI_SCHEME @"hbits"
 #define BITCOIN_URI_SCHEME @"bitcoin"
 
+#define READER_VIEW_TAG     99999999
+
 typedef NS_ENUM(NSUInteger, RequestState) {
     kNone,    // waiting for the user to input new request data
     kRequest, // request a new, full amount

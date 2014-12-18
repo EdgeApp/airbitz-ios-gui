@@ -353,7 +353,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	_readerView.readerDelegate = self;
 	_readerView.tracksSymbols = NO;
 	
-	_readerView.tag = 99999999;
+	_readerView.tag = READER_VIEW_TAG;
 	if ([self.pickerTextSendTo.textField.text length])
 	{
 		_readerView.alpha = 0.0;

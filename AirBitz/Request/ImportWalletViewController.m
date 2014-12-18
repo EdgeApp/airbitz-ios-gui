@@ -23,12 +23,12 @@
 #import "DL_URLServer.h"
 #import "Server.h"
 #import "CJSONDeserializer.h"
+#import "PickerTextView.h"
+#import <Social/Social.h>
 
 #define WALLET_BUTTON_WIDTH 210
 
 #define SCANNER_DELAY_SECS  0
-
-#define READER_VIEW_TAG     99999999
 
 typedef enum eImportState
 {
@@ -63,7 +63,7 @@ typedef enum eImportState
 @property (weak, nonatomic) IBOutlet UIImageView        *imageFlashFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView    *flashSelector;
 @property (weak, nonatomic) IBOutlet UIView             *viewDisplay;
-@property (weak, nonatomic) IBOutlet LatoLabel          *labelEnter;
+@property (weak, nonatomic) IBOutlet UIView				*qrView;
 @property (weak, nonatomic) IBOutlet UIImageView        *imagePasswordEmboss;
 @property (weak, nonatomic) IBOutlet UIImageView        *imageApproved;
 @property (weak, nonatomic) IBOutlet UIImageView        *imageNotApproved;
@@ -71,6 +71,7 @@ typedef enum eImportState
 
 @property (nonatomic, strong) NSArray  *arrayWallets;
 @property (nonatomic, copy)   NSString *strPassword;
+@property (nonatomic, weak) IBOutlet UILabel *scanningErrorLabel;
 
 @end
 
@@ -128,8 +129,8 @@ typedef enum eImportState
 
     if (_bUsingImagePicker == NO)
     {
-        [self performSelector:@selector(startCameraScanner) withObject:nil afterDelay:SCANNER_DELAY_SECS];
-        //_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:SCANNER_DELAY_SECS target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+        [self performSelector:@selector(startQRReader) withObject:nil afterDelay:SCANNER_DELAY_SECS];
+        //_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:SCANNER_DELAY_SECS target:self selector:@selector(startQRReader:) userInfo:nil repeats:NO];
 
         [self.flashSelector selectItem:FLASH_ITEM_OFF];
     }
@@ -167,16 +168,20 @@ typedef enum eImportState
 
 - (IBAction)buttonBackTouched:(id)sender
 {
+	[self.view endEditing:YES];
+    [self resignAllResponders];
     [self animatedExit];
 }
 
 - (IBAction)buttonCameraTouched:(id)sender
 {
+    [self resignAllResponders];
     [self showImageScanner];
 }
 
 - (IBAction)buttonInfoTouched:(id)sender
 {
+    [self resignAllResponders];
     [InfoView CreateWithHTML:@"infoImportWallet" forView:self.view];
 }
 
@@ -190,8 +195,6 @@ typedef enum eImportState
     {
         bHideEnter = NO;
     }
-
-    self.labelEnter.hidden = bHideEnter;
 
     if (_state == ImportState_PrivateKey)
     {
@@ -321,29 +324,35 @@ typedef enum eImportState
 
 - (void)importWallet
 {
-    const int hBitzIDLength = 4;
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWallet];
-    _sweptAddress = [CoreBridge sweepKey:self.textPrivateKey.text intoWallet:wallet.strUUID withCallback:ABC_Sweep_Complete_Callback];
-    if (kHBURI == _dataModel && nil != _sweptAddress && hBitzIDLength <= _sweptAddress.length)
+    if ([self.textPrivateKey.text length])
     {
-        // make a query with the last bytes of the address
-        NSString *hiddenBitzID = [_sweptAddress substringFromIndex:[_sweptAddress length]-hBitzIDLength];
-        NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
-        [[DL_URLServer controller] issueRequestURL:hiddenBitzURI
-                                        withParams:nil
-                                        withObject:self
-                                      withDelegate:self
-                                acceptableCacheAge:CACHE_24_HOURS
-                                       cacheResult:YES];
-    }
-    else
-    {
-        _sweptAddress = nil;
-    }
+        const int hBitzIDLength = 4;
+        Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWallet];
+        _sweptAddress = [CoreBridge sweepKey:self.textPrivateKey.text
+                                  intoWallet:wallet.strUUID
+                                withCallback:ABC_Sweep_Complete_Callback];
+        if (kHBURI == _dataModel && nil != _sweptAddress && hBitzIDLength <= _sweptAddress.length)
+        {
+            // make a query with the last bytes of the address
+            NSString *hiddenBitzID = [_sweptAddress substringFromIndex:[_sweptAddress length]-hBitzIDLength];
+            NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
+            [[DL_URLServer controller] issueRequestURL:hiddenBitzURI
+                                            withParams:nil
+                                            withObject:self
+                                          withDelegate:self
+                                    acceptableCacheAge:CACHE_24_HOURS
+                                           cacheResult:YES];
 
-    // then bring up the transaction window representing the import
-    _state = ImportState_Importing;
-    [self updateDisplay];
+            // then bring up the transaction window representing the import
+            _state = ImportState_Importing;
+            [self updateDisplay];
+        }
+        else
+        {
+            _sweptAddress = nil;
+            [self showFadingError:NSLocalizedString(@"Invalid private key", nil)];
+        }
+    }
 }
 
 - (void)triggerImportStart
@@ -367,8 +376,10 @@ typedef enum eImportState
     }
 }
 
-- (void)processZBarResults:(ZBarSymbolSet *)syms
+- (BOOL)processZBarResults:(ZBarSymbolSet *)syms
 {
+    BOOL bSuccess = YES;
+
     NSString *symbolData;
 	for (ZBarSymbol *sym in syms)
 	{
@@ -394,22 +405,25 @@ typedef enum eImportState
                     [self performSelector:@selector(triggerImportStart)
                                withObject:nil
                                afterDelay:0.0];
+
+                    bSuccess = YES;
                 }
                 else if (NSNotFound != [scheme rangeOfString:BITCOIN_URI_SCHEME].location)
                 {
                     // valid bitcoin URI... we could pop up a helpful message
                     // "You've scanned an address. Would you like to send to it?"
                     // Yes | No
-                    [self showFadingError:NSLocalizedString(@"Invalid private key", nil)];
+
+                    bSuccess = NO;
                 }
                 else
                 {
-                    [self showFadingError:NSLocalizedString(@"Invalid private key", nil)];
+                    bSuccess = NO;
                 }
             }
             else
             {
-                [self showFadingError:NSLocalizedString(@"Invalid private key", nil)];
+                bSuccess = NO;
             }
         }
         else
@@ -423,14 +437,21 @@ typedef enum eImportState
             [self performSelector:@selector(triggerImportStart)
                        withObject:nil
                        afterDelay:0.0];
+            return YES;
         }
     }
     else
     {
+        bSuccess = NO;
+    }
+
+    if (!bSuccess)
+    {
         [self showFadingError:NSLocalizedString(@"Invalid private key", nil)];
     }
+    
+    return bSuccess;
 }
-
 
 - (void)showImageScanner
 {
@@ -453,13 +474,23 @@ typedef enum eImportState
 #endif
 }
 
-- (void)startCameraScanner
+- (void)startQRReader
 {
 #if !TARGET_IPHONE_SIMULATOR
-    // NSLog(@"Scanning...");
-
 	_readerView = [ZBarReaderView new];
-	[self.viewDisplay insertSubview:_readerView belowSubview:self.scanFrame];
+    if ([_readerView isDeviceAvailable])
+    {
+        [self.scanningErrorLabel setHidden:YES];
+        [self.flashSelector setHidden:NO];
+    }
+    else
+    {
+        self.scanningErrorLabel.text = NSLocalizedString(@"Camera unavailable", @"");
+        [self.scanningErrorLabel setHidden:NO];
+        [self.flashSelector setHidden:YES];
+    }
+    
+	[self.qrView insertSubview:_readerView belowSubview:self.scanFrame];
 	_readerView.frame = self.scanFrame.frame;
 	_readerView.readerDelegate = self;
 	_readerView.tracksSymbols = NO;
@@ -499,6 +530,12 @@ typedef enum eImportState
     return NO;
 }
 
+- (void)resignAllResponders
+{
+    [self.textPrivateKey resignFirstResponder];
+    [self.buttonSelector resignFirstResponder];
+}
+
 - (void)animatedExit
 {
 	[UIView animateWithDuration:0.35
@@ -536,16 +573,33 @@ typedef enum eImportState
     _fadingAlert = nil;
 }
 
+- (void)sendTweet
+{
+    // invoke Twitter to send tweet
+    SLComposeViewController *slComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [slComposerSheet setInitialText:_tweet];
+    [slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
+        switch (result) {
+            case SLComposeViewControllerResultCancelled:
+                [self showFadingError:NSLocalizedString(@"Sweep the private key to retry Twitter", nil)];
+                // intentional fall-through
+            default:
+                _state = ImportState_PrivateKey;
+                break;
+        }
+    }];
+    [self presentViewController:slComposerSheet animated:YES completion:nil];
+}
+
 #pragma mark - AlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 	if (buttonIndex == 1)
 	{
-		// invoke Twitter to send tweet
-        NSString *encodedTweet = [NSString stringWithFormat:@"twitter://post?message=%@", _tweet];
-        NSURL *tweetURL = [NSURL URLWithString:encodedTweet];
-        [[UIApplication sharedApplication] openURL:tweetURL];
+        [self performSelector:@selector(sendTweet)
+                   withObject:nil
+                   afterDelay:0.0];
 	}
 }
 
@@ -588,11 +642,11 @@ typedef enum eImportState
         [self updateDisplay];
 
         _dataModel = kWIF;
-        [self performSelector:@selector(triggerImportStart) withObject:nil afterDelay:0.0];
+        [self triggerImportStart];
     }
     else
     {
-        [self performSelector:@selector(checkEnteredPassword) withObject:nil afterDelay:0.0];
+        [self checkEnteredPassword];
     }
 
 	return YES;
@@ -627,44 +681,35 @@ typedef enum eImportState
     }
 
 	NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-	
 	NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
+
 	NSError *myError;
-	NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
-    
-	NSArray *searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
-    if (searchResultsArray)
+	NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
+    if (dict)
     {
-        // a promotion is on. give the user a chance to tweet about it if
-        // this one hasn't been claimed
-        for (NSDictionary *dict in searchResultsArray)
+        NSString *token = [dict objectForKey:@"token"];
+        _tweet = [dict objectForKey:@"tweet"];
+        NSString *message = [dict objectForKey:@"message"];
+        if ([dict objectForKey:@"claimed"] && [[dict objectForKey:@"claimed"] boolValue])
         {
-            NSString *token = [dict objectForKey:@"token"];
-            _tweet = [dict objectForKey:@"tweet"];
-            NSString *message = [dict objectForKey:@"message"];
-            if ([dict objectForKey:@"claimed"] && [[dict objectForKey:@"claimed"] boolValue])
-            {
-                [self showFadingError:NSLocalizedString(@"Promotion has been claimed", nil)];
-            }
-            else if (message && token && _tweet)
-            {
-                _tweet = [_tweet stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle:NSLocalizedString(@"Congratulations", nil)
-                                      message:message
-                                      delegate:self
-                                      cancelButtonTitle:@"No"
-                                      otherButtonTitles:@"Yes", nil];
-                [alert show];
-            }
+            [self showFadingError:NSLocalizedString(@"Promotion has been claimed", nil)];
         }
-    }
+        else if (message && token && _tweet)
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Congratulations", nil)
+                                  message:message
+                                  delegate:self
+                                  cancelButtonTitle:@"No"
+                                  otherButtonTitles:@"Yes", nil];
+            [alert show];
+        }
+    }/*
     else
     {
-        // no promotion
-        //
-//        [self showFadingError:NSLocalizedString(@"Import is ", nil)];
-    }
+        no promotion
+        allow the callback to notify the user of the funds sweep
+    }*/
 }
 
 #pragma mark - Flash Select Delegates
@@ -705,25 +750,41 @@ typedef enum eImportState
 
 #pragma mark - ZBar's Delegate methods
 
+#if !TARGET_IPHONE_SIMULATOR
+
 - (void)readerView:(ZBarReaderView *)view didReadSymbols:(ZBarSymbolSet *)syms fromImage:(UIImage *)img
 {
-    [self processZBarResults:syms];
-
-    [view stop];
+    if ([self processZBarResults:syms])
+    {
+        [view stop];
+    }
+    else
+    {
+        [view start];
+    }
 }
 
-#if !TARGET_IPHONE_SIMULATOR
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)reader
+{
+    [reader dismissViewControllerAnimated:YES completion:nil];
+    _bUsingImagePicker = NO;
+
+    [self startQRReader];
+}
 
 - (void)imagePickerController:(UIImagePickerController *)reader didFinishPickingMediaWithInfo:(NSDictionary*) info
 {
     id<NSFastEnumeration> results = [info objectForKey:ZBarReaderControllerResults];
-    //UIImage *image = [info objectForKey: UIImagePickerControllerOriginalImage];
 
-    [self processZBarResults:(ZBarSymbolSet *)results];
+    BOOL bSuccess = [self processZBarResults:(ZBarSymbolSet *)results];
 
     [reader dismissViewControllerAnimated:YES completion:nil];
-    //[[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-    //[reader dismissModalViewControllerAnimated: YES];
+    _bUsingImagePicker = NO;
+
+    if (!bSuccess)
+    {
+        [self startQRReader];
+    }
 }
 
 - (void)readerControllerDidFailToRead:(ZBarReaderController*)reader
@@ -732,13 +793,10 @@ typedef enum eImportState
     self.textPrivateKey.text = @"";
     [reader dismissViewControllerAnimated:YES completion:nil];
 
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"QR Code Scan Failure", nil)
-                          message:NSLocalizedString(@"Unable to scan QR code", nil)
-                          delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil];
-    [alert show];
+    [self showFadingError:NSLocalizedString(@"Unable to scan QR code", nil)];
+
+    _bUsingImagePicker = NO;
+    [self startQRReader];
 }
 
 #endif
@@ -771,6 +829,7 @@ typedef enum eImportState
     tABC_CC result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
     if (ABC_CC_Ok == result)
     {
+        // note: txID can be nil or length 0
 //        NSString *txID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
         uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
         [self showFadingError:[NSString stringWithFormat:NSLocalizedString(@"Imported %ull into wallet", nil), amount]];
@@ -781,7 +840,6 @@ typedef enum eImportState
         temp.code = result;
         [self showFadingError:[Util errorMap:&temp]];
     }
-    [self showFadingError:NSLocalizedString(@"", nil)];
     _state = ImportState_PrivateKey;
 }
 
