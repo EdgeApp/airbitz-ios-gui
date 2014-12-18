@@ -579,7 +579,7 @@ typedef enum eImportState
     [self showFadingError:NSLocalizedString(@"Import the private key again to retry Twitter", nil)];
 }
 
-- (void)showSweepDoneAlerts
+- (void)showSweepResults
 {
     if (_sweptAlert)
     {
@@ -588,6 +588,29 @@ typedef enum eImportState
     if (_receivedAlert)
     {
         [_receivedAlert show];
+    }
+
+    if (kHBURI == _dataModel)
+    {
+        // make a query with the last bytes of the address
+        const int hBitzIDLength = 4;
+        if (nil != _sweptAddress && hBitzIDLength <= _sweptAddress.length)
+        {
+            NSString *hiddenBitzID = [_sweptAddress substringFromIndex:[_sweptAddress length]-hBitzIDLength];
+            NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
+            [[DL_URLServer controller] issueRequestURL:hiddenBitzURI
+                                            withParams:nil
+                                            withObject:self
+                                          withDelegate:self
+                                    acceptableCacheAge:CACHE_24_HOURS
+                                           cacheResult:YES];
+            
+            _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:10
+                                                              target:self
+                                                            selector:@selector(expireImport)
+                                                            userInfo:nil
+                                                             repeats:NO];
+        }
     }
 }
 
@@ -727,6 +750,7 @@ typedef enum eImportState
 - (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
 {
     bool bSuccess = NO;
+    [self cancelImportExpirationTimer];
 
     if (nil == _tweetAlert)
     {
@@ -900,23 +924,6 @@ typedef enum eImportState
 
         if (ABC_CC_Ok == result)
         {
-            if (kHBURI == _dataModel)
-            {
-                // make a query with the last bytes of the address
-                const int hBitzIDLength = 4;
-                if (nil != _sweptAddress && hBitzIDLength <= _sweptAddress.length)
-                {
-                    NSString *hiddenBitzID = [_sweptAddress substringFromIndex:[_sweptAddress length]-hBitzIDLength];
-                    NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
-                    [[DL_URLServer controller] issueRequestURL:hiddenBitzURI
-                                                    withParams:nil
-                                                    withObject:self
-                                                  withDelegate:self
-                                            acceptableCacheAge:CACHE_24_HOURS
-                                                   cacheResult:YES];
-                }
-            }
-
             if (0 < amount)
             {
                 // handle received bitcoin
@@ -935,7 +942,7 @@ typedef enum eImportState
                     _sweptTXID = nil;
                 }
             }
-            else
+            else if (kHBURI != _dataModel)
             {
                 NSString *message = NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil);
                 _sweptAlert = [[UIAlertView alloc]
@@ -959,7 +966,7 @@ typedef enum eImportState
                            otherButtonTitles:nil, nil];
         }
 
-        [self performSelectorOnMainThread:@selector(showSweepDoneAlerts)
+        [self performSelectorOnMainThread:@selector(showSweepResults)
                                withObject:nil
                             waitUntilDone:NO];
     }
