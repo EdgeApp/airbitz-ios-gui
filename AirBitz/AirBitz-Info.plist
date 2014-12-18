@@ -35,6 +35,12 @@
 	<string>99999999-99</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Bluetooth is used to connect to others and make transactions within short distances.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Your camera is used to scan QR codes.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Your contact list is used to label recipients and senders.</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Your location is used to find businesses in your area.</string>
 	<key>UIAppFonts</key>
