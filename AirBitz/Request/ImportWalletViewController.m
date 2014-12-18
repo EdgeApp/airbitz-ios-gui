@@ -937,31 +937,31 @@ typedef enum eImportState
     NSDictionary *userInfo = [notification userInfo];
     tABC_CC result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
     uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
-    if (ABC_CC_Ok == result)
+    if (nil == _sweptAlert && nil == _receivedAlert)
     {
-        if (0 < amount)
+        if (ABC_CC_Ok == result)
         {
-            // handle received bitcoin
-            _sweptTXID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
-            if (_sweptTXID && [_sweptTXID length])
+            if (0 < amount)
             {
-                _receivedAlert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Received Funds", nil)
-                                  message:NSLocalizedString(@"Bitcoin received. Tap for details.", nil)
-                                  delegate:self
-                                  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                  otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                // handle received bitcoin
+                _sweptTXID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
+                if (_sweptTXID && [_sweptTXID length])
+                {
+                    _receivedAlert = [[UIAlertView alloc]
+                                      initWithTitle:NSLocalizedString(@"Received Funds", nil)
+                                      message:NSLocalizedString(@"Bitcoin received. Tap for details.", nil)
+                                      delegate:self
+                                      cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                      otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                }
+                else
+                {
+                    _sweptTXID = nil;
+                }
             }
             else
             {
-                _sweptTXID = nil;
-            }
-        }
-        else
-        {
-            if (nil == _sweptAlert)
-            {
-                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil), amount];
+                NSString *message = NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil);
                 _sweptAlert = [[UIAlertView alloc]
                                initWithTitle:NSLocalizedString(@"Error", nil)
                                message:message
@@ -970,10 +970,7 @@ typedef enum eImportState
                                otherButtonTitles:nil, nil];
             }
         }
-    }
-    else
-    {
-        if (nil == _sweptAlert)
+        else
         {
             tABC_Error temp;
             temp.code = result;
@@ -985,11 +982,11 @@ typedef enum eImportState
                            cancelButtonTitle:@"OK"
                            otherButtonTitles:nil, nil];
         }
-    }
 
-    [self performSelectorOnMainThread:@selector(showSweepDoneAlerts)
-                           withObject:nil
-                        waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(showSweepDoneAlerts)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
 }
 
 @end
