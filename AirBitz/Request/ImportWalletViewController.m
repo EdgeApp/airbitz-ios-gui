@@ -586,9 +586,6 @@ typedef enum eImportState
 - (void)showSweepDoneAlert
 {
     [_sweptAlert show];
-    _state = ImportState_PrivateKey;
-    [self updateDisplay];
-    [self startQRReader];
 }
 
 - (void)sendTweet
@@ -627,6 +624,14 @@ typedef enum eImportState
         {
             [self tweetCancelled];
         }
+        _tweetAlert = nil;
+    }
+    else if (_sweptAlert == alertView)
+    {
+        _state = ImportState_PrivateKey;
+        [self updateDisplay];
+        [self startQRReader];
+        _sweptAlert = nil;
     }
 }
 
@@ -699,54 +704,57 @@ typedef enum eImportState
 {
     bool bSuccess = NO;
 
-    NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
+    if (nil == _tweetAlert)
+    {
+        NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
 
-    NSError *myError;
-    NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
-    if (dict)
-    {
-        NSString *token = [dict objectForKey:@"token"];
-        _tweet = [dict objectForKey:@"tweet"];
-        if (token && _tweet)
+        NSError *myError;
+        NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
+        if (dict)
         {
-            if ([dict objectForKey:@"claimed"] && [[dict objectForKey:@"claimed"] boolValue])
+            NSString *token = [dict objectForKey:@"token"];
+            _tweet = [dict objectForKey:@"tweet"];
+            if (token && _tweet)
             {
-                NSString *zmessage = [dict objectForKey:@"zero_message"];
-                if (zmessage)
+                if ([dict objectForKey:@"claimed"] && [[dict objectForKey:@"claimed"] boolValue])
                 {
-                    _tweetAlert = [[UIAlertView alloc]
-                                   initWithTitle:NSLocalizedString(@"Sorry", nil)
-                                   message:zmessage
-                                   delegate:self
-                                   cancelButtonTitle:@"No"
-                                   otherButtonTitles:@"Yes", nil];
-                    [_tweetAlert show];
-                    bSuccess = YES;
+                    NSString *zmessage = [dict objectForKey:@"zero_message"];
+                    if (zmessage)
+                    {
+                        _tweetAlert = [[UIAlertView alloc]
+                                       initWithTitle:NSLocalizedString(@"Sorry", nil)
+                                       message:zmessage
+                                       delegate:self
+                                       cancelButtonTitle:@"No"
+                                       otherButtonTitles:@"Yes", nil];
+                        [_tweetAlert show];
+                        bSuccess = YES;
+                    }
+                }
+                else
+                {
+                    NSString *message = [dict objectForKey:@"message"];
+                    if (message)
+                    {
+                        _tweetAlert = [[UIAlertView alloc]
+                                       initWithTitle:NSLocalizedString(@"Congratulations", nil)
+                                       message:message
+                                       delegate:self
+                                       cancelButtonTitle:@"No"
+                                       otherButtonTitles:@"Yes", nil];
+                        [_tweetAlert show];
+                        bSuccess = YES;
+                    }
                 }
             }
-            else
-            {
-                NSString *message = [dict objectForKey:@"message"];
-                if (message)
-                {
-                    _tweetAlert = [[UIAlertView alloc]
-                                   initWithTitle:NSLocalizedString(@"Congratulations", nil)
-                                   message:message
-                                   delegate:self
-                                   cancelButtonTitle:@"No"
-                                   otherButtonTitles:@"Yes", nil];
-                    [_tweetAlert show];
-                    bSuccess = YES;
-                }
-            }
-        }
-    }/*
-    else
-    {
-        no promotion
-        allow the callback to notify the user of the funds sweep
-    }*/
+        }/*
+        else
+        {
+            no promotion
+            allow the callback to notify the user of the funds sweep
+        }*/
+    }
 
     if (NO == bSuccess)
     {
@@ -869,26 +877,41 @@ typedef enum eImportState
 
 - (void)sweepDoneCallback:(NSNotification *)notification
 {
-    NSDictionary *userInfo = [notification userInfo];
-    tABC_CC result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
-    uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
-    if (ABC_CC_Ok == result)
+    if (nil == _sweptAlert)
     {
-        if (0 < amount)
+        NSDictionary *userInfo = [notification userInfo];
+        tABC_CC result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
+        uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
+        if (ABC_CC_Ok == result)
         {
-            // note: txID can be nil or length 0
-//            NSString *txID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
-            NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Imported %llu into wallet", nil), amount];
-            _sweptAlert = [[UIAlertView alloc]
-                           initWithTitle:NSLocalizedString(@"Success", nil)
-                           message:message
-                           delegate:self
-                           cancelButtonTitle:@"OK"
-                           otherButtonTitles:nil, nil];
+            if (0 < amount)
+            {
+                // note: txID can be nil or length 0
+//                NSString *txID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
+                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Imported %llu into wallet", nil), amount];
+                _sweptAlert = [[UIAlertView alloc]
+                               initWithTitle:NSLocalizedString(@"Success", nil)
+                               message:message
+                               delegate:self
+                               cancelButtonTitle:@"OK"
+                               otherButtonTitles:nil, nil];
+            }
+            else
+            {
+                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil), amount];
+                _sweptAlert = [[UIAlertView alloc]
+                               initWithTitle:NSLocalizedString(@"Error", nil)
+                               message:message
+                               delegate:self
+                               cancelButtonTitle:@"OK"
+                               otherButtonTitles:nil, nil];
+            }
         }
         else
         {
-            NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil), amount];
+            tABC_Error temp;
+            temp.code = result;
+            NSString *message = [Util errorMap:&temp];
             _sweptAlert = [[UIAlertView alloc]
                            initWithTitle:NSLocalizedString(@"Error", nil)
                            message:message
@@ -896,23 +919,11 @@ typedef enum eImportState
                            cancelButtonTitle:@"OK"
                            otherButtonTitles:nil, nil];
         }
+        
+        [self performSelectorOnMainThread:@selector(showSweepDoneAlert)
+                               withObject:nil
+                            waitUntilDone:NO];
     }
-    else
-    {
-        tABC_Error temp;
-        temp.code = result;
-        NSString *message = [Util errorMap:&temp];
-        _sweptAlert = [[UIAlertView alloc]
-                       initWithTitle:NSLocalizedString(@"Error", nil)
-                       message:message
-                       delegate:self
-                       cancelButtonTitle:@"OK"
-                       otherButtonTitles:nil, nil];
-    }
-    
-    [self performSelectorOnMainThread:@selector(showSweepDoneAlert)
-                           withObject:nil
-                        waitUntilDone:NO];
 }
 
 @end
