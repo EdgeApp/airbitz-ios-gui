@@ -43,6 +43,8 @@
 	<string>Your contact list is used to label recipients and senders.</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Your location is used to find businesses in your area.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>You can select a photo of a QR code to scan.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-Black.ttf</string>
