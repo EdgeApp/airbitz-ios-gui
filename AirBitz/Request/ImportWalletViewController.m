@@ -53,8 +53,12 @@ typedef enum eImportState
     FadingAlertView         *_fadingAlert;
     NSString                *_sweptAddress;
     NSString                *_tweet;
-    UIAlertView             *_tweetAlert;
+    NSString                *_privateKey;
+    NSString                *_sweptTXID;
     UIAlertView             *_sweptAlert;
+    UIAlertView             *_tweetAlert;
+    UIAlertView             *_receivedAlert;
+    NSTimer                 *_callbackTimer;
 }
 
 @property (weak, nonatomic) IBOutlet UIView             *viewPassword;
@@ -93,6 +97,10 @@ typedef enum eImportState
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _readerView = nil;
+    _sweptAddress = nil;
+    _tweet = nil;
+    _privateKey = nil;
+    _sweptTXID = nil;
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplay];
@@ -325,15 +333,32 @@ typedef enum eImportState
     }
 }
 
+- (void)expireImport
+{
+    [self showFadingError:NSLocalizedString(@"Import failed. Please check your internet connection", nil)];
+    _state = ImportState_PrivateKey;
+    [self updateDisplay];
+    [self startQRReader];
+}
+
+- (void)cancelImportExpirationTimer
+{
+    if (_callbackTimer)
+    {
+        [_callbackTimer invalidate];
+        _callbackTimer = nil;
+    }
+}
+
 - (void)importWallet
 {
     bool bSuccess = NO;
 
-    if ([self.textPrivateKey.text length])
+    if ([_privateKey length])
     {
         const int hBitzIDLength = 4;
         Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWallet];
-        _sweptAddress = [CoreBridge sweepKey:self.textPrivateKey.text
+        _sweptAddress = [CoreBridge sweepKey:_privateKey
                                   intoWallet:wallet.strUUID
                                 withCallback:ABC_Sweep_Complete_Callback];
         if (nil != _sweptAddress && hBitzIDLength <= _sweptAddress.length)
@@ -342,6 +367,12 @@ typedef enum eImportState
             _state = ImportState_Importing;
             [self updateDisplay];
 
+            _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:30 * 60
+                                                              target:self
+                                                            selector:@selector(expireImport)
+                                                            userInfo:nil
+                                                             repeats:NO];
+            
             if (kHBURI == _dataModel)
             {
                 // make a query with the last bytes of the address
@@ -395,7 +426,7 @@ typedef enum eImportState
                 {
                     _dataModel = kHBURI;
                     // start the sweep
-                    self.textPrivateKey.text = [symbolData substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
+                    _privateKey = [symbolData substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
 
                     [self performSelector:@selector(importWallet)
                                withObject:nil
@@ -425,7 +456,7 @@ typedef enum eImportState
         {
             // assume this must be a private key
             _dataModel = kWIF;
-            self.textPrivateKey.text = symbolData;
+            _privateKey = symbolData;
 
             [self updateDisplay];
             
@@ -583,9 +614,16 @@ typedef enum eImportState
     [self startQRReader];
 }
 
-- (void)showSweepDoneAlert
+- (void)showSweepDoneAlerts
 {
-    [_sweptAlert show];
+    if (_sweptAlert)
+    {
+        [_sweptAlert show];
+    }
+    if (_receivedAlert)
+    {
+        [_receivedAlert show];
+    }
 }
 
 - (void)sendTweet
@@ -614,7 +652,7 @@ typedef enum eImportState
 {
     if (_tweetAlert == alertView)
     {
-        if (buttonIndex == 1)
+        if (1 == buttonIndex)
         {
             [self performSelector:@selector(sendTweet)
                        withObject:nil
@@ -628,11 +666,27 @@ typedef enum eImportState
     }
     else if (_sweptAlert == alertView)
     {
+        _sweptAlert = nil;
         _state = ImportState_PrivateKey;
         [self updateDisplay];
         [self startQRReader];
-        _sweptAlert = nil;
     }
+	else if (_receivedAlert == alertView)
+	{
+        if (1 == buttonIndex)
+        {
+            Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWallet];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
+                                                                object:nil
+                                                              userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:wallet.strUUID,
+                                                                         KEY_TX_DETAILS_EXITED_TX_ID:_sweptTXID}];
+        }
+
+        _receivedAlert = nil;
+        _state = ImportState_PrivateKey;
+        [self updateDisplay];
+        [self startQRReader];
+	}
 }
 
 #pragma mark - FadingAlertView delegate
@@ -674,6 +728,7 @@ typedef enum eImportState
         [self updateDisplay];
 
         _dataModel = kWIF;
+        _privateKey = self.textPrivateKey.text;
         [self importWallet];
     }
 
@@ -727,7 +782,7 @@ typedef enum eImportState
                                        message:zmessage
                                        delegate:self
                                        cancelButtonTitle:@"No"
-                                       otherButtonTitles:@"Yes", nil];
+                                       otherButtonTitles:@"OK", nil];
                         [_tweetAlert show];
                         bSuccess = YES;
                     }
@@ -742,7 +797,7 @@ typedef enum eImportState
                                        message:message
                                        delegate:self
                                        cancelButtonTitle:@"No"
-                                       otherButtonTitles:@"Yes", nil];
+                                       otherButtonTitles:@"OK", nil];
                         [_tweetAlert show];
                         bSuccess = YES;
                     }
@@ -842,7 +897,7 @@ typedef enum eImportState
 - (void)readerControllerDidFailToRead:(ZBarReaderController*)reader
                              withRetry:(BOOL)retry
 {
-    self.textPrivateKey.text = @"";
+    _privateKey = @"";
     [reader dismissViewControllerAnimated:YES completion:nil];
 
     [self showFadingError:NSLocalizedString(@"Unable to scan QR code", nil)];
@@ -877,26 +932,34 @@ typedef enum eImportState
 
 - (void)sweepDoneCallback:(NSNotification *)notification
 {
-    if (nil == _sweptAlert)
+    [self cancelImportExpirationTimer];
+
+    NSDictionary *userInfo = [notification userInfo];
+    tABC_CC result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
+    uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
+    if (ABC_CC_Ok == result)
     {
-        NSDictionary *userInfo = [notification userInfo];
-        tABC_CC result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
-        uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
-        if (ABC_CC_Ok == result)
+        if (0 < amount)
         {
-            if (0 < amount)
+            // handle received bitcoin
+            _sweptTXID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
+            if (_sweptTXID && [_sweptTXID length])
             {
-                // note: txID can be nil or length 0
-//                NSString *txID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
-                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Imported %llu into wallet", nil), amount];
-                _sweptAlert = [[UIAlertView alloc]
-                               initWithTitle:NSLocalizedString(@"Success", nil)
-                               message:message
-                               delegate:self
-                               cancelButtonTitle:@"OK"
-                               otherButtonTitles:nil, nil];
+                _receivedAlert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Received Funds", nil)
+                                  message:NSLocalizedString(@"Bitcoin received. Tap for details.", nil)
+                                  delegate:self
+                                  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                  otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
             }
             else
+            {
+                _sweptTXID = nil;
+            }
+        }
+        else
+        {
+            if (nil == _sweptAlert)
             {
                 NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil), amount];
                 _sweptAlert = [[UIAlertView alloc]
@@ -907,7 +970,10 @@ typedef enum eImportState
                                otherButtonTitles:nil, nil];
             }
         }
-        else
+    }
+    else
+    {
+        if (nil == _sweptAlert)
         {
             tABC_Error temp;
             temp.code = result;
@@ -919,11 +985,11 @@ typedef enum eImportState
                            cancelButtonTitle:@"OK"
                            otherButtonTitles:nil, nil];
         }
-        
-        [self performSelectorOnMainThread:@selector(showSweepDoneAlert)
-                               withObject:nil
-                            waitUntilDone:NO];
     }
+
+    [self performSelectorOnMainThread:@selector(showSweepDoneAlerts)
+                           withObject:nil
+                        waitUntilDone:NO];
 }
 
 @end

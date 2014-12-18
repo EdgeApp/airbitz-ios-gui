@@ -126,6 +126,7 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:NOTIFICATION_TX_RECEIVED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchViewSweep:) name:NOTIFICATION_VIEW_SWEEP_TX object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
 
     // init and set API key
@@ -583,6 +584,7 @@ typedef enum eAppMode
     _fadingAlert = nil;
 }
 
+
 - (void)launchReceiving:(NSNotification *)notification
 {
     NSDictionary *data = [notification userInfo];
@@ -696,6 +698,14 @@ typedef enum eAppMode
             [_requestViewController resetViews];
         });
     }];
+}
+
+- (void)launchViewSweep:(NSNotification *)notification
+{
+    NSDictionary *data = [notification userInfo];
+    _strWalletUUID = [data objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+    _strTxID = [data objectForKey:KEY_TX_DETAILS_EXITED_TX_ID];
+    [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
 }
 
 - (void)launchTransactionDetails:(NSString *)walletUUID withTx:(NSString *)txId
