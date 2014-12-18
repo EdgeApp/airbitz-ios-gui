@@ -351,30 +351,64 @@ typedef enum eImportState
 {
     bool bSuccess = NO;
 
-    if ([_privateKey length])
+    if (_privateKey)
     {
-        Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWallet];
-        _sweptAddress = [CoreBridge sweepKey:_privateKey
-                                  intoWallet:wallet.strUUID
-                                withCallback:ABC_Sweep_Complete_Callback];
-        if (nil != _sweptAddress && _sweptAddress.length)
+        _privateKey = [_privateKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([_privateKey length])
         {
-            bSuccess = YES;
-            _state = ImportState_Importing;
-            [self updateDisplay];
+            NSRange schemeMarkerRange = [_privateKey rangeOfString:@"://"];
+            if (NSNotFound != schemeMarkerRange.location)
+            {
+                NSString *scheme = [_privateKey substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
+                if (nil != scheme && 0 != [scheme length])
+                {
+                    if (NSNotFound != [scheme rangeOfString:HIDDEN_BITZ_URI_SCHEME].location)
+                    {
+                        _dataModel = kHBURI;
 
-            _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:30 * 60
-                                                              target:self
-                                                            selector:@selector(expireImport)
-                                                            userInfo:nil
-                                                             repeats:NO];
-        }
-        else
-        {
-            bSuccess = NO;
+                        _privateKey = [_privateKey substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
+
+                        bSuccess = YES;
+                    }
+                }
+            }
+            else
+            {
+                _dataModel = kWIF;
+
+                bSuccess = YES;
+            }
+
+            if (bSuccess)
+            {
+                // private key is a valid format
+                // attempt to sweep it
+                Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWallet];
+                _sweptAddress = [CoreBridge sweepKey:_privateKey
+                                          intoWallet:wallet.strUUID
+                                        withCallback:ABC_Sweep_Complete_Callback];
+
+                if (nil != _sweptAddress && _sweptAddress.length)
+                {
+                    _state = ImportState_Importing;
+                    [self updateDisplay];
+                    
+                    // handle the case that the sweep callback is not triggered in a timely manner
+                    _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:30 * 60
+                                                                      target:self
+                                                                    selector:@selector(expireImport)
+                                                                    userInfo:nil
+                                                                     repeats:NO];
+                }
+                else
+                {
+                    // no address associated with the private key, must be invalid
+                    bSuccess = NO;
+                }
+            }
         }
     }
-    
+
     if (NO == bSuccess)
     {
         _sweptAddress = nil;
@@ -385,71 +419,23 @@ typedef enum eImportState
 
 - (BOOL)processZBarResults:(ZBarSymbolSet *)syms
 {
-    BOOL bSuccess = YES;
+    BOOL bSuccess = NO;
 
     NSString *symbolData;
 	for (ZBarSymbol *sym in syms)
 	{
 		symbolData = (NSString *)sym.data;
-        symbolData = [symbolData stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 		break; //just grab first one
 	}
 
-    if (nil != symbolData && 0 != [symbolData length])
+    if (nil != symbolData && [symbolData length])
     {
-        NSRange schemeMarkerRange = [symbolData rangeOfString:@"://"];
-        if (NSNotFound != schemeMarkerRange.location)
-        {
-            NSString *scheme = [symbolData substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
-            if (nil != scheme && 0 != [scheme length])
-            {
-                if (NSNotFound != [scheme rangeOfString:HIDDEN_BITZ_URI_SCHEME].location)
-                {
-                    _dataModel = kHBURI;
-                    // start the sweep
-                    _privateKey = [symbolData substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
-
-                    [self performSelector:@selector(importWallet)
-                               withObject:nil
-                               afterDelay:0.0];
-
-                    bSuccess = YES;
-                }
-                else if (NSNotFound != [scheme rangeOfString:BITCOIN_URI_SCHEME].location)
-                {
-                    // valid bitcoin URI... we could pop up a helpful message
-                    // "You've scanned an address. Would you like to send to it?"
-                    // Yes | No
-
-                    bSuccess = NO;
-                }
-                else
-                {
-                    bSuccess = NO;
-                }
-            }
-            else
-            {
-                bSuccess = NO;
-            }
-        }
-        else
-        {
-            // assume this must be a private key
-            _dataModel = kWIF;
-            _privateKey = symbolData;
-
-            [self updateDisplay];
-            
-            [self performSelector:@selector(importWallet)
-                       withObject:nil
-                       afterDelay:0.0];
-            return YES;
-        }
-    }
-    else
-    {
-        bSuccess = NO;
+        _privateKey = symbolData;
+        [self performSelector:@selector(importWallet)
+                   withObject:nil
+                   afterDelay:0.0];
+        
+        bSuccess = YES;
     }
 
     if (!bSuccess)
