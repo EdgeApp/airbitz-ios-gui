@@ -623,6 +623,7 @@
 
 - (void)bringUpImportWalletView
 {
+    if (nil == _importWalletViewController)
     {
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _importWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ImportWalletViewController"];

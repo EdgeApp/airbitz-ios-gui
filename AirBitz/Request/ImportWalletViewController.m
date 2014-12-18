@@ -55,6 +55,7 @@ typedef enum eImportState
     NSString                *_tweet;
     NSString                *_privateKey;
     NSString                *_sweptTXID;
+    uint64_t                _sweptAmount;
     UIAlertView             *_sweptAlert;
     UIAlertView             *_tweetAlert;
     UIAlertView             *_receivedAlert;
@@ -129,15 +130,10 @@ typedef enum eImportState
     
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-    [center addObserver:self selector:@selector(sweepDoneCallback:) name:NOTIFICATION_SWEEP object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	//NSLog(@"Starting timer");
-
     if (_bUsingImagePicker == NO)
     {
         [self performSelector:@selector(startQRReader) withObject:nil afterDelay:SCANNER_DELAY_SECS];
@@ -145,11 +141,14 @@ typedef enum eImportState
 
         [self.flashSelector selectItem:FLASH_ITEM_OFF];
     }
+
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+    [center addObserver:self selector:@selector(sweepDoneCallback:) name:NOTIFICATION_SWEEP object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	//NSLog(@"Invalidating timer");
 	[_startScannerTimer invalidate];
 	_startScannerTimer = nil;
 
@@ -336,9 +335,7 @@ typedef enum eImportState
 - (void)expireImport
 {
     [self showFadingError:NSLocalizedString(@"Import failed. Please check your internet connection", nil)];
-    _state = ImportState_PrivateKey;
-    [self updateDisplay];
-    [self startQRReader];
+    [self updateState];
 }
 
 - (void)cancelImportExpirationTimer
@@ -356,12 +353,11 @@ typedef enum eImportState
 
     if ([_privateKey length])
     {
-        const int hBitzIDLength = 4;
         Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWallet];
         _sweptAddress = [CoreBridge sweepKey:_privateKey
                                   intoWallet:wallet.strUUID
                                 withCallback:ABC_Sweep_Complete_Callback];
-        if (nil != _sweptAddress && hBitzIDLength <= _sweptAddress.length)
+        if (nil != _sweptAddress && _sweptAddress.length)
         {
             bSuccess = YES;
             _state = ImportState_Importing;
@@ -372,19 +368,6 @@ typedef enum eImportState
                                                             selector:@selector(expireImport)
                                                             userInfo:nil
                                                              repeats:NO];
-            
-            if (kHBURI == _dataModel)
-            {
-                // make a query with the last bytes of the address
-                NSString *hiddenBitzID = [_sweptAddress substringFromIndex:[_sweptAddress length]-hBitzIDLength];
-                NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
-                [[DL_URLServer controller] issueRequestURL:hiddenBitzURI
-                                                withParams:nil
-                                                withObject:self
-                                              withDelegate:self
-                                        acceptableCacheAge:CACHE_24_HOURS
-                                               cacheResult:YES];
-            }
         }
         else
         {
@@ -396,9 +379,7 @@ typedef enum eImportState
     {
         _sweptAddress = nil;
         [self showFadingError:NSLocalizedString(@"Invalid private key", nil)];
-        _state = ImportState_PrivateKey;
-        [self updateDisplay];
-        [self startQRReader];
+        [self updateState];
     }
 }
 
@@ -609,9 +590,6 @@ typedef enum eImportState
 - (void)tweetCancelled
 {
     [self showFadingError:NSLocalizedString(@"Import the private key again to retry Twitter", nil)];
-    _state = ImportState_PrivateKey;
-    [self updateDisplay];
-    [self startQRReader];
 }
 
 - (void)showSweepDoneAlerts
@@ -626,6 +604,16 @@ typedef enum eImportState
     }
 }
 
+- (void)updateState
+{
+    if (nil == _tweetAlert && nil == _sweptAlert && nil == _receivedAlert)
+    {
+        _state = ImportState_PrivateKey;
+        [self updateDisplay];
+        [self startQRReader];
+    }
+}
+
 - (void)sendTweet
 {
     // invoke Twitter to send tweet
@@ -635,11 +623,8 @@ typedef enum eImportState
         switch (result) {
             case SLComposeViewControllerResultCancelled:
                 [self tweetCancelled];
-                break;
             default:
-                _state = ImportState_PrivateKey;
-                [self updateDisplay];
-                [self startQRReader];
+                [self updateState];
                 break;
         }
     }];
@@ -652,6 +637,7 @@ typedef enum eImportState
 {
     if (_tweetAlert == alertView)
     {
+        _tweetAlert = nil;
         if (1 == buttonIndex)
         {
             [self performSelector:@selector(sendTweet)
@@ -661,15 +647,13 @@ typedef enum eImportState
         else
         {
             [self tweetCancelled];
+            [self updateState];
         }
-        _tweetAlert = nil;
     }
     else if (_sweptAlert == alertView)
     {
         _sweptAlert = nil;
-        _state = ImportState_PrivateKey;
-        [self updateDisplay];
-        [self startQRReader];
+        [self updateState];
     }
 	else if (_receivedAlert == alertView)
 	{
@@ -683,9 +667,7 @@ typedef enum eImportState
         }
 
         _receivedAlert = nil;
-        _state = ImportState_PrivateKey;
-        [self updateDisplay];
-        [self startQRReader];
+        [self updateState];
 	}
 }
 
@@ -772,7 +754,7 @@ typedef enum eImportState
             _tweet = [dict objectForKey:@"tweet"];
             if (token && _tweet)
             {
-                if ([dict objectForKey:@"claimed"] && [[dict objectForKey:@"claimed"] boolValue])
+                if (0 == _sweptAmount)
                 {
                     NSString *zmessage = [dict objectForKey:@"zero_message"];
                     if (zmessage)
@@ -803,19 +785,7 @@ typedef enum eImportState
                     }
                 }
             }
-        }/*
-        else
-        {
-            no promotion
-            allow the callback to notify the user of the funds sweep
-        }*/
-    }
-
-    if (NO == bSuccess)
-    {
-        _state = ImportState_PrivateKey;
-        [self updateDisplay];
-        [self startQRReader];
+        }
     }
 }
 
@@ -939,8 +909,27 @@ typedef enum eImportState
     uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
     if (nil == _sweptAlert && nil == _receivedAlert)
     {
+        _sweptAmount = amount;
+
         if (ABC_CC_Ok == result)
         {
+            if (kHBURI == _dataModel)
+            {
+                // make a query with the last bytes of the address
+                const int hBitzIDLength = 4;
+                if (nil != _sweptAddress && hBitzIDLength <= _sweptAddress.length)
+                {
+                    NSString *hiddenBitzID = [_sweptAddress substringFromIndex:[_sweptAddress length]-hBitzIDLength];
+                    NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
+                    [[DL_URLServer controller] issueRequestURL:hiddenBitzURI
+                                                    withParams:nil
+                                                    withObject:self
+                                                  withDelegate:self
+                                            acceptableCacheAge:CACHE_24_HOURS
+                                                   cacheResult:YES];
+                }
+            }
+
             if (0 < amount)
             {
                 // handle received bitcoin
