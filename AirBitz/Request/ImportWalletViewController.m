@@ -334,7 +334,7 @@ typedef enum eImportState
 
 - (void)expireImport
 {
-    [self showFadingError:NSLocalizedString(@"Import failed. Please check your connection", nil)];
+    [self showFadingError:NSLocalizedString(@"Import failed", nil)];
     [self updateState];
     _callbackTimer = nil;
 }
