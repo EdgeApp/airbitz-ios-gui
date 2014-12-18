@@ -871,18 +871,31 @@ typedef enum eImportState
 {
     NSDictionary *userInfo = [notification userInfo];
     tABC_CC result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
+    uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
     if (ABC_CC_Ok == result)
     {
-        // note: txID can be nil or length 0
-//        NSString *txID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
-        uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
-        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Imported %ull into wallet", nil), amount];
-        _sweptAlert = [[UIAlertView alloc]
-                       initWithTitle:NSLocalizedString(@"Success", nil)
-                       message:message
-                       delegate:self
-                       cancelButtonTitle:@"OK"
-                       otherButtonTitles:nil, nil];
+        if (0 < amount)
+        {
+            // note: txID can be nil or length 0
+//            NSString *txID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
+            NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Imported %llu into wallet", nil), amount];
+            _sweptAlert = [[UIAlertView alloc]
+                           initWithTitle:NSLocalizedString(@"Success", nil)
+                           message:message
+                           delegate:self
+                           cancelButtonTitle:@"OK"
+                           otherButtonTitles:nil, nil];
+        }
+        else
+        {
+            NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil), amount];
+            _sweptAlert = [[UIAlertView alloc]
+                           initWithTitle:NSLocalizedString(@"Error", nil)
+                           message:message
+                           delegate:self
+                           cancelButtonTitle:@"OK"
+                           otherButtonTitles:nil, nil];
+        }
     }
     else
     {
