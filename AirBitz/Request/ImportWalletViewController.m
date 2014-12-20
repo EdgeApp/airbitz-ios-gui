@@ -468,9 +468,30 @@ typedef enum eImportState
 #endif
 }
 
-- (void)startQRReader
-{
 #if !TARGET_IPHONE_SIMULATOR
+-(void)startQRReader
+{
+    // on iOS 8, we must request permission to access the camera
+    if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType: completionHandler:)]) {
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+            if (granted) {
+                // Permission has been granted. Use dispatch_async for any UI updating
+                // code because this block may be executed in a thread.
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self attemptToStartQRReader];
+                });
+            } else {
+                [self attemptToStartQRReader];
+            }
+        }];
+    } else {
+        [self attemptToStartQRReader];
+    }
+}
+
+-(void)attemptToStartQRReader
+{
+    // check camera state before proceeding
     if (!_readerView)
     {
         _readerView = [ZBarReaderView new];
