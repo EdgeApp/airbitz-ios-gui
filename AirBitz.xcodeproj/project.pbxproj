@@ -186,6 +186,14 @@
 		7D8B59C51A328895000AC178 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7D8B59C01A328895000AC178 /* HockeySDK.xcconfig */; };
 		7D8B59C61A328895000AC178 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D8B59C11A328895000AC178 /* HockeySDKResources.bundle */; };
 		7D8B59C71A328895000AC178 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D8B59C11A328895000AC178 /* HockeySDKResources.bundle */; };
+		7D987AFA1A48BA8C00958AAD /* BitcoinReceived.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D987AF71A48BA8C00958AAD /* BitcoinReceived.mp3 */; };
+		7D987AFB1A48BA8C00958AAD /* BitcoinReceived.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D987AF71A48BA8C00958AAD /* BitcoinReceived.mp3 */; };
+		7D987AFC1A48BA8C00958AAD /* BitcoinReceivedPartial.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D987AF81A48BA8C00958AAD /* BitcoinReceivedPartial.mp3 */; };
+		7D987AFD1A48BA8C00958AAD /* BitcoinReceivedPartial.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D987AF81A48BA8C00958AAD /* BitcoinReceivedPartial.mp3 */; };
+		7D987AFE1A48BA8C00958AAD /* BitcoinSent.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D987AF91A48BA8C00958AAD /* BitcoinSent.mp3 */; };
+		7D987AFF1A48BA8C00958AAD /* BitcoinSent.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D987AF91A48BA8C00958AAD /* BitcoinSent.mp3 */; };
+		7D987B011A48BABC00958AAD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D987B001A48BABC00958AAD /* AudioToolbox.framework */; };
+		7D987B021A48BAC300958AAD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D987B001A48BABC00958AAD /* AudioToolbox.framework */; };
 		7D989FFA1A0206960094512B /* bd_icon_facebook@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D989FF21A0206960094512B /* bd_icon_facebook@2x~iphone.png */; };
 		7D989FFB1A0206960094512B /* bd_icon_facebook@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D989FF21A0206960094512B /* bd_icon_facebook@2x~iphone.png */; };
 		7D989FFC1A0206960094512B /* bd_icon_facebook~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D989FF31A0206960094512B /* bd_icon_facebook~iphone.png */; };
@@ -1335,6 +1343,10 @@
 		7D8B59BE1A328895000AC178 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		7D8B59C01A328895000AC178 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
 		7D8B59C11A328895000AC178 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		7D987AF71A48BA8C00958AAD /* BitcoinReceived.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = BitcoinReceived.mp3; path = Resources/Audio/BitcoinReceived.mp3; sourceTree = "<group>"; };
+		7D987AF81A48BA8C00958AAD /* BitcoinReceivedPartial.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = BitcoinReceivedPartial.mp3; path = Resources/Audio/BitcoinReceivedPartial.mp3; sourceTree = "<group>"; };
+		7D987AF91A48BA8C00958AAD /* BitcoinSent.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = BitcoinSent.mp3; path = Resources/Audio/BitcoinSent.mp3; sourceTree = "<group>"; };
+		7D987B001A48BABC00958AAD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7D989FF21A0206960094512B /* bd_icon_facebook@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_icon_facebook@2x~iphone.png"; sourceTree = "<group>"; };
 		7D989FF31A0206960094512B /* bd_icon_facebook~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_icon_facebook~iphone.png"; sourceTree = "<group>"; };
 		7D989FF41A0206960094512B /* bd_icon_foursquare@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_icon_foursquare@2x~iphone.png"; sourceTree = "<group>"; };
@@ -1851,6 +1863,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D987B021A48BAC300958AAD /* AudioToolbox.framework in Frameworks */,
 				7DB9FEAF1A424DAB00DD76BD /* Social.framework in Frameworks */,
 				7DAD01E51A3272FF002C4A30 /* QuickLook.framework in Frameworks */,
 				7DAD01E31A3272F5002C4A30 /* AssetsLibrary.framework in Frameworks */,
@@ -1898,6 +1911,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D987B011A48BABC00958AAD /* AudioToolbox.framework in Frameworks */,
 				7DB9FEB01A424DB400DD76BD /* Social.framework in Frameworks */,
 				7DAD01E71A327310002C4A30 /* AssetsLibrary.framework in Frameworks */,
 				7DAD01E61A327308002C4A30 /* QuickLook.framework in Frameworks */,
@@ -2146,6 +2160,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		7D987AF21A48BA7C00958AAD /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				7D987AF71A48BA8C00958AAD /* BitcoinReceived.mp3 */,
+				7D987AF81A48BA8C00958AAD /* BitcoinReceivedPartial.mp3 */,
+				7D987AF91A48BA8C00958AAD /* BitcoinSent.mp3 */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 		7DFD22DC1A1E716C008C43FB /* UIPhotoGallery */ = {
 			isa = PBXGroup;
 			children = (
@@ -2316,6 +2340,7 @@
 		B5675B4A18A17F6F002E0703 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7D987B001A48BABC00958AAD /* AudioToolbox.framework */,
 				7DB9FEAE1A424DAB00DD76BD /* Social.framework */,
 				7DB9FEA71A424CE200DD76BD /* Twitter.framework */,
 				7D8B59BD1A328895000AC178 /* HockeySDK.embeddedframework */,
@@ -2455,6 +2480,7 @@
 		B5675B8718A180D9002E0703 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7D987AF21A48BA7C00958AAD /* Audio */,
 				DAA5784819C23C8200E972FC /* Text */,
 				683D95B61989F14B0082BC1A /* Certs */,
 				4C7C1253193D2CBD0096338D /* MockData */,
@@ -3211,6 +3237,7 @@
 				7D98AD4419A7C550003D2BF6 /* Green-check@2x~iphone.png in Resources */,
 				7D98AD4519A7C550003D2BF6 /* logo_bitcoin@2x~iphone.png in Resources */,
 				7D98AD4619A7C550003D2BF6 /* Main_iPad.storyboard in Resources */,
+				7D987AFF1A48BA8C00958AAD /* BitcoinSent.mp3 in Resources */,
 				7D98AD4719A7C550003D2BF6 /* 0-bars@2x.png in Resources */,
 				7D98AD4819A7C550003D2BF6 /* btn_locateMe~iphone.png in Resources */,
 				7D98AD4919A7C550003D2BF6 /* SearchBarBacking@2x~iphone.png in Resources */,
@@ -3248,6 +3275,7 @@
 				7D98AD6619A7C550003D2BF6 /* btn_big_blue2_dark~iphone.png in Resources */,
 				7D98AD6719A7C550003D2BF6 /* GTMOAuth2ViewTouch.xib in Resources */,
 				7D98AD6819A7C550003D2BF6 /* tabbar_popup_left~iphone.png in Resources */,
+				7D987AFD1A48BA8C00958AAD /* BitcoinReceivedPartial.mp3 in Resources */,
 				7D98AD6919A7C550003D2BF6 /* flash-off~iphone.png in Resources */,
 				7D98AD6B19A7C550003D2BF6 /* btn_addCategory~iphone.png in Resources */,
 				7D98AD6C19A7C550003D2BF6 /* emboss_up@2x~iphone.png in Resources */,
@@ -3578,6 +3606,7 @@
 				7D98AE8E19A7C550003D2BF6 /* bd_icon_phone@2x~iphone.png in Resources */,
 				7DB1353F19FB48D9007D23CE /* bd_icon_share@2x~iphone.png in Resources */,
 				7D98AE8F19A7C550003D2BF6 /* thumb@2x~iphone.png in Resources */,
+				7D987AFB1A48BA8C00958AAD /* BitcoinReceived.mp3 in Resources */,
 				7D98AE9019A7C550003D2BF6 /* btn_8~iphone.png in Resources */,
 				7D98AE9119A7C550003D2BF6 /* infoWallets.html in Resources */,
 				7D6493971A060F1E0002E64C /* large-digit-input_selected@2x~iphone.png in Resources */,
@@ -3594,6 +3623,7 @@
 			files = (
 				4C5D8C821930060F0015BB3C /* btn_search~iphone.png in Resources */,
 				B5F2E9D318DCE09E008ACF88 /* PasswordVerifyView~ipad.xib in Resources */,
+				7D987AFA1A48BA8C00958AAD /* BitcoinReceived.mp3 in Resources */,
 				4C7C1257193D2CFC0096338D /* WalletExportQuicken.QIF in Resources */,
 				B55A030118EA206300845090 /* btn_done~iphone.png in Resources */,
 				7D4DA23B19EC82C600E3D571 /* btn_expand@2x~iphone.png in Resources */,
@@ -3614,6 +3644,7 @@
 				B5675BB418A19A84002E0703 /* SearchBarBacking@2x~iphone.png in Resources */,
 				B59C150E18C012B500AEA789 /* emboss_down_deep~iphone.png in Resources */,
 				4C5D8C68192D1DE50015BB3C /* icon_approved~iphone.png in Resources */,
+				7D987AFE1A48BA8C00958AAD /* BitcoinSent.mp3 in Resources */,
 				B59C14D218C012B500AEA789 /* btn_4@2x~iphone.png in Resources */,
 				683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */,
 				7DB1354019FB48D9007D23CE /* bd_icon_share~iphone.png in Resources */,
@@ -3832,6 +3863,7 @@
 				B5137C0C18A40A8400DA4A34 /* Lato-HairlineItalic.ttf in Resources */,
 				B59C150D18C012B500AEA789 /* emboss_down_deep@2x~iphone.png in Resources */,
 				B59C151618C012B500AEA789 /* icon_bitcoin_light@2x~iphone.png in Resources */,
+				7D987AFC1A48BA8C00958AAD /* BitcoinReceivedPartial.mp3 in Resources */,
 				B59C14D718C012B500AEA789 /* btn_6~iphone.png in Resources */,
 				4C7247CE1935594F0091C286 /* background_header@2x~iphone.png in Resources */,
 				B59C153118C012B500AEA789 /* logo_bitcoin~iphone.png in Resources */,
