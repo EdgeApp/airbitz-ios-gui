@@ -25,6 +25,7 @@
 #define CURRENCY_NUM_EUR                978
 
 #define FILE_SYNC_FREQUENCY_SECONDS     10
+#define NOTIFY_DATA_SYNC_DELAY          1
 
 #define DOLLAR_CURRENCY_NUMBER	840
 
@@ -54,6 +55,7 @@ static CoreBridge *singleton = nil;
 
 static NSTimer *_exchangeTimer;
 static NSTimer *_dataSyncTimer;
+static NSTimer *_notificationTimer;
 
 + (void)initAll
 {
@@ -1703,6 +1705,19 @@ static NSTimer *_dataSyncTimer;
     // if there are new wallets, we need to start their watchers
     [CoreBridge startWatchers];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:self];
+
+}
+
+- (void)notifyDataSyncDelayed:(NSArray *)params
+{
+    if (_notificationTimer) {
+        [_notificationTimer invalidate];
+    }
+    _notificationTimer = [NSTimer scheduledTimerWithTimeInterval:NOTIFY_DATA_SYNC_DELAY
+        target:self
+        selector:@selector(notifyDataSync:)
+        userInfo:nil
+        repeats:NO];
 }
 
 - (void)notifyRemotePasswordChange:(NSArray *)params
@@ -1725,7 +1740,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     } else if (pInfo->eventType == ABC_AsyncEventType_ExchangeRateUpdate) {
         [coreBridge performSelectorOnMainThread:@selector(notifyExchangeRate:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_DataSyncUpdate) {
-        [coreBridge performSelectorOnMainThread:@selector(notifyDataSync:) withObject:nil waitUntilDone:NO];
+        [coreBridge performSelectorOnMainThread:@selector(notifyDataSyncDelayed:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_RemotePasswordChange) {
         [coreBridge performSelectorOnMainThread:@selector(notifyRemotePasswordChange:) withObject:nil waitUntilDone:NO];
     }
