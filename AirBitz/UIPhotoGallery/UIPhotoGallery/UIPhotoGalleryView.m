@@ -133,7 +133,12 @@
     else
         contentOffset.x = currentPage * mainScrollView.frame.size.width;
     
-    [mainScrollView setContentOffset:contentOffset animated:animation];
+    [UIView animateWithDuration:.25 animations:^
+    {
+        mainScrollView.contentOffset = contentOffset;
+    } completion:^(BOOL finished)
+    {
+    }];
     
     return YES;
 }

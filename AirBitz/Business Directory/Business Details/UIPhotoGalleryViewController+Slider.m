@@ -12,7 +12,7 @@
 
 - (void)sliderValueChangedToIndex:(NSUInteger)index
 {
-    [vPhotoGallery scrollToPage:index animated:NO];
+    [vPhotoGallery scrollToPage:index animated:YES];
 }
 
 @end
