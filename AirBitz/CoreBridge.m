@@ -1054,6 +1054,7 @@ static NSTimer *_notificationTimer;
 {
     [CoreBridge stopWatchers];
     [CoreBridge stopQueues];
+    [LocalSettings saveAll];
 
     tABC_Error Error;
     tABC_CC result = ABC_ClearKeyCache(&Error);
