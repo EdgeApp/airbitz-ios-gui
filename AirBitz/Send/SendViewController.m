@@ -47,6 +47,7 @@
 #import "LocalSettings.h"
 
 #define WALLET_BUTTON_WIDTH         210
+#define BLE_TIMEOUT                 1.0
 
 #define POPUP_PICKER_LOWEST_POINT   360
 #define POPUP_PICKER_TABLE_HEIGHT   (!IS_IPHONE4 ? 180 : 90)
@@ -179,12 +180,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	scanMode = SCAN_MODE_UNINITIALIZED;
 	[self loadWalletInfo];
 	[self updateTable];
-	[self syncTest];
-	
-	if(!_syncingView)
-	{
-		_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
-	}
 	
 	if([LocalSettings controller].bDisableBLE == NO)
 	{
@@ -199,10 +194,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 			 _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(NO)}];
 		 }
 		lastCentralBLEPowerOffNotificationTime = curTime;
+        [self startBleTimeout:BLE_TIMEOUT];
     }
 	else
 	{
 		self.ble_button.hidden = YES;
+        [self startBleTimeout:0.0];
 	}
 	
 	//reset our frame's height in case it got changed by the image picker view controller
@@ -1437,7 +1434,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	[_sendConfirmationViewController.view removeFromSuperview];
 	_sendConfirmationViewController = nil;
 	
-	[self enableBLEMode];
+    scanMode = SCAN_MODE_UNINITIALIZED;
+    if ([LocalSettings controller].bDisableBLE == NO) {
+        [self enableBLEMode];
+        [self startBleTimeout:BLE_TIMEOUT];
+    } else {
+        [self startBleTimeout:0.0];
+    }
 }
 
 #pragma mark - ButtonSelectorView delegates
@@ -1695,6 +1698,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     CGRect frame = pickerTextView.popupPicker.frame;
     frame.size.height = POPUP_PICKER_TABLE_HEIGHT;
     pickerTextView.popupPicker.frame = frame;
+}
+
+#pragma - BLE Timeout
+
+- (void)startBleTimeout:(int)timeout
+{
+    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:timeout target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 }
 
 #pragma - Sync View methods
