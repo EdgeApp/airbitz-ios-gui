@@ -650,7 +650,13 @@
     _passwordRequired = NO;
     _pinRequired = NO;
 
-    if ([User Singleton].bDailySpendLimit 
+    if (self.bAddressIsWalletUUID) {
+        // Transfers don't require a PIN or password
+        _labelPINTitle.hidden = YES;
+        _withdrawlPIN.hidden = YES;
+        _imagePINEmboss.hidden = YES;
+        return;
+    } else if ([User Singleton].bDailySpendLimit
             && self.amountToSendSatoshi + _totalSentToday >= [User Singleton].dailySpendLimitSatoshis) {
         // Show password
         _passwordRequired = YES;
@@ -976,7 +982,6 @@
         return self.sendToAddress;
     }
 }
-
 
 #pragma mark - GestureReconizer methods
 
