@@ -441,13 +441,13 @@ typedef enum eRequestType
     NSMutableString *outAddresses = [[NSMutableString alloc] init];
     NSMutableString *baseUrl = [[NSMutableString alloc] init];
     if ([CoreBridge isTestNet]) {
-        [baseUrl appendString:@"https://blockexplorer.com/testnet"];
+        [baseUrl appendString:@"https://www.biteasy.com/testnet"];
     } else {
-        [baseUrl appendString:@"https://blockchain.info"];
+        [baseUrl appendString:@"https://www.biteasy.com/blockchain"];
     }
     for (TxOutput *t in self.transaction.outputs) {
         NSString *val = [CoreBridge formatSatoshi:t.value];
-        NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
+        NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/addresses/%@\">%@</a></div><div>%@</div>"),
                 baseUrl, t.strAddress, t.strAddress, val];
         if (t.bInput) {
             [inAddresses appendString:html];
@@ -457,7 +457,7 @@ typedef enum eRequestType
         }
     }
     totalSent -= fees;
-    NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
+    NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/transactions/%@\">%@</a></div>",
                                 baseUrl, self.transaction.strMallealbeID, self.transaction.strMallealbeID];
     //transaction ID
     content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
