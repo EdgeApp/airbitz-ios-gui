@@ -99,6 +99,9 @@
     self.amountBTCTextField.delegate = self;
     self.amountFiatTextField.delegate = self;
     self.keypadView.delegate = self;
+#ifdef __IPHONE_8_0
+    [self.keypadView removeFromSuperview];
+#endif
     self.amountBTCTextField.inputView = self.keypadView;
     self.amountFiatTextField.inputView = self.keypadView;
 
