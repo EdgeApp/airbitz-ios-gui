@@ -1087,6 +1087,9 @@ typedef enum eMapDisplayState
 - (void)mapViewDidFinishLoadingMap: (MKMapView *)mapView
 {
     //NSLog(@"Did finish loading map");
+    UITapGestureRecognizer *tap =
+        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removePopupView)];
+    [mapView addGestureRecognizer:tap];
 }
 
 - (void)mapView: (MKMapView *)mapView regionDidChangeAnimated: (BOOL)animated
@@ -1181,6 +1184,25 @@ typedef enum eMapDisplayState
                      permittedArrowDirections: SMCalloutArrowDirectionAny
                                      animated: YES];
 }
+
+- (void)removePopupView
+{
+    if (singleCalloutView) {
+        [UIView animateWithDuration:0.35
+                              delay:0
+                            options:UIViewAnimationOptionCurveLinear
+                        animations:^
+        {
+            singleCalloutView.alpha = 0.0;
+        }
+        completion:^(BOOL finished)
+        {
+            [singleCalloutView removeFromSuperview];
+            singleCalloutView.alpha = 1.0; // reset alpha
+        }];
+    }
+}
+
 
 #pragma mark Segue
 
