@@ -57,14 +57,14 @@
 
 	self.errorMessageView.alpha = 0.0;
     
-    [self setTitleColors];
-    
     self.PINCodeView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1 arrow:_swipeRightArrow origFrame:_originalRightSwipeArrowFrame];
+
+    [self setTitleColors];
 
     _bTouchesEnabled = YES;
 }
