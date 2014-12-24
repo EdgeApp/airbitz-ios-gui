@@ -16,7 +16,9 @@
 #import "Util.h"
 #import "User.h"
 #import "LatoLabel.h"
+#if !TARGET_IPHONE_SIMULATOR
 #import "ZBarSDK.h"
+#endif
 #import "InfoView.h"
 #import "CoreBridge.h"
 #import "FadingAlertView.h"
@@ -38,12 +40,17 @@ typedef enum eImportState
     ImportState_Importing
 } tImportState;
 
-@interface ImportWalletViewController () <ButtonSelectorDelegate, UITextFieldDelegate, FlashSelectViewDelegate, ZBarReaderDelegate,
-                                          ZBarReaderViewDelegate, UIGestureRecognizerDelegate, FadingAlertViewDelegate,
+@interface ImportWalletViewController () <ButtonSelectorDelegate, UITextFieldDelegate, FlashSelectViewDelegate,
+#if !TARGET_IPHONE_SIMULATOR
+                                          ZBarReaderDelegate, ZBarReaderViewDelegate,
+#endif
+                                          UIGestureRecognizerDelegate, FadingAlertViewDelegate,
                                           DL_URLRequestDelegate, UIAlertViewDelegate>
 {
+#if !TARGET_IPHONE_SIMULATOR
     ZBarReaderView          *_readerView;
     ZBarReaderController    *_readerPicker;
+#endif
     NSTimer                 *_startScannerTimer;
     NSInteger               _selectedWallet;
     BOOL                    _bUsingImagePicker;
@@ -97,7 +104,9 @@ typedef enum eImportState
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+#if !TARGET_IPHONE_SIMULATOR
     _readerView = nil;
+#endif
     _sweptAddress = nil;
     _tweet = nil;
     _privateKey = nil;
@@ -418,6 +427,7 @@ typedef enum eImportState
     }
 }
 
+#if !TARGET_IPHONE_SIMULATOR
 - (BOOL)processZBarResults:(ZBarSymbolSet *)syms
 {
     BOOL bSuccess = NO;
@@ -446,6 +456,7 @@ typedef enum eImportState
     
     return bSuccess;
 }
+#endif
 
 - (void)showImageScanner
 {
@@ -468,7 +479,11 @@ typedef enum eImportState
 #endif
 }
 
-#if !TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATOR
+-(void)startQRReader
+{
+}
+#else
 -(void)startQRReader
 {
     // on iOS 8, we must request permission to access the camera
@@ -526,17 +541,19 @@ typedef enum eImportState
     {
         [_readerView start];
     }
-#endif
 }
+#endif
 
 - (void)closeCameraScanner
 {
+#if !TARGET_IPHONE_SIMULATOR
     if (_readerView)
     {
         [_readerView stop];
         [_readerView removeFromSuperview];
         _readerView = nil;
     }
+#endif
 }
 
 - (void)installLeftToRightSwipeDetection
@@ -823,6 +840,8 @@ typedef enum eImportState
 
 #pragma mark - Flash Select Delegates
 
+#if !TARGET_IPHONE_SIMULATOR
+
 -(void)flashItemSelected:(tFlashItem)flashType
 {
 	//NSLog(@"Flash Item Selected: %i", flashType);
@@ -856,6 +875,8 @@ typedef enum eImportState
 		}
 	}
 }
+
+#endif
 
 #pragma mark - ZBar's Delegate methods
 
