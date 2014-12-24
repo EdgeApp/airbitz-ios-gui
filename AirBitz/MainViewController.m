@@ -25,6 +25,7 @@
 #import "CoreBridge.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
+#import "AudioController.h"
 #import "FadingAlertView.h"
 #import "InfoView.h"
 #import "DL_URLServer.h"
@@ -608,22 +609,26 @@ typedef enum eAppMode
         {
             // Sender paid exact amount
             [self launchSendStatus:_strWalletUUID withTx:_strTxID];
+            [[AudioController controller] playReceived];
         }
         else if (txDiff > 0)
         {
             // Sender paid too much. Should notify the user somehow
             [self launchSendStatus:_strWalletUUID withTx:_strTxID];
+            [[AudioController controller] playReceived];
         }
         else if (txDiff < 0)
         {
             // Sender didn't pay enough
             txDiff = fabs(txDiff);
             [_requestViewController LaunchQRCodeScreen:txDiff withRequestState:kPartial];
+            [[AudioController controller] playPartialReceived];
         }
     }
     // Prevent displaying multiple alerts
     else if (_receivedAlert == nil)
     {
+        [[AudioController controller] playReceived];
         _receivedAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Received Funds", nil)
                                 message:NSLocalizedString(@"Bitcoin received. Tap for details.", nil)

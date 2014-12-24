@@ -13,6 +13,7 @@
 #import "CommonTypes.h"
 #import "PopupPickerView.h"
 #import "LocalSettings.h"
+#import "AudioController.h"
 #import "Config.h"
 #import <HockeySDK/HockeySDK.h>
 #import <SDWebImage/SDImageCache.h>
@@ -40,6 +41,8 @@ NSDate *logoutDate = NULL;
     [LocalSettings initAll];
 
     [PopupPickerView initAll];
+
+    [AudioController initAll];
 
     [CoreBridge initAll];
 

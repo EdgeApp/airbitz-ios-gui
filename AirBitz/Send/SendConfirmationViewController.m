@@ -18,6 +18,7 @@
 #import "Util.h"
 #import "CommonTypes.h"
 #import "FadingAlertView.h"
+#import "AudioController.h"
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate,
@@ -957,6 +958,7 @@
 - (void)txSendSuccess:(NSString *)walletUUID withTx:(NSString *)txId
 {
     NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
+    [[AudioController controller] playSent];
 
     int maxDelay = 3;
     int delay = MIN(maxDelay, MAX(0, maxDelay - ([[NSDate date] timeIntervalSince1970] - _callbackTimestamp)));
