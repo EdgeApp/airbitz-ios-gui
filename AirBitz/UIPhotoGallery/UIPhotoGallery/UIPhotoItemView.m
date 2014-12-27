@@ -21,6 +21,7 @@
     CGRect displayFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     
     if (self = [super initWithFrame:frame]) {
+        photoGalleryMode = galleryMode;
         switch (galleryMode) {
             case UIPhotoGalleryModeImageLocal:
                 photoItemView = [[UIPhotoItemView alloc] initWithFrame:displayFrame andLocalImage:galleryItem];
@@ -83,6 +84,10 @@
     [photoItemView resetOptions];
 }
 
+- (UIImage *)getBackgroundImage
+{
+    return [photoItemView getBackgroundImage];
+}
 
 @end
 
@@ -165,6 +170,11 @@
     if ([mainImageView respondsToSelector:@selector(setPhotoItemView:)]) {
         [mainImageView performSelector:@selector(setPhotoItemView:) withObject:nil];
     }
+}
+
+- (UIImage*)getBackgroundImage
+{
+    return mainImageView.image;
 }
 
 #pragma private methods
@@ -255,24 +265,32 @@
         
         [self addSubview:activityIndicator];
         
-        UIRemotePhotoItem *selfDelegate = self;
-        
         double delayInSeconds = 0.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [selfDelegate setImageWithURL:remoteUrl completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                if (!error && image) {
-                    [activityIndicator removeFromSuperview];
-                    
-                    CGFloat widthScale = image.size.width / _photoItemView.frame.size.width;
-                    CGFloat heightScale = image.size.height / _photoItemView.frame.size.height;
-                    _photoItemView.maximumZoomScale = MIN(widthScale, heightScale) * kMaxZoomingScale;
-                }
-            }];
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            [manager downloadImageWithURL:remoteUrl
+                                  options:0
+                                 progress:nil
+                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                    if (!error && image) {
+                                        self.image = image;
+                                        [activityIndicator removeFromSuperview];
+                                        
+                                        CGFloat widthScale = image.size.width / _photoItemView.frame.size.width;
+                                        CGFloat heightScale = image.size.height / _photoItemView.frame.size.height;
+                                        _photoItemView.maximumZoomScale = MIN(widthScale, heightScale) * kMaxZoomingScale;
+                                    }
+                                }];
         });
     }
     
     return self;
+}
+
+- (UIImage*)getBackgroundImage
+{
+    return [_photoItemView getBackgroundImage];
 }
 
 @end

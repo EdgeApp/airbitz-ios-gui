@@ -9,11 +9,15 @@
 #import "UIPhotoGalleryView.h"
 #import "UIPhotoItemView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "CommonTypes.h"
 
 #define kDefaultSubviewGap              30
 #define kMaxSpareViews                  1
 
 @interface UIPhotoGalleryView ()
+{
+    NSURL *remoteImage;
+}
 
 - (void)initDefaults;
 - (void)initMainScrollView;
@@ -41,7 +45,6 @@
         [self initDefaults];
         [self initMainScrollView];
     }
-    
     return self;
 }
 
@@ -213,11 +216,16 @@
     if ([_delegate respondsToSelector:@selector(photoGallery:didMoveToIndex:)])
         [_delegate photoGallery:self didMoveToIndex:currentPage];
     
-    mainScrollIndicatorView.tag = 0;
-    
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self setupBackgroundView];
+    });
+    
+    mainScrollIndicatorView.tag = 0;
+
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime2 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
         if (mainScrollIndicatorView.tag == 0) {
             [UIView animateWithDuration:0.5 animations:^{
                 mainScrollIndicatorView.alpha = 0;
@@ -235,8 +243,10 @@
     _peakSubView = NO;
     _showsScrollIndicator = YES;
     _verticalGallery = NO;
+    _showBlurredPhotoBG = NO;
     _initialIndex = 0;
     currentPage = 0;
+    remoteImage = nil;
 }
 
 - (void)initMainScrollView {
@@ -323,6 +333,13 @@
     return NO;
 }
 
+- (UIView *)getReusableViewAtIndex:(NSInteger)index {
+    for (UIView *view in reusableViews)
+        if (view.tag == index)
+            return view;
+    return nil;
+}
+
 - (void)populateSubviews {
     NSMutableSet *toRemovedViews = [NSMutableSet set];
     
@@ -348,12 +365,56 @@
             frame.origin.x = assertIndex * mainScrollView.frame.size.width;
         
         UIPhotoContainerView *subView = [self viewToBeAddedWithFrame:frame atIndex:currentPage+index];
-        
+
         if (subView) {
             [subView resetZoom];
             [subView resetOptions];
             [mainScrollView addSubview:subView];
             [reusableViews addObject:subView];
+        }
+    }
+    [self setupBackgroundView];
+}
+
+- (void)setupBackgroundView
+{
+    if (_showBlurredPhotoBG)
+    {
+        if (nil == _backgroundImage)
+        {
+            _backgroundImage = [[UIImageView alloc] initWithFrame:self.frame];
+            _backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
+            [self addSubview:_backgroundImage];
+            [self sendSubviewToBack:_backgroundImage];
+        }
+
+        if (UIPhotoGalleryModeImageLocal == _galleryMode)
+        {
+            UIPhotoItemView *view = (UIPhotoItemView *)[self getReusableViewAtIndex:currentPage];
+            if (view)
+            {
+                UIImage *image = [view getBackgroundImage];
+                if (image)
+                {
+                    [_backgroundImage setImage:image];
+                }
+            }
+        }
+        else if (UIPhotoGalleryModeImageRemote == _galleryMode)
+        {
+            remoteImage = [_dataSource photoGallery:self remoteImageURLAtIndex:currentPage];
+            if (remoteImage)
+            {
+                SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                [manager downloadImageWithURL:remoteImage
+                                      options:0
+                                     progress:nil
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                    if (!error && image) {
+                        [_backgroundImage setImage:image];
+                    }
+                }];
+            }
         }
     }
 }

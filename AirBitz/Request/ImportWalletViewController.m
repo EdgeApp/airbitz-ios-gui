@@ -479,13 +479,9 @@ typedef enum eImportState
 #endif
 }
 
-#if TARGET_IPHONE_SIMULATOR
 -(void)startQRReader
 {
-}
-#else
--(void)startQRReader
-{
+#if !TARGET_IPHONE_SIMULATOR
     // on iOS 8, we must request permission to access the camera
     if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType: completionHandler:)]) {
         [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
@@ -502,8 +498,10 @@ typedef enum eImportState
     } else {
         [self attemptToStartQRReader];
     }
+#endif
 }
 
+#if !TARGET_IPHONE_SIMULATOR
 -(void)attemptToStartQRReader
 {
     // check camera state before proceeding

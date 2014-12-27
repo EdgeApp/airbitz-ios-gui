@@ -36,6 +36,7 @@
         vPhotoGallery = [[UIPhotoGalleryView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         vPhotoGallery.dataSource = self;
         vPhotoGallery.delegate = self;
+        vPhotoGallery.showBlurredPhotoBG = YES;
         vPhotoGallery.photoItemContentMode = UIViewContentModeScaleAspectFit;
         
         [self.view addSubview:vPhotoGallery];

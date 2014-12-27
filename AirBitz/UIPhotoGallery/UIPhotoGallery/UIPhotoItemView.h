@@ -14,6 +14,7 @@
 @interface UIPhotoContainerView : UIView {
     UIPhotoItemView *photoItemView;
     UIPhotoCaptionView *photoCaptionView;
+    UIPhotoGalleryMode photoGalleryMode;
 }
 
 @property (nonatomic, assign) id<UIPhotoItemDelegate> galleryDelegate;
@@ -23,6 +24,7 @@
 - (void)setCaptionHide:(BOOL)hide withAnimation:(BOOL)animated;
 - (void)resetZoom;
 - (void)resetOptions;
+- (UIImage *)getBackgroundImage;
 
 @end
 
@@ -37,6 +39,7 @@
 - (id)initWithFrame:(CGRect)frame andLocalImage:(UIImage*)localImage;
 - (id)initWithFrame:(CGRect)frame andRemoteURL:(NSURL*)remoteUrl;
 - (id)initWithFrame:(CGRect)frame andCustomView:(UIView*)customView;
+- (UIImage*)getBackgroundImage;
 
 - (void)resetZoom;
 - (void)resetOptions;

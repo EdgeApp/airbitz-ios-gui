@@ -81,6 +81,8 @@ typedef enum UIPhotoGalleryDoubleTapHandlerEnum {
     NSInteger currentPage;
 }
 
+@property (nonatomic, retain) UIImageView *backgroundImage;
+
 @property (nonatomic, assign) IBOutlet id<UIPhotoGalleryDataSource> dataSource;
 @property (nonatomic, assign) IBOutlet id<UIPhotoGalleryDelegate> delegate;
 
@@ -91,6 +93,7 @@ typedef enum UIPhotoGalleryDoubleTapHandlerEnum {
 @property (nonatomic, assign) BOOL peakSubView;
 @property (nonatomic, assign) BOOL showsScrollIndicator;
 @property (nonatomic, assign) BOOL verticalGallery;
+@property (nonatomic, assign) BOOL showBlurredPhotoBG;
 @property (nonatomic, assign) CGFloat subviewGap;
 @property (nonatomic, assign) NSInteger initialIndex;
 @property (nonatomic, readonly) NSInteger currentIndex;
