@@ -82,6 +82,7 @@ typedef enum UIPhotoGalleryDoubleTapHandlerEnum {
 }
 
 @property (nonatomic, retain) UIImageView *backgroundImage;
+@property (nonatomic, retain) UIImageView *transitionalBgImage;
 
 @property (nonatomic, assign) IBOutlet id<UIPhotoGalleryDataSource> dataSource;
 @property (nonatomic, assign) IBOutlet id<UIPhotoGalleryDelegate> delegate;

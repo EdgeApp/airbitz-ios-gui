@@ -177,7 +177,8 @@
     
     mainScrollIndicatorView.frame = frame;
     
-    if (((NSInteger)newPage) != currentPage) {
+    BOOL settled = newPage == floor(newPage);
+    if (((NSInteger)newPage) != currentPage && settled) {
         currentPage = (NSInteger)newPage;
         [self populateSubviews];
         
@@ -215,11 +216,6 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if ([_delegate respondsToSelector:@selector(photoGallery:didMoveToIndex:)])
         [_delegate photoGallery:self didMoveToIndex:currentPage];
-    
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self setupBackgroundView];
-    });
     
     mainScrollIndicatorView.tag = 0;
 
@@ -267,6 +263,7 @@
     mainScrollView.delegate = self;
     mainScrollView.pagingEnabled = YES;
     mainScrollView.showsHorizontalScrollIndicator = mainScrollView.showsVerticalScrollIndicator = NO;
+    mainScrollView.bounces = NO;
     
     [self addSubview:mainScrollView];
     
@@ -387,6 +384,18 @@
             [self addSubview:_backgroundImage];
             [self sendSubviewToBack:_backgroundImage];
         }
+        if (nil == _transitionalBgImage)
+        {
+            _transitionalBgImage = [[UIImageView alloc] initWithFrame:self.frame];
+            _transitionalBgImage.contentMode = UIViewContentModeScaleAspectFill;
+            [self addSubview:_transitionalBgImage];
+            [self sendSubviewToBack:_transitionalBgImage];
+        }
+        if (_backgroundImage.image) {
+            _transitionalBgImage.image = _backgroundImage.image;
+        }
+        _transitionalBgImage.alpha = 1.0;
+        _backgroundImage.alpha = 0.0;
 
         if (UIPhotoGalleryModeImageLocal == _galleryMode)
         {
@@ -396,7 +405,8 @@
                 UIImage *image = [view getBackgroundImage];
                 if (image)
                 {
-                    [_backgroundImage setImage:image];
+                    [self blurImage:image forURL:nil];
+                    [self tweenBgImages];
                 }
             }
         }
@@ -411,12 +421,50 @@
                                      progress:nil
                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                     if (!error && image) {
-                        [_backgroundImage setImage:image];
+                        [self blurImage:image forURL:imageURL];
                     }
                 }];
             }
         }
     }
+}
+
+- (void)blurImage:(UIImage *)image forURL:(NSURL *)url
+{
+    NSString *cacheKey = [NSString stringWithFormat:@"%@_cached", url];
+    UIImage *cachedImage = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:cacheKey];
+    if (cachedImage) {
+        [_backgroundImage setImage:cachedImage];
+        [self tweenBgImages];
+    }
+    [[SDImageCache sharedImageCache] queryDiskCacheForKey:cacheKey done:^(UIImage *cachedImage, SDImageCacheType type)
+    {
+        if (!cachedImage) {
+            CIContext *context = [CIContext contextWithOptions:nil];
+            CIImage *inputImage = [CIImage imageWithCGImage:image.CGImage];
+            
+            //setting up Gaussian Blur (we could use one of many filters offered by Core Image)
+            CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+            [filter setValue:inputImage forKey:kCIInputImageKey];
+            [filter setValue:[NSNumber numberWithFloat:10.0f] forKey:@"inputRadius"];
+            CIImage *result = [filter valueForKey:kCIOutputImageKey];
+            //CIGaussianBlur has a tendency to shrink the image a little, this ensures it matches up exactly to the bounds of our original image
+            CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
+
+            UIImage *blurred = [UIImage imageWithCGImage:cgImage];
+            [[SDImageCache sharedImageCache] storeImage:blurred forKey:cacheKey];
+            cachedImage = blurred;
+        }
+        [_backgroundImage setImage:cachedImage];
+        [self tweenBgImages];
+    }];
+}
+
+- (void)tweenBgImages
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        _backgroundImage.alpha = 1.0;
+    }];
 }
 
 - (UIPhotoContainerView*)viewToBeAddedWithFrame:(CGRect)frame atIndex:(NSInteger)index {
