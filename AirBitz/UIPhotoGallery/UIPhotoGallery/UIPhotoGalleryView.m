@@ -17,6 +17,7 @@
 @interface UIPhotoGalleryView ()
 {
     NSURL *remoteImage;
+    NSTimer *bgTimer;
 }
 
 - (void)initDefaults;
@@ -141,6 +142,7 @@
         mainScrollView.contentOffset = contentOffset;
     } completion:^(BOOL finished)
     {
+        [self queueBackgroundSetup];
     }];
     
     return YES;
@@ -216,6 +218,8 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if ([_delegate respondsToSelector:@selector(photoGallery:didMoveToIndex:)])
         [_delegate photoGallery:self didMoveToIndex:currentPage];
+
+    [self queueBackgroundSetup];
     
     mainScrollIndicatorView.tag = 0;
 
@@ -370,7 +374,18 @@
             [reusableViews addObject:subView];
         }
     }
-    [self setupBackgroundView];
+}
+
+- (void)queueBackgroundSetup
+{
+    if (bgTimer) {
+        [bgTimer invalidate];
+    }
+    bgTimer = [NSTimer scheduledTimerWithTimeInterval:0.20
+        target:self
+        selector:@selector(setupBackgroundView)
+        userInfo:nil
+        repeats:NO];
 }
 
 - (void)setupBackgroundView
