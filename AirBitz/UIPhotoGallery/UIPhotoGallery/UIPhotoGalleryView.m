@@ -258,7 +258,7 @@
     mainScrollView = [[UIScrollView alloc] initWithFrame:frame];
     mainScrollView.autoresizingMask = self.autoresizingMask;
     mainScrollView.backgroundColor = [UIColor clearColor];
-    mainScrollView.clipsToBounds = NO;
+    mainScrollView.clipsToBounds = YES;
     mainScrollView.contentSize = frame.size;
     mainScrollView.delegate = self;
     mainScrollView.pagingEnabled = YES;
@@ -381,6 +381,7 @@
         {
             _backgroundImage = [[UIImageView alloc] initWithFrame:self.frame];
             _backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
+            _backgroundImage.clipsToBounds = YES;
             [self addSubview:_backgroundImage];
             [self sendSubviewToBack:_backgroundImage];
         }
@@ -388,6 +389,7 @@
         {
             _transitionalBgImage = [[UIImageView alloc] initWithFrame:self.frame];
             _transitionalBgImage.contentMode = UIViewContentModeScaleAspectFill;
+            _transitionalBgImage.clipsToBounds = YES;
             [self addSubview:_transitionalBgImage];
             [self sendSubviewToBack:_transitionalBgImage];
         }
