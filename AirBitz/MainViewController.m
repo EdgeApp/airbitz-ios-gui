@@ -919,6 +919,7 @@ typedef enum eAppMode
 {
 	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
     [self resetViews:notification];
+    [self showTabBarAnimated:NO];
 }
 
 - (void)resetViews:(NSNotification *)notification
