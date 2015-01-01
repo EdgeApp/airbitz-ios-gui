@@ -25,7 +25,8 @@
 typedef enum eAlertType
 {
 	ALERT_TYPE_SETUP_COMPLETE,
-	ALERT_TYPE_SKIP_THIS_STEP
+	ALERT_TYPE_SKIP_THIS_STEP,
+	ALERT_TYPE_EXIT
 } tAlertType;
 
 @interface PasswordRecoveryViewController () <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
@@ -151,20 +152,36 @@ typedef enum eAlertType
 {
     if (!self.buttonBack.hidden)
     {
-        [UIView animateWithDuration:0.35
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^
-         {
-             CGRect frame = self.view.frame;
-             frame.origin.x = frame.size.width;
-             self.view.frame = frame;
-         }
-                         completion:^(BOOL finished)
-         {
-             [self exit];
-         }];
+        if ([self isFormDirty]) {
+            _alertType = ALERT_TYPE_EXIT;
+            UIAlertView *alert = [[UIAlertView alloc]
+                initWithTitle:NSLocalizedString(@"Warning!", nil)
+                message:NSLocalizedString(@"You are about to exit password recovery and questions & answers have not yet been set.", nil)
+                delegate:self
+                cancelButtonTitle:@"Cancel"
+                otherButtonTitles:@"OK", nil];
+            [alert show];
+        } else {
+            [self doBack];
+        }
     }
+}
+
+- (void)doBack
+{
+    [UIView animateWithDuration:0.35
+                            delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                        animations:^
+        {
+            CGRect frame = self.view.frame;
+            frame.origin.x = frame.size.width;
+            self.view.frame = frame;
+        }
+                        completion:^(BOOL finished)
+        {
+            [self exit];
+        }];
 }
 
 - (IBAction)SkipThisStep
@@ -178,6 +195,23 @@ typedef enum eAlertType
 						  cancelButtonTitle:@"Go Back"
 						  otherButtonTitles:@"OK", nil];
 	[alert show];
+}
+
+- (BOOL)isFormDirty
+{
+    for (UIView *view in self.scrollView.subviews) {
+        if ([view isKindOfClass:[QuestionAnswerView class]]) {
+            QuestionAnswerView *qaView = (QuestionAnswerView *)view;
+            if ((self.mode != PassRecovMode_Recover) && (qaView.questionSelected == YES)) {
+                return YES;
+            }
+            //verify that all six answers have achieved their minimum character limit
+            if ((self.mode != PassRecovMode_Recover) && ([qaView.answerField.text length] > 0)) {
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 - (IBAction)CompleteSignup
@@ -499,7 +533,14 @@ typedef enum eAlertType
 			//user dismissed recovery questions complete alert
             [self performSelector:@selector(exit) withObject:nil afterDelay:0.0];
 		}
-	}
+    }
+    else if (_alertType == ALERT_TYPE_EXIT)
+    {
+		if (buttonIndex == 1)
+		{
+            [self doBack];
+        }
+    }
 	else
 	{
 		//SKIP THIS STEP alert
