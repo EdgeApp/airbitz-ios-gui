@@ -66,8 +66,8 @@
                             &Error);
     [Util printABC_Error:&Error];
 
-    _dailySpendLimitSwitch.on = _pAccountSettings->bDailySpendLimit > 0;
-    _dailySpendLimitField.text = [CoreBridge formatSatoshi:_pAccountSettings->dailySpendLimitSatoshis withSymbol:false];
+    _dailySpendLimitSwitch.on = [User Singleton].bDailySpendLimit;
+    _dailySpendLimitField.text = [CoreBridge formatSatoshi:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
     _dailySpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
     _dailyDenomination.text = [User Singleton].denominationLabelShort;
 
@@ -165,9 +165,12 @@
 {
     if ([CoreBridge passwordOk:_passwordTextField.text]) {
         if (_dailySpendLimitSwitch.on) {
+            [User Singleton].bDailySpendLimit = YES;
+            [User Singleton].dailySpendLimitSatoshis = [CoreBridge denominationToSatoshi:_dailySpendLimitField.text];
             _pAccountSettings->bDailySpendLimit = 1;
-            _pAccountSettings->dailySpendLimitSatoshis = [CoreBridge denominationToSatoshi:_dailySpendLimitField.text];
+            _pAccountSettings->dailySpendLimitSatoshis = [User Singleton].dailySpendLimitSatoshis;
         } else {
+            [User Singleton].bDailySpendLimit = NO;
             _pAccountSettings->bDailySpendLimit = 0;
         }
 
@@ -177,7 +180,7 @@
         } else {
             _pAccountSettings->bSpendRequirePin = 0;
         }
-
+        [[User Singleton] saveLocalSettings];
         tABC_Error Error;
         ABC_UpdateAccountSettings([[User Singleton].name UTF8String],
                                 [[User Singleton].password UTF8String],

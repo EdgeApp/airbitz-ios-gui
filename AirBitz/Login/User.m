@@ -11,6 +11,9 @@
 #import "Util.h"
 #import "CoreBridge.h"
 
+#define SPENDING_LIMIT_AMOUNT  @"spending_limit_amount"
+#define SPENDING_LIMIT_ENABLED @"spending_limit_enabled"
+
 static BOOL bInitialized = NO;
 
 @implementation User
@@ -118,8 +121,15 @@ static User *singleton = nil;  // this will be the one and only object this stat
             self.fullName = [NSString stringWithUTF8String:pSettings->szFullName];
         self.bNameOnPayments = pSettings->bNameOnPayments;
 
-        self.bDailySpendLimit = pSettings->bDailySpendLimit;
-        self.dailySpendLimitSatoshis = pSettings->dailySpendLimitSatoshis;
+        NSUserDefaults *localConfig = [NSUserDefaults standardUserDefaults];
+        if ([localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]]) {
+            self.dailySpendLimitSatoshis = [[localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]] unsignedLongLongValue];
+            self.bDailySpendLimit = [localConfig boolForKey:[self userKey:SPENDING_LIMIT_ENABLED]];
+        } else {
+            self.dailySpendLimitSatoshis = pSettings->dailySpendLimitSatoshis;
+            self.bDailySpendLimit = pSettings->bDailySpendLimit > 0;
+            [self saveLocalSettings];
+        }
         self.bSpendRequirePin = pSettings->bSpendRequirePin;
         self.spendRequirePinSatoshis = pSettings->spendRequirePinSatoshis;
         self.bDisablePINLogin = pSettings->bDisablePINLogin;
@@ -129,6 +139,19 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [Util printABC_Error:&Error];
     }
     ABC_FreeAccountSettings(pSettings);
+}
+
+- (NSString *)userKey:(NSString *)base
+{
+    return [NSString stringWithFormat:@"%@_%@", self.name, base];
+}
+
+- (void)saveLocalSettings
+{
+    NSUserDefaults *localConfig = [NSUserDefaults standardUserDefaults];
+    [localConfig setObject:@(_dailySpendLimitSatoshis) forKey:[self userKey:SPENDING_LIMIT_AMOUNT]];
+    [localConfig setBool:_bDailySpendLimit forKey:[self userKey:SPENDING_LIMIT_ENABLED]];
+    [localConfig synchronize];
 }
 
 - (void)clear
