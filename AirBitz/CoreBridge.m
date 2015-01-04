@@ -622,8 +622,8 @@ static NSTimer *_notificationTimer;
 + (NSNumberFormatter *)generateNumberFormatter
 {
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    [f setMinimumFractionDigits:3];
-    [f setMaximumFractionDigits:3];
+    [f setMinimumFractionDigits:2];
+    [f setMaximumFractionDigits:2];
     [f setLocale:[NSLocale localeWithLocaleIdentifier:@"USD"]];
     return f;
 }
