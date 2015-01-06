@@ -18,5 +18,6 @@
 + (void)freeStringArray:(char **)aszStrings count:(unsigned int)count;
 + (NSString *)getNameFromAddressRecord:(ABRecordRef)person;
 + (void)callTelephoneNumber:(NSString *)telNum;
++ (CGFloat)statusBarHeight;
 
 @end
