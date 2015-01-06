@@ -76,6 +76,7 @@ static NSString *kTimerStart = @"start";
 #define SUB_SCREEN_HEIGHT   (SCREEN_HEIGHT - TOOLBAR_HEIGHT)
 #define HEADER_HEIGHT       64
 #define DISPLAY_AREA_HEIGHT (SUB_SCREEN_HEIGHT - HEADER_HEIGHT)
+#define STATUS_BAR_HEIGHT   20
 
 #define KEYBOARD_HEIGHT     216
 

@@ -302,7 +302,7 @@ typedef enum eAppMode
 						 animations:^
 		 {
 			 CGRect frame = self.tabBar.frame;
-			 frame.origin.y = _originalTabBarFrame.origin.y + frame.size.height;
+			 frame.origin.y = SCREEN_HEIGHT;
 			 self.tabBar.frame = frame;
 			 
 			 _selectedViewController.view.frame = self.view.bounds;
@@ -443,7 +443,10 @@ typedef enum eAppMode
 							options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
 		 {
-			 self.tabBar.frame = _originalTabBarFrame;
+			 CGRect tabBarFrame = self.tabBar.frame;
+			 tabBarFrame.origin.y = SCREEN_HEIGHT - [Util statusBarHeight] + STATUS_BAR_HEIGHT - self.tabBar.frame.size.height;
+			 self.tabBar.frame = tabBarFrame;
+
 			 CGRect frame = self.view.bounds;
 			 frame.size.height -= (_originalTabBarFrame.size.height - 5.0);
 			 _selectedViewController.view.frame = frame;
