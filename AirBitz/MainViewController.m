@@ -63,7 +63,6 @@ typedef enum eAppMode
 	tAppMode                    _appMode;
     NSURL                       *_uri;
     InfoView                    *_notificationInfoView;
-    BOOL                        tabBarHidden;
 }
 
 @property (nonatomic, weak) IBOutlet TabBarView *tabBar;
@@ -107,7 +106,6 @@ typedef enum eAppMode
     [Util printABC_Error:&Error];
 #endif
 
-    tabBarHidden = NO;
 	_originalTabBarFrame = self.tabBar.frame;
 	_originalViewFrame = self.view.frame;
 	// Do any additional setup after loading the view.
@@ -131,7 +129,6 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:NOTIFICATION_TX_RECEIVED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchViewSweep:) name:NOTIFICATION_VIEW_SWEEP_TX object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleStatusBarChange:) name:NOTIFICATION_STATUS_BAR_CHANGE object:nil];
 
     // init and set API key
     [DL_URLServer initAll];
@@ -288,12 +285,10 @@ typedef enum eAppMode
 	if(showTabBar)
 	{
 		[self showTabBarAnimated:YES];
-        tabBarHidden = NO;
 	}
 	else
 	{
 		[self hideTabBarAnimated:YES];
-        tabBarHidden = YES;
 	}
 }
 
@@ -319,11 +314,11 @@ typedef enum eAppMode
 	}
 	else
 	{
-        CGRect frame = self.tabBar.frame;
-        frame.origin.y = SCREEN_HEIGHT;
-        self.tabBar.frame = frame;
-        
-        _selectedViewController.view.frame = self.view.bounds;
+		CGRect frame = self.tabBar.frame;
+		frame.origin.y = _originalTabBarFrame.origin.y + frame.size.height;
+		self.tabBar.frame = frame;
+		
+		_selectedViewController.view.frame = self.view.bounds;
 	}
 }
 
@@ -464,9 +459,7 @@ typedef enum eAppMode
 	}
 	else
 	{
-        CGRect tabBarFrame = self.tabBar.frame;
-        tabBarFrame.origin.y = SCREEN_HEIGHT - [Util statusBarHeight] + STATUS_BAR_HEIGHT - self.tabBar.frame.size.height;
-        self.tabBar.frame = tabBarFrame;
+		self.tabBar.frame = _originalTabBarFrame;
 		
 		CGRect frame = self.view.bounds;
 		frame.size.height -= (_originalTabBarFrame.size.height - 5.0);
@@ -940,24 +933,6 @@ typedef enum eAppMode
     // Force the tabs to redraw the selected view
     _selectedViewController = nil;
     [self launchViewControllerBasedOnAppMode];
-}
-
-- (void)handleStatusBarChange:(NSNotification *)notification
-{
-    CGRect tabBarFrame = self.tabBar.frame;
-    CGRect viewFrame = self.view.bounds;
-    if (tabBarHidden)
-    {
-        tabBarFrame.origin.y = SCREEN_HEIGHT;
-    }
-    else
-    {
-        tabBarFrame.origin.y = SCREEN_HEIGHT - [Util statusBarHeight] + STATUS_BAR_HEIGHT - self.tabBar.frame.size.height;
-
-        viewFrame.size.height -= (_originalTabBarFrame.size.height - 5.0);
-    }
-    self.tabBar.frame = tabBarFrame;
-    _selectedViewController.view.frame = viewFrame;
 }
 
 #pragma mark infoView Delegates

@@ -67,13 +67,6 @@ NSDate *logoutDate = NULL;
     return YES;
 }
 
-- (void)application:(UIApplication *)application didChangeStatusBarFrame:(CGRect)oldStatusBarFrame
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_STATUS_BAR_CHANGE
-                                                        object:self
-                                                      userInfo:nil];
-}
-
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     // Reset badges to 0
@@ -196,7 +189,9 @@ NSDate *logoutDate = NULL;
     ABC_Terminate();
 }
 
-#pragma mark - Long-running background task methods
+- (void)watchStatus
+{
+}
 
 - (void)bgLogoutCleanup
 {
