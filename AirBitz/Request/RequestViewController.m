@@ -49,7 +49,6 @@
     ImportWalletViewController  *_importWalletViewController;
     tABC_TxDetails              _details;
     NSString                    *requestID;
-	CGRect                      _originalCalculatorFrame;
 }
 
 @property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
@@ -93,8 +92,6 @@
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
     
     self.nextButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
-    
-    _originalCalculatorFrame = self.keypadView.frame;
 }
 
 -(void)awakeFromNib
@@ -128,14 +125,6 @@
     {
         // no need for the done button since the calculator is always up
         [self.keypadView hideDoneButton];
-
-        // only adjust for the status bar height if it is greater than the default
-        if ([Util statusBarHeight] > STATUS_BAR_HEIGHT)
-        {
-            CGRect frame = self.keypadView.frame;
-            frame.origin.y = _originalCalculatorFrame.origin.y - [Util statusBarHeight];
-            self.keypadView.frame = frame;
-        }
     }
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
