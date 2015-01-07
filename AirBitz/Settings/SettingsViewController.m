@@ -1296,7 +1296,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             }
             else if (indexPath.row == ROW_BLE)
             {
-				cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+                if (_showBluetoothOption)
+                {
+                    cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+                }
+                else
+                {
+                    NSIndexPath *temp = [NSIndexPath indexPathForRow:ROW_PIN_RELOGIN inSection:indexPath.section];
+                    cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:temp];
+                }
             }
             else if (indexPath.row == ROW_PIN_RELOGIN)
             {
