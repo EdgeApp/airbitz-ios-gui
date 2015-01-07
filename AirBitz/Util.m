@@ -101,7 +101,6 @@
     {
         frame = theView.frame;
         frame.size.height = SUB_SCREEN_HEIGHT;
-        frame.size.height = frame.size.height - [Util statusBarHeight];
         theView.frame = frame;
     }
 
@@ -188,12 +187,6 @@
         webView = [UIWebView new];
     });
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNum]]];
-}
-
-+ (CGFloat)statusBarHeight
-{
-    CGSize statusBarSize = [[UIApplication sharedApplication] statusBarFrame].size;
-    return MIN(statusBarSize.width, statusBarSize.height);
 }
 
 @end
