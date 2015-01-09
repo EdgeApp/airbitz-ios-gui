@@ -678,7 +678,10 @@ typedef enum eExportOption
 
 - (void)exit
 {
-    [_mailComposer.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    if (_mailComposer && _mailComposer.presentingViewController)
+    {
+        [_mailComposer.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
 	[self.delegate exportWalletOptionsViewControllerDidFinish:self];
 }
 
