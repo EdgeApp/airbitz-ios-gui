@@ -163,9 +163,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     _selectedWalletIndex = 0;
 	
-    // And somewhere to store the incoming data
-    _data = [[NSMutableData alloc] init];
-	
 	//for some reason, dismissing the image picker resizes our view's frame to full screen which places the orange QR button behind the tool bar.
 	//Remember our original height so we can force it back to that in viewWillAppear.
 	originalFrameHeight = self.view.frame.size.height;
@@ -528,7 +525,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
 	else
 	{
-		NSLog(@"POWERED ON");
+//		NSLog(@"POWERED ON");
 
 		[self enableBLEMode];
 		self.ble_button.hidden = NO;
@@ -541,9 +538,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)scan
 {
 	//NSLog(@"################## BLE SCAN STARTED ######################");
+    _data = [[NSMutableData alloc] init];
 	self.peripheralContainers = nil;
-    //[self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]] options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
-	[self.centralManager scanForPeripheralsWithServices:nil options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
+	[self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]]
+                                                options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES}];
     
     //NSLog(@"Scanning started");
 }
@@ -577,7 +575,17 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-	//only interested in peripherals advertising TRANSFER_SERVICE_UUID
+    // Reject any where the value is above reasonable range
+    if (RSSI.integerValue > -15) {
+        return;
+    }
+    
+    // Reject if the signal strength is too low to be close enough (Close is around -22dB)
+    if (RSSI.integerValue < -35) {
+        return;
+    }
+
+    //only interested in peripherals advertising TRANSFER_SERVICE_UUID
 	NSArray *array = [advertisementData objectForKey:CBAdvertisementDataServiceUUIDsKey];
 	CBUUID *uuid = [array objectAtIndex:0];
 	//if([[uuid UUIDString] isEqualToString:TRANSFER_SERVICE_UUID])
@@ -622,7 +630,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 			[self updateTable];
 		}
     }
-    //NSLog(@"Discovered %@ at %@ with adv data: %@", peripheral.name, RSSI, advertisementData);
+//    NSLog(@"Discovered %@ at %@ with adv data: %@", peripheral.name, RSSI, advertisementData);
 }
 
 
@@ -639,11 +647,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-   // NSLog(@"Peripheral Connected");
+//    NSLog(@"Peripheral Connected");
     
     // Stop scanning
     [self.centralManager stopScan];
-   // NSLog(@"Scanning stopped");
+//    NSLog(@"Scanning stopped");
     
     // Clear the data that we may already have
     [self.data setLength:0];
@@ -693,14 +701,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     for (CBCharacteristic *characteristic in service.characteristics)
 	{
         
-        // And check if it's the right one
-        /*if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_BITCOIN_URI_CHARACTERISTIC_UUID]])
-		{
-			
-            // If it is, subscribe to it
-            [peripheral setNotifyValue:YES forCharacteristic:characteristic];
-        }*/
-		
 		if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
 		{
 			
@@ -742,8 +742,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 			
 			[peripheral writeValue:[fullName dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
 			
-			
-			//NSLog(@"Writing: %@ to peripheral", fullName);
+//			NSLog(@"Writing: %@ to peripheral", fullName);
         }
     }
     
@@ -759,39 +758,46 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
         return;
     }
-    
 	
     NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
     
-	// and disconnect from the peripehral
-	[self.centralManager cancelPeripheralConnection:peripheral];
-	
-	//make sure partial bitcoin address that was advertized is contained within the actual full bitcoin address
-	if ([stringFromData rangeOfString:self.advertisedPartialBitcoinAddress].location == NSNotFound)
-	{
-		//start at index 9 to skip over "bitcoin:".  Partial address is 10 characters long
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Bitcoin address mismatch", nil)
-							  message:[NSString stringWithFormat:@"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@", [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-	}
-	else
-	{
-		self.pickerTextSendTo.textField.text = stringFromData;
-		[self processURI];
-	}
+    // determine if this was the last chunk of data
+    if ([stringFromData isEqualToString:@"EOM"])
+    {
+        NSString *receivedData = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
+        // make sure partial bitcoin address that was advertized is contained within the actual full bitcoin address
+        if ([receivedData rangeOfString:self.advertisedPartialBitcoinAddress].location == NSNotFound)
+        {
+            // start at index 9 to skip over "bitcoin:".  Partial address is 10 characters long
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Bitcoin address mismatch", nil)
+                                  message:[NSString stringWithFormat:@"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@", [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+        else
+        {
+            self.pickerTextSendTo.textField.text = receivedData;
+            [self processURI];
+        }
+
+        // and disconnect from the peripehral
+        [self.centralManager cancelPeripheralConnection:peripheral];
+        [self cleanup];
+    }
+    else
+    {
+        [_data appendData:characteristic.value];
+    }
 }
 
 
 /** The peripheral letting us know whether our subscribe/unsubscribe happened or not
  */
- /*
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-	//cw no longer need this method
     if (error)
 	{
         NSLog(@"Error changing notification state: %@", error.localizedDescription);
@@ -803,27 +809,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         return;
     }
     
-    // Notification has started
-    if (characteristic.isNotifying)
-	{
-        NSLog(@"Notification began on %@", characteristic);
-    }
-    
-    // Notification has stopped
-    else
+    if (!characteristic.isNotifying)
 	{
         // so disconnect from the peripheral
         NSLog(@"Notification stopped on %@.  Disconnecting", characteristic);
         [self.centralManager cancelPeripheralConnection:peripheral];
     }
 }
-*/
-/*
+
+
 -(void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
 {
 	NSLog(@"Did Modify Services: %@", invalidatedServices);
 }
-*/
+
 
 /** Once the disconnection happens, we need to clean up our local copy of the peripheral
  */
@@ -847,9 +846,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 -(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-	//NSLog(@"Did write value for characteristic: %@", characteristic);
-	
-	[peripheral readValueForCharacteristic:characteristic];
+    if (error) {
+        NSLog(@"Error writing value for characteristic: %@", error.localizedDescription);
+        return;
+    }
+    
+    [peripheral setNotifyValue:YES forCharacteristic:characteristic];
 }
 
 

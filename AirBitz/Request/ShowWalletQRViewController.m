@@ -85,7 +85,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (strong, nonatomic) CBMutableCharacteristic   *bitcoinURICharacteristic;
 @property (strong, nonatomic) CBMutableCharacteristic   *userNameCharacteristic;
 @property (strong, nonatomic) NSData                    *dataToSend;
-//@property (nonatomic, readwrite) NSInteger              sendDataIndex;
+@property (nonatomic, readwrite) NSInteger              sendDataIndex;
 
 @property (nonatomic, weak) IBOutlet UIView				*connectedView;
 @property (nonatomic, weak) IBOutlet UIImageView		*connectedPhoto;
@@ -417,7 +417,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 		
 		// Start with the CBMutableCharacteristic
 		self.bitcoinURICharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]
-																		 properties:CBCharacteristicPropertyRead | CBCharacteristicPropertyWrite
+																		 properties:CBCharacteristicPropertyNotify | CBCharacteristicPropertyRead | CBCharacteristicPropertyWrite
 																			  value:nil
 																		permissions:CBAttributePermissionsReadable | CBAttributePermissionsWriteable];
 											
@@ -490,10 +490,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 /** Catch when someone subscribes to our characteristic, then start sending them data
  */
- /*
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic
 {
-    NSLog(@"Central subscribed to characteristic");
+//    NSLog(@"Central subscribed to characteristic");
     
 	//[self showConnectedPopup];
 	
@@ -506,22 +505,19 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     
     // Start sending
     [self sendData];
-}*/
+}
 
 
 /** Recognise when the central unsubscribes
  */
- /*
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic
 {
-    NSLog(@"Central unsubscribed from characteristic");
+//    NSLog(@"Central unsubscribed from characteristic");
 	[self.navigationController popViewControllerAnimated:YES];
 }
-*/
 
 /** Sends the next amount of data to the connected central
  */
- /*
 - (void)sendData
 {
     // First up, check if we're meant to be sending an EOM
@@ -539,7 +535,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             // It did, so mark it as sent
             sendingEOM = NO;
             
-            NSLog(@"Sent: EOM");
+//            NSLog(@"Sent: EOM");
         }
         
         // It didn't send, so we'll exit and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendData again
@@ -583,7 +579,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         
         NSString *stringFromData = [[NSString alloc] initWithData:chunk encoding:NSUTF8StringEncoding];
-        NSLog(@"Sent: %@", stringFromData);
+//        NSLog(@"Sent: %@", stringFromData);
         
         // It did send, so update our index
         self.sendDataIndex += amountToSend;
@@ -603,23 +599,21 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 			{
                 // It sent, we're all done
                 sendingEOM = NO;
-                NSLog(@"Sent: EOM");
+//                NSLog(@"Sent: EOM");
             }
             return;
         }
     }
 }
-*/
 
 /** This callback comes in when the PeripheralManager is ready to send the next chunk of data.
  *  This is to ensure that packets will arrive in the order they are sent
  */
- /*
 - (void)peripheralManagerIsReadyToUpdateSubscribers:(CBPeripheralManager *)peripheral
 {
     // Start sending again
     [self sendData];
-}*/
+}
 
 -(void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests
 {
@@ -636,24 +630,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	}
 	[self showConnectedPopup];
 	[self.peripheralManager respondToRequest:[requests objectAtIndex:0] withResult:CBATTErrorSuccess];
-}
-
--(void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request
-{
-	//NSLog(@"didReceiveReadRequests");
-
-	if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
-	{
-		// Send the bitcoin address and the amount in Satoshi
-#if TEST_SEND_BOGUS_BITCOIN_ADDRESS
-		NSString *stringToSend = BOGUS_BITCOIN_ADDRESS_STRING;
-#else
-		NSString *stringToSend = [NSString stringWithFormat:@"%@", self.uriString];
-#endif
-		self.dataToSend = [stringToSend dataUsingEncoding:NSUTF8StringEncoding];
-		request.value = self.dataToSend;
-		[peripheral respondToRequest:request withResult:CBATTErrorSuccess];
-	}
 }
 
 #pragma mark - Action Methods
