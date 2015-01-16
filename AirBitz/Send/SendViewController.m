@@ -750,7 +750,25 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
 	
     NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-    
+    if ([stringFromData rangeOfString:self.advertisedPartialBitcoinAddress].location == NSNotFound)
+    {
+        //start at index 9 to skip over "bitcoin:".  Partial address is 10 characters long
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"Bitcoin address mismatch", nil)
+                              message:[NSString stringWithFormat:@"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@", [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
+                              delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+    }
+    else
+    {
+        self.pickerTextSendTo.textField.text = stringFromData;
+        [self processURI];
+    }
+
+    // subscription a.k.a. notify mode isn't necessary unless your data is larger than >512 bytes
+#ifdef LARGE_BLE_DATA
     // determine if this was the last chunk of data
     if ([stringFromData isEqualToString:@"EOM"])
     {
@@ -781,6 +799,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         [_data appendData:characteristic.value];
     }
+#endif
 }
 
 
@@ -840,8 +859,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         NSLog(@"Error writing value for characteristic: %@", error.localizedDescription);
         return;
     }
-    
+
+#ifdef LARGE_BLE_DATA
     [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+#endif
+    [peripheral readValueForCharacteristic:characteristic];
 }
 
 

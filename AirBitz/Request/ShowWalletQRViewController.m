@@ -632,6 +632,27 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	[self.peripheralManager respondToRequest:[requests objectAtIndex:0] withResult:CBATTErrorSuccess];
 }
 
+-(void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request
+{
+	//NSLog(@"didReceiveReadRequests");
+
+	if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
+	{
+        NSString *stringToSend = [NSString stringWithFormat:@"%@", self.uriString];
+        NSData *data = [stringToSend dataUsingEncoding:NSUTF8StringEncoding];
+
+        if (request.offset > data.length)
+        {
+            [self.peripheralManager respondToRequest:request withResult:CBATTErrorInvalidOffset];
+            return;
+        }
+        
+        NSRange readRange = NSMakeRange(request.offset, data.length - request.offset);
+        request.value = [data subdataWithRange:readRange];
+		[peripheral respondToRequest:request withResult:CBATTErrorSuccess];
+	}
+}
+
 #pragma mark - Action Methods
 
 - (IBAction)Refresh
