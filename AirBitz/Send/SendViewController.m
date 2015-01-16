@@ -575,16 +575,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    // Reject any where the value is above reasonable range
-    if (RSSI.integerValue > -15) {
-        return;
-    }
-    
-    // Reject if the signal strength is too low to be close enough (Close is around -22dB)
-    if (RSSI.integerValue < -35) {
-        return;
-    }
-
     //only interested in peripherals advertising TRANSFER_SERVICE_UUID
 	NSArray *array = [advertisementData objectForKey:CBAdvertisementDataServiceUUIDsKey];
 	CBUUID *uuid = [array objectAtIndex:0];
@@ -1443,6 +1433,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     } else {
         [self startBleTimeout:0.0];
     }
+
+    [self enableTableSelection];
 }
 
 #pragma mark - ButtonSelectorView delegates
