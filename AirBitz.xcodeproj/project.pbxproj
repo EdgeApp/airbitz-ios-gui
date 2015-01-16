@@ -13,7 +13,6 @@
 		4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D518C29CEF0071B87C /* libcurl.a */; };
 		4C08A6DE18C29CEF0071B87C /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D618C29CEF0071B87C /* libjansson.a */; };
 		4C08A6DF18C29CEF0071B87C /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D718C29CEF0071B87C /* libqrencode.a */; };
-		4C08A6E018C29CEF0071B87C /* libscrypt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D818C29CEF0071B87C /* libscrypt.a */; };
 		4C08A6E118C29CEF0071B87C /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D918C29CEF0071B87C /* libssl.a */; };
 		4C08A6E218C29CEF0071B87C /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6DA18C29CEF0071B87C /* libz.a */; };
 		4C08A6E618C2B1D50071B87C /* Wallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C08A6E518C2B1D50071B87C /* Wallet.m */; };
@@ -145,7 +144,6 @@
 		7D5E1CE719AFB2D400943A81 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CCD19AFB2D400943A81 /* libcurl.a */; };
 		7D5E1CE919AFB2D400943A81 /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CCF19AFB2D400943A81 /* libjansson.a */; };
 		7D5E1CEA19AFB2D400943A81 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD019AFB2D400943A81 /* libqrencode.a */; };
-		7D5E1CEB19AFB2D400943A81 /* libscrypt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD119AFB2D400943A81 /* libscrypt.a */; };
 		7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD519AFB2D400943A81 /* libwallet.a */; };
 		7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD619AFB2D400943A81 /* libz.a */; };
 		7D5E1CF419AFB34C00943A81 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CF319AFB34C00943A81 /* libssl.a */; };
@@ -1151,7 +1149,6 @@
 		4C08A6D518C29CEF0071B87C /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ABC/libcurl.a; sourceTree = "<group>"; };
 		4C08A6D618C29CEF0071B87C /* libjansson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjansson.a; path = ABC/libjansson.a; sourceTree = "<group>"; };
 		4C08A6D718C29CEF0071B87C /* libqrencode.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libqrencode.a; path = ABC/libqrencode.a; sourceTree = "<group>"; };
-		4C08A6D818C29CEF0071B87C /* libscrypt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libscrypt.a; path = ABC/libscrypt.a; sourceTree = "<group>"; };
 		4C08A6D918C29CEF0071B87C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ABC/libssl.a; sourceTree = "<group>"; };
 		4C08A6DA18C29CEF0071B87C /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ABC/libz.a; sourceTree = "<group>"; };
 		4C08A6E418C2B1D50071B87C /* Wallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wallet.h; path = "ABC Data/Wallet.h"; sourceTree = "<group>"; };
@@ -1317,7 +1314,6 @@
 		7D5E1CCD19AFB2D400943A81 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = "ABC-testnet/libcurl.a"; sourceTree = "<group>"; };
 		7D5E1CCF19AFB2D400943A81 /* libjansson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjansson.a; path = "ABC-testnet/libjansson.a"; sourceTree = "<group>"; };
 		7D5E1CD019AFB2D400943A81 /* libqrencode.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libqrencode.a; path = "ABC-testnet/libqrencode.a"; sourceTree = "<group>"; };
-		7D5E1CD119AFB2D400943A81 /* libscrypt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libscrypt.a; path = "ABC-testnet/libscrypt.a"; sourceTree = "<group>"; };
 		7D5E1CD519AFB2D400943A81 /* libwallet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwallet.a; path = "ABC-testnet/libwallet.a"; sourceTree = "<group>"; };
 		7D5E1CD619AFB2D400943A81 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = "ABC-testnet/libz.a"; sourceTree = "<group>"; };
 		7D5E1CF319AFB34C00943A81 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "ABC-testnet/libssl.a"; sourceTree = "<group>"; };
@@ -1884,7 +1880,6 @@
 				7D98AD1E19A7C550003D2BF6 /* CoreVideo.framework in Frameworks */,
 				7D5E1CEA19AFB2D400943A81 /* libqrencode.a in Frameworks */,
 				7D5E1CE719AFB2D400943A81 /* libcurl.a in Frameworks */,
-				7D5E1CEB19AFB2D400943A81 /* libscrypt.a in Frameworks */,
 				7D98AD1F19A7C550003D2BF6 /* CoreAudio.framework in Frameworks */,
 				7D98AD2019A7C550003D2BF6 /* CoreMedia.framework in Frameworks */,
 				7D98AD2119A7C550003D2BF6 /* DriveLib.a in Frameworks */,
@@ -1953,7 +1948,6 @@
 				4C08A6DB18C29CEF0071B87C /* libabc.a in Frameworks */,
 				B5F2E9A518D3BFEF008ACF88 /* libbitcoin.a in Frameworks */,
 				B5675B4C18A17F6F002E0703 /* Foundation.framework in Frameworks */,
-				4C08A6E018C29CEF0071B87C /* libscrypt.a in Frameworks */,
 				4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */,
 				4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */,
 				6A587502F675B6C6ECA2BB1B /* libPods.a in Frameworks */,
@@ -1974,7 +1968,6 @@
 				4C08A6D518C29CEF0071B87C /* libcurl.a */,
 				4C08A6D618C29CEF0071B87C /* libjansson.a */,
 				4C08A6D718C29CEF0071B87C /* libqrencode.a */,
-				4C08A6D818C29CEF0071B87C /* libscrypt.a */,
 				4C08A6D918C29CEF0071B87C /* libssl.a */,
 				4C08A6DA18C29CEF0071B87C /* libz.a */,
 			);
@@ -2128,7 +2121,6 @@
 				7D5E1CCD19AFB2D400943A81 /* libcurl.a */,
 				7D5E1CCF19AFB2D400943A81 /* libjansson.a */,
 				7D5E1CD019AFB2D400943A81 /* libqrencode.a */,
-				7D5E1CD119AFB2D400943A81 /* libscrypt.a */,
 				7D5E1CF319AFB34C00943A81 /* libssl.a */,
 				7D5E1CD619AFB2D400943A81 /* libz.a */,
 			);
