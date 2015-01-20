@@ -167,10 +167,8 @@ NSDate *logoutDate = NULL;
     [self bgNotificationCleanup];
     [self bgLogoutCleanup];
     [self checkLoginExpired];
-    NSLog(@("connectWatchers:"));
     if ([User isLoggedIn])
     {
-        NSLog(@("isLoggedIn:"));
         [CoreBridge connectWatchers];
         [CoreBridge startQueues];
     }
