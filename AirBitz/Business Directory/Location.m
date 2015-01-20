@@ -107,25 +107,29 @@ static Location *singleton = nil;  // this will be the one and only object this 
 {
     [self stop];
     
-    //NSLog(@"Starting location");
-    
     if (NO == [CLLocationManager locationServicesEnabled])
     {
         [self showAlert:@"Your location services are not currently enabled. Therefore, this application will not be able to calculate distances. If you would like this feature, please go to the device settings under \"General / Location Services\" and enable it."
               withTitle:@"Location Warning"];
-        //NSLog(@"No general location to start with");
     }
     else
     {
         if (!self.locationManager)
         {
             self.locationManager = [[CLLocationManager alloc] init];
-            //self.locationManager.purpose = @"Your location is used to find businesses in your area.";
             self.locationManager.delegate = self;
             self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 			self.locationManager.distanceFilter = 500; //meters
         }
+#ifdef __IPHONE_8_0
+        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [self.locationManager requestWhenInUseAuthorization];
+        } else {
+            [self.locationManager startUpdatingLocation];
+        }
+#else
         [self.locationManager startUpdatingLocation];
+#endif
     }
 }
 
@@ -221,6 +225,15 @@ static Location *singleton = nil;  // this will be the one and only object this 
 		[self.delegate DidReceiveLocation];
 	}
 }
+
+#ifdef __IPHONE_8_0
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (kCLAuthorizationStatusAuthorizedWhenInUse == status || kCLAuthorizationStatusAuthorized == status) {
+        [self.locationManager startUpdatingLocation];
+    }
+}
+#endif
 
 -(void)timerFired:(NSTimer *)timer
 {
