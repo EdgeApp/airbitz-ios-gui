@@ -92,7 +92,11 @@
     [self.view addSubview:self.buttonBlocker];
 
     // put the cursor in the user name field
-    [self.userNameTextField becomeFirstResponder];
+    if (self.strUserName && _mode == SignUpMode_SignUp) {
+        [self.passwordTextField becomeFirstResponder];
+    } else {
+        [self.userNameTextField becomeFirstResponder];
+    }
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
