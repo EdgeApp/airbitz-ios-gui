@@ -57,6 +57,7 @@
 + (void)deletePINLogin;
 + (void)setupLoginPIN;
 + (tABC_CC)PINLoginWithPIN:(NSString *)PIN;
++ (int)loginTimeSeconds;
 + (void)login;
 + (void)logout;
 + (BOOL)passwordOk:(NSString *)password;

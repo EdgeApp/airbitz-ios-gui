@@ -36,6 +36,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 static BOOL bInitialized = NO;
 static BOOL bDataFetched = NO;
+static int iLoginTimeSeconds = 0;
 static NSOperationQueue *exchangeQueue;
 static NSOperationQueue *dataQueue;
 static NSMutableDictionary *watchers;
@@ -1035,6 +1036,11 @@ static NSTimer *_notificationTimer;
     }
 }
 
++ (int)loginTimeSeconds
+{
+    return iLoginTimeSeconds;
+}
+
 + (void)login
 {
     NSString *username = [User Singleton].name;
@@ -1048,6 +1054,8 @@ static NSTimer *_notificationTimer;
     bDataFetched = NO;
     [CoreBridge startQueues];
     [CoreBridge startWatchers];
+
+    iLoginTimeSeconds = (int) [[NSDate date] timeIntervalSince1970];
 }
 
 + (void)logout

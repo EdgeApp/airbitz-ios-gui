@@ -20,6 +20,8 @@
 #import "FadingAlertView.h"
 #import "AudioController.h"
 
+#define PIN_REQUIRED_PERIOD 120
+
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate,
                                               InfoViewDelegate, FadingAlertViewDelegate>
@@ -37,6 +39,7 @@
     UITapGestureRecognizer              *tap;
     UIAlertView                         *_alert;
     FadingAlertView                     *_fadingAlert;
+    NSTimer                             *_pinTimer;
 }
 
 @property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
@@ -146,6 +149,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [_pinTimer invalidate];
+    _pinTimer = nil;
     [self dismissErrorMessage];
     [super viewWillDisappear:animated];
     [self.view removeGestureRecognizer:tap];
@@ -231,6 +236,12 @@
         [self.amountFiatTextField becomeFirstResponder];
     }
     [self exchangeRateUpdate:nil]; 
+
+    _pinTimer = [NSTimer scheduledTimerWithTimeInterval:PIN_REQUIRED_PERIOD
+        target:self
+        selector:@selector(updateTextFieldContents)
+        userInfo:nil
+        repeats:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -651,7 +662,8 @@
     _passwordRequired = NO;
     _pinRequired = NO;
 
-    if (self.bAddressIsWalletUUID) {
+    int now = [[NSDate date] timeIntervalSince1970];
+    if (self.bAddressIsWalletUUID || now - [CoreBridge loginTimeSeconds] <= PIN_REQUIRED_PERIOD) {
         // Transfers don't require a PIN or password
         _labelPINTitle.hidden = YES;
         _withdrawlPIN.hidden = YES;
