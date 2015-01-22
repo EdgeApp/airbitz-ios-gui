@@ -592,6 +592,8 @@ typedef enum eAppMode
     _strWalletUUID = [data objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
     _strTxID = [data objectForKey:KEY_TX_DETAILS_EXITED_TX_ID];
 
+    Transaction *transaction = [CoreBridge getTransaction:_strWalletUUID withTx:_strTxID];
+
     /* If showing QR code, launch receiving screen*/
     if (_selectedViewController == _requestViewController 
             && [_requestViewController showingQRCode:_strWalletUUID withTx:_strTxID])
@@ -599,7 +601,6 @@ typedef enum eAppMode
         if ([_requestViewController transactionWasDonation])
         {
             // launch the next QR view with the donation amount
-            Transaction *transaction = [CoreBridge getTransaction:_strWalletUUID withTx:_strTxID];
             [_requestViewController LaunchQRCodeScreen:transaction.amountSatoshi withRequestState:kDonation];
             return;
         }
@@ -628,10 +629,16 @@ typedef enum eAppMode
     // Prevent displaying multiple alerts
     else if (_receivedAlert == nil)
     {
+        NSMutableString *title = NSLocalizedString(@"Received Funds", nil);
+        NSMutableString *msg = NSLocalizedString(@"Bitcoin received. Tap for details.", nil);
+        if (transaction && transaction.amountSatoshi < 0) {
+            title = NSLocalizedString(@"Sent Funds", nil);
+            msg = NSLocalizedString(@"Bitcoin sent. Tap for details.", nil);
+        }
         [[AudioController controller] playReceived];
         _receivedAlert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Received Funds", nil)
-                                message:NSLocalizedString(@"Bitcoin received. Tap for details.", nil)
+                                initWithTitle:title
+                                message:msg
                                 delegate:self
                                 cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                 otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
