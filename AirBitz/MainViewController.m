@@ -204,7 +204,6 @@ typedef enum eAppMode
     [strSeed appendString:[[UIDevice currentDevice] name]];
 
     // add the string to the data
-    //NSLog(@"seed string: %@", strSeed);
     [data appendData:[strSeed dataUsingEncoding:NSUTF8StringEncoding]];
 
     double time = CACurrentMediaTime();
@@ -496,7 +495,6 @@ typedef enum eAppMode
 
 -(void)tabVarView:(TabBarView *)view selectedSubview:(UIView *)subview reselected:(BOOL)bReselected
 {
-	//NSLog(@"Selecting view %i", (int) subview.tag);
     tTabBarButton tabBarButton = (tTabBarButton) (subview.tag);
 	_appMode = (tAppMode)(subview.tag);
 
@@ -504,7 +502,6 @@ typedef enum eAppMode
     {
         NSDictionary *dictNotification = @{ KEY_TAB_BAR_BUTTON_RESELECT_ID : [NSNumber numberWithInt:tabBarButton] };
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:self userInfo:dictNotification];
-        //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\Tab Bar Button tapped while already selected\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎");
     }
     else
     {
