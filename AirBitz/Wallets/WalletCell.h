@@ -13,4 +13,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *name;
 @property (nonatomic, weak) IBOutlet UILabel *amount;
 @property (nonatomic, weak) IBOutlet UIImageView *bkgImage;
+
+- (void)setInfo:(int)index tableHeight:(int)height;
+
 @end
