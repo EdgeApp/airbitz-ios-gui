@@ -63,6 +63,7 @@ typedef enum eAppMode
 	tAppMode                    _appMode;
     NSURL                       *_uri;
     InfoView                    *_notificationInfoView;
+    BOOL                        firstLaunch;
 }
 
 @property (nonatomic, weak) IBOutlet TabBarView *tabBar;
@@ -152,6 +153,8 @@ typedef enum eAppMode
 	_walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
 	_settingsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
 	_settingsViewController.delegate = self;
+
+    firstLaunch = YES;
 }
 
 
@@ -165,7 +168,12 @@ typedef enum eAppMode
 #else
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHideTabBar:) name:NOTIFICATION_SHOW_TAB_BAR object:nil];
 #endif
-	[self.tabBar selectButtonAtIndex:0];
+    [self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
+
+    // Start on the Wallets tab
+    _appMode = APP_MODE_WALLETS;
+    [self launchViewControllerBasedOnAppMode];
+    firstLaunch = NO;
 }
 
 - (void)dealloc
@@ -217,57 +225,65 @@ typedef enum eAppMode
 
 -(void)showFastestLogin
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-    {
+    if (firstLaunch) {
         bool exists = [CoreBridge PINLoginExists];
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-            if (exists)
-            {
-                [self showPINLogin];
-            }
-            else
-            {
-                [self showLogin];
-            }
+        if (exists) {
+            [self showPINLogin:NO];
+        } else {
+            [self showLogin:NO];
+        }
+    } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
+            bool exists = [CoreBridge PINLoginExists];
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                if (exists) {
+                    [self showPINLogin:YES];
+                } else {
+                    [self showLogin:YES];
+                }
+            });
         });
-    });
+    }
 }
 
--(void)showLogin
+-(void)showLogin:(BOOL)animated
 {
-	_loginViewController.view.frame = self.view.bounds;
-	[self.view insertSubview:_loginViewController.view belowSubview:self.tabBar];
-	_loginViewController.view.alpha = 0.0;
-	[self hideTabBarAnimated:YES];
-	[UIView animateWithDuration:0.25
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseIn
-					 animations:^
-	 {
-		 _loginViewController.view.alpha = 1.0;
-	 }
-					 completion:^(BOOL finished)
-	 {
-	 }];
+    _loginViewController.view.frame = self.view.bounds;
+    [self.view insertSubview:_loginViewController.view belowSubview:self.tabBar];
+    [self hideTabBarAnimated:animated];
+    if (animated) {
+        _loginViewController.view.alpha = 0.0;
+        [UIView animateWithDuration:0.25
+                            delay:0.0
+                            options:UIViewAnimationOptionCurveEaseIn
+                        animations:^
+        {
+            _loginViewController.view.alpha = 1.0;
+        }
+                        completion:^(BOOL finished)
+        {
+        }];
+    }
 }
 
--(void)showPINLogin
+-(void)showPINLogin:(BOOL)animated
 {
-	_PINReLoginViewController.view.frame = self.view.bounds;
-	[self.view insertSubview:_PINReLoginViewController.view belowSubview:self.tabBar];
-	_PINReLoginViewController.view.alpha = 0.0;
-	[self hideTabBarAnimated:YES];
-	[UIView animateWithDuration:0.25
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseIn
-					 animations:^
-	 {
-		 _PINReLoginViewController.view.alpha = 1.0;
-	 }
-					 completion:^(BOOL finished)
-	 {
-	 }];
+    _PINReLoginViewController.view.frame = self.view.bounds;
+    [self.view insertSubview:_PINReLoginViewController.view belowSubview:self.tabBar];
+    [self hideTabBarAnimated:animated];
+    if (animated) {
+        _PINReLoginViewController.view.alpha = 0.0;
+        [UIView animateWithDuration:0.25
+                            delay:0.0
+                            options:UIViewAnimationOptionCurveEaseIn
+                        animations:^
+        {
+            _PINReLoginViewController.view.alpha = 1.0;
+        }
+                        completion:^(BOOL finished)
+        {
+        }];
+    }
 }
 
 -(void)updateChildViewSizeForTabBar
@@ -348,7 +364,7 @@ typedef enum eAppMode
 				}
 				else
 				{
-					[self showFastestLogin];
+                    [self showFastestLogin];
 				}
 			}
 			break;
@@ -392,7 +408,7 @@ typedef enum eAppMode
 				}
 				else
 				{
-					[self showFastestLogin];
+                    [self showFastestLogin];
 				}
 			}
 			break;
@@ -410,7 +426,7 @@ typedef enum eAppMode
 				}
 				else
 				{
-					[self showFastestLogin];
+                    [self showFastestLogin];
 				}
 			}
 			break;
@@ -426,7 +442,7 @@ typedef enum eAppMode
 				}
 				else
 				{
-					[self showFastestLogin];
+                    [self showFastestLogin];
 				}
 			}
 			break;
@@ -770,7 +786,7 @@ typedef enum eAppMode
 - (void)PINReLoginViewControllerDidSwitchUserWithMessage:(NSString *)message
 {
     [self PINReLoginViewControllerDidAbort];
-    [self showLogin];
+    [self showLogin:YES];
     if (message)
     {
         _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
