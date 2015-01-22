@@ -93,6 +93,8 @@
 		6806B2611A4A95960026A6F2 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806B2601A4A95960026A6F2 /* AudioController.m */; };
 		6806B2621A4A95960026A6F2 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806B2601A4A95960026A6F2 /* AudioController.m */; };
 		6809FB9A196F9EEB0076CA4D /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809FB99196F9EEB0076CA4D /* libgit2.a */; };
+		681946861A71BC6300BE1F34 /* CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 681946841A71BC6300BE1F34 /* CommonCell.m */; };
+		681946871A71BC6300BE1F34 /* CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 681946841A71BC6300BE1F34 /* CommonCell.m */; };
 		68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */; };
 		683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
 		684861AC1A0C01C5008E53F8 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C4AA221A0B4DD70010C837 /* FadingAlertView.m */; };
@@ -1269,6 +1271,8 @@
 		6806B25F1A4A95960026A6F2 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
 		6806B2601A4A95960026A6F2 /* AudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioController.m; sourceTree = "<group>"; };
 		6809FB99196F9EEB0076CA4D /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = AirBitz/ABC/libgit2.a; sourceTree = "<group>"; };
+		681946841A71BC6300BE1F34 /* CommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonCell.m; sourceTree = "<group>"; };
+		681946851A71BC6300BE1F34 /* CommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCell.h; sourceTree = "<group>"; };
 		68390DB51A0406D600D3789F /* SpendingLimitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendingLimitsViewController.h; sourceTree = "<group>"; };
 		68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendingLimitsViewController.m; sourceTree = "<group>"; };
 		683D95B71989F14B0082BC1A /* ca-certificates.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ca-certificates.crt"; sourceTree = "<group>"; };
@@ -2995,6 +2999,8 @@
 		B5C0A9B618EA0DD8008F302C /* Wallets */ = {
 			isa = PBXGroup;
 			children = (
+				681946841A71BC6300BE1F34 /* CommonCell.m */,
+				681946851A71BC6300BE1F34 /* CommonCell.h */,
 				B5C0A9B718EA0DD8008F302C /* TransactionCell.h */,
 				B5C0A9B818EA0DD8008F302C /* TransactionCell.m */,
 				B5C0A9B918EA0DD8008F302C /* TransactionDetailsViewController.h */,
@@ -4216,6 +4222,7 @@
 				7D98AD0019A7C550003D2BF6 /* OfflineWalletViewController.m in Sources */,
 				7D98AD0119A7C550003D2BF6 /* ButtonOnlyCell.m in Sources */,
 				7D98AD0219A7C550003D2BF6 /* categoryCell.m in Sources */,
+				681946871A71BC6300BE1F34 /* CommonCell.m in Sources */,
 				7D98AD0319A7C550003D2BF6 /* CJSONSerializer.m in Sources */,
 				7D98AD0419A7C550003D2BF6 /* ExportWalletOptionsViewController.m in Sources */,
 				7D98AD0519A7C550003D2BF6 /* main.m in Sources */,
@@ -4338,6 +4345,7 @@
 				4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */,
 				B55A031718EA5F5B00845090 /* ButtonOnlyCell.m in Sources */,
 				B5C0A99618EA0BE7008F302C /* categoryCell.m in Sources */,
+				681946861A71BC6300BE1F34 /* CommonCell.m in Sources */,
 				B5137C3B18A435BD00DA4A34 /* CJSONSerializer.m in Sources */,
 				4C5D8C911933C8040015BB3C /* ExportWalletOptionsViewController.m in Sources */,
 				B5675B5818A17F6F002E0703 /* main.m in Sources */,

@@ -9,16 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "MontserratLabel.h"
 #import "LatoLabel.h"
+#import "CommonCell.h"
 
-@interface TransactionCell : UITableViewCell
+@interface TransactionCell : CommonCell
 
 @property (nonatomic, weak) IBOutlet MontserratLabel    *dateLabel;
 @property (nonatomic, weak) IBOutlet MontserratLabel    *addressLabel;
 @property (nonatomic, weak) IBOutlet LatoLabel          *confirmationLabel;
 @property (nonatomic, weak) IBOutlet LatoLabel          *amountLabel;
 @property (nonatomic, weak) IBOutlet LatoLabel          *balanceLabel;
-@property (nonatomic, weak) IBOutlet UIImageView        *bkgImage;
 @property (weak, nonatomic) IBOutlet UIView             *viewPhoto;
 @property (weak, nonatomic) IBOutlet UIImageView        *imagePhoto;
+
+- (void)setInfo:(int)index tableHeight:(int)height;
 
 @end

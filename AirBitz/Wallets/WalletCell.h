@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonCell.h"
 
-@interface WalletCell : UITableViewCell
+@interface WalletCell : CommonCell
 
 @property (nonatomic, weak) IBOutlet UILabel *name;
 @property (nonatomic, weak) IBOutlet UILabel *amount;
-@property (nonatomic, weak) IBOutlet UIImageView *bkgImage;
 
 - (void)setInfo:(int)index tableHeight:(int)height;
 

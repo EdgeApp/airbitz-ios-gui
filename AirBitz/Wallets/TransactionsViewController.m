@@ -47,7 +47,6 @@
     CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
     CGRect                              _frameTableWithSearchNoKeyboard;
-    NSInteger                           _highlightedRow;
 }
 
 @property (weak, nonatomic) IBOutlet UIView         *viewSearch;
@@ -185,9 +184,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    // reset highlight
-    _highlightedRow = -1;
-    
     [super viewWillAppear:animated];
     [CoreBridge reloadWallet:self.wallet];
     [self getBizImagesForWallet:self.wallet];
@@ -692,9 +688,6 @@
 
 -(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
 {
-    // reset highlight
-    _highlightedRow = -1;
-
     // if we got a new photo
     if (controller.transaction.bizId && controller.photo)
     {
@@ -812,6 +805,7 @@
 
         // wallet cell
         cell = [self getTransactionCellForTableView:tableView];
+        [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
 
         Transaction *transaction = NULL;
         if ([self searchEnabled])
@@ -881,56 +875,6 @@
 
         // color amount
         cell.amountLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
-
-        if ((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
-        {
-            if (row == _highlightedRow)
-            {
-                cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_single"];
-            }
-            else
-            {
-                cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
-            }
-        }
-        else
-        {
-            if(row == 0)
-            {
-                if (row == _highlightedRow)
-                {
-                    cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_top"];
-                }
-                else
-                {
-                    cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
-                }
-            }
-            else
-                if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
-                {
-                    if (row == _highlightedRow)
-                    {
-                        cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_bottom"];
-                    }
-                    else
-                    {
-                        cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_bottom"];
-                    }
-                }
-                else
-                {
-                    if (row == _highlightedRow)
-                    {
-                        cell.bkgImage.image = [UIImage imageNamed:@"bd_highlighted_cell_middle"];
-                    }
-                    else
-                    {
-                        cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_middle"];
-                    }
-                }
-        }
-
         // set the photo
         cell.imagePhoto.image = [self imageForTransaction:transaction];
         cell.viewPhoto.hidden = (cell.imagePhoto.image == nil);
@@ -964,9 +908,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _highlightedRow = indexPath.row;
-    [self.tableView reloadData];
-
     if (indexPath.section == 1)
     {
         if (YES == [self canLeaveWalletNameField])
