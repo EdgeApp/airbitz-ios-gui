@@ -168,8 +168,11 @@ typedef enum eAppMode
 #else
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHideTabBar:) name:NOTIFICATION_SHOW_TAB_BAR object:nil];
 #endif
+    // Setup Business Directory
     [self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
 
+    // Switch to Wallets Business Directory
+    [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
     // Start on the Wallets tab
     _appMode = APP_MODE_WALLETS;
     [self launchViewControllerBasedOnAppMode];
