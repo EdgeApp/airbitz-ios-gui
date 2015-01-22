@@ -1050,7 +1050,6 @@ static NSTimer *_notificationTimer;
     }
 
     [LocalSettings saveAll];
-    [CoreBridge setupLoginPIN];
     bDataFetched = NO;
     [CoreBridge startQueues];
     [CoreBridge startWatchers];
