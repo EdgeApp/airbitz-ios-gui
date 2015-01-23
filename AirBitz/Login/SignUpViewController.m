@@ -91,8 +91,9 @@
     self.buttonBlocker.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
 
-    // put the cursor in the user name field
-    if (self.strUserName && _mode == SignUpMode_SignUp) {
+    if (self.strUserName
+            && [self.strUserName length] > 0
+            && _mode == SignUpMode_SignUp) {
         [self.passwordTextField becomeFirstResponder];
     } else {
         [self.userNameTextField becomeFirstResponder];
