@@ -645,8 +645,8 @@ typedef enum eAppMode
     // Prevent displaying multiple alerts
     else if (_receivedAlert == nil)
     {
-        NSMutableString *title = NSLocalizedString(@"Received Funds", nil);
-        NSMutableString *msg = NSLocalizedString(@"Bitcoin received. Tap for details.", nil);
+        NSString *title = NSLocalizedString(@"Received Funds", nil);
+        NSString *msg = NSLocalizedString(@"Bitcoin received. Tap for details.", nil);
         if (transaction && transaction.amountSatoshi < 0) {
             title = NSLocalizedString(@"Sent Funds", nil);
             msg = NSLocalizedString(@"Bitcoin sent. Tap for details.", nil);
