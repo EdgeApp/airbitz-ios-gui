@@ -669,8 +669,9 @@
         _withdrawlPIN.keyboardType = UIKeyboardTypeDefault;
         _imagePINEmboss.hidden = NO;
     } else if (!self.bAddressIsWalletUUID
-                && (([User Singleton].bSpendRequirePin && self.amountToSendSatoshi >= [User Singleton].spendRequirePinSatoshis)
-                    || ![CoreBridge recentlyLoggedIn])) {
+                && [User Singleton].bSpendRequirePin
+                && self.amountToSendSatoshi >= [User Singleton].spendRequirePinSatoshis
+                && ![CoreBridge recentlyLoggedIn]) {
         // Show PIN pad
         _pinRequired = YES;
         _labelPINTitle.hidden = NO;
