@@ -1049,8 +1049,8 @@ static NSTimer *_notificationTimer;
 
     [LocalSettings saveAll];
     bDataFetched = NO;
-    [CoreBridge startQueues];
     [CoreBridge startWatchers];
+    [CoreBridge startQueues];
 
     iLoginTimeSeconds = (int) [[NSDate date] timeIntervalSince1970];
 }
