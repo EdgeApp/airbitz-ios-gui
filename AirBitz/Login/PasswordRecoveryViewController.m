@@ -19,7 +19,7 @@
 #define NUM_QUESTION_ANSWER_BLOCKS	6
 #define QA_STARTING_Y_POSITION      67.0
 
-#define TOOLBAR_HEIGHT              54
+#define RECOVERY_TOOLBAR_HEIGHT     54
 #define EXTRA_HEGIHT_FOR_IPHONE4    80
 
 typedef enum eAlertType
@@ -654,7 +654,7 @@ typedef enum eAlertType
         // add more if we have a tool bar
         if (_mode == PassRecovMode_Change)
         {
-            size.height += TOOLBAR_HEIGHT;
+            size.height += RECOVERY_TOOLBAR_HEIGHT;
         }
 
         // add more if not iPhone5
