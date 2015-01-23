@@ -11,6 +11,6 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView        *bkgImage;
 
-- (void)setInfo:(int)index tableHeight:(int)height;
+- (void)setInfo:(long)index tableHeight:(long)height;
 
 @end

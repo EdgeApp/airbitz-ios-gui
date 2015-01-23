@@ -8,8 +8,8 @@
 
 @interface CommonCell ()
 {
-    int row;
-    int tableHeight;
+    long row;
+    long tableHeight;
 }
 
 @end
@@ -29,7 +29,7 @@
     [self setBackground:selected];
 }
 
-- (void)setInfo:(int)index tableHeight:(int)height
+- (void)setInfo:(long)index tableHeight:(long)height
 {
     row = index;
     tableHeight = height;

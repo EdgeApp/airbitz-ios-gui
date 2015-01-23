@@ -21,6 +21,4 @@
 @property (weak, nonatomic) IBOutlet UIView             *viewPhoto;
 @property (weak, nonatomic) IBOutlet UIImageView        *imagePhoto;
 
-- (void)setInfo:(int)index tableHeight:(int)height;
-
 @end
