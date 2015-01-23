@@ -14,6 +14,4 @@
 @property (nonatomic, weak) IBOutlet UILabel *name;
 @property (nonatomic, weak) IBOutlet UILabel *amount;
 
-- (void)setInfo:(int)index tableHeight:(int)height;
-
 @end
