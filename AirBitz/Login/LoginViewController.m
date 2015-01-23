@@ -503,7 +503,9 @@ typedef enum eLoginMode
     {
         [User login:self.userNameTextField.text
            password:self.passwordTextField.text];
-
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            [CoreBridge setupLoginPIN];
+        });
         [self.delegate loginViewControllerDidLogin:NO];
     }
     else
