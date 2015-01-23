@@ -78,17 +78,11 @@
 #define ROW_YUAN                        4
 
 #define ARRAY_CURRENCY_NUMS @[@840, @124, @978, @484, @156]
-// #define ARRAY_EXCHANGES     @[@[@"Bitstamp", @"CoinMKT", @"Kraken", @"Coindesk", @"CampBX", @"Coinbase", @"BTC-e"], \
-//                               @[@"Cavirtex", @"Vault of Satoshi"], \
-//                               @[@"Bitcoin.de", @"Kraken", @"BTC-e"], \
-//                               @[@"MEXBT", @"Bitso"], \
-//                               @[@"Huobi", @"BTC China", @"OKcoin"] \
-//                              ]
-#define ARRAY_EXCHANGES     @[@[@"Bitstamp", @"Coinbase"], \
-                              @[@"Coinbase"], \
-                              @[@"Coinbase"], \
-                              @[@"Coinbase"], \
-                              @[@"Coinbase"] \
+#define ARRAY_EXCHANGES     @[@[@"Bitstamp", @"BraveNewCoin", @"Coinbase"], \
+                              @[@"BraveNewCoin", @"Coinbase"], \
+                              @[@"BraveNewCoin", @"Coinbase"], \
+                              @[@"BraveNewCoin", @"Coinbase"], \
+                              @[@"BraveNewCoin", @"Coinbase"] \
                              ]
 
 #define ARRAY_LOGOUT        @[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9", \
