@@ -9,6 +9,7 @@
 #import "FadingAlertView.h"
 
 #define CONFIRMED_CONFIRMATION_COUNT 6
+#define PIN_REQUIRED_PERIOD_SECONDS     120
 
 @interface CoreBridge : NSObject
 
@@ -57,7 +58,7 @@
 + (void)deletePINLogin;
 + (void)setupLoginPIN;
 + (tABC_CC)PINLoginWithPIN:(NSString *)PIN;
-+ (int)loginTimeSeconds;
++ (BOOL)recentlyLoggedIn;
 + (void)login;
 + (void)logout;
 + (BOOL)passwordOk:(NSString *)password;

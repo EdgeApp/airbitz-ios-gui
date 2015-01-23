@@ -20,8 +20,6 @@
 #import "FadingAlertView.h"
 #import "AudioController.h"
 
-#define PIN_REQUIRED_PERIOD 120
-
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate,
                                               InfoViewDelegate, FadingAlertViewDelegate>
@@ -237,7 +235,7 @@
     }
     [self exchangeRateUpdate:nil]; 
 
-    _pinTimer = [NSTimer scheduledTimerWithTimeInterval:PIN_REQUIRED_PERIOD
+    _pinTimer = [NSTimer scheduledTimerWithTimeInterval:PIN_REQUIRED_PERIOD_SECONDS
         target:self
         selector:@selector(updateTextFieldContents)
         userInfo:nil
@@ -661,16 +659,8 @@
 {
     _passwordRequired = NO;
     _pinRequired = NO;
-
-    int now = [[NSDate date] timeIntervalSince1970];
-    if (self.bAddressIsWalletUUID || now - [CoreBridge loginTimeSeconds] <= PIN_REQUIRED_PERIOD) {
-        // Transfers don't require a PIN or password
-        _labelPINTitle.hidden = YES;
-        _withdrawlPIN.hidden = YES;
-        _imagePINEmboss.hidden = YES;
-        return;
-    } else if ([User Singleton].bDailySpendLimit
-            && self.amountToSendSatoshi + _totalSentToday >= [User Singleton].dailySpendLimitSatoshis) {
+    if (!self.bAddressIsWalletUUID && [User Singleton].bDailySpendLimit
+                && self.amountToSendSatoshi + _totalSentToday >= [User Singleton].dailySpendLimitSatoshis) {
         // Show password
         _passwordRequired = YES;
         _labelPINTitle.hidden = NO;
@@ -678,7 +668,9 @@
         _withdrawlPIN.hidden = NO;
         _withdrawlPIN.keyboardType = UIKeyboardTypeDefault;
         _imagePINEmboss.hidden = NO;
-    } else if ([User Singleton].bSpendRequirePin && self.amountToSendSatoshi >= [User Singleton].spendRequirePinSatoshis) {
+    } else if (!self.bAddressIsWalletUUID
+                && (([User Singleton].bSpendRequirePin && self.amountToSendSatoshi >= [User Singleton].spendRequirePinSatoshis)
+                    || ![CoreBridge recentlyLoggedIn])) {
         // Show PIN pad
         _pinRequired = YES;
         _labelPINTitle.hidden = NO;

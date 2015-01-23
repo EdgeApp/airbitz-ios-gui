@@ -1036,9 +1036,10 @@ static NSTimer *_notificationTimer;
     }
 }
 
-+ (int)loginTimeSeconds
++ (BOOL)recentlyLoggedIn
 {
-    return iLoginTimeSeconds;
+    int now = [[NSDate date] timeIntervalSince1970];
+    return now - iLoginTimeSeconds <= PIN_REQUIRED_PERIOD_SECONDS;
 }
 
 + (void)login
