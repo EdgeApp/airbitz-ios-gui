@@ -1647,11 +1647,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [self.tableView reloadData];
 
     [self dismissPopupPicker];
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-    {
-        [CoreBridge setupLoginPIN];
-    });
 }
 
 - (void)PopupWheelPickerViewCancelled:(PopupWheelPickerView *)view userData:(id)data
