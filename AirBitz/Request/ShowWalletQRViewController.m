@@ -578,9 +578,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             return;
         }
         
-        NSString *stringFromData = [[NSString alloc] initWithData:chunk encoding:NSUTF8StringEncoding];
-//        NSLog(@"Sent: %@", stringFromData);
-        
         // It did send, so update our index
         self.sendDataIndex += amountToSend;
         
