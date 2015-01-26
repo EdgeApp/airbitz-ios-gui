@@ -41,6 +41,7 @@
 #import "TransferService.h"
 #import "RecipientViewController.h"
 #import "Contact.h"
+#import "FadingAlertView.h"
 #import "LocalSettings.h"
 
 //This allows you to test the case when the advertisied bitcoin address (first 10 digits) doesn't match the actual bitcoin address.  This is to catch the rare condition where someone could try to spoof someone else's bitcoin request.
@@ -61,9 +62,10 @@ typedef enum eAddressPickerType
 
 static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
-@interface ShowWalletQRViewController () <ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, CBPeripheralManagerDelegate, RecipientViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface ShowWalletQRViewController () <ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, CBPeripheralManagerDelegate, RecipientViewControllerDelegate, UIGestureRecognizerDelegate, FadingAlertViewDelegate >
 {
     tAddressPickerType          _addressPickerType;
+    FadingAlertView *_fadingAlert;
 }
 
 @property (nonatomic, weak) IBOutlet UIImageView    *qrCodeImageView;
@@ -211,11 +213,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-	if([LocalSettings controller].bDisableBLE == NO)
-	{
+    if(self.peripheralManager.isAdvertising) {
 		// Don't keep it going while we're not showing.
+        [self.peripheralManager removeAllServices];
 		[self.peripheralManager stopAdvertising];
-	}
+    }
     [CoreBridge prioritizeAddress:nil inWallet:_walletUUID];
 }
 
@@ -407,9 +409,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
  */
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
-	if(peripheral.state == CBPeripheralManagerStatePoweredOn)
+	if(peripheral.state == CBPeripheralManagerStatePoweredOn && [self isLECapableHardware])
 	{
-
+        
 		// We're in CBPeripheralManagerStatePoweredOn state...
 		//NSLog(@"self.peripheralManager powered on.");
 		
@@ -482,6 +484,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	}
 	else
 	{
+//        [self showFadingError:NSLocalizedString(@"Bluetooth disconnected", nil)];
 		self.BLE_LogoImageView.hidden = YES;
 	}
 
@@ -494,8 +497,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
 //    NSLog(@"Central subscribed to characteristic");
     
-	//[self showConnectedPopup];
-	
+//    [self showFadingError:NSLocalizedString(@"Characteristic subscribed", nil)];
+
     // Send the bitcoin address and the amount in Satoshi
 	NSString *stringToSend = [NSString stringWithFormat:@"%@", self.uriString];
     self.dataToSend = [stringToSend dataUsingEncoding:NSUTF8StringEncoding];
@@ -514,6 +517,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
 //    NSLog(@"Central unsubscribed from characteristic");
 	[self.navigationController popViewControllerAnimated:YES];
+//    [self showFadingError:NSLocalizedString(@"Characteristic unsubscribed", nil)];
 }
 
 /** Sends the next amount of data to the connected central
@@ -534,12 +538,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 		{
             // It did, so mark it as sent
             sendingEOM = NO;
-            
-//            NSLog(@"Sent: EOM");
         }
-        
-        // It didn't send, so we'll exit and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendData again
-        return;
+        else
+        {
+            // It didn't send, so we'll exit and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendData again
+//            [self showFadingError:NSLocalizedString(@"EOM not sent", nil)];
+            return;
+        }
     }
     
     // We're not sending an EOM, so we're sending data
@@ -1320,6 +1325,58 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         [self Back];
     }
+}
+
+- (void)showFadingError:(NSString *)message
+{
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert.message = message;
+    _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
+    _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
+    [_fadingAlert showFading];
+}
+
+- (void)dismissErrorMessage
+{
+    [_fadingAlert dismiss:NO];
+    _fadingAlert = nil;
+}
+
+#pragma mark - FadingAlertView delegate
+
+- (void)fadingAlertDismissed:(FadingAlertView *)view
+{
+    _fadingAlert = nil;
+}
+
+// Use CBPeripheralManager to check whether the current platform/hardware supports Bluetooth LE.
+- (BOOL)isLECapableHardware
+{
+    NSString * state = nil;
+    switch ([self.peripheralManager state]) {
+        case CBPeripheralManagerStateUnsupported:
+            state = @"Your hardware doesn't support Bluetooth LE sharing.";
+            break;
+        case CBPeripheralManagerStateUnauthorized:
+            state = @"This app is not authorized to use Bluetooth. You can change this in the Settings app.";
+            break;
+        case CBPeripheralManagerStatePoweredOff:
+            state = @"Bluetooth is currently powered off.";
+            break;
+        case CBPeripheralManagerStateResetting:
+            state = @"Bluetooth is currently resetting.";
+            break;
+        case CBPeripheralManagerStatePoweredOn:
+            NSLog(@"powered on");
+            return TRUE;
+        case CBPeripheralManagerStateUnknown:
+            NSLog(@"state unknown");
+            return FALSE;
+        default:
+            return FALSE;
+    }
+    NSLog(@"Peripheral manager state: %@", state);
+    return FALSE;
 }
 
 @end
