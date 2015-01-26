@@ -484,7 +484,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	}
 	else
 	{
-//        [self showFadingError:NSLocalizedString(@"Bluetooth disconnected", nil)];
+//        [self showFadingAlert:NSLocalizedString(@"Bluetooth disconnected", nil)];
 		self.BLE_LogoImageView.hidden = YES;
 	}
 
@@ -497,7 +497,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
 //    NSLog(@"Central subscribed to characteristic");
     
-//    [self showFadingError:NSLocalizedString(@"Characteristic subscribed", nil)];
+//    [self showFadingAlert:NSLocalizedString(@"Characteristic subscribed", nil)];
 
     // Send the bitcoin address and the amount in Satoshi
 	NSString *stringToSend = [NSString stringWithFormat:@"%@", self.uriString];
@@ -517,7 +517,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
 //    NSLog(@"Central unsubscribed from characteristic");
 	[self.navigationController popViewControllerAnimated:YES];
-//    [self showFadingError:NSLocalizedString(@"Characteristic unsubscribed", nil)];
+//    [self showFadingAlert:NSLocalizedString(@"Characteristic unsubscribed", nil)];
 }
 
 /** Sends the next amount of data to the connected central
@@ -542,7 +542,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         else
         {
             // It didn't send, so we'll exit and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendData again
-//            [self showFadingError:NSLocalizedString(@"EOM not sent", nil)];
+//            [self showFadingAlert:NSLocalizedString(@"EOM not sent", nil)];
             return;
         }
     }
@@ -655,6 +655,36 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	}
 }
 
+// Use CBPeripheralManager to check whether the current platform/hardware supports Bluetooth LE.
+- (BOOL)isLECapableHardware
+{
+    NSString * state = nil;
+    switch ([self.peripheralManager state]) {
+        case CBPeripheralManagerStateUnsupported:
+            state = @"Your hardware doesn't support Bluetooth LE sharing.";
+            break;
+        case CBPeripheralManagerStateUnauthorized:
+            state = @"This app is not authorized to use Bluetooth. You can change this in the Settings app.";
+            break;
+        case CBPeripheralManagerStatePoweredOff:
+            state = @"Bluetooth is currently powered off.";
+            break;
+        case CBPeripheralManagerStateResetting:
+            state = @"Bluetooth is currently resetting.";
+            break;
+        case CBPeripheralManagerStatePoweredOn:
+            NSLog(@"powered on");
+            return TRUE;
+        case CBPeripheralManagerStateUnknown:
+            NSLog(@"state unknown");
+            return FALSE;
+        default:
+            return FALSE;
+    }
+    NSLog(@"Peripheral manager state: %@", state);
+    return FALSE;
+}
+
 #pragma mark - Action Methods
 
 - (IBAction)Refresh
@@ -671,6 +701,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
 	UIPasteboard *pb = [UIPasteboard generalPasteboard];
 	[pb setString:self.addressString];
+    
+    [self showFadingAlert:NSLocalizedString(@"Request is copied to the clipboard", nil)];
 }
 
 - (IBAction)Cancel
@@ -1327,7 +1359,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
 }
 
-- (void)showFadingError:(NSString *)message
+- (void)showFadingAlert:(NSString *)message
 {
     _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
     _fadingAlert.message = message;
@@ -1347,36 +1379,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (void)fadingAlertDismissed:(FadingAlertView *)view
 {
     _fadingAlert = nil;
-}
-
-// Use CBPeripheralManager to check whether the current platform/hardware supports Bluetooth LE.
-- (BOOL)isLECapableHardware
-{
-    NSString * state = nil;
-    switch ([self.peripheralManager state]) {
-        case CBPeripheralManagerStateUnsupported:
-            state = @"Your hardware doesn't support Bluetooth LE sharing.";
-            break;
-        case CBPeripheralManagerStateUnauthorized:
-            state = @"This app is not authorized to use Bluetooth. You can change this in the Settings app.";
-            break;
-        case CBPeripheralManagerStatePoweredOff:
-            state = @"Bluetooth is currently powered off.";
-            break;
-        case CBPeripheralManagerStateResetting:
-            state = @"Bluetooth is currently resetting.";
-            break;
-        case CBPeripheralManagerStatePoweredOn:
-            NSLog(@"powered on");
-            return TRUE;
-        case CBPeripheralManagerStateUnknown:
-            NSLog(@"state unknown");
-            return FALSE;
-        default:
-            return FALSE;
-    }
-    NSLog(@"Peripheral manager state: %@", state);
-    return FALSE;
 }
 
 @end
