@@ -186,7 +186,9 @@ typedef enum eLoginMode
 
     _signUpController.mode = SignUpMode_SignUp;
     _signUpController.delegate = self;
-    _signUpController.strUserName = self.userNameTextField.text;
+    if (self.userNameTextField.text) {
+        _signUpController.strUserName = self.userNameTextField.text;
+    }
     
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;

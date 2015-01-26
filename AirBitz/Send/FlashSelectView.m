@@ -13,6 +13,8 @@
 	UIImageView *_buttonImage;
     BOOL        _bAwake;
     CGRect      _originalFrame;
+    UIImage     *flashOff;
+    UIImage     *flashOn;
 }
 @end
 
@@ -29,9 +31,11 @@
 
 -(void)awakeFromNib
 {
+    flashOff = [UIImage imageNamed:@"flash-off"];
+    flashOn = [UIImage imageNamed:@"flash-on"];
 	_buttonImage = [[UIImageView alloc] initWithFrame:self.bounds];
 	[self addSubview:_buttonImage];
-	_buttonImage.image = [UIImage imageNamed:@"flash-off"];
+	_buttonImage.image = flashOff;
 	self.backgroundColor = [UIColor clearColor];
     _originalFrame = self.frame;
     _bAwake = YES;
@@ -69,25 +73,21 @@
 	switch(flashType)
 	{
 		case FLASH_ITEM_ON:
-			_buttonImage.image = [UIImage imageNamed:@"flash-on"];
+			_buttonImage.image = flashOn;
 			break;
 		case FLASH_ITEM_OFF:
-			_buttonImage.image = [UIImage imageNamed:@"flash-off"];
+			_buttonImage.image = flashOff;
 			break;
 	}
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	
-    if (_buttonImage.image == [UIImage imageNamed:@"flash-on"])
-    {
-		_buttonImage.image = [UIImage imageNamed:@"flash-off"];
+    if (_buttonImage.image == flashOn) {
+		_buttonImage.image = flashOff;
 		[self.delegate flashItemSelected:FLASH_ITEM_OFF];
-    }
-    else
-    {
-		_buttonImage.image = [UIImage imageNamed:@"flash-on"];
+    } else {
+		_buttonImage.image = flashOn;
 		[self.delegate flashItemSelected:FLASH_ITEM_ON];
     }
 }

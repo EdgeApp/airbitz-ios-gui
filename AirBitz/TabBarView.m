@@ -119,7 +119,9 @@
 					selectedButton = button;
 					[self updateDividers];
 				}
-			}
+			} else {
+                [button deselect];
+            }
 		}
 	}
 }
@@ -144,7 +146,9 @@
 					selectedButton = button;
 					[self updateDividers];
 				}
-			}
+			} else {
+                [button deselect];
+            }
 		}
 	}
 }
@@ -177,7 +181,9 @@
                         [self.delegate tabVarView:self selectedSubview:button reselected:YES];
                     }
                 }
-			}
+			} else {
+                [button deselect];
+            }
 		}
 
 	}

@@ -940,7 +940,9 @@ typedef enum eAppMode
 
 - (void)loggedOffRedirect:(NSNotification *)notification
 {
-	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
+    [self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
+    [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
+    _appMode = APP_MODE_WALLETS;
     [self resetViews:notification];
     [self showTabBarAnimated:NO];
 }

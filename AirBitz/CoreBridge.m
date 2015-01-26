@@ -779,15 +779,12 @@ static NSTimer *_notificationTimer;
 
 + (int64_t) denominationToSatoshi: (NSString *) amount
 {
-    int64_t parsedAmount;
+    uint64_t parsedAmount;
     int decimalPlaces = [self maxDecimalPlaces];
-#warning TODO this should be handled by the ABC_ParseAmount...maybe
     NSString *cleanAmount = [amount stringByReplacingOccurrencesOfString:@"," withString:@""];
-    if (ABC_ParseAmount([cleanAmount UTF8String], &parsedAmount, decimalPlaces) != ABC_CC_Ok)
-    {
-#warning TODO handle error
+    if (ABC_ParseAmount([cleanAmount UTF8String], &parsedAmount, decimalPlaces) != ABC_CC_Ok) {
     }
-    return parsedAmount;
+    return (int64_t) parsedAmount;
 }
 
 + (NSString *)conversionString:(Wallet *) wallet
@@ -889,7 +886,7 @@ static NSTimer *_notificationTimer;
                                  &Error);
     if (cc == ABC_CC_Ok) {
         if (wallet.balance >= RECOVERY_REMINDER_AMOUNT && pSettings->recoveryReminderCount < RECOVERY_REMINDER_COUNT) {
-            bool bQuestions = NO;
+            BOOL bQuestions = NO;
             NSMutableString *errorMsg = [[NSMutableString alloc] init];
             [CoreBridge getRecoveryQuestionsForUserName:[User Singleton].name
                                               isSuccess:&bQuestions
@@ -1052,8 +1049,8 @@ static NSTimer *_notificationTimer;
 
     [LocalSettings saveAll];
     bDataFetched = NO;
-    [CoreBridge startQueues];
     [CoreBridge startWatchers];
+    [CoreBridge startQueues];
 
     iLoginTimeSeconds = (int) [[NSDate date] timeIntervalSince1970];
 }

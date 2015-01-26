@@ -109,6 +109,11 @@
 	[self loadWalletInfo];
 
 	self.BTCLabel_TextField.text = [User Singleton].denominationLabel; 
+    if (IS_IPHONE4) {
+#ifdef __IPHONE_8_0
+        [self.keypadView removeFromSuperview];
+#endif
+    }
 	self.BTC_TextField.inputView = !IS_IPHONE4 ? dummyView : self.keypadView;
 	self.USD_TextField.inputView = !IS_IPHONE4 ? dummyView : self.keypadView;
 	self.BTC_TextField.delegate = self;

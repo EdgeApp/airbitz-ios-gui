@@ -574,6 +574,11 @@ typedef enum eRequestType
         frame.origin.y = self.imageNameEmboss.frame.origin.y + 2;
         self.nameTextField.frame = frame;
 
+        frame = self.viewPhoto.frame;
+        frame.origin.y = (self.nameTextField.frame.origin.y + (self.nameTextField.frame.size.height / 2.0))
+                            - (self.viewPhoto.frame.size.height / 2.0);
+        self.viewPhoto.frame = frame;
+
         frame = self.advancedDetailsButton.frame;
         frame.origin.y = self.imageNameEmboss.frame.origin.y + self.imageNameEmboss.frame.size.height + 3;
         self.advancedDetailsButton.frame = frame;
