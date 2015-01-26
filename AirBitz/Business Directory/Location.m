@@ -150,13 +150,16 @@ static Location *singleton = nil;  // this will be the one and only object this 
 
 - (void)showAlert:(NSString *)strMsg withTitle:(NSString *)strTitle
 {
-    UIAlertView *alert = [[UIAlertView alloc]
-						  initWithTitle:strTitle 
-						  message:strMsg
-						  delegate:nil
-						  cancelButtonTitle:@"OK"
-						  otherButtonTitles:nil];
-	[alert show];
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1000 * 500);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                            initWithTitle:strTitle
+                            message:strMsg
+                            delegate:nil
+                            cancelButtonTitle:@"OK"
+                            otherButtonTitles:nil];
+        [alert show];
+    });
 }
 
 #pragma mark - CLLocationManagerDelegate Methods
