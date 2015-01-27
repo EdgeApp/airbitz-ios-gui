@@ -675,8 +675,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 
-/** The Transfer characteristic was discovered.
- *  Once this has been found, we want to subscribe to it, which lets the peripheral know we want the data it contains
+/*
+ *  On Airbitz service discovery, send our name
  */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
