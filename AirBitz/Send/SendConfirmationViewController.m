@@ -885,11 +885,17 @@
     {
         NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
         NSString *entry = _pinRequired ? @"PIN" : @"password";
-        [self showFadingError:[NSString stringWithFormat:
-                NSLocalizedString(@"Please wait %.0f seconds before retrying %@",
-                nil),
-                remaining,
-                entry]];
+        if(remaining == 1) {
+            [self showFadingError:[NSString stringWithFormat:
+                NSLocalizedString(@"Please wait 1 second before retrying %@", nil),
+                    remaining, entry]];
+        }
+        else
+        {
+            [self showFadingError:[NSString stringWithFormat:
+                NSLocalizedString(@"Please wait %.0f seconds before retrying %@", nil),
+                    remaining, entry]];
+        }
     }
     else
     {
