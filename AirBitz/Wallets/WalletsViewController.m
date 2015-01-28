@@ -712,7 +712,9 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)dataUpdated:(NSNotification *)notification
 {
     [self reloadWallets];
-    [self.walletsTable reloadData];
+    if(self.arrayWallets.count > 0) {
+        [self.walletsTable reloadData];
+    }
     [self updateBalanceView];
     [self.view setNeedsDisplay];
 }
