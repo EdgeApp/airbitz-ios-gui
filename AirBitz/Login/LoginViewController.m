@@ -387,8 +387,13 @@ typedef enum eLoginMode
              self.swipeText.hidden = YES;
              self.swipeRightArrow.hidden = YES;
              self.titleText.hidden = YES;
-             self.credentialsView.frame = CGRectMake(_originalCredentialsFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + 10, _originalCredentialsFrame.size.width, _originalCredentialsFrame.size.height);
-             self.userEntryView.frame = CGRectMake(_originalUserEntryFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + _originalCredentialsFrame.size.height, _originalUserEntryFrame.size.width, _originalUserEntryFrame.size.height);
+             int iphone4heightadjust = 0;
+             if(IS_IPHONE4) {
+                 self.logoImage.frame = CGRectMake(_originalLogoFrame.origin.x, _originalLogoFrame.origin.y, _originalLogoFrame.size.width, _originalLogoFrame.size.height * 0.35);
+                 iphone4heightadjust = -75;
+             }
+             self.credentialsView.frame = CGRectMake(_originalCredentialsFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + 10 + iphone4heightadjust, _originalCredentialsFrame.size.width, _originalCredentialsFrame.size.height);
+             self.userEntryView.frame = CGRectMake(_originalUserEntryFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + _originalCredentialsFrame.size.height + iphone4heightadjust, _originalUserEntryFrame.size.width, _originalUserEntryFrame.size.height);
          }
             completion:^(BOOL finished)
          {
@@ -405,6 +410,9 @@ typedef enum eLoginMode
              self.swipeText.hidden = NO;
              self.swipeRightArrow.hidden = NO;
              self.titleText.hidden = NO;
+             if(IS_IPHONE4) {
+                 self.logoImage.frame = CGRectMake(_originalLogoFrame.origin.x, _originalLogoFrame.origin.y, _originalLogoFrame.size.width, _originalLogoFrame.size.height);
+             }
              self.credentialsView.frame = CGRectMake(_originalCredentialsFrame.origin.x, _originalCredentialsFrame.origin.y, _originalCredentialsFrame.size.width, _originalCredentialsFrame.size.height);
              self.userEntryView.frame = CGRectMake(_originalUserEntryFrame.origin.x, _originalUserEntryFrame.origin.y, _originalUserEntryFrame.size.width, _originalUserEntryFrame.size.height);
          }
