@@ -533,9 +533,14 @@
 
 - (void)categoriesCellDeleteTouched:(CategoriesCell *)cell
 {
-    NSInteger row = cell.tag;
-
-    [self.arrayCategories removeObjectAtIndex:row];
+    for (int i = 0; i < [self.arrayCategories count]; i++)
+    {
+        NSString *strCategory = [self.arrayCategories objectAtIndex:i];
+        if([strCategory isEqualToString:cell.pickerTextView.textField.text]) {
+            [self.arrayCategories removeObjectAtIndex:i];
+            break;
+        }
+    }
     [self updateDisplay];
 }
 
