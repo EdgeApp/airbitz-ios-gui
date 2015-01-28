@@ -1095,6 +1095,8 @@
 		DA76938B1964FE8A0022EE64 /* email_btn~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693851964FE8A0022EE64 /* email_btn~iphone.png */; };
 		DA76938C1964FE8A0022EE64 /* sms_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693861964FE8A0022EE64 /* sms_btn@2x~iphone.png */; };
 		DA76938D1964FE8A0022EE64 /* sms_btn~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693871964FE8A0022EE64 /* sms_btn~iphone.png */; };
+		DA8B5ABB1A79640B00DDED09 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA8B5ABA1A79640B00DDED09 /* api.cer */; };
+		DA8B5AC01A79864800DDED09 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA8B5ABA1A79640B00DDED09 /* api.cer */; };
 		DAA5782319BF55F600E972FC /* Warning_icon@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782119BF55F600E972FC /* Warning_icon@2x~iphone.png */; };
 		DAA5782419BF55F600E972FC /* Warning_icon@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782119BF55F600E972FC /* Warning_icon@2x~iphone.png */; };
 		DAA5782519BF55F600E972FC /* Warning_icon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782219BF55F600E972FC /* Warning_icon~iphone.png */; };
@@ -1848,6 +1850,7 @@
 		DA7693851964FE8A0022EE64 /* email_btn~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email_btn~iphone.png"; sourceTree = "<group>"; };
 		DA7693861964FE8A0022EE64 /* sms_btn@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms_btn@2x~iphone.png"; sourceTree = "<group>"; };
 		DA7693871964FE8A0022EE64 /* sms_btn~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms_btn~iphone.png"; sourceTree = "<group>"; };
+		DA8B5ABA1A79640B00DDED09 /* api.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = api.cer; sourceTree = "<group>"; };
 		DAA5782119BF55F600E972FC /* Warning_icon@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warning_icon@2x~iphone.png"; sourceTree = "<group>"; };
 		DAA5782219BF55F600E972FC /* Warning_icon~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warning_icon~iphone.png"; sourceTree = "<group>"; };
 		DAA5782819C1632000E972FC /* emailTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = emailTemplate.html; sourceTree = "<group>"; };
@@ -2097,6 +2100,7 @@
 		683D95B61989F14B0082BC1A /* Certs */ = {
 			isa = PBXGroup;
 			children = (
+				DA8B5ABA1A79640B00DDED09 /* api.cer */,
 				683D95B71989F14B0082BC1A /* ca-certificates.crt */,
 			);
 			name = Certs;
@@ -3607,6 +3611,7 @@
 				7D98AE8B19A7C550003D2BF6 /* scan_frame~iphone.png in Resources */,
 				7D98AE8C19A7C550003D2BF6 /* btn_7~iphone.png in Resources */,
 				7D98AE8D19A7C550003D2BF6 /* btn_cancel~iphone.png in Resources */,
+				DA8B5AC01A79864800DDED09 /* api.cer in Resources */,
 				7D98AE8E19A7C550003D2BF6 /* bd_icon_phone@2x~iphone.png in Resources */,
 				7DB1353F19FB48D9007D23CE /* bd_icon_share@2x~iphone.png in Resources */,
 				7D98AE8F19A7C550003D2BF6 /* thumb@2x~iphone.png in Resources */,
@@ -3869,6 +3874,7 @@
 				B59C151618C012B500AEA789 /* icon_bitcoin_light@2x~iphone.png in Resources */,
 				7D987AFC1A48BA8C00958AAD /* BitcoinReceivedPartial.mp3 in Resources */,
 				B59C14D718C012B500AEA789 /* btn_6~iphone.png in Resources */,
+				DA8B5ABB1A79640B00DDED09 /* api.cer in Resources */,
 				4C7247CE1935594F0091C286 /* background_header@2x~iphone.png in Resources */,
 				B59C153118C012B500AEA789 /* logo_bitcoin~iphone.png in Resources */,
 				B59C14E318C012B500AEA789 /* btn_calc_back~iphone.png in Resources */,
