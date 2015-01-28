@@ -198,6 +198,9 @@ typedef enum eRequestType
     self.keypadView.textField = self.fiatTextField;
     
     self.fiatTextField.delegate = self;
+#ifdef __IPHONE_8_0
+    [self.keypadView removeFromSuperview];
+#endif
     self.fiatTextField.inputView = self.keypadView;
     self.notesTextView.delegate = self;
     self.nameTextField.delegate = self;
