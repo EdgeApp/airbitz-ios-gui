@@ -32,6 +32,8 @@ typedef enum eLoginMode
     CGRect                          _originalContentFrame;
     CGRect                          _originalLogoFrame;
     CGRect                          _originalRightSwipeArrowFrame;
+    CGRect                          _originalCredentialsFrame;
+    CGRect                          _originalUserEntryFrame;
     CGPoint                         _firstTouchPoint;
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
@@ -41,6 +43,7 @@ typedef enum eLoginMode
     PasswordRecoveryViewController  *_passwordRecoveryController;
 }
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
+@property (weak, nonatomic) IBOutlet UIView             *credentialsView;
 @property (nonatomic, weak) IBOutlet StylizedTextField  *userNameTextField;
 @property (nonatomic, weak) IBOutlet StylizedTextField  *passwordTextField;
 @property (nonatomic, weak) IBOutlet UIButton           *backButton;
@@ -73,8 +76,10 @@ typedef enum eLoginMode
     // Do any additional setup after loading the view.
     _mode = MODE_ENTERING_NEITHER;
     _originalContentFrame = self.contentView.frame;
+    _originalCredentialsFrame = self.credentialsView.frame;
     _originalLogoFrame = self.logoImage.frame;
     _originalRightSwipeArrowFrame = _swipeRightArrow.frame;
+    _originalUserEntryFrame = _userEntryView.frame;
     
     self.userNameTextField.delegate = self;
     self.passwordTextField.delegate = self;
@@ -358,7 +363,7 @@ typedef enum eLoginMode
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    // Logic to move login page elements above keyboard removed. -Allan Wright
+    [self updateDisplayForKeyboard:YES];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -367,6 +372,49 @@ typedef enum eLoginMode
     {
          _activeTextField = nil;
     }
+    [self updateDisplayForKeyboard:NO];
+}
+
+- (void)updateDisplayForKeyboard:(BOOL)up
+{
+    if(up)
+    {
+        [UIView animateWithDuration:0.35
+                              delay: 0.0
+                            options: UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             self.swipeText.hidden = YES;
+             self.swipeRightArrow.hidden = YES;
+             self.titleText.hidden = YES;
+             self.credentialsView.frame = CGRectMake(_originalCredentialsFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + 10, _originalCredentialsFrame.size.width, _originalCredentialsFrame.size.height);
+             self.userEntryView.frame = CGRectMake(_originalUserEntryFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + _originalCredentialsFrame.size.height, _originalUserEntryFrame.size.width, _originalUserEntryFrame.size.height);
+         }
+            completion:^(BOOL finished)
+         {
+             
+         }];
+    }
+    else
+    {
+        [UIView animateWithDuration:0.35
+                              delay: 0.0
+                            options: UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             self.swipeText.hidden = NO;
+             self.swipeRightArrow.hidden = NO;
+             self.titleText.hidden = NO;
+             self.credentialsView.frame = CGRectMake(_originalCredentialsFrame.origin.x, _originalCredentialsFrame.origin.y, _originalCredentialsFrame.size.width, _originalCredentialsFrame.size.height);
+             self.userEntryView.frame = CGRectMake(_originalUserEntryFrame.origin.x, _originalUserEntryFrame.origin.y, _originalUserEntryFrame.size.width, _originalUserEntryFrame.size.height);
+         }
+                         completion:^(BOOL finished)
+         {
+             
+         }];
+
+    }
+
 }
 
 #pragma mark - touch events (for swiping)
