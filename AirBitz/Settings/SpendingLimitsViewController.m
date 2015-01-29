@@ -105,7 +105,9 @@
     CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
     CGSize size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
-    size.height += keyboardFrame.size.height;
+    if(IS_IPHONE4) {
+        size.height += keyboardFrame.size.height;
+    }
     self.scrollView.contentSize = size;
 }
 
