@@ -887,14 +887,12 @@
         NSString *entry = _pinRequired ? @"PIN" : @"password";
         if(remaining < 1.5) {
             [self showFadingError:[NSString stringWithFormat:
-                NSLocalizedString(@"Please wait 1 second before retrying %@", nil),
-                    remaining, entry]];
+                NSLocalizedString(@"Please wait 1 second before retrying %@", nil), entry]];
         }
         else
         {
             [self showFadingError:[NSString stringWithFormat:
-                NSLocalizedString(@"Please wait %.0f seconds before retrying %@", nil),
-                    remaining, entry]];
+                NSLocalizedString(@"Please wait %.0f seconds before retrying %@", nil), remaining, entry]];
         }
     }
     else
