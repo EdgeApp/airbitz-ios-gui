@@ -171,14 +171,21 @@ CGRect keyboardFrame;
     CGRect newFrame = popup.frame;
     
     // give it enough height to handle the items
+    int height = 0;
 	if(strings)
 	{
-		newFrame.size.height = strings.count * cellHeight + (2 * borderThickness);
+		height = strings.count * cellHeight + (2 * borderThickness);
 	}
 	else
 	{
-		newFrame.size.height = [popup.delegate PopupPickerViewNumberOfRows:popup userData:nil] * cellHeight + (2 * borderThickness);
+		height = [popup.delegate PopupPickerViewNumberOfRows:popup userData:nil] * cellHeight + (2 * borderThickness);
 	}
+    
+    // but not too much height
+    if(height > window.frame.size.height * 0.75) {
+        height = window.frame.size.height * 0.75;
+    }
+    newFrame.size.height = height;
     
     // change the width
     newFrame.size.width = width;
