@@ -1,12 +1,23 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ScanViewDelegate;
+
 @interface ScanView : UIView
 
-@property (nonatomic, assign) int fadeDelay;
-@property (nonatomic, assign) int fadeDuration;
-@property (nonatomic, copy) NSString *message;
+@property (nonatomic, assign) id<ScanViewDelegate> delegate;
 
-+ (ScanView *)CreateInsideView:(UIView *)parentView;
++ (ScanView *)CreateView:(UIView *)parentView;
+
+- (void)startQRReader;
+- (void)stopQRReader;
+
+@end
+
+@protocol ScanViewDelegate <NSObject>
+
+@required
+- (BOOL)processResultArray:(NSArray *)results;
+@optional
 
 @end

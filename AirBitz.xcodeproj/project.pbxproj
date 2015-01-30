@@ -1087,6 +1087,10 @@
 		B5FD393618F0A67100BE2670 /* transactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393518F0A67100BE2670 /* transactionDetails.html */; };
 		B5FD394718F240E600BE2670 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */; };
 		C40BC5D5199479CF00149E12 /* libcsv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C40BC5D4199479CF00149E12 /* libcsv.a */; };
+		DA13339D1A7B203C0051DE14 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13339C1A7B203C0051DE14 /* ScanView.m */; };
+		DA13339E1A7B203C0051DE14 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13339C1A7B203C0051DE14 /* ScanView.m */; };
+		DA1333A01A7B20840051DE14 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */; };
+		DA1333A11A7B20840051DE14 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */; };
 		DA4CFE45196F897B002CFD49 /* drag_bar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */; };
 		DA4CFE46196F897B002CFD49 /* drag_bar~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */; };
 		DA7693881964FE8A0022EE64 /* copy_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */; };
@@ -1842,6 +1846,9 @@
 		B5FD394518F240E600BE2670 /* AutoCompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCompleteTextField.h; sourceTree = "<group>"; };
 		B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCompleteTextField.m; sourceTree = "<group>"; };
 		C40BC5D4199479CF00149E12 /* libcsv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcsv.a; path = AirBitz/ABC/libcsv.a; sourceTree = "<group>"; };
+		DA13339B1A7B203C0051DE14 /* ScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
+		DA13339C1A7B203C0051DE14 /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
+		DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ScanView~iphone.xib"; sourceTree = "<group>"; };
 		DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar@2x~iphone.png"; sourceTree = "<group>"; };
 		DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar~iphone.png"; sourceTree = "<group>"; };
 		DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copy_btn@2x~iphone.png"; sourceTree = "<group>"; };
@@ -2444,6 +2451,7 @@
 				4C3C308B1918347F006923DE /* PopupPickerView */,
 				B5C0A9A718EA0D09008F302C /* Request */,
 				B5C0A9AB18EA0D78008F302C /* Send */,
+				DA13339A1A7B203C0051DE14 /* ScanView */,
 				B5004A2618A5C755003560A4 /* Server.h */,
 				B5C0A9B218EA0D99008F302C /* Settings */,
 				4C3C309A19199AB6006923DE /* StrokeGradientButton */,
@@ -3088,6 +3096,16 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		DA13339A1A7B203C0051DE14 /* ScanView */ = {
+			isa = PBXGroup;
+			children = (
+				DA13339B1A7B203C0051DE14 /* ScanView.h */,
+				DA13339C1A7B203C0051DE14 /* ScanView.m */,
+				DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */,
+			);
+			path = ScanView;
+			sourceTree = "<group>";
+		};
 		DAA5784819C23C8200E972FC /* Text */ = {
 			isa = PBXGroup;
 			children = (
@@ -3409,6 +3427,7 @@
 				7D98ADD819A7C550003D2BF6 /* btn_locateMe@2x~iphone.png in Resources */,
 				7D98ADD919A7C550003D2BF6 /* Red-X~iphone.png in Resources */,
 				7D98ADDA19A7C550003D2BF6 /* icon_export_dropbox@2x~iphone.png in Resources */,
+				DA1333A11A7B20840051DE14 /* ScanView~iphone.xib in Resources */,
 				7D98ADDB19A7C550003D2BF6 /* bkg_dark_header~iphone.png in Resources */,
 				7D98ADDC19A7C550003D2BF6 /* btn_slider~iphone.png in Resources */,
 				7D98ADDD19A7C550003D2BF6 /* logo_large~iphone.png in Resources */,
@@ -3635,6 +3654,7 @@
 				7D987AFA1A48BA8C00958AAD /* BitcoinReceived.mp3 in Resources */,
 				4C7C1257193D2CFC0096338D /* WalletExportQuicken.QIF in Resources */,
 				B55A030118EA206300845090 /* btn_done~iphone.png in Resources */,
+				DA1333A01A7B20840051DE14 /* ScanView~iphone.xib in Resources */,
 				7D4DA23B19EC82C600E3D571 /* btn_expand@2x~iphone.png in Resources */,
 				7D23D56319BD612F0042B87A /* background-errormessage@2x.png in Resources */,
 				B59C14E618C012B500AEA789 /* btn_checkmark@2x~iphone.png in Resources */,
@@ -4171,6 +4191,7 @@
 				7D98ACCF19A7C550003D2BF6 /* WalletHeaderView.m in Sources */,
 				7D98ACD019A7C550003D2BF6 /* RecipientViewController.m in Sources */,
 				7D98ACD119A7C550003D2BF6 /* TransactionDetailsViewController.m in Sources */,
+				DA13339E1A7B203C0051DE14 /* ScanView.m in Sources */,
 				7D98ACD219A7C550003D2BF6 /* SendConfirmationViewController.m in Sources */,
 				7D98ACD319A7C550003D2BF6 /* CategoriesCell.m in Sources */,
 				7D98ACD419A7C550003D2BF6 /* MapView.m in Sources */,
@@ -4294,6 +4315,7 @@
 				B5635A25193D0F8700345AEE /* WalletHeaderView.m in Sources */,
 				4C98CAEC199D53A2000009B5 /* RecipientViewController.m in Sources */,
 				B5C0A9C218EA0DD8008F302C /* TransactionDetailsViewController.m in Sources */,
+				DA13339D1A7B203C0051DE14 /* ScanView.m in Sources */,
 				B5C0A9B018EA0D78008F302C /* SendConfirmationViewController.m in Sources */,
 				4C3C30A1191B07C0006923DE /* CategoriesCell.m in Sources */,
 				B5C0A99018EA0B80008F302C /* MapView.m in Sources */,
