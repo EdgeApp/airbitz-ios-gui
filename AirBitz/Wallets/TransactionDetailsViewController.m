@@ -1728,6 +1728,24 @@ typedef enum eRequestType
 
      }];
 
+    if(self.arrayCategories) {
+//        for(int i=0; i < [pickerTextView.popupPicker ???]; i++) {
+//            UITableViewCell *cell = [pickerTextView objectAtIndex:i];
+//            NSUInteger index = [self.arrayCategories indexOfObject:cell];
+//            if(index == NSNotFound) {
+//                UIImage *image = [UIImage imageNamed:@"btn_addCategory.png"];
+//                
+//                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//                CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+//                button.frame = frame;
+//                [button setBackgroundImage:image forState:UIControlStateNormal];
+//                
+//                [button addTarget:self action:@selector(checkButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
+//                button.backgroundColor = [UIColor clearColor];
+//                cell.accessoryView = button;
+//            }
+//        }
+    }
 }
 
 #pragma mark - Keyboard callbacks
