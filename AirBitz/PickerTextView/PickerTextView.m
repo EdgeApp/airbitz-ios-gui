@@ -16,6 +16,7 @@
 @interface PickerTextView () <UITextFieldDelegate, PopupPickerViewDelegate>
 {
     UIView *_viewTop;
+    NSArray *_arrayCategories;
 }
 
 
@@ -58,6 +59,11 @@
 - (void)setTopMostView:(UIView *)topMostView
 {
     _viewTop = topMostView;
+}
+
+- (void)setCategories:(NSArray *)categories
+{
+    self.arrayCategories = categories;
 }
 
 - (void)updateChoices:(NSArray *)arrayChoices
@@ -141,6 +147,7 @@
 										 relativeToView:self.textField
                                          relativePosition:self.popupPickerPosition
                                           withStrings:self.arrayChoices
+                                          fromCategories:self.arrayCategories
                                           selectedRow:-1
                                             withWidth:_pickerWidth
                                         andCellHeight:_pickerCellHeight
@@ -327,7 +334,7 @@
             cell = [self.delegate pickerTextViewPopupCellForRow:view forTableView:tableView andRow:row];
         }
     }
-
+    
     return cell;
 }
 

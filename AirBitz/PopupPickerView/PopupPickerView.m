@@ -38,6 +38,7 @@
 @property (weak, nonatomic)     IBOutlet UIButton       *buttonTrash;
 
 @property (nonatomic, strong) NSArray                       *strings;
+@property (nonatomic, strong) NSArray                       *categories;
 @property (nonatomic, assign) tPopupPickerPosition          position;
 
 @end
@@ -147,7 +148,7 @@ CGRect keyboardFrame;
 	 }];
 }
 
-+ (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings selectedRow:(NSInteger)selectedRow /*maxCellsVisible:(NSInteger)maxCellsVisible*/ withWidth:(NSInteger)width andCellHeight:(NSInteger)cellHeight
++ (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings fromCategories:(NSArray *)categories selectedRow:(NSInteger)selectedRow /*maxCellsVisible:(NSInteger)maxCellsVisible*/ withWidth:(NSInteger)width andCellHeight:(NSInteger)cellHeight
 {
     // create the picker from the xib
     PopupPickerView *popup = [[[NSBundle mainBundle] loadNibNamed:@"PopupPickerView" owner:nil options:nil] objectAtIndex:0];
@@ -164,8 +165,9 @@ CGRect keyboardFrame;
     // calculate the border thickness
     CGFloat borderThickness = (popup.frame.size.height - popup->table.frame.size.height) / 2.0;
     
-    // set the strings
+    // set the strings and categories
 	popup.strings = strings;
+    popup.categories = categories;
     
     // start with the existing frame
     CGRect newFrame = popup.frame;
@@ -637,6 +639,22 @@ CGRect keyboardFrame;
             cell.textLabel.numberOfLines = 1;
             cell.textLabel.text = [_strings objectAtIndex:row];
             cell.textLabel.textColor = [UIColor blackColor];
+            
+            UIImage *image = [UIImage imageNamed:@"btn_addCategory.png"];
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+            button.frame = frame;
+            [button setBackgroundImage:image forState:UIControlStateNormal];
+            button.backgroundColor = [UIColor clearColor];
+            cell.accessoryView = button;
+            cell.accessoryView.hidden = YES;
+            if(self.categories) {
+                NSInteger index = [self.categories indexOfObject:cell.textLabel.text];
+                if(index == NSNotFound) {
+                    cell.accessoryView.hidden = NO;
+                    
+                }
+            }
         }
     }
 	

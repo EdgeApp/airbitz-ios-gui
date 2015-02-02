@@ -35,6 +35,7 @@ typedef enum ePopupPickerPosition
 				  relativeToView:(UIView *)viewToPointTo			/* the view we will appear next to and point to */
 				  relativePosition:(tPopupPickerPosition)position	/* where we want to appear relative to viewToPointTo */
 				  withStrings:(NSArray *)strings					/* optional list of NSStrings to display.  If you don't provide strings, then subscribe to -PopupPickerViewNumberOfRows and -PopupPickerViewCellForRow to provide data for the picker */
+                  fromCategories:(NSArray *)categories              /* optional list of categories */
 				  selectedRow:(NSInteger)selectedRow				/* which row is initially selected */
 				  withWidth:(NSInteger)width
 				  andCellHeight:(NSInteger)cellHeight;
