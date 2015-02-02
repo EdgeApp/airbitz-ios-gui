@@ -62,6 +62,6 @@ typedef enum ePopupPickerPosition
 - (BOOL)PopupPickerViewFormatCell:(PopupPickerView *)view onRow:(NSInteger)row withCell:(UITableViewCell *)cell userData:(id)data;
 - (NSInteger)PopupPickerViewNumberOfRows:(PopupPickerView *)view userData:(id)data;
 - (UITableViewCell *)PopupPickerViewCellForRow:(PopupPickerView *)view forTableView:(UITableView *)tableView andRow:(NSInteger)row userData:(id)data;
-
+- (void)PopupPickerViewDidAddCategory:(PopupPickerView *)view categoryString:(NSString *)string;
 @end
 

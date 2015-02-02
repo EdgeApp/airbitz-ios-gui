@@ -53,5 +53,6 @@
 - (NSInteger)pickerTextViewPopupNumberOfRows:(PopupPickerView *)view;
 - (UITableViewCell *)pickerTextViewPopupCellForRow:(PopupPickerView *)view forTableView:(UITableView *)tableView andRow:(NSInteger)row;
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView;
+- (void)pickerTextViewDidAddCategory:(PickerTextView *)pickerTextView categoryString:(NSString *)string;
 
 @end
