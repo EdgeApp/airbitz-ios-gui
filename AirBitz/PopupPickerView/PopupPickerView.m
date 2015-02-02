@@ -640,19 +640,19 @@ CGRect keyboardFrame;
             cell.textLabel.text = [_strings objectAtIndex:row];
             cell.textLabel.textColor = [UIColor blackColor];
             
-            UIImage *image = [UIImage imageNamed:@"btn_addCategory.png"];
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-            button.frame = frame;
-            [button setBackgroundImage:image forState:UIControlStateNormal];
-            button.backgroundColor = [UIColor clearColor];
-            cell.accessoryView = button;
-            cell.accessoryView.hidden = YES;
             if(self.categories) {
                 NSInteger index = [self.categories indexOfObject:cell.textLabel.text];
                 if(index == NSNotFound) {
+                    UIImage *image = [UIImage imageNamed:@"btn_addCategory.png"];
+                    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+                    CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+                    button.frame = frame;
+                    button.tag = row;
+                    [button setBackgroundImage:image forState:UIControlStateNormal];
+                    button.backgroundColor = [UIColor clearColor];
+                    cell.accessoryView = button;
                     cell.accessoryView.hidden = NO;
-                    
+                    [button addTarget:self action:@selector(addCategoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
                 }
             }
         }
@@ -661,10 +661,21 @@ CGRect keyboardFrame;
     return cell;
 }
 
+- (void)addCategoryButtonTapped:(id)sender event:(id)event
+{
+    UIButton *button = (UIButton *) sender;
+    NSString *newCategory = [self.strings objectAtIndex:button.tag];
+    
+    if ([self.delegate respondsToSelector:@selector(PopupPickerViewDidAddCategory: categoryString:)])
+    {
+        [self.delegate PopupPickerViewDidAddCategory:self categoryString:newCategory];
+    }
+}
+
 #pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{   
+{
     if (self.delegate)
     {
         if ([self.delegate respondsToSelector:@selector(PopupPickerViewSelected:onRow: userData:)])

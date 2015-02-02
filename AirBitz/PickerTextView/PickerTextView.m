@@ -334,8 +334,16 @@
             cell = [self.delegate pickerTextViewPopupCellForRow:view forTableView:tableView andRow:row];
         }
     }
-    
+
     return cell;
+}
+
+- (void) PopupPickerViewDidAddCategory:(PopupPickerView *)view categoryString:(NSString *)catString
+{
+    if ([self.delegate respondsToSelector:@selector(pickerTextViewDidAddCategory:categoryString:)])
+    {
+        [self.delegate pickerTextViewDidAddCategory:self categoryString:catString];
+    }
 }
 
 @end
