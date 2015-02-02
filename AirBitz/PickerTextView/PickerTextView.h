@@ -22,12 +22,14 @@
 @property (nonatomic, assign) NSInteger                     pickerCellHeight;
 @property (nonatomic, assign) UITableViewCellStyle          pickerTableViewCellStyle;
 @property (nonatomic, strong) NSArray                       *arrayChoices;
+@property (nonatomic, strong) NSArray                       *arrayCategories;
 @property (nonatomic, assign) CGFloat                       cropPointTop;
 @property (nonatomic, assign) CGFloat                       cropPointBottom;
 
 
 - (void)setTextFieldObject:(UITextField *)newTextField;
 - (void)setTopMostView:(UIView *)topMostView; //what view will the drop down selector be added to?
+- (void)setCategories:(NSArray *)categories;
 - (void)updateChoices:(NSArray *)arrayChoices;
 - (void)dismissPopupPicker;
 

@@ -1552,6 +1552,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 											 relativeToView:cell.button
                                              relativePosition:PopupPickerPosition_Left
                                               withStrings:arrayPopupChoices
+                                              fromCategories:nil
                                               selectedRow:curChoice
                                                 withWidth:PICKER_WIDTH
                                             andCellHeight:PICKER_CELL_HEIGHT
