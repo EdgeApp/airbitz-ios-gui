@@ -169,7 +169,10 @@
 
 - (void)hideDoneButton
 {
-    self.buttonDone.hidden = YES;
+//    self.buttonDone.hidden = YES;
+    [self.buttonDone setTitle:@"Next" forState:UIControlStateNormal];
+    UIImage *buttonImage = [UIImage imageNamed:@"btn_calc_next.png"];
+    [self.buttonDone setBackgroundImage:buttonImage forState:UIControlStateNormal];
 }
 
 #pragma mark - Misc Methods
