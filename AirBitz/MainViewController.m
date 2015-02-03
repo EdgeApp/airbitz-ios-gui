@@ -30,6 +30,7 @@
 #import "InfoView.h"
 #import "DL_URLServer.h"
 #import "NotificationChecker.h"
+#import "LocalSettings.h"
 
 typedef enum eAppMode
 {
@@ -620,16 +621,10 @@ typedef enum eAppMode
         }
 
         SInt64 txDiff = [_requestViewController transactionDifference:_strWalletUUID withTx:_strTxID];
-        if (txDiff == 0)
+        if (txDiff >= 0)
         {
-            // Sender paid exact amount
-            [self launchSendStatus:_strWalletUUID withTx:_strTxID];
-            [[AudioController controller] playReceived];
-        }
-        else if (txDiff > 0)
-        {
-            // Sender paid too much. Should notify the user somehow
-            [self launchSendStatus:_strWalletUUID withTx:_strTxID];
+            // Sender paid exact amount or too much
+            [self handleReceiveFromQR:_strWalletUUID withTx:_strTxID];
             [[AudioController controller] playReceived];
         }
         else if (txDiff < 0)
@@ -668,62 +663,51 @@ typedef enum eAppMode
     }
 }
 
-- (void)launchSendStatus:(NSString *)walletUUID withTx:(NSString *)txId
+- (void)handleReceiveFromQR:(NSString *)walletUUID withTx:(NSString *)txId
 {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    _sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
-
-    CGRect frame = self.view.bounds;
-    _sendStatusController.view.frame = frame;
-    [self.view insertSubview:_sendStatusController.view belowSubview:self.tabBar];
-    _sendStatusController.view.alpha = 0.0;
-    _sendStatusController.messageLabel.text = NSLocalizedString(@"Receiving...", nil);
-    _sendStatusController.titleLabel.text = NSLocalizedString(@"Receive Status", nil);
-    [UIView animateWithDuration:0.35
-                        delay:0.0
-                    options:UIViewAnimationOptionCurveEaseInOut
-                    animations:^
+    NSString *message;
+    
+    NSInteger receiveCount = LocalSettings.controller.receiveBitcoinCount + 1; //TODO find RECEIVES_COUNT
+    [LocalSettings controller].receiveBitcoinCount = receiveCount;
+    [LocalSettings saveAll];
+    
+    NSString *coin;
+    NSString *fiat;
+    
+    tABC_Error error;
+    Wallet *wallet = [CoreBridge getWallet:walletUUID];
+    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    
+    double currency;
+    int64_t satoshi = transaction.balance;
+    if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                              satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
+        fiat = [CoreBridge formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
+    
+    currency = [fiat doubleValue];
+    if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                  currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
+        coin = [CoreBridge formatSatoshi:satoshi withSymbol:false cropDecimals:[CoreBridge currencyDecimalPlaces]];
+    
+    if([LocalSettings controller].bMerchantMode == YES || receiveCount > 2)
     {
-        _sendStatusController.view.alpha = 1.0;
+        message = [NSString stringWithFormat:@"You received %@ (~%@) of Bitcoin.", coin, fiat];
+        [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
     }
-    completion:^(BOOL finished)
+    else
     {
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            
-            if([LocalSettings controller].bMerchantMode == NO)
-            {
-                [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
-            }
-            else
-            {
-                _receivedAlert = [[UIAlertView alloc]
-                                        initWithTitle:NSLocalizedString(@"** Payment Received **", nil)
-                                              message:@"" 
-                                             delegate:self 
-                                    cancelButtonTitle:@"OK" 
-                                    otherButtonTitles:nil];
+        message = [NSString stringWithFormat:@"You received %@ (~%@) of Bitcoin. Use the Payee, Category, and Notes field to optionally tag your transaction", coin, fiat];
+        [_requestViewController resetViews];
+        [self showTabBarAnimated:NO];
+    }
 
-                [_receivedAlert show];
-                // Wait and dismiss
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, MERCHANT_RECEIVED_DURATION * NSEC_PER_SEC);
-                dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-                    if (_receivedAlert)
-                    {
-                        [_receivedAlert dismissWithClickedButtonIndex:0 animated:YES];
-                    }
-                });
-
-                _appMode = APP_MODE_REQUEST;
-                [self launchViewControllerBasedOnAppMode];
-                [self showTabBarAnimated:YES];
-
-            }
-            [_sendStatusController.view removeFromSuperview];
-            _sendStatusController = nil;
-            [_requestViewController resetViews];
-        });
-    }];
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert.message = message;
+    _fadingAlert.fadeDuration = 2;
+    _fadingAlert.fadeDelay = 5;
+    [_fadingAlert blockButtons:NO];
+    [_fadingAlert showSpinner:NO];
+    [_fadingAlert showFading];
 }
 
 - (void)launchViewSweep:(NSNotification *)notification
