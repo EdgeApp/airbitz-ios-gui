@@ -45,7 +45,7 @@
     view.imgButton.hidden = YES;
 
     CGRect frame = view.frame;
-    frame.origin.x = (parentView.frame.size.width - frame.size.width) / 2;
+    frame.origin.x = parentView.frame.origin.x;
     view.frame = frame;
     return view;
 }
