@@ -1733,20 +1733,22 @@ typedef enum eRequestType
 
 - (void)pickerTextViewDidAddCategory:(PickerTextView *)pickerTextView categoryString:(NSString *)catString
 {
-    [self addCategory: catString];
+    pickerTextView.textField.text = catString;
+    
     // add string to categories, update arrays
     NSInteger index = [self.arrayCategories indexOfObject:catString];
     if(index == NSNotFound) {
         NSLog(@"ADD CATEGORY: adding category = %@", catString);
+        [self addCategory: catString];
         NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.arrayCategories];
         [array addObject:catString];
         self.arrayCategories = [array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-
         [pickerTextView setCategories:self.arrayCategories];
         NSArray *arrayChoices = [self createNewCategoryChoices:pickerTextView.textField.text];
-        [pickerTextView dismissPopupPicker];
         [pickerTextView updateChoices:arrayChoices];
     }
+    [pickerTextView dismissPopupPicker];
+    [pickerTextView.textField resignFirstResponder];
 }
 
 #pragma mark - Keyboard callbacks

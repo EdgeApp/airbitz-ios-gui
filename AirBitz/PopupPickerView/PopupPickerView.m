@@ -621,7 +621,6 @@ CGRect keyboardFrame;
         if (nil == cell)
         {
             cell = [[UITableViewCell alloc] initWithStyle:self.tableViewCellStyle reuseIdentifier:PickerTableIdentifier];
-
         }
 
         BOOL bFormatted = NO;
@@ -635,29 +634,31 @@ CGRect keyboardFrame;
 
         if (!bFormatted)
         {
-			cell.textLabel.font = [UIFont fontWithName:@"Lato-Black.ttf" size:17.0];
-            cell.textLabel.numberOfLines = 1;
-            cell.textLabel.text = [_strings objectAtIndex:row];
-            cell.textLabel.textColor = [UIColor blackColor];
             
-            if(self.categories) {
-                NSInteger index = [self.categories indexOfObject:cell.textLabel.text];
-                if(index == NSNotFound) {
-                    UIImage *image = [UIImage imageNamed:@"btn_addCategory.png"];
-                    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-                    CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-                    button.frame = frame;
-                    button.tag = row;
-                    [button setBackgroundImage:image forState:UIControlStateNormal];
-                    button.backgroundColor = [UIColor clearColor];
-                    cell.accessoryView = button;
-                    cell.accessoryView.hidden = NO;
-                    [button addTarget:self action:@selector(addCategoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
-                }
-            }
         }
     }
 	
+    cell.textLabel.font = [UIFont fontWithName:@"Lato-Black.ttf" size:17.0];
+    cell.textLabel.numberOfLines = 1;
+    cell.textLabel.text = [_strings objectAtIndex:row];
+    cell.textLabel.textColor = [UIColor blackColor];
+    cell.accessoryView.hidden = YES;
+    if(self.categories) {
+        NSInteger index = [self.categories indexOfObject:cell.textLabel.text];
+        if(index == NSNotFound) {
+            UIImage *image = [UIImage imageNamed:@"btn_addCategory.png"];
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+            button.frame = frame;
+            button.tag = row;
+            [button setBackgroundImage:image forState:UIControlStateNormal];
+            button.backgroundColor = [UIColor clearColor];
+            cell.accessoryView = button;
+            cell.accessoryView.hidden = NO;
+            [button addTarget:self action:@selector(addCategoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
+    
     return cell;
 }
 
