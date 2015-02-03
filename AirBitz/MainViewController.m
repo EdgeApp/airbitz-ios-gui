@@ -581,10 +581,8 @@ typedef enum eAppMode
     // After login, reset all the main views
     [self loadUserViews];
 
-    if (bNewAccount) {
-        _appMode = APP_MODE_WALLETS;
-        [self.tabBar selectButtonAtIndex:_appMode];
-    }
+    _appMode = APP_MODE_WALLETS;
+    [self.tabBar selectButtonAtIndex:_appMode];
 	[_loginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];
