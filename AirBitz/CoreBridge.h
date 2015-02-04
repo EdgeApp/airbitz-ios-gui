@@ -51,7 +51,7 @@
 + (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName
                                    isSuccess:(BOOL *)bSuccess
                                     errorMsg:(NSMutableString *)error;
-+ (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName;
++ (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName status:(tABC_Error *)error;
 + (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet;
 + (NSString *)getPIN;
 + (bool)PINLoginExists;

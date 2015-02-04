@@ -7,6 +7,7 @@
 //
 
 #import "PasswordRecoveryViewController.h"
+#import "TwoFactorMenuViewController.h"
 #import "QuestionAnswerView.h"
 #import "ABC.h"
 #import "User.h"
@@ -29,12 +30,17 @@ typedef enum eAlertType
 	ALERT_TYPE_EXIT
 } tAlertType;
 
-@interface PasswordRecoveryViewController () <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
+@interface PasswordRecoveryViewController ()
+    <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate,
+     UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorMenuViewControllerDelegate>
 {
 	float                   _completeButtonToEmbossImageDistance;
 	UITextField             *_activeTextField;
 	CGSize                  _defaultContentSize;
 	tAlertType              _alertType;
+    tABC_CC                 _statusCode;
+    TwoFactorMenuViewController *_tfaMenuViewController;
+    NSString                    *_secret;
 }
 
 @property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
@@ -336,10 +342,17 @@ typedef enum eAlertType
     _bSuccess = NO;
     [self showSpinner:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        BOOL bSuccess = [CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName];
+        tABC_Error error;
+        BOOL bSuccess = [CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName status:&error];
         NSArray *params = [NSArray arrayWithObjects:strAnswers, nil];
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             _bSuccess = bSuccess;
+            _statusCode = error.code;
+            // If we have otp enabled, persist the token
+            if (_secret != nil) {
+                ABC_SetTwoFactorSecret([self.strUserName UTF8String], NULL, [_secret UTF8String], true, &error);
+            }
+                    
             [self performSelectorOnMainThread:@selector(checkRecoveryAnswersResponse:) withObject:params waitUntilDone:NO];
         });
     });
@@ -355,14 +368,57 @@ typedef enum eAlertType
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
-							  message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
+        if (ABC_CC_InvalidOTP  == _statusCode) {
+            [self launchTwoFactorMenu];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
+                                message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
+                                delegate:nil
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+            [alert show];
+        }
     }
+}
+
+- (void)launchTwoFactorMenu
+{
+    _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" parentController:self];
+    _tfaMenuViewController.delegate = self;
+    _tfaMenuViewController.bStoreSecret = NO;
+    _tfaMenuViewController.bTestSecret = NO;
+}
+
+#pragma mark - TwoFactorScanViewControllerDelegate
+
+- (void)twoFactorMenuViewControllerDone:(TwoFactorMenuViewController *)controller withBackButton:(BOOL)bBack
+{
+    _bSuccess = controller.bSuccess;
+    _secret = controller.secret;
+    [Util animateOut:controller parentController:self complete:^(void) {
+        _tfaMenuViewController = nil;
+
+        if (_bSuccess) {
+            tABC_Error error;
+            ABC_SetTwoFactorSecret([self.strUserName UTF8String], NULL, [_secret UTF8String], false, &error);
+            if (error.code == ABC_CC_Ok) {
+                // Try again with OTP
+                [self CompleteSignup];
+            } else {
+                _bSuccess = NO;
+            }
+        }
+        if (!_bSuccess) {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Unable to import token", nil)
+                                message:NSLocalizedString(@"We are sorry we are unable to import the token at this time.", nil)
+                                delegate:nil
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
 }
 
 - (void)commitQuestions:(NSString *)strQuestions andAnswersToABC:(NSString *)strAnswers

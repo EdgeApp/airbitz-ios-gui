@@ -12,6 +12,7 @@
 {
 }
 + (void)initAll;
++ (void)resetOtpNotifications;
 + (NSDictionary *)haveNotifications;
 + (NSDictionary *)firstNotification;
 + (NSDictionary *)unseenNotification;
