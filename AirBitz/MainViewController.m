@@ -31,6 +31,8 @@
 #import "DL_URLServer.h"
 #import "NotificationChecker.h"
 #import "LocalSettings.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 typedef enum eAppMode
 {
@@ -44,7 +46,7 @@ typedef enum eAppMode
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate,
-                                  InfoViewDelegate>
+                                  InfoViewDelegate, MFMailComposeViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_directoryViewController;
@@ -58,6 +60,8 @@ typedef enum eAppMode
     TransactionDetailsViewController *_txDetailsController;
     UIAlertView                 *_receivedAlert;
     UIAlertView                 *_passwordChangeAlert;
+    UIAlertView                 *_userReviewAlert;
+    UIAlertView                 *_userReviewOKAlert;
     FadingAlertView             *_fadingAlert;
 	CGRect                      _originalTabBarFrame;
 	CGRect                      _originalViewFrame;
@@ -593,6 +597,17 @@ typedef enum eAppMode
         [self processBitcoinURI:_uri];
         _uri = nil;
     }
+    
+    if([User offerUserReview])
+    {
+        _userReviewAlert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Airbitz", nil)
+                                message:NSLocalizedString(@"Do you like Airbitz?", nil)
+                                delegate:self
+                                cancelButtonTitle:NSLocalizedString(@"NO", nil)
+                                otherButtonTitles:NSLocalizedString(@"YES", nil), nil];
+        [_userReviewAlert show];
+    }
 }
 
 - (void)fadingAlertDismissed:(FadingAlertView *)view
@@ -819,6 +834,28 @@ typedef enum eAppMode
     {
         _passwordChangeAlert = nil;
     }
+    else if (_userReviewAlert == alertView)
+    {
+        if(buttonIndex == 0) // No, send an email to support
+        {
+            [self sendSupportEmail];
+        }
+        else if (buttonIndex == 1) // Yes, launch userReviewOKAlert
+        {
+            _userReviewOKAlert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Airbitz", nil)
+                                message:NSLocalizedString(@"Please write a review in the App store.", nil)
+                                delegate:self
+                                cancelButtonTitle:nil
+                                otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+            [_userReviewOKAlert show];
+        }
+    }
+    else if (_userReviewOKAlert == alertView)
+    {
+        NSString *iTunesLink = @"https://itunes.apple.com/us/app/bitcoin-wallet-map-directory/id843536046?mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+    }
 }
 
 - (void)alertViewCancel:(UIAlertView *)alertView
@@ -829,6 +866,70 @@ typedef enum eAppMode
         _strTxID = @"";
         _receivedAlert = nil;
     }
+}
+
+- (void)sendSupportEmail
+{
+    // if mail is available
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+        [mailComposer setToRecipients:[NSArray arrayWithObjects:@"support@airbitz.co", nil]];
+        NSString *subject = [NSString stringWithFormat:@"Airbitz Feedback"];
+        [mailComposer setSubject:NSLocalizedString(subject, nil)];
+        mailComposer.mailComposeDelegate = self;
+        [self presentViewController:mailComposer animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"Can't send e-mail"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+#pragma mark - Mail Compose Delegate Methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    NSString *strTitle = NSLocalizedString(@"AirBitz", nil);
+    NSString *strMsg = nil;
+    
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            strMsg = NSLocalizedString(@"Email cancelled", nil);
+            break;
+            
+        case MFMailComposeResultSaved:
+            strMsg = NSLocalizedString(@"Email saved to send later", nil);
+            break;
+            
+        case MFMailComposeResultSent:
+            strMsg = NSLocalizedString(@"Email sent", nil);
+            break;
+            
+        case MFMailComposeResultFailed:
+        {
+            strTitle = NSLocalizedString(@"Error sending Email", nil);
+            strMsg = [error localizedDescription];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
+                                                    message:strMsg
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                          otherButtonTitles:nil];
+    [alert show];
+    
+    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Custom Notification Handlers
