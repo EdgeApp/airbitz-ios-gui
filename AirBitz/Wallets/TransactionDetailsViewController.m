@@ -346,6 +346,19 @@ typedef enum eRequestType
     self.bitCoinLabel.text = coinFormatted;
     self.labelBTC.text = [User Singleton].denominationLabel;
     
+    
+    if (self.categoryButton.titleLabel.text == nil)
+    {
+        if (_transactionDetailsMode == TD_MODE_SENT)
+        {
+            [self.categoryButton setTitle:@"Expense" forState:UIControlStateNormal];
+        }
+        else if (_transactionDetailsMode == TD_MODE_RECEIVED)
+        {
+            [self.categoryButton setTitle:@"Income" forState:UIControlStateNormal];
+        }
+    }
+
     [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
 }
 
@@ -810,7 +823,7 @@ typedef enum eRequestType
     NSString *strPrefix = [self categoryPrefix:strCurVal];
     if (strPrefix)
     {
-        [strCurVal setString:[strCurVal substringFromIndex:[strPrefix length]]];
+        [strCurVal setString:[self categoryPrefixRemove:strCurVal]];
     }
 
     NSString *strFirstType = @"Expense:";
@@ -818,12 +831,29 @@ typedef enum eRequestType
     NSString *strThirdType = @"Transfer:";
     NSString *strFourthType = @"Exchange:"; 
 
-    if (self.transactionDetailsMode == TD_MODE_RECEIVED)
+    if (self.transactionDetailsMode == TD_MODE_RECEIVED ||
+        [self.categoryButton.titleLabel.text isEqual:@"Income"])
     {
         strFirstType = @"Income:";
         strSecondType = @"Expense:";
     }
+    
+    if ([self.categoryButton.titleLabel.text isEqual:@"Transfer"])
+    {
+        strFirstType = @"Transfer:";
+        strSecondType = @"Expense:";
+        strThirdType = @"Income:";
+        strFourthType = @"Exchange:";
+    }
 
+    if ([self.categoryButton.titleLabel.text isEqual:@"Exchange"])
+    {
+        strFirstType =  @"Exchange:";
+        strSecondType = @"Expense:";
+        strThirdType = @"Income:";
+        strFourthType = @"Transfer:";
+    }
+    
     NSArray *arrayTypes = @[strFirstType, strSecondType, strThirdType, strFourthType];
 
     // run through each type
@@ -850,37 +880,23 @@ typedef enum eRequestType
 - (void)forceCategoryFieldValue:(UITextField *)textField forPickerView:(PickerTextView *)pickerTextView
 {
     NSMutableString *strNewVal = [[NSMutableString alloc] init];
-    [strNewVal appendString:textField.text];
+    strNewVal = (NSMutableString *) [self categoryPrefixRemove:textField.text];
 
     NSString *strPrefix = [self categoryPrefix:textField.text];
-    strNewVal = [self categoryPrefixRemove:textField.text];
+
+    NSArray *arrayChoices = [self createNewCategoryChoices:textField.text];
+    [pickerTextView updateChoices:arrayChoices];
+    
     if (strNewVal)
     {
         textField.text = strNewVal;
     }
-/*
-    // if it doesn't start with a prefix, make it
-    if (strPrefix == nil)
-    {
-        if (self.transactionDetailsMode == TD_MODE_SENT)
-        {
-            [strNewVal insertString: [ARRAY_CATEGORY_PREFIXES objectAtIndex: ARRAY_CATEGORY_PREFIX_EXPENSE] atIndex: 0];
-        }
-        else
-        {
-            [strNewVal insertString: [ARRAY_CATEGORY_PREFIXES objectAtIndex: ARRAY_CATEGORY_PREFIX_INCOME ] atIndex: 0];
-        }
-    }
-*/
+    
     // If string starts with a prefix, then set category button to prefix
     if (strPrefix != nil)
     {
         [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
     }
-    
-    NSArray *arrayChoices = [self createNewCategoryChoices:textField.text];
-
-    [pickerTextView updateChoices:arrayChoices];
 }
 
 - (void)resignAllResponders
@@ -1561,13 +1577,30 @@ typedef enum eRequestType
 
 - (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
 {
-    NSString *strNewVal;
+    NSArray *arrayChoices;
+    NSMutableString *strNewVal = [[NSMutableString alloc] init];
+    
+    [strNewVal appendString:pickerTextView.textField.text];
+
     NSString *strPrefix = [self categoryPrefix:pickerTextView.textField.text];
-    strNewVal = [self categoryPrefixRemove:pickerTextView.textField.text];
-    if (strNewVal)
+
+    if (strPrefix == nil)
     {
-        pickerTextView.textField.text = strNewVal;
+        NSMutableString *strFullCategory = [[NSMutableString alloc] init];
+        [strFullCategory appendString:self.categoryButton.titleLabel.text];
+        [strFullCategory appendString:@":"];
+        [strFullCategory appendString:pickerTextView.textField.text];
+
+        arrayChoices = [self createNewCategoryChoices:strFullCategory];
     }
+    else
+    {
+        arrayChoices = [self createNewCategoryChoices:pickerTextView.textField.text];
+    }
+    
+    [pickerTextView updateChoices:arrayChoices];
+
+    pickerTextView.textField.text = strNewVal;
 
     // If starts with prefix, put prefix in category button
     if (strPrefix != nil)
@@ -1575,9 +1608,6 @@ typedef enum eRequestType
         [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
     }
 
-    NSArray *arrayChoices = [self createNewCategoryChoices:pickerTextView.textField.text];
-
-    [pickerTextView updateChoices:arrayChoices];
 }
 
 - (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
@@ -1625,7 +1655,10 @@ typedef enum eRequestType
 {
     // set the text field to the choice
     pickerTextView.textField.text = [pickerTextView.arrayChoices objectAtIndex:row];
-
+    
+    NSArray *arrayChoices = [self createNewCategoryChoices:pickerTextView.textField.text];
+    [pickerTextView updateChoices:arrayChoices];
+    
     NSString *strPrefix = [self categoryPrefix:pickerTextView.textField.text];
     pickerTextView.textField.text = [self categoryPrefixRemove:pickerTextView.textField.text];
     
@@ -1636,19 +1669,6 @@ typedef enum eRequestType
     }
     
     [pickerTextView.textField resignFirstResponder];
-/*
-    // check and see if there is more text than just the prefix
-    if ([ARRAY_CATEGORY_PREFIXES indexOfObject:pickerTextView.textField.text] == NSNotFound)
-    {
-        [pickerTextView.textField resignFirstResponder];
-
-        if (!self.bOldTransaction)
-        {
-            // XX Don't go to notes. Feels like most users don't use notes most often
-//            [self.notesTextView becomeFirstResponder];
-        }
-    }
- */
 }
 
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
