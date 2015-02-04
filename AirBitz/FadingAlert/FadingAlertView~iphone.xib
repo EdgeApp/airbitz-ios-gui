@@ -23,7 +23,7 @@
                         </imageView>
                         <label autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alert Message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="2is-5E-X7J" userLabel="Message" customClass="LatoLabel">
                             <rect key="frame" x="85" y="211" width="150" height="120"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -38,6 +38,7 @@
                 <outlet property="buttonBlocker" destination="nxm-IL-wEZ" id="yUU-BI-xOY"/>
                 <outlet property="messageText" destination="2is-5E-X7J" id="yvV-lv-54v"/>
             </connections>
+            <point key="canvasLocation" x="-3" y="155"/>
         </view>
     </objects>
     <resources>

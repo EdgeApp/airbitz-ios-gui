@@ -694,24 +694,24 @@ typedef enum eAppMode
     Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
     
     double currency;
-    int64_t satoshi = transaction.balance;
+    int64_t satoshi = transaction.amountSatoshi;
     if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                               satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
         fiat = [CoreBridge formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
     
-    currency = [fiat doubleValue];
+    currency = fabs(transaction.amountFiat);
     if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                   currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
         coin = [CoreBridge formatSatoshi:satoshi withSymbol:false cropDecimals:[CoreBridge currencyDecimalPlaces]];
     
     if([LocalSettings controller].bMerchantMode == YES || receiveCount > 2)
     {
-        message = [NSString stringWithFormat:@"You received %@ (~%@) of Bitcoin.", coin, fiat];
+        message = [NSString stringWithFormat:@"You Received Bitcoin!\n%@ (~%@)", coin, fiat];
         [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
     }
     else
     {
-        message = [NSString stringWithFormat:@"You received %@ (~%@) of Bitcoin. Use the Payee, Category, and Notes field to optionally tag your transaction", coin, fiat];
+        message = [NSString stringWithFormat:@"You received Bitcoin\n%@ (~%@)\nUse the Payee, Category, and Notes field to optionally tag your transaction", coin, fiat];
         [_requestViewController resetViews];
         [self showTabBarAnimated:NO];
     }
