@@ -22,4 +22,6 @@
 + (UIViewController *)animateIn:(NSString *)identifier parentController:(UIViewController *)parent;
 + (void)animateOut:(UIViewController *)controller parentController:(UIViewController *)parent complete:(void(^)(void))cb;
 
++ (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height;
+
 @end
