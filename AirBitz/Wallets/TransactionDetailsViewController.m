@@ -59,7 +59,6 @@ typedef enum eRequestType
     RequestType_BusinessDetails
 } tRequestType;
 
-
 @interface TransactionDetailsViewController () <UITextFieldDelegate, UITextViewDelegate, InfoViewDelegate, CalculatorViewDelegate,
                                                 DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate,
                                                 UIGestureRecognizerDelegate, UIAlertViewDelegate,
@@ -106,6 +105,7 @@ typedef enum eRequestType
 @property (weak, nonatomic) IBOutlet UIImageView            *imageNotesEmboss;
 @property (nonatomic, weak) IBOutlet UITextView             *notesTextView;
 @property (nonatomic, weak) IBOutlet UIButton               *doneButton;
+@property (nonatomic, weak) IBOutlet UIButton               *categoryButton;
 
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
 @property (weak, nonatomic) IBOutlet UIButton               *buttonBack;
@@ -190,10 +190,22 @@ typedef enum eRequestType
     // load all the names from the address book
     [self generateListOfContactNames];
 
-    UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
-    [self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateNormal];
-    [self.advancedDetailsButton setBackgroundImage:blue_button_image forState:UIControlStateSelected];
+    // Add button borders
+    self.doneButton.layer.borderWidth = 1.0f;
+    self.doneButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.doneButton.layer.cornerRadius = 10;
+    self.doneButton.clipsToBounds = YES;
 
+    self.categoryButton.layer.borderWidth = 1.0f;
+    self.categoryButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.categoryButton.layer.cornerRadius = 10;
+    self.categoryButton.clipsToBounds = YES;
+
+    self.advancedDetailsButton.layer.borderWidth = 1.0f;
+    self.advancedDetailsButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.advancedDetailsButton.layer.cornerRadius = 10;
+    self.advancedDetailsButton.clipsToBounds = YES;
+    
     self.keypadView.delegate = self;
     self.keypadView.textField = self.fiatTextField;
     
@@ -212,7 +224,7 @@ typedef enum eRequestType
     self.pickerTextCategory.textField.borderStyle = UITextBorderStyleNone;
     self.pickerTextCategory.textField.backgroundColor = [UIColor clearColor];
     self.pickerTextCategory.textField.font = [UIFont systemFontOfSize:14];
-    self.pickerTextCategory.textField.clearButtonMode = UITextFieldViewModeAlways;
+    self.pickerTextCategory.textField.clearButtonMode = UITextFieldViewModeNever;
     self.pickerTextCategory.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.pickerTextCategory.textField.autocorrectionType = UITextAutocorrectionTypeDefault;
     self.pickerTextCategory.textField.spellCheckingType = UITextSpellCheckingTypeNo;
@@ -234,6 +246,12 @@ typedef enum eRequestType
     self.notesTextView.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
 
+    NSString *strPrefix;
+    strPrefix = [self categoryPrefix:self.pickerTextCategory.textField.text];
+    self.pickerTextCategory.textField.text = [self categoryPrefixRemove:self.pickerTextCategory.textField.text];
+    
+    [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
+
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -241,7 +259,6 @@ typedef enum eRequestType
     self.nameTextField.placeholder = NSLocalizedString(@"Enter Payee", nil);
     self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.nameTextField.font = [UIFont systemFontOfSize:18];
-    self.nameTextField.textAlignment = NSTextAlignmentCenter;
     self.nameTextField.tintColor = [UIColor whiteColor];
     
     _originalHeaderFrame = self.headerView.frame;
@@ -357,29 +374,19 @@ typedef enum eRequestType
 
 #pragma mark - Action Methods
 
+- (IBAction)CategoryButton
+{
+    
+}
+
 - (IBAction)Done
 {
     [DL_URLServer.controller cancelAllRequestsForDelegate:self];
 
     [self resignAllResponders];
 
-    //
-    // Check if category is only one of the sub categories (ie. Income, Expense, Transfer, Exchange)
-    // If so, do not add it
-    //
-
-    NSArray *arrayTypes = ARRAY_CATEGORY_PREFIXES;
-
     bool doAddCategory = true;
     // run through each type
-    for (NSString *strPrefix in arrayTypes)
-    {
-        if ([strPrefix isEqualToString: self.pickerTextCategory.textField.text])
-        {
-            doAddCategory = false;
-            break;
-        }
-    }
 
     if ([self.pickerTextCategory.textField.text isEqualToString: @""])
     {
@@ -388,9 +395,17 @@ typedef enum eRequestType
 
     if (doAddCategory)
     {
+        NSMutableString *strFullCategory = [[NSMutableString alloc] init];
+        [strFullCategory appendString:self.categoryButton.titleLabel.text];
+        [strFullCategory appendString:@":"];
+        [strFullCategory appendString:self.pickerTextCategory.textField.text];
+         
         // add the category if we didn't have it
-        [self addCategory: self.pickerTextCategory.textField.text];
-        self.transaction.strCategory = [self.pickerTextCategory.textField text];
+        [self addCategory: strFullCategory];
+        
+        self.transaction.strCategory = strFullCategory;
+        
+//        self.transaction.strCategory = [self.transaction.strCategory stringByReplacingOccurrencesOfString:self.transaction.strCategory withString:strFullCategory];
     }
     else
     {
@@ -559,101 +574,6 @@ typedef enum eRequestType
 
 - (void)updateDisplayLayout
 {
-    // update for iPhone 4
-    if (IS_IPHONE4 )
-    {
-        // warning: magic numbers for iphone layout
-
-        CGRect frame;
-
-        frame = self.dateLabel.frame;
-        frame.origin.y = 0;
-        self.dateLabel.frame = frame;
-
-        frame = self.imageNameEmboss.frame;
-        frame.origin.y = self.dateLabel.frame.origin.y + self.dateLabel.frame.size.height + 0;
-        self.imageNameEmboss.frame = frame;
-
-        frame = self.nameTextField.frame;
-        frame.origin.y = self.imageNameEmboss.frame.origin.y + 2;
-        self.nameTextField.frame = frame;
-
-        frame = self.viewPhoto.frame;
-        frame.origin.y = (self.nameTextField.frame.origin.y + (self.nameTextField.frame.size.height / 2.0))
-                            - (self.viewPhoto.frame.size.height / 2.0);
-        self.viewPhoto.frame = frame;
-
-        frame = self.advancedDetailsButton.frame;
-        frame.origin.y = self.imageNameEmboss.frame.origin.y + self.imageNameEmboss.frame.size.height + 3;
-        self.advancedDetailsButton.frame = frame;
-
-        frame = self.imageAmountEmboss.frame;
-        frame.origin.y = self.advancedDetailsButton.frame.origin.y + self.advancedDetailsButton.frame.size.height + 3;
-        frame.size.height = 90;
-        self.imageAmountEmboss.frame = frame;
-
-        frame = self.walletLabel.frame;
-        frame.origin.y = self.imageAmountEmboss.frame.origin.y + 3;
-        self.walletLabel.frame = frame;
-
-        frame = self.bitCoinLabel.frame;
-        frame.origin.y = self.walletLabel.frame.origin.y + self.walletLabel.frame.size.height + 2;
-        self.bitCoinLabel.frame = frame;
-
-        frame = self.labelBTC.frame;
-        frame.origin.y = self.walletLabel.frame.origin.y + self.walletLabel.frame.size.height + 2;
-        self.labelBTC.frame = frame;
-
-        frame = self.labelFee.frame;
-        frame.origin.y = self.walletLabel.frame.origin.y + self.walletLabel.frame.size.height + 2;
-        self.labelFee.frame = frame;
-
-        frame = self.labelFiatName.frame;
-        frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 5;
-        self.labelFiatName.frame = frame;
-
-        frame = self.imageFiatEmboss.frame;
-        frame.origin.y = self.bitCoinLabel.frame.origin.y + self.bitCoinLabel.frame.size.height + 2;
-        self.imageFiatEmboss.frame = frame;
-
-        frame = self.fiatTextField.frame;
-        frame.origin.y = self.imageFiatEmboss.frame.origin.y + 1;
-        self.fiatTextField.frame = frame;
-
-        frame = self.imageBottomEmboss.frame;
-        frame.origin.y = self.imageAmountEmboss.frame.origin.y + self.imageAmountEmboss.frame.size.height + 5;
-        frame.size.height = 132;
-        self.imageBottomEmboss.frame = frame;
-
-        frame = self.labelCategory.frame;
-        frame.origin.y = self.imageBottomEmboss.frame.origin.y + 2;
-        self.labelCategory.frame = frame;
-
-        frame = self.imageCategoryEmboss.frame;
-        frame.origin.y = self.labelCategory.frame.origin.y + self.labelCategory.frame.size.height + -2;
-        self.imageCategoryEmboss.frame = frame;
-
-        frame = self.pickerTextCategory.frame;
-        frame.origin.y = self.imageCategoryEmboss.frame.origin.y + 2;
-        self.pickerTextCategory.frame = frame;
-
-        frame = self.labelNotes.frame;
-        frame.origin.y = self.imageCategoryEmboss.frame.origin.y + self.imageCategoryEmboss.frame.size.height + 0;
-        self.labelNotes.frame = frame;
-
-        frame = self.imageNotesEmboss.frame;
-        frame.origin.y = self.labelNotes.frame.origin.y + self.labelNotes.frame.size.height + -2;
-        self.imageNotesEmboss.frame = frame;
-
-        frame = self.notesTextView.frame;
-        frame.origin.y = self.imageNotesEmboss.frame.origin.y + 4;
-        self.notesTextView.frame = frame;
-
-        frame = self.doneButton.frame;
-        frame.origin.y = self.imageBottomEmboss.frame.origin.y + self.imageBottomEmboss.frame.size.height + 4;
-        self.doneButton.frame = frame;
-
-    }
 }
 
 - (void)updatePhoto
@@ -798,20 +718,44 @@ typedef enum eRequestType
 }
 
 // returns which prefix the given string starts with
-// returns nil in none of them
+// returns nil if none of them
 - (NSString *)categoryPrefix:(NSString *)strCategory
 {
+    NSString *strPrefix;
     if (strCategory)
     {
-        for (NSString *strPrefix in ARRAY_CATEGORY_PREFIXES)
+        for (strPrefix in ARRAY_CATEGORY_PREFIXES)
         {
             if ([strCategory hasPrefix:strPrefix])
             {
+                strPrefix = [strPrefix stringByReplacingOccurrencesOfString:@":" withString:@""];
                 return strPrefix;
             }
         }
     }
 
+    return nil;
+}
+
+- (NSString *)categoryPrefixRemove:(NSString *)strCategory
+{
+    
+    NSArray *arrayTypes = ARRAY_CATEGORY_PREFIXES;
+    
+    for (NSString *strPrefix in arrayTypes)
+    {
+        if ([strCategory hasPrefix:strPrefix])
+        {
+            NSRange rOriginal = [strCategory rangeOfString: strPrefix];
+            if (NSNotFound != rOriginal.location) {
+                strCategory = [strCategory
+                               stringByReplacingCharactersInRange: rOriginal
+                               withString:@""];
+                return strCategory;
+            }
+        }
+    }
+    
     return nil;
 }
 
@@ -909,7 +853,12 @@ typedef enum eRequestType
     [strNewVal appendString:textField.text];
 
     NSString *strPrefix = [self categoryPrefix:textField.text];
-
+    strNewVal = [self categoryPrefixRemove:textField.text];
+    if (strNewVal)
+    {
+        textField.text = strNewVal;
+    }
+/*
     // if it doesn't start with a prefix, make it
     if (strPrefix == nil)
     {
@@ -922,9 +871,13 @@ typedef enum eRequestType
             [strNewVal insertString: [ARRAY_CATEGORY_PREFIXES objectAtIndex: ARRAY_CATEGORY_PREFIX_INCOME ] atIndex: 0];
         }
     }
-
-    textField.text = strNewVal;
-
+*/
+    // If string starts with a prefix, then set category button to prefix
+    if (strPrefix != nil)
+    {
+        [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
+    }
+    
     NSArray *arrayChoices = [self createNewCategoryChoices:textField.text];
 
     [pickerTextView updateChoices:arrayChoices];
@@ -1522,7 +1475,7 @@ typedef enum eRequestType
     
     if (textView == self.notesTextView)
     {
-        scrollFrame.origin.y = (!IS_IPHONE4 ? -90 : -115);
+        scrollFrame.origin.y = -self.notesTextView.frame.origin.y + 30;
         [self dismissPayeeTable];
     }
     
@@ -1547,11 +1500,11 @@ typedef enum eRequestType
 
     if (textField == self.nameTextField)
     {
-        scrollFrame.origin.y = (!IS_IPHONE4 ? -30 : -20);
+        scrollFrame.origin.y = -self.nameTextField.frame.origin.y + 10;
 
         CGRect frame = self.view.bounds;
-        frame.origin.y = (!IS_IPHONE4 ? 100 : 95);
-        frame.size.height = (!IS_IPHONE4 ? 252 : 169);
+        frame.origin.y = 100;
+        frame.size.height = 252;
         [self spawnPayeeTableInFrame:frame];
         [self updateAutoCompleteArray];
     }
@@ -1603,33 +1556,24 @@ typedef enum eRequestType
 
 - (BOOL)pickerTextViewFieldShouldChange:(PickerTextView *)pickerTextView charactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    // create what the new value would look like
-    NSString *strNewVal = [pickerTextView.textField.text stringByReplacingCharactersInRange:range withString:string];
-
-    // if it still has a prefix
-    if ([self categoryPrefix:strNewVal])
-    {
-        // allow it
-        return YES;
-    }
-
-    return NO;
+    return YES;
 }
 
 - (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
 {
-    NSMutableString *strNewVal = [[NSMutableString alloc] init];
-    [strNewVal appendString:pickerTextView.textField.text];
-
+    NSString *strNewVal;
     NSString *strPrefix = [self categoryPrefix:pickerTextView.textField.text];
-
-    // if it doesn't start with a prefix, make it
-    if (strPrefix == nil)
+    strNewVal = [self categoryPrefixRemove:pickerTextView.textField.text];
+    if (strNewVal)
     {
-        [strNewVal insertString:[ARRAY_CATEGORY_PREFIXES objectAtIndex:0] atIndex:0];
+        pickerTextView.textField.text = strNewVal;
     }
 
-    pickerTextView.textField.text = strNewVal;
+    // If starts with prefix, put prefix in category button
+    if (strPrefix != nil)
+    {
+        [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
+    }
 
     NSArray *arrayChoices = [self createNewCategoryChoices:pickerTextView.textField.text];
 
@@ -1642,10 +1586,12 @@ typedef enum eRequestType
 
     [self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
 
-    // highlight all the text after the :
+    // highlight all the text
+    /*
     NSRange range = [pickerTextView.textField.text rangeOfString:@":"];
     UITextPosition *startPosition = [pickerTextView.textField positionFromPosition:pickerTextView.textField.beginningOfDocument offset:range.location + 1];
-    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:startPosition toPosition:pickerTextView.textField.endOfDocument]];
+     */
+    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.endOfDocument]];
 }
 
 - (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
@@ -1680,6 +1626,17 @@ typedef enum eRequestType
     // set the text field to the choice
     pickerTextView.textField.text = [pickerTextView.arrayChoices objectAtIndex:row];
 
+    NSString *strPrefix = [self categoryPrefix:pickerTextView.textField.text];
+    pickerTextView.textField.text = [self categoryPrefixRemove:pickerTextView.textField.text];
+    
+    // If starts with prefix, put prefix in category button
+    if (strPrefix != nil)
+    {
+        [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
+    }
+    
+    [pickerTextView.textField resignFirstResponder];
+/*
     // check and see if there is more text than just the prefix
     if ([ARRAY_CATEGORY_PREFIXES indexOfObject:pickerTextView.textField.text] == NSNotFound)
     {
@@ -1691,6 +1648,7 @@ typedef enum eRequestType
 //            [self.notesTextView becomeFirstResponder];
         }
     }
+ */
 }
 
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
@@ -1711,7 +1669,7 @@ typedef enum eRequestType
 
     // now move the window up so that the category field is at the top
     CGRect scrollFrame = self.scrollableContentView.frame;
-    scrollFrame.origin.y = (!IS_IPHONE4 ? -250 : -190); // magic number
+    scrollFrame.origin.y = -self.pickerTextCategory.frame.origin.y + 10;
     [self scrollContentViewToFrame:scrollFrame];
 
     // bring the picker up with it
@@ -1721,8 +1679,8 @@ typedef enum eRequestType
                      animations:^
      {
          CGRect frame = self.pickerTextCategory.popupPicker.frame;
-         frame.origin.y = (!IS_IPHONE4 ? 130 : 126);
-         frame.size.height = (!IS_IPHONE4 ? 220 : 130); // magic number to make it as big as possible
+         frame.origin.y = 130;
+         frame.size.height = 220; // magic number to make it as big as possible
          self.pickerTextCategory.popupPicker.frame = frame;
      }
                      completion:^(BOOL finished)

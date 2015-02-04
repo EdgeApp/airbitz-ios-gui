@@ -79,6 +79,11 @@ typedef enum eAlertType
 
     _completeButtonToEmbossImageDistance = (self.embossImage.frame.origin.y + self.embossImage.frame.size.height) - self.completeSignupButton.frame.origin.y;
 
+    self.completeSignupButton.layer.borderWidth = 1.0f;
+    self.completeSignupButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.completeSignupButton.layer.cornerRadius = 10;
+    self.completeSignupButton.clipsToBounds = YES;
+
 	self.arrayCategoryString	= [[NSMutableArray alloc] init];
 	self.arrayCategoryNumeric	= [[NSMutableArray alloc] init];
 //	self.arrayCategoryAddress	= [[NSMutableArray alloc] init];

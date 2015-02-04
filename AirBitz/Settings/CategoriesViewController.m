@@ -86,7 +86,7 @@
     self.pickerTextNew.textField.borderStyle = UITextBorderStyleNone;
     self.pickerTextNew.textField.backgroundColor = [UIColor clearColor];
     self.pickerTextNew.textField.font = [UIFont systemFontOfSize:14];
-    self.pickerTextNew.textField.clearButtonMode = UITextFieldViewModeAlways;
+    self.pickerTextNew.textField.clearButtonMode = UITextFieldViewModeNever;
     self.pickerTextNew.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.pickerTextNew.textField.autocorrectionType = UITextAutocorrectionTypeDefault;
     self.pickerTextNew.textField.spellCheckingType = UITextSpellCheckingTypeNo;
@@ -167,7 +167,7 @@
     cell.pickerTextView.textField.borderStyle = UITextBorderStyleNone;
     cell.pickerTextView.textField.backgroundColor = [UIColor clearColor];
     cell.pickerTextView.textField.font = [UIFont systemFontOfSize:14];
-    cell.pickerTextView.textField.clearButtonMode = UITextFieldViewModeAlways;
+    cell.pickerTextView.textField.clearButtonMode = UITextFieldViewModeNever;
     cell.pickerTextView.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     cell.pickerTextView.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     cell.pickerTextView.textField.spellCheckingType = UITextSpellCheckingTypeNo;
@@ -676,9 +676,11 @@
          cell.pickerTextView.popupPicker.frame = frame;
 
          // move the arrow to the right spot
+         /*
          frame = cell.pickerTextView.popupPicker.arrowImage.frame;
          frame.origin.y = cell.pickerTextView.popupPicker.frame.size.height - 9;
          cell.pickerTextView.popupPicker.arrowImage.frame = frame;
+          */
      }
                      completion:^(BOOL finished)
      {

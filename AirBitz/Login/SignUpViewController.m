@@ -304,6 +304,11 @@
     {
         self.labelTitle.text = NSLocalizedString(@"Sign Up", @"screen title");
         [self.buttonNextStep setTitle:NSLocalizedString(@"Next Step", @"") forState:UIControlStateNormal];
+        self.buttonNextStep.layer.borderWidth = 1.0f;
+        self.buttonNextStep.layer.borderColor = [[UIColor whiteColor] CGColor];
+        self.buttonNextStep.layer.cornerRadius = 10;
+        self.buttonNextStep.clipsToBounds = YES;
+
         self.passwordTextField.placeholder = NSLocalizedString(@"Password", @"");
         self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter Password", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"User Name", @"");

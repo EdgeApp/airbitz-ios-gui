@@ -1,0 +1,552 @@
+
+/* Class = "IBUITextField"; placeholder = "Current Password"; ObjectID = "0Ma-6E-cjS"; */
+"0Ma-6E-cjS.placeholder" = "Current Password";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "0QH-Cd-JVq"; */
+"0QH-Cd-JVq.text" = "Label";
+
+/* Class = "IBUILabel"; text = "mBTC"; ObjectID = "0WP-4K-TNl"; */
+"0WP-4K-TNl.text" = "mBTC";
+
+/* Class = "IBUILabel"; text = "Email Recipient"; ObjectID = "0b6-ws-V2S"; */
+"0b6-ws-V2S.text" = "Email Recipient";
+
+/* Class = "IBUILabel"; text = "Scanning for Bluetooth  Requests..."; ObjectID = "21p-YC-LN1"; */
+"21p-YC-LN1.text" = "Scanning for Bluetooth  Requests...";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "2FV-6E-gId"; */
+"2FV-6E-gId.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Send Confirmation"; ObjectID = "2LK-LX-sOp"; */
+"2LK-LX-sOp.text" = "Send Confirmation";
+
+/* Class = "IBUILabel"; text = "10/15/2014"; ObjectID = "2Rj-4b-xgk"; */
+"2Rj-4b-xgk.text" = "10/15/2014";
+
+/* Class = "IBUITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
+"2cx-Qx-XQc.placeholder" = "User Name";
+
+/* Class = "IBUIButton"; normalTitle = "Advanced Details"; ObjectID = "3Py-nn-1AR"; */
+"3Py-nn-1AR.normalTitle" = "Advanced Details";
+
+/* Class = "IBUITextField"; placeholder = "Business Name or Category"; ObjectID = "3S0-VF-OIs"; */
+"3S0-VF-OIs.placeholder" = "Business Name or Category";
+
+/* Class = "IBUILabel"; text = "Offline Wallet"; ObjectID = "4KX-hj-tJA"; */
+"4KX-hj-tJA.text" = "Offline Wallet";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "4Li-R2-dUi"; */
+"4Li-R2-dUi.text" = "Label";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "4ab-Wa-eS4"; */
+"4ab-Wa-eS4.placeholder" = "Password";
+
+/* Class = "IBUILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv"; */
+"4md-ob-Ttv.text" = "Core Version:";
+
+/* Class = "IBUILabel"; text = "Import Wallet"; ObjectID = "51g-oU-QIB"; */
+"51g-oU-QIB.text" = "Import Wallet";
+
+/* Class = "IBUILabel"; text = "Invalid user name or password"; ObjectID = "5wy-Mi-whP"; */
+"5wy-Mi-whP.text" = "Invalid user name or password";
+
+/* Class = "IBUILabel"; text = "Export"; ObjectID = "6dp-0x-wlF"; */
+"6dp-0x-wlF.text" = "Export";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "6qu-Co-pyz"; */
+"6qu-Co-pyz.text" = "Label";
+
+/* Class = "IBUILabel"; text = "BTC"; ObjectID = "7wl-Lb-K8l"; */
+"7wl-Lb-K8l.text" = "BTC";
+
+/* Class = "IBUIButton"; normalTitle = "Cancel"; ObjectID = "810-FP-oTH"; */
+"810-FP-oTH.normalTitle" = "Cancel";
+
+/* Class = "IBUILabel"; text = "10/15/2014"; ObjectID = "828-lV-dxc"; */
+"828-lV-dxc.text" = "10/15/2014";
+
+/* Class = "IBUILabel"; text = "External Storage / Print"; ObjectID = "8Nr-wB-OaB"; */
+"8Nr-wB-OaB.text" = "External Storage / Print";
+
+/* Class = "IBUILabel"; text = "Swipe to View Business Directory"; ObjectID = "8XB-1A-1hO"; */
+"8XB-1A-1hO.text" = "Swipe to View Business Directory";
+
+/* Class = "IBUIButton"; normalTitle = "Create Account"; ObjectID = "8iz-Uc-LTS"; */
+"8iz-Uc-LTS.normalTitle" = "Create Account";
+
+/* Class = "IBUILabel"; text = "1.00 BTC - $876.13 USD"; ObjectID = "9aX-Dw-7XD"; */
+"9aX-Dw-7XD.text" = "1.00 BTC - $876.13 USD";
+
+/* Class = "IBUILabel"; text = "Password Recovery Setup"; ObjectID = "9kf-YJ-8Zz"; */
+"9kf-YJ-8Zz.text" = "Password Recovery Setup";
+
+/* Class = "IBUILabel"; text = "Address 1234 Orange"; ObjectID = "9nk-xb-nVD"; */
+"9nk-xb-nVD.text" = "Address 1234 Orange";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "9ur-p7-oPb"; */
+"9ur-p7-oPb.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Debug View"; ObjectID = "9vG-sw-IPy"; */
+"9vG-sw-IPy.text" = "Debug View";
+
+/* Class = "IBUILabel"; text = "Request Bitcoin"; ObjectID = "AX6-P8-c2L"; */
+"AX6-P8-c2L.text" = "Request Bitcoin";
+
+/* Class = "IBUIButton"; normalTitle = "Clear Watcher Cache"; ObjectID = "Ag5-Xn-Vpg"; */
+"Ag5-Xn-Vpg.normalTitle" = "Clear Watcher Cache";
+
+/* Class = "IBUILabel"; text = "m฿ 0.00847778"; ObjectID = "B9X-O3-QF3"; */
+"B9X-O3-QF3.text" = "m฿ 0.00847778";
+
+/* Class = "IBUILabel"; text = "Password must have an upper and lower case letter, a number, and a minimum 10 of characters"; ObjectID = "BED-Cf-F1n"; */
+"BED-Cf-F1n.text" = "Password must have an upper and lower case letter, a number, and a minimum 10 of characters";
+
+/* Class = "IBUIButton"; normalTitle = "(coming soon)        ."; ObjectID = "BET-uK-exQ"; */
+"BET-uK-exQ.normalTitle" = "(coming soon)        .";
+
+/* Class = "IBUILabel"; text = "From:"; ObjectID = "BW5-4o-QhE"; */
+"BW5-4o-QhE.text" = "From:";
+
+/* Class = "IBUIButton"; normalTitle = "Upload Log Files"; ObjectID = "Bs1-Yi-SIh"; */
+"Bs1-Yi-SIh.normalTitle" = "Upload Log Files";
+
+/* Class = "IBUILabel"; text = "Phone"; ObjectID = "Bxa-tB-mk3"; */
+"Bxa-tB-mk3.text" = "Phone";
+
+/* Class = "IBUILabel"; text = "Category"; ObjectID = "ClG-um-kmI"; */
+"ClG-um-kmI.text" = "Category";
+
+/* Class = "IBUILabel"; text = "Enter password to decode wallet"; ObjectID = "CuI-Tj-a8q"; */
+"CuI-Tj-a8q.text" = "Enter password to decode wallet";
+
+/* Class = "IBUILabel"; text = "B"; ObjectID = "D9Y-q9-3fh"; */
+"D9Y-q9-3fh.text" = "B";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "DFL-Hc-ld2"; */
+"DFL-Hc-ld2.text" = "Label";
+
+/* Class = "IBUIButton"; normalTitle = "Next Step"; ObjectID = "Det-Mr-8a9"; */
+"Det-Mr-8a9.normalTitle" = "Next Step";
+
+/* Class = "IBUITextView"; text = "Test"; ObjectID = "Dh6-PA-WGi"; */
+"Dh6-PA-WGi.text" = "Test";
+
+/* Class = "IBUILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08"; */
+"DlF-tR-T08.text" = "Business Name";
+
+/* Class = "IBUILabel"; text = "Enter PIN for (airbitz)"; ObjectID = "Dn2-OV-6cd"; */
+"Dn2-OV-6cd.text" = "Enter PIN for (airbitz)";
+
+/* Class = "IBUILabel"; text = "Send Bitcoin"; ObjectID = "ESa-8m-WoY"; */
+"ESa-8m-WoY.text" = "Send Bitcoin";
+
+/* Class = "IBUILabel"; text = "This Year"; ObjectID = "EcC-tD-Jnf"; */
+"EcC-tD-Jnf.text" = "This Year";
+
+/* Class = "IBUILabel"; text = "USD"; ObjectID = "EuE-s0-NQ2"; */
+"EuE-s0-NQ2.text" = "USD";
+
+/* Class = "IBUILabel"; text = "BTC"; ObjectID = "Fic-d9-oDx"; */
+"Fic-d9-oDx.text" = "BTC";
+
+/* Class = "IBUILabel"; text = "From:"; ObjectID = "GFx-1Z-kFg"; */
+"GFx-1Z-kFg.text" = "From:";
+
+/* Class = "IBUILabel"; text = "$"; ObjectID = "GNf-rJ-hJ5"; */
+"GNf-rJ-hJ5.text" = "$";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "Gf7-s5-OZS"; */
+"Gf7-s5-OZS.text" = "Label";
+
+/* Class = "IBUILabel"; text = "10/15/2014"; ObjectID = "HBM-Sv-Tz3"; */
+"HBM-Sv-Tz3.text" = "10/15/2014";
+
+/* Class = "IBUILabel"; text = "USD"; ObjectID = "HKk-4P-SL1"; */
+"HKk-4P-SL1.text" = "USD";
+
+/* Class = "IBUILabel"; text = "(Duplicate Names)"; ObjectID = "Hba-dd-to8"; */
+"Hba-dd-to8.text" = "(Duplicate Names)";
+
+/* Class = "IBUILabel"; text = "BTC"; ObjectID = "Hk5-ol-0gD"; */
+"Hk5-ol-0gD.text" = "BTC";
+
+/* Class = "IBUILabel"; text = "Export"; ObjectID = "HzM-6V-ckO"; */
+"HzM-6V-ckO.text" = "Export";
+
+/* Class = "IBUILabel"; text = "Share"; ObjectID = "IKa-up-adT"; */
+"IKa-up-adT.text" = "Share";
+
+/* Class = "IBUILabel"; text = "Camera unavailable"; ObjectID = "IrC-mj-iIB"; */
+"IrC-mj-iIB.text" = "Camera unavailable";
+
+/* Class = "IBUILabel"; text = "Invalid PIN"; ObjectID = "Ise-AL-ggT"; */
+"Ise-AL-ggT.text" = "Invalid PIN";
+
+/* Class = "IBUILabel"; text = "PRIVATE KEY"; ObjectID = "JZ8-MW-EwQ"; */
+"JZ8-MW-EwQ.text" = "PRIVATE KEY";
+
+/* Class = "IBUILabel"; text = "1WWM5ZWX"; ObjectID = "KUE-S9-d9J"; */
+"KUE-S9-d9J.text" = "1WWM5ZWX";
+
+/* Class = "IBUILabel"; text = "         Details..."; ObjectID = "Kgm-MH-DvG"; */
+"Kgm-MH-DvG.text" = "         Details...";
+
+/* Class = "IBUILabel"; text = "Notes"; ObjectID = "L8T-Xw-aVE"; */
+"L8T-Xw-aVE.text" = "Notes";
+
+/* Class = "IBUIButton"; normalTitle = "Done"; ObjectID = "LAg-aY-W5b"; */
+"LAg-aY-W5b.normalTitle" = "Done";
+
+/* Class = "IBUILabel"; text = "Payment received"; ObjectID = "MKi-zS-5GZ"; */
+"MKi-zS-5GZ.text" = "Payment received";
+
+/* Class = "IBUILabel"; text = "Social"; ObjectID = "MT9-P3-r5I"; */
+"MT9-P3-r5I.text" = "Social";
+
+/* Class = "IBUILabel"; text = "Wallet"; ObjectID = "MUU-w2-x0B"; */
+"MUU-w2-x0B.text" = "Wallet";
+
+/* Class = "IBUILabel"; text = "Copy Public Address"; ObjectID = "Maf-2U-Gv8"; */
+"Maf-2U-Gv8.text" = "Copy Public Address";
+
+/* Class = "IBUIButton"; normalTitle = "(coming soon)        ."; ObjectID = "McH-2Y-GJx"; */
+"McH-2Y-GJx.normalTitle" = "(coming soon)        .";
+
+/* Class = "IBUILabel"; text = "Version:"; ObjectID = "Myh-H6-aDd"; */
+"Myh-H6-aDd.text" = "Version:";
+
+/* Class = "IBUILabel"; text = "Wallet:"; ObjectID = "N0S-HZ-7RS"; */
+"N0S-HZ-7RS.text" = "Wallet:";
+
+/* Class = "IBUILabel"; text = "User Name:"; ObjectID = "NdY-co-ret"; */
+"NdY-co-ret.text" = "User Name:";
+
+/* Class = "IBUIButton"; normalTitle = "Import"; ObjectID = "NzT-rU-bq0"; */
+"NzT-rU-bq0.normalTitle" = "Import";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "O1G-gR-pT0"; */
+"O1G-gR-pT0.text" = "Label";
+
+/* Class = "IBUILabel"; text = "BTC Amount"; ObjectID = "OfK-AQ-g7A"; */
+"OfK-AQ-g7A.text" = "BTC Amount";
+
+/* Class = "IBUILabel"; text = "To:"; ObjectID = "P8W-G0-G18"; */
+"P8W-G0-G18.text" = "To:";
+
+/* Class = "IBUILabel"; text = "PUBLIC ADDRESS"; ObjectID = "PDc-Am-Qmc"; */
+"PDc-Am-Qmc.text" = "PUBLIC ADDRESS";
+
+/* Class = "IBUITextField"; placeholder = "Current Password"; ObjectID = "PI3-NW-bVF"; */
+"PI3-NW-bVF.placeholder" = "Current Password";
+
+/* Class = "IBUILabel"; text = "Sending..."; ObjectID = "PY5-r2-zeB"; */
+"PY5-r2-zeB.text" = "Sending...";
+
+/* Class = "IBUILabel"; text = "Request Bitcoin"; ObjectID = "PYX-iO-gJ9"; */
+"PYX-iO-gJ9.text" = "Request Bitcoin";
+
+/* Class = "IBUIButton"; normalTitle = "Income"; ObjectID = "PmL-d6-vpJ"; */
+"PmL-d6-vpJ.normalTitle" = "Income";
+
+/* Class = "IBUIButton"; normalTitle = "Log In"; ObjectID = "Q2G-61-ExK"; */
+"Q2G-61-ExK.normalTitle" = "Log In";
+
+/* Class = "IBUITextField"; placeholder = "Re-enter Password"; ObjectID = "QzV-Gk-Vrs"; */
+"QzV-Gk-Vrs.placeholder" = "Re-enter Password";
+
+/* Class = "IBUIButton"; normalTitle = "Forgot Password"; ObjectID = "RVo-M5-ZXk"; */
+"RVo-M5-ZXk.normalTitle" = "Forgot Password";
+
+/* Class = "IBUILabel"; text = "Require PIN above amount"; ObjectID = "Rid-6B-Lv4"; */
+"Rid-6B-Lv4.text" = "Require PIN above amount";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "RqX-ow-U05"; */
+"RqX-ow-U05.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Transaction Details"; ObjectID = "S6o-KK-lbq"; */
+"S6o-KK-lbq.text" = "Transaction Details";
+
+/* Class = "IBUILabel"; text = "BTC"; ObjectID = "S8Q-An-svf"; */
+"S8Q-An-svf.text" = "BTC";
+
+/* Class = "IBUILabel"; text = "From:"; ObjectID = "SMT-jD-Uec"; */
+"SMT-jD-Uec.text" = "From:";
+
+/* Class = "IBUILabel"; text = "0.1.0-mainnet"; ObjectID = "SXK-F7-NoK"; */
+"SXK-F7-NoK.text" = "0.1.0-mainnet";
+
+/* Class = "IBUILabel"; text = "4 Digit PIN"; ObjectID = "ScE-Ny-R3i"; */
+"ScE-Ny-R3i.text" = "4 Digit PIN";
+
+/* Class = "IBUIButton"; normalTitle = "Switch User"; ObjectID = "Szb-Pc-bx6"; */
+"Szb-Pc-bx6.normalTitle" = "Switch User";
+
+/* Class = "IBUITextField"; placeholder = "User Name"; ObjectID = "TCB-w9-Wgd"; */
+"TCB-w9-Wgd.placeholder" = "User Name";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "TJ3-SX-hen"; */
+"TJ3-SX-hen.text" = "Label";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "TJm-Ie-PWq"; */
+"TJm-Ie-PWq.placeholder" = "Password";
+
+/* Class = "IBUILabel"; text = "5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF"; ObjectID = "U2R-0A-Vdq"; */
+"U2R-0A-Vdq.text" = "5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF";
+
+/* Class = "IBUITextField"; text = "0.0"; ObjectID = "UHx-LD-t4M"; */
+"UHx-LD-t4M.text" = "0.0";
+
+/* Class = "IBUILabel"; text = "To:"; ObjectID = "Uak-ip-kgV"; */
+"Uak-ip-kgV.text" = "To:";
+
+/* Class = "IBUILabel"; text = "Phone"; ObjectID = "Uf1-Hd-oNr"; */
+"Uf1-Hd-oNr.text" = "Phone";
+
+/* Class = "IBUITextField"; placeholder = "Amt (optional)"; ObjectID = "Ug3-Vw-VAD"; */
+"Ug3-Vw-VAD.placeholder" = "Amt (optional)";
+
+/* Class = "IBUITextField"; text = "0.00000"; ObjectID = "Ug3-Vw-VAD"; */
+"Ug3-Vw-VAD.text" = "0.00000";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "V5e-1n-K9Z"; */
+"V5e-1n-K9Z.placeholder" = "Password";
+
+/* Class = "IBUILabel"; text = "Categories"; ObjectID = "Vde-og-tHg"; */
+"Vde-og-tHg.text" = "Categories";
+
+/* Class = "IBUILabel"; text = "4 Digit PIN"; ObjectID = "WB0-Ox-RAw"; */
+"WB0-Ox-RAw.text" = "4 Digit PIN";
+
+/* Class = "IBUIButton"; normalTitle = "Email"; ObjectID = "WCA-P7-L3q"; */
+"WCA-P7-L3q.normalTitle" = "Email";
+
+/* Class = "IBUITextField"; placeholder = "Search"; ObjectID = "WMa-Cy-YRr"; */
+"WMa-Cy-YRr.placeholder" = "Search";
+
+/* Class = "IBUILabel"; text = "fee"; ObjectID = "WU8-fS-VMb"; */
+"WU8-fS-VMb.text" = "fee";
+
+/* Class = "IBUITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv"; */
+"X6G-HD-WUv.placeholder" = "Search";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "XJN-At-Qod"; */
+"XJN-At-Qod.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Web"; ObjectID = "XeE-e1-pX7"; */
+"XeE-e1-pX7.text" = "Web";
+
+/* Class = "IBUILabel"; text = "Wallet:"; ObjectID = "Xq1-GY-d2Y"; */
+"Xq1-GY-d2Y.text" = "Wallet:";
+
+/* Class = "IBUILabel"; text = "Send Status"; ObjectID = "XxH-iI-cot"; */
+"XxH-iI-cot.text" = "Send Status";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "Yfp-gi-q8F"; */
+"Yfp-gi-q8F.text" = "Label";
+
+/* Class = "IBUITextField"; placeholder = "City, State/Province, or Country"; ObjectID = "ZBb-rD-XHs"; */
+"ZBb-rD-XHs.placeholder" = "City, State/Province, or Country";
+
+/* Class = "IBUITextField"; placeholder = "Private key"; ObjectID = "ZTK-Sq-FqJ"; */
+"ZTK-Sq-FqJ.placeholder" = "Private key";
+
+/* Class = "IBUILabel"; text = "Sent From:"; ObjectID = "ZW8-Za-VVy"; */
+"ZW8-Za-VVy.text" = "Sent From:";
+
+/* Class = "IBUILabel"; text = "Total Balance"; ObjectID = "ZgP-7Q-PoB"; */
+"ZgP-7Q-PoB.text" = "Total Balance";
+
+/* Class = "IBUILabel"; text = "Sign Up"; ObjectID = "ZkD-2s-BfP"; */
+"ZkD-2s-BfP.text" = "Sign Up";
+
+/* Class = "IBUILabel"; text = "This Month"; ObjectID = "Zsg-Mo-aHL"; */
+"Zsg-Mo-aHL.text" = "This Month";
+
+/* Class = "IBUILabel"; text = "Mainnet"; ObjectID = "Zw4-k1-a82"; */
+"Zw4-k1-a82.text" = "Mainnet";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "a3J-4E-YSl"; */
+"a3J-4E-YSl.text" = "Label";
+
+/* Class = "IBUITextField"; text = "0.0"; ObjectID = "aWm-mP-gxj"; */
+"aWm-mP-gxj.text" = "0.0";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "beI-FV-03P"; */
+"beI-FV-03P.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "bu9-4x-j6f"; */
+"bu9-4x-j6f.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Swipe to View Business Directory"; ObjectID = "bv5-eJ-aMl"; */
+"bv5-eJ-aMl.text" = "Swipe to View Business Directory";
+
+/* Class = "IBUILabel"; text = "Wallets"; ObjectID = "c6k-sf-dw2"; */
+"c6k-sf-dw2.text" = "Wallets";
+
+/* Class = "IBUILabel"; text = "1CC3X2gu58d6wXUWMffpuzN9JAfTUWu4Kj"; ObjectID = "cIH-5H-WKu"; */
+"cIH-5H-WKu.text" = "1CC3X2gu58d6wXUWMffpuzN9JAfTUWu4Kj";
+
+/* Class = "IBUIButton"; normalTitle = "Skip This Step"; ObjectID = "cix-f2-i3I"; */
+"cix-f2-i3I.normalTitle" = "Skip This Step";
+
+/* Class = "IBUIButton"; normalTitle = "Forgot PIN"; ObjectID = "dAN-gQ-Vd0"; */
+"dAN-gQ-Vd0.normalTitle" = "Forgot PIN";
+
+/* Class = "IBUILabel"; text = "Near You"; ObjectID = "dJQ-W9-yUR"; */
+"dJQ-W9-yUR.text" = "Near You";
+
+/* Class = "IBUILabel"; text = "$3.15"; ObjectID = "dSV-XA-npo"; */
+"dSV-XA-npo.text" = "$3.15";
+
+/* Class = "IBUITextField"; placeholder = "Amt (optional)"; ObjectID = "dY3-MX-MNV"; */
+"dY3-MX-MNV.placeholder" = "Amt (optional)";
+
+/* Class = "IBUITextField"; text = "0.00"; ObjectID = "dY3-MX-MNV"; */
+"dY3-MX-MNV.text" = "0.00";
+
+/* Class = "IBUILabel"; text = "Export"; ObjectID = "df7-Ds-9wI"; */
+"df7-Ds-9wI.text" = "Export";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "djr-fy-moN"; */
+"djr-fy-moN.text" = "Label";
+
+/* Class = "IBUIButton"; normalTitle = "Next"; ObjectID = "e3p-Sp-KAc"; */
+"e3p-Sp-KAc.normalTitle" = "Next";
+
+/* Class = "IBUILabel"; text = "Categories"; ObjectID = "eQh-NG-MLn"; */
+"eQh-NG-MLn.text" = "Categories";
+
+/* Class = "IBUILabel"; text = "Directory"; ObjectID = "efU-iU-0QP"; */
+"efU-iU-0QP.text" = "Directory";
+
+/* Class = "IBUITextField"; placeholder = "PIN Spending Limit"; ObjectID = "egu-Uy-luw"; */
+"egu-Uy-luw.placeholder" = "PIN Spending Limit";
+
+/* Class = "IBUILabel"; text = "10/15/2014"; ObjectID = "elg-44-b1O"; */
+"elg-44-b1O.text" = "10/15/2014";
+
+/* Class = "IBUILabel"; text = "Always confirm for future transactions"; ObjectID = "eoS-dN-sXy"; */
+"eoS-dN-sXy.text" = "Always confirm for future transactions";
+
+/* Class = "IBUILabel"; text = "Type BTC"; ObjectID = "foH-la-zuu"; */
+"foH-la-zuu.text" = "Type BTC";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "g6f-f3-w6p"; */
+"g6f-f3-w6p.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Hours..."; ObjectID = "gA3-Mp-du2"; */
+"gA3-Mp-du2.text" = "Hours...";
+
+/* Class = "IBUIButton"; normalTitle = "Complete Signup"; ObjectID = "gIX-pR-SaU"; */
+"gIX-pR-SaU.normalTitle" = "Complete Signup";
+
+/* Class = "IBUILabel"; text = "Type BTC"; ObjectID = "ga1-R0-wof"; */
+"ga1-R0-wof.text" = "Type BTC";
+
+/* Class = "IBUILabel"; text = "Settings"; ObjectID = "h7A-2J-B9v"; */
+"h7A-2J-B9v.text" = "Settings";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "iE3-Jv-3vs"; */
+"iE3-Jv-3vs.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Camera unavailable"; ObjectID = "iXW-st-n5q"; */
+"iXW-st-n5q.text" = "Camera unavailable";
+
+/* Class = "IBUILabel"; text = "(Requires password above daily limit)"; ObjectID = "ifv-G8-Cxe"; */
+"ifv-G8-Cxe.text" = "(Requires password above daily limit)";
+
+/* Class = "IBUILabel"; text = "This Week"; ObjectID = "ihd-bm-hZb"; */
+"ihd-bm-hZb.text" = "This Week";
+
+/* Class = "IBUILabel"; text = "1.00 mBTC = $0.60 USD"; ObjectID = "jwC-1c-veH"; */
+"jwC-1c-veH.text" = "1.00 mBTC = $0.60 USD";
+
+/* Class = "IBUILabel"; text = "Transactions"; ObjectID = "k2v-Gd-mWv"; */
+"k2v-Gd-mWv.text" = "Transactions";
+
+/* Class = "IBUILabel"; text = "To:"; ObjectID = "k2x-c8-HxP"; */
+"k2x-c8-HxP.text" = "To:";
+
+/* Class = "IBUIButton"; normalTitle = "Save"; ObjectID = "kjs-dz-76a"; */
+"kjs-dz-76a.normalTitle" = "Save";
+
+/* Class = "IBUILabel"; text = "Business Name"; ObjectID = "lCQ-mB-Xjh"; */
+"lCQ-mB-Xjh.text" = "Business Name";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "lFC-s8-IJT"; */
+"lFC-s8-IJT.text" = "Label";
+
+/* Class = "IBUIButton"; normalTitle = "SMS"; ObjectID = "mkM-bm-hN8"; */
+"mkM-bm-hN8.normalTitle" = "SMS";
+
+/* Class = "IBUILabel"; text = "From:"; ObjectID = "n3h-9z-3tD"; */
+"n3h-9z-3tD.text" = "From:";
+
+/* Class = "IBUIButton"; normalTitle = "Done"; ObjectID = "n7B-WE-395"; */
+"n7B-WE-395.normalTitle" = "Done";
+
+/* Class = "IBUILabel"; text = "John Smith"; ObjectID = "nLx-fU-Gvx"; */
+"nLx-fU-Gvx.text" = "John Smith";
+
+/* Class = "IBUILabel"; text = "Bitcoin Wallet"; ObjectID = "nae-d6-xoW"; */
+"nae-d6-xoW.text" = "Bitcoin Wallet";
+
+/* Class = "IBUITextField"; placeholder = "Daily Spend Limit"; ObjectID = "o7c-0i-ioy"; */
+"o7c-0i-ioy.placeholder" = "Daily Spend Limit";
+
+/* Class = "IBUIButton"; normalTitle = "(coming soon)        ."; ObjectID = "o9H-k9-0fs"; */
+"o9H-k9-0fs.normalTitle" = "(coming soon)        .";
+
+/* Class = "IBUILabel"; text = "Address"; ObjectID = "oPG-fA-f9b"; */
+"oPG-fA-f9b.text" = "Address";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "pX1-NU-49a"; */
+"pX1-NU-49a.text" = "Label";
+
+/* Class = "IBUITextField"; placeholder = "Create PIN"; ObjectID = "puA-fb-r0H"; */
+"puA-fb-r0H.placeholder" = "Create PIN";
+
+/* Class = "IBUILabel"; text = "Network:"; ObjectID = "qLK-qd-7qg"; */
+"qLK-qd-7qg.text" = "Network:";
+
+/* Class = "IBUILabel"; text = "USD"; ObjectID = "rDW-FH-GD0"; */
+"rDW-FH-GD0.text" = "USD";
+
+/* Class = "IBUILabel"; text = "App Version"; ObjectID = "sZm-Gx-M8r"; */
+"sZm-Gx-M8r.text" = "App Version";
+
+/* Class = "IBUILabel"; text = "Daily Spending Limit"; ObjectID = "sgY-Eq-QTK"; */
+"sgY-Eq-QTK.text" = "Daily Spending Limit";
+
+/* Class = "IBUIButton"; normalTitle = "Max"; ObjectID = "shF-7X-2GL"; */
+"shF-7X-2GL.normalTitle" = "Max";
+
+/* Class = "IBUIButton"; normalTitle = "Cancel"; ObjectID = "th1-bn-E4x"; */
+"th1-bn-E4x.normalTitle" = "Cancel";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "uD8-yl-zpf"; */
+"uD8-yl-zpf.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "urJ-xg-F01"; */
+"urJ-xg-F01.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Scan QR Code or use photo"; ObjectID = "vVZ-Kb-RwQ"; */
+"vVZ-Kb-RwQ.text" = "Scan QR Code or use photo";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "wrf-OC-DKs"; */
+"wrf-OC-DKs.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap"; */
+"wy7-Kv-3ap.text" = "Address 1234";
+
+/* Class = "IBUIButton"; normalTitle = "Done"; ObjectID = "x8T-QG-WiU"; */
+"x8T-QG-WiU.normalTitle" = "Done";
+
+/* Class = "IBUILabel"; text = "Scan QR Code or use photo"; ObjectID = "xGm-o9-j7u"; */
+"xGm-o9-j7u.text" = "Scan QR Code or use photo";
+
+/* Class = "IBUILabel"; text = "To:"; ObjectID = "xKp-jc-8KT"; */
+"xKp-jc-8KT.text" = "To:";
+
+/* Class = "IBUILabel"; text = "Spending Limits"; ObjectID = "ysZ-jm-fOP"; */
+"ysZ-jm-fOP.text" = "Spending Limits";

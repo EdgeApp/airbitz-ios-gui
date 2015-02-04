@@ -21,7 +21,7 @@ typedef enum ePopupPickerPosition
 
 @interface PopupPickerView : UIView
 
-@property (nonatomic, strong)   IBOutlet UIImageView            *arrowImage;
+//@property (nonatomic, strong)   IBOutlet UIImageView            *arrowImage;
 
 @property (nonatomic, assign)   id                              userData;
 @property (nonatomic, assign)   BOOL                            showOptions;

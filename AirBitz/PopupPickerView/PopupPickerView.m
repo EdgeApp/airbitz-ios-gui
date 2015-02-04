@@ -9,17 +9,17 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PopupPickerView.h"
 
-#define DEFAULT_WIDTH           300
+#define DEFAULT_WIDTH           330
 
-#define DEFAULT_CELL_HEIGHT     44
+#define DEFAULT_CELL_HEIGHT     40
 
 #define OFFSET_YPOS             45  // how much to offset the y position
 
-#define ARROW_INSET             10.0
+#define ARROW_INSET             0.0
 
 #define DATE_PICKER_HEIGHT      216
 
-#define POPUP_STROKE_WIDTH		1.0	//width of the thin border around the entire popup picker
+#define POPUP_STROKE_WIDTH		0.0	//width of the thin border around the entire popup picker
 
 @interface PopupPickerView () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 {
@@ -163,7 +163,8 @@ CGRect keyboardFrame;
 	[parentView addSubview:popup];
 
     // calculate the border thickness
-    CGFloat borderThickness = (popup.frame.size.height - popup->table.frame.size.height) / 2.0;
+//    CGFloat borderThickness = (popup.frame.size.height - popup->table.frame.size.height) / 2.0;
+    CGFloat borderThickness = 0.0f;
     
     // set the strings and categories
 	popup.strings = strings;
@@ -210,11 +211,11 @@ CGRect keyboardFrame;
     // start the position to the upper-left corner of the positioning view
     newFrame.origin = [viewToPointTo.superview convertPoint:viewToPointTo.frame.origin toView:popup.superview];
     
-	CGRect imageFrame = popup.arrowImage.frame;
-	UIImage *image = [UIImage imageNamed:@"picker_left_point.png"];
-	imageFrame.size = image.size;
-	popup.arrowImage.frame = imageFrame;
-	popup.arrowImage.image = image;
+//	CGRect imageFrame = popup.arrowImage.frame;
+//	UIImage *image = [UIImage imageNamed:@"picker_left_point.png"];
+//	imageFrame.size = image.size;
+//	popup.arrowImage.frame = imageFrame;
+//	popup.arrowImage.image = image;
 	
     // if this is above or below
     if ((PopupPickerPosition_Below == position) || (PopupPickerPosition_Above == position))
@@ -227,13 +228,13 @@ CGRect keyboardFrame;
         {
             // put it under the positioning view control
             newFrame.origin.y += viewToPointTo.frame.size.height;
-            newFrame.origin.y += popup.arrowImage.frame.size.height - 10;  // offset by arrow height
+//            newFrame.origin.y += popup.arrowImage.frame.size.height - 10;  // offset by arrow height
         }
         else //PopupPickerPosition_Above
         {
             // put it above the positioning view
             newFrame.origin.y -= newFrame.size.height;
-            newFrame.origin.y -= popup.arrowImage.frame.size.height - 10;  // offset by arrow height
+//            newFrame.origin.y -= popup.arrowImage.frame.size.height - 10;  // offset by arrow height
         }
         
         // makes sure the picker is within the parents bounds
@@ -259,6 +260,7 @@ CGRect keyboardFrame;
         popup.frame = newFrame;
         
         // set up the pointer position
+        /*
         CGRect arrowFrame = popup.arrowImage.frame;
         if (PopupPickerPosition_Below == position)
         {
@@ -278,7 +280,7 @@ CGRect keyboardFrame;
             CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI * 1.5 );
             [popup.arrowImage setTransform:rotate];
         }
-        
+
         // we need the arrow to be centered on the button, start with the pos view in parent coords
         CGRect frameForArrowRef = [viewToPointTo.superview convertRect:viewToPointTo.frame toView:popup];
         
@@ -287,6 +289,7 @@ CGRect keyboardFrame;
         
         // set the final arrow location
         popup.arrowImage.frame = arrowFrame;
+         */
     }
     else // if ((PopupPickerPosition_Left == position) || (PopupPickerPosition_Right == position))
     {
@@ -298,13 +301,13 @@ CGRect keyboardFrame;
         {
             // put it to the right of the positioning frame
             newFrame.origin.x += viewToPointTo.frame.size.width;
-            newFrame.origin.x += popup.arrowImage.frame.size.width;  // offset by arrow width
+//            newFrame.origin.x += popup.arrowImage.frame.size.width;  // offset by arrow width
         }
         else // if (PopupPickerPosition_Left == position)
         {
             // put it to the left of the positioning frame
             newFrame.origin.x -= newFrame.size.width;             
-            newFrame.origin.x -= (popup.arrowImage.frame.size.width - ARROW_INSET);  // offset by arrow width
+//            newFrame.origin.x -= (popup.arrowImage.frame.size.width - ARROW_INSET);  // offset by arrow width
         }
         
         // makes sure the picker is within the parents bounds
@@ -323,6 +326,7 @@ CGRect keyboardFrame;
         popup.frame = newFrame;
         
         // set up the pointer position
+        /*
         CGRect arrowFrame = popup.arrowImage.frame;
         if (PopupPickerPosition_Right == position)
         {
@@ -356,6 +360,7 @@ CGRect keyboardFrame;
 		}
         // set the final arrow location
         popup.arrowImage.frame = arrowFrame;
+         */
     }
     
     // assign the delegate
@@ -438,20 +443,20 @@ CGRect keyboardFrame;
     {
         if ((self.position == PopupPickerPosition_Left) || (self.position == PopupPickerPosition_Right))
         {
-            CGRect frameArrow = self.arrowImage.frame;
+//            CGRect frameArrow = self.arrowImage.frame;
             
             if (frameSelf.origin.y - self.viewOptions.frame.size.height >= 0)
             {
                 frameSelf.origin.y -= self.viewOptions.frame.size.height;
-                frameArrow.origin.y += self.viewOptions.frame.size.height;
+//                frameArrow.origin.y += self.viewOptions.frame.size.height;
             }
             else
             {
                 frameSelf.origin.y += self.viewOptions.frame.size.height;
-                frameArrow.origin.y -= self.viewOptions.frame.size.height;
+//                frameArrow.origin.y -= self.viewOptions.frame.size.height;
             }
             
-            self.arrowImage.frame = frameArrow;
+//            self.arrowImage.frame = frameArrow;
         }
         frameSelf.size.height += self.viewOptions.frame.size.height;
     }
