@@ -47,8 +47,8 @@ typedef enum eAppMode
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, InfoViewDelegate>
-                                  InfoViewDelegate, MFMailComposeViewControllerDelegate>
+                                  TwoFactorScanViewControllerDelegate, InfoViewDelegate,
+                                  MFMailComposeViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_directoryViewController;
