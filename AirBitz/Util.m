@@ -189,4 +189,98 @@
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNum]]];
 }
 
++ (UIViewController *)animateIn:(NSString *)identifier parentController:(UIViewController *)parent
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:identifier];
+
+    CGRect frame = parent.view.bounds;
+    frame.origin.x = frame.size.width;
+    controller.view.frame = frame;
+    [parent.view addSubview:controller.view];
+
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [UIView animateWithDuration:0.35
+                            delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                        animations:^
+        {
+            controller.view.frame = parent.view.bounds;
+        }
+                        completion:^(BOOL finished)
+        {
+            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+        }];
+    return controller;
+}
+
++ (void)animateOut:(UIViewController *)controller parentController:(UIViewController *)parent complete:(void(^)(void))cb
+{
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+        CGRect frame = parent.view.bounds;
+        frame.origin.x = frame.size.width;
+        controller.view.frame = frame;
+    }
+    completion:^(BOOL finished) {
+        [controller.view removeFromSuperview];
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+        cb();
+    }];
+}
+
++ (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height
+{
+	//converts raw monochrome bitmap data (each byte is a 1 or a 0 representing a pixel) into a UIImage
+	char *pixels = malloc(4 * width * width);
+	char *buf = pixels;
+		
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			if (data[(y * width) + x] & 0x1)
+			{
+				//printf("%c", '*');
+				*buf++ = 0;
+				*buf++ = 0;
+				*buf++ = 0;
+				*buf++ = 255;
+			}
+			else
+			{
+				printf(" ");
+				*buf++ = 255;
+				*buf++ = 255;
+				*buf++ = 255;
+				*buf++ = 255;
+			}
+		}
+		//printf("\n");
+	}
+	
+	CGContextRef ctx;
+	CGImageRef imageRef;
+	
+	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+	ctx = CGBitmapContextCreate(pixels,
+								(float)width,
+								(float)height,
+								8,
+								width * 4,
+								colorSpace,
+								(CGBitmapInfo)kCGImageAlphaPremultipliedLast ); //documentation says this is OK
+	CGColorSpaceRelease(colorSpace);
+	imageRef = CGBitmapContextCreateImage (ctx);
+	UIImage* rawImage = [UIImage imageWithCGImage:imageRef];
+	
+	CGContextRelease(ctx);
+	CGImageRelease(imageRef);
+	free(pixels);
+	return rawImage;
+}
+
 @end

@@ -848,16 +848,15 @@ static NSTimer *_notificationTimer;
     return arrayQuestions;
 }
 
-+ (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName
++ (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName status:(tABC_Error *)error
 {
     BOOL bValid = NO;
     bool bABCValid = false;
 
-    tABC_Error Error;
     tABC_CC result = ABC_CheckRecoveryAnswers([strUserName UTF8String],
                                               [strAnswers UTF8String],
                                               &bABCValid,
-                                              &Error);
+                                              error);
     if (ABC_CC_Ok == result)
     {
         if (bABCValid == true)
@@ -867,7 +866,7 @@ static NSTimer *_notificationTimer;
     }
     else
     {
-        [Util printABC_Error:&Error];
+        [Util printABC_Error:error];
     }
 
     return bValid;
@@ -1047,10 +1046,16 @@ static NSTimer *_notificationTimer;
         [LocalSettings controller].cachedUsername = [User Singleton].name;
     }
 
+    // Try to cache the OTP secret if exists
+    tABC_Error error;
+    ABC_GetTwoFactorSecret([[User Singleton].name UTF8String],
+        [[User Singleton].password UTF8String],NULL, &error);
+
     [LocalSettings saveAll];
     bDataFetched = NO;
     [CoreBridge startWatchers];
     [CoreBridge startQueues];
+
 
     iLoginTimeSeconds = (int) [[NSDate date] timeIntervalSince1970];
 }
@@ -1700,6 +1705,11 @@ static NSTimer *_notificationTimer;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:self];
 }
 
+- (void)notifyOtpRequired:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_OTP_REQUIRED object:self];
+}
+
 - (void)notifyExchangeRate:(NSArray *)params
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:self];
@@ -1740,6 +1750,8 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         };
         NSArray *params = [NSArray arrayWithObjects: data, nil];
         [coreBridge performSelectorOnMainThread:@selector(notifyReceiving:) withObject:params waitUntilDone:NO];
+    } else if (pInfo->eventType == ABC_AsyncEventType_OtpRequired) {
+        [coreBridge performSelectorOnMainThread:@selector(notifyOtpRequired:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
         [coreBridge performSelectorOnMainThread:@selector(notifyBlockHeight:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_ExchangeRateUpdate) {

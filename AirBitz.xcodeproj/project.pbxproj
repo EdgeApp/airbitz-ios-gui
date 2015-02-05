@@ -1071,6 +1071,14 @@
 		B5FD393618F0A67100BE2670 /* transactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393518F0A67100BE2670 /* transactionDetails.html */; };
 		B5FD394718F240E600BE2670 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */; };
 		C40BC5D5199479CF00149E12 /* libcsv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C40BC5D4199479CF00149E12 /* libcsv.a */; };
+		DA1333901A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */; };
+		DA1333911A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */; };
+		DA1333981A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1333971A7B12E00051DE14 /* TwoFactorScanViewController.m */; };
+		DA1333991A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1333971A7B12E00051DE14 /* TwoFactorScanViewController.m */; };
+		DA13339D1A7B203C0051DE14 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13339C1A7B203C0051DE14 /* ScanView.m */; };
+		DA13339E1A7B203C0051DE14 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13339C1A7B203C0051DE14 /* ScanView.m */; };
+		DA1333A01A7B20840051DE14 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */; };
+		DA1333A11A7B20840051DE14 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */; };
 		DA4CFE45196F897B002CFD49 /* drag_bar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */; };
 		DA4CFE46196F897B002CFD49 /* drag_bar~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */; };
 		DA7693881964FE8A0022EE64 /* copy_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */; };
@@ -1096,6 +1104,8 @@
 		DAAC216C1963A35900CC0F1E /* btn_album@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */; };
 		DAAC216D1963A35900CC0F1E /* btn_album~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */; };
 		DABA3486198DFEE300EFAB13 /* infoRequestQR.html in Resources */ = {isa = PBXBuildFile; fileRef = DABA3485198DFEE300EFAB13 /* infoRequestQR.html */; };
+		DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
+		DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1819,6 +1829,13 @@
 		B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCompleteTextField.m; sourceTree = "<group>"; };
 		C40BC5D4199479CF00149E12 /* libcsv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcsv.a; path = AirBitz/ABC/libcsv.a; sourceTree = "<group>"; };
 		DA14ABCA1A8066A300C30F08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		DA13338E1A7AECA70051DE14 /* TwoFactorShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorShowViewController.h; sourceTree = "<group>"; };
+		DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorShowViewController.m; sourceTree = "<group>"; };
+		DA1333961A7B12E00051DE14 /* TwoFactorScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorScanViewController.h; sourceTree = "<group>"; };
+		DA1333971A7B12E00051DE14 /* TwoFactorScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorScanViewController.m; sourceTree = "<group>"; };
+		DA13339B1A7B203C0051DE14 /* ScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
+		DA13339C1A7B203C0051DE14 /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
+		DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ScanView~iphone.xib"; sourceTree = "<group>"; };
 		DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar@2x~iphone.png"; sourceTree = "<group>"; };
 		DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar~iphone.png"; sourceTree = "<group>"; };
 		DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copy_btn@2x~iphone.png"; sourceTree = "<group>"; };
@@ -1839,6 +1856,8 @@
 		DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album@2x~iphone.png"; sourceTree = "<group>"; };
 		DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album~iphone.png"; sourceTree = "<group>"; };
 		DABA3485198DFEE300EFAB13 /* infoRequestQR.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoRequestQR.html; sourceTree = "<group>"; };
+		DAFC799E1A81CCBE00E9039D /* TwoFactorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorMenuViewController.h; sourceTree = "<group>"; };
+		DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorMenuViewController.m; sourceTree = "<group>"; };
 		E47C0EC32EE29D34C5A03A0B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -2419,6 +2438,7 @@
 				4C3C308B1918347F006923DE /* PopupPickerView */,
 				B5C0A9A718EA0D09008F302C /* Request */,
 				B5C0A9AB18EA0D78008F302C /* Send */,
+				DA13339A1A7B203C0051DE14 /* ScanView */,
 				B5004A2618A5C755003560A4 /* Server.h */,
 				B5C0A9B218EA0D99008F302C /* Settings */,
 				4C3C309A19199AB6006923DE /* StrokeGradientButton */,
@@ -2941,6 +2961,12 @@
 		B5C0A9B218EA0D99008F302C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				DAFC799E1A81CCBE00E9039D /* TwoFactorMenuViewController.h */,
+				DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */,
+				DA1333961A7B12E00051DE14 /* TwoFactorScanViewController.h */,
+				DA1333971A7B12E00051DE14 /* TwoFactorScanViewController.m */,
+				DA13338E1A7AECA70051DE14 /* TwoFactorShowViewController.h */,
+				DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */,
 				68390DB51A0406D600D3789F /* SpendingLimitsViewController.h */,
 				68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */,
 				B55A030F18EA538500845090 /* BooleanCell.h */,
@@ -3055,6 +3081,16 @@
 				B5E7F57918E4AAD5009B5844 /* User.m */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		DA13339A1A7B203C0051DE14 /* ScanView */ = {
+			isa = PBXGroup;
+			children = (
+				DA13339B1A7B203C0051DE14 /* ScanView.h */,
+				DA13339C1A7B203C0051DE14 /* ScanView.m */,
+				DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */,
+			);
+			path = ScanView;
 			sourceTree = "<group>";
 		};
 		DAA5784819C23C8200E972FC /* Text */ = {
@@ -3373,6 +3409,7 @@
 				7D98ADD819A7C550003D2BF6 /* btn_locateMe@2x~iphone.png in Resources */,
 				7D98ADD919A7C550003D2BF6 /* Red-X~iphone.png in Resources */,
 				7D98ADDA19A7C550003D2BF6 /* icon_export_dropbox@2x~iphone.png in Resources */,
+				DA1333A11A7B20840051DE14 /* ScanView~iphone.xib in Resources */,
 				7D98ADDB19A7C550003D2BF6 /* bkg_dark_header~iphone.png in Resources */,
 				7D98ADDC19A7C550003D2BF6 /* btn_slider~iphone.png in Resources */,
 				7D98ADDD19A7C550003D2BF6 /* logo_large~iphone.png in Resources */,
@@ -3596,6 +3633,7 @@
 				7D987AFA1A48BA8C00958AAD /* BitcoinReceived.mp3 in Resources */,
 				4C7C1257193D2CFC0096338D /* WalletExportQuicken.QIF in Resources */,
 				B55A030118EA206300845090 /* btn_done~iphone.png in Resources */,
+				DA1333A01A7B20840051DE14 /* ScanView~iphone.xib in Resources */,
 				7D4DA23B19EC82C600E3D571 /* btn_expand@2x~iphone.png in Resources */,
 				7D23D56319BD612F0042B87A /* background-errormessage@2x.png in Resources */,
 				B59C14E618C012B500AEA789 /* btn_checkmark@2x~iphone.png in Resources */,
@@ -4096,6 +4134,7 @@
 				7D98ACB819A7C550003D2BF6 /* DirectoryViewController.m in Sources */,
 				4CA4672C19B604CA004F9923 /* DL_URLServer.m in Sources */,
 				7D98ACB919A7C550003D2BF6 /* ShowWalletQRViewController.m in Sources */,
+				DA1333911A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */,
 				6806B2621A4A95960026A6F2 /* AudioController.m in Sources */,
 				7D98ACBA19A7C550003D2BF6 /* ExportWalletOptionsCell.m in Sources */,
 				7D98ACBB19A7C550003D2BF6 /* User.m in Sources */,
@@ -4124,6 +4163,7 @@
 				7D98ACCF19A7C550003D2BF6 /* WalletHeaderView.m in Sources */,
 				7D98ACD019A7C550003D2BF6 /* RecipientViewController.m in Sources */,
 				7D98ACD119A7C550003D2BF6 /* TransactionDetailsViewController.m in Sources */,
+				DA13339E1A7B203C0051DE14 /* ScanView.m in Sources */,
 				7D98ACD219A7C550003D2BF6 /* SendConfirmationViewController.m in Sources */,
 				7D98ACD319A7C550003D2BF6 /* CategoriesCell.m in Sources */,
 				7D98ACD419A7C550003D2BF6 /* MapView.m in Sources */,
@@ -4139,6 +4179,7 @@
 				7D98ACDB19A7C550003D2BF6 /* LocalSettings.m in Sources */,
 				7DFD22E41A1E716C008C43FB /* UIPhotoGalleryView.m in Sources */,
 				7D98ACDC19A7C550003D2BF6 /* NSDate+Helper.m in Sources */,
+				DA1333991A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */,
 				7D89E8CF1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C61A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				7D98ACDD19A7C550003D2BF6 /* PopupPickerView.m in Sources */,
@@ -4195,6 +4236,7 @@
 				7D98AD0C19A7C550003D2BF6 /* BD_Hours_Cell.m in Sources */,
 				7D98AD0D19A7C550003D2BF6 /* overviewCell.m in Sources */,
 				7D98AD0E19A7C550003D2BF6 /* SyncView.m in Sources */,
+				DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
 				7D98AD0F19A7C550003D2BF6 /* TabBarButton.m in Sources */,
 				7D98AD1019A7C550003D2BF6 /* PickerTextView.m in Sources */,
 			);
@@ -4219,6 +4261,7 @@
 				4CA4672B19B604CA004F9923 /* DL_URLServer.m in Sources */,
 				7DFD22E31A1E716C008C43FB /* UIPhotoGalleryView.m in Sources */,
 				B5C0A9CB18EA0FF0008F302C /* ShowWalletQRViewController.m in Sources */,
+				DA1333901A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */,
 				6806B2611A4A95960026A6F2 /* AudioController.m in Sources */,
 				4C7247B219352F730091C286 /* ExportWalletOptionsCell.m in Sources */,
 				B5E7F57A18E4AAD5009B5844 /* User.m in Sources */,
@@ -4247,6 +4290,7 @@
 				B5635A25193D0F8700345AEE /* WalletHeaderView.m in Sources */,
 				4C98CAEC199D53A2000009B5 /* RecipientViewController.m in Sources */,
 				B5C0A9C218EA0DD8008F302C /* TransactionDetailsViewController.m in Sources */,
+				DA13339D1A7B203C0051DE14 /* ScanView.m in Sources */,
 				B5C0A9B018EA0D78008F302C /* SendConfirmationViewController.m in Sources */,
 				4C3C30A1191B07C0006923DE /* CategoriesCell.m in Sources */,
 				B5C0A99018EA0B80008F302C /* MapView.m in Sources */,
@@ -4262,6 +4306,7 @@
 				7D7FB25D1A0847B300E4BB44 /* PINReLoginViewController.m in Sources */,
 				B516C1E818C54B07008CC6A1 /* NSDate+Helper.m in Sources */,
 				4C3C3093191834AC006923DE /* PopupPickerView.m in Sources */,
+				DA1333981A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */,
 				7D89E8CE1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C51A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				4C7247D41937A7520091C286 /* PayeeCell.m in Sources */,
@@ -4318,6 +4363,7 @@
 				B5C0A99F18EA0C10008F302C /* overviewCell.m in Sources */,
 				7DFD22E51A1E716C008C43FB /* UIPhotoGalleryViewController.m in Sources */,
 				6893E6CA19783FED0092DA04 /* SyncView.m in Sources */,
+				DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
 				B57C207D18C15009005D7245 /* TabBarButton.m in Sources */,
 				4C3C30A5191C1CAF006923DE /* PickerTextView.m in Sources */,
 			);

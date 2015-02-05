@@ -13,6 +13,7 @@
 #define KEY_LOCAL_SETTINGS_CACHED_USERNAME      @"cachedUsername"
 #define KEY_LOCAL_SETTINGS_PREV_NOTIF_ID        @"previousNotificationID"
 #define KEY_LOCAL_SETTINGS_NOTIFICATION_DATA    @"notificationData"
+#define KEY_LOCAL_SETTINGS_OTP_NOTIF_DATA       @"otpNotificationData"
 #define KEY_LOCAL_SETTINGS_CLIENT_ID            @"clientID"
 
 static BOOL bInitialized = NO;
@@ -66,13 +67,17 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     singleton.clientID = [defaults stringForKey:KEY_LOCAL_SETTINGS_CLIENT_ID];
 
     NSData *notifsData = [defaults objectForKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
-    if (notifsData)
-    {
+    if (notifsData) {
         singleton.notifications = [NSKeyedUnarchiver unarchiveObjectWithData:notifsData];
-    }
-    else
-    {
+    } else {
         singleton.notifications = [[NSMutableArray alloc] init];
+    }
+
+    NSData *notifsOtpData = [defaults objectForKey:KEY_LOCAL_SETTINGS_OTP_NOTIF_DATA];
+    if (notifsOtpData) {
+        singleton.otpNotifications = [NSKeyedUnarchiver unarchiveObjectWithData:notifsOtpData];
+    } else {
+        singleton.otpNotifications = [[NSMutableArray alloc] init];
     }
 }
 
@@ -90,8 +95,11 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     NSData *notifsData = [NSKeyedArchiver archivedDataWithRootObject:singleton.notifications];
     [defaults setObject:notifsData forKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
 
-	// flush the buffer
-	[defaults synchronize];
+    NSData *otpNotifsData = [NSKeyedArchiver archivedDataWithRootObject:singleton.otpNotifications];
+    [defaults setObject:otpNotifsData forKey:KEY_LOCAL_SETTINGS_OTP_NOTIF_DATA];
+
+    // flush the buffer
+    [defaults synchronize];
 }
 
 // returns the singleton 
@@ -113,6 +121,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
         self.bMerchantMode = NO;
         self.cachedUsername = nil;
         self.notifications = nil;
+        self.otpNotifications = nil;
         self.previousNotificationID = 0;
     }
     return self;

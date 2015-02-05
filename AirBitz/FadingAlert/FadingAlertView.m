@@ -76,11 +76,15 @@
         }
         completion:^(BOOL finished)
         {
-            [self.delegate fadingAlertDismissed:self];
+            if (self.delegate) {
+                [self.delegate fadingAlertDismissed:self];
+            }
         }];
     } else {
         self.alpha = 0.0;
-        [self.delegate fadingAlertDismissed:self];
+        if (self.delegate) {
+            [self.delegate fadingAlertDismissed:self];
+        }
     }
 }
 
