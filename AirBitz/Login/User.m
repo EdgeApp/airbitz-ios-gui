@@ -74,6 +74,9 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.sendState = kNormal;
     self.runLoop = [NSRunLoop currentRunLoop];
     self.PINLoginInvalidEntryCount = 0;
+    self.reviewNotified = NO;
+    self.loginCount = 0;
+    self.twoWeeksAfterFirstLoginTime = 0;
 
     return self;
 }
@@ -227,5 +230,72 @@ static User *singleton = nil;  // this will be the one and only object this stat
 {
     self.PINLoginInvalidEntryCount = 0;
 }
+
++ (bool)offerUserReview
+{
+    if(![User Singleton].reviewNotified && ([User Singleton].loginCountTriggered ||
+                                            [User Singleton].transactionCountTriggered || [User Singleton].timeUseTriggered)) {
+        [User Singleton].reviewNotified = true;
+        return true;
+    }
+    return false;
+}
+
+- (bool)loginCountTriggered
+{
+    bool ret = false;
+    if(self.loginCount != NSIntegerMax) {
+        if(++self.loginCount >= 7) {
+            self.loginCount = NSIntegerMax;
+            ret = true;
+        }
+    }
+    return ret;
+}
+
+- (bool)transactionCountTriggered
+{
+    if([User isLoggedIn])
+    {
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+        [CoreBridge loadWallets:arrayWallets
+                       archived:arrayArchivedWallets
+                        withTxs:YES];
+        int transactionCount = 0;
+        for (Wallet *curWallet in arrayWallets)
+        {
+            transactionCount += [curWallet.arrayTransactions count];
+        }
+        for (Wallet *curWallet in arrayArchivedWallets)
+        {
+            transactionCount += [curWallet.arrayTransactions count];
+        }
+        return transactionCount >= 7;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+- (bool)timeUseTriggered
+{
+    if(self.twoWeeksAfterFirstLoginTime == 0)
+    {
+        NSDateComponents *comps = [NSDateComponents new];
+        [comps setDay:+14];
+        self.twoWeeksAfterFirstLoginTime = [[NSCalendar currentCalendar] dateByAddingComponents:comps toDate:[NSDate date] options:0];
+        return false;
+    }
+    else {
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *difference = [calendar components:NSDayCalendarUnit
+                                                   fromDate:self.twoWeeksAfterFirstLoginTime toDate:[NSDate date] options:0];
+        NSInteger days = [difference day];
+        return days > 0;
+    }
+}
+
 
 @end

@@ -92,6 +92,11 @@
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
     
     self.nextButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
+    [self.nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.nextButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.nextButton.titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
+    UIImage *buttonImage = [UIImage imageNamed:@"btn_expand_green.png"];
+    [self.nextButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
 }
 
 -(void)awakeFromNib
@@ -609,6 +614,12 @@
 {
 	[self.BTC_TextField resignFirstResponder];
 	[self.USD_TextField resignFirstResponder];
+    if (!IS_IPHONE4 ) // condition where calculator is showing Next instead of Done
+    {
+        SInt64 amountSatoshi = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
+        RequestState state = [self isDonation:amountSatoshi] ? kDonation : kRequest;
+        [self LaunchQRCodeScreen:amountSatoshi withRequestState:state];
+    }
 }
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator

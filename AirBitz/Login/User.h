@@ -37,11 +37,15 @@
 @property (nonatomic) NSRunLoop *runLoop;
 @property (nonatomic) NSTimer *sendInvalidEntryTimer;
 @property (nonatomic) NSUInteger PINLoginInvalidEntryCount;
+@property (nonatomic) bool reviewNotified;
+@property (nonatomic) NSDate *twoWeeksAfterFirstLoginTime;
+@property (nonatomic) int loginCount;
 
 + (void)initAll;
 + (void)freeAll;
 + (User *)Singleton;
 + (bool)isLoggedIn;
++ (bool)offerUserReview;
 + (void)login:(NSString *)user password:(NSString *)pword;
 
 - (id)init;
@@ -54,5 +58,4 @@
 - (NSTimeInterval)getRemainingInvalidEntryWait;
 - (bool)haveExceededPINLoginInvalidEntries;
 - (void)resetPINLoginInvalidEntryCount;
-
 @end

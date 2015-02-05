@@ -2,6 +2,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol FadingAlertViewDelegate;
+@protocol UIGestureRecognizerDelegate;
 
 @interface FadingAlertView : UIView
 
@@ -12,7 +13,7 @@
 
 + (FadingAlertView *)CreateInsideView:(UIView *)parentView withDelegate:(id<FadingAlertViewDelegate>)delegate;
 
-- (void)blockButtons:(BOOL)blocking;
+- (void)blockModal:(BOOL)blocking;
 - (void)showSpinner:(BOOL)visible;
 - (void)show;
 - (void)showFading;
