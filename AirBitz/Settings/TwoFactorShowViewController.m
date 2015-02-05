@@ -325,6 +325,7 @@
     if (cc == ABC_CC_Ok) {
         _secret = nil;
         _isOn = NO;
+        [NotificationChecker resetOtpNotifications];
     }
     return cc;
 }

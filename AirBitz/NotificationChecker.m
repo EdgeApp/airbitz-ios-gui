@@ -12,6 +12,7 @@
 #import "CommonTypes.h"
 #import "LocalSettings.h"
 #import "CJSONDeserializer.h"
+#import "User.h"
 #import "ABC.h"
 
 #define OTP_NOTIFICATION          @"otp_notification"
@@ -156,7 +157,9 @@ static NotificationChecker *singleton = nil;
 {
     while ([[LocalSettings controller].otpNotifications count] > 0) {
         NSDictionary *notif = [[LocalSettings controller].otpNotifications firstObject];
-        [[LocalSettings controller].otpNotifications removeObject:notif];
+        if ([[notif objectForKey:@"id"] isEqualToString:[User Singleton].name]) {
+            [[LocalSettings controller].otpNotifications removeObject:notif];
+        }
     }
     [LocalSettings saveAll];
 }
