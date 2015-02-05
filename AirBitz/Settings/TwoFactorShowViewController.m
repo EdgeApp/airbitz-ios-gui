@@ -200,7 +200,7 @@
 - (BOOL)isResetPending:(tABC_Error *)error
 {
     BOOL bPending = NO;
-    const char *szUsernames = NULL;
+    char *szUsernames = NULL;
     tABC_CC cc = ABC_IsTwoFactorResetPending(&szUsernames, error);
     if (cc == ABC_CC_Ok) {
         bPending = [[[NSString alloc] initWithUTF8String:szUsernames] containsString:[User Singleton].name];
