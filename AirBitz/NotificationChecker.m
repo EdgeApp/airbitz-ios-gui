@@ -158,6 +158,7 @@ static NotificationChecker *singleton = nil;
         NSDictionary *notif = [[LocalSettings controller].otpNotifications firstObject];
         [[LocalSettings controller].otpNotifications removeObject:notif];
     }
+    [LocalSettings saveAll];
 }
 
 - (void)checkOtpResetPending
@@ -172,8 +173,7 @@ static NotificationChecker *singleton = nil;
     }
     usernames = [NSString stringWithUTF8String:szUsernames];
     usernames = [usernames stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    arrayUsers = [[NSMutableArray alloc] initWithArray:[[NSString stringWithUTF8String:szUsernames]
-                           componentsSeparatedByString:@"\n"]];
+    arrayUsers = [[NSMutableArray alloc] initWithArray:[usernames componentsSeparatedByString:@"\n"]];
     for (NSString *username in arrayUsers) {
         if (!username || ![username length]) {
             continue;
