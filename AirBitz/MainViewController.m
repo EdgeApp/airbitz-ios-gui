@@ -577,7 +577,7 @@ typedef enum eAppMode
         _fadingAlert.message = NSLocalizedString(@"Creating and securing wallet", nil);
         _fadingAlert.fadeDuration = 2;
         _fadingAlert.fadeDelay = 0;
-        [_fadingAlert blockButtons:YES];
+        [_fadingAlert blockModal:YES];
         [_fadingAlert showSpinner:YES];
         [_fadingAlert show];
         [CoreBridge setupNewAccount:_fadingAlert];
@@ -711,7 +711,7 @@ typedef enum eAppMode
     }
     else
     {
-        message = [NSString stringWithFormat:@"You received Bitcoin\n%@ (~%@)\nUse the Payee, Category, and Notes field to optionally tag your transaction", coin, fiat];
+        message = [NSString stringWithFormat:@"You received Bitcoin!\n%@ (~%@)\nUse the Payee, Category, and Notes field to optionally tag your transaction", coin, fiat];
         [_requestViewController resetViews];
         [self showTabBarAnimated:NO];
     }
@@ -720,7 +720,7 @@ typedef enum eAppMode
     _fadingAlert.message = message;
     _fadingAlert.fadeDuration = 2;
     _fadingAlert.fadeDelay = 5;
-    [_fadingAlert blockButtons:NO];
+    [_fadingAlert blockModal:NO];
     [_fadingAlert showSpinner:NO];
     [_fadingAlert showFading];
 }

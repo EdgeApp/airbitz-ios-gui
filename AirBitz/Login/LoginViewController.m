@@ -41,6 +41,7 @@ typedef enum eLoginMode
     SignUpViewController            *_signUpController;
     UITextField                     *_activeTextField;
     PasswordRecoveryViewController  *_passwordRecoveryController;
+    FadingAlertView                 *_fadingAlert;
 }
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
 @property (weak, nonatomic) IBOutlet UIView             *credentialsView;
@@ -619,18 +620,13 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
 
 - (void)showFadingError:(NSString *)message
 {
-    self.errorMessageText.text = message;
-    self.errorMessageView.alpha = 1.0;
-    [UIView animateWithDuration:ERROR_MESSAGE_FADE_DURATION
-                          delay:ERROR_MESSAGE_FADE_DELAY
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^
-     {
-         self.errorMessageView.alpha = 0.0;
-     }
-                     completion:^(BOOL finished)
-     {
-     }];
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
+    _fadingAlert.message = message;
+    _fadingAlert.fadeDuration = 2;
+    _fadingAlert.fadeDelay = 5;
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert showSpinner:NO];
+    [_fadingAlert showFading];
 }
 
 #pragma mark - Misc

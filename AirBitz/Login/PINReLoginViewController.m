@@ -14,7 +14,7 @@
 #import "LocalSettings.h"
 #import "APPINView.h"
 
-@interface PINReLoginViewController () <APPINViewDelegate>
+@interface PINReLoginViewController () <APPINViewDelegate, FadingAlertViewDelegate>
 {
     CGRect   _originalContentFrame;
     CGRect   _originalLogoFrame;
@@ -22,6 +22,7 @@
     CGPoint  _firstTouchPoint;
     BOOL     _bTouchesEnabled;
     NSUInteger _invalidEntryCount;
+    FadingAlertView                 *_fadingAlert;
 }
 @property (nonatomic, weak) IBOutlet UIView      *contentView;
 @property (nonatomic, weak) IBOutlet UIButton    *backButton;
@@ -232,18 +233,22 @@
 
 - (void)showFadingError:(NSString *)message
 {
-    self.errorMessageText.text = message;
-    self.errorMessageView.alpha = 1.0;
-    [UIView animateWithDuration:ERROR_MESSAGE_FADE_DURATION
-                          delay:ERROR_MESSAGE_FADE_DELAY
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^
-     {
-         self.errorMessageView.alpha = 0.0;
-     }
-                     completion:^(BOOL finished)
-     {
-     }];
+    [self.PINCodeView resignFirstResponder]; // hide keyboard
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert.message = message;
+    _fadingAlert.fadeDuration = 2;
+    _fadingAlert.fadeDelay = 5;
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert showSpinner:NO];
+    [_fadingAlert showFading];
+}
+
+#pragma mark - FadingAlertView delegate
+
+- (void)fadingAlertDismissed:(FadingAlertView *)view
+{
+    _fadingAlert = nil;
+    [self.PINCodeView becomeFirstResponder];
 }
 
 - (void)dismissErrorMessage

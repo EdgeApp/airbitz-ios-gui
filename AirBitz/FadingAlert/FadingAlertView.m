@@ -6,15 +6,29 @@
 #define ALERT_MESSAGE_FADE_DELAY 10
 #define ALERT_MESSAGE_FADE_DURATION 10
 
+static const NSUInteger kFinalViewTag = 3337;
+
 @interface FadingAlertView ()
 
++ (void)fadeOutView:(UIView *)view completion:(void (^)(BOOL finished))completion;
++ (void)hideAlertByTap:(UITapGestureRecognizer *)sender;
+
 @property (nonatomic, weak) IBOutlet UILabel *messageText;
-@property (nonatomic, weak) IBOutlet UIView *buttonBlocker;
+@property (nonatomic, weak) IBOutlet UIButton *buttonBlocker;
 @property (nonatomic, weak) IBOutlet UIView *activityIndicator;
 
 @end
 
+static FadingAlertView *currentView = nil;
+static NSTimer *timer = nil;
+static UIView *alert;
+
 @implementation FadingAlertView
+
++ (FadingAlertView *)currentView
+{
+    return currentView;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -26,23 +40,45 @@
 
 + (FadingAlertView *)CreateInsideView:(UIView *)parentView withDelegate:(id<FadingAlertViewDelegate>)delegate
 {
-	FadingAlertView *alert;
+//    //get window size and position
+//    CGRect windowRect = [[UIScreen mainScreen] bounds];
+//    
+//    //create the final view with a special tag
+//    FadingAlertView *resultView = [[FadingAlertView alloc] initWithFrame:windowRect];
+//    resultView.tag = kFinalViewTag; //set tag to retrieve later
+//    
+//
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-		alert = [[[NSBundle mainBundle] loadNibNamed:@"FadingAlertView~iphone" owner:nil options:nil] objectAtIndex:0];
+		currentView = [[[NSBundle mainBundle] loadNibNamed:@"FadingAlertView~iphone" owner:nil options:nil] objectAtIndex:0];
 	} else {
-		alert = [[[NSBundle mainBundle] loadNibNamed:@"FadingAlertView~ipad" owner:nil options:nil] objectAtIndex:0];
+		currentView = [[[NSBundle mainBundle] loadNibNamed:@"FadingAlertView~ipad" owner:nil options:nil] objectAtIndex:0];
 	}
     alert.alpha = 1.0;
-    alert.fadeDelay = ALERT_MESSAGE_FADE_DELAY;
-    alert.fadeDuration = ALERT_MESSAGE_FADE_DURATION;
-    alert.buttonBlocker.hidden = YES;
-    alert.activityIndicator.hidden = YES;
-    alert.delegate = delegate;
-	[parentView addSubview:alert];
-	return alert;
+    
+    currentView.tag = kFinalViewTag; //set tag to retrieve later
+    currentView.fadeDelay = ALERT_MESSAGE_FADE_DELAY;
+    currentView.fadeDuration = ALERT_MESSAGE_FADE_DURATION;
+    currentView.buttonBlocker.hidden = NO;
+    currentView.activityIndicator.hidden = YES;
+    currentView.delegate = delegate;
+    
+    //create shadow view by adding a black background with custom opacity
+    UIView *shadowView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    shadowView.backgroundColor = [UIColor blackColor];
+    shadowView.alpha = 0.1;
+    [currentView addSubview:shadowView];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:[FadingAlertView class] action:@selector(hideAlertByTap:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    [shadowView addGestureRecognizer:tapGesture];
+
+	[parentView addSubview:currentView];
+    
+    return currentView;
 }
 
-- (void)blockButtons:(BOOL)blocking
+- (void)blockModal:(BOOL)blocking
 {
     _buttonBlocker.hidden = !blocking;
 }
@@ -64,24 +100,82 @@
     [self dismiss:YES];
 }
 
++ (void)hideAlertByTap:(UITapGestureRecognizer *)sender {
+    if(!currentView.buttonBlocker.hidden)
+    {
+        return;
+    }
+    if(timer)
+    {
+        [timer invalidate];
+    }
+    if(currentView.delegate) {
+        [currentView.delegate fadingAlertDismissed:currentView];
+    }
+    //fade out and then remove from superview
+    [self fadeOutView:currentView
+           completion:^(BOOL finished) {
+               [currentView removeFromSuperview];
+               currentView = nil;
+           }];
+}
+
++ (void)fadeOutView:(UIView *)view completion:(void (^)(BOOL finished))completion {
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         [view setAlpha:0.0];
+                     }
+                     completion:completion];
+}
+
+- (void)timedOut
+{
+    [timer invalidate];
+    [UIView animateWithDuration:_fadeDuration
+             delay:0.0
+             options:UIViewAnimationOptionCurveEaseOut
+             animations:^{
+                self.alpha = 0.0;
+             }
+             completion:^(BOOL finished)
+             {
+                [currentView removeFromSuperview];
+                currentView = nil;
+                if(self.delegate) {
+                    [self.delegate fadingAlertDismissed:self];
+             }
+            }];
+}
+
 - (void)dismiss:(BOOL)animated
 {
     if (animated) {
-        [UIView animateWithDuration:_fadeDuration
-                              delay:_fadeDelay
-                            options:UIViewAnimationOptionCurveLinear
-                        animations:^
+        if(self.fadeDelay != 0)
         {
-            self.alpha = 0.0;
+            timer = [NSTimer scheduledTimerWithTimeInterval:_fadeDelay target:self selector:@selector(timedOut) userInfo:nil repeats:NO];
         }
-        completion:^(BOOL finished)
-        {
-            [self.delegate fadingAlertDismissed:self];
-        }];
     } else {
-        self.alpha = 0.0;
-        [self.delegate fadingAlertDismissed:self];
+        [currentView removeFromSuperview];
+        currentView = nil;
     }
 }
 
+#pragma mark - UIGestureRecognizer Delegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return YES;
+}
 @end
