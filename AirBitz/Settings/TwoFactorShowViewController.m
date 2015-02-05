@@ -201,7 +201,6 @@
 {
     BOOL bPending = NO;
     const char *szUsernames = NULL;
-    bool *pending = calloc(1, sizeof(BOOL));
     tABC_CC cc = ABC_IsTwoFactorResetPending(&szUsernames, error);
     if (cc == ABC_CC_Ok) {
         bPending = [[[NSString alloc] initWithUTF8String:szUsernames] containsString:[User Singleton].name];
@@ -421,7 +420,7 @@
 
 - (void)showFadingAlert:(NSString *)message
 {
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
     _fadingAlert.message = message;
     _fadingAlert.fadeDelay = 2;
     _fadingAlert.fadeDuration = 1;
@@ -431,11 +430,6 @@
 - (void)dismissErrorMessage
 {
     [_fadingAlert dismiss:NO];
-    _fadingAlert = nil;
-}
-
-- (void)fadingAlertDismissed:(FadingAlertView *)view
-{
     _fadingAlert = nil;
 }
 
