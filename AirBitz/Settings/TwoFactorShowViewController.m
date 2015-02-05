@@ -14,8 +14,8 @@
     NSString                    *_secret;
     TwoFactorMenuViewController *_tfaMenuViewController;
     FadingAlertView             *_fadingAlert;
-    BOOL                        isOn;
-    long                        timeout;
+    BOOL                        _isOn;
+    long                        _timeout;
 }
 
 @property (nonatomic, weak) IBOutlet UIScrollView            *scrollView;
@@ -62,7 +62,7 @@
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
 
-    isOn = NO;
+    _isOn = NO;
     [self updateTwoFactorUi:NO];
     _loadingSpinner.hidden = NO;
 
@@ -86,13 +86,14 @@
             [[User Singleton].password UTF8String], &on, &timeout, &Error);
     if (cc == ABC_CC_Ok) {
         dispatch_async(dispatch_get_main_queue(), ^(void){
-            isOn = on;
-            [self updateTwoFactorUi:isOn == true];
+            _isOn = on;
+            _timeout = timeout;
+            [self updateTwoFactorUi:_isOn == true];
             [self checkSecret:bMsg];
         });
     } else {
         dispatch_async(dispatch_get_main_queue(), ^(void){
-            isOn = on;
+            _isOn = on;
             [self updateTwoFactorUi:NO];
             [self showFadingAlert:NSLocalizedString(@"Unable to determine two factor status", nil)];
         });
@@ -104,7 +105,7 @@
     char *szSecret = NULL;
     _secret = nil;
     tABC_Error error;
-    if (isOn) {
+    if (_isOn) {
         tABC_CC cc = ABC_GetTwoFactorSecret([[User Singleton].name UTF8String],
             [[User Singleton].password UTF8String], &szSecret, &error);
         if (cc == ABC_CC_Ok && szSecret) {
@@ -118,7 +119,7 @@
             _requestSpinner.hidden = NO;
         }
     }
-    [self showQrCode:isOn];
+    [self showQrCode:_isOn];
 
     if (_secret != nil) {
         _requestSpinner.hidden = NO;
@@ -312,7 +313,7 @@
     tABC_CC cc = ABC_EnableTwoFactor([[User Singleton].name UTF8String],
         [[User Singleton].password UTF8String], &error);
     if (cc == ABC_CC_Ok) {
-        isOn = YES;
+        _isOn = YES;
     }
     return cc;
 }
@@ -323,7 +324,7 @@
         [[User Singleton].password UTF8String], &error);
     if (cc == ABC_CC_Ok) {
         _secret = nil;
-        isOn = NO;
+        _isOn = NO;
     }
     return cc;
 }
