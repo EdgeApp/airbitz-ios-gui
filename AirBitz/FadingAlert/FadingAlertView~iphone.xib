@@ -15,14 +15,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="573"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OYT-Tf-r4L" userLabel="AlertGroup">
+                <view contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="568" translatesAutoresizingMaskIntoConstraints="NO" id="OYT-Tf-r4L" userLabel="AlertGroup">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background-errormessage.png" translatesAutoresizingMaskIntoConstraints="NO" id="IVC-BB-3J0">
                             <rect key="frame" x="60" y="200" width="200" height="183"/>
                         </imageView>
                         <label autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alert Message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="2is-5E-X7J" userLabel="Message" customClass="LatoLabel">
-                            <rect key="frame" x="85" y="211" width="150" height="120"/>
+                            <rect key="frame" x="85" y="229" width="150" height="120"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -35,6 +35,7 @@
             </subviews>
             <connections>
                 <outlet property="activityIndicator" destination="Joy-6Y-Kdk" id="R2S-4F-jcd"/>
+                <outlet property="background" destination="IVC-BB-3J0" id="Xlg-ak-26N"/>
                 <outlet property="buttonBlocker" destination="nxm-IL-wEZ" id="yUU-BI-xOY"/>
                 <outlet property="messageText" destination="2is-5E-X7J" id="yvV-lv-54v"/>
             </connections>

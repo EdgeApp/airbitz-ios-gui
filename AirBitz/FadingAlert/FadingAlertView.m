@@ -6,8 +6,6 @@
 #define ALERT_MESSAGE_FADE_DELAY 10
 #define ALERT_MESSAGE_FADE_DURATION 10
 
-static const NSUInteger kFinalViewTag = 3337;
-
 @interface FadingAlertView ()
 
 + (void)fadeOutView:(UIView *)view completion:(void (^)(BOOL finished))completion;
@@ -16,6 +14,7 @@ static const NSUInteger kFinalViewTag = 3337;
 @property (nonatomic, weak) IBOutlet UILabel *messageText;
 @property (nonatomic, weak) IBOutlet UIButton *buttonBlocker;
 @property (nonatomic, weak) IBOutlet UIView *activityIndicator;
+@property (nonatomic, weak) IBOutlet UIImageView *background;
 
 @end
 
@@ -40,14 +39,6 @@ static UIView *alert;
 
 + (FadingAlertView *)CreateInsideView:(UIView *)parentView withDelegate:(id<FadingAlertViewDelegate>)delegate
 {
-//    //get window size and position
-//    CGRect windowRect = [[UIScreen mainScreen] bounds];
-//    
-//    //create the final view with a special tag
-//    FadingAlertView *resultView = [[FadingAlertView alloc] initWithFrame:windowRect];
-//    resultView.tag = kFinalViewTag; //set tag to retrieve later
-//    
-//
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
 		currentView = [[[NSBundle mainBundle] loadNibNamed:@"FadingAlertView~iphone" owner:nil options:nil] objectAtIndex:0];
 	} else {
@@ -55,7 +46,6 @@ static UIView *alert;
 	}
     alert.alpha = 1.0;
     
-    currentView.tag = kFinalViewTag; //set tag to retrieve later
     currentView.fadeDelay = ALERT_MESSAGE_FADE_DELAY;
     currentView.fadeDuration = ALERT_MESSAGE_FADE_DURATION;
     currentView.buttonBlocker.hidden = NO;
