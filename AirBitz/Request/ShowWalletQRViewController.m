@@ -125,6 +125,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 	self.qrCodeImageView.layer.magnificationFilter = kCAFilterNearest;
 	self.qrCodeImageView.image = self.qrCodeImage;
+    self.viewQRCodeFrame.layer.cornerRadius = 8;
+    self.viewQRCodeFrame.layer.masksToBounds = YES;
 	self.statusLabel.text = self.statusString;
 	//show first eight characters of address larger than rest
 	if(self.addressString.length >= 8)
@@ -657,9 +659,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)updateDisplayLayout
 {
+    self.buttonCancel.hidden = YES;
+
     // if we are on a smaller screen
     if (IS_IPHONE4 )
     {
+     /*
+     
         // be prepared! lots and lots of magic numbers here to jam the controls to fit on a small screen
 
         CGRect frame;
@@ -668,9 +674,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         frame.size.height = 135.0;
         self.imageBottomFrame.frame = frame;
 
-        self.buttonCancel.hidden = YES;
-        /*
-         
         frame = self.viewQRCodeFrame.frame;
         frame.origin.y = 67.0;
         self.viewQRCodeFrame.frame = frame;
