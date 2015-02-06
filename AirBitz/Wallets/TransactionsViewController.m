@@ -877,7 +877,9 @@
         cell.amountLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
         // set the photo
         cell.imagePhoto.image = [self imageForTransaction:transaction];
-        cell.viewPhoto.hidden = (cell.imagePhoto.image == nil);
+        cell.imagePhoto.hidden = (cell.imagePhoto.image == nil);
+        cell.imagePhoto.layer.cornerRadius = 5;
+        cell.imagePhoto.layer.masksToBounds = YES;
     
         CGRect dateFrame = cell.dateLabel.frame;
         CGRect addressFrame = cell.addressLabel.frame;

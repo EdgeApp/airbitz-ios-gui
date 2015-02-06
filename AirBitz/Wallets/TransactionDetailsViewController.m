@@ -266,12 +266,14 @@ typedef enum eRequestType
     _originalScrollableContentFrame = self.scrollableContentView.frame;
 
     // set up the photo view
-    CGFloat borderWidth = PHOTO_BORDER_WIDTH;
+    /*
+    CGFloat borderWidth = 0.0f;
     self.viewPhoto.frame = CGRectInset(self.viewPhoto.frame, -borderWidth, -borderWidth);
     self.viewPhoto.layer.borderColor = [PHOTO_BORDER_COLOR CGColor];
     self.viewPhoto.layer.borderWidth = borderWidth;
     self.viewPhoto.layer.cornerRadius = PHOTO_BORDER_CORNER_RADIUS;
     self.viewPhoto.layer.masksToBounds = YES;
+     */
     [self updatePhoto];
     
     // add left to right swipe detection for going back
@@ -598,10 +600,12 @@ typedef enum eRequestType
     if (imageForPhoto)
     {
         self.imagePhoto.image = imageForPhoto;
+        self.imagePhoto.layer.cornerRadius = 5;
+        self.imagePhoto.layer.masksToBounds = YES;
         bHavePhoto = YES;
     }
 
-    self.viewPhoto.hidden = !bHavePhoto;
+    self.imagePhoto.hidden = !bHavePhoto;
     self.photo = imageForPhoto;
 }
 
