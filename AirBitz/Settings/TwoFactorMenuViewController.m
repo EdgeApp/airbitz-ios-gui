@@ -123,6 +123,7 @@
     _fadingAlert.message = message;
     _fadingAlert.fadeDelay = 2;
     _fadingAlert.fadeDuration = 1;
+    [_fadingAlert blockModal:NO];
     [_fadingAlert showFading];
 }
 
