@@ -9,8 +9,7 @@
 #import "CoreBridge.h"
 
 @interface TwoFactorMenuViewController ()
-    <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate,
-    TwoFactorScanViewControllerDelegate, FadingAlertViewDelegate>
+    <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorScanViewControllerDelegate>
 {
     FadingAlertView             *_fadingAlert;
     TwoFactorScanViewController *_tfaScanViewController;
@@ -97,6 +96,7 @@
 
 - (void)exitWithBackButton:(BOOL)bBack
 {
+    [self dismissErrorMessage];
     [self.delegate twoFactorMenuViewControllerDone:self withBackButton:bBack];
 }
 
@@ -119,21 +119,17 @@
 
 - (void)showFadingAlert:(NSString *)message
 {
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
     _fadingAlert.message = message;
     _fadingAlert.fadeDelay = 2;
     _fadingAlert.fadeDuration = 1;
+    [_fadingAlert blockModal:NO];
     [_fadingAlert showFading];
 }
 
 - (void)dismissErrorMessage
 {
     [_fadingAlert dismiss:NO];
-    _fadingAlert = nil;
-}
-
-- (void)fadingAlertDismissed:(FadingAlertView *)view
-{
     _fadingAlert = nil;
 }
 

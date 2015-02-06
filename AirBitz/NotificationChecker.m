@@ -12,6 +12,7 @@
 #import "CommonTypes.h"
 #import "LocalSettings.h"
 #import "CJSONDeserializer.h"
+#import "User.h"
 #import "ABC.h"
 
 #define OTP_NOTIFICATION          @"otp_notification"
@@ -156,8 +157,11 @@ static NotificationChecker *singleton = nil;
 {
     while ([[LocalSettings controller].otpNotifications count] > 0) {
         NSDictionary *notif = [[LocalSettings controller].otpNotifications firstObject];
-        [[LocalSettings controller].otpNotifications removeObject:notif];
+        if ([[notif objectForKey:@"id"] isEqualToString:[User Singleton].name]) {
+            [[LocalSettings controller].otpNotifications removeObject:notif];
+        }
     }
+    [LocalSettings saveAll];
 }
 
 - (void)checkOtpResetPending
@@ -172,8 +176,7 @@ static NotificationChecker *singleton = nil;
     }
     usernames = [NSString stringWithUTF8String:szUsernames];
     usernames = [usernames stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    arrayUsers = [[NSMutableArray alloc] initWithArray:[[NSString stringWithUTF8String:szUsernames]
-                           componentsSeparatedByString:@"\n"]];
+    arrayUsers = [[NSMutableArray alloc] initWithArray:[usernames componentsSeparatedByString:@"\n"]];
     for (NSString *username in arrayUsers) {
         if (!username || ![username length]) {
             continue;
@@ -181,9 +184,10 @@ static NotificationChecker *singleton = nil;
         // If there is already an OTP notification, do not add another
         for (NSDictionary *d in [LocalSettings controller].otpNotifications) {
             if ([[d objectForKey:@"id"] isEqualToString:username]) {
-                continue;
+                goto exit;
             }
         }
+
 
         NSMutableDictionary *notif = [[NSMutableDictionary alloc] init];
         [notif setObject:username forKey:@"id"];

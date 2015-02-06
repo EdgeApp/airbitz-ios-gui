@@ -1508,7 +1508,7 @@ static NSTimer *_notificationTimer;
                                   0, NULL, &szUUID, &Error);
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
-            [fadingAlert dismiss:YES];
+            [fadingAlert dismiss:NO];
         });
         free(szUUID);
         [CoreBridge startWatchers];

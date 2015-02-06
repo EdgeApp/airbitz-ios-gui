@@ -172,7 +172,7 @@
                     _fadingAlert.message = NSLocalizedString(@"Creating and securing account", nil);
                     _fadingAlert.fadeDuration = 0;
                     _fadingAlert.fadeDelay = 0;
-                    [_fadingAlert blockButtons:YES];
+                    [_fadingAlert blockModal:YES];
                     [_fadingAlert showSpinner:YES];
                     [_fadingAlert show];
                     result = ABC_CreateAccount([self.userNameTextField.text UTF8String],
@@ -763,7 +763,6 @@
 							  otherButtonTitles:nil];
 		[alert show];
     }
-    [_fadingAlert dismiss:NO];
     [self blockUser:NO];
 }
 

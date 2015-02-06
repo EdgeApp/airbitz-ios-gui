@@ -1244,6 +1244,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     _fadingAlert.message = message;
     _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
     _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert showSpinner:NO];
     [_fadingAlert showFading];
 }
 
