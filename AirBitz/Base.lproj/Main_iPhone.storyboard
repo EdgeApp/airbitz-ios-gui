@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -1333,18 +1333,6 @@
                                 <rect key="frame" x="45" y="83" width="229" height="229"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="810-FP-oTH">
-                                <rect key="frame" x="34" y="464" width="251" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <size key="titleShadowOffset" width="0.0" height="1"/>
-                                <state key="normal" title="Cancel" backgroundImage="btn_big_blue.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="Cancel" destination="Nhq-ts-4tB" eventType="touchUpInside" id="1tA-tp-XWE"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qov-uI-G7t">
                                 <rect key="frame" x="34" y="411" width="80" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1455,7 +1443,6 @@
                         <outlet property="addressLabel1" destination="KUE-S9-d9J" id="Yhh-qY-l2u"/>
                         <outlet property="addressLabel2" destination="4Li-R2-dUi" id="NZU-wU-fsP"/>
                         <outlet property="amountLabel" destination="2FV-6E-gId" id="TuK-CX-L2B"/>
-                        <outlet property="buttonCancel" destination="810-FP-oTH" id="Igh-8p-sn2"/>
                         <outlet property="buttonCopyAddress" destination="Qov-uI-G7t" id="Zp6-bx-jv8"/>
                         <outlet property="connectedLine2" destination="B9X-O3-QF3" id="YkX-DI-qOt"/>
                         <outlet property="connectedLine3" destination="dSV-XA-npo" id="hQL-8m-J3U"/>
@@ -3532,7 +3519,7 @@
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="VjU-w1-oiT">
-                                                    <rect key="frame" x="11" y="10.5" width="253" height="30"/>
+                                                    <rect key="frame" x="11" y="11" width="253" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -5594,6 +5581,7 @@
         <image name="btn_alwaysConfirm_off.png" width="36" height="36"/>
         <image name="btn_alwaysConfirm_on.png" width="36" height="36"/>
         <image name="btn_big_blue.png" width="251" height="41"/>
+        <image name="btn_big_green.png" width="251" height="41"/>
         <image name="btn_blue.png" width="110" height="26"/>
         <image name="btn_cancel.png" width="143" height="41"/>
         <image name="btn_changeCategories.png" width="291" height="41"/>
