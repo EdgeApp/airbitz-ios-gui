@@ -952,10 +952,6 @@ typedef enum eAppMode
     {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [[User Singleton] clear];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-        {
-            [CoreBridge deletePINLogin];
-        });
         [self resetViews:nil];
         _passwordChangeAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Password Change", nil)
