@@ -184,9 +184,10 @@ static NotificationChecker *singleton = nil;
         // If there is already an OTP notification, do not add another
         for (NSDictionary *d in [LocalSettings controller].otpNotifications) {
             if ([[d objectForKey:@"id"] isEqualToString:username]) {
-                continue;
+                goto exit;
             }
         }
+
 
         NSMutableDictionary *notif = [[NSMutableDictionary alloc] init];
         [notif setObject:username forKey:@"id"];
