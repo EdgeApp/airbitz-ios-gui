@@ -586,6 +586,7 @@ typedef enum eLoginMode
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" parentController:self];
     _tfaMenuViewController.delegate = self;
+    _tfaMenuViewController.username = self.userNameTextField.text;
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
 }

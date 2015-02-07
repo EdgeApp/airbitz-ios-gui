@@ -339,6 +339,7 @@
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" parentController:self];
     _tfaMenuViewController.delegate = self;
+    _tfaMenuViewController.username = [User Singleton].name;
     _tfaMenuViewController.bStoreSecret = YES;
     [self initUI];
 }

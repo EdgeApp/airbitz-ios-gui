@@ -391,6 +391,7 @@ typedef enum eAlertType
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" parentController:self];
     _tfaMenuViewController.delegate = self;
+    _tfaMenuViewController.username = self.strUserName;
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
 }
@@ -415,7 +416,7 @@ typedef enum eAlertType
                 success = NO;
             }
         }
-        if (!success) {
+        if (!success && !bBack) {
             UIAlertView *alert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Unable to import token", nil)
                                 message:NSLocalizedString(@"We are sorry we are unable to import the token at this time.", nil)
