@@ -519,7 +519,14 @@
 - (void)updateTextFieldContents
 {
     tABC_Error error;
+    
+    if (_selectedWalletIndex >= [self.arrayWallets count])
+    {
+        return;
+    }
+    
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    
     self.exchangeRateLabel.text = [CoreBridge conversionString:wallet];
     self.USDLabel_TextField.text = wallet.currencyAbbrev;
 	if (_selectedTextField == self.BTC_TextField)
