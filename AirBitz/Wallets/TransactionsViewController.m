@@ -846,7 +846,7 @@
             }
             else if (transaction.confirmations == 0)
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"Unconfirmed"];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"Pending"];
                 cell.confirmationLabel.textColor = COLOR_NEGATIVE;
             }
             else if (transaction.confirmations == 1)
