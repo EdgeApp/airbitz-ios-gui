@@ -31,7 +31,7 @@
 
 static NSDictionary *_localeAsCurrencyNum;
 
-const int64_t RECOVERY_REMINDER_AMOUNT = 2000000;
+const int64_t RECOVERY_REMINDER_AMOUNT = 10000000;
 const int RECOVERY_REMINDER_COUNT = 2;
 
 static BOOL bInitialized = NO;
