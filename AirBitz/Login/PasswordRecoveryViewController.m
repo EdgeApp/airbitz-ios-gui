@@ -391,6 +391,7 @@ typedef enum eAlertType
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" parentController:self];
     _tfaMenuViewController.delegate = self;
+    _tfaMenuViewController.username = self.strUserName;
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
 }
@@ -399,22 +400,23 @@ typedef enum eAlertType
 
 - (void)twoFactorMenuViewControllerDone:(TwoFactorMenuViewController *)controller withBackButton:(BOOL)bBack
 {
-    _bSuccess = controller.bSuccess;
+    BOOL _bSuccess = controller.bSuccess;
     _secret = controller.secret;
     [Util animateOut:controller parentController:self complete:^(void) {
         _tfaMenuViewController = nil;
 
-        if (_bSuccess) {
+        BOOL success = _bSuccess;
+        if (success) {
             tABC_Error error;
             ABC_SetTwoFactorSecret([self.strUserName UTF8String], NULL, [_secret UTF8String], false, &error);
             if (error.code == ABC_CC_Ok) {
                 // Try again with OTP
                 [self CompleteSignup];
             } else {
-                _bSuccess = NO;
+                success = NO;
             }
         }
-        if (!_bSuccess) {
+        if (!success && !bBack) {
             UIAlertView *alert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Unable to import token", nil)
                                 message:NSLocalizedString(@"We are sorry we are unable to import the token at this time.", nil)

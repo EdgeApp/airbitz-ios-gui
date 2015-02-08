@@ -80,20 +80,20 @@
 - (void)doCheckStatus:(BOOL)bMsg
 {
     tABC_Error Error;
-    BOOL on = NO;
+    bool on = NO;
     long timeout = 0;
     tABC_CC cc = ABC_StatusTwoFactor([[User Singleton].name UTF8String],
             [[User Singleton].password UTF8String], &on, &timeout, &Error);
     if (cc == ABC_CC_Ok) {
         dispatch_async(dispatch_get_main_queue(), ^(void){
-            _isOn = on;
+            _isOn = on == true ? YES : NO;
             _timeout = timeout;
             [self updateTwoFactorUi:_isOn == true];
             [self checkSecret:bMsg];
         });
     } else {
         dispatch_async(dispatch_get_main_queue(), ^(void){
-            _isOn = on;
+            _isOn = on == true ? YES : NO;
             [self updateTwoFactorUi:NO];
             [self showFadingAlert:NSLocalizedString(@"Unable to determine two factor status", nil)];
         });
@@ -311,7 +311,7 @@
 - (tABC_CC)enableTwoFactor:(tABC_Error *)error
 {
     tABC_CC cc = ABC_EnableTwoFactor([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], &error);
+        [[User Singleton].password UTF8String], error);
     if (cc == ABC_CC_Ok) {
         _isOn = YES;
     }
@@ -321,7 +321,7 @@
 - (tABC_CC)disableTwoFactor:(tABC_Error *)error
 {
     tABC_CC cc = ABC_DisableTwoFactor([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], &error);
+        [[User Singleton].password UTF8String], error);
     if (cc == ABC_CC_Ok) {
         _secret = nil;
         _isOn = NO;
@@ -339,6 +339,7 @@
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" parentController:self];
     _tfaMenuViewController.delegate = self;
+    _tfaMenuViewController.username = [User Singleton].name;
     _tfaMenuViewController.bStoreSecret = YES;
     [self initUI];
 }
