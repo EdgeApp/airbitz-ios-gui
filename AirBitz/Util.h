@@ -18,6 +18,9 @@
 + (void)freeStringArray:(char **)aszStrings count:(unsigned int)count;
 + (NSString *)getNameFromAddressRecord:(ABRecordRef)person;
 + (void)callTelephoneNumber:(NSString *)telNum;
++ (void)stylizeTextField:(UITextField *)textField;
++ (void)stylizeTextView:(UITextView *)textField;
+
 
 + (UIViewController *)animateIn:(NSString *)identifier parentController:(UIViewController *)parent;
 + (void)animateOut:(UIViewController *)controller parentController:(UIViewController *)parent complete:(void(^)(void))cb;

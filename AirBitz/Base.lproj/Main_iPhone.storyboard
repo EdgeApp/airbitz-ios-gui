@@ -2777,13 +2777,8 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="EEe-WW-4Vt">
-                                                <rect key="frame" x="15" y="31" width="230" height="36"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                            </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="lxC-qf-In1" customClass="StylizedTextField">
-                                                <rect key="frame" x="24" y="33" width="209" height="30"/>
+                                                <rect key="frame" x="25" y="33" width="220" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="insetFor6xAndEarlier" minX="-30" minY="0.0" maxX="30" maxY="0.0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2809,7 +2804,7 @@
                                                 <size key="shadowOffset" width="0.0" height="1"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EuE-s0-NQ2" userLabel="Lato Label - USD" customClass="LatoLabel">
-                                                <rect key="frame" x="260" y="134" width="40" height="21"/>
+                                                <rect key="frame" x="254" y="134" width="40" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2817,11 +2812,6 @@
                                                 <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <size key="shadowOffset" width="0.0" height="1"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="8rP-Iw-mIC">
-                                                <rect key="frame" x="15" y="130" width="162" height="33"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                            </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="s2W-q2-bds" customClass="StylizedTextField">
                                                 <rect key="frame" x="24" y="130" width="145" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2831,55 +2821,34 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
                                             </textField>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ClG-um-kmI" customClass="MontserratLabel">
-                                                <rect key="frame" x="24" y="163" width="82" height="21"/>
+                                                <rect key="frame" x="25" y="163" width="82" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="t11-qN-hef">
-                                                <rect key="frame" x="126" y="182" width="178" height="36"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                            </imageView>
                                             <view contentMode="scaleToFill" id="bOm-nJ-2Ot" userLabel="View - PickerTextView - Category" customClass="PickerTextView">
                                                 <rect key="frame" x="136" y="184" width="158" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L8T-Xw-aVE" customClass="MontserratLabel">
-                                                <rect key="frame" x="24" y="219" width="82" height="21"/>
+                                                <rect key="frame" x="25" y="219" width="82" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="RWm-5y-zN2">
-                                                <rect key="frame" x="15" y="239" width="289" height="49"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                            </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Test" id="Dh6-PA-WGi">
-                                                <rect key="frame" x="23" y="244" width="271" height="37"/>
+                                                <rect key="frame" x="25" y="244" width="270" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n7B-WE-395">
-                                                <rect key="frame" x="170" y="296" width="130" height="42"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <size key="titleShadowOffset" width="1" height="1"/>
-                                                <state key="normal" title="Done">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="Done" destination="Gtr-aC-t0S" eventType="touchUpInside" id="MIr-Pc-lfn"/>
-                                                </connections>
-                                            </button>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mBTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0WP-4K-TNl" userLabel="Lato - Label BTC">
-                                                <rect key="frame" x="251" y="101" width="49" height="21"/>
+                                                <rect key="frame" x="245" y="101" width="49" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2888,7 +2857,7 @@
                                                 <size key="shadowOffset" width="0.0" height="1"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fee" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="4" id="WU8-fS-VMb">
-                                                <rect key="frame" x="184" y="101" width="60" height="21"/>
+                                                <rect key="frame" x="178" y="101" width="60" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2918,7 +2887,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PmL-d6-vpJ">
-                                                <rect key="frame" x="15" y="187" width="103" height="26"/>
+                                                <rect key="frame" x="25" y="187" width="103" height="26"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Exchange">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2929,14 +2898,25 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Py-nn-1AR">
-                                                <rect key="frame" x="21" y="297" width="130" height="41"/>
+                                                <rect key="frame" x="25" y="297" width="121" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <state key="normal" title="Advanced Details">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="AdvancedDetails" destination="Gtr-aC-t0S" eventType="touchUpInside" id="pkS-ur-JQP"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n7B-WE-395">
+                                                <rect key="frame" x="173" y="296" width="121" height="42"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <size key="titleShadowOffset" width="1" height="1"/>
+                                                <state key="normal" title="Done">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="Done" destination="Gtr-aC-t0S" eventType="touchUpInside" id="MIr-Pc-lfn"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -2962,10 +2942,6 @@
                         <outlet property="doneButton" destination="n7B-WE-395" id="gWu-Bq-vOV"/>
                         <outlet property="fiatTextField" destination="s2W-q2-bds" id="1OR-cM-zzQ"/>
                         <outlet property="headerView" destination="ahZ-L3-08Q" id="bTO-Aw-qCZ"/>
-                        <outlet property="imageCategoryEmboss" destination="t11-qN-hef" id="hYx-oy-Xtd"/>
-                        <outlet property="imageFiatEmboss" destination="8rP-Iw-mIC" id="4NY-3J-Vwq"/>
-                        <outlet property="imageNameEmboss" destination="EEe-WW-4Vt" id="gbz-wQ-uqk"/>
-                        <outlet property="imageNotesEmboss" destination="RWm-5y-zN2" id="I5s-Ws-tTq"/>
                         <outlet property="imagePhoto" destination="bWb-oS-cFc" id="SpQ-Qr-ONQ"/>
                         <outlet property="imagePhotoButton" destination="emF-lj-aya" id="pHD-8K-KEH"/>
                         <outlet property="keypadView" destination="XNd-9N-hLm" id="n96-xl-rlz"/>

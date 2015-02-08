@@ -283,4 +283,35 @@
 	return rawImage;
 }
 
++ (void)stylizeTextView:(UITextView *)textField
+{
+    textField.tintColor = [UIColor whiteColor];
+    
+    [textField.layer setBackgroundColor:[[[UIColor blackColor] colorWithAlphaComponent:0.1] CGColor]];
+    [textField.layer setBorderColor:[[[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0] colorWithAlphaComponent:1.0] CGColor]];
+    [textField.layer setBorderWidth:0.7];
+    
+    //The rounded corner part, where you specify your view's corner radius:
+    textField.layer.cornerRadius = 5;
+    textField.clipsToBounds = YES;
+    
+}
+
+
++ (void)stylizeTextField:(UITextField *)textField
+{
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    textField.leftView = paddingView;
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    textField.tintColor = [UIColor whiteColor];
+
+    [textField.layer setBackgroundColor:[[[UIColor blackColor] colorWithAlphaComponent:0.1] CGColor]];
+    [textField.layer setBorderColor:[[[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0] colorWithAlphaComponent:1.0] CGColor]];
+    [textField.layer setBorderWidth:1.0];
+    
+    //The rounded corner part, where you specify your view's corner radius:
+    textField.layer.cornerRadius = 5;
+    textField.clipsToBounds = YES;
+
+}
 @end

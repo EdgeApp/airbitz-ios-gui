@@ -28,6 +28,7 @@
 #import "Location.h"
 #import "CommonTypes.h"
 #import "PopupPickerView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
 #define ARRAY_CATEGORY_PREFIXES_NOCOLON @[@"Expense",@"Income",@"Transfer",@"Exchange"]
@@ -267,7 +268,7 @@ typedef enum eRequestType
     strPrefix = [self categoryPrefix:self.pickerTextCategory.textField.text];
     self.pickerTextCategory.textField.text = [self categoryPrefixRemove:self.pickerTextCategory.textField.text];
     
-    [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
+    [self setCategoryButtonText:strPrefix];
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -276,13 +277,23 @@ typedef enum eRequestType
     self.nameTextField.placeholder = NSLocalizedString(@"Enter Payee", nil);
     self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.nameTextField.font = [UIFont systemFontOfSize:18];
-    self.nameTextField.tintColor = [UIColor whiteColor];
+    
+    //To make the border look very close to a UITextField
+    [Util stylizeTextField:self.nameTextField];
+    [Util stylizeTextField:self.fiatTextField];
+    [Util stylizeTextField:self.pickerTextCategory.textField];
+    [Util stylizeTextView:self.notesTextView];
     
     _originalHeaderFrame = self.headerView.frame;
     _originalContentFrame = self.contentView.frame;
     _originalScrollableContentFrame = self.scrollableContentView.frame;
 
     // set up the photo view
+    self.viewPhoto.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.viewPhoto.layer.shadowOpacity = 0.5;
+    self.viewPhoto.layer.shadowRadius = 10;
+    self.viewPhoto.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
+    
     /*
     CGFloat borderWidth = 0.0f;
     self.viewPhoto.frame = CGRectInset(self.viewPhoto.frame, -borderWidth, -borderWidth);
@@ -370,11 +381,11 @@ typedef enum eRequestType
     {
         if (_transactionDetailsMode == TD_MODE_SENT)
         {
-            [self.categoryButton setTitle:@"Expense" forState:UIControlStateNormal];
+            [self setCategoryButtonText:@"Expense"];
         }
         else if (_transactionDetailsMode == TD_MODE_RECEIVED)
         {
-            [self.categoryButton setTitle:@"Income" forState:UIControlStateNormal];
+            [self setCategoryButtonText:@"Income"];
         }
     }
 
@@ -427,6 +438,40 @@ typedef enum eRequestType
     self.categoryPopupPicker.delegate = self;
     [self blockUser:TRUE];
     
+}
+
+- (IBAction)setCategoryButtonText:(NSString *)text
+{
+    if ([text isEqual:@"Income"])
+    {
+        [self.categoryButton setBackgroundColor:[UIColor colorWithRed:0.3
+                                                                green:0.6
+                                                                 blue:0.0
+                                                                alpha:1.0]];
+    }
+    else if ([text isEqual:@"Expense"])
+    {
+        [self.categoryButton setBackgroundColor:[UIColor colorWithRed:0.7
+                                                                green:0.0
+                                                                 blue:0.0
+                                                                alpha:1.0]];
+    }
+    else if ([text isEqual:@"Transfer"])
+    {
+        [self.categoryButton setBackgroundColor:[UIColor colorWithRed:0.0
+                                                                green:0.4
+                                                                 blue:0.8
+                                                                alpha:1.0]];
+    }
+    else
+    {
+        [self.categoryButton setBackgroundColor:[UIColor colorWithRed:0.8
+                                                                green:0.4
+                                                                 blue:0.0
+                                                                alpha:1.0]];
+    }
+    
+    [self.categoryButton setTitle:text forState:UIControlStateNormal];
 }
 
 
@@ -501,7 +546,7 @@ typedef enum eRequestType
     
     strPrefix = [array objectAtIndex:row];
     
-    [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
+    [self setCategoryButtonText:strPrefix];
     
     if (self.categoryPopupPicker)
     {
@@ -965,7 +1010,7 @@ typedef enum eRequestType
     // If string starts with a prefix, then set category button to prefix
     if (strPrefix != nil)
     {
-        [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
+        [self setCategoryButtonText:strPrefix];
     }
 }
 
@@ -1676,7 +1721,7 @@ typedef enum eRequestType
     // If starts with prefix, put prefix in category button
     if (strPrefix != nil)
     {
-        [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
+        [self setCategoryButtonText:strPrefix];
     }
 
 }
@@ -1738,7 +1783,7 @@ typedef enum eRequestType
     // If starts with prefix, put prefix in category button
     if (strPrefix != nil)
     {
-        [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
+        [self setCategoryButtonText:strPrefix];
     }
     
     [pickerTextView.textField resignFirstResponder];
