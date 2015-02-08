@@ -27,12 +27,17 @@
 #import "BusinessDetailsViewController.h"
 #import "Location.h"
 #import "CommonTypes.h"
+#import "PopupPickerView.h"
 
 #define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
+#define ARRAY_CATEGORY_PREFIXES_NOCOLON @[@"Expense",@"Income",@"Transfer",@"Exchange"]
 #define ARRAY_CATEGORY_PREFIX_EXPENSE    0
 #define ARRAY_CATEGORY_PREFIX_INCOME     1
 #define ARRAY_CATEGORY_PREFIX_TRANSFER   2
 #define ARRAY_CATEGORY_PREFIX_EXCHANGE   3
+
+#define PICKER_WIDTH                    160
+#define PICKER_CELL_HEIGHT              40
 
 #define PICKER_MAX_CELLS_VISIBLE 4
 
@@ -60,7 +65,7 @@ typedef enum eRequestType
 } tRequestType;
 
 @interface TransactionDetailsViewController () <UITextFieldDelegate, UITextViewDelegate, InfoViewDelegate, CalculatorViewDelegate,
-                                                DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate,
+                                                DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate,PopupPickerViewDelegate,
                                                 UIGestureRecognizerDelegate, UIAlertViewDelegate,
                                                 LocationDelegate, BusinessDetailsViewControllerDelegate>
 {
@@ -106,6 +111,10 @@ typedef enum eRequestType
 @property (nonatomic, weak) IBOutlet UITextView             *notesTextView;
 @property (nonatomic, weak) IBOutlet UIButton               *doneButton;
 @property (nonatomic, weak) IBOutlet UIButton               *categoryButton;
+@property (nonatomic, strong)        PopupPickerView        *categoryPopupPicker;
+@property (nonatomic, strong)        UIButton               *buttonBlocker;
+
+
 
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
 @property (weak, nonatomic) IBOutlet UIButton               *buttonBack;
@@ -176,6 +185,14 @@ typedef enum eRequestType
         _labelFiatName.text = _wallet.currencyAbbrev;
     }
 
+    // set up our user blocking button
+    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.buttonBlocker.backgroundColor = [UIColor clearColor];
+    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
+    self.buttonBlocker.frame = self.view.bounds;
+    self.buttonBlocker.hidden = YES;
+    [self.scrollableContentView addSubview:self.buttonBlocker];
+    
     // get the list of businesses
     [self generateListOfNearBusinesses];
 
@@ -226,7 +243,7 @@ typedef enum eRequestType
     self.pickerTextCategory.textField.font = [UIFont systemFontOfSize:14];
     self.pickerTextCategory.textField.clearButtonMode = UITextFieldViewModeNever;
     self.pickerTextCategory.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    self.pickerTextCategory.textField.autocorrectionType = UITextAutocorrectionTypeDefault;
+    self.pickerTextCategory.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.pickerTextCategory.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     self.pickerTextCategory.textField.textColor = [UIColor whiteColor];
     self.pickerTextCategory.textField.tintColor = [UIColor whiteColor];
@@ -391,8 +408,27 @@ typedef enum eRequestType
 
 - (IBAction)CategoryButton
 {
+    NSArray *arrayCategories = ARRAY_CATEGORY_PREFIXES_NOCOLON;
+
+    [self scrollContentViewBackToOriginalPosition];
+    
+    self.categoryPopupPicker = [PopupPickerView CreateForView:self.scrollableContentView
+                                               relativeToView:self.categoryButton
+                                             relativePosition:PopupPickerPosition_Right
+                                                  withStrings:arrayCategories
+                                               fromCategories:nil
+                                                  selectedRow:-1
+                                                    withWidth:PICKER_WIDTH
+                                                andCellHeight:PICKER_CELL_HEIGHT
+                                ];
+    self.categoryPopupPicker.userData = nil;
+    //prevent popup from extending behind tool bar
+    [self.categoryPopupPicker addCropLine:CGPointMake(0, self.view.window.frame.size.height - TOOLBAR_HEIGHT) direction:PopupPickerPosition_Below animated:NO];
+    self.categoryPopupPicker.delegate = self;
+    [self blockUser:TRUE];
     
 }
+
 
 - (IBAction)Done
 {
@@ -455,6 +491,36 @@ typedef enum eRequestType
     } else {
         [self exit:YES];
     }
+}
+
+- (IBAction)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
+{
+    NSString *strPrefix;
+    
+    NSArray *array = ARRAY_CATEGORY_PREFIXES_NOCOLON;
+    
+    strPrefix = [array objectAtIndex:row];
+    
+    [self.categoryButton setTitle:strPrefix forState:UIControlStateNormal];
+    
+    if (self.categoryPopupPicker)
+    {
+        [self.categoryPopupPicker removeFromSuperview];
+        self.categoryPopupPicker = nil;
+    }
+    [self blockUser:FALSE];
+}
+
+- (void)blockUser:(BOOL)bBlock
+{
+    self.buttonBlocker.hidden = !bBlock;
+}
+
+- (IBAction)buttonBlockerTouched:(id)sender
+{
+    [self blockUser:NO];
+    [self resignAllResponders];
+    [self.categoryPopupPicker removeFromSuperview];
 }
 
 - (IBAction)AdvancedDetails
@@ -909,6 +975,7 @@ typedef enum eRequestType
     [self.pickerTextCategory.textField resignFirstResponder];
     [self.nameTextField resignFirstResponder];
     [self.fiatTextField resignFirstResponder];
+    [self.categoryPopupPicker resignFirstResponder];
     [self dismissPayeeTable];
     [self scrollContentViewBackToOriginalPosition];
 }
@@ -1634,6 +1701,8 @@ typedef enum eRequestType
     // note: for some reason, if we don't do this, the text won't select next time the user selects it
     [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.beginningOfDocument]];
 
+    [self blockUser:FALSE];
+    
     return YES;
 }
 
@@ -1673,6 +1742,7 @@ typedef enum eRequestType
     }
     
     [pickerTextView.textField resignFirstResponder];
+    [self blockUser:FALSE];
 }
 
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
@@ -1688,13 +1758,14 @@ typedef enum eRequestType
     frame.size.height = 20;
     //frame.size.height = 220; // magic number to make it as big as possible
     CGPoint pickerLocationScreen = [pickerTextView.superview convertPoint:pickerTextView.frame.origin toView:nil];
-    frame.origin.y = pickerLocationScreen.y + pickerTextView.frame.size.height;
+    frame.origin.y = pickerLocationScreen.y + pickerTextView.frame.size.height - 10;
     self.pickerTextCategory.popupPicker.frame = frame;
 
     // now move the window up so that the category field is at the top
     CGRect scrollFrame = self.scrollableContentView.frame;
     scrollFrame.origin.y = -self.pickerTextCategory.frame.origin.y + 10;
     [self scrollContentViewToFrame:scrollFrame];
+    [self blockUser:TRUE];
 
     // bring the picker up with it
     [UIView animateWithDuration:0.35
@@ -1731,6 +1802,7 @@ typedef enum eRequestType
     }
     [pickerTextView dismissPopupPicker];
     [pickerTextView.textField resignFirstResponder];
+    [self blockUser:FALSE];
 }
 
 #pragma mark - Keyboard callbacks
