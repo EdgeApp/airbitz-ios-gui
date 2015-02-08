@@ -66,6 +66,7 @@ typedef enum eAppMode
     UIAlertView                 *_otpRequiredAlert;
     UIAlertView                 *_userReviewAlert;
     UIAlertView                 *_userReviewOKAlert;
+    UIAlertView                 *_userReviewNOAlert;
     FadingAlertView             *_fadingAlert;
 	CGRect                      _originalTabBarFrame;
 	CGRect                      _originalViewFrame;
@@ -610,10 +611,10 @@ typedef enum eAppMode
     {
         _userReviewAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Airbitz", nil)
-                                message:NSLocalizedString(@"Do you like Airbitz?", nil)
+                                message:NSLocalizedString(@"How are you liking Airbitz?", nil)
                                 delegate:self
-                                cancelButtonTitle:NSLocalizedString(@"NO", nil)
-                                otherButtonTitles:NSLocalizedString(@"YES", nil), nil];
+                                cancelButtonTitle:NSLocalizedString(@"Not so good", nil)
+                                otherButtonTitles:NSLocalizedString(@"It's great", nil), nil];
         [_userReviewAlert show];
     }
 }
@@ -850,23 +851,39 @@ typedef enum eAppMode
     {
         if(buttonIndex == 0) // No, send an email to support
         {
-            [self sendSupportEmail];
+            _userReviewNOAlert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Airbitz", nil)
+                                  message:NSLocalizedString(@"Would you like to send us some feedback?", nil)
+                                  delegate:self
+                                  cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
+                                  otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+            [_userReviewNOAlert show];
         }
         else if (buttonIndex == 1) // Yes, launch userReviewOKAlert
         {
             _userReviewOKAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Airbitz", nil)
-                                message:NSLocalizedString(@"Please write a review in the App store.", nil)
+                                message:NSLocalizedString(@"Would you like to write a review in the App store?", nil)
                                 delegate:self
-                                cancelButtonTitle:nil
+                                cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
                                 otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
             [_userReviewOKAlert show];
         }
     }
+    else if (_userReviewNOAlert == alertView)
+    {
+        if(buttonIndex == 1)
+        {
+            [self sendSupportEmail];
+        }
+    }
     else if (_userReviewOKAlert == alertView)
     {
-        NSString *iTunesLink = @"https://itunes.apple.com/us/app/bitcoin-wallet-map-directory/id843536046?mt=8";
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+        if(buttonIndex == 1)
+        {
+            NSString *iTunesLink = @"https://itunes.apple.com/us/app/bitcoin-wallet-map-directory/id843536046?mt=8";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+        }
     }
 }
 
