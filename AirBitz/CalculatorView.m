@@ -40,6 +40,8 @@
 	{
         // Initialization code
         _calcMode = CALC_MODE_COIN;
+        self.backgroundColor = [UIColor colorWithWhite:0.0
+                                                 alpha:0.5];
     }
     return self;
 }
@@ -50,6 +52,8 @@
 	{
         _calcMode = CALC_MODE_COIN;
         [self addSubview:[[[NSBundle mainBundle] loadNibNamed:@"CalculatorView~iphone" owner:self options:nil] objectAtIndex:0]];
+        self.backgroundColor = [UIColor colorWithWhite:0.0
+                                                 alpha:0.5];
     }
     return self;
 }
