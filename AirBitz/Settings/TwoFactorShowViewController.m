@@ -49,9 +49,17 @@
 {
     [super viewDidLoad];
 
+    _viewQRCodeFrame.layer.cornerRadius = 8;
+    _viewQRCodeFrame.layer.masksToBounds = YES;
+
     CGSize size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
     _scrollView.contentSize = size;
     [self initUI];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (void)initUI
