@@ -157,6 +157,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     //self.pickerTextSendTo.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
     self.pickerTextSendTo.cropPointBottom = POPUP_PICKER_LOWEST_POINT;
     self.pickerTextSendTo.delegate = self;
+    [Util stylizeTextField:self.pickerTextSendTo.textField];
 
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"From:", @"From: text on Send Bitcoin screen");
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];

@@ -279,8 +279,10 @@ typedef enum eRequestType
     self.nameTextField.font = [UIFont systemFontOfSize:18];
     
     //To make the border look very close to a UITextField
+/*
     [Util stylizeTextField:self.nameTextField];
     [Util stylizeTextField:self.fiatTextField];
+ */
     [Util stylizeTextField:self.pickerTextCategory.textField];
     [Util stylizeTextView:self.notesTextView];
     

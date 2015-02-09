@@ -110,7 +110,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
-    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonExport, self.imageWalletNameEmboss, self.buttonSearch, nil];
+    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonExport, self.buttonSearch, nil];
 
     self.textWalletName.text = self.wallet.strName;
     self.textWalletName.font = [UIFont systemFontOfSize:18];

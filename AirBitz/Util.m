@@ -297,10 +297,9 @@
     
 }
 
-
 + (void)stylizeTextField:(UITextField *)textField
 {
-    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
     textField.leftView = paddingView;
     textField.leftViewMode = UITextFieldViewModeAlways;
     textField.tintColor = [UIColor whiteColor];
@@ -314,4 +313,5 @@
     textField.clipsToBounds = YES;
 
 }
+
 @end
