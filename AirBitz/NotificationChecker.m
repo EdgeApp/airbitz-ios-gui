@@ -155,11 +155,14 @@ static NotificationChecker *singleton = nil;
 
 + (void)resetOtpNotifications
 {
-    while ([[LocalSettings controller].otpNotifications count] > 0) {
+    int i = 0;
+    while (i < [[LocalSettings controller].otpNotifications count]) {
         NSDictionary *notif = [[LocalSettings controller].otpNotifications firstObject];
         if ([[notif objectForKey:@"id"] isEqualToString:[User Singleton].name]) {
             [[LocalSettings controller].otpNotifications removeObject:notif];
+            break;
         }
+        i++;
     }
     [LocalSettings saveAll];
 }

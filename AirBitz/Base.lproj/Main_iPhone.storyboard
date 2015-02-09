@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -3691,18 +3691,18 @@
                                         </connections>
                                     </switch>
                                     <view hidden="YES" contentMode="scaleToFill" id="Hu4-Fk-wPE">
-                                        <rect key="frame" x="41" y="107" width="245" height="245"/>
+                                        <rect key="frame" x="66" y="107" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="aRf-4C-W4Y">
-                                                <rect key="frame" x="8" y="8" width="229" height="229"/>
+                                                <rect key="frame" x="8" y="8" width="184" height="184"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="WZ2-WG-JQn">
-                                        <rect key="frame" x="19" y="360" width="290" height="46"/>
+                                        <rect key="frame" x="19" y="310" width="290" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="avV-bm-INd">
@@ -3733,12 +3733,12 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="cXH-jU-wGs" userLabel="Spinner">
-                                        <rect key="frame" x="145" y="366" width="37" height="37"/>
+                                        <rect key="frame" x="145" y="316" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                 </subviews>
                             </scrollView>
-                            <view hidden="YES" contentMode="scaleToFill" id="Qrf-BE-9d0">
+                            <view contentMode="scaleToFill" id="Qrf-BE-9d0">
                                 <rect key="frame" x="0.0" y="62" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -3827,7 +3827,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lqV-Y6-LKD">
-                                <rect key="frame" x="67" y="424" width="185" height="41"/>
+                                <rect key="frame" x="67" y="369" width="185" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                 <state key="normal" title="Request Reset" backgroundImage="btn_big_green.png">
@@ -3851,7 +3851,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bYl-WU-bNw">
-                                <rect key="frame" x="16" y="309" width="288" height="90"/>
+                                <rect key="frame" x="16" y="269" width="288" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <string key="text">Request that the Two Factor authentication be turned off. The request will be automatically reset in 1 day if no action is taken by other users.</string>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
@@ -3914,7 +3914,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="mIP-Ro-Aet">
-                                <rect key="frame" x="0.0" y="148" width="320" height="320"/>
+                                <rect key="frame" x="0.0" y="88" width="320" height="320"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -4069,7 +4069,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uf1-Hd-oNr" customClass="LatoLabel">
-                                                    <rect key="frame" x="44" y="16.5" width="203" height="16"/>
+                                                    <rect key="frame" x="44" y="16" width="203" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.47450980392156861" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
@@ -4106,7 +4106,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Web" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XeE-e1-pX7" customClass="LatoLabel">
-                                                    <rect key="frame" x="42" y="16.5" width="203" height="16"/>
+                                                    <rect key="frame" x="42" y="16" width="203" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.47450980392156861" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
