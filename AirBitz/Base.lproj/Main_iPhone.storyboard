@@ -3721,7 +3721,7 @@
                                                 <rect key="frame" x="149" y="3" width="121" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
-                                                <state key="normal" title="Cancel" backgroundImage="btn_big_blue.png">
+                                                <state key="normal" title="Cancel" backgroundImage="btn_done.png">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
