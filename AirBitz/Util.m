@@ -287,8 +287,8 @@
 {
     textField.tintColor = [UIColor whiteColor];
     
-    [textField.layer setBackgroundColor:[[[UIColor blackColor] colorWithAlphaComponent:0.1] CGColor]];
-    [textField.layer setBorderColor:[[[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0] colorWithAlphaComponent:1.0] CGColor]];
+    [textField.layer setBackgroundColor:[[[UIColor blackColor] colorWithAlphaComponent:0.2] CGColor]];
+    [textField.layer setBorderColor:[[[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.5] colorWithAlphaComponent:1.0] CGColor]];
     [textField.layer setBorderWidth:0.7];
     
     //The rounded corner part, where you specify your view's corner radius:
@@ -304,8 +304,8 @@
     textField.leftViewMode = UITextFieldViewModeAlways;
     textField.tintColor = [UIColor whiteColor];
 
-    [textField.layer setBackgroundColor:[[[UIColor blackColor] colorWithAlphaComponent:0.1] CGColor]];
-    [textField.layer setBorderColor:[[[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0] colorWithAlphaComponent:1.0] CGColor]];
+    [textField.layer setBackgroundColor:[[[UIColor blackColor] colorWithAlphaComponent:0.2] CGColor]];
+    [textField.layer setBorderColor:[[[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.5] colorWithAlphaComponent:1.0] CGColor]];
     [textField.layer setBorderWidth:1.0];
     
     //The rounded corner part, where you specify your view's corner radius:

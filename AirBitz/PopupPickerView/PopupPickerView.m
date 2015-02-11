@@ -11,7 +11,7 @@
 
 #define DEFAULT_WIDTH           330
 
-#define DEFAULT_CELL_HEIGHT     40
+#define DEFAULT_CELL_HEIGHT     35
 
 #define OFFSET_YPOS             45  // how much to offset the y position
 
@@ -164,7 +164,7 @@ CGRect keyboardFrame;
 
     // calculate the border thickness
 //    CGFloat borderThickness = (popup.frame.size.height - popup->table.frame.size.height) / 2.0;
-    CGFloat borderThickness = 0.0f;
+    CGFloat borderThickness = 10.0f;
     
     // set the strings and categories
 	popup.strings = strings;

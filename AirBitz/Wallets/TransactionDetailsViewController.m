@@ -216,7 +216,7 @@ typedef enum eRequestType
 
     self.categoryButton.layer.borderWidth = 1.0f;
     self.categoryButton.layer.borderColor = [[UIColor whiteColor] CGColor];
-    self.categoryButton.layer.cornerRadius = 10;
+    self.categoryButton.layer.cornerRadius = 5;
     self.categoryButton.clipsToBounds = YES;
 
     self.advancedDetailsButton.layer.borderWidth = 1.0f;
