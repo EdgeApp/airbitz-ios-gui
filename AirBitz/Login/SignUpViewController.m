@@ -279,6 +279,13 @@
 
 #pragma mark - Fading Alert Delegate
 
+- (void)dismissFading:(BOOL)animated
+{
+    if (_fadingAlert) {
+        [_fadingAlert dismiss:animated];
+    }
+}
+
 - (void)fadingAlertDismissed:(FadingAlertView *)view
 {
     _fadingAlert = nil;
@@ -756,6 +763,7 @@
         });
         [self exit];
     } else {
+        [self dismissFading:NO];
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Account Sign In", @"Title of account signin error alert")
 							  message:[NSString stringWithFormat:@"Sign-in failed:\n%@", _strReason]
