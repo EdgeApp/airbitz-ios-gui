@@ -39,13 +39,13 @@
 @property (nonatomic) NSUInteger PINLoginInvalidEntryCount;
 @property (nonatomic) bool reviewNotified;
 @property (nonatomic) NSDate *twoWeeksAfterFirstLoginTime;
-@property (nonatomic) int loginCount;
+@property (nonatomic) NSInteger loginCount;
 
 + (void)initAll;
 + (void)freeAll;
 + (User *)Singleton;
-+ (bool)isLoggedIn;
-+ (bool)offerUserReview;
++ (BOOL)isLoggedIn;
++ (BOOL)offerUserReview;
 + (void)login:(NSString *)user password:(NSString *)pword;
 
 - (id)init;

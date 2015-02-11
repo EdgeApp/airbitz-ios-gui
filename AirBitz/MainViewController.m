@@ -622,16 +622,18 @@ typedef enum eAppMode
         _uri = nil;
     }
     
-    if([User offerUserReview])
-    {
-        _userReviewAlert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Airbitz", nil)
-                                message:NSLocalizedString(@"How are you liking Airbitz?", nil)
-                                delegate:self
-                                cancelButtonTitle:NSLocalizedString(@"Not so good", nil)
-                                otherButtonTitles:NSLocalizedString(@"It's great", nil), nil];
-        [_userReviewAlert show];
-    }
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+        if([User offerUserReview]) {
+            _userReviewAlert = [[UIAlertView alloc]
+                                    initWithTitle:NSLocalizedString(@"Airbitz", nil)
+                                    message:NSLocalizedString(@"How are you liking Airbitz?", nil)
+                                    delegate:self
+                                    cancelButtonTitle:NSLocalizedString(@"Not so good", nil)
+                                    otherButtonTitles:NSLocalizedString(@"It's great", nil), nil];
+            [_userReviewAlert show];
+        }
+    });
 }
 
 - (void)fadingAlertDismissed:(FadingAlertView *)view
