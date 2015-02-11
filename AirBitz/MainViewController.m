@@ -142,6 +142,9 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchViewSweep:) name:NOTIFICATION_VIEW_SWEEP_TX object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockTabbar) name:NOTIFICATION_LOCK_TABBAR object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockTabbar) name:NOTIFICATION_UNLOCK_TABBAR object:nil];
+
     // init and set API key
     [DL_URLServer initAll];
     NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
@@ -522,6 +525,18 @@ typedef enum eAppMode
             [self.view addSubview:_notificationInfoView];
         }
     }
+}
+
+- (void)lockTabbar
+{
+    self.tabBar.userInteractionEnabled = NO;
+    self.tabBar.alpha = 0.5;
+}
+
+- (void)unlockTabbar
+{
+    self.tabBar.userInteractionEnabled = YES;
+    self.tabBar.alpha = 1.0;
 }
 
 #pragma mark - TabBarView delegates
