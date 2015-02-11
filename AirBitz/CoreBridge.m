@@ -1049,6 +1049,7 @@ static BOOL bOtpError = NO;
 
     [LocalSettings saveAll];
     bDataFetched = NO;
+    bOtpError = NO;
     [CoreBridge startWatchers];
     [CoreBridge startQueues];
 
