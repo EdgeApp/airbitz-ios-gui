@@ -103,9 +103,7 @@
 - (BOOL)storeSecret
 {
     tABC_Error Error;
-    tABC_CC cc = ABC_SetTwoFactorSecret([[User Singleton].name UTF8String],
-                                        [[User Singleton].password UTF8String],
-                                        [_secret UTF8String], true, &Error);
+    tABC_CC cc = ABC_OtpKeySet([[User Singleton].name UTF8String], [_secret UTF8String], &Error);
     return cc == ABC_CC_Ok;
 }
 

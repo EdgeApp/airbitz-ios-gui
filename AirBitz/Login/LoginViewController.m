@@ -561,6 +561,7 @@ typedef enum eLoginMode
 - (void)signInComplete
 {
     [self showSpinner:NO];
+    [CoreBridge otpSetError:_resultCode];
     if (_bSuccess)
     {
         [User login:self.userNameTextField.text
@@ -629,8 +630,10 @@ typedef enum eLoginMode
 {
     _bSuccess = NO;
     tABC_Error error;
-    tABC_CC cc = ABC_TwoFactorSignIn([self.userNameTextField.text UTF8String],
-        [self.passwordTextField.text UTF8String], [secret UTF8String], &error);
+
+    ABC_OtpKeySet([self.userNameTextField.text UTF8String], [secret UTF8String], &error);
+    tABC_CC cc = ABC_SignIn([self.userNameTextField.text UTF8String],
+                            [self.passwordTextField.text UTF8String], NULL, NULL, &error);
     dispatch_async(dispatch_get_main_queue(), ^(void) {
         _bSuccess = cc == ABC_CC_Ok; 
         _strReason = [Util errorMap:&error];
