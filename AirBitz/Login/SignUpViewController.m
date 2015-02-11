@@ -206,6 +206,8 @@
                                                     &Error);
                         free(szOldPIN);
 
+                        [CoreBridge setupLoginPIN];
+
                         _bSuccess = result == ABC_CC_Ok;
                         _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&Error]];
 
@@ -246,10 +248,9 @@
                         [alert show];
 
                         // all other modes must wait for callback before PIN login setup
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-                                       {
-                                           [CoreBridge setupLoginPIN];
-                                       });
+                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                            [CoreBridge setupLoginPIN];
+                        });
                     }
                 }
                 else

@@ -57,6 +57,7 @@ static CoreBridge *singleton = nil;
 static NSTimer *_exchangeTimer;
 static NSTimer *_dataSyncTimer;
 static NSTimer *_notificationTimer;
+static BOOL bOtpError = NO;
 
 + (void)initAll
 {
@@ -1046,11 +1047,6 @@ static NSTimer *_notificationTimer;
         [LocalSettings controller].cachedUsername = [User Singleton].name;
     }
 
-    // Try to cache the OTP secret if exists
-    tABC_Error error;
-    ABC_GetTwoFactorSecret([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String],NULL, &error);
-
     [LocalSettings saveAll];
     bDataFetched = NO;
     [CoreBridge startWatchers];
@@ -1335,12 +1331,18 @@ static NSTimer *_notificationTimer;
         [dataQueue addOperationWithBlock:^{
             [[NSThread currentThread] setName:@"Data Sync"];
             tABC_Error error;
-            ABC_DataSyncAccount([[User Singleton].name UTF8String],
-                                [[User Singleton].password UTF8String],
-                                ABC_BitCoin_Event_Callback,
-                                (__bridge void *) singleton,
-                                &error);
-            [Util printABC_Error: &error];
+            tABC_CC cc =
+                ABC_DataSyncAccount([[User Singleton].name UTF8String],
+                                    [[User Singleton].password UTF8String],
+                                    ABC_BitCoin_Event_Callback,
+                                    (__bridge void *) singleton,
+                                    &error);
+            [CoreBridge otpSetError:cc];
+            if (cc == ABC_CC_InvalidOTP) {
+                [singleton performSelectorOnMainThread:@selector(notifyOtpRequired:)
+                                            withObject:nil
+                                         waitUntilDone:NO];
+            }
         }];
     }
     // Sync Wallets
@@ -1740,6 +1742,21 @@ static NSTimer *_notificationTimer;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:self];
 }
 
++ (void)otpSetError:(tABC_CC)cc
+{
+    bOtpError = ABC_CC_InvalidOTP == cc;
+}
+
++ (BOOL)otpHasError;
+{
+    return bOtpError;
+}
+
++ (void)otpClearError
+{
+    bOtpError = NO;
+}
+
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
     CoreBridge *coreBridge = (__bridge id) pInfo->pData;
@@ -1750,8 +1767,8 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         };
         NSArray *params = [NSArray arrayWithObjects: data, nil];
         [coreBridge performSelectorOnMainThread:@selector(notifyReceiving:) withObject:params waitUntilDone:NO];
-    } else if (pInfo->eventType == ABC_AsyncEventType_OtpRequired) {
-        [coreBridge performSelectorOnMainThread:@selector(notifyOtpRequired:) withObject:nil waitUntilDone:NO];
+    // } else if (pInfo->eventType == ABC_AsyncEventType_OtpRequired) {
+    //     [coreBridge performSelectorOnMainThread:@selector(notifyOtpRequired:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
         [coreBridge performSelectorOnMainThread:@selector(notifyBlockHeight:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_ExchangeRateUpdate) {
@@ -1783,5 +1800,6 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
                                                         object:nil
                                                       userInfo:sweepData];
 }
+
 
 @end

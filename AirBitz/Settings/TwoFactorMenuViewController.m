@@ -54,10 +54,11 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         tABC_Error error;
-        tABC_CC cc = ABC_RequestTwoFactorReset([_username UTF8String], [@"" UTF8String], &error);
+        tABC_CC cc = ABC_OtpResetSet([_username UTF8String], &error);
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (cc == ABC_CC_Ok) {
                 [self showFadingAlert:NSLocalizedString(@"Reset requested.", nil)];
+                [CoreBridge otpClearError];
             } else {
                 [self showFadingAlert:[Util errorMap:&error]];
             }

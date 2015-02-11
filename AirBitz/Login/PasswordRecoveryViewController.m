@@ -355,7 +355,7 @@ typedef enum eAlertType
             _statusCode = error.code;
             // If we have otp enabled, persist the token
             if (_secret != nil) {
-                ABC_SetTwoFactorSecret([self.strUserName UTF8String], NULL, [_secret UTF8String], true, &error);
+                ABC_OtpKeySet([self.strUserName UTF8String], [_secret UTF8String], &error);
             }
                     
             [self performSelectorOnMainThread:@selector(checkRecoveryAnswersResponse:) withObject:params waitUntilDone:NO];
@@ -373,6 +373,7 @@ typedef enum eAlertType
     }
     else
     {
+        [CoreBridge otpSetError:_statusCode];
         if (ABC_CC_InvalidOTP  == _statusCode) {
             [self launchTwoFactorMenu];
         } else {
@@ -408,7 +409,7 @@ typedef enum eAlertType
         BOOL success = _bSuccess;
         if (success) {
             tABC_Error error;
-            ABC_SetTwoFactorSecret([self.strUserName UTF8String], NULL, [_secret UTF8String], false, &error);
+            ABC_OtpKeySet([self.strUserName UTF8String], [_secret UTF8String], &error);
             if (error.code == ABC_CC_Ok) {
                 // Try again with OTP
                 [self CompleteSignup];

@@ -60,6 +60,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    _buttonImport.hidden = ![CoreBridge otpHasError];
 }
 
 - (void)initUI
@@ -90,7 +91,7 @@
     tABC_Error Error;
     bool on = NO;
     long timeout = 0;
-    tABC_CC cc = ABC_StatusTwoFactor([[User Singleton].name UTF8String],
+    tABC_CC cc = ABC_OtpAuthGet([[User Singleton].name UTF8String],
             [[User Singleton].password UTF8String], &on, &timeout, &Error);
     if (cc == ABC_CC_Ok) {
         dispatch_async(dispatch_get_main_queue(), ^(void){
@@ -114,8 +115,7 @@
     _secret = nil;
     tABC_Error error;
     if (_isOn) {
-        tABC_CC cc = ABC_GetTwoFactorSecret([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String], &szSecret, &error);
+        tABC_CC cc = ABC_OtpKeyGet([[User Singleton].name UTF8String], &szSecret, &error);
         if (cc == ABC_CC_Ok && szSecret) {
             _secret = [NSString stringWithUTF8String:szSecret];
         } else {
@@ -151,8 +151,7 @@
         unsigned int width;
 
         tABC_Error error;
-        tABC_CC cc = ABC_GetTwoFactorQrCode([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String], &pData, &width, &error);
+        tABC_CC cc = ABC_QrEncode([_secret UTF8String], &pData, &width, &error);
         if (cc == ABC_CC_Ok) {
             UIImage *qrImage = [Util dataToImage:pData withWidth:width andHeight:width];
             _qrCodeImageView.image = qrImage;
@@ -210,7 +209,7 @@
 {
     BOOL bPending = NO;
     char *szUsernames = NULL;
-    tABC_CC cc = ABC_IsTwoFactorResetPending(&szUsernames, error);
+    tABC_CC cc = ABC_OtpResetGet(&szUsernames, error);
     if (cc == ABC_CC_Ok) {
         bPending = [[[NSString alloc] initWithUTF8String:szUsernames] containsString:[User Singleton].name];
     }
@@ -266,7 +265,9 @@
     _loadingSpinner.hidden = YES;
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated) {
-        [self switchTwoFactor:_tfaEnabledSwitch.on];
+        if (![self switchTwoFactor:_tfaEnabledSwitch.on]) {
+            _tfaEnabledSwitch.on = !_tfaEnabledSwitch.on;
+        }
     } else {
         [_passwordTextField becomeFirstResponder];
         _tfaEnabledSwitch.on = !_tfaEnabledSwitch.on;
@@ -289,6 +290,7 @@
         _viewQRCodeFrame.hidden = YES;
         _buttonImport.hidden = YES;
     }
+    _buttonImport.hidden = ![CoreBridge otpHasError];
     [self setText:on];
     _tfaEnabledSwitch.on = on;
     _loadingSpinner.hidden = YES;
@@ -303,7 +305,7 @@
     }
 }
 
-- (void)switchTwoFactor:(BOOL)on
+- (BOOL)switchTwoFactor:(BOOL)on
 {
     tABC_Error error;
     tABC_CC cc;
@@ -312,14 +314,20 @@
     } else {
         cc = [self disableTwoFactor:&error];
     }
-    [self updateTwoFactorUi:on];
-    [self checkSecret:YES];
+    if (cc == ABC_CC_Ok) {
+        [self updateTwoFactorUi:on];
+        [self checkSecret:YES];
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 - (tABC_CC)enableTwoFactor:(tABC_Error *)error
 {
-    tABC_CC cc = ABC_EnableTwoFactor([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], error);
+    long timeout = 60 * 60 * 24;
+    tABC_CC cc = ABC_OtpAuthSet([[User Singleton].name UTF8String],
+                                [[User Singleton].password UTF8String], timeout, error);
     if (cc == ABC_CC_Ok) {
         _isOn = YES;
     }
@@ -328,12 +336,14 @@
 
 - (tABC_CC)disableTwoFactor:(tABC_Error *)error
 {
-    tABC_CC cc = ABC_DisableTwoFactor([[User Singleton].name UTF8String],
+    tABC_CC cc = ABC_OtpAuthRemove([[User Singleton].name UTF8String],
         [[User Singleton].password UTF8String], error);
     if (cc == ABC_CC_Ok) {
         _secret = nil;
         _isOn = NO;
         [NotificationChecker resetOtpNotifications];
+
+        ABC_OtpKeyRemove([[User Singleton].name UTF8String], error);
     }
     return cc;
 }
@@ -394,9 +404,9 @@
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             tABC_Error Error;
-            tABC_CC cc = ABC_CancelTwoFactorReset([[User Singleton].name UTF8String],
-                                                [[User Singleton].password UTF8String],
-                                                &Error);
+            tABC_CC cc = ABC_OtpResetRemove([[User Singleton].name UTF8String],
+                                            [[User Singleton].password UTF8String],
+                                            &Error);
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (cc == ABC_CC_Ok) {
                     [self showFadingAlert:NSLocalizedString(@"Reset Cancelled", nil)];

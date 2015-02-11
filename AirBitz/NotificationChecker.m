@@ -173,7 +173,7 @@ static NotificationChecker *singleton = nil;
     NSArray *arrayUsers = nil;
     NSString *usernames = nil;
     tABC_Error error;
-    tABC_CC cc = ABC_IsTwoFactorResetPending(&szUsernames, &error);
+    tABC_CC cc = ABC_OtpResetGet(&szUsernames, &error);
     if (cc != ABC_CC_Ok || !szUsernames) {
         goto exit;
     }
