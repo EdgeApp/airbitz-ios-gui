@@ -1087,6 +1087,9 @@
 		DA14ABDD1A841C3600C30F08 /* btn_calc_next@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA14ABDA1A841C3600C30F08 /* btn_calc_next@2x~iphone.png */; };
 		DA14ABDE1A841C3600C30F08 /* btn_calc_next~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA14ABDB1A841C3600C30F08 /* btn_calc_next~iphone.png */; };
 		DA14ABDF1A841C3600C30F08 /* btn_calc_next~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA14ABDB1A841C3600C30F08 /* btn_calc_next~iphone.png */; };
+		DA1E7CA71A8C187F007C6C05 /* StylizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */; };
+		DA1E7CA81A8C187F007C6C05 /* StylizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */; };
+		DA1E7CA91A8C187F007C6C05 /* StylizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */; };
 		DA4CFE45196F897B002CFD49 /* drag_bar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */; };
 		DA4CFE46196F897B002CFD49 /* drag_bar~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */; };
 		DA7693881964FE8A0022EE64 /* copy_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */; };
@@ -2403,6 +2406,8 @@
 		DA14ABD51A841B5A00C30F08 /* btn_expand_green~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_expand_green~iphone.png"; sourceTree = "<group>"; };
 		DA14ABDA1A841C3600C30F08 /* btn_calc_next@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_calc_next@2x~iphone.png"; sourceTree = "<group>"; };
 		DA14ABDB1A841C3600C30F08 /* btn_calc_next~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_calc_next~iphone.png"; sourceTree = "<group>"; };
+		DA1E7CA51A8C187F007C6C05 /* StylizedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedButton.h; sourceTree = "<group>"; };
+		DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedButton.m; sourceTree = "<group>"; };
 		DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar@2x~iphone.png"; sourceTree = "<group>"; };
 		DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar~iphone.png"; sourceTree = "<group>"; };
 		DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copy_btn@2x~iphone.png"; sourceTree = "<group>"; };
@@ -3059,6 +3064,8 @@
 				B5004A2618A5C755003560A4 /* Server.h */,
 				B5C0A9B218EA0D99008F302C /* Settings */,
 				4C3C309A19199AB6006923DE /* StrokeGradientButton */,
+				DA1E7CA51A8C187F007C6C05 /* StylizedButton.h */,
+				DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */,
 				B5FD393218F06FD800BE2670 /* StylizedTextField.h */,
 				B5FD393318F06FD800BE2670 /* StylizedTextField.m */,
 				68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */,
@@ -5278,6 +5285,7 @@
 				7D89E8CF1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C61A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				7D98ACDD19A7C550003D2BF6 /* PopupPickerView.m in Sources */,
+				DA1E7CA81A8C187F007C6C05 /* StylizedButton.m in Sources */,
 				7D98ACDE19A7C550003D2BF6 /* PayeeCell.m in Sources */,
 				7D98ACDF19A7C550003D2BF6 /* topOverviewCell.m in Sources */,
 				7D98ACE019A7C550003D2BF6 /* NSDictionary_JSONExtensions.m in Sources */,
@@ -5405,6 +5413,7 @@
 				7D89E8CE1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C51A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				4C7247D41937A7520091C286 /* PayeeCell.m in Sources */,
+				DA1E7CA71A8C187F007C6C05 /* StylizedButton.m in Sources */,
 				B5C0A9A018EA0C10008F302C /* topOverviewCell.m in Sources */,
 				B5137C3818A435BD00DA4A34 /* NSDictionary_JSONExtensions.m in Sources */,
 				B5C0A98C18EA0B80008F302C /* Annotation.m in Sources */,
@@ -5532,6 +5541,7 @@
 				DAE864341A88A58A00A17BD3 /* NotificationChecker.m in Sources */,
 				DAE864351A88A58A00A17BD3 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				DAE864361A88A58A00A17BD3 /* PayeeCell.m in Sources */,
+				DA1E7CA91A8C187F007C6C05 /* StylizedButton.m in Sources */,
 				DAE864371A88A58A00A17BD3 /* topOverviewCell.m in Sources */,
 				DAE864381A88A58A00A17BD3 /* NSDictionary_JSONExtensions.m in Sources */,
 				DAE864391A88A58A00A17BD3 /* Annotation.m in Sources */,
