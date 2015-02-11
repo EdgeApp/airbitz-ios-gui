@@ -33,9 +33,7 @@
     self.rightViewMode = UITextFieldViewModeAlways;
     self.tintColor = [UIColor whiteColor];
     
-    [self.layer setBackgroundColor:[[[UIColor blackColor] colorWithAlphaComponent:0.2] CGColor]];
-    [self.layer setBorderColor:[[[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.5] colorWithAlphaComponent:1.0] CGColor]];
-    [self.layer setBorderWidth:1.0];
+    [self resetBorder];
     
     //The rounded corner part, where you specify your view's corner radius:
     self.layer.cornerRadius = 5;
@@ -79,6 +77,13 @@
 -(void)doClear
 {
 	self.text = @"";
+}
+
+- (void)resetBorder
+{
+    [self.layer setBackgroundColor:[[[UIColor blackColor] colorWithAlphaComponent:0.2] CGColor]];
+    [self.layer setBorderColor:[[[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.5] colorWithAlphaComponent:1.0] CGColor]];
+    [self.layer setBorderWidth:1.0];
 }
 
 @end

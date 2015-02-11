@@ -10,4 +10,6 @@
 
 @interface StylizedTextField : UITextField
 
+- (void)resetBorder;
+
 @end

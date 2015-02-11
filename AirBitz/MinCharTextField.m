@@ -48,8 +48,7 @@
 	}
 	else
 	{
-		self.layer.borderColor = [[UIColor clearColor] CGColor];
-		self.layer.borderWidth = 0.0;
+        [self resetBorder];
 		_satisfiesMinimumCharacters = YES;
 	}
 }
