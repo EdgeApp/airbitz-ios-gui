@@ -17,6 +17,9 @@
 #define REVIEW_NOTIFIED @"review_notified"
 #define TWO_WEEKS_AFTER_FIRST_LOGIN_TIME @"two_weeks_after_first_login_time"
 #define LOGIN_COUNT @"login_count"
+#define REQUEST_VIEW_COUNT @"request_view_count"
+#define SEND_VIEW_COUNT @"send_view_count"
+#define BLE_VIEW_COUNT @"ble_view_count"
 
 static BOOL bInitialized = NO;
 
@@ -81,6 +84,9 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.reviewNotified = NO;
     self.loginCount = 0;
     self.twoWeeksAfterFirstLoginTime = 0;
+    self.requestViewCount = 0;
+    self.sendViewCount = 0;
+    self.bleViewCount = 0;
 
     return self;
 }
@@ -152,6 +158,9 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.reviewNotified = [localConfig boolForKey:REVIEW_NOTIFIED];
     self.twoWeeksAfterFirstLoginTime = [localConfig objectForKey:TWO_WEEKS_AFTER_FIRST_LOGIN_TIME];
     self.loginCount = [localConfig integerForKey:LOGIN_COUNT];
+    self.requestViewCount = [localConfig integerForKey:REQUEST_VIEW_COUNT];
+    self.sendViewCount = [localConfig integerForKey:SEND_VIEW_COUNT];
+    self.bleViewCount = [localConfig integerForKey:BLE_VIEW_COUNT];
 
     if ([localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]]) {
         self.dailySpendLimitSatoshis = [[localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]] unsignedLongLongValue];
@@ -172,6 +181,9 @@ static User *singleton = nil;  // this will be the one and only object this stat
     [localConfig setBool:self.reviewNotified forKey:REVIEW_NOTIFIED];
     [localConfig setObject:self.twoWeeksAfterFirstLoginTime forKey:TWO_WEEKS_AFTER_FIRST_LOGIN_TIME];
     [localConfig setInteger:self.loginCount forKey:LOGIN_COUNT];
+    [localConfig setInteger:self.requestViewCount forKey:REQUEST_VIEW_COUNT];
+    [localConfig setInteger:self.sendViewCount forKey:SEND_VIEW_COUNT];
+    [localConfig setInteger:self.bleViewCount forKey:BLE_VIEW_COUNT];
 
     [localConfig synchronize];
 }
@@ -265,6 +277,31 @@ static User *singleton = nil;  // this will be the one and only object this stat
     }
     [[User Singleton] saveLocalSettings];
     return ret;
+}
+
++ (BOOL)offerRequestHelp
+{
+    return [User offerHelp:[User Singleton].requestViewCount];
+}
+
++ (BOOL)offerSendHelp
+{
+    return [User offerHelp:[User Singleton].sendViewCount];
+}
+
++ (BOOL)offerBleHelp
+{
+    return [User offerHelp:[User Singleton].bleViewCount];
+}
+
++ (BOOL)offerHelp:(NSInteger *)value
+{
+    if (value > 2) {
+        return NO;
+    }
+    value++;
+    [[User Singleton] saveLocalSettings];
+    return value <= 2;
 }
 
 - (BOOL)transactionCountTriggered

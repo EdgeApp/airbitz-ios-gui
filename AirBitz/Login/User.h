@@ -40,6 +40,9 @@
 @property (nonatomic) bool reviewNotified;
 @property (nonatomic) NSDate *twoWeeksAfterFirstLoginTime;
 @property (nonatomic) NSInteger loginCount;
+@property (nonatomic) NSInteger requestViewCount;
+@property (nonatomic) NSInteger sendViewCount;
+@property (nonatomic) NSInteger bleViewCount;
 
 + (void)initAll;
 + (void)freeAll;
@@ -47,6 +50,10 @@
 + (BOOL)isLoggedIn;
 + (BOOL)offerUserReview;
 + (void)login:(NSString *)user password:(NSString *)pword;
+
++ (BOOL)offerRequestHelp;
++ (BOOL)offerSendHelp;
++ (BOOL)offerBleHelp;
 
 - (id)init;
 - (void)clear;
