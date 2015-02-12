@@ -14,7 +14,7 @@
 
 @property (assign) id<TabBarViewDelegate> delegate;
 
--(void)selectButtonAtIndex:(int)index;
+- (void)selectButtonAtIndex:(int)index;
 - (void)lockButton:(int)idx;
 - (void)unlockButton:(int)idx;
 
