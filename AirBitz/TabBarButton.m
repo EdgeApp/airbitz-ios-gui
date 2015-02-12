@@ -44,6 +44,7 @@
 	[self deselectedFont];
 	originalImagePosition = self.icon.frame.origin;
 	originalLabelPosition = self.label.frame.origin;
+    _locked = NO;
 }
 
 -(void)selectedFont

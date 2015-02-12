@@ -16,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *selectedBackgroundImage;
 @property (nonatomic, weak) IBOutlet UIImageView *highlightedBackgroundImage;
 @property (nonatomic, weak) IBOutlet LatoLabel *label;
+@property (nonatomic, assign) BOOL locked;
 
 -(void)highlight;
 -(void)select;

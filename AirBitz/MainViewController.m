@@ -529,14 +529,14 @@ typedef enum eAppMode
 
 - (void)lockTabbar
 {
-    self.tabBar.userInteractionEnabled = NO;
-    self.tabBar.alpha = 0.5;
+    [_tabBar lockButton:TAB_BAR_BUTTON_APP_MODE_SEND];
+    [_tabBar lockButton:TAB_BAR_BUTTON_APP_MODE_REQUEST];
 }
 
 - (void)unlockTabbar
 {
-    self.tabBar.userInteractionEnabled = YES;
-    self.tabBar.alpha = 1.0;
+    [_tabBar unlockButton:TAB_BAR_BUTTON_APP_MODE_SEND];
+    [_tabBar unlockButton:TAB_BAR_BUTTON_APP_MODE_REQUEST];
 }
 
 #pragma mark - TabBarView delegates
