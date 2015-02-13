@@ -925,12 +925,30 @@
             [_withdrawlPIN selectAll:nil];
         } else if (self.amountToSendSatoshi == 0) {
             [self showFadingError:NSLocalizedString(@"Please enter an amount to send", nil)];
+        } else if (self.amountToSendSatoshi < DUST_AMOUNT) {
+            [self tooSmallAlert];
         } else {
             NSLog(@"SUCCESS!");
             [self initiateSendRequest];
         }
     }
     [_confirmationSlider resetIn:1.0];
+}
+
+- (void)tooSmallAlert
+{
+    double currency;
+    tABC_Error error;
+    ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                                DUST_AMOUNT, &currency, self.wallet.currencyNum, &error);
+    if (error.code == ABC_CC_Ok) {
+        [self showFadingError:[NSString stringWithFormat:
+            NSLocalizedString(@"Amount is too small. Please send at least %@ (~%@)", nil),
+                [CoreBridge formatSatoshi:self.amountToSendSatoshi],
+                [CoreBridge formatCurrency:currency withCurrencyNum:self.wallet.currencyNum]]];
+    } else {
+        [self showFadingError:NSLocalizedString(@"Amount is too small", nil)];
+    }
 }
 
 #pragma mark - Calculator delegates
