@@ -538,29 +538,26 @@ static NSTimer *_notificationTimer;
 + (void)setWalletOrder: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets
 {
     tABC_Error Error;
-    int i = 0;
-    unsigned int walletCount = (unsigned int) [arrayWallets count] + (unsigned int)[arrayArchivedWallets count];
-    const char **paUUIDS = malloc(sizeof(char *) * walletCount);
+    NSMutableString *uuids = [[NSMutableString alloc] init];
     for (Wallet *w in arrayWallets)
     {
-        paUUIDS[i] = [w.strUUID UTF8String];
-        i++;
+        [uuids stringByAppendingString:w.strUUID];
+        [uuids stringByAppendingString:@"\n"];
     }
     for (Wallet *w in arrayArchivedWallets)
     {
-        paUUIDS[i] = [w.strUUID UTF8String];
-        i++;
+        [uuids stringByAppendingString:w.strUUID];
+        [uuids stringByAppendingString:@"\n"];
     }
+    NSString *ids = [uuids stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (ABC_SetWalletOrder([[User Singleton].name UTF8String],
                            [[User Singleton].password UTF8String],
-                           (char **)paUUIDS,
-                           walletCount,
+                           (char *)[ids UTF8String],
                            &Error) != ABC_CC_Ok)
     {
         NSLog(@("Error: CoreBridge.setWalletOrder:  %s\n"), Error.szDescription);
         [Util printABC_Error:&Error];
     }
-    free(paUUIDS);
 }
 
 + (bool)setWalletAttributes: (Wallet *) wallet
