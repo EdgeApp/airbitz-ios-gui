@@ -46,6 +46,7 @@ typedef NS_ENUM(NSUInteger, RequestState) {
 #define ERROR_MESSAGE_FADE_DURATION         3.0
 #define ERROR_MESSAGE_FADE_DELAY            2.0
 #define ERROR_MESSAGE_FADE_DISMISS          0.1
+#define FADING_HELP_DURATION                5.0
 
 #define LOCATION_UPDATE_PERIOD	60 /* seconds */
 

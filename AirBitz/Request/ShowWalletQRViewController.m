@@ -62,7 +62,7 @@ typedef enum eAddressPickerType
 
 static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
-@interface ShowWalletQRViewController () <ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, CBPeripheralManagerDelegate, RecipientViewControllerDelegate, UIGestureRecognizerDelegate, FadingAlertViewDelegate >
+@interface ShowWalletQRViewController () <ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, CBPeripheralManagerDelegate, RecipientViewControllerDelegate, UIGestureRecognizerDelegate>
 {
     tAddressPickerType          _addressPickerType;
     FadingAlertView *_fadingAlert;
@@ -211,6 +211,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
     [super viewWillAppear:animated];
     [CoreBridge prioritizeAddress:_addressString inWallet:_walletUUID];
+
+    if ([[User Singleton] offerRequestHelp]) {
+        [self showFadingAlert:NSLocalizedString(@"Present QR code to Sender and have them scan to send you payment", nil)
+                    withDelay:FADING_HELP_DURATION];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -1243,9 +1248,14 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)showFadingAlert:(NSString *)message
 {
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    [self showFadingAlert:message withDelay:ERROR_MESSAGE_FADE_DELAY];
+}
+
+- (void)showFadingAlert:(NSString *)message withDelay:(int)fadeDelay
+{
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
     _fadingAlert.message = message;
-    _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
+    _fadingAlert.fadeDelay = fadeDelay;
     _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
     [_fadingAlert blockModal:NO];
     [_fadingAlert showSpinner:NO];
@@ -1255,13 +1265,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (void)dismissErrorMessage
 {
     [_fadingAlert dismiss:NO];
-    _fadingAlert = nil;
-}
-
-#pragma mark - FadingAlertView delegate
-
-- (void)fadingAlertDismissed:(FadingAlertView *)view
-{
     _fadingAlert = nil;
 }
 

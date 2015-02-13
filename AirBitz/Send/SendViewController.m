@@ -45,6 +45,7 @@
 #import "BLEScanCell.h"
 #import "Contact.h"
 #import "LocalSettings.h"
+#import "FadingAlertView.h"
 
 #define WALLET_BUTTON_WIDTH         210
 #define BLE_TIMEOUT                 1.0
@@ -81,6 +82,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	NSTimer							*peripheralCleanupTimer; //used to remove BLE devices from table when they're no longer around
 	tScanMode						scanMode;
 	float							originalFrameHeight;
+    FadingAlertView                 *_fadingAlert;
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
@@ -308,6 +310,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		self.qrView.hidden = NO;
 		//turns on QR code scanner.  Disables BLE
 		[self stopBLE];
+
+        if ([[User Singleton] offerSendHelp]) {
+            [self showFadingAlert:NSLocalizedString(@"Scan the QR code of payee to send payment", nil)
+                        withDelay:FADING_HELP_DURATION];
+        }
 
 #if !TARGET_IPHONE_SIMULATOR
 		if([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive)
@@ -971,6 +978,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	}
 	else
 	{
+        if ([[User Singleton] offerBleHelp]) {
+            [self showFadingAlert:NSLocalizedString(@"Bluetooth payment requests are listed here. Tap on a user to send them a payment", nil)
+                        withDelay:FADING_HELP_DURATION];
+        }
 		self.scanningLabel.hidden = YES;
 		[self.scanningSpinner stopAnimating];
 	}
@@ -1751,5 +1762,28 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
 }
 
+#pragma - Fading Alert Methods
+
+- (void)showFadingAlert:(NSString *)message
+{
+    [self showFadingAlert:message withDelay:ERROR_MESSAGE_FADE_DELAY];
+}
+
+- (void)showFadingAlert:(NSString *)message withDelay:(int)fadeDelay
+{
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
+    _fadingAlert.message = message;
+    _fadingAlert.fadeDelay = fadeDelay;
+    _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert showSpinner:NO];
+    [_fadingAlert showFading];
+}
+
+- (void)dismissErrorMessage
+{
+    [_fadingAlert dismiss:NO];
+    _fadingAlert = nil;
+}
 
 @end

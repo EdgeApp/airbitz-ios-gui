@@ -62,6 +62,10 @@ static User *singleton = nil;  // this will be the one and only object this stat
     [User Singleton].name = name;
     [User Singleton].password = pword;
     [[User Singleton] loadSettings];
+
+    [User Singleton].notifiedSend = NO;
+    [User Singleton].notifiedRequest = NO;
+    [User Singleton].notifiedBle = NO;
     
     [CoreBridge login];
 }
@@ -279,29 +283,36 @@ static User *singleton = nil;  // this will be the one and only object this stat
     return ret;
 }
 
-+ (BOOL)offerRequestHelp
+- (BOOL)offerRequestHelp
 {
-    return [User offerHelp:[User Singleton].requestViewCount];
+    return [self offerHelp:&_requestViewCount
+               thisSession:&_notifiedRequest];
 }
 
-+ (BOOL)offerSendHelp
+- (BOOL)offerSendHelp
 {
-    return [User offerHelp:[User Singleton].sendViewCount];
+    return [self offerHelp:&_sendViewCount
+               thisSession:&_notifiedSend];
 }
 
-+ (BOOL)offerBleHelp
+- (BOOL)offerBleHelp
 {
-    return [User offerHelp:[User Singleton].bleViewCount];
+    return [self offerHelp:&_bleViewCount
+               thisSession:&_notifiedBle];
 }
 
-+ (BOOL)offerHelp:(NSInteger *)value
+- (BOOL)offerHelp:(NSInteger *)value thisSession:(BOOL *)session
 {
-    if (value > 2) {
+    if (*session) {
         return NO;
     }
-    value++;
-    [[User Singleton] saveLocalSettings];
-    return value <= 2;
+    *session = YES;
+    if (*value > 2) {
+        return NO;
+    }
+    (*value)++;
+    [self saveLocalSettings];
+    return *value <= 2;
 }
 
 - (BOOL)transactionCountTriggered
