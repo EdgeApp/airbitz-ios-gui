@@ -939,12 +939,11 @@
 {
     double currency;
     tABC_Error error;
-    ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                DUST_AMOUNT, &currency, self.wallet.currencyNum, &error);
+    ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], DUST_AMOUNT, &currency, self.wallet.currencyNum, &error);
     if (error.code == ABC_CC_Ok) {
         [self showFadingError:[NSString stringWithFormat:
             NSLocalizedString(@"Amount is too small. Please send at least %@ (~%@)", nil),
-                [CoreBridge formatSatoshi:self.amountToSendSatoshi],
+                [CoreBridge formatSatoshi:DUST_AMOUNT],
                 [CoreBridge formatCurrency:currency withCurrencyNum:self.wallet.currencyNum]]];
     } else {
         [self showFadingError:NSLocalizedString(@"Amount is too small", nil)];
