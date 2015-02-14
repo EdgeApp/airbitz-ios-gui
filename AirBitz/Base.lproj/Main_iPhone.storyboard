@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="h3o-pD-bFl">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -837,6 +837,7 @@
                                 <rect key="frame" x="26" y="88" width="273" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1179,6 +1180,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="NzT-rU-bq0">
                                 <rect key="frame" x="22" y="202" width="100" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
                                 <state key="normal" title="Import" backgroundImage="btn_blue.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1236,7 +1238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2bB-r5-X2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26" y="683"/>
+            <point key="canvasLocation" x="-232" y="566"/>
         </scene>
         <!--Show WalletQR View Controller-->
         <scene sceneID="UOX-Wf-p5A">
@@ -3215,6 +3217,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nhU-8o-H50">
                                                             <rect key="frame" x="167" y="6" width="109" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" backgroundImage="btn_blue.png">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3244,7 +3247,8 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xky-Rp-Nkh">
                                                             <rect key="frame" x="0.0" y="5" width="291" height="41"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" backgroundImage="btn_changeCategories.png">
+                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                            <state key="normal" backgroundImage="btn_blue.png">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
@@ -3269,7 +3273,8 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iUa-wU-ZnQ">
                                                             <rect key="frame" x="0.0" y="5" width="143" height="41"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" backgroundImage="btn_cancel.png">
+                                                            <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
+                                                            <state key="normal" backgroundImage="bg_btn_green.png">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
@@ -3452,7 +3457,7 @@
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="VjU-w1-oiT">
-                                                    <rect key="frame" x="11" y="12" width="253" height="30"/>
+                                                    <rect key="frame" x="11" y="13" width="253" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4020,7 +4025,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_top.png" id="BhX-No-chB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="49"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999961" y="0.49999999999999994" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4065,7 +4070,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="Dzq-3h-Adz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="49"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999994" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4102,7 +4107,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="Hlz-Yq-T2I">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="49"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4138,7 +4143,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="clC-N3-iKS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="49"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4174,7 +4179,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle_white.png" id="866-tQ-bOR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="49"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4222,7 +4227,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle_white.png" id="ED4-SO-l2Q">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="49"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -5438,6 +5443,7 @@
         <image name="bd_icon_phone.png" width="11" height="15"/>
         <image name="bd_icon_share.png" width="16" height="16"/>
         <image name="bd_icon_web.png" width="15" height="16"/>
+        <image name="bg_btn_green.png" width="68" height="55"/>
         <image name="bkg_categories.png" width="320" height="209"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
         <image name="bkg_textfield.png" width="13" height="15"/>
@@ -5449,7 +5455,6 @@
         <image name="btn_big_green.png" width="251" height="41"/>
         <image name="btn_blue.png" width="110" height="26"/>
         <image name="btn_cancel.png" width="143" height="41"/>
-        <image name="btn_changeCategories.png" width="291" height="41"/>
         <image name="btn_deleteCategory.png" width="38" height="31"/>
         <image name="btn_done.png" width="143" height="41"/>
         <image name="btn_expand.png" width="100" height="106"/>
