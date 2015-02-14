@@ -521,7 +521,7 @@ typedef enum eDatePeriod
 - (UIImage *)stretchableImage:(NSString *)imageName
 {
 	UIImage *img = [UIImage imageNamed:imageName];
-	UIImage *stretchable = [img resizableImageWithCapInsets:UIEdgeInsetsMake(28, 28, 28, 28)]; //top, left, bottom, right
+	UIImage *stretchable = [img resizableImageWithCapInsets:UIEdgeInsetsMake(10,10,10,10)]; //top, left, bottom, right
 	return stretchable;
 }
 
