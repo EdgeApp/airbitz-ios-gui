@@ -782,20 +782,29 @@
             finalCell.backgroundColor = [UIColor clearColor];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(15, 0, 143.0, 41.0);
-            [button setBackgroundImage:[UIImage imageNamed:@"btn_request.png"] forState:UIControlStateNormal];
+            button.layer.cornerRadius = 5;
+            button.clipsToBounds = YES;
+
+            [button setBackgroundColor:[UIColor colorWithRed:1.0 green:.63 blue:.25 alpha:1]];
+            
             [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
             [finalCell addSubview:button];
             [button setTitle:@"      Request" forState:UIControlStateNormal];
             button.titleLabel.font = [UIFont systemFontOfSize:15.0];
             self.buttonRequest = button;
 
+
+            
             button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(163.0, 0, 143.0, 41.0);
-            [button setBackgroundImage:[UIImage imageNamed:@"btn_send.png"] forState:UIControlStateNormal];
+            [button setBackgroundColor:[UIColor colorWithRed:0.5 green:.76 blue:.25 alpha:1]];
             [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
             [finalCell addSubview:button];
             [button setTitle:@"      Send" forState:UIControlStateNormal];
             button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+            button.layer.cornerRadius = 5;
+            button.clipsToBounds = YES;
+
             self.buttonSend = button;
         }
     }
