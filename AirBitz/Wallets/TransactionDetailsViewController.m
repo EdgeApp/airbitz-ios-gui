@@ -208,22 +208,6 @@ typedef enum eRequestType
     // load all the names from the address book
     [self generateListOfContactNames];
 
-    // Add button borders
-    self.doneButton.layer.borderWidth = 1.0f;
-    self.doneButton.layer.borderColor = [[UIColor whiteColor] CGColor];
-    self.doneButton.layer.cornerRadius = 5;
-    self.doneButton.clipsToBounds = YES;
-
-    self.categoryButton.layer.borderWidth = 1.0f;
-    self.categoryButton.layer.borderColor = [[UIColor whiteColor] CGColor];
-    self.categoryButton.layer.cornerRadius = 5;
-    self.categoryButton.clipsToBounds = YES;
-
-    self.advancedDetailsButton.layer.borderWidth = 1.0f;
-    self.advancedDetailsButton.layer.borderColor = [[UIColor whiteColor] CGColor];
-    self.advancedDetailsButton.layer.cornerRadius = 5;
-    self.advancedDetailsButton.clipsToBounds = YES;
-    
     self.keypadView.delegate = self;
     self.keypadView.textField = self.fiatTextField;
     

@@ -72,7 +72,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ug5-7Y-oG3">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ug5-7Y-oG3" customClass="StylizedButton">
                     <rect key="frame" x="10" y="92" width="143" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
@@ -84,7 +84,7 @@
                         <action selector="buttonCancelTouched:" destination="-1" eventType="touchUpInside" id="Vig-I9-HXO"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bfD-1n-tCg">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bfD-1n-tCg" customClass="StylizedButton">
                     <rect key="frame" x="167" y="92" width="143" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.50196081399917603" green="0.76470595598220825" blue="0.25882354378700256" alpha="1" colorSpace="deviceRGB"/>

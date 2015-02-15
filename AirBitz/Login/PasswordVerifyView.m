@@ -150,7 +150,7 @@
 			}
 			else
 			{
-				imageView.image = [UIImage imageNamed:@"Red-X"];
+				imageView.image = [UIImage imageNamed:@"White-Dot"];
 			}
 		}
 		

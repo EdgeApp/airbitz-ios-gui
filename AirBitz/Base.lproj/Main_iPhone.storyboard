@@ -519,20 +519,15 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="yHc-zO-am9">
-                                <rect key="frame" x="0.0" y="3" width="320" height="116"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SearchBarBacking.png" id="BXu-cF-Wts">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <rect key="contentStretch" x="0.0" y="0.70999999999999996" width="0.0" height="0.0"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="bvO-HY-PTm">
-                                        <rect key="frame" x="11" y="68" width="298" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="City, State/Province, or Country" minimumFontSize="17" clearButtonMode="always" id="ZBb-rD-XHs">
+                                    <view contentMode="scaleToFill" id="Sph-ic-DOK">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.070588238540000001" green="0.65098041299999998" blue="0.93333339689999995" alpha="1" colorSpace="deviceRGB"/>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="City, State/Province, or Country" minimumFontSize="17" clearButtonMode="always" id="ZBb-rD-XHs" customClass="StylizedTextField">
                                         <rect key="frame" x="40" y="69" width="269" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -545,12 +540,12 @@
                                         <rect key="frame" x="21" y="74" width="9" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="uZW-eD-oVE">
-                                        <rect key="frame" x="11" y="68" width="298" height="30"/>
+                                    <view contentMode="scaleToFill" id="Kjf-R8-YGw">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Business Name or Category" minimumFontSize="17" clearButtonMode="always" id="3S0-VF-OIs">
+                                        <color key="backgroundColor" red="0.070588238540000001" green="0.65098041299999998" blue="0.93333339689999995" alpha="1" colorSpace="deviceRGB"/>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Business Name or Category" minimumFontSize="17" clearButtonMode="always" id="3S0-VF-OIs" customClass="StylizedTextField">
                                         <rect key="frame" x="40" y="69" width="269" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -749,10 +744,11 @@
                                         <rect key="frame" x="141" y="104" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="krf-ke-awm">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="krf-ke-awm" customClass="StylizedButton">
                                         <rect key="frame" x="39" y="243" width="241" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <state key="normal" backgroundImage="btn_scan_qr_code.png">
+                                        <color key="backgroundColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
+                                        <state key="normal" title="Scan QR Code">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1042,10 +1038,10 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="shF-7X-2GL">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="shF-7X-2GL" customClass="StylizedButton">
                                         <rect key="frame" x="243" y="92" width="45" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Max" backgroundImage="btn_max.png">
+                                        <state key="normal" title="Max">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1574,12 +1570,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <rect key="contentStretch" x="0.0" y="0.70999999999999996" width="0.0" height="0.0"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="AjN-aR-aWs">
-                                        <rect key="frame" x="11" y="7" width="298" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" clearButtonMode="always" id="WMa-Cy-YRr">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" clearButtonMode="always" id="WMa-Cy-YRr" customClass="StylizedTextField">
                                         <rect key="frame" x="40" y="8" width="269" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2840,9 +2831,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PmL-d6-vpJ">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PmL-d6-vpJ" customClass="StylizedButton">
                                                 <rect key="frame" x="25" y="190" width="103" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Exchange">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2851,20 +2843,22 @@
                                                     <action selector="CategoryButton" destination="Gtr-aC-t0S" eventType="touchUpInside" id="ae5-ht-r4L"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Py-nn-1AR">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Py-nn-1AR" customClass="StylizedButton">
                                                 <rect key="frame" x="25" y="302" width="121" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="Details">
+                                                <state key="normal" title="Advanced">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="AdvancedDetails" destination="Gtr-aC-t0S" eventType="touchUpInside" id="pkS-ur-JQP"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n7B-WE-395">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n7B-WE-395" customClass="StylizedButton">
                                                 <rect key="frame" x="173" y="301" width="121" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                                 <state key="normal" title="Done">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -3043,18 +3037,14 @@
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RadioButtonCell" rowHeight="37" id="df9-g3-qlT" customClass="RadioButtonCell">
                                                 <rect key="frame" x="0.0" y="55" width="291" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="df9-g3-qlT" id="Px9-MO-jKP">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="df9-g3-qlT" id="Px9-MO-jKP">
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="owt-QB-0Ju">
-                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                        </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xoZ-yo-zgk">
                                                             <rect key="frame" x="242" y="0.0" width="37" height="37"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g6f-f3-w6p" customClass="LatoLabel">
                                                             <rect key="frame" x="20" y="8" width="214" height="21"/>
@@ -3065,11 +3055,10 @@
                                                             <size key="shadowOffset" width="0.0" height="0.0"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
-                                                    <outlet property="bkgImage" destination="owt-QB-0Ju" id="dJ5-T1-hDk"/>
                                                     <outlet property="name" destination="g6f-f3-w6p" id="hVu-gy-u1Z"/>
                                                     <outlet property="radioButton" destination="xoZ-yo-zgk" id="lOG-fb-L1P"/>
                                                 </connections>
@@ -3096,15 +3085,10 @@
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlainCell" rowHeight="37" id="Ypm-7d-MqH" customClass="PlainCell">
                                                 <rect key="frame" x="0.0" y="136" width="291" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ypm-7d-MqH" id="3Pn-lw-SEB">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="Ypm-7d-MqH" id="3Pn-lw-SEB">
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="37o-nd-VVF">
-                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                        </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RqX-ow-U05" customClass="LatoLabel">
                                                             <rect key="frame" x="20" y="7" width="251" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -3117,32 +3101,21 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
-                                                    <outlet property="bkgImage" destination="37o-nd-VVF" id="KcO-JR-yrH"/>
                                                     <outlet property="name" destination="RqX-ow-U05" id="QQR-vc-DlY"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" rowHeight="37" id="feP-rn-4kz" customClass="TextFieldCell">
                                                 <rect key="frame" x="0.0" y="173" width="291" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="feP-rn-4kz" id="E0L-1T-x2a">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="feP-rn-4kz" id="E0L-1T-x2a">
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Al7-xm-sPk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                        </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="lHu-rb-W79">
-                                                            <rect key="frame" x="12" y="4" width="267" height="29"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                        </imageView>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="tIh-1R-4zh">
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="tIh-1R-4zh" customClass="StylizedTextField">
                                                             <rect key="frame" x="20" y="4" width="251" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
@@ -3150,26 +3123,20 @@
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
-                                                    <outlet property="bkgImage" destination="Al7-xm-sPk" id="yhX-b4-SNR"/>
                                                     <outlet property="textField" destination="tIh-1R-4zh" id="WCO-7M-MJN"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BooleanCell" rowHeight="37" id="me5-hG-XVx" customClass="BooleanCell">
                                                 <rect key="frame" x="0.0" y="210" width="291" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="me5-hG-XVx" id="0Re-Bz-wXO">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="me5-hG-XVx" id="0Re-Bz-wXO">
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Eu3-ob-hfP">
-                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                        </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pX1-NU-49a" customClass="LatoLabel">
                                                             <rect key="frame" x="20" y="8" width="196" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -3186,11 +3153,10 @@
                                                             </connections>
                                                         </switch>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
-                                                    <outlet property="bkgImage" destination="Eu3-ob-hfP" id="3xE-aY-ye5"/>
                                                     <outlet property="name" destination="pX1-NU-49a" id="FFM-MI-Iq7"/>
                                                     <outlet property="state" destination="qLX-2g-fOr" id="QZb-aS-NgT"/>
                                                 </connections>
@@ -3198,15 +3164,10 @@
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ButtonCell" rowHeight="37" id="7qj-Nh-UCb" customClass="ButtonCell">
                                                 <rect key="frame" x="0.0" y="247" width="291" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7qj-Nh-UCb" id="GXN-W3-ghL">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="7qj-Nh-UCb" id="GXN-W3-ghL">
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0fw-Q6-sDq">
-                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                        </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9ur-p7-oPb" customClass="LatoLabel">
                                                             <rect key="frame" x="20" y="8" width="196" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -3228,11 +3189,10 @@
                                                             </connections>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
-                                                    <outlet property="bkgImage" destination="0fw-Q6-sDq" id="snP-W6-UN3"/>
                                                     <outlet property="button" destination="nhU-8o-H50" id="MXG-nc-FY2"/>
                                                     <outlet property="name" destination="9ur-p7-oPb" id="92g-VR-1wl"/>
                                                 </connections>
@@ -3244,11 +3204,12 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xky-Rp-Nkh">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xky-Rp-Nkh" customClass="StylizedButton">
                                                             <rect key="frame" x="0.0" y="5" width="291" height="41"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                            <state key="normal" backgroundImage="btn_blue.png">
+                                                            <state key="normal">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
@@ -3270,21 +3231,23 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iUa-wU-ZnQ">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iUa-wU-ZnQ" customClass="StylizedButton">
                                                             <rect key="frame" x="0.0" y="5" width="143" height="41"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
-                                                            <state key="normal" backgroundImage="bg_btn_green.png">
+                                                            <state key="normal">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="Cancel" destination="Nwi-OG-lo2" eventType="touchUpInside" id="Nnv-AA-m6b"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W1v-bx-bSO">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W1v-bx-bSO" customClass="StylizedButton">
                                                             <rect key="frame" x="148" y="5" width="143" height="41"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" backgroundImage="btn_done.png">
+                                                            <color key="backgroundColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
+                                                            <state key="normal">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
@@ -3340,22 +3303,12 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <rect key="contentStretch" x="0.0" y="0.70999999999999996" width="0.0" height="0.0"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="xqy-8s-Kc3">
-                                        <rect key="frame" x="11" y="105" width="253" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
-                                    </imageView>
                                     <view contentMode="scaleToFill" id="GaA-K1-87Y" userLabel="View - PickerTextView - Add New" customClass="PickerTextView">
                                         <rect key="frame" x="20" y="106" width="244" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="Y4L-Yj-AuS">
-                                        <rect key="frame" x="11" y="68" width="298" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" clearButtonMode="always" id="X6G-HD-WUv">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" clearButtonMode="always" id="X6G-HD-WUv" customClass="StylizedTextField">
                                         <rect key="frame" x="40" y="69" width="269" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3402,26 +3355,29 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tabbar_base.png" id="DLe-wl-2SZ">
-                                <rect key="frame" x="0.0" y="426" width="320" height="54"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="DLe-wl-2SZ">
+                                <rect key="frame" x="0.0" y="426" width="320" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.070588238540000001" green="0.65098041299999998" blue="0.93333339689999995" alpha="1" colorSpace="deviceRGB"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="th1-bn-E4x">
-                                <rect key="frame" x="10" y="435" width="143" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="th1-bn-E4x" customClass="StylizedButton">
+                                <rect key="frame" x="10" y="442" width="143" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <state key="normal" title="Cancel" backgroundImage="btn_done.png">
+                                <state key="normal" title="CANCEL">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="Cancel" destination="sjK-gq-bVx" eventType="touchUpInside" id="TeV-ky-Akb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LAg-aY-W5b">
-                                <rect key="frame" x="167" y="435" width="143" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LAg-aY-W5b" customClass="StylizedButton">
+                                <rect key="frame" x="167" y="442" width="143" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <state key="normal" title="Done" backgroundImage="btn_cancel.png">
+                                <state key="normal" title="DONE">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -3431,18 +3387,19 @@
                             <view contentMode="scaleToFill" id="5RH-YC-xKK">
                                 <rect key="frame" x="0.0" y="140" width="320" height="293"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.81960784310000001" green="0.90196078430000004" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="wfo-0v-1Fd">
                                 <rect key="frame" x="0.0" y="140" width="320" height="293"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.81960784310000001" green="0.90196078430000004" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoriesCell" id="D1F-6W-k2p" customClass="CategoriesCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D1F-6W-k2p" id="v5H-O1-tYI">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="D1F-6W-k2p" id="v5H-O1-tYI">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -3456,19 +3413,15 @@
                                                         <action selector="buttonDeleteTouched:" destination="D1F-6W-k2p" eventType="touchUpInside" id="uru-Pe-fT9"/>
                                                     </connections>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="VjU-w1-oiT">
-                                                    <rect key="frame" x="11" y="13" width="253" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
-                                                </imageView>
                                                 <view contentMode="scaleToFill" id="Wy2-Sd-8S0" customClass="PickerTextView">
                                                     <rect key="frame" x="16" y="10" width="244" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.81960784313725488" green="0.90196078431372551" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="pickerTextView" destination="Wy2-Sd-8S0" id="LsZ-cx-3yl"/>
                                         </connections>
@@ -3537,10 +3490,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ag5-Xn-Vpg">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ag5-Xn-Vpg" customClass="StylizedButton">
                                 <rect key="frame" x="20" y="199" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Clear Watcher Cache" backgroundImage="btn_cancel.png">
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Clear Watcher Cache">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -3548,10 +3502,11 @@
                                     <action selector="clearWatcher:" destination="mgG-UH-rxA" eventType="touchUpInside" id="Iyc-6a-xHJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bs1-Yi-SIh">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bs1-Yi-SIh" customClass="StylizedButton">
                                 <rect key="frame" x="20" y="234" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload Log Files" backgroundImage="btn_cancel.png">
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Upload Log Files">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -3836,11 +3791,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lqV-Y6-LKD">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lqV-Y6-LKD" customClass="StylizedButton">
                                 <rect key="frame" x="67" y="369" width="185" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
-                                <state key="normal" title="Request Reset" backgroundImage="btn_big_green.png">
+                                <state key="normal" title="Request Reset">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -3848,11 +3804,12 @@
                                     <action selector="Reset:" destination="UTI-It-wVp" eventType="touchUpInside" id="mS4-cz-SXW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pki-9D-VwL">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pki-9D-VwL" customClass="StylizedButton">
                                 <rect key="frame" x="67" y="122" width="185" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
-                                <state key="normal" title="Scan Token" backgroundImage="btn_big_green.png">
+                                <state key="normal" title="Scan Token">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -4025,7 +3982,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_top.png" id="BhX-No-chB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="52"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999961" y="0.49999999999999994" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4070,7 +4027,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="Dzq-3h-Adz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="52"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999994" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4107,7 +4064,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="Hlz-Yq-T2I">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="52"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4143,7 +4100,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="clC-N3-iKS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="52"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4179,7 +4136,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle_white.png" id="866-tQ-bOR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="52"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4227,7 +4184,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle_white.png" id="ED4-SO-l2Q">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="52"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4382,12 +4339,13 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q2G-61-ExK">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q2G-61-ExK" customClass="StylizedButton">
                                                 <rect key="frame" x="34" y="98" width="251" height="43"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
-                                                <state key="normal" title="Log In" backgroundImage="btn_td_green.png">
+                                                <state key="normal" title="Log In">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -4415,12 +4373,13 @@
                                         <rect key="frame" x="0.0" y="461" width="320" height="107"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8iz-Uc-LTS">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8iz-Uc-LTS" customClass="StylizedButton">
                                                 <rect key="frame" x="34" y="10" width="252" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.85882359743118286" green="0.23529413342475891" blue="0.21176472306251526" alpha="1" colorSpace="deviceRGB"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
-                                                <state key="normal" title="Create Account" backgroundImage="btn_td_red.png">
+                                                <state key="normal" title="Create Account">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -4606,6 +4565,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Det-Mr-8a9" customClass="StylizedButton">
                                                 <rect key="frame" x="13" y="283" width="294" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <color key="backgroundColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                                 <state key="normal" title="Next Step">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4719,6 +4679,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gIX-pR-SaU" customClass="StylizedButton">
                                         <rect key="frame" x="36" y="403" width="251" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Complete Signup">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -4802,12 +4763,13 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Szb-Pc-bx6">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Szb-Pc-bx6" customClass="StylizedButton">
                                         <rect key="frame" x="34" y="210" width="252" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.85882359740000003" green="0.23529413339999999" blue="0.2117647231" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <size key="titleShadowOffset" width="0.0" height="1"/>
-                                        <state key="normal" title="Switch User" backgroundImage="btn_td_red.png">
+                                        <state key="normal" title="Switch User">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
@@ -5315,11 +5277,12 @@
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kjs-dz-76a">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kjs-dz-76a" customClass="StylizedButton">
                                                         <rect key="frame" x="35" y="206" width="251" height="41"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                                         <size key="titleShadowOffset" width="0.0" height="1"/>
-                                                        <state key="normal" title="Save" backgroundImage="btn_big_blue.png">
+                                                        <state key="normal" title="Save">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
@@ -5443,18 +5406,14 @@
         <image name="bd_icon_phone.png" width="11" height="15"/>
         <image name="bd_icon_share.png" width="16" height="16"/>
         <image name="bd_icon_web.png" width="15" height="16"/>
-        <image name="bg_btn_green.png" width="68" height="55"/>
         <image name="bkg_categories.png" width="320" height="209"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
-        <image name="bkg_textfield.png" width="13" height="15"/>
         <image name="btn_addCategory.png" width="38" height="31"/>
         <image name="btn_album.png" width="50" height="50"/>
         <image name="btn_alwaysConfirm_off.png" width="36" height="36"/>
         <image name="btn_alwaysConfirm_on.png" width="36" height="36"/>
-        <image name="btn_big_blue.png" width="251" height="41"/>
         <image name="btn_big_green.png" width="251" height="41"/>
         <image name="btn_blue.png" width="110" height="26"/>
-        <image name="btn_cancel.png" width="143" height="41"/>
         <image name="btn_deleteCategory.png" width="38" height="31"/>
         <image name="btn_done.png" width="143" height="41"/>
         <image name="btn_expand.png" width="100" height="106"/>
@@ -5464,13 +5423,9 @@
         <image name="btn_info.png" width="25" height="25"/>
         <image name="btn_light.png" width="252" height="38"/>
         <image name="btn_locateMe.png" width="39" height="39"/>
-        <image name="btn_max.png" width="251" height="41"/>
         <image name="btn_right.png" width="22" height="22"/>
-        <image name="btn_scan_qr_code.png" width="241" height="37"/>
         <image name="btn_search.png" width="32" height="33"/>
         <image name="btn_td_done.png" width="251" height="41"/>
-        <image name="btn_td_green.png" width="255" height="44"/>
-        <image name="btn_td_red.png" width="255" height="44"/>
         <image name="comp_09.2-send_bitcoin2.jpg" width="640" height="1136"/>
         <image name="copy_btn.png" width="80" height="42"/>
         <image name="darken_bottom_table_cell.png" width="320" height="111"/>

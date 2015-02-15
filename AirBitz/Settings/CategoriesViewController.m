@@ -164,8 +164,6 @@
 	cell.delegate = self;
 
     cell.pickerTextView.textField.returnKeyType = UIReturnKeyDone;
-    cell.pickerTextView.textField.borderStyle = UITextBorderStyleNone;
-    cell.pickerTextView.textField.backgroundColor = [UIColor clearColor];
     cell.pickerTextView.textField.font = [UIFont systemFontOfSize:14];
     cell.pickerTextView.textField.clearButtonMode = UITextFieldViewModeNever;
     cell.pickerTextView.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
