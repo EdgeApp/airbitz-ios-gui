@@ -870,37 +870,61 @@ static BOOL bOtpError = NO;
     return bValid;
 }
 
-+ (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet
++ (void)incRecoveryReminder
 {
-    tABC_CC cc = ABC_CC_Ok;
-    tABC_Error Error;
-    tABC_AccountSettings *pSettings = NULL;
-    BOOL bResult = NO;
+    [CoreBridge incRecoveryReminder:1];
+}
 
-    cc = ABC_LoadAccountSettings([[User Singleton].name UTF8String],
-                                 [[User Singleton].password UTF8String],
-                                 &pSettings,
-                                 &Error);
++ (void)clearRecoveryReminder
+{
+    [CoreBridge incRecoveryReminder:RECOVERY_REMINDER_COUNT];
+}
+
++ (void)incRecoveryReminder:(int)val
+{
+    tABC_Error error;
+    tABC_AccountSettings *pSettings = NULL;
+    tABC_CC cc = ABC_LoadAccountSettings([[User Singleton].name UTF8String],
+        [[User Singleton].password UTF8String], &pSettings, &error);
     if (cc == ABC_CC_Ok) {
-        if (wallet.balance >= RECOVERY_REMINDER_AMOUNT && pSettings->recoveryReminderCount < RECOVERY_REMINDER_COUNT) {
-            BOOL bQuestions = NO;
-            NSMutableString *errorMsg = [[NSMutableString alloc] init];
-            [CoreBridge getRecoveryQuestionsForUserName:[User Singleton].name
-                                              isSuccess:&bQuestions
-                                               errorMsg:errorMsg];
-            if (!bQuestions) {
-                pSettings->recoveryReminderCount++;
-                ABC_UpdateAccountSettings([[User Singleton].name UTF8String],
-                                          [[User Singleton].password UTF8String],
-                                          pSettings,
-                                          &Error);
-                bResult = YES;
-            }
-        }
-    } else {
-        [Util printABC_Error:&Error];
+        pSettings->recoveryReminderCount += val;
+        ABC_UpdateAccountSettings([[User Singleton].name UTF8String],
+            [[User Singleton].password UTF8String], pSettings, &error);
     }
     ABC_FreeAccountSettings(pSettings);
+}
+
++ (int)getReminderCount
+{
+    int count = 0;
+    tABC_Error error;
+    tABC_AccountSettings *pSettings = NULL;
+    tABC_CC cc = ABC_LoadAccountSettings([[User Singleton].name UTF8String],
+        [[User Singleton].password UTF8String], &pSettings, &error);
+    if (cc == ABC_CC_Ok) {
+        count = pSettings->recoveryReminderCount;
+    }
+    ABC_FreeAccountSettings(pSettings);
+    return count;
+}
+
++ (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet
+{
+    BOOL bResult = NO;
+    int reminderCount = [CoreBridge getReminderCount];
+    if (wallet.balance >= RECOVERY_REMINDER_AMOUNT && reminderCount < RECOVERY_REMINDER_COUNT) {
+        BOOL bQuestions = NO;
+        NSMutableString *errorMsg = [[NSMutableString alloc] init];
+        [CoreBridge getRecoveryQuestionsForUserName:[User Singleton].name
+                                            isSuccess:&bQuestions
+                                            errorMsg:errorMsg];
+        if (!bQuestions) {
+            [CoreBridge incRecoveryReminder];
+            bResult = YES;
+        } else {
+            [CoreBridge clearRecoveryReminder];
+        }
+    }
     return bResult;
 }
 

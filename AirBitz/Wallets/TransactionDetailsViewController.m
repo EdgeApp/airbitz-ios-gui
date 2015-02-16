@@ -511,17 +511,23 @@ typedef enum eRequestType
     self.transaction.bizId = _bizId;
     [CoreBridge storeTransaction: self.transaction];
 
-    if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
-        _recoveryAlert = [[UIAlertView alloc]
-                            initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
-                            message:NSLocalizedString(@"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.", nil)
-                            delegate:self
-                            cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                            otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
-        [_recoveryAlert show];
-    } else {
-        [self exit:YES];
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
+        if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
+            _recoveryAlert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
+                                message:NSLocalizedString(@"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.", nil)
+                                delegate:self
+                                cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [_recoveryAlert show];
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [self exit:YES];
+            });
+        }
+    });
 }
 
 - (IBAction)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
