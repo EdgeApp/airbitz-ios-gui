@@ -1090,6 +1090,9 @@
 		DA1E7CA91A8C187F007C6C05 /* StylizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */; };
 		DA4CFE45196F897B002CFD49 /* drag_bar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */; };
 		DA4CFE46196F897B002CFD49 /* drag_bar~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */; };
+		DA5509581A928E1300F57106 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509571A928E1300F57106 /* StylizedTextField2.m */; };
+		DA5509591A928E1300F57106 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509571A928E1300F57106 /* StylizedTextField2.m */; };
+		DA55095A1A928E1300F57106 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509571A928E1300F57106 /* StylizedTextField2.m */; };
 		DA7693881964FE8A0022EE64 /* copy_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */; };
 		DA7693891964FE8A0022EE64 /* copy_btn~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693831964FE8A0022EE64 /* copy_btn~iphone.png */; };
 		DA76938A1964FE8A0022EE64 /* email_btn@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7693841964FE8A0022EE64 /* email_btn@2x~iphone.png */; };
@@ -2402,6 +2405,8 @@
 		DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedButton.m; sourceTree = "<group>"; };
 		DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar@2x~iphone.png"; sourceTree = "<group>"; };
 		DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar~iphone.png"; sourceTree = "<group>"; };
+		DA5509561A928E1300F57106 /* StylizedTextField2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField2.h; sourceTree = "<group>"; };
+		DA5509571A928E1300F57106 /* StylizedTextField2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField2.m; sourceTree = "<group>"; };
 		DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copy_btn@2x~iphone.png"; sourceTree = "<group>"; };
 		DA7693831964FE8A0022EE64 /* copy_btn~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copy_btn~iphone.png"; sourceTree = "<group>"; };
 		DA7693841964FE8A0022EE64 /* email_btn@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email_btn@2x~iphone.png"; sourceTree = "<group>"; };
@@ -3060,6 +3065,8 @@
 				DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */,
 				B5FD393218F06FD800BE2670 /* StylizedTextField.h */,
 				B5FD393318F06FD800BE2670 /* StylizedTextField.m */,
+				DA5509561A928E1300F57106 /* StylizedTextField2.h */,
+				DA5509571A928E1300F57106 /* StylizedTextField2.m */,
 				68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */,
 				6893E6C819783FED0092DA04 /* SyncView.h */,
 				6893E6C919783FED0092DA04 /* SyncView.m */,
@@ -5311,6 +5318,7 @@
 				7D98AD0219A7C550003D2BF6 /* categoryCell.m in Sources */,
 				681946871A71BC6300BE1F34 /* CommonCell.m in Sources */,
 				7D98AD0319A7C550003D2BF6 /* CJSONSerializer.m in Sources */,
+				DA5509591A928E1300F57106 /* StylizedTextField2.m in Sources */,
 				7D98AD0419A7C550003D2BF6 /* ExportWalletOptionsViewController.m in Sources */,
 				7D98AD0519A7C550003D2BF6 /* main.m in Sources */,
 				7D98AD0619A7C550003D2BF6 /* TextFieldCell.m in Sources */,
@@ -5439,6 +5447,7 @@
 				B5C0A99618EA0BE7008F302C /* categoryCell.m in Sources */,
 				681946861A71BC6300BE1F34 /* CommonCell.m in Sources */,
 				B5137C3B18A435BD00DA4A34 /* CJSONSerializer.m in Sources */,
+				DA5509581A928E1300F57106 /* StylizedTextField2.m in Sources */,
 				4C5D8C911933C8040015BB3C /* ExportWalletOptionsViewController.m in Sources */,
 				B5675B5818A17F6F002E0703 /* main.m in Sources */,
 				B55A030E18EA4ED400845090 /* TextFieldCell.m in Sources */,
@@ -5567,6 +5576,7 @@
 				DAE8645D1A88A58A00A17BD3 /* categoryCell.m in Sources */,
 				DAE8645E1A88A58A00A17BD3 /* CommonCell.m in Sources */,
 				DAE8645F1A88A58A00A17BD3 /* CJSONSerializer.m in Sources */,
+				DA55095A1A928E1300F57106 /* StylizedTextField2.m in Sources */,
 				DAE864601A88A58A00A17BD3 /* ExportWalletOptionsViewController.m in Sources */,
 				DAE864611A88A58A00A17BD3 /* main.m in Sources */,
 				DAE864621A88A58A00A17BD3 /* TextFieldCell.m in Sources */,
