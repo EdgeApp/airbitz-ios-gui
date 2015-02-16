@@ -1348,6 +1348,13 @@ static BOOL bOtpError = NO;
     if ([dataQueue operationCount] > 0) {
         return;
     }
+
+    // Fetch general info
+    [dataQueue addOperationWithBlock:^{
+        tABC_Error error;
+        ABC_GeneralInfoUpdate(&error);
+        [Util printABC_Error:&error];
+    }];
     // Sync Account
     if (bDataFetched) {
         [dataQueue addOperationWithBlock:^{
