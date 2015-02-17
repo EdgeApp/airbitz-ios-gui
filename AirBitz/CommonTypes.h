@@ -48,6 +48,8 @@ typedef NS_ENUM(NSUInteger, RequestState) {
 #define ERROR_MESSAGE_FADE_DISMISS          0.1
 #define FADING_HELP_DURATION                5.0
 
+#define OTP_RESET_DELAY (60 * 60 * 24 * 7)
+
 #define LOCATION_UPDATE_PERIOD	60 /* seconds */
 
 // invalid send confirmation PIN and password entry
