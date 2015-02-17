@@ -35,29 +35,30 @@
     
     //set up the button characteristics
     button = [self findButton:0];
-    button.label.text = NSLocalizedString(@"Directory", "tab bar button title");
+    button.label.text = NSLocalizedString(@"DIRECTORY", "tab bar button title");
     button.icon.image = [UIImage imageNamed:@"icon_directory_dark"];
     button.selectedIcon.image = [UIImage imageNamed:@"icon_directory"];
     
     button = [self findButton:1];
-    button.label.text = NSLocalizedString(@"Request", "tab bar button title");
+    button.label.text = NSLocalizedString(@"RECEIVE", "tab bar button title");
     button.icon.image = [UIImage imageNamed:@"icon_request_dark"];
     button.selectedIcon.image = [UIImage imageNamed:@"icon_request"];
     
     button = [self findButton:2];
-    button.label.text = NSLocalizedString(@"Send", "tab bar button title");
+    button.label.text = NSLocalizedString(@"SEND", "tab bar button title");
     button.icon.image = [UIImage imageNamed:@"icon_send_dark"];
     button.selectedIcon.image = [UIImage imageNamed:@"icon_send"];
     
     button = [self findButton:3];
-    button.label.text = NSLocalizedString(@"Wallets", "tab bar button title");
+    button.label.text = NSLocalizedString(@"WALLETS", "tab bar button title");
     button.icon.image = [UIImage imageNamed:@"icon_wallet_dark"];
     button.selectedIcon.image = [UIImage imageNamed:@"icon_wallet"];
     
     button = [self findButton:4];
-    button.label.text = NSLocalizedString(@"Settings", "tab bar button title");
+    button.label.text = NSLocalizedString(@"SETTINGS", "tab bar button title");
     button.icon.image = [UIImage imageNamed:@"icon_settings_dark"];
     button.selectedIcon.image = [UIImage imageNamed:@"icon_settings"];
+    
 }
 
 -(void)showAllDividers

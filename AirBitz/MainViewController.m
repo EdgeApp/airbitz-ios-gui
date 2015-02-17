@@ -1003,10 +1003,10 @@ typedef enum eAppMode
     if (_otpRequiredAlert == nil) {
         _otpRequiredAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Two Factor Authentication On", nil)
-                                message:NSLocalizedString(@"Two Factor Authentication has been enabled on a different device. Would you like to obtain the Token from the other device?", nil)
+                                message:NSLocalizedString(@"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.", nil)
                                 delegate:self
-                                cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                otherButtonTitles:NSLocalizedString(@"Scan Token", nil), nil];
+                                cancelButtonTitle:NSLocalizedString(@"Remind Me Later", nil)
+                                otherButtonTitles:NSLocalizedString(@"Enable", nil), nil];
         [_otpRequiredAlert show];
     }
 }
