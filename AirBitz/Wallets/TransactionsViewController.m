@@ -782,26 +782,29 @@
             finalCell.backgroundColor = [UIColor clearColor];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(15, 0, 143.0, 41.0);
+            button.layer.borderWidth = 1.0;
             button.layer.cornerRadius = 5;
+            [button setBackgroundColor:UIColorFromARGB(0xFF80c342)];
+            [button.layer setBorderColor:[UIColorFromARGB(0xFF1b7400) CGColor]];
             button.clipsToBounds = YES;
-
-            [button setBackgroundColor:[UIColor colorWithRed:1.0 green:.63 blue:.25 alpha:1]];
+            //XXXP -paul
             
             [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
             [finalCell addSubview:button];
-            [button setTitle:@"      Request" forState:UIControlStateNormal];
+            [button setTitle:@"Receive" forState:UIControlStateNormal];
             button.titleLabel.font = [UIFont systemFontOfSize:15.0];
             self.buttonRequest = button;
 
-
-            
             button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(163.0, 0, 143.0, 41.0);
-            [button setBackgroundColor:[UIColor colorWithRed:0.5 green:.76 blue:.25 alpha:1]];
+//            [button setBackgroundColor:[UIColor colorWithRed:0.5 green:.76 blue:.25 alpha:1]];
             [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
             [finalCell addSubview:button];
-            [button setTitle:@"      Send" forState:UIControlStateNormal];
+            [button setTitle:@"Send" forState:UIControlStateNormal];
             button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+            [button.layer setBorderColor:[UIColorFromARGB(0xff006698) CGColor]];
+            [button setBackgroundColor:UIColorFromARGB(0xff2291cf)];
+            button.layer.borderWidth = 1.0;
             button.layer.cornerRadius = 5;
             button.clipsToBounds = YES;
 
