@@ -35,6 +35,10 @@
         [self.layer setBorderWidth:1.0];
 
     }
+    [self.layer setBorderColor:(__bridge CGColorRef)([UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8])];
+    [self.layer setBorderWidth:1.0];
+    
+    
     
 }
 
