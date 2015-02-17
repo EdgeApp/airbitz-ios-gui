@@ -26,8 +26,8 @@
 /* Class = "IBUITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
 "2cx-Qx-XQc.placeholder" = "User Name";
 
-/* Class = "IBUIButton"; normalTitle = "Advanced Details"; ObjectID = "3Py-nn-1AR"; */
-"3Py-nn-1AR.normalTitle" = "Advanced Details";
+/* Class = "IBUIButton"; normalTitle = "Advanced"; ObjectID = "3Py-nn-1AR"; */
+"3Py-nn-1AR.normalTitle" = "Advanced";
 
 /* Class = "IBUITextField"; placeholder = "Business Name or Category"; ObjectID = "3S0-VF-OIs"; */
 "3S0-VF-OIs.placeholder" = "Business Name or Category";
