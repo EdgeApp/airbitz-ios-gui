@@ -3049,14 +3049,21 @@
                                         <rect key="frame" x="14" y="0.0" width="291" height="455"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RadioButtonCell" rowHeight="37" id="df9-g3-qlT" customClass="RadioButtonCell">
                                                 <rect key="frame" x="0.0" y="55" width="291" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="df9-g3-qlT" id="Px9-MO-jKP">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="df9-g3-qlT" id="Px9-MO-jKP">
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="owt-QB-0Ju">
+                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                        </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xoZ-yo-zgk">
                                                             <rect key="frame" x="242" y="0.0" width="37" height="37"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -3071,10 +3078,11 @@
                                                             <size key="shadowOffset" width="0.0" height="0.0"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
+                                                    <outlet property="bkgImage" destination="owt-QB-0Ju" id="dJ5-T1-hDk"/>
                                                     <outlet property="name" destination="g6f-f3-w6p" id="hVu-gy-u1Z"/>
                                                     <outlet property="radioButton" destination="xoZ-yo-zgk" id="lOG-fb-L1P"/>
                                                 </connections>
@@ -3101,10 +3109,15 @@
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlainCell" rowHeight="37" id="Ypm-7d-MqH" customClass="PlainCell">
                                                 <rect key="frame" x="0.0" y="136" width="291" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="Ypm-7d-MqH" id="3Pn-lw-SEB">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ypm-7d-MqH" id="3Pn-lw-SEB">
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="37o-nd-VVF">
+                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                        </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RqX-ow-U05" customClass="LatoLabel">
                                                             <rect key="frame" x="20" y="7" width="251" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -3117,21 +3130,32 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
+                                                    <outlet property="bkgImage" destination="37o-nd-VVF" id="KcO-JR-yrH"/>
                                                     <outlet property="name" destination="RqX-ow-U05" id="QQR-vc-DlY"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" rowHeight="37" id="feP-rn-4kz" customClass="TextFieldCell">
                                                 <rect key="frame" x="0.0" y="173" width="291" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="feP-rn-4kz" id="E0L-1T-x2a">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="feP-rn-4kz" id="E0L-1T-x2a">
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="tIh-1R-4zh" customClass="StylizedTextField">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Al7-xm-sPk">
+                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="lHu-rb-W79">
+                                                            <rect key="frame" x="12" y="4" width="267" height="29"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                        </imageView>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="tIh-1R-4zh">
                                                             <rect key="frame" x="20" y="4" width="251" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
@@ -3139,20 +3163,26 @@
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
+                                                    <outlet property="bkgImage" destination="Al7-xm-sPk" id="yhX-b4-SNR"/>
                                                     <outlet property="textField" destination="tIh-1R-4zh" id="WCO-7M-MJN"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BooleanCell" rowHeight="37" id="me5-hG-XVx" customClass="BooleanCell">
                                                 <rect key="frame" x="0.0" y="210" width="291" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="me5-hG-XVx" id="0Re-Bz-wXO">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="me5-hG-XVx" id="0Re-Bz-wXO">
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Eu3-ob-hfP">
+                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                        </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pX1-NU-49a" customClass="LatoLabel">
                                                             <rect key="frame" x="20" y="8" width="196" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -3169,10 +3199,11 @@
                                                             </connections>
                                                         </switch>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
+                                                    <outlet property="bkgImage" destination="Eu3-ob-hfP" id="3xE-aY-ye5"/>
                                                     <outlet property="name" destination="pX1-NU-49a" id="FFM-MI-Iq7"/>
                                                     <outlet property="state" destination="qLX-2g-fOr" id="QZb-aS-NgT"/>
                                                 </connections>
@@ -3180,10 +3211,15 @@
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ButtonCell" rowHeight="37" id="7qj-Nh-UCb" customClass="ButtonCell">
                                                 <rect key="frame" x="0.0" y="247" width="291" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="7qj-Nh-UCb" id="GXN-W3-ghL">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7qj-Nh-UCb" id="GXN-W3-ghL">
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0fw-Q6-sDq">
+                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                        </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9ur-p7-oPb" customClass="LatoLabel">
                                                             <rect key="frame" x="20" y="8" width="196" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -3205,10 +3241,11 @@
                                                             </connections>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
+                                                    <outlet property="bkgImage" destination="0fw-Q6-sDq" id="snP-W6-UN3"/>
                                                     <outlet property="button" destination="nhU-8o-H50" id="MXG-nc-FY2"/>
                                                     <outlet property="name" destination="9ur-p7-oPb" id="92g-VR-1wl"/>
                                                 </connections>
@@ -3223,7 +3260,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xky-Rp-Nkh" customClass="StylizedButton">
                                                             <rect key="frame" x="0.0" y="5" width="291" height="41"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" red="0.1411764771" green="0.6549019814" blue="0.9215686917" alpha="1" colorSpace="deviceRGB"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                             <state key="normal">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -3247,23 +3284,21 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iUa-wU-ZnQ" customClass="StylizedButton">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iUa-wU-ZnQ">
                                                             <rect key="frame" x="0.0" y="5" width="143" height="41"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
-                                                            <state key="normal">
+                                                            <state key="normal" backgroundImage="bg_btn_green.png">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="Cancel" destination="Nwi-OG-lo2" eventType="touchUpInside" id="Nnv-AA-m6b"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W1v-bx-bSO" customClass="StylizedButton">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W1v-bx-bSO">
                                                             <rect key="frame" x="148" y="5" width="143" height="41"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
-                                                            <state key="normal">
+                                                            <state key="normal" backgroundImage="btn_done.png">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
@@ -3314,17 +3349,27 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="153"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SearchBarBacking.png" id="9Fy-sk-3as">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="9Fy-sk-3as">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="153"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="0.1411764771" green="0.6549019814" blue="0.9215686917" alpha="1" colorSpace="deviceRGB"/>
                                         <rect key="contentStretch" x="0.0" y="0.70999999999999996" width="0.0" height="0.0"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" id="GaA-K1-87Y" userLabel="View - PickerTextView - Add New" customClass="PickerTextView">
-                                        <rect key="frame" x="20" y="106" width="244" height="30"/>
+                                        <rect key="frame" x="10" y="106" width="254" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" clearButtonMode="always" id="X6G-HD-WUv" customClass="StylizedTextField">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="always" id="oKg-fT-Xek" customClass="StylizedTextField3">
+                                        <rect key="frame" x="10" y="69" width="300" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sjK-gq-bVx" id="cNU-cp-ZIO"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" clearButtonMode="always" id="X6G-HD-WUv">
                                         <rect key="frame" x="40" y="69" width="269" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3371,29 +3416,22 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="DLe-wl-2SZ">
-                                <rect key="frame" x="0.0" y="426" width="320" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.070588238540000001" green="0.65098041299999998" blue="0.93333339689999995" alpha="1" colorSpace="deviceRGB"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="th1-bn-E4x" customClass="StylizedButton">
-                                <rect key="frame" x="10" y="442" width="143" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="th1-bn-E4x">
+                                <rect key="frame" x="10" y="435" width="143" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <state key="normal" title="CANCEL">
+                                <state key="normal" title="Cancel" backgroundImage="btn_done.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="Cancel" destination="sjK-gq-bVx" eventType="touchUpInside" id="TeV-ky-Akb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LAg-aY-W5b" customClass="StylizedButton">
-                                <rect key="frame" x="167" y="442" width="143" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LAg-aY-W5b">
+                                <rect key="frame" x="167" y="435" width="143" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <state key="normal" title="DONE">
+                                <state key="normal" title="Done" backgroundImage="btn_cancel.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -3403,19 +3441,18 @@
                             <view contentMode="scaleToFill" id="5RH-YC-xKK">
                                 <rect key="frame" x="0.0" y="140" width="320" height="293"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.81960784310000001" green="0.90196078430000004" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="wfo-0v-1Fd">
                                 <rect key="frame" x="0.0" y="140" width="320" height="293"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.81960784310000001" green="0.90196078430000004" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoriesCell" id="D1F-6W-k2p" customClass="CategoriesCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="center" tableViewCell="D1F-6W-k2p" id="v5H-O1-tYI">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D1F-6W-k2p" id="v5H-O1-tYI">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -3429,15 +3466,19 @@
                                                         <action selector="buttonDeleteTouched:" destination="D1F-6W-k2p" eventType="touchUpInside" id="uru-Pe-fT9"/>
                                                     </connections>
                                                 </button>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="VjU-w1-oiT">
+                                                    <rect key="frame" x="11" y="13.5" width="253" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
+                                                </imageView>
                                                 <view contentMode="scaleToFill" id="Wy2-Sd-8S0" customClass="PickerTextView">
                                                     <rect key="frame" x="16" y="10" width="244" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" red="0.81960784313725488" green="0.90196078431372551" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="pickerTextView" destination="Wy2-Sd-8S0" id="LsZ-cx-3yl"/>
                                         </connections>
@@ -3454,7 +3495,6 @@
                     <connections>
                         <outlet property="cancelButton" destination="th1-bn-E4x" id="rLO-Xv-fCO"/>
                         <outlet property="doneButton" destination="LAg-aY-W5b" id="hnp-Er-jOQ"/>
-                        <outlet property="imageBottomBar" destination="DLe-wl-2SZ" id="fiS-n0-Rzh"/>
                         <outlet property="pickerTextNew" destination="GaA-K1-87Y" id="AG1-Vb-0tH"/>
                         <outlet property="tableView" destination="wfo-0v-1Fd" id="JaS-l8-Jhd"/>
                         <outlet property="textSearch" destination="X6G-HD-WUv" id="4sG-5o-p0a"/>
