@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StylizedTextField3.h"
 
 @protocol TextFieldCellDelegate;
 
 @interface TextFieldCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UITextField *textField;
+@property (nonatomic, weak) IBOutlet StylizedTextField3 *textField;
 @property (nonatomic, weak) IBOutlet UIImageView *bkgImage;
 @property (nonatomic, weak) IBOutlet UIImageView *textFieldBkgImage;
 

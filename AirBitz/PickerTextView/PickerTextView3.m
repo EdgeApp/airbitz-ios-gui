@@ -7,13 +7,13 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "PickerTextView.h"
+#import "PickerTextView3.h"
 
 #define PICKER_MAX_CELLS_VISIBLE        3
 #define PICKER_WIDTH                    320
 #define PICKER_CELL_HEIGHT              44
 
-@interface PickerTextView () <UITextFieldDelegate, PopupPickerViewDelegate>
+@interface PickerTextView3 () <UITextFieldDelegate, PopupPickerViewDelegate>
 {
     UIView *_viewTop;
     NSArray *_arrayCategories;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation PickerTextView
+@implementation PickerTextView3
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -96,7 +96,7 @@
     CGRect frame = self.frame;
     frame.origin.x = 0;
     frame.origin.y = 0;
-    self.textField = [[StylizedTextField alloc] initWithFrame:frame];
+    self.textField = [[StylizedTextField3 alloc] initWithFrame:frame];
     [self addSubview:self.textField];
 
     self.cropPointTop = -1;

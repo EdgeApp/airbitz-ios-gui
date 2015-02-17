@@ -938,6 +938,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	cell.bkgImage.image = bkgImage;
 	cell.delegate = self;
+//    cell.textField.backgroundColor = [UIColor whiteColor];
+    
 	if (indexPath.section == SECTION_NAME)
 	{
 		if (indexPath.row == 1)
@@ -1330,7 +1332,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 
 	//cell.backgroundColor = backgroundColor;
-	cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
+//	cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
 	return cell;
 }
 
