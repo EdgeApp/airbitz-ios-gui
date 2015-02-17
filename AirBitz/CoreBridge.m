@@ -541,13 +541,13 @@ static NSTimer *_notificationTimer;
     NSMutableString *uuids = [[NSMutableString alloc] init];
     for (Wallet *w in arrayWallets)
     {
-        [uuids stringByAppendingString:w.strUUID];
-        [uuids stringByAppendingString:@"\n"];
+        [uuids appendString:w.strUUID];
+        [uuids appendString:@"\n"];
     }
     for (Wallet *w in arrayArchivedWallets)
     {
-        [uuids stringByAppendingString:w.strUUID];
-        [uuids stringByAppendingString:@"\n"];
+        [uuids appendString:w.strUUID];
+        [uuids appendString:@"\n"];
     }
     NSString *ids = [uuids stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (ABC_SetWalletOrder([[User Singleton].name UTF8String],
