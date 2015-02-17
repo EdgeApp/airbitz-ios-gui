@@ -727,15 +727,12 @@
     if (_maxAmount > 0 && _maxAmount == self.amountToSendSatoshi)
     {
         color = [UIColor colorWithRed:255/255.0f green:166/255.0f blue:52/255.0f alpha:1.0f];
-        [_maxAmountButton setBackgroundImage:[UIImage imageNamed:@"btn_use_max.png"]
-                                    forState:UIControlStateNormal];
-
+        [_maxAmountButton setBackgroundColor:UIColorFromARGB(0xFFfca600) ];
     }
     else
     {
         color = [UIColor whiteColor];
-        [_maxAmountButton setBackgroundImage:[UIImage imageNamed:@"btn_max.png"]
-                                    forState:UIControlStateNormal];
+        [_maxAmountButton setBackgroundColor:UIColorFromARGB(0xFF72b83b) ];
     }
     if (sufficientFunds)
     {
