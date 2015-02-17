@@ -917,7 +917,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         } else if (indexPath.row == ROW_SPEND_LIMITS) {
 			cell.name.text = NSLocalizedString(@"Spending Limits", @"spending limits text");
         } else if (indexPath.row == ROW_TFA) {
-			cell.name.text = NSLocalizedString(@"Two Factor Authentication", nil);
+			cell.name.text = NSLocalizedString(@"2 Factor (Enhanced Security)", nil);
         }
     }
 	

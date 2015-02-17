@@ -57,7 +57,7 @@
         tABC_CC cc = ABC_OtpResetSet([_username UTF8String], &error);
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (cc == ABC_CC_Ok) {
-                [self showFadingAlert:NSLocalizedString(@"Reset requested.", nil)];
+                [self showFadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
                 [CoreBridge otpClearError];
             } else {
                 [self showFadingAlert:[Util errorMap:&error]];
