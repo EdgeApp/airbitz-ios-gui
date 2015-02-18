@@ -71,6 +71,10 @@
 {
 }
 
+- (void)stopQRReader
+{
+}
+
 #else 
 
 - (void)startQRReader
