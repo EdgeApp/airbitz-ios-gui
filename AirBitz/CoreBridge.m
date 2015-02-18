@@ -1332,7 +1332,7 @@ static BOOL bOtpError = NO;
         // Check the default currency for updates
         ABC_RequestExchangeRateUpdate([[User Singleton].name UTF8String],
                                       [[User Singleton].password UTF8String],
-                                      [User Singleton].defaultCurrencyNum, NULL, NULL, &error);
+                                      [User Singleton].defaultCurrencyNum, &error);
         [Util printABC_Error: &error];
 
         NSMutableArray *wallets = [[NSMutableArray alloc] init];
@@ -1344,7 +1344,7 @@ static BOOL bOtpError = NO;
             // We pass no callback so this call is blocking
             ABC_RequestExchangeRateUpdate([[User Singleton].name UTF8String],
                                           [[User Singleton].password UTF8String],
-                                          w.currencyNum, NULL, NULL, &error);
+                                          w.currencyNum, &error);
             [Util printABC_Error: &error];
         }
 
@@ -1542,18 +1542,18 @@ static BOOL bOtpError = NO;
         [CoreBridge setDefaultCurrencyNum:currencyNum];
 
         // create first wallet
-        tABC_CC result;
-        tABC_Error Error;
-        char **szUUID = NULL;
-        result = ABC_CreateWallet([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                  [NSLocalizedString(@"My Wallet", @"Name of initial wallet") UTF8String],
-                                  currencyNum,
-                                  0, NULL, &szUUID, &Error);
+        tABC_Error error;
+        char *szUUID = NULL;
+        ABC_CreateWallet([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+            [NSLocalizedString(@"My Wallet", @"Name of initial wallet") UTF8String],
+            currencyNum, &szUUID, &error);
+        if (szUUID) {
+            free(szUUID);
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
             [fadingAlert dismiss:NO];
         });
-        free(szUUID);
         [CoreBridge startWatchers];
 
         NSMutableArray *arrayCategories = [[NSMutableArray alloc] init];
@@ -1703,8 +1703,8 @@ static BOOL bOtpError = NO;
             NSString *strCategory = [arrayCategories objectAtIndex:i];
             ABC_AddCategory([[User Singleton].name UTF8String],
                             [[User Singleton].password UTF8String],
-                            (char *)[strCategory UTF8String], &Error);
-            [Util printABC_Error:&Error];
+                            (char *)[strCategory UTF8String], &error);
+            [Util printABC_Error:&error];
         }
     });
 }

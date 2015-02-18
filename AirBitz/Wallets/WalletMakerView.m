@@ -205,35 +205,24 @@
 
 - (void)createOnlineWallet
 {
-    tABC_CC result;
-	tABC_Error Error;
-
-    //NSLog(@"creating wallet: %s with currency code: %d", [self.textField.text UTF8String], [[self.arrayCurrencyNums objectAtIndex:_currencyChoice] intValue]);
-	result = ABC_CreateWallet([[User Singleton].name UTF8String],
-                              [[User Singleton].password UTF8String],
-                              [self.textField.text UTF8String],
-                              [[self.arrayCurrencyNums objectAtIndex:_currencyChoice] intValue],
-                              0,
-                              ABC_Wallet_Maker_Request_Callback,
-                              (__bridge void *)self,
-                              &Error);
-    [Util printABC_Error:&Error];
-
-    if (result == ABC_CC_Ok)
-    {
-        [self blockUser:YES];
-        _bCreatingWallet = YES;
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Create Wallet", nil)
-                                    message:[NSString stringWithFormat:@"Wallet creation failed:\n%@", [Util errorMap:&Error]]
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-    }
+    [self blockUser:YES];
+    _bCreatingWallet = YES;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        tABC_Error error;
+        char *szUUID = NULL;
+        ABC_CreateWallet([[User Singleton].name UTF8String],
+                                [[User Singleton].password UTF8String],
+                                [self.textField.text UTF8String],
+                                [[self.arrayCurrencyNums objectAtIndex:_currencyChoice] intValue],
+                                &szUUID,
+                                &error);
+        _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
+        _strReason = [Util errorMap:&error];
+        if (szUUID) {
+            free(szUUID);
+        }
+        [self performSelectorOnMainThread:@selector(createWalletComplete) withObject:nil waitUntilDone:FALSE];
+    });
 }
 
 - (void)createOfflineWallet
@@ -333,25 +322,6 @@
     }
 
 	return YES;
-}
-
-void ABC_Wallet_Maker_Request_Callback(const tABC_RequestResults *pResults)
-{
-    if (pResults)
-    {
-        WalletMakerView *controller = (__bridge id) pResults->pData;
-        controller.bSuccess = (BOOL) pResults->bSuccess;
-        controller.strReason = [Util errorMap:&(pResults->errorInfo)];
-        if (pResults->requestType == ABC_RequestType_CreateWallet)
-		{
-			if (pResults->pRetData && controller.bSuccess)
-            {
-                [CoreBridge startWatcher:[NSString stringWithFormat:@"%s", (char *) pResults->pRetData]];
-                free(pResults->pRetData);
-            }
-            [controller performSelectorOnMainThread:@selector(createWalletComplete) withObject:nil waitUntilDone:FALSE];
-		}
-    }
 }
 
 @end
