@@ -38,7 +38,7 @@
 @property (nonatomic) NSTimer *sendInvalidEntryTimer;
 @property (nonatomic) NSUInteger PINLoginInvalidEntryCount;
 @property (nonatomic) bool reviewNotified;
-@property (nonatomic) NSDate *twoWeeksAfterFirstLoginTime;
+@property (nonatomic) NSDate *firstLoginTime;
 @property (nonatomic) NSInteger loginCount;
 @property (nonatomic, assign) NSInteger requestViewCount;
 @property (nonatomic, assign) NSInteger sendViewCount;

@@ -15,11 +15,15 @@
 #define SPENDING_LIMIT_ENABLED @"spending_limit_enabled"
 
 #define REVIEW_NOTIFIED @"review_notified"
-#define TWO_WEEKS_AFTER_FIRST_LOGIN_TIME @"two_weeks_after_first_login_time"
+#define FIRST_LOGIN_TIME @"first_login_time"
 #define LOGIN_COUNT @"login_count"
 #define REQUEST_VIEW_COUNT @"request_view_count"
 #define SEND_VIEW_COUNT @"send_view_count"
 #define BLE_VIEW_COUNT @"ble_view_count"
+
+#define REVIEW_ACCOUNT_AGE 14
+#define REVIEW_LOGIN_COUNT 7
+#define REVIEW_TX_COUNT    7
 
 static BOOL bInitialized = NO;
 
@@ -87,7 +91,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.PINLoginInvalidEntryCount = 0;
     self.reviewNotified = NO;
     self.loginCount = 0;
-    self.twoWeeksAfterFirstLoginTime = 0;
+    self.firstLoginTime = nil;
     self.requestViewCount = 0;
     self.sendViewCount = 0;
     self.bleViewCount = 0;
@@ -160,7 +164,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
 {
     NSUserDefaults *localConfig = [NSUserDefaults standardUserDefaults];
     self.reviewNotified = [localConfig boolForKey:REVIEW_NOTIFIED];
-    self.twoWeeksAfterFirstLoginTime = [localConfig objectForKey:TWO_WEEKS_AFTER_FIRST_LOGIN_TIME];
+    self.firstLoginTime = [localConfig objectForKey:FIRST_LOGIN_TIME];
     self.loginCount = [localConfig integerForKey:LOGIN_COUNT];
     self.requestViewCount = [localConfig integerForKey:REQUEST_VIEW_COUNT];
     self.sendViewCount = [localConfig integerForKey:SEND_VIEW_COUNT];
@@ -183,7 +187,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     [localConfig setBool:_bDailySpendLimit forKey:[self userKey:SPENDING_LIMIT_ENABLED]];
 
     [localConfig setBool:self.reviewNotified forKey:REVIEW_NOTIFIED];
-    [localConfig setObject:self.twoWeeksAfterFirstLoginTime forKey:TWO_WEEKS_AFTER_FIRST_LOGIN_TIME];
+    [localConfig setObject:self.firstLoginTime forKey:FIRST_LOGIN_TIME];
     [localConfig setInteger:self.loginCount forKey:LOGIN_COUNT];
     [localConfig setInteger:self.requestViewCount forKey:REQUEST_VIEW_COUNT];
     [localConfig setInteger:self.sendViewCount forKey:SEND_VIEW_COUNT];
@@ -274,7 +278,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     BOOL ret = NO;
     BOOL timeTrigger = [User Singleton].timeUseTriggered;
     [User Singleton].loginCount++;
-    if ([User Singleton].loginCount >= 7 && timeTrigger
+    if ([User Singleton].loginCount >= REVIEW_LOGIN_COUNT && timeTrigger
             && [User Singleton].transactionCountTriggered) {
         [User Singleton].reviewNotified = true;
         ret = YES;
@@ -330,31 +334,43 @@ static User *singleton = nil;  // this will be the one and only object this stat
         for (Wallet *curWallet in arrayArchivedWallets) {
             transactionCount += [curWallet.arrayTransactions count];
         }
-        return transactionCount >= 7;
+        return transactionCount >= REVIEW_TX_COUNT;
     } else {
         return NO;
     }
 }
 
+- (NSDate *)earliestDate
+{
+    NSDate *date = [NSDate date];
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets:arrayWallets withTxs:YES];
+    for (Wallet *w in arrayWallets) {
+        for (Transaction *t in w.arrayTransactions) {
+            if (t.date && [t.date compare:date] == NSOrderedAscending) {
+                date = t.date;
+            }
+        }
+    }
+    return date;
+}
+
 - (BOOL)timeUseTriggered
 {
-    if (self.twoWeeksAfterFirstLoginTime == 0) {
-        NSDateComponents *comps = [NSDateComponents new];
-        [comps setDay:+14];
-        self.twoWeeksAfterFirstLoginTime =
-            [[NSCalendar currentCalendar] dateByAddingComponents:comps
-                                                         toDate:[NSDate date]
-                                                        options:0];
-        return YES;
-    } else {
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDateComponents *difference = [calendar components:NSDayCalendarUnit
-                                                   fromDate:self.twoWeeksAfterFirstLoginTime
-                                                     toDate:[NSDate date]
-                                                    options:0];
-        NSInteger days = [difference day];
-        return days > 0;
+    NSDate *earliest = [self earliestDate];
+    if (self.firstLoginTime == nil) {
+        self.firstLoginTime = earliest;
+        return NO;
     }
+    if ([earliest compare:self.firstLoginTime] == NSOrderedAscending) {
+        self.firstLoginTime = earliest;
+    }
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *difference = [calendar components:NSDayCalendarUnit
+                                                fromDate:self.firstLoginTime
+                                                    toDate:[NSDate date]
+                                                options:0];
+    return [difference day] >= REVIEW_ACCOUNT_AGE;
 }
 
 @end
