@@ -11,14 +11,10 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="aXY-Ea-f1s">
+        <view opaque="NO" contentMode="scaleToFill" id="aXY-Ea-f1s">
             <rect key="frame" x="0.0" y="0.0" width="320" height="229"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_calculator.png" id="PGR-8n-cdh">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="229"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V76-TG-gfn">
                     <rect key="frame" x="74" y="168" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -246,7 +242,6 @@
         </view>
     </objects>
     <resources>
-        <image name="bkg_calculator.png" width="320" height="229"/>
         <image name="btn_0.png" width="54" height="50"/>
         <image name="btn_1.png" width="54" height="50"/>
         <image name="btn_2.png" width="54" height="50"/>

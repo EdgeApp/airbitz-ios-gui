@@ -23,6 +23,7 @@
 #import "CommonTypes.h"
 #import "CategoriesViewController.h"
 #import "SpendingLimitsViewController.h"
+#import "TwoFactorShowViewController.h"
 #import "Util.h"
 #import "InfoView.h"
 #import "LocalSettings.h"
@@ -67,9 +68,10 @@
 #define ROW_DEFAULT_CURRENCY            1
 #define ROW_CHANGE_CATEGORIES           2
 #define ROW_SPEND_LIMITS                3
-#define ROW_MERCHANT_MODE               4
-#define ROW_BLE                         5
-#define ROW_PIN_RELOGIN                 6
+#define ROW_TFA                         4
+#define ROW_MERCHANT_MODE               5
+#define ROW_BLE                         6
+#define ROW_PIN_RELOGIN                 7
 
 #define ROW_US_DOLLAR                   0
 #define ROW_CANADIAN_DOLLAR             1
@@ -122,7 +124,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 };
 
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate, ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate, SpendingLimitsViewControllerDelegate, DebugViewControllerDelegate, CBCentralManagerDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate,
+                                      ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate,
+                                      PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate,
+                                      SpendingLimitsViewControllerDelegate, TwoFactorShowViewControllerDelegate, DebugViewControllerDelegate,
+                                      CBCentralManagerDelegate>
 {
     tABC_Currency                   *_aCurrencies;
     int                             _currencyCount;
@@ -133,6 +139,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     PasswordRecoveryViewController  *_passwordRecoveryController;
     CategoriesViewController        *_categoriesController;
     SpendingLimitsViewController    *_spendLimitsController;
+    TwoFactorShowViewController     *_tfaViewController;
     DebugViewController             *_debugViewController;
     BOOL                            _bKeyboardIsShown;
 	BOOL							_showBluetoothOption;
@@ -462,6 +469,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     }
 }
 
+- (void)bringUpTwoFactor
+{
+    _tfaViewController = (TwoFactorShowViewController *)[Util animateIn:@"TwoFactorShowViewController" parentController:self];
+    _tfaViewController.delegate = self;
+}
+
 - (void)bringUpDebugView
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
@@ -543,7 +556,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         CGFloat curOffsetY = self.tableView.contentOffset.y;
         CGPoint p = CGPointMake(0, curOffsetY + offsetChangeY);
 
-		[self.tableView setContentOffset:p animated:YES];
+        [self.tableView setContentOffset:p animated:YES];
     }
 }
 
@@ -901,9 +914,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         if (indexPath.row == ROW_CHANGE_CATEGORIES)
         {
 			cell.name.text = NSLocalizedString(@"Change Categories", @"settings text");
-        } else if (indexPath.row == ROW_SPEND_LIMITS)
-        {
+        } else if (indexPath.row == ROW_SPEND_LIMITS) {
 			cell.name.text = NSLocalizedString(@"Spending Limits", @"spending limits text");
+        } else if (indexPath.row == ROW_TFA) {
+			cell.name.text = NSLocalizedString(@"2 Factor (Enhanced Security)", nil);
         }
     }
 	
@@ -924,6 +938,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	cell.bkgImage.image = bkgImage;
 	cell.delegate = self;
+//    cell.textField.backgroundColor = [UIColor whiteColor];
+    
 	if (indexPath.section == SECTION_NAME)
 	{
 		if (indexPath.row == 1)
@@ -1141,11 +1157,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			//assumes bluetooth option is last of the options.
 			if(_showBluetoothOption)
 			{
-				return 7;
+				return 8;
 			}
 			else
 			{
-				return 6; //return 5 to not show the Bluetooth cell.
+				return 7; //return 7 to not show the Bluetooth cell.
 			}
             break;
 
@@ -1280,7 +1296,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		}
 		else if (indexPath.section == SECTION_OPTIONS)
 		{
-            if (indexPath.row == ROW_CHANGE_CATEGORIES || indexPath.row == ROW_SPEND_LIMITS)
+            if (indexPath.row == ROW_CHANGE_CATEGORIES || indexPath.row == ROW_SPEND_LIMITS || indexPath.row == ROW_TFA)
             {
                 cell = [self getPlainCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
             }
@@ -1316,7 +1332,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 
 	//cell.backgroundColor = backgroundColor;
-	cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
+//	cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
 	return cell;
 }
 
@@ -1359,6 +1375,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             else if (indexPath.row == ROW_SPEND_LIMITS)
             {
                 [self bringUpSpendingLimits];
+            }
+            else if (indexPath.row == ROW_TFA)
+            {
+                [self bringUpTwoFactor];
             }
             break;
 
@@ -1431,6 +1451,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		 _spendLimitsController = nil;
          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 	 }];
+}
+
+#pragma mark - TwoFactorShowViewControllerDelegate
+
+- (void)twoFactorShowViewControllerDone:(TwoFactorShowViewController *)controller withBackButton:(BOOL)bBack
+{
+    [Util animateOut:controller parentController:self complete:^(void) {
+        _tfaViewController = nil;
+    }];
 }
 
 #pragma mark - BooleanCell Delegate

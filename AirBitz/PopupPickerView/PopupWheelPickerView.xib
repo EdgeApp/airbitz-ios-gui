@@ -30,7 +30,6 @@
                 <view contentMode="scaleToFill" id="20">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.066666666666666666" green="0.50196078431372548" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="picker_left_point.png" id="10">
                     <rect key="frame" x="-16" y="28" width="16" height="22"/>

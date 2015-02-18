@@ -92,11 +92,6 @@
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
     
     self.nextButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
-    [self.nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.nextButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.nextButton.titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-    UIImage *buttonImage = [UIImage imageNamed:@"btn_expand_green.png"];
-    [self.nextButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
 }
 
 -(void)awakeFromNib
@@ -366,57 +361,6 @@
 	}
 }
 
-- (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height
-{
-	//converts raw monochrome bitmap data (each byte is a 1 or a 0 representing a pixel) into a UIImage
-	char *pixels = malloc(4 * width * width);
-	char *buf = pixels;
-		
-	for (int y = 0; y < height; y++)
-	{
-		for (int x = 0; x < width; x++)
-		{
-			if (data[(y * width) + x] & 0x1)
-			{
-				//printf("%c", '*');
-				*buf++ = 0;
-				*buf++ = 0;
-				*buf++ = 0;
-				*buf++ = 255;
-			}
-			else
-			{
-				printf(" ");
-				*buf++ = 255;
-				*buf++ = 255;
-				*buf++ = 255;
-				*buf++ = 255;
-			}
-		}
-		//printf("\n");
-	}
-	
-	CGContextRef ctx;
-	CGImageRef imageRef;
-	
-	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	ctx = CGBitmapContextCreate(pixels,
-								(float)width,
-								(float)height,
-								8,
-								width * 4,
-								colorSpace,
-								(CGBitmapInfo)kCGImageAlphaPremultipliedLast ); //documentation says this is OK
-	CGColorSpaceRelease(colorSpace);
-	imageRef = CGBitmapContextCreateImage (ctx);
-	UIImage* rawImage = [UIImage imageWithCGImage:imageRef];
-	
-	CGContextRelease(ctx);
-	CGImageRelease(imageRef);
-	free(pixels);
-	return rawImage;
-}
-
 -(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address requestURI:(NSString *)strRequestURI withAmount:(SInt64)amountSatoshi  withDonation:(SInt64)donation withRequestState:(RequestState)state
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
@@ -499,7 +443,7 @@
 
         if (result == ABC_CC_Ok)
         {
-                qrImage = [self dataToImage:pData withWidth:width andHeight:width];
+                qrImage = [Util dataToImage:pData withWidth:width andHeight:width];
 
             if (pszURI && strRequestURI)
             {
@@ -575,7 +519,14 @@
 - (void)updateTextFieldContents
 {
     tABC_Error error;
+    
+    if (_selectedWalletIndex >= [self.arrayWallets count])
+    {
+        return;
+    }
+    
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    
     self.exchangeRateLabel.text = [CoreBridge conversionString:wallet];
     self.USDLabel_TextField.text = wallet.currencyAbbrev;
 	if (_selectedTextField == self.BTC_TextField)

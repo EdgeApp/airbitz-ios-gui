@@ -187,7 +187,7 @@
     }
 }
 
--(void)createBlockingButtonUnderView:(UIView *)view
+-(void)createBlockingButton:(UIView *)view
 {
 	_blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	CGRect frame = self.view.bounds;
@@ -195,7 +195,7 @@
 	frame.size.height = self.view.bounds.size.height - frame.origin.y;
 	_blockingButton.frame = frame;
 	_blockingButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-	[self.view insertSubview:_blockingButton belowSubview:self.walletMakerView];
+    [self.view insertSubview:_blockingButton belowSubview:view];
 	_blockingButton.alpha = 0.0;
 
 	[_blockingButton addTarget:self
@@ -253,6 +253,23 @@
     [CoreBridge loadWallets:self.arrayWallets
                    archived:self.arrayArchivedWallets
                     withTxs:NO];
+    [self lockIfLoading];
+}
+
+- (void)lockIfLoading
+{
+    // Still loading?
+    int loadingCount = 0;
+    for (Wallet *w in self.arrayWallets) {
+        if (!w.loaded) {
+            loadingCount++;
+        }
+    }
+    if (loadingCount > 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LOCK_TABBAR object:self];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UNLOCK_TABBAR object:self];
+    }
 }
 
 - (void)updateBalanceView
@@ -411,7 +428,7 @@
 		_walletMakerVisible = YES;
 		self.walletMakerView.hidden = NO;
 		[[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
-		[self createBlockingButtonUnderView:self.walletMakerView];
+        [self createBlockingButton:self.walletMakerView];
         [self.walletMakerView.textField becomeFirstResponder];
 		[UIView animateWithDuration:0.35
 							  delay:0.0

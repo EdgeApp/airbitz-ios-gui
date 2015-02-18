@@ -22,7 +22,7 @@
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate,
-                                              InfoViewDelegate, FadingAlertViewDelegate>
+                                              InfoViewDelegate>
 {
     ConfirmationSliderView              *_confirmationSlider;
     UITextField                         *_selectedTextField;
@@ -727,15 +727,12 @@
     if (_maxAmount > 0 && _maxAmount == self.amountToSendSatoshi)
     {
         color = [UIColor colorWithRed:255/255.0f green:166/255.0f blue:52/255.0f alpha:1.0f];
-        [_maxAmountButton setBackgroundImage:[UIImage imageNamed:@"btn_use_max.png"]
-                                    forState:UIControlStateNormal];
-
+        [_maxAmountButton setBackgroundColor:UIColorFromARGB(0xFFfca600) ];
     }
     else
     {
         color = [UIColor whiteColor];
-        [_maxAmountButton setBackgroundImage:[UIImage imageNamed:@"btn_max.png"]
-                                    forState:UIControlStateNormal];
+        [_maxAmountButton setBackgroundColor:UIColorFromARGB(0xFF72b83b) ];
     }
     if (sufficientFunds)
     {
@@ -828,21 +825,17 @@
 
 - (void)showFadingError:(NSString *)message
 {
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
     _fadingAlert.message = message;
     _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
     _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
+    [_fadingAlert blockModal:NO];
     [_fadingAlert showFading];
 }
 
 - (void)dismissErrorMessage
 {
     [_fadingAlert dismiss:NO];
-    _fadingAlert = nil;
-}
-
-- (void)fadingAlertDismissed:(FadingAlertView *)view
-{
     _fadingAlert = nil;
 }
 
@@ -859,8 +852,6 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self dismissErrorMessage];
-
     _selectedTextField = textField;
     if (_selectedTextField == self.amountBTCTextField)
         self.keypadView.calcMode = CALC_MODE_COIN;
@@ -925,12 +916,29 @@
             [_withdrawlPIN selectAll:nil];
         } else if (self.amountToSendSatoshi == 0) {
             [self showFadingError:NSLocalizedString(@"Please enter an amount to send", nil)];
+        } else if (self.amountToSendSatoshi < DUST_AMOUNT) {
+            [self tooSmallAlert];
         } else {
             NSLog(@"SUCCESS!");
             [self initiateSendRequest];
         }
     }
     [_confirmationSlider resetIn:1.0];
+}
+
+- (void)tooSmallAlert
+{
+    double currency;
+    tABC_Error error;
+    ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], DUST_AMOUNT, &currency, self.wallet.currencyNum, &error);
+    if (error.code == ABC_CC_Ok) {
+        [self showFadingError:[NSString stringWithFormat:
+            NSLocalizedString(@"Amount is too small. Please send at least %@ (~%@)", nil),
+                [CoreBridge formatSatoshi:DUST_AMOUNT],
+                [CoreBridge formatCurrency:currency withCurrencyNum:self.wallet.currencyNum]]];
+    } else {
+        [self showFadingError:NSLocalizedString(@"Amount is too small", nil)];
+    }
 }
 
 #pragma mark - Calculator delegates

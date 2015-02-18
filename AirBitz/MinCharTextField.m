@@ -16,6 +16,13 @@
     if (self)
 	{
         // Initialization code
+        UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+        self.leftView = paddingView;
+        self.leftViewMode = UITextFieldViewModeAlways;
+        self.rightView = paddingView;
+        self.rightViewMode = UITextFieldViewModeAlways;
+        self.tintColor = [UIColor whiteColor];
+
     }
     return self;
 }
@@ -41,8 +48,7 @@
 	}
 	else
 	{
-		self.layer.borderColor = [[UIColor clearColor] CGColor];
-		self.layer.borderWidth = 0.0;
+        [self resetBorder];
 		_satisfiesMinimumCharacters = YES;
 	}
 }

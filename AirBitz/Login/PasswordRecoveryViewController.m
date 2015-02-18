@@ -7,6 +7,7 @@
 //
 
 #import "PasswordRecoveryViewController.h"
+#import "TwoFactorMenuViewController.h"
 #import "QuestionAnswerView.h"
 #import "ABC.h"
 #import "User.h"
@@ -29,12 +30,17 @@ typedef enum eAlertType
 	ALERT_TYPE_EXIT
 } tAlertType;
 
-@interface PasswordRecoveryViewController () <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
+@interface PasswordRecoveryViewController ()
+    <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate,
+     UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorMenuViewControllerDelegate>
 {
 	float                   _completeButtonToEmbossImageDistance;
 	UITextField             *_activeTextField;
 	CGSize                  _defaultContentSize;
 	tAlertType              _alertType;
+    tABC_CC                 _statusCode;
+    TwoFactorMenuViewController *_tfaMenuViewController;
+    NSString                    *_secret;
 }
 
 @property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
@@ -53,7 +59,7 @@ typedef enum eAlertType
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray        *arrayCategoryString;
 @property (nonatomic, strong) NSMutableArray        *arrayCategoryNumeric;
-//@property (nonatomic, strong) NSMutableArray      *arrayCategoryAddress;
+@property (nonatomic, strong) NSMutableArray        *arrayCategoryMust;
 @property (nonatomic, strong) NSMutableArray        *arrayChosenQuestions;
 @property (nonatomic, copy)   NSString              *strReason;
 @property (nonatomic, assign) BOOL                  bSuccess;
@@ -81,7 +87,7 @@ typedef enum eAlertType
 
 	self.arrayCategoryString	= [[NSMutableArray alloc] init];
 	self.arrayCategoryNumeric	= [[NSMutableArray alloc] init];
-//	self.arrayCategoryAddress	= [[NSMutableArray alloc] init];
+	self.arrayCategoryMust      = [[NSMutableArray alloc] init];
 	self.arrayChosenQuestions	= [[NSMutableArray alloc] init];
 
 	//NSLog(@"Adding keyboard notification");
@@ -336,10 +342,17 @@ typedef enum eAlertType
     _bSuccess = NO;
     [self showSpinner:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        BOOL bSuccess = [CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName];
+        tABC_Error error;
+        BOOL bSuccess = [CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName status:&error];
         NSArray *params = [NSArray arrayWithObjects:strAnswers, nil];
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             _bSuccess = bSuccess;
+            _statusCode = error.code;
+            // If we have otp enabled, persist the token
+            if (_secret != nil) {
+                ABC_OtpKeySet([self.strUserName UTF8String], [_secret UTF8String], &error);
+            }
+                    
             [self performSelectorOnMainThread:@selector(checkRecoveryAnswersResponse:) withObject:params waitUntilDone:NO];
         });
     });
@@ -355,14 +368,60 @@ typedef enum eAlertType
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
-							  message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
+        [CoreBridge otpSetError:_statusCode];
+        if (ABC_CC_InvalidOTP  == _statusCode) {
+            [self launchTwoFactorMenu];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
+                                message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
+                                delegate:nil
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+            [alert show];
+        }
     }
+}
+
+- (void)launchTwoFactorMenu
+{
+    _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" parentController:self];
+    _tfaMenuViewController.delegate = self;
+    _tfaMenuViewController.username = self.strUserName;
+    _tfaMenuViewController.bStoreSecret = NO;
+    _tfaMenuViewController.bTestSecret = NO;
+}
+
+#pragma mark - TwoFactorScanViewControllerDelegate
+
+- (void)twoFactorMenuViewControllerDone:(TwoFactorMenuViewController *)controller withBackButton:(BOOL)bBack
+{
+    BOOL _bSuccess = controller.bSuccess;
+    _secret = controller.secret;
+    [Util animateOut:controller parentController:self complete:^(void) {
+        _tfaMenuViewController = nil;
+
+        BOOL success = _bSuccess;
+        if (success) {
+            tABC_Error error;
+            ABC_OtpKeySet([self.strUserName UTF8String], [_secret UTF8String], &error);
+            if (error.code == ABC_CC_Ok) {
+                // Try again with OTP
+                [self CompleteSignup];
+            } else {
+                success = NO;
+            }
+        }
+        if (!success && !bBack) {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Unable to import token", nil)
+                                message:NSLocalizedString(@"We are sorry we are unable to import the token at this time.", nil)
+                                delegate:nil
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
 }
 
 - (void)commitQuestions:(NSString *)strQuestions andAnswersToABC:(NSString *)strAnswers
@@ -686,7 +745,7 @@ typedef enum eAlertType
 
 - (void)categorizeQuestionChoices:(tABC_QuestionChoices *)pChoices
 {
-	//splits wad of questions into three categories:  string, numeric and address
+	//splits wad of questions into three categories:  string, numeric and must
     if (pChoices)
     {
         if (pChoices->aChoices)
@@ -710,10 +769,10 @@ typedef enum eAlertType
 				{
 					[self.arrayCategoryNumeric addObject:dict];
 				}
-//				else if([category isEqualToString:@"address"])
-//				{
-//					[self.arrayCategoryAddress addObject:dict];
-//				}
+				else if([category isEqualToString:@"must"])
+				{
+					[self.arrayCategoryMust addObject:dict];
+				}
             }
         }
     }
@@ -797,19 +856,20 @@ void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
 	}
 	
 	//populate available questions
-	if (view.tag < 4)
+	if (view.tag < 2)
 	{
 		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryString];
 	}
-	else
+	else if (view.tag < 4)
 	{
 		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryNumeric];
 	}
-//	else
-//	{
-//		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryAddress];
-//	}
-	CGSize contentSize = self.scrollView.contentSize;
+	else
+	{
+		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryMust];
+	}
+
+    CGSize contentSize = self.scrollView.contentSize;
 	
 	if ((frame.origin.y + frame.size.height) > self.scrollView.contentSize.height)
 	{

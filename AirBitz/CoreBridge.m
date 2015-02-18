@@ -31,7 +31,7 @@
 
 static NSDictionary *_localeAsCurrencyNum;
 
-const int64_t RECOVERY_REMINDER_AMOUNT = 2000000;
+const int64_t RECOVERY_REMINDER_AMOUNT = 10000000;
 const int RECOVERY_REMINDER_COUNT = 2;
 
 static BOOL bInitialized = NO;
@@ -57,6 +57,7 @@ static CoreBridge *singleton = nil;
 static NSTimer *_exchangeTimer;
 static NSTimer *_dataSyncTimer;
 static NSTimer *_notificationTimer;
+static BOOL bOtpError = NO;
 
 + (void)initAll
 {
@@ -845,16 +846,15 @@ static NSTimer *_notificationTimer;
     return arrayQuestions;
 }
 
-+ (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName
++ (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName status:(tABC_Error *)error
 {
     BOOL bValid = NO;
     bool bABCValid = false;
 
-    tABC_Error Error;
     tABC_CC result = ABC_CheckRecoveryAnswers([strUserName UTF8String],
                                               [strAnswers UTF8String],
                                               &bABCValid,
-                                              &Error);
+                                              error);
     if (ABC_CC_Ok == result)
     {
         if (bABCValid == true)
@@ -864,43 +864,67 @@ static NSTimer *_notificationTimer;
     }
     else
     {
-        [Util printABC_Error:&Error];
+        [Util printABC_Error:error];
     }
 
     return bValid;
 }
 
-+ (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet
++ (void)incRecoveryReminder
 {
-    tABC_CC cc = ABC_CC_Ok;
-    tABC_Error Error;
-    tABC_AccountSettings *pSettings = NULL;
-    BOOL bResult = NO;
+    [CoreBridge incRecoveryReminder:1];
+}
 
-    cc = ABC_LoadAccountSettings([[User Singleton].name UTF8String],
-                                 [[User Singleton].password UTF8String],
-                                 &pSettings,
-                                 &Error);
++ (void)clearRecoveryReminder
+{
+    [CoreBridge incRecoveryReminder:RECOVERY_REMINDER_COUNT];
+}
+
++ (void)incRecoveryReminder:(int)val
+{
+    tABC_Error error;
+    tABC_AccountSettings *pSettings = NULL;
+    tABC_CC cc = ABC_LoadAccountSettings([[User Singleton].name UTF8String],
+        [[User Singleton].password UTF8String], &pSettings, &error);
     if (cc == ABC_CC_Ok) {
-        if (wallet.balance >= RECOVERY_REMINDER_AMOUNT && pSettings->recoveryReminderCount < RECOVERY_REMINDER_COUNT) {
-            BOOL bQuestions = NO;
-            NSMutableString *errorMsg = [[NSMutableString alloc] init];
-            [CoreBridge getRecoveryQuestionsForUserName:[User Singleton].name
-                                              isSuccess:&bQuestions
-                                               errorMsg:errorMsg];
-            if (!bQuestions) {
-                pSettings->recoveryReminderCount++;
-                ABC_UpdateAccountSettings([[User Singleton].name UTF8String],
-                                          [[User Singleton].password UTF8String],
-                                          pSettings,
-                                          &Error);
-                bResult = YES;
-            }
-        }
-    } else {
-        [Util printABC_Error:&Error];
+        pSettings->recoveryReminderCount += val;
+        ABC_UpdateAccountSettings([[User Singleton].name UTF8String],
+            [[User Singleton].password UTF8String], pSettings, &error);
     }
     ABC_FreeAccountSettings(pSettings);
+}
+
++ (int)getReminderCount
+{
+    int count = 0;
+    tABC_Error error;
+    tABC_AccountSettings *pSettings = NULL;
+    tABC_CC cc = ABC_LoadAccountSettings([[User Singleton].name UTF8String],
+        [[User Singleton].password UTF8String], &pSettings, &error);
+    if (cc == ABC_CC_Ok) {
+        count = pSettings->recoveryReminderCount;
+    }
+    ABC_FreeAccountSettings(pSettings);
+    return count;
+}
+
++ (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet
+{
+    BOOL bResult = NO;
+    int reminderCount = [CoreBridge getReminderCount];
+    if (wallet.balance >= RECOVERY_REMINDER_AMOUNT && reminderCount < RECOVERY_REMINDER_COUNT) {
+        BOOL bQuestions = NO;
+        NSMutableString *errorMsg = [[NSMutableString alloc] init];
+        [CoreBridge getRecoveryQuestionsForUserName:[User Singleton].name
+                                            isSuccess:&bQuestions
+                                            errorMsg:errorMsg];
+        if (!bQuestions) {
+            [CoreBridge incRecoveryReminder];
+            bResult = YES;
+        } else {
+            [CoreBridge clearRecoveryReminder];
+        }
+    }
     return bResult;
 }
 
@@ -1046,8 +1070,10 @@ static NSTimer *_notificationTimer;
 
     [LocalSettings saveAll];
     bDataFetched = NO;
+    bOtpError = NO;
     [CoreBridge startWatchers];
     [CoreBridge startQueues];
+
 
     iLoginTimeSeconds = (int) [[NSDate date] timeIntervalSince1970];
 }
@@ -1322,17 +1348,30 @@ static NSTimer *_notificationTimer;
     if ([dataQueue operationCount] > 0) {
         return;
     }
+
+    // Fetch general info
+    [dataQueue addOperationWithBlock:^{
+        tABC_Error error;
+        ABC_GeneralInfoUpdate(&error);
+        [Util printABC_Error:&error];
+    }];
     // Sync Account
     if (bDataFetched) {
         [dataQueue addOperationWithBlock:^{
             [[NSThread currentThread] setName:@"Data Sync"];
             tABC_Error error;
-            ABC_DataSyncAccount([[User Singleton].name UTF8String],
-                                [[User Singleton].password UTF8String],
-                                ABC_BitCoin_Event_Callback,
-                                (__bridge void *) singleton,
-                                &error);
-            [Util printABC_Error: &error];
+            tABC_CC cc =
+                ABC_DataSyncAccount([[User Singleton].name UTF8String],
+                                    [[User Singleton].password UTF8String],
+                                    ABC_BitCoin_Event_Callback,
+                                    (__bridge void *) singleton,
+                                    &error);
+            [CoreBridge otpSetError:cc];
+            if (cc == ABC_CC_InvalidOTP) {
+                [singleton performSelectorOnMainThread:@selector(notifyOtpRequired:)
+                                            withObject:nil
+                                         waitUntilDone:NO];
+            }
         }];
     }
     // Sync Wallets
@@ -1697,6 +1736,11 @@ static NSTimer *_notificationTimer;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:self];
 }
 
+- (void)notifyOtpRequired:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_OTP_REQUIRED object:self];
+}
+
 - (void)notifyExchangeRate:(NSArray *)params
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:self];
@@ -1727,6 +1771,21 @@ static NSTimer *_notificationTimer;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:self];
 }
 
++ (void)otpSetError:(tABC_CC)cc
+{
+    bOtpError = ABC_CC_InvalidOTP == cc;
+}
+
++ (BOOL)otpHasError;
+{
+    return bOtpError;
+}
+
++ (void)otpClearError
+{
+    bOtpError = NO;
+}
+
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
     CoreBridge *coreBridge = (__bridge id) pInfo->pData;
@@ -1737,10 +1796,10 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         };
         NSArray *params = [NSArray arrayWithObjects: data, nil];
         [coreBridge performSelectorOnMainThread:@selector(notifyReceiving:) withObject:params waitUntilDone:NO];
+    // } else if (pInfo->eventType == ABC_AsyncEventType_OtpRequired) {
+    //     [coreBridge performSelectorOnMainThread:@selector(notifyOtpRequired:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
         [coreBridge performSelectorOnMainThread:@selector(notifyBlockHeight:) withObject:nil waitUntilDone:NO];
-    } else if (pInfo->eventType == ABC_AsyncEventType_ExchangeRateUpdate) {
-        [coreBridge performSelectorOnMainThread:@selector(notifyExchangeRate:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_DataSyncUpdate) {
         [coreBridge performSelectorOnMainThread:@selector(notifyDataSyncDelayed:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_RemotePasswordChange) {
@@ -1768,5 +1827,6 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
                                                         object:nil
                                                       userInfo:sweepData];
 }
+
 
 @end

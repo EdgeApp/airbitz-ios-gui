@@ -96,7 +96,7 @@
     CGRect frame = self.frame;
     frame.origin.x = 0;
     frame.origin.y = 0;
-    self.textField = [[UITextField alloc] initWithFrame:frame];
+    self.textField = [[StylizedTextField alloc] initWithFrame:frame];
     [self addSubview:self.textField];
 
     self.cropPointTop = -1;

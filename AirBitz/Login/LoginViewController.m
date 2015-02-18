@@ -15,6 +15,7 @@
 #import "CoreBridge.h"
 #import "Config.h"
 #import "PasswordRecoveryViewController.h"
+#import "TwoFactorMenuViewController.h"
 #import "CoreBridge.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
@@ -26,7 +27,7 @@ typedef enum eLoginMode
     MODE_ENTERING_PASSWORD
 } tLoginMode;
 
-@interface LoginViewController () <UITextFieldDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate>
+@interface LoginViewController () <UITextFieldDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, TwoFactorMenuViewControllerDelegate>
 {
     tLoginMode                      _mode;
     CGRect                          _originalContentFrame;
@@ -38,9 +39,11 @@ typedef enum eLoginMode
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
     NSString                        *_strReason;
+    tABC_CC                         _resultCode;                            
     SignUpViewController            *_signUpController;
     UITextField                     *_activeTextField;
     PasswordRecoveryViewController  *_passwordRecoveryController;
+    TwoFactorMenuViewController     *_tfaMenuViewController;
     FadingAlertView                 *_fadingAlert;
 }
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
@@ -558,6 +561,7 @@ typedef enum eLoginMode
 - (void)signInComplete
 {
     [self showSpinner:NO];
+    [CoreBridge otpSetError:_resultCode];
     if (_bSuccess)
     {
         [User login:self.userNameTextField.text
@@ -566,13 +570,26 @@ typedef enum eLoginMode
             [CoreBridge setupLoginPIN];
         });
         [self.delegate loginViewControllerDidLogin:NO];
-    }
-    else
-    {
-        [self showFadingError:_strReason];
+    } else if (ABC_CC_InvalidOTP == _resultCode) {
+        [self launchTwoFactorMenu];
+    } else {
+        if (ABC_CC_InvalidOTP == _resultCode) {
+            [self launchTwoFactorMenu];
+        } else {
+            [self showFadingError:_strReason];
+        }
         [User Singleton].name = nil;
         [User Singleton].password = nil; 
     }
+}
+
+- (void)launchTwoFactorMenu
+{
+    _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" parentController:self];
+    _tfaMenuViewController.delegate = self;
+    _tfaMenuViewController.username = self.userNameTextField.text;
+    _tfaMenuViewController.bStoreSecret = NO;
+    _tfaMenuViewController.bTestSecret = NO;
 }
 
 #pragma mark - SignUpViewControllerDelegates
@@ -585,6 +602,46 @@ typedef enum eLoginMode
     [self finishIfLoggedIn:YES];
 }
 
+#pragma mark - TwoFactorScanViewControllerDelegate
+
+- (void)twoFactorMenuViewControllerDone:(TwoFactorMenuViewController *)controller withBackButton:(BOOL)bBack
+{
+    BOOL success = controller.bSuccess;
+    NSString *secret = controller.secret;
+    [Util animateOut:controller parentController:self complete:^(void) {
+        _tfaMenuViewController = nil;
+
+        if (!success) {
+            return;
+        }
+        [self.userNameTextField resignFirstResponder];
+        [self.passwordTextField resignFirstResponder];
+        [self animateToInitialPresentation];
+
+        [self showSpinner:YES];
+        // Perform the two factor sign in
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            [self twoFactorSignIn:secret];
+        });
+    }];
+}
+
+- (void)twoFactorSignIn:(NSString *)secret
+{
+    _bSuccess = NO;
+    tABC_Error error;
+
+    ABC_OtpKeySet([self.userNameTextField.text UTF8String], [secret UTF8String], &error);
+    tABC_CC cc = ABC_SignIn([self.userNameTextField.text UTF8String],
+                            [self.passwordTextField.text UTF8String], NULL, NULL, &error);
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        _bSuccess = cc == ABC_CC_Ok; 
+        _strReason = [Util errorMap:&error];
+        _resultCode = error.code;
+        [self signInComplete];
+    });
+}
+
 #pragma mark - ABC Callbacks
 
 void ABC_Request_Callback(const tABC_RequestResults *pResults)
@@ -594,6 +651,7 @@ void ABC_Request_Callback(const tABC_RequestResults *pResults)
         LoginViewController *controller = (__bridge id)pResults->pData;
         controller->_bSuccess = (BOOL)pResults->bSuccess;
         controller->_strReason = [Util errorMap:&(pResults->errorInfo)];
+        controller->_resultCode = pResults->errorInfo.code;
         if (pResults->requestType == ABC_RequestType_AccountSignIn)
         {
             [controller performSelectorOnMainThread:@selector(signInComplete) withObject:nil waitUntilDone:FALSE];

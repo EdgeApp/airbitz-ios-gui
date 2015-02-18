@@ -19,6 +19,7 @@
 #import "SettingsViewController.h"
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
+#import "TwoFactorScanViewController.h"
 #import "User.h"
 #import "Config.h"
 #import "Util.h"
@@ -46,7 +47,8 @@ typedef enum eAppMode
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate,
-                                  InfoViewDelegate, MFMailComposeViewControllerDelegate>
+                                  TwoFactorScanViewControllerDelegate, InfoViewDelegate,
+                                  MFMailComposeViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_directoryViewController;
@@ -58,10 +60,13 @@ typedef enum eAppMode
 	SettingsViewController      *_settingsViewController;
 	SendStatusViewController    *_sendStatusController;
     TransactionDetailsViewController *_txDetailsController;
+    TwoFactorScanViewController      *_tfaScanViewController;
     UIAlertView                 *_receivedAlert;
     UIAlertView                 *_passwordChangeAlert;
+    UIAlertView                 *_otpRequiredAlert;
     UIAlertView                 *_userReviewAlert;
     UIAlertView                 *_userReviewOKAlert;
+    UIAlertView                 *_userReviewNOAlert;
     FadingAlertView             *_fadingAlert;
 	CGRect                      _originalTabBarFrame;
 	CGRect                      _originalViewFrame;
@@ -132,9 +137,13 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBitcoinUri:) name:NOTIFICATION_HANDLE_BITCOIN_URI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpRequired:) name:NOTIFICATION_OTP_REQUIRED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:NOTIFICATION_TX_RECEIVED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchViewSweep:) name:NOTIFICATION_VIEW_SWEEP_TX object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockTabbar) name:NOTIFICATION_LOCK_TABBAR object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockTabbar) name:NOTIFICATION_UNLOCK_TABBAR object:nil];
 
     // init and set API key
     [DL_URLServer initAll];
@@ -159,6 +168,7 @@ typedef enum eAppMode
 	_settingsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
 	_settingsViewController.delegate = self;
 
+    _otpRequiredAlert = nil;
     firstLaunch = YES;
 }
 
@@ -494,6 +504,8 @@ typedef enum eAppMode
         NSDictionary *notif = [NotificationChecker firstNotification];
         if (notif)
         {
+            // Hide the keyboard if a notification is shown
+            [self.view endEditing:NO];
             NSString *notifHTML = [NSString stringWithFormat:@"<!DOCTYPE html>\
             <html>\
                 <body>\
@@ -513,6 +525,18 @@ typedef enum eAppMode
             [self.view addSubview:_notificationInfoView];
         }
     }
+}
+
+- (void)lockTabbar
+{
+    [_tabBar lockButton:TAB_BAR_BUTTON_APP_MODE_SEND];
+    [_tabBar lockButton:TAB_BAR_BUTTON_APP_MODE_REQUEST];
+}
+
+- (void)unlockTabbar
+{
+    [_tabBar unlockButton:TAB_BAR_BUTTON_APP_MODE_SEND];
+    [_tabBar unlockButton:TAB_BAR_BUTTON_APP_MODE_REQUEST];
 }
 
 #pragma mark - TabBarView delegates
@@ -598,16 +622,23 @@ typedef enum eAppMode
         _uri = nil;
     }
     
-    if([User offerUserReview])
-    {
-        _userReviewAlert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Airbitz", nil)
-                                message:NSLocalizedString(@"Do you like Airbitz?", nil)
-                                delegate:self
-                                cancelButtonTitle:NSLocalizedString(@"NO", nil)
-                                otherButtonTitles:NSLocalizedString(@"YES", nil), nil];
-        [_userReviewAlert show];
-    }
+    [self checkUserReview];
+}
+
+- (void)checkUserReview
+{
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+        if([User offerUserReview]) {
+            _userReviewAlert = [[UIAlertView alloc]
+                                    initWithTitle:NSLocalizedString(@"Airbitz", nil)
+                                    message:NSLocalizedString(@"How are you liking Airbitz?", nil)
+                                    delegate:self
+                                    cancelButtonTitle:NSLocalizedString(@"Not so good", nil)
+                                    otherButtonTitles:NSLocalizedString(@"It's great", nil), nil];
+            [_userReviewAlert show];
+        }
+    });
 }
 
 - (void)fadingAlertDismissed:(FadingAlertView *)view
@@ -819,6 +850,8 @@ typedef enum eAppMode
         [self processBitcoinURI:_uri];
         _uri = nil;
     }
+
+    [self checkUserReview];
 }
 
 #pragma mark - ABC Alert delegate
@@ -834,27 +867,47 @@ typedef enum eAppMode
     {
         _passwordChangeAlert = nil;
     }
+    else if (_otpRequiredAlert == alertView && buttonIndex == 1)
+    {
+        [self launchTwoFactorScan];
+    }
     else if (_userReviewAlert == alertView)
     {
         if(buttonIndex == 0) // No, send an email to support
         {
-            [self sendSupportEmail];
+            _userReviewNOAlert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Airbitz", nil)
+                                  message:NSLocalizedString(@"Would you like to send us some feedback?", nil)
+                                  delegate:self
+                                  cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
+                                  otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+            [_userReviewNOAlert show];
         }
         else if (buttonIndex == 1) // Yes, launch userReviewOKAlert
         {
             _userReviewOKAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Airbitz", nil)
-                                message:NSLocalizedString(@"Please write a review in the App store.", nil)
+                                message:NSLocalizedString(@"Would you like to write a review in the App store?", nil)
                                 delegate:self
-                                cancelButtonTitle:nil
+                                cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
                                 otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
             [_userReviewOKAlert show];
         }
     }
+    else if (_userReviewNOAlert == alertView)
+    {
+        if(buttonIndex == 1)
+        {
+            [self sendSupportEmail];
+        }
+    }
     else if (_userReviewOKAlert == alertView)
     {
-        NSString *iTunesLink = @"https://itunes.apple.com/us/app/bitcoin-wallet-map-directory/id843536046?mt=8";
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+        if(buttonIndex == 1)
+        {
+            NSString *iTunesLink = @"https://itunes.apple.com/us/app/bitcoin-wallet-map-directory/id843536046?mt=8";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+        }
     }
 }
 
@@ -940,10 +993,6 @@ typedef enum eAppMode
     {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [[User Singleton] clear];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-        {
-            [CoreBridge deletePINLogin];
-        });
         [self resetViews:nil];
         _passwordChangeAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Password Change", nil)
@@ -953,6 +1002,19 @@ typedef enum eAppMode
                     otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
         [_passwordChangeAlert show];
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    }
+}
+
+- (void)notifyOtpRequired:(NSArray *)params
+{
+    if (_otpRequiredAlert == nil) {
+        _otpRequiredAlert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Two Factor Authentication On", nil)
+                                message:NSLocalizedString(@"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.", nil)
+                                delegate:self
+                                cancelButtonTitle:NSLocalizedString(@"Remind Me Later", nil)
+                                otherButtonTitles:NSLocalizedString(@"Enable", nil), nil];
+        [_otpRequiredAlert show];
     }
 }
 
@@ -997,6 +1059,22 @@ typedef enum eAppMode
         [self.tabBar selectButtonAtIndex:APP_MODE_SETTINGS];
     }
     [_settingsViewController bringUpRecoveryQuestionsView];
+}
+
+- (void)launchTwoFactorScan
+{
+    _tfaScanViewController = (TwoFactorScanViewController *)[Util animateIn:@"TwoFactorScanViewController" parentController:self];
+    _tfaScanViewController.delegate = self;
+    _tfaScanViewController.bStoreSecret = YES;
+    _tfaScanViewController.bTestSecret = YES;
+}
+
+- (void)twoFactorScanViewControllerDone:(TwoFactorScanViewController *)controller withBackButton:(BOOL)bBack
+{
+    BOOL success = controller.bSuccess;
+    [Util animateOut:controller parentController:self complete:^(void) {
+        _tfaScanViewController = nil;
+    }];
 }
 
 - (void)handleBitcoinUri:(NSNotification *)notification

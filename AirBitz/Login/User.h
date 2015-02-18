@@ -38,15 +38,25 @@
 @property (nonatomic) NSTimer *sendInvalidEntryTimer;
 @property (nonatomic) NSUInteger PINLoginInvalidEntryCount;
 @property (nonatomic) bool reviewNotified;
-@property (nonatomic) NSDate *twoWeeksAfterFirstLoginTime;
-@property (nonatomic) int loginCount;
+@property (nonatomic) NSDate *firstLoginTime;
+@property (nonatomic) NSInteger loginCount;
+@property (nonatomic, assign) NSInteger requestViewCount;
+@property (nonatomic, assign) NSInteger sendViewCount;
+@property (nonatomic, assign) NSInteger bleViewCount;
+@property (nonatomic) BOOL notifiedSend;
+@property (nonatomic) BOOL notifiedRequest;
+@property (nonatomic) BOOL notifiedBle;
 
 + (void)initAll;
 + (void)freeAll;
 + (User *)Singleton;
-+ (bool)isLoggedIn;
-+ (bool)offerUserReview;
++ (BOOL)isLoggedIn;
++ (BOOL)offerUserReview;
 + (void)login:(NSString *)user password:(NSString *)pword;
+
+- (BOOL)offerRequestHelp;
+- (BOOL)offerSendHelp;
+- (BOOL)offerBleHelp;
 
 - (id)init;
 - (void)clear;

@@ -18,12 +18,26 @@
 	
 	
 	//UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    /*
 	UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 15.0, 15.0)];
 	[button setImage:[UIImage imageNamed:@"clearButton.png"] forState:UIControlStateNormal];
 	[button setFrame:CGRectMake(0.0f, 0.0f, 15.0f, 15.0f)]; // Required for iOS7
 	[button addTarget:self action:@selector(doClear) forControlEvents:UIControlEventTouchUpInside];
 	self.rightView = button;
 	self.rightViewMode = self.clearButtonMode;
+*/
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
+    self.leftView = paddingView;
+    self.leftViewMode = UITextFieldViewModeAlways;
+    self.rightView = paddingView;
+    self.rightViewMode = UITextFieldViewModeAlways;
+    self.tintColor = [UIColor whiteColor];
+    
+    [self resetBorder];
+    
+    //The rounded corner part, where you specify your view's corner radius:
+    self.layer.cornerRadius = 5;
+    self.clipsToBounds = YES;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -63,6 +77,13 @@
 -(void)doClear
 {
 	self.text = @"";
+}
+
+- (void)resetBorder
+{
+    [self.layer setBackgroundColor:[[[UIColor blackColor] colorWithAlphaComponent:0.2] CGColor]];
+    [self.layer setBorderColor:[[[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.5] colorWithAlphaComponent:1.0] CGColor]];
+    [self.layer setBorderWidth:1.0];
 }
 
 @end

@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "PopupPickerView.h"
+#import "StylizedTextField.h"
 
 @protocol PickerTextViewDelegate;
 
 @interface PickerTextView : UIView
 
 @property (nonatomic, assign) id<PickerTextViewDelegate>    delegate;
-@property (nonatomic, strong) UITextField                   *textField;
+@property (nonatomic, strong) StylizedTextField             *textField;
 @property (nonatomic, strong) PopupPickerView               *popupPicker; //nil until picker actually appears
 @property (nonatomic, assign) tPopupPickerPosition          popupPickerPosition;
 @property (nonatomic, assign) NSInteger                     pickerMaxChoicesVisible; //can constrain to a certain number of choices

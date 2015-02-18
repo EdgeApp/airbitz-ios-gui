@@ -14,6 +14,17 @@
 #define SPENDING_LIMIT_AMOUNT  @"spending_limit_amount"
 #define SPENDING_LIMIT_ENABLED @"spending_limit_enabled"
 
+#define REVIEW_NOTIFIED @"review_notified"
+#define FIRST_LOGIN_TIME @"first_login_time"
+#define LOGIN_COUNT @"login_count"
+#define REQUEST_VIEW_COUNT @"request_view_count"
+#define SEND_VIEW_COUNT @"send_view_count"
+#define BLE_VIEW_COUNT @"ble_view_count"
+
+#define REVIEW_ACCOUNT_AGE 14
+#define REVIEW_LOGIN_COUNT 7
+#define REVIEW_TX_COUNT    7
+
 static BOOL bInitialized = NO;
 
 @implementation User
@@ -55,6 +66,10 @@ static User *singleton = nil;  // this will be the one and only object this stat
     [User Singleton].name = name;
     [User Singleton].password = pword;
     [[User Singleton] loadSettings];
+
+    [User Singleton].notifiedSend = NO;
+    [User Singleton].notifiedRequest = NO;
+    [User Singleton].notifiedBle = NO;
     
     [CoreBridge login];
 }
@@ -76,7 +91,10 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.PINLoginInvalidEntryCount = 0;
     self.reviewNotified = NO;
     self.loginCount = 0;
-    self.twoWeeksAfterFirstLoginTime = 0;
+    self.firstLoginTime = nil;
+    self.requestViewCount = 0;
+    self.sendViewCount = 0;
+    self.bleViewCount = 0;
 
     return self;
 }
@@ -124,15 +142,8 @@ static User *singleton = nil;  // this will be the one and only object this stat
             self.fullName = [NSString stringWithUTF8String:pSettings->szFullName];
         self.bNameOnPayments = pSettings->bNameOnPayments;
 
-        NSUserDefaults *localConfig = [NSUserDefaults standardUserDefaults];
-        if ([localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]]) {
-            self.dailySpendLimitSatoshis = [[localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]] unsignedLongLongValue];
-            self.bDailySpendLimit = [localConfig boolForKey:[self userKey:SPENDING_LIMIT_ENABLED]];
-        } else {
-            self.dailySpendLimitSatoshis = pSettings->dailySpendLimitSatoshis;
-            self.bDailySpendLimit = pSettings->bDailySpendLimit > 0;
-            [self saveLocalSettings];
-        }
+        [self loadLocalSettings:pSettings];
+
         self.bSpendRequirePin = pSettings->bSpendRequirePin;
         self.spendRequirePinSatoshis = pSettings->spendRequirePinSatoshis;
         self.bDisablePINLogin = pSettings->bDisablePINLogin;
@@ -149,11 +160,39 @@ static User *singleton = nil;  // this will be the one and only object this stat
     return [NSString stringWithFormat:@"%@_%@", self.name, base];
 }
 
+- (void)loadLocalSettings:(tABC_AccountSettings *)pSettings
+{
+    NSUserDefaults *localConfig = [NSUserDefaults standardUserDefaults];
+    self.reviewNotified = [localConfig boolForKey:REVIEW_NOTIFIED];
+    self.firstLoginTime = [localConfig objectForKey:FIRST_LOGIN_TIME];
+    self.loginCount = [localConfig integerForKey:LOGIN_COUNT];
+    self.requestViewCount = [localConfig integerForKey:REQUEST_VIEW_COUNT];
+    self.sendViewCount = [localConfig integerForKey:SEND_VIEW_COUNT];
+    self.bleViewCount = [localConfig integerForKey:BLE_VIEW_COUNT];
+
+    if ([localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]]) {
+        self.dailySpendLimitSatoshis = [[localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]] unsignedLongLongValue];
+        self.bDailySpendLimit = [localConfig boolForKey:[self userKey:SPENDING_LIMIT_ENABLED]];
+    } else {
+        self.dailySpendLimitSatoshis = pSettings->dailySpendLimitSatoshis;
+        self.bDailySpendLimit = pSettings->bDailySpendLimit > 0;
+        [self saveLocalSettings];
+    }
+}
+
 - (void)saveLocalSettings
 {
     NSUserDefaults *localConfig = [NSUserDefaults standardUserDefaults];
     [localConfig setObject:@(_dailySpendLimitSatoshis) forKey:[self userKey:SPENDING_LIMIT_AMOUNT]];
     [localConfig setBool:_bDailySpendLimit forKey:[self userKey:SPENDING_LIMIT_ENABLED]];
+
+    [localConfig setBool:self.reviewNotified forKey:REVIEW_NOTIFIED];
+    [localConfig setObject:self.firstLoginTime forKey:FIRST_LOGIN_TIME];
+    [localConfig setInteger:self.loginCount forKey:LOGIN_COUNT];
+    [localConfig setInteger:self.requestViewCount forKey:REQUEST_VIEW_COUNT];
+    [localConfig setInteger:self.sendViewCount forKey:SEND_VIEW_COUNT];
+    [localConfig setInteger:self.bleViewCount forKey:BLE_VIEW_COUNT];
+
     [localConfig synchronize];
 }
 
@@ -231,71 +270,107 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.PINLoginInvalidEntryCount = 0;
 }
 
-+ (bool)offerUserReview
++ (BOOL)offerUserReview
 {
-    if(![User Singleton].reviewNotified && ([User Singleton].loginCountTriggered ||
-                                            [User Singleton].transactionCountTriggered || [User Singleton].timeUseTriggered)) {
+    if ([User Singleton].reviewNotified) {
+        return NO;
+    }
+    BOOL ret = NO;
+    BOOL timeTrigger = [User Singleton].timeUseTriggered;
+    [User Singleton].loginCount++;
+    if ([User Singleton].loginCount >= REVIEW_LOGIN_COUNT && timeTrigger
+            && [User Singleton].transactionCountTriggered) {
         [User Singleton].reviewNotified = true;
-        return true;
+        ret = YES;
     }
-    return false;
-}
-
-- (bool)loginCountTriggered
-{
-    bool ret = false;
-    if(self.loginCount != NSIntegerMax) {
-        if(++self.loginCount >= 7) {
-            self.loginCount = NSIntegerMax;
-            ret = true;
-        }
-    }
+    [[User Singleton] saveLocalSettings];
     return ret;
 }
 
-- (bool)transactionCountTriggered
+- (BOOL)offerRequestHelp
 {
-    if([User isLoggedIn])
-    {
+    return [self offerHelp:&_requestViewCount
+               thisSession:&_notifiedRequest];
+}
+
+- (BOOL)offerSendHelp
+{
+    return [self offerHelp:&_sendViewCount
+               thisSession:&_notifiedSend];
+}
+
+- (BOOL)offerBleHelp
+{
+    return [self offerHelp:&_bleViewCount
+               thisSession:&_notifiedBle];
+}
+
+- (BOOL)offerHelp:(NSInteger *)value thisSession:(BOOL *)session
+{
+    if (*session) {
+        return NO;
+    }
+    *session = YES;
+    if (*value > 2) {
+        return NO;
+    }
+    (*value)++;
+    [self saveLocalSettings];
+    return *value <= 2;
+}
+
+- (BOOL)transactionCountTriggered
+{
+    if ([User isLoggedIn]) {
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
         NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
         [CoreBridge loadWallets:arrayWallets
                        archived:arrayArchivedWallets
                         withTxs:YES];
         int transactionCount = 0;
-        for (Wallet *curWallet in arrayWallets)
-        {
+        for (Wallet *curWallet in arrayWallets) {
             transactionCount += [curWallet.arrayTransactions count];
         }
-        for (Wallet *curWallet in arrayArchivedWallets)
-        {
+        for (Wallet *curWallet in arrayArchivedWallets) {
             transactionCount += [curWallet.arrayTransactions count];
         }
-        return transactionCount >= 7;
-    }
-    else
-    {
-        return false;
+        return transactionCount >= REVIEW_TX_COUNT;
+    } else {
+        return NO;
     }
 }
 
-- (bool)timeUseTriggered
+- (NSDate *)earliestDate
 {
-    if(self.twoWeeksAfterFirstLoginTime == 0)
-    {
-        NSDateComponents *comps = [NSDateComponents new];
-        [comps setDay:+14];
-        self.twoWeeksAfterFirstLoginTime = [[NSCalendar currentCalendar] dateByAddingComponents:comps toDate:[NSDate date] options:0];
-        return false;
+    NSDate *date = [NSDate date];
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets:arrayWallets withTxs:YES];
+    for (Wallet *w in arrayWallets) {
+        for (Transaction *t in w.arrayTransactions) {
+            if (t.date && [t.date compare:date] == NSOrderedAscending) {
+                date = t.date;
+            }
+        }
     }
-    else {
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDateComponents *difference = [calendar components:NSDayCalendarUnit
-                                                   fromDate:self.twoWeeksAfterFirstLoginTime toDate:[NSDate date] options:0];
-        NSInteger days = [difference day];
-        return days > 0;
-    }
+    return date;
 }
 
+- (BOOL)timeUseTriggered
+{
+    NSDate *earliest = [self earliestDate];
+    if (self.firstLoginTime == nil) {
+        self.firstLoginTime = earliest;
+        return NO;
+    }
+    if ([earliest compare:self.firstLoginTime] == NSOrderedAscending) {
+        self.firstLoginTime = earliest;
+    }
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *difference = [calendar components:NSDayCalendarUnit
+                                                fromDate:self.firstLoginTime
+                                                    toDate:[NSDate date]
+                                                options:0];
+    return [difference day] >= REVIEW_ACCOUNT_AGE;
+}
 
 @end

@@ -206,6 +206,8 @@
                                                     &Error);
                         free(szOldPIN);
 
+                        [CoreBridge setupLoginPIN];
+
                         _bSuccess = result == ABC_CC_Ok;
                         _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&Error]];
 
@@ -246,10 +248,9 @@
                         [alert show];
 
                         // all other modes must wait for callback before PIN login setup
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-                                       {
-                                           [CoreBridge setupLoginPIN];
-                                       });
+                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                            [CoreBridge setupLoginPIN];
+                        });
                     }
                 }
                 else
@@ -278,6 +279,13 @@
 
 #pragma mark - Fading Alert Delegate
 
+- (void)dismissFading:(BOOL)animated
+{
+    if (_fadingAlert) {
+        [_fadingAlert dismiss:animated];
+    }
+}
+
 - (void)fadingAlertDismissed:(FadingAlertView *)view
 {
     _fadingAlert = nil;
@@ -304,6 +312,7 @@
     {
         self.labelTitle.text = NSLocalizedString(@"Sign Up", @"screen title");
         [self.buttonNextStep setTitle:NSLocalizedString(@"Next Step", @"") forState:UIControlStateNormal];
+
         self.passwordTextField.placeholder = NSLocalizedString(@"Password", @"");
         self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter Password", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"User Name", @"");
@@ -750,6 +759,7 @@
         });
         [self exit];
     } else {
+        [self dismissFading:NO];
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Account Sign In", @"Title of account signin error alert")
 							  message:[NSString stringWithFormat:@"Sign-in failed:\n%@", _strReason]

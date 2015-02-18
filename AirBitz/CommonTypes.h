@@ -46,6 +46,9 @@ typedef NS_ENUM(NSUInteger, RequestState) {
 #define ERROR_MESSAGE_FADE_DURATION         3.0
 #define ERROR_MESSAGE_FADE_DELAY            2.0
 #define ERROR_MESSAGE_FADE_DISMISS          0.1
+#define FADING_HELP_DURATION                5.0
+
+#define OTP_RESET_DELAY (60 * 60 * 24 * 7)
 
 #define LOCATION_UPDATE_PERIOD	60 /* seconds */
 
@@ -93,11 +96,14 @@ typedef enum eTabBarButton
 	TAB_BAR_BUTTON_APP_MODE_SETTINGS
 } tTabBarButton;
 
+#define DUST_AMOUNT 5430
+
 // notifications
 
 #define NOTIFICATION_MAIN_RESET                         @"Main_Views_Reset"
 #define NOTIFICATION_REMOTE_PASSWORD_CHANGE             @"Remote_Password_Change"
 #define NOTIFICATION_BLOCK_HEIGHT_CHANGE                @"Block_Height_Change"
+#define NOTIFICATION_OTP_REQUIRED                       @"Otp_Required"
 #define NOTIFICATION_EXCHANGE_RATE_CHANGE               @"Exchange_Rate_Change"
 #define NOTIFICATION_DATA_SYNC_UPDATE                   @"Data_Sync_Update"
 #define NOTIFICATION_HANDLE_BITCOIN_URI                 @"Handle_Bitcoin_URI"
@@ -110,6 +116,8 @@ typedef enum eTabBarButton
 #define NOTIFICATION_NOTIFICATION_RECEIVED              @"Notification_Received"
 #define NOTIFICATION_SWEEP                              @"Notification_Sweep"
 #define NOTIFICATION_VIEW_SWEEP_TX                      @"Notification_View_Sweep_Transaction_Details"
+#define NOTIFICATION_LOCK_TABBAR                        @"Lock_Tabbar"
+#define NOTIFICATION_UNLOCK_TABBAR                      @"Unlock_Tabbar"
 
 #define KEY_ERROR_CODE                                  @"Error_Code"
 #define KEY_TX_DETAILS_EXITED_TX                        @"transaction"

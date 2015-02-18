@@ -110,7 +110,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
-    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonExport, self.imageWalletNameEmboss, self.buttonSearch, nil];
+    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonExport, self.buttonSearch, nil];
 
     self.textWalletName.text = self.wallet.strName;
     self.textWalletName.font = [UIFont systemFontOfSize:18];
@@ -782,20 +782,32 @@
             finalCell.backgroundColor = [UIColor clearColor];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(15, 0, 143.0, 41.0);
-            [button setBackgroundImage:[UIImage imageNamed:@"btn_request.png"] forState:UIControlStateNormal];
+            button.layer.borderWidth = 1.0;
+            button.layer.cornerRadius = 5;
+            [button setBackgroundColor:UIColorFromARGB(0xFF80c342)];
+            [button.layer setBorderColor:[UIColorFromARGB(0xFF1b7400) CGColor]];
+            button.clipsToBounds = YES;
+            //XXXP -paul
+            
             [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
             [finalCell addSubview:button];
-            [button setTitle:@"      Request" forState:UIControlStateNormal];
+            [button setTitle:@"Receive" forState:UIControlStateNormal];
             button.titleLabel.font = [UIFont systemFontOfSize:15.0];
             self.buttonRequest = button;
 
             button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(163.0, 0, 143.0, 41.0);
-            [button setBackgroundImage:[UIImage imageNamed:@"btn_send.png"] forState:UIControlStateNormal];
+//            [button setBackgroundColor:[UIColor colorWithRed:0.5 green:.76 blue:.25 alpha:1]];
             [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
             [finalCell addSubview:button];
-            [button setTitle:@"      Send" forState:UIControlStateNormal];
+            [button setTitle:@"Send" forState:UIControlStateNormal];
             button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+            [button.layer setBorderColor:[UIColorFromARGB(0xff006698) CGColor]];
+            [button setBackgroundColor:UIColorFromARGB(0xff2291cf)];
+            button.layer.borderWidth = 1.0;
+            button.layer.cornerRadius = 5;
+            button.clipsToBounds = YES;
+
             self.buttonSend = button;
         }
     }
@@ -846,7 +858,7 @@
             }
             else if (transaction.confirmations == 0)
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"Unconfirmed"];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"Pending"];
                 cell.confirmationLabel.textColor = COLOR_NEGATIVE;
             }
             else if (transaction.confirmations == 1)
@@ -877,7 +889,9 @@
         cell.amountLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
         // set the photo
         cell.imagePhoto.image = [self imageForTransaction:transaction];
-        cell.viewPhoto.hidden = (cell.imagePhoto.image == nil);
+        cell.imagePhoto.hidden = (cell.imagePhoto.image == nil);
+        cell.imagePhoto.layer.cornerRadius = 5;
+        cell.imagePhoto.layer.masksToBounds = YES;
     
         CGRect dateFrame = cell.dateLabel.frame;
         CGRect addressFrame = cell.addressLabel.frame;

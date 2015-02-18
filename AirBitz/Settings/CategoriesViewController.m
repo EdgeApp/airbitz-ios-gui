@@ -11,7 +11,7 @@
 #import "CategoriesCell.h"
 #import "ABC.h"
 #import "User.h"
-#import "PickerTextView.h"
+#import "PickerTextView3.h"
 #import "Util.h"
 #import "CommonTypes.h"
 
@@ -36,7 +36,7 @@
 @property (nonatomic, weak) IBOutlet    UIButton        *cancelButton;
 @property (nonatomic, weak) IBOutlet    UIButton        *doneButton;
 @property (weak, nonatomic) IBOutlet    UIImageView     *imageBottomBar;
-@property (weak, nonatomic) IBOutlet    PickerTextView  *pickerTextNew;
+@property (weak, nonatomic) IBOutlet    PickerTextView3  *pickerTextNew;
 @property (weak, nonatomic) IBOutlet    UITextField     *textSearch;
 
 @property (nonatomic, strong)           NSMutableArray  *arrayCategories;
@@ -83,10 +83,12 @@
     // set up the specifics on our picker text view
     self.pickerTextNew.textField.returnKeyType = UIReturnKeyDone;
     self.pickerTextNew.textField.placeholder = NSLocalizedString(@"Add New", nil);
-    self.pickerTextNew.textField.borderStyle = UITextBorderStyleNone;
-    self.pickerTextNew.textField.backgroundColor = [UIColor clearColor];
+    self.pickerTextNew.textField.borderStyle = UITextBorderStyleLine;
+    self.pickerTextNew.textField.backgroundColor = [UIColor whiteColor];
+    self.pickerTextNew.textField.layer.cornerRadius = 5;
+    self.pickerTextNew.textField.clipsToBounds = YES;
     self.pickerTextNew.textField.font = [UIFont systemFontOfSize:14];
-    self.pickerTextNew.textField.clearButtonMode = UITextFieldViewModeAlways;
+    self.pickerTextNew.textField.clearButtonMode = UITextFieldViewModeNever;
     self.pickerTextNew.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.pickerTextNew.textField.autocorrectionType = UITextAutocorrectionTypeDefault;
     self.pickerTextNew.textField.spellCheckingType = UITextSpellCheckingTypeNo;
@@ -164,10 +166,8 @@
 	cell.delegate = self;
 
     cell.pickerTextView.textField.returnKeyType = UIReturnKeyDone;
-    cell.pickerTextView.textField.borderStyle = UITextBorderStyleNone;
-    cell.pickerTextView.textField.backgroundColor = [UIColor clearColor];
     cell.pickerTextView.textField.font = [UIFont systemFontOfSize:14];
-    cell.pickerTextView.textField.clearButtonMode = UITextFieldViewModeAlways;
+    cell.pickerTextView.textField.clearButtonMode = UITextFieldViewModeNever;
     cell.pickerTextView.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     cell.pickerTextView.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     cell.pickerTextView.textField.spellCheckingType = UITextSpellCheckingTypeNo;
@@ -318,7 +318,7 @@
     return arrayChoices;
 }
 
-- (void)forceCategoryFieldValue:(UITextField *)textField forPickerView:(PickerTextView *)pickerTextView
+- (void)forceCategoryFieldValue:(UITextField *)textField forPickerView:(PickerTextView3 *)pickerTextView
 {
     NSMutableString *strNewVal = [[NSMutableString alloc] init];
     [strNewVal appendString:textField.text];
@@ -447,7 +447,7 @@
 
 #pragma mark - PickerTextView Delegates
 
-- (BOOL)pickerTextViewFieldShouldChange:(PickerTextView *)pickerTextView charactersInRange:(NSRange)range replacementString:(NSString *)string
+- (BOOL)pickerTextViewFieldShouldChange:(PickerTextView3 *)pickerTextView charactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     // create what the new value would look like
     NSString *strNewVal = [pickerTextView.textField.text stringByReplacingCharactersInRange:range withString:string];
@@ -462,7 +462,7 @@
     return NO;
 }
 
-- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
+- (void)pickerTextViewFieldDidChange:(PickerTextView3 *)pickerTextView
 {
     NSMutableString *strNewVal = [[NSMutableString alloc] init];
     [strNewVal appendString:pickerTextView.textField.text];
@@ -482,7 +482,7 @@
     [pickerTextView updateChoices:arrayChoices];
 }
 
-- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
+- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView3 *)pickerTextView
 {
     [self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
 
@@ -493,7 +493,7 @@
     [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:startPosition toPosition:pickerTextView.textField.endOfDocument]];
 }
 
-- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
+- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView3 *)pickerTextView
 {
     // unhighlight text
     // note: for some reason, if we don't do this, the text won't select next time the user selects it
@@ -502,12 +502,12 @@
     return YES;
 }
 
-- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
+- (void)pickerTextViewFieldDidEndEditing:(PickerTextView3 *)pickerTextView
 {
     //[self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
 }
 
-- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
+- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView3 *)pickerTextView
 {
     // check and see if there is more text than just the prefix
     if ([ARRAY_CATEGORY_PREFIXES indexOfObject:pickerTextView.textField.text] == NSNotFound)
@@ -523,7 +523,7 @@
 	return YES;
 }
 
-- (void)pickerTextViewPopupSelected:(PickerTextView *)view onRow:(NSInteger)row
+- (void)pickerTextViewPopupSelected:(PickerTextView3 *)view onRow:(NSInteger)row
 {
     // set the text field to the choice
     self.pickerTextNew.textField.text = [self.pickerTextNew.arrayChoices objectAtIndex:row];
@@ -676,9 +676,11 @@
          cell.pickerTextView.popupPicker.frame = frame;
 
          // move the arrow to the right spot
+         /*
          frame = cell.pickerTextView.popupPicker.arrowImage.frame;
          frame.origin.y = cell.pickerTextView.popupPicker.frame.size.height - 9;
          cell.pickerTextView.popupPicker.arrowImage.frame = frame;
+          */
      }
                      completion:^(BOOL finished)
      {

@@ -51,7 +51,7 @@
 + (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName
                                    isSuccess:(BOOL *)bSuccess
                                     errorMsg:(NSMutableString *)error;
-+ (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName;
++ (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName status:(tABC_Error *)error;
 + (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet;
 + (NSString *)getPIN;
 + (bool)PINLoginExists;
@@ -86,6 +86,9 @@
 + (bool)setDefaultCurrencyNum:(int)currencyNum;
 + (void)setupNewAccount:(FadingAlertView *)fadingAlert;
 + (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID withCallback:(tABC_Sweep_Done_Callback)callback;
++ (void)otpSetError:(tABC_CC)cc;
++ (BOOL)otpHasError;
++ (void)otpClearError;
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo);
 void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
