@@ -50,8 +50,8 @@
         </view>
     </objects>
     <resources>
-        <image name="btn_add.png" width="37" height="37"/>
-        <image name="btn_collapse_expand.png" width="37" height="37"/>
+        <image name="btn_add.png" width="36" height="36"/>
+        <image name="btn_collapse_expand.png" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

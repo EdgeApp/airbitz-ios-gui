@@ -3172,14 +3172,10 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Al7-xm-sPk">
                                                             <rect key="frame" x="0.0" y="0.0" width="291" height="37"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emboss_down.png" id="lHu-rb-W79">
-                                                            <rect key="frame" x="12" y="4" width="267" height="29"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                            <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                        </imageView>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="tIh-1R-4zh">
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="tIh-1R-4zh" customClass="StylizedTextField">
                                                             <rect key="frame" x="20" y="4" width="251" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
@@ -4081,7 +4077,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_top.png" id="BhX-No-chB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="53.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999961" y="0.49999999999999994" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4126,7 +4122,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="Dzq-3h-Adz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="53.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999994" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4135,7 +4131,7 @@ Scan the QR code using this device</string>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uf1-Hd-oNr" customClass="LatoLabel">
-                                                    <rect key="frame" x="44" y="16.5" width="203" height="16"/>
+                                                    <rect key="frame" x="44" y="17" width="203" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.47450980392156861" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
@@ -4163,7 +4159,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="Hlz-Yq-T2I">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="53.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4199,7 +4195,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="clC-N3-iKS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="53.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4235,7 +4231,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle_white.png" id="866-tQ-bOR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="53.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4283,7 +4279,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle_white.png" id="ED4-SO-l2Q">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="53.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4316,7 +4312,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_bottom.png" id="DqH-FQ-kgn">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4325,7 +4321,7 @@ Scan the QR code using this device</string>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MT9-P3-r5I" customClass="LatoLabel">
-                                                    <rect key="frame" x="42" y="14.5" width="203" height="16"/>
+                                                    <rect key="frame" x="42" y="15" width="203" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.47450980390000003" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
