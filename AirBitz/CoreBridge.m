@@ -797,9 +797,21 @@ static BOOL bOtpError = NO;
                                            denomination, &currency, wallet.currencyNum, &error);
     [Util printABC_Error:&error];
     if (result == ABC_CC_Ok)
-        return [NSString stringWithFormat:@"1 %@ = %@ %.3f %@", denominationLabel, wallet.currencySymbol, currency, wallet.currencyAbbrev];
+    {
+        if ([User Singleton].denominationType == ABC_DENOMINATION_UBTC)
+        {
+            return [NSString stringWithFormat:@"1000 %@ = %@ %.3f %@", denominationLabel, wallet.currencySymbol, currency*1000, wallet.currencyAbbrev];
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"1 %@ = %@ %.3f %@", denominationLabel, wallet.currencySymbol, currency, wallet.currencyAbbrev];
+            
+        }
+    }
     else
+    {
         return @"";
+    }
 }
 
 // gets the recover questions for a given account
