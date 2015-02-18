@@ -166,20 +166,16 @@ typedef enum eLoginMode
     [self animateToInitialPresentation];
 
     _bSuccess = NO;
-    tABC_Error Error;
-    ABC_SignIn([self.userNameTextField.text UTF8String],
-               [self.passwordTextField.text UTF8String],
-               ABC_Request_Callback,
-               (__bridge void *)self,
-               &Error);
-    if (Error.code != ABC_CC_Ok)
-    {
-        [Util printABC_Error:&Error];
-    }
-    else
-    {
-        [self showSpinner:YES];
-    }
+    [self showSpinner:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        tABC_Error error;
+        ABC_SignIn([self.userNameTextField.text UTF8String],
+            [self.passwordTextField.text UTF8String], &error);
+        _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
+        _strReason = [Util errorMap:&error];
+        _resultCode = error.code;
+        [self performSelectorOnMainThread:@selector(signInComplete) withObject:nil waitUntilDone:FALSE];
+    });
 }
 
 - (IBAction)SignUp
@@ -631,32 +627,15 @@ typedef enum eLoginMode
     _bSuccess = NO;
     tABC_Error error;
 
-    ABC_OtpKeySet([self.userNameTextField.text UTF8String], [secret UTF8String], &error);
+    ABC_OtpKeySet([self.userNameTextField.text UTF8String], (char *)[secret UTF8String], &error);
     tABC_CC cc = ABC_SignIn([self.userNameTextField.text UTF8String],
-                            [self.passwordTextField.text UTF8String], NULL, NULL, &error);
+                            [self.passwordTextField.text UTF8String], &error);
     dispatch_async(dispatch_get_main_queue(), ^(void) {
         _bSuccess = cc == ABC_CC_Ok; 
         _strReason = [Util errorMap:&error];
         _resultCode = error.code;
         [self signInComplete];
     });
-}
-
-#pragma mark - ABC Callbacks
-
-void ABC_Request_Callback(const tABC_RequestResults *pResults)
-{
-    if (pResults)
-    {
-        LoginViewController *controller = (__bridge id)pResults->pData;
-        controller->_bSuccess = (BOOL)pResults->bSuccess;
-        controller->_strReason = [Util errorMap:&(pResults->errorInfo)];
-        controller->_resultCode = pResults->errorInfo.code;
-        if (pResults->requestType == ABC_RequestType_AccountSignIn)
-        {
-            [controller performSelectorOnMainThread:@selector(signInComplete) withObject:nil waitUntilDone:FALSE];
-        }
-    }
 }
 
 #pragma mark - PasswordRecoveryViewController Delegate
