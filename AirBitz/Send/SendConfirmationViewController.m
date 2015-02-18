@@ -829,6 +829,7 @@
     _fadingAlert.message = message;
     _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
     _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
+    [_fadingAlert blockModal:NO];
     [_fadingAlert showFading];
 }
 
@@ -851,8 +852,6 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self dismissErrorMessage];
-
     _selectedTextField = textField;
     if (_selectedTextField == self.amountBTCTextField)
         self.keypadView.calcMode = CALC_MODE_COIN;
