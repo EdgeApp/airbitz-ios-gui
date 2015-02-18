@@ -22,7 +22,7 @@
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate,
-                                              InfoViewDelegate, FadingAlertViewDelegate>
+                                              InfoViewDelegate>
 {
     ConfirmationSliderView              *_confirmationSlider;
     UITextField                         *_selectedTextField;
@@ -825,21 +825,17 @@
 
 - (void)showFadingError:(NSString *)message
 {
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
     _fadingAlert.message = message;
     _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
     _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
+    [_fadingAlert blockModal:NO];
     [_fadingAlert showFading];
 }
 
 - (void)dismissErrorMessage
 {
     [_fadingAlert dismiss:NO];
-    _fadingAlert = nil;
-}
-
-- (void)fadingAlertDismissed:(FadingAlertView *)view
-{
     _fadingAlert = nil;
 }
 
@@ -856,8 +852,6 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self dismissErrorMessage];
-
     _selectedTextField = textField;
     if (_selectedTextField == self.amountBTCTextField)
         self.keypadView.calcMode = CALC_MODE_COIN;

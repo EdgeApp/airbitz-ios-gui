@@ -622,6 +622,11 @@ typedef enum eAppMode
         _uri = nil;
     }
     
+    [self checkUserReview];
+}
+
+- (void)checkUserReview
+{
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
         if([User offerUserReview]) {
@@ -845,6 +850,8 @@ typedef enum eAppMode
         [self processBitcoinURI:_uri];
         _uri = nil;
     }
+
+    [self checkUserReview];
 }
 
 #pragma mark - ABC Alert delegate

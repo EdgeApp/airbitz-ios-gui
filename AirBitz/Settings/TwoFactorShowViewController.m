@@ -325,9 +325,8 @@
 
 - (tABC_CC)enableTwoFactor:(tABC_Error *)error
 {
-    long timeout = 60 * 60 * 24;
     tABC_CC cc = ABC_OtpAuthSet([[User Singleton].name UTF8String],
-                                [[User Singleton].password UTF8String], timeout, error);
+        [[User Singleton].password UTF8String], OTP_RESET_DELAY, error);
     if (cc == ABC_CC_Ok) {
         _isOn = YES;
     }
