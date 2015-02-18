@@ -938,7 +938,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	cell.bkgImage.image = bkgImage;
 	cell.delegate = self;
-//    cell.textField.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.layer.backgroundColor = (__bridge CGColorRef)([UIColor clearColor]);
     
 	if (indexPath.section == SECTION_NAME)
 	{

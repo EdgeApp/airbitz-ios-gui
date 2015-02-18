@@ -53,7 +53,7 @@
         }
     } else {
         if (row == 0) {
-            if (row == tableHeight) {
+            if (1 == tableHeight) {
                 _bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
             } else {
                 _bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
