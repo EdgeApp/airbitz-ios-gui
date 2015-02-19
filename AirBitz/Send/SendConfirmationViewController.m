@@ -910,20 +910,36 @@
             }
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
-        } else if (_passwordRequired && ![CoreBridge passwordOk:self.withdrawlPIN.text]) {
-            [self showFadingError:NSLocalizedString(@"Incorrect password", nil)];
-            [_withdrawlPIN becomeFirstResponder];
-            [_withdrawlPIN selectAll:nil];
-        } else if (self.amountToSendSatoshi == 0) {
-            [self showFadingError:NSLocalizedString(@"Please enter an amount to send", nil)];
-        } else if (self.amountToSendSatoshi < DUST_AMOUNT) {
-            [self tooSmallAlert];
+        } else if (_passwordRequired) {
+            [Util checkPasswordAsync:self.withdrawlPIN.text withSelector:@selector(handlePasswordCheck:) controller:self];
         } else {
-            NSLog(@"SUCCESS!");
-            [self initiateSendRequest];
+            [self continueChecks];
         }
     }
     [_confirmationSlider resetIn:1.0];
+}
+
+- (void)handlePasswordCheck:(NSNumber *)authenticated
+{
+    BOOL bAuthenticated = [authenticated boolValue];
+    if (bAuthenticated) {
+        [self continueChecks];
+    } else {
+        [self showFadingError:NSLocalizedString(@"Incorrect password", nil)];
+        [_withdrawlPIN becomeFirstResponder];
+        [_withdrawlPIN selectAll:nil];
+    }
+}
+
+- (void)continueChecks
+{
+    if (self.amountToSendSatoshi == 0) {
+        [self showFadingError:NSLocalizedString(@"Please enter an amount to send", nil)];
+    } else if (self.amountToSendSatoshi < DUST_AMOUNT) {
+        [self tooSmallAlert];
+    } else {
+        [self initiateSendRequest];
+    }
 }
 
 - (void)tooSmallAlert
