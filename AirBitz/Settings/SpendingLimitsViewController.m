@@ -165,7 +165,13 @@
 
 - (IBAction)Complete:(id)sender
 {
-    if ([CoreBridge passwordOk:_passwordTextField.text]) {
+    [Util checkPasswordAsync:_passwordTextField.text withSelector:@selector(doComplete:) controller:self];
+}
+
+- (void)doComplete:(NSNumber *)authenticated
+{
+    BOOL bAuthenticated = [authenticated boolValue];
+    if (bAuthenticated) {
         if (_dailySpendLimitSwitch.on) {
             [User Singleton].bDailySpendLimit = YES;
             [User Singleton].dailySpendLimitSatoshis = [CoreBridge denominationToSatoshi:_dailySpendLimitField.text];
