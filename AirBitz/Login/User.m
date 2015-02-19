@@ -56,7 +56,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     return singleton;
 }
 
-+ (bool)isLoggedIn
++ (BOOL)isLoggedIn
 {
     return [User Singleton].name.length;// && [User Singleton].password.length;
 }

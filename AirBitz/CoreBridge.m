@@ -1440,7 +1440,6 @@ static BOOL bOtpError = NO;
 
 + (NSString *)currencyAbbrevLookup:(int) currencyNum
 {
-#warning TODO move this to the core
     if (currencyNum == CURRENCY_NUM_USD) {
         return @"USD";
     } else if (currencyNum == CURRENCY_NUM_CAD) {
