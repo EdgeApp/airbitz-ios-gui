@@ -825,6 +825,9 @@
 
 - (void)showFadingError:(NSString *)message
 {
+    if (_fadingAlert) {
+        [_fadingAlert dismiss:YES];
+    }
     _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
     _fadingAlert.message = message;
     _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
@@ -911,6 +914,8 @@
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
         } else if (_passwordRequired) {
+            _fadingAlert = [FadingAlertView CreateLoadingView:self.view withDelegate:nil];
+            [_fadingAlert show];
             [Util checkPasswordAsync:self.withdrawlPIN.text withSelector:@selector(handlePasswordCheck:) controller:self];
         } else {
             [self continueChecks];
@@ -922,6 +927,7 @@
 - (void)handlePasswordCheck:(NSNumber *)authenticated
 {
     BOOL bAuthenticated = [authenticated boolValue];
+    [_fadingAlert dismiss:NO];
     if (bAuthenticated) {
         [self continueChecks];
     } else {

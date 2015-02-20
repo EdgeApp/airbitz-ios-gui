@@ -6,11 +6,13 @@
 #import "InfoView.h"
 #import "User.h"
 #import "Util.h"
+#import "FadingAlertView.h"
 #import "ABC.h"
 
 @interface SpendingLimitsViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
 {
     tABC_AccountSettings            *_pAccountSettings;
+    FadingAlertView                 *_fadingAlert;
 }
 
 @property (nonatomic, weak) IBOutlet MinCharTextField           *passwordTextField;
@@ -165,12 +167,15 @@
 
 - (IBAction)Complete:(id)sender
 {
+    _fadingAlert = [FadingAlertView CreateLoadingView:self.view withDelegate:nil];
+    [_fadingAlert show];
     [Util checkPasswordAsync:_passwordTextField.text withSelector:@selector(doComplete:) controller:self];
 }
 
 - (void)doComplete:(NSNumber *)authenticated
 {
     BOOL bAuthenticated = [authenticated boolValue];
+    [_fadingAlert dismiss:NO];
     if (bAuthenticated) {
         if (_dailySpendLimitSwitch.on) {
             [User Singleton].bDailySpendLimit = YES;
