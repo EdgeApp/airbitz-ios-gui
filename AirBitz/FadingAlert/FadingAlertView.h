@@ -12,9 +12,12 @@
 @property (nonatomic, copy) NSString *message;
 
 + (FadingAlertView *)CreateInsideView:(UIView *)parentView withDelegate:(id<FadingAlertViewDelegate>)delegate;
++ (FadingAlertView *)CreateLoadingView:(UIView *)parentView withDelegate:(id<FadingAlertViewDelegate>)delegate;
 
 - (void)blockModal:(BOOL)blocking;
 - (void)showSpinner:(BOOL)visible;
+- (void)showSpinner:(BOOL)visible center:(BOOL)center;
+- (void)showBackground:(BOOL)visible;
 - (void)show;
 - (void)showFading;
 - (void)dismiss:(BOOL)animated;

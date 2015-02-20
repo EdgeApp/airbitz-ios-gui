@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "ABC.h"
+#import "CoreBridge.h"
 
 #define UIColorFromRGB(rgbValue) \
         [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -39,5 +40,6 @@
 + (void)animateOut:(UIViewController *)controller parentController:(UIViewController *)parent complete:(void(^)(void))cb;
 
 + (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height;
++ (void)checkPasswordAsync:(NSString *)password withSelector:(SEL)selector controller:(UIViewController *)controller;
 
 @end

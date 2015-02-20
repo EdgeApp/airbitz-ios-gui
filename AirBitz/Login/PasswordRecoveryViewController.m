@@ -350,9 +350,10 @@ typedef enum eAlertType
             _statusCode = error.code;
             // If we have otp enabled, persist the token
             if (_secret != nil) {
-                ABC_OtpKeySet([self.strUserName UTF8String], [_secret UTF8String], &error);
+                tABC_Error e;
+                ABC_OtpKeySet([self.strUserName UTF8String], (char *)[_secret UTF8String], &e);
+                [Util printABC_Error:&e];
             }
-                    
             [self performSelectorOnMainThread:@selector(checkRecoveryAnswersResponse:) withObject:params waitUntilDone:NO];
         });
     });
@@ -396,15 +397,14 @@ typedef enum eAlertType
 
 - (void)twoFactorMenuViewControllerDone:(TwoFactorMenuViewController *)controller withBackButton:(BOOL)bBack
 {
-    BOOL _bSuccess = controller.bSuccess;
+    BOOL __bSuccess = controller.bSuccess;
     _secret = controller.secret;
     [Util animateOut:controller parentController:self complete:^(void) {
         _tfaMenuViewController = nil;
-
-        BOOL success = _bSuccess;
+        BOOL success = __bSuccess;
         if (success) {
             tABC_Error error;
-            ABC_OtpKeySet([self.strUserName UTF8String], [_secret UTF8String], &error);
+            ABC_OtpKeySet([self.strUserName UTF8String], (char *)[_secret UTF8String], &error);
             if (error.code == ABC_CC_Ok) {
                 // Try again with OTP
                 [self CompleteSignup];
@@ -445,29 +445,18 @@ typedef enum eAlertType
     }
     [self blockUser:YES];
     [self showSpinner:YES];
-	tABC_Error Error;
-	tABC_CC result;
-    result = ABC_SetAccountRecoveryQuestions([[User Singleton].name UTF8String],
-                                             [password UTF8String],
-                                             [strQuestions UTF8String],
-                                             [strAnswers UTF8String],
-                                             PW_ABC_Request_Callback,
-                                             (__bridge void *)self,
-                                             &Error);
-	[Util printABC_Error:&Error];
 
-	if (ABC_CC_Ok != result)
-	{
-        [self blockUser:NO];
-        [self showSpinner:NO];
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:self.labelTitle.text
-                                    message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, [Util errorMap:&Error]]
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-	}
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        tABC_Error error;
+        ABC_SetAccountRecoveryQuestions([[User Singleton].name UTF8String],
+                                                [password UTF8String],
+                                                [strQuestions UTF8String],
+                                                [strAnswers UTF8String],
+                                                &error);
+        _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
+        _strReason = [Util errorMap:&error];
+        [self performSelectorOnMainThread:@selector(setRecoveryComplete) withObject:nil waitUntilDone:FALSE];
+    });
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions
@@ -802,20 +791,6 @@ typedef enum eAlertType
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
 		[alert show];
-    }
-}
-
-void PW_ABC_Request_Callback(const tABC_RequestResults *pResults)
-{
-    if (pResults)
-    {
-        PasswordRecoveryViewController *controller = (__bridge id)pResults->pData;
-        controller.bSuccess = (BOOL)pResults->bSuccess;
-        controller.strReason = [Util errorMap:&(pResults->errorInfo)];
-		if (pResults->requestType == ABC_RequestType_SetAccountRecoveryQuestions)
-		{
-            [controller performSelectorOnMainThread:@selector(setRecoveryComplete) withObject:nil waitUntilDone:FALSE];
-		}
     }
 }
 

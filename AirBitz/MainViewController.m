@@ -1071,7 +1071,6 @@ typedef enum eAppMode
 
 - (void)twoFactorScanViewControllerDone:(TwoFactorScanViewController *)controller withBackButton:(BOOL)bBack
 {
-    BOOL success = controller.bSuccess;
     [Util animateOut:controller parentController:self complete:^(void) {
         _tfaScanViewController = nil;
     }];

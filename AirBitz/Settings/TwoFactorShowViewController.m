@@ -228,25 +228,14 @@
 
 - (IBAction)switchFlipped:(UISwitch *)uiSwitch
 {
-    [self checkPasswordAsync:@selector(handleSwitchFlip:)];
+    [self checkPassword];
 }
 
-- (void)checkPasswordAsync:(SEL)selector
+- (void)checkPassword
 {
-    if (!_passwordTextField.text || [_passwordTextField.text length] == 0) {
-        [self performSelectorOnMainThread:selector
-                            withObject:[NSNumber numberWithBool:NO]
-                            waitUntilDone:NO];
-    } else {
-        _loadingSpinner.hidden = NO;
-        [_passwordTextField resignFirstResponder];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            BOOL matched = [CoreBridge passwordOk:_passwordTextField.text];
-            [self performSelectorOnMainThread:selector
-                                withObject:[NSNumber numberWithBool:matched]
-                                waitUntilDone:NO];
-        });
-    }
+    _loadingSpinner.hidden = NO;
+    [_passwordTextField resignFirstResponder];
+    [Util checkPasswordAsync:_passwordTextField.text withSelector:@selector(handleSwitchFlip:) controller:self];
 }
 
 - (void)invalidPasswordAlert
@@ -363,8 +352,7 @@
 
 - (IBAction)confirmRequest:(id)sender
 {
-    [NotificationChecker resetOtpNotifications];
-    [self checkPasswordAsync:@selector(doConfirmRequest:)];
+    [self checkPassword];
 }
 
 - (void)doConfirmRequest:(NSNumber *)object
@@ -393,8 +381,7 @@
 
 - (IBAction)cancelRequest:(id)sender
 {
-    [NotificationChecker resetOtpNotifications];
-    [self checkPasswordAsync:@selector(doCancelRequest:)];
+    [self checkPassword];
 }
 
 - (void)doCancelRequest:(NSNumber *)object

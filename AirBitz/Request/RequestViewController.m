@@ -92,6 +92,7 @@
     [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
     
     self.nextButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
+    [self.nextButton setTitleColor:[UIColor colorWithWhite:1 alpha:1.0] forState:UIControlStateNormal];
 }
 
 -(void)awakeFromNib

@@ -14,6 +14,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *messageText;
 @property (nonatomic, weak) IBOutlet UIButton *buttonBlocker;
 @property (nonatomic, weak) IBOutlet UIView *activityIndicator;
+@property (nonatomic, weak) IBOutlet UIView *alertGroup;
 @property (nonatomic, weak) IBOutlet UIImageView *background;
 
 @end
@@ -45,6 +46,8 @@ static UIView *alert;
 		currentView = [[[NSBundle mainBundle] loadNibNamed:@"FadingAlertView~ipad" owner:nil options:nil] objectAtIndex:0];
 	}
     alert.alpha = 1.0;
+
+    [currentView setCenter:parentView.center];
     
     currentView.fadeDelay = ALERT_MESSAGE_FADE_DELAY;
     currentView.fadeDuration = ALERT_MESSAGE_FADE_DURATION;
@@ -68,6 +71,15 @@ static UIView *alert;
     return currentView;
 }
 
++ (FadingAlertView *)CreateLoadingView:(UIView *)parentView withDelegate:(id<FadingAlertViewDelegate>)delegate
+{
+    currentView = [FadingAlertView CreateInsideView:parentView withDelegate:delegate];
+    [currentView blockModal:YES];
+    [currentView showSpinner:YES center:YES];
+    [currentView showBackground:NO];
+    return currentView;
+}
+
 - (void)blockModal:(BOOL)blocking
 {
     _buttonBlocker.hidden = !blocking;
@@ -76,6 +88,19 @@ static UIView *alert;
 - (void)showSpinner:(BOOL)visible
 {
     _activityIndicator.hidden = !visible;
+}
+
+- (void)showSpinner:(BOOL)visible center:(BOOL)center
+{
+    _activityIndicator.hidden = !visible;
+    if (center) {
+        [_activityIndicator setCenter:_alertGroup.center];
+    }
+}
+
+- (void)showBackground:(BOOL)visible
+{
+    _background.hidden = !visible;
 }
 
 - (void)show
