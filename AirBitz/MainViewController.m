@@ -1097,6 +1097,7 @@ typedef enum eAppMode
 
 - (void)processBitcoinURI:(NSURL *)uri
 {
+    [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
     if ([User isLoggedIn]) {
         [_sendViewController resetViews];
         
@@ -1106,8 +1107,6 @@ typedef enum eAppMode
     else {
         _uri = uri;
     }
-    
-    [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
 }
 
 - (void)loggedOffRedirect:(NSNotification *)notification
