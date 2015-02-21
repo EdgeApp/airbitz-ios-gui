@@ -562,6 +562,18 @@ typedef enum eAppMode
     }
 }
 
+- (void)tabVarView:(TabBarView *)view selectedLockedSubview:(UIView *)subview
+{
+    if (!_fadingAlert) {
+        _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+        _fadingAlert.message = NSLocalizedString(@"Please wait until your wallets are loaded.", nil);
+        _fadingAlert.fadeDuration = 2;
+        _fadingAlert.fadeDelay = 2;
+        [_fadingAlert blockModal:NO];
+        [_fadingAlert show];
+    }
+}
+
 #pragma mark - RequestViewControllerDelegates
 
 -(void)RequestViewControllerDone:(RequestViewController *)vc

@@ -168,7 +168,6 @@
                 [button deselect];
             }
         }
-
     }
 }
 
@@ -178,6 +177,10 @@
     TabBarButton *button = [self findButtonAtPoint:startPoint];
     if (!button.locked) {
         [self highlightButtonAtPoint:startPoint];
+    } else {
+        if ([self.delegate respondsToSelector:@selector(tabVarView:selectedLockedSubview:)]) {
+            [self.delegate tabVarView:self selectedLockedSubview:button];
+        }
     }
 }
 
@@ -187,6 +190,10 @@
     TabBarButton *button = [self findButtonAtPoint:startPoint];
     if (!button.locked) {
         [self highlightButtonAtPoint:startPoint];
+    } else {
+        if ([self.delegate respondsToSelector:@selector(tabVarView:selectedLockedSubview:)]) {
+            [self.delegate tabVarView:self selectedLockedSubview:button];
+        }
     }
 }
 
