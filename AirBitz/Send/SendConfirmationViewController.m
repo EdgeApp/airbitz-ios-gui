@@ -19,10 +19,11 @@
 #import "CommonTypes.h"
 #import "FadingAlertView.h"
 #import "AudioController.h"
+#import "ButtonSelectorView.h"
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate,
-                                              InfoViewDelegate>
+                                              ButtonSelectorDelegate, InfoViewDelegate>
 {
     ConfirmationSliderView              *_confirmationSlider;
     UITextField                         *_selectedTextField;
@@ -33,6 +34,7 @@
     BOOL                                _passwordRequired;
     NSString                            *_strReason;
     int                                 _callbackTimestamp;
+	int                                 _selectedWalletIndex;
     Transaction                         *_completedTransaction;    // nil until sendTransaction is successfully completed
     UITapGestureRecognizer              *tap;
     UIAlertView                         *_alert;
@@ -44,7 +46,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView            *imageTopEmboss;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendFromTitle;
-@property (weak, nonatomic) IBOutlet UILabel                *labelSendFrom;
+@property (weak, nonatomic) IBOutlet ButtonSelectorView     *walletSelector;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendToTitle;
 @property (nonatomic, weak) IBOutlet UILabel                *addressLabel;
 @property (weak, nonatomic) IBOutlet UIView                 *viewBTC;
@@ -67,6 +69,7 @@
 @property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
 
+@property (nonatomic, strong) NSMutableArray                *arrayWallets;
 @property (nonatomic, strong) SendStatusViewController          *sendStatusController;
 @property (nonatomic, strong) TransactionDetailsViewController  *transactionDetailsController;
 @property (nonatomic, strong) InfoView                          *infoView;
@@ -89,9 +92,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     // Added gesture recognizer to control keyboard
-    tap = [[UITapGestureRecognizer alloc] 
-        initWithTarget:self
-                action:@selector(dismissKeyboard)];
+    [self setupGestureRecognizer];
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplayArea];
@@ -101,6 +102,9 @@
     self.amountBTCTextField.delegate = self;
     self.amountFiatTextField.delegate = self;
     self.keypadView.delegate = self;
+    self.walletSelector.delegate = self;
+	self.walletSelector.textLabel.text = NSLocalizedString(@"", nil);
+    [self.walletSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 #ifdef __IPHONE_8_0
     [self.keypadView removeFromSuperview];
 #endif
@@ -112,6 +116,9 @@
     [self.viewDisplayArea bringSubviewToFront:self.amountFiatTextField];
     [self.viewDisplayArea bringSubviewToFront:self.withdrawlPIN];
 
+    // Load up the wallets
+    self.arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWallets:self.arrayWallets archived:nil withTxs:NO];
     [self setWalletLabel];
     
     CGRect frame = self.keypadView.frame;
@@ -151,9 +158,21 @@
     _pinTimer = nil;
     [self dismissErrorMessage];
     [super viewWillDisappear:animated];
-    [self.view removeGestureRecognizer:tap];
+    [self dismissGestureRecognizer];
     [self.infoView dismiss];
     [self dismissKeyboard];
+}
+
+- (void)setupGestureRecognizer
+{
+    tap = [[UITapGestureRecognizer alloc]
+        initWithTarget:self
+                action:@selector(dismissKeyboard)];
+}
+
+- (void)dismissGestureRecognizer
+{
+    [self.view removeGestureRecognizer:tap];
 }
 
 - (void)myTextDidChange:(NSNotification *)notification
@@ -186,7 +205,7 @@
     self.amountFiatSymbol.text = [CoreBridge currencySymbolLookup:self.wallet.currencyNum];
     self.amountFiatLabel.text = [CoreBridge currencyAbbrevLookup:self.wallet.currencyNum];
     self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
-    
+
     NSString *prefix;
     NSString *suffix;
     
@@ -216,30 +235,30 @@
         self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
     }
     [self startCalcFees];
-    
-    if (self.amountToSendSatoshi)
-    {
-        // If the PIN is empty, then focus
-        if ([self.withdrawlPIN.text length] <= 0)
-        {
-            if (_pinRequired || _passwordRequired) {
-                [self.withdrawlPIN becomeFirstResponder];
-            }
-        }
-    }
-    else
-    {
-        self.amountFiatTextField.text = nil;
-        self.amountBTCTextField.text = nil;
-        [self.amountFiatTextField becomeFirstResponder];
-    }
-    [self exchangeRateUpdate:nil]; 
+    [self pickBestResponder];
+    [self exchangeRateUpdate:nil];
 
     _pinTimer = [NSTimer scheduledTimerWithTimeInterval:PIN_REQUIRED_PERIOD_SECONDS
         target:self
         selector:@selector(updateTextFieldContents)
         userInfo:nil
         repeats:NO];
+}
+
+- (void)pickBestResponder
+{
+    if (self.amountToSendSatoshi) {
+        // If the PIN is empty, then focus
+        if ([self.withdrawlPIN.text length] <= 0) {
+            if (_pinRequired || _passwordRequired) {
+                [self.withdrawlPIN becomeFirstResponder];
+            }
+        }
+    } else {
+        self.amountFiatTextField.text = nil;
+        self.amountBTCTextField.text = nil;
+        [self.amountFiatTextField becomeFirstResponder];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -365,9 +384,9 @@
         frame.origin.y -= topShift;
         self.labelSendFromTitle.frame = frame;
         
-        frame = self.labelSendFrom.frame;
+        frame = self.walletSelector.frame;
         frame.origin.y -= topShift;
-        self.labelSendFrom.frame = frame;
+        self.walletSelector.frame = frame;
         
         frame = self.labelSendToTitle.frame;
         frame.origin.y -= topShift + 10;
@@ -552,14 +571,31 @@
     }
 }
 
+- (void)setWalletFromIndex:(int)walletIdx
+{
+    _selectedWalletIndex = walletIdx;
+    if (self.arrayWallets && walletIdx < [self.arrayWallets count]) {
+        self.wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    }
+}
+
 - (void)setWalletLabel
 {
-    if (self.wallet)
-    {
-        NSMutableString *label = [[NSMutableString alloc] init];
-        [label appendFormat:@"%@ (%@)", self.wallet.strName,
-            [CoreBridge formatSatoshi:self.wallet.balance]];
-        self.labelSendFrom.text = label;
+    if (self.wallet && self.arrayWallets) {
+        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[self.arrayWallets count]];
+        _selectedWalletIndex = 0;
+        for (int i = 0; i < [self.arrayWallets count]; i++) {
+            Wallet *w = [self.arrayWallets objectAtIndex:i];
+            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", w.strName, [CoreBridge formatSatoshi:w.balance]]];
+
+            if ([self.wallet.strUUID isEqualToString:w.strUUID]) {
+                _selectedWalletIndex = i;
+            }
+        }
+        self.walletSelector.arrayItemsToSelect = [arrayWalletNames copy];
+        [self.walletSelector.button setTitle:[NSString stringWithFormat:@"%@ (%@)", self.wallet.strName, [CoreBridge formatSatoshi:self.wallet.balance]]
+            forState:UIControlStateNormal];
+        self.walletSelector.selectedItemIndex = (int) _selectedWalletIndex;
     }
 }
 
@@ -865,6 +901,26 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+}
+
+#pragma mark - ButtonSelectorView delegates
+
+- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+{
+    [self setWalletFromIndex:itemIndex];
+    [self setWalletLabel];
+}
+
+- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
+{
+    [self dismissKeyboard];
+    [self dismissGestureRecognizer];
+}
+
+- (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view
+{
+    [self pickBestResponder];
+    [self setupGestureRecognizer];
 }
 
 #pragma mark - ConfirmationSlider delegates

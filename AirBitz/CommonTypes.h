@@ -74,6 +74,8 @@ static NSString *kTimerStart = @"start";
 #define BIT6 0x40
 #define BIT7 0x80
 
+#define WALLET_BUTTON_WIDTH         210
+
 #define SCREEN_HEIGHT       ([[UIScreen mainScreen] bounds].size.height)
 #define TOOLBAR_HEIGHT      49
 #define SUB_SCREEN_HEIGHT   (SCREEN_HEIGHT - TOOLBAR_HEIGHT)

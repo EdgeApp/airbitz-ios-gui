@@ -47,7 +47,6 @@
 #import "LocalSettings.h"
 #import "FadingAlertView.h"
 
-#define WALLET_BUTTON_WIDTH         210
 #define BLE_TIMEOUT                 1.0
 
 #define POPUP_PICKER_LOWEST_POINT   360
