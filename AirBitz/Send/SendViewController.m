@@ -1326,7 +1326,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             [alert show];
         }
 
-		ABC_FreeURIInfo(uri);
+        if (uri != NULL) {
+            ABC_FreeURIInfo(uri);
+            uri = NULL;
+        }
         
 		break; //just grab first one
 	}
@@ -1689,9 +1692,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
 	}
 
-    if (uri != NULL)
-    {
+    if (uri != NULL) {
         ABC_FreeURIInfo(uri);
+        uri = NULL;
     }
 }
 
