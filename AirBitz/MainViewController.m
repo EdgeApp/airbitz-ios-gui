@@ -20,6 +20,7 @@
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
 #import "TwoFactorScanViewController.h"
+#import "AddressRequestController.h"
 #import "User.h"
 #import "Config.h"
 #import "Util.h"
@@ -47,12 +48,13 @@ typedef enum eAppMode
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, InfoViewDelegate,
+                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate,
                                   MFMailComposeViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
+	AddressRequestController    *_addressRequestController;
 	SendViewController          *_sendViewController;
 	WalletsViewController       *_walletsViewController;
 	LoginViewController         *_loginViewController;
@@ -1097,16 +1099,37 @@ typedef enum eAppMode
 
 - (void)processBitcoinURI:(NSURL *)uri
 {
-    [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
-    if ([User isLoggedIn]) {
-        [_sendViewController resetViews];
-        
-        _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
-        [_sendViewController processURI];
+    if ([uri.scheme isEqualToString:@"bitcoin"]) {
+        [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
+        if ([User isLoggedIn]) {
+            [_sendViewController resetViews];
+            _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
+            [_sendViewController processURI];
+        } else {
+            _uri = uri;
+        }
+    } else if ([uri.scheme isEqualToString:@"bitcoinaddr"]) {
+        if ([User isLoggedIn]) {
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+            _addressRequestController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AddressRequestController"];
+            _addressRequestController.url = uri;
+            _addressRequestController.delegate = self;
+            [Util animateController:_addressRequestController parentController:self];
+            [self showTabBarAnimated:YES];
+            _uri = nil;
+        } else {
+            _uri = uri;
+        }
     }
-    else {
-        _uri = uri;
-    }
+}
+
+-(void)AddressRequestControllerDone:(AddressRequestController *)vc
+{
+    [Util animateOut:_addressRequestController parentController:self complete:^(void) {
+        _addressRequestController = nil;
+    }];
+    _uri = nil;
+    [self showTabBarAnimated:NO];
 }
 
 - (void)loggedOffRedirect:(NSNotification *)notification

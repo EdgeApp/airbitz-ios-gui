@@ -262,11 +262,17 @@
         donation = amountSatoshi;
     }
 
+    NSString *strName = @"";
+    NSString *strCategory = @"";
+    NSString *strNotes = @"";
+
     // get the QR Code image
     NSMutableString *strRequestID = [[NSMutableString alloc] init];
     NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
     NSMutableString *strRequestURI = [[NSMutableString alloc] init];
-    UIImage *qrImage = [self createRequestQRImageFor:@"" withNotes:@"" storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress scaleAndSave:NO withAmount:requestAmount withRequestState:state];
+    UIImage *qrImage = [self createRequestQRImageFor:strName withNotes:strNotes withCategory:strCategory
+        storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
+        scaleAndSave:NO withAmount:requestAmount withRequestState:state];
 
     ShowWalletQRViewController *tempQRViewController = NULL;
     if (_qrViewController)
@@ -280,7 +286,6 @@
     {
         [tempQRViewController.view removeFromSuperview];
     }
-
 }
 
 #pragma mark - Notification Handlers
@@ -307,7 +312,8 @@
     }
 }
 
-- (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes withAmount:(SInt64)amountSatoshi withRequestState:(RequestState)state
+- (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes 
+    withCategory:(NSString *)strCategory withAmount:(SInt64)amountSatoshi withRequestState:(RequestState)state
 {
 	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
 	tABC_CC result;
@@ -338,7 +344,7 @@
 
     _details.szName = (char *) [strName UTF8String];
     _details.szNotes = (char *) [strNotes UTF8String];
-	_details.szCategory = "";
+	_details.szCategory = (char *) [strCategory UTF8String];
 	_details.attributes = 0x0; //for our own use (not used by the core)
     _details.bizId = 0;
 
@@ -415,7 +421,10 @@
 }
 
 // generates and returns a request qr image, stores request id in the given mutable string
-- (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes storeRequestIDIn:(NSMutableString *)strRequestID storeRequestURI:(NSMutableString *)strRequestURI storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave withAmount:(SInt64)amountSatoshi withRequestState:(RequestState)state
+- (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes withCategory:(NSString *)strCategory 
+    storeRequestIDIn:(NSMutableString *)strRequestID storeRequestURI:(NSMutableString *)strRequestURI 
+    storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave 
+    withAmount:(SInt64)amountSatoshi withRequestState:(RequestState)state
 {
     UIImage *qrImage = nil;
     [strRequestID setString:@""];
@@ -427,7 +436,8 @@
     char *pszURI = NULL;
     tABC_Error error;
 
-    const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes withAmount:amountSatoshi withRequestState:state];
+    const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes
+        withCategory:strCategory withAmount:amountSatoshi withRequestState:state];
     requestID = [NSString stringWithUTF8String:szRequestID];
 
     if (szRequestID)

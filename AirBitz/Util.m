@@ -193,7 +193,11 @@
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
     UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:identifier];
+    return [Util animateController:controller parentController:parent];
+}
 
++ (UIViewController *)animateController:(UIViewController *)controller parentController:(UIViewController *)parent
+{
     CGRect frame = parent.view.bounds;
     frame.origin.x = frame.size.width;
     controller.view.frame = frame;
@@ -326,6 +330,26 @@
                 withObject:[NSNumber numberWithBool:matched] waitUntilDone:NO];
         });
     }
+}
+
++ (NSString *)urlencode:(NSString *)url
+{
+    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    url = [url stringByReplacingOccurrencesOfString:@":" withString:@"%3A"];
+    url = [url stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
+    return [url stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
+}
+
++ (NSMutableDictionary *)getUrlParameters:(NSURL *)url
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *param in [[url query] componentsSeparatedByString:@"&"]) {
+        NSArray *split = [param componentsSeparatedByString:@"="];
+        if ([split count] > 1) {
+            [params setValue:[split[1] stringByRemovingPercentEncoding] forKey:split[0]];
+        }
+    }
+    return params;
 }
 
 @end

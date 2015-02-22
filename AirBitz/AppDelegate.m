@@ -79,7 +79,6 @@ NSDate *logoutDate = NULL;
 {
     NSDictionary *d = @{ KEY_URL: url };
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HANDLE_BITCOIN_URI object:self userInfo:d];
-    
     return YES;
 }
 

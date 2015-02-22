@@ -1114,6 +1114,9 @@
 		DAAC216C1963A35900CC0F1E /* btn_album@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */; };
 		DAAC216D1963A35900CC0F1E /* btn_album~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */; };
 		DABA3486198DFEE300EFAB13 /* infoRequestQR.html in Resources */ = {isa = PBXBuildFile; fileRef = DABA3485198DFEE300EFAB13 /* infoRequestQR.html */; };
+		DAE276141A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
+		DAE276151A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
+		DAE276161A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
 		DAE863F71A88A58A00A17BD3 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9A418EA0C4E008F302C /* SMCalloutView.m */; };
 		DAE863F81A88A58A00A17BD3 /* QuestionAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EB0E18DE018E008ACF88 /* QuestionAnswerView.m */; };
 		DAE863F91A88A58A00A17BD3 /* DateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D0193564D20091C286 /* DateTime.m */; };
@@ -2419,6 +2422,8 @@
 		DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album@2x~iphone.png"; sourceTree = "<group>"; };
 		DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album~iphone.png"; sourceTree = "<group>"; };
 		DABA3485198DFEE300EFAB13 /* infoRequestQR.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoRequestQR.html; sourceTree = "<group>"; };
+		DAE276121A9AEE8500E24523 /* AddressRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressRequestController.h; sourceTree = "<group>"; };
+		DAE276131A9AEE8500E24523 /* AddressRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressRequestController.m; sourceTree = "<group>"; };
 		DAE866291A88A58A00A17BD3 /* Airbitz Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAFC799E1A81CCBE00E9039D /* TwoFactorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorMenuViewController.h; sourceTree = "<group>"; };
 		DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorMenuViewController.m; sourceTree = "<group>"; };
@@ -3545,6 +3550,8 @@
 		B5C0A9A718EA0D09008F302C /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				DAE276121A9AEE8500E24523 /* AddressRequestController.h */,
+				DAE276131A9AEE8500E24523 /* AddressRequestController.m */,
 				B5C0A9A818EA0D09008F302C /* RequestViewController.h */,
 				B5C0A9A918EA0D09008F302C /* RequestViewController.m */,
 				B5C0A9C918EA0FF0008F302C /* ShowWalletQRViewController.h */,
@@ -5258,6 +5265,7 @@
 				7D89E8CF1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C61A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				7D98ACDD19A7C550003D2BF6 /* PopupPickerView.m in Sources */,
+				DAE276151A9AEE8500E24523 /* AddressRequestController.m in Sources */,
 				DA1E7CA81A8C187F007C6C05 /* StylizedButton.m in Sources */,
 				7D98ACDE19A7C550003D2BF6 /* PayeeCell.m in Sources */,
 				7D98ACDF19A7C550003D2BF6 /* topOverviewCell.m in Sources */,
@@ -5389,6 +5397,7 @@
 				7D89E8CE1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C51A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				4C7247D41937A7520091C286 /* PayeeCell.m in Sources */,
+				DAE276141A9AEE8500E24523 /* AddressRequestController.m in Sources */,
 				DA1E7CA71A8C187F007C6C05 /* StylizedButton.m in Sources */,
 				B5C0A9A018EA0C10008F302C /* topOverviewCell.m in Sources */,
 				B5137C3818A435BD00DA4A34 /* NSDictionary_JSONExtensions.m in Sources */,
@@ -5520,6 +5529,7 @@
 				DAE864341A88A58A00A17BD3 /* NotificationChecker.m in Sources */,
 				DAE864351A88A58A00A17BD3 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				DAE864361A88A58A00A17BD3 /* PayeeCell.m in Sources */,
+				DAE276161A9AEE8500E24523 /* AddressRequestController.m in Sources */,
 				DA1E7CA91A8C187F007C6C05 /* StylizedButton.m in Sources */,
 				DAE864371A88A58A00A17BD3 /* topOverviewCell.m in Sources */,
 				DAE864381A88A58A00A17BD3 /* NSDictionary_JSONExtensions.m in Sources */,
