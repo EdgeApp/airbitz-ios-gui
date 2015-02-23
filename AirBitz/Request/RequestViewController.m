@@ -28,7 +28,7 @@
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 #define QR_CODE_SIZE          200.0
 
-#define WALLET_BUTTON_WIDTH         200
+#define WALLET_REQUEST_BUTTON_WIDTH  200
 
 #define OPERATION_CLEAR		0
 #define OPERATION_BACK		1
@@ -89,7 +89,7 @@
 	self.keypadView.delegate = self;
 	self.buttonSelector.delegate = self;
 	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
-    [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
+    [self.buttonSelector setButtonWidth:WALLET_REQUEST_BUTTON_WIDTH];
     
     self.nextButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
     [self.nextButton setTitleColor:[UIColor colorWithWhite:1 alpha:1.0] forState:UIControlStateNormal];
