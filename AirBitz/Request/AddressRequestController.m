@@ -16,6 +16,7 @@
     NSString *strName;
     NSString *strCategory;
     NSString *strNotes;
+    Wallet   *wallet;
 }
 
 @property (nonatomic, weak) IBOutlet ButtonSelectorView *walletSelector;
@@ -42,7 +43,20 @@
     _walletSelector.textLabel.text = NSLocalizedString(@"Wallet:", nil);
     [_walletSelector setButtonWidth:200];
     [self loadWalletInfo];
+    [self validateUri];
 
+    NSMutableString *msg = [[NSMutableString alloc] init];
+    if ([strName length] > 0) {
+        [msg appendFormat:NSLocalizedString(@"%@ has requested a bitcoin address to send money to.", nil), strName];
+    } else {
+        [msg appendString:NSLocalizedString(@"An app has requested a bitcoin address to send money to.", nil)];
+    }
+    [msg appendString:NSLocalizedString(@" Please choose a wallet to receive funds.", nil)];
+    _message.text = msg;
+}
+
+- (void)validateUri
+{
     if (_url) {
         NSDictionary *dict = [Util getUrlParameters:_url];
         strName = [dict objectForKey:@"provider"] ? [dict objectForKey:@"provider"] : @"";
@@ -54,15 +68,6 @@
         strCategory = @"";
         strNotes = @"";
     }
-
-    NSMutableString *msg = [[NSMutableString alloc] init];
-    if ([strName length] > 0) {
-        [msg appendFormat:NSLocalizedString(@"%@ has requested a bitcoin address to send money to.", nil), strName];
-    } else {
-        [msg appendString:NSLocalizedString(@"An app has requested a bitcoin address to send money to.", nil)];
-    }
-    [msg appendString:NSLocalizedString(@" Please choose a wallet to receive funds.", nil)];
-    _message.text = msg;
 }
 
 - (void)loadWalletInfo
@@ -77,12 +82,12 @@
     NSMutableArray *arrayWalletNames =
         [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
     for (int i = 0; i < [arrayWallets count]; i++) {
-        Wallet *wallet = [arrayWallets objectAtIndex:i];
+        Wallet *w = [arrayWallets objectAtIndex:i];
         [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)",
-            wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+            w.strName, [CoreBridge formatSatoshi:w.balance]]];
     }
     if (_selectedWalletIndex < [arrayWallets count]) {
-        Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
+        wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
         _walletSelector.arrayItemsToSelect = [arrayWalletNames copy];
         [_walletSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
         _walletSelector.selectedItemIndex = (int) _selectedWalletIndex;
@@ -95,6 +100,8 @@
 - (IBAction)okay
 {
     [self.view endEditing:YES];
+    wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+
     NSMutableString *strRequestID = [[NSMutableString alloc] init];
     NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
     NSMutableString *strRequestURI = [[NSMutableString alloc] init];
@@ -109,7 +116,10 @@
             query = [[NSMutableString alloc] initWithFormat: @"%@&addr=%@", url, [Util urlencode:strRequestURI]];
         }
         [query appendString:@"&provider=Airbitz"];
-        [[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]];
+        if ([[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]]) {
+            // If the URL was successfully opened, finalize the request
+            [self finalizeRequest:strRequestID];
+        }
     }
     // finish
     [self.delegate AddressRequestControllerDone:self];
@@ -147,7 +157,6 @@
 
     char *szRequestID = [self createReceiveRequestFor:amountSatoshi withRequestState:state];
     if (szRequestID) {
-        Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
         ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
             [[User Singleton].password UTF8String], [wallet.strUUID UTF8String],
             szRequestID, &pszURI, &pData, &width, &error);
@@ -158,6 +167,24 @@
             }
         } else {
             [Util printABC_Error:&error];
+        }
+    }
+    if (szRequestID) {
+        if (strRequestID) {
+            [strRequestID appendFormat:@"%s", szRequestID];
+        }
+        char *szRequestAddress = NULL;
+        tABC_CC result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
+            [[User Singleton].password UTF8String], [wallet.strUUID UTF8String],
+            szRequestID, &szRequestAddress, &error);
+        [Util printABC_Error:&error];
+        if (result == ABC_CC_Ok) {
+            if (szRequestAddress && strRequestAddress) {
+                [strRequestAddress appendFormat:@"%s", szRequestAddress];
+            }
+        }
+        if (szRequestAddress) {
+            free(szRequestAddress);
         }
     }
     if (szRequestID) {
@@ -172,8 +199,6 @@
 {
 	tABC_Error error;
     tABC_TxDetails details;
-
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 
     memset(&details, 0, sizeof(tABC_TxDetails));
     details.amountSatoshi = 0;
@@ -198,14 +223,24 @@
 	}
 }
 
+- (BOOL)finalizeRequest:(NSString *)requestId
+{
+    tABC_Error error;
+    // Finalize this request so it isn't used elsewhere
+    ABC_FinalizeReceiveRequest([[User Singleton].name UTF8String],
+        [[User Singleton].password UTF8String], [wallet.strUUID UTF8String],
+        [requestId UTF8String], &error);
+    [Util printABC_Error:&error];
+    return error.code == ABC_CC_Ok ? YES : NO;
+}
+
 #pragma mark - ButtonSelectorView delegates
 
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
     _selectedWalletIndex = itemIndex;
+    wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 
-    // Update wallet UUID
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
     [_walletSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
     _walletSelector.selectedItemIndex = _selectedWalletIndex;
 }
