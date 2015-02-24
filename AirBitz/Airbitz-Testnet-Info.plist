@@ -37,7 +37,7 @@
 			<string>com.airbitz.airbitz</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>bitcoinaddr</string>
+				<string>bitcoin-ret</string>
 			</array>
 		</dict>
 	</array>

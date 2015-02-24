@@ -1108,7 +1108,7 @@ typedef enum eAppMode
         } else {
             _uri = uri;
         }
-    } else if ([uri.scheme isEqualToString:@"bitcoinaddr"]) {
+    } else if ([uri.scheme isEqualToString:@"bitcoin-ret"] || [uri.host isEqualToString:@"x-callback-url"]) {
         if ([User isLoggedIn]) {
             UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
             _addressRequestController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AddressRequestController"];

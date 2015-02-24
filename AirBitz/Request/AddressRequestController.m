@@ -10,6 +10,8 @@
 #import "User.h"
 #import "ABC.h"
 
+#define X_SOURCE @"Airbitz"
+
 @interface AddressRequestController () <UITextFieldDelegate,  ButtonSelectorDelegate>
 {
 	int _selectedWalletIndex;
@@ -59,10 +61,12 @@
 {
     if (_url) {
         NSDictionary *dict = [Util getUrlParameters:_url];
-        strName = [dict objectForKey:@"provider"] ? [dict objectForKey:@"provider"] : @"";
+        strName = [dict objectForKey:@"x-source"] ? [dict objectForKey:@"x-source"] : @"";
         strNotes = [dict objectForKey:@"notes"] ? [dict objectForKey:@"notes"] : @"";
         strCategory = [dict objectForKey:@"category"] ? [dict objectForKey:@"category"] : @"";
-        _returnUrl = [[NSURL alloc] initWithString:[[_url host] stringByRemovingPercentEncoding]];
+        _successUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-success"]];
+        _errorUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-error"]];
+        _cancelUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-cancel"]];
     } else {
         strName = @"";
         strCategory = @"";
@@ -107,18 +111,21 @@
     NSMutableString *strRequestURI = [[NSMutableString alloc] init];
     [self createRequest:strRequestID storeRequestURI:strRequestURI
         storeRequestAddressIn:strRequestAddress withAmount:0 withRequestState:kRequest];
-    if (_returnUrl) {
-        NSString *url = [_returnUrl absoluteString];
+    if (_successUrl) {
+        NSString *url = [_successUrl absoluteString];
         NSMutableString *query;
         if ([url rangeOfString:@"?"].location == NSNotFound) {
             query = [[NSMutableString alloc] initWithFormat: @"%@?addr=%@", url, [Util urlencode:strRequestURI]];
         } else {
             query = [[NSMutableString alloc] initWithFormat: @"%@&addr=%@", url, [Util urlencode:strRequestURI]];
         }
-        [query appendString:@"&provider=Airbitz"];
+        [query appendFormat:@"&x-source=%@", X_SOURCE];
         if ([[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]]) {
             // If the URL was successfully opened, finalize the request
             [self finalizeRequest:strRequestID];
+        } else {
+            // If that failed to open, try error url
+            [[UIApplication sharedApplication] openURL:_errorUrl];
         }
     }
     // finish
@@ -127,13 +134,17 @@
 
 - (IBAction)cancel
 {
-    if (_returnUrl) {
-        NSString *url = [_returnUrl absoluteString];
+    if (_cancelUrl == nil) {
+        _cancelUrl = _errorUrl;
+    }
+    if (_cancelUrl) {
+        NSString *url = [_cancelUrl absoluteString];
         NSMutableString *query;
+        NSString *cancelMessage = [Util urlencode:NSLocalizedString(@"User cancelled the request.", nil)];
         if ([url rangeOfString:@"?"].location == NSNotFound) {
-            query = [[NSMutableString alloc] initWithFormat: @"%@?addr=", url];
+            query = [[NSMutableString alloc] initWithFormat: @"%@?addr=&cancelMessage=%@", url, cancelMessage];
         } else {
-            query = [[NSMutableString alloc] initWithFormat: @"%@&addr=", url];
+            query = [[NSMutableString alloc] initWithFormat: @"%@&addr=&cancelMessage=%@", url, cancelMessage];
         }
         [[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]];
     }
