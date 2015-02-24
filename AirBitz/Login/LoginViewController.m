@@ -8,12 +8,12 @@
 
 #import "LoginViewController.h"
 #import "ABC.h"
-#import "SignUpViewController.h"
 #import "User.h"
 #import "StylizedTextField.h"
 #import "Util.h"
 #import "CoreBridge.h"
 #import "Config.h"
+#import "SignUpManager.h"
 #import "PasswordRecoveryViewController.h"
 #import "TwoFactorMenuViewController.h"
 #import "CoreBridge.h"
@@ -27,7 +27,7 @@ typedef enum eLoginMode
     MODE_ENTERING_PASSWORD
 } tLoginMode;
 
-@interface LoginViewController () <UITextFieldDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, TwoFactorMenuViewControllerDelegate>
+@interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, TwoFactorMenuViewControllerDelegate>
 {
     tLoginMode                      _mode;
     CGRect                          _originalContentFrame;
@@ -40,7 +40,7 @@ typedef enum eLoginMode
     BOOL                            _bTouchesEnabled;
     NSString                        *_strReason;
     tABC_CC                         _resultCode;                            
-    SignUpViewController            *_signUpController;
+    SignUpManager                   *_signupManager;
     UITextField                     *_activeTextField;
     PasswordRecoveryViewController  *_passwordRecoveryController;
     TwoFactorMenuViewController     *_tfaMenuViewController;
@@ -186,31 +186,12 @@ typedef enum eLoginMode
     [self.passwordTextField resignFirstResponder];
     [self animateToInitialPresentation];
     
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-    _signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
-
-    _signUpController.mode = SignUpMode_SignUp;
-    _signUpController.delegate = self;
+    _signupManager = [[SignUpManager alloc] initWithController:self];
+    _signupManager.delegate = self;
     if (self.userNameTextField.text) {
-        _signUpController.strUserName = self.userNameTextField.text;
+        _signupManager.strUserName = self.userNameTextField.text;
     }
-    
-    CGRect frame = self.view.bounds;
-    frame.origin.x = frame.size.width;
-    _signUpController.view.frame = frame;
-    [self.view addSubview:_signUpController.view];
-    
-    
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-     {
-         _signUpController.view.frame = self.view.bounds;
-     }
-     completion:^(BOOL finished)
-     {
-     }];
+    [_signupManager startSignup];
 }
 
 - (IBAction)buttonForgotTouched:(id)sender
@@ -588,13 +569,15 @@ typedef enum eLoginMode
     _tfaMenuViewController.bTestSecret = NO;
 }
 
-#pragma mark - SignUpViewControllerDelegates
+#pragma mark - SignUpManagerDelegate
 
-- (void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
+-(void)signupAborted
 {
-    [controller.view removeFromSuperview];
-    _signUpController = nil;
+    [self finishIfLoggedIn:YES];
+}
 
+-(void)signupFinished
+{
     [self finishIfLoggedIn:YES];
 }
 
