@@ -63,7 +63,7 @@
     [self.passwordTextField addTarget:self action:@selector(passwordTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     
     // Only needed for old SignUpViewController which is multipurpose. Used when changing password or PIN
-    [self updateDisplayForMode:_mode];
+//    [self updateDisplayForMode:_mode];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
