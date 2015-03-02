@@ -59,6 +59,9 @@
     self.pinTextField.minimumCharacters = ABC_MIN_PIN_LENGTH;
     self.contentViewY = self.contentView.frame.origin.y;
 
+    self.labelString = NSLocalizedString(@"Sign Up", @"Sign Up");
+
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
