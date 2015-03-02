@@ -10,6 +10,9 @@
 #import "SignUpCameraController.h"
 #import "SignUpContactsController.h"
 #import "Util.h"
+#import <AddressBookUI/AddressBookUI.h>
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface SignUpManager () 
 {
@@ -21,6 +24,10 @@
     SignUpCameraController   *_signupCameraController;
     UIViewController         *_parentController;
 }
+
+@property (nonatomic, assign)   BOOL                            bHasCameraAccess;
+@property (nonatomic, assign)   BOOL                            bHasContactsAccess;
+
 
 @end
 
@@ -37,29 +44,60 @@
 
 - (void)startSignup
 {
+    _bHasCameraAccess = [self haveRequestCamera];
+    _bHasContactsAccess = [self haveRequestedContacts];
     [self launchUsernameController];
 }
 
 - (void)next
 {
-    if (_current == _signupUsernameController) {
-        [self launchPasswordController];
-    } else if (_current == _signupPasswordController) {
-//        [self launchHandleController];
-//    } else if (_current == _signupHandleController) {
-        [self launchCameraController];
-    } else if (_current == _signupCameraController) {
-        [self launchContactController];
-    } else if (_current == _signupContactController) {
-        [_signupUsernameController.view removeFromSuperview];
-        [_signupPasswordController.view removeFromSuperview];
-        [_signupHandleController.view removeFromSuperview];
-        [_signupCameraController.view removeFromSuperview];
-        [Util animateOut:_signupContactController parentController:_parentController complete:^(void) {
-            _signupUsernameController = nil;
-            _current = nil;
-        }];
+    if (_current == _signupUsernameController)
+    {
+        goto usernameCtl;
     }
+    else if (_current == _signupPasswordController)
+    {
+        goto passwordCtl;
+    }
+    else if (_current == _signupCameraController)
+    {
+        goto cameraCtl;
+    }
+    else if (_current == _signupContactController)
+    {
+        goto contactsCtl;
+    }
+
+    usernameCtl:
+    [self launchPasswordController];
+    return;
+
+    passwordCtl:
+    if (!_bHasCameraAccess)
+    {
+        [self launchCameraController];
+        return;
+    }
+
+    cameraCtl:
+    if (!_bHasContactsAccess)
+    {
+        [self launchContactController];
+        return;
+    }
+
+    contactsCtl:
+    [_signupUsernameController.view removeFromSuperview];
+    [_signupPasswordController.view removeFromSuperview];
+    [_signupHandleController.view removeFromSuperview];
+    [_signupCameraController.view removeFromSuperview];
+    [Util animateOut:_signupContactController parentController:_parentController complete:^(void) {
+        _signupUsernameController = nil;
+        _current = nil;
+    }];
+
+    return;
+
 }
 
 - (void)back
@@ -75,22 +113,6 @@
             _current = _signupUsernameController;
             [_current viewWillAppear:true];
         }];
-
-//    } else if (_current == _signupHandleController) {
-//        [Util animateOut:_signupHandleController parentController:_parentController complete:^(void) {
-//            _signupHandleController = nil;
-//            _current = _signupPasswordController;
-//        }];
-//    } else if (_current == _signupContactController) {
-//        [Util animateOut:_signupContactController parentController:_parentController complete:^(void) {
-//            _signupContactController = nil;
-//            _current = _signupHandleController;
-//        }];
-//    } else if (_current == _signupCameraController) {
-//        [Util animateOut:_signupCameraController parentController:_parentController complete:^(void) {
-//            _signupCameraController = nil;
-//            _current = _signupContactController;
-//        }];
     }
 }
 
@@ -112,15 +134,6 @@
     [Util animateController:_signupPasswordController parentController:_parentController];
 }
 
-- (void)launchHandleController
-{
-    UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
-    _signupHandleController = (SignUpHandleController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpHandleController"];
-    _signupHandleController.manager = self;
-    _current = _signupHandleController;
-    [Util animateController:_signupHandleController parentController:_parentController];
-}
-
 - (void)launchCameraController
 {
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
@@ -138,5 +151,31 @@
     _current = _signupContactController;
     [Util animateController:_signupContactController parentController:_parentController];
 }
+
+
+- (BOOL)haveRequestCamera
+{
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if(authStatus == AVAuthorizationStatusAuthorized) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)haveRequestedContacts
+{
+    ABAuthorizationStatus abAuthorizationStatus;
+
+    abAuthorizationStatus = ABAddressBookGetAuthorizationStatus();
+
+    if (abAuthorizationStatus == kABAuthorizationStatusAuthorized) {
+        return YES;
+    }
+
+    return NO;
+
+}
+
+
 
 @end

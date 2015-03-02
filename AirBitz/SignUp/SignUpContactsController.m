@@ -9,39 +9,7 @@
 @implementation SignUpContactsController
 
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    if ([self haveRequestedContacts]) {
-        [self.manager next];
-    }
-
-}
-
-
 - (IBAction)next
-{
-    [self requestContactAccess];
-
-    [self.manager next];
-}
-
-- (BOOL)haveRequestedContacts
-{
-    ABAuthorizationStatus abAuthorizationStatus;
-
-    abAuthorizationStatus = ABAddressBookGetAuthorizationStatus();
-
-    if (abAuthorizationStatus == kABAuthorizationStatusAuthorized) {
-        return YES;
-    }
-
-    return NO;
-
-}
-
-- (void)requestContactAccess
 {
     ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
     ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
@@ -51,6 +19,12 @@
             // Update bummer
         }
     });
+
+    [self.manager next];
+}
+
+- (void)requestContactAccess
+{
 }
 
 

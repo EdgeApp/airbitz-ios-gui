@@ -19,32 +19,7 @@
 
 @implementation SignUpCameraController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    if ([self haveRequestCamera]) {
-        [self.manager next];
-    }
-
-}
-
 - (IBAction)next
-{
-    [self requestCameraAccess];
-    [self.manager next];
-}
-
-- (BOOL)haveRequestCamera
-{
-    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    if(authStatus == AVAuthorizationStatusAuthorized) {
-        return YES;
-    }
-    return NO;
-}
-
-- (void)requestCameraAccess
 {
     if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType: completionHandler:)]) {
         [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
@@ -55,6 +30,7 @@
             }
         }];
     }
+    [self.manager next];
 }
 
 @end
