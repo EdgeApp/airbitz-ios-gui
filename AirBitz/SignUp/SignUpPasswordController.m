@@ -10,10 +10,10 @@
 #import "Util.h"
 
 #define KEYBOARD_MARGIN         10.0
+#define PASSWORD_VERIFY_FRAME_Y_OFFSET 20
 
 @interface SignUpPasswordController () <UITextFieldDelegate, PasswordVerifyViewDelegate>
 {
-    SignUpPasswordController        *_signupPasswordController;
     UITextField                     *_activeTextField;
     PasswordVerifyView              *_passwordVerifyView;
     FadingAlertView                 *_fadingAlert;
@@ -24,9 +24,11 @@
 @property (nonatomic, weak) IBOutlet MinCharTextField *passwordTextField;
 @property (nonatomic, weak) IBOutlet MinCharTextField *reenterPasswordTextField;
 @property (nonatomic, weak) IBOutlet MinCharTextField *pinTextField;
+@property (nonatomic, weak) IBOutlet UIView                     *masterView;
 @property (nonatomic, weak) IBOutlet UIView                     *contentView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView    *activityView;
 @property (nonatomic, strong)   UIButton                        *buttonBlocker;
+@property (nonatomic)           CGFloat                         contentViewY;
 
 
 
@@ -49,6 +51,7 @@
     self.reenterPasswordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
     self.pinTextField.delegate = self;
     self.pinTextField.minimumCharacters = ABC_MIN_PIN_LENGTH;
+    self.contentViewY = self.contentView.frame.origin.y;
 
 }
 
@@ -93,9 +96,10 @@
 {
     if(_keyboardFrameOriginY) //set when keyboard is visible
     {
-        CGRect textFieldFrame = [self.contentView convertRect:_activeTextField.frame toView:self.view.window];
-        float overlap = self.contentView.frame.origin.y + _keyboardFrameOriginY - KEYBOARD_MARGIN - (textFieldFrame.origin.y + textFieldFrame.size.height);
-        //NSLog(@"Overlap: %f", overlap);
+        CGRect textFieldFrame = [self.contentView convertRect:textField.frame toView:self.view.window];
+
+        float overlap = _keyboardFrameOriginY - (textFieldFrame.origin.y + textFieldFrame.size.height + KEYBOARD_MARGIN);
+
         if(overlap < 0)
         {
             [UIView animateWithDuration:0.35
@@ -104,7 +108,7 @@
                              animations:^
              {
                  CGRect frame = self.contentView.frame;
-                 frame.origin.y = overlap;
+                 frame.origin.y += overlap;
                  self.contentView.frame = frame;
              }
                              completion:^(BOOL finished)
@@ -147,7 +151,7 @@
                      animations:^
      {
          CGRect frame = self.contentView.frame;
-         frame.origin.y = 0;
+         frame.origin.y = self.contentViewY;
          self.contentView.frame = frame;
      }
                      completion:^(BOOL finished)
@@ -167,7 +171,10 @@
     {
         if(_passwordVerifyView == nil)
         {
-            _passwordVerifyView = [PasswordVerifyView CreateInsideView:self.contentView withDelegate:self];
+            _passwordVerifyView = [PasswordVerifyView CreateInsideView:self.masterView withDelegate:self];
+            CGRect frame = _passwordVerifyView.frame;
+            frame.origin.y += PASSWORD_VERIFY_FRAME_Y_OFFSET;
+            _passwordVerifyView.frame = frame;
         }
         _passwordVerifyView.password = textField.text;
     }
@@ -211,7 +218,7 @@
 {
     if (_passwordVerifyView == nil)
     {
-        _passwordVerifyView = [PasswordVerifyView CreateInsideView:self.contentView withDelegate:self];
+        _passwordVerifyView = [PasswordVerifyView CreateInsideView:self.masterView withDelegate:self];
     }
     _passwordVerifyView.password = textField.text;
 }
