@@ -189,7 +189,7 @@ typedef enum eLoginMode
     _signupManager = [[SignUpManager alloc] initWithController:self];
     _signupManager.delegate = self;
     if (self.userNameTextField.text) {
-        _signupManager.strUserName = self.userNameTextField.text;
+        _signupManager.strInUserName = self.userNameTextField.text;
     }
     [_signupManager startSignup];
 }

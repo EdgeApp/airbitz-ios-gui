@@ -67,6 +67,8 @@
     
     // Only needed for old SignUpViewController which is multipurpose. Used when changing password or PIN
 //    [self updateDisplayForMode:_mode];
+    [self.passwordTextField becomeFirstResponder];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated

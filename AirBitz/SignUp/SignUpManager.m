@@ -45,8 +45,8 @@
     if (_current == _signupUsernameController) {
         [self launchPasswordController];
     } else if (_current == _signupPasswordController) {
-        [self launchHandleController];
-    } else if (_current == _signupHandleController) {
+//        [self launchHandleController];
+//    } else if (_current == _signupHandleController) {
         [self launchCameraController];
     } else if (_current == _signupCameraController) {
         [self launchContactController];
@@ -73,6 +73,7 @@
         [Util animateOut:_signupPasswordController parentController:_parentController complete:^(void) {
             _signupPasswordController = nil;
             _current = _signupUsernameController;
+            [_current viewWillAppear:true];
         }];
     } else if (_current == _signupHandleController) {
         [Util animateOut:_signupHandleController parentController:_parentController complete:^(void) {

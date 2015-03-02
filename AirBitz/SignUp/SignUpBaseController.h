@@ -10,4 +10,7 @@
 
 @property (assign) SignUpManager *manager;
 
+- (void)next;
+
+- (void)back;
 @end
