@@ -12,8 +12,6 @@
 @property (assign) id<SignUpManagerDelegate> delegate;
 @property (nonatomic, copy)     NSString                        *strInUserName;
 @property (nonatomic, copy)     NSString                        *strUserName;
-@property (nonatomic, copy)     NSString                        *strPassword;
-@property (nonatomic, copy)     NSString                        *strPIN;
 
 - (id)initWithController:(UIViewController *)parentController;
 - (void)startSignup;

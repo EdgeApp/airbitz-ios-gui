@@ -75,21 +75,22 @@
             _current = _signupUsernameController;
             [_current viewWillAppear:true];
         }];
-    } else if (_current == _signupHandleController) {
-        [Util animateOut:_signupHandleController parentController:_parentController complete:^(void) {
-            _signupHandleController = nil;
-            _current = _signupPasswordController;
-        }];
-    } else if (_current == _signupContactController) {
-        [Util animateOut:_signupContactController parentController:_parentController complete:^(void) {
-            _signupContactController = nil;
-            _current = _signupHandleController;
-        }];
-    } else if (_current == _signupCameraController) {
-        [Util animateOut:_signupCameraController parentController:_parentController complete:^(void) {
-            _signupCameraController = nil;
-            _current = _signupContactController;
-        }];
+
+//    } else if (_current == _signupHandleController) {
+//        [Util animateOut:_signupHandleController parentController:_parentController complete:^(void) {
+//            _signupHandleController = nil;
+//            _current = _signupPasswordController;
+//        }];
+//    } else if (_current == _signupContactController) {
+//        [Util animateOut:_signupContactController parentController:_parentController complete:^(void) {
+//            _signupContactController = nil;
+//            _current = _signupHandleController;
+//        }];
+//    } else if (_current == _signupCameraController) {
+//        [Util animateOut:_signupCameraController parentController:_parentController complete:^(void) {
+//            _signupCameraController = nil;
+//            _current = _signupContactController;
+//        }];
     }
 }
 

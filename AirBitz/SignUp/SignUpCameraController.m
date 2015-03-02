@@ -19,13 +19,20 @@
 
 @implementation SignUpCameraController
 
-- (IBAction)next
+- (void)viewDidLoad
 {
+    [super viewDidLoad];
+
     if ([self haveRequestCamera]) {
         [self.manager next];
-    } else {
-        [self requestCameraAccess];
     }
+
+}
+
+- (IBAction)next
+{
+    [self requestCameraAccess];
+    [self.manager next];
 }
 
 - (BOOL)haveRequestCamera
@@ -33,12 +40,6 @@
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if(authStatus == AVAuthorizationStatusAuthorized) {
         return YES;
-    } else if(authStatus == AVAuthorizationStatusDenied){
-        return YES;
-    } else if(authStatus == AVAuthorizationStatusRestricted){
-        return YES;
-    } else if(authStatus == AVAuthorizationStatusNotDetermined){
-        return NO;
     }
     return NO;
 }
@@ -53,8 +54,6 @@
                 // Update so sad
             }
         }];
-    } else {
-        [self.manager next];
     }
 }
 

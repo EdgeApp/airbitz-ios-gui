@@ -8,6 +8,7 @@
 #import "PasswordVerifyView.h"
 #import "ABC.h"
 #import "Util.h"
+#import "User.h"
 
 #define KEYBOARD_MARGIN         10.0
 #define PASSWORD_VERIFY_FRAME_Y_OFFSET 20
@@ -29,6 +30,11 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView    *activityView;
 @property (nonatomic, strong)   UIButton                        *buttonBlocker;
 @property (nonatomic)           CGFloat                         contentViewY;
+@property (nonatomic, copy)     NSString                        *labelString;
+@property (nonatomic, assign)   BOOL                            bSuccess;
+@property (nonatomic, copy)     NSString                        *strReason;
+
+
 
 
 
@@ -79,6 +85,172 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewWillDisappear:animated];
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Action Methods
+
+-(IBAction)back:(id)sender
+{
+//    [UIView animateWithDuration:0.35
+//                          delay:0.0
+//                        options:UIViewAnimationOptionCurveEaseInOut
+//                     animations:^
+//                     {
+//                         CGRect frame = self.view.frame;
+//                         frame.origin.x = frame.size.width;
+//                         self.view.frame = frame;
+//                     }
+//                     completion:^(BOOL finished)
+//                     {
+//                         [self exitWithBackButton:YES];
+//                     }];
+    [super back];
+}
+
+- (void)next
+{
+    // check the new password fields
+    if ([self newPasswordFieldsAreValid] == YES)
+    {
+        // check the username and pin field
+        if ([self fieldsAreValid] == YES)
+        {
+            // if we are signing up a new account
+            _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+            _fadingAlert.message = NSLocalizedString(@"Creating and securing account", nil);
+            _fadingAlert.fadeDuration = 0;
+            _fadingAlert.fadeDelay = 0;
+            [_fadingAlert blockModal:YES];
+            [_fadingAlert showSpinner:YES];
+            [_fadingAlert show];
+
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                tABC_Error error;
+//                ABC_CreateAccount([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String], &error);
+//                if (error.code == ABC_CC_Ok) {
+//                    ABC_SetPIN([[User Singleton].name UTF8String], [self.manager.strUserName UTF8String],
+//                            [self.pinTextField.text UTF8String], &error);
+//                }
+                error.code = ABC_CC_Ok;
+                _bSuccess = (error.code == ABC_CC_Ok);
+                _strReason = [Util errorMap:&error];
+                [self performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
+            });
+        }
+    }
+}
+
+
+#pragma mark - Fading Alert Delegate
+
+- (void)dismissFading:(BOOL)animated
+{
+    if (_fadingAlert) {
+        [_fadingAlert dismiss:animated];
+    }
+}
+
+- (void)fadingAlertDismissed:(FadingAlertView *)view
+{
+    _fadingAlert = nil;
+}
+
+// checks the password against the password rules
+// returns YES if new password fields are good, NO if the new password fields failed the checks
+// if the new password fields are bad, an appropriate message box is displayed
+// note: this function is aware of the 'mode' of the view controller and will check and display appropriately
+- (BOOL)newPasswordFieldsAreValid
+{
+    BOOL bNewPasswordFieldsAreValid = YES;
+
+    {
+        double secondsToCrack;
+        tABC_Error Error;
+        tABC_CC result;
+        unsigned int count = 0;
+        tABC_PasswordRule **aRules = NULL;
+        result = ABC_CheckPassword([self.passwordTextField.text UTF8String],
+                &secondsToCrack,
+                &aRules,
+                &count,
+                &Error);
+
+        //printf("Password results:\n");
+        NSMutableString *message = [[NSMutableString alloc] init];
+        [message appendString:@"Your password...\n"];
+        for (int i = 0; i < count; i++)
+        {
+            tABC_PasswordRule *pRule = aRules[i];
+            if (!pRule->bPassed)
+            {
+                bNewPasswordFieldsAreValid = NO;
+                [message appendFormat:@"%s.\n", pRule->szDescription];
+            }
+
+            //printf("%s - %s\n", pRule->bPassed ? "pass" : "fail", pRule->szDescription);
+        }
+
+        ABC_FreePasswordRuleArray(aRules, count);
+        if (bNewPasswordFieldsAreValid == NO)
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                    initWithTitle:NSLocalizedString(@"Insufficient Password", @"Title of password check popup alert")
+                          message:message
+                         delegate:nil
+                cancelButtonTitle:@"OK"
+                otherButtonTitles:nil];
+            [alert show];
+        }
+        else if ([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text] == NO)
+        {
+            bNewPasswordFieldsAreValid = NO;
+            UIAlertView *alert = [[UIAlertView alloc]
+                    initWithTitle:self.labelString
+                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                                             self.labelString,
+                                          NSLocalizedString(@"Password does not match re-entered password", @"")]
+                         delegate:nil
+                cancelButtonTitle:@"OK"
+                otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+
+    return bNewPasswordFieldsAreValid;
+}
+
+// checks the pin field
+// returns YES if field is good
+// if the field is bad, an appropriate message box is displayed
+// note: this function is aware of the 'mode' of the view controller and will check and display appropriately
+- (BOOL)fieldsAreValid
+{
+    BOOL valid = YES;
+    {
+        // if the pin isn't long enough
+        if (self.pinTextField.text.length < ABC_MIN_PIN_LENGTH)
+        {
+            valid = NO;
+            UIAlertView *alert = [[UIAlertView alloc]
+                    initWithTitle:self.labelString
+                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                                             self.labelString,
+                                                             [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), ABC_MIN_PIN_LENGTH]]
+                         delegate:nil
+                cancelButtonTitle:@"OK"
+                otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+
+    return valid;
+}
+
 
 - (void)blockUser:(BOOL)bBlock
 {
@@ -239,6 +411,30 @@
         }
         [_activeTextField resignFirstResponder];
     }
+}
+#pragma mark - ABC Callbacks
+
+- (void)createAccountComplete
+{
+    if (_bSuccess) {
+//        [User login:self.manager.strUserName
+//           password:self.passwordTextField.text];
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+//        {
+//            [CoreBridge setupLoginPIN];
+//        });
+        [super next];
+    } else {
+        [self dismissFading:NO];
+        UIAlertView *alert = [[UIAlertView alloc]
+                initWithTitle:NSLocalizedString(@"Account Sign In", @"Title of account signin error alert")
+                      message:[NSString stringWithFormat:@"Sign-in failed:\n%@", _strReason]
+                     delegate:nil
+            cancelButtonTitle:@"OK"
+            otherButtonTitles:nil];
+        [alert show];
+    }
+    [self blockUser:NO];
 }
 
 #pragma mark - PasswordVerifyViewDelegates

@@ -8,24 +8,37 @@
 
 @implementation SignUpContactsController
 
-- (IBAction)next
+
+- (void)viewDidLoad
 {
+    [super viewDidLoad];
+
     if ([self haveRequestedContacts]) {
         [self.manager next];
-    } else {
-        [self requestContactAccess];
     }
+
+}
+
+
+- (IBAction)next
+{
+    [self requestContactAccess];
+
+    [self.manager next];
 }
 
 - (BOOL)haveRequestedContacts
 {
-    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
-        return NO;
-    } else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
-        return YES;
-    } else {
+    ABAuthorizationStatus abAuthorizationStatus;
+
+    abAuthorizationStatus = ABAddressBookGetAuthorizationStatus();
+
+    if (abAuthorizationStatus == kABAuthorizationStatusAuthorized) {
         return YES;
     }
+
+    return NO;
+
 }
 
 - (void)requestContactAccess
