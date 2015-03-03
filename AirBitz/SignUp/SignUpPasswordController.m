@@ -134,11 +134,11 @@
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
                 tABC_Error error;
-//                ABC_CreateAccount([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String], &error);
-//                if (error.code == ABC_CC_Ok) {
-//                    ABC_SetPIN([[User Singleton].name UTF8String], [self.manager.strUserName UTF8String],
-//                            [self.pinTextField.text UTF8String], &error);
-//                }
+                ABC_CreateAccount([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String], &error);
+                if (error.code == ABC_CC_Ok) {
+                    ABC_SetPIN([[User Singleton].name UTF8String], [self.manager.strUserName UTF8String],
+                            [self.pinTextField.text UTF8String], &error);
+                }
                 error.code = ABC_CC_Ok;
                 _bSuccess = (error.code == ABC_CC_Ok);
                 _strReason = [Util errorMap:&error];
@@ -420,14 +420,15 @@
 - (void)createAccountComplete
 {
     if (_bSuccess) {
-//        [User login:self.manager.strUserName
-//           password:self.passwordTextField.text];
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-//        {
-//            [CoreBridge setupLoginPIN];
-//        });
         super.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
         super.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
+
+        [User login:self.manager.strUserName
+           password:self.passwordTextField.text];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+        {
+            [CoreBridge setupLoginPIN];
+        });
 
         [super next];
     } else {
