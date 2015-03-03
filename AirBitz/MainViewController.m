@@ -608,9 +608,7 @@ typedef enum eAppMode
 
 - (void)loginViewControllerDidLogin:(BOOL)bNewAccount
 {
-    NSMutableArray *wallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWalletUUIDs:wallets];
-    if (bNewAccount || [wallets count] == 0) {
+    if (bNewAccount) {
         _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
         _fadingAlert.message = NSLocalizedString(@"Creating and securing wallet", nil);
         _fadingAlert.fadeDuration = 2;

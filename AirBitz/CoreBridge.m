@@ -1540,18 +1540,29 @@ static BOOL bOtpError = NO;
         int currencyNum = [CoreBridge getCurrencyNumOfLocale];
         [CoreBridge setDefaultCurrencyNum:currencyNum];
 
-        // create first wallet
-        tABC_Error error;
-        char *szUUID = NULL;
-        ABC_CreateWallet([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-            [NSLocalizedString(@"My Wallet", @"Name of initial wallet") UTF8String],
-            currencyNum, &szUUID, &error);
-        if (szUUID) {
-            free(szUUID);
+        NSMutableArray *wallets = [[NSMutableArray alloc] init];
+        [CoreBridge loadWalletUUIDs:wallets];
+
+        if ([wallets count] == 0)
+        {
+            // create first wallet if it doesn't already exist
+            tABC_Error error;
+            char *szUUID = NULL;
+            ABC_CreateWallet([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                    [NSLocalizedString(@"My Wallet", @"Name of initial wallet") UTF8String],
+                    currencyNum, &szUUID, &error);
+            if (szUUID) {
+                free(szUUID);
+            }
+
         }
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
-            [fadingAlert dismiss:NO];
+            if (fadingAlert)
+            {
+                [fadingAlert dismiss:NO];
+            }
         });
         [CoreBridge startWatchers];
 
@@ -1697,14 +1708,38 @@ static BOOL bOtpError = NO;
         [arrayCategories addObject:NSLocalizedString(@"Transfer:Wallet:Mycelium", @"default category Transfer:Wallet:Mycelium")];
         [arrayCategories addObject:NSLocalizedString(@"Transfer:Wallet:Dark Wallet", @"default category Transfer:Wallet:Dark Wallet")];
 
-        // add default categories to core
-        for (int i = 0; i < [arrayCategories count]; i++) {
-            NSString *strCategory = [arrayCategories objectAtIndex:i];
-            ABC_AddCategory([[User Singleton].name UTF8String],
+        char            **aszCategories = NULL;
+        unsigned int    countCategories = 0;
+
+        // get the categories from the core
+        tABC_Error error;
+        ABC_GetCategories([[User Singleton].name UTF8String],
+                [[User Singleton].password UTF8String],
+                &aszCategories,
+                &countCategories,
+                &error);
+
+        [Util printABC_Error:&error];
+
+        if (error.code == ABC_CC_Ok)
+        {
+            // If we've never added any categories, add them now
+            if (countCategories == 0)
+            {
+                // add default categories to core
+                for (int i = 0; i < [arrayCategories count]; i++) {
+                    NSString *strCategory = [arrayCategories objectAtIndex:i];
+                    ABC_AddCategory([[User Singleton].name UTF8String],
                             [[User Singleton].password UTF8String],
                             (char *)[strCategory UTF8String], &error);
-            [Util printABC_Error:&error];
+                    [Util printABC_Error:&error];
+                }
+
+            }
+
         }
+
+
     });
 }
 

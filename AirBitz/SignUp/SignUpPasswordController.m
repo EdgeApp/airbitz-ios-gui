@@ -439,6 +439,8 @@
             [CoreBridge setupLoginPIN];
         });
 
+        [CoreBridge setupNewAccount:nil];
+
         [super next];
     } else {
         [self dismissFading:NO];
