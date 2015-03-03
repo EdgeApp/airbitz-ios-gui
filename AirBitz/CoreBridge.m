@@ -1535,7 +1535,7 @@ static BOOL bOtpError = NO;
 
 + (void)setupNewAccount:(FadingAlertView *)fadingAlert
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [dataQueue addOperationWithBlock:^{
         // update user's default currency num to match their locale
         int currencyNum = [CoreBridge getCurrencyNumOfLocale];
         [CoreBridge setDefaultCurrencyNum:currencyNum];
@@ -1740,7 +1740,7 @@ static BOOL bOtpError = NO;
         }
 
 
-    });
+    }];
 }
 
 + (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID withCallback:(tABC_Sweep_Done_Callback)callback
