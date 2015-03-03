@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "ABC.h"
+#import "PickerTextView.h"
 #import "SignUpViewController.h"
 #import "User.h"
 #import "StylizedTextField.h"
@@ -48,7 +49,6 @@ typedef enum eLoginMode
 }
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
 @property (weak, nonatomic) IBOutlet UIView             *credentialsView;
-@property (nonatomic, weak) IBOutlet StylizedTextField  *userNameTextField;
 @property (nonatomic, weak) IBOutlet StylizedTextField  *passwordTextField;
 @property (nonatomic, weak) IBOutlet UIButton           *backButton;
 @property (nonatomic, weak) IBOutlet UIImageView        *swipeRightArrow;
@@ -60,6 +60,8 @@ typedef enum eLoginMode
 
 @property (nonatomic, weak) IBOutlet UIView				*errorMessageView;
 @property (nonatomic, weak) IBOutlet UILabel			*errorMessageText;
+
+@property (nonatomic, strong) IBOutlet PickerTextView   *usernameSelector;
 
 @end
 
@@ -85,17 +87,36 @@ typedef enum eLoginMode
     _originalRightSwipeArrowFrame = _swipeRightArrow.frame;
     _originalUserEntryFrame = _userEntryView.frame;
     
-    self.userNameTextField.delegate = self;
+    self.usernameSelector.textField.delegate = self;
     self.passwordTextField.delegate = self;
     self.spinnerView.hidden = YES;
     
     #if HARD_CODED_LOGIN
     
-    self.userNameTextField.text = HARD_CODED_LOGIN_NAME;
+    self.usernameSelection.textField.text = HARD_CODED_LOGIN_NAME;
     self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
     #endif
 
 	self.errorMessageView.alpha = 0.0;
+    
+    // set up the specifics on our picker text view
+    self.usernameSelector.textField.borderStyle = UITextBorderStyleNone;
+    self.usernameSelector.textField.backgroundColor = [UIColor clearColor];
+    self.usernameSelector.textField.font = [UIFont systemFontOfSize:16];
+    self.usernameSelector.textField.clearButtonMode = UITextFieldViewModeNever;
+    self.usernameSelector.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.usernameSelector.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.usernameSelector.textField.spellCheckingType = UITextSpellCheckingTypeNo;
+    self.usernameSelector.textField.textColor = [UIColor whiteColor];
+    self.usernameSelector.textField.returnKeyType = UIReturnKeyDone;
+    self.usernameSelector.textField.tintColor = [UIColor whiteColor];
+    self.usernameSelector.textField.textAlignment = NSTextAlignmentLeft;
+    self.usernameSelector.textField.placeholder = NSLocalizedString(@"Username", nil);
+    self.usernameSelector.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.usernameSelector.textField.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
+    [self.usernameSelector setTopMostView:self.view];
+    self.usernameSelector.pickerMaxChoicesVisible = 3;
+    [Util stylizeTextField:self.usernameSelector.textField];
+//    self.usernameSelector.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -112,7 +133,7 @@ typedef enum eLoginMode
     NSString *username = [LocalSettings controller].cachedUsername;
     if (username && 0 < username.length)
     {
-        self.userNameTextField.text = username;
+        self.usernameSelector.textField.text = username;
     }
     self.passwordTextField.text = [User Singleton].password;
 #endif
@@ -161,7 +182,7 @@ typedef enum eLoginMode
 
 - (IBAction)SignIn
 {
-    [self.userNameTextField resignFirstResponder];
+    [self.usernameSelector resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     [self animateToInitialPresentation];
 
@@ -169,7 +190,7 @@ typedef enum eLoginMode
     [self showSpinner:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         tABC_Error error;
-        ABC_SignIn([self.userNameTextField.text UTF8String],
+        ABC_SignIn([self.usernameSelector.textField.text UTF8String],
             [self.passwordTextField.text UTF8String], &error);
         _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
         _strReason = [Util errorMap:&error];
@@ -182,7 +203,7 @@ typedef enum eLoginMode
 {
     [self dismissErrorMessage];
 
-    [self.userNameTextField resignFirstResponder];
+    [self.usernameSelector.textField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     [self animateToInitialPresentation];
     
@@ -191,8 +212,8 @@ typedef enum eLoginMode
 
     _signUpController.mode = SignUpMode_SignUp;
     _signUpController.delegate = self;
-    if (self.userNameTextField.text) {
-        _signUpController.strUserName = self.userNameTextField.text;
+    if (self.usernameSelector.textField.text) {
+        _signUpController.strUserName = self.usernameSelector.textField.text;
     }
     
     CGRect frame = self.view.bounds;
@@ -217,17 +238,17 @@ typedef enum eLoginMode
 {
     [self dismissErrorMessage];
 
-    [self.userNameTextField resignFirstResponder];
+    [self.usernameSelector.textField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
 
     // if they have a username
-    if ([self.userNameTextField.text length])
+    if ([self.usernameSelector.textField.text length])
     {
         [self showSpinner:YES];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             BOOL bSuccess = NO;
             NSMutableString *error = [[NSMutableString alloc] init];
-            NSArray *arrayQuestions = [CoreBridge getRecoveryQuestionsForUserName:self.userNameTextField.text
+            NSArray *arrayQuestions = [CoreBridge getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
                                                                         isSuccess:&bSuccess
                                                                          errorMsg:error];
             NSArray *params = [NSArray arrayWithObjects:arrayQuestions, nil];
@@ -256,7 +277,7 @@ typedef enum eLoginMode
         _passwordRecoveryController.delegate = self;
         _passwordRecoveryController.mode = PassRecovMode_Recover;
         _passwordRecoveryController.arrayQuestions = arrayQuestions;
-        _passwordRecoveryController.strUserName = self.userNameTextField.text;
+        _passwordRecoveryController.strUserName = self.usernameSelector.textField.text;
 
         CGRect frame = self.view.bounds;
         frame.origin.x = frame.size.width;
@@ -520,7 +541,7 @@ typedef enum eLoginMode
     
     if(_mode == MODE_ENTERING_NEITHER)
     {
-        if(textField == self.userNameTextField)
+        if(textField == self.usernameSelector.textField)
         {
             _mode = MODE_ENTERING_USERNAME;
         }
@@ -531,7 +552,7 @@ typedef enum eLoginMode
     }
 
     // highlight all of the text
-    if (textField == self.userNameTextField)
+    if (textField == self.usernameSelector.textField)
     {
         // highlight all the text
         [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
@@ -541,7 +562,7 @@ typedef enum eLoginMode
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    if (textField == self.userNameTextField)
+    if (textField == self.usernameSelector.textField)
     {
         [self.passwordTextField becomeFirstResponder];
 
@@ -560,7 +581,7 @@ typedef enum eLoginMode
     [CoreBridge otpSetError:_resultCode];
     if (_bSuccess)
     {
-        [User login:self.userNameTextField.text
+        [User login:self.usernameSelector.textField.text
            password:self.passwordTextField.text];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             [CoreBridge setupLoginPIN];
@@ -583,7 +604,7 @@ typedef enum eLoginMode
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" parentController:self];
     _tfaMenuViewController.delegate = self;
-    _tfaMenuViewController.username = self.userNameTextField.text;
+    _tfaMenuViewController.username = self.usernameSelector.textField.text;
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
 }
@@ -610,7 +631,7 @@ typedef enum eLoginMode
         if (!success) {
             return;
         }
-        [self.userNameTextField resignFirstResponder];
+        [self.usernameSelector.textField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
         [self animateToInitialPresentation];
 
@@ -627,8 +648,8 @@ typedef enum eLoginMode
     _bSuccess = NO;
     tABC_Error error;
 
-    ABC_OtpKeySet([self.userNameTextField.text UTF8String], (char *)[secret UTF8String], &error);
-    tABC_CC cc = ABC_SignIn([self.userNameTextField.text UTF8String],
+    ABC_OtpKeySet([self.usernameSelector.textField.text UTF8String], (char *)[secret UTF8String], &error);
+    tABC_CC cc = ABC_SignIn([self.usernameSelector.textField.text UTF8String],
                             [self.passwordTextField.text UTF8String], &error);
     dispatch_async(dispatch_get_main_queue(), ^(void) {
         _bSuccess = cc == ABC_CC_Ok; 
@@ -685,5 +706,32 @@ typedef enum eLoginMode
         [self.delegate loginViewControllerDidLogin:bNewAccount];
     }
 }
+
+#pragma mark - PickerTextView Delegates
+
+- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView {}
+
+- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
+{
+//    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
+//    
+//    [pickerTextView updateChoices:arrayChoices];
+}
+
+- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
+{
+    return NO;
+}
+
+- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView {}
+
+- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
+{
+    [pickerTextView.textField resignFirstResponder];
+    
+    return YES;
+}
+
+
 
 @end
