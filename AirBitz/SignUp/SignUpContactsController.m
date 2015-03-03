@@ -23,9 +23,4 @@
     [self.manager next];
 }
 
-- (void)requestContactAccess
-{
-}
-
-
 @end

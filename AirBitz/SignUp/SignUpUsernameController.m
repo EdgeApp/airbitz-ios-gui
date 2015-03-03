@@ -130,7 +130,7 @@
 
             [self.userNameTextField resignFirstResponder];
 
-            [super.manager.strUserName initWithString:self.userNameTextField.text];
+            super.manager.strUserName = [NSString stringWithFormat:@"%@",self.userNameTextField.text];
 
             [super next];
         }

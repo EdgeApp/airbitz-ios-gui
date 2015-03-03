@@ -8,6 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		17C92258FEBAD8A39BBFD0FC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E47C0EC32EE29D34C5A03A0B /* libPods.a */; };
+		3464413AC1EC077C3B787A7C /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 34644208DF1224ADCCE12D41 /* enable-camera.png */; };
+		346441FD1CFE7B907EB76873 /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 34644208DF1224ADCCE12D41 /* enable-camera.png */; };
+		346443C3E8845FA868E63AEA /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
+		346443E3A93D877CC0DB195C /* write-it-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3464497CB6AAD6876F34D5E7 /* write-it-down.png */; };
+		34644665214F55CD0153A916 /* write-it-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3464497CB6AAD6876F34D5E7 /* write-it-down.png */; };
+		34644734A0BD9A1B7525D953 /* write-it-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3464497CB6AAD6876F34D5E7 /* write-it-down.png */; };
+		3464478ACA2CD83CC1ABE74B /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 34644208DF1224ADCCE12D41 /* enable-camera.png */; };
+		3464480C798505E1E965C451 /* enable-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 346446CBE5B435CA404ED78C /* enable-contacts.png */; };
+		346449A3221BD04F98BB6460 /* enable-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 346446CBE5B435CA404ED78C /* enable-contacts.png */; };
+		34644A25DA476D61E67398D6 /* enable-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 346446CBE5B435CA404ED78C /* enable-contacts.png */; };
+		34644B2B5788D8A8EBC9F0E5 /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
+		34644B507781CF1F8E7D5301 /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
+		34644DFBC522F75CE8481CB6 /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
+		34644F1EE31C431DADB1F99C /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
+		34644F47B5DBBBDBD702E03F /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
 		4C08A6DB18C29CEF0071B87C /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D318C29CEF0071B87C /* libabc.a */; };
 		4C08A6DC18C29CEF0071B87C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D418C29CEF0071B87C /* libcrypto.a */; };
 		4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D518C29CEF0071B87C /* libcurl.a */; };
@@ -1725,6 +1740,13 @@
 
 /* Begin PBXFileReference section */
 		188D8A965DB464149F922F3B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3464417D3C4E858FE232DCD2 /* StylizedButtonOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedButtonOutline.h; sourceTree = "<group>"; };
+		34644208DF1224ADCCE12D41 /* enable-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enable-camera.png"; sourceTree = "<group>"; };
+		346446CBE5B435CA404ED78C /* enable-contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enable-contacts.png"; sourceTree = "<group>"; };
+		346446F326CD2FB38A4B0DE1 /* SignUpWriteItController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpWriteItController.h; path = SignUp/SignUpWriteItController.h; sourceTree = "<group>"; };
+		346448D77123858DD23C231B /* StylizedButtonOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedButtonOutline.m; sourceTree = "<group>"; };
+		3464497CB6AAD6876F34D5E7 /* write-it-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write-it-down.png"; sourceTree = "<group>"; };
+		34644A61390FB99D07036E91 /* SignUpWriteItController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpWriteItController.m; path = SignUp/SignUpWriteItController.m; sourceTree = "<group>"; };
 		3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4C08A6D318C29CEF0071B87C /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = ABC/libabc.a; sourceTree = "<group>"; };
 		4C08A6D418C29CEF0071B87C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ABC/libcrypto.a; sourceTree = "<group>"; };
@@ -3128,6 +3150,8 @@
 				B5675B6618A17F6F002E0703 /* Images.xcassets */,
 				B5675B8718A180D9002E0703 /* Resources */,
 				B5675B5218A17F6F002E0703 /* Supporting Files */,
+				346448D77123858DD23C231B /* StylizedButtonOutline.m */,
+				3464417D3C4E858FE232DCD2 /* StylizedButtonOutline.h */,
 			);
 			path = AirBitz;
 			sourceTree = "<group>";
@@ -3504,6 +3528,9 @@
 				DA0B03CF1A90A72000A4D5B0 /* White-Dot@2x~iphone.png */,
 				DA0B03D01A90A72000A4D5B0 /* White-Dot~iphone.png */,
 				7D8270C019F89C8B003F275D /* btn_forgot_password_arrow.png */,
+				34644208DF1224ADCCE12D41 /* enable-camera.png */,
+				3464497CB6AAD6876F34D5E7 /* write-it-down.png */,
+				346446CBE5B435CA404ED78C /* enable-contacts.png */,
 			);
 			path = wallet;
 			sourceTree = "<group>";
@@ -3785,6 +3812,8 @@
 				DAE276261A9BF8AB00E24523 /* SignUpPasswordController.m */,
 				DAE276201A9BF68100E24523 /* SignUpUsernameController.h */,
 				DAE276211A9BF68100E24523 /* SignUpUsernameController.m */,
+				34644A61390FB99D07036E91 /* SignUpWriteItController.m */,
+				346446F326CD2FB38A4B0DE1 /* SignUpWriteItController.h */,
 			);
 			name = SignUp;
 			sourceTree = "<group>";
@@ -4329,6 +4358,9 @@
 				7D98AE9319A7C550003D2BF6 /* tabbar_base~iphone.png in Resources */,
 				7DB9DD801A03187D00AD35ED /* background@2x~iphone.jpg in Resources */,
 				7D98AE9419A7C550003D2BF6 /* btn_export@2x~iphone.png in Resources */,
+				3464413AC1EC077C3B787A7C /* enable-camera.png in Resources */,
+				34644734A0BD9A1B7525D953 /* write-it-down.png in Resources */,
+				34644A25DA476D61E67398D6 /* enable-contacts.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4725,6 +4757,9 @@
 				B59C153518C012B500AEA789 /* tabbar_base~iphone.png in Resources */,
 				7DB9DD7F1A03187D00AD35ED /* background@2x~iphone.jpg in Resources */,
 				B59C14F218C012B500AEA789 /* btn_export@2x~iphone.png in Resources */,
+				3464478ACA2CD83CC1ABE74B /* enable-camera.png in Resources */,
+				346443E3A93D877CC0DB195C /* write-it-down.png in Resources */,
+				346449A3221BD04F98BB6460 /* enable-contacts.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5121,6 +5156,9 @@
 				DAE866211A88A58A00A17BD3 /* tabbar_base~iphone.png in Resources */,
 				DAE866221A88A58A00A17BD3 /* background@2x~iphone.jpg in Resources */,
 				DAE866231A88A58A00A17BD3 /* btn_export@2x~iphone.png in Resources */,
+				346441FD1CFE7B907EB76873 /* enable-camera.png in Resources */,
+				34644665214F55CD0153A916 /* write-it-down.png in Resources */,
+				3464480C798505E1E965C451 /* enable-contacts.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5398,6 +5436,8 @@
 				DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
 				7D98AD0F19A7C550003D2BF6 /* TabBarButton.m in Sources */,
 				7D98AD1019A7C550003D2BF6 /* PickerTextView.m in Sources */,
+				34644B507781CF1F8E7D5301 /* SignUpWriteItController.m in Sources */,
+				34644F1EE31C431DADB1F99C /* StylizedButtonOutline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5537,6 +5577,8 @@
 				DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
 				B57C207D18C15009005D7245 /* TabBarButton.m in Sources */,
 				4C3C30A5191C1CAF006923DE /* PickerTextView.m in Sources */,
+				34644F47B5DBBBDBD702E03F /* SignUpWriteItController.m in Sources */,
+				34644DFBC522F75CE8481CB6 /* StylizedButtonOutline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5676,6 +5718,8 @@
 				DAE8646C1A88A58A00A17BD3 /* TwoFactorMenuViewController.m in Sources */,
 				DAE8646D1A88A58A00A17BD3 /* TabBarButton.m in Sources */,
 				DAE8646E1A88A58A00A17BD3 /* PickerTextView.m in Sources */,
+				346443C3E8845FA868E63AEA /* SignUpWriteItController.m in Sources */,
+				34644B2B5788D8A8EBC9F0E5 /* StylizedButtonOutline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

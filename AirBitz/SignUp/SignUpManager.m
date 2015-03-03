@@ -9,6 +9,7 @@
 #import "SignUpHandleController.h"
 #import "SignUpCameraController.h"
 #import "SignUpContactsController.h"
+#import "SignUpWriteItController.h"
 #import "Util.h"
 #import <AddressBookUI/AddressBookUI.h>
 #import <AVFoundation/AVFoundation.h>
@@ -22,6 +23,7 @@
     SignUpHandleController   *_signupHandleController;
     SignUpContactsController *_signupContactController;
     SignUpCameraController   *_signupCameraController;
+    SignUpWriteItController  *_signupWriteItController;
     UIViewController         *_parentController;
 }
 
@@ -67,6 +69,10 @@
     {
         goto contactsCtl;
     }
+    else if (_current == _signupWriteItController)
+    {
+        goto writeItCtl;
+    }
 
     usernameCtl:
     [self launchPasswordController];
@@ -87,11 +93,16 @@
     }
 
     contactsCtl:
+    [self launchWriteItController];
+    return;
+
+    writeItCtl:
     [_signupUsernameController.view removeFromSuperview];
     [_signupPasswordController.view removeFromSuperview];
     [_signupHandleController.view removeFromSuperview];
     [_signupCameraController.view removeFromSuperview];
-    [Util animateOut:_signupContactController parentController:_parentController complete:^(void) {
+    [_signupContactController.view removeFromSuperview];
+    [Util animateOut:_signupWriteItController parentController:_parentController complete:^(void) {
         _signupUsernameController = nil;
         _current = nil;
     }];
@@ -152,6 +163,14 @@
     [Util animateController:_signupContactController parentController:_parentController];
 }
 
+- (void)launchWriteItController
+{
+    UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
+    _signupWriteItController = (SignUpWriteItController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpWriteItController"];
+    _signupWriteItController.manager = self;
+    _current = _signupWriteItController;
+    [Util animateController:_signupWriteItController parentController:_parentController];
+}
 
 - (BOOL)haveRequestCamera
 {

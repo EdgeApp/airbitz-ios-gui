@@ -426,6 +426,9 @@
 //        {
 //            [CoreBridge setupLoginPIN];
 //        });
+        super.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
+        super.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
+
         [super next];
     } else {
         [self dismissFading:NO];
