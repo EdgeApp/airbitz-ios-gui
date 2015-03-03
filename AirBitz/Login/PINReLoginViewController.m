@@ -7,6 +7,7 @@
 //
 
 #import "PINReLoginViewController.h"
+#import "ButtonSelectorView.h"
 #import "User.h"
 #import "Util.h"
 #import "CoreBridge.h"
@@ -14,7 +15,7 @@
 #import "LocalSettings.h"
 #import "APPINView.h"
 
-@interface PINReLoginViewController () <APPINViewDelegate, FadingAlertViewDelegate>
+@interface PINReLoginViewController () <APPINViewDelegate, ButtonSelectorDelegate, FadingAlertViewDelegate>
 {
     CGRect   _originalContentFrame;
     CGRect   _originalLogoFrame;
@@ -28,12 +29,15 @@
 @property (nonatomic, weak) IBOutlet UIButton    *backButton;
 @property (nonatomic, weak) IBOutlet UIImageView *swipeRightArrow;
 @property (nonatomic, weak) IBOutlet UILabel     *swipeText;
-@property (nonatomic, weak) IBOutlet UILabel     *titleText;
 @property (nonatomic, weak) IBOutlet UIImageView *logoImage;
 @property (nonatomic, weak) IBOutlet UIView      *spinnerView;
 @property (nonatomic, weak) IBOutlet UIView		 *errorMessageView;
 @property (nonatomic, weak) IBOutlet UILabel	 *errorMessageText;
 @property (weak, nonatomic) IBOutlet APPINView   *PINCodeView;
+@property (nonatomic, weak) IBOutlet ButtonSelectorView     *usernameSelector;
+
+@property (nonatomic, strong) NSArray   *arrayAccounts;
+@property (nonatomic, strong) NSArray   *otherAccounts;
 
 @end
 
@@ -59,13 +63,19 @@
 	self.errorMessageView.alpha = 0.0;
     
     self.PINCodeView.delegate = self;
+    self.usernameSelector.delegate = self;
+    [self.usernameSelector.button setBackgroundImage:nil forState:UIControlStateNormal];
+    [self.usernameSelector.button setBackgroundImage:nil forState:UIControlStateSelected];
+    self.usernameSelector.textLabel.text = NSLocalizedString(@"", @"username");
+    [self.usernameSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1 arrow:_swipeRightArrow origFrame:_originalRightSwipeArrowFrame];
-
-    [self setTitleColors];
+    
+    [self getAllAccounts];
+    [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
 
     _bTouchesEnabled = YES;
 }
@@ -133,27 +143,78 @@
     [self.delegate PINReLoginViewControllerDidSwitchUserWithMessage:nil];
 }
 
+- (IBAction)usernameSelectorTouched:(id)sender
+{
+    [self showSpinner:NO];
+    self.PINCodeView.PINCode = nil;
+}
+
 #pragma mark - Misc Methods
 
-- (void)setTitleColors
+- (void)getAllAccounts
 {
-    NSString *username = [LocalSettings controller].cachedUsername;
+        char * pszUserNames;
+        tABC_Error error;
+        __block tABC_CC result = ABC_ListAccounts(&pszUserNames, &error);
+            switch (result)
+            {
+                case ABC_CC_Ok:
+                {
+                    NSString *str = [NSString stringWithCString:pszUserNames encoding:NSUTF8StringEncoding];
+                    NSArray *arrayAccounts = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+                    NSMutableArray *stringArray = [[NSMutableArray alloc] init];
+                    for(NSString *str in arrayAccounts)
+                    {
+                        if(str && str.length!=0)
+                        {
+                            [stringArray addObject:str];
+                        }
+                    }
+                    self.arrayAccounts = [stringArray copy];
+                }
+                default:
+                {
+                    tABC_Error temp;
+                    temp.code = result;
+                    [self showFadingError:[Util errorMap:&temp]];
+                    break;
+                }
+            }
+}
+
+- (void)updateUsernameSelector:(NSString *)username
+{
+    [self setUsernameText:username];
+    NSMutableArray *stringArray = [[NSMutableArray alloc] init];
+    for(NSString *str in self.arrayAccounts)
+    {
+        if(![str isEqualToString:username])
+        {
+            [stringArray addObject:str];
+        }
+    }
+    self.otherAccounts = [stringArray copy];
+    self.usernameSelector.arrayItemsToSelect = self.otherAccounts;
+}
+
+- (void)setUsernameText:(NSString *)username
+{
     NSString *title = [NSString stringWithFormat:@"Enter PIN for (%@)",
                        username];
     // Define general attributes like color and fonts for the entire text
-    NSDictionary *attr = @{NSForegroundColorAttributeName:self.titleText.textColor,
-                           NSFontAttributeName:self.titleText.font};
+    NSDictionary *attr = @{NSForegroundColorAttributeName:self.usernameSelector.button.titleLabel.textColor,
+                           NSFontAttributeName:self.usernameSelector.button.titleLabel.font};
     NSMutableAttributedString *attributedText = [ [NSMutableAttributedString alloc]
                                                  initWithString:title
                                                  attributes:attr];
     // blue and bold text attributes
     UIColor *color = [UIColor colorWithRed:126.5/255. green:202.5/255. blue:255/255. alpha:1.];
-    UIFont *boldFont = [UIFont boldSystemFontOfSize:self.titleText.font.pointSize];
+    UIFont *boldFont = [UIFont boldSystemFontOfSize:self.usernameSelector.button.titleLabel.font.pointSize];
     NSRange usernameTextRange = [title rangeOfString:username];
     [attributedText setAttributes:@{NSForegroundColorAttributeName:color,
                                     NSFontAttributeName:boldFont}
                             range:usernameTextRange];
-    self.titleText.attributedText = attributedText;
+    [self.usernameSelector.button setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)animateSwipeArrowWithRepetitions:(int)repetitions
@@ -220,7 +281,6 @@
          _backButton.alpha = 1.0;
          _swipeRightArrow.alpha = 1.0;
          _swipeText.alpha = 1.0;
-         _titleText.alpha = 1.0;
          
          self.logoImage.transform = CGAffineTransformMakeScale(1.0, 1.0);
          self.logoImage.frame = _originalLogoFrame;
@@ -418,5 +478,33 @@
     // disable touches while the spinner is visible
     _bTouchesEnabled = _spinnerView.hidden;
 }
+
+#pragma mark - ButtonSelectorView delegates
+
+- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+{
+    [LocalSettings controller].cachedUsername = [self.otherAccounts objectAtIndex:itemIndex];
+    if([CoreBridge PINLoginExists:[LocalSettings controller].cachedUsername])
+    {
+        [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
+    }
+    else
+    {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.delegate PINReLoginViewControllerDidSwitchUserWithMessage:nil];
+        }];
+    }
+}
+
+- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
+{
+    [self.usernameSelector.textLabel resignFirstResponder];
+}
+
+- (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view
+{
+    
+}
+
 
 @end

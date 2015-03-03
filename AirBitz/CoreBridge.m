@@ -967,6 +967,12 @@ static BOOL bOtpError = NO;
 + (bool)PINLoginExists
 {
     NSString *username = [LocalSettings controller].cachedUsername;
+    
+    return [self PINLoginExists:username];
+}
+
++ (bool)PINLoginExists:(NSString *)username
+{
     bool exists = NO;
     if (username && 0 < username.length)
     {
