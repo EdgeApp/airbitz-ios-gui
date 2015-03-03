@@ -67,7 +67,7 @@
     [self.usernameSelector.button setBackgroundImage:nil forState:UIControlStateNormal];
     [self.usernameSelector.button setBackgroundImage:nil forState:UIControlStateSelected];
     self.usernameSelector.textLabel.text = NSLocalizedString(@"", @"username");
-    [self.usernameSelector setButtonWidth:WALLET_BUTTON_WIDTH];
+    [self.usernameSelector setButtonWidth:_originalLogoFrame.size.width];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -171,6 +171,7 @@
                         }
                     }
                     self.arrayAccounts = [stringArray copy];
+                    break;
                 }
                 default:
                 {
@@ -214,7 +215,7 @@
     [attributedText setAttributes:@{NSForegroundColorAttributeName:color,
                                     NSFontAttributeName:boldFont}
                             range:usernameTextRange];
-    [self.usernameSelector.button setTitle:title forState:UIControlStateNormal];
+    [self.usernameSelector.button setAttributedTitle:attributedText forState:UIControlStateNormal];
 }
 
 - (void)animateSwipeArrowWithRepetitions:(int)repetitions
