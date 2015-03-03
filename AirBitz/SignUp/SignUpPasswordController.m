@@ -135,13 +135,22 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
                 tABC_Error error;
                 ABC_CreateAccount([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String], &error);
-                if (error.code == ABC_CC_Ok) {
-                    ABC_SetPIN([[User Singleton].name UTF8String], [self.manager.strUserName UTF8String],
+                if (error.code == ABC_CC_Ok)
+                {
+                    ABC_SetPIN([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String],
                             [self.pinTextField.text UTF8String], &error);
                 }
-                error.code = ABC_CC_Ok;
-                _bSuccess = (error.code == ABC_CC_Ok);
+
+                if (error.code == ABC_CC_Ok)
+                {
+                    _bSuccess = true;
+                }
+                else
+                {
+                    _bSuccess = false;
+                }
                 _strReason = [Util errorMap:&error];
+
                 [self performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
             });
         }

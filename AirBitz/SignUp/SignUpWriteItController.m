@@ -33,8 +33,8 @@
 
     self.bShow = true;
     self.labelUsername.text = [NSString stringWithFormat:@"%@", self.manager.strUserName];
-    [self.labelPassword setText:self.manager.strPassword];
-    [self.labelUsername setText:self.manager.strPIN];
+    self.labelPassword.text = [NSString stringWithFormat:@"%@", self.manager.strPassword];
+    self.labelPIN.text = [NSString stringWithFormat:@"%@", self.manager.strPIN];
 
 }
 

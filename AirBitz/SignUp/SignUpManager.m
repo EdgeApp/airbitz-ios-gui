@@ -107,6 +107,8 @@
         _current = nil;
     }];
 
+    [self.delegate signupFinished];
+
     return;
 
 }
