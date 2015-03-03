@@ -61,7 +61,8 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet UIView				*errorMessageView;
 @property (nonatomic, weak) IBOutlet UILabel			*errorMessageText;
 
-@property (nonatomic, strong) IBOutlet PickerTextView   *usernameSelector;
+@property (nonatomic, weak) IBOutlet PickerTextView   *usernameSelector;
+@property (nonatomic, strong) NSArray   *arrayAccounts;
 
 @end
 
@@ -99,6 +100,8 @@ typedef enum eLoginMode
 
 	self.errorMessageView.alpha = 0.0;
     
+    [self getAllAccounts];
+    
     // set up the specifics on our picker text view
     self.usernameSelector.textField.borderStyle = UITextBorderStyleNone;
     self.usernameSelector.textField.backgroundColor = [UIColor clearColor];
@@ -116,7 +119,6 @@ typedef enum eLoginMode
     [self.usernameSelector setTopMostView:self.view];
     self.usernameSelector.pickerMaxChoicesVisible = 3;
     [Util stylizeTextField:self.usernameSelector.textField];
-//    self.usernameSelector.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -405,6 +407,7 @@ typedef enum eLoginMode
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
+             [self.usernameSelector dismissPopupPicker];
              self.swipeText.hidden = YES;
              self.swipeRightArrow.hidden = YES;
              self.titleText.hidden = YES;
@@ -418,7 +421,10 @@ typedef enum eLoginMode
          }
             completion:^(BOOL finished)
          {
-             
+             if(self.usernameSelector.textField.isEditing)
+             {
+                 [self.usernameSelector updateChoices:self.arrayAccounts];
+             }
          }];
     }
     else
@@ -439,7 +445,6 @@ typedef enum eLoginMode
          }
                          completion:^(BOOL finished)
          {
-             
          }];
 
     }
@@ -554,7 +559,8 @@ typedef enum eLoginMode
     // highlight all of the text
     if (textField == self.usernameSelector.textField)
     {
-        // highlight all the text
+        [self.usernameSelector updateChoices:self.arrayAccounts];
+
         [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
     }
 }
@@ -564,8 +570,8 @@ typedef enum eLoginMode
     [textField resignFirstResponder];
     if (textField == self.usernameSelector.textField)
     {
+        [self.usernameSelector dismissPopupPicker];
         [self.passwordTextField becomeFirstResponder];
-
     }
     else
     {
@@ -707,31 +713,36 @@ typedef enum eLoginMode
     }
 }
 
-#pragma mark - PickerTextView Delegates
-
-- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView {}
-
-- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
+- (void)getAllAccounts
 {
-//    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
-//    
-//    [pickerTextView updateChoices:arrayChoices];
+    char * pszUserNames;
+    tABC_Error error;
+    __block tABC_CC result = ABC_ListAccounts(&pszUserNames, &error);
+    switch (result)
+    {
+        case ABC_CC_Ok:
+        {
+            NSString *str = [NSString stringWithCString:pszUserNames encoding:NSUTF8StringEncoding];
+            NSArray *arrayAccounts = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+            NSMutableArray *stringArray = [[NSMutableArray alloc] init];
+            for(NSString *str in arrayAccounts)
+            {
+                if(str && str.length!=0)
+                {
+                    [stringArray addObject:str];
+                }
+            }
+            self.arrayAccounts = [stringArray copy];
+            break;
+        }
+        default:
+        {
+            tABC_Error temp;
+            temp.code = result;
+            [self showFadingError:[Util errorMap:&temp]];
+            break;
+        }
+    }
 }
-
-- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
-{
-    return NO;
-}
-
-- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView {}
-
-- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
-{
-    [pickerTextView.textField resignFirstResponder];
-    
-    return YES;
-}
-
-
 
 @end
