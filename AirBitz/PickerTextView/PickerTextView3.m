@@ -150,6 +150,7 @@
                                           fromCategories:self.arrayCategories
                                           selectedRow:-1
                                             withWidth:_pickerWidth
+                                        withAccessory:nil
                                         andCellHeight:_pickerCellHeight
                         ];
     self.popupPicker.tableViewCellStyle = self.pickerTableViewCellStyle;
@@ -338,11 +339,11 @@
     return cell;
 }
 
-- (void) PopupPickerViewDidAddCategory:(PopupPickerView *)view categoryString:(NSString *)catString
+- (void) PopupPickerViewDidTouchAccessory:(PopupPickerView *)view categoryString:(NSString *)catString
 {
     if ([self.delegate respondsToSelector:@selector(pickerTextViewDidAddCategory:categoryString:)])
     {
-        [self.delegate pickerTextViewDidAddCategory:self categoryString:catString];
+        [self.delegate pickerTextViewDidTouchAccessory:self categoryString:catString];
     }
 }
 

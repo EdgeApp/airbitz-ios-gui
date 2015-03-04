@@ -1612,6 +1612,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                                               fromCategories:nil
                                               selectedRow:curChoice
                                                 withWidth:PICKER_WIDTH
+                                            withAccessory:nil
                                             andCellHeight:PICKER_CELL_HEIGHT
                             ];
         self.popupPicker.userData = cell;

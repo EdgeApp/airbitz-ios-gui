@@ -24,6 +24,7 @@
 @property (nonatomic, assign) UITableViewCellStyle          pickerTableViewCellStyle;
 @property (nonatomic, strong) NSArray                       *arrayChoices;
 @property (nonatomic, strong) NSArray                       *arrayCategories;
+@property (nonatomic, strong) UIImage                       *accessoryImage;
 @property (nonatomic, assign) CGFloat                       cropPointTop;
 @property (nonatomic, assign) CGFloat                       cropPointBottom;
 
@@ -31,6 +32,7 @@
 - (void)setTextFieldObject:(UITextField *)newTextField;
 - (void)setTopMostView:(UIView *)topMostView; //what view will the drop down selector be added to?
 - (void)setCategories:(NSArray *)categories;
+- (void)setAccessoryImage:(UIImage *)accessoryImage;
 - (void)updateChoices:(NSArray *)arrayChoices;
 - (void)dismissPopupPicker;
 
@@ -54,6 +56,6 @@
 - (NSInteger)pickerTextViewPopupNumberOfRows:(PopupPickerView *)view;
 - (UITableViewCell *)pickerTextViewPopupCellForRow:(PopupPickerView *)view forTableView:(UITableView *)tableView andRow:(NSInteger)row;
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView;
-- (void)pickerTextViewDidAddCategory:(PickerTextView *)pickerTextView categoryString:(NSString *)string;
+- (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string;
 
 @end

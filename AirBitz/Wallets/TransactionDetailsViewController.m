@@ -416,6 +416,7 @@ typedef enum eRequestType
                                                fromCategories:nil
                                                   selectedRow:-1
                                                     withWidth:PICKER_WIDTH
+                                                withAccessory:nil
                                                 andCellHeight:PICKER_CELL_HEIGHT
                                 ];
     self.categoryPopupPicker.userData = nil;
@@ -1802,7 +1803,7 @@ typedef enum eRequestType
      }];
 }
 
-- (void)pickerTextViewDidAddCategory:(PickerTextView *)pickerTextView categoryString:(NSString *)catString
+- (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)catString
 {
     pickerTextView.textField.text = catString;
     

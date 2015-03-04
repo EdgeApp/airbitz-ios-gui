@@ -28,7 +28,7 @@ typedef enum eLoginMode
     MODE_ENTERING_PASSWORD
 } tLoginMode;
 
-@interface LoginViewController () <UITextFieldDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, TwoFactorMenuViewControllerDelegate>
+@interface LoginViewController () <UITextFieldDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate, TwoFactorMenuViewControllerDelegate>
 {
     tLoginMode                      _mode;
     CGRect                          _originalContentFrame;
@@ -89,6 +89,7 @@ typedef enum eLoginMode
     _originalUserEntryFrame = _userEntryView.frame;
     
     self.usernameSelector.textField.delegate = self;
+    self.usernameSelector.delegate = self;
     self.passwordTextField.delegate = self;
     self.spinnerView.hidden = YES;
     
@@ -118,6 +119,7 @@ typedef enum eLoginMode
     self.usernameSelector.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.usernameSelector.textField.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
     [self.usernameSelector setTopMostView:self.view];
     self.usernameSelector.pickerMaxChoicesVisible = 3;
+    [self.usernameSelector setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
     [Util stylizeTextField:self.usernameSelector.textField];
 }
 
@@ -743,6 +745,33 @@ typedef enum eLoginMode
             break;
         }
     }
+}
+
+#pragma mark - PickerTextView delegates
+
+- (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
+{
+    // set the text field to the choice
+    NSString *account = [self.arrayAccounts objectAtIndex:row];
+    self.usernameSelector.textField.text = account;
+    [self.usernameSelector.textField resignFirstResponder];
+    [self.usernameSelector dismissPopupPicker];
+}
+
+- (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
+{
+    // TODO delete the account, update array - current implementation is fake
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for(NSString *str in self.arrayAccounts)
+    {
+        if(![str isEqualToString:string])
+        {
+            [array addObject:str];
+        }
+    }
+    [self.usernameSelector dismissPopupPicker];
+    [self.usernameSelector updateChoices:array];
 }
 
 @end

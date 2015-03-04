@@ -39,6 +39,7 @@
 
 @property (nonatomic, strong) NSArray                       *strings;
 @property (nonatomic, strong) NSArray                       *categories;
+@property (nonatomic, strong) UIImage                       *accessoryImage;
 @property (nonatomic, assign) tPopupPickerPosition          position;
 
 @end
@@ -148,7 +149,7 @@ CGRect keyboardFrame;
 	 }];
 }
 
-+ (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings fromCategories:(NSArray *)categories selectedRow:(NSInteger)selectedRow /*maxCellsVisible:(NSInteger)maxCellsVisible*/ withWidth:(NSInteger)width andCellHeight:(NSInteger)cellHeight
++ (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings fromCategories:(NSArray *)categories selectedRow:(NSInteger)selectedRow /*maxCellsVisible:(NSInteger)maxCellsVisible*/ withWidth:(NSInteger)width withAccessory:(UIImage *)image andCellHeight:(NSInteger)cellHeight
 {
     // create the picker from the xib
     PopupPickerView *popup = [[[NSBundle mainBundle] loadNibNamed:@"PopupPickerView" owner:nil options:nil] objectAtIndex:0];
@@ -169,6 +170,8 @@ CGRect keyboardFrame;
     // set the strings and categories
 	popup.strings = strings;
     popup.categories = categories;
+    
+    popup.accessoryImage = image;
     
     // start with the existing frame
     CGRect newFrame = popup.frame;
@@ -660,21 +663,33 @@ CGRect keyboardFrame;
             button.backgroundColor = [UIColor clearColor];
             cell.accessoryView = button;
             cell.accessoryView.hidden = NO;
-            [button addTarget:self action:@selector(addCategoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
+            [button addTarget:self action:@selector(accessoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
         }
+    }
+    else if (self.accessoryImage) {
+        UIImage *image = self.accessoryImage;
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+        button.frame = frame;
+        button.tag = row;
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+        button.backgroundColor = [UIColor clearColor];
+        cell.accessoryView = button;
+        cell.accessoryView.hidden = NO;
+        [button addTarget:self action:@selector(accessoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
     }
     
     return cell;
 }
 
-- (void)addCategoryButtonTapped:(id)sender event:(id)event
+- (void)accessoryButtonTapped:(id)sender event:(id)event
 {
     UIButton *button = (UIButton *) sender;
     NSString *newCategory = [self.strings objectAtIndex:button.tag];
     
-    if ([self.delegate respondsToSelector:@selector(PopupPickerViewDidAddCategory: categoryString:)])
+    if ([self.delegate respondsToSelector:@selector(PopupPickerViewDidTouchAccessory: categoryString:)])
     {
-        [self.delegate PopupPickerViewDidAddCategory:self categoryString:newCategory];
+        [self.delegate PopupPickerViewDidTouchAccessory:self categoryString:newCategory];
     }
 }
 

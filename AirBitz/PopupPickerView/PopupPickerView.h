@@ -38,7 +38,8 @@ typedef enum ePopupPickerPosition
                   fromCategories:(NSArray *)categories              /* optional list of categories */
 				  selectedRow:(NSInteger)selectedRow				/* which row is initially selected */
 				  withWidth:(NSInteger)width
-				  andCellHeight:(NSInteger)cellHeight;
+                  withAccessory:(UIImage *)image                    /* optional accessory for each row */
+                  andCellHeight:(NSInteger)cellHeight;
 
 - (void)selectRow:(NSInteger)row;
 - (void)setCellHeight:(NSInteger)height;
@@ -62,6 +63,6 @@ typedef enum ePopupPickerPosition
 - (BOOL)PopupPickerViewFormatCell:(PopupPickerView *)view onRow:(NSInteger)row withCell:(UITableViewCell *)cell userData:(id)data;
 - (NSInteger)PopupPickerViewNumberOfRows:(PopupPickerView *)view userData:(id)data;
 - (UITableViewCell *)PopupPickerViewCellForRow:(PopupPickerView *)view forTableView:(UITableView *)tableView andRow:(NSInteger)row userData:(id)data;
-- (void)PopupPickerViewDidAddCategory:(PopupPickerView *)view categoryString:(NSString *)string;
+- (void)PopupPickerViewDidTouchAccessory:(PopupPickerView *)view categoryString:(NSString *)string;
 @end
 
