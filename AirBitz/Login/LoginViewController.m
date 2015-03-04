@@ -735,11 +735,20 @@ typedef enum eLoginMode
 
 - (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
 {
-    // set the text field to the choice
-    NSString *account = [self.arrayAccounts objectAtIndex:row];
-    self.usernameSelector.textField.text = account;
     [self.usernameSelector.textField resignFirstResponder];
     [self.usernameSelector dismissPopupPicker];
+    
+    // set the text field to the choice
+    NSString *account = [self.arrayAccounts objectAtIndex:row];
+    if([CoreBridge PINLoginExists:account])
+    {
+        [LocalSettings controller].cachedUsername = account;
+        [self.delegate loginViewControllerDidAbort];
+        [self.delegate loginViewControllerDidSwitchAccount];
+    }
+    else {
+        self.usernameSelector.textField.text = account;
+    }
 }
 
 - (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string

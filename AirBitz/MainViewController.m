@@ -635,6 +635,11 @@ typedef enum eAppMode
     [self checkUserReview];
 }
 
+- (void)loginViewControllerDidSwitchAccount
+{
+    [self showPINLogin:NO];
+}
+
 - (void)checkUserReview
 {
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
@@ -848,6 +853,10 @@ typedef enum eAppMode
 
 - (void)PINReLoginViewControllerDidLogin
 {
+    _appMode = APP_MODE_WALLETS;
+    [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
+    [self showTabBarAnimated:YES];
+    
     // After login, reset all the main views
     [self loadUserViews];
     
