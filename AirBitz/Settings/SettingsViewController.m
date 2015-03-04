@@ -40,14 +40,13 @@
 #define SECTION_OPTIONS                 3
 #define SECTION_DEFAULT_EXCHANGE        4
 #define SECTION_LOGOUT                  5
-#define SECTION_FULL_LOGOUT             6
-#define SECTION_DEBUG                   7
+#define SECTION_DEBUG                   6
 
 // If we are in debug include the DEBUG section in settings
 #if (DEBUG || 1) // Always enable debug section for now
-#define SECTION_COUNT                   8
-#else 
 #define SECTION_COUNT                   7
+#else 
+#define SECTION_COUNT                   6
 #endif
 
 #define DENOMINATION_CHOICES            3
@@ -1636,21 +1635,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                 [self.delegate SettingsViewControllerDone:self];
             });
         });
-    } else if (section == SECTION_FULL_LOGOUT) {
-            [self blockUser:YES];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [cell.button setTitle:@"Please Wait..." forState:UIControlStateNormal];
-                [[User Singleton] clear];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-                               {
-                                   [CoreBridge deletePINLogin];
-                               });
-                
-                dispatch_async(dispatch_get_main_queue(), ^(void){
-                    [self blockUser:NO];
-                    [self.delegate SettingsViewControllerDone:self];
-                });
-            });
     } else if (section == SECTION_DEBUG) {
         [self bringUpDebugView];
     }
