@@ -46,7 +46,12 @@
 	frame.origin.y = -frame.size.height;
 	pv.frame = frame;
 	pv.delegate = delegate;
-	pv.layer.cornerRadius = 8.0;
+	pv.layer.cornerRadius = 5;
+    pv.layer.shadowColor = [[UIColor blackColor] CGColor];
+    pv.layer.shadowRadius = 5.0f;
+    pv.layer.shadowOpacity = 1.0f;
+    pv.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    pv.layer.masksToBounds = NO;
 	
 	[UIView animateWithDuration:0.35
 						  delay:0.0

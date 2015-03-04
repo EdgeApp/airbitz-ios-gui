@@ -480,10 +480,14 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 		if(sendName)
 		{
 			name = [User Singleton].fullName ;
+            if ([name isEqualToString:@""])
+            {
+                name = [[UIDevice currentDevice] name];
+            }
 		}
 		else
 		{
-			name = @" ";
+			name = [[UIDevice currentDevice] name];
 		}
 		//broadcast first 10 digits of bitcoin address followed by full name (up to 28 bytes total)
 		[self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]], CBAdvertisementDataLocalNameKey : [NSString stringWithFormat:@"%@%@", address, name]}];

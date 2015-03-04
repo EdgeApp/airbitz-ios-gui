@@ -8,6 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		17C92258FEBAD8A39BBFD0FC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E47C0EC32EE29D34C5A03A0B /* libPods.a */; };
+		3464413AC1EC077C3B787A7C /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 34644208DF1224ADCCE12D41 /* enable-camera.png */; };
+		346441FD1CFE7B907EB76873 /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 34644208DF1224ADCCE12D41 /* enable-camera.png */; };
+		346443C3E8845FA868E63AEA /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
+		346443E3A93D877CC0DB195C /* write-it-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3464497CB6AAD6876F34D5E7 /* write-it-down.png */; };
+		34644665214F55CD0153A916 /* write-it-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3464497CB6AAD6876F34D5E7 /* write-it-down.png */; };
+		34644734A0BD9A1B7525D953 /* write-it-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3464497CB6AAD6876F34D5E7 /* write-it-down.png */; };
+		3464478ACA2CD83CC1ABE74B /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 34644208DF1224ADCCE12D41 /* enable-camera.png */; };
+		3464480C798505E1E965C451 /* enable-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 346446CBE5B435CA404ED78C /* enable-contacts.png */; };
+		346449A3221BD04F98BB6460 /* enable-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 346446CBE5B435CA404ED78C /* enable-contacts.png */; };
+		34644A25DA476D61E67398D6 /* enable-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 346446CBE5B435CA404ED78C /* enable-contacts.png */; };
+		34644B2B5788D8A8EBC9F0E5 /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
+		34644B507781CF1F8E7D5301 /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
+		34644DFBC522F75CE8481CB6 /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
+		34644F1EE31C431DADB1F99C /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
+		34644F47B5DBBBDBD702E03F /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
 		4C08A6DB18C29CEF0071B87C /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D318C29CEF0071B87C /* libabc.a */; };
 		4C08A6DC18C29CEF0071B87C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D418C29CEF0071B87C /* libcrypto.a */; };
 		4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D518C29CEF0071B87C /* libcurl.a */; };
@@ -1117,6 +1132,30 @@
 		DAE276141A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
 		DAE276151A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
 		DAE276161A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
+		DAE276221A9BF68100E24523 /* SignUpUsernameController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276211A9BF68100E24523 /* SignUpUsernameController.m */; };
+		DAE276231A9BF68100E24523 /* SignUpUsernameController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276211A9BF68100E24523 /* SignUpUsernameController.m */; };
+		DAE276241A9BF68100E24523 /* SignUpUsernameController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276211A9BF68100E24523 /* SignUpUsernameController.m */; };
+		DAE276271A9BF8AB00E24523 /* SignUpPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276261A9BF8AB00E24523 /* SignUpPasswordController.m */; };
+		DAE276281A9BF8AB00E24523 /* SignUpPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276261A9BF8AB00E24523 /* SignUpPasswordController.m */; };
+		DAE276291A9BF8AB00E24523 /* SignUpPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276261A9BF8AB00E24523 /* SignUpPasswordController.m */; };
+		DAE2762B1A9BFDFD00E24523 /* AccountCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAE2762A1A9BFDFD00E24523 /* AccountCreate.storyboard */; };
+		DAE2762C1A9BFDFD00E24523 /* AccountCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAE2762A1A9BFDFD00E24523 /* AccountCreate.storyboard */; };
+		DAE2762D1A9BFDFD00E24523 /* AccountCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAE2762A1A9BFDFD00E24523 /* AccountCreate.storyboard */; };
+		DAE276301A9BFEC200E24523 /* SignUpHandleController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE2762F1A9BFEC200E24523 /* SignUpHandleController.m */; };
+		DAE276311A9BFEC200E24523 /* SignUpHandleController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE2762F1A9BFEC200E24523 /* SignUpHandleController.m */; };
+		DAE276321A9BFEC200E24523 /* SignUpHandleController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE2762F1A9BFEC200E24523 /* SignUpHandleController.m */; };
+		DAE276351A9C018700E24523 /* SignUpCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276341A9C018700E24523 /* SignUpCameraController.m */; };
+		DAE276361A9C018700E24523 /* SignUpCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276341A9C018700E24523 /* SignUpCameraController.m */; };
+		DAE276371A9C018700E24523 /* SignUpCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276341A9C018700E24523 /* SignUpCameraController.m */; };
+		DAE2763A1A9C033C00E24523 /* SignUpContactsController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276391A9C033C00E24523 /* SignUpContactsController.m */; };
+		DAE2763B1A9C033C00E24523 /* SignUpContactsController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276391A9C033C00E24523 /* SignUpContactsController.m */; };
+		DAE2763C1A9C033C00E24523 /* SignUpContactsController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276391A9C033C00E24523 /* SignUpContactsController.m */; };
+		DAE2763F1A9C0FA600E24523 /* SignUpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE2763E1A9C0FA600E24523 /* SignUpManager.m */; };
+		DAE276401A9C0FA600E24523 /* SignUpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE2763E1A9C0FA600E24523 /* SignUpManager.m */; };
+		DAE276411A9C0FA600E24523 /* SignUpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE2763E1A9C0FA600E24523 /* SignUpManager.m */; };
+		DAE276441A9C1D9300E24523 /* SignUpBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276431A9C1D9300E24523 /* SignUpBaseController.m */; };
+		DAE276451A9C1D9300E24523 /* SignUpBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276431A9C1D9300E24523 /* SignUpBaseController.m */; };
+		DAE276461A9C1D9300E24523 /* SignUpBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276431A9C1D9300E24523 /* SignUpBaseController.m */; };
 		DAE863F71A88A58A00A17BD3 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9A418EA0C4E008F302C /* SMCalloutView.m */; };
 		DAE863F81A88A58A00A17BD3 /* QuestionAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EB0E18DE018E008ACF88 /* QuestionAnswerView.m */; };
 		DAE863F91A88A58A00A17BD3 /* DateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D0193564D20091C286 /* DateTime.m */; };
@@ -1701,6 +1740,13 @@
 
 /* Begin PBXFileReference section */
 		188D8A965DB464149F922F3B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3464417D3C4E858FE232DCD2 /* StylizedButtonOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedButtonOutline.h; sourceTree = "<group>"; };
+		34644208DF1224ADCCE12D41 /* enable-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enable-camera.png"; sourceTree = "<group>"; };
+		346446CBE5B435CA404ED78C /* enable-contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enable-contacts.png"; sourceTree = "<group>"; };
+		346446F326CD2FB38A4B0DE1 /* SignUpWriteItController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpWriteItController.h; path = SignUp/SignUpWriteItController.h; sourceTree = "<group>"; };
+		346448D77123858DD23C231B /* StylizedButtonOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedButtonOutline.m; sourceTree = "<group>"; };
+		3464497CB6AAD6876F34D5E7 /* write-it-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write-it-down.png"; sourceTree = "<group>"; };
+		34644A61390FB99D07036E91 /* SignUpWriteItController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpWriteItController.m; path = SignUp/SignUpWriteItController.m; sourceTree = "<group>"; };
 		3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4C08A6D318C29CEF0071B87C /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = ABC/libabc.a; sourceTree = "<group>"; };
 		4C08A6D418C29CEF0071B87C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ABC/libcrypto.a; sourceTree = "<group>"; };
@@ -2424,6 +2470,21 @@
 		DABA3485198DFEE300EFAB13 /* infoRequestQR.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoRequestQR.html; sourceTree = "<group>"; };
 		DAE276121A9AEE8500E24523 /* AddressRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressRequestController.h; sourceTree = "<group>"; };
 		DAE276131A9AEE8500E24523 /* AddressRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressRequestController.m; sourceTree = "<group>"; };
+		DAE276201A9BF68100E24523 /* SignUpUsernameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpUsernameController.h; path = SignUp/SignUpUsernameController.h; sourceTree = "<group>"; };
+		DAE276211A9BF68100E24523 /* SignUpUsernameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpUsernameController.m; path = SignUp/SignUpUsernameController.m; sourceTree = "<group>"; };
+		DAE276251A9BF8AB00E24523 /* SignUpPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpPasswordController.h; path = SignUp/SignUpPasswordController.h; sourceTree = "<group>"; };
+		DAE276261A9BF8AB00E24523 /* SignUpPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpPasswordController.m; path = SignUp/SignUpPasswordController.m; sourceTree = "<group>"; };
+		DAE2762A1A9BFDFD00E24523 /* AccountCreate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = AccountCreate.storyboard; path = SignUp/AccountCreate.storyboard; sourceTree = "<group>"; };
+		DAE2762E1A9BFEC200E24523 /* SignUpHandleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpHandleController.h; path = SignUp/SignUpHandleController.h; sourceTree = "<group>"; };
+		DAE2762F1A9BFEC200E24523 /* SignUpHandleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpHandleController.m; path = SignUp/SignUpHandleController.m; sourceTree = "<group>"; };
+		DAE276331A9C018700E24523 /* SignUpCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpCameraController.h; path = SignUp/SignUpCameraController.h; sourceTree = "<group>"; };
+		DAE276341A9C018700E24523 /* SignUpCameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpCameraController.m; path = SignUp/SignUpCameraController.m; sourceTree = "<group>"; };
+		DAE276381A9C033C00E24523 /* SignUpContactsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpContactsController.h; path = SignUp/SignUpContactsController.h; sourceTree = "<group>"; };
+		DAE276391A9C033C00E24523 /* SignUpContactsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpContactsController.m; path = SignUp/SignUpContactsController.m; sourceTree = "<group>"; };
+		DAE2763D1A9C0FA600E24523 /* SignUpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpManager.h; path = SignUp/SignUpManager.h; sourceTree = "<group>"; };
+		DAE2763E1A9C0FA600E24523 /* SignUpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpManager.m; path = SignUp/SignUpManager.m; sourceTree = "<group>"; };
+		DAE276421A9C1D9300E24523 /* SignUpBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpBaseController.h; path = SignUp/SignUpBaseController.h; sourceTree = "<group>"; };
+		DAE276431A9C1D9300E24523 /* SignUpBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpBaseController.m; path = SignUp/SignUpBaseController.m; sourceTree = "<group>"; };
 		DAE866291A88A58A00A17BD3 /* Airbitz Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAFC799E1A81CCBE00E9039D /* TwoFactorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorMenuViewController.h; sourceTree = "<group>"; };
 		DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorMenuViewController.m; sourceTree = "<group>"; };
@@ -3061,6 +3122,7 @@
 				DA13339A1A7B203C0051DE14 /* ScanView */,
 				B5004A2618A5C755003560A4 /* Server.h */,
 				B5C0A9B218EA0D99008F302C /* Settings */,
+				DAE2761F1A9BF66000E24523 /* SignUp */,
 				4C3C309A19199AB6006923DE /* StrokeGradientButton */,
 				DA1E7CA51A8C187F007C6C05 /* StylizedButton.h */,
 				DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */,
@@ -3088,6 +3150,8 @@
 				B5675B6618A17F6F002E0703 /* Images.xcassets */,
 				B5675B8718A180D9002E0703 /* Resources */,
 				B5675B5218A17F6F002E0703 /* Supporting Files */,
+				346448D77123858DD23C231B /* StylizedButtonOutline.m */,
+				3464417D3C4E858FE232DCD2 /* StylizedButtonOutline.h */,
 			);
 			path = AirBitz;
 			sourceTree = "<group>";
@@ -3464,6 +3528,9 @@
 				DA0B03CF1A90A72000A4D5B0 /* White-Dot@2x~iphone.png */,
 				DA0B03D01A90A72000A4D5B0 /* White-Dot~iphone.png */,
 				7D8270C019F89C8B003F275D /* btn_forgot_password_arrow.png */,
+				34644208DF1224ADCCE12D41 /* enable-camera.png */,
+				3464497CB6AAD6876F34D5E7 /* write-it-down.png */,
+				346446CBE5B435CA404ED78C /* enable-contacts.png */,
 			);
 			path = wallet;
 			sourceTree = "<group>";
@@ -3725,6 +3792,30 @@
 				DAA5784C19C272C400E972FC /* SMSTemplate.txt */,
 			);
 			name = Text;
+			sourceTree = "<group>";
+		};
+		DAE2761F1A9BF66000E24523 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				DAE276421A9C1D9300E24523 /* SignUpBaseController.h */,
+				DAE276431A9C1D9300E24523 /* SignUpBaseController.m */,
+				DAE2763D1A9C0FA600E24523 /* SignUpManager.h */,
+				DAE2763E1A9C0FA600E24523 /* SignUpManager.m */,
+				DAE276381A9C033C00E24523 /* SignUpContactsController.h */,
+				DAE276391A9C033C00E24523 /* SignUpContactsController.m */,
+				DAE276331A9C018700E24523 /* SignUpCameraController.h */,
+				DAE276341A9C018700E24523 /* SignUpCameraController.m */,
+				DAE2762E1A9BFEC200E24523 /* SignUpHandleController.h */,
+				DAE2762F1A9BFEC200E24523 /* SignUpHandleController.m */,
+				DAE2762A1A9BFDFD00E24523 /* AccountCreate.storyboard */,
+				DAE276251A9BF8AB00E24523 /* SignUpPasswordController.h */,
+				DAE276261A9BF8AB00E24523 /* SignUpPasswordController.m */,
+				DAE276201A9BF68100E24523 /* SignUpUsernameController.h */,
+				DAE276211A9BF68100E24523 /* SignUpUsernameController.m */,
+				34644A61390FB99D07036E91 /* SignUpWriteItController.m */,
+				346446F326CD2FB38A4B0DE1 /* SignUpWriteItController.h */,
+			);
+			name = SignUp;
 			sourceTree = "<group>";
 		};
 		E9B30ECB4BB83AB9C4A56899 /* Pods */ = {
@@ -4141,6 +4232,7 @@
 				7D98AE2919A7C550003D2BF6 /* bd_cell_top@2x~iphone.png in Resources */,
 				7D98AE2A19A7C550003D2BF6 /* icon_export_sdcard@2x~iphone.png in Resources */,
 				7D98AE2B19A7C550003D2BF6 /* btn_camera@2x~iphone.png in Resources */,
+				DAE2762C1A9BFDFD00E24523 /* AccountCreate.storyboard in Resources */,
 				7DFAF0C41A03119D00D33198 /* background_login@2x~iphone.jpg in Resources */,
 				7D98AE2C19A7C550003D2BF6 /* divider@2x~iphone.png in Resources */,
 				7D05AB831A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png in Resources */,
@@ -4266,6 +4358,9 @@
 				7D98AE9319A7C550003D2BF6 /* tabbar_base~iphone.png in Resources */,
 				7DB9DD801A03187D00AD35ED /* background@2x~iphone.jpg in Resources */,
 				7D98AE9419A7C550003D2BF6 /* btn_export@2x~iphone.png in Resources */,
+				3464413AC1EC077C3B787A7C /* enable-camera.png in Resources */,
+				34644734A0BD9A1B7525D953 /* write-it-down.png in Resources */,
+				34644A25DA476D61E67398D6 /* enable-contacts.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4461,6 +4556,7 @@
 				B59C154118C012B500AEA789 /* table_cell_middle~iphone.png in Resources */,
 				DA14ABD81A841B5A00C30F08 /* btn_expand_green~iphone.png in Resources */,
 				B5184B7518E0D5E90001712A /* btn_big_green@2x~iphone.png in Resources */,
+				DAE2762B1A9BFDFD00E24523 /* AccountCreate.storyboard in Resources */,
 				B561E1A818D2572D002DCDC2 /* InfoView~iphone.xib in Resources */,
 				B56553EC18ECC8C2005B35E1 /* CalculatorView~iphone.xib in Resources */,
 				B55A02FC18EA206300845090 /* btn_cancel@2x~iphone.png in Resources */,
@@ -4661,6 +4757,9 @@
 				B59C153518C012B500AEA789 /* tabbar_base~iphone.png in Resources */,
 				7DB9DD7F1A03187D00AD35ED /* background@2x~iphone.jpg in Resources */,
 				B59C14F218C012B500AEA789 /* btn_export@2x~iphone.png in Resources */,
+				3464478ACA2CD83CC1ABE74B /* enable-camera.png in Resources */,
+				346443E3A93D877CC0DB195C /* write-it-down.png in Resources */,
+				346449A3221BD04F98BB6460 /* enable-contacts.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4856,6 +4955,7 @@
 				DAE865541A88A58A00A17BD3 /* table_cell_middle~iphone.png in Resources */,
 				DAE865551A88A58A00A17BD3 /* btn_expand_green~iphone.png in Resources */,
 				DAE865561A88A58A00A17BD3 /* btn_big_green@2x~iphone.png in Resources */,
+				DAE2762D1A9BFDFD00E24523 /* AccountCreate.storyboard in Resources */,
 				DAE865571A88A58A00A17BD3 /* InfoView~iphone.xib in Resources */,
 				DAE865581A88A58A00A17BD3 /* CalculatorView~iphone.xib in Resources */,
 				DAE8655A1A88A58A00A17BD3 /* btn_cancel@2x~iphone.png in Resources */,
@@ -5056,6 +5156,9 @@
 				DAE866211A88A58A00A17BD3 /* tabbar_base~iphone.png in Resources */,
 				DAE866221A88A58A00A17BD3 /* background@2x~iphone.jpg in Resources */,
 				DAE866231A88A58A00A17BD3 /* btn_export@2x~iphone.png in Resources */,
+				346441FD1CFE7B907EB76873 /* enable-camera.png in Resources */,
+				34644665214F55CD0153A916 /* write-it-down.png in Resources */,
+				3464480C798505E1E965C451 /* enable-contacts.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5203,6 +5306,7 @@
 			files = (
 				7DFD22F01A1ED1F5008C43FB /* SpendingLimitsViewController.m in Sources */,
 				7D98ACAD19A7C550003D2BF6 /* SMCalloutView.m in Sources */,
+				DAE276361A9C018700E24523 /* SignUpCameraController.m in Sources */,
 				7D98ACAE19A7C550003D2BF6 /* QuestionAnswerView.m in Sources */,
 				7D98ACAF19A7C550003D2BF6 /* DateTime.m in Sources */,
 				7D98ACB019A7C550003D2BF6 /* ImportWalletViewController.m in Sources */,
@@ -5233,10 +5337,12 @@
 				7D98ACC419A7C550003D2BF6 /* Transaction.m in Sources */,
 				7DFD22E81A1E716C008C43FB /* UIPhotoItemView.m in Sources */,
 				7D98ACC519A7C550003D2BF6 /* PasswordVerifyView.m in Sources */,
+				DAE276231A9BF68100E24523 /* SignUpUsernameController.m in Sources */,
 				7D98ACC619A7C550003D2BF6 /* RadioButtonCell.m in Sources */,
 				7D98ACC719A7C550003D2BF6 /* TabBarView.m in Sources */,
 				7D98ACC819A7C550003D2BF6 /* CommonOverviewCell.m in Sources */,
 				7D98ACC919A7C550003D2BF6 /* AppDelegate.m in Sources */,
+				DAE276281A9BF8AB00E24523 /* SignUpPasswordController.m in Sources */,
 				7D98ACCA19A7C550003D2BF6 /* CategoriesViewController.m in Sources */,
 				7D98ACCB19A7C550003D2BF6 /* InfoView.m in Sources */,
 				7D98ACCC19A7C550003D2BF6 /* WalletMakerView.m in Sources */,
@@ -5251,6 +5357,7 @@
 				7D98ACD419A7C550003D2BF6 /* MapView.m in Sources */,
 				7D98ACD519A7C550003D2BF6 /* MontserratLabel.m in Sources */,
 				7D98ACD619A7C550003D2BF6 /* TransactionsViewController.m in Sources */,
+				DAE276401A9C0FA600E24523 /* SignUpManager.m in Sources */,
 				7D98ACD719A7C550003D2BF6 /* CustomAnnotationView.m in Sources */,
 				7DFD22E61A1E716C008C43FB /* UIPhotoGalleryViewController.m in Sources */,
 				7D98ACD819A7C550003D2BF6 /* PasswordRecoveryViewController.m in Sources */,
@@ -5264,6 +5371,7 @@
 				DA1333991A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */,
 				7D89E8CF1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C61A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
+				DAE2763B1A9C033C00E24523 /* SignUpContactsController.m in Sources */,
 				7D98ACDD19A7C550003D2BF6 /* PopupPickerView.m in Sources */,
 				DAE276151A9AEE8500E24523 /* AddressRequestController.m in Sources */,
 				DA1E7CA81A8C187F007C6C05 /* StylizedButton.m in Sources */,
@@ -5302,6 +5410,7 @@
 				7D98ACFB19A7C550003D2BF6 /* BD_Address_Cell.m in Sources */,
 				7D98ACFC19A7C550003D2BF6 /* CJSONDeserializer.m in Sources */,
 				7D98ACFD19A7C550003D2BF6 /* RequestViewController.m in Sources */,
+				DAE276451A9C1D9300E24523 /* SignUpBaseController.m in Sources */,
 				7D98ACFE19A7C550003D2BF6 /* BD_Details_Cell.m in Sources */,
 				7D98ACFF19A7C550003D2BF6 /* WalletCell.m in Sources */,
 				7D98AD0019A7C550003D2BF6 /* OfflineWalletViewController.m in Sources */,
@@ -5320,12 +5429,15 @@
 				7D98AD0919A7C550003D2BF6 /* LatoLabel.m in Sources */,
 				7D98AD0A19A7C550003D2BF6 /* CalculatorView.m in Sources */,
 				7D98AD0B19A7C550003D2BF6 /* ButtonSelectorView.m in Sources */,
+				DAE276311A9BFEC200E24523 /* SignUpHandleController.m in Sources */,
 				7D98AD0C19A7C550003D2BF6 /* BD_Hours_Cell.m in Sources */,
 				7D98AD0D19A7C550003D2BF6 /* overviewCell.m in Sources */,
 				7D98AD0E19A7C550003D2BF6 /* SyncView.m in Sources */,
 				DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
 				7D98AD0F19A7C550003D2BF6 /* TabBarButton.m in Sources */,
 				7D98AD1019A7C550003D2BF6 /* PickerTextView.m in Sources */,
+				34644B507781CF1F8E7D5301 /* SignUpWriteItController.m in Sources */,
+				34644F1EE31C431DADB1F99C /* StylizedButtonOutline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5335,6 +5447,7 @@
 			files = (
 				B5C0A9A618EA0C4E008F302C /* SMCalloutView.m in Sources */,
 				B5F2EB0F18DE018E008ACF88 /* QuestionAnswerView.m in Sources */,
+				DAE276351A9C018700E24523 /* SignUpCameraController.m in Sources */,
 				4C7247D1193564D20091C286 /* DateTime.m in Sources */,
 				4C5D8C58192AB6C60015BB3C /* ImportWalletViewController.m in Sources */,
 				B55A030B18EA4C4400845090 /* PlainCell.m in Sources */,
@@ -5365,10 +5478,12 @@
 				B5FD393418F06FD800BE2670 /* StylizedTextField.m in Sources */,
 				4C08A6E918C53BDA0071B87C /* Transaction.m in Sources */,
 				B5F2E9CF18DCDFB0008ACF88 /* PasswordVerifyView.m in Sources */,
+				DAE276221A9BF68100E24523 /* SignUpUsernameController.m in Sources */,
 				B55A030818EA210000845090 /* RadioButtonCell.m in Sources */,
 				B59C161B18C1436300AEA789 /* TabBarView.m in Sources */,
 				B5C0A99E18EA0C10008F302C /* CommonOverviewCell.m in Sources */,
 				B5675B5C18A17F6F002E0703 /* AppDelegate.m in Sources */,
+				DAE276271A9BF8AB00E24523 /* SignUpPasswordController.m in Sources */,
 				B55A031D18EB569000845090 /* CategoriesViewController.m in Sources */,
 				B561E1A618D2572D002DCDC2 /* InfoView.m in Sources */,
 				B5FD392F18EFC30E00BE2670 /* WalletMakerView.m in Sources */,
@@ -5383,6 +5498,7 @@
 				B5C0A99018EA0B80008F302C /* MapView.m in Sources */,
 				B5137C1818A40F3900DA4A34 /* MontserratLabel.m in Sources */,
 				68C4AA241A0B4DD70010C837 /* FadingAlertView.m in Sources */,
+				DAE2763F1A9C0FA600E24523 /* SignUpManager.m in Sources */,
 				B5C0A9C318EA0DD8008F302C /* TransactionsViewController.m in Sources */,
 				B5C0A98F18EA0B80008F302C /* CustomAnnotationView.m in Sources */,
 				B5F2E9C518DB4B23008ACF88 /* PasswordRecoveryViewController.m in Sources */,
@@ -5396,6 +5512,7 @@
 				DA1333981A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */,
 				7D89E8CE1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C51A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
+				DAE2763A1A9C033C00E24523 /* SignUpContactsController.m in Sources */,
 				4C7247D41937A7520091C286 /* PayeeCell.m in Sources */,
 				DAE276141A9AEE8500E24523 /* AddressRequestController.m in Sources */,
 				DA1E7CA71A8C187F007C6C05 /* StylizedButton.m in Sources */,
@@ -5434,6 +5551,7 @@
 				68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */,
 				B5137C3918A435BD00DA4A34 /* CJSONDeserializer.m in Sources */,
 				B5C0A9AA18EA0D09008F302C /* RequestViewController.m in Sources */,
+				DAE276441A9C1D9300E24523 /* SignUpBaseController.m in Sources */,
 				B5C0A97418EA0A42008F302C /* BD_Details_Cell.m in Sources */,
 				B5C0A9C418EA0DD8008F302C /* WalletCell.m in Sources */,
 				4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */,
@@ -5452,12 +5570,15 @@
 				B56553EF18ECC8E0005B35E1 /* CalculatorView.m in Sources */,
 				B56553F218EDDCF8005B35E1 /* ButtonSelectorView.m in Sources */,
 				B5C0A97518EA0A42008F302C /* BD_Hours_Cell.m in Sources */,
+				DAE276301A9BFEC200E24523 /* SignUpHandleController.m in Sources */,
 				B5C0A99F18EA0C10008F302C /* overviewCell.m in Sources */,
 				7DFD22E51A1E716C008C43FB /* UIPhotoGalleryViewController.m in Sources */,
 				6893E6CA19783FED0092DA04 /* SyncView.m in Sources */,
 				DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
 				B57C207D18C15009005D7245 /* TabBarButton.m in Sources */,
 				4C3C30A5191C1CAF006923DE /* PickerTextView.m in Sources */,
+				34644F47B5DBBBDBD702E03F /* SignUpWriteItController.m in Sources */,
+				34644DFBC522F75CE8481CB6 /* StylizedButtonOutline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5467,6 +5588,7 @@
 			files = (
 				DAE863F71A88A58A00A17BD3 /* SMCalloutView.m in Sources */,
 				DAE863F81A88A58A00A17BD3 /* QuestionAnswerView.m in Sources */,
+				DAE276371A9C018700E24523 /* SignUpCameraController.m in Sources */,
 				DAE863F91A88A58A00A17BD3 /* DateTime.m in Sources */,
 				DAE863FA1A88A58A00A17BD3 /* ImportWalletViewController.m in Sources */,
 				DAE863FB1A88A58A00A17BD3 /* PlainCell.m in Sources */,
@@ -5497,10 +5619,12 @@
 				DAE864141A88A58A00A17BD3 /* StylizedTextField.m in Sources */,
 				DAE864151A88A58A00A17BD3 /* Transaction.m in Sources */,
 				DAE864161A88A58A00A17BD3 /* PasswordVerifyView.m in Sources */,
+				DAE276241A9BF68100E24523 /* SignUpUsernameController.m in Sources */,
 				DAE864171A88A58A00A17BD3 /* RadioButtonCell.m in Sources */,
 				DAE864181A88A58A00A17BD3 /* TabBarView.m in Sources */,
 				DAE864191A88A58A00A17BD3 /* CommonOverviewCell.m in Sources */,
 				DAE8641A1A88A58A00A17BD3 /* AppDelegate.m in Sources */,
+				DAE276291A9BF8AB00E24523 /* SignUpPasswordController.m in Sources */,
 				DAE8641B1A88A58A00A17BD3 /* CategoriesViewController.m in Sources */,
 				DAE8641C1A88A58A00A17BD3 /* InfoView.m in Sources */,
 				DAE8641D1A88A58A00A17BD3 /* WalletMakerView.m in Sources */,
@@ -5515,6 +5639,7 @@
 				DAE864261A88A58A00A17BD3 /* MapView.m in Sources */,
 				DAE864271A88A58A00A17BD3 /* MontserratLabel.m in Sources */,
 				DAE864281A88A58A00A17BD3 /* FadingAlertView.m in Sources */,
+				DAE276411A9C0FA600E24523 /* SignUpManager.m in Sources */,
 				DAE864291A88A58A00A17BD3 /* TransactionsViewController.m in Sources */,
 				DAE8642A1A88A58A00A17BD3 /* CustomAnnotationView.m in Sources */,
 				DAE8642B1A88A58A00A17BD3 /* PasswordRecoveryViewController.m in Sources */,
@@ -5528,6 +5653,7 @@
 				DAE864331A88A58A00A17BD3 /* TwoFactorScanViewController.m in Sources */,
 				DAE864341A88A58A00A17BD3 /* NotificationChecker.m in Sources */,
 				DAE864351A88A58A00A17BD3 /* UIPhotoGalleryViewController+Slider.m in Sources */,
+				DAE2763C1A9C033C00E24523 /* SignUpContactsController.m in Sources */,
 				DAE864361A88A58A00A17BD3 /* PayeeCell.m in Sources */,
 				DAE276161A9AEE8500E24523 /* AddressRequestController.m in Sources */,
 				DA1E7CA91A8C187F007C6C05 /* StylizedButton.m in Sources */,
@@ -5566,6 +5692,7 @@
 				DAE864561A88A58A00A17BD3 /* SpendingLimitsViewController.m in Sources */,
 				DAE864571A88A58A00A17BD3 /* CJSONDeserializer.m in Sources */,
 				DAE864581A88A58A00A17BD3 /* RequestViewController.m in Sources */,
+				DAE276461A9C1D9300E24523 /* SignUpBaseController.m in Sources */,
 				DAE864591A88A58A00A17BD3 /* BD_Details_Cell.m in Sources */,
 				DAE8645A1A88A58A00A17BD3 /* WalletCell.m in Sources */,
 				DAE8645B1A88A58A00A17BD3 /* OfflineWalletViewController.m in Sources */,
@@ -5584,12 +5711,15 @@
 				DAE864661A88A58A00A17BD3 /* CalculatorView.m in Sources */,
 				DAE864671A88A58A00A17BD3 /* ButtonSelectorView.m in Sources */,
 				DAE864681A88A58A00A17BD3 /* BD_Hours_Cell.m in Sources */,
+				DAE276321A9BFEC200E24523 /* SignUpHandleController.m in Sources */,
 				DAE864691A88A58A00A17BD3 /* overviewCell.m in Sources */,
 				DAE8646A1A88A58A00A17BD3 /* UIPhotoGalleryViewController.m in Sources */,
 				DAE8646B1A88A58A00A17BD3 /* SyncView.m in Sources */,
 				DAE8646C1A88A58A00A17BD3 /* TwoFactorMenuViewController.m in Sources */,
 				DAE8646D1A88A58A00A17BD3 /* TabBarButton.m in Sources */,
 				DAE8646E1A88A58A00A17BD3 /* PickerTextView.m in Sources */,
+				346443C3E8845FA868E63AEA /* SignUpWriteItController.m in Sources */,
+				34644B2B5788D8A8EBC9F0E5 /* StylizedButtonOutline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

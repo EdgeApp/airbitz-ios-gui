@@ -732,8 +732,8 @@
     } else {
         [self dismissFading:NO];
 		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Account Sign In", @"Title of account signin error alert")
-							  message:[NSString stringWithFormat:@"Sign-in failed:\n%@", _strReason]
+							  initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signin error alert")
+							  message:[NSString stringWithFormat:@"Sign Up failed:\n%@", _strReason]
 							  delegate:nil
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
