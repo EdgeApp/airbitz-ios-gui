@@ -543,6 +543,7 @@ typedef enum eLoginMode
     // highlight all of the text
     if (textField == self.usernameSelector.textField)
     {
+        [self getAllAccounts];
         [self.usernameSelector updateChoices:self.arrayAccounts];
 
         [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
