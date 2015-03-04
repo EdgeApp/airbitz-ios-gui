@@ -1190,10 +1190,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             return 1;
             break;
             
-        case SECTION_FULL_LOGOUT:
-            return 1;
-            break;
-            
         case SECTION_DEBUG:
             return 1;
             break;
@@ -1208,7 +1204,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
 	if ((indexPath.section == SECTION_OPTIONS) 
         || (indexPath.section == SECTION_LOGOUT)
-        || (indexPath.section == SECTION_FULL_LOGOUT)
             || (indexPath.section == SECTION_DEBUG))
 	{
 		return 47.0;
@@ -1219,7 +1214,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	if (section == SECTION_LOGOUT || section == SECTION_FULL_LOGOUT || section == SECTION_DEBUG)
+	if (section == SECTION_LOGOUT || section == SECTION_DEBUG)
 	{
 		return 0.0;
 	}
@@ -1265,8 +1260,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	UITableViewCell *cell;
     if (indexPath.section == SECTION_LOGOUT) {
 		cell = [self getLogoutButton:tableView withIndexPath:indexPath];
-    } else if (indexPath.section == SECTION_FULL_LOGOUT) {
-        cell = [self getFullLogoutButton:tableView withIndexPath:indexPath];
 	} else if (indexPath.section == SECTION_DEBUG) {
 		cell = [self getDebugButton:tableView withIndexPath:indexPath];
 	}
@@ -1412,9 +1405,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         case SECTION_LOGOUT:
             break;
 
-        case SECTION_FULL_LOGOUT:
-            break;
-            
         case SECTION_DEBUG:
             break;
 
