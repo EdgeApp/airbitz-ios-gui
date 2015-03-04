@@ -1805,7 +1805,10 @@ typedef enum eRequestType
 
 - (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)catString
 {
-    pickerTextView.textField.text = catString;
+    NSString *strPrefix;
+    strPrefix = [self categoryPrefix:catString];
+    pickerTextView.textField.text = [self categoryPrefixRemove:catString];
+    [self setCategoryButtonText:strPrefix];
     
     // add string to categories, update arrays
     NSInteger index = [self.arrayCategories indexOfObject:catString];
