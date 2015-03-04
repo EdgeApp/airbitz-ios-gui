@@ -209,7 +209,7 @@
                                                  initWithString:title
                                                  attributes:attr];
     // blue and bold text attributes
-    UIColor *color = [UIColor colorWithRed:126.5/255. green:202.5/255. blue:255/255. alpha:1.];
+    UIColor *color = [UIColor colorWithRed:60./255. green:140.5/255. blue:200/255. alpha:1.];
     UIFont *boldFont = [UIFont boldSystemFontOfSize:self.usernameSelector.button.titleLabel.font.pointSize];
     NSRange usernameTextRange = [title rangeOfString:username];
     [attributedText setAttributes:@{NSForegroundColorAttributeName:color,

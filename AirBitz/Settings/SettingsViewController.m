@@ -40,14 +40,13 @@
 #define SECTION_OPTIONS                 3
 #define SECTION_DEFAULT_EXCHANGE        4
 #define SECTION_LOGOUT                  5
-#define SECTION_FULL_LOGOUT             6
-#define SECTION_DEBUG                   7
+#define SECTION_DEBUG                   6
 
 // If we are in debug include the DEBUG section in settings
 #if (DEBUG || 1) // Always enable debug section for now
-#define SECTION_COUNT                   8
-#else 
 #define SECTION_COUNT                   7
+#else 
+#define SECTION_COUNT                   6
 #endif
 
 #define DENOMINATION_CHOICES            3
@@ -1191,10 +1190,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             return 1;
             break;
             
-        case SECTION_FULL_LOGOUT:
-            return 1;
-            break;
-            
         case SECTION_DEBUG:
             return 1;
             break;
@@ -1209,7 +1204,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
 	if ((indexPath.section == SECTION_OPTIONS) 
         || (indexPath.section == SECTION_LOGOUT)
-        || (indexPath.section == SECTION_FULL_LOGOUT)
             || (indexPath.section == SECTION_DEBUG))
 	{
 		return 47.0;
@@ -1220,7 +1214,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	if (section == SECTION_LOGOUT || section == SECTION_FULL_LOGOUT || section == SECTION_DEBUG)
+	if (section == SECTION_LOGOUT || section == SECTION_DEBUG)
 	{
 		return 0.0;
 	}
@@ -1266,8 +1260,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	UITableViewCell *cell;
     if (indexPath.section == SECTION_LOGOUT) {
 		cell = [self getLogoutButton:tableView withIndexPath:indexPath];
-    } else if (indexPath.section == SECTION_FULL_LOGOUT) {
-        cell = [self getFullLogoutButton:tableView withIndexPath:indexPath];
 	} else if (indexPath.section == SECTION_DEBUG) {
 		cell = [self getDebugButton:tableView withIndexPath:indexPath];
 	}
@@ -1413,9 +1405,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         case SECTION_LOGOUT:
             break;
 
-        case SECTION_FULL_LOGOUT:
-            break;
-            
         case SECTION_DEBUG:
             break;
 
@@ -1637,21 +1626,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                 [self.delegate SettingsViewControllerDone:self];
             });
         });
-    } else if (section == SECTION_FULL_LOGOUT) {
-            [self blockUser:YES];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [cell.button setTitle:@"Please Wait..." forState:UIControlStateNormal];
-                [[User Singleton] clear];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-                               {
-                                   [CoreBridge deletePINLogin];
-                               });
-                
-                dispatch_async(dispatch_get_main_queue(), ^(void){
-                    [self blockUser:NO];
-                    [self.delegate SettingsViewControllerDone:self];
-                });
-            });
     } else if (section == SECTION_DEBUG) {
         [self bringUpDebugView];
     }

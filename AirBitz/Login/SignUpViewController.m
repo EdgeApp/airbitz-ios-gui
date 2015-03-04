@@ -212,7 +212,7 @@
                         tABC_Error error;
                         ABC_ChangePasswordWithRecoveryAnswers([self.strUserName UTF8String],
                             [self.strAnswers UTF8String], [self.passwordTextField.text UTF8String], &error);
-                        _bSuccess = error.code;
+                        _bSuccess = error.code == ABC_CC_Ok;
                         _strReason = [Util errorMap:&error];
                         [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
                     });
@@ -732,8 +732,8 @@
     } else {
         [self dismissFading:NO];
 		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Account Sign In", @"Title of account signin error alert")
-							  message:[NSString stringWithFormat:@"Sign-in failed:\n%@", _strReason]
+							  initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signin error alert")
+							  message:[NSString stringWithFormat:@"Sign Up failed:\n%@", _strReason]
 							  delegate:nil
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
@@ -751,8 +751,7 @@
     {
         // set up the user password to the new one
         NSString *username = [User Singleton].name;
-        if (self.strUserName)
-        {
+        if (self.strUserName) {
             username = self.strUserName;
         }
         [CoreBridge stopWatchers];
