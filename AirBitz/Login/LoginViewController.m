@@ -29,7 +29,7 @@ typedef enum eLoginMode
     MODE_ENTERING_PASSWORD
 } tLoginMode;
 
-@interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, TwoFactorMenuViewControllerDelegate>
+@interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate, TwoFactorMenuViewControllerDelegate>
 {
     tLoginMode                      _mode;
     CGRect                          _originalContentFrame;
