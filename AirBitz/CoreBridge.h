@@ -55,6 +55,7 @@
 + (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet;
 + (NSString *)getPIN;
 + (bool)PINLoginExists;
++ (bool)PINLoginExists:(NSString *)username;
 + (void)deletePINLogin;
 + (void)setupLoginPIN;
 + (tABC_CC)PINLoginWithPIN:(NSString *)PIN;
