@@ -110,7 +110,7 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
                 tABC_Error error;
 
-                ABC_AcountAvailable([self.userNameTextField.text UTF8String], &error);
+                ABC_AccountAvailable([self.userNameTextField.text UTF8String], &error);
 
                 if (error.code == ABC_CC_Ok)
                 {
