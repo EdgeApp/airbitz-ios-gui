@@ -352,7 +352,14 @@
 
 - (IBAction)confirmRequest:(id)sender
 {
-    [self checkPassword];
+    [self checkConfirm];
+}
+
+- (void)checkConfirm
+{
+    _loadingSpinner.hidden = NO;
+    [_passwordTextField resignFirstResponder];
+    [Util checkPasswordAsync:_passwordTextField.text withSelector:@selector(doConfirmRequest:) controller:self];
 }
 
 - (void)doConfirmRequest:(NSNumber *)object
@@ -381,7 +388,14 @@
 
 - (IBAction)cancelRequest:(id)sender
 {
-    [self checkPassword];
+    [self checkCancel];
+}
+
+- (void)checkCancel
+{
+    _loadingSpinner.hidden = NO;
+    [_passwordTextField resignFirstResponder];
+    [Util checkPasswordAsync:_passwordTextField.text withSelector:@selector(doCancelRequest:) controller:self];
 }
 
 - (void)doCancelRequest:(NSNumber *)object
