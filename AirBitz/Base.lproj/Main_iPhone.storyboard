@@ -3465,7 +3465,7 @@
                                                     </connections>
                                                 </button>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_textfield.png" id="VjU-w1-oiT">
-                                                    <rect key="frame" x="11" y="14.5" width="253" height="30"/>
+                                                    <rect key="frame" x="11" y="15" width="253" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4141,7 +4141,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_top.png" id="BhX-No-chB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="45.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999961" y="0.49999999999999994" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4186,7 +4186,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="Dzq-3h-Adz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="45.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.49999999999999994" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4223,7 +4223,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="Hlz-Yq-T2I">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="45.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4259,7 +4259,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle.png" id="clC-N3-iKS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="45.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4295,7 +4295,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle_white.png" id="866-tQ-bOR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="45.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4343,7 +4343,7 @@ Scan the QR code using this device</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_cell_middle_white.png" id="ED4-SO-l2Q">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="45.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
@@ -4916,7 +4916,7 @@ Scan the QR code using this device</string>
                                         <color key="backgroundColor" red="0.85882359740000003" green="0.23529413339999999" blue="0.2117647231" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <size key="titleShadowOffset" width="0.0" height="1"/>
-                                        <state key="normal" title="Switch User">
+                                        <state key="normal" title="Login With Password">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
@@ -5542,7 +5542,7 @@ Scan the QR code using this device</string>
         <image name="BLE_connected.png" width="200" height="168"/>
         <image name="BLE_photo.png" width="45" height="45"/>
         <image name="UIButtonBarRefresh.png" width="18" height="22"/>
-        <image name="back_arrow.png" width="37" height="37"/>
+        <image name="back_arrow.png" width="30" height="30"/>
         <image name="background-errormessage.png" width="200" height="168"/>
         <image name="background.jpg" width="320" height="568"/>
         <image name="background_header.png" width="320" height="568"/>

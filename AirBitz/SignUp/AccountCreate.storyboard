@@ -34,7 +34,7 @@
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUo-Zx-2Wc" userLabel="Button - back">
-                                        <rect key="frame" x="8" y="17" width="90" height="37"/>
+                                        <rect key="frame" x="8" y="23" width="90" height="37"/>
                                         <inset key="imageEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" image="back_arrow.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -232,7 +232,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjZ-Dd-AuW" userLabel="Button - back">
-                                        <rect key="frame" x="8" y="17" width="90" height="37"/>
+                                        <rect key="frame" x="8" y="23" width="90" height="37"/>
                                         <inset key="imageEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" image="back_arrow.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -776,7 +776,7 @@ No one, including Airbitz, has any access to this information.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="back_arrow.png" width="37" height="37"/>
+        <image name="back_arrow.png" width="30" height="30"/>
         <image name="background.jpg" width="320" height="568"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
         <image name="enable-camera.png" width="277" height="205"/>
