@@ -10,7 +10,7 @@
 #import "Util.h"
 #import "User.h"
 
-@interface SignUpUsernameController () <UITextFieldDelegate>
+@interface SignUpUsernameController () <UITextFieldDelegate, FadingAlertViewDelegate>
 {
     UITextField                     *_activeTextField;
     FadingAlertView                 *_fadingAlert;
@@ -106,33 +106,25 @@
         // check the username and pin field
         if ([self fieldsAreValid] == YES) {
 
-            // XXX - Tim, add check for valid username here
-
-//        _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-//        _fadingAlert.message = NSLocalizedString(@"Checking availability of username", nil);
-//        _fadingAlert.fadeDuration = 0;
-//        _fadingAlert.fadeDelay = 0;
-//        [_fadingAlert blockModal:YES];
-//        [_fadingAlert showSpinner:YES];
-//        [_fadingAlert show];
-//
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-//            tABC_Error error;
-//            ABC_CreateAccount([self.userNameTextField.text UTF8String], [self.passwordTextField.text UTF8String], &error);
-//            if (error.code == ABC_CC_Ok) {
-//                ABC_SetPIN([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String],
-//                        [self.pinTextField.text UTF8String], &error);
-//            }
-//            _bSuccess = error.code;
-//            _strReason = [Util errorMap:&error];
-//            [self performSelectorOnMainThread:@selector(checkUserNameComplete) withObject:nil waitUntilDone:FALSE];
-//        });
-
-            [self.userNameTextField resignFirstResponder];
-
-            super.manager.strUserName = [NSString stringWithFormat:@"%@",self.userNameTextField.text];
-
-            [super next];
+            tABC_Error error;
+            tABC_CC cc = ABC_AcountAvailable((const char*)[self.userNameTextField.text UTF8String], &error);
+            
+            if(cc == ABC_CC_Ok) {
+                [self.userNameTextField resignFirstResponder];
+                
+                super.manager.strUserName = [NSString stringWithFormat:@"%@",self.userNameTextField.text];
+                
+                [super next];
+            }
+            else {
+                _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+                _fadingAlert.message = NSLocalizedString(@"Username not available. Try another name.", nil);
+                _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
+                _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
+                [_fadingAlert blockModal:NO];
+                [_fadingAlert showSpinner:NO];
+                [_fadingAlert showFading];
+            }
         }
     }
 
