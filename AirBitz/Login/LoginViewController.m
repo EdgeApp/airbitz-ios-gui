@@ -49,6 +49,8 @@ typedef enum eLoginMode
     PasswordRecoveryViewController  *_passwordRecoveryController;
     TwoFactorMenuViewController     *_tfaMenuViewController;
     FadingAlertView                 *_fadingAlert;
+    float                           _keyboardFrameOriginY;
+
 }
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
 @property (weak, nonatomic) IBOutlet UIView             *credentialsView;
@@ -373,6 +375,14 @@ typedef enum eLoginMode
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     [self updateDisplayForKeyboard:YES];
+
+    //NSLog(@"Keyboard will show for SignUpView");
+    NSDictionary *userInfo = [notification userInfo];
+    CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
+    _keyboardFrameOriginY = keyboardFrame.origin.y;
+
+
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -382,6 +392,7 @@ typedef enum eLoginMode
          _activeTextField = nil;
     }
     [self updateDisplayForKeyboard:NO];
+    _keyboardFrameOriginY = 0.0;
 }
 
 - (void)updateDisplayForKeyboard:(BOOL)up
@@ -780,6 +791,27 @@ typedef enum eLoginMode
     [alert show];
     [self.usernameSelector dismissPopupPicker];
 }
+
+- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
+{
+    CGRect frame = pickerTextView.popupPicker.frame;
+    pickerTextView.popupPicker.frame = frame;
+
+    CGRect pickerWindowFrame = [self.contentView convertRect:frame toView:self.view.window];
+
+    // Shrink the popup if it would be behind the keyboard.
+
+    float overlap = _keyboardFrameOriginY - (pickerWindowFrame.origin.y + pickerWindowFrame.size.height);
+
+    if (overlap < 0)
+    {
+        frame.size.height += overlap;
+    }
+    pickerTextView.popupPicker.frame = frame;
+
+}
+
+
 
 #pragma mark - UIAlertView Delegate
 
