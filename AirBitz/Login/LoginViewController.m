@@ -29,7 +29,8 @@ typedef enum eLoginMode
     MODE_ENTERING_PASSWORD
 } tLoginMode;
 
-@interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate, TwoFactorMenuViewControllerDelegate>
+@interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
+    TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate >
 {
     tLoginMode                      _mode;
     CGRect                          _originalContentFrame;
@@ -41,7 +42,8 @@ typedef enum eLoginMode
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
     NSString                        *_strReason;
-    tABC_CC                         _resultCode;                            
+    NSString                        *_account;
+    tABC_CC                         _resultCode;
     SignUpManager                   *_signupManager;
     UITextField                     *_activeTextField;
     PasswordRecoveryViewController  *_passwordRecoveryController;
@@ -724,9 +726,7 @@ typedef enum eLoginMode
         }
         default:
         {
-            tABC_Error temp;
-            temp.code = result;
-            [self showFadingError:[Util errorMap:&temp]];
+            [self showFadingError:[Util errorMap:&error]];
             break;
         }
     }
@@ -752,20 +752,47 @@ typedef enum eLoginMode
     }
 }
 
-- (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
+- (void)removeAccount:(NSString *)account
 {
     // TODO delete the account, update array - current implementation is fake
-    
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    for(NSString *str in self.arrayAccounts)
-    {
-        if(![str isEqualToString:string])
-        {
-            [array addObject:str];
-        }
+    tABC_Error error;
+    tABC_CC cc = ABC_AccountDelete((const char*)[account UTF8String], &error);
+    if(cc == ABC_CC_Ok) {
+        [self getAllAccounts];
+        [self.usernameSelector updateChoices:self.arrayAccounts];
     }
-    [self.usernameSelector dismissPopupPicker];
-    [self.usernameSelector updateChoices:array];
+    else {
+        [self showFadingError:[Util errorMap:&error]];
+    }
 }
+
+- (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
+{
+    _account = string;
+    NSString *message = [NSString stringWithFormat:@"Delete %@ on this device only?",
+                       string];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:NSLocalizedString(@"Delete Account", nil)
+                          message:NSLocalizedString(message, nil)
+                          delegate:self
+                          cancelButtonTitle:@"No"
+                          otherButtonTitles:@"Yes", nil];
+    [alert show];
+    [self.usernameSelector dismissPopupPicker];
+}
+
+#pragma mark - UIAlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self.usernameSelector.textField resignFirstResponder];
+    // if they said they wanted to delete the account
+    if (buttonIndex == 1)
+    {
+        [self removeAccount:_account];
+        self.usernameSelector.textField.text = @"";
+    }
+}
+
 
 @end
