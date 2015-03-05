@@ -1022,7 +1022,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         else if (indexPath.row == ROW_PIN_RELOGIN)
         {
 			cell.name.text = NSLocalizedString(@"PIN Re-Login", @"settings text");
-            [cell.state setOn:!_pAccountSettings->bDisablePINLogin animated:NO];
+            if(_pAccountSettings) {
+                [cell.state setOn:!_pAccountSettings->bDisablePINLogin animated:NO];
+            }
         }
     }
 	
@@ -1099,21 +1101,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     cell.tag = (indexPath.section << 8) | (indexPath.row);
 
 	return cell;
-}
-
-- (ButtonOnlyCell *)getFullLogoutButton:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
-{
-    ButtonOnlyCell *cell;
-    static NSString *cellIdentifier = @"ButtonOnlyCell";
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (nil == cell)
-    {
-        cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    cell.delegate = self;
-    [cell.button setTitle:NSLocalizedString(@"Full Logout (require password)", @"settings text") forState:UIControlStateNormal];
-    cell.tag = (indexPath.section << 8) | (indexPath.row);
-    return cell;
 }
 
 - (ButtonOnlyCell *)getLogoutButton:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
