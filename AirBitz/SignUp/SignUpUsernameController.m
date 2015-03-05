@@ -106,36 +106,46 @@
         // check the username and pin field
         if ([self fieldsAreValid] == YES) {
 
-            // XXX - Tim, add check for valid username here
 
-//        _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-//        _fadingAlert.message = NSLocalizedString(@"Checking availability of username", nil);
-//        _fadingAlert.fadeDuration = 0;
-//        _fadingAlert.fadeDelay = 0;
-//        [_fadingAlert blockModal:YES];
-//        [_fadingAlert showSpinner:YES];
-//        [_fadingAlert show];
-//
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-//            tABC_Error error;
-//            ABC_CreateAccount([self.userNameTextField.text UTF8String], [self.passwordTextField.text UTF8String], &error);
-//            if (error.code == ABC_CC_Ok) {
-//                ABC_SetPIN([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String],
-//                        [self.pinTextField.text UTF8String], &error);
-//            }
-//            _bSuccess = error.code;
-//            _strReason = [Util errorMap:&error];
-//            [self performSelectorOnMainThread:@selector(checkUserNameComplete) withObject:nil waitUntilDone:FALSE];
-//        });
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                tABC_Error error;
 
-            [self.userNameTextField resignFirstResponder];
+                ABC_AcountAvailable([self.userNameTextField.text UTF8String], &error);
 
-            super.manager.strUserName = [NSString stringWithFormat:@"%@",self.userNameTextField.text];
+                if (error.code == ABC_CC_Ok)
+                {
+                    _bSuccess = true;
+                }
+                else
+                {
+                    _bSuccess = false;
+                }
+                _strReason = [Util errorMap:&error];
 
-            [super next];
+                [self performSelectorOnMainThread:@selector(checkUsernameComplete) withObject:nil waitUntilDone:FALSE];
+            });
         }
     }
 
+}
+
+- (void)checkUsernameComplete
+{
+    if (_bSuccess) {
+        [self.userNameTextField resignFirstResponder];
+        super.manager.strUserName = [NSString stringWithFormat:@"%@",self.userNameTextField.text];
+        [super next];
+    } else {
+        [self dismissFading:NO];
+        UIAlertView *alert = [[UIAlertView alloc]
+                initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signin error alert")
+                      message:[NSString stringWithFormat:@"Sign-Up failed:\n%@", _strReason]
+                     delegate:nil
+            cancelButtonTitle:@"OK"
+            otherButtonTitles:nil];
+        [alert show];
+    }
+    [self blockUser:NO];
 }
 
 - (IBAction)buttonBlockerTouched:(id)sender
@@ -330,30 +340,6 @@
 
 
 #pragma mark - ABC Callbacks
-
-- (void)checkUserNameComplete
-{
-    if (_bSuccess) {
-//        [User login:self.userNameTextField.text
-//           password:self.passwordTextField.text];
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-//        {
-//            [CoreBridge setupLoginPIN];
-//        });
-        [self next];
-    } else {
-        [self dismissFading:NO];
-        UIAlertView *alert = [[UIAlertView alloc]
-                initWithTitle:NSLocalizedString(@"Account Sign In", @"Title of account signin error alert")
-                      message:[NSString stringWithFormat:@"Sign-in failed:\n%@", _strReason]
-                     delegate:nil
-            cancelButtonTitle:@"OK"
-            otherButtonTitles:nil];
-        [alert show];
-    }
-    [self blockUser:NO];
-}
-
 
 #pragma mark - UIAlertView delegates
 
