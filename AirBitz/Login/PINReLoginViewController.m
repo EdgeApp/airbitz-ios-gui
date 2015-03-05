@@ -26,6 +26,7 @@
     FadingAlertView                 *_fadingAlert;
 }
 @property (nonatomic, weak) IBOutlet UIView      *contentView;
+
 @property (nonatomic, weak) IBOutlet UIButton    *backButton;
 @property (nonatomic, weak) IBOutlet UIImageView *swipeRightArrow;
 @property (nonatomic, weak) IBOutlet UILabel     *swipeText;
@@ -500,11 +501,14 @@
 - (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
 {
     [self.usernameSelector.textLabel resignFirstResponder];
+    [self.PINCodeView resignFirstResponder];
+
 }
 
 - (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view
 {
-    
+    [self.PINCodeView becomeFirstResponder];
+
 }
 
 
