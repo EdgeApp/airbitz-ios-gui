@@ -130,7 +130,15 @@
 
 - (void)showTable
 {
-	float yOriginOffset = self.button.frame.size.height / 2;
+    float yOriginOffset;
+    if ([self.textLabel.text isEqualToString:@""])
+    {
+         yOriginOffset = self.button.frame.size.height;
+    }
+    else
+    {
+        yOriginOffset = self.button.frame.size.height / 2;
+    }
 	
 	CGRect tableFrame = self.button.frame;
 	tableFrame.origin.x += 1.0;
@@ -158,8 +166,7 @@
 		 CGRect frame = _selectionTable.frame;
 		 float originalHeight = frame.size.height;
 
-		 frame.size.height = self.arrayItemsToSelect.count * TABLE_ROW_HEIGHT + (self.button.frame.size.height / 2);
-		 
+		 frame.size.height = self.arrayItemsToSelect.count * TABLE_ROW_HEIGHT + yOriginOffset;
 		 
 		 //constrain frame to window (in cases when table has a ton of items) (centered vertically)
 		 CGRect frameInWindow = [_selectionTable.superview convertRect:frame toView:self.window];

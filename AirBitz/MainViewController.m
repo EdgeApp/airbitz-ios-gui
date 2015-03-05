@@ -20,6 +20,7 @@
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
 #import "TwoFactorScanViewController.h"
+#import "AddressRequestController.h"
 #import "User.h"
 #import "Config.h"
 #import "Util.h"
@@ -47,12 +48,13 @@ typedef enum eAppMode
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, InfoViewDelegate,
+                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate,
                                   MFMailComposeViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
+	AddressRequestController    *_addressRequestController;
 	SendViewController          *_sendViewController;
 	WalletsViewController       *_walletsViewController;
 	LoginViewController         *_loginViewController;
@@ -183,10 +185,8 @@ typedef enum eAppMode
 #else
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHideTabBar:) name:NOTIFICATION_SHOW_TAB_BAR object:nil];
 #endif
-    // Setup Business Directory
-    [self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
 
-    // Switch to Wallets Business Directory
+    // Switch to Wallets
     [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
     // Start on the Wallets tab
     _appMode = APP_MODE_WALLETS;
@@ -562,6 +562,18 @@ typedef enum eAppMode
     }
 }
 
+- (void)tabVarView:(TabBarView *)view selectedLockedSubview:(UIView *)subview
+{
+    if (!_fadingAlert) {
+        _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+        _fadingAlert.message = NSLocalizedString(@"Please wait until your wallets are loaded.", nil);
+        _fadingAlert.fadeDuration = 2;
+        _fadingAlert.fadeDelay = 2;
+        [_fadingAlert blockModal:NO];
+        [_fadingAlert show];
+    }
+}
+
 #pragma mark - RequestViewControllerDelegates
 
 -(void)RequestViewControllerDone:(RequestViewController *)vc
@@ -578,8 +590,8 @@ typedef enum eAppMode
 {
     [self loadUserViews];
 
-	_appMode = APP_MODE_DIRECTORY;
-	[self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
+	_appMode = APP_MODE_WALLETS;
+	[self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
 }
 
 #pragma mark - LoginViewControllerDelegates
@@ -594,9 +606,7 @@ typedef enum eAppMode
 
 - (void)loginViewControllerDidLogin:(BOOL)bNewAccount
 {
-    NSMutableArray *wallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWalletUUIDs:wallets];
-    if (bNewAccount || [wallets count] == 0) {
+    if (bNewAccount) {
         _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
         _fadingAlert.message = NSLocalizedString(@"Creating and securing wallet", nil);
         _fadingAlert.fadeDuration = 2;
@@ -625,9 +635,14 @@ typedef enum eAppMode
     [self checkUserReview];
 }
 
+- (void)loginViewControllerDidSwitchAccount
+{
+    [self showPINLogin:NO];
+}
+
 - (void)checkUserReview
 {
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC);
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
         if([User offerUserReview]) {
             _userReviewAlert = [[UIAlertView alloc]
@@ -838,6 +853,10 @@ typedef enum eAppMode
 
 - (void)PINReLoginViewControllerDidLogin
 {
+    _appMode = APP_MODE_WALLETS;
+    [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
+    [self showTabBarAnimated:YES];
+    
     // After login, reset all the main views
     [self loadUserViews];
     
@@ -1071,7 +1090,6 @@ typedef enum eAppMode
 
 - (void)twoFactorScanViewControllerDone:(TwoFactorScanViewController *)controller withBackButton:(BOOL)bBack
 {
-    BOOL success = controller.bSuccess;
     [Util animateOut:controller parentController:self complete:^(void) {
         _tfaScanViewController = nil;
     }];
@@ -1086,17 +1104,37 @@ typedef enum eAppMode
 
 - (void)processBitcoinURI:(NSURL *)uri
 {
-    if ([User isLoggedIn]) {
-        [_sendViewController resetViews];
-        
-        _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
-        [_sendViewController processURI];
+    if ([uri.scheme isEqualToString:@"bitcoin"]) {
+        [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
+        if ([User isLoggedIn]) {
+            [_sendViewController resetViews];
+            _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
+            [_sendViewController processURI];
+        } else {
+            _uri = uri;
+        }
+    } else if ([uri.scheme isEqualToString:@"bitcoin-ret"] || [uri.host isEqualToString:@"x-callback-url"]) {
+        if ([User isLoggedIn]) {
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+            _addressRequestController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AddressRequestController"];
+            _addressRequestController.url = uri;
+            _addressRequestController.delegate = self;
+            [Util animateController:_addressRequestController parentController:self];
+            [self showTabBarAnimated:YES];
+            _uri = nil;
+        } else {
+            _uri = uri;
+        }
     }
-    else {
-        _uri = uri;
-    }
-    
-    [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
+}
+
+-(void)AddressRequestControllerDone:(AddressRequestController *)vc
+{
+    [Util animateOut:_addressRequestController parentController:self complete:^(void) {
+        _addressRequestController = nil;
+    }];
+    _uri = nil;
+    [self showTabBarAnimated:NO];
 }
 
 - (void)loggedOffRedirect:(NSNotification *)notification

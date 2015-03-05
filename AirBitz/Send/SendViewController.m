@@ -47,7 +47,6 @@
 #import "LocalSettings.h"
 #import "FadingAlertView.h"
 
-#define WALLET_BUTTON_WIDTH         210
 #define BLE_TIMEOUT                 1.0
 
 #define POPUP_PICKER_LOWEST_POINT   360
@@ -1327,7 +1326,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             [alert show];
         }
 
-		ABC_FreeURIInfo(uri);
+        if (uri != NULL) {
+            ABC_FreeURIInfo(uri);
+            uri = NULL;
+        }
         
 		break; //just grab first one
 	}
@@ -1690,9 +1692,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
 	}
 
-    if (uri != NULL)
-    {
+    if (uri != NULL) {
         ABC_FreeURIInfo(uri);
+        uri = NULL;
     }
 }
 

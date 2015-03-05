@@ -26,4 +26,5 @@
 
 @optional
 - (void)tabVarView:(TabBarView *)view selectedSubview:(UIView *)subview reselected:(BOOL)bReselected;
+- (void)tabVarView:(TabBarView *)view selectedLockedSubview:(UIView *)subview;
 @end

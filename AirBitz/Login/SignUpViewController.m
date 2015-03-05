@@ -162,9 +162,6 @@
             // check the username and pin field
             if ([self fieldsAreValid] == YES)
             {
-                tABC_Error Error;
-                tABC_CC result = ABC_CC_Ok;
-
                 // if we are signing up a new account
                 if (_mode == SignUpMode_SignUp)
                 {
@@ -175,76 +172,65 @@
                     [_fadingAlert blockModal:YES];
                     [_fadingAlert showSpinner:YES];
                     [_fadingAlert show];
-                    result = ABC_CreateAccount([self.userNameTextField.text UTF8String],
-                                               [self.passwordTextField.text UTF8String],
-                                               [self.pinTextField.text UTF8String],
-                                               ABC_SignUp_Request_Callback,
-                                               (__bridge void *)self,
-                                               &Error);
+
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                        tABC_Error error;
+                        ABC_CreateAccount([self.userNameTextField.text UTF8String], [self.passwordTextField.text UTF8String], &error);
+                        if (error.code == ABC_CC_Ok) {
+                            ABC_SetPIN([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String],
+                                [self.pinTextField.text UTF8String], &error);
+                        }
+                        _bSuccess = error.code;
+                        _strReason = [Util errorMap:&error];
+                        [self performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
+                    });
                 }
                 else if (_mode == SignUpMode_ChangePassword)
                 {
                     // get their old pen
                     [self blockUser:YES];
-
-                    result = ABC_CC_Ok;
                     // We post this to the Data Sync queue, so password is updated in between sync's
                     [CoreBridge postToSyncQueue:^(void) {
-                        tABC_Error Error;
+                        tABC_Error error;
                         [CoreBridge stopWatchers];
                         [CoreBridge stopQueues];
 
-                        char *szOldPIN = NULL;
                         // NOTE: userNameTextField is repurposed for current password
-                        ABC_GetPIN([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String], &szOldPIN, nil);
-                        tABC_CC result = ABC_ChangePassword([[User Singleton].name UTF8String],
-                                                    [self.userNameTextField.text UTF8String],
-                                                    [self.passwordTextField.text UTF8String],
-                                                    szOldPIN,
-                                                    NULL,
-                                                    NULL,
-                                                    &Error);
-                        free(szOldPIN);
-
+                        ABC_ChangePassword([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String],
+                            [self.passwordTextField.text UTF8String], &error);
                         [CoreBridge setupLoginPIN];
 
-                        _bSuccess = result == ABC_CC_Ok;
-                        _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&Error]];
-
+                        _bSuccess = error.code == ABC_CC_Ok;
+                        _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&error]];
                         [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
                     }];
                 }
                 else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
                 {
                     [self blockUser:YES];
-                    result = ABC_ChangePasswordWithRecoveryAnswers([self.strUserName UTF8String],
-                                                                   [self.strAnswers UTF8String],
-                                                                   [self.passwordTextField.text UTF8String],
-                                                                   [self.pinTextField.text UTF8String],
-                                                                   ABC_SignUp_Request_Callback,
-                                                                   (__bridge void *)self,
-                                                                   &Error);
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                        tABC_Error error;
+                        ABC_ChangePasswordWithRecoveryAnswers([self.strUserName UTF8String],
+                            [self.strAnswers UTF8String], [self.passwordTextField.text UTF8String], &error);
+                        _bSuccess = error.code == ABC_CC_Ok;
+                        _strReason = [Util errorMap:&error];
+                        [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
+                    });
                 }
                 else
                 {
-                    result = ABC_SetPIN([[User Singleton].name UTF8String],
-                                        [self.userNameTextField.text UTF8String],
-                                        [self.pinTextField.text UTF8String],
-                                        &Error);
-                }
-
-                // if success
-                if (ABC_CC_Ok == result)
-                {
-                    if (_mode == SignUpMode_ChangePIN)
+                    tABC_Error error;
+                    ABC_SetPIN([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String],
+                        [self.pinTextField.text UTF8String], &error);
+                    if (ABC_CC_Ok == error.code)
                     {
                         // no callback on this one so tell them it was a success
                         UIAlertView *alert = [[UIAlertView alloc]
-                                              initWithTitle:self.labelTitle.text
-                                              message:NSLocalizedString(@"PIN successfully changed.", @"")
-                                              delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
+                                                initWithTitle:self.labelTitle.text
+                                                message:NSLocalizedString(@"PIN successfully changed.", @"")
+                                                delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
                         [alert show];
 
                         // all other modes must wait for callback before PIN login setup
@@ -252,21 +238,6 @@
                             [CoreBridge setupLoginPIN];
                         });
                     }
-                }
-                else
-                {
-                    [self blockUser:NO];
-                    [self.activityView stopAnimating];
-                    [Util printABC_Error:&Error];
-                    UIAlertView *alert = [[UIAlertView alloc]
-                                          initWithTitle:self.labelTitle.text
-                                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                                   self.labelTitle.text,
-                                                   [Util errorMap:&Error]]
-                                          delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-                    [alert show];
                 }
             }
         }
@@ -761,8 +732,8 @@
     } else {
         [self dismissFading:NO];
 		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Account Sign In", @"Title of account signin error alert")
-							  message:[NSString stringWithFormat:@"Sign-in failed:\n%@", _strReason]
+							  initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signin error alert")
+							  message:[NSString stringWithFormat:@"Sign Up failed:\n%@", _strReason]
 							  delegate:nil
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
@@ -780,8 +751,7 @@
     {
         // set up the user password to the new one
         NSString *username = [User Singleton].name;
-        if (self.strUserName)
-        {
+        if (self.strUserName) {
             username = self.strUserName;
         }
         [CoreBridge stopWatchers];
@@ -846,24 +816,6 @@
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
         [alert show];
-    }
-}
-
-void ABC_SignUp_Request_Callback(const tABC_RequestResults *pResults)
-{
-    if (pResults)
-    {
-        SignUpViewController *controller = (__bridge id)pResults->pData;
-        controller.bSuccess = (BOOL)pResults->bSuccess;
-        controller.strReason = [Util errorMap:&(pResults->errorInfo)];
-        if (pResults->requestType == ABC_RequestType_CreateAccount)
-        {
-            [controller performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
-        }
-        else if (pResults->requestType == ABC_RequestType_ChangePassword)
-        {
-            [controller performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
-        }
     }
 }
 

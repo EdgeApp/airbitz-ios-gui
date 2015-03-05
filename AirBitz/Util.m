@@ -193,7 +193,11 @@
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
     UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:identifier];
+    return [Util animateController:controller parentController:parent];
+}
 
++ (UIViewController *)animateController:(UIViewController *)controller parentController:(UIViewController *)parent
+{
     CGRect frame = parent.view.bounds;
     frame.origin.x = frame.size.width;
     controller.view.frame = frame;
@@ -312,6 +316,40 @@
     textField.layer.cornerRadius = 5;
     textField.clipsToBounds = YES;
 
+}
+
++ (void)checkPasswordAsync:(NSString *)password withSelector:(SEL)selector controller:(UIViewController *)controller
+{
+    if (!password || [password length] == 0) {
+        [controller performSelectorOnMainThread:selector
+            withObject:[NSNumber numberWithBool:NO] waitUntilDone:NO];
+    } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            BOOL matched = [CoreBridge passwordOk:password];
+            [controller performSelectorOnMainThread:selector
+                withObject:[NSNumber numberWithBool:matched] waitUntilDone:NO];
+        });
+    }
+}
+
++ (NSString *)urlencode:(NSString *)url
+{
+    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    url = [url stringByReplacingOccurrencesOfString:@":" withString:@"%3A"];
+    url = [url stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
+    return [url stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
+}
+
++ (NSMutableDictionary *)getUrlParameters:(NSURL *)url
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *param in [[url query] componentsSeparatedByString:@"&"]) {
+        NSArray *split = [param componentsSeparatedByString:@"="];
+        if ([split count] > 1) {
+            [params setValue:[split[1] stringByRemovingPercentEncoding] forKey:split[0]];
+        }
+    }
+    return params;
 }
 
 @end

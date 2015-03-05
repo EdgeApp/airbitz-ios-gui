@@ -278,8 +278,8 @@
 /* Class = "IBUILabel"; text = "4 Digit PIN"; ObjectID = "ScE-Ny-R3i"; */
 "ScE-Ny-R3i.text" = "4 Digit PIN";
 
-/* Class = "IBUIButton"; normalTitle = "Switch User"; ObjectID = "Szb-Pc-bx6"; */
-"Szb-Pc-bx6.normalTitle" = "Switch User";
+/* Class = "IBUIButton"; normalTitle = "Login With Password"; ObjectID = "Szb-Pc-bx6"; */
+"Szb-Pc-bx6.normalTitle" = "Login With Password";
 
 /* Class = "IBUITextField"; placeholder = "User Name"; ObjectID = "TCB-w9-Wgd"; */
 "TCB-w9-Wgd.placeholder" = "User Name";

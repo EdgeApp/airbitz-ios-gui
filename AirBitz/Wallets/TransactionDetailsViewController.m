@@ -416,6 +416,7 @@ typedef enum eRequestType
                                                fromCategories:nil
                                                   selectedRow:-1
                                                     withWidth:PICKER_WIDTH
+                                                withAccessory:nil
                                                 andCellHeight:PICKER_CELL_HEIGHT
                                 ];
     self.categoryPopupPicker.userData = nil;
@@ -467,33 +468,14 @@ typedef enum eRequestType
 
     [self resignAllResponders];
 
-    bool doAddCategory = true;
-    // run through each type
-
-    if ([self.pickerTextCategory.textField.text isEqualToString: @""])
-    {
-        doAddCategory = false;
-    }
-
-    if (doAddCategory)
-    {
-        NSMutableString *strFullCategory = [[NSMutableString alloc] init];
-        [strFullCategory appendString:self.categoryButton.titleLabel.text];
-        [strFullCategory appendString:@":"];
-        [strFullCategory appendString:self.pickerTextCategory.textField.text];
-         
-        // add the category if we didn't have it
-        [self addCategory: strFullCategory];
+    NSMutableString *strFullCategory = [[NSMutableString alloc] init];
+    [strFullCategory appendString:self.categoryButton.titleLabel.text];
+    [strFullCategory appendString:@":"];
+    [strFullCategory appendString:self.pickerTextCategory.textField.text];
         
-        self.transaction.strCategory = strFullCategory;
-        
-//        self.transaction.strCategory = [self.transaction.strCategory stringByReplacingOccurrencesOfString:self.transaction.strCategory withString:strFullCategory];
-    }
-    else
-    {
-        self.transaction.strCategory = @"";
-    }
-
+    // add the category if we didn't have it
+    [self addCategory: strFullCategory];
+    self.transaction.strCategory = strFullCategory;
     self.transaction.strName = [self.nameTextField text];
     self.transaction.strNotes = [self.notesTextView text];
     
@@ -1821,9 +1803,12 @@ typedef enum eRequestType
      }];
 }
 
-- (void)pickerTextViewDidAddCategory:(PickerTextView *)pickerTextView categoryString:(NSString *)catString
+- (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)catString
 {
-    pickerTextView.textField.text = catString;
+    NSString *strPrefix;
+    strPrefix = [self categoryPrefix:catString];
+    pickerTextView.textField.text = [self categoryPrefixRemove:catString];
+    [self setCategoryButtonText:strPrefix];
     
     // add string to categories, update arrays
     NSInteger index = [self.arrayCategories indexOfObject:catString];

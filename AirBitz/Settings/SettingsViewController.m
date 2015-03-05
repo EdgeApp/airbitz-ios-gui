@@ -1101,7 +1101,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	return cell;
 }
 
-- (ButtonOnlyCell *)getButtonOnlyCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
+- (ButtonOnlyCell *)getFullLogoutButton:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
 {
     ButtonOnlyCell *cell;
     static NSString *cellIdentifier = @"ButtonOnlyCell";
@@ -1111,10 +1111,26 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     cell.delegate = self;
-    [cell.button setTitle:NSLocalizedString(@"Log Out", @"settings text") forState:UIControlStateNormal];
+    [cell.button setTitle:NSLocalizedString(@"Full Logout (require password)", @"settings text") forState:UIControlStateNormal];
     cell.tag = (indexPath.section << 8) | (indexPath.row);
     return cell;
 }
+
+- (ButtonOnlyCell *)getLogoutButton:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
+{
+    ButtonOnlyCell *cell;
+    static NSString *cellIdentifier = @"ButtonOnlyCell";
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.delegate = self;
+    [cell.button setTitle:NSLocalizedString(@"Logout", @"settings text") forState:UIControlStateNormal];
+    cell.tag = (indexPath.section << 8) | (indexPath.row);
+    return cell;
+}
+
 
 - (ButtonOnlyCell *)getDebugButton:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
 {
@@ -1173,7 +1189,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         case SECTION_LOGOUT:
             return 1;
             break;
-
+            
         case SECTION_DEBUG:
             return 1;
             break;
@@ -1187,7 +1203,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if ((indexPath.section == SECTION_OPTIONS) 
-            || (indexPath.section == SECTION_LOGOUT)
+        || (indexPath.section == SECTION_LOGOUT)
             || (indexPath.section == SECTION_DEBUG))
 	{
 		return 47.0;
@@ -1243,7 +1259,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
 	UITableViewCell *cell;
     if (indexPath.section == SECTION_LOGOUT) {
-		cell = [self getButtonOnlyCellForTableView:tableView withIndexPath:indexPath];
+		cell = [self getLogoutButton:tableView withIndexPath:indexPath];
 	} else if (indexPath.section == SECTION_DEBUG) {
 		cell = [self getDebugButton:tableView withIndexPath:indexPath];
 	}
@@ -1585,6 +1601,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                                               fromCategories:nil
                                               selectedRow:curChoice
                                                 withWidth:PICKER_WIDTH
+                                            withAccessory:nil
                                             andCellHeight:PICKER_CELL_HEIGHT
                             ];
         self.popupPicker.userData = cell;
@@ -1604,11 +1621,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [cell.button setTitle:@"Please Wait..." forState:UIControlStateNormal];
             [[User Singleton] clear];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-            {
-                [CoreBridge deletePINLogin];
-            });
-
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [self blockUser:NO];
                 [self.delegate SettingsViewControllerDone:self];
