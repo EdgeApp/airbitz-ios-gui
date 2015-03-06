@@ -132,8 +132,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:nil];
 
-    [self updateDisplayLayout];
-
     _bUsingImagePicker = NO;
 	
 	self.flashSelector.delegate = self;
@@ -1163,34 +1161,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)resignAllResonders
 {
     [self.pickerTextSendTo.textField resignFirstResponder];
-}
-
-- (void)updateDisplayLayout
-{
-    // if we are on a smaller screen
-    if (IS_IPHONE4 )
-    {
-        // be prepared! lots and lots of magic numbers here to jam the controls to fit on a small screen
-
-        CGRect frame;
-
-        /*
-        // put the flash view at the bottom
-        frame = self.imageFlashFrame.frame;
-        frame.size.height = 60;
-        frame.origin.y = self.view.frame.size.height - frame.size.height + 0.0;
-        self.imageFlashFrame.frame = frame;
-
-        frame = self.flashSelector.frame;
-        frame.origin.y = self.imageFlashFrame.frame.origin.y + 8.0;
-        frame.size.height = 48.0;
-        self.flashSelector.frame = frame;
-*/
-        // put the scan frame bottom right to the top of the flash frame
-        frame = self.scanFrame.frame;
-        frame.size.height = 275;
-        self.scanFrame.frame = frame;
-    }
 }
 
 - (void)loadWalletInfo
