@@ -734,6 +734,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 					}
 				}
 			}
+            else
+            {
+                // Send device name
+                fullName = [[UIDevice currentDevice] name];
+
+            }
 			
 			[peripheral writeValue:[fullName dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
 			
