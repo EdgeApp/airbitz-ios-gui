@@ -16,6 +16,8 @@
 #import "ABC.h"
 
 #define OTP_NOTIFICATION          @"otp_notification"
+#define OTP_TIME                  @"otp_time"
+#define OTP_REPEAT_PERIOD         60 * 60 * 24
 #define NOTIFICATION_SEEN_KEY     @"viewed"
 #define NOTIFICATION_SHOWN_IN_APP @"shown_in_app"
 
@@ -184,19 +186,27 @@ static NotificationChecker *singleton = nil;
         if (!username || ![username length]) {
             continue;
         }
-        // If there is already an OTP notification, do not add another
+        // If there is already an OTP notification, then if it's over a day old, replace it, else ignore it
         for (NSDictionary *d in [LocalSettings controller].otpNotifications) {
             if ([[d objectForKey:@"id"] isEqualToString:username]) {
-                goto exit;
+                double currentTime = [[NSDate date] timeIntervalSince1970]; // in seconds
+                double notifBegan = [[d objectForKey:@"otp_time"] doubleValue];
+                double delta = currentTime - notifBegan;
+                if(delta > OTP_REPEAT_PERIOD) {
+                    [NotificationChecker resetOtpNotifications];
+                }
+                else {
+                    goto exit;
+                }
             }
         }
-
 
         NSMutableDictionary *notif = [[NSMutableDictionary alloc] init];
         [notif setObject:username forKey:@"id"];
         [notif setObject:OTP_NOTIFICATION forKey:@"type"];
         [notif setValue:[NSNumber numberWithBool:NO] forKey:NOTIFICATION_SEEN_KEY];
         [notif setValue:[NSNumber numberWithBool:NO] forKey:NOTIFICATION_SHOWN_IN_APP];
+        [notif setValue:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:OTP_TIME];
         [notif setObject:NSLocalizedString(@"Two Factor Reset", nil) forKey:@"title"];
         NSString *message = [NSString stringWithFormat:
             @"A two factor reset has been requested. Please login as %@ and approve or cancel the request.", username];
