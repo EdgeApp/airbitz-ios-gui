@@ -100,6 +100,7 @@
 
 - (void) next
 {
+    [self blockUser:YES];
     // if they entered a valid username or old password
     if ([self userNameFieldIsValid] == YES)
     {
@@ -325,6 +326,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [textField resignFirstResponder];
     [self next];
 
     return YES;
