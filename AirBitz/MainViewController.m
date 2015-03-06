@@ -762,13 +762,14 @@ typedef enum eAppMode
 
     if([LocalSettings controller].bMerchantMode)
     {
-        [_requestViewController resetViews];
         [self showTabBarAnimated:NO];
     }
     else
     {
         [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
     }
+
+    [_requestViewController resetViews];
 
     _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
     _fadingAlert.message = message;
