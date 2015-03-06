@@ -749,17 +749,25 @@ typedef enum eAppMode
     if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                   currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
         coin = [CoreBridge formatSatoshi:satoshi withSymbol:false cropDecimals:[CoreBridge currencyDecimalPlaces]];
-    
-    if([LocalSettings controller].bMerchantMode == YES || receiveCount > 2)
+
+
+    if (receiveCount <= 2 && ([LocalSettings controller].bMerchantMode == false))
     {
-        message = [NSString stringWithFormat:@"You Received Bitcoin!\n%@ (~%@)", coin, fiat];
-        [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
+        message = [NSString stringWithFormat:@"You received Bitcoin!\n%@ (~%@)\nUse the Payee, Category, and Notes field to optionally tag your transaction", coin, fiat];
     }
     else
     {
-        message = [NSString stringWithFormat:@"You received Bitcoin!\n%@ (~%@)\nUse the Payee, Category, and Notes field to optionally tag your transaction", coin, fiat];
+        message = [NSString stringWithFormat:@"You Received Bitcoin!\n%@ (~%@)", coin, fiat];
+    }
+
+    if([LocalSettings controller].bMerchantMode)
+    {
         [_requestViewController resetViews];
         [self showTabBarAnimated:NO];
+    }
+    else
+    {
+        [self launchTransactionDetails:_strWalletUUID withTx:_strTxID];
     }
 
     _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
