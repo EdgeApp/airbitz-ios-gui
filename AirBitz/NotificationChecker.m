@@ -201,21 +201,24 @@ static NotificationChecker *singleton = nil;
 
 - (void)checkNotificationsAsync:(NSTimer *)timer
 {
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
         [self checkNotifications];
     
-//    });
+    });
 }
 
 - (void)checkNotifications
 {
     NSLog(@"ENTER checkNotifications\n");
     [self checkOtpResetPending];
-    [self checkDirectoryNotifications];
+    [self performSelectorOnMainThread:@selector(checkDirectoryNotifications) withObject:nil waitUntilDone:FALSE];
+
+//    [self checkDirectoryNotifications];
 
     if ([self getFirstUnseenNotification] != nil)
     {
-        [self postNotification];
+        [self performSelectorOnMainThread:@selector(postNotification) withObject:nil waitUntilDone:FALSE];
+//        [self postNotification];
     }
     NSLog(@"EXIT checkNotifications\n");
 }
