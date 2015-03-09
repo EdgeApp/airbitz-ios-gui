@@ -201,10 +201,10 @@ static NotificationChecker *singleton = nil;
 
 - (void)checkNotificationsAsync:(NSTimer *)timer
 {
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
         [self checkNotifications];
     
-//    });
+    });
 }
 
 - (void)checkNotifications
@@ -215,7 +215,7 @@ static NotificationChecker *singleton = nil;
 
     if ([self getFirstUnseenNotification] != nil)
     {
-        [self postNotification];
+        [self performSelectorOnMainThread:@selector(postNotification) withObject:nil waitUntilDone:FALSE];
     }
     NSLog(@"EXIT checkNotifications\n");
 }
