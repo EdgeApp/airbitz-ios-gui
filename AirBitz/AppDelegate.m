@@ -49,6 +49,10 @@ NSDate *logoutDate = NULL;
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
 
+    // Set background fetch in seconds
+    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+
+
     Reachability *reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
     [reachability startNotifier];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -56,8 +60,6 @@ NSDate *logoutDate = NULL;
                                                 name:kReachabilityChangedNotification
                                             object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNotifications) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
-
 #if (!AIRBITZ_IOS_DEBUG) || (0 == AIRBITZ_IOS_DEBUG)
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:HOCKEY_MANAGER_ID];
     [[BITHockeyManager sharedHockeyManager] startManager];
@@ -84,13 +86,25 @@ NSDate *logoutDate = NULL;
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
-    [self showNotifications];
+    NSLog(@"ENTER performFetch...\n");
+
+    bool bDidNotification = [self showNotifications];
+
     if (![self isAppActive])
     {
-        [self autoLogout];
         [self checkLoginExpired];
     }
-    completionHandler(UIBackgroundFetchResultNoData);
+
+    if (bDidNotification)
+    {
+        NSLog(@"EXIT performFetch() NewData...\n");
+        completionHandler(UIBackgroundFetchResultNewData);
+    }
+    else
+    {
+        NSLog(@"EXIT performFetch() NoData...\n");
+        completionHandler(UIBackgroundFetchResultNoData);
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -104,7 +118,6 @@ NSDate *logoutDate = NULL;
         logoutDate = [NSDate date];
         
         // multiply to get the time in seconds
-        [application setMinimumBackgroundFetchInterval: [User Singleton].minutesAutoLogout * 60];
     }
 }
 
@@ -115,7 +128,6 @@ NSDate *logoutDate = NULL;
     bgNotificationTask = [application beginBackgroundTaskWithExpirationHandler:^{
         [self bgNotificationCleanup];
     }];
-    [NotificationChecker requestNotifications];
 
     if ([User isLoggedIn])
     {
@@ -229,7 +241,6 @@ NSDate *logoutDate = NULL;
     {
         [[User Singleton] clear];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
-        [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval: UIApplicationBackgroundFetchIntervalNever];
     }
     [self bgLogoutCleanup];
 }
@@ -239,13 +250,21 @@ NSDate *logoutDate = NULL;
     return [UIApplication sharedApplication].applicationState == UIApplicationStateActive;
 }
 
-- (void)showNotifications
+- (BOOL)showNotifications
 {
+    NSLog(@"ENTER showNotifications\n");
+
+    bool bDidNotification = false;
+
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
     {
+        [NotificationChecker requestNotifications];
+
         NSDictionary *notif = [NotificationChecker unseenNotification];
         while (notif)
         {
+            NSLog(@"IN showNotifications: while loop\n");
+
             UILocalNotification *localNotif = [[UILocalNotification alloc] init];
             
             NSString *title = [notif objectForKey:@"title"];
@@ -259,11 +278,20 @@ NSDate *logoutDate = NULL;
             // fire the notification now
             [localNotif setFireDate:[NSDate date]];
             [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
-            
+
+            // Mark seen
+            [NotificationChecker setNotificationSeen:notif];
+
             // get the next one
             notif = [NotificationChecker unseenNotification];
+
+            bDidNotification = true;
         };
     }
+
+    NSLog(@"EXIT showNotifications\n");
+
+    return bDidNotification;
 }
 
 - (void)bringNotificationsToForeground

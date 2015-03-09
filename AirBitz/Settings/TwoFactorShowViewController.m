@@ -211,7 +211,11 @@
     char *szUsernames = NULL;
     tABC_CC cc = ABC_OtpResetGet(&szUsernames, error);
     if (cc == ABC_CC_Ok) {
-        bPending = [[[NSString alloc] initWithUTF8String:szUsernames] containsString:[User Singleton].name];
+        NSString *usernames;
+        NSString *loggedInUser;
+        usernames = [[NSString alloc] initWithUTF8String:szUsernames];
+        loggedInUser = [User Singleton].name;
+        bPending = [usernames rangeOfString:loggedInUser].length > 0;
     }
     return bPending;
 }

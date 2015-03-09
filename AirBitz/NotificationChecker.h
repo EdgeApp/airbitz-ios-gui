@@ -12,6 +12,9 @@
 {
 }
 + (void)initAll;
+
++ (BOOL)setNotificationSeen:(NSDictionary *)setSeenNotif;
+
 + (void)resetOtpNotifications;
 + (NSDictionary *)haveNotifications;
 + (NSDictionary *)firstNotification;
