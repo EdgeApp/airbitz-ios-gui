@@ -508,6 +508,7 @@ typedef enum eAppMode
             [self.view endEditing:NO];
             NSString *notifHTML = [NSString stringWithFormat:@"<!DOCTYPE html>\
             <html>\
+                <style>* { font-family: Helvetica; }</style>\
                 <body>\
                     <div><strong><center>%@</center></strong><BR />\
                     %@\
