@@ -744,7 +744,6 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
                 [self.walletsTable reloadData];
             }
             [self updateBalanceView];
-            [self dismissTransactions];
             [self.view setNeedsDisplay];
         });
     }];
