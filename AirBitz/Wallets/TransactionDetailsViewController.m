@@ -262,11 +262,6 @@ typedef enum eRequestType
     self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.nameTextField.font = [UIFont systemFontOfSize:18];
     
-    //To make the border look very close to a UITextField
-/*
-    [Util stylizeTextField:self.nameTextField];
-    [Util stylizeTextField:self.fiatTextField];
- */
     [Util stylizeTextField:self.pickerTextCategory.textField];
     [Util stylizeTextView:self.notesTextView];
     
@@ -280,14 +275,6 @@ typedef enum eRequestType
     self.viewPhoto.layer.shadowRadius = 10;
     self.viewPhoto.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
     
-    /*
-    CGFloat borderWidth = 0.0f;
-    self.viewPhoto.frame = CGRectInset(self.viewPhoto.frame, -borderWidth, -borderWidth);
-    self.viewPhoto.layer.borderColor = [PHOTO_BORDER_COLOR CGColor];
-    self.viewPhoto.layer.borderWidth = borderWidth;
-    self.viewPhoto.layer.cornerRadius = PHOTO_BORDER_CORNER_RADIUS;
-    self.viewPhoto.layer.masksToBounds = YES;
-     */
     [self updatePhoto];
     
     // add left to right swipe detection for going back
@@ -491,7 +478,11 @@ typedef enum eRequestType
     }
     self.transaction.amountFiat = amountFiat;
     self.transaction.bizId = _bizId;
-    [CoreBridge storeTransaction: self.transaction];
+
+
+    [CoreBridge postToWalletsQueue:^(void) {
+        [CoreBridge storeTransaction: self.transaction];
+    }];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
         if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
