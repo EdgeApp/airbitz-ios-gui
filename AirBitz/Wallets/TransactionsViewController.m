@@ -703,14 +703,14 @@
 
     [CoreBridge postToWalletsQueue:^(void) {
         [CoreBridge reloadWallet:self.wallet];
+        [self getBizImagesForWallet:self.wallet];
 
         dispatch_async(dispatch_get_main_queue(),^{
-            [self getBizImagesForWallet:self.wallet];
             [self.tableView reloadData];
             [self checkSearchArray];
-            [self dismissTransactionDetails];
         });
     }];
+    [self dismissTransactionDetails];
 
 }
 
