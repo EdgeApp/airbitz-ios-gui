@@ -185,10 +185,17 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [CoreBridge reloadWallet:self.wallet];
-    [self getBizImagesForWallet:self.wallet];
-    [self.tableView reloadData];
-    [self updateBalanceView];
+
+    [CoreBridge postToWalletsQueue:^(void) {
+        [CoreBridge reloadWallet:self.wallet];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            [self getBizImagesForWallet:self.wallet];
+            [self.tableView reloadData];
+            [self updateBalanceView];
+        });
+    }];
+
 }
 
 - (void)dealloc
@@ -693,12 +700,18 @@
     {
         [self.dictBizImages setObject:controller.photo forKey:[NSNumber numberWithInt:controller.transaction.bizId]];
     }
-    
-    [CoreBridge reloadWallet: self.wallet];
-    [self getBizImagesForWallet:self.wallet];
-    [self.tableView reloadData];
-    [self checkSearchArray];
-    [self dismissTransactionDetails];
+
+    [CoreBridge postToWalletsQueue:^(void) {
+        [CoreBridge reloadWallet:self.wallet];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            [self getBizImagesForWallet:self.wallet];
+            [self.tableView reloadData];
+            [self checkSearchArray];
+            [self dismissTransactionDetails];
+        });
+    }];
+
 }
 
 #pragma mark - UITableView delegates
@@ -1107,10 +1120,16 @@
 
 - (void)dataUpdated:(NSNotification *)notification
 {
-    [CoreBridge reloadWallet: self.wallet];
-    [self.tableView reloadData];
-    [self updateBalanceView];
-    [self.view setNeedsDisplay];
+    [CoreBridge postToWalletsQueue:^(void) {
+        [CoreBridge reloadWallet:self.wallet];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            [self.tableView reloadData];
+            [self updateBalanceView];
+            [self.view setNeedsDisplay];
+        });
+    }];
+
 }
 
 #pragma mark - GestureReconizer methods

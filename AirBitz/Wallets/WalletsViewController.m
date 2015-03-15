@@ -112,17 +112,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
-    [self reloadWallets];
-    [self.walletsTable reloadData];
-	[self updateBalanceView];
 
-/*	NSString *CellIdentifier = @"WalletsHeader";
-	_activeWalletsHeaderView = [self.walletsTable dequeueReusableCellWithIdentifier:CellIdentifier];
-	((UITableViewCell *)_activeWalletsHeaderView).contentView.layer.cornerRadius = 4.0;
-	
-	CellIdentifier = @"ArchiveHeader";
-	_archivedWalletsHeaderView = [self.walletsTable dequeueReusableCellWithIdentifier:CellIdentifier];
-	((UITableViewCell *)_archivedWalletsHeaderView).contentView.layer.cornerRadius = 4.0;*/
+    [CoreBridge postToWalletsQueue:^(void) {
+        [self reloadWallets];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            [self.walletsTable reloadData];
+            [self updateBalanceView];
+        });
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -506,10 +504,15 @@
 
 - (void)TransactionsViewControllerDone:(TransactionsViewController *)controller
 {
-    [self reloadWallets];
-    [self.walletsTable reloadData];
-    [self updateBalanceView];
-	[self dismissTransactions];
+    [CoreBridge postToWalletsQueue:^(void) {
+        [self reloadWallets];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            [self.walletsTable reloadData];
+            [self updateBalanceView];
+            [self dismissTransactions];
+        });
+    }];
 }
 
 #pragma mark - UITableView delegates
@@ -706,9 +709,14 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	[self hideWalletMaker];
 	[self removeBlockingButton];
 
-    [self reloadWallets];
-    [self.walletsTable reloadData];
-	[self updateBalanceView];
+    [CoreBridge postToWalletsQueue:^(void) {
+        [self reloadWallets];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            [self.walletsTable reloadData];
+            [self updateBalanceView];
+        });
+    }];
 }
 
 - (void)walletMakerViewExitOffline:(WalletMakerView *)walletMakerView
@@ -728,12 +736,20 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)dataUpdated:(NSNotification *)notification
 {
-    [self reloadWallets];
-    if(self.arrayWallets.count > 0) {
-        [self.walletsTable reloadData];
-    }
-    [self updateBalanceView];
-    [self.view setNeedsDisplay];
+    [CoreBridge postToWalletsQueue:^(void) {
+        [self reloadWallets];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            if(self.arrayWallets.count > 0) {
+                [self.walletsTable reloadData];
+            }
+            [self updateBalanceView];
+            [self dismissTransactions];
+            [self.view setNeedsDisplay];
+        });
+    }];
+
+
 }
 
 @end

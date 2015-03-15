@@ -39,6 +39,7 @@ static BOOL bDataFetched = NO;
 static int iLoginTimeSeconds = 0;
 static NSOperationQueue *exchangeQueue;
 static NSOperationQueue *dataQueue;
+static NSOperationQueue *walletsQueue;
 static NSMutableDictionary *watchers;
 static CoreBridge *singleton = nil;
 
@@ -67,6 +68,8 @@ static BOOL bOtpError = NO;
         [exchangeQueue setMaxConcurrentOperationCount:1];
         dataQueue = [[NSOperationQueue alloc] init];
         [dataQueue setMaxConcurrentOperationCount:1];
+        walletsQueue = [[NSOperationQueue alloc] init];
+        [walletsQueue setMaxConcurrentOperationCount:1];
 
         watchers = [[NSMutableDictionary alloc] init];
 
@@ -95,6 +98,7 @@ static BOOL bOtpError = NO;
     {
         exchangeQueue = nil;
         dataQueue = nil;
+        walletsQueue = nil;
         singleton = nil;
         bInitialized = NO;
     }
@@ -139,11 +143,21 @@ static BOOL bOtpError = NO;
     {
         [dataQueue cancelAllOperations];
     }
+    if (walletsQueue)
+    {
+        [walletsQueue cancelAllOperations];
+    }
+
 }
 
 + (void)postToSyncQueue:(void(^)(void))cb;
 {
     [dataQueue addOperationWithBlock:cb];
+}
+
++ (void)postToWalletsQueue:(void(^)(void))cb;
+{
+    [walletsQueue addOperationWithBlock:cb];
 }
 
 + (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs
@@ -182,6 +196,8 @@ static BOOL bOtpError = NO;
     unsigned int nCount;
 
     NSLog(@"CoreBridge.LoadWallets\n");
+
+
     tABC_CC result = ABC_GetWallets([[User Singleton].name UTF8String],
                                     [[User Singleton].password UTF8String],
                                     &aWalletInfo, &nCount, &Error);
