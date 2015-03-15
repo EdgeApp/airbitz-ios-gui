@@ -510,9 +510,9 @@
         dispatch_async(dispatch_get_main_queue(),^{
             [self.walletsTable reloadData];
             [self updateBalanceView];
-            [self dismissTransactions];
         });
     }];
+    [self dismissTransactions];
 }
 
 #pragma mark - UITableView delegates
