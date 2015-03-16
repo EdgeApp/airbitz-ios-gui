@@ -1171,32 +1171,41 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)loadWalletInfo
 {
-    // load all the non-archive wallets
-    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
 
-    // create the arrays of wallet info
-    _selectedWalletIndex = 0;
-    NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
-    for (int i = 0; i < [arrayWallets count]; i++)
-    {
-        Wallet *wallet = [arrayWallets objectAtIndex:i];
-        [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
-        
-        if ([_walletUUID isEqualToString: wallet.strUUID])
-            _selectedWalletIndex = i;
-    }
-    
-    if (_selectedWalletIndex < [arrayWallets count])
-    {
-        Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
-        
-        self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-        [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
-    }
-    self.arrayWallets = arrayWallets;
-    self.arrayWalletNames = arrayWalletNames;
+    [CoreBridge postToWalletsQueue:^(void) {
+        // load all the non-archive wallets
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
+        // create the arrays of wallet info
+        _selectedWalletIndex = 0;
+        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
+
+        for (int i = 0; i < [arrayWallets count]; i++)
+        {
+            Wallet *wallet = [arrayWallets objectAtIndex:i];
+            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+
+            if ([_walletUUID isEqualToString: wallet.strUUID])
+                _selectedWalletIndex = i;
+        }
+        self.arrayWallets = arrayWallets;
+        self.arrayWalletNames = arrayWalletNames;
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            if (_selectedWalletIndex < [arrayWallets count])
+            {
+                Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
+
+                self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
+                [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+                self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
+            }
+        });
+    }];
+
+
+
+
 }
 
 // if bToIsUUID NO, then it is assumed the strTo is an address
