@@ -596,42 +596,48 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (bool)storeTransaction: (Transaction *) transaction
++ (void)storeTransaction: (Transaction *) transaction
 {
-    tABC_Error Error;
-    tABC_TxDetails *pDetails;
-    tABC_CC result = ABC_GetTransactionDetails([[User Singleton].name UTF8String],
-                                               [[User Singleton].password UTF8String],
-                                               [transaction.strWalletUUID UTF8String],
-                                               [transaction.strID UTF8String],
-                                               &pDetails, &Error);
-    if (ABC_CC_Ok != result)
-    {
-        NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
-        return false;
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
 
-    pDetails->szName = (char *) [transaction.strName UTF8String];
-    pDetails->szCategory = (char *) [transaction.strCategory UTF8String];
-    pDetails->szNotes = (char *) [transaction.strNotes UTF8String];
-    pDetails->amountCurrency = transaction.amountFiat;
-    pDetails->bizId = transaction.bizId;
+        tABC_Error Error;
+        tABC_TxDetails *pDetails;
+        tABC_CC result = ABC_GetTransactionDetails([[User Singleton].name UTF8String],
+                [[User Singleton].password UTF8String],
+                [transaction.strWalletUUID UTF8String],
+                [transaction.strID UTF8String],
+                &pDetails, &Error);
+        if (ABC_CC_Ok != result) {
+            NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
+            [Util printABC_Error:&Error];
+//            return false;
+            return;
+        }
 
-    result = ABC_SetTransactionDetails([[User Singleton].name UTF8String],
-                                       [[User Singleton].password UTF8String],
-                                       [transaction.strWalletUUID UTF8String],
-                                       [transaction.strID UTF8String],
-                                       pDetails, &Error);
-    
-    if (ABC_CC_Ok != result)
-    {
-        NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
-        return false;
-    }
+        pDetails->szName = (char *) [transaction.strName UTF8String];
+        pDetails->szCategory = (char *) [transaction.strCategory UTF8String];
+        pDetails->szNotes = (char *) [transaction.strNotes UTF8String];
+        pDetails->amountCurrency = transaction.amountFiat;
+        pDetails->bizId = transaction.bizId;
 
-    return true;
+        result = ABC_SetTransactionDetails([[User Singleton].name UTF8String],
+                [[User Singleton].password UTF8String],
+                [transaction.strWalletUUID UTF8String],
+                [transaction.strID UTF8String],
+                pDetails, &Error);
+
+        if (ABC_CC_Ok != result) {
+            NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
+            [Util printABC_Error:&Error];
+//            return false;
+            return;
+        }
+
+//        return true;
+        return;
+    });
+
+    return; // This might as well be a void. async task return value can't ever really be tested
 }
 
 + (NSNumberFormatter *)generateNumberFormatter

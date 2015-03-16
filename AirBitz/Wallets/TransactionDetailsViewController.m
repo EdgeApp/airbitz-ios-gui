@@ -479,10 +479,7 @@ typedef enum eRequestType
     self.transaction.amountFiat = amountFiat;
     self.transaction.bizId = _bizId;
 
-
-    [CoreBridge postToWalletsQueue:^(void) {
-        [CoreBridge storeTransaction: self.transaction];
-    }];
+    [CoreBridge storeTransaction: self.transaction];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
         if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
