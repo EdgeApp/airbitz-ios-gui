@@ -581,9 +581,10 @@
             if ([_walletUUID isEqualToString: wallet.strUUID])
                 _selectedWalletIndex = i;
         }
-        self.arrayWallets = arrayWallets;
 
         dispatch_async(dispatch_get_main_queue(),^{
+
+            self.arrayWallets = arrayWallets;
 
             if (_selectedWalletIndex < [arrayWallets count])
             {

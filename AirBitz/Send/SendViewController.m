@@ -1188,10 +1188,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             if ([_walletUUID isEqualToString: wallet.strUUID])
                 _selectedWalletIndex = i;
         }
-        self.arrayWallets = arrayWallets;
-        self.arrayWalletNames = arrayWalletNames;
 
         dispatch_async(dispatch_get_main_queue(),^{
+            self.arrayWallets = arrayWallets;
+            self.arrayWalletNames = arrayWalletNames;
+
             if (_selectedWalletIndex < [arrayWallets count])
             {
                 Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
