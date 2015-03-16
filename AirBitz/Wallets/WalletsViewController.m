@@ -114,9 +114,15 @@
     [super viewWillAppear: animated];
 
     [CoreBridge postToWalletsQueue:^(void) {
-        [self reloadWallets];
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+
+        [self reloadWallets:arrayWallets archived:arrayArchivedWallets];
 
         dispatch_async(dispatch_get_main_queue(),^{
+            self.arrayWallets = arrayWallets;
+            self.arrayArchivedWallets = arrayArchivedWallets;
+
             [self.walletsTable reloadData];
             [self updateBalanceView];
         });
@@ -148,7 +154,9 @@
         if ([strUUID length])
         {
             [self resetViews];
-            [self reloadWallets];
+
+            [self reloadWallets:self.arrayWallets archived:self.arrayArchivedWallets];
+
             // If the transaction view is open, close it
 
             Wallet *wallet = nil;
@@ -236,20 +244,20 @@
 }
 
 // retrieves the wallets from disk and put them in the two member arrays
-- (void)reloadWallets
+- (void)reloadWallets: (NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets
 {
-    if (self.arrayWallets == nil)
+    if (arrayWallets == nil || arrayArchivedWallets == nil)
     {
-        self.arrayWallets = [[NSMutableArray alloc] init];
-        self.arrayArchivedWallets = [[NSMutableArray alloc] init];
+        NSLog(@"ERROR reloadWallets arrayWallets or arrayArchivedWallets = nil.");
+        return;
     }
     else
     {
-        [self.arrayWallets removeAllObjects];
-        [self.arrayArchivedWallets removeAllObjects];
+        [arrayWallets removeAllObjects];
+        [arrayArchivedWallets removeAllObjects];
     }
-    [CoreBridge loadWallets:self.arrayWallets
-                   archived:self.arrayArchivedWallets
+    [CoreBridge loadWallets:arrayWallets
+                   archived:arrayArchivedWallets
                     withTxs:NO];
     [self lockIfLoading];
 }
@@ -498,6 +506,7 @@
 		 _transactionsController = nil;
          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 	 }];
+
 }
 
 #pragma mark - TransactionsViewControllerDelegates
@@ -505,9 +514,17 @@
 - (void)TransactionsViewControllerDone:(TransactionsViewController *)controller
 {
     [CoreBridge postToWalletsQueue:^(void) {
-        [self reloadWallets];
+
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+
+        [self reloadWallets:arrayWallets archived:arrayArchivedWallets];
 
         dispatch_async(dispatch_get_main_queue(),^{
+
+            self.arrayWallets = arrayWallets;
+            self.arrayArchivedWallets = arrayArchivedWallets;
+
             [self.walletsTable reloadData];
             [self updateBalanceView];
         });
@@ -710,9 +727,15 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 	[self removeBlockingButton];
 
     [CoreBridge postToWalletsQueue:^(void) {
-        [self reloadWallets];
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+
+        [self reloadWallets:arrayWallets archived:arrayArchivedWallets];
 
         dispatch_async(dispatch_get_main_queue(),^{
+            self.arrayWallets = arrayWallets;
+            self.arrayArchivedWallets = arrayArchivedWallets;
+
             [self.walletsTable reloadData];
             [self updateBalanceView];
         });
@@ -737,9 +760,15 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)dataUpdated:(NSNotification *)notification
 {
     [CoreBridge postToWalletsQueue:^(void) {
-        [self reloadWallets];
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+
+        [self reloadWallets:arrayWallets archived:arrayArchivedWallets];
 
         dispatch_async(dispatch_get_main_queue(),^{
+            self.arrayWallets = arrayWallets;
+            self.arrayArchivedWallets = arrayArchivedWallets;
+
             if(self.arrayWallets.count > 0) {
                 [self.walletsTable reloadData];
             }
