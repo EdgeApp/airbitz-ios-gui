@@ -393,36 +393,10 @@ typedef enum eAppMode
 			{
 				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-					tABC_CC result;
-					tABC_WalletInfo **walletInfo;
-					unsigned int numWallets = 0;
-					tABC_Error error;
-					
-					result = ABC_GetWallets([[User Singleton].name UTF8String],
-										   [[User Singleton].password UTF8String],
-										   &walletInfo,
-										   &numWallets,
-										   &error);
-					
-					if(1) //numWallets)
-					{
-                        _sendViewController.walletUUID = self.strWalletUUID;
-						[_selectedViewController.view removeFromSuperview];
-						_selectedViewController = _sendViewController;
-						[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-					}
-					else
-					{
-						[Util printABC_Error:&error];
-						UIAlertView *alert = [[UIAlertView alloc]
-											  initWithTitle:NSLocalizedString(@"No Wallets", @"Alert title that warns user they have no wallets to send from")
-											  message:NSLocalizedString(@"You have no wallets from which to send funds.  First create a wallet by tapping on the Wallets tab and hitting the '+' button", nil)
-											  delegate:nil
-											  cancelButtonTitle:@"OK"
-											  otherButtonTitles:nil];
-						[alert show];
-					}
-					
+                    _sendViewController.walletUUID = self.strWalletUUID;
+                    [_selectedViewController.view removeFromSuperview];
+                    _selectedViewController = _sendViewController;
+                    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
 				}
 				else
 				{
