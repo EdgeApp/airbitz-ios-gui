@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSArray *arrayItemsToSelect;			/* set this to an array of NSStrings that will appear in the drop-down */
 @property (nonatomic, readwrite) int selectedItemIndex;
 @property (nonatomic, strong) IBOutlet UIView *containerView;	/* if this is embedded within a containerView, specify it here and this will animate the containerView's frame to fit the table */
+@property (nonatomic, assign) BOOL enabled;
 
 - (void)setButtonWidth:(CGFloat)width;
 - (void)close; /* closes button table and shrinks button if open */

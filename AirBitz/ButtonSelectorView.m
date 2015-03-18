@@ -27,7 +27,7 @@
     self = [super initWithFrame:frame];
     if (self)
 	{
-        // Initialization code
+        self.enabled = YES;
     }
     return self;
 }
@@ -86,6 +86,9 @@
 
 - (IBAction)ButtonPressed
 {
+    if (!self.enabled) {
+        return;
+    }
 	if (self.button.selected)
 	{
         [self hideTable];

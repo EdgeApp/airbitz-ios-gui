@@ -17,10 +17,14 @@
 @property (assign)              id<SendConfirmationViewControllerDelegate>  delegate;
 @property (nonatomic, copy)     NSString                                    *sendToAddress;
 @property (nonatomic, copy)     NSString                                    *nameLabel;
+@property (nonatomic, copy)     NSString                                    *category;
+@property (nonatomic, copy)     NSString                                    *notes;
 @property (nonatomic, assign)   int64_t                                     amountToSendSatoshi;
+@property (nonatomic, assign)   double                                      overrideCurrency;
 @property (nonatomic, strong)   Wallet                                      *wallet;
 @property (nonatomic, strong)   Wallet                                      *destWallet;
 @property (nonatomic, assign)   BOOL                                        bAddressIsWalletUUID;
+@property (nonatomic, assign)   BOOL                                        bAdvanceToTx;
 
 @end
 
@@ -29,4 +33,11 @@
 
 @required
 -(void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller;
+
+@optional
+-(void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
+                                      withBack:(BOOL)bBack
+                                     withError:(BOOL)bError
+                                      withTxId:(NSString *)txid;
+
 @end

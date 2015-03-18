@@ -21,6 +21,7 @@
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
 #import "TwoFactorScanViewController.h"
+#import "PluginViewController.h"
 #import "AddressRequestController.h"
 #import "User.h"
 #import "Config.h"
@@ -49,7 +50,7 @@ typedef enum eAppMode
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate,
+                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, PluginViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
@@ -61,6 +62,7 @@ typedef enum eAppMode
 	LoginViewController         *_loginViewController;
     PINReLoginViewController    *_PINReLoginViewController;
 	SettingsViewController      *_settingsViewController;
+	PluginViewController        *_pluginViewController;
 	SendStatusViewController    *_sendStatusController;
     TransactionDetailsViewController *_txDetailsController;
     TwoFactorScanViewController      *_tfaScanViewController;
@@ -182,6 +184,10 @@ typedef enum eAppMode
 	_walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
 	_settingsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
 	_settingsViewController.delegate = self;
+
+	UIStoryboard *pluginStoryboard = [UIStoryboard storyboardWithName:@"Plugins" bundle: nil];
+	_pluginViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"PluginViewController"];
+    _pluginViewController.delegate = self;
 
     _otpRequiredAlert = nil;
     firstLaunch = YES;
@@ -1282,7 +1288,9 @@ typedef enum eAppMode
 
 - (void)slideoutBuySell
 {
-    NSLog(@"MainViewController.slideoutBuySell");
+    [_selectedViewController.view removeFromSuperview];
+    _selectedViewController = _pluginViewController;
+    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     [slideoutView showSlideout:NO];
 }
 
@@ -1355,6 +1363,12 @@ typedef enum eAppMode
     {
         [slideoutView showSlideout:YES];
     }
+}
+
+#pragma mark - Plugin Delegate
+
+- (void)PluginViewControllerDone:(PluginViewController *)vc
+{
 }
 
 

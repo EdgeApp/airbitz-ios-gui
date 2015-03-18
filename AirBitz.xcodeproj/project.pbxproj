@@ -1092,6 +1092,12 @@
 		DA14ABDD1A841C3600C30F08 /* btn_calc_next@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA14ABDA1A841C3600C30F08 /* btn_calc_next@2x~iphone.png */; };
 		DA14ABDE1A841C3600C30F08 /* btn_calc_next~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA14ABDB1A841C3600C30F08 /* btn_calc_next~iphone.png */; };
 		DA14ABDF1A841C3600C30F08 /* btn_calc_next~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA14ABDB1A841C3600C30F08 /* btn_calc_next~iphone.png */; };
+		DA15B98D1AC0D72500B229A5 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */; };
+		DA15B98E1AC0D72500B229A5 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */; };
+		DA15B98F1AC0D72500B229A5 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */; };
+		DA15B9901AC0D72500B229A5 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA15B98C1AC0D72500B229A5 /* PluginViewController.m */; };
+		DA15B9911AC0D72500B229A5 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA15B98C1AC0D72500B229A5 /* PluginViewController.m */; };
+		DA15B9921AC0D72500B229A5 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA15B98C1AC0D72500B229A5 /* PluginViewController.m */; };
 		DA1E7CA71A8C187F007C6C05 /* StylizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */; };
 		DA1E7CA81A8C187F007C6C05 /* StylizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */; };
 		DA1E7CA91A8C187F007C6C05 /* StylizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */; };
@@ -1156,6 +1162,9 @@
 		DAE276441A9C1D9300E24523 /* SignUpBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276431A9C1D9300E24523 /* SignUpBaseController.m */; };
 		DAE276451A9C1D9300E24523 /* SignUpBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276431A9C1D9300E24523 /* SignUpBaseController.m */; };
 		DAE276461A9C1D9300E24523 /* SignUpBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276431A9C1D9300E24523 /* SignUpBaseController.m */; };
+		DAE81D881AC204140064BA5D /* plugins in Resources */ = {isa = PBXBuildFile; fileRef = DAE81D871AC204140064BA5D /* plugins */; };
+		DAE81D891AC204140064BA5D /* plugins in Resources */ = {isa = PBXBuildFile; fileRef = DAE81D871AC204140064BA5D /* plugins */; };
+		DAE81D8A1AC204140064BA5D /* plugins in Resources */ = {isa = PBXBuildFile; fileRef = DAE81D871AC204140064BA5D /* plugins */; };
 		DAE863F71A88A58A00A17BD3 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9A418EA0C4E008F302C /* SMCalloutView.m */; };
 		DAE863F81A88A58A00A17BD3 /* QuestionAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EB0E18DE018E008ACF88 /* QuestionAnswerView.m */; };
 		DAE863F91A88A58A00A17BD3 /* DateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D0193564D20091C286 /* DateTime.m */; };
@@ -2467,6 +2476,9 @@
 		DA14ABD51A841B5A00C30F08 /* btn_expand_green~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_expand_green~iphone.png"; sourceTree = "<group>"; };
 		DA14ABDA1A841C3600C30F08 /* btn_calc_next@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_calc_next@2x~iphone.png"; sourceTree = "<group>"; };
 		DA14ABDB1A841C3600C30F08 /* btn_calc_next~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_calc_next~iphone.png"; sourceTree = "<group>"; };
+		DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Plugins.storyboard; sourceTree = "<group>"; };
+		DA15B98B1AC0D72500B229A5 /* PluginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginViewController.h; sourceTree = "<group>"; };
+		DA15B98C1AC0D72500B229A5 /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginViewController.m; sourceTree = "<group>"; };
 		DA1E7CA51A8C187F007C6C05 /* StylizedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedButton.h; sourceTree = "<group>"; };
 		DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedButton.m; sourceTree = "<group>"; };
 		DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar@2x~iphone.png"; sourceTree = "<group>"; };
@@ -2512,6 +2524,7 @@
 		DAE2763E1A9C0FA600E24523 /* SignUpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpManager.m; path = SignUp/SignUpManager.m; sourceTree = "<group>"; };
 		DAE276421A9C1D9300E24523 /* SignUpBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpBaseController.h; path = SignUp/SignUpBaseController.h; sourceTree = "<group>"; };
 		DAE276431A9C1D9300E24523 /* SignUpBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpBaseController.m; path = SignUp/SignUpBaseController.m; sourceTree = "<group>"; };
+		DAE81D871AC204140064BA5D /* plugins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = plugins; path = Resources/plugins; sourceTree = "<group>"; };
 		DAE866291A88A58A00A17BD3 /* Airbitz Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAFC799E1A81CCBE00E9039D /* TwoFactorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorMenuViewController.h; sourceTree = "<group>"; };
 		DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorMenuViewController.m; sourceTree = "<group>"; };
@@ -3153,6 +3166,7 @@
 				B516C1E718C54B06008CC6A1 /* NSDate+Helper.m */,
 				7D89E8D81A2465FB0067F660 /* NSString+StripHTML.h */,
 				7D89E8D91A2465FB0067F660 /* NSString+StripHTML.m */,
+				DA15B9891AC0D72500B229A5 /* Plugins */,
 				4C3C30A2191C1C90006923DE /* PickerTextView */,
 				4C3C308B1918347F006923DE /* PopupPickerView */,
 				B5C0A9A718EA0D09008F302C /* Request */,
@@ -3209,6 +3223,7 @@
 		B5675B8718A180D9002E0703 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DAE81D871AC204140064BA5D /* plugins */,
 				7D987AF21A48BA7C00958AAD /* Audio */,
 				DAA5784819C23C8200E972FC /* Text */,
 				683D95B61989F14B0082BC1A /* Certs */,
@@ -3827,6 +3842,16 @@
 			path = ScanView;
 			sourceTree = "<group>";
 		};
+		DA15B9891AC0D72500B229A5 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */,
+				DA15B98B1AC0D72500B229A5 /* PluginViewController.h */,
+				DA15B98C1AC0D72500B229A5 /* PluginViewController.m */,
+			);
+			path = Plugins;
+			sourceTree = "<group>";
+		};
 		DAA5784819C23C8200E972FC /* Text */ = {
 			isa = PBXGroup;
 			children = (
@@ -4256,6 +4281,7 @@
 				E2067B8B1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */,
 				7D98AE0219A7C550003D2BF6 /* table_cell_middle@2x~iphone.png in Resources */,
 				7D98AE0319A7C550003D2BF6 /* infoSettings.html in Resources */,
+				DA15B98E1AC0D72500B229A5 /* Plugins.storyboard in Resources */,
 				7D98AE0419A7C550003D2BF6 /* icon_request_dark~iphone.png in Resources */,
 				7D98AE0519A7C550003D2BF6 /* swipe-arrow~iphone.png in Resources */,
 				7D98AE0619A7C550003D2BF6 /* WalletExportPDF.pdf in Resources */,
@@ -4426,6 +4452,7 @@
 				7D98AE9119A7C550003D2BF6 /* infoWallets.html in Resources */,
 				7D6493971A060F1E0002E64C /* large-digit-input_selected@2x~iphone.png in Resources */,
 				7D98AE9219A7C550003D2BF6 /* drag_bar~iphone.png in Resources */,
+				DAE81D891AC204140064BA5D /* plugins in Resources */,
 				7D98AE9319A7C550003D2BF6 /* tabbar_base~iphone.png in Resources */,
 				7DB9DD801A03187D00AD35ED /* background@2x~iphone.jpg in Resources */,
 				7D98AE9419A7C550003D2BF6 /* btn_export@2x~iphone.png in Resources */,
@@ -4520,6 +4547,7 @@
 				B59C153B18C012B500AEA789 /* tabbar_popup_middle~iphone.png in Resources */,
 				4C5D8C73192E7D4A0015BB3C /* infoTransactionDetails.html in Resources */,
 				4C7247C919353BD50091C286 /* icon_export_printer~iphone.png in Resources */,
+				DA15B98D1AC0D72500B229A5 /* Plugins.storyboard in Resources */,
 				4C3C3094191834AC006923DE /* PopupPickerView.xib in Resources */,
 				DAAC216D1963A35900CC0F1E /* btn_album~iphone.png in Resources */,
 				B59C14FE18C012B500AEA789 /* btn_QR@2x~iphone.png in Resources */,
@@ -4703,6 +4731,7 @@
 				B59C161E18C145D400AEA789 /* tabbar_bkg_selected@2x~iphone.png in Resources */,
 				4C7247CD1935594F0091C286 /* background_header~iphone.png in Resources */,
 				B59C14DD18C012B500AEA789 /* btn_9~iphone.png in Resources */,
+				DAE81D881AC204140064BA5D /* plugins in Resources */,
 				7D05AB841A0304DD00AFA5F7 /* bd_cell_middle_white~iphone.png in Resources */,
 				B59C152418C012B500AEA789 /* icon_settings@2x~iphone.png in Resources */,
 				B5675B6718A17F6F002E0703 /* Images.xcassets in Resources */,
@@ -4927,6 +4956,7 @@
 				DAE864E71A88A58A00A17BD3 /* tabbar_popup_middle~iphone.png in Resources */,
 				DAE864E81A88A58A00A17BD3 /* infoTransactionDetails.html in Resources */,
 				DAE864E91A88A58A00A17BD3 /* icon_export_printer~iphone.png in Resources */,
+				DA15B98F1AC0D72500B229A5 /* Plugins.storyboard in Resources */,
 				DAE864EA1A88A58A00A17BD3 /* PopupPickerView.xib in Resources */,
 				DAE864EB1A88A58A00A17BD3 /* btn_album~iphone.png in Resources */,
 				DAE864EC1A88A58A00A17BD3 /* btn_QR@2x~iphone.png in Resources */,
@@ -5110,6 +5140,7 @@
 				DAE8659B1A88A58A00A17BD3 /* tabbar_bkg_selected@2x~iphone.png in Resources */,
 				DAE8659C1A88A58A00A17BD3 /* background_header~iphone.png in Resources */,
 				DAE8659D1A88A58A00A17BD3 /* btn_9~iphone.png in Resources */,
+				DAE81D8A1AC204140064BA5D /* plugins in Resources */,
 				DAE8659E1A88A58A00A17BD3 /* bd_cell_middle_white~iphone.png in Resources */,
 				DAE8659F1A88A58A00A17BD3 /* icon_settings@2x~iphone.png in Resources */,
 				DAE865A01A88A58A00A17BD3 /* Images.xcassets in Resources */,
@@ -5498,6 +5529,7 @@
 				7D98ACFC19A7C550003D2BF6 /* CJSONDeserializer.m in Sources */,
 				7D98ACFD19A7C550003D2BF6 /* RequestViewController.m in Sources */,
 				DAE276451A9C1D9300E24523 /* SignUpBaseController.m in Sources */,
+				DA15B9911AC0D72500B229A5 /* PluginViewController.m in Sources */,
 				7D98ACFE19A7C550003D2BF6 /* BD_Details_Cell.m in Sources */,
 				7D98ACFF19A7C550003D2BF6 /* WalletCell.m in Sources */,
 				7D98AD0019A7C550003D2BF6 /* OfflineWalletViewController.m in Sources */,
@@ -5640,6 +5672,7 @@
 				B5137C3918A435BD00DA4A34 /* CJSONDeserializer.m in Sources */,
 				B5C0A9AA18EA0D09008F302C /* RequestViewController.m in Sources */,
 				DAE276441A9C1D9300E24523 /* SignUpBaseController.m in Sources */,
+				DA15B9901AC0D72500B229A5 /* PluginViewController.m in Sources */,
 				B5C0A97418EA0A42008F302C /* BD_Details_Cell.m in Sources */,
 				B5C0A9C418EA0DD8008F302C /* WalletCell.m in Sources */,
 				4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */,
@@ -5782,6 +5815,7 @@
 				DAE864571A88A58A00A17BD3 /* CJSONDeserializer.m in Sources */,
 				DAE864581A88A58A00A17BD3 /* RequestViewController.m in Sources */,
 				DAE276461A9C1D9300E24523 /* SignUpBaseController.m in Sources */,
+				DA15B9921AC0D72500B229A5 /* PluginViewController.m in Sources */,
 				DAE864591A88A58A00A17BD3 /* BD_Details_Cell.m in Sources */,
 				DAE8645A1A88A58A00A17BD3 /* WalletCell.m in Sources */,
 				DAE8645B1A88A58A00A17BD3 /* OfflineWalletViewController.m in Sources */,

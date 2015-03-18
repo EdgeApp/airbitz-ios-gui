@@ -83,6 +83,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
+        _bAdvanceToTx = YES;
     }
     return self;
 }
@@ -206,6 +207,9 @@
     self.amountFiatLabel.text = [CoreBridge currencyAbbrevLookup:self.wallet.currencyNum];
     self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
 
+    self.maxAmountButton.hidden = !_bAdvanceToTx;
+    self.walletSelector.enabled = _bAdvanceToTx;
+
     NSString *prefix;
     NSString *suffix;
     
@@ -313,7 +317,12 @@
      }
      completion:^(BOOL finished)
      {
-         [self.delegate sendConfirmationViewControllerDidFinish:self];
+            if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:withTxId:)]) {
+                [self.delegate sendConfirmationViewControllerDidFinish:self withBack:YES withError:NO withTxId:nil];
+            } else {
+                [self.delegate sendConfirmationViewControllerDidFinish:self];
+            }
+            [self dismissKeyboard];
      }];
 }
 
@@ -513,18 +522,14 @@
                 tABC_TxDetails Details;
                 memset(&Details, 0, sizeof(tABC_TxDetails));
                 Details.amountSatoshi = self.amountToSendSatoshi;
-                Details.amountCurrency = currency;
+                Details.amountCurrency = _overrideCurrency != 0.0 ? _overrideCurrency : currency;
                 // These will be calculated for us
                 Details.amountFeesAirbitzSatoshi = 0;
                 Details.amountFeesMinersSatoshi = 0;
                 // If this is a transfer, populate the comments
-                if (self.nameLabel) {
-                    Details.szName = (char *)[self.nameLabel UTF8String];
-                } else {
-                    Details.szName = "";
-                }
-                Details.szCategory = "";
-                Details.szNotes = "";
+                Details.szName = (_nameLabel) ?  (char *)[_nameLabel UTF8String] : "";
+                Details.szCategory = (_category) ? (char *)[_category UTF8String] : "";
+                Details.szNotes = (_notes) ? (char *)[_notes UTF8String] : "";
                 Details.attributes = 0x2;
 
                 if (self.bAddressIsWalletUUID)
@@ -889,6 +894,10 @@
 
 #pragma mark - UITextField delegates
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    return _bAdvanceToTx;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     _selectedTextField = textField;
@@ -1059,7 +1068,16 @@
     int delay = MIN(maxDelay, MAX(0, maxDelay - ([[NSDate date] timeIntervalSince1970] - _callbackTimestamp)));
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-        [self showTransactionDetails:params];
+        if (_bAdvanceToTx) {
+            [self showTransactionDetails:params];
+        } else {
+            if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:withTxId:)]) {
+                [self.delegate sendConfirmationViewControllerDidFinish:self withBack:NO withError:NO withTxId:txId];
+            } else {
+                [self.delegate sendConfirmationViewControllerDidFinish:self];
+            }
+            [self hideSendStatus];
+        }
     });
 }
 
@@ -1068,7 +1086,18 @@
     NSString *title = NSLocalizedString(@"Error during send", nil);
     NSString *message = [Util errorMap:&Error];
     NSArray *params = [NSArray arrayWithObjects: title, message, nil];
-    [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        if (_bAdvanceToTx) {
+            [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
+        } else {
+            if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:withTxId:)]) {
+                [self.delegate sendConfirmationViewControllerDidFinish:self withBack:NO withError:NO withTxId:nil];
+            } else {
+                [self.delegate sendConfirmationViewControllerDidFinish:self];
+            }
+            [self hideSendStatus];
+        }
+    });
 }
 
 - (NSString *)getDestAddress

@@ -1217,7 +1217,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         case SECTION_DEBUG:
             return 1;
             break;
-            
+
         default:
             return 0;
             break;
@@ -1228,7 +1228,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
 	if ((indexPath.section == SECTION_OPTIONS) 
         || (indexPath.section == SECTION_LOGOUT)
-            || (indexPath.section == SECTION_DEBUG))
+        || (indexPath.section == SECTION_DEBUG))
 	{
 		return 47.0;
 	}
