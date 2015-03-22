@@ -1237,7 +1237,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	if (section == SECTION_DEFAULT_EXCHANGE)
 	{
-		label.text = NSLocalizedString(@"DEFAULT EXCHANGE", @"section header in settings table");
+		label.text = NSLocalizedString(@"DEFAULT EXCHANGE RATE", @"section header in settings table");
 	}
 	return cell;
 }
