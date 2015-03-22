@@ -400,7 +400,7 @@
                                   initWithTitle:self.labelTitle.text
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                            self.labelTitle.text,
-                                           NSLocalizedString(@"Incorrect password", @"")]
+                                           NSLocalizedString(@"Incorrect current password", @"")]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
