@@ -36,6 +36,8 @@
 	UIButton                    *_blockingButton;
 	BOOL                        _walletMakerVisible;
     OfflineWalletViewController *_offlineWalletViewController;
+    FadingAlertView             *_fadingAlert;
+
 }
 
 @property (nonatomic, strong) NSMutableArray *arrayWallets;
@@ -424,6 +426,21 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [[NSUserDefaults standardUserDefaults] setBool:_archiveCollapsed forKey:ARCHIVE_COLLAPSED];
     [userDefaults synchronize];
+}
+
+- (void)headerButton
+{
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert.message = @"To archive a wallet, tap and hold the 3 dots to the right of a wallet and drag it below the [ARCHIVE] header";
+    _fadingAlert.fadeDelay = FADING_HELP_DELAY;
+    _fadingAlert.fadeDuration = FADING_HELP_DURATION;
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert showFading];
+}
+
+- (void)fadingAlertDismissed:(FadingAlertView *)view
+{
+    _fadingAlert = nil;
 }
 
 - (void)addWallet

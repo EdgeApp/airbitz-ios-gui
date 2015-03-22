@@ -43,10 +43,11 @@ typedef NS_ENUM(NSUInteger, RequestState) {
 
 #define MERCHANT_RECEIVED_DURATION 20
 
-#define ERROR_MESSAGE_FADE_DURATION         3.0
-#define ERROR_MESSAGE_FADE_DELAY            2.0
+#define ERROR_MESSAGE_FADE_DURATION         1.0
+#define ERROR_MESSAGE_FADE_DELAY            4.0
 #define ERROR_MESSAGE_FADE_DISMISS          0.1
-#define FADING_HELP_DURATION                5.0
+#define FADING_HELP_DURATION                1.0
+#define FADING_HELP_DELAY                   4.0
 
 #define OTP_RESET_DELAY (60 * 60 * 24 * 7)
 

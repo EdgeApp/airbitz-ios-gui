@@ -84,6 +84,11 @@
     }
 }
 
+- (IBAction)headerButton
+{
+    [self.delegate headerButton];
+}
+
 - (IBAction)addWallet
 {
     [self.delegate addWallet];
