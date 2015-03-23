@@ -178,7 +178,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	scanMode = SCAN_MODE_UNINITIALIZED;
 	[self loadWalletInfo];
 	[self updateTable];
+#if !TARGET_IPHONE_SIMULATOR
     [self startQRReader];
+#endif
 
 
     if([LocalSettings controller].bDisableBLE == NO)
@@ -1449,8 +1451,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     [self loadWalletInfo];
     self.qrView.hidden = YES;
+#if !TARGET_IPHONE_SIMULATOR
     [self startQRReader];
-
+#endif
+    
     self.pickerTextSendTo.textField.text = @"";
     //[self startCameraScanner:nil];
 	[_sendConfirmationViewController.view removeFromSuperview];
