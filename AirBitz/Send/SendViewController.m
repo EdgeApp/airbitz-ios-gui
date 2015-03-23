@@ -166,7 +166,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	//for some reason, dismissing the image picker resizes our view's frame to full screen which places the orange QR button behind the tool bar.
 	//Remember our original height so we can force it back to that in viewWillAppear.
 	originalFrameHeight = self.view.frame.size.height;
-	
+
+    self.qrView.hidden = YES;
 	self.arrayContacts = @[];
 	// load all the names from the address book
     [self generateListOfContactNames];
@@ -177,8 +178,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	scanMode = SCAN_MODE_UNINITIALIZED;
 	[self loadWalletInfo];
 	[self updateTable];
-	
-	if([LocalSettings controller].bDisableBLE == NO)
+    [self startQRReader];
+
+
+    if([LocalSettings controller].bDisableBLE == NO)
 	{
 		// Start up the CBCentralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
 		 NSTimeInterval curTime = CACurrentMediaTime();
@@ -291,9 +294,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		scanMode = SCAN_MODE_BLE;
 		self.bleView.hidden = NO;
 		self.qrView.hidden = YES;
-#if !TARGET_IPHONE_SIMULATOR
-		[self stopQRReader];
-#endif
 		[self startBLE];
 	}
 }
@@ -322,7 +322,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		else
 		{
 			//NSLog(@" ^^^^^^^^^^^^^^^^ NORMAL SCAN MODE.  START QR NOW ^^^^^^^^^^^^^^^^");
-			[self startQRReader];
 		}
 #endif
 		
@@ -1443,7 +1442,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
 {
     [self loadWalletInfo];
-	self.pickerTextSendTo.textField.text = @"";
+    self.qrView.hidden = YES;
+    [self startQRReader];
+
+    self.pickerTextSendTo.textField.text = @"";
     //[self startCameraScanner:nil];
 	[_sendConfirmationViewController.view removeFromSuperview];
 	_sendConfirmationViewController = nil;
