@@ -91,6 +91,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.PINLoginInvalidEntryCount = 0;
     self.reviewNotified = NO;
     self.loginCount = 0;
+    self.needsPasswordCheck = NO;
     self.firstLoginTime = nil;
     self.requestViewCount = 0;
     self.sendViewCount = 0;
@@ -268,6 +269,24 @@ static User *singleton = nil;  // this will be the one and only object this stat
 - (void)resetPINLoginInvalidEntryCount
 {
     self.PINLoginInvalidEntryCount = 0;
+}
+
+- (void)incPinLogin
+{
+    tABC_Error error;
+    tABC_AccountSettings *pSettings;
+    ABC_LoadAccountSettings([_name UTF8String], [_password UTF8String], &pSettings, &error);
+    if (error.code == ABC_CC_Ok) {
+        int pinLoginCount = ++(pSettings->pinLoginCount);
+        ABC_UpdateAccountSettings([_name UTF8String], [_password UTF8String], pSettings, &error);
+
+        if (pinLoginCount == 3
+                || pinLoginCount == 10
+                || pinLoginCount == 40
+                || pinLoginCount == 100) {
+            _needsPasswordCheck = YES;
+        }
+    }
 }
 
 + (BOOL)offerUserReview

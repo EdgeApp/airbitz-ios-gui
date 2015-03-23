@@ -40,6 +40,8 @@
 @property (nonatomic) bool reviewNotified;
 @property (nonatomic) NSDate *firstLoginTime;
 @property (nonatomic) NSInteger loginCount;
+@property (nonatomic) NSInteger pinLoginCount;
+@property (nonatomic) BOOL needsPasswordCheck;
 @property (nonatomic, assign) NSInteger requestViewCount;
 @property (nonatomic, assign) NSInteger sendViewCount;
 @property (nonatomic, assign) NSInteger bleViewCount;
@@ -68,4 +70,6 @@
 - (NSTimeInterval)getRemainingInvalidEntryWait;
 - (bool)haveExceededPINLoginInvalidEntries;
 - (void)resetPINLoginInvalidEntryCount;
+- (void)incPinLogin;
+
 @end

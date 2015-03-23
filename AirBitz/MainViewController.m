@@ -65,6 +65,8 @@ typedef enum eAppMode
     TwoFactorScanViewController      *_tfaScanViewController;
     UIAlertView                 *_receivedAlert;
     UIAlertView                 *_passwordChangeAlert;
+    UIAlertView                 *_passwordCheckAlert;
+    UIAlertView                 *_passwordIncorrectAlert;
     UIAlertView                 *_otpRequiredAlert;
     UIAlertView                 *_userReviewAlert;
     UIAlertView                 *_userReviewOKAlert;
@@ -605,9 +607,58 @@ typedef enum eAppMode
     {
         [self processBitcoinURI:_uri];
         _uri = nil;
+    } else {
+        [self checkUserReview];
     }
-    
-    [self checkUserReview];
+}
+
+- (void)showPasswordCheckAlert
+{
+    NSString *title = NSLocalizedString(@"Remember your password?", nil);
+    NSString *message = NSLocalizedString(@"Do you still remember your password? You will need your password if your device gets lost or if your PIN is incorrectly entered 3 times.\nEnter it below to make sure:", nil);
+    // show password reminder test
+    _passwordCheckAlert = [[UIAlertView alloc] initWithTitle:title
+                                                     message:message
+                                                    delegate:self
+                                           cancelButtonTitle:@"Later"
+                                           otherButtonTitles:@"Check Password", nil];
+    _passwordCheckAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
+    [_passwordCheckAlert show];
+    [User Singleton].needsPasswordCheck = NO;
+}
+
+- (void)showPasswordCheckSkip
+{
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert.message = NSLocalizedString(@"Please create a new account and transfer your funds if you forgot your password.", nil);
+    _fadingAlert.fadeDuration = 2;
+    _fadingAlert.fadeDelay = 5;
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert showFading];
+}
+
+- (void)handlePasswordResults:(NSNumber *)authenticated
+{
+    if (_fadingAlert) {
+        [_fadingAlert dismiss:NO];
+    }
+    BOOL bAuthenticated = [authenticated boolValue];
+    if (bAuthenticated) {
+        _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+        _fadingAlert.message = NSLocalizedString(@"Great job remembering your password.", nil);
+        _fadingAlert.fadeDuration = 2;
+        _fadingAlert.fadeDelay = 5;
+        [_fadingAlert blockModal:NO];
+        [_fadingAlert show];
+    } else {
+        _passwordIncorrectAlert = [[UIAlertView alloc]
+                initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
+                      message:NSLocalizedString(@"Incorrect Password. Try again?", nil)
+                     delegate:self
+            cancelButtonTitle:@"NO"
+            otherButtonTitles:@"YES", nil];
+        [_passwordIncorrectAlert show];
+    }
 }
 
 - (void)loginViewControllerDidSwitchAccount
@@ -847,14 +898,18 @@ typedef enum eAppMode
 	[_PINReLoginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];
+
+    // increment PIN login count
+    [[User Singleton] incPinLogin];
     
-    if (_uri)
-    {
+    if (_uri) {
         [self processBitcoinURI:_uri];
         _uri = nil;
+    } else if ([User Singleton].needsPasswordCheck) {
+        [self showPasswordCheckAlert];
+    } else {
+        [self checkUserReview];
     }
-
-    [self checkUserReview];
 }
 
 #pragma mark - ABC Alert delegate
@@ -873,6 +928,31 @@ typedef enum eAppMode
     else if (_otpRequiredAlert == alertView && buttonIndex == 1)
     {
         [self launchTwoFactorScan];
+    }
+    else if (_passwordCheckAlert == alertView)
+    {
+        _passwordCheckAlert = nil;
+        if (buttonIndex == 0) {
+            [self showPasswordCheckSkip];
+        } else {
+            [Util checkPasswordAsync:[[alertView textFieldAtIndex:0] text]
+                        withSelector:@selector(handlePasswordResults:)
+                          controller:self];
+
+            _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+            _fadingAlert.message = NSLocalizedString(@"Checking password...", nil);
+            [_fadingAlert blockModal:YES];
+            [_fadingAlert showSpinner:YES];
+            [_fadingAlert showFading];
+        }
+    }
+    else if (_passwordIncorrectAlert == alertView)
+    {
+        if (buttonIndex == 0) {
+            [self showPasswordCheckSkip];
+        } else {
+            [self showPasswordCheckAlert];
+        }
     }
     else if (_userReviewAlert == alertView)
     {
