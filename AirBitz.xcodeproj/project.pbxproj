@@ -1705,6 +1705,12 @@
 		DAE866231A88A58A00A17BD3 /* btn_export@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147018C012B500AEA789 /* btn_export@2x~iphone.png */; };
 		DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
 		DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
+		E25451491AC0E15C004ACD70 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25451481AC0E15C004ACD70 /* SWRevealViewController.m */; };
+		E254514A1AC0E15C004ACD70 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25451481AC0E15C004ACD70 /* SWRevealViewController.m */; };
+		E254514B1AC0E15C004ACD70 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25451481AC0E15C004ACD70 /* SWRevealViewController.m */; };
+		E254514E1AC0EC3A004ACD70 /* SlideoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E254514D1AC0EC3A004ACD70 /* SlideoutViewController.m */; };
+		E254514F1AC0EC3A004ACD70 /* SlideoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E254514D1AC0EC3A004ACD70 /* SlideoutViewController.m */; };
+		E25451501AC0EC3A004ACD70 /* SlideoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E254514D1AC0EC3A004ACD70 /* SlideoutViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2488,6 +2494,10 @@
 		DAE866291A88A58A00A17BD3 /* Airbitz Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAFC799E1A81CCBE00E9039D /* TwoFactorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorMenuViewController.h; sourceTree = "<group>"; };
 		DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorMenuViewController.m; sourceTree = "<group>"; };
+		E25451471AC0E15C004ACD70 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		E25451481AC0E15C004ACD70 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		E254514C1AC0EC3A004ACD70 /* SlideoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideoutViewController.h; sourceTree = "<group>"; };
+		E254514D1AC0EC3A004ACD70 /* SlideoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideoutViewController.m; sourceTree = "<group>"; };
 		E47C0EC32EE29D34C5A03A0B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -3057,6 +3067,7 @@
 		B5675B5118A17F6F002E0703 /* AirBitz */ = {
 			isa = PBXGroup;
 			children = (
+				E25451411AC0E141004ACD70 /* Slideout */,
 				7D5E1CB919AFB21F00943A81 /* ABC-testnet */,
 				4C08A6D118C29CDC0071B87C /* ABC */,
 				4C08A6E318C2B1B60071B87C /* ABC Data */,
@@ -3816,6 +3827,26 @@
 				346446F326CD2FB38A4B0DE1 /* SignUpWriteItController.h */,
 			);
 			name = SignUp;
+			sourceTree = "<group>";
+		};
+		E25451411AC0E141004ACD70 /* Slideout */ = {
+			isa = PBXGroup;
+			children = (
+				E25451461AC0E15C004ACD70 /* SWRevealViewController */,
+				E254514C1AC0EC3A004ACD70 /* SlideoutViewController.h */,
+				E254514D1AC0EC3A004ACD70 /* SlideoutViewController.m */,
+			);
+			name = Slideout;
+			sourceTree = "<group>";
+		};
+		E25451461AC0E15C004ACD70 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E25451471AC0E15C004ACD70 /* SWRevealViewController.h */,
+				E25451481AC0E15C004ACD70 /* SWRevealViewController.m */,
+			);
+			name = SWRevealViewController;
+			path = "../../../../Downloads/SWRevealViewController-master/SWRevealViewController";
 			sourceTree = "<group>";
 		};
 		E9B30ECB4BB83AB9C4A56899 /* Pods */ = {
@@ -5336,8 +5367,10 @@
 				7D98ACC319A7C550003D2BF6 /* StylizedTextField.m in Sources */,
 				7D98ACC419A7C550003D2BF6 /* Transaction.m in Sources */,
 				7DFD22E81A1E716C008C43FB /* UIPhotoItemView.m in Sources */,
+				E254514A1AC0E15C004ACD70 /* SWRevealViewController.m in Sources */,
 				7D98ACC519A7C550003D2BF6 /* PasswordVerifyView.m in Sources */,
 				DAE276231A9BF68100E24523 /* SignUpUsernameController.m in Sources */,
+				E254514F1AC0EC3A004ACD70 /* SlideoutViewController.m in Sources */,
 				7D98ACC619A7C550003D2BF6 /* RadioButtonCell.m in Sources */,
 				7D98ACC719A7C550003D2BF6 /* TabBarView.m in Sources */,
 				7D98ACC819A7C550003D2BF6 /* CommonOverviewCell.m in Sources */,
@@ -5477,8 +5510,10 @@
 				7DB1354819FF10E5007D23CE /* BD_Share_Cell.m in Sources */,
 				B5FD393418F06FD800BE2670 /* StylizedTextField.m in Sources */,
 				4C08A6E918C53BDA0071B87C /* Transaction.m in Sources */,
+				E25451491AC0E15C004ACD70 /* SWRevealViewController.m in Sources */,
 				B5F2E9CF18DCDFB0008ACF88 /* PasswordVerifyView.m in Sources */,
 				DAE276221A9BF68100E24523 /* SignUpUsernameController.m in Sources */,
+				E254514E1AC0EC3A004ACD70 /* SlideoutViewController.m in Sources */,
 				B55A030818EA210000845090 /* RadioButtonCell.m in Sources */,
 				B59C161B18C1436300AEA789 /* TabBarView.m in Sources */,
 				B5C0A99E18EA0C10008F302C /* CommonOverviewCell.m in Sources */,
@@ -5618,8 +5653,10 @@
 				DAE864131A88A58A00A17BD3 /* BD_Share_Cell.m in Sources */,
 				DAE864141A88A58A00A17BD3 /* StylizedTextField.m in Sources */,
 				DAE864151A88A58A00A17BD3 /* Transaction.m in Sources */,
+				E254514B1AC0E15C004ACD70 /* SWRevealViewController.m in Sources */,
 				DAE864161A88A58A00A17BD3 /* PasswordVerifyView.m in Sources */,
 				DAE276241A9BF68100E24523 /* SignUpUsernameController.m in Sources */,
+				E25451501AC0EC3A004ACD70 /* SlideoutViewController.m in Sources */,
 				DAE864171A88A58A00A17BD3 /* RadioButtonCell.m in Sources */,
 				DAE864181A88A58A00A17BD3 /* TabBarView.m in Sources */,
 				DAE864191A88A58A00A17BD3 /* CommonOverviewCell.m in Sources */,
