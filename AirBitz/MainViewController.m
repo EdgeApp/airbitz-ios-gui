@@ -81,6 +81,7 @@ typedef enum eAppMode
     BOOL                        firstLaunch;
     
     CGRect                      _originalSlideoutFrame;
+    CGRect                      _closedSlideoutFrame;
     UIButton                    *_blockingButton;
 }
 
@@ -162,8 +163,12 @@ typedef enum eAppMode
     [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
     
     [NotificationChecker initAll];
-        
+    
     _originalSlideoutFrame = self.slideoutView.frame;
+    CGRect frame = _originalSlideoutFrame;
+    frame.origin.x = frame.origin.x + frame.size.width;
+    _closedSlideoutFrame = frame;
+
     self.slideoutView.hidden = YES;
     self.slideoutView.delegate = self;
 }
@@ -1251,23 +1256,22 @@ typedef enum eAppMode
 {
     if (!show)
     {
-        CGRect frame = self.slideoutView.frame;
-        frame.size.width = 0;
-        [self removeBlockingButton];
         [UIView animateWithDuration:0.35
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^
          {
-             self.slideoutView.frame = frame;
+             self.slideoutView.frame = _closedSlideoutFrame;
          }
                          completion:^(BOOL finished)
          {
              self.slideoutView.hidden = YES;
+             [self removeBlockingButton];
          }];
     }
     else {
         self.slideoutView.hidden = NO;
+        self.slideoutView.frame = _closedSlideoutFrame;
         [[self.slideoutView superview] bringSubviewToFront:self.slideoutView];
         [self createBlockingButton:self.slideoutView];
         [UIView animateWithDuration:0.35

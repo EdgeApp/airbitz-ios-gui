@@ -35,7 +35,6 @@
     return self;
 }
 
-
 - (IBAction)buysellTouched:(id)sender
 {
     if (self.delegate)
