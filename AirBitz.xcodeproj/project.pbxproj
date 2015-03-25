@@ -1705,6 +1705,27 @@
 		DAE866231A88A58A00A17BD3 /* btn_export@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147018C012B500AEA789 /* btn_export@2x~iphone.png */; };
 		DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
 		DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
+		E2067B7A1AC2FDE000E17C36 /* ico_more_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B781AC2FDE000E17C36 /* ico_more_dark.png */; };
+		E2067B7B1AC2FDE000E17C36 /* ico_more_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B781AC2FDE000E17C36 /* ico_more_dark.png */; };
+		E2067B7C1AC2FDE000E17C36 /* ico_more_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B781AC2FDE000E17C36 /* ico_more_dark.png */; };
+		E2067B7D1AC2FDE000E17C36 /* ico_more.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B791AC2FDE000E17C36 /* ico_more.png */; };
+		E2067B7E1AC2FDE000E17C36 /* ico_more.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B791AC2FDE000E17C36 /* ico_more.png */; };
+		E2067B7F1AC2FDE000E17C36 /* ico_more.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B791AC2FDE000E17C36 /* ico_more.png */; };
+		E2067B8A1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */; };
+		E2067B8B1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */; };
+		E2067B8C1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */; };
+		E2067B8D1AC2FDFB00E17C36 /* icon_bitcoin_symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B861AC2FDFB00E17C36 /* icon_bitcoin_symbol.png */; };
+		E2067B8E1AC2FDFB00E17C36 /* icon_bitcoin_symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B861AC2FDFB00E17C36 /* icon_bitcoin_symbol.png */; };
+		E2067B8F1AC2FDFB00E17C36 /* icon_bitcoin_symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B861AC2FDFB00E17C36 /* icon_bitcoin_symbol.png */; };
+		E2067B901AC2FDFB00E17C36 /* icon_exchange.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B871AC2FDFB00E17C36 /* icon_exchange.png */; };
+		E2067B911AC2FDFB00E17C36 /* icon_exchange.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B871AC2FDFB00E17C36 /* icon_exchange.png */; };
+		E2067B921AC2FDFB00E17C36 /* icon_exchange.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B871AC2FDFB00E17C36 /* icon_exchange.png */; };
+		E2067B931AC2FDFB00E17C36 /* icon_logout.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B881AC2FDFB00E17C36 /* icon_logout.png */; };
+		E2067B941AC2FDFB00E17C36 /* icon_logout.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B881AC2FDFB00E17C36 /* icon_logout.png */; };
+		E2067B951AC2FDFB00E17C36 /* icon_logout.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B881AC2FDFB00E17C36 /* icon_logout.png */; };
+		E2067B961AC2FDFB00E17C36 /* icon_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B891AC2FDFB00E17C36 /* icon_settings.png */; };
+		E2067B971AC2FDFB00E17C36 /* icon_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B891AC2FDFB00E17C36 /* icon_settings.png */; };
+		E2067B981AC2FDFB00E17C36 /* icon_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B891AC2FDFB00E17C36 /* icon_settings.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2488,6 +2509,13 @@
 		DAE866291A88A58A00A17BD3 /* Airbitz Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAFC799E1A81CCBE00E9039D /* TwoFactorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorMenuViewController.h; sourceTree = "<group>"; };
 		DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorMenuViewController.m; sourceTree = "<group>"; };
+		E2067B781AC2FDE000E17C36 /* ico_more_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_more_dark.png; sourceTree = "<group>"; };
+		E2067B791AC2FDE000E17C36 /* ico_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_more.png; sourceTree = "<group>"; };
+		E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_account_secure.png; sourceTree = "<group>"; };
+		E2067B861AC2FDFB00E17C36 /* icon_bitcoin_symbol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bitcoin_symbol.png; sourceTree = "<group>"; };
+		E2067B871AC2FDFB00E17C36 /* icon_exchange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_exchange.png; sourceTree = "<group>"; };
+		E2067B881AC2FDFB00E17C36 /* icon_logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_logout.png; sourceTree = "<group>"; };
+		E2067B891AC2FDFB00E17C36 /* icon_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings.png; sourceTree = "<group>"; };
 		E47C0EC32EE29D34C5A03A0B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -3194,6 +3222,7 @@
 		B5675B9F18A19A84002E0703 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				E2067B841AC2FDFB00E17C36 /* Slideout */,
 				B5675BA018A19A84002E0703 /* back_arrow@2x~iphone.png */,
 				B5675BA118A19A84002E0703 /* back_arrow~iphone.png */,
 				7DFAF0C11A03119D00D33198 /* background_login@2x~iphone.jpg */,
@@ -3305,6 +3334,8 @@
 		B59C144118C012B500AEA789 /* wallet */ = {
 			isa = PBXGroup;
 			children = (
+				E2067B781AC2FDE000E17C36 /* ico_more_dark.png */,
+				E2067B791AC2FDE000E17C36 /* ico_more.png */,
 				B5628BE7199BD6320077DA1C /* 0-bars@2x.png */,
 				B5628BE8199BD6320077DA1C /* 1-bar@2x.png */,
 				B5628BE9199BD6320077DA1C /* 2-bars@2x.png */,
@@ -3819,6 +3850,18 @@
 			name = SignUp;
 			sourceTree = "<group>";
 		};
+		E2067B841AC2FDFB00E17C36 /* Slideout */ = {
+			isa = PBXGroup;
+			children = (
+				E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */,
+				E2067B861AC2FDFB00E17C36 /* icon_bitcoin_symbol.png */,
+				E2067B871AC2FDFB00E17C36 /* icon_exchange.png */,
+				E2067B881AC2FDFB00E17C36 /* icon_logout.png */,
+				E2067B891AC2FDFB00E17C36 /* icon_settings.png */,
+			);
+			path = Slideout;
+			sourceTree = "<group>";
+		};
 		E25451411AC0E141004ACD70 /* Slideout */ = {
 			isa = PBXGroup;
 			children = (
@@ -4020,6 +4063,7 @@
 				7D8B59C51A328895000AC178 /* HockeySDK.xcconfig in Resources */,
 				7D98AD5819A7C550003D2BF6 /* icon_USD_light.png in Resources */,
 				7D98AD5919A7C550003D2BF6 /* ButtonSelectorView~iphone.xib in Resources */,
+				E2067B971AC2FDFB00E17C36 /* icon_settings.png in Resources */,
 				7D98AD5A19A7C550003D2BF6 /* icon_request~iphone.png in Resources */,
 				7D98AD5B19A7C550003D2BF6 /* WalletMakerView~iphone.xib in Resources */,
 				7D98AD5C19A7C550003D2BF6 /* btn_alwaysConfirm_off~iphone.png in Resources */,
@@ -4143,6 +4187,7 @@
 				7D98ADD419A7C550003D2BF6 /* icon_wallet_dark~iphone.png in Resources */,
 				7D23D57719BE8E130042B87A /* bd_highlighted_cell_middle~iphone.png in Resources */,
 				7D64939B1A060F1E0002E64C /* large-digit-input@2x~iphone.png in Resources */,
+				E2067B7E1AC2FDE000E17C36 /* ico_more.png in Resources */,
 				7D98ADD519A7C550003D2BF6 /* btn_export_dates@2x~iphone.png in Resources */,
 				7D98ADD619A7C550003D2BF6 /* infoSend.html in Resources */,
 				7DB9DD821A03187D00AD35ED /* background~iphone.jpg in Resources */,
@@ -4189,12 +4234,14 @@
 				7D98ADF919A7C550003D2BF6 /* btn_add@2x~iphone.png in Resources */,
 				7D98ADFA19A7C550003D2BF6 /* ConfirmationSliderView.xib in Resources */,
 				7D98ADFB19A7C550003D2BF6 /* Lato-BoldItalic.ttf in Resources */,
+				E2067B8E1AC2FDFB00E17C36 /* icon_bitcoin_symbol.png in Resources */,
 				7D98ADFC19A7C550003D2BF6 /* 5-bars@2x.png in Resources */,
 				7D98ADFD19A7C550003D2BF6 /* icon_send~iphone.png in Resources */,
 				7D98ADFE19A7C550003D2BF6 /* btn_import_wallet~iphone.png in Resources */,
 				7D98ADFF19A7C550003D2BF6 /* btn_alwaysConfirm_on@2x~iphone.png in Resources */,
 				7D98AE0019A7C550003D2BF6 /* img_collapseExpandBlueDown@2x~iphone.png in Resources */,
 				7D98AE0119A7C550003D2BF6 /* WalletHeaderView~iphone.xib in Resources */,
+				E2067B8B1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */,
 				7D98AE0219A7C550003D2BF6 /* table_cell_middle@2x~iphone.png in Resources */,
 				7D98AE0319A7C550003D2BF6 /* infoSettings.html in Resources */,
 				7D98AE0419A7C550003D2BF6 /* icon_request_dark~iphone.png in Resources */,
@@ -4235,6 +4282,7 @@
 				7D98AE2519A7C550003D2BF6 /* icon_settings@2x~iphone.png in Resources */,
 				7D98AE2619A7C550003D2BF6 /* Images.xcassets in Resources */,
 				7D98AE2719A7C550003D2BF6 /* bd_highlighted_cell_top~iphone.png in Resources */,
+				E2067B7B1AC2FDE000E17C36 /* ico_more_dark.png in Resources */,
 				7D8270BF19F89A9A003F275D /* btn_forgot_password_arrow.png in Resources */,
 				7D989FFB1A0206960094512B /* bd_icon_facebook@2x~iphone.png in Resources */,
 				7D98AE2919A7C550003D2BF6 /* bd_cell_top@2x~iphone.png in Resources */,
@@ -4312,6 +4360,7 @@
 				7D98AE6919A7C550003D2BF6 /* BalanceView~iphone.xib in Resources */,
 				7D98AE6A19A7C550003D2BF6 /* btn_request~iphone.png in Resources */,
 				7D8B59C71A328895000AC178 /* HockeySDKResources.bundle in Resources */,
+				E2067B911AC2FDFB00E17C36 /* icon_exchange.png in Resources */,
 				7D98AE6B19A7C550003D2BF6 /* table_cell_bottom@2x~iphone.png in Resources */,
 				7D98AE6C19A7C550003D2BF6 /* icon_export_google~iphone.png in Resources */,
 				7D98AE6D19A7C550003D2BF6 /* bkg_dark_header@2x~iphone.png in Resources */,
@@ -4330,6 +4379,7 @@
 				7D98AE7A19A7C550003D2BF6 /* infoRequest.html in Resources */,
 				7D98AE7B19A7C550003D2BF6 /* flash-on~iphone.png in Resources */,
 				7D98AE7C19A7C550003D2BF6 /* btn_checkmark~iphone.png in Resources */,
+				E2067B941AC2FDFB00E17C36 /* icon_logout.png in Resources */,
 				7DFD23161A200F8F008C43FB /* bd_sliderbubble@2x~iphone.png in Resources */,
 				7D98AE7D19A7C550003D2BF6 /* logo_large@2x~iphone.png in Resources */,
 				7D98AE7E19A7C550003D2BF6 /* btn_3~iphone.png in Resources */,
@@ -4379,6 +4429,7 @@
 				4C5D8C821930060F0015BB3C /* btn_search~iphone.png in Resources */,
 				B5F2E9D318DCE09E008ACF88 /* PasswordVerifyView~ipad.xib in Resources */,
 				7D987AFA1A48BA8C00958AAD /* BitcoinReceived.mp3 in Resources */,
+				E2067B8D1AC2FDFB00E17C36 /* icon_bitcoin_symbol.png in Resources */,
 				4C7C1257193D2CFC0096338D /* WalletExportQuicken.QIF in Resources */,
 				B55A030118EA206300845090 /* btn_done~iphone.png in Resources */,
 				DA1333A01A7B20840051DE14 /* ScanView~iphone.xib in Resources */,
@@ -4430,6 +4481,7 @@
 				B561E1B218D25CC1002DCDC2 /* btn_info@2x~iphone.png in Resources */,
 				DA0B03D11A90A72000A4D5B0 /* White-Dot@2x~iphone.png in Resources */,
 				B5675BB518A19A84002E0703 /* SearchBarBacking~iphone.png in Resources */,
+				E2067B7D1AC2FDE000E17C36 /* ico_more.png in Resources */,
 				B5184B7E18E0F4DA0001712A /* btn_big_blue2_dark~iphone.png in Resources */,
 				B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */,
 				B59C153918C012B500AEA789 /* tabbar_popup_left~iphone.png in Resources */,
@@ -4512,6 +4564,7 @@
 				7D23D57819BE8E130042B87A /* bd_highlighted_cell_single@2x~iphone.png in Resources */,
 				B561E1B318D25CC1002DCDC2 /* btn_info~iphone.png in Resources */,
 				B59C143E18C0129300AEA789 /* bd_icon_phone~iphone.png in Resources */,
+				E2067B901AC2FDFB00E17C36 /* icon_exchange.png in Resources */,
 				B5137C0918A40A8400DA4A34 /* Lato-Bold.ttf in Resources */,
 				B59C14E918C012B500AEA789 /* btn_clear~iphone.png in Resources */,
 				B59C153618C012B500AEA789 /* tabbar_divider@2x~iphone.png in Resources */,
@@ -4570,6 +4623,7 @@
 				B55A02FC18EA206300845090 /* btn_cancel@2x~iphone.png in Resources */,
 				B5F2E9AA18D4AF6C008ACF88 /* info.html in Resources */,
 				4C7247AE19351BFD0091C286 /* table_export~iphone.png in Resources */,
+				E2067B8A1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */,
 				7DEE7DF519F8645200FD2FB6 /* infoInsufficientFunds.html in Resources */,
 				B59C143618C0129300AEA789 /* bd_cell_middle~iphone.png in Resources */,
 				B5628BF7199C035F0077DA1C /* BLE_Logo@2x.png in Resources */,
@@ -4603,6 +4657,7 @@
 				4C7C1256193D2CFC0096338D /* WalletExportPDF.pdf in Resources */,
 				7D8270B519F8976E003F275D /* btn_td_red@2x~iphone.png in Resources */,
 				B59C150418C012B500AEA789 /* btn_slash@2x~iphone.png in Resources */,
+				E2067B7A1AC2FDE000E17C36 /* ico_more_dark.png in Resources */,
 				DABA3486198DFEE300EFAB13 /* infoRequestQR.html in Resources */,
 				B59C143A18C0129300AEA789 /* bd_icon_clock~iphone.png in Resources */,
 				B59C14F418C012B500AEA789 /* btn_import_wallet@2x~iphone.png in Resources */,
@@ -4642,6 +4697,7 @@
 				7D989FFA1A0206960094512B /* bd_icon_facebook@2x~iphone.png in Resources */,
 				B59C143718C0129300AEA789 /* bd_cell_top@2x~iphone.png in Resources */,
 				4C7247C819353BD50091C286 /* icon_export_sdcard@2x~iphone.png in Resources */,
+				E2067B961AC2FDFB00E17C36 /* icon_settings.png in Resources */,
 				68BC31CC1A3F745900ECDA97 /* UIButtonBarRefresh@2x.png in Resources */,
 				4C5D8C61192AF4FF0015BB3C /* btn_camera@2x~iphone.png in Resources */,
 				7DFAF0C31A03119D00D33198 /* background_login@2x~iphone.jpg in Resources */,
@@ -4681,6 +4737,7 @@
 				B5137C0818A40A8400DA4A34 /* Lato-BlackItalic.ttf in Resources */,
 				DAA5782919C1632000E972FC /* emailTemplate.html in Resources */,
 				B59C153218C012B500AEA789 /* password_dot@2x~iphone.png in Resources */,
+				E2067B931AC2FDFB00E17C36 /* icon_logout.png in Resources */,
 				B59C14D018C012B500AEA789 /* btn_3@2x~iphone.png in Resources */,
 				B59C14CB18C012B500AEA789 /* btn_0~iphone.png in Resources */,
 				B59C150818C012B500AEA789 /* btn_SMS@2x~iphone.png in Resources */,
@@ -4778,6 +4835,7 @@
 				DAE8649A1A88A58A00A17BD3 /* btn_search~iphone.png in Resources */,
 				DAE8649B1A88A58A00A17BD3 /* PasswordVerifyView~ipad.xib in Resources */,
 				DAE8649C1A88A58A00A17BD3 /* BitcoinReceived.mp3 in Resources */,
+				E2067B8F1AC2FDFB00E17C36 /* icon_bitcoin_symbol.png in Resources */,
 				DAE8649D1A88A58A00A17BD3 /* WalletExportQuicken.QIF in Resources */,
 				DAE8649E1A88A58A00A17BD3 /* btn_done~iphone.png in Resources */,
 				DAE8649F1A88A58A00A17BD3 /* ScanView~iphone.xib in Resources */,
@@ -4829,6 +4887,7 @@
 				DAE864CD1A88A58A00A17BD3 /* btn_info@2x~iphone.png in Resources */,
 				DA0B03D31A90A72000A4D5B0 /* White-Dot@2x~iphone.png in Resources */,
 				DAE864CE1A88A58A00A17BD3 /* SearchBarBacking~iphone.png in Resources */,
+				E2067B7F1AC2FDE000E17C36 /* ico_more.png in Resources */,
 				DAE864CF1A88A58A00A17BD3 /* btn_big_blue2_dark~iphone.png in Resources */,
 				DAE864D01A88A58A00A17BD3 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DAE864D11A88A58A00A17BD3 /* tabbar_popup_left~iphone.png in Resources */,
@@ -4911,6 +4970,7 @@
 				DAE865201A88A58A00A17BD3 /* bd_highlighted_cell_single@2x~iphone.png in Resources */,
 				DAE865211A88A58A00A17BD3 /* btn_info~iphone.png in Resources */,
 				DAE865221A88A58A00A17BD3 /* bd_icon_phone~iphone.png in Resources */,
+				E2067B921AC2FDFB00E17C36 /* icon_exchange.png in Resources */,
 				DAE865231A88A58A00A17BD3 /* Lato-Bold.ttf in Resources */,
 				DAE865241A88A58A00A17BD3 /* btn_clear~iphone.png in Resources */,
 				DAE865251A88A58A00A17BD3 /* tabbar_divider@2x~iphone.png in Resources */,
@@ -4969,6 +5029,7 @@
 				DAE8655A1A88A58A00A17BD3 /* btn_cancel@2x~iphone.png in Resources */,
 				DAE8655B1A88A58A00A17BD3 /* info.html in Resources */,
 				DAE8655C1A88A58A00A17BD3 /* table_export~iphone.png in Resources */,
+				E2067B8C1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */,
 				DAE8655D1A88A58A00A17BD3 /* infoInsufficientFunds.html in Resources */,
 				DAE8655E1A88A58A00A17BD3 /* bd_cell_middle~iphone.png in Resources */,
 				DAE8655F1A88A58A00A17BD3 /* BLE_Logo@2x.png in Resources */,
@@ -5002,6 +5063,7 @@
 				DAE8657B1A88A58A00A17BD3 /* WalletExportPDF.pdf in Resources */,
 				DAE8657D1A88A58A00A17BD3 /* btn_td_red@2x~iphone.png in Resources */,
 				DAE8657E1A88A58A00A17BD3 /* btn_slash@2x~iphone.png in Resources */,
+				E2067B7C1AC2FDE000E17C36 /* ico_more_dark.png in Resources */,
 				DAE8657F1A88A58A00A17BD3 /* infoRequestQR.html in Resources */,
 				DAE865801A88A58A00A17BD3 /* bd_icon_clock~iphone.png in Resources */,
 				DAE865811A88A58A00A17BD3 /* btn_import_wallet@2x~iphone.png in Resources */,
@@ -5041,6 +5103,7 @@
 				DAE865A31A88A58A00A17BD3 /* bd_icon_facebook@2x~iphone.png in Resources */,
 				DAE865A41A88A58A00A17BD3 /* bd_cell_top@2x~iphone.png in Resources */,
 				DAE865A51A88A58A00A17BD3 /* icon_export_sdcard@2x~iphone.png in Resources */,
+				E2067B981AC2FDFB00E17C36 /* icon_settings.png in Resources */,
 				DAE865A61A88A58A00A17BD3 /* UIButtonBarRefresh@2x.png in Resources */,
 				DAE865A71A88A58A00A17BD3 /* btn_camera@2x~iphone.png in Resources */,
 				DAE865A81A88A58A00A17BD3 /* background_login@2x~iphone.jpg in Resources */,
@@ -5080,6 +5143,7 @@
 				DAE865CA1A88A58A00A17BD3 /* Lato-BlackItalic.ttf in Resources */,
 				DAE865CB1A88A58A00A17BD3 /* emailTemplate.html in Resources */,
 				DAE865CC1A88A58A00A17BD3 /* password_dot@2x~iphone.png in Resources */,
+				E2067B951AC2FDFB00E17C36 /* icon_logout.png in Resources */,
 				DAE865CD1A88A58A00A17BD3 /* btn_3@2x~iphone.png in Resources */,
 				DAE865CE1A88A58A00A17BD3 /* btn_0~iphone.png in Resources */,
 				DAE865CF1A88A58A00A17BD3 /* btn_SMS@2x~iphone.png in Resources */,
