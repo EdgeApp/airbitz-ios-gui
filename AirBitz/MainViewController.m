@@ -8,7 +8,6 @@
 
 #import "ABC.h"
 #import "MainViewController.h"
-#import "SWRevealViewController.h"
 #import "TabBarView.h"
 #import "DirectoryViewController.h"
 #import "RequestViewController.h"
@@ -159,12 +158,6 @@ typedef enum eAppMode
     
     [NotificationChecker initAll];
     
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if ( revealViewController )
-    {
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    }
-
 }
 
 /**
@@ -438,12 +431,10 @@ typedef enum eAppMode
 			{
 				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-//					[_selectedViewController.view removeFromSuperview];
-//					_selectedViewController = _settingsViewController;
-//					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-                    
-                    [self.revealViewController revealToggle:nil];
-				}
+					[_selectedViewController.view removeFromSuperview];
+					_selectedViewController = _settingsViewController;
+					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+                }
 				else
 				{
                     [self showFastestLogin];
