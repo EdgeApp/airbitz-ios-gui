@@ -9,6 +9,7 @@
 #import "ABC.h"
 #import "MainViewController.h"
 #import "TabBarView.h"
+#import "SlideoutView.h"
 #import "DirectoryViewController.h"
 #import "RequestViewController.h"
 #import "SendViewController.h"
@@ -47,7 +48,7 @@ typedef enum eAppMode
 
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
-                                  TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate,
+                                  TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate,
                                   MFMailComposeViewControllerDelegate>
 {
@@ -78,9 +79,13 @@ typedef enum eAppMode
     NSURL                       *_uri;
     InfoView                    *_notificationInfoView;
     BOOL                        firstLaunch;
+    
+    CGRect                      _originalSlideoutFrame;
+    UIButton                    *_blockingButton;
 }
 
 @property (nonatomic, weak) IBOutlet TabBarView *tabBar;
+@property (nonatomic, weak) IBOutlet SlideoutView       *slideoutView;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -157,7 +162,10 @@ typedef enum eAppMode
     [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
     
     [NotificationChecker initAll];
-    
+        
+    _originalSlideoutFrame = self.slideoutView.frame;
+    self.slideoutView.hidden = YES;
+    self.slideoutView.delegate = self;
 }
 
 /**
@@ -431,9 +439,11 @@ typedef enum eAppMode
 			{
 				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-					[_selectedViewController.view removeFromSuperview];
-					_selectedViewController = _settingsViewController;
-					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+//					[_selectedViewController.view removeFromSuperview];
+//					_selectedViewController = _settingsViewController;
+//					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+                    
+                    [self showSlideout:YES];
                 }
 				else
 				{
@@ -1229,5 +1239,103 @@ typedef enum eAppMode
     _notificationInfoView = nil;
     [self displayNextNotification];
 }
+
+#pragma mark slideoutView Delegates
+
+- (void)slideoutViewClosed:(SlideoutView *)slideoutView
+{
+    
+}
+
+- (void)showSlideout:(bool) show
+{
+    if (!show)
+    {
+        CGRect frame = self.slideoutView.frame;
+        frame.size.width = 0;
+        [self removeBlockingButton];
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^
+         {
+             self.slideoutView.frame = frame;
+         }
+                         completion:^(BOOL finished)
+         {
+             self.slideoutView.hidden = YES;
+         }];
+    }
+    else {
+        self.slideoutView.hidden = NO;
+        [[self.slideoutView superview] bringSubviewToFront:self.slideoutView];
+        [self createBlockingButton:self.slideoutView];
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^
+         {
+             self.slideoutView.frame = _originalSlideoutFrame;
+         }
+                         completion:^(BOOL finished)
+         {
+             
+         }];
+    }
+}
+
+-(void)createBlockingButton:(UIView *)view
+{
+    _blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGRect frame = self.view.bounds;
+    _blockingButton.frame = frame;
+    _blockingButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    [self.view insertSubview:_blockingButton belowSubview:view];
+    _blockingButton.alpha = 0.0;
+    
+    [_blockingButton addTarget:self
+                        action:@selector(blockingButtonHit:)
+              forControlEvents:UIControlEventTouchDown];
+    
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^
+     {
+         _blockingButton.alpha = 1.0;
+     }
+                     completion:^(BOOL finished)
+     {
+         
+     }];
+    
+}
+
+- (void)removeBlockingButton
+{
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^
+     {
+         _blockingButton.alpha = 0.0;
+     }
+                     completion:^(BOOL finished)
+     {
+         [_blockingButton removeFromSuperview];
+         _blockingButton = nil;
+     }];
+}
+
+- (void)blockingButtonHit:(UIButton *)button
+{
+    [self showSlideout:NO];
+}
+
+- (void)slideoutBuySell
+{
+    NSLog(@"buysell touched");
+}
+
 
 @end

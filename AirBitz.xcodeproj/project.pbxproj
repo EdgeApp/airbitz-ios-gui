@@ -1726,6 +1726,12 @@
 		E2067B961AC2FDFB00E17C36 /* icon_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B891AC2FDFB00E17C36 /* icon_settings.png */; };
 		E2067B971AC2FDFB00E17C36 /* icon_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B891AC2FDFB00E17C36 /* icon_settings.png */; };
 		E2067B981AC2FDFB00E17C36 /* icon_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B891AC2FDFB00E17C36 /* icon_settings.png */; };
+		E2067B9B1AC30A7200E17C36 /* SlideoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2067B9A1AC30A7200E17C36 /* SlideoutView.m */; };
+		E2067B9C1AC30A7200E17C36 /* SlideoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2067B9A1AC30A7200E17C36 /* SlideoutView.m */; };
+		E2067B9D1AC30A7200E17C36 /* SlideoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2067B9A1AC30A7200E17C36 /* SlideoutView.m */; };
+		E2067BA71AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */; };
+		E2067BA81AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */; };
+		E2067BA91AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2516,6 +2522,9 @@
 		E2067B871AC2FDFB00E17C36 /* icon_exchange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_exchange.png; sourceTree = "<group>"; };
 		E2067B881AC2FDFB00E17C36 /* icon_logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_logout.png; sourceTree = "<group>"; };
 		E2067B891AC2FDFB00E17C36 /* icon_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings.png; sourceTree = "<group>"; };
+		E2067B991AC30A7200E17C36 /* SlideoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideoutView.h; sourceTree = "<group>"; };
+		E2067B9A1AC30A7200E17C36 /* SlideoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideoutView.m; sourceTree = "<group>"; };
+		E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SlideoutView~iphone.xib"; sourceTree = "<group>"; };
 		E47C0EC32EE29D34C5A03A0B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -3865,6 +3874,9 @@
 		E25451411AC0E141004ACD70 /* Slideout */ = {
 			isa = PBXGroup;
 			children = (
+				E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */,
+				E2067B991AC30A7200E17C36 /* SlideoutView.h */,
+				E2067B9A1AC30A7200E17C36 /* SlideoutView.m */,
 			);
 			name = Slideout;
 			sourceTree = "<group>";
@@ -4339,6 +4351,7 @@
 				7D98AE5419A7C550003D2BF6 /* btn_use_max@2x~iphone.png in Resources */,
 				7D98AE5519A7C550003D2BF6 /* San Diego.gpx in Resources */,
 				7D98AE5619A7C550003D2BF6 /* btn_2@2x~iphone.png in Resources */,
+				E2067BA81AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */,
 				7D98AE5719A7C550003D2BF6 /* AnnotationContentView.xib in Resources */,
 				7D98AE5819A7C550003D2BF6 /* bd_icon_clock@2x~iphone.png in Resources */,
 				7D98AE5919A7C550003D2BF6 /* bd_icon_location@2x~iphone.png in Resources */,
@@ -4455,6 +4468,7 @@
 				683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */,
 				7DB1354019FB48D9007D23CE /* bd_icon_share~iphone.png in Resources */,
 				7D23D57019BE8E130042B87A /* bd_highlighted_cell_bottom@2x~iphone.png in Resources */,
+				E2067BA71AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */,
 				B5628BF0199BD6320077DA1C /* 3-bars@2x.png in Resources */,
 				B5F2EB1318DE01EE008ACF88 /* QuestionAnswerView~ipad.xib in Resources */,
 				B55A030318EA206300845090 /* btn_selected~iphone.png in Resources */,
@@ -4861,6 +4875,7 @@
 				DAE864B31A88A58A00A17BD3 /* ca-certificates.crt in Resources */,
 				DAE864B41A88A58A00A17BD3 /* bd_icon_share~iphone.png in Resources */,
 				DAE864B51A88A58A00A17BD3 /* bd_highlighted_cell_bottom@2x~iphone.png in Resources */,
+				E2067BA91AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */,
 				DAE864B61A88A58A00A17BD3 /* 3-bars@2x.png in Resources */,
 				DAE864B71A88A58A00A17BD3 /* QuestionAnswerView~ipad.xib in Resources */,
 				DAE864B81A88A58A00A17BD3 /* btn_selected~iphone.png in Resources */,
@@ -5507,6 +5522,7 @@
 				7D98AD0E19A7C550003D2BF6 /* SyncView.m in Sources */,
 				DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
 				7D98AD0F19A7C550003D2BF6 /* TabBarButton.m in Sources */,
+				E2067B9C1AC30A7200E17C36 /* SlideoutView.m in Sources */,
 				7D98AD1019A7C550003D2BF6 /* PickerTextView.m in Sources */,
 				34644B507781CF1F8E7D5301 /* SignUpWriteItController.m in Sources */,
 				34644F1EE31C431DADB1F99C /* StylizedButtonOutline.m in Sources */,
@@ -5648,6 +5664,7 @@
 				6893E6CA19783FED0092DA04 /* SyncView.m in Sources */,
 				DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
 				B57C207D18C15009005D7245 /* TabBarButton.m in Sources */,
+				E2067B9B1AC30A7200E17C36 /* SlideoutView.m in Sources */,
 				4C3C30A5191C1CAF006923DE /* PickerTextView.m in Sources */,
 				34644F47B5DBBBDBD702E03F /* SignUpWriteItController.m in Sources */,
 				34644DFBC522F75CE8481CB6 /* StylizedButtonOutline.m in Sources */,
@@ -5789,6 +5806,7 @@
 				DAE8646B1A88A58A00A17BD3 /* SyncView.m in Sources */,
 				DAE8646C1A88A58A00A17BD3 /* TwoFactorMenuViewController.m in Sources */,
 				DAE8646D1A88A58A00A17BD3 /* TabBarButton.m in Sources */,
+				E2067B9D1AC30A7200E17C36 /* SlideoutView.m in Sources */,
 				DAE8646E1A88A58A00A17BD3 /* PickerTextView.m in Sources */,
 				346443C3E8845FA868E63AEA /* SignUpWriteItController.m in Sources */,
 				34644B2B5788D8A8EBC9F0E5 /* StylizedButtonOutline.m in Sources */,
