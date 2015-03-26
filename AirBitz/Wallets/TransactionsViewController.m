@@ -185,7 +185,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
     [CoreBridge postToWalletsQueue:^(void) {
         [CoreBridge reloadWallet:self.wallet];
 
@@ -822,6 +822,25 @@
             button.clipsToBounds = YES;
 
             self.buttonSend = button;
+            
+            if ([self.wallet isArchived])
+            {
+                self.buttonSend.enabled = false;
+                self.buttonRequest.enabled = false;
+                [self.buttonRequest setBackgroundColor:UIColorFromARGB(0x5580c342)];
+                [self.buttonRequest.layer setBorderColor:[UIColorFromARGB(0x551b7400) CGColor]];
+                [self.buttonSend setBackgroundColor:UIColorFromARGB(0x55006698)];
+                [self.buttonSend.layer setBorderColor:[UIColorFromARGB(0x552291cf) CGColor]];
+                self.buttonSend.titleLabel.alpha = 0.4f;
+                self.buttonRequest.titleLabel.alpha = 0.4f;
+
+            }
+            else
+            {
+                self.buttonSend.enabled = true;
+                self.buttonRequest.enabled = true;
+            }
+            
         }
     }
     else
