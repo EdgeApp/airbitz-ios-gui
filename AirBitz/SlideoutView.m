@@ -27,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UILabel                *accountText;
 @property (weak, nonatomic) IBOutlet UIView                 *otherAccountsView;
 @property (weak, nonatomic) IBOutlet UIView                 *lowerViews;
+@property (weak, nonatomic) IBOutlet UIButton               *buySellButton;
+@property (weak, nonatomic) IBOutlet UIView                 *buySellDivider;
 
 @property (nonatomic, strong) NSArray                       *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
@@ -56,7 +58,13 @@
     f.origin.x = f.origin.x + f.size.width;
     v.frame = f;
     v->_open = NO;
-    
+
+    tABC_Error error;
+    bool isTestnet = false;
+    ABC_IsTestNet(&isTestnet, &error);
+    v->_buySellButton.hidden = isTestnet ? NO : YES;
+    v->_buySellDivider.hidden = isTestnet ? NO : YES;
+
     return v;
 }
 
