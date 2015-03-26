@@ -55,9 +55,9 @@
     button.selectedIcon.image = [UIImage imageNamed:@"icon_wallet"];
     
     button = [self findButton:4];
-    button.label.text = NSLocalizedString(@"SETTINGS", "tab bar button title");
-    button.icon.image = [UIImage imageNamed:@"icon_settings_dark"];
-    button.selectedIcon.image = [UIImage imageNamed:@"icon_settings"];
+    button.label.text = NSLocalizedString(@"MORE", "tab bar button title");
+    button.icon.image = [UIImage imageNamed:@"icon_more_dark"];
+    button.selectedIcon.image = [UIImage imageNamed:@"icon_more"];
     
 }
 
