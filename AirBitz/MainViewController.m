@@ -80,13 +80,12 @@ typedef enum eAppMode
     InfoView                    *_notificationInfoView;
     BOOL                        firstLaunch;
     
-    CGRect                      _originalSlideoutFrame;
     CGRect                      _closedSlideoutFrame;
+    SlideoutView                *slideoutView;
     UIButton                    *_blockingButton;
 }
 
 @property (nonatomic, weak) IBOutlet TabBarView *tabBar;
-@property (nonatomic, weak) IBOutlet SlideoutView       *slideoutView;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -163,14 +162,9 @@ typedef enum eAppMode
     [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
     
     [NotificationChecker initAll];
-    
-    _originalSlideoutFrame = self.slideoutView.frame;
-    CGRect frame = _originalSlideoutFrame;
-    frame.origin.x = frame.origin.x + frame.size.width;
-    _closedSlideoutFrame = frame;
 
-    self.slideoutView.hidden = YES;
-    self.slideoutView.delegate = self;
+    slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
+    [self.view insertSubview:slideoutView aboveSubview:self.view];
 }
 
 /**
@@ -440,21 +434,18 @@ typedef enum eAppMode
 			break;
 		}
 		case APP_MODE_SETTINGS:
-			if (_selectedViewController != _settingsViewController)
-			{
-				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
-				{
-//					[_selectedViewController.view removeFromSuperview];
-//					_selectedViewController = _settingsViewController;
-//					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-                    
-                    [self showSlideout:YES];
+            if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
+            {
+                if ([slideoutView isOpen]) {
+                    [slideoutView showSlideout:NO];
+                } else {
+                    [slideoutView showSlideout:YES];
                 }
-				else
-				{
-                    [self showFastestLogin];
-				}
-			}
+            }
+            else
+            {
+                [self showFastestLogin];
+            }
 			break;
 	}
 }
@@ -1252,49 +1243,44 @@ typedef enum eAppMode
     
 }
 
-- (void)showSlideout:(bool) show
+- (void)slideoutAccount
 {
-    if (!show)
-    {
-        [UIView animateWithDuration:0.35
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^
-         {
-             self.slideoutView.frame = _closedSlideoutFrame;
-         }
-                         completion:^(BOOL finished)
-         {
-             self.slideoutView.hidden = YES;
-             [self removeBlockingButton];
-         }];
-    }
-    else {
-        self.slideoutView.hidden = NO;
-        self.slideoutView.frame = _closedSlideoutFrame;
-        [[self.slideoutView superview] bringSubviewToFront:self.slideoutView];
-        [self createBlockingButton:self.slideoutView];
-        [UIView animateWithDuration:0.35
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^
-         {
-             self.slideoutView.frame = _originalSlideoutFrame;
-         }
-                         completion:^(BOOL finished)
-         {
-             
-         }];
-    }
+    NSLog(@"MainViewController.slideoutAccount");
+    [slideoutView showSlideout:NO];
 }
 
--(void)createBlockingButton:(UIView *)view
+- (void)slideoutSettings
+{
+    [_selectedViewController.view removeFromSuperview];
+    _selectedViewController = _settingsViewController;
+    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+    [slideoutView showSlideout:NO];
+}
+
+- (void)slideoutLogout
+{
+    [slideoutView showSlideout:NO withAnimation:NO];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[User Singleton] clear];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [self SettingsViewControllerDone:nil];
+        });
+    });
+}
+
+- (void)slideoutBuySell
+{
+    NSLog(@"MainViewController.slideoutBuySell");
+    [slideoutView showSlideout:NO];
+}
+
+- (void)slideoutWillOpen:(SlideoutView *)view
 {
     _blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
     CGRect frame = self.view.bounds;
     _blockingButton.frame = frame;
     _blockingButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-    [self.view insertSubview:_blockingButton belowSubview:view];
+    [self.view insertSubview:_blockingButton belowSubview:slideoutView];
     _blockingButton.alpha = 0.0;
     
     [_blockingButton addTarget:self
@@ -1315,7 +1301,7 @@ typedef enum eAppMode
     
 }
 
-- (void)removeBlockingButton
+- (void)slideoutWillClose:(SlideoutView *)view
 {
     [UIView animateWithDuration:0.35
                           delay:0.0
@@ -1333,13 +1319,7 @@ typedef enum eAppMode
 
 - (void)blockingButtonHit:(UIButton *)button
 {
-    [self showSlideout:NO];
+    [slideoutView showSlideout:NO];
 }
-
-- (void)slideoutBuySell
-{
-    NSLog(@"buysell touched");
-}
-
 
 @end

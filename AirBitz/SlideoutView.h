@@ -12,7 +12,13 @@
 
 @interface SlideoutView : UIView
 
-@property (nonatomic, assign) id<SlideoutViewDelegate>   delegate;
++ (SlideoutView *)CreateWithDelegate:(id)del parentView:(UIView *)parentView withTab:(UIView *)tabBar;
+
+@property (assign) id<SlideoutViewDelegate>   delegate;
+
+- (void)showSlideout:(BOOL)show;
+- (void)showSlideout:(BOOL)show withAnimation:(BOOL)bAnimation;
+- (BOOL)isOpen;
 
 @end
 
@@ -26,6 +32,9 @@
 - (void)slideoutSettings;
 - (void)slideoutLogout;
 - (void)slideoutBuySell;
+
+- (void)slideoutWillOpen:(SlideoutView *)slideoutView;
+- (void)slideoutWillClose:(SlideoutView *)slideoutView;
 - (void)slideoutViewClosed:(SlideoutView *)slideoutView;
 
 @end

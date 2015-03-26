@@ -8,15 +8,44 @@
 
 #import "SlideoutView.h"
 
+@interface SlideoutView ()
+{
+    CGRect   _originalSlideoutFrame;
+    BOOL     _open;
+}
+
+@end
 
 @implementation SlideoutView
+
++ (SlideoutView *)CreateWithDelegate:(id)del parentView:(UIView *)parentView withTab:(UIView *)tabBar;
+{
+    SlideoutView *v = [[[NSBundle mainBundle] loadNibNamed:@"SlideoutView~iphone" owner:self options:nil] objectAtIndex:0];
+    v.delegate = del;
+
+    CGRect f = parentView.frame;
+    int topOffset = 64;
+    int sliderWidth = 250;
+    f.size.width = sliderWidth;
+    f.origin.y = topOffset;
+    f.origin.x = parentView.frame.size.width - f.size.width;
+    f.size.height = parentView.frame.size.height - tabBar.frame.size.height - topOffset;
+    v.frame = f;
+
+    v->_originalSlideoutFrame = v.frame;
+
+    f = v.frame;
+    f.origin.x = f.origin.x + f.size.width;
+    v.frame = f;
+    v->_open = NO;
+
+    return v;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self)
-    {
-        // Initialization code
+    if (self) {
     }
     return self;
 }
@@ -25,61 +54,95 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        if (self.subviews.count == 0) {
-            UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:nil];
-            UIView *subview = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
-            subview.frame = self.bounds;
-            [self addSubview:subview];
-        }
     }
     return self;
 }
 
-- (IBAction)buysellTouched:(id)sender
+- (void)showSlideout:(BOOL)show
 {
-    if (self.delegate)
+    [self showSlideout:show withAnimation:YES];
+}
+
+- (void)showSlideout:(BOOL)show withAnimation:(BOOL)bAnimation
+{
+    if (!show)
     {
-        if ([self.delegate respondsToSelector:@selector(slideoutBuySell)])
-        {
-            [self.delegate slideoutBuySell];
+        CGRect frame = self.frame;
+        frame.origin.x = frame.origin.x + frame.size.width;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWillClose:)]) {
+            [self.delegate slideoutWillClose:self];
         }
+        if (bAnimation) {
+            [UIView animateWithDuration:0.35
+                                delay:0.0
+                                options:UIViewAnimationOptionCurveEaseOut
+                            animations:^
+            {
+                self.frame = frame;
+            }
+                            completion:^(BOOL finished)
+            {
+                self.hidden = YES;
+            }];
+        } else {
+            self.frame = frame;
+            self.hidden = YES;
+        }
+    } else {
+        self.hidden = NO;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWillOpen:)]) {
+            [self.delegate slideoutWillOpen:self];
+        }
+        if (bAnimation) {
+            [UIView animateWithDuration:0.35
+                                delay:0.0
+                                options:UIViewAnimationOptionCurveEaseOut
+                            animations:^
+            {
+                self.frame = _originalSlideoutFrame;
+            }
+                            completion:^(BOOL finished)
+            {
+                
+            }];
+        } else {
+            self.frame = _originalSlideoutFrame;
+        }
+    }
+    _open = show;
+}
+
+- (IBAction)buysellTouched
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutBuySell)]) {
+        [self.delegate slideoutBuySell];
     }
 }
 
-- (IBAction)accountTouched:(id)sender
+- (IBAction)accountTouched
 {
-    NSLog(@"account touched");
-    if (self.delegate)
-    {
-        if ([self.delegate respondsToSelector:@selector(slideoutAccount)])
-        {
-            [self.delegate slideoutAccount];
-        }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutAccount)]) {
+        [self.delegate slideoutAccount];
     }
 }
 
-- (IBAction)settingTouched:(id)sender
+- (IBAction)settingTouched
 {
-    NSLog(@"setting touched");
-    if (self.delegate)
-    {
-        if ([self.delegate respondsToSelector:@selector(slideoutSettings)])
-        {
-            [self.delegate slideoutSettings];
-        }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutSettings)]) {
+        [self.delegate slideoutSettings];
     }
 }
 
-- (IBAction)logoutTouched:(id)sender
+- (IBAction)logoutTouched
 {
-    NSLog(@"logout touched");
-    if (self.delegate)
-    {
-        if ([self.delegate respondsToSelector:@selector(slideoutLogout)])
-        {
-            [self.delegate slideoutLogout];
-        }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutLogout)]) {
+        [self.delegate slideoutLogout];
     }
+}
+
+- (BOOL)isOpen
+{
+    return _open;
 }
 
 @end
