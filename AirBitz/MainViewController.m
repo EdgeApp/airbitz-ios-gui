@@ -43,7 +43,7 @@ typedef enum eAppMode
 	APP_MODE_REQUEST = TAB_BAR_BUTTON_APP_MODE_REQUEST,
 	APP_MODE_SEND = TAB_BAR_BUTTON_APP_MODE_SEND,
 	APP_MODE_WALLETS = TAB_BAR_BUTTON_APP_MODE_WALLETS,
-	APP_MODE_SETTINGS = TAB_BAR_BUTTON_APP_MODE_SETTINGS
+	APP_MODE_MORE = TAB_BAR_BUTTON_APP_MODE_MORE
 } tAppMode;
 
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
@@ -433,7 +433,7 @@ typedef enum eAppMode
 			}
 			break;
 		}
-		case APP_MODE_SETTINGS:
+		case APP_MODE_MORE:
             if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
             {
                 if ([slideoutView isOpen]) {
@@ -525,11 +525,14 @@ typedef enum eAppMode
 
 #pragma mark - TabBarView delegates
 
--(void)tabVarView:(TabBarView *)view selectedSubview:(UIView *)subview reselected:(BOOL)bReselected
+-(void)tabBarView:(TabBarView *)view selectedSubview:(UIView *)subview reselected:(BOOL)bReselected
 {
     tTabBarButton tabBarButton = (tTabBarButton) (subview.tag);
 	_appMode = (tAppMode)(subview.tag);
 
+    if (bReselected && _appMode == APP_MODE_MORE) {
+        [self launchViewControllerBasedOnAppMode]; // slideout if not out already
+    }
     if (bReselected)
     {
         NSDictionary *dictNotification = @{ KEY_TAB_BAR_BUTTON_RESELECT_ID : [NSNumber numberWithInt:tabBarButton] };
@@ -546,7 +549,7 @@ typedef enum eAppMode
     }
 }
 
-- (void)tabVarView:(TabBarView *)view selectedLockedSubview:(UIView *)subview
+- (void)tabBarView:(TabBarView *)view selectedLockedSubview:(UIView *)subview
 {
     if (!_fadingAlert) {
         _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
@@ -1145,8 +1148,8 @@ typedef enum eAppMode
 
 - (void)launchRecoveryQuestions:(NSNotification *)notification
 {
-    if (APP_MODE_SETTINGS != _appMode) {
-        [self.tabBar selectButtonAtIndex:APP_MODE_SETTINGS];
+    if (APP_MODE_MORE != _appMode) {
+        [self.tabBar selectButtonAtIndex:APP_MODE_MORE];
     }
     [_settingsViewController bringUpRecoveryQuestionsView];
 }
@@ -1245,7 +1248,6 @@ typedef enum eAppMode
 
 - (void)slideoutAccount
 {
-    NSLog(@"MainViewController.slideoutAccount");
     [slideoutView showSlideout:NO];
 }
 
