@@ -165,6 +165,9 @@ typedef enum eAppMode
 
     slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
     [self.view insertSubview:slideoutView aboveSubview:self.view];
+    
+    // add right to left swipe detection for slideout
+    [self installRightToLeftSwipeDetection];
 }
 
 /**
@@ -620,6 +623,9 @@ typedef enum eAppMode
     } else {
         [self checkUserReview];
     }
+    
+    // add right to left swipe detection for slideout
+    [self installRightToLeftSwipeDetection];
 }
 
 - (void)showPasswordCheckAlert
@@ -920,6 +926,9 @@ typedef enum eAppMode
     } else {
         [self checkUserReview];
     }
+    
+    // add right to left swipe detection for slideout
+    [self installRightToLeftSwipeDetection];
 }
 
 #pragma mark - ABC Alert delegate
@@ -1324,5 +1333,29 @@ typedef enum eAppMode
 {
     [slideoutView showSlideout:NO];
 }
+
+#pragma mark - Misc Methods
+
+- (void)installRightToLeftSwipeDetection
+{
+    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeRightToLeft:)];
+    gesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return NO;
+}
+
+- (void)didSwipeRightToLeft:(UIGestureRecognizer *)gestureRecognizer
+{
+    if([User isLoggedIn] && ![slideoutView isOpen])
+    {
+        [slideoutView showSlideout:YES];
+    }
+}
+
 
 @end
