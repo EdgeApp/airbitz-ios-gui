@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
@@ -61,8 +60,19 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <view contentMode="scaleToFill" id="BN8-sG-2n3" userLabel="otherAccountsView">
+                    <rect key="frame" x="0.0" y="112" width="240" height="250"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="8L6-iO-nWG" userLabel="View username picker" customClass="PickerTextView">
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <view contentMode="scaleToFill" id="WFe-bF-Laf" userLabel="lowerViews">
-                    <rect key="frame" x="0.0" y="111" width="240" height="250"/>
+                    <rect key="frame" x="0.0" y="112" width="240" height="250"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="GIG-Sd-O0c" userLabel="logoutView" customClass="UIButton">
@@ -157,15 +167,18 @@
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="accountPicker" destination="8L6-iO-nWG" id="mrV-4C-C8t"/>
                 <outlet property="accountText" destination="vsf-Ms-1Ff" id="EjR-p2-q8x"/>
                 <outlet property="conversionText" destination="O8N-2d-FwL" id="Bml-x3-ife"/>
+                <outlet property="lowerViews" destination="WFe-bF-Laf" id="Oyd-RS-Y5j"/>
+                <outlet property="otherAccountsView" destination="BN8-sG-2n3" id="iwC-WI-kIH"/>
             </connections>
             <point key="canvasLocation" x="195" y="375"/>
         </view>
