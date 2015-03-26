@@ -459,7 +459,7 @@
 "ihd-bm-hZb.text" = "This Week";
 
 /* Class = "IBUILabel"; text = "1.00 mBTC = $0.60 USD"; ObjectID = "jwC-1c-veH"; */
-"jwC-1c-veH.text" = "1.00 mBTC = $0.60 USD";
+"jwC-1c-veH.text" = "Exchange Rate Loading...";
 
 /* Class = "IBUILabel"; text = "Transactions"; ObjectID = "k2v-Gd-mWv"; */
 "k2v-Gd-mWv.text" = "Transactions";
