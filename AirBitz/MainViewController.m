@@ -1256,6 +1256,7 @@ typedef enum eAppMode
     [_selectedViewController.view removeFromSuperview];
     _selectedViewController = _settingsViewController;
     [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+    [_settingsViewController resetViews];
     [slideoutView showSlideout:NO];
 }
 

@@ -722,6 +722,43 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     return arraySelections;
 }
 
+- (void)resetViews
+{
+    if (_signUpController)
+    {
+        [_signUpController.view removeFromSuperview];
+        _signUpController = nil;
+    }
+    if (_passwordRecoveryController)
+    {
+        [_passwordRecoveryController.view removeFromSuperview];
+        _passwordRecoveryController = nil;
+    }
+    if (_categoriesController)
+    {
+        [_categoriesController.view removeFromSuperview];
+        _categoriesController = nil;
+    }
+    if (_spendLimitsController)
+    {
+        [_spendLimitsController.view removeFromSuperview];
+        _spendLimitsController = nil;
+    }
+    if (_tfaViewController)
+    {
+        [_tfaViewController.view removeFromSuperview];
+        _tfaViewController = nil;
+    }
+    if (_debugViewController)
+    {
+        [_debugViewController.view removeFromSuperview];
+        _debugViewController = nil;
+    }
+    
+}
+
+
+
 #pragma mark - Action Methods
 
 - (IBAction)buttonBlockerTouched:(id)sender
