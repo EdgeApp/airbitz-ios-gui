@@ -809,6 +809,11 @@ static BOOL bOtpError = NO;
 
 + (NSString *)conversionString:(Wallet *) wallet
 {
+    return [self conversionStringFromNum:wallet.currencyNum withAbbrev:YES];
+}
+
++ (NSString *)conversionStringFromNum:(int) currencyNum withAbbrev:(bool) includeAbbrev
+{
     double currency;
     tABC_Error error;
 
@@ -816,18 +821,31 @@ static BOOL bOtpError = NO;
     NSString *denominationLabel = [User Singleton].denominationLabel;
     tABC_CC result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
                                            [[User Singleton].password UTF8String],
-                                           denomination, &currency, wallet.currencyNum, &error);
+                                           denomination, &currency, currencyNum, &error);
     [Util printABC_Error:&error];
     if (result == ABC_CC_Ok)
     {
+        NSString *abbrev = [CoreBridge currencyAbbrevLookup:currencyNum];
+        NSString *symbol = [CoreBridge currencySymbolLookup:currencyNum];
         if ([User Singleton].denominationType == ABC_DENOMINATION_UBTC)
         {
-            return [NSString stringWithFormat:@"1000 %@ = %@ %.3f %@", denominationLabel, wallet.currencySymbol, currency*1000, wallet.currencyAbbrev];
+            if(includeAbbrev) {
+                return [NSString stringWithFormat:@"1000 %@ = %@ %.3f %@", denominationLabel, symbol, currency*1000, abbrev];
+            }
+            else
+            {
+                return [NSString stringWithFormat:@"1000 %@ = %@ %.3f", denominationLabel, symbol, currency*1000];
+            }
         }
         else
         {
-            return [NSString stringWithFormat:@"1 %@ = %@ %.3f %@", denominationLabel, wallet.currencySymbol, currency, wallet.currencyAbbrev];
-            
+            if(includeAbbrev) {
+                return [NSString stringWithFormat:@"1 %@ = %@ %.3f %@", denominationLabel, symbol, currency, abbrev];
+            }
+            else
+            {
+                return [NSString stringWithFormat:@"1 %@ = %@ %.3f", denominationLabel, symbol, currency];
+            }
         }
     }
     else

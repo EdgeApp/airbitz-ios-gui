@@ -7,12 +7,18 @@
 //
 
 #import "SlideoutView.h"
+#import "CoreBridge.h"
+#import "ABC.h"
+#import "User.h"
 
 @interface SlideoutView ()
 {
     CGRect   _originalSlideoutFrame;
     BOOL     _open;
 }
+
+@property (weak, nonatomic) IBOutlet UILabel                *conversionText;
+@property (weak, nonatomic) IBOutlet UILabel                *accountText;
 
 @end
 
@@ -60,6 +66,16 @@
 
 - (void)showSlideout:(BOOL)show
 {
+    tABC_AccountSettings *_pAccountSettings = NULL;
+    tABC_Error Error;
+    Error.code = ABC_CC_Ok;
+    ABC_LoadAccountSettings([[User Singleton].name UTF8String],
+                            [[User Singleton].password UTF8String],
+                            &_pAccountSettings,
+                            &Error);
+    NSInteger num = _pAccountSettings->currencyNum;
+    self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:NO];
+    self.accountText.text = @"account";
     [self showSlideout:show withAnimation:YES];
 }
 

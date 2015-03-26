@@ -49,6 +49,7 @@
 + (NSString *)formatSatoshi:(int64_t) bitcoin withSymbol:(bool) symbol cropDecimals:(int) decimals forceDecimals:(int) forcedecimals;
 + (int64_t) denominationToSatoshi: (NSString *) amount;
 + (NSString *)conversionString: (Wallet *) wallet;
++ (NSString *)conversionStringFromNum:(int) currencyNum withAbbrev:(bool) abbrev;
 + (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName
                                    isSuccess:(BOOL *)bSuccess
                                     errorMsg:(NSMutableString *)error;
