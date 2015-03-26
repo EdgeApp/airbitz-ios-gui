@@ -26,42 +26,6 @@
 	//can likely break in future iOS releases...
 	
     [super setEditing: editing animated: YES];
-	
-    if (editing)
-	{
-		//for pre-iOS 7
-        for (UIView * view in self.subviews)
-		{
-            if ([NSStringFromClass([view class]) rangeOfString: @"Reorder"].location != NSNotFound)
-			{
-                for (UIView * subview in view.subviews)
-				{
-                    if ([subview isKindOfClass: [UIImageView class]])
-					{
-                        ((UIImageView *)subview).image = [UIImage imageNamed: @"thumb"];
-                        [((UIImageView*)subview) setBounds:CGRectMake(0.0, 0.0, 14.0, 11.0)];
-                    }
-                }
-            }
-        }
-		//for iOS 7
-		UIView *scrollView = self.subviews[0];
-		for (UIView * view in scrollView.subviews)
-		{
-			//NSLog(@"Class: %@", NSStringFromClass([view class]));
-			if ([NSStringFromClass([view class]) rangeOfString: @"Reorder"].location != NSNotFound)
-			{
-				for (UIView * subview in view.subviews)
-				{
-					if ([subview isKindOfClass: [UIImageView class]])
-					{
-						((UIImageView *)subview).image = [UIImage imageNamed: @"thumb"];
-                        [((UIImageView*)subview) setBounds:CGRectMake(0.0, 0.0, 14.0, 11.0)];
-                    }
-				}
-			}
-		}
-    }
 }
 
 @end
