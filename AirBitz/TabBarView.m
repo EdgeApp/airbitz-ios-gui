@@ -95,9 +95,9 @@
                 {
                     [selectedButton deselect];
                     [button select];
-                    if ([self.delegate respondsToSelector:@selector(tabVarView:selectedSubview:reselected:)])
+                    if ([self.delegate respondsToSelector:@selector(tabBarView:selectedSubview:reselected:)])
                     {
-                        [self.delegate tabVarView:self selectedSubview:button reselected:NO];
+                        [self.delegate tabBarView:self selectedSubview:button reselected:NO];
                     }
                     selectedButton = button;
                     [self updateDividers];
@@ -122,9 +122,9 @@
                 {
                     [selectedButton deselect];
                     [button select];
-                    if([self.delegate respondsToSelector:@selector(tabVarView:selectedSubview:reselected:)])
+                    if([self.delegate respondsToSelector:@selector(tabBarView:selectedSubview:reselected:)])
                     {
-                        [self.delegate tabVarView:self selectedSubview:button reselected:NO];
+                        [self.delegate tabBarView:self selectedSubview:button reselected:NO];
                     }
                     selectedButton = button;
                     [self updateDividers];
@@ -150,18 +150,18 @@
                 
                 if(selectedButton != button)
                 {
-                    if ([self.delegate respondsToSelector:@selector(tabVarView:selectedSubview:reselected:)])
+                    if ([self.delegate respondsToSelector:@selector(tabBarView:selectedSubview:reselected:)])
                     {
-                        [self.delegate tabVarView:self selectedSubview:button reselected:NO];
+                        [self.delegate tabBarView:self selectedSubview:button reselected:NO];
                     }
                     selectedButton = button;
                     [self updateDividers];
                 }
                 else
                 {
-                    if ([self.delegate respondsToSelector:@selector(tabVarView:selectedSubview:reselected:)])
+                    if ([self.delegate respondsToSelector:@selector(tabBarView:selectedSubview:reselected:)])
                     {
-                        [self.delegate tabVarView:self selectedSubview:button reselected:YES];
+                        [self.delegate tabBarView:self selectedSubview:button reselected:YES];
                     }
                 }
             } else {
@@ -178,8 +178,8 @@
     if (!button.locked) {
         [self highlightButtonAtPoint:startPoint];
     } else {
-        if ([self.delegate respondsToSelector:@selector(tabVarView:selectedLockedSubview:)]) {
-            [self.delegate tabVarView:self selectedLockedSubview:button];
+        if ([self.delegate respondsToSelector:@selector(tabBarView:selectedLockedSubview:)]) {
+            [self.delegate tabBarView:self selectedLockedSubview:button];
         }
     }
 }
@@ -191,8 +191,8 @@
     if (!button.locked) {
         [self highlightButtonAtPoint:startPoint];
     } else {
-        if ([self.delegate respondsToSelector:@selector(tabVarView:selectedLockedSubview:)]) {
-            [self.delegate tabVarView:self selectedLockedSubview:button];
+        if ([self.delegate respondsToSelector:@selector(tabBarView:selectedLockedSubview:)]) {
+            [self.delegate tabBarView:self selectedLockedSubview:button];
         }
     }
 }
