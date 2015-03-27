@@ -17,10 +17,12 @@
 @interface SlideoutView () <PickerTextViewDelegate >
 
 {
-    CGRect          _originalSlideoutFrame;
-    BOOL            _open;
-    NSString        *_account;
-    FadingAlertView                 *_fadingAlert;
+    CGRect                      _originalSlideoutFrame;
+    BOOL                        _open;
+    NSString                    *_account;
+    FadingAlertView             *_fadingAlert;
+    UIButton                    *_blockingButton;
+    UIView                      *_parentView;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel                *conversionText;
@@ -28,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UIView                 *otherAccountsView;
 @property (weak, nonatomic) IBOutlet UIView                 *lowerViews;
 @property (weak, nonatomic) IBOutlet UIButton               *buySellButton;
+@property (weak, nonatomic) IBOutlet UIButton               *logoutButton;
+@property (weak, nonatomic) IBOutlet UIButton               *settingsButton;
 @property (weak, nonatomic) IBOutlet UIView                 *buySellDivider;
 
 @property (nonatomic, strong) NSArray                       *arrayAccounts;
@@ -43,6 +47,7 @@
     SlideoutView *v = [[[NSBundle mainBundle] loadNibNamed:@"SlideoutView~iphone" owner:self options:nil] objectAtIndex:0];
     v.delegate = del;
 
+    v->_parentView = parentView;
     CGRect f = parentView.frame;
     int topOffset = 64;
     int sliderWidth = 250;
@@ -64,7 +69,11 @@
     ABC_IsTestNet(&isTestnet, &error);
     v->_buySellButton.hidden = isTestnet ? NO : YES;
     v->_buySellDivider.hidden = isTestnet ? NO : YES;
-
+    
+    UIColor *back = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.05];
+    [v->_logoutButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
+    [v->_settingsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
+    [v->_buySellButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     return v;
 }
 
@@ -82,6 +91,20 @@
     if (self) {
     }
     return self;
+}
+
++ (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (void)showSlideout:(BOOL)show
@@ -134,8 +157,19 @@
             }
                             completion:^(BOOL finished)
             {
-
+                
             }];
+            [UIView animateWithDuration:0.35
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseOut
+                             animations:^
+             {
+                 _blockingButton.alpha = 0;
+             }
+                             completion:^(BOOL finished)
+             {
+                 [self removeBlockingButton:self->_parentView];
+             }];
         } else {
             self.frame = frame;
         }
@@ -155,6 +189,18 @@
             {
                 
             }];
+            [self addBlockingButton:self->_parentView];
+            [UIView animateWithDuration:0.35
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseOut
+                             animations:^
+             {
+                 _blockingButton.alpha = 0.5;
+             }
+                             completion:^(BOOL finished)
+             {
+                 
+             }];
         } else {
             self.frame = _originalSlideoutFrame;
         }
@@ -182,9 +228,9 @@
         self.otherAccountsView.hidden = YES;
         self.lowerViews.hidden = NO;
     }
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutAccount)]) {
-//        [self.delegate slideoutAccount];
-//    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutAccount)]) {
+        [self.delegate slideoutAccount];
+    }
 }
 
 - (IBAction)settingTouched
@@ -199,12 +245,79 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutLogout)]) {
         [self.delegate slideoutLogout];
     }
+    [self removeBlockingButton:self->_parentView];
 }
 
 - (BOOL)isOpen
 {
     return _open;
 }
+
+- (void)handleRecognizer:(UIPanGestureRecognizer *)recognizer
+{
+    CGPoint translation = [recognizer translationInView:self->_parentView];
+
+    bool halfwayOut = -translation.x > self.bounds.size.width / 2;
+    
+    if(recognizer.state == UIGestureRecognizerStateEnded)
+    {
+        [self showSlideout:halfwayOut];
+        return;
+    }
+    else if(recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        [self addBlockingButton:self->_parentView];
+    }
+    
+    if(-translation.x > self.bounds.size.width) {
+        self.center = CGPointMake(self->_parentView.bounds.size.width + - self.bounds.size.width/2, self.center.y);
+    }
+    else
+    {
+        self.center = CGPointMake(self->_parentView.bounds.size.width + translation.x + self.bounds.size.width/2, self.center.y);
+    }
+    
+    [self updateBlockingButtonAlpha:self.frame.origin.x];
+}
+
+- (void)updateBlockingButtonAlpha:(int) frameOriginX
+{
+    float alpha = (self->_parentView.bounds.size.width - frameOriginX) / self->_parentView.bounds.size.width;
+    if(alpha > 0.5)
+    {
+        alpha = 0.5;
+    }
+    _blockingButton.alpha = alpha;
+}
+
+- (void)addBlockingButton:(UIView *)view
+{
+    if(!_blockingButton)
+    {
+        _blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGRect frame = view.bounds;
+        _blockingButton.frame = frame;
+        _blockingButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+        [self->_parentView insertSubview:_blockingButton belowSubview:self];
+        _blockingButton.alpha = 0.0;
+    
+        [_blockingButton addTarget:self
+                        action:@selector(blockingButtonHit:)
+              forControlEvents:UIControlEventTouchDown];
+    }
+}
+
+- (void)removeBlockingButton:(UIView *)view
+{
+    [_blockingButton removeFromSuperview];
+    _blockingButton = nil;
+}
+
+- (void)blockingButtonHit:(UIButton *)button
+{
+    [self showSlideout:NO];
+}
+
 
 #pragma mark - PickerTextView delegates
 

@@ -18,6 +18,7 @@
 
 - (void)showSlideout:(BOOL)show;
 - (void)showSlideout:(BOOL)show withAnimation:(BOOL)bAnimation;
+- (void)handleRecognizer:(UIPanGestureRecognizer *)recognizer;
 - (BOOL)isOpen;
 
 @end

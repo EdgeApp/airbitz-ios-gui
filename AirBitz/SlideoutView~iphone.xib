@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -76,7 +76,7 @@
                     <rect key="frame" x="0.0" y="112" width="240" height="250"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" id="GIG-Sd-O0c" userLabel="logoutView" customClass="UIButton">
+                        <view clipsSubviews="YES" contentMode="scaleToFill" id="GIG-Sd-O0c" userLabel="logoutView" customClass="UIButton">
                             <rect key="frame" x="0.0" y="149" width="240" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <subviews>
@@ -98,7 +98,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" none="YES" button="YES" selected="YES"/>
+                            </accessibility>
                             <connections>
                                 <action selector="logoutTouched" destination="Kd7-Wc-vzE" eventType="touchUpInside" id="lmw-eB-Hvh"/>
                             </connections>
@@ -130,7 +133,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" none="YES" button="YES"/>
+                            </accessibility>
                             <connections>
                                 <action selector="settingTouched" destination="Kd7-Wc-vzE" eventType="touchUpInside" id="Vl4-8B-Zqj"/>
                             </connections>
@@ -157,7 +163,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" none="YES" button="YES"/>
+                            </accessibility>
                             <connections>
                                 <action selector="buysellTouched" destination="Kd7-Wc-vzE" eventType="touchUpInside" id="Ryy-Il-so6"/>
                             </connections>
@@ -180,8 +189,10 @@
                 <outlet property="buySellButton" destination="jpu-23-4kh" id="Gzm-Dc-9Qt"/>
                 <outlet property="buySellDivider" destination="I1t-ii-re1" id="mtc-ld-1GY"/>
                 <outlet property="conversionText" destination="O8N-2d-FwL" id="Bml-x3-ife"/>
+                <outlet property="logoutButton" destination="GIG-Sd-O0c" id="G8X-1c-MlU"/>
                 <outlet property="lowerViews" destination="WFe-bF-Laf" id="Oyd-RS-Y5j"/>
                 <outlet property="otherAccountsView" destination="BN8-sG-2n3" id="iwC-WI-kIH"/>
+                <outlet property="settingsButton" destination="xna-m1-9hx" id="s5I-7x-I5Z"/>
             </connections>
             <point key="canvasLocation" x="195" y="375"/>
         </view>

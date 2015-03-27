@@ -84,7 +84,6 @@ typedef enum eAppMode
     
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
-    UIButton                    *_blockingButton;
 }
 
 @property (nonatomic, weak) IBOutlet TabBarView *tabBar;
@@ -1265,11 +1264,11 @@ typedef enum eAppMode
 
 - (void)slideoutSettings
 {
+    [slideoutView showSlideout:NO];
     [_selectedViewController.view removeFromSuperview];
     _selectedViewController = _settingsViewController;
     [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     [_settingsViewController resetViews];
-    [slideoutView showSlideout:NO];
 }
 
 - (void)slideoutLogout
@@ -1292,55 +1291,7 @@ typedef enum eAppMode
     [slideoutView showSlideout:NO];
 }
 
-- (void)slideoutWillOpen:(SlideoutView *)view
-{
-    _blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGRect frame = self.view.bounds;
-    _blockingButton.frame = frame;
-    _blockingButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-    [self.view insertSubview:_blockingButton belowSubview:slideoutView];
-    _blockingButton.alpha = 0.0;
-    
-    [_blockingButton addTarget:self
-                        action:@selector(blockingButtonHit:)
-              forControlEvents:UIControlEventTouchDown];
-    
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^
-     {
-         _blockingButton.alpha = 1.0;
-     }
-                     completion:^(BOOL finished)
-     {
-         
-     }];
-    
-}
-
-- (void)slideoutWillClose:(SlideoutView *)view
-{
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^
-     {
-         _blockingButton.alpha = 0.0;
-     }
-                     completion:^(BOOL finished)
-     {
-         [_blockingButton removeFromSuperview];
-         _blockingButton = nil;
-     }];
-}
-
-- (void)blockingButtonHit:(UIButton *)button
-{
-    [slideoutView showSlideout:NO];
-}
-
-#pragma mark - Misc Methods
+#pragma mark - Slideout Methods
 
 - (void)installRightToLeftSwipeDetection
 {
@@ -1355,34 +1306,8 @@ typedef enum eAppMode
     return NO;
 }
 
-//- (void)handlePan:(UIGestureRecognizer *)gestureRecognizer
-//{
-//    if([User isLoggedIn] && ![slideoutView isOpen])
-//    {
-//        [slideoutView showSlideout:YES];
-//    }    
-//}
-
 - (void)handlePan:(UIPanGestureRecognizer *) recognizer {
-    bool halfwayOut = self->slideoutView.center.x < self.view.bounds.size.width - self->slideoutView.bounds.size.width / 4;
-    if(recognizer.state == UIGestureRecognizerStateEnded)
-    {
-        [slideoutView showSlideout:halfwayOut];
-        [self installRightToLeftSwipeDetection];
-        return;
-    }
-    
-    CGPoint translation = [recognizer translationInView:self.view];
-
-    if(self->slideoutView.center.x < self.view.bounds.size.width - self->slideoutView.bounds.size.width / 2)
-    {
-        
-    }
-    else {
-        self->slideoutView.center = CGPointMake(self->slideoutView.center.x + translation.x,
-                                         self->slideoutView.center.y);
-        [recognizer setTranslation:CGPointMake(0, 0) inView:self.view];
-    }
+    [slideoutView handleRecognizer:recognizer];
 }
 
 #pragma mark - Plugin Delegate
