@@ -1260,7 +1260,6 @@ typedef enum eAppMode
 - (void)slideoutAccount
 {
     NSLog(@"MainViewController.slideoutAccount");
-    [slideoutView showSlideout:NO];
 }
 
 - (void)slideoutSettings
