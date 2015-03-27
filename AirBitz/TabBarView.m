@@ -145,8 +145,11 @@
             TabBarButton *button = (TabBarButton *)view;
             if(CGRectContainsPoint(view.frame, point))
             {
-                [selectedButton deselect];
-                [button highlight];
+                if(![button.label.text isEqualToString:@"MORE"])
+                {
+                    [selectedButton deselect];
+                    [button highlight];
+                }
                 
                 if(selectedButton != button)
                 {
@@ -154,8 +157,11 @@
                     {
                         [self.delegate tabBarView:self selectedSubview:button reselected:NO];
                     }
-                    selectedButton = button;
-                    [self updateDividers];
+                    if(![button.label.text isEqualToString:@"MORE"])
+                    {
+                        selectedButton = button;
+                        [self updateDividers];
+                    }
                 }
                 else
                 {
@@ -165,7 +171,7 @@
                     }
                 }
             } else {
-                [button deselect];
+//                [button deselect];
             }
         }
     }
@@ -199,7 +205,10 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [selectedButton select];
+    if(![selectedButton.label.text isEqualToString:@"MORE"])
+    {
+        [selectedButton select];
+    }
 }
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event

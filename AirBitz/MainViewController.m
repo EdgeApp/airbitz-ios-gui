@@ -1260,6 +1260,7 @@ typedef enum eAppMode
 - (void)slideoutAccount
 {
     NSLog(@"MainViewController.slideoutAccount");
+    [slideoutView showSlideout:NO];
 }
 
 - (void)slideoutSettings
@@ -1269,6 +1270,8 @@ typedef enum eAppMode
     _selectedViewController = _settingsViewController;
     [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     [_settingsViewController resetViews];
+    [self.tabBar selectButtonAtIndex:APP_MODE_MORE];
+    [slideoutView showSlideout:NO];
 }
 
 - (void)slideoutLogout
