@@ -103,7 +103,7 @@
                             [[User Singleton].password UTF8String],
                             &_pAccountSettings,
                             &Error);
-    NSInteger num = _pAccountSettings->currencyNum;
+    int num = _pAccountSettings->currencyNum;
     self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:NO];
     
     
@@ -134,14 +134,12 @@
             }
                             completion:^(BOOL finished)
             {
-                self.hidden = YES;
+
             }];
         } else {
             self.frame = frame;
-            self.hidden = YES;
         }
     } else {
-        self.hidden = NO;
         if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWillOpen:)]) {
             [self.delegate slideoutWillOpen:self];
         }

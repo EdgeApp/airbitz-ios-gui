@@ -167,9 +167,6 @@ typedef enum eAppMode
 
     slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
     [self.view insertSubview:slideoutView aboveSubview:self.view];
-    
-    // add right to left swipe detection for slideout
-    [self installRightToLeftSwipeDetection];
 }
 
 /**
@@ -1346,8 +1343,8 @@ typedef enum eAppMode
 
 - (void)installRightToLeftSwipeDetection
 {
-    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeRightToLeft:)];
-    gesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    UIScreenEdgePanGestureRecognizer *gesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [gesture setEdges:UIRectEdgeRight];
     [self.view addGestureRecognizer:gesture];
 }
 
@@ -1357,11 +1354,32 @@ typedef enum eAppMode
     return NO;
 }
 
-- (void)didSwipeRightToLeft:(UIGestureRecognizer *)gestureRecognizer
-{
-    if([User isLoggedIn] && ![slideoutView isOpen])
+//- (void)handlePan:(UIGestureRecognizer *)gestureRecognizer
+//{
+//    if([User isLoggedIn] && ![slideoutView isOpen])
+//    {
+//        [slideoutView showSlideout:YES];
+//    }    
+//}
+
+- (void)handlePan:(UIPanGestureRecognizer *) recognizer {
+    bool halfwayOut = self->slideoutView.center.x < self.view.bounds.size.width - self->slideoutView.bounds.size.width / 4;
+    if(recognizer.state == UIGestureRecognizerStateEnded)
     {
-        [slideoutView showSlideout:YES];
+        [slideoutView showSlideout:halfwayOut];
+        [self installRightToLeftSwipeDetection];
+        return;
+    }
+    
+    CGPoint translation = [recognizer translationInView:self.view];
+
+    if(self->slideoutView.center.x < self.view.bounds.size.width - self->slideoutView.bounds.size.width / 2)
+    {
+    }
+    else{
+        self->slideoutView.center = CGPointMake(self->slideoutView.center.x + translation.x,
+                                         self->slideoutView.center.y);
+        [recognizer setTranslation:CGPointMake(0, 0) inView:self.view];
     }
 }
 
@@ -1370,6 +1388,5 @@ typedef enum eAppMode
 - (void)PluginViewControllerDone:(PluginViewController *)vc
 {
 }
-
 
 @end
