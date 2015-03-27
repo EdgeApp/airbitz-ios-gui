@@ -18,7 +18,7 @@
 
 - (void)showSlideout:(BOOL)show;
 - (void)showSlideout:(BOOL)show withAnimation:(BOOL)bAnimation;
-- (void)handleRecognizer:(UIPanGestureRecognizer *)recognizer;
+- (void)handleRecognizer:(UIPanGestureRecognizer *)recognizer fromBlock:(bool) block;
 - (BOOL)isOpen;
 
 @end

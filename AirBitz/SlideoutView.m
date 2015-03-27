@@ -253,11 +253,13 @@
     return _open;
 }
 
-- (void)handleRecognizer:(UIPanGestureRecognizer *)recognizer
+- (void)handleRecognizer:(UIPanGestureRecognizer *)recognizer fromBlock:(bool) block
 {
     CGPoint translation = [recognizer translationInView:self->_parentView];
-
-    bool halfwayOut = -translation.x > self.bounds.size.width / 2;
+    CGPoint location = [recognizer locationInView:self->_parentView];
+    int openLeftX = self->_parentView.bounds.size.width - self.bounds.size.width;
+    bool halfwayOut = location.x < self->_parentView.bounds.size.width - self.bounds.size.width / 2;
+    NSLog(@"transX, locX, centerX: %f %f %f", translation.x, location.x, self.center.x);
     
     if(recognizer.state == UIGestureRecognizerStateEnded)
     {
@@ -269,12 +271,22 @@
         [self addBlockingButton:self->_parentView];
     }
     
-    if(-translation.x > self.bounds.size.width) {
-        self.center = CGPointMake(self->_parentView.bounds.size.width + - self.bounds.size.width/2, self.center.y);
+    if(block)
+    {
+        //over slideout
+        if(location.x >= openLeftX) {
+            self.center = CGPointMake(location.x + self.bounds.size.width / 2, self.center.y);
+        }
     }
     else
     {
-        self.center = CGPointMake(self->_parentView.bounds.size.width + translation.x + self.bounds.size.width/2, self.center.y);
+        if(-translation.x > self.bounds.size.width) {
+            self.center = CGPointMake(self->_parentView.bounds.size.width - self.bounds.size.width/2, self.center.y);
+        }
+        else
+        {
+            self.center = CGPointMake(self->_parentView.bounds.size.width + translation.x + self.bounds.size.width/2, self.center.y);
+        }
     }
     
     [self updateBlockingButtonAlpha:self.frame.origin.x];
@@ -303,7 +315,8 @@
     
         [_blockingButton addTarget:self
                         action:@selector(blockingButtonHit:)
-              forControlEvents:UIControlEventTouchDown];
+              forControlEvents:UIControlEventTouchUpInside];
+        [self installBlockingButtonSwipeDetection];
     }
 }
 
@@ -317,6 +330,23 @@
 {
     [self showSlideout:NO];
 }
+
+- (void)installBlockingButtonSwipeDetection
+{
+    UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleBlockingButtonPan:)];
+    [self->_blockingButton addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return NO;
+}
+
+- (void)handleBlockingButtonPan:(UIPanGestureRecognizer *) recognizer {
+    [self handleRecognizer:recognizer fromBlock:YES];
+}
+
 
 
 #pragma mark - PickerTextView delegates
