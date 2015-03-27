@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="Kd7-Wc-vzE" customClass="SlideoutView">
-            <rect key="frame" x="0.0" y="0.0" width="240" height="358"/>
+            <rect key="frame" x="0.0" y="0.0" width="240" height="362"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="qEK-dC-DG9" userLabel="exchangeView">
@@ -111,8 +111,13 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
+                        <view contentMode="scaleToFill" id="6sW-mE-1UL" userLabel="divider1">
+                            <rect key="frame" x="0.0" y="149" width="240" height="1"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <view contentMode="scaleToFill" id="xna-m1-9hx" userLabel="settingsView" customClass="UIButton">
-                            <rect key="frame" x="0.0" y="200" width="240" height="50"/>
+                            <rect key="frame" x="0.0" y="201" width="240" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_settings_dark.png" id="4PE-14-Bju">
@@ -194,7 +199,7 @@
                 <outlet property="otherAccountsView" destination="BN8-sG-2n3" id="iwC-WI-kIH"/>
                 <outlet property="settingsButton" destination="xna-m1-9hx" id="s5I-7x-I5Z"/>
             </connections>
-            <point key="canvasLocation" x="195" y="375"/>
+            <point key="canvasLocation" x="195" y="377"/>
         </view>
     </objects>
     <resources>
