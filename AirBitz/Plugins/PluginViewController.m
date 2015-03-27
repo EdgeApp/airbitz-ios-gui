@@ -12,6 +12,7 @@
 #import "SendConfirmationViewController.h"
 #import "Util.h"
 #import "Notifications.h"
+#import "CommonTypes.h"
 
 static const NSString *PROTOCOL = @"bridge://";
 static NSString *pluginId = @"com.glidera";
@@ -78,6 +79,16 @@ static NSString *pluginId = @"com.glidera";
     [_webView loadRequest:localRequest];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    CGRect frame = _webView.frame;
+    frame.size.height = self.view.frame.size.height - HEADER_HEIGHT - TOOLBAR_HEIGHT;
+    _webView.frame = frame;
+    _webView.scrollView.bounces = NO;
+
+    [super viewWillAppear:animated];
 }
 
 - (void)dealloc
