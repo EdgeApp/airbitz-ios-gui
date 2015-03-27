@@ -8195,26 +8195,25 @@ module.run(['$templateCache', function($templateCache) {
     '        previous two factor code.</p>\n' +
     '      </div>\n' +
     '      <label for="inputOldVerificationCode" class="sr-only">Old Verification Code</label>\n' +
-    '      <input\n' +
-    '        ng-model="oldVerificationCode"\n' +
-    '        type="text"\n' +
+    '      <input type="number"\n' +
     '        id="inputOldVerificationCode"\n' +
     '        class="large text-center"\n' +
     '        placeholder="Previous 2FA Code"\n' +
+    '        autocorrect="off"\n' +
     '        autocomplete="off"\n' +
+    '        ng-model="oldVerificationCode"\n' +
     '      />\n' +
     '    </div>\n' +
     '    <div class="form-group">\n' +
     '      <label for="inputVerificationCode" class="sr-only">Verification Code</label>\n' +
-    '      <input\n' +
-    '        ng-model="verificationCode"\n' +
-    '        autofocus\n' +
-    '        type="number"\n' +
+    '      <input type="number"\n' +
     '        id="inputVerificationCode"\n' +
     '        class="large text-center"\n' +
     '        placeholder="Your Code"\n' +
-    '\n' +
+    '        autocorrect="off"\n' +
     '        autocomplete="off"\n' +
+    '        ng-model="verificationCode"\n' +
+    '        autofocus\n' +
     '      />\n' +
     '      <button type="submit" ng-click="submit2FA()"\n' +
     '              class="buy-sell-next btn btn-lg btn-block btn-success">Verify Code</button>\n' +
@@ -8534,10 +8533,10 @@ module.run(['$templateCache', function($templateCache) {
     '      <div class="row">\n' +
     '        <div class="col-xs-6 form-group">\n' +
     '          <label for="inputBtcWallet" class="">BTC Wallet</label>\n' +
-    '          <select\n' +
+    '          <select id="inputBtcWallet"\n' +
     '            ng-model="order.transferToWallet"\n' +
     '            ng-options="w.name for w in userWallets"\n' +
-    '            id="inputBtcWallet"\n' +
+    '            autocorrect="off"\n' +
     '            class="form-control input-lg">\n' +
     '          </select>\n' +
     '        </div>\n' +
@@ -8582,6 +8581,7 @@ module.run(['$templateCache', function($templateCache) {
     '            class="large right-square"\n' +
     '            id="inputFiatAmount"\n' +
     '            placeholder="100.00"\n' +
+    '            autocorrect="off"\n' +
     '            autofocus="true"\n' +
     '            tabindex="1"\n' +
     '            step="any"\n' +
@@ -9109,6 +9109,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <input ng-model="account.firstName" name="firstName" type="text" id="inputFirstName" class="form-control"\n' +
     '             placeholder="First Name"\n' +
     '             autofocus=""\n' +
+    '             autocorrect="off"\n' +
     '             autocomplete="off"\n' +
     '             required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.firstName.$touched">\n' +
@@ -9120,6 +9121,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <label for="inputLastName" class="sr-only">Last</label>\n' +
     '      <input ng-model="account.lastName" name="lastName" type="text" id="inputLastName" class="form-control"\n' +
     '             placeholder="Last Name"\n' +
+    '             autocorrect="off"\n' +
     '             autocomplete="off"\n' +
     '             required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.lastName.$touched">\n' +
@@ -9177,7 +9179,8 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group">\n' +
     '      <label for="inputFirstName" class="">Name</label>\n' +
     '      <input ng-model="account.firstName" ng-required="true"\n' +
-    '             type="text" id="inputFirstName" class="form-control" placeholder="First name" autofocus="true" autocomplete="off"\n' +
+    '             type="text" id="inputFirstName" class="form-control"\n' +
+    '             placeholder="First name" autofocus="true" autocomplete="off" autocorrect="off"\n' +
     '             name="firstName"\n' +
     '             required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.firstName.$touched">\n' +
@@ -9188,7 +9191,8 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group">\n' +
     '      <label for="inputLastName" class="sr-only">Last</label>\n' +
     '      <input ng-model="account.lastName" ng-required="true"\n' +
-    '             type="text" id="inputLastName" class="form-control" placeholder="Last name" autofocus="" autocomplete="off"\n' +
+    '             type="text" id="inputLastName" class="form-control"\n' +
+    '             placeholder="Last name" autofocus="" autocomplete="off" autocorrect="off"\n' +
     '             name="lastName"\n' +
     '             required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.lastName.$touched">\n' +
@@ -9199,7 +9203,8 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group">\n' +
     '      <label for="inputAddress" class="">Address</label>\n' +
     '      <input ng-model="account.address1"\n' +
-    '             type="text" id="inputAddressStreet" class="form-control" placeholder="Address" autofocus="" autocomplete="off"\n' +
+    '             type="text" id="inputAddressStreet" class="form-control"\n' +
+    '             placeholder="Address" autofocus="" autocomplete="off" autocorrect="off"\n' +
     '             name="address"\n' +
     '             required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.address.$touched">\n' +
@@ -9210,13 +9215,15 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group">\n' +
     '      <label for="inputAddress2" class="sr-only">Address 2</label>\n' +
     '      <input ng-model="account.address2"\n' +
-    '             type="text" id="inputAddressStreet2" class="form-control" placeholder="Address 2" autofocus="" autocomplete="off" />\n' +
+    '             type="text" id="inputAddressStreet2" class="form-control"\n' +
+    '             placeholder="Address 2" autofocus="" autocomplete="off" autocorrect="off" />\n' +
     '    </div>\n' +
     '\n' +
     '    <div class="form-group">\n' +
     '      <label for="inputAddressCity" class="sr-only">City</label>\n' +
     '      <input ng-model="account.city"\n' +
-    '             type="text" id="inputAddressCity" class="form-control" placeholder="City" autofocus="" autocomplete="off"\n' +
+    '             type="text" id="inputAddressCity" class="form-control"\n' +
+    '             placeholder="City" autofocus="" autocomplete="off" autocorrect="off"\n' +
     '             name="city"\n' +
     '             required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.city.$touched">\n' +
@@ -9228,7 +9235,8 @@ module.run(['$templateCache', function($templateCache) {
     '      <div class="form-group col-xs-6">\n' +
     '        <label for="inputAddressZip" class="sr-only">Zip</label>\n' +
     '        <input ng-model="account.zipCode"\n' +
-    '               type="text" id="inputAddressZip" class="form-control" placeholder="Postal Code" autofocus="" autocomplete="off"\n' +
+    '               type="text" id="inputAddressZip" class="form-control"\n' +
+    '               placeholder="Postal Code" autofocus="" autocomplete="off" autocorrect="off"\n' +
     '               name="zip"\n' +
     '               required="" />\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.zip.$touched">\n' +
