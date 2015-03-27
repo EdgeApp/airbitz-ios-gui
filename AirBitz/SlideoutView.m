@@ -172,6 +172,7 @@
              }];
         } else {
             self.frame = frame;
+            [self removeBlockingButton:self->_parentView];
         }
     } else {
         if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWillOpen:)]) {
