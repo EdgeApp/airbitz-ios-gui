@@ -219,9 +219,12 @@
 {
     if(self.otherAccountsView.hidden) {
         [self updateOtherAccounts:self.accountText.text];
-        [self.accountPicker updateChoices:self.otherAccounts] ;
-        self.otherAccountsView.hidden = NO;
-        self.lowerViews.hidden = YES;
+        if(self.otherAccounts.count > 0)
+        {
+            [self.accountPicker updateChoices:self.otherAccounts] ;
+            self.otherAccountsView.hidden = NO;
+            self.lowerViews.hidden = YES;
+        }
     }
     else
     {
