@@ -1307,7 +1307,10 @@ typedef enum eAppMode
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *) recognizer {
-    [slideoutView handleRecognizer:recognizer fromBlock:NO];
+    if(![slideoutView isOpen])
+    {
+        [slideoutView handleRecognizer:recognizer fromBlock:NO];
+    }
 }
 
 #pragma mark - Plugin Delegate
