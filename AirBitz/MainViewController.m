@@ -1290,6 +1290,7 @@ typedef enum eAppMode
     [_selectedViewController.view removeFromSuperview];
     _selectedViewController = _pluginViewController;
     [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+    [self.tabBar selectButtonAtIndex:APP_MODE_MORE];
     [slideoutView showSlideout:NO];
 }
 
