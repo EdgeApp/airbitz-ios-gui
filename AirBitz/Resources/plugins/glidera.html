@@ -8536,7 +8536,6 @@ module.run(['$templateCache', function($templateCache) {
     '          <select id="inputBtcWallet"\n' +
     '            ng-model="order.transferToWallet"\n' +
     '            ng-options="w.name for w in userWallets"\n' +
-    '            autocorrect="off"\n' +
     '            class="form-control input-lg">\n' +
     '          </select>\n' +
     '        </div>\n' +
@@ -8562,6 +8561,7 @@ module.run(['$templateCache', function($templateCache) {
     '            id="inputBtcAmount"\n' +
     '            placeholder="0.5"\n' +
     '            step="any"\n' +
+    '            autocorrect="off"\n' +
     '            required="" />\n' +
     '          <span class="large input-group-addon">BTC</span>\n' +
     '        </div>\n' +
@@ -9236,7 +9236,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <label for="inputAddressZip" class="sr-only">Zip</label>\n' +
     '        <input ng-model="account.zipCode"\n' +
     '               type="text" id="inputAddressZip" class="form-control"\n' +
-    '               placeholder="Postal Code" autofocus="" autocomplete="off" autocorrect="off"\n' +
+    '               placeholder="Postal Code" autofocus="" autocomplete="off" autocorrect="off" pattern="[0-9]*"\n' +
     '               name="zip"\n' +
     '               required="" />\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.zip.$touched">\n' +
