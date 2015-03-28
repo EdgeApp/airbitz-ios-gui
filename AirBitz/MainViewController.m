@@ -1310,9 +1310,10 @@ typedef enum eAppMode
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *) recognizer {
-    if(![slideoutView isOpen])
-    {
-        [slideoutView handleRecognizer:recognizer fromBlock:NO];
+    if ([User isLoggedIn]) {
+        if (![slideoutView isOpen]) {
+            [slideoutView handleRecognizer:recognizer fromBlock:NO];
+        }
     }
 }
 
