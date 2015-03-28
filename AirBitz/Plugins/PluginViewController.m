@@ -78,17 +78,28 @@ static NSString *pluginId = @"com.glidera";
     _webView.opaque = NO;
     [_webView loadRequest:localRequest];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    CGRect frame = _webView.frame;
-    frame.size.height = self.view.frame.size.height - HEADER_HEIGHT - TOOLBAR_HEIGHT;
-    _webView.frame = frame;
-    _webView.scrollView.bounces = NO;
+    [self resizeFrame:YES];
 
     [super viewWillAppear:animated];
+}
+
+- (void)resizeFrame:(BOOL)withTabBar
+{
+    CGRect frame = _webView.frame;
+    frame.size.height = self.view.frame.size.height - HEADER_HEIGHT;
+    if (withTabBar) {
+        frame.size.height -= TOOLBAR_HEIGHT;
+    }
+
+    _webView.frame = frame;
+    _webView.scrollView.bounces = NO;
+    [_webView setNeedsLayout];
 }
 
 - (void)dealloc
@@ -648,11 +659,99 @@ static NSString *pluginId = @"com.glidera";
     [_fadingAlert showFading];
 }
 
-#pragma mark - Custom Notification Handlers
+#pragma mark - Keyboard Hack
 
-// called when a tab bar button that is already selected, is reselected again
-- (void)tabBarButtonReselect:(NSNotification *)notification
+// Snagged from https://github.com/apache/cordova-plugins
+
+- (void)keyboardWillShow:(NSNotification *)notification
 {
+    [self performSelector:@selector(removeBar) withObject:nil afterDelay:0];
 }
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [self resizeFrame:YES];
+}
+
+- (void)removeBar
+{
+    UIWindow *keyboardWindow = nil;
+    for (UIWindow *windows in [[UIApplication sharedApplication] windows]) {
+        if (![[windows class] isEqual:[UIWindow class]]) {
+            keyboardWindow = windows;
+            break;
+        }
+    }
+    
+    for (UIView* peripheralView in [self getKeyboardViews:keyboardWindow]) {
+        
+        // hides the backdrop (iOS 7)
+        if ([[peripheralView description] hasPrefix:@"<UIKBInputBackdropView"]) {
+            // check that this backdrop is for the accessory bar (at the top),
+            // sparing the backdrop behind the main keyboard
+            CGRect rect = peripheralView.frame;
+            if (rect.origin.y == 0) {
+                [[peripheralView layer] setOpacity:0.0];
+            }
+        }
+        
+        // hides the accessory bar
+        if ([[peripheralView description] hasPrefix:@"<UIWebFormAccessory"]) {
+            //remove the extra scroll space for the form accessory bar
+            CGRect newFrame = self.webView.scrollView.frame;
+            newFrame.size.height += peripheralView.frame.size.height;
+            self.webView.scrollView.frame = newFrame;
+            
+            // remove the form accessory bar
+            if ([self IsAtLeastiOSVersion8]) {
+                [[peripheralView layer] setOpacity:0.0];
+            } else {
+                [peripheralView removeFromSuperview];
+            }
+            
+        }
+        // hides the thin grey line used to adorn the bar (iOS 6)
+        if ([[peripheralView description] hasPrefix:@"<UIImageView"]) {
+            [[peripheralView layer] setOpacity:0.0];
+        }
+    }
+}
+
+- (NSArray*)getKeyboardViews:(UIView*)viewToSearch{
+    NSArray *subViews;
+    
+    for (UIView *possibleFormView in viewToSearch.subviews) {
+        if ([[possibleFormView description] hasPrefix: self.getKeyboardFirstLevelIdentifier]) {
+            if([self IsAtLeastiOSVersion8]){
+                for (UIView* subView in possibleFormView.subviews) {
+                    return subView.subviews;
+                }
+            }else{
+                return possibleFormView.subviews;
+            }
+        }
+        
+    }
+    return subViews;
+}
+
+- (NSString*)getKeyboardFirstLevelIdentifier{
+    if(![self IsAtLeastiOSVersion8]){
+        return @"<UIPeripheralHostView";
+    }else{
+        return @"<UIInputSetContainerView";
+    }
+}
+
+- (BOOL)IsAtLeastiOSVersion8
+{
+#ifdef __IPHONE_8_0
+    return YES;
+#else
+    return NO;
+#endif
+
+}
+
 
 @end
