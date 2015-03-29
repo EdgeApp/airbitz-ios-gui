@@ -13,6 +13,7 @@
 #import "User.h"
 #import "LocalSettings.h"
 #import "Util.h"
+#import "CommonTypes.h"
 
 @interface SlideoutView () <PickerTextViewDelegate >
 
@@ -49,7 +50,7 @@
 
     v->_parentView = parentView;
     CGRect f = parentView.frame;
-    int topOffset = 64;
+    int topOffset = HEADER_HEIGHT;
     int sliderWidth = 250;
     f.size.width = sliderWidth;
     f.origin.y = topOffset;
