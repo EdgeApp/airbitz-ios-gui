@@ -36,6 +36,7 @@
 {
     if ((self = [super initWithCoder:aDecoder]))
 	{
+        self.enabled = YES;
 		UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ButtonSelectorView~iphone" owner:self options:nil] objectAtIndex:0];
 		view.frame = self.bounds;
 		UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
