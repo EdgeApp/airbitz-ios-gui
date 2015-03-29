@@ -129,6 +129,15 @@
     // Load up the wallets
     self.arrayWallets = [[NSMutableArray alloc] init];
     [CoreBridge loadWallets:self.arrayWallets archived:nil withTxs:NO];
+    if (_bAddressIsWalletUUID) {
+        NSMutableArray *newArr = [[NSMutableArray alloc] init];
+        for (Wallet *w in self.arrayWallets) {
+            if (![w.strUUID isEqualToString:_destWallet.strUUID]) {
+                [newArr addObject:w];
+            }
+        }
+        self.arrayWallets = newArr;
+    }
     [self setWalletLabel];
     
     CGRect frame = self.keypadView.frame;
