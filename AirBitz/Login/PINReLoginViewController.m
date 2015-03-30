@@ -427,11 +427,14 @@
                 }
                 case ABC_CC_BadPassword:
                 {
-                    [self showFadingError:NSLocalizedString(@"Invalid PIN", nil)];
                     if ([[User Singleton] haveExceededPINLoginInvalidEntries])
                     {
                         [[User Singleton] resetPINLoginInvalidEntryCount];
                         [self abortPermanently];
+                    }
+                    else
+                    {
+                        [self showFadingError:NSLocalizedString(@"Invalid PIN", nil)];
                     }
                     break;
                 }
@@ -457,10 +460,6 @@
 
 - (void)abortPermanently
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-    {
-        [CoreBridge deletePINLogin];
-    });
     NSString *PINExpired = NSLocalizedString(@"Invalid PIN. Please log in.", nil);
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self.delegate PINReLoginViewControllerDidSwitchUserWithMessage:PINExpired];
