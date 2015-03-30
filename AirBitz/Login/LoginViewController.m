@@ -760,6 +760,7 @@ typedef enum eLoginMode
     }
     else {
         self.usernameSelector.textField.text = account;
+        [self.usernameSelector dismissPopupPicker];
     }
 }
 
@@ -823,6 +824,7 @@ typedef enum eLoginMode
     {
         [self removeAccount:_account];
         self.usernameSelector.textField.text = @"";
+        [self.usernameSelector dismissPopupPicker];
     }
 }
 
