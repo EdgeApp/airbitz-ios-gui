@@ -171,6 +171,28 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	self.arrayContacts = @[];
 	// load all the names from the address book
     [self generateListOfContactNames];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)willResignActive
+{
+#if !TARGET_IPHONE_SIMULATOR
+    [self stopQRReader];
+#endif
+}
+
+- (void)didBecomeActive
+{
+#if !TARGET_IPHONE_SIMULATOR
+    [self startQRReader];
+#endif
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -181,7 +203,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #if !TARGET_IPHONE_SIMULATOR
     [self startQRReader];
 #endif
-
 
     if([LocalSettings controller].bDisableBLE == NO)
 	{
