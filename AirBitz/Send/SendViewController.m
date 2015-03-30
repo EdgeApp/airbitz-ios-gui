@@ -171,23 +171,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	self.arrayContacts = @[];
 	// load all the names from the address book
     [self generateListOfContactNames];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive) name:UIApplicationWillResignActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-}
-
-- (void)willResignActive
-{
-#if !TARGET_IPHONE_SIMULATOR
-    [self stopQRReader];
-#endif
-}
-
-- (void)didBecomeActive
-{
-#if !TARGET_IPHONE_SIMULATOR
-    [self startQRReader];
-#endif
 }
 
 - (void)dealloc
@@ -230,11 +213,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	frame.size.height = originalFrameHeight;
 	self.view.frame = frame;
 	
-	[[NSNotificationCenter defaultCenter]
-	 addObserver:self
-	 selector:@selector(applicationDidBecomeActiveNotification:)
-	 name:UIApplicationDidBecomeActiveNotification
-	 object:[UIApplication sharedApplication]];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
+           selector:@selector(applicationDidBecomeActiveNotification:)
+               name:UIApplicationDidBecomeActiveNotification
+             object:nil];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
+           selector:@selector(willResignActive)
+               name:UIApplicationWillResignActiveNotification
+             object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -254,9 +242,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	}
 	scanMode = SCAN_MODE_UNINITIALIZED;
     //NSLog(@"Scanning stopped");
-	
-	//remove our app did become active notification listener
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -275,6 +260,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		scanMode = SCAN_MODE_QR;
 		[self startQRReader];
 	}
+#endif
+}
+
+- (void)willResignActive
+{
+	[_startScannerTimer invalidate];
+	_startScannerTimer = nil;
+#if !TARGET_IPHONE_SIMULATOR
+	[self stopQRReader];
 #endif
 }
 
