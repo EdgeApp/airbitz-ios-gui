@@ -144,12 +144,6 @@
     [self.delegate PINReLoginViewControllerDidSwitchUserWithMessage:nil];
 }
 
-- (IBAction)usernameSelectorTouched:(id)sender
-{
-    [self showSpinner:NO];
-    self.PINCodeView.PINCode = nil;
-}
-
 #pragma mark - Misc Methods
 
 - (void)getAllAccounts
