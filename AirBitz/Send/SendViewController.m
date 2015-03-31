@@ -1616,6 +1616,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)processURI
 {
+    // Added to wallet queue since wallets are loaded asynchronously
+    [CoreBridge postToWalletsQueue:^(void) {
+        dispatch_async(dispatch_get_main_queue(),^{
+            [self doProcessURI];
+        });
+    }];
+}
+
+- (void)doProcessURI
+{
     BOOL bSuccess = YES;
     tABC_BitcoinURIInfo *uri = NULL;
 
