@@ -7231,6 +7231,11 @@ var app = angular.module('app.core', [
         || next.match(/\.html#\/signup\/$/)) {
         history.length = 0;
         Airbitz.ui.navStackClear();
+      } else if (next.match(/\.html#\/receipt\/$/)) {
+        Airbitz.ui.navStackClear();
+
+        history.push('/exchange/');
+        Airbitz.ui.navStackPush('/exchange/');
       }
       skip = false;
     });
@@ -7504,7 +7509,7 @@ angular.module('app.exchange', ['app.dataFactory', 'app.2fa', 'app.prices', 'app
 .controller('reviewOrderController', ['$scope', '$state', 'Error', 'DataFactory', 'UserFactory', 'TwoFactor', 'Prices',
   function ($scope, $state, Error, DataFactory, UserFactory, TwoFactor, Prices) {
     var order = DataFactory.getOrder(false);
-    console.log(JSON.stringify(order));
+    Airbitz.ui.title('Confirm Order');
     $scope.order = order;
     $scope.exchange = DataFactory.getExchange();
     $scope.account = UserFactory.getUserAccount();
@@ -8582,7 +8587,6 @@ module.run(['$templateCache', function($templateCache) {
     '            id="inputFiatAmount"\n' +
     '            placeholder="100.00"\n' +
     '            autocorrect="off"\n' +
-    '            autofocus="true"\n' +
     '            tabindex="1"\n' +
     '            step="any"\n' +
     '            required="" />\n' +
