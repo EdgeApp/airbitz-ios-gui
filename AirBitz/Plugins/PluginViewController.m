@@ -92,7 +92,8 @@ static NSString *pluginId = @"com.glidera";
 - (void)resizeFrame:(BOOL)withTabBar
 {
     CGRect frame = _webView.frame;
-    frame.size.height = self.view.frame.size.height - HEADER_HEIGHT;
+    CGRect screenFrame = [[UIScreen mainScreen] bounds];
+    frame.size.height = screenFrame.size.height - HEADER_HEIGHT;
     if (withTabBar) {
         frame.size.height -= TOOLBAR_HEIGHT;
     }
