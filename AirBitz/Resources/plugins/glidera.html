@@ -535,6 +535,9 @@ body input[type='email'] {
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
+body input:focus {
+  color: white;
+}
 body .btn {
   box-shadow: 0 2px 0px rgba(0, 0, 0, 0.4);
 }
@@ -8200,25 +8203,26 @@ module.run(['$templateCache', function($templateCache) {
     '        previous two factor code.</p>\n' +
     '      </div>\n' +
     '      <label for="inputOldVerificationCode" class="sr-only">Old Verification Code</label>\n' +
-    '      <input type="number"\n' +
+    '      <input type="text"\n' +
     '        id="inputOldVerificationCode"\n' +
     '        class="large text-center"\n' +
     '        placeholder="Previous 2FA Code"\n' +
     '        autocorrect="off"\n' +
     '        autocomplete="off"\n' +
     '        ng-model="oldVerificationCode"\n' +
+    '        pattern="[0-9]*"\n' +
     '      />\n' +
     '    </div>\n' +
     '    <div class="form-group">\n' +
     '      <label for="inputVerificationCode" class="sr-only">Verification Code</label>\n' +
-    '      <input type="number"\n' +
+    '      <input type="text"\n' +
     '        id="inputVerificationCode"\n' +
     '        class="large text-center"\n' +
     '        placeholder="Your Code"\n' +
     '        autocorrect="off"\n' +
     '        autocomplete="off"\n' +
     '        ng-model="verificationCode"\n' +
-    '        autofocus\n' +
+    '        pattern="[0-9]*"\n' +
     '      />\n' +
     '      <button type="submit" ng-click="submit2FA()"\n' +
     '              class="buy-sell-next btn btn-lg btn-block btn-success">Verify Code</button>\n' +
@@ -8308,7 +8312,9 @@ module.run(['$templateCache', function($templateCache) {
     '               class="form-control"\n' +
     '               placeholder="123456789"\n' +
     '               autocomplete="off"\n' +
-    '               required="" />\n' +
+    '               required=""\n' +
+    '               pattern="[0-9]*" \n' +
+    '               />\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.accountNumber.$touched">\n' +
     '            <div ng-show="form.accountNumber.$error.required" class="label label-danger">Required.</div>\n' +
     '        </div>\n' +
@@ -8318,13 +8324,15 @@ module.run(['$templateCache', function($templateCache) {
     '        <label for="inputBankRoutingNumber" class="">Routing Number</label>\n' +
     '        <input ng-model="bankAccount.routingNumber"\n' +
     '               name="routingNumber"\n' +
-    '               type="number"\n' +
+    '               type="text"\n' +
     '               id="inputBankRoutingNumber"\n' +
     '               class="form-control"\n' +
     '               placeholder="987654321"\n' +
     '               autocomplete="off"\n' +
     '               required=""\n' +
-    '               routing-number-validator />\n' +
+    '               routing-number-validator \n' +
+    '               pattern="[0-9]*"\n' +
+    '               />\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.routingNumber.$touched">\n' +
     '            <div ng-show="form.routingNumber.$error.required" class="label label-danger">Required.</div>\n' +
     '            <div ng-show="form.routingNumber.$error.routingNumber" class="label label-danger">Valid routing number required</div>\n' +
