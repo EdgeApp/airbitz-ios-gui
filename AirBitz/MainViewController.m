@@ -891,7 +891,9 @@ typedef enum eAppMode
         _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
         _fadingAlert.message = message;
         _fadingAlert.fadeDuration = 2;
-        _fadingAlert.fadeDelay = 0;
+        _fadingAlert.fadeDelay = 5;
+        [_fadingAlert blockModal:NO];
+        [_fadingAlert showSpinner:NO];
         [_fadingAlert showFading];
     }
 }
