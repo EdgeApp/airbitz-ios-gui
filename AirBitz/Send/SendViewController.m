@@ -158,8 +158,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     self.pickerTextSendTo.delegate = self;
     [Util stylizeTextField:self.pickerTextSendTo.textField];
 
-	self.buttonSelector.textLabel.text = NSLocalizedString(@"From:", @"From: text on Send Bitcoin screen");
-    [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
+	self.buttonSelector.textLabel.text = NSLocalizedString(@"", nil);
+    [self.buttonSelector setButtonWidth:223];
 
     _selectedWalletIndex = 0;
 	
