@@ -169,6 +169,11 @@ static BOOL bOtpError = NO;
     return total;
 }
 
++ (void)clearSyncQueue
+{
+    [dataQueue cancelAllOperations];
+}
+
 + (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs
 {
     tABC_Error Error;

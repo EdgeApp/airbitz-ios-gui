@@ -18,6 +18,7 @@
 + (void)startQueues;
 + (void)stopQueues;
 + (void)postToSyncQueue:(void(^)(void))cb;
++ (void)clearSyncQueue;
 + (void)postToWalletsQueue:(void(^)(void))cb;
 + (int)dataOperationCount;
 
