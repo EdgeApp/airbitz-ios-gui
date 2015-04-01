@@ -19,6 +19,7 @@
 + (void)stopQueues;
 + (void)postToSyncQueue:(void(^)(void))cb;
 + (void)postToWalletsQueue:(void(^)(void))cb;
++ (int)dataOperationCount;
 
 + (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs;
 + (void)loadWallets:(NSMutableArray *)arrayWallets;

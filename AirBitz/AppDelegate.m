@@ -192,7 +192,15 @@ NSDate *logoutDate = NULL;
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    [CoreBridge stopQueues];
     [LocalSettings freeAll];
+
+    int wait = 0;
+    int maxWait = 200; // ~10 seconds
+    while ([CoreBridge dataOperationCount] > 0 && wait < maxWait) {
+        [NSThread sleepForTimeInterval:.2];
+        wait++;
+    }
     
     [[User Singleton] clear];
     ABC_Terminate();
