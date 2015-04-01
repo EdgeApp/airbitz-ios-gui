@@ -1616,6 +1616,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)processURI
 {
+    if ([self.arrayWalletNames count] == 0 || [self.arrayWallets count] == 0) {
+        [self loadWalletInfo];
+    }
     // Added to wallet queue since wallets are loaded asynchronously
     [CoreBridge postToWalletsQueue:^(void) {
         dispatch_async(dispatch_get_main_queue(),^{
