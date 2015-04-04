@@ -82,8 +82,8 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [self clear];
     }
     self.denomination = 100000000;
-    self.denominationType = ABC_DENOMINATION_BTC;
-    self.denominationLabel = @"BTC";
+    self.denominationType = ABC_DENOMINATION_UBTC;
+    self.denominationLabel = @"bits";
     self.denominationLabelShort = @"฿ ";
     self.sendInvalidEntryCount = 0;
     self.sendState = kNormal;
@@ -127,8 +127,8 @@ static User *singleton = nil;  // this will be the one and only object this stat
                     self.denominationLabelShort = @"m฿ ";
                     break;
                 case ABC_DENOMINATION_UBTC:
-                    self.denominationLabel = @"μBTC";
-                    self.denominationLabelShort = @"μ฿ ";
+                    self.denominationLabel = @"bits";
+                    self.denominationLabelShort = @"ƀ ";
                     break;
 
             }

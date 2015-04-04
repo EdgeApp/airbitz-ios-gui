@@ -724,9 +724,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     NSString *amountBTC = [CoreBridge formatSatoshi:self.amountSatoshi
                                          withSymbol:false
                                       forceDecimals:8];
-    NSString *amountMBTC = [CoreBridge formatSatoshi:self.amountSatoshi
+    NSString *amountBits = [CoreBridge formatSatoshi:self.amountSatoshi
                                           withSymbol:false
-                                       forceDecimals:5];
+                                       forceDecimals:2];
     // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
     
     NSString *iosURL;
@@ -772,7 +772,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                                    @"[[abtag BITCOIN_URI]]",
                                    @"[[abtag ADDRESS]]",
                                    @"[[abtag AMOUNT_BTC]]",
-                                   @"[[abtag AMOUNT_MBTC]]",
+                                   @"[[abtag AMOUNT_BITS]]",
                                    @"[[abtag QRCODE]]",
                                    nil];
     
@@ -783,7 +783,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                                    self.uriString,
                                    self.addressString,
                                    amountBTC,
-                                   amountMBTC,
+                                   amountBits,
                                    @"cid:qrcode.jpg",
                                    nil];
     
