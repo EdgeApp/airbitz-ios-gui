@@ -77,22 +77,29 @@ static NSString *pluginId = @"com.glidera";
     _webView.backgroundColor = [UIColor clearColor];
     _webView.opaque = NO;
     [_webView loadRequest:localRequest];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self resizeFrame:YES];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
     [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)resizeFrame:(BOOL)withTabBar
 {
     CGRect frame = _webView.frame;
-    frame.size.height = self.view.frame.size.height - HEADER_HEIGHT;
+    CGRect screenFrame = [[UIScreen mainScreen] bounds];
+    frame.size.height = screenFrame.size.height - HEADER_HEIGHT;
     if (withTabBar) {
         frame.size.height -= TOOLBAR_HEIGHT;
     }

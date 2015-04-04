@@ -7095,10 +7095,12 @@ var Glidera = (function () {
         if ($stateParams.confirmNumber == 'confirm' && userStatus.userPhoneIsSetup) {
           $scope.hasNumber = true;
         }
-        TwoFactor.requestCode().then(function() { }, function(error) {
-          $state.go('exchange');
-          Airbitz.ui.showAlert('Error', 'Unable to request 2fa token. Please retry again later.');
-        });
+        if ($stateParams.confirmNumber != 'confirm') {
+          TwoFactor.requestCode().then(function() { }, function(error) {
+            $state.go('exchange');
+            Airbitz.ui.showAlert('Error', 'Unable to request 2fa token. Please retry again later.');
+          });
+        }
       });
     };
     $scope.submit2FA = function() {
@@ -7231,6 +7233,11 @@ var app = angular.module('app.core', [
         || next.match(/\.html#\/signup\/$/)) {
         history.length = 0;
         Airbitz.ui.navStackClear();
+      } else if (next.match(/\.html#\/receipt\/$/)) {
+        Airbitz.ui.navStackClear();
+
+        history.push('/exchange/');
+        Airbitz.ui.navStackPush('/exchange/');
       }
       skip = false;
     });
@@ -7424,7 +7431,15 @@ angular.module('app.exchange', ['app.dataFactory', 'app.2fa', 'app.prices', 'app
         DataFactory.deleteBankAccount($scope.bankAccount.bankAccountUuid).then(function() {
           Airbitz.ui.showAlert('Bank Account Deleted', $scope.bankAccount.description + ' deleted');
           $state.go('exchange');
-        }, Error.reject);
+        }, function(res) {
+          if (res && res.message && res.message.match(/2FACode/i)) {
+            Airbitz.ui.showAlert('Unauthorized', 'Invalid 2 Factor code.');
+            TwoFactor.reset();
+            $state.go('exchangeEditBankController', {'uuid': $stateParams.uuid});
+          } else {
+            Error.reject(res);
+          }
+        });
       });
     };
   }])
@@ -7504,7 +7519,7 @@ angular.module('app.exchange', ['app.dataFactory', 'app.2fa', 'app.prices', 'app
 .controller('reviewOrderController', ['$scope', '$state', 'Error', 'DataFactory', 'UserFactory', 'TwoFactor', 'Prices',
   function ($scope, $state, Error, DataFactory, UserFactory, TwoFactor, Prices) {
     var order = DataFactory.getOrder(false);
-    console.log(JSON.stringify(order));
+    Airbitz.ui.title('Confirm Order');
     $scope.order = order;
     $scope.exchange = DataFactory.getExchange();
     $scope.account = UserFactory.getUserAccount();
@@ -8195,25 +8210,26 @@ module.run(['$templateCache', function($templateCache) {
     '        previous two factor code.</p>\n' +
     '      </div>\n' +
     '      <label for="inputOldVerificationCode" class="sr-only">Old Verification Code</label>\n' +
-    '      <input type="number"\n' +
+    '      <input type="text"\n' +
     '        id="inputOldVerificationCode"\n' +
     '        class="large text-center"\n' +
     '        placeholder="Previous 2FA Code"\n' +
     '        autocorrect="off"\n' +
     '        autocomplete="off"\n' +
     '        ng-model="oldVerificationCode"\n' +
+    '        pattern="[0-9]*"\n' +
     '      />\n' +
     '    </div>\n' +
     '    <div class="form-group">\n' +
     '      <label for="inputVerificationCode" class="sr-only">Verification Code</label>\n' +
-    '      <input type="number"\n' +
+    '      <input type="text"\n' +
     '        id="inputVerificationCode"\n' +
     '        class="large text-center"\n' +
     '        placeholder="Your Code"\n' +
     '        autocorrect="off"\n' +
     '        autocomplete="off"\n' +
     '        ng-model="verificationCode"\n' +
-    '        autofocus\n' +
+    '        pattern="[0-9]*"\n' +
     '      />\n' +
     '      <button type="submit" ng-click="submit2FA()"\n' +
     '              class="buy-sell-next btn btn-lg btn-block btn-success">Verify Code</button>\n' +
@@ -8303,7 +8319,9 @@ module.run(['$templateCache', function($templateCache) {
     '               class="form-control"\n' +
     '               placeholder="123456789"\n' +
     '               autocomplete="off"\n' +
-    '               required="" />\n' +
+    '               required=""\n' +
+    '               pattern="[0-9]*" \n' +
+    '               />\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.accountNumber.$touched">\n' +
     '            <div ng-show="form.accountNumber.$error.required" class="label label-danger">Required.</div>\n' +
     '        </div>\n' +
@@ -8313,13 +8331,15 @@ module.run(['$templateCache', function($templateCache) {
     '        <label for="inputBankRoutingNumber" class="">Routing Number</label>\n' +
     '        <input ng-model="bankAccount.routingNumber"\n' +
     '               name="routingNumber"\n' +
-    '               type="number"\n' +
+    '               type="text"\n' +
     '               id="inputBankRoutingNumber"\n' +
     '               class="form-control"\n' +
     '               placeholder="987654321"\n' +
     '               autocomplete="off"\n' +
     '               required=""\n' +
-    '               routing-number-validator />\n' +
+    '               routing-number-validator \n' +
+    '               pattern="[0-9]*"\n' +
+    '               />\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.routingNumber.$touched">\n' +
     '            <div ng-show="form.routingNumber.$error.required" class="label label-danger">Required.</div>\n' +
     '            <div ng-show="form.routingNumber.$error.routingNumber" class="label label-danger">Valid routing number required</div>\n' +
@@ -8582,7 +8602,6 @@ module.run(['$templateCache', function($templateCache) {
     '            id="inputFiatAmount"\n' +
     '            placeholder="100.00"\n' +
     '            autocorrect="off"\n' +
-    '            autofocus="true"\n' +
     '            tabindex="1"\n' +
     '            step="any"\n' +
     '            required="" />\n' +
