@@ -427,7 +427,15 @@
                 }
                 case ABC_CC_BadPassword:
                 {
-                    [self showFadingError:NSLocalizedString(@"Invalid PIN", nil)];
+                    if ([[User Singleton] haveExceededPINLoginInvalidEntries])
+                    {
+                        [[User Singleton] resetPINLoginInvalidEntryCount];
+                        [self abortPermanently];
+                    }
+                    else
+                    {
+                        [self showFadingError:NSLocalizedString(@"Invalid PIN", nil)];
+                    }
                     break;
                 }
                 case ABC_CC_PinExpired:
