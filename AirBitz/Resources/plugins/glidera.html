@@ -819,7 +819,7 @@ body .order-limits {
   width: 100%;
 }
 body .order-review {
-  margin-top: 30px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 body .order-review table {
@@ -6801,14 +6801,16 @@ var Glidera = (function () {
       return Glidera.request(req, opts.callback);
     },
 
-    register: function(firstName, lastName, email, code, cb) {
+    register: function(firstName, lastName, email, countryCode, registrationCode, cb) {
       var that = this;
       this._request(false, '/user/register', {
         'method': 'POST',
         'data': {
           'firstName': firstName,
           'lastName': lastName,
-          'email': email
+          'email': email,
+          'countryCode': countryCode,
+          'registrationCode': registrationCode,
         },
         'callback': function(error, statusCode, body) {
           if (statusCode == 200) {
@@ -7297,7 +7299,7 @@ angular.module('app.exchange', ['app.dataFactory', 'app.2fa', 'app.prices', 'app
     $scope.routeBankAccount = function() {
       if ($scope.bankAccounts.length) {
         var bankAccount = $scope.bankAccounts[0]; // get first bank account if available
-        if(bankAccount.status == 'Pending') {
+        if (bankAccount.status === 'Pending Verification') {
           $state.go('exchangeVerifyBankAccount', {'uuid': bankAccount.bankAccountUuid});
         } else {
           $state.go('exchangeEditBankController', {'uuid': bankAccount.bankAccountUuid});
@@ -7781,9 +7783,10 @@ directive('priceExpires', ['$interval', '$filter', 'Prices',
   <script type="text/javascript">
 
 angular.module('app.user', ['app.dataFactory', 'app.constants'])
-.controller('userAccountController', ['$scope', '$state', 'Error', 'States', 'UserFactory',
-  function ($scope, $state, Error, States, UserFactory) {
+.controller('userAccountController', ['$scope', '$state', 'Error', 'States', 'Occupations', 'UserFactory',
+  function ($scope, $state, Error, States, Occupations, UserFactory) {
     $scope.states = States.getStates();
+    $scope.occupations = Occupations.getOccupations();
     $scope.account = UserFactory.getUserAccount();
     UserFactory.getFullUserAccount().then(function(account) {
       $scope.account = account;
@@ -7849,6 +7852,7 @@ angular.module('app.user', ['app.dataFactory', 'app.constants'])
   function ($scope, $state, Error, States, UserFactory) {
     Airbitz.ui.title('Glidera Signup');
     $scope.account = UserFactory.getUserAccount();
+    $scope.registrationCode = '';
 
     $scope.cancelSignup = function(){
       $state.go('home');
@@ -7859,7 +7863,9 @@ angular.module('app.user', ['app.dataFactory', 'app.constants'])
       if (UserFactory.isRegistered()) {
         $state.go('verifyEmail');
       } else {
-        UserFactory.registerUser($scope.account.firstName, $scope.account.lastName, $scope.account.email).then(function() {
+        UserFactory.registerUser($scope.account.firstName,
+            $scope.account.lastName, $scope.account.email,
+            "US", $scope.registrationCode).then(function() {
           $state.go('verifyEmail');
         }, Error.reject);
       }
@@ -7873,7 +7879,7 @@ angular.module('app.user', ['app.dataFactory', 'app.constants'])
       $scope.next = function() {
         UserFactory.fetchUserAccountStatus().then(function(userStatus) {
           if (userStatus.userEmailIsSetup) {
-            $state.go('verifyInfo');
+            $state.go('verifyPhone');
           } else {
             Airbitz.ui.showAlert('Verify Email', 'Please verify your email address before proceeding!');
             $state.go('verifyEmail');
@@ -7881,10 +7887,11 @@ angular.module('app.user', ['app.dataFactory', 'app.constants'])
         }, Error.reject);
       };
     }])
-.controller('verifyInfoController', ['$scope', '$state', 'Error', 'States', 'UserFactory',
-  function($scope, $state, Error, States, UserFactory) {
+.controller('verifyInfoController', ['$scope', '$state', 'Error', 'States', 'Occupations', 'UserFactory',
+  function($scope, $state, Error, States, Occupations, UserFactory) {
     Airbitz.ui.title('Verify User Information');
     $scope.states = States.getStates();
+    $scope.occupations = Occupations.getOccupations();
     $scope.account = UserFactory.getUserAccount();
 
     $scope.saveUserAccount = function() {
@@ -9160,6 +9167,34 @@ module.run(['$templateCache', function($templateCache) {
     '      </div>\n' +
     '    </div>\n' +
     '\n' +
+    '    <!--\n' +
+    '    <div class="form-group">\n' +
+    '        <label for="inputCountry" class="">Country</label>\n' +
+    '        <select ng-model="account.countryCode" class="form-control"\n' +
+    '            name="countryCode"\n' +
+    '            id="inputCountry"\n' +
+    '            required="" />\n' +
+    '            <option value="US">United States</option>\n' +
+    '        </select>\n' +
+    '      <div class="input-error" ng-show="form.$submitted || form.countryCode.$touched">\n' +
+    '        <span ng-show="form.countryCode.$error.required" class="label label-danger">Required</span>\n' +
+    '        <span ng-show="form.countryCode.$error.countryCode" class="label label-danger">Country Required</span>\n' +
+    '      </div>\n' +
+    '    </div>\n' +
+    '    -->\n' +
+    '\n' +
+    '    <div class="form-group">\n' +
+    '      <label for="inputCode" class="">Registration Code</label>\n' +
+    '      <input ng-model="registrationCode" name="registrationCode" type="text" id="inputCode" class="form-control"\n' +
+    '             placeholder=""\n' +
+    '             autocomplete="off"\n' +
+    '             required="" />\n' +
+    '      <div class="input-error" ng-show="form.$submitted || form.registrationCode.$touched">\n' +
+    '        <span ng-show="form.registrationCode.$error.required" class="label label-danger">Required</span>\n' +
+    '        <span ng-show="form.registrationCode.$error.registrationCode" class="label label-danger">Valid registration code required</span>\n' +
+    '      </div>\n' +
+    '    </div>\n' +
+    '\n' +
     '    <div class="row text-right" style="margin-top: 40px;">\n' +
     '      <div class="col-xs-12">\n' +
     '        <button type="button"\n' +
@@ -9193,7 +9228,7 @@ try {
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/user/partials/userAccount.html',
     '<div class="user-account-form row">\n' +
-    '  <form name="form" ng-submit="saveUserAccount()" class="exchange-sign-up col-xs-12" novalidate>\n' +
+    '  <form name="form" class="exchange-sign-up col-xs-12" novalidate>\n' +
     '\n' +
     '    <div class="form-group">\n' +
     '      <label for="inputFirstName" class="">Name</label>\n' +
@@ -9275,6 +9310,19 @@ module.run(['$templateCache', function($templateCache) {
     '      </div>\n' +
     '    </div>\n' +
     '\n' +
+    '    <div class="form-group" ng-if="account.countryCode == \'CA\'">\n' +
+    '        <label for="inputOccupation" class="">Occupation</label>\n' +
+    '        <select ng-options="o.name for o in occupations" ng-model="account.occupation" class="form-control"\n' +
+    '                name="occupation"\n' +
+    '                required="" />\n' +
+    '            <option value="">Select an Occupation</option>\n' +
+    '        </select>\n' +
+    '      <div class="input-error" ng-show="form.$submitted || form.occupation.$touched">\n' +
+    '        <span ng-show="form.occupation.$error.required" class="label label-danger">Required</span>\n' +
+    '        <span ng-show="form.occupation.$error.occupation" class="label label-danger">Occupation Required</span>\n' +
+    '      </div>\n' +
+    '    </div>\n' +
+    '\n' +
     '    <div class="form-group">\n' +
     '      <label for="inputDob" class="">Date of Birth</label>\n' +
     '      <input ng-model="account.birthDate"\n' +
@@ -9291,7 +9339,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="row text-right" style="margin-top: 40px;">\n' +
     '      <div class="col-xs-12">\n' +
     '        <button type="button" ng-click="cancelSignup()" class="btn btn-lg btn-link">Cancel</button>\n' +
-    '        <button type="submit" class="btn btn-lg btn-success">Save</button>\n' +
+    '        <button type="button" ng-click="saveUserAccount()" class="btn btn-lg btn-success">Save</button>\n' +
     '      </div>\n' +
     '    </div>\n' +
     '  </form>\n' +
@@ -9405,13 +9453,14 @@ factory('UserFactory', [
       account = {};
       Airbitz.core.writeData('account', {});
     };
-    factory.registerUser = function(firstName, lastName, email) {
+    factory.registerUser = function(firstName, lastName, email, countryCode, registrationCode) {
       var d = $q.defer();
-      glideraFactory.register(firstName, lastName, email, '', function(success, b) {
+      glideraFactory.register(firstName, lastName, email, countryCode, registrationCode, function(success, b) {
         var account = factory.getUserAccount();
         account.firstName = firstName;
         account.lastName = lastName;
         account.email = email;
+        account.countryCode = countryCode;
         account.key = b["key"];
         account.secret = b["secret"];
         if (success) {
@@ -9457,6 +9506,8 @@ factory('UserFactory', [
             account.city = b.city;
             account.zipCode = b.zipCode;
             account.state = States.findState(b.state);
+            account.country = b.countryCode;
+            account.occupation = b.occupation;
             account.status = b.status.status;
 
             // XXX: This is kind of hacky
@@ -9486,6 +9537,7 @@ factory('UserFactory', [
           'address2': account.address2,
           'city': account.city,
           'state': account.state.id,
+          'occupation': account.occupation,
           'zipCode': account.zipCode
         }, function(e, s, b) {
           if (s === 200) {
@@ -9853,6 +9905,47 @@ factory('States', [function() {
     },
     findState: function(code) {
       var l = states.filter(function(s) {
+        return s.id === code;
+      });
+      return l.length >= 1 ? l[0] : null;
+    }
+  }
+}]).
+factory('Occupations', [function() {
+  var occupations = [
+    {"id": "1", "name": "Accounting"},
+    {"id": "2", "name": "Administration"},
+    {"id": "3", "name": "Arts, Culture"},
+    {"id": "4", "name": "Business"},
+    {"id": "5", "name": "Communications"},
+    {"id": "6", "name": "Customer Service"},
+    {"id": "7", "name": "Education"},
+    {"id": "8", "name": "Energy, Utilities"},
+    {"id": "9", "name": "Engineering"},
+    {"id": "10", "name": "Finance"},
+    {"id": "11", "name": "Financial Services"},
+    {"id": "12", "name": "Government"},
+    {"id": "13", "name": "Health"},
+    {"id": "14", "name": "Hospitality"},
+    {"id": "15", "name": "Human Resources"},
+    {"id": "16", "name": "Internet"},
+    {"id": "17", "name": "Legal"},
+    {"id": "18", "name": "Manufacturing"},
+    {"id": "19", "name": "Marketing"},
+    {"id": "20", "name": "Non profit"},
+    {"id": "21", "name": "Recreation"},
+    {"id": "22", "name": "Religion"},
+    {"id": "23", "name": "Research"},
+    {"id": "24", "name": "Sales"},
+    {"id": "25", "name": "Sports, Fitness"},
+    {"id": "26", "name": "Student"}
+  ];
+  return {
+    getOccupations: function() {
+      return occupations;
+    },
+    findOccupations: function(code) {
+      var l = occupations.filter(function(s) {
         return s.id === code;
       });
       return l.length >= 1 ? l[0] : null;
