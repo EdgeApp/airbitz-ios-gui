@@ -1551,19 +1551,27 @@ typedef enum eMapDisplayState
 
 - (BOOL)textFieldShouldReturn: (UITextField *)textField
 {
-    if (directoryMode == DIRECTORY_MODE_SEARCH)
+    if (textField == self.searchTextfield)
     {
-        if ([[self.locationTextfield.text uppercaseString] isEqualToString: [ON_THE_WEB_STRING uppercaseString]])
-        {
-            directoryMode = DIRECTORY_MODE_ON_THE_WEB_LISTING;
-            [self transitionSearchToListing];
-        } else
-        {
-            [self transitionSearchToMap];
-        }
+        [self.locationTextfield becomeFirstResponder];
     }
-
-    return YES;
+    if (textField == self.locationTextfield)
+    {
+        if (directoryMode == DIRECTORY_MODE_SEARCH)
+        {
+            if ([[self.locationTextfield.text uppercaseString] isEqualToString: [ON_THE_WEB_STRING uppercaseString]])
+            {
+                directoryMode = DIRECTORY_MODE_ON_THE_WEB_LISTING;
+                [self transitionSearchToListing];
+            }
+            else
+            {
+                [self transitionSearchToMap];
+            }
+        }
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark UIScrollView delegates
