@@ -128,6 +128,7 @@
     {
         // add the category
         [self.arrayCategories addObject:self.pickerTextNew.textField.text];
+        [self.arrayCategories sortUsingSelector:@selector(localizedCompare:)];
         self.pickerTextNew.textField.text = @"";
         [self updateDisplay];
     }
@@ -514,6 +515,7 @@
     {
         // add the category
         [self.arrayCategories addObject:pickerTextView.textField.text];
+        [self.arrayCategories sortUsingSelector:@selector(localizedCompare:)];
         pickerTextView.textField.text = @"";
         [self updateDisplay];
     }
