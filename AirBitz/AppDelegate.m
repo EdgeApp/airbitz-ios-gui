@@ -23,7 +23,6 @@
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
-NSTimer *logoutTimer = NULL;
 NSDate *logoutDate = NULL;
 
 @implementation AppDelegate
@@ -90,11 +89,6 @@ NSDate *logoutDate = NULL;
 
     bool bDidNotification = [self showNotifications];
 
-    if (![self isAppActive])
-    {
-        [self checkLoginExpired];
-    }
-
     if (bDidNotification)
     {
         NSLog(@"EXIT performFetch() NewData...\n");
@@ -135,13 +129,6 @@ NSDate *logoutDate = NULL;
         bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
             [self bgLogoutCleanup];
         }];
-        // start a logout timer
-        // multiply to get the time in seconds
-        logoutTimer = [NSTimer scheduledTimerWithTimeInterval:[User Singleton].minutesAutoLogout * 60
-                                                       target:self
-                                                       selector:@selector(autoLogout)
-                                                       userInfo:application
-                                                       repeats:NO];
         if ([CoreBridge allWatchersReady])
         {
             [CoreBridge disconnectWatchers];
@@ -163,10 +150,6 @@ NSDate *logoutDate = NULL;
                 if (![self isAppActive])
                 {
                     [CoreBridge disconnectWatchers];
-                }
-                if (![logoutTimer isValid])
-                {
-                    [self bgLogoutCleanup];
                 }
             });
         }
@@ -192,7 +175,15 @@ NSDate *logoutDate = NULL;
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    [CoreBridge stopQueues];
     [LocalSettings freeAll];
+
+    int wait = 0;
+    int maxWait = 200; // ~10 seconds
+    while ([CoreBridge dataOperationCount] > 0 && wait < maxWait) {
+        [NSThread sleepForTimeInterval:.2];
+        wait++;
+    }
     
     [[User Singleton] clear];
     ABC_Terminate();
@@ -204,10 +195,6 @@ NSDate *logoutDate = NULL;
 
 - (void)bgLogoutCleanup
 {
-    if (logoutTimer)
-    {
-        [logoutTimer invalidate];
-    }
     [[UIApplication sharedApplication] endBackgroundTask:bgLogoutTask];
     bgLogoutTask = UIBackgroundTaskInvalid;
 }

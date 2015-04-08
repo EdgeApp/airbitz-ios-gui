@@ -119,7 +119,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         "mBTC", 100000 // ABC_DENOMINATION_MBTC = 1
     },
     {
-        "µBTC", 100 // ABC_DENOMINATION_UBTC = 2
+        "bits", 100 // ABC_DENOMINATION_UBTC = 2
     }
 };
 
@@ -910,7 +910,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	if (indexPath.row == ROW_UBITCOIN)
 	{
-		cell.name.text = NSLocalizedString(@"μBitcoin = (0.000001 Bitcoin)", @"settings text");
+		cell.name.text = NSLocalizedString(@"bits = (0.000001 Bitcoin)", @"settings text");
 	}
 	cell.radioButton.image = [UIImage imageNamed:(indexPath.row == [self denominationChoice] ? @"btn_selected" : @"btn_unselected")];
 

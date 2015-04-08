@@ -207,7 +207,8 @@
 {
     [self blockUser:YES];
     _bCreatingWallet = YES;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [CoreBridge clearSyncQueue];
+    [CoreBridge postToSyncQueue:^{
         tABC_Error error;
         char *szUUID = NULL;
         ABC_CreateWallet([[User Singleton].name UTF8String],
@@ -222,7 +223,7 @@
             free(szUUID);
         }
         [self performSelectorOnMainThread:@selector(createWalletComplete) withObject:nil waitUntilDone:FALSE];
-    });
+    }];
 }
 
 - (void)createOfflineWallet

@@ -160,6 +160,20 @@ static BOOL bOtpError = NO;
     [walletsQueue addOperationWithBlock:cb];
 }
 
++ (int)dataOperationCount
+{
+    int total = 0;
+    total += dataQueue == nil     ? 0 : [dataQueue operationCount];
+    total += exchangeQueue == nil ? 0 : [exchangeQueue operationCount];
+    total += walletsQueue == nil  ? 0 : [walletsQueue operationCount];
+    return total;
+}
+
++ (void)clearSyncQueue
+{
+    [dataQueue cancelAllOperations];
+}
+
 + (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs
 {
     tABC_Error Error;

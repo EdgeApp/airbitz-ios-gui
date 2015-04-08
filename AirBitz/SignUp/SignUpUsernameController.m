@@ -125,6 +125,8 @@
 
                 [self performSelectorOnMainThread:@selector(checkUsernameComplete) withObject:nil waitUntilDone:FALSE];
             });
+        } else {
+            [self blockUser:NO];
         }
     }
 

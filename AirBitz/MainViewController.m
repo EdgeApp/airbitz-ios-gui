@@ -251,8 +251,12 @@ typedef enum eAppMode
 
     [data appendBytes:&time length:sizeof(double)];
 
-    u_int32_t rand = arc4random();
+    UInt32 randomBytes = 0;
+    if (0 == SecRandomCopyBytes(kSecRandomDefault, sizeof(int), (uint8_t*)&randomBytes)) {
+        [data appendBytes:&randomBytes length:sizeof(UInt32)];
+    }
 
+    u_int32_t rand = arc4random();
     [data appendBytes:&rand length:sizeof(u_int32_t)];
 }
 

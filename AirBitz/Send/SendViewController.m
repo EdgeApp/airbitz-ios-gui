@@ -173,6 +173,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self generateListOfContactNames];
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
 	scanMode = SCAN_MODE_UNINITIALIZED;
@@ -181,7 +186,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #if !TARGET_IPHONE_SIMULATOR
     [self startQRReader];
 #endif
-
 
     if([LocalSettings controller].bDisableBLE == NO)
 	{
@@ -209,11 +213,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	frame.size.height = originalFrameHeight;
 	self.view.frame = frame;
 	
-	[[NSNotificationCenter defaultCenter]
-	 addObserver:self
-	 selector:@selector(applicationDidBecomeActiveNotification:)
-	 name:UIApplicationDidBecomeActiveNotification
-	 object:[UIApplication sharedApplication]];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
+           selector:@selector(applicationDidBecomeActiveNotification:)
+               name:UIApplicationDidBecomeActiveNotification
+             object:nil];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
+           selector:@selector(willResignActive)
+               name:UIApplicationWillResignActiveNotification
+             object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -233,9 +242,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	}
 	scanMode = SCAN_MODE_UNINITIALIZED;
     //NSLog(@"Scanning stopped");
-	
-	//remove our app did become active notification listener
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -254,6 +260,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		scanMode = SCAN_MODE_QR;
 		[self startQRReader];
 	}
+#endif
+}
+
+- (void)willResignActive
+{
+	[_startScannerTimer invalidate];
+	_startScannerTimer = nil;
+#if !TARGET_IPHONE_SIMULATOR
+	[self stopQRReader];
 #endif
 }
 
@@ -1600,6 +1615,19 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 - (void)processURI
+{
+    if ([self.arrayWalletNames count] == 0 || [self.arrayWallets count] == 0) {
+        [self loadWalletInfo];
+    }
+    // Added to wallet queue since wallets are loaded asynchronously
+    [CoreBridge postToWalletsQueue:^(void) {
+        dispatch_async(dispatch_get_main_queue(),^{
+            [self doProcessURI];
+        });
+    }];
+}
+
+- (void)doProcessURI
 {
     BOOL bSuccess = YES;
     tABC_BitcoinURIInfo *uri = NULL;
