@@ -209,7 +209,8 @@
             [self.arrayCategories addObject:[NSString stringWithUTF8String:_aszCategories[i]]];
         }
     }
-
+    
+    [self.arrayCategories sortUsingSelector:@selector(localizedCompare:)];
     [self updateDisplay];
 }
 
