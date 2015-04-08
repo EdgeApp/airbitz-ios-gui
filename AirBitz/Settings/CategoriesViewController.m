@@ -12,6 +12,7 @@
 #import "ABC.h"
 #import "User.h"
 #import "PickerTextView3.h"
+#import "FadingAlertView.h"
 #import "Util.h"
 #import "CommonTypes.h"
 
@@ -24,12 +25,13 @@
 
 #define POS_THRESHOLD_TO_GET_3_CHOICES  180.0
 
-@interface CategoriesViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate, CategoriesCellDelegate, PickerTextViewDelegate>
+@interface CategoriesViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate, CategoriesCellDelegate, FadingAlertViewDelegate, PickerTextViewDelegate>
 {
     char            **_aszCategories;
     unsigned int    _count;
     CGRect          _frameTableOriginal;
     CGPoint         _offsetTableOriginal;
+    FadingAlertView             *_fadingAlert;
 }
 
 @property (nonatomic, weak) IBOutlet    UITableView     *tableView;
@@ -368,6 +370,17 @@
 	[self.delegate categoriesViewControllerDidFinish:self];
 }
 
+- (void)showFadingMessage:(NSString *)message
+{
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert.message = message;
+    _fadingAlert.fadeDuration = 2;
+    _fadingAlert.fadeDelay = 5;
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert showSpinner:NO];
+    [_fadingAlert showFading];
+}
+
 #pragma mark - UITableView Delegates
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -422,6 +435,13 @@
 	{
         [self performSelector:@selector(animatedExit) withObject:nil afterDelay:0.0];
 	}
+}
+
+#pragma mark - FadingAlertView Delegate
+
+-(void)fadingAlertDismissed:(FadingAlertView *)pv
+{
+    
 }
 
 #pragma mark - UITextField delegates
@@ -535,13 +555,20 @@
 
 - (void)categoriesCellDeleteTouched:(CategoriesCell *)cell
 {
+    NSString *selected;
+    
     for (int i = 0; i < [self.arrayCategories count]; i++)
     {
         NSString *strCategory = [self.arrayCategories objectAtIndex:i];
         if([strCategory isEqualToString:cell.pickerTextView.textField.text]) {
+            selected = strCategory;
             [self.arrayCategories removeObjectAtIndex:i];
             break;
         }
+    }
+    if(selected)
+    {
+        [self showFadingMessage:[NSString stringWithFormat:@"%@ Deleted", selected]];
     }
     [self updateDisplay];
 }
