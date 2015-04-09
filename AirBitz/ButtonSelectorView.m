@@ -284,7 +284,8 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell;
+    UITableViewCell *cell;
+    NSUInteger row = [indexPath row];
 	
 	//wallet cell
 	static NSString *cellIdentifier = @"ButtonSelectorCell";
@@ -300,6 +301,19 @@
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
 	//cell.textLabel.textColor = [UIColor redColor];
 	//NSLog(@"Row: %i, text: %@", indexPath.row, cell.textLabel.text);
+    
+    if (self.accessoryImage) {
+        UIImage *image = self.accessoryImage;
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+        button.frame = frame;
+        button.tag = row;
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+        button.backgroundColor = [UIColor clearColor];
+        cell.accessoryView = button;
+        cell.accessoryView.hidden = NO;
+        [button addTarget:self action:@selector(accessoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
+    }
 	return cell;
 }
 
@@ -326,5 +340,18 @@
         }
     }
 }
+
+- (void)accessoryButtonTapped:(id)sender event:(id)event
+{
+    UIButton *button = (UIButton *) sender;
+    NSString *account = [self.arrayItemsToSelect objectAtIndex:button.tag];
+    
+    if ([self.delegate respondsToSelector:@selector(ButtonSelectorDidTouchAccessory:accountString:)])
+    {
+        [self.delegate ButtonSelectorDidTouchAccessory:self accountString:account];
+    }
+    [self hideTable];
+}
+
 
 @end

@@ -22,6 +22,7 @@
     CGRect   _originalRightSwipeArrowFrame;
     CGPoint  _firstTouchPoint;
     BOOL     _bTouchesEnabled;
+    NSString                        *_account;
     NSUInteger _invalidEntryCount;
     FadingAlertView                 *_fadingAlert;
 }
@@ -69,6 +70,7 @@
     [self.usernameSelector.button setBackgroundImage:nil forState:UIControlStateSelected];
     self.usernameSelector.textLabel.text = NSLocalizedString(@"", @"username");
     [self.usernameSelector setButtonWidth:_originalLogoFrame.size.width];
+    self.usernameSelector.accessoryImage = [UIImage imageNamed:@"btn_close.png"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -474,6 +476,19 @@
     _bTouchesEnabled = _spinnerView.hidden;
 }
 
+- (void)removeAccount:(NSString *)account
+{
+    // TODO delete the account, update array - current implementation is fake
+    tABC_Error error;
+    tABC_CC cc = ABC_AccountDelete((const char*)[account UTF8String], &error);
+    if(cc == ABC_CC_Ok) {
+        // go to login view controller
+    }
+    else {
+        [self showFadingError:[Util errorMap:&error]];
+    }
+}
+
 #pragma mark - ButtonSelectorView delegates
 
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
@@ -504,5 +519,34 @@
 
 }
 
+- (void)ButtonSelectorDidTouchAccessory:(ButtonSelectorView *)selector accountString:(NSString *)string
+{
+    _account = string;
+    NSString *message = [NSString stringWithFormat:@"Delete %@ on this device only?",
+                         string];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:NSLocalizedString(@"Delete Account", nil)
+                          message:NSLocalizedString(message, nil)
+                          delegate:self
+                          cancelButtonTitle:@"No"
+                          otherButtonTitles:@"Yes", nil];
+    [alert show];
+    [self.PINCodeView becomeFirstResponder];
+
+}
+
+#pragma mark - UIAlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    // if they said they wanted to delete the account
+    if (buttonIndex == 1)
+    {
+        [self removeAccount:_account];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.delegate PINReLoginViewControllerDidSwitchUserWithMessage:nil];
+        }];
+    }
+}
 
 @end

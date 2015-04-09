@@ -18,6 +18,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *textLabel;
 @property (nonatomic, weak) IBOutlet UIButton *button;
+@property (nonatomic, strong) UIImage *accessoryImage;
 @property (nonatomic, assign) id<ButtonSelectorDelegate> delegate;
 @property (nonatomic, strong) NSArray *arrayItemsToSelect;			/* set this to an array of NSStrings that will appear in the drop-down */
 @property (nonatomic, readwrite) int selectedItemIndex;
@@ -40,5 +41,6 @@
 - (NSString *)ButtonSelector:(ButtonSelectorView *)view willSetButtonTextToString:(NSString *)desiredString; //allows delegate to alter the new desired button title
 - (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view;
 - (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view;
+- (void)ButtonSelectorDidTouchAccessory:(ButtonSelectorView *)selector accountString:(NSString *)string;
 
 @end
