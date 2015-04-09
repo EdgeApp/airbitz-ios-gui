@@ -6801,6 +6801,14 @@ var Glidera = (function () {
       return Glidera.request(req, opts.callback);
     },
 
+    registrationMode: function(cb) {
+      this._request(false, '/user/register/mode', {
+        'method': 'GET',
+        'callback': function(error, statusCode, body) {
+          cb(statusCode == 200, body.mode === 'OPEN');
+        }
+      });
+    },
     register: function(firstName, lastName, email, countryCode, registrationCode, cb) {
       var that = this;
       this._request(false, '/user/register', {
@@ -7853,6 +7861,12 @@ angular.module('app.user', ['app.dataFactory', 'app.constants'])
     Airbitz.ui.title('Glidera Signup');
     $scope.account = UserFactory.getUserAccount();
     $scope.registrationCode = '';
+    $scope.regCodeRequired = false;
+
+    UserFactory.registrationMode().then(function(isOpen) {
+      $scope.regCodeRequired = true; // !isOpen;
+    }, function() {
+    });
 
     $scope.cancelSignup = function(){
       $state.go('home');
@@ -8259,15 +8273,15 @@ try {
   module = angular.module('app', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('app/core/partials/index.html',
-    '<div class="row text-center">\n' +
-    '  <h1>Glidera Exchange</h1>\n' +
+  $templateCache.put('app/error/partials/error.html',
+    '<div class="error-screen text-center row">\n' +
+    '  <div class="col-xs-12">\n' +
+    '    <h2>{{ title }}</h2>\n' +
+    '    <h3>{{ message }}</h3>\n' +
+    '    <button class="btn btn-large btn-warning" ng-click="refresh()">Refresh</button>\n' +
+    '  </div>\n' +
     '</div>\n' +
-    '\n' +
-    '<div class="row text-center" style="margin-top: 20px">\n' +
-    '  <a ui-sref="exchange" class="btn btn-lg btn-link">Cheat Code</a>\n' +
-    '  <a ui-sref="signup" class="btn btn-lg btn-success">Sign Up</a>\n' +
-    '</div>');
+    '');
 }]);
 })();
 
@@ -8278,15 +8292,15 @@ try {
   module = angular.module('app', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('app/error/partials/error.html',
-    '<div class="error-screen text-center row">\n' +
-    '  <div class="col-xs-12">\n' +
-    '    <h2>{{ title }}</h2>\n' +
-    '    <h3>{{ message }}</h3>\n' +
-    '    <button class="btn btn-large btn-warning" ng-click="refresh()">Refresh</button>\n' +
-    '  </div>\n' +
+  $templateCache.put('app/core/partials/index.html',
+    '<div class="row text-center">\n' +
+    '  <h1>Glidera Exchange</h1>\n' +
     '</div>\n' +
-    '');
+    '\n' +
+    '<div class="row text-center" style="margin-top: 20px">\n' +
+    '  <a ui-sref="exchange" class="btn btn-lg btn-link">Cheat Code</a>\n' +
+    '  <a ui-sref="signup" class="btn btn-lg btn-success">Sign Up</a>\n' +
+    '</div>');
 }]);
 })();
 
@@ -9167,23 +9181,7 @@ module.run(['$templateCache', function($templateCache) {
     '      </div>\n' +
     '    </div>\n' +
     '\n' +
-    '    <!--\n' +
-    '    <div class="form-group">\n' +
-    '        <label for="inputCountry" class="">Country</label>\n' +
-    '        <select ng-model="account.countryCode" class="form-control"\n' +
-    '            name="countryCode"\n' +
-    '            id="inputCountry"\n' +
-    '            required="" />\n' +
-    '            <option value="US">United States</option>\n' +
-    '        </select>\n' +
-    '      <div class="input-error" ng-show="form.$submitted || form.countryCode.$touched">\n' +
-    '        <span ng-show="form.countryCode.$error.required" class="label label-danger">Required</span>\n' +
-    '        <span ng-show="form.countryCode.$error.countryCode" class="label label-danger">Country Required</span>\n' +
-    '      </div>\n' +
-    '    </div>\n' +
-    '    -->\n' +
-    '\n' +
-    '    <div class="form-group">\n' +
+    '    <div class="form-group" ng-show="regCodeRequired">\n' +
     '      <label for="inputCode" class="">Registration Code</label>\n' +
     '      <input ng-model="registrationCode" name="registrationCode" type="text" id="inputCode" class="form-control"\n' +
     '             placeholder=""\n' +
@@ -9452,6 +9450,17 @@ factory('UserFactory', [
     factory.clearUser = function() {
       account = {};
       Airbitz.core.writeData('account', {});
+    };
+    factory.registrationMode = function() {
+      var d = $q.defer();
+      glideraFactory.registrationMode(function(success, isOpen) {
+        if (success) {
+          d.resolve(isOpen);
+        } else {
+          d.reject();
+        }
+      });
+      return d.promise;
     };
     factory.registerUser = function(firstName, lastName, email, countryCode, registrationCode) {
       var d = $q.defer();
