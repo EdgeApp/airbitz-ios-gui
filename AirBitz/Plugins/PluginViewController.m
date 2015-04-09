@@ -15,7 +15,6 @@
 #import "CommonTypes.h"
 
 static const NSString *PROTOCOL = @"bridge://";
-static NSString *pluginId = @"com.glidera";
 
 @interface PluginViewController () <UIWebViewDelegate, SendConfirmationViewControllerDelegate>
 {
@@ -71,7 +70,7 @@ static NSString *pluginId = @"com.glidera";
                  @"navStackPop":NSStringFromSelector(@selector(navStackPop:))
     };
 
-    NSString *localFilePath = [[NSBundle mainBundle] pathForResource:@"glidera" ofType:@"html" inDirectory:@"plugins"];
+    NSString *localFilePath = [[NSBundle mainBundle] pathForResource:_plugin.sourceFile ofType:_plugin.sourceExtension inDirectory:@"plugins"];
     NSURLRequest *localRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localFilePath]];
     _webView.delegate = self;
     _webView.backgroundColor = [UIColor clearColor];
@@ -368,7 +367,7 @@ static NSString *pluginId = @"com.glidera";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    if ([self pluginDataSet:pluginId withKey:[args objectForKey:@"key"] 
+    if ([self pluginDataSet:_plugin.pluginId withKey:[args objectForKey:@"key"] 
                                     withValue:[args objectForKey:@"value"]]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
@@ -380,7 +379,7 @@ static NSString *pluginId = @"com.glidera";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    if ([self pluginDataClear:pluginId]) {
+    if ([self pluginDataClear:_plugin.pluginId]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -390,7 +389,7 @@ static NSString *pluginId = @"com.glidera";
 - (void)readData:(NSDictionary *)params
 {
     NSDictionary *args = [params objectForKey:@"args"];
-    NSString *value = [self pluginDataGet:pluginId withKey:[args objectForKey:@"key"]];
+    NSString *value = [self pluginDataGet:_plugin.pluginId withKey:[args objectForKey:@"key"]];
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:value]];
 }
 
@@ -463,7 +462,12 @@ static NSString *pluginId = @"com.glidera";
     if ([@"GLIDERA_PARTNER_TOKEN" compare:key]  == NSOrderedSame) {
         [self setJsResults:cbid withArgs:[self jsonResult:GLIDERA_API_KEY]];
     } else {
-        [self setJsResults:cbid withArgs:[self jsonResult:@""]];
+        NSString *value = [_plugin.env valueForKey:key];
+        if (value) {
+            [self setJsResults:cbid withArgs:[self jsonResult:value]];
+        } else {
+            [self setJsResults:cbid withArgs:[self jsonResult:@""]];
+        }
     }
 }
 
@@ -521,8 +525,6 @@ static NSString *pluginId = @"com.glidera";
 
     _navStack = [[NSMutableArray alloc] init];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
-
-    _backButton.hidden = YES;
 }
 
 - (void)navStackPush:(NSDictionary *)params
@@ -532,8 +534,6 @@ static NSString *pluginId = @"com.glidera";
 
     [_navStack addObject:[args objectForKey:@"path"]];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
-
-    _backButton.hidden = NO;
 }
 
 - (void)navStackPop:(NSDictionary *)params
@@ -543,8 +543,6 @@ static NSString *pluginId = @"com.glidera";
 
     [_navStack removeLastObject];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
-
-    _backButton.hidden = [_navStack count] == 0;
 }
 
 #pragma - Helper Functions

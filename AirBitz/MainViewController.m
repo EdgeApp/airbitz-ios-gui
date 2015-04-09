@@ -21,7 +21,7 @@
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
 #import "TwoFactorScanViewController.h"
-#import "PluginViewController.h"
+#import "BuySellViewController.h"
 #import "AddressRequestController.h"
 #import "User.h"
 #import "Config.h"
@@ -50,7 +50,7 @@ typedef enum eAppMode
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, PluginViewControllerDelegate,
+                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate,
                                   MFMailComposeViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
@@ -62,7 +62,7 @@ typedef enum eAppMode
 	LoginViewController         *_loginViewController;
     PINReLoginViewController    *_PINReLoginViewController;
 	SettingsViewController      *_settingsViewController;
-	PluginViewController        *_pluginViewController;
+	BuySellViewController       *_buySellViewController;
 	SendStatusViewController    *_sendStatusController;
     TransactionDetailsViewController *_txDetailsController;
     TwoFactorScanViewController      *_tfaScanViewController;
@@ -179,8 +179,8 @@ typedef enum eAppMode
 	_settingsViewController.delegate = self;
 
 	UIStoryboard *pluginStoryboard = [UIStoryboard storyboardWithName:@"Plugins" bundle: nil];
-	_pluginViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"PluginViewController"];
-    _pluginViewController.delegate = self;
+	_buySellViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"BuySellViewController"];
+    _buySellViewController.delegate = self;
 
     slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
     [self.view insertSubview:slideoutView aboveSubview:self.view];
@@ -1296,7 +1296,7 @@ typedef enum eAppMode
 - (void)slideoutBuySell
 {
     [_selectedViewController.view removeFromSuperview];
-    _selectedViewController = _pluginViewController;
+    _selectedViewController = _buySellViewController;
     [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     [self.tabBar selectButtonAtIndex:APP_MODE_MORE];
     [slideoutView showSlideout:NO];
@@ -1323,12 +1323,6 @@ typedef enum eAppMode
             [slideoutView handleRecognizer:recognizer fromBlock:NO];
         }
     }
-}
-
-#pragma mark - Plugin Delegate
-
-- (void)PluginViewControllerDone:(PluginViewController *)vc
-{
 }
 
 @end

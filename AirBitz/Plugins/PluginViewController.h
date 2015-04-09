@@ -4,12 +4,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Plugin.h"
 
 @protocol PluginViewControllerDelegate;
 
 @interface PluginViewController : UIViewController
 
 @property (assign) id<PluginViewControllerDelegate> delegate;
+@property (assign) Plugin *plugin;
 
 @end
 
