@@ -405,6 +405,7 @@ typedef enum eRequestType
                                                     withWidth:PICKER_WIDTH
                                                 withAccessory:nil
                                                 andCellHeight:PICKER_CELL_HEIGHT
+                                                roundedEdgesAndShadow:YES
                                 ];
     self.categoryPopupPicker.userData = nil;
     //prevent popup from extending behind tool bar

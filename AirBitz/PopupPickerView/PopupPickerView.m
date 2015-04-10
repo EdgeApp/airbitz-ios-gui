@@ -149,7 +149,7 @@ CGRect keyboardFrame;
 	 }];
 }
 
-+ (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings fromCategories:(NSArray *)categories selectedRow:(NSInteger)selectedRow /*maxCellsVisible:(NSInteger)maxCellsVisible*/ withWidth:(NSInteger)width withAccessory:(UIImage *)image andCellHeight:(NSInteger)cellHeight
++ (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings fromCategories:(NSArray *)categories selectedRow:(NSInteger)selectedRow /*maxCellsVisible:(NSInteger)maxCellsVisible*/ withWidth:(NSInteger)width withAccessory:(UIImage *)image andCellHeight:(NSInteger)cellHeight roundedEdgesAndShadow:(Boolean)rounded
 {
     // create the picker from the xib
     PopupPickerView *popup = [[[NSBundle mainBundle] loadNibNamed:@"PopupPickerView" owner:nil options:nil] objectAtIndex:0];
@@ -375,6 +375,20 @@ CGRect keyboardFrame;
         //cw table wasn't scrolling to selected position because rows hadn't been filled in yet.  PerformSelector fixed it.
 		[popup performSelectorOnMainThread:@selector(selectRow2:) withObject:[NSNumber numberWithInt:(int)selectedRow] waitUntilDone:NO];
     }
+    
+    if(rounded) {
+        // round the corners
+        popup.layer.cornerRadius = 10;
+        popup->innerView.layer.cornerRadius = 10;
+        popup->m_viewBorder.layer.cornerRadius = 10;
+    
+        // add drop shadow
+        popup.layer.shadowColor = [UIColor blackColor].CGColor;
+        popup.layer.shadowOpacity = 0.5;
+        popup.layer.shadowRadius = 10;
+        popup.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
+    }
+
 
     return popup;
 }
@@ -384,17 +398,6 @@ CGRect keyboardFrame;
     // add a black border around the grey 'border'
     m_viewBorder.layer.borderWidth = POPUP_STROKE_WIDTH;
     m_viewBorder.layer.borderColor = [[UIColor blackColor] CGColor];
-    
-	// round the corners
-	self.layer.cornerRadius = 10;
-	innerView.layer.cornerRadius = 10;
-    m_viewBorder.layer.cornerRadius = 10;
-	
-	// add drop shadow
-	self.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.layer.shadowOpacity = 0.5;
-    self.layer.shadowRadius = 10;
-    self.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
     
     // start with no delegate
     self.delegate = nil;

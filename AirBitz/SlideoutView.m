@@ -119,6 +119,7 @@
     self.accountPicker.frame = frame;
     self.accountPicker.pickerMaxChoicesVisible = 3;
     [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
+    [self.accountPicker setRoundedAndShadowed:NO];
     
     tABC_AccountSettings *_pAccountSettings = NULL;
     tABC_Error Error;
@@ -480,8 +481,8 @@
     if (buttonIndex == 1)
     {
         [self removeAccount:_account];
-        [self accountTouched];
     }
+    [self accountTouched];
 }
 
 @end

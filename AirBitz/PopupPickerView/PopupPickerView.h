@@ -39,7 +39,8 @@ typedef enum ePopupPickerPosition
 				  selectedRow:(NSInteger)selectedRow				/* which row is initially selected */
 				  withWidth:(NSInteger)width
                   withAccessory:(UIImage *)image                    /* optional accessory for each row */
-                  andCellHeight:(NSInteger)cellHeight;
+                  andCellHeight:(NSInteger)cellHeight
+                  roundedEdgesAndShadow:(Boolean)rounded;           /* rounded edges and shadowed */
 
 - (void)selectRow:(NSInteger)row;
 - (void)setCellHeight:(NSInteger)height;

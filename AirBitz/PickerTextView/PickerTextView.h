@@ -35,6 +35,7 @@
 - (void)setAccessoryImage:(UIImage *)accessoryImage;
 - (void)updateChoices:(NSArray *)arrayChoices;
 - (void)dismissPopupPicker;
+- (void)setRoundedAndShadowed:(Boolean)rounded;
 
 @end
 

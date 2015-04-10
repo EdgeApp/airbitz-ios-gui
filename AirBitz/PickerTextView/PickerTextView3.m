@@ -152,6 +152,7 @@
                                             withWidth:_pickerWidth
                                         withAccessory:nil
                                         andCellHeight:_pickerCellHeight
+                                        roundedEdgesAndShadow:YES
                         ];
     self.popupPicker.tableViewCellStyle = self.pickerTableViewCellStyle;
     [self.popupPicker disableBackgroundTouchDetect];

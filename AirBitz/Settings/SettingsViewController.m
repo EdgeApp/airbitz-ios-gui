@@ -1627,6 +1627,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                                                 withWidth:PICKER_WIDTH
                                             withAccessory:nil
                                             andCellHeight:PICKER_CELL_HEIGHT
+                                            roundedEdgesAndShadow:YES
                             ];
         self.popupPicker.userData = cell;
 		//prevent popup from extending behind tool bar

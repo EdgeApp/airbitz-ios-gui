@@ -17,6 +17,7 @@
 {
     UIView *_viewTop;
     NSArray *_arrayCategories;
+    Boolean _roundedAndShadowed;
 }
 
 
@@ -114,6 +115,13 @@
     _viewTop = [self superview];
 
     [self configTextField];
+    
+    _roundedAndShadowed = YES;
+}
+
+- (void)setRoundedAndShadowed:(Boolean)rounded
+{
+    _roundedAndShadowed = rounded;
 }
 
 - (void)configTextField
@@ -152,6 +160,7 @@
                                             withWidth:_pickerWidth
                                         withAccessory:self.accessoryImage
                                         andCellHeight:_pickerCellHeight
+                                        roundedEdgesAndShadow:_roundedAndShadowed
                         ];
     self.popupPicker.tableViewCellStyle = self.pickerTableViewCellStyle;
     [self.popupPicker disableBackgroundTouchDetect];
