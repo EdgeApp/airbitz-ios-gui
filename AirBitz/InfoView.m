@@ -24,15 +24,15 @@
 {
 	InfoView *iv;
 	
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-	{
+//	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+//	{
 		iv = [[[NSBundle mainBundle] loadNibNamed:@"InfoView~iphone" owner:nil options:nil] objectAtIndex:0];
-	}
-	else
-	{
-		iv = [[[NSBundle mainBundle] loadNibNamed:@"InfoView~ipad" owner:nil options:nil] objectAtIndex:0];
-		
-	}
+//	}
+//	else
+//	{
+//		iv = [[[NSBundle mainBundle] loadNibNamed:@"InfoView~ipad" owner:nil options:nil] objectAtIndex:0];
+//		
+//	}
 	iv.delegate = delegate;
 	return iv;
 }

@@ -81,14 +81,14 @@
 
     BalanceView *bv;
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-    {
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+//    {
         bv = [[[NSBundle mainBundle] loadNibNamed:@"BalanceView~iphone" owner:self options:nil] objectAtIndex:0];
-    }
-    else
-    {
-        bv = [[[NSBundle mainBundle] loadNibNamed:@"BalanceView~ipad" owner:self options:nil] objectAtIndex:0];
-    }
+//    }
+//    else
+//    {
+//        bv = [[[NSBundle mainBundle] loadNibNamed:@"BalanceView~ipad" owner:self options:nil] objectAtIndex:0];
+//    }
     
 
     bv.delegate = del;

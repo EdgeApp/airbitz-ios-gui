@@ -48,15 +48,15 @@
 {
 	QuestionAnswerView *qav;
 	
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+//	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 	{
 		qav = [[[NSBundle mainBundle] loadNibNamed:@"QuestionAnswerView~iphone" owner:nil options:nil] objectAtIndex:0];
 	}
-	else
-	{
-		qav = [[[NSBundle mainBundle] loadNibNamed:@"QuestionAnswerView~ipad" owner:nil options:nil] objectAtIndex:0];
-		
-	}
+//	else
+//	{
+//		qav = [[[NSBundle mainBundle] loadNibNamed:@"QuestionAnswerView~ipad" owner:nil options:nil] objectAtIndex:0];
+//		
+//	}
 	[parentView addSubview:qav];
 	qav.delegate = delegate;
 	qav.expandCollapseImage.transform = CGAffineTransformRotate(qav.expandCollapseImage.transform, M_PI);

@@ -112,7 +112,7 @@
 		68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */; };
 		683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
 		684861AC1A0C01C5008E53F8 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C4AA221A0B4DD70010C837 /* FadingAlertView.m */; };
-		684861B11A0C01D7008E53F8 /* FadingAlertView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView~iphone.xib */; };
+		684861B11A0C01D7008E53F8 /* FadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */; };
 		684C0E521936B97000AB9807 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
 		685E6DE7197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DE5197DC9ED00EC95F8 /* btn_use_max@2x~iphone.png */; };
 		685E6DE8197DC9ED00EC95F8 /* btn_use_max~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 685E6DE6197DC9ED00EC95F8 /* btn_use_max~iphone.png */; };
@@ -131,7 +131,7 @@
 		68BC31CC1A3F745900ECDA97 /* UIButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BC31CA1A3F745900ECDA97 /* UIButtonBarRefresh@2x.png */; };
 		68C3285719804BFE007DA4C2 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */; };
 		68C4AA241A0B4DD70010C837 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C4AA221A0B4DD70010C837 /* FadingAlertView.m */; };
-		68C4AA251A0B4DD70010C837 /* FadingAlertView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView~iphone.xib */; };
+		68C4AA251A0B4DD70010C837 /* FadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */; };
 		6A587502F675B6C6ECA2BB1B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E47C0EC32EE29D34C5A03A0B /* libPods.a */; };
 		7D05AB821A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D05AB801A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png */; };
 		7D05AB831A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D05AB801A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png */; };
@@ -1501,7 +1501,7 @@
 		DAE865491A88A58A00A17BD3 /* Red-X~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9D718DCE475008ACF88 /* Red-X~iphone.png */; };
 		DAE8654A1A88A58A00A17BD3 /* icon_export_dropbox@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7247B619353BD50091C286 /* icon_export_dropbox@2x~iphone.png */; };
 		DAE8654B1A88A58A00A17BD3 /* bkg_dark_header~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C144718C012B500AEA789 /* bkg_dark_header~iphone.png */; };
-		DAE8654C1A88A58A00A17BD3 /* FadingAlertView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView~iphone.xib */; };
+		DAE8654C1A88A58A00A17BD3 /* FadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */; };
 		DAE8654D1A88A58A00A17BD3 /* btn_slider~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C148518C012B500AEA789 /* btn_slider~iphone.png */; };
 		DAE8654E1A88A58A00A17BD3 /* logo_large~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9B418DA0F9E008ACF88 /* logo_large~iphone.png */; };
 		DAE8654F1A88A58A00A17BD3 /* btn_export~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147118C012B500AEA789 /* btn_export~iphone.png */; };
@@ -1938,7 +1938,7 @@
 		68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SyncView~iphone.xib"; sourceTree = "<group>"; };
 		68C4AA211A0B4DD70010C837 /* FadingAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FadingAlertView.h; path = AirBitz/FadingAlert/FadingAlertView.h; sourceTree = SOURCE_ROOT; };
 		68C4AA221A0B4DD70010C837 /* FadingAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FadingAlertView.m; path = AirBitz/FadingAlert/FadingAlertView.m; sourceTree = SOURCE_ROOT; };
-		68C4AA231A0B4DD70010C837 /* FadingAlertView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "FadingAlertView~iphone.xib"; path = "AirBitz/FadingAlert/FadingAlertView~iphone.xib"; sourceTree = SOURCE_ROOT; };
+		68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FadingAlertView.xib; path = AirBitz/FadingAlert/FadingAlertView.xib; sourceTree = SOURCE_ROOT; };
 		6BECB1B8C9CE1002526F24AB /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; };
 		7D05AB801A0304DD00AFA5F7 /* bd_cell_middle_white@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_cell_middle_white@2x~iphone.png"; sourceTree = "<group>"; };
 		7D05AB811A0304DD00AFA5F7 /* bd_cell_middle_white~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_cell_middle_white~iphone.png"; sourceTree = "<group>"; };
@@ -2840,7 +2840,7 @@
 			children = (
 				68C4AA211A0B4DD70010C837 /* FadingAlertView.h */,
 				68C4AA221A0B4DD70010C837 /* FadingAlertView.m */,
-				68C4AA231A0B4DD70010C837 /* FadingAlertView~iphone.xib */,
+				68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */,
 			);
 			name = FadingAlert;
 			path = "Google Drive";
@@ -4342,7 +4342,7 @@
 				7D98AE3019A7C550003D2BF6 /* bd_cell_top~iphone.png in Resources */,
 				7D98A0011A0206960094512B /* bd_icon_foursquare~iphone.png in Resources */,
 				7D98AE3119A7C550003D2BF6 /* PasswordVerifyView~iphone.xib in Resources */,
-				684861B11A0C01D7008E53F8 /* FadingAlertView~iphone.xib in Resources */,
+				684861B11A0C01D7008E53F8 /* FadingAlertView.xib in Resources */,
 				7D98AE3219A7C550003D2BF6 /* logo@2x~iphone.png in Resources */,
 				7D98AE3319A7C550003D2BF6 /* bd_cell_bottom_white~iphone.png in Resources */,
 				7D98AE3419A7C550003D2BF6 /* 1-bar@2x.png in Resources */,
@@ -4654,7 +4654,7 @@
 				B5F2E9DB18DCE475008ACF88 /* Red-X~iphone.png in Resources */,
 				4C7247C219353BD50091C286 /* icon_export_dropbox@2x~iphone.png in Resources */,
 				B59C14C918C012B500AEA789 /* bkg_dark_header~iphone.png in Resources */,
-				68C4AA251A0B4DD70010C837 /* FadingAlertView~iphone.xib in Resources */,
+				68C4AA251A0B4DD70010C837 /* FadingAlertView.xib in Resources */,
 				B59C150718C012B500AEA789 /* btn_slider~iphone.png in Resources */,
 				B5F2E9B618DA0F9E008ACF88 /* logo_large~iphone.png in Resources */,
 				B59C14F318C012B500AEA789 /* btn_export~iphone.png in Resources */,
@@ -5065,7 +5065,7 @@
 				DAE865491A88A58A00A17BD3 /* Red-X~iphone.png in Resources */,
 				DAE8654A1A88A58A00A17BD3 /* icon_export_dropbox@2x~iphone.png in Resources */,
 				DAE8654B1A88A58A00A17BD3 /* bkg_dark_header~iphone.png in Resources */,
-				DAE8654C1A88A58A00A17BD3 /* FadingAlertView~iphone.xib in Resources */,
+				DAE8654C1A88A58A00A17BD3 /* FadingAlertView.xib in Resources */,
 				DAE8654D1A88A58A00A17BD3 /* btn_slider~iphone.png in Resources */,
 				DAE8654E1A88A58A00A17BD3 /* logo_large~iphone.png in Resources */,
 				DAE8654F1A88A58A00A17BD3 /* btn_export~iphone.png in Resources */,
@@ -5891,7 +5891,7 @@
 			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -5916,7 +5916,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "Airbitz Testnet";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -5926,7 +5926,7 @@
 			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -5951,7 +5951,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "Airbitz Testnet";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -6035,7 +6035,7 @@
 			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -6058,7 +6058,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -6068,7 +6068,7 @@
 			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -6091,7 +6091,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -6101,7 +6101,7 @@
 			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Develop";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -6124,7 +6124,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "Airbitz Develop";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -6134,7 +6134,7 @@
 			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Develop";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -6157,7 +6157,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "Airbitz Develop";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

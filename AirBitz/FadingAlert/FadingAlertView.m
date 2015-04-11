@@ -40,11 +40,11 @@ static UIView *alert;
 
 + (FadingAlertView *)CreateInsideView:(UIView *)parentView withDelegate:(id<FadingAlertViewDelegate>)delegate
 {
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-		currentView = [[[NSBundle mainBundle] loadNibNamed:@"FadingAlertView~iphone" owner:nil options:nil] objectAtIndex:0];
-	} else {
-		currentView = [[[NSBundle mainBundle] loadNibNamed:@"FadingAlertView~ipad" owner:nil options:nil] objectAtIndex:0];
-	}
+//	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+		currentView = [[[NSBundle mainBundle] loadNibNamed:@"FadingAlertView" owner:nil options:nil] objectAtIndex:0];
+//	} else {
+//		currentView = [[[NSBundle mainBundle] loadNibNamed:@"FadingAlertView~ipad" owner:nil options:nil] objectAtIndex:0];
+//	}
     alert.alpha = 1.0;
 
     [currentView setCenter:parentView.center];

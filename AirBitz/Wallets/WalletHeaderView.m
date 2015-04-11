@@ -30,15 +30,15 @@
 {
     WalletHeaderView *whv = nil;
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         whv = [[[NSBundle mainBundle] loadNibNamed:@"WalletHeaderView~iphone" owner:nil options:nil] objectAtIndex:0];
     }
-    /*else
-     {
-     av = [[[NSBundle mainBundle] loadNibNamed:@"HowToPlayView~ipad" owner:nil options:nil] objectAtIndex:0];
-     
-     }*/
+//    else
+//    {
+//     av = [[[NSBundle mainBundle] loadNibNamed:@"HowToPlayView~ipad" owner:nil options:nil] objectAtIndex:0];
+//     
+//    }
     whv.layer.cornerRadius = 4.0;
     whv.titleLabel.text = title;
     whv->headerCollapsed = bCollapsed;

@@ -31,15 +31,15 @@
 {
 	PasswordVerifyView *pv;
 	
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+//	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 	{
 		pv = [[[NSBundle mainBundle] loadNibNamed:@"PasswordVerifyView~iphone" owner:nil options:nil] objectAtIndex:0];
 	}
-	else
-	{
-		pv = [[[NSBundle mainBundle] loadNibNamed:@"PasswordVerifyView~ipad" owner:nil options:nil] objectAtIndex:0];
-		
-	}
+//	else
+//	{
+//		pv = [[[NSBundle mainBundle] loadNibNamed:@"PasswordVerifyView~ipad" owner:nil options:nil] objectAtIndex:0];
+//		
+//	}
 	[parentView addSubview:pv];
 	CGRect frame = pv.frame;
 	frame.origin.x = (parentView.frame.size.width - frame.size.width) / 2;
