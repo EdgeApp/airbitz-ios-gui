@@ -177,6 +177,8 @@
             self.frame = frame;
             [self removeBlockingButton:self->_parentView];
         }
+        [self rotateImage:self.accountArrow duration:0.0
+                    curve:UIViewAnimationCurveEaseIn radians:0];
     } else {
         if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWillOpen:)]) {
             [self.delegate slideoutWillOpen:self];
@@ -270,8 +272,7 @@
     [UIView setAnimationBeginsFromCurrentState:YES];
     
     // The transform matrix
-    CGAffineTransform transform =
-    CGAffineTransformMakeRotation(radians);
+    CGAffineTransform transform = CGAffineTransformMakeRotation(radians);
     image.transform = transform;
     
     // Commit the changes
