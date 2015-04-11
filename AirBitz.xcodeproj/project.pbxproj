@@ -1741,6 +1741,7 @@
 		E2067BA71AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */; };
 		E2067BA81AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */; };
 		E2067BA91AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */; };
+		E23793C71AD841A8005FB7D9 /* icon_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E23793C61AD841A8005FB7D9 /* icon_arrow.png */; };
 		E2C7D2CB1AD5E217007F79C4 /* ico_nav_directory_white@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E2C7D2C91AD5E217007F79C4 /* ico_nav_directory_white@2x~iphone.png */; };
 		E2C7D2CC1AD5E217007F79C4 /* ico_nav_directory_white~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E2C7D2CA1AD5E217007F79C4 /* ico_nav_directory_white~iphone.png */; };
 /* End PBXBuildFile section */
@@ -2540,6 +2541,7 @@
 		E2067B991AC30A7200E17C36 /* SlideoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideoutView.h; sourceTree = "<group>"; };
 		E2067B9A1AC30A7200E17C36 /* SlideoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideoutView.m; sourceTree = "<group>"; };
 		E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SlideoutView~iphone.xib"; sourceTree = "<group>"; };
+		E23793C61AD841A8005FB7D9 /* icon_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrow.png; sourceTree = "<group>"; };
 		E2C7D2C91AD5E217007F79C4 /* ico_nav_directory_white@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_nav_directory_white@2x~iphone.png"; sourceTree = "<group>"; };
 		E2C7D2CA1AD5E217007F79C4 /* ico_nav_directory_white~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_nav_directory_white~iphone.png"; sourceTree = "<group>"; };
 		E47C0EC32EE29D34C5A03A0B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3250,6 +3252,7 @@
 		B5675B9F18A19A84002E0703 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				E23793C61AD841A8005FB7D9 /* icon_arrow.png */,
 				E2C7D2C91AD5E217007F79C4 /* ico_nav_directory_white@2x~iphone.png */,
 				E2C7D2CA1AD5E217007F79C4 /* ico_nav_directory_white~iphone.png */,
 				E2067B841AC2FDFB00E17C36 /* Slideout */,
@@ -4522,6 +4525,7 @@
 				685E6DF0197DCB7800EC95F8 /* btn_max~iphone.png in Resources */,
 				B59C14CD18C012B500AEA789 /* btn_1~iphone.png in Resources */,
 				DA76938D1964FE8A0022EE64 /* sms_btn~iphone.png in Resources */,
+				E23793C71AD841A8005FB7D9 /* icon_arrow.png in Resources */,
 				B59C151818C012B500AEA789 /* icon_directory@2x~iphone.png in Resources */,
 				B59C151918C012B500AEA789 /* icon_directory_dark@2x~iphone.png in Resources */,
 				B5137C0718A40A8400DA4A34 /* Lato-Black.ttf in Resources */,

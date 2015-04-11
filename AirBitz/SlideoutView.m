@@ -28,6 +28,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel                *conversionText;
 @property (weak, nonatomic) IBOutlet UILabel                *accountText;
+@property (weak, nonatomic) IBOutlet UIView                 *accountArrow;
 @property (weak, nonatomic) IBOutlet UIView                 *otherAccountsView;
 @property (weak, nonatomic) IBOutlet UIView                 *lowerViews;
 @property (weak, nonatomic) IBOutlet UIButton               *buySellButton;
@@ -227,12 +228,17 @@
             [self.accountPicker updateChoices:self.otherAccounts] ;
             self.otherAccountsView.hidden = NO;
             self.lowerViews.hidden = YES;
+            
+            [self rotateImage:self.accountArrow duration:0.2
+                        curve:UIViewAnimationCurveEaseIn radians:M_PI];
         }
     }
     else
     {
         self.otherAccountsView.hidden = YES;
         self.lowerViews.hidden = NO;
+        [self rotateImage:self.accountArrow duration:0.2
+                    curve:UIViewAnimationCurveEaseIn radians:0];
     }
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutAccount)]) {
         [self.delegate slideoutAccount];
@@ -252,6 +258,24 @@
         [self.delegate slideoutLogout];
     }
     [self removeBlockingButton:self->_parentView];
+}
+
+- (void)rotateImage:(UIView *)image duration:(NSTimeInterval)duration
+              curve:(int)curve radians:(CGFloat)radians
+{
+    // Setup the animation
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:duration];
+    [UIView setAnimationCurve:curve];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    // The transform matrix
+    CGAffineTransform transform =
+    CGAffineTransformMakeRotation(radians);
+    image.transform = transform;
+    
+    // Commit the changes
+    [UIView commitAnimations];
 }
 
 - (BOOL)isOpen
