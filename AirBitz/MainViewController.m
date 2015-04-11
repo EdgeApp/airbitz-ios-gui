@@ -46,7 +46,9 @@ typedef enum eAppMode
 	APP_MODE_MORE = TAB_BAR_BUTTON_APP_MODE_MORE
 } tAppMode;
 
-@interface MainViewController () <RequestViewControllerDelegate, SettingsViewControllerDelegate,
+
+
+@interface MainViewController () <UITabBarDelegate,RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, PluginViewControllerDelegate,
@@ -84,6 +86,8 @@ typedef enum eAppMode
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
 }
+
+@property (nonatomic, weak) IBOutlet UITabBar *tabBar;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -200,7 +204,8 @@ typedef enum eAppMode
 
     // Start on the Wallets tab
     _appMode = APP_MODE_WALLETS;
-    [self.tabBarController setSelectedIndex:_appMode];
+
+    self.tabBar.selectedItem = self.tabBar.items[_appMode];
 
     [self launchViewControllerBasedOnAppMode];
     firstLaunch = NO;
@@ -586,7 +591,7 @@ typedef enum eAppMode
     [self loadUserViews];
 
 	_appMode = APP_MODE_WALLETS;
-    [self.tabBarController setSelectedIndex:APP_MODE_WALLETS];
+    self.tabBar.selectedItem = self.tabBar.items[_appMode];
 }
 
 #pragma mark - LoginViewControllerDelegates
@@ -594,7 +599,7 @@ typedef enum eAppMode
 - (void)loginViewControllerDidAbort
 {
 	_appMode = APP_MODE_DIRECTORY;
-    [self.tabBarController setSelectedIndex:APP_MODE_DIRECTORY];
+    self.tabBar.selectedItem = self.tabBar.items[_appMode];
 	[self showTabBarAnimated:YES];
 	[_loginViewController.view removeFromSuperview];
 }
@@ -616,7 +621,7 @@ typedef enum eAppMode
     [self loadUserViews];
 
     _appMode = APP_MODE_WALLETS;
-    [self.tabBarController setSelectedIndex:_appMode];
+    self.tabBar.selectedItem = self.tabBar.items[_appMode];
 	[_loginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];
@@ -904,7 +909,7 @@ typedef enum eAppMode
 - (void)PINReLoginViewControllerDidAbort
 {
 	_appMode = APP_MODE_DIRECTORY;
-    [self.tabBarController setSelectedIndex:_appMode];
+    self.tabBar.selectedItem = self.tabBar.items[_appMode];
 	[self showTabBarAnimated:YES];
 	[_PINReLoginViewController.view removeFromSuperview];
 }
@@ -912,7 +917,7 @@ typedef enum eAppMode
 - (void)PINReLoginViewControllerDidLogin
 {
     _appMode = APP_MODE_WALLETS;
-    [self.tabBarController setSelectedIndex:_appMode];
+    self.tabBar.selectedItem = self.tabBar.items[_appMode];
     [self showTabBarAnimated:YES];
     
     // After login, reset all the main views
@@ -1136,7 +1141,7 @@ typedef enum eAppMode
         NSDictionary *dictData = [notification userInfo];
         _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [_walletsViewController resetViews];
-        [self.tabBarController setSelectedIndex:APP_MODE_WALLETS];
+        self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
     }
 }
 
@@ -1147,7 +1152,7 @@ typedef enum eAppMode
         NSDictionary *dictData = [notification userInfo];
         _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [_sendViewController resetViews];
-        [self.tabBarController setSelectedIndex:APP_MODE_SEND];
+        self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
     }
 }
 
@@ -1158,14 +1163,14 @@ typedef enum eAppMode
         NSDictionary *dictData = [notification userInfo];
         _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [_requestViewController resetViews];
-        [self.tabBarController setSelectedIndex:APP_MODE_REQUEST];
+        self.tabBar.selectedItem = self.tabBar.items[APP_MODE_REQUEST];
     }
 }
 
 - (void)launchRecoveryQuestions:(NSNotification *)notification
 {
     if (APP_MODE_MORE != _appMode) {
-        [self.tabBarController setSelectedIndex:APP_MODE_MORE];
+        self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     }
     [_settingsViewController bringUpRecoveryQuestionsView];
 }
@@ -1195,7 +1200,7 @@ typedef enum eAppMode
 - (void)processBitcoinURI:(NSURL *)uri
 {
     if ([uri.scheme isEqualToString:@"bitcoin"]) {
-        [self.tabBarController setSelectedIndex:APP_MODE_SEND];
+        self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
         if ([User isLoggedIn]) {
             [_sendViewController resetViews];
             _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
@@ -1230,7 +1235,7 @@ typedef enum eAppMode
 - (void)loggedOffRedirect:(NSNotification *)notification
 {
     _appMode = APP_MODE_WALLETS;
-    [self.tabBarController setSelectedIndex:_appMode];
+    self.tabBar.selectedItem = self.tabBar.items[_appMode];
     [self resetViews:notification];
     [self showTabBarAnimated:NO];
 }
@@ -1273,7 +1278,7 @@ typedef enum eAppMode
     _selectedViewController = _settingsViewController;
     [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     [_settingsViewController resetViews];
-    [self.tabBarController setSelectedIndex:APP_MODE_MORE];
+    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     [slideoutView showSlideout:NO];
 }
 
@@ -1294,7 +1299,7 @@ typedef enum eAppMode
     [_selectedViewController.view removeFromSuperview];
     _selectedViewController = _pluginViewController;
     [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-    [self.tabBarController setSelectedIndex:APP_MODE_MORE];
+    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     [slideoutView showSlideout:NO];
 }
 
@@ -1325,6 +1330,35 @@ typedef enum eAppMode
 
 - (void)PluginViewControllerDone:(PluginViewController *)vc
 {
+}
+
+#pragma mark - UITabBarDelegate
+
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+    if (item == [self.tabBar.items objectAtIndex:APP_MODE_DIRECTORY])
+    {
+        _appMode = APP_MODE_DIRECTORY;
+    }
+    else if (item == [self.tabBar.items objectAtIndex:APP_MODE_REQUEST])
+    {
+        _appMode = APP_MODE_REQUEST;
+    }
+    else if (item == [self.tabBar.items objectAtIndex:APP_MODE_SEND])
+    {
+        _appMode = APP_MODE_SEND;
+    }
+    else if (item == [self.tabBar.items objectAtIndex:APP_MODE_WALLETS])
+    {
+        _appMode = APP_MODE_WALLETS;
+    }
+    else if (item == [self.tabBar.items objectAtIndex:APP_MODE_MORE])
+    {
+        _appMode = APP_MODE_MORE;
+    }
+
+    [self launchViewControllerBasedOnAppMode];
+
 }
 
 @end

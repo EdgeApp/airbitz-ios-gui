@@ -10,6 +10,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UITabBarController
+@interface MainViewController : UIViewController
 
 @end
