@@ -413,6 +413,7 @@ CGRect keyboardFrame;
 
     // This will remove extra separators from tableview
     table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    table.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -681,6 +682,10 @@ CGRect keyboardFrame;
         cell.accessoryView.hidden = NO;
         [button addTarget:self action:@selector(accessoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
     }
+    
+    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.bounds.size.height-1, 320, 0.5)];
+    separatorLineView.backgroundColor = [UIColor lightGrayColor];
+    [cell.contentView addSubview:separatorLineView];
     
     return cell;
 }
