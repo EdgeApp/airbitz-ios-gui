@@ -526,6 +526,10 @@
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="g5b-cW-RKj"/>
                                         </connections>
                                     </tableView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="z8n-Gg-a1W" userLabel="loading indicator">
+                                        <rect key="frame" x="142" y="20" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -626,6 +630,7 @@
                         <outlet property="locationTextfield" destination="ZBb-rD-XHs" id="JD4-nT-Qb6"/>
                         <outlet property="mapView" destination="OKH-hE-U5z" id="jSu-hX-fkS"/>
                         <outlet property="searchCluesTableView" destination="Czb-sM-HHv" id="JdA-Mx-H14"/>
+                        <outlet property="searchIndicator" destination="z8n-Gg-a1W" id="mGq-2n-VeX"/>
                         <outlet property="searchTextfield" destination="3S0-VF-OIs" id="HsP-bo-EbD"/>
                         <outlet property="searchView" destination="yHc-zO-am9" id="Nia-tc-aR3"/>
                         <outlet property="spinnerView" destination="JMV-gs-E3H" id="Bxl-B0-Dn7"/>

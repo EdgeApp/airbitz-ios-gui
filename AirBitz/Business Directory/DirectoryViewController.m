@@ -146,6 +146,7 @@ typedef enum eMapDisplayState
 @property (nonatomic, weak) IBOutlet UIButton *btn_locateMe;
 @property (nonatomic, weak) IBOutlet UIButton *btn_info;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *searchIndicator;
 @end
 
 @implementation DirectoryViewController
@@ -195,6 +196,7 @@ typedef enum eMapDisplayState
     self.spinnerView.hidden = NO;
 
     self.searchCluesTableView.hidden = YES;
+    self.searchIndicator.hidden = YES;
     [self hideMapView];
     self.mapView.delegate = self;
 
@@ -873,7 +875,8 @@ typedef enum eMapDisplayState
 - (void)transitionMapToSearch
 {
     directoryMode = DIRECTORY_MODE_SEARCH;
-
+    
+    
     [UIView animateWithDuration: 0.35
                           delay: 0.0
                         options: UIViewAnimationOptionCurveEaseInOut
@@ -1513,6 +1516,8 @@ typedef enum eMapDisplayState
     //NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
     if (urlString != (id)[NSNull null])
     {
+        self.searchIndicator.hidden = NO;
+        
         [[DL_URLServer controller] issueRequestURL: [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]
                                         withParams: nil
                                         withObject: textField
@@ -1547,6 +1552,8 @@ typedef enum eMapDisplayState
                                   withDelegate: self
                             acceptableCacheAge: AGE_ACCEPT_CACHE_SECS
                                    cacheResult: YES];
+    
+    self.searchIndicator.hidden = NO;
 }
 
 - (BOOL)textFieldShouldReturn: (UITextField *)textField
@@ -1880,6 +1887,7 @@ typedef enum eMapDisplayState
 {
     if (tableView == self.searchCluesTableView)
     {
+        self.searchIndicator.hidden = YES;
         //NSLog(@"Row: %i", indexPath.row);
         UITableViewCell *cell = [tableView cellForRowAtIndexPath: indexPath];
         if (mostRecentSearchTag == TAG_BUSINESS_SEARCH)
@@ -2028,7 +2036,7 @@ typedef enum eMapDisplayState
             locationAutoCorrectArray = [[dictFromServer objectForKey: @"results"] mutableCopy];
             [self pruneCachedLocationItemsFromSearchResults];
             [self.searchCluesTableView reloadData];
-
+            
         } else if (object == self.searchTextfield)
         {
             //NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
@@ -2073,6 +2081,7 @@ typedef enum eMapDisplayState
         }
     }
     self.spinnerView.hidden = YES;
+    self.searchIndicator.hidden = YES;
 }
 
 #pragma mark DividerView
