@@ -163,9 +163,6 @@ typedef enum eAppMode
     [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
     
     [NotificationChecker initAll];
-
-    slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
-    [self.view insertSubview:slideoutView aboveSubview:self.view];
 }
 
 /**
@@ -184,6 +181,9 @@ typedef enum eAppMode
 	UIStoryboard *pluginStoryboard = [UIStoryboard storyboardWithName:@"Plugins" bundle: nil];
 	_pluginViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"PluginViewController"];
     _pluginViewController.delegate = self;
+
+    slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
+    [self.view insertSubview:slideoutView aboveSubview:self.view];
 
     _otpRequiredAlert = nil;
     firstLaunch = YES;
@@ -1230,6 +1230,8 @@ typedef enum eAppMode
 
 - (void)loggedOffRedirect:(NSNotification *)notification
 {
+    [slideoutView showSlideout:NO withAnimation:NO];
+
     [self.tabBar selectButtonAtIndex:APP_MODE_DIRECTORY];
     [self.tabBar selectButtonAtIndex:APP_MODE_WALLETS];
     _appMode = APP_MODE_WALLETS;
