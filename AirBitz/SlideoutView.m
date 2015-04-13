@@ -130,7 +130,7 @@
                             &_pAccountSettings,
                             &Error);
     int num = _pAccountSettings->currencyNum;
-    self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:NO];
+    self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:YES];
     
     
     self.accountText.text = [User Singleton].name;
