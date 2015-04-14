@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
   <meta name="description" content="Glidera Exchange Interface for Airbitz">
   <meta charset="utf-8">
 
@@ -466,11 +466,13 @@ html body {
   -o-animation: fadein 500ms;
   /* Opera < 12.1 */
   animation: fadein 500ms;
+  /*
   background: url('img/bg_app.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: top center;
   background-attachment: fixed;
+  */
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -6767,7 +6769,7 @@ var Glidera = (function () {
 
   Glidera.prototype = {
     _nextNonce: function() {
-      return this.nonce++;
+      return new Date().getTime();
     },
     _request: function(authRequired, uri, opts) {
       opts = opts || {};
