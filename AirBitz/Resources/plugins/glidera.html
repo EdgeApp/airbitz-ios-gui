@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, ">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta name="description" content="Glidera Exchange Interface for Airbitz">
   <meta charset="utf-8">
 
@@ -819,8 +819,8 @@ body .order-limits {
   width: 100%;
 }
 body .order-review {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 body .order-review table {
   margin-bottom: 10px;
@@ -6889,13 +6889,15 @@ var Glidera = (function () {
       });
     },
 
-    createBankAccount: function(otpCode, routingNumber, accountNumber, description, accountType, callback) {
+    createBankAccount: function(otpCode, routingNumber, accountNumber, transit, institution, description, accountType, callback) {
       return this._request(true, '/user/bankaccount', {
         'method': 'POST',
         'otpCode': otpCode,
         'data': {
             'routingNumber': routingNumber,
             'accountNumber': accountNumber,
+            'transit': transit,
+            'institution': institution,
             'description': description,
             'bankAccountType': accountType
           },
@@ -7282,9 +7284,10 @@ angular.module('app.exchange', ['app.dataFactory', 'app.2fa', 'app.prices', 'app
   function ($scope, $sce, $state, Error, DataFactory, UserFactory, Limits) {
     Airbitz.ui.title('Buy/Sell Bitcoin');
     // set variables that might be cached locally to make sure they load faster if available
-    $scope.exchange = DataFactory.getExchange();
     $scope.account = UserFactory.getUserAccount();
     $scope.userStatus = UserFactory.getUserAccountStatus();
+    $scope.bankAccounts = DataFactory.getBankAccounts();
+    $scope.limits = Limits.getLimits();
     $scope.showOptions = !$scope.userStatus.userCanTransact;
     $scope.showDebug = false;
     $scope.debugClicks = 0;
@@ -7292,17 +7295,15 @@ angular.module('app.exchange', ['app.dataFactory', 'app.2fa', 'app.prices', 'app
     UserFactory.fetchUserAccountStatus().then(function(b) {
       $scope.userStatus = b;
       $scope.showOptions = !$scope.userStatus.userCanTransact;
+    }).then(function() {
+      Limits.fetchLimits().then(function(limits) {
+        $scope.limits = limits;
+      });
+    }).then(function() {
+      DataFactory.fetchBankAccounts().then(function(bankAccounts) {
+        $scope.bankAccounts = bankAccounts;
+      }, Error.reject);
     });
-
-    $scope.limits = Limits.getLimits();
-    Limits.fetchLimits().then(function(limits) {
-      $scope.limits = limits;
-    });
-
-    $scope.bankAccounts = DataFactory.getBankAccounts();
-    DataFactory.fetchBankAccounts().then(function(bankAccounts) {
-      $scope.bankAccounts = bankAccounts;
-    }, Error.reject);
 
     $scope.routeBankAccount = function() {
       if ($scope.bankAccounts.length) {
@@ -7378,7 +7379,6 @@ angular.module('app.exchange', ['app.dataFactory', 'app.2fa', 'app.prices', 'app
   ['$scope', '$state', 'Error', 'DataFactory', 'UserFactory', 'TwoFactor',
   function ($scope, $state, Error, DataFactory, UserFactory, TwoFactor) {
     Airbitz.ui.title('Add Bank Account');
-    $scope.exchange = DataFactory.getExchange();
     $scope.account = UserFactory.getUserAccount();
     $scope.bankAccount = {};
     $scope.bankAccount.bankAccountType = 'CHECKING';
@@ -7457,7 +7457,6 @@ angular.module('app.exchange', ['app.dataFactory', 'app.2fa', 'app.prices', 'app
 .controller('orderController',
   ['$scope', '$state', '$stateParams', '$filter', 'Error', 'DataFactory', 'UserFactory', 'TwoFactor', 'Limits', 'Prices',
   function ($scope, $state, $stateParams, $filter, Error, DataFactory, UserFactory, TwoFactor, Limits, Prices) {
-    $scope.exchange = DataFactory.getExchange();
     $scope.account = UserFactory.getUserAccount();
 
     $scope.limits = Limits.getLimits();
@@ -7531,7 +7530,6 @@ angular.module('app.exchange', ['app.dataFactory', 'app.2fa', 'app.prices', 'app
     var order = DataFactory.getOrder(false);
     Airbitz.ui.title('Confirm Order');
     $scope.order = order;
-    $scope.exchange = DataFactory.getExchange();
     $scope.account = UserFactory.getUserAccount();
     $scope.priceObj = ($scope.order.orderAction == 'buy')
                     ? Prices.currentBuy : Prices.currentSell;
@@ -7560,7 +7558,6 @@ angular.module('app.exchange', ['app.dataFactory', 'app.2fa', 'app.prices', 'app
   }])
 .controller('executeOrderController', ['$scope', '$state', 'DataFactory', 'UserFactory',
   function ($scope, $state, DataFactory, UserFactory) {
-    $scope.exchange = DataFactory.getExchange();
     $scope.account = UserFactory.getUserAccount();
 
     $scope.exchange.confirmDeposit = function(){
@@ -7771,6 +7768,7 @@ directive('priceUpdate', ['$interval', '$filter', 'Prices',
       link: function(scope, elements, attrs){
         return priceLink($interval, Prices, scope, elements, attrs, function(scope, b) {
           scope.price = $filter('currency')(b.price, '$', 2);
+          scope.currency = b.currency;
         });
       }
     };
@@ -7838,7 +7836,7 @@ angular.module('app.user', ['app.dataFactory', 'app.constants'])
       Airbitz.core.clearData();
       $state.go('signup');
 
-      Airbitz.ui.showAlert('Acctoun Removed', 'Your account has been removed. Please register a new account or enter your access keys from Glidera.');
+      Airbitz.ui.showAlert('Account Removed', 'Your account has been removed. Please register a new account or enter your access keys from Glidera.');
     };
 
     $scope.submit = function(form) {
@@ -7858,7 +7856,7 @@ angular.module('app.user', ['app.dataFactory', 'app.constants'])
   }])
 .controller('signupController', ['$scope', '$state', 'Error', 'States', 'UserFactory',
   function ($scope, $state, Error, States, UserFactory) {
-    Airbitz.ui.title('Glidera Signup');
+    Airbitz.ui.title('Glidera - ' + $scope.countryName);
     $scope.account = UserFactory.getUserAccount();
     $scope.registrationCode = '';
     $scope.regCodeRequired = false;
@@ -7877,9 +7875,10 @@ angular.module('app.user', ['app.dataFactory', 'app.constants'])
       if (UserFactory.isRegistered()) {
         $state.go('verifyEmail');
       } else {
+        var countryCode = Airbitz.config.get('COUNTRY_CODE');
         UserFactory.registerUser($scope.account.firstName,
             $scope.account.lastName, $scope.account.email,
-            "US", $scope.registrationCode).then(function() {
+            countryCode, $scope.registrationCode).then(function() {
           $state.go('verifyEmail');
         }, Error.reject);
       }
@@ -8031,7 +8030,6 @@ directive('phoneNumberValidator', [function() {
     ]);
 
   function errorController($scope, $state, $stateParams) {
-    console.log('here');
     $scope.title = 'Authentication Error';
     $scope.message = 'Please try again.';
     $scope.refresh = function() {
@@ -8210,6 +8208,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 }]).
 run(['$rootScope', 'DataFactory', function ($rootScope, DataFactory) {
   $rootScope.exchange = DataFactory.getExchange();
+  $rootScope.countryCode = Airbitz.config.get('COUNTRY_CODE');
+  $rootScope.countryName = Airbitz.config.get('COUNTRY_NAME');
 }]);
 
 </script>
@@ -8273,15 +8273,15 @@ try {
   module = angular.module('app', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('app/error/partials/error.html',
-    '<div class="error-screen text-center row">\n' +
-    '  <div class="col-xs-12">\n' +
-    '    <h2>{{ title }}</h2>\n' +
-    '    <h3>{{ message }}</h3>\n' +
-    '    <button class="btn btn-large btn-warning" ng-click="refresh()">Refresh</button>\n' +
-    '  </div>\n' +
+  $templateCache.put('app/core/partials/index.html',
+    '<div class="row text-center">\n' +
+    '  <h1>Glidera Exchange</h1>\n' +
     '</div>\n' +
-    '');
+    '\n' +
+    '<div class="row text-center" style="margin-top: 20px">\n' +
+    '  <a ui-sref="exchange" class="btn btn-lg btn-link">Cheat Code</a>\n' +
+    '  <a ui-sref="signup" class="btn btn-lg btn-success">Sign Up</a>\n' +
+    '</div>');
 }]);
 })();
 
@@ -8292,15 +8292,15 @@ try {
   module = angular.module('app', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('app/core/partials/index.html',
-    '<div class="row text-center">\n' +
-    '  <h1>Glidera Exchange</h1>\n' +
+  $templateCache.put('app/error/partials/error.html',
+    '<div class="error-screen text-center row">\n' +
+    '  <div class="col-xs-12">\n' +
+    '    <h2>{{ title }}</h2>\n' +
+    '    <h3>{{ message }}</h3>\n' +
+    '    <button class="btn btn-large btn-warning" ng-click="refresh()">Refresh</button>\n' +
+    '  </div>\n' +
     '</div>\n' +
-    '\n' +
-    '<div class="row text-center" style="margin-top: 20px">\n' +
-    '  <a ui-sref="exchange" class="btn btn-lg btn-link">Cheat Code</a>\n' +
-    '  <a ui-sref="signup" class="btn btn-lg btn-success">Sign Up</a>\n' +
-    '</div>');
+    '');
 }]);
 })();
 
@@ -8348,22 +8348,61 @@ module.run(['$templateCache', function($templateCache) {
     '        </div>\n' +
     '      </div>\n' +
     '\n' +
-    '      <div class="form-group">\n' +
-    '        <label for="inputBankRoutingNumber" class="">Routing Number</label>\n' +
-    '        <input ng-model="bankAccount.routingNumber"\n' +
-    '               name="routingNumber"\n' +
-    '               type="text"\n' +
-    '               id="inputBankRoutingNumber"\n' +
-    '               class="form-control"\n' +
-    '               placeholder="987654321"\n' +
-    '               autocomplete="off"\n' +
-    '               required=""\n' +
-    '               routing-number-validator \n' +
-    '               pattern="[0-9]*"\n' +
-    '               />\n' +
-    '        <div class="input-error" ng-show="form.$submitted || form.routingNumber.$touched">\n' +
-    '            <div ng-show="form.routingNumber.$error.required" class="label label-danger">Required.</div>\n' +
-    '            <div ng-show="form.routingNumber.$error.routingNumber" class="label label-danger">Valid routing number required</div>\n' +
+    '      <div ng-if="countryCode == \'US\'">\n' +
+    '        <div class="form-group">\n' +
+    '          <label for="inputBankRoutingNumber" class="">Routing Number</label>\n' +
+    '          <input ng-model="bankAccount.routingNumber"\n' +
+    '                name="routingNumber"\n' +
+    '                type="text"\n' +
+    '                id="inputBankRoutingNumber"\n' +
+    '                class="form-control"\n' +
+    '                placeholder="987654321"\n' +
+    '                autocomplete="off"\n' +
+    '                required=""\n' +
+    '                routing-number-validator \n' +
+    '                pattern="[0-9]*"\n' +
+    '                />\n' +
+    '          <div class="input-error" ng-show="form.$submitted || form.routingNumber.$touched">\n' +
+    '              <div ng-show="form.routingNumber.$error.required" class="label label-danger">Required.</div>\n' +
+    '              <div ng-show="form.routingNumber.$error.routingNumber" class="label label-danger">Valid routing number required</div>\n' +
+    '          </div>\n' +
+    '        </div>\n' +
+    '      </div>\n' +
+    '\n' +
+    '      <div ng-if="countryCode == \'CA\'">\n' +
+    '        <div class="form-group">\n' +
+    '          <label for="inputTransit" class="">Transit</label>\n' +
+    '          <input ng-model="bankAccount.transit"\n' +
+    '                name="transit"\n' +
+    '                type="text"\n' +
+    '                id="inputTransit"\n' +
+    '                class="form-control"\n' +
+    '                placeholder="12345"\n' +
+    '                autocomplete="off"\n' +
+    '                required=""\n' +
+    '                pattern="[0-9]*"\n' +
+    '                />\n' +
+    '          <div class="input-error" ng-show="form.$submitted || form.transit.$touched">\n' +
+    '              <div ng-show="form.transit.$error.required" class="label label-danger">Required.</div>\n' +
+    '              <div ng-show="form.transit.$error.transit" class="label label-danger">Valid transit number required</div>\n' +
+    '          </div>\n' +
+    '        </div>\n' +
+    '        <div class="form-group">\n' +
+    '          <label for="inputInstitution" class="">Institution</label>\n' +
+    '          <input ng-model="bankAccount.institution"\n' +
+    '                name="institution"\n' +
+    '                type="text"\n' +
+    '                id="inputInstitution"\n' +
+    '                class="form-control"\n' +
+    '                placeholder="123"\n' +
+    '                autocomplete="off"\n' +
+    '                required=""\n' +
+    '                pattern="[0-9]*"\n' +
+    '                />\n' +
+    '          <div class="input-error" ng-show="form.$submitted || form.institution.$touched">\n' +
+    '              <div ng-show="form.institution.$error.required" class="label label-danger">Required.</div>\n' +
+    '              <div ng-show="form.institution.$error.institution" class="label label-danger">Valid institution number required</div>\n' +
+    '          </div>\n' +
     '        </div>\n' +
     '      </div>\n' +
     '\n' +
@@ -8517,7 +8556,7 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/exchange/partials/order.execute.html',
     '<div class="row text-center">\n' +
     '  <h3 class="col-xs-12"><label class="label label-info">{{exchange.order.type||"BUY"}}</label></h3>\n' +
-    '  <h3 class="col-xs-12">Please deposit <label class="label label-default">{{exchange.order.currencySymbol||"$"}}{{exchange.order.getExchangeRate()||"5555.91"}} {{exchange.order.currency||"USD"}}</label></h3>\n' +
+    '  <h3 class="col-xs-12">Please deposit <label class="label label-default">{{exchange.currencySymbol || "$" }}{{ exchange.order.getExchangeRate() ||"5555.91"}} {{exchange.currency || "USD"}}</label></h3>\n' +
     '  <h3 class="col-xs-12">Bank <label class="label label-outline">{{exchange.depositBankName1}}</label></h3>\n' +
     '  <h3 class="col-xs-12">Accout # <label class="label label-outline">{{exchange.depositBankAccount1}}</label></h3>\n' +
     '  <h2 class="col-xs-12">or</h2>\n' +
@@ -8538,7 +8577,8 @@ module.run(['$templateCache', function($templateCache) {
     '  <div class="col-xs-12">\n' +
     '    <label class="label label-outline" style="border-radius: 100px; font-size: 14px;">{{exchange.depositTimeout||"60"}} seconds</label>\n' +
     '  </div>\n' +
-    '</div>');
+    '</div>\n' +
+    '');
 }]);
 })();
 
@@ -8626,7 +8666,7 @@ module.run(['$templateCache', function($templateCache) {
     '            tabindex="1"\n' +
     '            step="any"\n' +
     '            required="" />\n' +
-    '          <span class="large input-group-addon">USD</span>\n' +
+    '            <span class="large input-group-addon">{{ exchange.currency || "USD" }}</span>\n' +
     '        </div>\n' +
     '        <div class="input-error"\n' +
     '             ng-show="form.$submitted || form.orderFiatInput.$touched">\n' +
@@ -8705,15 +8745,15 @@ module.run(['$templateCache', function($templateCache) {
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>Subtotal</td>\n' +
-    '          <td>{{ exchange.order.currencySymbol || "$" }}{{ priceObj.subtotal || "priceSubtotal" | roundFiat }} {{ exchange.order.currency || "USD" }}</td>\n' +
+    '          <td>{{ exchange.order.currencySymbol || "$" }}{{ priceObj.subtotal || "priceSubtotal" | roundFiat }} {{ exchange.currency || "USD" }}</td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>Fees</td>\n' +
-    '          <td>{{ exchange.order.currencySymbol || "$" }}{{ priceObj.fees || "priceFees" | roundFiat }} {{ exchange.order.currency || "USD" }}</td>\n' +
+    '          <td>{{ exchange.order.currencySymbol || "$" }}{{ priceObj.fees || "priceFees" | roundFiat }} {{ exchange.currency || "USD" }}</td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>Total</td>\n' +
-    '          <td>{{ exchange.order.currencySymbol || "$" }}{{ priceObj.total || "priceTotal" | roundFiat }} {{ exchange.order.currency || "USD" }}</td>\n' +
+    '          <td>{{ exchange.order.currencySymbol || "$" }}{{ priceObj.total || "priceTotal" | roundFiat }} {{ exchange.currency || "USD" }}</td>\n' +
     '        </tr>\n' +
     '      </tbody>\n' +
     '    </table>\n' +
@@ -8836,7 +8876,8 @@ module.run(['$templateCache', function($templateCache) {
     '  <div class="limit-buy-monthly">\n' +
     '    <span class="limit-label">Monthly: </span><span class="limit-data">{{ limits.monthlyBuyRemaining | currency:"$"}}</span>\n' +
     '  </div>\n' +
-    '</div>');
+    '</div>\n' +
+    '');
 }]);
 })();
 
@@ -8919,7 +8960,7 @@ try {
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/prices/partials/rate.html',
     '<div class="live-price-rate">\n' +
-    '  <span class="price-rate-label">1 BTC =</span> <span class="price-rate-data">{{ price }}</span>\n' +
+    '  <span class="price-rate-label">1 BTC =</span> <span class="price-rate-data">{{ price }} {{ currency }} </span>\n' +
     '</div>\n' +
     '');
 }]);
@@ -9285,10 +9326,10 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '    <div class="row">\n' +
     '      <div class="form-group col-xs-6">\n' +
-    '        <label for="inputAddressZip" class="sr-only">Zip</label>\n' +
+    '        <label for="inputAddressZip" class="sr-only">Postal Code</label>\n' +
     '        <input ng-model="account.zipCode"\n' +
     '               type="text" id="inputAddressZip" class="form-control"\n' +
-    '               placeholder="Postal Code" autofocus="" autocomplete="off" autocorrect="off" pattern="[0-9]*"\n' +
+    '               placeholder="Postal Code" autofocus="" autocomplete="off" autocorrect="off"\n' +
     '               name="zip"\n' +
     '               required="" />\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.zip.$touched">\n' +
@@ -9300,7 +9341,8 @@ module.run(['$templateCache', function($templateCache) {
     '        <select ng-options="o.name for o in states" ng-model="account.state" class="form-control"\n' +
     '                name="state"\n' +
     '                required="" />\n' +
-    '          <option value="">Select a State</option>\n' +
+    '          <option value="" ng-if="countryCode == \'US\'">Select a State</option>\n' +
+    '          <option value="" ng-if="countryCode == \'CA\'">Select a Province</option>\n' +
     '        </select>\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.state.$touched">\n' +
     '          <span ng-show="form.state.$error.required" class="label label-danger">Required</span>\n' +
@@ -9308,7 +9350,7 @@ module.run(['$templateCache', function($templateCache) {
     '      </div>\n' +
     '    </div>\n' +
     '\n' +
-    '    <div class="form-group" ng-if="account.countryCode == \'CA\'">\n' +
+    '    <div class="form-group" ng-show="countryCode == \'CA\'">\n' +
     '        <label for="inputOccupation" class="">Occupation</label>\n' +
     '        <select ng-options="o.name for o in occupations" ng-model="account.occupation" class="form-control"\n' +
     '                name="occupation"\n' +
@@ -9436,8 +9478,8 @@ module.run(['$templateCache', function($templateCache) {
 
 angular.module('app.dataFactory', ['app.glidera', 'app.2fa', 'app.constants', 'app.limits']).
 factory('UserFactory', [
-  '$q', '$filter', 'States', 'ExchangeFactory', 'glideraFactory', 'TwoFactor',
-  function($q, $filter, States, ExchangeFactory, glideraFactory, TwoFactor) {
+  '$q', '$filter', 'States', 'Occupations', 'ExchangeFactory', 'glideraFactory', 'TwoFactor',
+  function($q, $filter, States, Occupations, ExchangeFactory, glideraFactory, TwoFactor) {
     var factory = {};
     var account = Airbitz.core.readData('account') || {};
 
@@ -9490,6 +9532,7 @@ factory('UserFactory', [
     factory.getUserAccountStatus = function() {
       return userStatus;
     };
+
     factory.fetchUserAccountStatus = function() {
       var d = $q.defer();
       glideraFactory.userStatus(function(e,s,b) {
@@ -9507,6 +9550,7 @@ factory('UserFactory', [
       return $q(function(resolve, reject) {
         glideraFactory.getBasicInfo(function(e, s, b) {
           if (s === 200) {
+            account.email = account.email || b.email;
             account.firstName = b.firstName;
             account.middleName = b.middleName;
             account.lastName = b.lastName;
@@ -9516,7 +9560,7 @@ factory('UserFactory', [
             account.zipCode = b.zipCode;
             account.state = States.findState(b.state);
             account.country = b.countryCode;
-            account.occupation = b.occupation;
+            account.occupation = Occupations.find(b.occupation);
             account.status = b.status.status;
 
             // XXX: This is kind of hacky
@@ -9546,8 +9590,9 @@ factory('UserFactory', [
           'address2': account.address2,
           'city': account.city,
           'state': account.state.id,
-          'occupation': account.occupation,
-          'zipCode': account.zipCode
+          'occupation': account.occupation ? account.occupation.id : null,
+          'zipCode': account.zipCode,
+          'ip': '127.0.0.1'
         }, function(e, s, b) {
           if (s === 200) {
             Airbitz.core.writeData('account', account);
@@ -9666,6 +9711,8 @@ factory('DataFactory', [
         TwoFactor.getCode(),
         bankAccount.routingNumber,
         bankAccount.accountNumber,
+        bankAccount.transit,
+        bankAccount.institution,
         bankAccount.description,
         bankAccount.bankAccountType,
         function(e, s, b) {
@@ -9847,15 +9894,15 @@ factory('ExchangeFactory', [function() {
     'depositBankAccount2': '23002223932',
     'orderTimeout': '60',
     'depositTimeout': '3600',
-    'verificationCode': 'someCode',
     'depositId': 'GLIDER-USA-002',
     'supportsBankAccounts': true,
     'supportsCreditCards': false,
-    'currencyNum': 840
+    'currencyNum': Airbitz.config.get("CURRENCY_CODE"),
+    'currency': Airbitz.config.get("CURRENCY_ABBREV")
   };
 }]).
 factory('States', [function() {
-  var states = [
+  var usStates = [
     {"id": "AL", "name": "Alabama"},
     {"id": "AK", "name": "Alaska"},
     {"id": "AZ", "name": "Arizona"},
@@ -9908,6 +9955,19 @@ factory('States', [function() {
     {"id": "WI", "name": "Wisconsin"},
     {"id": "WY", "name": "Wyoming"}
   ];
+  var caProvinces = [
+    {"id": "ON", "name": "Ontario"},
+    {"id": "QC", "name": "Quebec"},
+    {"id": "NS", "name": "Nova Scotia"},
+    {"id": "NB", "name": "New Brunswick"},
+    {"id": "MB", "name": "Manitoba"},
+    {"id": "BC", "name": "British Columbia"},
+    {"id": "PE", "name": "Prince Edward Island"},
+    {"id": "SK", "name": "Saskatchewan"},
+    {"id": "AB", "name": "Alberta"},
+    {"id": "NL", "name": "Newfoundland and Labrador"}
+  ];
+  var states = Airbitz.config.get("COUNTRY_CODE") === "US" ? usStates : caProvinces;
   return {
     getStates: function() {
       return states;
@@ -9953,9 +10013,9 @@ factory('Occupations', [function() {
     getOccupations: function() {
       return occupations;
     },
-    findOccupations: function(code) {
+    find: function(code) {
       var l = occupations.filter(function(s) {
-        return s.id === code;
+        return s.id === code.toString();
       });
       return l.length >= 1 ? l[0] : null;
     }
