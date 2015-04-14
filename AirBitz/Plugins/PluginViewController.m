@@ -104,7 +104,6 @@ static const NSString *PROTOCOL = @"bridge://";
     }
 
     _webView.frame = frame;
-    _webView.scrollView.bounces = NO;
     [_webView setNeedsLayout];
 }
 
@@ -675,7 +674,6 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    [self resizeFrame:YES];
 }
 
 - (void)removeBar
