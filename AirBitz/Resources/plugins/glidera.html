@@ -911,12 +911,6 @@ body .input-error {
           <i class="fa fa-spinner fa-spin"></i> Loading
         </h1>
     </div><!-- /.container -->
-
-    <div id="footer" class="container">
-      <p class="muted text-right">
-        powered by Glidera
-      </p>
-    </div>
   </div>
 
   <script type="text/javascript">
@@ -7201,7 +7195,7 @@ var Glidera = (function () {
     .directive('routingNumberValidator', routingNumberValidator);
 
   function dashboardController($scope, $sce, $state, Error, DataFactory, UserFactory, Limits) {
-    Airbitz.ui.title('Buy/Sell Bitcoin');
+    Airbitz.ui.title('Glidera ' + $scope.countryName);
     // set variables that might be cached locally to make sure they load faster if available
     $scope.account = UserFactory.getUserAccount();
     $scope.userStatus = UserFactory.getUserAccountStatus();
@@ -8394,7 +8388,7 @@ var app = angular.module('app.core', [
         var sellAddress = data["sellAddress"];
         var d = $q.defer();
         createAddress(wallet, 'Glidera Refund', btcToSatoshi(qty), 
-                      amountFiat, 'Exchange:Refund Bitcoin', '', function(req) {
+                      amountFiat, 'Exchange:Refund Bitcoin', notes, function(req) {
           d.resolve({'sellAddress': sellAddress, 'refundAddress': req['address']});
         }, d.reject);
         return d.promise;
@@ -8403,7 +8397,7 @@ var app = angular.module('app.core', [
         Airbitz.core.requestSpend(wallet, data.sellAddress, btcToSatoshi(qty), amountFiat, {
           label: 'Glidera',
           category: 'Exchange:Sell Bitcoin',
-          notes: '',
+          notes: notes,
           success: function(data) {
             if (data && data.back) {
               d.reject({"code": "IgnoreAction"});
@@ -9042,9 +9036,11 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/exchange/partials/exchange.html',
-    '<div class="exchange-ticker row" ng-click="showAccountDebug()">\n' +
-    '  <div class="live-ticker text-right">\n' +
-    '    <div price-update price-type="{{ order.orderAction }}"></div>\n' +
+    '<div ng-click="showAccountDebug()">\n' +
+    '  <div class="exchange-ticker row">\n' +
+    '    <div class="live-ticker text-right">\n' +
+    '        <div price-update price-type="{{ order.orderAction }}"></div>\n' +
+    '    </div>\n' +
     '  </div>\n' +
     '</div>\n' +
     '\n' +
