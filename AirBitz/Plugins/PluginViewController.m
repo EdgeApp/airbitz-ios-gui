@@ -637,12 +637,16 @@ static const NSString *PROTOCOL = @"bridge://";
     [Util animateOut:_sendConfirmationViewController parentController:self complete:^(void) {
         // hide calculator
         if (bBack) {
-            [self callJsFunction:_sendCbid withArgs:[self jsonError]];
+            [self callJsFunction:_sendCbid withArgs:[self jsonResult:@{@"back": @"true"}]];
         } else if (bError) {
             [self callJsFunction:_sendCbid withArgs:[self jsonError]];
         } else {
-            NSString *hex = [self getRawTransaction:_sendWallet.strUUID withTxId:txId];
-            [self callJsFunction:_sendCbid withArgs:[self jsonResult:hex]];
+            if (txId) {
+                NSString *hex = [self getRawTransaction:_sendWallet.strUUID withTxId:txId];
+                [self callJsFunction:_sendCbid withArgs:[self jsonResult:hex]];
+            } else {
+                [self callJsFunction:_sendCbid withArgs:[self jsonError]];
+            }
         }
         // clean up
         _sendConfirmationViewController = nil;
