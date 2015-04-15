@@ -80,8 +80,6 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self resizeFrame:YES];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
@@ -104,7 +102,6 @@ static const NSString *PROTOCOL = @"bridge://";
     }
 
     _webView.frame = frame;
-    _webView.scrollView.bounces = NO;
     [_webView setNeedsLayout];
 }
 
@@ -638,12 +635,16 @@ static const NSString *PROTOCOL = @"bridge://";
     [Util animateOut:_sendConfirmationViewController parentController:self complete:^(void) {
         // hide calculator
         if (bBack) {
-            [self callJsFunction:_sendCbid withArgs:[self jsonError]];
+            [self callJsFunction:_sendCbid withArgs:[self jsonResult:@{@"back": @"true"}]];
         } else if (bError) {
             [self callJsFunction:_sendCbid withArgs:[self jsonError]];
         } else {
-            NSString *hex = [self getRawTransaction:_sendWallet.strUUID withTxId:txId];
-            [self callJsFunction:_sendCbid withArgs:[self jsonResult:hex]];
+            if (txId) {
+                NSString *hex = [self getRawTransaction:_sendWallet.strUUID withTxId:txId];
+                [self callJsFunction:_sendCbid withArgs:[self jsonResult:hex]];
+            } else {
+                [self callJsFunction:_sendCbid withArgs:[self jsonError]];
+            }
         }
         // clean up
         _sendConfirmationViewController = nil;
@@ -670,15 +671,14 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    [self performSelector:@selector(removeBar) withObject:nil afterDelay:0];
+    [self performSelector:@selector(stylizeKeyboard) withObject:nil afterDelay:0];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    [self resizeFrame:YES];
 }
 
-- (void)removeBar
+- (void)stylizeKeyboard
 {
     UIWindow *keyboardWindow = nil;
     for (UIWindow *windows in [[UIApplication sharedApplication] windows]) {
@@ -687,12 +687,54 @@ static const NSString *PROTOCOL = @"bridge://";
             break;
         }
     }
-    
+
+    BOOL *picker = NO;
     for (UIView* peripheralView in [self getKeyboardViews:keyboardWindow]) {
-        
+        if ([[peripheralView description] hasPrefix:@"<UIWebSelectSinglePicker"]
+                || [[peripheralView description] hasPrefix:@"<UIDatePicker"]) {
+            picker = YES;
+            break;
+        }
+    }
+    if (picker) {
+        [self modPicker:keyboardWindow];
+    } else {
+        [self modKeyboard:keyboardWindow];
+    }
+}
+
+- (void)modPicker:(UIWindow *)keyboardWindow {
+    for (UIView* peripheralView in [self getKeyboardViews:keyboardWindow]) {
+        if ([[peripheralView description] hasPrefix:@"<UIKBInputBackdropView"]) {
+            [[peripheralView layer] setOpacity:1.0];
+        }
+        if ([[peripheralView description] hasPrefix:@"<UIImageView"]) {
+            [[peripheralView layer] setOpacity:1.0];
+        }
+        if ([[peripheralView description] hasPrefix:@"<UIWebFormAccessory"]) {
+            [[peripheralView layer] setOpacity:1.0];
+
+            UIView *view = [peripheralView.subviews objectAtIndex:0];
+            if (view == nil) {
+                continue;
+            }
+            UIView *toolbar = [view.subviews objectAtIndex:0];
+            if (toolbar == nil) {
+                continue;
+            }
+            for (UIView *subview in toolbar.subviews) {
+                if ([[subview description] hasPrefix:@"<UIToolbarButton"]) {
+                    subview.hidden = YES;
+                }
+            }
+        }
+    }
+}
+
+- (void)modKeyboard:(UIWindow *)keyboardWindow {
+    for (UIView* peripheralView in [self getKeyboardViews:keyboardWindow]) {
         // hides the backdrop (iOS 7)
         if ([[peripheralView description] hasPrefix:@"<UIKBInputBackdropView"]) {
-            // check that this backdrop is for the accessory bar (at the top),
             // sparing the backdrop behind the main keyboard
             CGRect rect = peripheralView.frame;
             if (rect.origin.y == 0) {
@@ -713,7 +755,6 @@ static const NSString *PROTOCOL = @"bridge://";
             } else {
                 [peripheralView removeFromSuperview];
             }
-            
         }
         // hides the thin grey line used to adorn the bar (iOS 6)
         if ([[peripheralView description] hasPrefix:@"<UIImageView"]) {
@@ -723,8 +764,7 @@ static const NSString *PROTOCOL = @"bridge://";
 }
 
 - (NSArray*)getKeyboardViews:(UIView*)viewToSearch{
-    NSArray *subViews;
-    
+    NSArray *subViews = [[NSArray alloc] init];
     for (UIView *possibleFormView in viewToSearch.subviews) {
         if ([[possibleFormView description] hasPrefix: self.getKeyboardFirstLevelIdentifier]) {
             if([self IsAtLeastiOSVersion8]){

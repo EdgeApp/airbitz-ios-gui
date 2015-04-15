@@ -913,7 +913,7 @@
 #pragma mark - UITextField delegates
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    return _bAdvanceToTx;
+    return textField == _withdrawlPIN || _bAdvanceToTx;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
