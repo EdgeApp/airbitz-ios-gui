@@ -7079,15 +7079,7 @@ var Glidera = (function () {
       ['$scope','$state', '$stateParams', 'DataFactory', 'UserFactory', 'TwoFactor', otpController])
     .factory('TwoFactor',
       ['$state', '$q', 'glideraFactory', otpFactory])
-    .directive('autofocus', ['$document', function($document) {
-      return {
-        link: function($scope, $element, attrs) {
-          setTimeout(function() {
-            $element[0].focus();
-          }, 100);
-        }
-      };
-    }]);
+    .directive('autoFocus', ['$timeout', autoFocus]);
 
   function otpController($scope, $state, $stateParams, DataFactory, UserFactory, TwoFactor) {
     Airbitz.ui.title('2 Factor Verification');
@@ -7118,62 +7110,73 @@ var Glidera = (function () {
   }
 
   function otpFactory($state, $q, glideraFactory) {
-      var code = '';
-      var oldCode = '';
-      var lastFetch = null;
-      var nextAction = function() { };
-      var factory = {};
-      var that = this;
-      factory.cached = function() {
-        if (!that.lastFetch || !that.code) {
-          return false;
-        }
-        // if the code is less than 2 minutes old, don't ask for 2fa
-        return ((new Date().getTime() - that.lastFetch.getTime()) / 1000.0) <= 2 * 60;
-      };
-      factory.confirmTwoFactor = function(finishedCallback) {
+    var code = '';
+    var oldCode = '';
+    var lastFetch = null;
+    var nextAction = function() { };
+    var factory = {};
+    var that = this;
+    factory.cached = function() {
+      if (!that.lastFetch || !that.code) {
+        return false;
+      }
+      // if the code is less than 2 minutes old, don't ask for 2fa
+      return ((new Date().getTime() - that.lastFetch.getTime()) / 1000.0) <= 2 * 60;
+    };
+    factory.confirmTwoFactor = function(finishedCallback) {
+      if (finishedCallback) {
+        that.nextAction = finishedCallback;
+      }
+      $state.go('verify2FA', {'confirmNumber': 'confirm'});
+    };
+    factory.showTwoFactor = function(finishedCallback) {
+      if (factory.cached())  {
+        finishedCallback(that.code);
+      } else {
         if (finishedCallback) {
           that.nextAction = finishedCallback;
         }
-        $state.go('verify2FA', {'confirmNumber': 'confirm'});
-      };
-      factory.showTwoFactor = function(finishedCallback) {
-        if (factory.cached())  {
-          finishedCallback(that.code);
-        } else {
-          if (finishedCallback) {
-            that.nextAction = finishedCallback;
-          }
-          $state.go('verify2FA', {'confirmNumber': ''});
-        }
-      };
-      factory.requestCode = function() {
-        var d = $q.defer();
-        glideraFactory.getTwoFactorCode(function(e, r, b) {
-          that.lastFetch = new Date();
-          r >= 200 && r < 300 ? d.resolve(b) : d.reject(b);
-        });
-        return d.promise;
-      };
-      factory.reset = function() {
-        that.lastFetch = null;
-        that.code = '';
-      };
-      factory.finish = function(c, o) {
-        that.code = c;
-        that.oldCode = o;
-        if (that.nextAction) {
-          that.nextAction();
-        }
-      };
-      factory.getCode = function() {
-        return that.code;
-      };
-      factory.getOldCode = function() {
-        return that.oldCode;
+        $state.go('verify2FA', {'confirmNumber': ''});
       }
-      return factory;
     };
+    factory.requestCode = function() {
+      var d = $q.defer();
+      glideraFactory.getTwoFactorCode(function(e, r, b) {
+        that.lastFetch = new Date();
+        r >= 200 && r < 300 ? d.resolve(b) : d.reject(b);
+      });
+      return d.promise;
+    };
+    factory.reset = function() {
+      that.lastFetch = null;
+      that.code = '';
+    };
+    factory.finish = function(c, o) {
+      that.code = c;
+      that.oldCode = o;
+      if (that.nextAction) {
+        that.nextAction();
+      }
+    };
+    factory.getCode = function() {
+      return that.code;
+    };
+    factory.getOldCode = function() {
+      return that.oldCode;
+    }
+    return factory;
+  };
+
+  function autoFocus($timeout) {
+    return {
+      restrict: 'A',
+      link: function(scope, element) {
+        $timeout(function() {
+          element[0].focus();
+        }, 500);
+      }
+    };
+  }
 })();
 
 </script>
@@ -7216,6 +7219,8 @@ var Glidera = (function () {
       return DataFactory.fetchBankAccounts().then(function(bankAccounts) {
         $scope.bankAccounts = bankAccounts;
       }, Error.reject);
+    }).then(function() {
+      DataFactory.checkPhoneNumber($scope.account);
     });
 
     $scope.routeBankAccount = function() {
@@ -8214,6 +8219,15 @@ var app = angular.module('app.core', [
       return d.promise;
     };
 
+    factory.checkPhoneNumber = function(account) {
+      if (!account.phone) {
+        factory.getPhoneNumber().then(function(data) {
+          account.phone = data.phoneNumber;
+          Airbitz.core.writeData('account', account);
+        });
+      }
+    };
+
     var bankAccounts = Airbitz.core.readData('bankAccounts') || [];
     factory.getBankAccounts = function() {
       return bankAccounts;
@@ -8358,7 +8372,7 @@ var app = angular.module('app.core', [
     };
 
     var formatNotes = function(action, amountFiat) {
-      return action + " on " + $filter('date')(new Date().getTime(), 'MM/dd/yyyy @ h:mma') + " for " + $filter('currency')(amountFiat);
+      return action + " on " + $filter('date')(new Date().getTime(), 'yyyy-MM-dd @ H:mm') + " for " + $filter('currency')(amountFiat);
     }
 
     var btcToSatoshi = function(btc) {
@@ -8398,13 +8412,13 @@ var app = angular.module('app.core', [
           label: 'Glidera',
           category: 'Exchange:Sell Bitcoin',
           notes: notes,
-          success: function(data) {
-            if (data && data.back) {
+          success: function(res) {
+            if (res && res.back) {
               d.reject({"code": "IgnoreAction"});
             } else {
               d.resolve({'sellAddress': data.sellAddress,
                         'refundAddress': data.refundAddress,
-                        'signedTx': data});
+                        'signedTx': res});
             }
           },
           error: function() {
@@ -8438,6 +8452,7 @@ var app = angular.module('app.core', [
     return {
       'name': 'Glidera',
       'emailVerificationAddress': 'admin@glidera.com',
+      'depositId':  'Glidera Inc',
       'orderTimeout': '60',
       'depositTimeout': '3600',
       'countryCode': Airbitz.config.get("COUNTRY_CODE"),
@@ -8818,6 +8833,7 @@ module.run(['$templateCache', function($templateCache) {
     '        autocomplete="off"\n' +
     '        ng-model="verificationCode"\n' +
     '        pattern="[0-9]*"\n' +
+    '        auto-focus\n' +
     '      />\n' +
     '      <button type="submit" ng-click="submit2FA()"\n' +
     '              class="buy-sell-next btn btn-lg btn-block btn-success">Verify Code</button>\n' +
@@ -8825,10 +8841,11 @@ module.run(['$templateCache', function($templateCache) {
     '  </form>\n' +
     '</div>\n' +
     '\n' +
-    '<div class="row text-center">\n' +
+    '<div class="row text-center" ng-if="account.phone">\n' +
     '  <h3 class="col-xs-12">Code sent to:</h3>\n' +
-    '  <h3 class="col-xs-12" style="margin-top: 0;"><label class="label label-outline"><span style="color: #ddd;">Phone:</span> {{account.phone||"321-555-1212"}}</label></h3>\n' +
+    '  <h3 class="col-xs-12" style="margin-top: 0;"><label class="label label-outline"><span style="color: #ddd;">Phone:</span> {{ account.phone }}</label></h3>\n' +
     '</div>\n' +
+    '\n' +
     '');
 }]);
 })();
@@ -9157,7 +9174,7 @@ module.run(['$templateCache', function($templateCache) {
     '            name="orderBtcInput"\n' +
     '            class="large right-square"\n' +
     '            id="inputBtcAmount"\n' +
-    '            placeholder="0.5"\n' +
+    '            placeholder="Enter Amount"\n' +
     '            step="any"\n' +
     '            autocorrect="off"\n' +
     '            required="" />\n' +
@@ -9178,7 +9195,7 @@ module.run(['$templateCache', function($templateCache) {
     '            name="orderFiatInput"\n' +
     '            class="large right-square"\n' +
     '            id="inputFiatAmount"\n' +
-    '            placeholder="100.00"\n' +
+    '            placeholder="Enter Amount"\n' +
     '            autocorrect="off"\n' +
     '            tabindex="1"\n' +
     '            step="any"\n' +
@@ -9241,20 +9258,12 @@ module.run(['$templateCache', function($templateCache) {
     '      </colgroup>\n' +
     '      <tbody>\n' +
     '        <tr ng-show="{{ order.orderAction === \'buy\' }}">\n' +
-    '          <td>Payment Method</td>\n' +
-    '          <td>{{order.transferFromBankAccount.description || "FakeVisa 4494" }}</td>\n' +
-    '        </tr>\n' +
-    '        <tr ng-show="{{ order.orderAction === \'buy\' }}">\n' +
     '          <td>Destination Wallet</td>\n' +
-    '          <td>{{ order.transferToWallet.name || "Travel Spending" }}</td>\n' +
+    '          <td>{{ order.transferToWallet.name || "" }}</td>\n' +
     '        </tr>\n' +
     '        <tr ng-show="{{ order.orderAction === \'sell\' }}">\n' +
     '          <td>Sell From</td>\n' +
-    '          <td>{{ order.transferToWallet.name || "Travel Spending" }}</td>\n' +
-    '        </tr>\n' +
-    '        <tr ng-show="{{ order.orderAction === \'sell\' }}">\n' +
-    '          <td>Deposit To</td>\n' +
-    '          <td>{{order.transferFromBankAccount.description || "FakeVisa 4494" }}</td>\n' +
+    '          <td>{{ order.transferToWallet.name || "" }}</td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>{{ exchange.order.currency }} Amount</td>\n' +
@@ -9347,7 +9356,7 @@ module.run(['$templateCache', function($templateCache) {
     '  <div class="col-xs-12">\n' +
     '    <form name="form" class="form" novalidate>\n' +
     '      <div class="row">\n' +
-    '          <p class="col-xs-12" style="margin-top: 15px; margin-bottom: 15px;">Please check your account for two deposits from <label class="label label-info">{{ exchange.depositId }}</label> and input them below.</p>\n' +
+    '          <p class="col-xs-12" style="margin-top: 15px; margin-bottom: 15px;">Please check your account for a deposit from <label class="label label-info">{{ exchange.depositId }}</label> and input them below.</p>\n' +
     '          <div class="col-xs-6">\n' +
     '              <label for="inputDepositAmount1" class="">Deposit Amount</label>\n' +
     '              <input ng-model="deposit.amount1"\n' +
@@ -9374,7 +9383,8 @@ module.run(['$templateCache', function($templateCache) {
     '      </div>\n' +
     '    </form>\n' +
     '  </div>\n' +
-    '</div>');
+    '</div>\n' +
+    '');
 }]);
 })();
 
@@ -9509,20 +9519,12 @@ module.run(['$templateCache', function($templateCache) {
     '    <table class="table table-bordered">\n' +
     '      <tbody>\n' +
     '        <tr ng-show="{{ order.orderAction === \'buy\' }}">\n' +
-    '          <td>Payment Method</td>\n' +
-    '          <td>{{order.transferFromBankAccount.description || "FakeVisa 4494" }}</td>\n' +
-    '        </tr>\n' +
-    '        <tr ng-show="{{ order.orderAction === \'buy\' }}">\n' +
     '          <td>Destination Wallet</td>\n' +
-    '          <td>{{ order.transferToWallet.name || "Travel Spending" }}</td>\n' +
+    '          <td>{{ order.transferToWallet.name || "" }}</td>\n' +
     '        </tr>\n' +
     '        <tr ng-show="{{ order.orderAction === \'sell\' }}">\n' +
     '          <td>Sell From</td>\n' +
-    '          <td>{{ order.transferToWallet.name || "Travel Spending" }}</td>\n' +
-    '        </tr>\n' +
-    '        <tr ng-show="{{ order.orderAction === \'sell\' }}">\n' +
-    '          <td>Deposit To</td>\n' +
-    '          <td>{{order.transferFromBankAccount.description || "FakeVisa 4494" }}</td>\n' +
+    '          <td>{{ order.transferToWallet.name || "" }}</td>\n' +
     '        </tr>\n' +
     '      </tbody>\n' +
     '    </table>\n' +
