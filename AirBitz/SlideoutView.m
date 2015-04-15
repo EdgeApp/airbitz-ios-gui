@@ -232,7 +232,7 @@
             self.lowerViews.hidden = YES;
             
             [self rotateImage:self.accountArrow duration:0.2
-                        curve:UIViewAnimationCurveEaseIn radians:M_PI];
+                        curve:UIViewAnimationCurveEaseIn radians:M_PI-0.0001];
         }
     }
     else
