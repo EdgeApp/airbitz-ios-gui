@@ -652,7 +652,12 @@ typedef enum eAlertType
 
     if (_bSuccess)
     {
-		float posY = QA_STARTING_Y_POSITION;
+        float posY = 0;
+        if(self.mode != PassRecovMode_Recover)
+        {
+            posY = QA_STARTING_Y_POSITION;
+        }
+        
 		CGSize size = self.scrollView.contentSize;
 		size.height = posY;
 		
