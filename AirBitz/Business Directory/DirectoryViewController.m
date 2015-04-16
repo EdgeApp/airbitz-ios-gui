@@ -1762,8 +1762,8 @@ typedef enum eMapDisplayState
         } else
         {
             //in case server returns fewer objects than it says (so we don't crash)
-            cell.businessNameLabel.text = @"NO LISTING";
-            cell.businessNameLabel.textColor = [UIColor yellowColor];
+            cell.businessNameLabel.text = @"Loading...";
+            cell.businessNameLabel.textColor = [UIColor whiteColor];
             cell.addressLabel.text = @" ";
             cell.bitCoinLabel.hidden = YES;
             //[cell loadBackgroundImageForBusiness:nil];
