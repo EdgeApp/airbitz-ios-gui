@@ -118,7 +118,7 @@ typedef enum eMapDisplayState
     UIView *categoryView; //view that's the table's headerView
     NSMutableDictionary *businessSearchResults;
     BackgroundImageManager *backgroundImages;
-    CGRect homeTableViewFrame;
+//    CGRect homeTableViewFrame;
     NSDictionary *selectedBusinessInfo;     //cw we might be able to pass this to -launchBusinessDetails and remove it from here
     tDirectoryMode directoryMode;
     tMapDisplayState mapDisplayState; //keeps track of current map state so we can decide if we can zoom automatically or load data after region changes.
@@ -134,7 +134,9 @@ typedef enum eMapDisplayState
     UITextField *activeTextField;
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationSearchViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapViewHeight;
 @property (nonatomic, weak) IBOutlet DividerView *dividerView;
 @property (nonatomic, weak) IBOutlet UIView *spinnerView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -249,12 +251,12 @@ typedef enum eMapDisplayState
 
 - (void)viewDidAppear: (BOOL)animated
 {
-    if (homeTableViewFrame.size.width == 0)
-    {
-        //only set it once
-        homeTableViewFrame = self.tableView.frame;
-        //NSLog(@"Home TableView Frame: %f, %f, %f, %f", homeTableViewFrame.origin.x, homeTableViewFrame.origin.y, homeTableViewFrame.size.width, homeTableViewFrame.size.height);
-    }
+//XXX    if (homeTableViewFrame.size.width == 0)
+//    {
+//        //only set it once
+//        homeTableViewFrame = self.tableListingsView.frame;
+//        //NSLog(@"Home TableView Frame: %f, %f, %f, %f", homeTableViewFrame.origin.x, homeTableViewFrame.origin.y, homeTableViewFrame.size.width, homeTableViewFrame.size.height);
+//    }
 }
 
 - (void)viewWillAppear: (BOOL)animated
@@ -306,22 +308,15 @@ typedef enum eMapDisplayState
         NSDictionary *userInfo = [notification userInfo];
         CGRect keyboardFrame = [[userInfo objectForKey: UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
-        CGRect ownFrame = [self.view.window convertRect: keyboardFrame toView: self.contentView];
-
-        CGRect searchCluesFrame = self.searchCluesTableView.frame;
-        searchCluesFrame.size.height = 0.0;
-        self.searchCluesTableView.frame = searchCluesFrame;
-
         self.searchCluesTableView.hidden = NO;
-
         [UIView animateWithDuration: 0.35
                               delay: 0.0
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations: ^
         {
-            CGRect frame = self.searchCluesTableView.frame;
-            frame.size.height = ownFrame.origin.y - frame.origin.y;
-            self.searchCluesTableView.frame = frame;
+
+            self.searchCluesBottom.constant = keyboardFrame.size.height;
+            [self.view layoutIfNeeded];
 
         }
                          completion: ^(BOOL finished)
@@ -344,9 +339,8 @@ typedef enum eMapDisplayState
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations: ^
         {
-            CGRect frame = self.searchCluesTableView.frame;
-            frame.size.height = 0.0;
-            self.searchCluesTableView.frame = frame;
+            self.searchCluesBottom.constant = self.view.frame.size.height;
+            [self.view layoutIfNeeded];
         }
                          completion: ^(BOOL finished)
         {
@@ -726,10 +720,12 @@ typedef enum eMapDisplayState
     [self TackLocateMeButtonToMapBottomCorner];
 
     //set tableView frame right under divider bar
-    CGRect tableFrame = self.tableView.frame;
-    tableFrame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height;
-    tableFrame.size.height = self.contentView.bounds.size.height - tableFrame.origin.y;
-    self.tableView.frame = tableFrame;
+//XXX    CGRect tableFrame = self.tableListingsView.frame;
+//    tableFrame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height;
+//    tableFrame.size.height = self.contentView.bounds.size.height - tableFrame.origin.y;
+//    self.tableListingsView.frame = tableFrame;
+
+
 }
 
 - (void)transitionSearchToMap
@@ -745,7 +741,7 @@ typedef enum eMapDisplayState
     [self.searchTextfield resignFirstResponder];
     [self.locationTextfield resignFirstResponder];
     self.mapView.showsUserLocation = YES;
-    [self.tableView setContentOffset: CGPointZero animated: NO];
+    [self.tableView setContentOffset:CGPointZero animated:NO];
 
     [self setDefaultMapDividerPosition];
 
@@ -783,7 +779,7 @@ typedef enum eMapDisplayState
         directoryMode = DIRECTORY_MODE_LISTING;
         [self hideBackButtonAnimated: YES];
     }
-    [self.tableView setContentOffset: CGPointZero animated: NO];
+    [self.tableView setContentOffset:CGPointZero animated:NO];
     [self businessListingQueryForPage: 0];
     [UIView animateWithDuration: 0.5
                           delay: 0.0
@@ -833,7 +829,7 @@ typedef enum eMapDisplayState
         {
             self.mapView.showsUserLocation = NO;
             [self.mapView removeAllAnnotations];
-            self.tableView.frame = homeTableViewFrame;
+//XXX            self.tableListingsView.frame = homeTableViewFrame;
         }];
 
     }];
@@ -875,11 +871,11 @@ typedef enum eMapDisplayState
     self.mapView.showsUserLocation = NO;
     self.dividerView.userControllable = NO;
     [self addBusinessListingHeader];
-    self.tableView.frame = homeTableViewFrame;
+//XXX    self.tableListingsView.frame = homeTableViewFrame;
     [self positionDividerView];
     [self hideBackButtonAnimated: YES];
     [self.mapView removeAllAnnotations];
-    [self.tableView setContentOffset: CGPointZero animated: YES];
+    [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 #pragma mark MapView
 
@@ -1628,7 +1624,7 @@ typedef enum eMapDisplayState
             cell = [self getTopOverviewCellForTableView: tableView];
         } else
         {
-            cell = [self getOverviewCellForTableView: tableView];
+            cell = [self getTopOverviewCellForTableView: tableView];
         }
 
         if (businessInfo)
@@ -2013,14 +2009,14 @@ typedef enum eMapDisplayState
         {
             offset = self.tableView.tableHeaderView.frame.size.height;
         }
-        frame.origin.y = self.tableView.frame.origin.y + self.tableView.tableHeaderView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
-        self.dividerView.frame = frame;
-    } else
-    {
-        //frame.origin.y -= EXTRA_SEARCH_BAR_HEIGHT;
-        frame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-        self.dividerView.frame = frame;
+        self.mapViewHeight.constant = 10 + self.tableView.frame.origin.y + self.tableView.tableHeaderView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
     }
+//    else
+//    {
+//        //frame.origin.y -= EXTRA_SEARCH_BAR_HEIGHT;
+//        frame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
+//        self.dividerView.frame = frame;
+//    }
 }
 /*
 -(void)tieViewsToDividerBar
@@ -2063,40 +2059,28 @@ typedef enum eMapDisplayState
 - (void)DividerViewTouchesMoved: (NSSet *)touches withEvent: (UIEvent *)event
 {
     CGPoint newLocation = [[touches anyObject] locationInView: self.contentView];
-    CGRect frame = self.dividerView.frame;
-    frame.origin.y += newLocation.y - dividerBarStartTouchPoint.y;
-    //don't allow divider bar to be dragged beyond searchbar
-    if (frame.origin.y < 0) //(self.searchView.frame.origin.y + self.searchView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT))
-    {
-        frame.origin.y = 0; //self.searchView.frame.origin.y + self.searchView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-    }
 
-    //don't allow divider bar to be dragged to far down
-    if (frame.origin.y > self.contentView.bounds.size.height - frame.size.height - DIVIDER_DOWN_MARGIN)
-    {
-        frame.origin.y = self.contentView.bounds.size.height - frame.size.height - DIVIDER_DOWN_MARGIN;
-    }
-    self.dividerView.frame = frame;
-    dividerBarStartTouchPoint = newLocation;
+    if (newLocation.y < 0)
+        newLocation.y = 0;
 
-    [self updateMapAndTableToTrackDividerBar];
+    self.mapViewHeight.constant = newLocation.y;
 }
 
 - (void)updateMapAndTableToTrackDividerBar
 {
-    //updates mapView and tableView heights to conincide with divider bar position
-    CGRect frame = self.dividerView.frame;
-
-    CGRect mapFrame = self.mapView.frame;
-    mapFrame.size.height = frame.origin.y - mapFrame.origin.y + DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-    self.mapView.frame = mapFrame;
-
-    [self TackLocateMeButtonToMapBottomCorner];
-
-    CGRect tableFrame = self.tableView.frame;
-    tableFrame.origin.y = frame.origin.y + DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-    tableFrame.size.height = self.contentView.bounds.size.height - tableFrame.origin.y;
-    self.tableView.frame = tableFrame;
+//    //updates mapView and tableView heights to conincide with divider bar position
+//    CGRect frame = self.dividerView.frame;
+//
+//    CGRect mapFrame = self.mapView.frame;
+//    mapFrame.size.height = frame.origin.y - mapFrame.origin.y + DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
+//    self.mapView.frame = mapFrame;
+//
+//    [self TackLocateMeButtonToMapBottomCorner];
+//
+//    CGRect tableFrame = self.tableView.frame;
+//    tableFrame.origin.y = frame.origin.y + DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
+//    tableFrame.size.height = self.contentView.bounds.size.height - tableFrame.origin.y;
+//    self.tableView.frame = tableFrame;
 }
 
 
@@ -2193,8 +2177,8 @@ typedef enum eMapDisplayState
     //tapTimer = CACurrentMediaTime();
     self.tableView.canCancelContentTouches = NO;
     self.tableView.delaysContentTouches = NO;
-    CGPoint swipeLocation = [cell convertPoint: point toView: self.tableView]; //[gestureRecognizer locationInView:self.tableView];
-    NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint: swipeLocation];
+    CGPoint swipeLocation = [cell convertPoint:point toView:self.tableView]; //[gestureRecognizer locationInView:self.tableView];
+    NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     //UITableViewCell* swipedCell = [self.tableView cellForRowAtIndexPath:swipedIndexPath];
 
     NSDictionary *businessInfo = [businessSearchResults objectForKey: [NSNumber numberWithInteger: swipedIndexPath.row]];
