@@ -55,7 +55,7 @@
 #define HEIGHT_FOR_TYPICAL_BUSINESS_RESULT	110.0
 
 //geometry
-#define EXTRA_SEARCH_BAR_HEIGHT	37.0
+#define EXTRA_SEARCH_BAR_HEIGHT	40.0
 #define DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT	10.0	/* the divider bar image has some transparency above the actual bar */
 #define DIVIDER_DOWN_MARGIN		12.0			/* Limit how far off bottom of screen divider bar can be dragged to */
 #define LOCATE_ME_BUTTON_OFFSET_FROM_MAP_BOTTOM	58.0
@@ -134,6 +134,7 @@ typedef enum eMapDisplayState
     UITextField *activeTextField;
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationSearchViewHeight;
 @property (nonatomic, weak) IBOutlet DividerView *dividerView;
 @property (nonatomic, weak) IBOutlet UIView *spinnerView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -697,15 +698,10 @@ typedef enum eMapDisplayState
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
-        CGRect frame = self.searchView.frame;
-        frame.size.height += EXTRA_SEARCH_BAR_HEIGHT;
-        self.searchView.frame = frame;
+        _locationSearchViewHeight.constant += EXTRA_SEARCH_BAR_HEIGHT;
 
-        //push top of content area down by EXTRA SEARCH BAR HEIGHT
-        CGRect contentFrame = self.contentView.frame;
-        contentFrame.origin.y += EXTRA_SEARCH_BAR_HEIGHT;
-        contentFrame.size.height -= EXTRA_SEARCH_BAR_HEIGHT;
-        self.contentView.frame = contentFrame;
+        [self.view layoutIfNeeded];
+
     }
                      completion: ^(BOOL finished)
     {
@@ -760,67 +756,15 @@ typedef enum eMapDisplayState
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
-        CGRect contentFrame = self.contentView.frame;
-        contentFrame.origin.y -= EXTRA_SEARCH_BAR_HEIGHT;
-        contentFrame.size.height += EXTRA_SEARCH_BAR_HEIGHT;
-        self.contentView.frame = contentFrame;
+        _locationSearchViewHeight.constant -= EXTRA_SEARCH_BAR_HEIGHT;
 
-        CGRect frame = self.searchView.frame;
-        frame.size.height -= EXTRA_SEARCH_BAR_HEIGHT;
-        self.searchView.frame = frame;
+        [self.view layoutIfNeeded];
+
     }
                      completion: ^(BOOL finished)
     {
 
 
-        /* CGRect dividerFrame = self.dividerView.frame;
-         dividerFrame.origin.y = contentFrame.size.height / 2;
-         self.dividerView.frame = dividerFrame;
-     
-         //set map frame
-         CGRect mapFrame = self.mapView.frame;
-         mapFrame.size.height = dividerFrame.origin.y + DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-         self.mapView.frame = mapFrame;
-        
-         [self TackLocateMeButtonToMapBottomCorner];
-         
-         self.dividerView.userControllable = YES;
-         [self removeBusinessListingHeader];
-        
-         //position divider bar under map
-         //CGRect dividerFrame = self.dividerView.frame;
-         //dividerFrame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-         //self.dividerView.frame = dividerFrame;
-
-         //set tableView frame right under divider bar
-         CGRect tableFrame = self.tableView.frame;
-         tableFrame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height;
-         tableFrame.size.height = self.view.bounds.size.height - tableFrame.origin.y;
-         self.tableView.frame = tableFrame;
-
-         
-         
-         [UIView animateWithDuration:0.35
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^
-         {
-             
-             
-             //[self showMapView];
-             
-             //frame = self.mapView.frame;
-             //frame.origin.y -= EXTRA_SEARCH_BAR_HEIGHT;
-             //frame.size.height += EXTRA_SEARCH_BAR_HEIGHT;
-             //self.mapView.frame = frame;
-             
-             [self TackLocateMeButtonToMapBottomCorner];
-         }
-         completion:^(BOOL finished)
-         {
-             
-             [self businessListingQueryForPage:0];
-         }];*/
     }];
 }
 
@@ -846,22 +790,9 @@ typedef enum eMapDisplayState
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
-        CGRect frame = self.searchView.frame;
-        frame.size.height -= EXTRA_SEARCH_BAR_HEIGHT;
-        self.searchView.frame = frame;
+        _locationSearchViewHeight.constant -= EXTRA_SEARCH_BAR_HEIGHT;
 
-        /*frame = self.tableView.frame;
-        frame.origin.y -= EXTRA_SEARCH_BAR_HEIGHT;
-        self.tableView.frame = frame;
-        
-        frame = self.dividerView.frame;
-        frame.origin.y -= EXTRA_SEARCH_BAR_HEIGHT;
-        self.dividerView.frame = frame;*/
-        CGRect contentFrame = self.contentView.frame;
-        contentFrame.origin.y -= EXTRA_SEARCH_BAR_HEIGHT;
-        contentFrame.size.height += EXTRA_SEARCH_BAR_HEIGHT;
-        self.contentView.frame = contentFrame;
-
+        [self.view layoutIfNeeded];
     }
                      completion: ^(BOOL finished)
     {
@@ -879,15 +810,9 @@ typedef enum eMapDisplayState
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
-        CGRect frame = self.searchView.frame;
-        frame.size.height += EXTRA_SEARCH_BAR_HEIGHT;
-        self.searchView.frame = frame;
+        _locationSearchViewHeight.constant += EXTRA_SEARCH_BAR_HEIGHT;
 
-
-        CGRect contentFrame = self.contentView.frame;
-        contentFrame.origin.y += EXTRA_SEARCH_BAR_HEIGHT;
-        contentFrame.size.height -= EXTRA_SEARCH_BAR_HEIGHT;
-        self.contentView.frame = contentFrame;
+        [self.view layoutIfNeeded];
     }
                      completion: ^(BOOL finished)
     {

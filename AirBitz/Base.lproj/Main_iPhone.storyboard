@@ -25,10 +25,11 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-NB-3KY">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i8d-J1-RvK" userLabel="View - Body">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i8d-J1-RvK" userLabel="View - Body">
                                 <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="nIF-qC-v9Y">
+                                        <rect key="frame" x="0.0" y="-33" width="0.0" height="33"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="separatorColor" red="0.0039215688593685627" green="0.29019609093666077" blue="0.45098042488098145" alpha="1" colorSpace="deviceRGB"/>
@@ -206,14 +207,14 @@
                                         </connections>
                                     </tableView>
                                     <mapView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="OKH-hE-U5z" customClass="MapView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="223"/>
+                                        <rect key="frame" x="0.0" y="-33" width="320" height="223"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="BRu-69-YqM"/>
                                         </connections>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ue2-Gm-7u2">
-                                        <rect key="frame" x="272" y="165" width="39" height="39"/>
+                                        <rect key="frame" x="272" y="132" width="39" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="btn_locateMe.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -223,7 +224,7 @@
                                         </connections>
                                     </button>
                                     <view opaque="NO" alpha="0.69999999999999973" contentMode="scaleToFill" id="JMV-gs-E3H" userLabel="Spinner View">
-                                        <rect key="frame" x="0.0" y="221" width="320" height="239"/>
+                                        <rect key="frame" x="0.0" y="188" width="320" height="239"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="9ws-q3-jPv">
@@ -234,7 +235,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="d8k-A8-ona" customClass="DividerView">
-                                        <rect key="frame" x="0.0" y="212" width="320" height="27"/>
+                                        <rect key="frame" x="0.0" y="179" width="320" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drag_bar.png" id="4V6-Vv-Ai6">
@@ -261,7 +262,7 @@
                                         </connections>
                                     </view>
                                     <tableView hidden="YES" clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Czb-sM-HHv">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                        <rect key="frame" x="0.0" y="-33" width="320" height="460"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.81176470590000005" green="0.92941176469999998" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="separatorColor" red="0.70588235290000001" green="0.70196078429999997" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -291,7 +292,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dVE-sd-K4z" customClass="StylizedTextField2">
-                                        <rect key="frame" x="70" y="69" width="295" height="30"/>
+                                        <rect key="frame" x="10" y="69" width="355" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="qGW-jz-mY2"/>
                                         </constraints>
@@ -325,7 +326,7 @@
                                     <constraint firstAttribute="bottom" secondItem="s09-AE-jEX" secondAttribute="bottom" constant="10" id="bpO-Dy-Op0"/>
                                     <constraint firstAttribute="bottom" secondItem="dVE-sd-K4z" secondAttribute="bottom" constant="9" id="fyw-Bc-i2t"/>
                                     <constraint firstAttribute="trailing" secondItem="dVE-sd-K4z" secondAttribute="trailing" constant="10" id="gTU-Oe-PLV"/>
-                                    <constraint firstItem="dVE-sd-K4z" firstAttribute="leading" secondItem="btQ-C9-m3h" secondAttribute="leading" constant="70" id="lZd-XX-QOn"/>
+                                    <constraint firstItem="dVE-sd-K4z" firstAttribute="leading" secondItem="btQ-C9-m3h" secondAttribute="leading" constant="10" id="lZd-XX-QOn"/>
                                     <constraint firstAttribute="trailing" secondItem="s09-AE-jEX" secondAttribute="trailing" constant="10" id="uiy-kf-ApD"/>
                                     <constraint firstAttribute="bottom" secondItem="sAw-mY-mjA" secondAttribute="bottom" constant="16" id="wbo-sW-0by"/>
                                 </constraints>
@@ -368,7 +369,6 @@
                                     <constraint firstAttribute="trailing" secondItem="3S0-VF-OIs" secondAttribute="trailing" constant="10" id="V1u-hY-6hX"/>
                                     <constraint firstItem="heh-wL-TpP" firstAttribute="leading" secondItem="yHc-zO-am9" secondAttribute="leading" constant="10" id="X32-WR-AB1"/>
                                     <constraint firstAttribute="bottom" secondItem="heh-wL-TpP" secondAttribute="bottom" constant="10" id="YwD-Ua-7v4"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="108" id="ZLt-xn-dPs"/>
                                     <constraint firstAttribute="bottom" secondItem="Dtb-6I-ZLr" secondAttribute="bottom" constant="17" id="fyx-od-1ik"/>
                                     <constraint firstAttribute="trailing" secondItem="heh-wL-TpP" secondAttribute="trailing" constant="10" id="ksG-v6-yV9"/>
                                     <constraint firstAttribute="height" constant="108" id="pxp-3R-mcI"/>
@@ -426,9 +426,13 @@
                             <constraint firstItem="btQ-C9-m3h" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="R0c-1w-MkA"/>
                             <constraint firstItem="v8X-uL-WUV" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="20" id="Xvg-go-TLN"/>
                             <constraint firstAttribute="trailing" secondItem="yHc-zO-am9" secondAttribute="trailing" id="bUG-2i-6Sw"/>
+                            <constraint firstAttribute="trailing" secondItem="i8d-J1-RvK" secondAttribute="trailing" id="eaa-v0-2aw"/>
                             <constraint firstItem="btQ-C9-m3h" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="fm1-jb-CWy"/>
                             <constraint firstItem="7xg-eC-Myi" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="23" id="g0Z-oq-dYu"/>
                             <constraint firstItem="yHc-zO-am9" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="jdN-4D-ivf"/>
+                            <constraint firstItem="qrv-4Z-BZ5" firstAttribute="top" secondItem="i8d-J1-RvK" secondAttribute="bottom" id="lJk-4D-m56"/>
+                            <constraint firstItem="i8d-J1-RvK" firstAttribute="top" secondItem="btQ-C9-m3h" secondAttribute="bottom" id="plQ-1b-KQ9"/>
+                            <constraint firstItem="i8d-J1-RvK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="r0O-KZ-OQ7"/>
                             <constraint firstItem="ehS-NB-3KY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="vMz-c2-NwR"/>
                             <constraint firstItem="qrv-4Z-BZ5" firstAttribute="top" secondItem="ehS-NB-3KY" secondAttribute="bottom" id="vhP-5a-a2G"/>
                             <constraint firstItem="wdg-Vc-E0Q" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="23" id="ydQ-Zo-BlE"/>
@@ -443,10 +447,11 @@
                         <outlet property="btn_locateMe" destination="Ue2-Gm-7u2" id="xDJ-MF-9ot"/>
                         <outlet property="contentView" destination="i8d-J1-RvK" id="SfM-Ta-bBe"/>
                         <outlet property="dividerView" destination="d8k-A8-ona" id="SR0-W3-prN"/>
+                        <outlet property="locationSearchViewHeight" destination="A0u-io-ZZf" id="KGn-GG-oaE"/>
                         <outlet property="mapView" destination="OKH-hE-U5z" id="jSu-hX-fkS"/>
                         <outlet property="searchCluesTableView" destination="Czb-sM-HHv" id="JdA-Mx-H14"/>
                         <outlet property="searchTextfield" destination="3S0-VF-OIs" id="HsP-bo-EbD"/>
-                        <outlet property="searchView" destination="btQ-C9-m3h" id="kW8-es-nMo"/>
+                        <outlet property="searchView" destination="yHc-zO-am9" id="WAL-Vh-R2Q"/>
                         <outlet property="spinnerView" destination="JMV-gs-E3H" id="Bxl-B0-Dn7"/>
                         <outlet property="tableView" destination="nIF-qC-v9Y" id="RU9-mM-O5f"/>
                     </connections>
