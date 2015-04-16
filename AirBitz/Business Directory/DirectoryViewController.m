@@ -266,6 +266,8 @@ typedef enum eMapDisplayState
 
     //NSLog(@"Adding keyboard notification");
     [self receiveKeyboardNotifications: YES];
+    
+    self.searchTextfield.placeholder = @"Search";
 }
 
 - (void)receiveKeyboardNotifications: (BOOL)on
@@ -303,6 +305,7 @@ typedef enum eMapDisplayState
     //if(notification.object == self)
     if (activeTextField)
     {
+        self.searchTextfield.placeholder = @"Business Name or Category";
         //NSLog(@"keyboard will show for directoryViewController");
         NSDictionary *userInfo = [notification userInfo];
         CGRect keyboardFrame = [[userInfo objectForKey: UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -337,6 +340,7 @@ typedef enum eMapDisplayState
     if (activeTextField)
     //if(notification.object == self)
     {
+        self.searchTextfield.placeholder = @"Search";
         //NSLog(@"Keyboard will hide for DirectoryViewController");
         //make searchCluesTableView go away
         //bring back divider bar
