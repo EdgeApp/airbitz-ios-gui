@@ -134,6 +134,10 @@ typedef enum eMapDisplayState
     UITextField *activeTextField;
 }
 
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *footerHeight;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationSearchViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapViewHeight;
@@ -293,6 +297,15 @@ typedef enum eMapDisplayState
     [self receiveKeyboardNotifications: NO];
     [Location stopLocating];
     [super viewWillDisappear: animated];
+}
+
+- (void)viewWillLayoutSubviews {
+    // Your adjustments accd to
+    // viewController.bounds
+    
+    self.footerHeight.constant = [self.delegate getFooterHeight:self];
+    
+    [super viewWillLayoutSubviews];
 }
 
 - (void)keyboardWillShow: (NSNotification *)notification

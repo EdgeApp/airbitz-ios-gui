@@ -51,7 +51,7 @@ typedef enum eAppMode
 @interface MainViewController () <UITabBarDelegate,RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, PluginViewControllerDelegate,
+                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, PluginViewControllerDelegate, DirectoryViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
@@ -85,9 +85,10 @@ typedef enum eAppMode
     SlideoutView                *slideoutView;
 }
 
+@property (weak, nonatomic) IBOutlet UITabBar *tabBar;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
-@property (nonatomic, weak) IBOutlet UITabBar *tabBar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBarBottom;
+
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -204,6 +205,13 @@ typedef enum eAppMode
     _appMode = APP_MODE_WALLETS;
 
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
+
+    NSLog(@"navBar:%f %f\ntabBar: %f %f\n",
+            self.navBar.frame.origin.y, self.navBar.frame.size.height,
+            self.tabBar.frame.origin.y, self.tabBar.frame.size.height);
+
+    NSLog(@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
+
 
     [self launchViewControllerBasedOnAppMode];
     firstLaunch = NO;
@@ -356,7 +364,6 @@ typedef enum eAppMode
 		 {
 
              self.tabBarBottom.constant = -self.tabBar.frame.size.height;
-			 _selectedViewController.view.frame = self.view.bounds;
 
              [self.view layoutIfNeeded];
 		 }
@@ -1350,6 +1357,16 @@ typedef enum eAppMode
 
     [self launchViewControllerBasedOnAppMode];
 
+}
+
+- (GLfloat)getFooterHeight:(UIViewController *)vc
+{
+    return self.tabBar.frame.size.height;
+}
+
+- (GLfloat)getHeaderHeight:(UIViewController *)vc
+{
+    return self.navBar.frame.size.height;
 }
 
 @end

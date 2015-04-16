@@ -22,6 +22,20 @@
                     <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kh9-bI-dsS" userLabel="View - Main">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y7n-uj-nhg" userLabel="View - Header">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="2dF-S6-Fpm"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Sj-dO-Q40" userLabel="View - Footer">
+                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="PZC-aO-O09"/>
+                                </constraints>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-NB-3KY">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
@@ -445,6 +459,10 @@
                                     <constraint firstAttribute="width" constant="64" id="Jo4-R7-ORm"/>
                                 </constraints>
                             </imageView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="7Mm-f5-Iyj" userLabel="Search Bar - Location">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -452,19 +470,28 @@
                             <constraint firstItem="wdg-Vc-E0Q" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="4" id="95K-8B-nRx"/>
                             <constraint firstAttribute="centerX" secondItem="v8X-uL-WUV" secondAttribute="centerX" id="Awd-uV-CFf"/>
                             <constraint firstAttribute="trailing" secondItem="7xg-eC-Myi" secondAttribute="trailing" constant="4" id="BmS-bX-00g"/>
+                            <constraint firstAttribute="trailing" secondItem="Y7n-uj-nhg" secondAttribute="trailing" id="CA2-oS-Tjq"/>
                             <constraint firstItem="yHc-zO-am9" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="FCa-Ef-gtZ"/>
                             <constraint firstItem="ehS-NB-3KY" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="JQ5-tl-UJF"/>
                             <constraint firstAttribute="trailing" secondItem="btQ-C9-m3h" secondAttribute="trailing" id="ONa-1C-sbM"/>
+                            <constraint firstAttribute="bottom" secondItem="7Sj-dO-Q40" secondAttribute="bottom" id="Oah-9d-kaf"/>
                             <constraint firstItem="btQ-C9-m3h" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="R0c-1w-MkA"/>
+                            <constraint firstItem="7Mm-f5-Iyj" firstAttribute="top" secondItem="Y7n-uj-nhg" secondAttribute="bottom" id="UBm-fK-LwC"/>
                             <constraint firstItem="v8X-uL-WUV" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="20" id="Xvg-go-TLN"/>
+                            <constraint firstItem="Y7n-uj-nhg" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="Yky-om-ZFT"/>
+                            <constraint firstAttribute="trailing" secondItem="7Mm-f5-Iyj" secondAttribute="trailing" id="ZQz-eu-CVh"/>
                             <constraint firstAttribute="trailing" secondItem="yHc-zO-am9" secondAttribute="trailing" id="bUG-2i-6Sw"/>
                             <constraint firstAttribute="trailing" secondItem="i8d-J1-RvK" secondAttribute="trailing" id="eaa-v0-2aw"/>
                             <constraint firstItem="btQ-C9-m3h" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="fm1-jb-CWy"/>
                             <constraint firstItem="7xg-eC-Myi" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="23" id="g0Z-oq-dYu"/>
                             <constraint firstItem="yHc-zO-am9" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="jdN-4D-ivf"/>
+                            <constraint firstItem="Y7n-uj-nhg" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="kaT-mf-tX7"/>
                             <constraint firstItem="qrv-4Z-BZ5" firstAttribute="top" secondItem="i8d-J1-RvK" secondAttribute="bottom" id="lJk-4D-m56"/>
+                            <constraint firstItem="7Sj-dO-Q40" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="pVw-6b-FXl"/>
                             <constraint firstItem="i8d-J1-RvK" firstAttribute="top" secondItem="btQ-C9-m3h" secondAttribute="bottom" id="plQ-1b-KQ9"/>
                             <constraint firstItem="i8d-J1-RvK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="r0O-KZ-OQ7"/>
+                            <constraint firstItem="7Mm-f5-Iyj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="tLR-XS-NCx"/>
+                            <constraint firstAttribute="trailing" secondItem="7Sj-dO-Q40" secondAttribute="trailing" id="vKz-6x-gbG"/>
                             <constraint firstItem="ehS-NB-3KY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="vMz-c2-NwR"/>
                             <constraint firstItem="qrv-4Z-BZ5" firstAttribute="top" secondItem="ehS-NB-3KY" secondAttribute="bottom" id="vhP-5a-a2G"/>
                             <constraint firstItem="wdg-Vc-E0Q" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="23" id="ydQ-Zo-BlE"/>
@@ -479,10 +506,13 @@
                         <outlet property="btn_locateMe" destination="Ue2-Gm-7u2" id="xDJ-MF-9ot"/>
                         <outlet property="contentView" destination="i8d-J1-RvK" id="SfM-Ta-bBe"/>
                         <outlet property="dividerView" destination="d8k-A8-ona" id="SR0-W3-prN"/>
+                        <outlet property="footerHeight" destination="PZC-aO-O09" id="qDO-Pe-hgo"/>
+                        <outlet property="headerHeight" destination="2dF-S6-Fpm" id="b3G-ce-F6V"/>
                         <outlet property="locationSearchViewHeight" destination="A0u-io-ZZf" id="KGn-GG-oaE"/>
                         <outlet property="locationTextfield" destination="s09-AE-jEX" id="GGf-uC-1PH"/>
                         <outlet property="mapView" destination="OKH-hE-U5z" id="jSu-hX-fkS"/>
                         <outlet property="mapViewHeight" destination="B8R-BZ-DUX" id="PiS-E3-UuA"/>
+                        <outlet property="searchBar" destination="7Mm-f5-Iyj" id="X1m-xj-frc"/>
                         <outlet property="searchCluesBottom" destination="2HK-aY-fP7" id="ezI-sy-doc"/>
                         <outlet property="searchCluesTableView" destination="Czb-sM-HHv" id="JdA-Mx-H14"/>
                         <outlet property="searchTextfield" destination="3S0-VF-OIs" id="HsP-bo-EbD"/>
@@ -511,60 +541,56 @@
                                 <rect key="frame" x="0.0" y="687" width="414" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <tabBarItem title="Directory" image="icon_directory.png" id="vFM-Wt-TRk">
+                                    <tabBarItem title="Directory" image="icon_directory.png" id="Rpq-Hp-RbG">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
-                                    <tabBarItem title="Request" image="icon_request.png" id="5iO-A2-xDB">
+                                    <tabBarItem title="Request" image="icon_request.png" id="uTa-MB-0Sl">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
-                                    <tabBarItem title="Send" image="icon_send.png" id="U1y-ds-4xC">
+                                    <tabBarItem title="Send" image="icon_send.png" id="6Ey-Xn-GTe">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
-                                    <tabBarItem title="Wallets" image="icon_wallet.png" id="rP1-Nx-oCW">
+                                    <tabBarItem title="Wallets" image="icon_wallet.png" id="j3q-OI-el3">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
-                                    <tabBarItem title="More" image="icon_more.png" id="Xxc-15-RVO">
+                                    <tabBarItem title="More" image="icon_more.png" id="sAy-bR-lqd">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
                                 </items>
                             </tabBar>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Luv-G7-p9Q">
-                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="rfe-M5-YSm"/>
+                                </constraints>
                                 <items>
-                                    <navigationItem title="Title" id="Rdx-zC-NnO"/>
+                                    <navigationItem title="Title" id="FSa-Zc-vxz"/>
                                 </items>
                             </navigationBar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uym-W2-TSQ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
-                                <items/>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="F5s-te-cfW" secondAttribute="trailing" id="1Gf-Um-NZs"/>
-                            <constraint firstItem="F5s-te-cfW" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="86P-36-Ji1"/>
-                            <constraint firstItem="Luv-G7-p9Q" firstAttribute="top" secondItem="XQq-t8-But" secondAttribute="bottom" id="8hs-jd-9ns"/>
-                            <constraint firstAttribute="trailing" secondItem="uym-W2-TSQ" secondAttribute="trailing" id="9rv-rd-kiR"/>
-                            <constraint firstItem="uym-W2-TSQ" firstAttribute="top" secondItem="hcq-oI-SbF" secondAttribute="top" id="DC7-oG-1IN"/>
-                            <constraint firstItem="Luv-G7-p9Q" firstAttribute="top" secondItem="uym-W2-TSQ" secondAttribute="bottom" id="IUV-hO-M8I"/>
-                            <constraint firstAttribute="trailing" secondItem="Luv-G7-p9Q" secondAttribute="trailing" id="QOd-Pr-NX1"/>
-                            <constraint firstItem="Luv-G7-p9Q" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="dYW-cV-CNX"/>
-                            <constraint firstAttribute="bottom" secondItem="F5s-te-cfW" secondAttribute="bottom" id="m8S-Pl-ifL"/>
-                            <constraint firstItem="uym-W2-TSQ" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="rFZ-2N-1HM"/>
+                            <constraint firstAttribute="trailing" secondItem="Luv-G7-p9Q" secondAttribute="trailing" id="2TG-xD-1L5"/>
+                            <constraint firstItem="F5s-te-cfW" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="3KO-vl-5GQ"/>
+                            <constraint firstAttribute="trailing" secondItem="F5s-te-cfW" secondAttribute="trailing" id="9GU-l6-bFZ"/>
+                            <constraint firstItem="Luv-G7-p9Q" firstAttribute="top" secondItem="hcq-oI-SbF" secondAttribute="top" id="FEw-Fw-JdJ"/>
+                            <constraint firstItem="Luv-G7-p9Q" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="ZxI-1D-zhA"/>
+                            <constraint firstAttribute="bottom" secondItem="F5s-te-cfW" secondAttribute="bottom" id="pbq-pw-QxT"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="AbJ-WR-eGF"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
-                        <outlet property="navBar" destination="Luv-G7-p9Q" id="77s-Qh-3zk"/>
-                        <outlet property="tabBar" destination="F5s-te-cfW" id="zk2-sW-0fo"/>
-                        <outlet property="tabBarBottom" destination="m8S-Pl-ifL" id="MjW-Xz-ZFj"/>
+                        <outlet property="navBar" destination="Luv-G7-p9Q" id="GMr-vB-i3Z"/>
+                        <outlet property="tabBar" destination="F5s-te-cfW" id="XDl-gK-rTM"/>
+                        <outlet property="tabBarBottom" destination="pbq-pw-QxT" id="zPS-yh-5Bi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j90-0A-RBe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1432" y="-32"/>
+            <point key="canvasLocation" x="-1415" y="-65"/>
         </scene>
         <!--Send View Controller-->
         <scene sceneID="Xe2-5u-Scf">
@@ -789,7 +815,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pn1-ga-1fM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-738.5" y="-66.5"/>
+            <point key="canvasLocation" x="-627.5" y="-43.5"/>
         </scene>
         <!--Send Confirmation View Controller-->
         <scene sceneID="X59-5p-opO">
@@ -1016,7 +1042,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pvc-fs-3wd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-67.5" y="-39.5"/>
+            <point key="canvasLocation" x="43.5" y="-16.5"/>
         </scene>
         <!--Request View Controller-->
         <scene sceneID="4ZZ-sF-pUe">
@@ -2738,7 +2764,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akK-ti-Ibh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="556.5" y="-66.5"/>
+            <point key="canvasLocation" x="667.5" y="-43.5"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="TqO-j1-XQ5">
@@ -4083,7 +4109,7 @@ Scan the QR code using this device</string>
                             <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eTI-9q-uu0">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="565"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="logo_large.png" translatesAutoresizingMaskIntoConstraints="NO" id="LqE-iy-sKS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo_large.png" translatesAutoresizingMaskIntoConstraints="NO" id="LqE-iy-sKS">
                                         <rect key="frame" x="54" y="33" width="211" height="108"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Bitcoin Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nae-d6-xoW" customClass="LatoLabel">
