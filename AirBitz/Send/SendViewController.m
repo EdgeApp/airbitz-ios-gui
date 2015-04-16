@@ -178,35 +178,40 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)scanBLEstartCamera
 {
-	scanMode = SCAN_MODE_UNINITIALIZED;
-	[self loadWalletInfo];
-	[self updateTable];
+    scanMode = SCAN_MODE_UNINITIALIZED;
+    [self loadWalletInfo];
+    [self updateTable];
 #if !TARGET_IPHONE_SIMULATOR
     [self startQRReader];
 #endif
-
+    
     if([LocalSettings controller].bDisableBLE == NO)
-	{
-		// Start up the CBCentralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
-		 NSTimeInterval curTime = CACurrentMediaTime();
-		 if((curTime - lastCentralBLEPowerOffNotificationTime) > 86400.0) //24 hours
-		 {
-			 _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
-		 }
-		 else
-		 {
-			 _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(NO)}];
-		 }
-		lastCentralBLEPowerOffNotificationTime = curTime;
+    {
+        // Start up the CBCentralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
+        NSTimeInterval curTime = CACurrentMediaTime();
+        if((curTime - lastCentralBLEPowerOffNotificationTime) > 86400.0) //24 hours
+        {
+            _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
+        }
+        else
+        {
+            _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(NO)}];
+        }
+        lastCentralBLEPowerOffNotificationTime = curTime;
         [self startBleTimeout:BLE_TIMEOUT];
     }
-	else
-	{
-		self.ble_button.hidden = YES;
+    else
+    {
+        self.ble_button.hidden = YES;
         [self startBleTimeout:0.0];
-	}
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self scanBLEstartCamera];
 	
 	//reset our frame's height in case it got changed by the image picker view controller
 	CGRect frame = self.view.frame;
@@ -254,11 +259,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
 #if !TARGET_IPHONE_SIMULATOR
 	//NSLog(@"&&&&&&&&&&& APP BECAME ACTIVE &&&&&&&&&&&&&");
-	if(scanMode == SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND)
+	if(YES || scanMode == SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND)
 	{
 		//NSLog(@"&&&&&&&&&&&&& STARTING QR READER &&&&&&&&&&&&&&&&");
 		scanMode = SCAN_MODE_QR;
-		[self startQRReader];
+		[self scanBLEstartCamera];
 	}
 #endif
 }
