@@ -528,25 +528,43 @@
                                     </tabBarItem>
                                 </items>
                             </tabBar>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Luv-G7-p9Q">
+                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="Rdx-zC-NnO"/>
+                                </items>
+                            </navigationBar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uym-W2-TSQ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                                <items/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="F5s-te-cfW" secondAttribute="trailing" id="1Gf-Um-NZs"/>
                             <constraint firstItem="F5s-te-cfW" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="86P-36-Ji1"/>
+                            <constraint firstItem="Luv-G7-p9Q" firstAttribute="top" secondItem="XQq-t8-But" secondAttribute="bottom" id="8hs-jd-9ns"/>
+                            <constraint firstAttribute="trailing" secondItem="uym-W2-TSQ" secondAttribute="trailing" id="9rv-rd-kiR"/>
+                            <constraint firstItem="uym-W2-TSQ" firstAttribute="top" secondItem="hcq-oI-SbF" secondAttribute="top" id="DC7-oG-1IN"/>
+                            <constraint firstItem="Luv-G7-p9Q" firstAttribute="top" secondItem="uym-W2-TSQ" secondAttribute="bottom" id="IUV-hO-M8I"/>
+                            <constraint firstAttribute="trailing" secondItem="Luv-G7-p9Q" secondAttribute="trailing" id="QOd-Pr-NX1"/>
+                            <constraint firstItem="Luv-G7-p9Q" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="dYW-cV-CNX"/>
                             <constraint firstAttribute="bottom" secondItem="F5s-te-cfW" secondAttribute="bottom" id="m8S-Pl-ifL"/>
+                            <constraint firstItem="uym-W2-TSQ" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="rFZ-2N-1HM"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
+                        <outlet property="navBar" destination="Luv-G7-p9Q" id="77s-Qh-3zk"/>
                         <outlet property="tabBar" destination="F5s-te-cfW" id="zk2-sW-0fo"/>
+                        <outlet property="tabBarBottom" destination="m8S-Pl-ifL" id="MjW-Xz-ZFj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j90-0A-RBe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1425.5" y="-29.5"/>
+            <point key="canvasLocation" x="-1432" y="-32"/>
         </scene>
         <!--Send View Controller-->
         <scene sceneID="Xe2-5u-Scf">

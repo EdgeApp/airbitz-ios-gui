@@ -31,7 +31,7 @@ NSDate *logoutDate = NULL;
 {
     // Override point for customization after application launch.
     [application setStatusBarHidden:NO];
-    [application setStatusBarStyle:UIStatusBarStyleLightContent];
+    [application setStatusBarStyle:UIStatusBarStyleDefault];
 
     [[SDImageCache sharedImageCache] clearDisk];
     [[SDImageCache sharedImageCache] cleanDisk];

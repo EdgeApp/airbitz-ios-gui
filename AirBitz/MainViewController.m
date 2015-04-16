@@ -76,8 +76,6 @@ typedef enum eAppMode
     UIAlertView                 *_userReviewOKAlert;
     UIAlertView                 *_userReviewNOAlert;
     FadingAlertView             *_fadingAlert;
-	CGRect                      _originalTabBarFrame;
-	CGRect                      _originalViewFrame;
 	tAppMode                    _appMode;
     NSURL                       *_uri;
     InfoView                    *_notificationInfoView;
@@ -87,7 +85,9 @@ typedef enum eAppMode
     SlideoutView                *slideoutView;
 }
 
+@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (nonatomic, weak) IBOutlet UITabBar *tabBar;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBarBottom;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -128,8 +128,6 @@ typedef enum eAppMode
     [Util printABC_Error:&Error];
 #endif
 
-	_originalTabBarFrame = self.tabBar.frame;
-	_originalViewFrame = self.view.frame;
 	// Do any additional setup after loading the view.
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_directoryViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
@@ -325,13 +323,13 @@ typedef enum eAppMode
     }
 }
 
--(void)updateChildViewSizeForTabBar
-{
-	if([_selectedViewController respondsToSelector:@selector(viewBottom:)])
-	{
-		[(id)_selectedViewController viewBottom:self.tabBar.frame.origin.y + 5.0];	/* 5.0 covers transparent area at top of tab bar */
-	}
-}
+//-(void)updateChildViewSizeForTabBar
+//{
+//	if([_selectedViewController respondsToSelector:@selector(viewBottom:)])
+//	{
+//		[(id)_selectedViewController viewBottom:self.tabBar.frame.origin.y + 5.0];	/* 5.0 covers transparent area at top of tab bar */
+//	}
+//}
 
 -(void)showHideTabBar:(NSNotification *)notification
 {
@@ -356,11 +354,11 @@ typedef enum eAppMode
 							options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
 		 {
-			 CGRect frame = self.tabBar.frame;
-			 frame.origin.y = _originalTabBarFrame.origin.y + frame.size.height;
-			 self.tabBar.frame = frame;
-			 
+
+             self.tabBarBottom.constant = -self.tabBar.frame.size.height;
 			 _selectedViewController.view.frame = self.view.bounds;
+
+             [self.view layoutIfNeeded];
 		 }
 		completion:^(BOOL finished)
 		 {
@@ -369,12 +367,8 @@ typedef enum eAppMode
 	}
 	else
 	{
-		CGRect frame = self.tabBar.frame;
-		frame.origin.y = _originalTabBarFrame.origin.y + frame.size.height;
-		self.tabBar.frame = frame;
-		
-		_selectedViewController.view.frame = self.view.bounds;
-	}
+        self.tabBarBottom.constant = -self.tabBar.frame.size.height;
+    }
 }
 
 -(void)launchViewControllerBasedOnAppMode
@@ -388,6 +382,8 @@ typedef enum eAppMode
 				[_selectedViewController.view removeFromSuperview];
 				_selectedViewController = _directoryViewController;
 				[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+                self.navBar.topItem.title = @"Directory";
+                
 			}
 			break;
 		}
@@ -471,10 +467,9 @@ typedef enum eAppMode
 							options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
 		 {
-			 self.tabBar.frame = _originalTabBarFrame;
-			 CGRect frame = self.view.bounds;
-			 frame.size.height -= (_originalTabBarFrame.size.height - 5.0);
-			 _selectedViewController.view.frame = frame;
+             self.tabBarBottom.constant = 0;
+             [self.view layoutIfNeeded];
+
 		 }
 		 completion:^(BOOL finished)
 		 {
@@ -484,11 +479,7 @@ typedef enum eAppMode
 	}
 	else
 	{
-		self.tabBar.frame = _originalTabBarFrame;
-		
-		CGRect frame = self.view.bounds;
-		frame.size.height -= (_originalTabBarFrame.size.height - 5.0);
-		_selectedViewController.view.frame = frame;
+        self.tabBarBottom.constant = 0;
 	}
 }
 
