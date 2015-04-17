@@ -84,7 +84,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.denomination = 100000000;
     self.denominationType = ABC_DENOMINATION_UBTC;
     self.denominationLabel = @"bits";
-    self.denominationLabelShort = @"฿ ";
+    self.denominationLabelShort = @"Ƀ ";
     self.sendInvalidEntryCount = 0;
     self.sendState = kNormal;
     self.runLoop = [NSRunLoop currentRunLoop];
@@ -120,11 +120,11 @@ static User *singleton = nil;  // this will be the one and only object this stat
             switch (self.denominationType) {
                 case ABC_DENOMINATION_BTC:
                     self.denominationLabel = @"BTC";
-                    self.denominationLabelShort = @"฿ ";
+                    self.denominationLabelShort = @"Ƀ ";
                     break;
                 case ABC_DENOMINATION_MBTC:
                     self.denominationLabel = @"mBTC";
-                    self.denominationLabelShort = @"m฿ ";
+                    self.denominationLabelShort = @"mɃ ";
                     break;
                 case ABC_DENOMINATION_UBTC:
                     self.denominationLabel = @"bits";

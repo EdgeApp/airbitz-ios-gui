@@ -301,7 +301,8 @@
         separatorLineView.backgroundColor = [UIColor grayColor];// you can also put image here
         [cell.contentView addSubview:separatorLineView];
     }
-	
+    
+    cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:17.0];
 	cell.textLabel.text = [self.arrayItemsToSelect objectAtIndex:indexPath.row];
 	cell.textLabel.minimumScaleFactor = 0.5;
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
