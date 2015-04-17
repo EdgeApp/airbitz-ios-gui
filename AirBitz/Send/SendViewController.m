@@ -171,6 +171,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	self.arrayContacts = @[];
 	// load all the names from the address book
     [self generateListOfContactNames];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationEnteredForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+}
+
+- (void)applicationEnteredForeground:(NSNotification *)notification {
+    [self.flashSelector selectItem:FLASH_ITEM_OFF];
 }
 
 - (void)dealloc
