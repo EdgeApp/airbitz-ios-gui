@@ -75,12 +75,12 @@
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.85657793209999999" green="0.85657793209999999" blue="0.85657793209999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <accessibility key="accessibilityConfiguration">
-                        <accessibilityTraits key="traits" none="YES" button="YES" summaryElement="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="">
+                        <accessibilityTraits key="traits" none="YES" button="YES"/>
                         <bool key="isElement" value="YES"/>
                     </accessibility>
                     <connections>
-                        <action selector="accountTouched" destination="Kd7-Wc-vzE" eventType="touchUpInside" id="eob-G1-V79"/>
+                        <action selector="accountTouched" destination="Kd7-Wc-vzE" eventType="touchUpInside" id="bXh-x6-7nh"/>
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" id="BN8-sG-2n3" userLabel="otherAccountsView">
@@ -218,6 +218,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="accountArrow" destination="dFV-3F-fjN" id="1Pa-o0-YeN"/>
+                <outlet property="accountButton" destination="EpU-B2-VTR" id="OU5-vY-J4n"/>
                 <outlet property="accountPicker" destination="8L6-iO-nWG" id="mrV-4C-C8t"/>
                 <outlet property="accountText" destination="vsf-Ms-1Ff" id="EjR-p2-q8x"/>
                 <outlet property="buySellButton" destination="jpu-23-4kh" id="Gzm-Dc-9Qt"/>
@@ -228,7 +229,7 @@
                 <outlet property="otherAccountsView" destination="BN8-sG-2n3" id="iwC-WI-kIH"/>
                 <outlet property="settingsButton" destination="xna-m1-9hx" id="s5I-7x-I5Z"/>
             </connections>
-            <point key="canvasLocation" x="195" y="377"/>
+            <point key="canvasLocation" x="-452" y="23"/>
         </view>
     </objects>
     <resources>

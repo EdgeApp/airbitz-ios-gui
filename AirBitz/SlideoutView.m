@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIView                 *otherAccountsView;
 @property (weak, nonatomic) IBOutlet UIView                 *lowerViews;
 @property (weak, nonatomic) IBOutlet UIButton               *buySellButton;
+@property (weak, nonatomic) IBOutlet UIButton               *accountButton;
 @property (weak, nonatomic) IBOutlet UIButton               *logoutButton;
 @property (weak, nonatomic) IBOutlet UIButton               *settingsButton;
 @property (weak, nonatomic) IBOutlet UIView                 *buySellDivider;
@@ -134,6 +135,7 @@
     
     
     self.accountText.text = [User Singleton].name;
+    [self.accountButton setAccessibilityLabel:[User Singleton].name];
     
     self.lowerViews.hidden = NO;
     self.otherAccountsView.hidden = YES;
@@ -471,7 +473,7 @@
                          string];
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:NSLocalizedString(@"Delete Account", nil)
-                          message:NSLocalizedString(message, nil)
+                          message:message
                           delegate:self
                           cancelButtonTitle:@"No"
                           otherButtonTitles:@"Yes", nil];
