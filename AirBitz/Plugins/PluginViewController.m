@@ -83,6 +83,7 @@ static const NSString *PROTOCOL = @"bridge://";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
+    [self resizeFrame:YES];
     [super viewWillAppear:animated];
 }
 
@@ -94,14 +95,14 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)resizeFrame:(BOOL)withTabBar
 {
-    CGRect frame = _webView.frame;
+    CGRect webFrame = _webView.frame;
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
-    frame.size.height = screenFrame.size.height - HEADER_HEIGHT;
+    webFrame.size.height = screenFrame.size.height - HEADER_HEIGHT;
     if (withTabBar) {
-        frame.size.height -= TOOLBAR_HEIGHT;
+        webFrame.size.height -= TOOLBAR_HEIGHT;
     }
 
-    _webView.frame = frame;
+    _webView.frame = webFrame;
     [_webView setNeedsLayout];
 }
 
@@ -111,6 +112,12 @@ static const NSString *PROTOCOL = @"bridge://";
 }
 
 #pragma mark - WebView Methods
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSString *padding = @"document.body.style.margin='0';document.body.style.padding = '0'";
+    [_webView stringByEvaluatingJavaScriptFromString:padding];
+}
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -701,6 +708,7 @@ static const NSString *PROTOCOL = @"bridge://";
     } else {
         [self modKeyboard:keyboardWindow];
     }
+    [self resizeFrame:YES];
 }
 
 - (void)modPicker:(UIWindow *)keyboardWindow {

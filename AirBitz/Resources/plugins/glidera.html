@@ -2,10 +2,9 @@
 <html ng-app="app">
 <head>
   <!-- meta name=viewport content="width=device-width, height=device-height, initial-scale=1, user-scalable=no" -->
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <!-- iOS meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" / -->
   <!-- ANDROID meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" / -->
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="Glidera Exchange Interface for Airbitz">
   <meta charset="utf-8">
   <title>Glidera Exchange</title>
@@ -481,7 +480,6 @@ html body {
 html body #main-content {
   position: absolute;
   width: 100%;
-  padding-bottom: 70px;
 }
 html body #wrap {
   position: absolute;
@@ -786,7 +784,7 @@ body .exchange-buy-sell {
   margin-bottom: 30px;
 }
 body .buy-sell-header {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 body .buy-sell-header .btn-group .btn.active {
   background: none;
@@ -9151,7 +9149,7 @@ module.run(['$templateCache', function($templateCache) {
     '          <select id="inputBtcWallet"\n' +
     '            ng-model="order.transferToWallet"\n' +
     '            ng-options="w.name for w in userWallets"\n' +
-    '            class="form-control input-lg">\n' +
+    '            class="form-control">\n' +
     '          </select>\n' +
     '        </div>\n' +
     '\n' +
@@ -9172,13 +9170,13 @@ module.run(['$templateCache', function($templateCache) {
     '            ng-change="convertBtcValue(order.orderBtcInput)"\n' +
     '            type="number"\n' +
     '            name="orderBtcInput"\n' +
-    '            class="large right-square"\n' +
+    '            class="right-square"\n' +
     '            id="inputBtcAmount"\n' +
     '            placeholder="Enter Amount"\n' +
     '            step="any"\n' +
     '            autocorrect="off"\n' +
     '            required="" />\n' +
-    '          <span class="large input-group-addon">BTC</span>\n' +
+    '          <span class="input-group-addon">BTC</span>\n' +
     '        </div>\n' +
     '        <div class="input-error"\n' +
     '             ng-show="form.$submitted || form.orderBtcInput.$touched">\n' +
@@ -9193,14 +9191,14 @@ module.run(['$templateCache', function($templateCache) {
     '            ng-change="convertFiatValue(order.orderFiatInput)"\n' +
     '            type="number"\n' +
     '            name="orderFiatInput"\n' +
-    '            class="large right-square"\n' +
+    '            class="right-square"\n' +
     '            id="inputFiatAmount"\n' +
     '            placeholder="Enter Amount"\n' +
     '            autocorrect="off"\n' +
     '            tabindex="1"\n' +
     '            step="any"\n' +
     '            required="" />\n' +
-    '            <span class="large input-group-addon">{{ exchange.currency || "USD" }}</span>\n' +
+    '            <span class="input-group-addon">{{ exchange.currency || "USD" }}</span>\n' +
     '        </div>\n' +
     '        <div class="input-error"\n' +
     '             ng-show="form.$submitted || form.orderFiatInput.$touched">\n' +
@@ -9579,34 +9577,34 @@ module.run(['$templateCache', function($templateCache) {
     '  </div>\n' +
     '  <div class="col-xs-12">\n' +
     '    <ul class="list-group">\n' +
-    '      <li ng-show="userStatus.userCanTransact" ng-click="showAccountOptions()" class="header list-group-item">\n' +
+    '      <li ng-if="userStatus.userCanTransact" ng-click="showAccountOptions()" class="header list-group-item">\n' +
     '        <span class="list-group-item-heading">{{ account.firstName || \'first\' | titlecase }} {{ account.lastName || \'last\' | titlecase }}</span>\n' +
     '        <p class="list-group-item-text">Tap to view your account details</p>\n' +
     '        <label class="status label label-outline pull-right"\n' +
     '               ng-class="{\'label-success\': userStatus.userCanTransact}">{{ userStatus.userCanTransact | statusFilter }}</label>\n' +
     '      </li>\n' +
-    '      <li ng-if="userStatus.userCanTransact" ng-show="showOptions" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
+    '      <li ng-if="userStatus.userCanTransact && showOptions" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <div exchange-limits></div>\n' +
     '      </li>\n' +
-    '      <li ng-show="showOptions" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
+    '      <li ng-if="showOptions" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Email</span>\n' +
     '        <p class="list-group-item-text">{{account.email || \'email\'}}</p>\n' +
     '        <label class="status label label-outline pull-right"\n' +
     '               ng-class="{\'label-success\': userStatus.userEmailIsSetup}">{{ userStatus.userEmailIsSetup | statusFilter }}</label>\n' +
     '      </li>\n' +
-    '      <li ng-show="showOptions" ui-sref="account" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
+    '      <li ng-if="showOptions" ui-sref="account" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Account Information</span>\n' +
     '        <p class="list-group-item-text">Tap to edit</p>\n' +
     '        <label class="status label label-outline pull-right"\n' +
     '               ng-class="{\'label-success\': userStatus.userBasicInfoIsSetup}">{{ userStatus.userBasicInfoIsSetup | statusFilter }}</label>\n' +
     '      </li>\n' +
-    '      <li ng-show="showOptions" ui-sref="verifyPhone" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
+    '      <li ng-if="showOptions" ui-sref="verifyPhone" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Mobile Phone</span>\n' +
     '        <p class="list-group-item-text">Tap to edit</p>\n' +
     '        <label class="status label label-outline pull-right"\n' +
     '               ng-class="{\'label-success\': userStatus.userPhoneIsSetup}">{{ userStatus.userPhoneIsSetup | statusFilter }}</label>\n' +
     '      </li>\n' +
-    '      <li ng-show="showOptions" ng-click="routeBankAccount()" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
+    '      <li ng-if="showOptions" ng-click="routeBankAccount()" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Bank Account</span>\n' +
     '        <p class="list-group-item-text">Tap to edit</p>\n' +
     '        <label class="status label label-outline pull-right"\n' +
@@ -9614,7 +9612,8 @@ module.run(['$templateCache', function($templateCache) {
     '      </li>\n' +
     '    </ul>\n' +
     '  </div>\n' +
-    '</div>');
+    '</div>\n' +
+    '');
 }]);
 })();
 
@@ -9810,7 +9809,7 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '    <div class="row text-right" style="margin-top: 40px;">\n' +
     '      <div class="col-xs-12">\n' +
-    '        <button type="button" ui-sref="apiKeys" class="btn btn-sm btn-primary">Keys</button>\n' +
+    '        <button type="button" ui-sref="apiKeys" class="btn btn-sm btn-primary">Existing Account?</button>\n' +
     '      </div>\n' +
     '    </div>\n' +
     '\n' +
