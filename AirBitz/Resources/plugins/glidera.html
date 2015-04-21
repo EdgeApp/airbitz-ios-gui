@@ -784,7 +784,7 @@ body .exchange-buy-sell {
   margin-bottom: 30px;
 }
 body .buy-sell-header {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 body .buy-sell-header .btn-group .btn.active {
   background: none;
@@ -9149,7 +9149,7 @@ module.run(['$templateCache', function($templateCache) {
     '          <select id="inputBtcWallet"\n' +
     '            ng-model="order.transferToWallet"\n' +
     '            ng-options="w.name for w in userWallets"\n' +
-    '            class="form-control input-lg">\n' +
+    '            class="form-control">\n' +
     '          </select>\n' +
     '        </div>\n' +
     '\n' +
@@ -9170,13 +9170,13 @@ module.run(['$templateCache', function($templateCache) {
     '            ng-change="convertBtcValue(order.orderBtcInput)"\n' +
     '            type="number"\n' +
     '            name="orderBtcInput"\n' +
-    '            class="large right-square"\n' +
+    '            class="right-square"\n' +
     '            id="inputBtcAmount"\n' +
     '            placeholder="Enter Amount"\n' +
     '            step="any"\n' +
     '            autocorrect="off"\n' +
     '            required="" />\n' +
-    '          <span class="large input-group-addon">BTC</span>\n' +
+    '          <span class="input-group-addon">BTC</span>\n' +
     '        </div>\n' +
     '        <div class="input-error"\n' +
     '             ng-show="form.$submitted || form.orderBtcInput.$touched">\n' +
@@ -9191,14 +9191,14 @@ module.run(['$templateCache', function($templateCache) {
     '            ng-change="convertFiatValue(order.orderFiatInput)"\n' +
     '            type="number"\n' +
     '            name="orderFiatInput"\n' +
-    '            class="large right-square"\n' +
+    '            class="right-square"\n' +
     '            id="inputFiatAmount"\n' +
     '            placeholder="Enter Amount"\n' +
     '            autocorrect="off"\n' +
     '            tabindex="1"\n' +
     '            step="any"\n' +
     '            required="" />\n' +
-    '            <span class="large input-group-addon">{{ exchange.currency || "USD" }}</span>\n' +
+    '            <span class="input-group-addon">{{ exchange.currency || "USD" }}</span>\n' +
     '        </div>\n' +
     '        <div class="input-error"\n' +
     '             ng-show="form.$submitted || form.orderFiatInput.$touched">\n' +
@@ -9809,7 +9809,7 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '    <div class="row text-right" style="margin-top: 40px;">\n' +
     '      <div class="col-xs-12">\n' +
-    '        <button type="button" ui-sref="apiKeys" class="btn btn-sm btn-primary">Keys</button>\n' +
+    '        <button type="button" ui-sref="apiKeys" class="btn btn-sm btn-primary">Existing Account?</button>\n' +
     '      </div>\n' +
     '    </div>\n' +
     '\n' +
