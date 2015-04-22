@@ -4,6 +4,7 @@
 //
 
 #import "Plugin.h"
+#import "ABC.h"
 
 @interface Plugin ()
 @end
@@ -15,22 +16,29 @@ static NSMutableArray *plugins;
 
 + (void)initAll
 {
-	if (NO == bInitialized)
-	{
+    if (NO == bInitialized)
+    {
+        tABC_Error error;
+        bool isTestnet = false;
+        ABC_IsTestNet(&isTestnet, &error);
+
         plugins = [[NSMutableArray alloc] init];
 
-        Plugin *plugin = [[Plugin alloc] init];
-        plugin.pluginId = @"com.glidera.us";
-        plugin.sourceFile = @"glidera";
-        plugin.sourceExtension = @"html";
-        plugin.name = @"Glidera USA";
-        plugin.env = @{
-            @"COUNTRY_CODE": @"US",
-            @"COUNTRY_NAME": @"United States",
-            @"CURRENCY_CODE": @"840",
-            @"CURRENCY_ABBREV": @"USD",
-        };
-        [plugins addObject:plugin];
+        Plugin *plugin;
+        if (isTestnet) {
+            plugin = [[Plugin alloc] init];
+            plugin.pluginId = @"com.glidera.us";
+            plugin.sourceFile = @"glidera";
+            plugin.sourceExtension = @"html";
+            plugin.name = @"Glidera USA";
+            plugin.env = @{
+                @"COUNTRY_CODE": @"US",
+                @"COUNTRY_NAME": @"United States",
+                @"CURRENCY_CODE": @"840",
+                @"CURRENCY_ABBREV": @"USD",
+            };
+            [plugins addObject:plugin];
+        }
 
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.glidera.ca";
@@ -45,8 +53,8 @@ static NSMutableArray *plugins;
         };
         [plugins addObject:plugin];
 
-		bInitialized = YES;
-	}
+        bInitialized = YES;
+    }
 }
 
 + (void)freeAll

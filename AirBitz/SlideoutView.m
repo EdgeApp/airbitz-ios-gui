@@ -67,12 +67,6 @@
     v.frame = f;
     v->_open = NO;
 
-    tABC_Error error;
-    bool isTestnet = false;
-    ABC_IsTestNet(&isTestnet, &error);
-    v->_buySellButton.hidden = isTestnet ? NO : YES;
-    v->_buySellDivider.hidden = isTestnet ? NO : YES;
-    
     UIColor *back = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.05];
     [v->_logoutButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_settingsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
