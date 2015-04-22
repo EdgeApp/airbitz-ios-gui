@@ -88,6 +88,7 @@ typedef enum eAppMode
 @property (weak, nonatomic) IBOutlet UITabBar *tabBar;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBarBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *navBarTop;
 
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
@@ -303,6 +304,7 @@ typedef enum eAppMode
     _loginViewController.view.frame = self.view.bounds;
     [self.view insertSubview:_loginViewController.view belowSubview:self.tabBar];
     [self hideTabBarAnimated:animated];
+    [self hideNavBarAnimated:animated];
     if (animated) {
         _loginViewController.view.alpha = 0.0;
         [UIView animateWithDuration:0.25
@@ -323,6 +325,7 @@ typedef enum eAppMode
     _PINReLoginViewController.view.frame = self.view.bounds;
     [self.view insertSubview:_PINReLoginViewController.view belowSubview:self.tabBar];
     [self hideTabBarAnimated:animated];
+    [self hideNavBarAnimated:animated];
     if (animated) {
         _PINReLoginViewController.view.alpha = 0.0;
         [UIView animateWithDuration:0.25
@@ -382,6 +385,33 @@ typedef enum eAppMode
 	else
 	{
         self.tabBarBottom.constant = -self.tabBar.frame.size.height;
+    }
+}
+
+-(void)hideNavBarAnimated:(BOOL)animated
+{
+
+    if(animated)
+    {
+        [UIView animateWithDuration:0.25
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
+                         animations:^
+                         {
+
+                             self.navBarTop.constant = -self.navBar.frame.size.height;
+
+                             [self.view layoutIfNeeded];
+                         }
+                         completion:^(BOOL finished)
+                         {
+                             NSLog(@"view: %f, %f, tab bar origin: %f", self.view.frame.origin.y, self.view.frame.size.height, self.tabBar.frame.origin.y);
+                         }];
+    }
+    else
+    {
+        self.navBarTop.constant = -self.navBar.frame.size.height;
+        [self.view layoutIfNeeded];
     }
 }
 
@@ -497,6 +527,34 @@ typedef enum eAppMode
 	}
 }
 
+-(void)showNavBarAnimated:(BOOL)animated
+{
+
+    if(animated)
+    {
+        [UIView animateWithDuration:0.25
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
+                         animations:^
+                         {
+
+                             self.navBarTop.constant = 0;
+
+                             [self.view layoutIfNeeded];
+                         }
+                         completion:^(BOOL finished)
+                         {
+                             NSLog(@"view: %f, %f, tab bar origin: %f", self.view.frame.origin.y, self.view.frame.size.height, self.tabBar.frame.origin.y);
+                         }];
+    }
+    else
+    {
+        self.navBarTop.constant = 0;
+        [self.view layoutIfNeeded];
+    }
+}
+
+
 - (void)displayNextNotification
 {
     if (!_notificationInfoView && [[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
@@ -606,6 +664,7 @@ typedef enum eAppMode
 	_appMode = APP_MODE_DIRECTORY;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
 	[self showTabBarAnimated:YES];
+    [self showNavBarAnimated:YES];
 	[_loginViewController.view removeFromSuperview];
 }
 
@@ -629,7 +688,9 @@ typedef enum eAppMode
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
 	[_loginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];
-	[self launchViewControllerBasedOnAppMode];
+    [self showNavBarAnimated:YES];
+
+    [self launchViewControllerBasedOnAppMode];
 
     if (_uri)
     {
@@ -916,6 +977,8 @@ typedef enum eAppMode
 	_appMode = APP_MODE_DIRECTORY;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
 	[self showTabBarAnimated:YES];
+    [self showNavBarAnimated:YES];
+
 	[_PINReLoginViewController.view removeFromSuperview];
 }
 
@@ -924,12 +987,15 @@ typedef enum eAppMode
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
     [self showTabBarAnimated:YES];
-    
+    [self showNavBarAnimated:YES];
+
+
     // After login, reset all the main views
     [self loadUserViews];
     
 	[_PINReLoginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];
+    [self showNavBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];
 
     // increment PIN login count
@@ -1221,6 +1287,8 @@ typedef enum eAppMode
             _addressRequestController.delegate = self;
             [Util animateController:_addressRequestController parentController:self];
             [self showTabBarAnimated:YES];
+            [self showNavBarAnimated:YES];
+
             _uri = nil;
         } else {
             _uri = uri;
@@ -1235,6 +1303,8 @@ typedef enum eAppMode
     }];
     _uri = nil;
     [self showTabBarAnimated:NO];
+    [self showNavBarAnimated:NO];
+
 }
 
 - (void)loggedOffRedirect:(NSNotification *)notification
@@ -1243,6 +1313,8 @@ typedef enum eAppMode
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
     [self resetViews:notification];
     [self showTabBarAnimated:NO];
+    [self showNavBarAnimated:NO];
+
 }
 
 - (void)resetViews:(NSNotification *)notification

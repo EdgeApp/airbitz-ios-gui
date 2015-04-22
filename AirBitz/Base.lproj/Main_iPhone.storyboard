@@ -483,6 +483,7 @@
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
                         <outlet property="navBar" destination="Luv-G7-p9Q" id="GMr-vB-i3Z"/>
+                        <outlet property="navBarTop" destination="FEw-Fw-JdJ" id="c06-2D-8NV"/>
                         <outlet property="tabBar" destination="F5s-te-cfW" id="XDl-gK-rTM"/>
                         <outlet property="tabBarBottom" destination="pbq-pw-QxT" id="zPS-yh-5Bi"/>
                     </connections>
