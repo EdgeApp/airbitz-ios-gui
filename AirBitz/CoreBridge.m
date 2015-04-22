@@ -1438,7 +1438,6 @@ static BOOL bOtpError = NO;
                                     ABC_BitCoin_Event_Callback,
                                     (__bridge void *) singleton,
                                     &error);
-            [CoreBridge otpSetError:cc];
             if (cc == ABC_CC_InvalidOTP) {
                 [singleton performSelectorOnMainThread:@selector(notifyOtpRequired:)
                                             withObject:nil
