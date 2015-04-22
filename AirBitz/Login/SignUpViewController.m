@@ -205,6 +205,10 @@
                         [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
                     }];
                 }
+                else if (_mode == SignUpMode_ChangePasswordNoVerify)
+                {
+                    // change password without old password
+                }
                 else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
                 {
                     [self blockUser:YES];
@@ -324,6 +328,25 @@
 
         self.userNameTextField.secureTextEntry = YES;
     }
+    else if (mode == SignUpMode_ChangePasswordNoVerify)
+    {
+        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
+        self.labelTitle.text = NSLocalizedString(@"Change Password", @"screen title");
+        [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
+        self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
+        self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
+        
+        self.imageUserName.hidden = NO;
+        self.imageReenterPassword.hidden = NO;
+        self.passwordTextField.hidden = NO;
+        self.reenterPasswordTextField.hidden = NO;
+        self.labelPasswordInfo.hidden = NO;
+        self.imagePassword.hidden = NO;
+        
+        self.reenterPasswordTextField.returnKeyType = UIReturnKeyDone;
+        
+        self.userNameTextField.secureTextEntry = YES;
+    }
     else if (mode == SignUpMode_ChangePasswordUsingAnswers)
     {
         self.labelTitle.text = NSLocalizedString(@"Change Password", @"screen title");
@@ -420,7 +443,7 @@
 	BOOL bNewPasswordFieldsAreValid = YES;
 
     // if we are signing up for a new account or changing our password
-    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePassword) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
+    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePassword) || (_mode == SignUpMode_ChangePasswordNoVerify) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
         double secondsToCrack;
         tABC_Error Error;
@@ -650,7 +673,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if ((_mode == SignUpMode_ChangePassword) && (textField == self.reenterPasswordTextField))
+    if ((_mode == SignUpMode_ChangePassword || _mode == SignUpMode_ChangePasswordNoVerify) && (textField == self.reenterPasswordTextField))
     {
 		[textField resignFirstResponder];
     }

@@ -18,6 +18,7 @@
 #import "PINReLoginViewController.h"
 #import "Notifications.h"
 #import "SettingsViewController.h"
+#import "SignUpViewController.h"
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
 #import "TwoFactorScanViewController.h"
@@ -50,7 +51,7 @@ typedef enum eAppMode
 @interface MainViewController () <TabBarViewDelegate, RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate,
+                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
@@ -66,6 +67,7 @@ typedef enum eAppMode
 	SendStatusViewController    *_sendStatusController;
     TransactionDetailsViewController *_txDetailsController;
     TwoFactorScanViewController      *_tfaScanViewController;
+    SignUpViewController            *_signUpController;
     UIAlertView                 *_receivedAlert;
     UIAlertView                 *_passwordChangeAlert;
     UIAlertView                 *_passwordCheckAlert;
@@ -649,6 +651,34 @@ typedef enum eAppMode
     [User Singleton].needsPasswordCheck = NO;
 }
 
+- (void)showPasswordChange
+{
+    //TODO - show the sreen for password change without needing old password
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    _signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
+    
+    _signUpController.mode = SignUpMode_ChangePasswordNoVerify;
+    _signUpController.delegate = self;
+    
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _signUpController.view.frame = frame;
+    [self.view addSubview:_signUpController.view];
+    
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         _signUpController.view.frame = self.view.bounds;
+     }
+                     completion:^(BOOL finished)
+     {
+         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+     }];
+}
+
 - (void)showPasswordCheckSkip
 {
     _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
@@ -675,10 +705,10 @@ typedef enum eAppMode
     } else {
         _passwordIncorrectAlert = [[UIAlertView alloc]
                 initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
-                      message:NSLocalizedString(@"Incorrect Password. Try again?", nil)
+                      message:NSLocalizedString(@"Incorrect Password. Try again, or change it now?", nil)
                      delegate:self
             cancelButtonTitle:@"NO"
-            otherButtonTitles:@"YES", nil];
+            otherButtonTitles:@"YES", @"CHANGE", nil];
         [_passwordIncorrectAlert show];
     }
 }
@@ -977,8 +1007,10 @@ typedef enum eAppMode
     {
         if (buttonIndex == 0) {
             [self showPasswordCheckSkip];
-        } else {
+        } else if (buttonIndex == 1) {
             [self showPasswordCheckAlert];
+        } else {
+            [self showPasswordChange];
         }
     }
     else if (_userReviewAlert == alertView)
@@ -1324,5 +1356,14 @@ typedef enum eAppMode
         }
     }
 }
+
+#pragma mark - SignUpViewControllerDelegates
+
+-(void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
+{
+    [controller.view removeFromSuperview];
+    _signUpController = nil;
+}
+
 
 @end
