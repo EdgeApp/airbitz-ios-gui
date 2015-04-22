@@ -105,7 +105,7 @@ typedef enum eMapDisplayState
     MAP_DISPLAY_RESIZE  /* set when user moves divider bar */
 } tMapDisplayState;
 
-@interface DirectoryViewController () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, DL_URLRequestDelegate, UITextFieldDelegate, DividerViewDelegate, MKMapViewDelegate, SMCalloutViewDelegate, BackgroundImageManagerDelegate, LocationDelegate, BusinessDetailsViewControllerDelegate, MoreCategoriesViewControllerDelegate, UIGestureRecognizerDelegate, InfoViewDelegate, CommonOverviewCellDelegate>
+@interface DirectoryViewController () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, DL_URLRequestDelegate, UISearchBarDelegate, DividerViewDelegate, MKMapViewDelegate, SMCalloutViewDelegate, BackgroundImageManagerDelegate, LocationDelegate, BusinessDetailsViewControllerDelegate, MoreCategoriesViewControllerDelegate, UIGestureRecognizerDelegate, InfoViewDelegate, CommonOverviewCellDelegate>
 {
     int totalResultsCount;          //total number of items in business listings search results (could be more than number of items actually returned due to pages)
     int currentPage;
@@ -131,10 +131,12 @@ typedef enum eMapDisplayState
     NSMutableArray *searchTermCache;
     NSMutableArray *searchLocationCache;
     CLLocationCoordinate2D mostRecentLatLong;
-    UITextField *activeTextField;
+    UISearchBar *activeSearchBar;
 }
 
 
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBarLocation;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBarSearch;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *footerHeight;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -144,8 +146,6 @@ typedef enum eMapDisplayState
 @property (nonatomic, weak) IBOutlet DividerView *dividerView;
 @property (nonatomic, weak) IBOutlet UIView *spinnerView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UITextField *searchTextfield;
-@property (nonatomic, weak) IBOutlet UITextField *locationTextfield;
 @property (nonatomic, weak) IBOutlet UIView *searchView;
 @property (nonatomic, weak) IBOutlet UITableView *searchCluesTableView;
 @property (nonatomic, weak) IBOutlet MapView *mapView;
@@ -187,9 +187,6 @@ typedef enum eMapDisplayState
             NSLog(@"  %@", name);
         }
     }*/
-    self.searchTextfield.font = [UIFont fontWithName: @"Montserrat-Regular" size: self.searchTextfield.font.pointSize];
-    self.locationTextfield.font = [UIFont fontWithName: @"Montserrat-Regular" size: self.locationTextfield.font.pointSize];
-
 
     //NSString *paramDataString = [self createSearchParamString];
 
@@ -198,6 +195,8 @@ typedef enum eMapDisplayState
     //[self loadSearchResultsPage:currentPage + 1];
     //[self businessListingQueryForPage:currentPage];
     //[self businessListingQueryForPage:currentPage + 1];
+
+    [self.tableView setContentInset:UIEdgeInsetsMake(64,0,0,0)];
 
     self.spinnerView.hidden = NO;
 
@@ -266,8 +265,6 @@ typedef enum eMapDisplayState
 - (void)viewWillAppear: (BOOL)animated
 {
     [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
-    [self.searchTextfield addTarget: self action: @selector(searchTextFieldChanged:) forControlEvents: UIControlEventEditingChanged];
-    [self.locationTextfield addTarget: self action: @selector(locationTextFieldChanged:) forControlEvents: UIControlEventEditingChanged];
 
     //NSLog(@"Adding keyboard notification");
     [self receiveKeyboardNotifications: YES];
@@ -315,7 +312,7 @@ typedef enum eMapDisplayState
 
     //Get KeyboardFrame (in Window coordinates)
     //if(notification.object == self)
-    if (activeTextField)
+    if (activeSearchBar)
     {
         //NSLog(@"keyboard will show for directoryViewController");
         NSDictionary *userInfo = [notification userInfo];
@@ -341,7 +338,7 @@ typedef enum eMapDisplayState
 
 - (void)keyboardWillHide: (NSNotification *)notification
 {
-    if (activeTextField)
+    if (activeSearchBar)
     //if(notification.object == self)
     {
         //NSLog(@"Keyboard will hide for DirectoryViewController");
@@ -358,7 +355,7 @@ typedef enum eMapDisplayState
                          completion: ^(BOOL finished)
         {
             self.searchCluesTableView.hidden = YES;
-            activeTextField = nil;
+            activeSearchBar = nil;
         }];
     }
 }
@@ -522,15 +519,15 @@ typedef enum eMapDisplayState
     switch (sender.tag)
     {
         case TAG_CATEGORY_RESTAURANTS:
-            self.searchTextfield.text = NSLocalizedString(@"Restaurants", nil);
+            self.searchBarSearch.text = NSLocalizedString(@"Restaurants", nil);
             [self transitionListingToMap];
             break;
         case TAG_CATEGORY_BARS:
-            self.searchTextfield.text = NSLocalizedString(@"Bars", nil);
+            self.searchBarSearch.text = NSLocalizedString(@"Bars", nil);
             [self transitionListingToMap];
             break;
         case TAG_CATEGORY_COFFEE:
-            self.searchTextfield.text = NSLocalizedString(@"Coffee & Tea", nil);
+            self.searchBarSearch.text = NSLocalizedString(@"Coffee & Tea", nil);
             [self transitionListingToMap];
             break;
         case TAG_CATEGORY_MORE:
@@ -578,19 +575,19 @@ typedef enum eMapDisplayState
             NSString *locationString = [NSString stringWithFormat: @"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
             [query appendFormat: @"&ll=%@", locationString];
 
-            if ([self.locationTextfield.text length])
+            if ([self.searchBarLocation.text length])
             {
-                if ([[self.locationTextfield.text uppercaseString] isEqualToString: [CURRENT_LOCATION_STRING uppercaseString]])
+                if ([[self.searchBarLocation.text uppercaseString] isEqualToString: [CURRENT_LOCATION_STRING uppercaseString]])
                 {
                     //NSString *locationString = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
                     //[query appendFormat:@"&ll=%@", locationString];
                 } else
                 {
-                    [query appendFormat: @"&location=%@", self.locationTextfield.text];
+                    [query appendFormat: @"&location=%@", self.searchBarLocation.text];
                 }
             }
         } else {
-            [query appendFormat: @"&location=%@", self.locationTextfield.text];
+            [query appendFormat: @"&location=%@", self.searchBarLocation.text];
         }
     } else {
         //NSLog(@"string already contains ll");
@@ -600,9 +597,9 @@ typedef enum eMapDisplayState
 - (void)businessListingQuery: (NSMutableString *)query
 {
     //load business listing based on user's search criteria
-    if ([self.searchTextfield.text length])
+    if ([self.searchBarSearch.text length])
     {
-        [query appendFormat: @"&term=%@", self.searchTextfield.text];
+        [query appendFormat: @"&term=%@", self.searchBarSearch.text];
     }
     [self addLocationToQuery: query];
 
@@ -751,8 +748,8 @@ typedef enum eMapDisplayState
     [self showMapView];
     self.dividerView.userControllable = YES;
     [self removeBusinessListingHeader];
-    [self.searchTextfield resignFirstResponder];
-    [self.locationTextfield resignFirstResponder];
+    [self.searchBarSearch resignFirstResponder];
+    [self.searchBarLocation resignFirstResponder];
     self.mapView.showsUserLocation = YES;
     [self.tableView setContentOffset:CGPointZero animated:NO];
 
@@ -781,8 +778,8 @@ typedef enum eMapDisplayState
 {
     //directoryMode = DIRECTORY_MODE_ON_THE_WEB_LISTING;
     [businessSearchResults removeAllObjects];
-    [self.searchTextfield resignFirstResponder];
-    [self.locationTextfield resignFirstResponder];
+    [self.searchBarSearch resignFirstResponder];
+    [self.searchBarLocation resignFirstResponder];
     if (directoryMode == DIRECTORY_MODE_ON_THE_WEB_LISTING)
     {
         [self removeBusinessListingHeader];
@@ -1382,13 +1379,12 @@ typedef enum eMapDisplayState
     }
 }
 
-#pragma mark UITextField delegates
-
-- (void)textFieldDidBeginEditing: (UITextField *)textField
+#pragma mark UISearchBar delegates
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     //called when user taps on either search textField or location textField
 
-    activeTextField = textField;
+    activeSearchBar = searchBar;
 
     //NSLog(@"TextField began editing");
     if (directoryMode != DIRECTORY_MODE_SEARCH)
@@ -1404,26 +1400,40 @@ typedef enum eMapDisplayState
             [self transitionMapToSearch];
         }
     }
-    if (textField == self.locationTextfield)
+    if (searchBar == self.searchBarLocation)
     {
         mostRecentSearchTag = TAG_LOCATION_SEARCH;
         [self pruneCachedSearchItemsFromSearchResults];
         [self.searchCluesTableView reloadData];
         //NSLog(@"Most Recent Search Tag: TAG_LOCATION_SEARCH");
-        [self locationTextFieldChanged: textField];
+        [self searchBarLocationChanged:searchBar textDidChange:searchBar.text];
     }
-    if (textField == self.searchTextfield)
+    if (searchBar == self.searchBarSearch)
     {
         mostRecentSearchTag = TAG_BUSINESS_SEARCH;
         [self pruneCachedLocationItemsFromSearchResults];
         [self.searchCluesTableView reloadData];
         //NSLog(@"Most Recent Search Tag: TAG_BUSINESS_SEARCH");
-        [self searchTextFieldChanged: textField];
+        [self searchBarSearchChanged:searchBar textDidChange:searchBar.text];
+    }
+}
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)text
+{
+    if (searchBar == self.searchBarLocation)
+    {
+        [self searchBarLocationChanged:searchBar textDidChange:text];
+
+    }
+    else if(searchBar == self.searchBarSearch)
+    {
+        [self searchBarSearchChanged:searchBar textDidChange:text];
+
     }
 }
 
 //http://107.170.22.83:80/api/v1/autocomplete-business/?term=den&location=san
-- (void)searchTextFieldChanged: (UITextField *)textField
+- (void)searchBarSearchChanged: (UISearchBar *)searchBar textDidChange:(NSString *)text
 {
     //NSLog( @"search text changed: %@", textField.text);
     //mostRecentSearchTag = TAG_BUSINESS_SEARCH;
@@ -1431,7 +1441,7 @@ typedef enum eMapDisplayState
     [[DL_URLServer controller] cancelAllRequestsForDelegate: self];
     NSMutableString *urlString = [[NSMutableString alloc] init];
 
-    NSString *searchTerm = [textField.text stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    NSString *searchTerm = [text stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     if (searchTerm == nil)
     {
         //there are non ascii characters in the string
@@ -1439,7 +1449,7 @@ typedef enum eMapDisplayState
 
     } else
     {
-        searchTerm = textField.text;
+        searchTerm = text;
     }
     [urlString appendString: [NSString stringWithFormat: @"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm]];
 
@@ -1449,7 +1459,7 @@ typedef enum eMapDisplayState
     {
         [[DL_URLServer controller] issueRequestURL: [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]
                                         withParams: nil
-                                        withObject: textField
+                                        withObject: searchBar
                                       withDelegate: self
                                 acceptableCacheAge: AGE_ACCEPT_CACHE_SECS
                                        cacheResult: YES];
@@ -1467,33 +1477,33 @@ typedef enum eMapDisplayState
  Recommendation from server (remainder of slots).  Don’t duplicate what is already cached.
  */
 
-- (void)locationTextFieldChanged: (UITextField *)textField
+- (void)searchBarLocationChanged: (UISearchBar *)searchBar textDidChange:(NSString *)text
 {
     [[DL_URLServer controller] cancelAllRequestsForDelegate: self];
     //http://107.170.22.83:80/api/v1/autocomplete-location/?term=sa
     //NSLog( @"location text changed: %@", textField.text);
-    NSMutableString *query = [[NSMutableString alloc] initWithString: [NSString stringWithFormat: @"%@/autocomplete-location?term=%@", SERVER_API, textField.text]];
+    NSMutableString *query = [[NSMutableString alloc] initWithString: [NSString stringWithFormat: @"%@/autocomplete-location?term=%@", SERVER_API, text]];
     [self addLocationToQuery: query];
     //NSLog(@"Location Query: %@", query);
     [[DL_URLServer controller] issueRequestURL: [query stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]
                                     withParams: nil
-                                    withObject: textField
+                                    withObject: searchBar
                                   withDelegate: self
                             acceptableCacheAge: AGE_ACCEPT_CACHE_SECS
                                    cacheResult: YES];
 }
 
-- (BOOL)textFieldShouldReturn: (UITextField *)textField
+-(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    if (textField == self.searchTextfield)
+    if (searchBar == self.searchBarSearch)
     {
-        [self.locationTextfield becomeFirstResponder];
+        [self.searchBarLocation becomeFirstResponder];
     }
-    if (textField == self.locationTextfield)
+    if (searchBar == self.searchBarLocation)
     {
         if (directoryMode == DIRECTORY_MODE_SEARCH)
         {
-            if ([[self.locationTextfield.text uppercaseString] isEqualToString: [ON_THE_WEB_STRING uppercaseString]])
+            if ([[self.searchBarLocation.text uppercaseString] isEqualToString: [ON_THE_WEB_STRING uppercaseString]])
             {
                 directoryMode = DIRECTORY_MODE_ON_THE_WEB_LISTING;
                 [self transitionSearchToListing];
@@ -1503,11 +1513,9 @@ typedef enum eMapDisplayState
                 [self transitionSearchToMap];
             }
         }
-        return YES;
     }
-    return NO;
-}
 
+}
 #pragma mark UIScrollView delegates
 
 
@@ -1565,7 +1573,7 @@ typedef enum eMapDisplayState
         //search clues table
         if (mostRecentSearchTag == TAG_BUSINESS_SEARCH)
         {
-            if (self.searchTextfield.text.length == 0)
+            if (self.searchBarSearch.text.length == 0)
             {
                 return [businessAutoCorrectArray count] + [searchTermCache count];
             } else
@@ -1574,7 +1582,7 @@ typedef enum eMapDisplayState
             }
         } else //(mostRecentSearchTag == TAG_LOCATION_SEARCH)
         {
-            if (self.locationTextfield.text.length == 0)
+            if (self.searchBarLocation.text.length == 0)
             {
                 return [locationAutoCorrectArray count] + 2 + [searchLocationCache count];
             } else
@@ -1714,7 +1722,7 @@ typedef enum eMapDisplayState
             cell.textLabel.font = myFont;
 
             unsigned long cacheSize = 0;
-            if (self.locationTextfield.text.length == 0)
+            if (self.searchBarLocation.text.length == 0)
             {
                 cacheSize = searchLocationCache.count;
             }
@@ -1751,7 +1759,7 @@ typedef enum eMapDisplayState
             UIFont *myFont = [UIFont systemFontOfSize: 18.0f];
             cell.textLabel.font = myFont;
 
-            if (self.searchTextfield.text.length == 0)
+            if (self.searchBarSearch.text.length == 0)
             {
                 cacheSize = searchTermCache.count;
             }
@@ -1821,7 +1829,7 @@ typedef enum eMapDisplayState
             NSDictionary *dict;
 
             NSUInteger cacheSize = 0;
-            if (self.searchTextfield.text.length == 0)
+            if (self.searchBarSearch.text.length == 0)
             {
                 cacheSize = searchTermCache.count;
             }
@@ -1846,8 +1854,8 @@ typedef enum eMapDisplayState
 
             if ([type isEqualToString: @"business"])
             {
-                self.searchTextfield.text = cell.textLabel.text;
-                [self.searchTextfield resignFirstResponder];
+                self.searchBarSearch.text = cell.textLabel.text;
+                [self.searchBarSearch resignFirstResponder];
                 //NSLog(@"Go to business");
                 //[self transitionSearchToMap];
                 /*NSDictionary *businessInfo = [businessSearchResults objectForKey:[NSNumber numberWithInteger:indexPath.row]];
@@ -1885,9 +1893,9 @@ typedef enum eMapDisplayState
                 //}
             } else
             {
-                self.searchTextfield.text = cell.textLabel.text;
+                self.searchBarSearch.text = cell.textLabel.text;
 
-                [self.locationTextfield becomeFirstResponder];
+                [self.searchBarLocation becomeFirstResponder];
 
                 businessAutoCorrectArray = nil;
                 [self.searchCluesTableView reloadData];
@@ -1895,7 +1903,7 @@ typedef enum eMapDisplayState
             }
         } else if (mostRecentSearchTag == TAG_LOCATION_SEARCH)
         {
-            self.locationTextfield.text = cell.textLabel.text;
+            self.searchBarLocation.text = cell.textLabel.text;
             //add to search cache
             if ([searchLocationCache containsObject: cell.textLabel.text] == NO)
             {
@@ -1908,7 +1916,7 @@ typedef enum eMapDisplayState
                     }
                 }
             }
-            [self.searchTextfield becomeFirstResponder];
+            [self.searchBarSearch becomeFirstResponder];
 
             locationAutoCorrectArray = nil;
             [self.searchCluesTableView reloadData];
@@ -1956,14 +1964,14 @@ typedef enum eMapDisplayState
 
     if ([dictFromServer objectForKey: @"results"] != (id)[NSNull null])
     {
-        if (object == self.locationTextfield)
+        if (object == self.searchBarLocation)
         {
             //NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
             locationAutoCorrectArray = [[dictFromServer objectForKey: @"results"] mutableCopy];
             [self pruneCachedLocationItemsFromSearchResults];
             [self.searchCluesTableView reloadData];
 
-        } else if (object == self.searchTextfield)
+        } else if (object == self.searchBarSearch)
         {
             //NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
             businessAutoCorrectArray = [[dictFromServer objectForKey: @"results"] mutableCopy];
@@ -2013,7 +2021,7 @@ typedef enum eMapDisplayState
 
 - (void)positionDividerView
 {
-    CGRect frame = self.dividerView.frame;
+//    CGRect frame = self.dividerView.frame;
     if (self.dividerView.userControllable == NO)
     {
         //NSLog(@"offset: %f", scrollView.contentOffset.y);
@@ -2023,6 +2031,8 @@ typedef enum eMapDisplayState
             offset = self.tableView.tableHeaderView.frame.size.height;
         }
         self.mapViewHeight.constant = 10 + self.tableView.frame.origin.y + self.tableView.tableHeaderView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
+
+        self.dividerView.hidden = TRUE;
     }
 //    else
 //    {
@@ -2164,8 +2174,8 @@ typedef enum eMapDisplayState
     if (category)
     {
         [self transitionListingToSearch];
-        [self.locationTextfield becomeFirstResponder];
-        self.searchTextfield.text = category;
+        [self.searchBarLocation becomeFirstResponder];
+        self.searchBarSearch.text = category;
     }
 }
 
