@@ -1227,7 +1227,7 @@ typedef enum eAppMode
 
 - (void)processBitcoinURI:(NSURL *)uri
 {
-    if ([uri.scheme isEqualToString:@"bitcoin"]) {
+    if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:@"airbitz"]) {
         [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
         if ([User isLoggedIn]) {
             [_sendViewController resetViews];
@@ -1236,7 +1236,8 @@ typedef enum eAppMode
         } else {
             _uri = uri;
         }
-    } else if ([uri.scheme isEqualToString:@"bitcoin-ret"] || [uri.host isEqualToString:@"x-callback-url"]) {
+    } else if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:@"airbitz-ret"]
+               || [uri.host isEqualToString:@"x-callback-url"]) {
         if ([User isLoggedIn]) {
             UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
             _addressRequestController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AddressRequestController"];
