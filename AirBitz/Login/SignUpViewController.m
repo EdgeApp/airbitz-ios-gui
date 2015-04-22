@@ -91,9 +91,10 @@
     self.buttonBlocker.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
 
-    if (self.strUserName
+    if ((self.strUserName
             && [self.strUserName length] > 0
-            && _mode == SignUpMode_SignUp) {
+            && _mode == SignUpMode_SignUp)
+            || _mode == SignUpMode_ChangePasswordNoVerify) {
         [self.passwordTextField becomeFirstResponder];
     } else {
         [self.userNameTextField becomeFirstResponder];
@@ -208,6 +209,25 @@
                 else if (_mode == SignUpMode_ChangePasswordNoVerify)
                 {
                     // change password without old password
+                    // get their old pen
+                    [self blockUser:YES];
+                    // We post this to the Data Sync queue, so password is updated in between sync's
+                    [CoreBridge postToSyncQueue:^(void) {
+                        tABC_Error error;
+                        [CoreBridge stopWatchers];
+                        [CoreBridge stopQueues];
+                        
+                        const char * ignore = "ignore";
+                        
+                        // NOTE: userNameTextField is repurposed for current password
+                        ABC_ChangePassword([[User Singleton].name UTF8String], ignore,
+                                           [self.passwordTextField.text UTF8String], &error);
+                        [CoreBridge setupLoginPIN];
+                        
+                        _bSuccess = error.code == ABC_CC_Ok;
+                        _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&error]];
+                        [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
+                    }];
                 }
                 else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
                 {
@@ -412,6 +432,10 @@
                                   otherButtonTitles:nil];
             [alert show];
         }
+    }
+    else if(_mode == SignUpMode_ChangePasswordNoVerify)
+    {
+        bUserNameFieldIsValid = YES;
     }
     else if (_mode != SignUpMode_ChangePasswordUsingAnswers) // the user name field is used for the old password in this case
     {
