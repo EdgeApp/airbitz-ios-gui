@@ -58,7 +58,7 @@
     char *szDate = NULL;
     ABC_OtpResetDate(&szDate, &error);
     if (error.code == ABC_CC_Ok) {
-        if (szDate == NULL) {
+        if (szDate == NULL || strlen(szDate) == 0) {
             _labelResetDate.hidden = YES;
             _labelResetDesc.hidden = YES;
             _buttonReset.hidden = NO;
