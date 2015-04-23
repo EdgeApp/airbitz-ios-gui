@@ -8855,25 +8855,6 @@ try {
   module = angular.module('app', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('app/error/partials/error.html',
-    '<div class="error-screen text-center row">\n' +
-    '  <div class="col-xs-12">\n' +
-    '    <h2>{{ title }}</h2>\n' +
-    '    <h3>{{ message }}</h3>\n' +
-    '    <button class="btn btn-large btn-warning" ng-click="refresh()">Refresh</button>\n' +
-    '  </div>\n' +
-    '</div>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('app');
-} catch (e) {
-  module = angular.module('app', []);
-}
-module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/exchange/partials/add.bankAccount.html',
     '\n' +
     '<div class="exchange-add-bank-account row">\n' +
@@ -9393,6 +9374,25 @@ try {
   module = angular.module('app', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('app/error/partials/error.html',
+    '<div class="error-screen text-center row">\n' +
+    '  <div class="col-xs-12">\n' +
+    '    <h2>{{ title }}</h2>\n' +
+    '    <h3>{{ message }}</h3>\n' +
+    '    <button class="btn btn-large btn-warning" ng-click="refresh()">Refresh</button>\n' +
+    '  </div>\n' +
+    '</div>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('app');
+} catch (e) {
+  module = angular.module('app', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/limits/partials/buy.html',
     '<div class="buy-limits">\n' +
     '  <div class="limit-buy-daily">\n' +
@@ -9486,78 +9486,6 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/prices/partials/rate.html',
     '<div class="live-price-rate">\n' +
     '  <span class="price-rate-label">1 BTC =</span> <span class="price-rate-data">{{ price }} {{ currency }} </span>\n' +
-    '</div>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('app');
-} catch (e) {
-  module = angular.module('app', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('app/receipt/partials/receipt.html',
-    '<h2 class="order-receipt-heading">\n' +
-    '  <img class="bitcoin-logo" src="./img/bitcoin-icon-logo.png"> Order Receipt\n' +
-    '</h2>\n' +
-    '\n' +
-    '<div class="order-review row">\n' +
-    '  <div class="col-xs-12">\n' +
-    '    <table class="table table-bordered">\n' +
-    '      <tbody>\n' +
-    '        <tr>\n' +
-    '          <td>Order Type</td>\n' +
-    '          <td>{{ order.orderAction || "orderAction" | titlecase }} Order</td>\n' +
-    '        </tr>\n' +
-    '      </tbody>\n' +
-    '    </table>\n' +
-    '\n' +
-    '    <table class="table table-bordered">\n' +
-    '      <tbody>\n' +
-    '        <tr ng-show="{{ order.orderAction === \'buy\' }}">\n' +
-    '          <td>Destination Wallet</td>\n' +
-    '          <td>{{ order.transferToWallet.name || "" }}</td>\n' +
-    '        </tr>\n' +
-    '        <tr ng-show="{{ order.orderAction === \'sell\' }}">\n' +
-    '          <td>Sell From</td>\n' +
-    '          <td>{{ order.transferToWallet.name || "" }}</td>\n' +
-    '        </tr>\n' +
-    '      </tbody>\n' +
-    '    </table>\n' +
-    '\n' +
-    '    <table class="table table-bordered">\n' +
-    '      <tbody>\n' +
-    '        <tr>\n' +
-    '          <td>BTC Price:</td>\n' +
-    '          <td>{{ order.details.price | currency }}</td>\n' +
-    '        </tr>\n' +
-    '        <tr>\n' +
-    '          <td>BTC Amount:</td>\n' +
-    '          <td>{{ order.orderBtcInput }}</td>\n' +
-    '        </tr>\n' +
-    '        <tr>\n' +
-    '          <td>Sub Total:</td>\n' +
-    '          <td>{{ order.details.subtotal }}</td>\n' +
-    '        </tr>\n' +
-    '        <tr>\n' +
-    '          <td>Fees:</td>\n' +
-    '          <td>{{ order.details.fees }}</td>\n' +
-    '        </tr>\n' +
-    '        <tr>\n' +
-    '          <td>Total:</td>\n' +
-    '          <td>{{ order.details.total }}</td>\n' +
-    '        </tr>\n' +
-    '      </tbody>\n' +
-    '    </table>\n' +
-    '  </div>\n' +
-    '</div>\n' +
-    '\n' +
-    '<div class="row">\n' +
-    '  <div class="text-right col-xs-12">\n' +
-    '    <button ng-click="finish()" class="btn btn-lg btn-primary">Finish</button>\n' +
-    '  </div>\n' +
     '</div>\n' +
     '');
 }]);
@@ -9990,6 +9918,11 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '<div class="verify-phone-form text-center row">\n' +
     '  <form name="form" class="form col-xs-12" novalidate>\n' +
+    '\n' +
+    '    <div class="row" style="margin: 20px 0">\n' +
+    '      <p>Please enter your phone number.</p>\n' +
+    '    </div>\n' +
+    '\n' +
     '    <div class="row">\n' +
     '      <div class="form-group col-xs-offset-1 col-xs-10">\n' +
     '        <label for="inputPhone" class="sr-only">Verification Code</label>\n' +
@@ -10024,6 +9957,78 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '  </form>\n' +
     '\n' +
+    '</div>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('app');
+} catch (e) {
+  module = angular.module('app', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('app/receipt/partials/receipt.html',
+    '<h2 class="order-receipt-heading">\n' +
+    '  <img class="bitcoin-logo" src="./img/bitcoin-icon-logo.png"> Order Receipt\n' +
+    '</h2>\n' +
+    '\n' +
+    '<div class="order-review row">\n' +
+    '  <div class="col-xs-12">\n' +
+    '    <table class="table table-bordered">\n' +
+    '      <tbody>\n' +
+    '        <tr>\n' +
+    '          <td>Order Type</td>\n' +
+    '          <td>{{ order.orderAction || "orderAction" | titlecase }} Order</td>\n' +
+    '        </tr>\n' +
+    '      </tbody>\n' +
+    '    </table>\n' +
+    '\n' +
+    '    <table class="table table-bordered">\n' +
+    '      <tbody>\n' +
+    '        <tr ng-show="{{ order.orderAction === \'buy\' }}">\n' +
+    '          <td>Destination Wallet</td>\n' +
+    '          <td>{{ order.transferToWallet.name || "" }}</td>\n' +
+    '        </tr>\n' +
+    '        <tr ng-show="{{ order.orderAction === \'sell\' }}">\n' +
+    '          <td>Sell From</td>\n' +
+    '          <td>{{ order.transferToWallet.name || "" }}</td>\n' +
+    '        </tr>\n' +
+    '      </tbody>\n' +
+    '    </table>\n' +
+    '\n' +
+    '    <table class="table table-bordered">\n' +
+    '      <tbody>\n' +
+    '        <tr>\n' +
+    '          <td>BTC Price:</td>\n' +
+    '          <td>{{ order.details.price | currency }}</td>\n' +
+    '        </tr>\n' +
+    '        <tr>\n' +
+    '          <td>BTC Amount:</td>\n' +
+    '          <td>{{ order.orderBtcInput }}</td>\n' +
+    '        </tr>\n' +
+    '        <tr>\n' +
+    '          <td>Sub Total:</td>\n' +
+    '          <td>{{ order.details.subtotal }}</td>\n' +
+    '        </tr>\n' +
+    '        <tr>\n' +
+    '          <td>Fees:</td>\n' +
+    '          <td>{{ order.details.fees }}</td>\n' +
+    '        </tr>\n' +
+    '        <tr>\n' +
+    '          <td>Total:</td>\n' +
+    '          <td>{{ order.details.total }}</td>\n' +
+    '        </tr>\n' +
+    '      </tbody>\n' +
+    '    </table>\n' +
+    '  </div>\n' +
+    '</div>\n' +
+    '\n' +
+    '<div class="row">\n' +
+    '  <div class="text-right col-xs-12">\n' +
+    '    <button ng-click="finish()" class="btn btn-lg btn-primary">Finish</button>\n' +
+    '  </div>\n' +
     '</div>\n' +
     '');
 }]);
