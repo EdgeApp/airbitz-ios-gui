@@ -595,6 +595,8 @@
                 [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
                 self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
             }
+
+            [self updateTextFieldContents];
         });
     }];
 
