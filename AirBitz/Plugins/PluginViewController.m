@@ -465,15 +465,11 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
 
     NSString *key = [args objectForKey:@"key"];
-    if ([@"GLIDERA_PARTNER_TOKEN" compare:key]  == NSOrderedSame) {
-        [self setJsResults:cbid withArgs:[self jsonResult:GLIDERA_API_KEY]];
+    NSString *value = [_plugin.env valueForKey:key];
+    if (value) {
+        [self setJsResults:cbid withArgs:[self jsonResult:value]];
     } else {
-        NSString *value = [_plugin.env valueForKey:key];
-        if (value) {
-            [self setJsResults:cbid withArgs:[self jsonResult:value]];
-        } else {
-            [self setJsResults:cbid withArgs:[self jsonResult:@""]];
-        }
+        [self setJsResults:cbid withArgs:[self jsonResult:@""]];
     }
 }
 

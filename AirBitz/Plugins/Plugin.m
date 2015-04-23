@@ -4,6 +4,7 @@
 //
 
 #import "Plugin.h"
+#import "Config.h"
 #import "ABC.h"
 
 @interface Plugin ()
@@ -37,6 +38,7 @@ static NSMutableArray *plugins;
                 @"CURRENCY_CODE": @"840",
                 @"CURRENCY_ABBREV": @"USD",
                 @"SANDBOX": (isTestnet ? @"true" : @"false"),
+                @"GLIDERA_PARTNER_TOKEN": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY)
             };
             [plugins addObject:plugin];
         }
@@ -52,6 +54,7 @@ static NSMutableArray *plugins;
             @"CURRENCY_CODE": @"124",
             @"CURRENCY_ABBREV": @"CAD",
             @"SANDBOX": (isTestnet ? @"true" : @"false"),
+            @"GLIDERA_PARTNER_TOKEN": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY)
         };
         [plugins addObject:plugin];
 
