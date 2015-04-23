@@ -73,6 +73,7 @@ typedef enum eAppMode
     UIAlertView                 *_passwordCheckAlert;
     UIAlertView                 *_passwordIncorrectAlert;
     UIAlertView                 *_otpRequiredAlert;
+    UIAlertView                 *_otpSkewAlert;
     UIAlertView                 *_userReviewAlert;
     UIAlertView                 *_userReviewOKAlert;
     UIAlertView                 *_userReviewNOAlert;
@@ -150,6 +151,7 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpRequired:) name:NOTIFICATION_OTP_REQUIRED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpSkew:) name:NOTIFICATION_OTP_SKEW object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:NOTIFICATION_TX_RECEIVED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchViewSweep:) name:NOTIFICATION_VIEW_SWEEP_TX object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
@@ -188,6 +190,7 @@ typedef enum eAppMode
     [self.view insertSubview:slideoutView aboveSubview:self.view];
 
     _otpRequiredAlert = nil;
+    _otpSkewAlert = nil;
     firstLaunch = YES;
 }
 
@@ -1157,6 +1160,19 @@ typedef enum eAppMode
                                 cancelButtonTitle:NSLocalizedString(@"Remind Me Later", nil)
                                 otherButtonTitles:NSLocalizedString(@"Enable", nil), nil];
         [_otpRequiredAlert show];
+    }
+}
+
+- (void)notifyOtpSkew:(NSArray *)params
+{
+    if (_otpSkewAlert == nil) {
+        _otpSkewAlert = [[UIAlertView alloc]
+            initWithTitle:NSLocalizedString(@"Two Factor Invalid", nil)
+            message:NSLocalizedString(@"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.", nil)
+            delegate:self
+            cancelButtonTitle:NSLocalizedString(@"OK", nil)
+            otherButtonTitles:nil, nil];
+        [_otpSkewAlert show];
     }
 }
 

@@ -1439,9 +1439,15 @@ static BOOL bOtpError = NO;
                                     (__bridge void *) singleton,
                                     &error);
             if (cc == ABC_CC_InvalidOTP) {
-                [singleton performSelectorOnMainThread:@selector(notifyOtpRequired:)
-                                            withObject:nil
-                                         waitUntilDone:NO];
+                if ([self getOtpSecret] != nil) {
+                    [singleton performSelectorOnMainThread:@selector(notifyOtpSkew:)
+                                                withObject:nil
+                                            waitUntilDone:NO];
+                } else {
+                    [singleton performSelectorOnMainThread:@selector(notifyOtpRequired:)
+                                                withObject:nil
+                                            waitUntilDone:NO];
+                }
             }
         }];
     }
@@ -1846,6 +1852,11 @@ static BOOL bOtpError = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_OTP_REQUIRED object:self];
 }
 
+- (void)notifyOtpSkew:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_OTP_SKEW object:self];
+}
+
 - (void)notifyExchangeRate:(NSArray *)params
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:self];
@@ -1889,6 +1900,22 @@ static BOOL bOtpError = NO;
 + (void)otpClearError
 {
     bOtpError = NO;
+}
+
++ (NSString *)getOtpSecret
+{
+    tABC_Error error;
+    NSString *secret = nil;
+    char *szSecret = NULL;
+    ABC_OtpKeyGet([[User Singleton].name UTF8String], &szSecret, &error);
+    if (error.code == ABC_CC_Ok && szSecret) {
+        secret = [NSString stringWithUTF8String:szSecret];
+    }
+    if (szSecret) {
+        free(szSecret);
+    }
+    NSLog(@("SECRET: %@"), secret);
+    return secret;
 }
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
