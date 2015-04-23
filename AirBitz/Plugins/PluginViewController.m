@@ -171,7 +171,9 @@ static const NSString *PROTOCOL = @"bridge://";
 - (NSDictionary *)jsonResult:(id)val
 {
     NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
-    [d setObject:val forKey:@"result"];
+    if (val) {
+        [d setObject:val forKey:@"result"];
+    }
     [d setObject:[NSNumber numberWithBool:YES] forKey:@"success"];
     return d;
 }

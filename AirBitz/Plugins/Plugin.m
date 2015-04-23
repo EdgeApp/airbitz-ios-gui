@@ -36,6 +36,7 @@ static NSMutableArray *plugins;
                 @"COUNTRY_NAME": @"United States",
                 @"CURRENCY_CODE": @"840",
                 @"CURRENCY_ABBREV": @"USD",
+                @"SANDBOX": (isTestnet ? @"true" : @"false"),
             };
             [plugins addObject:plugin];
         }
@@ -50,6 +51,7 @@ static NSMutableArray *plugins;
             @"COUNTRY_NAME": @"Canada",
             @"CURRENCY_CODE": @"124",
             @"CURRENCY_ABBREV": @"CAD",
+            @"SANDBOX": (isTestnet ? @"true" : @"false"),
         };
         [plugins addObject:plugin];
 
