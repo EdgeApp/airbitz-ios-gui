@@ -41,6 +41,10 @@ static NSOperationQueue *exchangeQueue;
 static NSOperationQueue *dataQueue;
 static NSOperationQueue *walletsQueue;
 static NSMutableDictionary *watchers;
+static NSMutableDictionary *currencyCodesCache;
+static NSMutableDictionary *currencySymbolCache;
+
+
 static CoreBridge *singleton = nil;
 
 @interface CoreBridge ()
@@ -72,6 +76,8 @@ static BOOL bOtpError = NO;
         [walletsQueue setMaxConcurrentOperationCount:1];
 
         watchers = [[NSMutableDictionary alloc] init];
+        currencySymbolCache = [[NSMutableDictionary alloc] init];
+        currencyCodesCache = [[NSMutableDictionary alloc] init];
 
         _localeAsCurrencyNum = @{
             @"AUD" : @CURRENCY_NUM_AUD,
@@ -1503,50 +1509,51 @@ static BOOL bOtpError = NO;
     return version;
 }
 
-+ (NSString *)currencyAbbrevLookup:(int) currencyNum
++ (NSString *)currencyAbbrevLookup:(int)currencyNum
 {
-    if (currencyNum == CURRENCY_NUM_USD) {
-        return @"USD";
-    } else if (currencyNum == CURRENCY_NUM_CAD) {
-        return @"CAD";
-    } else if (currencyNum == CURRENCY_NUM_MXN) {
-        return @"MXN";
-    } else if (currencyNum == CURRENCY_NUM_GBP) {
-        return @"GBP";
-    } else if (currencyNum == CURRENCY_NUM_CUP) {
-        return @"CUP";
-    } else if (currencyNum == CURRENCY_NUM_CNY) {
-        return @"CNY";
-    } else if (currencyNum == CURRENCY_NUM_EUR) {
-        return @"EUR";
-    } else if (currencyNum == CURRENCY_NUM_AUD) {
-        return @"AUD";
-    } else if (currencyNum == CURRENCY_NUM_HKD) {
-        return @"HKD";
-    } else if (currencyNum == CURRENCY_NUM_NZD) {
-        return @"NZD";
-    } else if (currencyNum == CURRENCY_NUM_PHP) {
-        return @"PHP";
-    } else {
-        return @"USD";
+    NSNumber *c = [NSNumber numberWithInt:currencyNum];
+    NSString *cached = [currencyCodesCache objectForKey:c];
+    if (cached != nil) {
+        return cached;
     }
+    tABC_Error error;
+    int currencyCount;
+    tABC_Currency *currencies = NULL;
+    ABC_GetCurrencies(&currencies, &currencyCount, &error);
+    if (error.code == ABC_CC_Ok) {
+        for (int i = 0; i < currencyCount; ++i) {
+            if (currencyNum == currencies[i].num) {
+                NSString *code = [NSString stringWithUTF8String:currencies[i].szCode];
+                [currencyCodesCache setObject:code forKey:c];
+                return code;
+            }
+        }
+    }
+    return @"";
 }
 
-+ (NSString *)currencySymbolLookup:(int) currencyNum
++ (NSString *)currencySymbolLookup:(int)currencyNum
 {
-    switch (currencyNum) {
-        case CURRENCY_NUM_CNY:
-            return @"¥";
-        case CURRENCY_NUM_EUR:
-            return @"€";
-        case CURRENCY_NUM_GBP:
-            return @"£";
-        case CURRENCY_NUM_CUP:
-        case CURRENCY_NUM_PHP:
-            return @"₱";
-            return @"₱";
-        default:
-            return @"$";
+    NSNumber *c = [NSNumber numberWithInt:currencyNum];
+    NSString *cached = [currencySymbolCache objectForKey:c];
+    if (cached != nil) {
+        return cached;
+    }
+    NSNumberFormatter *formatter = nil;
+    NSString *code = [CoreBridge currencyAbbrevLookup:currencyNum];
+    for (NSString *l in NSLocale.availableLocaleIdentifiers) {
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.locale = [NSLocale localeWithLocaleIdentifier:l];
+        if ([f.currencyCode isEqualToString:code]) {
+            formatter = f;
+            break;
+        }
+    }
+    if (formatter != nil) {
+        [currencySymbolCache setObject:formatter.currencySymbol forKey:c];
+        return formatter.currencySymbol;
+    } else {
+        return @"";
     }
 }
 
