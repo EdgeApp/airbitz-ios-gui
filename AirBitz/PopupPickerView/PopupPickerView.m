@@ -306,11 +306,16 @@ CGRect keyboardFrame;
             newFrame.origin.x += viewToPointTo.frame.size.width;
 //            newFrame.origin.x += popup.arrowImage.frame.size.width;  // offset by arrow width
         }
-        else // if (PopupPickerPosition_Left == position)
+        else if (PopupPickerPosition_Left == position)
         {
             // put it to the left of the positioning frame
             newFrame.origin.x -= newFrame.size.width;             
 //            newFrame.origin.x -= (popup.arrowImage.frame.size.width - ARROW_INSET);  // offset by arrow width
+        }
+        else // if (PopupPickerPosition_ScreenLeft == position)
+        {
+            CGRect screenRect = [[UIScreen mainScreen] bounds];
+            newFrame.origin.x = (screenRect.size.width / 2.0) - (newFrame.size.width / 2.0);
         }
         
         // makes sure the picker is within the parents bounds
