@@ -4600,7 +4600,7 @@ Scan the QR code using this device</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ypw-4p-DZr">
-                                <rect key="frame" x="4" y="23" width="90" height="30"/>
+                                <rect key="frame" x="6" y="24" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=" ">
                                     <accessibilityTraits key="traits" none="YES" button="YES"/>
@@ -5012,7 +5012,7 @@ Scan the QR code using this device</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dKI-Dd-pLU">
-                                <rect key="frame" x="10" y="23" width="90" height="30"/>
+                                <rect key="frame" x="6" y="24" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="ico_nav_directory_white.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
