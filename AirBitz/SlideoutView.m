@@ -113,7 +113,6 @@
     CGRect frame = self.accountPicker.frame;
     frame.size.width = self.otherAccountsView.frame.size.width;
     self.accountPicker.frame = frame;
-    self.accountPicker.pickerMaxChoicesVisible = 3;
     [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
     [self.accountPicker setRoundedAndShadowed:NO];
     
@@ -133,6 +132,13 @@
     
     self.lowerViews.hidden = NO;
     self.otherAccountsView.hidden = YES;
+    self.otherAccountsView.clipsToBounds = YES;
+    
+    CGRect lframe = self.lowerViews.frame;
+    CGRect oframe = self.otherAccountsView.frame;
+    oframe.size.height = lframe.size.height;
+    self.lowerViews.frame = lframe;
+    self.otherAccountsView.frame = oframe;
     
     [self showSlideout:show withAnimation:YES];
 }
@@ -226,6 +232,7 @@
             [self.accountPicker updateChoices:self.otherAccounts] ;
             self.otherAccountsView.hidden = NO;
             self.lowerViews.hidden = YES;
+            self.lowerViews.userInteractionEnabled = NO;
             
             [self rotateImage:self.accountArrow duration:0.2
                         curve:UIViewAnimationCurveEaseIn radians:M_PI-0.0001];
@@ -235,6 +242,7 @@
     {
         self.otherAccountsView.hidden = YES;
         self.lowerViews.hidden = NO;
+        self.lowerViews.userInteractionEnabled = YES;
         [self rotateImage:self.accountArrow duration:0.2
                     curve:UIViewAnimationCurveEaseIn radians:0];
     }
@@ -420,7 +428,8 @@
     CGRect popupWindowFrame = pickerTextView.popupPicker.frame;
     
     popupWindowFrame.size.width = pickerTextView.frame.size.width;
-    popupWindowFrame.size.height = !IS_IPHONE4 ? 340 : 250;
+    int height = IS_IPHONE4 ? 250 : 340;
+    popupWindowFrame.size.height = height;
     pickerTextView.popupPicker.frame = popupWindowFrame;
 }
 
