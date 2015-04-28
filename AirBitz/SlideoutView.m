@@ -400,6 +400,30 @@
     }
 }
 
+- (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
+{
+    _account = string;
+    NSString *message = [NSString stringWithFormat:@"Delete %@ on this device only?",
+                         string];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:NSLocalizedString(@"Delete Account", nil)
+                          message:message
+                          delegate:self
+                          cancelButtonTitle:@"No"
+                          otherButtonTitles:@"Yes", nil];
+    [alert show];
+    [self.accountPicker dismissPopupPicker];
+}
+
+- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
+{
+    CGRect popupWindowFrame = pickerTextView.popupPicker.frame;
+    
+    popupWindowFrame.size.width = pickerTextView.frame.size.width;
+    popupWindowFrame.size.height = !IS_IPHONE4 ? 340 : 250;
+    pickerTextView.popupPicker.frame = popupWindowFrame;
+}
+
 - (void)removeAccount:(NSString *)account
 {
     tABC_Error error;
@@ -459,29 +483,6 @@
     self.otherAccounts = [stringArray copy];
 }
 
-
-- (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
-{
-    _account = string;
-    NSString *message = [NSString stringWithFormat:@"Delete %@ on this device only?",
-                         string];
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Delete Account", nil)
-                          message:message
-                          delegate:self
-                          cancelButtonTitle:@"No"
-                          otherButtonTitles:@"Yes", nil];
-    [alert show];
-    [self.accountPicker dismissPopupPicker];
-}
-
-- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
-{
-    CGRect popupWindowFrame = pickerTextView.popupPicker.frame;
-    
-    popupWindowFrame.size.width = pickerTextView.frame.size.width;
-    pickerTextView.popupPicker.frame = popupWindowFrame;
-}
 
 - (void)showFadingError:(NSString *)message
 {
