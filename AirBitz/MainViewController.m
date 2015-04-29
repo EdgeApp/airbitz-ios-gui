@@ -1238,7 +1238,7 @@ typedef enum eAppMode
     }
 }
 
-- (void)launchChangePassword
+- (void)switchToSettingsView
 {
     _selectedViewController = _settingsViewController;
     [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
@@ -1246,15 +1246,17 @@ typedef enum eAppMode
 
     [self.tabBar highlighButtonAtIndex:APP_MODE_MORE];
     _appMode = APP_MODE_MORE;
+}
 
+- (void)launchChangePassword
+{
+    [self switchToSettingsView];
     [_settingsViewController bringUpSignUpViewInMode:SignUpMode_ChangePassword];
 }
 
 - (void)launchRecoveryQuestions:(NSNotification *)notification
 {
-    if (APP_MODE_MORE != _appMode) {
-        [self.tabBar selectButtonAtIndex:APP_MODE_MORE];
-    }
+    [self switchToSettingsView];
     [_settingsViewController bringUpRecoveryQuestionsView];
 }
 
