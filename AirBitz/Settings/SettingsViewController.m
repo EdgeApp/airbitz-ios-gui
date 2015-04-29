@@ -993,6 +993,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             if(_pAccountSettings) {
                 [cell.state setOn:!_pAccountSettings->bDisablePINLogin animated:NO];
             }
+            if ([CoreBridge passwordExists]) {
+                cell.state.userInteractionEnabled = YES;
+            } else {
+                cell.state.userInteractionEnabled = NO;
+            }
         }
     }
 	

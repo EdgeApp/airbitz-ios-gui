@@ -67,6 +67,7 @@
 + (void)login;
 + (void)logout;
 + (BOOL)passwordOk:(NSString *)password;
++ (BOOL)passwordExists;
 + (BOOL)allWatchersReady;
 + (BOOL)watcherIsReady:(NSString *)UUID;
 + (void)connectWatchers;

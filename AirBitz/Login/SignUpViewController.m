@@ -327,6 +327,26 @@
         self.reenterPasswordTextField.returnKeyType = UIReturnKeyNext;
         self.userNameTextField.secureTextEntry = NO;
     }
+    else if (mode == SignUpMode_ChangePasswordNoVerify
+            || (_mode == SignUpMode_ChangePassword && ![CoreBridge passwordExists]))
+    {
+        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
+        self.labelTitle.text = NSLocalizedString(@"Change Password", @"screen title");
+        [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
+        self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
+        self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
+        
+        self.imageUserName.hidden = NO;
+        self.imageReenterPassword.hidden = NO;
+        self.passwordTextField.hidden = NO;
+        self.reenterPasswordTextField.hidden = NO;
+        self.labelPasswordInfo.hidden = NO;
+        self.imagePassword.hidden = NO;
+        
+        self.reenterPasswordTextField.returnKeyType = UIReturnKeyDone;
+        
+        self.userNameTextField.secureTextEntry = YES;
+    }
     else if (mode == SignUpMode_ChangePassword)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
@@ -346,25 +366,6 @@
 
         self.reenterPasswordTextField.returnKeyType = UIReturnKeyDone;
 
-        self.userNameTextField.secureTextEntry = YES;
-    }
-    else if (mode == SignUpMode_ChangePasswordNoVerify)
-    {
-        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
-        self.labelTitle.text = NSLocalizedString(@"Change Password", @"screen title");
-        [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
-        self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
-        self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
-        
-        self.imageUserName.hidden = NO;
-        self.imageReenterPassword.hidden = NO;
-        self.passwordTextField.hidden = NO;
-        self.reenterPasswordTextField.hidden = NO;
-        self.labelPasswordInfo.hidden = NO;
-        self.imagePassword.hidden = NO;
-        
-        self.reenterPasswordTextField.returnKeyType = UIReturnKeyDone;
-        
         self.userNameTextField.secureTextEntry = YES;
     }
     else if (mode == SignUpMode_ChangePasswordUsingAnswers)
@@ -394,12 +395,12 @@
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.pinTextField.placeholder = NSLocalizedString(@"New PIN", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"Password", @"");
+        self.userNameTextField.hidden = ![CoreBridge passwordExists];
 
         self.labelPIN.hidden = NO;
         self.pinTextField.hidden = NO;
         self.imagePIN.hidden = NO;
         self.imageUserName.hidden = NO;
-        self.userNameTextField.hidden = NO; // used for old password in this case
 
         self.reenterPasswordTextField.returnKeyType = UIReturnKeyNext;
 
@@ -433,7 +434,10 @@
             [alert show];
         }
     }
-    else if(_mode == SignUpMode_ChangePasswordNoVerify)
+    else if (_mode == SignUpMode_ChangePasswordNoVerify
+            || (![CoreBridge passwordExists] 
+                && (_mode == SignUpMode_ChangePassword
+                    || _mode == SignUpMode_ChangePIN)))
     {
         bUserNameFieldIsValid = YES;
     }
@@ -535,7 +539,7 @@
     // if we are signing up for a new account
     if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        if (self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
+        if ([CoreBridge passwordExists] && self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SignUpViewController.h"
 
 @protocol SettingsViewControllerDelegate;
 
@@ -14,6 +15,7 @@
 
 @property (assign) id<SettingsViewControllerDelegate> delegate;
 
+- (void)bringUpSignUpViewInMode:(tSignUpMode)mode;
 - (void)bringUpRecoveryQuestionsView;
 - (void)resetViews;
 

@@ -94,8 +94,9 @@ typedef enum eExportOption
 
     self.arrayChoices = [ARRAY_CHOICES_FOR_TYPES objectAtIndex:(NSUInteger) self.type];
 
-    if (WalletExportType_PrivateSeed == self.type)
-    {
+    if (![CoreBridge passwordExists]) {
+        self.viewPassword.hidden = YES;
+    } else if (WalletExportType_PrivateSeed == self.type) {
         self.viewPassword.hidden = NO;
         [self.passwordTextField becomeFirstResponder];
     }
@@ -769,7 +770,7 @@ typedef enum eExportOption
     }
     else
     {
-        if (![CoreBridge passwordOk:self.passwordTextField.text])
+        if ([CoreBridge passwordExists] && ![CoreBridge passwordOk:self.passwordTextField.text])
         {
             [self showFadingError:NSLocalizedString(@"Incorrect password", nil)];
             [self.passwordTextField becomeFirstResponder];

@@ -71,6 +71,7 @@ typedef enum eAppMode
     UIAlertView                 *_receivedAlert;
     UIAlertView                 *_passwordChangeAlert;
     UIAlertView                 *_passwordCheckAlert;
+    UIAlertView                 *_passwordSetAlert;
     UIAlertView                 *_passwordIncorrectAlert;
     UIAlertView                 *_otpRequiredAlert;
     UIAlertView                 *_otpSkewAlert;
@@ -692,6 +693,20 @@ typedef enum eAppMode
     [_fadingAlert showFading];
 }
 
+- (void)showPasswordSetAlert
+{
+    NSString *title = NSLocalizedString(@"No password set", nil);
+    NSString *message = NSLocalizedString(@"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.", nil);
+    // show password reminder test
+    _passwordSetAlert = [[UIAlertView alloc]
+            initWithTitle:title
+                  message:message
+                 delegate:self
+        cancelButtonTitle:NSLocalizedString(@"Skip", nil)
+        otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+    [_passwordSetAlert show];
+}
+
 - (void)handlePasswordResults:(NSNumber *)authenticated
 {
     if (_fadingAlert) {
@@ -956,12 +971,16 @@ typedef enum eAppMode
 	[self showTabBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];
 
-    // increment PIN login count
-    [[User Singleton] incPinLogin];
+    // if the user has a password, increment PIN login count
+    if ([CoreBridge passwordExists]) {
+        [[User Singleton] incPinLogin];
+    }
     
     if (_uri) {
         [self processBitcoinURI:_uri];
         _uri = nil;
+    } else if (![CoreBridge passwordExists]) {
+        [self showPasswordSetAlert];
     } else if ([User Singleton].needsPasswordCheck) {
         [self showPasswordCheckAlert];
     } else {
@@ -1014,6 +1033,14 @@ typedef enum eAppMode
             [self showPasswordCheckAlert];
         } else {
             [self showPasswordChange];
+        }
+    }
+    else if (_passwordSetAlert == alertView)
+    {
+        _passwordSetAlert = nil;
+        if (buttonIndex == 0) {
+        } else {
+            [self launchChangePassword];
         }
     }
     else if (_userReviewAlert == alertView)
@@ -1209,6 +1236,18 @@ typedef enum eAppMode
         [_requestViewController resetViews];
         [self.tabBar selectButtonAtIndex:APP_MODE_REQUEST];
     }
+}
+
+- (void)launchChangePassword
+{
+    _selectedViewController = _settingsViewController;
+    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+    [_settingsViewController resetViews];
+
+    [self.tabBar highlighButtonAtIndex:APP_MODE_MORE];
+    _appMode = APP_MODE_MORE;
+
+    [_settingsViewController bringUpSignUpViewInMode:SignUpMode_ChangePassword];
 }
 
 - (void)launchRecoveryQuestions:(NSNotification *)notification

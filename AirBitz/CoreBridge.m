@@ -1184,6 +1184,17 @@ static BOOL bOtpError = NO;
     return ok == true ? YES : NO;
 }
 
++ (BOOL)passwordExists
+{
+    tABC_Error error;
+    bool exists = false;
+    ABC_PasswordExists([[User Singleton].name UTF8String], &exists, &error);
+    if (error.code == ABC_CC_Ok) {
+        return exists == true ? YES : NO;
+    }
+    return YES;
+}
+
 + (BOOL)allWatchersReady
 {
     return YES;
