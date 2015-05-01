@@ -1246,13 +1246,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 // if bToIsUUID NO, then it is assumed the strTo is an address
-- (void)showSendConfirmationTo:(NSString *)strTo amount:(long long)amount nameLabel:(NSString *)nameLabel toIsUUID:(BOOL)bToIsUUID
+- (void)showSendConfirmationTo:(NSString *)strTo amount:(long long)amount nameLabel:(NSString *)nameLabel
+                      category:(NSString *)category returnUrl:(NSString *)returnUrl toIsUUID:(BOOL)bToIsUUID
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
 
 	_sendConfirmationViewController.delegate = self;
 	_sendConfirmationViewController.sendToAddress = strTo;
+    _sendConfirmationViewController.category = category;
+    _sendConfirmationViewController.returnUrl = returnUrl;
     _sendConfirmationViewController.bAddressIsWalletUUID = bToIsUUID;
 	_sendConfirmationViewController.amountToSendSatoshi = amount;
     _sendConfirmationViewController.wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
@@ -1304,26 +1307,17 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		{
 			if (uri->szAddress)
 			{
-				printf("    address: %s\n", uri->szAddress);
+                NSString *label = uri->szLabel ?  [NSString stringWithUTF8String:uri->szLabel] : @"";
+                NSString *category = uri->szCategory ? [NSString stringWithUTF8String:uri->szCategory] : @"";
+                NSString *returnUrl = uri->szRet ?  [NSString stringWithUTF8String:uri->szRet] : @"";
 
-				printf("    amount: %lld\n", uri->amountSatoshi);
+                if (![Util isValidCategory:category]) {
+                    category = @"";
+                }
 
-				NSString *label;
-				if (uri->szLabel)
-				{
-					printf("    label: %s\n", uri->szLabel);
-					label = [NSString stringWithUTF8String:uri->szLabel];
-				}
-				else
-				{
-					label = @"";
-				}
-				if (uri->szMessage)
-				{
-                    printf("    message: %s\n", uri->szMessage);
-				}
                 bSuccess = YES;
-                [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label toIsUUID:NO];
+                [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi
+                                   nameLabel:label category:category returnUrl:returnUrl toIsUUID:NO];
 			}
 			else
 			{
@@ -1652,6 +1646,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         
         
         NSString *label;
+        NSString *category;
+        NSString *returnUrl;
         NSString *strTo = _pickerTextSendTo.textField.text;
 
         // see if the text corresponds to one of the wallets
@@ -1665,7 +1661,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #if !TARGET_IPHONE_SIMULATOR
             [self stopQRReader];
 #endif
-            [self showSendConfirmationTo:strTo amount:0.0 nameLabel:@"" toIsUUID:bIsUUID];
+            [self showSendConfirmationTo:strTo amount:0.0 nameLabel:@"" category:@"" returnUrl:@"" toIsUUID:bIsUUID];
 
         }
         else
@@ -1678,22 +1674,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             {
                 if (uri->szAddress)
                 {
-                    printf("    address: %s\n", uri->szAddress);
-                    
-                    printf("    amount: %lld\n", uri->amountSatoshi);
-                    
-                    if (uri->szLabel)
-                    {
-                        printf("    label: %s\n", uri->szLabel);
-                        label = [NSString stringWithUTF8String:uri->szLabel];
-                    }
-                    else
-                    {
-                        label = NSLocalizedString(@"", nil);
-                    }
-                    if (uri->szMessage)
-                    {
-                        printf("    message: %s\n", uri->szMessage);
+                    label = uri->szLabel ? [NSString stringWithUTF8String:uri->szLabel] : @"";
+                    category = uri->szCategory ? [NSString stringWithUTF8String:uri->szCategory] : @"";
+                    returnUrl = uri->szRet ?  [NSString stringWithUTF8String:uri->szRet] : @"";
+                    if (![Util isValidCategory:category]) {
+                        category = @"";
                     }
                 }
                 else
@@ -1727,7 +1712,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #endif
             if (uri != NULL)
             {
-                [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label toIsUUID:NO];
+                [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label
+                                    category:category returnUrl:returnUrl toIsUUID:NO];
             }
         }
 	}
@@ -1752,7 +1738,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [self stopQRReader];
 #endif
         //NSLog(@"using UUID for wallet: %@", wallet.strName);
-		[self showSendConfirmationTo:wallet.strUUID amount:0.0 nameLabel:@"" toIsUUID:YES];
+        [self showSendConfirmationTo:wallet.strUUID amount:0.0 nameLabel:@"" category:@"" returnUrl:@"" toIsUUID:YES];
 	}
 }
 

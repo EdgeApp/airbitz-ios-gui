@@ -357,4 +357,12 @@
     return params;
 }
 
++ (BOOL)isValidCategory:(NSString *)category
+{
+    return [category hasPrefix:NSLocalizedString(@"Expense", nil)]
+            || [category hasPrefix:NSLocalizedString(@"Income", nil)]
+            || [category hasPrefix:NSLocalizedString(@"Transfer", nil)]
+            || [category hasPrefix:NSLocalizedString(@"Exchange", nil)];
+}
+
 @end

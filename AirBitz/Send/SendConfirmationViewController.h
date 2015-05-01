@@ -19,6 +19,7 @@
 @property (nonatomic, copy)     NSString                                    *nameLabel;
 @property (nonatomic, copy)     NSString                                    *category;
 @property (nonatomic, copy)     NSString                                    *notes;
+@property (nonatomic, copy)     NSString                                    *returnUrl;
 @property (nonatomic, assign)   int64_t                                     amountToSendSatoshi;
 @property (nonatomic, assign)   double                                      overrideCurrency;
 @property (nonatomic, strong)   Wallet                                      *wallet;
