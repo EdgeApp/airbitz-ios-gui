@@ -7689,7 +7689,6 @@ var Glidera = (function () {
     .controller('disclaimerController', ['$scope', '$state', 'Error', 'States', 'UserFactory', disclaimerController])
     .controller('signupController', ['$scope', '$state', 'Error', 'States', 'UserFactory', signupController])
     .controller('verifyEmailController', ['$scope', '$state', 'Error', 'UserFactory', verifyEmailController])
-    .controller('verifyInfoController', ['$scope', '$state', 'Error', 'States', 'Occupations', 'UserFactory', verifyInfoController])
     .controller('verifyPhoneController', ['$scope', '$state', 'Error', 'DataFactory', 'UserFactory', 'TwoFactor', verifyPhoneController])
     .directive('phoneNumberValidator', phoneNumberValidator);
 
@@ -7706,6 +7705,8 @@ var Glidera = (function () {
     }
   }
   function userAccountController($scope, $state, Error, States, Occupations, UserFactory) {
+    var title = 'User Information';
+    Airbitz.ui.title(title);
     $scope.states = States.getStates();
     $scope.occupations = Occupations.getOccupations();
     $scope.account = UserFactory.getUserAccount();
@@ -7724,7 +7725,10 @@ var Glidera = (function () {
       UserFactory.updateUserAccount($scope.account).then(function() {
         Airbitz.ui.showAlert('Saved', 'User information has been updated.');
         $state.go('exchange');
-      }, Error.reject);
+      }, function(e) {
+        Error.reject(e);
+        Airbitz.ui.title(title);
+      });
     };
   }
   function apiKeyController($scope, $state, glideraFactory, UserFactory) {
@@ -7826,20 +7830,6 @@ var Glidera = (function () {
       }, Error.reject);
     };
   }
-  function verifyInfoController($scope, $state, Error, States, Occupations, UserFactory) {
-    Airbitz.ui.title('Verify User Information');
-    $scope.states = States.getStates();
-    $scope.occupations = Occupations.getOccupations();
-    $scope.account = UserFactory.getUserAccount();
-
-    $scope.saveUserAccount = function() {
-      Airbitz.ui.title('Saving...');
-      UserFactory.updateUserAccount($scope.account).then(function() {
-        Airbitz.ui.showAlert('Saved', 'User information has been updated.');
-        $state.go('verifyPhone');
-      }, Error.reject);
-    };
-  }
   function verifyPhoneController($scope, $state, Error, DataFactory, UserFactory, TwoFactor) {
     Airbitz.ui.title('Verify Phone');
     $scope.account = UserFactory.getUserAccount();
@@ -7856,7 +7846,7 @@ var Glidera = (function () {
     };
   }
   function phoneNumberValidator() {
-    var PHONE_REGEXP = /^[0-9]{3}-?[0-9]{3}-?[0-9]{4}$/i;
+    var PHONE_REGEXP = /^\+?[0-9]*[ -]?[0-9]{3}[ -]?[0-9]{3}[ -]?[0-9]{4}$/i;
     return {
       require: 'ngModel',
       link: function(scope, elm, attrs, ctrl) {
@@ -8695,12 +8685,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       url: "/signup/verify/email/",
       templateUrl: "app/user/partials/verify.email.html",
       controller: "verifyEmailController",
-    })
-    // route for signup info verification
-    .state("verifyInfo", {
-      url: "/signup/verify/info/",
-      templateUrl: "app/user/partials/userAccount.html",
-      controller: "verifyInfoController",
     })
     // route for phone verification
     .state("verifyPhone", {
@@ -9592,17 +9576,17 @@ module.run(['$templateCache', function($templateCache) {
     '        <label class="status label label-outline pull-right"\n' +
     '               ng-class="{\'label-success\': userStatus.userEmailIsSetup}">{{ userStatus.userEmailIsSetup | statusFilter }}</label>\n' +
     '      </li>\n' +
-    '      <li ng-if="showOptions" ui-sref="account" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
-    '        <span class="list-group-item-heading">Account Information</span>\n' +
-    '        <p class="list-group-item-text">Tap to edit</p>\n' +
-    '        <label class="status label label-outline pull-right"\n' +
-    '               ng-class="{\'label-success\': userStatus.userBasicInfoIsSetup}">{{ userStatus.userBasicInfoIsSetup | statusFilter }}</label>\n' +
-    '      </li>\n' +
     '      <li ng-if="showOptions" ui-sref="verifyPhone" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Mobile Phone</span>\n' +
     '        <p class="list-group-item-text">Tap to edit</p>\n' +
     '        <label class="status label label-outline pull-right"\n' +
     '               ng-class="{\'label-success\': userStatus.userPhoneIsSetup}">{{ userStatus.userPhoneIsSetup | statusFilter }}</label>\n' +
+    '      </li>\n' +
+    '      <li ng-if="showOptions" ui-sref="account" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
+    '        <span class="list-group-item-heading">Account Information</span>\n' +
+    '        <p class="list-group-item-text">Tap to edit</p>\n' +
+    '        <label class="status label label-outline pull-right"\n' +
+    '               ng-class="{\'label-success\': userStatus.userBasicInfoIsSetup}">{{ userStatus.userBasicInfoIsSetup | statusFilter }}</label>\n' +
     '      </li>\n' +
     '      <li ng-if="showOptions" ng-click="routeBankAccount()" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Bank Account</span>\n' +
@@ -9787,8 +9771,7 @@ module.run(['$templateCache', function($templateCache) {
     '             placeholder=""\n' +
     '             autocomplete="off"\n' +
     '             autocorrect="off"\n' +
-    '             autocapitalize="off"\n' +
-    '             required="" />\n' +
+    '             autocapitalize="off" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.registrationCode.$touched">\n' +
     '        <span ng-show="form.registrationCode.$error.required" class="label label-danger">Required</span>\n' +
     '        <span ng-show="form.registrationCode.$error.registrationCode" class="label label-danger">Valid registration code required</span>\n' +
