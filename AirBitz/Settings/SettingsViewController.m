@@ -73,19 +73,7 @@
 #define ROW_BLE                         6
 #define ROW_PIN_RELOGIN                 7
 
-#define ROW_US_DOLLAR                   0
-#define ROW_CANADIAN_DOLLAR             1
-#define ROW_EURO                        2
-#define ROW_MEXICAN_PESO                3
-#define ROW_YUAN                        4
-
-#define ARRAY_CURRENCY_NUMS @[@840, @124, @978, @484, @156]
-#define ARRAY_EXCHANGES     @[@[@"Bitstamp", @"BraveNewCoin", @"Coinbase"], \
-                              @[@"BraveNewCoin", @"Coinbase"], \
-                              @[@"BraveNewCoin", @"Coinbase"], \
-                              @[@"BraveNewCoin", @"Coinbase"], \
-                              @[@"BraveNewCoin", @"Coinbase"] \
-                             ]
+#define ARRAY_EXCHANGES     @[@"Bitstamp", @"BraveNewCoin", @"Coinbase"]
 
 #define ARRAY_LOGOUT        @[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9", \
                                 @"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19", \
@@ -156,6 +144,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 @property (nonatomic, strong) NSArray               *arrayCurrencyCodes;
 @property (nonatomic, strong) NSArray               *arrayCurrencyNums;
+@property (nonatomic, strong) NSArray               *arrayCurrencyStrings;
 @property (nonatomic, strong) CBCentralManager		*centralManager;
 @end
 
@@ -224,13 +213,18 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     // set up our internal currency arrays
     NSMutableArray *arrayCurrencyCodes = [[NSMutableArray alloc] initWithCapacity:_currencyCount];
     NSMutableArray *arrayCurrencyNums = [[NSMutableArray alloc] initWithCapacity:_currencyCount];
+    NSMutableArray *arrayCurrencyStrings = [[NSMutableArray alloc] init];
     for (int i = 0; i < _currencyCount; i++)
     {
-        [arrayCurrencyCodes addObject:[NSString stringWithUTF8String:_aCurrencies[i].szCode]];
+        [arrayCurrencyStrings addObject:[NSString stringWithFormat:@"%s - %@",
+                                        _aCurrencies[i].szCode,
+                                        [NSString stringWithUTF8String:_aCurrencies[i].szDescription]]];
         [arrayCurrencyNums addObject:[NSNumber numberWithInt:_aCurrencies[i].num]];
+        [arrayCurrencyCodes addObject:[NSString stringWithUTF8String:_aCurrencies[i].szCode]];
     }
     self.arrayCurrencyCodes = arrayCurrencyCodes;
     self.arrayCurrencyNums = arrayCurrencyNums;
+    self.arrayCurrencyStrings = arrayCurrencyStrings;
 
     // load the current account settings
     _pAccountSettings = NULL;
@@ -584,69 +578,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 // searches the exchanges in the settings for the exchange associated with the given currency number
 // NULL is returned if none can be found
-- (char *)exchangeForCurrencyNum:(int)currencyNum
-{
-    char *szRetVal = NULL;
-
-    if (_pAccountSettings)
-    {
-        // look through all the sources
-        for (int i = 0; i < _pAccountSettings->exchangeRateSources.numSources; i++)
-        {
-            if (_pAccountSettings->exchangeRateSources.aSources[i]->currencyNum == currencyNum)
-            {
-                szRetVal = _pAccountSettings->exchangeRateSources.aSources[i]->szSource;
-                break;
-            }
-        }
-    }
-
-    return szRetVal;
-}
-
-// sets the exchange for the given currency in the settings
-- (void)setExchange:(const char *)szSourceSel forCurrencyNum:(int)currencyNum
-{
-    if (_pAccountSettings)
-    {
-        tABC_ExchangeRateSources *pSources = &(_pAccountSettings->exchangeRateSources);
-
-        // if there are currently any sources
-        if (pSources->numSources > 0)
-        {
-            BOOL bReplaced = NO;
-            // look through all the sources
-            for (int i = 0; i < pSources->numSources; i++)
-            {
-                if (pSources->aSources[i]->currencyNum == currencyNum)
-                {
-                    free(pSources->aSources[i]->szSource);
-                    pSources->aSources[i]->szSource = strdup(szSourceSel);
-                    bReplaced = YES;
-                    break;
-                }
-            }
-            if (bReplaced == NO)
-            {
-                pSources->numSources++;
-                pSources->aSources = realloc(pSources->aSources, pSources->numSources * sizeof(tABC_ExchangeRateSource *));
-                pSources->aSources[pSources->numSources - 1] = calloc(1, sizeof(tABC_ExchangeRateSource));
-                pSources->aSources[pSources->numSources - 1]->currencyNum = currencyNum;
-                pSources->aSources[pSources->numSources - 1]->szSource = strdup(szSourceSel);
-            }
-        }
-        else
-        {
-            // add our first and only source
-            pSources->numSources = 1;
-            pSources->aSources = calloc(1, sizeof(tABC_ExchangeRateSource *));
-            pSources->aSources[0] = calloc(1, sizeof(tABC_ExchangeRateSource));
-            pSources->aSources[0]->currencyNum = currencyNum;
-            pSources->aSources[0]->szSource = strdup(szSourceSel);
-        }
-    }
-}
-
 // gets the string for the 'auto log off after' button
 - (NSString *)logoutDisplay
 {
@@ -1062,6 +993,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             if(_pAccountSettings) {
                 [cell.state setOn:!_pAccountSettings->bDisablePINLogin animated:NO];
             }
+            if ([CoreBridge passwordExists]) {
+                cell.state.userInteractionEnabled = YES;
+            } else {
+                cell.state.userInteractionEnabled = NO;
+            }
         }
     }
 	
@@ -1106,31 +1042,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		if (indexPath.row == 0)
 		{
-			cell.name.text = NSLocalizedString(@"US dollar", @"settings text");
+			cell.name.text = NSLocalizedString(@"Default Exchange", @"settings text");
 		}
-		else if (indexPath.row == 1)
-		{
-			cell.name.text = NSLocalizedString(@"Canadian dollar", @"settings text");
-		}
-		else if (indexPath.row == 2)
-		{
-			cell.name.text = NSLocalizedString(@"Euro", @"settings text");
-		}
-		else if (indexPath.row == 3)
-		{
-			cell.name.text = NSLocalizedString(@"Mexican Peso", @"settings text");
-		}
-		else if (indexPath.row == 4)
-		{
-			cell.name.text = NSLocalizedString(@"Yuan", @"settings text");
-		}
-        char *szSource = [self exchangeForCurrencyNum:[[ARRAY_CURRENCY_NUMS objectAtIndex:indexPath.row] intValue]];
-        if (szSource)
-        {
+        char *szSource = _pAccountSettings->szExchangeRateSource;
+        if (szSource) {
             [cell.button setTitle:[NSString stringWithUTF8String:szSource] forState:UIControlStateNormal];
-        }
-        else
-        {
+        } else {
             [cell.button setTitle:@"" forState:UIControlStateNormal];
         }
 	}
@@ -1207,7 +1124,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
-            return 5;
+            return 1;
             break;
 
         case SECTION_LOGOUT:
@@ -1561,6 +1478,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
     NSInteger section = (cell.tag >> 8);
     NSInteger row = cell.tag & 0xff;
+    NSInteger pickerWidth = PICKER_WIDTH;
+    tPopupPickerPosition popupPosition = PopupPickerPosition_Left;
 
     NSInteger curChoice = -1;
     NSArray *arrayPopupChoices = nil;
@@ -1596,22 +1515,27 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                     curChoice = -1;
                 }
             }
-            arrayPopupChoices = self.arrayCurrencyCodes;
+            arrayPopupChoices = self.arrayCurrencyStrings;
+            popupPosition = PopupPickerPosition_ScreenLeft;
+
+            // make this take up the entire screen
+            CGRect screenRect = [[UIScreen mainScreen] bounds];
+            pickerWidth = (int) screenRect.size.width - (IS_IPHONE4 ? 50 : 75); // magic padding
         }
     }
     else if (SECTION_DEFAULT_EXCHANGE == section)
     {
         curChoice = NSNotFound;
-        char *szSource = [self exchangeForCurrencyNum:[[ARRAY_CURRENCY_NUMS objectAtIndex:row] intValue]];
+        char *szSource = _pAccountSettings->szExchangeRateSource;
         if (szSource)
         {
-            curChoice = [[ARRAY_EXCHANGES objectAtIndex:row] indexOfObject:[NSString stringWithUTF8String:szSource]];
+            curChoice = [ARRAY_EXCHANGES indexOfObject:[NSString stringWithUTF8String:szSource]];
         }
         if (curChoice == NSNotFound)
         {
             curChoice = -1;
         }
-        arrayPopupChoices = [ARRAY_EXCHANGES objectAtIndex:row];
+        arrayPopupChoices = ARRAY_EXCHANGES;
     }
 
     // if we are supposed to bring up a popup picker
@@ -1620,11 +1544,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         [self blockUser:YES];
         self.popupPicker = [PopupPickerView CreateForView:self.viewMain
 											 relativeToView:cell.button
-                                             relativePosition:PopupPickerPosition_Left
+                                             relativePosition:popupPosition
                                               withStrings:arrayPopupChoices
                                               fromCategories:nil
                                               selectedRow:curChoice
-                                                withWidth:PICKER_WIDTH
+                                                withWidth:pickerWidth
                                             withAccessory:nil
                                             andCellHeight:PICKER_CELL_HEIGHT
                                             roundedEdgesAndShadow:YES
@@ -1676,8 +1600,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     }
     else if (SECTION_DEFAULT_EXCHANGE == sectionCell)
     {
-        const char *szSourceSel = [[[ARRAY_EXCHANGES objectAtIndex:rowCell] objectAtIndex:row] UTF8String];
-        [self setExchange:szSourceSel forCurrencyNum:[[ARRAY_CURRENCY_NUMS objectAtIndex:rowCell] intValue]];
+        const char *szSourceSel = [[ARRAY_EXCHANGES objectAtIndex:row] UTF8String];
+        _pAccountSettings->szExchangeRateSource = strdup(szSourceSel);
     }
 
     // update the settings in the core

@@ -17,10 +17,11 @@
 #import "PINReLoginViewController.h"
 #import "Notifications.h"
 #import "SettingsViewController.h"
+#import "SignUpViewController.h"
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
 #import "TwoFactorScanViewController.h"
-#import "PluginViewController.h"
+#import "BuySellViewController.h"
 #import "AddressRequestController.h"
 #import "User.h"
 #import "Config.h"
@@ -51,8 +52,8 @@ typedef enum eAppMode
 @interface MainViewController () <UITabBarDelegate,RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, PluginViewControllerDelegate, DirectoryViewControllerDelegate,
-                                  MFMailComposeViewControllerDelegate>
+                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate, DirectoryViewControllerDelegate,
+                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_directoryViewController;
@@ -63,15 +64,18 @@ typedef enum eAppMode
 	LoginViewController         *_loginViewController;
     PINReLoginViewController    *_PINReLoginViewController;
 	SettingsViewController      *_settingsViewController;
-	PluginViewController        *_pluginViewController;
+	BuySellViewController       *_buySellViewController;
 	SendStatusViewController    *_sendStatusController;
     TransactionDetailsViewController *_txDetailsController;
     TwoFactorScanViewController      *_tfaScanViewController;
+    SignUpViewController            *_signUpController;
     UIAlertView                 *_receivedAlert;
     UIAlertView                 *_passwordChangeAlert;
     UIAlertView                 *_passwordCheckAlert;
+    UIAlertView                 *_passwordSetAlert;
     UIAlertView                 *_passwordIncorrectAlert;
     UIAlertView                 *_otpRequiredAlert;
+    UIAlertView                 *_otpSkewAlert;
     UIAlertView                 *_userReviewAlert;
     UIAlertView                 *_userReviewOKAlert;
     UIAlertView                 *_userReviewNOAlert;
@@ -149,6 +153,7 @@ typedef enum eAppMode
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpRequired:) name:NOTIFICATION_OTP_REQUIRED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpSkew:) name:NOTIFICATION_OTP_SKEW object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:NOTIFICATION_TX_RECEIVED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchViewSweep:) name:NOTIFICATION_VIEW_SWEEP_TX object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
@@ -164,9 +169,6 @@ typedef enum eAppMode
     [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
     
     [NotificationChecker initAll];
-
-    slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
-    [self.view insertSubview:slideoutView aboveSubview:self.view];
 }
 
 /**
@@ -183,10 +185,14 @@ typedef enum eAppMode
 	_settingsViewController.delegate = self;
 
 	UIStoryboard *pluginStoryboard = [UIStoryboard storyboardWithName:@"Plugins" bundle: nil];
-	_pluginViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"PluginViewController"];
-    _pluginViewController.delegate = self;
+	_buySellViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"BuySellViewController"];
+    _buySellViewController.delegate = self;
+
+    slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
+    [self.view insertSubview:slideoutView aboveSubview:self.view];
 
     _otpRequiredAlert = nil;
+    _otpSkewAlert = nil;
     firstLaunch = YES;
 }
 
@@ -719,6 +725,34 @@ typedef enum eAppMode
     [User Singleton].needsPasswordCheck = NO;
 }
 
+- (void)showPasswordChange
+{
+    //TODO - show the sreen for password change without needing old password
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    _signUpController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
+    
+    _signUpController.mode = SignUpMode_ChangePasswordNoVerify;
+    _signUpController.delegate = self;
+    
+    CGRect frame = self.view.bounds;
+    frame.origin.x = frame.size.width;
+    _signUpController.view.frame = frame;
+    [self.view addSubview:_signUpController.view];
+    
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         _signUpController.view.frame = self.view.bounds;
+     }
+                     completion:^(BOOL finished)
+     {
+         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+     }];
+}
+
 - (void)showPasswordCheckSkip
 {
     _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
@@ -727,6 +761,20 @@ typedef enum eAppMode
     _fadingAlert.fadeDelay = 5;
     [_fadingAlert blockModal:NO];
     [_fadingAlert showFading];
+}
+
+- (void)showPasswordSetAlert
+{
+    NSString *title = NSLocalizedString(@"No password set", nil);
+    NSString *message = NSLocalizedString(@"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.", nil);
+    // show password reminder test
+    _passwordSetAlert = [[UIAlertView alloc]
+            initWithTitle:title
+                  message:message
+                 delegate:self
+        cancelButtonTitle:NSLocalizedString(@"Skip", nil)
+        otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+    [_passwordSetAlert show];
 }
 
 - (void)handlePasswordResults:(NSNumber *)authenticated
@@ -745,10 +793,10 @@ typedef enum eAppMode
     } else {
         _passwordIncorrectAlert = [[UIAlertView alloc]
                 initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
-                      message:NSLocalizedString(@"Incorrect Password. Try again?", nil)
+                      message:NSLocalizedString(@"Incorrect Password. Try again, or change it now?", nil)
                      delegate:self
             cancelButtonTitle:@"NO"
-            otherButtonTitles:@"YES", nil];
+            otherButtonTitles:@"YES", @"CHANGE", nil];
         [_passwordIncorrectAlert show];
     }
 }
@@ -998,12 +1046,16 @@ typedef enum eAppMode
     [self showNavBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];
 
-    // increment PIN login count
-    [[User Singleton] incPinLogin];
+    // if the user has a password, increment PIN login count
+    if ([CoreBridge passwordExists]) {
+        [[User Singleton] incPinLogin];
+    }
     
     if (_uri) {
         [self processBitcoinURI:_uri];
         _uri = nil;
+    } else if (![CoreBridge passwordExists]) {
+        [self showPasswordSetAlert];
     } else if ([User Singleton].needsPasswordCheck) {
         [self showPasswordCheckAlert];
     } else {
@@ -1052,8 +1104,18 @@ typedef enum eAppMode
     {
         if (buttonIndex == 0) {
             [self showPasswordCheckSkip];
-        } else {
+        } else if (buttonIndex == 1) {
             [self showPasswordCheckAlert];
+        } else {
+            [self showPasswordChange];
+        }
+    }
+    else if (_passwordSetAlert == alertView)
+    {
+        _passwordSetAlert = nil;
+        if (buttonIndex == 0) {
+        } else {
+            [self launchChangePassword];
         }
     }
     else if (_userReviewAlert == alertView)
@@ -1203,6 +1265,19 @@ typedef enum eAppMode
     }
 }
 
+- (void)notifyOtpSkew:(NSArray *)params
+{
+    if (_otpSkewAlert == nil) {
+        _otpSkewAlert = [[UIAlertView alloc]
+            initWithTitle:NSLocalizedString(@"Two Factor Invalid", nil)
+            message:NSLocalizedString(@"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.", nil)
+            delegate:self
+            cancelButtonTitle:NSLocalizedString(@"OK", nil)
+            otherButtonTitles:nil, nil];
+        [_otpSkewAlert show];
+    }
+}
+
 // called when the stats have been updated
 - (void)transactionDetailsExit:(NSNotification *)notification
 {
@@ -1238,11 +1313,25 @@ typedef enum eAppMode
     }
 }
 
+- (void)switchToSettingsView
+{
+    _selectedViewController = _settingsViewController;
+    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+    [_settingsViewController resetViews];
+
+    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+    _appMode = APP_MODE_MORE;
+}
+
+- (void)launchChangePassword
+{
+    [self switchToSettingsView];
+    [_settingsViewController bringUpSignUpViewInMode:SignUpMode_ChangePassword];
+}
+
 - (void)launchRecoveryQuestions:(NSNotification *)notification
 {
-    if (APP_MODE_MORE != _appMode) {
-        self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
-    }
+    [self switchToSettingsView];
     [_settingsViewController bringUpRecoveryQuestionsView];
 }
 
@@ -1270,7 +1359,7 @@ typedef enum eAppMode
 
 - (void)processBitcoinURI:(NSURL *)uri
 {
-    if ([uri.scheme isEqualToString:@"bitcoin"]) {
+    if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:@"airbitz"]) {
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
         if ([User isLoggedIn]) {
             [_sendViewController resetViews];
@@ -1279,7 +1368,8 @@ typedef enum eAppMode
         } else {
             _uri = uri;
         }
-    } else if ([uri.scheme isEqualToString:@"bitcoin-ret"] || [uri.host isEqualToString:@"x-callback-url"]) {
+    } else if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:@"airbitz-ret"]
+               || [uri.host isEqualToString:@"x-callback-url"]) {
         if ([User isLoggedIn]) {
             UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
             _addressRequestController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AddressRequestController"];
@@ -1309,6 +1399,10 @@ typedef enum eAppMode
 
 - (void)loggedOffRedirect:(NSNotification *)notification
 {
+    [slideoutView showSlideout:NO withAnimation:NO];
+
+    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_DIRECTORY];
+    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
     [self resetViews:notification];
@@ -1374,7 +1468,7 @@ typedef enum eAppMode
 - (void)slideoutBuySell
 {
     [_selectedViewController.view removeFromSuperview];
-    _selectedViewController = _pluginViewController;
+    _selectedViewController = _buySellViewController;
     [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     [slideoutView showSlideout:NO];
@@ -1403,10 +1497,12 @@ typedef enum eAppMode
     }
 }
 
-#pragma mark - Plugin Delegate
+#pragma mark - SignUpViewControllerDelegates
 
-- (void)PluginViewControllerDone:(PluginViewController *)vc
+-(void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
 {
+    [controller.view removeFromSuperview];
+    _signUpController = nil;
 }
 
 #pragma mark - UITabBarDelegate

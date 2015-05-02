@@ -153,6 +153,7 @@ typedef enum eMapDisplayState
 @property (nonatomic, weak) IBOutlet UIButton *btn_locateMe;
 @property (nonatomic, weak) IBOutlet UIButton *btn_info;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *searchIndicator;
 @end
 
 @implementation DirectoryViewController
@@ -201,6 +202,7 @@ typedef enum eMapDisplayState
     self.spinnerView.hidden = NO;
 
     self.searchCluesTableView.hidden = YES;
+    self.searchIndicator.hidden = YES;
     [self hideMapView];
     self.mapView.delegate = self;
 
@@ -268,6 +270,8 @@ typedef enum eMapDisplayState
 
     //NSLog(@"Adding keyboard notification");
     [self receiveKeyboardNotifications: YES];
+    
+    self.searchBarSearch.placeholder = @"Search";
 }
 
 - (void)receiveKeyboardNotifications: (BOOL)on
@@ -314,6 +318,7 @@ typedef enum eMapDisplayState
     //if(notification.object == self)
     if (activeSearchBar)
     {
+        self.searchBarSearch.placeholder = @"Business Name or Category";
         //NSLog(@"keyboard will show for directoryViewController");
         NSDictionary *userInfo = [notification userInfo];
         CGRect keyboardFrame = [[userInfo objectForKey: UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -341,6 +346,7 @@ typedef enum eMapDisplayState
     if (activeSearchBar)
     //if(notification.object == self)
     {
+        self.searchBarSearch.placeholder = @"Search";
         //NSLog(@"Keyboard will hide for DirectoryViewController");
         //make searchCluesTableView go away
         //bring back divider bar
@@ -810,7 +816,8 @@ typedef enum eMapDisplayState
 - (void)transitionMapToSearch
 {
     directoryMode = DIRECTORY_MODE_SEARCH;
-
+    
+    
     [UIView animateWithDuration: 0.35
                           delay: 0.0
                         options: UIViewAnimationOptionCurveEaseInOut
@@ -1457,6 +1464,8 @@ typedef enum eMapDisplayState
     //NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
     if (urlString != (id)[NSNull null])
     {
+        self.searchIndicator.hidden = NO;
+        
         [[DL_URLServer controller] issueRequestURL: [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]
                                         withParams: nil
                                         withObject: searchBar
@@ -1491,6 +1500,8 @@ typedef enum eMapDisplayState
                                   withDelegate: self
                             acceptableCacheAge: AGE_ACCEPT_CACHE_SECS
                                    cacheResult: YES];
+    
+    self.searchIndicator.hidden = NO;
 }
 
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -1697,8 +1708,8 @@ typedef enum eMapDisplayState
         } else
         {
             //in case server returns fewer objects than it says (so we don't crash)
-            cell.businessNameLabel.text = @"NO LISTING";
-            cell.businessNameLabel.textColor = [UIColor yellowColor];
+            cell.businessNameLabel.text = @"Loading...";
+            cell.businessNameLabel.textColor = [UIColor whiteColor];
             cell.addressLabel.text = @" ";
             cell.bitCoinLabel.hidden = YES;
             //[cell loadBackgroundImageForBusiness:nil];
@@ -1822,6 +1833,7 @@ typedef enum eMapDisplayState
 {
     if (tableView == self.searchCluesTableView)
     {
+        self.searchIndicator.hidden = YES;
         //NSLog(@"Row: %i", indexPath.row);
         UITableViewCell *cell = [tableView cellForRowAtIndexPath: indexPath];
         if (mostRecentSearchTag == TAG_BUSINESS_SEARCH)
@@ -2015,6 +2027,7 @@ typedef enum eMapDisplayState
         }
     }
     self.spinnerView.hidden = YES;
+    self.searchIndicator.hidden = YES;
 }
 
 #pragma mark DividerView

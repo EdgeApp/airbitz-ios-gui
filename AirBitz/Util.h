@@ -44,5 +44,6 @@
 + (void)checkPasswordAsync:(NSString *)password withSelector:(SEL)selector controller:(UIViewController *)controller;
 + (NSString *)urlencode:(NSString *)url;
 + (NSMutableDictionary *)getUrlParameters:(NSURL *)url;
++ (BOOL)isValidCategory:(NSString *)category;
 
 @end

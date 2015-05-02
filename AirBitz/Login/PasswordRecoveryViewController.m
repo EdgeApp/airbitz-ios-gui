@@ -322,7 +322,7 @@ typedef enum eAlertType
         self.buttonSkip.hidden = YES;
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
-        self.passwordView.hidden = NO;
+        self.passwordView.hidden = ![CoreBridge passwordExists];
         [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
     }
@@ -433,7 +433,7 @@ typedef enum eAlertType
     } else {
         password = [User Singleton].password;
     }
-    if (![CoreBridge passwordOk:password]) {
+    if ([CoreBridge passwordExists] && ![CoreBridge passwordOk:password]) {
         UIAlertView *alert = [[UIAlertView alloc]
                              initWithTitle:NSLocalizedString(@"Password mismatch", nil)
                              message:NSLocalizedString(@"Please enter your correct password.", nil)
@@ -652,7 +652,12 @@ typedef enum eAlertType
 
     if (_bSuccess)
     {
-		float posY = QA_STARTING_Y_POSITION;
+        float posY = 0;
+        if(self.mode != PassRecovMode_Recover)
+        {
+            posY = QA_STARTING_Y_POSITION;
+        }
+        
 		CGSize size = self.scrollView.contentSize;
 		size.height = posY;
 		

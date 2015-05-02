@@ -134,7 +134,8 @@
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
                 tABC_Error error;
-                ABC_CreateAccount([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String], &error);
+                char *szPassword = [self.passwordTextField.text length] == 0 ? NULL : [self.passwordTextField.text UTF8String];
+                ABC_CreateAccount([self.manager.strUserName UTF8String], szPassword, &error);
                 if (error.code == ABC_CC_Ok)
                 {
                     ABC_SetPIN([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String],
@@ -178,8 +179,12 @@
 // note: this function is aware of the 'mode' of the view controller and will check and display appropriately
 - (BOOL)newPasswordFieldsAreValid
 {
-    BOOL bNewPasswordFieldsAreValid = YES;
+    // Allow accounts with an empty password
+    if ([self.passwordTextField.text length] == 0) {
+        return YES;
+    }
 
+    BOOL bNewPasswordFieldsAreValid = YES;
     {
         double secondsToCrack;
         tABC_Error Error;

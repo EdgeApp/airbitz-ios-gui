@@ -45,6 +45,9 @@
     [super viewDidLoad];
     self.passwordTextField.delegate = self;
     self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+    if (![CoreBridge passwordExists]) {
+        self.passwordTextField.hidden = YES;
+    }
 
     CGSize size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
     self.scrollView.contentSize = size;

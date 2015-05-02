@@ -41,6 +41,10 @@ static NSOperationQueue *exchangeQueue;
 static NSOperationQueue *dataQueue;
 static NSOperationQueue *walletsQueue;
 static NSMutableDictionary *watchers;
+static NSMutableDictionary *currencyCodesCache;
+static NSMutableDictionary *currencySymbolCache;
+
+
 static CoreBridge *singleton = nil;
 
 @interface CoreBridge ()
@@ -72,6 +76,8 @@ static BOOL bOtpError = NO;
         [walletsQueue setMaxConcurrentOperationCount:1];
 
         watchers = [[NSMutableDictionary alloc] init];
+        currencySymbolCache = [[NSMutableDictionary alloc] init];
+        currencyCodesCache = [[NSMutableDictionary alloc] init];
 
         _localeAsCurrencyNum = @{
             @"AUD" : @CURRENCY_NUM_AUD,
@@ -1178,6 +1184,17 @@ static BOOL bOtpError = NO;
     return ok == true ? YES : NO;
 }
 
++ (BOOL)passwordExists
+{
+    tABC_Error error;
+    bool exists = false;
+    ABC_PasswordExists([[User Singleton].name UTF8String], &exists, &error);
+    if (error.code == ABC_CC_Ok) {
+        return exists == true ? YES : NO;
+    }
+    return YES;
+}
+
 + (BOOL)allWatchersReady
 {
     return YES;
@@ -1438,11 +1455,16 @@ static BOOL bOtpError = NO;
                                     ABC_BitCoin_Event_Callback,
                                     (__bridge void *) singleton,
                                     &error);
-            [CoreBridge otpSetError:cc];
             if (cc == ABC_CC_InvalidOTP) {
-                [singleton performSelectorOnMainThread:@selector(notifyOtpRequired:)
-                                            withObject:nil
-                                         waitUntilDone:NO];
+                if ([self getOtpSecret] != nil) {
+                    [singleton performSelectorOnMainThread:@selector(notifyOtpSkew:)
+                                                withObject:nil
+                                            waitUntilDone:NO];
+                } else {
+                    [singleton performSelectorOnMainThread:@selector(notifyOtpRequired:)
+                                                withObject:nil
+                                            waitUntilDone:NO];
+                }
             }
         }];
     }
@@ -1498,50 +1520,51 @@ static BOOL bOtpError = NO;
     return version;
 }
 
-+ (NSString *)currencyAbbrevLookup:(int) currencyNum
++ (NSString *)currencyAbbrevLookup:(int)currencyNum
 {
-    if (currencyNum == CURRENCY_NUM_USD) {
-        return @"USD";
-    } else if (currencyNum == CURRENCY_NUM_CAD) {
-        return @"CAD";
-    } else if (currencyNum == CURRENCY_NUM_MXN) {
-        return @"MXN";
-    } else if (currencyNum == CURRENCY_NUM_GBP) {
-        return @"GBP";
-    } else if (currencyNum == CURRENCY_NUM_CUP) {
-        return @"CUP";
-    } else if (currencyNum == CURRENCY_NUM_CNY) {
-        return @"CNY";
-    } else if (currencyNum == CURRENCY_NUM_EUR) {
-        return @"EUR";
-    } else if (currencyNum == CURRENCY_NUM_AUD) {
-        return @"AUD";
-    } else if (currencyNum == CURRENCY_NUM_HKD) {
-        return @"HKD";
-    } else if (currencyNum == CURRENCY_NUM_NZD) {
-        return @"NZD";
-    } else if (currencyNum == CURRENCY_NUM_PHP) {
-        return @"PHP";
-    } else {
-        return @"USD";
+    NSNumber *c = [NSNumber numberWithInt:currencyNum];
+    NSString *cached = [currencyCodesCache objectForKey:c];
+    if (cached != nil) {
+        return cached;
     }
+    tABC_Error error;
+    int currencyCount;
+    tABC_Currency *currencies = NULL;
+    ABC_GetCurrencies(&currencies, &currencyCount, &error);
+    if (error.code == ABC_CC_Ok) {
+        for (int i = 0; i < currencyCount; ++i) {
+            if (currencyNum == currencies[i].num) {
+                NSString *code = [NSString stringWithUTF8String:currencies[i].szCode];
+                [currencyCodesCache setObject:code forKey:c];
+                return code;
+            }
+        }
+    }
+    return @"";
 }
 
-+ (NSString *)currencySymbolLookup:(int) currencyNum
++ (NSString *)currencySymbolLookup:(int)currencyNum
 {
-    switch (currencyNum) {
-        case CURRENCY_NUM_CNY:
-            return @"¥";
-        case CURRENCY_NUM_EUR:
-            return @"€";
-        case CURRENCY_NUM_GBP:
-            return @"£";
-        case CURRENCY_NUM_CUP:
-        case CURRENCY_NUM_PHP:
-            return @"₱";
-            return @"₱";
-        default:
-            return @"$";
+    NSNumber *c = [NSNumber numberWithInt:currencyNum];
+    NSString *cached = [currencySymbolCache objectForKey:c];
+    if (cached != nil) {
+        return cached;
+    }
+    NSNumberFormatter *formatter = nil;
+    NSString *code = [CoreBridge currencyAbbrevLookup:currencyNum];
+    for (NSString *l in NSLocale.availableLocaleIdentifiers) {
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.locale = [NSLocale localeWithLocaleIdentifier:l];
+        if ([f.currencyCode isEqualToString:code]) {
+            formatter = f;
+            break;
+        }
+    }
+    if (formatter != nil) {
+        [currencySymbolCache setObject:formatter.currencySymbol forKey:c];
+        return formatter.currencySymbol;
+    } else {
+        return @"";
     }
 }
 
@@ -1847,6 +1870,11 @@ static BOOL bOtpError = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_OTP_REQUIRED object:self];
 }
 
+- (void)notifyOtpSkew:(NSArray *)params
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_OTP_SKEW object:self];
+}
+
 - (void)notifyExchangeRate:(NSArray *)params
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:self];
@@ -1890,6 +1918,22 @@ static BOOL bOtpError = NO;
 + (void)otpClearError
 {
     bOtpError = NO;
+}
+
++ (NSString *)getOtpSecret
+{
+    tABC_Error error;
+    NSString *secret = nil;
+    char *szSecret = NULL;
+    ABC_OtpKeyGet([[User Singleton].name UTF8String], &szSecret, &error);
+    if (error.code == ABC_CC_Ok && szSecret) {
+        secret = [NSString stringWithUTF8String:szSecret];
+    }
+    if (szSecret) {
+        free(szSecret);
+    }
+    NSLog(@("SECRET: %@"), secret);
+    return secret;
 }
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)

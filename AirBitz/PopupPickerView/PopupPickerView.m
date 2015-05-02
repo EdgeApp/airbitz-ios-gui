@@ -306,11 +306,16 @@ CGRect keyboardFrame;
             newFrame.origin.x += viewToPointTo.frame.size.width;
 //            newFrame.origin.x += popup.arrowImage.frame.size.width;  // offset by arrow width
         }
-        else // if (PopupPickerPosition_Left == position)
+        else if (PopupPickerPosition_Left == position)
         {
             // put it to the left of the positioning frame
             newFrame.origin.x -= newFrame.size.width;             
 //            newFrame.origin.x -= (popup.arrowImage.frame.size.width - ARROW_INSET);  // offset by arrow width
+        }
+        else // if (PopupPickerPosition_ScreenLeft == position)
+        {
+            CGRect screenRect = [[UIScreen mainScreen] bounds];
+            newFrame.origin.x = (screenRect.size.width / 2.0) - (newFrame.size.width / 2.0);
         }
         
         // makes sure the picker is within the parents bounds
@@ -413,6 +418,7 @@ CGRect keyboardFrame;
 
     // This will remove extra separators from tableview
     table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    table.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -649,7 +655,7 @@ CGRect keyboardFrame;
         }
     }
 	
-    cell.textLabel.font = [UIFont fontWithName:@"Lato-Black.ttf" size:17.0];
+    cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:17.0];
     cell.textLabel.numberOfLines = 1;
     cell.textLabel.text = [_strings objectAtIndex:row];
     cell.textLabel.textColor = [UIColor blackColor];
@@ -681,6 +687,10 @@ CGRect keyboardFrame;
         cell.accessoryView.hidden = NO;
         [button addTarget:self action:@selector(accessoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
     }
+    
+    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.bounds.size.height-1, 320, 0.5)];
+    separatorLineView.backgroundColor = [UIColor lightGrayColor];
+    [cell.contentView addSubview:separatorLineView];
     
     return cell;
 }

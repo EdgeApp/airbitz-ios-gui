@@ -70,6 +70,9 @@
     _passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
+    if (![CoreBridge passwordExists]) {
+        _passwordTextField.hidden = YES;
+    }
 
     _isOn = NO;
     [self updateTwoFactorUi:NO];

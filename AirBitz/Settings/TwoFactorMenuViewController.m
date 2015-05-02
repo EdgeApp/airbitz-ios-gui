@@ -6,6 +6,7 @@
 #import "Util.h"
 #import "ABC.h"
 #import "CoreBridge.h"
+#import "NSDate+Helper.h"
 
 @interface TwoFactorMenuViewController ()
     <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorScanViewControllerDelegate>
@@ -14,6 +15,8 @@
     TwoFactorScanViewController *_tfaScanViewController;
 }
 
+@property (nonatomic, weak) IBOutlet UILabel  *labelResetDesc;
+@property (nonatomic, weak) IBOutlet UILabel  *labelResetDate;
 @property (nonatomic, weak) IBOutlet UIButton *buttonReset;
 @property (nonatomic, weak) IBOutlet UIButton *buttonScan;
 
@@ -32,9 +35,50 @@
     return self;
 }
 
+- (NSDate *)parseDate:(NSString *)dateString
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+    return [dateFormatter dateFromString:dateString];
+}
+
+- (NSString *)formatDate:(NSDate *)date
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    dateFormatter.doesRelativeDateFormatting = YES;
+    return [dateFormatter stringFromDate:date];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    tABC_Error error;
+    char *szDate = NULL;
+    ABC_OtpResetDate(&szDate, &error);
+    if (error.code == ABC_CC_Ok) {
+        if (szDate == NULL || strlen(szDate) == 0) {
+            _labelResetDate.hidden = YES;
+            _labelResetDesc.hidden = YES;
+            _buttonReset.hidden = NO;
+        } else {
+            _buttonReset.hidden = YES;
+            _labelResetDate.hidden = NO;
+            _labelResetDesc.hidden = NO;
+            NSString *dateStr = [NSString stringWithUTF8String:szDate];
+            _labelResetDate.text = [NSString stringWithFormat:@"%@: %@",
+                                        NSLocalizedString(@"Reset Date", nil),
+                                        [self formatDate:[self parseDate:dateStr]]];
+        }
+    } else {
+        _buttonReset.hidden = NO;
+        _labelResetDate.hidden = YES;
+        _labelResetDesc.hidden = YES;
+    }
+    if (NULL != szDate) {
+        free(szDate);
+    }
 }
 
 - (IBAction)Back:(id)sender

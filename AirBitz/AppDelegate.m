@@ -12,6 +12,7 @@
 #import "CoreBridge.h"
 #import "CommonTypes.h"
 #import "PopupPickerView.h"
+#import "Plugin.h"
 #import "LocalSettings.h"
 #import "AudioController.h"
 #import "Config.h"
@@ -42,6 +43,8 @@ NSDate *logoutDate = NULL;
     [PopupPickerView initAll];
 
     [AudioController initAll];
+
+    [Plugin initAll];
 
     [CoreBridge initAll];
 

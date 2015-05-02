@@ -321,8 +321,13 @@
 + (void)checkPasswordAsync:(NSString *)password withSelector:(SEL)selector controller:(UIViewController *)controller
 {
     if (!password || [password length] == 0) {
-        [controller performSelectorOnMainThread:selector
-            withObject:[NSNumber numberWithBool:NO] waitUntilDone:NO];
+        if ([CoreBridge passwordExists]) {
+            [controller performSelectorOnMainThread:selector
+                withObject:[NSNumber numberWithBool:NO] waitUntilDone:NO];
+        } else {
+            [controller performSelectorOnMainThread:selector
+                withObject:[NSNumber numberWithBool:YES] waitUntilDone:NO];
+        }
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             BOOL matched = [CoreBridge passwordOk:password];
@@ -350,6 +355,14 @@
         }
     }
     return params;
+}
+
++ (BOOL)isValidCategory:(NSString *)category
+{
+    return [category hasPrefix:NSLocalizedString(@"Expense", nil)]
+            || [category hasPrefix:NSLocalizedString(@"Income", nil)]
+            || [category hasPrefix:NSLocalizedString(@"Transfer", nil)]
+            || [category hasPrefix:NSLocalizedString(@"Exchange", nil)];
 }
 
 @end

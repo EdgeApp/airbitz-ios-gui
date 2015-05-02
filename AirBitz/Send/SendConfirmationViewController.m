@@ -632,6 +632,7 @@
     self.transactionDetailsController.delegate = self;
     self.transactionDetailsController.transaction = transaction;
     self.transactionDetailsController.wallet = self.wallet;
+    self.transactionDetailsController.returnUrl = self.returnUrl;
     self.transactionDetailsController.bOldTransaction = NO;
     self.transactionDetailsController.transactionDetailsMode = TD_MODE_SENT;
     CGRect frame = self.view.bounds;
@@ -913,7 +914,7 @@
 #pragma mark - UITextField delegates
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    return _bAdvanceToTx;
+    return textField == _withdrawlPIN || _bAdvanceToTx;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField

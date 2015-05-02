@@ -157,6 +157,7 @@
 	_selectionTable.scrollEnabled = YES;
 	_selectionTable.allowsSelection = YES;
 	_selectionTable.userInteractionEnabled = YES;
+    _selectionTable.separatorStyle=UITableViewCellSeparatorStyleNone;
 	[self.button.superview insertSubview:_selectionTable belowSubview:self.button];
 	
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
@@ -294,8 +295,14 @@
 	if (nil == cell)
 	{
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	
+        
+        
+        UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.bounds.size.height-6, 320, 0.5)];/// change size as you need.
+        separatorLineView.backgroundColor = [UIColor grayColor];// you can also put image here
+        [cell.contentView addSubview:separatorLineView];
+    }
+    
+    cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:17.0];
 	cell.textLabel.text = [self.arrayItemsToSelect objectAtIndex:indexPath.row];
 	cell.textLabel.minimumScaleFactor = 0.5;
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;

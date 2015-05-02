@@ -15,7 +15,6 @@
 #import "CommonTypes.h"
 
 static const NSString *PROTOCOL = @"bridge://";
-static NSString *pluginId = @"com.glidera";
 
 @interface PluginViewController () <UIWebViewDelegate, SendConfirmationViewControllerDelegate>
 {
@@ -71,7 +70,7 @@ static NSString *pluginId = @"com.glidera";
                  @"navStackPop":NSStringFromSelector(@selector(navStackPop:))
     };
 
-    NSString *localFilePath = [[NSBundle mainBundle] pathForResource:@"glidera" ofType:@"html" inDirectory:@"plugins"];
+    NSString *localFilePath = [[NSBundle mainBundle] pathForResource:_plugin.sourceFile ofType:_plugin.sourceExtension inDirectory:@"plugins"];
     NSURLRequest *localRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localFilePath]];
     _webView.delegate = self;
     _webView.backgroundColor = [UIColor clearColor];
@@ -81,11 +80,10 @@ static NSString *pluginId = @"com.glidera";
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self resizeFrame:YES];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
+    [self resizeFrame:YES];
     [super viewWillAppear:animated];
 }
 
@@ -97,15 +95,14 @@ static NSString *pluginId = @"com.glidera";
 
 - (void)resizeFrame:(BOOL)withTabBar
 {
-    CGRect frame = _webView.frame;
+    CGRect webFrame = _webView.frame;
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
-    frame.size.height = screenFrame.size.height - HEADER_HEIGHT;
+    webFrame.size.height = screenFrame.size.height - HEADER_HEIGHT;
     if (withTabBar) {
-        frame.size.height -= TOOLBAR_HEIGHT;
+        webFrame.size.height -= TOOLBAR_HEIGHT;
     }
 
-    _webView.frame = frame;
-    _webView.scrollView.bounces = NO;
+    _webView.frame = webFrame;
     [_webView setNeedsLayout];
 }
 
@@ -115,6 +112,12 @@ static NSString *pluginId = @"com.glidera";
 }
 
 #pragma mark - WebView Methods
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSString *padding = @"document.body.style.margin='0';document.body.style.padding = '0'";
+    [_webView stringByEvaluatingJavaScriptFromString:padding];
+}
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -168,7 +171,9 @@ static NSString *pluginId = @"com.glidera";
 - (NSDictionary *)jsonResult:(id)val
 {
     NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
-    [d setObject:val forKey:@"result"];
+    if (val) {
+        [d setObject:val forKey:@"result"];
+    }
     [d setObject:[NSNumber numberWithBool:YES] forKey:@"success"];
     return d;
 }
@@ -368,7 +373,7 @@ static NSString *pluginId = @"com.glidera";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    if ([self pluginDataSet:pluginId withKey:[args objectForKey:@"key"] 
+    if ([self pluginDataSet:_plugin.pluginId withKey:[args objectForKey:@"key"] 
                                     withValue:[args objectForKey:@"value"]]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
@@ -380,7 +385,7 @@ static NSString *pluginId = @"com.glidera";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    if ([self pluginDataClear:pluginId]) {
+    if ([self pluginDataClear:_plugin.pluginId]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -390,7 +395,7 @@ static NSString *pluginId = @"com.glidera";
 - (void)readData:(NSDictionary *)params
 {
     NSDictionary *args = [params objectForKey:@"args"];
-    NSString *value = [self pluginDataGet:pluginId withKey:[args objectForKey:@"key"]];
+    NSString *value = [self pluginDataGet:_plugin.pluginId withKey:[args objectForKey:@"key"]];
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:value]];
 }
 
@@ -460,8 +465,9 @@ static NSString *pluginId = @"com.glidera";
     NSDictionary *args = [params objectForKey:@"args"];
 
     NSString *key = [args objectForKey:@"key"];
-    if ([@"GLIDERA_PARTNER_TOKEN" compare:key]  == NSOrderedSame) {
-        [self setJsResults:cbid withArgs:[self jsonResult:GLIDERA_API_KEY]];
+    NSString *value = [_plugin.env valueForKey:key];
+    if (value) {
+        [self setJsResults:cbid withArgs:[self jsonResult:value]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonResult:@""]];
     }
@@ -521,8 +527,6 @@ static NSString *pluginId = @"com.glidera";
 
     _navStack = [[NSMutableArray alloc] init];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
-
-    _backButton.hidden = YES;
 }
 
 - (void)navStackPush:(NSDictionary *)params
@@ -532,8 +536,6 @@ static NSString *pluginId = @"com.glidera";
 
     [_navStack addObject:[args objectForKey:@"path"]];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
-
-    _backButton.hidden = NO;
 }
 
 - (void)navStackPop:(NSDictionary *)params
@@ -543,8 +545,6 @@ static NSString *pluginId = @"com.glidera";
 
     [_navStack removeLastObject];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
-
-    _backButton.hidden = [_navStack count] == 0;
 }
 
 #pragma - Helper Functions
@@ -640,12 +640,16 @@ static NSString *pluginId = @"com.glidera";
     [Util animateOut:_sendConfirmationViewController parentController:self complete:^(void) {
         // hide calculator
         if (bBack) {
-            [self callJsFunction:_sendCbid withArgs:[self jsonError]];
+            [self callJsFunction:_sendCbid withArgs:[self jsonResult:@{@"back": @"true"}]];
         } else if (bError) {
             [self callJsFunction:_sendCbid withArgs:[self jsonError]];
         } else {
-            NSString *hex = [self getRawTransaction:_sendWallet.strUUID withTxId:txId];
-            [self callJsFunction:_sendCbid withArgs:[self jsonResult:hex]];
+            if (txId) {
+                NSString *hex = [self getRawTransaction:_sendWallet.strUUID withTxId:txId];
+                [self callJsFunction:_sendCbid withArgs:[self jsonResult:hex]];
+            } else {
+                [self callJsFunction:_sendCbid withArgs:[self jsonError]];
+            }
         }
         // clean up
         _sendConfirmationViewController = nil;
@@ -672,15 +676,14 @@ static NSString *pluginId = @"com.glidera";
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    [self performSelector:@selector(removeBar) withObject:nil afterDelay:0];
+    [self performSelector:@selector(stylizeKeyboard) withObject:nil afterDelay:0];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    [self resizeFrame:YES];
 }
 
-- (void)removeBar
+- (void)stylizeKeyboard
 {
     UIWindow *keyboardWindow = nil;
     for (UIWindow *windows in [[UIApplication sharedApplication] windows]) {
@@ -689,12 +692,55 @@ static NSString *pluginId = @"com.glidera";
             break;
         }
     }
-    
+
+    BOOL *picker = NO;
     for (UIView* peripheralView in [self getKeyboardViews:keyboardWindow]) {
-        
+        if ([[peripheralView description] hasPrefix:@"<UIWebSelectSinglePicker"]
+                || [[peripheralView description] hasPrefix:@"<UIDatePicker"]) {
+            picker = YES;
+            break;
+        }
+    }
+    if (picker) {
+        [self modPicker:keyboardWindow];
+    } else {
+        [self modKeyboard:keyboardWindow];
+    }
+    [self resizeFrame:YES];
+}
+
+- (void)modPicker:(UIWindow *)keyboardWindow {
+    for (UIView* peripheralView in [self getKeyboardViews:keyboardWindow]) {
+        if ([[peripheralView description] hasPrefix:@"<UIKBInputBackdropView"]) {
+            [[peripheralView layer] setOpacity:1.0];
+        }
+        if ([[peripheralView description] hasPrefix:@"<UIImageView"]) {
+            [[peripheralView layer] setOpacity:1.0];
+        }
+        if ([[peripheralView description] hasPrefix:@"<UIWebFormAccessory"]) {
+            [[peripheralView layer] setOpacity:1.0];
+
+            UIView *view = [peripheralView.subviews objectAtIndex:0];
+            if (view == nil) {
+                continue;
+            }
+            UIView *toolbar = [view.subviews objectAtIndex:0];
+            if (toolbar == nil) {
+                continue;
+            }
+            for (UIView *subview in toolbar.subviews) {
+                if ([[subview description] hasPrefix:@"<UIToolbarButton"]) {
+                    subview.hidden = YES;
+                }
+            }
+        }
+    }
+}
+
+- (void)modKeyboard:(UIWindow *)keyboardWindow {
+    for (UIView* peripheralView in [self getKeyboardViews:keyboardWindow]) {
         // hides the backdrop (iOS 7)
         if ([[peripheralView description] hasPrefix:@"<UIKBInputBackdropView"]) {
-            // check that this backdrop is for the accessory bar (at the top),
             // sparing the backdrop behind the main keyboard
             CGRect rect = peripheralView.frame;
             if (rect.origin.y == 0) {
@@ -715,7 +761,6 @@ static NSString *pluginId = @"com.glidera";
             } else {
                 [peripheralView removeFromSuperview];
             }
-            
         }
         // hides the thin grey line used to adorn the bar (iOS 6)
         if ([[peripheralView description] hasPrefix:@"<UIImageView"]) {
@@ -725,8 +770,7 @@ static NSString *pluginId = @"com.glidera";
 }
 
 - (NSArray*)getKeyboardViews:(UIView*)viewToSearch{
-    NSArray *subViews;
-    
+    NSArray *subViews = [[NSArray alloc] init];
     for (UIView *possibleFormView in viewToSearch.subviews) {
         if ([[possibleFormView description] hasPrefix: self.getKeyboardFirstLevelIdentifier]) {
             if([self IsAtLeastiOSVersion8]){

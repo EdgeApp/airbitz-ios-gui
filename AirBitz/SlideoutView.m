@@ -28,9 +28,11 @@
 
 @property (weak, nonatomic) IBOutlet UILabel                *conversionText;
 @property (weak, nonatomic) IBOutlet UILabel                *accountText;
+@property (weak, nonatomic) IBOutlet UIView                 *accountArrow;
 @property (weak, nonatomic) IBOutlet UIView                 *otherAccountsView;
 @property (weak, nonatomic) IBOutlet UIView                 *lowerViews;
 @property (weak, nonatomic) IBOutlet UIButton               *buySellButton;
+@property (weak, nonatomic) IBOutlet UIButton               *accountButton;
 @property (weak, nonatomic) IBOutlet UIButton               *logoutButton;
 @property (weak, nonatomic) IBOutlet UIButton               *settingsButton;
 @property (weak, nonatomic) IBOutlet UIView                 *buySellDivider;
@@ -65,12 +67,6 @@
     v.frame = f;
     v->_open = NO;
 
-    tABC_Error error;
-    bool isTestnet = false;
-    ABC_IsTestNet(&isTestnet, &error);
-    v->_buySellButton.hidden = isTestnet ? NO : YES;
-    v->_buySellDivider.hidden = isTestnet ? NO : YES;
-    
     UIColor *back = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.05];
     [v->_logoutButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_settingsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
@@ -117,7 +113,6 @@
     CGRect frame = self.accountPicker.frame;
     frame.size.width = self.otherAccountsView.frame.size.width;
     self.accountPicker.frame = frame;
-    self.accountPicker.pickerMaxChoicesVisible = 3;
     [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
     [self.accountPicker setRoundedAndShadowed:NO];
     
@@ -129,13 +124,21 @@
                             &_pAccountSettings,
                             &Error);
     int num = _pAccountSettings->currencyNum;
-    self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:NO];
+    self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:YES];
     
     
     self.accountText.text = [User Singleton].name;
+    [self.accountButton setAccessibilityLabel:[User Singleton].name];
     
     self.lowerViews.hidden = NO;
     self.otherAccountsView.hidden = YES;
+    self.otherAccountsView.clipsToBounds = YES;
+    
+    CGRect lframe = self.lowerViews.frame;
+    CGRect oframe = self.otherAccountsView.frame;
+    oframe.size.height = lframe.size.height;
+    self.lowerViews.frame = lframe;
+    self.otherAccountsView.frame = oframe;
     
     [self showSlideout:show withAnimation:YES];
 }
@@ -176,6 +179,8 @@
             self.frame = frame;
             [self removeBlockingButton:self->_parentView];
         }
+        [self rotateImage:self.accountArrow duration:0.0
+                    curve:UIViewAnimationCurveEaseIn radians:0];
     } else {
         if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWillOpen:)]) {
             [self.delegate slideoutWillOpen:self];
@@ -227,12 +232,19 @@
             [self.accountPicker updateChoices:self.otherAccounts] ;
             self.otherAccountsView.hidden = NO;
             self.lowerViews.hidden = YES;
+            self.lowerViews.userInteractionEnabled = NO;
+            
+            [self rotateImage:self.accountArrow duration:0.2
+                        curve:UIViewAnimationCurveEaseIn radians:M_PI-0.0001];
         }
     }
     else
     {
         self.otherAccountsView.hidden = YES;
         self.lowerViews.hidden = NO;
+        self.lowerViews.userInteractionEnabled = YES;
+        [self rotateImage:self.accountArrow duration:0.2
+                    curve:UIViewAnimationCurveEaseIn radians:0];
     }
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutAccount)]) {
         [self.delegate slideoutAccount];
@@ -252,6 +264,23 @@
         [self.delegate slideoutLogout];
     }
     [self removeBlockingButton:self->_parentView];
+}
+
+- (void)rotateImage:(UIView *)image duration:(NSTimeInterval)duration
+              curve:(int)curve radians:(CGFloat)radians
+{
+    // Setup the animation
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:duration];
+    [UIView setAnimationCurve:curve];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    // The transform matrix
+    CGAffineTransform transform = CGAffineTransformMakeRotation(radians);
+    image.transform = transform;
+    
+    // Commit the changes
+    [UIView commitAnimations];
 }
 
 - (BOOL)isOpen
@@ -379,6 +408,31 @@
     }
 }
 
+- (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
+{
+    _account = string;
+    NSString *message = [NSString stringWithFormat:@"Delete %@ on this device only?",
+                         string];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:NSLocalizedString(@"Delete Account", nil)
+                          message:message
+                          delegate:self
+                          cancelButtonTitle:@"No"
+                          otherButtonTitles:@"Yes", nil];
+    [alert show];
+    [self.accountPicker dismissPopupPicker];
+}
+
+- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
+{
+    CGRect popupWindowFrame = pickerTextView.popupPicker.frame;
+    
+    popupWindowFrame.size.width = pickerTextView.frame.size.width;
+    int height = IS_IPHONE4 ? 250 : 340;
+    popupWindowFrame.size.height = height;
+    pickerTextView.popupPicker.frame = popupWindowFrame;
+}
+
 - (void)removeAccount:(NSString *)account
 {
     tABC_Error error;
@@ -438,29 +492,6 @@
     self.otherAccounts = [stringArray copy];
 }
 
-
-- (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
-{
-    _account = string;
-    NSString *message = [NSString stringWithFormat:@"Delete %@ on this device only?",
-                         string];
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Delete Account", nil)
-                          message:NSLocalizedString(message, nil)
-                          delegate:self
-                          cancelButtonTitle:@"No"
-                          otherButtonTitles:@"Yes", nil];
-    [alert show];
-    [self.accountPicker dismissPopupPicker];
-}
-
-- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
-{
-    CGRect popupWindowFrame = pickerTextView.popupPicker.frame;
-    
-    popupWindowFrame.size.width = pickerTextView.frame.size.width;
-    pickerTextView.popupPicker.frame = popupWindowFrame;
-}
 
 - (void)showFadingError:(NSString *)message
 {

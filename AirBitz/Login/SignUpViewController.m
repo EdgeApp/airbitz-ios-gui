@@ -91,9 +91,10 @@
     self.buttonBlocker.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
 
-    if (self.strUserName
+    if ((self.strUserName
             && [self.strUserName length] > 0
-            && _mode == SignUpMode_SignUp) {
+            && _mode == SignUpMode_SignUp)
+            || _mode == SignUpMode_ChangePasswordNoVerify) {
         [self.passwordTextField becomeFirstResponder];
     } else {
         [self.userNameTextField becomeFirstResponder];
@@ -205,6 +206,29 @@
                         [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
                     }];
                 }
+                else if (_mode == SignUpMode_ChangePasswordNoVerify)
+                {
+                    // change password without old password
+                    // get their old pen
+                    [self blockUser:YES];
+                    // We post this to the Data Sync queue, so password is updated in between sync's
+                    [CoreBridge postToSyncQueue:^(void) {
+                        tABC_Error error;
+                        [CoreBridge stopWatchers];
+                        [CoreBridge stopQueues];
+                        
+                        const char * ignore = "ignore";
+                        
+                        // NOTE: userNameTextField is repurposed for current password
+                        ABC_ChangePassword([[User Singleton].name UTF8String], ignore,
+                                           [self.passwordTextField.text UTF8String], &error);
+                        [CoreBridge setupLoginPIN];
+                        
+                        _bSuccess = error.code == ABC_CC_Ok;
+                        _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&error]];
+                        [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
+                    }];
+                }
                 else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
                 {
                     [self blockUser:YES];
@@ -303,6 +327,26 @@
         self.reenterPasswordTextField.returnKeyType = UIReturnKeyNext;
         self.userNameTextField.secureTextEntry = NO;
     }
+    else if (mode == SignUpMode_ChangePasswordNoVerify
+            || (_mode == SignUpMode_ChangePassword && ![CoreBridge passwordExists]))
+    {
+        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
+        self.labelTitle.text = NSLocalizedString(@"Change Password", @"screen title");
+        [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
+        self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
+        self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
+        
+        self.imageUserName.hidden = NO;
+        self.imageReenterPassword.hidden = NO;
+        self.passwordTextField.hidden = NO;
+        self.reenterPasswordTextField.hidden = NO;
+        self.labelPasswordInfo.hidden = NO;
+        self.imagePassword.hidden = NO;
+        
+        self.reenterPasswordTextField.returnKeyType = UIReturnKeyDone;
+        
+        self.userNameTextField.secureTextEntry = YES;
+    }
     else if (mode == SignUpMode_ChangePassword)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
@@ -351,12 +395,12 @@
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.pinTextField.placeholder = NSLocalizedString(@"New PIN", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"Password", @"");
+        self.userNameTextField.hidden = ![CoreBridge passwordExists];
 
         self.labelPIN.hidden = NO;
         self.pinTextField.hidden = NO;
         self.imagePIN.hidden = NO;
         self.imageUserName.hidden = NO;
-        self.userNameTextField.hidden = NO; // used for old password in this case
 
         self.reenterPasswordTextField.returnKeyType = UIReturnKeyNext;
 
@@ -390,6 +434,13 @@
             [alert show];
         }
     }
+    else if (_mode == SignUpMode_ChangePasswordNoVerify
+            || (![CoreBridge passwordExists] 
+                && (_mode == SignUpMode_ChangePassword
+                    || _mode == SignUpMode_ChangePIN)))
+    {
+        bUserNameFieldIsValid = YES;
+    }
     else if (_mode != SignUpMode_ChangePasswordUsingAnswers) // the user name field is used for the old password in this case
     {
         // if the password is wrong
@@ -420,7 +471,7 @@
 	BOOL bNewPasswordFieldsAreValid = YES;
 
     // if we are signing up for a new account or changing our password
-    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePassword) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
+    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePassword) || (_mode == SignUpMode_ChangePasswordNoVerify) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
         double secondsToCrack;
         tABC_Error Error;
@@ -488,7 +539,7 @@
     // if we are signing up for a new account
     if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        if (self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
+        if ([CoreBridge passwordExists] && self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
@@ -650,7 +701,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if ((_mode == SignUpMode_ChangePassword) && (textField == self.reenterPasswordTextField))
+    if ((_mode == SignUpMode_ChangePassword || _mode == SignUpMode_ChangePasswordNoVerify) && (textField == self.reenterPasswordTextField))
     {
 		[textField resignFirstResponder];
     }

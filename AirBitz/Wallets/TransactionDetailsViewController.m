@@ -1277,6 +1277,9 @@ typedef enum eRequestType
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:self userInfo:dictNotification];
         }
     }
+    if (self.returnUrl || [self.returnUrl length] > 0) {
+        [[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:self.returnUrl]];
+    }
 }
 
 #pragma mark - Calculator delegates

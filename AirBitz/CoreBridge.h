@@ -67,6 +67,7 @@
 + (void)login;
 + (void)logout;
 + (BOOL)passwordOk:(NSString *)password;
++ (BOOL)passwordExists;
 + (BOOL)allWatchersReady;
 + (BOOL)watcherIsReady:(NSString *)UUID;
 + (void)connectWatchers;
@@ -86,7 +87,7 @@
 + (bool)isTestNet;
 + (NSString *)coreVersion;
 + (NSString *)currencyAbbrevLookup:(int) currencyNum;
-+ (NSString *)currencySymbolLookup:(int) currencyNum;
++ (NSString *)currencySymbolLookup:(int)currencyNum;
 + (int)getCurrencyNumOfLocale;
 + (bool)setDefaultCurrencyNum:(int)currencyNum;
 + (void)setupNewAccount:(FadingAlertView *)fadingAlert;

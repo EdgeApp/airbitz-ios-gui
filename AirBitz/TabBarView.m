@@ -109,6 +109,29 @@
     }
 }
 
+-(void)highlighButtonAtIndex:(int)index
+{
+    for (UIView *view in self.subviews)
+    {
+        if ([view isKindOfClass:[TabBarButton class]])
+        {
+            TabBarButton *button = (TabBarButton *)view;
+            if (button.tag == index)
+            {
+                if (selectedButton != button)
+                {
+                    [selectedButton deselect];
+                    [button select];
+                    selectedButton = button;
+                    [self updateDividers];
+                }
+            } else {
+                [button deselect];
+            }
+        }
+    }
+}
+
 -(void)selectButtonAtPoint:(CGPoint)point
 {
     for(UIView *view in self.subviews)

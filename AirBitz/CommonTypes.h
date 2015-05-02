@@ -107,6 +107,7 @@ typedef enum eTabBarButton
 #define NOTIFICATION_REMOTE_PASSWORD_CHANGE             @"Remote_Password_Change"
 #define NOTIFICATION_BLOCK_HEIGHT_CHANGE                @"Block_Height_Change"
 #define NOTIFICATION_OTP_REQUIRED                       @"Otp_Required"
+#define NOTIFICATION_OTP_SKEW                           @"Otp_Skew"
 #define NOTIFICATION_EXCHANGE_RATE_CHANGE               @"Exchange_Rate_Change"
 #define NOTIFICATION_DATA_SYNC_UPDATE                   @"Data_Sync_Update"
 #define NOTIFICATION_HANDLE_BITCOIN_URI                 @"Handle_Bitcoin_URI"

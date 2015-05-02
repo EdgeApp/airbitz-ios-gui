@@ -16,7 +16,8 @@ typedef enum ePopupPickerPosition
     PopupPickerPosition_Below,
     PopupPickerPosition_Above,
     PopupPickerPosition_Left,
-    PopupPickerPosition_Right
+    PopupPickerPosition_Right,
+    PopupPickerPosition_ScreenLeft
 } tPopupPickerPosition;
 
 @interface PopupPickerView : UIView

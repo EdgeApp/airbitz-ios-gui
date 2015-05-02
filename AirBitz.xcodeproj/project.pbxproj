@@ -1085,6 +1085,9 @@
 		DA1E7CA71A8C187F007C6C05 /* StylizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */; };
 		DA1E7CA81A8C187F007C6C05 /* StylizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */; };
 		DA1E7CA91A8C187F007C6C05 /* StylizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */; };
+		DA4710631AD7363F006ACF2A /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4710621AD7363F006ACF2A /* BuySellViewController.m */; };
+		DA4710641AD7363F006ACF2A /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4710621AD7363F006ACF2A /* BuySellViewController.m */; };
+		DA4710651AD7363F006ACF2A /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4710621AD7363F006ACF2A /* BuySellViewController.m */; };
 		DA4CFE45196F897B002CFD49 /* drag_bar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */; };
 		DA4CFE46196F897B002CFD49 /* drag_bar~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */; };
 		DA5509581A928E1300F57106 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509571A928E1300F57106 /* StylizedTextField2.m */; };
@@ -1696,6 +1699,18 @@
 		DAE866231A88A58A00A17BD3 /* btn_export@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147018C012B500AEA789 /* btn_export@2x~iphone.png */; };
 		DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
 		DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
+		DAFF8FEB1ADC9186000BCBEF /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFF8FEA1ADC9186000BCBEF /* Plugin.m */; };
+		DAFF8FEC1ADC9186000BCBEF /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFF8FEA1ADC9186000BCBEF /* Plugin.m */; };
+		DAFF8FED1ADC9186000BCBEF /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFF8FEA1ADC9186000BCBEF /* Plugin.m */; };
+		DAFF8FF41ADC9A46000BCBEF /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFF8FF31ADC9A46000BCBEF /* BuySellCell.m */; };
+		DAFF8FF51ADC9A46000BCBEF /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFF8FF31ADC9A46000BCBEF /* BuySellCell.m */; };
+		DAFF8FF61ADC9A46000BCBEF /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFF8FF31ADC9A46000BCBEF /* BuySellCell.m */; };
+		E2067B7A1AC2FDE000E17C36 /* icon_more_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B781AC2FDE000E17C36 /* icon_more_dark.png */; };
+		E2067B7B1AC2FDE000E17C36 /* icon_more_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B781AC2FDE000E17C36 /* icon_more_dark.png */; };
+		E2067B7C1AC2FDE000E17C36 /* icon_more_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B781AC2FDE000E17C36 /* icon_more_dark.png */; };
+		E2067B7D1AC2FDE000E17C36 /* icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B791AC2FDE000E17C36 /* icon_more.png */; };
+		E2067B7E1AC2FDE000E17C36 /* icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B791AC2FDE000E17C36 /* icon_more.png */; };
+		E2067B7F1AC2FDE000E17C36 /* icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B791AC2FDE000E17C36 /* icon_more.png */; };
 		E2067B8A1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */; };
 		E2067B8B1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */; };
 		E2067B8C1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */; };
@@ -1717,6 +1732,13 @@
 		E2067BA71AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */; };
 		E2067BA81AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */; };
 		E2067BA91AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */; };
+		E227243A1ADD89960032FCDB /* icon_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E23793C61AD841A8005FB7D9 /* icon_arrow.png */; };
+		E227243F1ADD89970032FCDB /* icon_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E23793C61AD841A8005FB7D9 /* icon_arrow.png */; };
+		E22724401ADD899A0032FCDB /* ico_nav_directory_white@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E2C7D2C91AD5E217007F79C4 /* ico_nav_directory_white@2x~iphone.png */; };
+		E22724411ADD899B0032FCDB /* ico_nav_directory_white@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E2C7D2C91AD5E217007F79C4 /* ico_nav_directory_white@2x~iphone.png */; };
+		E22724421ADD899E0032FCDB /* ico_nav_directory_white~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E2C7D2CA1AD5E217007F79C4 /* ico_nav_directory_white~iphone.png */; };
+		E22724431ADD899F0032FCDB /* ico_nav_directory_white~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E2C7D2CA1AD5E217007F79C4 /* ico_nav_directory_white~iphone.png */; };
+		E23793C71AD841A8005FB7D9 /* icon_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E23793C61AD841A8005FB7D9 /* icon_arrow.png */; };
 		E2C7D2CB1AD5E217007F79C4 /* ico_nav_directory_white@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E2C7D2C91AD5E217007F79C4 /* ico_nav_directory_white@2x~iphone.png */; };
 		E2C7D2CC1AD5E217007F79C4 /* ico_nav_directory_white~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E2C7D2CA1AD5E217007F79C4 /* ico_nav_directory_white~iphone.png */; };
 /* End PBXBuildFile section */
@@ -2451,6 +2473,8 @@
 		DA15B98C1AC0D72500B229A5 /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginViewController.m; sourceTree = "<group>"; };
 		DA1E7CA51A8C187F007C6C05 /* StylizedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedButton.h; sourceTree = "<group>"; };
 		DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedButton.m; sourceTree = "<group>"; };
+		DA4710611AD7363F006ACF2A /* BuySellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuySellViewController.h; sourceTree = "<group>"; };
+		DA4710621AD7363F006ACF2A /* BuySellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuySellViewController.m; sourceTree = "<group>"; };
 		DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar@2x~iphone.png"; sourceTree = "<group>"; };
 		DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar~iphone.png"; sourceTree = "<group>"; };
 		DA5509561A928E1300F57106 /* StylizedTextField2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField2.h; sourceTree = "<group>"; };
@@ -2500,6 +2524,12 @@
 		DAE866291A88A58A00A17BD3 /* Airbitz Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAFC799E1A81CCBE00E9039D /* TwoFactorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorMenuViewController.h; sourceTree = "<group>"; };
 		DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorMenuViewController.m; sourceTree = "<group>"; };
+		DAFF8FE91ADC9186000BCBEF /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
+		DAFF8FEA1ADC9186000BCBEF /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
+		DAFF8FF21ADC9A46000BCBEF /* BuySellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuySellCell.h; sourceTree = "<group>"; };
+		DAFF8FF31ADC9A46000BCBEF /* BuySellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuySellCell.m; sourceTree = "<group>"; };
+		E2067B781AC2FDE000E17C36 /* icon_more_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_more_dark.png; sourceTree = "<group>"; };
+		E2067B791AC2FDE000E17C36 /* icon_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_more.png; sourceTree = "<group>"; };
 		E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_account_secure.png; sourceTree = "<group>"; };
 		E2067B861AC2FDFB00E17C36 /* icon_bitcoin_symbol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bitcoin_symbol.png; sourceTree = "<group>"; };
 		E2067B871AC2FDFB00E17C36 /* icon_exchange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_exchange.png; sourceTree = "<group>"; };
@@ -2508,6 +2538,7 @@
 		E2067B991AC30A7200E17C36 /* SlideoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideoutView.h; sourceTree = "<group>"; };
 		E2067B9A1AC30A7200E17C36 /* SlideoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideoutView.m; sourceTree = "<group>"; };
 		E2067BA61AC312B300E17C36 /* SlideoutView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SlideoutView~iphone.xib"; sourceTree = "<group>"; };
+		E23793C61AD841A8005FB7D9 /* icon_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrow.png; sourceTree = "<group>"; };
 		E2C7D2C91AD5E217007F79C4 /* ico_nav_directory_white@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_nav_directory_white@2x~iphone.png"; sourceTree = "<group>"; };
 		E2C7D2CA1AD5E217007F79C4 /* ico_nav_directory_white~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_nav_directory_white~iphone.png"; sourceTree = "<group>"; };
 		E47C0EC32EE29D34C5A03A0B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3079,7 +3110,6 @@
 		B5675B5118A17F6F002E0703 /* AirBitz */ = {
 			isa = PBXGroup;
 			children = (
-				E25451411AC0E141004ACD70 /* Slideout */,
 				7D5E1CB919AFB21F00943A81 /* ABC-testnet */,
 				4C08A6D118C29CDC0071B87C /* ABC */,
 				4C08A6E318C2B1B60071B87C /* ABC Data */,
@@ -3147,6 +3177,7 @@
 				B5004A2618A5C755003560A4 /* Server.h */,
 				B5C0A9B218EA0D99008F302C /* Settings */,
 				DAE2761F1A9BF66000E24523 /* SignUp */,
+				E25451411AC0E141004ACD70 /* Slideout */,
 				4C3C309A19199AB6006923DE /* StrokeGradientButton */,
 				DA1E7CA51A8C187F007C6C05 /* StylizedButton.h */,
 				DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */,
@@ -3218,6 +3249,7 @@
 		B5675B9F18A19A84002E0703 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				E23793C61AD841A8005FB7D9 /* icon_arrow.png */,
 				E2C7D2C91AD5E217007F79C4 /* ico_nav_directory_white@2x~iphone.png */,
 				E2C7D2CA1AD5E217007F79C4 /* ico_nav_directory_white~iphone.png */,
 				E2067B841AC2FDFB00E17C36 /* Slideout */,
@@ -3811,6 +3843,12 @@
 		DA15B9891AC0D72500B229A5 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				DAFF8FF21ADC9A46000BCBEF /* BuySellCell.h */,
+				DAFF8FF31ADC9A46000BCBEF /* BuySellCell.m */,
+				DAFF8FE91ADC9186000BCBEF /* Plugin.h */,
+				DAFF8FEA1ADC9186000BCBEF /* Plugin.m */,
+				DA4710611AD7363F006ACF2A /* BuySellViewController.h */,
+				DA4710621AD7363F006ACF2A /* BuySellViewController.m */,
 				DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */,
 				DA15B98B1AC0D72500B229A5 /* PluginViewController.h */,
 				DA15B98C1AC0D72500B229A5 /* PluginViewController.m */,
@@ -4121,6 +4159,7 @@
 				7D98AD9319A7C550003D2BF6 /* icon_rightArrow~iphone.png in Resources */,
 				7D98AD9419A7C550003D2BF6 /* swipe-arrow@2x~iphone.png in Resources */,
 				7D98AD9519A7C550003D2BF6 /* icon_export_google@2x~iphone.png in Resources */,
+				E22724421ADD899E0032FCDB /* ico_nav_directory_white~iphone.png in Resources */,
 				7D98AD9619A7C550003D2BF6 /* icon_send@2x~iphone.png in Resources */,
 				7D98AD9719A7C550003D2BF6 /* 2-bars@2x.png in Resources */,
 				7D98AD9819A7C550003D2BF6 /* emboss_down@2x~iphone.png in Resources */,
@@ -4205,6 +4244,7 @@
 				7D98ADDF19A7C550003D2BF6 /* btn_calc_done@2x~iphone.png in Resources */,
 				7D98ADE019A7C550003D2BF6 /* BLE_connected@2x.png in Resources */,
 				7D98ADE119A7C550003D2BF6 /* btn_dot@2x~iphone.png in Resources */,
+				E227243A1ADD89960032FCDB /* icon_arrow.png in Resources */,
 				7D98ADE219A7C550003D2BF6 /* btn_deleteCategory~iphone.png in Resources */,
 				7D98ADE319A7C550003D2BF6 /* table_cell_middle~iphone.png in Resources */,
 				7D98ADE419A7C550003D2BF6 /* btn_big_green@2x~iphone.png in Resources */,
@@ -4334,6 +4374,7 @@
 				7D98AE5319A7C550003D2BF6 /* divider~iphone.png in Resources */,
 				7D98AE5419A7C550003D2BF6 /* btn_use_max@2x~iphone.png in Resources */,
 				7D98AE5519A7C550003D2BF6 /* San Diego.gpx in Resources */,
+				E22724401ADD899A0032FCDB /* ico_nav_directory_white@2x~iphone.png in Resources */,
 				7D98AE5619A7C550003D2BF6 /* btn_2@2x~iphone.png in Resources */,
 				E2067BA81AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */,
 				7D98AE5719A7C550003D2BF6 /* AnnotationContentView.xib in Resources */,
@@ -4472,6 +4513,7 @@
 				685E6DF0197DCB7800EC95F8 /* btn_max~iphone.png in Resources */,
 				B59C14CD18C012B500AEA789 /* btn_1~iphone.png in Resources */,
 				DA76938D1964FE8A0022EE64 /* sms_btn~iphone.png in Resources */,
+				E23793C71AD841A8005FB7D9 /* icon_arrow.png in Resources */,
 				B59C151818C012B500AEA789 /* icon_directory@2x~iphone.png in Resources */,
 				B59C151918C012B500AEA789 /* icon_directory_dark@2x~iphone.png in Resources */,
 				B5137C0718A40A8400DA4A34 /* Lato-Black.ttf in Resources */,
@@ -5089,6 +5131,7 @@
 				DAE8659F1A88A58A00A17BD3 /* icon_settings@2x~iphone.png in Resources */,
 				DAE865A01A88A58A00A17BD3 /* Images.xcassets in Resources */,
 				DAE865A11A88A58A00A17BD3 /* bd_highlighted_cell_top~iphone.png in Resources */,
+				E22724411ADD899B0032FCDB /* ico_nav_directory_white@2x~iphone.png in Resources */,
 				DAE865A21A88A58A00A17BD3 /* btn_forgot_password_arrow.png in Resources */,
 				DAE865A31A88A58A00A17BD3 /* bd_icon_facebook@2x~iphone.png in Resources */,
 				DAE865A41A88A58A00A17BD3 /* bd_cell_top@2x~iphone.png in Resources */,
@@ -5118,6 +5161,7 @@
 				DAE865BC1A88A58A00A17BD3 /* bd_icon_location~iphone.png in Resources */,
 				DAE865BD1A88A58A00A17BD3 /* icon_directory_dark~iphone.png in Resources */,
 				DAE865BE1A88A58A00A17BD3 /* Lato-Italic.ttf in Resources */,
+				E22724431ADD899F0032FCDB /* ico_nav_directory_white~iphone.png in Resources */,
 				DAE865BF1A88A58A00A17BD3 /* btn_plus~iphone.png in Resources */,
 				DAE865C01A88A58A00A17BD3 /* btn_big_blue2~iphone.png in Resources */,
 				DAE865C11A88A58A00A17BD3 /* btn_blue~iphone.png in Resources */,
@@ -5151,6 +5195,7 @@
 				DAE865DD1A88A58A00A17BD3 /* bd_cell_bottom@2x~iphone.png in Resources */,
 				DAE865DE1A88A58A00A17BD3 /* icon_export_email@2x~iphone.png in Resources */,
 				DAE865DF1A88A58A00A17BD3 /* btn_email~iphone.png in Resources */,
+				E227243F1ADD89970032FCDB /* icon_arrow.png in Resources */,
 				DAE865E01A88A58A00A17BD3 /* btn_unselected@2x~iphone.png in Resources */,
 				DAE865E11A88A58A00A17BD3 /* email_btn@2x~iphone.png in Resources */,
 				DAE865E21A88A58A00A17BD3 /* transactionDetails.html in Resources */,
@@ -5380,6 +5425,7 @@
 				7D98ACB619A7C550003D2BF6 /* BackgroundImageManager.m in Sources */,
 				7D98ACB719A7C550003D2BF6 /* LoginViewController.m in Sources */,
 				7D98ACB819A7C550003D2BF6 /* DirectoryViewController.m in Sources */,
+				DAFF8FF51ADC9A46000BCBEF /* BuySellCell.m in Sources */,
 				4CA4672C19B604CA004F9923 /* DL_URLServer.m in Sources */,
 				7D98ACB919A7C550003D2BF6 /* ShowWalletQRViewController.m in Sources */,
 				DA1333911A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */,
@@ -5408,6 +5454,7 @@
 				7D98ACCA19A7C550003D2BF6 /* CategoriesViewController.m in Sources */,
 				7D98ACCB19A7C550003D2BF6 /* InfoView.m in Sources */,
 				7D98ACCC19A7C550003D2BF6 /* WalletMakerView.m in Sources */,
+				DAFF8FEC1ADC9186000BCBEF /* Plugin.m in Sources */,
 				7D98ACCD19A7C550003D2BF6 /* PopupWheelPickerView.m in Sources */,
 				7D98ACCE19A7C550003D2BF6 /* UIImage+Colorize.m in Sources */,
 				7D98ACCF19A7C550003D2BF6 /* WalletHeaderView.m in Sources */,
@@ -5489,6 +5536,7 @@
 				7D7FB25E1A0847B300E4BB44 /* PINReLoginViewController.m in Sources */,
 				7D98AD0719A7C550003D2BF6 /* Util.m in Sources */,
 				7D98AD0819A7C550003D2BF6 /* ExportWalletViewController.m in Sources */,
+				DA4710641AD7363F006ACF2A /* BuySellViewController.m in Sources */,
 				7D98AD0919A7C550003D2BF6 /* LatoLabel.m in Sources */,
 				7D98AD0A19A7C550003D2BF6 /* CalculatorView.m in Sources */,
 				7D98AD0B19A7C550003D2BF6 /* ButtonSelectorView.m in Sources */,
@@ -5523,6 +5571,7 @@
 				B5F2E9C118DA911A008ACF88 /* LoginViewController.m in Sources */,
 				B5C0A97D18EA0A7F008F302C /* DirectoryViewController.m in Sources */,
 				4CA4672B19B604CA004F9923 /* DL_URLServer.m in Sources */,
+				DAFF8FF41ADC9A46000BCBEF /* BuySellCell.m in Sources */,
 				7DFD22E31A1E716C008C43FB /* UIPhotoGalleryView.m in Sources */,
 				B5C0A9CB18EA0FF0008F302C /* ShowWalletQRViewController.m in Sources */,
 				DA1333901A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */,
@@ -5551,6 +5600,7 @@
 				B55A031D18EB569000845090 /* CategoriesViewController.m in Sources */,
 				B561E1A618D2572D002DCDC2 /* InfoView.m in Sources */,
 				B5FD392F18EFC30E00BE2670 /* WalletMakerView.m in Sources */,
+				DAFF8FEB1ADC9186000BCBEF /* Plugin.m in Sources */,
 				4C3C309819198B33006923DE /* PopupWheelPickerView.m in Sources */,
 				B5376E1D18B55D920099EF8F /* UIImage+Colorize.m in Sources */,
 				B5635A25193D0F8700345AEE /* WalletHeaderView.m in Sources */,
@@ -5632,6 +5682,7 @@
 				4C5D8C5B192AB8E70015BB3C /* Util.m in Sources */,
 				4C5D8C8E1933C7DC0015BB3C /* ExportWalletViewController.m in Sources */,
 				B5137C1518A40EDA00DA4A34 /* LatoLabel.m in Sources */,
+				DA4710631AD7363F006ACF2A /* BuySellViewController.m in Sources */,
 				B56553EF18ECC8E0005B35E1 /* CalculatorView.m in Sources */,
 				B56553F218EDDCF8005B35E1 /* ButtonSelectorView.m in Sources */,
 				B5C0A97518EA0A42008F302C /* BD_Hours_Cell.m in Sources */,
@@ -5666,6 +5717,7 @@
 				DAE864011A88A58A00A17BD3 /* LoginViewController.m in Sources */,
 				DAE864021A88A58A00A17BD3 /* DirectoryViewController.m in Sources */,
 				DAE864031A88A58A00A17BD3 /* DL_URLServer.m in Sources */,
+				DAFF8FF61ADC9A46000BCBEF /* BuySellCell.m in Sources */,
 				DAE864041A88A58A00A17BD3 /* UIPhotoGalleryView.m in Sources */,
 				DAE864051A88A58A00A17BD3 /* ShowWalletQRViewController.m in Sources */,
 				DAE864061A88A58A00A17BD3 /* TwoFactorShowViewController.m in Sources */,
@@ -5694,6 +5746,7 @@
 				DAE8641B1A88A58A00A17BD3 /* CategoriesViewController.m in Sources */,
 				DAE8641C1A88A58A00A17BD3 /* InfoView.m in Sources */,
 				DAE8641D1A88A58A00A17BD3 /* WalletMakerView.m in Sources */,
+				DAFF8FED1ADC9186000BCBEF /* Plugin.m in Sources */,
 				DAE8641E1A88A58A00A17BD3 /* PopupWheelPickerView.m in Sources */,
 				DAE8641F1A88A58A00A17BD3 /* UIImage+Colorize.m in Sources */,
 				DAE864201A88A58A00A17BD3 /* WalletHeaderView.m in Sources */,
@@ -5775,6 +5828,7 @@
 				DAE864631A88A58A00A17BD3 /* Util.m in Sources */,
 				DAE864641A88A58A00A17BD3 /* ExportWalletViewController.m in Sources */,
 				DAE864651A88A58A00A17BD3 /* LatoLabel.m in Sources */,
+				DA4710651AD7363F006ACF2A /* BuySellViewController.m in Sources */,
 				DAE864661A88A58A00A17BD3 /* CalculatorView.m in Sources */,
 				DAE864671A88A58A00A17BD3 /* ButtonSelectorView.m in Sources */,
 				DAE864681A88A58A00A17BD3 /* BD_Hours_Cell.m in Sources */,
