@@ -425,22 +425,53 @@ typedef enum eAppMode
 
 -(void)changeNavBarTitle: (NSString*) titleText isButton:(BOOL)isButton
 {
-    UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
-    titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
-    titleLabelButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     if (isButton)
     {
+        UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
+        titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
+        titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
         [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
+        [titleLabelButton addTarget:self action:@selector(didTapTitleView:) forControlEvents:UIControlEventTouchUpInside];
+
+        self.navBar.topItem.titleView = titleLabelButton;
     }
     else
     {
-        [titleLabelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.navBar.topItem.title = titleText;
     }
 
+
+}
+
+-(void)changeNavBarSide: (NSString*) titleText side:(tNavBarSide)navBarSide enable:(BOOL)enable
+{
+    UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
+    titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
+    titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
+
+    [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
     [titleLabelButton addTarget:self action:@selector(didTapTitleView:) forControlEvents:UIControlEventTouchUpInside];
 
-    self.navBar.topItem.titleView = titleLabelButton;
+    if (!enable)
+    {
+        titleLabelButton.hidden = true;
+    }
+
+    UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:titleLabelButton];
+
+    if (navBarSide == NAV_BAR_LEFT)
+    {
+        titleLabelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        self.navBar.topItem.leftBarButtonItem = buttonItem;
+
+    }
+    else if (navBarSide == NAV_BAR_RIGHT)
+    {
+        titleLabelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        self.navBar.topItem.rightBarButtonItem = buttonItem;
+    }
 
 }
 
@@ -456,26 +487,9 @@ typedef enum eAppMode
 				_selectedViewController = _directoryViewController;
 				[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
 
-
-                UIButton *leftButton = [UIButton buttonWithType: UIButtonTypeSystem];
-                [leftButton setTitle:@"BACK" forState:UIControlStateNormal];
-                leftButton.frame = CGRectMake(0, 0, 70, 44);
-                leftButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
-                leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-                [leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-
-                UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-
-                UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RIGHT" style:UIBarButtonItemStyleBordered
-                                                                              target:nil action:nil];
-
-
-                [self changeNavBarTitle:@"My Title" isButton:true];
-
-
-                self.navBar.topItem.leftBarButtonItem = leftButtonItem;
-
-                self.navBar.topItem.rightBarButtonItem = rightButtonItem;
+                [self changeNavBarTitle:@"Directory" isButton:false];
+                [self changeNavBarSide:@"LEFT" side:NAV_BAR_LEFT enable:false];
+                [self changeNavBarSide:@"HELP" side:NAV_BAR_RIGHT enable:true];
 
 			}
 			break;

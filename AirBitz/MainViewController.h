@@ -10,6 +10,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum eNavBarSide
+{
+    NAV_BAR_LEFT,
+    NAV_BAR_RIGHT
+} tNavBarSide;
+
 @interface MainViewController : UIViewController
 
 @end
