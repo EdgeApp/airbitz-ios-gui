@@ -26,6 +26,7 @@
 #import "User.h"
 #import "Config.h"
 #import "Util.h"
+#import "Theme.h"
 #import "CoreBridge.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
@@ -116,6 +117,7 @@ typedef enum eAppMode
     [super viewDidLoad];
 
     [User initAll];
+    [Theme initAll];
 
     NSMutableData *seedData = [[NSMutableData alloc] init];
     [self fillSeedData:seedData];
@@ -421,6 +423,27 @@ typedef enum eAppMode
     }
 }
 
+-(void)changeNavBarTitle: (NSString*) titleText isButton:(BOOL)isButton
+{
+    UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
+    titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
+    titleLabelButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    if (isButton)
+    {
+        [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
+    }
+    else
+    {
+        [titleLabelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
+
+    [titleLabelButton addTarget:self action:@selector(didTapTitleView:) forControlEvents:UIControlEventTouchUpInside];
+
+    self.navBar.topItem.titleView = titleLabelButton;
+
+}
+
 -(void)launchViewControllerBasedOnAppMode
 {
 	switch(_appMode)
@@ -432,8 +455,28 @@ typedef enum eAppMode
 				[_selectedViewController.view removeFromSuperview];
 				_selectedViewController = _directoryViewController;
 				[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-                self.navBar.topItem.title = @"Directory";
-                
+
+
+                UIButton *leftButton = [UIButton buttonWithType: UIButtonTypeSystem];
+                [leftButton setTitle:@"BACK" forState:UIControlStateNormal];
+                leftButton.frame = CGRectMake(0, 0, 70, 44);
+                leftButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
+                leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+                [leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+
+                UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+
+                UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RIGHT" style:UIBarButtonItemStyleBordered
+                                                                              target:nil action:nil];
+
+
+                [self changeNavBarTitle:@"My Title" isButton:true];
+
+
+                self.navBar.topItem.leftBarButtonItem = leftButtonItem;
+
+                self.navBar.topItem.rightBarButtonItem = rightButtonItem;
+
 			}
 			break;
 		}
@@ -506,6 +549,11 @@ typedef enum eAppMode
             }
 			break;
 	}
+}
+
+- (IBAction)didTapTitleView:(id) sender
+{
+    NSLog(@"Title tap");
 }
 
 -(void)showTabBarAnimated:(BOOL)animated
