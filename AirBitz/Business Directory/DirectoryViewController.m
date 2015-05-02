@@ -8,6 +8,7 @@
 //
 
 #import "DirectoryViewController.h"
+#import "MainViewController.h"
 #import "RibbonView.h"
 #import "topOverviewCell.h"
 #import "overviewCell.h"
@@ -149,9 +150,7 @@ typedef enum eMapDisplayState
 @property (nonatomic, weak) IBOutlet UIView *searchView;
 @property (nonatomic, weak) IBOutlet UITableView *searchCluesTableView;
 @property (nonatomic, weak) IBOutlet MapView *mapView;
-@property (nonatomic, weak) IBOutlet UIButton *btn_back;
 @property (nonatomic, weak) IBOutlet UIButton *btn_locateMe;
-@property (nonatomic, weak) IBOutlet UIButton *btn_info;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *searchIndicator;
 @end
@@ -190,6 +189,10 @@ typedef enum eMapDisplayState
     }*/
 
     //NSString *paramDataString = [self createSearchParamString];
+
+    [MainViewController changeNavBarTitle:@"Directory"];
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBarSide:@"INFO" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
     currentPage = 0;
     //[self loadSearchResultsPage:currentPage];
@@ -380,7 +383,7 @@ typedef enum eMapDisplayState
     self.view.frame = frame;
 }
 
-- (IBAction)info
+- (IBAction)info: (UIButton *)sender
 {
     //spawn infoView
     InfoView *iv = [InfoView CreateWithDelegate: self];
@@ -425,45 +428,13 @@ typedef enum eMapDisplayState
 - (void)hideBackButtonAnimated: (BOOL)animated
 {
     //NSLog(@"Hiding back button");
-    if (animated)
-    {
-        [UIView animateWithDuration: 0.5
-                              delay: 0.0
-                            options: UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
-                         animations: ^
-        {
-            self.btn_back.alpha = 0.0;
-        }
-                         completion: ^(BOOL finished)
-        {
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
 
-        }];
-    } else
-    {
-        self.btn_back.alpha = 0.0;
-    }
 }
 
 - (void)showBackButtonAnimated: (BOOL)animated
 {
-    //NSLog(@"Showing back button");
-    if (animated)
-    {
-        [UIView animateWithDuration: 0.5
-                              delay: 0.0
-                            options: UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
-                         animations: ^
-        {
-            self.btn_back.alpha = 1.0;
-        }
-                         completion: ^(BOOL finished)
-        {
-
-        }];
-    } else
-    {
-        self.btn_back.alpha = 1.0;
-    }
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
 }
 
 - (void)removeBusinessListingHeader

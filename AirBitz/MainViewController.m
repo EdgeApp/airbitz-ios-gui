@@ -85,7 +85,7 @@ typedef enum eAppMode
     NSURL                       *_uri;
     InfoView                    *_notificationInfoView;
     BOOL                        firstLaunch;
-    
+
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
 }
@@ -100,6 +100,8 @@ typedef enum eAppMode
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
 
 @end
+
+MainViewController *staticMVC;
 
 @implementation MainViewController
 
@@ -118,6 +120,8 @@ typedef enum eAppMode
 
     [User initAll];
     [Theme initAll];
+
+    staticMVC = self;
 
     NSMutableData *seedData = [[NSMutableData alloc] init];
     [self fillSeedData:seedData];
@@ -423,28 +427,24 @@ typedef enum eAppMode
     }
 }
 
--(void)changeNavBarTitle: (NSString*) titleText isButton:(BOOL)isButton
++(void)changeNavBarTitle: (NSString*) titleText
 {
-    if (isButton)
-    {
-        UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
-        titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
-        titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
-        [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
-        [titleLabelButton addTarget:self action:@selector(didTapTitleView:) forControlEvents:UIControlEventTouchUpInside];
-
-        self.navBar.topItem.titleView = titleLabelButton;
-    }
-    else
-    {
-        self.navBar.topItem.title = titleText;
-    }
-
-
+    staticMVC.navBar.topItem.title = titleText;
 }
 
--(void)changeNavBarSide: (NSString*) titleText side:(tNavBarSide)navBarSide enable:(BOOL)enable
++(void)changeNavBarTitleWithButton: (NSString*) titleText action:(SEL)func fromObject:(id) object
+{
+    UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
+    titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
+    titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
+    [titleLabelButton addTarget:object action:func forControlEvents:UIControlEventTouchUpInside];
+
+    staticMVC.navBar.topItem.titleView = titleLabelButton;
+}
+
++(void)changeNavBarSide: (NSString*) titleText side:(tNavBarSide)navBarSide enable:(BOOL)enable action:(SEL)func fromObject:(id) object
 {
     UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
@@ -452,7 +452,7 @@ typedef enum eAppMode
     titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
 
     [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
-    [titleLabelButton addTarget:self action:@selector(didTapTitleView:) forControlEvents:UIControlEventTouchUpInside];
+    [titleLabelButton addTarget:object action:func forControlEvents:UIControlEventTouchUpInside];
 
     if (!enable)
     {
@@ -464,13 +464,13 @@ typedef enum eAppMode
     if (navBarSide == NAV_BAR_LEFT)
     {
         titleLabelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        self.navBar.topItem.leftBarButtonItem = buttonItem;
+        staticMVC.navBar.topItem.leftBarButtonItem = buttonItem;
 
     }
     else if (navBarSide == NAV_BAR_RIGHT)
     {
         titleLabelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        self.navBar.topItem.rightBarButtonItem = buttonItem;
+        staticMVC.navBar.topItem.rightBarButtonItem = buttonItem;
     }
 
 }
@@ -486,10 +486,6 @@ typedef enum eAppMode
 				[_selectedViewController.view removeFromSuperview];
 				_selectedViewController = _directoryViewController;
 				[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-
-                [self changeNavBarTitle:@"Directory" isButton:false];
-                [self changeNavBarSide:@"LEFT" side:NAV_BAR_LEFT enable:false];
-                [self changeNavBarSide:@"HELP" side:NAV_BAR_RIGHT enable:true];
 
 			}
 			break;

@@ -18,4 +18,8 @@ typedef enum eNavBarSide
 
 @interface MainViewController : UIViewController
 
++(void)changeNavBarTitle: (NSString*) titleText;
++(void)changeNavBarTitleWithButton: (NSString*) titleText action:(SEL)func fromObject:(id) object;
++(void)changeNavBarSide: (NSString*) titleText side:(tNavBarSide)navBarSide enable:(BOOL)enable action:(SEL)func fromObject:(id) object;
+
 @end
