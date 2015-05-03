@@ -142,7 +142,7 @@ typedef enum eMapDisplayState
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *footerHeight;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesBottom;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationSearchViewHeight;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationSearchViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapViewHeight;
 @property (nonatomic, weak) IBOutlet DividerView *dividerView;
 @property (nonatomic, weak) IBOutlet UIView *spinnerView;
@@ -200,7 +200,11 @@ typedef enum eMapDisplayState
     //[self businessListingQueryForPage:currentPage];
     //[self businessListingQueryForPage:currentPage + 1];
 
-    [self.tableView setContentInset:UIEdgeInsetsMake(64,0,0,0)];
+    CGPoint pt;
+    pt.y = [MainViewController getHeaderHeight];
+    [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
+
+    [self resetTableHideSearch];
 
     self.spinnerView.hidden = NO;
 
@@ -235,6 +239,14 @@ typedef enum eMapDisplayState
             }
         });
     }
+}
+
+- (void)resetTableHideSearch
+{
+    CGPoint pt;
+
+    pt.y = -[MainViewController getHeaderHeight] + self.searchBarSearch.frame.size.height;
+    [self.tableView setContentOffset:pt animated:true];
 }
 
 - (BOOL)gestureRecognizer: (UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer: (UIGestureRecognizer *)otherGestureRecognizer
@@ -685,7 +697,7 @@ typedef enum eMapDisplayState
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
-        _locationSearchViewHeight.constant += EXTRA_SEARCH_BAR_HEIGHT;
+//        _locationSearchViewHeight.constant += EXTRA_SEARCH_BAR_HEIGHT;
 
         [self.view layoutIfNeeded];
 
@@ -734,7 +746,7 @@ typedef enum eMapDisplayState
     [self.searchBarSearch resignFirstResponder];
     [self.searchBarLocation resignFirstResponder];
     self.mapView.showsUserLocation = YES;
-    [self.tableView setContentOffset:CGPointZero animated:NO];
+//    [self.tableView setContentOffset:CGPointZero animated:NO];
 
     [self setDefaultMapDividerPosition];
 
@@ -745,7 +757,7 @@ typedef enum eMapDisplayState
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
-        _locationSearchViewHeight.constant -= EXTRA_SEARCH_BAR_HEIGHT;
+//        _locationSearchViewHeight.constant -= EXTRA_SEARCH_BAR_HEIGHT;
 
         [self.view layoutIfNeeded];
 
@@ -772,14 +784,15 @@ typedef enum eMapDisplayState
         directoryMode = DIRECTORY_MODE_LISTING;
         [self hideBackButtonAnimated: YES];
     }
-    [self.tableView setContentOffset:CGPointZero animated:NO];
+//    [self.tableView setContentOffset:CGPointZero animated:NO];
+    [self resetTableHideSearch];
     [self businessListingQueryForPage: 0];
     [UIView animateWithDuration: 0.5
                           delay: 0.0
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
-        _locationSearchViewHeight.constant -= EXTRA_SEARCH_BAR_HEIGHT;
+//        _locationSearchViewHeight.constant -= EXTRA_SEARCH_BAR_HEIGHT;
 
         [self.view layoutIfNeeded];
     }
@@ -800,7 +813,7 @@ typedef enum eMapDisplayState
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
-        _locationSearchViewHeight.constant += EXTRA_SEARCH_BAR_HEIGHT;
+//        _locationSearchViewHeight.constant += EXTRA_SEARCH_BAR_HEIGHT;
 
         [self.view layoutIfNeeded];
     }
@@ -869,7 +882,7 @@ typedef enum eMapDisplayState
     [self positionDividerView];
     [self hideBackButtonAnimated: YES];
     [self.mapView removeAllAnnotations];
-    [self.tableView setContentOffset:CGPointZero animated:YES];
+//    [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 #pragma mark MapView
 
