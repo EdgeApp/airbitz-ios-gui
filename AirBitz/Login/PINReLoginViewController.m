@@ -14,6 +14,7 @@
 #import "CommonTypes.h"
 #import "LocalSettings.h"
 #import "APPINView.h"
+#import "Theme.h"
 
 @interface PINReLoginViewController () <APPINViewDelegate, ButtonSelectorDelegate, FadingAlertViewDelegate>
 {
@@ -522,7 +523,7 @@
 - (void)ButtonSelectorDidTouchAccessory:(ButtonSelectorView *)selector accountString:(NSString *)string
 {
     _account = string;
-    NSString *message = [NSString stringWithFormat:@"Delete %@ on this device only?",
+    NSString *message = [NSString stringWithFormat:[Theme Singleton].deleteAccountWarning,
                          string];
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:NSLocalizedString(@"Delete Account", nil)

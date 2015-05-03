@@ -46,6 +46,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 
     //    self.denomination = 100000000;
     self.colorTextLink = UIColorFromARGB(0xFF007aFF);
+    self.deleteAccountWarning = NSLocalizedString(@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.", @"Delete Account Warning");
     
     return self;
 }

@@ -24,6 +24,7 @@
 #import "MainViewController.h"
 #import "ButtonSelectorView.h"
 #import "APPINView.h"
+#import "Theme.h"
 
 typedef enum eLoginMode
 {
@@ -36,7 +37,7 @@ typedef enum eLoginMode
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertViewDelegate >
+    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
@@ -54,6 +55,8 @@ typedef enum eLoginMode
     CGFloat                         _originalLogoHeight;
     CGFloat                         _originalUsernameHeight;
     CGFloat                         _originalPasswordHeight;
+    CGFloat                         _originalPasswordWidth;
+    CGFloat                         _originalPINSelectorWidth;
     CGFloat                         _originalTextBitcoinWalletHeight;
 
 }
@@ -123,6 +126,8 @@ static BOOL bInitialized = false;
         _originalTextBitcoinWalletHeight = self.textBitcoinWalletHeight.constant;
         _originalUsernameHeight = self.usernameHeight.constant;
         _originalPasswordHeight = self.passwordHeight.constant;
+        _originalPasswordWidth = self.passwordTextField.frame.size.width;
+        _originalPINSelectorWidth = self.PINusernameSelector.frame.size.width;
 
         if ([self.arrayAccounts count] == 0)
         {
@@ -187,7 +192,7 @@ static BOOL bInitialized = false;
     [self.PINusernameSelector.button setBackgroundImage:nil forState:UIControlStateNormal];
     [self.PINusernameSelector.button setBackgroundImage:nil forState:UIControlStateSelected];
     self.PINusernameSelector.textLabel.text = NSLocalizedString(@"", @"username");
-    [self.PINusernameSelector setButtonWidth:self.logoImage.frame.size.width];
+    [self.PINusernameSelector setButtonWidth:_originalPINSelectorWidth];
     self.PINusernameSelector.accessoryImage = [UIImage imageNamed:@"btn_close.png"];
 
 }
@@ -1051,8 +1056,9 @@ static BOOL bInitialized = false;
     if([CoreBridge PINLoginExists:account])
     {
         [LocalSettings controller].cachedUsername = account;
-        [self.delegate loginViewControllerDidAbort];
-        [self.delegate loginViewControllerDidSwitchAccount];
+        bPINModeEnabled = true;
+        [self viewDidLoad];
+        [self viewWillAppear:true];
     }
     else {
         self.usernameSelector.textField.text = account;
@@ -1077,7 +1083,7 @@ static BOOL bInitialized = false;
 - (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
 {
     _account = string;
-    NSString *message = [NSString stringWithFormat:@"Delete %@ on this device only?",
+    NSString *message = [NSString stringWithFormat:[Theme Singleton].deleteAccountWarning,
                        string];
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:NSLocalizedString(@"Delete Account", nil)
@@ -1098,17 +1104,39 @@ static BOOL bInitialized = false;
 
     // Shrink the popup if it would be behind the keyboard.
 
-    float overlap = _keyboardFrameOriginY - (pickerWindowFrame.origin.y + pickerWindowFrame.size.height);
-
-    if (overlap < 0)
+    if (_keyboardFrameOriginY > 0)
     {
-        frame.size.height += overlap;
+        float overlap = _keyboardFrameOriginY - (pickerWindowFrame.origin.y + pickerWindowFrame.size.height);
+        
+        if (overlap < 0)
+        {
+            frame.size.height += overlap;
+        }
+        pickerTextView.popupPicker.frame = frame;
+        
     }
-    pickerTextView.popupPicker.frame = frame;
 
 }
 
+- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView;
+{
+    //
+    // Do not show popup if user has text in the field
+    //
+    if ([pickerTextView.textField.text length] > 0)
+    {
+        [pickerTextView dismissPopupPicker];
+    }
+    else if ([pickerTextView.textField.text length] == 0)
+    {
+        [pickerTextView createPopupPicker];
+    }
+}
 
+- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView;
+{
+    [pickerTextView dismissPopupPicker];
+}
 
 #pragma mark - UIAlertView Delegate
 
@@ -1122,6 +1150,53 @@ static BOOL bInitialized = false;
         self.usernameSelector.textField.text = @"";
         [self.usernameSelector dismissPopupPicker];
     }
+}
+
+#pragma mark - ButtonSelectorView delegates
+
+- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+{
+    [LocalSettings controller].cachedUsername = [self.otherAccounts objectAtIndex:itemIndex];
+    if([CoreBridge PINLoginExists:[LocalSettings controller].cachedUsername])
+    {
+        [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
+    }
+    else
+    {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self viewDidLoad];
+            [self viewWillAppear:true];
+        }];
+    }
+}
+
+- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
+{
+    [self.PINusernameSelector.textLabel resignFirstResponder];
+    [self.PINCodeView resignFirstResponder];
+
+}
+
+- (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view
+{
+    [self.PINCodeView becomeFirstResponder];
+
+}
+
+- (void)ButtonSelectorDidTouchAccessory:(ButtonSelectorView *)selector accountString:(NSString *)string
+{
+    _account = string;
+    NSString *message = [NSString stringWithFormat:[Theme Singleton].deleteAccountWarning,
+                                                   string];
+    UIAlertView *alert = [[UIAlertView alloc]
+            initWithTitle:NSLocalizedString(@"Delete Account", @"Delete Account")
+                  message:NSLocalizedString(message, nil)
+                 delegate:self
+        cancelButtonTitle:@"No"
+        otherButtonTitles:@"Yes", nil];
+    [alert show];
+    [self.PINCodeView becomeFirstResponder];
+
 }
 
 

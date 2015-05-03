@@ -411,7 +411,7 @@
 - (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
 {
     _account = string;
-    NSString *message = [NSString stringWithFormat:@"Delete %@ on this device only?",
+    NSString *message = [NSString stringWithFormat:@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled, this device will not be able to login without a 2FA reset which takes 7 days.",
                          string];
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:NSLocalizedString(@"Delete Account", nil)
