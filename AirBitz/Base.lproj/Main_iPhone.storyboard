@@ -1291,39 +1291,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0kG-xg-4yk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="XEF-aZ-4GM">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wallets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6k-sf-dw2" customClass="MontserratLabel">
-                                <rect key="frame" x="124" y="32" width="73" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OkX-sO-elV">
-                                <rect key="frame" x="280" y="23" width="37" height="37"/>
-                                <state key="normal" image="btn_info.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="info" destination="ZP6-jP-fb3" eventType="touchUpInside" id="g2y-rH-dAc"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgP-7Q-PoB">
-                                <rect key="frame" x="87" y="72" width="146" height="26"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgP-7Q-PoB">
+                                <rect key="frame" x="115" y="72" width="146" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="146" id="VRO-F8-VOd"/>
+                                    <constraint firstAttribute="height" constant="26" id="idB-fq-fsG"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Yg-1c-9dj">
-                                <rect key="frame" x="13" y="106" width="294" height="82"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Yg-1c-9dj" userLabel="View - Toggle Bar">
+                                <rect key="frame" x="41" y="106" width="294" height="82"/>
                                 <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="294" id="03u-t4-EW7"/>
+                                    <constraint firstAttribute="height" constant="82" id="xPW-Ku-mZZ"/>
+                                </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w7G-E8-m3C">
-                                <rect key="frame" x="13" y="210" width="294" height="273"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w7G-E8-m3C" userLabel="Table View - Wallet List">
+                                <rect key="frame" x="20" y="196" width="335" height="471"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="1" green="0.01176470588" blue="0.01176470588" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1331,34 +1318,44 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WalletCell" id="qki-JE-lxe" customClass="WalletCell">
                                         <rect key="frame" x="0.0" y="22" width="294" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qki-JE-lxe" id="foq-5o-Sh5">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qki-JE-lxe" id="foq-5o-Sh5" userLabel="Content View - Wallet">
                                             <rect key="frame" x="0.0" y="0.0" width="294" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EbY-4p-h0Y">
-                                                    <rect key="frame" x="0.0" y="0.0" width="294" height="44"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EbY-4p-h0Y">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0QH-Cd-JVq" customClass="MontserratLabel">
-                                                    <rect key="frame" x="9" y="9" width="131" height="27"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0QH-Cd-JVq" userLabel="Label - Wallet Name" customClass="MontserratLabel">
+                                                    <rect key="frame" x="20" y="4" width="249" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.25490196078431371" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bu9-4x-j6f" customClass="LatoLabel">
-                                                    <rect key="frame" x="173" y="7" width="87" height="27"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bu9-4x-j6f" userLabel="Label - Wallet Balance" customClass="LatoLabel">
+                                                    <rect key="frame" x="277" y="4" width="38" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ojk-Pu-unU">
-                                                    <rect key="frame" x="268" y="11" width="22" height="22"/>
-                                                </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0QH-Cd-JVq" firstAttribute="top" secondItem="foq-5o-Sh5" secondAttribute="top" constant="4" id="2bL-eD-fd8"/>
+                                                <constraint firstAttribute="bottom" secondItem="EbY-4p-h0Y" secondAttribute="bottom" id="30T-Dj-4po"/>
+                                                <constraint firstAttribute="bottom" secondItem="bu9-4x-j6f" secondAttribute="bottom" constant="4" id="55R-Yz-25y"/>
+                                                <constraint firstItem="bu9-4x-j6f" firstAttribute="leading" secondItem="0QH-Cd-JVq" secondAttribute="trailing" constant="8" symbolic="YES" id="65x-pj-yoi"/>
+                                                <constraint firstItem="0QH-Cd-JVq" firstAttribute="leading" secondItem="foq-5o-Sh5" secondAttribute="leading" constant="20" symbolic="YES" id="73H-Kn-SdI"/>
+                                                <constraint firstAttribute="trailing" secondItem="bu9-4x-j6f" secondAttribute="trailing" constant="20" symbolic="YES" id="X64-Io-ykO"/>
+                                                <constraint firstItem="EbY-4p-h0Y" firstAttribute="leading" secondItem="foq-5o-Sh5" secondAttribute="leading" id="dJd-4X-n3n"/>
+                                                <constraint firstAttribute="trailing" secondItem="EbY-4p-h0Y" secondAttribute="trailing" id="g87-hX-4Wa"/>
+                                                <constraint firstItem="bu9-4x-j6f" firstAttribute="top" secondItem="foq-5o-Sh5" secondAttribute="top" constant="4" id="h2H-6m-SHj"/>
+                                                <constraint firstAttribute="bottom" secondItem="0QH-Cd-JVq" secondAttribute="bottom" constant="4" id="oTu-fG-XnI"/>
+                                                <constraint firstItem="EbY-4p-h0Y" firstAttribute="top" secondItem="foq-5o-Sh5" secondAttribute="top" id="t2A-73-dZm"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
@@ -1369,17 +1366,33 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bzx-4y-6VM" customClass="WalletMakerView">
-                                <rect key="frame" x="0.0" y="66" width="320" height="150"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bzx-4y-6VM" customClass="WalletMakerView">
+                                <rect key="frame" x="0.0" y="66" width="375" height="150"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="OKQ-xO-bRc"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Bzx-4y-6VM" secondAttribute="trailing" id="3nY-XD-RWf"/>
+                            <constraint firstItem="6Yg-1c-9dj" firstAttribute="top" secondItem="ZgP-7Q-PoB" secondAttribute="bottom" constant="8" symbolic="YES" id="9q7-6A-Ozb"/>
+                            <constraint firstItem="w7G-E8-m3C" firstAttribute="leading" secondItem="bTU-z5-MKB" secondAttribute="leading" constant="20" symbolic="YES" id="A9N-bf-DMG"/>
+                            <constraint firstAttribute="centerX" secondItem="ZgP-7Q-PoB" secondAttribute="centerX" id="BdC-fR-xTc"/>
+                            <constraint firstItem="ZgP-7Q-PoB" firstAttribute="top" secondItem="jhg-Mk-M7b" secondAttribute="bottom" constant="52" id="Cdo-rs-D2m"/>
+                            <constraint firstItem="Bzx-4y-6VM" firstAttribute="top" secondItem="jhg-Mk-M7b" secondAttribute="bottom" constant="46" id="MOQ-6V-LkM"/>
+                            <constraint firstItem="w7G-E8-m3C" firstAttribute="top" secondItem="6Yg-1c-9dj" secondAttribute="bottom" constant="8" symbolic="YES" id="TmP-mr-bZf"/>
+                            <constraint firstAttribute="centerX" secondItem="6Yg-1c-9dj" secondAttribute="centerX" id="azB-7G-ghO"/>
+                            <constraint firstAttribute="trailing" secondItem="w7G-E8-m3C" secondAttribute="trailing" constant="20" symbolic="YES" id="dpr-Lz-sYn"/>
+                            <constraint firstItem="Bzx-4y-6VM" firstAttribute="leading" secondItem="bTU-z5-MKB" secondAttribute="leading" id="uui-bW-HO2"/>
+                            <constraint firstItem="tsd-Gh-wL0" firstAttribute="top" secondItem="w7G-E8-m3C" secondAttribute="bottom" id="zh1-2b-DD1"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="Vew-Wr-i4K"/>
                     <connections>
                         <outlet property="balanceViewPlaceholder" destination="6Yg-1c-9dj" id="pOU-nS-3UF"/>
-                        <outlet property="headerView" destination="XEF-aZ-4GM" id="jN4-Wu-KM6"/>
                         <outlet property="walletMakerView" destination="Bzx-4y-6VM" id="RsE-Lm-43W"/>
                         <outlet property="walletsTable" destination="w7G-E8-m3C" id="ZYa-Zf-mib"/>
                     </connections>
@@ -4052,7 +4065,7 @@ Scan the QR code using this device</string>
                             <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eTI-9q-uu0">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="565"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo_large.png" translatesAutoresizingMaskIntoConstraints="NO" id="LqE-iy-sKS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="logo_large.png" translatesAutoresizingMaskIntoConstraints="NO" id="LqE-iy-sKS">
                                         <rect key="frame" x="54" y="33" width="211" height="108"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Bitcoin Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nae-d6-xoW" customClass="LatoLabel">

@@ -21,6 +21,7 @@
 #import "InfoView.h"
 #import "Util.h"
 #import "WalletHeaderView.h"
+#import "MainViewController.h"
 
 #define ARCHIVE_COLLAPSED @"archive_collapsed"
 #define HIGHLIGHTED @"_highlighted"
@@ -77,8 +78,12 @@
 	self.walletsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.walletsTable.allowsSelectionDuringEditing = YES;
 	_currencyConversionFactor = 1.0;
-	
-	CGRect frame = self.walletMakerView.frame;
+
+    [MainViewController changeNavBarTitle:@"Wallets"];
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
+
+    CGRect frame = self.walletMakerView.frame;
 	_originalWalletMakerFrame = frame;
 	frame.size.height = 0;
 	self.walletMakerView.frame = frame;
@@ -376,7 +381,7 @@
 
 #pragma mark - Action Methods
 
-- (IBAction)info
+- (IBAction)info: (UIButton *)sender
 {
     [InfoView CreateWithHTML:@"infoWallets" forView:self.view];
 }
