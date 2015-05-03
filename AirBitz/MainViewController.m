@@ -89,6 +89,7 @@ typedef enum eAppMode
     SlideoutView                *slideoutView;
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *blurViewLeft;
 @property (weak, nonatomic) IBOutlet UITabBar *tabBar;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBarBottom;
@@ -319,6 +320,7 @@ MainViewController *staticMVC;
     frame.origin.x = x;
     
     staticMVC.selectedViewController.view.frame = frame;
+    staticMVC.blurViewLeft.constant = x;
 
 }
 

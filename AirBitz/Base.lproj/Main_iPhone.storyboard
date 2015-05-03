@@ -36,14 +36,6 @@
                                     <constraint firstAttribute="height" constant="49" id="PZC-aO-O09"/>
                                 </constraints>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLB-lv-6Oa" userLabel="Toolbar - Blur">
-                                <rect key="frame" x="0.0" y="312" width="375" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <items>
-                                    <barButtonItem title="Item" id="CSw-D2-ceA"/>
-                                </items>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i8d-J1-RvK" userLabel="View - Body">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
@@ -289,7 +281,7 @@
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="JcL-kA-vl8"/>
                                         </connections>
                                     </tableView>
-                                    <mapView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OKH-hE-U5z" customClass="MapView">
+                                    <mapView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OKH-hE-U5z" customClass="MapView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="223"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="223" id="B8R-BZ-DUX"/>
@@ -298,7 +290,7 @@
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="BRu-69-YqM"/>
                                         </connections>
                                     </mapView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ue2-Gm-7u2" userLabel="Button - Nav">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ue2-Gm-7u2" userLabel="Button - Nav">
                                         <rect key="frame" x="316" y="166" width="39" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="39" id="5ly-Ua-34d"/>
@@ -322,7 +314,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d8k-A8-ona" userLabel="Dragbar View" customClass="DividerView">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d8k-A8-ona" userLabel="Dragbar View" customClass="DividerView">
                                         <rect key="frame" x="0.0" y="213" width="375" height="27"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="drag_bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="4V6-Vv-Ai6">
@@ -398,12 +390,8 @@
                             <constraint firstAttribute="trailing" secondItem="Y7n-uj-nhg" secondAttribute="trailing" id="CA2-oS-Tjq"/>
                             <constraint firstAttribute="bottom" secondItem="7Sj-dO-Q40" secondAttribute="bottom" id="Oah-9d-kaf"/>
                             <constraint firstAttribute="bottom" secondItem="i8d-J1-RvK" secondAttribute="bottom" id="S7w-7m-nzX"/>
-                            <constraint firstAttribute="trailing" secondItem="mLB-lv-6Oa" secondAttribute="trailing" id="T6I-sf-vCy"/>
-                            <constraint firstItem="mLB-lv-6Oa" firstAttribute="top" secondItem="Y7n-uj-nhg" secondAttribute="bottom" id="YcZ-b9-Gzm"/>
                             <constraint firstItem="Y7n-uj-nhg" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="Yky-om-ZFT"/>
                             <constraint firstAttribute="trailing" secondItem="i8d-J1-RvK" secondAttribute="trailing" id="eaa-v0-2aw"/>
-                            <constraint firstItem="mLB-lv-6Oa" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="gBu-x7-0Pv"/>
-                            <constraint firstItem="7Sj-dO-Q40" firstAttribute="top" secondItem="mLB-lv-6Oa" secondAttribute="bottom" id="jWy-hF-LHv"/>
                             <constraint firstItem="Y7n-uj-nhg" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="kaT-mf-tX7"/>
                             <constraint firstItem="7Sj-dO-Q40" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="pVw-6b-FXl"/>
                             <constraint firstItem="i8d-J1-RvK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="r0O-KZ-OQ7"/>
@@ -448,7 +436,26 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-NB-3KY">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <tabBar contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="49" translatesAutoresizingMaskIntoConstraints="NO" id="F5s-te-cfW">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0w-aK-PS3" userLabel="View - Blur">
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mLB-lv-6Oa" userLabel="Toolbar - Blur">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="623"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <items/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </toolbar>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="mLB-lv-6Oa" secondAttribute="trailing" id="Av2-xT-VH4"/>
+                                    <constraint firstItem="mLB-lv-6Oa" firstAttribute="leading" secondItem="J0w-aK-PS3" secondAttribute="leading" id="Lsr-uZ-aV7"/>
+                                    <constraint firstItem="mLB-lv-6Oa" firstAttribute="top" secondItem="J0w-aK-PS3" secondAttribute="top" id="Wfj-Qs-7dO"/>
+                                    <constraint firstAttribute="bottom" secondItem="mLB-lv-6Oa" secondAttribute="bottom" id="zx9-mU-CcR"/>
+                                </constraints>
+                            </view>
+                            <tabBar contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="49" translatesAutoresizingMaskIntoConstraints="NO" id="F5s-te-cfW">
                                 <rect key="frame" x="0.0" y="687" width="414" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
@@ -484,10 +491,14 @@
                             <constraint firstAttribute="trailing" secondItem="Luv-G7-p9Q" secondAttribute="trailing" id="2TG-xD-1L5"/>
                             <constraint firstItem="F5s-te-cfW" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="3KO-vl-5GQ"/>
                             <constraint firstAttribute="trailing" secondItem="F5s-te-cfW" secondAttribute="trailing" id="9GU-l6-bFZ"/>
+                            <constraint firstItem="J0w-aK-PS3" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="AdO-l3-DpT"/>
                             <constraint firstItem="ehS-NB-3KY" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="Dt7-ao-hvc"/>
+                            <constraint firstAttribute="width" secondItem="J0w-aK-PS3" secondAttribute="width" id="EhY-gm-XcQ"/>
                             <constraint firstItem="Luv-G7-p9Q" firstAttribute="top" secondItem="hcq-oI-SbF" secondAttribute="top" id="FEw-Fw-JdJ"/>
+                            <constraint firstItem="J0w-aK-PS3" firstAttribute="top" secondItem="Luv-G7-p9Q" secondAttribute="bottom" id="KTd-jg-lUw"/>
                             <constraint firstAttribute="bottom" secondItem="ehS-NB-3KY" secondAttribute="bottom" id="MVG-CK-skQ"/>
                             <constraint firstAttribute="trailing" secondItem="ehS-NB-3KY" secondAttribute="trailing" id="Qyi-Jp-KPD"/>
+                            <constraint firstItem="F5s-te-cfW" firstAttribute="top" secondItem="J0w-aK-PS3" secondAttribute="bottom" id="TS3-8Y-WLL"/>
                             <constraint firstItem="Luv-G7-p9Q" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="ZxI-1D-zhA"/>
                             <constraint firstAttribute="bottom" secondItem="F5s-te-cfW" secondAttribute="bottom" id="pbq-pw-QxT"/>
                             <constraint firstItem="ehS-NB-3KY" firstAttribute="top" secondItem="hcq-oI-SbF" secondAttribute="top" id="wda-q1-TNK"/>
@@ -498,6 +509,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
+                        <outlet property="blurViewLeft" destination="AdO-l3-DpT" id="Xoa-ho-VR1"/>
                         <outlet property="navBar" destination="Luv-G7-p9Q" id="GMr-vB-i3Z"/>
                         <outlet property="navBarTop" destination="FEw-Fw-JdJ" id="c06-2D-8NV"/>
                         <outlet property="tabBar" destination="F5s-te-cfW" id="XDl-gK-rTM"/>
