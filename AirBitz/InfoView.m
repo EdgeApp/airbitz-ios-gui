@@ -7,6 +7,7 @@
 
 #import "InfoView.h"
 #import "DarkenView.h"
+#import "MainViewController.h"
 
 @interface InfoView () <DarkenViewDelegate, UIWebViewDelegate>
 {
@@ -51,9 +52,16 @@
 
 	}
 
+    CGRect frame;
+
+    frame = theView.bounds;
+    frame.origin.y += [MainViewController getHeaderHeight];
+    frame.size.height -= [MainViewController getFooterHeight] + [MainViewController getHeaderHeight];
+
+    iv.frame = frame;
 	iv.delegate = nil;
-	iv.frame = theView.bounds;
-	[iv enableScrolling:YES];
+
+    [iv enableScrolling:YES];
 	NSString* path = [[NSBundle mainBundle] pathForResource:strHTML ofType:@"html"];
 	iv.htmlInfoToDisplay = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
     [theView addSubview:iv];
