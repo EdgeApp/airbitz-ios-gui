@@ -1090,6 +1090,9 @@
 		DA4710651AD7363F006ACF2A /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4710621AD7363F006ACF2A /* BuySellViewController.m */; };
 		DA4CFE45196F897B002CFD49 /* drag_bar@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */; };
 		DA4CFE46196F897B002CFD49 /* drag_bar~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */; };
+		DA4F91A71AF569EA008C0BD4 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F91A61AF569EA008C0BD4 /* Theme.m */; };
+		DA4F91A81AF569EA008C0BD4 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F91A61AF569EA008C0BD4 /* Theme.m */; };
+		DA4F91A91AF569EA008C0BD4 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F91A61AF569EA008C0BD4 /* Theme.m */; };
 		DA5509581A928E1300F57106 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509571A928E1300F57106 /* StylizedTextField2.m */; };
 		DA5509591A928E1300F57106 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509571A928E1300F57106 /* StylizedTextField2.m */; };
 		DA55095A1A928E1300F57106 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509571A928E1300F57106 /* StylizedTextField2.m */; };
@@ -1705,12 +1708,6 @@
 		DAFF8FF41ADC9A46000BCBEF /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFF8FF31ADC9A46000BCBEF /* BuySellCell.m */; };
 		DAFF8FF51ADC9A46000BCBEF /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFF8FF31ADC9A46000BCBEF /* BuySellCell.m */; };
 		DAFF8FF61ADC9A46000BCBEF /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFF8FF31ADC9A46000BCBEF /* BuySellCell.m */; };
-		E2067B7A1AC2FDE000E17C36 /* icon_more_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B781AC2FDE000E17C36 /* icon_more_dark.png */; };
-		E2067B7B1AC2FDE000E17C36 /* icon_more_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B781AC2FDE000E17C36 /* icon_more_dark.png */; };
-		E2067B7C1AC2FDE000E17C36 /* icon_more_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B781AC2FDE000E17C36 /* icon_more_dark.png */; };
-		E2067B7D1AC2FDE000E17C36 /* icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B791AC2FDE000E17C36 /* icon_more.png */; };
-		E2067B7E1AC2FDE000E17C36 /* icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B791AC2FDE000E17C36 /* icon_more.png */; };
-		E2067B7F1AC2FDE000E17C36 /* icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B791AC2FDE000E17C36 /* icon_more.png */; };
 		E2067B8A1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */; };
 		E2067B8B1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */; };
 		E2067B8C1AC2FDFB00E17C36 /* icon_account_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */; };
@@ -2477,6 +2474,8 @@
 		DA4710621AD7363F006ACF2A /* BuySellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuySellViewController.m; sourceTree = "<group>"; };
 		DA4CFE43196F897B002CFD49 /* drag_bar@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar@2x~iphone.png"; sourceTree = "<group>"; };
 		DA4CFE44196F897B002CFD49 /* drag_bar~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_bar~iphone.png"; sourceTree = "<group>"; };
+		DA4F919D1AF569B7008C0BD4 /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
+		DA4F91A61AF569EA008C0BD4 /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
 		DA5509561A928E1300F57106 /* StylizedTextField2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField2.h; sourceTree = "<group>"; };
 		DA5509571A928E1300F57106 /* StylizedTextField2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField2.m; sourceTree = "<group>"; };
 		DA55095B1A92934B00F57106 /* StylizedTextField3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField3.h; sourceTree = "<group>"; };
@@ -2528,8 +2527,6 @@
 		DAFF8FEA1ADC9186000BCBEF /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		DAFF8FF21ADC9A46000BCBEF /* BuySellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuySellCell.h; sourceTree = "<group>"; };
 		DAFF8FF31ADC9A46000BCBEF /* BuySellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuySellCell.m; sourceTree = "<group>"; };
-		E2067B781AC2FDE000E17C36 /* icon_more_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_more_dark.png; sourceTree = "<group>"; };
-		E2067B791AC2FDE000E17C36 /* icon_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_more.png; sourceTree = "<group>"; };
 		E2067B851AC2FDFB00E17C36 /* icon_account_secure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_account_secure.png; sourceTree = "<group>"; };
 		E2067B861AC2FDFB00E17C36 /* icon_bitcoin_symbol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bitcoin_symbol.png; sourceTree = "<group>"; };
 		E2067B871AC2FDFB00E17C36 /* icon_exchange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_exchange.png; sourceTree = "<group>"; };
@@ -3110,6 +3107,8 @@
 		B5675B5118A17F6F002E0703 /* AirBitz */ = {
 			isa = PBXGroup;
 			children = (
+				DA4F919D1AF569B7008C0BD4 /* Theme.h */,
+				DA4F91A61AF569EA008C0BD4 /* Theme.m */,
 				7D5E1CB919AFB21F00943A81 /* ABC-testnet */,
 				4C08A6D118C29CDC0071B87C /* ABC */,
 				4C08A6E318C2B1B60071B87C /* ABC Data */,
@@ -5544,6 +5543,7 @@
 				7D98AD0C19A7C550003D2BF6 /* BD_Hours_Cell.m in Sources */,
 				7D98AD0D19A7C550003D2BF6 /* overviewCell.m in Sources */,
 				7D98AD0E19A7C550003D2BF6 /* SyncView.m in Sources */,
+				DA4F91A81AF569EA008C0BD4 /* Theme.m in Sources */,
 				DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
 				7D98AD0F19A7C550003D2BF6 /* TabBarButton.m in Sources */,
 				E2067B9C1AC30A7200E17C36 /* SlideoutView.m in Sources */,
@@ -5690,6 +5690,7 @@
 				B5C0A99F18EA0C10008F302C /* overviewCell.m in Sources */,
 				7DFD22E51A1E716C008C43FB /* UIPhotoGalleryViewController.m in Sources */,
 				6893E6CA19783FED0092DA04 /* SyncView.m in Sources */,
+				DA4F91A71AF569EA008C0BD4 /* Theme.m in Sources */,
 				DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
 				B57C207D18C15009005D7245 /* TabBarButton.m in Sources */,
 				E2067B9B1AC30A7200E17C36 /* SlideoutView.m in Sources */,
@@ -5836,6 +5837,7 @@
 				DAE864691A88A58A00A17BD3 /* overviewCell.m in Sources */,
 				DAE8646A1A88A58A00A17BD3 /* UIPhotoGalleryViewController.m in Sources */,
 				DAE8646B1A88A58A00A17BD3 /* SyncView.m in Sources */,
+				DA4F91A91AF569EA008C0BD4 /* Theme.m in Sources */,
 				DAE8646C1A88A58A00A17BD3 /* TwoFactorMenuViewController.m in Sources */,
 				DAE8646D1A88A58A00A17BD3 /* TabBarButton.m in Sources */,
 				E2067B9D1AC30A7200E17C36 /* SlideoutView.m in Sources */,
