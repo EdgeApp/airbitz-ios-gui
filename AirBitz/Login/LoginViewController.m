@@ -30,15 +30,12 @@ typedef enum eLoginMode
     MODE_ENTERING_PASSWORD
 } tLoginMode;
 
+#define SWIPE_ARROW_ANIM_PIXELS 10
+
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
     TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate >
 {
     tLoginMode                      _mode;
-    CGRect                          _originalContentFrame;
-    CGRect                          _originalLogoFrame;
-    CGRect                          _originalRightSwipeArrowFrame;
-    CGRect                          _originalCredentialsFrame;
-    CGRect                          _originalUserEntryFrame;
     CGPoint                         _firstTouchPoint;
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
@@ -51,8 +48,11 @@ typedef enum eLoginMode
     TwoFactorMenuViewController     *_tfaMenuViewController;
     FadingAlertView                 *_fadingAlert;
     float                           _keyboardFrameOriginY;
+    CGFloat                         _originalLogoHeight;
 
 }
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoHeight;
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
 @property (weak, nonatomic) IBOutlet UIView             *credentialsView;
 @property (nonatomic, weak) IBOutlet StylizedTextField  *passwordTextField;
@@ -66,6 +66,7 @@ typedef enum eLoginMode
 
 @property (nonatomic, weak) IBOutlet UIView				*errorMessageView;
 @property (nonatomic, weak) IBOutlet UILabel			*errorMessageText;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeArrowLeft;
 
 @property (nonatomic, weak) IBOutlet PickerTextView   *usernameSelector;
 @property (nonatomic, strong) NSArray   *arrayAccounts;
@@ -88,16 +89,13 @@ typedef enum eLoginMode
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _mode = MODE_ENTERING_NEITHER;
-    _originalContentFrame = self.contentView.frame;
-    _originalCredentialsFrame = self.credentialsView.frame;
-    _originalLogoFrame = self.logoImage.frame;
-    _originalRightSwipeArrowFrame = _swipeRightArrow.frame;
-    _originalUserEntryFrame = _userEntryView.frame;
-    
+
     self.usernameSelector.textField.delegate = self;
     self.usernameSelector.delegate = self;
     self.passwordTextField.delegate = self;
     self.spinnerView.hidden = YES;
+
+    _originalLogoHeight = self.logoHeight.constant;
     
     #if HARD_CODED_LOGIN
     
@@ -135,7 +133,7 @@ typedef enum eLoginMode
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
-    [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1 arrow:_swipeRightArrow origFrame:_originalRightSwipeArrowFrame];
+    [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1];
 
     _bTouchesEnabled = YES;
 
@@ -298,8 +296,6 @@ typedef enum eLoginMode
 - (void)animateSwipeArrowWithRepetitions:(int)repetitions 
                                 andDelay:(float)delay 
                                direction:(int)dir
-                                   arrow:(UIView *)swipeArrow 
-                               origFrame:(CGRect)originalFrame
 {
     if (!repetitions)
     {
@@ -310,13 +306,13 @@ typedef enum eLoginMode
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
-         CGRect frame = swipeArrow.frame;
          if (dir > 0)
-            frame.origin.x = originalFrame.origin.x + originalFrame.size.width * 0.5;
+             self.swipeArrowLeft.constant = SWIPE_ARROW_ANIM_PIXELS;
          else
-            frame.origin.x = originalFrame.origin.x - originalFrame.size.width * 0.5;
-         swipeArrow.frame = frame;
-         
+             self.swipeArrowLeft.constant = -SWIPE_ARROW_ANIM_PIXELS;
+         [self.view layoutIfNeeded];
+
+
      }
      completion:^(BOOL finished)
      {
@@ -325,18 +321,15 @@ typedef enum eLoginMode
                              options:UIViewAnimationOptionCurveEaseInOut
                           animations:^
           {
-              CGRect frame = swipeArrow.frame;
-              frame.origin.x = originalFrame.origin.x;
-              swipeArrow.frame = frame;
-              
+              self.swipeArrowLeft.constant = 0;
+              [self.view layoutIfNeeded];
+
           }
                           completion:^(BOOL finished)
           {
             [self animateSwipeArrowWithRepetitions:repetitions - 1
                                           andDelay:0
-                                         direction:dir
-                                             arrow:swipeArrow
-                                         origFrame:originalFrame];
+                                         direction:dir];
           }];
      }];
 }
@@ -349,26 +342,26 @@ typedef enum eLoginMode
 
 - (void)animateToInitialPresentation
 {
-    [UIView animateWithDuration:0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-     {
-         self.contentView.frame = _originalContentFrame;
-         
-         _backButton.alpha = 1.0;
-         _swipeRightArrow.alpha = 1.0;
-         _swipeText.alpha = 1.0;
-         _titleText.alpha = 1.0;
-         
-         self.logoImage.transform = CGAffineTransformMakeScale(1.0, 1.0);
-         self.logoImage.frame = _originalLogoFrame;
-         self.logoImage.alpha = 1.0;
-     }
-                     completion:^(BOOL finished)
-     {
-         _mode = MODE_ENTERING_NEITHER;
-     }];
+//    [UIView animateWithDuration:0.35
+//                          delay: 0.0
+//                        options: UIViewAnimationOptionCurveEaseInOut
+//                     animations:^
+//     {
+//         self.contentView.frame = _originalContentFrame;
+//
+//         _backButton.alpha = 1.0;
+//         _swipeRightArrow.alpha = 1.0;
+//         _swipeText.alpha = 1.0;
+//         _titleText.alpha = 1.0;
+//
+//         self.logoImage.transform = CGAffineTransformMakeScale(1.0, 1.0);
+//         self.logoImage.frame = _originalLogoFrame;
+//         self.logoImage.alpha = 1.0;
+//     }
+//                     completion:^(BOOL finished)
+//     {
+//         _mode = MODE_ENTERING_NEITHER;
+//     }];
 }
 
 #pragma mark - keyboard callbacks
@@ -404,25 +397,30 @@ typedef enum eLoginMode
                               delay: 0.0
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations:^
-         {
-             [self.usernameSelector dismissPopupPicker];
-             self.swipeText.hidden = YES;
-             self.swipeRightArrow.hidden = YES;
-             self.titleText.hidden = YES;
-             int iphone4heightadjust = 0;
-             if(IS_IPHONE4) {
-                 self.logoImage.frame = CGRectMake(_originalLogoFrame.origin.x, _originalLogoFrame.origin.y, _originalLogoFrame.size.width, _originalLogoFrame.size.height * 0.35);
-                 iphone4heightadjust = -75;
-             }
-             self.credentialsView.frame = CGRectMake(_originalCredentialsFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + 10 + iphone4heightadjust, _originalCredentialsFrame.size.width, _originalCredentialsFrame.size.height);
-             self.userEntryView.frame = CGRectMake(_originalUserEntryFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + _originalCredentialsFrame.size.height + iphone4heightadjust, _originalUserEntryFrame.size.width, _originalUserEntryFrame.size.height);
+        {
+////             [self.usernameSelector dismissPopupPicker];
+////             self.swipeText.hidden = YES;
+////             self.swipeRightArrow.hidden = YES;
+////             self.titleText.hidden = YES;
+////             int iphone4heightadjust = 0;
+////             if(IS_IPHONE4) {
+////                 self.logoImage.frame = CGRectMake(_originalLogoFrame.origin.x, _originalLogoFrame.origin.y, _originalLogoFrame.size.width, _originalLogoFrame.size.height * 0.35);
+////                 iphone4heightadjust = -75;
+////             }
+////             self.credentialsView.frame = CGRectMake(_originalCredentialsFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + 10 + iphone4heightadjust, _originalCredentialsFrame.size.width, _originalCredentialsFrame.size.height);
+////             self.userEntryView.frame = CGRectMake(_originalUserEntryFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + _originalCredentialsFrame.size.height + iphone4heightadjust, _originalUserEntryFrame.size.width, _originalUserEntryFrame.size.height);
+                 if(self.usernameSelector.textField.isEditing)
+                 {
+                     [self.usernameSelector updateChoices:self.arrayAccounts];
+                 }
+
+                 self.logoHeight.constant /= 2;
+                 [self.view layoutIfNeeded];
+
          }
             completion:^(BOOL finished)
          {
-             if(self.usernameSelector.textField.isEditing)
-             {
-                 [self.usernameSelector updateChoices:self.arrayAccounts];
-             }
+
          }];
     }
     else
@@ -432,14 +430,17 @@ typedef enum eLoginMode
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
-             self.swipeText.hidden = NO;
-             self.swipeRightArrow.hidden = NO;
-             self.titleText.hidden = NO;
-             if(IS_IPHONE4) {
-                 self.logoImage.frame = CGRectMake(_originalLogoFrame.origin.x, _originalLogoFrame.origin.y, _originalLogoFrame.size.width, _originalLogoFrame.size.height);
-             }
-             self.credentialsView.frame = CGRectMake(_originalCredentialsFrame.origin.x, _originalCredentialsFrame.origin.y, _originalCredentialsFrame.size.width, _originalCredentialsFrame.size.height);
-             self.userEntryView.frame = CGRectMake(_originalUserEntryFrame.origin.x, _originalUserEntryFrame.origin.y, _originalUserEntryFrame.size.width, _originalUserEntryFrame.size.height);
+             self.logoHeight.constant = _originalLogoHeight;
+             [self.view layoutIfNeeded];
+
+//             self.swipeText.hidden = NO;
+//             self.swipeRightArrow.hidden = NO;
+//             self.titleText.hidden = NO;
+//             if(IS_IPHONE4) {
+//                 self.logoImage.frame = CGRectMake(_originalLogoFrame.origin.x, _originalLogoFrame.origin.y, _originalLogoFrame.size.width, _originalLogoFrame.size.height);
+//             }
+//             self.credentialsView.frame = CGRectMake(_originalCredentialsFrame.origin.x, _originalCredentialsFrame.origin.y, _originalCredentialsFrame.size.width, _originalCredentialsFrame.size.height);
+//             self.userEntryView.frame = CGRectMake(_originalUserEntryFrame.origin.x, _originalUserEntryFrame.origin.y, _originalUserEntryFrame.size.width, _originalUserEntryFrame.size.height);
          }
                          completion:^(BOOL finished)
          {

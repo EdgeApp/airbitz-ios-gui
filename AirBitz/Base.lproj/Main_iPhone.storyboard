@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -4062,22 +4063,30 @@ Scan the QR code using this device</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eTI-9q-uu0">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="565"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eTI-9q-uu0" userLabel="View - Content">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="logo_large.png" translatesAutoresizingMaskIntoConstraints="NO" id="LqE-iy-sKS">
-                                        <rect key="frame" x="54" y="33" width="211" height="108"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_large.png" translatesAutoresizingMaskIntoConstraints="NO" id="LqE-iy-sKS">
+                                        <rect key="frame" x="56" y="20" width="208" height="106"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="106" id="XEa-cm-iAj"/>
+                                            <constraint firstAttribute="width" secondItem="LqE-iy-sKS" secondAttribute="height" multiplier="104:53" id="wTC-p4-vpe"/>
+                                        </constraints>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Bitcoin Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nae-d6-xoW" customClass="LatoLabel">
-                                        <rect key="frame" x="67" y="164" width="186" height="27"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bitcoin Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nae-d6-xoW" customClass="LatoLabel">
+                                        <rect key="frame" x="67" y="134" width="186" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="27" id="6J0-O3-MAp"/>
+                                            <constraint firstAttribute="width" constant="186" id="8zF-39-Abo"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" red="0.49910315690000001" green="0.49910315690000001" blue="0.49910315690000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kpH-FO-ztL">
-                                        <rect key="frame" x="0.0" y="210" width="320" height="147"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpH-FO-ztL" userLabel="View - Username Pwd">
+                                        <rect key="frame" x="0.0" y="169" width="320" height="147"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z92-xY-Nti" userLabel="View username picker" customClass="PickerTextView">
                                                 <rect key="frame" x="34" y="3" width="251" height="35"/>
@@ -4105,20 +4114,32 @@ Scan the QR code using this device</string>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="147" id="7Ne-xO-Kkv"/>
+                                            <constraint firstAttribute="width" constant="320" id="GhS-9N-0LZ"/>
+                                        </constraints>
                                     </view>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe to View Business Directory" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8XB-1A-1hO" customClass="LatoLabel">
-                                        <rect key="frame" x="12" y="385" width="255" height="30"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to View Business Directory" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8XB-1A-1hO" customClass="LatoLabel">
+                                        <rect key="frame" x="40" y="324" width="240" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="5Py-kI-Nim"/>
+                                            <constraint firstAttribute="width" constant="240" id="bVa-l9-bV5"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" red="0.11372549831867218" green="0.49411767721176147" blue="0.72156864404678345" alpha="1" colorSpace="deviceRGB"/>
                                         <size key="shadowOffset" width="0.0" height="2"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="swipe-arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="jLL-vF-Vbd">
-                                        <rect key="frame" x="259" y="390" width="36" height="20"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe-arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="jLL-vF-Vbd">
+                                        <rect key="frame" x="280" y="329" width="36" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="36" id="hiP-9R-E08"/>
+                                            <constraint firstAttribute="height" constant="20" id="zex-CZ-MrN"/>
+                                        </constraints>
                                     </imageView>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUp-i4-uHt">
-                                        <rect key="frame" x="0.0" y="461" width="320" height="107"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUp-i4-uHt" userLabel="View - Create / Forgot">
+                                        <rect key="frame" x="0.0" y="362" width="320" height="107"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iz-Uc-LTS" customClass="StylizedButton">
                                                 <rect key="frame" x="34" y="10" width="252" height="44"/>
@@ -4149,19 +4170,39 @@ Scan the QR code using this device</string>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="107" id="7vW-bf-gCj"/>
+                                            <constraint firstAttribute="width" constant="320" id="aqr-DW-AOm"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="LqE-iy-sKS" firstAttribute="top" secondItem="eTI-9q-uu0" secondAttribute="top" constant="20" symbolic="YES" id="6iW-d6-Qv9"/>
+                                    <constraint firstItem="kpH-FO-ztL" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" constant="8" symbolic="YES" id="AnO-5K-GCi"/>
                                     <constraint firstItem="nae-d6-xoW" firstAttribute="centerX" secondItem="LqE-iy-sKS" secondAttribute="centerX" id="DX0-zg-toi"/>
+                                    <constraint firstItem="jLL-vF-Vbd" firstAttribute="centerY" secondItem="8XB-1A-1hO" secondAttribute="centerY" id="HhJ-C4-KBO"/>
+                                    <constraint firstItem="bUp-i4-uHt" firstAttribute="top" secondItem="8XB-1A-1hO" secondAttribute="bottom" constant="8" symbolic="YES" id="Kbe-0q-p9l"/>
+                                    <constraint firstItem="nae-d6-xoW" firstAttribute="top" secondItem="LqE-iy-sKS" secondAttribute="bottom" constant="8" symbolic="YES" id="NZO-G9-2kT"/>
+                                    <constraint firstAttribute="centerX" secondItem="8XB-1A-1hO" secondAttribute="centerX" id="UZF-mI-uqs"/>
+                                    <constraint firstItem="8XB-1A-1hO" firstAttribute="top" secondItem="kpH-FO-ztL" secondAttribute="bottom" constant="8" symbolic="YES" id="Vxq-SZ-hYf"/>
+                                    <constraint firstAttribute="centerX" secondItem="nae-d6-xoW" secondAttribute="centerX" id="Wg7-nU-ecP"/>
+                                    <constraint firstAttribute="centerX" secondItem="bUp-i4-uHt" secondAttribute="centerX" id="Yqx-ez-xtP"/>
+                                    <constraint firstAttribute="centerX" secondItem="LqE-iy-sKS" secondAttribute="centerX" id="gMX-zi-xrg"/>
+                                    <constraint firstItem="jLL-vF-Vbd" firstAttribute="leading" secondItem="8XB-1A-1hO" secondAttribute="trailing" id="qg6-OB-iqn"/>
+                                    <constraint firstAttribute="centerX" secondItem="kpH-FO-ztL" secondAttribute="centerX" id="vy5-ZF-fZP"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypw-4p-DZr">
-                                <rect key="frame" x="6" y="24" width="24" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypw-4p-DZr" userLabel="Button - Business Directory">
+                                <rect key="frame" x="6" y="28" width="20" height="20"/>
                                 <accessibility key="accessibilityConfiguration" label=" ">
                                     <accessibilityTraits key="traits" none="YES" button="YES"/>
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Wbh-YZ-arV"/>
+                                    <constraint firstAttribute="width" constant="20" id="vLg-Vu-Ioh"/>
+                                </constraints>
                                 <state key="normal" image="ico_nav_directory_white.png"/>
                                 <connections>
                                     <action selector="Back" destination="zLx-xG-j1m" eventType="touchUpInside" id="Dko-mN-FWJ"/>
@@ -4196,6 +4237,14 @@ Scan the QR code using this device</string>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="eTI-9q-uu0" secondAttribute="trailing" id="6EF-l4-14T"/>
+                            <constraint firstItem="eTI-9q-uu0" firstAttribute="leading" secondItem="nTP-NI-D0U" secondAttribute="leading" id="BWA-Vs-TVO"/>
+                            <constraint firstItem="Ypw-4p-DZr" firstAttribute="top" secondItem="3HA-Gy-Y0a" secondAttribute="bottom" constant="8" symbolic="YES" id="CkO-ck-ccS"/>
+                            <constraint firstItem="eTI-9q-uu0" firstAttribute="top" secondItem="3HA-Gy-Y0a" secondAttribute="bottom" id="Gcy-9j-wjf"/>
+                            <constraint firstItem="com-9x-BkR" firstAttribute="top" secondItem="eTI-9q-uu0" secondAttribute="bottom" id="PNk-ZX-gye"/>
+                            <constraint firstItem="Ypw-4p-DZr" firstAttribute="leading" secondItem="nTP-NI-D0U" secondAttribute="leading" constant="20" symbolic="YES" id="q4D-Og-rCx"/>
+                        </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
@@ -4205,9 +4254,11 @@ Scan the QR code using this device</string>
                         <outlet property="credentialsView" destination="kpH-FO-ztL" id="UiA-5C-OgI"/>
                         <outlet property="errorMessageText" destination="5wy-Mi-whP" id="oh9-gY-loy"/>
                         <outlet property="errorMessageView" destination="whJ-vw-6PG" id="T37-ad-SID"/>
+                        <outlet property="logoHeight" destination="XEa-cm-iAj" id="8KE-7I-DrP"/>
                         <outlet property="logoImage" destination="LqE-iy-sKS" id="cmm-Yx-nMh"/>
                         <outlet property="passwordTextField" destination="V5e-1n-K9Z" id="iwd-kF-klp"/>
                         <outlet property="spinnerView" destination="YZe-mr-te9" id="IDf-eC-kyH"/>
+                        <outlet property="swipeArrowLeft" destination="qg6-OB-iqn" id="Co4-UH-SCE"/>
                         <outlet property="swipeRightArrow" destination="jLL-vF-Vbd" id="1py-kB-hez"/>
                         <outlet property="swipeText" destination="8XB-1A-1hO" id="yBH-JD-yZ2"/>
                         <outlet property="titleText" destination="nae-d6-xoW" id="2iX-DH-tAT"/>

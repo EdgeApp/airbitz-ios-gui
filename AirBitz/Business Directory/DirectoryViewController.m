@@ -192,19 +192,13 @@ typedef enum eMapDisplayState
 
     [MainViewController changeNavBarTitle:@"Directory"];
     [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBarSide:@"INFO" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
     currentPage = 0;
     //[self loadSearchResultsPage:currentPage];
     //[self loadSearchResultsPage:currentPage + 1];
     //[self businessListingQueryForPage:currentPage];
     //[self businessListingQueryForPage:currentPage + 1];
-
-    CGPoint pt;
-    pt.y = [MainViewController getHeaderHeight];
-    [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
-
-    [self resetTableHideSearch];
 
     self.spinnerView.hidden = NO;
 
@@ -245,6 +239,7 @@ typedef enum eMapDisplayState
 {
     CGPoint pt;
 
+    pt.x = 0.0;
     pt.y = -[MainViewController getHeaderHeight] + self.searchBarSearch.frame.size.height;
     [self.tableView setContentOffset:pt animated:true];
 }
@@ -287,6 +282,14 @@ typedef enum eMapDisplayState
     [self receiveKeyboardNotifications: YES];
     
     self.searchBarSearch.placeholder = @"Search";
+
+    CGPoint pt;
+    pt.x = 0.0;
+    pt.y = [MainViewController getHeaderHeight];
+    [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
+
+    [self resetTableHideSearch];
+
 }
 
 - (void)receiveKeyboardNotifications: (BOOL)on
