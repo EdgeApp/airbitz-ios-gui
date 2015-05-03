@@ -68,6 +68,9 @@
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:nil];
 
+    [self.view setNeedsLayout];
+    [self.view layoutIfNeeded];
+
 	_balanceView = [BalanceView CreateWithDelegate:self];
 	_balanceView.frame = self.balanceViewPlaceholder.frame;
 	[self.balanceViewPlaceholder removeFromSuperview];
