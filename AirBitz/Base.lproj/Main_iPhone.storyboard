@@ -434,8 +434,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-NB-3KY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="postcard-mountain.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-NB-3KY">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0w-aK-PS3" userLabel="View - Blur">
                                 <rect key="frame" x="0.0" y="64" width="414" height="623"/>
@@ -5195,6 +5197,7 @@ Scan the QR code using this device</string>
         <image name="logo.png" width="64" height="36"/>
         <image name="logo_bitcoin.png" width="126" height="165"/>
         <image name="logo_large.png" width="208" height="106"/>
+        <image name="postcard-mountain.jpg" width="844" height="568"/>
         <image name="scan_frame.png" width="271" height="226"/>
         <image name="sms_btn.png" width="80" height="42"/>
         <image name="swipe-arrow.png" width="35" height="18"/>

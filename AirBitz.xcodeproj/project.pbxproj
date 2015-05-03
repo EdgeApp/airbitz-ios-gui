@@ -1700,6 +1700,12 @@
 		DAE866211A88A58A00A17BD3 /* tabbar_base~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C14B318C012B500AEA789 /* tabbar_base~iphone.png */; };
 		DAE866221A88A58A00A17BD3 /* background@2x~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7DB9DD7D1A03187D00AD35ED /* background@2x~iphone.jpg */; };
 		DAE866231A88A58A00A17BD3 /* btn_export@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C147018C012B500AEA789 /* btn_export@2x~iphone.png */; };
+		DAEB4B211AF5F5CF006D6A48 /* postcard-mountain@2x~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAEB4B1F1AF5F5CF006D6A48 /* postcard-mountain@2x~iphone.jpg */; };
+		DAEB4B221AF5F5CF006D6A48 /* postcard-mountain@2x~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAEB4B1F1AF5F5CF006D6A48 /* postcard-mountain@2x~iphone.jpg */; };
+		DAEB4B231AF5F5CF006D6A48 /* postcard-mountain@2x~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAEB4B1F1AF5F5CF006D6A48 /* postcard-mountain@2x~iphone.jpg */; };
+		DAEB4B241AF5F5CF006D6A48 /* postcard-mountain~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAEB4B201AF5F5CF006D6A48 /* postcard-mountain~iphone.jpg */; };
+		DAEB4B251AF5F5CF006D6A48 /* postcard-mountain~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAEB4B201AF5F5CF006D6A48 /* postcard-mountain~iphone.jpg */; };
+		DAEB4B261AF5F5CF006D6A48 /* postcard-mountain~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAEB4B201AF5F5CF006D6A48 /* postcard-mountain~iphone.jpg */; };
 		DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
 		DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
 		DAFF8FEB1ADC9186000BCBEF /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFF8FEA1ADC9186000BCBEF /* Plugin.m */; };
@@ -2521,6 +2527,8 @@
 		DAE276431A9C1D9300E24523 /* SignUpBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpBaseController.m; path = SignUp/SignUpBaseController.m; sourceTree = "<group>"; };
 		DAE81D871AC204140064BA5D /* plugins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = plugins; path = Resources/plugins; sourceTree = "<group>"; };
 		DAE866291A88A58A00A17BD3 /* Airbitz Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAEB4B1F1AF5F5CF006D6A48 /* postcard-mountain@2x~iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "postcard-mountain@2x~iphone.jpg"; sourceTree = "<group>"; };
+		DAEB4B201AF5F5CF006D6A48 /* postcard-mountain~iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "postcard-mountain~iphone.jpg"; sourceTree = "<group>"; };
 		DAFC799E1A81CCBE00E9039D /* TwoFactorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorMenuViewController.h; sourceTree = "<group>"; };
 		DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorMenuViewController.m; sourceTree = "<group>"; };
 		DAFF8FE91ADC9186000BCBEF /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
@@ -3280,6 +3288,8 @@
 				B5F2E9B418DA0F9E008ACF88 /* logo_large~iphone.png */,
 				B5137C3C18A4529500DA4A34 /* logo@2x~iphone.png */,
 				B5137C3D18A4529500DA4A34 /* logo~iphone.png */,
+				DAEB4B1F1AF5F5CF006D6A48 /* postcard-mountain@2x~iphone.jpg */,
+				DAEB4B201AF5F5CF006D6A48 /* postcard-mountain~iphone.jpg */,
 				B5675BA918A19A84002E0703 /* SearchBarBacking@2x~iphone.png */,
 				B5675BAA18A19A84002E0703 /* SearchBarBacking~iphone.png */,
 				B55A02F118EA206300845090 /* Settings */,
@@ -4215,6 +4225,7 @@
 				7D98ADC819A7C550003D2BF6 /* TxSearchBarBacking~iphone.png in Resources */,
 				7D98ADC919A7C550003D2BF6 /* btn_selected@2x~iphone.png in Resources */,
 				7D98ADCA19A7C550003D2BF6 /* icon_location@2x~iphone.png in Resources */,
+				DAEB4B221AF5F5CF006D6A48 /* postcard-mountain@2x~iphone.jpg in Resources */,
 				7D98ADCB19A7C550003D2BF6 /* clearButton@2x~iphone.png in Resources */,
 				7D98ADCC19A7C550003D2BF6 /* tabbar_popup_right@2x~iphone.png in Resources */,
 				7D98ADCD19A7C550003D2BF6 /* img_collapseExpandBlueDown~iphone.png in Resources */,
@@ -4303,6 +4314,7 @@
 				7D98AE1919A7C550003D2BF6 /* flash-off@2x~iphone.png in Resources */,
 				7D98AE1A19A7C550003D2BF6 /* btn_td_done@2x~iphone.png in Resources */,
 				DA14ABD71A841B5A00C30F08 /* btn_expand_green@2x~iphone.png in Resources */,
+				DAEB4B251AF5F5CF006D6A48 /* postcard-mountain~iphone.jpg in Resources */,
 				7D98A0091A0206960094512B /* bd_icon_yelp~iphone.png in Resources */,
 				7D98AE1B19A7C550003D2BF6 /* btn_scan_qr_code@2x~iphone.png in Resources */,
 				7D98AE1C19A7C550003D2BF6 /* btn_deleteCategory@2x~iphone.png in Resources */,
@@ -4499,6 +4511,7 @@
 				B55A030318EA206300845090 /* btn_selected~iphone.png in Resources */,
 				B59C151718C012B500AEA789 /* icon_bitcoin_light~iphone.png in Resources */,
 				B59C152818C012B500AEA789 /* icon_USD_dark@2x~iphone.png in Resources */,
+				DAEB4B211AF5F5CF006D6A48 /* postcard-mountain@2x~iphone.jpg in Resources */,
 				B59C141A18C0113A00AEA789 /* bkg_categories@2x~iphone.png in Resources */,
 				B59C14D818C012B500AEA789 /* btn_7@2x~iphone.png in Resources */,
 				4C5D8C66192D1DE50015BB3C /* icon_not_approved~iphone.png in Resources */,
@@ -4568,6 +4581,7 @@
 				687D2E7C1A09638200F1F9D1 /* infoSpendingLimits.html in Resources */,
 				B5F2E9DA18DCE475008ACF88 /* Red-X@2x~iphone.png in Resources */,
 				B5F2EB1618DE0523008ACF88 /* btn_light@2x~iphone.png in Resources */,
+				DAEB4B241AF5F5CF006D6A48 /* postcard-mountain~iphone.jpg in Resources */,
 				4C7247A31934FC840091C286 /* btn_export_dates~iphone.png in Resources */,
 				4C5D8C8719300CBD0015BB3C /* TxSearchBarBacking@2x~iphone.png in Resources */,
 				B5137C1018A40A8400DA4A34 /* Lato-Regular.ttf in Resources */,
@@ -4903,6 +4917,7 @@
 				DAE864B81A88A58A00A17BD3 /* btn_selected~iphone.png in Resources */,
 				DAE864B91A88A58A00A17BD3 /* icon_bitcoin_light~iphone.png in Resources */,
 				DAE864BB1A88A58A00A17BD3 /* icon_USD_dark@2x~iphone.png in Resources */,
+				DAEB4B231AF5F5CF006D6A48 /* postcard-mountain@2x~iphone.jpg in Resources */,
 				DAE864BC1A88A58A00A17BD3 /* bkg_categories@2x~iphone.png in Resources */,
 				DAE864BD1A88A58A00A17BD3 /* btn_7@2x~iphone.png in Resources */,
 				DAE864BF1A88A58A00A17BD3 /* icon_not_approved~iphone.png in Resources */,
@@ -4972,6 +4987,7 @@
 				DAE865001A88A58A00A17BD3 /* infoSpendingLimits.html in Resources */,
 				DAE865011A88A58A00A17BD3 /* Red-X@2x~iphone.png in Resources */,
 				DAE865021A88A58A00A17BD3 /* btn_light@2x~iphone.png in Resources */,
+				DAEB4B261AF5F5CF006D6A48 /* postcard-mountain~iphone.jpg in Resources */,
 				DAE865041A88A58A00A17BD3 /* btn_export_dates~iphone.png in Resources */,
 				DAE865051A88A58A00A17BD3 /* TxSearchBarBacking@2x~iphone.png in Resources */,
 				DAE865061A88A58A00A17BD3 /* Lato-Regular.ttf in Resources */,
