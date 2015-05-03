@@ -328,7 +328,7 @@ MainViewController *staticMVC;
     // This *should* be the directoryView. Move it away to the side
     [MainViewController moveSelectedViewController: -_selectedViewController.view.frame.size.width];
 
-    [self.view insertSubview:_loginViewController.view belowSubview:self.tabBar];
+    [self.view insertSubview:_loginViewController.view aboveSubview:self.tabBar];
     [self hideTabBarAnimated:animated];
     [self hideNavBarAnimated:animated];
     if (animated) {
@@ -354,7 +354,7 @@ MainViewController *staticMVC;
     // This *should* be the directoryView. Move it away to the side
     [MainViewController moveSelectedViewController: -_selectedViewController.view.frame.size.width];
 
-    [self.view insertSubview:_loginViewController.view belowSubview:self.tabBar];
+    [self.view insertSubview:_loginViewController.view aboveSubview:self.tabBar];
     [self hideTabBarAnimated:animated];
     [self hideNavBarAnimated:animated];
     if (animated) {

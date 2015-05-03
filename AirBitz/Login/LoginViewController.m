@@ -52,10 +52,14 @@ typedef enum eLoginMode
     FadingAlertView                 *_fadingAlert;
     float                           _keyboardFrameOriginY;
     CGFloat                         _originalLogoHeight;
+    CGFloat                         _originalUsernameHeight;
+    CGFloat                         _originalPasswordHeight;
     CGFloat                         _originalTextBitcoinWalletHeight;
 
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *usernameHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordHeight;
 @property (weak, nonatomic) IBOutlet UIButton *forgotPassworddButton;
 @property (weak, nonatomic) IBOutlet APPINView          *PINCodeView;
 @property (weak, nonatomic) IBOutlet ButtonSelectorView *PINusernameSelector;
@@ -117,6 +121,8 @@ static BOOL bInitialized = false;
         bInitialized = true;
         _originalLogoHeight = self.logoHeight.constant;
         _originalTextBitcoinWalletHeight = self.textBitcoinWalletHeight.constant;
+        _originalUsernameHeight = self.usernameHeight.constant;
+        _originalPasswordHeight = self.passwordHeight.constant;
 
         if ([self.arrayAccounts count] == 0)
         {
@@ -146,7 +152,7 @@ static BOOL bInitialized = false;
     self.usernameSelector.textField.textAlignment = NSTextAlignmentLeft;
 
     // Add shadows to some text for visibility
-    self.PINusernameSelector.textLabel.layer.shadowRadius = 4.0f;
+    self.PINusernameSelector.textLabel.layer.shadowRadius = 3.0f;
     self.PINusernameSelector.textLabel.layer.shadowOpacity = 1.0f;
     self.PINusernameSelector.textLabel.layer.masksToBounds = NO;
     self.PINusernameSelector.textLabel.layer.shadowColor = [[UIColor whiteColor] CGColor];
@@ -155,7 +161,7 @@ static BOOL bInitialized = false;
     self.swipeText.layer.shadowRadius = 3.0f;
     self.swipeText.layer.shadowOpacity = 1.0f;
     self.swipeText.layer.masksToBounds = NO;
-    self.swipeText.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.swipeText.layer.shadowColor = [[UIColor darkGrayColor] CGColor];
     self.swipeText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
     self.titleText.layer.shadowRadius = 3.0f;
@@ -163,6 +169,12 @@ static BOOL bInitialized = false;
     self.titleText.layer.masksToBounds = NO;
     self.titleText.layer.shadowColor = [[UIColor whiteColor] CGColor];
     self.titleText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+
+    self.forgotPassworddButton.layer.shadowRadius = 3.0f;
+    self.forgotPassworddButton.layer.shadowOpacity = 1.0f;
+    self.forgotPassworddButton.layer.masksToBounds = NO;
+    self.forgotPassworddButton.layer.shadowColor = [[UIColor darkGrayColor] CGColor];
+    self.forgotPassworddButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
     self.usernameSelector.textField.placeholder = NSLocalizedString(@"Username", @"Username");
     self.usernameSelector.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.usernameSelector.textField.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
@@ -212,19 +224,16 @@ static BOOL bInitialized = false;
 
     if (_mode == MODE_NO_USERS)
     {
-        self.usernameSelector.textField.enabled = false;
         self.usernameSelector.textField.hidden = true;
-        self.passwordTextField.enabled = false;
-        self.passwordTextField.hidden = true;
+        self.usernameHeight.constant = 0;
+        self.passwordHeight.constant = 0;
         self.forgotPassworddButton.hidden = true;
     }
     else
     {
-
-        self.usernameSelector.textField.enabled = true;
         self.usernameSelector.textField.hidden = false;
-        self.passwordTextField.enabled = true;
-        self.passwordTextField.hidden = false;
+        self.usernameHeight.constant = _originalUsernameHeight;
+        self.passwordHeight.constant = _originalPasswordHeight;
         self.forgotPassworddButton.hidden = false;
 
         if (_mode == MODE_ENTERING_USERNAME)
@@ -324,19 +333,21 @@ static BOOL bInitialized = false;
         //
         // Set the PIN username default
         //
+        UIFont *boldFont = [UIFont fontWithName:@"Lato-Bold" size:self.PINusernameSelector.button.titleLabel.font.pointSize];
+        UIFont *regularFont = [UIFont fontWithName:@"Lato-Regular" size:self.PINusernameSelector.button.titleLabel.font.pointSize];
+        UIColor *boldColor = [UIColor colorWithRed:60./255. green:140.5/255. blue:200/255. alpha:1.];
+        UIColor *regularColor = [UIColor grayColor];
         NSString *title = [NSString stringWithFormat:@"Enter PIN for (%@)",
                            username];
         // Define general attributes like color and fonts for the entire text
-        NSDictionary *attr = @{NSForegroundColorAttributeName:self.PINusernameSelector.button.titleLabel.textColor,
-                               NSFontAttributeName:self.PINusernameSelector.button.titleLabel.font};
+        NSDictionary *attr = @{NSForegroundColorAttributeName:regularColor,
+                               NSFontAttributeName:regularFont};
         NSMutableAttributedString *attributedText = [ [NSMutableAttributedString alloc]
                                                      initWithString:title
                                                      attributes:attr];
         // blue and bold text attributes
-        UIColor *color = [UIColor colorWithRed:60./255. green:140.5/255. blue:200/255. alpha:1.];
-        UIFont *boldFont = [UIFont boldSystemFontOfSize:self.PINusernameSelector.button.titleLabel.font.pointSize];
         NSRange usernameTextRange = [title rangeOfString:username];
-        [attributedText setAttributes:@{NSForegroundColorAttributeName:color,
+        [attributedText setAttributes:@{NSForegroundColorAttributeName:boldColor,
                                         NSFontAttributeName:boldFont}
                                 range:usernameTextRange];
         [self.PINusernameSelector.button setAttributedTitle:attributedText forState:UIControlStateNormal];
@@ -771,7 +782,7 @@ static BOOL bInitialized = false;
                  // sliding to right. Move directory back to left
                  [MainViewController moveSelectedViewController:-self.view.frame.size.width];
              }
-             else
+             else if (self.view.frame.origin.x < 0)
              {
                  // sliding to left. Move directory back to right
                  [MainViewController moveSelectedViewController:self.view.frame.size.width];
