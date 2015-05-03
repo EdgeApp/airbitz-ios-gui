@@ -307,7 +307,7 @@ typedef enum eMapDisplayState
     // Your adjustments accd to
     // viewController.bounds
     
-    self.footerHeight.constant = [self.delegate getFooterHeight:self];
+    self.footerHeight.constant = [MainViewController getFooterHeight];
     
     [super viewWillLayoutSubviews];
 }
@@ -387,7 +387,13 @@ typedef enum eMapDisplayState
 {
     //spawn infoView
     InfoView *iv = [InfoView CreateWithDelegate: self];
-    iv.frame = self.view.bounds;
+    CGRect frame;
+
+    frame = self.view.bounds;
+    frame.origin.y += [MainViewController getHeaderHeight];
+    frame.size.height -= [MainViewController getFooterHeight] + [MainViewController getHeaderHeight];
+
+    iv.frame = frame;
     [iv enableScrolling: NO];
     [self.view addSubview: iv];
 

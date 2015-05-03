@@ -53,7 +53,7 @@ typedef enum eAppMode
 @interface MainViewController () <UITabBarDelegate,RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate, DirectoryViewControllerDelegate,
+                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate>
 {
 	UIViewController            *_selectedViewController;
@@ -1592,14 +1592,14 @@ MainViewController *staticMVC;
 
 }
 
-- (GLfloat)getFooterHeight:(UIViewController *)vc
++ (CGFloat)getFooterHeight
 {
-    return self.tabBar.frame.size.height;
+    return staticMVC.tabBar.frame.size.height;
 }
 
-- (GLfloat)getHeaderHeight:(UIViewController *)vc
++ (CGFloat)getHeaderHeight
 {
-    return self.navBar.frame.size.height;
+    return staticMVC.navBar.frame.size.height;
 }
 
 @end

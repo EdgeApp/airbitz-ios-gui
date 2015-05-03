@@ -8,18 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol DirectoryViewControllerDelegate;
-
 @interface DirectoryViewController : UIViewController
 
-@property (assign) id<DirectoryViewControllerDelegate> delegate;
-
-@end
-
-
-@protocol DirectoryViewControllerDelegate <NSObject>
-
-@required
--(GLfloat)getFooterHeight:(UIViewController *)vc;
--(GLfloat)getHeaderHeight:(UIViewController *)vc;
 @end
