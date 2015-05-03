@@ -438,7 +438,7 @@
 - (void)headerButton
 {
     _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-    _fadingAlert.message = @"To archive a wallet, tap and hold the 3 dots to the right of a wallet and drag it below the [ARCHIVE] header";
+    _fadingAlert.message = @"To archive a wallet, tap and hold the 3 bars to the right of a wallet and drag it below the [ARCHIVE] header";
     _fadingAlert.fadeDelay = FADING_HELP_DELAY;
     _fadingAlert.fadeDuration = FADING_HELP_DURATION;
     [_fadingAlert blockModal:NO];
@@ -680,7 +680,14 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 44.0;
+    if (IS_IPHONE4)
+    {
+        return 44.0;
+    }
+    else
+    {
+        return 55.0;
+    }
 }
 
 -(WalletCell *)getWalletCellForTableView:(UITableView *)tableView
@@ -708,6 +715,11 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
     Wallet *wallet = (indexPath.section == 0 ?
                       [self.arrayWallets objectAtIndex:row] :
                       [self.arrayArchivedWallets objectAtIndex:row]);
+
+    cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.6];
+    cell.name.backgroundColor = [UIColor clearColor];
+    cell.amount.backgroundColor = [UIColor clearColor];
+
     if (wallet.loaded) {
         cell.userInteractionEnabled = YES;
         cell.name.text = wallet.strName;

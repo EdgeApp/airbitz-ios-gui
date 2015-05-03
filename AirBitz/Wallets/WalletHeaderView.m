@@ -39,7 +39,7 @@
 //     av = [[[NSBundle mainBundle] loadNibNamed:@"HowToPlayView~ipad" owner:nil options:nil] objectAtIndex:0];
 //     
 //    }
-    whv.layer.cornerRadius = 4.0;
+    whv.layer.cornerRadius = 0.0;
     whv.titleLabel.text = title;
     whv->headerCollapsed = bCollapsed;
     if (whv->headerCollapsed)

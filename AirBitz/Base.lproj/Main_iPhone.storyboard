@@ -1318,7 +1318,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w7G-E8-m3C" userLabel="Table View - Wallet List">
-                                <rect key="frame" x="20" y="196" width="335" height="471"/>
+                                <rect key="frame" x="0.0" y="196" width="375" height="471"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="471" id="E38-JB-Hp1"/>
@@ -1333,11 +1333,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="294" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EbY-4p-h0Y">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EbY-4p-h0Y">
                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
                                                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0QH-Cd-JVq" userLabel="Label - Wallet Name" customClass="MontserratLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0QH-Cd-JVq" userLabel="Label - Wallet Name" customClass="MontserratLabel">
                                                     <rect key="frame" x="20" y="4" width="249" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.25490196078431371" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
@@ -1345,7 +1345,7 @@
                                                     <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bu9-4x-j6f" userLabel="Label - Wallet Balance" customClass="LatoLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bu9-4x-j6f" userLabel="Label - Wallet Balance" customClass="LatoLabel">
                                                     <rect key="frame" x="277" y="4" width="38" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1389,13 +1389,13 @@
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Bzx-4y-6VM" secondAttribute="trailing" id="3nY-XD-RWf"/>
-                            <constraint firstItem="w7G-E8-m3C" firstAttribute="leading" secondItem="bTU-z5-MKB" secondAttribute="leading" constant="20" symbolic="YES" id="A9N-bf-DMG"/>
+                            <constraint firstItem="w7G-E8-m3C" firstAttribute="leading" secondItem="bTU-z5-MKB" secondAttribute="leading" id="A9N-bf-DMG"/>
                             <constraint firstAttribute="centerX" secondItem="ZgP-7Q-PoB" secondAttribute="centerX" id="BdC-fR-xTc"/>
                             <constraint firstItem="ZgP-7Q-PoB" firstAttribute="top" secondItem="jhg-Mk-M7b" secondAttribute="bottom" constant="52" id="Cdo-rs-D2m"/>
                             <constraint firstItem="Bzx-4y-6VM" firstAttribute="top" secondItem="jhg-Mk-M7b" secondAttribute="bottom" constant="46" id="MOQ-6V-LkM"/>
                             <constraint firstItem="6Yg-1c-9dj" firstAttribute="top" secondItem="ZgP-7Q-PoB" secondAttribute="bottom" constant="10" id="St7-dk-7AK"/>
                             <constraint firstAttribute="centerX" secondItem="6Yg-1c-9dj" secondAttribute="centerX" id="azB-7G-ghO"/>
-                            <constraint firstAttribute="trailing" secondItem="w7G-E8-m3C" secondAttribute="trailing" constant="20" symbolic="YES" id="dpr-Lz-sYn"/>
+                            <constraint firstAttribute="trailing" secondItem="w7G-E8-m3C" secondAttribute="trailing" id="dpr-Lz-sYn"/>
                             <constraint firstItem="w7G-E8-m3C" firstAttribute="top" secondItem="ZgP-7Q-PoB" secondAttribute="bottom" constant="98" id="kil-Zu-D7L"/>
                             <constraint firstItem="Bzx-4y-6VM" firstAttribute="leading" secondItem="bTU-z5-MKB" secondAttribute="leading" id="uui-bW-HO2"/>
                         </constraints>
