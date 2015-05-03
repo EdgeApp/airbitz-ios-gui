@@ -56,7 +56,6 @@ typedef enum eAppMode
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate>
 {
-	UIViewController            *_selectedViewController;
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
 	AddressRequestController    *_addressRequestController;
@@ -95,6 +94,7 @@ typedef enum eAppMode
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBarBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *navBarTop;
 
+@property UIViewController            *selectedViewController;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -311,9 +311,24 @@ MainViewController *staticMVC;
     }
 }
 
++(void)moveSelectedViewController: (CGFloat) x
+{
+    CGRect frame;
+    
+    frame = staticMVC.selectedViewController.view.frame;
+    frame.origin.x = x;
+    
+    staticMVC.selectedViewController.view.frame = frame;
+
+}
+
 -(void)showLogin:(BOOL)animated
 {
     _loginViewController.view.frame = self.view.bounds;
+
+    // This *should* be the directoryView. Move it away to the side
+    [MainViewController moveSelectedViewController: -_selectedViewController.view.frame.size.width];
+
     [self.view insertSubview:_loginViewController.view belowSubview:self.tabBar];
     [self hideTabBarAnimated:animated];
     [self hideNavBarAnimated:animated];

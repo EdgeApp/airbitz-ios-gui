@@ -21,6 +21,7 @@
 #import "CoreBridge.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
+#import "MainViewController.h"
 
 typedef enum eLoginMode
 {
@@ -471,9 +472,18 @@ typedef enum eLoginMode
     
     CGRect frame = self.view.frame;
     CGFloat xPos;
-    
+
+
     xPos = touchPoint.x - _firstTouchPoint.x;
-    
+
+    if (xPos < 0)
+    {
+        [MainViewController moveSelectedViewController:(frame.size.width + xPos)];
+    }
+    else
+    {
+        [MainViewController moveSelectedViewController:(-frame.size.width + xPos)];
+    }
     frame.origin.x = xPos;
     self.view.frame = frame;
 }
@@ -498,6 +508,17 @@ typedef enum eLoginMode
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
+             if (self.view.frame.origin.x > 0)
+             {
+                 // sliding to right. Move directory back to left
+                 [MainViewController moveSelectedViewController:-self.view.frame.size.width];
+             }
+             else
+             {
+                 // sliding to left. Move directory back to right
+                 [MainViewController moveSelectedViewController:self.view.frame.size.width];
+             }
+
              CGRect frame = self.view.frame;
             frame.origin.x = 0.0;
              self.view.frame = frame;
@@ -523,6 +544,8 @@ typedef enum eLoginMode
              {
                  frame.origin.x = frame.size.width;
              }
+             [MainViewController moveSelectedViewController:0.0];
+
              self.view.frame = frame;
          }
          completion:^(BOOL finished)
