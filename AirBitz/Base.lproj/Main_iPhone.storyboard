@@ -287,7 +287,7 @@
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="JcL-kA-vl8"/>
                                         </connections>
                                     </tableView>
-                                    <mapView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OKH-hE-U5z" customClass="MapView">
+                                    <mapView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OKH-hE-U5z" customClass="MapView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="223"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="223" id="B8R-BZ-DUX"/>
@@ -296,7 +296,7 @@
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="BRu-69-YqM"/>
                                         </connections>
                                     </mapView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ue2-Gm-7u2" userLabel="Button - Nav">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ue2-Gm-7u2" userLabel="Button - Nav">
                                         <rect key="frame" x="316" y="166" width="39" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="39" id="5ly-Ua-34d"/>
@@ -320,7 +320,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d8k-A8-ona" userLabel="Dragbar View" customClass="DividerView">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d8k-A8-ona" userLabel="Dragbar View" customClass="DividerView">
                                         <rect key="frame" x="0.0" y="213" width="375" height="27"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="drag_bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="4V6-Vv-Ai6">
@@ -1309,17 +1309,20 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Yg-1c-9dj" userLabel="View - Toggle Bar">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Yg-1c-9dj" userLabel="View - Toggle Bar">
                                 <rect key="frame" x="41" y="106" width="294" height="82"/>
                                 <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="294" id="03u-t4-EW7"/>
+                                    <constraint firstAttribute="width" constant="280" id="JMq-Ro-WYM"/>
                                     <constraint firstAttribute="height" constant="82" id="xPW-Ku-mZZ"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w7G-E8-m3C" userLabel="Table View - Wallet List">
                                 <rect key="frame" x="20" y="196" width="335" height="471"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="471" id="E38-JB-Hp1"/>
+                                </constraints>
                                 <color key="separatorColor" red="1" green="0.01176470588" blue="0.01176470588" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1386,16 +1389,15 @@
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Bzx-4y-6VM" secondAttribute="trailing" id="3nY-XD-RWf"/>
-                            <constraint firstItem="6Yg-1c-9dj" firstAttribute="top" secondItem="ZgP-7Q-PoB" secondAttribute="bottom" constant="8" symbolic="YES" id="9q7-6A-Ozb"/>
                             <constraint firstItem="w7G-E8-m3C" firstAttribute="leading" secondItem="bTU-z5-MKB" secondAttribute="leading" constant="20" symbolic="YES" id="A9N-bf-DMG"/>
                             <constraint firstAttribute="centerX" secondItem="ZgP-7Q-PoB" secondAttribute="centerX" id="BdC-fR-xTc"/>
                             <constraint firstItem="ZgP-7Q-PoB" firstAttribute="top" secondItem="jhg-Mk-M7b" secondAttribute="bottom" constant="52" id="Cdo-rs-D2m"/>
                             <constraint firstItem="Bzx-4y-6VM" firstAttribute="top" secondItem="jhg-Mk-M7b" secondAttribute="bottom" constant="46" id="MOQ-6V-LkM"/>
-                            <constraint firstItem="w7G-E8-m3C" firstAttribute="top" secondItem="6Yg-1c-9dj" secondAttribute="bottom" constant="8" symbolic="YES" id="TmP-mr-bZf"/>
+                            <constraint firstItem="6Yg-1c-9dj" firstAttribute="top" secondItem="ZgP-7Q-PoB" secondAttribute="bottom" constant="10" id="St7-dk-7AK"/>
                             <constraint firstAttribute="centerX" secondItem="6Yg-1c-9dj" secondAttribute="centerX" id="azB-7G-ghO"/>
                             <constraint firstAttribute="trailing" secondItem="w7G-E8-m3C" secondAttribute="trailing" constant="20" symbolic="YES" id="dpr-Lz-sYn"/>
+                            <constraint firstItem="w7G-E8-m3C" firstAttribute="top" secondItem="ZgP-7Q-PoB" secondAttribute="bottom" constant="98" id="kil-Zu-D7L"/>
                             <constraint firstItem="Bzx-4y-6VM" firstAttribute="leading" secondItem="bTU-z5-MKB" secondAttribute="leading" id="uui-bW-HO2"/>
-                            <constraint firstItem="tsd-Gh-wL0" firstAttribute="top" secondItem="w7G-E8-m3C" secondAttribute="bottom" id="zh1-2b-DD1"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="Vew-Wr-i4K"/>

@@ -10,7 +10,7 @@
 
 @interface WalletsViewController : UIViewController
 
-- (void)reloadWallets;
+- (void)reloadWallets: (NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets;
 - (void)selectWalletWithUUID:(NSString *)strUUID;
 - (void)resetViews;
 

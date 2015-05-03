@@ -37,6 +37,7 @@
 	UIButton                    *_blockingButton;
 	BOOL                        _walletMakerVisible;
     OfflineWalletViewController *_offlineWalletViewController;
+    
     FadingAlertView             *_fadingAlert;
 
 }
@@ -64,9 +65,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // resize ourselves to fit in area
-    [Util resizeView:self.view withDisplayView:nil];
 
     [self.view setNeedsLayout];
     [self.view layoutIfNeeded];
@@ -133,6 +131,7 @@
             self.arrayWallets = arrayWallets;
             self.arrayArchivedWallets = arrayArchivedWallets;
 
+            NSLog(@"Wallet Table %f %f %f %f\n", self.walletsTable.frame.origin.x, self.walletsTable.frame.origin.y, self.walletsTable.frame.size.width, self.walletsTable.frame.size.height);
             [self.walletsTable reloadData];
             [self updateBalanceView];
         });
@@ -550,6 +549,7 @@
             self.arrayWallets = arrayWallets;
             self.arrayArchivedWallets = arrayArchivedWallets;
 
+            NSLog(@"Wallet Table %f %f %f %f\n", self.walletsTable.frame.origin.x, self.walletsTable.frame.origin.y, self.walletsTable.frame.size.width, self.walletsTable.frame.size.height);
             [self.walletsTable reloadData];
             [self updateBalanceView];
         });
@@ -616,7 +616,9 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
     [CoreBridge setWalletAttributes:wallet];
     [CoreBridge setWalletOrder: self.arrayWallets archived:self.arrayArchivedWallets];
 	[self updateBalanceView];
-	[self.walletsTable reloadData];
+    NSLog(@"Wallet Table %f %f %f %f\n", self.walletsTable.frame.origin.x, self.walletsTable.frame.origin.y, self.walletsTable.frame.size.width, self.walletsTable.frame.size.height);
+
+    [self.walletsTable reloadData];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -741,7 +743,9 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 
 -(void)BalanceView:(BalanceView *)view changedStateTo:(tBalanceViewState)state
 {
-	[self.walletsTable reloadData];
+    NSLog(@"Wallet Table %f %f %f %f\n", self.walletsTable.frame.origin.x, self.walletsTable.frame.origin.y, self.walletsTable.frame.size.width, self.walletsTable.frame.size.height);
+
+    [self.walletsTable reloadData];
 }
 
 #pragma mark - Wallet Maker View Delegates
