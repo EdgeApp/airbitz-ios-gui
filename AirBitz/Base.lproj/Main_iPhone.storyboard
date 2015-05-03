@@ -4062,21 +4062,21 @@ Scan the QR code using this device</string>
                         <viewControllerLayoutGuide type="bottom" id="com-9x-BkR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nTP-NI-D0U">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eTI-9q-uu0" userLabel="View - Content">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_large.png" translatesAutoresizingMaskIntoConstraints="NO" id="LqE-iy-sKS">
-                                        <rect key="frame" x="56" y="20" width="208" height="106"/>
+                                        <rect key="frame" x="84" y="20" width="208" height="106"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="106" id="XEa-cm-iAj"/>
                                             <constraint firstAttribute="width" secondItem="LqE-iy-sKS" secondAttribute="height" multiplier="104:53" id="wTC-p4-vpe"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bitcoin Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nae-d6-xoW" customClass="LatoLabel">
-                                        <rect key="frame" x="67" y="134" width="186" height="27"/>
+                                        <rect key="frame" x="95" y="134" width="186" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="27" id="6J0-O3-MAp"/>
                                             <constraint firstAttribute="width" constant="186" id="8zF-39-Abo"/>
@@ -4088,7 +4088,7 @@ Scan the QR code using this device</string>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpH-FO-ztL" userLabel="View - Username Pwd">
-                                        <rect key="frame" x="0.0" y="169" width="320" height="147"/>
+                                        <rect key="frame" x="28" y="169" width="320" height="147"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z92-xY-Nti" userLabel="View username picker" customClass="PickerTextView">
                                                 <rect key="frame" x="34" y="3" width="251" height="35"/>
@@ -4106,7 +4106,7 @@ Scan the QR code using this device</string>
                                                 <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
-                                                <state key="normal" title="Log In">
+                                                <state key="normal" title="Sign In">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -4121,8 +4121,58 @@ Scan the QR code using this device</string>
                                             <constraint firstAttribute="width" constant="320" id="GhS-9N-0LZ"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHf-E8-N2q" userLabel="View - PIN and Username">
+                                        <rect key="frame" x="27" y="169" width="320" height="147"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VWS-p6-0xj" customClass="ButtonSelectorView">
+                                                <rect key="frame" x="54" y="20" width="213" height="30"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="1" height="1"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="213" id="8hj-7S-w2S"/>
+                                                    <constraint firstAttribute="height" constant="30" id="q38-ab-yfU"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIc-w4-vLL" userLabel="View - PINCode" customClass="APPINView">
+                                                <rect key="frame" x="53" y="58" width="214" height="44"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="214" id="2uy-fq-mu7"/>
+                                                    <constraint firstAttribute="height" constant="44" id="S8R-eu-Y7C"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTg-3l-g7y" customClass="StylizedButton">
+                                                <rect key="frame" x="34" y="110" width="251" height="43"/>
+                                                <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="251" id="WsM-ti-Mul"/>
+                                                    <constraint firstAttribute="height" constant="43" id="bjz-Zs-SaW"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                                <state key="normal" title="Login With Password">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="buttonLoginWithPasswordTouched:" destination="zLx-xG-j1m" eventType="touchUpInside" id="JEa-hI-cHQ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="centerX" secondItem="DIc-w4-vLL" secondAttribute="centerX" id="4rb-wz-yLG"/>
+                                            <constraint firstItem="DIc-w4-vLL" firstAttribute="top" secondItem="VWS-p6-0xj" secondAttribute="bottom" constant="8" symbolic="YES" id="FeL-Lr-a5V"/>
+                                            <constraint firstItem="VWS-p6-0xj" firstAttribute="top" secondItem="BHf-E8-N2q" secondAttribute="top" constant="20" symbolic="YES" id="O0u-yh-FTc"/>
+                                            <constraint firstAttribute="width" constant="320" id="cS4-NL-nIo"/>
+                                            <constraint firstItem="RTg-3l-g7y" firstAttribute="top" secondItem="DIc-w4-vLL" secondAttribute="bottom" constant="8" symbolic="YES" id="jzI-1T-MAP"/>
+                                            <constraint firstAttribute="centerX" secondItem="VWS-p6-0xj" secondAttribute="centerX" id="kXr-Xe-Apa"/>
+                                            <constraint firstAttribute="centerX" secondItem="RTg-3l-g7y" secondAttribute="centerX" id="tcV-NQ-Kgm"/>
+                                            <constraint firstAttribute="height" constant="147" id="wtL-N3-dKH"/>
+                                        </constraints>
+                                    </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to View Business Directory" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8XB-1A-1hO" customClass="LatoLabel">
-                                        <rect key="frame" x="40" y="324" width="240" height="30"/>
+                                        <rect key="frame" x="68" y="324" width="240" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="5Py-kI-Nim"/>
                                             <constraint firstAttribute="width" constant="240" id="bVa-l9-bV5"/>
@@ -4134,14 +4184,14 @@ Scan the QR code using this device</string>
                                         <size key="shadowOffset" width="0.0" height="2"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe-arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="jLL-vF-Vbd">
-                                        <rect key="frame" x="280" y="329" width="36" height="20"/>
+                                        <rect key="frame" x="308" y="329" width="36" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="36" id="hiP-9R-E08"/>
                                             <constraint firstAttribute="height" constant="20" id="zex-CZ-MrN"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUp-i4-uHt" userLabel="View - Create / Forgot">
-                                        <rect key="frame" x="0.0" y="362" width="320" height="107"/>
+                                        <rect key="frame" x="28" y="362" width="320" height="107"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iz-Uc-LTS" customClass="StylizedButton">
                                                 <rect key="frame" x="34" y="10" width="252" height="44"/>
@@ -4182,10 +4232,13 @@ Scan the QR code using this device</string>
                                 <constraints>
                                     <constraint firstItem="LqE-iy-sKS" firstAttribute="top" secondItem="eTI-9q-uu0" secondAttribute="top" constant="20" symbolic="YES" id="6iW-d6-Qv9"/>
                                     <constraint firstItem="kpH-FO-ztL" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" constant="8" symbolic="YES" id="AnO-5K-GCi"/>
+                                    <constraint firstItem="8XB-1A-1hO" firstAttribute="top" secondItem="BHf-E8-N2q" secondAttribute="bottom" constant="8" symbolic="YES" id="D5Y-65-Xb9"/>
                                     <constraint firstItem="nae-d6-xoW" firstAttribute="centerX" secondItem="LqE-iy-sKS" secondAttribute="centerX" id="DX0-zg-toi"/>
                                     <constraint firstItem="jLL-vF-Vbd" firstAttribute="centerY" secondItem="8XB-1A-1hO" secondAttribute="centerY" id="HhJ-C4-KBO"/>
                                     <constraint firstItem="bUp-i4-uHt" firstAttribute="top" secondItem="8XB-1A-1hO" secondAttribute="bottom" constant="8" symbolic="YES" id="Kbe-0q-p9l"/>
                                     <constraint firstItem="nae-d6-xoW" firstAttribute="top" secondItem="LqE-iy-sKS" secondAttribute="bottom" constant="8" symbolic="YES" id="NZO-G9-2kT"/>
+                                    <constraint firstAttribute="centerX" secondItem="BHf-E8-N2q" secondAttribute="centerX" id="Orr-nz-wcl"/>
+                                    <constraint firstItem="BHf-E8-N2q" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" constant="8" symbolic="YES" id="TAl-3p-bP9"/>
                                     <constraint firstAttribute="centerX" secondItem="8XB-1A-1hO" secondAttribute="centerX" id="UZF-mI-uqs"/>
                                     <constraint firstItem="8XB-1A-1hO" firstAttribute="top" secondItem="kpH-FO-ztL" secondAttribute="bottom" constant="8" symbolic="YES" id="Vxq-SZ-hYf"/>
                                     <constraint firstAttribute="centerX" secondItem="nae-d6-xoW" secondAttribute="centerX" id="Wg7-nU-ecP"/>
@@ -4211,17 +4264,17 @@ Scan the QR code using this device</string>
                                 </connections>
                             </button>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZe-mr-te9" userLabel="Spinner View">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="jxB-Sf-1qJ">
-                                        <rect key="frame" x="142" y="265" width="37" height="37"/>
+                                        <rect key="frame" x="169" y="315" width="37" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="37" id="JSR-NO-KwI"/>
                                             <constraint firstAttribute="width" constant="37" id="TU2-kk-RMt"/>
                                         </constraints>
                                     </activityIndicatorView>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" id="whJ-vw-6PG" userLabel="ErrorMessageView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <rect key="frame" x="27" y="49" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-errormessage.png" id="GW4-rc-pP7">
@@ -4260,11 +4313,13 @@ Scan the QR code using this device</string>
                             <constraint firstItem="com-9x-BkR" firstAttribute="top" secondItem="YZe-mr-te9" secondAttribute="bottom" id="vV6-hz-PX9"/>
                         </constraints>
                     </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="568"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="PINCodeView" destination="DIc-w4-vLL" id="VK1-PT-9eC"/>
+                        <outlet property="PINusernameSelector" destination="VWS-p6-0xj" id="BKI-59-q7h"/>
                         <outlet property="backButton" destination="Ypw-4p-DZr" id="Gdl-4p-iBe"/>
                         <outlet property="contentView" destination="eTI-9q-uu0" id="9Og-HH-DYd"/>
+                        <outlet property="credentialsPINView" destination="BHf-E8-N2q" id="YXf-Zn-gQZ"/>
                         <outlet property="credentialsView" destination="kpH-FO-ztL" id="UiA-5C-OgI"/>
                         <outlet property="errorMessageText" destination="5wy-Mi-whP" id="oh9-gY-loy"/>
                         <outlet property="errorMessageView" destination="whJ-vw-6PG" id="T37-ad-SID"/>
@@ -4278,12 +4333,12 @@ Scan the QR code using this device</string>
                         <outlet property="textBitcoinWalletHeight" destination="6J0-O3-MAp" id="PKx-Pf-IgX"/>
                         <outlet property="titleText" destination="nae-d6-xoW" id="2iX-DH-tAT"/>
                         <outlet property="userEntryView" destination="bUp-i4-uHt" id="dJP-E5-WVa"/>
-                        <outlet property="usernameSelector" destination="Z92-xY-Nti" id="5of-54-l25"/>
+                        <outlet property="usernameSelector" destination="Z92-xY-Nti" id="5Mc-tU-He9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YfQ-ZQ-sIA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1462" y="-2714"/>
+            <point key="canvasLocation" x="-1685" y="-2716"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="wjF-TM-30t">
@@ -4545,7 +4600,7 @@ Scan the QR code using this device</string>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo_large.png" translatesAutoresizingMaskIntoConstraints="NO" id="5UU-KK-R7x">
                                         <rect key="frame" x="55" y="37" width="211" height="71"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iUH-NW-Znt" customClass="APPINView">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iUH-NW-Znt" userLabel="View - PINCode" customClass="APPINView">
                                         <rect key="frame" x="53" y="156" width="214" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>

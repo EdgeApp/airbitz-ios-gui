@@ -22,6 +22,8 @@
 #import "CommonTypes.h"
 #import "LocalSettings.h"
 #import "MainViewController.h"
+#import "ButtonSelectorView.h"
+#import "APPINView.h"
 
 typedef enum eLoginMode
 {
@@ -33,7 +35,7 @@ typedef enum eLoginMode
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate >
+    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
@@ -53,6 +55,8 @@ typedef enum eLoginMode
 
 }
 
+@property (weak, nonatomic) IBOutlet APPINView          *PINCodeView;
+@property (weak, nonatomic) IBOutlet ButtonSelectorView *PINusernameSelector;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textBitcoinWalletHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoHeight;
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
@@ -65,6 +69,7 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet UIImageView        *logoImage;
 @property (nonatomic, weak) IBOutlet UIView             *userEntryView;
 @property (nonatomic, weak) IBOutlet UIView             *spinnerView;
+@property (weak, nonatomic) IBOutlet UIView             *credentialsPINView;
 
 @property (nonatomic, weak) IBOutlet UIView				*errorMessageView;
 @property (nonatomic, weak) IBOutlet UILabel			*errorMessageText;
@@ -72,8 +77,12 @@ typedef enum eLoginMode
 
 @property (nonatomic, weak) IBOutlet PickerTextView   *usernameSelector;
 @property (nonatomic, strong) NSArray   *arrayAccounts;
+@property (nonatomic, strong) NSArray   *otherAccounts;
 
 @end
+
+static BOOL bPINModeEnabled = false;
+static BOOL bInitialized = false;
 
 @implementation LoginViewController
 
@@ -95,11 +104,17 @@ typedef enum eLoginMode
     self.usernameSelector.textField.delegate = self;
     self.usernameSelector.delegate = self;
     self.passwordTextField.delegate = self;
+    self.PINCodeView.delegate = self;
+    self.PINusernameSelector.delegate = self;
     self.spinnerView.hidden = YES;
 
-    _originalLogoHeight = self.logoHeight.constant;
-    _originalTextBitcoinWalletHeight = self.textBitcoinWalletHeight.constant;
-    
+    if (!bInitialized)
+    {
+        bInitialized = true;
+        _originalLogoHeight = self.logoHeight.constant;
+        _originalTextBitcoinWalletHeight = self.textBitcoinWalletHeight.constant;
+    }
+
     #if HARD_CODED_LOGIN
     
     self.usernameSelection.textField.text = HARD_CODED_LOGIN_NAME;
@@ -122,12 +137,25 @@ typedef enum eLoginMode
     self.usernameSelector.textField.returnKeyType = UIReturnKeyDone;
     self.usernameSelector.textField.tintColor = [UIColor whiteColor];
     self.usernameSelector.textField.textAlignment = NSTextAlignmentLeft;
-    self.usernameSelector.textField.placeholder = NSLocalizedString(@"Username", nil);
-    self.usernameSelector.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.usernameSelector.textField.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
+    NSString *myString = NSLocalizedString(@"Username", @"Username");
+
+    if (myString != nil)
+    {
+        self.usernameSelector.textField.placeholder = myString;
+        self.usernameSelector.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:myString attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
+
+    }
     [self.usernameSelector setTopMostView:self.view];
     self.usernameSelector.pickerMaxChoicesVisible = 3;
     [self.usernameSelector setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
     [Util stylizeTextField:self.usernameSelector.textField];
+
+    [self.PINusernameSelector.button setBackgroundImage:nil forState:UIControlStateNormal];
+    [self.PINusernameSelector.button setBackgroundImage:nil forState:UIControlStateSelected];
+    self.PINusernameSelector.textLabel.text = NSLocalizedString(@"", @"username");
+    [self.PINusernameSelector setButtonWidth:self.logoImage.frame.size.width];
+    self.PINusernameSelector.accessoryImage = [UIImage imageNamed:@"btn_close.png"];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -140,24 +168,48 @@ typedef enum eLoginMode
 
     _bTouchesEnabled = YES;
 
-#if !HARD_CODED_LOGIN
-    NSString *username = [LocalSettings controller].cachedUsername;
-    if (username && 0 < username.length)
+    [self getAllAccounts];
+    [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
+
+    if (bPINModeEnabled)
     {
-        self.usernameSelector.textField.text = username;
+        self.textBitcoinWalletHeight.constant = 0;
+        self.credentialsPINView.hidden = false;
+        self.credentialsView.hidden = true;
+        self.userEntryView.hidden = true;
+        [self.PINCodeView becomeFirstResponder];
     }
-    self.passwordTextField.text = [User Singleton].password;
-#endif
-    
+    else
+    {
+        self.textBitcoinWalletHeight.constant = _originalTextBitcoinWalletHeight;
+        self.credentialsPINView.hidden = true;
+        self.credentialsView.hidden = false;
+        self.userEntryView.hidden = false;
+        [self.PINCodeView resignFirstResponder];
+    }
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self dismissErrorMessage];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.PINCodeView.PINCode = nil;
     [super viewWillDisappear:animated];
 }
 
+#pragma mark - APPINViewDelegate Methods
+
+- (void)PINCodeView:(APPINView *)view didEnterPIN:(NSString *)PINCode
+{
+    [self showSpinner:YES];
+    [self signIn:PINCode];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -190,6 +242,54 @@ typedef enum eLoginMode
          [self.delegate loginViewControllerDidAbort];
      }];
 }
+
+#pragma mark - Misc Methods
+
+- (void)updateUsernameSelector:(NSString *)username
+{
+    [self setUsernameText:username];
+    NSMutableArray *stringArray = [[NSMutableArray alloc] init];
+    for(NSString *str in self.arrayAccounts)
+    {
+//        if(![str isEqualToString:username])
+//        {
+//            [stringArray addObject:str];
+//        }
+    }
+    self.otherAccounts = [stringArray copy];
+    self.PINusernameSelector.arrayItemsToSelect = self.otherAccounts;
+}
+
+- (void)setUsernameText:(NSString *)username
+{
+    NSString *title = [NSString stringWithFormat:@"Enter PIN for (%@)",
+                                                 username];
+    // Define general attributes like color and fonts for the entire text
+    NSDictionary *attr = @{NSForegroundColorAttributeName:self.PINusernameSelector.button.titleLabel.textColor,
+            NSFontAttributeName:self.PINusernameSelector.button.titleLabel.font};
+    NSMutableAttributedString *attributedText = [ [NSMutableAttributedString alloc]
+            initWithString:title
+                attributes:attr];
+    // blue and bold text attributes
+    UIColor *color = [UIColor colorWithRed:60./255. green:140.5/255. blue:200/255. alpha:1.];
+    UIFont *boldFont = [UIFont boldSystemFontOfSize:self.PINusernameSelector.button.titleLabel.font.pointSize];
+    NSRange usernameTextRange = [title rangeOfString:username];
+    [attributedText setAttributes:@{NSForegroundColorAttributeName:color,
+                    NSFontAttributeName:boldFont}
+                            range:usernameTextRange];
+    [self.PINusernameSelector.button setAttributedTitle:attributedText forState:UIControlStateNormal];
+
+    // Update non-PIN username
+#if !HARD_CODED_LOGIN
+    if (username && 0 < username.length)
+    {
+        self.usernameSelector.textField.text = username;
+    }
+    self.passwordTextField.text = [User Singleton].password;
+#endif
+
+}
+
 
 - (IBAction)SignIn
 {
@@ -229,7 +329,6 @@ typedef enum eLoginMode
 - (IBAction)buttonForgotTouched:(id)sender
 {
     [self dismissErrorMessage];
-
     [self.usernameSelector.textField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
 
@@ -257,6 +356,16 @@ typedef enum eLoginMode
         [self showFadingError:NSLocalizedString(@"Please enter a User Name", nil)];
     }
 }
+
+- (IBAction)buttonLoginWithPasswordTouched:(id)sender
+{
+    [self dismissErrorMessage];
+    bPINModeEnabled = false;
+
+    [self viewDidLoad];
+    [self viewWillAppear:true];
+}
+
 
 - (void)launchQuestionRecovery:(NSArray *)params
 {
@@ -293,6 +402,79 @@ typedef enum eLoginMode
         [self showFadingError:_strReason];
     }
 }
+
+#pragma mark - ReLogin Methods
+
+- (void)signIn:(NSString *)PINCode
+{
+    [self animateToInitialPresentation];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
+    {
+        __block tABC_CC result = [CoreBridge PINLoginWithPIN:PINCode];
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            switch (result)
+            {
+                case ABC_CC_Ok:
+                {
+                    [User login:[LocalSettings controller].cachedUsername password:NULL];
+                    [[User Singleton] resetPINLoginInvalidEntryCount];
+                    [self.delegate LoginViewControllerDidPINLogin];
+                    break;
+                }
+                case ABC_CC_BadPassword:
+                {
+                    if ([[User Singleton] haveExceededPINLoginInvalidEntries])
+                    {
+                        [[User Singleton] resetPINLoginInvalidEntryCount];
+                        [self PINabortPermanently];
+                    }
+                    else
+                    {
+                        [self showFadingError:NSLocalizedString(@"Invalid PIN", nil)];
+                    }
+                    break;
+                }
+                case ABC_CC_PinExpired:
+                {
+                    [[User Singleton] resetPINLoginInvalidEntryCount];
+                    [self PINabortPermanently];
+                    break;
+                }
+                default:
+                {
+                    tABC_Error temp;
+                    temp.code = result;
+                    [self showFadingError:[Util errorMap:&temp]];
+                    break;
+                }
+            }
+            [self showSpinner:NO];
+            self.PINCodeView.PINCode = nil;
+        });
+    });
+}
+
+- (void)PINabortPermanently
+{
+    NSString *PINExpired = NSLocalizedString(@"Invalid PIN. Please log in.", nil);
+
+    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
+    _fadingAlert.message = PINExpired;
+    _fadingAlert.fadeDuration = 2;
+    _fadingAlert.fadeDelay = 5;
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert showSpinner:NO];
+    [_fadingAlert showFading];
+
+    bPINModeEnabled = false;
+    [self viewDidLoad];
+    [self viewWillAppear:true];
+
+
+}
+
 
 #pragma mark - Misc Methods
 
@@ -417,7 +599,7 @@ typedef enum eLoginMode
                      [self.usernameSelector updateChoices:self.arrayAccounts];
                  }
 
-                 self.logoHeight.constant /= 2;
+                 self.logoHeight.constant = _originalLogoHeight / 2;
                  self.textBitcoinWalletHeight.constant = 0;
 
                  [self.view layoutIfNeeded];
@@ -858,5 +1040,14 @@ typedef enum eLoginMode
     }
 }
 
+
++ (void)setModePIN:(BOOL)enable
+{
+    if (enable)
+        bPINModeEnabled = true;
+    else
+        bPINModeEnabled = false;
+
+}
 
 @end

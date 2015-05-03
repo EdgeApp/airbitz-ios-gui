@@ -14,7 +14,6 @@
 #import "SendViewController.h"
 #import "WalletsViewController.h"
 #import "LoginViewController.h"
-#import "PINReLoginViewController.h"
 #import "Notifications.h"
 #import "SettingsViewController.h"
 #import "SignUpViewController.h"
@@ -51,7 +50,7 @@ typedef enum eAppMode
 
 
 @interface MainViewController () <UITabBarDelegate,RequestViewControllerDelegate, SettingsViewControllerDelegate,
-                                  LoginViewControllerDelegate, PINReLoginViewControllerDelegate,
+                                  LoginViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate>
@@ -62,7 +61,6 @@ typedef enum eAppMode
 	SendViewController          *_sendViewController;
 	WalletsViewController       *_walletsViewController;
 	LoginViewController         *_loginViewController;
-    PINReLoginViewController    *_PINReLoginViewController;
 	SettingsViewController      *_settingsViewController;
 	BuySellViewController       *_buySellViewController;
 	SendStatusViewController    *_sendStatusController;
@@ -146,8 +144,6 @@ MainViewController *staticMVC;
 	_directoryViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
 	_loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
 	_loginViewController.delegate = self;
-	_PINReLoginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PINReLoginViewController"];
-	_PINReLoginViewController.delegate = self;
 
     [self loadUserViews];
 
@@ -326,6 +322,7 @@ MainViewController *staticMVC;
 
 -(void)showLogin:(BOOL)animated
 {
+    [LoginViewController setModePIN:false];
     _loginViewController.view.frame = self.view.bounds;
 
     // This *should* be the directoryView. Move it away to the side
@@ -351,18 +348,23 @@ MainViewController *staticMVC;
 
 -(void)showPINLogin:(BOOL)animated
 {
-    _PINReLoginViewController.view.frame = self.view.bounds;
-    [self.view insertSubview:_PINReLoginViewController.view belowSubview:self.tabBar];
+    [LoginViewController setModePIN:true];
+    _loginViewController.view.frame = self.view.bounds;
+
+    // This *should* be the directoryView. Move it away to the side
+    [MainViewController moveSelectedViewController: -_selectedViewController.view.frame.size.width];
+
+    [self.view insertSubview:_loginViewController.view belowSubview:self.tabBar];
     [self hideTabBarAnimated:animated];
     [self hideNavBarAnimated:animated];
     if (animated) {
-        _PINReLoginViewController.view.alpha = 0.0;
+        _loginViewController.view.alpha = 0.0;
         [UIView animateWithDuration:0.25
                             delay:0.0
                             options:UIViewAnimationOptionCurveEaseIn
                         animations:^
         {
-            _PINReLoginViewController.view.alpha = 1.0;
+            _loginViewController.view.alpha = 1.0;
         }
                         completion:^(BOOL finished)
         {
@@ -503,8 +505,9 @@ MainViewController *staticMVC;
 				[_selectedViewController.view removeFromSuperview];
 				_selectedViewController = _directoryViewController;
 				[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+                [MainViewController moveSelectedViewController: 0.0];
 
-			}
+            }
 			break;
 		}
 		case APP_MODE_REQUEST:
@@ -517,6 +520,7 @@ MainViewController *staticMVC;
 					[_selectedViewController.view removeFromSuperview];
 					_selectedViewController = _requestViewController;
 					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+                    [MainViewController moveSelectedViewController: 0.0];
 				}
 				else
 				{
@@ -535,6 +539,7 @@ MainViewController *staticMVC;
                     [_selectedViewController.view removeFromSuperview];
                     _selectedViewController = _sendViewController;
                     [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+                    [MainViewController moveSelectedViewController: 0.0];
 				}
 				else
 				{
@@ -553,6 +558,7 @@ MainViewController *staticMVC;
 					_selectedViewController = _walletsViewController;
 					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
                     [_walletsViewController selectWalletWithUUID:_strWalletUUID];
+                    [MainViewController moveSelectedViewController: 0.0];
 				}
 				else
 				{
@@ -576,11 +582,6 @@ MainViewController *staticMVC;
             }
 			break;
 	}
-}
-
-- (IBAction)didTapTitleView:(id) sender
-{
-    NSLog(@"Title tap");
 }
 
 -(void)showTabBarAnimated:(BOOL)animated
@@ -1077,35 +1078,7 @@ MainViewController *staticMVC;
     }];
 }
 
-#pragma mark - PINReLoginViewControllerDelegates
-
-- (void)PINReLoginViewControllerDidSwitchUserWithMessage:(NSString *)message
-{
-    [self PINReLoginViewControllerDidAbort];
-    [self showLogin:YES];
-    if (message)
-    {
-        _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-        _fadingAlert.message = message;
-        _fadingAlert.fadeDuration = 2;
-        _fadingAlert.fadeDelay = 5;
-        [_fadingAlert blockModal:NO];
-        [_fadingAlert showSpinner:NO];
-        [_fadingAlert showFading];
-    }
-}
-
-- (void)PINReLoginViewControllerDidAbort
-{
-	_appMode = APP_MODE_DIRECTORY;
-    self.tabBar.selectedItem = self.tabBar.items[_appMode];
-	[self showTabBarAnimated:YES];
-    [self showNavBarAnimated:YES];
-
-	[_PINReLoginViewController.view removeFromSuperview];
-}
-
-- (void)PINReLoginViewControllerDidLogin
+- (void)LoginViewControllerDidPINLogin
 {
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
@@ -1116,7 +1089,7 @@ MainViewController *staticMVC;
     // After login, reset all the main views
     [self loadUserViews];
     
-	[_PINReLoginViewController.view removeFromSuperview];
+	[_loginViewController.view removeFromSuperview];
 	[self showTabBarAnimated:YES];
     [self showNavBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];

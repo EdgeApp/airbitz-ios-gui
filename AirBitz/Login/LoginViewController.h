@@ -12,6 +12,8 @@
 
 @interface LoginViewController : UIViewController
 
++ (void)setModePIN:(BOOL)enable;
+
 @property (assign) id<LoginViewControllerDelegate> delegate;
 
 @end
@@ -25,4 +27,6 @@
 -(void)loginViewControllerDidAbort;
 -(void)loginViewControllerDidLogin:(BOOL)bNewAccount;
 -(void)loginViewControllerDidSwitchAccount;
+-(void)LoginViewControllerDidPINLogin;
+
 @end
