@@ -49,9 +49,11 @@ typedef enum eLoginMode
     FadingAlertView                 *_fadingAlert;
     float                           _keyboardFrameOriginY;
     CGFloat                         _originalLogoHeight;
+    CGFloat                         _originalTextBitcoinWalletHeight;
 
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textBitcoinWalletHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoHeight;
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
 @property (weak, nonatomic) IBOutlet UIView             *credentialsView;
@@ -96,6 +98,7 @@ typedef enum eLoginMode
     self.spinnerView.hidden = YES;
 
     _originalLogoHeight = self.logoHeight.constant;
+    _originalTextBitcoinWalletHeight = self.textBitcoinWalletHeight.constant;
     
     #if HARD_CODED_LOGIN
     
@@ -415,6 +418,8 @@ typedef enum eLoginMode
                  }
 
                  self.logoHeight.constant /= 2;
+                 self.textBitcoinWalletHeight.constant = 0;
+
                  [self.view layoutIfNeeded];
 
          }
@@ -431,6 +436,7 @@ typedef enum eLoginMode
                          animations:^
          {
              self.logoHeight.constant = _originalLogoHeight;
+             self.textBitcoinWalletHeight.constant = _originalTextBitcoinWalletHeight;
              [self.view layoutIfNeeded];
 
 //             self.swipeText.hidden = NO;

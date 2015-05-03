@@ -4261,6 +4261,7 @@ Scan the QR code using this device</string>
                         <outlet property="swipeArrowLeft" destination="qg6-OB-iqn" id="Co4-UH-SCE"/>
                         <outlet property="swipeRightArrow" destination="jLL-vF-Vbd" id="1py-kB-hez"/>
                         <outlet property="swipeText" destination="8XB-1A-1hO" id="yBH-JD-yZ2"/>
+                        <outlet property="textBitcoinWalletHeight" destination="6J0-O3-MAp" id="PKx-Pf-IgX"/>
                         <outlet property="titleText" destination="nae-d6-xoW" id="2iX-DH-tAT"/>
                         <outlet property="userEntryView" destination="bUp-i4-uHt" id="dJP-E5-WVa"/>
                         <outlet property="usernameSelector" destination="Z92-xY-Nti" id="5of-54-l25"/>
