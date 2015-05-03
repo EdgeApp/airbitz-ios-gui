@@ -27,6 +27,7 @@
 
 typedef enum eLoginMode
 {
+    MODE_NO_USERS,
     MODE_ENTERING_NEITHER,
     MODE_ENTERING_USERNAME,
     MODE_ENTERING_PASSWORD
@@ -35,7 +36,7 @@ typedef enum eLoginMode
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate >
+    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertViewDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
@@ -55,6 +56,7 @@ typedef enum eLoginMode
 
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *forgotPassworddButton;
 @property (weak, nonatomic) IBOutlet APPINView          *PINCodeView;
 @property (weak, nonatomic) IBOutlet ButtonSelectorView *PINusernameSelector;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textBitcoinWalletHeight;
@@ -108,11 +110,18 @@ static BOOL bInitialized = false;
     self.PINusernameSelector.delegate = self;
     self.spinnerView.hidden = YES;
 
+    [self getAllAccounts];
+
     if (!bInitialized)
     {
         bInitialized = true;
         _originalLogoHeight = self.logoHeight.constant;
         _originalTextBitcoinWalletHeight = self.textBitcoinWalletHeight.constant;
+
+        if ([self.arrayAccounts count] == 0)
+        {
+            _mode = MODE_NO_USERS;
+        }
     }
 
     #if HARD_CODED_LOGIN
@@ -122,8 +131,6 @@ static BOOL bInitialized = false;
     #endif
 
 	self.errorMessageView.alpha = 0.0;
-    
-    [self getAllAccounts];
     
     // set up the specifics on our picker text view
     self.usernameSelector.textField.borderStyle = UITextBorderStyleNone;
@@ -137,14 +144,29 @@ static BOOL bInitialized = false;
     self.usernameSelector.textField.returnKeyType = UIReturnKeyDone;
     self.usernameSelector.textField.tintColor = [UIColor whiteColor];
     self.usernameSelector.textField.textAlignment = NSTextAlignmentLeft;
-    NSString *myString = NSLocalizedString(@"Username", @"Username");
 
-    if (myString != nil)
-    {
-        self.usernameSelector.textField.placeholder = myString;
-        self.usernameSelector.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:myString attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
+    // Add shadows to some text for visibility
+    self.PINusernameSelector.textLabel.layer.shadowRadius = 4.0f;
+    self.PINusernameSelector.textLabel.layer.shadowOpacity = 1.0f;
+    self.PINusernameSelector.textLabel.layer.masksToBounds = NO;
+    self.PINusernameSelector.textLabel.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.PINusernameSelector.textLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
-    }
+    self.swipeText.layer.shadowRadius = 3.0f;
+    self.swipeText.layer.shadowOpacity = 1.0f;
+    self.swipeText.layer.masksToBounds = NO;
+    self.swipeText.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.swipeText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+
+    self.titleText.layer.shadowRadius = 3.0f;
+    self.titleText.layer.shadowOpacity = 1.0f;
+    self.titleText.layer.masksToBounds = NO;
+    self.titleText.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.titleText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+
+    self.usernameSelector.textField.placeholder = NSLocalizedString(@"Username", @"Username");
+    self.usernameSelector.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.usernameSelector.textField.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
+
     [self.usernameSelector setTopMostView:self.view];
     self.usernameSelector.pickerMaxChoicesVisible = 3;
     [self.usernameSelector setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
@@ -188,6 +210,29 @@ static BOOL bInitialized = false;
         [self.PINCodeView resignFirstResponder];
     }
 
+    if (_mode == MODE_NO_USERS)
+    {
+        self.usernameSelector.textField.enabled = false;
+        self.usernameSelector.textField.hidden = true;
+        self.passwordTextField.enabled = false;
+        self.passwordTextField.hidden = true;
+        self.forgotPassworddButton.hidden = true;
+    }
+    else
+    {
+
+        self.usernameSelector.textField.enabled = true;
+        self.usernameSelector.textField.hidden = false;
+        self.passwordTextField.enabled = true;
+        self.passwordTextField.hidden = false;
+        self.forgotPassworddButton.hidden = false;
+
+        if (_mode == MODE_ENTERING_USERNAME)
+        {
+            [self.usernameSelector.textField becomeFirstResponder];
+        }
+    }
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -215,6 +260,19 @@ static BOOL bInitialized = false;
 {
     [super didReceiveMemoryWarning];
 }
+
+#pragma mark - FadingAlertView delegate
+
+- (void)fadingAlertDismissed:(FadingAlertView *)view
+{
+    _fadingAlert = nil;
+    if (bPINModeEnabled)
+        [self.PINCodeView becomeFirstResponder];
+    else
+        [self.PINCodeView resignFirstResponder];
+}
+
+
 
 #pragma mark - Action Methods
 
@@ -251,10 +309,7 @@ static BOOL bInitialized = false;
     NSMutableArray *stringArray = [[NSMutableArray alloc] init];
     for(NSString *str in self.arrayAccounts)
     {
-//        if(![str isEqualToString:username])
-//        {
-//            [stringArray addObject:str];
-//        }
+        [stringArray addObject:str];
     }
     self.otherAccounts = [stringArray copy];
     self.PINusernameSelector.arrayItemsToSelect = self.otherAccounts;
@@ -262,27 +317,33 @@ static BOOL bInitialized = false;
 
 - (void)setUsernameText:(NSString *)username
 {
-    NSString *title = [NSString stringWithFormat:@"Enter PIN for (%@)",
-                                                 username];
-    // Define general attributes like color and fonts for the entire text
-    NSDictionary *attr = @{NSForegroundColorAttributeName:self.PINusernameSelector.button.titleLabel.textColor,
-            NSFontAttributeName:self.PINusernameSelector.button.titleLabel.font};
-    NSMutableAttributedString *attributedText = [ [NSMutableAttributedString alloc]
-            initWithString:title
-                attributes:attr];
-    // blue and bold text attributes
-    UIColor *color = [UIColor colorWithRed:60./255. green:140.5/255. blue:200/255. alpha:1.];
-    UIFont *boldFont = [UIFont boldSystemFontOfSize:self.PINusernameSelector.button.titleLabel.font.pointSize];
-    NSRange usernameTextRange = [title rangeOfString:username];
-    [attributedText setAttributes:@{NSForegroundColorAttributeName:color,
-                    NSFontAttributeName:boldFont}
-                            range:usernameTextRange];
-    [self.PINusernameSelector.button setAttributedTitle:attributedText forState:UIControlStateNormal];
-
     // Update non-PIN username
 #if !HARD_CODED_LOGIN
     if (username && 0 < username.length)
     {
+        //
+        // Set the PIN username default
+        //
+        NSString *title = [NSString stringWithFormat:@"Enter PIN for (%@)",
+                           username];
+        // Define general attributes like color and fonts for the entire text
+        NSDictionary *attr = @{NSForegroundColorAttributeName:self.PINusernameSelector.button.titleLabel.textColor,
+                               NSFontAttributeName:self.PINusernameSelector.button.titleLabel.font};
+        NSMutableAttributedString *attributedText = [ [NSMutableAttributedString alloc]
+                                                     initWithString:title
+                                                     attributes:attr];
+        // blue and bold text attributes
+        UIColor *color = [UIColor colorWithRed:60./255. green:140.5/255. blue:200/255. alpha:1.];
+        UIFont *boldFont = [UIFont boldSystemFontOfSize:self.PINusernameSelector.button.titleLabel.font.pointSize];
+        NSRange usernameTextRange = [title rangeOfString:username];
+        [attributedText setAttributes:@{NSForegroundColorAttributeName:color,
+                                        NSFontAttributeName:boldFont}
+                                range:usernameTextRange];
+        [self.PINusernameSelector.button setAttributedTitle:attributedText forState:UIControlStateNormal];
+
+        //
+        // Set the regular username field
+        //
         self.usernameSelector.textField.text = username;
     }
     self.passwordTextField.text = [User Singleton].password;
@@ -293,21 +354,29 @@ static BOOL bInitialized = false;
 
 - (IBAction)SignIn
 {
-    [self.usernameSelector resignFirstResponder];
-    [self.passwordTextField resignFirstResponder];
-    [self animateToInitialPresentation];
+    if (_mode == MODE_NO_USERS)
+    {
+        _mode = MODE_ENTERING_USERNAME;
+        [self viewWillAppear:true];
+    }
+    else
+    {
+        [self.usernameSelector resignFirstResponder];
+        [self.passwordTextField resignFirstResponder];
+        [self animateToInitialPresentation];
 
-    _bSuccess = NO;
-    [self showSpinner:YES];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        tABC_Error error;
-        ABC_SignIn([self.usernameSelector.textField.text UTF8String],
-            [self.passwordTextField.text UTF8String], &error);
-        _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
-        _strReason = [Util errorMap:&error];
-        _resultCode = error.code;
-        [self performSelectorOnMainThread:@selector(signInComplete) withObject:nil waitUntilDone:FALSE];
-    });
+        _bSuccess = NO;
+        [self showSpinner:YES];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            tABC_Error error;
+            ABC_SignIn([self.usernameSelector.textField.text UTF8String],
+                    [self.passwordTextField.text UTF8String], &error);
+            _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
+            _strReason = [Util errorMap:&error];
+            _resultCode = error.code;
+            [self performSelectorOnMainThread:@selector(signInComplete) withObject:nil waitUntilDone:FALSE];
+        });
+    }
 }
 
 - (IBAction)SignUp
@@ -763,6 +832,10 @@ static BOOL bInitialized = false;
         {
             _mode = MODE_ENTERING_PASSWORD;
         }
+    }
+    else if (_mode == MODE_NO_USERS)
+    {
+        NSLog(@"XXX error. should not happen");
     }
 
     // highlight all of the text

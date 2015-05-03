@@ -9,6 +9,10 @@
     <customFonts key="customFonts">
         <mutableArray key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -434,7 +438,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="postcard-mountain.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-NB-3KY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="postcard-mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-NB-3KY">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4082,10 +4086,10 @@ Scan the QR code using this device</string>
                                             <constraint firstAttribute="width" constant="186" id="8zF-39-Abo"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.49910315690000001" green="0.49910315690000001" blue="0.49910315690000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <size key="shadowOffset" width="1" height="1"/>
+                                        <color key="textColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="2" height="2"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpH-FO-ztL" userLabel="View - Username Pwd">
                                         <rect key="frame" x="28" y="169" width="320" height="147"/>
@@ -4104,7 +4108,7 @@ Scan the QR code using this device</string>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2G-61-ExK" customClass="StylizedButton">
                                                 <rect key="frame" x="34" y="98" width="251" height="43"/>
                                                 <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                                 <state key="normal" title="Sign In">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4124,6 +4128,14 @@ Scan the QR code using this device</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHf-E8-N2q" userLabel="View - PIN and Username">
                                         <rect key="frame" x="27" y="169" width="320" height="147"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIc-w4-vLL" userLabel="View - PINCode" customClass="APPINView">
+                                                <rect key="frame" x="53" y="58" width="214" height="44"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="214" id="2uy-fq-mu7"/>
+                                                    <constraint firstAttribute="height" constant="44" id="S8R-eu-Y7C"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VWS-p6-0xj" customClass="ButtonSelectorView">
                                                 <rect key="frame" x="54" y="20" width="213" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4133,14 +4145,6 @@ Scan the QR code using this device</string>
                                                     <constraint firstAttribute="height" constant="30" id="q38-ab-yfU"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIc-w4-vLL" userLabel="View - PINCode" customClass="APPINView">
-                                                <rect key="frame" x="53" y="58" width="214" height="44"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="214" id="2uy-fq-mu7"/>
-                                                    <constraint firstAttribute="height" constant="44" id="S8R-eu-Y7C"/>
-                                                </constraints>
-                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTg-3l-g7y" customClass="StylizedButton">
                                                 <rect key="frame" x="34" y="110" width="251" height="43"/>
                                                 <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
@@ -4148,7 +4152,7 @@ Scan the QR code using this device</string>
                                                     <constraint firstAttribute="width" constant="251" id="WsM-ti-Mul"/>
                                                     <constraint firstAttribute="height" constant="43" id="bjz-Zs-SaW"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                                 <state key="normal" title="Login With Password">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4177,11 +4181,11 @@ Scan the QR code using this device</string>
                                             <constraint firstAttribute="height" constant="30" id="5Py-kI-Nim"/>
                                             <constraint firstAttribute="width" constant="240" id="bVa-l9-bV5"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.11372549831867218" green="0.49411767721176147" blue="0.72156864404678345" alpha="1" colorSpace="deviceRGB"/>
-                                        <size key="shadowOffset" width="0.0" height="2"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe-arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="jLL-vF-Vbd">
                                         <rect key="frame" x="308" y="329" width="36" height="20"/>
@@ -4196,9 +4200,9 @@ Scan the QR code using this device</string>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iz-Uc-LTS" customClass="StylizedButton">
                                                 <rect key="frame" x="34" y="10" width="252" height="44"/>
                                                 <color key="backgroundColor" red="0.85882359743118286" green="0.23529413342475891" blue="0.21176472306251526" alpha="1" colorSpace="deviceRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
-                                                <state key="normal" title="Create Account">
+                                                <state key="normal" title="Sign Up">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -4323,6 +4327,7 @@ Scan the QR code using this device</string>
                         <outlet property="credentialsView" destination="kpH-FO-ztL" id="UiA-5C-OgI"/>
                         <outlet property="errorMessageText" destination="5wy-Mi-whP" id="oh9-gY-loy"/>
                         <outlet property="errorMessageView" destination="whJ-vw-6PG" id="T37-ad-SID"/>
+                        <outlet property="forgotPassworddButton" destination="RVo-M5-ZXk" id="DqM-0z-GWY"/>
                         <outlet property="logoHeight" destination="XEa-cm-iAj" id="8KE-7I-DrP"/>
                         <outlet property="logoImage" destination="LqE-iy-sKS" id="cmm-Yx-nMh"/>
                         <outlet property="passwordTextField" destination="V5e-1n-K9Z" id="iwd-kF-klp"/>
@@ -5252,7 +5257,7 @@ Scan the QR code using this device</string>
         <image name="logo.png" width="64" height="36"/>
         <image name="logo_bitcoin.png" width="126" height="165"/>
         <image name="logo_large.png" width="208" height="106"/>
-        <image name="postcard-mountain.jpg" width="844" height="568"/>
+        <image name="postcard-mountain.png" width="844" height="568"/>
         <image name="scan_frame.png" width="271" height="226"/>
         <image name="sms_btn.png" width="80" height="42"/>
         <image name="swipe-arrow.png" width="35" height="18"/>

@@ -71,8 +71,8 @@
 /* Class = "IBUILabel"; text = "Swipe to View Business Directory"; ObjectID = "8XB-1A-1hO"; */
 "8XB-1A-1hO.text" = "Swipe to View Business Directory";
 
-/* Class = "IBUIButton"; normalTitle = "Create Account"; ObjectID = "8iz-Uc-LTS"; */
-"8iz-Uc-LTS.normalTitle" = "Create Account";
+/* Class = "IBUIButton"; normalTitle = "Sign Up"; ObjectID = "8iz-Uc-LTS"; */
+"8iz-Uc-LTS.normalTitle" = "Sign Up";
 
 /* Class = "IBUILabel"; text = "1.00 BTC - $876.13 USD"; ObjectID = "9aX-Dw-7XD"; */
 "9aX-Dw-7XD.text" = "1.00 BTC - $876.13 USD";
@@ -248,8 +248,8 @@
 /* Class = "IBUIButton"; normalTitle = "Income"; ObjectID = "PmL-d6-vpJ"; */
 "PmL-d6-vpJ.normalTitle" = "Income";
 
-/* Class = "IBUIButton"; normalTitle = "Log In"; ObjectID = "Q2G-61-ExK"; */
-"Q2G-61-ExK.normalTitle" = "Log In";
+/* Class = "IBUIButton"; normalTitle = "Sign In"; ObjectID = "Q2G-61-ExK"; */
+"Q2G-61-ExK.normalTitle" = "Sign In";
 
 /* Class = "IBUITextField"; placeholder = "Re-enter Password"; ObjectID = "QzV-Gk-Vrs"; */
 "QzV-Gk-Vrs.placeholder" = "Re-enter Password";
