@@ -179,6 +179,8 @@ typedef enum eMapDisplayState
 
     self.dividerView.delegate = self;
 
+    self.searchBarLocation.placeholder = NSLocalizedString(@"City, State/Province, or Country", @"City, State/Province, or Country placeholder");
+
     //
     // Add a footer so the last listing is visible above tabbar
     //
