@@ -59,8 +59,8 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                                     <items/>
                                                 </toolbar>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P8l-kL-Lmr" userLabel="View - Category Buttons">
-                                                    <rect key="frame" x="0.0" y="44" width="375" height="212"/>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P8l-kL-Lmr" userLabel="View - Category Buttons">
+                                                    <rect key="frame" x="0.0" y="90" width="375" height="212"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_categories.png" translatesAutoresizingMaskIntoConstraints="NO" id="7tf-o8-e7c">
                                                             <rect key="frame" x="28" y="0.0" width="320" height="209"/>
@@ -167,7 +167,7 @@
                                                 <constraint firstItem="heE-og-iXA" firstAttribute="leading" secondItem="8bn-C4-Wh5" secondAttribute="leading" id="8Ed-y8-9cG"/>
                                                 <constraint firstItem="P8l-kL-Lmr" firstAttribute="leading" secondItem="8bn-C4-Wh5" secondAttribute="leading" id="LGa-Me-sA7"/>
                                                 <constraint firstItem="MKO-Sv-SEw" firstAttribute="top" secondItem="aNa-3g-QXd" secondAttribute="top" id="QYy-Lf-xBV"/>
-                                                <constraint firstItem="P8l-kL-Lmr" firstAttribute="top" secondItem="aNa-3g-QXd" secondAttribute="bottom" id="Xf4-iX-85s"/>
+                                                <constraint firstItem="P8l-kL-Lmr" firstAttribute="top" secondItem="heE-og-iXA" secondAttribute="bottom" id="gfE-cq-dIT"/>
                                                 <constraint firstItem="MKO-Sv-SEw" firstAttribute="leading" secondItem="8bn-C4-Wh5" secondAttribute="leading" id="h6B-jW-5Qo"/>
                                                 <constraint firstAttribute="trailing" secondItem="MKO-Sv-SEw" secondAttribute="trailing" id="jpT-jr-h2b"/>
                                                 <constraint firstItem="heE-og-iXA" firstAttribute="top" secondItem="aNa-3g-QXd" secondAttribute="bottom" id="pag-bn-HAA"/>
