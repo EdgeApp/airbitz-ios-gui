@@ -22,6 +22,7 @@
 #import "DL_URLServer.h"
 #import "Server.h"
 #import "CJSONDeserializer.h"
+#import "MainViewController.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
@@ -89,8 +90,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    // resize ourselves to fit in area
-    [Util resizeView:self.view withDisplayView:nil];
+    [self.view setNeedsLayout];
+    [self.view layoutIfNeeded];
 
     // alloc the arrays
     self.arraySearchTransactions = [[NSMutableArray alloc] init];
@@ -180,6 +181,17 @@
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+
+    [MainViewController changeNavBarTitleWithButton:self.wallet.strName action:@selector(didTapWalletName:) fromObject:self];
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
+
+
+}
+
+- (void)didTapWalletName: (UIButton *)sender
+{
+    NSLog(@"didTapWalletName: Hello world\n");
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -211,7 +223,12 @@
 
 #pragma mark - Action Methods
 
-- (IBAction)Done
+- (void)Back: (UIButton *)sender
+{
+    [self Done];
+}
+
+- (void)Done
 {
     if (YES == [self canLeaveWalletNameField])
     {
@@ -228,7 +245,7 @@
     }
 }
 
-- (IBAction)info
+- (void)info: (UIButton *)sender
 {
     if (YES == [self canLeaveWalletNameField])
     {

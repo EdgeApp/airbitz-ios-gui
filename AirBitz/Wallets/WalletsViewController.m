@@ -80,7 +80,7 @@
 	self.walletsTable.allowsSelectionDuringEditing = YES;
 	_currencyConversionFactor = 1.0;
 
-    [MainViewController changeNavBarTitle:@"Wallets"];
+    [MainViewController changeNavBarTitle:@"Total Balance"];
     [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
@@ -552,6 +552,8 @@
             NSLog(@"Wallet Table %f %f %f %f\n", self.walletsTable.frame.origin.x, self.walletsTable.frame.origin.y, self.walletsTable.frame.size.width, self.walletsTable.frame.size.height);
             [self.walletsTable reloadData];
             [self updateBalanceView];
+            [self viewDidLoad];
+            [self viewWillAppear:true];
         });
     }];
     [self dismissTransactions];

@@ -448,7 +448,14 @@ MainViewController *staticMVC;
 
 +(void)changeNavBarTitle: (NSString*) titleText
 {
-    staticMVC.navBar.topItem.title = titleText;
+    UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
+    titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
+    titleLabelButton.enabled = false;
+    titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    [titleLabelButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+
+    staticMVC.navBar.topItem.titleView = titleLabelButton;
 }
 
 +(void)changeNavBarTitleWithButton: (NSString*) titleText action:(SEL)func fromObject:(id) object
