@@ -56,7 +56,8 @@
 #define HEIGHT_FOR_TYPICAL_BUSINESS_RESULT	110.0
 
 //geometry
-#define EXTRA_SEARCH_BAR_HEIGHT	40.0
+#define EXTRA_SEARCH_BAR_HEIGHT	44.0
+#define TABBAR_FOOTER_HEIGHT 49.0
 #define DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT	10.0	/* the divider bar image has some transparency above the actual bar */
 #define DIVIDER_DOWN_MARGIN		12.0			/* Limit how far off bottom of screen divider bar can be dragged to */
 #define LOCATE_ME_BUTTON_OFFSET_FROM_MAP_BOTTOM	58.0
@@ -136,13 +137,15 @@ typedef enum eMapDisplayState
 }
 
 
+@property (weak, nonatomic) IBOutlet UIView *tableListingsCategoriesHeader;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBarLocation;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBarSearch;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *footerHeight;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesBottom;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationSearchViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationSearchViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapViewHeight;
 @property (nonatomic, weak) IBOutlet DividerView *dividerView;
 @property (nonatomic, weak) IBOutlet UIView *spinnerView;
@@ -177,6 +180,11 @@ typedef enum eMapDisplayState
     [self positionDividerView];
 
     dividerBarPositionWithMap = dividerBarPositionWithoutMap = self.dividerView.frame.origin.y;
+
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.dividerView.frame.size.width, TABBAR_FOOTER_HEIGHT)];
+
+    self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
+    self.tableView.tableFooterView = footerView;
 
     /*for (NSString* family in [UIFont familyNames])
     {
@@ -242,6 +250,7 @@ typedef enum eMapDisplayState
     pt.x = 0.0;
     pt.y = -[MainViewController getHeaderHeight] + self.searchBarSearch.frame.size.height;
     [self.tableView setContentOffset:pt animated:true];
+    _locationSearchViewHeight.constant = 0;
 }
 
 - (BOOL)gestureRecognizer: (UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer: (UIGestureRecognizer *)otherGestureRecognizer
@@ -336,8 +345,9 @@ typedef enum eMapDisplayState
     //if(notification.object == self)
     if (activeSearchBar)
     {
-        self.searchBarSearch.placeholder = @"Business Name or Category";
-        //NSLog(@"keyboard will show for directoryViewController");
+        self.searchBarSearch.placeholder = NSLocalizedString(@"Business Name or Category", @"Business Name or Category");
+        self.searchBarLocation.placeholder = NSLocalizedString(@"City, State, or Country", @"City, State, or Country");
+
         NSDictionary *userInfo = [notification userInfo];
         CGRect keyboardFrame = [[userInfo objectForKey: UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
@@ -349,6 +359,7 @@ typedef enum eMapDisplayState
         {
 
             self.searchCluesBottom.constant = keyboardFrame.size.height;
+
             [self.view layoutIfNeeded];
 
         }
@@ -700,8 +711,17 @@ typedef enum eMapDisplayState
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
-//        _locationSearchViewHeight.constant += EXTRA_SEARCH_BAR_HEIGHT;
+        //
+        // Open up location searchBar
+        //
+        _locationSearchViewHeight.constant = EXTRA_SEARCH_BAR_HEIGHT;
+        [self.view layoutIfNeeded];
 
+        //
+        // Open up the autocomplete clues tableview. Line up top of autocomplete table with bottom of searchBarLocation
+        //
+        CGRect frame = [_searchBarLocation convertRect:_searchBarLocation.bounds toView:self.view];
+        _searchCluesTop.constant = frame.origin.y + frame.size.height;
         [self.view layoutIfNeeded];
 
     }
@@ -760,7 +780,7 @@ typedef enum eMapDisplayState
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
-//        _locationSearchViewHeight.constant -= EXTRA_SEARCH_BAR_HEIGHT;
+        _locationSearchViewHeight.constant = 0;
 
         [self.view layoutIfNeeded];
 
