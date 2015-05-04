@@ -28,6 +28,7 @@
 #import "InfoView.h"
 #import "CommonTypes.h"
 #import "Config.h"
+#import "Theme.h"
 
 //server defines (uncomment one)
 #define SERVER_MESSAGES_TO_SHOW		VERBOSE_MESSAGES_OFF
@@ -50,10 +51,6 @@
 
 
 #define MILES_TO_METERS(a)	(a * 1609.34)
-
-//Business results table cell heights
-#define HEIGHT_FOR_TOP_BUSINESS_RESULT	130.0
-#define HEIGHT_FOR_TYPICAL_BUSINESS_RESULT	110.0
 
 //geometry
 #define EXTRA_SEARCH_BAR_HEIGHT	44.0
@@ -134,6 +131,7 @@ typedef enum eMapDisplayState
     NSMutableArray *searchLocationCache;
     CLLocationCoordinate2D mostRecentLatLong;
     UISearchBar *activeSearchBar;
+
 }
 
 
@@ -178,6 +176,8 @@ typedef enum eMapDisplayState
 
     self.dividerView.delegate = self;
     [self positionDividerView];
+
+
 
     dividerBarPositionWithMap = dividerBarPositionWithoutMap = self.dividerView.frame.origin.y;
 
@@ -1829,16 +1829,10 @@ typedef enum eMapDisplayState
 {
     if (tableView.tag == 0)
     {
-        if (indexPath.row == 0)
-        {
-            return HEIGHT_FOR_TOP_BUSINESS_RESULT;
-        } else
-        {
-            return HEIGHT_FOR_TYPICAL_BUSINESS_RESULT;
-        }
+        return [Theme Singleton].heightListings;
     } else
     {
-        return 35.0;
+        return [Theme Singleton].heightSearchClues;
     }
 }
 

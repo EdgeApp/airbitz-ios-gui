@@ -217,18 +217,18 @@
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="topOverviewCell" rowHeight="112" id="OSb-Tn-1Ba" customClass="topOverviewCell">
                                                 <rect key="frame" x="0.0" y="234" width="320" height="112"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="OSb-Tn-1Ba" translatesAutoresizingMaskIntoConstraints="NO" id="8d9-XF-nIn">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" tableViewCell="OSb-Tn-1Ba" translatesAutoresizingMaskIntoConstraints="NO" id="8d9-XF-nIn">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6E-Xg-Tz3">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6E-Xg-Tz3">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="112"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="darken_bottom_table_cell.png" translatesAutoresizingMaskIntoConstraints="NO" id="Afa-Pw-qW2">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="darken_bottom_table_cell.png" translatesAutoresizingMaskIntoConstraints="NO" id="Afa-Pw-qW2">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="112"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
                                                         </imageView>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Address 1234" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wy7-Kv-3ap" customClass="LatoLabel">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Address 1234" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wy7-Kv-3ap" customClass="LatoLabel">
                                                             <rect key="frame" x="4" y="93" width="237" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="G8R-sS-oua"/>
@@ -239,7 +239,7 @@
                                                             <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                             <size key="shadowOffset" width="1" height="1"/>
                                                         </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Type BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ga1-R0-wof" customClass="LatoLabel">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Type BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ga1-R0-wof" customClass="LatoLabel">
                                                             <rect key="frame" x="247" y="96" width="114" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="114" id="YI2-7n-RMO"/>
@@ -251,7 +251,7 @@
                                                             <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                             <size key="shadowOffset" width="1" height="1"/>
                                                         </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Business Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="DlF-tR-T08" customClass="LatoLabel">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Business Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="DlF-tR-T08" customClass="LatoLabel">
                                                             <rect key="frame" x="4" y="71" width="200" height="22"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -276,11 +276,11 @@
                                                         <constraint firstItem="ga1-R0-wof" firstAttribute="leading" secondItem="wy7-Kv-3ap" secondAttribute="trailing" constant="6" id="l50-IH-BO4"/>
                                                         <constraint firstItem="Afa-Pw-qW2" firstAttribute="leading" secondItem="8d9-XF-nIn" secondAttribute="leading" id="lRb-rh-dfW"/>
                                                         <constraint firstItem="c6E-Xg-Tz3" firstAttribute="top" secondItem="8d9-XF-nIn" secondAttribute="top" id="mca-Sc-sio"/>
-                                                        <constraint firstAttribute="height" constant="112" id="rdX-bL-HsU"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="DlF-tR-T08" secondAttribute="trailing" constant="163" id="sfc-tf-n5Z"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <constraints>
+                                                    <constraint firstItem="8d9-XF-nIn" firstAttribute="top" secondItem="OSb-Tn-1Ba" secondAttribute="top" id="N9z-5o-wVu"/>
                                                     <constraint firstAttribute="trailing" secondItem="8d9-XF-nIn" secondAttribute="trailing" id="ZRi-W5-bHF"/>
                                                     <constraint firstItem="8d9-XF-nIn" firstAttribute="leading" secondItem="OSb-Tn-1Ba" secondAttribute="leading" id="pVL-2M-JCl"/>
                                                 </constraints>

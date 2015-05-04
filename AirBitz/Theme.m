@@ -47,7 +47,28 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     //    self.denomination = 100000000;
     self.colorTextLink = UIColorFromARGB(0xFF007aFF);
     self.deleteAccountWarning = NSLocalizedString(@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.", @"Delete Account Warning");
-    
+
+    if (IS_IPHONE4)
+    {
+        self.heightListings = 90.0;
+        self.heightSearchClues = 35.0;
+    }
+    else if (IS_IPHONE5)
+    {
+        self.heightListings = 110.0;
+        self.heightSearchClues = 40.0;
+    }
+    else if (IS_IPHONE6)
+    {
+        self.heightListings = 120.0;
+        self.heightSearchClues = 45.0;
+    }
+    else if (IS_IPHONE6_PLUS || IS_IPAD)
+    {
+        self.heightListings = 130.0;
+        self.heightSearchClues = 45.0;
+    }
+
     return self;
 }
 

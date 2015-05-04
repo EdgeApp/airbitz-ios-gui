@@ -17,6 +17,9 @@
 // User Settings
 @property (nonatomic) UIColor *colorTextLink;
 @property (nonatomic) NSString *deleteAccountWarning;
+@property (nonatomic) CGFloat heightListings;
+@property (nonatomic) CGFloat heightSearchClues;
+
 //@property (nonatomic) int minutesAutoLogout;
 //@property (nonatomic) int defaultCurrencyNum;
 //@property (nonatomic) int64_t denomination;
