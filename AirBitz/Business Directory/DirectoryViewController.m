@@ -180,7 +180,6 @@ typedef enum eMapDisplayState
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.dividerView.frame.size.width, [MainViewController getFooterHeight])];
     self.tableView.tableFooterView = footerView;
 
-
     [MainViewController changeNavBarTitle:@"Directory"];
     [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
@@ -220,7 +219,12 @@ typedef enum eMapDisplayState
 
 - (void)resetTableHideSearch
 {
+    _tableViewListingsTop.constant = 0;
+
     CGPoint pt;
+    pt.x = 0.0;
+    pt.y = [MainViewController getHeaderHeight];
+    [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
 
     pt.x = 0.0;
     pt.y = -[MainViewController getHeaderHeight] + self.searchBarSearch.frame.size.height;
@@ -267,24 +271,25 @@ typedef enum eMapDisplayState
     
     self.searchBarSearch.placeholder = @"Search";
 
-    CGPoint pt;
-    pt.x = 0.0;
-    pt.y = [MainViewController getHeaderHeight];
-    [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
-
-    [self resetTableHideSearch];
-    [self positionDividerView];
-
     //
     // Calculate the header size of tableview and set it's frame to that height. Hack because Apple can't
     // figure it out for us automatically -paulvp
     //
-    CGFloat height = _dividerView.frame.origin.y + _dividerView.frame.size.height;
+    CGFloat height = _dividerView.frame.origin.y + _dividerView.frame.size.height - [MainViewController getHeaderHeight];
 
     CGRect headerFrame = _tableListingsCategoriesHeader.frame;
+
+    NSLog(@"BizDirView viewWillAppear %f %f %f %f\n",_dividerView.frame.origin.y, _dividerView.frame.size.height, _tableListingsCategoriesHeader.frame.origin.y, _tableListingsCategoriesHeader.frame.size.height);
+
+
     headerFrame.size.height = height;
     _tableListingsCategoriesHeader.frame = headerFrame;
     self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
+
+    [self resetTableHideSearch];
+    [self positionDividerView];
+
+
 }
 
 - (void)receiveKeyboardNotifications: (BOOL)on
@@ -746,6 +751,7 @@ typedef enum eMapDisplayState
     [self.searchBarLocation resignFirstResponder];
     self.mapView.showsUserLocation = YES;
     [self.tableView setContentOffset:CGPointZero animated:NO];
+    [self.tableView setContentInset:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
 
     [self setDefaultMapDividerPosition];
 
@@ -774,6 +780,7 @@ typedef enum eMapDisplayState
     [businessSearchResults removeAllObjects];
     [self.searchBarSearch resignFirstResponder];
     [self.searchBarLocation resignFirstResponder];
+
     if (directoryMode == DIRECTORY_MODE_ON_THE_WEB_LISTING)
     {
         [self removeBusinessListingHeader];
@@ -783,7 +790,7 @@ typedef enum eMapDisplayState
         directoryMode = DIRECTORY_MODE_LISTING;
         [self hideBackButtonAnimated: YES];
     }
-//    [self.tableView setContentOffset:CGPointZero animated:NO];
+
     [self resetTableHideSearch];
     [self businessListingQueryForPage: 0];
     [UIView animateWithDuration: 0.5
@@ -877,11 +884,11 @@ typedef enum eMapDisplayState
     self.mapView.showsUserLocation = NO;
     self.dividerView.userControllable = NO;
     [self addBusinessListingHeader];
-//XXX    self.tableListingsView.frame = homeTableViewFrame;
-    [self positionDividerView];
     [self hideBackButtonAnimated: YES];
     [self.mapView removeAllAnnotations];
-//    [self.tableView setContentOffset:CGPointZero animated:YES];
+    [self resetTableHideSearch];
+    [self positionDividerView];
+
 }
 #pragma mark MapView
 
@@ -2012,7 +2019,7 @@ typedef enum eMapDisplayState
 {
     if (self.dividerView.userControllable == NO)
     {
-        float offset = self.tableView.contentInset.top + self.tableView.contentOffset.y;
+        float offset = self.tableView.contentOffset.y;
         if (offset > self.tableView.tableHeaderView.frame.size.height - [MainViewController getHeaderHeight])
         {
             offset = self.tableView.tableHeaderView.frame.size.height - [MainViewController getHeaderHeight];
