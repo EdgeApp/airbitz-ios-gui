@@ -145,6 +145,7 @@ typedef enum eMapDisplayState
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationSearchViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapViewHeight;
+@property (weak, nonatomic) IBOutlet DividerView *dragbarView;
 @property (nonatomic, weak) IBOutlet DividerView *dividerView;
 @property (nonatomic, weak) IBOutlet UIView *spinnerView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -177,36 +178,36 @@ typedef enum eMapDisplayState
     self.dividerView.delegate = self;
     [self positionDividerView];
 
-
-
     dividerBarPositionWithMap = dividerBarPositionWithoutMap = self.dividerView.frame.origin.y;
 
+    //
+    // Add a footer so the last listing is visible above tabbar
+    //
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.dividerView.frame.size.width, TABBAR_FOOTER_HEIGHT)];
-
-    self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
     self.tableView.tableFooterView = footerView;
 
-    /*for (NSString* family in [UIFont familyNames])
-    {
-        NSLog(@"%@", family);
-        
-        for (NSString* name in [UIFont fontNamesForFamilyName: family])
-        {
-            NSLog(@"  %@", name);
-        }
-    }*/
+    //
+    // Calculate the header size of tableview and set it's frame to that height. Hack because Apple can't
+    // figure it out for us automatically -paulvp
+    //
+    self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
+    [_tableListingsCategoriesHeader setNeedsLayout];
+    [_tableListingsCategoriesHeader layoutIfNeeded];
+    CGFloat height = [_tableListingsCategoriesHeader systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    height = _dividerView.frame.origin.y + _dividerView.frame.size.height;
 
-    //NSString *paramDataString = [self createSearchParamString];
+    CGRect headerFrame = _tableListingsCategoriesHeader.frame;
+    headerFrame.size.height = height;
+    _tableListingsCategoriesHeader.frame = headerFrame;
+    self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
+
+
 
     [MainViewController changeNavBarTitle:@"Directory"];
     [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
     currentPage = 0;
-    //[self loadSearchResultsPage:currentPage];
-    //[self loadSearchResultsPage:currentPage + 1];
-    //[self businessListingQueryForPage:currentPage];
-    //[self businessListingQueryForPage:currentPage + 1];
 
     self.spinnerView.hidden = NO;
 
@@ -218,10 +219,6 @@ typedef enum eMapDisplayState
     [self hideBackButtonAnimated: NO];
 
     [self createSingleCalloutView];
-
-    /*UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
-    gesture.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.tableView addGestureRecognizer:gesture];*/
 
     locateMeButtonDesiredAlpha = 1.0;
 
@@ -1663,15 +1660,7 @@ typedef enum eMapDisplayState
             ann.thumbnailImage = [backgroundImages imageForRow:row];
         }*/
         //[self.mapView zoomToFitMapAnnotations];
-        if (row == 0)
-        {
-            //top cell
-            cell = [self getTopOverviewCellForTableView: tableView];
-        } else
-        {
-            cell = [self getTopOverviewCellForTableView: tableView];
-        }
-
+        cell = [self getTopOverviewCellForTableView: tableView];
         if (businessInfo)
         {
 
@@ -1679,7 +1668,8 @@ typedef enum eMapDisplayState
             if (distance && (distance != (id)[NSNull null]))
             {
                 cell.ribbon = [RibbonView metersToDistance: [[businessInfo objectForKey: @"distance"] floatValue]];
-            } else
+            }
+            else
             {
                 cell.ribbon = nil;
                 //NSLog(@"Unknown");

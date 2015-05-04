@@ -55,7 +55,9 @@
 	{
 		if(ribbon.length)
 		{
-			ribbonView = [[RibbonView alloc] initAtLocation:CGPointMake(self.contentView.bounds.origin.x + self.contentView.bounds.size.width, 17.0) WithString:ribbon];
+            // XXX Hack. need to get screen width somehow. For somereason, contentView is only 320 wide at this point
+//            ribbonView = [[RibbonView alloc] initAtLocation:CGPointMake(self.contentView.frame.size.width, 17.0) WithString:ribbon];
+			ribbonView = [[RibbonView alloc] initAtLocation:CGPointMake([[UIScreen mainScreen] bounds].size.width, 12.0) WithString:ribbon];
 			[self.contentView addSubview:ribbonView];
 		}
 	}
