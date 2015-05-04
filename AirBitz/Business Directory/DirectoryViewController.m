@@ -111,10 +111,11 @@ typedef enum eMapDisplayState
     NSMutableArray *locationAutoCorrectArray;
     int mostRecentSearchTag;
     CGPoint dividerBarStartTouchPoint;
-    UIView *categoryView; //view that's the table's headerView
+    UIView *listingHeaderView; //view that's the table's headerView
     NSMutableDictionary *businessSearchResults;
     BackgroundImageManager *backgroundImages;
     NSDictionary *selectedBusinessInfo;     //cw we might be able to pass this to -launchBusinessDetails and remove it from here
+    tDirectoryMode previousDirectoryMode;
     tDirectoryMode directoryMode;
     tMapDisplayState mapDisplayState; //keeps track of current map state so we can decide if we can zoom automatically or load data after region changes.
     SMCalloutView *singleCalloutView;
@@ -127,6 +128,7 @@ typedef enum eMapDisplayState
     NSMutableArray *searchLocationCache;
     CLLocationCoordinate2D mostRecentLatLong;
     UISearchBar *activeSearchBar;
+    CGFloat originalCategoryViewHeight;
 
 }
 
@@ -152,6 +154,7 @@ typedef enum eMapDisplayState
 @property (nonatomic, weak) IBOutlet UIButton *btn_locateMe;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *searchIndicator;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *categoryViewHeight;
 @end
 
 @implementation DirectoryViewController
@@ -160,8 +163,10 @@ typedef enum eMapDisplayState
 {
     [super viewDidLoad];
 
-    directoryMode = DIRECTORY_MODE_LISTING;
+    directoryMode = previousDirectoryMode = DIRECTORY_MODE_LISTING;
     receivedInitialLocation = NO;
+
+    originalCategoryViewHeight = _categoryViewHeight.constant;
 
     businessSearchResults = [[NSMutableDictionary alloc] init];
     backgroundImages = [[BackgroundImageManager alloc] init];
@@ -187,13 +192,11 @@ typedef enum eMapDisplayState
     currentPage = 0;
 
     self.spinnerView.hidden = NO;
-
-    self.searchCluesTableView.hidden = YES;
-    self.searchIndicator.hidden = YES;
-    [self hideMapView];
     self.mapView.delegate = self;
+    self.mapView.showsUserLocation = YES;
 
-    [self hideBackButtonAnimated: NO];
+    _searchBarSearch.enablesReturnKeyAutomatically = NO;
+    _searchBarLocation.enablesReturnKeyAutomatically = NO;
 
     [self createSingleCalloutView];
 
@@ -268,28 +271,19 @@ typedef enum eMapDisplayState
 
     //NSLog(@"Adding keyboard notification");
     [self receiveKeyboardNotifications: YES];
-    
-    self.searchBarSearch.placeholder = @"Search";
 
     //
     // Calculate the header size of tableview and set it's frame to that height. Hack because Apple can't
     // figure it out for us automatically -paulvp
     //
     CGFloat height = _dividerView.frame.origin.y + _dividerView.frame.size.height - [MainViewController getHeaderHeight];
-
     CGRect headerFrame = _tableListingsCategoriesHeader.frame;
-
     NSLog(@"BizDirView viewWillAppear %f %f %f %f\n",_dividerView.frame.origin.y, _dividerView.frame.size.height, _tableListingsCategoriesHeader.frame.origin.y, _tableListingsCategoriesHeader.frame.size.height);
-
-
     headerFrame.size.height = height;
     _tableListingsCategoriesHeader.frame = headerFrame;
     self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
 
-    [self resetTableHideSearch];
-    [self positionDividerView];
-
-
+    [self transitionMode:DIRECTORY_MODE_LISTING];
 }
 
 - (void)receiveKeyboardNotifications: (BOOL)on
@@ -329,34 +323,21 @@ typedef enum eMapDisplayState
 
 - (void)keyboardWillShow: (NSNotification *)notification
 {
-    //show searchCluesTableView
-    //hide divider bar
-
-    //Get KeyboardFrame (in Window coordinates)
-    //if(notification.object == self)
     if (activeSearchBar)
     {
-        self.searchBarSearch.placeholder = NSLocalizedString(@"Business Name or Category", @"Business Name or Category");
-        self.searchBarLocation.placeholder = NSLocalizedString(@"City, State, or Country", @"City, State, or Country");
-
         NSDictionary *userInfo = [notification userInfo];
         CGRect keyboardFrame = [[userInfo objectForKey: UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
-        self.searchCluesTableView.hidden = NO;
         [UIView animateWithDuration: 0.35
                               delay: 0.0
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations: ^
         {
-
             self.searchCluesBottom.constant = keyboardFrame.size.height;
-
             [self.view layoutIfNeeded];
-
         }
                          completion: ^(BOOL finished)
         {
-            //self.dividerView.alpha = 0.0;
         }];
     }
 }
@@ -375,12 +356,11 @@ typedef enum eMapDisplayState
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations: ^
         {
-            self.searchCluesBottom.constant = self.view.frame.size.height;
+            [self hideSearchBarsAndClues];
             [self.view layoutIfNeeded];
         }
                          completion: ^(BOOL finished)
         {
-            self.searchCluesTableView.hidden = YES;
             activeSearchBar = nil;
         }];
     }
@@ -428,55 +408,24 @@ typedef enum eMapDisplayState
 
 - (IBAction)Back: (UIButton *)sender
 {
-
-    if (directoryMode == DIRECTORY_MODE_SEARCH)
+    switch (directoryMode)
     {
-        [self transitionSearchToListing];
-    } else if (directoryMode == DIRECTORY_MODE_MAP)
-    {
-        [self transitionMapToListing];
-    } else if (directoryMode == DIRECTORY_MODE_ON_THE_WEB_LISTING)
-    {
-        directoryMode = DIRECTORY_MODE_LISTING;
-        //[self.tableView beginUpdates];
-        [self addBusinessListingHeader];
-        //[self.tableView endUpdates];
-        [self showDividerView];
-        [self positionDividerView];
-        [self hideBackButtonAnimated: YES];
-
+        case DIRECTORY_MODE_LISTING:
+            // Can't go back any more
+            // There shouldn't even be a back button
+            break;
+        case DIRECTORY_MODE_SEARCH:
+            [self transitionMode:DIRECTORY_MODE_LISTING];
+            break;
+        case DIRECTORY_MODE_MAP:
+            [self transitionMode:DIRECTORY_MODE_SEARCH];
+            break;
+        case DIRECTORY_MODE_ON_THE_WEB_LISTING:
+            [self transitionMode:DIRECTORY_MODE_SEARCH];
+            break;
     }
 }
 
-- (void)hideBackButtonAnimated: (BOOL)animated
-{
-    //NSLog(@"Hiding back button");
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
-
-}
-
-- (void)showBackButtonAnimated: (BOOL)animated
-{
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
-}
-
-- (void)removeBusinessListingHeader
-{
-    if (self.tableView.tableHeaderView)
-    {
-        categoryView = self.tableView.tableHeaderView;
-        self.tableView.tableHeaderView = nil;
-    }
-}
-
-- (void)addBusinessListingHeader
-{
-    if (categoryView)
-    {
-        self.tableView.tableHeaderView = categoryView;
-        categoryView = nil;
-    }
-}
 /*
 -(NSString *)metersToDistance:(float)meters
 {
@@ -520,15 +469,15 @@ typedef enum eMapDisplayState
     {
         case TAG_CATEGORY_RESTAURANTS:
             self.searchBarSearch.text = NSLocalizedString(@"Restaurants", nil);
-            [self transitionListingToMap];
+            [self transitionMode:DIRECTORY_MODE_MAP];
             break;
         case TAG_CATEGORY_BARS:
             self.searchBarSearch.text = NSLocalizedString(@"Bars", nil);
-            [self transitionListingToMap];
+            [self transitionMode:DIRECTORY_MODE_MAP];
             break;
         case TAG_CATEGORY_COFFEE:
             self.searchBarSearch.text = NSLocalizedString(@"Coffee & Tea", nil);
-            [self transitionListingToMap];
+            [self transitionMode:DIRECTORY_MODE_MAP];
             break;
         case TAG_CATEGORY_MORE:
             [self launchMoreCategories];
@@ -693,36 +642,80 @@ typedef enum eMapDisplayState
 
  */
 
-- (void)transitionListingToSearch
+- (void) transitionMode: (tDirectoryMode) mode
 {
-    //NSLog(@"Transition Listing TO Search");
-    directoryMode = DIRECTORY_MODE_SEARCH;
+
     [UIView animateWithDuration: 0.35
                           delay: 0.0
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
-    {
-        //
-        // Open up location searchBar
-        //
-        _locationSearchViewHeight.constant = EXTRA_SEARCH_BAR_HEIGHT;
-        [self.view layoutIfNeeded];
+                     {
+                         switch (mode)
+                         {
+                             case DIRECTORY_MODE_LISTING:
+                                 [self.searchBarSearch resignFirstResponder];
+                                 [self.searchBarLocation resignFirstResponder];
 
-        //
-        // Open up the autocomplete clues tableview. Line up top of autocomplete table with bottom of searchBarLocation
-        //
-        CGRect frame = [_searchBarLocation convertRect:_searchBarLocation.bounds toView:self.view];
-        _searchCluesTop.constant = frame.origin.y + frame.size.height;
-        [self.view layoutIfNeeded];
+//                                 [businessSearchResults removeAllObjects];
+                                 [self hideBackButton];
+                                 [self addBusinessListingHeader];
+                                 self.dividerView.userControllable = NO;
+                                 [self showDividerView];
+                                 [self hideMapView];
+                                 [self showCategoryView];
+                                 //XXX Hide fake searchBar
+                                 [self resetTableHideSearch];
+                                 break;
 
-    }
+                             case DIRECTORY_MODE_SEARCH:
+                                 [self hideMapView];
+                                 [self hideDividerView];
+                                 [self showBackButton];
+                                 [self addBusinessListingHeader];
+                                 [self showSearchBarsAndClues];
+                                 [self.searchBarSearch becomeFirstResponder];
+                                 break;
+
+                             case DIRECTORY_MODE_MAP:
+                                 mapDisplayState = MAP_DISPLAY_INIT;
+
+                                 [self.searchBarSearch resignFirstResponder];
+                                 [self.searchBarLocation resignFirstResponder];
+                                 [self showBackButton];
+                                 [self removeBusinessListingHeader];
+                                 self.dividerView.userControllable = YES;
+                                 [self hideCategoryView];
+                                 [self setDefaultMapDividerPosition];
+                                 [self showDividerView];
+                                 [self showMapView];
+                                 //XXX Show fake searchBar
+                                 [self businessListingQueryForPage: 0];
+                                 break;
+
+                             case DIRECTORY_MODE_ON_THE_WEB_LISTING:
+                                 [self.searchBarSearch resignFirstResponder];
+                                 [self.searchBarLocation resignFirstResponder];
+                                 [self showBackButton];
+                                 [self addBusinessListingHeader];
+                                 [self hideCategoryView];
+                                 [self hideDividerView];
+                                 [self hideMapView];
+                                 //XXX Hide fake searchBar
+                                 [self resetTableHideSearch];
+                                 break;
+                         }
+                         [self.view layoutIfNeeded];
+
+                     }
                      completion: ^(BOOL finished)
-    {
-        //NSLog(@"Listing To Search COMPLETION");
-        [self showBackButtonAnimated: YES];
-        [self showDividerView]; //in case it was previously hidden by an on the web search
-    }];
+                     {
+                         NSLog(@"Directory Mode Transition %d -> %d\n", directoryMode, mode);
+                         previousDirectoryMode = directoryMode;
+                         directoryMode = mode;
+                     }];
+
 }
+
 
 - (void)setDefaultMapDividerPosition
 {
@@ -737,159 +730,264 @@ typedef enum eMapDisplayState
 
 }
 
-- (void)transitionSearchToMap
+- (void) showSearchBarsAndClues
 {
-    //NSLog(@"Transition Search To Map");
-    directoryMode = DIRECTORY_MODE_MAP;
-    //NSLog(@"Setting map state to INIT");
-    mapDisplayState = MAP_DISPLAY_INIT;
-    //subtly show mapView
-    [self showMapView];
-    self.dividerView.userControllable = YES;
-    [self removeBusinessListingHeader];
-    [self.searchBarSearch resignFirstResponder];
-    [self.searchBarLocation resignFirstResponder];
-    self.mapView.showsUserLocation = YES;
-    [self.tableView setContentOffset:CGPointZero animated:NO];
-    [self.tableView setContentInset:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+    //
+    // Set tableView listings to top of screen
+    //
+    _tableViewListingsTop.constant = 0;
 
-    [self setDefaultMapDividerPosition];
+    //
+    // Set placeholder text
+    //
+    self.searchBarSearch.placeholder = NSLocalizedString(@"Business Name or Category", @"Business Name or Category placeholder");
+    self.searchCluesTableView.hidden = NO;
 
-    [self businessListingQueryForPage: 0];
+    //
+    // Open up location searchBar
+    //
+    _locationSearchViewHeight.constant = EXTRA_SEARCH_BAR_HEIGHT;
+    [self.view layoutIfNeeded];
 
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^
-    {
-        _locationSearchViewHeight.constant = 0;
+    //
+    // Open up the autocomplete clues tableview. Line up top of autocomplete table with bottom of searchBarLocation
+    //
+    CGRect frame = [_searchBarLocation convertRect:_searchBarLocation.bounds toView:self.view];
+    _searchCluesTop.constant = frame.origin.y + frame.size.height;
+    [self.view layoutIfNeeded];
 
-        [self.view layoutIfNeeded];
+    //
+    // The last part of this is taken care of in keyboardWillShow
+    // The searchCluesBottom is tied to the top of the keyboard height
+    //
 
-    }
-                     completion: ^(BOOL finished)
-    {
-
-
-    }];
 }
 
-- (void)transitionSearchToListing
+- (void) hideSearchBarsAndClues
 {
-    //directoryMode = DIRECTORY_MODE_ON_THE_WEB_LISTING;
-    [businessSearchResults removeAllObjects];
-    [self.searchBarSearch resignFirstResponder];
-    [self.searchBarLocation resignFirstResponder];
+    // Put bottom of searchCluesTable to top of screen.
+    self.searchCluesBottom.constant = self.view.frame.size.height;
+    self.searchCluesTableView.hidden = YES;
+    self.searchBarSearch.placeholder = NSLocalizedString(@"Search", @"SearchBarSearch placeholder");
 
-    if (directoryMode == DIRECTORY_MODE_ON_THE_WEB_LISTING)
-    {
-        [self removeBusinessListingHeader];
-        [self hideDividerView];
-    } else
-    {
-        directoryMode = DIRECTORY_MODE_LISTING;
-        [self hideBackButtonAnimated: YES];
-    }
-
-    [self resetTableHideSearch];
-    [self businessListingQueryForPage: 0];
-    [UIView animateWithDuration: 0.5
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^
-    {
-//        _locationSearchViewHeight.constant -= EXTRA_SEARCH_BAR_HEIGHT;
-
-        [self.view layoutIfNeeded];
-    }
-                     completion: ^(BOOL finished)
-    {
-
-
-    }];
+    _locationSearchViewHeight.constant = 0;
 }
 
-- (void)transitionMapToSearch
-{
-    directoryMode = DIRECTORY_MODE_SEARCH;
-    
-    
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^
-    {
-//        _locationSearchViewHeight.constant += EXTRA_SEARCH_BAR_HEIGHT;
 
-        [self.view layoutIfNeeded];
+
+- (void)hideBackButton
+{
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
+
+}
+
+- (void)showBackButton
+{
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
+}
+
+//
+// Removes header which includes both double search bars AND categories buttons
+//
+- (void)removeBusinessListingHeader
+{
+    if (self.tableView.tableHeaderView)
+    {
+        listingHeaderView = self.tableView.tableHeaderView;
+        self.tableView.tableHeaderView = nil;
     }
-                     completion: ^(BOOL finished)
-    {
-        //
-        self.dividerView.userControllable = NO;
-        [self addBusinessListingHeader];
-        [self positionDividerView];
-
-        //subtly hide mapView
-        [UIView animateWithDuration: 0.5
-                              delay: 0.0
-                            options: UIViewAnimationOptionCurveLinear
-                         animations: ^
-        {
-            [self hideMapView];
-        }
-                         completion: ^(BOOL finished)
-        {
-            self.mapView.showsUserLocation = NO;
-            [self.mapView removeAllAnnotations];
-//XXX            self.tableListingsView.frame = homeTableViewFrame;
-        }];
-
-    }];
 }
 
-- (void)transitionListingToMap
+//
+// Add header which includes both double search bars AND categories buttons
+//
+- (void)addBusinessListingHeader
 {
-    directoryMode = DIRECTORY_MODE_MAP;
-    //NSLog(@"Setting map state to INIT");
-    mapDisplayState = MAP_DISPLAY_INIT;
-
-    self.mapView.showsUserLocation = YES;
-    self.dividerView.userControllable = YES;
-    [self removeBusinessListingHeader];
-    [self showBackButtonAnimated: YES];
-
-    [self setDefaultMapDividerPosition];
-
-    [self businessListingQueryForPage: 0];
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveLinear
-                     animations: ^
+    if (listingHeaderView)
     {
-
-        [self showMapView];
+        self.tableView.tableHeaderView = listingHeaderView;
+        listingHeaderView = nil;
     }
-                     completion: ^(BOOL finished)
-    {
-
-    }];
 }
 
-- (void)transitionMapToListing
+- (void)showCategoryView
 {
-    directoryMode = DIRECTORY_MODE_LISTING;
-
-    [self hideMapView];
-    self.mapView.showsUserLocation = NO;
-    self.dividerView.userControllable = NO;
-    [self addBusinessListingHeader];
-    [self hideBackButtonAnimated: YES];
-    [self.mapView removeAllAnnotations];
-    [self resetTableHideSearch];
-    [self positionDividerView];
-
+    _categoryViewHeight.constant = originalCategoryViewHeight;
 }
+
+- (void)hideCategoryView
+{
+    _categoryViewHeight.constant = 0;
+}
+
+
+//- (void)transitionSearchToMap
+//{
+//    //NSLog(@"Transition Search To Map");
+//    directoryMode = DIRECTORY_MODE_MAP;
+//    //NSLog(@"Setting map state to INIT");
+//    mapDisplayState = MAP_DISPLAY_INIT;
+//    //subtly show mapView
+//    [self showMapView];
+//    self.dividerView.userControllable = YES;
+//    [self removeBusinessListingHeader];
+//    [self.searchBarSearch resignFirstResponder];
+//    [self.searchBarLocation resignFirstResponder];
+//    self.mapView.showsUserLocation = YES;
+//    [self.tableView setContentOffset:CGPointZero animated:NO];
+//    [self.tableView setContentInset:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+//
+//    [self setDefaultMapDividerPosition];
+//
+//    [self businessListingQueryForPage: 0];
+//
+//    [UIView animateWithDuration: 0.35
+//                          delay: 0.0
+//                        options: UIViewAnimationOptionCurveEaseInOut
+//                     animations: ^
+//    {
+//        _locationSearchViewHeight.constant = 0;
+//
+//        [self.view layoutIfNeeded];
+//
+//    }
+//                     completion: ^(BOOL finished)
+//    {
+//
+//
+//    }];
+//}
+//
+//- (void)transitionSearchToListing
+//{
+//    //directoryMode = DIRECTORY_MODE_ON_THE_WEB_LISTING;
+//    [businessSearchResults removeAllObjects];
+//    [self.searchBarSearch resignFirstResponder];
+//    [self.searchBarLocation resignFirstResponder];
+//
+//    if (directoryMode == DIRECTORY_MODE_ON_THE_WEB_LISTING)
+//    {
+//        [self removeBusinessListingHeader];
+//        [self hideDividerView];
+//    } else
+//    {
+//        directoryMode = DIRECTORY_MODE_LISTING;
+//        [self hideBackButtonAnimated: YES];
+//    }
+//
+//    [self resetTableHideSearch];
+//    [self businessListingQueryForPage: 0];
+//    [UIView animateWithDuration: 0.5
+//                          delay: 0.0
+//                        options: UIViewAnimationOptionCurveEaseInOut
+//                     animations: ^
+//    {
+////        _locationSearchViewHeight.constant -= EXTRA_SEARCH_BAR_HEIGHT;
+//
+//        [self.view layoutIfNeeded];
+//    }
+//                     completion: ^(BOOL finished)
+//    {
+//
+//
+//    }];
+//}
+//
+//- (void)transitionMapToSearch
+//{
+//    directoryMode = DIRECTORY_MODE_SEARCH;
+//
+//    [UIView animateWithDuration: 0.35
+//                          delay: 0.0
+//                        options: UIViewAnimationOptionCurveEaseInOut
+//                     animations: ^
+//    {
+//        [self hideMapView];
+//        self.mapView.showsUserLocation = NO;
+//        self.dividerView.userControllable = NO;
+//        [self addBusinessListingHeader];
+//        [self hideBackButtonAnimated: YES];
+//        [self.mapView removeAllAnnotations];
+//    }
+//                     completion: ^(BOOL finished)
+//    {
+//
+//        //subtly hide mapView
+//        [UIView animateWithDuration: 0.5
+//                              delay: 0.0
+//                            options: UIViewAnimationOptionCurveLinear
+//                         animations: ^
+//        {
+//            [self hideMapView];
+//        }
+//                         completion: ^(BOOL finished)
+//        {
+//
+//            [self resetTableHideSearch];
+//            [self positionDividerView];
+//
+//            //
+//            // Open up location searchBar
+//            //
+//            _locationSearchViewHeight.constant = EXTRA_SEARCH_BAR_HEIGHT;
+//            [self.view layoutIfNeeded];
+//
+//            //
+//            // Open up the autocomplete clues tableview. Line up top of autocomplete table with bottom of searchBarLocation
+//            //
+//            CGRect frame = [_searchBarLocation convertRect:_searchBarLocation.bounds toView:self.view];
+//            _searchCluesTop.constant = frame.origin.y + frame.size.height;
+//            [self.view layoutIfNeeded];
+//
+//        }];
+//
+//    }];
+//}
+//
+//- (void)transitionListingToMap
+//{
+//    directoryMode = DIRECTORY_MODE_MAP;
+//    //NSLog(@"Setting map state to INIT");
+//    mapDisplayState = MAP_DISPLAY_INIT;
+//
+//    self.mapView.showsUserLocation = YES;
+//    self.dividerView.userControllable = YES;
+//    [self removeBusinessListingHeader];
+//    [self showBackButtonAnimated: YES];
+//
+//    [self setDefaultMapDividerPosition];
+//
+//    [self businessListingQueryForPage: 0];
+//    [UIView animateWithDuration: 0.35
+//                          delay: 0.0
+//                        options: UIViewAnimationOptionCurveLinear
+//                     animations: ^
+//    {
+//
+//        [self showMapView];
+//    }
+//                     completion: ^(BOOL finished)
+//    {
+//
+//    }];
+//}
+//
+//- (void)transitionMapToListing
+//{
+//    directoryMode = DIRECTORY_MODE_LISTING;
+//
+//    [self hideMapView];
+//    self.mapView.showsUserLocation = NO;
+//    self.dividerView.userControllable = NO;
+//    [self addBusinessListingHeader];
+//    [self hideBackButtonAnimated: YES];
+//    [self.mapView removeAllAnnotations];
+//    [self resetTableHideSearch];
+//    [self positionDividerView];
+//
+//}
+
+
 #pragma mark MapView
 
 - (void)didDragMap: (UIGestureRecognizer *)gestureRecognizer
@@ -1392,16 +1490,8 @@ typedef enum eMapDisplayState
     //NSLog(@"TextField began editing");
     if (directoryMode != DIRECTORY_MODE_SEARCH)
     {
-        if ((directoryMode == DIRECTORY_MODE_LISTING) || (directoryMode == DIRECTORY_MODE_ON_THE_WEB_LISTING))
-        {
-            //NSLog(@"APP MODE MAP.  Transition Listing to Search");
-            [self transitionListingToSearch];
-        }
-        if (directoryMode == DIRECTORY_MODE_MAP)
-        {
-            //NSLog(@"APP MODE MAP.  Transition MAP to Search");
-            [self transitionMapToSearch];
-        }
+        [self transitionMode:DIRECTORY_MODE_SEARCH];
+
     }
     if (searchBar == self.searchBarLocation)
     {
@@ -1435,7 +1525,6 @@ typedef enum eMapDisplayState
     }
 }
 
-//http://107.170.22.83:80/api/v1/autocomplete-business/?term=den&location=san
 - (void)searchBarSearchChanged: (UISearchBar *)searchBar textDidChange:(NSString *)text
 {
     //NSLog( @"search text changed: %@", textField.text);
@@ -1512,12 +1601,11 @@ typedef enum eMapDisplayState
         {
             if ([[self.searchBarLocation.text uppercaseString] isEqualToString: [ON_THE_WEB_STRING uppercaseString]])
             {
-                directoryMode = DIRECTORY_MODE_ON_THE_WEB_LISTING;
-                [self transitionSearchToListing];
+                [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
             }
             else
             {
-                [self transitionSearchToMap];
+                [self transitionMode:DIRECTORY_MODE_MAP];
             }
         }
     }
@@ -1884,7 +1972,8 @@ typedef enum eMapDisplayState
                 }
                 CLLocation *location = [Location controller].curLocation;
                 [self launchBusinessDetailsWithBizID: [dict objectForKey: @"bizId"] andLocation: location.coordinate animated: YES];
-                [self transitionSearchToListing];
+//                [self transitionSearchToListing];
+                [self transitionMode:DIRECTORY_MODE_LISTING];
                 //}
             } else
             {
@@ -1896,7 +1985,8 @@ typedef enum eMapDisplayState
                 [self.searchCluesTableView reloadData];
                 //[self transitionSearchToMap];
             }
-        } else if (mostRecentSearchTag == TAG_LOCATION_SEARCH)
+        }
+        else if (mostRecentSearchTag == TAG_LOCATION_SEARCH)
         {
             self.searchBarLocation.text = cell.textLabel.text;
             //add to search cache
@@ -1911,10 +2001,11 @@ typedef enum eMapDisplayState
                     }
                 }
             }
-            [self.searchBarSearch becomeFirstResponder];
-
-            locationAutoCorrectArray = nil;
-            [self.searchCluesTableView reloadData];
+            [self transitionMode:DIRECTORY_MODE_MAP];
+//            [self.searchBarSearch becomeFirstResponder];
+//
+//            locationAutoCorrectArray = nil;
+//            [self.searchCluesTableView reloadData];
         }
     } else
     {
@@ -2025,13 +2116,13 @@ typedef enum eMapDisplayState
             offset = self.tableView.tableHeaderView.frame.size.height - [MainViewController getHeaderHeight];
         }
         self.dividerViewTop.constant = self.tableView.frame.origin.y + self.tableView.tableHeaderView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
-        NSLog(@"position non-control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, offset, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
+//        NSLog(@"position non-control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, offset, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
 
     }
     else
     {
         self.dividerViewTop.constant = self.mapView.frame.origin.y + self.mapView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-        NSLog(@"position control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
+//        NSLog(@"position control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
     }
 }
 /*
@@ -2174,7 +2265,7 @@ typedef enum eMapDisplayState
     [self dismissMoreCategories];
     if (category)
     {
-        [self transitionListingToSearch];
+        [self transitionMode:DIRECTORY_MODE_SEARCH];
         [self.searchBarLocation becomeFirstResponder];
         self.searchBarSearch.text = category;
     }

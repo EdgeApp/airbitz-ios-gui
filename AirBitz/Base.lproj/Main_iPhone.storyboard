@@ -145,7 +145,8 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="6Vf-3p-Rdw"/>
                                                     </constraints>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="vXZ-lx-hvc" id="woe-0r-p6Y"/>
                                                     </connections>
@@ -155,7 +156,8 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="1rY-IF-ljS"/>
                                                     </constraints>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="search"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="vXZ-lx-hvc" id="ovw-6O-aIj"/>
                                                     </connections>
@@ -408,6 +410,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btn_locateMe" destination="Ue2-Gm-7u2" id="xDJ-MF-9ot"/>
+                        <outlet property="categoryViewHeight" destination="e93-bb-5es" id="jxb-uC-W6N"/>
                         <outlet property="contentView" destination="i8d-J1-RvK" id="SfM-Ta-bBe"/>
                         <outlet property="dividerView" destination="d8k-A8-ona" id="SR0-W3-prN"/>
                         <outlet property="dividerViewTop" destination="FK8-4P-Yy6" id="gYM-oc-EDR"/>
