@@ -54,8 +54,7 @@
 
 //geometry
 #define EXTRA_SEARCH_BAR_HEIGHT	44.0
-#define TABBAR_FOOTER_HEIGHT 49.0
-#define DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT	10.0	/* the divider bar image has some transparency above the actual bar */
+#define DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT	9.0	/* the divider bar image has some transparency above the actual bar */
 #define DIVIDER_DOWN_MARGIN		12.0			/* Limit how far off bottom of screen divider bar can be dragged to */
 #define LOCATE_ME_BUTTON_OFFSET_FROM_MAP_BOTTOM	58.0
 #define MINIMUM_LOCATE_ME_BUTTON_OFFSET_Y	120.0
@@ -112,12 +111,9 @@ typedef enum eMapDisplayState
     NSMutableArray *locationAutoCorrectArray;
     int mostRecentSearchTag;
     CGPoint dividerBarStartTouchPoint;
-    float dividerBarPositionWithMap;
-    float dividerBarPositionWithoutMap;
     UIView *categoryView; //view that's the table's headerView
     NSMutableDictionary *businessSearchResults;
     BackgroundImageManager *backgroundImages;
-//    CGRect homeTableViewFrame;
     NSDictionary *selectedBusinessInfo;     //cw we might be able to pass this to -launchBusinessDetails and remove it from here
     tDirectoryMode directoryMode;
     tMapDisplayState mapDisplayState; //keeps track of current map state so we can decide if we can zoom automatically or load data after region changes.
@@ -134,7 +130,10 @@ typedef enum eMapDisplayState
 
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewListingsTop;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *dividerViewTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *tableListingsCategoriesHeader;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBarLocation;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBarSearch;
@@ -144,8 +143,6 @@ typedef enum eMapDisplayState
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationSearchViewHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapViewHeight;
-@property (weak, nonatomic) IBOutlet DividerView *dragbarView;
 @property (nonatomic, weak) IBOutlet DividerView *dividerView;
 @property (nonatomic, weak) IBOutlet UIView *spinnerView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -176,31 +173,12 @@ typedef enum eMapDisplayState
     searchLocationCache = [[NSMutableArray alloc] init];
 
     self.dividerView.delegate = self;
-    [self positionDividerView];
-
-    dividerBarPositionWithMap = dividerBarPositionWithoutMap = self.dividerView.frame.origin.y;
 
     //
     // Add a footer so the last listing is visible above tabbar
     //
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.dividerView.frame.size.width, TABBAR_FOOTER_HEIGHT)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.dividerView.frame.size.width, [MainViewController getFooterHeight])];
     self.tableView.tableFooterView = footerView;
-
-    //
-    // Calculate the header size of tableview and set it's frame to that height. Hack because Apple can't
-    // figure it out for us automatically -paulvp
-    //
-    self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
-    [_tableListingsCategoriesHeader setNeedsLayout];
-    [_tableListingsCategoriesHeader layoutIfNeeded];
-    CGFloat height = [_tableListingsCategoriesHeader systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    height = _dividerView.frame.origin.y + _dividerView.frame.size.height;
-
-    CGRect headerFrame = _tableListingsCategoriesHeader.frame;
-    headerFrame.size.height = height;
-    _tableListingsCategoriesHeader.frame = headerFrame;
-    self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
-
 
 
     [MainViewController changeNavBarTitle:@"Directory"];
@@ -295,7 +273,18 @@ typedef enum eMapDisplayState
     [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
 
     [self resetTableHideSearch];
+    [self positionDividerView];
 
+    //
+    // Calculate the header size of tableview and set it's frame to that height. Hack because Apple can't
+    // figure it out for us automatically -paulvp
+    //
+    CGFloat height = _dividerView.frame.origin.y + _dividerView.frame.size.height;
+
+    CGRect headerFrame = _tableListingsCategoriesHeader.frame;
+    headerFrame.size.height = height;
+    _tableListingsCategoriesHeader.frame = headerFrame;
+    self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
 }
 
 - (void)receiveKeyboardNotifications: (BOOL)on
@@ -733,23 +722,13 @@ typedef enum eMapDisplayState
 - (void)setDefaultMapDividerPosition
 {
     //put divider in ~ middle of screen.  Adjust map and tableView to divider position
-    CGRect dividerFrame = self.dividerView.frame;
-    dividerFrame.origin.y = (self.contentView.frame.size.height) / 2;
-    self.dividerView.frame = dividerFrame;
+    _dividerViewTop.constant = (self.contentView.frame.size.height) / 2;
 
     //set map frame
-    CGRect mapFrame = self.mapView.frame;
-    mapFrame.size.height = dividerFrame.origin.y + DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-    self.mapView.frame = mapFrame;
-
-    [self TackLocateMeButtonToMapBottomCorner];
+    _mapViewHeight.constant = _dividerViewTop.constant + DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
 
     //set tableView frame right under divider bar
-//XXX    CGRect tableFrame = self.tableListingsView.frame;
-//    tableFrame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height;
-//    tableFrame.size.height = self.contentView.bounds.size.height - tableFrame.origin.y;
-//    self.tableListingsView.frame = tableFrame;
-
+    _tableViewListingsTop.constant = _mapViewHeight.constant;
 
 }
 
@@ -766,7 +745,7 @@ typedef enum eMapDisplayState
     [self.searchBarSearch resignFirstResponder];
     [self.searchBarLocation resignFirstResponder];
     self.mapView.showsUserLocation = YES;
-//    [self.tableView setContentOffset:CGPointZero animated:NO];
+    [self.tableView setContentOffset:CGPointZero animated:NO];
 
     [self setDefaultMapDividerPosition];
 
@@ -931,48 +910,48 @@ typedef enum eMapDisplayState
     [self.mapView setCenterCoordinate: self.mapView.userLocation.location.coordinate animated: YES];
 }
 
-- (void)TackLocateMeButtonToMapBottomCorner
-{
-    CGRect locateMeFrame = self.btn_locateMe.frame;
-    locateMeFrame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height - LOCATE_ME_BUTTON_OFFSET_FROM_MAP_BOTTOM;
-    self.btn_locateMe.frame = locateMeFrame;
-
-    if (locateMeFrame.origin.y < MINIMUM_LOCATE_ME_BUTTON_OFFSET_Y)
-    {
-        if (locateMeButtonDesiredAlpha != 0.0)
-        {
-            locateMeButtonDesiredAlpha = 0.0;
-            //hide locateMe button
-            [UIView animateWithDuration: 0.1
-                                  delay: 0.0
-                                options: UIViewAnimationOptionCurveLinear
-                             animations: ^
-            {
-                self.btn_locateMe.alpha = locateMeButtonDesiredAlpha;
-            }
-                             completion: ^(BOOL finished)
-            {
-            }];
-        }
-    } else
-    {
-        if (locateMeButtonDesiredAlpha != 1.0)
-        {
-            locateMeButtonDesiredAlpha = 1.0;
-            //hide locateMe button
-            [UIView animateWithDuration: 0.1
-                                  delay: 0.0
-                                options: UIViewAnimationOptionCurveLinear
-                             animations: ^
-            {
-                self.btn_locateMe.alpha = locateMeButtonDesiredAlpha;
-            }
-                             completion: ^(BOOL finished)
-            {
-            }];
-        }
-    }
-}
+//- (void)TackLocateMeButtonToMapBottomCorner
+//{
+//    CGRect locateMeFrame = self.btn_locateMe.frame;
+//    locateMeFrame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height - LOCATE_ME_BUTTON_OFFSET_FROM_MAP_BOTTOM;
+//    self.btn_locateMe.frame = locateMeFrame;
+//
+//    if (locateMeFrame.origin.y < MINIMUM_LOCATE_ME_BUTTON_OFFSET_Y)
+//    {
+//        if (locateMeButtonDesiredAlpha != 0.0)
+//        {
+//            locateMeButtonDesiredAlpha = 0.0;
+//            //hide locateMe button
+//            [UIView animateWithDuration: 0.1
+//                                  delay: 0.0
+//                                options: UIViewAnimationOptionCurveLinear
+//                             animations: ^
+//            {
+//                self.btn_locateMe.alpha = locateMeButtonDesiredAlpha;
+//            }
+//                             completion: ^(BOOL finished)
+//            {
+//            }];
+//        }
+//    } else
+//    {
+//        if (locateMeButtonDesiredAlpha != 1.0)
+//        {
+//            locateMeButtonDesiredAlpha = 1.0;
+//            //hide locateMe button
+//            [UIView animateWithDuration: 0.1
+//                                  delay: 0.0
+//                                options: UIViewAnimationOptionCurveLinear
+//                             animations: ^
+//            {
+//                self.btn_locateMe.alpha = locateMeButtonDesiredAlpha;
+//            }
+//                             completion: ^(BOOL finished)
+//            {
+//            }];
+//        }
+//    }
+//}
 
 - (void)hideMapView
 {
@@ -2031,25 +2010,22 @@ typedef enum eMapDisplayState
 
 - (void)positionDividerView
 {
-//    CGRect frame = self.dividerView.frame;
     if (self.dividerView.userControllable == NO)
     {
-        //NSLog(@"offset: %f", scrollView.contentOffset.y);
-        float offset = self.tableView.contentOffset.y;
-        if (offset > self.tableView.tableHeaderView.frame.size.height)
+        float offset = self.tableView.contentInset.top + self.tableView.contentOffset.y;
+        if (offset > self.tableView.tableHeaderView.frame.size.height - [MainViewController getHeaderHeight])
         {
-            offset = self.tableView.tableHeaderView.frame.size.height;
+            offset = self.tableView.tableHeaderView.frame.size.height - [MainViewController getHeaderHeight];
         }
-        self.mapViewHeight.constant = 10 + self.tableView.frame.origin.y + self.tableView.tableHeaderView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
+        self.dividerViewTop.constant = self.tableView.frame.origin.y + self.tableView.tableHeaderView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
+        NSLog(@"position non-control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, offset, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
 
-        self.dividerView.hidden = TRUE;
     }
-//    else
-//    {
-//        //frame.origin.y -= EXTRA_SEARCH_BAR_HEIGHT;
-//        frame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-//        self.dividerView.frame = frame;
-//    }
+    else
+    {
+        self.dividerViewTop.constant = self.mapView.frame.origin.y + self.mapView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
+        NSLog(@"position control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
+    }
 }
 /*
 -(void)tieViewsToDividerBar
@@ -2093,27 +2069,35 @@ typedef enum eMapDisplayState
 {
     CGPoint newLocation = [[touches anyObject] locationInView: self.contentView];
 
-    if (newLocation.y < 0)
-        newLocation.y = 0;
+    _dividerViewTop.constant += newLocation.y - dividerBarStartTouchPoint.y;
+    //don't allow divider bar to be dragged beyond searchbar
+    if (_dividerViewTop.constant < [MainViewController getHeaderHeight]) //(self.searchView.frame.origin.y + self.searchView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT))
+    {
+        _dividerViewTop.constant = [MainViewController getHeaderHeight]; //self.searchView.frame.origin.y + self.searchView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
+    }
 
-    self.mapViewHeight.constant = newLocation.y;
+    //don't allow divider bar to be dragged to far down
+    if (_dividerViewTop.constant > self.contentView.bounds.size.height - _dividerView.frame.size.height - [MainViewController getFooterHeight] - DIVIDER_DOWN_MARGIN)
+    {
+        _dividerViewTop.constant = self.contentView.bounds.size.height - _dividerView.frame.size.height - [MainViewController getFooterHeight] - DIVIDER_DOWN_MARGIN;
+    }
+    dividerBarStartTouchPoint = newLocation;
+
+    [self updateMapAndTableToTrackDividerBar];
 }
 
 - (void)updateMapAndTableToTrackDividerBar
 {
-//    //updates mapView and tableView heights to conincide with divider bar position
-//    CGRect frame = self.dividerView.frame;
-//
-//    CGRect mapFrame = self.mapView.frame;
-//    mapFrame.size.height = frame.origin.y - mapFrame.origin.y + DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-//    self.mapView.frame = mapFrame;
-//
-//    [self TackLocateMeButtonToMapBottomCorner];
-//
-//    CGRect tableFrame = self.tableView.frame;
-//    tableFrame.origin.y = frame.origin.y + DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-//    tableFrame.size.height = self.contentView.bounds.size.height - tableFrame.origin.y;
-//    self.tableView.frame = tableFrame;
+    //updates mapView and tableView heights to conincide with divider bar position
+    CGRect frame = self.dividerView.frame;
+
+    CGRect mapFrame = self.mapView.frame;
+    _mapViewHeight.constant = frame.origin.y - mapFrame.origin.y + DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
+
+    CGRect tableFrame = self.tableView.frame;
+    _tableViewListingsTop.constant = frame.origin.y + DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
+    self.tableView.frame = tableFrame;
+
 }
 
 
