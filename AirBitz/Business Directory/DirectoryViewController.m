@@ -647,6 +647,20 @@ typedef enum eMapDisplayState
 - (void) transitionMode: (tDirectoryMode) mode
 {
 
+    switch (mode)
+    {
+        case DIRECTORY_MODE_LISTING:
+        case DIRECTORY_MODE_MAP:
+        case DIRECTORY_MODE_ON_THE_WEB_LISTING:
+            [self.searchBarSearch resignFirstResponder];
+            [self.searchBarLocation resignFirstResponder];
+            break;
+
+        case DIRECTORY_MODE_SEARCH:
+            [self showSearchBarsAndClues];
+            break;
+    }
+
     [UIView animateWithDuration: 0.35
                           delay: 0.0
                         options: UIViewAnimationOptionCurveEaseInOut
@@ -655,8 +669,6 @@ typedef enum eMapDisplayState
                          switch (mode)
                          {
                              case DIRECTORY_MODE_LISTING:
-                                 [self.searchBarSearch resignFirstResponder];
-                                 [self.searchBarLocation resignFirstResponder];
 
 //                                 [businessSearchResults removeAllObjects];
                                  [self hideBackButton];
@@ -674,15 +686,11 @@ typedef enum eMapDisplayState
                                  [self hideDividerView];
                                  [self showBackButton];
                                  [self addBusinessListingHeader];
-                                 [self showSearchBarsAndClues];
-                                 [self.searchBarSearch becomeFirstResponder];
                                  break;
 
                              case DIRECTORY_MODE_MAP:
                                  mapDisplayState = MAP_DISPLAY_INIT;
 
-                                 [self.searchBarSearch resignFirstResponder];
-                                 [self.searchBarLocation resignFirstResponder];
                                  [self showBackButton];
                                  [self removeBusinessListingHeader];
                                  self.dividerView.userControllable = YES;
@@ -695,8 +703,6 @@ typedef enum eMapDisplayState
                                  break;
 
                              case DIRECTORY_MODE_ON_THE_WEB_LISTING:
-                                 [self.searchBarSearch resignFirstResponder];
-                                 [self.searchBarLocation resignFirstResponder];
                                  [self showBackButton];
                                  [self addBusinessListingHeader];
                                  [self hideCategoryView];
@@ -711,6 +717,12 @@ typedef enum eMapDisplayState
                      }
                      completion: ^(BOOL finished)
                      {
+                         switch (mode)
+                         {
+                             case DIRECTORY_MODE_SEARCH:
+                                 [self.searchBarSearch becomeFirstResponder];
+                                 break;
+                         }
                          NSLog(@"Directory Mode Transition %d -> %d\n", directoryMode, mode);
                          previousDirectoryMode = directoryMode;
                          directoryMode = mode;
@@ -730,10 +742,15 @@ typedef enum eMapDisplayState
     //set tableView frame right under divider bar
     _tableViewListingsTop.constant = _mapViewHeight.constant;
 
+    // Remove top offset and inset of the listings tableview to prevent gap
+    [self.tableView setContentOffset:CGPointZero animated:NO];
+    [self.tableView setContentInset:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
 }
 
 - (void) showSearchBarsAndClues
 {
+
+
     //
     // Set tableView listings to top of screen
     //
@@ -746,6 +763,18 @@ typedef enum eMapDisplayState
     self.searchCluesTableView.hidden = NO;
 
     //
+    // Reset the inset/offset to show the search bar below the header (navbar)
+    //
+    CGPoint pt;
+    pt.x = 0.0;
+    pt.y = [MainViewController getHeaderHeight];
+    [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
+
+    pt.x = 0.0;
+    pt.y = -[MainViewController getHeaderHeight];
+    [self.tableView setContentOffset:pt animated:true];
+
+    //
     // Open up location searchBar
     //
     _locationSearchViewHeight.constant = EXTRA_SEARCH_BAR_HEIGHT;
@@ -754,8 +783,9 @@ typedef enum eMapDisplayState
     //
     // Open up the autocomplete clues tableview. Line up top of autocomplete table with bottom of searchBarLocation
     //
-    CGRect frame = [_searchBarLocation convertRect:_searchBarLocation.bounds toView:self.view];
-    _searchCluesTop.constant = frame.origin.y + frame.size.height;
+//    CGRect frame = [_searchBarLocation convertRect:_searchBarLocation.bounds toView:self.view];
+//    _searchCluesTop.constant = frame.origin.y + frame.size.height;
+    _searchCluesTop.constant = [MainViewController getHeaderHeight] + (2 * EXTRA_SEARCH_BAR_HEIGHT);
     [self.view layoutIfNeeded];
 
     //
