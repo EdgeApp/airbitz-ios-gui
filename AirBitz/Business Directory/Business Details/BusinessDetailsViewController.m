@@ -10,13 +10,7 @@
 #import "DL_URLServer.h"
 #import "Server.h"
 #import "Util.h"
-#import "BD_Address_Cell.h"
-#import "BD_Phone_Cell.h"
-#import "BD_Website_Cell.h"
-#import "BD_Hours_Cell.h"
-#import "BD_Details_Cell.h"
 #import "BD_Social_Cell.h"
-#import "BD_Share_Cell.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "RibbonView.h"
@@ -118,7 +112,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 							acceptableCacheAge:CACHE_24_HOURS
 								   cacheResult:YES];
 	
-	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 	[self.activityView startAnimating];
 	
 	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
@@ -499,6 +493,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 					[self determineVisibleRows];
 					
 					self.businessTitleLabel.text = [self.businessDetails objectForKey:@"name"];
+                    [MainViewController changeNavBarTitle:self.businessTitleLabel.text];
 					
 					NSArray *daysOfOperation = [self.businessDetails objectForKey:@"hours"];
 					
@@ -511,12 +506,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 						hoursCellHeight = SINGLE_ROW_CELL_HEIGHT;
 					}
 					
-					BD_Details_Cell *detailsCell = [self getDetailsCellForTableView:self.tableView];
-					
-					//calculate height of details cell
-					CGSize size = [ [self.businessDetails objectForKey:@"description"] sizeWithFont:detailsCell.detailsLabel.font constrainedToSize:CGSizeMake(detailsLabelWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
-					detailsCellHeight = size.height + 28.0;
-
 					[self.tableView reloadData];
 					
 					//Get image URLs
@@ -556,98 +545,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
     return cell;
 }
 
--(BD_Address_Cell *)getAddressCellForTableView:(UITableView *)tableView
-{
-	BD_Address_Cell *cell;
-	static NSString *cellIdentifier = @"BD_Address_Cell";
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (nil == cell)
-	{
-		cell = [[BD_Address_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	return cell;
-}
-
--(BD_Phone_Cell *)getPhoneCellForTableView:(UITableView *)tableView
-{
-	BD_Phone_Cell *cell;
-	static NSString *cellIdentifier = @"BD_Phone_Cell";
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (nil == cell)
-	{
-		cell = [[BD_Phone_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	return cell;
-}
-
--(BD_Website_Cell *)getWebsiteCellForTableView:(UITableView *)tableView
-{
-	BD_Website_Cell *cell;
-	static NSString *cellIdentifier = @"BD_Website_Cell";
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (nil == cell)
-	{
-		cell = [[BD_Website_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	return cell;
-}
-
--(BD_Social_Cell *)getSocialCellForTableView:(UITableView *)tableView
-{
-	BD_Social_Cell *cell;
-	static NSString *cellIdentifier = @"BD_Social_Cell";
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (nil == cell)
-	{
-		cell = [[BD_Social_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	return cell;
-}
-
--(BD_Share_Cell *)getShareCellForTableView:(UITableView *)tableView
-{
-	BD_Share_Cell *cell;
-	static NSString *cellIdentifier = @"BD_Share_Cell";
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (nil == cell)
-	{
-		cell = [[BD_Share_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	return cell;
-}
-
--(BD_Hours_Cell *)getHoursCellForTableView:(UITableView *)tableView
-{
-	BD_Hours_Cell *cell;
-	static NSString *cellIdentifier = @"BD_Hours_Cell";
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (nil == cell)
-	{
-		cell = [[BD_Hours_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	return cell;
-}
-
--(BD_Details_Cell *)getDetailsCellForTableView:(UITableView *)tableView
-{
-	BD_Details_Cell *cell;
-	static NSString *cellIdentifier = @"BD_Details_Cell";
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (nil == cell)
-	{
-		cell = [[BD_Details_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-	detailsLabelWidth = cell.detailsLabel.frame.size.width;
-	return cell;
-}
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSInteger row = [indexPath row];
@@ -657,7 +554,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	int cellType = [self cellTypeForRow:indexPath.row];
 
     //common cell
-    BD_CommonCell *commonCell = [self getAddressCellForTableView:tableView];
+    BD_CommonCell *commonCell = [self getCommonCellForTableView:tableView];
 
 	if (cellType == kAddress)
 	{
@@ -749,6 +646,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
             commonCell.rightLabel.textColor = [UIColor blackColor];
             NSLog(@"rightLabel: %@", commonCell.rightLabel.text);
 
+            commonCell.rightIcon.hidden = YES;
             commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_clock.png"];
 
         }
@@ -756,14 +654,17 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	else if(cellType == kDetails)
 	{
 		//details cell
-		BD_Details_Cell *detailsCell = [self getDetailsCellForTableView:tableView];
 		if(self.businessDetails)
 		{
-			[detailsCell.activityView stopAnimating];
-			detailsCell.detailsLabel.text = [self.businessDetails objectForKey:@"description"];
-			[detailsCell.detailsLabel sizeToFit];
+            commonCell.leftLabel.text = [self.businessDetails objectForKey:@"description"];
+            NSInteger leftLines = [[commonCell.leftLabel.text componentsSeparatedByCharactersInSet:
+                    [NSCharacterSet newlineCharacterSet]] count];
+
+            commonCell.leftLabel.numberOfLines = leftLines;
+			[commonCell.leftLabel sizeToFit];
+            commonCell.rightIcon.hidden = YES;
+//            commonCell.rightLabel = nil;
 		}
-		cell = detailsCell;
 	}
 	else if(cellType == kSocial)
 	{

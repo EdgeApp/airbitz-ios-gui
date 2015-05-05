@@ -3675,12 +3675,18 @@ Scan the QR code using this device</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UQu-aJ-TSX">
+                                <rect key="frame" x="0.0" y="312" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="CiR-Rl-fWL"/>
+                                </items>
+                            </toolbar>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BGr-Rg-RmT">
                                 <rect key="frame" x="169" y="320" width="37" height="37"/>
                             </activityIndicatorView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fW9-fV-Lwx" userLabel="Table View -details">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fW9-fV-Lwx" userLabel="Table View -details">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="9h3-Kj-nNy" userLabel="View -PhotoArea">
                                     <rect key="frame" x="0.0" y="20" width="375" height="200"/>
@@ -3746,30 +3752,26 @@ Scan the QR code using this device</string>
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0aq-T8-gZj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
-                                                    <items/>
-                                                </toolbar>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="leftLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oPG-fA-f9b" userLabel="leftLabel" customClass="LatoLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="leftLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oPG-fA-f9b" userLabel="leftLabel" customClass="LatoLabel">
                                                     <rect key="frame" x="48" y="6" width="291" height="47"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.47450980392156861" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nPb-Eu-ljL" userLabel="rightLabel" customClass="LatoLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nPb-Eu-ljL" userLabel="rightLabel" customClass="LatoLabel">
                                                     <rect key="frame" x="336" y="6" width="0.0" height="47"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.47450980390000003" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_location.png" translatesAutoresizingMaskIntoConstraints="NO" id="p1D-b0-qgV">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bd_icon_location.png" translatesAutoresizingMaskIntoConstraints="NO" id="p1D-b0-qgV">
                                                     <rect key="frame" x="12" y="20" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="DNa-mI-dAQ"/>
                                                         <constraint firstAttribute="height" constant="20" id="kM9-HB-ToP"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="T2Q-C3-gz5">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="T2Q-C3-gz5">
                                                     <rect key="frame" x="347" y="19" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="P0r-uf-i9K"/>
@@ -3787,12 +3789,8 @@ Scan the QR code using this device</string>
                                                 <constraint firstItem="nPb-Eu-ljL" firstAttribute="top" secondItem="Nzv-ft-qQX" secondAttribute="top" constant="6" id="Mdf-NA-y2q"/>
                                                 <constraint firstAttribute="centerY" secondItem="T2Q-C3-gz5" secondAttribute="centerY" id="N2V-ZV-dAL"/>
                                                 <constraint firstAttribute="trailing" secondItem="T2Q-C3-gz5" secondAttribute="trailing" constant="6" id="RJi-AF-4fo"/>
-                                                <constraint firstItem="0aq-T8-gZj" firstAttribute="top" secondItem="Nzv-ft-qQX" secondAttribute="top" id="S4w-8y-Zje"/>
-                                                <constraint firstAttribute="trailing" secondItem="0aq-T8-gZj" secondAttribute="trailing" id="ZRQ-qt-5An"/>
                                                 <constraint firstItem="T2Q-C3-gz5" firstAttribute="leading" secondItem="nPb-Eu-ljL" secondAttribute="trailing" constant="11" id="crn-LI-SZK"/>
                                                 <constraint firstAttribute="centerY" secondItem="p1D-b0-qgV" secondAttribute="centerY" id="exK-XT-oKX"/>
-                                                <constraint firstItem="0aq-T8-gZj" firstAttribute="leading" secondItem="Nzv-ft-qQX" secondAttribute="leading" id="gq3-7K-YyO"/>
-                                                <constraint firstAttribute="bottom" secondItem="0aq-T8-gZj" secondAttribute="bottom" id="rjy-Y0-ltK"/>
                                                 <constraint firstItem="oPG-fA-f9b" firstAttribute="top" secondItem="Nzv-ft-qQX" secondAttribute="top" constant="6" id="tdP-fw-fzm"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -3801,32 +3799,8 @@ Scan the QR code using this device</string>
                                         <connections>
                                             <outlet property="cellIcon" destination="p1D-b0-qgV" id="Y4O-g6-gGA"/>
                                             <outlet property="leftLabel" destination="oPG-fA-f9b" id="q9k-r4-pEH"/>
+                                            <outlet property="rightIcon" destination="T2Q-C3-gz5" id="GaT-ZI-BZ9"/>
                                             <outlet property="rightLabel" destination="nPb-Eu-ljL" id="iPB-ut-Bw6"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Details_Cell" id="IFa-yF-0Do" customClass="BD_Details_Cell">
-                                        <rect key="frame" x="0.0" y="257" width="288" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IFa-yF-0Do" id="SsV-v1-k0W">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="         Details..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Kgm-MH-DvG" customClass="LatoLabel">
-                                                    <rect key="frame" x="20" y="14" width="248" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="3Rh-Cn-OCX" userLabel="Large White Activity Indicator">
-                                                    <rect key="frame" x="135" y="11" width="20" height="20"/>
-                                                    <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </activityIndicatorView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="activityView" destination="3Rh-Cn-OCX" id="Q18-m2-w9i"/>
-                                            <outlet property="detailsLabel" destination="Kgm-MH-DvG" id="0Tb-Bf-gxO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -3840,7 +3814,11 @@ Scan the QR code using this device</string>
                         <constraints>
                             <constraint firstItem="BGr-Rg-RmT" firstAttribute="top" secondItem="m5h-hH-PG6" secondAttribute="bottom" constant="300" id="6NW-ZW-yYu"/>
                             <constraint firstAttribute="centerX" secondItem="BGr-Rg-RmT" secondAttribute="centerX" id="QJH-SH-r7I"/>
+                            <constraint firstItem="g31-Uw-ef5" firstAttribute="top" secondItem="UQu-aJ-TSX" secondAttribute="bottom" id="QrF-dn-vGR"/>
+                            <constraint firstItem="UQu-aJ-TSX" firstAttribute="top" secondItem="m5h-hH-PG6" secondAttribute="bottom" id="bIv-pu-pjw"/>
                             <constraint firstAttribute="centerX" secondItem="fW9-fV-Lwx" secondAttribute="centerX" id="gX6-S2-1rd"/>
+                            <constraint firstAttribute="trailing" secondItem="UQu-aJ-TSX" secondAttribute="trailing" id="mxe-UL-RMe"/>
+                            <constraint firstItem="UQu-aJ-TSX" firstAttribute="leading" secondItem="ATO-J5-tNU" secondAttribute="leading" id="oG7-LK-6DQ"/>
                             <constraint firstItem="fW9-fV-Lwx" firstAttribute="top" secondItem="m5h-hH-PG6" secondAttribute="bottom" id="x0V-Hh-mpX"/>
                             <constraint firstItem="g31-Uw-ef5" firstAttribute="top" secondItem="fW9-fV-Lwx" secondAttribute="bottom" id="x58-yI-8Yl"/>
                             <constraint firstItem="fW9-fV-Lwx" firstAttribute="width" secondItem="ATO-J5-tNU" secondAttribute="width" id="xol-5W-IXb"/>

@@ -280,7 +280,6 @@
 		7D98ACE019A7C550003D2BF6 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C2C18A435BD00DA4A34 /* NSDictionary_JSONExtensions.m */; };
 		7D98ACE119A7C550003D2BF6 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A98418EA0B80008F302C /* Annotation.m */; };
 		7D98ACE219A7C550003D2BF6 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6868AD1219516D7A006C3716 /* DebugViewController.m */; };
-		7D98ACE319A7C550003D2BF6 /* BD_Website_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96F18EA0A42008F302C /* BD_Website_Cell.m */; };
 		7D98ACE419A7C550003D2BF6 /* ButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031318EA55C700845090 /* ButtonCell.m */; };
 		7D98ACE519A7C550003D2BF6 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C2718A435BD00DA4A34 /* CDataScanner.m */; };
 		7D98ACE619A7C550003D2BF6 /* SendStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */; };
@@ -290,7 +289,6 @@
 		7D98ACEA19A7C550003D2BF6 /* ExportWalletPDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7C1259193E7C510096338D /* ExportWalletPDFViewController.m */; };
 		7D98ACEB19A7C550003D2BF6 /* GDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050568193FD014007D4960 /* GDrive.m */; };
 		7D98ACEC19A7C550003D2BF6 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */; };
-		7D98ACED19A7C550003D2BF6 /* BD_Phone_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96D18EA0A42008F302C /* BD_Phone_Cell.m */; };
 		7D98ACEE19A7C550003D2BF6 /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861FE671950DFB100CDF24E /* TxOutput.m */; };
 		7D98ACEF19A7C550003D2BF6 /* MoreCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A99218EA0BAC008F302C /* MoreCategoriesViewController.m */; };
 		7D98ACF019A7C550003D2BF6 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C2A18A435BD00DA4A34 /* CDataScanner_Extensions.m */; };
@@ -304,10 +302,8 @@
 		7D98ACF819A7C550003D2BF6 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
 		7D98ACF919A7C550003D2BF6 /* BalanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = B57C209518C25011005D7245 /* BalanceView.m */; };
 		7D98ACFA19A7C550003D2BF6 /* BooleanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031018EA538500845090 /* BooleanCell.m */; };
-		7D98ACFB19A7C550003D2BF6 /* BD_Address_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96718EA0A42008F302C /* BD_Address_Cell.m */; };
 		7D98ACFC19A7C550003D2BF6 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C2F18A435BD00DA4A34 /* CJSONDeserializer.m */; };
 		7D98ACFD19A7C550003D2BF6 /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9A918EA0D09008F302C /* RequestViewController.m */; };
-		7D98ACFE19A7C550003D2BF6 /* BD_Details_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96918EA0A42008F302C /* BD_Details_Cell.m */; };
 		7D98ACFF19A7C550003D2BF6 /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9BE18EA0DD8008F302C /* WalletCell.m */; };
 		7D98AD0019A7C550003D2BF6 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
 		7D98AD0119A7C550003D2BF6 /* ButtonOnlyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031618EA5F5B00845090 /* ButtonOnlyCell.m */; };
@@ -321,7 +317,6 @@
 		7D98AD0919A7C550003D2BF6 /* LatoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C1418A40EDA00DA4A34 /* LatoLabel.m */; };
 		7D98AD0A19A7C550003D2BF6 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B56553EE18ECC8E0005B35E1 /* CalculatorView.m */; };
 		7D98AD0B19A7C550003D2BF6 /* ButtonSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B56553F118EDDCF8005B35E1 /* ButtonSelectorView.m */; };
-		7D98AD0C19A7C550003D2BF6 /* BD_Hours_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96B18EA0A42008F302C /* BD_Hours_Cell.m */; };
 		7D98AD0D19A7C550003D2BF6 /* overviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A99B18EA0C10008F302C /* overviewCell.m */; };
 		7D98AD0E19A7C550003D2BF6 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6893E6C919783FED0092DA04 /* SyncView.m */; };
 		7D98AD0F19A7C550003D2BF6 /* TabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B57C207C18C15009005D7245 /* TabBarButton.m */; };
@@ -679,8 +674,6 @@
 		7DB1353F19FB48D9007D23CE /* bd_icon_share@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DB1353C19FB48D9007D23CE /* bd_icon_share@2x~iphone.png */; };
 		7DB1354019FB48D9007D23CE /* bd_icon_share~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DB1353D19FB48D9007D23CE /* bd_icon_share~iphone.png */; };
 		7DB1354119FB48D9007D23CE /* bd_icon_share~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DB1353D19FB48D9007D23CE /* bd_icon_share~iphone.png */; };
-		7DB1354819FF10E5007D23CE /* BD_Share_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1354719FF10E5007D23CE /* BD_Share_Cell.m */; };
-		7DB1354919FF10E5007D23CE /* BD_Share_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1354719FF10E5007D23CE /* BD_Share_Cell.m */; };
 		7DB1354C19FF13BA007D23CE /* BD_Social_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1354B19FF13BA007D23CE /* BD_Social_Cell.m */; };
 		7DB1354D19FF13BA007D23CE /* BD_Social_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1354B19FF13BA007D23CE /* BD_Social_Cell.m */; };
 		7DB9DD7F1A03187D00AD35ED /* background@2x~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7DB9DD7D1A03187D00AD35ED /* background@2x~iphone.jpg */; };
@@ -985,11 +978,6 @@
 		B59C161F18C145D400AEA789 /* tabbar_bkg_selected~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C161D18C145D400AEA789 /* tabbar_bkg_selected~iphone.png */; };
 		B5B19BCF18ABFCDF00CF04A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B19BCE18ABFCDF00CF04A4 /* MapKit.framework */; };
 		B5C0A97218EA0A42008F302C /* BackgroundImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96418EA0A42008F302C /* BackgroundImageManager.m */; };
-		B5C0A97318EA0A42008F302C /* BD_Address_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96718EA0A42008F302C /* BD_Address_Cell.m */; };
-		B5C0A97418EA0A42008F302C /* BD_Details_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96918EA0A42008F302C /* BD_Details_Cell.m */; };
-		B5C0A97518EA0A42008F302C /* BD_Hours_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96B18EA0A42008F302C /* BD_Hours_Cell.m */; };
-		B5C0A97618EA0A42008F302C /* BD_Phone_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96D18EA0A42008F302C /* BD_Phone_Cell.m */; };
-		B5C0A97718EA0A42008F302C /* BD_Website_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96F18EA0A42008F302C /* BD_Website_Cell.m */; };
 		B5C0A97818EA0A42008F302C /* BusinessDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A97118EA0A42008F302C /* BusinessDetailsViewController.m */; };
 		B5C0A97D18EA0A7F008F302C /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A97A18EA0A7F008F302C /* DirectoryViewController.m */; };
 		B5C0A97E18EA0A7F008F302C /* DividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A97C18EA0A7F008F302C /* DividerView.m */; };
@@ -1189,7 +1177,6 @@
 		DAE864101A88A58A00A17BD3 /* DarkenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B561E1AA18D2573F002DCDC2 /* DarkenView.m */; };
 		DAE864111A88A58A00A17BD3 /* APPINView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7783EC1A07875E0043806B /* APPINView.m */; };
 		DAE864121A88A58A00A17BD3 /* NSString+StripHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8D91A2465FB0067F660 /* NSString+StripHTML.m */; };
-		DAE864131A88A58A00A17BD3 /* BD_Share_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1354719FF10E5007D23CE /* BD_Share_Cell.m */; };
 		DAE864141A88A58A00A17BD3 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD393318F06FD800BE2670 /* StylizedTextField.m */; };
 		DAE864151A88A58A00A17BD3 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C08A6E818C53BDA0071B87C /* Transaction.m */; };
 		DAE864161A88A58A00A17BD3 /* PasswordVerifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2E9CE18DCDFB0008ACF88 /* PasswordVerifyView.m */; };
@@ -1229,7 +1216,6 @@
 		DAE864381A88A58A00A17BD3 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C2C18A435BD00DA4A34 /* NSDictionary_JSONExtensions.m */; };
 		DAE864391A88A58A00A17BD3 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A98418EA0B80008F302C /* Annotation.m */; };
 		DAE8643A1A88A58A00A17BD3 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6868AD1219516D7A006C3716 /* DebugViewController.m */; };
-		DAE8643B1A88A58A00A17BD3 /* BD_Website_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96F18EA0A42008F302C /* BD_Website_Cell.m */; };
 		DAE8643C1A88A58A00A17BD3 /* ButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031318EA55C700845090 /* ButtonCell.m */; };
 		DAE8643D1A88A58A00A17BD3 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C2718A435BD00DA4A34 /* CDataScanner.m */; };
 		DAE8643E1A88A58A00A17BD3 /* SendStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */; };
@@ -1239,7 +1225,6 @@
 		DAE864421A88A58A00A17BD3 /* ExportWalletPDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7C1259193E7C510096338D /* ExportWalletPDFViewController.m */; };
 		DAE864431A88A58A00A17BD3 /* GDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050568193FD014007D4960 /* GDrive.m */; };
 		DAE864441A88A58A00A17BD3 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */; };
-		DAE864451A88A58A00A17BD3 /* BD_Phone_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96D18EA0A42008F302C /* BD_Phone_Cell.m */; };
 		DAE864461A88A58A00A17BD3 /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861FE671950DFB100CDF24E /* TxOutput.m */; };
 		DAE864471A88A58A00A17BD3 /* UIPhotoGallerySliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD230D1A1FF98A008C43FB /* UIPhotoGallerySliderView.m */; };
 		DAE864481A88A58A00A17BD3 /* MoreCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A99218EA0BAC008F302C /* MoreCategoriesViewController.m */; };
@@ -1255,11 +1240,9 @@
 		DAE864521A88A58A00A17BD3 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
 		DAE864531A88A58A00A17BD3 /* BalanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = B57C209518C25011005D7245 /* BalanceView.m */; };
 		DAE864541A88A58A00A17BD3 /* BooleanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031018EA538500845090 /* BooleanCell.m */; };
-		DAE864551A88A58A00A17BD3 /* BD_Address_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96718EA0A42008F302C /* BD_Address_Cell.m */; };
 		DAE864561A88A58A00A17BD3 /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */; };
 		DAE864571A88A58A00A17BD3 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C2F18A435BD00DA4A34 /* CJSONDeserializer.m */; };
 		DAE864581A88A58A00A17BD3 /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9A918EA0D09008F302C /* RequestViewController.m */; };
-		DAE864591A88A58A00A17BD3 /* BD_Details_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96918EA0A42008F302C /* BD_Details_Cell.m */; };
 		DAE8645A1A88A58A00A17BD3 /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9BE18EA0DD8008F302C /* WalletCell.m */; };
 		DAE8645B1A88A58A00A17BD3 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */; };
 		DAE8645C1A88A58A00A17BD3 /* ButtonOnlyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031618EA5F5B00845090 /* ButtonOnlyCell.m */; };
@@ -1274,7 +1257,6 @@
 		DAE864651A88A58A00A17BD3 /* LatoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5137C1418A40EDA00DA4A34 /* LatoLabel.m */; };
 		DAE864661A88A58A00A17BD3 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B56553EE18ECC8E0005B35E1 /* CalculatorView.m */; };
 		DAE864671A88A58A00A17BD3 /* ButtonSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B56553F118EDDCF8005B35E1 /* ButtonSelectorView.m */; };
-		DAE864681A88A58A00A17BD3 /* BD_Hours_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96B18EA0A42008F302C /* BD_Hours_Cell.m */; };
 		DAE864691A88A58A00A17BD3 /* overviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A99B18EA0C10008F302C /* overviewCell.m */; };
 		DAE8646A1A88A58A00A17BD3 /* UIPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22E01A1E716C008C43FB /* UIPhotoGalleryViewController.m */; };
 		DAE8646B1A88A58A00A17BD3 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6893E6C919783FED0092DA04 /* SyncView.m */; };
@@ -2008,8 +1990,6 @@
 		7DAE1F4719A3C6A400BF5C60 /* infoSendConfirmation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoSendConfirmation.html; sourceTree = "<group>"; };
 		7DB1353C19FB48D9007D23CE /* bd_icon_share@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_icon_share@2x~iphone.png"; sourceTree = "<group>"; };
 		7DB1353D19FB48D9007D23CE /* bd_icon_share~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bd_icon_share~iphone.png"; sourceTree = "<group>"; };
-		7DB1354619FF10E5007D23CE /* BD_Share_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_Share_Cell.h; sourceTree = "<group>"; };
-		7DB1354719FF10E5007D23CE /* BD_Share_Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_Share_Cell.m; sourceTree = "<group>"; };
 		7DB1354A19FF13BA007D23CE /* BD_Social_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_Social_Cell.h; sourceTree = "<group>"; };
 		7DB1354B19FF13BA007D23CE /* BD_Social_Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_Social_Cell.m; sourceTree = "<group>"; };
 		7DB9DD7D1A03187D00AD35ED /* background@2x~iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x~iphone.jpg"; sourceTree = "<group>"; };
@@ -2350,16 +2330,6 @@
 		B5C0A8D518E6228E008F302C /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		B5C0A96318EA0A42008F302C /* BackgroundImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundImageManager.h; sourceTree = "<group>"; };
 		B5C0A96418EA0A42008F302C /* BackgroundImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundImageManager.m; sourceTree = "<group>"; };
-		B5C0A96618EA0A42008F302C /* BD_Address_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_Address_Cell.h; sourceTree = "<group>"; };
-		B5C0A96718EA0A42008F302C /* BD_Address_Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_Address_Cell.m; sourceTree = "<group>"; };
-		B5C0A96818EA0A42008F302C /* BD_Details_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_Details_Cell.h; sourceTree = "<group>"; };
-		B5C0A96918EA0A42008F302C /* BD_Details_Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_Details_Cell.m; sourceTree = "<group>"; };
-		B5C0A96A18EA0A42008F302C /* BD_Hours_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_Hours_Cell.h; sourceTree = "<group>"; };
-		B5C0A96B18EA0A42008F302C /* BD_Hours_Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_Hours_Cell.m; sourceTree = "<group>"; };
-		B5C0A96C18EA0A42008F302C /* BD_Phone_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_Phone_Cell.h; sourceTree = "<group>"; };
-		B5C0A96D18EA0A42008F302C /* BD_Phone_Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_Phone_Cell.m; sourceTree = "<group>"; };
-		B5C0A96E18EA0A42008F302C /* BD_Website_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_Website_Cell.h; sourceTree = "<group>"; };
-		B5C0A96F18EA0A42008F302C /* BD_Website_Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_Website_Cell.m; sourceTree = "<group>"; };
 		B5C0A97018EA0A42008F302C /* BusinessDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessDetailsViewController.h; sourceTree = "<group>"; };
 		B5C0A97118EA0A42008F302C /* BusinessDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessDetailsViewController.m; sourceTree = "<group>"; };
 		B5C0A97918EA0A7F008F302C /* DirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryViewController.h; sourceTree = "<group>"; };
@@ -3633,22 +3603,10 @@
 			isa = PBXGroup;
 			children = (
 				7DFD22DC1A1E716C008C43FB /* UIPhotoGallery */,
-				B5C0A96618EA0A42008F302C /* BD_Address_Cell.h */,
-				B5C0A96718EA0A42008F302C /* BD_Address_Cell.m */,
 				DAEB4B341AF867CD006D6A48 /* BD_CommonCell.h */,
 				DAEB4B351AF867CD006D6A48 /* BD_CommonCell.m */,
-				B5C0A96818EA0A42008F302C /* BD_Details_Cell.h */,
-				B5C0A96918EA0A42008F302C /* BD_Details_Cell.m */,
-				B5C0A96A18EA0A42008F302C /* BD_Hours_Cell.h */,
-				B5C0A96B18EA0A42008F302C /* BD_Hours_Cell.m */,
-				B5C0A96C18EA0A42008F302C /* BD_Phone_Cell.h */,
-				B5C0A96D18EA0A42008F302C /* BD_Phone_Cell.m */,
-				B5C0A96E18EA0A42008F302C /* BD_Website_Cell.h */,
-				B5C0A96F18EA0A42008F302C /* BD_Website_Cell.m */,
 				B5C0A97018EA0A42008F302C /* BusinessDetailsViewController.h */,
 				B5C0A97118EA0A42008F302C /* BusinessDetailsViewController.m */,
-				7DB1354619FF10E5007D23CE /* BD_Share_Cell.h */,
-				7DB1354719FF10E5007D23CE /* BD_Share_Cell.m */,
 				7DB1354A19FF13BA007D23CE /* BD_Social_Cell.h */,
 				7DB1354B19FF13BA007D23CE /* BD_Social_Cell.m */,
 			);
@@ -5461,7 +5419,6 @@
 				7D98ACC019A7C550003D2BF6 /* WalletsViewController.m in Sources */,
 				7D98ACC119A7C550003D2BF6 /* ConfirmationSliderView.m in Sources */,
 				7D98ACC219A7C550003D2BF6 /* DarkenView.m in Sources */,
-				7DB1354919FF10E5007D23CE /* BD_Share_Cell.m in Sources */,
 				7D89E8DB1A2465FB0067F660 /* NSString+StripHTML.m in Sources */,
 				7D98ACC319A7C550003D2BF6 /* StylizedTextField.m in Sources */,
 				7D98ACC419A7C550003D2BF6 /* Transaction.m in Sources */,
@@ -5512,7 +5469,6 @@
 				7D98ACE019A7C550003D2BF6 /* NSDictionary_JSONExtensions.m in Sources */,
 				7D98ACE119A7C550003D2BF6 /* Annotation.m in Sources */,
 				7D98ACE219A7C550003D2BF6 /* DebugViewController.m in Sources */,
-				7D98ACE319A7C550003D2BF6 /* BD_Website_Cell.m in Sources */,
 				7D98ACE419A7C550003D2BF6 /* ButtonCell.m in Sources */,
 				7D98ACE519A7C550003D2BF6 /* CDataScanner.m in Sources */,
 				DA5509631A929BEA00F57106 /* PickerTextView3.m in Sources */,
@@ -5525,7 +5481,6 @@
 				7D98ACEB19A7C550003D2BF6 /* GDrive.m in Sources */,
 				7D98ACEC19A7C550003D2BF6 /* GTLDrive_Sources.m in Sources */,
 				7DFD23101A1FF98A008C43FB /* UIPhotoGallerySliderView.m in Sources */,
-				7D98ACED19A7C550003D2BF6 /* BD_Phone_Cell.m in Sources */,
 				7D98ACEE19A7C550003D2BF6 /* TxOutput.m in Sources */,
 				7D98ACEF19A7C550003D2BF6 /* MoreCategoriesViewController.m in Sources */,
 				7D98ACF019A7C550003D2BF6 /* CDataScanner_Extensions.m in Sources */,
@@ -5539,12 +5494,10 @@
 				7D98ACF819A7C550003D2BF6 /* CoreBridge.m in Sources */,
 				7D98ACF919A7C550003D2BF6 /* BalanceView.m in Sources */,
 				7D98ACFA19A7C550003D2BF6 /* BooleanCell.m in Sources */,
-				7D98ACFB19A7C550003D2BF6 /* BD_Address_Cell.m in Sources */,
 				7D98ACFC19A7C550003D2BF6 /* CJSONDeserializer.m in Sources */,
 				7D98ACFD19A7C550003D2BF6 /* RequestViewController.m in Sources */,
 				DAE276451A9C1D9300E24523 /* SignUpBaseController.m in Sources */,
 				DA15B9911AC0D72500B229A5 /* PluginViewController.m in Sources */,
-				7D98ACFE19A7C550003D2BF6 /* BD_Details_Cell.m in Sources */,
 				7D98ACFF19A7C550003D2BF6 /* WalletCell.m in Sources */,
 				7D98AD0019A7C550003D2BF6 /* OfflineWalletViewController.m in Sources */,
 				DA55095E1A92934B00F57106 /* StylizedTextField3.m in Sources */,
@@ -5564,7 +5517,6 @@
 				7D98AD0A19A7C550003D2BF6 /* CalculatorView.m in Sources */,
 				7D98AD0B19A7C550003D2BF6 /* ButtonSelectorView.m in Sources */,
 				DAE276311A9BFEC200E24523 /* SignUpHandleController.m in Sources */,
-				7D98AD0C19A7C550003D2BF6 /* BD_Hours_Cell.m in Sources */,
 				7D98AD0D19A7C550003D2BF6 /* overviewCell.m in Sources */,
 				7D98AD0E19A7C550003D2BF6 /* SyncView.m in Sources */,
 				DA4F91A81AF569EA008C0BD4 /* Theme.m in Sources */,
@@ -5611,7 +5563,6 @@
 				B561E1AB18D2573F002DCDC2 /* DarkenView.m in Sources */,
 				7D7783F21A07875E0043806B /* APPINView.m in Sources */,
 				7D89E8DA1A2465FB0067F660 /* NSString+StripHTML.m in Sources */,
-				7DB1354819FF10E5007D23CE /* BD_Share_Cell.m in Sources */,
 				B5FD393418F06FD800BE2670 /* StylizedTextField.m in Sources */,
 				4C08A6E918C53BDA0071B87C /* Transaction.m in Sources */,
 				B5F2E9CF18DCDFB0008ACF88 /* PasswordVerifyView.m in Sources */,
@@ -5659,7 +5610,6 @@
 				B5137C3818A435BD00DA4A34 /* NSDictionary_JSONExtensions.m in Sources */,
 				B5C0A98C18EA0B80008F302C /* Annotation.m in Sources */,
 				6868AD1319516D7A006C3716 /* DebugViewController.m in Sources */,
-				B5C0A97718EA0A42008F302C /* BD_Website_Cell.m in Sources */,
 				B55A031418EA55C700845090 /* ButtonCell.m in Sources */,
 				B5137C3618A435BD00DA4A34 /* CDataScanner.m in Sources */,
 				B5FD392818EE2DFD00BE2670 /* SendStatusViewController.m in Sources */,
@@ -5670,7 +5620,6 @@
 				4C7C125A193E7C510096338D /* ExportWalletPDFViewController.m in Sources */,
 				B5050569193FD014007D4960 /* GDrive.m in Sources */,
 				B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */,
-				B5C0A97618EA0A42008F302C /* BD_Phone_Cell.m in Sources */,
 				6861FE681950DFB100CDF24E /* TxOutput.m in Sources */,
 				7DFD230F1A1FF98A008C43FB /* UIPhotoGallerySliderView.m in Sources */,
 				B5C0A99318EA0BAC008F302C /* MoreCategoriesViewController.m in Sources */,
@@ -5686,13 +5635,11 @@
 				687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */,
 				B57C209618C25011005D7245 /* BalanceView.m in Sources */,
 				B55A031118EA538500845090 /* BooleanCell.m in Sources */,
-				B5C0A97318EA0A42008F302C /* BD_Address_Cell.m in Sources */,
 				68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */,
 				B5137C3918A435BD00DA4A34 /* CJSONDeserializer.m in Sources */,
 				B5C0A9AA18EA0D09008F302C /* RequestViewController.m in Sources */,
 				DAE276441A9C1D9300E24523 /* SignUpBaseController.m in Sources */,
 				DA15B9901AC0D72500B229A5 /* PluginViewController.m in Sources */,
-				B5C0A97418EA0A42008F302C /* BD_Details_Cell.m in Sources */,
 				B5C0A9C418EA0DD8008F302C /* WalletCell.m in Sources */,
 				4C9E919A1922AB7400F01423 /* OfflineWalletViewController.m in Sources */,
 				DA55095D1A92934B00F57106 /* StylizedTextField3.m in Sources */,
@@ -5710,7 +5657,6 @@
 				DA4710631AD7363F006ACF2A /* BuySellViewController.m in Sources */,
 				B56553EF18ECC8E0005B35E1 /* CalculatorView.m in Sources */,
 				B56553F218EDDCF8005B35E1 /* ButtonSelectorView.m in Sources */,
-				B5C0A97518EA0A42008F302C /* BD_Hours_Cell.m in Sources */,
 				DAE276301A9BFEC200E24523 /* SignUpHandleController.m in Sources */,
 				B5C0A99F18EA0C10008F302C /* overviewCell.m in Sources */,
 				7DFD22E51A1E716C008C43FB /* UIPhotoGalleryViewController.m in Sources */,
@@ -5759,7 +5705,6 @@
 				DAE864101A88A58A00A17BD3 /* DarkenView.m in Sources */,
 				DAE864111A88A58A00A17BD3 /* APPINView.m in Sources */,
 				DAE864121A88A58A00A17BD3 /* NSString+StripHTML.m in Sources */,
-				DAE864131A88A58A00A17BD3 /* BD_Share_Cell.m in Sources */,
 				DAE864141A88A58A00A17BD3 /* StylizedTextField.m in Sources */,
 				DAE864151A88A58A00A17BD3 /* Transaction.m in Sources */,
 				DAE864161A88A58A00A17BD3 /* PasswordVerifyView.m in Sources */,
@@ -5807,7 +5752,6 @@
 				DAE864381A88A58A00A17BD3 /* NSDictionary_JSONExtensions.m in Sources */,
 				DAE864391A88A58A00A17BD3 /* Annotation.m in Sources */,
 				DAE8643A1A88A58A00A17BD3 /* DebugViewController.m in Sources */,
-				DAE8643B1A88A58A00A17BD3 /* BD_Website_Cell.m in Sources */,
 				DAE8643C1A88A58A00A17BD3 /* ButtonCell.m in Sources */,
 				DAE8643D1A88A58A00A17BD3 /* CDataScanner.m in Sources */,
 				DAE8643E1A88A58A00A17BD3 /* SendStatusViewController.m in Sources */,
@@ -5818,7 +5762,6 @@
 				DAE864421A88A58A00A17BD3 /* ExportWalletPDFViewController.m in Sources */,
 				DAE864431A88A58A00A17BD3 /* GDrive.m in Sources */,
 				DAE864441A88A58A00A17BD3 /* GTLDrive_Sources.m in Sources */,
-				DAE864451A88A58A00A17BD3 /* BD_Phone_Cell.m in Sources */,
 				DAE864461A88A58A00A17BD3 /* TxOutput.m in Sources */,
 				DAE864471A88A58A00A17BD3 /* UIPhotoGallerySliderView.m in Sources */,
 				DAE864481A88A58A00A17BD3 /* MoreCategoriesViewController.m in Sources */,
@@ -5834,13 +5777,11 @@
 				DAE864521A88A58A00A17BD3 /* CoreBridge.m in Sources */,
 				DAE864531A88A58A00A17BD3 /* BalanceView.m in Sources */,
 				DAE864541A88A58A00A17BD3 /* BooleanCell.m in Sources */,
-				DAE864551A88A58A00A17BD3 /* BD_Address_Cell.m in Sources */,
 				DAE864561A88A58A00A17BD3 /* SpendingLimitsViewController.m in Sources */,
 				DAE864571A88A58A00A17BD3 /* CJSONDeserializer.m in Sources */,
 				DAE864581A88A58A00A17BD3 /* RequestViewController.m in Sources */,
 				DAE276461A9C1D9300E24523 /* SignUpBaseController.m in Sources */,
 				DA15B9921AC0D72500B229A5 /* PluginViewController.m in Sources */,
-				DAE864591A88A58A00A17BD3 /* BD_Details_Cell.m in Sources */,
 				DAE8645A1A88A58A00A17BD3 /* WalletCell.m in Sources */,
 				DAE8645B1A88A58A00A17BD3 /* OfflineWalletViewController.m in Sources */,
 				DA55095F1A92934B00F57106 /* StylizedTextField3.m in Sources */,
@@ -5858,7 +5799,6 @@
 				DA4710651AD7363F006ACF2A /* BuySellViewController.m in Sources */,
 				DAE864661A88A58A00A17BD3 /* CalculatorView.m in Sources */,
 				DAE864671A88A58A00A17BD3 /* ButtonSelectorView.m in Sources */,
-				DAE864681A88A58A00A17BD3 /* BD_Hours_Cell.m in Sources */,
 				DAE276321A9BFEC200E24523 /* SignUpHandleController.m in Sources */,
 				DAE864691A88A58A00A17BD3 /* overviewCell.m in Sources */,
 				DAE8646A1A88A58A00A17BD3 /* UIPhotoGalleryViewController.m in Sources */,

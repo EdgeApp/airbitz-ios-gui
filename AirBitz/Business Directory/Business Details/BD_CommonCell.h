@@ -15,6 +15,6 @@
 @property (nonatomic, weak) IBOutlet LatoLabel *rightLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftLabelWidth;
 @property (nonatomic, weak) IBOutlet UIImageView *cellIcon;
-
+@property (nonatomic, weak) IBOutlet UIImageView *rightIcon;
 
 @end
