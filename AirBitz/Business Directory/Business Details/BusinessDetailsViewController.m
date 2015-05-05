@@ -37,7 +37,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
     kSocial
 };
 
-#define SINGLE_ROW_CELL_HEIGHT	44
+#define SINGLE_ROW_CELL_HEIGHT	50
+#define LABEL_WIDTH_WILD_GUESS  300
 
 #define CLOSED_STRING	@"closed"
 
@@ -95,12 +96,19 @@ typedef NS_ENUM(NSUInteger, CellType) {
     socialRows = [[NSMutableArray alloc] init];
 	hoursCellHeight = SINGLE_ROW_CELL_HEIGHT;
 	detailsCellHeight = SINGLE_ROW_CELL_HEIGHT;
-	
-	self.darkenImageView.hidden = YES; //hide until business image gets loaded
+    detailsLabelWidth = LABEL_WIDTH_WILD_GUESS;
+
+
+    self.darkenImageView.hidden = YES; //hide until business image gets loaded
+
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = SINGLE_ROW_CELL_HEIGHT; // set to whatever your "average" cell height is
 
     [MainViewController changeNavBarTitle:@"Directory"];
     [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
+
+    [self.tableView setContentInset:UIEdgeInsetsMake([MainViewController getHeaderHeight],0,[MainViewController getFooterHeight],0)];
 
     //get business details
 	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/?ll=%f,%f", SERVER_API, self.bizId, self.latLong.latitude, self.latLong.longitude];
@@ -505,8 +513,14 @@ typedef NS_ENUM(NSUInteger, CellType) {
 					{
 						hoursCellHeight = SINGLE_ROW_CELL_HEIGHT;
 					}
-					
-					[self.tableView reloadData];
+
+                    BD_CommonCell *commonCell = [self getCommonCellForTableView:self.tableView];
+
+                    //calculate height of details cell
+                    CGSize size = [ [self.businessDetails objectForKey:@"description"] sizeWithFont:commonCell.leftLabel.font constrainedToSize:CGSizeMake(detailsLabelWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+                    detailsCellHeight = size.height + 28.0;
+
+                    [self.tableView reloadData];
 					
 					//Get image URLs
 					NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/photos/", SERVER_API, self.bizId];
@@ -657,14 +671,15 @@ typedef NS_ENUM(NSUInteger, CellType) {
 		if(self.businessDetails)
 		{
             commonCell.leftLabel.text = [self.businessDetails objectForKey:@"description"];
-            NSInteger leftLines = [[commonCell.leftLabel.text componentsSeparatedByCharactersInSet:
-                    [NSCharacterSet newlineCharacterSet]] count];
 
-            commonCell.leftLabel.numberOfLines = leftLines;
+            commonCell.leftLabel.numberOfLines = 0;
 			[commonCell.leftLabel sizeToFit];
+            commonCell.leftLabel.textColor = [UIColor blackColor];
             commonCell.rightIcon.hidden = YES;
-//            commonCell.rightLabel = nil;
-		}
+            commonCell.cellIcon.hidden = YES;
+            commonCell.leftLabel.lineBreakMode = NSLineBreakByWordWrapping;
+
+        }
 	}
 	else if(cellType == kSocial)
 	{
