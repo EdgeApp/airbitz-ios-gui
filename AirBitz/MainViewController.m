@@ -470,6 +470,13 @@ MainViewController *staticMVC;
     staticMVC.navBar.topItem.titleView = titleLabelButton;
 }
 
++(void)changeNavBarTitleWithImage: (UIImage *) titleImage
+{
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:titleImage];
+
+    staticMVC.navBar.topItem.titleView = imageView;
+}
+
 +(void)changeNavBarSide: (NSString*) titleText side:(tNavBarSide)navBarSide enable:(BOOL)enable action:(SEL)func fromObject:(id) object
 {
     UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeSystem];
