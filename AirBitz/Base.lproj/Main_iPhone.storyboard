@@ -5060,7 +5060,7 @@ Scan the QR code using this device</string>
         <image name="icon_search.png" width="14" height="15"/>
         <image name="icon_send.png" width="30" height="30"/>
         <image name="icon_wallet.png" width="30" height="30"/>
-        <image name="logo.png" width="64" height="36"/>
+        <image name="logo.png" width="141" height="72"/>
         <image name="logo_bitcoin.png" width="126" height="165"/>
         <image name="logo_large.png" width="208" height="106"/>
         <image name="postcard-mountain.png" width="844" height="568"/>
