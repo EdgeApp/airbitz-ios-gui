@@ -710,6 +710,7 @@ typedef enum eMapDisplayState
                                  [self hideMapView];
                                  //XXX Hide fake searchBar
                                  [self resetTableHideSearch];
+                                 [self businessListingQueryForPage: 0];
                                  break;
                          }
                          [self.view layoutIfNeeded];
