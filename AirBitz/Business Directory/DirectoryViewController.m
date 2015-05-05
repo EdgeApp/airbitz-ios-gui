@@ -734,6 +734,10 @@ typedef enum eMapDisplayState
 
 - (void)setDefaultMapDividerPosition
 {
+    // Remove top offset and inset of the listings tableview to prevent gap
+    [self.tableView setContentOffset:CGPointZero animated:NO];
+    [self.tableView setContentInset:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+
     //put divider in ~ middle of screen.  Adjust map and tableView to divider position
     _dividerViewTop.constant = (self.contentView.frame.size.height) / 2;
 
@@ -743,9 +747,6 @@ typedef enum eMapDisplayState
     //set tableView frame right under divider bar
     _tableViewListingsTop.constant = _mapViewHeight.constant;
 
-    // Remove top offset and inset of the listings tableview to prevent gap
-    [self.tableView setContentOffset:CGPointZero animated:NO];
-    [self.tableView setContentInset:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
 }
 
 - (void) showSearchBarsAndClues
@@ -2034,13 +2035,22 @@ typedef enum eMapDisplayState
                     }
                 }
             }
-            [self transitionMode:DIRECTORY_MODE_MAP];
+
+            if ([cell.textLabel.text isEqualToString: ON_THE_WEB_STRING])
+            {
+                [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
+            }
+            else
+            {
+                [self transitionMode:DIRECTORY_MODE_MAP];
+            }
 //            [self.searchBarSearch becomeFirstResponder];
 //
 //            locationAutoCorrectArray = nil;
 //            [self.searchCluesTableView reloadData];
         }
-    } else
+    }
+    else
     {
         //business listings table
         NSDictionary *businessInfo = [businessSearchResults objectForKey: [NSNumber numberWithInteger: indexPath.row]];
