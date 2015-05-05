@@ -95,11 +95,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
     self.galleryView.subviewGap = 0;
     self.galleryView.photoItemContentMode = UIViewContentModeScaleAspectFill;
 
-
-    // Remove top offset and inset of the listings tableview to prevent gap
-    [self.tableView setContentOffset:CGPointZero animated:NO];
-    [self.tableView setContentInset:UIEdgeInsetsMake(TOP_IMAGE_HEIGHT, 0.0, 0.0, 0.0)];
-
     details = nil;
 	imageURLs = [[NSMutableArray alloc] init];
     rowTypes = [[NSMutableArray alloc] init];
