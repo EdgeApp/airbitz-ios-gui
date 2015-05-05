@@ -157,6 +157,8 @@ typedef enum eMapDisplayState
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *categoryViewHeight;
 @end
 
+static bool bInitialized = false;
+
 @implementation DirectoryViewController
 
 - (void)viewDidLoad
@@ -274,17 +276,22 @@ typedef enum eMapDisplayState
     //NSLog(@"Adding keyboard notification");
     [self receiveKeyboardNotifications: YES];
 
-    //
-    // Calculate the header size of tableview and set it's frame to that height. Hack because Apple can't
-    // figure it out for us automatically -paulvp
-    //
-    CGFloat height = _dividerView.frame.origin.y + _dividerView.frame.size.height - [MainViewController getHeaderHeight];
-    CGRect headerFrame = _tableListingsCategoriesHeader.frame;
-    NSLog(@"BizDirView viewWillAppear %f %f %f %f\n",_dividerView.frame.origin.y, _dividerView.frame.size.height, _tableListingsCategoriesHeader.frame.origin.y, _tableListingsCategoriesHeader.frame.size.height);
-    headerFrame.size.height = height;
-    _tableListingsCategoriesHeader.frame = headerFrame;
-    self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
+    if (bInitialized == false)
+    {
+        //
+        // Calculate the header size of tableview and set it's frame to that height. Hack because Apple can't
+        // figure it out for us automatically -paulvp
+        //
+        CGFloat height = _dividerView.frame.origin.y + _dividerView.frame.size.height - [MainViewController getHeaderHeight];
+        CGRect headerFrame = _tableListingsCategoriesHeader.frame;
+        NSLog(@"BizDirView viewWillAppear %f %f %f %f\n",_dividerView.frame.origin.y, _dividerView.frame.size.height, _tableListingsCategoriesHeader.frame.origin.y, _tableListingsCategoriesHeader.frame.size.height);
+        headerFrame.size.height = height;
+        _tableListingsCategoriesHeader.frame = headerFrame;
+        self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
 
+        bInitialized = true;
+
+    }
     [self transitionMode:DIRECTORY_MODE_LISTING];
 }
 
