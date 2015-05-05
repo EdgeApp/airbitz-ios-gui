@@ -14,6 +14,8 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -3673,21 +3675,21 @@ Scan the QR code using this device</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BGr-Rg-RmT">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BGr-Rg-RmT">
                                 <rect key="frame" x="142" y="120" width="37" height="37"/>
                             </activityIndicatorView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9h3-Kj-nNy">
-                                <rect key="frame" x="0.0" y="92" width="375" height="142"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9h3-Kj-nNy" userLabel="View -PhotoArea">
+                                <rect key="frame" x="0.0" y="20" width="375" height="200"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fq-Gv-OdB" customClass="UIPhotoGalleryView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="142"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="darken_bottom_table_cell.png" translatesAutoresizingMaskIntoConstraints="NO" id="PLV-qj-cYH">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="142"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75000000000000022" translatesAutoresizingMaskIntoConstraints="NO" id="HIT-3i-9iw" customClass="LatoLabel">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75000000000000022" translatesAutoresizingMaskIntoConstraints="NO" id="HIT-3i-9iw" userLabel="Lato Label -Categories" customClass="LatoLabel">
                                         <rect key="frame" x="10" y="115" width="198" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3695,7 +3697,7 @@ Scan the QR code using this device</string>
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xpP-s7-KrH" customClass="LatoLabel">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xpP-s7-KrH" userLabel="Lato Label -Discount" customClass="LatoLabel">
                                         <rect key="frame" x="216" y="115" width="94" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3703,209 +3705,102 @@ Scan the QR code using this device</string>
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Qyb-1i-ay9">
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Qyb-1i-ay9">
                                         <rect key="frame" x="142" y="52" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="37" id="02D-C8-SrS"/>
+                                            <constraint firstAttribute="width" constant="37" id="oH5-cH-SwQ"/>
+                                        </constraints>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="PLV-qj-cYH" secondAttribute="trailing" id="4On-eS-P25"/>
                                     <constraint firstItem="PLV-qj-cYH" firstAttribute="top" secondItem="9h3-Kj-nNy" secondAttribute="top" id="AZ9-47-Php"/>
-                                    <constraint firstAttribute="height" constant="142" id="CbQ-Ed-WZh"/>
+                                    <constraint firstAttribute="height" constant="200" id="CbQ-Ed-WZh"/>
                                     <constraint firstAttribute="trailing" secondItem="6fq-Gv-OdB" secondAttribute="trailing" id="FE4-up-Yya"/>
+                                    <constraint firstItem="Qyb-1i-ay9" firstAttribute="top" secondItem="9h3-Kj-nNy" secondAttribute="top" constant="52" id="FH9-FQ-16C"/>
+                                    <constraint firstAttribute="centerX" secondItem="Qyb-1i-ay9" secondAttribute="centerX" id="RnC-NZ-bd4"/>
+                                    <constraint firstItem="HIT-3i-9iw" firstAttribute="leading" secondItem="9h3-Kj-nNy" secondAttribute="leading" constant="20" symbolic="YES" id="SsS-cb-vW2"/>
+                                    <constraint firstAttribute="trailing" secondItem="xpP-s7-KrH" secondAttribute="trailing" constant="20" symbolic="YES" id="TFx-gf-BLf"/>
+                                    <constraint firstItem="xpP-s7-KrH" firstAttribute="leading" secondItem="HIT-3i-9iw" secondAttribute="trailing" constant="8" symbolic="YES" id="UT3-O0-gjS"/>
                                     <constraint firstItem="6fq-Gv-OdB" firstAttribute="top" secondItem="9h3-Kj-nNy" secondAttribute="top" id="WUv-7H-b8G"/>
                                     <constraint firstItem="6fq-Gv-OdB" firstAttribute="leading" secondItem="9h3-Kj-nNy" secondAttribute="leading" id="d8q-E0-9UI"/>
                                     <constraint firstAttribute="bottom" secondItem="PLV-qj-cYH" secondAttribute="bottom" id="guJ-gK-JIX"/>
                                     <constraint firstAttribute="bottom" secondItem="6fq-Gv-OdB" secondAttribute="bottom" id="rIV-AP-VN8"/>
                                     <constraint firstItem="PLV-qj-cYH" firstAttribute="leading" secondItem="9h3-Kj-nNy" secondAttribute="leading" id="ude-Ok-3fJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="HIT-3i-9iw" secondAttribute="bottom" constant="20" symbolic="YES" id="yyE-bU-SUC"/>
+                                    <constraint firstAttribute="bottom" secondItem="xpP-s7-KrH" secondAttribute="bottom" constant="20" symbolic="YES" id="zdv-CN-r74"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fW9-fV-Lwx">
-                                <rect key="frame" x="16" y="210" width="288" height="269"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fW9-fV-Lwx" userLabel="Table View -details">
+                                <rect key="frame" x="0.0" y="180" width="375" height="487"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="7SS-Sz-DjD">
-                                    <rect key="frame" x="0.0" y="0.0" width="288" height="15"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Address_Cell" id="HUx-W3-j1F" customClass="BD_Address_Cell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Address_Cell" id="HUx-W3-j1F" userLabel="BD_CommonCell" customClass="BD_CommonCell">
                                         <rect key="frame" x="0.0" y="37" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HUx-W3-j1F" id="Nzv-ft-qQX">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_cell_top.png" translatesAutoresizingMaskIntoConstraints="NO" id="BhX-No-chB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
-                                                    <rect key="contentStretch" x="0.49999999999999961" y="0.49999999999999994" width="0.0" height="0.0"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oPG-fA-f9b" customClass="LatoLabel">
-                                                    <rect key="frame" x="44" y="6" width="203" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0aq-T8-gZj">
+                                                    <rect key="frame" x="16" y="-302" width="343" height="43"/>
+                                                    <items/>
+                                                </toolbar>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="leftLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oPG-fA-f9b" userLabel="leftLabel" customClass="LatoLabel">
+                                                    <rect key="frame" x="44" y="6" width="149" height="29"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.47450980392156861" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_icon_location.png" translatesAutoresizingMaskIntoConstraints="NO" id="p1D-b0-qgV">
-                                                    <rect key="frame" x="10" y="13" width="10" height="18"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="F9m-UK-36r">
-                                                    <rect key="frame" x="44" y="21" width="203" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nPb-Eu-ljL" userLabel="rightLabel" customClass="LatoLabel">
+                                                    <rect key="frame" x="201" y="7" width="135" height="29"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.47450980390000003" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="T2Q-C3-gz5">
-                                                    <rect key="frame" x="255" y="11" width="22" height="22"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bd_icon_location.png" translatesAutoresizingMaskIntoConstraints="NO" id="p1D-b0-qgV">
+                                                    <rect key="frame" x="12" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="DNa-mI-dAQ"/>
+                                                        <constraint firstAttribute="height" constant="20" id="kM9-HB-ToP"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="T2Q-C3-gz5">
+                                                    <rect key="frame" x="347" y="11" width="22" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="22" id="P0r-uf-i9K"/>
+                                                        <constraint firstAttribute="height" constant="22" id="cQA-tx-H2Y"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="oPG-fA-f9b" firstAttribute="leading" secondItem="Nzv-ft-qQX" secondAttribute="leading" constant="48" id="28o-CP-ZHc"/>
+                                                <constraint firstItem="p1D-b0-qgV" firstAttribute="leading" secondItem="Nzv-ft-qQX" secondAttribute="leadingMargin" constant="4" id="2ph-CO-IfM"/>
+                                                <constraint firstAttribute="bottom" secondItem="oPG-fA-f9b" secondAttribute="bottom" constant="6" id="AnA-9S-ozD"/>
+                                                <constraint firstItem="T2Q-C3-gz5" firstAttribute="leading" secondItem="oPG-fA-f9b" secondAttribute="trailing" constant="8" symbolic="YES" id="EJK-G4-NfU"/>
+                                                <constraint firstAttribute="bottom" secondItem="nPb-Eu-ljL" secondAttribute="bottom" constant="6" id="KcA-UQ-rt9"/>
+                                                <constraint firstItem="nPb-Eu-ljL" firstAttribute="top" secondItem="Nzv-ft-qQX" secondAttribute="top" constant="6" id="Mdf-NA-y2q"/>
+                                                <constraint firstAttribute="centerY" secondItem="T2Q-C3-gz5" secondAttribute="centerY" id="N2V-ZV-dAL"/>
+                                                <constraint firstAttribute="trailing" secondItem="T2Q-C3-gz5" secondAttribute="trailing" constant="6" id="RJi-AF-4fo"/>
+                                                <constraint firstItem="0aq-T8-gZj" firstAttribute="top" secondItem="Nzv-ft-qQX" secondAttribute="top" id="S4w-8y-Zje"/>
+                                                <constraint firstAttribute="trailing" secondItem="0aq-T8-gZj" secondAttribute="trailing" id="ZRQ-qt-5An"/>
+                                                <constraint firstItem="T2Q-C3-gz5" firstAttribute="leading" secondItem="nPb-Eu-ljL" secondAttribute="trailing" constant="11" id="crn-LI-SZK"/>
+                                                <constraint firstAttribute="centerY" secondItem="p1D-b0-qgV" secondAttribute="centerY" id="exK-XT-oKX"/>
+                                                <constraint firstItem="0aq-T8-gZj" firstAttribute="leading" secondItem="Nzv-ft-qQX" secondAttribute="leading" id="gq3-7K-YyO"/>
+                                                <constraint firstAttribute="bottom" secondItem="0aq-T8-gZj" secondAttribute="bottom" id="rjy-Y0-ltK"/>
+                                                <constraint firstItem="oPG-fA-f9b" firstAttribute="top" secondItem="Nzv-ft-qQX" secondAttribute="top" constant="6" id="tdP-fw-fzm"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="10000" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="bkg_image" destination="BhX-No-chB" id="cyc-uk-MSp"/>
-                                            <outlet property="botAddress" destination="F9m-UK-36r" id="tKm-vz-sBf"/>
-                                            <outlet property="topAddress" destination="oPG-fA-f9b" id="npc-KU-TH3"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Phone_Cell" id="3He-b1-Hoe" customClass="BD_Phone_Cell">
-                                        <rect key="frame" x="0.0" y="81" width="288" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3He-b1-Hoe" id="N1m-Ac-5vL">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_cell_middle.png" translatesAutoresizingMaskIntoConstraints="NO" id="Dzq-3h-Adz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
-                                                    <rect key="contentStretch" x="0.49999999999999994" y="0.5" width="0.0" height="0.0"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="bp8-iM-jXQ">
-                                                    <rect key="frame" x="255" y="11" width="22" height="22"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uf1-Hd-oNr" customClass="LatoLabel">
-                                                    <rect key="frame" x="44" y="16" width="203" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.47450980392156861" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_icon_phone.png" translatesAutoresizingMaskIntoConstraints="NO" id="p4s-Dr-qkH">
-                                                    <rect key="frame" x="10" y="14" width="11" height="15"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <inset key="separatorInset" minX="10000" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <connections>
-                                            <outlet property="bkg_image" destination="Dzq-3h-Adz" id="rHH-GZ-y1Q"/>
-                                            <outlet property="phoneLabel" destination="Uf1-Hd-oNr" id="9Ww-7Y-I73"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Website_Cell" id="cr9-yO-3fx" customClass="BD_Website_Cell">
-                                        <rect key="frame" x="0.0" y="125" width="288" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cr9-yO-3fx" id="hYZ-h5-qLE">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_cell_middle.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hlz-Yq-T2I">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
-                                                    <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="47h-L2-Jb5">
-                                                    <rect key="frame" x="255" y="11" width="22" height="22"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Web" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XeE-e1-pX7" customClass="LatoLabel">
-                                                    <rect key="frame" x="42" y="16" width="203" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.47450980392156861" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_icon_web.png" translatesAutoresizingMaskIntoConstraints="NO" id="suX-5D-c5N">
-                                                    <rect key="frame" x="8" y="14" width="15" height="16"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="bkg_image" destination="Hlz-Yq-T2I" id="OiY-NK-ntz"/>
-                                            <outlet property="websiteLabel" destination="XeE-e1-pX7" id="2Zj-fx-KeF"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Share_Cell" id="gJM-N8-kcO" customClass="BD_Share_Cell">
-                                        <rect key="frame" x="0.0" y="169" width="288" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gJM-N8-kcO" id="v7e-Cq-Jz4">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_cell_middle.png" translatesAutoresizingMaskIntoConstraints="NO" id="clC-N3-iKS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
-                                                    <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="3vd-2t-3zW">
-                                                    <rect key="frame" x="255" y="11" width="22" height="22"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKa-up-adT" customClass="LatoLabel">
-                                                    <rect key="frame" x="42" y="16" width="203" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.47450980390000003" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_icon_share.png" translatesAutoresizingMaskIntoConstraints="NO" id="YRM-NQ-0xn">
-                                                    <rect key="frame" x="8" y="14" width="15" height="16"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="bkg_image" destination="clC-N3-iKS" id="DL7-67-AhM"/>
-                                            <outlet property="shareLabel" destination="IKa-up-adT" id="why-eC-ATG"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Hours_Cell" id="WPR-t8-qaK" customClass="BD_Hours_Cell">
-                                        <rect key="frame" x="0.0" y="213" width="288" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WPR-t8-qaK" id="GS5-4a-wtJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_cell_middle_white.png" translatesAutoresizingMaskIntoConstraints="NO" id="866-tQ-bOR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
-                                                    <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                </imageView>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="lx9-pX-ey7">
-                                                    <rect key="frame" x="255" y="12" width="22" height="22"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_icon_clock.png" translatesAutoresizingMaskIntoConstraints="NO" id="8Mo-wp-rJP">
-                                                    <rect key="frame" x="8" y="15" width="15" height="16"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hours..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gA3-Mp-du2" customClass="LatoLabel">
-                                                    <rect key="frame" x="42" y="14" width="73" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5h2-sC-4mG" customClass="LatoLabel">
-                                                    <rect key="frame" x="129" y="14" width="139" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="lXQ-i3-tM2" userLabel="Large White Activity Indicator">
-                                                    <rect key="frame" x="135" y="11" width="20" height="20"/>
-                                                    <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </activityIndicatorView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="activityView" destination="lXQ-i3-tM2" id="TAO-nT-GwA"/>
-                                            <outlet property="bkg_image" destination="866-tQ-bOR" id="qCz-ac-a2A"/>
-                                            <outlet property="dayLabel" destination="gA3-Mp-du2" id="ZKr-hg-UdM"/>
-                                            <outlet property="timeLabel" destination="5h2-sC-4mG" id="AMU-1d-ix0"/>
+                                            <outlet property="cellIcon" destination="p1D-b0-qgV" id="Y4O-g6-gGA"/>
+                                            <outlet property="leftLabel" destination="oPG-fA-f9b" id="q9k-r4-pEH"/>
+                                            <outlet property="rightLabel" destination="nPb-Eu-ljL" id="iPB-ut-Bw6"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Details_Cell" id="IFa-yF-0Do" customClass="BD_Details_Cell">
@@ -3915,10 +3810,6 @@ Scan the QR code using this device</string>
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_cell_middle_white.png" translatesAutoresizingMaskIntoConstraints="NO" id="ED4-SO-l2Q">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="46"/>
-                                                    <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="         Details..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Kgm-MH-DvG" customClass="LatoLabel">
                                                     <rect key="frame" x="20" y="14" width="248" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3934,41 +3825,7 @@ Scan the QR code using this device</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="activityView" destination="3Rh-Cn-OCX" id="Q18-m2-w9i"/>
-                                            <outlet property="bkg_image" destination="ED4-SO-l2Q" id="3f0-eT-fxF"/>
                                             <outlet property="detailsLabel" destination="Kgm-MH-DvG" id="0Tb-Bf-gxO"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BD_Social_Cell" id="sWa-ap-3if" customClass="BD_Social_Cell">
-                                        <rect key="frame" x="0.0" y="301" width="288" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sWa-ap-3if" id="T8J-dY-QhV">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_cell_bottom.png" translatesAutoresizingMaskIntoConstraints="NO" id="DqH-FQ-kgn">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
-                                                    <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="aSd-yz-xwL">
-                                                    <rect key="frame" x="255" y="11" width="22" height="22"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Social" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MT9-P3-r5I" customClass="LatoLabel">
-                                                    <rect key="frame" x="42" y="14" width="203" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.47450980390000003" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bd_icon_facebook.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kwg-pF-xhd">
-                                                    <rect key="frame" x="8" y="14" width="15" height="16"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="bkg_image" destination="DqH-FQ-kgn" id="T2S-ZO-fDa"/>
-                                            <outlet property="socialIcon" destination="Kwg-pF-xhd" id="84L-CR-Wkf"/>
-                                            <outlet property="socialLabel" destination="MT9-P3-r5I" id="y5P-vE-6ID"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -3977,35 +3834,24 @@ Scan the QR code using this device</string>
                                     <outlet property="delegate" destination="hqP-3Q-b63" id="fp5-6o-xHC"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Pa6-PK-SvP" customClass="MontserratLabel">
-                                <rect key="frame" x="45" y="33" width="229" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tL-Wd-FgS">
-                                <rect key="frame" x="4" y="23" width="90" height="37"/>
-                                <inset key="imageEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" image="back_arrow.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="Back:" destination="hqP-3Q-b63" eventType="touchUpInside" id="gkW-Nt-rGd"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="BGr-Rg-RmT" firstAttribute="top" secondItem="m5h-hH-PG6" secondAttribute="bottom" constant="300" id="6NW-ZW-yYu"/>
                             <constraint firstAttribute="trailing" secondItem="9h3-Kj-nNy" secondAttribute="trailing" id="PQG-1j-fzC"/>
-                            <constraint firstItem="9h3-Kj-nNy" firstAttribute="top" secondItem="m5h-hH-PG6" secondAttribute="bottom" constant="72" id="ZbE-ht-QdC"/>
+                            <constraint firstAttribute="centerX" secondItem="BGr-Rg-RmT" secondAttribute="centerX" id="QJH-SH-r7I"/>
+                            <constraint firstItem="9h3-Kj-nNy" firstAttribute="top" secondItem="m5h-hH-PG6" secondAttribute="bottom" id="ZbE-ht-QdC"/>
                             <constraint firstItem="9h3-Kj-nNy" firstAttribute="leading" secondItem="ATO-J5-tNU" secondAttribute="leading" id="aLR-9M-fQM"/>
+                            <constraint firstAttribute="centerX" secondItem="fW9-fV-Lwx" secondAttribute="centerX" id="gX6-S2-1rd"/>
+                            <constraint firstItem="fW9-fV-Lwx" firstAttribute="top" secondItem="m5h-hH-PG6" secondAttribute="bottom" id="x0V-Hh-mpX"/>
+                            <constraint firstItem="g31-Uw-ef5" firstAttribute="top" secondItem="fW9-fV-Lwx" secondAttribute="bottom" id="x58-yI-8Yl"/>
+                            <constraint firstItem="fW9-fV-Lwx" firstAttribute="width" secondItem="ATO-J5-tNU" secondAttribute="width" id="xol-5W-IXb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zar-Wn-O95"/>
                     <connections>
                         <outlet property="BTC_DiscountLabel" destination="xpP-s7-KrH" id="kaI-Ij-d0K"/>
                         <outlet property="activityView" destination="BGr-Rg-RmT" id="d6F-nI-Fjq"/>
-                        <outlet property="businessTitleLabel" destination="Pa6-PK-SvP" id="jml-Fx-gep"/>
                         <outlet property="categoriesLabel" destination="HIT-3i-9iw" id="Jy6-8B-xOz"/>
                         <outlet property="darkenImageView" destination="PLV-qj-cYH" id="YSr-lZ-pSV"/>
                         <outlet property="galleryView" destination="6fq-Gv-OdB" id="sHH-nE-tbj"/>
@@ -5195,14 +5041,9 @@ Scan the QR code using this device</string>
         <image name="background_login.jpg" width="320" height="568"/>
         <image name="bd_cell_bottom.png" width="12" height="12"/>
         <image name="bd_cell_middle.png" width="6" height="6"/>
-        <image name="bd_cell_middle_white.png" width="6" height="6"/>
         <image name="bd_cell_top.png" width="12" height="12"/>
-        <image name="bd_icon_clock.png" width="15" height="16"/>
-        <image name="bd_icon_facebook.png" width="16" height="16"/>
         <image name="bd_icon_location.png" width="10" height="18"/>
         <image name="bd_icon_phone.png" width="11" height="15"/>
-        <image name="bd_icon_share.png" width="16" height="16"/>
-        <image name="bd_icon_web.png" width="15" height="16"/>
         <image name="bkg_categories.png" width="320" height="209"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
         <image name="bkg_textfield.png" width="320" height="54"/>

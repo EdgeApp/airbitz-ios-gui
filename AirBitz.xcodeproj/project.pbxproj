@@ -1706,6 +1706,9 @@
 		DAEB4B301AF69946006D6A48 /* postcard-mountain~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAEB4B2C1AF69946006D6A48 /* postcard-mountain~iphone.png */; };
 		DAEB4B311AF69946006D6A48 /* postcard-mountain~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAEB4B2C1AF69946006D6A48 /* postcard-mountain~iphone.png */; };
 		DAEB4B321AF69946006D6A48 /* postcard-mountain~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAEB4B2C1AF69946006D6A48 /* postcard-mountain~iphone.png */; };
+		DAEB4B361AF867CD006D6A48 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAEB4B351AF867CD006D6A48 /* BD_CommonCell.m */; };
+		DAEB4B371AF867CD006D6A48 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAEB4B351AF867CD006D6A48 /* BD_CommonCell.m */; };
+		DAEB4B381AF867CD006D6A48 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAEB4B351AF867CD006D6A48 /* BD_CommonCell.m */; };
 		DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
 		DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */; };
 		DAFF8FEB1ADC9186000BCBEF /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFF8FEA1ADC9186000BCBEF /* Plugin.m */; };
@@ -2529,6 +2532,8 @@
 		DAE866291A88A58A00A17BD3 /* Airbitz Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAEB4B2B1AF69946006D6A48 /* postcard-mountain@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "postcard-mountain@2x~iphone.png"; sourceTree = "<group>"; };
 		DAEB4B2C1AF69946006D6A48 /* postcard-mountain~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "postcard-mountain~iphone.png"; sourceTree = "<group>"; };
+		DAEB4B341AF867CD006D6A48 /* BD_CommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_CommonCell.h; sourceTree = "<group>"; };
+		DAEB4B351AF867CD006D6A48 /* BD_CommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_CommonCell.m; sourceTree = "<group>"; };
 		DAFC799E1A81CCBE00E9039D /* TwoFactorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorMenuViewController.h; sourceTree = "<group>"; };
 		DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorMenuViewController.m; sourceTree = "<group>"; };
 		DAFF8FE91ADC9186000BCBEF /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
@@ -3630,6 +3635,8 @@
 				7DFD22DC1A1E716C008C43FB /* UIPhotoGallery */,
 				B5C0A96618EA0A42008F302C /* BD_Address_Cell.h */,
 				B5C0A96718EA0A42008F302C /* BD_Address_Cell.m */,
+				DAEB4B341AF867CD006D6A48 /* BD_CommonCell.h */,
+				DAEB4B351AF867CD006D6A48 /* BD_CommonCell.m */,
 				B5C0A96818EA0A42008F302C /* BD_Details_Cell.h */,
 				B5C0A96918EA0A42008F302C /* BD_Details_Cell.m */,
 				B5C0A96A18EA0A42008F302C /* BD_Hours_Cell.h */,
@@ -5468,6 +5475,7 @@
 				DAE276281A9BF8AB00E24523 /* SignUpPasswordController.m in Sources */,
 				7D98ACCA19A7C550003D2BF6 /* CategoriesViewController.m in Sources */,
 				7D98ACCB19A7C550003D2BF6 /* InfoView.m in Sources */,
+				DAEB4B371AF867CD006D6A48 /* BD_CommonCell.m in Sources */,
 				7D98ACCC19A7C550003D2BF6 /* WalletMakerView.m in Sources */,
 				DAFF8FEC1ADC9186000BCBEF /* Plugin.m in Sources */,
 				7D98ACCD19A7C550003D2BF6 /* PopupWheelPickerView.m in Sources */,
@@ -5615,6 +5623,7 @@
 				DAE276271A9BF8AB00E24523 /* SignUpPasswordController.m in Sources */,
 				B55A031D18EB569000845090 /* CategoriesViewController.m in Sources */,
 				B561E1A618D2572D002DCDC2 /* InfoView.m in Sources */,
+				DAEB4B361AF867CD006D6A48 /* BD_CommonCell.m in Sources */,
 				B5FD392F18EFC30E00BE2670 /* WalletMakerView.m in Sources */,
 				DAFF8FEB1ADC9186000BCBEF /* Plugin.m in Sources */,
 				4C3C309819198B33006923DE /* PopupWheelPickerView.m in Sources */,
@@ -5762,6 +5771,7 @@
 				DAE276291A9BF8AB00E24523 /* SignUpPasswordController.m in Sources */,
 				DAE8641B1A88A58A00A17BD3 /* CategoriesViewController.m in Sources */,
 				DAE8641C1A88A58A00A17BD3 /* InfoView.m in Sources */,
+				DAEB4B381AF867CD006D6A48 /* BD_CommonCell.m in Sources */,
 				DAE8641D1A88A58A00A17BD3 /* WalletMakerView.m in Sources */,
 				DAFF8FED1ADC9186000BCBEF /* Plugin.m in Sources */,
 				DAE8641E1A88A58A00A17BD3 /* PopupWheelPickerView.m in Sources */,

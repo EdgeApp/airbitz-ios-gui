@@ -27,8 +27,11 @@
 #import "UIPhotoGalleryViewController+Slider.h"
 
 #import "CJSONDeserializer.h"
+#import "MainViewController.h"
+#import "BD_CommonCell.h"
 
 #define SHOW_PHONE_CALL_ARE_YOU_SURE_ALERT 0	/* set to 1 to show are you sure alert before dialing */
+#define TOP_IMAGE_HEIGHT 200.0
 
 typedef NS_ENUM(NSUInteger, CellType) {
     kAddress,
@@ -92,6 +95,11 @@ typedef NS_ENUM(NSUInteger, CellType) {
     self.galleryView.subviewGap = 0;
     self.galleryView.photoItemContentMode = UIViewContentModeScaleAspectFill;
 
+
+    // Remove top offset and inset of the listings tableview to prevent gap
+    [self.tableView setContentOffset:CGPointZero animated:NO];
+    [self.tableView setContentInset:UIEdgeInsetsMake(TOP_IMAGE_HEIGHT, 0.0, 0.0, 0.0)];
+
     details = nil;
 	imageURLs = [[NSMutableArray alloc] init];
     rowTypes = [[NSMutableArray alloc] init];
@@ -100,8 +108,12 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	detailsCellHeight = SINGLE_ROW_CELL_HEIGHT;
 	
 	self.darkenImageView.hidden = YES; //hide until business image gets loaded
-	
-	//get business details
+
+    [MainViewController changeNavBarTitle:@"Directory"];
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
+
+    //get business details
 	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/?ll=%f,%f", SERVER_API, self.bizId, self.latLong.latitude, self.latLong.longitude];
 	//NSLog(@"Requesting: %@", requestURL);
 	[[DL_URLServer controller] issueRequestURL:requestURL
@@ -536,6 +548,19 @@ typedef NS_ENUM(NSUInteger, CellType) {
     return [rowTypes count];
 }
 
+-(BD_CommonCell *)getCommonCellForTableView:(UITableView *)tableView
+{
+    BD_CommonCell *cell;
+    static NSString *cellIdentifier = @"BD_CommonCell";
+
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[BD_CommonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    return cell;
+}
+
 -(BD_Address_Cell *)getAddressCellForTableView:(UITableView *)tableView
 {
 	BD_Address_Cell *cell;
@@ -635,85 +660,41 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	
 	
 	int cellType = [self cellTypeForRow:indexPath.row];
-	
-	UIImage *cellImage;
-	if ([tableView numberOfRowsInSection:indexPath.section] == 1)
-	{
-		cellImage = [UIImage imageNamed:@"bd_cell_single"];
-	}
-	else
-	{
-		if (row == 0)
-		{
-			cellImage = [UIImage imageNamed:@"bd_cell_top"];
-		}
-		else if (row == [tableView numberOfRowsInSection:indexPath.section] - 1)
-        {
-            if (cellType == kHours | cellType == kDetails)
-            {
-                cellImage = [UIImage imageNamed:@"bd_cell_bottom_white"];
-            }
-            else
-            {
-                cellImage = [UIImage imageNamed:@"bd_cell_bottom"];
-            }
-        }
-        else
-        {
-            if (cellType == kHours | cellType == kDetails)
-            {
-                cellImage = [UIImage imageNamed:@"bd_cell_middle_white"];
-            }
-            else
-            {
-                cellImage = [UIImage imageNamed:@"bd_cell_middle"];
-            }
-        }
-	}
-	
+
+    //common cell
+    BD_CommonCell *commonCell = [self getAddressCellForTableView:tableView];
+
 	if (cellType == kAddress)
 	{
-		//address cell
-		BD_Address_Cell *addressCell = [self getAddressCellForTableView:tableView];
 		if(self.businessDetails)
 		{
-			addressCell.topAddress.text = [self.businessDetails objectForKey:@"address"];
-			addressCell.botAddress.text = [NSString stringWithFormat:@"%@, %@  %@", [self.businessDetails objectForKey:@"city"], [self.businessDetails objectForKey:@"state"], [self.businessDetails objectForKey:@"postalcode"]];
-			addressCell.bkg_image.image = cellImage;
+            commonCell.leftLabel.numberOfLines = 2;
+			commonCell.leftLabel.text = [NSString stringWithFormat:@"%@\n%@, %@  %@", [self.businessDetails objectForKey:@"address"],
+                            [self.businessDetails objectForKey:@"city"], [self.businessDetails objectForKey:@"state"], [self.businessDetails objectForKey:@"postalcode"]];
 		}
-		cell = addressCell;
 	}
 	else if(cellType == kPhone)
 	{
-		//phone cell
-		BD_Phone_Cell *phoneCell = [self getPhoneCellForTableView:tableView];
-		phoneCell.phoneLabel.text = [self.businessDetails objectForKey:@"phone"];
-		phoneCell.bkg_image.image = cellImage;
-		cell = phoneCell;
+        commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_phone.png"];
+		commonCell.leftLabel.text = [self.businessDetails objectForKey:@"phone"];
 	}
 	else if(cellType == kWebsite)
 	{
 		//website cell
-		BD_Website_Cell *websiteCell = [self getWebsiteCellForTableView:tableView];
-		websiteCell.websiteLabel.text = [self.businessDetails objectForKey:@"website"];
-		websiteCell.bkg_image.image = cellImage;
-		cell = websiteCell;
+        commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_web.png"];
+		commonCell.leftLabel.text = [self.businessDetails objectForKey:@"website"];
 	}
 	else if(cellType == kShare)
 	{
-		//phone cell
-		BD_Share_Cell *shareCell = [self getShareCellForTableView:tableView];
-//		shareCell.shareLabel.text = [self.businessDetails objectForKey:@"share"];
-		shareCell.bkg_image.image = cellImage;
-		cell = shareCell;
+		//share cell
+        commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_share.png"];
+        commonCell.leftLabel.text = NSLocalizedString(@"Share", @"Share button text");
 	}
 	else if(cellType == kHours)
 	{
-		BD_Hours_Cell *hoursCell = [self getHoursCellForTableView:tableView];
-		hoursCell.bkg_image.image = cellImage;
 		if(self.businessDetails)
 		{
-			[hoursCell.activityView stopAnimating];
+//			[hoursCell.activityView stopAnimating];
 			NSArray *operatingDays = [self.businessDetails objectForKey:@"hours"];
 			NSMutableString *dayString = [[NSMutableString alloc] init];
 			NSMutableString *hoursString = [[NSMutableString alloc] init];
@@ -756,20 +737,31 @@ typedef NS_ENUM(NSUInteger, CellType) {
 				[dayString appendString:@"Open 24"];
 				[hoursString appendString:@"hours\n"];
 			}
-			
-			//apply new strings to text labels
-			hoursCell.dayLabel.text = [dayString copy];
-			[hoursCell.dayLabel sizeToFit];
-			hoursCell.timeLabel.text = [hoursString copy];
-			[hoursCell.timeLabel sizeToFit];
-		}
-		cell = hoursCell;
+            NSInteger leftLines = [[dayString componentsSeparatedByCharactersInSet:
+                    [NSCharacterSet newlineCharacterSet]] count];
+
+            NSInteger rightLines = [[hoursString componentsSeparatedByCharactersInSet:
+                    [NSCharacterSet newlineCharacterSet]] count];
+
+            //apply new strings to text labels
+			commonCell.leftLabel.text = [dayString copy];
+            commonCell.leftLabel.numberOfLines = leftLines;
+            commonCell.leftLabel.textColor = [UIColor blackColor];
+            NSLog(@"leftLabel: %@", commonCell.leftLabel.text);
+
+			commonCell.rightLabel.text = [hoursString copy];
+            commonCell.rightLabel.numberOfLines = rightLines;
+            commonCell.rightLabel.textColor = [UIColor blackColor];
+            NSLog(@"rightLabel: %@", commonCell.rightLabel.text);
+
+            commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_clock.png"];
+
+        }
 	}
 	else if(cellType == kDetails)
 	{
 		//details cell
 		BD_Details_Cell *detailsCell = [self getDetailsCellForTableView:tableView];
-		detailsCell.bkg_image.image = cellImage;
 		if(self.businessDetails)
 		{
 			[detailsCell.activityView stopAnimating];
@@ -780,22 +772,24 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	}
 	else if(cellType == kSocial)
 	{
-		BD_Social_Cell *socialCell = [self getSocialCellForTableView:tableView];
         for (NSDictionary *pair in socialRows)
         {
             NSNumber *socialType = [pair objectForKey:[NSNumber numberWithInt:row]];
             if (socialType)
             {
-                socialCell.socialLabel.text = [BD_Social_Cell getSocialTypeAsString:socialType];
-                socialCell.socialIcon.image = [BD_Social_Cell getSocialTypeImage:socialType];
+                commonCell.leftLabel.text = [BD_Social_Cell getSocialTypeAsString:socialType];
+                commonCell.cellIcon.image = [BD_Social_Cell getSocialTypeImage:socialType];
                 break;
             }
         }
-		socialCell.bkg_image.image = cellImage;
-		cell = socialCell;
 	}
-	
-	return cell;
+
+    [commonCell.leftLabel sizeToFit];
+    [commonCell.rightLabel sizeToFit];
+
+    cell = commonCell;
+
+    return cell;
 }
 
 -(int)cellTypeForRow:(NSInteger)row
