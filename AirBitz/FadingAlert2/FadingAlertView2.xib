@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" customClass="FadingAlertView2">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFN-Ju-C7T" userLabel="View -shadowView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="568" translatesAutoresizingMaskIntoConstraints="NO" id="OYT-Tf-r4L" userLabel="AlertGroup">
+                    <rect key="frame" x="35" y="159" width="250" height="250"/>
+                    <subviews>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8D-FP-37y" userLabel="Toolbar -blur">
+                            <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                            <items/>
+                        </toolbar>
+                        <label autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="2is-5E-X7J" userLabel="Message" customClass="LatoLabel">
+                            <rect key="frame" x="16" y="16" width="218" height="218"/>
+                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
+                            <color key="textColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Joy-6Y-Kdk" userLabel="Spinner">
+                            <rect key="frame" x="107" y="193" width="37" height="37"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="M8D-FP-37y" secondAttribute="bottom" id="IXM-oH-suB"/>
+                        <constraint firstAttribute="bottom" secondItem="2is-5E-X7J" secondAttribute="bottom" constant="16" id="In1-2K-5pO"/>
+                        <constraint firstItem="2is-5E-X7J" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" constant="16" id="JXH-F4-QSK"/>
+                        <constraint firstAttribute="trailing" secondItem="M8D-FP-37y" secondAttribute="trailing" id="M3E-DR-J55"/>
+                        <constraint firstAttribute="width" constant="250" id="RCC-2m-09y"/>
+                        <constraint firstItem="M8D-FP-37y" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" id="Srz-xi-CRQ"/>
+                        <constraint firstItem="2is-5E-X7J" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" constant="16" id="TbY-5b-Nyp"/>
+                        <constraint firstAttribute="trailing" secondItem="2is-5E-X7J" secondAttribute="trailing" constant="16" id="Xr7-AO-sph"/>
+                        <constraint firstAttribute="height" constant="250" id="bm6-Jx-kNe"/>
+                        <constraint firstAttribute="bottom" secondItem="Joy-6Y-Kdk" secondAttribute="bottom" constant="20" id="jHj-Jz-QEz"/>
+                        <constraint firstItem="M8D-FP-37y" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" id="jbg-V2-123"/>
+                        <constraint firstAttribute="centerX" secondItem="Joy-6Y-Kdk" secondAttribute="centerX" id="lEr-l3-sDs"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="OYT-Tf-r4L" secondAttribute="centerX" id="0TW-Xh-kzy"/>
+                <constraint firstAttribute="centerY" secondItem="OYT-Tf-r4L" secondAttribute="centerY" id="1Ky-bz-xOK"/>
+                <constraint firstAttribute="bottom" secondItem="gFN-Ju-C7T" secondAttribute="bottom" id="4sm-a5-1Lw"/>
+                <constraint firstItem="gFN-Ju-C7T" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BRj-Cm-5j2"/>
+                <constraint firstItem="gFN-Ju-C7T" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eWw-rQ-KHQ"/>
+                <constraint firstAttribute="trailing" secondItem="gFN-Ju-C7T" secondAttribute="trailing" id="wm9-UY-0GD"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="activityIndicator" destination="Joy-6Y-Kdk" id="R2S-4F-jcd"/>
+                <outlet property="messageText" destination="2is-5E-X7J" id="yvV-lv-54v"/>
+                <outlet property="shadowView" destination="gFN-Ju-C7T" id="LIr-VT-amS"/>
+                <outlet property="toolBarView" destination="M8D-FP-37y" id="6UK-g0-KBC"/>
+            </connections>
+            <point key="canvasLocation" x="-3" y="155"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

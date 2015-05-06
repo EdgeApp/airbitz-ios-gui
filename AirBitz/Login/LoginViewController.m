@@ -25,6 +25,7 @@
 #import "ButtonSelectorView.h"
 #import "APPINView.h"
 #import "Theme.h"
+#import "FadingAlertView2.h"
 
 typedef enum eLoginMode
 {
@@ -37,7 +38,7 @@ typedef enum eLoginMode
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate >
+    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertView2Delegate, ButtonSelectorDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
@@ -50,7 +51,7 @@ typedef enum eLoginMode
     UITextField                     *_activeTextField;
     PasswordRecoveryViewController  *_passwordRecoveryController;
     TwoFactorMenuViewController     *_tfaMenuViewController;
-    FadingAlertView                 *_fadingAlert;
+    FadingAlertView2                 *_fadingAlert;
     float                           _keyboardFrameOriginY;
     CGFloat                         _originalLogoHeight;
     CGFloat                         _originalUsernameHeight;
@@ -247,6 +248,7 @@ static BOOL bInitialized = false;
         }
     }
 
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -277,7 +279,7 @@ static BOOL bInitialized = false;
 
 #pragma mark - FadingAlertView delegate
 
-- (void)fadingAlertDismissed:(FadingAlertView *)view
+- (void)fadingAlertDismissed:(FadingAlertView2 *)view
 {
     _fadingAlert = nil;
     if (bPINModeEnabled)
@@ -545,8 +547,8 @@ static BOOL bInitialized = false;
 {
     NSString *PINExpired = NSLocalizedString(@"Invalid PIN. Please log in.", nil);
 
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-    _fadingAlert.message = PINExpired;
+    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+    [_fadingAlert messageTextSet:PINExpired];
     _fadingAlert.fadeDuration = 2;
     _fadingAlert.fadeDelay = 5;
     [_fadingAlert blockModal:NO];
@@ -985,11 +987,11 @@ static BOOL bInitialized = false;
 
 - (void)showFadingError:(NSString *)message
 {
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
-    _fadingAlert.message = message;
+    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert messageTextSet:message];
     _fadingAlert.fadeDuration = 2;
     _fadingAlert.fadeDelay = 5;
-    [_fadingAlert blockModal:NO];
     [_fadingAlert showSpinner:NO];
     [_fadingAlert showFading];
 }
