@@ -62,7 +62,7 @@
 + (bool)PINLoginExists:(NSString *)username;
 + (void)deletePINLogin;
 + (void)setupLoginPIN;
-+ (tABC_CC)PINLoginWithPIN:(NSString *)PIN;
++ (void)PINLoginWithPIN:(NSString *)PIN error:(tABC_Error *)pError;
 + (BOOL)recentlyLoggedIn;
 + (void)login;
 + (void)logout;
