@@ -609,6 +609,8 @@
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _importWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ImportWalletViewController"];
 
+        Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+        _importWalletViewController.walletUUID = wallet.strUUID;
         _importWalletViewController.delegate = self;
 
         CGRect frame = self.view.bounds;
