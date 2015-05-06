@@ -93,7 +93,7 @@
     </objects>
     <resources>
         <image name="btn_close.png" width="36" height="36"/>
-        <image name="logo.png" width="64" height="36"/>
+        <image name="logo.png" width="71" height="36"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
