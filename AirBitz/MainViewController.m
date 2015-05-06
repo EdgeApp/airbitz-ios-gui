@@ -129,6 +129,13 @@ typedef enum eAppMode
                    (unsigned int)[seedData length],
                    &Error);
     [Util printABC_Error:&Error];
+
+    // Fetch general info as soon as possible
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        tABC_Error error;
+        ABC_GeneralInfoUpdate(&error);
+        [Util printABC_Error:&error];
+    });
 #endif
 
 	_originalTabBarFrame = self.tabBar.frame;
