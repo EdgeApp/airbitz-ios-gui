@@ -1047,6 +1047,9 @@
 		DA5101E51AF9FD1100949855 /* FadingAlertView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA5101E11AF9FD1100949855 /* FadingAlertView2.xib */; };
 		DA5101E61AF9FD1100949855 /* FadingAlertView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA5101E11AF9FD1100949855 /* FadingAlertView2.xib */; };
 		DA5101E71AF9FD1100949855 /* FadingAlertView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA5101E11AF9FD1100949855 /* FadingAlertView2.xib */; };
+		DA5101EE1AFB35AD00949855 /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5101ED1AFB35AD00949855 /* BusinessDirectory.storyboard */; };
+		DA5101EF1AFB35AD00949855 /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5101ED1AFB35AD00949855 /* BusinessDirectory.storyboard */; };
+		DA5101F01AFB35AD00949855 /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5101ED1AFB35AD00949855 /* BusinessDirectory.storyboard */; };
 		DA5509581A928E1300F57106 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509571A928E1300F57106 /* StylizedTextField2.m */; };
 		DA5509591A928E1300F57106 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509571A928E1300F57106 /* StylizedTextField2.m */; };
 		DA55095A1A928E1300F57106 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509571A928E1300F57106 /* StylizedTextField2.m */; };
@@ -2384,6 +2387,7 @@
 		DA5101DF1AF9FD1100949855 /* FadingAlertView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FadingAlertView2.h; path = FadingAlert2/FadingAlertView2.h; sourceTree = "<group>"; };
 		DA5101E01AF9FD1100949855 /* FadingAlertView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FadingAlertView2.m; path = FadingAlert2/FadingAlertView2.m; sourceTree = "<group>"; };
 		DA5101E11AF9FD1100949855 /* FadingAlertView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FadingAlertView2.xib; path = FadingAlert2/FadingAlertView2.xib; sourceTree = "<group>"; };
+		DA5101ED1AFB35AD00949855 /* BusinessDirectory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BusinessDirectory.storyboard; sourceTree = "<group>"; };
 		DA5509561A928E1300F57106 /* StylizedTextField2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField2.h; sourceTree = "<group>"; };
 		DA5509571A928E1300F57106 /* StylizedTextField2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField2.m; sourceTree = "<group>"; };
 		DA55095B1A92934B00F57106 /* StylizedTextField3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField3.h; sourceTree = "<group>"; };
@@ -3486,6 +3490,7 @@
 		B5C0A96218EA0A42008F302C /* Business Directory */ = {
 			isa = PBXGroup;
 			children = (
+				DA5101ED1AFB35AD00949855 /* BusinessDirectory.storyboard */,
 				B5C0A96318EA0A42008F302C /* BackgroundImageManager.h */,
 				B5C0A96418EA0A42008F302C /* BackgroundImageManager.m */,
 				B5C0A96518EA0A42008F302C /* Business Details */,
@@ -4255,6 +4260,7 @@
 				7D98AE5219A7C550003D2BF6 /* btn_add~iphone.png in Resources */,
 				7D98AE5319A7C550003D2BF6 /* divider~iphone.png in Resources */,
 				7D98AE5419A7C550003D2BF6 /* btn_use_max@2x~iphone.png in Resources */,
+				DA5101EF1AFB35AD00949855 /* BusinessDirectory.storyboard in Resources */,
 				7D98AE5519A7C550003D2BF6 /* San Diego.gpx in Resources */,
 				E22724401ADD899A0032FCDB /* ico_nav_directory_white@2x~iphone.png in Resources */,
 				7D98AE5619A7C550003D2BF6 /* btn_2@2x~iphone.png in Resources */,
@@ -4641,6 +4647,7 @@
 				E2067B931AC2FDFB00E17C36 /* icon_logout.png in Resources */,
 				B59C14D018C012B500AEA789 /* btn_3@2x~iphone.png in Resources */,
 				B59C14CB18C012B500AEA789 /* btn_0~iphone.png in Resources */,
+				DA5101EE1AFB35AD00949855 /* BusinessDirectory.storyboard in Resources */,
 				B59C150818C012B500AEA789 /* btn_SMS@2x~iphone.png in Resources */,
 				4C7247BF19353BD50091C286 /* icon_export_view~iphone.png in Resources */,
 				B5675B5F18A17F6F002E0703 /* Main_iPhone.storyboard in Resources */,
@@ -5028,6 +5035,7 @@
 				DAE865CD1A88A58A00A17BD3 /* btn_3@2x~iphone.png in Resources */,
 				DAE865CE1A88A58A00A17BD3 /* btn_0~iphone.png in Resources */,
 				DAE865CF1A88A58A00A17BD3 /* btn_SMS@2x~iphone.png in Resources */,
+				DA5101F01AFB35AD00949855 /* BusinessDirectory.storyboard in Resources */,
 				DAE865D01A88A58A00A17BD3 /* icon_export_view~iphone.png in Resources */,
 				DAE865D21A88A58A00A17BD3 /* Main_iPhone.storyboard in Resources */,
 				DAE865D31A88A58A00A17BD3 /* btn_add~iphone.png in Resources */,

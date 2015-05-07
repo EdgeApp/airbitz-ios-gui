@@ -141,7 +141,8 @@ MainViewController *staticMVC;
 
 	// Do any additional setup after loading the view.
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	_directoryViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
+    UIStoryboard *directoryStoryboard = [UIStoryboard storyboardWithName:@"BusinessDirectory" bundle: nil];
+	_directoryViewController = [directoryStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
 	_loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
 	_loginViewController.delegate = self;
 
