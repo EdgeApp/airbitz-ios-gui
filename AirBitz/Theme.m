@@ -47,6 +47,13 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     //    self.denomination = 100000000;
     self.colorTextLink = UIColorFromARGB(0xFF007aFF);
     self.deleteAccountWarning = NSLocalizedString(@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.", @"Delete Account Warning");
+    self.colorSendButton = UIColorFromARGB(0xFF80c342);
+    self.colorRequestButton = UIColorFromARGB(0xff2291cf);
+
+    self.colorRequestButtonDisabled = UIColorFromARGB(0x5580c342);
+    self.colorSendButtonDisabled = UIColorFromARGB(0x55006698);
+
+    self.sendRequestButtonDisabled = 0.4f;
 
     if (IS_IPHONE4)
     {

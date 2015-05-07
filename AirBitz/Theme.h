@@ -16,6 +16,12 @@
 
 // User Settings
 @property (nonatomic) UIColor *colorTextLink;
+@property (nonatomic) UIColor *colorSendButton;
+@property (nonatomic) UIColor *colorRequestButton;
+@property (nonatomic) UIColor *colorSendButtonDisabled;
+@property (nonatomic) UIColor *colorRequestButtonDisabled;
+@property (nonatomic) CGFloat sendRequestButtonDisabled;
+
 @property (nonatomic) NSString *deleteAccountWarning;
 @property (nonatomic) CGFloat heightListings;
 @property (nonatomic) CGFloat heightSearchClues;
