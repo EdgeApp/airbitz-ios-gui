@@ -43,7 +43,7 @@
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate, UIGestureRecognizerDelegate>
 {
-    BalanceView                         *_balanceView;
+//    BalanceView                         *_balanceView;
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bSearchModeEnabled;
 //    CGRect                              _searchShowingFrame;
@@ -53,7 +53,7 @@
 
 //@property (weak, nonatomic) IBOutlet UIView         *viewSearch; // Moves search bar in and out
 //@property (weak, nonatomic) IBOutlet UITextField    *textWalletName;
-@property (nonatomic, weak) IBOutlet UIView         *balanceViewPlaceholder;
+@property (nonatomic, weak) IBOutlet BalanceView    *balanceViewPlaceholder;
 @property (nonatomic, weak) IBOutlet UITableView    *tableView;
 @property (nonatomic, weak) IBOutlet UISearchBar    *searchTextField;
 //@property (weak, nonatomic) IBOutlet UIButton       *buttonExport;
@@ -103,12 +103,11 @@
     // load all the names from the address book
     [self loadContactImages];
 
-    _balanceView = [BalanceView CreateWithDelegate:self];
-    _balanceView.frame = self.balanceViewPlaceholder.frame;
-    _balanceView.botDenomination.text = self.wallet.currencyAbbrev;
+    self.balanceViewPlaceholder.botDenomination.text = self.wallet.currencyAbbrev;
 
-    [self.balanceViewPlaceholder removeFromSuperview];
-    [self.view addSubview:_balanceView];
+    [[NSBundle mainBundle] loadNibNamed:@"BalanceView~iphone" owner:self options:nil];
+    [self.view addSubview:self.balanceViewPlaceholder];
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
@@ -140,7 +139,7 @@
                                            action:@selector(refresh:)
                                  forControlEvents:UIControlEventValueChanged];
 
-    [_balanceView refresh];
+    [self.balanceViewPlaceholder refresh];
     _transactionTableStartFrame = self.tableView.frame;
 
     [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -153,10 +152,6 @@
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-
-    [MainViewController changeNavBarTitleWithButton:self.wallet.strName action:@selector(didTapWalletName:) fromObject:self];
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
     self.buttonRequest.enabled = false;
     self.buttonSend.enabled = false;
@@ -174,15 +169,12 @@
 {
     [super viewWillAppear:animated];
 
-    CGPoint pt;
-    pt.x = 0.0;
-    pt.y = [MainViewController getHeaderHeight];
-    [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
+    [self performSelector:@selector(resetTableHideSearch) withObject:nil afterDelay:0.0f];
+//    [self resetTableHideSearch];
 
-    pt.x = 0.0;
-    pt.y = -[MainViewController getHeaderHeight] + self.searchTextField.frame.size.height;
-    [self.tableView setContentOffset:pt animated:true];
-
+    [MainViewController changeNavBarTitleWithButton:self.wallet.strName action:@selector(didTapWalletName:) fromObject:self];
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
     [CoreBridge postToWalletsQueue:^(void) {
         [CoreBridge reloadWallet:self.wallet];
@@ -193,6 +185,28 @@
             [self updateBalanceView];
         });
     }];
+
+}
+
+- (void)resetTableHideSearch
+{
+//    [UIView animateWithDuration: 0.35
+//                          delay: 0.0
+//                        options: UIViewAnimationOptionCurveEaseInOut
+//                     animations: ^
+                     {
+                         CGPoint pt;
+                         pt.x = 0.0;
+                         pt.y = [MainViewController getHeaderHeight];
+                         [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
+
+                         pt.x = 0.0;
+                         pt.y = -[MainViewController getHeaderHeight] + self.searchTextField.frame.size.height;
+                         [self.tableView setContentOffset:pt animated:true];
+                     }
+//                     completion: ^(BOOL finished)
+//                     {
+//                     }];
 
 }
 
@@ -315,18 +329,18 @@
     {
         totalSatoshi += tx.amountSatoshi;
     }
-    _balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
+    self.balanceViewPlaceholder.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
 
     double currency;
     tABC_Error error;
 
     ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
                           totalSatoshi, &currency, self.wallet.currencyNum, &error);
-    _balanceView.botAmount.text = [CoreBridge formatCurrency:currency 
+    self.balanceViewPlaceholder.botAmount.text = [CoreBridge formatCurrency:currency
                                              withCurrencyNum:self.wallet.currencyNum];
-    _balanceView.topDenomination.text = [User Singleton].denominationLabel;
+    self.balanceViewPlaceholder.topDenomination.text = [User Singleton].denominationLabel;
 
-    [_balanceView refresh];
+    [self.balanceViewPlaceholder refresh];
 
     if ([self.wallet isArchived])
     {
@@ -465,7 +479,7 @@
 //note this method duplicated in WalletsViewController
 - (NSString *)conversion:(int64_t)satoshi
 {
-    return [self formatSatoshi:satoshi useFiat:!_balanceView.barIsUp];
+    return [self formatSatoshi:satoshi useFiat:!self.balanceViewPlaceholder.barIsUp];
 }
 
 -(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction
@@ -736,13 +750,13 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 1)
-    {
+//    if (section == 1)
+//    {
         if ([self searchEnabled])
         {
             return self.arraySearchTransactions.count;
@@ -751,30 +765,30 @@
         {
             return self.wallet.arrayTransactions.count;
         }
-    }
-    else
-    {
-
-        return _bSearchModeEnabled ? 0 : 1;
-    }
+//    }
+//    else
+//    {
+//
+//        return _bSearchModeEnabled ? 0 : 1;
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height;
 
-    if (indexPath.section == 0)
-    {
-        if (_bSearchModeEnabled)
-        {
-            height = 0.0;
-        }
-        else
-        {
-            height = TABLE_HEADER_HEIGHT;
-        }
-    }
-    else
+//    if (indexPath.section == 0)
+//    {
+//        if (_bSearchModeEnabled)
+//        {
+//            height = 0.0;
+//        }
+//        else
+//        {
+//            height = TABLE_HEADER_HEIGHT;
+//        }
+//    }
+//    else
     {
         height = TABLE_CELL_HEIGHT;
     }
@@ -800,68 +814,68 @@
     UITableViewCell *finalCell;
     NSInteger row = [indexPath row];
     NSInteger section = [indexPath section];
-
-    if (section == 0)
-    {
-        static NSString *cellIdentifier = @"TransactionHeaderCell";
-
-        finalCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (nil == finalCell)
-        {
-            finalCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-            finalCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            finalCell.backgroundColor = [UIColor clearColor];
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(15, 0, 143.0, 41.0);
-            button.layer.borderWidth = 1.0;
-            button.layer.cornerRadius = 5;
-            [button setBackgroundColor:UIColorFromARGB(0xFF80c342)];
-            [button.layer setBorderColor:[UIColorFromARGB(0xFF1b7400) CGColor]];
-            button.clipsToBounds = YES;
-            //XXXP -paul
-            
-            [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
-            [finalCell addSubview:button];
-            [button setTitle:@"Receive" forState:UIControlStateNormal];
-            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
-            self.buttonRequest = button;
-
-            button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(163.0, 0, 143.0, 41.0);
-//            [button setBackgroundColor:[UIColor colorWithRed:0.5 green:.76 blue:.25 alpha:1]];
-            [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
-            [finalCell addSubview:button];
-            [button setTitle:@"Send" forState:UIControlStateNormal];
-            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
-            [button.layer setBorderColor:[UIColorFromARGB(0xff006698) CGColor]];
-            [button setBackgroundColor:UIColorFromARGB(0xff2291cf)];
-            button.layer.borderWidth = 1.0;
-            button.layer.cornerRadius = 5;
-            button.clipsToBounds = YES;
-
-            self.buttonSend = button;
-            
-            if ([self.wallet isArchived])
-            {
-                self.buttonSend.enabled = false;
-                self.buttonRequest.enabled = false;
-                [self.buttonRequest setBackgroundColor:UIColorFromARGB(0x5580c342)];
-                [self.buttonRequest.layer setBorderColor:[UIColorFromARGB(0x551b7400) CGColor]];
-                [self.buttonSend setBackgroundColor:UIColorFromARGB(0x55006698)];
-                [self.buttonSend.layer setBorderColor:[UIColorFromARGB(0x552291cf) CGColor]];
-                self.buttonSend.titleLabel.alpha = 0.4f;
-                self.buttonRequest.titleLabel.alpha = 0.4f;
-
-            }
-            else
-            {
-                self.buttonSend.enabled = true;
-                self.buttonRequest.enabled = true;
-            }
-            
-        }
-    }
-    else
+//
+//    if (section == 0)
+//    {
+//        static NSString *cellIdentifier = @"TransactionHeaderCell";
+//
+//        finalCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//        if (nil == finalCell)
+//        {
+//            finalCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+//            finalCell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            finalCell.backgroundColor = [UIColor clearColor];
+//            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//            button.frame = CGRectMake(15, 0, 143.0, 41.0);
+//            button.layer.borderWidth = 1.0;
+//            button.layer.cornerRadius = 5;
+//            [button setBackgroundColor:UIColorFromARGB(0xFF80c342)];
+//            [button.layer setBorderColor:[UIColorFromARGB(0xFF1b7400) CGColor]];
+//            button.clipsToBounds = YES;
+//            //XXXP -paul
+//
+//            [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
+//            [finalCell addSubview:button];
+//            [button setTitle:@"Receive" forState:UIControlStateNormal];
+//            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+//            self.buttonRequest = button;
+//
+//            button = [UIButton buttonWithType:UIButtonTypeCustom];
+//            button.frame = CGRectMake(163.0, 0, 143.0, 41.0);
+////            [button setBackgroundColor:[UIColor colorWithRed:0.5 green:.76 blue:.25 alpha:1]];
+//            [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
+//            [finalCell addSubview:button];
+//            [button setTitle:@"Send" forState:UIControlStateNormal];
+//            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+//            [button.layer setBorderColor:[UIColorFromARGB(0xff006698) CGColor]];
+//            [button setBackgroundColor:UIColorFromARGB(0xff2291cf)];
+//            button.layer.borderWidth = 1.0;
+//            button.layer.cornerRadius = 5;
+//            button.clipsToBounds = YES;
+//
+//            self.buttonSend = button;
+//
+//            if ([self.wallet isArchived])
+//            {
+//                self.buttonSend.enabled = false;
+//                self.buttonRequest.enabled = false;
+//                [self.buttonRequest setBackgroundColor:UIColorFromARGB(0x5580c342)];
+//                [self.buttonRequest.layer setBorderColor:[UIColorFromARGB(0x551b7400) CGColor]];
+//                [self.buttonSend setBackgroundColor:UIColorFromARGB(0x55006698)];
+//                [self.buttonSend.layer setBorderColor:[UIColorFromARGB(0x552291cf) CGColor]];
+//                self.buttonSend.titleLabel.alpha = 0.4f;
+//                self.buttonRequest.titleLabel.alpha = 0.4f;
+//
+//            }
+//            else
+//            {
+//                self.buttonSend.enabled = true;
+//                self.buttonRequest.enabled = true;
+//            }
+//
+//        }
+//    }
+//    else
     {
         TransactionCell *cell;
 

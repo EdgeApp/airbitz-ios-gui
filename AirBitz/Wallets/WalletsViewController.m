@@ -80,10 +80,6 @@
 	self.walletsTable.allowsSelectionDuringEditing = YES;
 	_currencyConversionFactor = 1.0;
 
-    [MainViewController changeNavBarTitle:@"Total Balance"];
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
-
 	self.walletMakerView.hidden = YES;
     self.walletMakerView.delegate = self;
     self.walletMakerTop.constant = -self.walletMakerView.layer.frame.size.height;
@@ -117,6 +113,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
+
+    [MainViewController changeNavBarTitle:@"Total Balance"];
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
     [CoreBridge postToWalletsQueue:^(void) {
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
