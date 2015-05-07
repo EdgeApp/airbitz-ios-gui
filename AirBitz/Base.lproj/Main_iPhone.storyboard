@@ -4600,7 +4600,11 @@ Scan the QR code using this device</string>
         <image name="background.jpg" width="320" height="568"/>
         <image name="background_header.png" width="320" height="568"/>
         <image name="background_login.jpg" width="320" height="568"/>
-        <image name="bkg_categories.png" width="320" height="209"/>
+        <image name="bd_cell_bottom.png" width="844" height="568"/>
+        <image name="bd_cell_middle.png" width="844" height="568"/>
+        <image name="bd_cell_top.png" width="844" height="568"/>
+        <image name="bd_icon_location.png" width="10" height="18"/>
+        <image name="bd_icon_phone.png" width="11" height="15"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
         <image name="bkg_textfield.png" width="320" height="54"/>
         <image name="btn_addCategory.png" width="38" height="31"/>
@@ -4615,15 +4619,12 @@ Scan the QR code using this device</string>
         <image name="btn_forgot_password_arrow.png" width="24" height="26"/>
         <image name="btn_info.png" width="24" height="25"/>
         <image name="btn_light.png" width="252" height="38"/>
-        <image name="btn_locateMe.png" width="39" height="39"/>
         <image name="btn_right.png" width="22" height="22"/>
         <image name="btn_search.png" width="32" height="33"/>
         <image name="btn_td_done.png" width="251" height="41"/>
         <image name="comp_09.2-send_bitcoin2.jpg" width="640" height="1136"/>
         <image name="copy_btn.png" width="80" height="42"/>
         <image name="darken_bottom_table_cell.png" width="320" height="111"/>
-        <image name="divider.png" width="320" height="27"/>
-        <image name="drag_bar.png" width="320" height="33"/>
         <image name="email_btn.png" width="80" height="42"/>
         <image name="emboss_down.png" width="20" height="21"/>
         <image name="emboss_up.png" width="291" height="193"/>
