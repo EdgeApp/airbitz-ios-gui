@@ -1286,8 +1286,8 @@ static bool bInitialized = false;
         return;
     }
 
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName: @"Main_iPhone" bundle: nil];
-    businessDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier: @"BusinessDetailsViewController"];
+    UIStoryboard *directoryStoryboard = [UIStoryboard storyboardWithName: @"BusinessDirectory" bundle: nil];
+    businessDetailsController = [directoryStoryboard instantiateViewControllerWithIdentifier: @"BusinessDetailsViewController"];
 
     businessDetailsController.bizId = bizId;
     businessDetailsController.latLong = location;
@@ -1394,8 +1394,8 @@ static bool bInitialized = false;
         return;
     }
 
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName: @"Main_iPhone" bundle: nil];
-    moreCategoriesController = [mainStoryboard instantiateViewControllerWithIdentifier: @"MoreCategoriesViewController"];
+    UIStoryboard *directoryStoryboard = [UIStoryboard storyboardWithName: @"BusinessDirectory" bundle: nil];
+    moreCategoriesController = [directoryStoryboard instantiateViewControllerWithIdentifier: @"MoreCategoriesViewController"];
 
     moreCategoriesController.delegate = self;
 

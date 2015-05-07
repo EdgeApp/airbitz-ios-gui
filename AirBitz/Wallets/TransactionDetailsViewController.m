@@ -616,9 +616,9 @@ typedef enum eRequestType
     {
         return;
     }
-    
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName: @"Main_iPhone" bundle: nil];
-    businessDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier: @"BusinessDetailsViewController"];
+
+    UIStoryboard *directoryStoryboard = [UIStoryboard storyboardWithName: @"BusinessDirectory" bundle: nil];
+    businessDetailsController = [directoryStoryboard instantiateViewControllerWithIdentifier: @"BusinessDetailsViewController"];
     
     businessDetailsController.bizId = bizId;
     businessDetailsController.latLong = location;
