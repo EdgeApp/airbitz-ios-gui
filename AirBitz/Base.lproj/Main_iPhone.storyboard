@@ -15,6 +15,8 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1003,7 +1005,7 @@
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="Dyb-xZ-KkC" userLabel="View -header">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ltN-lB-ATB">
@@ -1021,14 +1023,44 @@
                                                 <constraint firstAttribute="height" constant="82" id="vmj-gk-ZkY"/>
                                             </constraints>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6EE-Aw-gGZ">
+                                            <rect key="frame" x="0.0" y="160" width="188" height="50"/>
+                                            <color key="backgroundColor" red="0.50196078431372548" green="0.76470588235294112" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="Oij-Bs-yEe"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                            <state key="normal" title="Request">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPo-UX-ZHi">
+                                            <rect key="frame" x="188" y="160" width="187" height="50"/>
+                                            <color key="backgroundColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="XB3-oL-6di"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                            <state key="normal" title="Send">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="centerX" secondItem="3Qw-an-knM" secondAttribute="centerX" id="FxR-lB-Fqs"/>
+                                        <constraint firstItem="LPo-UX-ZHi" firstAttribute="leading" secondItem="6EE-Aw-gGZ" secondAttribute="trailing" id="GPB-iN-sxK"/>
+                                        <constraint firstItem="6EE-Aw-gGZ" firstAttribute="leading" secondItem="Dyb-xZ-KkC" secondAttribute="leading" id="HvY-C6-OSC"/>
+                                        <constraint firstAttribute="bottom" secondItem="6EE-Aw-gGZ" secondAttribute="bottom" id="MTS-8x-hJU"/>
                                         <constraint firstItem="3Qw-an-knM" firstAttribute="top" secondItem="ltN-lB-ATB" secondAttribute="bottom" constant="16" id="PWc-Zf-hdR"/>
                                         <constraint firstAttribute="trailing" secondItem="ltN-lB-ATB" secondAttribute="trailing" id="SlL-fh-S2n"/>
+                                        <constraint firstAttribute="bottom" secondItem="LPo-UX-ZHi" secondAttribute="bottom" id="dju-aI-LIe"/>
                                         <constraint firstItem="ltN-lB-ATB" firstAttribute="top" secondItem="Dyb-xZ-KkC" secondAttribute="top" id="glF-26-Ym8"/>
+                                        <constraint firstAttribute="trailing" secondItem="LPo-UX-ZHi" secondAttribute="trailing" id="hvO-S4-MO6"/>
                                         <constraint firstItem="ltN-lB-ATB" firstAttribute="leading" secondItem="Dyb-xZ-KkC" secondAttribute="leading" id="ilj-v6-bwr"/>
+                                        <constraint firstItem="6EE-Aw-gGZ" firstAttribute="width" secondItem="LPo-UX-ZHi" secondAttribute="width" id="phP-09-OCE"/>
                                     </constraints>
                                 </view>
                                 <prototypes>

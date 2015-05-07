@@ -750,13 +750,13 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 1)
-    {
+//    if (section == 1)
+//    {
         if ([self searchEnabled])
         {
             return self.arraySearchTransactions.count;
@@ -765,30 +765,30 @@
         {
             return self.wallet.arrayTransactions.count;
         }
-    }
-    else
-    {
-
-        return _bSearchModeEnabled ? 0 : 1;
-    }
+//    }
+//    else
+//    {
+//
+//        return _bSearchModeEnabled ? 0 : 1;
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height;
 
-    if (indexPath.section == 0)
-    {
-        if (_bSearchModeEnabled)
-        {
-            height = 0.0;
-        }
-        else
-        {
-            height = TABLE_HEADER_HEIGHT;
-        }
-    }
-    else
+//    if (indexPath.section == 0)
+//    {
+//        if (_bSearchModeEnabled)
+//        {
+//            height = 0.0;
+//        }
+//        else
+//        {
+//            height = TABLE_HEADER_HEIGHT;
+//        }
+//    }
+//    else
     {
         height = TABLE_CELL_HEIGHT;
     }
@@ -814,68 +814,68 @@
     UITableViewCell *finalCell;
     NSInteger row = [indexPath row];
     NSInteger section = [indexPath section];
-
-    if (section == 0)
-    {
-        static NSString *cellIdentifier = @"TransactionHeaderCell";
-
-        finalCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (nil == finalCell)
-        {
-            finalCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-            finalCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            finalCell.backgroundColor = [UIColor clearColor];
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(15, 0, 143.0, 41.0);
-            button.layer.borderWidth = 1.0;
-            button.layer.cornerRadius = 5;
-            [button setBackgroundColor:UIColorFromARGB(0xFF80c342)];
-            [button.layer setBorderColor:[UIColorFromARGB(0xFF1b7400) CGColor]];
-            button.clipsToBounds = YES;
-            //XXXP -paul
-            
-            [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
-            [finalCell addSubview:button];
-            [button setTitle:@"Receive" forState:UIControlStateNormal];
-            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
-            self.buttonRequest = button;
-
-            button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(163.0, 0, 143.0, 41.0);
-//            [button setBackgroundColor:[UIColor colorWithRed:0.5 green:.76 blue:.25 alpha:1]];
-            [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
-            [finalCell addSubview:button];
-            [button setTitle:@"Send" forState:UIControlStateNormal];
-            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
-            [button.layer setBorderColor:[UIColorFromARGB(0xff006698) CGColor]];
-            [button setBackgroundColor:UIColorFromARGB(0xff2291cf)];
-            button.layer.borderWidth = 1.0;
-            button.layer.cornerRadius = 5;
-            button.clipsToBounds = YES;
-
-            self.buttonSend = button;
-            
-            if ([self.wallet isArchived])
-            {
-                self.buttonSend.enabled = false;
-                self.buttonRequest.enabled = false;
-                [self.buttonRequest setBackgroundColor:UIColorFromARGB(0x5580c342)];
-                [self.buttonRequest.layer setBorderColor:[UIColorFromARGB(0x551b7400) CGColor]];
-                [self.buttonSend setBackgroundColor:UIColorFromARGB(0x55006698)];
-                [self.buttonSend.layer setBorderColor:[UIColorFromARGB(0x552291cf) CGColor]];
-                self.buttonSend.titleLabel.alpha = 0.4f;
-                self.buttonRequest.titleLabel.alpha = 0.4f;
-
-            }
-            else
-            {
-                self.buttonSend.enabled = true;
-                self.buttonRequest.enabled = true;
-            }
-            
-        }
-    }
-    else
+//
+//    if (section == 0)
+//    {
+//        static NSString *cellIdentifier = @"TransactionHeaderCell";
+//
+//        finalCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//        if (nil == finalCell)
+//        {
+//            finalCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+//            finalCell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            finalCell.backgroundColor = [UIColor clearColor];
+//            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//            button.frame = CGRectMake(15, 0, 143.0, 41.0);
+//            button.layer.borderWidth = 1.0;
+//            button.layer.cornerRadius = 5;
+//            [button setBackgroundColor:UIColorFromARGB(0xFF80c342)];
+//            [button.layer setBorderColor:[UIColorFromARGB(0xFF1b7400) CGColor]];
+//            button.clipsToBounds = YES;
+//            //XXXP -paul
+//
+//            [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
+//            [finalCell addSubview:button];
+//            [button setTitle:@"Receive" forState:UIControlStateNormal];
+//            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+//            self.buttonRequest = button;
+//
+//            button = [UIButton buttonWithType:UIButtonTypeCustom];
+//            button.frame = CGRectMake(163.0, 0, 143.0, 41.0);
+////            [button setBackgroundColor:[UIColor colorWithRed:0.5 green:.76 blue:.25 alpha:1]];
+//            [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
+//            [finalCell addSubview:button];
+//            [button setTitle:@"Send" forState:UIControlStateNormal];
+//            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+//            [button.layer setBorderColor:[UIColorFromARGB(0xff006698) CGColor]];
+//            [button setBackgroundColor:UIColorFromARGB(0xff2291cf)];
+//            button.layer.borderWidth = 1.0;
+//            button.layer.cornerRadius = 5;
+//            button.clipsToBounds = YES;
+//
+//            self.buttonSend = button;
+//
+//            if ([self.wallet isArchived])
+//            {
+//                self.buttonSend.enabled = false;
+//                self.buttonRequest.enabled = false;
+//                [self.buttonRequest setBackgroundColor:UIColorFromARGB(0x5580c342)];
+//                [self.buttonRequest.layer setBorderColor:[UIColorFromARGB(0x551b7400) CGColor]];
+//                [self.buttonSend setBackgroundColor:UIColorFromARGB(0x55006698)];
+//                [self.buttonSend.layer setBorderColor:[UIColorFromARGB(0x552291cf) CGColor]];
+//                self.buttonSend.titleLabel.alpha = 0.4f;
+//                self.buttonRequest.titleLabel.alpha = 0.4f;
+//
+//            }
+//            else
+//            {
+//                self.buttonSend.enabled = true;
+//                self.buttonRequest.enabled = true;
+//            }
+//
+//        }
+//    }
+//    else
     {
         TransactionCell *cell;
 
