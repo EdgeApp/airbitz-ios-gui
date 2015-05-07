@@ -129,6 +129,7 @@ typedef enum eMapDisplayState
     CLLocationCoordinate2D mostRecentLatLong;
     UISearchBar *activeSearchBar;
     CGFloat originalCategoryViewHeight;
+    BOOL bShowBackButton;
 
 }
 
@@ -180,8 +181,6 @@ static bool bInitialized = false;
 
     self.dividerView.delegate = self;
 
-    [self setupNavBar];
-
     self.searchBarLocation.placeholder = NSLocalizedString(@"City, State/Province, or Country", @"City, State/Province, or Country placeholder");
 
     //
@@ -223,8 +222,9 @@ static bool bInitialized = false;
 
 - (void) setupNavBar
 {
-    [MainViewController changeNavBarTitleWithImage:[UIImage imageWithContentsOfFile:@"logo.png"]];
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
+//    [MainViewController changeNavBarTitleWithImage:[UIImage imageWithContentsOfFile:@"logo.png"]];
+    [MainViewController changeNavBarTitle:@"Directory"];
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:bShowBackButton action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 }
 
@@ -276,6 +276,9 @@ static bool bInitialized = false;
 - (void)viewWillAppear: (BOOL)animated
 {
     [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
+
+    [self hideBackButton];
+    [self setupNavBar];
 
     //NSLog(@"Adding keyboard notification");
     [self receiveKeyboardNotifications: YES];
