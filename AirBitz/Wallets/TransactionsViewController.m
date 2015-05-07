@@ -43,7 +43,7 @@
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate, UIGestureRecognizerDelegate>
 {
-    BalanceView                         *_balanceView;
+//    BalanceView                         *_balanceView;
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bSearchModeEnabled;
 //    CGRect                              _searchShowingFrame;
@@ -53,7 +53,7 @@
 
 //@property (weak, nonatomic) IBOutlet UIView         *viewSearch; // Moves search bar in and out
 //@property (weak, nonatomic) IBOutlet UITextField    *textWalletName;
-@property (nonatomic, weak) IBOutlet UIView         *balanceViewPlaceholder;
+@property (nonatomic, weak) IBOutlet BalanceView    *balanceViewPlaceholder;
 @property (nonatomic, weak) IBOutlet UITableView    *tableView;
 @property (nonatomic, weak) IBOutlet UISearchBar    *searchTextField;
 //@property (weak, nonatomic) IBOutlet UIButton       *buttonExport;
@@ -103,12 +103,11 @@
     // load all the names from the address book
     [self loadContactImages];
 
-    _balanceView = [BalanceView CreateWithDelegate:self];
-    _balanceView.frame = self.balanceViewPlaceholder.frame;
-    _balanceView.botDenomination.text = self.wallet.currencyAbbrev;
+    self.balanceViewPlaceholder.botDenomination.text = self.wallet.currencyAbbrev;
 
-    [self.balanceViewPlaceholder removeFromSuperview];
-    [self.view addSubview:_balanceView];
+    [[NSBundle mainBundle] loadNibNamed:@"BalanceView~iphone" owner:self options:nil];
+    [self.view addSubview:self.balanceViewPlaceholder];
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
@@ -140,7 +139,7 @@
                                            action:@selector(refresh:)
                                  forControlEvents:UIControlEventValueChanged];
 
-    [_balanceView refresh];
+    [self.balanceViewPlaceholder refresh];
     _transactionTableStartFrame = self.tableView.frame;
 
     [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -315,18 +314,18 @@
     {
         totalSatoshi += tx.amountSatoshi;
     }
-    _balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
+    self.balanceViewPlaceholder.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
 
     double currency;
     tABC_Error error;
 
     ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
                           totalSatoshi, &currency, self.wallet.currencyNum, &error);
-    _balanceView.botAmount.text = [CoreBridge formatCurrency:currency 
+    self.balanceViewPlaceholder.botAmount.text = [CoreBridge formatCurrency:currency
                                              withCurrencyNum:self.wallet.currencyNum];
-    _balanceView.topDenomination.text = [User Singleton].denominationLabel;
+    self.balanceViewPlaceholder.topDenomination.text = [User Singleton].denominationLabel;
 
-    [_balanceView refresh];
+    [self.balanceViewPlaceholder refresh];
 
     if ([self.wallet isArchived])
     {
@@ -465,7 +464,7 @@
 //note this method duplicated in WalletsViewController
 - (NSString *)conversion:(int64_t)satoshi
 {
-    return [self formatSatoshi:satoshi useFiat:!_balanceView.barIsUp];
+    return [self formatSatoshi:satoshi useFiat:!self.balanceViewPlaceholder.barIsUp];
 }
 
 -(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction

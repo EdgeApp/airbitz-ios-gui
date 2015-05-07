@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Lato-Regular.ttf">
@@ -992,8 +993,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E65-Du-K3g">
-                                <rect key="frame" x="0.0" y="312" width="375" height="44"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E65-Du-K3g">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <items/>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1la-Es-fPE">
@@ -1012,7 +1013,7 @@
                                             </constraints>
                                             <textInputTraits key="textInputTraits"/>
                                         </searchBar>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Qw-an-knM" userLabel="View -balance">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qw-an-knM" userLabel="View -balance" customClass="BalanceView">
                                             <rect key="frame" x="40" y="60" width="294" height="82"/>
                                             <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                                             <constraints>
@@ -1024,7 +1025,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="centerX" secondItem="3Qw-an-knM" secondAttribute="centerX" id="FxR-lB-Fqs"/>
-                                        <constraint firstItem="3Qw-an-knM" firstAttribute="top" secondItem="ltN-lB-ATB" secondAttribute="bottom" symbolic="YES" id="PWc-Zf-hdR"/>
+                                        <constraint firstItem="3Qw-an-knM" firstAttribute="top" secondItem="ltN-lB-ATB" secondAttribute="bottom" constant="16" id="PWc-Zf-hdR"/>
                                         <constraint firstAttribute="trailing" secondItem="ltN-lB-ATB" secondAttribute="trailing" id="SlL-fh-S2n"/>
                                         <constraint firstItem="ltN-lB-ATB" firstAttribute="top" secondItem="Dyb-xZ-KkC" secondAttribute="top" id="glF-26-Ym8"/>
                                         <constraint firstItem="ltN-lB-ATB" firstAttribute="leading" secondItem="Dyb-xZ-KkC" secondAttribute="leading" id="ilj-v6-bwr"/>
@@ -1038,48 +1039,80 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TJ3-SX-hen" customClass="MontserratLabel">
-                                                    <rect key="frame" x="63" y="10" width="99" height="13"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TJ3-SX-hen" userLabel="dateLabel" customClass="MontserratLabel">
+                                                    <rect key="frame" x="63" y="10" width="186" height="13"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="13" id="M5r-0D-JMD"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.090196078431372548" green="0.4392156862745098" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iE3-Jv-3vs" customClass="MontserratLabel">
-                                                    <rect key="frame" x="63" y="25" width="219" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iE3-Jv-3vs" userLabel="nameLabel" customClass="MontserratLabel">
+                                                    <rect key="frame" x="63" y="25" width="292" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="utj-aS-CbR"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.25490196078431371" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3J-4E-YSl" customClass="LatoLabel">
-                                                    <rect key="frame" x="63" y="45" width="135" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3J-4E-YSl" userLabel="confLabel" customClass="LatoLabel">
+                                                    <rect key="frame" x="63" y="45" width="162" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="ERP-p2-Vdz"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.32549019607843138" green="0.3529411764705882" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Yfp-gi-q8F" customClass="LatoLabel">
-                                                    <rect key="frame" x="176" y="6" width="114" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Yfp-gi-q8F" userLabel="topAmount Label" customClass="LatoLabel">
+                                                    <rect key="frame" x="257" y="6" width="108" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="6qu-Co-pyz" customClass="LatoLabel">
-                                                    <rect key="frame" x="212" y="45" width="78" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="6qu-Co-pyz" userLabel="bottomAmt Label" customClass="LatoLabel">
+                                                    <rect key="frame" x="233" y="49" width="132" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.32549019610000002" green="0.35294117650000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo_bitcoin.png" translatesAutoresizingMaskIntoConstraints="NO" id="eY0-zc-Tda" userLabel="Image View - photo">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" translatesAutoresizingMaskIntoConstraints="NO" id="eY0-zc-Tda" userLabel="Image View - photo">
                                                     <rect key="frame" x="9" y="11" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="eY0-zc-Tda" secondAttribute="height" multiplier="1:1" id="76l-8e-beM"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="Yfp-gi-q8F" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" constant="6" id="1xW-ny-92R"/>
+                                                <constraint firstItem="iE3-Jv-3vs" firstAttribute="leading" secondItem="eY0-zc-Tda" secondAttribute="trailing" constant="4" id="3gH-9m-cwA"/>
+                                                <constraint firstAttribute="trailing" secondItem="iE3-Jv-3vs" secondAttribute="trailing" constant="20" symbolic="YES" id="5aT-uT-XBH"/>
+                                                <constraint firstItem="eY0-zc-Tda" firstAttribute="leading" secondItem="w2k-NV-yYC" secondAttribute="leading" constant="9" id="AEi-lW-i1Y"/>
+                                                <constraint firstAttribute="trailing" secondItem="Yfp-gi-q8F" secondAttribute="trailing" constant="10" id="Evb-sK-BGY"/>
+                                                <constraint firstItem="eY0-zc-Tda" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" constant="11" id="I81-Z3-FpV"/>
+                                                <constraint firstAttribute="trailing" secondItem="6qu-Co-pyz" secondAttribute="trailing" constant="10" id="JSS-lz-NlE"/>
+                                                <constraint firstAttribute="centerY" secondItem="iE3-Jv-3vs" secondAttribute="centerY" id="Kss-0q-bMM"/>
+                                                <constraint firstItem="6qu-Co-pyz" firstAttribute="leading" secondItem="a3J-4E-YSl" secondAttribute="trailing" constant="8" symbolic="YES" id="R7v-FB-ylm"/>
+                                                <constraint firstAttribute="bottom" secondItem="eY0-zc-Tda" secondAttribute="bottom" constant="10" id="UbC-r5-S0X"/>
+                                                <constraint firstItem="TJ3-SX-hen" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" constant="10" id="cV9-Q9-Z9X"/>
+                                                <constraint firstItem="a3J-4E-YSl" firstAttribute="leading" secondItem="iE3-Jv-3vs" secondAttribute="leading" id="j31-tz-fao"/>
+                                                <constraint firstItem="Yfp-gi-q8F" firstAttribute="leading" secondItem="TJ3-SX-hen" secondAttribute="trailing" constant="8" symbolic="YES" id="jLO-Rp-ngq"/>
+                                                <constraint firstItem="a3J-4E-YSl" firstAttribute="leading" secondItem="TJ3-SX-hen" secondAttribute="leading" id="ltp-BN-I9v"/>
+                                                <constraint firstItem="a3J-4E-YSl" firstAttribute="trailing" secondItem="w2k-NV-yYC" secondAttribute="centerX" multiplier="1.2" id="mmo-NP-soB"/>
+                                                <constraint firstAttribute="bottom" secondItem="6qu-Co-pyz" secondAttribute="bottom" constant="5" id="o45-qT-3KC"/>
+                                                <constraint firstItem="TJ3-SX-hen" firstAttribute="trailing" secondItem="w2k-NV-yYC" secondAttribute="centerX" multiplier="1.33" id="pNG-EO-I3l"/>
+                                                <constraint firstAttribute="bottom" secondItem="a3J-4E-YSl" secondAttribute="bottom" constant="5" id="yhD-HJ-2ct"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
