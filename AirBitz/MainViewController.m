@@ -1303,6 +1303,8 @@ MainViewController *staticMVC;
         _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [_sendViewController resetViews];
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
+        _appMode = APP_MODE_SEND;
+        [self launchViewControllerBasedOnAppMode];
     }
 }
 
@@ -1314,6 +1316,9 @@ MainViewController *staticMVC;
         _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [_requestViewController resetViews];
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_REQUEST];
+        _appMode = APP_MODE_REQUEST;
+        [self launchViewControllerBasedOnAppMode];
+
     }
 }
 

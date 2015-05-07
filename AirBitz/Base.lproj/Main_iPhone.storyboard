@@ -999,7 +999,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <items/>
                             </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1la-Es-fPE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1la-Es-fPE">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1034,6 +1034,9 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="buttonRequestTouched:" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="N7E-84-4cZ"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPo-UX-ZHi">
                                             <rect key="frame" x="188" y="160" width="187" height="50"/>
@@ -1046,6 +1049,9 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="buttonSendTouched:" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="TC5-FR-tBE"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1161,14 +1167,20 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="1la-Es-fPE" firstAttribute="leading" secondItem="AqW-9S-8UJ" secondAttribute="leading" id="5TJ-1m-xT0"/>
                             <constraint firstItem="E65-Du-K3g" firstAttribute="leading" secondItem="AqW-9S-8UJ" secondAttribute="leading" id="H8a-Ka-jjS"/>
                             <constraint firstAttribute="trailing" secondItem="E65-Du-K3g" secondAttribute="trailing" id="Wud-l7-ogf"/>
                             <constraint firstItem="E65-Du-K3g" firstAttribute="top" secondItem="tzc-m9-gCL" secondAttribute="bottom" id="d3c-ie-lJo"/>
+                            <constraint firstAttribute="trailing" secondItem="1la-Es-fPE" secondAttribute="trailing" id="fpH-UY-Boh"/>
+                            <constraint firstItem="1la-Es-fPE" firstAttribute="top" secondItem="AqW-9S-8UJ" secondAttribute="top" id="omf-bw-PHO"/>
+                            <constraint firstAttribute="bottom" secondItem="1la-Es-fPE" secondAttribute="bottom" id="pJG-q3-OZB"/>
                             <constraint firstItem="fQ4-UV-drJ" firstAttribute="top" secondItem="E65-Du-K3g" secondAttribute="bottom" id="vnb-ac-usB"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="balanceViewPlaceholder" destination="3Qw-an-knM" id="uWP-JF-vsP"/>
+                        <outlet property="buttonRequest" destination="6EE-Aw-gGZ" id="uhQ-28-kwq"/>
+                        <outlet property="buttonSend" destination="LPo-UX-ZHi" id="k0T-VH-273"/>
                         <outlet property="searchTextField" destination="ltN-lB-ATB" id="zTA-qc-n5r"/>
                         <outlet property="tableView" destination="1la-Es-fPE" id="4pj-UV-ux5"/>
                     </connections>

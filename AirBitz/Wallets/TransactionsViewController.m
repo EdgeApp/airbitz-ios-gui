@@ -41,7 +41,8 @@
 
 #define CACHE_IMAGE_AGE_SECS (60 * 60) // 60 hour
 
-@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionDetailsViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate, UIGestureRecognizerDelegate>
+@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate,
+        TransactionDetailsViewControllerDelegate, UISearchBarDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate, UIGestureRecognizerDelegate>
 {
 //    BalanceView                         *_balanceView;
     CGRect                              _transactionTableStartFrame;
@@ -153,11 +154,6 @@
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 
-    self.buttonRequest.enabled = false;
-    self.buttonSend.enabled = false;
-    [self.buttonSend setBackgroundColor:[Theme Singleton].colorSendButtonDisabled];
-    [self.buttonRequest setBackgroundColor:[Theme Singleton].colorRequestButtonDisabled];
-
 }
 
 - (void)didTapWalletName: (UIButton *)sender
@@ -175,6 +171,11 @@
     [MainViewController changeNavBarTitleWithButton:self.wallet.strName action:@selector(didTapWalletName:) fromObject:self];
     [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
+
+    self.buttonRequest.enabled = false;
+    self.buttonSend.enabled = false;
+    [self.buttonSend setAlpha:0.4];
+    [self.buttonRequest setAlpha:0.4];
 
     [CoreBridge postToWalletsQueue:^(void) {
         [CoreBridge reloadWallet:self.wallet];
@@ -196,9 +197,8 @@
 //                     animations: ^
                      {
                          CGPoint pt;
-                         pt.x = 0.0;
-                         pt.y = [MainViewController getHeaderHeight];
-                         [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
+                         [self.tableView setContentInset:UIEdgeInsetsMake([MainViewController getHeaderHeight],0,
+                                 [MainViewController getFooterHeight],0)];
 
                          pt.x = 0.0;
                          pt.y = -[MainViewController getHeaderHeight] + self.searchTextField.frame.size.height;
@@ -346,18 +346,16 @@
     {
         self.buttonRequest.enabled = false;
         self.buttonSend.enabled = false;
-        [self.buttonSend setBackgroundColor:[Theme Singleton].colorSendButtonDisabled];
-        [self.buttonRequest setBackgroundColor:[Theme Singleton].colorRequestButtonDisabled];
+        [self.buttonSend setAlpha:0.4];
+        [self.buttonRequest setAlpha:0.4];
     }
     else
     {
         self.buttonRequest.enabled = true;
         self.buttonSend.enabled = true;
-        [self.buttonSend setBackgroundColor:[Theme Singleton].colorSendButton];
-        [self.buttonRequest setBackgroundColor:[Theme Singleton].colorRequestButton];
+        [self.buttonSend setAlpha:1.0];
+        [self.buttonRequest setAlpha:1.0];
     }
-
-
 
 }
 
@@ -986,8 +984,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1)
-    {
+//    if (indexPath.section == 1)
+//    {
 //        if (YES == [self canLeaveWalletNameField])
         {
             [self resignAllResponders];
@@ -1001,7 +999,7 @@
             }
         }
     }
-}
+//}
 
 #pragma mark - BalanceViewDelegates
 
