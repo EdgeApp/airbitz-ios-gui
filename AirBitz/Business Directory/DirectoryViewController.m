@@ -141,7 +141,6 @@ typedef enum eMapDisplayState
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBarSearch;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *footerHeight;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationSearchViewHeight;
