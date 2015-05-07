@@ -289,20 +289,12 @@ MainViewController *staticMVC;
 {
     if (firstLaunch) {
         bool exists = [CoreBridge PINLoginExists];
-        if (exists) {
-            [self showPINLogin:NO];
-        } else {
-            [self showLogin:NO];
-        }
+        [self showLogin:NO withPIN:exists];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
             bool exists = [CoreBridge PINLoginExists];
             dispatch_async(dispatch_get_main_queue(), ^ {
-                if (exists) {
-                    [self showPINLogin:YES];
-                } else {
-                    [self showLogin:YES];
-                }
+                [self showLogin:YES withPIN:exists];
             });
         });
     }
@@ -320,106 +312,59 @@ MainViewController *staticMVC;
 
 }
 
--(void)showLogin:(BOOL)animated
+-(void)showLogin:(BOOL)animated withPIN:(BOOL)bWithPIN
 {
-    [LoginViewController setModePIN:false];
+    [LoginViewController setModePIN:bWithPIN];
     _loginViewController.view.frame = self.view.bounds;
 
     // This *should* be the directoryView. Move it away to the side
     [MainViewController moveSelectedViewController: -_selectedViewController.view.frame.size.width];
+    [MainViewController addChildView:_loginViewController.view];
 
-    [self.view insertSubview:_loginViewController.view aboveSubview:self.tabBar];
-    [self hideTabBarAnimated:animated];
-    [self hideNavBarAnimated:animated];
-    if (animated) {
-        _loginViewController.view.alpha = 0.0;
-        [UIView animateWithDuration:0.25
-                            delay:0.0
-                            options:UIViewAnimationOptionCurveEaseIn
-                        animations:^
-        {
-            _loginViewController.view.alpha = 1.0;
-        }
-                        completion:^(BOOL finished)
-        {
-        }];
-    }
+    [MainViewController hideTabBarAnimated:animated];
+    [MainViewController hideNavBarAnimated:animated];
+    [MainViewController animateFadeIn:_loginViewController.view];
 }
 
--(void)showPINLogin:(BOOL)animated
-{
-    [LoginViewController setModePIN:true];
-    _loginViewController.view.frame = self.view.bounds;
-
-    // This *should* be the directoryView. Move it away to the side
-    [MainViewController moveSelectedViewController: -_selectedViewController.view.frame.size.width];
-
-    [self.view insertSubview:_loginViewController.view aboveSubview:self.tabBar];
-    [self hideTabBarAnimated:animated];
-    [self hideNavBarAnimated:animated];
-    if (animated) {
-        _loginViewController.view.alpha = 0.0;
-        [UIView animateWithDuration:0.25
-                            delay:0.0
-                            options:UIViewAnimationOptionCurveEaseIn
-                        animations:^
-        {
-            _loginViewController.view.alpha = 1.0;
-        }
-                        completion:^(BOOL finished)
-        {
-        }];
-    }
-}
-
-//-(void)updateChildViewSizeForTabBar
-//{
-//	if([_selectedViewController respondsToSelector:@selector(viewBottom:)])
-//	{
-//		[(id)_selectedViewController viewBottom:self.tabBar.frame.origin.y + 5.0];	/* 5.0 covers transparent area at top of tab bar */
-//	}
-//}
-
--(void)showHideTabBar:(NSNotification *)notification
++(void)showHideTabBar:(NSNotification *)notification
 {
 	BOOL showTabBar = ((NSNumber *)notification.object).boolValue;
 	if(showTabBar)
 	{
-		[self showTabBarAnimated:YES];
+		[MainViewController showTabBarAnimated:YES];
 	}
 	else
 	{
-		[self hideTabBarAnimated:YES];
+		[MainViewController hideTabBarAnimated:YES];
 	}
 }
 
--(void)hideTabBarAnimated:(BOOL)animated
++(void)showTabBarAnimated:(BOOL)animated
 {
+    if(animated)
+    {
+        [UIView animateWithDuration:0.25
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
+                         animations:^
+                         {
+                             staticMVC.tabBarBottom.constant = 0;
+                             [staticMVC.view layoutIfNeeded];
 
-	if(animated)
-	{
-		[UIView animateWithDuration:0.25
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
-						 animations:^
-		 {
+                         }
+                         completion:^(BOOL finished)
+                         {
+                             NSLog(@"view: %f, %f, tab bar origin: %f", staticMVC.view.frame.origin.y, staticMVC.view.frame.size.height, staticMVC.tabBar.frame.origin.y);
 
-             self.tabBarBottom.constant = -self.tabBar.frame.size.height;
-
-             [self.view layoutIfNeeded];
-		 }
-		completion:^(BOOL finished)
-		 {
-			NSLog(@"view: %f, %f, tab bar origin: %f", self.view.frame.origin.y, self.view.frame.size.height, self.tabBar.frame.origin.y);
-		 }];
-	}
-	else
-	{
-        self.tabBarBottom.constant = -self.tabBar.frame.size.height;
+                         }];
+    }
+    else
+    {
+        staticMVC.tabBarBottom.constant = 0;
     }
 }
 
--(void)hideNavBarAnimated:(BOOL)animated
++(void)showNavBarAnimated:(BOOL)animated
 {
 
     if(animated)
@@ -430,19 +375,73 @@ MainViewController *staticMVC;
                          animations:^
                          {
 
-                             self.navBarTop.constant = -self.navBar.frame.size.height;
+                             staticMVC.navBarTop.constant = 0;
 
-                             [self.view layoutIfNeeded];
+                             [staticMVC.view layoutIfNeeded];
                          }
                          completion:^(BOOL finished)
                          {
-                             NSLog(@"view: %f, %f, tab bar origin: %f", self.view.frame.origin.y, self.view.frame.size.height, self.tabBar.frame.origin.y);
+                             NSLog(@"view: %f, %f, tab bar origin: %f", staticMVC.view.frame.origin.y, staticMVC.view.frame.size.height, staticMVC.tabBar.frame.origin.y);
                          }];
     }
     else
     {
-        self.navBarTop.constant = -self.navBar.frame.size.height;
-        [self.view layoutIfNeeded];
+        staticMVC.navBarTop.constant = 0;
+        [staticMVC.view layoutIfNeeded];
+    }
+}
+
+
++(void)hideTabBarAnimated:(BOOL)animated
+{
+
+	if(animated)
+	{
+		[UIView animateWithDuration:0.25
+							  delay:0.0
+							options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
+						 animations:^
+		 {
+
+             staticMVC.tabBarBottom.constant = -staticMVC.tabBar.frame.size.height;
+
+             [staticMVC.view layoutIfNeeded];
+		 }
+		completion:^(BOOL finished)
+		 {
+			NSLog(@"view: %f, %f, tab bar origin: %f", staticMVC.view.frame.origin.y, staticMVC.view.frame.size.height, staticMVC.tabBar.frame.origin.y);
+		 }];
+	}
+	else
+	{
+        staticMVC.tabBarBottom.constant = -staticMVC.tabBar.frame.size.height;
+    }
+}
+
++(void)hideNavBarAnimated:(BOOL)animated
+{
+
+    if(animated)
+    {
+        [UIView animateWithDuration:0.25
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
+                         animations:^
+                         {
+
+                             staticMVC.navBarTop.constant = -staticMVC.navBar.frame.size.height;
+
+                             [staticMVC.view layoutIfNeeded];
+                         }
+                         completion:^(BOOL finished)
+                         {
+                             NSLog(@"view: %f, %f, tab bar origin: %f", staticMVC.view.frame.origin.y, staticMVC.view.frame.size.height, staticMVC.tabBar.frame.origin.y);
+                         }];
+    }
+    else
+    {
+        staticMVC.navBarTop.constant = -staticMVC.navBar.frame.size.height;
+        [staticMVC.view layoutIfNeeded];
     }
 }
 
@@ -598,59 +597,6 @@ MainViewController *staticMVC;
 	}
 }
 
--(void)showTabBarAnimated:(BOOL)animated
-{
-	if(animated)
-	{
-		[UIView animateWithDuration:0.25
-							  delay:0.0
-							options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
-						 animations:^
-		 {
-             self.tabBarBottom.constant = 0;
-             [self.view layoutIfNeeded];
-
-		 }
-		 completion:^(BOOL finished)
-		 {
-			NSLog(@"view: %f, %f, tab bar origin: %f", self.view.frame.origin.y, self.view.frame.size.height, self.tabBar.frame.origin.y);
-
-		 }];
-	}
-	else
-	{
-        self.tabBarBottom.constant = 0;
-	}
-}
-
--(void)showNavBarAnimated:(BOOL)animated
-{
-
-    if(animated)
-    {
-        [UIView animateWithDuration:0.25
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
-                         animations:^
-                         {
-
-                             self.navBarTop.constant = 0;
-
-                             [self.view layoutIfNeeded];
-                         }
-                         completion:^(BOOL finished)
-                         {
-                             NSLog(@"view: %f, %f, tab bar origin: %f", self.view.frame.origin.y, self.view.frame.size.height, self.tabBar.frame.origin.y);
-                         }];
-    }
-    else
-    {
-        self.navBarTop.constant = 0;
-        [self.view layoutIfNeeded];
-    }
-}
-
-
 - (void)displayNextNotification
 {
     if (!_notificationInfoView && [[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
@@ -759,8 +705,8 @@ MainViewController *staticMVC;
 {
 	_appMode = APP_MODE_DIRECTORY;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
-	[self showTabBarAnimated:YES];
-    [self showNavBarAnimated:YES];
+	[MainViewController showTabBarAnimated:YES];
+    [MainViewController showNavBarAnimated:YES];
 	[_loginViewController.view removeFromSuperview];
 }
 
@@ -783,8 +729,8 @@ MainViewController *staticMVC;
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
 	[_loginViewController.view removeFromSuperview];
-	[self showTabBarAnimated:YES];
-    [self showNavBarAnimated:YES];
+	[MainViewController showTabBarAnimated:YES];
+    [MainViewController showNavBarAnimated:YES];
 
     [self launchViewControllerBasedOnAppMode];
 
@@ -889,11 +835,6 @@ MainViewController *staticMVC;
             otherButtonTitles:@"YES", @"CHANGE", nil];
         [_passwordIncorrectAlert show];
     }
-}
-
-- (void)loginViewControllerDidSwitchAccount
-{
-    [self showPINLogin:NO];
 }
 
 - (void)checkUserReview
@@ -1018,7 +959,7 @@ MainViewController *staticMVC;
 
     if([LocalSettings controller].bMerchantMode)
     {
-        [self showTabBarAnimated:NO];
+        [MainViewController showTabBarAnimated:NO];
     }
     else
     {
@@ -1070,7 +1011,7 @@ MainViewController *staticMVC;
     }
     completion:^(BOOL finished)
     {
-        [self showTabBarAnimated:YES];
+        [MainViewController showTabBarAnimated:YES];
     }];
 }
 
@@ -1096,16 +1037,16 @@ MainViewController *staticMVC;
 {
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
-    [self showTabBarAnimated:YES];
-    [self showNavBarAnimated:YES];
+    [MainViewController showTabBarAnimated:YES];
+    [MainViewController showNavBarAnimated:YES];
 
 
     // After login, reset all the main views
     [self loadUserViews];
     
 	[_loginViewController.view removeFromSuperview];
-	[self showTabBarAnimated:YES];
-    [self showNavBarAnimated:YES];
+	[MainViewController showTabBarAnimated:YES];
+    [MainViewController showNavBarAnimated:YES];
 	[self launchViewControllerBasedOnAppMode];
 
     // if the user has a password, increment PIN login count
@@ -1438,8 +1379,8 @@ MainViewController *staticMVC;
             _addressRequestController.url = uri;
             _addressRequestController.delegate = self;
             [Util animateController:_addressRequestController parentController:self];
-            [self showTabBarAnimated:YES];
-            [self showNavBarAnimated:YES];
+            [MainViewController showTabBarAnimated:YES];
+            [MainViewController showNavBarAnimated:YES];
 
             _uri = nil;
         } else {
@@ -1454,8 +1395,8 @@ MainViewController *staticMVC;
         _addressRequestController = nil;
     }];
     _uri = nil;
-    [self showTabBarAnimated:NO];
-    [self showNavBarAnimated:NO];
+    [MainViewController showTabBarAnimated:NO];
+    [MainViewController showNavBarAnimated:NO];
 
 }
 
@@ -1468,8 +1409,8 @@ MainViewController *staticMVC;
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
     [self resetViews:notification];
-    [self showTabBarAnimated:NO];
-    [self showNavBarAnimated:NO];
+    [MainViewController showTabBarAnimated:NO];
+    [MainViewController showNavBarAnimated:NO];
 
 }
 
@@ -1605,5 +1546,90 @@ MainViewController *staticMVC;
 {
     return staticMVC.navBar.frame.size.height;
 }
+
++ (void)addChildView: (UIView *)view
+{
+    [staticMVC.view insertSubview:view aboveSubview:staticMVC.tabBar];
+}
+
++ (void)animateFadeIn:(UIView *)view
+{
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [view setAlpha:0.0];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         [view setAlpha:1.0];
+                     }
+                     completion:^(BOOL finished) {
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+//                         cb();
+                     }];
+}
+
++ (void)animateFadeOut:(UIView *)view
+{
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [view setAlpha:1.0];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         [view setAlpha:0.0];
+                     }
+                     completion:^(BOOL finished) {
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+//                         cb();
+                     }];
+}
+
++ (void)animateIn:(NSString *)identifier
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:identifier];
+    [MainViewController animateView:controller.view];
+}
+
++ (void)animateView:(UIView *)view
+{
+    CGRect frame = staticMVC.view.bounds;
+    frame.origin.x = frame.size.width;
+    view.frame = frame;
+
+    [staticMVC.view insertSubview:view belowSubview:staticMVC.tabBar];
+
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+                     {
+                         view.frame = staticMVC.view.bounds;
+                     }
+                     completion:^(BOOL finished)
+                     {
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                     }];
+}
+
++ (void)animateOut:(UIView *)view complete:(void(^)(void))cb
+{
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         CGRect frame = staticMVC.view.bounds;
+                         frame.origin.x = frame.size.width;
+                         view.frame = frame;
+                     }
+                     completion:^(BOOL finished) {
+                         [view removeFromSuperview];
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                         cb();
+                     }];
+}
+
 
 @end

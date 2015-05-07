@@ -13,6 +13,7 @@
 #import "Util.h"
 #import <AddressBookUI/AddressBookUI.h>
 #import <AVFoundation/AVFoundation.h>
+#import "MainViewController.h"
 
 
 @interface SignUpManager () 
@@ -48,6 +49,7 @@
 {
     _bHasCameraAccess = [self haveRequestCamera];
     _bHasContactsAccess = [self haveRequestedContacts];
+    [MainViewController showNavBarAnimated:YES];
     [self launchUsernameController];
 }
 
@@ -102,7 +104,7 @@
     [_signupHandleController.view removeFromSuperview];
     [_signupCameraController.view removeFromSuperview];
     [_signupContactController.view removeFromSuperview];
-    [Util animateOut:_signupWriteItController parentController:_parentController complete:^(void) {
+    [MainViewController animateOut:_signupWriteItController.view complete:^(void) {
         _signupUsernameController = nil;
         _current = nil;
     }];
@@ -113,15 +115,17 @@
 
 }
 
-- (void)back
+- (void)back:(id)sender
 {
     if (_current == _signupUsernameController) {
-        [Util animateOut:_signupUsernameController parentController:_parentController complete:^(void) {
+        [MainViewController hideNavBarAnimated:YES];
+        [MainViewController animateOut:_signupUsernameController.view complete:^(void) {
             _signupUsernameController = nil;
             _current = nil;
+            [self.delegate signupAborted];
         }];
     } else if (_current == _signupPasswordController) {
-        [Util animateOut:_signupPasswordController parentController:_parentController complete:^(void) {
+        [MainViewController animateOut:_signupPasswordController.view complete:^(void) {
             _signupPasswordController = nil;
             _current = _signupUsernameController;
             [_current viewWillAppear:true];
@@ -135,7 +139,9 @@
     _signupUsernameController = (SignUpUsernameController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpUsernameController"];
     _signupUsernameController.manager = self;
     _current = _signupUsernameController;
-    [Util animateController:_signupUsernameController parentController:_parentController];
+    [MainViewController changeNavBarTitle:@"Sign Up"];
+    [MainViewController changeNavBarSide:@"EXIT" side:NAV_BAR_LEFT enable:true action:@selector(back:) fromObject:self];
+    [MainViewController animateView:_signupUsernameController.view];
 }
 
 - (void)launchPasswordController

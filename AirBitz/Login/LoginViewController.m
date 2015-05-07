@@ -410,6 +410,8 @@ static BOOL bInitialized = false;
     if (self.usernameSelector.textField.text) {
         _signupManager.strInUserName = self.usernameSelector.textField.text;
     }
+    [MainViewController animateFadeOut:self.view];
+
     [_signupManager startSignup];
 }
 
@@ -920,7 +922,7 @@ static BOOL bInitialized = false;
 
 -(void)signupAborted
 {
-    [self finishIfLoggedIn:YES];
+    [MainViewController animateFadeIn:self.view];
 }
 
 -(void)signupFinished

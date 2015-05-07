@@ -18,7 +18,20 @@ typedef enum eNavBarSide
 
 @interface MainViewController : UIViewController
 
++ (void)addChildView: (UIView *)view;
++ (void)animateFadeIn:(UIView *)view;
++ (void)animateFadeOut:(UIView *)view;
+
++ (void)animateIn:(NSString *)identifier;
++ (void)animateView:(UIView *)view;
++ (void)animateOut:(UIView *)view complete:(void(^)(void))cb;
+
 +(void)changeNavBarTitle: (NSString*) titleText;
++(void)showHideTabBar:(NSNotification *)notification;
++(void)showTabBarAnimated:(BOOL)animated;
++(void)showNavBarAnimated:(BOOL)animated;
++(void)hideTabBarAnimated:(BOOL)animated;
++(void)hideNavBarAnimated:(BOOL)animated;
 +(void)changeNavBarTitleWithButton: (NSString*) titleText action:(SEL)func fromObject:(id) object;
 +(void)changeNavBarTitleWithImage: (UIImage *) titleImage;
 +(void)changeNavBarSide: (NSString*) titleText side:(tNavBarSide)navBarSide enable:(BOOL)enable action:(SEL)func fromObject:(id) object;

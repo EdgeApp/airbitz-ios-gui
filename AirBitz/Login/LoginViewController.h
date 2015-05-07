@@ -26,7 +26,6 @@
 @required
 -(void)loginViewControllerDidAbort;
 -(void)loginViewControllerDidLogin:(BOOL)bNewAccount;
--(void)loginViewControllerDidSwitchAccount;
 -(void)LoginViewControllerDidPINLogin;
 
 @end
