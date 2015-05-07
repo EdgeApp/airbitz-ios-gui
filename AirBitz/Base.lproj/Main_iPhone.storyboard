@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Lato-Regular.ttf">
@@ -970,16 +971,16 @@
                             <constraint firstAttribute="trailing" secondItem="Bzx-4y-6VM" secondAttribute="trailing" id="3nY-XD-RWf"/>
                             <constraint firstItem="w7G-E8-m3C" firstAttribute="leading" secondItem="bTU-z5-MKB" secondAttribute="leading" id="A9N-bf-DMG"/>
                             <constraint firstItem="w7G-E8-m3C" firstAttribute="top" secondItem="jhg-Mk-M7b" secondAttribute="bottom" constant="176" id="IhL-vg-DSi"/>
-                            <constraint firstItem="Bzx-4y-6VM" firstAttribute="top" secondItem="jhg-Mk-M7b" secondAttribute="bottom" constant="46" id="MOQ-6V-LkM"/>
                             <constraint firstAttribute="centerX" secondItem="6Yg-1c-9dj" secondAttribute="centerX" id="azB-7G-ghO"/>
+                            <constraint firstItem="Bzx-4y-6VM" firstAttribute="top" secondItem="bTU-z5-MKB" secondAttribute="topMargin" constant="66" id="c7R-Ue-fNy"/>
                             <constraint firstAttribute="trailing" secondItem="w7G-E8-m3C" secondAttribute="trailing" id="dpr-Lz-sYn"/>
                             <constraint firstItem="Bzx-4y-6VM" firstAttribute="leading" secondItem="bTU-z5-MKB" secondAttribute="leading" id="uui-bW-HO2"/>
                             <constraint firstItem="6Yg-1c-9dj" firstAttribute="top" secondItem="jhg-Mk-M7b" secondAttribute="bottom" constant="72" id="x2l-Ph-ni9"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Vew-Wr-i4K"/>
                     <connections>
                         <outlet property="balanceViewPlaceholder" destination="6Yg-1c-9dj" id="pOU-nS-3UF"/>
+                        <outlet property="walletMakerTop" destination="c7R-Ue-fNy" id="CKW-lA-MHI"/>
                         <outlet property="walletMakerView" destination="Bzx-4y-6VM" id="RsE-Lm-43W"/>
                         <outlet property="walletsTable" destination="w7G-E8-m3C" id="ZYa-Zf-mib"/>
                     </connections>

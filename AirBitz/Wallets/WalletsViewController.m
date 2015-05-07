@@ -33,7 +33,6 @@
 	BOOL                        _archiveCollapsed;
 	double                      _currencyConversionFactor;
 	
-	CGRect                      _originalWalletMakerFrame;
 	UIButton                    *_blockingButton;
 	BOOL                        _walletMakerVisible;
     OfflineWalletViewController *_offlineWalletViewController;
@@ -42,6 +41,7 @@
 
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *walletMakerTop;
 @property (nonatomic, strong) NSMutableArray *arrayWallets;
 @property (nonatomic, strong) NSMutableArray *arrayArchivedWallets;
 @property (nonatomic, strong) WalletHeaderView         *activeWalletsHeaderView;
@@ -84,12 +84,9 @@
     [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
-    CGRect frame = self.walletMakerView.frame;
-	_originalWalletMakerFrame = frame;
-	frame.size.height = 0;
-	self.walletMakerView.frame = frame;
 	self.walletMakerView.hidden = YES;
     self.walletMakerView.delegate = self;
+    self.walletMakerTop.constant = -self.walletMakerView.layer.frame.size.height;
 	
     self.activeWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"WALLETS", @"title of active wallets table")
                                                             collapse:NO];
@@ -324,8 +321,10 @@
 							options:UIViewAnimationOptionCurveEaseOut
 						 animations:^
 		 {
-			 self.walletMakerView.frame = frame;
-		 }
+             self.walletMakerTop.constant = -self.walletMakerView.layer.frame.size.height;
+             [self.view layoutIfNeeded];
+
+         }
          completion:^(BOOL finished)
 		 {
 			 self.walletMakerView.hidden = YES;
@@ -465,7 +464,8 @@
 							options:UIViewAnimationOptionCurveEaseOut
 						 animations:^
 		 {
-			 self.walletMakerView.frame = _originalWalletMakerFrame;
+             self.walletMakerTop.constant = [MainViewController getHeaderHeight];
+             [self.view layoutIfNeeded];
 		 }
                          completion:^(BOOL finished)
 		 {
