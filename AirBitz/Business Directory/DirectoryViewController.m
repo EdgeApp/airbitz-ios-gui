@@ -181,6 +181,8 @@ static bool bInitialized = false;
 
     self.dividerView.delegate = self;
 
+    [self setupNavBar];
+
     self.searchBarLocation.placeholder = NSLocalizedString(@"City, State/Province, or Country", @"City, State/Province, or Country placeholder");
 
     //
@@ -188,10 +190,6 @@ static bool bInitialized = false;
     //
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.dividerView.frame.size.width, [MainViewController getFooterHeight])];
     self.tableView.tableFooterView = footerView;
-
-    [MainViewController changeNavBarTitle:@"Directory"];
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
     currentPage = 0;
 
@@ -222,6 +220,13 @@ static bool bInitialized = false;
             }
         });
     }
+}
+
+- (void) setupNavBar
+{
+    [MainViewController changeNavBarTitleWithImage:[UIImage imageWithContentsOfFile:@"logo.png"]];
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 }
 
 - (void)resetTableHideSearch
@@ -1337,38 +1342,6 @@ static bool bInitialized = false;
     }];
 }
 
-/*
--(void)launchBusinessDetails
-{
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-    businessDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"BusinessDetailsViewController"];
-    
-    
-    //businessDetailsController.businessGeneralInfo = selectedBusinessInfo;
-    businessDetailsController.bizId = [selectedBusinessInfo objectForKey:@"bizId"];
-    businessDetailsController.delegate = self;
-    
-    CGRect frame = self.view.bounds;
-    frame.origin.x = frame.size.width;
-    businessDetailsController.view.frame = frame;
-    [self.view addSubview:businessDetailsController.view];
-    
-    
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-     {
-         businessDetailsController.view.frame = self.view.bounds;
-     }
-     completion:^(BOOL finished)
-     {
-         //self.dividerView.alpha = 0.0;
-     }];
-     
-}
-*/
-
 - (void)dismissBusinessDetails
 {
     [UIView animateWithDuration: 0.35
@@ -1384,6 +1357,7 @@ static bool bInitialized = false;
     {
         [businessDetailsController.view removeFromSuperview];
         businessDetailsController = nil;
+        [self setupNavBar];
     }];
 }
 
@@ -2378,6 +2352,7 @@ static bool bInitialized = false;
         {
             [businessDetailsController.view removeFromSuperview];
             businessDetailsController = nil;
+            [self setupNavBar];
         }
     }
     //self.tableView.canCancelContentTouches = YES;
@@ -2398,6 +2373,7 @@ static bool bInitialized = false;
     //NSLog(@"Removing business details controller");
     [businessDetailsController.view removeFromSuperview];
     businessDetailsController = nil;
+    [self setupNavBar];
 }
 
 @end

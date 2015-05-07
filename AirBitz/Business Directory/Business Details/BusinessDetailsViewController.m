@@ -104,9 +104,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = SINGLE_ROW_CELL_HEIGHT; // set to whatever your "average" cell height is
 
-    [MainViewController changeNavBarTitle:@"Directory"];
     [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:false action:@selector(info:) fromObject:self];
 
     [self.tableView setContentInset:UIEdgeInsetsMake([MainViewController getHeaderHeight],0,[MainViewController getFooterHeight],0)];
 
