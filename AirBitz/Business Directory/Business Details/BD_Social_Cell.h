@@ -22,6 +22,6 @@ typedef NS_ENUM(NSUInteger, SocialType) {
 
 + (NSNumber *)getSocialTypeAsEnum:(NSString *)type;
 + (NSString *)getSocialTypeAsString:(NSNumber *)type;
-+ (UIImage *)getSocialTypeImage:(NSNumber *)type;
++ (NSString *)getSocialTypeImage:(NSNumber *)type;
 
 @end

@@ -689,7 +689,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
             if (socialType)
             {
                 commonCell.leftLabel.text = [BD_Social_Cell getSocialTypeAsString:socialType];
-                commonCell.cellIcon.image = [BD_Social_Cell getSocialTypeImage:socialType];
+                commonCell.cellIcon.image = [UIImage imageNamed:[BD_Social_Cell getSocialTypeImage:socialType]];
                 break;
             }
         }

@@ -27,10 +27,10 @@ static NSDictionary *_socialTypeAsString;
             @"yelp" : [NSNumber numberWithInt:kYelp]
         };
         _socialTypeImages = @{
-            [NSNumber numberWithInt:kFacebook] : [UIImage imageNamed:@"bd_icon_facebook"],
-            [NSNumber numberWithInt:kTwitter] : [UIImage imageNamed:@"bd_icon_twitter"],
-            [NSNumber numberWithInt:kFoursquare] : [UIImage imageNamed:@"bd_icon_foursquare"],
-            [NSNumber numberWithInt:kYelp] : [UIImage imageNamed:@"bd_icon_yelp"],
+            [NSNumber numberWithInt:kFacebook] : @"bd_icon_facebook",
+            [NSNumber numberWithInt:kTwitter] : @"bd_icon_twitter",
+            [NSNumber numberWithInt:kFoursquare] : @"bd_icon_foursquare",
+            [NSNumber numberWithInt:kYelp] : @"bd_icon_yelp",
         };
         _socialTypeAsString = @{
             [NSNumber numberWithInt:kFacebook] : @"Facebook",
@@ -71,7 +71,7 @@ static NSDictionary *_socialTypeAsString;
  * Return the image associated with the social media type
  * SocialType social : Enum version of the social media type
  */
-+ (UIImage *)getSocialTypeImage:(NSNumber *)type
++ (NSString *)getSocialTypeImage:(NSNumber *)type
 {
     return [_socialTypeImages objectForKey:type];
 }
