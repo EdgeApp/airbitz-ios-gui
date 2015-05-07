@@ -153,10 +153,6 @@
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 
-    [MainViewController changeNavBarTitleWithButton:self.wallet.strName action:@selector(didTapWalletName:) fromObject:self];
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
-
     self.buttonRequest.enabled = false;
     self.buttonSend.enabled = false;
     [self.buttonSend setBackgroundColor:[Theme Singleton].colorSendButtonDisabled];
@@ -173,15 +169,12 @@
 {
     [super viewWillAppear:animated];
 
-    CGPoint pt;
-    pt.x = 0.0;
-    pt.y = [MainViewController getHeaderHeight];
-    [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
+    [self performSelector:@selector(resetTableHideSearch) withObject:nil afterDelay:0.0f];
+//    [self resetTableHideSearch];
 
-    pt.x = 0.0;
-    pt.y = -[MainViewController getHeaderHeight] + self.searchTextField.frame.size.height;
-    [self.tableView setContentOffset:pt animated:true];
-
+    [MainViewController changeNavBarTitleWithButton:self.wallet.strName action:@selector(didTapWalletName:) fromObject:self];
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
     [CoreBridge postToWalletsQueue:^(void) {
         [CoreBridge reloadWallet:self.wallet];
@@ -192,6 +185,28 @@
             [self updateBalanceView];
         });
     }];
+
+}
+
+- (void)resetTableHideSearch
+{
+//    [UIView animateWithDuration: 0.35
+//                          delay: 0.0
+//                        options: UIViewAnimationOptionCurveEaseInOut
+//                     animations: ^
+                     {
+                         CGPoint pt;
+                         pt.x = 0.0;
+                         pt.y = [MainViewController getHeaderHeight];
+                         [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
+
+                         pt.x = 0.0;
+                         pt.y = -[MainViewController getHeaderHeight] + self.searchTextField.frame.size.height;
+                         [self.tableView setContentOffset:pt animated:true];
+                     }
+//                     completion: ^(BOOL finished)
+//                     {
+//                     }];
 
 }
 

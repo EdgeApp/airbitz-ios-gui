@@ -1137,6 +1137,7 @@
                     </view>
                     <connections>
                         <outlet property="balanceViewPlaceholder" destination="3Qw-an-knM" id="uWP-JF-vsP"/>
+                        <outlet property="searchTextField" destination="ltN-lB-ATB" id="zTA-qc-n5r"/>
                         <outlet property="tableView" destination="1la-Es-fPE" id="4pj-UV-ux5"/>
                     </connections>
                 </viewController>
