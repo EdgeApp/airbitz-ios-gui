@@ -913,10 +913,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="294" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EbY-4p-h0Y">
-                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
-                                                    <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0QH-Cd-JVq" userLabel="Label - Wallet Name" customClass="MontserratLabel">
                                                     <rect key="frame" x="20" y="4" width="249" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -936,22 +932,17 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="0QH-Cd-JVq" firstAttribute="top" secondItem="foq-5o-Sh5" secondAttribute="top" constant="4" id="2bL-eD-fd8"/>
-                                                <constraint firstAttribute="bottom" secondItem="EbY-4p-h0Y" secondAttribute="bottom" id="30T-Dj-4po"/>
                                                 <constraint firstAttribute="bottom" secondItem="bu9-4x-j6f" secondAttribute="bottom" constant="4" id="55R-Yz-25y"/>
                                                 <constraint firstItem="bu9-4x-j6f" firstAttribute="leading" secondItem="0QH-Cd-JVq" secondAttribute="trailing" constant="8" symbolic="YES" id="65x-pj-yoi"/>
                                                 <constraint firstItem="0QH-Cd-JVq" firstAttribute="leading" secondItem="foq-5o-Sh5" secondAttribute="leading" constant="20" symbolic="YES" id="73H-Kn-SdI"/>
                                                 <constraint firstAttribute="trailing" secondItem="bu9-4x-j6f" secondAttribute="trailing" constant="20" symbolic="YES" id="X64-Io-ykO"/>
-                                                <constraint firstItem="EbY-4p-h0Y" firstAttribute="leading" secondItem="foq-5o-Sh5" secondAttribute="leading" id="dJd-4X-n3n"/>
-                                                <constraint firstAttribute="trailing" secondItem="EbY-4p-h0Y" secondAttribute="trailing" id="g87-hX-4Wa"/>
                                                 <constraint firstItem="bu9-4x-j6f" firstAttribute="top" secondItem="foq-5o-Sh5" secondAttribute="top" constant="4" id="h2H-6m-SHj"/>
                                                 <constraint firstAttribute="bottom" secondItem="0QH-Cd-JVq" secondAttribute="bottom" constant="4" id="oTu-fG-XnI"/>
-                                                <constraint firstItem="EbY-4p-h0Y" firstAttribute="top" secondItem="foq-5o-Sh5" secondAttribute="top" id="t2A-73-dZm"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="amount" destination="bu9-4x-j6f" id="3TO-VX-L1h"/>
-                                            <outlet property="bkgImage" destination="EbY-4p-h0Y" id="qPl-ck-5PZ"/>
                                             <outlet property="name" destination="0QH-Cd-JVq" id="cwI-Ys-eCC"/>
                                         </connections>
                                     </tableViewCell>

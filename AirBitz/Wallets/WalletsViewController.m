@@ -718,7 +718,6 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
                       [self.arrayWallets objectAtIndex:row] :
                       [self.arrayArchivedWallets objectAtIndex:row]);
 
-    cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.6];
     cell.name.backgroundColor = [UIColor clearColor];
     cell.amount.backgroundColor = [UIColor clearColor];
 
