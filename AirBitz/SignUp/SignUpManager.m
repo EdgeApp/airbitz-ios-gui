@@ -104,7 +104,7 @@
     [_signupHandleController.view removeFromSuperview];
     [_signupCameraController.view removeFromSuperview];
     [_signupContactController.view removeFromSuperview];
-    [MainViewController animateOut:_signupWriteItController.view complete:^(void) {
+    [MainViewController animateOut:_signupWriteItController.view withBlur:NO complete:^(void) {
         _signupUsernameController = nil;
         _current = nil;
     }];
@@ -119,13 +119,13 @@
 {
     if (_current == _signupUsernameController) {
         [MainViewController hideNavBarAnimated:YES];
-        [MainViewController animateOut:_signupUsernameController.view complete:^(void) {
+        [MainViewController animateOut:_signupUsernameController.view withBlur:YES complete:^(void) {
             _signupUsernameController = nil;
             _current = nil;
             [self.delegate signupAborted];
         }];
     } else if (_current == _signupPasswordController) {
-        [MainViewController animateOut:_signupPasswordController.view complete:^(void) {
+        [MainViewController animateOut:_signupPasswordController.view withBlur:NO complete:^(void) {
             _signupPasswordController = nil;
             _current = _signupUsernameController;
             [_current viewWillAppear:true];
@@ -141,7 +141,7 @@
     _current = _signupUsernameController;
     [MainViewController changeNavBarTitle:@"Sign Up"];
     [MainViewController changeNavBarSide:@"EXIT" side:NAV_BAR_LEFT enable:true action:@selector(back:) fromObject:self];
-    [MainViewController animateView:_signupUsernameController.view];
+    [MainViewController animateView:_signupUsernameController.view withBlur:YES];
 }
 
 - (void)launchPasswordController

@@ -1584,20 +1584,23 @@ MainViewController *staticMVC;
                      }];
 }
 
-+ (void)animateIn:(NSString *)identifier
++ (void)animateIn:(NSString *)identifier withBlur:(BOOL)withBlur
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
     UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:identifier];
-    [MainViewController animateView:controller.view];
+    [MainViewController animateView:controller.view withBlur:withBlur];
 }
 
-+ (void)animateView:(UIView *)view
++ (void)animateView:(UIView *)view withBlur:(BOOL)withBlur
 {
     CGRect frame = staticMVC.view.bounds;
     frame.origin.x = frame.size.width;
     view.frame = frame;
 
     [staticMVC.view insertSubview:view belowSubview:staticMVC.tabBar];
+
+    if (withBlur)
+        staticMVC.blurViewLeft.constant = staticMVC.view.bounds.size.width;
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.35
@@ -1606,6 +1609,9 @@ MainViewController *staticMVC;
                      animations:^
                      {
                          view.frame = staticMVC.view.bounds;
+                         if (withBlur)
+                             staticMVC.blurViewLeft.constant = 0;
+                         [staticMVC.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished)
                      {
@@ -1613,9 +1619,13 @@ MainViewController *staticMVC;
                      }];
 }
 
-+ (void)animateOut:(UIView *)view complete:(void(^)(void))cb
++ (void)animateOut:(UIView *)view withBlur:(BOOL)withBlur complete:(void(^)(void))cb
 {
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+
+    if (withBlur)
+        staticMVC.blurViewLeft.constant = 0;
+
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
@@ -1623,6 +1633,11 @@ MainViewController *staticMVC;
                          CGRect frame = staticMVC.view.bounds;
                          frame.origin.x = frame.size.width;
                          view.frame = frame;
+
+                         if (withBlur)
+                             staticMVC.blurViewLeft.constant = staticMVC.view.bounds.size.width;
+                         [staticMVC.view layoutIfNeeded];
+
                      }
                      completion:^(BOOL finished) {
                          [view removeFromSuperview];

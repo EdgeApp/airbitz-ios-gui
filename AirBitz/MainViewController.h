@@ -22,9 +22,9 @@ typedef enum eNavBarSide
 + (void)animateFadeIn:(UIView *)view;
 + (void)animateFadeOut:(UIView *)view;
 
-+ (void)animateIn:(NSString *)identifier;
-+ (void)animateView:(UIView *)view;
-+ (void)animateOut:(UIView *)view complete:(void(^)(void))cb;
++ (void)animateIn:(NSString *)identifier withBlur:(BOOL)withBlur;
++ (void)animateView:(UIView *)view withBlur:(BOOL)withBlur;
++ (void)animateOut:(UIView *)view withBlur:(BOOL)withBlur complete:(void(^)(void))cb;
 
 +(void)changeNavBarTitle: (NSString*) titleText;
 +(void)showHideTabBar:(NSNotification *)notification;
