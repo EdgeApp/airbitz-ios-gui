@@ -992,56 +992,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fOc-BT-zsB">
-                                <rect key="frame" x="0.0" y="64" width="320" height="55"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="WMa-Cy-YRr">
-                                        <rect key="frame" x="40" y="8" width="269" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="tIs-Cz-ZD5" id="4Db-PZ-pQX"/>
-                                        </connections>
-                                    </textField>
-                                </subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E65-Du-K3g">
+                                <rect key="frame" x="0.0" y="312" width="375" height="44"/>
+                                <items/>
+                            </toolbar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1la-Es-fPE">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MFx-OC-ubq" userLabel="Button - Export">
-                                <rect key="frame" x="12" y="131" width="37" height="37"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" backgroundImage="btn_export.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonExportTouched:" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="Aq6-md-LtJ"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x1H-Vr-RsO" customClass="StylizedTextField">
-                                <rect key="frame" x="65" y="134" width="191" height="30"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
-                                <connections>
-                                    <outlet property="delegate" destination="tIs-Cz-ZD5" id="ikk-Rt-0cG"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wMi-Kk-9gE" userLabel="Button - Search">
-                                <rect key="frame" x="270" y="130" width="42" height="40"/>
-                                <state key="normal" image="btn_search.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonSearchTouched:" destination="tIs-Cz-ZD5" eventType="touchUpInside" id="5Cj-Va-fzz"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Qw-an-knM">
-                                <rect key="frame" x="13" y="176" width="294" height="82"/>
-                                <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                            </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1la-Es-fPE">
-                                <rect key="frame" x="0.0" y="274" width="320" height="207"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="Dyb-xZ-KkC" userLabel="View -header">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ltN-lB-ATB">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="XLx-fO-yAV"/>
+                                            </constraints>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </searchBar>
+                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Qw-an-knM" userLabel="View -balance">
+                                            <rect key="frame" x="40" y="60" width="294" height="82"/>
+                                            <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="294" id="vhx-hJ-oeV"/>
+                                                <constraint firstAttribute="height" constant="82" id="vmj-gk-ZkY"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="centerX" secondItem="3Qw-an-knM" secondAttribute="centerX" id="FxR-lB-Fqs"/>
+                                        <constraint firstItem="3Qw-an-knM" firstAttribute="top" secondItem="ltN-lB-ATB" secondAttribute="bottom" symbolic="YES" id="PWc-Zf-hdR"/>
+                                        <constraint firstAttribute="trailing" secondItem="ltN-lB-ATB" secondAttribute="trailing" id="SlL-fh-S2n"/>
+                                        <constraint firstItem="ltN-lB-ATB" firstAttribute="top" secondItem="Dyb-xZ-KkC" secondAttribute="top" id="glF-26-Ym8"/>
+                                        <constraint firstItem="ltN-lB-ATB" firstAttribute="leading" secondItem="Dyb-xZ-KkC" secondAttribute="leading" id="ilj-v6-bwr"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionCell" rowHeight="72" id="VE0-S6-Hzh" customClass="TransactionCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="72"/>
@@ -1050,11 +1038,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G0y-XL-Bp2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TJ3-SX-hen" customClass="MontserratLabel">
                                                     <rect key="frame" x="63" y="10" width="99" height="13"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -1077,9 +1060,6 @@
                                                     <color key="textColor" red="0.32549019607843138" green="0.3529411764705882" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="wro-z9-Bpf">
-                                                    <rect key="frame" x="290" y="26" width="22" height="22"/>
-                                                </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Yfp-gi-q8F" customClass="LatoLabel">
                                                     <rect key="frame" x="176" y="6" width="114" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1106,7 +1086,6 @@
                                             <outlet property="addressLabel" destination="iE3-Jv-3vs" id="EQr-Le-RYd"/>
                                             <outlet property="amountLabel" destination="Yfp-gi-q8F" id="npZ-Bm-LdE"/>
                                             <outlet property="balanceLabel" destination="6qu-Co-pyz" id="CSv-ph-YjI"/>
-                                            <outlet property="bkgImage" destination="G0y-XL-Bp2" id="WAJ-Uf-JNa"/>
                                             <outlet property="confirmationLabel" destination="a3J-4E-YSl" id="K4R-UD-LQe"/>
                                             <outlet property="dateLabel" destination="TJ3-SX-hen" id="hrO-GV-he8"/>
                                             <outlet property="imagePhoto" destination="eY0-zc-Tda" id="cjk-H4-3VD"/>
@@ -1115,16 +1094,17 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="E65-Du-K3g" firstAttribute="leading" secondItem="AqW-9S-8UJ" secondAttribute="leading" id="H8a-Ka-jjS"/>
+                            <constraint firstAttribute="trailing" secondItem="E65-Du-K3g" secondAttribute="trailing" id="Wud-l7-ogf"/>
+                            <constraint firstItem="E65-Du-K3g" firstAttribute="top" secondItem="tzc-m9-gCL" secondAttribute="bottom" id="d3c-ie-lJo"/>
+                            <constraint firstItem="fQ4-UV-drJ" firstAttribute="top" secondItem="E65-Du-K3g" secondAttribute="bottom" id="vnb-ac-usB"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="balanceViewPlaceholder" destination="3Qw-an-knM" id="uWP-JF-vsP"/>
-                        <outlet property="buttonExport" destination="MFx-OC-ubq" id="Wwq-5w-giJ"/>
-                        <outlet property="buttonSearch" destination="wMi-Kk-9gE" id="IZp-8z-djn"/>
-                        <outlet property="searchTextField" destination="WMa-Cy-YRr" id="QCQ-ep-s1L"/>
                         <outlet property="tableView" destination="1la-Es-fPE" id="4pj-UV-ux5"/>
-                        <outlet property="textWalletName" destination="x1H-Vr-RsO" id="13a-Km-nOc"/>
-                        <outlet property="viewSearch" destination="fOc-BT-zsB" id="DLd-54-Q4v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6hJ-9Y-8wI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4313,13 +4293,11 @@ Scan the QR code using this device</string>
         <image name="btn_blue.png" width="110" height="27"/>
         <image name="btn_deleteCategory.png" width="38" height="31"/>
         <image name="btn_expand.png" width="100" height="106"/>
-        <image name="btn_export.png" width="37" height="37"/>
         <image name="btn_export_dates.png" width="94" height="36"/>
         <image name="btn_forgot_password_arrow.png" width="24" height="26"/>
         <image name="btn_info.png" width="24" height="25"/>
         <image name="btn_light.png" width="252" height="38"/>
         <image name="btn_right.png" width="22" height="22"/>
-        <image name="btn_search.png" width="32" height="33"/>
         <image name="btn_td_done.png" width="251" height="41"/>
         <image name="comp_09.2-send_bitcoin2.jpg" width="640" height="1136"/>
         <image name="copy_btn.png" width="80" height="42"/>
