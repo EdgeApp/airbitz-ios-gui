@@ -23,6 +23,7 @@
 #import "Server.h"
 #import "CJSONDeserializer.h"
 #import "MainViewController.h"
+#import "Theme.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
@@ -45,25 +46,25 @@
     BalanceView                         *_balanceView;
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bSearchModeEnabled;
-    CGRect                              _searchShowingFrame;
+//    CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
     CGRect                              _frameTableWithSearchNoKeyboard;
 }
 
-@property (weak, nonatomic) IBOutlet UIView         *viewSearch;
-@property (weak, nonatomic) IBOutlet UITextField    *textWalletName;
+//@property (weak, nonatomic) IBOutlet UIView         *viewSearch; // Moves search bar in and out
+//@property (weak, nonatomic) IBOutlet UITextField    *textWalletName;
 @property (nonatomic, weak) IBOutlet UIView         *balanceViewPlaceholder;
 @property (nonatomic, weak) IBOutlet UITableView    *tableView;
-@property (nonatomic, weak) IBOutlet UITextField    *searchTextField;
-@property (weak, nonatomic) IBOutlet UIButton       *buttonExport;
+@property (nonatomic, weak) IBOutlet UISearchBar    *searchTextField;
+//@property (weak, nonatomic) IBOutlet UIButton       *buttonExport;
 @property (weak, nonatomic) IBOutlet UIButton       *buttonRequest;
 @property (weak, nonatomic) IBOutlet UIButton       *buttonSend;
 @property (weak, nonatomic) IBOutlet UIImageView    *imageWalletNameEmboss;
-@property (weak, nonatomic) IBOutlet UIButton       *buttonSearch;
+//@property (weak, nonatomic) IBOutlet UIButton       *buttonSearch;
 
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray        *arraySearchTransactions;
-@property (nonatomic, strong) NSArray               *arrayNonSearchViews;
+//@property (nonatomic, strong) NSArray               *arrayNonSearchViews;
 @property (nonatomic, strong) NSMutableDictionary   *dictContactImages; // images for the contacts
 @property (nonatomic, strong) NSMutableDictionary   *dictBizImages; // images for businesses
 @property (nonatomic, strong) NSMutableDictionary   *dictImageRequests;
@@ -111,14 +112,12 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
-    self.arrayNonSearchViews = [NSArray arrayWithObjects:_balanceView, self.textWalletName, self.buttonExport, self.buttonSearch, nil];
-
-    self.textWalletName.text = self.wallet.strName;
-    self.textWalletName.font = [UIFont systemFontOfSize:18];
-    self.textWalletName.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
-    [self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
-    [self.textWalletName addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+//    self.textWalletName.text = self.wallet.strName;
+//    self.textWalletName.font = [UIFont systemFontOfSize:18];
+//    self.textWalletName.autocapitalizationType = UITextAutocapitalizationTypeWords;
+//    self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
+//    [self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+//    [self.textWalletName addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
 
     // set up our user blocking button
     self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -128,38 +127,11 @@
     self.buttonBlocker.hidden = YES;
     //self.buttonBlocker.backgroundColor = [UIColor greenColor];
     [self.view addSubview:self.buttonBlocker];
-    [self.view bringSubviewToFront:self.textWalletName];
-    [self.view bringSubviewToFront:self.viewSearch];
+//    [self.view bringSubviewToFront:self.textWalletName];
+//    [self.view bringSubviewToFront:self.viewSearch];
 
-    _searchShowingFrame = self.viewSearch.frame;
+//    _searchShowingFrame = self.viewSearch.frame;
 
-    if (!IS_IPHONE4 && !NO_SEARCHBAR)
-    {
-        self.buttonSearch.hidden = YES;
-    }
-    else
-    {
-        // get the search frame out
-        CGRect frame = self.viewSearch.frame;
-        frame.origin.x = self.viewSearch.frame.size.width;
-        self.viewSearch.frame = frame;
-        [self.view bringSubviewToFront:self.viewSearch];
-
-        // move up the controls by the search frame amount
-        for (UIView *curView in self.arrayNonSearchViews)
-        {
-            CGRect frame = curView.frame;
-            frame.origin.y -= self.viewSearch.frame.size.height;
-            curView.frame = frame;
-        }
-
-        // change the table to compensate for now search screen
-        frame = self.tableView.frame;
-        frame.origin.y -= self.viewSearch.frame.size.height;
-        frame.size.height += self.viewSearch.frame.size.height;
-        self.tableView.frame = frame;
-
-    }
 
     UITableViewController *tableViewController = [[UITableViewController alloc] init];
     tableViewController.tableView = self.tableView;
@@ -186,6 +158,10 @@
     [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
+    self.buttonRequest.enabled = false;
+    self.buttonSend.enabled = false;
+    [self.buttonSend setBackgroundColor:[Theme Singleton].colorSendButtonDisabled];
+    [self.buttonRequest setBackgroundColor:[Theme Singleton].colorRequestButtonDisabled];
 
 }
 
@@ -197,7 +173,17 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
+    CGPoint pt;
+    pt.x = 0.0;
+    pt.y = [MainViewController getHeaderHeight];
+    [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
+
+    pt.x = 0.0;
+    pt.y = -[MainViewController getHeaderHeight] + self.searchTextField.frame.size.height;
+    [self.tableView setContentOffset:pt animated:true];
+
+
     [CoreBridge postToWalletsQueue:^(void) {
         [CoreBridge reloadWallet:self.wallet];
 
@@ -230,28 +216,25 @@
 
 - (void)Done
 {
-    if (YES == [self canLeaveWalletNameField])
-    {
-        [self resignAllResponders];
-        if (_bSearchModeEnabled)
-        {
-            self.searchTextField.text = @"";
-            [self transitionToSearch:NO];
-        }
-        else
-        {
+//    if (YES == [self canLeaveWalletNameField])
+//    {
+//        [self resignAllResponders];
+//        if (_bSearchModeEnabled)
+//        {
+//            self.searchTextField.text = @"";
+//            [self transitionToSearch:NO];
+//        }
+//        else
+//        {
             [self.delegate TransactionsViewControllerDone:self];
-        }
-    }
+//        }
+//    }
 }
 
 - (void)info: (UIButton *)sender
 {
-    if (YES == [self canLeaveWalletNameField])
-    {
-        [self resignAllResponders];
-        [InfoView CreateWithHTML:@"infoTransactions" forView:self.view];
-    }
+    [self resignAllResponders];
+    [InfoView CreateWithHTML:@"infoTransactions" forView:self.view];
 }
 
 - (IBAction)buttonBlockerTouched:(id)sender
@@ -260,18 +243,18 @@
     [self resignAllResponders];
 }
 
-- (IBAction)buttonSearchTouched:(id)sender
-{
-    if (YES == [self canLeaveWalletNameField])
-    {
-        [self resignAllResponders];
-        [self transitionToSearch:YES];
-    }
-}
+//- (IBAction)buttonSearchTouched:(id)sender
+//{
+//    if (YES == [self canLeaveWalletNameField])
+//    {
+//        [self resignAllResponders];
+//        [self transitionToSearch:YES];
+//    }
+//}
 
 - (IBAction)buttonRequestTouched:(id)sender
 {
-    if (YES == [self canLeaveWalletNameField])
+//    if (YES == [self canLeaveWalletNameField])
     {
         [self resignAllResponders];
         NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: self.wallet.strUUID };
@@ -282,7 +265,7 @@
 
 - (IBAction)buttonSendTouched:(id)sender
 {
-    if (YES == [self canLeaveWalletNameField])
+//    if (YES == [self canLeaveWalletNameField])
     {
         [self resignAllResponders];
         NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: self.wallet.strUUID };
@@ -293,7 +276,7 @@
 
 - (IBAction)buttonExportTouched:(id)sender
 {
-    if (YES == [self canLeaveWalletNameField])
+//    if (YES == [self canLeaveWalletNameField])
     {
         [self resignAllResponders];
 
@@ -344,79 +327,97 @@
     _balanceView.topDenomination.text = [User Singleton].denominationLabel;
 
     [_balanceView refresh];
-}
 
-// transition two and from search
-- (void)transitionToSearch:(BOOL)bGoToSearch
-{
-    CGRect frameSearch = self.viewSearch.frame;
-    CGRect frame = self.tableView.frame;
-
-    if (bGoToSearch)
+    if ([self.wallet isArchived])
     {
-        [self.view bringSubviewToFront:self.tableView];
-        frame.origin.y = _searchShowingFrame.origin.y + _searchShowingFrame.size.height;
-        frame.size.height = self.view.frame.size.height - frame.origin.y - 10;
-        _frameTableWithSearchNoKeyboard = frame;
-        frame.size.height -= TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD; // compensate for keyboard
-
-        if (IS_IPHONE4  || NO_SEARCHBAR)
-        {
-            [self.searchTextField becomeFirstResponder];
-            frameSearch.origin.x = _searchShowingFrame.origin.x;
-        }
-
-        _bSearchModeEnabled = YES;
+        self.buttonRequest.enabled = false;
+        self.buttonSend.enabled = false;
+        [self.buttonSend setBackgroundColor:[Theme Singleton].colorSendButtonDisabled];
+        [self.buttonRequest setBackgroundColor:[Theme Singleton].colorRequestButtonDisabled];
     }
     else
     {
-        for (UIView *curView in _arrayNonSearchViews)
-        {
-            curView.hidden = NO;
-        }
-        if (!IS_IPHONE4 && !NO_SEARCHBAR)
-        {
-            self.buttonSearch.hidden = YES;
-        }
-        else
-        {
-            frameSearch.origin.x = _searchShowingFrame.size.width;
-        }
-        frame = _transactionTableStartFrame;
-        _bSearchModeEnabled = NO;
+        self.buttonRequest.enabled = true;
+        self.buttonSend.enabled = true;
+        [self.buttonSend setBackgroundColor:[Theme Singleton].colorSendButton];
+        [self.buttonRequest setBackgroundColor:[Theme Singleton].colorRequestButton];
     }
 
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^
-     {
-         self.tableView.frame = frame;
 
-         if (IS_IPHONE4  || NO_SEARCHBAR)
-         {
-             self.viewSearch.frame = frameSearch;
-         }
-     }
-                     completion:^(BOOL finished)
-     {
-         if (bGoToSearch)
-         {
-             for (UIView *curView in _arrayNonSearchViews)
-             {
-                 curView.hidden = YES;
-             }
-         }
-        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-     }];
 
-    [self.tableView reloadData];
 }
+
+// transition two and from search
+//- (void)transitionToSearch:(BOOL)bGoToSearch
+//{
+//    CGRect frameSearch = self.viewSearch.frame;
+//    CGRect frame = self.tableView.frame;
+//
+//    if (bGoToSearch)
+//    {
+//        [self.view bringSubviewToFront:self.tableView];
+//        frame.origin.y = _searchShowingFrame.origin.y + _searchShowingFrame.size.height;
+//        frame.size.height = self.view.frame.size.height - frame.origin.y - 10;
+//        _frameTableWithSearchNoKeyboard = frame;
+//        frame.size.height -= TABLE_SIZE_HEIGHT_REDUCE_SEARCH_WITH_KEYBOARD; // compensate for keyboard
+//
+//        if (IS_IPHONE4  || NO_SEARCHBAR)
+//        {
+//            [self.searchTextField becomeFirstResponder];
+//            frameSearch.origin.x = _searchShowingFrame.origin.x;
+//        }
+//
+//        _bSearchModeEnabled = YES;
+//    }
+//    else
+//    {
+//        for (UIView *curView in _arrayNonSearchViews)
+//        {
+//            curView.hidden = NO;
+//        }
+//        if (!IS_IPHONE4 && !NO_SEARCHBAR)
+//        {
+//            self.buttonSearch.hidden = YES;
+//        }
+//        else
+//        {
+//            frameSearch.origin.x = _searchShowingFrame.size.width;
+//        }
+//        frame = _transactionTableStartFrame;
+//        _bSearchModeEnabled = NO;
+//    }
+//
+//    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+//    [UIView animateWithDuration:0.35
+//                          delay:0.0
+//                        options:UIViewAnimationOptionCurveEaseOut
+//                     animations:^
+//     {
+//         self.tableView.frame = frame;
+//
+//         if (IS_IPHONE4  || NO_SEARCHBAR)
+//         {
+//             self.viewSearch.frame = frameSearch;
+//         }
+//     }
+//                     completion:^(BOOL finished)
+//     {
+//         if (bGoToSearch)
+//         {
+//             for (UIView *curView in _arrayNonSearchViews)
+//             {
+//                 curView.hidden = YES;
+//             }
+//         }
+//        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+//     }];
+//
+//    [self.tableView reloadData];
+//}
 
 - (void)resignAllResponders
 {
-    [self.textWalletName resignFirstResponder];
+//    [self.textWalletName resignFirstResponder];
     [self.searchTextField resignFirstResponder];
 }
 
@@ -427,12 +428,12 @@
 
     if (bBlock)
     {
-        [self.view bringSubviewToFront:self.buttonBlocker];
-        if (!_bSearchModeEnabled)
-        {
-            [self.view bringSubviewToFront:self.textWalletName];
-        }
-        [self.view bringSubviewToFront:self.viewSearch];
+//        [self.view bringSubviewToFront:self.buttonBlocker];
+//        if (!_bSearchModeEnabled)
+//        {
+//            [self.view bringSubviewToFront:self.textWalletName];
+//        }
+//        [self.view bringSubviewToFront:self.viewSearch];
         self.buttonBlocker.hidden = NO;
     }
     else
@@ -540,31 +541,31 @@
 
 // returns YES if the user can leave the wallet name field
 // otherwise, user is warned
-- (BOOL)canLeaveWalletNameField
-{
-    if ([self.textWalletName.text length] == 0)
-    {
-        [self.textWalletName becomeFirstResponder];
-        if (!_bWalletNameWarningDisplaying)
-        {
-            _bWalletNameWarningDisplaying = YES;
-
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Invalid Wallet Name", nil)
-                                  message:NSLocalizedString(@"You must provide a wallet name.", nil)
-                                  delegate:self
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-            [alert show];
-        }
-
-        return NO;
-    }
-    else
-    {
-        return YES;
-    }
-}
+//- (BOOL)canLeaveWalletNameField
+//{
+//    if ([self.textWalletName.text length] == 0)
+//    {
+//        [self.textWalletName becomeFirstResponder];
+//        if (!_bWalletNameWarningDisplaying)
+//        {
+//            _bWalletNameWarningDisplaying = YES;
+//
+//            UIAlertView *alert = [[UIAlertView alloc]
+//                                  initWithTitle:NSLocalizedString(@"Invalid Wallet Name", nil)
+//                                  message:NSLocalizedString(@"You must provide a wallet name.", nil)
+//                                  delegate:self
+//                                  cancelButtonTitle:@"OK"
+//                                  otherButtonTitles:nil];
+//            [alert show];
+//        }
+//
+//        return NO;
+//    }
+//    else
+//    {
+//        return YES;
+//    }
+//}
 
 - (void)loadContactImages
 {
@@ -942,22 +943,22 @@
         cell.imagePhoto.layer.cornerRadius = 5;
         cell.imagePhoto.layer.masksToBounds = YES;
     
-        CGRect dateFrame = cell.dateLabel.frame;
-        CGRect addressFrame = cell.addressLabel.frame;
-        CGRect confirmationFrame = cell.confirmationLabel.frame;
+//        CGRect dateFrame = cell.dateLabel.frame;
+//        CGRect addressFrame = cell.addressLabel.frame;
+//        CGRect confirmationFrame = cell.confirmationLabel.frame;
         
-        if (cell.imagePhoto.image == nil)
-        {
-            dateFrame.origin.x = addressFrame.origin.x = confirmationFrame.origin.x = 10;
-        }
-        else
-        {
-            dateFrame.origin.x = addressFrame.origin.x = confirmationFrame.origin.x = 63;
-        }
+//        if (cell.imagePhoto.image == nil)
+//        {
+//            dateFrame.origin.x = addressFrame.origin.x = confirmationFrame.origin.x = 10;
+//        }
+//        else
+//        {
+//            dateFrame.origin.x = addressFrame.origin.x = confirmationFrame.origin.x = 63;
+//        }
         
-        cell.dateLabel.frame = dateFrame;
-        cell.addressLabel.frame = addressFrame;
-        cell.confirmationLabel.frame = confirmationFrame;
+//        cell.dateLabel.frame = dateFrame;
+//        cell.addressLabel.frame = addressFrame;
+//        cell.confirmationLabel.frame = confirmationFrame;
         
         CGFloat borderWidth = PHOTO_BORDER_WIDTH;
         cell.viewPhoto.layer.borderColor = [PHOTO_BORDER_COLOR CGColor];
@@ -973,7 +974,7 @@
 {
     if (indexPath.section == 1)
     {
-        if (YES == [self canLeaveWalletNameField])
+//        if (YES == [self canLeaveWalletNameField])
         {
             [self resignAllResponders];
             if ([self searchEnabled])
@@ -995,99 +996,76 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - UITextField delegates
+#pragma mark - UISearchBar delegates
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    if (textField == self.textWalletName)
-    {
-        [self blockUser:YES];
-
-        // highlight all the text
-        [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
-    }
-    else if (textField == self.searchTextField)
-    {
-        if ([self canLeaveWalletNameField])
-        {
-            [self transitionToSearch:YES];
-            [self blockUser:YES];
-        }
-    }
+    //XXX
+    // Need to lock table header & shrink toggle bar
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar;
 {
-    if (textField == self.textWalletName)
-    {
-        if (NO == [self canLeaveWalletNameField])
-        {
-            [self.textWalletName becomeFirstResponder];
-        }
-    }
-    else if (textField == self.searchTextField)
-    {
-        if (_bSearchModeEnabled)
-        {
-            self.tableView.frame = _frameTableWithSearchNoKeyboard;
-        }
-
-        [self blockUser:NO];
-    }
+    //XXX
+    // Need to unlock table header & grow toggle bar
 }
 
-- (void)searchTextFieldChanged:(UITextField *)textField
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)text
 {
-    if (textField == self.searchTextField)
-    {
-        [self checkSearchArray];
-    }
-    else if (textField == self.textWalletName)
-    {
-        // need at least one character in a wallet name
-        if ([textField.text length])
-        {
-            //NSLog(@"rename wallet to: %@", textField.text);
-            tABC_Error error;
-            ABC_RenameWallet([[User Singleton].name UTF8String],
-                             [[User Singleton].password UTF8String],
-                             [self.wallet.strUUID UTF8String],
-                             (char *)[textField.text UTF8String],
-                             &error);
-            [Util printABC_Error:&error];
-        }
-    }
+
+    [self checkSearchArray];
+//    }
+//    else if (textField == self.textWalletName)
+//    {
+//        // need at least one character in a wallet name
+//        if ([textField.text length])
+//        {
+//            //NSLog(@"rename wallet to: %@", textField.text);
+//            tABC_Error error;
+//            ABC_RenameWallet([[User Singleton].name UTF8String],
+//                             [[User Singleton].password UTF8String],
+//                             [self.wallet.strUUID UTF8String],
+//                             (char *)[textField.text UTF8String],
+//                             &error);
+//            [Util printABC_Error:&error];
+//        }
+//    }
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;                     // called when keyboard search button pressed
 {
-    if ((textField != self.textWalletName) || ([self canLeaveWalletNameField]))
-    {
-        [textField resignFirstResponder];
-    }
-
-    return YES;
+    [searchBar resignFirstResponder];
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    if (textField == self.textWalletName)
-    {
-        if (NO == [self canLeaveWalletNameField])
-        {
-            [self blockUser:YES];
-            return NO;
-        }
-        else
-        {
-            // unhighlight wallet name text
-            // note: for some reason, if we don't do this, the text won't select next time the user selects it
-            [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.beginningOfDocument]];
-        }
-    }
-
-    return YES;
-}
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField
+//{
+//    if ((textField != self.textWalletName) || ([self canLeaveWalletNameField]))
+//    {
+//        [textField resignFirstResponder];
+//    }
+//
+//    return YES;
+//}
+//
+//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+//{
+//    if (textField == self.textWalletName)
+//    {
+//        if (NO == [self canLeaveWalletNameField])
+//        {
+//            [self blockUser:YES];
+//            return NO;
+//        }
+//        else
+//        {
+//            // unhighlight wallet name text
+//            // note: for some reason, if we don't do this, the text won't select next time the user selects it
+//            [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.beginningOfDocument]];
+//        }
+//    }
+//
+//    return YES;
+//}
 
 #pragma mark - DLURLServer Callbacks
 
@@ -1139,9 +1117,9 @@
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    // the only alert we have that uses a delegate is the one that tells them they must provide a wallet name
-    [self.textWalletName becomeFirstResponder];
-    _bWalletNameWarningDisplaying = NO;
+//    // the only alert we have that uses a delegate is the one that tells them they must provide a wallet name
+//    [self.textWalletName becomeFirstResponder];
+//    _bWalletNameWarningDisplaying = NO;
 }
 
 #pragma mark - Export Wallet Delegates
