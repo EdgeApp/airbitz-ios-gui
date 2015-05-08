@@ -1013,6 +1013,9 @@
                                             </constraints>
                                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="tIs-Cz-ZD5" id="9w7-k0-Bs2"/>
+                                            </connections>
                                         </searchBar>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qw-an-knM" userLabel="View -balance" customClass="BalanceView">
                                             <rect key="frame" x="40" y="60" width="294" height="82"/>

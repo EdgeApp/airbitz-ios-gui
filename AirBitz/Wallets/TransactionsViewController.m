@@ -127,6 +127,7 @@
 
 //    _searchShowingFrame = self.viewSearch.frame;
 
+    self.searchTextField.enablesReturnKeyAutomatically = NO;
 
     UITableViewController *tableViewController = [[UITableViewController alloc] init];
     tableViewController.tableView = self.tableView;
@@ -1017,12 +1018,14 @@
 {
     //XXX
     // Need to lock table header & shrink toggle bar
+    NSLog(@"TransactionsView: searchBarTextDidBeginEditing");
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar;
 {
     //XXX
     // Need to unlock table header & grow toggle bar
+    NSLog(@"TransactionsView: searchBarTextDidEndEditing");
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)text
