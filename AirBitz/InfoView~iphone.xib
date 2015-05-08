@@ -32,7 +32,13 @@
                 <view alpha="0.49999999999999961" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2NU-VG-WLr">
                     <rect key="frame" x="8" y="21" width="304" height="465"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="8zR-Wo-WM3">
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TyH-Dl-V2N">
+                            <rect key="frame" x="0.0" y="211" width="304" height="44"/>
+                            <items>
+                                <barButtonItem title="Item" id="CtF-dq-GB9"/>
+                            </items>
+                        </toolbar>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="8zR-Wo-WM3">
                             <rect key="frame" x="120" y="8" width="64" height="36"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="64" id="UHF-Ld-Zwx"/>
@@ -57,16 +63,20 @@
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </webView>
                     </subviews>
-                    <color key="backgroundColor" red="0.090196078430000007" green="0.43921568630000002" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="1YQ-Ab-i4K" secondAttribute="bottom" id="09d-4U-fJx"/>
                         <constraint firstAttribute="centerX" secondItem="8zR-Wo-WM3" secondAttribute="centerX" id="3kq-d8-Juz"/>
+                        <constraint firstItem="TyH-Dl-V2N" firstAttribute="leading" secondItem="2NU-VG-WLr" secondAttribute="leading" id="GpW-HO-Qke"/>
                         <constraint firstAttribute="trailing" secondItem="1YQ-Ab-i4K" secondAttribute="trailing" id="UiM-bE-5BM"/>
                         <constraint firstItem="1YQ-Ab-i4K" firstAttribute="top" secondItem="8zR-Wo-WM3" secondAttribute="bottom" constant="8" symbolic="YES" id="WJ6-g3-AGo"/>
                         <constraint firstItem="IzD-YB-joX" firstAttribute="top" secondItem="2NU-VG-WLr" secondAttribute="top" constant="20" symbolic="YES" id="aKC-ok-o9q"/>
+                        <constraint firstItem="TyH-Dl-V2N" firstAttribute="top" secondItem="2NU-VG-WLr" secondAttribute="top" id="cbb-cC-5oq"/>
                         <constraint firstAttribute="trailing" secondItem="IzD-YB-joX" secondAttribute="trailing" constant="20" symbolic="YES" id="cl8-jC-KVW"/>
                         <constraint firstItem="1YQ-Ab-i4K" firstAttribute="leading" secondItem="2NU-VG-WLr" secondAttribute="leading" id="gpY-K2-2dR"/>
+                        <constraint firstAttribute="bottom" secondItem="TyH-Dl-V2N" secondAttribute="bottom" id="lGV-hb-wct"/>
                         <constraint firstItem="8zR-Wo-WM3" firstAttribute="top" secondItem="2NU-VG-WLr" secondAttribute="top" constant="20" symbolic="YES" id="pmu-jK-qaX"/>
+                        <constraint firstAttribute="trailing" secondItem="TyH-Dl-V2N" secondAttribute="trailing" id="swO-lM-DZT"/>
                     </constraints>
                 </view>
             </subviews>
