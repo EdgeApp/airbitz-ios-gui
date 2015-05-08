@@ -109,6 +109,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
+                        <outlet property="blurView" destination="mLB-lv-6Oa" id="fYT-9M-qZW"/>
+                        <outlet property="blurViewContainer" destination="J0w-aK-PS3" id="8bM-hd-Pqy"/>
                         <outlet property="blurViewLeft" destination="AdO-l3-DpT" id="Xoa-ho-VR1"/>
                         <outlet property="navBar" destination="Luv-G7-p9Q" id="GMr-vB-i3Z"/>
                         <outlet property="navBarTop" destination="FEw-Fw-JdJ" id="c06-2D-8NV"/>

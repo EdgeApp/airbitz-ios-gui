@@ -89,6 +89,8 @@ typedef enum eAppMode
     SlideoutView                *slideoutView;
 }
 
+@property (weak, nonatomic) IBOutlet UIView *blurViewContainer;
+@property (weak, nonatomic) IBOutlet UIToolbar *blurView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *blurViewLeft;
 @property (weak, nonatomic) IBOutlet UITabBar *tabBar;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
@@ -312,6 +314,10 @@ MainViewController *staticMVC;
     frame.origin.x = x;
     
     staticMVC.selectedViewController.view.frame = frame;
+
+//    NSLog(@"Moving Blur from:%f to:%f", staticMVC.blurViewLeft.constant, x);
+//    NSLog(@"BlurView x:%f y:%f w:%f h:%f", staticMVC.blurView.frame.origin.x,staticMVC.blurView.frame.origin.y,staticMVC.blurView.frame.size.width,staticMVC.blurView.frame.size.height);
+//    NSLog(@"BlurViewContainer x:%f y:%f w:%f h:%f", staticMVC.blurViewContainer.frame.origin.x,staticMVC.blurViewContainer.frame.origin.y,staticMVC.blurViewContainer.frame.size.width,staticMVC.blurViewContainer.frame.size.height);
     staticMVC.blurViewLeft.constant = x;
 
 }
@@ -322,6 +328,7 @@ MainViewController *staticMVC;
     _loginViewController.view.frame = self.view.bounds;
 
     // This *should* be the directoryView. Move it away to the side
+//    [self showSelectedViewController];
     if (_selectedViewController != _directoryViewController)
     {
         [_selectedViewController.view removeFromSuperview];
@@ -1437,7 +1444,11 @@ MainViewController *staticMVC;
     [self.view endEditing:NO];
 
     // Force the tabs to redraw the selected view
-    _selectedViewController = nil;
+    if (_selectedViewController != nil)
+    {
+        [_selectedViewController.view removeFromSuperview];
+        _selectedViewController = nil;
+    }
     [self launchViewControllerBasedOnAppMode];
 }
 
@@ -1663,5 +1674,31 @@ MainViewController *staticMVC;
                      }];
 }
 
-
+- (void)showSelectedViewController
+{
+    if (_selectedViewController == nil)
+    {
+        NSLog(@"_selectedViewController == nil");
+    }
+    else if (_selectedViewController == _directoryViewController)
+    {
+        NSLog(@"_selectedViewController == _directoryViewController");
+    }
+    else if (_selectedViewController == _walletsViewController)
+    {
+        NSLog(@"_selectedViewController == _walletsViewController");
+    }
+    else if (_selectedViewController == _loginViewController)
+    {
+        NSLog(@"_selectedViewController == _loginViewController");
+    }
+    else if (_selectedViewController == _sendViewController)
+    {
+        NSLog(@"_selectedViewController == _sendViewController");
+    }
+    else if (_selectedViewController == _requestViewController)
+    {
+        NSLog(@"_selectedViewController == _requestViewController");
+    }
+}
 @end
