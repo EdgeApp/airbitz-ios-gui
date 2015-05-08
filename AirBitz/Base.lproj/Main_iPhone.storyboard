@@ -980,10 +980,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E65-Du-K3g">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <items/>
-                            </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1la-Es-fPE">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1227,16 +1223,12 @@
                         <constraints>
                             <constraint firstItem="1la-Es-fPE" firstAttribute="leading" secondItem="AqW-9S-8UJ" secondAttribute="leading" id="5TJ-1m-xT0"/>
                             <constraint firstItem="Sel-8S-IX8" firstAttribute="top" secondItem="AqW-9S-8UJ" secondAttribute="top" id="5k4-Py-ile"/>
-                            <constraint firstItem="E65-Du-K3g" firstAttribute="leading" secondItem="AqW-9S-8UJ" secondAttribute="leading" id="H8a-Ka-jjS"/>
-                            <constraint firstAttribute="trailing" secondItem="E65-Du-K3g" secondAttribute="trailing" id="Wud-l7-ogf"/>
-                            <constraint firstItem="E65-Du-K3g" firstAttribute="top" secondItem="tzc-m9-gCL" secondAttribute="bottom" id="d3c-ie-lJo"/>
                             <constraint firstAttribute="trailing" secondItem="1la-Es-fPE" secondAttribute="trailing" id="fpH-UY-Boh"/>
                             <constraint firstAttribute="height" secondItem="Sel-8S-IX8" secondAttribute="height" constant="100" id="iwW-6t-3q5"/>
                             <constraint firstItem="1la-Es-fPE" firstAttribute="top" secondItem="AqW-9S-8UJ" secondAttribute="top" id="omf-bw-PHO"/>
                             <constraint firstAttribute="bottom" secondItem="1la-Es-fPE" secondAttribute="bottom" id="pJG-q3-OZB"/>
                             <constraint firstItem="Sel-8S-IX8" firstAttribute="leading" secondItem="AqW-9S-8UJ" secondAttribute="leading" constant="20" symbolic="YES" id="pa9-1b-ixH"/>
                             <constraint firstAttribute="trailing" secondItem="Sel-8S-IX8" secondAttribute="trailing" constant="20" symbolic="YES" id="vO1-fs-pCC"/>
-                            <constraint firstItem="fQ4-UV-drJ" firstAttribute="top" secondItem="E65-Du-K3g" secondAttribute="bottom" id="vnb-ac-usB"/>
                         </constraints>
                     </view>
                     <connections>
