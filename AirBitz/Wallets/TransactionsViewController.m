@@ -418,7 +418,12 @@
         [self.buttonRequest setAlpha:1.0];
     }
 
-    [MainViewController changeNavBarTitleWithButton:self.wallet.strName action:@selector(toggleWalletDropdown:) fromObject:self];
+    NSString *walletName;
+
+    walletName = [NSString stringWithFormat:@"%@ ↓", self.wallet.strName];
+
+    [MainViewController changeNavBarTitleWithButton:walletName action:@selector(toggleWalletDropdown:) fromObject:self];
+
 
 }
 
