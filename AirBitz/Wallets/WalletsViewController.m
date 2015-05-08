@@ -114,9 +114,9 @@
 {
     [super viewWillAppear: animated];
 
-    [MainViewController changeNavBarTitle:@"Total Balance"];
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
+//    [MainViewController changeNavBarTitle:@"Total Balance"];
+//    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
+//    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
     [CoreBridge postToWalletsQueue:^(void) {
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
@@ -821,5 +821,11 @@ shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 
 
 }
+
+//
+// Wallet Dropdown functionality
+//   taken from WalletsViewController.c
+//
+
 
 @end

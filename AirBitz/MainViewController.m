@@ -13,6 +13,7 @@
 #import "RequestViewController.h"
 #import "SendViewController.h"
 #import "WalletsViewController.h"
+#import "TransactionsViewController.h"
 #import "LoginViewController.h"
 #import "Notifications.h"
 #import "SettingsViewController.h"
@@ -59,7 +60,8 @@ typedef enum eAppMode
 	RequestViewController       *_requestViewController;
 	AddressRequestController    *_addressRequestController;
 	SendViewController          *_sendViewController;
-	WalletsViewController       *_walletsViewController;
+	TransactionsViewController       *_walletsViewController;
+//	WalletsViewController       *_walletsViewController;
 	LoginViewController         *_loginViewController;
 	SettingsViewController      *_settingsViewController;
 	BuySellViewController       *_buySellViewController;
@@ -184,7 +186,8 @@ MainViewController *staticMVC;
 	_requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
 	_requestViewController.delegate = self;
 	_sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
-	_walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
+	_walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
+//    _walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
 	_settingsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
 	_settingsViewController.delegate = self;
 
@@ -571,7 +574,7 @@ MainViewController *staticMVC;
 					[_selectedViewController.view removeFromSuperview];
 					_selectedViewController = _walletsViewController;
 					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
+//                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
                     [MainViewController moveSelectedViewController: 0.0];
 				}
 				else
@@ -1290,8 +1293,10 @@ MainViewController *staticMVC;
     {
         NSDictionary *dictData = [notification userInfo];
         _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
-        [_walletsViewController resetViews];
+//        [_walletsViewController resetViews];
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
+        _appMode = APP_MODE_WALLETS;
+        [self launchViewControllerBasedOnAppMode];
     }
 }
 

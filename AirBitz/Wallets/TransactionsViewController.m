@@ -24,6 +24,7 @@
 #import "CJSONDeserializer.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "WalletHeaderView.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
@@ -41,12 +42,19 @@
 
 #define CACHE_IMAGE_AGE_SECS (60 * 60) // 60 hour
 
-@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate,
+#define ARCHIVE_COLLAPSED @"archive_collapsed"
+
+
+@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate,
         TransactionDetailsViewControllerDelegate, UISearchBarDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate, UIGestureRecognizerDelegate>
 {
     BalanceView                         *_balanceView;
+
+    BOOL                        _archiveCollapsed;
+
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bSearchModeEnabled;
+    BOOL                                _bWalletsShowing;
 //    CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
     CGRect                              _frameTableWithSearchNoKeyboard;
@@ -54,12 +62,22 @@
 
 //@property (weak, nonatomic) IBOutlet UIView         *viewSearch; // Moves search bar in and out
 //@property (weak, nonatomic) IBOutlet UITextField    *textWalletName;
+@property (nonatomic, strong) NSMutableArray *arrayWallets;
+@property (nonatomic, strong) NSMutableArray *arrayArchivedWallets;
+
+@property (weak, nonatomic) IBOutlet UITableView *walletsTable;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbarBlur;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *walletsViewTop;
+@property (weak, nonatomic) IBOutlet UIView *walletsView;
 @property (nonatomic, weak) IBOutlet BalanceView    *balanceViewPlaceholder;
 @property (nonatomic, weak) IBOutlet UITableView    *tableView;
 @property (nonatomic, weak) IBOutlet UISearchBar    *searchTextField;
 //@property (weak, nonatomic) IBOutlet UIButton       *buttonExport;
 @property (weak, nonatomic) IBOutlet UIButton       *buttonRequest;
 @property (weak, nonatomic) IBOutlet UIButton       *buttonSend;
+@property (nonatomic, strong) WalletHeaderView         *activeWalletsHeaderView;
+@property (nonatomic, strong) WalletHeaderView         *archivedWalletsHeaderView;
+
 @property (weak, nonatomic) IBOutlet UIImageView    *imageWalletNameEmboss;
 //@property (weak, nonatomic) IBOutlet UIButton       *buttonSearch;
 
@@ -106,6 +124,7 @@
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.wallet = nil;
 
 //    self.textWalletName.text = self.wallet.strName;
 //    self.textWalletName.font = [UIFont systemFontOfSize:18];
@@ -126,6 +145,10 @@
 //    [self.view bringSubviewToFront:self.viewSearch];
 
 //    _searchShowingFrame = self.viewSearch.frame;
+
+    _bWalletsShowing = false;
+    _balanceView = [BalanceView CreateWithDelegate:self];
+    [self.balanceViewPlaceholder addSubview:_balanceView];
 
     self.searchTextField.enablesReturnKeyAutomatically = NO;
 
@@ -154,6 +177,32 @@
 - (void)didTapWalletName: (UIButton *)sender
 {
     NSLog(@"didTapWalletName: Hello world\n");
+
+    CGFloat destination;
+
+    if (_bWalletsShowing)
+    {
+        destination = -self.walletsView.frame.size.height;
+        _bWalletsShowing = false;
+
+    }
+    else
+    {
+        destination = [MainViewController getHeaderHeight];
+        _bWalletsShowing = true;
+    }
+
+    [UIView animateWithDuration: 0.35
+                          delay: 0.0
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations: ^
+    {
+        self.walletsViewTop.constant = destination;
+        [self.view layoutIfNeeded];
+    }
+                     completion: ^(BOOL finished)
+                     {
+                     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -163,8 +212,7 @@
     [self performSelector:@selector(resetTableHideSearch) withObject:nil afterDelay:0.0f];
 //    [self resetTableHideSearch];
 
-    [MainViewController changeNavBarTitleWithButton:self.wallet.strName action:@selector(didTapWalletName:) fromObject:self];
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
 
     self.buttonRequest.enabled = false;
@@ -172,22 +220,25 @@
     [self.buttonSend setAlpha:0.4];
     [self.buttonRequest setAlpha:0.4];
 
-    _balanceView = [BalanceView CreateWithDelegate:self];
-    [self.balanceViewPlaceholder addSubview:_balanceView];
+    self.walletsViewTop.constant = -self.walletsView.layer.frame.size.height;
 
     _balanceView.botDenomination.text = self.wallet.currencyAbbrev;
 
-
     [self.balanceViewPlaceholder refresh];
 
-
+    if (self.arrayWallets == nil)
+    {
+        self.arrayWallets = [[NSMutableArray alloc] init];
+        self.arrayArchivedWallets = [[NSMutableArray alloc] init];
+    }
     [CoreBridge postToWalletsQueue:^(void) {
-        [CoreBridge reloadWallet:self.wallet];
+        [self reloadWallets:self.arrayWallets archived:self.arrayArchivedWallets];
 
         dispatch_async(dispatch_get_main_queue(),^{
             [self getBizImagesForWallet:self.wallet];
             [self.tableView reloadData];
             [self updateBalanceView];
+
         });
     }];
 
@@ -244,7 +295,7 @@
 //        }
 //        else
 //        {
-            [self.delegate TransactionsViewControllerDone:self];
+//            [self.delegate TransactionsViewControllerDone:self];
 //        }
 //    }
 }
@@ -360,6 +411,8 @@
         [self.buttonSend setAlpha:1.0];
         [self.buttonRequest setAlpha:1.0];
     }
+
+    [MainViewController changeNavBarTitleWithButton:self.wallet.strName action:@selector(didTapWalletName:) fromObject:self];
 
 }
 
@@ -816,68 +869,6 @@
     UITableViewCell *finalCell;
     NSInteger row = [indexPath row];
     NSInteger section = [indexPath section];
-//
-//    if (section == 0)
-//    {
-//        static NSString *cellIdentifier = @"TransactionHeaderCell";
-//
-//        finalCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//        if (nil == finalCell)
-//        {
-//            finalCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-//            finalCell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            finalCell.backgroundColor = [UIColor clearColor];
-//            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//            button.frame = CGRectMake(15, 0, 143.0, 41.0);
-//            button.layer.borderWidth = 1.0;
-//            button.layer.cornerRadius = 5;
-//            [button setBackgroundColor:UIColorFromARGB(0xFF80c342)];
-//            [button.layer setBorderColor:[UIColorFromARGB(0xFF1b7400) CGColor]];
-//            button.clipsToBounds = YES;
-//            //XXXP -paul
-//
-//            [button addTarget:self action:@selector(buttonRequestTouched:) forControlEvents:UIControlEventTouchUpInside];
-//            [finalCell addSubview:button];
-//            [button setTitle:@"Receive" forState:UIControlStateNormal];
-//            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
-//            self.buttonRequest = button;
-//
-//            button = [UIButton buttonWithType:UIButtonTypeCustom];
-//            button.frame = CGRectMake(163.0, 0, 143.0, 41.0);
-////            [button setBackgroundColor:[UIColor colorWithRed:0.5 green:.76 blue:.25 alpha:1]];
-//            [button addTarget:self action:@selector(buttonSendTouched:) forControlEvents:UIControlEventTouchUpInside];
-//            [finalCell addSubview:button];
-//            [button setTitle:@"Send" forState:UIControlStateNormal];
-//            button.titleLabel.font = [UIFont systemFontOfSize:15.0];
-//            [button.layer setBorderColor:[UIColorFromARGB(0xff006698) CGColor]];
-//            [button setBackgroundColor:UIColorFromARGB(0xff2291cf)];
-//            button.layer.borderWidth = 1.0;
-//            button.layer.cornerRadius = 5;
-//            button.clipsToBounds = YES;
-//
-//            self.buttonSend = button;
-//
-//            if ([self.wallet isArchived])
-//            {
-//                self.buttonSend.enabled = false;
-//                self.buttonRequest.enabled = false;
-//                [self.buttonRequest setBackgroundColor:UIColorFromARGB(0x5580c342)];
-//                [self.buttonRequest.layer setBorderColor:[UIColorFromARGB(0x551b7400) CGColor]];
-//                [self.buttonSend setBackgroundColor:UIColorFromARGB(0x55006698)];
-//                [self.buttonSend.layer setBorderColor:[UIColorFromARGB(0x552291cf) CGColor]];
-//                self.buttonSend.titleLabel.alpha = 0.4f;
-//                self.buttonRequest.titleLabel.alpha = 0.4f;
-//
-//            }
-//            else
-//            {
-//                self.buttonSend.enabled = true;
-//                self.buttonRequest.enabled = true;
-//            }
-//
-//        }
-//    }
-//    else
     {
         TransactionCell *cell;
 
@@ -1153,15 +1144,23 @@
 - (void)dataUpdated:(NSNotification *)notification
 {
     [CoreBridge postToWalletsQueue:^(void) {
-        [CoreBridge reloadWallet:self.wallet];
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+
+        [self reloadWallets:arrayWallets archived:arrayArchivedWallets];
 
         dispatch_async(dispatch_get_main_queue(),^{
-            [self.tableView reloadData];
+            self.arrayWallets = arrayWallets;
+            self.arrayArchivedWallets = arrayArchivedWallets;
+
+            if(self.arrayWallets.count > 0) {
+                [self.walletsTable reloadData];
+                [self.tableView reloadData];
+            }
             [self updateBalanceView];
             [self.view setNeedsDisplay];
         });
     }];
-
 }
 
 #pragma mark - GestureReconizer methods
@@ -1192,6 +1191,128 @@
     [CoreBridge refreshWallet:_wallet.strUUID refreshData:NO notify:^{
         [(UIRefreshControl *)sender endRefreshing];
     }];
+}
+
+
+//
+// Wallet Dropdown functionality
+//   taken from WalletsViewController.c
+//
+
+
+- (void)initializeWalletsTable
+{
+    self.walletsTable.dataSource = self;
+    self.walletsTable.delegate = self;
+    self.walletsTable.editing = YES;
+    self.walletsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.walletsTable.allowsSelectionDuringEditing = YES;
+//    _currencyConversionFactor = 1.0;
+
+//    self.walletMakerView.hidden = YES;
+//    self.walletMakerView.delegate = self;
+//    self.walletMakerTop.constant = -self.walletMakerView.layer.frame.size.height;
+
+    self.activeWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"WALLETS", @"title of active wallets table")
+                                                            collapse:NO];
+    self.activeWalletsHeaderView.btn_expandCollapse.hidden = YES;
+    self.activeWalletsHeaderView.delegate = self;
+
+    _archiveCollapsed = [[NSUserDefaults standardUserDefaults] boolForKey:ARCHIVE_COLLAPSED];
+    self.archivedWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"ARCHIVE", @"title of archived wallets table")
+                                                              collapse:_archiveCollapsed];
+    self.archivedWalletsHeaderView.btn_addWallet.hidden = YES;
+    self.archivedWalletsHeaderView.delegate = self;
+}
+
+// retrieves the wallets from disk and put them in the two member arrays
+- (void)reloadWallets: (NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets
+{
+    if (arrayWallets == nil || arrayArchivedWallets == nil)
+    {
+        NSLog(@"ERROR reloadWallets arrayWallets or arrayArchivedWallets = nil.");
+        return;
+    }
+    else
+    {
+        [arrayWallets removeAllObjects];
+        [arrayArchivedWallets removeAllObjects];
+    }
+    [CoreBridge loadWallets:arrayWallets
+                   archived:arrayArchivedWallets
+                    withTxs:NO];
+
+    if (self.wallet == nil)
+    {
+        if ([arrayWallets count] > 0)
+        {
+            self.wallet = [arrayWallets objectAtIndex:0];
+            [CoreBridge reloadWallet:self.wallet];
+        }
+    }
+    [self lockIfLoading];
+}
+
+- (void)lockIfLoading
+{
+    // Still loading?
+    int loadingCount = 0;
+    for (Wallet *w in self.arrayWallets) {
+        if (!w.loaded) {
+            loadingCount++;
+        }
+    }
+    if (loadingCount > 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LOCK_TABBAR object:self];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UNLOCK_TABBAR object:self];
+    }
+}
+
+// select the wallet with the given UUID
+- (void)selectWalletWithUUID:(NSString *)strUUID
+{
+    if (strUUID)
+    {
+        if ([strUUID length])
+        {
+            [self reloadWallets:self.arrayWallets archived:self.arrayArchivedWallets];
+
+            // If the transaction view is open, close it
+
+            Wallet *wallet = nil;
+
+            // look for the wallet in our arrays
+            for (Wallet *curWallet in self.arrayWallets)
+            {
+                if ([strUUID isEqualToString:curWallet.strUUID])
+                {
+                    wallet = curWallet;
+                    break;
+                }
+            }
+
+            // if we haven't found it yet, try the archived wallets
+            if (nil == wallet)
+            {
+                for (Wallet *curWallet in self.arrayArchivedWallets)
+                {
+                    if ([strUUID isEqualToString:curWallet.strUUID])
+                    {
+                        wallet = curWallet;
+                        break;
+                    }
+                }
+            }
+
+            // if we found it
+            if (nil != wallet)
+            {
+                //XXX
+//                [self launchTransactionsWithWallet:wallet animated:NO];
+            }
+        }
+    }
 }
 
 @end

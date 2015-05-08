@@ -16,8 +16,8 @@
             <rect key="frame" x="0.0" y="0.0" width="294" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kk-Hg-VIb">
-                    <rect key="frame" x="74" y="11" width="146" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kk-Hg-VIb">
+                    <rect key="frame" x="20" y="11" width="209" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="To4-Ix-AYx"/>
                     </constraints>
@@ -25,8 +25,8 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nvh-Ja-ygJ" userLabel="Button - down/up arrow">
-                    <rect key="frame" x="249" y="4" width="37" height="37"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nvh-Ja-ygJ" userLabel="Button - down/up arrow">
+                    <rect key="frame" x="237" y="4" width="37" height="37"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="6fA-Wb-3rJ"/>
                         <constraint firstAttribute="width" constant="37" id="zVC-nr-I1q"/>
@@ -38,8 +38,8 @@
                         <action selector="ExpandCollapse" destination="N7s-Lf-JN5" eventType="touchUpInside" id="LlQ-Yy-n3V"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IbZ-gX-b12" userLabel="Button - add">
-                    <rect key="frame" x="249" y="5" width="37" height="37"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IbZ-gX-b12" userLabel="Button - add">
+                    <rect key="frame" x="237" y="4" width="37" height="37"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="37" id="4p4-mP-cCi"/>
                         <constraint firstAttribute="height" constant="37" id="CBD-0P-ZqB"/>
@@ -51,8 +51,8 @@
                         <action selector="addWallet" destination="N7s-Lf-JN5" eventType="touchUpInside" id="F7i-jk-hFd"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzk-gl-KBi" userLabel="Button - label">
-                    <rect key="frame" x="64" y="4" width="164" height="37"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzk-gl-KBi" userLabel="Button - label">
+                    <rect key="frame" x="20" y="0.0" width="209" height="44"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
