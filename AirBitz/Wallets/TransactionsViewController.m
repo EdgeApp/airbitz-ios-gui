@@ -26,6 +26,7 @@
 #import "Theme.h"
 #import "WalletHeaderView.h"
 #import "WalletCell.h"
+#import "FadingAlertView2.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
@@ -46,10 +47,11 @@
 #define ARCHIVE_COLLAPSED @"archive_collapsed"
 
 
-@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate,
+@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletHeaderViewDelegate,
         TransactionDetailsViewControllerDelegate, UISearchBarDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate, UIGestureRecognizerDelegate>
 {
     BalanceView                         *_balanceView;
+    FadingAlertView2                    *_fadingAlert2;
 
     BOOL                        _archiveCollapsed;
 
@@ -807,6 +809,115 @@
 
 #pragma mark - UITableView delegates
 
+////
+
+- (BOOL)tableView:(UITableView *)tableView
+        shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // If there is only 1 wallet left in the active wallts table, prohibit moving
+    if (tableView == self.walletsTable)
+        return !(indexPath.section == 0 && indexPath.row == 0 && [_arrayWallets count] == 1);
+    else
+        return NO;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    // If there is only 1 wallet left in the active wallets table, prohibit moving
+    if (tableView == self.walletsTable)
+    {
+        if (sourceIndexPath.section == 0 && sourceIndexPath.row == 0 && [_arrayWallets count] == 1)
+        {
+            return sourceIndexPath;
+        }
+        return proposedDestinationIndexPath;
+    }
+    else
+    {
+        NSAssert(0, @"Wrong table to move");
+        return sourceIndexPath;
+    }
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleNone;
+}
+
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    Wallet *wallet;
+    if(sourceIndexPath.section == 0)
+    {
+        wallet = [self.arrayWallets objectAtIndex:sourceIndexPath.row];
+        [self.arrayWallets removeObjectAtIndex:sourceIndexPath.row];
+    }
+    else
+    {
+        wallet = [self.arrayArchivedWallets objectAtIndex:sourceIndexPath.row];
+        [self.arrayArchivedWallets removeObjectAtIndex:sourceIndexPath.row];
+    }
+
+    if(destinationIndexPath.section == 0)
+    {
+        wallet.archived = NO;
+        [self.arrayWallets insertObject:wallet atIndex:destinationIndexPath.row];
+
+    }
+    else
+    {
+        wallet.archived = YES;
+        [self.arrayArchivedWallets insertObject:wallet atIndex:destinationIndexPath.row];
+    }
+    [CoreBridge setWalletAttributes:wallet];
+    [CoreBridge setWalletOrder: self.arrayWallets archived:self.arrayArchivedWallets];
+    [self updateBalanceView];
+    NSLog(@"Wallet Table %f %f %f %f\n", self.walletsTable.frame.origin.x, self.walletsTable.frame.origin.y, self.walletsTable.frame.size.width, self.walletsTable.frame.size.height);
+
+    [self.walletsTable reloadData];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (tableView == self.walletsTable)
+        return 44.0;
+    else
+        return 0;
+}
+
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+
+    if (tableView == self.walletsTable)
+    {
+        if(section == 0)
+        {
+            //CellIdentifier = @"WalletsHeader";
+            //NSLog(@"Active wallets header view: %@", activeWalletsHeaderView);
+            return _activeWalletsHeaderView;
+        }
+        else
+        {
+            //CellIdentifier = @"ArchiveHeader";
+            return _archivedWalletsHeaderView;
+        }
+    }
+    else
+    {
+//        NSAssert(0, @"Wrong table for header");
+        return nil;
+    }
+}
+
+
+////
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView == self.tableView)
@@ -1421,4 +1532,93 @@
 
     return cell;
 }
+
+#pragma mark - WalletHeaderViewDelegates
+
+-(void)walletHeaderView:(WalletHeaderView *)walletHeaderView Expanded:(BOOL)expanded
+{
+    if(expanded)
+    {
+        _archiveCollapsed = NO;
+
+        NSInteger countOfRowsToInsert = self.arrayArchivedWallets.count;
+        NSMutableArray *indexPathsToInsert = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < countOfRowsToInsert; i++)
+        {
+            [indexPathsToInsert addObject:[NSIndexPath indexPathForRow:i inSection:1]];
+        }
+
+        UITableViewRowAnimation insertAnimation = UITableViewRowAnimationTop;
+
+        // apply the updates
+        [self.walletsTable beginUpdates];
+        [self.walletsTable insertRowsAtIndexPaths:indexPathsToInsert withRowAnimation:insertAnimation];
+        [self.walletsTable endUpdates];
+    }
+    else
+    {
+        _archiveCollapsed = YES;
+        NSInteger countOfRowsToDelete = self.arrayArchivedWallets.count;
+        //NSLog(@"Rows to collapse: %i", countOfRowsToDelete);
+        if (countOfRowsToDelete > 0)
+        {
+            NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];
+            for (NSInteger i = 0; i < countOfRowsToDelete; i++)
+            {
+                [indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:1]];
+            }
+            if ([indexPathsToDelete count] > 0)
+            {
+                [self.walletsTable deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationTop];
+            }
+        }
+    }
+    // persist _archiveCollapsed
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] setBool:_archiveCollapsed forKey:ARCHIVE_COLLAPSED];
+    [userDefaults synchronize];
+}
+
+- (void)headerButton
+{
+    _fadingAlert2 = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+    _fadingAlert2.fadeDelay = FADING_HELP_DELAY;
+    _fadingAlert2.fadeDuration = FADING_HELP_DURATION;
+    [_fadingAlert2 messageTextSet:@"To archive a wallet, tap and hold the 3 bars to the right of a wallet and drag it below the [ARCHIVE] header"];
+    [_fadingAlert2 blockModal:NO];
+    [_fadingAlert2 showFading];
+}
+
+- (void)fadingAlertDismissed:(FadingAlertView *)view
+{
+    _fadingAlert2 = nil;
+}
+
+- (void)addWallet
+{
+
+//    if (_walletMakerVisible == NO)
+//    {
+//        [self.walletMakerView reset];
+//        _walletMakerVisible = YES;
+//        self.walletMakerView.hidden = NO;
+//        [[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
+//        [self createBlockingButton:self.walletMakerView];
+//        [self.walletMakerView.textField becomeFirstResponder];
+//        [UIView animateWithDuration:0.35
+//                              delay:0.0
+//                            options:UIViewAnimationOptionCurveEaseOut
+//                         animations:^
+//                         {
+//                             self.walletMakerTop.constant = [MainViewController getHeaderHeight];
+//                             [self.view layoutIfNeeded];
+//                         }
+//                         completion:^(BOOL finished)
+//                         {
+//
+//                         }];
+//    }
+}
+
+
 @end
