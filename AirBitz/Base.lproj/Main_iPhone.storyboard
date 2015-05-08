@@ -15,6 +15,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -980,7 +981,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1la-Es-fPE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1la-Es-fPE">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1157,10 +1158,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="567"/>
                                         <items/>
                                     </toolbar>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xQD-1v-Z9a" userLabel="Table View - Wallet List">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xQD-1v-Z9a" userLabel="Table View - Wallet List">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="567"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="separatorColor" red="1" green="0.01176470588" blue="0.01176470588" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WalletCell" id="Mhi-jw-aaR" customClass="WalletCell">
@@ -1170,16 +1171,24 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="294" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-nP-HJx" userLabel="Label - Wallet Name" customClass="MontserratLabel">
-                                                            <rect key="frame" x="20" y="4" width="249" height="36"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-nP-HJx" userLabel="Wallet Name" customClass="MontserratLabel">
+                                                            <rect key="frame" x="20" y="4" width="249" height="52"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <size key="shadowOffset" width="0.0" height="1"/>
                                                         </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YUW-ey-Md7" userLabel="Label - Wallet Balance" customClass="LatoLabel">
-                                                            <rect key="frame" x="277" y="4" width="38" height="36"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YUW-ey-Md7" userLabel="Amount BTC" customClass="LatoLabel">
+                                                            <rect key="frame" x="277" y="4" width="38" height="19"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <size key="shadowOffset" width="0.0" height="1"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AXW-gm-cRg" userLabel="Amount Fiat" customClass="LatoLabel">
+                                                            <rect key="frame" x="277" y="31" width="38" height="25"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -1188,18 +1197,22 @@
                                                         </label>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="AXW-gm-cRg" firstAttribute="top" secondItem="YUW-ey-Md7" secondAttribute="bottom" constant="8" symbolic="YES" id="0RL-Zu-pAh"/>
+                                                        <constraint firstAttribute="trailing" secondItem="AXW-gm-cRg" secondAttribute="trailing" constant="20" symbolic="YES" id="4yf-Na-KEQ"/>
                                                         <constraint firstItem="9iF-nP-HJx" firstAttribute="top" secondItem="vKv-Bo-lvH" secondAttribute="top" constant="4" id="9z3-qs-7b7"/>
                                                         <constraint firstItem="YUW-ey-Md7" firstAttribute="leading" secondItem="9iF-nP-HJx" secondAttribute="trailing" constant="8" symbolic="YES" id="IDg-zD-zK5"/>
                                                         <constraint firstItem="YUW-ey-Md7" firstAttribute="top" secondItem="vKv-Bo-lvH" secondAttribute="top" constant="4" id="Kro-GH-NMR"/>
                                                         <constraint firstAttribute="bottom" secondItem="9iF-nP-HJx" secondAttribute="bottom" constant="4" id="NJB-vJ-mcy"/>
+                                                        <constraint firstItem="AXW-gm-cRg" firstAttribute="leading" secondItem="YUW-ey-Md7" secondAttribute="leading" id="TkA-bM-SVZ"/>
                                                         <constraint firstAttribute="trailing" secondItem="YUW-ey-Md7" secondAttribute="trailing" constant="20" symbolic="YES" id="dGL-y2-0Vk"/>
-                                                        <constraint firstAttribute="bottom" secondItem="YUW-ey-Md7" secondAttribute="bottom" constant="4" id="sYh-aI-f88"/>
+                                                        <constraint firstAttribute="bottom" secondItem="AXW-gm-cRg" secondAttribute="bottom" constant="4" id="hyy-Cf-t4f"/>
                                                         <constraint firstItem="9iF-nP-HJx" firstAttribute="leading" secondItem="vKv-Bo-lvH" secondAttribute="leading" constant="20" symbolic="YES" id="u4N-SX-y50"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <outlet property="amount" destination="YUW-ey-Md7" id="1Y9-oz-q3N"/>
+                                                    <outlet property="amountFiat" destination="AXW-gm-cRg" id="r7c-Za-azh"/>
                                                     <outlet property="name" destination="9iF-nP-HJx" id="xWq-5C-Fh5"/>
                                                 </connections>
                                             </tableViewCell>

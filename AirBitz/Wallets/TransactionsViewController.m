@@ -40,6 +40,10 @@
 
 #define TABLE_HEADER_HEIGHT 46.0
 #define TABLE_CELL_HEIGHT   72.0
+
+#define WALLETS_TABLE_CELL_HEIGHT 60
+#define WALLETS_TABLE_HEADER_HEIGHT 44
+
 #define NO_SEARCHBAR 1
 
 #define CACHE_IMAGE_AGE_SECS (60 * 60) // 60 hour
@@ -898,9 +902,13 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (tableView == self.walletsTable)
-        return 44.0;
-    else
-        return 0;
+    {
+        if (section == 0 || [_arrayWallets count] > 1)
+        {
+            return 44.0;
+        }
+    }
+    return 0;
 }
 
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -973,38 +981,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height;
-
-//    if (indexPath.section == 0)
-//    {
-//        if (_bSearchModeEnabled)
-//        {
-//            height = 0.0;
-//        }
-//        else
-//        {
-//            height = TABLE_HEADER_HEIGHT;
-//        }
-//    }
-//    else
     if (tableView == self.tableView)
     {
-        height = TABLE_CELL_HEIGHT;
+        return TABLE_CELL_HEIGHT;
     }
     else
     {
-        if (IS_IPHONE4)
-        {
-            return 44.0;
-        }
-        else
-        {
-            return 55.0;
-        }
-
+        return WALLETS_TABLE_CELL_HEIGHT;
     }
-
-    return height;
 }
 
 - (TransactionCell *)getTransactionCellForTableView:(UITableView *)tableView
@@ -1391,6 +1375,27 @@
 //
 
 
+- (NSString *)walletAmounttoString:(Wallet *)wallet inFiat:(BOOL)inFiat
+{
+    if (inFiat)
+    {
+        double currency;
+        tABC_Error error;
+        ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
+                [[User Singleton].password UTF8String],
+                wallet.balance, &currency,
+                wallet.currencyNum, &error);
+        [Util printABC_Error:&error];
+        return [CoreBridge formatCurrency:currency
+                          withCurrencyNum:wallet.currencyNum];
+    }
+    else
+    {
+        return [CoreBridge formatSatoshi:wallet.balance];
+    }
+}
+
+
 - (void)initializeWalletsTable
 {
     self.walletsTable.dataSource = self;
@@ -1530,7 +1535,8 @@
         cell.name.text = NSLocalizedString(@"Loading...", @"");
     }
 
-    cell.amount.text = [self conversion:wallet];
+    cell.amount.text = [self walletAmounttoString:wallet inFiat:NO];
+    cell.amountFiat.text = [self walletAmounttoString:wallet inFiat:YES];
 
     // If there is only 1 wallet left in the active wallets table, prohibit moving
     if (indexPath.section == 0 && [_arrayWallets count] == 1)
