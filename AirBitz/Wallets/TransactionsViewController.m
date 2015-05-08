@@ -228,6 +228,13 @@
     _bWalletsShowing = false;
     self.walletsViewTop.constant = -self.walletsView.layer.frame.size.height;
 
+    self.walletsView.layer.masksToBounds = NO;
+    self.walletsView.layer.cornerRadius = 8; // if you like rounded corners
+    self.walletsView.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    self.walletsView.layer.shadowRadius = 10;
+    self.walletsView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.walletsView.layer.shadowOpacity = 0.2;
+
     _balanceView.botDenomination.text = self.wallet.currencyAbbrev;
 
     [self.balanceViewPlaceholder refresh];
