@@ -254,6 +254,7 @@
         dispatch_async(dispatch_get_main_queue(),^{
             [self getBizImagesForWallet:self.wallet];
             [self.tableView reloadData];
+            [self.walletsTable reloadData];
             [self updateBalanceView];
 
         });
@@ -263,22 +264,16 @@
 
 - (void)resetTableHideSearch
 {
-//    [UIView animateWithDuration: 0.35
-//                          delay: 0.0
-//                        options: UIViewAnimationOptionCurveEaseInOut
-//                     animations: ^
-                     {
-                         CGPoint pt;
-                         [self.tableView setContentInset:UIEdgeInsetsMake([MainViewController getHeaderHeight],0,
-                                 [MainViewController getFooterHeight],0)];
+     CGPoint pt;
+     [self.tableView setContentInset:UIEdgeInsetsMake([MainViewController getHeaderHeight],0,
+             [MainViewController getFooterHeight],0)];
 
-                         pt.x = 0.0;
-                         pt.y = -[MainViewController getHeaderHeight] + self.searchTextField.frame.size.height;
-                         [self.tableView setContentOffset:pt animated:true];
-                     }
-//                     completion: ^(BOOL finished)
-//                     {
-//                     }];
+     pt.x = 0.0;
+     pt.y = -[MainViewController getHeaderHeight] + self.searchTextField.frame.size.height;
+     [self.tableView setContentOffset:pt animated:true];
+
+    [self.searchTextField setText:@""];
+    [self resignAllResponders];
 
 }
 
@@ -995,7 +990,7 @@
 {
     TransactionCell *cell;
     static NSString *cellIdentifier = @"TransactionCell";
-    
+
     cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (nil == cell)
     {
@@ -1443,8 +1438,12 @@
         if ([arrayWallets count] > 0)
         {
             self.wallet = [arrayWallets objectAtIndex:0];
-            [CoreBridge reloadWallet:self.wallet];
         }
+    }
+
+    if (self.wallet != nil)
+    {
+        [CoreBridge reloadWallet:self.wallet];
     }
     [self lockIfLoading];
 }
