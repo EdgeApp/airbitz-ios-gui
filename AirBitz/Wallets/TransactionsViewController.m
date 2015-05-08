@@ -25,6 +25,7 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "WalletHeaderView.h"
+#import "WalletCell.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
@@ -168,13 +169,15 @@
                                              selector:@selector(dataUpdated:)
                                                  name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
 
+    [self initializeWalletsTable];
+
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 
 }
 
-- (void)didTapWalletName: (UIButton *)sender
+- (void)toggleWalletDropdown: (UIButton *)sender
 {
     NSLog(@"didTapWalletName: Hello world\n");
 
@@ -220,6 +223,7 @@
     [self.buttonSend setAlpha:0.4];
     [self.buttonRequest setAlpha:0.4];
 
+    _bWalletsShowing = false;
     self.walletsViewTop.constant = -self.walletsView.layer.frame.size.height;
 
     _balanceView.botDenomination.text = self.wallet.currencyAbbrev;
@@ -412,7 +416,7 @@
         [self.buttonRequest setAlpha:1.0];
     }
 
-    [MainViewController changeNavBarTitleWithButton:self.wallet.strName action:@selector(didTapWalletName:) fromObject:self];
+    [MainViewController changeNavBarTitleWithButton:self.wallet.strName action:@selector(toggleWalletDropdown:) fromObject:self];
 
 }
 
@@ -805,27 +809,43 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if (tableView == self.tableView)
+        return 1;
+    else
+        return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if (section == 1)
-//    {
-        if ([self searchEnabled])
-        {
+    if (tableView == self.tableView)
+    {
+        if ([self searchEnabled]) {
             return self.arraySearchTransactions.count;
+        }
+        else {
+            return self.wallet.arrayTransactions.count;
+        }
+    }
+    else // self.walletsTable
+    {
+        if(section == 0)
+        {
+            //NSLog(@"Section 0 rows: %i", self.arrayWallets.count);
+            return self.arrayWallets.count;
         }
         else
         {
-            return self.wallet.arrayTransactions.count;
+            if(_archiveCollapsed)
+            {
+                return 0;
+            }
+            else
+            {
+                return self.arrayArchivedWallets.count;
+            }
         }
-//    }
-//    else
-//    {
-//
-//        return _bSearchModeEnabled ? 0 : 1;
-//    }
+
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -844,8 +864,21 @@
 //        }
 //    }
 //    else
+    if (tableView == self.tableView)
     {
         height = TABLE_CELL_HEIGHT;
+    }
+    else
+    {
+        if (IS_IPHONE4)
+        {
+            return 44.0;
+        }
+        else
+        {
+            return 55.0;
+        }
+
     }
 
     return height;
@@ -864,8 +897,27 @@
     return cell;
 }
 
+-(WalletCell *)getWalletCellForTableView:(UITableView *)tableView
+{
+    WalletCell *cell;
+    static NSString *cellIdentifier = @"WalletCell";
+
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[WalletCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    return cell;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView == self.walletsTable)
+    {
+        return [self tableViewWallets:tableView cellForRowAtIndexPath:indexPath];
+    }
+
     UITableViewCell *finalCell;
     NSInteger row = [indexPath row];
     NSInteger section = [indexPath section];
@@ -979,9 +1031,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.section == 1)
-//    {
-//        if (YES == [self canLeaveWalletNameField])
+    if (tableView == self.tableView)
+    {
+
         {
             [self resignAllResponders];
             if ([self searchEnabled])
@@ -994,7 +1046,23 @@
             }
         }
     }
-//}
+    else
+    {
+        //
+        // Set new wallet. Hide the dropdown. Then reload the TransactionsView table
+        //
+        if(indexPath.section == 0)
+        {
+            self.wallet = [self.arrayWallets objectAtIndex:indexPath.row];
+        }
+        else
+        {
+            self.wallet = [self.arrayArchivedWallets objectAtIndex:indexPath.row];
+        }
+        [self viewWillAppear:YES];
+
+    }
+}
 
 #pragma mark - BalanceViewDelegates
 
@@ -1315,4 +1383,42 @@
     }
 }
 
+-(UITableViewCell *)tableViewWallets:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger row = [indexPath row];
+    WalletCell *cell;
+
+    //wallet cell
+    cell = [self getWalletCellForTableView:tableView];
+    [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
+
+    Wallet *wallet = (indexPath.section == 0 ?
+            [self.arrayWallets objectAtIndex:row] :
+            [self.arrayArchivedWallets objectAtIndex:row]);
+
+    cell.name.backgroundColor = [UIColor clearColor];
+    cell.amount.backgroundColor = [UIColor clearColor];
+
+    if (wallet.loaded) {
+        cell.userInteractionEnabled = YES;
+        cell.name.text = wallet.strName;
+    } else {
+        cell.userInteractionEnabled = NO;
+        cell.name.text = NSLocalizedString(@"Loading...", @"");
+    }
+
+    cell.amount.text = [self conversion:wallet];
+
+    // If there is only 1 wallet left in the active wallets table, prohibit moving
+    if (indexPath.section == 0 && [_arrayWallets count] == 1)
+    {
+        [cell setEditing:NO];
+    }
+    else
+    {
+        [cell setEditing:YES];
+    }
+
+    return cell;
+}
 @end
