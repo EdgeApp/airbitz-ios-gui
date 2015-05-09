@@ -33,6 +33,7 @@ typedef enum eNavBarSide
 +(void)hideTabBarAnimated:(BOOL)animated;
 +(void)hideNavBarAnimated:(BOOL)animated;
 +(void)changeNavBarTitleWithButton: (NSString*) titleText action:(SEL)func fromObject:(id) object;
++(void)changeNavBarTitleWithButtonView: (UIButton *)navButton;
 +(void)changeNavBarTitleWithImage: (UIImage *) titleImage;
 +(void)changeNavBarSide: (NSString*) titleText side:(tNavBarSide)navBarSide enable:(BOOL)enable action:(SEL)func fromObject:(id) object;
 +(void)moveSelectedViewController: (CGFloat) x;

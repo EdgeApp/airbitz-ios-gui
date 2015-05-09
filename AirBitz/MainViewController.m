@@ -486,6 +486,12 @@ MainViewController *staticMVC;
     staticMVC.navBar.topItem.titleView = titleLabelButton;
 }
 
++(void)changeNavBarTitleWithButtonView: (UIButton *)navButton
+{
+    navButton.frame = CGRectMake(0,0,70,44);
+    staticMVC.navBar.topItem.titleView = navButton;
+}
+
 +(void)changeNavBarTitleWithImage: (UIImage *) titleImage
 {
     UIImageView *imageView = [[UIImageView alloc] initWithImage:titleImage];

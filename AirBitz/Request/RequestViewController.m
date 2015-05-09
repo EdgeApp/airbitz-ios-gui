@@ -15,7 +15,7 @@
 #import "Transaction.h"
 #import "TxOutput.h"
 #import "CalculatorView.h"
-#import "ButtonSelectorView.h"
+#import "ButtonSelectorView2.h"
 #import "ABC.h"
 #import "User.h"
 #import "ShowWalletQRViewController.h"
@@ -42,7 +42,7 @@
 #define OPERATION_PLUS		7
 #define OPERATION_PERCENT	8
 
-@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelectorDelegate, 
+@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelector2Delegate,
                                      ShowWalletQRViewControllerDelegate, ImportWalletViewControllerDelegate>
 {
 	UITextField                 *_selectedTextField;
@@ -56,6 +56,7 @@
     BOOL                        bInitialized;
     CGFloat                     topTextSize;
     CGFloat                     bottomTextSize;
+    BOOL                        bWalletListDropped;
 
 }
 
@@ -68,7 +69,7 @@
 //@property (nonatomic, weak) IBOutlet UILabel            *USDLabel_TextField;
 @property (nonatomic, weak) IBOutlet UILabel            *bottomBTCUSDLabel;
 @property (nonatomic, weak) IBOutlet UITextField        *USD_TextField;
-//@property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector; //wallet dropdown
+@property (nonatomic, weak) IBOutlet ButtonSelectorView2 *buttonSelector; //wallet dropdown
 @property (nonatomic, weak) IBOutlet UILabel            *exchangeRateLabel;
 //@property (nonatomic, weak) IBOutlet UIButton           *nextButton;
 
@@ -102,11 +103,14 @@
 	self.keypadView.delegate = self;
     self.currentTopField = nil;
     bInitialized = false;
+    bWalletListDropped = false;
 
-//XXX	self.buttonSelector.delegate = self;
+	self.buttonSelector.delegate = self;
+    [self.buttonSelector disableButton];
+
 //	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
-//    [self.buttonSelector setButtonWidth:WALLET_REQUEST_BUTTON_WIDTH];
-//
+    [self.buttonSelector setButtonWidth:WALLET_REQUEST_BUTTON_WIDTH];
+
 //    self.nextButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
 //    [self.nextButton setTitleColor:[UIColor colorWithWhite:1 alpha:1.0] forState:UIControlStateNormal];
 }
@@ -155,6 +159,11 @@
         bInitialized = true;
     }
     [self changeTopField:true animate:false];
+
+    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
+
+
 
 }
 
@@ -298,7 +307,7 @@
 }
 
 
-- (IBAction)info
+- (void)info
 {
 	[self.view endEditing:YES];
     [InfoView CreateWithHTML:@"infoRequest" forView:self.view];
@@ -695,6 +704,28 @@
                                                      withSymbol:false
                                                cropDecimals:[CoreBridge currencyDecimalPlaces]];
 	}
+
+    NSString *walletName;
+
+    walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
+
+    [MainViewController changeNavBarTitleWithButton:walletName action:@selector(didTapTitle:) fromObject:self];
+
+}
+
+- (void)didTapTitle: (UIButton *)sender
+{
+    if (bWalletListDropped)
+    {
+        [self.buttonSelector close];
+        bWalletListDropped = false;
+    }
+    else
+    {
+        [self.buttonSelector open];
+        bWalletListDropped = true;
+    }
+
 }
 
 - (void)loadWalletInfo
@@ -726,9 +757,9 @@
                 Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
                 self.keypadView.currencyNum = wallet.currencyNum;
 
-//XXX                self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-//                [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-//                self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
+                self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
+                [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+                self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
             }
 
             [self updateTextFieldContents];
@@ -789,21 +820,22 @@
 }
 
 
-#pragma mark - ButtonSelectorView delegates
+#pragma mark - ButtonSelectorView2 delegates
 
-- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+- (void)ButtonSelector2:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
 {
     _selectedWalletIndex = itemIndex;
 
     // Update wallet UUID
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-//XXX    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-//    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
     
     _walletUUID = wallet.strUUID;
 
     self.keypadView.currencyNum = wallet.currencyNum;
     [self updateTextFieldContents];
+    bWalletListDropped = false;
 }
 
 #pragma mark - ShowWalletQRViewController delegates

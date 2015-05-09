@@ -1081,6 +1081,12 @@
 		DAA5782A19C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
 		DAA5784D19C272C400E972FC /* SMSTemplate.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAA5784C19C272C400E972FC /* SMSTemplate.txt */; };
 		DAA5784E19C272C400E972FC /* SMSTemplate.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAA5784C19C272C400E972FC /* SMSTemplate.txt */; };
+		DAA99D621AFDD49300A0E26E /* ButtonSelectorView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA99D611AFDD49200A0E26E /* ButtonSelectorView2.xib */; };
+		DAA99D681AFDD49E00A0E26E /* ButtonSelectorView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA99D671AFDD49E00A0E26E /* ButtonSelectorView2.m */; };
+		DAA99D6A1AFDE0BB00A0E26E /* ButtonSelectorView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA99D611AFDD49200A0E26E /* ButtonSelectorView2.xib */; };
+		DAA99D6B1AFDE0BC00A0E26E /* ButtonSelectorView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA99D611AFDD49200A0E26E /* ButtonSelectorView2.xib */; };
+		DAA99D6C1AFDE0D000A0E26E /* ButtonSelectorView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA99D671AFDD49E00A0E26E /* ButtonSelectorView2.m */; };
+		DAA99D6D1AFDE0D100A0E26E /* ButtonSelectorView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA99D671AFDD49E00A0E26E /* ButtonSelectorView2.m */; };
 		DAAC2166196399F400CC0F1E /* flash-off@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2162196399F400CC0F1E /* flash-off@2x~iphone.png */; };
 		DAAC2167196399F400CC0F1E /* flash-off~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2163196399F400CC0F1E /* flash-off~iphone.png */; };
 		DAAC2168196399F400CC0F1E /* flash-on@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2164196399F400CC0F1E /* flash-on@2x~iphone.png */; };
@@ -2407,6 +2413,9 @@
 		DAA5782219BF55F600E972FC /* Warning_icon~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warning_icon~iphone.png"; sourceTree = "<group>"; };
 		DAA5782819C1632000E972FC /* emailTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = emailTemplate.html; sourceTree = "<group>"; };
 		DAA5784C19C272C400E972FC /* SMSTemplate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SMSTemplate.txt; path = Resources/Text/SMSTemplate.txt; sourceTree = "<group>"; };
+		DAA99D611AFDD49200A0E26E /* ButtonSelectorView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonSelectorView2.xib; sourceTree = "<group>"; };
+		DAA99D671AFDD49E00A0E26E /* ButtonSelectorView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonSelectorView2.m; sourceTree = "<group>"; };
+		DAA99D691AFDD4AC00A0E26E /* ButtonSelectorView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonSelectorView2.h; sourceTree = "<group>"; };
 		DAAC2162196399F400CC0F1E /* flash-off@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-off@2x~iphone.png"; sourceTree = "<group>"; };
 		DAAC2163196399F400CC0F1E /* flash-off~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-off~iphone.png"; sourceTree = "<group>"; };
 		DAAC2164196399F400CC0F1E /* flash-on@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-on@2x~iphone.png"; sourceTree = "<group>"; };
@@ -3045,6 +3054,9 @@
 				B56553F018EDDCF8005B35E1 /* ButtonSelectorView.h */,
 				B56553F118EDDCF8005B35E1 /* ButtonSelectorView.m */,
 				B56553F318EDDD26005B35E1 /* ButtonSelectorView~iphone.xib */,
+				DAA99D671AFDD49E00A0E26E /* ButtonSelectorView2.m */,
+				DAA99D691AFDD4AC00A0E26E /* ButtonSelectorView2.h */,
+				DAA99D611AFDD49200A0E26E /* ButtonSelectorView2.xib */,
 				B56553ED18ECC8E0005B35E1 /* CalculatorView.h */,
 				B56553EB18ECC8C2005B35E1 /* CalculatorView~iphone.xib */,
 				4C3C309E19199B4F006923DE /* CommonTypes.h */,
@@ -3984,6 +3996,7 @@
 				7D98AD4719A7C550003D2BF6 /* 0-bars@2x.png in Resources */,
 				7D98AD4819A7C550003D2BF6 /* btn_locateMe~iphone.png in Resources */,
 				7D98AD4919A7C550003D2BF6 /* SearchBarBacking@2x~iphone.png in Resources */,
+				DAA99D6A1AFDE0BB00A0E26E /* ButtonSelectorView2.xib in Resources */,
 				7D98AD4B19A7C550003D2BF6 /* icon_approved~iphone.png in Resources */,
 				7D98AD4C19A7C550003D2BF6 /* btn_4@2x~iphone.png in Resources */,
 				7D98AD4D19A7C550003D2BF6 /* ca-certificates.crt in Resources */,
@@ -4458,6 +4471,7 @@
 				B59C150318C012B500AEA789 /* btn_send~iphone.png in Resources */,
 				B59C151518C012B500AEA789 /* icon_bitcoin_dark~iphone.png in Resources */,
 				4C7247CA19353BD50091C286 /* icon_export_printer@2x~iphone.png in Resources */,
+				DAA99D621AFDD49300A0E26E /* ButtonSelectorView2.xib in Resources */,
 				B561E1AE18D259CA002DCDC2 /* btn_close@2x~iphone.png in Resources */,
 				4C7247C519353BD50091C286 /* icon_export_email~iphone.png in Resources */,
 				4C5D8C60192AF4FF0015BB3C /* btn_camera~iphone.png in Resources */,
@@ -4846,6 +4860,7 @@
 				DAE865081A88A58A00A17BD3 /* btn_send~iphone.png in Resources */,
 				DAE865091A88A58A00A17BD3 /* icon_bitcoin_dark~iphone.png in Resources */,
 				DAE8650A1A88A58A00A17BD3 /* icon_export_printer@2x~iphone.png in Resources */,
+				DAA99D6B1AFDE0BC00A0E26E /* ButtonSelectorView2.xib in Resources */,
 				DAE8650B1A88A58A00A17BD3 /* btn_close@2x~iphone.png in Resources */,
 				DAE8650C1A88A58A00A17BD3 /* icon_export_email~iphone.png in Resources */,
 				DAE8650E1A88A58A00A17BD3 /* btn_camera~iphone.png in Resources */,
@@ -5344,6 +5359,7 @@
 				7D98ACE419A7C550003D2BF6 /* ButtonCell.m in Sources */,
 				7D98ACE519A7C550003D2BF6 /* CDataScanner.m in Sources */,
 				DA5509631A929BEA00F57106 /* PickerTextView3.m in Sources */,
+				DAA99D6C1AFDE0D000A0E26E /* ButtonSelectorView2.m in Sources */,
 				684861AC1A0C01C5008E53F8 /* FadingAlertView.m in Sources */,
 				7D98ACE619A7C550003D2BF6 /* SendStatusViewController.m in Sources */,
 				7D98ACE719A7C550003D2BF6 /* CJSONScanner.m in Sources */,
@@ -5487,6 +5503,7 @@
 				B5137C3618A435BD00DA4A34 /* CDataScanner.m in Sources */,
 				B5FD392818EE2DFD00BE2670 /* SendStatusViewController.m in Sources */,
 				DA5509621A929BEA00F57106 /* PickerTextView3.m in Sources */,
+				DAA99D681AFDD49E00A0E26E /* ButtonSelectorView2.m in Sources */,
 				B5137C3A18A435BD00DA4A34 /* CJSONScanner.m in Sources */,
 				B5C0A97E18EA0A7F008F302C /* DividerView.m in Sources */,
 				B57C207A18C14687005D7245 /* MainViewController.m in Sources */,
@@ -5630,6 +5647,7 @@
 				DAE8643D1A88A58A00A17BD3 /* CDataScanner.m in Sources */,
 				DAE8643E1A88A58A00A17BD3 /* SendStatusViewController.m in Sources */,
 				DA5509641A929BEA00F57106 /* PickerTextView3.m in Sources */,
+				DAA99D6D1AFDE0D100A0E26E /* ButtonSelectorView2.m in Sources */,
 				DAE8643F1A88A58A00A17BD3 /* CJSONScanner.m in Sources */,
 				DAE864401A88A58A00A17BD3 /* DividerView.m in Sources */,
 				DAE864411A88A58A00A17BD3 /* MainViewController.m in Sources */,

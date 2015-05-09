@@ -672,9 +672,17 @@
                                             <constraint firstAttribute="height" constant="229" id="pku-lT-Ky2"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7N4-k1-c9H" customClass="ButtonSelectorView2">
+                                        <rect key="frame" x="20" y="0.0" width="280" height="1"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="Get-1y-G6d"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="7N4-k1-c9H" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="0fk-Na-gcH"/>
                                     <constraint firstItem="5sd-ot-S1v" firstAttribute="top" secondItem="Fc7-23-ecF" secondAttribute="bottom" constant="8" symbolic="YES" id="1Co-L4-BBO"/>
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="9x4-jx-Knd"/>
                                     <constraint firstAttribute="trailing" secondItem="FS5-S0-Rqp" secondAttribute="trailing" id="Bpf-7g-eiN"/>
@@ -682,9 +690,11 @@
                                     <constraint firstItem="FS5-S0-Rqp" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="FlS-Fz-ggc"/>
                                     <constraint firstItem="Fc7-23-ecF" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="124" id="GQY-Jg-jf9"/>
                                     <constraint firstAttribute="trailing" secondItem="jwC-1c-veH" secondAttribute="trailing" constant="10" id="HK4-g1-B8z"/>
+                                    <constraint firstItem="7N4-k1-c9H" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" id="LHn-2R-wnG"/>
                                     <constraint firstItem="FS5-S0-Rqp" firstAttribute="top" secondItem="5sd-ot-S1v" secondAttribute="bottom" constant="8" symbolic="YES" id="WdN-XG-9a5"/>
                                     <constraint firstItem="jwC-1c-veH" firstAttribute="leading" secondItem="Fc7-23-ecF" secondAttribute="trailing" constant="8" symbolic="YES" id="Wns-uH-FL9"/>
                                     <constraint firstAttribute="bottom" secondItem="FS5-S0-Rqp" secondAttribute="bottom" constant="49" id="aqf-C8-N7y"/>
+                                    <constraint firstAttribute="trailing" secondItem="7N4-k1-c9H" secondAttribute="trailing" constant="20" id="b0e-5R-pN1"/>
                                     <constraint firstItem="Fc7-23-ecF" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="dXq-T1-ULl"/>
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="jLA-xe-QYF"/>
                                     <constraint firstAttribute="centerX" secondItem="5sd-ot-S1v" secondAttribute="centerX" id="o1H-0P-xVV"/>
@@ -708,6 +718,7 @@
                         <outlet property="BTC_TextField" destination="Ug3-Vw-VAD" id="wxA-0t-0gW"/>
                         <outlet property="USD_TextField" destination="dY3-MX-MNV" id="KN9-2s-2Cb"/>
                         <outlet property="bottomBTCUSDLabel" destination="Fc7-23-ecF" id="9rC-bM-Dq9"/>
+                        <outlet property="buttonSelector" destination="7N4-k1-c9H" id="XXU-Jd-aGn"/>
                         <outlet property="calculatorBottom" destination="aqf-C8-N7y" id="bLC-E9-fKs"/>
                         <outlet property="exchangeRateLabel" destination="jwC-1c-veH" id="3U1-BI-cHp"/>
                         <outlet property="keypadView" destination="FS5-S0-Rqp" id="Xh1-wc-LVQ"/>
