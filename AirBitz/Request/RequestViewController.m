@@ -512,7 +512,7 @@
             bottomField = self.USD_TextField;
 
             Wallet *wallet = [self getCurrentWallet];
-            _bottomBTCUSDLabel = wallet.currencyAbbrev;
+            _bottomBTCUSDLabel.text = wallet.currencyAbbrev;
         }
     }
 
@@ -537,7 +537,7 @@
     [bottomField setEnabled:false];
 
     if ([bottomField.text length] == 0)
-        _bottomBTCUSDLabel = @"";
+        _bottomBTCUSDLabel.text = @"";
 
 }
 
