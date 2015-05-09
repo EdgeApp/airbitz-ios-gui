@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalculatorView">
             <connections>
@@ -18,8 +42,10 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V76-TG-gfn">
                     <rect key="frame" x="74" y="168" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_0.png">
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="0">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -29,8 +55,10 @@
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="b8e-QF-DXa">
                     <rect key="frame" x="15" y="12" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_1.png">
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="1">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -40,8 +68,10 @@
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vjB-0i-g2w">
                     <rect key="frame" x="74" y="12" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_2.png">
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="2">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -51,8 +81,10 @@
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="x4B-P3-CYU">
                     <rect key="frame" x="133" y="12" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_3.png">
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="3">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -62,8 +94,10 @@
                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="P0f-iB-KJr">
                     <rect key="frame" x="15" y="64" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_4.png">
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="4">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -73,8 +107,10 @@
                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2uL-vk-tLg">
                     <rect key="frame" x="74" y="64" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_5.png">
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="5">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -84,8 +120,10 @@
                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ORi-eH-Enh">
                     <rect key="frame" x="132" y="64" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_6.png">
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="6">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -95,8 +133,10 @@
                 <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wVl-D5-w0P">
                     <rect key="frame" x="15" y="116" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_7.png">
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="7">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -106,8 +146,10 @@
                 <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Emr-ag-G6B">
                     <rect key="frame" x="74" y="116" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_8.png">
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="8">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -117,8 +159,10 @@
                 <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Tqz-n7-FoF">
                     <rect key="frame" x="133" y="116" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_9.png">
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="9">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -128,9 +172,11 @@
                 <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WkG-ho-3qR">
                     <rect key="frame" x="132" y="168" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_dot.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title=".">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="qZP-cV-ovG"/>
@@ -139,31 +185,37 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="O42-ZS-u2K">
                     <rect key="frame" x="15" y="168" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_clear.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="C">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="vsC-Mz-h98"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tNK-PX-QMO">
+                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="tNK-PX-QMO">
                     <rect key="frame" x="251" y="116" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="&lt; Del" backgroundImage="btn_calc_back.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.97254901960784312" green="0.58823529411764708" blue="0.047058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
+                    <state key="normal" title="&lt; Del">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="RHV-PK-1Ud"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JE3-3X-s8v">
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="JE3-3X-s8v">
                     <rect key="frame" x="251" y="168" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="Done" backgroundImage="btn_calc_done.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.43529411764705883" green="0.72941176470588232" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
+                    <state key="normal" title="Done">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="dBl-WT-Dw2"/>
@@ -172,9 +224,11 @@
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fTN-mi-eGB">
                     <rect key="frame" x="192" y="116" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_slash.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="/">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="ekG-3d-wTw"/>
@@ -183,9 +237,11 @@
                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Aeb-Xc-JRe">
                     <rect key="frame" x="192" y="64" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_minus.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="-">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="9fM-fa-CeM"/>
@@ -194,9 +250,11 @@
                 <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hpP-b8-SWQ">
                     <rect key="frame" x="192" y="12" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_plus.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="+">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="zaP-eF-j3v"/>
@@ -205,9 +263,11 @@
                 <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xYy-J7-W9D">
                     <rect key="frame" x="251" y="12" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_percent.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="%">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="Cul-fe-ZZM"/>
@@ -216,9 +276,11 @@
                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MCV-gu-4YU">
                     <rect key="frame" x="251" y="64" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_multiply.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="*">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="WeB-XE-457"/>
@@ -227,9 +289,11 @@
                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RyR-lU-hrP">
                     <rect key="frame" x="192" y="168" width="54" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" backgroundImage="btn_equal.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
+                    <state key="normal" title="=">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="8ZJ-IV-PrE"/>
@@ -241,28 +305,6 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
-    <resources>
-        <image name="btn_0.png" width="54" height="50"/>
-        <image name="btn_1.png" width="54" height="50"/>
-        <image name="btn_2.png" width="54" height="50"/>
-        <image name="btn_3.png" width="54" height="50"/>
-        <image name="btn_4.png" width="54" height="50"/>
-        <image name="btn_5.png" width="54" height="50"/>
-        <image name="btn_6.png" width="54" height="50"/>
-        <image name="btn_7.png" width="54" height="50"/>
-        <image name="btn_8.png" width="54" height="50"/>
-        <image name="btn_9.png" width="54" height="50"/>
-        <image name="btn_calc_back.png" width="54" height="50"/>
-        <image name="btn_calc_done.png" width="54" height="50"/>
-        <image name="btn_clear.png" width="54" height="50"/>
-        <image name="btn_dot.png" width="54" height="50"/>
-        <image name="btn_equal.png" width="54" height="50"/>
-        <image name="btn_minus.png" width="54" height="50"/>
-        <image name="btn_multiply.png" width="54" height="50"/>
-        <image name="btn_percent.png" width="54" height="50"/>
-        <image name="btn_plus.png" width="54" height="50"/>
-        <image name="btn_slash.png" width="54" height="50"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
