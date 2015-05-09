@@ -661,7 +661,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MRG-UO-gcm" userLabel="View -QR Code">
                                         <rect key="frame" x="56" y="108" width="209" height="209"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_QR.png" translatesAutoresizingMaskIntoConstraints="NO" id="5sd-ot-S1v" userLabel="qrCodeImage">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5sd-ot-S1v" userLabel="qrCodeImage">
                                                 <rect key="frame" x="10" y="10" width="189" height="189"/>
                                             </imageView>
                                         </subviews>
@@ -712,7 +712,6 @@
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="9x4-jx-Knd"/>
                                     <constraint firstAttribute="trailing" secondItem="FS5-S0-Rqp" secondAttribute="trailing" id="Bpf-7g-eiN"/>
                                     <constraint firstAttribute="trailing" secondItem="2Po-w8-mEf" secondAttribute="trailing" id="CdR-tB-b9W"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MRG-UO-gcm" secondAttribute="bottom" constant="100" id="CpX-a0-DQQ"/>
                                     <constraint firstItem="FS5-S0-Rqp" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="FlS-Fz-ggc"/>
                                     <constraint firstItem="Fc7-23-ecF" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="124" id="GQY-Jg-jf9"/>
                                     <constraint firstAttribute="trailing" secondItem="jwC-1c-veH" secondAttribute="trailing" constant="10" id="HK4-g1-B8z"/>
@@ -727,6 +726,7 @@
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="jLA-xe-QYF"/>
                                     <constraint firstItem="jlL-oE-aWy" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="10" id="k3E-Yq-7CZ"/>
                                     <constraint firstItem="jwC-1c-veH" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="tuc-7l-JlM"/>
+                                    <constraint firstItem="jlL-oE-aWy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MRG-UO-gcm" secondAttribute="bottom" constant="8" symbolic="YES" id="yDr-Bs-3g6"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -4493,7 +4493,6 @@ Scan the QR code using this device</string>
         <image name="bd_icon_phone.png" width="11" height="15"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
         <image name="bkg_textfield.png" width="320" height="54"/>
-        <image name="btn_QR.png" width="79" height="83"/>
         <image name="btn_addCategory.png" width="38" height="31"/>
         <image name="btn_album.png" width="50" height="50"/>
         <image name="btn_alwaysConfirm_off.png" width="36" height="36"/>

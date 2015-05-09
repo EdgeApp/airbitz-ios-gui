@@ -8,6 +8,7 @@
 
 #import "CalculatorView.h"
 #import "CoreBridge.h"
+#import "Util.h"
 
 #define DIGIT_BACK			11
 
@@ -50,10 +51,19 @@
 {
     if ((self = [super initWithCoder:aDecoder]))
 	{
+        CGRect frame;
+
+        UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"CalculatorView~iphone" owner:self options:nil] objectAtIndex:0];
+        frame = view.frame;
+
+        CGRect screenRect = [Util currentScreenBoundsDependOnOrientation];
+        frame.size.width = screenRect.size.width;
+
+        view.frame = frame;
         _calcMode = CALC_MODE_COIN;
-        [self addSubview:[[[NSBundle mainBundle] loadNibNamed:@"CalculatorView~iphone" owner:self options:nil] objectAtIndex:0]];
+        [self addSubview:view];
         self.backgroundColor = [UIColor colorWithWhite:0.8
-                                                 alpha:0.4];
+                                                 alpha:0.8];
         
     }
     return self;

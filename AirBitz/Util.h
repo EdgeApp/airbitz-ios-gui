@@ -34,6 +34,7 @@
 + (void)callTelephoneNumber:(NSString *)telNum;
 + (void)stylizeTextField:(UITextField *)textField;
 + (void)stylizeTextView:(UITextView *)textField;
++(CGRect)currentScreenBoundsDependOnOrientation;
 
 
 + (UIViewController *)animateIn:(NSString *)identifier parentController:(UIViewController *)parent;
