@@ -16,6 +16,10 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -583,125 +587,136 @@
                         <viewControllerLayoutGuide type="bottom" id="cvY-Y2-Lon"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nuS-pz-ngD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="cpE-Uf-9fd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="7UH-AH-joT">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAM-6J-kvd">
-                                <rect key="frame" x="280" y="23" width="37" height="37"/>
-                                <state key="normal" image="btn_info.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="info" destination="Int-ih-AH6" eventType="touchUpInside" id="UtQ-gc-gqZ"/>
-                                    <action selector="info" destination="ZP6-jP-fb3" eventType="touchUpInside" id="lOP-Wz-6r1"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Request Bitcoin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYX-iO-gJ9" customClass="MontserratLabel">
-                                <rect key="frame" x="92" y="32" width="136" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00000" placeholder="Amt (optional)" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Ug3-Vw-VAD" customClass="StylizedTextField">
-                                <rect key="frame" x="22" y="114" width="200" height="34"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" placeholder="Amt (optional)" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="dY3-MX-MNV" customClass="StylizedTextField">
-                                <rect key="frame" x="22" y="153" width="200" height="34"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hk5-ol-0gD" customClass="LatoLabel">
-                                <rect key="frame" x="163" y="121" width="51" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="0.0" height="1"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="USD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDW-FH-GD0" customClass="LatoLabel">
-                                <rect key="frame" x="165" y="160" width="51" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="0.0" height="1"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="NzT-rU-bq0">
-                                <rect key="frame" x="22" y="202" width="100" height="26"/>
-                                <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
-                                <state key="normal" title="Import" backgroundImage="btn_blue.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="ImportWallet" destination="Int-ih-AH6" eventType="touchUpInside" id="fii-Pt-vXt"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="tailTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e3p-Sp-KAc">
-                                <rect key="frame" x="233" y="114" width="68" height="72"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="4"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="22"/>
-                                <size key="titleShadowOffset" width="0.0" height="1"/>
-                                <state key="normal" backgroundImage="btn_expand.png">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="NEXT">
-                                            <attributes>
-                                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <font key="NSFont" metaFont="system" size="15"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <connections>
-                                    <action selector="QRCodeButton" destination="Int-ih-AH6" eventType="touchUpInside" id="cMO-PG-ymx"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FS5-S0-Rqp" customClass="CalculatorView">
-                                <rect key="frame" x="0.0" y="290" width="320" height="229"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Exchange Rate Loading..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwC-1c-veH">
-                                <rect key="frame" x="130" y="197" width="170" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="0.0" height="1"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TyS-sr-hRl" customClass="ButtonSelectorView">
-                                <rect key="frame" x="28" y="77" width="264" height="34"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtl-WY-3kv" userLabel="View -body">
+                                <rect key="frame" x="0.0" y="64" width="320" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Po-w8-mEf" userLabel="View -entry">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="USD Amount" placeholder="USD Amount" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="dY3-MX-MNV" userLabel="Amt Fiat">
+                                                <rect key="frame" x="10" y="11" width="192" height="38"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                            </textField>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="900" horizontalCompressionResistancePriority="900" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dqf-l4-9Zx">
+                                                <rect key="frame" x="210" y="16" width="100" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="28" id="7Nr-hN-37o"/>
+                                                    <constraint firstAttribute="width" constant="100" id="7vY-sR-qia"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="mBTC"/>
+                                                    <segment title="kCAD"/>
+                                                </segments>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <action selector="segmentedControlBTCUSDAction:" destination="Int-ih-AH6" eventType="valueChanged" id="Lzi-JG-gBa"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="dqf-l4-9Zx" secondAttribute="trailing" constant="10" id="016-Sh-VlR"/>
+                                            <constraint firstAttribute="centerY" secondItem="dqf-l4-9Zx" secondAttribute="centerY" id="iMP-f5-Skj"/>
+                                            <constraint firstAttribute="height" constant="60" id="ilF-6c-9V6"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BTC Amount" placeholder="BTC Amount" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ug3-Vw-VAD" userLabel="Amt BTC">
+                                        <rect key="frame" x="10" y="60" width="106" height="40"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" misplaced="YES" text="Exchange Rate Loading..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwC-1c-veH">
+                                        <rect key="frame" x="166" y="60" width="144" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="47a-Rc-X2z"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="700" misplaced="YES" text="BTC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fc7-23-ecF" userLabel="BTC">
+                                        <rect key="frame" x="124" y="60" width="34" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Zhe-0Q-QnX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_QR.png" translatesAutoresizingMaskIntoConstraints="NO" id="5sd-ot-S1v">
+                                        <rect key="frame" x="56" y="108" width="209" height="209"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="5sd-ot-S1v" secondAttribute="height" multiplier="1:1" id="d3x-VX-Pma"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="oHb-35-C2V"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FS5-S0-Rqp" customClass="CalculatorView">
+                                        <rect key="frame" x="0.0" y="325" width="320" height="229"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="229" id="pku-lT-Ky2"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="5sd-ot-S1v" firstAttribute="top" secondItem="Fc7-23-ecF" secondAttribute="bottom" constant="8" symbolic="YES" id="1Co-L4-BBO"/>
+                                    <constraint firstItem="2Po-w8-mEf" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="9x4-jx-Knd"/>
+                                    <constraint firstAttribute="trailing" secondItem="FS5-S0-Rqp" secondAttribute="trailing" id="Bpf-7g-eiN"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Po-w8-mEf" secondAttribute="trailing" id="CdR-tB-b9W"/>
+                                    <constraint firstItem="FS5-S0-Rqp" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="FlS-Fz-ggc"/>
+                                    <constraint firstItem="Fc7-23-ecF" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="124" id="GQY-Jg-jf9"/>
+                                    <constraint firstAttribute="trailing" secondItem="jwC-1c-veH" secondAttribute="trailing" constant="10" id="HK4-g1-B8z"/>
+                                    <constraint firstItem="FS5-S0-Rqp" firstAttribute="top" secondItem="5sd-ot-S1v" secondAttribute="bottom" constant="8" symbolic="YES" id="WdN-XG-9a5"/>
+                                    <constraint firstItem="jwC-1c-veH" firstAttribute="leading" secondItem="Fc7-23-ecF" secondAttribute="trailing" constant="8" symbolic="YES" id="Wns-uH-FL9"/>
+                                    <constraint firstAttribute="bottom" secondItem="FS5-S0-Rqp" secondAttribute="bottom" constant="49" id="aqf-C8-N7y"/>
+                                    <constraint firstItem="Fc7-23-ecF" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="dXq-T1-ULl"/>
+                                    <constraint firstItem="2Po-w8-mEf" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="jLA-xe-QYF"/>
+                                    <constraint firstAttribute="centerX" secondItem="5sd-ot-S1v" secondAttribute="centerX" id="o1H-0P-xVV"/>
+                                    <constraint firstItem="jwC-1c-veH" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="tuc-7l-JlM"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5sd-ot-S1v" secondAttribute="bottom" constant="100" id="xpI-uO-ETW"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wtl-WY-3kv" firstAttribute="leading" secondItem="nuS-pz-ngD" secondAttribute="leading" id="af6-wG-Rdv"/>
+                            <constraint firstAttribute="trailing" secondItem="wtl-WY-3kv" secondAttribute="trailing" id="cqF-Av-dDE"/>
+                            <constraint firstItem="wtl-WY-3kv" firstAttribute="top" secondItem="nuS-pz-ngD" secondAttribute="top" constant="64" id="uAQ-7M-BkL"/>
+                            <constraint firstAttribute="bottom" secondItem="wtl-WY-3kv" secondAttribute="bottom" id="zzR-RV-S3Y"/>
+                        </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="667"/>
                     <connections>
-                        <outlet property="BTCLabel_TextField" destination="Hk5-ol-0gD" id="hnn-be-cog"/>
                         <outlet property="BTC_TextField" destination="Ug3-Vw-VAD" id="wxA-0t-0gW"/>
-                        <outlet property="USDLabel_TextField" destination="rDW-FH-GD0" id="jof-3j-jNO"/>
                         <outlet property="USD_TextField" destination="dY3-MX-MNV" id="KN9-2s-2Cb"/>
-                        <outlet property="buttonSelector" destination="TyS-sr-hRl" id="JcR-Jg-aYq"/>
+                        <outlet property="bottomBTCUSDLabel" destination="Fc7-23-ecF" id="9rC-bM-Dq9"/>
+                        <outlet property="calculatorBottom" destination="aqf-C8-N7y" id="bLC-E9-fKs"/>
                         <outlet property="exchangeRateLabel" destination="jwC-1c-veH" id="3U1-BI-cHp"/>
                         <outlet property="keypadView" destination="FS5-S0-Rqp" id="Xh1-wc-LVQ"/>
-                        <outlet property="nextButton" destination="e3p-Sp-KAc" id="76l-BL-fyB"/>
+                        <outlet property="segmentedControlBTCUSD" destination="dqf-l4-9Zx" id="FOf-6y-9mP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2bB-r5-X2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-738.5" y="-987.5"/>
+            <point key="canvasLocation" x="-739" y="-987.5"/>
         </scene>
         <!--Show WalletQR View Controller-->
         <scene sceneID="UOX-Wf-p5A">
@@ -4437,13 +4452,13 @@ Scan the QR code using this device</string>
         <image name="bd_icon_phone.png" width="11" height="15"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
         <image name="bkg_textfield.png" width="320" height="54"/>
+        <image name="btn_QR.png" width="79" height="83"/>
         <image name="btn_addCategory.png" width="38" height="31"/>
         <image name="btn_album.png" width="50" height="50"/>
         <image name="btn_alwaysConfirm_off.png" width="36" height="36"/>
         <image name="btn_alwaysConfirm_on.png" width="36" height="36"/>
         <image name="btn_blue.png" width="110" height="27"/>
         <image name="btn_deleteCategory.png" width="38" height="31"/>
-        <image name="btn_expand.png" width="100" height="106"/>
         <image name="btn_export_dates.png" width="94" height="36"/>
         <image name="btn_forgot_password_arrow.png" width="24" height="26"/>
         <image name="btn_info.png" width="24" height="25"/>

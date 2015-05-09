@@ -24,6 +24,8 @@
 #import "ImportWalletViewController.h"
 #import "InfoView.h"
 #import "LocalSettings.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 #define QR_CODE_SIZE          200.0
@@ -49,16 +51,26 @@
     ImportWalletViewController  *_importWalletViewController;
     tABC_TxDetails              _details;
     NSString                    *requestID;
+    CGRect                      topFrame;
+    CGRect                      bottomFrame;
+    BOOL                        bInitialized;
+    CGFloat                     topTextSize;
+    CGFloat                     bottomTextSize;
+
 }
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlBTCUSD;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *calculatorBottom;
 @property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
-@property (nonatomic, weak) IBOutlet UILabel            *BTCLabel_TextField;
+//@property (nonatomic, weak) IBOutlet UILabel            *BTCLabel_TextField;
+@property (nonatomic, weak) IBOutlet UITextField        *currentTopField;
 @property (nonatomic, weak) IBOutlet UITextField        *BTC_TextField;
-@property (nonatomic, weak) IBOutlet UILabel            *USDLabel_TextField;
+//@property (nonatomic, weak) IBOutlet UILabel            *USDLabel_TextField;
+@property (nonatomic, weak) IBOutlet UILabel            *bottomBTCUSDLabel;
 @property (nonatomic, weak) IBOutlet UITextField        *USD_TextField;
-@property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector;
+//@property (nonatomic, weak) IBOutlet ButtonSelectorView *buttonSelector; //wallet dropdown
 @property (nonatomic, weak) IBOutlet UILabel            *exchangeRateLabel;
-@property (nonatomic, weak) IBOutlet UIButton           *nextButton;
+//@property (nonatomic, weak) IBOutlet UIButton           *nextButton;
 
 @property (nonatomic, copy)   NSString *strFullName;
 @property (nonatomic, copy)   NSString *strPhoneNumber;
@@ -68,6 +80,7 @@
 @end
 
 @implementation RequestViewController
+@synthesize segmentedControlBTCUSD;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -84,15 +97,18 @@
 	// Do any additional setup after loading the view.
 
     // resize ourselves to fit in area
-    [Util resizeView:self.view withDisplayView:nil];
+//    [Util resizeView:self.view withDisplayView:nil];
 
 	self.keypadView.delegate = self;
-	self.buttonSelector.delegate = self;
-	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
-    [self.buttonSelector setButtonWidth:WALLET_REQUEST_BUTTON_WIDTH];
-    
-    self.nextButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
-    [self.nextButton setTitleColor:[UIColor colorWithWhite:1 alpha:1.0] forState:UIControlStateNormal];
+    self.currentTopField = nil;
+    bInitialized = false;
+
+//XXX	self.buttonSelector.delegate = self;
+//	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
+//    [self.buttonSelector setButtonWidth:WALLET_REQUEST_BUTTON_WIDTH];
+//
+//    self.nextButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
+//    [self.nextButton setTitleColor:[UIColor colorWithWhite:1 alpha:1.0] forState:UIControlStateNormal];
 }
 
 -(void)awakeFromNib
@@ -109,32 +125,37 @@
 
 	[self loadWalletInfo];
 
-	self.BTCLabel_TextField.text = [User Singleton].denominationLabel; 
-    if (IS_IPHONE4) {
-#ifdef __IPHONE_8_0
-        [self.keypadView removeFromSuperview];
-#endif
-    }
-	self.BTC_TextField.inputView = !IS_IPHONE4 ? dummyView : self.keypadView;
-	self.USD_TextField.inputView = !IS_IPHONE4 ? dummyView : self.keypadView;
+//XXX	self.BTCLabel_TextField.text = [User Singleton].denominationLabel;
+    [self.segmentedControlBTCUSD setTitle:[User Singleton].denominationLabel forSegmentAtIndex:1];
+//    self.BTC_TextField.inputView = !IS_IPHONE4 ? dummyView : self.keypadView;
+//    self.USD_TextField.inputView = !IS_IPHONE4 ? dummyView : self.keypadView;
+    self.BTC_TextField.inputView = dummyView;
+    self.USD_TextField.inputView = dummyView;
 	self.BTC_TextField.delegate = self;
 	self.USD_TextField.delegate = self;
 
     // if they are on a 4" screen then move the calculator below the bottom of the screen
-    if (IS_IPHONE4 )
+    if ([LocalSettings controller].bMerchantMode)
     {
-        CGRect frame = self.keypadView.frame;
-        frame.origin.y = frame.origin.y + frame.size.height;
-        self.keypadView.frame = frame;
+        [self changeCalculator:false show:true];
     }
     else
     {
-        // no need for the done button since the calculator is always up
-        [self.keypadView hideDoneButton];
+        [self changeCalculator:false show:false];
     }
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
-    [self exchangeRateUpdate:nil]; 
+    [self exchangeRateUpdate:nil];
+
+    if (!bInitialized) {
+        topFrame = self.USD_TextField.frame;
+        bottomFrame = self.BTC_TextField.frame;
+        topTextSize = self.USD_TextField.font.pointSize;
+        bottomTextSize = self.BTC_TextField.font.pointSize;
+        bInitialized = true;
+    }
+    [self changeTopField:true animate:false];
+
 }
 
 
@@ -173,6 +194,41 @@
         }
     }
     return NO;
+}
+
+- (void)changeCalculator:(BOOL)animate show:(BOOL)bShow
+{
+    if (animate) {
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+                         {
+                             [self upCalculator:bShow];
+                             [self.view layoutIfNeeded];
+                         }
+                         completion:^(BOOL finished)
+                         {
+                         }];
+
+    }
+    else
+    {
+        [self upCalculator:bShow];
+    }
+
+}
+
+- (void)upCalculator:(BOOL)up
+{
+    CGFloat destination;
+    if (up)
+        destination = [MainViewController getFooterHeight];
+    else
+        destination = -self.keypadView.frame.size.height;
+
+    self.calculatorBottom.constant = destination;
+
 }
 
 - (BOOL)transactionWasDonation
@@ -228,6 +284,19 @@
 
 
 #pragma mark - Action Methods
+
+- (IBAction)segmentedControlBTCUSDAction:(id)sender
+{
+    if(segmentedControlBTCUSD.selectedSegmentIndex == 0)            // Checking which segment is selected using the segment index value
+    {
+        [self changeTopField:true animate:true];
+    }
+    else if(segmentedControlBTCUSD.selectedSegmentIndex == 1)
+    {
+        [self changeTopField:false animate:true];
+    }
+}
+
 
 - (IBAction)info
 {
@@ -301,15 +370,79 @@
 - (void)setFirstResponder
 {
     // if this is a 4.5" screen then the calculator is up so we need to always have one of the edit boxes selected
-    if (!IS_IPHONE4)
+    if (![LocalSettings controller].bMerchantMode)
     {
-        // if the BTC is not the first responder
-        if (![self.BTC_TextField isFirstResponder])
+        // make the USD the first responder
+        [self.USD_TextField becomeFirstResponder];
+    }
+}
+
+- (void)changeTopField:(BOOL)bFiat animate:(BOOL)animate
+{
+    if (animate) {
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+                         {
+                             [self changeTopFieldRaw:bFiat];
+                             [self.view layoutIfNeeded];
+                         }
+                         completion:^(BOOL finished)
+                         {
+                         }];
+
+    }
+    else
+    {
+        [self changeTopFieldRaw:bFiat];
+    }
+}
+
+- (void)changeTopFieldRaw:(BOOL)bFiat
+{
+
+    UITextField *bottomField;
+
+    if (bFiat)
+    {
+        if (self.currentTopField == self.USD_TextField)
         {
-            // make the USD the first responder
-            [self.USD_TextField becomeFirstResponder];
+            return;
+        }
+        else
+        {
+            self.currentTopField = self.USD_TextField;
+            bottomField = self.BTC_TextField;
         }
     }
+    else
+    {
+        if (self.currentTopField == self.BTC_TextField)
+        {
+            return;
+        }
+        else
+        {
+            self.currentTopField = self.BTC_TextField;
+            bottomField = self.USD_TextField;
+        }
+    }
+
+    self.currentTopField.frame = topFrame;
+    [self.currentTopField setFont:[UIFont fontWithName:@"Lato-Regular" size:topTextSize]];
+    [self.currentTopField setTextColor:[Theme Singleton].colorRequestTopTextField];
+    [self.currentTopField becomeFirstResponder];
+    [self.currentTopField setTintColor:[UIColor lightGrayColor]];
+    [self.currentTopField setEnabled:true];
+    self.keypadView.textField = self.currentTopField;
+
+    bottomField.frame = bottomFrame;
+    [bottomField setFont:[UIFont fontWithName:@"Lato-Regular" size:bottomTextSize]];
+    [bottomField setTextColor:[Theme Singleton].colorRequestBottomTextField];
+    [bottomField setTintColor:[UIColor lightGrayColor]];
+    [bottomField setEnabled:false];
+
 }
 
 - (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes 
@@ -539,8 +672,10 @@
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
     
     self.exchangeRateLabel.text = [CoreBridge conversionString:wallet];
-    self.USDLabel_TextField.text = wallet.currencyAbbrev;
-	if (_selectedTextField == self.BTC_TextField)
+//XXX    self.USDLabel_TextField.text = wallet.currencyAbbrev;
+    [self.segmentedControlBTCUSD setTitle:wallet.currencyAbbrev forSegmentAtIndex:0];
+
+    if (_selectedTextField == self.BTC_TextField)
 	{
 		double currency;
         int64_t satoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
@@ -591,9 +726,9 @@
                 Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
                 self.keypadView.currencyNum = wallet.currencyNum;
 
-                self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-                [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-                self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
+//XXX                self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
+//                [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+//                self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
             }
 
             [self updateTextFieldContents];
@@ -634,13 +769,17 @@
 
 - (void)CalculatorDone:(CalculatorView *)calculator
 {
-	[self.BTC_TextField resignFirstResponder];
-	[self.USD_TextField resignFirstResponder];
-    if (!IS_IPHONE4 ) // condition where calculator is showing Next instead of Done
+//	[self.BTC_TextField resignFirstResponder];
+//	[self.USD_TextField resignFirstResponder];
+
+    [self changeCalculator:YES show:NO];
+//    if (!IS_IPHONE4 ) // condition where calculator is showing Next instead of Done
     {
-        SInt64 amountSatoshi = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
-        RequestState state = [self isDonation:amountSatoshi] ? kDonation : kRequest;
-        [self LaunchQRCodeScreen:amountSatoshi withRequestState:state];
+//XXX        SInt64 amountSatoshi = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
+//        RequestState state = [self isDonation:amountSatoshi] ? kDonation : kRequest;
+//        [self LaunchQRCodeScreen:amountSatoshi withRequestState:state];
+
+        // Need to update QR code or as we type
     }
 }
 
@@ -658,8 +797,8 @@
 
     // Update wallet UUID
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+//XXX    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+//    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
     
     _walletUUID = wallet.strUUID;
 
@@ -681,15 +820,26 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-	_selectedTextField = textField;
+    if (textField != self.currentTopField)
+    {
+        if (self.currentTopField == self.USD_TextField)
+            [self changeTopField:false animate:YES];
+        else
+            [self changeTopField:true animate:YES];
+
+    }
+
+    _selectedTextField = textField;
     if (_selectedTextField == self.BTC_TextField)
         self.keypadView.calcMode = CALC_MODE_COIN;
     else if (_selectedTextField == self.USD_TextField)
         self.keypadView.calcMode = CALC_MODE_FIAT;
 
-	self.keypadView.textField = textField;
-	self.BTC_TextField.text = @"";
-	self.USD_TextField.text = @"";
+    // Popup numpad
+    [self changeCalculator:YES show:true];
+
+//	self.BTC_TextField.text = @"";
+//	self.USD_TextField.text = @"";
 }
 
 #pragma mark - Import Wallet Delegates

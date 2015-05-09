@@ -21,6 +21,9 @@
 @property (nonatomic) UIColor *colorSendButtonDisabled;
 @property (nonatomic) UIColor *colorRequestButtonDisabled;
 @property (nonatomic) CGFloat sendRequestButtonDisabled;
+@property (nonatomic) UIColor *colorRequestTopTextField;
+@property (nonatomic) UIColor *colorRequestBottomTextField;
+
 
 @property (nonatomic) NSString *deleteAccountWarning;
 @property (nonatomic) CGFloat heightListings;

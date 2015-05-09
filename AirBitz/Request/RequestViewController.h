@@ -22,6 +22,8 @@
 - (SInt64)transactionDifference:(NSString *)walletUUID withTx:(NSString *)txId;
 - (void)LaunchQRCodeScreen: (SInt64)amountSatoshi withRequestState:(RequestState)state;
 - (void)resetViews;
+- (IBAction)segmentedControlBTCUSDAction:(id)sender;
+
 
 @end
 

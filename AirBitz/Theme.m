@@ -53,6 +53,9 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorRequestButtonDisabled = UIColorFromARGB(0x5580c342);
     self.colorSendButtonDisabled = UIColorFromARGB(0x55006698);
 
+    self.colorRequestTopTextField = [UIColor whiteColor];
+    self.colorRequestBottomTextField = [UIColor darkGrayColor];
+
     self.sendRequestButtonDisabled = 0.4f;
 
     if (IS_IPHONE4)

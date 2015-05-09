@@ -175,9 +175,10 @@
 - (void)hideDoneButton
 {
 //    self.buttonDone.hidden = YES;
-    [self.buttonDone setTitle:@"Next" forState:UIControlStateNormal];
-    UIImage *buttonImage = [UIImage imageNamed:@"btn_calc_next.png"];
-    [self.buttonDone setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    // Never hide the Done button
+//    [self.buttonDone setTitle:@"Next" forState:UIControlStateNormal];
+//    UIImage *buttonImage = [UIImage imageNamed:@"btn_calc_next.png"];
+//    [self.buttonDone setBackgroundImage:buttonImage forState:UIControlStateNormal];
 }
 
 #pragma mark - Misc Methods
@@ -192,12 +193,20 @@
     if (_calcMode == CALC_MODE_COIN)
     {
         int64_t satoshi = [CoreBridge denominationToSatoshi:[NSString stringWithFormat:@"%f", acc]];
-        return [CoreBridge formatSatoshi:satoshi withSymbol:false];
+        if (satoshi == 0 || acc == 0.0)
+            return @"";
+        else
+            return [CoreBridge formatSatoshi:satoshi withSymbol:false];
     }
     else
-        return [CoreBridge formatCurrency:acc
-                          withCurrencyNum:self.currencyNum
-                               withSymbol:false];
+    {
+        if (acc == 0.0)
+            return @"";
+        else
+            return [CoreBridge formatCurrency:acc
+                              withCurrencyNum:self.currencyNum
+                                   withSymbol:false];
+    }
 }
 
 - (void)performLastOperation
