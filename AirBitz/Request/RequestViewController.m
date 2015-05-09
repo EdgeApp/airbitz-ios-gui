@@ -137,6 +137,8 @@
 
 	[self loadWalletInfo];
 
+    _bottomBTCUSDLabel.text = [User Singleton].denominationLabel;
+
 //XXX	self.BTCLabel_TextField.text = [User Singleton].denominationLabel;
     [self.segmentedControlBTCUSD setTitle:[User Singleton].denominationLabel forSegmentAtIndex:1];
 //    self.BTC_TextField.inputView = !IS_IPHONE4 ? dummyView : self.keypadView;
@@ -363,6 +365,7 @@
 
 - (void)updateQRCode
 {
+    NSLog(@"ENTER updateQRCode");
     NSString *strName = @"";
     NSString *strCategory = @"";
     NSString *strNotes = @"";
@@ -389,6 +392,7 @@
 //    // bring up the qr code view controller
 //    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress requestURI:strRequestURI withAmount:requestAmount withDonation:donation withRequestState:state];
 
+    NSLog(@"EXIT updateQRCode");
 
 }
 
@@ -492,7 +496,8 @@
         else
         {
             self.currentTopField = self.USD_TextField;
-            bottomField = self.BTC_TextField;
+            _bottomBTCUSDLabel.text = [User Singleton].denominationLabel;
+
         }
     }
     else
@@ -505,22 +510,34 @@
         {
             self.currentTopField = self.BTC_TextField;
             bottomField = self.USD_TextField;
+
+            Wallet *wallet = [self getCurrentWallet];
+            _bottomBTCUSDLabel = wallet.currencyAbbrev;
         }
     }
 
     self.currentTopField.frame = topFrame;
+    UIColor *color = [UIColor lightGrayColor];
+    NSString *string = NSLocalizedString(@"Enter Amount (optional)", "Placeholder text for Receive screen amount");
+    self.currentTopField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:string attributes:@{NSForegroundColorAttributeName: color}];
+
     [self.currentTopField setFont:[UIFont fontWithName:@"Lato-Regular" size:topTextSize]];
     [self.currentTopField setTextColor:[Theme Singleton].colorRequestTopTextField];
     [self.currentTopField becomeFirstResponder];
     [self.currentTopField setTintColor:[UIColor lightGrayColor]];
     [self.currentTopField setEnabled:true];
+
     self.keypadView.textField = self.currentTopField;
 
     bottomField.frame = bottomFrame;
+    bottomField.placeholder = @"";
     [bottomField setFont:[UIFont fontWithName:@"Lato-Regular" size:bottomTextSize]];
     [bottomField setTextColor:[Theme Singleton].colorRequestBottomTextField];
     [bottomField setTintColor:[UIColor lightGrayColor]];
     [bottomField setEnabled:false];
+
+    if ([bottomField.text length] == 0)
+        _bottomBTCUSDLabel = @"";
 
 }
 
@@ -532,7 +549,7 @@
 	double currency;
 	tABC_Error error;
 
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    Wallet *wallet = [self getCurrentWallet];
 
 	//first need to create a transaction details struct
     memset(&_details, 0, sizeof(tABC_TxDetails));
@@ -638,6 +655,8 @@
     storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave 
     withAmount:(SInt64)amountSatoshi withRequestState:(RequestState)state
 {
+    NSLog(@"ENTER createRequestQRImageFor");
+
     UIImage *qrImage = nil;
     [strRequestID setString:@""];
     [strRequestAddress setString:@""];
@@ -654,7 +673,7 @@
 
     if (szRequestID)
     {
-        Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+        Wallet *wallet = [self getCurrentWallet];
         tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
                                            [[User Singleton].password UTF8String],
                                            [wallet.strUUID UTF8String],
@@ -689,7 +708,7 @@
         }
         char *szRequestAddress = NULL;
 
-        Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+        Wallet *wallet = [self getCurrentWallet];
         tABC_CC result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
                                                [[User Singleton].password UTF8String],
                                                [wallet.strUUID UTF8String],
@@ -736,6 +755,8 @@
         [UIImagePNGRepresentation(qrImageFinal) writeToFile:filePath atomically:YES];
     }
 
+    NSLog(@"EXIT createRequestQRImageFor");
+
     return qrImageFinal;
 }
 
@@ -747,8 +768,8 @@
     {
         return;
     }
-    
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+
+    Wallet *wallet = [self getCurrentWallet];
     
     self.exchangeRateLabel.text = [CoreBridge conversionString:wallet];
 //XXX    self.USDLabel_TextField.text = wallet.currencyAbbrev;
@@ -758,21 +779,39 @@
 	{
 		double currency;
         int64_t satoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
-		if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                  satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
-            self.USD_TextField.text = [CoreBridge formatCurrency:currency
-                                                 withCurrencyNum:wallet.currencyNum
-                                                      withSymbol:false];
+        if (satoshi == 0)
+        {
+            self.USD_TextField.text = @"";
+            self.BTC_TextField.text = @"";
+        }
+        else
+        {
+            if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                    satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
+                self.USD_TextField.text = [CoreBridge formatCurrency:currency
+                                                     withCurrencyNum:wallet.currencyNum
+                                                          withSymbol:false];
+        }
 	}
 	else if (_selectedTextField == self.USD_TextField)
 	{
 		int64_t satoshi;
 		double currency = [self.USD_TextField.text doubleValue];
-		if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                  currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
-            self.BTC_TextField.text = [CoreBridge formatSatoshi:satoshi
-                                                     withSymbol:false
-                                               cropDecimals:[CoreBridge currencyDecimalPlaces]];
+        if (currency == 0.0)
+        {
+            self.USD_TextField.text = @"";
+            self.BTC_TextField.text = @"";
+        }
+        else
+        {
+            if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                    currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
+            {
+                self.BTC_TextField.text = [CoreBridge formatSatoshi:satoshi
+                                                         withSymbol:false
+                                                       cropDecimals:[CoreBridge currencyDecimalPlaces]];
+            }
+        }
 	}
 
     NSString *walletName;
@@ -825,7 +864,7 @@
 
             if (_selectedWalletIndex < [arrayWallets count])
             {
-                Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
+                Wallet *wallet = [self getCurrentWallet];
                 self.keypadView.currencyNum = wallet.currencyNum;
 
                 self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
@@ -898,7 +937,7 @@
     _selectedWalletIndex = itemIndex;
 
     // Update wallet UUID
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    Wallet *wallet = [self getCurrentWallet];
     [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
     self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
     
@@ -955,5 +994,8 @@
     [self setFirstResponder];
 }
 
-
+- (Wallet *) getCurrentWallet
+{
+    return [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+}
 @end

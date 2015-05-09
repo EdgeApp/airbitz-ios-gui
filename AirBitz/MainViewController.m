@@ -152,6 +152,9 @@ MainViewController *staticMVC;
 
     [self loadUserViews];
 
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
+
     // resgister for transaction details screen complete notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit:) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchSend:) name:NOTIFICATION_LAUNCH_SEND_FOR_WALLET object:nil];
@@ -177,6 +180,12 @@ MainViewController *staticMVC;
     [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
     
     [NotificationChecker initAll];
+}
+
+- (void)deviceOrientationDidChange
+{
+ //XXX
+
 }
 
 /**
