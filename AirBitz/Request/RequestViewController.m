@@ -496,6 +496,7 @@
         else
         {
             self.currentTopField = self.USD_TextField;
+            bottomField = self.BTC_TextField;
             _bottomBTCUSDLabel.text = [User Singleton].denominationLabel;
 
         }
