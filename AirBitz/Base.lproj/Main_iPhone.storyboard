@@ -636,8 +636,8 @@
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" misplaced="YES" text="Exchange Rate Loading..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwC-1c-veH">
-                                        <rect key="frame" x="166" y="60" width="144" height="40"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Exchange Rate Loading..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwC-1c-veH">
+                                        <rect key="frame" x="162" y="60" width="148" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="47a-Rc-X2z"/>
                                         </constraints>
@@ -647,8 +647,8 @@
                                         <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="700" misplaced="YES" text="BTC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fc7-23-ecF" userLabel="BTC">
-                                        <rect key="frame" x="124" y="60" width="34" height="40"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="700" text="BTC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fc7-23-ecF" userLabel="BTC">
+                                        <rect key="frame" x="124" y="60" width="30" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Zhe-0Q-QnX"/>
                                         </constraints>
@@ -665,6 +665,20 @@
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="oHb-35-C2V"/>
                                         </constraints>
                                     </imageView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jlL-oE-aWy">
+                                        <rect key="frame" x="10" y="518" width="300" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="lWi-lc-5JU"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Copy"/>
+                                            <segment title="Email"/>
+                                            <segment title="SMS"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentedControlCopyEmailSMSAction:" destination="Int-ih-AH6" eventType="touchUpInside" id="rNX-hV-IBi"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FS5-S0-Rqp" customClass="CalculatorView">
                                         <rect key="frame" x="0.0" y="325" width="320" height="229"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -684,6 +698,7 @@
                                 <constraints>
                                     <constraint firstItem="7N4-k1-c9H" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="0fk-Na-gcH"/>
                                     <constraint firstItem="5sd-ot-S1v" firstAttribute="top" secondItem="Fc7-23-ecF" secondAttribute="bottom" constant="8" symbolic="YES" id="1Co-L4-BBO"/>
+                                    <constraint firstAttribute="trailing" secondItem="jlL-oE-aWy" secondAttribute="trailing" constant="10" id="9iA-63-a78"/>
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="9x4-jx-Knd"/>
                                     <constraint firstAttribute="trailing" secondItem="FS5-S0-Rqp" secondAttribute="trailing" id="Bpf-7g-eiN"/>
                                     <constraint firstAttribute="trailing" secondItem="2Po-w8-mEf" secondAttribute="trailing" id="CdR-tB-b9W"/>
@@ -696,7 +711,9 @@
                                     <constraint firstAttribute="bottom" secondItem="FS5-S0-Rqp" secondAttribute="bottom" constant="49" id="aqf-C8-N7y"/>
                                     <constraint firstAttribute="trailing" secondItem="7N4-k1-c9H" secondAttribute="trailing" constant="20" id="b0e-5R-pN1"/>
                                     <constraint firstItem="Fc7-23-ecF" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="dXq-T1-ULl"/>
+                                    <constraint firstAttribute="bottom" secondItem="jlL-oE-aWy" secondAttribute="bottom" constant="57" id="dZ7-sF-hD9"/>
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="jLA-xe-QYF"/>
+                                    <constraint firstItem="jlL-oE-aWy" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="10" id="k3E-Yq-7CZ"/>
                                     <constraint firstAttribute="centerX" secondItem="5sd-ot-S1v" secondAttribute="centerX" id="o1H-0P-xVV"/>
                                     <constraint firstItem="jwC-1c-veH" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="tuc-7l-JlM"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5sd-ot-S1v" secondAttribute="bottom" constant="100" id="xpI-uO-ETW"/>
@@ -723,6 +740,7 @@
                         <outlet property="exchangeRateLabel" destination="jwC-1c-veH" id="3U1-BI-cHp"/>
                         <outlet property="keypadView" destination="FS5-S0-Rqp" id="Xh1-wc-LVQ"/>
                         <outlet property="segmentedControlBTCUSD" destination="dqf-l4-9Zx" id="FOf-6y-9mP"/>
+                        <outlet property="segmentedControlCopyEmailSMS" destination="jlL-oE-aWy" id="81Z-jp-5uQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2bB-r5-X2p" userLabel="First Responder" sceneMemberID="firstResponder"/>

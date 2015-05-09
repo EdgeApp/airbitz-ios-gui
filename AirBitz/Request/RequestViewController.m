@@ -61,6 +61,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlBTCUSD;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlCopyEmailSMS;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calculatorBottom;
 @property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
 //@property (nonatomic, weak) IBOutlet UILabel            *BTCLabel_TextField;
@@ -232,9 +233,17 @@
 {
     CGFloat destination;
     if (up)
+    {
         destination = [MainViewController getFooterHeight];
+        self.keypadView.alpha = 1.0;
+        self.keypadView.hidden = false;
+    }
     else
+    {
         destination = -self.keypadView.frame.size.height;
+        self.keypadView.alpha = 0.0;
+        self.keypadView.hidden = true;
+    }
 
     self.calculatorBottom.constant = destination;
 
@@ -306,6 +315,24 @@
     }
 }
 
+- (IBAction)segmentedControlCopyEmailSMSAction:(id)sender
+{
+    if(segmentedControlBTCUSD.selectedSegmentIndex == 0)
+    {
+        // Do Copy
+        
+    }
+    else if(segmentedControlBTCUSD.selectedSegmentIndex == 1)
+    {
+        // Do Email
+        
+    }
+    else if(segmentedControlBTCUSD.selectedSegmentIndex == 2)
+    {
+        // Do SMS
+        
+    }
+}
 
 - (void)info
 {
@@ -378,11 +405,15 @@
 
 - (void)setFirstResponder
 {
-    // if this is a 4.5" screen then the calculator is up so we need to always have one of the edit boxes selected
-    if (![LocalSettings controller].bMerchantMode)
+    if ([LocalSettings controller].bMerchantMode)
     {
         // make the USD the first responder
         [self.USD_TextField becomeFirstResponder];
+    }
+    else
+    {
+        [self.BTC_TextField resignFirstResponder];
+        [self.USD_TextField resignFirstResponder];
     }
 }
 
@@ -800,8 +831,8 @@
 
 - (void)CalculatorDone:(CalculatorView *)calculator
 {
-//	[self.BTC_TextField resignFirstResponder];
-//	[self.USD_TextField resignFirstResponder];
+	[self.BTC_TextField resignFirstResponder];
+	[self.USD_TextField resignFirstResponder];
 
     [self changeCalculator:YES show:NO];
 //    if (!IS_IPHONE4 ) // condition where calculator is showing Next instead of Done
