@@ -658,15 +658,25 @@
                                         <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_QR.png" translatesAutoresizingMaskIntoConstraints="NO" id="5sd-ot-S1v">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MRG-UO-gcm" userLabel="View -QR Code">
                                         <rect key="frame" x="56" y="108" width="209" height="209"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_QR.png" translatesAutoresizingMaskIntoConstraints="NO" id="5sd-ot-S1v" userLabel="qrCodeImage">
+                                                <rect key="frame" x="10" y="10" width="189" height="189"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="5sd-ot-S1v" secondAttribute="height" multiplier="1:1" id="d3x-VX-Pma"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="oHb-35-C2V"/>
+                                            <constraint firstAttribute="width" secondItem="MRG-UO-gcm" secondAttribute="height" multiplier="1:1" id="1Yx-WK-Qo5"/>
+                                            <constraint firstAttribute="bottom" secondItem="5sd-ot-S1v" secondAttribute="bottom" constant="10" id="VGJ-HT-Mob"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="XyV-AG-oOE"/>
+                                            <constraint firstAttribute="trailing" secondItem="5sd-ot-S1v" secondAttribute="trailing" constant="10" id="Zx1-Aw-mbe"/>
+                                            <constraint firstItem="5sd-ot-S1v" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="top" constant="10" id="iUD-7Z-rPi"/>
+                                            <constraint firstItem="5sd-ot-S1v" firstAttribute="leading" secondItem="MRG-UO-gcm" secondAttribute="leading" constant="10" id="ojw-f4-A0p"/>
                                         </constraints>
-                                    </imageView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jlL-oE-aWy">
-                                        <rect key="frame" x="10" y="518" width="300" height="29"/>
+                                    </view>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jlL-oE-aWy">
+                                        <rect key="frame" x="10" y="506" width="300" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="lWi-lc-5JU"/>
                                         </constraints>
@@ -697,26 +707,26 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="7N4-k1-c9H" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="0fk-Na-gcH"/>
-                                    <constraint firstItem="5sd-ot-S1v" firstAttribute="top" secondItem="Fc7-23-ecF" secondAttribute="bottom" constant="8" symbolic="YES" id="1Co-L4-BBO"/>
+                                    <constraint firstItem="FS5-S0-Rqp" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="bottom" constant="8" symbolic="YES" id="0kB-HL-udn"/>
                                     <constraint firstAttribute="trailing" secondItem="jlL-oE-aWy" secondAttribute="trailing" constant="10" id="9iA-63-a78"/>
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="9x4-jx-Knd"/>
                                     <constraint firstAttribute="trailing" secondItem="FS5-S0-Rqp" secondAttribute="trailing" id="Bpf-7g-eiN"/>
                                     <constraint firstAttribute="trailing" secondItem="2Po-w8-mEf" secondAttribute="trailing" id="CdR-tB-b9W"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MRG-UO-gcm" secondAttribute="bottom" constant="100" id="CpX-a0-DQQ"/>
                                     <constraint firstItem="FS5-S0-Rqp" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="FlS-Fz-ggc"/>
                                     <constraint firstItem="Fc7-23-ecF" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="124" id="GQY-Jg-jf9"/>
                                     <constraint firstAttribute="trailing" secondItem="jwC-1c-veH" secondAttribute="trailing" constant="10" id="HK4-g1-B8z"/>
+                                    <constraint firstAttribute="centerX" secondItem="MRG-UO-gcm" secondAttribute="centerX" id="L0B-46-sJq"/>
                                     <constraint firstItem="7N4-k1-c9H" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" id="LHn-2R-wnG"/>
-                                    <constraint firstItem="FS5-S0-Rqp" firstAttribute="top" secondItem="5sd-ot-S1v" secondAttribute="bottom" constant="8" symbolic="YES" id="WdN-XG-9a5"/>
                                     <constraint firstItem="jwC-1c-veH" firstAttribute="leading" secondItem="Fc7-23-ecF" secondAttribute="trailing" constant="8" symbolic="YES" id="Wns-uH-FL9"/>
                                     <constraint firstAttribute="bottom" secondItem="FS5-S0-Rqp" secondAttribute="bottom" constant="49" id="aqf-C8-N7y"/>
                                     <constraint firstAttribute="trailing" secondItem="7N4-k1-c9H" secondAttribute="trailing" constant="20" id="b0e-5R-pN1"/>
+                                    <constraint firstItem="MRG-UO-gcm" firstAttribute="top" secondItem="Fc7-23-ecF" secondAttribute="bottom" constant="8" symbolic="YES" id="bwV-vG-x9m"/>
                                     <constraint firstItem="Fc7-23-ecF" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="dXq-T1-ULl"/>
                                     <constraint firstAttribute="bottom" secondItem="jlL-oE-aWy" secondAttribute="bottom" constant="57" id="dZ7-sF-hD9"/>
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="jLA-xe-QYF"/>
                                     <constraint firstItem="jlL-oE-aWy" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="10" id="k3E-Yq-7CZ"/>
-                                    <constraint firstAttribute="centerX" secondItem="5sd-ot-S1v" secondAttribute="centerX" id="o1H-0P-xVV"/>
                                     <constraint firstItem="jwC-1c-veH" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="tuc-7l-JlM"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5sd-ot-S1v" secondAttribute="bottom" constant="100" id="xpI-uO-ETW"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -739,8 +749,10 @@
                         <outlet property="calculatorBottom" destination="aqf-C8-N7y" id="bLC-E9-fKs"/>
                         <outlet property="exchangeRateLabel" destination="jwC-1c-veH" id="3U1-BI-cHp"/>
                         <outlet property="keypadView" destination="FS5-S0-Rqp" id="Xh1-wc-LVQ"/>
+                        <outlet property="qrCodeImageView" destination="5sd-ot-S1v" id="Tct-qD-0GX"/>
                         <outlet property="segmentedControlBTCUSD" destination="dqf-l4-9Zx" id="FOf-6y-9mP"/>
                         <outlet property="segmentedControlCopyEmailSMS" destination="jlL-oE-aWy" id="81Z-jp-5uQ"/>
+                        <outlet property="viewQRCodeFrame" destination="MRG-UO-gcm" id="qXa-Xs-5On"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2bB-r5-X2p" userLabel="First Responder" sceneMemberID="firstResponder"/>

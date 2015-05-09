@@ -60,6 +60,8 @@
 
 }
 
+@property (nonatomic, weak) IBOutlet UIImageView    *qrCodeImageView;
+@property (weak, nonatomic) IBOutlet UIView         *viewQRCodeFrame;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlBTCUSD;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlCopyEmailSMS;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calculatorBottom;
@@ -108,6 +110,11 @@
 
 	self.buttonSelector.delegate = self;
     [self.buttonSelector disableButton];
+
+    self.qrCodeImageView.layer.magnificationFilter = kCAFilterNearest;
+    self.viewQRCodeFrame.layer.cornerRadius = 8;
+    self.viewQRCodeFrame.layer.masksToBounds = YES;
+
 
 //	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
     [self.buttonSelector setButtonWidth:WALLET_REQUEST_BUTTON_WIDTH];
@@ -290,11 +297,11 @@
         [_importWalletViewController.view removeFromSuperview];
         _importWalletViewController = nil;
     }
-    if (_qrViewController)
-    {
-        [_qrViewController.view removeFromSuperview];
-        _qrViewController = nil;
-    }
+//    if (_qrViewController)
+//    {
+//        [_qrViewController.view removeFromSuperview];
+//        _qrViewController = nil;
+//    }
     self.BTC_TextField.text = @"";
 	self.USD_TextField.text = @"";
 
@@ -354,19 +361,8 @@
     [self LaunchQRCodeScreen:amountSatoshi withRequestState:state];
 }
 
-- (void)LaunchQRCodeScreen:(SInt64)amountSatoshi withRequestState:(RequestState)state
+- (void)updateQRCode
 {
-    [self.view endEditing:YES];
-    
-    SInt64 requestAmount = amountSatoshi;
-    SInt64 donation = 0;
-    if (kDonation == state)
-    {
-        // parameter represents the received donation amount
-        requestAmount = 0;
-        donation = amountSatoshi;
-    }
-
     NSString *strName = @"";
     NSString *strCategory = @"";
     NSString *strNotes = @"";
@@ -375,23 +371,66 @@
     NSMutableString *strRequestID = [[NSMutableString alloc] init];
     NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
     NSMutableString *strRequestURI = [[NSMutableString alloc] init];
+    SInt64 amountSatoshi = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
+
+    RequestState state = [self isDonation:amountSatoshi] ? kDonation : kRequest;
+
     UIImage *qrImage = [self createRequestQRImageFor:strName withNotes:strNotes withCategory:strCategory
-        storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
-        scaleAndSave:NO withAmount:requestAmount withRequestState:state];
+                                    storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
+                                        scaleAndSave:NO withAmount:amountSatoshi withRequestState:state];
 
-    ShowWalletQRViewController *tempQRViewController = NULL;
-    if (_qrViewController)
-    {
-        tempQRViewController = _qrViewController;
-    }
-    // bring up the qr code view controller
-    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress requestURI:strRequestURI withAmount:requestAmount withDonation:donation withRequestState:state];
+    self.qrCodeImageView.image = qrImage;
+//
+//    ShowWalletQRViewController *tempQRViewController = NULL;
+//    if (_qrViewController)
+//    {
+//        tempQRViewController = _qrViewController;
+//    }
+//    // bring up the qr code view controller
+//    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress requestURI:strRequestURI withAmount:requestAmount withDonation:donation withRequestState:state];
 
-    if (tempQRViewController)
-    {
-        [tempQRViewController.view removeFromSuperview];
-    }
+
 }
+
+
+//- (void)LaunchQRCodeScreen:(SInt64)amountSatoshi withRequestState:(RequestState)state
+//{
+//    [self.view endEditing:YES];
+//
+//    SInt64 requestAmount = amountSatoshi;
+//    SInt64 donation = 0;
+//    if (kDonation == state)
+//    {
+//        // parameter represents the received donation amount
+//        requestAmount = 0;
+//        donation = amountSatoshi;
+//    }
+//
+//    NSString *strName = @"";
+//    NSString *strCategory = @"";
+//    NSString *strNotes = @"";
+//
+//    // get the QR Code image
+//    NSMutableString *strRequestID = [[NSMutableString alloc] init];
+//    NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
+//    NSMutableString *strRequestURI = [[NSMutableString alloc] init];
+//    UIImage *qrImage = [self createRequestQRImageFor:strName withNotes:strNotes withCategory:strCategory
+//        storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
+//        scaleAndSave:NO withAmount:requestAmount withRequestState:state];
+//
+//    ShowWalletQRViewController *tempQRViewController = NULL;
+//    if (_qrViewController)
+//    {
+//        tempQRViewController = _qrViewController;
+//    }
+//    // bring up the qr code view controller
+//    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress requestURI:strRequestURI withAmount:requestAmount withDonation:donation withRequestState:state];
+//
+//    if (tempQRViewController)
+//    {
+//        [tempQRViewController.view removeFromSuperview];
+//    }
+//}
 
 #pragma mark - Notification Handlers
 
@@ -741,6 +780,7 @@
     walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
 
     [MainViewController changeNavBarTitleWithButton:walletName action:@selector(didTapTitle:) fromObject:self];
+    [self updateQRCode];
 
 }
 
