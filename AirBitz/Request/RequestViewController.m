@@ -158,7 +158,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.viewQRCodeFrame.layer.masksToBounds = YES;
     self.amountSatoshiReceived = 0;
     self.amountSatoshiRequested = 0;
-    self.previousAmountSatoshiRequested = -1;
     self.state = kRequest;
 
     _selectedTextField = self.USD_TextField;
@@ -224,6 +223,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.previousAmountSatoshiRequested = -1;
 
     // create a dummy view to replace the keyboard if we are on a 4.5" screen
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
