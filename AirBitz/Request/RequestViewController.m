@@ -501,7 +501,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         self.amountSatoshiReceived = 0;
         self.amountSatoshiRequested = 0;
-        return kDone;
     }
 
     NSString *strName = @"";
