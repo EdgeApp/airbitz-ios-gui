@@ -596,6 +596,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtl-WY-3kv" userLabel="View -body">
                                 <rect key="frame" x="0.0" y="64" width="320" height="603"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BLE_Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="fHY-wl-t5s">
+                                        <rect key="frame" x="30" y="276" width="21" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29" id="PAb-qn-RLj"/>
+                                            <constraint firstAttribute="width" constant="21" id="xye-jR-07Z"/>
+                                        </constraints>
+                                    </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Po-w8-mEf" userLabel="View -entry">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                         <subviews>
@@ -763,13 +770,6 @@
                                             <constraint firstAttribute="height" constant="1" id="Get-1y-G6d"/>
                                         </constraints>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BLE_Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="fHY-wl-t5s">
-                                        <rect key="frame" x="30" y="276" width="21" height="29"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="29" id="PAb-qn-RLj"/>
-                                            <constraint firstAttribute="width" constant="21" id="xye-jR-07Z"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
