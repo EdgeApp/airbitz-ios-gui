@@ -70,25 +70,29 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightListings = 90.0;
         self.heightSearchClues = 35.0;
         self.fadingAlertDropdownHeight = 100;
+        self.heightBLETableCells = 50;
     }
     if (IS_MIN_IPHONE5)
     {
         self.heightListings = 110.0;
         self.heightSearchClues = 40.0;
+        self.heightBLETableCells = 52;
     }
     if (IS_MIN_IPHONE6)
     {
         self.heightListings = 120.0;
         self.heightSearchClues = 45.0;
+        self.heightBLETableCells = 55;
     }
     if (IS_MIN_IPHONE6_PLUS)
     {
         self.heightListings = 130.0;
         self.heightSearchClues = 45.0;
+        self.heightBLETableCells = 57;
     }
     if (IS_MIN_IPAD_MINI)
     {
-
+        self.heightBLETableCells = 60;
     }
 
     if ([[UIDevice currentDevice].systemVersion hasPrefix:@"7"])

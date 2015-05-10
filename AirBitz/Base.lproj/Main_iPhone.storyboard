@@ -147,7 +147,7 @@
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wik-w7-rsL" userLabel="View -darkbackdrop">
                                 <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AOi-Wp-bVq">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AOi-Wp-bVq">
                                         <rect key="frame" x="8" y="8" width="304" height="35"/>
                                         <segments>
                                             <segment title="Transfer"/>
@@ -166,10 +166,10 @@
                                     <constraint firstItem="AOi-Wp-bVq" firstAttribute="leading" secondItem="Wik-w7-rsL" secondAttribute="leading" constant="8" id="u5G-PQ-bIK"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="1eG-qb-KCi" userLabel="View -MinSpaceForCamera">
+                            <view contentMode="scaleAspectFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1eG-qb-KCi" userLabel="View -MinSpaceForCamera">
                                 <rect key="frame" x="0.0" y="114" width="320" height="200"/>
                                 <subviews>
-                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IrC-mj-iIB" customClass="LatoLabel">
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Camera unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IrC-mj-iIB" customClass="LatoLabel">
                                         <rect key="frame" x="20" y="20" width="280" height="160"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -188,10 +188,10 @@
                                     <constraint firstItem="IrC-mj-iIB" firstAttribute="top" secondItem="1eG-qb-KCi" secondAttribute="top" constant="20" symbolic="YES" id="wKJ-Sa-Nfg"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V8c-6o-ibr" userLabel="View -BLE">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V8c-6o-ibr" userLabel="View -BLE">
                                 <rect key="frame" x="0.0" y="314" width="320" height="166"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9C3-ej-2l9">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9C3-ej-2l9">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="166"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -200,7 +200,7 @@
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ScanCell" rowHeight="50" id="lQK-wC-hur" customClass="BLEScanCell">
                                                 <rect key="frame" x="0.0" y="22" width="320" height="47"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="center" tableViewCell="lQK-wC-hur" id="vNw-m0-R4u">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.65000000000000002" contentMode="center" tableViewCell="lQK-wC-hur" id="vNw-m0-R4u">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
@@ -277,6 +277,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="Ala-bv-06W"/>
                                     <constraint firstItem="9C3-ej-2l9" firstAttribute="leading" secondItem="V8c-6o-ibr" secondAttribute="leading" id="Ir8-c3-oVG"/>
                                     <constraint firstItem="9C3-ej-2l9" firstAttribute="top" secondItem="V8c-6o-ibr" secondAttribute="top" id="PBM-JO-jyc"/>
                                     <constraint firstAttribute="trailing" secondItem="9C3-ej-2l9" secondAttribute="trailing" id="SJC-fL-1hS"/>
@@ -340,6 +341,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="addressTextField" destination="aan-73-l0U" id="aRK-Io-jvN"/>
+                        <outlet property="bleViewHeight" destination="Ala-bv-06W" id="kNb-GU-e7J"/>
                         <outlet property="flashSelector" destination="P8E-fr-7ke" id="N5Z-qc-wEU"/>
                         <outlet property="scanFrame" destination="IsP-NR-ytZ" id="WAe-eF-Ooy"/>
                         <outlet property="scanningErrorLabel" destination="IrC-mj-iIB" id="TIf-ir-pjC"/>

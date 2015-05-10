@@ -110,6 +110,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //@property (nonatomic, weak) IBOutlet UILabel				*scanningLabel;
 @property (nonatomic, weak) IBOutlet UILabel				*scanningErrorLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bleViewHeight;
 @property (strong, nonatomic) CBCentralManager      *centralManager;
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
 @property (strong, nonatomic) NSMutableData         *data;
@@ -682,7 +683,24 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		NSTimeInterval newUpdateTime = CACurrentMediaTime();
 		if((newUpdateTime - lastUpdateTime) > 0.5)
 		{
-			lastUpdateTime = newUpdateTime;
+            dispatch_async(dispatch_get_main_queue(),^{
+                [UIView animateWithDuration:0.35
+                                      delay:0.0
+                                    options:UIViewAnimationOptionCurveEaseInOut
+                                 animations:^
+                                 {
+                                     // Update the table height
+
+                                     _bleViewHeight.constant = [MainViewController getFooterHeight] + ([Theme Singleton].heightBLETableCells * [self.peripheralContainers count]);
+                                     [self.view layoutIfNeeded];
+                                 }
+                                 completion:^(BOOL finished)
+                                 {
+                                 }];
+
+            });
+
+            lastUpdateTime = newUpdateTime;
 			[self updateTable];
 		}
     }
@@ -1199,7 +1217,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 50.0;
+	return [Theme Singleton].heightBLETableCells;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -34,6 +34,8 @@
 @property (nonatomic) NSString *deleteAccountWarning;
 @property (nonatomic) CGFloat heightListings;
 @property (nonatomic) CGFloat heightSearchClues;
+@property (nonatomic) CGFloat heightBLETableCells;
+
 
 //@property (nonatomic) int minutesAutoLogout;
 //@property (nonatomic) int defaultCurrencyNum;
