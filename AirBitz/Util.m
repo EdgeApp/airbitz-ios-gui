@@ -39,8 +39,17 @@
             return NSLocalizedString(@"Synchronizing with the network.", nil);
         case ABC_CC_NonNumericPin:
             return NSLocalizedString(@"PIN must be a numeric value.", nil);
-        case ABC_CC_PinExpired:
-            return NSLocalizedString(@"PIN login cancelled", nil);
+        case ABC_CC_InvalidPinWait:
+        {
+            NSString *description = [NSString stringWithUTF8String:pError->szDescription];
+            if ([@"0" isEqualToString:description]) {
+                return NSLocalizedString(@"Invalid PIN.", nil);
+            } else {
+                return [NSString stringWithFormat:
+                            NSLocalizedString(@"Too many failed login attempts. Please try again in %@ seconds.", nil),
+                            description];
+            }
+        }
         case ABC_CC_Error:
         case ABC_CC_NULLPtr:
         case ABC_CC_NoAvailAccountSpace:

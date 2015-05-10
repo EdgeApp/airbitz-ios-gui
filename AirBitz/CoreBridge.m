@@ -1111,24 +1111,22 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (tABC_CC)PINLoginWithPIN:(NSString *)PIN
++ (void)PINLoginWithPIN:(NSString *)PIN error:(tABC_Error *)pError
 {
     if ([CoreBridge PINLoginExists])
     {
         NSString *username = [LocalSettings controller].cachedUsername;
-        tABC_Error error;
         tABC_CC result = ABC_PinLogin([username UTF8String],
                                       [PIN UTF8String],
-                                      &error);
+                                      pError);
         if (ABC_CC_Ok == result)
         {
             [User login:[LocalSettings controller].cachedUsername password:NULL];
         }
-        return result;
     }
     else
     {
-        return ABC_CC_PinExpired;
+        pError->code = ABC_CC_BadPassword;
     }
 }
 

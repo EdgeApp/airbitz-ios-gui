@@ -171,15 +171,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	self.arrayContacts = @[];
 	// load all the names from the address book
     [self generateListOfContactNames];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationEnteredForeground:)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-}
-
-- (void)applicationEnteredForeground:(NSNotification *)notification {
-    [self.flashSelector selectItem:FLASH_ITEM_OFF];
 }
 
 - (void)dealloc
@@ -221,41 +212,28 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)viewWillAppear:(BOOL)animated
 {
     [self scanBLEstartCamera];
-	
+
 	//reset our frame's height in case it got changed by the image picker view controller
 	CGRect frame = self.view.frame;
 	frame.size.height = originalFrameHeight;
 	self.view.frame = frame;
-	
-    [[NSNotificationCenter defaultCenter]
-        addObserver:self
-           selector:@selector(applicationDidBecomeActiveNotification:)
-               name:UIApplicationDidBecomeActiveNotification
-             object:nil];
+
     [[NSNotificationCenter defaultCenter]
         addObserver:self
            selector:@selector(willResignActive)
                name:UIApplicationWillResignActiveNotification
              object:nil];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
+           selector:@selector(applicationDidBecomeActiveNotification:)
+               name:UIApplicationDidBecomeActiveNotification
+             object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[_startScannerTimer invalidate];
-	_startScannerTimer = nil;
-	self.peripheralContainers = nil;
-#if !TARGET_IPHONE_SIMULATOR
-	[self stopQRReader];
-#endif
-	
-	// Don't keep it going while we're not showing.
-	if([LocalSettings controller].bDisableBLE == NO)
-	{
-		[self stopBLE];
-		_centralManager = nil;
-	}
-	scanMode = SCAN_MODE_UNINITIALIZED;
-    //NSLog(@"Scanning stopped");
+    [self willResignActive];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -266,15 +244,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
 {
-#if !TARGET_IPHONE_SIMULATOR
-	//NSLog(@"&&&&&&&&&&& APP BECAME ACTIVE &&&&&&&&&&&&&");
-	if(YES || scanMode == SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND)
-	{
-		//NSLog(@"&&&&&&&&&&&&& STARTING QR READER &&&&&&&&&&&&&&&&");
-		scanMode = SCAN_MODE_QR;
-		[self scanBLEstartCamera];
-	}
-#endif
+    [self.flashSelector selectItem:FLASH_ITEM_OFF];
+    if (SCAN_MODE_UNINITIALIZED == scanMode) {
+        [self scanBLEstartCamera];
+    }
 }
 
 - (void)willResignActive
@@ -284,6 +257,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #if !TARGET_IPHONE_SIMULATOR
 	[self stopQRReader];
 #endif
+
+	// Don't keep it going while we're not showing.
+	if([LocalSettings controller].bDisableBLE == NO)
+	{
+		[self stopBLE];
+		_centralManager = nil;
+	}
+	scanMode = SCAN_MODE_UNINITIALIZED;
 }
 
 - (void)resetViews
@@ -390,6 +371,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 -(void)attemptToStartQRReader
 {
+    if (_readerView) {
+        return;
+    }
     // check camera state before proceeding
 	_readerView = [ZBarReaderView new];
     if ([_readerView isDeviceAvailable])
@@ -416,7 +400,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	}
 	[_readerView start];
 	[self flashItemSelected:FLASH_ITEM_OFF];
-	//NSLog(@"################## QR READER STARTED ######################");
 }
 
 - (void)stopQRReader
@@ -426,7 +409,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [_readerView stop];
         [_readerView removeFromSuperview];
         _readerView = nil;
-		//NSLog(@"################## QR READER STOPPED ######################");
     }
 }
 

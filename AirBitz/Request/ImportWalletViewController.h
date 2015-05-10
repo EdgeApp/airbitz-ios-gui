@@ -13,6 +13,7 @@
 @interface ImportWalletViewController : UIViewController
 
 @property (assign)            id<ImportWalletViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSString *walletUUID;
 
 @end
 

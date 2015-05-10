@@ -500,10 +500,11 @@ static BOOL bInitialized = false;
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
     {
-        __block tABC_CC result = [CoreBridge PINLoginWithPIN:PINCode];
+        tABC_Error error;
+        [CoreBridge PINLoginWithPIN:PINCode error:&error];
         dispatch_async(dispatch_get_main_queue(), ^
         {
-            switch (result)
+            switch (error.code)
             {
                 case ABC_CC_Ok:
                 {
@@ -525,18 +526,9 @@ static BOOL bInitialized = false;
                     }
                     break;
                 }
-                case ABC_CC_PinExpired:
-                {
-                    [[User Singleton] resetPINLoginInvalidEntryCount];
-                    [self PINabortPermanently];
-                    break;
-                }
                 default:
                 {
-                    tABC_Error temp;
-                    temp.code = result;
-                    [self showFadingError:[Util errorMap:&temp]];
-                    break;
+                    [CoreBridge PINLoginWithPIN:PINCode error:&error];
                 }
             }
             [self showSpinner:NO];
