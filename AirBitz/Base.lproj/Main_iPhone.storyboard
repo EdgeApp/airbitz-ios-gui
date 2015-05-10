@@ -242,7 +242,7 @@
                                                     <constraints>
                                                         <constraint firstItem="Hba-dd-to8" firstAttribute="leading" secondItem="ASx-id-nUc" secondAttribute="trailing" constant="3" id="1nM-og-BNo"/>
                                                         <constraint firstItem="Tb9-gC-0YS" firstAttribute="top" secondItem="vNw-m0-R4u" secondAttribute="top" constant="12" id="2cR-SL-1p8"/>
-                                                        <constraint firstAttribute="bottom" secondItem="ASx-id-nUc" secondAttribute="bottom" constant="3" id="9FH-1M-ELS"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ASx-id-nUc" secondAttribute="bottom" constant="3" id="9FH-1M-ELS"/>
                                                         <constraint firstAttribute="bottom" secondItem="Tb9-gC-0YS" secondAttribute="bottom" constant="10" id="9Iu-Oa-gkl"/>
                                                         <constraint firstItem="RIr-2j-jnF" firstAttribute="leading" secondItem="vNw-m0-R4u" secondAttribute="leading" id="KsS-Br-zR5"/>
                                                         <constraint firstItem="gHX-Xq-QLY" firstAttribute="leading" secondItem="ASx-id-nUc" secondAttribute="leading" id="M9Q-wb-zUT"/>
@@ -294,14 +294,6 @@
                                     <constraint firstAttribute="height" constant="108" id="nkt-Va-yQa"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9e-kM-2rC" customClass="ButtonSelectorView2">
-                                <rect key="frame" x="0.0" y="64" width="320" height="1"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="L7Y-Fa-3uo"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="QJw-vc-Za2"/>
-                                </constraints>
-                            </view>
                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aan-73-l0U" userLabel="addressTextField">
                                 <rect key="frame" x="10" y="70" width="300" height="40"/>
                                 <constraints>
@@ -310,6 +302,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9e-kM-2rC" customClass="ButtonSelectorView2">
+                                <rect key="frame" x="0.0" y="64" width="320" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="L7Y-Fa-3uo"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -342,6 +341,7 @@
                     <connections>
                         <outlet property="addressTextField" destination="aan-73-l0U" id="aRK-Io-jvN"/>
                         <outlet property="bleViewHeight" destination="Ala-bv-06W" id="kNb-GU-e7J"/>
+                        <outlet property="buttonSelector" destination="g9e-kM-2rC" id="30G-6H-VYq"/>
                         <outlet property="flashSelector" destination="P8E-fr-7ke" id="N5Z-qc-wEU"/>
                         <outlet property="scanFrame" destination="IsP-NR-ytZ" id="WAe-eF-Ooy"/>
                         <outlet property="scanningErrorLabel" destination="IrC-mj-iIB" id="TIf-ir-pjC"/>

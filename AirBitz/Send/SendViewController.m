@@ -68,7 +68,7 @@ typedef enum eScanMode
 
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
+@interface SendViewController () <SendConfirmationViewControllerDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
 #if !TARGET_IPHONE_SIMULATOR
  ,ZBarReaderDelegate, ZBarReaderViewDelegate
 #endif
@@ -242,6 +242,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
              object:nil];
 
     [MainViewController changeNavBarOwner:self];
+
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(info:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
@@ -1280,6 +1281,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
                 [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
                 self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
+
+                NSString *walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
+                [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
+
+            }
+            else
+            {
+                NSString *tempTitle = NSLocalizedString(@"Loading...", @"Loading wallet list");
+                [MainViewController changeNavBarTitle:self title:tempTitle];
             }
         });
     }];
@@ -1546,7 +1556,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
     [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
     self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+    bWalletListDropped = false;
     _walletUUID = wallet.strUUID;
+
+    NSString *walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
+    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 }
 
 - (void)ButtonSelector2WillShowTable:(ButtonSelectorView2 *)view
@@ -1631,34 +1645,34 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 #pragma mark - PickerTextView Delegates
 
-- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
-{
-    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
-
-    [pickerTextView updateChoices:arrayChoices];
-}
-
-- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
-{
-    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
-
-    [pickerTextView updateChoices:arrayChoices];
-}
-
-- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
-{
-    // unhighlight text
-    // note: for some reason, if we don't do this, the text won't select next time the user selects it
-    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.beginningOfDocument]];
-
-    return YES;
-}
-
-- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
-{
-    //[self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
-}
-
+//- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
+//{
+//    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
+//
+//    [pickerTextView updateChoices:arrayChoices];
+//}
+//
+//- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
+//{
+//    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
+//
+//    [pickerTextView updateChoices:arrayChoices];
+//}
+//
+//- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
+//{
+//    // unhighlight text
+//    // note: for some reason, if we don't do this, the text won't select next time the user selects it
+//    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.beginningOfDocument]];
+//
+//    return YES;
+//}
+//
+//- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
+//{
+//    //[self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
+//}
+//
 - (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
 {
 	[pickerTextView.textField resignFirstResponder];
