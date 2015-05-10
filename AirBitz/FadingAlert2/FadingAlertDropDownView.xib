@@ -79,7 +79,7 @@
                                 <constraint firstAttribute="height" constant="80" id="xON-ME-e8T"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ppf-Pw-27m">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ppf-Pw-27m">
                             <rect key="frame" x="15" y="15" width="50" height="50"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -125,7 +125,7 @@
                 <outlet property="connectedLine1" destination="CvA-Nc-W9y" id="U1t-Bt-1I0"/>
                 <outlet property="connectedLine2" destination="xIk-Ub-qbu" id="cVc-yQ-Chl"/>
                 <outlet property="connectedLine3" destination="ZOf-PC-P7M" id="AY2-bn-aKv"/>
-                <outlet property="connectedPhoto" destination="Ppf-Pw-27m" id="l7k-hs-wTg"/>
+                <outlet property="connectedPhoto" destination="Ppf-Pw-27m" id="Rh6-LT-4MA"/>
                 <outlet property="messageText" destination="2is-5E-X7J" id="yvV-lv-54v"/>
                 <outlet property="toolBarView" destination="M8D-FP-37y" id="6UK-g0-KBC"/>
             </connections>

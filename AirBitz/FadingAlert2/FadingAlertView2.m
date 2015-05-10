@@ -91,7 +91,7 @@
     currentView.alertGroupView.layer.shadowRadius = 10;
     currentView.alertGroupView.layer.shadowColor = [[UIColor blackColor] CGColor];
     currentView.alertGroupView.layer.shadowOpacity = 0.4;
-
+    [currentView.toolBarView setTranslucent:[Theme Singleton].bTranslucencyEnable];
 
 
     return currentView;
@@ -120,6 +120,7 @@
 
     frame = parentView.frame;
     currentView.frame = frame;
+    [currentView.toolBarView setTranslucent:[Theme Singleton].bTranslucencyEnable];
 
     return currentView;
 }
@@ -135,6 +136,8 @@
 
     currentView.bIsBlocking = true;
     currentView.activityIndicator.hidden = false;
+    [currentView.toolBarView setTranslucent:[Theme Singleton].bTranslucencyEnable];
+
     [currentView showSpinner:YES center:YES];
 //    [currentView showBackground:NO];
     return currentView;

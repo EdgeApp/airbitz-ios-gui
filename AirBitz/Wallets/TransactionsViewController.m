@@ -239,6 +239,7 @@
     self.walletsView.layer.shadowRadius = 10;
     self.walletsView.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.walletsView.layer.shadowOpacity = 0.2;
+    [self.toolbarBlur setTranslucent:[Theme Singleton].bTranslucencyEnable];
 
     [self.balanceViewPlaceholder refresh];
 

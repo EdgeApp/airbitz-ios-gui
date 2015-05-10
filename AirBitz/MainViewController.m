@@ -246,6 +246,7 @@ MainViewController *staticMVC;
     NSLog(@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
 
 
+    [self.tabBar setTranslucent:[Theme Singleton].bTranslucencyEnable];
     [self launchViewControllerBasedOnAppMode];
     firstLaunch = NO;
 }

@@ -91,6 +91,14 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 
     }
 
+    if ([[UIDevice currentDevice].systemVersion hasPrefix:@"7"])
+    {
+        self.bTranslucencyEnable = NO;
+    }
+    else
+    {
+        self.bTranslucencyEnable = YES;
+    }
     return self;
 }
 

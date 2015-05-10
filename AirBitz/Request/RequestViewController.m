@@ -576,11 +576,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         case kRequest:
         case kDone:
         {
-            if (self.amountSatoshiRequested > 0)
-            {
-                NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
-                self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiRequested],string];
-            }
+//            if (self.amountSatoshiRequested > 0)
+//            {
+//                NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
+//                self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiRequested],string];
+//            }
             self.statusLine2.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
             break;
         }
@@ -596,12 +596,15 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         case kDonation:
         {
-            self.statusLine1.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
 
             if (self.amountSatoshiReceived > 0)
             {
                 NSString *string = NSLocalizedString(@"Received...", @"Received string on Request screen");
                 self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiReceived],string];
+            }
+            else
+            {
+                self.statusLine2.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
             }
             break;
         }
@@ -833,9 +836,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     [self.currentTopField setFont:[UIFont fontWithName:@"Lato-Regular" size:topTextSize]];
     [self.currentTopField setTextColor:[Theme Singleton].colorRequestTopTextField];
-//    [self.currentTopField becomeFirstResponder];
     [self.currentTopField setTintColor:[UIColor lightGrayColor]];
     [self.currentTopField setEnabled:true];
+    if (bLastCalculatorState)
+    {
+        [self.currentTopField becomeFirstResponder];
+    }
 
 
     self.keypadView.textField = self.currentTopField;
