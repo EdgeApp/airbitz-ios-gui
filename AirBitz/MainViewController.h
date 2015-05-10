@@ -12,6 +12,7 @@
 
 typedef enum eNavBarSide
 {
+    NAV_BAR_CENTER,
     NAV_BAR_LEFT,
     NAV_BAR_RIGHT
 } tNavBarSide;
@@ -26,16 +27,23 @@ typedef enum eNavBarSide
 + (void)animateView:(UIView *)view withBlur:(BOOL)withBlur;
 + (void)animateOut:(UIView *)view withBlur:(BOOL)withBlur complete:(void(^)(void))cb;
 
-+(void)changeNavBarTitle: (NSString*) titleText;
++(void)changeNavBarOwner:(UIViewController *)viewController;
++(void)changeNavBar:(UIViewController *)viewController
+              title:(NSString*) titleText
+               side:(tNavBarSide)navBarSide
+             button:(BOOL)bIsButton
+             enable:(BOOL)enable
+             action:(SEL)func
+         fromObject:(id) object;
++(void)changeNavBarTitle:(UIViewController *)viewController
+                   title:(NSString*) titleText;
++(void)changeNavBarTitleWithButton:(UIViewController *)viewController title:(NSString*) titleText action:(SEL)func fromObject:(id) object;
 +(void)showHideTabBar:(NSNotification *)notification;
 +(void)showTabBarAnimated:(BOOL)animated;
 +(void)showNavBarAnimated:(BOOL)animated;
 +(void)hideTabBarAnimated:(BOOL)animated;
 +(void)hideNavBarAnimated:(BOOL)animated;
-+(void)changeNavBarTitleWithButton: (NSString*) titleText action:(SEL)func fromObject:(id) object;
-+(void)changeNavBarTitleWithButtonView: (UIButton *)navButton;
-+(void)changeNavBarTitleWithImage: (UIImage *) titleImage;
-+(void)changeNavBarSide: (NSString*) titleText side:(tNavBarSide)navBarSide enable:(BOOL)enable action:(SEL)func fromObject:(id) object;
++(UIViewController *)getSelectedViewController;
 +(void)moveSelectedViewController: (CGFloat) x;
 +(CGFloat) getFooterHeight;
 +(CGFloat) getHeaderHeight;

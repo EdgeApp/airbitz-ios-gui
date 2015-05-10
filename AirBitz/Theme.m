@@ -56,6 +56,13 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorRequestTopTextField = [UIColor whiteColor];
     self.colorRequestBottomTextField = [UIColor darkGrayColor];
 
+    self.appFont = @"Lato-Regular";
+
+    self.backButtonText = NSLocalizedString(@"Back", @"Back button text on top left");
+    self.exitButtonText = NSLocalizedString(@"Exit", @"Exit button text on top left");
+    self.helpButtonText = NSLocalizedString(@"Help", @"Help button text on top right");
+    self.infoButtonText = NSLocalizedString(@"Info", @"Info button text on top right");
+
     self.sendRequestButtonDisabled = 0.4f;
 
     if (IS_IPHONE4)

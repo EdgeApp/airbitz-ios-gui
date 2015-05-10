@@ -223,9 +223,10 @@ static bool bInitialized = false;
 - (void) setupNavBar
 {
 //    [MainViewController changeNavBarTitleWithImage:[UIImage imageWithContentsOfFile:@"logo.png"]];
-    [MainViewController changeNavBarTitle:@"Directory"];
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:bShowBackButton action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Directory", @"Directory title bar text")];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:bShowBackButton action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].infoButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(Back:) fromObject:self];
 }
 
 - (void)resetTableHideSearch
@@ -825,13 +826,13 @@ static bool bInitialized = false;
 
 - (void)hideBackButton
 {
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
 
 }
 
 - (void)showBackButton
 {
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
 }
 
 //

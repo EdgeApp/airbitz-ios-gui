@@ -221,8 +221,9 @@
     [self performSelector:@selector(resetTableHideSearch) withObject:nil afterDelay:0.0f];
 //    [self resetTableHideSearch];
 
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
     self.buttonRequest.enabled = false;
     self.buttonSend.enabled = false;
@@ -428,7 +429,7 @@
 
     walletName = [NSString stringWithFormat:@"%@ ↓", self.wallet.strName];
 
-    [MainViewController changeNavBarTitleWithButton:walletName action:@selector(toggleWalletDropdown:) fromObject:self];
+    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(toggleWalletDropdown:) fromObject:self];
 
 
 }
@@ -1327,6 +1328,11 @@
                 [self.walletsTable reloadData];
                 [self.tableView reloadData];
             }
+            NSLog(@"TransactionsView: dataUpdated: Calling updateBalanceView");
+
+            // Since these actions are all queued. We may not be the current viewcontroller
+            // If not, then don't update the display. Especially the Navbar which is likely owned by
+            // someone else.
             [self updateBalanceView];
             [self.view setNeedsDisplay];
         });

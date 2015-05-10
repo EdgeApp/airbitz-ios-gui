@@ -98,6 +98,7 @@ typedef enum eAppMode
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *navBarTop;
 
 @property UIViewController            *selectedViewController;
+@property UIViewController            *navBarOwnerViewController;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -471,72 +472,82 @@ MainViewController *staticMVC;
     }
 }
 
-+(void)changeNavBarTitle: (NSString*) titleText
++(UIViewController *)getSelectedViewController
 {
+    return staticMVC.selectedViewController;
+}
+
+//
+// Call this at initialization of viewController (NOT in an async queued call)
+// Once a viewController takes ownership, it can send async'ed updates to navbar. In case an update comes in
+// after another controller takes ownsership, the update will be dropped.
+//
++(void)changeNavBarOwner:(UIViewController *)viewController
+{
+    staticMVC.navBarOwnerViewController = viewController;
+}
+
++(void)changeNavBar:(UIViewController *)viewController
+              title:(NSString*) titleText
+               side:(tNavBarSide)navBarSide
+             button:(BOOL)bIsButton
+             enable:(BOOL)enable
+             action:(SEL)func
+         fromObject:(id) object
+{
+    if (staticMVC.navBarOwnerViewController != viewController)
+        return;
+
     UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
     titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
-    titleLabelButton.enabled = false;
-    titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    [titleLabelButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-
-    staticMVC.navBar.topItem.titleView = titleLabelButton;
-}
-
-+(void)changeNavBarTitleWithButton: (NSString*) titleText action:(SEL)func fromObject:(id) object
-{
-    UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
-    titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
-    titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
-    [titleLabelButton addTarget:object action:func forControlEvents:UIControlEventTouchUpInside];
-
-    staticMVC.navBar.topItem.titleView = titleLabelButton;
-}
-
-+(void)changeNavBarTitleWithButtonView: (UIButton *)navButton
-{
-    navButton.frame = CGRectMake(0,0,70,44);
-    staticMVC.navBar.topItem.titleView = navButton;
-}
-
-+(void)changeNavBarTitleWithImage: (UIImage *) titleImage
-{
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:titleImage];
-
-    staticMVC.navBar.topItem.titleView = imageView;
-}
-
-+(void)changeNavBarSide: (NSString*) titleText side:(tNavBarSide)navBarSide enable:(BOOL)enable action:(SEL)func fromObject:(id) object
-{
-    UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
-    titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
-    titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
-
-    [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
-    [titleLabelButton addTarget:object action:func forControlEvents:UIControlEventTouchUpInside];
+    if (bIsButton)
+    {
+        [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
+        [titleLabelButton addTarget:object action:func forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        titleLabelButton.enabled = false;
+        [titleLabelButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    }
+    titleLabelButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16];
 
     if (!enable)
     {
         titleLabelButton.hidden = true;
     }
 
-    UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:titleLabelButton];
 
     if (navBarSide == NAV_BAR_LEFT)
     {
+        UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:titleLabelButton];
         titleLabelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         staticMVC.navBar.topItem.leftBarButtonItem = buttonItem;
 
     }
     else if (navBarSide == NAV_BAR_RIGHT)
     {
+        UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:titleLabelButton];
         titleLabelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         staticMVC.navBar.topItem.rightBarButtonItem = buttonItem;
     }
+    else
+    {
+        staticMVC.navBar.topItem.titleView = titleLabelButton;
+    }
 
+}
+
++(void)changeNavBarTitle:(UIViewController *)viewController
+        title:(NSString*) titleText
+{
+    [MainViewController changeNavBar:viewController title:titleText side:NAV_BAR_CENTER button:false enable:true action:nil fromObject:nil];
+}
+
++(void)changeNavBarTitleWithButton:(UIViewController *)viewController title:(NSString*) titleText action:(SEL)func fromObject:(id) object;
+{
+    [MainViewController changeNavBar:viewController title:titleText side:NAV_BAR_CENTER button:true enable:true action:func fromObject:object];
 }
 
 -(void)launchViewControllerBasedOnAppMode

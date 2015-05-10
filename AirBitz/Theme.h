@@ -24,7 +24,11 @@
 @property (nonatomic) UIColor *colorRequestTopTextField;
 @property (nonatomic) UIColor *colorRequestBottomTextField;
 
-
+@property (nonatomic) NSString *appFont;
+@property (nonatomic) NSString *backButtonText;
+@property (nonatomic) NSString *exitButtonText;
+@property (nonatomic) NSString *helpButtonText;
+@property (nonatomic) NSString *infoButtonText;
 @property (nonatomic) NSString *deleteAccountWarning;
 @property (nonatomic) CGFloat heightListings;
 @property (nonatomic) CGFloat heightSearchClues;

@@ -23,6 +23,7 @@
 #import "CJSONDeserializer.h"
 #import "MainViewController.h"
 #import "BD_CommonCell.h"
+#import "Theme.h"
 
 #define SHOW_PHONE_CALL_ARE_YOU_SURE_ALERT 0	/* set to 1 to show are you sure alert before dialing */
 #define TOP_IMAGE_HEIGHT 200.0
@@ -104,8 +105,9 @@ typedef NS_ENUM(NSUInteger, CellType) {
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = SINGLE_ROW_CELL_HEIGHT; // set to whatever your "average" cell height is
 
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBarSide:@"Info" side:NAV_BAR_RIGHT enable:false action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(Back:) fromObject:self];
 
     [self.tableView setContentInset:UIEdgeInsetsMake([MainViewController getHeaderHeight],0,[MainViewController getFooterHeight],0)];
 
@@ -500,7 +502,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 					[self determineVisibleRows];
 					
 					self.businessTitleLabel.text = [self.businessDetails objectForKey:@"name"];
-                    [MainViewController changeNavBarTitle:self.businessTitleLabel.text];
+                    [MainViewController changeNavBarTitle:self title:self.businessTitleLabel.text];
 					
 					NSArray *daysOfOperation = [self.businessDetails objectForKey:@"hours"];
 					

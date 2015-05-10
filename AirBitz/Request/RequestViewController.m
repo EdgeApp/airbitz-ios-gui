@@ -170,10 +170,9 @@
     }
     [self changeTopField:true animate:false];
 
-    [MainViewController changeNavBarSide:@"BACK" side:NAV_BAR_LEFT enable:false action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBarSide:@"Help" side:NAV_BAR_RIGHT enable:true action:@selector(info:) fromObject:self];
-
-
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
 }
 
@@ -343,7 +342,7 @@
     }
 }
 
-- (void)info
+- (IBAction)info:(id)sender
 {
 	[self.view endEditing:YES];
     [InfoView CreateWithHTML:@"infoRequest" forView:self.view];
@@ -819,7 +818,7 @@
 
     walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
 
-    [MainViewController changeNavBarTitleWithButton:walletName action:@selector(didTapTitle:) fromObject:self];
+    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
     [self updateQRCode];
 
 }

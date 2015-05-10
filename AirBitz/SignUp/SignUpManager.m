@@ -14,6 +14,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <AVFoundation/AVFoundation.h>
 #import "MainViewController.h"
+#import "Theme.h"
 
 
 @interface SignUpManager () 
@@ -139,8 +140,9 @@
     _signupUsernameController = (SignUpUsernameController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpUsernameController"];
     _signupUsernameController.manager = self;
     _current = _signupUsernameController;
-    [MainViewController changeNavBarTitle:@"Sign Up"];
-    [MainViewController changeNavBarSide:@"EXIT" side:NAV_BAR_LEFT enable:true action:@selector(back:) fromObject:self];
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Sign Up", @"Sign Up title bar text")];
+    [MainViewController changeNavBar:self title:[Theme Singleton].exitButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
     [MainViewController animateView:_signupUsernameController.view withBlur:YES];
 }
 
