@@ -515,6 +515,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     switch (self.state) {
         case kRequest:
+        case kDone:
         {
             NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
             self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiRequested],string];
