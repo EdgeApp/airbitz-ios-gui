@@ -240,8 +240,6 @@
     self.walletsView.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.walletsView.layer.shadowOpacity = 0.2;
 
-    _balanceView.botDenomination.text = self.wallet.currencyAbbrev;
-
     [self.balanceViewPlaceholder refresh];
 
     if (self.arrayWallets == nil)
@@ -390,7 +388,7 @@
 
 #pragma mark - Misc Methods
 
-- (void)updateBalanceView
+- (void)updateBalanceView //
 {
     int64_t totalSatoshi = 0.0;
     for(Transaction * tx in self.wallet.arrayTransactions)
@@ -407,6 +405,7 @@
     _balanceView.botAmount.text = [CoreBridge formatCurrency:currency
                                              withCurrencyNum:self.wallet.currencyNum];
     _balanceView.topDenomination.text = [User Singleton].denominationLabel;
+    _balanceView.botDenomination.text = self.wallet.currencyAbbrev;
 
     [_balanceView refresh];
 

@@ -1087,6 +1087,9 @@
 		DAA99D6B1AFDE0BC00A0E26E /* ButtonSelectorView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA99D611AFDD49200A0E26E /* ButtonSelectorView2.xib */; };
 		DAA99D6C1AFDE0D000A0E26E /* ButtonSelectorView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA99D671AFDD49E00A0E26E /* ButtonSelectorView2.m */; };
 		DAA99D6D1AFDE0D100A0E26E /* ButtonSelectorView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA99D671AFDD49E00A0E26E /* ButtonSelectorView2.m */; };
+		DAA99D711AFF455B00A0E26E /* FadingAlertDropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA99D701AFF455B00A0E26E /* FadingAlertDropDownView.xib */; };
+		DAA99D761AFF4EE900A0E26E /* FadingAlertDropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA99D701AFF455B00A0E26E /* FadingAlertDropDownView.xib */; };
+		DAA99D771AFF4EEA00A0E26E /* FadingAlertDropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA99D701AFF455B00A0E26E /* FadingAlertDropDownView.xib */; };
 		DAAC2166196399F400CC0F1E /* flash-off@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2162196399F400CC0F1E /* flash-off@2x~iphone.png */; };
 		DAAC2167196399F400CC0F1E /* flash-off~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2163196399F400CC0F1E /* flash-off~iphone.png */; };
 		DAAC2168196399F400CC0F1E /* flash-on@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2164196399F400CC0F1E /* flash-on@2x~iphone.png */; };
@@ -2416,6 +2419,7 @@
 		DAA99D611AFDD49200A0E26E /* ButtonSelectorView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonSelectorView2.xib; sourceTree = "<group>"; };
 		DAA99D671AFDD49E00A0E26E /* ButtonSelectorView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonSelectorView2.m; sourceTree = "<group>"; };
 		DAA99D691AFDD4AC00A0E26E /* ButtonSelectorView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonSelectorView2.h; sourceTree = "<group>"; };
+		DAA99D701AFF455B00A0E26E /* FadingAlertDropDownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FadingAlertDropDownView.xib; path = FadingAlert2/FadingAlertDropDownView.xib; sourceTree = "<group>"; };
 		DAAC2162196399F400CC0F1E /* flash-off@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-off@2x~iphone.png"; sourceTree = "<group>"; };
 		DAAC2163196399F400CC0F1E /* flash-off~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-off~iphone.png"; sourceTree = "<group>"; };
 		DAAC2164196399F400CC0F1E /* flash-on@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-on@2x~iphone.png"; sourceTree = "<group>"; };
@@ -3763,6 +3767,7 @@
 				DA5101DF1AF9FD1100949855 /* FadingAlertView2.h */,
 				DA5101E01AF9FD1100949855 /* FadingAlertView2.m */,
 				DA5101E11AF9FD1100949855 /* FadingAlertView2.xib */,
+				DAA99D701AFF455B00A0E26E /* FadingAlertDropDownView.xib */,
 			);
 			name = FadingAlert2;
 			sourceTree = "<group>";
@@ -4059,6 +4064,7 @@
 				7D98AD8919A7C550003D2BF6 /* ribbon~iphone.png in Resources */,
 				7D98AD8A19A7C550003D2BF6 /* thumb~iphone.png in Resources */,
 				DAEB4B311AF69946006D6A48 /* postcard-mountain~iphone.png in Resources */,
+				DAA99D761AFF4EE900A0E26E /* FadingAlertDropDownView.xib in Resources */,
 				7D98AD8B19A7C550003D2BF6 /* icon_location~iphone.png in Resources */,
 				7D98AD8C19A7C550003D2BF6 /* btn_slide_to_confirm~iphone.png in Resources */,
 				7D98AD8D19A7C550003D2BF6 /* tabbar_popup_left@2x~iphone.png in Resources */,
@@ -4402,6 +4408,7 @@
 				B59C152A18C012B500AEA789 /* icon_USD_light.png in Resources */,
 				B56553F418EDDD26005B35E1 /* ButtonSelectorView~iphone.xib in Resources */,
 				B59C151F18C012B500AEA789 /* icon_request~iphone.png in Resources */,
+				DAA99D711AFF455B00A0E26E /* FadingAlertDropDownView.xib in Resources */,
 				B5FD393118EFC35A00BE2670 /* WalletMakerView~iphone.xib in Resources */,
 				B56553E018ECAFE8005B35E1 /* btn_alwaysConfirm_off~iphone.png in Resources */,
 				B55A02FE18EA206300845090 /* btn_changeCategories@2x~iphone.png in Resources */,
@@ -4791,6 +4798,7 @@
 				DAE864C11A88A58A00A17BD3 /* icon_USD_light.png in Resources */,
 				DAE864C21A88A58A00A17BD3 /* ButtonSelectorView~iphone.xib in Resources */,
 				DAE864C31A88A58A00A17BD3 /* icon_request~iphone.png in Resources */,
+				DAA99D771AFF4EEA00A0E26E /* FadingAlertDropDownView.xib in Resources */,
 				DAE864C41A88A58A00A17BD3 /* WalletMakerView~iphone.xib in Resources */,
 				DAE864C51A88A58A00A17BD3 /* btn_alwaysConfirm_off~iphone.png in Resources */,
 				DA6B3CB51ADE4AE800A4F852 /* icon_more@2x~iphone.png in Resources */,

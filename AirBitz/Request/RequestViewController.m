@@ -85,6 +85,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, strong) NSArray                   *arrayContacts;
 @property (nonatomic, weak) IBOutlet UILabel			*connectedName;
 @property (nonatomic, assign) int64_t                   amountSatoshiRequested;
+@property (nonatomic, assign) int64_t                   previousAmountSatoshiRequested;
 @property (nonatomic, assign) int64_t                   amountSatoshiReceived;
 @property (nonatomic, assign) RequestState              state;
 
@@ -149,6 +150,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.viewQRCodeFrame.layer.masksToBounds = YES;
     self.amountSatoshiReceived = 0;
     self.amountSatoshiRequested = 0;
+    self.previousAmountSatoshiRequested = -1;
     self.state = kRequest;
 
 
@@ -461,10 +463,25 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
     NSLog(@"ENTER updateQRCode");
 
+    BOOL bChangeRequest = false;
+
     BOOL mm = [LocalSettings controller].bMerchantMode;
     self.amountSatoshiReceived += incomingSatoshi;
     self.amountSatoshiRequested = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
     SInt64 remaining = self.amountSatoshiRequested;
+
+    if (self.previousAmountSatoshiRequested != self.amountSatoshiRequested)
+    {
+        self.previousAmountSatoshiRequested = self.amountSatoshiRequested;
+        bChangeRequest = true;
+    }
+    else if (incomingSatoshi)
+    {
+        bChangeRequest = true;
+    }
+
+    if (!bChangeRequest) // Nothing's changed so save some work. Especially BLE start/stop
+        return self.state;
 
     if (self.amountSatoshiRequested == 0)
     {
@@ -580,7 +597,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     //
     // If request has changed or is brand new, startup the BLE manager and start broadcasting
     //
-    if (1)
+//    if (1)
     {
         if(self.peripheralManager.isAdvertising) {
             NSLog(@"Removing all BLE services and stopping advertising");
@@ -667,7 +684,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (void)exchangeRateUpdate: (NSNotification *)notification
 {
     NSLog(@"Updating exchangeRateUpdate");
-	[self updateTextFieldContents];
+	[self updateTextFieldContents:NO];
 }
 
 #pragma mark - Misc Methods
@@ -983,7 +1000,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     return qrImageFinal;
 }
 
-- (void)updateTextFieldContents
+
+
+- (void)updateTextFieldContents:(BOOL)allowBTCUpdate
 {
     tABC_Error error;
     
@@ -1020,7 +1039,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                                                           withSymbol:false];
         }
 	}
-	else if (_selectedTextField == self.USD_TextField)
+	else if (allowBTCUpdate && (_selectedTextField == self.USD_TextField))
 	{
 		int64_t satoshi;
 		double currency = [self.USD_TextField.text doubleValue];
@@ -1118,7 +1137,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                 self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
             }
 
-            [self updateTextFieldContents];
+            [self updateTextFieldContents:YES];
         });
     }];
 
@@ -1172,7 +1191,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
-	[self updateTextFieldContents];
+	[self updateTextFieldContents:YES];
 }
 
 
@@ -1190,7 +1209,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     _walletUUID = wallet.strUUID;
 
     self.keypadView.currencyNum = wallet.currencyNum;
-    [self updateTextFieldContents];
+    [self updateTextFieldContents:YES];
     bWalletListDropped = false;
 }
 
@@ -1283,7 +1302,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         image = [UIImage imageNamed:@"BLE_photo.png"];
     }
 
-    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+    _fadingAlert = [FadingAlertView2 CreateDropView:self.view withDelegate:self];
     [_fadingAlert messageTextSet:@""];
     _fadingAlert.fadeDuration = 2;
     _fadingAlert.fadeDelay = 3;
@@ -1363,7 +1382,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
     }
 
-    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+    _fadingAlert = [FadingAlertView2 CreateDropView:self.view withDelegate:self];
     [_fadingAlert messageTextSet:@""];
     _fadingAlert.fadeDuration = duration;
     _fadingAlert.fadeDelay = delay;

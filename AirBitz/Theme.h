@@ -23,6 +23,7 @@
 @property (nonatomic) CGFloat sendRequestButtonDisabled;
 @property (nonatomic) UIColor *colorRequestTopTextField;
 @property (nonatomic) UIColor *colorRequestBottomTextField;
+@property (nonatomic) CGFloat fadingAlertDropdownHeight;
 
 @property (nonatomic) NSString *appFont;
 @property (nonatomic) NSString *backButtonText;

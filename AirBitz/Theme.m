@@ -65,25 +65,30 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 
     self.sendRequestButtonDisabled = 0.4f;
 
-    if (IS_IPHONE4)
+//    if (IS_IPHONE4)
     {
         self.heightListings = 90.0;
         self.heightSearchClues = 35.0;
+        self.fadingAlertDropdownHeight = 100;
     }
-    else if (IS_IPHONE5)
+    if (IS_MIN_IPHONE5)
     {
         self.heightListings = 110.0;
         self.heightSearchClues = 40.0;
     }
-    else if (IS_IPHONE6)
+    if (IS_MIN_IPHONE6)
     {
         self.heightListings = 120.0;
         self.heightSearchClues = 45.0;
     }
-    else if (IS_IPHONE6_PLUS || IS_IPAD)
+    if (IS_MIN_IPHONE6_PLUS)
     {
         self.heightListings = 130.0;
         self.heightSearchClues = 45.0;
+    }
+    if (IS_MIN_IPAD_MINI)
+    {
+
     }
 
     return self;

@@ -10,6 +10,7 @@
 @property (nonatomic, assign) int fadeDelay;
 @property (nonatomic, assign) int fadeDuration;
 
++ (FadingAlertView2 *)CreateDropView:(UIView *)parentView withDelegate:(id<FadingAlertView2Delegate>)delegate;
 + (FadingAlertView2 *)CreateInsideView:(UIView *)parentView withDelegate:(id<FadingAlertView2Delegate>)delegate;
 + (FadingAlertView2 *)CreateLoadingView:(UIView *)parentView withDelegate:(id<FadingAlertView2Delegate>)delegate;
 
