@@ -1437,7 +1437,7 @@ MainViewController *staticMVC;
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
         if ([User isLoggedIn]) {
             [_sendViewController resetViews];
-            _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
+            _sendViewController.addressTextField.text = [uri absoluteString];
             [_sendViewController processURI];
         } else {
             _uri = uri;

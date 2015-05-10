@@ -178,8 +178,8 @@
     [self initializeWalletsTable];
 
     // add left to right swipe detection for going back
-    [self installLeftToRightSwipeDetection];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+//    [self installLeftToRightSwipeDetection];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 
 }
 
