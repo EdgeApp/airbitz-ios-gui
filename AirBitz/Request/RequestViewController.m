@@ -69,6 +69,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     NSString                    *addressString;
     FadingAlertView2                 *_fadingAlert;
     NSString                    *_uriString;
+    NSMutableString                    *previousWalletUUID;
 
 
 }
@@ -141,6 +142,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.currentTopField = nil;
     bInitialized = false;
     bWalletListDropped = false;
+    previousWalletUUID = nil;
 
 	self.buttonSelector.delegate = self;
     [self.buttonSelector disableButton];
@@ -256,7 +258,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     if ([[User Singleton] offerRequestHelp]) {
         [self showFadingAlert:NSLocalizedString(@"Present QR code to Sender and have them scan to send you payment", nil)
-                    withDelay:FADING_HELP_DURATION];
+                    withDelay:FADING_HELP_DELAY];
     }
 
 }
@@ -475,7 +477,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         self.previousAmountSatoshiRequested = self.amountSatoshiRequested;
         bChangeRequest = true;
     }
-    else if (incomingSatoshi)
+    if (previousWalletUUID != _walletUUID)
+    {
+        previousWalletUUID = _walletUUID;
+        bChangeRequest = true;
+    }
+    if (incomingSatoshi)
     {
         bChangeRequest = true;
     }
@@ -1092,7 +1099,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [CoreBridge postToWalletsQueue:^(void) {
         // load all the non-archive wallets
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-        NSString *newWalletUUID;
+        NSString *newWalletUUID = nil;
         int newWalletIndex = 0;
 
         [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
@@ -1116,7 +1123,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             }
             else
             {
-                if ([_walletUUID isEqualToString: wallet.strUUID])
+                if (_walletUUID == wallet.strUUID)
                     newWalletIndex = i;
             }
         }
@@ -1125,7 +1132,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
             self.arrayWallets = arrayWallets;
             _selectedWalletIndex = newWalletIndex;
-            _walletUUID = newWalletUUID;
+            if (newWalletIndex != nil)
+                _walletUUID = newWalletUUID;
 
             if (_selectedWalletIndex < [arrayWallets count])
             {
