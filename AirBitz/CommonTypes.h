@@ -36,6 +36,7 @@ typedef NS_ENUM(NSUInteger, RequestState) {
     kRequest, // request a new, full amount
     kPartial, // request the remainder of a previous request
     kDonation,// request with no specified amount
+    kDone,
 };
 
 #define BACKGROUND_NOTIF_PULL_REFRESH_INTERVAL_MINUTES 5

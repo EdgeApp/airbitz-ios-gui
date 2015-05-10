@@ -20,6 +20,9 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -689,6 +692,39 @@
                                             <action selector="segmentedControlCopyEmailSMSAction:" destination="Int-ih-AH6" eventType="touchUpInside" id="rNX-hV-IBi"/>
                                         </connections>
                                     </segmentedControl>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Status Line 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3A3-3d-okn">
+                                        <rect key="frame" x="20" y="319" width="280" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="d6r-Ou-4zx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Status Line 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NGg-Nn-BeH" userLabel="Status Line 2">
+                                        <rect key="frame" x="20" y="342" width="280" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="L38-8w-StF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Status Line 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtQ-SU-6iS">
+                                        <rect key="frame" x="20" y="365" width="280" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="u2z-WZ-GnH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FS5-S0-Rqp" customClass="CalculatorView">
                                         <rect key="frame" x="0.0" y="325" width="320" height="229"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -703,11 +739,22 @@
                                             <constraint firstAttribute="height" constant="1" id="Get-1y-G6d"/>
                                         </constraints>
                                     </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BLE_Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="fHY-wl-t5s">
+                                        <rect key="frame" x="20" y="276" width="21" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29" id="PAb-qn-RLj"/>
+                                            <constraint firstAttribute="width" constant="21" id="xye-jR-07Z"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="NGg-Nn-BeH" firstAttribute="top" secondItem="3A3-3d-okn" secondAttribute="bottom" constant="2" id="0Kd-3g-yfd"/>
                                     <constraint firstItem="7N4-k1-c9H" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="0fk-Na-gcH"/>
                                     <constraint firstItem="FS5-S0-Rqp" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="bottom" constant="8" symbolic="YES" id="0kB-HL-udn"/>
+                                    <constraint firstAttribute="trailing" secondItem="3A3-3d-okn" secondAttribute="trailing" constant="20" symbolic="YES" id="3ce-ZB-KY9"/>
+                                    <constraint firstItem="rtQ-SU-6iS" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" symbolic="YES" id="7rH-6S-wrI"/>
+                                    <constraint firstItem="3A3-3d-okn" firstAttribute="top" secondItem="fHY-wl-t5s" secondAttribute="bottom" constant="14" id="97S-S7-s02"/>
                                     <constraint firstAttribute="trailing" secondItem="jlL-oE-aWy" secondAttribute="trailing" constant="10" id="9iA-63-a78"/>
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="9x4-jx-Knd"/>
                                     <constraint firstAttribute="trailing" secondItem="FS5-S0-Rqp" secondAttribute="trailing" id="Bpf-7g-eiN"/>
@@ -715,18 +762,25 @@
                                     <constraint firstItem="FS5-S0-Rqp" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="FlS-Fz-ggc"/>
                                     <constraint firstItem="Fc7-23-ecF" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="124" id="GQY-Jg-jf9"/>
                                     <constraint firstAttribute="trailing" secondItem="jwC-1c-veH" secondAttribute="trailing" constant="10" id="HK4-g1-B8z"/>
+                                    <constraint firstItem="3A3-3d-okn" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="bottom" constant="2" id="Hpq-yy-IZs"/>
+                                    <constraint firstItem="rtQ-SU-6iS" firstAttribute="top" secondItem="NGg-Nn-BeH" secondAttribute="bottom" constant="2" id="I3s-m5-AiW"/>
                                     <constraint firstAttribute="centerX" secondItem="MRG-UO-gcm" secondAttribute="centerX" id="L0B-46-sJq"/>
                                     <constraint firstItem="7N4-k1-c9H" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" id="LHn-2R-wnG"/>
+                                    <constraint firstItem="NGg-Nn-BeH" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" symbolic="YES" id="Ogn-tw-gkF"/>
+                                    <constraint firstItem="jlL-oE-aWy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rtQ-SU-6iS" secondAttribute="bottom" constant="8" symbolic="YES" id="Pab-mx-fWu"/>
+                                    <constraint firstItem="3A3-3d-okn" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" symbolic="YES" id="QWc-yL-Ry2"/>
                                     <constraint firstItem="jwC-1c-veH" firstAttribute="leading" secondItem="Fc7-23-ecF" secondAttribute="trailing" constant="8" symbolic="YES" id="Wns-uH-FL9"/>
                                     <constraint firstAttribute="bottom" secondItem="FS5-S0-Rqp" secondAttribute="bottom" constant="49" id="aqf-C8-N7y"/>
                                     <constraint firstAttribute="trailing" secondItem="7N4-k1-c9H" secondAttribute="trailing" constant="20" id="b0e-5R-pN1"/>
+                                    <constraint firstAttribute="trailing" secondItem="NGg-Nn-BeH" secondAttribute="trailing" constant="20" symbolic="YES" id="bJx-Qh-GGH"/>
                                     <constraint firstItem="MRG-UO-gcm" firstAttribute="top" secondItem="Fc7-23-ecF" secondAttribute="bottom" constant="8" symbolic="YES" id="bwV-vG-x9m"/>
                                     <constraint firstItem="Fc7-23-ecF" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="dXq-T1-ULl"/>
                                     <constraint firstAttribute="bottom" secondItem="jlL-oE-aWy" secondAttribute="bottom" constant="57" id="dZ7-sF-hD9"/>
+                                    <constraint firstAttribute="trailing" secondItem="rtQ-SU-6iS" secondAttribute="trailing" constant="20" symbolic="YES" id="hgK-mG-uZZ"/>
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="jLA-xe-QYF"/>
                                     <constraint firstItem="jlL-oE-aWy" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="10" id="k3E-Yq-7CZ"/>
+                                    <constraint firstItem="MRG-UO-gcm" firstAttribute="leading" secondItem="fHY-wl-t5s" secondAttribute="trailing" constant="15" id="rqK-Zs-E4V"/>
                                     <constraint firstItem="jwC-1c-veH" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="tuc-7l-JlM"/>
-                                    <constraint firstItem="jlL-oE-aWy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MRG-UO-gcm" secondAttribute="bottom" constant="8" symbolic="YES" id="yDr-Bs-3g6"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -742,6 +796,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="667"/>
                     <connections>
+                        <outlet property="BLE_LogoImageView" destination="fHY-wl-t5s" id="iy3-MN-Bvp"/>
                         <outlet property="BTC_TextField" destination="Ug3-Vw-VAD" id="wxA-0t-0gW"/>
                         <outlet property="USD_TextField" destination="dY3-MX-MNV" id="KN9-2s-2Cb"/>
                         <outlet property="bottomBTCUSDLabel" destination="Fc7-23-ecF" id="9rC-bM-Dq9"/>
@@ -752,6 +807,9 @@
                         <outlet property="qrCodeImageView" destination="5sd-ot-S1v" id="Tct-qD-0GX"/>
                         <outlet property="segmentedControlBTCUSD" destination="dqf-l4-9Zx" id="FOf-6y-9mP"/>
                         <outlet property="segmentedControlCopyEmailSMS" destination="jlL-oE-aWy" id="81Z-jp-5uQ"/>
+                        <outlet property="statusLine1" destination="3A3-3d-okn" id="DBQ-L3-xO2"/>
+                        <outlet property="statusLine2" destination="NGg-Nn-BeH" id="14S-uc-tlx"/>
+                        <outlet property="statusLine3" destination="rtQ-SU-6iS" id="L01-bY-nkH"/>
                         <outlet property="viewQRCodeFrame" destination="MRG-UO-gcm" id="qXa-Xs-5On"/>
                     </connections>
                 </viewController>

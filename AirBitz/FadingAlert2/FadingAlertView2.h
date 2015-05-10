@@ -16,8 +16,8 @@
 - (void)blockModal:(BOOL)blocking;
 - (void)showSpinner:(BOOL)visible;
 - (void)showSpinner:(BOOL)visible center:(BOOL)center;
-- (void)showBackground:(BOOL)visible;
 - (void)messageTextSet:(NSString *)message;
+- (void)photoAlertSet:(UIImage *)image line1:(NSString *)line1 line2:(NSString *)line2 line3:(NSString *)line3;
 - (void)show;
 - (void)showFading;
 - (void)dismiss:(BOOL)animated;
@@ -28,6 +28,7 @@
 
 @required
 -(void)fadingAlertDismissed:(FadingAlertView2 *)pv;
+
 @optional
 
 @end

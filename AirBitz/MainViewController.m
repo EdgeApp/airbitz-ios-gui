@@ -914,27 +914,40 @@ MainViewController *staticMVC;
     if (_selectedViewController == _requestViewController 
             && [_requestViewController showingQRCode:_strWalletUUID withTx:_strTxID])
     {
-        if ([_requestViewController transactionWasDonation])
+        RequestState state;
+
+        //
+        // Let the RequestViewController know a Tx came in for the QR code it's currently scanning.
+        // If it returns kDone as the state. Transition to Tx Details.
+        //
+        state = [_requestViewController updateQRCode:transaction.amountSatoshi];
+
+        if (state == kDone)
         {
-            // launch the next QR view with the donation amount
-            [_requestViewController LaunchQRCodeScreen:transaction.amountSatoshi withRequestState:kDonation];
-            return;
+            [self handleReceiveFromQR:_strWalletUUID withTx:_strTxID];
         }
 
-        SInt64 txDiff = [_requestViewController transactionDifference:_strWalletUUID withTx:_strTxID];
-        if (txDiff >= 0)
-        {
-            // Sender paid exact amount or too much
-            [self handleReceiveFromQR:_strWalletUUID withTx:_strTxID];
-            [[AudioController controller] playReceived];
-        }
-        else if (txDiff < 0)
-        {
-            // Sender didn't pay enough
-            txDiff = fabs(txDiff);
-            [_requestViewController LaunchQRCodeScreen:txDiff withRequestState:kPartial];
-            [[AudioController controller] playPartialReceived];
-        }
+//        if ([_requestViewController transactionWasDonation])
+//        {
+//            // launch the next QR view with the donation amount
+//            [_requestViewController updateQRCodeFromReceive:transaction.amountSatoshi withRequestState:kDonation];
+//            return;
+//        }
+//
+//        SInt64 txDiff = [_requestViewController transactionDifference:_strWalletUUID withTx:_strTxID];
+//        if (txDiff >= 0)
+//        {
+//            // Sender paid exact amount or too much
+//            [self handleReceiveFromQR:_strWalletUUID withTx:_strTxID];
+//            [[AudioController controller] playReceived];
+//        }
+//        else if (txDiff < 0)
+//        {
+//            // Sender didn't pay enough
+//            txDiff = fabs(txDiff);
+//            [_requestViewController updateQRCodeFromReceive:txDiff withRequestState:kPartial];
+//            [[AudioController controller] playPartialReceived];
+//        }
     }
     // Prevent displaying multiple alerts
     else if (_receivedAlert == nil)

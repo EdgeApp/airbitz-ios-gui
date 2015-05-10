@@ -1326,6 +1326,10 @@ static BOOL bOtpError = NO;
     {
         szAddress = (char *)[address UTF8String];
     }
+
+    if (walletUUID == nil)
+        return;
+
     tABC_Error Error;
     ABC_PrioritizeAddress([[User Singleton].name UTF8String],
                           [[User Singleton].password UTF8String],

@@ -9,6 +9,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
 #import <MobileCoreServices/UTCoreTypes.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 #import "DDData.h"
 #import "RequestViewController.h"
 #import "Notifications.h"
@@ -26,6 +27,11 @@
 #import "LocalSettings.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "FadingAlertView2.h"
+#import "Contact.h"
+#import "TransferService.h"
+#import "AudioController.h"
+
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 #define QR_CODE_SIZE          200.0
@@ -42,12 +48,14 @@
 #define OPERATION_PLUS		7
 #define OPERATION_PERCENT	8
 
-@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelector2Delegate,
+static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
+
+@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelector2Delegate,FadingAlertView2Delegate,CBPeripheralManagerDelegate,
                                      ShowWalletQRViewControllerDelegate, ImportWalletViewControllerDelegate>
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
-	ShowWalletQRViewController  *_qrViewController;
+//	ShowWalletQRViewController  *_qrViewController;
     ImportWalletViewController  *_importWalletViewController;
     tABC_TxDetails              _details;
     NSString                    *requestID;
@@ -57,8 +65,33 @@
     CGFloat                     topTextSize;
     CGFloat                     bottomTextSize;
     BOOL                        bWalletListDropped;
+    NSString                    *statusString;
+    NSString                    *addressString;
+    FadingAlertView2                 *_fadingAlert;
+    NSString                    *_uriString;
+
 
 }
+
+@property (weak, nonatomic) IBOutlet UILabel *statusLine1;
+@property (weak, nonatomic) IBOutlet UILabel *statusLine2;
+@property (weak, nonatomic) IBOutlet UILabel *statusLine3;
+@property (nonatomic, weak) IBOutlet UIImageView	*BLE_LogoImageView;
+@property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
+@property (strong, nonatomic) CBMutableCharacteristic   *bitcoinURICharacteristic;
+@property (strong, nonatomic) CBMutableCharacteristic   *userNameCharacteristic;
+@property (strong, nonatomic) NSData                    *dataToSend;
+@property (nonatomic, readwrite) NSInteger              sendDataIndex;
+@property (nonatomic, strong) NSArray                   *arrayContacts;
+@property (nonatomic, weak) IBOutlet UILabel			*connectedName;
+@property (nonatomic, assign) int64_t                   amountSatoshiRequested;
+@property (nonatomic, assign) int64_t                   amountSatoshiReceived;
+@property (nonatomic, assign) RequestState              state;
+
+
+
+
+
 
 @property (nonatomic, weak) IBOutlet UIImageView    *qrCodeImageView;
 @property (weak, nonatomic) IBOutlet UIView         *viewQRCodeFrame;
@@ -114,13 +147,58 @@
     self.qrCodeImageView.layer.magnificationFilter = kCAFilterNearest;
     self.viewQRCodeFrame.layer.cornerRadius = 8;
     self.viewQRCodeFrame.layer.masksToBounds = YES;
+    self.amountSatoshiReceived = 0;
+    self.amountSatoshiRequested = 0;
+    self.state = kRequest;
 
 
 //	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
-    [self.buttonSelector setButtonWidth:WALLET_REQUEST_BUTTON_WIDTH];
+//    [self.buttonSelector setButtonWidth:WALLET_REQUEST_BUTTON_WIDTH];
 
 //    self.nextButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
 //    [self.nextButton setTitleColor:[UIColor colorWithWhite:1 alpha:1.0] forState:UIControlStateNormal];
+
+    //
+    // All logic below copied from ShowWalletQRView
+    //
+
+//    self.statusLabel.text = self.statusString;
+    //show first eight characters of address larger than rest
+
+//    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:NO]];
+
+//    if([LocalSettings controller].bDisableBLE)
+//    {
+//        self.BLE_LogoImageView.hidden = YES;
+//    }
+//    else
+//    {
+//        // Start up the CBPeripheralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
+//        NSTimeInterval curTime = CACurrentMediaTime();
+//        if((curTime - lastPeripheralBLEPowerOffNotificationTime) > 86400.0) //24 hours
+//        {
+//            _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(YES)}];
+//        }
+//        else
+//        {
+//            _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(NO)}];
+//        }
+//        lastPeripheralBLEPowerOffNotificationTime = curTime;
+//    }
+//
+    // Replace with fadingAlert2
+//    self.connectedView.alpha = 0.0;
+//    self.connectedPhoto.layer.cornerRadius = 8.0;
+//    self.connectedPhoto.layer.masksToBounds = YES;
+
+    self.arrayContacts = @[];
+    // load all the names from the address book
+    [self generateListOfContactNames];
+
+    // add left to right swipe detection for going back
+//    [self installLeftToRightSwipeDetection];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+
 }
 
 -(void)awakeFromNib
@@ -174,6 +252,11 @@
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
+    if ([[User Singleton] offerRequestHelp]) {
+        [self showFadingAlert:NSLocalizedString(@"Present QR code to Sender and have them scan to send you payment", nil)
+                    withDelay:FADING_HELP_DURATION];
+    }
+
 }
 
 
@@ -193,12 +276,20 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    if(self.peripheralManager.isAdvertising) {
+        NSLog(@"Removing all BLE services and stopping advertising");
+        [self.peripheralManager removeAllServices];
+        [self.peripheralManager stopAdvertising];
+        _peripheralManager = nil;
+    }
+    [CoreBridge prioritizeAddress:nil inWallet:_walletUUID];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (BOOL)showingQRCode:(NSString *)walletUUID withTx:(NSString *)txId
 {
-    if (_qrViewController == nil || _qrViewController.addressString == nil)
+//    if (_qrViewController == nil || _qrViewController.addressString == nil)
+    if (addressString == nil)
     {
         return NO;
     }
@@ -206,7 +297,7 @@
     for (TxOutput *output in transaction.outputs)
     {
         if (!output.bInput 
-            && [_qrViewController.addressString isEqualToString:output.strAddress])
+            && [addressString isEqualToString:output.strAddress])
         {
             return YES;
         }
@@ -257,40 +348,32 @@
 
 }
 
-- (BOOL)transactionWasDonation
-{
-    // a transaction can only be treated as a donation if the QR view is showing
-    if (_qrViewController)
-    {
-        return [self isDonation:_qrViewController.amountSatoshi];
-    }
-    else
-    {
-        return NO;
-    }
-}
-
-
-- (BOOL)isDonation:(SInt64)requestedSatoshis
-{
-    return YES == [LocalSettings controller].bMerchantMode && 0 == requestedSatoshis;
-}
-
-- (SInt64)transactionDifference:(NSString *)walletUUID withTx:(NSString *) txId
-{
-    // If the request was 0, then this was a donation and it's up to payer to
-    // determine amount to send
-    if (_details.amountSatoshi > 0)
-    {
-        Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
-        return transaction.amountSatoshi - _details.amountSatoshi;
-    }
-    else
-    {
-        return 0;
-    }
-}
-
+//- (BOOL)transactionWasDonation
+//{
+//    return [self isDonation:amountSatoshi];
+//}
+//
+//
+//- (BOOL)isDonation:(SInt64)requestedSatoshis
+//{
+//    return YES == [LocalSettings controller].bMerchantMode && 0 == requestedSatoshis;
+//}
+//
+//- (SInt64)transactionDifference:(NSString *)walletUUID withTx:(NSString *) txId
+//{
+//    // If the request was 0, then this was a donation and it's up to payer to
+//    // determine amount to send
+//    if (_details.amountSatoshi > 0)
+//    {
+//        Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+//        return transaction.amountSatoshi - _details.amountSatoshi;
+//    }
+//    else
+//    {
+//        return 0;
+//    }
+//}
+//
 - (void)resetViews
 {
     if (_importWalletViewController)
@@ -305,7 +388,9 @@
 //    }
     self.BTC_TextField.text = @"";
 	self.USD_TextField.text = @"";
-
+    self.amountSatoshiReceived = 0;
+    self.amountSatoshiRequested = 0;
+    self.state = kRequest;
 }
 
 
@@ -354,17 +439,71 @@
     [self bringUpImportWalletView];
 }
 
-- (IBAction)QRCodeButton
-{
-    [self.view endEditing:YES];
-    SInt64 amountSatoshi = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
-    RequestState state = [self isDonation:amountSatoshi] ? kDonation : kRequest;
-    [self LaunchQRCodeScreen:amountSatoshi withRequestState:state];
-}
+//- (IBAction)QRCodeButton
+//{
+//    [self.view endEditing:YES];
+//    SInt64 amountSatoshi = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
+//    RequestState state = [self isDonation:amountSatoshi] ? kDonation : kRequest;
+//    [self LaunchQRCodeScreen:amountSatoshi withRequestState:state];
+//}
+//
 
-- (void)updateQRCode
+//
+// This is called from MainViewController to update QR code upon receiving funds
+//
+
+
+//
+// Implement the state machine of the QR code screen based on Merchant Mode, amount received, amount requested. All of which could change at any time.
+// Returns new state
+
+- (RequestState)updateQRCode:(SInt64)incomingSatoshi
 {
     NSLog(@"ENTER updateQRCode");
+
+    BOOL mm = [LocalSettings controller].bMerchantMode;
+    self.amountSatoshiReceived += incomingSatoshi;
+    self.amountSatoshiRequested = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
+    SInt64 remaining = self.amountSatoshiRequested;
+
+    if (self.amountSatoshiRequested == 0)
+    {
+        if (mm)
+        {
+            self.state = kDonation;
+        }
+        else
+        {
+            if (self.amountSatoshiReceived == 0)
+                self.state = kRequest;
+            else
+                self.state = kDone;
+
+        }
+    }
+    else
+    {
+        if (self.amountSatoshiReceived == 0)
+        {
+            self.state = kRequest;
+        }
+        else if (self.amountSatoshiReceived < self.amountSatoshiRequested)
+        {
+            self.state = kPartial;
+        }
+        else // if (self.amountSatoshiReceived >= self.amountSatoshiRequested)
+        {
+            self.state = kDone;
+        }
+    }
+
+    if (self.state == kDone)
+    {
+        self.amountSatoshiReceived = 0;
+        self.amountSatoshiRequested = 0;
+        return kDone;
+    }
+
     NSString *strName = @"";
     NSString *strCategory = @"";
     NSString *strNotes = @"";
@@ -373,15 +512,104 @@
     NSMutableString *strRequestID = [[NSMutableString alloc] init];
     NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
     NSMutableString *strRequestURI = [[NSMutableString alloc] init];
-    SInt64 amountSatoshi = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
 
-    RequestState state = [self isDonation:amountSatoshi] ? kDonation : kRequest;
 
+    switch (self.state) {
+        case kRequest:
+        {
+            NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
+            self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiRequested],string];
+            self.statusLine2.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
+            break;
+        }
+        case kPartial:
+        {
+            remaining = self.amountSatoshiRequested - self.amountSatoshiReceived;
+            NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
+            self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiRequested],string];
+
+            string = NSLocalizedString(@"Remaining...", @"Remaining string on Request screen");
+            self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:remaining],string];
+            break;
+        }
+        case kDonation:
+        {
+            self.statusLine1.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
+
+            NSString *string = NSLocalizedString(@"Received...", @"Received string on Request screen");
+            self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiReceived],string];
+            break;
+        }
+    }
     UIImage *qrImage = [self createRequestQRImageFor:strName withNotes:strNotes withCategory:strCategory
                                     storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
-                                        scaleAndSave:NO withAmount:amountSatoshi withRequestState:state];
+                                        scaleAndSave:NO withAmount:remaining];
 
     self.qrCodeImageView.image = qrImage;
+    addressString = strRequestAddress;
+    _uriString = strRequestURI;
+
+    [CoreBridge prioritizeAddress:addressString inWallet:_walletUUID];
+
+//    if(addressString.length >= 8)
+//    {
+//        self.addressLabel1.text = [addressString substringToIndex:8];
+//        [self.addressLabel1 sizeToFit];
+//        if(addressString.length > 8)
+//        {
+//            self.addressLabel2.text = [addressString substringFromIndex:8];
+//
+//            CGRect frame = self.addressLabel2.frame;
+//            float endX = frame.origin.x + frame.size.width;
+//            frame.origin.x = self.addressLabel1.frame.origin.x + self.addressLabel1.frame.size.width;
+//            frame.size.width = endX - frame.origin.x;
+//            self.addressLabel2.frame = frame;
+//        }
+//    }
+//    else
+    {
+        self.statusLine3.text = addressString;
+    }
+
+    if (incomingSatoshi)
+    {
+        [self showPaymentPopup:self.state amount:incomingSatoshi];
+    }
+
+
+    //
+    // If request has changed or is brand new, startup the BLE manager and start broadcasting
+    //
+    if (1)
+    {
+        if(self.peripheralManager.isAdvertising) {
+            NSLog(@"Removing all BLE services and stopping advertising");
+            [self.peripheralManager removeAllServices];
+            [self.peripheralManager stopAdvertising];
+            _peripheralManager = nil;
+        }
+
+        if([LocalSettings controller].bDisableBLE)
+        {
+            self.BLE_LogoImageView.hidden = YES;
+        }
+        else
+        {
+            // Start up the CBPeripheralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
+            NSTimeInterval curTime = CACurrentMediaTime();
+            if((curTime - lastPeripheralBLEPowerOffNotificationTime) > 86400.0) //24 hours
+            {
+                _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(YES)}];
+            }
+            else
+            {
+                _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(NO)}];
+            }
+            lastPeripheralBLEPowerOffNotificationTime = curTime;
+        }
+        return self.state;
+    }
+
 //
 //    ShowWalletQRViewController *tempQRViewController = NULL;
 //    if (_qrViewController)
@@ -394,7 +622,6 @@
     NSLog(@"EXIT updateQRCode");
 
 }
-
 
 //- (void)LaunchQRCodeScreen:(SInt64)amountSatoshi withRequestState:(RequestState)state
 //{
@@ -542,7 +769,7 @@
 }
 
 - (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes 
-    withCategory:(NSString *)strCategory withAmount:(SInt64)amountSatoshi withRequestState:(RequestState)state
+    withCategory:(NSString *)strCategory withAmount:(SInt64)amountSatoshi
 {
 	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
 	tABC_CC result;
@@ -555,11 +782,7 @@
     memset(&_details, 0, sizeof(tABC_TxDetails));
 
     _details.amountSatoshi = amountSatoshi;
-    if (kPartial != state)
-    {
-        self.originalAmountSatoshi = _details.amountSatoshi;
-    }
-	
+
 	//the true fee values will be set by the core
 	_details.amountFeesAirbitzSatoshi = 0;
 	_details.amountFeesMinersSatoshi = 0;
@@ -597,63 +820,63 @@
 	}
 }
 
--(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address requestURI:(NSString *)strRequestURI withAmount:(SInt64)amountSatoshi  withDonation:(SInt64)donation withRequestState:(RequestState)state
-{
-	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-
-    _qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
-
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-	_qrViewController.delegate = self;
-	_qrViewController.qrCodeImage = image;
-	_qrViewController.addressString = address;
-	_qrViewController.uriString = strRequestURI;
-    _qrViewController.amountSatoshi = amountSatoshi;
-    _qrViewController.donation = donation;
-    _qrViewController.state = state;
-
-    if (kPartial == state)
-    {
-        NSMutableString *strBody = [[NSMutableString alloc] init];
-        
-        [strBody appendString:NSLocalizedString(@"Partial Payment from ",nil)];
-        [strBody appendFormat:@"%@ ", [CoreBridge formatSatoshi:self.originalAmountSatoshi withSymbol:true]];
-        [strBody appendString:NSLocalizedString(@"Request ",nil)];
-
-        _qrViewController.statusString = [NSString stringWithFormat:@"%@", strBody];
-    }
-    else
-    {
-        _qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
-    }
-    _qrViewController.requestID = requestID;
-    _qrViewController.walletUUID = wallet.strUUID;
-    _qrViewController.txDetails = _details;
-    _qrViewController.currencyNum = wallet.currencyNum;
-	//CGRect frame = self.view.bounds;
-	//_qrViewController.view.frame = frame;
-	[self.view addSubview:_qrViewController.view];
-	_qrViewController.view.alpha = 0.0;
-	
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		_qrViewController.view.alpha = 1.0;
-	 }
-    completion:^(BOOL finished)
-    {
-        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    }];
-}
+//-(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address requestURI:(NSString *)strRequestURI withAmount:(SInt64)amountSatoshi  withDonation:(SInt64)donation withRequestState:(RequestState)state
+//{
+//	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+//
+//    _qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
+//
+//    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+//	_qrViewController.delegate = self;
+//	_qrViewController.qrCodeImage = image;
+//	_qrViewController.addressString = address;
+//	_qrViewController.uriString = strRequestURI;
+//    _qrViewController.amountSatoshi = amountSatoshi;
+//    _qrViewController.donation = donation;
+//    _qrViewController.state = state;
+//
+//    if (kPartial == state)
+//    {
+//        NSMutableString *strBody = [[NSMutableString alloc] init];
+//
+//        [strBody appendString:NSLocalizedString(@"Partial Payment from ",nil)];
+//        [strBody appendFormat:@"%@ ", [CoreBridge formatSatoshi:self.originalAmountSatoshi withSymbol:true]];
+//        [strBody appendString:NSLocalizedString(@"Request ",nil)];
+//
+//        _qrViewController.statusString = [NSString stringWithFormat:@"%@", strBody];
+//    }
+//    else
+//    {
+//        _qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
+//    }
+//    _qrViewController.requestID = requestID;
+//    _qrViewController.walletUUID = wallet.strUUID;
+//    _qrViewController.txDetails = _details;
+//    _qrViewController.currencyNum = wallet.currencyNum;
+//	//CGRect frame = self.view.bounds;
+//	//_qrViewController.view.frame = frame;
+//	[self.view addSubview:_qrViewController.view];
+//	_qrViewController.view.alpha = 0.0;
+//
+//    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+//	[UIView animateWithDuration:0.35
+//						  delay:0.0
+//						options:UIViewAnimationOptionCurveEaseInOut
+//					 animations:^
+//	 {
+//		_qrViewController.view.alpha = 1.0;
+//	 }
+//    completion:^(BOOL finished)
+//    {
+//        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+//    }];
+//}
 
 // generates and returns a request qr image, stores request id in the given mutable string
 - (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes withCategory:(NSString *)strCategory 
     storeRequestIDIn:(NSMutableString *)strRequestID storeRequestURI:(NSMutableString *)strRequestURI 
     storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave 
-    withAmount:(SInt64)amountSatoshi withRequestState:(RequestState)state
+    withAmount:(SInt64)amountSatoshi
 {
     NSLog(@"ENTER createRequestQRImageFor");
 
@@ -668,7 +891,7 @@
     tABC_Error error;
 
     const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes
-        withCategory:strCategory withAmount:amountSatoshi withRequestState:state];
+        withCategory:strCategory withAmount:amountSatoshi];
     requestID = [NSString stringWithUTF8String:szRequestID];
 
     if (szRequestID)
@@ -779,10 +1002,14 @@
 	{
 		double currency;
         int64_t satoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
+
         if (satoshi == 0)
         {
-            self.USD_TextField.text = @"";
-            self.BTC_TextField.text = @"";
+            if ([self.BTC_TextField.text hasPrefix:@"."] == NO)
+            {
+                self.USD_TextField.text = @"";
+                self.BTC_TextField.text = @"";
+            }
         }
         else
         {
@@ -799,8 +1026,11 @@
 		double currency = [self.USD_TextField.text doubleValue];
         if (currency == 0.0)
         {
-            self.USD_TextField.text = @"";
-            self.BTC_TextField.text = @"";
+            if ([self.USD_TextField.text hasPrefix:@"."] == NO)
+            {
+                self.USD_TextField.text = @"";
+                self.BTC_TextField.text = @"";
+            }
         }
         else
         {
@@ -819,7 +1049,7 @@
     walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
 
     [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
-    [self updateQRCode];
+    [self updateQRCode:0];
 
 }
 
@@ -843,10 +1073,12 @@
     [CoreBridge postToWalletsQueue:^(void) {
         // load all the non-archive wallets
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        NSString *newWalletUUID;
+        int newWalletIndex = 0;
+
         [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
 
         // create the array of wallet names
-        _selectedWalletIndex = 0;
         NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
         for (int i = 0; i < [arrayWallets count]; i++)
         {
@@ -854,13 +1086,27 @@
 
             [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
 
-            if ([_walletUUID isEqualToString: wallet.strUUID])
-                _selectedWalletIndex = i;
+            if ([_walletUUID length] == 0)
+            {
+                // walletID is uninitialized. Choose the primary wallet
+                if (i == 0)
+                {
+                    newWalletUUID = wallet.strUUID;
+                    newWalletIndex = i;
+                }
+            }
+            else
+            {
+                if ([_walletUUID isEqualToString: wallet.strUUID])
+                    newWalletIndex = i;
+            }
         }
 
         dispatch_async(dispatch_get_main_queue(),^{
 
             self.arrayWallets = arrayWallets;
+            _selectedWalletIndex = newWalletIndex;
+            _walletUUID = newWalletUUID;
 
             if (_selectedWalletIndex < [arrayWallets count])
             {
@@ -948,16 +1194,16 @@
     bWalletListDropped = false;
 }
 
-#pragma mark - ShowWalletQRViewController delegates
-
-- (void)ShowWalletQRViewControllerDone:(ShowWalletQRViewController *)controller
-{
-	[controller.view removeFromSuperview];
-	_qrViewController = nil;
-
-    [self setFirstResponder];
-}
-
+//#pragma mark - ShowWalletQRViewController delegates
+//
+//- (void)ShowWalletQRViewControllerDone:(ShowWalletQRViewController *)controller
+//{
+//	[controller.view removeFromSuperview];
+//	_qrViewController = nil;
+//
+//    [self setFirstResponder];
+//}
+//
 #pragma mark - Textfield delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -998,4 +1244,411 @@
 {
     return [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 }
+
+-(void)showConnectedPopup
+{
+    NSString *line1;
+    NSString *line2;
+    NSString *line3;
+    UIImage *image;
+
+    line1 = self.connectedName.text;
+    line2 = NSLocalizedString(@"Connected", "Popup text when BLE connects");
+    line3 = @"";
+
+    //see if there is a match between advertised name and name in contacts.  If so, use the photo from contacts
+    BOOL imageIsFromContacts = NO;
+
+    NSArray *arrayComponents = [self.connectedName.text componentsSeparatedByString:@" "];
+    if(arrayComponents.count >= 2)
+    {
+        //filter off the nickname.  We just want first name and last name
+        NSString *firstName = [arrayComponents objectAtIndex:0];
+        NSString *lastName = [arrayComponents objectAtIndex:1];
+        NSString *name = [NSString stringWithFormat:@"%@ %@", firstName, lastName ];
+        for (Contact *contact in self.arrayContacts)
+        {
+            if([[name uppercaseString] isEqualToString:[contact.strName uppercaseString]])
+            {
+                image = contact.imagePhoto;
+                imageIsFromContacts = YES;
+                break;
+            }
+        }
+    }
+
+
+    if(imageIsFromContacts == NO)
+    {
+        image = [UIImage imageNamed:@"BLE_photo.png"];
+    }
+
+    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+    [_fadingAlert messageTextSet:@""];
+    _fadingAlert.fadeDuration = 2;
+    _fadingAlert.fadeDelay = 3;
+    [_fadingAlert photoAlertSet:image line1:line1 line2:line2 line3:line3];
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert showSpinner:NO];
+    [_fadingAlert showFading];
+
+//    [UIView animateWithDuration:3.0
+//                          delay:2.0
+//                        options:UIViewAnimationOptionCurveLinear
+//                     animations:^
+//                     {
+//                         self.connectedView.alpha = 0.0;
+//                         self.qrCodeImageView.alpha = 1.0;
+//                     }
+//                     completion:^(BOOL finished)
+//                     {
+//
+//                     }];
+}
+
+-(void)showPaymentPopup:(RequestState)state amount:(SInt64) amountSatoshi
+{
+    NSString *line1;
+    NSString *line2;
+    NSString *line3;
+    UIImage *image;
+
+    NSTimeInterval delay;
+    NSTimeInterval duration;
+
+    Wallet *wallet = [self getCurrentWallet];
+
+
+    switch (state) {
+        case kPartial:
+        {
+            delay = 4.0;
+            duration = 2.0;
+            line1 = NSLocalizedString(@"** Warning **", @"** Warning ** text on partial payment");
+            line2 = NSLocalizedString(@"Partial Payment", @"Text on partial payment");
+            line3 = @"";
+            image = [UIImage imageNamed:@"Warning_icon.png"];
+            [[AudioController controller] playPartialReceived];
+            break;
+        }
+        case kDonation:
+        {
+            delay = 7.0;
+            duration = 2.0;
+            line1 = NSLocalizedString(@"Payment received", @"Text on payment recived popup");
+            tABC_Error error;
+            double currency;
+            if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+                    amountSatoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
+            {
+                NSString *fiatAmount = [CoreBridge currencySymbolLookup:wallet.currencyNum];
+                NSString *fiatSymbol = [NSString stringWithFormat:@"%.2f", currency];
+                NSString *fiat = [fiatAmount stringByAppendingString:fiatSymbol];
+                line2 = [CoreBridge formatSatoshi:amountSatoshi];
+                line3 = fiat;
+            }
+            else
+            {
+                // failed to look up the wallet's fiat currency
+                line2 = [CoreBridge formatSatoshi:amountSatoshi];
+                line3  = @"";
+            }
+            [[AudioController controller] playReceived];
+            break;
+        }
+        default:
+        {
+            [[AudioController controller] playReceived];
+            return;
+        }
+    }
+
+    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+    [_fadingAlert messageTextSet:@""];
+    _fadingAlert.fadeDuration = duration;
+    _fadingAlert.fadeDelay = delay;
+    [_fadingAlert photoAlertSet:image line1:line1 line2:line2 line3:line3];
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert showSpinner:NO];
+    [_fadingAlert showFading];
+
+
+//    self.connectedView.alpha = 1.0;
+//    self.qrCodeImageView.alpha = 0.0;
+//    [UIView animateWithDuration:duration
+//                          delay:delay
+//                        options:UIViewAnimationOptionCurveLinear
+//                     animations:^
+//                     {
+//                         self.connectedView.alpha = 0.0;
+//                         self.qrCodeImageView.alpha = 1.0;
+//                     }
+//                     completion:^(BOOL finished)
+//                     {
+//                     }];
+}
+
+#pragma mark FadingAlertView2 Delegates
+
+-(void)fadingAlertDismissed:(FadingAlertView2 *)pv
+{
+
+}
+
+#pragma mark address book
+
+- (void)generateListOfContactNames
+{
+    NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
+
+    CFErrorRef error;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+
+    __block BOOL accessGranted = NO;
+
+    if (ABAddressBookRequestAccessWithCompletion != NULL)
+    {
+        // we're on iOS 6
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+        {
+            accessGranted = granted;
+            dispatch_semaphore_signal(sema);
+        });
+
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        //dispatch_release(sema);
+    }
+    else
+    {
+        // we're on iOS 5 or older
+        accessGranted = YES;
+    }
+
+    if (accessGranted)
+    {
+        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+        for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
+        {
+            ABRecordRef person = CFArrayGetValueAtIndex(people, i);
+
+            NSString *strFullName = [Util getNameFromAddressRecord:person];
+            if ([strFullName length])
+            {
+                // add this contact
+                [self addContactInfo:person withName:strFullName toArray:arrayContacts];
+            }
+        }
+        CFRelease(people);
+    }
+
+    // assign final
+    self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];
+    //NSLog(@"contacts: %@", self.arrayContacts);
+}
+
+- (void)addContactInfo:(ABRecordRef)person withName:(NSString *)strName toArray:(NSMutableArray *)arrayContacts
+{
+    UIImage *imagePhoto = nil;
+
+    // does this contact has an image
+    if (ABPersonHasImageData(person))
+    {
+        NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
+        imagePhoto = [UIImage imageWithData:data];
+    }
+
+    Contact *contact = [[Contact alloc] init];
+    contact.strName = strName;
+    //contact.strData = strData;
+    //contact.strDataLabel = strDataLabel;
+    contact.imagePhoto = imagePhoto;
+
+    [arrayContacts addObject:contact];
+}
+
+#pragma mark - CBPeripheral methods
+
+/** Required protocol method.  A full app should take care of all the possible states,
+*  but we're just waiting for  to know when the CBPeripheralManager is ready
+*/
+- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
+{
+    if(peripheral.state == CBPeripheralManagerStatePoweredOn && [self isLECapableHardware])
+    {
+        // We're in CBPeripheralManagerStatePoweredOn state...
+        //NSLog(@"self.peripheralManager powered on.");
+
+        // ... so build our service.
+
+        // Start with the CBMutableCharacteristic
+        self.bitcoinURICharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]
+                                                                           properties:CBCharacteristicPropertyNotify | CBCharacteristicPropertyRead | CBCharacteristicPropertyWrite
+                                                                                value:nil
+                                                                          permissions:CBAttributePermissionsReadable | CBAttributePermissionsWriteable];
+
+
+        // Then the service
+        CBMutableService *transferService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]
+                                                                           primary:YES];
+
+        // Add the characteristic to the service
+        transferService.characteristics = @[self.bitcoinURICharacteristic];
+
+        // And add it to the peripheral manager
+        [self.peripheralManager addService:transferService];
+
+        //now start advertising (UUID and username)
+
+        //make 10-character address
+        NSString *address;
+        if(addressString.length >= 10)
+        {
+            address = [addressString substringToIndex:10];
+        }
+        else
+        {
+            address = addressString;
+        }
+
+        tABC_AccountSettings            *pAccountSettings;
+        tABC_Error Error;
+        Error.code = ABC_CC_Ok;
+
+        // load the current account settings
+        pAccountSettings = NULL;
+        ABC_LoadAccountSettings([[User Singleton].name UTF8String],
+                [[User Singleton].password UTF8String],
+                &pAccountSettings,
+                &Error);
+        [Util printABC_Error:&Error];
+
+        BOOL sendName = NO;
+        if (pAccountSettings)
+        {
+            if(pAccountSettings->bNameOnPayments)
+            {
+                sendName = YES;
+            }
+            ABC_FreeAccountSettings(pAccountSettings);
+        }
+
+        NSString *name;
+        if(sendName)
+        {
+            name = [User Singleton].fullName ;
+            if ([name isEqualToString:@""])
+            {
+                name = [[UIDevice currentDevice] name];
+            }
+        }
+        else
+        {
+            name = [[UIDevice currentDevice] name];
+        }
+        //broadcast first 10 digits of bitcoin address followed by full name (up to 28 bytes total)
+        [self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]], CBAdvertisementDataLocalNameKey : [NSString stringWithFormat:@"%@%@", address, name]}];
+        self.BLE_LogoImageView.hidden = NO;
+    }
+    else
+    {
+//        [self showFadingAlert:NSLocalizedString(@"Bluetooth disconnected", nil)];
+        self.BLE_LogoImageView.hidden = YES;
+    }
+
+}
+
+/*
+ * Central sends their name - acknowledge it
+ */
+-(void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests
+{
+    //NSLog(@"didReceiveWriteRequests");
+    for(CBATTRequest *request in requests)
+    {
+        if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
+        {
+            NSString *userName = [[NSString alloc] initWithData:request.value encoding:NSUTF8StringEncoding];
+            //NSLog(@"Received new string: %@", userName);
+
+            self.connectedName.text = userName;
+        }
+    }
+    [self showConnectedPopup];
+    [self.peripheralManager respondToRequest:[requests objectAtIndex:0] withResult:CBATTErrorSuccess];
+}
+
+/*
+ * Central requesting full bitcoin URI. Send it in limited packets up to 512 bytes
+ */
+-(void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request
+{
+    //NSLog(@"didReceiveReadRequests");
+
+    if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
+    {
+        NSString *stringToSend = [NSString stringWithFormat:@"%@", _uriString];
+        NSData *data = [stringToSend dataUsingEncoding:NSUTF8StringEncoding];
+
+        if (request.offset > data.length)
+        {
+            [self.peripheralManager respondToRequest:request withResult:CBATTErrorInvalidOffset];
+            return;
+        }
+
+        NSRange readRange = NSMakeRange(request.offset, data.length - request.offset);
+        request.value = [data subdataWithRange:readRange];
+        [peripheral respondToRequest:request withResult:CBATTErrorSuccess];
+    }
+}
+
+// Use CBPeripheralManager to check whether the current platform/hardware supports Bluetooth LE.
+- (BOOL)isLECapableHardware
+{
+    NSString * state = nil;
+    switch ([self.peripheralManager state]) {
+        case CBPeripheralManagerStateUnsupported:
+            state = @"Your hardware doesn't support Bluetooth LE sharing.";
+            break;
+        case CBPeripheralManagerStateUnauthorized:
+            state = @"This app is not authorized to use Bluetooth. You can change this in the Settings app.";
+            break;
+        case CBPeripheralManagerStatePoweredOff:
+            state = @"Bluetooth is currently powered off.";
+            break;
+        case CBPeripheralManagerStateResetting:
+            state = @"Bluetooth is currently resetting.";
+            break;
+        case CBPeripheralManagerStatePoweredOn:
+            NSLog(@"powered on");
+            return TRUE;
+        case CBPeripheralManagerStateUnknown:
+            NSLog(@"state unknown");
+            return FALSE;
+        default:
+            return FALSE;
+    }
+    NSLog(@"Peripheral manager state: %@", state);
+    return FALSE;
+}
+
+- (void)showFadingAlert:(NSString *)message
+{
+    [self showFadingAlert:message withDelay:ERROR_MESSAGE_FADE_DELAY];
+}
+
+- (void)showFadingAlert:(NSString *)message withDelay:(int)fadeDelay
+{
+    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
+    [_fadingAlert messageTextSet:message];
+    _fadingAlert.fadeDelay = fadeDelay;
+    _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
+    [_fadingAlert blockModal:NO];
+    [_fadingAlert showSpinner:NO];
+    [_fadingAlert showFading];
+}
+
+
+
 @end

@@ -2,6 +2,7 @@
 #import "FadingAlertView2.h"
 #import "ABC.h"
 #import "Util.h"
+#import "LatoLabel.h"
 
 #define ALERT_MESSAGE_FADE_DELAY 10
 #define ALERT_MESSAGE_FADE_DURATION 10
@@ -13,10 +14,13 @@
 - (void)fadeOutView:(UIView *)view completion:(void (^)(BOOL finished))completion;
 - (void)hideAlertByTap:(UITapGestureRecognizer *)sender;
 
+@property (weak, nonatomic) IBOutlet LatoLabel *connectedLine1;
+@property (weak, nonatomic) IBOutlet LatoLabel *connectedLine2;
+@property (weak, nonatomic) IBOutlet LatoLabel *connectedLine3;
+@property (weak, nonatomic) IBOutlet UIImageView *connectedPhoto;
 @property (nonatomic, weak) IBOutlet UILabel *messageText;
 @property (nonatomic, weak) IBOutlet UIView *activityIndicator;
 @property (nonatomic, weak) IBOutlet UIToolbar *toolBarView;
-@property (nonatomic, weak) IBOutlet UIView *shadowView;
 @property (nonatomic, weak) NSTimer *timer;
 @property BOOL bIsBlocking;
 
@@ -40,8 +44,8 @@
         _toolBarView.clipsToBounds = YES;
         _toolBarView.layer.cornerRadius = 5.0;
         _toolBarView.alpha = 1.0;
-        _shadowView.backgroundColor = [UIColor clearColor];
-        _shadowView.alpha = 0.0;
+//        _shadowView.backgroundColor = [UIColor clearColor];
+//        _shadowView.alpha = 0.0;
 
     }
     return self;
@@ -86,9 +90,18 @@
     currentView.bIsBlocking = true;
     currentView.activityIndicator.hidden = false;
     [currentView showSpinner:YES center:YES];
-    [currentView showBackground:NO];
+//    [currentView showBackground:NO];
     return currentView;
 }
+
+- (void)photoAlertSet:(UIImage *)image line1:(NSString *)line1 line2:(NSString *)line2 line3:(NSString *)line3;
+{
+    self.connectedPhoto.image = image;
+    self.connectedLine1.text = line1;
+    self.connectedLine2.text = line2;
+    self.connectedLine3.text = line3;
+}
+
 
 - (void)blockModal:(BOOL)blocking
 {
@@ -144,7 +157,7 @@
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          [view setAlpha:0.0];
-                         [self.shadowView setAlpha:0.0];
+//                         [self.shadowView setAlpha:0.0];
                          [self.toolBarView setAlpha:0.0];
                          NSLog(@"FadingAlert2 init fadeout: x=%f width=%f\n", self.layer.frame.origin.x, self.layer.frame.size.width);
 
