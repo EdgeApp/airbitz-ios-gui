@@ -599,13 +599,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Po-w8-mEf" userLabel="View -entry">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="USD Amount" placeholder="USD Amount" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="dY3-MX-MNV" userLabel="Amt Fiat">
-                                                <rect key="frame" x="10" y="11" width="192" height="38"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                            </textField>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="900" horizontalCompressionResistancePriority="900" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dqf-l4-9Zx">
                                                 <rect key="frame" x="210" y="16" width="100" height="29"/>
                                                 <constraints>
@@ -629,17 +622,32 @@
                                             <constraint firstAttribute="height" constant="60" id="ilF-6c-9V6"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BTC Amount" placeholder="BTC Amount" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ug3-Vw-VAD" userLabel="Amt BTC">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BTC Amount" placeholder="BTC Amount" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ug3-Vw-VAD" userLabel="Amt BTC">
                                         <rect key="frame" x="10" y="60" width="106" height="40"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="106" id="3nO-DL-Obg"/>
+                                            <constraint firstAttribute="height" constant="40" id="t5O-t5-X3g"/>
+                                        </constraints>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Exchange Rate Loading..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwC-1c-veH">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="USD Amount" placeholder="USD Amount" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="dY3-MX-MNV" userLabel="Amt Fiat">
+                                        <rect key="frame" x="10" y="11" width="192" height="38"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="192" id="2jg-vD-63I"/>
+                                            <constraint firstAttribute="height" constant="38" id="fot-bQ-5w7"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Exchange Rate Loading..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwC-1c-veH">
                                         <rect key="frame" x="162" y="60" width="148" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="47a-Rc-X2z"/>
@@ -667,13 +675,29 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5sd-ot-S1v" userLabel="qrCodeImage">
                                                 <rect key="frame" x="10" y="10" width="189" height="189"/>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cuf-lh-wIN">
+                                                <rect key="frame" x="81" y="90" width="46" height="30"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didTouchQRCode:" destination="Int-ih-AH6" eventType="touchUpInside" id="hNv-wh-5DB"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MRG-UO-gcm" secondAttribute="height" multiplier="1:1" id="1Yx-WK-Qo5"/>
+                                            <constraint firstItem="cuf-lh-wIN" firstAttribute="leading" secondItem="MRG-UO-gcm" secondAttribute="leading" id="C9f-9g-iee"/>
+                                            <constraint firstAttribute="trailing" secondItem="cuf-lh-wIN" secondAttribute="trailing" id="Fj8-8E-Zcb"/>
+                                            <constraint firstAttribute="bottom" secondItem="cuf-lh-wIN" secondAttribute="bottom" id="OTJ-Tj-btb"/>
                                             <constraint firstAttribute="bottom" secondItem="5sd-ot-S1v" secondAttribute="bottom" constant="10" id="VGJ-HT-Mob"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="XyV-AG-oOE"/>
                                             <constraint firstAttribute="trailing" secondItem="5sd-ot-S1v" secondAttribute="trailing" constant="10" id="Zx1-Aw-mbe"/>
+                                            <constraint firstItem="cuf-lh-wIN" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="top" id="bg2-Qh-3d8"/>
                                             <constraint firstItem="5sd-ot-S1v" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="top" constant="10" id="iUD-7Z-rPi"/>
                                             <constraint firstItem="5sd-ot-S1v" firstAttribute="leading" secondItem="MRG-UO-gcm" secondAttribute="leading" constant="10" id="ojw-f4-A0p"/>
                                         </constraints>
@@ -740,7 +764,7 @@
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BLE_Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="fHY-wl-t5s">
-                                        <rect key="frame" x="20" y="276" width="21" height="29"/>
+                                        <rect key="frame" x="30" y="276" width="21" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="PAb-qn-RLj"/>
                                             <constraint firstAttribute="width" constant="21" id="xye-jR-07Z"/>
@@ -752,6 +776,7 @@
                                     <constraint firstItem="NGg-Nn-BeH" firstAttribute="top" secondItem="3A3-3d-okn" secondAttribute="bottom" constant="2" id="0Kd-3g-yfd"/>
                                     <constraint firstItem="7N4-k1-c9H" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="0fk-Na-gcH"/>
                                     <constraint firstItem="FS5-S0-Rqp" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="bottom" constant="8" symbolic="YES" id="0kB-HL-udn"/>
+                                    <constraint firstItem="Ug3-Vw-VAD" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="10" id="2B1-zb-TZk"/>
                                     <constraint firstAttribute="trailing" secondItem="3A3-3d-okn" secondAttribute="trailing" constant="20" symbolic="YES" id="3ce-ZB-KY9"/>
                                     <constraint firstItem="rtQ-SU-6iS" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" symbolic="YES" id="7rH-6S-wrI"/>
                                     <constraint firstItem="3A3-3d-okn" firstAttribute="top" secondItem="fHY-wl-t5s" secondAttribute="bottom" constant="14" id="97S-S7-s02"/>
@@ -769,6 +794,7 @@
                                     <constraint firstItem="NGg-Nn-BeH" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" symbolic="YES" id="Ogn-tw-gkF"/>
                                     <constraint firstItem="jlL-oE-aWy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rtQ-SU-6iS" secondAttribute="bottom" constant="8" symbolic="YES" id="Pab-mx-fWu"/>
                                     <constraint firstItem="3A3-3d-okn" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" symbolic="YES" id="QWc-yL-Ry2"/>
+                                    <constraint firstItem="dY3-MX-MNV" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="10" id="W6D-Zr-p4f"/>
                                     <constraint firstItem="jwC-1c-veH" firstAttribute="leading" secondItem="Fc7-23-ecF" secondAttribute="trailing" constant="8" symbolic="YES" id="Wns-uH-FL9"/>
                                     <constraint firstAttribute="bottom" secondItem="FS5-S0-Rqp" secondAttribute="bottom" constant="49" id="aqf-C8-N7y"/>
                                     <constraint firstAttribute="trailing" secondItem="7N4-k1-c9H" secondAttribute="trailing" constant="20" id="b0e-5R-pN1"/>
@@ -776,10 +802,12 @@
                                     <constraint firstItem="MRG-UO-gcm" firstAttribute="top" secondItem="Fc7-23-ecF" secondAttribute="bottom" constant="8" symbolic="YES" id="bwV-vG-x9m"/>
                                     <constraint firstItem="Fc7-23-ecF" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="dXq-T1-ULl"/>
                                     <constraint firstAttribute="bottom" secondItem="jlL-oE-aWy" secondAttribute="bottom" constant="57" id="dZ7-sF-hD9"/>
+                                    <constraint firstItem="dY3-MX-MNV" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" constant="11" id="fDp-p2-zgx"/>
                                     <constraint firstAttribute="trailing" secondItem="rtQ-SU-6iS" secondAttribute="trailing" constant="20" symbolic="YES" id="hgK-mG-uZZ"/>
+                                    <constraint firstItem="Ug3-Vw-VAD" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" constant="60" id="iYd-oA-pww"/>
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="jLA-xe-QYF"/>
                                     <constraint firstItem="jlL-oE-aWy" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="10" id="k3E-Yq-7CZ"/>
-                                    <constraint firstItem="MRG-UO-gcm" firstAttribute="leading" secondItem="fHY-wl-t5s" secondAttribute="trailing" constant="15" id="rqK-Zs-E4V"/>
+                                    <constraint firstItem="MRG-UO-gcm" firstAttribute="leading" secondItem="fHY-wl-t5s" secondAttribute="trailing" constant="5" id="rqK-Zs-E4V"/>
                                     <constraint firstItem="jwC-1c-veH" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="tuc-7l-JlM"/>
                                 </constraints>
                             </view>
@@ -800,9 +828,15 @@
                         <outlet property="BTC_TextField" destination="Ug3-Vw-VAD" id="wxA-0t-0gW"/>
                         <outlet property="USD_TextField" destination="dY3-MX-MNV" id="KN9-2s-2Cb"/>
                         <outlet property="bottomBTCUSDLabel" destination="Fc7-23-ecF" id="9rC-bM-Dq9"/>
+                        <outlet property="btcHeight" destination="t5O-t5-X3g" id="LIb-uz-WCK"/>
+                        <outlet property="btcTop" destination="iYd-oA-pww" id="i6v-Pc-V4c"/>
+                        <outlet property="btcWidth" destination="3nO-DL-Obg" id="lr7-Pk-zrM"/>
                         <outlet property="buttonSelector" destination="7N4-k1-c9H" id="XXU-Jd-aGn"/>
                         <outlet property="calculatorBottom" destination="aqf-C8-N7y" id="bLC-E9-fKs"/>
                         <outlet property="exchangeRateLabel" destination="jwC-1c-veH" id="3U1-BI-cHp"/>
+                        <outlet property="fiatHeight" destination="fot-bQ-5w7" id="8lj-8b-sCT"/>
+                        <outlet property="fiatTop" destination="fDp-p2-zgx" id="AWP-fI-w8e"/>
+                        <outlet property="fiatWidth" destination="2jg-vD-63I" id="ngZ-an-ani"/>
                         <outlet property="keypadView" destination="FS5-S0-Rqp" id="Xh1-wc-LVQ"/>
                         <outlet property="qrCodeImageView" destination="5sd-ot-S1v" id="Tct-qD-0GX"/>
                         <outlet property="segmentedControlBTCUSD" destination="dqf-l4-9Zx" id="FOf-6y-9mP"/>

@@ -70,10 +70,16 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     FadingAlertView2                 *_fadingAlert;
     NSString                    *_uriString;
     NSMutableString                    *previousWalletUUID;
+    BOOL                        bLastCalculatorState;
 
 
 }
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btcWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btcHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fiatTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btcTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fiatWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fiatHeight;
 @property (weak, nonatomic) IBOutlet UILabel *statusLine1;
 @property (weak, nonatomic) IBOutlet UILabel *statusLine2;
 @property (weak, nonatomic) IBOutlet UILabel *statusLine3;
@@ -154,6 +160,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.amountSatoshiRequested = 0;
     self.previousAmountSatoshiRequested = -1;
     self.state = kRequest;
+
+    _selectedTextField = self.USD_TextField;
+    self.keypadView.calcMode = CALC_MODE_FIAT;
+
+
 
 
 //	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
@@ -329,6 +340,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         [self upCalculator:bShow];
     }
+    bLastCalculatorState = bShow;
+
 
 }
 
@@ -399,6 +412,25 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 
 #pragma mark - Action Methods
+
+- (IBAction)didTouchQRCode:(id)sender
+{
+    if (bLastCalculatorState)
+    {
+        [self.BTC_TextField resignFirstResponder];
+        [self.USD_TextField resignFirstResponder];
+
+        [self changeCalculator:YES show:NO];
+    }
+    else
+    {
+        [self changeCalculator:YES show:YES];
+        [self.currentTopField becomeFirstResponder];
+    }
+
+}
+
+
 
 - (IBAction)segmentedControlBTCUSDAction:(id)sender
 {
@@ -536,13 +568,19 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
     NSMutableString *strRequestURI = [[NSMutableString alloc] init];
 
+    self.statusLine1.text = @"";
+    self.statusLine2.text = @"";
+    self.statusLine3.text = @"";
 
     switch (self.state) {
         case kRequest:
         case kDone:
         {
-            NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
-            self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiRequested],string];
+            if (self.amountSatoshiRequested > 0)
+            {
+                NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
+                self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiRequested],string];
+            }
             self.statusLine2.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
             break;
         }
@@ -560,8 +598,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             self.statusLine1.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
 
-            NSString *string = NSLocalizedString(@"Received...", @"Received string on Request screen");
-            self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiReceived],string];
+            if (self.amountSatoshiReceived > 0)
+            {
+                NSString *string = NSLocalizedString(@"Received...", @"Received string on Request screen");
+                self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiReceived],string];
+            }
             break;
         }
     }
@@ -736,6 +777,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
 
     UITextField *bottomField;
+    CGRect fiatFrame, btcFrame;
 
     if (bFiat)
     {
@@ -748,6 +790,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             self.currentTopField = self.USD_TextField;
             bottomField = self.BTC_TextField;
             _bottomBTCUSDLabel.text = [User Singleton].denominationLabel;
+
+            fiatFrame = topFrame;
+            btcFrame = bottomFrame;
+            segmentedControlBTCUSD.selectedSegmentIndex = 0;
+
 
         }
     }
@@ -764,23 +811,36 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
             Wallet *wallet = [self getCurrentWallet];
             _bottomBTCUSDLabel.text = wallet.currencyAbbrev;
+            fiatFrame = bottomFrame;
+            btcFrame = topFrame;
+            segmentedControlBTCUSD.selectedSegmentIndex = 1;
+
         }
     }
 
-    self.currentTopField.frame = topFrame;
+    self.fiatTop.constant = fiatFrame.origin.y;
+    self.fiatWidth.constant = fiatFrame.size.width;
+    self.fiatHeight.constant = fiatFrame.size.height;
+
+    self.btcTop.constant = btcFrame.origin.y;
+    self.btcWidth.constant = btcFrame.size.width;
+    self.btcHeight.constant = btcFrame.size.height;
+
+//    self.currentTopField.frame = topFrame;
     UIColor *color = [UIColor lightGrayColor];
     NSString *string = NSLocalizedString(@"Enter Amount (optional)", "Placeholder text for Receive screen amount");
     self.currentTopField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:string attributes:@{NSForegroundColorAttributeName: color}];
 
     [self.currentTopField setFont:[UIFont fontWithName:@"Lato-Regular" size:topTextSize]];
     [self.currentTopField setTextColor:[Theme Singleton].colorRequestTopTextField];
-    [self.currentTopField becomeFirstResponder];
+//    [self.currentTopField becomeFirstResponder];
     [self.currentTopField setTintColor:[UIColor lightGrayColor]];
     [self.currentTopField setEnabled:true];
 
+
     self.keypadView.textField = self.currentTopField;
 
-    bottomField.frame = bottomFrame;
+//    bottomField.frame = bottomFrame;
     bottomField.placeholder = @"";
     [bottomField setFont:[UIFont fontWithName:@"Lato-Regular" size:bottomTextSize]];
     [bottomField setTextColor:[Theme Singleton].colorRequestBottomTextField];
@@ -1181,20 +1241,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 #pragma mark - Calculator delegates
 
+
+
 - (void)CalculatorDone:(CalculatorView *)calculator
 {
-	[self.BTC_TextField resignFirstResponder];
-	[self.USD_TextField resignFirstResponder];
-
-    [self changeCalculator:YES show:NO];
-//    if (!IS_IPHONE4 ) // condition where calculator is showing Next instead of Done
-    {
-//XXX        SInt64 amountSatoshi = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
-//        RequestState state = [self isDonation:amountSatoshi] ? kDonation : kRequest;
-//        [self LaunchQRCodeScreen:amountSatoshi withRequestState:state];
-
-        // Need to update QR code or as we type
-    }
+    [self didTouchQRCode:nil];
 }
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
