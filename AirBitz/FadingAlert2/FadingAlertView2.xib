@@ -15,13 +15,13 @@
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" customClass="FadingAlertView2">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <subviews>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8D-FP-37y" userLabel="Toolbar -blur">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <items/>
-                </toolbar>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="568" translatesAutoresizingMaskIntoConstraints="NO" id="OYT-Tf-r4L" userLabel="AlertGroup">
                     <rect key="frame" x="35" y="159" width="250" height="250"/>
                     <subviews>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M8D-FP-37y" userLabel="Toolbar -blur">
+                            <rect key="frame" x="-35" y="-159" width="320" height="568"/>
+                            <items/>
+                        </toolbar>
                         <label autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="2is-5E-X7J" userLabel="Message" customClass="LatoLabel">
                             <rect key="frame" x="16" y="16" width="218" height="218"/>
                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
@@ -89,15 +89,19 @@
                     </subviews>
                     <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="M8D-FP-37y" secondAttribute="bottom" id="8XR-hq-s6A"/>
                         <constraint firstAttribute="bottom" secondItem="2is-5E-X7J" secondAttribute="bottom" constant="16" id="In1-2K-5pO"/>
                         <constraint firstItem="2is-5E-X7J" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" constant="16" id="JXH-F4-QSK"/>
+                        <constraint firstItem="M8D-FP-37y" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" id="Jgg-MC-qY6"/>
                         <constraint firstAttribute="width" constant="250" id="RCC-2m-09y"/>
                         <constraint firstItem="2is-5E-X7J" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" constant="16" id="TbY-5b-Nyp"/>
+                        <constraint firstAttribute="trailing" secondItem="M8D-FP-37y" secondAttribute="trailing" id="Uiq-UT-rRc"/>
                         <constraint firstAttribute="trailing" secondItem="uOK-yM-OiA" secondAttribute="trailing" constant="16" id="Wcm-bP-G1X"/>
                         <constraint firstAttribute="trailing" secondItem="2is-5E-X7J" secondAttribute="trailing" constant="16" id="Xr7-AO-sph"/>
                         <constraint firstAttribute="height" constant="250" id="bm6-Jx-kNe"/>
                         <constraint firstItem="uOK-yM-OiA" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" constant="16" id="eXw-Xl-r1Y"/>
                         <constraint firstAttribute="bottom" secondItem="uOK-yM-OiA" secondAttribute="bottom" constant="16" id="foC-H3-Zhf"/>
+                        <constraint firstItem="M8D-FP-37y" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" id="hqL-Tu-yXn"/>
                         <constraint firstItem="uOK-yM-OiA" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" constant="16" id="iOQ-wI-x9t"/>
                         <constraint firstAttribute="bottom" secondItem="Joy-6Y-Kdk" secondAttribute="bottom" constant="20" id="jHj-Jz-QEz"/>
                         <constraint firstAttribute="centerX" secondItem="Joy-6Y-Kdk" secondAttribute="centerX" id="lEr-l3-sDs"/>
@@ -109,10 +113,6 @@
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="OYT-Tf-r4L" secondAttribute="centerX" id="0TW-Xh-kzy"/>
                 <constraint firstAttribute="centerY" secondItem="OYT-Tf-r4L" secondAttribute="centerY" id="1Ky-bz-xOK"/>
-                <constraint firstItem="M8D-FP-37y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Cpo-HX-zRQ"/>
-                <constraint firstAttribute="trailing" secondItem="M8D-FP-37y" secondAttribute="trailing" id="D6s-bG-c7k"/>
-                <constraint firstAttribute="bottom" secondItem="M8D-FP-37y" secondAttribute="bottom" id="Z1T-Hl-oaG"/>
-                <constraint firstItem="M8D-FP-37y" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xg7-rc-tp2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
