@@ -2,22 +2,29 @@
 #import "FadingAlertView2.h"
 #import "ABC.h"
 #import "Util.h"
+#import "LatoLabel.h"
+#import "Theme.h"
+#import "MainViewController.h"
 
 #define ALERT_MESSAGE_FADE_DELAY 10
 #define ALERT_MESSAGE_FADE_DURATION 10
 
 @interface FadingAlertView2 ()
 {
-
 }
 - (void)fadeOutView:(UIView *)view completion:(void (^)(BOOL finished))completion;
 - (void)hideAlertByTap:(UITapGestureRecognizer *)sender;
 
+@property (weak, nonatomic) IBOutlet UIView *alertGroupView;
+@property (weak, nonatomic) IBOutlet LatoLabel *connectedLine1;
+@property (weak, nonatomic) IBOutlet LatoLabel *connectedLine2;
+@property (weak, nonatomic) IBOutlet LatoLabel *connectedLine3;
+@property (weak, nonatomic) IBOutlet UIImageView *connectedPhoto;
 @property (nonatomic, weak) IBOutlet UILabel *messageText;
 @property (nonatomic, weak) IBOutlet UIView *activityIndicator;
 @property (nonatomic, weak) IBOutlet UIToolbar *toolBarView;
-@property (nonatomic, weak) IBOutlet UIView *shadowView;
 @property (nonatomic, weak) NSTimer *timer;
+@property (nonatomic) BOOL bDropDown;
 @property BOOL bIsBlocking;
 
 @end
@@ -40,11 +47,54 @@
         _toolBarView.clipsToBounds = YES;
         _toolBarView.layer.cornerRadius = 5.0;
         _toolBarView.alpha = 1.0;
-        _shadowView.backgroundColor = [UIColor clearColor];
-        _shadowView.alpha = 0.0;
+        self.bDropDown = false;
+
+
+//        _shadowView.backgroundColor = [UIColor clearColor];
+//        _shadowView.alpha = 0.0;
 
     }
     return self;
+}
+
++ (FadingAlertView2 *)CreateDropView:(UIView *)parentView withDelegate:(id<FadingAlertView2Delegate>)delegate
+{
+    FadingAlertView2 *currentView = [[FadingAlertView2 alloc] init];
+    currentView = [[[NSBundle mainBundle] loadNibNamed:@"FadingAlertDropDownView" owner:nil options:nil] objectAtIndex:0];
+
+    NSLog(@"FadingAlert2 CreateDropView show: x=%f width=%f\n", parentView.layer.frame.origin.x, parentView.layer.frame.size.width);
+
+
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:currentView action:@selector(hideAlertByTap:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    [currentView addGestureRecognizer:tapGesture];
+
+    currentView.delegate = delegate;
+
+    [parentView addSubview:currentView];
+
+    [currentView setTranslatesAutoresizingMaskIntoConstraints:YES];
+
+    CGRect frame;
+
+    frame = parentView.frame;
+    frame.size.height = [Theme Singleton].fadingAlertDropdownHeight;
+    frame.origin.y = - (frame.size.height * 2);
+
+    currentView.frame = frame;
+    currentView.bDropDown = true;
+
+    currentView.alertGroupView.layer.masksToBounds = NO;
+//        self.walletsView.layer.cornerRadius = 8; // if you like rounded corners
+    currentView.alertGroupView.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    currentView.alertGroupView.layer.shadowRadius = 10;
+    currentView.alertGroupView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    currentView.alertGroupView.layer.shadowOpacity = 0.4;
+    [currentView.toolBarView setTranslucent:[Theme Singleton].bTranslucencyEnable];
+
+
+    return currentView;
 }
 
 + (FadingAlertView2 *)CreateInsideView:(UIView *)parentView withDelegate:(id<FadingAlertView2Delegate>)delegate
@@ -70,6 +120,7 @@
 
     frame = parentView.frame;
     currentView.frame = frame;
+    [currentView.toolBarView setTranslucent:[Theme Singleton].bTranslucencyEnable];
 
     return currentView;
 }
@@ -85,10 +136,21 @@
 
     currentView.bIsBlocking = true;
     currentView.activityIndicator.hidden = false;
+    [currentView.toolBarView setTranslucent:[Theme Singleton].bTranslucencyEnable];
+
     [currentView showSpinner:YES center:YES];
-    [currentView showBackground:NO];
+//    [currentView showBackground:NO];
     return currentView;
 }
+
+- (void)photoAlertSet:(UIImage *)image line1:(NSString *)line1 line2:(NSString *)line2 line3:(NSString *)line3;
+{
+    self.connectedPhoto.image = image;
+    self.connectedLine1.text = line1;
+    self.connectedLine2.text = line2;
+    self.connectedLine3.text = line3;
+}
+
 
 - (void)blockModal:(BOOL)blocking
 {
@@ -107,9 +169,25 @@
 
 - (void)show
 {
-    self.alpha = 1.0;
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.alpha = 1.0;
+                         if (self.bDropDown)
+                         {
+                             CGRect frame = self.frame;
+                             frame.origin.y = [MainViewController getHeaderHeight];
+                             self.frame = frame;
+                         }
+                         [self.toolBarView setAlpha:1.0];
+                         NSLog(@"FadingAlert2 init fadeout: x=%f width=%f\n", self.layer.frame.origin.x, self.layer.frame.size.width);
 
-    NSLog(@"FadingAlert show: x=%f width=%f\n", self.layer.frame.origin.x, self.layer.frame.size.width);
+                     }
+                     completion:^(BOOL finished)
+                     {}];
+
+    NSLog(@"FadingAlert show: x=%f y=%f width=%f height=%f\n", self.layer.frame.origin.x, self.layer.frame.origin.y, self.layer.frame.size.width, self.layer.frame.size.height);
 
 }
 
@@ -144,7 +222,13 @@
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          [view setAlpha:0.0];
-                         [self.shadowView setAlpha:0.0];
+                         if (self.bDropDown)
+                         {
+                             CGRect frame = self.frame;
+                             frame.origin.y = - (frame.size.height * 2);
+                             self.frame = frame;
+                         }
+//                         [self.shadowView setAlpha:0.0];
                          [self.toolBarView setAlpha:0.0];
                          NSLog(@"FadingAlert2 init fadeout: x=%f width=%f\n", self.layer.frame.origin.x, self.layer.frame.size.width);
 
@@ -160,6 +244,13 @@
              options:UIViewAnimationOptionCurveEaseOut
              animations:^{
                 self.alpha = 0.0;
+                 if (self.bDropDown)
+                 {
+                     CGRect frame = self.frame;
+                     frame.origin.y = - (frame.size.height * 2);
+                     self.frame = frame;
+                 }
+
              }
              completion:^(BOOL finished)
              {

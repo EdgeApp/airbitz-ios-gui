@@ -53,29 +53,56 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorRequestButtonDisabled = UIColorFromARGB(0x5580c342);
     self.colorSendButtonDisabled = UIColorFromARGB(0x55006698);
 
+    self.colorRequestTopTextField = [UIColor whiteColor];
+    self.colorRequestBottomTextField = [UIColor darkGrayColor];
+
+    self.appFont = @"Lato-Regular";
+
+    self.backButtonText = NSLocalizedString(@"Back", @"Back button text on top left");
+    self.exitButtonText = NSLocalizedString(@"Exit", @"Exit button text on top left");
+    self.helpButtonText = NSLocalizedString(@"Help", @"Help button text on top right");
+    self.infoButtonText = NSLocalizedString(@"Info", @"Info button text on top right");
+
     self.sendRequestButtonDisabled = 0.4f;
 
-    if (IS_IPHONE4)
+//    if (IS_IPHONE4)
     {
         self.heightListings = 90.0;
         self.heightSearchClues = 35.0;
+        self.fadingAlertDropdownHeight = 100;
+        self.heightBLETableCells = 50;
     }
-    else if (IS_IPHONE5)
+    if (IS_MIN_IPHONE5)
     {
         self.heightListings = 110.0;
         self.heightSearchClues = 40.0;
+        self.heightBLETableCells = 55;
     }
-    else if (IS_IPHONE6)
+    if (IS_MIN_IPHONE6)
     {
         self.heightListings = 120.0;
         self.heightSearchClues = 45.0;
+        self.heightBLETableCells = 65;
     }
-    else if (IS_IPHONE6_PLUS || IS_IPAD)
+    if (IS_MIN_IPHONE6_PLUS)
     {
         self.heightListings = 130.0;
         self.heightSearchClues = 45.0;
+        self.heightBLETableCells = 70;
+    }
+    if (IS_MIN_IPAD_MINI)
+    {
+        self.heightBLETableCells = 75;
     }
 
+    if ([[UIDevice currentDevice].systemVersion hasPrefix:@"7"])
+    {
+        self.bTranslucencyEnable = NO;
+    }
+    else
+    {
+        self.bTranslucencyEnable = YES;
+    }
     return self;
 }
 

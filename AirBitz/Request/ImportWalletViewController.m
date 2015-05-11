@@ -291,6 +291,8 @@ typedef enum eImportState
 
 - (void)setWalletData
 {
+    _selectedWallet = 0;
+
     // load all the non-archive wallets
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
     [CoreBridge loadWallets:arrayWallets archived:nil];
@@ -301,13 +303,14 @@ typedef enum eImportState
     {
         Wallet *wallet = [arrayWallets objectAtIndex:i];
         [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
-
+        if (_walletUUID && [_walletUUID isEqualToString:wallet.strUUID]) {
+            _selectedWallet = i;
+        }
     }
 
     if ([arrayWallets count] > 0)
     {
-        Wallet *wallet = [arrayWallets objectAtIndex:0];
-        _selectedWallet = 0;
+        Wallet *wallet = [arrayWallets objectAtIndex:_selectedWallet];
         self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
         [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = (int) _selectedWallet;

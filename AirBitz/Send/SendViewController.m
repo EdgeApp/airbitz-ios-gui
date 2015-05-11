@@ -46,6 +46,11 @@
 #import "Contact.h"
 #import "LocalSettings.h"
 #import "FadingAlertView.h"
+#import "ButtonSelectorView2.h"
+#import "FadingAlertView2.h"
+#import "MainViewController.h"
+#import "Theme.h"
+
 
 #define BLE_TIMEOUT                 1.0
 
@@ -55,14 +60,15 @@
 typedef enum eScanMode
 {
 	SCAN_MODE_UNINITIALIZED,
-	SCAN_MODE_BLE,
-	SCAN_MODE_QR,
+    SCAN_MODE_BLE_QR,
+//	SCAN_MODE_BLE,
+//	SCAN_MODE_QR,
 	SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND
 }tScanMode;
 
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelectorDelegate, PickerTextViewDelegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
+@interface SendViewController () <SendConfirmationViewControllerDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
 #if !TARGET_IPHONE_SIMULATOR
  ,ZBarReaderDelegate, ZBarReaderViewDelegate
 #endif
@@ -72,7 +78,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	ZBarReaderView                  *_readerView;
     ZBarReaderController            *_readerPicker;
 #endif
-	NSTimer                         *_startScannerTimer;
+//	NSTimer                         *_startScannerTimer;
 	int                             _selectedWalletIndex;
 	SendConfirmationViewController  *_sendConfirmationViewController;
     BOOL                            _bUsingImagePicker;
@@ -81,27 +87,30 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	NSTimer							*peripheralCleanupTimer; //used to remove BLE devices from table when they're no longer around
 	tScanMode						scanMode;
 	float							originalFrameHeight;
-    FadingAlertView                 *_fadingAlert;
+    FadingAlertView2                 *_fadingAlert;
+    BOOL                        bWalletListDropped;
+
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
 @property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
-@property (nonatomic, weak) IBOutlet ButtonSelectorView     *buttonSelector;
-@property (weak, nonatomic) IBOutlet UIImageView            *imageTopFrame;
-@property (weak, nonatomic) IBOutlet UILabel                *labelSendTo;
-@property (weak, nonatomic) IBOutlet UIImageView            *imageSendTo;
-@property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
-@property (weak, nonatomic) IBOutlet UIView					*bleView;
-@property (weak, nonatomic) IBOutlet UIView					*qrView;
+@property (nonatomic, weak) IBOutlet ButtonSelectorView2    *buttonSelector;
+//@property (weak, nonatomic) IBOutlet UIImageView            *imageTopFrame;
+//@property (weak, nonatomic) IBOutlet UILabel                *labelSendTo;
+//@property (weak, nonatomic) IBOutlet UIImageView            *imageSendTo;
+//@property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
+//@property (weak, nonatomic) IBOutlet UIView					*bleView;
+//@property (weak, nonatomic) IBOutlet UIView					*qrView;
 @property (nonatomic, weak)	IBOutlet UITableView			*tableView;
-@property (nonatomic, weak) IBOutlet UIButton				*ble_button;
+//@property (nonatomic, weak) IBOutlet UIButton				*ble_button;
 
 @property (nonatomic, strong) NSArray   *arrayWallets;
 @property (nonatomic, strong) NSArray   *arrayWalletNames;
 @property (nonatomic, strong) NSArray   *arrayChoicesIndexes;
-@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *scanningSpinner;
-@property (nonatomic, weak) IBOutlet UILabel				*scanningLabel;
+//@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *scanningSpinner;
+//@property (nonatomic, weak) IBOutlet UILabel				*scanningLabel;
 @property (nonatomic, weak) IBOutlet UILabel				*scanningErrorLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bleViewHeight;
 @property (strong, nonatomic) CBCentralManager      *centralManager;
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
 @property (strong, nonatomic) NSMutableData         *data;
@@ -133,33 +142,35 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [Util resizeView:self.view withDisplayView:nil];
 
     _bUsingImagePicker = NO;
-	
-	self.flashSelector.delegate = self;
+    bWalletListDropped = false;
+
+    self.flashSelector.delegate = self;
 	self.buttonSelector.delegate = self;
+    [self.buttonSelector disableButton];
 
     // set up the specifics on our picker text view
-    self.pickerTextSendTo.textField.borderStyle = UITextBorderStyleNone;
-    self.pickerTextSendTo.textField.backgroundColor = [UIColor clearColor];
-    self.pickerTextSendTo.textField.font = [UIFont systemFontOfSize:14];
-    self.pickerTextSendTo.textField.clearButtonMode = UITextFieldViewModeNever;
-    self.pickerTextSendTo.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.pickerTextSendTo.textField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.pickerTextSendTo.textField.spellCheckingType = UITextSpellCheckingTypeNo;
-    self.pickerTextSendTo.textField.textColor = [UIColor whiteColor];
-    self.pickerTextSendTo.textField.returnKeyType = UIReturnKeyDone;
-    self.pickerTextSendTo.textField.tintColor = [UIColor whiteColor];
-    self.pickerTextSendTo.textField.textAlignment = NSTextAlignmentCenter;
-    self.pickerTextSendTo.textField.placeholder = NSLocalizedString(@"Bitcoin address or wallet", nil);
-    self.pickerTextSendTo.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.pickerTextSendTo.textField.placeholder
+    self.addressTextField.borderStyle = UITextBorderStyleNone;
+    self.addressTextField.backgroundColor = [UIColor clearColor];
+    self.addressTextField.font = [UIFont systemFontOfSize:14];
+    self.addressTextField.clearButtonMode = UITextFieldViewModeNever;
+    self.addressTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.addressTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.addressTextField.spellCheckingType = UITextSpellCheckingTypeNo;
+    self.addressTextField.textColor = [UIColor whiteColor];
+    self.addressTextField.returnKeyType = UIReturnKeyDone;
+    self.addressTextField.tintColor = [UIColor whiteColor];
+    self.addressTextField.textAlignment = NSTextAlignmentCenter;
+    self.addressTextField.placeholder = NSLocalizedString(@"Enter Bitcoin Address", nil);
+    self.addressTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.addressTextField.placeholder
                                                                                             attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
-    [self.pickerTextSendTo setTopMostView:self.view];
+//    [self.pickerTextSendTo setTopMostView:self.view];
     //self.pickerTextSendTo.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
-    self.pickerTextSendTo.cropPointBottom = POPUP_PICKER_LOWEST_POINT;
-    self.pickerTextSendTo.delegate = self;
-    [Util stylizeTextField:self.pickerTextSendTo.textField];
+//    self.pickerTextSendTo.cropPointBottom = POPUP_PICKER_LOWEST_POINT;
+//    self.pickerTextSendTo.delegate = self;
+    self.addressTextField.delegate = self;
 
-	self.buttonSelector.textLabel.text = NSLocalizedString(@"", nil);
-    [self.buttonSelector setButtonWidth:223];
+//	self.buttonSelector.textLabel.text = NSLocalizedString(@"", nil);
+//    [self.buttonSelector setButtonWidth:223];
 
     _selectedWalletIndex = 0;
 	
@@ -167,19 +178,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	//Remember our original height so we can force it back to that in viewWillAppear.
 	originalFrameHeight = self.view.frame.size.height;
 
-    self.qrView.hidden = YES;
+//    self.qrView.hidden = YES;
 	self.arrayContacts = @[];
 	// load all the names from the address book
     [self generateListOfContactNames];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationEnteredForeground:)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-}
-
-- (void)applicationEnteredForeground:(NSNotification *)notification {
-    [self.flashSelector selectItem:FLASH_ITEM_OFF];
 }
 
 - (void)dealloc
@@ -209,54 +211,65 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(NO)}];
         }
         lastCentralBLEPowerOffNotificationTime = curTime;
-        [self startBleTimeout:BLE_TIMEOUT];
+        [self startBLE];
+//        [self startBleTimeout:BLE_TIMEOUT];
     }
-    else
-    {
-        self.ble_button.hidden = YES;
-        [self startBleTimeout:0.0];
-    }
+//    else
+//    {
+//        self.ble_button.hidden = YES;
+//        [self startBleTimeout:0.0];
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self scanBLEstartCamera];
-	
+
 	//reset our frame's height in case it got changed by the image picker view controller
-	CGRect frame = self.view.frame;
-	frame.size.height = originalFrameHeight;
-	self.view.frame = frame;
-	
-    [[NSNotificationCenter defaultCenter]
-        addObserver:self
-           selector:@selector(applicationDidBecomeActiveNotification:)
-               name:UIApplicationDidBecomeActiveNotification
-             object:nil];
+//	CGRect frame = self.view.frame;
+//	frame.size.height = originalFrameHeight;
+//	self.view.frame = frame;
+
     [[NSNotificationCenter defaultCenter]
         addObserver:self
            selector:@selector(willResignActive)
                name:UIApplicationWillResignActiveNotification
              object:nil];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
+           selector:@selector(applicationDidBecomeActiveNotification:)
+               name:UIApplicationDidBecomeActiveNotification
+             object:nil];
+
+    [MainViewController changeNavBarOwner:self];
+
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[_startScannerTimer invalidate];
-	_startScannerTimer = nil;
-	self.peripheralContainers = nil;
-#if !TARGET_IPHONE_SIMULATOR
-	[self stopQRReader];
-#endif
-	
-	// Don't keep it going while we're not showing.
-	if([LocalSettings controller].bDisableBLE == NO)
-	{
-		[self stopBLE];
-		_centralManager = nil;
-	}
-	scanMode = SCAN_MODE_UNINITIALIZED;
-    //NSLog(@"Scanning stopped");
+    [self willResignActive];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+- (void)didTapTitle: (UIButton *)sender
+{
+    if (bWalletListDropped)
+    {
+        [self.buttonSelector close];
+        bWalletListDropped = false;
+    }
+    else
+    {
+        [self.buttonSelector open];
+        bWalletListDropped = true;
+    }
+
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -266,24 +279,27 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
 {
-#if !TARGET_IPHONE_SIMULATOR
-	//NSLog(@"&&&&&&&&&&& APP BECAME ACTIVE &&&&&&&&&&&&&");
-	if(YES || scanMode == SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND)
-	{
-		//NSLog(@"&&&&&&&&&&&&& STARTING QR READER &&&&&&&&&&&&&&&&");
-		scanMode = SCAN_MODE_QR;
-		[self scanBLEstartCamera];
-	}
-#endif
+    [self.flashSelector selectItem:FLASH_ITEM_OFF];
+    if (SCAN_MODE_UNINITIALIZED == scanMode) {
+        [self scanBLEstartCamera];
+    }
 }
 
 - (void)willResignActive
 {
-	[_startScannerTimer invalidate];
-	_startScannerTimer = nil;
+//	[_startScannerTimer invalidate];
+//	_startScannerTimer = nil;
 #if !TARGET_IPHONE_SIMULATOR
 	[self stopQRReader];
 #endif
+
+	// Don't keep it going while we're not showing.
+	if([LocalSettings controller].bDisableBLE == NO)
+	{
+		[self stopBLE];
+		_centralManager = nil;
+	}
+	scanMode = SCAN_MODE_UNINITIALIZED;
 }
 
 - (void)resetViews
@@ -318,47 +334,57 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	}
 }
 
--(void)enableBLEMode
+-(void)enableAll
 {
-	if(scanMode != SCAN_MODE_BLE)
-	{
-		scanMode = SCAN_MODE_BLE;
-		self.bleView.hidden = NO;
-		self.qrView.hidden = YES;
-		[self startBLE];
-	}
+    [self startBLE];
+    if ([[User Singleton] offerSendHelp]) {
+        [self showFadingAlert:NSLocalizedString(@"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below", nil)
+                    withDelay:FADING_HELP_DURATION];
+    }
+
 }
 
--(void)enableQRMode
-{
-	if(scanMode != SCAN_MODE_QR)
-	{
-		scanMode = SCAN_MODE_QR;
-		self.bleView.hidden = YES;
-		self.qrView.hidden = NO;
-		//turns on QR code scanner.  Disables BLE
-		[self stopBLE];
-
-        if ([[User Singleton] offerSendHelp]) {
-            [self showFadingAlert:NSLocalizedString(@"Scan the QR code of payee to send payment", nil)
-                        withDelay:FADING_HELP_DURATION];
-        }
-
-#if !TARGET_IPHONE_SIMULATOR
-		if([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive)
-		{
-			//NSLog(@" ^^^^^^^^^^^^^^^^ SPECIAL SCAN MODE.  WAIT UNTIL IN FOREGROUND ^^^^^^^^^^^^^^^^");
-			scanMode = SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND;
-		}
-		else
-		{
-			//NSLog(@" ^^^^^^^^^^^^^^^^ NORMAL SCAN MODE.  START QR NOW ^^^^^^^^^^^^^^^^");
-		}
-#endif
-		
-		
-	}
-}
+//-(void)enableBLEMode
+//{
+//	if(scanMode != SCAN_MODE_BLE)
+//	{
+//		scanMode = SCAN_MODE_BLE;
+//		self.bleView.hidden = NO;
+//		self.qrView.hidden = YES;
+//		[self startBLE];
+//	}
+//}
+//
+//-(void)enableQRMode
+//{
+//	if(scanMode != SCAN_MODE_QR)
+//	{
+//		scanMode = SCAN_MODE_QR;
+//		self.bleView.hidden = YES;
+//		self.qrView.hidden = NO;
+//		//turns on QR code scanner.  Disables BLE
+//		[self stopBLE];
+//
+//        if ([[User Singleton] offerSendHelp]) {
+//            [self showFadingAlert:NSLocalizedString(@"Scan the QR code of payee to send payment", nil)
+//                        withDelay:FADING_HELP_DURATION];
+//        }
+//
+//#if !TARGET_IPHONE_SIMULATOR
+//		if([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive)
+//		{
+//			//NSLog(@" ^^^^^^^^^^^^^^^^ SPECIAL SCAN MODE.  WAIT UNTIL IN FOREGROUND ^^^^^^^^^^^^^^^^");
+//			scanMode = SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND;
+//		}
+//		else
+//		{
+//			//NSLog(@" ^^^^^^^^^^^^^^^^ NORMAL SCAN MODE.  START QR NOW ^^^^^^^^^^^^^^^^");
+//		}
+//#endif
+//
+//
+//	}
+//}
 
 #if TARGET_IPHONE_SIMULATOR
 
@@ -390,6 +416,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 -(void)attemptToStartQRReader
 {
+    if (_readerView) {
+        return;
+    }
     // check camera state before proceeding
 	_readerView = [ZBarReaderView new];
     if ([_readerView isDeviceAvailable])
@@ -399,24 +428,23 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
     else
     {
-        self.scanningErrorLabel.text = NSLocalizedString(@"Camera unavailable", @"");
+        self.scanningErrorLabel.text = NSLocalizedString(@"Camera unavailable. Please enable camera access on your phone's Privacy Settings", @"");
         [self.scanningErrorLabel setHidden:NO];
         [self.flashSelector setHidden:YES];
     }
 
-	[self.qrView insertSubview:_readerView belowSubview:self.scanFrame];
+	[self.view insertSubview:_readerView belowSubview:self.scanFrame];
 	_readerView.frame = self.scanFrame.frame;
 	_readerView.readerDelegate = self;
 	_readerView.tracksSymbols = NO;
 	
 	_readerView.tag = READER_VIEW_TAG;
-	if ([self.pickerTextSendTo.textField.text length])
-	{
-		_readerView.alpha = 0.0;
-	}
+//	if ([self.pickerTextSendTo.textField.text length])
+//	{
+//		_readerView.alpha = 0.0;
+//	}
 	[_readerView start];
 	[self flashItemSelected:FLASH_ITEM_OFF];
-	//NSLog(@"################## QR READER STARTED ######################");
 }
 
 - (void)stopQRReader
@@ -426,7 +454,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [_readerView stop];
         [_readerView removeFromSuperview];
         _readerView = nil;
-		//NSLog(@"################## QR READER STOPPED ######################");
     }
 }
 
@@ -434,14 +461,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 #pragma mark - Action Methods
 
-- (IBAction)scanQRCode
-{
-#if !TARGET_IPHONE_SIMULATOR
-    [self enableQRMode];
-#endif
-}
+//- (IBAction)scanQRCode
+//{
+//#if !TARGET_IPHONE_SIMULATOR
+//    [self enableQRMode];
+//#endif
+//}
 
-- (IBAction)info
+- (IBAction)info:(id)sender
 {
 	[self.view endEditing:YES];
     [self resignAllResonders];
@@ -454,10 +481,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self showImageScanner];
 }
 
--(IBAction)BLE_button_touched
-{
-	[self enableBLEMode];
-}
+//-(IBAction)BLE_button_touched
+//{
+//	[self enableBLEMode];
+//}
 
 #pragma mark address book
 
@@ -559,18 +586,18 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
 	//NSLog(@"DID UPDATE STATE");
 
-    if (central.state != CBCentralManagerStatePoweredOn)
-	{
-		self.ble_button.hidden = YES;
-		[self enableQRMode];
-    }
-	else
-	{
-//		NSLog(@"POWERED ON");
-
-		[self enableBLEMode];
-		self.ble_button.hidden = NO;
-    }
+//    if (central.state != CBCentralManagerStatePoweredOn)
+//	{
+//		self.ble_button.hidden = YES;
+////		[self enableQRMode];
+//    }
+//	else
+//	{
+////		NSLog(@"POWERED ON");
+//
+////		[self enableBLEMode];
+//		self.ble_button.hidden = NO;
+//    }
 }
 
 
@@ -657,7 +684,24 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		NSTimeInterval newUpdateTime = CACurrentMediaTime();
 		if((newUpdateTime - lastUpdateTime) > 0.5)
 		{
-			lastUpdateTime = newUpdateTime;
+            dispatch_async(dispatch_get_main_queue(),^{
+                [UIView animateWithDuration:0.35
+                                      delay:0.0
+                                    options:UIViewAnimationOptionCurveEaseInOut
+                                 animations:^
+                                 {
+                                     // Update the table height
+
+                                     _bleViewHeight.constant = [MainViewController getFooterHeight] + ([Theme Singleton].heightBLETableCells * [self.peripheralContainers count]);
+                                     [self.view layoutIfNeeded];
+                                 }
+                                 completion:^(BOOL finished)
+                                 {
+                                 }];
+
+            });
+
+            lastUpdateTime = newUpdateTime;
 			[self updateTable];
 		}
     }
@@ -810,7 +854,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
     else
     {
-        self.pickerTextSendTo.textField.text = stringFromData;
+        self.addressTextField.text = stringFromData;
         [self processURI];
     }
 
@@ -1010,20 +1054,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 -(void)updateTable
 {
-	if(self.peripheralContainers.count == 0)
-	{
-		self.scanningLabel.hidden = NO;
-		[self.scanningSpinner startAnimating];
-	}
-	else
-	{
-        if ([[User Singleton] offerBleHelp]) {
-            [self showFadingAlert:NSLocalizedString(@"Bluetooth payment requests are listed here. Tap on a user to send them a payment", nil)
-                        withDelay:FADING_HELP_DURATION];
-        }
-		self.scanningLabel.hidden = YES;
-		[self.scanningSpinner stopAnimating];
-	}
+//	if(self.peripheralContainers.count == 0)
+//	{
+//		self.scanningLabel.hidden = NO;
+//		[self.scanningSpinner startAnimating];
+//	}
+//	else
+//	{
+//        if ([[User Singleton] offerBleHelp]) {
+//            [self showFadingAlert:NSLocalizedString(@"Bluetooth payment requests are listed here. Tap on a user to send them a payment", nil)
+//                        withDelay:FADING_HELP_DURATION];
+//        }
+//		self.scanningLabel.hidden = YES;
+//		[self.scanningSpinner stopAnimating];
+//	}
 	[self.tableView reloadData];
 }
 
@@ -1158,8 +1202,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 				else
 				{
 					scanCell.duplicateNamesLabel.hidden = YES;
-					scanCell.contactName.textColor = [UIColor blackColor];
-					scanCell.contactBitcoinAddress.textColor = [UIColor blackColor];
+					scanCell.contactName.textColor = [UIColor whiteColor];
+					scanCell.contactBitcoinAddress.textColor = [UIColor whiteColor];
 				}
 			}
 		}
@@ -1168,12 +1212,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	{
 		scanCell.contactImage.image = [UIImage imageNamed:@"BLE_photo.png"];
 	}
-	return scanCell;
+    [scanCell layoutSubviews];
+    return scanCell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 47.0;
+	return [Theme Singleton].heightBLETableCells;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1202,7 +1247,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)resignAllResonders
 {
-    [self.pickerTextSendTo.textField resignFirstResponder];
+    [self.addressTextField resignFirstResponder];
 }
 
 - (void)loadWalletInfo
@@ -1236,6 +1281,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
                 [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
                 self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
+
+                NSString *walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
+                [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
+
+            }
+            else
+            {
+                NSString *tempTitle = NSLocalizedString(@"Loading...", @"Loading wallet list");
+                [MainViewController changeNavBarTitle:self title:tempTitle];
             }
         });
     }];
@@ -1374,16 +1428,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #endif
 }
 
-- (void)startCameraScanner:(NSTimer *)timer
-{
-	//will only switch to QR mode if there are no found BLE devices
-	//NSLog(@"################## SCAN TIMER FIRED ######################");
-	if(self.peripheralContainers.count == 0)
-	{
-		[self enableQRMode];
-	}
-}
-
+//- (void)startCameraScanner:(NSTimer *)timer
+//{
+//	//will only switch to QR mode if there are no found BLE devices
+//	//NSLog(@"################## SCAN TIMER FIRED ######################");
+//	if(self.peripheralContainers.count == 0)
+//	{
+//		[self enableQRMode];
+//	}
+//}
+//
 - (NSArray *)createNewSendToChoices:(NSString *)strCur
 {
     BOOL bUseAll = YES;
@@ -1473,44 +1527,48 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
 {
     [self loadWalletInfo];
-    self.qrView.hidden = YES;
+//    self.qrView.hidden = YES;
 #if !TARGET_IPHONE_SIMULATOR
     [self startQRReader];
 #endif
     
-    self.pickerTextSendTo.textField.text = @"";
+    self.addressTextField.text = @"";
     //[self startCameraScanner:nil];
 	[_sendConfirmationViewController.view removeFromSuperview];
 	_sendConfirmationViewController = nil;
 	
     scanMode = SCAN_MODE_UNINITIALIZED;
     if ([LocalSettings controller].bDisableBLE == NO) {
-        [self enableBLEMode];
-        [self startBleTimeout:BLE_TIMEOUT];
-    } else {
-        [self startBleTimeout:0.0];
+        [self enableAll];
+//        [self startBleTimeout:BLE_TIMEOUT];
+//    } else {
+//        [self startBleTimeout:0.0];
     }
 
     [self enableTableSelection];
 }
 
-#pragma mark - ButtonSelectorView delegates
+#pragma mark - ButtonSelectorView2 delegates
 
-- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+- (void)ButtonSelector2:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
 {
     _selectedWalletIndex = itemIndex;
     Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
     [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
     self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+    bWalletListDropped = false;
     _walletUUID = wallet.strUUID;
+
+    NSString *walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
+    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 }
 
-- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
+- (void)ButtonSelector2WillShowTable:(ButtonSelectorView2 *)view
 {
     [self resignAllResonders];
 }
 
-- (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view
+- (void)ButtonSelector2WillHideTable:(ButtonSelectorView2 *)view
 {
 
 }
@@ -1587,34 +1645,34 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 #pragma mark - PickerTextView Delegates
 
-- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
-{
-    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
-
-    [pickerTextView updateChoices:arrayChoices];
-}
-
-- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
-{
-    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
-
-    [pickerTextView updateChoices:arrayChoices];
-}
-
-- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
-{
-    // unhighlight text
-    // note: for some reason, if we don't do this, the text won't select next time the user selects it
-    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.beginningOfDocument]];
-
-    return YES;
-}
-
-- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
-{
-    //[self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
-}
-
+//- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
+//{
+//    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
+//
+//    [pickerTextView updateChoices:arrayChoices];
+//}
+//
+//- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
+//{
+//    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
+//
+//    [pickerTextView updateChoices:arrayChoices];
+//}
+//
+//- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
+//{
+//    // unhighlight text
+//    // note: for some reason, if we don't do this, the text won't select next time the user selects it
+//    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.beginningOfDocument]];
+//
+//    return YES;
+//}
+//
+//- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
+//{
+//    //[self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
+//}
+//
 - (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
 {
 	[pickerTextView.textField resignFirstResponder];
@@ -1640,7 +1698,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     BOOL bSuccess = YES;
     tABC_BitcoinURIInfo *uri = NULL;
 
-    if (_pickerTextSendTo.textField.text.length)
+    if (self.addressTextField.text.length)
 	{
         BOOL bIsUUID = NO;
         
@@ -1648,10 +1706,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         NSString *label;
         NSString *category;
         NSString *returnUrl;
-        NSString *strTo = _pickerTextSendTo.textField.text;
+        NSString *strTo = self.addressTextField.text;
 
         // see if the text corresponds to one of the wallets
-        NSInteger index = [self.arrayWalletNames indexOfObject:_pickerTextSendTo.textField.text];
+        NSInteger index = [self.arrayWalletNames indexOfObject:self.addressTextField.text];
         if (index != NSNotFound)
         {
             bIsUUID = YES;
@@ -1758,11 +1816,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 #pragma - BLE Timeout
 
-- (void)startBleTimeout:(int)timeout
-{
-    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:timeout target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
-}
-
+//- (void)startBleTimeout:(int)timeout
+//{
+//    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:timeout target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+//}
+//
 #pragma - Sync View methods
 
 - (void)SyncViewDismissed:(SyncView *)sv
@@ -1770,26 +1828,26 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [_syncingView removeFromSuperview];
     _syncingView = nil;
 
-    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+//    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
 }
 
-- (void)syncTest
-{
-    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-    if (![CoreBridge watcherIsReady:wallet.strUUID] && !_syncingView)
-    {
-        _syncingView = [SyncView createView:self.view forWallet:wallet.strUUID];
-        _syncingView.delegate = self;
-    }
-    if (_syncingView)
-    {
-        [self resignAllResonders];
-#if !TARGET_IPHONE_SIMULATOR
-        [self stopQRReader];
-#endif
-    }
-}
-
+//- (void)syncTest
+//{
+//    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+//    if (![CoreBridge watcherIsReady:wallet.strUUID] && !_syncingView)
+//    {
+//        _syncingView = [SyncView createView:self.view forWallet:wallet.strUUID];
+//        _syncingView.delegate = self;
+//    }
+//    if (_syncingView)
+//    {
+//        [self resignAllResonders];
+//#if !TARGET_IPHONE_SIMULATOR
+//        [self stopQRReader];
+//#endif
+//    }
+//}
+//
 #pragma - Fading Alert Methods
 
 - (void)showFadingAlert:(NSString *)message
@@ -1799,8 +1857,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)showFadingAlert:(NSString *)message withDelay:(int)fadeDelay
 {
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
-    _fadingAlert.message = message;
+    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
+    [_fadingAlert messageTextSet:message];
     _fadingAlert.fadeDelay = fadeDelay;
     _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
     [_fadingAlert blockModal:NO];

@@ -22,6 +22,6 @@
 @protocol TransactionsViewControllerDelegate <NSObject>
 
 @required
--(void)TransactionsViewControllerDone:(TransactionsViewController *)controller;
+//-(void)TransactionsViewControllerDone:(TransactionsViewController *)controller;
 @optional
 @end

@@ -13,6 +13,7 @@
 #import "RequestViewController.h"
 #import "SendViewController.h"
 #import "WalletsViewController.h"
+#import "TransactionsViewController.h"
 #import "LoginViewController.h"
 #import "Notifications.h"
 #import "SettingsViewController.h"
@@ -59,7 +60,8 @@ typedef enum eAppMode
 	RequestViewController       *_requestViewController;
 	AddressRequestController    *_addressRequestController;
 	SendViewController          *_sendViewController;
-	WalletsViewController       *_walletsViewController;
+	TransactionsViewController       *_walletsViewController;
+//	WalletsViewController       *_walletsViewController;
 	LoginViewController         *_loginViewController;
 	SettingsViewController      *_settingsViewController;
 	BuySellViewController       *_buySellViewController;
@@ -87,6 +89,8 @@ typedef enum eAppMode
     SlideoutView                *slideoutView;
 }
 
+@property (weak, nonatomic) IBOutlet UIView *blurViewContainer;
+@property (weak, nonatomic) IBOutlet UIToolbar *blurView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *blurViewLeft;
 @property (weak, nonatomic) IBOutlet UITabBar *tabBar;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
@@ -94,6 +98,7 @@ typedef enum eAppMode
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *navBarTop;
 
 @property UIViewController            *selectedViewController;
+@property UIViewController            *navBarOwnerViewController;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -137,6 +142,13 @@ MainViewController *staticMVC;
                    (unsigned int)[seedData length],
                    &Error);
     [Util printABC_Error:&Error];
+
+    // Fetch general info as soon as possible
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        tABC_Error error;
+        ABC_GeneralInfoUpdate(&error);
+        [Util printABC_Error:&error];
+    });
 #endif
 
 	// Do any additional setup after loading the view.
@@ -147,6 +159,9 @@ MainViewController *staticMVC;
 	_loginViewController.delegate = self;
 
     [self loadUserViews];
+
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
 
     // resgister for transaction details screen complete notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit:) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
@@ -175,6 +190,12 @@ MainViewController *staticMVC;
     [NotificationChecker initAll];
 }
 
+- (void)deviceOrientationDidChange
+{
+ //XXX
+
+}
+
 /**
  * These views need to be cleaned out after a login
  */
@@ -184,7 +205,8 @@ MainViewController *staticMVC;
 	_requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
 	_requestViewController.delegate = self;
 	_sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
-	_walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
+	_walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
+//    _walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
 	_settingsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
 	_settingsViewController.delegate = self;
 
@@ -231,6 +253,7 @@ MainViewController *staticMVC;
     NSLog(@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
 
 
+    [self.tabBar setTranslucent:[Theme Singleton].bTranslucencyEnable];
     [self launchViewControllerBasedOnAppMode];
     firstLaunch = NO;
 }
@@ -309,6 +332,10 @@ MainViewController *staticMVC;
     frame.origin.x = x;
     
     staticMVC.selectedViewController.view.frame = frame;
+
+//    NSLog(@"Moving Blur from:%f to:%f", staticMVC.blurViewLeft.constant, x);
+//    NSLog(@"BlurView x:%f y:%f w:%f h:%f", staticMVC.blurView.frame.origin.x,staticMVC.blurView.frame.origin.y,staticMVC.blurView.frame.size.width,staticMVC.blurView.frame.size.height);
+//    NSLog(@"BlurViewContainer x:%f y:%f w:%f h:%f", staticMVC.blurViewContainer.frame.origin.x,staticMVC.blurViewContainer.frame.origin.y,staticMVC.blurViewContainer.frame.size.width,staticMVC.blurViewContainer.frame.size.height);
     staticMVC.blurViewLeft.constant = x;
 
 }
@@ -319,6 +346,13 @@ MainViewController *staticMVC;
     _loginViewController.view.frame = self.view.bounds;
 
     // This *should* be the directoryView. Move it away to the side
+//    [self showSelectedViewController];
+    if (_selectedViewController != _directoryViewController)
+    {
+        [_selectedViewController.view removeFromSuperview];
+        _selectedViewController = _directoryViewController;
+        [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+    }
     [MainViewController moveSelectedViewController: -_selectedViewController.view.frame.size.width];
     [MainViewController addChildView:_loginViewController.view];
 
@@ -446,66 +480,82 @@ MainViewController *staticMVC;
     }
 }
 
-+(void)changeNavBarTitle: (NSString*) titleText
++(UIViewController *)getSelectedViewController
 {
+    return staticMVC.selectedViewController;
+}
+
+//
+// Call this at initialization of viewController (NOT in an async queued call)
+// Once a viewController takes ownership, it can send async'ed updates to navbar. In case an update comes in
+// after another controller takes ownsership, the update will be dropped.
+//
++(void)changeNavBarOwner:(UIViewController *)viewController
+{
+    staticMVC.navBarOwnerViewController = viewController;
+}
+
++(void)changeNavBar:(UIViewController *)viewController
+              title:(NSString*) titleText
+               side:(tNavBarSide)navBarSide
+             button:(BOOL)bIsButton
+             enable:(BOOL)enable
+             action:(SEL)func
+         fromObject:(id) object
+{
+    if (staticMVC.navBarOwnerViewController != viewController)
+        return;
+
     UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
     titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
-    titleLabelButton.enabled = false;
-    titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    [titleLabelButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-
-    staticMVC.navBar.topItem.titleView = titleLabelButton;
-}
-
-+(void)changeNavBarTitleWithButton: (NSString*) titleText action:(SEL)func fromObject:(id) object
-{
-    UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
-    titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
-    titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
-    [titleLabelButton addTarget:object action:func forControlEvents:UIControlEventTouchUpInside];
-
-    staticMVC.navBar.topItem.titleView = titleLabelButton;
-}
-
-+(void)changeNavBarTitleWithImage: (UIImage *) titleImage
-{
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:titleImage];
-
-    staticMVC.navBar.topItem.titleView = imageView;
-}
-
-+(void)changeNavBarSide: (NSString*) titleText side:(tNavBarSide)navBarSide enable:(BOOL)enable action:(SEL)func fromObject:(id) object
-{
-    UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [titleLabelButton setTitle:titleText forState:UIControlStateNormal];
-    titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
-    titleLabelButton.titleLabel.font = [UIFont systemFontOfSize:16];
-
-    [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
-    [titleLabelButton addTarget:object action:func forControlEvents:UIControlEventTouchUpInside];
+    if (bIsButton)
+    {
+        [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
+        [titleLabelButton addTarget:object action:func forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        titleLabelButton.enabled = false;
+        [titleLabelButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    }
+    titleLabelButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16];
 
     if (!enable)
     {
         titleLabelButton.hidden = true;
     }
 
-    UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:titleLabelButton];
 
     if (navBarSide == NAV_BAR_LEFT)
     {
+        UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:titleLabelButton];
         titleLabelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         staticMVC.navBar.topItem.leftBarButtonItem = buttonItem;
 
     }
     else if (navBarSide == NAV_BAR_RIGHT)
     {
+        UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:titleLabelButton];
         titleLabelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         staticMVC.navBar.topItem.rightBarButtonItem = buttonItem;
     }
+    else
+    {
+        staticMVC.navBar.topItem.titleView = titleLabelButton;
+    }
 
+}
+
++(void)changeNavBarTitle:(UIViewController *)viewController
+        title:(NSString*) titleText
+{
+    [MainViewController changeNavBar:viewController title:titleText side:NAV_BAR_CENTER button:false enable:true action:nil fromObject:nil];
+}
+
++(void)changeNavBarTitleWithButton:(UIViewController *)viewController title:(NSString*) titleText action:(SEL)func fromObject:(id) object;
+{
+    [MainViewController changeNavBar:viewController title:titleText side:NAV_BAR_CENTER button:true enable:true action:func fromObject:object];
 }
 
 -(void)launchViewControllerBasedOnAppMode
@@ -571,7 +621,7 @@ MainViewController *staticMVC;
 					[_selectedViewController.view removeFromSuperview];
 					_selectedViewController = _walletsViewController;
 					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
+//                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
                     [MainViewController moveSelectedViewController: 0.0];
 				}
 				else
@@ -872,27 +922,40 @@ MainViewController *staticMVC;
     if (_selectedViewController == _requestViewController 
             && [_requestViewController showingQRCode:_strWalletUUID withTx:_strTxID])
     {
-        if ([_requestViewController transactionWasDonation])
+        RequestState state;
+
+        //
+        // Let the RequestViewController know a Tx came in for the QR code it's currently scanning.
+        // If it returns kDone as the state. Transition to Tx Details.
+        //
+        state = [_requestViewController updateQRCode:transaction.amountSatoshi];
+
+        if (state == kDone)
         {
-            // launch the next QR view with the donation amount
-            [_requestViewController LaunchQRCodeScreen:transaction.amountSatoshi withRequestState:kDonation];
-            return;
+            [self handleReceiveFromQR:_strWalletUUID withTx:_strTxID];
         }
 
-        SInt64 txDiff = [_requestViewController transactionDifference:_strWalletUUID withTx:_strTxID];
-        if (txDiff >= 0)
-        {
-            // Sender paid exact amount or too much
-            [self handleReceiveFromQR:_strWalletUUID withTx:_strTxID];
-            [[AudioController controller] playReceived];
-        }
-        else if (txDiff < 0)
-        {
-            // Sender didn't pay enough
-            txDiff = fabs(txDiff);
-            [_requestViewController LaunchQRCodeScreen:txDiff withRequestState:kPartial];
-            [[AudioController controller] playPartialReceived];
-        }
+//        if ([_requestViewController transactionWasDonation])
+//        {
+//            // launch the next QR view with the donation amount
+//            [_requestViewController updateQRCodeFromReceive:transaction.amountSatoshi withRequestState:kDonation];
+//            return;
+//        }
+//
+//        SInt64 txDiff = [_requestViewController transactionDifference:_strWalletUUID withTx:_strTxID];
+//        if (txDiff >= 0)
+//        {
+//            // Sender paid exact amount or too much
+//            [self handleReceiveFromQR:_strWalletUUID withTx:_strTxID];
+//            [[AudioController controller] playReceived];
+//        }
+//        else if (txDiff < 0)
+//        {
+//            // Sender didn't pay enough
+//            txDiff = fabs(txDiff);
+//            [_requestViewController updateQRCodeFromReceive:txDiff withRequestState:kPartial];
+//            [[AudioController controller] playPartialReceived];
+//        }
     }
     // Prevent displaying multiple alerts
     else if (_receivedAlert == nil)
@@ -1290,8 +1353,10 @@ MainViewController *staticMVC;
     {
         NSDictionary *dictData = [notification userInfo];
         _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
-        [_walletsViewController resetViews];
+//        [_walletsViewController resetViews];
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
+        _appMode = APP_MODE_WALLETS;
+        [self launchViewControllerBasedOnAppMode];
     }
 }
 
@@ -1303,6 +1368,8 @@ MainViewController *staticMVC;
         _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [_sendViewController resetViews];
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
+        _appMode = APP_MODE_SEND;
+        [self launchViewControllerBasedOnAppMode];
     }
 }
 
@@ -1314,6 +1381,9 @@ MainViewController *staticMVC;
         _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [_requestViewController resetViews];
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_REQUEST];
+        _appMode = APP_MODE_REQUEST;
+        [self launchViewControllerBasedOnAppMode];
+
     }
 }
 
@@ -1367,7 +1437,7 @@ MainViewController *staticMVC;
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
         if ([User isLoggedIn]) {
             [_sendViewController resetViews];
-            _sendViewController.pickerTextSendTo.textField.text = [uri absoluteString];
+            _sendViewController.addressTextField.text = [uri absoluteString];
             [_sendViewController processURI];
         } else {
             _uri = uri;
@@ -1421,7 +1491,11 @@ MainViewController *staticMVC;
     [self.view endEditing:NO];
 
     // Force the tabs to redraw the selected view
-    _selectedViewController = nil;
+    if (_selectedViewController != nil)
+    {
+        [_selectedViewController.view removeFromSuperview];
+        _selectedViewController = nil;
+    }
     [self launchViewControllerBasedOnAppMode];
 }
 
@@ -1647,5 +1721,31 @@ MainViewController *staticMVC;
                      }];
 }
 
-
+- (void)showSelectedViewController
+{
+    if (_selectedViewController == nil)
+    {
+        NSLog(@"_selectedViewController == nil");
+    }
+    else if (_selectedViewController == _directoryViewController)
+    {
+        NSLog(@"_selectedViewController == _directoryViewController");
+    }
+    else if (_selectedViewController == _walletsViewController)
+    {
+        NSLog(@"_selectedViewController == _walletsViewController");
+    }
+    else if (_selectedViewController == _loginViewController)
+    {
+        NSLog(@"_selectedViewController == _loginViewController");
+    }
+    else if (_selectedViewController == _sendViewController)
+    {
+        NSLog(@"_selectedViewController == _sendViewController");
+    }
+    else if (_selectedViewController == _requestViewController)
+    {
+        NSLog(@"_selectedViewController == _requestViewController");
+    }
+}
 @end

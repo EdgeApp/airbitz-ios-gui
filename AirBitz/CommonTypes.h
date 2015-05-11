@@ -18,7 +18,12 @@
 #define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height > 567 && [[UIScreen mainScreen] bounds].size.height < 569) ? YES : NO)
 #define IS_IPHONE6 (([[UIScreen mainScreen] bounds].size.height > 666 && [[UIScreen mainScreen] bounds].size.height < 668) ? YES : NO)
 #define IS_IPHONE6_PLUS (([[UIScreen mainScreen] bounds].size.height > 735 && [[UIScreen mainScreen] bounds].size.height < 737) ? YES : NO)
-#define IS_IPAD (([[UIScreen mainScreen] bounds].size.height > 737) ? YES : NO)
+#define IS_IPAD_MINI (([[UIScreen mainScreen] bounds].size.height > 737) ? YES : NO)
+
+#define IS_MIN_IPHONE5 ([[UIScreen mainScreen] bounds].size.height >= 568)
+#define IS_MIN_IPHONE6 ([[UIScreen mainScreen] bounds].size.height >= 667)
+#define IS_MIN_IPHONE6_PLUS ([[UIScreen mainScreen] bounds].size.height >= 736)
+#define IS_MIN_IPAD_MINI ([[UIScreen mainScreen] bounds].size.height > 737)
 
 
 typedef NS_ENUM(NSUInteger, ImportDataModel) {
@@ -36,6 +41,7 @@ typedef NS_ENUM(NSUInteger, RequestState) {
     kRequest, // request a new, full amount
     kPartial, // request the remainder of a previous request
     kDonation,// request with no specified amount
+    kDone,
 };
 
 #define BACKGROUND_NOTIF_PULL_REFRESH_INTERVAL_MINUTES 5

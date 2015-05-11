@@ -21,10 +21,21 @@
 @property (nonatomic) UIColor *colorSendButtonDisabled;
 @property (nonatomic) UIColor *colorRequestButtonDisabled;
 @property (nonatomic) CGFloat sendRequestButtonDisabled;
+@property (nonatomic) UIColor *colorRequestTopTextField;
+@property (nonatomic) UIColor *colorRequestBottomTextField;
+@property (nonatomic) CGFloat fadingAlertDropdownHeight;
+@property (nonatomic) BOOL    bTranslucencyEnable;
 
+@property (nonatomic) NSString *appFont;
+@property (nonatomic) NSString *backButtonText;
+@property (nonatomic) NSString *exitButtonText;
+@property (nonatomic) NSString *helpButtonText;
+@property (nonatomic) NSString *infoButtonText;
 @property (nonatomic) NSString *deleteAccountWarning;
 @property (nonatomic) CGFloat heightListings;
 @property (nonatomic) CGFloat heightSearchClues;
+@property (nonatomic) CGFloat heightBLETableCells;
+
 
 //@property (nonatomic) int minutesAutoLogout;
 //@property (nonatomic) int defaultCurrencyNum;

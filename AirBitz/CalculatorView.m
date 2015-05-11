@@ -8,6 +8,7 @@
 
 #import "CalculatorView.h"
 #import "CoreBridge.h"
+#import "Util.h"
 
 #define DIGIT_BACK			11
 
@@ -50,10 +51,19 @@
 {
     if ((self = [super initWithCoder:aDecoder]))
 	{
+        CGRect frame;
+
+        UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"CalculatorView~iphone" owner:self options:nil] objectAtIndex:0];
+        frame = view.frame;
+
+        CGRect screenRect = [Util currentScreenBoundsDependOnOrientation];
+        frame.size.width = screenRect.size.width;
+
+        view.frame = frame;
         _calcMode = CALC_MODE_COIN;
-        [self addSubview:[[[NSBundle mainBundle] loadNibNamed:@"CalculatorView~iphone" owner:self options:nil] objectAtIndex:0]];
+        [self addSubview:view];
         self.backgroundColor = [UIColor colorWithWhite:0.8
-                                                 alpha:0.4];
+                                                 alpha:0.8];
         
     }
     return self;
@@ -175,9 +185,10 @@
 - (void)hideDoneButton
 {
 //    self.buttonDone.hidden = YES;
-    [self.buttonDone setTitle:@"Next" forState:UIControlStateNormal];
-    UIImage *buttonImage = [UIImage imageNamed:@"btn_calc_next.png"];
-    [self.buttonDone setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    // Never hide the Done button
+//    [self.buttonDone setTitle:@"Next" forState:UIControlStateNormal];
+//    UIImage *buttonImage = [UIImage imageNamed:@"btn_calc_next.png"];
+//    [self.buttonDone setBackgroundImage:buttonImage forState:UIControlStateNormal];
 }
 
 #pragma mark - Misc Methods
@@ -192,12 +203,20 @@
     if (_calcMode == CALC_MODE_COIN)
     {
         int64_t satoshi = [CoreBridge denominationToSatoshi:[NSString stringWithFormat:@"%f", acc]];
-        return [CoreBridge formatSatoshi:satoshi withSymbol:false];
+        if (satoshi == 0 || acc == 0.0)
+            return @"";
+        else
+            return [CoreBridge formatSatoshi:satoshi withSymbol:false];
     }
     else
-        return [CoreBridge formatCurrency:acc
-                          withCurrencyNum:self.currencyNum
-                               withSymbol:false];
+    {
+        if (acc == 0.0)
+            return @"";
+        else
+            return [CoreBridge formatCurrency:acc
+                              withCurrencyNum:self.currencyNum
+                                   withSymbol:false];
+    }
 }
 
 - (void)performLastOperation

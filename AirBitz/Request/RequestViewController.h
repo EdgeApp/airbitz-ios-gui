@@ -18,10 +18,13 @@
 @property (nonatomic, readwrite) SInt64 originalAmountSatoshi;
 
 - (BOOL)showingQRCode:(NSString *)walletUUID withTx:(NSString *)txId;
-- (BOOL)transactionWasDonation;
-- (SInt64)transactionDifference:(NSString *)walletUUID withTx:(NSString *)txId;
-- (void)LaunchQRCodeScreen: (SInt64)amountSatoshi withRequestState:(RequestState)state;
+//- (BOOL)transactionWasDonation;
+//- (SInt64)transactionDifference:(NSString *)walletUUID withTx:(NSString *)txId;
+- (RequestState)updateQRCode:(SInt64)incomingSatoshi;
+//- (void)LaunchQRCodeScreen: (SInt64)amountSatoshi withRequestState:(RequestState)state;
 - (void)resetViews;
+- (IBAction)segmentedControlBTCUSDAction:(id)sender;
+
 
 @end
 
