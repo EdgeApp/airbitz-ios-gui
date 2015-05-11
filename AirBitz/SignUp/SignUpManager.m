@@ -152,7 +152,7 @@
     _signupPasswordController = (SignUpPasswordController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpPasswordController"];
     _signupPasswordController.manager = self;
     _current = _signupPasswordController;
-    [Util animateController:_signupPasswordController parentController:_parentController];
+    [Util animateController:_signupPasswordController parentController:_signupUsernameController];
 }
 
 - (void)launchCameraController
@@ -179,7 +179,7 @@
     _signupWriteItController = (SignUpWriteItController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpWriteItController"];
     _signupWriteItController.manager = self;
     _current = _signupWriteItController;
-    [Util animateController:_signupWriteItController parentController:_parentController];
+    [Util animateController:_signupWriteItController parentController:_signupPasswordController];
 }
 
 - (BOOL)haveRequestCamera
