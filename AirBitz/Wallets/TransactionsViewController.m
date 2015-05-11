@@ -813,6 +813,10 @@
         dispatch_async(dispatch_get_main_queue(),^{
             [self.tableView reloadData];
             [self checkSearchArray];
+            [MainViewController changeNavBarOwner:self];
+            [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
+            [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+            [self updateBalanceView];
         });
     }];
     [self dismissTransactionDetails];

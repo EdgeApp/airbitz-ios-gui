@@ -28,6 +28,8 @@
 #import "Location.h"
 #import "CommonTypes.h"
 #import "PopupPickerView.h"
+#import "MainViewController.h"
+#import "Theme.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
@@ -362,6 +364,11 @@ typedef enum eRequestType
         }
     }
 
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Transaction Details", @"Transaction Details header text")];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Exit:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(info:) fromObject:self];
+
     [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
 }
 
@@ -449,6 +456,10 @@ typedef enum eRequestType
     [self.categoryButton setTitle:text forState:UIControlStateNormal];
 }
 
+-(void)Exit:(id)sender
+{
+    [self Done];
+}
 
 - (IBAction)Done
 {
