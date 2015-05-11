@@ -19,11 +19,13 @@
 #import "CommonTypes.h"
 #import "FadingAlertView.h"
 #import "AudioController.h"
-#import "ButtonSelectorView.h"
+#import "MainViewController.h"
+#import "Theme.h"
+#import "ButtonSelectorView2.h"
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate,
-                                              ButtonSelectorDelegate, InfoViewDelegate>
+                                              ButtonSelector2Delegate, InfoViewDelegate>
 {
     ConfirmationSliderView              *_confirmationSlider;
     UITextField                         *_selectedTextField;
@@ -40,13 +42,16 @@
     UIAlertView                         *_alert;
     FadingAlertView                     *_fadingAlert;
     NSTimer                             *_pinTimer;
+    BOOL                        bWalletListDropped;
+
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *keypadViewBottom;
 @property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
 
 @property (weak, nonatomic) IBOutlet UIImageView            *imageTopEmboss;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendFromTitle;
-@property (weak, nonatomic) IBOutlet ButtonSelectorView     *walletSelector;
+@property (weak, nonatomic) IBOutlet ButtonSelectorView2     *walletSelector;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendToTitle;
 @property (nonatomic, weak) IBOutlet UILabel                *addressLabel;
 @property (weak, nonatomic) IBOutlet UIView                 *viewBTC;
@@ -65,8 +70,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView            *imagePINEmboss;
 @property (nonatomic, weak) IBOutlet UITextField            *withdrawlPIN;
 @property (nonatomic, weak) IBOutlet UIView                 *confirmSliderContainer;
-@property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
-@property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
+//@property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
+//@property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
 
 @property (nonatomic, strong) NSMutableArray                *arrayWallets;
@@ -113,7 +118,7 @@
     self.amountFiatTextField.delegate = self;
     self.keypadView.delegate = self;
     self.walletSelector.delegate = self;
-	self.walletSelector.textLabel.text = NSLocalizedString(@"", nil);
+//	self.walletSelector.textLabel.text = NSLocalizedString(@"", nil);
     [self.walletSelector setButtonWidth:WALLET_BUTTON_WIDTH];
 #ifdef __IPHONE_8_0
     [self.keypadView removeFromSuperview];
@@ -164,6 +169,7 @@
                                              selector:@selector(exchangeRateUpdate:)
                                                  name:NOTIFICATION_EXCHANGE_RATE_CHANGE
                                                object:nil];
+
 }
 
 - (void)dealloc
@@ -265,6 +271,11 @@
         selector:@selector(updateTextFieldContents)
         userInfo:nil
         repeats:NO];
+
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+
 }
 
 - (void)pickBestResponder
@@ -301,7 +312,7 @@
 
 #pragma mark - Actions Methods
 
-- (IBAction)info
+- (IBAction)info:(id) sender
 {
     [self dismissErrorMessage];
     [self.view endEditing:YES];
@@ -344,18 +355,18 @@
      }];
 }
 
-- (IBAction)alwaysConfirm:(UIButton *)sender
-{
-    if(sender.selected)
-    {
-        sender.selected = NO;
-    }
-    else
-    {
-        sender.selected = YES;
-    }
-}
-
+//- (IBAction)alwaysConfirm:(UIButton *)sender
+//{
+//    if(sender.selected)
+//    {
+//        sender.selected = NO;
+//    }
+//    else
+//    {
+//        sender.selected = YES;
+//    }
+//}
+//
 - (IBAction)selectMaxAmount
 {
     [self dismissErrorMessage];
@@ -396,83 +407,83 @@
 - (void)updateDisplayLayout
 {
     // if we are on a smaller screen
-    if (IS_IPHONE4 )
-    {
-        // be prepared! lots and lots of magic numbers here to jam the controls to fit on a small screen
-
-        int topShift = 22;
-        int valueShift = 47;
-        int pinShift = 67;
-        CGRect frame;
-
-        self.imageTopEmboss.hidden = YES;
-        
-        frame = self.labelSendFromTitle.frame;
-        frame.origin.y -= topShift;
-        self.labelSendFromTitle.frame = frame;
-        
-        frame = self.walletSelector.frame;
-        frame.origin.y -= topShift;
-        self.walletSelector.frame = frame;
-        
-        frame = self.labelSendToTitle.frame;
-        frame.origin.y -= topShift + 10;
-        self.labelSendToTitle.frame = frame;
-        
-        frame = self.addressLabel.frame;
-        frame.origin.y -= topShift + 10;
-        self.addressLabel.frame = frame;
-        
-        frame = self.conversionLabel.frame;
-        frame.origin.y -= (topShift + 22);
-        self.conversionLabel.frame = frame;
-
-        frame = self.maxAmountButton.frame;
-        frame.origin.y -= (topShift + 22);
-        self.maxAmountButton.frame = frame;
-        
-        frame = self.viewBTC.frame;
-        frame.origin.y -= valueShift;
-        self.viewBTC.frame = frame;
-
-        frame = self.viewFiat.frame;
-        frame.origin.y -= (valueShift + 2);
-        self.viewFiat.frame = frame;
-
-        frame = self.imagePINEmboss.frame;
-        frame.origin.y -= pinShift;
-        self.imagePINEmboss.frame = frame;
-        
-        frame = self.labelPINTitle.frame;
-        frame.origin.y -= pinShift;
-        self.labelPINTitle.frame = frame;
-        
-        frame = self.withdrawlPIN.frame;
-        frame.origin.y -= pinShift;
-        self.withdrawlPIN.frame = frame;
-        
-        frame = self.confirmSliderContainer.frame;
-        frame.origin.y -= pinShift;
-        self.confirmSliderContainer.frame = frame;
-
-        /*
-        frame = self.amountBTCTextField.frame;
-        frame.origin.y -= 5;
-        self.amountBTCTextField.frame = frame;
-        frame = self.amountFiatTextField.frame;
-        frame.origin.y = self.viewFiat.frame.origin.y + 7;
-        self.amountFiatTextField.frame = frame;
-
-
-        frame = self.btn_alwaysConfirm.frame;
-        frame.origin.y = self.confirmSliderContainer.frame.origin.y + self.confirmSliderContainer.frame.size.height + 25;
-        self.btn_alwaysConfirm.frame = frame;
-
-        frame = self.labelAlwaysConfirm.frame;
-        frame.origin.y = self.btn_alwaysConfirm.frame.origin.y + self.btn_alwaysConfirm.frame.size.height + 0;
-        self.labelAlwaysConfirm.frame = frame;
-         */
-    }
+//    if (IS_IPHONE4 )
+//    {
+//        // be prepared! lots and lots of magic numbers here to jam the controls to fit on a small screen
+//
+//        int topShift = 22;
+//        int valueShift = 47;
+//        int pinShift = 67;
+//        CGRect frame;
+//
+//        self.imageTopEmboss.hidden = YES;
+//
+//        frame = self.labelSendFromTitle.frame;
+//        frame.origin.y -= topShift;
+//        self.labelSendFromTitle.frame = frame;
+//
+//        frame = self.walletSelector.frame;
+//        frame.origin.y -= topShift;
+//        self.walletSelector.frame = frame;
+//
+//        frame = self.labelSendToTitle.frame;
+//        frame.origin.y -= topShift + 10;
+//        self.labelSendToTitle.frame = frame;
+//
+//        frame = self.addressLabel.frame;
+//        frame.origin.y -= topShift + 10;
+//        self.addressLabel.frame = frame;
+//
+//        frame = self.conversionLabel.frame;
+//        frame.origin.y -= (topShift + 22);
+//        self.conversionLabel.frame = frame;
+//
+//        frame = self.maxAmountButton.frame;
+//        frame.origin.y -= (topShift + 22);
+//        self.maxAmountButton.frame = frame;
+//
+//        frame = self.viewBTC.frame;
+//        frame.origin.y -= valueShift;
+//        self.viewBTC.frame = frame;
+//
+//        frame = self.viewFiat.frame;
+//        frame.origin.y -= (valueShift + 2);
+//        self.viewFiat.frame = frame;
+//
+//        frame = self.imagePINEmboss.frame;
+//        frame.origin.y -= pinShift;
+//        self.imagePINEmboss.frame = frame;
+//
+//        frame = self.labelPINTitle.frame;
+//        frame.origin.y -= pinShift;
+//        self.labelPINTitle.frame = frame;
+//
+//        frame = self.withdrawlPIN.frame;
+//        frame.origin.y -= pinShift;
+//        self.withdrawlPIN.frame = frame;
+//
+//        frame = self.confirmSliderContainer.frame;
+//        frame.origin.y -= pinShift;
+//        self.confirmSliderContainer.frame = frame;
+//
+//        /*
+//        frame = self.amountBTCTextField.frame;
+//        frame.origin.y -= 5;
+//        self.amountBTCTextField.frame = frame;
+//        frame = self.amountFiatTextField.frame;
+//        frame.origin.y = self.viewFiat.frame.origin.y + 7;
+//        self.amountFiatTextField.frame = frame;
+//
+//
+//        frame = self.btn_alwaysConfirm.frame;
+//        frame.origin.y = self.confirmSliderContainer.frame.origin.y + self.confirmSliderContainer.frame.size.height + 25;
+//        self.btn_alwaysConfirm.frame = frame;
+//
+//        frame = self.labelAlwaysConfirm.frame;
+//        frame.origin.y = self.btn_alwaysConfirm.frame.origin.y + self.btn_alwaysConfirm.frame.size.height + 0;
+//        self.labelAlwaysConfirm.frame = frame;
+//         */
+//    }
 }
 
 - (void)showSendStatus:(NSArray *)params
@@ -619,8 +630,27 @@
         [self.walletSelector.button setTitle:[NSString stringWithFormat:@"%@ (%@)", self.wallet.strName, [CoreBridge formatSatoshi:self.wallet.balance]]
             forState:UIControlStateNormal];
         self.walletSelector.selectedItemIndex = (int) _selectedWalletIndex;
+        [MainViewController changeNavBarTitleWithButton:self title:self.wallet.strName action:@selector(didTapTitle:) fromObject:self];
+
     }
 }
+
+- (void)didTapTitle: (UIButton *)sender
+{
+    if (bWalletListDropped)
+    {
+        [self.walletSelector close];
+        bWalletListDropped = false;
+    }
+    else
+    {
+        [self.walletSelector open];
+        bWalletListDropped = true;
+    }
+
+}
+
+
 
 - (void)launchTransactionDetailsWithTransaction:(Wallet *)wallet withTx:(Transaction *)transaction
 {
@@ -752,7 +782,7 @@
     if (self.amountToSendSatoshi == 0)
     {
         self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
-        self.conversionLabel.textColor = [UIColor whiteColor];
+        self.conversionLabel.textColor = [UIColor darkGrayColor];
         self.amountBTCTextField.textColor = [UIColor whiteColor];
         self.amountFiatTextField.textColor = [UIColor whiteColor];
 
@@ -782,23 +812,25 @@
 
 - (void)updateFeeFieldContents:(int64_t)txFees hasEnough:(BOOL)sufficientFunds
 {
-    UIColor *color;
+    UIColor *color, *colorConversionLabel;
     _maxAmountButton.selected = NO;
     if (_maxAmount > 0 && _maxAmount == self.amountToSendSatoshi)
     {
         color = [UIColor colorWithRed:255/255.0f green:166/255.0f blue:52/255.0f alpha:1.0f];
+        colorConversionLabel = [UIColor colorWithRed:255/255.0f green:180/255.0f blue:80/255.0f alpha:1.0f];
         [_maxAmountButton setBackgroundColor:UIColorFromARGB(0xFFfca600) ];
     }
     else
     {
         color = [UIColor whiteColor];
+        colorConversionLabel = [UIColor darkGrayColor];
         [_maxAmountButton setBackgroundColor:UIColorFromARGB(0xFF72b83b) ];
     }
     if (sufficientFunds)
     {
         tABC_Error error;
         double currencyFees = 0.0;
-        self.conversionLabel.textColor = color;
+        self.conversionLabel.textColor = colorConversionLabel;
         self.amountBTCTextField.textColor = color;
         self.amountFiatTextField.textColor = color;
 
@@ -931,21 +963,22 @@
 {
 }
 
-#pragma mark - ButtonSelectorView delegates
+#pragma mark - ButtonSelectorView2 delegates
 
-- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+- (void)ButtonSelector2:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
 {
     [self setWalletFromIndex:itemIndex];
     [self setWalletLabel];
+    bWalletListDropped = false;
 }
 
-- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
+- (void)ButtonSelector2WillShowTable:(ButtonSelectorView2 *)view
 {
     [self dismissKeyboard];
     [self dismissGestureRecognizer];
 }
 
-- (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view
+- (void)ButtonSelector2WillHideTable:(ButtonSelectorView2 *)view
 {
     [self pickBestResponder];
     [self setupGestureRecognizer];
