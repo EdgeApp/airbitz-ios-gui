@@ -584,20 +584,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-	//NSLog(@"DID UPDATE STATE");
+//	NSLog(@"DID UPDATE STATE");
 
-//    if (central.state != CBCentralManagerStatePoweredOn)
-//	{
+    if (central.state != CBCentralManagerStatePoweredOn)
+	{
 //		self.ble_button.hidden = YES;
-////		[self enableQRMode];
-//    }
-//	else
-//	{
-////		NSLog(@"POWERED ON");
-//
-////		[self enableBLEMode];
+//		[self enableQRMode];
+    }
+	else
+	{
+		NSLog(@"POWERED ON");
+        [self startBLE];
+//		[self enableBLEMode];
 //		self.ble_button.hidden = NO;
-//    }
+    }
 }
 
 
