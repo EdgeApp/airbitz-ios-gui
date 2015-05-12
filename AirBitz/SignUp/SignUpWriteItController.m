@@ -66,7 +66,7 @@
 
 - (IBAction)next
 {
-    [self.manager next];
+    [super next];
 }
 
 @end

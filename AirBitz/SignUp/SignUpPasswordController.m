@@ -125,7 +125,6 @@
                             [self.pinTextField.text UTF8String], &error);
                 }
 
-                [_fadingAlert dismiss:NO];
                 if (error.code == ABC_CC_Ok)
                 {
                     _bSuccess = true;
@@ -142,7 +141,8 @@
                     _fadingAlert.fadeDelay = 5;
                     [_fadingAlert showSpinner:NO];
                     [_fadingAlert showFading];
-                }
+                 }
+                [_fadingAlert dismiss:NO];
             });
     }
 }
@@ -389,6 +389,7 @@
         [_activeTextField resignFirstResponder];
     }
 }
+
 #pragma mark - ABC Callbacks
 
 - (void)createAccountComplete
