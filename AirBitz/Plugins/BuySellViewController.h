@@ -10,6 +10,7 @@
 @interface BuySellViewController : UIViewController
 
 @property (assign) id<BuySellViewControllerDelegate> delegate;
+- (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider;
 
 @end
 

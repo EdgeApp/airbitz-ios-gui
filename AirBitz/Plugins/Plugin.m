@@ -29,6 +29,8 @@ static NSMutableArray *plugins;
         if (isTestnet) {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.glidera.us";
+            plugin.provider = @"glidera";
+            plugin.country = @"US";
             plugin.sourceFile = @"glidera";
             plugin.sourceExtension = @"html";
             plugin.name = @"Glidera USA";
@@ -46,6 +48,8 @@ static NSMutableArray *plugins;
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.glidera.ca";
         plugin.sourceFile = @"glidera";
+        plugin.provider = @"glidera";
+        plugin.country = @"CA";
         plugin.sourceExtension = @"html";
         plugin.name = @"Glidera Canada";
         plugin.env = @{
