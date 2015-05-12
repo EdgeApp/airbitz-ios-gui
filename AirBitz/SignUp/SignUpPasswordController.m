@@ -6,6 +6,7 @@
 #import "SignUpPasswordController.h"
 #import "MinCharTextField.h"
 #import "PasswordVerifyView.h"
+#import "FadingAlertView2.h"
 #import "ABC.h"
 #import "Util.h"
 #import "User.h"
@@ -17,7 +18,7 @@
 {
     UITextField                     *_activeTextField;
     PasswordVerifyView              *_passwordVerifyView;
-    FadingAlertView                 *_fadingAlert;
+    FadingAlertView2                 *_fadingAlert;
     float                           _keyboardFrameOriginY;
 
 }
@@ -74,10 +75,7 @@
     [self.pinTextField addTarget:self action:@selector(pinTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.passwordTextField addTarget:self action:@selector(passwordTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     
-    // Only needed for old SignUpViewController which is multipurpose. Used when changing password or PIN
-//    [self updateDisplayForMode:_mode];
     [self.passwordTextField becomeFirstResponder];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -99,33 +97,18 @@
 
 -(IBAction)back:(id)sender
 {
-//    [UIView animateWithDuration:0.35
-//                          delay:0.0
-//                        options:UIViewAnimationOptionCurveEaseInOut
-//                     animations:^
-//                     {
-//                         CGRect frame = self.view.frame;
-//                         frame.origin.x = frame.size.width;
-//                         self.view.frame = frame;
-//                     }
-//                     completion:^(BOOL finished)
-//                     {
-//                         [self exitWithBackButton:YES];
-//                     }];
     [super back];
 }
 
 - (void)next
 {
     // check the new password fields
-    if ([self newPasswordFieldsAreValid] == YES)
+    if ([self newPasswordFieldsAreValid] == YES && [self fieldsAreValid] == YES)
     {
-        // check the username and pin field
-        if ([self fieldsAreValid] == YES)
-        {
-            // if we are signing up a new account
-            _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-            _fadingAlert.message = NSLocalizedString(@"Creating and securing account", nil);
+        [self viewDidLoad];
+        [self viewWillAppear:true];
+            _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
+            [_fadingAlert messageTextSet:NSLocalizedString(@"Creating and securing account", nil)];
             _fadingAlert.fadeDuration = 0;
             _fadingAlert.fadeDelay = 0;
             [_fadingAlert blockModal:YES];
@@ -142,36 +125,28 @@
                             [self.pinTextField.text UTF8String], &error);
                 }
 
+                [_fadingAlert dismiss:NO];
                 if (error.code == ABC_CC_Ok)
                 {
                     _bSuccess = true;
+                    [super next];
                 }
                 else
                 {
                     _bSuccess = false;
+                    _strReason = [Util errorMap:&error];
+                    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
+                    [_fadingAlert blockModal:NO];
+                    [_fadingAlert messageTextSet:_strReason];
+                    _fadingAlert.fadeDuration = 2;
+                    _fadingAlert.fadeDelay = 5;
+                    [_fadingAlert showSpinner:NO];
+                    [_fadingAlert showFading];
                 }
-                _strReason = [Util errorMap:&error];
-
-                [self performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
             });
-        }
     }
 }
 
-
-#pragma mark - Fading Alert Delegate
-
-- (void)dismissFading:(BOOL)animated
-{
-    if (_fadingAlert) {
-        [_fadingAlert dismiss:animated];
-    }
-}
-
-- (void)fadingAlertDismissed:(FadingAlertView *)view
-{
-    _fadingAlert = nil;
-}
 
 // checks the password against the password rules
 // returns YES if new password fields are good, NO if the new password fields failed the checks
@@ -266,21 +241,6 @@
     }
 
     return valid;
-}
-
-
-- (void)blockUser:(BOOL)bBlock
-{
-    if (bBlock)
-    {
-        [self.activityView startAnimating];
-        self.buttonBlocker.hidden = NO;
-    }
-    else
-    {
-        [self.activityView stopAnimating];
-        self.buttonBlocker.hidden = YES;
-    }
 }
 
 -(void)scrollTextFieldAboveKeyboard:(UITextField *)textField
@@ -448,7 +408,6 @@
 
         [super next];
     } else {
-        [self dismissFading:NO];
         UIAlertView *alert = [[UIAlertView alloc]
                 initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signin error alert")
                       message:[NSString stringWithFormat:@"Sign-Up failed:\n%@", _strReason]
@@ -457,7 +416,6 @@
             otherButtonTitles:nil];
         [alert show];
     }
-    [self blockUser:NO];
 }
 
 #pragma mark - PasswordVerifyViewDelegates

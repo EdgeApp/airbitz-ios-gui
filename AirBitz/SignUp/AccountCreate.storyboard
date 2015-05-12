@@ -711,7 +711,7 @@ No one, including Airbitz, has any access to this information.</string>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KK6-aH-ad6">
                                 <rect key="frame" x="8" y="44" width="585" height="324"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Write it Down!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wff-Il-8GU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write it Down!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wff-Il-8GU">
                                         <rect key="frame" x="16" y="8" width="552" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="RCK-Ad-JKl"/>
@@ -726,7 +726,7 @@ No one, including Airbitz, has any access to this information.</string>
                                             </mask>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="write-it-down.png" translatesAutoresizingMaskIntoConstraints="NO" id="qwh-Mw-sul">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="write-it-down.png" translatesAutoresizingMaskIntoConstraints="NO" id="qwh-Mw-sul">
                                         <rect key="frame" x="20" y="37" width="146" height="132"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -737,7 +737,7 @@ No one, including Airbitz, has any access to this information.</string>
                                             <rect key="frame" x="20" y="37" width="280" height="132"/>
                                         </variation>
                                     </imageView>
-                                    <view alpha="0.25" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wES-c3-x79" userLabel="Toggle View">
+                                    <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wES-c3-x79" userLabel="Toggle View">
                                         <rect key="frame" x="0.0" y="180" width="320" height="87"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your username and password are known only to you and never transmitted or stored unencrypted." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eB-ff-Ebh">
@@ -842,16 +842,20 @@ No one, including Airbitz, has any access to this information.</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="W8f-q2-Sa7" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="top" constant="275" id="2XA-at-Dfv"/>
-                                    <constraint firstAttribute="trailing" secondItem="wff-Il-8GU" secondAttribute="trailing" constant="20" symbolic="YES" id="DaW-mv-XBL"/>
+                                    <constraint firstAttribute="trailing" secondItem="wff-Il-8GU" secondAttribute="trailing" constant="17" id="DaW-mv-XBL"/>
+                                    <constraint firstItem="wES-c3-x79" firstAttribute="top" secondItem="qwh-Mw-sul" secondAttribute="bottom" constant="11" id="Dia-LX-F7W"/>
                                     <constraint firstItem="W8f-q2-Sa7" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" constant="8" id="Dst-Bl-2xT"/>
-                                    <constraint firstItem="qwh-Mw-sul" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" constant="20" symbolic="YES" id="Ig1-lk-COR"/>
-                                    <constraint firstItem="wff-Il-8GU" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="top" constant="20" symbolic="YES" id="NkL-fb-UwG"/>
+                                    <constraint firstItem="qwh-Mw-sul" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" constant="20" id="Ig1-lk-COR"/>
+                                    <constraint firstItem="wff-Il-8GU" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="top" constant="8" id="NkL-fb-UwG"/>
+                                    <constraint firstItem="qwh-Mw-sul" firstAttribute="leading" secondItem="wES-c3-x79" secondAttribute="leading" constant="20" id="auK-Am-Qtk"/>
+                                    <constraint firstItem="W8f-q2-Sa7" firstAttribute="top" secondItem="wES-c3-x79" secondAttribute="bottom" constant="8" symbolic="YES" id="br1-Xc-E16"/>
+                                    <constraint firstItem="qwh-Mw-sul" firstAttribute="leading" secondItem="wff-Il-8GU" secondAttribute="leading" constant="4" id="cee-FN-qFM"/>
                                     <constraint firstAttribute="bottom" secondItem="W8f-q2-Sa7" secondAttribute="bottom" constant="20" symbolic="YES" id="dfT-C9-odH"/>
-                                    <constraint firstAttribute="trailing" secondItem="qwh-Mw-sul" secondAttribute="trailing" constant="20" symbolic="YES" id="etu-KW-Vpx"/>
-                                    <constraint firstItem="wff-Il-8GU" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" constant="20" symbolic="YES" id="gTb-uB-U5B"/>
+                                    <constraint firstAttribute="trailing" secondItem="qwh-Mw-sul" secondAttribute="trailing" constant="419" id="etu-KW-Vpx"/>
+                                    <constraint firstItem="wff-Il-8GU" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" constant="16" id="gTb-uB-U5B"/>
                                     <constraint firstItem="qwh-Mw-sul" firstAttribute="top" secondItem="wff-Il-8GU" secondAttribute="bottom" constant="8" symbolic="YES" id="riS-hE-AwI"/>
-                                    <constraint firstAttribute="trailing" secondItem="wES-c3-x79" secondAttribute="trailing" constant="20" symbolic="YES" id="xKI-vf-CHV"/>
-                                    <constraint firstItem="wES-c3-x79" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" constant="20" symbolic="YES" id="xeV-MV-un4"/>
+                                    <constraint firstAttribute="trailing" secondItem="wES-c3-x79" secondAttribute="trailing" constant="265" id="xKI-vf-CHV"/>
+                                    <constraint firstItem="wES-c3-x79" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" id="xeV-MV-un4"/>
                                 </constraints>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="8" y="44" width="384" height="329"/>
@@ -885,7 +889,7 @@ No one, including Airbitz, has any access to this information.</string>
                             <constraint firstItem="nqJ-hb-Kll" firstAttribute="top" secondItem="6uu-dw-ssd" secondAttribute="bottom" constant="132" id="6Io-8w-56i"/>
                             <constraint firstItem="6uu-dw-ssd" firstAttribute="trailing" secondItem="gVb-bf-YdA" secondAttribute="trailingMargin" id="JgR-qK-lih"/>
                             <constraint firstItem="6uu-dw-ssd" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="bottom" constant="8" symbolic="YES" id="fQj-Pj-oW0"/>
-                            <constraint firstItem="KK6-aH-ad6" firstAttribute="leading" secondItem="gVb-bf-YdA" secondAttribute="leading" id="n1D-Yb-Uab"/>
+                            <constraint firstItem="KK6-aH-ad6" firstAttribute="leading" secondItem="gVb-bf-YdA" secondAttribute="leading" constant="20" id="n1D-Yb-Uab"/>
                         </constraints>
                         <variation key="widthClass=compact">
                             <mask key="constraints">

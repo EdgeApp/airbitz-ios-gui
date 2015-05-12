@@ -58,62 +58,51 @@
 {
     if (_current == _signupUsernameController)
     {
-        goto usernameCtl;
+        [self launchPasswordController];
     }
     else if (_current == _signupPasswordController)
     {
-        goto passwordCtl;
+        if(!_bHasCameraAccess) {
+            [self launchCameraController];
+        }
+        else if (!_bHasContactsAccess)
+        {
+            [self launchContactController];
+        }
+        else
+        {
+            [self launchWriteItController];
+        }
     }
     else if (_current == _signupCameraController)
     {
-        goto cameraCtl;
+        if(!_bHasContactsAccess)
+        {
+            [self launchContactController];
+        }
+        else
+        {
+            [self launchWriteItController];
+        }
     }
     else if (_current == _signupContactController)
     {
-        goto contactsCtl;
+        [self launchWriteItController];
     }
     else if (_current == _signupWriteItController)
     {
-        goto writeItCtl;
+        [_signupUsernameController.view removeFromSuperview];
+        [_signupPasswordController.view removeFromSuperview];
+        [_signupHandleController.view removeFromSuperview];
+        [_signupCameraController.view removeFromSuperview];
+        [_signupContactController.view removeFromSuperview];
+        [MainViewController animateOut:_signupWriteItController.view withBlur:NO complete:^(void) {
+            _signupUsernameController = nil;
+            _current = nil;
+        }];
+
+        [self.delegate signupFinished];
     }
-
-    usernameCtl:
-    [self launchPasswordController];
-    return;
-
-    passwordCtl:
-    if (!_bHasCameraAccess)
-    {
-        [self launchCameraController];
-        return;
-    }
-
-    cameraCtl:
-    if (!_bHasContactsAccess)
-    {
-        [self launchContactController];
-        return;
-    }
-
-    contactsCtl:
-    [self launchWriteItController];
-    return;
-
-    writeItCtl:
-    [_signupUsernameController.view removeFromSuperview];
-    [_signupPasswordController.view removeFromSuperview];
-    [_signupHandleController.view removeFromSuperview];
-    [_signupCameraController.view removeFromSuperview];
-    [_signupContactController.view removeFromSuperview];
-    [MainViewController animateOut:_signupWriteItController.view withBlur:NO complete:^(void) {
-        _signupUsernameController = nil;
-        _current = nil;
-    }];
-
-    [self.delegate signupFinished];
-
-    return;
-
 }
 
 - (void)back:(id)sender
@@ -151,8 +140,8 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupPasswordController = (SignUpPasswordController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpPasswordController"];
     _signupPasswordController.manager = self;
+    [Util animateController:_signupPasswordController parentController:_current];
     _current = _signupPasswordController;
-    [Util animateController:_signupPasswordController parentController:_signupUsernameController];
 }
 
 - (void)launchCameraController
@@ -160,8 +149,8 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupCameraController = (SignUpCameraController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpCameraController"];
     _signupCameraController.manager = self;
+    [Util animateController:_signupCameraController parentController:_current];
     _current = _signupCameraController;
-    [Util animateController:_signupCameraController parentController:_parentController];
 }
 
 - (void)launchContactController
@@ -169,8 +158,8 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupContactController = (SignUpContactsController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpContactsController"];
     _signupContactController.manager = self;
+    [Util animateController:_signupContactController parentController:_current];
     _current = _signupContactController;
-    [Util animateController:_signupContactController parentController:_parentController];
 }
 
 - (void)launchWriteItController
@@ -178,8 +167,8 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupWriteItController = (SignUpWriteItController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpWriteItController"];
     _signupWriteItController.manager = self;
+    [Util animateController:_signupWriteItController parentController:_current];
     _current = _signupWriteItController;
-    [Util animateController:_signupWriteItController parentController:_signupPasswordController];
 }
 
 - (BOOL)haveRequestCamera
