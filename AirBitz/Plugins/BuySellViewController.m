@@ -106,8 +106,27 @@
     [self launchPlugin:plugin];
 }
 
+- (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider
+{
+    Plugin *plugin = nil;
+    for (Plugin *p in [Plugin getPlugins]) {
+        if ([provider isEqualToString:p.provider]
+          && [country isEqualToString:p.country]) {
+            plugin = p;
+        }
+    }
+    if (plugin != nil) {
+        [self launchPlugin:plugin];
+        return YES;
+    }
+    return NO;
+}
+
 - (void)launchPlugin:(Plugin *)plugin
 {
+    if (_pluginViewController != nil) {
+        [_pluginViewController.view removeFromSuperview];
+    }
     UIStoryboard *pluginStoryboard = [UIStoryboard storyboardWithName:@"Plugins" bundle: nil];
     _pluginViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"PluginViewController"];
     _pluginViewController.delegate = self;

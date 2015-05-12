@@ -1245,11 +1245,10 @@ typedef enum eAppMode
     }
 }
 
-- (void)switchToSettingsView
+- (void)switchToSettingsView:(UIViewController *)controller
 {
-    _selectedViewController = _settingsViewController;
+    _selectedViewController = controller;
     [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-    [_settingsViewController resetViews];
 
     [self.tabBar highlighButtonAtIndex:APP_MODE_MORE];
     _appMode = APP_MODE_MORE;
@@ -1257,14 +1256,25 @@ typedef enum eAppMode
 
 - (void)launchChangePassword
 {
-    [self switchToSettingsView];
+    [self switchToSettingsView:_settingsViewController];
+    [_settingsViewController resetViews];
     [_settingsViewController bringUpSignUpViewInMode:SignUpMode_ChangePassword];
 }
 
 - (void)launchRecoveryQuestions:(NSNotification *)notification
 {
-    [self switchToSettingsView];
+    [self switchToSettingsView:_settingsViewController];
+    [_settingsViewController resetViews];
     [_settingsViewController bringUpRecoveryQuestionsView];
+}
+
+- (void)launchBuySell:(NSString *)country provider:(NSString *)provider
+{
+    if ([_buySellViewController launchPluginByCountry:country provider:provider]) {
+        [self switchToSettingsView:_buySellViewController];
+    } else {
+        // Notify user no match!
+    }
 }
 
 - (void)launchTwoFactorScan
@@ -1291,7 +1301,12 @@ typedef enum eAppMode
 
 - (void)processBitcoinURI:(NSURL *)uri
 {
-    if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:@"airbitz"]) {
+    if ([uri.scheme isEqualToString:@"airbitz"] && [uri.host isEqualToString:@"plugin"]) {
+        NSArray *cs = [uri.path pathComponents];
+        if ([cs count] == 3) {
+            [self launchBuySell:cs[2] provider:cs[1]];
+        }
+    } else if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:@"airbitz"]) {
         [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
         if ([User isLoggedIn]) {
             [_sendViewController resetViews];
