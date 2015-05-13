@@ -249,7 +249,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hHD-NP-fM6" firstAttribute="top" secondItem="Cx6-mG-7Op" secondAttribute="bottom" constant="8" symbolic="YES" id="CAX-3f-IIm"/>
                             <constraint firstItem="RuU-Zx-pBJ" firstAttribute="top" secondItem="Cx6-mG-7Op" secondAttribute="bottom" constant="143" id="NxZ-mu-1ID"/>
@@ -507,7 +507,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zpC-Ha-otG" firstAttribute="top" secondItem="WxG-UM-tfn" secondAttribute="bottom" constant="48" id="0wS-kp-tEo"/>
                             <constraint firstItem="0gq-ds-DJC" firstAttribute="top" secondItem="zpC-Ha-otG" secondAttribute="bottom" constant="8" symbolic="YES" id="B7x-Zx-hHB"/>
@@ -663,7 +663,7 @@ No one, including Airbitz, has any access to this information.</string>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="AAt-Oh-ifI" firstAttribute="trailing" secondItem="kLp-dz-2xL" secondAttribute="trailingMargin" id="03D-2b-4LV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g4H-Hm-IKW" secondAttribute="trailing" constant="8" id="MHu-IQ-wdK"/>
@@ -892,7 +892,7 @@ No one, including Airbitz, has any access to this information.</string>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nqJ-hb-Kll" firstAttribute="top" secondItem="6uu-dw-ssd" secondAttribute="bottom" constant="147" id="6Io-8w-56i"/>
                             <constraint firstItem="6uu-dw-ssd" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="bottom" constant="8" symbolic="YES" id="Hwx-Gn-T2l"/>
