@@ -405,7 +405,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-Ha-otG">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-Ha-otG">
                                 <rect key="frame" x="0.0" y="68" width="600" height="311"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Camera Access" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJZ-dK-bwv">
@@ -421,7 +421,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAn-0y-asT">
-                                        <rect key="frame" x="16" y="183" width="288" height="102"/>
+                                        <rect key="frame" x="16" y="183" width="568" height="102"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="102" id="BuB-Go-fjV"/>
                                         </constraints>
@@ -438,7 +438,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                             <rect key="frame" x="16" y="183" width="712" height="102"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="enable-camera.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Mp-nC-F2Z">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="enable-camera.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Mp-nC-F2Z">
                                         <rect key="frame" x="8" y="29" width="155" height="146"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -459,10 +459,21 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                     <constraint firstItem="VAn-0y-asT" firstAttribute="centerX" secondItem="zpC-Ha-otG" secondAttribute="centerX" id="NTL-jR-KD1"/>
                                     <constraint firstItem="6Mp-nC-F2Z" firstAttribute="top" secondItem="YJZ-dK-bwv" secondAttribute="bottom" constant="8" symbolic="YES" id="V7q-V5-57E"/>
                                     <constraint firstItem="YJZ-dK-bwv" firstAttribute="leading" secondItem="zpC-Ha-otG" secondAttribute="leadingMargin" id="bpK-hz-JhM"/>
+                                    <constraint firstItem="VAn-0y-asT" firstAttribute="leading" secondItem="zpC-Ha-otG" secondAttribute="leading" constant="20" symbolic="YES" id="cqf-44-B5p"/>
                                     <constraint firstItem="YJZ-dK-bwv" firstAttribute="top" secondItem="zpC-Ha-otG" secondAttribute="top" id="gsE-Dd-2jd"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="VAn-0y-asT" secondAttribute="bottom" constant="20" symbolic="YES" id="oCY-5u-FwL"/>
+                                    <constraint firstAttribute="trailing" secondItem="VAn-0y-asT" secondAttribute="trailing" constant="20" symbolic="YES" id="pHi-um-xcl"/>
                                     <constraint firstItem="6Mp-nC-F2Z" firstAttribute="leading" secondItem="YJZ-dK-bwv" secondAttribute="leading" id="pia-PE-rQv"/>
                                     <constraint firstAttribute="trailing" secondItem="YJZ-dK-bwv" secondAttribute="trailing" constant="24" id="vG0-86-Pjb"/>
+                                    <constraint firstItem="VAn-0y-asT" firstAttribute="top" secondItem="6Mp-nC-F2Z" secondAttribute="bottom" constant="8" symbolic="YES" id="vb7-11-gjS"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="FSD-F0-MEQ"/>
+                                        <exclude reference="GCW-T9-HaN"/>
+                                        <exclude reference="NTL-jR-KD1"/>
+                                    </mask>
+                                </variation>
                                 <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="32" y="64" width="504" height="35"/>
                                 </variation>
@@ -473,7 +484,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gq-ds-DJC" customClass="StylizedButton">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gq-ds-DJC" customClass="StylizedButton">
                                 <rect key="frame" x="465" y="387" width="119" height="41"/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -511,6 +522,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                             <mask key="constraints">
                                 <exclude reference="gnF-75-Fbl"/>
                                 <exclude reference="wI6-Ie-hqn"/>
+                                <exclude reference="FGJ-3M-STe"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -525,7 +537,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2b-HB-5iR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1204.5" y="186"/>
+            <point key="canvasLocation" x="1204" y="186"/>
         </scene>
         <!--Sign Up Contacts Controller-->
         <scene sceneID="yvC-OS-k34">
@@ -543,8 +555,12 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                 <rect key="frame" x="8" y="59" width="584" height="250"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="enable-contacts.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kzh-ZS-bcq">
-                                        <rect key="frame" x="16" y="33" width="119" height="97"/>
+                                        <rect key="frame" x="16" y="37" width="119" height="97"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="97" id="0uY-uA-oEh"/>
+                                            <constraint firstAttribute="width" constant="119" id="c0F-R1-KyX"/>
+                                        </constraints>
                                         <variation key="widthClass=compact" misplaced="YES">
                                             <rect key="frame" x="20" y="33" width="100" height="100"/>
                                         </variation>
@@ -553,7 +569,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                         </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You will next see a popup requesting access to your Contacts." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyh-gB-nOv">
-                                        <rect key="frame" x="143" y="33" width="161" height="97"/>
+                                        <rect key="frame" x="143" y="37" width="161" height="97"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="161" id="FAg-dH-dvk"/>
                                             <constraint firstAttribute="height" constant="97" id="eXY-wl-rQ2"/>
@@ -573,8 +589,23 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                             <rect key="frame" x="226" y="33" width="502" height="97"/>
                                         </variation>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enable Contact Access" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cng-Cv-ULC">
+                                        <rect key="frame" x="16" y="8" width="288" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="KP6-ct-mGf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="20" y="8" width="178" height="21"/>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="20" y="20" width="696" height="21"/>
+                                        </variation>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSv-b6-auz">
-                                        <rect key="frame" x="16" y="138" width="568" height="100"/>
+                                        <rect key="frame" x="16" y="142" width="568" height="100"/>
                                         <string key="text">Airbitz uses contacts to help tag information regarding your transactions.
 
 All tagged information is kept 100% private and encrypted by your password.
@@ -587,68 +618,28 @@ No one, including Airbitz, has any access to this information.</string>
                                             <rect key="frame" x="20" y="221" width="696" height="97"/>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enable Contact Access" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cng-Cv-ULC">
-                                        <rect key="frame" x="16" y="8" width="288" height="21"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="20" y="8" width="178" height="21"/>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="20" y="20" width="696" height="21"/>
-                                        </variation>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="KSv-b6-auz" firstAttribute="leading" secondItem="g4H-Hm-IKW" secondAttribute="leading" constant="20" symbolic="YES" id="0lA-Q4-k6m"/>
-                                    <constraint firstAttribute="bottom" secondItem="Kzh-ZS-bcq" secondAttribute="bottom" constant="20" symbolic="YES" id="2Pu-ho-QiB"/>
-                                    <constraint firstItem="Dyh-gB-nOv" firstAttribute="width" secondItem="Kzh-ZS-bcq" secondAttribute="width" id="8BX-cy-d5X"/>
                                     <constraint firstItem="KSv-b6-auz" firstAttribute="top" secondItem="Dyh-gB-nOv" secondAttribute="bottom" constant="8" symbolic="YES" id="96B-HQ-U3i"/>
-                                    <constraint firstAttribute="trailing" secondItem="cng-Cv-ULC" secondAttribute="trailing" constant="20" symbolic="YES" id="9iu-Ns-8gP"/>
-                                    <constraint firstItem="Dyh-gB-nOv" firstAttribute="top" secondItem="cng-Cv-ULC" secondAttribute="bottom" constant="8" symbolic="YES" id="GMy-UR-VAu"/>
-                                    <constraint firstAttribute="trailing" secondItem="Dyh-gB-nOv" secondAttribute="trailing" constant="20" symbolic="YES" id="GOP-Ri-FZU"/>
-                                    <constraint firstItem="Kzh-ZS-bcq" firstAttribute="leading" secondItem="g4H-Hm-IKW" secondAttribute="leading" constant="20" symbolic="YES" id="Htz-mR-4Dt"/>
-                                    <constraint firstItem="Dyh-gB-nOv" firstAttribute="top" secondItem="cng-Cv-ULC" secondAttribute="bottom" constant="8" symbolic="YES" id="IQm-DN-yN1"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dyh-gB-nOv" secondAttribute="trailing" constant="20" symbolic="YES" id="ET3-XU-3TO"/>
+                                    <constraint firstItem="Kzh-ZS-bcq" firstAttribute="leading" secondItem="g4H-Hm-IKW" secondAttribute="leading" constant="16" id="Htz-mR-4Dt"/>
                                     <constraint firstItem="cng-Cv-ULC" firstAttribute="top" secondItem="g4H-Hm-IKW" secondAttribute="top" constant="20" symbolic="YES" id="Nvj-N6-iCh"/>
+                                    <constraint firstItem="Dyh-gB-nOv" firstAttribute="top" secondItem="Kzh-ZS-bcq" secondAttribute="top" id="TWK-fO-o0y"/>
                                     <constraint firstAttribute="trailing" secondItem="KSv-b6-auz" secondAttribute="trailing" constant="20" symbolic="YES" id="ThG-ex-Yi2"/>
                                     <constraint firstItem="Dyh-gB-nOv" firstAttribute="leading" secondItem="Kzh-ZS-bcq" secondAttribute="trailing" constant="8" symbolic="YES" id="UA2-eJ-RZX"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="KSv-b6-auz" secondAttribute="bottom" constant="20" symbolic="YES" id="Xua-eK-xFC"/>
                                     <constraint firstItem="Kzh-ZS-bcq" firstAttribute="top" secondItem="cng-Cv-ULC" secondAttribute="bottom" constant="8" symbolic="YES" id="Zfu-qt-yze"/>
-                                    <constraint firstItem="Dyh-gB-nOv" firstAttribute="top" secondItem="Kzh-ZS-bcq" secondAttribute="top" id="f6E-oY-iM4"/>
-                                    <constraint firstItem="Dyh-gB-nOv" firstAttribute="top" secondItem="g4H-Hm-IKW" secondAttribute="top" constant="33" id="h7E-MC-o1p"/>
-                                    <constraint firstItem="KSv-b6-auz" firstAttribute="top" secondItem="Dyh-gB-nOv" secondAttribute="bottom" constant="8" symbolic="YES" id="kZ4-9R-1Xm"/>
                                     <constraint firstItem="cng-Cv-ULC" firstAttribute="leading" secondItem="g4H-Hm-IKW" secondAttribute="leading" constant="20" symbolic="YES" id="l98-EE-Rui"/>
                                     <constraint firstAttribute="bottom" secondItem="KSv-b6-auz" secondAttribute="bottom" constant="20" symbolic="YES" id="mgP-nI-ctZ"/>
-                                    <constraint firstItem="KSv-b6-auz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="g4H-Hm-IKW" secondAttribute="leading" constant="20" symbolic="YES" id="n61-l7-aVD"/>
-                                    <constraint firstItem="KSv-b6-auz" firstAttribute="top" secondItem="Dyh-gB-nOv" secondAttribute="bottom" constant="8" symbolic="YES" id="pBD-wg-41E"/>
-                                    <constraint firstItem="Dyh-gB-nOv" firstAttribute="leading" secondItem="Kzh-ZS-bcq" secondAttribute="trailing" constant="8" symbolic="YES" id="pXS-Av-TVN"/>
-                                    <constraint firstAttribute="trailing" secondItem="KSv-b6-auz" secondAttribute="trailing" constant="20" symbolic="YES" id="qrr-4q-zJk"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="9iu-Ns-8gP"/>
-                                        <exclude reference="Xua-eK-xFC"/>
-                                        <exclude reference="kZ4-9R-1Xm"/>
-                                        <exclude reference="n61-l7-aVD"/>
-                                        <exclude reference="pBD-wg-41E"/>
-                                        <exclude reference="qrr-4q-zJk"/>
-                                        <exclude reference="GMy-UR-VAu"/>
-                                        <exclude reference="GOP-Ri-FZU"/>
-                                        <exclude reference="IQm-DN-yN1"/>
-                                        <exclude reference="pXS-Av-TVN"/>
-                                    </mask>
-                                </variation>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="32" y="64" width="352" height="332"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
                                     <rect key="frame" x="32" y="64" width="736" height="325"/>
                                     <mask key="constraints">
-                                        <exclude reference="2Pu-ho-QiB"/>
                                         <exclude reference="Htz-mR-4Dt"/>
-                                        <exclude reference="8BX-cy-d5X"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -676,8 +667,10 @@ No one, including Airbitz, has any access to this information.</string>
                         <constraints>
                             <constraint firstItem="AAt-Oh-ifI" firstAttribute="trailing" secondItem="kLp-dz-2xL" secondAttribute="trailingMargin" id="03D-2b-4LV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g4H-Hm-IKW" secondAttribute="trailing" constant="8" id="MHu-IQ-wdK"/>
+                            <constraint firstAttribute="trailing" secondItem="AAt-Oh-ifI" secondAttribute="trailing" constant="20" symbolic="YES" id="Mne-aq-rBf"/>
                             <constraint firstItem="g4H-Hm-IKW" firstAttribute="top" secondItem="8zy-GQ-Ony" secondAttribute="bottom" constant="44" id="MqW-jG-Mdp"/>
                             <constraint firstItem="g4H-Hm-IKW" firstAttribute="top" secondItem="8zy-GQ-Ony" secondAttribute="bottom" constant="44" id="NgK-Jn-FEU"/>
+                            <constraint firstItem="AAt-Oh-ifI" firstAttribute="top" secondItem="g4H-Hm-IKW" secondAttribute="bottom" constant="8" id="Phi-g3-c5t"/>
                             <constraint firstItem="g4H-Hm-IKW" firstAttribute="leading" secondItem="kLp-dz-2xL" secondAttribute="leadingMargin" constant="8" id="c6D-2u-2Ty"/>
                             <constraint firstItem="AAt-Oh-ifI" firstAttribute="top" secondItem="g4H-Hm-IKW" secondAttribute="bottom" constant="8" symbolic="YES" id="jGj-lS-By8"/>
                             <constraint firstItem="g4H-Hm-IKW" firstAttribute="leading" secondItem="kLp-dz-2xL" secondAttribute="leadingMargin" constant="16" id="jac-rr-W9j"/>
@@ -687,7 +680,9 @@ No one, including Airbitz, has any access to this information.</string>
                             <mask key="constraints">
                                 <exclude reference="MqW-jG-Mdp"/>
                                 <exclude reference="jac-rr-W9j"/>
+                                <exclude reference="03D-2b-4LV"/>
                                 <exclude reference="jGj-lS-By8"/>
+                                <exclude reference="q41-gC-Kq5"/>
                             </mask>
                         </variation>
                     </view>
@@ -708,11 +703,11 @@ No one, including Airbitz, has any access to this information.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KK6-aH-ad6">
-                                <rect key="frame" x="8" y="44" width="585" height="324"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KK6-aH-ad6">
+                                <rect key="frame" x="8" y="64" width="585" height="340"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write it Down!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wff-Il-8GU">
-                                        <rect key="frame" x="16" y="8" width="552" height="21"/>
+                                        <rect key="frame" x="16" y="20" width="552" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="RCK-Ad-JKl"/>
                                             <constraint firstAttribute="width" constant="288" id="w7j-1G-TUH"/>
@@ -727,7 +722,7 @@ No one, including Airbitz, has any access to this information.</string>
                                         </variation>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="write-it-down.png" translatesAutoresizingMaskIntoConstraints="NO" id="qwh-Mw-sul">
-                                        <rect key="frame" x="20" y="37" width="146" height="132"/>
+                                        <rect key="frame" x="20" y="49" width="146" height="132"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="146" id="81q-Ks-rpq"/>
@@ -738,7 +733,7 @@ No one, including Airbitz, has any access to this information.</string>
                                         </variation>
                                     </imageView>
                                     <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wES-c3-x79" userLabel="Toggle View">
-                                        <rect key="frame" x="0.0" y="180" width="320" height="87"/>
+                                        <rect key="frame" x="0.0" y="192" width="320" height="95"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your username and password are known only to you and never transmitted or stored unencrypted." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eB-ff-Ebh">
                                                 <rect key="frame" x="16" y="0.0" width="288" height="62"/>
@@ -752,7 +747,7 @@ No one, including Airbitz, has any access to this information.</string>
                                                 <color key="textColor" red="0.89239875637755106" green="0.88161009480985808" blue="0.18640587365728245" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0If-SH-SJz" userLabel="Credentials view">
+                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0If-SH-SJz" userLabel="Credentials view">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJ6-mQ-mSV">
@@ -793,13 +788,21 @@ No one, including Airbitz, has any access to this information.</string>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                                </accessibility>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="95" id="B12-tx-LiA"/>
+                                            <constraint firstItem="0If-SH-SJz" firstAttribute="leading" secondItem="wES-c3-x79" secondAttribute="leading" id="HIZ-0Y-cy6"/>
+                                            <constraint firstItem="0If-SH-SJz" firstAttribute="top" secondItem="wES-c3-x79" secondAttribute="top" id="L8D-gf-0Mx"/>
                                             <constraint firstAttribute="trailing" secondItem="0If-SH-SJz" secondAttribute="trailing" constant="20" symbolic="YES" id="cmf-v8-8yW"/>
+                                            <constraint firstAttribute="trailing" secondItem="0If-SH-SJz" secondAttribute="trailing" id="de1-TF-3kM"/>
                                             <constraint firstItem="0If-SH-SJz" firstAttribute="leading" secondItem="wES-c3-x79" secondAttribute="leading" constant="20" symbolic="YES" id="gU9-VZ-qQK"/>
                                             <constraint firstItem="0If-SH-SJz" firstAttribute="top" secondItem="wES-c3-x79" secondAttribute="top" constant="20" symbolic="YES" id="jLr-mQ-EPm"/>
+                                            <constraint firstAttribute="bottom" secondItem="0If-SH-SJz" secondAttribute="bottom" constant="8" id="k1I-lo-eDP"/>
                                             <constraint firstAttribute="bottom" secondItem="0If-SH-SJz" secondAttribute="bottom" constant="20" symbolic="YES" id="pdR-ek-bbd"/>
                                         </constraints>
                                         <variation key="default">
@@ -824,7 +827,7 @@ No one, including Airbitz, has any access to this information.</string>
                                         </variation>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8f-q2-Sa7" customClass="StylizedButtonOutline">
-                                        <rect key="frame" x="8" y="275" width="85" height="34"/>
+                                        <rect key="frame" x="8" y="295" width="85" height="34"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="cUc-X7-GJg"/>
@@ -841,22 +844,27 @@ No one, including Airbitz, has any access to this information.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="W8f-q2-Sa7" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="top" constant="275" id="2XA-at-Dfv"/>
                                     <constraint firstAttribute="trailing" secondItem="wff-Il-8GU" secondAttribute="trailing" constant="17" id="DaW-mv-XBL"/>
-                                    <constraint firstItem="wES-c3-x79" firstAttribute="top" secondItem="qwh-Mw-sul" secondAttribute="bottom" constant="11" id="Dia-LX-F7W"/>
                                     <constraint firstItem="W8f-q2-Sa7" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" constant="8" id="Dst-Bl-2xT"/>
                                     <constraint firstItem="qwh-Mw-sul" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" constant="20" id="Ig1-lk-COR"/>
-                                    <constraint firstItem="wff-Il-8GU" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="top" constant="8" id="NkL-fb-UwG"/>
+                                    <constraint firstItem="wff-Il-8GU" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="top" constant="20" symbolic="YES" id="NkL-fb-UwG"/>
+                                    <constraint firstItem="wES-c3-x79" firstAttribute="top" secondItem="qwh-Mw-sul" secondAttribute="bottom" constant="11" id="aGD-7Y-zj0"/>
                                     <constraint firstItem="qwh-Mw-sul" firstAttribute="leading" secondItem="wES-c3-x79" secondAttribute="leading" constant="20" id="auK-Am-Qtk"/>
+                                    <constraint firstItem="W8f-q2-Sa7" firstAttribute="top" secondItem="wES-c3-x79" secondAttribute="bottom" constant="8" symbolic="YES" id="bNz-Pu-R9n"/>
                                     <constraint firstItem="W8f-q2-Sa7" firstAttribute="top" secondItem="wES-c3-x79" secondAttribute="bottom" constant="8" symbolic="YES" id="br1-Xc-E16"/>
                                     <constraint firstItem="qwh-Mw-sul" firstAttribute="leading" secondItem="wff-Il-8GU" secondAttribute="leading" constant="4" id="cee-FN-qFM"/>
-                                    <constraint firstAttribute="bottom" secondItem="W8f-q2-Sa7" secondAttribute="bottom" constant="20" symbolic="YES" id="dfT-C9-odH"/>
                                     <constraint firstAttribute="trailing" secondItem="qwh-Mw-sul" secondAttribute="trailing" constant="419" id="etu-KW-Vpx"/>
                                     <constraint firstItem="wff-Il-8GU" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" constant="16" id="gTb-uB-U5B"/>
+                                    <constraint firstAttribute="bottom" secondItem="W8f-q2-Sa7" secondAttribute="bottom" constant="11" id="j8F-Cb-rh2"/>
                                     <constraint firstItem="qwh-Mw-sul" firstAttribute="top" secondItem="wff-Il-8GU" secondAttribute="bottom" constant="8" symbolic="YES" id="riS-hE-AwI"/>
                                     <constraint firstAttribute="trailing" secondItem="wES-c3-x79" secondAttribute="trailing" constant="265" id="xKI-vf-CHV"/>
                                     <constraint firstItem="wES-c3-x79" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" id="xeV-MV-un4"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="br1-Xc-E16"/>
+                                    </mask>
+                                </variation>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="8" y="44" width="384" height="329"/>
                                 </variation>
@@ -864,8 +872,8 @@ No one, including Airbitz, has any access to this information.</string>
                                     <rect key="frame" x="0.0" y="28" width="320" height="329"/>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uu-dw-ssd" customClass="StylizedButton">
-                                <rect key="frame" x="465" y="376" width="119" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uu-dw-ssd" customClass="StylizedButton">
+                                <rect key="frame" x="465" y="412" width="119" height="41"/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="Ety-b4-KRH"/>
@@ -886,11 +894,22 @@ No one, including Airbitz, has any access to this information.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="nqJ-hb-Kll" firstAttribute="top" secondItem="6uu-dw-ssd" secondAttribute="bottom" constant="132" id="6Io-8w-56i"/>
+                            <constraint firstItem="nqJ-hb-Kll" firstAttribute="top" secondItem="6uu-dw-ssd" secondAttribute="bottom" constant="147" id="6Io-8w-56i"/>
+                            <constraint firstItem="6uu-dw-ssd" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="bottom" constant="8" symbolic="YES" id="Hwx-Gn-T2l"/>
+                            <constraint firstItem="6uu-dw-ssd" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="bottom" constant="8" id="IpX-Vr-ioJ"/>
                             <constraint firstItem="6uu-dw-ssd" firstAttribute="trailing" secondItem="gVb-bf-YdA" secondAttribute="trailingMargin" id="JgR-qK-lih"/>
-                            <constraint firstItem="6uu-dw-ssd" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="bottom" constant="8" symbolic="YES" id="fQj-Pj-oW0"/>
-                            <constraint firstItem="KK6-aH-ad6" firstAttribute="leading" secondItem="gVb-bf-YdA" secondAttribute="leading" constant="20" id="n1D-Yb-Uab"/>
+                            <constraint firstItem="KK6-aH-ad6" firstAttribute="top" secondItem="alR-Kk-2t9" secondAttribute="bottom" constant="44" id="MbG-yb-ilx"/>
+                            <constraint firstAttribute="trailing" secondItem="6uu-dw-ssd" secondAttribute="trailing" constant="16" id="bQo-DA-a1m"/>
+                            <constraint firstItem="6uu-dw-ssd" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="bottom" constant="-12" id="fQj-Pj-oW0"/>
+                            <constraint firstItem="KK6-aH-ad6" firstAttribute="leading" secondItem="gVb-bf-YdA" secondAttribute="leading" constant="8" id="n1D-Yb-Uab"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="6Io-8w-56i"/>
+                                <exclude reference="IpX-Vr-ioJ"/>
+                                <exclude reference="fQj-Pj-oW0"/>
+                            </mask>
+                        </variation>
                         <variation key="widthClass=compact">
                             <mask key="constraints">
                                 <exclude reference="n1D-Yb-Uab"/>

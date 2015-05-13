@@ -31,7 +31,8 @@
 {
     [super viewDidLoad];
 
-    self.bShow = true;
+    self.bShow = false;
+    [self showHide];
     self.labelUsername.text = [NSString stringWithFormat:@"%@", self.manager.strUserName];
     self.labelPassword.text = [NSString stringWithFormat:@"%@", self.manager.strPassword];
     self.labelPIN.text = [NSString stringWithFormat:@"%@", self.manager.strPIN];
