@@ -7,6 +7,7 @@
 #import "User.h"
 #import "Util.h"
 #import "LocalSettings.h"
+#import "FadingAlertView2.h"
 
 #import "CoreBridge.h"
 
@@ -1618,7 +1619,7 @@ static BOOL bOtpError = NO;
     return cc == ABC_CC_Ok;
 }
 
-+ (void)setupNewAccount:(FadingAlertView *)fadingAlert
++ (void)setupNewAccount:(FadingAlertView2 *)fadingAlert
 {
     [dataQueue addOperationWithBlock:^{
         // update user's default currency num to match their locale

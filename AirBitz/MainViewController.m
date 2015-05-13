@@ -31,7 +31,7 @@
 #import "CommonTypes.h"
 #import "LocalSettings.h"
 #import "AudioController.h"
-#import "FadingAlertView.h"
+#import "FadingAlertView2.h"
 #import "InfoView.h"
 #import "DL_URLServer.h"
 #import "NotificationChecker.h"
@@ -52,7 +52,7 @@ typedef enum eAppMode
 
 @interface MainViewController () <UITabBarDelegate,RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate,
-                                  TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
+                                  TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertView2Delegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate>
 {
@@ -79,7 +79,7 @@ typedef enum eAppMode
     UIAlertView                 *_userReviewAlert;
     UIAlertView                 *_userReviewOKAlert;
     UIAlertView                 *_userReviewNOAlert;
-    FadingAlertView             *_fadingAlert;
+    FadingAlertView2            *_fadingAlert;
 	tAppMode                    _appMode;
     NSURL                       *_uri;
     InfoView                    *_notificationInfoView;
@@ -764,8 +764,8 @@ MainViewController *staticMVC;
 - (void)loginViewControllerDidLogin:(BOOL)bNewAccount
 {
     if (bNewAccount) {
-        _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-        _fadingAlert.message = NSLocalizedString(@"Creating and securing wallet", nil);
+        _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+        [_fadingAlert messageTextSet:NSLocalizedString(@"Creating and securing wallet", nil)];
         _fadingAlert.fadeDuration = 2;
         _fadingAlert.fadeDelay = 0;
         [_fadingAlert blockModal:YES];
@@ -842,8 +842,8 @@ MainViewController *staticMVC;
 
 - (void)showPasswordCheckSkip
 {
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-    _fadingAlert.message = NSLocalizedString(@"Please create a new account and transfer your funds if you forgot your password.", nil);
+    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+    [_fadingAlert messageTextSet:NSLocalizedString(@"Please create a new account and transfer your funds if you forgot your password.", nil)];
     _fadingAlert.fadeDuration = 2;
     _fadingAlert.fadeDelay = 5;
     [_fadingAlert blockModal:NO];
@@ -871,8 +871,8 @@ MainViewController *staticMVC;
     }
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated) {
-        _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-        _fadingAlert.message = NSLocalizedString(@"Great job remembering your password.", nil);
+        _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+        [_fadingAlert messageTextSet:NSLocalizedString(@"Great job remembering your password.", nil)];
         _fadingAlert.fadeDuration = 2;
         _fadingAlert.fadeDelay = 5;
         [_fadingAlert blockModal:NO];
@@ -1032,8 +1032,8 @@ MainViewController *staticMVC;
 
     [_requestViewController resetViews];
 
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-    _fadingAlert.message = message;
+    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+    [_fadingAlert messageTextSet:message];
     _fadingAlert.fadeDuration = 2;
     _fadingAlert.fadeDelay = 5;
     [_fadingAlert blockModal:NO];
@@ -1160,8 +1160,8 @@ MainViewController *staticMVC;
                         withSelector:@selector(handlePasswordResults:)
                           controller:self];
 
-            _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-            _fadingAlert.message = NSLocalizedString(@"Checking password...", nil);
+            _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+            [_fadingAlert messageTextSet:NSLocalizedString(@"Checking password...", nil)];
             [_fadingAlert blockModal:YES];
             [_fadingAlert showSpinner:YES];
             [_fadingAlert showFading];
