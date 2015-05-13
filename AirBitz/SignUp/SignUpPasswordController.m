@@ -127,8 +127,10 @@
                 [_fadingAlert dismiss:NO];
                 if (error.code == ABC_CC_Ok)
                 {
-                        _bSuccess = true;
-                        [super next];
+                    _bSuccess = true;
+                    
+                    [User login:self.manager.strUserName password:self.passwordTextField.text];
+                    [super next];
                 }
                 else
                 {
