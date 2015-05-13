@@ -140,8 +140,8 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupPasswordController = (SignUpPasswordController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpPasswordController"];
     _signupPasswordController.manager = self;
-    [Util animateController:_signupPasswordController parentController:_current];
     _current = _signupPasswordController;
+    [MainViewController animateView:_signupPasswordController.view withBlur:NO];
 }
 
 - (void)launchCameraController
@@ -149,8 +149,8 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupCameraController = (SignUpCameraController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpCameraController"];
     _signupCameraController.manager = self;
-    [Util animateController:_signupCameraController parentController:_current];
     _current = _signupCameraController;
+    [MainViewController animateView:_signupCameraController.view withBlur:NO];
 }
 
 - (void)launchContactController
@@ -158,8 +158,8 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupContactController = (SignUpContactsController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpContactsController"];
     _signupContactController.manager = self;
-    [Util animateController:_signupContactController parentController:_current];
     _current = _signupContactController;
+    [MainViewController animateView:_signupContactController.view withBlur:NO];
 }
 
 - (void)launchWriteItController
@@ -167,8 +167,8 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupWriteItController = (SignUpWriteItController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpWriteItController"];
     _signupWriteItController.manager = self;
-    [Util animateController:_signupWriteItController parentController:_current];
     _current = _signupWriteItController;
+    [MainViewController animateView:_signupWriteItController.view withBlur:NO];
 }
 
 - (BOOL)haveRequestCamera

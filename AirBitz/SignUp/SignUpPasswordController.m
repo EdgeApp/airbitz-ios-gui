@@ -125,10 +125,13 @@
                             [self.pinTextField.text UTF8String], &error);
                 }
 
+                [_fadingAlert dismiss:NO];
                 if (error.code == ABC_CC_Ok)
                 {
-                    _bSuccess = true;
-                    [super next];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        _bSuccess = true;
+                        [super next];
+                    });
                 }
                 else
                 {
@@ -142,7 +145,6 @@
                     [_fadingAlert showSpinner:NO];
                     [_fadingAlert showFading];
                  }
-                [_fadingAlert dismiss:NO];
             });
     }
 }
