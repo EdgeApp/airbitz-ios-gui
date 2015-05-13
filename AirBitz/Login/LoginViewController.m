@@ -528,7 +528,8 @@ static BOOL bInitialized = false;
                 }
                 default:
                 {
-                    [CoreBridge PINLoginWithPIN:PINCode error:&error];
+                    [self showFadingError:[Util errorMap:&error]];
+                    
                 }
             }
             [self showSpinner:NO];

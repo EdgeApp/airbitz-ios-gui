@@ -22,6 +22,7 @@
 @property (nonatomic) UIColor *colorRequestButtonDisabled;
 @property (nonatomic) CGFloat sendRequestButtonDisabled;
 @property (nonatomic) UIColor *colorRequestTopTextField;
+@property (nonatomic) UIColor *colorRequestTopTextFieldPlaceholder;
 @property (nonatomic) UIColor *colorRequestBottomTextField;
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
 @property (nonatomic) BOOL    bTranslucencyEnable;

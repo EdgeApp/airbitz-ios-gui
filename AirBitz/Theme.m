@@ -54,6 +54,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorSendButtonDisabled = UIColorFromARGB(0x55006698);
 
     self.colorRequestTopTextField = [UIColor whiteColor];
+    self.colorRequestTopTextFieldPlaceholder = UIColorFromARGB(0xffdddddd);
     self.colorRequestBottomTextField = [UIColor darkGrayColor];
 
     self.appFont = @"Lato-Regular";

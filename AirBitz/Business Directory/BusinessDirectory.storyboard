@@ -9,6 +9,13 @@
         <mutableArray key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -57,85 +64,238 @@
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P8l-kL-Lmr" userLabel="View - Category Buttons">
                                                     <rect key="frame" x="0.0" y="90" width="375" height="212"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg_categories.png" translatesAutoresizingMaskIntoConstraints="NO" id="7tf-o8-e7c">
-                                                            <rect key="frame" x="28" y="0.0" width="320" height="209"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="209" id="Be6-uF-Mvu"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyK-ph-99S" userLabel="Button - Category 1">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyK-ph-99S" userLabel="Button - Category 1">
                                                             <rect key="frame" x="56" y="20" width="264" height="38"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="264" id="XUI-aH-Bs9"/>
-                                                                <constraint firstAttribute="height" constant="38" id="s6E-cZ-Qd2"/>
-                                                            </constraints>
-                                                            <inset key="imageEdgeInsets" minX="240" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                            <state key="normal" image="btn_right.png">
-                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <inset key="contentEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <state key="normal" title="Restaurants">
+                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="0.0" y="0.0" width="188" height="53"/>
+                                                            </variation>
                                                             <connections>
                                                                 <action selector="CategoryButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="bue-z7-zo9"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a78-ih-LDk" userLabel="Button - Category 2">
+                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a78-ih-LDk" userLabel="Button - Category 2">
                                                             <rect key="frame" x="56" y="65" width="264" height="38"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="38" id="KnT-4z-VJp"/>
-                                                                <constraint firstAttribute="width" constant="264" id="WeC-Ni-Apd"/>
-                                                            </constraints>
-                                                            <inset key="imageEdgeInsets" minX="240" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                            <state key="normal" image="btn_right.png">
-                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <inset key="contentEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <state key="normal" title="Coffee &amp; Tea">
+                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="0.0" y="53" width="188" height="53"/>
+                                                            </variation>
                                                             <connections>
                                                                 <action selector="CategoryButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="BdK-O4-1Pw"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWr-pd-hBY" userLabel="Button - Category 3">
+                                                        <button opaque="NO" tag="2" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWr-pd-hBY" userLabel="Button - Category 3">
                                                             <rect key="frame" x="56" y="110" width="264" height="38"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="264" id="0Kx-7l-yLm"/>
-                                                                <constraint firstAttribute="height" constant="38" id="mvY-Kf-Ekl"/>
-                                                            </constraints>
-                                                            <inset key="imageEdgeInsets" minX="240" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                            <state key="normal" image="btn_right.png">
-                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <inset key="contentEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <state key="normal" title="ATMs">
+                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="0.0" y="106" width="188" height="53"/>
+                                                            </variation>
                                                             <connections>
                                                                 <action selector="CategoryButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="l9g-3w-d7H"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sfb-cf-6wF" userLabel="Button - Category 4">
+                                                        <button opaque="NO" tag="3" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sfb-cf-6wF" userLabel="Button - Category 4">
                                                             <rect key="frame" x="56" y="155" width="264" height="38"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="38" id="TtX-ng-4Yb"/>
-                                                                <constraint firstAttribute="width" constant="264" id="cMx-4z-oj9"/>
-                                                            </constraints>
-                                                            <inset key="imageEdgeInsets" minX="240" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                            <state key="normal" image="btn_right.png">
-                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <state key="normal" title="More">
+                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="0.0" y="159" width="375" height="53"/>
+                                                            </variation>
                                                             <connections>
                                                                 <action selector="CategoryButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tVN-mu-Zek"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1E-1G-btq" userLabel="Button - Category 5">
+                                                            <rect key="frame" x="56" y="155" width="264" height="38"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <inset key="contentEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <state key="normal" title="Gift Cards">
+                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="188" y="0.0" width="187" height="53"/>
+                                                            </variation>
+                                                            <connections>
+                                                                <action selector="CategoryButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vrj-3u-JAq"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTm-at-TUR" userLabel="Button - Category 6">
+                                                            <rect key="frame" x="56" y="155" width="264" height="38"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <inset key="contentEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <state key="normal" title="Electronics">
+                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="188" y="53" width="187" height="53"/>
+                                                            </variation>
+                                                            <connections>
+                                                                <action selector="CategoryButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MYX-LI-qSQ"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGS-YR-zt1" userLabel="Button - Category 7">
+                                                            <rect key="frame" x="56" y="155" width="264" height="38"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <inset key="contentEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <state key="normal" title="Health">
+                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="188" y="106" width="187" height="53"/>
+                                                            </variation>
+                                                            <connections>
+                                                                <action selector="CategoryButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="TAX-mb-fN8"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="centerX" secondItem="oyK-ph-99S" secondAttribute="centerX" id="1xo-eg-MaV"/>
+                                                        <constraint firstItem="sWr-pd-hBY" firstAttribute="height" secondItem="kTm-at-TUR" secondAttribute="height" id="0C0-Pq-izk"/>
+                                                        <constraint firstItem="GGS-YR-zt1" firstAttribute="width" secondItem="oyK-ph-99S" secondAttribute="width" id="4oM-EX-wID"/>
+                                                        <constraint firstItem="sWr-pd-hBY" firstAttribute="leading" secondItem="P8l-kL-Lmr" secondAttribute="leading" id="5qF-nW-xVy"/>
+                                                        <constraint firstItem="GGS-YR-zt1" firstAttribute="top" secondItem="kTm-at-TUR" secondAttribute="bottom" id="6N1-lp-wbE"/>
+                                                        <constraint firstItem="sWr-pd-hBY" firstAttribute="top" secondItem="a78-ih-LDk" secondAttribute="bottom" constant="8" id="6nL-Cj-zUn">
+                                                            <variation key="widthClass=compact" constant="0.0"/>
+                                                        </constraint>
                                                         <constraint firstItem="Sfb-cf-6wF" firstAttribute="top" secondItem="sWr-pd-hBY" secondAttribute="bottom" constant="7" id="6td-Fw-SEy"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Sfb-cf-6wF" secondAttribute="bottom" id="80s-Fu-UtD"/>
+                                                        <constraint firstAttribute="trailing" secondItem="GGS-YR-zt1" secondAttribute="trailing" id="Bsq-I6-o0N"/>
+                                                        <constraint firstItem="Sfb-cf-6wF" firstAttribute="top" secondItem="sWr-pd-hBY" secondAttribute="bottom" constant="48" id="EkR-mY-eFX">
+                                                            <variation key="widthClass=compact" constant="0.0"/>
+                                                        </constraint>
+                                                        <constraint firstItem="sWr-pd-hBY" firstAttribute="height" secondItem="b1E-1G-btq" secondAttribute="height" id="GQo-f4-5ch"/>
                                                         <constraint firstItem="a78-ih-LDk" firstAttribute="top" secondItem="oyK-ph-99S" secondAttribute="bottom" constant="7" id="IVm-g7-Zrl"/>
-                                                        <constraint firstItem="7tf-o8-e7c" firstAttribute="top" secondItem="P8l-kL-Lmr" secondAttribute="top" id="Klw-TK-QlU"/>
-                                                        <constraint firstAttribute="centerX" secondItem="sWr-pd-hBY" secondAttribute="centerX" id="Vfe-Lg-9aX"/>
-                                                        <constraint firstAttribute="centerX" secondItem="Sfb-cf-6wF" secondAttribute="centerX" id="Y0e-Bq-YRZ"/>
-                                                        <constraint firstAttribute="centerX" secondItem="a78-ih-LDk" secondAttribute="centerX" id="e8i-0j-a9F"/>
+                                                        <constraint firstAttribute="trailing" secondItem="kTm-at-TUR" secondAttribute="trailing" id="KQ7-gA-BmB"/>
+                                                        <constraint firstItem="sWr-pd-hBY" firstAttribute="height" secondItem="oyK-ph-99S" secondAttribute="height" id="NeY-xc-G7D"/>
+                                                        <constraint firstItem="a78-ih-LDk" firstAttribute="top" secondItem="oyK-ph-99S" secondAttribute="bottom" id="Ops-ES-lIC"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Sfb-cf-6wF" secondAttribute="trailing" id="PUX-tu-Qob"/>
+                                                        <constraint firstItem="Sfb-cf-6wF" firstAttribute="height" secondItem="sWr-pd-hBY" secondAttribute="height" id="QFA-yn-v5E"/>
+                                                        <constraint firstItem="a78-ih-LDk" firstAttribute="leading" secondItem="P8l-kL-Lmr" secondAttribute="leading" id="T0t-Xx-po9"/>
+                                                        <constraint firstItem="sWr-pd-hBY" firstAttribute="height" secondItem="GGS-YR-zt1" secondAttribute="height" id="UbP-Vg-SZh"/>
+                                                        <constraint firstItem="GGS-YR-zt1" firstAttribute="width" secondItem="sWr-pd-hBY" secondAttribute="width" id="Udr-0A-bvi"/>
+                                                        <constraint firstItem="oyK-ph-99S" firstAttribute="leading" secondItem="P8l-kL-Lmr" secondAttribute="leading" id="V50-qe-Zfy"/>
+                                                        <constraint firstAttribute="trailing" secondItem="b1E-1G-btq" secondAttribute="trailing" id="X6j-wF-lZ3"/>
+                                                        <constraint firstItem="kTm-at-TUR" firstAttribute="leading" secondItem="a78-ih-LDk" secondAttribute="trailing" id="ZN8-uf-xG3"/>
+                                                        <constraint firstItem="b1E-1G-btq" firstAttribute="top" secondItem="P8l-kL-Lmr" secondAttribute="top" id="ZZ0-yv-qGg"/>
+                                                        <constraint firstItem="kTm-at-TUR" firstAttribute="top" secondItem="b1E-1G-btq" secondAttribute="bottom" id="a72-4D-cuA"/>
+                                                        <constraint firstItem="b1E-1G-btq" firstAttribute="leading" secondItem="oyK-ph-99S" secondAttribute="trailing" id="amI-FC-UyM"/>
                                                         <constraint firstAttribute="height" constant="212" id="e93-bb-5es"/>
                                                         <constraint firstItem="oyK-ph-99S" firstAttribute="top" secondItem="P8l-kL-Lmr" secondAttribute="top" constant="20" id="fSU-xb-RDD"/>
-                                                        <constraint firstAttribute="centerX" secondItem="7tf-o8-e7c" secondAttribute="centerX" id="iaD-Kt-gej"/>
+                                                        <constraint firstItem="sWr-pd-hBY" firstAttribute="height" secondItem="a78-ih-LDk" secondAttribute="height" id="i9t-F0-UCW"/>
+                                                        <constraint firstItem="GGS-YR-zt1" firstAttribute="width" secondItem="b1E-1G-btq" secondAttribute="width" id="iRM-bh-Nf1"/>
+                                                        <constraint firstItem="sWr-pd-hBY" firstAttribute="height" secondItem="Sfb-cf-6wF" secondAttribute="height" id="iTE-LM-fru"/>
+                                                        <constraint firstItem="Sfb-cf-6wF" firstAttribute="top" secondItem="GGS-YR-zt1" secondAttribute="bottom" id="kMD-Qt-HLI"/>
+                                                        <constraint firstItem="oyK-ph-99S" firstAttribute="top" secondItem="P8l-kL-Lmr" secondAttribute="top" id="mRx-67-Dii"/>
+                                                        <constraint firstItem="GGS-YR-zt1" firstAttribute="width" secondItem="kTm-at-TUR" secondAttribute="width" id="oqg-Pb-35A"/>
+                                                        <constraint firstItem="Sfb-cf-6wF" firstAttribute="leading" secondItem="P8l-kL-Lmr" secondAttribute="leading" id="sxs-qg-bRM"/>
                                                         <constraint firstItem="sWr-pd-hBY" firstAttribute="top" secondItem="a78-ih-LDk" secondAttribute="bottom" constant="7" id="xhG-eD-1fX"/>
+                                                        <constraint firstItem="GGS-YR-zt1" firstAttribute="width" secondItem="a78-ih-LDk" secondAttribute="width" id="xqb-Ne-c88"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="subviews">
+                                                            <exclude reference="b1E-1G-btq"/>
+                                                            <exclude reference="kTm-at-TUR"/>
+                                                            <exclude reference="GGS-YR-zt1"/>
+                                                        </mask>
+                                                        <mask key="constraints">
+                                                            <exclude reference="4oM-EX-wID"/>
+                                                            <exclude reference="6N1-lp-wbE"/>
+                                                            <exclude reference="Bsq-I6-o0N"/>
+                                                            <exclude reference="Udr-0A-bvi"/>
+                                                            <exclude reference="iRM-bh-Nf1"/>
+                                                            <exclude reference="oqg-Pb-35A"/>
+                                                            <exclude reference="xqb-Ne-c88"/>
+                                                            <exclude reference="X6j-wF-lZ3"/>
+                                                            <exclude reference="ZZ0-yv-qGg"/>
+                                                            <exclude reference="amI-FC-UyM"/>
+                                                            <exclude reference="KQ7-gA-BmB"/>
+                                                            <exclude reference="ZN8-uf-xG3"/>
+                                                            <exclude reference="a72-4D-cuA"/>
+                                                            <exclude reference="V50-qe-Zfy"/>
+                                                            <exclude reference="mRx-67-Dii"/>
+                                                            <exclude reference="Ops-ES-lIC"/>
+                                                            <exclude reference="T0t-Xx-po9"/>
+                                                            <exclude reference="0C0-Pq-izk"/>
+                                                            <exclude reference="5qF-nW-xVy"/>
+                                                            <exclude reference="6nL-Cj-zUn"/>
+                                                            <exclude reference="GQo-f4-5ch"/>
+                                                            <exclude reference="NeY-xc-G7D"/>
+                                                            <exclude reference="UbP-Vg-SZh"/>
+                                                            <exclude reference="i9t-F0-UCW"/>
+                                                            <exclude reference="iTE-LM-fru"/>
+                                                            <exclude reference="80s-Fu-UtD"/>
+                                                            <exclude reference="EkR-mY-eFX"/>
+                                                            <exclude reference="PUX-tu-Qob"/>
+                                                            <exclude reference="QFA-yn-v5E"/>
+                                                            <exclude reference="kMD-Qt-HLI"/>
+                                                            <exclude reference="sxs-qg-bRM"/>
+                                                        </mask>
+                                                    </variation>
                                                     <variation key="widthClass=compact" misplaced="YES">
                                                         <rect key="frame" x="0.0" y="88" width="375" height="212"/>
+                                                        <mask key="subviews">
+                                                            <include reference="b1E-1G-btq"/>
+                                                            <include reference="kTm-at-TUR"/>
+                                                            <include reference="GGS-YR-zt1"/>
+                                                        </mask>
+                                                        <mask key="constraints">
+                                                            <include reference="4oM-EX-wID"/>
+                                                            <include reference="6N1-lp-wbE"/>
+                                                            <include reference="Bsq-I6-o0N"/>
+                                                            <include reference="Udr-0A-bvi"/>
+                                                            <include reference="iRM-bh-Nf1"/>
+                                                            <include reference="oqg-Pb-35A"/>
+                                                            <include reference="xqb-Ne-c88"/>
+                                                            <include reference="X6j-wF-lZ3"/>
+                                                            <include reference="ZZ0-yv-qGg"/>
+                                                            <include reference="amI-FC-UyM"/>
+                                                            <include reference="KQ7-gA-BmB"/>
+                                                            <include reference="ZN8-uf-xG3"/>
+                                                            <include reference="a72-4D-cuA"/>
+                                                            <include reference="V50-qe-Zfy"/>
+                                                            <exclude reference="fSU-xb-RDD"/>
+                                                            <include reference="mRx-67-Dii"/>
+                                                            <exclude reference="IVm-g7-Zrl"/>
+                                                            <include reference="Ops-ES-lIC"/>
+                                                            <include reference="T0t-Xx-po9"/>
+                                                            <include reference="0C0-Pq-izk"/>
+                                                            <include reference="5qF-nW-xVy"/>
+                                                            <include reference="6nL-Cj-zUn"/>
+                                                            <include reference="GQo-f4-5ch"/>
+                                                            <include reference="NeY-xc-G7D"/>
+                                                            <include reference="UbP-Vg-SZh"/>
+                                                            <include reference="i9t-F0-UCW"/>
+                                                            <exclude reference="iTE-LM-fru"/>
+                                                            <exclude reference="xhG-eD-1fX"/>
+                                                            <exclude reference="6td-Fw-SEy"/>
+                                                            <include reference="80s-Fu-UtD"/>
+                                                            <include reference="EkR-mY-eFX"/>
+                                                            <include reference="PUX-tu-Qob"/>
+                                                            <include reference="QFA-yn-v5E"/>
+                                                            <include reference="kMD-Qt-HLI"/>
+                                                            <include reference="sxs-qg-bRM"/>
+                                                        </mask>
                                                     </variation>
                                                     <variation key="widthClass=regular" misplaced="YES">
                                                         <rect key="frame" x="0.0" y="88" width="375" height="212"/>
@@ -463,7 +623,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-983.5" y="-1840.5"/>
+            <point key="canvasLocation" x="-984" y="-1841"/>
         </scene>
         <!--Business Details View Controller-->
         <scene sceneID="0bd-7b-jeZ">
@@ -742,7 +902,6 @@
         <image name="back_arrow.png" width="30" height="30"/>
         <image name="background.jpg" width="320" height="568"/>
         <image name="bd_icon_location.png" width="10" height="18"/>
-        <image name="bkg_categories.png" width="320" height="209"/>
         <image name="btn_blue.png" width="110" height="27"/>
         <image name="btn_locateMe.png" width="39" height="39"/>
         <image name="btn_right.png" width="22" height="22"/>

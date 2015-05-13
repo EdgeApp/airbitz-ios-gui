@@ -63,9 +63,12 @@
 #define TAG_LOCATION_SEARCH 1
 
 #define TAG_CATEGORY_RESTAURANTS	0
-#define TAG_CATEGORY_BARS			1
-#define TAG_CATEGORY_COFFEE			2
+#define TAG_CATEGORY_COFFEE			1
+#define TAG_CATEGORY_ATM			2
 #define TAG_CATEGORY_MORE			3
+#define TAG_CATEGORY_GIFTCARDS      4
+#define TAG_CATEGORY_ELECTRONICS    5
+#define TAG_CATEGORY_SHOPPING       6
 
 #define LOCATION_WAIT_SECONDS       8.0
 
@@ -485,16 +488,34 @@ static bool bInitialized = false;
     switch (sender.tag)
     {
         case TAG_CATEGORY_RESTAURANTS:
-            self.searchBarSearch.text = NSLocalizedString(@"Restaurants", nil);
-            [self transitionMode:DIRECTORY_MODE_MAP];
-            break;
-        case TAG_CATEGORY_BARS:
-            self.searchBarSearch.text = NSLocalizedString(@"Bars", nil);
+            self.searchBarSearch.text = NSLocalizedString(@"Restaurants & Food Trucks", nil);
+            self.searchBarLocation.text = NSLocalizedString(@"", nil);
             [self transitionMode:DIRECTORY_MODE_MAP];
             break;
         case TAG_CATEGORY_COFFEE:
             self.searchBarSearch.text = NSLocalizedString(@"Coffee & Tea", nil);
+            self.searchBarLocation.text = NSLocalizedString(@"", nil);
             [self transitionMode:DIRECTORY_MODE_MAP];
+            break;
+        case TAG_CATEGORY_ATM:
+            self.searchBarSearch.text = NSLocalizedString(@"ATM", nil);
+            self.searchBarLocation.text = NSLocalizedString(@"", nil);
+            [self transitionMode:DIRECTORY_MODE_MAP];
+            break;
+        case TAG_CATEGORY_GIFTCARDS:
+            self.searchBarSearch.text = NSLocalizedString(@"Gift Cards", nil);
+            self.searchBarLocation.text = NSLocalizedString(@"On the Web", nil);
+            [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
+            break;
+        case TAG_CATEGORY_ELECTRONICS:
+            self.searchBarSearch.text = NSLocalizedString(@"Electronics", nil);
+            self.searchBarLocation.text = NSLocalizedString(@"On the Web", nil);
+            [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
+            break;
+        case TAG_CATEGORY_SHOPPING:
+            self.searchBarSearch.text = NSLocalizedString(@"Shopping", nil);
+            self.searchBarLocation.text = NSLocalizedString(@"On the Web", nil);
+            [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
             break;
         case TAG_CATEGORY_MORE:
             [self launchMoreCategories];
@@ -866,7 +887,7 @@ static bool bInitialized = false;
 
 - (void)hideCategoryView
 {
-    _categoryViewHeight.constant = 0;
+//    _categoryViewHeight.constant = 0;
 }
 
 

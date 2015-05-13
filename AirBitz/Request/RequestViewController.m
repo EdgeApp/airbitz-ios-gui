@@ -100,7 +100,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 
 
-
+@property (weak, nonatomic) IBOutlet UILabel *btcLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fiatLabel;
 @property (nonatomic, weak) IBOutlet UIImageView    *qrCodeImageView;
 @property (weak, nonatomic) IBOutlet UIView         *viewQRCodeFrame;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlBTCUSD;
@@ -111,7 +112,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, weak) IBOutlet UITextField        *currentTopField;
 @property (nonatomic, weak) IBOutlet UITextField        *BTC_TextField;
 //@property (nonatomic, weak) IBOutlet UILabel            *USDLabel_TextField;
-@property (nonatomic, weak) IBOutlet UILabel            *bottomBTCUSDLabel;
+//@property (nonatomic, weak) IBOutlet UILabel            *bottomBTCUSDLabel;
 @property (nonatomic, weak) IBOutlet UITextField        *USD_TextField;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView2 *buttonSelector; //wallet dropdown
 @property (nonatomic, weak) IBOutlet UILabel            *exchangeRateLabel;
@@ -229,8 +230,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
 
 	[self loadWalletInfo];
-
-    _bottomBTCUSDLabel.text = [User Singleton].denominationLabel;
 
 //XXX	self.BTCLabel_TextField.text = [User Singleton].denominationLabel;
     [self.segmentedControlBTCUSD setTitle:[User Singleton].denominationLabel forSegmentAtIndex:1];
@@ -780,7 +779,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
 
     UITextField *bottomField;
+    UILabel *bottomLabel;
+    UILabel *topLabel;
     CGRect fiatFrame, btcFrame;
+    Wallet *wallet = [self getCurrentWallet];
 
     if (bFiat)
     {
@@ -792,11 +794,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             self.currentTopField = self.USD_TextField;
             bottomField = self.BTC_TextField;
-            _bottomBTCUSDLabel.text = [User Singleton].denominationLabel;
 
             fiatFrame = topFrame;
             btcFrame = bottomFrame;
+            topLabel = _fiatLabel;
+            bottomLabel = _btcLabel;
             segmentedControlBTCUSD.selectedSegmentIndex = 0;
+            
 
 
         }
@@ -812,10 +816,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             self.currentTopField = self.BTC_TextField;
             bottomField = self.USD_TextField;
 
-            Wallet *wallet = [self getCurrentWallet];
-            _bottomBTCUSDLabel.text = wallet.currencyAbbrev;
             fiatFrame = bottomFrame;
             btcFrame = topFrame;
+            topLabel = _btcLabel;
+            bottomLabel = _fiatLabel;
             segmentedControlBTCUSD.selectedSegmentIndex = 1;
 
         }
@@ -832,8 +836,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 //    self.currentTopField.frame = topFrame;
     UIColor *color = [UIColor lightGrayColor];
     NSString *string = NSLocalizedString(@"Enter Amount (optional)", "Placeholder text for Receive screen amount");
-    self.currentTopField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:string attributes:@{NSForegroundColorAttributeName: color}];
+    self.currentTopField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:string attributes:@{NSForegroundColorAttributeName: [Theme Singleton].colorRequestTopTextFieldPlaceholder}];
 
+    [topLabel setFont:[UIFont fontWithName:@"Lato-Regular" size:topTextSize]];
+    [topLabel setTextColor:[Theme Singleton].colorRequestTopTextField];
     [self.currentTopField setFont:[UIFont fontWithName:@"Lato-Regular" size:topTextSize]];
     [self.currentTopField setTextColor:[Theme Singleton].colorRequestTopTextField];
     [self.currentTopField setTintColor:[UIColor lightGrayColor]];
@@ -848,13 +854,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 //    bottomField.frame = bottomFrame;
     bottomField.placeholder = @"";
+    [bottomLabel setFont:[UIFont fontWithName:@"Lato-Regular" size:bottomTextSize]];
+    [bottomLabel setTextColor:[Theme Singleton].colorRequestBottomTextField];
     [bottomField setFont:[UIFont fontWithName:@"Lato-Regular" size:bottomTextSize]];
     [bottomField setTextColor:[Theme Singleton].colorRequestBottomTextField];
     [bottomField setTintColor:[UIColor lightGrayColor]];
     [bottomField setEnabled:false];
-
-    if ([bottomField.text length] == 0)
-        _bottomBTCUSDLabel.text = @"";
 
 }
 
@@ -1089,6 +1094,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.exchangeRateLabel.text = [CoreBridge conversionString:wallet];
 //XXX    self.USDLabel_TextField.text = wallet.currencyAbbrev;
     [self.segmentedControlBTCUSD setTitle:wallet.currencyAbbrev forSegmentAtIndex:0];
+    _fiatLabel.text = wallet.currencyAbbrev;
 
     if (_selectedTextField == self.BTC_TextField)
 	{
@@ -1209,6 +1215,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                 self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
                 [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
                 self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
+                _btcLabel.text = [User Singleton].denominationLabel;
+                _fiatLabel.text = wallet.currencyAbbrev;
+                
             }
 
             [self updateTextFieldContents:YES];
