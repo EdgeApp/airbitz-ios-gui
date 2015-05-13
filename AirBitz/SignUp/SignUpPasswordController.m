@@ -107,31 +107,31 @@
     {
         [self viewDidLoad];
         [self viewWillAppear:true];
-            _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
-            [_fadingAlert messageTextSet:NSLocalizedString(@"Creating and securing account", nil)];
-            _fadingAlert.fadeDuration = 0;
-            _fadingAlert.fadeDelay = 0;
-            [_fadingAlert blockModal:YES];
-            [_fadingAlert showSpinner:YES];
-            [_fadingAlert show];
+        
+        _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
+        [_fadingAlert messageTextSet:NSLocalizedString(@"Creating and securing account", nil)];
+        _fadingAlert.fadeDuration = 0;
+        _fadingAlert.fadeDelay = 0;
+        [_fadingAlert blockModal:YES];
+        [_fadingAlert showSpinner:YES];
+        [_fadingAlert show];
 
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                tABC_Error error;
-                char *szPassword = [self.passwordTextField.text length] == 0 ? NULL : [self.passwordTextField.text UTF8String];
-                ABC_CreateAccount([self.manager.strUserName UTF8String], szPassword, &error);
-                if (error.code == ABC_CC_Ok)
-                {
-                    ABC_SetPIN([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String],
-                            [self.pinTextField.text UTF8String], &error);
-                }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            tABC_Error error;
+            char *szPassword = [self.passwordTextField.text length] == 0 ? NULL : [self.passwordTextField.text UTF8String];
+            ABC_CreateAccount([self.manager.strUserName UTF8String], szPassword, &error);
+            if (error.code == ABC_CC_Ok)
+            {
+                ABC_SetPIN([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String],
+                        [self.pinTextField.text UTF8String], &error);
+            }
 
+            dispatch_async(dispatch_get_main_queue(), ^{
                 [_fadingAlert dismiss:NO];
                 if (error.code == ABC_CC_Ok)
                 {
-                    dispatch_async(dispatch_get_main_queue(), ^{
                         _bSuccess = true;
                         [super next];
-                    });
                 }
                 else
                 {
@@ -146,6 +146,7 @@
                     [_fadingAlert showFading];
                  }
             });
+        });
     }
 }
 
