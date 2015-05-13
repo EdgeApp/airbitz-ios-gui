@@ -887,7 +887,7 @@ static bool bInitialized = false;
 
 - (void)hideCategoryView
 {
-    _categoryViewHeight.constant = 0;
+//    _categoryViewHeight.constant = 0;
 }
 
 
