@@ -118,7 +118,8 @@
         [MainViewController animateOut:_signupPasswordController.view withBlur:NO complete:^(void) {
             _signupPasswordController = nil;
             _current = _signupUsernameController;
-            [_current viewWillAppear:true];
+            _current.view.alpha = 1.0;
+            [MainViewController animateView:_current.view withBlur:NO];
         }];
     }
 }
@@ -140,6 +141,7 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupPasswordController = (SignUpPasswordController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpPasswordController"];
     _signupPasswordController.manager = self;
+    [MainViewController animateFadeOut:_current.view];
     _current = _signupPasswordController;
     [MainViewController animateView:_signupPasswordController.view withBlur:NO];
 }
@@ -149,6 +151,7 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupCameraController = (SignUpCameraController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpCameraController"];
     _signupCameraController.manager = self;
+    [MainViewController animateFadeOut:_current.view];
     _current = _signupCameraController;
     [MainViewController animateView:_signupCameraController.view withBlur:NO];
 }
@@ -158,6 +161,7 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupContactController = (SignUpContactsController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpContactsController"];
     _signupContactController.manager = self;
+    [MainViewController animateFadeOut:_current.view];
     _current = _signupContactController;
     [MainViewController animateView:_signupContactController.view withBlur:NO];
 }
@@ -167,6 +171,7 @@
     UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
     _signupWriteItController = (SignUpWriteItController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpWriteItController"];
     _signupWriteItController.manager = self;
+    [MainViewController animateFadeOut:_current.view];
     _current = _signupWriteItController;
     [MainViewController animateView:_signupWriteItController.view withBlur:NO];
 }
