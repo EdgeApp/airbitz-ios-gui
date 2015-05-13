@@ -1717,7 +1717,8 @@ MainViewController *staticMVC;
                      completion:^(BOOL finished) {
                          [view removeFromSuperview];
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-                         cb();
+                         if(cb != nil)
+                             cb();
                      }];
 }
 
