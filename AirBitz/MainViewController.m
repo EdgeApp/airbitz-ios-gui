@@ -1449,7 +1449,7 @@ MainViewController *staticMVC;
             [self launchBuySell:cs[2] provider:cs[1]];
         }
     } else if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:@"airbitz"]) {
-        [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
+        // [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
         if ([User isLoggedIn]) {
             [_sendViewController resetViews];
             _sendViewController.addressTextField.text = [uri absoluteString];
