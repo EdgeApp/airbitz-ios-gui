@@ -105,9 +105,6 @@
     // check the new password fields
     if ([self newPasswordFieldsAreValid] == YES && [self fieldsAreValid] == YES)
     {
-        [self viewDidLoad];
-        [self viewWillAppear:true];
-        
         _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
         [_fadingAlert messageTextSet:NSLocalizedString(@"Creating and securing account", nil)];
         _fadingAlert.fadeDuration = 0;
