@@ -255,9 +255,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
 	[_startScannerTimer invalidate];
 	_startScannerTimer = nil;
-#if !TARGET_IPHONE_SIMULATOR
 	[self stopQRReader];
-#endif
 
 	// Don't keep it going while we're not showing.
 	if([LocalSettings controller].bDisableBLE == NO)
@@ -345,6 +343,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #if TARGET_IPHONE_SIMULATOR
 
 -(void)startQRReader
+{
+}
+
+- (void)stopQRReader
 {
 }
 
@@ -1586,9 +1588,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         {
             Wallet *wallet = [self.arrayWallets objectAtIndex:index];
             [spendTarget newTransfer:wallet.strUUID error:&error];
-#if !TARGET_IPHONE_SIMULATOR
             [self stopQRReader];
-#endif
             [self showSendConfirmationTo:spendTarget];
 
         }
@@ -1609,9 +1609,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-#if !TARGET_IPHONE_SIMULATOR
             [self stopQRReader];
-#endif
             [self showSendConfirmationTo:spendTarget];
         }
 	}
@@ -1632,9 +1630,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     if (pickerTextView.textField.text.length)
 	{
-#if !TARGET_IPHONE_SIMULATOR
         [self stopQRReader];
-#endif
         [self showSendConfirmationTo:spendTarget];
 	}
 }
@@ -1681,9 +1677,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (_syncingView)
     {
         [self resignAllResonders];
-#if !TARGET_IPHONE_SIMULATOR
         [self stopQRReader];
-#endif
     }
 }
 
