@@ -76,14 +76,6 @@
 + (void)startWatcher:(NSString *)walletUUID;
 + (void)stopWatchers;
 + (void)prioritizeAddress:(NSString *)address inWallet:(NSString *)walletUUID;
-+ (uint64_t)maxSpendable:(NSString *)walletUUID
-               toAddress:(NSString *)destAddress
-              isTransfer:(BOOL)bTransfer;
-+ (bool)calcSendFees:(NSString *) walletUUID 
-                 sendTo:(NSString *) destAddr 
-           amountToSend:(int64_t) sendAmount
-         storeResultsIn:(int64_t *) totalFees
-         walletTransfer:(bool)bTransfer;
 + (bool)isTestNet;
 + (NSString *)coreVersion;
 + (NSString *)currencyAbbrevLookup:(int) currencyNum;

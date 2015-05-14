@@ -1137,6 +1137,9 @@
 		DAAC2169196399F400CC0F1E /* flash-on~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC2165196399F400CC0F1E /* flash-on~iphone.png */; };
 		DAAC216C1963A35900CC0F1E /* btn_album@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */; };
 		DAAC216D1963A35900CC0F1E /* btn_album~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */; };
+		DAB9E4581B04189E00686DD8 /* SpendTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB9E4561B04189E00686DD8 /* SpendTarget.m */; };
+		DAB9E4591B04189E00686DD8 /* SpendTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB9E4561B04189E00686DD8 /* SpendTarget.m */; };
+		DAB9E45A1B04189E00686DD8 /* SpendTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB9E4561B04189E00686DD8 /* SpendTarget.m */; };
 		DABA3486198DFEE300EFAB13 /* infoRequestQR.html in Resources */ = {isa = PBXBuildFile; fileRef = DABA3485198DFEE300EFAB13 /* infoRequestQR.html */; };
 		DAE276141A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
 		DAE276151A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
@@ -2526,6 +2529,8 @@
 		DAAC2165196399F400CC0F1E /* flash-on~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-on~iphone.png"; sourceTree = "<group>"; };
 		DAAC216A1963A35900CC0F1E /* btn_album@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album@2x~iphone.png"; sourceTree = "<group>"; };
 		DAAC216B1963A35900CC0F1E /* btn_album~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_album~iphone.png"; sourceTree = "<group>"; };
+		DAB9E4561B04189E00686DD8 /* SpendTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendTarget.m; sourceTree = "<group>"; };
+		DAB9E4571B04189E00686DD8 /* SpendTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendTarget.h; sourceTree = "<group>"; };
 		DABA3485198DFEE300EFAB13 /* infoRequestQR.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoRequestQR.html; sourceTree = "<group>"; };
 		DAE276121A9AEE8500E24523 /* AddressRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressRequestController.h; sourceTree = "<group>"; };
 		DAE276131A9AEE8500E24523 /* AddressRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressRequestController.m; sourceTree = "<group>"; };
@@ -3731,6 +3736,8 @@
 				B5FD392718EE2DFD00BE2670 /* SendStatusViewController.m */,
 				B5C0A9AE18EA0D78008F302C /* SendViewController.h */,
 				B5C0A9AF18EA0D78008F302C /* SendViewController.m */,
+				DAB9E4561B04189E00686DD8 /* SpendTarget.m */,
+				DAB9E4571B04189E00686DD8 /* SpendTarget.h */,
 				B5628BE4199BD44D0077DA1C /* BLEScanCell.h */,
 				B5628BE5199BD44D0077DA1C /* BLEScanCell.m */,
 			);
@@ -5564,6 +5571,7 @@
 				7D98ACF019A7C550003D2BF6 /* CDataScanner_Extensions.m in Sources */,
 				7D98ACF119A7C550003D2BF6 /* BusinessDetailsViewController.m in Sources */,
 				7D98ACF219A7C550003D2BF6 /* RibbonView.m in Sources */,
+				DAB9E4591B04189E00686DD8 /* SpendTarget.m in Sources */,
 				7D98ACF319A7C550003D2BF6 /* MinCharTextField.m in Sources */,
 				7D98ACF419A7C550003D2BF6 /* DDData.m in Sources */,
 				7D98ACF519A7C550003D2BF6 /* SignUpViewController.m in Sources */,
@@ -5710,6 +5718,7 @@
 				7DFD22E71A1E716C008C43FB /* UIPhotoItemView.m in Sources */,
 				B5C0A9A518EA0C4E008F302C /* RibbonView.m in Sources */,
 				B55D0FE818E233A80035DCC8 /* MinCharTextField.m in Sources */,
+				DAB9E4581B04189E00686DD8 /* SpendTarget.m in Sources */,
 				4C5D8C55192AA1A80015BB3C /* DDData.m in Sources */,
 				B5F2E9C218DA911A008ACF88 /* SignUpViewController.m in Sources */,
 				B5C0A9C818EA0E55008F302C /* FlashSelectView.m in Sources */,
@@ -5856,6 +5865,7 @@
 				DAE8644B1A88A58A00A17BD3 /* UIPhotoItemView.m in Sources */,
 				DAE8644C1A88A58A00A17BD3 /* RibbonView.m in Sources */,
 				DAE8644D1A88A58A00A17BD3 /* MinCharTextField.m in Sources */,
+				DAB9E45A1B04189E00686DD8 /* SpendTarget.m in Sources */,
 				DAE8644E1A88A58A00A17BD3 /* DDData.m in Sources */,
 				DAE8644F1A88A58A00A17BD3 /* SignUpViewController.m in Sources */,
 				DAE864501A88A58A00A17BD3 /* FlashSelectView.m in Sources */,

@@ -13,6 +13,7 @@
 #import "Util.h"
 #import "Notifications.h"
 #import "CommonTypes.h"
+#import "SpendTarget.h"
 
 static const NSString *PROTOCOL = @"bridge://";
 
@@ -286,26 +287,23 @@ static const NSString *PROTOCOL = @"bridge://";
     _sendCbid = cbid;
     _sendWallet = [CoreBridge getWallet:[args objectForKey:@"id"]];
 
-    NSString *toAddress = [args objectForKey:@"toAddress"];
-    uint64_t amountSatoshi = [[args objectForKey:@"amountSatoshi"] longValue];
-    double amountFiat = [[args objectForKey:@"amountFiat"] doubleValue];
-    NSString *label = [args objectForKey:@"label"];
-    NSString *category = [args objectForKey:@"category"];
-    NSString *notes = [args objectForKey:@"notes"];
-
-	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-	_sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
-	_sendConfirmationViewController.delegate = self;
-	_sendConfirmationViewController.sendToAddress = toAddress;
-    _sendConfirmationViewController.bAddressIsWalletUUID = NO;
-    _sendConfirmationViewController.wallet = _sendWallet;
-	_sendConfirmationViewController.amountToSendSatoshi = amountSatoshi;
-	_sendConfirmationViewController.overrideCurrency = amountFiat;
-	_sendConfirmationViewController.nameLabel = label;
-	_sendConfirmationViewController.category = category;
-	_sendConfirmationViewController.notes = notes;
-    _sendConfirmationViewController.bAdvanceToTx = NO;
-    [Util animateController:_sendConfirmationViewController parentController:self];
+    tABC_Error error;
+    SpendTarget *spendTarget = [[SpendTarget alloc] init];
+    if ([spendTarget spendNewInternal:[args objectForKey:@"toAddress"]
+                                label:[args objectForKey:@"label"]
+                             category:[args objectForKey:@"category"]
+                                notes:[args objectForKey:@"notes"] 
+                        amountSatoshi:[[args objectForKey:@"amountSatoshi"] longValue]
+                                error:&error]) {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        _sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
+        _sendConfirmationViewController.delegate = self;
+        _sendConfirmationViewController.spendTarget = spendTarget;
+        _sendConfirmationViewController.wallet = _sendWallet;
+        _sendConfirmationViewController.overrideCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
+        _sendConfirmationViewController.bAdvanceToTx = NO;
+        [Util animateController:_sendConfirmationViewController parentController:self];
+    }
 }
 
 - (void)createReceiveRequest:(NSDictionary *)params
