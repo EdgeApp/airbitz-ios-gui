@@ -130,6 +130,9 @@
                 {
                     _bSuccess = true;
                     
+                    self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
+                    self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
+                    
                     [User login:self.manager.strUserName password:self.passwordTextField.text];
                     [super next];
                 }
@@ -395,35 +398,6 @@
             }
         }
         [_activeTextField resignFirstResponder];
-    }
-}
-
-#pragma mark - ABC Callbacks
-
-- (void)createAccountComplete
-{
-    if (_bSuccess) {
-        super.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
-        super.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
-
-        [User login:self.manager.strUserName
-           password:self.passwordTextField.text];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-        {
-            [CoreBridge setupLoginPIN];
-        });
-
-        [CoreBridge setupNewAccount:nil];
-
-        [super next];
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc]
-                initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signin error alert")
-                      message:[NSString stringWithFormat:@"Sign-Up failed:\n%@", _strReason]
-                     delegate:nil
-            cancelButtonTitle:@"OK"
-            otherButtonTitles:nil];
-        [alert show];
     }
 }
 
