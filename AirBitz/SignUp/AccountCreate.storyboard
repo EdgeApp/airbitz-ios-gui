@@ -230,11 +230,12 @@ Your username and password are known only to you and never stored unencrypted.</
                                     <rect key="frame" x="0.0" y="64" width="800" height="200"/>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHD-NP-fM6" customClass="StylizedButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHD-NP-fM6" customClass="StylizedButton">
                                 <rect key="frame" x="465" y="316" width="119" height="41"/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="119" id="RAi-Zu-Su1"/>
+                                    <constraint firstAttribute="height" constant="41" id="ftW-cs-4gD"/>
                                 </constraints>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                 <state key="normal" title="NEXT">
@@ -454,9 +455,6 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="VAn-0y-asT" firstAttribute="top" secondItem="6Mp-nC-F2Z" secondAttribute="bottom" constant="8" symbolic="YES" id="FSD-F0-MEQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="VAn-0y-asT" secondAttribute="bottom" constant="26" id="GCW-T9-HaN"/>
-                                    <constraint firstItem="VAn-0y-asT" firstAttribute="centerX" secondItem="zpC-Ha-otG" secondAttribute="centerX" id="NTL-jR-KD1"/>
                                     <constraint firstItem="6Mp-nC-F2Z" firstAttribute="top" secondItem="YJZ-dK-bwv" secondAttribute="bottom" constant="8" symbolic="YES" id="V7q-V5-57E"/>
                                     <constraint firstItem="YJZ-dK-bwv" firstAttribute="leading" secondItem="zpC-Ha-otG" secondAttribute="leadingMargin" id="bpK-hz-JhM"/>
                                     <constraint firstItem="VAn-0y-asT" firstAttribute="leading" secondItem="zpC-Ha-otG" secondAttribute="leading" constant="20" symbolic="YES" id="cqf-44-B5p"/>
@@ -467,13 +465,6 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                     <constraint firstAttribute="trailing" secondItem="YJZ-dK-bwv" secondAttribute="trailing" constant="24" id="vG0-86-Pjb"/>
                                     <constraint firstItem="VAn-0y-asT" firstAttribute="top" secondItem="6Mp-nC-F2Z" secondAttribute="bottom" constant="8" symbolic="YES" id="vb7-11-gjS"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="FSD-F0-MEQ"/>
-                                        <exclude reference="GCW-T9-HaN"/>
-                                        <exclude reference="NTL-jR-KD1"/>
-                                    </mask>
-                                </variation>
                                 <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="32" y="64" width="504" height="35"/>
                                 </variation>
