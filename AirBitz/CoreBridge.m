@@ -1510,55 +1510,6 @@ static BOOL bOtpError = NO;
     [Util printABC_Error: &Error];
 }
 
-+ (uint64_t)maxSpendable:(NSString *)walletUUID
-               toAddress:(NSString *)destAddress
-              isTransfer:(BOOL)bTransfer
-{
-    tABC_Error Error;
-    uint64_t result = 0;
-    ABC_MaxSpendable([[User Singleton].name UTF8String],
-                     [[User Singleton].password UTF8String],
-                     [walletUUID UTF8String],
-                     [destAddress UTF8String],
-                     bTransfer, &result, &Error);
-    [Util printABC_Error: &Error];
-    return result;
-}
-
-+ (bool)calcSendFees:(NSString *) walletUUID 
-                 sendTo:(NSString *) destAddr
-           amountToSend:(int64_t) sendAmount
-         storeResultsIn:(int64_t *) totalFees
-         walletTransfer:(bool) bTransfer
-{
-    tABC_Error error;
-    tABC_TxDetails details;
-    details.amountSatoshi = sendAmount;
-    details.amountCurrency = 0;
-    details.amountFeesAirbitzSatoshi = 0;
-    details.amountFeesMinersSatoshi = 0;
-    details.szName = "";
-    details.szCategory = "";
-    details.szNotes = "";
-    details.attributes = 0;
-    if (ABC_CalcSendFees([[User Singleton].name UTF8String],
-                         [[User Singleton].password UTF8String],
-                         [walletUUID UTF8String],
-                         [destAddr UTF8String],
-                         bTransfer,
-                         &details,
-                         totalFees,
-                         &error) != ABC_CC_Ok)
-    {
-        if (error.code != ABC_CC_InsufficientFunds)
-        {
-            [Util printABC_Error: &error];
-        }
-        return false;
-    }
-    return true;
-}
-
 + (void)requestExchangeRateUpdate:(NSTimer *)object
 {
     [exchangeQueue addOperationWithBlock:^{
