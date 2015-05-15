@@ -119,7 +119,7 @@
             _signupPasswordController = nil;
             _current = _signupUsernameController;
             _current.view.alpha = 1.0;
-            [MainViewController animateView:_current.view withBlur:NO];
+            [MainViewController animateFadeIn:_current.view];
         }];
     }
 }
