@@ -62,6 +62,7 @@
     }
     else if (_current == _signupPasswordController)
     {
+        [MainViewController changeNavBar:self title:@"" side:NAV_BAR_LEFT button:false enable:false action:@selector(back:) fromObject:self];
         if(!_bHasCameraAccess) {
             [self launchCameraController];
         }
