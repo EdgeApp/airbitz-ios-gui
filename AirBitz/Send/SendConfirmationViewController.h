@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Wallet.h"
+#import "ABC.h"
+#import "SpendTarget.h"
 
 @protocol SendConfirmationViewControllerDelegate;
 
@@ -15,16 +17,9 @@
 
 
 @property (assign)              id<SendConfirmationViewControllerDelegate>  delegate;
-@property (nonatomic, copy)     NSString                                    *sendToAddress;
-@property (nonatomic, copy)     NSString                                    *nameLabel;
-@property (nonatomic, copy)     NSString                                    *category;
-@property (nonatomic, copy)     NSString                                    *notes;
-@property (nonatomic, copy)     NSString                                    *returnUrl;
-@property (nonatomic, assign)   int64_t                                     amountToSendSatoshi;
 @property (nonatomic, assign)   double                                      overrideCurrency;
+@property (nonatomic, strong)   SpendTarget                                 *spendTarget;
 @property (nonatomic, strong)   Wallet                                      *wallet;
-@property (nonatomic, strong)   Wallet                                      *destWallet;
-@property (nonatomic, assign)   BOOL                                        bAddressIsWalletUUID;
 @property (nonatomic, assign)   BOOL                                        bAdvanceToTx;
 
 @end

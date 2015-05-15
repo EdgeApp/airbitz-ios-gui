@@ -50,7 +50,7 @@
 #import "FadingAlertView2.h"
 #import "MainViewController.h"
 #import "Theme.h"
-
+#import "SpendTarget.h"
 
 #define BLE_TIMEOUT                 1.0
 
@@ -291,7 +291,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //	_startScannerTimer = nil;
 #if !TARGET_IPHONE_SIMULATOR
 	[self stopQRReader];
-#endif
 
 	// Don't keep it going while we're not showing.
 	if([LocalSettings controller].bDisableBLE == NO)
@@ -299,6 +298,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		[self stopBLE];
 		_centralManager = nil;
 	}
+#endif
 	scanMode = SCAN_MODE_UNINITIALIZED;
 }
 
@@ -389,6 +389,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #if TARGET_IPHONE_SIMULATOR
 
 -(void)startQRReader
+{
+}
+
+- (void)stopQRReader
 {
 }
 
@@ -1300,26 +1304,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 // if bToIsUUID NO, then it is assumed the strTo is an address
-- (void)showSendConfirmationTo:(NSString *)strTo amount:(long long)amount nameLabel:(NSString *)nameLabel
-                      category:(NSString *)category returnUrl:(NSString *)returnUrl toIsUUID:(BOOL)bToIsUUID
+- (void)showSendConfirmationTo:(SpendTarget *)spendTarget
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
 
 	_sendConfirmationViewController.delegate = self;
-	_sendConfirmationViewController.sendToAddress = strTo;
-    _sendConfirmationViewController.category = category;
-    _sendConfirmationViewController.returnUrl = returnUrl;
-    _sendConfirmationViewController.bAddressIsWalletUUID = bToIsUUID;
-	_sendConfirmationViewController.amountToSendSatoshi = amount;
+    _sendConfirmationViewController.spendTarget = spendTarget;
     _sendConfirmationViewController.wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-    if (bToIsUUID)
-    {
-        Wallet *destWallet = [CoreBridge getWallet:strTo];
-        _sendConfirmationViewController.destWallet = destWallet;
-        _sendConfirmationViewController.sendToAddress = destWallet.strName;
-    }
-	_sendConfirmationViewController.nameLabel = nameLabel;
 
     //NSLog(@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
 	
@@ -1348,45 +1340,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     BOOL bSuccess = YES;
 
-	for(ZBarSymbol *sym in syms)
+	for (ZBarSymbol *sym in syms)
 	{
+        tABC_Error error;
 		NSString *text = (NSString *)sym.data;
-
-		tABC_Error Error;
-		tABC_BitcoinURIInfo *uri;
-		ABC_ParseBitcoinURI([text UTF8String], &uri, &Error);
-		[Util printABC_Error:&Error];
-
-		if (uri != NULL)
-		{
-			if (uri->szAddress)
-			{
-                NSString *label = uri->szLabel ?  [NSString stringWithUTF8String:uri->szLabel] : @"";
-                NSString *category = uri->szCategory ? [NSString stringWithUTF8String:uri->szCategory] : @"";
-                NSString *returnUrl = uri->szRet ?  [NSString stringWithUTF8String:uri->szRet] : @"";
-
-                if (![Util isValidCategory:category]) {
-                    category = @"";
-                }
-
-                bSuccess = YES;
-                [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi
-                                   nameLabel:label category:category returnUrl:returnUrl toIsUUID:NO];
-			}
-			else
-			{
-				printf("No address!");
-                bSuccess = NO;
-			}
-		}
-		else
-		{
-			printf("URI parse failed!");
+        SpendTarget *spendTarget = [[SpendTarget alloc] init];
+		if ([spendTarget newSpend:text error:&error]) {
+            bSuccess = YES;
+            [self showSendConfirmationTo:spendTarget];
+		} else {
             bSuccess = NO;
-		}
-
-        if (!bSuccess)
-        {
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:NSLocalizedString(@"Invalid Bitcoin Address", nil)
                                   message:NSLocalizedString(@"", nil)
@@ -1395,12 +1358,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                   otherButtonTitles:nil];
             [alert show];
         }
-
-        if (uri != NULL) {
-            ABC_FreeURIInfo(uri);
-            uri = NULL;
-        }
-        
 		break; //just grab first one
 	}
 
@@ -1695,62 +1652,26 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)doProcessURI
 {
+    tABC_Error error;
     BOOL bSuccess = YES;
-    tABC_BitcoinURIInfo *uri = NULL;
+    SpendTarget *spendTarget = [[SpendTarget alloc] init];
+    NSString *text = _addressTextField.text;
 
-    if (self.addressTextField.text.length)
+    if (text.length)
 	{
-        BOOL bIsUUID = NO;
-        
-        
-        NSString *label;
-        NSString *category;
-        NSString *returnUrl;
-        NSString *strTo = self.addressTextField.text;
-
         // see if the text corresponds to one of the wallets
-        NSInteger index = [self.arrayWalletNames indexOfObject:self.addressTextField.text];
+        NSInteger index = [self.arrayWalletNames indexOfObject:text];
         if (index != NSNotFound)
         {
-            bIsUUID = YES;
             Wallet *wallet = [self.arrayWallets objectAtIndex:index];
-            //NSLog(@"using UUID for wallet: %@", wallet.strName);
-            strTo = wallet.strUUID;
-#if !TARGET_IPHONE_SIMULATOR
+            [spendTarget newTransfer:wallet.strUUID error:&error];
             [self stopQRReader];
-#endif
-            [self showSendConfirmationTo:strTo amount:0.0 nameLabel:@"" category:@"" returnUrl:@"" toIsUUID:bIsUUID];
+            [self showSendConfirmationTo:spendTarget];
 
         }
         else
         {
-            tABC_Error Error;
-            ABC_ParseBitcoinURI([strTo UTF8String], &uri, &Error);
-            [Util printABC_Error:&Error];
-            
-            if (uri != NULL)
-            {
-                if (uri->szAddress)
-                {
-                    label = uri->szLabel ? [NSString stringWithUTF8String:uri->szLabel] : @"";
-                    category = uri->szCategory ? [NSString stringWithUTF8String:uri->szCategory] : @"";
-                    returnUrl = uri->szRet ?  [NSString stringWithUTF8String:uri->szRet] : @"";
-                    if (![Util isValidCategory:category]) {
-                        category = @"";
-                    }
-                }
-                else
-                {
-                    printf("No address!");
-                    bSuccess = NO;
-                }
-            }
-            else
-            {
-                printf("URI parse failed!");
-                bSuccess = NO;
-            }
-            
+            bSuccess = [spendTarget newSpend:text error:&error];
         }
 
         if (!bSuccess)
@@ -1765,38 +1686,29 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-#if !TARGET_IPHONE_SIMULATOR
             [self stopQRReader];
-#endif
-            if (uri != NULL)
-            {
-                [self showSendConfirmationTo:[NSString stringWithUTF8String:uri->szAddress] amount:uri->amountSatoshi nameLabel:label
-                                    category:category returnUrl:returnUrl toIsUUID:NO];
-            }
+            [self showSendConfirmationTo:spendTarget];
         }
 	}
-
-    if (uri != NULL) {
-        ABC_FreeURIInfo(uri);
-        uri = NULL;
-    }
 }
 
 - (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
 {
+    tABC_Error error;
     // set the text field to the choice
     NSInteger index = [[self.arrayChoicesIndexes objectAtIndex:row] integerValue];
     Wallet *wallet = [self.arrayWallets objectAtIndex:index];
+
+    SpendTarget *spendTarget = [[SpendTarget alloc] init];
+    [spendTarget newTransfer:wallet.strUUID error:&error];
+
     pickerTextView.textField.text = wallet.strName;
 	[pickerTextView.textField resignFirstResponder];
 
     if (pickerTextView.textField.text.length)
 	{
-#if !TARGET_IPHONE_SIMULATOR
         [self stopQRReader];
-#endif
-        //NSLog(@"using UUID for wallet: %@", wallet.strName);
-        [self showSendConfirmationTo:wallet.strUUID amount:0.0 nameLabel:@"" category:@"" returnUrl:@"" toIsUUID:YES];
+        [self showSendConfirmationTo:spendTarget];
 	}
 }
 
