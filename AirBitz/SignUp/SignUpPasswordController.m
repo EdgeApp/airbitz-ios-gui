@@ -333,7 +333,7 @@
             frame.origin.y += PASSWORD_VERIFY_FRAME_Y_OFFSET;
             _passwordVerifyView.frame = frame;
             
-            _contentStartConstraint.constant += 46; // lower the view to see PIN
+            _contentStartConstraint.constant += 56; // lower the view to see PIN
         }
         _passwordVerifyView.password = textField.text;
     }
