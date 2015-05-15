@@ -13,6 +13,13 @@
 
 @interface CoreBridge : NSObject
 
+@property (nonatomic, strong) NSMutableArray            *arrayWallets;
+@property (nonatomic, strong) NSMutableArray            *arrayArchivedWallets;
+@property (nonatomic, strong) NSMutableArray            *arrayUUIDs;
+@property (nonatomic, strong) Wallet                    *currentWallet;
+
+
++ (CoreBridge *)Singleton;
 + (void)initAll;
 + (void)freeAll;
 + (void)startQueues;
@@ -22,13 +29,26 @@
 + (void)postToWalletsQueue:(void(^)(void))cb;
 + (int)dataOperationCount;
 
+
+// Old methods. Need to deprecate
 + (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs;
 + (void)loadWallets:(NSMutableArray *)arrayWallets;
 + (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx;
 + (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx;
 + (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets;
 + (void)reloadWallet: (Wallet *) wallet;
+// XXX DELETE ABOVE WHEN FULLY CLEANED UP TO USE NEW METHODS -paulvp
+
 + (void)refreshWallet:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb;
+
+// New methods
++ (void)refreshWallets;
++ (void)reorderWallets: (NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
++ (void)makeCurrentWallet:(NSIndexPath *)indexPath;
++ (Wallet *)selectWalletWithUUID:(NSString *)strUUID;
+
+
+
 + (Wallet *)getWallet: (NSString *)walletUUID;
 + (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
 + (int64_t)getTotalSentToday:(Wallet *)wallet;

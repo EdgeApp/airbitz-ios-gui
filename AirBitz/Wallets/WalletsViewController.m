@@ -484,7 +484,7 @@
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_transactionsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
 	_transactionsController.delegate = self;
-	_transactionsController.wallet = wallet;
+//	_transactionsController.wallet = wallet;
 
 	CGRect frame = self.view.bounds;
 	frame.origin.x = frame.size.width;
