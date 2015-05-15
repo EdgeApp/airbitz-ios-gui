@@ -42,6 +42,8 @@
 #define PICKER_WIDTH                    160
 #define PICKER_CELL_HEIGHT              40
 
+#define HEADER_PADDING                  30
+
 #define PICKER_MAX_CELLS_VISIBLE 4
 
 #define USE_AUTOCOMPLETE_QUERY 0
@@ -85,9 +87,11 @@ typedef enum eRequestType
     BusinessDetailsViewController *businessDetailsController;
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollableContentBottom;
 @property (nonatomic, weak) IBOutlet UIView                 *headerView;
 @property (nonatomic, weak) IBOutlet UIView                 *contentView;
 @property (nonatomic, weak) IBOutlet UIView                 *scrollableContentView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *calculatorBottom;
 
 @property (weak, nonatomic) IBOutlet UIView                 *viewPhoto;
 @property (weak, nonatomic) IBOutlet UIButton               *imagePhotoButton;
@@ -237,7 +241,7 @@ typedef enum eRequestType
     [self.pickerTextCategory setTopMostView:self.view];
     [self.pickerTextCategory setCategories:self.arrayCategories];
     //self.pickerTextCategory.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
-    self.pickerTextCategory.cropPointBottom = 360; // magic number
+//    self.pickerTextCategory.cropPointBottom = 360; // magic number
     self.pickerTextCategory.delegate = self;
 
     _bizId = self.transaction.bizId;
@@ -326,9 +330,10 @@ typedef enum eRequestType
         }
 
         // push the calculator keypad to below the bottom of the screen
-        frame = self.keypadView.frame;
-        frame.origin.y = frame.origin.y + frame.size.height;
-        self.keypadView.frame = frame;
+        _calculatorBottom.constant = -_keypadView.frame.size.height;
+//        frame = self.keypadView.frame;
+//        frame.origin.y = frame.origin.y + frame.size.height;
+//        self.keypadView.frame = frame;
     }
 
     NSMutableString *coinFormatted = [[NSMutableString alloc] init];
@@ -370,6 +375,7 @@ typedef enum eRequestType
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(info:) fromObject:self];
 
     [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -548,7 +554,11 @@ typedef enum eRequestType
 
     //spawn infoView
     InfoView *iv = [InfoView CreateWithDelegate:self];
-    iv.frame = self.view.bounds;
+    CGRect frame = self.view.bounds;
+    frame.origin.y = [MainViewController getHeaderHeight] + 5;
+    frame.size.height -= [MainViewController getHeaderHeight] + [MainViewController getFooterHeight] + 5;
+
+    iv.frame = frame;
     
     NSString* path = [[NSBundle mainBundle] pathForResource:@"transactionDetails" ofType:@"html"];
     NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
@@ -801,19 +811,26 @@ typedef enum eRequestType
     return stretchable;
 }
 
-- (void)scrollContentViewToFrame:(CGRect)newFrame
+- (CGFloat)scrollContentViewToFrame:(CGRect) frame
 {
+    CGFloat yOffset = frame.origin.y - [MainViewController getHeaderHeight] - HEADER_PADDING;
+
     [UIView animateWithDuration:0.35
                           delay: 0.0
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
-         self.scrollableContentView.frame = newFrame;
+         self.scrollableContentBottom.constant = yOffset;
+         [self.view layoutIfNeeded];
+
      }
                      completion:^(BOOL finished)
      {
 
      }];
+
+    return yOffset;
+
 }
 
 - (void)scrollContentViewBackToOriginalPosition
@@ -825,7 +842,9 @@ typedef enum eRequestType
      {
          self.headerView.frame = _originalHeaderFrame;
          self.contentView.frame = _originalContentFrame;
-         self.scrollableContentView.frame = _originalScrollableContentFrame;
+         self.scrollableContentBottom.constant = 0;
+         [self.view layoutIfNeeded];
+//         self.scrollableContentView.frame = _originalScrollableContentFrame;
      }
      completion:^(BOOL finished)
      {
@@ -1323,11 +1342,13 @@ typedef enum eRequestType
 
 #pragma mark - Payee Table
 
-- (void)spawnPayeeTableInFrame:(CGRect)frame
+- (void)spawnPayeeTableInFrame
 {
-    CGRect startingFrame = frame;
-    startingFrame.size.height = 0;
-    _autoCompleteTable = [[UITableView alloc] initWithFrame:startingFrame];
+    CGRect frame = _nameTextField.superview.frame;
+
+    frame.origin.y = _nameTextField.frame.origin.y + _nameTextField.frame.size.height + 3;
+
+    _autoCompleteTable = [[UITableView alloc] initWithFrame:_nameTextField.frame];
     _autoCompleteTable.backgroundColor = TABLE_CELL_BACKGROUND_COLOR;
     _autoCompleteTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];     // This will remove extra separators from tableview
     [self.view addSubview:_autoCompleteTable];
@@ -1581,9 +1602,7 @@ typedef enum eRequestType
 {
     if ([text isEqualToString:(NSString *) @"\n"])
     {
-        CGRect scrollFrame = self.scrollableContentView.frame;
-
-        [self scrollContentViewToFrame:scrollFrame];
+        [self scrollContentViewBackToOriginalPosition];
         [textView resignFirstResponder];
     }
     return YES;
@@ -1597,11 +1616,11 @@ typedef enum eRequestType
     
     if (textView == self.notesTextView)
     {
-        scrollFrame.origin.y = -self.notesTextView.frame.origin.y + 30;
+//        scrollFrame.origin.y = -self.notesTextView.frame.origin.y + 30;
+        [self scrollContentViewToFrame:self.notesTextView.frame];
         [self dismissPayeeTable];
     }
     
-    [self scrollContentViewToFrame:scrollFrame];
 }
 
 #pragma mark - UITextField delegates
@@ -1622,20 +1641,17 @@ typedef enum eRequestType
 
     if (textField == self.nameTextField)
     {
-        scrollFrame.origin.y = -self.nameTextField.frame.origin.y + 10;
-
-        CGRect frame = self.view.bounds;
-        frame.origin.y = 100;
-        frame.size.height = 252;
-        [self spawnPayeeTableInFrame:frame];
         [self updateAutoCompleteArray];
+        [self scrollContentViewToFrame:self.nameTextField.frame];
+        [self.view layoutIfNeeded];
+        [self spawnPayeeTableInFrame];
     }
     else
     {
-        scrollFrame.origin.y = _originalScrollableContentFrame.origin.y;
+        [self scrollContentViewBackToOriginalPosition];
+//        scrollFrame.origin.y = _originalScrollableContentFrame.origin.y;
     }
 
-    [self scrollContentViewToFrame:scrollFrame];
 
     // highlight all the text
     [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
@@ -1789,17 +1805,22 @@ typedef enum eRequestType
     //       so we want the table to always be as large as it can be
 
     // first start the popup pickerit right under the control and squished down
-    CGRect frame = self.pickerTextCategory.popupPicker.frame;
-    frame.size.height = 20;
-    //frame.size.height = 220; // magic number to make it as big as possible
-    CGPoint pickerLocationScreen = [pickerTextView.superview convertPoint:pickerTextView.frame.origin toView:nil];
-    frame.origin.y = pickerLocationScreen.y + pickerTextView.frame.size.height - 10;
-    self.pickerTextCategory.popupPicker.frame = frame;
+//    CGRect frame = self.pickerTextCategory.popupPicker.frame;
+//    frame.size.height = 20;
+//    //frame.size.height = 220; // magic number to make it as big as possible
+//    CGPoint pickerLocationScreen = [pickerTextView.superview convertPoint:pickerTextView.frame.origin toView:nil];
+//    frame.origin.y = pickerLocationScreen.y + pickerTextView.frame.size.height - 10;
+//    self.pickerTextCategory.popupPicker.frame = frame;
+//
+//    // now move the window up so that the category field is at the top
+//    CGRect scrollFrame = self.scrollableContentView.frame;
+//    scrollFrame.origin.y = -self.pickerTextCategory.frame.origin.y + 10;
+//    [self scrollContentViewToFrame:scrollFrame];
+    CGFloat yOffset = [self scrollContentViewToFrame:self.pickerTextCategory.frame];
 
-    // now move the window up so that the category field is at the top
-    CGRect scrollFrame = self.scrollableContentView.frame;
-    scrollFrame.origin.y = -self.pickerTextCategory.frame.origin.y + 10;
-    [self scrollContentViewToFrame:scrollFrame];
+    CGRect frame = self.pickerTextCategory.popupPicker.frame;
+    frame.origin.y = self.pickerTextCategory.frame.origin.y + self.pickerTextCategory.frame.size.height + 3 - yOffset;
+
     [self blockUser:TRUE];
 
     // bring the picker up with it
@@ -1808,9 +1829,9 @@ typedef enum eRequestType
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
-         CGRect frame = self.pickerTextCategory.popupPicker.frame;
-         frame.origin.y = 130;
-         frame.size.height = 220; // magic number to make it as big as possible
+//         CGRect frame = self.pickerTextCategory.popupPicker.frame;
+//         frame.origin.y = 130;
+//         frame.size.height = 220; // magic number to make it as big as possible
          self.pickerTextCategory.popupPicker.frame = frame;
      }
                      completion:^(BOOL finished)
@@ -1847,6 +1868,20 @@ typedef enum eRequestType
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
+    NSDictionary *userInfo = [notification userInfo];
+    CGRect keyboardFrame = [[userInfo objectForKey: UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
+    if (nil != _autoCompleteTable)
+    {
+        CGRect frame = _autoCompleteTable.frame;
+        frame.size.height = keyboardFrame.origin.y - _autoCompleteTable.frame.origin.y;
+        _autoCompleteTable.frame = frame;
+    }
+
+    CGRect frame;
+    frame = self.pickerTextCategory.popupPicker.frame;
+    frame.size.height = keyboardFrame.origin.y - self.pickerTextCategory.popupPicker.frame.origin.y;
+    self.pickerTextCategory.popupPicker.frame = frame;
     //NSLog(@"keyboard will show");
 }
 
