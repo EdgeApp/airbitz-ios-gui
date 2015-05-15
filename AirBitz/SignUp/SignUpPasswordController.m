@@ -12,7 +12,7 @@
 #import "User.h"
 
 #define KEYBOARD_MARGIN         10.0
-#define PASSWORD_VERIFY_FRAME_Y_OFFSET 20
+#define PASSWORD_VERIFY_FRAME_Y_OFFSET 66
 
 @interface SignUpPasswordController () <UITextFieldDelegate, PasswordVerifyViewDelegate>
 {
