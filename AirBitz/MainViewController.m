@@ -580,7 +580,7 @@ MainViewController *staticMVC;
 			{
 				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-                    _requestViewController.walletUUID = self.strWalletUUID;
+//                    _requestViewController.walletUUID = self.strWalletUUID;
 					[_selectedViewController.view removeFromSuperview];
 					_selectedViewController = _requestViewController;
 					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];

@@ -121,7 +121,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, copy)   NSString *strFullName;
 @property (nonatomic, copy)   NSString *strPhoneNumber;
 @property (nonatomic, copy)   NSString *strEMail;
-@property (nonatomic, strong) NSArray  *arrayWallets;
+//@property (nonatomic, strong) NSArray  *arrayWallets;
 
 @end
 
@@ -212,7 +212,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     // add left to right swipe detection for going back
 //    [self installLeftToRightSwipeDetection];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 
 }
 
@@ -229,7 +228,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     // create a dummy view to replace the keyboard if we are on a 4.5" screen
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
 
-	[self loadWalletInfo];
+//	[self loadWalletInfo];
 
 //XXX	self.BTCLabel_TextField.text = [User Singleton].denominationLabel;
     [self.segmentedControlBTCUSD setTitle:[User Singleton].denominationLabel forSegmentAtIndex:1];
@@ -250,8 +249,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [self changeCalculator:false show:false];
     }
 
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
-    [self exchangeRateUpdate:nil];
+//    [self exchangeRateUpdate:nil];
 
     if (!bInitialized) {
         topFrame = self.USD_TextField.frame;
@@ -271,10 +269,42 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                     withDelay:FADING_HELP_DELAY];
     }
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
+
+    [self updateViews:nil];
 }
 
+- (void)updateViews:(NSNotification *)notification
+{
+    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    {
+        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
+        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
 
--(void)viewDidAppear:(BOOL)animated
+        NSString *walletName = [NSString stringWithFormat:@"To: %@ ↓", [CoreBridge Singleton].currentWallet.strName];
+        [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
+
+        self.keypadView.currencyNum = [CoreBridge Singleton].currentWallet.currencyNum;
+
+        [self updateTextFieldContents:YES];
+
+        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        {
+            _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+            _fadingAlert.fadeDelay = 9999;
+            _fadingAlert.fadeDuration = FADING_HELP_DURATION;
+            [_fadingAlert messageTextSet:NSLocalizedString(@"This wallet has been archived. Please select a different wallet from the [Wallets] tab below", @"Popup sessage for when a wallet is archived")];
+            [_fadingAlert blockModal:YES];
+            [_fadingAlert showFading];
+
+        }
+    }
+}
+
+    -(void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 
@@ -296,7 +326,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [self.peripheralManager stopAdvertising];
         _peripheralManager = nil;
     }
-    [CoreBridge prioritizeAddress:nil inWallet:_walletUUID];
+    if (!(nil == _fadingAlert))
+        [_fadingAlert dismiss:NO];
+    [CoreBridge prioritizeAddress:nil inWallet:[CoreBridge Singleton].currentWallet.strUUID];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -508,9 +540,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         self.previousAmountSatoshiRequested = self.amountSatoshiRequested;
         bChangeRequest = true;
     }
-    if (previousWalletUUID != _walletUUID)
+    if (previousWalletUUID != [CoreBridge Singleton].currentWallet.strUUID)
     {
-        previousWalletUUID = _walletUUID;
+        previousWalletUUID = [CoreBridge Singleton].currentWallet.strUUID;
         bChangeRequest = true;
     }
     if (incomingSatoshi)
@@ -557,6 +589,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         self.amountSatoshiReceived = 0;
         self.amountSatoshiRequested = 0;
     }
+
+    //
+    // Done with validation. Now to change the GUI
+    //
 
     NSString *strName = @"";
     NSString *strCategory = @"";
@@ -608,15 +644,29 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             break;
         }
     }
-    UIImage *qrImage = [self createRequestQRImageFor:strName withNotes:strNotes withCategory:strCategory
-                                    storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
-                                        scaleAndSave:NO withAmount:remaining];
 
-    self.qrCodeImageView.image = qrImage;
-    addressString = strRequestAddress;
-    _uriString = strRequestURI;
+    //
+    // Change the QR code. This is a slow call so put it in a queue
+    //
+    [CoreBridge postToWalletsQueue:^(void) {
 
-    [CoreBridge prioritizeAddress:addressString inWallet:_walletUUID];
+        UIImage *qrImage = [self createRequestQRImageFor:strName withNotes:strNotes withCategory:strCategory
+                                        storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
+                                            scaleAndSave:NO withAmount:remaining];
+
+
+        addressString = strRequestAddress;
+        _uriString = strRequestURI;
+        [CoreBridge prioritizeAddress:addressString inWallet:[CoreBridge Singleton].currentWallet.strUUID];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            self.statusLine3.text = addressString;
+            self.qrCodeImageView.image = qrImage;
+        });
+    }];
+
+
+
 
 //    if(addressString.length >= 8)
 //    {
@@ -634,21 +684,21 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 //        }
 //    }
 //    else
-    {
-        self.statusLine3.text = addressString;
-    }
 
     if (incomingSatoshi)
     {
         [self showPaymentPopup:self.state amount:incomingSatoshi];
     }
 
+    if([LocalSettings controller].bDisableBLE)
+    {
+        self.BLE_LogoImageView.hidden = YES;
+    }
 
     //
     // If request has changed or is brand new, startup the BLE manager and start broadcasting
     //
-//    if (1)
-    {
+    [CoreBridge postToWalletsQueue:^(void) {
         if(self.peripheralManager.isAdvertising) {
             NSLog(@"Removing all BLE services and stopping advertising");
             [self.peripheralManager removeAllServices];
@@ -656,11 +706,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             _peripheralManager = nil;
         }
 
-        if([LocalSettings controller].bDisableBLE)
-        {
-            self.BLE_LogoImageView.hidden = YES;
-        }
-        else
+        if(![LocalSettings controller].bDisableBLE)
         {
             // Start up the CBPeripheralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
             NSTimeInterval curTime = CACurrentMediaTime();
@@ -674,8 +720,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             }
             lastPeripheralBLEPowerOffNotificationTime = curTime;
         }
-        return self.state;
-    }
+    }];
+
+    return self.state;
 
 //
 //    ShowWalletQRViewController *tempQRViewController = NULL;
@@ -1084,11 +1131,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
     tABC_Error error;
     
-    if (_selectedWalletIndex >= [self.arrayWallets count])
-    {
-        return;
-    }
-
     Wallet *wallet = [self getCurrentWallet];
     
     self.exchangeRateLabel.text = [CoreBridge conversionString:wallet];
@@ -1142,13 +1184,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
 	}
 
-    NSString *walletName;
-
-    walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
-
-    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
+//    NSString *walletName;
+//
+//    walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
+//
+//    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
     [self updateQRCode:0];
-
+//
 }
 
 - (void)didTapTitle: (UIButton *)sender
@@ -1166,65 +1208,65 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 }
 
-- (void)loadWalletInfo
-{
-    [CoreBridge postToWalletsQueue:^(void) {
-        // load all the non-archive wallets
-        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-        NSString *newWalletUUID = nil;
-        int newWalletIndex = 0;
-
-        [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
-
-        // create the array of wallet names
-        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
-        for (int i = 0; i < [arrayWallets count]; i++)
-        {
-            Wallet *wallet = [arrayWallets objectAtIndex:i];
-
-            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
-
-            if ([_walletUUID length] == 0)
-            {
-                // walletID is uninitialized. Choose the primary wallet
-                if (i == 0)
-                {
-                    newWalletUUID = wallet.strUUID;
-                    newWalletIndex = i;
-                }
-            }
-            else
-            {
-                if (_walletUUID == wallet.strUUID)
-                    newWalletIndex = i;
-            }
-        }
-
-        dispatch_async(dispatch_get_main_queue(),^{
-
-            self.arrayWallets = arrayWallets;
-            _selectedWalletIndex = newWalletIndex;
-            if (newWalletIndex != nil)
-                _walletUUID = newWalletUUID;
-
-            if (_selectedWalletIndex < [arrayWallets count])
-            {
-                Wallet *wallet = [self getCurrentWallet];
-                self.keypadView.currencyNum = wallet.currencyNum;
-
-                self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-                [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-                self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
-                _btcLabel.text = [User Singleton].denominationLabel;
-                _fiatLabel.text = wallet.currencyAbbrev;
-                
-            }
-
-            [self updateTextFieldContents:YES];
-        });
-    }];
-
-}
+//- (void)loadWalletInfo
+//{
+//    [CoreBridge postToWalletsQueue:^(void) {
+//        // load all the non-archive wallets
+//        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+//        NSString *newWalletUUID = nil;
+//        int newWalletIndex = 0;
+//
+//        [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
+//
+//        // create the array of wallet names
+//        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
+//        for (int i = 0; i < [arrayWallets count]; i++)
+//        {
+//            Wallet *wallet = [arrayWallets objectAtIndex:i];
+//
+//            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+//
+//            if ([_walletUUID length] == 0)
+//            {
+//                // walletID is uninitialized. Choose the primary wallet
+//                if (i == 0)
+//                {
+//                    newWalletUUID = wallet.strUUID;
+//                    newWalletIndex = i;
+//                }
+//            }
+//            else
+//            {
+//                if (_walletUUID == wallet.strUUID)
+//                    newWalletIndex = i;
+//            }
+//        }
+//
+//        dispatch_async(dispatch_get_main_queue(),^{
+//
+//            self.arrayWallets = arrayWallets;
+//            _selectedWalletIndex = newWalletIndex;
+//            if (newWalletIndex != nil)
+//                _walletUUID = newWalletUUID;
+//
+//            if (_selectedWalletIndex < [arrayWallets count])
+//            {
+//                Wallet *wallet = [self getCurrentWallet];
+//                self.keypadView.currencyNum = wallet.currencyNum;
+//
+//                self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
+//                [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+//                self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
+//                _btcLabel.text = [User Singleton].denominationLabel;
+//                _fiatLabel.text = wallet.currencyAbbrev;
+//
+//            }
+//
+//            [self updateTextFieldContents:YES];
+//        });
+//    }];
+//
+//}
 
 - (void)bringUpImportWalletView
 {
@@ -1233,7 +1275,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _importWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ImportWalletViewController"];
 
-        Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+        Wallet *wallet = [CoreBridge Singleton].currentWallet;
         _importWalletViewController.walletUUID = wallet.strUUID;
         _importWalletViewController.delegate = self;
 
@@ -1275,17 +1317,21 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)ButtonSelector2:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
 {
-    _selectedWalletIndex = itemIndex;
+    NSIndexPath *indexPath = [[NSIndexPath alloc]init];
+    indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
+    [CoreBridge makeCurrentWallet:indexPath];
 
-    // Update wallet UUID
-    Wallet *wallet = [self getCurrentWallet];
-    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
-    
-    _walletUUID = wallet.strUUID;
-
-    self.keypadView.currencyNum = wallet.currencyNum;
-    [self updateTextFieldContents:YES];
+//    _selectedWalletIndex = itemIndex;
+//
+//    // Update wallet UUID
+//    Wallet *wallet = [self getCurrentWallet];
+//    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+//    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
+//
+//    _walletUUID = wallet.strUUID;
+//
+//    self.keypadView.currencyNum = wallet.currencyNum;
+//    [self updateTextFieldContents:YES];
     bWalletListDropped = false;
 }
 
@@ -1337,7 +1383,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (Wallet *) getCurrentWallet
 {
-    return [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+//    return [self.arrayWallets objectAtIndex:_selectedWalletIndex];
+    return [CoreBridge Singleton].currentWallet;
 }
 
 -(void)showConnectedPopup

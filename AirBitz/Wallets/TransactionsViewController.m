@@ -177,8 +177,6 @@
 
     [self initializeWalletsTable];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
-
 
     // add left to right swipe detection for going back
 //    [self installLeftToRightSwipeDetection];
@@ -244,6 +242,8 @@
     self.walletsView.layer.shadowOpacity = 0.2;
     [self.toolbarBlur setTranslucent:[Theme Singleton].bTranslucencyEnable];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+
     [self updateViews:nil];
 //    [self.balanceViewPlaceholder refresh];
 
@@ -264,6 +264,12 @@
 //        });
 //    }];
 //
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)updateViews:(NSNotification *)notification

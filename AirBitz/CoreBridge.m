@@ -103,11 +103,7 @@ static BOOL bOtpError = NO;
         singleton = [[CoreBridge alloc] init];
         bInitialized = YES;
 
-        singleton.arrayUUIDs = nil;
-        singleton.arrayWallets = nil;
-        singleton.arrayArchivedWallets = nil;
-        singleton.currentWallet = nil;
-
+        [CoreBridge cleanWallets];
     }
 }
 
@@ -120,6 +116,7 @@ static BOOL bOtpError = NO;
         walletsQueue = nil;
         singleton = nil;
         bInitialized = NO;
+        [CoreBridge cleanWallets];
     }
 }
 
@@ -332,8 +329,10 @@ static BOOL bOtpError = NO;
 {
     singleton.arrayWallets = nil;
     singleton.arrayArchivedWallets = nil;
+    singleton.arrayWalletNames = nil;
     singleton.arrayUUIDs = nil;
     singleton.currentWallet = nil;
+    singleton.currentWalletID = 0;
 }
 
 + (void)refreshWallets
@@ -342,25 +341,38 @@ static BOOL bOtpError = NO;
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
         NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
         NSMutableArray *arrayUUIDs = [[NSMutableArray alloc] init];
+        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] init];
 
         [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets withTxs:true];
         [CoreBridge loadWalletUUIDs:arrayUUIDs];
+
+        //
+        // Update wallet names for various dropdowns
+        //
+        for (int i = 0; i < [arrayWallets count]; i++)
+        {
+            Wallet *wallet = [arrayWallets objectAtIndex:i];
+            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+        }
 
         dispatch_async(dispatch_get_main_queue(),^{
             singleton.arrayWallets = arrayWallets;
             singleton.arrayArchivedWallets = arrayArchivedWallets;
             singleton.arrayUUIDs = arrayUUIDs;
+            singleton.arrayWalletNames = arrayWalletNames;
             if (nil == singleton.currentWallet)
             {
                 if ([singleton.arrayWallets count] > 0)
                 {
                     singleton.currentWallet = [arrayWallets objectAtIndex:0];
                 }
+                singleton.currentWalletID = 0;
             }
             else
             {
                 NSString *lastCurrentWalletUUID = singleton.currentWallet.strUUID;
                 singleton.currentWallet = [self selectWalletWithUUID:lastCurrentWalletUUID];
+                singleton.currentWalletID = [singleton.arrayWallets indexOfObject:singleton.currentWallet];
             }
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED
                                                                 object:self userInfo:nil];
@@ -2019,7 +2031,7 @@ static BOOL bOtpError = NO;
 //- (void)notifyBlockHeight:(NSArray *)params
 //{
 //    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:self];
-}
+//}
 
 - (void)notifyOtpRequired:(NSArray *)params
 {
