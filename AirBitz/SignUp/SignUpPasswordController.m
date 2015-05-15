@@ -28,6 +28,7 @@
 @property (nonatomic, weak) IBOutlet MinCharTextField *pinTextField;
 @property (nonatomic, weak) IBOutlet UIView                     *masterView;
 @property (nonatomic, weak) IBOutlet UIView                     *contentView;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint         *contentStartConstraint;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView    *activityView;
 @property (nonatomic, strong)   UIButton                        *buttonBlocker;
 @property (nonatomic)           CGFloat                         contentViewY;
@@ -328,6 +329,8 @@
             CGRect frame = _passwordVerifyView.frame;
             frame.origin.y += PASSWORD_VERIFY_FRAME_Y_OFFSET;
             _passwordVerifyView.frame = frame;
+            
+            _contentStartConstraint.constant += 46; // lower the view to see PIN
         }
         _passwordVerifyView.password = textField.text;
     }
@@ -336,6 +339,7 @@
         if(_passwordVerifyView)
         {
             [_passwordVerifyView dismiss];
+            _contentStartConstraint.constant = 44; // raise the view
         }
     }
     //won't do anything when a textField is tapped for the first time and no keyboard is visible because
@@ -346,15 +350,17 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-        UIView *view = [self.contentView viewWithTag:textField.tag + 1];
-        if (view)
-        {
-            [view becomeFirstResponder];
-        }
-        else
-        {
-            [textField resignFirstResponder];
-        }
+    if(textField == self.passwordTextField) {
+        [_reenterPasswordTextField becomeFirstResponder];
+    }
+    else if (textField == self.reenterPasswordTextField)
+    {
+        [_pinTextField becomeFirstResponder];
+    }
+    else
+    {
+        [textField resignFirstResponder];
+    }
     
     return YES;
 }
