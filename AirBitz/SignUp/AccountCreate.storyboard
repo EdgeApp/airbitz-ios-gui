@@ -143,7 +143,7 @@ Your username and password are known only to you and never stored unencrypted.</
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cx6-mG-7Op">
-                                <rect key="frame" x="0.0" y="64" width="600" height="244"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="288"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Set a Password and PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgQ-ju-YiX">
                                         <rect key="frame" x="16" y="8" width="560" height="21"/>
@@ -182,12 +182,6 @@ Your username and password are known only to you and never stored unencrypted.</
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The password is used to authenticate your account and to change sensitive settings." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3d-xe-eUq">
-                                        <rect key="frame" x="16" y="37" width="288" height="63"/>
-                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Create PIN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fV9-pz-Wfn" customClass="MinCharTextField">
                                         <rect key="frame" x="194" y="207" width="110" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -201,6 +195,12 @@ Your username and password are known only to you and never stored unencrypted.</
                                             <rect key="frame" x="670" y="151" width="110" height="30"/>
                                         </variation>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The password is used to authenticate your account and to change sensitive settings." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3d-xe-eUq">
+                                        <rect key="frame" x="16" y="37" width="288" height="63"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -210,14 +210,14 @@ Your username and password are known only to you and never stored unencrypted.</
                                     <constraint firstAttribute="trailing" secondItem="hoE-Bh-x2F" secondAttribute="trailing" constant="20" symbolic="YES" id="9kn-94-4TF"/>
                                     <constraint firstItem="jgQ-ju-YiX" firstAttribute="leading" secondItem="Cx6-mG-7Op" secondAttribute="leading" constant="20" symbolic="YES" id="A3C-KI-XT1"/>
                                     <constraint firstItem="Tqs-NN-dWt" firstAttribute="leading" secondItem="Cx6-mG-7Op" secondAttribute="leading" constant="20" symbolic="YES" id="AYU-7r-WlD"/>
-                                    <constraint firstItem="w3d-xe-eUq" firstAttribute="top" secondItem="jgQ-ju-YiX" secondAttribute="bottom" constant="8" symbolic="YES" id="Ffw-gm-fui"/>
+                                    <constraint firstItem="w3d-xe-eUq" firstAttribute="top" secondItem="jgQ-ju-YiX" secondAttribute="bottom" constant="30" id="Ffw-gm-fui"/>
                                     <constraint firstItem="fV9-pz-Wfn" firstAttribute="leading" secondItem="Tqs-NN-dWt" secondAttribute="trailing" constant="8" symbolic="YES" id="GDn-hH-Hm5"/>
                                     <constraint firstItem="w3d-xe-eUq" firstAttribute="leading" secondItem="Cx6-mG-7Op" secondAttribute="leading" constant="20" symbolic="YES" id="Gp5-xM-Ekj"/>
                                     <constraint firstItem="fnL-7h-MQL" firstAttribute="leading" secondItem="Cx6-mG-7Op" secondAttribute="leading" constant="20" symbolic="YES" id="Mrx-Es-Uea"/>
                                     <constraint firstItem="hoE-Bh-x2F" firstAttribute="leading" secondItem="Cx6-mG-7Op" secondAttribute="leading" constant="20" symbolic="YES" id="PKF-bm-6Zc"/>
                                     <constraint firstItem="Tqs-NN-dWt" firstAttribute="top" secondItem="hoE-Bh-x2F" secondAttribute="bottom" constant="8" symbolic="YES" id="Pqf-KV-Noe"/>
                                     <constraint firstItem="jgQ-ju-YiX" firstAttribute="top" secondItem="Cx6-mG-7Op" secondAttribute="top" constant="20" symbolic="YES" id="Pz4-YL-qQm"/>
-                                    <constraint firstItem="fnL-7h-MQL" firstAttribute="top" secondItem="w3d-xe-eUq" secondAttribute="bottom" constant="8" symbolic="YES" id="WQM-53-hV5"/>
+                                    <constraint firstItem="fnL-7h-MQL" firstAttribute="top" secondItem="w3d-xe-eUq" secondAttribute="bottom" constant="30" id="WQM-53-hV5"/>
                                     <constraint firstItem="Tqs-NN-dWt" firstAttribute="top" secondItem="hoE-Bh-x2F" secondAttribute="bottom" constant="8" symbolic="YES" id="a3z-PD-91N"/>
                                     <constraint firstItem="hoE-Bh-x2F" firstAttribute="trailing" secondItem="fnL-7h-MQL" secondAttribute="trailing" id="ffA-KU-6cK"/>
                                     <constraint firstAttribute="trailing" secondItem="w3d-xe-eUq" secondAttribute="trailing" constant="20" symbolic="YES" id="g9D-No-4Hr"/>
@@ -231,7 +231,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHD-NP-fM6" customClass="StylizedButton">
-                                <rect key="frame" x="465" y="316" width="119" height="41"/>
+                                <rect key="frame" x="465" y="360" width="119" height="41"/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="119" id="RAi-Zu-Su1"/>
