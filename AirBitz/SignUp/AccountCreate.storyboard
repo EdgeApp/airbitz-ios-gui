@@ -406,11 +406,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-Ha-otG">
-                                <rect key="frame" x="0.0" y="68" width="600" height="311"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-Ha-otG">
+                                <rect key="frame" x="10" y="68" width="580" height="327"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Camera Access" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJZ-dK-bwv">
-                                        <rect key="frame" x="8" y="0.0" width="568" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enable Camera Access" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJZ-dK-bwv">
+                                        <rect key="frame" x="18" y="0.0" width="552" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Pxd-wQ-T9f"/>
                                         </constraints>
@@ -422,9 +422,9 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAn-0y-asT">
-                                        <rect key="frame" x="16" y="183" width="568" height="102"/>
+                                        <rect key="frame" x="26" y="183" width="568" height="75"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="102" id="BuB-Go-fjV"/>
+                                            <constraint firstAttribute="height" constant="75" id="BuB-Go-fjV"/>
                                         </constraints>
                                         <string key="text">You will next see a popup requesting access to your Camera.
 
@@ -440,29 +440,54 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                         </variation>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="enable-camera.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Mp-nC-F2Z">
-                                        <rect key="frame" x="8" y="29" width="155" height="146"/>
+                                        <rect key="frame" x="18" y="29" width="155" height="146"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="155" id="cKf-zf-elw">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="100"/>
                                             </constraint>
+                                            <constraint firstAttribute="height" constant="146" id="yZt-Ml-wkU"/>
                                         </constraints>
                                         <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
                                             <rect key="frame" x="8" y="51" width="122" height="100"/>
                                         </variation>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gq-ds-DJC" customClass="StylizedButton">
+                                        <rect key="frame" x="461" y="266" width="119" height="41"/>
+                                        <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="119" id="LbW-PU-eBc"/>
+                                            <constraint firstAttribute="height" constant="41" id="VA3-36-mZo"/>
+                                        </constraints>
+                                        <size key="titleShadowOffset" width="0.0" height="1"/>
+                                        <state key="normal" title="NEXT">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="433" y="107" width="119" height="41"/>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="655" y="372" width="119" height="41"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="next" destination="jIU-MV-e36" eventType="touchUpInside" id="nKo-fj-Nek"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="327" id="OAe-ZW-VqZ"/>
+                                    <constraint firstItem="0gq-ds-DJC" firstAttribute="top" secondItem="VAn-0y-asT" secondAttribute="bottom" constant="8" symbolic="YES" id="OGU-Ts-thz"/>
                                     <constraint firstItem="6Mp-nC-F2Z" firstAttribute="top" secondItem="YJZ-dK-bwv" secondAttribute="bottom" constant="8" symbolic="YES" id="V7q-V5-57E"/>
                                     <constraint firstItem="YJZ-dK-bwv" firstAttribute="leading" secondItem="zpC-Ha-otG" secondAttribute="leadingMargin" id="bpK-hz-JhM"/>
                                     <constraint firstItem="VAn-0y-asT" firstAttribute="leading" secondItem="zpC-Ha-otG" secondAttribute="leading" constant="20" symbolic="YES" id="cqf-44-B5p"/>
                                     <constraint firstItem="YJZ-dK-bwv" firstAttribute="top" secondItem="zpC-Ha-otG" secondAttribute="top" id="gsE-Dd-2jd"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="VAn-0y-asT" secondAttribute="bottom" constant="20" symbolic="YES" id="oCY-5u-FwL"/>
+                                    <constraint firstAttribute="trailing" secondItem="0gq-ds-DJC" secondAttribute="trailing" constant="20" symbolic="YES" id="oMc-49-mlU"/>
                                     <constraint firstAttribute="trailing" secondItem="VAn-0y-asT" secondAttribute="trailing" constant="20" symbolic="YES" id="pHi-um-xcl"/>
                                     <constraint firstItem="6Mp-nC-F2Z" firstAttribute="leading" secondItem="YJZ-dK-bwv" secondAttribute="leading" id="pia-PE-rQv"/>
-                                    <constraint firstAttribute="trailing" secondItem="YJZ-dK-bwv" secondAttribute="trailing" constant="24" id="vG0-86-Pjb"/>
+                                    <constraint firstAttribute="trailing" secondItem="YJZ-dK-bwv" secondAttribute="trailing" constant="20" symbolic="YES" id="vG0-86-Pjb"/>
                                     <constraint firstItem="VAn-0y-asT" firstAttribute="top" secondItem="6Mp-nC-F2Z" secondAttribute="bottom" constant="8" symbolic="YES" id="vb7-11-gjS"/>
                                 </constraints>
                                 <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
@@ -475,45 +500,27 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gq-ds-DJC" customClass="StylizedButton">
-                                <rect key="frame" x="465" y="387" width="119" height="41"/>
-                                <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="119" id="LbW-PU-eBc"/>
-                                    <constraint firstAttribute="height" constant="41" id="VA3-36-mZo"/>
-                                </constraints>
-                                <size key="titleShadowOffset" width="0.0" height="1"/>
-                                <state key="normal" title="NEXT">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="433" y="107" width="119" height="41"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="655" y="372" width="119" height="41"/>
-                                </variation>
-                                <connections>
-                                    <action selector="next" destination="jIU-MV-e36" eventType="touchUpInside" id="nKo-fj-Nek"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zpC-Ha-otG" firstAttribute="top" secondItem="WxG-UM-tfn" secondAttribute="bottom" constant="48" id="0wS-kp-tEo"/>
-                            <constraint firstItem="0gq-ds-DJC" firstAttribute="top" secondItem="zpC-Ha-otG" secondAttribute="bottom" constant="8" symbolic="YES" id="B7x-Zx-hHB"/>
-                            <constraint firstItem="GV0-Wy-hRA" firstAttribute="top" secondItem="0gq-ds-DJC" secondAttribute="bottom" constant="172" id="FGJ-3M-STe"/>
+                            <constraint firstItem="zpC-Ha-otG" firstAttribute="top" secondItem="WxG-UM-tfn" secondAttribute="bottom" constant="44" id="0wS-kp-tEo"/>
+                            <constraint firstItem="zpC-Ha-otG" firstAttribute="leading" secondItem="J6e-cx-UFZ" secondAttribute="leadingMargin" id="32N-YE-3EH"/>
+                            <constraint firstItem="zpC-Ha-otG" firstAttribute="top" secondItem="WxG-UM-tfn" secondAttribute="bottom" constant="44" id="5KX-fx-goF"/>
                             <constraint firstItem="zpC-Ha-otG" firstAttribute="leading" secondItem="J6e-cx-UFZ" secondAttribute="leadingMargin" constant="-16" id="Ggz-Jb-n7x"/>
-                            <constraint firstItem="0gq-ds-DJC" firstAttribute="trailing" secondItem="J6e-cx-UFZ" secondAttribute="trailingMargin" id="YEU-HM-k3M"/>
+                            <constraint firstItem="zpC-Ha-otG" firstAttribute="top" secondItem="WxG-UM-tfn" secondAttribute="bottom" constant="44" id="JJM-tU-mMK"/>
                             <constraint firstItem="zpC-Ha-otG" firstAttribute="leading" secondItem="J6e-cx-UFZ" secondAttribute="leadingMargin" constant="16" id="gnF-75-Fbl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zpC-Ha-otG" secondAttribute="trailing" id="jVn-9e-DrQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zpC-Ha-otG" secondAttribute="trailing" constant="16" id="wI6-Ie-hqn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zpC-Ha-otG" secondAttribute="trailing" constant="-16" id="zvQ-Ei-u47"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="0wS-kp-tEo"/>
+                                <exclude reference="5KX-fx-goF"/>
+                                <exclude reference="Ggz-Jb-n7x"/>
                                 <exclude reference="gnF-75-Fbl"/>
                                 <exclude reference="wI6-Ie-hqn"/>
-                                <exclude reference="FGJ-3M-STe"/>
+                                <exclude reference="zvQ-Ei-u47"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -528,7 +535,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2b-HB-5iR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1204" y="186"/>
+            <point key="canvasLocation" x="1194" y="186"/>
         </scene>
         <!--Sign Up Contacts Controller-->
         <scene sceneID="yvC-OS-k34">
