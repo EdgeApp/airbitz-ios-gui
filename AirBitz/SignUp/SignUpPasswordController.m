@@ -12,7 +12,7 @@
 #import "User.h"
 
 #define KEYBOARD_MARGIN         10.0
-#define PASSWORD_VERIFY_FRAME_Y_OFFSET 20
+#define PASSWORD_VERIFY_FRAME_Y_OFFSET 66
 
 @interface SignUpPasswordController () <UITextFieldDelegate, PasswordVerifyViewDelegate>
 {
@@ -28,6 +28,7 @@
 @property (nonatomic, weak) IBOutlet MinCharTextField *pinTextField;
 @property (nonatomic, weak) IBOutlet UIView                     *masterView;
 @property (nonatomic, weak) IBOutlet UIView                     *contentView;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint         *contentStartConstraint;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView    *activityView;
 @property (nonatomic, strong)   UIButton                        *buttonBlocker;
 @property (nonatomic)           CGFloat                         contentViewY;
@@ -128,6 +129,9 @@
                 if (error.code == ABC_CC_Ok)
                 {
                     _bSuccess = true;
+                    
+                    self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
+                    self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
                     
                     [User login:self.manager.strUserName password:self.passwordTextField.text];
                     [super next];
@@ -328,6 +332,8 @@
             CGRect frame = _passwordVerifyView.frame;
             frame.origin.y += PASSWORD_VERIFY_FRAME_Y_OFFSET;
             _passwordVerifyView.frame = frame;
+            
+            _contentStartConstraint.constant += 56; // lower the view to see PIN
         }
         _passwordVerifyView.password = textField.text;
     }
@@ -336,6 +342,7 @@
         if(_passwordVerifyView)
         {
             [_passwordVerifyView dismiss];
+            _contentStartConstraint.constant = 44; // raise the view
         }
     }
     //won't do anything when a textField is tapped for the first time and no keyboard is visible because
@@ -346,15 +353,17 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-        UIView *view = [self.contentView viewWithTag:textField.tag + 1];
-        if (view)
-        {
-            [view becomeFirstResponder];
-        }
-        else
-        {
-            [textField resignFirstResponder];
-        }
+    if(textField == self.passwordTextField) {
+        [_reenterPasswordTextField becomeFirstResponder];
+    }
+    else if (textField == self.reenterPasswordTextField)
+    {
+        [_pinTextField becomeFirstResponder];
+    }
+    else
+    {
+        [textField resignFirstResponder];
+    }
     
     return YES;
 }
@@ -389,35 +398,6 @@
             }
         }
         [_activeTextField resignFirstResponder];
-    }
-}
-
-#pragma mark - ABC Callbacks
-
-- (void)createAccountComplete
-{
-    if (_bSuccess) {
-        super.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
-        super.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
-
-        [User login:self.manager.strUserName
-           password:self.passwordTextField.text];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-        {
-            [CoreBridge setupLoginPIN];
-        });
-
-        [CoreBridge setupNewAccount:nil];
-
-        [super next];
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc]
-                initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signin error alert")
-                      message:[NSString stringWithFormat:@"Sign-Up failed:\n%@", _strReason]
-                     delegate:nil
-            cancelButtonTitle:@"OK"
-            otherButtonTitles:nil];
-        [alert show];
     }
 }
 

@@ -136,7 +136,7 @@
 {
     if (_bSuccess) {
         [self.userNameTextField resignFirstResponder];
-        super.manager.strUserName = [NSString stringWithFormat:@"%@",self.userNameTextField.text];
+        self.manager.strUserName = [NSString stringWithFormat:@"%@",self.userNameTextField.text];
         [super next];
     } else {
         [self dismissFading:NO];
