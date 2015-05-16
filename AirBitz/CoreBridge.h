@@ -41,10 +41,10 @@
 + (void)reloadWallet: (Wallet *) wallet;
 // XXX DELETE ABOVE WHEN FULLY CLEANED UP TO USE NEW METHODS -paulvp
 
-+ (void)refreshWallet:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb;
 
 // New methods
 + (void)refreshWallets;
++ (void)refreshWallet:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb;
 + (void)reorderWallets: (NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
 + (void)makeCurrentWallet:(NSIndexPath *)indexPath;
 + (Wallet *)selectWalletWithUUID:(NSString *)strUUID;

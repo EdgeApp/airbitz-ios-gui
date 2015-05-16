@@ -12,7 +12,7 @@
 
 @interface SendViewController : UIViewController
 
-@property (nonatomic, strong) NSString              *walletUUID;
+//@property (nonatomic, strong) NSString              *walletUUID;
 //@property (nonatomic, weak) IBOutlet PickerTextView *pickerTextSendTo;
 @property (nonatomic, weak) IBOutlet UITextField    *addressTextField;
 
