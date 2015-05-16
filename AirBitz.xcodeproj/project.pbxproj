@@ -1059,6 +1059,9 @@
 		DA5509621A929BEA00F57106 /* PickerTextView3.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509611A929BEA00F57106 /* PickerTextView3.m */; };
 		DA5509631A929BEA00F57106 /* PickerTextView3.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509611A929BEA00F57106 /* PickerTextView3.m */; };
 		DA5509641A929BEA00F57106 /* PickerTextView3.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5509611A929BEA00F57106 /* PickerTextView3.m */; };
+		DA6645251B07175A00B04C5B /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6645241B07175A00B04C5B /* BlurView.m */; };
+		DA6645261B07277E00B04C5B /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6645241B07175A00B04C5B /* BlurView.m */; };
+		DA6645271B07277F00B04C5B /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6645241B07175A00B04C5B /* BlurView.m */; };
 		DA6B3CB31ADE4AE800A4F852 /* icon_more@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6B3CB11ADE4AE800A4F852 /* icon_more@2x~iphone.png */; };
 		DA6B3CB41ADE4AE800A4F852 /* icon_more@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6B3CB11ADE4AE800A4F852 /* icon_more@2x~iphone.png */; };
 		DA6B3CB51ADE4AE800A4F852 /* icon_more@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6B3CB11ADE4AE800A4F852 /* icon_more@2x~iphone.png */; };
@@ -2406,6 +2409,8 @@
 		DA55095C1A92934B00F57106 /* StylizedTextField3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField3.m; sourceTree = "<group>"; };
 		DA5509601A929BEA00F57106 /* PickerTextView3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PickerTextView3.h; path = PickerTextView/PickerTextView3.h; sourceTree = "<group>"; };
 		DA5509611A929BEA00F57106 /* PickerTextView3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PickerTextView3.m; path = PickerTextView/PickerTextView3.m; sourceTree = "<group>"; };
+		DA66451F1B07174A00B04C5B /* BlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurView.h; sourceTree = "<group>"; };
+		DA6645241B07175A00B04C5B /* BlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurView.m; sourceTree = "<group>"; };
 		DA6B3CB11ADE4AE800A4F852 /* icon_more@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_more@2x~iphone.png"; sourceTree = "<group>"; };
 		DA6B3CB21ADE4AE800A4F852 /* icon_more~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_more~iphone.png"; sourceTree = "<group>"; };
 		DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copy_btn@2x~iphone.png"; sourceTree = "<group>"; };
@@ -3060,6 +3065,8 @@
 				B57C209518C25011005D7245 /* BalanceView.m */,
 				B57C209718C2502D005D7245 /* BalanceView~iphone.xib */,
 				B57C209918C25042005D7245 /* BalanceView~ipad.xib */,
+				DA6645241B07175A00B04C5B /* BlurView.m */,
+				DA66451F1B07174A00B04C5B /* BlurView.h */,
 				B56553F018EDDCF8005B35E1 /* ButtonSelectorView.h */,
 				B56553F118EDDCF8005B35E1 /* ButtonSelectorView.m */,
 				B56553F318EDDD26005B35E1 /* ButtonSelectorView~iphone.xib */,
@@ -5422,6 +5429,7 @@
 				7D98AD0B19A7C550003D2BF6 /* ButtonSelectorView.m in Sources */,
 				DAE276311A9BFEC200E24523 /* SignUpHandleController.m in Sources */,
 				7D98AD0D19A7C550003D2BF6 /* overviewCell.m in Sources */,
+				DA6645261B07277E00B04C5B /* BlurView.m in Sources */,
 				7D98AD0E19A7C550003D2BF6 /* SyncView.m in Sources */,
 				DA4F91A81AF569EA008C0BD4 /* Theme.m in Sources */,
 				DAFC79A11A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
@@ -5567,6 +5575,7 @@
 				DAE276301A9BFEC200E24523 /* SignUpHandleController.m in Sources */,
 				B5C0A99F18EA0C10008F302C /* overviewCell.m in Sources */,
 				7DFD22E51A1E716C008C43FB /* UIPhotoGalleryViewController.m in Sources */,
+				DA6645251B07175A00B04C5B /* BlurView.m in Sources */,
 				6893E6CA19783FED0092DA04 /* SyncView.m in Sources */,
 				DA4F91A71AF569EA008C0BD4 /* Theme.m in Sources */,
 				DAFC79A01A81CCBE00E9039D /* TwoFactorMenuViewController.m in Sources */,
@@ -5712,6 +5721,7 @@
 				DAE276321A9BFEC200E24523 /* SignUpHandleController.m in Sources */,
 				DAE864691A88A58A00A17BD3 /* overviewCell.m in Sources */,
 				DAE8646A1A88A58A00A17BD3 /* UIPhotoGalleryViewController.m in Sources */,
+				DA6645271B07277F00B04C5B /* BlurView.m in Sources */,
 				DAE8646B1A88A58A00A17BD3 /* SyncView.m in Sources */,
 				DA4F91A91AF569EA008C0BD4 /* Theme.m in Sources */,
 				DAE8646C1A88A58A00A17BD3 /* TwoFactorMenuViewController.m in Sources */,

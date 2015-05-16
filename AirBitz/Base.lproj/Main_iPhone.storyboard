@@ -47,28 +47,18 @@
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0w-aK-PS3" userLabel="View - Blur">
                                 <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <subviews>
-                                    <view alpha="0.20000000000000001" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OMG-Eq-L5D" userLabel="View -tint">
-                                        <rect key="frame" x="0.0" y="312" width="414" height="0.0"/>
-                                        <color key="backgroundColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mLB-lv-6Oa" userLabel="Toolbar - Blur">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMG-Eq-L5D" userLabel="BlurView" customClass="BlurView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="623"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <items/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </toolbar>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="mLB-lv-6Oa" secondAttribute="trailing" id="Av2-xT-VH4"/>
                                     <constraint firstAttribute="bottom" secondItem="OMG-Eq-L5D" secondAttribute="bottom" id="Iag-f5-MYL"/>
-                                    <constraint firstItem="mLB-lv-6Oa" firstAttribute="leading" secondItem="J0w-aK-PS3" secondAttribute="leading" id="Lsr-uZ-aV7"/>
-                                    <constraint firstItem="mLB-lv-6Oa" firstAttribute="top" secondItem="J0w-aK-PS3" secondAttribute="top" id="Wfj-Qs-7dO"/>
                                     <constraint firstItem="OMG-Eq-L5D" firstAttribute="top" secondItem="J0w-aK-PS3" secondAttribute="top" id="X9S-iF-YFq"/>
                                     <constraint firstAttribute="trailing" secondItem="OMG-Eq-L5D" secondAttribute="trailing" id="dfp-d1-LOY"/>
                                     <constraint firstItem="OMG-Eq-L5D" firstAttribute="leading" secondItem="J0w-aK-PS3" secondAttribute="leading" id="vpY-QH-jUV"/>
-                                    <constraint firstAttribute="bottom" secondItem="mLB-lv-6Oa" secondAttribute="bottom" id="zx9-mU-CcR"/>
                                 </constraints>
                             </view>
                             <tabBar contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="49" translatesAutoresizingMaskIntoConstraints="NO" id="F5s-te-cfW">
@@ -125,7 +115,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
-                        <outlet property="blurView" destination="mLB-lv-6Oa" id="fYT-9M-qZW"/>
                         <outlet property="blurViewContainer" destination="J0w-aK-PS3" id="8bM-hd-Pqy"/>
                         <outlet property="blurViewLeft" destination="AdO-l3-DpT" id="Xoa-ho-VR1"/>
                         <outlet property="navBar" destination="Luv-G7-p9Q" id="GMr-vB-i3Z"/>

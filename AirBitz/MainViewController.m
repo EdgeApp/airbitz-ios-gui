@@ -23,6 +23,7 @@
 #import "TwoFactorScanViewController.h"
 #import "BuySellViewController.h"
 #import "AddressRequestController.h"
+#import "BlurView.h"
 #import "User.h"
 #import "Config.h"
 #import "Util.h"
@@ -90,7 +91,6 @@ typedef enum eAppMode
 }
 
 @property (weak, nonatomic) IBOutlet UIView *blurViewContainer;
-@property (weak, nonatomic) IBOutlet UIToolbar *blurView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *blurViewLeft;
 @property (weak, nonatomic) IBOutlet UITabBar *tabBar;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
