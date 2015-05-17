@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *connectedPhoto;
 @property (nonatomic, weak) IBOutlet UILabel *messageText;
 @property (nonatomic, weak) IBOutlet UIView *activityIndicator;
-@property (nonatomic, weak) IBOutlet BlurView *blurView;
+//@property (nonatomic, weak) IBOutlet BlurView *blurView;
 
 @property (nonatomic, weak) NSTimer *timer;
 @property (nonatomic) BOOL bDropDown;
@@ -46,9 +46,9 @@
         self.alpha = 0.0;
         self.clipsToBounds = YES;
         self.layer.cornerRadius = 5.0;
-        self.blurView.clipsToBounds = YES;
-        self.blurView.layer.cornerRadius = 5.0;
-        self.blurView.alpha = 1.0;
+//        self.blurView.clipsToBounds = YES;
+//        self.blurView.layer.cornerRadius = 5.0;
+//        self.blurView.alpha = 1.0;
         self.bDropDown = false;
 
 
@@ -74,8 +74,6 @@
 
     currentView.delegate = delegate;
 
-    [parentView addSubview:currentView];
-
     [currentView setTranslatesAutoresizingMaskIntoConstraints:YES];
 
     CGRect frame;
@@ -86,6 +84,7 @@
 
     currentView.frame = frame;
     currentView.bDropDown = true;
+    currentView.alpha = 0.0;
 
     currentView.alertGroupView.layer.masksToBounds = NO;
 //        self.walletsView.layer.cornerRadius = 8; // if you like rounded corners
@@ -94,6 +93,7 @@
     currentView.alertGroupView.layer.shadowColor = [[UIColor blackColor] CGColor];
     currentView.alertGroupView.layer.shadowOpacity = 0.4;
 
+    [parentView addSubview:currentView];
 
     return currentView;
 }
@@ -110,10 +110,13 @@
     tapGesture.numberOfTapsRequired = 1;
     tapGesture.numberOfTouchesRequired = 1;
     [currentView addGestureRecognizer:tapGesture];
+    currentView.alpha = 0.0;
+    currentView.alertGroupView.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    currentView.alertGroupView.layer.shadowRadius = 10;
+    currentView.alertGroupView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    currentView.alertGroupView.layer.shadowOpacity = 0.4;
 
     currentView.delegate = delegate;
-
-	[parentView addSubview:currentView];
 
     [currentView setTranslatesAutoresizingMaskIntoConstraints:YES];
 
@@ -121,6 +124,8 @@
 
     frame = parentView.frame;
     currentView.frame = frame;
+
+    [parentView addSubview:currentView];
 
     return currentView;
 }
@@ -139,6 +144,18 @@
 
     [currentView showSpinner:YES center:YES];
 //    [currentView showBackground:NO];
+
+    currentView.alpha = 0.0;
+    currentView.alertGroupView.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    currentView.alertGroupView.layer.shadowRadius = 10;
+    currentView.alertGroupView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    currentView.alertGroupView.layer.shadowOpacity = 0.4;
+
+    CGRect frame = parentView.frame;
+    currentView.frame = frame;
+
+    [parentView addSubview:currentView];
+
     return currentView;
 }
 
@@ -169,7 +186,7 @@
 - (void)show
 {
     self.alpha = 0.0;
-    [self.blurView setAlpha:0.0];
+//    [self.blurView setAlpha:0.0];
     [self layoutIfNeeded];
     [UIView animateWithDuration:0.25
                           delay:0.0
@@ -182,7 +199,7 @@
                              frame.origin.y = [MainViewController getHeaderHeight];
                              self.frame = frame;
                          }
-                         [self.blurView setAlpha:1.0];
+//                         [self.blurView setAlpha:1.0];
                          NSLog(@"FadingAlert2 init fadeout: x=%f width=%f\n", self.layer.frame.origin.x, self.layer.frame.size.width);
 
                      }
@@ -231,7 +248,7 @@
                              self.frame = frame;
                          }
 //                         [self.shadowView setAlpha:0.0];
-                         [self.blurView setAlpha:0.0];
+//                         [self.blurView setAlpha:0.0];
                          NSLog(@"FadingAlert2 init fadeout: x=%f width=%f\n", self.layer.frame.origin.x, self.layer.frame.size.width);
 
                      }

@@ -95,7 +95,7 @@
             {
                 // iOS 7 whitish blur view can be faked with a UIToolBar
                 toolbarBlur = [[UIToolbar alloc] initWithFrame:self.frame];
-                [self addSubview:toolbarBlur];
+                [self.superview insertSubview:toolbarBlur belowSubview:self];
                 [self.layer setBackgroundColor:[UIColorFromARGB(0x00000000) CGColor]];
 
             }
