@@ -36,6 +36,9 @@
 @property (nonatomic) CGFloat heightListings;
 @property (nonatomic) CGFloat heightSearchClues;
 @property (nonatomic) CGFloat heightBLETableCells;
+@property (nonatomic) UIImage *backgroundLogin;
+@property (nonatomic) UIImage *backgroundApp;
+
 
 
 //@property (nonatomic) int minutesAutoLogout;

@@ -97,6 +97,7 @@ typedef enum eAppMode
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBarBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *navBarTop;
 
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
 @property UIViewController            *selectedViewController;
 @property UIViewController            *navBarOwnerViewController;
 
@@ -311,6 +312,8 @@ MainViewController *staticMVC;
 
 -(void)showFastestLogin
 {
+    self.backgroundView.image = [Theme Singleton].backgroundLogin;
+
     if (firstLaunch) {
         bool exists = [CoreBridge PINLoginExists];
         [self showLogin:NO withPIN:exists];
@@ -763,6 +766,8 @@ MainViewController *staticMVC;
 
 - (void)loginViewControllerDidLogin:(BOOL)bNewAccount
 {
+    self.backgroundView.image = [Theme Singleton].backgroundApp;
+
     if (bNewAccount) {
         _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
         [_fadingAlert messageTextSet:NSLocalizedString(@"Creating and securing wallet", nil)];
@@ -1099,6 +1104,8 @@ MainViewController *staticMVC;
 
 - (void)LoginViewControllerDidPINLogin
 {
+    self.backgroundView.image = [Theme Singleton].backgroundApp;
+
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
     [MainViewController showTabBarAnimated:YES];

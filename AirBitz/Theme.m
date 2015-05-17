@@ -66,6 +66,9 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 
     self.sendRequestButtonDisabled = 0.4f;
 
+    self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];
+    self.backgroundLogin = [UIImage imageNamed:@"postcard-mountain.png"];
+
 //    if (IS_IPHONE4)
     {
         self.heightListings = 90.0;

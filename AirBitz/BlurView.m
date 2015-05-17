@@ -16,8 +16,15 @@
 {
     UIToolbar *toolbarBlur;
     UIView    *blurEffectView;
+    UIView *backgroundVibrancyView;
     BOOL bInitialized;
 }
+
+@property (nonatomic)  NSInteger blurStyle;
+@property (nonatomic)  BOOL       bSetBlurStyleExtraLight;
+@property (nonatomic)  BOOL       bSetBlurStyleDark;
+@property (nonatomic)  UIBlurEffectStyle currentBlurStyle;
+
 @end
 
 @implementation BlurView
@@ -43,13 +50,28 @@
     if (!bInitialized)
     {
         if([UIVisualEffectView class]){
+            UIBlurEffect *blurEffect;
 
-            UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+            if (self.bSetBlurStyleExtraLight)
+            {
+                self.currentBlurStyle = UIBlurEffectStyleExtraLight;
+            }
+            else if (self.bSetBlurStyleDark)
+            {
+                self.currentBlurStyle = UIBlurEffectStyleDark;
+            }
+            else
+            {
+                self.currentBlurStyle = UIBlurEffectStyleLight;
+            }
+            blurEffect = [UIBlurEffect effectWithStyle:self.currentBlurStyle];
+
             blurEffectView = (UIVisualEffectView *) [[UIVisualEffectView alloc] initWithEffect:blurEffect];
 
             [blurEffectView setFrame:self.frame];
 
-            [self addSubview:blurEffectView];
+//            [self addSubview:blurEffectView];
+            [self.superview insertSubview:blurEffectView belowSubview:self];
 
 //            UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
 //            UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
@@ -59,24 +81,37 @@
 //
 //            [[blurEffectView contentView] addSubview:vibrancyEffectView];
 //            vibrancyEffectView.center = blurEffectView.center;
+            [self.layer setBackgroundColor:[UIColorFromARGB(0x00000000) CGColor]];
         }
         else
         {
-            toolbarBlur = [[UIToolbar alloc] initWithFrame:self.frame];
-            [self addSubview:toolbarBlur];
+            if (self.bSetBlurStyleDark)
+            {
+                // No iOS8 blur capability which is needed to do a dark blur view
+                // Just do a dark tinted view with opacity
+                [self.layer setBackgroundColor:[UIColorFromARGB(0x80000000) CGColor]];
+            }
+            else
+            {
+                // iOS 7 whitish blur view can be faked with a UIToolBar
+                toolbarBlur = [[UIToolbar alloc] initWithFrame:self.frame];
+                [self addSubview:toolbarBlur];
+                [self.layer setBackgroundColor:[UIColorFromARGB(0x00000000) CGColor]];
+
+            }
         }
         bInitialized = true;
 
     }
     else
     {
-        if (nil == toolbarBlur)
-        {
-            [blurEffectView setFrame:self.frame];
-        }
-        else
+        if (toolbarBlur)
         {
             toolbarBlur.frame = self.frame;
+        }
+        if (blurEffectView)
+        {
+            [blurEffectView setFrame:self.frame];
         }
     }
 
@@ -124,7 +159,7 @@
 
 //    self.layer.cornerRadius = 8;
 //    self.clipsToBounds = YES;
-    [self.layer setBackgroundColor:[UIColorFromARGB(0x14BDDCFF) CGColor]];
+//    [self.layer setBackgroundColor:[UIColorFromARGB(0x14BDDCFF) CGColor]];
 
 }
 
@@ -135,14 +170,14 @@
 
 -(id)init
 {
-    [self initMyVariables];
+//    [self initMyVariables];
     return self;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     if ((self = [super initWithCoder:aDecoder]))
     {
-        [self initMyVariables];
+//        [self initMyVariables];
     }
     return self;
 }
@@ -151,7 +186,7 @@
     self = [super initWithFrame:frame];
     if (self)
 	{
-        [self initMyVariables];
+//        [self initMyVariables];
     }
     return self;
 }
@@ -159,7 +194,7 @@
 -(void)awakeFromNib
 {
 	[super awakeFromNib];
-	[self initMyVariables];
+//	[self initMyVariables];
 }
 
 @end

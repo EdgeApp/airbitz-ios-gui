@@ -89,10 +89,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	float							originalFrameHeight;
     FadingAlertView2                 *_fadingAlert;
     BOOL                        bWalletListDropped;
+    BOOL                            bFlashOn;
 
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
-@property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
+//@property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView2    *buttonSelector;
 //@property (weak, nonatomic) IBOutlet UIImageView            *imageTopFrame;
 //@property (weak, nonatomic) IBOutlet UILabel                *labelSendTo;
@@ -110,6 +111,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //@property (nonatomic, weak) IBOutlet UILabel				*scanningLabel;
 @property (nonatomic, weak) IBOutlet UILabel				*scanningErrorLabel;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bleViewHeight;
 @property (strong, nonatomic) CBCentralManager      *centralManager;
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
@@ -123,6 +125,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 @end
 
 @implementation SendViewController
+@synthesize segmentedControl;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -144,7 +148,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     _bUsingImagePicker = NO;
     bWalletListDropped = false;
 
-    self.flashSelector.delegate = self;
+//    self.flashSelector.delegate = self;
 	self.buttonSelector.delegate = self;
     [self.buttonSelector disableButton];
 
@@ -276,7 +280,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
 {
-    [self.flashSelector selectItem:FLASH_ITEM_OFF];
+//    [self.flashSelector selectItem:FLASH_ITEM_OFF];
     if (SCAN_MODE_UNINITIALIZED == scanMode) {
         [self scanBLEstartCamera];
     }
@@ -425,13 +429,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if ([_readerView isDeviceAvailable])
     {
         [self.scanningErrorLabel setHidden:YES];
-        [self.flashSelector setHidden:NO];
+//        [self.flashSelector setHidden:NO];
     }
     else
     {
         self.scanningErrorLabel.text = NSLocalizedString(@"Camera unavailable. Please enable camera access on your phone's Privacy Settings", @"");
         [self.scanningErrorLabel setHidden:NO];
-        [self.flashSelector setHidden:YES];
+//        [self.flashSelector setHidden:YES];
     }
 
 	[self.view insertSubview:_readerView belowSubview:self.scanFrame];
@@ -486,6 +490,29 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //{
 //	[self enableBLEMode];
 //}
+
+#pragma mark UISegmentedControl
+
+
+- (IBAction)segmentedControlAction:(id)sender
+{
+    switch (segmentedControl.selectedSegmentIndex)
+    {
+        case 0:
+            // Do Transfer
+            break;
+        case 1:
+            // Do Address
+            break;
+        case 2:
+            // Do Photo
+            break;
+        case 3:
+            // Do Flash
+            [self toggleFlash];
+            break;
+    }
+}
 
 #pragma mark address book
 
@@ -693,7 +720,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                  {
                                      // Update the table height
 
-                                     _bleViewHeight.constant = [MainViewController getFooterHeight] + ([Theme Singleton].heightBLETableCells * [self.peripheralContainers count]);
+                                     _bleViewHeight.constant = ([Theme Singleton].heightBLETableCells * [self.peripheralContainers count]);
                                      [self.view layoutIfNeeded];
                                  }
                                  completion:^(BOOL finished)
@@ -1465,39 +1492,51 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 #pragma mark - Flash Select Delegates
 
+- (void)toggleFlash
+{
+
+    //NSLog(@"Flash Item Selected: %i", flashType);
+    if (bFlashOn)
+    {
+        [self flashItemSelected:FLASH_ITEM_OFF];
+    }
+    else
+    {
+        [self flashItemSelected:FLASH_ITEM_ON];
+    }
+}
 - (void)flashItemSelected:(tFlashItem)flashType
 {
 #if !TARGET_IPHONE_SIMULATOR
-	//NSLog(@"Flash Item Selected: %i", flashType);
-	AVCaptureDevice *device = _readerView.device;
-	if(device)
-	{
-		switch(flashType)
-		{
-				case FLASH_ITEM_OFF:
-					if ([device isTorchModeSupported:AVCaptureTorchModeOff])
-					{
-						NSError *error = nil;
-						if ([device lockForConfiguration:&error])
-						{
-							device.torchMode = AVCaptureTorchModeOff;
-							[device unlockForConfiguration];
-						}
-					}
-					break;
-				case FLASH_ITEM_ON:
-					if ([device isTorchModeSupported:AVCaptureTorchModeOn])
-					{
-						NSError *error = nil;
-						if ([device lockForConfiguration:&error])
-						{
-							device.torchMode = AVCaptureTorchModeOn;
-							[device unlockForConfiguration];
-						}
-					}
-					break;
-		}
-	}
+    AVCaptureDevice *device = _readerView.device;
+
+    switch(flashType)
+    {
+            case FLASH_ITEM_OFF:
+                if ([device isTorchModeSupported:AVCaptureTorchModeOff])
+                {
+                    NSError *error = nil;
+                    if ([device lockForConfiguration:&error])
+                    {
+                        device.torchMode = AVCaptureTorchModeOff;
+                        [device unlockForConfiguration];
+                        bFlashOn = NO;
+                    }
+                }
+                break;
+            case FLASH_ITEM_ON:
+                if ([device isTorchModeSupported:AVCaptureTorchModeOn])
+                {
+                    NSError *error = nil;
+                    if ([device lockForConfiguration:&error])
+                    {
+                        device.torchMode = AVCaptureTorchModeOn;
+                        [device unlockForConfiguration];
+                        bFlashOn = YES;
+                    }
+                }
+                break;
+    }
 #endif
 }
 
