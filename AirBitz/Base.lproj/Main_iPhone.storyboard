@@ -343,6 +343,20 @@
                         <outlet property="view" destination="of2-42-Lef" id="I0w-Df-2dv"/>
                     </connections>
                 </viewController>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" momentary="YES" id="aYH-JB-k1y">
+                    <rect key="frame" x="0.0" y="0.0" width="304" height="39"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="Transfer"/>
+                        <segment title="Address"/>
+                        <segment title="Photos"/>
+                        <segment title="Flash"/>
+                    </segments>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="segmentedControlAction:" destination="c1q-yF-WIr" eventType="valueChanged" id="Pax-89-fpY"/>
+                    </connections>
+                </segmentedControl>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pn1-ga-1fM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-628" y="-44"/>
