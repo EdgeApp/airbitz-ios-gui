@@ -240,6 +240,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
            selector:@selector(applicationDidBecomeActiveNotification:)
                name:UIApplicationDidBecomeActiveNotification
              object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
 
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(info:) fromObject:self];
@@ -1580,6 +1581,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
     [CoreBridge makeCurrentWallet:indexPath];
+    bWalletListDropped = false;
 
 }
 

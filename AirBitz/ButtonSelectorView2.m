@@ -38,20 +38,41 @@
 {
     if ((self = [super initWithCoder:aDecoder]))
 	{
-        self.enabled = YES;
-		UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ButtonSelectorView2" owner:self options:nil] objectAtIndex:0];
-		view.frame = self.bounds;
-        [view setBackgroundColor:[UIColor clearColor]];
+//        self.enabled = YES;
+//		UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ButtonSelectorView2" owner:self options:nil] objectAtIndex:0];
+//		view.frame = self.bounds;
+//        [view setBackgroundColor:[UIColor clearColor]];
+////		UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
+////		[self.button setBackgroundImage:blue_button_image forState:UIControlStateNormal];
+////		[self.button setBackgroundImage:blue_button_image forState:UIControlStateSelected];
+//        [self addSubview:view];
+//        [self.superview insertSubview:view aboveSubview:self];
+////
+//		_originalButtonFrame = self.button.frame;
+//		_originalFrame = self.frame;
+//		//cw temp
+//		//self.arrayItemsToSelect = [NSArray arrayWithObjects:@"item 1", @"item 2", @"item 3", @"item 4", @"item 5", @"item 6", @"item 7", @"item 8", @"item 9", @"item 10", @"item 11", @"item 12" , nil];
+    }
+    return self;
+}
+
+- (id)drawRect:(CGRect)rect
+{
+    NSLog(@"ButtonSelector2: drawRect");
+    self.enabled = YES;
+    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ButtonSelectorView2" owner:self options:nil] objectAtIndex:0];
+    view.frame = self.bounds;
+    [view setBackgroundColor:[UIColor clearColor]];
 //		UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
 //		[self.button setBackgroundImage:blue_button_image forState:UIControlStateNormal];
 //		[self.button setBackgroundImage:blue_button_image forState:UIControlStateSelected];
-        [self addSubview:view];
-		
-		_originalButtonFrame = self.button.frame;
-		_originalFrame = self.frame;
-		//cw temp
-		//self.arrayItemsToSelect = [NSArray arrayWithObjects:@"item 1", @"item 2", @"item 3", @"item 4", @"item 5", @"item 6", @"item 7", @"item 8", @"item 9", @"item 10", @"item 11", @"item 12" , nil];
-    }
+    [self addSubview:view];
+//    [self.superview insertSubview:view aboveSubview:self];
+//
+    _originalButtonFrame = self.button.frame;
+    _originalFrame = self.frame;
+    //cw temp
+    //self.arrayItemsToSelect = [NSArray arrayWithObjects:@"item 1", @"item 2", @"item 3", @"item 4", @"item 5", @"item 6", @"item 7", @"item 8", @"item 9", @"item 10", @"item 11", @"item 12" , nil];
     return self;
 }
 
@@ -156,7 +177,7 @@
 //        yOriginOffset = self.button.frame.size.height / 2;
 //    }
 	
-	CGRect tableFrame = self.button.frame;
+	CGRect tableFrame = self.frame;
 //	tableFrame.origin.x += 1.0;
 //	tableFrame.size.width -= 2.0;
 //	tableFrame.origin.y += yOriginOffset;
@@ -172,8 +193,8 @@
 	_selectionTable.userInteractionEnabled = YES;
     _selectionTable.separatorStyle=UITableViewCellSeparatorStyleNone;
     _selectionTable.backgroundColor = [UIColor clearColor];
-    [self.button.superview insertSubview:_blurToolbar aboveSubview:self.button];
-	[self.button.superview insertSubview:_selectionTable aboveSubview:_blurToolbar];
+    [self.superview insertSubview:_blurToolbar aboveSubview:self];
+	[self.superview insertSubview:_selectionTable aboveSubview:_blurToolbar];
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	//make the table expand from the bottom of the button
