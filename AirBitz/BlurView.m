@@ -163,9 +163,9 @@
 
 }
 
--(id)drawRect:(CGRect)rect {
+-(void)drawRect:(CGRect)rect
+{
     [self initMyVariables];
-    return self;
 }
 
 -(id)init

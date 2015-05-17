@@ -5,6 +5,7 @@
 #import "LatoLabel.h"
 #import "Theme.h"
 #import "MainViewController.h"
+#import "BlurView.h"
 
 #define ALERT_MESSAGE_FADE_DELAY 10
 #define ALERT_MESSAGE_FADE_DURATION 10
@@ -22,7 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *connectedPhoto;
 @property (nonatomic, weak) IBOutlet UILabel *messageText;
 @property (nonatomic, weak) IBOutlet UIView *activityIndicator;
-@property (nonatomic, weak) IBOutlet UIToolbar *toolBarView;
+@property (nonatomic, weak) IBOutlet BlurView *blurView;
+
 @property (nonatomic, weak) NSTimer *timer;
 @property (nonatomic) BOOL bDropDown;
 @property BOOL bIsBlocking;
@@ -44,9 +46,9 @@
         self.alpha = 0.0;
         self.clipsToBounds = YES;
         self.layer.cornerRadius = 5.0;
-        _toolBarView.clipsToBounds = YES;
-        _toolBarView.layer.cornerRadius = 5.0;
-        _toolBarView.alpha = 1.0;
+        self.blurView.clipsToBounds = YES;
+        self.blurView.layer.cornerRadius = 5.0;
+        self.blurView.alpha = 1.0;
         self.bDropDown = false;
 
 
@@ -91,7 +93,6 @@
     currentView.alertGroupView.layer.shadowRadius = 10;
     currentView.alertGroupView.layer.shadowColor = [[UIColor blackColor] CGColor];
     currentView.alertGroupView.layer.shadowOpacity = 0.4;
-    [currentView.toolBarView setTranslucent:[Theme Singleton].bTranslucencyEnable];
 
 
     return currentView;
@@ -120,7 +121,6 @@
 
     frame = parentView.frame;
     currentView.frame = frame;
-    [currentView.toolBarView setTranslucent:[Theme Singleton].bTranslucencyEnable];
 
     return currentView;
 }
@@ -136,7 +136,6 @@
 
     currentView.bIsBlocking = true;
     currentView.activityIndicator.hidden = false;
-    [currentView.toolBarView setTranslucent:[Theme Singleton].bTranslucencyEnable];
 
     [currentView showSpinner:YES center:YES];
 //    [currentView showBackground:NO];
@@ -169,6 +168,9 @@
 
 - (void)show
 {
+    self.alpha = 0.0;
+    [self.blurView setAlpha:0.0];
+    [self layoutIfNeeded];
     [UIView animateWithDuration:0.25
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseOut
@@ -180,7 +182,7 @@
                              frame.origin.y = [MainViewController getHeaderHeight];
                              self.frame = frame;
                          }
-                         [self.toolBarView setAlpha:1.0];
+                         [self.blurView setAlpha:1.0];
                          NSLog(@"FadingAlert2 init fadeout: x=%f width=%f\n", self.layer.frame.origin.x, self.layer.frame.size.width);
 
                      }
@@ -229,7 +231,7 @@
                              self.frame = frame;
                          }
 //                         [self.shadowView setAlpha:0.0];
-                         [self.toolBarView setAlpha:0.0];
+                         [self.blurView setAlpha:0.0];
                          NSLog(@"FadingAlert2 init fadeout: x=%f width=%f\n", self.layer.frame.origin.x, self.layer.frame.size.width);
 
                      }

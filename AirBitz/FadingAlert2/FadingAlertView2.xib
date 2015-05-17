@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
@@ -15,17 +15,21 @@
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" customClass="FadingAlertView2">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRF-84-nZk" userLabel="BlurView" customClass="BlurView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="568" translatesAutoresizingMaskIntoConstraints="NO" id="OYT-Tf-r4L" userLabel="AlertGroup">
                     <rect key="frame" x="35" y="159" width="250" height="250"/>
                     <subviews>
-                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M8D-FP-37y" userLabel="Toolbar -blur">
-                            <rect key="frame" x="-35" y="-159" width="320" height="568"/>
-                            <items/>
-                        </toolbar>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0DF-hU-X03" userLabel="BlurView" customClass="BlurView">
+                            <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                            <color key="backgroundColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
                         <label autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="2is-5E-X7J" userLabel="Message" customClass="LatoLabel">
                             <rect key="frame" x="16" y="16" width="218" height="218"/>
                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
-                            <color key="textColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Joy-6Y-Kdk" userLabel="Spinner">
@@ -49,7 +53,7 @@
                                         <constraint firstAttribute="height" constant="25" id="gcM-e4-DZy"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                    <color key="textColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xIk-Ub-qbu" userLabel="Line2" customClass="LatoLabel">
@@ -58,7 +62,7 @@
                                         <constraint firstAttribute="height" constant="25" id="Z8C-je-KF0"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                    <color key="textColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZOf-PC-P7M" userLabel="Line3" customClass="LatoLabel">
@@ -67,7 +71,7 @@
                                         <constraint firstAttribute="height" constant="25" id="7Gi-XJ-c1N"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                    <color key="textColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -87,25 +91,31 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="M8D-FP-37y" secondAttribute="bottom" id="8XR-hq-s6A"/>
+                        <constraint firstAttribute="bottom" secondItem="0DF-hU-X03" secondAttribute="bottom" id="A3Z-j4-QGm"/>
                         <constraint firstAttribute="bottom" secondItem="2is-5E-X7J" secondAttribute="bottom" constant="16" id="In1-2K-5pO"/>
                         <constraint firstItem="2is-5E-X7J" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" constant="16" id="JXH-F4-QSK"/>
-                        <constraint firstItem="M8D-FP-37y" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" id="Jgg-MC-qY6"/>
                         <constraint firstAttribute="width" constant="250" id="RCC-2m-09y"/>
                         <constraint firstItem="2is-5E-X7J" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" constant="16" id="TbY-5b-Nyp"/>
-                        <constraint firstAttribute="trailing" secondItem="M8D-FP-37y" secondAttribute="trailing" id="Uiq-UT-rRc"/>
                         <constraint firstAttribute="trailing" secondItem="uOK-yM-OiA" secondAttribute="trailing" constant="16" id="Wcm-bP-G1X"/>
                         <constraint firstAttribute="trailing" secondItem="2is-5E-X7J" secondAttribute="trailing" constant="16" id="Xr7-AO-sph"/>
+                        <constraint firstItem="0DF-hU-X03" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" id="aD3-qm-OWh"/>
                         <constraint firstAttribute="height" constant="250" id="bm6-Jx-kNe"/>
                         <constraint firstItem="uOK-yM-OiA" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" constant="16" id="eXw-Xl-r1Y"/>
                         <constraint firstAttribute="bottom" secondItem="uOK-yM-OiA" secondAttribute="bottom" constant="16" id="foC-H3-Zhf"/>
-                        <constraint firstItem="M8D-FP-37y" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" id="hqL-Tu-yXn"/>
                         <constraint firstItem="uOK-yM-OiA" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" constant="16" id="iOQ-wI-x9t"/>
                         <constraint firstAttribute="bottom" secondItem="Joy-6Y-Kdk" secondAttribute="bottom" constant="20" id="jHj-Jz-QEz"/>
+                        <constraint firstAttribute="trailing" secondItem="0DF-hU-X03" secondAttribute="trailing" id="ko3-Qt-6Na"/>
                         <constraint firstAttribute="centerX" secondItem="Joy-6Y-Kdk" secondAttribute="centerX" id="lEr-l3-sDs"/>
+                        <constraint firstItem="0DF-hU-X03" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" id="p3J-8f-fes"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -113,16 +123,20 @@
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="OYT-Tf-r4L" secondAttribute="centerX" id="0TW-Xh-kzy"/>
                 <constraint firstAttribute="centerY" secondItem="OYT-Tf-r4L" secondAttribute="centerY" id="1Ky-bz-xOK"/>
+                <constraint firstAttribute="trailing" secondItem="FRF-84-nZk" secondAttribute="trailing" id="G9M-Hj-BYa"/>
+                <constraint firstItem="FRF-84-nZk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Lni-nb-Leo"/>
+                <constraint firstAttribute="bottom" secondItem="FRF-84-nZk" secondAttribute="bottom" id="fsS-aV-Swo"/>
+                <constraint firstItem="FRF-84-nZk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="t1j-dD-4iK"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="activityIndicator" destination="Joy-6Y-Kdk" id="R2S-4F-jcd"/>
+                <outlet property="blurView" destination="0DF-hU-X03" id="bgF-Dh-D2O"/>
                 <outlet property="connectedLine1" destination="CvA-Nc-W9y" id="U1t-Bt-1I0"/>
                 <outlet property="connectedLine2" destination="xIk-Ub-qbu" id="cVc-yQ-Chl"/>
                 <outlet property="connectedLine3" destination="ZOf-PC-P7M" id="AY2-bn-aKv"/>
                 <outlet property="connectedPhoto" destination="Ppf-Pw-27m" id="l7k-hs-wTg"/>
                 <outlet property="messageText" destination="2is-5E-X7J" id="yvV-lv-54v"/>
-                <outlet property="toolBarView" destination="M8D-FP-37y" id="6UK-g0-KBC"/>
             </connections>
             <point key="canvasLocation" x="-3" y="155"/>
         </view>

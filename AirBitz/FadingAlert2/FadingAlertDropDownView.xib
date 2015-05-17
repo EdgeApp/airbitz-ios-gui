@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
@@ -18,10 +18,10 @@
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="568" translatesAutoresizingMaskIntoConstraints="NO" id="OYT-Tf-r4L" userLabel="AlertGroup">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                     <subviews>
-                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8D-FP-37y" userLabel="Toolbar -blur">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ag-2s-o7z" userLabel="BlurView" customClass="BlurView">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
-                            <items/>
-                        </toolbar>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                         <label autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="2is-5E-X7J" userLabel="Message" customClass="LatoLabel">
                             <rect key="frame" x="4" y="4" width="312" height="72"/>
                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
@@ -91,19 +91,19 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="M8D-FP-37y" secondAttribute="bottom" id="8XR-hq-s6A"/>
+                        <constraint firstAttribute="trailing" secondItem="6Ag-2s-o7z" secondAttribute="trailing" id="C64-XK-CO4"/>
                         <constraint firstAttribute="bottom" secondItem="2is-5E-X7J" secondAttribute="bottom" constant="4" id="In1-2K-5pO"/>
                         <constraint firstItem="2is-5E-X7J" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" constant="4" id="JXH-F4-QSK"/>
-                        <constraint firstItem="M8D-FP-37y" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" id="Jgg-MC-qY6"/>
+                        <constraint firstItem="6Ag-2s-o7z" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" id="MrE-0G-F3Y"/>
                         <constraint firstItem="2is-5E-X7J" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" constant="4" id="TbY-5b-Nyp"/>
-                        <constraint firstAttribute="trailing" secondItem="M8D-FP-37y" secondAttribute="trailing" id="Uiq-UT-rRc"/>
                         <constraint firstAttribute="trailing" secondItem="uOK-yM-OiA" secondAttribute="trailing" id="Wcm-bP-G1X"/>
                         <constraint firstItem="Ppf-Pw-27m" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" constant="15" id="XlX-fV-M9s"/>
                         <constraint firstAttribute="trailing" secondItem="2is-5E-X7J" secondAttribute="trailing" constant="4" id="Xr7-AO-sph"/>
                         <constraint firstItem="Ppf-Pw-27m" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" constant="15" id="YJI-Cf-x7c"/>
                         <constraint firstAttribute="height" constant="80" id="bm6-Jx-kNe"/>
+                        <constraint firstAttribute="bottom" secondItem="6Ag-2s-o7z" secondAttribute="bottom" id="dsI-cZ-RyU"/>
                         <constraint firstItem="uOK-yM-OiA" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" id="eXw-Xl-r1Y"/>
-                        <constraint firstItem="M8D-FP-37y" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" id="hqL-Tu-yXn"/>
+                        <constraint firstItem="6Ag-2s-o7z" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" id="hxW-fl-bN4"/>
                         <constraint firstItem="uOK-yM-OiA" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" id="iOQ-wI-x9t"/>
                         <constraint firstAttribute="bottom" secondItem="Joy-6Y-Kdk" secondAttribute="bottom" constant="20" id="jHj-Jz-QEz"/>
                         <constraint firstAttribute="centerX" secondItem="Joy-6Y-Kdk" secondAttribute="centerX" id="lEr-l3-sDs"/>
@@ -122,12 +122,12 @@
             <connections>
                 <outlet property="activityIndicator" destination="Joy-6Y-Kdk" id="R2S-4F-jcd"/>
                 <outlet property="alertGroupView" destination="OYT-Tf-r4L" id="E2f-CO-j1h"/>
+                <outlet property="blurView" destination="6Ag-2s-o7z" id="b6O-sU-Lro"/>
                 <outlet property="connectedLine1" destination="CvA-Nc-W9y" id="U1t-Bt-1I0"/>
                 <outlet property="connectedLine2" destination="xIk-Ub-qbu" id="cVc-yQ-Chl"/>
                 <outlet property="connectedLine3" destination="ZOf-PC-P7M" id="AY2-bn-aKv"/>
                 <outlet property="connectedPhoto" destination="Ppf-Pw-27m" id="Rh6-LT-4MA"/>
                 <outlet property="messageText" destination="2is-5E-X7J" id="yvV-lv-54v"/>
-                <outlet property="toolBarView" destination="M8D-FP-37y" id="6UK-g0-KBC"/>
             </connections>
             <point key="canvasLocation" x="-3" y="-88.5"/>
         </view>
