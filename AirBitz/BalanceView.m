@@ -97,49 +97,67 @@
     return bv;
 }
 
-- (void)BalanceViewTapped:(UITapGestureRecognizer *)recognizer
+- (void)balanceViewSetBTC
 {
-    if(_barIsUp)
-    {
-        //move bar down
-        _barIsUp = NO;
-        [UIView animateWithDuration:0.1
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
-                         animations:^
-         {
-             [self moveBarDown];
-         }
-         completion:^(BOOL finished)
-         {
-             if([self.delegate respondsToSelector:@selector(BalanceView:changedStateTo:)])
-             {
-                 [self.delegate BalanceView:self changedStateTo:BALANCE_VIEW_DOWN];
-             }
-         }];
-    }
-    else
-    {
-        _barIsUp = YES;
-        [UIView animateWithDuration:0.1
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
-                         animations:^
-         {
-             [self moveBarUp];
-         }
-        completion:^(BOOL finished)
-         {
-             if([self.delegate respondsToSelector:@selector(BalanceView:changedStateTo:)])
-             {
-                 [self.delegate BalanceView:self changedStateTo:BALANCE_VIEW_UP];
-             }
-         }];
-    }
+    _barIsUp = YES;
+    [UIView animateWithDuration:0.1
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^
+                     {
+                         [self moveBarUp];
+                     }
+                     completion:^(BOOL finished)
+                     {
+                         if([self.delegate respondsToSelector:@selector(BalanceView:changedStateTo:)])
+                         {
+                             [self.delegate BalanceView:self changedStateTo:BALANCE_VIEW_UP];
+                         }
+                     }];
+
     // Store bar position
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [[NSUserDefaults standardUserDefaults] setBool:_barIsUp forKey:BAR_UP];
     [userDefaults synchronize];
+}
+
+
+- (void)balanceViewSetFiat
+{
+    //move bar down
+    _barIsUp = NO;
+    [UIView animateWithDuration:0.1
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^
+                     {
+                         [self moveBarDown];
+                     }
+                     completion:^(BOOL finished)
+                     {
+                         if([self.delegate respondsToSelector:@selector(BalanceView:changedStateTo:)])
+                         {
+                             [self.delegate BalanceView:self changedStateTo:BALANCE_VIEW_DOWN];
+                         }
+                     }];
+
+    // Store bar position
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] setBool:_barIsUp forKey:BAR_UP];
+    [userDefaults synchronize];
+}
+
+
+- (void)BalanceViewTapped:(UITapGestureRecognizer *)recognizer
+{
+    if(_barIsUp)
+    {
+        [self balanceViewSetFiat];
+    }
+    else
+    {
+        [self balanceViewSetBTC];
+    }
 }
 
 - (void)moveBarUp

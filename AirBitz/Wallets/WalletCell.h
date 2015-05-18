@@ -13,7 +13,6 @@
 
 @property (nonatomic, weak) IBOutlet LatoLabel *name;
 @property (nonatomic, weak) IBOutlet LatoLabel *amount;
-@property (weak, nonatomic) IBOutlet LatoLabel *amountFiat;
 
 
 @end

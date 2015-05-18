@@ -17,6 +17,7 @@
 
 @interface WalletHeaderView : UIView
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlBTCUSD;
 @property(nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *btn_expandCollapse;
 @property (nonatomic, weak) IBOutlet UIButton *btn_addWallet;
@@ -35,5 +36,6 @@
 
 @optional
 - (void)headerButton;
+- (void)segmentedControlHeader;
 
 @end

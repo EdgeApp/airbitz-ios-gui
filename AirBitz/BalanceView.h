@@ -22,6 +22,8 @@ typedef enum eBalanceViewState
 @property BOOL barIsUp;
 
 + (BalanceView *)CreateWithDelegate:(id)del;
+- (void)balanceViewSetBTC;
+- (void)balanceViewSetFiat;
 
 - (void)refresh;
 @property (nonatomic, weak) IBOutlet UIImageView *topIcon;

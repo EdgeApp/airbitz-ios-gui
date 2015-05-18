@@ -16,6 +16,7 @@
 @end
 
 @implementation WalletHeaderView
+@synthesize segmentedControlBTCUSD;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -92,6 +93,11 @@
 - (IBAction)addWallet
 {
     [self.delegate addWallet];
+}
+
+- (IBAction)segmentedControlAction:(id)sender {
+    
+    [self.delegate segmentedControlHeader];
 }
 
 @end
