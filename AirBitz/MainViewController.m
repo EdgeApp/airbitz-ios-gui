@@ -610,10 +610,11 @@ MainViewController *staticMVC;
 		{
 			if (_selectedViewController != _directoryViewController)
 			{
-				[_selectedViewController.view removeFromSuperview];
-				_selectedViewController = _directoryViewController;
-				[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-                [MainViewController moveSelectedViewController: 0.0];
+//				[_selectedViewController.view removeFromSuperview];
+//				_selectedViewController = _directoryViewController;
+//				[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+//                [MainViewController moveSelectedViewController: 0.0];
+                [MainViewController animateSwapViewControllers:_directoryViewController out:_selectedViewController];
 
             }
 			break;
@@ -624,11 +625,12 @@ MainViewController *staticMVC;
 			{
 				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-//                    _requestViewController.walletUUID = self.strWalletUUID;
-					[_selectedViewController.view removeFromSuperview];
-					_selectedViewController = _requestViewController;
-					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-                    [MainViewController moveSelectedViewController: 0.0];
+////                    _requestViewController.walletUUID = self.strWalletUUID;
+//					[_selectedViewController.view removeFromSuperview];
+//					_selectedViewController = _requestViewController;
+//					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+//                    [MainViewController moveSelectedViewController: 0.0];
+                    [MainViewController animateSwapViewControllers:_requestViewController out:_selectedViewController];
 				}
 				else
 				{
@@ -643,11 +645,12 @@ MainViewController *staticMVC;
 			{
 				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-//                    _sendViewController.walletUUID = self.strWalletUUID;
-                    [_selectedViewController.view removeFromSuperview];
-                    _selectedViewController = _sendViewController;
-                    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-                    [MainViewController moveSelectedViewController: 0.0];
+////                    _sendViewController.walletUUID = self.strWalletUUID;
+//                    [_selectedViewController.view removeFromSuperview];
+//                    _selectedViewController = _sendViewController;
+//                    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+//                    [MainViewController moveSelectedViewController: 0.0];
+                    [MainViewController animateSwapViewControllers:_sendViewController out:_selectedViewController];
 				}
 				else
 				{
@@ -662,11 +665,12 @@ MainViewController *staticMVC;
 			{
 				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-					[_selectedViewController.view removeFromSuperview];
-					_selectedViewController = _walletsViewController;
-					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-//                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
-                    [MainViewController moveSelectedViewController: 0.0];
+//					[_selectedViewController.view removeFromSuperview];
+//					_selectedViewController = _walletsViewController;
+//					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+////                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
+//                    [MainViewController moveSelectedViewController: 0.0];
+                    [MainViewController animateSwapViewControllers:_walletsViewController out:_selectedViewController];
 				}
 				else
 				{
@@ -1734,11 +1738,43 @@ MainViewController *staticMVC;
                      }];
 }
 
-+ (void)animateIn:(NSString *)identifier withBlur:(BOOL)withBlur
+//+ (void)animateIn:(NSString *)identifier withBlur:(BOOL)withBlur
+//{
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+//    UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:identifier];
+//    [MainViewController animateView:controller.view withBlur:withBlur];
+//}
+
++ (void)animateSwapViewControllers:(UIViewController *)in out:(UIViewController *)out
 {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-    UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:identifier];
-    [MainViewController animateView:controller.view withBlur:withBlur];
+    staticMVC.selectedViewController = in;
+    [staticMVC.view insertSubview:staticMVC.selectedViewController.view belowSubview:staticMVC.tabBar];
+//                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
+    [out.view setAlpha:1.0];
+    [in.view setAlpha:0.0];
+    [staticMVC.view layoutIfNeeded];
+
+    CGRect frame = in.view.frame;
+    frame.origin.x = 0;
+
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [UIView animateWithDuration:0.20
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+                     {
+                         in.view.frame = frame;
+                         staticMVC.blurViewLeft.constant = 0;
+                         [out.view setAlpha:0.0];
+                         [in.view setAlpha:1.0];
+
+                         [staticMVC.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished)
+                     {
+                         [out.view removeFromSuperview];
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                     }];
 }
 
 + (void)animateView:(UIView *)view withBlur:(BOOL)withBlur
