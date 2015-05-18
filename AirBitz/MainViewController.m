@@ -98,6 +98,7 @@ typedef enum eAppMode
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *navBarTop;
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundViewBlue;
 @property UIViewController            *selectedViewController;
 @property UIViewController            *navBarOwnerViewController;
 
@@ -312,7 +313,7 @@ MainViewController *staticMVC;
 
 -(void)showFastestLogin
 {
-    self.backgroundView.image = [Theme Singleton].backgroundLogin;
+//    self.backgroundView.image = [Theme Singleton].backgroundLogin;
 
     if (firstLaunch) {
         bool exists = [CoreBridge PINLoginExists];
@@ -325,6 +326,44 @@ MainViewController *staticMVC;
             });
         });
     }
+}
+
++ (void)showBackground:(BOOL)loggedIn animate:(BOOL)animated
+{
+    CGFloat bvStart, bvEnd, bvbStart, bvbEnd;
+
+    if (loggedIn)
+    {
+        bvStart = bvbEnd = 1.0;
+        bvEnd = bvbStart = 0.0;
+    }
+    else
+    {
+        bvStart = bvbEnd = 0.0;
+        bvEnd = bvbStart = 1.0;
+    }
+    if(animated)
+    {
+        [staticMVC.backgroundView setAlpha:bvStart];
+        [staticMVC.backgroundViewBlue setAlpha:bvbStart];
+        [UIView animateWithDuration:1.0
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
+                         animations:^
+                         {
+                             [staticMVC.backgroundView setAlpha:bvEnd];
+                             [staticMVC.backgroundViewBlue setAlpha:bvbEnd];
+                         }
+                         completion:^(BOOL finished)
+                         {
+                         }];
+    }
+    else
+    {
+        [staticMVC.backgroundView setAlpha:bvEnd];
+        [staticMVC.backgroundViewBlue setAlpha:bvbEnd];
+    }
+
 }
 
 +(void)moveSelectedViewController: (CGFloat) x
@@ -362,6 +401,8 @@ MainViewController *staticMVC;
     [MainViewController hideTabBarAnimated:animated];
     [MainViewController hideNavBarAnimated:animated];
     [MainViewController animateFadeIn:_loginViewController.view];
+    [MainViewController showBackground:NO animate:YES];
+
 }
 
 +(void)showHideTabBar:(NSNotification *)notification
@@ -766,7 +807,7 @@ MainViewController *staticMVC;
 
 - (void)loginViewControllerDidLogin:(BOOL)bNewAccount
 {
-    self.backgroundView.image = [Theme Singleton].backgroundApp;
+//    self.backgroundView.image = [Theme Singleton].backgroundApp;
 
     if (bNewAccount) {
         _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
@@ -1104,7 +1145,7 @@ MainViewController *staticMVC;
 
 - (void)LoginViewControllerDidPINLogin
 {
-    self.backgroundView.image = [Theme Singleton].backgroundApp;
+//    self.backgroundView.image = [Theme Singleton].backgroundApp;
 
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
@@ -1672,6 +1713,11 @@ MainViewController *staticMVC;
 
 + (void)animateFadeOut:(UIView *)view
 {
+    [MainViewController animateFadeOut:view remove:NO];
+}
+
++ (void)animateFadeOut:(UIView *)view remove:(BOOL)removeFromView
+{
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [view setAlpha:1.0];
     [UIView animateWithDuration:0.35
@@ -1682,6 +1728,8 @@ MainViewController *staticMVC;
                      }
                      completion:^(BOOL finished) {
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                         if (removeFromView)
+                             [view removeFromSuperview];
 //                         cb();
                      }];
 }
@@ -1702,7 +1750,10 @@ MainViewController *staticMVC;
     [staticMVC.view insertSubview:view belowSubview:staticMVC.tabBar];
 
     if (withBlur)
+    {
         staticMVC.blurViewLeft.constant = staticMVC.view.bounds.size.width;
+        [staticMVC.view layoutIfNeeded];
+    }
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.35
@@ -1712,8 +1763,10 @@ MainViewController *staticMVC;
                      {
                          view.frame = staticMVC.view.bounds;
                          if (withBlur)
+                         {
                              staticMVC.blurViewLeft.constant = 0;
-                         [staticMVC.view layoutIfNeeded];
+                             [staticMVC.view layoutIfNeeded];
+                         }
                      }
                      completion:^(BOOL finished)
                      {

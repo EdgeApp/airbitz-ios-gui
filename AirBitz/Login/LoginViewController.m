@@ -385,6 +385,7 @@ static BOOL bInitialized = false;
 
         _bSuccess = NO;
         [self showSpinner:YES];
+        [MainViewController showBackground:YES animate:YES];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             tABC_Error error;
             ABC_SignIn([self.usernameSelector.textField.text UTF8String],
@@ -497,6 +498,7 @@ static BOOL bInitialized = false;
 - (void)signIn:(NSString *)PINCode
 {
     [self animateToInitialPresentation];
+    [MainViewController showBackground:YES animate:YES];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
     {
@@ -515,6 +517,7 @@ static BOOL bInitialized = false;
                 }
                 case ABC_CC_BadPassword:
                 {
+                    [MainViewController showBackground:NO animate:YES];
                     if ([[User Singleton] haveExceededPINLoginInvalidEntries])
                     {
                         [[User Singleton] resetPINLoginInvalidEntryCount];
@@ -528,6 +531,7 @@ static BOOL bInitialized = false;
                 }
                 default:
                 {
+                    [MainViewController showBackground:NO animate:YES];
                     [self showFadingError:[Util errorMap:&error]];
                     
                 }
@@ -890,8 +894,10 @@ static BOOL bInitialized = false;
         });
         [self.delegate loginViewControllerDidLogin:NO];
     } else if (ABC_CC_InvalidOTP == _resultCode) {
+        [MainViewController showBackground:NO animate:YES];
         [self launchTwoFactorMenu];
     } else {
+        [MainViewController showBackground:NO animate:YES];
         if (ABC_CC_InvalidOTP == _resultCode) {
             [self launchTwoFactorMenu];
         } else {
