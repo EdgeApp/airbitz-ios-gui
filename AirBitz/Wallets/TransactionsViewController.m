@@ -1312,11 +1312,13 @@
             [self resignAllResponders];
             if ([self searchEnabled])
             {
-                [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row]];
+                if ([self.arraySearchTransactions count] > 0)
+                    [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row]];
             }
             else
             {
-                [self launchTransactionDetailsWithTransaction:[[CoreBridge Singleton].currentWallet.arrayTransactions objectAtIndex:indexPath.row]];
+                if ([[CoreBridge Singleton].currentWallet.arrayTransactions count] > 0)
+                    [self launchTransactionDetailsWithTransaction:[[CoreBridge Singleton].currentWallet.arrayTransactions objectAtIndex:indexPath.row]];
             }
         }
     }
