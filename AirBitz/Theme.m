@@ -65,13 +65,21 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.exitButtonText = NSLocalizedString(@"Exit", @"Exit button text on top left");
     self.helpButtonText = NSLocalizedString(@"Help", @"Help button text on top right");
     self.infoButtonText = NSLocalizedString(@"Info", @"Info button text on top right");
+    self.doneButtonText = NSLocalizedString(@"Done", @"Generic DONE button text");
+    self.cancelButtonText = NSLocalizedString(@"Cancel", @"Generic CANCEL button text");
+    self.exportButtonText = NSLocalizedString(@"Export", @"EXPORT button text for wallet export");
+    self.renameButtonText = NSLocalizedString(@"Rename", @"RENAME button text for wallet rename");
     self.walletBalanceHeaderText = NSLocalizedString(@"TOTAL: ", @"Prefix of wallet balance dropdown header");
+    self.walletNameHeaderText = NSLocalizedString(@"Wallet: ", @"Prefix of wallet name on rename popup");
+    self.renameWalletWarningText = NSLocalizedString(@"Wallet name must have at least one character", nil);
     self.transactionCellNoTransactionsText = NSLocalizedString(@"No Transactions", @"what to display when wallet has no transactions");
     self.transactionCellNoTransactionsFoundText = NSLocalizedString(@"No Transactions Found", @"what to display when no transactions are found in search");
     self.fiatText = NSLocalizedString(@"Fiat", @"Fiat");
     self.walletHeaderButtonHelpText = NSLocalizedString(@"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet", @"Popup wallet help test");
     self.walletHasBeenArchivedText = NSLocalizedString(@"This wallet has been archived. Please select a different wallet from the [Wallets] tab below", @"Popup sessage for when a wallet is archived");
     self.walletsPopupHelpText = NSLocalizedString(@"Tap and hold a wallet for additional options", nil);
+
+
     self.sendRequestButtonDisabled = 0.4f;
 
     self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];

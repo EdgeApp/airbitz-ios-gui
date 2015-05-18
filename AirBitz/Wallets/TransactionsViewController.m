@@ -56,8 +56,10 @@
     BalanceView                         *_balanceView;
     FadingAlertView2                    *_fadingAlert2;
     Wallet                              *longTapWallet;
+    UIAlertView                         *longTapAlert;
+    UIAlertView                         *renameAlert;
 
-    BOOL                        _archiveCollapsed;
+    BOOL                                _archiveCollapsed;
 
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bSearchModeEnabled;
@@ -1477,6 +1479,57 @@
 //    _bWalletNameWarningDisplaying = NO;
 //}
 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (alertView == longTapAlert)
+    {
+        if (buttonIndex == 1)
+        {
+            // Do Rename popup
+            renameAlert =[[UIAlertView alloc ] initWithTitle:NSLocalizedString(@"Rename Wallet", nil)
+                                                     message:longTapWallet.strName
+                                                    delegate:self
+                                           cancelButtonTitle:[Theme Singleton].cancelButtonText
+                                           otherButtonTitles:[Theme Singleton].doneButtonText, nil];
+            renameAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            UITextField *textField = [renameAlert textFieldAtIndex:0];
+            textField.text = longTapWallet.strName;
+            textField.placeholder = longTapWallet.strName;
+
+            [renameAlert show];
+        }
+
+        if (buttonIndex == 2)
+        {
+            [self exportWallet:longTapWallet];
+        }
+    }
+    else if (alertView == renameAlert)
+    {
+        if (buttonIndex == 1) {  //Login
+            UITextField *textField = [alertView textFieldAtIndex:0];
+            //        // need at least one character in a wallet name
+            if ([textField.text length])
+            {
+                //NSLog(@"rename wallet to: %@", textField.text);
+                tABC_Error error;
+                ABC_RenameWallet([[User Singleton].name UTF8String],
+                                 [[User Singleton].password UTF8String],
+                                 [longTapWallet.strUUID UTF8String],
+                                 (char *)[textField.text UTF8String],
+                                 &error);
+                [Util printABC_Error:&error];
+                [CoreBridge refreshWallets];
+            }
+            else
+            {
+                [MainViewController showFadingAlert:[Theme Singleton].renameWalletWarningText];
+            }
+
+        }
+    }
+}
+
 #pragma mark - Export Wallet Delegates
 
 - (void)exportWalletViewControllerDidFinish:(ExportWalletViewController *)controller
@@ -1515,6 +1568,35 @@
 //}
 
 #pragma mark - GestureReconizer methods
+
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    CGPoint p = [gestureRecognizer locationInView:self.walletsTable];
+
+    NSIndexPath *indexPath = [self.walletsTable indexPathForRowAtPoint:p];
+    if (indexPath == nil) {
+        NSLog(@"long press on table view but not on a row");
+    } else if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"long press on table view at section %d, row %d", indexPath.section, indexPath.row);
+        if (indexPath.section == WALLET_SECTION_ACTIVE)
+        {
+            longTapWallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:indexPath.row];
+        }
+        else if (indexPath.section == WALLET_SECTION_ARCHIVED)
+        {
+            longTapWallet = [[CoreBridge Singleton].arrayArchivedWallets objectAtIndex:indexPath.row];
+        }
+        longTapAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@%@",[Theme Singleton].walletNameHeaderText, longTapWallet.strName]
+                                                  message:@""
+                                                 delegate:self
+                                        cancelButtonTitle:[Theme Singleton].cancelButtonText
+                                        otherButtonTitles:[Theme Singleton].renameButtonText,[Theme Singleton].exportButtonText,nil];
+        [longTapAlert show];
+    } else {
+        NSLog(@"gestureRecognizer.state = %d", gestureRecognizer.state);
+    }
+}
+
 
 - (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
 {
@@ -1616,46 +1698,6 @@
 
 }
 
--(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
-{
-    CGPoint p = [gestureRecognizer locationInView:self.walletsTable];
-
-    NSIndexPath *indexPath = [self.walletsTable indexPathForRowAtPoint:p];
-    if (indexPath == nil) {
-        NSLog(@"long press on table view but not on a row");
-    } else if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"long press on table view at section %d, row %d", indexPath.section, indexPath.row);
-        if (indexPath.section == WALLET_SECTION_ACTIVE)
-        {
-            longTapWallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:indexPath.row];
-        }
-        else if (indexPath.section == WALLET_SECTION_ARCHIVED)
-        {
-            longTapWallet = [[CoreBridge Singleton].arrayArchivedWallets objectAtIndex:indexPath.row];
-        }
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Wallet: %@",longTapWallet.strName]
-                                                        message:@""
-                                                       delegate:self
-                                              cancelButtonTitle:@"CANCEL"
-                                              otherButtonTitles:@"Rename",@"Export",nil];
-        [alert show];
-    } else {
-        NSLog(@"gestureRecognizer.state = %d", gestureRecognizer.state);
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        // Do Rename popup
-    }
-
-    if (buttonIndex == 2)
-    {
-        [self exportWallet:longTapWallet];
-    }
-}
 // retrieves the wallets from disk and put them in the two member arrays
 //- (void)reloadWallets: (NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets
 //{
