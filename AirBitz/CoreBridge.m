@@ -732,6 +732,12 @@ static BOOL bOtpError = NO;
         [singleton.arrayArchivedWallets insertObject:wallet atIndex:destinationIndexPath.row];
     }
 
+    if (sourceIndexPath.section != destinationIndexPath.section)
+    {
+        // Wallet moved to/from archive. Reset attributes to Core
+        [CoreBridge setWalletAttributes:wallet];
+    }
+
     NSMutableString *uuids = [[NSMutableString alloc] init];
     for (Wallet *w in singleton.arrayWallets)
     {
@@ -767,6 +773,7 @@ static BOOL bOtpError = NO;
     if (ABC_CC_Ok == result)
     {
         return true;
+        [CoreBridge refreshWallets];
     }
     else
     {
