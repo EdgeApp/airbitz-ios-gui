@@ -22,7 +22,7 @@
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="568" translatesAutoresizingMaskIntoConstraints="NO" id="OYT-Tf-r4L" userLabel="AlertGroup">
                     <rect key="frame" x="35" y="159" width="250" height="250"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0DF-hU-X03" userLabel="BlurView" customClass="BlurView">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0DF-hU-X03" userLabel="View -blue" customClass="BlurView">
                             <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                             <color key="backgroundColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
                         </view>

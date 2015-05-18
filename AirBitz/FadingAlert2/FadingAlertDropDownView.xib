@@ -122,7 +122,6 @@
             <connections>
                 <outlet property="activityIndicator" destination="Joy-6Y-Kdk" id="R2S-4F-jcd"/>
                 <outlet property="alertGroupView" destination="OYT-Tf-r4L" id="E2f-CO-j1h"/>
-                <outlet property="blurView" destination="6Ag-2s-o7z" id="b6O-sU-Lro"/>
                 <outlet property="connectedLine1" destination="CvA-Nc-W9y" id="U1t-Bt-1I0"/>
                 <outlet property="connectedLine2" destination="xIk-Ub-qbu" id="cVc-yQ-Chl"/>
                 <outlet property="connectedLine3" destination="ZOf-PC-P7M" id="AY2-bn-aKv"/>
