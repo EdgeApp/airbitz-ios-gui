@@ -21,6 +21,8 @@
 @property (nonatomic) UIColor *colorSendButtonDisabled;
 @property (nonatomic) UIColor *colorRequestButtonDisabled;
 @property (nonatomic) CGFloat sendRequestButtonDisabled;
+@property (nonatomic) UIColor *colorTextBright;
+@property (nonatomic) UIColor *colorTextDark;
 @property (nonatomic) UIColor *colorRequestTopTextField;
 @property (nonatomic) UIColor *colorRequestTopTextFieldPlaceholder;
 @property (nonatomic) UIColor *colorRequestBottomTextField;
@@ -33,11 +35,25 @@
 @property (nonatomic) NSString *helpButtonText;
 @property (nonatomic) NSString *infoButtonText;
 @property (nonatomic) NSString *deleteAccountWarning;
+@property (nonatomic) NSString *walletBalanceHeaderText;
+@property (nonatomic) NSString *transactionCellNoTransactionsText;
+@property (nonatomic) NSString *transactionCellNoTransactionsFoundText;
+@property (nonatomic) NSString *walletHeaderButtonHelpText;
+@property (nonatomic) NSString *walletHasBeenArchivedText;
+@property (nonatomic) NSString *fiatText;
+
+
 @property (nonatomic) CGFloat heightListings;
 @property (nonatomic) CGFloat heightSearchClues;
 @property (nonatomic) CGFloat heightBLETableCells;
 @property (nonatomic) UIImage *backgroundLogin;
 @property (nonatomic) UIImage *backgroundApp;
+@property (nonatomic) CGFloat heightWalletHeader;
+@property (nonatomic) CGFloat heightWalletCell;
+@property (nonatomic) CGFloat heightTransactionCell;
+
+
+
 
 
 

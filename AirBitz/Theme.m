@@ -45,6 +45,8 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self = [super init];
 
     //    self.denomination = 100000000;
+    self.colorTextBright = [UIColor whiteColor];
+    self.colorTextDark = [UIColor darkGrayColor];
     self.colorTextLink = UIColorFromARGB(0xFF007aFF);
     self.deleteAccountWarning = NSLocalizedString(@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.", @"Delete Account Warning");
     self.colorSendButton = UIColorFromARGB(0xFF80c342);
@@ -53,9 +55,9 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorRequestButtonDisabled = UIColorFromARGB(0x5580c342);
     self.colorSendButtonDisabled = UIColorFromARGB(0x55006698);
 
-    self.colorRequestTopTextField = [UIColor whiteColor];
+    self.colorRequestTopTextField = self.colorTextBright;
     self.colorRequestTopTextFieldPlaceholder = UIColorFromARGB(0xffdddddd);
-    self.colorRequestBottomTextField = [UIColor darkGrayColor];
+    self.colorRequestBottomTextField = self.colorTextDark;
 
     self.appFont = @"Lato-Regular";
 
@@ -63,7 +65,12 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.exitButtonText = NSLocalizedString(@"Exit", @"Exit button text on top left");
     self.helpButtonText = NSLocalizedString(@"Help", @"Help button text on top right");
     self.infoButtonText = NSLocalizedString(@"Info", @"Info button text on top right");
-
+    self.walletBalanceHeaderText = NSLocalizedString(@"Total: ", @"Prefix of wallet balance dropdown header");
+    self.transactionCellNoTransactionsText = NSLocalizedString(@"No Transactions", @"what to display when wallet has no transactions");
+    self.transactionCellNoTransactionsFoundText = NSLocalizedString(@"No Transactions Found", @"what to display when no transactions are found in search");
+    self.fiatText = NSLocalizedString(@"Fiat", @"Fiat");
+    self.walletHeaderButtonHelpText = NSLocalizedString(@"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet", @"Popup wallet help test");
+    self.walletHasBeenArchivedText = NSLocalizedString(@"This wallet has been archived. Please select a different wallet from the [Wallets] tab below", @"Popup sessage for when a wallet is archived");
     self.sendRequestButtonDisabled = 0.4f;
 
     self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];
@@ -72,13 +79,17 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 //    if (IS_IPHONE4)
     {
         self.heightListings = 90.0;
+        self.heightWalletHeader = 44.0;
         self.heightSearchClues = 35.0;
         self.fadingAlertDropdownHeight = 100;
         self.heightBLETableCells = 50;
+        self.heightWalletCell = 60;
+        self.heightTransactionCell = 72;
     }
     if (IS_MIN_IPHONE5)
     {
         self.heightListings = 110.0;
+        self.heightWalletHeader = 50.0;
         self.heightSearchClues = 40.0;
         self.heightBLETableCells = 55;
     }
@@ -90,6 +101,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     }
     if (IS_MIN_IPHONE6_PLUS)
     {
+        self.heightWalletHeader = 55.0;
         self.heightListings = 130.0;
         self.heightSearchClues = 45.0;
         self.heightBLETableCells = 70;

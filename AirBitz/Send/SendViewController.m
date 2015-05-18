@@ -1291,14 +1291,28 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
         {
+            if (_fadingAlert)
+            {
+                [_fadingAlert dismiss:NO];
+                _fadingAlert = nil;
+            }
             _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
             _fadingAlert.fadeDelay = 9999;
             _fadingAlert.fadeDuration = FADING_HELP_DURATION;
-            [_fadingAlert messageTextSet:NSLocalizedString(@"This wallet has been archived. Please select a different wallet from the [Wallets] tab below", @"Popup sessage for when a wallet is archived")];
+            [_fadingAlert messageTextSet:[Theme Singleton].walletHasBeenArchivedText];
             [_fadingAlert blockModal:YES];
             [_fadingAlert showFading];
 
         }
+        else
+        {
+            if (_fadingAlert)
+            {
+                [_fadingAlert dismiss:NO];
+                _fadingAlert = nil;
+            }
+        }
+
 
         [self.tableView reloadData];
 

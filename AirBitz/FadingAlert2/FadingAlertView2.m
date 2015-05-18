@@ -92,6 +92,8 @@
     currentView.alertGroupView.layer.shadowRadius = 10;
     currentView.alertGroupView.layer.shadowColor = [[UIColor blackColor] CGColor];
     currentView.alertGroupView.layer.shadowOpacity = 0.4;
+    [currentView showSpinner:NO center:YES];
+
 
     [parentView addSubview:currentView];
 
@@ -115,6 +117,7 @@
     currentView.alertGroupView.layer.shadowRadius = 10;
     currentView.alertGroupView.layer.shadowColor = [[UIColor blackColor] CGColor];
     currentView.alertGroupView.layer.shadowOpacity = 0.4;
+    [currentView showSpinner:NO center:YES];
 
     currentView.delegate = delegate;
 
@@ -142,7 +145,7 @@
     currentView.bIsBlocking = true;
     currentView.activityIndicator.hidden = false;
 
-    [currentView showSpinner:YES center:YES];
+    [currentView showSpinner:NO center:YES];
 //    [currentView showBackground:NO];
 
     currentView.alpha = 0.0;
@@ -174,6 +177,10 @@
 }
 
 - (void)showSpinner:(BOOL)visible
+{
+    [self showSpinner:visible center:YES];
+}
+- (void)showSpinner:(BOOL)visible center:(BOOL)center
 {
     _activityIndicator.hidden = !visible;
 }
