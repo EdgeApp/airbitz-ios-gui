@@ -55,6 +55,7 @@
 {
     BalanceView                         *_balanceView;
     FadingAlertView2                    *_fadingAlert2;
+    Wallet                              *longTapWallet;
 
     BOOL                        _archiveCollapsed;
 
@@ -409,7 +410,8 @@
     }
 }
 
-- (IBAction)buttonExportTouched:(id)sender
+//- (IBAction)buttonExportTouched:(id)sender
+- (void)exportWallet:(Wallet *)wallet
 {
 //    if (YES == [self canLeaveWalletNameField])
     {
@@ -419,7 +421,7 @@
         self.exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
 
         self.exportWalletViewController.delegate = self;
-        self.exportWalletViewController.wallet = [CoreBridge Singleton].currentWallet;
+        self.exportWalletViewController.wallet = wallet;
 
         CGRect frame = self.view.bounds;
         frame.origin.x = frame.size.width;
@@ -1464,12 +1466,12 @@
 
 #pragma mark - UIAlertView delegates
 
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
+//-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+//{
 //    // the only alert we have that uses a delegate is the one that tells them they must provide a wallet name
 //    [self.textWalletName becomeFirstResponder];
 //    _bWalletNameWarningDisplaying = NO;
-}
+//}
 
 #pragma mark - Export Wallet Delegates
 
@@ -1600,8 +1602,56 @@
     self.archivedWalletsHeaderView.segmentedControlBTCUSD.hidden = YES;
     self.archivedWalletsHeaderView.segmentedControlBTCUSD.enabled = NO;
     self.archivedWalletsHeaderView.delegate = self;
+
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+            initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 2.0; //seconds
+    lpgr.delegate = self;
+    [self.walletsTable addGestureRecognizer:lpgr];
+
+
 }
 
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    CGPoint p = [gestureRecognizer locationInView:self.walletsTable];
+
+    NSIndexPath *indexPath = [self.walletsTable indexPathForRowAtPoint:p];
+    if (indexPath == nil) {
+        NSLog(@"long press on table view but not on a row");
+    } else if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"long press on table view at section %d, row %d", indexPath.section, indexPath.row);
+        if (indexPath.section == WALLET_SECTION_ACTIVE)
+        {
+            longTapWallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:indexPath.row];
+        }
+        else if (indexPath.section == WALLET_SECTION_ARCHIVED)
+        {
+            longTapWallet = [[CoreBridge Singleton].arrayArchivedWallets objectAtIndex:indexPath.row];
+        }
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Wallet: %@",longTapWallet.strName]
+                                                        message:@""
+                                                       delegate:self
+                                              cancelButtonTitle:@"CANCEL"
+                                              otherButtonTitles:@"Rename",@"Export",nil];
+        [alert show];
+    } else {
+        NSLog(@"gestureRecognizer.state = %d", gestureRecognizer.state);
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        // Do Rename popup
+    }
+
+    if (buttonIndex == 2)
+    {
+        [self exportWallet:longTapWallet];
+    }
+}
 // retrieves the wallets from disk and put them in the two member arrays
 //- (void)reloadWallets: (NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets
 //{
