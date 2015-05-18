@@ -816,6 +816,7 @@ static BOOL bOtpError = NO;
             return;
         }
 
+        [CoreBridge refreshWallets];
 //        return true;
         return;
     });

@@ -469,6 +469,8 @@ typedef enum eRequestType
 
 - (IBAction)Done
 {
+    BOOL bSomethingChanged = false;
+
     [DL_URLServer.controller cancelAllRequestsForDelegate:self];
 
     [self resignAllResponders];
@@ -480,10 +482,23 @@ typedef enum eRequestType
         
     // add the category if we didn't have it
     [self addCategory: strFullCategory];
-    self.transaction.strCategory = strFullCategory;
-    self.transaction.strName = [self.nameTextField text];
-    self.transaction.strNotes = [self.notesTextView text];
-    
+
+    if (![self.transaction.strCategory isEqualToString:strFullCategory])
+    {
+        self.transaction.strCategory = strFullCategory;
+        bSomethingChanged = true;
+    }
+    if (![self.transaction.strName isEqualToString:[self.nameTextField text]])
+    {
+        self.transaction.strName = [self.nameTextField text];
+        bSomethingChanged = true;
+    }
+    if (![self.transaction.strNotes isEqualToString:[self.notesTextView text]])
+    {
+        self.transaction.strNotes = [self.notesTextView text];
+        bSomethingChanged = true;
+    }
+
     double amountFiat = [[self.fiatTextField text] doubleValue];
 
     if (_transactionDetailsMode == TD_MODE_SENT)
@@ -494,10 +509,22 @@ typedef enum eRequestType
             amountFiat *= -1;
         }
     }
-    self.transaction.amountFiat = amountFiat;
-    self.transaction.bizId = _bizId;
 
-    [CoreBridge storeTransaction: self.transaction];
+    if (amountFiat != self.transaction.amountFiat)
+    {
+        self.transaction.amountFiat = amountFiat;
+        bSomethingChanged = true;
+    }
+    if (self.transaction.bizId != _bizId)
+    {
+        self.transaction.bizId = _bizId;
+        bSomethingChanged = true;
+    }
+
+    if (bSomethingChanged)
+    {
+        [CoreBridge storeTransaction: self.transaction];
+    }
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
         if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
