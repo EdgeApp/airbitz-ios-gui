@@ -7,6 +7,7 @@
 //
 
 #import "ButtonSelectorView2.h"
+#import "BlurView.h"
 
 #define TABLE_ROW_HEIGHT	50.0
 #define TABLE_HEIGHT_PADDING 25.0
@@ -15,7 +16,7 @@
 {
 	CGRect      _originalButtonFrame;
 	UITableView *_selectionTable;
-    UIToolbar   *_blurToolbar;
+    BlurView   *_blurView;
 	CGRect      _originalFrame;
 	float       _amountToGrow;
 }
@@ -183,7 +184,7 @@
 //	tableFrame.origin.y += yOriginOffset;
 	tableFrame.size.height = 0.0;
 
-    _blurToolbar = [[UIToolbar alloc] initWithFrame:tableFrame];
+    _blurView = [[UIToolbar alloc] initWithFrame:tableFrame];
     _selectionTable = [[UITableView alloc] initWithFrame:tableFrame];
 	_selectionTable.delegate = self;
 	_selectionTable.dataSource = self;
@@ -193,8 +194,8 @@
 	_selectionTable.userInteractionEnabled = YES;
     _selectionTable.separatorStyle=UITableViewCellSeparatorStyleNone;
     _selectionTable.backgroundColor = [UIColor clearColor];
-    [self.superview insertSubview:_blurToolbar aboveSubview:self];
-	[self.superview insertSubview:_selectionTable aboveSubview:_blurToolbar];
+    [self.superview insertSubview:_blurView aboveSubview:self];
+	[self.superview insertSubview:_selectionTable aboveSubview:_blurView];
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	//make the table expand from the bottom of the button
@@ -221,19 +222,19 @@
 		 _amountToGrow = frame.size.height - originalHeight;
 		 
 		 _selectionTable.frame = frame;
-         _blurToolbar.frame = frame;
+         _blurView.frame = frame;
 		 
 		 CGRect myFrame = _originalFrame;
 		 myFrame.size.height = frame.origin.y + frame.size.height;
 		 self.frame = myFrame;
 		 
 		 //animate our container's frame (if we have a container)
-		 if(self.containerView)
-		 {
-			 frame = self.containerView.frame;
-			 frame.size.height += _amountToGrow;
-			 self.containerView.frame = frame;
-		 }
+//		 if(self.containerView)
+//		 {
+//			 frame = self.containerView.frame;
+//			 frame.size.height += _amountToGrow;
+//			 self.containerView.frame = frame;
+//		 }
 	 }
 	 completion:^(BOOL finished)
 	 {
@@ -263,16 +264,16 @@
 		 CGRect frame = _selectionTable.frame;
 		 frame.size.height = 0.0;
 		 _selectionTable.frame = frame;
-         _blurToolbar.frame = frame;
+         _blurView.frame = frame;
 		 
 		 self.frame = _originalFrame;
 		 
-		 if (self.containerView)
-		 {
-			 frame = self.containerView.frame;
-			 frame.size.height -= _amountToGrow;
-			 self.containerView.frame = frame;
-		 }
+//		 if (self.containerView)
+//		 {
+//			 frame = self.containerView.frame;
+//			 frame.size.height -= _amountToGrow;
+//			 self.containerView.frame = frame;
+//		 }
 		 
 	 }
 					 completion:^(BOOL finished)
