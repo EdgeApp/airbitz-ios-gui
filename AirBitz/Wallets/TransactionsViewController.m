@@ -216,6 +216,10 @@
     }
                      completion: ^(BOOL finished)
                      {
+                         if (_bWalletsShowing && [[User Singleton] offerWalletHelp]) {
+                             [MainViewController showFadingAlert:[Theme Singleton].walletsPopupHelpText
+                                         withDelay:FADING_HELP_DELAY];
+                         }
                      }];
 }
 

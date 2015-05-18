@@ -20,6 +20,7 @@
 #define REQUEST_VIEW_COUNT @"request_view_count"
 #define SEND_VIEW_COUNT @"send_view_count"
 #define BLE_VIEW_COUNT @"ble_view_count"
+#define WALLETS_VIEW_COUNT @"ble_view_count"
 
 #define REVIEW_ACCOUNT_AGE 14
 #define REVIEW_LOGIN_COUNT 7
@@ -170,6 +171,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.requestViewCount = [localConfig integerForKey:REQUEST_VIEW_COUNT];
     self.sendViewCount = [localConfig integerForKey:SEND_VIEW_COUNT];
     self.bleViewCount = [localConfig integerForKey:BLE_VIEW_COUNT];
+    self.walletsViewCount = [localConfig integerForKey:WALLETS_VIEW_COUNT];
 
     if ([localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]]) {
         self.dailySpendLimitSatoshis = [[localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]] unsignedLongLongValue];
@@ -193,6 +195,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     [localConfig setInteger:self.requestViewCount forKey:REQUEST_VIEW_COUNT];
     [localConfig setInteger:self.sendViewCount forKey:SEND_VIEW_COUNT];
     [localConfig setInteger:self.bleViewCount forKey:BLE_VIEW_COUNT];
+    [localConfig setInteger:self.walletsViewCount forKey:WALLETS_VIEW_COUNT];
 
     [localConfig synchronize];
 }
@@ -324,6 +327,11 @@ static User *singleton = nil;  // this will be the one and only object this stat
                thisSession:&_notifiedBle];
 }
 
+- (BOOL)offerWalletHelp
+{
+    return [self offerHelp:&_walletsViewCount
+               thisSession:&_notifiedWallet];
+}
 - (BOOL)offerHelp:(NSInteger *)value thisSession:(BOOL *)session
 {
     if (*session) {

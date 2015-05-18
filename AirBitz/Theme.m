@@ -71,6 +71,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.fiatText = NSLocalizedString(@"Fiat", @"Fiat");
     self.walletHeaderButtonHelpText = NSLocalizedString(@"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet", @"Popup wallet help test");
     self.walletHasBeenArchivedText = NSLocalizedString(@"This wallet has been archived. Please select a different wallet from the [Wallets] tab below", @"Popup sessage for when a wallet is archived");
+    self.walletsPopupHelpText = NSLocalizedString(@"Tap and hold a wallet for additional options", nil);
     self.sendRequestButtonDisabled = 0.4f;
 
     self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];

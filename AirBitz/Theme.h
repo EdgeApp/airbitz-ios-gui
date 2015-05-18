@@ -41,6 +41,7 @@
 @property (nonatomic) NSString *walletHeaderButtonHelpText;
 @property (nonatomic) NSString *walletHasBeenArchivedText;
 @property (nonatomic) NSString *fiatText;
+@property (nonatomic) NSString *walletsPopupHelpText;
 
 
 @property (nonatomic) CGFloat heightListings;

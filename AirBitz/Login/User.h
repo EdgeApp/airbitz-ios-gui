@@ -45,9 +45,11 @@
 @property (nonatomic, assign) NSInteger requestViewCount;
 @property (nonatomic, assign) NSInteger sendViewCount;
 @property (nonatomic, assign) NSInteger bleViewCount;
+@property (nonatomic, assign) NSInteger walletsViewCount;
 @property (nonatomic) BOOL notifiedSend;
 @property (nonatomic) BOOL notifiedRequest;
 @property (nonatomic) BOOL notifiedBle;
+@property (nonatomic) BOOL notifiedWallet;
 
 + (void)initAll;
 + (void)freeAll;
@@ -59,6 +61,7 @@
 - (BOOL)offerRequestHelp;
 - (BOOL)offerSendHelp;
 - (BOOL)offerBleHelp;
+- (BOOL)offerWalletHelp;
 
 - (id)init;
 - (void)clear;
