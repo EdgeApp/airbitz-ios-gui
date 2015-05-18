@@ -31,10 +31,14 @@
 #import "Contact.h"
 #import "TransferService.h"
 #import "AudioController.h"
+#import "RecipientViewController.h"
 
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
 #define QR_CODE_SIZE          200.0
+#define QR_ATTACHMENT_WIDTH 100
+
+
 
 #define WALLET_REQUEST_BUTTON_WIDTH  200
 
@@ -48,10 +52,16 @@
 #define OPERATION_PLUS		7
 #define OPERATION_PERCENT	8
 
+typedef enum eAddressPickerType
+{
+    AddressPickerType_SMS,
+    AddressPickerType_EMail
+} tAddressPickerType;
+
 static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 @interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelector2Delegate,FadingAlertView2Delegate,CBPeripheralManagerDelegate,
-                                     ShowWalletQRViewControllerDelegate, ImportWalletViewControllerDelegate>
+                                     ShowWalletQRViewControllerDelegate, ImportWalletViewControllerDelegate,RecipientViewControllerDelegate>
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
@@ -71,6 +81,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     NSString                    *_uriString;
     NSMutableString                    *previousWalletUUID;
     BOOL                        bLastCalculatorState;
+    tAddressPickerType          _addressPickerType;
+
 
 
 }
@@ -99,7 +111,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 
 
-
+@property (assign) tABC_TxDetails txDetails;
+@property (nonatomic, strong) RecipientViewController   *recipientViewController;
 @property (weak, nonatomic) IBOutlet UILabel *btcLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fiatLabel;
 @property (nonatomic, weak) IBOutlet UIImageView    *qrCodeImageView;
@@ -127,6 +140,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 @implementation RequestViewController
 @synthesize segmentedControlBTCUSD;
+@synthesize segmentedControlCopyEmailSMS;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -490,20 +504,28 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (IBAction)segmentedControlCopyEmailSMSAction:(id)sender
 {
-    if(segmentedControlBTCUSD.selectedSegmentIndex == 0)
+    if(segmentedControlCopyEmailSMS.selectedSegmentIndex == 0)
     {
-        // Do Copy
-        
+        UIPasteboard *pb = [UIPasteboard generalPasteboard];
+        [pb setString:addressString];
+
+        [MainViewController showFadingAlert:NSLocalizedString(@"Request is copied to the clipboard", nil)];
     }
-    else if(segmentedControlBTCUSD.selectedSegmentIndex == 1)
+    else if(segmentedControlCopyEmailSMS.selectedSegmentIndex == 1)
     {
         // Do Email
-        
+        self.strFullName = @"";
+        self.strEMail = @"";
+
+        [self launchRecipientWithMode:RecipientMode_Email];
     }
-    else if(segmentedControlBTCUSD.selectedSegmentIndex == 2)
+    else if(segmentedControlCopyEmailSMS.selectedSegmentIndex == 2)
     {
         // Do SMS
-        
+        self.strPhoneNumber = @"";
+        self.strFullName = @"";
+
+        [self launchRecipientWithMode:RecipientMode_SMS];
     }
 }
 
@@ -1804,6 +1826,521 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [_fadingAlert showFading];
 }
 
+
+- (void)replaceRequestTags:(NSString **) strContent
+{
+    NSString *amountBTC = [CoreBridge formatSatoshi:_amountSatoshiRequested
+                                         withSymbol:false
+                                      forceDecimals:8];
+    NSString *amountBits = [CoreBridge formatSatoshi:_amountSatoshiRequested
+                                          withSymbol:false
+                                       forceDecimals:2];
+    // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
+
+    NSString *iosURL;
+    NSString *redirectURL = [NSString stringWithString: _uriString];
+    NSString *paramsURI;
+    NSString *paramsURIEnc;
+
+    NSRange tempRange = [_uriString rangeOfString:@"bitcoin:"];
+
+    if (*strContent == NULL)
+    {
+        return;
+    }
+
+    if (tempRange.location != NSNotFound)
+    {
+        iosURL = [_uriString stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
+        paramsURI = [_uriString stringByReplacingCharactersInRange:tempRange withString:@""];
+        paramsURIEnc = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                NULL,
+                (CFStringRef)paramsURI,
+                NULL,
+                (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                kCFStringEncodingUTF8 ));
+        redirectURL = [NSString stringWithFormat:@"%@%@",@"https://airbitz.co/blf/?address=", paramsURIEnc ];
+
+    }
+    NSString *name;
+
+    if ([User Singleton].bNameOnPayments && [User Singleton].fullName)
+    {
+        name = [NSString stringWithString:[User Singleton].fullName];
+    }
+    else
+    {
+        name = nil;
+    }
+
+    NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
+            @"[[abtag FROM]]",
+            @"[[abtag BITCOIN_URL]]",
+            @"[[abtag REDIRECT_URL]]",
+            @"[[abtag BITCOIN_URI]]",
+            @"[[abtag ADDRESS]]",
+            @"[[abtag AMOUNT_BTC]]",
+            @"[[abtag AMOUNT_BITS]]",
+            @"[[abtag QRCODE]]",
+                    nil];
+
+    NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
+            name ? name : @"Unknown User",
+            iosURL,
+            redirectURL,
+                    _uriString,
+            addressString,
+            amountBTC,
+            amountBits,
+            @"cid:qrcode.jpg",
+                    nil];
+
+    for (int i=0; i<[searchList count];i++)
+    {
+        *strContent = [*strContent stringByReplacingOccurrencesOfString:[searchList objectAtIndex:i]
+                                                             withString:[replaceList objectAtIndex:i]];
+    }
+
+}
+
+
+- (void)sendEMail
+{
+
+    // if mail is available
+    if ([MFMailComposeViewController canSendMail])
+    {
+
+        NSError* error = nil;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"emailTemplate" ofType:@"html"];
+        NSString* content = [NSString stringWithContentsOfFile:path
+                                                      encoding:NSUTF8StringEncoding
+                                                         error:&error];
+        [self replaceRequestTags:&content];
+
+        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+
+        if ([self.strEMail length])
+        {
+            [mailComposer setToRecipients:[NSArray arrayWithObject:self.strEMail]];
+        }
+
+        NSString *subject;
+
+        if ([User Singleton].bNameOnPayments && [User Singleton].fullName)
+        {
+            subject = [NSString stringWithFormat:@"Airbitz Bitcoin Request from %@", [User Singleton].fullName];
+        }
+        else
+        {
+            subject = [NSString stringWithFormat:@"Airbitz Bitcoin Request"];
+        }
+
+        [mailComposer setSubject:NSLocalizedString(subject, nil)];
+
+        [mailComposer setMessageBody:content isHTML:YES];
+
+        NSData *imgData;
+
+        UIImage *imageAttachment = [self imageWithImage:self.qrCodeImageView.image scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
+        imgData = [NSData dataWithData:UIImageJPEGRepresentation(imageAttachment, 1.0)];
+        [mailComposer addAttachmentData:imgData mimeType:@"image/jpeg" fileName:@"qrcode.jpg"];
+
+        mailComposer.mailComposeDelegate = self;
+
+        [self presentViewController:mailComposer animated:YES completion:nil];
+        [self finalizeRequest:@"Email"];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"Can't send e-mail"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+- (void)sendSMS
+{
+    //NSLog(@"sendSMS to: %@ / %@", self.strFullName, self.strPhoneNumber);
+
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    if ([MFMessageComposeViewController canSendText] && [MFMessageComposeViewController canSendAttachments])
+    {
+
+        NSError* error = nil;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"SMSTemplate" ofType:@"txt"];
+        NSString* content = [NSString stringWithContentsOfFile:path
+                                                      encoding:NSUTF8StringEncoding
+                                                         error:&error];
+        [self replaceRequestTags:&content];
+
+        // create the attachment
+        UIImage *imageAttachment = [self imageWithImage:self.qrCodeImageView.image scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:QR_CODE_TEMP_FILENAME];
+        BOOL bAttached = [controller addAttachmentData:UIImagePNGRepresentation(imageAttachment) typeIdentifier:(NSString*)kUTTypePNG filename:filePath];
+        if (!bAttached)
+        {
+            NSLog(@"Could not attach qr code");
+        }
+
+        controller.body = content;
+
+        if (self.strPhoneNumber)
+        {
+            if ([self.strPhoneNumber length] != 0)
+            {
+                controller.recipients = @[self.strPhoneNumber];
+            }
+        }
+
+        controller.messageComposeDelegate = self;
+
+        [self presentViewController:controller animated:YES completion:nil];
+        [self finalizeRequest:@"SMS"];
+    }
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
+{
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    CGContextSetInterpolationQuality(UIGraphicsGetCurrentContext(), kCGInterpolationNone);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+
+- (void)launchRecipientWithMode:(tRecipientMode)mode
+{
+    if (self.recipientViewController)
+    {
+        return;
+    }
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    self.recipientViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RecipientViewController"];
+
+    self.recipientViewController.delegate = self;
+    self.recipientViewController.mode = mode;
+
+    [MainViewController animateView:self.recipientViewController.view withBlur:NO];
+//    CGRect frame = self.view.bounds;
+//    frame.origin.x = frame.size.width;
+//    self.recipientViewController.view.frame = frame;
+//    [self.view addSubview:self.recipientViewController.view];
+//
+//    [UIView animateWithDuration:ENTER_ANIM_TIME_SECS
+//                          delay:0.0
+//                        options:UIViewAnimationOptionCurveEaseInOut
+//                     animations:^
+//                     {
+//                         self.recipientViewController.view.frame = self.view.bounds;
+//                     }
+//                     completion:^(BOOL finished)
+//                     {
+//                     }];
+}
+
+- (void)dismissRecipient
+{
+    [self.recipientViewController.view removeFromSuperview];
+    self.recipientViewController = nil;
+}
+
+- (void)installLeftToRightSwipeDetection
+{
+    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+    gesture.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:gesture];
+}
+
+// used by the guesture recognizer to ignore exit
+- (BOOL)haveSubViewsShowing
+{
+    return (self.recipientViewController != nil);
+}
+
+
+#pragma mark - Address Book delegates
+
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
+{
+    [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+{
+    return YES;
+}
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+                                property:(ABPropertyID)property
+                              identifier:(ABMultiValueIdentifier)identifier
+{
+
+    self.strFullName = [Util getNameFromAddressRecord:person];
+
+    if (_addressPickerType == AddressPickerType_SMS)
+    {
+        if (property == kABPersonPhoneProperty)
+        {
+            ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
+            for (CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++)
+            {
+                if (identifier == ABMultiValueGetIdentifierAtIndex(multiPhones, i))
+                {
+                    NSString *strPhoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(multiPhones, i);
+                    self.strPhoneNumber = strPhoneNumber;
+                    break;
+                }
+            }
+            CFRelease(multiPhones);
+        }
+
+        [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:^{
+            [self sendSMS];
+        }];
+    }
+    else if (_addressPickerType == AddressPickerType_EMail)
+    {
+        if (property == kABPersonEmailProperty)
+        {
+            ABMultiValueRef multiEMails = ABRecordCopyValue(person, kABPersonEmailProperty);
+            for (CFIndex i = 0; i < ABMultiValueGetCount(multiEMails); i++)
+            {
+                if (identifier == ABMultiValueGetIdentifierAtIndex(multiEMails, i))
+                {
+                    NSString *strEMail = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(multiEMails, i);
+                    self.strEMail = strEMail;
+                    break;
+                }
+            }
+            CFRelease(multiEMails);
+        }
+
+        [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:^{
+            [self sendEMail];
+        }];
+    }
+    return NO;
+}
+
+- (void)finalizeRequest:(NSString *)type
+{
+    if (_strFullName) {
+        _txDetails.szName = (char *)[_strFullName UTF8String];
+    } else if (_strEMail) {
+        _txDetails.szName = (char *)[_strEMail UTF8String];
+    } else if (_strPhoneNumber) {
+        _txDetails.szName = (char *)[_strPhoneNumber UTF8String];
+    }
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    NSDate *now = [NSDate date];
+
+    NSMutableString *notes = [[NSMutableString alloc] init];
+    [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ on %@.", nil),
+                        [CoreBridge formatSatoshi:_txDetails.amountSatoshi],
+                        [CoreBridge formatCurrency:_txDetails.amountCurrency withCurrencyNum:[CoreBridge Singleton].currentWallet.currencyNum],
+                        type,
+                        [dateFormatter stringFromDate:now]];
+    _txDetails.szNotes = (char *)[notes UTF8String];
+    tABC_Error Error;
+    // Update the Details
+    if (ABC_CC_Ok != ABC_ModifyReceiveRequest([[User Singleton].name UTF8String],
+            [[User Singleton].password UTF8String],
+            [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
+            [requestID UTF8String],
+            &_txDetails,
+            &Error))
+    {
+        [Util printABC_Error:&Error];
+    }
+    // Finalize this request so it isn't used elsewhere
+    if (ABC_CC_Ok != ABC_FinalizeReceiveRequest([[User Singleton].name UTF8String],
+            [[User Singleton].password UTF8String],
+            [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
+            [requestID UTF8String],
+            &Error))
+    {
+        [Util printABC_Error:&Error];
+    }
+}
+
+#pragma mark - MFMessageComposeViewController delegate
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    switch (result)
+    {
+        case MessageComposeResultCancelled:
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Airbitz"
+                                                            message:@"SMS cancelled"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+            [alert show];
+        }
+            break;
+
+        case MessageComposeResultFailed:
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Airbitz"
+                                                            message:@"Error sending SMS"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+            [alert show];
+        }
+            break;
+
+        case MessageComposeResultSent:
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Airbitz"
+                                                            message:@"SMS sent"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+            [alert show];
+        }
+            break;
+
+        default:
+            break;
+    }
+
+    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Mail Compose Delegate Methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    NSString *strTitle = NSLocalizedString(@"Airbitz", nil);
+    NSString *strMsg = nil;
+
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            strMsg = NSLocalizedString(@"Email cancelled", nil);
+            break;
+
+        case MFMailComposeResultSaved:
+            strMsg = NSLocalizedString(@"Email saved to send later", nil);
+            break;
+
+        case MFMailComposeResultSent:
+            strMsg = NSLocalizedString(@"Email sent", nil);
+            break;
+
+        case MFMailComposeResultFailed:
+        {
+            strTitle = NSLocalizedString(@"Error sending Email", nil);
+            strMsg = [error localizedDescription];
+            break;
+        }
+        default:
+            break;
+    }
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
+                                                    message:strMsg
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                          otherButtonTitles:nil];
+    [alert show];
+
+    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIAlertView delegates
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    // we only use the alert for selecting from contacts or not
+
+    // if they wanted to select from contacts
+    if (buttonIndex == 0)
+    {
+        [self performSelector:@selector(showAddressPicker) withObject:nil afterDelay:0.0];
+    }
+    else if (_addressPickerType == AddressPickerType_SMS)
+    {
+        [self performSelector:@selector(sendSMS) withObject:nil afterDelay:0.0];
+    }
+    else if (_addressPickerType == AddressPickerType_EMail)
+    {
+        [self performSelector:@selector(sendEMail) withObject:nil afterDelay:0.0];
+    }
+}
+
+
+- (void)showAddressPicker
+{
+    [self.view endEditing:YES];
+
+    ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+
+    picker.peoplePickerDelegate = self;
+
+    if (_addressPickerType == AddressPickerType_SMS)
+    {
+        picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonPhoneProperty]];
+    }
+    else
+    {
+        picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonEmailProperty]];
+    }
+
+    [self presentViewController:picker animated:YES completion:nil];
+    //[self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
+}
+
+
+#pragma mark - RecipientViewControllerDelegates
+
+- (void)RecipientViewControllerDone:(RecipientViewController *)controller withFullName:(NSString *)strFullName andTarget:(NSString *)strTarget
+{
+    // if they selected a target
+    if ([strTarget length])
+    {
+        self.strFullName = strFullName;
+        self.strEMail = strTarget;
+        self.strPhoneNumber = strTarget;
+
+        //NSLog(@"name: %@, target: %@", strFullName, strTarget);
+
+        if (controller.mode == RecipientMode_SMS)
+        {
+            [self performSelector:@selector(sendSMS) withObject:nil afterDelay:0.0];
+        }
+        else if (controller.mode == RecipientMode_Email)
+        {
+            [self performSelector:@selector(sendEMail) withObject:nil afterDelay:0.0];
+        }
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
+                                                        message:(controller.mode == RecipientMode_SMS ? @"SMS cancelled" : @"Email cancelled")
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+
+    [self dismissRecipient];
+}
 
 
 @end

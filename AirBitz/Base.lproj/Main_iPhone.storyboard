@@ -693,7 +693,7 @@
                                                 </segments>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
-                                                    <action selector="segmentedControlBTCUSDAction:" destination="Int-ih-AH6" eventType="valueChanged" id="Lzi-JG-gBa"/>
+                                                    <action selector="segmentedControlBTCUSDAction:" destination="Int-ih-AH6" eventType="valueChanged" id="qEC-v8-cYX"/>
                                                 </connections>
                                             </segmentedControl>
                                         </subviews>
@@ -813,7 +813,7 @@
                                         </segments>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <action selector="segmentedControlCopyEmailSMSAction:" destination="Int-ih-AH6" eventType="touchUpInside" id="rNX-hV-IBi"/>
+                                            <action selector="segmentedControlCopyEmailSMSAction:" destination="Int-ih-AH6" eventType="valueChanged" id="Yi0-Sn-AYh"/>
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Status Line 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3A3-3d-okn">
