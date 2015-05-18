@@ -85,6 +85,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightBLETableCells = 50;
         self.heightWalletCell = 60;
         self.heightTransactionCell = 72;
+        self.heightPopupPicker = 40;
     }
     if (IS_MIN_IPHONE5)
     {

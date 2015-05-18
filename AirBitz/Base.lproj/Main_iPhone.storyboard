@@ -1482,17 +1482,25 @@
                                     <constraint firstItem="tDk-Hi-NWo" firstAttribute="leading" secondItem="Sel-8S-IX8" secondAttribute="leading" id="vgr-mX-iYn"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bjl-V6-xj5" customClass="WalletMakerView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1la-Es-fPE" firstAttribute="leading" secondItem="AqW-9S-8UJ" secondAttribute="leading" id="5TJ-1m-xT0"/>
                             <constraint firstItem="Sel-8S-IX8" firstAttribute="top" secondItem="AqW-9S-8UJ" secondAttribute="top" id="5k4-Py-ile"/>
+                            <constraint firstAttribute="bottom" secondItem="Bjl-V6-xj5" secondAttribute="bottom" constant="49" id="OhA-iI-v5z"/>
+                            <constraint firstAttribute="trailing" secondItem="Bjl-V6-xj5" secondAttribute="trailing" id="UqJ-Yd-kvk"/>
+                            <constraint firstItem="Bjl-V6-xj5" firstAttribute="leading" secondItem="AqW-9S-8UJ" secondAttribute="leading" id="WfV-pT-6gE"/>
                             <constraint firstAttribute="trailing" secondItem="1la-Es-fPE" secondAttribute="trailing" id="fpH-UY-Boh"/>
                             <constraint firstAttribute="height" secondItem="Sel-8S-IX8" secondAttribute="height" constant="100" id="iwW-6t-3q5"/>
                             <constraint firstItem="1la-Es-fPE" firstAttribute="top" secondItem="AqW-9S-8UJ" secondAttribute="top" id="omf-bw-PHO"/>
                             <constraint firstAttribute="bottom" secondItem="1la-Es-fPE" secondAttribute="bottom" id="pJG-q3-OZB"/>
                             <constraint firstItem="Sel-8S-IX8" firstAttribute="leading" secondItem="AqW-9S-8UJ" secondAttribute="leading" id="pa9-1b-ixH"/>
                             <constraint firstAttribute="trailing" secondItem="Sel-8S-IX8" secondAttribute="trailing" id="vO1-fs-pCC"/>
+                            <constraint firstItem="Bjl-V6-xj5" firstAttribute="top" secondItem="AqW-9S-8UJ" secondAttribute="top" constant="64" id="xWS-0V-7bP"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -1504,6 +1512,7 @@
                         <outlet property="searchTextField" destination="ltN-lB-ATB" id="zTA-qc-n5r"/>
                         <outlet property="tableView" destination="1la-Es-fPE" id="4pj-UV-ux5"/>
                         <outlet property="toolbarBlur" destination="tDk-Hi-NWo" id="rWe-RI-Y5U"/>
+                        <outlet property="walletMakerView" destination="Bjl-V6-xj5" id="T4g-PU-nco"/>
                         <outlet property="walletsTable" destination="xQD-1v-Z9a" id="pxo-KO-Ma2"/>
                         <outlet property="walletsView" destination="Sel-8S-IX8" id="iRa-dw-4Xh"/>
                         <outlet property="walletsViewTop" destination="5k4-Py-ile" id="iLJ-k0-RcM"/>

@@ -27,6 +27,7 @@
 #import "WalletHeaderView.h"
 #import "WalletCell.h"
 #import "FadingAlertView2.h"
+#import "WalletMakerView.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
@@ -49,7 +50,7 @@
 #define ARCHIVE_COLLAPSED @"archive_collapsed"
 
 
-@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletHeaderViewDelegate,
+@interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletHeaderViewDelegate, WalletMakerViewDelegate,
         TransactionDetailsViewControllerDelegate, UISearchBarDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate, UIGestureRecognizerDelegate>
 {
     BalanceView                         *_balanceView;
@@ -63,13 +64,13 @@
 //    CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
     CGRect                              _frameTableWithSearchNoKeyboard;
+    BOOL                        _walletMakerVisible;
+    UIButton                    *_blockingButton;
+
+
 }
 
-//@property (weak, nonatomic) IBOutlet UIView         *viewSearch; // Moves search bar in and out
-//@property (weak, nonatomic) IBOutlet UITextField    *textWalletName;
-//@property (nonatomic, strong) NSMutableArray *arrayWallets;
-//@property (nonatomic, strong) NSMutableArray *arrayArchivedWallets;
-
+@property (nonatomic, weak) IBOutlet WalletMakerView    *walletMakerView;
 @property (weak, nonatomic) IBOutlet UITableView *walletsTable;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbarBlur;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *walletsViewTop;
@@ -138,6 +139,9 @@
 //    self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
 //    [self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
 //    [self.textWalletName addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+
+    self.walletMakerView.hidden = YES;
+    self.walletMakerView.delegate = self;
 
     // set up our user blocking button
     self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -240,6 +244,7 @@
     self.walletsView.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.walletsView.layer.shadowOpacity = 0.2;
     [self.toolbarBlur setTranslucent:[Theme Singleton].bTranslucencyEnable];
+    self.walletMakerView.alpha = 0;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
 
@@ -1568,11 +1573,6 @@
     self.walletsTable.editing = YES;
     self.walletsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.walletsTable.allowsSelectionDuringEditing = YES;
-//    _currencyConversionFactor = 1.0;
-
-//    self.walletMakerView.hidden = YES;
-//    self.walletMakerView.delegate = self;
-//    self.walletMakerTop.constant = -self.walletMakerView.layer.frame.size.height;
 
     self.balanceHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"Loading Balance...", @"title of wallets table balance header")
                                                             collapse:NO];
@@ -1837,31 +1837,130 @@
     _fadingAlert2 = nil;
 }
 
+- (void)hideWalletMaker
+{
+    if (_walletMakerVisible == YES)
+    {
+        _walletMakerVisible = NO;
+
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^
+                         {
+                             self.walletMakerView.alpha = 0;
+                             [self.view layoutIfNeeded];
+
+                         }
+                         completion:^(BOOL finished)
+                         {
+                             self.walletMakerView.hidden = YES;
+                         }];
+    }
+}
+
+
+
 - (void)addWallet
 {
 
-//    if (_walletMakerVisible == NO)
-//    {
-//        [self.walletMakerView reset];
-//        _walletMakerVisible = YES;
-//        self.walletMakerView.hidden = NO;
-//        [[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
-//        [self createBlockingButton:self.walletMakerView];
-//        [self.walletMakerView.textField becomeFirstResponder];
-//        [UIView animateWithDuration:0.35
-//                              delay:0.0
-//                            options:UIViewAnimationOptionCurveEaseOut
-//                         animations:^
-//                         {
-//                             self.walletMakerTop.constant = [MainViewController getHeaderHeight];
-//                             [self.view layoutIfNeeded];
-//                         }
-//                         completion:^(BOOL finished)
-//                         {
-//
-//                         }];
-//    }
+    if (_walletMakerVisible == NO)
+    {
+        [self.walletMakerView reset];
+        _walletMakerVisible = YES;
+        self.walletMakerView.hidden = NO;
+        [[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
+        [self createBlockingButton:self.walletMakerView];
+        [self.walletMakerView.textField becomeFirstResponder];
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^
+                         {
+                             self.walletMakerView.alpha = 1;
+                             [self.view layoutIfNeeded];
+                         }
+                         completion:^(BOOL finished)
+                         {
+
+                         }];
+    }
 }
+
+-(void)createBlockingButton:(UIView *)view
+{
+    _blockingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGRect frame = self.view.bounds;
+//    frame.origin.y = self.headerView.frame.origin.y + self.headerView.frame.size.height;
+//    frame.size.height = self.view.bounds.size.height - frame.origin.y;
+    _blockingButton.frame = frame;
+    _blockingButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    [self.view insertSubview:_blockingButton belowSubview:view];
+    _blockingButton.alpha = 0.0;
+
+    [_blockingButton addTarget:self
+                        action:@selector(blockingButtonHit:)
+              forControlEvents:UIControlEventTouchDown];
+
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^
+                     {
+                         _blockingButton.alpha = 1.0;
+                     }
+                     completion:^(BOOL finished)
+                     {
+
+                     }];
+
+}
+
+- (void)removeBlockingButton
+{
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^
+                     {
+                         _blockingButton.alpha = 0.0;
+                     }
+                     completion:^(BOOL finished)
+                     {
+                         [_blockingButton removeFromSuperview];
+                         _blockingButton = nil;
+                     }];
+}
+
+- (void)blockingButtonHit:(UIButton *)button
+{
+    [self.walletMakerView exit];
+}
+
+#pragma mark - Wallet Maker View Delegates
+
+- (void)walletMakerViewExit:(WalletMakerView *)walletMakerView
+{
+    [self hideWalletMaker];
+    [self removeBlockingButton];
+
+//    [CoreBridge postToWalletsQueue:^(void) {
+//        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+//        NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+//
+//        [self reloadWallets:arrayWallets archived:arrayArchivedWallets];
+//
+//        dispatch_async(dispatch_get_main_queue(),^{
+//            self.arrayWallets = arrayWallets;
+//            self.arrayArchivedWallets = arrayArchivedWallets;
+//
+//            [self.walletsTable reloadData];
+//            [self updateBalanceView];
+//        });
+//    }];
+    [self updateViews:nil];
+}
+
 
 
 @end

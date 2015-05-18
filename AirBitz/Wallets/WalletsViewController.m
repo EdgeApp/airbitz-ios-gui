@@ -82,8 +82,7 @@
 
 	self.walletMakerView.hidden = YES;
     self.walletMakerView.delegate = self;
-    self.walletMakerTop.constant = -self.walletMakerView.layer.frame.size.height;
-	
+
     self.activeWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"WALLETS", @"title of active wallets table")
                                                             collapse:NO];
 	self.activeWalletsHeaderView.btn_expandCollapse.hidden = YES;

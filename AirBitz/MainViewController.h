@@ -47,5 +47,6 @@ typedef enum eNavBarSide
 +(void)moveSelectedViewController: (CGFloat) x;
 +(CGFloat) getFooterHeight;
 +(CGFloat) getHeaderHeight;
++ (CGFloat)getWidth;
 
 @end

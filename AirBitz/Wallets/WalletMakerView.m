@@ -13,30 +13,44 @@
 #import "OfflineWalletViewController.h"
 #import "Util.h"
 #import "CoreBridge.h"
+#import "ButtonSelectorView2.h"
+#import "PopupPickerView.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
-@interface WalletMakerView () <ButtonSelectorDelegate, UITextFieldDelegate>
+@interface WalletMakerView () <PopupPickerViewDelegate, UITextFieldDelegate>
 {
+    BOOL                        _bCurrencyPopup;
     BOOL                        _bCreatingWallet;
 	CGRect                      _originalFrame;
     int                         _currencyChoice;
+    NSMutableArray              *arrayCurrencyCodes;
+    NSMutableArray              *arrayCurrencyNums;
+    NSMutableArray              *arrayCurrencyStrings;
+
+
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView            *imageEditBox;
-@property (nonatomic, weak) IBOutlet ButtonSelectorView     *buttonSelectorView;
+//@property (nonatomic, weak) IBOutlet ButtonSelectorView2    *buttonSelectorView;
 @property (weak, nonatomic) IBOutlet UILabel                *labelOnline;
 @property (weak, nonatomic) IBOutlet UILabel                *labelOffline;
 @property (weak, nonatomic) IBOutlet UISwitch               *switchOnlineOffline;
-@property (weak, nonatomic) IBOutlet UIView                 *viewBlocker;
+//@property (weak, nonatomic) IBOutlet UIView                 *viewBlocker;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property (nonatomic, strong)   NSArray                     *arrayCurrencyNums;
-@property (nonatomic, strong)   NSArray                     *arrayCurrencyCodes;
+//@property (nonatomic, strong)   NSArray                     *arrayCurrencyNums;
+//@property (nonatomic, strong)   NSArray                     *arrayCurrencyCodes;
 @property (nonatomic, copy)     NSString                    *strReason;
 @property (nonatomic, assign)   BOOL                        bSuccess;
+@property (weak, nonatomic) IBOutlet PopupPickerView *popupPickerCurrency;
+@property (weak, nonatomic) IBOutlet UIButton *buttonCurrency;
 
 
 @end
 
 @implementation WalletMakerView
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -48,16 +62,17 @@
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+//- (id)initWithCoder:(NSCoder *)aDecoder
+- (id)drawRect:(CGRect)rect
 {
-    if ((self = [super initWithCoder:aDecoder]))
+//    if ((self = [super initWithCoder:aDecoder]))
 	{
 		UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"WalletMakerView~iphone" owner:self options:nil] objectAtIndex:0];
 		view.frame = self.bounds;
         [self addSubview:view];
 
         self.textField.delegate = self;
-		self.buttonSelectorView.delegate = self;
+//		self.buttonSelectorView.delegate = self;
 
         _bCreatingWallet = NO;
 		
@@ -69,9 +84,9 @@
 		tABC_CC result = ABC_GetCurrencies(&currencyArray, &numCurrencies, &error);
 		if(result == ABC_CC_Ok)
 		{
-            NSMutableArray *arrayCurrencyCodes = [[NSMutableArray alloc] init];
-            NSMutableArray *arrayCurrencyNums = [[NSMutableArray alloc] init];
-			NSMutableArray *arrayCurrencyStrings = [[NSMutableArray alloc] init];
+            arrayCurrencyCodes = [[NSMutableArray alloc] init];
+            arrayCurrencyNums = [[NSMutableArray alloc] init];
+			arrayCurrencyStrings = [[NSMutableArray alloc] init];
 			for(int i = 0; i < numCurrencies; i++)
 			{
 				//populate with currency code and description
@@ -83,9 +98,13 @@
                 [arrayCurrencyCodes addObject:[NSString stringWithUTF8String:currencyArray[i].szCode]];
 			}
 
-			self.buttonSelectorView.arrayItemsToSelect = arrayCurrencyStrings;
-            self.arrayCurrencyNums = arrayCurrencyNums;
-            self.arrayCurrencyCodes = arrayCurrencyCodes;
+//			self.buttonSelectorView.arrayItemsToSelect = arrayCurrencyStrings;
+//            [self.buttonSelectorView.button setBackgroundImage:nil forState:UIControlStateNormal];
+//            [self.buttonSelectorView.button setBackgroundImage:nil forState:UIControlStateSelected];
+//            self.buttonSelectorView.textLabel.text = @"";
+
+//            self.arrayCurrencyNums = arrayCurrencyNums;
+//            self.arrayCurrencyCodes = arrayCurrencyCodes;
 		}
 
         [self reset];
@@ -95,32 +114,35 @@
 
 #pragma mark - Action Methods
 
-- (IBAction)switchValueChanged:(id)sender
+- (IBAction)buttonCurrencyTapped:(id)sender
 {
-    [self.buttonSelectorView close];
     [self.textField resignFirstResponder];
-    [self updateDisplay];
-    if ([self onlineSelected])
+
+    if (!_bCurrencyPopup)
     {
-        [self.textField becomeFirstResponder];
+
+        self.popupPickerCurrency = [PopupPickerView CreateForView:self
+                                                   relativeToView:self.buttonCurrency
+                                                 relativePosition:PopupPickerPosition_Below
+                                                      withStrings:arrayCurrencyStrings
+                                                   fromCategories:nil
+                                                      selectedRow:-1
+                                                        withWidth:[MainViewController getWidth]
+                                                    withAccessory:nil
+                                                    andCellHeight:[Theme Singleton].heightPopupPicker
+                                            roundedEdgesAndShadow:NO
+        ];
+        _bCurrencyPopup = YES;
     }
+    else
+    {
+        [self.popupPickerCurrency removeFromSuperview];
+        [self.textField becomeFirstResponder];
+        _bCurrencyPopup = NO;
+    }
+
 }
 
-- (IBAction)buttonOnlineTouched:(id)sender
-{
-    [self.switchOnlineOffline setOn:NO animated:YES];
-    [self updateDisplay];
-    if ([self onlineSelected])
-    {
-        [self.textField becomeFirstResponder];
-    }
-}
-
-- (IBAction)buttonOfflineTouched:(id)sender
-{
-    [self.switchOnlineOffline setOn:YES animated:YES];
-    [self updateDisplay];
-}
 
 - (IBAction)buttonCancelTouched:(id)sender
 {
@@ -139,21 +161,28 @@
 {
     int currencyNum;
     NSString *currencyString;
-    CGRect frame = self.viewBlocker.frame;
-    frame.origin.x = 0;
-    frame.origin.y = 0;
-    self.viewBlocker.hidden = YES;
+//    CGRect frame = self.viewBlocker.frame;
+//    self.viewBlocker.hidden = YES;
+    self.activityIndicator.hidden = YES;
     [self.textField resignFirstResponder];
     self.textField.text = @"";
     [self.switchOnlineOffline setOn:NO];
-    [self.buttonSelectorView close];
-    self.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
+    [self.popupPickerCurrency removeFromSuperview];
+    _bCurrencyPopup = NO;
+//    [self.buttonSelectorView close];
+//    self.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
     
     // Default currency for new wallets should be the currency set in the account settings
     currencyNum = [[User Singleton] defaultCurrencyNum];
     currencyString = [CoreBridge currencyAbbrevLookup:currencyNum];
-	[self.buttonSelectorView.button setTitle:currencyString forState:UIControlStateNormal];
-    _currencyChoice = (int) [self.arrayCurrencyCodes indexOfObject:currencyString];
+//	[self.buttonSelectorView.button setTitle:currencyString forState:UIControlStateNormal];
+//    NSLog(self.buttonSelectorView.button.currentTitle);
+
+    _currencyChoice = (int) [arrayCurrencyCodes indexOfObject:currencyString];
+    [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];
+    [self.buttonCurrency.layer setBorderColor:[[Theme Singleton].colorTextLink CGColor]];
+    [self.buttonCurrency.layer setBorderWidth:2.0];
+    [self.buttonCurrency.layer setCornerRadius:8.0];
     [self updateDisplay];
 }
 
@@ -161,45 +190,25 @@
 
 - (void)updateDisplay
 {
-    if ([self onlineSelected])
-    {
-        self.buttonSelectorView.hidden = NO;
-        self.textField.hidden = NO;
-        self.imageEditBox.hidden = NO;
-        self.labelOffline.textColor = [UIColor darkGrayColor];
-        self.labelOnline.textColor = [UIColor whiteColor];
-    }
-    else
-    {
-        self.buttonSelectorView.hidden = YES;
-        self.textField.hidden = YES;
-        self.imageEditBox.hidden = YES;
-        self.labelOnline.textColor = [UIColor darkGrayColor];
-        self.labelOffline.textColor = [UIColor whiteColor];
-    }
+//    self.buttonSelectorView.hidden = NO;
+    self.textField.hidden = NO;
+    self.imageEditBox.hidden = NO;
 }
 
-- (BOOL)onlineSelected
-{
-    return ![self.switchOnlineOffline isOn];
-}
-
+//- (BOOL)onlineSelected
+//{
+//    return ![self.switchOnlineOffline isOn];
+//}
+//
 - (void)createWallet
 {
-    if ([self onlineSelected])
+    if (self.textField.text)
     {
-        if (self.textField.text)
+        if ([self.textField.text length])
         {
-            if ([self.textField.text length])
-            {
-                [self createOnlineWallet];
-                [self exit];
-            }
+            [self createOnlineWallet];
+            [self exit];
         }
-    }
-    else
-    {
-        [self createOfflineWallet];
     }
 }
 
@@ -214,7 +223,7 @@
         ABC_CreateWallet([[User Singleton].name UTF8String],
                                 [[User Singleton].password UTF8String],
                                 [self.textField.text UTF8String],
-                                [[self.arrayCurrencyNums objectAtIndex:_currencyChoice] intValue],
+                                [[arrayCurrencyNums objectAtIndex:_currencyChoice] intValue],
                                 &szUUID,
                                 &error);
         _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
@@ -226,27 +235,11 @@
     }];
 }
 
-- (void)createOfflineWallet
-{
-    if (!_bCreatingWallet)
-    {
-        [self.textField resignFirstResponder];
-        [self.buttonSelectorView close];
-
-        if (self.delegate)
-        {
-            if ([self.delegate respondsToSelector:@selector(walletMakerViewExitOffline:)])
-            {
-                [self.delegate walletMakerViewExitOffline:self];
-            }
-        }
-    }
-}
-
 - (void)createWalletComplete
 {
     [self blockUser:NO];
     _bCreatingWallet = NO;
+    [CoreBridge refreshWallets];
 
     //NSLog(@"Wallet create complete");
     if (_bSuccess)
@@ -267,7 +260,8 @@
 
 - (void)blockUser:(BOOL)bBlock
 {
-    self.viewBlocker.hidden = !bBlock;
+//    self.viewBlocker.hidden = !bBlock;
+    self.activityIndicator.hidden = NO;
     [self.textField resignFirstResponder];
 }
 
@@ -276,7 +270,7 @@
     if (!_bCreatingWallet)
     {
         [self.textField resignFirstResponder];
-        [self.buttonSelectorView close];
+//        [self.buttonSelectorView close];
 
         if (self.delegate)
         {
@@ -288,29 +282,42 @@
     }
 }
 
+- (IBAction)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
+{
+   _currencyChoice = row;
+    NSNumber *currencyNum = [arrayCurrencyNums objectAtIndex:_currencyChoice];
+    NSString *currencyString = [CoreBridge currencyAbbrevLookup:[currencyNum intValue]];
+
+    [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];
+    [self.popupPickerCurrency removeFromSuperview];
+    _bCurrencyPopup = NO;
+    [self.textField becomeFirstResponder];
+}
+
 #pragma mark - ButtonSelector Delegates
-
--(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
-{
-    _currencyChoice = itemIndex;
-}
-
--(NSString *)ButtonSelector:(ButtonSelectorView *)view willSetButtonTextToString:(NSString *)desiredString
-{
-	NSString *result = [[desiredString componentsSeparatedByString:@" - "] firstObject];
-	return result;
-}
-
-- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
-{
-    [self.textField resignFirstResponder];
-}
-
+//
+//-(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+//{
+//    _currencyChoice = itemIndex;
+//}
+//
+//-(NSString *)ButtonSelector:(ButtonSelectorView *)view willSetButtonTextToString:(NSString *)desiredString
+//{
+//	NSString *result = [[desiredString componentsSeparatedByString:@" - "] firstObject];
+//	return result;
+//}
+//
+//- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
+//{
+//    [self.textField resignFirstResponder];
+//}
+//
 #pragma mark - UITextField delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self.buttonSelectorView close];
+    [self.popupPickerCurrency removeFromSuperview];
+    _bCurrencyPopup = NO;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

@@ -51,6 +51,8 @@
 @property (nonatomic) CGFloat heightWalletHeader;
 @property (nonatomic) CGFloat heightWalletCell;
 @property (nonatomic) CGFloat heightTransactionCell;
+@property (nonatomic) CGFloat heightPopupPicker;
+
 
 
 
