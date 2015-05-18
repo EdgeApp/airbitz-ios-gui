@@ -21,6 +21,9 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ag-2s-o7z" userLabel="BlurView" customClass="BlurView">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <label autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="2is-5E-X7J" userLabel="Message" customClass="LatoLabel">
                             <rect key="frame" x="4" y="4" width="312" height="72"/>
