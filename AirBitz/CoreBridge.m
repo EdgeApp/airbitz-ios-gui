@@ -754,10 +754,7 @@ static BOOL bOtpError = NO;
         [Util printABC_Error:&Error];
     }
 
-//    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: [CoreBridge Singleton].currentWallet.strUUID };
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED
-                                                        object:self userInfo:nil];
-
+    [CoreBridge refreshWallets];
 }
 
 + (bool)setWalletAttributes: (Wallet *) wallet
