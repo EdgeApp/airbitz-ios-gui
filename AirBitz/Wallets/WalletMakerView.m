@@ -180,9 +180,10 @@
 
     _currencyChoice = (int) [arrayCurrencyCodes indexOfObject:currencyString];
     [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];
-    [self.buttonCurrency.layer setBorderColor:[[Theme Singleton].colorTextLink CGColor]];
-    [self.buttonCurrency.layer setBorderWidth:2.0];
-    [self.buttonCurrency.layer setCornerRadius:8.0];
+    [self.buttonCurrency.titleLabel setTextColor:[Theme Singleton].colorTextLink];
+//    [self.buttonCurrency.layer setBorderColor:[[Theme Singleton].colorTextLink CGColor]];
+//    [self.buttonCurrency.layer setBorderWidth:2.0];
+//    [self.buttonCurrency.layer setCornerRadius:8.0];
     [self updateDisplay];
 }
 
