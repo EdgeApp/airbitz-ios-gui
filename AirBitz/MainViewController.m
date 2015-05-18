@@ -80,7 +80,6 @@ typedef enum eAppMode
     UIAlertView                 *_userReviewAlert;
     UIAlertView                 *_userReviewOKAlert;
     UIAlertView                 *_userReviewNOAlert;
-    FadingAlertView2            *_fadingAlert;
 	tAppMode                    _appMode;
     NSURL                       *_uri;
     InfoView                    *_notificationInfoView;
@@ -91,6 +90,7 @@ typedef enum eAppMode
 }
 
 @property (weak, nonatomic) IBOutlet UIView *blurViewContainer;
+@property (weak, nonatomic) IBOutlet FadingAlertView2 *fadingAlert;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *blurViewLeft;
 @property (weak, nonatomic) IBOutlet UITabBar *tabBar;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
@@ -1865,4 +1865,21 @@ MainViewController *staticMVC;
         NSLog(@"_selectedViewController == _requestViewController");
     }
 }
+
++ (void)showFadingAlert:(NSString *)message
+{
+    [MainViewController showFadingAlert:message withDelay:ERROR_MESSAGE_FADE_DELAY];
+}
+
++ (void)showFadingAlert:(NSString *)message withDelay:(int)fadeDelay
+{
+    staticMVC.fadingAlert = [FadingAlertView2 CreateInsideView:staticMVC.view withDelegate:nil];
+    [staticMVC.fadingAlert messageTextSet:message];
+    staticMVC.fadingAlert.fadeDelay = fadeDelay;
+    staticMVC.fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
+    [staticMVC.fadingAlert blockModal:NO];
+    [staticMVC.fadingAlert showSpinner:NO];
+    [staticMVC.fadingAlert showFading];
+}
+
 @end
