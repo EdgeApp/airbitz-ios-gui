@@ -72,7 +72,8 @@
 
 //            [self addSubview:blurEffectView];
 //            [self.superview insertSubview:blurEffectView belowSubview:self];
-            [Util insertSubviewWithConstraints:self.superview child:blurEffectView belowSubView:self];
+//            [Util insertSubviewWithConstraints:self.superview child:blurEffectView belowSubView:self];
+            [Util addSubviewWithConstraints:self child:blurEffectView];
 
 //            UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
 //            UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];

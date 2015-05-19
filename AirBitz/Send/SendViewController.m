@@ -442,6 +442,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 	[self.view insertSubview:_readerView belowSubview:self.scanFrame];
 	_readerView.frame = self.scanFrame.frame;
+//    [Util addSubviewWithConstraints:self.scanFrame child:_readerView];
 	_readerView.readerDelegate = self;
 	_readerView.tracksSymbols = NO;
 	
@@ -478,13 +479,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (IBAction)info:(id)sender
 {
 	[self.view endEditing:YES];
-    [self resignAllResonders];
+    [self resignAllResponders];
     [InfoView CreateWithHTML:@"infoSend" forView:self.view];
 }
 
 - (IBAction)buttonCameraTouched:(id)sender
 {
-    [self resignAllResonders];
+    [self resignAllResponders];
     [self showImageScanner];
 }
 
@@ -524,6 +525,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             break;
         case 2:
             // Do Photo
+            [self resignAllResponders];
+            [self showImageScanner];
+
             break;
         case 3:
             // Do Flash
@@ -738,7 +742,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                  {
                                      // Update the table height
 
-                                     _bleViewHeight.constant = ([Theme Singleton].heightBLETableCells * [self.peripheralContainers count]);
+                                     CGFloat height, maxheight;
+
+                                     height = ([Theme Singleton].heightBLETableCells * [self.peripheralContainers count]);
+
+                                     maxheight = [MainViewController getHeight] -
+                                             [MainViewController getFooterHeight] - [MainViewController getHeaderHeight] - [Theme Singleton].heightMinimumForQRScanFrame;
+
+                                     _bleViewHeight.constant = height > maxheight ? maxheight : height;
                                      [self.view layoutIfNeeded];
                                  }
                                  completion:^(BOOL finished)
@@ -1291,7 +1302,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 #pragma mark - Misc Methods
 
-- (void)resignAllResonders
+- (void)resignAllResponders
 {
     [self.addressTextField resignFirstResponder];
 }
@@ -1624,7 +1635,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)ButtonSelector2WillShowTable:(ButtonSelectorView2 *)view
 {
-    [self resignAllResonders];
+    [self resignAllResponders];
 }
 
 - (void)ButtonSelector2WillHideTable:(ButtonSelectorView2 *)view
@@ -1856,7 +1867,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //    }
 //    if (_syncingView)
 //    {
-//        [self resignAllResonders];
+//        [self resignAllResponders];
 //#if !TARGET_IPHONE_SIMULATOR
 //        [self stopQRReader];
 //#endif

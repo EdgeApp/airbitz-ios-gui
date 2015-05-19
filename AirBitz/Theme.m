@@ -96,6 +96,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightWalletCell = 60;
         self.heightTransactionCell = 72;
         self.heightPopupPicker = 50;
+        self.heightMinimumForQRScanFrame = 200;
     }
     if (IS_MIN_IPHONE5)
     {

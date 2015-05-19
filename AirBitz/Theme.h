@@ -51,6 +51,7 @@
 @property (nonatomic) NSString *selectWalletTransferPopupHeaderText;
 
 
+
 @property (nonatomic) CGFloat heightListings;
 @property (nonatomic) CGFloat heightSearchClues;
 @property (nonatomic) CGFloat heightBLETableCells;
@@ -60,6 +61,7 @@
 @property (nonatomic) CGFloat heightWalletCell;
 @property (nonatomic) CGFloat heightTransactionCell;
 @property (nonatomic) CGFloat heightPopupPicker;
+@property (nonatomic) CGFloat heightMinimumForQRScanFrame;
 
 
 

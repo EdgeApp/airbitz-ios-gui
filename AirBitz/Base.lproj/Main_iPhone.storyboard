@@ -153,28 +153,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IsP-NR-ytZ" userLabel="Image -scanner">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             </imageView>
-                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="1eG-qb-KCi" userLabel="View -MinSpaceForCamera">
-                                <rect key="frame" x="0.0" y="64" width="320" height="213"/>
-                                <subviews>
-                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IrC-mj-iIB" customClass="LatoLabel">
-                                        <rect key="frame" x="20" y="20" width="280" height="173"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="IrC-mj-iIB" secondAttribute="trailing" constant="20" symbolic="YES" id="Hf0-YD-dVa"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="160" id="PCw-WI-UKw"/>
-                                    <constraint firstAttribute="bottom" secondItem="IrC-mj-iIB" secondAttribute="bottom" constant="20" symbolic="YES" id="hqT-PP-Wr5"/>
-                                    <constraint firstItem="IrC-mj-iIB" firstAttribute="leading" secondItem="1eG-qb-KCi" secondAttribute="leading" constant="20" symbolic="YES" id="oea-sU-uWa"/>
-                                    <constraint firstItem="IrC-mj-iIB" firstAttribute="top" secondItem="1eG-qb-KCi" secondAttribute="top" constant="20" symbolic="YES" id="wKJ-Sa-Nfg"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V8c-6o-ibr" userLabel="View -BLE Table">
                                 <rect key="frame" x="0.0" y="277" width="320" height="100"/>
                                 <subviews>
@@ -271,7 +249,14 @@
                                     <constraint firstAttribute="bottom" secondItem="9C3-ej-2l9" secondAttribute="bottom" id="fnB-bp-z3b"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wik-w7-rsL" userLabel="View -darkbackdrop" customClass="BlurView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrj-OZ-WpR" userLabel="BlurView" customClass="BlurView">
+                                <rect key="frame" x="0.0" y="377" width="320" height="54"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleDark" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wik-w7-rsL" userLabel="View -segmentedContainer">
                                 <rect key="frame" x="0.0" y="377" width="320" height="54"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AOi-Wp-bVq">
@@ -296,9 +281,6 @@
                                     <constraint firstAttribute="trailing" secondItem="AOi-Wp-bVq" secondAttribute="trailing" constant="8" id="NGf-9a-5oR"/>
                                     <constraint firstItem="AOi-Wp-bVq" firstAttribute="leading" secondItem="Wik-w7-rsL" secondAttribute="leading" constant="8" id="u5G-PQ-bIK"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleDark" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aan-73-l0U" userLabel="addressTextField">
                                 <rect key="frame" x="10" y="70" width="300" height="40"/>
@@ -319,25 +301,25 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="IsP-NR-ytZ" secondAttribute="bottom" id="0tx-rQ-VTX"/>
+                            <constraint firstItem="Wik-w7-rsL" firstAttribute="bottom" secondItem="jrj-OZ-WpR" secondAttribute="bottom" id="BD7-Mw-Htv"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="CRv-kb-3AU"/>
-                            <constraint firstItem="V8c-6o-ibr" firstAttribute="top" secondItem="1eG-qb-KCi" secondAttribute="bottom" id="EpR-0e-tEF"/>
+                            <constraint firstItem="Wik-w7-rsL" firstAttribute="top" secondItem="jrj-OZ-WpR" secondAttribute="top" id="FE7-MO-dAU"/>
                             <constraint firstAttribute="trailing" secondItem="IsP-NR-ytZ" secondAttribute="trailing" id="H3u-ks-fT0"/>
                             <constraint firstItem="IsP-NR-ytZ" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" id="JQC-lX-ebL"/>
                             <constraint firstAttribute="trailing" secondItem="aan-73-l0U" secondAttribute="trailing" constant="10" id="KCd-YU-T1B"/>
+                            <constraint firstItem="Wik-w7-rsL" firstAttribute="leading" secondItem="jrj-OZ-WpR" secondAttribute="leading" id="LEC-ps-Ftg"/>
                             <constraint firstItem="g9e-kM-2rC" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" constant="64" id="OY9-2b-zt3"/>
                             <constraint firstItem="V8c-6o-ibr" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="RRh-Ip-q4X"/>
                             <constraint firstItem="g9e-kM-2rC" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="Rlk-dD-FSj"/>
                             <constraint firstAttribute="trailing" secondItem="Wik-w7-rsL" secondAttribute="trailing" id="WB1-u2-Kp5"/>
-                            <constraint firstItem="1eG-qb-KCi" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="WLE-X4-qMu"/>
                             <constraint firstItem="aan-73-l0U" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" constant="10" id="XGu-8e-3kr"/>
                             <constraint firstAttribute="trailing" secondItem="g9e-kM-2rC" secondAttribute="trailing" id="a1j-fU-gWs"/>
-                            <constraint firstItem="1eG-qb-KCi" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" constant="64" id="c2d-uJ-oik"/>
                             <constraint firstItem="IsP-NR-ytZ" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="gIb-dm-Eyq"/>
-                            <constraint firstAttribute="trailing" secondItem="1eG-qb-KCi" secondAttribute="trailing" id="gvc-kv-MGW"/>
                             <constraint firstAttribute="bottom" secondItem="Wik-w7-rsL" secondAttribute="bottom" constant="49" id="jMR-HN-Qff"/>
                             <constraint firstItem="aan-73-l0U" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" constant="70" id="sQL-hq-oPg"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="top" secondItem="V8c-6o-ibr" secondAttribute="bottom" id="sbw-6l-sjS"/>
                             <constraint firstAttribute="trailing" secondItem="V8c-6o-ibr" secondAttribute="trailing" id="uVA-Gd-QqU"/>
+                            <constraint firstItem="Wik-w7-rsL" firstAttribute="trailing" secondItem="jrj-OZ-WpR" secondAttribute="trailing" id="yAN-pG-hzZ"/>
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -347,7 +329,6 @@
                         <outlet property="bleViewHeight" destination="Ala-bv-06W" id="kNb-GU-e7J"/>
                         <outlet property="buttonSelector" destination="g9e-kM-2rC" id="30G-6H-VYq"/>
                         <outlet property="scanFrame" destination="IsP-NR-ytZ" id="WAe-eF-Ooy"/>
-                        <outlet property="scanningErrorLabel" destination="IrC-mj-iIB" id="TIf-ir-pjC"/>
                         <outlet property="segmentedControl" destination="AOi-Wp-bVq" id="Ryr-z6-A2U"/>
                         <outlet property="tableView" destination="9C3-ej-2l9" id="sGK-l5-2nZ"/>
                         <outlet property="view" destination="of2-42-Lef" id="I0w-Df-2dv"/>
@@ -4808,9 +4789,9 @@ Scan the QR code using this device</string>
         <image name="background.jpg" width="320" height="568"/>
         <image name="background_header.png" width="320" height="568"/>
         <image name="background_login.jpg" width="320" height="568"/>
-        <image name="bd_cell_bottom.png" width="844" height="568"/>
-        <image name="bd_cell_middle.png" width="844" height="568"/>
-        <image name="bd_cell_top.png" width="844" height="568"/>
+        <image name="bd_cell_bottom.png" width="12" height="12"/>
+        <image name="bd_cell_middle.png" width="6" height="6"/>
+        <image name="bd_cell_top.png" width="12" height="12"/>
         <image name="bd_icon_phone.png" width="11" height="15"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
         <image name="bkg_textfield.png" width="320" height="54"/>
