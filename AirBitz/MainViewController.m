@@ -615,10 +615,6 @@ MainViewController *staticMVC;
 		{
 			if (_selectedViewController != _directoryViewController)
 			{
-//				[_selectedViewController.view removeFromSuperview];
-//				_selectedViewController = _directoryViewController;
-//				[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-//                [MainViewController moveSelectedViewController: 0.0];
                 [MainViewController animateSwapViewControllers:_directoryViewController out:_selectedViewController];
 
             }
@@ -630,11 +626,6 @@ MainViewController *staticMVC;
 			{
 				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-////                    _requestViewController.walletUUID = self.strWalletUUID;
-//					[_selectedViewController.view removeFromSuperview];
-//					_selectedViewController = _requestViewController;
-//					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-//                    [MainViewController moveSelectedViewController: 0.0];
                     [MainViewController animateSwapViewControllers:_requestViewController out:_selectedViewController];
 				}
 				else
@@ -650,11 +641,6 @@ MainViewController *staticMVC;
 			{
 				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-////                    _sendViewController.walletUUID = self.strWalletUUID;
-//                    [_selectedViewController.view removeFromSuperview];
-//                    _selectedViewController = _sendViewController;
-//                    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-//                    [MainViewController moveSelectedViewController: 0.0];
                     [MainViewController animateSwapViewControllers:_sendViewController out:_selectedViewController];
 				}
 				else
@@ -670,11 +656,6 @@ MainViewController *staticMVC;
 			{
 				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-//					[_selectedViewController.view removeFromSuperview];
-//					_selectedViewController = _walletsViewController;
-//					[self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-////                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
-//                    [MainViewController moveSelectedViewController: 0.0];
                     [MainViewController animateSwapViewControllers:_walletsViewController out:_selectedViewController];
 				}
 				else
@@ -834,7 +815,7 @@ MainViewController *staticMVC;
 
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
-	[_loginViewController.view removeFromSuperview];
+    [MainViewController animateFadeOut:_loginViewController.view remove:YES];
 	[MainViewController showTabBarAnimated:YES];
     [MainViewController showNavBarAnimated:YES];
 
@@ -851,6 +832,47 @@ MainViewController *staticMVC;
     // add right to left swipe detection for slideout
     [self installRightToLeftSwipeDetection];
 }
+
+- (void)LoginViewControllerDidPINLogin
+{
+//    self.backgroundView.image = [Theme Singleton].backgroundApp;
+
+    _appMode = APP_MODE_WALLETS;
+    self.tabBar.selectedItem = self.tabBar.items[_appMode];
+    [MainViewController showTabBarAnimated:YES];
+    [MainViewController showNavBarAnimated:YES];
+
+
+    // After login, reset all the main views
+    [self loadUserViews];
+
+    [MainViewController animateFadeOut:_loginViewController.view remove:YES];
+    [MainViewController showTabBarAnimated:YES];
+    [MainViewController showNavBarAnimated:YES];
+
+    [self launchViewControllerBasedOnAppMode];
+
+    // if the user has a password, increment PIN login count
+    if ([CoreBridge passwordExists]) {
+        [[User Singleton] incPinLogin];
+    }
+
+    if (_uri) {
+        [self processBitcoinURI:_uri];
+        _uri = nil;
+    } else if (![CoreBridge passwordExists]) {
+        [self showPasswordSetAlert];
+    } else if ([User Singleton].needsPasswordCheck) {
+        [self showPasswordCheckAlert];
+    } else {
+        [self checkUserReview];
+    }
+
+    // add right to left swipe detection for slideout
+    [self installRightToLeftSwipeDetection];
+}
+
+
 
 - (void)showPasswordCheckAlert
 {
@@ -1150,44 +1172,6 @@ MainViewController *staticMVC;
         [_txDetailsController.view removeFromSuperview];
         _txDetailsController = nil;
     }];
-}
-
-- (void)LoginViewControllerDidPINLogin
-{
-//    self.backgroundView.image = [Theme Singleton].backgroundApp;
-
-    _appMode = APP_MODE_WALLETS;
-    self.tabBar.selectedItem = self.tabBar.items[_appMode];
-    [MainViewController showTabBarAnimated:YES];
-    [MainViewController showNavBarAnimated:YES];
-
-
-    // After login, reset all the main views
-    [self loadUserViews];
-    
-	[_loginViewController.view removeFromSuperview];
-	[MainViewController showTabBarAnimated:YES];
-    [MainViewController showNavBarAnimated:YES];
-	[self launchViewControllerBasedOnAppMode];
-
-    // if the user has a password, increment PIN login count
-    if ([CoreBridge passwordExists]) {
-        [[User Singleton] incPinLogin];
-    }
-    
-    if (_uri) {
-        [self processBitcoinURI:_uri];
-        _uri = nil;
-    } else if (![CoreBridge passwordExists]) {
-        [self showPasswordSetAlert];
-    } else if ([User Singleton].needsPasswordCheck) {
-        [self showPasswordCheckAlert];
-    } else {
-        [self checkUserReview];
-    }
-    
-    // add right to left swipe detection for slideout
-    [self installRightToLeftSwipeDetection];
 }
 
 #pragma mark - ABC Alert delegate
@@ -1757,6 +1741,7 @@ MainViewController *staticMVC;
 //                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
     [out.view setAlpha:1.0];
     [in.view setAlpha:0.0];
+    staticMVC.blurViewLeft.constant = 0;
     [staticMVC.view layoutIfNeeded];
 
     CGRect frame = in.view.frame;
@@ -1770,6 +1755,7 @@ MainViewController *staticMVC;
                      {
                          in.view.frame = frame;
                          staticMVC.blurViewLeft.constant = 0;
+                         [staticMVC.blurViewContainer setAlpha:1];
                          [out.view setAlpha:0.0];
                          [in.view setAlpha:1.0];
 

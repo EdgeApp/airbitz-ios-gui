@@ -22,6 +22,7 @@ typedef enum eNavBarSide
 + (void)addChildView: (UIView *)view;
 + (void)animateFadeIn:(UIView *)view;
 + (void)animateFadeOut:(UIView *)view;
++ (void)animateFadeOut:(UIView *)view remove:(BOOL)removeFromView;
 
 + (void)animateIn:(NSString *)identifier withBlur:(BOOL)withBlur;
 + (void)animateView:(UIView *)view withBlur:(BOOL)withBlur;
