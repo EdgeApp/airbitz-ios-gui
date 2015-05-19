@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
-@interface SendStatusViewController : UIViewController
+@interface SendStatusViewController : AirbitzViewController
 
 @property (nonatomic, weak) IBOutlet UILabel *messageLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonTypes.h"
+#import "AirbitzViewController.h"
 
 @protocol RequestViewControllerDelegate;
 
-@interface RequestViewController : UIViewController
+@interface RequestViewController : AirbitzViewController
 
 @property (assign) id<RequestViewControllerDelegate> delegate;
 //@property (nonatomic, strong) NSString  *walletUUID;

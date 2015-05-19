@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Wallet.h"
+#import "AirbitzViewController.h"
 
 @protocol TransactionsViewControllerDelegate;
 
-@interface TransactionsViewController : UIViewController
+@interface TransactionsViewController : AirbitzViewController
 
 @property (assign) id<TransactionsViewControllerDelegate> delegate;
 //@property (nonatomic, strong) Wallet *wallet;

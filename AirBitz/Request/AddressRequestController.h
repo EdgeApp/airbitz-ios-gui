@@ -4,10 +4,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 @protocol AddressRequestControllerDelegate;
 
-@interface AddressRequestController : UIViewController
+@interface AddressRequestController : AirbitzViewController
 
 @property (assign) id<AddressRequestControllerDelegate> delegate;
 @property (strong, nonatomic) NSURL *url;

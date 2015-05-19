@@ -97,7 +97,7 @@
         [_signupHandleController.view removeFromSuperview];
         [_signupCameraController.view removeFromSuperview];
         [_signupContactController.view removeFromSuperview];
-        [MainViewController animateOut:_signupWriteItController.view withBlur:NO complete:^(void) {
+        [MainViewController animateOut:_signupWriteItController withBlur:NO complete:^(void) {
             _signupUsernameController = nil;
             _current = nil;
         }];
@@ -110,13 +110,13 @@
 {
     if (_current == _signupUsernameController) {
         [MainViewController hideNavBarAnimated:YES];
-        [MainViewController animateOut:_signupUsernameController.view withBlur:YES complete:^(void) {
+        [MainViewController animateOut:_signupUsernameController withBlur:YES complete:^(void) {
             _signupUsernameController = nil;
             _current = nil;
             [self.delegate signupAborted];
         }];
     } else if (_current == _signupPasswordController) {
-        [MainViewController animateOut:_signupPasswordController.view withBlur:NO complete:^(void) {
+        [MainViewController animateOut:_signupPasswordController withBlur:NO complete:^(void) {
             _signupPasswordController = nil;
             _current = _signupUsernameController;
             _current.view.alpha = 1.0;
@@ -134,7 +134,7 @@
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Sign Up", @"Sign Up title bar text")];
     [MainViewController changeNavBar:self title:[Theme Singleton].exitButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
-    [MainViewController animateView:_signupUsernameController.view withBlur:YES];
+    [MainViewController animateView:_signupUsernameController withBlur:YES];
 }
 
 - (void)launchPasswordController
@@ -144,7 +144,7 @@
     _signupPasswordController.manager = self;
     [MainViewController animateFadeOut:_current.view];
     _current = _signupPasswordController;
-    [MainViewController animateView:_signupPasswordController.view withBlur:NO];
+    [MainViewController animateView:_signupPasswordController withBlur:NO];
 }
 
 - (void)launchCameraController
@@ -154,7 +154,7 @@
     _signupCameraController.manager = self;
     [MainViewController animateFadeOut:_current.view];
     _current = _signupCameraController;
-    [MainViewController animateView:_signupCameraController.view withBlur:NO];
+    [MainViewController animateView:_signupCameraController withBlur:NO];
 }
 
 - (void)launchContactController
@@ -164,7 +164,7 @@
     _signupContactController.manager = self;
     [MainViewController animateFadeOut:_current.view];
     _current = _signupContactController;
-    [MainViewController animateView:_signupContactController.view withBlur:NO];
+    [MainViewController animateView:_signupContactController withBlur:NO];
 }
 
 - (void)launchWriteItController
@@ -174,7 +174,7 @@
     _signupWriteItController.manager = self;
     [MainViewController animateFadeOut:_current.view];
     _current = _signupWriteItController;
-    [MainViewController animateView:_signupWriteItController.view withBlur:NO];
+    [MainViewController animateView:_signupWriteItController withBlur:NO];
 }
 
 - (BOOL)haveRequestCamera

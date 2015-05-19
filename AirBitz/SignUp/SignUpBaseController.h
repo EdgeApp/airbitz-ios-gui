@@ -5,8 +5,9 @@
 
 #import <UIKit/UIKit.h>
 #import "SignUpManager.h"
+#import "AirbitzViewController.h"
 
-@interface SignUpBaseController : UIViewController
+@interface SignUpBaseController : AirbitzViewController
 
 @property (assign) SignUpManager *manager;
 

@@ -1,9 +1,10 @@
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 @protocol TwoFactorScanViewControllerDelegate;
 
-@interface TwoFactorScanViewController : UIViewController
+@interface TwoFactorScanViewController : AirbitzViewController
 
 @property (assign) id<TwoFactorScanViewControllerDelegate> delegate;
 @property (assign) NSString *secret;

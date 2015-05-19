@@ -45,7 +45,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="postcard-mountain-blue.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="I33-Mp-005">
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="postcard-mountain-blue.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="I33-Mp-005">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -104,14 +104,18 @@
                             <constraint firstItem="F5s-te-cfW" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="3KO-vl-5GQ"/>
                             <constraint firstAttribute="trailing" secondItem="F5s-te-cfW" secondAttribute="trailing" id="9GU-l6-bFZ"/>
                             <constraint firstItem="J0w-aK-PS3" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="AdO-l3-DpT"/>
+                            <constraint firstAttribute="bottom" secondItem="I33-Mp-005" secondAttribute="bottom" id="Cgn-sg-7zA"/>
                             <constraint firstItem="ehS-NB-3KY" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="Dt7-ao-hvc"/>
                             <constraint firstAttribute="width" secondItem="J0w-aK-PS3" secondAttribute="width" id="EhY-gm-XcQ"/>
                             <constraint firstItem="Luv-G7-p9Q" firstAttribute="top" secondItem="hcq-oI-SbF" secondAttribute="top" id="FEw-Fw-JdJ"/>
+                            <constraint firstItem="I33-Mp-005" firstAttribute="top" secondItem="hcq-oI-SbF" secondAttribute="top" id="J5S-Y3-OJc"/>
                             <constraint firstItem="J0w-aK-PS3" firstAttribute="top" secondItem="Luv-G7-p9Q" secondAttribute="bottom" id="KTd-jg-lUw"/>
                             <constraint firstAttribute="bottom" secondItem="ehS-NB-3KY" secondAttribute="bottom" id="MVG-CK-skQ"/>
                             <constraint firstAttribute="trailing" secondItem="ehS-NB-3KY" secondAttribute="trailing" id="Qyi-Jp-KPD"/>
                             <constraint firstItem="F5s-te-cfW" firstAttribute="top" secondItem="J0w-aK-PS3" secondAttribute="bottom" id="TS3-8Y-WLL"/>
                             <constraint firstItem="Luv-G7-p9Q" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="ZxI-1D-zhA"/>
+                            <constraint firstItem="I33-Mp-005" firstAttribute="leading" secondItem="hcq-oI-SbF" secondAttribute="leading" id="ePm-pN-RuM"/>
+                            <constraint firstAttribute="trailing" secondItem="I33-Mp-005" secondAttribute="trailing" id="oGq-RJ-OaY"/>
                             <constraint firstAttribute="bottom" secondItem="F5s-te-cfW" secondAttribute="bottom" id="pbq-pw-QxT"/>
                             <constraint firstItem="ehS-NB-3KY" firstAttribute="top" secondItem="hcq-oI-SbF" secondAttribute="top" id="wda-q1-TNK"/>
                         </constraints>

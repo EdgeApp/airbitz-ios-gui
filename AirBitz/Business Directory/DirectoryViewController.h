@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
-@interface DirectoryViewController : UIViewController
+@interface DirectoryViewController : AirbitzViewController
 
 @end

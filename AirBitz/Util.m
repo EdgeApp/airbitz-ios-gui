@@ -426,13 +426,19 @@
     return constraints;
 
 }
-+ (void)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView
++ (NSArray *)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView
 {
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+
     [childView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView);
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
     [parentView addSubview:childView];
-    [parentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[childView]-0-|" options:0 metrics:nil views:viewsDictionary]];
-    [parentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]-0-|" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+
+    return constraints;
 }
 
 

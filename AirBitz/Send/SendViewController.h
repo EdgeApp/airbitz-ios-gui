@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "PickerTextView.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "AirbitzViewController.h"
 
-@interface SendViewController : UIViewController
+@interface SendViewController : AirbitzViewController
 
 //@property (nonatomic, strong) NSString              *walletUUID;
 //@property (nonatomic, weak) IBOutlet PickerTextView *pickerTextSendTo;

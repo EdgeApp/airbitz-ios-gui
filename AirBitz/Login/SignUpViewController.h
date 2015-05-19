@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 typedef enum eSignUpMode
 {
@@ -19,7 +20,7 @@ typedef enum eSignUpMode
 
 @protocol SignUpViewControllerDelegate;
 
-@interface SignUpViewController : UIViewController
+@interface SignUpViewController : AirbitzViewController
 
 @property (assign)            id<SignUpViewControllerDelegate> delegate;
 @property (nonatomic, assign) tSignUpMode                      mode;

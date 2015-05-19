@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "SignUpViewController.h"
+#import "AirbitzViewController.h"
 
 @protocol SettingsViewControllerDelegate;
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : AirbitzViewController
 
 @property (assign) id<SettingsViewControllerDelegate> delegate;
 

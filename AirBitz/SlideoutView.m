@@ -18,7 +18,7 @@
 @interface SlideoutView () <PickerTextViewDelegate >
 
 {
-    CGRect                      _originalSlideoutFrame;
+//    CGRect                      _originalSlideoutFrame;
     BOOL                        _open;
     NSString                    *_account;
     FadingAlertView             *_fadingAlert;
@@ -51,20 +51,20 @@
     v.delegate = del;
 
     v->_parentView = parentView;
-    CGRect f = parentView.frame;
-    int topOffset = HEADER_HEIGHT;
-    int sliderWidth = 250;
-    f.size.width = sliderWidth;
-    f.origin.y = topOffset;
-    f.origin.x = parentView.frame.size.width - f.size.width;
-    f.size.height = parentView.frame.size.height - tabBar.frame.size.height - topOffset;
-    v.frame = f;
-
-    v->_originalSlideoutFrame = v.frame;
-
-    f = v.frame;
-    f.origin.x = f.origin.x + f.size.width;
-    v.frame = f;
+//    CGRect f = parentView.frame;
+//    int topOffset = HEADER_HEIGHT;
+//    int sliderWidth = 250;
+//    f.size.width = sliderWidth;
+//    f.origin.y = topOffset;
+//    f.origin.x = parentView.frame.size.width - f.size.width;
+//    f.size.height = parentView.frame.size.height - tabBar.frame.size.height - topOffset;
+//    v.frame = f;
+//
+//    v->_originalSlideoutFrame = v.frame;
+//
+//    f = v.frame;
+//    f.origin.x = f.origin.x + f.size.width;
+//    v.frame = f;
     v->_open = NO;
 
     UIColor *back = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.05];
@@ -147,8 +147,8 @@
 {
     if (!show)
     {
-        CGRect frame = self.frame;
-        frame.origin.x = frame.origin.x + frame.size.width;
+//        CGRect frame = self.frame;
+//        frame.origin.x = frame.origin.x + frame.size.width;
         if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWillClose:)]) {
             [self.delegate slideoutWillClose:self];
         }
@@ -158,7 +158,8 @@
                                 options:UIViewAnimationOptionCurveEaseOut
                             animations:^
             {
-                self.frame = frame;
+                self.leftConstraint.constant = -0;
+                [self layoutIfNeeded];
             }
                             completion:^(BOOL finished)
             {
@@ -176,7 +177,9 @@
                  [self removeBlockingButton:self->_parentView];
              }];
         } else {
-            self.frame = frame;
+            self.leftConstraint.constant = -0;
+            [self layoutIfNeeded];
+//            self.frame = frame;
             [self removeBlockingButton:self->_parentView];
         }
         [self rotateImage:self.accountArrow duration:0.0
@@ -191,7 +194,8 @@
                                 options:UIViewAnimationOptionCurveEaseOut
                             animations:^
             {
-                self.frame = _originalSlideoutFrame;
+                self.leftConstraint.constant = -self.frame.size.width;
+                [self layoutIfNeeded];
             }
                             completion:^(BOOL finished)
             {
@@ -210,7 +214,8 @@
                  
              }];
         } else {
-            self.frame = _originalSlideoutFrame;
+            self.leftConstraint.constant = -self.frame.size.width;
+            [self layoutIfNeeded];
         }
     }
     _open = show;

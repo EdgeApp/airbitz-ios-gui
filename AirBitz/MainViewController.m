@@ -37,6 +37,7 @@
 #import "DL_URLServer.h"
 #import "NotificationChecker.h"
 #import "LocalSettings.h"
+#import "AirbitzViewController.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
@@ -87,7 +88,6 @@ typedef enum eAppMode
 
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
-    NSLayoutConstraint          *slideoutLeft;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *blurViewContainer;
@@ -100,7 +100,7 @@ typedef enum eAppMode
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundViewBlue;
-@property UIViewController            *selectedViewController;
+@property AirbitzViewController                  *selectedViewController;
 @property UIViewController            *navBarOwnerViewController;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
@@ -253,8 +253,7 @@ MainViewController *staticMVC;
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[slideoutView(==280)]" options:0 metrics:nil views:viewsDictionary]];
 
     [parentView addConstraints:constraints];
-
-    slideoutLeft = x;
+    slideoutView.leftConstraint = x;
 
 }
 
@@ -407,16 +406,18 @@ MainViewController *staticMVC;
 
 +(void)moveSelectedViewController: (CGFloat) x
 {
-    CGRect frame;
-    
-    frame = staticMVC.selectedViewController.view.frame;
-    frame.origin.x = x;
-    
-    staticMVC.selectedViewController.view.frame = frame;
+//    CGRect frame;
+//
+//    frame = staticMVC.selectedViewController.view.frame;
+//
+//    frame.origin.x = x;
+//
+//    staticMVC.selectedViewController.view.frame = frame;
 
 //    NSLog(@"Moving Blur from:%f to:%f", staticMVC.blurViewLeft.constant, x);
 //    NSLog(@"BlurView x:%f y:%f w:%f h:%f", staticMVC.blurView.frame.origin.x,staticMVC.blurView.frame.origin.y,staticMVC.blurView.frame.size.width,staticMVC.blurView.frame.size.height);
 //    NSLog(@"BlurViewContainer x:%f y:%f w:%f h:%f", staticMVC.blurViewContainer.frame.origin.x,staticMVC.blurViewContainer.frame.origin.y,staticMVC.blurViewContainer.frame.size.width,staticMVC.blurViewContainer.frame.size.height);
+    staticMVC.selectedViewController.leftConstraint.constant = x;
     staticMVC.blurViewLeft.constant = x;
 
 }
@@ -424,7 +425,8 @@ MainViewController *staticMVC;
 -(void)showLogin:(BOOL)animated withPIN:(BOOL)bWithPIN
 {
     [LoginViewController setModePIN:bWithPIN];
-    _loginViewController.view.frame = self.view.bounds;
+    _loginViewController.leftConstraint.constant = 0;
+    [self.view layoutIfNeeded];
 
     if (_selectedViewController != _directoryViewController)
     {
@@ -432,11 +434,16 @@ MainViewController *staticMVC;
         _selectedViewController = _directoryViewController;
 
 //        [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-        [Util insertSubviewWithConstraints:self.view child:_selectedViewController.view belowSubView:self.tabBar];
+
+        NSArray *constraints = [Util insertSubviewWithConstraints:self.view child:_selectedViewController.view belowSubView:self.tabBar];
+
+        _selectedViewController.leftConstraint = [constraints objectAtIndex:0];
     }
     [MainViewController animateFadeOut:_selectedViewController.view];
     [MainViewController moveSelectedViewController: -_selectedViewController.view.frame.size.width];
-    [MainViewController addChildView:_loginViewController.view];
+//    [MainViewController addChildView:_loginViewController.view];
+    NSArray *constraints = [Util insertSubviewWithConstraints:staticMVC.view child:_loginViewController.view belowSubView:staticMVC.tabBar];
+    _loginViewController.leftConstraint = [constraints objectAtIndex:0];
 
     [MainViewController hideTabBarAnimated:animated];
     [MainViewController hideNavBarAnimated:animated];
@@ -932,19 +939,19 @@ MainViewController *staticMVC;
     
     _signUpController.mode = SignUpMode_ChangePasswordNoVerify;
     _signUpController.delegate = self;
-    
-    CGRect frame = self.view.bounds;
-    frame.origin.x = frame.size.width;
-    _signUpController.view.frame = frame;
-    [self.view addSubview:_signUpController.view];
-    
+
+    NSArray *constraints = [Util addSubviewWithConstraints:self.view child:_signUpController.view];
+    _signUpController.leftConstraint = [constraints objectAtIndex:0];
+    _signUpController.leftConstraint.constant = _signUpController.view.frame.size.width;
+
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
-         _signUpController.view.frame = self.view.bounds;
+         _signUpController.leftConstraint.constant = 0;
+         [self.view layoutIfNeeded];
      }
                      completion:^(BOOL finished)
      {
@@ -1174,17 +1181,17 @@ MainViewController *staticMVC;
     _txDetailsController.bOldTransaction = NO;
     _txDetailsController.transactionDetailsMode = TD_MODE_RECEIVED;
 
-    CGRect frame = self.view.bounds;
-    frame.origin.x = frame.size.width;
-    _txDetailsController.view.frame = frame;
-    [Util insertSubviewWithConstraints:self.view child:_txDetailsController.view belowSubView:self.tabBar];
-//    [self.view insertSubview:_txDetailsController.view belowSubview:self.tabBar];
+    NSArray *constraints = [Util insertSubviewWithConstraints:self.view child:_txDetailsController.view belowSubView:self.tabBar];
+    _txDetailsController.leftConstraint = [constraints objectAtIndex:0];
+    _txDetailsController.leftConstraint.constant = _txDetailsController.view.frame.size.width;
+
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
     {
-        _txDetailsController.view.frame = self.view.bounds;
+        _txDetailsController.leftConstraint.constant = 0;
+        [self.view layoutIfNeeded];
     }
     completion:^(BOOL finished)
     {
@@ -1199,9 +1206,8 @@ MainViewController *staticMVC;
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
     {
-        CGRect frame = self.view.bounds;
-        frame.origin.x = frame.size.width;
-        _txDetailsController.view.frame = frame;
+        _txDetailsController.leftConstraint.constant = _txDetailsController.view.frame.size.width;
+        [self.view layoutIfNeeded];
     }
     completion:^(BOOL finished)
     {
@@ -1779,18 +1785,16 @@ MainViewController *staticMVC;
 //    [MainViewController animateView:controller.view withBlur:withBlur];
 //}
 
-+ (void)animateSwapViewControllers:(UIViewController *)in out:(UIViewController *)out
++ (NSArray *)animateSwapViewControllers:(AirbitzViewController *)in out:(AirbitzViewController *)out
 {
-    [Util insertSubviewWithConstraints:staticMVC.view child:in.view belowSubView:staticMVC.tabBar];
+    NSArray *constraints = [Util insertSubviewWithConstraints:staticMVC.view child:in.view belowSubView:staticMVC.tabBar];
     staticMVC.selectedViewController = in;
+    in.leftConstraint = [constraints objectAtIndex:0];
 
     [out.view setAlpha:1.0];
     [in.view setAlpha:0.0];
     staticMVC.blurViewLeft.constant = 0;
     [staticMVC.view layoutIfNeeded];
-
-    CGRect frame = in.view.frame;
-    frame.origin.x = 0;
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.20
@@ -1798,7 +1802,7 @@ MainViewController *staticMVC;
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
                      {
-                         in.view.frame = frame;
+                         in.leftConstraint.constant = 0;
                          staticMVC.blurViewLeft.constant = 0;
                          [staticMVC.blurViewContainer setAlpha:1];
                          [out.view setAlpha:0.0];
@@ -1811,15 +1815,16 @@ MainViewController *staticMVC;
                          [out.view removeFromSuperview];
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                      }];
+    return constraints;
 }
 
-+ (void)animateView:(UIView *)view withBlur:(BOOL)withBlur
++ (void)animateView:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur
 {
-    CGRect frame = staticMVC.view.bounds;
-    frame.origin.x = frame.size.width;
-    view.frame = frame;
 
-//    [staticMVC.view insertSubview:view belowSubview:staticMVC.tabBar];
+    viewController.leftConstraint.constant = viewController.view.frame.size.width;
+    [staticMVC.view layoutIfNeeded];
+
+    [Util insertSubviewWithConstraints:staticMVC.view child:viewController.view belowSubView:staticMVC.tabBar];
 
     if (withBlur)
     {
@@ -1833,7 +1838,7 @@ MainViewController *staticMVC;
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
                      {
-                         view.frame = staticMVC.view.bounds;
+                         viewController.leftConstraint.constant = 0;
                          if (withBlur)
                          {
                              staticMVC.blurViewLeft.constant = 0;
@@ -1846,7 +1851,7 @@ MainViewController *staticMVC;
                      }];
 }
 
-+ (void)animateOut:(UIView *)view withBlur:(BOOL)withBlur complete:(void(^)(void))cb
++ (void)animateOut:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur complete:(void(^)(void))cb
 {
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 
@@ -1857,17 +1862,14 @@ MainViewController *staticMVC;
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
-                         CGRect frame = staticMVC.view.bounds;
-                         frame.origin.x = frame.size.width;
-                         view.frame = frame;
-
+                         viewController.leftConstraint.constant = viewController.view.frame.size.width;
                          if (withBlur)
                              staticMVC.blurViewLeft.constant = staticMVC.view.bounds.size.width;
                          [staticMVC.view layoutIfNeeded];
 
                      }
                      completion:^(BOOL finished) {
-                         [view removeFromSuperview];
+                         [viewController.view removeFromSuperview];
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                          if(cb != nil)
                              cb();

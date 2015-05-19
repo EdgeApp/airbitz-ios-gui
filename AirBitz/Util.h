@@ -48,7 +48,7 @@
 + (BOOL)isValidCategory:(NSString *)category;
 + (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView belowSubView:(UIView *)belowView;
 + (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView aboveSubView:(UIView *)aboveView;
-+ (void)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView;
++ (NSArray *)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView;
 
 @end
 

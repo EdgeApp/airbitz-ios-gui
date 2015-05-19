@@ -303,13 +303,13 @@ static BOOL bInitialized = false;
          CGRect frame = self.view.frame;
          if(frame.origin.x < 0)
          {
-             frame.origin.x = -frame.size.width;
+             self.leftConstraint.constant = -frame.size.width;
          }
          else
          {
-             frame.origin.x = frame.size.width;
+             self.leftConstraint.constant = frame.size.width;
          }
-         self.view.frame = frame;
+         [self.view layoutIfNeeded];
      }
                      completion:^(BOOL finished)
      {
@@ -766,8 +766,9 @@ static BOOL bInitialized = false;
     }
 
     [MainViewController setAlphaOfSelectedViewController:alpha];
-    frame.origin.x = xPos;
-    self.view.frame = frame;
+//    frame.origin.x = xPos;
+//    self.view.frame = frame;
+    self.leftConstraint.constant = xPos;
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
@@ -802,9 +803,11 @@ static BOOL bInitialized = false;
              }
 
              [MainViewController setAlphaOfSelectedViewController:0.0];
-             CGRect frame = self.view.frame;
-            frame.origin.x = 0.0;
-             self.view.frame = frame;
+             self.leftConstraint.constant = 0;
+//             CGRect frame = self.view.frame;
+//            frame.origin.x = 0.0;
+//             self.view.frame = frame;
+
              [self.view layoutIfNeeded];
          }
         completion:^(BOOL finished)
@@ -822,16 +825,16 @@ static BOOL bInitialized = false;
              CGRect frame = self.view.frame;
              if(frame.origin.x < 0)
              {
-                 frame.origin.x = -frame.size.width;
+                 self.leftConstraint.constant = -frame.size.width;
              }
              else
              {
-                 frame.origin.x = frame.size.width;
+                 self.leftConstraint.constant = frame.size.width;
              }
              [MainViewController moveSelectedViewController:0.0];
 
              [MainViewController setAlphaOfSelectedViewController:1.0];
-             self.view.frame = frame;
+//             self.view.frame = frame;
              [self.view layoutIfNeeded];
          }
          completion:^(BOOL finished)

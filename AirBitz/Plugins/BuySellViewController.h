@@ -4,10 +4,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 @protocol BuySellViewControllerDelegate;
 
-@interface BuySellViewController : UIViewController
+@interface BuySellViewController : AirbitzViewController
 
 @property (assign) id<BuySellViewControllerDelegate> delegate;
 - (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider;

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 @protocol LoginViewControllerDelegate;
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : AirbitzViewController
 
 + (void)setModePIN:(BOOL)enable;
 

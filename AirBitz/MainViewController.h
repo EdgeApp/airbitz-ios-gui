@@ -9,6 +9,7 @@
 //	tab bar button is selected
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 typedef enum eNavBarSide
 {
@@ -25,8 +26,8 @@ typedef enum eNavBarSide
 + (void)animateFadeOut:(UIView *)view remove:(BOOL)removeFromView;
 
 + (void)animateIn:(NSString *)identifier withBlur:(BOOL)withBlur;
-+ (void)animateView:(UIView *)view withBlur:(BOOL)withBlur;
-+ (void)animateOut:(UIView *)view withBlur:(BOOL)withBlur complete:(void(^)(void))cb;
++ (void)animateView:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur;
++ (void)animateOut:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur complete:(void(^)(void))cb;
 + (void)showBackground:(BOOL)loggedIn animate:(BOOL)animated;
 
 +(void)changeNavBarOwner:(UIViewController *)viewController;
@@ -45,7 +46,7 @@ typedef enum eNavBarSide
 +(void)showNavBarAnimated:(BOOL)animated;
 +(void)hideTabBarAnimated:(BOOL)animated;
 +(void)hideNavBarAnimated:(BOOL)animated;
-+(UIViewController *)getSelectedViewController;
++(AirbitzViewController *)getSelectedViewController;
 +(void)moveSelectedViewController: (CGFloat) x;
 +(void)setAlphaOfSelectedViewController: (CGFloat) alpha;
 +(CGFloat) getFooterHeight;

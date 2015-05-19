@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Transaction.h"
 #import "Wallet.h"
+#import "AirbitzViewController.h"
 
 typedef enum eTDMode
 {
@@ -18,7 +19,7 @@ typedef enum eTDMode
 
 @protocol TransactionDetailsViewControllerDelegate;
 
-@interface TransactionDetailsViewController : UIViewController
+@interface TransactionDetailsViewController : AirbitzViewController
 
 @property (assign)            id<TransactionDetailsViewControllerDelegate>  delegate;
 @property (nonatomic, strong) Transaction                                   *transaction;

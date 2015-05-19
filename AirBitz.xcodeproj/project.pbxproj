@@ -1066,6 +1066,9 @@
 		DA6645451B085D9B00B04C5B /* postcard-mountain@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA66453B1B085D9B00B04C5B /* postcard-mountain@2x.png */; };
 		DA6645461B085D9B00B04C5B /* postcard-mountain@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA66453B1B085D9B00B04C5B /* postcard-mountain@2x.png */; };
 		DA6645471B085D9B00B04C5B /* postcard-mountain@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA66453B1B085D9B00B04C5B /* postcard-mountain@2x.png */; };
+		DA6645501B0B408600B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
+		DA6645511B0B408700B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
+		DA6645521B0B408700B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
 		DA6B3CB31ADE4AE800A4F852 /* icon_more@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6B3CB11ADE4AE800A4F852 /* icon_more@2x~iphone.png */; };
 		DA6B3CB41ADE4AE800A4F852 /* icon_more@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6B3CB11ADE4AE800A4F852 /* icon_more@2x~iphone.png */; };
 		DA6B3CB51ADE4AE800A4F852 /* icon_more@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6B3CB11ADE4AE800A4F852 /* icon_more@2x~iphone.png */; };
@@ -2405,6 +2408,8 @@
 		DA6645391B085D9B00B04C5B /* postcard-mountain-blue@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "postcard-mountain-blue@2x.jpg"; path = "Resources/Artwork/postcard-mountain-blue@2x.jpg"; sourceTree = "<group>"; };
 		DA66453A1B085D9B00B04C5B /* postcard-mountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "postcard-mountain.png"; path = "Resources/Artwork/postcard-mountain.png"; sourceTree = "<group>"; };
 		DA66453B1B085D9B00B04C5B /* postcard-mountain@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "postcard-mountain@2x.png"; path = "Resources/Artwork/postcard-mountain@2x.png"; sourceTree = "<group>"; };
+		DA66454A1B0B37F000B04C5B /* AirbitzViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirbitzViewController.h; sourceTree = "<group>"; };
+		DA66454F1B0B408600B04C5B /* AirbitzViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirbitzViewController.m; sourceTree = "<group>"; };
 		DA6B3CB11ADE4AE800A4F852 /* icon_more@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_more@2x~iphone.png"; sourceTree = "<group>"; };
 		DA6B3CB21ADE4AE800A4F852 /* icon_more~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_more~iphone.png"; sourceTree = "<group>"; };
 		DA7693821964FE8A0022EE64 /* copy_btn@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copy_btn@2x~iphone.png"; sourceTree = "<group>"; };
@@ -2639,6 +2644,8 @@
 		4C08A6E318C2B1B60071B87C /* ABC Data */ = {
 			isa = PBXGroup;
 			children = (
+				DA66454F1B0B408600B04C5B /* AirbitzViewController.m */,
+				DA66454A1B0B37F000B04C5B /* AirbitzViewController.h */,
 				6861FE661950DFB100CDF24E /* TxOutput.h */,
 				6861FE671950DFB100CDF24E /* TxOutput.m */,
 				4C08A6E418C2B1D50071B87C /* Wallet.h */,
@@ -5385,6 +5392,7 @@
 				7D98ACF419A7C550003D2BF6 /* DDData.m in Sources */,
 				7D98ACF519A7C550003D2BF6 /* SignUpViewController.m in Sources */,
 				7D98ACF619A7C550003D2BF6 /* FlashSelectView.m in Sources */,
+				DA6645511B0B408700B04C5B /* AirbitzViewController.m in Sources */,
 				7D98ACF719A7C550003D2BF6 /* Location.m in Sources */,
 				7D98ACF819A7C550003D2BF6 /* CoreBridge.m in Sources */,
 				7D98ACF919A7C550003D2BF6 /* BalanceView.m in Sources */,
@@ -5531,6 +5539,7 @@
 				B5F2E9C218DA911A008ACF88 /* SignUpViewController.m in Sources */,
 				B5C0A9C818EA0E55008F302C /* FlashSelectView.m in Sources */,
 				B5C0A98118EA0B52008F302C /* Location.m in Sources */,
+				DA6645501B0B408600B04C5B /* AirbitzViewController.m in Sources */,
 				687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */,
 				B57C209618C25011005D7245 /* BalanceView.m in Sources */,
 				B55A031118EA538500845090 /* BooleanCell.m in Sources */,
@@ -5677,6 +5686,7 @@
 				DAE8644F1A88A58A00A17BD3 /* SignUpViewController.m in Sources */,
 				DAE864501A88A58A00A17BD3 /* FlashSelectView.m in Sources */,
 				DAE864511A88A58A00A17BD3 /* Location.m in Sources */,
+				DA6645521B0B408700B04C5B /* AirbitzViewController.m in Sources */,
 				DAE864521A88A58A00A17BD3 /* CoreBridge.m in Sources */,
 				DAE864531A88A58A00A17BD3 /* BalanceView.m in Sources */,
 				DAE864541A88A58A00A17BD3 /* BooleanCell.m in Sources */,

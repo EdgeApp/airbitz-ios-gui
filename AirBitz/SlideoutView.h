@@ -15,6 +15,7 @@
 + (SlideoutView *)CreateWithDelegate:(id)del parentView:(UIView *)parentView withTab:(UIView *)tabBar;
 
 @property (assign) id<SlideoutViewDelegate>   delegate;
+@property (nonatomic, strong) NSLayoutConstraint * leftConstraint;
 
 - (void)showSlideout:(BOOL)show;
 - (void)showSlideout:(BOOL)show withAnimation:(BOOL)bAnimation;
