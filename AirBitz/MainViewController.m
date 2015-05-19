@@ -224,6 +224,7 @@ MainViewController *staticMVC;
     _otpRequiredAlert = nil;
     _otpSkewAlert = nil;
     firstLaunch = YES;
+    [self.view layoutIfNeeded];
 }
 
 - (void) loadSlideOutViewConstraints
@@ -440,7 +441,7 @@ MainViewController *staticMVC;
         _selectedViewController.leftConstraint = [constraints objectAtIndex:0];
     }
     [MainViewController animateFadeOut:_selectedViewController.view];
-    [MainViewController moveSelectedViewController: -_selectedViewController.view.frame.size.width];
+    [MainViewController moveSelectedViewController: -[MainViewController getLargestDimension]];
 //    [MainViewController addChildView:_loginViewController.view];
     NSArray *constraints = [Util insertSubviewWithConstraints:staticMVC.view child:_loginViewController.view belowSubView:staticMVC.tabBar];
     _loginViewController.leftConstraint = [constraints objectAtIndex:0];
@@ -1733,6 +1734,12 @@ MainViewController *staticMVC;
     return staticMVC.view.frame.size.height;
 }
 
++(CGFloat)getLargestDimension
+{
+    CGRect frame = staticMVC.view.frame;
+    return frame.size.height > frame.size.width ? frame.size.height : frame.size.width;
+}
+
 + (void)addChildView: (UIView *)view
 {
     [Util insertSubviewWithConstraints:staticMVC.view child:view belowSubView:staticMVC.tabBar];
@@ -1828,7 +1835,7 @@ MainViewController *staticMVC;
 
     if (withBlur)
     {
-        staticMVC.blurViewLeft.constant = staticMVC.view.bounds.size.width;
+        staticMVC.blurViewLeft.constant = [MainViewController getLargestDimension];
         [staticMVC.view layoutIfNeeded];
     }
 
@@ -1862,9 +1869,9 @@ MainViewController *staticMVC;
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
-                         viewController.leftConstraint.constant = viewController.view.frame.size.width;
+                         viewController.leftConstraint.constant = [MainViewController getLargestDimension];
                          if (withBlur)
-                             staticMVC.blurViewLeft.constant = staticMVC.view.bounds.size.width;
+                             staticMVC.blurViewLeft.constant = [MainViewController getLargestDimension];
                          [staticMVC.view layoutIfNeeded];
 
                      }

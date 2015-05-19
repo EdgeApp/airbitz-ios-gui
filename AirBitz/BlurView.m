@@ -68,10 +68,11 @@
 
             blurEffectView = (UIVisualEffectView *) [[UIVisualEffectView alloc] initWithEffect:blurEffect];
 
-            [blurEffectView setFrame:self.frame];
+//            [blurEffectView setFrame:self.frame];
 
 //            [self addSubview:blurEffectView];
-            [self.superview insertSubview:blurEffectView belowSubview:self];
+//            [self.superview insertSubview:blurEffectView belowSubview:self];
+            [Util insertSubviewWithConstraints:self.superview child:blurEffectView belowSubView:self];
 
 //            UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
 //            UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
@@ -95,8 +96,9 @@
             {
                 // iOS 7 whitish blur view can be faked with a UIToolBar
                 toolbarBlur = [[UIToolbar alloc] initWithFrame:self.frame];
-                [self.superview insertSubview:toolbarBlur belowSubview:self];
+//                [self.superview insertSubview:toolbarBlur belowSubview:self];
                 [self.layer setBackgroundColor:[UIColorFromARGB(0x00000000) CGColor]];
+                [Util insertSubviewWithConstraints:self.superview child:toolbarBlur belowSubView:self];
 
             }
         }
@@ -105,14 +107,14 @@
     }
     else
     {
-        if (toolbarBlur)
-        {
-            toolbarBlur.frame = self.frame;
-        }
-        if (blurEffectView)
-        {
-            [blurEffectView setFrame:self.frame];
-        }
+//        if (toolbarBlur)
+//        {
+//            toolbarBlur.frame = self.frame;
+//        }
+//        if (blurEffectView)
+//        {
+//            [blurEffectView setFrame:self.frame];
+//        }
     }
 
 //    UIView *toolbarBlur = [[UIView alloc] initWithFrame:self.frame];

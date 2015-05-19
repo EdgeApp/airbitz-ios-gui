@@ -53,6 +53,7 @@ typedef enum eNavBarSide
 +(CGFloat) getHeaderHeight;
 +(CGFloat)getWidth;
 +(CGFloat)getHeight;
++(CGFloat)getLargestDimension;
 
 + (void)showFadingAlert:(NSString *)message;
 + (void)showFadingAlert:(NSString *)message withDelay:(int)fadeDelay;
