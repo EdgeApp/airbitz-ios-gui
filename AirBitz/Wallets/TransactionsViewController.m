@@ -198,7 +198,7 @@
 
     if (_bWalletsShowing)
     {
-        destination = -self.walletsView.frame.size.height;
+        destination = -[MainViewController getLargestDimension];
         _bWalletsShowing = false;
 
     }
@@ -242,7 +242,7 @@
     [self.buttonRequest setAlpha:0.4];
 
     _bWalletsShowing = false;
-    self.walletsViewTop.constant = -self.walletsView.layer.frame.size.height;
+    self.walletsViewTop.constant = -[MainViewController getLargestDimension];
 
     self.walletsView.layer.masksToBounds = NO;
     self.walletsView.layer.cornerRadius = 8; // if you like rounded corners
@@ -453,7 +453,8 @@
 
 - (void)updateBalanceView //
 {
-    if (nil == [CoreBridge Singleton].arrayWallets)
+    if (nil == [CoreBridge Singleton].arrayWallets ||
+            nil == [CoreBridge Singleton].currentWallet)
         return;
 
     int64_t totalSatoshi = 0.0;
@@ -659,17 +660,22 @@
     self.transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
     self.transactionDetailsController.photo = [self imageForTransaction:transaction];
 
-    CGRect frame = self.view.bounds;
-    frame.origin.x = frame.size.width;
-    self.transactionDetailsController.view.frame = frame;
-    [self.view addSubview:self.transactionDetailsController.view];
-    
+//    CGRect frame = self.view.bounds;
+//    frame.origin.x = frame.size.width;
+//    self.transactionDetailsController.view.frame = frame;
+//    [self.view addSubview:self.transactionDetailsController.view];
+    NSArray *constraints = [Util addSubviewWithConstraints:self.view child:self.transactionDetailsController.view];
+    self.transactionDetailsController.leftConstraint = [constraints objectAtIndex:0];
+    self.transactionDetailsController.leftConstraint.constant = [MainViewController getLargestDimension];
+    [self.view layoutIfNeeded];
+
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
-         self.transactionDetailsController.view.frame = self.view.bounds;
+         self.transactionDetailsController.leftConstraint.constant = 0;
+         [self.view layoutIfNeeded];
      }
                      completion:^(BOOL finished)
      {
@@ -684,9 +690,8 @@
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
-         CGRect frame = self.view.bounds;
-         frame.origin.x = frame.size.width;
-         self.transactionDetailsController.view.frame = frame;
+         self.transactionDetailsController.leftConstraint.constant = [MainViewController getLargestDimension];
+         [self.view layoutIfNeeded];
      }
                      completion:^(BOOL finished)
      {
