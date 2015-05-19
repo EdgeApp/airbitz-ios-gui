@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "PopupPickerView.h"
+#import "MainViewController.h"
 
 #define DEFAULT_WIDTH           330
 
@@ -165,7 +166,7 @@ CGRect keyboardFrame;
 
     // calculate the border thickness
 //    CGFloat borderThickness = (popup.frame.size.height - popup->table.frame.size.height) / 2.0;
-    CGFloat borderThickness = 10.0f;
+    CGFloat borderThickness = 0.0f;
     
     // set the strings and categories
 	popup.strings = strings;
@@ -258,10 +259,23 @@ CGRect keyboardFrame;
 			heightSubtract = (frameInWindow.origin.y + frameInWindow.size.height) - (usableFrame.origin.y + usableFrame.size.height);
 		}
 		newFrame.size.height -= heightSubtract;
-		
+
+        //
+        // Hack. if passed in 'width' is -1. do a full screen popup. Full width and height from header to footer
+        // -paulvp
+        //
+
+        if (width == -1)
+        {
+            newFrame.size.width = [MainViewController getWidth];
+            newFrame.origin.x = 0;
+            newFrame.origin.y = [MainViewController getHeaderHeight];
+            newFrame.size.height = [MainViewController getHeight] - [MainViewController getHeaderHeight] - [MainViewController getFooterHeight];
+        }
+
         // set the new frame
         popup.frame = newFrame;
-        
+
         // set up the pointer position
         /*
         CGRect arrowFrame = popup.arrowImage.frame;
@@ -660,6 +674,7 @@ CGRect keyboardFrame;
     cell.textLabel.text = [_strings objectAtIndex:row];
     cell.textLabel.textColor = [UIColor blackColor];
     cell.accessoryView.hidden = YES;
+    cell.backgroundColor = [UIColor clearColor];
     if(self.categories) {
         NSInteger index = [self.categories indexOfObject:cell.textLabel.text];
         if(index == NSNotFound) {
@@ -688,9 +703,9 @@ CGRect keyboardFrame;
         [button addTarget:self action:@selector(accessoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
     }
     
-    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.bounds.size.height-1, 320, 0.5)];
-    separatorLineView.backgroundColor = [UIColor lightGrayColor];
-    [cell.contentView addSubview:separatorLineView];
+//    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.bounds.size.height-1, 320, 0.5)];
+//    separatorLineView.backgroundColor = [UIColor lightGrayColor];
+//    [cell.contentView addSubview:separatorLineView];
     
     return cell;
 }

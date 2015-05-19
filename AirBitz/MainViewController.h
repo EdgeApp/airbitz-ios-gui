@@ -50,7 +50,8 @@ typedef enum eNavBarSide
 +(void)setAlphaOfSelectedViewController: (CGFloat) alpha;
 +(CGFloat) getFooterHeight;
 +(CGFloat) getHeaderHeight;
-+ (CGFloat)getWidth;
++(CGFloat)getWidth;
++(CGFloat)getHeight;
 
 + (void)showFadingAlert:(NSString *)message;
 + (void)showFadingAlert:(NSString *)message withDelay:(int)fadeDelay;

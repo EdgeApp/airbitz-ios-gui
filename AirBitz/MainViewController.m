@@ -1683,6 +1683,11 @@ MainViewController *staticMVC;
     return staticMVC.navBar.frame.size.width;
 }
 
++ (CGFloat)getHeight
+{
+    return staticMVC.view.frame.size.height;
+}
+
 + (void)addChildView: (UIView *)view
 {
     [staticMVC.view insertSubview:view aboveSubview:staticMVC.tabBar];

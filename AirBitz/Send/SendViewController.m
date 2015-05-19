@@ -68,7 +68,7 @@ typedef enum eScanMode
 
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
+@interface SendViewController () <SendConfirmationViewControllerDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerViewDelegate,ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
 #if !TARGET_IPHONE_SIMULATOR
  ,ZBarReaderDelegate, ZBarReaderViewDelegate
 #endif
@@ -107,6 +107,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //@property (nonatomic, strong) NSArray   *arrayWallets;
 //@property (nonatomic, strong) NSArray   *arrayWalletNames;
 @property (nonatomic, strong) NSArray   *arrayChoicesIndexes;
+@property (nonatomic, strong) PopupPickerView               *popupPickerSendTo;
 //@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *scanningSpinner;
 //@property (nonatomic, weak) IBOutlet UILabel				*scanningLabel;
 @property (nonatomic, weak) IBOutlet UILabel				*scanningErrorLabel;
@@ -497,9 +498,25 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (IBAction)segmentedControlAction:(id)sender
 {
+    NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
+
     switch (segmentedControl.selectedSegmentIndex)
     {
         case 0:
+            arrayChoices = [self createNewSendToChoices:@""];
+
+
+            self.popupPickerSendTo = [PopupPickerView CreateForView:self.view
+                                                     relativeToView:self.segmentedControl
+                                                   relativePosition:PopupPickerPosition_Above
+                                                        withStrings:arrayChoices
+                                                     fromCategories:nil
+                                                        selectedRow:-1
+                                                          withWidth:-1
+                                                      withAccessory:nil
+                                                      andCellHeight:[Theme Singleton].heightPopupPicker
+                                              roundedEdgesAndShadow:NO];
+            self.popupPickerSendTo.delegate = self;
             // Do Transfer
             break;
         case 1:
@@ -1474,6 +1491,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
     NSMutableArray *arrayChoicesIndexes = [[NSMutableArray alloc] init];
 
+    [arrayChoices addObject:[Theme Singleton].selectWalletTransferPopupHeaderText];
+    [arrayChoicesIndexes addObject:[NSNumber numberWithInt:-1]];
+
     for (int i = 0; i < [[CoreBridge Singleton].arrayWallets count]; i++)
     {
         // if this is not our currently selected wallet in the wallet selector
@@ -1498,7 +1518,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 [arrayChoicesIndexes addObject:[NSNumber numberWithInt:i]];
             }
         }
+
     }
+    [arrayChoices addObject:[Theme Singleton].cancelButtonText];
+    [arrayChoicesIndexes addObject:[NSNumber numberWithInt:-1]];
 
     self.arrayChoicesIndexes = arrayChoicesIndexes;
 
@@ -1769,24 +1792,27 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	}
 }
 
-- (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
+//- (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
+- (void)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
 {
     tABC_Error error;
     // set the text field to the choice
     NSInteger index = [[self.arrayChoicesIndexes objectAtIndex:row] integerValue];
-    Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
+    if (index < 0)
+    {
+        // Close the picker
+    }
+    else
+    {
+        Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
 
-    SpendTarget *spendTarget = [[SpendTarget alloc] init];
-    [spendTarget newTransfer:wallet.strUUID error:&error];
-
-    pickerTextView.textField.text = wallet.strName;
-	[pickerTextView.textField resignFirstResponder];
-
-    if (pickerTextView.textField.text.length)
-	{
+        SpendTarget *spendTarget = [[SpendTarget alloc] init];
+        [spendTarget newTransfer:wallet.strUUID error:&error];
         [self stopQRReader];
         [self showSendConfirmationTo:spendTarget];
-	}
+    }
+    [MainViewController animateFadeOut:view remove:YES];
+
 }
 
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView

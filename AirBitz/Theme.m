@@ -66,7 +66,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.helpButtonText = NSLocalizedString(@"Help", @"Help button text on top right");
     self.infoButtonText = NSLocalizedString(@"Info", @"Info button text on top right");
     self.doneButtonText = NSLocalizedString(@"Done", @"Generic DONE button text");
-    self.cancelButtonText = NSLocalizedString(@"Cancel", @"Generic CANCEL button text");
+    self.cancelButtonText = NSLocalizedString(@"CANCEL", @"Generic CANCEL button text");
     self.exportButtonText = NSLocalizedString(@"Export", @"EXPORT button text for wallet export");
     self.renameButtonText = NSLocalizedString(@"Rename", @"RENAME button text for wallet rename");
     self.walletBalanceHeaderText = NSLocalizedString(@"TOTAL: ", @"Prefix of wallet balance dropdown header");
@@ -78,6 +78,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.walletHeaderButtonHelpText = NSLocalizedString(@"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet", @"Popup wallet help test");
     self.walletHasBeenArchivedText = NSLocalizedString(@"This wallet has been archived. Please select a different wallet from the [Wallets] tab below", @"Popup sessage for when a wallet is archived");
     self.walletsPopupHelpText = NSLocalizedString(@"Tap and hold a wallet for additional options", nil);
+    self.selectWalletTransferPopupHeaderText = NSLocalizedString(@"↓ Choose a wallet to transfer funds to ↓", @"Header of popup in SendView from wallet to wallet transfer");
 
 
     self.sendRequestButtonDisabled = 0.4f;
@@ -94,7 +95,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightBLETableCells = 50;
         self.heightWalletCell = 60;
         self.heightTransactionCell = 72;
-        self.heightPopupPicker = 40;
+        self.heightPopupPicker = 50;
     }
     if (IS_MIN_IPHONE5)
     {
@@ -102,12 +103,14 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightWalletHeader = 50.0;
         self.heightSearchClues = 40.0;
         self.heightBLETableCells = 55;
+        self.heightPopupPicker = 55;
     }
     if (IS_MIN_IPHONE6)
     {
         self.heightListings = 120.0;
         self.heightSearchClues = 45.0;
         self.heightBLETableCells = 65;
+        self.heightPopupPicker = 60;
     }
     if (IS_MIN_IPHONE6_PLUS)
     {
@@ -115,6 +118,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightListings = 130.0;
         self.heightSearchClues = 45.0;
         self.heightBLETableCells = 70;
+        self.heightPopupPicker = 65;
     }
     if (IS_MIN_IPAD_MINI)
     {
