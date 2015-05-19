@@ -414,7 +414,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     else
     {
-        destination = -self.keypadView.frame.size.height;
+        destination = -[MainViewController getLargestDimension];
         self.keypadView.alpha = 0.0;
         self.keypadView.hidden = true;
     }
