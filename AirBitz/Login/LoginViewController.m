@@ -747,18 +747,25 @@ static BOOL bInitialized = false;
     
     CGRect frame = self.view.frame;
     CGFloat xPos;
+    CGFloat alpha;
 
 
     xPos = touchPoint.x - _firstTouchPoint.x;
 
     if (xPos < 0)
     {
+        // Swiping to left
         [MainViewController moveSelectedViewController:(frame.size.width + xPos)];
+        alpha = -xPos / frame.size.width;
     }
     else
     {
+        // Swiping to right
         [MainViewController moveSelectedViewController:(-frame.size.width + xPos)];
+        alpha = xPos / frame.size.width;
     }
+
+    [MainViewController setAlphaOfSelectedViewController:alpha];
     frame.origin.x = xPos;
     self.view.frame = frame;
 }
@@ -794,9 +801,11 @@ static BOOL bInitialized = false;
                  [MainViewController moveSelectedViewController:self.view.frame.size.width];
              }
 
+             [MainViewController setAlphaOfSelectedViewController:0.0];
              CGRect frame = self.view.frame;
             frame.origin.x = 0.0;
              self.view.frame = frame;
+             [self.view layoutIfNeeded];
          }
         completion:^(BOOL finished)
          {
@@ -821,7 +830,9 @@ static BOOL bInitialized = false;
              }
              [MainViewController moveSelectedViewController:0.0];
 
+             [MainViewController setAlphaOfSelectedViewController:1.0];
              self.view.frame = frame;
+             [self.view layoutIfNeeded];
          }
          completion:^(BOOL finished)
          {

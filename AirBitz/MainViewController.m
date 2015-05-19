@@ -366,6 +366,12 @@ MainViewController *staticMVC;
 
 }
 
++(void)setAlphaOfSelectedViewController: (CGFloat) alpha
+{
+    [staticMVC.selectedViewController.view setAlpha:alpha];
+}
+
+
 +(void)moveSelectedViewController: (CGFloat) x
 {
     CGRect frame;
@@ -387,14 +393,13 @@ MainViewController *staticMVC;
     [LoginViewController setModePIN:bWithPIN];
     _loginViewController.view.frame = self.view.bounds;
 
-    // This *should* be the directoryView. Move it away to the side
-//    [self showSelectedViewController];
     if (_selectedViewController != _directoryViewController)
     {
         [_selectedViewController.view removeFromSuperview];
         _selectedViewController = _directoryViewController;
         [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     }
+    [MainViewController animateFadeOut:_selectedViewController.view];
     [MainViewController moveSelectedViewController: -_selectedViewController.view.frame.size.width];
     [MainViewController addChildView:_loginViewController.view];
 

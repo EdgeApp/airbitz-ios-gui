@@ -46,6 +46,7 @@ typedef enum eNavBarSide
 +(void)hideNavBarAnimated:(BOOL)animated;
 +(UIViewController *)getSelectedViewController;
 +(void)moveSelectedViewController: (CGFloat) x;
++(void)setAlphaOfSelectedViewController: (CGFloat) alpha;
 +(CGFloat) getFooterHeight;
 +(CGFloat) getHeaderHeight;
 + (CGFloat)getWidth;
