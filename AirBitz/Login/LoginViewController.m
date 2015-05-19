@@ -81,7 +81,6 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet UIView             *spinnerView;
 @property (weak, nonatomic) IBOutlet UIView             *credentialsPINView;
 
-@property (nonatomic, weak) IBOutlet UIView				*errorMessageView;
 @property (nonatomic, weak) IBOutlet UILabel			*errorMessageText;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeArrowLeft;
 
@@ -142,8 +141,6 @@ static BOOL bInitialized = false;
     self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
     #endif
 
-	self.errorMessageView.alpha = 0.0;
-    
     // set up the specifics on our picker text view
     self.usernameSelector.textField.borderStyle = UITextBorderStyleNone;
     self.usernameSelector.textField.backgroundColor = [UIColor clearColor];
@@ -268,6 +265,7 @@ static BOOL bInitialized = false;
 
 - (void)PINCodeView:(APPINView *)view didEnterPIN:(NSString *)PINCode
 {
+    [view resignFirstResponder];
     [self showSpinner:YES];
     [self signIn:PINCode];
 }
@@ -526,6 +524,7 @@ static BOOL bInitialized = false;
                     else
                     {
                         [self showFadingError:NSLocalizedString(@"Invalid PIN", nil)];
+                        [self.PINCodeView becomeFirstResponder];
                     }
                     break;
                 }
@@ -533,7 +532,8 @@ static BOOL bInitialized = false;
                 {
                     [MainViewController showBackground:NO animate:YES];
                     [self showFadingError:[Util errorMap:&error]];
-                    
+                    [self.PINCodeView becomeFirstResponder];
+
                 }
             }
             [self showSpinner:NO];
@@ -997,7 +997,8 @@ static BOOL bInitialized = false;
 
 - (void)dismissErrorMessage
 {
-    [self.errorMessageView.layer removeAllAnimations];
+//    [self.errorMessageView.layer removeAllAnimations];
+    [_fadingAlert dismiss:NO];
 }
 
 - (void)showFadingError:(NSString *)message

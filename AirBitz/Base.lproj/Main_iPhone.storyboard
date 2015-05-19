@@ -4009,24 +4009,6 @@ Scan the QR code using this device</string>
                                             <constraint firstAttribute="width" constant="37" id="TU2-kk-RMt"/>
                                         </constraints>
                                     </activityIndicatorView>
-                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" id="whJ-vw-6PG" userLabel="ErrorMessageView">
-                                        <rect key="frame" x="27" y="49" width="320" height="568"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-errormessage.png" id="GW4-rc-pP7">
-                                                <rect key="frame" x="60" y="200" width="200" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid user name or password" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5wy-Mi-whP" userLabel="ErrorMessageText" customClass="LatoLabel">
-                                                <rect key="frame" x="85" y="215" width="150" height="139"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -4057,8 +4039,6 @@ Scan the QR code using this device</string>
                         <outlet property="contentView" destination="eTI-9q-uu0" id="9Og-HH-DYd"/>
                         <outlet property="credentialsPINView" destination="BHf-E8-N2q" id="YXf-Zn-gQZ"/>
                         <outlet property="credentialsView" destination="kpH-FO-ztL" id="UiA-5C-OgI"/>
-                        <outlet property="errorMessageText" destination="5wy-Mi-whP" id="oh9-gY-loy"/>
-                        <outlet property="errorMessageView" destination="whJ-vw-6PG" id="T37-ad-SID"/>
                         <outlet property="forgotPassworddButton" destination="RVo-M5-ZXk" id="DqM-0z-GWY"/>
                         <outlet property="logoHeight" destination="XEa-cm-iAj" id="8KE-7I-DrP"/>
                         <outlet property="logoImage" destination="LqE-iy-sKS" id="cmm-Yx-nMh"/>
