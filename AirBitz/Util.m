@@ -390,6 +390,52 @@
             || [category hasPrefix:NSLocalizedString(@"Exchange", nil)];
 }
 
++ (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView belowSubView:(UIView *)belowView
+{
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+
+    [childView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
+    [parentView insertSubview:childView belowSubview:belowView];
+
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+
+    [parentView addConstraints:constraints];
+    return constraints;
+//    [parentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[childView]-0-|" options:0 metrics:nil views:viewsDictionary]];
+//    [parentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]-0-|" options:0 metrics:nil views:viewsDictionary]];
+
+}
++ (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView aboveSubView:(UIView *)aboveView
+{
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+
+    [childView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
+    [parentView insertSubview:childView aboveSubview:aboveView];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+
+    [parentView addConstraints:constraints];
+
+    return constraints;
+
+}
++ (void)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView
+{
+    [childView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView);
+    [parentView addSubview:childView];
+    [parentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[childView]-0-|" options:0 metrics:nil views:viewsDictionary]];
+    [parentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]-0-|" options:0 metrics:nil views:viewsDictionary]];
+}
+
+
 @end
 
 @implementation NSString (reverse)

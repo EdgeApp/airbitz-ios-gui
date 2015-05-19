@@ -87,6 +87,7 @@ typedef enum eAppMode
 
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
+    NSLayoutConstraint          *slideoutLeft;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *blurViewContainer;
@@ -194,6 +195,7 @@ MainViewController *staticMVC;
 
 - (void)deviceOrientationDidChange
 {
+    NSLog(@"deviceOrientationDidChange %f %f %f %f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
  //XXX
 
 }
@@ -217,13 +219,44 @@ MainViewController *staticMVC;
     _buySellViewController.delegate = self;
 
     slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
-    [self.view insertSubview:slideoutView aboveSubview:self.view];
+    [self loadSlideOutViewConstraints];
 
     _otpRequiredAlert = nil;
     _otpSkewAlert = nil;
     firstLaunch = YES;
 }
 
+- (void) loadSlideOutViewConstraints
+{
+    NSLayoutConstraint *x;
+//    NSArray *constraints = [Util insertSubviewWithConstraints:self.view child:slideoutView aboveSubView:self.view];
+    UIView *parentView = self.view;
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+
+    [slideoutView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(slideoutView, parentView);
+    [parentView insertSubview:slideoutView aboveSubview:self.tabBar];
+
+    x = [NSLayoutConstraint constraintWithItem:slideoutView
+                                     attribute:NSLayoutAttributeLeading
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:parentView
+                                     attribute:NSLayoutAttributeTrailing
+                                    multiplier:1.0
+                                      constant:0];
+    [parentView addConstraint:x];
+
+    // Align 64 pixels from top and 49 pixels from bottom to avoid nav bar and tabbar
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[slideoutView]-49-|" options:0 metrics:nil views:viewsDictionary]];
+
+    // Width is 280
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[slideoutView(==280)]" options:0 metrics:nil views:viewsDictionary]];
+
+    [parentView addConstraints:constraints];
+
+    slideoutLeft = x;
+
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -397,7 +430,9 @@ MainViewController *staticMVC;
     {
         [_selectedViewController.view removeFromSuperview];
         _selectedViewController = _directoryViewController;
-        [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+
+//        [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+        [Util insertSubviewWithConstraints:self.view child:_selectedViewController.view belowSubView:self.tabBar];
     }
     [MainViewController animateFadeOut:_selectedViewController.view];
     [MainViewController moveSelectedViewController: -_selectedViewController.view.frame.size.width];
@@ -1142,7 +1177,8 @@ MainViewController *staticMVC;
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
     _txDetailsController.view.frame = frame;
-    [self.view insertSubview:_txDetailsController.view belowSubview:self.tabBar];
+    [Util insertSubviewWithConstraints:self.view child:_txDetailsController.view belowSubView:self.tabBar];
+//    [self.view insertSubview:_txDetailsController.view belowSubview:self.tabBar];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
@@ -1431,7 +1467,8 @@ MainViewController *staticMVC;
 - (void)switchToSettingsView:(UIViewController *)controller
 {
     _selectedViewController = controller;
-    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+    [Util insertSubviewWithConstraints:self.view child:_selectedViewController.view belowSubView:self.tabBar];
+//    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
 
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     _appMode = APP_MODE_MORE;
@@ -1581,7 +1618,8 @@ MainViewController *staticMVC;
     [slideoutView showSlideout:NO];
     [_selectedViewController.view removeFromSuperview];
     _selectedViewController = _settingsViewController;
-    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+    [Util insertSubviewWithConstraints:self.view child:_selectedViewController.view belowSubView:self.tabBar];
+//    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     [_settingsViewController resetViews];
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     [slideoutView showSlideout:NO];
@@ -1603,7 +1641,8 @@ MainViewController *staticMVC;
 {
     [_selectedViewController.view removeFromSuperview];
     _selectedViewController = _buySellViewController;
-    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
+    [Util insertSubviewWithConstraints:self.view child:_selectedViewController.view belowSubView:self.tabBar];
+//    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     [slideoutView showSlideout:NO];
 }
@@ -1690,7 +1729,8 @@ MainViewController *staticMVC;
 
 + (void)addChildView: (UIView *)view
 {
-    [staticMVC.view insertSubview:view aboveSubview:staticMVC.tabBar];
+    [Util insertSubviewWithConstraints:staticMVC.view child:view belowSubView:staticMVC.tabBar];
+//    [staticMVC.view insertSubview:view aboveSubview:staticMVC.tabBar];
 }
 
 + (void)animateFadeIn:(UIView *)view
@@ -1741,9 +1781,9 @@ MainViewController *staticMVC;
 
 + (void)animateSwapViewControllers:(UIViewController *)in out:(UIViewController *)out
 {
+    [Util insertSubviewWithConstraints:staticMVC.view child:in.view belowSubView:staticMVC.tabBar];
     staticMVC.selectedViewController = in;
-    [staticMVC.view insertSubview:staticMVC.selectedViewController.view belowSubview:staticMVC.tabBar];
-//                    [_walletsViewController selectWalletWithUUID:_strWalletUUID];
+
     [out.view setAlpha:1.0];
     [in.view setAlpha:0.0];
     staticMVC.blurViewLeft.constant = 0;
@@ -1779,7 +1819,7 @@ MainViewController *staticMVC;
     frame.origin.x = frame.size.width;
     view.frame = frame;
 
-    [staticMVC.view insertSubview:view belowSubview:staticMVC.tabBar];
+//    [staticMVC.view insertSubview:view belowSubview:staticMVC.tabBar];
 
     if (withBlur)
     {
