@@ -151,7 +151,7 @@
                 _bAddressIsWalletUUID = YES;
             }
         }
-        [CoreBridge Singleton].arrayWallets = newArr;
+//        [CoreBridge Singleton].arrayWallets = newArr;
     }
 
     CGRect frame = self.keypadView.frame;

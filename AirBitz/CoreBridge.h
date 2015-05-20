@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSMutableArray            *arrayWalletNames;
 @property (nonatomic, strong) NSMutableArray            *arrayUUIDs;
 @property (nonatomic, strong) Wallet                    *currentWallet;
-@property (nonatomic)         NSUInteger                *currentWalletID;
+@property (nonatomic)         int                       currentWalletID;
 
 
 + (CoreBridge *)Singleton;

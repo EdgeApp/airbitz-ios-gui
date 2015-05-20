@@ -310,7 +310,8 @@ static BOOL bOtpError = NO;
 {
     if ([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet])
     {
-        [CoreBridge Singleton].currentWallet = wallet;
+        singleton.currentWallet = wallet;
+        singleton.currentWalletID = [singleton.arrayWallets indexOfObject:singleton.currentWallet];
     }
 
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
@@ -322,11 +323,20 @@ static BOOL bOtpError = NO;
     //
     if(indexPath.section == 0)
     {
-        [CoreBridge Singleton].currentWallet = [singleton.arrayWallets objectAtIndex:indexPath.row];
+        if ([singleton.arrayWallets count] > indexPath.row)
+        {
+            singleton.currentWallet = [singleton.arrayWallets objectAtIndex:indexPath.row];
+            singleton.currentWalletID = [singleton.arrayWallets indexOfObject:singleton.currentWallet];
+
+        }
     }
     else
     {
-        [CoreBridge Singleton].currentWallet = [singleton.arrayArchivedWallets objectAtIndex:indexPath.row];
+        if ([singleton.arrayWallets count] > indexPath.row)
+        {
+            singleton.currentWallet = [singleton.arrayArchivedWallets objectAtIndex:indexPath.row];
+            singleton.currentWalletID = [singleton.arrayArchivedWallets indexOfObject:singleton.currentWallet];
+        }
     }
 
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED
