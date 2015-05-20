@@ -80,6 +80,9 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.walletsPopupHelpText = NSLocalizedString(@"Tap and hold a wallet for additional options", nil);
     self.selectWalletTransferPopupHeaderText = NSLocalizedString(@"↓ Choose a wallet to transfer funds to ↓", @"Header of popup in SendView from wallet to wallet transfer");
     self.invalidAddressPopupText = NSLocalizedString(@"Invalid Bitcoin Address", nil);
+    self.enterBitcoinAddressPopupText= NSLocalizedString(@"Send to Bitcion Address", nil);
+    self.enterBitcoinAddressPlaceholder= NSLocalizedString(@"Bitcoin Address or URI", nil);
+
 
     self.sendRequestButtonDisabled = 0.4f;
 

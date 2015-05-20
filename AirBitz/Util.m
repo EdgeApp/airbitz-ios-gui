@@ -9,6 +9,7 @@
 #import "Util.h"
 #import "ABC.h"
 #import "CommonTypes.h"
+#import "AirbitzViewController.h"
 
 @implementation Util
 
@@ -390,6 +391,24 @@
             || [category hasPrefix:NSLocalizedString(@"Exchange", nil)];
 }
 
++ (NSArray *)insertSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController belowSubView:(UIView *)belowView
+{
+    NSArray *constraints = [Util insertSubviewWithConstraints:parentView child:childViewController.view belowSubView:belowView];
+    childViewController.leftConstraint = [constraints objectAtIndex:0];
+    return constraints;
+}
++ (NSArray *)insertSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController aboveSubView:(UIView *)aboveView
+{
+    NSArray *constraints = [Util insertSubviewWithConstraints:parentView child:childViewController.view aboveSubView:aboveView];
+    childViewController.leftConstraint = [constraints objectAtIndex:0];
+    return constraints;
+}
++ (NSArray *)addSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController
+{
+    NSArray *constraints = [Util addSubviewWithConstraints:parentView child:childViewController.view];
+    childViewController.leftConstraint = [constraints objectAtIndex:0];
+    return constraints;
+}
 + (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView belowSubView:(UIView *)belowView
 {
     NSMutableArray *constraints = [[NSMutableArray alloc] init];

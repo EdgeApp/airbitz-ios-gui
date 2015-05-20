@@ -389,10 +389,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	_passwordRecoveryController.delegate = self;
 	_passwordRecoveryController.mode = PassRecovMode_Change;
 
-	CGRect frame = self.view.bounds;
-	frame.origin.x = frame.size.width;
-	_passwordRecoveryController.view.frame = frame;
-	[self.view addSubview:_passwordRecoveryController.view];
+//	CGRect frame = self.view.bounds;
+//	frame.origin.x = frame.size.width;
+//	_passwordRecoveryController.view.frame = frame;
+//	[self.view addSubview:_passwordRecoveryController.view];
+
+    [Util addSubviewControllerWithConstraints:self.view child:_passwordRecoveryController];
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[UIView animateWithDuration:0.35

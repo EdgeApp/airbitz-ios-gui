@@ -91,6 +91,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     FadingAlertView2                 *_fadingAlert;
     BOOL                        bWalletListDropped;
     BOOL                            bFlashOn;
+    UIAlertView                         *typeAddressAlertView;
+
 
 }
 @property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
@@ -501,13 +503,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 #pragma mark - Action Methods
 
-//- (IBAction)scanQRCode
-//{
-//#if !TARGET_IPHONE_SIMULATOR
-//    [self enableQRMode];
-//#endif
-//}
-
 - (IBAction)info:(id)sender
 {
 	[self.view endEditing:YES];
@@ -520,18 +515,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self resignAllResponders];
     [self showImagePicker];
 }
-
-//-(IBAction)BLE_button_touched
-//{
-//	[self enableBLEMode];
-//}
-
 #pragma mark UISegmentedControl
 
 
 - (IBAction)segmentedControlAction:(id)sender
 {
     NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
+    UITextField *textField;
 
     switch (segmentedControl.selectedSegmentIndex)
     {
@@ -553,8 +543,22 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             // Do Transfer
             break;
         case 1:
-            // Do Address
+            typeAddressAlertView =[[UIAlertView alloc ] initWithTitle:[Theme Singleton].enterBitcoinAddressPopupText
+                                                              message:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:[Theme Singleton].cancelButtonText
+                                                    otherButtonTitles:[Theme Singleton].doneButtonText, nil];
+            typeAddressAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+            textField = [typeAddressAlertView textFieldAtIndex:0];
+            textField.placeholder = [Theme Singleton].enterBitcoinAddressPlaceholder;
+            textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+            textField.autocorrectionType = UITextAutocorrectionTypeNo;
+            textField.spellCheckingType = UITextSpellCheckingTypeNo;
+            textField.returnKeyType = UIReturnKeyDone;
+
+            [typeAddressAlertView show];
             break;
+
         case 2:
             // Do Photo
             [self resignAllResponders];
@@ -565,6 +569,17 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             // Do Flash
             [self toggleFlash];
             break;
+    }
+}
+
+#pragma mark - UIAlertView delegates
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (alertView == typeAddressAlertView)
+    {
+        _addressTextField.text = [alertView textFieldAtIndex:0].text;
+        [self processURI];
     }
 }
 

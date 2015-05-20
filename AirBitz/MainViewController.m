@@ -1476,9 +1476,7 @@ MainViewController *staticMVC;
 - (void)switchToSettingsView:(UIViewController *)controller
 {
     _selectedViewController = controller;
-    [Util insertSubviewWithConstraints:self.view child:_selectedViewController.view belowSubView:self.tabBar];
-//    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-
+    [Util insertSubviewControllerWithConstraints:self.view child:_selectedViewController belowSubView:self.tabBar];
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     _appMode = APP_MODE_MORE;
 }
@@ -1627,7 +1625,7 @@ MainViewController *staticMVC;
     [slideoutView showSlideout:NO];
     [_selectedViewController.view removeFromSuperview];
     _selectedViewController = _settingsViewController;
-    [Util insertSubviewWithConstraints:self.view child:_selectedViewController.view belowSubView:self.tabBar];
+    [Util insertSubviewControllerWithConstraints:self.view child:_selectedViewController belowSubView:self.tabBar];
 //    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     [_settingsViewController resetViews];
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
@@ -1650,7 +1648,7 @@ MainViewController *staticMVC;
 {
     [_selectedViewController.view removeFromSuperview];
     _selectedViewController = _buySellViewController;
-    [Util insertSubviewWithConstraints:self.view child:_selectedViewController.view belowSubView:self.tabBar];
+    [Util insertSubviewControllerWithConstraints:self.view child:_selectedViewController belowSubView:self.tabBar];
 //    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     [slideoutView showSlideout:NO];
@@ -1742,11 +1740,11 @@ MainViewController *staticMVC;
     return frame.size.height > frame.size.width ? frame.size.height : frame.size.width;
 }
 
-+ (void)addChildView: (UIView *)view
-{
-    [Util insertSubviewWithConstraints:staticMVC.view child:view belowSubView:staticMVC.tabBar];
-//    [staticMVC.view insertSubview:view aboveSubview:staticMVC.tabBar];
-}
+//+ (void)addChildView: (UIView *)view
+//{
+//    [Util insertSubviewWithConstraints:staticMVC.view child:view belowSubView:staticMVC.tabBar];
+////    [staticMVC.view insertSubview:view aboveSubview:staticMVC.tabBar];
+//}
 
 + (void)animateFadeIn:(UIView *)view
 {
@@ -1796,9 +1794,9 @@ MainViewController *staticMVC;
 
 + (NSArray *)animateSwapViewControllers:(AirbitzViewController *)in out:(AirbitzViewController *)out
 {
-    NSArray *constraints = [Util insertSubviewWithConstraints:staticMVC.view child:in.view belowSubView:staticMVC.tabBar];
+    NSArray *constraints = [Util insertSubviewControllerWithConstraints:staticMVC.view child:in belowSubView:staticMVC.tabBar];
+
     staticMVC.selectedViewController = in;
-    in.leftConstraint = [constraints objectAtIndex:0];
 
     [out.view setAlpha:1.0];
     [in.view setAlpha:0.0];
@@ -1833,7 +1831,7 @@ MainViewController *staticMVC;
     viewController.leftConstraint.constant = viewController.view.frame.size.width;
     [staticMVC.view layoutIfNeeded];
 
-    [Util insertSubviewWithConstraints:staticMVC.view child:viewController.view belowSubView:staticMVC.tabBar];
+    [Util insertSubviewControllerWithConstraints:staticMVC.view child:viewController belowSubView:staticMVC.tabBar];
 
     if (withBlur)
     {

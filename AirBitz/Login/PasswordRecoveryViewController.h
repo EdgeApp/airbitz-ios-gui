@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 typedef enum ePassRecovMode
 {
@@ -17,7 +18,7 @@ typedef enum ePassRecovMode
 
 @protocol PasswordRecoveryViewControllerDelegate;
 
-@interface PasswordRecoveryViewController : UIViewController
+@interface PasswordRecoveryViewController : AirbitzViewController
 
 @property (assign)              id<PasswordRecoveryViewControllerDelegate>  delegate;
 @property (nonatomic, assign)   tPassRecovMode                              mode;

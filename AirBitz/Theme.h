@@ -50,7 +50,8 @@
 @property (nonatomic) NSString *walletsPopupHelpText;
 @property (nonatomic) NSString *selectWalletTransferPopupHeaderText;
 @property (nonatomic) NSString *invalidAddressPopupText;
-
+@property (nonatomic) NSString *enterBitcoinAddressPopupText;
+@property (nonatomic) NSString *enterBitcoinAddressPlaceholder;
 
 
 @property (nonatomic) CGFloat heightListings;

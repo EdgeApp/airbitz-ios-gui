@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 typedef enum eRecipientMode
 {
@@ -16,7 +17,7 @@ typedef enum eRecipientMode
 
 @protocol RecipientViewControllerDelegate;
 
-@interface RecipientViewController : UIViewController
+@interface RecipientViewController : AirbitzViewController
 
 @property (assign)            id<RecipientViewControllerDelegate>   delegate;
 @property (nonatomic, assign) tRecipientMode                        mode;

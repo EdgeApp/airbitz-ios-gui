@@ -11,6 +11,8 @@
 #import "ABC.h"
 #import "CoreBridge.h"
 
+@class AirbitzViewController;
+
 #define UIColorFromRGB(rgbValue) \
         [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
                         green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
@@ -49,6 +51,9 @@
 + (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView belowSubView:(UIView *)belowView;
 + (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView aboveSubView:(UIView *)aboveView;
 + (NSArray *)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView;
++ (NSArray *)insertSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController belowSubView:(UIView *)belowView;
++ (NSArray *)insertSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController aboveSubView:(UIView *)aboveView;
++ (NSArray *)addSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController;
 
 @end
 
