@@ -19,7 +19,7 @@
 @property (assign)              id<SendConfirmationViewControllerDelegate>  delegate;
 @property (nonatomic, assign)   double                                      overrideCurrency;
 @property (nonatomic, strong)   SpendTarget                                 *spendTarget;
-@property (nonatomic, strong)   Wallet                                      *wallet;
+//@property (nonatomic, strong)   Wallet                                      *wallet;
 @property (nonatomic, assign)   BOOL                                        bAdvanceToTx;
 
 @end

@@ -14,6 +14,7 @@
 #import "Notifications.h"
 #import "CommonTypes.h"
 #import "SpendTarget.h"
+#import "MainViewController.h"
 
 static const NSString *PROTOCOL = @"bridge://";
 
@@ -299,7 +300,8 @@ static const NSString *PROTOCOL = @"bridge://";
         _sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
         _sendConfirmationViewController.delegate = self;
         _sendConfirmationViewController.spendTarget = spendTarget;
-        _sendConfirmationViewController.wallet = _sendWallet;
+
+        [CoreBridge makeCurrentWallet:_sendWallet];
         _sendConfirmationViewController.overrideCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
         _sendConfirmationViewController.bAdvanceToTx = NO;
         [Util animateController:_sendConfirmationViewController parentController:self];

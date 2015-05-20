@@ -1345,7 +1345,7 @@
         NSIndexPath *setIndexPath = [[NSIndexPath alloc]init];
         setIndexPath = [NSIndexPath indexPathForItem:indexPath.row inSection:indexPath.section - WALLET_SECTION_ACTIVE];
 
-        [CoreBridge makeCurrentWallet:setIndexPath];
+        [CoreBridge makeCurrentWalletWithIndex:setIndexPath];
         [self toggleWalletDropdown:nil];
 
     }

@@ -554,25 +554,25 @@
                                             <action selector="fundsInfo" destination="mXe-0d-x2m" eventType="touchUpInside" id="x4g-d0-n1b"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tAp-gi-BNs" customClass="ButtonSelectorView">
-                                        <rect key="frame" x="20" y="19" width="280" height="1"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tAp-gi-BNs" customClass="ButtonSelectorView2">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="0.0"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="APk-vh-ioR"/>
+                                            <constraint firstAttribute="height" id="APk-vh-ioR"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="tAp-gi-BNs" firstAttribute="leading" secondItem="aNY-oK-5F5" secondAttribute="leading" constant="20" id="2nH-VB-zto"/>
+                                    <constraint firstItem="tAp-gi-BNs" firstAttribute="leading" secondItem="aNY-oK-5F5" secondAttribute="leading" id="2nH-VB-zto"/>
                                     <constraint firstItem="G2v-QN-NpV" firstAttribute="leading" secondItem="9aX-Dw-7XD" secondAttribute="leading" id="5Re-j7-816"/>
                                     <constraint firstItem="pdu-nu-njT" firstAttribute="top" secondItem="G2v-QN-NpV" secondAttribute="bottom" constant="1" id="7aH-Ex-eKe"/>
                                     <constraint firstItem="Uak-ip-kgV" firstAttribute="top" secondItem="nLx-fU-Gvx" secondAttribute="top" id="9Gs-7x-OMk"/>
-                                    <constraint firstItem="tAp-gi-BNs" firstAttribute="top" secondItem="aNY-oK-5F5" secondAttribute="top" constant="19" id="9Y9-ey-DZ9"/>
+                                    <constraint firstItem="tAp-gi-BNs" firstAttribute="top" secondItem="aNY-oK-5F5" secondAttribute="top" constant="64" id="9Y9-ey-DZ9"/>
                                     <constraint firstItem="nLx-fU-Gvx" firstAttribute="leading" secondItem="Uak-ip-kgV" secondAttribute="trailing" constant="8" id="EOw-Nd-9Pd"/>
-                                    <constraint firstAttribute="trailing" secondItem="tAp-gi-BNs" secondAttribute="trailing" constant="20" id="Eqf-fS-4tt"/>
+                                    <constraint firstAttribute="trailing" secondItem="tAp-gi-BNs" secondAttribute="trailing" id="Eqf-fS-4tt"/>
                                     <constraint firstItem="Uak-ip-kgV" firstAttribute="leading" secondItem="aNY-oK-5F5" secondAttribute="leading" constant="20" id="FLu-DK-oNe"/>
                                     <constraint firstItem="G2v-QN-NpV" firstAttribute="top" secondItem="9aX-Dw-7XD" secondAttribute="bottom" constant="4" id="FMc-sh-Wz4"/>
                                     <constraint firstItem="ScE-Ny-R3i" firstAttribute="leading" secondItem="pdu-nu-njT" secondAttribute="leading" id="Fi4-HK-hOQ"/>

@@ -1354,7 +1354,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWallet:indexPath];
+    [CoreBridge makeCurrentWalletWithIndex:indexPath];
 
 //    _selectedWalletIndex = itemIndex;
 //

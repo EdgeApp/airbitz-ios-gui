@@ -22,9 +22,10 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "ButtonSelectorView2.h"
+#import "FadingAlertView2.h"
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
-                                              TransactionDetailsViewControllerDelegate, UIGestureRecognizerDelegate,
+                                              TransactionDetailsViewControllerDelegate,
                                               ButtonSelector2Delegate, InfoViewDelegate>
 {
     ConfirmationSliderView              *_confirmationSlider;
@@ -39,11 +40,11 @@
     BOOL                                _passwordRequired;
     NSString                            *_strReason;
     int                                 _callbackTimestamp;
-	int                                 _selectedWalletIndex;
+//	int                                 _selectedWalletIndex;
     Transaction                         *_completedTransaction;    // nil until sendTransaction is successfully completed
-    UITapGestureRecognizer              *tap;
+//    UITapGestureRecognizer              *tap;
     UIAlertView                         *_alert;
-    FadingAlertView                     *_fadingAlert;
+    FadingAlertView2                    *_fadingAlert;
     NSTimer                             *_pinTimer;
     BOOL                        bWalletListDropped;
 
@@ -77,7 +78,7 @@
 //@property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
 
-@property (nonatomic, strong) NSMutableArray                *arrayWallets;
+//@property (nonatomic, strong) NSMutableArray                *arrayWallets;
 @property (nonatomic, strong) SendStatusViewController          *sendStatusController;
 @property (nonatomic, strong) TransactionDetailsViewController  *transactionDetailsController;
 @property (nonatomic, strong) InfoView                          *infoView;
@@ -110,19 +111,18 @@
 
     // Do any additional setup after loading the view.
     // Added gesture recognizer to control keyboard
-    [self setupGestureRecognizer];
+//    [self setupGestureRecognizer];
 
     // resize ourselves to fit in area
     [Util resizeView:self.view withDisplayView:self.viewDisplayArea];
 
-    self.keypadView.currencyNum = self.wallet.currencyNum;
     self.withdrawlPIN.delegate = self;
     self.amountBTCTextField.delegate = self;
     self.amountFiatTextField.delegate = self;
     self.keypadView.delegate = self;
     self.walletSelector.delegate = self;
-//	self.walletSelector.textLabel.text = NSLocalizedString(@"", nil);
-    [self.walletSelector setButtonWidth:WALLET_BUTTON_WIDTH];
+    [self.walletSelector disableButton];
+
 #ifdef __IPHONE_8_0
     [self.keypadView removeFromSuperview];
 #endif
@@ -134,27 +134,26 @@
     [self.viewDisplayArea bringSubviewToFront:self.amountFiatTextField];
     [self.viewDisplayArea bringSubviewToFront:self.withdrawlPIN];
 
-    // Load up the wallets
-    self.arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets:self.arrayWallets archived:nil withTxs:NO];
-
+//    // Load up the wallets
+//    self.arrayWallets = [[NSMutableArray alloc] init];
+//    [CoreBridge loadWallets:self.arrayWallets archived:nil withTxs:NO];
+//
     _sendTo = [NSString safeStringWithUTF8String:_spendTarget.pSpend->szName];
     _bAddressIsWalletUUID = NO;
     if ([NSString safeStringWithUTF8String:_spendTarget.pSpend->szDestUUID]) {
         _bAddressIsWalletUUID = YES;
         _destUUID = [NSString safeStringWithUTF8String:_spendTarget.pSpend->szDestUUID];
         NSMutableArray *newArr = [[NSMutableArray alloc] init];
-        for (Wallet *w in self.arrayWallets) {
+        for (Wallet *w in [CoreBridge Singleton].arrayWallets) {
             if (![w.strName isEqualToString:_sendTo]) {
                 [newArr addObject:w];
             } else {
                 _bAddressIsWalletUUID = YES;
             }
         }
-        self.arrayWallets = newArr;
+        [CoreBridge Singleton].arrayWallets = newArr;
     }
-    [self setWalletLabel];
-    
+
     CGRect frame = self.keypadView.frame;
     frame.origin.y = self.view.frame.size.height;
     self.keypadView.frame = frame;
@@ -163,13 +162,12 @@
     _maxLocked = NO;
 
     // Should this be threaded?
-    _totalSentToday = [CoreBridge getTotalSentToday:self.wallet];
+    _totalSentToday = [CoreBridge getTotalSentToday:[CoreBridge Singleton].currentWallet];
 
-    [self updateDisplayLayout];
     [self checkAuthorization];
 
     // add left to right swipe detection for going back
-    [self installLeftToRightSwipeDetection];
+//    [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(myTextDidChange:)
@@ -179,8 +177,51 @@
                                              selector:@selector(exchangeRateUpdate:)
                                                  name:NOTIFICATION_EXCHANGE_RATE_CHANGE
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+
 
 }
+
+- (void)updateViews:(NSNotification *)notification
+{
+    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    {
+        self.walletSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
+        [self.walletSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
+        self.walletSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        self.keypadView.currencyNum = [CoreBridge Singleton].currentWallet.currencyNum;
+
+        NSString *walletName = [NSString stringWithFormat:@"From: %@ ↓", [CoreBridge Singleton].currentWallet.strName];
+        [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
+        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        {
+            if (_fadingAlert)
+            {
+                [_fadingAlert dismiss:NO];
+                _fadingAlert = nil;
+            }
+            _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
+            _fadingAlert.fadeDelay = 9999;
+            _fadingAlert.fadeDuration = FADING_HELP_DURATION;
+            [_fadingAlert messageTextSet:[Theme Singleton].walletHasBeenArchivedText];
+            [_fadingAlert blockModal:YES];
+            [_fadingAlert showFading];
+
+        }
+        else
+        {
+            if (_fadingAlert)
+            {
+                [_fadingAlert dismiss:NO];
+                _fadingAlert = nil;
+            }
+        }
+
+        [self updateTextFieldContents];
+
+    }
+}
+
 
 - (void)dealloc
 {
@@ -193,23 +234,23 @@
     _pinTimer = nil;
     [self dismissErrorMessage];
     [super viewWillDisappear:animated];
-    [self dismissGestureRecognizer];
+//    [self dismissGestureRecognizer];
     [self.infoView dismiss];
     [self dismissKeyboard];
 }
 
-- (void)setupGestureRecognizer
-{
-    tap = [[UITapGestureRecognizer alloc]
-        initWithTarget:self
-                action:@selector(dismissKeyboard)];
-}
-
-- (void)dismissGestureRecognizer
-{
-    [self.view removeGestureRecognizer:tap];
-}
-
+//- (void)setupGestureRecognizer
+//{
+//    tap = [[UITapGestureRecognizer alloc]
+//        initWithTarget:self
+//                action:@selector(dismissKeyboard)];
+//}
+//
+//- (void)dismissGestureRecognizer
+//{
+//    [self.view removeGestureRecognizer:tap];
+//}
+//
 - (void)myTextDidChange:(NSNotification *)notification
 {
     if(_pinRequired && notification.object == self.withdrawlPIN)
@@ -233,13 +274,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.view addGestureRecognizer:tap];
-    self.amountBTCSymbol.text = [User Singleton].denominationLabelShort;
-    self.amountBTCLabel.text = [User Singleton].denominationLabel;
+//    [self.view addGestureRecognizer:tap];
     self.amountBTCTextField.text = [CoreBridge formatSatoshi:_spendTarget.pSpend->amount withSymbol:false];
-    self.amountFiatSymbol.text = [CoreBridge currencySymbolLookup:self.wallet.currencyNum];
-    self.amountFiatLabel.text = [CoreBridge currencyAbbrevLookup:self.wallet.currencyNum];
-    self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
 
     self.maxAmountButton.hidden = !_bAdvanceToTx;
     self.walletSelector.enabled = _bAdvanceToTx;
@@ -266,7 +302,7 @@
     tABC_Error error;
     
     result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                   _spendTarget.pSpend->amount, &currency, self.wallet.currencyNum, &error);
+                                   _spendTarget.pSpend->amount, &currency, [CoreBridge Singleton].currentWallet.currencyNum, &error);
                 
     if(result == ABC_CC_Ok)
     {
@@ -286,6 +322,7 @@
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
+    [self updateViews:nil];
 }
 
 - (void)pickBestResponder
@@ -313,11 +350,7 @@
 
 - (void)exchangeRateUpdate: (NSNotification *)notification
 {
-    // only update if on the BTC field
-    if (_selectedTextField == self.amountBTCTextField)
-    {
-        [self updateTextFieldContents];
-    }
+    [self updateTextFieldContents];
 }
 
 #pragma mark - Actions Methods
@@ -380,14 +413,14 @@
 - (IBAction)selectMaxAmount
 {
     [self dismissErrorMessage];
-    if (self.wallet != nil && _maxLocked == NO)
+    if ([CoreBridge Singleton].currentWallet != nil && _maxLocked == NO)
     {
         _maxLocked = YES;
         _selectedTextField = self.amountBTCTextField;
 
         // We use a serial queue for this calculation
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            int64_t maxAmount = [_spendTarget maxSpendable:self.wallet.strUUID];
+            int64_t maxAmount = [_spendTarget maxSpendable:[CoreBridge Singleton].currentWallet.strUUID];
             dispatch_async(dispatch_get_main_queue(), ^{
                 _maxLocked = NO;
                 _maxAmount = maxAmount;
@@ -412,87 +445,6 @@
     [self.amountBTCTextField resignFirstResponder];
 }
 
-- (void)updateDisplayLayout
-{
-    // if we are on a smaller screen
-//    if (IS_IPHONE4 )
-//    {
-//        // be prepared! lots and lots of magic numbers here to jam the controls to fit on a small screen
-//
-//        int topShift = 22;
-//        int valueShift = 47;
-//        int pinShift = 67;
-//        CGRect frame;
-//
-//        self.imageTopEmboss.hidden = YES;
-//
-//        frame = self.labelSendFromTitle.frame;
-//        frame.origin.y -= topShift;
-//        self.labelSendFromTitle.frame = frame;
-//
-//        frame = self.walletSelector.frame;
-//        frame.origin.y -= topShift;
-//        self.walletSelector.frame = frame;
-//
-//        frame = self.labelSendToTitle.frame;
-//        frame.origin.y -= topShift + 10;
-//        self.labelSendToTitle.frame = frame;
-//
-//        frame = self.addressLabel.frame;
-//        frame.origin.y -= topShift + 10;
-//        self.addressLabel.frame = frame;
-//
-//        frame = self.conversionLabel.frame;
-//        frame.origin.y -= (topShift + 22);
-//        self.conversionLabel.frame = frame;
-//
-//        frame = self.maxAmountButton.frame;
-//        frame.origin.y -= (topShift + 22);
-//        self.maxAmountButton.frame = frame;
-//
-//        frame = self.viewBTC.frame;
-//        frame.origin.y -= valueShift;
-//        self.viewBTC.frame = frame;
-//
-//        frame = self.viewFiat.frame;
-//        frame.origin.y -= (valueShift + 2);
-//        self.viewFiat.frame = frame;
-//
-//        frame = self.imagePINEmboss.frame;
-//        frame.origin.y -= pinShift;
-//        self.imagePINEmboss.frame = frame;
-//
-//        frame = self.labelPINTitle.frame;
-//        frame.origin.y -= pinShift;
-//        self.labelPINTitle.frame = frame;
-//
-//        frame = self.withdrawlPIN.frame;
-//        frame.origin.y -= pinShift;
-//        self.withdrawlPIN.frame = frame;
-//
-//        frame = self.confirmSliderContainer.frame;
-//        frame.origin.y -= pinShift;
-//        self.confirmSliderContainer.frame = frame;
-//
-//        /*
-//        frame = self.amountBTCTextField.frame;
-//        frame.origin.y -= 5;
-//        self.amountBTCTextField.frame = frame;
-//        frame = self.amountFiatTextField.frame;
-//        frame.origin.y = self.viewFiat.frame.origin.y + 7;
-//        self.amountFiatTextField.frame = frame;
-//
-//
-//        frame = self.btn_alwaysConfirm.frame;
-//        frame.origin.y = self.confirmSliderContainer.frame.origin.y + self.confirmSliderContainer.frame.size.height + 25;
-//        self.btn_alwaysConfirm.frame = frame;
-//
-//        frame = self.labelAlwaysConfirm.frame;
-//        frame.origin.y = self.btn_alwaysConfirm.frame.origin.y + self.btn_alwaysConfirm.frame.size.height + 0;
-//        self.labelAlwaysConfirm.frame = frame;
-//         */
-//    }
-}
 
 - (void)showSendStatus:(NSArray *)params
 {
@@ -539,18 +491,18 @@
 
 - (void)initiateSendRequest
 {
-    if (self.wallet)
+    if ([CoreBridge Singleton].currentWallet)
     {
         [self performSelectorOnMainThread:@selector(showSendStatus:) withObject:nil waitUntilDone:FALSE];
         _callbackTimestamp = [[NSDate date] timeIntervalSince1970];
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             tABC_Error error;
-            NSString *txId = [_spendTarget approve:_wallet.strUUID
+            NSString *txId = [_spendTarget approve:[CoreBridge Singleton].currentWallet.strUUID
                                               fiat:_overrideCurrency
                                              error:&error];
             if (error.code == ABC_CC_Ok) {
-                [self txSendSuccess:self.wallet.strUUID withTx:txId];
+                [self txSendSuccess:[CoreBridge Singleton].currentWallet.strUUID withTx:txId];
             } else {
                 [self txSendFailed:error];
             }
@@ -558,35 +510,35 @@
     }
 }
 
-- (void)setWalletFromIndex:(int)walletIdx
-{
-    _selectedWalletIndex = walletIdx;
-    if (self.arrayWallets && walletIdx < [self.arrayWallets count]) {
-        self.wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-    }
-}
-
-- (void)setWalletLabel
-{
-    if (self.wallet && self.arrayWallets) {
-        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[self.arrayWallets count]];
-        _selectedWalletIndex = 0;
-        for (int i = 0; i < [self.arrayWallets count]; i++) {
-            Wallet *w = [self.arrayWallets objectAtIndex:i];
-            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", w.strName, [CoreBridge formatSatoshi:w.balance]]];
-
-            if ([self.wallet.strUUID isEqualToString:w.strUUID]) {
-                _selectedWalletIndex = i;
-            }
-        }
-        self.walletSelector.arrayItemsToSelect = [arrayWalletNames copy];
-        [self.walletSelector.button setTitle:[NSString stringWithFormat:@"%@ (%@)", self.wallet.strName, [CoreBridge formatSatoshi:self.wallet.balance]]
-            forState:UIControlStateNormal];
-        self.walletSelector.selectedItemIndex = (int) _selectedWalletIndex;
-        [MainViewController changeNavBarTitleWithButton:self title:self.wallet.strName action:@selector(didTapTitle:) fromObject:self];
-
-    }
-}
+//- (void)setWalletFromIndex:(int)walletIdx
+//{
+//    _selectedWalletIndex = walletIdx;
+//    if ([CoreBridge Singleton].arrayWallets && walletIdx < [[CoreBridge Singleton].arrayWallets count]) {
+//        self.wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:_selectedWalletIndex];
+//    }
+//}
+//
+//- (void)setWalletLabel
+//{
+//    if (self.wallet && [CoreBridge Singleton].arrayWallets) {
+//        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[[CoreBridge Singleton].arrayWallets count]];
+//        _selectedWalletIndex = 0;
+//        for (int i = 0; i < [[CoreBridge Singleton].arrayWallets count]; i++) {
+//            Wallet *w = [[CoreBridge Singleton].arrayWallets objectAtIndex:i];
+//            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", w.strName, [CoreBridge formatSatoshi:w.balance]]];
+//
+//            if ([self.wallet.strUUID isEqualToString:w.strUUID]) {
+//                _selectedWalletIndex = i;
+//            }
+//        }
+//        self.walletSelector.arrayItemsToSelect = [arrayWalletNames copy];
+//        [self.walletSelector.button setTitle:[NSString stringWithFormat:@"%@ (%@)", self.wallet.strName, [CoreBridge formatSatoshi:self.wallet.balance]]
+//            forState:UIControlStateNormal];
+//        self.walletSelector.selectedItemIndex = (int) _selectedWalletIndex;
+//        [MainViewController changeNavBarTitleWithButton:self title:self.wallet.strName action:@selector(didTapTitle:) fromObject:self];
+//
+//    }
+//}
 
 - (void)didTapTitle: (UIButton *)sender
 {
@@ -607,14 +559,14 @@
 
 - (void)launchTransactionDetailsWithTransaction:(Wallet *)wallet withTx:(Transaction *)transaction
 {
-    [self.view removeGestureRecognizer:tap];
+//    [self.view removeGestureRecognizer:tap];
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
     self.transactionDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
     
     self.transactionDetailsController.delegate = self;
     self.transactionDetailsController.transaction = transaction;
-    self.transactionDetailsController.wallet = self.wallet;
+    self.transactionDetailsController.wallet = [CoreBridge Singleton].currentWallet;
     if (_spendTarget.pSpend->szRet) {
         self.transactionDetailsController.returnUrl = [NSString safeStringWithUTF8String:_spendTarget.pSpend->szRet];
     }
@@ -679,7 +631,7 @@
     {
         _spendTarget.pSpend->amount = [CoreBridge denominationToSatoshi: self.amountBTCTextField.text];
         if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                  _spendTarget.pSpend->amount, &currency, self.wallet.currencyNum, &error) == ABC_CC_Ok)
+                                  _spendTarget.pSpend->amount, &currency, [CoreBridge Singleton].currentWallet.currencyNum, &error) == ABC_CC_Ok)
         {
             self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
@@ -688,7 +640,7 @@
     {
         currency = [self.amountFiatTextField.text doubleValue];
         if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                  currency, self.wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
+                                  currency, [CoreBridge Singleton].currentWallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
         {
             _spendTarget.pSpend->amount = satoshi;
             self.amountBTCTextField.text = [CoreBridge formatSatoshi:satoshi
@@ -696,6 +648,12 @@
                                                     cropDecimals:[CoreBridge currencyDecimalPlaces]];
         }
     }
+    self.amountBTCSymbol.text = [User Singleton].denominationLabelShort;
+    self.amountBTCLabel.text = [User Singleton].denominationLabel;
+    self.amountFiatSymbol.text = [CoreBridge currencySymbolLookup:[CoreBridge Singleton].currentWallet.currencyNum];
+    self.amountFiatLabel.text = [CoreBridge currencyAbbrevLookup:[CoreBridge Singleton].currentWallet.currencyNum];
+    self.conversionLabel.text = [CoreBridge conversionString:[CoreBridge Singleton].currentWallet];
+
     [self checkAuthorization];
     [self startCalcFees];
 }
@@ -736,7 +694,7 @@
     // Don't caculate fees until there is a value
     if (_spendTarget.pSpend->amount == 0)
     {
-        self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
+        self.conversionLabel.text = [CoreBridge conversionString:[CoreBridge Singleton].currentWallet];
         self.conversionLabel.textColor = [UIColor darkGrayColor];
         self.amountBTCTextField.textColor = [UIColor whiteColor];
         self.amountFiatTextField.textColor = [UIColor whiteColor];
@@ -753,7 +711,7 @@
 - (void)calcFees
 {
     uint64_t fees = 0;
-    BOOL sufficent = [_spendTarget calcSendFees:self.wallet.strUUID totalFees:&fees];
+    BOOL sufficent = [_spendTarget calcSendFees:[CoreBridge Singleton].currentWallet.strUUID totalFees:&fees];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateFeeFieldContents:fees hasEnough:sufficent];
     });
@@ -791,18 +749,18 @@
         [coinFeeString appendString:[User Singleton].denominationLabel];
 
         if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
-                                  txFees, &currencyFees, self.wallet.currencyNum, &error) == ABC_CC_Ok)
+                                  txFees, &currencyFees, [CoreBridge Singleton].currentWallet.currencyNum, &error) == ABC_CC_Ok)
         {
             [fiatFeeString appendString:@"+ "];
             [fiatFeeString appendString:[CoreBridge formatCurrency:currencyFees
-                                                   withCurrencyNum:self.wallet.currencyNum
+                                                   withCurrencyNum:[CoreBridge Singleton].currentWallet.currencyNum
                                                         withSymbol:false]];
             [fiatFeeString appendString:@" "];
-            [fiatFeeString appendString:self.wallet.currencyAbbrev];
+            [fiatFeeString appendString:[CoreBridge Singleton].currentWallet.currencyAbbrev];
         }
         self.amountBTCLabel.text = coinFeeString; 
         self.amountFiatLabel.text = fiatFeeString;
-        self.conversionLabel.text = [CoreBridge conversionString:self.wallet];
+        self.conversionLabel.text = [CoreBridge conversionString:[CoreBridge Singleton].currentWallet];
         
         self.helpButton.hidden = YES;
         self.conversionLabel.layer.shadowOpacity = 0.0f;
@@ -851,12 +809,12 @@
     child.frame = childField;
 }
 
-- (void)installLeftToRightSwipeDetection
-{
-    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
-    gesture.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:gesture];
-}
+//- (void)installLeftToRightSwipeDetection
+//{
+//    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
+//    gesture.direction = UISwipeGestureRecognizerDirectionRight;
+//    [self.view addGestureRecognizer:gesture];
+//}
 
 // used by the guesture recognizer to ignore exit
 - (BOOL)haveSubViewsShowing
@@ -869,8 +827,8 @@
     if (_fadingAlert) {
         [_fadingAlert dismiss:YES];
     }
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
-    _fadingAlert.message = message;
+    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
+    [_fadingAlert messageTextSet:message];
     _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
     _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
     [_fadingAlert blockModal:NO];
@@ -916,21 +874,22 @@
 
 - (void)ButtonSelector2:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
 {
-    [self setWalletFromIndex:itemIndex];
-    [self setWalletLabel];
+    NSIndexPath *indexPath = [[NSIndexPath alloc]init];
+    indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
+    [CoreBridge makeCurrentWalletWithIndex:indexPath];
     bWalletListDropped = false;
 }
 
 - (void)ButtonSelector2WillShowTable:(ButtonSelectorView2 *)view
 {
     [self dismissKeyboard];
-    [self dismissGestureRecognizer];
+//    [self dismissGestureRecognizer];
 }
 
 - (void)ButtonSelector2WillHideTable:(ButtonSelectorView2 *)view
 {
     [self pickBestResponder];
-    [self setupGestureRecognizer];
+//    [self setupGestureRecognizer];
 }
 
 #pragma mark - ConfirmationSlider delegates
@@ -980,7 +939,7 @@
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
         } else if (_passwordRequired) {
-            _fadingAlert = [FadingAlertView CreateLoadingView:self.view withDelegate:nil];
+            _fadingAlert = [FadingAlertView2 CreateLoadingView:self.view withDelegate:nil];
             [_fadingAlert show];
             [Util checkPasswordAsync:self.withdrawlPIN.text withSelector:@selector(handlePasswordCheck:) controller:self];
         } else {
@@ -1018,12 +977,12 @@
 {
     double currency;
     tABC_Error error;
-    ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], DUST_AMOUNT, &currency, self.wallet.currencyNum, &error);
+    ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], DUST_AMOUNT, &currency, [CoreBridge Singleton].currentWallet.currencyNum, &error);
     if (error.code == ABC_CC_Ok) {
         [self showFadingError:[NSString stringWithFormat:
             NSLocalizedString(@"Amount is too small. Please send at least %@ (~%@)", nil),
                 [CoreBridge formatSatoshi:DUST_AMOUNT],
-                [CoreBridge formatCurrency:currency withCurrencyNum:self.wallet.currencyNum]]];
+                [CoreBridge formatCurrency:currency withCurrencyNum:[CoreBridge Singleton].currentWallet.currencyNum]]];
     } else {
         [self showFadingError:NSLocalizedString(@"Amount is too small", nil)];
     }
@@ -1103,14 +1062,14 @@
 
 #pragma mark - GestureReconizer methods
 
-- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
-{
-    if (![self haveSubViewsShowing])
-    {
-        [self Back:nil];
-    }
-}
-
+//- (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
+//{
+//    if (![self haveSubViewsShowing])
+//    {
+//        [self Back:nil];
+//    }
+//}
+//
 #pragma mark - Custom Notification Handlers
 
 // called when a tab bar button that is already selected, is reselected again

@@ -306,7 +306,16 @@ static BOOL bOtpError = NO;
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 }
 
-+ (void)makeCurrentWallet:(NSIndexPath *)indexPath
++ (void)makeCurrentWallet:(Wallet *)wallet
+{
+    if ([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet])
+    {
+        [CoreBridge Singleton].currentWallet = wallet;
+    }
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
+}
++ (void)makeCurrentWalletWithIndex:(NSIndexPath *)indexPath
 {
     //
     // Set new wallet. Hide the dropdown. Then reload the TransactionsView table

@@ -243,11 +243,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
              object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
 
-    [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(info:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
-
-    [self updateViews:nil];
 
     //
     // This might be a loopback from pleaseRestartSendViewBecauseAppleSucksWithPresentController
@@ -283,6 +278,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     self.spendTarget = nil;
     self.bInvalidAddressReadingQR = self.bDidFailReadingQR = NO;
 
+    [self setupNavBar];
+    [self updateViews:nil];
+
+}
+
+- (void)setupNavBar
+{
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -1450,7 +1455,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 	_sendConfirmationViewController.delegate = self;
     _sendConfirmationViewController.spendTarget = spendTarget;
-    _sendConfirmationViewController.wallet = [CoreBridge Singleton].currentWallet;
+//    _sendConfirmationViewController.wallet = [CoreBridge Singleton].currentWallet;
 
     //NSLog(@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
 	
@@ -1677,6 +1682,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
 
     [self enableTableSelection];
+    [self setupNavBar];
+    [self updateViews:nil];
 }
 
 #pragma mark - ButtonSelectorView2 delegates
@@ -1694,7 +1701,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWallet:indexPath];
+    [CoreBridge makeCurrentWalletWithIndex:indexPath];
     bWalletListDropped = false;
 
 }
