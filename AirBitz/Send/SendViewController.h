@@ -10,15 +10,31 @@
 #import "PickerTextView.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "AirbitzViewController.h"
+#import "SpendTarget.h"
+
+@protocol SendViewControllerDelegate;
 
 @interface SendViewController : AirbitzViewController
 
 //@property (nonatomic, strong) NSString              *walletUUID;
 //@property (nonatomic, weak) IBOutlet PickerTextView *pickerTextSendTo;
 @property (nonatomic, weak) IBOutlet UITextField    *addressTextField;
+@property (nonatomic, weak) SpendTarget *spendTarget;
+@property (nonatomic) BOOL bDidFailReadingQR;
+@property (nonatomic) BOOL bInvalidAddressReadingQR;
+@property (assign) id<SendViewControllerDelegate> delegate;
 
 - (void)processURI;
 - (void)resetViews;
+
+@end
+
+@protocol SendViewControllerDelegate <NSObject>
+
+@required
+-(void)pleaseRestartSendViewBecauseAppleSucksWithPresentController:(SpendTarget *)spendTarget fail:(BOOL)bDidFail invalidAddress:(BOOL)bInvalidAddress;
+@optional
+
 
 @end
 

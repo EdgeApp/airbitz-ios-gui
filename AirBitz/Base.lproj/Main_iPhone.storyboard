@@ -1110,6 +1110,24 @@
             </objects>
             <point key="canvasLocation" x="-26" y="-1025"/>
         </scene>
+        <!--Airbitz View Controller-->
+        <scene sceneID="hWx-JX-ZaM">
+            <objects>
+                <viewController storyboardIdentifier="AirbitzViewController" id="tk7-eE-AiV" customClass="AirbitzViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O9P-jL-rrQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zar-9r-gxN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Oqm-Xz-x6T">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h4S-18-Ono" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1473.5" y="1068.5"/>
+        </scene>
         <!--Wallets View Controller-->
         <scene sceneID="Vil-Xp-bQm">
             <objects>

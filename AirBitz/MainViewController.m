@@ -53,7 +53,7 @@ typedef enum eAppMode
 
 
 @interface MainViewController () <UITabBarDelegate,RequestViewControllerDelegate, SettingsViewControllerDelegate,
-                                  LoginViewControllerDelegate,
+                                  LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertView2Delegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate>
@@ -209,7 +209,9 @@ MainViewController *staticMVC;
 	_requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
 	_requestViewController.delegate = self;
 	_sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
-	_walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
+    _sendViewController.delegate = self;
+
+    _walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
 //    _walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
 	_settingsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
 	_settingsViewController.delegate = self;
@@ -1910,6 +1912,33 @@ MainViewController *staticMVC;
         NSLog(@"_selectedViewController == _requestViewController");
     }
 }
+
+#pragma SendViewController delegate
+-(void)pleaseRestartSendViewBecauseAppleSucksWithPresentController:(SpendTarget *)spendTarget fail:(BOOL)bDidFail invalidAddress:(BOOL)bInvalidAddress
+{
+    NSLog(@"pleaseRestartSendViewBecauseAppleSucksWithPresentController called");
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NSThread sleepForTimeInterval:0.5f];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            AirbitzViewController *fakeViewController;
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+
+            fakeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AirbitzViewController"];
+
+            [MainViewController animateSwapViewControllers:fakeViewController out:_sendViewController];
+            _sendViewController = nil;
+            _sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
+
+            _sendViewController.delegate = self;
+            _sendViewController.spendTarget = spendTarget;
+            _sendViewController.bDidFailReadingQR = bDidFail;
+            _sendViewController.bInvalidAddressReadingQR = bInvalidAddress;
+            [MainViewController animateSwapViewControllers:_sendViewController out:fakeViewController];
+        });
+    });
+}
+
 
 + (void)showFadingAlert:(NSString *)message
 {

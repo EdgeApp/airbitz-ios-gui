@@ -79,7 +79,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.walletHasBeenArchivedText = NSLocalizedString(@"This wallet has been archived. Please select a different wallet from the [Wallets] tab below", @"Popup sessage for when a wallet is archived");
     self.walletsPopupHelpText = NSLocalizedString(@"Tap and hold a wallet for additional options", nil);
     self.selectWalletTransferPopupHeaderText = NSLocalizedString(@"↓ Choose a wallet to transfer funds to ↓", @"Header of popup in SendView from wallet to wallet transfer");
-
+    self.invalidAddressPopupText = NSLocalizedString(@"Invalid Bitcoin Address", nil);
 
     self.sendRequestButtonDisabled = 0.4f;
 

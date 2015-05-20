@@ -23,7 +23,8 @@
  Request a read of the characteristic
  wait to receive bit coin address and amount from peripheral
  When it comes in, disconnect and transition to send confirmation screen
- */
+ */#import "SendViewController.h"
+#import "SpendTarget.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import "SendViewController.h"
@@ -143,9 +144,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
 	[super viewDidLoad];
 
-    // resize ourselves to fit in area
-    [Util resizeView:self.view withDisplayView:nil];
-
     _bUsingImagePicker = NO;
     bWalletListDropped = false;
 
@@ -249,6 +247,39 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     [self updateViews:nil];
 
+    //
+    // This might be a loopback from pleaseRestartSendViewBecauseAppleSucksWithPresentController
+    // Check params and go
+    //
+
+    if (self.spendTarget != nil)
+    {
+        [self showSendConfirmationTo:self.spendTarget];
+    }
+    else if (self.bDidFailReadingQR)
+    {
+
+        UIAlertView *alert = [[UIAlertView alloc]
+                initWithTitle:NSLocalizedString(@"QR Code Scan Failure", nil)
+                      message:NSLocalizedString(@"Unable to scan QR code", nil)
+                     delegate:nil
+            cancelButtonTitle:@"OK"
+            otherButtonTitles:nil];
+        [alert show];
+    }
+    else if (self.bInvalidAddressReadingQR)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                initWithTitle:[Theme Singleton].invalidAddressPopupText
+                      message:NSLocalizedString(@"", nil)
+                     delegate:self
+            cancelButtonTitle:@"OK"
+            otherButtonTitles:nil];
+        [alert show];
+
+    }
+    self.spendTarget = nil;
+    self.bInvalidAddressReadingQR = self.bDidFailReadingQR = NO;
 
 }
 
@@ -486,7 +517,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (IBAction)buttonCameraTouched:(id)sender
 {
     [self resignAllResponders];
-    [self showImageScanner];
+    [self showImagePicker];
 }
 
 //-(IBAction)BLE_button_touched
@@ -526,7 +557,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         case 2:
             // Do Photo
             [self resignAllResponders];
-            [self showImageScanner];
+            [self showImagePicker];
 
             break;
         case 3:
@@ -1428,7 +1459,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 #if !TARGET_IPHONE_SIMULATOR
-- (BOOL)processZBarResults:(ZBarSymbolSet *)syms
+- (BOOL)processZBarResults:(ZBarSymbolSet *)syms andExit:(BOOL)bExit
 {
     BOOL bSuccess = YES;
 
@@ -1439,28 +1470,43 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         SpendTarget *spendTarget = [[SpendTarget alloc] init];
 		if ([spendTarget newSpend:text error:&error]) {
             bSuccess = YES;
-            [self showSendConfirmationTo:spendTarget];
+            if (bExit)
+                [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController:spendTarget fail:NO invalidAddress:NO];
+            else
+                [self showSendConfirmationTo:spendTarget];
+            break;
+
 		} else {
             bSuccess = NO;
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Invalid Bitcoin Address", nil)
-                                  message:NSLocalizedString(@"", nil)
-                                  delegate:self
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-            [alert show];
         }
-		break; //just grab first one
 	}
 
+    if (bSuccess == NO)
+    {
+        if (bExit)
+        {
+            [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController:nil fail:NO invalidAddress:YES];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                    initWithTitle:[Theme Singleton].invalidAddressPopupText
+                          message:NSLocalizedString(@"", nil)
+                         delegate:self
+                cancelButtonTitle:@"OK"
+                otherButtonTitles:nil];
+            [alert show];
+        }
+    }
     return bSuccess;
 }
 #endif
 
-- (void)showImageScanner
+- (void)showImagePicker
 {
 #if !TARGET_IPHONE_SIMULATOR
     [self stopQRReader];
+    [self stopBLE];
 
     _bUsingImagePicker = YES;
 
@@ -1649,7 +1695,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)readerView: (ZBarReaderView*) view didReadSymbols: (ZBarSymbolSet*) syms fromImage: (UIImage*) img
 {
 
-    if ([self processZBarResults:syms])
+    if ([self processZBarResults:syms andExit:NO])
     {
         [view stop];
     }
@@ -1667,6 +1713,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     [reader dismissViewControllerAnimated:YES completion:nil];
     _bUsingImagePicker = NO;
+
+    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController:nil fail:NO invalidAddress:NO];
 	
 	//cw viewWillAppear will get called which will switch us back into BLE mode
 }
@@ -1676,37 +1724,38 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     id<NSFastEnumeration> results = [info objectForKey:ZBarReaderControllerResults];
     //UIImage *image = [info objectForKey: UIImagePickerControllerOriginalImage];
 
-    BOOL bSuccess = [self processZBarResults:(ZBarSymbolSet *)results];
+    BOOL bSuccess = [self processZBarResults:(ZBarSymbolSet *) results andExit:YES];
 
     [reader dismissViewControllerAnimated:YES completion:nil];
     //[[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
     //[reader dismissModalViewControllerAnimated: YES];
 
-    _bUsingImagePicker = NO;
-
-    if (!bSuccess)
-    {
-        //_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
-		[self startQRReader];
-    }
+//    _bUsingImagePicker = NO;
+//
+//    if (!bSuccess)
+//    {
+//        //_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+//		[self startQRReader];
+//    }
 }
 
 - (void)readerControllerDidFailToRead:(ZBarReaderController*)reader
                             withRetry:(BOOL)retry
 {
     [reader dismissViewControllerAnimated:YES completion:nil];
-
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"QR Code Scan Failure", nil)
-                          message:NSLocalizedString(@"Unable to scan QR code", nil)
-                          delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil];
-    [alert show];
-
-    _bUsingImagePicker = NO;
-   // _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
-   [self startQRReader];
+    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController:nil fail:YES invalidAddress:NO];
+//
+//    UIAlertView *alert = [[UIAlertView alloc]
+//                          initWithTitle:NSLocalizedString(@"QR Code Scan Failure", nil)
+//                          message:NSLocalizedString(@"Unable to scan QR code", nil)
+//                          delegate:nil
+//                          cancelButtonTitle:@"OK"
+//                          otherButtonTitles:nil];
+//    [alert show];
+//
+//    _bUsingImagePicker = NO;
+//   // _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
+//   [self startQRReader];
 }
 
 #endif

@@ -49,6 +49,7 @@
 @property (nonatomic) NSString *fiatText;
 @property (nonatomic) NSString *walletsPopupHelpText;
 @property (nonatomic) NSString *selectWalletTransferPopupHeaderText;
+@property (nonatomic) NSString *invalidAddressPopupText;
 
 
 
