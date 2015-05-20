@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonTypes.h"
 #import "AirbitzViewController.h"
+#import "ABC.h"
 
 @protocol RequestViewControllerDelegate;
 
@@ -17,6 +18,9 @@
 @property (assign) id<RequestViewControllerDelegate> delegate;
 //@property (nonatomic, strong) NSString  *walletUUID;
 @property (nonatomic, readwrite) SInt64 originalAmountSatoshi;
+@property (nonatomic, readwrite) BOOL bDoFinalizeTx;
+@property (nonatomic, weak) NSString                    *requestID;
+
 
 - (BOOL)showingQRCode:(NSString *)walletUUID withTx:(NSString *)txId;
 //- (BOOL)transactionWasDonation;
@@ -34,4 +38,7 @@
 
 @required
 -(void)RequestViewControllerDone:(RequestViewController *)vc;
+-(void)pleaseRestartRequestViewBecauseAppleSucksWithPresentController;
+
 @end
+

@@ -1911,6 +1911,33 @@ MainViewController *staticMVC;
     }
 }
 
+#pragma RequestViewController delegate
+-(void)pleaseRestartRequestViewBecauseAppleSucksWithPresentController
+{
+    NSLog(@"pleaseRestartRequestViewBecauseAppleSucksWithPresentController called");
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NSThread sleepForTimeInterval:0.5f];
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            NSString *requestID = _requestViewController.requestID;
+            AirbitzViewController *fakeViewController;
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+            fakeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AirbitzViewController"];
+
+            [MainViewController animateSwapViewControllers:fakeViewController out:_requestViewController];
+            _requestViewController = nil;
+            _requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
+
+            _requestViewController.delegate = self;
+            _requestViewController.requestID = requestID;
+            _requestViewController.bDoFinalizeTx = YES;
+            [MainViewController animateSwapViewControllers:_requestViewController out:fakeViewController];
+        });
+    });
+}
+
+
 #pragma SendViewController delegate
 -(void)pleaseRestartSendViewBecauseAppleSucksWithPresentController:(SpendTarget *)spendTarget fail:(BOOL)bDidFail invalidAddress:(BOOL)bInvalidAddress
 {

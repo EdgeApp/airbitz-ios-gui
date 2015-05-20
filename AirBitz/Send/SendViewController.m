@@ -1544,6 +1544,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     _readerPicker.showsHelpOnFail = NO;
 
     [self presentViewController:_readerPicker animated:YES completion:nil];
+    [MainViewController animateFadeOut:self.view];
+
 #endif
 }
 

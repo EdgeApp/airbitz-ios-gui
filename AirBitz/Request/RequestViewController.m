@@ -68,7 +68,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 //	ShowWalletQRViewController  *_qrViewController;
     ImportWalletViewController  *_importWalletViewController;
     tABC_TxDetails              _details;
-    NSString                    *requestID;
     CGRect                      topFrame;
     CGRect                      bottomFrame;
     BOOL                        bInitialized;
@@ -112,6 +111,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 
 @property (assign) tABC_TxDetails txDetails;
+@property (nonatomic, strong) NSString *requestType;
 @property (nonatomic, strong) RecipientViewController   *recipientViewController;
 @property (weak, nonatomic) IBOutlet UILabel *btcLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fiatLabel;
@@ -288,6 +288,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
 
     [self updateViews:nil];
+
+    if (_bDoFinalizeTx)
+    {
+        [self finalizeRequest];
+        _bDoFinalizeTx = NO;
+    }
 }
 
 - (void)updateViews:(NSNotification *)notification
@@ -1069,7 +1075,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes
         withCategory:strCategory withAmount:amountSatoshi];
-    requestID = [NSString stringWithUTF8String:szRequestID];
+    self.requestID = [NSString stringWithUTF8String:szRequestID];
 
     if (szRequestID)
     {
@@ -1949,7 +1955,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         mailComposer.mailComposeDelegate = self;
 
         [self presentViewController:mailComposer animated:YES completion:nil];
-        [self finalizeRequest:@"Email"];
+
+        [MainViewController animateFadeOut:self.view];
+        _requestType = [Theme Singleton].emailText;
     }
     else
     {
@@ -1961,6 +1969,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [alert show];
     }
 }
+
+
 
 - (void)sendSMS
 {
@@ -2000,7 +2010,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         controller.messageComposeDelegate = self;
 
         [self presentViewController:controller animated:YES completion:nil];
-        [self finalizeRequest:@"SMS"];
+        [MainViewController animateFadeOut:self.view];
+
+        _requestType = [Theme Singleton].smsText;
     }
 }
 
@@ -2068,73 +2080,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 }
 
 
-#pragma mark - Address Book delegates
-
-- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
-{
-    [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
-      shouldContinueAfterSelectingPerson:(ABRecordRef)person
-{
-    return YES;
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
-      shouldContinueAfterSelectingPerson:(ABRecordRef)person
-                                property:(ABPropertyID)property
-                              identifier:(ABMultiValueIdentifier)identifier
-{
-
-    self.strFullName = [Util getNameFromAddressRecord:person];
-
-    if (_addressPickerType == AddressPickerType_SMS)
-    {
-        if (property == kABPersonPhoneProperty)
-        {
-            ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
-            for (CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++)
-            {
-                if (identifier == ABMultiValueGetIdentifierAtIndex(multiPhones, i))
-                {
-                    NSString *strPhoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(multiPhones, i);
-                    self.strPhoneNumber = strPhoneNumber;
-                    break;
-                }
-            }
-            CFRelease(multiPhones);
-        }
-
-        [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:^{
-            [self sendSMS];
-        }];
-    }
-    else if (_addressPickerType == AddressPickerType_EMail)
-    {
-        if (property == kABPersonEmailProperty)
-        {
-            ABMultiValueRef multiEMails = ABRecordCopyValue(person, kABPersonEmailProperty);
-            for (CFIndex i = 0; i < ABMultiValueGetCount(multiEMails); i++)
-            {
-                if (identifier == ABMultiValueGetIdentifierAtIndex(multiEMails, i))
-                {
-                    NSString *strEMail = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(multiEMails, i);
-                    self.strEMail = strEMail;
-                    break;
-                }
-            }
-            CFRelease(multiEMails);
-        }
-
-        [[peoplePicker presentingViewController] dismissViewControllerAnimated:YES completion:^{
-            [self sendEMail];
-        }];
-    }
-    return NO;
-}
-
-- (void)finalizeRequest:(NSString *)type
+- (void)saveRequest
 {
     if (_strFullName) {
         _txDetails.szName = (char *)[_strFullName UTF8String];
@@ -2151,7 +2097,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ on %@.", nil),
                         [CoreBridge formatSatoshi:_txDetails.amountSatoshi],
                         [CoreBridge formatCurrency:_txDetails.amountCurrency withCurrencyNum:[CoreBridge Singleton].currentWallet.currencyNum],
-                        type,
+                        _requestType,
                         [dateFormatter stringFromDate:now]];
     _txDetails.szNotes = (char *)[notes UTF8String];
     tABC_Error Error;
@@ -2159,17 +2105,26 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if (ABC_CC_Ok != ABC_ModifyReceiveRequest([[User Singleton].name UTF8String],
             [[User Singleton].password UTF8String],
             [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
-            [requestID UTF8String],
+            [self.requestID UTF8String],
             &_txDetails,
             &Error))
     {
         [Util printABC_Error:&Error];
     }
+
+    [self.delegate pleaseRestartRequestViewBecauseAppleSucksWithPresentController];
+
+}
+
+- (void)finalizeRequest
+{
+    tABC_Error Error;
+
     // Finalize this request so it isn't used elsewhere
     if (ABC_CC_Ok != ABC_FinalizeReceiveRequest([[User Singleton].name UTF8String],
             [[User Singleton].password UTF8String],
             [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
-            [requestID UTF8String],
+            [self.requestID UTF8String],
             &Error))
     {
         [Util printABC_Error:&Error];
@@ -2220,6 +2175,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
 
     [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    [self saveRequest];
+
 }
 
 #pragma mark - Mail Compose Delegate Methods
@@ -2261,49 +2218,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [alert show];
 
     [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - UIAlertView delegates
-
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    // we only use the alert for selecting from contacts or not
-
-    // if they wanted to select from contacts
-    if (buttonIndex == 0)
-    {
-        [self performSelector:@selector(showAddressPicker) withObject:nil afterDelay:0.0];
-    }
-    else if (_addressPickerType == AddressPickerType_SMS)
-    {
-        [self performSelector:@selector(sendSMS) withObject:nil afterDelay:0.0];
-    }
-    else if (_addressPickerType == AddressPickerType_EMail)
-    {
-        [self performSelector:@selector(sendEMail) withObject:nil afterDelay:0.0];
-    }
-}
-
-
-- (void)showAddressPicker
-{
-    [self.view endEditing:YES];
-
-    ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-
-    picker.peoplePickerDelegate = self;
-
-    if (_addressPickerType == AddressPickerType_SMS)
-    {
-        picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonPhoneProperty]];
-    }
-    else
-    {
-        picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonEmailProperty]];
-    }
-
-    [self presentViewController:picker animated:YES completion:nil];
-    //[self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
+    [self saveRequest];
 }
 
 
