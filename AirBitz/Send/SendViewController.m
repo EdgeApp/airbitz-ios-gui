@@ -455,6 +455,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 -(void)attemptToStartQRReader
 {
     if (_readerView) {
+        [_readerView start];
         return;
     }
     // check camera state before proceeding
@@ -491,8 +492,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (_readerView)
     {
         [_readerView stop];
-        [_readerView removeFromSuperview];
-        _readerView = nil;
+//        [_readerView removeFromSuperview];
+//        _readerView = nil;
     }
 }
 
@@ -1438,11 +1439,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     //NSLog(@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
 	
-	CGRect frame = self.view.bounds;
-	frame.origin.x = frame.size.width;
-	_sendConfirmationViewController.view.frame = frame;
-	[self.view addSubview:_sendConfirmationViewController.view];
-	
+//	CGRect frame = self.view.bounds;
+//	frame.origin.x = frame.size.width;
+//	_sendConfirmationViewController.view.frame = frame;
+//	[self.view addSubview:_sendConfirmationViewController.view];
+
+    [_readerView stop];
+
+    [Util addSubviewWithConstraints:self.view child:_sendConfirmationViewController.view];
 	
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[UIView animateWithDuration:0.35
@@ -1641,6 +1645,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
 //    [self loadWalletInfo];
 //    self.qrView.hidden = YES;
+    [_readerView start];
     [self startQRReader];
 
     self.addressTextField.text = @"";
@@ -1695,14 +1700,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)readerView: (ZBarReaderView*) view didReadSymbols: (ZBarSymbolSet*) syms fromImage: (UIImage*) img
 {
 
-    if ([self processZBarResults:syms andExit:NO])
-    {
-        [view stop];
-    }
-    else
-    {
-        [view start];
-    }
+    [self processZBarResults:syms andExit:NO];
+//    if ([self processZBarResults:syms andExit:NO])
+//    {
+//        [view stop];
+//    }
+//    else
+//    {
+//        [view start];
+//    }
 
 }
 #endif
@@ -1871,7 +1877,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [self stopQRReader];
         [self showSendConfirmationTo:spendTarget];
     }
-    [MainViewController animateFadeOut:view remove:YES];
+//    [MainViewController animateFadeOut:view remove:YES];
 
 }
 
