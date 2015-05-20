@@ -1886,11 +1886,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     tABC_Error error;
     // set the text field to the choice
     NSInteger index = [[self.arrayChoicesIndexes objectAtIndex:row] integerValue];
-    if (index < 0)
-    {
-        // Close the picker
-    }
-    else
+    if (index >= 0)
     {
         Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
 
@@ -1899,58 +1895,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [self stopQRReader];
         [self showSendConfirmationTo:spendTarget];
     }
+    [view dismiss];
+
 //    [MainViewController animateFadeOut:view remove:YES];
 
 }
 
-- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
-{
-    // forces the size of the popup picker on the picker text view to a certain size
-
-    // Note: we have to do this because right now the size will start as max needed but as we dynamically
-    //       alter the choices, we may end up with more choices than we originally started with
-    //       so we want the table to always be as large as it can be
-
-    // first start the popup pickerit right under the control and squished down
-    CGRect frame = pickerTextView.popupPicker.frame;
-    frame.size.height = POPUP_PICKER_TABLE_HEIGHT;
-    pickerTextView.popupPicker.frame = frame;
-}
-
-#pragma - BLE Timeout
-
-//- (void)startBleTimeout:(int)timeout
-//{
-//    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:timeout target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
-//}
-//
-#pragma - Sync View methods
-
-- (void)SyncViewDismissed:(SyncView *)sv
-{
-    [_syncingView removeFromSuperview];
-    _syncingView = nil;
-
-//    _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
-}
-
-//- (void)syncTest
-//{
-//    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-//    if (![CoreBridge watcherIsReady:wallet.strUUID] && !_syncingView)
-//    {
-//        _syncingView = [SyncView createView:self.view forWallet:wallet.strUUID];
-//        _syncingView.delegate = self;
-//    }
-//    if (_syncingView)
-//    {
-//        [self resignAllResponders];
-//#if !TARGET_IPHONE_SIMULATOR
-//        [self stopQRReader];
-//#endif
-//    }
-//}
-//
 #pragma - Fading Alert Methods
 
 - (void)showFadingAlert:(NSString *)message

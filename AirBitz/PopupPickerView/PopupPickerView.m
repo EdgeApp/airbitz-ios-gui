@@ -150,6 +150,21 @@ CGRect keyboardFrame;
 	 }];
 }
 
+- (void)dismiss
+{
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+                     {
+                         [self setAlpha:0];
+                     }
+                     completion:^(BOOL finished)
+                     {
+                         [self removeFromSuperview];
+                     }];
+}
+
 + (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings fromCategories:(NSArray *)categories selectedRow:(NSInteger)selectedRow /*maxCellsVisible:(NSInteger)maxCellsVisible*/ withWidth:(NSInteger)width withAccessory:(UIImage *)image andCellHeight:(NSInteger)cellHeight roundedEdgesAndShadow:(Boolean)rounded
 {
     // create the picker from the xib
@@ -267,14 +282,45 @@ CGRect keyboardFrame;
 
         if (width == -1)
         {
+            CGFloat newY;
+
             newFrame.size.width = [MainViewController getWidth];
             newFrame.origin.x = 0;
-            newFrame.origin.y = [MainViewController getHeaderHeight];
             newFrame.size.height = [MainViewController getHeight] - [MainViewController getHeaderHeight] - [MainViewController getFooterHeight];
+
+            if (PopupPickerPosition_Below == position)
+            {
+                newFrame.origin.y = -[MainViewController getHeight];
+            }
+            else if (PopupPickerPosition_Above == position)
+            {
+                newFrame.origin.y = [MainViewController getHeight];
+            }
+            popup.frame = newFrame;
+            [popup setAlpha:0];
+
+            [UIView animateWithDuration:0.35
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^
+                             {
+                                 CGRect frame = popup.frame;
+                                 frame.origin.y = [MainViewController getHeaderHeight];
+                                 popup.frame = frame;
+                                 [popup setAlpha:1];
+
+                             }
+                             completion:^(BOOL finished)
+                             {
+                             }];
+
+        }
+        else
+        {
+            popup.frame = newFrame;
         }
 
         // set the new frame
-        popup.frame = newFrame;
 
         // set up the pointer position
         /*

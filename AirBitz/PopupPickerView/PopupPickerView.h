@@ -48,6 +48,8 @@ typedef enum ePopupPickerPosition
 - (void)reloadTableData;
 - (void)disableBackgroundTouchDetect;
 - (void)updateStrings:(NSArray *)strings;
+- (void)dismiss;
+
 
 -(void)addCropLine:(CGPoint)pointOnScreen direction:(tPopupPickerPosition)cropDirection animated:(BOOL)animated;	/* will add a keepout in the region above, below, left or right of the given point */
 
