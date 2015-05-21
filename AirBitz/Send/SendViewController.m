@@ -40,9 +40,7 @@
 #import "CommonTypes.h"
 #import "Util.h"
 #import "InfoView.h"
-#if !TARGET_IPHONE_SIMULATOR
 #import "ZBarSDK.h"
-#endif
 #import "CoreBridge.h"
 #import "SyncView.h"
 #import "TransferService.h"
@@ -84,15 +82,11 @@ typedef enum eImportState
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerViewDelegate,ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
-#if !TARGET_IPHONE_SIMULATOR
  ,ZBarReaderDelegate, ZBarReaderViewDelegate
-#endif
 >
 {
-#if !TARGET_IPHONE_SIMULATOR
 	ZBarReaderView                  *_readerView;
     ZBarReaderController            *_readerPicker;
-#endif
 //	NSTimer                         *_startScannerTimer;
 //	int                             _selectedWalletIndex;
 	SendConfirmationViewController  *_sendConfirmationViewController;
@@ -1566,10 +1560,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 
-#if !TARGET_IPHONE_SIMULATOR
 - (BOOL)processZBarResults:(ZBarSymbolSet *)syms
 {
     BOOL bSuccess = YES;
+#if !TARGET_IPHONE_SIMULATOR
 
 	for (ZBarSymbol *sym in syms)
 	{
@@ -1617,9 +1611,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //            otherButtonTitles:nil];
 //        [alert show];
 //    }
+#endif
     return bSuccess;
 }
-#endif
 
 - (void)showImagePicker
 {

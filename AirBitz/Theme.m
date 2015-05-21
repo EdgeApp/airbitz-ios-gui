@@ -104,6 +104,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightTransactionCell = 72;
         self.heightPopupPicker = 50;
         self.heightMinimumForQRScanFrame = 200;
+        self.elementPadding = 5; // Generic padding between elements
     }
     if (IS_MIN_IPHONE5)
     {

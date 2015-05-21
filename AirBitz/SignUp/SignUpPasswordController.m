@@ -10,9 +10,10 @@
 #import "ABC.h"
 #import "Util.h"
 #import "User.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
 #define KEYBOARD_MARGIN         10.0
-#define PASSWORD_VERIFY_FRAME_Y_OFFSET 66
 
 @interface SignUpPasswordController () <UITextFieldDelegate, PasswordVerifyViewDelegate>
 {
@@ -76,7 +77,7 @@
     [self.pinTextField addTarget:self action:@selector(pinTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.passwordTextField addTarget:self action:@selector(passwordTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     
-    [self.passwordTextField becomeFirstResponder];
+//    [self.passwordTextField becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -251,29 +252,29 @@
 
 -(void)scrollTextFieldAboveKeyboard:(UITextField *)textField
 {
-    if(_keyboardFrameOriginY) //set when keyboard is visible
-    {
-        CGRect textFieldFrame = [self.contentView convertRect:textField.frame toView:self.view.window];
-
-        float overlap = _keyboardFrameOriginY - (textFieldFrame.origin.y + textFieldFrame.size.height + KEYBOARD_MARGIN);
-
-        if(overlap < 0)
-        {
-            [UIView animateWithDuration:0.35
-                                  delay: 0.0
-                                options: UIViewAnimationOptionCurveEaseInOut
-                             animations:^
-             {
-                 CGRect frame = self.contentView.frame;
-                 frame.origin.y += overlap;
-                 self.contentView.frame = frame;
-             }
-                             completion:^(BOOL finished)
-             {
-                 
-             }];
-        }
-    }
+//    if(_keyboardFrameOriginY) //set when keyboard is visible
+//    {
+//        CGRect textFieldFrame = [self.contentView convertRect:textField.frame toView:self.view.window];
+//
+//        float overlap = _keyboardFrameOriginY - (textFieldFrame.origin.y + textFieldFrame.size.height + KEYBOARD_MARGIN);
+//
+//        if(overlap < 0)
+//        {
+//            [UIView animateWithDuration:0.35
+//                                  delay: 0.0
+//                                options: UIViewAnimationOptionCurveEaseInOut
+//                             animations:^
+//             {
+//                 CGRect frame = self.contentView.frame;
+//                 frame.origin.y += overlap;
+//                 self.contentView.frame = frame;
+//             }
+//                             completion:^(BOOL finished)
+//             {
+//
+//             }];
+//        }
+//    }
 }
 
 
@@ -302,24 +303,13 @@
         _activeTextField = nil;
     }
     _keyboardFrameOriginY = 0.0;
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-     {
-         CGRect frame = self.contentView.frame;
-         frame.origin.y = self.contentViewY;
-         self.contentView.frame = frame;
-     }
-                     completion:^(BOOL finished)
-     {
-     }];
 }
 
 #pragma mark - UITextField delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    CGFloat contentTop = [MainViewController getHeaderHeight]; // raise the view
     //called when user taps on either search textField or location textField
     
     //NSLog(@"TextField began editing");
@@ -330,10 +320,11 @@
         {
             _passwordVerifyView = [PasswordVerifyView CreateInsideView:self.masterView withDelegate:self];
             CGRect frame = _passwordVerifyView.frame;
-            frame.origin.y += PASSWORD_VERIFY_FRAME_Y_OFFSET;
+            frame.origin.y = [MainViewController getHeaderHeight];
+            frame.size.width = [MainViewController getWidth];
             _passwordVerifyView.frame = frame;
-            
-            _contentStartConstraint.constant += 56; // lower the view to see PIN
+
+            contentTop += _passwordVerifyView.frame.size.height - textField.frame.origin.y + [Theme Singleton].elementPadding;
         }
         _passwordVerifyView.password = textField.text;
     }
@@ -342,9 +333,23 @@
         if(_passwordVerifyView)
         {
             [_passwordVerifyView dismiss];
-            _contentStartConstraint.constant = 44; // raise the view
         }
     }
+
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+                     {
+
+                         _contentStartConstraint.constant = contentTop;
+                         [self.view layoutIfNeeded];
+
+                     }
+                     completion:^(BOOL finished)
+                     {
+                     }];
+
     //won't do anything when a textField is tapped for the first time and no keyboard is visible because
     //keyboardFrameOriginY isn't set yet (doestn' get set until KeyboardWillShow notification which occurs after this
     //method is called.  But -scrollTextFieldAboveKeyboard gets called from the KeyboardWillShow notification

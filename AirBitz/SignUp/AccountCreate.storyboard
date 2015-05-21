@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -255,17 +255,23 @@ Your username and password are known only to you and never stored unencrypted.</
                             <constraint firstItem="RuU-Zx-pBJ" firstAttribute="top" secondItem="Cx6-mG-7Op" secondAttribute="bottom" constant="143" id="NxZ-mu-1ID"/>
                             <constraint firstItem="Cx6-mG-7Op" firstAttribute="leading" secondItem="u9u-cR-ilw" secondAttribute="leading" id="VnB-Z8-0Qc"/>
                             <constraint firstAttribute="trailing" secondItem="Cx6-mG-7Op" secondAttribute="trailing" id="mAl-eN-x6j"/>
-                            <constraint firstItem="Cx6-mG-7Op" firstAttribute="top" secondItem="oID-Yo-O40" secondAttribute="bottom" constant="44" id="oKU-fN-52T"/>
+                            <constraint firstItem="Cx6-mG-7Op" firstAttribute="top" secondItem="u9u-cR-ilw" secondAttribute="top" constant="64" id="nmG-JF-Bse"/>
                             <constraint firstItem="hHD-NP-fM6" firstAttribute="trailing" secondItem="u9u-cR-ilw" secondAttribute="trailingMargin" id="yjt-wJ-d4s"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="nmG-JF-Bse"/>
                                 <exclude reference="NxZ-mu-1ID"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="nmG-JF-Bse"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="contentStartConstraint" destination="oKU-fN-52T" id="Dg6-gR-WV8"/>
+                        <outlet property="contentStartConstraint" destination="nmG-JF-Bse" id="Snj-ic-jln"/>
                         <outlet property="masterView" destination="u9u-cR-ilw" id="EHp-zh-pVx"/>
                         <outlet property="passwordTextField" destination="fnL-7h-MQL" id="UCZ-Um-wdk"/>
                         <outlet property="pinTextField" destination="fV9-pz-Wfn" id="TD8-96-flV"/>
@@ -274,7 +280,7 @@ Your username and password are known only to you and never stored unencrypted.</
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0LC-Ls-RPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877" y="191"/>
+            <point key="canvasLocation" x="1380" y="191"/>
         </scene>
         <!--Sign Up Handle Controller-->
         <scene sceneID="OYV-xi-2xu">
@@ -392,7 +398,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hsg-V7-Cts" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877" y="835"/>
+            <point key="canvasLocation" x="1053" y="1003"/>
         </scene>
         <!--Sign Up Camera Controller-->
         <scene sceneID="Pku-d2-xzf">
@@ -535,7 +541,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2b-HB-5iR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1194" y="186"/>
+            <point key="canvasLocation" x="2604" y="246"/>
         </scene>
         <!--Sign Up Contacts Controller-->
         <scene sceneID="yvC-OS-k34">
@@ -612,6 +618,9 @@ No one, including Airbitz, has any access to this information.</string>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular" misplaced="YES">
+                                            <rect key="frame" x="20" y="154" width="512" height="105"/>
+                                        </variation>
                                         <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
                                             <rect key="frame" x="20" y="221" width="696" height="97"/>
                                         </variation>
@@ -631,6 +640,9 @@ No one, including Airbitz, has any access to this information.</string>
                                     <constraint firstItem="cng-Cv-ULC" firstAttribute="leading" secondItem="g4H-Hm-IKW" secondAttribute="leading" constant="20" symbolic="YES" id="l98-EE-Rui"/>
                                     <constraint firstAttribute="bottom" secondItem="KSv-b6-auz" secondAttribute="bottom" constant="20" symbolic="YES" id="mgP-nI-ctZ"/>
                                 </constraints>
+                                <variation key="heightClass=regular" misplaced="YES">
+                                    <rect key="frame" x="24" y="64" width="552" height="279"/>
+                                </variation>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="32" y="64" width="352" height="332"/>
                                 </variation>
@@ -653,6 +665,9 @@ No one, including Airbitz, has any access to this information.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular" misplaced="YES">
+                                    <rect key="frame" x="461" y="351" width="119" height="41"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
                                     <rect key="frame" x="665" y="397" width="119" height="41"/>
                                 </variation>
@@ -687,7 +702,7 @@ No one, including Airbitz, has any access to this information.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WP0-x8-bIc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1620" y="190"/>
+            <point key="canvasLocation" x="3300" y="246"/>
         </scene>
         <!--Sign Up Write It Controller-->
         <scene sceneID="7ig-k8-jpL">
@@ -928,12 +943,12 @@ No one, including Airbitz, has any access to this information.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ea3-1C-qaA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1981" y="190"/>
+            <point key="canvasLocation" x="4086" y="234"/>
         </scene>
     </scenes>
     <resources>
         <image name="back_arrow.png" width="30" height="30"/>
-        <image name="background.jpg" width="320" height="568"/>
+        <image name="background.jpg" width="17" height="17"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
         <image name="enable-camera.png" width="277" height="205"/>
         <image name="enable-contacts.png" width="190" height="209"/>

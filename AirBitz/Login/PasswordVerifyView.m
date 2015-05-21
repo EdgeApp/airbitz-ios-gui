@@ -31,27 +31,21 @@
 {
 	PasswordVerifyView *pv;
 	
-//	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-	{
-		pv = [[[NSBundle mainBundle] loadNibNamed:@"PasswordVerifyView~iphone" owner:nil options:nil] objectAtIndex:0];
-	}
-//	else
-//	{
-//		pv = [[[NSBundle mainBundle] loadNibNamed:@"PasswordVerifyView~ipad" owner:nil options:nil] objectAtIndex:0];
-//		
-//	}
+    pv = [[[NSBundle mainBundle] loadNibNamed:@"PasswordVerifyView" owner:nil options:nil] objectAtIndex:0];
+
 	[parentView addSubview:pv];
 	CGRect frame = pv.frame;
-	frame.origin.x = (parentView.frame.size.width - frame.size.width) / 2;
+//	frame.origin.x = (parentView.frame.size.width - frame.size.width) / 2;
+    frame.origin.x = 0;
 	frame.origin.y = -frame.size.height;
 	pv.frame = frame;
 	pv.delegate = delegate;
-	pv.layer.cornerRadius = 5;
-    pv.layer.shadowColor = [[UIColor blackColor] CGColor];
-    pv.layer.shadowRadius = 5.0f;
-    pv.layer.shadowOpacity = 1.0f;
-    pv.layer.shadowOffset = CGSizeMake(0.0, 0.0);
-    pv.layer.masksToBounds = NO;
+//	pv.layer.cornerRadius = 5;
+//    pv.layer.shadowColor = [[UIColor blackColor] CGColor];
+//    pv.layer.shadowRadius = 5.0f;
+//    pv.layer.shadowOpacity = 1.0f;
+//    pv.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+//    pv.layer.masksToBounds = NO;
 	
 	[UIView animateWithDuration:0.35
 						  delay:0.0

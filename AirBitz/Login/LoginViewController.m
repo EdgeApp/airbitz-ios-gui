@@ -379,7 +379,6 @@ static BOOL bInitialized = false;
     {
         [self.usernameSelector resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
-        [self animateToInitialPresentation];
 
         _bSuccess = NO;
         [self showSpinner:YES];
@@ -400,18 +399,21 @@ static BOOL bInitialized = false;
 {
     [self dismissErrorMessage];
 
-    [self.usernameSelector.textField resignFirstResponder];
-    [self.passwordTextField resignFirstResponder];
-    [self animateToInitialPresentation];
-    
-    _signupManager = [[SignUpManager alloc] initWithController:self];
-    _signupManager.delegate = self;
-    if (self.usernameSelector.textField.text) {
-        _signupManager.strInUserName = self.usernameSelector.textField.text;
-    }
-    [MainViewController animateFadeOut:self.view];
+    [MainViewController showBackground:YES animate:YES completion:^(BOOL finished)
+    {
+        [self.usernameSelector.textField resignFirstResponder];
+        [self.passwordTextField resignFirstResponder];
 
-    [_signupManager startSignup];
+        _signupManager = [[SignUpManager alloc] initWithController:self];
+        _signupManager.delegate = self;
+        if (self.usernameSelector.textField.text) {
+            _signupManager.strInUserName = self.usernameSelector.textField.text;
+        }
+        [MainViewController animateFadeOut:self.view];
+
+        [_signupManager startSignup];
+
+    }];
 }
 
 - (IBAction)buttonForgotTouched:(id)sender
@@ -495,7 +497,6 @@ static BOOL bInitialized = false;
 
 - (void)signIn:(NSString *)PINCode
 {
-    [self animateToInitialPresentation];
     [MainViewController showBackground:YES animate:YES];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
@@ -609,30 +610,6 @@ static BOOL bInitialized = false;
 {
     CGSize statusBarSize = [[UIApplication sharedApplication] statusBarFrame].size;
     return MIN(statusBarSize.width, statusBarSize.height);
-}
-
-- (void)animateToInitialPresentation
-{
-//    [UIView animateWithDuration:0.35
-//                          delay: 0.0
-//                        options: UIViewAnimationOptionCurveEaseInOut
-//                     animations:^
-//     {
-//         self.contentView.frame = _originalContentFrame;
-//
-//         _backButton.alpha = 1.0;
-//         _swipeRightArrow.alpha = 1.0;
-//         _swipeText.alpha = 1.0;
-//         _titleText.alpha = 1.0;
-//
-//         self.logoImage.transform = CGAffineTransformMakeScale(1.0, 1.0);
-//         self.logoImage.frame = _originalLogoFrame;
-//         self.logoImage.alpha = 1.0;
-//     }
-//                     completion:^(BOOL finished)
-//     {
-//         _mode = MODE_ENTERING_NEITHER;
-//     }];
 }
 
 #pragma mark - keyboard callbacks
@@ -887,10 +864,6 @@ static BOOL bInitialized = false;
         [self.usernameSelector dismissPopupPicker];
         [self.passwordTextField becomeFirstResponder];
     }
-    else
-    {
-        [self animateToInitialPresentation];
-    }
 
     return NO;
 }
@@ -935,6 +908,7 @@ static BOOL bInitialized = false;
 
 -(void)signupAborted
 {
+    [MainViewController showBackground:NO animate:YES];
     [MainViewController animateFadeIn:self.view];
 }
 
@@ -957,7 +931,6 @@ static BOOL bInitialized = false;
         }
         [self.usernameSelector.textField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
-        [self animateToInitialPresentation];
 
         [self showSpinner:YES];
         // Perform the two factor sign in

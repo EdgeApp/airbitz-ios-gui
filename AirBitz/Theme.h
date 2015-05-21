@@ -26,7 +26,6 @@
 @property (nonatomic) UIColor *colorRequestTopTextField;
 @property (nonatomic) UIColor *colorRequestTopTextFieldPlaceholder;
 @property (nonatomic) UIColor *colorRequestBottomTextField;
-@property (nonatomic) CGFloat fadingAlertDropdownHeight;
 @property (nonatomic) BOOL    bTranslucencyEnable;
 
 @property (nonatomic) NSString *appFont;
@@ -58,6 +57,8 @@
 @property (nonatomic) NSString *emailText;
 
 
+@property (nonatomic) CGFloat fadingAlertDropdownHeight;
+@property (nonatomic) CGFloat elementPadding;
 @property (nonatomic) CGFloat heightListings;
 @property (nonatomic) CGFloat heightSearchClues;
 @property (nonatomic) CGFloat heightBLETableCells;

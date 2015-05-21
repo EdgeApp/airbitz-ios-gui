@@ -29,6 +29,7 @@ typedef enum eNavBarSide
 + (void)animateView:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur;
 + (void)animateOut:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur complete:(void(^)(void))cb;
 + (void)showBackground:(BOOL)loggedIn animate:(BOOL)animated;
++ (void)showBackground:(BOOL)loggedIn animate:(BOOL)animated completion:(void (^)(BOOL finished))completion;
 
 +(void)changeNavBarOwner:(UIViewController *)viewController;
 +(void)changeNavBar:(UIViewController *)viewController

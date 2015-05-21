@@ -365,6 +365,11 @@ MainViewController *staticMVC;
 
 + (void)showBackground:(BOOL)loggedIn animate:(BOOL)animated
 {
+    [MainViewController showBackground:loggedIn animate:animated completion:nil];
+}
+
++ (void)showBackground:(BOOL)loggedIn animate:(BOOL)animated completion:(void (^)(BOOL finished))completion
+{
     CGFloat bvStart, bvEnd, bvbStart, bvbEnd;
 
     if (loggedIn)
@@ -389,9 +394,7 @@ MainViewController *staticMVC;
                              [staticMVC.backgroundView setAlpha:bvEnd];
                              [staticMVC.backgroundViewBlue setAlpha:bvbEnd];
                          }
-                         completion:^(BOOL finished)
-                         {
-                         }];
+                         completion:completion];
     }
     else
     {
@@ -1865,10 +1868,11 @@ MainViewController *staticMVC;
 + (void)animateView:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur
 {
 
-    viewController.leftConstraint.constant = viewController.view.frame.size.width;
-    [staticMVC.view layoutIfNeeded];
 
     [Util insertSubviewControllerWithConstraints:staticMVC.view child:viewController belowSubView:staticMVC.tabBar];
+
+    viewController.leftConstraint.constant = viewController.view.frame.size.width;
+    [staticMVC.view layoutIfNeeded];
 
     if (withBlur)
     {
@@ -1886,8 +1890,8 @@ MainViewController *staticMVC;
                          if (withBlur)
                          {
                              staticMVC.blurViewLeft.constant = 0;
-                             [staticMVC.view layoutIfNeeded];
                          }
+                         [staticMVC.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished)
                      {

@@ -16,6 +16,7 @@
 #import "MainViewController.h"
 #import "Theme.h"
 
+#define FORCE_REQUEST_ACCESS_SCREENS 1
 
 @interface SignUpManager () 
 {
@@ -180,7 +181,7 @@
 - (BOOL)haveRequestCamera
 {
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    if(authStatus == AVAuthorizationStatusAuthorized) {
+    if(authStatus == AVAuthorizationStatusAuthorized && !FORCE_REQUEST_ACCESS_SCREENS) {
         return YES;
     }
     return NO;
@@ -192,7 +193,7 @@
 
     abAuthorizationStatus = ABAddressBookGetAuthorizationStatus();
 
-    if (abAuthorizationStatus == kABAuthorizationStatusAuthorized) {
+    if (abAuthorizationStatus == kABAuthorizationStatusAuthorized && !FORCE_REQUEST_ACCESS_SCREENS) {
         return YES;
     }
 
