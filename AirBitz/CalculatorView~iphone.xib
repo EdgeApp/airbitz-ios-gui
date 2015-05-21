@@ -39,8 +39,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V76-TG-gfn">
-                    <rect key="frame" x="73" y="169" width="57" height="50"/>
+                <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F41-Pj-s0u" customClass="BlurView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V76-TG-gfn">
+                    <rect key="frame" x="73" y="170" width="57" height="50"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="0">
@@ -51,8 +56,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="nxn-E3-OWa"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8e-QF-DXa">
-                    <rect key="frame" x="15" y="13" width="56" height="50"/>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8e-QF-DXa">
+                    <rect key="frame" x="15" y="14" width="56" height="50"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="1">
@@ -63,8 +68,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="jmB-uj-8k7"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjB-0i-g2w">
-                    <rect key="frame" x="73" y="13" width="57" height="50"/>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjB-0i-g2w">
+                    <rect key="frame" x="73" y="14" width="57" height="50"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="2">
@@ -75,8 +80,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="zoj-Ic-u5T"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4B-P3-CYU">
-                    <rect key="frame" x="132" y="13" width="56" height="50"/>
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4B-P3-CYU">
+                    <rect key="frame" x="132" y="14" width="56" height="50"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="3">
@@ -87,8 +92,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="hel-je-9Dr"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="4" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0f-iB-KJr">
-                    <rect key="frame" x="15" y="65" width="56" height="50"/>
+                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0f-iB-KJr">
+                    <rect key="frame" x="15" y="66" width="56" height="50"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="4">
@@ -99,8 +104,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="d3O-FC-Tdh"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uL-vk-tLg">
-                    <rect key="frame" x="73" y="65" width="57" height="50"/>
+                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uL-vk-tLg">
+                    <rect key="frame" x="73" y="66" width="57" height="50"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="5">
@@ -111,8 +116,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="Nga-2c-wBH"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="6" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORi-eH-Enh">
-                    <rect key="frame" x="132" y="65" width="56" height="50"/>
+                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORi-eH-Enh">
+                    <rect key="frame" x="132" y="66" width="56" height="50"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="6">
@@ -123,8 +128,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="oXF-oM-WgN"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="7" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVl-D5-w0P">
-                    <rect key="frame" x="15" y="117" width="56" height="50"/>
+                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVl-D5-w0P">
+                    <rect key="frame" x="15" y="118" width="56" height="50"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="7">
@@ -135,8 +140,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="YDd-oV-AlS"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="8" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Emr-ag-G6B">
-                    <rect key="frame" x="73" y="117" width="57" height="50"/>
+                <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Emr-ag-G6B">
+                    <rect key="frame" x="73" y="118" width="57" height="50"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="8">
@@ -147,8 +152,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="MnV-fC-aXV"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="9" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqz-n7-FoF">
-                    <rect key="frame" x="132" y="117" width="56" height="50"/>
+                <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqz-n7-FoF">
+                    <rect key="frame" x="132" y="118" width="56" height="50"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="9">
@@ -159,8 +164,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="7Bd-1L-Giz"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WkG-ho-3qR">
-                    <rect key="frame" x="132" y="169" width="56" height="50"/>
+                <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WkG-ho-3qR">
+                    <rect key="frame" x="132" y="170" width="56" height="50"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title=".">
@@ -171,8 +176,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="qZP-cV-ovG"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O42-ZS-u2K">
-                    <rect key="frame" x="15" y="169" width="56" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O42-ZS-u2K">
+                    <rect key="frame" x="15" y="170" width="56" height="50"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="C">
@@ -183,8 +188,8 @@
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="vsC-Mz-h98"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="11" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="tNK-PX-QMO">
-                    <rect key="frame" x="249" y="117" width="56" height="50"/>
+                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="tNK-PX-QMO">
+                    <rect key="frame" x="249" y="118" width="56" height="50"/>
                     <color key="backgroundColor" red="0.97254901960784312" green="0.58823529411764708" blue="0.047058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
                     <state key="normal" title="&lt; Del">
@@ -195,8 +200,8 @@
                         <action selector="digit:" destination="-1" eventType="touchUpInside" id="RHV-PK-1Ud"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="JE3-3X-s8v">
-                    <rect key="frame" x="249" y="169" width="56" height="50"/>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="JE3-3X-s8v">
+                    <rect key="frame" x="249" y="170" width="56" height="50"/>
                     <color key="backgroundColor" red="0.43529411764705883" green="0.72941176470588232" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
                     <state key="normal" title="Done">
@@ -207,8 +212,8 @@
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="dBl-WT-Dw2"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTN-mi-eGB">
-                    <rect key="frame" x="190" y="117" width="57" height="50"/>
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTN-mi-eGB">
+                    <rect key="frame" x="190" y="118" width="57" height="50"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="/">
@@ -219,8 +224,8 @@
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="ekG-3d-wTw"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aeb-Xc-JRe">
-                    <rect key="frame" x="190" y="65" width="57" height="50"/>
+                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aeb-Xc-JRe">
+                    <rect key="frame" x="190" y="66" width="57" height="50"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="-">
@@ -231,8 +236,8 @@
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="9fM-fa-CeM"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="7" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpP-b8-SWQ">
-                    <rect key="frame" x="190" y="13" width="57" height="50"/>
+                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpP-b8-SWQ">
+                    <rect key="frame" x="190" y="14" width="57" height="50"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="+">
@@ -243,8 +248,8 @@
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="zaP-eF-j3v"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="8" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYy-J7-W9D">
-                    <rect key="frame" x="249" y="13" width="56" height="50"/>
+                <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYy-J7-W9D">
+                    <rect key="frame" x="249" y="14" width="56" height="50"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="%">
@@ -255,8 +260,8 @@
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="Cul-fe-ZZM"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="6" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCV-gu-4YU">
-                    <rect key="frame" x="249" y="65" width="56" height="50"/>
+                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCV-gu-4YU">
+                    <rect key="frame" x="249" y="66" width="56" height="50"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="*">
@@ -267,8 +272,8 @@
                         <action selector="operation:" destination="-1" eventType="touchUpInside" id="WeB-XE-457"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="4" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyR-lU-hrP">
-                    <rect key="frame" x="190" y="169" width="57" height="50"/>
+                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyR-lU-hrP">
+                    <rect key="frame" x="190" y="170" width="57" height="50"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="=">
@@ -310,6 +315,7 @@
                 <constraint firstItem="vjB-0i-g2w" firstAttribute="top" secondItem="b8e-QF-DXa" secondAttribute="top" id="GvH-3X-Fcn"/>
                 <constraint firstAttribute="trailing" secondItem="xYy-J7-W9D" secondAttribute="trailing" constant="15" id="KJd-1D-4nk"/>
                 <constraint firstItem="2uL-vk-tLg" firstAttribute="height" secondItem="O42-ZS-u2K" secondAttribute="height" id="LRj-9X-Li2"/>
+                <constraint firstItem="F41-Pj-s0u" firstAttribute="leading" secondItem="aXY-Ea-f1s" secondAttribute="leading" id="LRm-IM-R4C"/>
                 <constraint firstItem="RyR-lU-hrP" firstAttribute="leading" secondItem="WkG-ho-3qR" secondAttribute="trailing" constant="2" id="Llx-mh-6eW"/>
                 <constraint firstItem="JE3-3X-s8v" firstAttribute="trailing" secondItem="tNK-PX-QMO" secondAttribute="trailing" id="M6r-ny-CIg"/>
                 <constraint firstItem="JE3-3X-s8v" firstAttribute="trailing" secondItem="MCV-gu-4YU" secondAttribute="trailing" id="MbZ-hU-CoO"/>
@@ -318,6 +324,7 @@
                 <constraint firstItem="2uL-vk-tLg" firstAttribute="width" secondItem="P0f-iB-KJr" secondAttribute="width" id="Qn9-2s-Oax"/>
                 <constraint firstItem="JE3-3X-s8v" firstAttribute="top" secondItem="tNK-PX-QMO" secondAttribute="bottom" constant="2" id="RRZ-0e-QPH"/>
                 <constraint firstItem="2uL-vk-tLg" firstAttribute="width" secondItem="xYy-J7-W9D" secondAttribute="width" id="RnS-35-GcN"/>
+                <constraint firstAttribute="trailing" secondItem="F41-Pj-s0u" secondAttribute="trailing" id="T2b-u6-DQn"/>
                 <constraint firstItem="WkG-ho-3qR" firstAttribute="top" secondItem="Tqz-n7-FoF" secondAttribute="bottom" constant="2" id="T5k-O1-Gge"/>
                 <constraint firstItem="V76-TG-gfn" firstAttribute="leading" secondItem="O42-ZS-u2K" secondAttribute="trailing" constant="2" id="TTN-i9-uxX"/>
                 <constraint firstItem="2uL-vk-tLg" firstAttribute="height" secondItem="fTN-mi-eGB" secondAttribute="height" id="ULc-X6-soA"/>
@@ -363,6 +370,7 @@
                 <constraint firstAttribute="trailing" secondItem="tNK-PX-QMO" secondAttribute="trailing" constant="15" id="rnQ-lU-06o"/>
                 <constraint firstItem="2uL-vk-tLg" firstAttribute="height" secondItem="hpP-b8-SWQ" secondAttribute="height" id="sTM-aj-I4L"/>
                 <constraint firstAttribute="bottom" secondItem="WkG-ho-3qR" secondAttribute="bottom" constant="10" id="tIG-CV-O0e"/>
+                <constraint firstAttribute="bottom" secondItem="F41-Pj-s0u" secondAttribute="bottom" id="u1o-H9-gh8"/>
                 <constraint firstItem="2uL-vk-tLg" firstAttribute="height" secondItem="x4B-P3-CYU" secondAttribute="height" id="ulZ-XV-TbV"/>
                 <constraint firstItem="2uL-vk-tLg" firstAttribute="width" secondItem="WkG-ho-3qR" secondAttribute="width" id="uq9-KV-hW2"/>
                 <constraint firstAttribute="bottom" secondItem="RyR-lU-hrP" secondAttribute="bottom" constant="10" id="uqj-Cb-8JC"/>
@@ -371,6 +379,7 @@
                 <constraint firstItem="2uL-vk-tLg" firstAttribute="width" secondItem="x4B-P3-CYU" secondAttribute="width" id="vjR-AE-Sct"/>
                 <constraint firstItem="tNK-PX-QMO" firstAttribute="top" secondItem="MCV-gu-4YU" secondAttribute="bottom" constant="2" id="vux-B1-2LO"/>
                 <constraint firstItem="2uL-vk-tLg" firstAttribute="height" secondItem="tNK-PX-QMO" secondAttribute="height" id="xgl-2E-pAc"/>
+                <constraint firstItem="F41-Pj-s0u" firstAttribute="top" secondItem="aXY-Ea-f1s" secondAttribute="top" id="xic-o5-DWX"/>
                 <constraint firstItem="2uL-vk-tLg" firstAttribute="width" secondItem="MCV-gu-4YU" secondAttribute="width" id="xqp-ey-j15"/>
                 <constraint firstItem="JE3-3X-s8v" firstAttribute="leading" secondItem="RyR-lU-hrP" secondAttribute="trailing" constant="2" id="yQt-Qq-3f2"/>
                 <constraint firstItem="wVl-D5-w0P" firstAttribute="leading" secondItem="b8e-QF-DXa" secondAttribute="leading" id="z0C-1L-cRz"/>
@@ -381,7 +390,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="395" y="292.5"/>
+            <point key="canvasLocation" x="395" y="292"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
