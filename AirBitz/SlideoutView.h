@@ -34,6 +34,7 @@
 - (void)slideoutSettings;
 - (void)slideoutLogout;
 - (void)slideoutBuySell;
+- (void)slideoutImport;
 
 - (void)slideoutWillOpen:(SlideoutView *)slideoutView;
 - (void)slideoutWillClose:(SlideoutView *)slideoutView;

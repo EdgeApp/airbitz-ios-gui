@@ -1347,6 +1347,15 @@
 		DA06FAF51B0BDEA5000BCA46 /* icon_settings_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAF41B0BDEA5000BCA46 /* icon_settings_dark.png */; };
 		DA06FAF61B0BDEA5000BCA46 /* icon_settings_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAF41B0BDEA5000BCA46 /* icon_settings_dark.png */; };
 		DA06FAF71B0BDEA5000BCA46 /* icon_settings_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAF41B0BDEA5000BCA46 /* icon_settings_dark.png */; };
+		DA06FB001B0CC107000BCA46 /* gift_box.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAFD1B0CC107000BCA46 /* gift_box.png */; };
+		DA06FB011B0CC107000BCA46 /* gift_box.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAFD1B0CC107000BCA46 /* gift_box.png */; };
+		DA06FB021B0CC107000BCA46 /* gift_box.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAFD1B0CC107000BCA46 /* gift_box.png */; };
+		DA06FB031B0CC107000BCA46 /* gift_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAFE1B0CC107000BCA46 /* gift_box@2x.png */; };
+		DA06FB041B0CC107000BCA46 /* gift_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAFE1B0CC107000BCA46 /* gift_box@2x.png */; };
+		DA06FB051B0CC107000BCA46 /* gift_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAFE1B0CC107000BCA46 /* gift_box@2x.png */; };
+		DA06FB061B0CC107000BCA46 /* gift_box@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAFF1B0CC107000BCA46 /* gift_box@3x.png */; };
+		DA06FB071B0CC107000BCA46 /* gift_box@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAFF1B0CC107000BCA46 /* gift_box@3x.png */; };
+		DA06FB081B0CC107000BCA46 /* gift_box@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06FAFF1B0CC107000BCA46 /* gift_box@3x.png */; };
 		DA1333901A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */; };
 		DA1333911A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */; };
 		DA1333981A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1333971A7B12E00051DE14 /* TwoFactorScanViewController.m */; };
@@ -2389,6 +2398,9 @@
 		DA06F7561B0BDD79000BCA46 /* White-Dot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "White-Dot@2x.png"; path = "Resources/Artwork/White-Dot@2x.png"; sourceTree = "<group>"; };
 		DA06F7571B0BDD79000BCA46 /* write-it-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "write-it-down.png"; path = "Resources/Artwork/write-it-down.png"; sourceTree = "<group>"; };
 		DA06FAF41B0BDEA5000BCA46 /* icon_settings_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_settings_dark.png; path = Resources/Artwork/icon_settings_dark.png; sourceTree = "<group>"; };
+		DA06FAFD1B0CC107000BCA46 /* gift_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gift_box.png; path = Resources/Artwork/gift_box.png; sourceTree = "<group>"; };
+		DA06FAFE1B0CC107000BCA46 /* gift_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gift_box@2x.png"; path = "Resources/Artwork/gift_box@2x.png"; sourceTree = "<group>"; };
+		DA06FAFF1B0CC107000BCA46 /* gift_box@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gift_box@3x.png"; path = "Resources/Artwork/gift_box@3x.png"; sourceTree = "<group>"; };
 		DA13338E1A7AECA70051DE14 /* TwoFactorShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorShowViewController.h; sourceTree = "<group>"; };
 		DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorShowViewController.m; sourceTree = "<group>"; };
 		DA1333961A7B12E00051DE14 /* TwoFactorScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorScanViewController.h; sourceTree = "<group>"; };
@@ -3336,6 +3348,9 @@
 				DA06F6E11B0BDD78000BCA46 /* flash-off@2x.png */,
 				DA06F6E21B0BDD78000BCA46 /* flash-on.png */,
 				DA06F6E31B0BDD78000BCA46 /* flash-on@2x.png */,
+				DA06FAFD1B0CC107000BCA46 /* gift_box.png */,
+				DA06FAFE1B0CC107000BCA46 /* gift_box@2x.png */,
+				DA06FAFF1B0CC107000BCA46 /* gift_box@3x.png */,
 				DA06F6E41B0BDD78000BCA46 /* Green-check.png */,
 				DA06F6E51B0BDD78000BCA46 /* Green-check@2x.png */,
 				DA06F6E61B0BDD78000BCA46 /* h_seperator.png */,
@@ -4110,6 +4125,7 @@
 				DA06F7AD1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06F9601B0BDD79000BCA46 /* darken_bottom_table_cell@2x.png in Resources */,
 				DA06FAA71B0BDD79000BCA46 /* tabbar_divider@2x.png in Resources */,
+				DA06FB041B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA06F9A21B0BDD79000BCA46 /* h_seperator@2x.png in Resources */,
 				7D98ADD119A7C550003D2BF6 /* Montserrat-Bold.ttf in Resources */,
 				DA06F8CD1B0BDD79000BCA46 /* btn_light@2x.png in Resources */,
@@ -4170,6 +4186,7 @@
 				DA06F93C1B0BDD79000BCA46 /* btn_td_green@2x.png in Resources */,
 				7D98AE2119A7C550003D2BF6 /* infoRecipient.html in Resources */,
 				DA06F7E01B0BDD79000BCA46 /* btn_1.png in Resources */,
+				DA06FB071B0CC107000BCA46 /* gift_box@3x.png in Resources */,
 				DA06F8461B0BDD79000BCA46 /* btn_blue.png in Resources */,
 				DA06F7FE1B0BDD79000BCA46 /* btn_6.png in Resources */,
 				DA06F7F81B0BDD79000BCA46 /* btn_5.png in Resources */,
@@ -4299,6 +4316,7 @@
 				DA06F8401B0BDD79000BCA46 /* btn_big_green.png in Resources */,
 				DA06F83A1B0BDD79000BCA46 /* btn_big_blue2.png in Resources */,
 				DA06FA261B0BDD79000BCA46 /* icon_send.png in Resources */,
+				DA06FB011B0CC107000BCA46 /* gift_box.png in Resources */,
 				DA06F9D51B0BDD79000BCA46 /* icon_directory@2x.png in Resources */,
 				DAE81D891AC204140064BA5D /* plugins in Resources */,
 				DA06F8191B0BDD79000BCA46 /* btn_add@2x.png in Resources */,
@@ -4494,6 +4512,7 @@
 				DA06F7CA1B0BDD79000BCA46 /* bkg_dark_header@2x.png in Resources */,
 				DA06F7AC1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06F95F1B0BDD79000BCA46 /* darken_bottom_table_cell@2x.png in Resources */,
+				DA06FB031B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA06FAA61B0BDD79000BCA46 /* tabbar_divider@2x.png in Resources */,
 				DA06F9A11B0BDD79000BCA46 /* h_seperator@2x.png in Resources */,
 				B5137C0B18A40A8400DA4A34 /* Lato-Hairline.ttf in Resources */,
@@ -4554,6 +4573,7 @@
 				B5137C0C18A40A8400DA4A34 /* Lato-HairlineItalic.ttf in Resources */,
 				DA06F93B1B0BDD79000BCA46 /* btn_td_green@2x.png in Resources */,
 				DA5101E51AF9FD1100949855 /* FadingAlertView2.xib in Resources */,
+				DA06FB061B0CC107000BCA46 /* gift_box@3x.png in Resources */,
 				DA06F7DF1B0BDD79000BCA46 /* btn_1.png in Resources */,
 				DA06F8451B0BDD79000BCA46 /* btn_blue.png in Resources */,
 				DA06F7FD1B0BDD79000BCA46 /* btn_6.png in Resources */,
@@ -4683,6 +4703,7 @@
 				DA06F83F1B0BDD79000BCA46 /* btn_big_green.png in Resources */,
 				DA06F8391B0BDD79000BCA46 /* btn_big_blue2.png in Resources */,
 				DA06FA251B0BDD79000BCA46 /* icon_send.png in Resources */,
+				DA06FB001B0CC107000BCA46 /* gift_box.png in Resources */,
 				DA06F9D41B0BDD79000BCA46 /* icon_directory@2x.png in Resources */,
 				4C5D8C75192E7D4A0015BB3C /* infoWallets.html in Resources */,
 				DA06F8181B0BDD79000BCA46 /* btn_add@2x.png in Resources */,
@@ -4878,6 +4899,7 @@
 				DA06F7CC1B0BDD79000BCA46 /* bkg_dark_header@2x.png in Resources */,
 				DA06F7AE1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06F9611B0BDD79000BCA46 /* darken_bottom_table_cell@2x.png in Resources */,
+				DA06FB051B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA06FAA81B0BDD79000BCA46 /* tabbar_divider@2x.png in Resources */,
 				DA06F9A31B0BDD79000BCA46 /* h_seperator@2x.png in Resources */,
 				DAE8652F1A88A58A00A17BD3 /* Lato-Hairline.ttf in Resources */,
@@ -4938,6 +4960,7 @@
 				DAE865851A88A58A00A17BD3 /* Lato-HairlineItalic.ttf in Resources */,
 				DA06F93D1B0BDD79000BCA46 /* btn_td_green@2x.png in Resources */,
 				DA5101E71AF9FD1100949855 /* FadingAlertView2.xib in Resources */,
+				DA06FB081B0CC107000BCA46 /* gift_box@3x.png in Resources */,
 				DA06F7E11B0BDD79000BCA46 /* btn_1.png in Resources */,
 				DA06F8471B0BDD79000BCA46 /* btn_blue.png in Resources */,
 				DA06F7FF1B0BDD79000BCA46 /* btn_6.png in Resources */,
@@ -5067,6 +5090,7 @@
 				DA06F8411B0BDD79000BCA46 /* btn_big_green.png in Resources */,
 				DA06F83B1B0BDD79000BCA46 /* btn_big_blue2.png in Resources */,
 				DA06FA271B0BDD79000BCA46 /* icon_send.png in Resources */,
+				DA06FB021B0CC107000BCA46 /* gift_box.png in Resources */,
 				DA06F9D61B0BDD79000BCA46 /* icon_directory@2x.png in Resources */,
 				DAE8661D1A88A58A00A17BD3 /* infoWallets.html in Resources */,
 				DA06F81A1B0BDD79000BCA46 /* btn_add@2x.png in Resources */,

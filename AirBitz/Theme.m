@@ -82,6 +82,8 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.invalidAddressPopupText = NSLocalizedString(@"Invalid Bitcoin Address", nil);
     self.enterBitcoinAddressPopupText= NSLocalizedString(@"Send to Bitcoin Address", nil);
     self.enterBitcoinAddressPlaceholder= NSLocalizedString(@"Bitcoin Address or URI", nil);
+    self.enterPrivateKeyPopupText= NSLocalizedString(@"Sweep Funds From Private Key", nil);
+    self.enterPrivateKeyPlaceholder= NSLocalizedString(@"Bitcoin Private Key", nil);
     self.smsText = NSLocalizedString(@"SMS", @"text for textmessage/SMS");
     self.emailText = NSLocalizedString(@"Email", @"text for Email");
 

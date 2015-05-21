@@ -51,20 +51,6 @@
     v.delegate = del;
 
     v->_parentView = parentView;
-//    CGRect f = parentView.frame;
-//    int topOffset = HEADER_HEIGHT;
-//    int sliderWidth = 250;
-//    f.size.width = sliderWidth;
-//    f.origin.y = topOffset;
-//    f.origin.x = parentView.frame.size.width - f.size.width;
-//    f.size.height = parentView.frame.size.height - tabBar.frame.size.height - topOffset;
-//    v.frame = f;
-//
-//    v->_originalSlideoutFrame = v.frame;
-//
-//    f = v.frame;
-//    f.origin.x = f.origin.x + f.size.width;
-//    v.frame = f;
     v->_open = NO;
 
     UIColor *back = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.05];
@@ -227,6 +213,15 @@
         [self.delegate slideoutBuySell];
     }
 }
+
+- (IBAction)importTouched:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutImport)]) {
+        [self.delegate slideoutImport];
+    }
+
+}
+
 
 - (IBAction)accountTouched
 {

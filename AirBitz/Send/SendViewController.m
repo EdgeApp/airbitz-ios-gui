@@ -23,10 +23,13 @@
  Request a read of the characteristic
  wait to receive bit coin address and amount from peripheral
  When it comes in, disconnect and transition to send confirmation screen
- */#import "SendViewController.h"
+ */
+
+#import "SendViewController.h"
 #import "SpendTarget.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import <Social/Social.h>
 #import "SendViewController.h"
 #import "Notifications.h"
 #import "ABC.h"
@@ -52,6 +55,8 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "SpendTarget.h"
+#import "DL_URLServer.h"
+#import "Server.h"
 
 #define BLE_TIMEOUT                 1.0
 
@@ -67,9 +72,18 @@ typedef enum eScanMode
 	SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND
 }tScanMode;
 
+typedef enum eImportState
+{
+    ImportState_PrivateKey,
+    ImportState_EnterPassword,
+    ImportState_RetryPassword,
+    ImportState_Importing
+} tImportState;
+
+
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerViewDelegate,ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
+@interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerViewDelegate,ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
 #if !TARGET_IPHONE_SIMULATOR
  ,ZBarReaderDelegate, ZBarReaderViewDelegate
 #endif
@@ -89,23 +103,34 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	tScanMode						scanMode;
 	float							originalFrameHeight;
     FadingAlertView2                 *_fadingAlert;
-    BOOL                        bWalletListDropped;
+    BOOL                            bWalletListDropped;
     BOOL                            bFlashOn;
-    UIAlertView                         *typeAddressAlertView;
+    UIAlertView                     *typeAddressAlertView;
+    ImportDataModel                 _dataModel;
+    NSString                        *_sweptAddress;
+    tImportState                    _state;
+    NSString                        *_sweptTXID;
+    uint64_t                        _sweptAmount;
+    UIAlertView                     *_sweptAlert;
+    UIAlertView                     *_tweetAlert;
+    UIAlertView                     *_receivedAlert;
+    NSTimer                         *_callbackTimer;
+    NSString                        *_tweet;
 
 
 }
-@property (weak, nonatomic) IBOutlet UIImageView            *scanFrame;
-//@property (weak, nonatomic) IBOutlet FlashSelectView        *flashSelector;
-@property (nonatomic, weak) IBOutlet ButtonSelectorView2    *buttonSelector;
-//@property (weak, nonatomic) IBOutlet UIImageView            *imageTopFrame;
-//@property (weak, nonatomic) IBOutlet UILabel                *labelSendTo;
-//@property (weak, nonatomic) IBOutlet UIImageView            *imageSendTo;
-//@property (weak, nonatomic) IBOutlet UIImageView            *imageFlashFrame;
-//@property (weak, nonatomic) IBOutlet UIView					*bleView;
-//@property (weak, nonatomic) IBOutlet UIView					*qrView;
-@property (nonatomic, weak)	IBOutlet UITableView			*tableView;
-//@property (nonatomic, weak) IBOutlet UIButton				*ble_button;
+@property (nonatomic, strong)   NSString                        *privateKey;
+@property (weak, nonatomic)     IBOutlet UIImageView            *scanFrame;
+//@property (weak, nonatomic)   IBOutlet FlashSelectView        *flashSelector;
+@property (nonatomic, strong)   IBOutlet ButtonSelectorView2    *buttonSelector;
+//@property (weak, nonatomic)   IBOutlet UIImageView            *imageTopFrame;
+//@property (weak, nonatomic)   IBOutlet UILabel                *labelSendTo;
+//@property (weak, nonatomic)   IBOutlet UIImageView            *imageSendTo;
+//@property (weak, nonatomic)   IBOutlet UIImageView            *imageFlashFrame;
+//@property (weak, nonatomic)   IBOutlet UIView					*bleView;
+//@property (weak, nonatomic)   IBOutlet UIView					*qrView;
+@property (nonatomic, strong)	IBOutlet UITableView			*tableView;
+//@property (nonatomic, weak)   IBOutlet UIButton				*ble_button;
 
 //@property (nonatomic, strong) NSArray   *arrayWallets;
 //@property (nonatomic, strong) NSArray   *arrayWalletNames;
@@ -113,7 +138,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, strong) PopupPickerView               *popupPickerSendTo;
 //@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *scanningSpinner;
 //@property (nonatomic, weak) IBOutlet UILabel				*scanningLabel;
-@property (nonatomic, weak) IBOutlet UILabel				*scanningErrorLabel;
+@property (nonatomic, strong) IBOutlet UILabel				*scanningErrorLabel;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bleViewHeight;
@@ -153,38 +178,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	self.buttonSelector.delegate = self;
     [self.buttonSelector disableButton];
 
-    // set up the specifics on our picker text view
-    self.addressTextField.borderStyle = UITextBorderStyleNone;
-    self.addressTextField.backgroundColor = [UIColor clearColor];
-    self.addressTextField.font = [UIFont systemFontOfSize:14];
-    self.addressTextField.clearButtonMode = UITextFieldViewModeNever;
-    self.addressTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.addressTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.addressTextField.spellCheckingType = UITextSpellCheckingTypeNo;
-    self.addressTextField.textColor = [UIColor whiteColor];
-    self.addressTextField.returnKeyType = UIReturnKeyDone;
-    self.addressTextField.tintColor = [UIColor whiteColor];
-    self.addressTextField.textAlignment = NSTextAlignmentCenter;
-    self.addressTextField.placeholder = NSLocalizedString(@"Enter Bitcoin Address", nil);
-    self.addressTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.addressTextField.placeholder
-                                                                                            attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
-//    [self.pickerTextSendTo setTopMostView:self.view];
-    //self.pickerTextSendTo.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
-//    self.pickerTextSendTo.cropPointBottom = POPUP_PICKER_LOWEST_POINT;
-//    self.pickerTextSendTo.delegate = self;
     self.addressTextField.delegate = self;
-
-//	self.buttonSelector.textLabel.text = NSLocalizedString(@"", nil);
-//    [self.buttonSelector setButtonWidth:223];
-
-	//for some reason, dismissing the image picker resizes our view's frame to full screen which places the orange QR button behind the tool bar.
-	//Remember our original height so we can force it back to that in viewWillAppear.
-//	originalFrameHeight = self.view.frame.size.height;
-
-//    self.qrView.hidden = YES;
 	self.arrayContacts = @[];
 	// load all the names from the address book
     [self generateListOfContactNames];
+
+
+    [self updateDisplay];
+
+    _dataModel = kWIF;
 }
 
 - (void)dealloc
@@ -195,11 +197,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)scanBLEstartCamera
 {
     scanMode = SCAN_MODE_UNINITIALIZED;
-//    [self loadWalletInfo];
-//    [self updateTable];
     [self startQRReader];
 
-    if([LocalSettings controller].bDisableBLE == NO)
+    if([LocalSettings controller].bDisableBLE == NO && !self.bImportMode)
     {
         // Start up the CBCentralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
         NSTimeInterval curTime = CACurrentMediaTime();
@@ -213,18 +213,17 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         lastCentralBLEPowerOffNotificationTime = curTime;
         [self startBLE];
-//        [self startBleTimeout:BLE_TIMEOUT];
     }
-//    else
-//    {
-//        self.ble_button.hidden = YES;
-//        [self startBleTimeout:0.0];
-//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self scanBLEstartCamera];
+
+    // Disable [Transfer] button if we're in Import Private Key mode
+    if (_bImportMode)
+        [segmentedControl setEnabled:NO forSegmentAtIndex:0];
+    _dataModel = kWIF;
 
 	//reset our frame's height in case it got changed by the image picker view controller
 //	CGRect frame = self.view.frame;
@@ -242,6 +241,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                name:UIApplicationDidBecomeActiveNotification
              object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sweepDoneCallback:) name:NOTIFICATION_SWEEP object:nil];
 
 
     //
@@ -249,11 +249,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     // Check params and go
     //
 
-    if (self.spendTarget != nil)
+    if (self.loopbackState == LoopbackState_Go && self.zBarSymbolSet != nil)
     {
-        [self showSendConfirmationTo:self.spendTarget];
+        [self processZBarResults:self.zBarSymbolSet];
     }
-    else if (self.bDidFailReadingQR)
+    else if (self.loopbackState == LoopbackState_Scan_Failed)
     {
 
         UIAlertView *alert = [[UIAlertView alloc]
@@ -264,7 +264,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             otherButtonTitles:nil];
         [alert show];
     }
-    else if (self.bInvalidAddressReadingQR)
+    else if (self.loopbackState == LoopbackState_Invalid_Address)
     {
         UIAlertView *alert = [[UIAlertView alloc]
                 initWithTitle:[Theme Singleton].invalidAddressPopupText
@@ -275,8 +275,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [alert show];
 
     }
-    self.spendTarget = nil;
-    self.bInvalidAddressReadingQR = self.bDidFailReadingQR = NO;
+    self.zBarSymbolSet = nil;
+    self.loopbackState = LoopbackState_None;
 
     [self setupNavBar];
     [self updateViews:nil];
@@ -527,6 +527,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
     UITextField *textField;
+    NSString *title;
+    NSString *placeholderText;
+
 
     switch (segmentedControl.selectedSegmentIndex)
     {
@@ -548,14 +551,24 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             // Do Transfer
             break;
         case 1:
-            typeAddressAlertView =[[UIAlertView alloc ] initWithTitle:[Theme Singleton].enterBitcoinAddressPopupText
+            if (_bImportMode)
+            {
+                title = [Theme Singleton].enterPrivateKeyPopupText;
+                placeholderText = [Theme Singleton].enterPrivateKeyPlaceholder;
+            }
+            else
+            {
+                title = [Theme Singleton].enterBitcoinAddressPopupText;
+                placeholderText = [Theme Singleton].enterBitcoinAddressPlaceholder;
+            }
+            typeAddressAlertView =[[UIAlertView alloc ] initWithTitle:title
                                                               message:nil
                                                              delegate:self
                                                     cancelButtonTitle:[Theme Singleton].cancelButtonText
                                                     otherButtonTitles:[Theme Singleton].doneButtonText, nil];
             typeAddressAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
             textField = [typeAddressAlertView textFieldAtIndex:0];
-            textField.placeholder = [Theme Singleton].enterBitcoinAddressPlaceholder;
+            textField.placeholder = placeholderText;
             textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
             textField.autocorrectionType = UITextAutocorrectionTypeNo;
             textField.spellCheckingType = UITextSpellCheckingTypeNo;
@@ -585,6 +598,39 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         _addressTextField.text = [alertView textFieldAtIndex:0].text;
         [self processURI];
+    }
+    else if (_tweetAlert == alertView)
+    {
+        _tweetAlert = nil;
+        if (1 == buttonIndex)
+        {
+            [self performSelector:@selector(sendTweet)
+                       withObject:nil
+                       afterDelay:0.0];
+        }
+        else
+        {
+            [self tweetCancelled];
+            [self updateState];
+        }
+    }
+    else if (_sweptAlert == alertView)
+    {
+        _sweptAlert = nil;
+        [self updateState];
+    }
+    else if (_receivedAlert == alertView)
+    {
+        if (1 == buttonIndex)
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
+                                                                object:nil
+                                                              userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID: [CoreBridge Singleton].currentWallet.strUUID,
+                                                                      KEY_TX_DETAILS_EXITED_TX_ID:_sweptTXID}];
+        }
+
+        _receivedAlert = nil;
+        [self updateState];
     }
 }
 
@@ -665,18 +711,24 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 -(void)startBLE
 {
-	//NSLog(@"################## STARTED BLE ######################");
-	[self scan];
-	//kick off peripheral cleanup timer (removes peripherals from table when they're no longer in range)
-	peripheralCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(cleanupPeripherals:) userInfo:nil repeats:YES];
+    if (!self.bImportMode)
+    {
+        //NSLog(@"################## STARTED BLE ######################");
+        [self scan];
+        //kick off peripheral cleanup timer (removes peripherals from table when they're no longer in range)
+        peripheralCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(cleanupPeripherals:) userInfo:nil repeats:YES];
+    }
 }
 
 -(void)stopBLE
 {
-	//NSLog(@"################## STOPPED BLE ######################");
-	[self.centralManager stopScan];
-	//NSLog(@"Getting rid of timer");
-	[peripheralCleanupTimer invalidate];
+    if (!self.bImportMode)
+    {
+        //NSLog(@"################## STOPPED BLE ######################");
+        [self.centralManager stopScan];
+        //NSLog(@"Getting rid of timer");
+        [peripheralCleanupTimer invalidate];
+    }
 }
 
 /** centralManagerDidUpdateState is a required protocol method.
@@ -1367,7 +1419,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
 
-        NSString *walletName = [NSString stringWithFormat:@"From: %@ ↓", [CoreBridge Singleton].currentWallet.strName];
+        NSString *walletName;
+        if (self.bImportMode)
+            walletName = [NSString stringWithFormat:@"Import To: %@ ↓", [CoreBridge Singleton].currentWallet.strName];
+        else
+            walletName = [NSString stringWithFormat:@"From: %@ ↓", [CoreBridge Singleton].currentWallet.strName];
+
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
         {
@@ -1398,54 +1455,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     }
 }
-//- (void)loadWalletInfo
-//{
-//
-//    [CoreBridge postToWalletsQueue:^(void) {
-//        // load all the non-archive wallets
-//        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-//        [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
-//        // create the arrays of wallet info
-//        _selectedWalletIndex = 0;
-//        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
-//
-//        for (int i = 0; i < [arrayWallets count]; i++)
-//        {
-//            Wallet *wallet = [arrayWallets objectAtIndex:i];
-//            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
-//
-//            if ([_walletUUID isEqualToString: wallet.strUUID])
-//                _selectedWalletIndex = i;
-//        }
-//
-//        dispatch_async(dispatch_get_main_queue(),^{
-//            self.arrayWallets = arrayWallets;
-//            self.arrayWalletNames = arrayWalletNames;
-//
-//            if (_selectedWalletIndex < [arrayWallets count])
-//            {
-//                Wallet *wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
-//
-//                self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-//                [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-//                self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
-//
-//                NSString *walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
-//                [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
-//
-//            }
-//            else
-//            {
-//                NSString *tempTitle = NSLocalizedString(@"Loading...", @"Loading wallet list");
-//                [MainViewController changeNavBarTitle:self title:tempTitle];
-//            }
-//        });
-//    }];
-//
-//
-//
-//
-//}
 
 // if bToIsUUID NO, then it is assumed the strTo is an address
 - (void)showSendConfirmationTo:(SpendTarget *)spendTarget
@@ -1482,8 +1491,83 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	 }];
 }
 
+
+- (void)importWallet
+{
+    bool bSuccess = NO;
+
+    if (self.privateKey)
+    {
+        self.privateKey = [self.privateKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([self.privateKey length])
+        {
+            NSRange schemeMarkerRange = [self.privateKey rangeOfString:@"://"];
+            if (NSNotFound != schemeMarkerRange.location)
+            {
+                NSString *scheme = [self.privateKey substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
+                if (nil != scheme && 0 != [scheme length])
+                {
+                    if (NSNotFound != [scheme rangeOfString:HIDDEN_BITZ_URI_SCHEME].location)
+                    {
+                        _dataModel = kHBURI;
+
+                        self.privateKey = [self.privateKey substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
+
+                        bSuccess = YES;
+                    }
+                }
+            }
+            else
+            {
+                _dataModel = kWIF;
+
+                bSuccess = YES;
+            }
+
+            if (bSuccess)
+            {
+                if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+                {
+                    // private key is a valid format
+                    // attempt to sweep it
+                    _sweptAddress = [CoreBridge sweepKey:self.privateKey
+                                              intoWallet:[CoreBridge Singleton].currentWallet.strUUID
+                                            withCallback:ABC_Sweep_Complete_Callback];
+
+                    if (nil != _sweptAddress && _sweptAddress.length)
+                    {
+                        _state = ImportState_Importing;
+                        [self updateDisplay]; //XXX Will be needed for encrypted private keys
+
+                        // handle the case that the sweep callback is not triggered in a timely manner
+                        _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:30
+                                                                          target:self
+                                                                        selector:@selector(expireImport)
+                                                                        userInfo:nil
+                                                                         repeats:NO];
+                    }
+                    else
+                    {
+                        // no address associated with the private key, must be invalid
+                        bSuccess = NO;
+                    }
+
+                }
+            }
+        }
+    }
+
+    if (NO == bSuccess)
+    {
+        _sweptAddress = nil;
+        [self showFadingAlert:NSLocalizedString(@"Invalid private key", nil)];
+        [self updateState];
+    }
+}
+
+
 #if !TARGET_IPHONE_SIMULATOR
-- (BOOL)processZBarResults:(ZBarSymbolSet *)syms andExit:(BOOL)bExit
+- (BOOL)processZBarResults:(ZBarSymbolSet *)syms
 {
     BOOL bSuccess = YES;
 
@@ -1491,37 +1575,48 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	{
         tABC_Error error;
 		NSString *text = (NSString *)sym.data;
-        SpendTarget *spendTarget = [[SpendTarget alloc] init];
-		if ([spendTarget newSpend:text error:&error]) {
-            bSuccess = YES;
-            if (bExit)
-                [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController:spendTarget fail:NO invalidAddress:NO];
-            else
-                [self showSendConfirmationTo:spendTarget];
-            break;
 
-		} else {
-            bSuccess = NO;
-        }
-	}
-
-    if (bSuccess == NO)
-    {
-        if (bExit)
+        if (_bImportMode)
         {
-            [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController:nil fail:NO invalidAddress:YES];
+            if (nil != text && [text length])
+            {
+                self.privateKey = text;
+                [self performSelector:@selector(importWallet)
+                           withObject:nil
+                           afterDelay:0.0];
+
+                bSuccess = YES;
+            }
+
+            if (!bSuccess)
+            {
+                [self showFadingAlert:NSLocalizedString(@"Invalid private key", nil)];
+            }
         }
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc]
-                    initWithTitle:[Theme Singleton].invalidAddressPopupText
-                          message:NSLocalizedString(@"", nil)
-                         delegate:self
-                cancelButtonTitle:@"OK"
-                otherButtonTitles:nil];
-            [alert show];
+            SpendTarget *spendTarget = [[SpendTarget alloc] init];
+            if ([spendTarget newSpend:text error:&error]) {
+                bSuccess = YES;
+                [self showSendConfirmationTo:spendTarget];
+                break;
+
+            } else {
+                bSuccess = NO;
+            }
         }
-    }
+	}
+
+//    if (bSuccess == NO)
+//    {
+//        UIAlertView *alert = [[UIAlertView alloc]
+//                initWithTitle:[Theme Singleton].invalidAddressPopupText
+//                      message:NSLocalizedString(@"", nil)
+//                     delegate:self
+//            cancelButtonTitle:@"OK"
+//            otherButtonTitles:nil];
+//        [alert show];
+//    }
     return bSuccess;
 }
 #endif
@@ -1724,15 +1819,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)readerView: (ZBarReaderView*) view didReadSymbols: (ZBarSymbolSet*) syms fromImage: (UIImage*) img
 {
 
-    [self processZBarResults:syms andExit:NO];
-//    if ([self processZBarResults:syms andExit:NO])
-//    {
-//        [view stop];
-//    }
-//    else
-//    {
-//        [view start];
-//    }
+    [self processZBarResults:syms];
 
 }
 #endif
@@ -1744,7 +1831,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [reader dismissViewControllerAnimated:YES completion:nil];
     _bUsingImagePicker = NO;
 
-    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController:nil fail:NO invalidAddress:NO];
+    self.loopbackState = LoopbackState_Cancelled;
+    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
 	
 	//cw viewWillAppear will get called which will switch us back into BLE mode
 }
@@ -1754,8 +1842,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     id<NSFastEnumeration> results = [info objectForKey:ZBarReaderControllerResults];
     //UIImage *image = [info objectForKey: UIImagePickerControllerOriginalImage];
 
-    BOOL bSuccess = [self processZBarResults:(ZBarSymbolSet *) results andExit:YES];
+    self.zBarSymbolSet = (ZBarSymbolSet *) results;
+    self.loopbackState = LoopbackState_Go;
+    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
 
+//    BOOL bSuccess = [self processZBarResults:(ZBarSymbolSet *) results andExit:YES];
+//
     [reader dismissViewControllerAnimated:YES completion:nil];
     //[[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
     //[reader dismissModalViewControllerAnimated: YES];
@@ -1773,7 +1865,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                             withRetry:(BOOL)retry
 {
     [reader dismissViewControllerAnimated:YES completion:nil];
-    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController:nil fail:YES invalidAddress:NO];
+    self.loopbackState = LoopbackState_Scan_Failed;
+    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
 //
 //    UIAlertView *alert = [[UIAlertView alloc]
 //                          initWithTitle:NSLocalizedString(@"QR Code Scan Failure", nil)
@@ -1902,6 +1995,218 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //    [MainViewController animateFadeOut:view remove:YES];
 
 }
+
+- (void)updateDisplay
+{
+    BOOL bHideEnter = YES;
+
+//    if ((![self.textPrivateKey isFirstResponder]) && ([self.textPrivateKey.text length] == 0))
+//    {
+//        bHideEnter = NO;
+//    }
+//
+    if (_state == ImportState_PrivateKey)
+    {
+//        self.viewDisplay.hidden = NO;
+//        self.viewPassword.hidden = YES;
+    }
+    else
+    {
+//        self.viewDisplay.hidden = YES;
+//        self.viewPassword.hidden = NO;
+//
+//        self.imageApproved.hidden = YES;
+//        self.imageNotApproved.hidden = YES;
+//        self.textPassword.hidden = YES;
+//        self.imagePasswordEmboss.hidden = YES;
+//        self.textPassword.enabled = NO;
+//
+//        if (_bPasswordRequired)
+//        {
+//            self.textPassword.hidden = NO;
+//            self.imagePasswordEmboss.hidden = NO;
+//        }
+//
+        if (_state == ImportState_EnterPassword)
+        {
+//            self.textPassword.enabled = YES;
+//            self.labelPasswordStatus.text = NSLocalizedString(@"Enter password to decode wallet", nil);
+//            self.textPassword.hidden = NO;
+//            self.imagePasswordEmboss.hidden = NO;
+        }
+        else if (_state == ImportState_RetryPassword)
+        {
+//            self.textPassword.enabled = YES;
+//            self.labelPasswordStatus.text = NSLocalizedString(@"Incorrect password.\nTry again", nil);
+//            self.textPassword.hidden = NO;
+//            self.imagePasswordEmboss.hidden = NO;
+//            self.imageNotApproved.hidden = NO;
+        }
+        else if (_state == ImportState_Importing)
+        {
+            NSMutableString *statusMessage = [NSMutableString string];
+//            if (_bPasswordRequired)
+//            {
+//                [statusMessage appendString:NSLocalizedString(@"Password Correct.\n", nil)];
+//                self.imageApproved.hidden = NO;
+//            }
+            [statusMessage appendString:[[NSString alloc] initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), _sweptAddress]];
+//            self.labelPasswordStatus.text = [NSString stringWithString:statusMessage];
+        }
+    }
+}
+
+
+- (void)updateState
+{
+    if (nil == _tweetAlert && nil == _sweptAlert && nil == _receivedAlert)
+    {
+        _state = ImportState_PrivateKey;
+        [self updateDisplay];
+        [self startQRReader];
+    }
+}
+
+- (void)sendTweet
+{
+    // invoke Twitter to send tweet
+    SLComposeViewController *slComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [slComposerSheet setInitialText:_tweet];
+    [slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
+        switch (result) {
+            case SLComposeViewControllerResultCancelled:
+                [self tweetCancelled];
+            default:
+                [self updateState];
+                break;
+        }
+    }];
+    [self presentViewController:slComposerSheet animated:YES completion:nil];
+}
+
+
+
+- (void)tweetCancelled
+{
+    [self showFadingAlert:NSLocalizedString(@"Import the private key again to retry Twitter", nil)];
+}
+
+- (void)showSweepResults
+{
+    if (_sweptAlert)
+    {
+        [_sweptAlert show];
+    }
+    if (_receivedAlert)
+    {
+        [_receivedAlert show];
+    }
+
+    if (kHBURI == _dataModel)
+    {
+        // make a query with the last bytes of the address
+        const int hBitzIDLength = 4;
+        if (nil != _sweptAddress && hBitzIDLength <= _sweptAddress.length)
+        {
+            NSString *hiddenBitzID = [_sweptAddress substringFromIndex:[_sweptAddress length]-hBitzIDLength];
+            NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
+            [[DL_URLServer controller] issueRequestURL:hiddenBitzURI
+                                            withParams:nil
+                                            withObject:self
+                                          withDelegate:self
+                                    acceptableCacheAge:CACHE_24_HOURS
+                                           cacheResult:YES];
+
+            _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:10
+                                                              target:self
+                                                            selector:@selector(expireImport)
+                                                            userInfo:nil
+                                                             repeats:NO];
+        }
+    }
+}
+
+
+- (void)expireImport
+{
+    [self showFadingAlert:NSLocalizedString(@"Import failed", nil)];
+    [self updateState];
+    _callbackTimer = nil;
+}
+
+- (void)cancelImportExpirationTimer
+{
+    if (_callbackTimer)
+    {
+        [_callbackTimer invalidate];
+        _callbackTimer = nil;
+    }
+}
+
+- (void)sweepDoneCallback:(NSNotification *)notification
+{
+    [self cancelImportExpirationTimer];
+
+    NSDictionary *userInfo = [notification userInfo];
+    tABC_CC result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
+    uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
+    if (nil == _sweptAlert && nil == _receivedAlert)
+    {
+        _sweptAmount = amount;
+
+        if (ABC_CC_Ok == result)
+        {
+            if (0 < amount)
+            {
+                // handle received bitcoin
+                _sweptTXID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
+                if (_sweptTXID && [_sweptTXID length])
+                {
+                    _receivedAlert = [[UIAlertView alloc]
+                            initWithTitle:NSLocalizedString(@"Received Funds", nil)
+                                  message:NSLocalizedString(@"Bitcoin received. Tap for details.", nil)
+                                 delegate:self
+                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                        otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                }
+                else
+                {
+                    _sweptTXID = nil;
+                }
+            }
+            else if (kHBURI != _dataModel)
+            {
+                NSString *message = NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil);
+                _sweptAlert = [[UIAlertView alloc]
+                        initWithTitle:NSLocalizedString(@"Error", nil)
+                              message:message
+                             delegate:self
+                    cancelButtonTitle:@"OK"
+                    otherButtonTitles:nil, nil];
+            }
+        }
+        else
+        {
+            tABC_Error temp;
+            temp.code = result;
+            NSString *message = [Util errorMap:&temp];
+            _sweptAlert = [[UIAlertView alloc]
+                    initWithTitle:NSLocalizedString(@"Error", nil)
+                          message:message
+                         delegate:self
+                cancelButtonTitle:@"OK"
+                otherButtonTitles:nil, nil];
+        }
+
+        [self performSelectorOnMainThread:@selector(showSweepResults)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
+}
+
+#pragma mark - AlertView delegate
+
+
 
 #pragma - Fading Alert Methods
 

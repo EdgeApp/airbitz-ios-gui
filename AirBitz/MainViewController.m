@@ -682,10 +682,22 @@ MainViewController *staticMVC;
 		}
 		case APP_MODE_SEND:
 		{
-			if (_selectedViewController != _sendViewController)
+			if (_selectedViewController != _sendViewController || _sendViewController.bImportMode == YES)
 			{
 				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
+                    AirbitzViewController *fakeViewController;
+
+                    if (_selectedViewController == _sendViewController)
+                    {
+                        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+                        fakeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AirbitzViewController"];
+                        [MainViewController animateSwapViewControllers:fakeViewController out:_selectedViewController];
+                        _sendViewController = nil;
+                        _sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
+                    }
+
+                    _sendViewController.bImportMode = NO;
                     [MainViewController animateSwapViewControllers:_sendViewController out:_selectedViewController];
 				}
 				else
@@ -1654,6 +1666,31 @@ MainViewController *staticMVC;
     [slideoutView showSlideout:NO];
 }
 
+- (void)slideoutImport
+{
+    AirbitzViewController *fakeViewController;
+
+    //
+    // Very weird. If we transition from the same view controller back to itself, we need to destroy it first
+    // Not enough to just load up a dummy controller in between. Full on =nil.
+    // Otherwise the controller doesn't show up. This is specifically for the transition between Send and Import
+    // which now use the same controller
+    //
+    if (_selectedViewController == _sendViewController)
+    {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+        fakeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AirbitzViewController"];
+        [MainViewController animateSwapViewControllers:fakeViewController out:_selectedViewController];
+        _sendViewController = nil;
+        _sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
+    }
+    _sendViewController.bImportMode = YES;
+    [MainViewController animateSwapViewControllers:_sendViewController out:fakeViewController];
+//    [Util insertSubviewControllerWithConstraints:self.view child:_selectedViewController belowSubView:self.tabBar];
+    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+    [slideoutView showSlideout:NO];
+}
+
 #pragma mark - Slideout Methods
 
 - (void)installRightToLeftSwipeDetection
@@ -1939,9 +1976,12 @@ MainViewController *staticMVC;
 
 
 #pragma SendViewController delegate
--(void)pleaseRestartSendViewBecauseAppleSucksWithPresentController:(SpendTarget *)spendTarget fail:(BOOL)bDidFail invalidAddress:(BOOL)bInvalidAddress
+-(void)pleaseRestartSendViewBecauseAppleSucksWithPresentController
 {
     NSLog(@"pleaseRestartSendViewBecauseAppleSucksWithPresentController called");
+    ZBarSymbolSet *zBarSymbolSet = _sendViewController.zBarSymbolSet;
+    BOOL bImportMode = _sendViewController.bImportMode;
+    tLoopbackState loopbackState = _sendViewController.loopbackState;
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [NSThread sleepForTimeInterval:0.5f];
@@ -1955,10 +1995,10 @@ MainViewController *staticMVC;
             _sendViewController = nil;
             _sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
 
+            _sendViewController.zBarSymbolSet = zBarSymbolSet;
+            _sendViewController.bImportMode = bImportMode;
             _sendViewController.delegate = self;
-            _sendViewController.spendTarget = spendTarget;
-            _sendViewController.bDidFailReadingQR = bDidFail;
-            _sendViewController.bInvalidAddressReadingQR = bInvalidAddress;
+            _sendViewController.loopbackState = loopbackState;
             [MainViewController animateSwapViewControllers:_sendViewController out:fakeViewController];
         });
     });

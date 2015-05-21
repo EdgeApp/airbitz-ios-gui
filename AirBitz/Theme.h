@@ -52,6 +52,8 @@
 @property (nonatomic) NSString *invalidAddressPopupText;
 @property (nonatomic) NSString *enterBitcoinAddressPopupText;
 @property (nonatomic) NSString *enterBitcoinAddressPlaceholder;
+@property (nonatomic) NSString *enterPrivateKeyPopupText;
+@property (nonatomic) NSString *enterPrivateKeyPlaceholder;
 @property (nonatomic) NSString *smsText;
 @property (nonatomic) NSString *emailText;
 

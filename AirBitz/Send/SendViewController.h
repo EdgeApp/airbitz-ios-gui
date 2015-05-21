@@ -11,17 +11,30 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "AirbitzViewController.h"
 #import "SpendTarget.h"
+#import "ZBarSDK.h"
+
+
+typedef enum eLoopbackState
+{
+    LoopbackState_None,
+    LoopbackState_Go,
+    LoopbackState_Scan_Failed,
+    LoopbackState_Invalid_Address,
+    LoopbackState_Invalid_Private_Key,
+    LoopbackState_Cancelled
+} tLoopbackState;
+
+
 
 @protocol SendViewControllerDelegate;
 
 @interface SendViewController : AirbitzViewController
 
-//@property (nonatomic, strong) NSString              *walletUUID;
-//@property (nonatomic, weak) IBOutlet PickerTextView *pickerTextSendTo;
+@property (nonatomic, weak) ZBarSymbolSet           *zBarSymbolSet;
 @property (nonatomic, weak) IBOutlet UITextField    *addressTextField;
-@property (nonatomic, weak) SpendTarget *spendTarget;
-@property (nonatomic) BOOL bDidFailReadingQR;
-@property (nonatomic) BOOL bInvalidAddressReadingQR;
+@property (nonatomic)       tLoopbackState          loopbackState;
+@property (nonatomic)       BOOL                    bImportMode;
+
 @property (assign) id<SendViewControllerDelegate> delegate;
 
 - (void)processURI;
@@ -32,7 +45,7 @@
 @protocol SendViewControllerDelegate <NSObject>
 
 @required
--(void)pleaseRestartSendViewBecauseAppleSucksWithPresentController:(SpendTarget *)spendTarget fail:(BOOL)bDidFail invalidAddress:(BOOL)bInvalidAddress;
+-(void)pleaseRestartSendViewBecauseAppleSucksWithPresentController;
 @optional
 
 
