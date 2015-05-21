@@ -61,8 +61,9 @@ typedef enum eAppMode
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
 	AddressRequestController    *_addressRequestController;
-	SendViewController          *_sendViewController;
 	TransactionsViewController       *_walletsViewController;
+    SendViewController          *_importViewController;
+    SendViewController          *_sendViewController;
 //	WalletsViewController       *_walletsViewController;
 	LoginViewController         *_loginViewController;
 	SettingsViewController      *_settingsViewController;
@@ -210,6 +211,9 @@ MainViewController *staticMVC;
 	_requestViewController.delegate = self;
 	_sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
     _sendViewController.delegate = self;
+
+    _importViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
+    _importViewController.delegate = self;
 
     _walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
 //    _walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
@@ -685,21 +689,10 @@ MainViewController *staticMVC;
 		}
 		case APP_MODE_SEND:
 		{
-			if (_selectedViewController != _sendViewController || _sendViewController.bImportMode == YES)
+			if (_selectedViewController != _sendViewController)
 			{
 				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-                    AirbitzViewController *fakeViewController;
-
-                    if (_selectedViewController == _sendViewController)
-                    {
-                        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-                        fakeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AirbitzViewController"];
-                        [MainViewController animateSwapViewControllers:fakeViewController out:_selectedViewController];
-                        _sendViewController = nil;
-                        _sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
-                    }
-
                     _sendViewController.bImportMode = NO;
                     [MainViewController animateSwapViewControllers:_sendViewController out:_selectedViewController];
 				}
@@ -1671,27 +1664,15 @@ MainViewController *staticMVC;
 
 - (void)slideoutImport
 {
-    AirbitzViewController *fakeViewController;
-
-    //
-    // Very weird. If we transition from the same view controller back to itself, we need to destroy it first
-    // Not enough to just load up a dummy controller in between. Full on =nil.
-    // Otherwise the controller doesn't show up. This is specifically for the transition between Send and Import
-    // which now use the same controller
-    //
-    if (_selectedViewController == _sendViewController)
+    if (_selectedViewController != _importViewController)
     {
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-        fakeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AirbitzViewController"];
-        [MainViewController animateSwapViewControllers:fakeViewController out:_selectedViewController];
-        _sendViewController = nil;
-        _sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
+        if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
+            _importViewController.bImportMode = YES;
+            [MainViewController animateSwapViewControllers:_importViewController out:_selectedViewController];
+            self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+            [slideoutView showSlideout:NO];
+        }
     }
-    _sendViewController.bImportMode = YES;
-    [MainViewController animateSwapViewControllers:_sendViewController out:fakeViewController];
-//    [Util insertSubviewControllerWithConstraints:self.view child:_selectedViewController belowSubView:self.tabBar];
-    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
-    [slideoutView showSlideout:NO];
 }
 
 #pragma mark - Slideout Methods
@@ -1982,10 +1963,14 @@ MainViewController *staticMVC;
 #pragma SendViewController delegate
 -(void)pleaseRestartSendViewBecauseAppleSucksWithPresentController
 {
+    SendViewController *tempSend;
     NSLog(@"pleaseRestartSendViewBecauseAppleSucksWithPresentController called");
-    ZBarSymbolSet *zBarSymbolSet = _sendViewController.zBarSymbolSet;
-    BOOL bImportMode = _sendViewController.bImportMode;
-    tLoopbackState loopbackState = _sendViewController.loopbackState;
+    NSAssert((_selectedViewController == _sendViewController) || (_selectedViewController == _importViewController), @"Must be Import or Send View Controllers");
+    tempSend = _selectedViewController;
+    ZBarSymbolSet *zBarSymbolSet = tempSend.zBarSymbolSet;
+    BOOL bImportMode = tempSend.bImportMode;
+    tLoopbackState loopbackState = tempSend.loopbackState;
+    tempSend = nil;
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [NSThread sleepForTimeInterval:0.5f];
@@ -1995,15 +1980,34 @@ MainViewController *staticMVC;
 
             fakeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AirbitzViewController"];
 
-            [MainViewController animateSwapViewControllers:fakeViewController out:_sendViewController];
-            _sendViewController = nil;
-            _sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
+            if (bImportMode)
+            {
+                NSAssert(_selectedViewController == _importViewController, @"Must be Import");
+                [MainViewController animateSwapViewControllers:fakeViewController out:_importViewController];
+                _importViewController = nil;
+                _importViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
 
-            _sendViewController.zBarSymbolSet = zBarSymbolSet;
-            _sendViewController.bImportMode = bImportMode;
-            _sendViewController.delegate = self;
-            _sendViewController.loopbackState = loopbackState;
-            [MainViewController animateSwapViewControllers:_sendViewController out:fakeViewController];
+                _importViewController.zBarSymbolSet = zBarSymbolSet;
+                _importViewController.bImportMode = bImportMode;
+                _importViewController.delegate = self;
+                _importViewController.loopbackState = loopbackState;
+                [MainViewController animateSwapViewControllers:_importViewController out:fakeViewController];
+
+            }
+            else
+            {
+                NSAssert(_selectedViewController == _sendViewController, @"Must be Send");
+                [MainViewController animateSwapViewControllers:fakeViewController out:_sendViewController];
+                _sendViewController = nil;
+                _sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
+
+                _sendViewController.zBarSymbolSet = zBarSymbolSet;
+                _sendViewController.bImportMode = bImportMode;
+                _sendViewController.delegate = self;
+                _sendViewController.loopbackState = loopbackState;
+                [MainViewController animateSwapViewControllers:_sendViewController out:fakeViewController];
+
+            }
         });
     });
 }
