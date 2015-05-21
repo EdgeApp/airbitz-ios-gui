@@ -70,11 +70,12 @@
 @property (nonatomic) CGFloat heightPopupPicker;
 @property (nonatomic) CGFloat heightMinimumForQRScanFrame;
 
-
-
-
-
-
+@property (nonatomic) CGFloat animationDelayTimeDefault;
+@property (nonatomic) CGFloat animationDurationTimeDefault;
+@property (nonatomic) UIViewAnimationOptions animationCurveDefault;
+@property (nonatomic) CGFloat alertHoldTimeDefault;
+@property (nonatomic) CGFloat alertFadeoutTimeDefault;
+@property (nonatomic) CGFloat alertHoldTimePaymentReceived;
 
 //@property (nonatomic) int minutesAutoLogout;
 //@property (nonatomic) int defaultCurrencyNum;

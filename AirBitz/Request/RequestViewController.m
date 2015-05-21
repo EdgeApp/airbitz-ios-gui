@@ -32,6 +32,7 @@
 #import "TransferService.h"
 #import "AudioController.h"
 #import "RecipientViewController.h"
+#import "DropDownAlertView.h"
 
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
@@ -1466,14 +1467,14 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         image = [UIImage imageNamed:@"BLE_photo.png"];
     }
 
-    _fadingAlert = [FadingAlertView2 CreateDropView:self.view withDelegate:self];
-    [_fadingAlert messageTextSet:@""];
-    _fadingAlert.fadeDuration = 2;
-    _fadingAlert.fadeDelay = 3;
-    [_fadingAlert photoAlertSet:image line1:line1 line2:line2 line3:line3];
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showSpinner:NO];
-    [_fadingAlert showFading];
+    [DropDownAlertView create:self.view
+                      message:nil
+                        image:image
+                        line1:line1
+                        line2:line2
+                        line3:line3
+                     holdTime:HOLD_TIME_DEFAULT
+                 withDelegate:nil];
 
 //    [UIView animateWithDuration:3.0
 //                          delay:2.0
@@ -1507,9 +1508,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             delay = 4.0;
             duration = 2.0;
-            line1 = NSLocalizedString(@"** Warning **", @"** Warning ** text on partial payment");
-            line2 = NSLocalizedString(@"Partial Payment", @"Text on partial payment");
-            line3 = @"";
+            line1 = @"";
+            line2 = NSLocalizedString(@"** Warning **", @"** Warning ** text on partial payment");
+            line3 = NSLocalizedString(@"Partial Payment", @"Text on partial payment");
             image = [UIImage imageNamed:@"Warning_icon.png"];
             [[AudioController controller] playPartialReceived];
             break;
@@ -1546,15 +1547,14 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
     }
 
-    _fadingAlert = [FadingAlertView2 CreateDropView:self.view withDelegate:self];
-    [_fadingAlert messageTextSet:@""];
-    _fadingAlert.fadeDuration = duration;
-    _fadingAlert.fadeDelay = delay;
-    [_fadingAlert photoAlertSet:image line1:line1 line2:line2 line3:line3];
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showSpinner:NO];
-    [_fadingAlert showFading];
-
+    [DropDownAlertView create:self.view
+                      message:nil
+                        image:image
+                        line1:line1
+                        line2:line2
+                        line3:line3
+                     holdTime:[Theme Singleton].alertHoldTimePaymentReceived
+                 withDelegate:nil];
 
 //    self.connectedView.alpha = 1.0;
 //    self.qrCodeImageView.alpha = 0.0;

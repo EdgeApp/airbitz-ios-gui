@@ -90,6 +90,15 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 
     self.sendRequestButtonDisabled = 0.4f;
 
+    self.animationDurationTimeDefault           = 0.35;     // How long the animation transition should take
+    self.animationDelayTimeDefault              = 0.0;      // Delay until animation starts. Should always be zero
+    self.animationCurveDefault                  = UIViewAnimationOptionCurveEaseOut;
+
+    self.alertHoldTimeDefault                   = 5.0;      // How long to hold the alert before going away
+    self.alertFadeoutTimeDefault                = 2.0;      // How much time it takes to animate the fade away
+    self.alertHoldTimePaymentReceived           = 10;       // Hold time for payments
+
+
     self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];
     self.backgroundLogin = [UIImage imageNamed:@"postcard-mountain.png"];
 

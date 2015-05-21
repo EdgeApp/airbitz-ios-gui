@@ -40,6 +40,7 @@
 #import "AirbitzViewController.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import "DropDownAlertView.h"
 
 typedef enum eAppMode
 {
@@ -128,6 +129,7 @@ MainViewController *staticMVC;
 
     [User initAll];
     [Theme initAll];
+    [DropDownAlertView initAll];
 
     staticMVC = self;
 
@@ -1760,6 +1762,18 @@ MainViewController *staticMVC;
     CGRect frame = staticMVC.view.frame;
     return frame.size.height > frame.size.width ? frame.size.height : frame.size.width;
 }
+
++(CGFloat)getSmallestDimension
+{
+    CGRect frame = staticMVC.view.frame;
+    return frame.size.height < frame.size.width ? frame.size.height : frame.size.width;
+}
+
++(CGFloat)getSafeOffscreenOffset:(CGFloat) widthOrHeight
+{
+    return widthOrHeight + [MainViewController getLargestDimension] - [MainViewController getSmallestDimension];
+}
+
 
 //+ (void)addChildView: (UIView *)view
 //{
