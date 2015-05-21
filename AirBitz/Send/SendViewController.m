@@ -217,6 +217,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     // Disable [Transfer] button if we're in Import Private Key mode
     if (_bImportMode)
         [segmentedControl setEnabled:NO forSegmentAtIndex:0];
+    else
+        [segmentedControl setEnabled:YES forSegmentAtIndex:0];
+
     _dataModel = kWIF;
 
 	//reset our frame's height in case it got changed by the image picker view controller
