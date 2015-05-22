@@ -33,12 +33,12 @@
 
 
 // Old methods. Need to deprecate
-+ (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs;
-+ (void)loadWallets:(NSMutableArray *)arrayWallets;
-+ (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx;
-+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx;
-+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets;
-+ (void)reloadWallet: (Wallet *) wallet;
+//+ (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs;
+//+ (void)loadWallets:(NSMutableArray *)arrayWallets;
+//+ (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx;
+//+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx;
+//+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets;
+//+ (void)reloadWallet: (Wallet *) wallet;
 // XXX DELETE ABOVE WHEN FULLY CLEANED UP TO USE NEW METHODS -paulvp
 
 

@@ -401,11 +401,11 @@ static BOOL bOtpError = NO;
 
 }
 
-+ (void)loadWallets:(NSMutableArray *)arrayWallets
-{
-    [CoreBridge loadWallets:arrayWallets withTxs:YES];
-}
-
+//+ (void)loadWallets:(NSMutableArray *)arrayWallets
+//{
+//    [CoreBridge loadWallets:arrayWallets withTxs:YES];
+//}
+//
 + (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx
 {
     [CoreBridge loadWallets:arrayWallets withTxs:bWithTx];
@@ -429,37 +429,37 @@ static BOOL bOtpError = NO;
         }
     }
 }
-
-+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets
-{
-    [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets withTxs:YES];
-}
-
-+ (void)reloadWallet:(Wallet *) wallet;
-{
-    tABC_Error Error;
-    tABC_WalletInfo *pWalletInfo = NULL;
-    tABC_CC result = ABC_GetWalletInfo([[User Singleton].name UTF8String],
-                                       [[User Singleton].password UTF8String],
-                                       [wallet.strUUID UTF8String],
-                                       &pWalletInfo, &Error);
-    if (ABC_CC_Ok == result && pWalletInfo != NULL)
-    {
-        wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
-        wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
-        wallet.archived = pWalletInfo->archived;
-        wallet.balance = pWalletInfo->balanceSatoshi;
-        wallet.currencyNum = pWalletInfo->currencyNum;
-        [self loadTransactions:wallet];
-    }
-    else
-    {
-        NSLog(@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
-    }
-    ABC_FreeWalletInfo(pWalletInfo);
-}
-
+//
+//+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets
+//{
+//    [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets withTxs:YES];
+//}
+//
+//+ (void)reloadWallet:(Wallet *) wallet;
+//{
+//    tABC_Error Error;
+//    tABC_WalletInfo *pWalletInfo = NULL;
+//    tABC_CC result = ABC_GetWalletInfo([[User Singleton].name UTF8String],
+//                                       [[User Singleton].password UTF8String],
+//                                       [wallet.strUUID UTF8String],
+//                                       &pWalletInfo, &Error);
+//    if (ABC_CC_Ok == result && pWalletInfo != NULL)
+//    {
+//        wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
+//        wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
+//        wallet.archived = pWalletInfo->archived;
+//        wallet.balance = pWalletInfo->balanceSatoshi;
+//        wallet.currencyNum = pWalletInfo->currencyNum;
+//        [self loadTransactions:wallet];
+//    }
+//    else
+//    {
+//        NSLog(@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
+//        [Util printABC_Error:&Error];
+//    }
+//    ABC_FreeWalletInfo(pWalletInfo);
+//}
+//
 //
 // This triggers a switch of libbitcoin servers and possibly an update if new information comes in
 //
@@ -791,8 +791,8 @@ static BOOL bOtpError = NO;
                                            wallet.archived, &Error);
     if (ABC_CC_Ok == result)
     {
-        return true;
         [CoreBridge refreshWallets];
+        return true;
     }
     else
     {
@@ -1536,6 +1536,7 @@ static BOOL bOtpError = NO;
 
 + (void)requestExchangeRateUpdate:(NSTimer *)object
 {
+
     [exchangeQueue addOperationWithBlock:^{
         [[NSThread currentThread] setName:@"Exchange Rate Update"];
         [CoreBridge requestExchangeUpdateBlocking];

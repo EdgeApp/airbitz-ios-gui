@@ -14,7 +14,6 @@
 @interface ExportWalletViewController : UIViewController
 
 @property (assign)            id<ExportWalletViewControllerDelegate> delegate;
-@property (nonatomic, strong) Wallet                                 *wallet;
 
 @end
 

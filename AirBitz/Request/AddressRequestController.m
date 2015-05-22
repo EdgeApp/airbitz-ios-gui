@@ -14,16 +14,16 @@
 
 @interface AddressRequestController () <UITextFieldDelegate,  ButtonSelectorDelegate>
 {
-	int _selectedWalletIndex;
+//	int _selectedWalletIndex;
     NSString *strName;
     NSString *strCategory;
     NSString *strNotes;
-    Wallet   *wallet;
+//    Wallet   *wallet;
 }
 
 @property (nonatomic, weak) IBOutlet ButtonSelectorView *walletSelector;
 @property (nonatomic, weak) IBOutlet UILabel *message;
-@property (nonatomic, strong) NSArray  *arrayWallets;
+//@property (nonatomic, strong) NSArray  *arrayWallets;
 
 @end
 
@@ -44,7 +44,7 @@
 	_walletSelector.delegate = self;
     _walletSelector.textLabel.text = NSLocalizedString(@"Wallet:", nil);
     [_walletSelector setButtonWidth:200];
-    [self loadWalletInfo];
+//    [self loadWalletInfo];
     [self validateUri];
 
     NSMutableString *msg = [[NSMutableString alloc] init];
@@ -55,6 +55,20 @@
     }
     [msg appendString:NSLocalizedString(@" Please choose a wallet to receive funds.", nil)];
     _message.text = msg;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+
+    [self updateViews:nil];
+}
+
+- (void)updateViews:(NSNotification *)notification
+{
+    _walletSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
+    [_walletSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
+    _walletSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
 }
 
 - (void)validateUri
@@ -74,37 +88,36 @@
     }
 }
 
-- (void)loadWalletInfo
-{
-    // load all the non-archive wallets
-    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
-
-    // create the array of wallet names
-    _selectedWalletIndex = 0;
-
-    NSMutableArray *arrayWalletNames =
-        [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
-    for (int i = 0; i < [arrayWallets count]; i++) {
-        Wallet *w = [arrayWallets objectAtIndex:i];
-        [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)",
-            w.strName, [CoreBridge formatSatoshi:w.balance]]];
-    }
-    if (_selectedWalletIndex < [arrayWallets count]) {
-        wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
-        _walletSelector.arrayItemsToSelect = [arrayWalletNames copy];
-        [_walletSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-        _walletSelector.selectedItemIndex = (int) _selectedWalletIndex;
-    }
-    self.arrayWallets = arrayWallets;
-}
-
+//- (void)loadWalletInfo
+//{
+//    // load all the non-archive wallets
+//    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+//    [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
+//
+//    // create the array of wallet names
+//    _selectedWalletIndex = 0;
+//
+//    NSMutableArray *arrayWalletNames =
+//        [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
+//    for (int i = 0; i < [arrayWallets count]; i++) {
+//        Wallet *w = [arrayWallets objectAtIndex:i];
+//        [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)",
+//            w.strName, [CoreBridge formatSatoshi:w.balance]]];
+//    }
+//    if (_selectedWalletIndex < [arrayWallets count]) {
+//        wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
+//        _walletSelector.arrayItemsToSelect = [arrayWalletNames copy];
+//        [_walletSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
+//        _walletSelector.selectedItemIndex = (int) _selectedWalletIndex;
+//    }
+//    self.arrayWallets = arrayWallets;
+//}
+//
 #pragma mark - Action Methods
 
 - (IBAction)okay
 {
     [self.view endEditing:YES];
-    wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
 
     NSMutableString *strRequestID = [[NSMutableString alloc] init];
     NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
@@ -169,7 +182,7 @@
     char *szRequestID = [self createReceiveRequestFor:amountSatoshi withRequestState:state];
     if (szRequestID) {
         ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String], [wallet.strUUID UTF8String],
+            [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
             szRequestID, &pszURI, &pData, &width, &error);
         if (error.code == ABC_CC_Ok) {
             if (pszURI && strRequestURI) {
@@ -186,7 +199,7 @@
         }
         char *szRequestAddress = NULL;
         tABC_CC result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String], [wallet.strUUID UTF8String],
+            [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
             szRequestID, &szRequestAddress, &error);
         [Util printABC_Error:&error];
         if (result == ABC_CC_Ok) {
@@ -225,7 +238,7 @@
 	char *pRequestID;
     // create the request
 	ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], [wallet.strUUID UTF8String],
+        [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
         &details, &pRequestID, &error);
 	if (error.code == ABC_CC_Ok) {
 		return pRequestID;
@@ -239,7 +252,7 @@
     tABC_Error error;
     // Finalize this request so it isn't used elsewhere
     ABC_FinalizeReceiveRequest([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], [wallet.strUUID UTF8String],
+        [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
         [requestId UTF8String], &error);
     [Util printABC_Error:&error];
     return error.code == ABC_CC_Ok ? YES : NO;
@@ -249,11 +262,9 @@
 
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
-    _selectedWalletIndex = itemIndex;
-    wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-
-    [_walletSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-    _walletSelector.selectedItemIndex = _selectedWalletIndex;
+    NSIndexPath *indexPath = [[NSIndexPath alloc]init];
+    indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
+    [CoreBridge makeCurrentWalletWithIndex:indexPath];
 }
 
 @end

@@ -31,7 +31,6 @@
 		4C3C30A1191B07C0006923DE /* CategoriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C30A0191B07C0006923DE /* CategoriesCell.m */; };
 		4C3C30A5191C1CAF006923DE /* PickerTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C30A4191C1CAF006923DE /* PickerTextView.m */; };
 		4C5D8C55192AA1A80015BB3C /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C54192AA1A80015BB3C /* DDData.m */; };
-		4C5D8C58192AB6C60015BB3C /* ImportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C57192AB6C60015BB3C /* ImportWalletViewController.m */; };
 		4C5D8C5B192AB8E70015BB3C /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C5A192AB8E70015BB3C /* Util.m */; };
 		4C5D8C6B192E6BC30015BB3C /* infoSettings.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6A192E6BC30015BB3C /* infoSettings.html */; };
 		4C5D8C71192E7D4A0015BB3C /* infoRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6C192E7D4A0015BB3C /* infoRequest.html */; };
@@ -124,7 +123,6 @@
 		7D98ACAD19A7C550003D2BF6 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9A418EA0C4E008F302C /* SMCalloutView.m */; };
 		7D98ACAE19A7C550003D2BF6 /* QuestionAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EB0E18DE018E008ACF88 /* QuestionAnswerView.m */; };
 		7D98ACAF19A7C550003D2BF6 /* DateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D0193564D20091C286 /* DateTime.m */; };
-		7D98ACB019A7C550003D2BF6 /* ImportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C57192AB6C60015BB3C /* ImportWalletViewController.m */; };
 		7D98ACB119A7C550003D2BF6 /* PlainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A030A18EA4C4400845090 /* PlainCell.m */; };
 		7D98ACB219A7C550003D2BF6 /* CancelDoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031918EB485F00845090 /* CancelDoneCell.m */; };
 		7D98ACB319A7C550003D2BF6 /* TransactionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9B818EA0DD8008F302C /* TransactionCell.m */; };
@@ -140,7 +138,6 @@
 		7D98ACBD19A7C550003D2BF6 /* BLEScanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5628BE5199BD44D0077DA1C /* BLEScanCell.m */; };
 		7D98ACBE19A7C550003D2BF6 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9AF18EA0D78008F302C /* SendViewController.m */; };
 		7D98ACBF19A7C550003D2BF6 /* AnnotationContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A98618EA0B80008F302C /* AnnotationContentView.m */; };
-		7D98ACC019A7C550003D2BF6 /* WalletsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9C018EA0DD8008F302C /* WalletsViewController.m */; };
 		7D98ACC119A7C550003D2BF6 /* ConfirmationSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B56553D918ECAEF7005B35E1 /* ConfirmationSliderView.m */; };
 		7D98ACC219A7C550003D2BF6 /* DarkenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B561E1AA18D2573F002DCDC2 /* DarkenView.m */; };
 		7D98ACC319A7C550003D2BF6 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD393318F06FD800BE2670 /* StylizedTextField.m */; };
@@ -407,7 +404,6 @@
 		B5C0A9C218EA0DD8008F302C /* TransactionDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9BA18EA0DD8008F302C /* TransactionDetailsViewController.m */; };
 		B5C0A9C318EA0DD8008F302C /* TransactionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9BC18EA0DD8008F302C /* TransactionsViewController.m */; };
 		B5C0A9C418EA0DD8008F302C /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9BE18EA0DD8008F302C /* WalletCell.m */; };
-		B5C0A9C518EA0DD8008F302C /* WalletsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9C018EA0DD8008F302C /* WalletsViewController.m */; };
 		B5C0A9C818EA0E55008F302C /* FlashSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9C718EA0E55008F302C /* FlashSelectView.m */; };
 		B5C0A9CB18EA0FF0008F302C /* ShowWalletQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9CA18EA0FF0008F302C /* ShowWalletQRViewController.m */; };
 		B5E7F57A18E4AAD5009B5844 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E7F57918E4AAD5009B5844 /* User.m */; };
@@ -1458,7 +1454,6 @@
 		DAE863F71A88A58A00A17BD3 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9A418EA0C4E008F302C /* SMCalloutView.m */; };
 		DAE863F81A88A58A00A17BD3 /* QuestionAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EB0E18DE018E008ACF88 /* QuestionAnswerView.m */; };
 		DAE863F91A88A58A00A17BD3 /* DateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247D0193564D20091C286 /* DateTime.m */; };
-		DAE863FA1A88A58A00A17BD3 /* ImportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D8C57192AB6C60015BB3C /* ImportWalletViewController.m */; };
 		DAE863FB1A88A58A00A17BD3 /* PlainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A030A18EA4C4400845090 /* PlainCell.m */; };
 		DAE863FC1A88A58A00A17BD3 /* CancelDoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031918EB485F00845090 /* CancelDoneCell.m */; };
 		DAE863FD1A88A58A00A17BD3 /* TransactionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9B818EA0DD8008F302C /* TransactionCell.m */; };
@@ -1478,7 +1473,6 @@
 		DAE8640B1A88A58A00A17BD3 /* BLEScanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5628BE5199BD44D0077DA1C /* BLEScanCell.m */; };
 		DAE8640C1A88A58A00A17BD3 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9AF18EA0D78008F302C /* SendViewController.m */; };
 		DAE8640D1A88A58A00A17BD3 /* AnnotationContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A98618EA0B80008F302C /* AnnotationContentView.m */; };
-		DAE8640E1A88A58A00A17BD3 /* WalletsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9C018EA0DD8008F302C /* WalletsViewController.m */; };
 		DAE8640F1A88A58A00A17BD3 /* ConfirmationSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B56553D918ECAEF7005B35E1 /* ConfirmationSliderView.m */; };
 		DAE864101A88A58A00A17BD3 /* DarkenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B561E1AA18D2573F002DCDC2 /* DarkenView.m */; };
 		DAE864111A88A58A00A17BD3 /* APPINView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7783EC1A07875E0043806B /* APPINView.m */; };
@@ -1755,8 +1749,6 @@
 		4C3C30A4191C1CAF006923DE /* PickerTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PickerTextView.m; path = PickerTextView/PickerTextView.m; sourceTree = "<group>"; };
 		4C5D8C53192AA1A80015BB3C /* DDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDData.h; path = DDData/DDData.h; sourceTree = "<group>"; };
 		4C5D8C54192AA1A80015BB3C /* DDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDData.m; path = DDData/DDData.m; sourceTree = "<group>"; };
-		4C5D8C56192AB6C60015BB3C /* ImportWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportWalletViewController.h; sourceTree = "<group>"; };
-		4C5D8C57192AB6C60015BB3C /* ImportWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportWalletViewController.m; sourceTree = "<group>"; };
 		4C5D8C59192AB8E70015BB3C /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		4C5D8C5A192AB8E70015BB3C /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		4C5D8C6A192E6BC30015BB3C /* infoSettings.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoSettings.html; sourceTree = "<group>"; };
@@ -2057,7 +2049,6 @@
 		B5C0A9BD18EA0DD8008F302C /* WalletCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletCell.h; sourceTree = "<group>"; };
 		B5C0A9BE18EA0DD8008F302C /* WalletCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletCell.m; sourceTree = "<group>"; };
 		B5C0A9BF18EA0DD8008F302C /* WalletsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletsViewController.h; sourceTree = "<group>"; };
-		B5C0A9C018EA0DD8008F302C /* WalletsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletsViewController.m; sourceTree = "<group>"; };
 		B5C0A9C618EA0E55008F302C /* FlashSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashSelectView.h; sourceTree = "<group>"; };
 		B5C0A9C718EA0E55008F302C /* FlashSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashSelectView.m; sourceTree = "<group>"; };
 		B5C0A9C918EA0FF0008F302C /* ShowWalletQRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowWalletQRViewController.h; sourceTree = "<group>"; };
@@ -3561,8 +3552,6 @@
 				B5C0A9A918EA0D09008F302C /* RequestViewController.m */,
 				B5C0A9C918EA0FF0008F302C /* ShowWalletQRViewController.h */,
 				B5C0A9CA18EA0FF0008F302C /* ShowWalletQRViewController.m */,
-				4C5D8C56192AB6C60015BB3C /* ImportWalletViewController.h */,
-				4C5D8C57192AB6C60015BB3C /* ImportWalletViewController.m */,
 				4C98CAEA199D53A2000009B5 /* RecipientViewController.h */,
 				4C98CAEB199D53A2000009B5 /* RecipientViewController.m */,
 			);
@@ -3649,7 +3638,6 @@
 				B5635A24193D0F8700345AEE /* WalletHeaderView.m */,
 				B5635A26193D0FB200345AEE /* WalletHeaderView~iphone.xib */,
 				B5C0A9BF18EA0DD8008F302C /* WalletsViewController.h */,
-				B5C0A9C018EA0DD8008F302C /* WalletsViewController.m */,
 				4C9E91981922AB7400F01423 /* OfflineWalletViewController.h */,
 				4C9E91991922AB7400F01423 /* OfflineWalletViewController.m */,
 				4C5D8C8C1933C7DC0015BB3C /* ExportWalletViewController.h */,
@@ -5250,7 +5238,6 @@
 				DAE276361A9C018700E24523 /* SignUpCameraController.m in Sources */,
 				7D98ACAE19A7C550003D2BF6 /* QuestionAnswerView.m in Sources */,
 				7D98ACAF19A7C550003D2BF6 /* DateTime.m in Sources */,
-				7D98ACB019A7C550003D2BF6 /* ImportWalletViewController.m in Sources */,
 				7D98ACB119A7C550003D2BF6 /* PlainCell.m in Sources */,
 				7D98ACB219A7C550003D2BF6 /* CancelDoneCell.m in Sources */,
 				7D98ACB319A7C550003D2BF6 /* TransactionCell.m in Sources */,
@@ -5270,7 +5257,6 @@
 				7D98ACBD19A7C550003D2BF6 /* BLEScanCell.m in Sources */,
 				7D98ACBE19A7C550003D2BF6 /* SendViewController.m in Sources */,
 				7D98ACBF19A7C550003D2BF6 /* AnnotationContentView.m in Sources */,
-				7D98ACC019A7C550003D2BF6 /* WalletsViewController.m in Sources */,
 				7D98ACC119A7C550003D2BF6 /* ConfirmationSliderView.m in Sources */,
 				7D98ACC219A7C550003D2BF6 /* DarkenView.m in Sources */,
 				7D89E8DB1A2465FB0067F660 /* NSString+StripHTML.m in Sources */,
@@ -5397,7 +5383,6 @@
 				B5F2EB0F18DE018E008ACF88 /* QuestionAnswerView.m in Sources */,
 				DAE276351A9C018700E24523 /* SignUpCameraController.m in Sources */,
 				4C7247D1193564D20091C286 /* DateTime.m in Sources */,
-				4C5D8C58192AB6C60015BB3C /* ImportWalletViewController.m in Sources */,
 				B55A030B18EA4C4400845090 /* PlainCell.m in Sources */,
 				B55A031A18EB485F00845090 /* CancelDoneCell.m in Sources */,
 				B5C0A9C118EA0DD8008F302C /* TransactionCell.m in Sources */,
@@ -5418,7 +5403,6 @@
 				B5628BE6199BD44D0077DA1C /* BLEScanCell.m in Sources */,
 				B5C0A9B118EA0D78008F302C /* SendViewController.m in Sources */,
 				B5C0A98D18EA0B80008F302C /* AnnotationContentView.m in Sources */,
-				B5C0A9C518EA0DD8008F302C /* WalletsViewController.m in Sources */,
 				B56553DA18ECAEF7005B35E1 /* ConfirmationSliderView.m in Sources */,
 				B561E1AB18D2573F002DCDC2 /* DarkenView.m in Sources */,
 				7D7783F21A07875E0043806B /* APPINView.m in Sources */,
@@ -5545,7 +5529,6 @@
 				DAE863F81A88A58A00A17BD3 /* QuestionAnswerView.m in Sources */,
 				DAE276371A9C018700E24523 /* SignUpCameraController.m in Sources */,
 				DAE863F91A88A58A00A17BD3 /* DateTime.m in Sources */,
-				DAE863FA1A88A58A00A17BD3 /* ImportWalletViewController.m in Sources */,
 				DAE863FB1A88A58A00A17BD3 /* PlainCell.m in Sources */,
 				DAE863FC1A88A58A00A17BD3 /* CancelDoneCell.m in Sources */,
 				DAE863FD1A88A58A00A17BD3 /* TransactionCell.m in Sources */,
@@ -5566,7 +5549,6 @@
 				DAE8640B1A88A58A00A17BD3 /* BLEScanCell.m in Sources */,
 				DAE8640C1A88A58A00A17BD3 /* SendViewController.m in Sources */,
 				DAE8640D1A88A58A00A17BD3 /* AnnotationContentView.m in Sources */,
-				DAE8640E1A88A58A00A17BD3 /* WalletsViewController.m in Sources */,
 				DAE8640F1A88A58A00A17BD3 /* ConfirmationSliderView.m in Sources */,
 				DAE864101A88A58A00A17BD3 /* DarkenView.m in Sources */,
 				DAE864111A88A58A00A17BD3 /* APPINView.m in Sources */,

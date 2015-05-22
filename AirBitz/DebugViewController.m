@@ -103,9 +103,10 @@
 {
     NSLog(@"Clearing Watcher\n");
     NSString *buttonText = self.clearWatcherButton.titleLabel.text;
-    NSMutableArray *wallets = [[NSMutableArray alloc] init];
-    NSMutableArray *archived = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets:wallets archived:archived];
+//    NSMutableArray *wallets = [[NSMutableArray alloc] init];
+//    NSMutableArray *archived = [[NSMutableArray alloc] init];
+//    [CoreBridge loadWallets:wallets archived:archived];
+    [CoreBridge refreshWallets];
 
     self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
 

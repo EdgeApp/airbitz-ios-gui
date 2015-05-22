@@ -425,7 +425,6 @@
         self.exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
 
         self.exportWalletViewController.delegate = self;
-        self.exportWalletViewController.wallet = wallet;
 
         CGRect frame = self.view.bounds;
         frame.origin.x = frame.size.width;
@@ -470,6 +469,7 @@
     _balanceView.botAmount.text = [CoreBridge formatCurrency:currency
                                              withCurrencyNum:[CoreBridge Singleton].currentWallet.currencyNum];
     _balanceView.topDenomination.text = [User Singleton].denominationLabel;
+    NSAssert([CoreBridge Singleton].currentWallet.currencyAbbrev.length > 0, @"currencyAbbrev not set");
     _balanceView.botDenomination.text = [CoreBridge Singleton].currentWallet.currencyAbbrev;
 
     [_balanceView refresh];

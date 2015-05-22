@@ -353,17 +353,15 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 - (BOOL)transactionCountTriggered
 {
-    if ([User isLoggedIn]) {
-        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-        NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
-        [CoreBridge loadWallets:arrayWallets
-                       archived:arrayArchivedWallets
-                        withTxs:YES];
+    if ([User isLoggedIn] &&
+            [CoreBridge Singleton].arrayWallets != nil &&
+            [CoreBridge Singleton].arrayArchivedWallets != nil)
+    {
         int transactionCount = 0;
-        for (Wallet *curWallet in arrayWallets) {
+        for (Wallet *curWallet in [CoreBridge Singleton].arrayWallets) {
             transactionCount += [curWallet.arrayTransactions count];
         }
-        for (Wallet *curWallet in arrayArchivedWallets) {
+        for (Wallet *curWallet in [CoreBridge Singleton].arrayArchivedWallets) {
             transactionCount += [curWallet.arrayTransactions count];
         }
         return transactionCount >= REVIEW_TX_COUNT;
@@ -375,12 +373,15 @@ static User *singleton = nil;  // this will be the one and only object this stat
 - (NSDate *)earliestDate
 {
     NSDate *date = [NSDate date];
-    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets:arrayWallets withTxs:YES];
-    for (Wallet *w in arrayWallets) {
-        for (Transaction *t in w.arrayTransactions) {
-            if (t.date && [t.date compare:date] == NSOrderedAscending) {
-                date = t.date;
+
+    if ([CoreBridge Singleton].arrayWallets != nil &&
+            [CoreBridge Singleton].arrayArchivedWallets != nil)
+    {
+        for (Wallet *w in [CoreBridge Singleton].arrayWallets) {
+            for (Transaction *t in w.arrayTransactions) {
+                if (t.date && [t.date compare:date] == NSOrderedAscending) {
+                    date = t.date;
+                }
             }
         }
     }

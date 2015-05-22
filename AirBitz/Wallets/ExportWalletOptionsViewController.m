@@ -51,7 +51,7 @@ typedef enum eExportOption
                                                  ExportWalletPDFViewControllerDelegate, GDriveDelegate, FadingAlertViewDelegate,
                                                  UIGestureRecognizerDelegate, ButtonSelectorDelegate, UITextFieldDelegate>
 {
-    NSInteger _selectedWallet;
+//    NSInteger _selectedWallet;
 	GDrive *drive;
     MFMailComposeViewController *_mailComposer;
     FadingAlertView *_fadingAlert;
@@ -68,8 +68,8 @@ typedef enum eExportOption
 
 @property (nonatomic, strong) ExportWalletPDFViewController *exportWalletPDFViewController;
 @property (nonatomic, strong) NSArray                       *arrayChoices;
-@property (nonatomic, strong) NSArray                       *arrayWalletUUIDs;
-@property (nonatomic, strong) NSArray                       *arrayWallets;
+//@property (nonatomic, strong) NSArray                       *arrayWalletUUIDs;
+//@property (nonatomic, strong) NSArray                       *arrayWallets;
 
 @end
 
@@ -160,41 +160,24 @@ typedef enum eExportOption
     self.buttonSelector.button.titleLabel.font = [UIFont systemFontOfSize:12];
     self.buttonSelector.button.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:15];
     
-	tABC_WalletInfo **aWalletInfo = NULL;
-    unsigned int nCount;
-	tABC_Error Error;
-    ABC_GetWallets([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], &aWalletInfo, &nCount, &Error);
-    [Util printABC_Error:&Error];
+	self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
+//    self.arrayWalletUUIDs = arrayWalletUUIDs;
     
-    // assign list of wallets to buttonSelector
-	NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] init];
-    NSMutableArray *arrayWalletUUIDs = [[NSMutableArray alloc] init];
+//    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
     
-    for (int i = 0; i < nCount; i++)
-    {
-        tABC_WalletInfo *pInfo = aWalletInfo[i];
-		[arrayWalletNames addObject:[NSString stringWithUTF8String:pInfo->szName]];
-        [arrayWalletUUIDs addObject:[NSString stringWithUTF8String:pInfo->szUUID]];
-    }
+//    _selectedWallet = [arrayWalletUUIDs indexOfObject:self.wallet.strUUID];
+//    if (_selectedWallet != NSNotFound)
+//	{
+		[self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
+		self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+//	}
     
-	self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-    self.arrayWalletUUIDs = arrayWalletUUIDs;
-    
-    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
-    
-    _selectedWallet = [arrayWalletUUIDs indexOfObject:self.wallet.strUUID];
-    if (_selectedWallet != NSNotFound)
-	{
-		[self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWallet] forState:UIControlStateNormal];
-		self.buttonSelector.selectedItemIndex = (int) _selectedWallet;
-	}
-    
-    // get an array of all the wallets
-    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets];
-    [arrayWallets addObjectsFromArray:arrayArchivedWallets];
-    self.arrayWallets = arrayWallets;
+//    // get an array of all the wallets
+//    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+//    [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets];
+//    [arrayWallets addObjectsFromArray:arrayArchivedWallets];
+//    self.arrayWallets = arrayWallets;
 }
 
 #pragma mark - Keyboard Notifications
@@ -333,7 +316,7 @@ typedef enum eExportOption
 
             NSString *strPrivateSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
             NSMutableString *strBody = [[NSMutableString alloc] init];
-            [strBody appendFormat:@"Wallet: %@\n\n", self.wallet.strName];
+            [strBody appendFormat:@"Wallet: %@\n\n", [CoreBridge Singleton].currentWallet.strName];
             [strBody appendString:@"Private Seed:\n"];
             [strBody appendString:strPrivateSeed];
             [strBody appendString:@"\n\n"];
@@ -391,7 +374,7 @@ typedef enum eExportOption
         [strBody appendString:@"<html><body>\n"];
 
 //        [strBody appendString:NSLocalizedString(@"Attached are the transactions for the AirBitz Bitcoin Wallet: ", nil)];
-        [strBody appendString:self.wallet.strName];
+        [strBody appendString:[CoreBridge Singleton].currentWallet.strName];
         [strBody appendString:@"\n"];
         [strBody appendString:@"<br><br>\n"];
 
@@ -406,7 +389,7 @@ typedef enum eExportOption
 
         // set up the attachment
         NSData *dataExport = [self getExportDataInForm:self.type];
-        NSString *strFilename = [NSString stringWithFormat:@"%@.%@", self.wallet.strName, [self suffixFor:self.type]];
+        NSString *strFilename = [NSString stringWithFormat:@"%@.%@", [CoreBridge Singleton].currentWallet.strName, [self suffixFor:self.type]];
         NSString *strMimeType = [self mimeTypeFor:self.type];
         [_mailComposer addAttachmentData:dataExport mimeType:strMimeType fileName:strFilename];
 
@@ -505,7 +488,7 @@ typedef enum eExportOption
             tABC_CC cc = ABC_CC_Ok;
             cc = ABC_CsvExport([[User Singleton].name UTF8String],
                                [[User Singleton].password UTF8String],
-                               [self.wallet.strUUID UTF8String], 
+                               [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
                                startTime, endTime, &szCsvData, &Error);
             if (ABC_CC_Ok != cc)
             {
@@ -555,7 +538,7 @@ typedef enum eExportOption
             char *szSeed = NULL;
             tABC_CC result = ABC_ExportWalletSeed([[User Singleton].name UTF8String],
                                                   [[User Singleton].password UTF8String],
-                                                  [self.wallet.strUUID UTF8String],
+                                                  [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
                                                   &szSeed, &Error);
             if (ABC_CC_Ok == result)
             {
@@ -692,7 +675,7 @@ typedef enum eExportOption
 	if(authenticated)
 	{
 		NSData *dataExport = [self getExportDataInForm:self.type];
-		NSString *strFilename = [NSString stringWithFormat:@"%@.%@", self.wallet.strName, [self suffixFor:self.type]];
+		NSString *strFilename = [NSString stringWithFormat:@"%@.%@", [CoreBridge Singleton].currentWallet.strName, [self suffixFor:self.type]];
 		NSString *strMimeType = [self mimeTypeFor:self.type];
 		
 		[gDrive uploadFile:dataExport name:strFilename mimeType:strMimeType];
@@ -809,8 +792,9 @@ typedef enum eExportOption
 
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
-    //NSLog(@"Selected item %i", itemIndex);
-    _selectedWallet = itemIndex;
+    NSIndexPath *indexPath = [[NSIndexPath alloc]init];
+    indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
+    [CoreBridge makeCurrentWalletWithIndex:indexPath];
 }
 
 

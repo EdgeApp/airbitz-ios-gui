@@ -258,23 +258,16 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)wallets:(NSDictionary *)params
 {
     // TODO: move to queue
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-        NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
-        [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets withTxs:NO];
-        NSMutableArray *results = [[NSMutableArray alloc] init];
-        for (Wallet *w in arrayWallets) {
-            NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
-            [d setObject:w.strUUID forKey:@"id"];
-            [d setObject:w.strName forKey:@"name"];
-            [d setObject:[NSNumber numberWithInt:w.currencyNum] forKey:@"currencyNum"];
-            [d setObject:[NSNumber numberWithLong:w.balance] forKey:@"balance"];
-            [results addObject:d];
-        }
-        dispatch_async(dispatch_get_main_queue(),^{
-            [self callJsFunction:[params objectForKey:@"cbid"] withArgs:[self jsonResult:results]];
-        });
-    });
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    for (Wallet *w in [CoreBridge Singleton].arrayWallets) {
+        NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
+        [d setObject:w.strUUID forKey:@"id"];
+        [d setObject:w.strName forKey:@"name"];
+        [d setObject:[NSNumber numberWithInt:w.currencyNum] forKey:@"currencyNum"];
+        [d setObject:[NSNumber numberWithLong:w.balance] forKey:@"balance"];
+        [results addObject:d];
+    }
+    [self callJsFunction:[params objectForKey:@"cbid"] withArgs:[self jsonResult:results]];
 }
 
 - (void)launchSpendConfirmation:(NSDictionary *)params

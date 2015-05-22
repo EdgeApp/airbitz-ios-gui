@@ -61,8 +61,8 @@ typedef enum eDatePeriod
 @property (weak, nonatomic) IBOutlet UILabel            *labelToDate;
 @property (weak, nonatomic) IBOutlet UIScrollView       *scrollView;
 
-@property (nonatomic, strong) NSArray               *arrayWalletUUIDs;
-@property (nonatomic, strong) NSArray               *arrayWallets;
+//@property (nonatomic, strong) NSArray               *arrayWalletUUIDs;
+//@property (nonatomic, strong) NSArray               *arrayWallets;
 @property (nonatomic, strong) PopupWheelPickerView  *popupWheelPicker;
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 @property (nonatomic, strong) DateTime              *fromDateTime;
@@ -478,24 +478,12 @@ typedef enum eDatePeriod
 
 - (void)showExportWalletOptionsWithType:(tWalletExportType)type
 {
-    // find the wallet to use
-    NSString *strUUID = [self.arrayWalletUUIDs objectAtIndex:_selectedWallet];
-    Wallet *wallet = nil;
-    for (wallet in self.arrayWallets)
-    {
-        if ([strUUID isEqualToString:wallet.strUUID])
-        {
-            // found it
-            break;
-        }
-    }
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
     self.exportWalletOptionsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletOptionsViewController"];
 
     self.exportWalletOptionsViewController.delegate = self;
     self.exportWalletOptionsViewController.type = type;
-    self.exportWalletOptionsViewController.wallet = wallet;
     self.exportWalletOptionsViewController.fromDateTime = self.fromDateTime;
     self.exportWalletOptionsViewController.toDateTime = self.toDateTime;
 
@@ -551,23 +539,11 @@ typedef enum eDatePeriod
     }
 
 	self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-    self.arrayWalletUUIDs = arrayWalletUUIDs;
 
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
 
-    _selectedWallet = [arrayWalletUUIDs indexOfObject:self.wallet.strUUID];
-    if (_selectedWallet != NSNotFound)
-	{
-		[self.buttonSelector.button setTitle:[arrayWalletNames objectAtIndex:_selectedWallet] forState:UIControlStateNormal];
-		self.buttonSelector.selectedItemIndex = (int) _selectedWallet;
-	}
-
-    // get an array of all the wallets
-    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets];
-    [arrayWallets addObjectsFromArray:arrayArchivedWallets];
-    self.arrayWallets = arrayWallets;
+    [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
+    self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
 }
 
 - (void)dismissPopupPicker
