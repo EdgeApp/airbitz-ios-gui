@@ -219,7 +219,8 @@ MainViewController *singleton;
 
     _walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
 //    _walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
-	_settingsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+    UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
+	_settingsViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
 	_settingsViewController.delegate = self;
 
 	UIStoryboard *pluginStoryboard = [UIStoryboard storyboardWithName:@"Plugins" bundle: nil];
@@ -1487,7 +1488,7 @@ MainViewController *singleton;
 
 - (void)launchTwoFactorScan
 {
-    _tfaScanViewController = (TwoFactorScanViewController *)[Util animateIn:@"TwoFactorScanViewController" parentController:self];
+    _tfaScanViewController = (TwoFactorScanViewController *)[Util animateIn:@"TwoFactorScanViewController" storyboard:@"Settings" parentController:self];
     _tfaScanViewController.delegate = self;
     _tfaScanViewController.bStoreSecret = YES;
     _tfaScanViewController.bTestSecret = YES;

@@ -413,8 +413,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)bringUpCategoriesView
 {
     {
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-        _categoriesController = [mainStoryboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
+        UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
+        _categoriesController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
 
         _categoriesController.delegate = self;
 
@@ -467,14 +467,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)bringUpTwoFactor
 {
-    _tfaViewController = (TwoFactorShowViewController *)[Util animateIn:@"TwoFactorShowViewController" parentController:self];
+    _tfaViewController = (TwoFactorShowViewController *)[Util animateIn:@"TwoFactorShowViewController" storyboard:@"Settings"
+                                                       parentController:self];
     _tfaViewController.delegate = self;
 }
 
 - (void)bringUpDebugView
 {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-    _debugViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DebugViewController"];
+    UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
+    _debugViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"DebugViewController"];
     _debugViewController.delegate = self;
 
     CGRect frame = self.view.bounds;

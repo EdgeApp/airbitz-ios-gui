@@ -350,7 +350,7 @@
 
 - (IBAction)Import:(id)sender
 {
-    _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" parentController:self];
+    _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" storyboard:@"Settings" parentController:self];
     _tfaMenuViewController.delegate = self;
     _tfaMenuViewController.username = [User Singleton].name;
     _tfaMenuViewController.bStoreSecret = YES;

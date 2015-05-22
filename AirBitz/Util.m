@@ -217,8 +217,13 @@
 
 + (UIViewController *)animateIn:(NSString *)identifier parentController:(UIViewController *)parent
 {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-    UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:identifier];
+    return [Util animateIn:identifier storyboard:@"Main_iPhone" parentController:parent];
+}
+
++ (UIViewController *)animateIn:(NSString *)identifier storyboard:(NSString *)storyboardName parentController:(UIViewController *)parent
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:identifier];
     return [Util animateController:controller parentController:parent];
 }
 

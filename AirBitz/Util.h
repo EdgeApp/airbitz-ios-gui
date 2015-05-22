@@ -40,6 +40,7 @@
 
 
 + (UIViewController *)animateIn:(NSString *)identifier parentController:(UIViewController *)parent;
++ (UIViewController *)animateIn:(NSString *)identifier storyboard:(NSString *)storyboardName parentController:(UIViewController *)parent;
 + (UIViewController *)animateController:(UIViewController *)controller parentController:(UIViewController *)parent;
 + (void)animateOut:(UIViewController *)controller parentController:(UIViewController *)parent complete:(void(^)(void))cb;
 

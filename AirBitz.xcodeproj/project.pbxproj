@@ -242,7 +242,6 @@
 		7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		7D98AD3A19A7C550003D2BF6 /* WalletExportQuicken.QIF in Resources */ = {isa = PBXBuildFile; fileRef = 4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */; };
 		7D98AD3F19A7C550003D2BF6 /* infoExportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C72479C1933D3890091C286 /* infoExportWallet.html */; };
-		7D98AD4619A7C550003D2BF6 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5675B6018A17F6F002E0703 /* Main_iPad.storyboard */; };
 		7D98AD4D19A7C550003D2BF6 /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
 		7D98AD5919A7C550003D2BF6 /* ButtonSelectorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56553F318EDDD26005B35E1 /* ButtonSelectorView~iphone.xib */; };
 		7D98AD5B19A7C550003D2BF6 /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */; };
@@ -373,7 +372,6 @@
 		B5675B5818A17F6F002E0703 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5675B5718A17F6F002E0703 /* main.m */; };
 		B5675B5C18A17F6F002E0703 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B5675B5B18A17F6F002E0703 /* AppDelegate.m */; };
 		B5675B5F18A17F6F002E0703 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5675B5D18A17F6F002E0703 /* Main_iPhone.storyboard */; };
-		B5675B6218A17F6F002E0703 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5675B6018A17F6F002E0703 /* Main_iPad.storyboard */; };
 		B5675B6718A17F6F002E0703 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5675B6618A17F6F002E0703 /* Images.xcassets */; };
 		B57288F8193518F600417426 /* San Diego.gpx in Resources */ = {isa = PBXBuildFile; fileRef = B57288F7193518F600417426 /* San Diego.gpx */; };
 		B57C207A18C14687005D7245 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B57C207918C14687005D7245 /* MainViewController.m */; };
@@ -1361,6 +1359,9 @@
 		DA06FB171B0EB355000BCA46 /* FadingAlertViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */; };
 		DA06FB181B0EB355000BCA46 /* FadingAlertViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */; };
 		DA06FB191B0EB355000BCA46 /* FadingAlertViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */; };
+		DA06FB2E1B0EE88E000BCA46 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB2D1B0EE88E000BCA46 /* Settings.storyboard */; };
+		DA06FB2F1B0EE88E000BCA46 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB2D1B0EE88E000BCA46 /* Settings.storyboard */; };
+		DA06FB301B0EE88E000BCA46 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB2D1B0EE88E000BCA46 /* Settings.storyboard */; };
 		DA1333901A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */; };
 		DA1333911A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */; };
 		DA1333981A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1333971A7B12E00051DE14 /* TwoFactorScanViewController.m */; };
@@ -1613,7 +1614,6 @@
 		DAE8649D1A88A58A00A17BD3 /* WalletExportQuicken.QIF in Resources */ = {isa = PBXBuildFile; fileRef = 4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */; };
 		DAE8649F1A88A58A00A17BD3 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */; };
 		DAE864A51A88A58A00A17BD3 /* infoExportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C72479C1933D3890091C286 /* infoExportWallet.html */; };
-		DAE864AC1A88A58A00A17BD3 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5675B6018A17F6F002E0703 /* Main_iPad.storyboard */; };
 		DAE864B11A88A58A00A17BD3 /* BitcoinSent.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D987AF91A48BA8C00958AAD /* BitcoinSent.mp3 */; };
 		DAE864B31A88A58A00A17BD3 /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
 		DAE864C01A88A58A00A17BD3 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7D8B59C01A328895000AC178 /* HockeySDK.xcconfig */; };
@@ -1989,7 +1989,6 @@
 		B5675B5A18A17F6F002E0703 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B5675B5B18A17F6F002E0703 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B5675B5E18A17F6F002E0703 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		B5675B6118A17F6F002E0703 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		B5675B6618A17F6F002E0703 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B5675B6D18A17F6F002E0703 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		B57288F7193518F600417426 /* San Diego.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "San Diego.gpx"; path = "AirBitz/San Diego.gpx"; sourceTree = "<group>"; };
@@ -2403,6 +2402,7 @@
 		DA06FB111B0E7CDD000BCA46 /* DropDownAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropDownAlertView.h; path = FadingAlert2/DropDownAlertView.h; sourceTree = "<group>"; };
 		DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropDownAlertView.m; path = FadingAlert2/DropDownAlertView.m; sourceTree = "<group>"; };
 		DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FadingAlertViewNew.xib; path = ../FadingAlert2/FadingAlertViewNew.xib; sourceTree = "<group>"; };
+		DA06FB2D1B0EE88E000BCA46 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		DA13338E1A7AECA70051DE14 /* TwoFactorShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorShowViewController.h; sourceTree = "<group>"; };
 		DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorShowViewController.m; sourceTree = "<group>"; };
 		DA1333961A7B12E00051DE14 /* TwoFactorScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorScanViewController.h; sourceTree = "<group>"; };
@@ -3078,10 +3078,9 @@
 				B5137C1618A40F3900DA4A34 /* MontserratLabel.h */,
 				B5137C1718A40F3900DA4A34 /* MontserratLabel.m */,
 				B5675B5D18A17F6F002E0703 /* Main_iPhone.storyboard */,
-				B5675B6018A17F6F002E0703 /* Main_iPad.storyboard */,
 				B57C207818C14687005D7245 /* MainViewController.h */,
-				B57C207918C14687005D7245 /* MainViewController.m */,
 				B55D0FE618E233A80035DCC8 /* MinCharTextField.h */,
+				B57C207918C14687005D7245 /* MainViewController.m */,
 				B55D0FE718E233A80035DCC8 /* MinCharTextField.m */,
 				7D89E8CC1A245FC20067F660 /* NotificationChecker.h */,
 				7D89E8CD1A245FC20067F660 /* NotificationChecker.m */,
@@ -3595,6 +3594,7 @@
 		B5C0A9B218EA0D99008F302C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				DA06FB2D1B0EE88E000BCA46 /* Settings.storyboard */,
 				DAFC799E1A81CCBE00E9039D /* TwoFactorMenuViewController.h */,
 				DAFC799F1A81CCBE00E9039D /* TwoFactorMenuViewController.m */,
 				DA1333961A7B12E00051DE14 /* TwoFactorScanViewController.h */,
@@ -3964,7 +3964,6 @@
 				DA06F8431B0BDD79000BCA46 /* btn_big_green@2x.png in Resources */,
 				DA06F8E21B0BDD79000BCA46 /* btn_multiply.png in Resources */,
 				DA06FA921B0BDD79000BCA46 /* swipe-arrow.png in Resources */,
-				7D98AD4619A7C550003D2BF6 /* Main_iPad.storyboard in Resources */,
 				7D987AFF1A48BA8C00958AAD /* BitcoinSent.mp3 in Resources */,
 				DA06FA8F1B0BDD79000BCA46 /* sms_btn@2x.png in Resources */,
 				DA06FA0B1B0BDD79000BCA46 /* icon_more@2x.png in Resources */,
@@ -3979,6 +3978,7 @@
 				DA06F9F91B0BDD79000BCA46 /* icon_export_view.png in Resources */,
 				7D98AD4D19A7C550003D2BF6 /* ca-certificates.crt in Resources */,
 				DA06F9CF1B0BDD79000BCA46 /* icon_directory_dark@2x.png in Resources */,
+				DA06FB2F1B0EE88E000BCA46 /* Settings.storyboard in Resources */,
 				DA06F9F31B0BDD79000BCA46 /* icon_export_sdcard.png in Resources */,
 				DA06F9B41B0BDD79000BCA46 /* icon_arrow.png in Resources */,
 				DA06F7951B0BDD79000BCA46 /* bd_icon_location@2x.png in Resources */,
@@ -4358,13 +4358,13 @@
 				DA06F9891B0BDD79000BCA46 /* flash_on@2x.png in Resources */,
 				DA06FA7F1B0BDD79000BCA46 /* ribbon.png in Resources */,
 				DA06FA131B0BDD79000BCA46 /* icon_request.png in Resources */,
-				B5675B6218A17F6F002E0703 /* Main_iPad.storyboard in Resources */,
 				DA06F9771B0BDD79000BCA46 /* emboss_down@2x.png in Resources */,
 				DA06F9921B0BDD79000BCA46 /* flash-on.png in Resources */,
 				DA06FA851B0BDD79000BCA46 /* scan_frame.png in Resources */,
 				DA06F9F81B0BDD79000BCA46 /* icon_export_view.png in Resources */,
 				7D987AFE1A48BA8C00958AAD /* BitcoinSent.mp3 in Resources */,
 				683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */,
+				DA06FB2E1B0EE88E000BCA46 /* Settings.storyboard in Resources */,
 				DA06F9CE1B0BDD79000BCA46 /* icon_directory_dark@2x.png in Resources */,
 				DA06F9F21B0BDD79000BCA46 /* icon_export_sdcard.png in Resources */,
 				DA06F9B31B0BDD79000BCA46 /* icon_arrow.png in Resources */,
@@ -4744,13 +4744,13 @@
 				DA06F98B1B0BDD79000BCA46 /* flash_on@2x.png in Resources */,
 				DA06FA811B0BDD79000BCA46 /* ribbon.png in Resources */,
 				DA06FA151B0BDD79000BCA46 /* icon_request.png in Resources */,
-				DAE864AC1A88A58A00A17BD3 /* Main_iPad.storyboard in Resources */,
 				DA06F9791B0BDD79000BCA46 /* emboss_down@2x.png in Resources */,
 				DA06F9941B0BDD79000BCA46 /* flash-on.png in Resources */,
 				DA06FA871B0BDD79000BCA46 /* scan_frame.png in Resources */,
 				DA06F9FA1B0BDD79000BCA46 /* icon_export_view.png in Resources */,
 				DAE864B11A88A58A00A17BD3 /* BitcoinSent.mp3 in Resources */,
 				DAE864B31A88A58A00A17BD3 /* ca-certificates.crt in Resources */,
+				DA06FB301B0EE88E000BCA46 /* Settings.storyboard in Resources */,
 				DA06F9D01B0BDD79000BCA46 /* icon_directory_dark@2x.png in Resources */,
 				DA06F9F41B0BDD79000BCA46 /* icon_export_sdcard.png in Resources */,
 				DA06F9B51B0BDD79000BCA46 /* icon_arrow.png in Resources */,
@@ -5703,14 +5703,6 @@
 				DA14ABCA1A8066A300C30F08 /* en */,
 			);
 			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		B5675B6018A17F6F002E0703 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B5675B6118A17F6F002E0703 /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

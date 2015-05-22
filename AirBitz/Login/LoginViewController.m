@@ -887,7 +887,7 @@ static BOOL bInitialized = false;
 
 - (void)launchTwoFactorMenu
 {
-    _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" parentController:self];
+    _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" storyboard:@"Settings" parentController:self];
     _tfaMenuViewController.delegate = self;
     _tfaMenuViewController.username = self.usernameSelector.textField.text;
     _tfaMenuViewController.bStoreSecret = NO;

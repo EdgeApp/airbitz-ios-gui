@@ -88,7 +88,7 @@
 
 - (IBAction)Scan:(id)sender
 {
-    _tfaScanViewController = (TwoFactorScanViewController *)[Util animateIn:@"TwoFactorScanViewController" parentController:self];
+    _tfaScanViewController = (TwoFactorScanViewController *)[Util animateIn:@"TwoFactorScanViewController" storyboard:@"Settings" parentController:self];
     _tfaScanViewController.delegate = self;
     _tfaScanViewController.bStoreSecret = _bStoreSecret;
     _tfaScanViewController.bTestSecret = _bTestSecret;
