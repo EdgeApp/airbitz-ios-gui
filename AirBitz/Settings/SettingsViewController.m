@@ -92,8 +92,6 @@
 #define PICKER_WIDTH                    160
 #define PICKER_CELL_HEIGHT              44
 
-#define AUTO_LOGOUT_CONTENT_POSY        240 // what to scroll table view to when 'auto logoff' is picked
-
 typedef struct sDenomination
 {
     char *szLabel;
@@ -1486,11 +1484,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         if (row == ROW_AUTO_LOG_OFF)
         {
-            // move the table so the picker is not cut off
-            CGPoint curOffset = self.tableView.contentOffset;
-            curOffset.y = AUTO_LOGOUT_CONTENT_POSY;
-            [self.tableView setContentOffset:curOffset animated:NO];
-
             // set up current selection
             NSArray *arraySelections = [self logoutSelections];
 
@@ -1518,7 +1511,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
             // make this take up the entire screen
             CGRect screenRect = [[UIScreen mainScreen] bounds];
-            pickerWidth = (int) screenRect.size.width - (IS_IPHONE4 ? 50 : 75); // magic padding
+            pickerWidth = (int) [MainViewController getWidth];
         }
     }
     else if (SECTION_DEFAULT_EXCHANGE == section)

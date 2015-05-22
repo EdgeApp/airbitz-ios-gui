@@ -216,7 +216,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="wp8-2J-671"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                     </subviews>
@@ -1079,7 +1079,7 @@ Scan the QR code using this device</string>
     </scenes>
     <resources>
         <image name="back_arrow.png" width="844" height="568"/>
-        <image name="background.jpg" width="320" height="111"/>
+        <image name="background.jpg" width="25" height="22"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
         <image name="bkg_textfield.png" width="844" height="568"/>
         <image name="btn_addCategory.png" width="38" height="31"/>
