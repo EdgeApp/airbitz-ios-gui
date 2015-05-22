@@ -1605,13 +1605,15 @@ MainViewController *singleton;
 - (void)slideoutSettings
 {
     [slideoutView showSlideout:NO];
-    [_selectedViewController.view removeFromSuperview];
-    _selectedViewController = _settingsViewController;
-    [Util insertSubviewControllerWithConstraints:self.view child:_selectedViewController belowSubView:self.tabBar];
-//    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
-    [_settingsViewController resetViews];
-    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
-    [slideoutView showSlideout:NO];
+    if (_selectedViewController != _settingsViewController)
+    {
+        if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
+            [MainViewController animateSwapViewControllers:_settingsViewController out:_selectedViewController];
+            self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+            [slideoutView showSlideout:NO];
+        }
+    }
+
 }
 
 - (void)slideoutLogout

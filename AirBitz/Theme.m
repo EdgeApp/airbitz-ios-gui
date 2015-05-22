@@ -46,7 +46,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 
     //    self.denomination = 100000000;
     self.colorTextBright = [UIColor whiteColor];
-    self.colorTextDark = UIColorFromARGB(0xff000080);;
+    self.colorTextDark = UIColorFromARGB(0xff0C578C);;
     self.colorTextLink = UIColorFromARGB(0xFF007aFF);
     self.deleteAccountWarning = NSLocalizedString(@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.", @"Delete Account Warning");
     self.colorSendButton = UIColorFromARGB(0xFF80c342);
@@ -90,6 +90,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.creatingWalletText                                 = NSLocalizedString(@"Creating and securing wallet", nil);
     self.createAccountAndTransferFundsText                  = NSLocalizedString(@"Please create a new account and transfer your funds if you forgot your password.", nil);
     self.createPasswordForAccountText                       = NSLocalizedString(@"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.", nil);
+    self.settingsText                                       = NSLocalizedString(@"Settings", nil);
 
     self.sendRequestButtonDisabled = 0.4f;
 
@@ -118,6 +119,8 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightPopupPicker = 50;
         self.heightMinimumForQRScanFrame = 200;
         self.elementPadding = 5; // Generic padding between elements
+        self.heightSettingsTableCell            = 40.0;
+        self.heightSettingsTableHeader          = 60.0;
     }
     if (IS_MIN_IPHONE5)
     {
@@ -133,6 +136,8 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightSearchClues = 45.0;
         self.heightBLETableCells = 65;
         self.heightPopupPicker = 60;
+        self.heightSettingsTableCell            = 45.0;
+        self.heightSettingsTableHeader          = 65.0;
     }
     if (IS_MIN_IPHONE6_PLUS)
     {

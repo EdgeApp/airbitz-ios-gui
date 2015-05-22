@@ -59,6 +59,8 @@
 @property (nonatomic) NSString *creatingWalletText;
 @property (nonatomic) NSString *createAccountAndTransferFundsText;
 @property (nonatomic) NSString *createPasswordForAccountText;
+@property (nonatomic) NSString *settingsText;
+
 
 
 
@@ -74,6 +76,9 @@
 @property (nonatomic) CGFloat heightTransactionCell;
 @property (nonatomic) CGFloat heightPopupPicker;
 @property (nonatomic) CGFloat heightMinimumForQRScanFrame;
+@property (nonatomic) CGFloat heightSettingsTableCell;
+@property (nonatomic) CGFloat heightSettingsTableHeader;
+
 
 @property (nonatomic) CGFloat animationDelayTimeDefault;
 @property (nonatomic) CGFloat animationDurationTimeDefault;

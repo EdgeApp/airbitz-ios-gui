@@ -13,7 +13,6 @@
 @interface BooleanCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel        *name;
-@property (nonatomic, weak) IBOutlet UIImageView    *bkgImage;
 @property (nonatomic, weak) IBOutlet UISwitch       *state;
 
 @property (assign) id<BooleanCellDelegate> delegate;

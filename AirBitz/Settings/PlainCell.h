@@ -11,6 +11,5 @@
 @interface PlainCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *name;
-@property (nonatomic, weak) IBOutlet UIImageView *bkgImage;
 
 @end

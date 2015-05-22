@@ -13,7 +13,6 @@
 @interface ButtonCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *name;
-@property (nonatomic, weak) IBOutlet UIImageView *bkgImage;
 @property (nonatomic, weak) IBOutlet UIButton *button;
 @property (assign) id<ButtonCellDelegate> delegate;
 @end

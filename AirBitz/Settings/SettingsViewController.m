@@ -28,6 +28,8 @@
 #import "InfoView.h"
 #import "LocalSettings.h"
 #import "CoreBridge.h"
+#import "Theme.h"
+#import "MainViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
@@ -39,14 +41,13 @@
 #define SECTION_NAME                    2
 #define SECTION_OPTIONS                 3
 #define SECTION_DEFAULT_EXCHANGE        4
-#define SECTION_LOGOUT                  5
-#define SECTION_DEBUG                   6
+#define SECTION_DEBUG                   5
 
 // If we are in debug include the DEBUG section in settings
 #if (DEBUG || 1) // Always enable debug section for now
-#define SECTION_COUNT                   7
-#else 
 #define SECTION_COUNT                   6
+#else 
+#define SECTION_COUNT                   5
 #endif
 
 #define DENOMINATION_CHOICES            3
@@ -191,6 +192,20 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [self refresh:nil];
 	
 	 _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(NO)}];
+
+    // Fix table insets
+    CGPoint pt;
+    pt.x = 0;
+    pt.y = -[MainViewController getHeaderHeight];
+    [self.tableView setContentInset:UIEdgeInsetsMake([MainViewController getHeaderHeight],0,[MainViewController getFooterHeight],0)];
+    [self.tableView setContentOffset:pt];
+
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:[Theme Singleton].settingsText];
+
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(Info) fromObject:self];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -832,8 +847,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		cell = [[RadioButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 	}
-	cell.bkgImage.image = bkgImage;
-	
+
 	if (indexPath.row == ROW_BITCOIN)
 	{
 		cell.name.text = NSLocalizedString(@"Bitcoin", @"settings text");
@@ -863,8 +877,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		cell = [[PlainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 	}
-	cell.bkgImage.image = bkgImage;
-	
+
 	if (indexPath.section == SECTION_USERNAME)
 	{
 		if (indexPath.row == ROW_PASSWORD)
@@ -907,7 +920,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 	}
-	cell.bkgImage.image = bkgImage;
 	cell.delegate = self;
     cell.backgroundColor = [UIColor clearColor];
     cell.layer.backgroundColor = (__bridge CGColorRef)([UIColor clearColor]);
@@ -947,7 +959,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         cell.textField.spellCheckingType = UITextSpellCheckingTypeNo;
 
         cell.textField.enabled = _pAccountSettings->bNameOnPayments;
-        cell.textField.textColor = cell.textField.enabled ? [UIColor blackColor] : [UIColor grayColor];
+        cell.textField.textColor = cell.textField.enabled ? [UIColor whiteColor] : [UIColor grayColor];
 	}
 
     cell.tag = (indexPath.section << 8) | (indexPath.row);
@@ -965,7 +977,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		cell = [[BooleanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 	}
-	cell.bkgImage.image = bkgImage;
 	cell.delegate = self;
 	if (indexPath.section == SECTION_NAME)
 	{
@@ -1019,7 +1030,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		cell = [[ButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 	}
-	cell.bkgImage.image = bkgImage;
 	cell.delegate = self;
 	if (indexPath.section == SECTION_OPTIONS)
 	{
@@ -1130,10 +1140,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             return 1;
             break;
 
-        case SECTION_LOGOUT:
-            return 1;
-            break;
-            
         case SECTION_DEBUG:
             return 1;
             break;
@@ -1146,24 +1152,18 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if ((indexPath.section == SECTION_OPTIONS) 
-        || (indexPath.section == SECTION_LOGOUT)
-        || (indexPath.section == SECTION_DEBUG))
-	{
-		return 47.0;
-	}
-
-	return 37.0;
+    return [Theme Singleton].heightSettingsTableCell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	if (section == SECTION_LOGOUT || section == SECTION_DEBUG)
+	if (section == SECTION_DEBUG)
 	{
 		return 0.0;
 	}
 
-	return 37.0;
+    return [Theme Singleton].heightSettingsTableHeader;
+
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -1202,9 +1202,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell;
-    if (indexPath.section == SECTION_LOGOUT) {
-		cell = [self getLogoutButton:tableView withIndexPath:indexPath];
-	} else if (indexPath.section == SECTION_DEBUG) {
+    if (indexPath.section == SECTION_DEBUG) {
 		cell = [self getDebugButton:tableView withIndexPath:indexPath];
 	}
 	else
@@ -1344,9 +1342,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
-            break;
-
-        case SECTION_LOGOUT:
             break;
 
         case SECTION_DEBUG:
@@ -1568,17 +1563,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)buttonOnlyCellButtonPressed:(ButtonOnlyCell *)cell
 {
     NSInteger section = (cell.tag >> 8);
-    if (section == SECTION_LOGOUT) {
-        [self blockUser:YES];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [cell.button setTitle:@"Please Wait..." forState:UIControlStateNormal];
-            [[User Singleton] clear];
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                [self blockUser:NO];
-                [self.delegate SettingsViewControllerDone:self];
-            });
-        });
-    } else if (section == SECTION_DEBUG) {
+    if (section == SECTION_DEBUG) {
         [self bringUpDebugView];
     }
 }
