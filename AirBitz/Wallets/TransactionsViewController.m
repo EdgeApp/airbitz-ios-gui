@@ -54,7 +54,6 @@
         TransactionDetailsViewControllerDelegate, UISearchBarDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, DL_URLRequestDelegate, UIGestureRecognizerDelegate>
 {
     BalanceView                         *_balanceView;
-    FadingAlertView2                    *_fadingAlert2;
     Wallet                              *longTapWallet;
     UIAlertView                         *longTapAlert;
     UIAlertView                         *renameAlert;
@@ -219,8 +218,7 @@
                      completion: ^(BOOL finished)
                      {
                          if (_bWalletsShowing && [[User Singleton] offerWalletHelp]) {
-                             [MainViewController showFadingAlert:[Theme Singleton].walletsPopupHelpText
-                                         withDelay:FADING_HELP_DELAY];
+                             [MainViewController fadingAlertHelpPopup:[Theme Singleton].walletsPopupHelpText];
                          }
                      }];
 }
@@ -1530,7 +1528,7 @@
             }
             else
             {
-                [MainViewController showFadingAlert:[Theme Singleton].renameWalletWarningText];
+                [MainViewController fadingAlert:[Theme Singleton].renameWalletWarningText];
             }
 
         }
@@ -1927,17 +1925,7 @@
 
 - (void)headerButton
 {
-    _fadingAlert2 = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
-    _fadingAlert2.fadeDelay = FADING_HELP_DELAY;
-    _fadingAlert2.fadeDuration = FADING_HELP_DURATION;
-    [_fadingAlert2 messageTextSet:[Theme Singleton].walletHeaderButtonHelpText];
-    [_fadingAlert2 blockModal:NO];
-    [_fadingAlert2 showFading];
-}
-
-- (void)fadingAlertDismissed:(FadingAlertView *)view
-{
-    _fadingAlert2 = nil;
+    [MainViewController fadingAlertHelpPopup:[Theme Singleton].walletHeaderButtonHelpText];
 }
 
 - (void)hideWalletMaker

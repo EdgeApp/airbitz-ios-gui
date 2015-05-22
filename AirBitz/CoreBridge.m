@@ -1757,7 +1757,7 @@ static BOOL bOtpError = NO;
     return cc == ABC_CC_Ok;
 }
 
-+ (void)setupNewAccount:(FadingAlertView2 *)fadingAlert
++ (void)setupNewAccount
 {
     [dataQueue addOperationWithBlock:^{
         // update user's default currency num to match their locale
@@ -1783,10 +1783,7 @@ static BOOL bOtpError = NO;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
-            if (fadingAlert)
-            {
-                [fadingAlert dismiss:NO];
-            }
+            [FadingAlertView dismiss:NO];
         });
         [CoreBridge startWatchers];
 

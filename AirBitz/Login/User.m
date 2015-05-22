@@ -26,6 +26,8 @@
 #define REVIEW_LOGIN_COUNT 7
 #define REVIEW_TX_COUNT    7
 
+#define FORCE_HELP_SCREENS 1
+
 static BOOL bInitialized = NO;
 
 @implementation User
@@ -334,6 +336,9 @@ static User *singleton = nil;  // this will be the one and only object this stat
 }
 - (BOOL)offerHelp:(NSInteger *)value thisSession:(BOOL *)session
 {
+    if (FORCE_HELP_SCREENS)
+        return YES;
+
     if (*session) {
         return NO;
     }

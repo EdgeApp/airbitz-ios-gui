@@ -14,6 +14,7 @@
 #import "LocalSettings.h"
 #import "Util.h"
 #import "CommonTypes.h"
+#import "MainViewController.h"
 
 @interface SlideoutView () <PickerTextViewDelegate >
 
@@ -442,7 +443,7 @@
         [self.accountPicker updateChoices:self.arrayAccounts];
     }
     else {
-        [self showFadingError:[Util errorMap:&error]];
+        [MainViewController fadingAlert:[Util errorMap:&error]];
     }
 }
 
@@ -472,7 +473,7 @@
         {
             tABC_Error temp;
             temp.code = result;
-            [self showFadingError:[Util errorMap:&temp]];
+            [MainViewController fadingAlert:[Util errorMap:&temp]];
             break;
         }
     }
@@ -490,18 +491,6 @@
         }
     }
     self.otherAccounts = [stringArray copy];
-}
-
-
-- (void)showFadingError:(NSString *)message
-{
-//    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-//    _fadingAlert.message = message;
-//    _fadingAlert.fadeDuration = 2;
-//    _fadingAlert.fadeDelay = 5;
-//    [_fadingAlert blockModal:NO];
-//    [_fadingAlert showSpinner:NO];
-//    [_fadingAlert showFading];
 }
 
 #pragma mark - UIAlertView Delegate

@@ -1358,6 +1358,9 @@
 		DA06FB131B0E7D03000BCA46 /* DropDownAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */; };
 		DA06FB141B0E7D03000BCA46 /* DropDownAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */; };
 		DA06FB151B0E7D03000BCA46 /* DropDownAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */; };
+		DA06FB171B0EB355000BCA46 /* FadingAlertViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */; };
+		DA06FB181B0EB355000BCA46 /* FadingAlertViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */; };
+		DA06FB191B0EB355000BCA46 /* FadingAlertViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */; };
 		DA1333901A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */; };
 		DA1333911A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */; };
 		DA1333981A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1333971A7B12E00051DE14 /* TwoFactorScanViewController.m */; };
@@ -2399,6 +2402,7 @@
 		DA06FB0D1B0E7CB2000BCA46 /* DropDownAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropDownAlertView.xib; path = FadingAlert2/DropDownAlertView.xib; sourceTree = "<group>"; };
 		DA06FB111B0E7CDD000BCA46 /* DropDownAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropDownAlertView.h; path = FadingAlert2/DropDownAlertView.h; sourceTree = "<group>"; };
 		DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropDownAlertView.m; path = FadingAlert2/DropDownAlertView.m; sourceTree = "<group>"; };
+		DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FadingAlertViewNew.xib; path = ../FadingAlert2/FadingAlertViewNew.xib; sourceTree = "<group>"; };
 		DA13338E1A7AECA70051DE14 /* TwoFactorShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorShowViewController.h; sourceTree = "<group>"; };
 		DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorShowViewController.m; sourceTree = "<group>"; };
 		DA1333961A7B12E00051DE14 /* TwoFactorScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorScanViewController.h; sourceTree = "<group>"; };
@@ -2770,6 +2774,7 @@
 				68C4AA211A0B4DD70010C837 /* FadingAlertView.h */,
 				68C4AA221A0B4DD70010C837 /* FadingAlertView.m */,
 				68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */,
+				DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */,
 			);
 			name = FadingAlert;
 			path = "Google Drive";
@@ -4171,6 +4176,7 @@
 				DA06FA3E1B0BDD79000BCA46 /* icon_wallet.png in Resources */,
 				7D98AE1019A7C550003D2BF6 /* Lato-HairlineItalic.ttf in Resources */,
 				DA06F7F51B0BDD79000BCA46 /* btn_4@2x.png in Resources */,
+				DA06FB181B0EB355000BCA46 /* FadingAlertViewNew.xib in Resources */,
 				DA06F8821B0BDD79000BCA46 /* btn_collapse_expand.png in Resources */,
 				DA06F93F1B0BDD79000BCA46 /* btn_td_red.png in Resources */,
 				DA06F84C1B0BDD79000BCA46 /* btn_calc_back.png in Resources */,
@@ -4556,6 +4562,7 @@
 				DA06FACA1B0BDD79000BCA46 /* table_cell_top@2x.png in Resources */,
 				DA06FA3D1B0BDD79000BCA46 /* icon_wallet.png in Resources */,
 				DABA3486198DFEE300EFAB13 /* infoRequestQR.html in Resources */,
+				DA06FB171B0EB355000BCA46 /* FadingAlertViewNew.xib in Resources */,
 				DA06F7F41B0BDD79000BCA46 /* btn_4@2x.png in Resources */,
 				DA06F8811B0BDD79000BCA46 /* btn_collapse_expand.png in Resources */,
 				DA06F93E1B0BDD79000BCA46 /* btn_td_red.png in Resources */,
@@ -4941,6 +4948,7 @@
 				DA06FACC1B0BDD79000BCA46 /* table_cell_top@2x.png in Resources */,
 				DA06FA3F1B0BDD79000BCA46 /* icon_wallet.png in Resources */,
 				DAE8657F1A88A58A00A17BD3 /* infoRequestQR.html in Resources */,
+				DA06FB191B0EB355000BCA46 /* FadingAlertViewNew.xib in Resources */,
 				DA06F7F61B0BDD79000BCA46 /* btn_4@2x.png in Resources */,
 				DA06F8831B0BDD79000BCA46 /* btn_collapse_expand.png in Resources */,
 				DA06F9401B0BDD79000BCA46 /* btn_td_red.png in Resources */,

@@ -25,7 +25,7 @@
 #import "ButtonSelectorView.h"
 #import "APPINView.h"
 #import "Theme.h"
-#import "FadingAlertView2.h"
+#import "FadingAlertView.h"
 
 typedef enum eLoginMode
 {
@@ -38,7 +38,7 @@ typedef enum eLoginMode
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertView2Delegate, ButtonSelectorDelegate >
+    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
@@ -51,7 +51,6 @@ typedef enum eLoginMode
     UITextField                     *_activeTextField;
     PasswordRecoveryViewController  *_passwordRecoveryController;
     TwoFactorMenuViewController     *_tfaMenuViewController;
-    FadingAlertView2                 *_fadingAlert;
     float                           _keyboardFrameOriginY;
     CGFloat                         _originalLogoHeight;
     CGFloat                         _originalUsernameHeight;
@@ -277,9 +276,8 @@ static BOOL bInitialized = false;
 
 #pragma mark - FadingAlertView delegate
 
-- (void)fadingAlertDismissed:(FadingAlertView2 *)view
+- (void)fadingAlertDismissedNew
 {
-    _fadingAlert = nil;
     if (bPINModeEnabled)
         [self.PINCodeView becomeFirstResponder];
     else
@@ -443,7 +441,7 @@ static BOOL bInitialized = false;
     }
     else
     {
-        [self showFadingError:NSLocalizedString(@"Please enter a User Name", nil)];
+        [MainViewController fadingAlert:NSLocalizedString(@"Please enter a User Name", nil)];
     }
 }
 
@@ -489,7 +487,7 @@ static BOOL bInitialized = false;
     }
     else
     {
-        [self showFadingError:_strReason];
+        [MainViewController fadingAlert:_strReason];
     }
 }
 
@@ -524,7 +522,7 @@ static BOOL bInitialized = false;
                     }
                     else
                     {
-                        [self showFadingError:NSLocalizedString(@"Invalid PIN", nil)];
+                        [MainViewController fadingAlert:NSLocalizedString(@"Invalid PIN", nil)];
                         [self.PINCodeView becomeFirstResponder];
                     }
                     break;
@@ -532,7 +530,7 @@ static BOOL bInitialized = false;
                 default:
                 {
                     [MainViewController showBackground:NO animate:YES];
-                    [self showFadingError:[Util errorMap:&error]];
+                    [MainViewController fadingAlert:[Util errorMap:&error]];
                     [self.PINCodeView becomeFirstResponder];
 
                 }
@@ -545,15 +543,7 @@ static BOOL bInitialized = false;
 
 - (void)PINabortPermanently
 {
-    NSString *PINExpired = NSLocalizedString(@"Invalid PIN. Please log in.", nil);
-
-    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
-    [_fadingAlert messageTextSet:PINExpired];
-    _fadingAlert.fadeDuration = 2;
-    _fadingAlert.fadeDelay = 5;
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showSpinner:NO];
-    [_fadingAlert showFading];
+    [MainViewController fadingAlert:NSLocalizedString(@"Invalid PIN. Please log in.", nil)];
 
     bPINModeEnabled = false;
     [self viewDidLoad];
@@ -888,7 +878,7 @@ static BOOL bInitialized = false;
         if (ABC_CC_InvalidOTP == _resultCode) {
             [self launchTwoFactorMenu];
         } else {
-            [self showFadingError:_strReason];
+            [MainViewController fadingAlert:_strReason];
         }
         [User Singleton].name = nil;
         [User Singleton].password = nil; 
@@ -971,18 +961,7 @@ static BOOL bInitialized = false;
 - (void)dismissErrorMessage
 {
 //    [self.errorMessageView.layer removeAllAnimations];
-    [_fadingAlert dismiss:NO];
-}
-
-- (void)showFadingError:(NSString *)message
-{
-    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert messageTextSet:message];
-    _fadingAlert.fadeDuration = 2;
-    _fadingAlert.fadeDelay = 5;
-    [_fadingAlert showSpinner:NO];
-    [_fadingAlert showFading];
+//    [_fadingAlert dismiss:NO];
 }
 
 #pragma mark - Misc
@@ -1029,7 +1008,7 @@ static BOOL bInitialized = false;
         }
         default:
         {
-            [self showFadingError:[Util errorMap:&error]];
+            [MainViewController fadingAlert:[Util errorMap:&error]];
             break;
         }
     }
@@ -1067,7 +1046,7 @@ static BOOL bInitialized = false;
         [self.usernameSelector updateChoices:self.arrayAccounts];
     }
     else {
-        [self showFadingError:[Util errorMap:&error]];
+        [MainViewController fadingAlert:[Util errorMap:&error]];
     }
 }
 

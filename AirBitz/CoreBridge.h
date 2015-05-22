@@ -105,7 +105,7 @@
 + (NSString *)currencySymbolLookup:(int)currencyNum;
 + (int)getCurrencyNumOfLocale;
 + (bool)setDefaultCurrencyNum:(int)currencyNum;
-+ (void)setupNewAccount:(FadingAlertView *)fadingAlert;
++ (void)setupNewAccount;
 + (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID withCallback:(tABC_Sweep_Done_Callback)callback;
 + (void)otpSetError:(tABC_CC)cc;
 + (BOOL)otpHasError;

@@ -276,8 +276,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     self.loopbackState = LoopbackState_None;
 
     [self setupNavBar];
-    [self updateViews:nil];
 
+    if (_bImportMode)
+    {
+        //XXX add Import help
+    }
+    else
+    {
+        if ([[User Singleton] offerSendHelp])
+        {
+            [MainViewController fadingAlertHelpPopup:[Theme Singleton].sendScreenHelpText];
+        }
+    }
+
+    [self updateViews:nil];
 }
 
 - (void)setupNavBar
@@ -375,11 +387,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 -(void)enableAll
 {
     [self startBLE];
-    if ([[User Singleton] offerSendHelp]) {
-        [self showFadingAlert:NSLocalizedString(@"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below", nil)
-                    withDelay:FADING_HELP_DURATION];
-    }
-
 }
 
 //-(void)enableBLEMode
@@ -1425,28 +1432,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
         {
-            if (_fadingAlert)
-            {
-                [_fadingAlert dismiss:NO];
-                _fadingAlert = nil;
-            }
-            _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
-            _fadingAlert.fadeDelay = 9999;
-            _fadingAlert.fadeDuration = FADING_HELP_DURATION;
-            [_fadingAlert messageTextSet:[Theme Singleton].walletHasBeenArchivedText];
-            [_fadingAlert blockModal:YES];
-            [_fadingAlert showFading];
-
+            [FadingAlertView create:self.view
+                            message:[Theme Singleton].walletHasBeenArchivedText
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
         }
-        else
-        {
-            if (_fadingAlert)
-            {
-                [_fadingAlert dismiss:NO];
-                _fadingAlert = nil;
-            }
-        }
-
 
         [self.tableView reloadData];
 
@@ -1557,7 +1546,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (NO == bSuccess)
     {
         _sweptAddress = nil;
-        [self showFadingAlert:NSLocalizedString(@"Invalid private key", nil)];
+        [MainViewController fadingAlert:NSLocalizedString(@"Invalid private key", nil)];
         [self updateState];
     }
 }
@@ -1587,7 +1576,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
             if (!bSuccess)
             {
-                [self showFadingAlert:NSLocalizedString(@"Invalid private key", nil)];
+                [MainViewController fadingAlert:NSLocalizedString(@"Invalid private key", nil)];
             }
         }
         else
@@ -2085,7 +2074,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)tweetCancelled
 {
-    [self showFadingAlert:NSLocalizedString(@"Import the private key again to retry Twitter", nil)];
+    [MainViewController fadingAlert:NSLocalizedString(@"Import the private key again to retry Twitter", nil)];
 }
 
 - (void)showSweepResults
@@ -2126,7 +2115,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)expireImport
 {
-    [self showFadingAlert:NSLocalizedString(@"Import failed", nil)];
+    [MainViewController fadingAlert:NSLocalizedString(@"Import failed", nil)];
     [self updateState];
     _callbackTimer = nil;
 }
@@ -2204,29 +2193,5 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #pragma mark - AlertView delegate
 
 
-
-#pragma - Fading Alert Methods
-
-- (void)showFadingAlert:(NSString *)message
-{
-    [self showFadingAlert:message withDelay:ERROR_MESSAGE_FADE_DELAY];
-}
-
-- (void)showFadingAlert:(NSString *)message withDelay:(int)fadeDelay
-{
-    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
-    [_fadingAlert messageTextSet:message];
-    _fadingAlert.fadeDelay = fadeDelay;
-    _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showSpinner:NO];
-    [_fadingAlert showFading];
-}
-
-- (void)dismissErrorMessage
-{
-    [_fadingAlert dismiss:NO];
-    _fadingAlert = nil;
-}
 
 @end

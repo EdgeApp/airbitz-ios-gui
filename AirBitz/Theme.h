@@ -55,6 +55,11 @@
 @property (nonatomic) NSString *enterPrivateKeyPlaceholder;
 @property (nonatomic) NSString *smsText;
 @property (nonatomic) NSString *emailText;
+@property (nonatomic) NSString *sendScreenHelpText;
+@property (nonatomic) NSString *creatingWalletText;
+@property (nonatomic) NSString *createAccountAndTransferFundsText;
+@property (nonatomic) NSString *createPasswordForAccountText;
+
 
 
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
@@ -76,6 +81,7 @@
 @property (nonatomic) CGFloat alertHoldTimeDefault;
 @property (nonatomic) CGFloat alertFadeoutTimeDefault;
 @property (nonatomic) CGFloat alertHoldTimePaymentReceived;
+@property (nonatomic) CGFloat alertHoldTimeHelpPopups;
 
 //@property (nonatomic) int minutesAutoLogout;
 //@property (nonatomic) int defaultCurrencyNum;

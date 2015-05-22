@@ -61,7 +61,7 @@ typedef enum eAddressPickerType
 
 static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
-@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelector2Delegate,FadingAlertView2Delegate,CBPeripheralManagerDelegate,
+@interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelector2Delegate,FadingAlertViewDelegate,CBPeripheralManagerDelegate,
                                      ShowWalletQRViewControllerDelegate, ImportWalletViewControllerDelegate,RecipientViewControllerDelegate>
 {
 	UITextField                 *_selectedTextField;
@@ -77,7 +77,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     BOOL                        bWalletListDropped;
     NSString                    *statusString;
     NSString                    *addressString;
-    FadingAlertView2                 *_fadingAlert;
     NSString                    *_uriString;
     NSMutableString                    *previousWalletUUID;
     BOOL                        bLastCalculatorState;
@@ -279,14 +278,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
-    if ([[User Singleton] offerRequestHelp]) {
-        [self showFadingAlert:NSLocalizedString(@"Present QR code to Sender and have them scan to send you payment", nil)
-                    withDelay:FADING_HELP_DELAY];
-    }
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
+
+    if ([[User Singleton] offerRequestHelp]) {
+        [MainViewController fadingAlertHelpPopup:NSLocalizedString(@"Present QR code to Sender and have them scan to send you payment",nil)];
+    }
 
     [self updateViews:nil];
 
@@ -295,6 +293,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [self finalizeRequest];
         _bDoFinalizeTx = NO;
     }
+
 }
 
 - (void)updateViews:(NSNotification *)notification
@@ -314,26 +313,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
         {
-            if (_fadingAlert)
-            {
-                [_fadingAlert dismiss:NO];
-                _fadingAlert = nil;
-            }
-            _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
-            _fadingAlert.fadeDelay = 9999;
-            _fadingAlert.fadeDuration = FADING_HELP_DURATION;
-            [_fadingAlert messageTextSet:[Theme Singleton].walletHasBeenArchivedText];
-            [_fadingAlert blockModal:YES];
-            [_fadingAlert showFading];
-
-        }
-        else
-        {
-            if (_fadingAlert)
-            {
-                [_fadingAlert dismiss:NO];
-                _fadingAlert = nil;
-            }
+            [FadingAlertView create:self.view
+                            message:[Theme Singleton].walletHasBeenArchivedText
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
         }
     }
 }
@@ -360,8 +342,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [self.peripheralManager stopAdvertising];
         _peripheralManager = nil;
     }
-    if (!(nil == _fadingAlert))
-        [_fadingAlert dismiss:NO];
     [CoreBridge prioritizeAddress:nil inWallet:[CoreBridge Singleton].currentWallet.strUUID];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -516,7 +496,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         UIPasteboard *pb = [UIPasteboard generalPasteboard];
         [pb setString:addressString];
 
-        [MainViewController showFadingAlert:NSLocalizedString(@"Request is copied to the clipboard", nil)];
+        [MainViewController fadingAlert:NSLocalizedString(@"Request is copied to the clipboard", nil)];
     }
     else if(segmentedControlCopyEmailSMS.selectedSegmentIndex == 1)
     {
@@ -1473,7 +1453,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                         line1:line1
                         line2:line2
                         line3:line3
-                     holdTime:HOLD_TIME_DEFAULT
+                     holdTime:DROP_DOWN_HOLD_TIME_DEFAULT
                  withDelegate:nil];
 
 //    [UIView animateWithDuration:3.0
@@ -1569,13 +1549,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 //                     completion:^(BOOL finished)
 //                     {
 //                     }];
-}
-
-#pragma mark FadingAlertView2 Delegates
-
--(void)fadingAlertDismissed:(FadingAlertView2 *)pv
-{
-
 }
 
 #pragma mark address book
@@ -1815,23 +1788,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     NSLog(@"Peripheral manager state: %@", state);
     return FALSE;
 }
-
-- (void)showFadingAlert:(NSString *)message
-{
-    [self showFadingAlert:message withDelay:ERROR_MESSAGE_FADE_DELAY];
-}
-
-- (void)showFadingAlert:(NSString *)message withDelay:(int)fadeDelay
-{
-    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
-    [_fadingAlert messageTextSet:message];
-    _fadingAlert.fadeDelay = fadeDelay;
-    _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showSpinner:NO];
-    [_fadingAlert showFading];
-}
-
 
 - (void)replaceRequestTags:(NSString **) strContent
 {

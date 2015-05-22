@@ -81,12 +81,15 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.selectWalletTransferPopupHeaderText = NSLocalizedString(@"↓ Choose a wallet to transfer funds to ↓", @"Header of popup in SendView from wallet to wallet transfer");
     self.invalidAddressPopupText = NSLocalizedString(@"Invalid Bitcoin Address", nil);
     self.enterBitcoinAddressPopupText= NSLocalizedString(@"Send to Bitcoin Address", nil);
-    self.enterBitcoinAddressPlaceholder= NSLocalizedString(@"Bitcoin Address or URI", nil);
-    self.enterPrivateKeyPopupText= NSLocalizedString(@"Sweep Funds From Private Key", nil);
-    self.enterPrivateKeyPlaceholder= NSLocalizedString(@"Bitcoin Private Key", nil);
-    self.smsText = NSLocalizedString(@"SMS", @"text for textmessage/SMS");
-    self.emailText = NSLocalizedString(@"Email", @"text for Email");
-
+    self.enterBitcoinAddressPlaceholder                     = NSLocalizedString(@"Bitcoin Address or URI", nil);
+    self.enterPrivateKeyPopupText                           = NSLocalizedString(@"Sweep Funds From Private Key", nil);
+    self.enterPrivateKeyPlaceholder                         = NSLocalizedString(@"Bitcoin Private Key", nil);
+    self.smsText                                            = NSLocalizedString(@"SMS", @"text for textmessage/SMS");
+    self.emailText                                          = NSLocalizedString(@"Email", @"text for Email");
+    self.sendScreenHelpText                                 = NSLocalizedString(@"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below", nil);
+    self.creatingWalletText                                 = NSLocalizedString(@"Creating and securing wallet", nil);
+    self.createAccountAndTransferFundsText                  = NSLocalizedString(@"Please create a new account and transfer your funds if you forgot your password.", nil);
+    self.createPasswordForAccountText                       = NSLocalizedString(@"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.", nil);
 
     self.sendRequestButtonDisabled = 0.4f;
 
@@ -94,9 +97,10 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.animationDelayTimeDefault              = 0.0;      // Delay until animation starts. Should always be zero
     self.animationCurveDefault                  = UIViewAnimationOptionCurveEaseOut;
 
-    self.alertHoldTimeDefault                   = 5.0;      // How long to hold the alert before going away
+    self.alertHoldTimeDefault                   = 4.0;      // How long to hold the alert before going away
     self.alertFadeoutTimeDefault                = 2.0;      // How much time it takes to animate the fade away
     self.alertHoldTimePaymentReceived           = 10;       // Hold time for payments
+    self.alertHoldTimeHelpPopups                = 6.0;      // Hold time for auto popup help
 
 
     self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];

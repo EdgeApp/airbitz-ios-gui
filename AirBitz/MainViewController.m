@@ -32,7 +32,7 @@
 #import "CommonTypes.h"
 #import "LocalSettings.h"
 #import "AudioController.h"
-#import "FadingAlertView2.h"
+#import "FadingAlertView.h"
 #import "InfoView.h"
 #import "DL_URLServer.h"
 #import "NotificationChecker.h"
@@ -55,7 +55,7 @@ typedef enum eAppMode
 
 @interface MainViewController () <UITabBarDelegate,RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
-                                  TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertView2Delegate, SlideoutViewDelegate,
+                                  TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate>
 {
@@ -93,7 +93,6 @@ typedef enum eAppMode
 }
 
 @property (weak, nonatomic) IBOutlet UIView *blurViewContainer;
-@property (weak, nonatomic) IBOutlet FadingAlertView2 *fadingAlert;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *blurViewLeft;
 @property (weak, nonatomic) IBOutlet UITabBar *tabBar;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
@@ -110,7 +109,7 @@ typedef enum eAppMode
 
 @end
 
-MainViewController *staticMVC;
+MainViewController *singleton;
 
 @implementation MainViewController
 
@@ -130,8 +129,9 @@ MainViewController *staticMVC;
     [User initAll];
     [Theme initAll];
     [DropDownAlertView initAll];
+    [FadingAlertView initAll];
 
-    staticMVC = self;
+    singleton = self;
 
     NSMutableData *seedData = [[NSMutableData alloc] init];
     [self fillSeedData:seedData];
@@ -390,29 +390,29 @@ MainViewController *staticMVC;
     }
     if(animated)
     {
-        [staticMVC.backgroundView setAlpha:bvStart];
-        [staticMVC.backgroundViewBlue setAlpha:bvbStart];
+        [singleton.backgroundView setAlpha:bvStart];
+        [singleton.backgroundViewBlue setAlpha:bvbStart];
         [UIView animateWithDuration:1.0
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
                          {
-                             [staticMVC.backgroundView setAlpha:bvEnd];
-                             [staticMVC.backgroundViewBlue setAlpha:bvbEnd];
+                             [singleton.backgroundView setAlpha:bvEnd];
+                             [singleton.backgroundViewBlue setAlpha:bvbEnd];
                          }
                          completion:completion];
     }
     else
     {
-        [staticMVC.backgroundView setAlpha:bvEnd];
-        [staticMVC.backgroundViewBlue setAlpha:bvbEnd];
+        [singleton.backgroundView setAlpha:bvEnd];
+        [singleton.backgroundViewBlue setAlpha:bvbEnd];
     }
 
 }
 
 +(void)setAlphaOfSelectedViewController: (CGFloat) alpha
 {
-    [staticMVC.selectedViewController.view setAlpha:alpha];
+    [singleton.selectedViewController.view setAlpha:alpha];
 }
 
 
@@ -420,17 +420,17 @@ MainViewController *staticMVC;
 {
 //    CGRect frame;
 //
-//    frame = staticMVC.selectedViewController.view.frame;
+//    frame = singleton.selectedViewController.view.frame;
 //
 //    frame.origin.x = x;
 //
-//    staticMVC.selectedViewController.view.frame = frame;
+//    singleton.selectedViewController.view.frame = frame;
 
-//    NSLog(@"Moving Blur from:%f to:%f", staticMVC.blurViewLeft.constant, x);
-//    NSLog(@"BlurView x:%f y:%f w:%f h:%f", staticMVC.blurView.frame.origin.x,staticMVC.blurView.frame.origin.y,staticMVC.blurView.frame.size.width,staticMVC.blurView.frame.size.height);
-//    NSLog(@"BlurViewContainer x:%f y:%f w:%f h:%f", staticMVC.blurViewContainer.frame.origin.x,staticMVC.blurViewContainer.frame.origin.y,staticMVC.blurViewContainer.frame.size.width,staticMVC.blurViewContainer.frame.size.height);
-    staticMVC.selectedViewController.leftConstraint.constant = x;
-    staticMVC.blurViewLeft.constant = x;
+//    NSLog(@"Moving Blur from:%f to:%f", singleton.blurViewLeft.constant, x);
+//    NSLog(@"BlurView x:%f y:%f w:%f h:%f", singleton.blurView.frame.origin.x,singleton.blurView.frame.origin.y,singleton.blurView.frame.size.width,singleton.blurView.frame.size.height);
+//    NSLog(@"BlurViewContainer x:%f y:%f w:%f h:%f", singleton.blurViewContainer.frame.origin.x,singleton.blurViewContainer.frame.origin.y,singleton.blurViewContainer.frame.size.width,singleton.blurViewContainer.frame.size.height);
+    singleton.selectedViewController.leftConstraint.constant = x;
+    singleton.blurViewLeft.constant = x;
 
 }
 
@@ -454,7 +454,7 @@ MainViewController *staticMVC;
     [MainViewController animateFadeOut:_selectedViewController.view];
     [MainViewController moveSelectedViewController: -[MainViewController getLargestDimension]];
 //    [MainViewController addChildView:_loginViewController.view];
-    NSArray *constraints = [Util insertSubviewWithConstraints:staticMVC.view child:_loginViewController.view belowSubView:staticMVC.tabBar];
+    NSArray *constraints = [Util insertSubviewWithConstraints:singleton.view child:_loginViewController.view belowSubView:singleton.tabBar];
     _loginViewController.leftConstraint = [constraints objectAtIndex:0];
 
     [MainViewController hideTabBarAnimated:animated];
@@ -486,19 +486,19 @@ MainViewController *staticMVC;
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
                          {
-                             staticMVC.tabBarBottom.constant = 0;
-                             [staticMVC.view layoutIfNeeded];
+                             singleton.tabBarBottom.constant = 0;
+                             [singleton.view layoutIfNeeded];
 
                          }
                          completion:^(BOOL finished)
                          {
-                             NSLog(@"view: %f, %f, tab bar origin: %f", staticMVC.view.frame.origin.y, staticMVC.view.frame.size.height, staticMVC.tabBar.frame.origin.y);
+                             NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
 
                          }];
     }
     else
     {
-        staticMVC.tabBarBottom.constant = 0;
+        singleton.tabBarBottom.constant = 0;
     }
 }
 
@@ -513,19 +513,19 @@ MainViewController *staticMVC;
                          animations:^
                          {
 
-                             staticMVC.navBarTop.constant = 0;
+                             singleton.navBarTop.constant = 0;
 
-                             [staticMVC.view layoutIfNeeded];
+                             [singleton.view layoutIfNeeded];
                          }
                          completion:^(BOOL finished)
                          {
-                             NSLog(@"view: %f, %f, tab bar origin: %f", staticMVC.view.frame.origin.y, staticMVC.view.frame.size.height, staticMVC.tabBar.frame.origin.y);
+                             NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                          }];
     }
     else
     {
-        staticMVC.navBarTop.constant = 0;
-        [staticMVC.view layoutIfNeeded];
+        singleton.navBarTop.constant = 0;
+        [singleton.view layoutIfNeeded];
     }
 }
 
@@ -541,18 +541,18 @@ MainViewController *staticMVC;
 						 animations:^
 		 {
 
-             staticMVC.tabBarBottom.constant = -staticMVC.tabBar.frame.size.height;
+             singleton.tabBarBottom.constant = -singleton.tabBar.frame.size.height;
 
-             [staticMVC.view layoutIfNeeded];
+             [singleton.view layoutIfNeeded];
 		 }
 		completion:^(BOOL finished)
 		 {
-			NSLog(@"view: %f, %f, tab bar origin: %f", staticMVC.view.frame.origin.y, staticMVC.view.frame.size.height, staticMVC.tabBar.frame.origin.y);
+			NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
 		 }];
 	}
 	else
 	{
-        staticMVC.tabBarBottom.constant = -staticMVC.tabBar.frame.size.height;
+        singleton.tabBarBottom.constant = -singleton.tabBar.frame.size.height;
     }
 }
 
@@ -567,25 +567,25 @@ MainViewController *staticMVC;
                          animations:^
                          {
 
-                             staticMVC.navBarTop.constant = -staticMVC.navBar.frame.size.height;
+                             singleton.navBarTop.constant = -singleton.navBar.frame.size.height;
 
-                             [staticMVC.view layoutIfNeeded];
+                             [singleton.view layoutIfNeeded];
                          }
                          completion:^(BOOL finished)
                          {
-                             NSLog(@"view: %f, %f, tab bar origin: %f", staticMVC.view.frame.origin.y, staticMVC.view.frame.size.height, staticMVC.tabBar.frame.origin.y);
+                             NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                          }];
     }
     else
     {
-        staticMVC.navBarTop.constant = -staticMVC.navBar.frame.size.height;
-        [staticMVC.view layoutIfNeeded];
+        singleton.navBarTop.constant = -singleton.navBar.frame.size.height;
+        [singleton.view layoutIfNeeded];
     }
 }
 
 +(UIViewController *)getSelectedViewController
 {
-    return staticMVC.selectedViewController;
+    return singleton.selectedViewController;
 }
 
 //
@@ -595,7 +595,7 @@ MainViewController *staticMVC;
 //
 +(void)changeNavBarOwner:(UIViewController *)viewController
 {
-    staticMVC.navBarOwnerViewController = viewController;
+    singleton.navBarOwnerViewController = viewController;
 }
 
 +(void)changeNavBar:(UIViewController *)viewController
@@ -606,7 +606,7 @@ MainViewController *staticMVC;
              action:(SEL)func
          fromObject:(id) object
 {
-    if (staticMVC.navBarOwnerViewController != viewController)
+    if (singleton.navBarOwnerViewController != viewController)
         return;
 
     UIButton *titleLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -634,18 +634,18 @@ MainViewController *staticMVC;
     {
         UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:titleLabelButton];
         titleLabelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        staticMVC.navBar.topItem.leftBarButtonItem = buttonItem;
+        singleton.navBar.topItem.leftBarButtonItem = buttonItem;
 
     }
     else if (navBarSide == NAV_BAR_RIGHT)
     {
         UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:titleLabelButton];
         titleLabelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        staticMVC.navBar.topItem.rightBarButtonItem = buttonItem;
+        singleton.navBar.topItem.rightBarButtonItem = buttonItem;
     }
     else
     {
-        staticMVC.navBar.topItem.titleView = titleLabelButton;
+        singleton.navBar.topItem.titleView = titleLabelButton;
     }
 
 }
@@ -855,14 +855,10 @@ MainViewController *staticMVC;
 //    self.backgroundView.image = [Theme Singleton].backgroundApp;
 
     if (bNewAccount) {
-        _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
-        [_fadingAlert messageTextSet:NSLocalizedString(@"Creating and securing wallet", nil)];
-        _fadingAlert.fadeDuration = 2;
-        _fadingAlert.fadeDelay = 0;
-        [_fadingAlert blockModal:YES];
-        [_fadingAlert showSpinner:YES];
-        [_fadingAlert show];
-        [CoreBridge setupNewAccount:_fadingAlert];
+        [FadingAlertView create:self.view
+                        message:[Theme Singleton].creatingWalletText
+                       holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        [CoreBridge setupNewAccount];
     }
 
     // After login, reset all the main views
@@ -974,18 +970,13 @@ MainViewController *staticMVC;
 
 - (void)showPasswordCheckSkip
 {
-    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
-    [_fadingAlert messageTextSet:NSLocalizedString(@"Please create a new account and transfer your funds if you forgot your password.", nil)];
-    _fadingAlert.fadeDuration = 2;
-    _fadingAlert.fadeDelay = 5;
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showFading];
+    [MainViewController fadingAlertHelpPopup:[Theme Singleton].createAccountAndTransferFundsText];
 }
 
 - (void)showPasswordSetAlert
 {
     NSString *title = NSLocalizedString(@"No password set", nil);
-    NSString *message = NSLocalizedString(@"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.", nil);
+    NSString *message = [Theme Singleton].createPasswordForAccountText;
     // show password reminder test
     _passwordSetAlert = [[UIAlertView alloc]
             initWithTitle:title
@@ -998,17 +989,9 @@ MainViewController *staticMVC;
 
 - (void)handlePasswordResults:(NSNumber *)authenticated
 {
-    if (_fadingAlert) {
-        [_fadingAlert dismiss:NO];
-    }
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated) {
-        _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
-        [_fadingAlert messageTextSet:NSLocalizedString(@"Great job remembering your password.", nil)];
-        _fadingAlert.fadeDuration = 2;
-        _fadingAlert.fadeDelay = 5;
-        [_fadingAlert blockModal:NO];
-        [_fadingAlert show];
+        [MainViewController fadingAlert:NSLocalizedString(@"Great job remembering your password.", nil)];
     } else {
         _passwordIncorrectAlert = [[UIAlertView alloc]
                 initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
@@ -1038,7 +1021,6 @@ MainViewController *staticMVC;
 
 - (void)fadingAlertDismissed:(FadingAlertView *)view
 {
-    _fadingAlert = nil;
 }
 
 
@@ -1164,13 +1146,7 @@ MainViewController *staticMVC;
 
     [_requestViewController resetViews];
 
-    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
-    [_fadingAlert messageTextSet:message];
-    _fadingAlert.fadeDuration = 2;
-    _fadingAlert.fadeDelay = 5;
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showSpinner:NO];
-    [_fadingAlert showFading];
+    [MainViewController fadingAlert:message];
 }
 
 - (void)launchViewSweep:(NSNotification *)notification
@@ -1255,12 +1231,7 @@ MainViewController *staticMVC;
             [Util checkPasswordAsync:[[alertView textFieldAtIndex:0] text]
                         withSelector:@selector(handlePasswordResults:)
                           controller:self];
-
-            _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
-            [_fadingAlert messageTextSet:NSLocalizedString(@"Checking password...", nil)];
-            [_fadingAlert blockModal:YES];
-            [_fadingAlert showSpinner:YES];
-            [_fadingAlert showFading];
+            [FadingAlertView create:self.view message:NSLocalizedString(@"Checking password...", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
         }
     }
     else if (_passwordIncorrectAlert == alertView)
@@ -1739,33 +1710,33 @@ MainViewController *staticMVC;
 
 + (CGFloat)getFooterHeight
 {
-    return staticMVC.tabBar.frame.size.height;
+    return singleton.tabBar.frame.size.height;
 }
 
 + (CGFloat)getHeaderHeight
 {
-    return staticMVC.navBar.frame.size.height;
+    return singleton.navBar.frame.size.height;
 }
 
 + (CGFloat)getWidth
 {
-    return staticMVC.navBar.frame.size.width;
+    return singleton.navBar.frame.size.width;
 }
 
 + (CGFloat)getHeight
 {
-    return staticMVC.view.frame.size.height;
+    return singleton.view.frame.size.height;
 }
 
 +(CGFloat)getLargestDimension
 {
-    CGRect frame = staticMVC.view.frame;
+    CGRect frame = singleton.view.frame;
     return frame.size.height > frame.size.width ? frame.size.height : frame.size.width;
 }
 
 +(CGFloat)getSmallestDimension
 {
-    CGRect frame = staticMVC.view.frame;
+    CGRect frame = singleton.view.frame;
     return frame.size.height < frame.size.width ? frame.size.height : frame.size.width;
 }
 
@@ -1777,8 +1748,8 @@ MainViewController *staticMVC;
 
 //+ (void)addChildView: (UIView *)view
 //{
-//    [Util insertSubviewWithConstraints:staticMVC.view child:view belowSubView:staticMVC.tabBar];
-////    [staticMVC.view insertSubview:view aboveSubview:staticMVC.tabBar];
+//    [Util insertSubviewWithConstraints:singleton.view child:view belowSubView:singleton.tabBar];
+////    [singleton.view insertSubview:view aboveSubview:singleton.tabBar];
 //}
 
 + (void)animateFadeIn:(UIView *)view
@@ -1829,14 +1800,14 @@ MainViewController *staticMVC;
 
 + (NSArray *)animateSwapViewControllers:(AirbitzViewController *)in out:(AirbitzViewController *)out
 {
-    NSArray *constraints = [Util insertSubviewControllerWithConstraints:staticMVC.view child:in belowSubView:staticMVC.tabBar];
+    NSArray *constraints = [Util insertSubviewControllerWithConstraints:singleton.view child:in belowSubView:singleton.tabBar];
 
-    staticMVC.selectedViewController = in;
+    singleton.selectedViewController = in;
 
     [out.view setAlpha:1.0];
     [in.view setAlpha:0.0];
-    staticMVC.blurViewLeft.constant = 0;
-    [staticMVC.view layoutIfNeeded];
+    singleton.blurViewLeft.constant = 0;
+    [singleton.view layoutIfNeeded];
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.20
@@ -1845,12 +1816,12 @@ MainViewController *staticMVC;
                      animations:^
                      {
                          in.leftConstraint.constant = 0;
-                         staticMVC.blurViewLeft.constant = 0;
-                         [staticMVC.blurViewContainer setAlpha:1];
+                         singleton.blurViewLeft.constant = 0;
+                         [singleton.blurViewContainer setAlpha:1];
                          [out.view setAlpha:0.0];
                          [in.view setAlpha:1.0];
 
-                         [staticMVC.view layoutIfNeeded];
+                         [singleton.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished)
                      {
@@ -1864,15 +1835,15 @@ MainViewController *staticMVC;
 {
 
 
-    [Util insertSubviewControllerWithConstraints:staticMVC.view child:viewController belowSubView:staticMVC.tabBar];
+    [Util insertSubviewControllerWithConstraints:singleton.view child:viewController belowSubView:singleton.tabBar];
 
     viewController.leftConstraint.constant = viewController.view.frame.size.width;
-    [staticMVC.view layoutIfNeeded];
+    [singleton.view layoutIfNeeded];
 
     if (withBlur)
     {
-        staticMVC.blurViewLeft.constant = [MainViewController getLargestDimension];
-        [staticMVC.view layoutIfNeeded];
+        singleton.blurViewLeft.constant = [MainViewController getLargestDimension];
+        [singleton.view layoutIfNeeded];
     }
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
@@ -1884,9 +1855,9 @@ MainViewController *staticMVC;
                          viewController.leftConstraint.constant = 0;
                          if (withBlur)
                          {
-                             staticMVC.blurViewLeft.constant = 0;
+                             singleton.blurViewLeft.constant = 0;
                          }
-                         [staticMVC.view layoutIfNeeded];
+                         [singleton.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished)
                      {
@@ -1899,7 +1870,7 @@ MainViewController *staticMVC;
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 
     if (withBlur)
-        staticMVC.blurViewLeft.constant = 0;
+        singleton.blurViewLeft.constant = 0;
 
     [UIView animateWithDuration:0.35
                           delay:0.0
@@ -1907,8 +1878,8 @@ MainViewController *staticMVC;
                      animations:^ {
                          viewController.leftConstraint.constant = [MainViewController getLargestDimension];
                          if (withBlur)
-                             staticMVC.blurViewLeft.constant = [MainViewController getLargestDimension];
-                         [staticMVC.view layoutIfNeeded];
+                             singleton.blurViewLeft.constant = [MainViewController getLargestDimension];
+                         [singleton.view layoutIfNeeded];
 
                      }
                      completion:^(BOOL finished) {
@@ -2027,20 +1998,19 @@ MainViewController *staticMVC;
 }
 
 
-+ (void)showFadingAlert:(NSString *)message
++ (void)fadingAlertHelpPopup:(NSString *)message
 {
-    [MainViewController showFadingAlert:message withDelay:ERROR_MESSAGE_FADE_DELAY];
+    [MainViewController fadingAlert:message holdTime:[Theme Singleton].alertHoldTimeHelpPopups];
 }
 
-+ (void)showFadingAlert:(NSString *)message withDelay:(int)fadeDelay
++ (void)fadingAlert:(NSString *)message
 {
-    staticMVC.fadingAlert = [FadingAlertView2 CreateInsideView:staticMVC.view withDelegate:nil];
-    [staticMVC.fadingAlert messageTextSet:message];
-    staticMVC.fadingAlert.fadeDelay = fadeDelay;
-    staticMVC.fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
-    [staticMVC.fadingAlert blockModal:NO];
-    [staticMVC.fadingAlert showSpinner:NO];
-    [staticMVC.fadingAlert showFading];
+    [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+}
+
++ (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime
+{
+    [FadingAlertView create:singleton.view message:message holdTime:holdTime];
 }
 
 @end

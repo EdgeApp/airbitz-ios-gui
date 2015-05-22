@@ -1,7 +1,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define HOLD_TIME_DEFAULT 0 // Forces use of Theme.m hold time settings
+#define DROP_DOWN_HOLD_TIME_DEFAULT 0  // Forces use of Theme.m hold time settings
 
 @protocol DropDownAlertViewDelegate;
 @protocol UIGestureRecognizerDelegate;

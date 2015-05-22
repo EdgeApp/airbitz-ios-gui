@@ -59,8 +59,8 @@ typedef enum eNavBarSide
 +(CGFloat)getSafeOffscreenOffset:(CGFloat) widthOrHeight;
 
 
-+ (void)showFadingAlert:(NSString *)message;
-+ (void)showFadingAlert:(NSString *)message withDelay:(int)fadeDelay;
-
++ (void)fadingAlertHelpPopup:(NSString *)message;
++ (void)fadingAlert:(NSString *)message;
++ (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime;
 
 @end

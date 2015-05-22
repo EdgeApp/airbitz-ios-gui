@@ -195,26 +195,9 @@
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
         {
-            if (_fadingAlert)
-            {
-                [_fadingAlert dismiss:NO];
-                _fadingAlert = nil;
-            }
-            _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:self];
-            _fadingAlert.fadeDelay = 9999;
-            _fadingAlert.fadeDuration = FADING_HELP_DURATION;
-            [_fadingAlert messageTextSet:[Theme Singleton].walletHasBeenArchivedText];
-            [_fadingAlert blockModal:YES];
-            [_fadingAlert showFading];
-
-        }
-        else
-        {
-            if (_fadingAlert)
-            {
-                [_fadingAlert dismiss:NO];
-                _fadingAlert = nil;
-            }
+            [FadingAlertView create:self.view
+                            message:[Theme Singleton].walletHasBeenArchivedText
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
         }
 
         [self updateTextFieldContents];
@@ -822,19 +805,6 @@
     return (self.sendStatusController != nil || self.transactionDetailsController != nil);
 }
 
-- (void)showFadingError:(NSString *)message
-{
-    if (_fadingAlert) {
-        [_fadingAlert dismiss:YES];
-    }
-    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
-    [_fadingAlert messageTextSet:message];
-    _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
-    _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showFading];
-}
-
 - (void)dismissErrorMessage
 {
     [_fadingAlert dismiss:NO];
@@ -905,12 +875,12 @@
         NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
         NSString *entry = _pinRequired ? @"PIN" : @"password";
         if(remaining < 1.5) {
-            [self showFadingError:[NSString stringWithFormat:
+            [MainViewController fadingAlert:[NSString stringWithFormat:
                 NSLocalizedString(@"Please wait 1 second before retrying %@", nil), entry]];
         }
         else
         {
-            [self showFadingError:[NSString stringWithFormat:
+            [MainViewController fadingAlert:[NSString stringWithFormat:
                 NSLocalizedString(@"Please wait %.0f seconds before retrying %@", nil), remaining, entry]];
         }
     }
@@ -918,7 +888,7 @@
     {
         //make sure PIN is good
         if (_pinRequired && !self.withdrawlPIN.text.length) {
-            [self showFadingError:NSLocalizedString(@"Please enter your PIN", nil)];
+            [MainViewController fadingAlert:NSLocalizedString(@"Please enter your PIN", nil)];
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
             [_confirmationSlider resetIn:1.0];
@@ -930,11 +900,11 @@
             if (kInvalidEntryWait == [user sendInvalidEntry])
             {
                 NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
-                [self showFadingError:[NSString stringWithFormat:NSLocalizedString(@"Incorrect PIN. Please wait %.0f seconds and try again.", nil), remaining]];
+                [MainViewController fadingAlert:[NSString stringWithFormat:NSLocalizedString(@"Incorrect PIN. Please wait %.0f seconds and try again.", nil), remaining]];
             }
             else
             {
-                [self showFadingError:NSLocalizedString(@"Incorrect PIN", nil)];
+                [MainViewController fadingAlert:NSLocalizedString(@"Incorrect PIN", nil)];
             }
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
@@ -956,7 +926,7 @@
     if (bAuthenticated) {
         [self continueChecks];
     } else {
-        [self showFadingError:NSLocalizedString(@"Incorrect password", nil)];
+        [MainViewController fadingAlert:NSLocalizedString(@"Incorrect password", nil)];
         [_withdrawlPIN becomeFirstResponder];
         [_withdrawlPIN selectAll:nil];
     }
@@ -965,7 +935,7 @@
 - (void)continueChecks
 {
     if (_spendTarget.pSpend->amount == 0) {
-        [self showFadingError:NSLocalizedString(@"Please enter an amount to send", nil)];
+        [MainViewController fadingAlert:NSLocalizedString(@"Please enter an amount to send", nil)];
     } else if (_spendTarget.pSpend->amount < DUST_AMOUNT) {
         [self tooSmallAlert];
     } else {
@@ -979,12 +949,12 @@
     tABC_Error error;
     ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], DUST_AMOUNT, &currency, [CoreBridge Singleton].currentWallet.currencyNum, &error);
     if (error.code == ABC_CC_Ok) {
-        [self showFadingError:[NSString stringWithFormat:
+        [MainViewController fadingAlert:[NSString stringWithFormat:
             NSLocalizedString(@"Amount is too small. Please send at least %@ (~%@)", nil),
                 [CoreBridge formatSatoshi:DUST_AMOUNT],
                 [CoreBridge formatCurrency:currency withCurrencyNum:[CoreBridge Singleton].currentWallet.currencyNum]]];
     } else {
-        [self showFadingError:NSLocalizedString(@"Amount is too small", nil)];
+        [MainViewController fadingAlert:NSLocalizedString(@"Amount is too small", nil)];
     }
 }
 
