@@ -12,6 +12,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -315,17 +316,19 @@
                                                             <color key="textColor" red="0.047715688751811786" green="0.34057895439621577" blue="0.54781940553999375" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhU-8o-H50">
+                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhU-8o-H50">
                                                             <rect key="frame" x="191" y="28" width="109" height="25"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="109" id="Zmq-qt-3i4"/>
                                                                 <constraint firstAttribute="height" constant="25" id="Znr-IK-Fxr"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <state key="normal" backgroundImage="btn_blue.png">
-                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <state key="normal" title="Button">
+                                                                <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="ButtonPressed" destination="7qj-Nh-UCb" eventType="touchUpInside" id="IrX-Re-aur"/>
@@ -1079,11 +1082,10 @@ Scan the QR code using this device</string>
     </scenes>
     <resources>
         <image name="back_arrow.png" width="844" height="568"/>
-        <image name="background.jpg" width="25" height="22"/>
+        <image name="background.jpg" width="22" height="22"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
         <image name="bkg_textfield.png" width="844" height="568"/>
         <image name="btn_addCategory.png" width="38" height="31"/>
-        <image name="btn_blue.png" width="110" height="27"/>
         <image name="btn_deleteCategory.png" width="38" height="31"/>
         <image name="btn_right.png" width="22" height="22"/>
         <image name="icon_search.png" width="14" height="15"/>
