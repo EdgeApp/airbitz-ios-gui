@@ -336,13 +336,14 @@ static User *singleton = nil;  // this will be the one and only object this stat
 }
 - (BOOL)offerHelp:(NSInteger *)value thisSession:(BOOL *)session
 {
-    if (FORCE_HELP_SCREENS)
-        return YES;
-
     if (*session) {
         return NO;
     }
     *session = YES;
+
+    if (FORCE_HELP_SCREENS)
+        return YES;
+
     if (*value > 2) {
         return NO;
     }
