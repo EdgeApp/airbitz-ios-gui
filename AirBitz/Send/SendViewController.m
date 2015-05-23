@@ -55,6 +55,7 @@
 #import "SpendTarget.h"
 #import "DL_URLServer.h"
 #import "Server.h"
+#import "PopupPickerView2.h"
 
 #define BLE_TIMEOUT                 1.0
 
@@ -81,7 +82,7 @@ typedef enum eImportState
 
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerViewDelegate,ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
+@interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerView2Delegate,ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
  ,ZBarReaderDelegate, ZBarReaderViewDelegate
 >
 {
@@ -129,7 +130,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //@property (nonatomic, strong) NSArray   *arrayWallets;
 //@property (nonatomic, strong) NSArray   *arrayWalletNames;
 @property (nonatomic, strong) NSArray   *arrayChoicesIndexes;
-@property (nonatomic, strong) PopupPickerView               *popupPickerSendTo;
+@property (nonatomic, strong) PopupPickerView2               *popupPickerSendTo;
 //@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *scanningSpinner;
 //@property (nonatomic, weak) IBOutlet UILabel				*scanningLabel;
 @property (nonatomic, strong) IBOutlet UILabel				*scanningErrorLabel;
@@ -541,16 +542,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             arrayChoices = [self createNewSendToChoices:@""];
 
 
-            self.popupPickerSendTo = [PopupPickerView CreateForView:self.view
-                                                     relativeToView:self.segmentedControl
-                                                   relativePosition:PopupPickerPosition_Above
+            self.popupPickerSendTo = [PopupPickerView2 CreateForView:self.view
+                                                   relativePosition:PopupPicker2Position_Full_Rising
                                                         withStrings:arrayChoices
-                                                     fromCategories:nil
-                                                        selectedRow:-1
-                                                          withWidth:-1
                                                       withAccessory:nil
-                                                      andCellHeight:[Theme Singleton].heightPopupPicker
-                                              roundedEdgesAndShadow:NO];
+                                                         headerText:[Theme Singleton].selectWalletTransferPopupHeaderText
+            ];
             self.popupPickerSendTo.delegate = self;
             // Do Transfer
             break;
@@ -1655,9 +1652,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
     NSMutableArray *arrayChoicesIndexes = [[NSMutableArray alloc] init];
 
-    [arrayChoices addObject:[Theme Singleton].selectWalletTransferPopupHeaderText];
-    [arrayChoicesIndexes addObject:[NSNumber numberWithInt:-1]];
-
+//    [arrayChoices addObject:[Theme Singleton].selectWalletTransferPopupHeaderText];
+//    [arrayChoicesIndexes addObject:[NSNumber numberWithInt:-1]];
+//
     for (int i = 0; i < [[CoreBridge Singleton].arrayWallets count]; i++)
     {
         // if this is not our currently selected wallet in the wallet selector
@@ -1684,8 +1681,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
 
     }
-    [arrayChoices addObject:[Theme Singleton].cancelButtonText];
-    [arrayChoicesIndexes addObject:[NSNumber numberWithInt:-1]];
+//    [arrayChoices addObject:[Theme Singleton].cancelButtonText];
+//    [arrayChoicesIndexes addObject:[NSNumber numberWithInt:-1]];
 
     self.arrayChoicesIndexes = arrayChoicesIndexes;
 
@@ -1961,8 +1958,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	}
 }
 
+- (void)PopupPickerView2Cancelled:(PopupPickerView2 *)view userData:(id)data
+{
+    // dismiss the picker
+    [view removeFromSuperview];
+}
+
 //- (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
-- (void)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
+- (void)PopupPickerView2Selected:(PopupPickerView2 *)view onRow:(NSInteger)row userData:(id)data
 {
     tABC_Error error;
     // set the text field to the choice

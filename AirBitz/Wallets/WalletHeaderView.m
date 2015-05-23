@@ -85,6 +85,11 @@
     }
 }
 
+- (void)createCloseButton
+{
+    self.btn_addWallet.transform = CGAffineTransformRotate(self.btn_addWallet.transform, M_PI/4);
+}
+
 - (IBAction)headerButton
 {
     [self.delegate headerButton];

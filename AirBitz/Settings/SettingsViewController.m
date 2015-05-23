@@ -18,7 +18,7 @@
 #import "SignUpViewController.h"
 #import "DebugViewController.h"
 #import "PasswordRecoveryViewController.h"
-#import "PopupPickerView.h"
+#import "PopupPickerView2.h"
 #import "PopupWheelPickerView.h"
 #import "CommonTypes.h"
 #import "CategoriesViewController.h"
@@ -30,6 +30,7 @@
 #import "CoreBridge.h"
 #import "Theme.h"
 #import "MainViewController.h"
+#import "PopupPickerView.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
@@ -113,7 +114,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate,
                                       ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate,
-                                      PopupPickerViewDelegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate,
+                                      PopupPickerView2Delegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate,
                                       SpendingLimitsViewControllerDelegate, TwoFactorShowViewControllerDelegate, DebugViewControllerDelegate,
                                       CBCentralManagerDelegate>
 {
@@ -137,7 +138,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 @property (nonatomic, weak) IBOutlet UITableView    *tableView;
 @property (weak, nonatomic) IBOutlet UIView         *viewMain;
 
-@property (nonatomic, strong) PopupPickerView       *popupPicker;
+@property (nonatomic, strong) PopupPickerView2       *popupPicker;
 @property (nonatomic, strong) PopupWheelPickerView  *popupWheelPicker;
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 
@@ -1475,7 +1476,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     NSInteger section = (cell.tag >> 8);
     NSInteger row = cell.tag & 0xff;
     NSInteger pickerWidth = PICKER_WIDTH;
-    tPopupPickerPosition popupPosition = PopupPickerPosition_Left;
+    tPopupPicker2Position popupPosition = PopupPicker2Position_Full_Fading;
+    NSString *headerText;
 
     NSInteger curChoice = -1;
     NSArray *arrayPopupChoices = nil;
@@ -1507,11 +1509,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                 }
             }
             arrayPopupChoices = self.arrayCurrencyStrings;
-            popupPosition = PopupPickerPosition_ScreenLeft;
+            popupPosition = PopupPicker2Position_Full_Fading;
+            headerText = @"Default Currency";
 
-            // make this take up the entire screen
-            CGRect screenRect = [[UIScreen mainScreen] bounds];
-            pickerWidth = (int) [MainViewController getWidth];
         }
     }
     else if (SECTION_DEFAULT_EXCHANGE == section)
@@ -1527,26 +1527,21 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             curChoice = -1;
         }
         arrayPopupChoices = ARRAY_EXCHANGES;
+        headerText = @"Exchange Rate Data Source";
     }
 
     // if we are supposed to bring up a popup picker
     if (arrayPopupChoices)
     {
         [self blockUser:YES];
-        self.popupPicker = [PopupPickerView CreateForView:self.viewMain
-											 relativeToView:cell.button
+        self.popupPicker = [PopupPickerView2 CreateForView:self.viewMain
                                              relativePosition:popupPosition
                                               withStrings:arrayPopupChoices
-                                              fromCategories:nil
-                                              selectedRow:curChoice
-                                                withWidth:pickerWidth
                                             withAccessory:nil
-                                            andCellHeight:PICKER_CELL_HEIGHT
-                                            roundedEdgesAndShadow:YES
+                                                headerText:headerText
                             ];
         self.popupPicker.userData = cell;
 		//prevent popup from extending behind tool bar
-		[self.popupPicker addCropLine:CGPointMake(0, self.view.window.frame.size.height - TOOLBAR_HEIGHT) direction:PopupPickerPosition_Below animated:NO];
 		self.popupPicker.delegate = self;
     }
 }
@@ -1563,7 +1558,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 #pragma mark - Popup Picker Delegate Methods
 
-- (void)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
+- (void)PopupPickerView2Selected:(PopupPickerView2 *)view onRow:(NSInteger)row userData:(id)data
 {
     UITableViewCell *cell = (UITableViewCell *)data;
     NSInteger sectionCell = (cell.tag >> 8);
@@ -1594,7 +1589,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [self dismissPopupPicker];
 }
 
-- (void)PopupPickerViewCancelled:(PopupPickerView *)view userData:(id)data
+- (void)PopupPickerView2Cancelled:(PopupPickerView2 *)view userData:(id)data
 {
     // dismiss the picker
     [self dismissPopupPicker];

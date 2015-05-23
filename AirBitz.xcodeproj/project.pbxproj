@@ -1358,6 +1358,12 @@
 		DA06FB2E1B0EE88E000BCA46 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB2D1B0EE88E000BCA46 /* Settings.storyboard */; };
 		DA06FB2F1B0EE88E000BCA46 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB2D1B0EE88E000BCA46 /* Settings.storyboard */; };
 		DA06FB301B0EE88E000BCA46 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB2D1B0EE88E000BCA46 /* Settings.storyboard */; };
+		DA06FB341B0FEF0F000BCA46 /* PopupPickerView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB331B0FEF0F000BCA46 /* PopupPickerView2.xib */; };
+		DA06FB3A1B0FEF32000BCA46 /* PopupPickerView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB331B0FEF0F000BCA46 /* PopupPickerView2.xib */; };
+		DA06FB3B1B0FEF33000BCA46 /* PopupPickerView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA06FB331B0FEF0F000BCA46 /* PopupPickerView2.xib */; };
+		DA06FB3D1B0FEF43000BCA46 /* PopupPickerView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA06FB3C1B0FEF43000BCA46 /* PopupPickerView2.m */; };
+		DA06FB3E1B0FEF43000BCA46 /* PopupPickerView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA06FB3C1B0FEF43000BCA46 /* PopupPickerView2.m */; };
+		DA06FB3F1B0FEF43000BCA46 /* PopupPickerView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA06FB3C1B0FEF43000BCA46 /* PopupPickerView2.m */; };
 		DA1333901A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */; };
 		DA1333911A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */; };
 		DA1333981A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1333971A7B12E00051DE14 /* TwoFactorScanViewController.m */; };
@@ -2394,6 +2400,9 @@
 		DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropDownAlertView.m; path = FadingAlert2/DropDownAlertView.m; sourceTree = "<group>"; };
 		DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FadingAlertViewNew.xib; path = ../FadingAlert2/FadingAlertViewNew.xib; sourceTree = "<group>"; };
 		DA06FB2D1B0EE88E000BCA46 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		DA06FB331B0FEF0F000BCA46 /* PopupPickerView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopupPickerView2.xib; path = PopupPickerView/PopupPickerView2.xib; sourceTree = "<group>"; };
+		DA06FB391B0FEF28000BCA46 /* PopupPickerView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopupPickerView2.h; path = PopupPickerView/PopupPickerView2.h; sourceTree = "<group>"; };
+		DA06FB3C1B0FEF43000BCA46 /* PopupPickerView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopupPickerView2.m; path = PopupPickerView/PopupPickerView2.m; sourceTree = "<group>"; };
 		DA13338E1A7AECA70051DE14 /* TwoFactorShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorShowViewController.h; sourceTree = "<group>"; };
 		DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoFactorShowViewController.m; sourceTree = "<group>"; };
 		DA1333961A7B12E00051DE14 /* TwoFactorScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoFactorScanViewController.h; sourceTree = "<group>"; };
@@ -2652,6 +2661,9 @@
 				4C3C308E191834AC006923DE /* PopupPickerView.h */,
 				4C3C308F191834AC006923DE /* PopupPickerView.m */,
 				4C3C3090191834AC006923DE /* PopupPickerView.xib */,
+				DA06FB3C1B0FEF43000BCA46 /* PopupPickerView2.m */,
+				DA06FB391B0FEF28000BCA46 /* PopupPickerView2.h */,
+				DA06FB331B0FEF0F000BCA46 /* PopupPickerView2.xib */,
 				4C3C309519198B33006923DE /* PopupWheelPickerView.h */,
 				4C3C309619198B33006923DE /* PopupWheelPickerView.m */,
 				4C3C309719198B33006923DE /* PopupWheelPickerView.xib */,
@@ -4113,6 +4125,7 @@
 				DA06F9601B0BDD79000BCA46 /* darken_bottom_table_cell@2x.png in Resources */,
 				DA06FAA71B0BDD79000BCA46 /* tabbar_divider@2x.png in Resources */,
 				DA06FB041B0CC107000BCA46 /* gift_box@2x.png in Resources */,
+				DA06FB3A1B0FEF32000BCA46 /* PopupPickerView2.xib in Resources */,
 				DA06F9A21B0BDD79000BCA46 /* h_seperator@2x.png in Resources */,
 				7D98ADD119A7C550003D2BF6 /* Montserrat-Bold.ttf in Resources */,
 				DA06F8CD1B0BDD79000BCA46 /* btn_light@2x.png in Resources */,
@@ -4499,6 +4512,7 @@
 				DA06F7AC1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06F95F1B0BDD79000BCA46 /* darken_bottom_table_cell@2x.png in Resources */,
 				DA06FB031B0CC107000BCA46 /* gift_box@2x.png in Resources */,
+				DA06FB341B0FEF0F000BCA46 /* PopupPickerView2.xib in Resources */,
 				DA06FAA61B0BDD79000BCA46 /* tabbar_divider@2x.png in Resources */,
 				DA06F9A11B0BDD79000BCA46 /* h_seperator@2x.png in Resources */,
 				B5137C0B18A40A8400DA4A34 /* Lato-Hairline.ttf in Resources */,
@@ -4885,6 +4899,7 @@
 				DA06F7AE1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06F9611B0BDD79000BCA46 /* darken_bottom_table_cell@2x.png in Resources */,
 				DA06FB051B0CC107000BCA46 /* gift_box@2x.png in Resources */,
+				DA06FB3B1B0FEF33000BCA46 /* PopupPickerView2.xib in Resources */,
 				DA06FAA81B0BDD79000BCA46 /* tabbar_divider@2x.png in Resources */,
 				DA06F9A31B0BDD79000BCA46 /* h_seperator@2x.png in Resources */,
 				DAE8652F1A88A58A00A17BD3 /* Lato-Hairline.ttf in Resources */,
@@ -5333,6 +5348,7 @@
 				7D98ACF319A7C550003D2BF6 /* MinCharTextField.m in Sources */,
 				7D98ACF419A7C550003D2BF6 /* DDData.m in Sources */,
 				7D98ACF519A7C550003D2BF6 /* SignUpViewController.m in Sources */,
+				DA06FB3E1B0FEF43000BCA46 /* PopupPickerView2.m in Sources */,
 				7D98ACF619A7C550003D2BF6 /* FlashSelectView.m in Sources */,
 				DA6645511B0B408700B04C5B /* AirbitzViewController.m in Sources */,
 				7D98ACF719A7C550003D2BF6 /* Location.m in Sources */,
@@ -5479,6 +5495,7 @@
 				4C5D8C55192AA1A80015BB3C /* DDData.m in Sources */,
 				B5F2E9C218DA911A008ACF88 /* SignUpViewController.m in Sources */,
 				B5C0A9C818EA0E55008F302C /* FlashSelectView.m in Sources */,
+				DA06FB3D1B0FEF43000BCA46 /* PopupPickerView2.m in Sources */,
 				B5C0A98118EA0B52008F302C /* Location.m in Sources */,
 				DA6645501B0B408600B04C5B /* AirbitzViewController.m in Sources */,
 				687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */,
@@ -5625,6 +5642,7 @@
 				DAE8644E1A88A58A00A17BD3 /* DDData.m in Sources */,
 				DAE8644F1A88A58A00A17BD3 /* SignUpViewController.m in Sources */,
 				DAE864501A88A58A00A17BD3 /* FlashSelectView.m in Sources */,
+				DA06FB3F1B0FEF43000BCA46 /* PopupPickerView2.m in Sources */,
 				DAE864511A88A58A00A17BD3 /* Location.m in Sources */,
 				DA6645521B0B408700B04C5B /* AirbitzViewController.m in Sources */,
 				DAE864521A88A58A00A17BD3 /* CoreBridge.m in Sources */,

@@ -24,6 +24,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *btn_header;
 @property (nonatomic, assign) id<WalletHeaderViewDelegate>   delegate;
 +(WalletHeaderView *)CreateWithTitle:(NSString *)title collapse:(BOOL)bCollapsed;
+- (void)createCloseButton;
 
 @end
 
