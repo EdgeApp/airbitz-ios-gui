@@ -60,7 +60,7 @@
 @property (nonatomic) NSString *createAccountAndTransferFundsText;
 @property (nonatomic) NSString *createPasswordForAccountText;
 @property (nonatomic) NSString *settingsText;
-
+@property (nonatomic) NSString *categoriesText;
 
 
 

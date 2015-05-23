@@ -15,6 +15,7 @@
 #import "MainViewController.h"
 #import "Util.h"
 #import "CommonTypes.h"
+#import "Theme.h"
 
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y    3
 #define TABLE_SIZE_EXTRA_HEIGHT         5
@@ -105,6 +106,14 @@
 
     _frameTableOriginal = self.tableView.frame;
     _offsetTableOriginal = self.tableView.contentOffset;
+
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:[Theme Singleton].categoriesText];
+
+    [MainViewController changeNavBar:self title:[Theme Singleton].cancelButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Cancel) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+
+
 }
 
 - (void)didReceiveMemoryWarning

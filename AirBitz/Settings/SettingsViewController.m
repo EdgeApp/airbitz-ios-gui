@@ -199,12 +199,16 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [self.tableView setContentInset:UIEdgeInsetsMake([MainViewController getHeaderHeight],0,[MainViewController getFooterHeight],0)];
     [self.tableView setContentOffset:pt];
 
+    [self updateViews];
+}
+
+- (void)updateViews
+{
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:[Theme Singleton].settingsText];
 
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(Info) fromObject:self];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -1384,6 +1388,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
 	[controller.view removeFromSuperview];
 	_categoriesController = nil;
+    [self updateViews];
 }
 
 #pragma mark - SpendingLimitsViewController Delegate
