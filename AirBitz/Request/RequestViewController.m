@@ -264,6 +264,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
 
 //    [self exchangeRateUpdate:nil];
+    [MainViewController changeNavBarOwner:self];
 
     if (!bInitialized) {
         topFrame = self.USD_TextField.frame;
@@ -273,10 +274,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         bInitialized = true;
     }
     [self changeTopField:true animate:false];
-
-    [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
@@ -318,6 +315,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
         }
     }
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+
 }
 
     -(void)viewDidAppear:(BOOL)animated
@@ -2005,6 +2005,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
     [MainViewController animateOut:self.recipientViewController withBlur:NO complete:nil];
     self.recipientViewController = nil;
+    [MainViewController changeNavBarOwner:self];
+    [self updateViews:nil];
 }
 
 - (void)installLeftToRightSwipeDetection
@@ -2187,7 +2189,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirBitz"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Airbitz"
                                                         message:(controller.mode == RecipientMode_SMS ? @"SMS cancelled" : @"Email cancelled")
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"OK", nil)
