@@ -61,6 +61,9 @@
 @property (nonatomic) NSString *createPasswordForAccountText;
 @property (nonatomic) NSString *settingsText;
 @property (nonatomic) NSString *categoriesText;
+@property (nonatomic) NSString *signupText;
+@property (nonatomic) NSString *changePasswordText;
+@property (nonatomic) NSString *changePINText;
 
 
 

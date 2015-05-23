@@ -1372,6 +1372,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                             &Error);
 
     [_tableView reloadData];
+    [self updateViews];
 }
 
 #pragma mark - PasswordRecoveryViewController Delegate

@@ -19,6 +19,8 @@
 #import "MinCharTextField.h"
 #import "CommonTypes.h"
 #import "FadingAlertView.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
 #define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
@@ -31,7 +33,9 @@
 	float                           _keyboardFrameOriginY;
 }
 
-@property (weak, nonatomic) IBOutlet MontserratLabel            *labelTitle;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordTextHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordFieldHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordReenterHeight;
 @property (weak, nonatomic) IBOutlet MontserratLabel            *labelUserName;
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonNextStep;
 @property (weak, nonatomic) IBOutlet UIImageView                *imageUserName;
@@ -48,6 +52,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView                *imagePassword;
 
 @property (nonatomic, copy)     NSString                        *strReason;
+@property (nonatomic, copy)     NSString                        *title;
 @property (nonatomic, assign)   BOOL                            bSuccess;
 @property (nonatomic, strong)   UIButton                        *buttonBlocker;
 @property (nonatomic, strong)   NSMutableArray                  *arrayCategories;
@@ -114,6 +119,11 @@
 	
 	[self.pinTextField addTarget:self action:@selector(pinTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
 	[self.passwordTextField addTarget:self action:@selector(passwordTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+
+    [MainViewController changeNavBarOwner:self];
+
+    [MainViewController changeNavBar:self title:[Theme Singleton].cancelButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 
     [self updateDisplayForMode:_mode];
 }
@@ -250,7 +260,7 @@
                     {
                         // no callback on this one so tell them it was a success
                         UIAlertView *alert = [[UIAlertView alloc]
-                                                initWithTitle:self.labelTitle.text
+                                                initWithTitle:@"Sign Up"
                                                 message:NSLocalizedString(@"PIN successfully changed.", @"")
                                                 delegate:self
                                                 cancelButtonTitle:@"OK"
@@ -305,7 +315,7 @@
 
     if (mode == SignUpMode_SignUp)
     {
-        self.labelTitle.text = NSLocalizedString(@"Sign Up", @"screen title");
+        NSAssert(0, @"Use SignUpManager");
         [self.buttonNextStep setTitle:NSLocalizedString(@"Next Step", @"") forState:UIControlStateNormal];
 
         self.passwordTextField.placeholder = NSLocalizedString(@"Password", @"");
@@ -330,8 +340,9 @@
     else if (mode == SignUpMode_ChangePasswordNoVerify
             || (_mode == SignUpMode_ChangePassword && ![CoreBridge passwordExists]))
     {
+        self.title = [Theme Singleton].changePasswordText;
+        [MainViewController changeNavBarTitle:self title:self.title];
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
-        self.labelTitle.text = NSLocalizedString(@"Change Password", @"screen title");
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
         self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
@@ -350,11 +361,12 @@
     else if (mode == SignUpMode_ChangePassword)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
-        self.labelTitle.text = NSLocalizedString(@"Change Password", @"screen title");
+        self.title = [Theme Singleton].changePasswordText;
+        [MainViewController changeNavBarTitle:self title:self.title];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
         self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
-        self.userNameTextField.placeholder = NSLocalizedString(@"Old Password", @"");
+        self.userNameTextField.placeholder = NSLocalizedString(@"Current Password", @"");
 
         self.imageUserName.hidden = NO;
         self.userNameTextField.hidden = NO; // used for old password in this case
@@ -370,7 +382,8 @@
     }
     else if (mode == SignUpMode_ChangePasswordUsingAnswers)
     {
-        self.labelTitle.text = NSLocalizedString(@"Change Password", @"screen title");
+        self.title = [Theme Singleton].changePasswordText;
+        [MainViewController changeNavBarTitle:self title:self.title];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
         self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
@@ -391,16 +404,21 @@
     else if (mode == SignUpMode_ChangePIN)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
-        self.labelTitle.text = NSLocalizedString(@"Change PIN", @"screen title");
+        self.title = [Theme Singleton].changePINText;
+        [MainViewController changeNavBarTitle:self title:self.title];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.pinTextField.placeholder = NSLocalizedString(@"New PIN", @"");
-        self.userNameTextField.placeholder = NSLocalizedString(@"Password", @"");
+        self.userNameTextField.placeholder = NSLocalizedString(@"Current Password", @"");
         self.userNameTextField.hidden = ![CoreBridge passwordExists];
 
         self.labelPIN.hidden = NO;
         self.pinTextField.hidden = NO;
         self.imagePIN.hidden = NO;
         self.imageUserName.hidden = NO;
+
+        self.passwordTextHeight.constant = 0;
+        self.passwordFieldHeight.constant = 0;
+        self.passwordReenterHeight.constant = 0;
 
         self.reenterPasswordTextField.returnKeyType = UIReturnKeyNext;
 
@@ -419,20 +437,20 @@
     // if we are signing up for a new account
     if (_mode == SignUpMode_SignUp)
     {
-        // if nothing was entered
-        if ([self.userNameTextField.text length] == 0)
-        {
-            bUserNameFieldIsValid = NO;
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:self.labelTitle.text
-                                  message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                           self.labelTitle.text,
-                                           NSLocalizedString(@"You must enter a user name", @"")]
-                                  delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-            [alert show];
-        }
+//        // if nothing was entered
+//        if ([self.userNameTextField.text length] == 0)
+//        {
+//            bUserNameFieldIsValid = NO;
+//            UIAlertView *alert = [[UIAlertView alloc]
+//                                  initWithTitle:self.labelTitle.text
+//                                  message:[NSString stringWithFormat:@"%@ failed:\n%@",
+//                                           self.labelTitle.text,
+//                                           NSLocalizedString(@"You must enter a user name", @"")]
+//                                  delegate:nil
+//                                  cancelButtonTitle:@"OK"
+//                                  otherButtonTitles:nil];
+//            [alert show];
+//        }
     }
     else if (_mode == SignUpMode_ChangePasswordNoVerify
             || (![CoreBridge passwordExists] 
@@ -448,9 +466,9 @@
         {
             bUserNameFieldIsValid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:self.labelTitle.text
+                                  initWithTitle:self.title
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                           self.labelTitle.text,
+                                           self.title,
                                            NSLocalizedString(@"Incorrect current password", @"")]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
@@ -514,9 +532,9 @@
         {
             bNewPasswordFieldsAreValid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:self.labelTitle.text
+                                  initWithTitle:self.title
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                           self.labelTitle.text,
+                                           self.title,
                                            NSLocalizedString(@"Password does not match re-entered password", @"")]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
@@ -543,9 +561,9 @@
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:self.labelTitle.text
+                                  initWithTitle:self.title
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                           self.labelTitle.text,
+                                           self.title,
                                            [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), ABC_MIN_USERNAME_LENGTH]]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
@@ -557,9 +575,9 @@
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:self.labelTitle.text
+                                  initWithTitle:self.title
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                           self.labelTitle.text,
+                                           self.title,
                                            [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), ABC_MIN_PIN_LENGTH]]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
@@ -677,11 +695,15 @@
 	_activeTextField = textField;
 	if(textField == self.passwordTextField)
 	{
-		if(textField.text.length)
+//		if(textField.text.length)
 		{
 			if(_passwordVerifyView == nil)
 			{
 				_passwordVerifyView = [PasswordVerifyView CreateInsideView:self.contentView withDelegate:self];
+                CGRect frame = _passwordVerifyView.frame;
+                frame.origin.y = [MainViewController getHeaderHeight];
+                frame.size.width = [MainViewController getWidth];
+                _passwordVerifyView.frame = frame;
 			}
 			_passwordVerifyView.password = textField.text;
 		}
@@ -740,6 +762,10 @@
 	if (_passwordVerifyView == nil)
 	{
 		_passwordVerifyView = [PasswordVerifyView CreateInsideView:self.contentView withDelegate:self];
+        CGRect frame = _passwordVerifyView.frame;
+        frame.origin.y = [MainViewController getHeaderHeight];
+        frame.size.width = [MainViewController getWidth];
+        _passwordVerifyView.frame = frame;
 	}
 	_passwordVerifyView.password = textField.text;
 }
@@ -809,7 +835,7 @@
         [User login:username password:self.passwordTextField.text];
 
         alert = [[UIAlertView alloc]
-                 initWithTitle:self.labelTitle.text
+                 initWithTitle:self.title
                  message:NSLocalizedString(@"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!", @"")
                  delegate:self
                  cancelButtonTitle:@"OK"
@@ -823,7 +849,7 @@
     else
     {
         alert = [[UIAlertView alloc]
-                 initWithTitle:self.labelTitle.text
+                 initWithTitle:self.title
                  message:[NSString stringWithFormat:@"Password change failed:\n%@", _strReason]
                  delegate:nil
                  cancelButtonTitle:@"OK"
@@ -859,9 +885,9 @@
         [self.activityView stopAnimating];
         [Util printABC_Error:&Error];
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:self.labelTitle.text
+                              initWithTitle:self.title
                               message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                       self.labelTitle.text,
+                                       self.title,
                                        [Util errorMap:&Error]]
                               delegate:nil
                               cancelButtonTitle:@"OK"

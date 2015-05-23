@@ -92,6 +92,9 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.createPasswordForAccountText                       = NSLocalizedString(@"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.", nil);
     self.settingsText                                       = NSLocalizedString(@"Settings", nil);
     self.categoriesText                                     = NSLocalizedString(@"Categories", nil);
+    self.signupText                                         = NSLocalizedString(@"Sign Up", nil);
+    self.changePasswordText                                 = NSLocalizedString(@"Change Password", nil);
+    self.changePINText                                      = NSLocalizedString(@"Change PIN", nil);
 
     self.sendRequestButtonDisabled = 0.4f;
 

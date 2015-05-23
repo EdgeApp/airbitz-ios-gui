@@ -932,184 +932,6 @@
             </objects>
             <point key="canvasLocation" x="-739" y="-987.5"/>
         </scene>
-        <!--Show WalletQR View Controller-->
-        <scene sceneID="UOX-Wf-p5A">
-            <objects>
-                <viewController storyboardIdentifier="ShowWalletQRViewController" id="Nhq-ts-4tB" customClass="ShowWalletQRViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0dg-iH-pbt"/>
-                        <viewControllerLayoutGuide type="bottom" id="2wX-kh-uuG"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2bg-WL-0Np">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="cmf-4c-Bn7">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="qwQ-aM-78p">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Request Bitcoin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AX6-P8-c2L" customClass="MontserratLabel">
-                                <rect key="frame" x="92" y="32" width="136" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEJ-BD-aLY">
-                                <rect key="frame" x="280" y="23" width="37" height="37"/>
-                                <state key="normal" image="btn_info.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="Info" destination="Nhq-ts-4tB" eventType="touchUpInside" id="iQq-lT-gnf"/>
-                                </connections>
-                            </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Ibr-dx-7hh">
-                                <rect key="frame" x="254" y="32" width="20" height="20"/>
-                            </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDA-iU-G6k">
-                                <rect key="frame" x="245" y="23" width="37" height="37"/>
-                                <state key="normal" image="UIButtonBarRefresh.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="Refresh" destination="Nhq-ts-4tB" eventType="touchUpInside" id="Sx7-xe-Lg3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrZ-BT-uK1">
-                                <rect key="frame" x="4" y="23" width="90" height="37"/>
-                                <inset key="contentEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" image="back_arrow.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="Back" destination="Nhq-ts-4tB" eventType="touchUpInside" id="A6D-dA-DOm"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x8L-0b-Hbe">
-                                <rect key="frame" x="37" y="75" width="245" height="245"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0A5-KU-hj2">
-                                <rect key="frame" x="45" y="83" width="229" height="229"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qov-uI-G7t">
-                                <rect key="frame" x="34" y="411" width="80" height="42"/>
-                                <size key="titleShadowOffset" width="0.0" height="1"/>
-                                <state key="normal" backgroundImage="copy_btn.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="CopyAddress" destination="Nhq-ts-4tB" eventType="touchUpInside" id="xFw-bz-B3y"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BLE_Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="gOB-df-rnx">
-                                <rect key="frame" x="20" y="342" width="21" height="29"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="O1G-gR-pT0" customClass="LatoLabel">
-                                <rect key="frame" x="49" y="332" width="220" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2FV-6E-gId" customClass="LatoLabel">
-                                <rect key="frame" x="34" y="355" width="251" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1WWM5ZWX" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUE-S9-d9J" customClass="LatoLabel">
-                                <rect key="frame" x="37" y="378" width="82" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4Li-R2-dUi" customClass="LatoLabel">
-                                <rect key="frame" x="119" y="378" width="166" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WwW-Ho-MLl">
-                                <rect key="frame" x="119" y="411" width="80" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" backgroundImage="email_btn.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="email" destination="Nhq-ts-4tB" eventType="touchUpInside" id="9qc-gD-5jb"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uhf-Lo-dxk">
-                                <rect key="frame" x="205" y="411" width="80" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" backgroundImage="sms_btn.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="SMS" destination="Nhq-ts-4tB" eventType="touchUpInside" id="kOg-Ul-bO2"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vnX-Jp-a7F">
-                                <rect key="frame" x="48" y="103" width="225" height="189"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BLE_connected.png" translatesAutoresizingMaskIntoConstraints="NO" id="KpQ-eK-ekw">
-                                        <rect key="frame" x="0.0" y="0.0" width="225" height="189"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BLE_photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Enn-T7-Jij">
-                                        <rect key="frame" x="86" y="30" width="52" height="52"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Payment received" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MKi-zS-5GZ" customClass="LatoLabel">
-                                        <rect key="frame" x="23" y="92" width="180" height="25"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="m฿ 0.00847778" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="B9X-O3-QF3" customClass="LatoLabel">
-                                        <rect key="frame" x="23" y="118" width="180" height="25"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$3.15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dSV-XA-npo" customClass="LatoLabel">
-                                        <rect key="frame" x="23" y="144" width="180" height="25"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="480"/>
-                    <connections>
-                        <outlet property="BLE_LogoImageView" destination="gOB-df-rnx" id="uvh-3P-3m6"/>
-                        <outlet property="addressLabel1" destination="KUE-S9-d9J" id="Yhh-qY-l2u"/>
-                        <outlet property="addressLabel2" destination="4Li-R2-dUi" id="NZU-wU-fsP"/>
-                        <outlet property="amountLabel" destination="2FV-6E-gId" id="TuK-CX-L2B"/>
-                        <outlet property="buttonCopyAddress" destination="Qov-uI-G7t" id="Zp6-bx-jv8"/>
-                        <outlet property="connectedLine2" destination="B9X-O3-QF3" id="YkX-DI-qOt"/>
-                        <outlet property="connectedLine3" destination="dSV-XA-npo" id="hQL-8m-J3U"/>
-                        <outlet property="connectedName" destination="MKi-zS-5GZ" id="EEp-BP-JOg"/>
-                        <outlet property="connectedPhoto" destination="Enn-T7-Jij" id="l16-Xe-SfZ"/>
-                        <outlet property="connectedView" destination="vnX-Jp-a7F" id="kdM-X3-OaU"/>
-                        <outlet property="qrCodeImageView" destination="0A5-KU-hj2" id="g0D-Lx-S59"/>
-                        <outlet property="refreshButton" destination="KDA-iU-G6k" id="x1N-am-pQA"/>
-                        <outlet property="refreshSpinner" destination="Ibr-dx-7hh" id="EK6-ty-JvK"/>
-                        <outlet property="statusLabel" destination="O1G-gR-pT0" id="D6E-8w-Iqx"/>
-                        <outlet property="viewQRCodeFrame" destination="x8L-0b-Hbe" id="CNC-j6-IvN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nKP-kx-08U" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-26" y="-1025"/>
-        </scene>
         <!--Airbitz View Controller-->
         <scene sceneID="hWx-JX-ZaM">
             <objects>
@@ -3150,113 +2972,150 @@
                         <viewControllerLayoutGuide type="bottom" id="6Wm-vH-hKf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eu3-6y-a7N">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="gvu-vI-lOr">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="zMB-6z-qu2">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkD-2s-BfP" userLabel="Label - Title" customClass="MontserratLabel">
-                                <rect key="frame" x="56" y="32" width="209" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcP-uw-ZhY">
-                                <rect key="frame" x="4" y="23" width="90" height="37"/>
-                                <inset key="imageEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" image="back_arrow.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="Back:" destination="Ych-QR-sa0" eventType="touchUpInside" id="MmR-I4-OAb"/>
-                                </connections>
-                            </button>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ThD-Fy-Z1N">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cuy-zk-xQO">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                        <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2cx-Qx-XQc" customClass="MinCharTextField">
-                                                <rect key="frame" x="24" y="21" width="247" height="35"/>
-                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
-                                            </textField>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password must have an upper and lower case letter, a number, and a minimum of 10 characters" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BED-Cf-F1n" customClass="LatoLabel">
-                                                <rect key="frame" x="24" y="56" width="270" height="75"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4ab-Wa-eS4" customClass="MinCharTextField">
-                                                <rect key="frame" x="24" y="134" width="247" height="35"/>
-                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-enter Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QzV-Gk-Vrs" customClass="MinCharTextField">
-                                                <rect key="frame" x="24" y="180" width="247" height="35"/>
-                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
-                                            </textField>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4 Digit PIN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WB0-Ox-RAw" customClass="MontserratLabel">
-                                                <rect key="frame" x="38" y="238" width="112" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <size key="shadowOffset" width="0.0" height="1"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Create PIN" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="puA-fb-r0H" customClass="MinCharTextField">
-                                                <rect key="frame" x="167" y="235" width="127" height="30"/>
-                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done" secureTextEntry="YES"/>
-                                            </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Det-Mr-8a9" customClass="StylizedButton">
-                                                <rect key="frame" x="13" y="283" width="294" height="41"/>
-                                                <color key="backgroundColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <size key="titleShadowOffset" width="0.0" height="1"/>
-                                                <state key="normal" title="Next Step">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="NextStep:" destination="Ych-QR-sa0" eventType="touchUpInside" id="04B-ej-xSg"/>
-                                                </connections>
-                                            </button>
-                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="LKm-fq-vQk">
-                                                <rect key="frame" x="245" y="293" width="20" height="20"/>
-                                                <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </activityIndicatorView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ThD-Fy-Z1N" userLabel="BlurView" customClass="BlurView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="487"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuy-zk-xQO" userLabel="View -content">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2cx-Qx-XQc" customClass="MinCharTextField">
+                                        <rect key="frame" x="20" y="90" width="335" height="35"/>
+                                        <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="Aii-Dm-P1N"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password must have an upper and lower case letter, a number, and a minimum of 10 characters" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BED-Cf-F1n" customClass="LatoLabel">
+                                        <rect key="frame" x="20" y="125" width="335" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="ACb-Ju-eOZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4ab-Wa-eS4" customClass="MinCharTextField">
+                                        <rect key="frame" x="20" y="203" width="335" height="35"/>
+                                        <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="C33-QM-qQI"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-enter Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QzV-Gk-Vrs" customClass="MinCharTextField">
+                                        <rect key="frame" x="20" y="249" width="335" height="35"/>
+                                        <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="oZA-Gh-bU3"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 Digit PIN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WB0-Ox-RAw" customClass="MontserratLabel">
+                                        <rect key="frame" x="20" y="311" width="191" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Create PIN" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="puA-fb-r0H" customClass="MinCharTextField">
+                                        <rect key="frame" x="228" y="304" width="127" height="30"/>
+                                        <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="c6S-wV-uYH"/>
+                                            <constraint firstAttribute="width" constant="127" id="myM-D9-tAZ"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done" secureTextEntry="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Det-Mr-8a9" customClass="StylizedButton">
+                                        <rect key="frame" x="20" y="352" width="335" height="41"/>
+                                        <color key="backgroundColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="41" id="cGO-ZM-Qnj"/>
+                                        </constraints>
+                                        <size key="titleShadowOffset" width="0.0" height="1"/>
+                                        <state key="normal" title="Next Step">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="NextStep:" destination="Ych-QR-sa0" eventType="touchUpInside" id="04B-ej-xSg"/>
+                                        </connections>
+                                    </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="LKm-fq-vQk">
+                                        <rect key="frame" x="300" y="362" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="1gE-p4-RGU"/>
+                                            <constraint firstAttribute="height" constant="20" id="o6H-q7-gIV"/>
+                                        </constraints>
+                                        <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="puA-fb-r0H" firstAttribute="top" secondItem="QzV-Gk-Vrs" secondAttribute="bottom" constant="20" id="2av-uc-4Xk"/>
+                                    <constraint firstItem="BED-Cf-F1n" firstAttribute="leading" secondItem="cuy-zk-xQO" secondAttribute="leading" constant="20" symbolic="YES" id="4XJ-L6-KCG"/>
+                                    <constraint firstAttribute="trailing" secondItem="QzV-Gk-Vrs" secondAttribute="trailing" constant="20" symbolic="YES" id="62n-Wh-RoJ"/>
+                                    <constraint firstItem="WB0-Ox-RAw" firstAttribute="leading" secondItem="cuy-zk-xQO" secondAttribute="leading" constant="20" symbolic="YES" id="6WN-z3-B21"/>
+                                    <constraint firstAttribute="trailing" secondItem="Det-Mr-8a9" secondAttribute="trailing" constant="20" symbolic="YES" id="A0l-SP-QNq"/>
+                                    <constraint firstItem="QzV-Gk-Vrs" firstAttribute="leading" secondItem="cuy-zk-xQO" secondAttribute="leading" constant="20" symbolic="YES" id="DTr-rS-chH"/>
+                                    <constraint firstItem="QzV-Gk-Vrs" firstAttribute="top" secondItem="4ab-Wa-eS4" secondAttribute="bottom" constant="11" id="Ft4-NP-aEG"/>
+                                    <constraint firstAttribute="trailing" secondItem="BED-Cf-F1n" secondAttribute="trailing" constant="20" symbolic="YES" id="GHD-Jz-lCL"/>
+                                    <constraint firstAttribute="trailing" secondItem="LKm-fq-vQk" secondAttribute="trailing" constant="55" id="GVP-VY-SE3"/>
+                                    <constraint firstItem="Det-Mr-8a9" firstAttribute="top" secondItem="puA-fb-r0H" secondAttribute="bottom" constant="18" id="GmI-Hb-azA"/>
+                                    <constraint firstItem="2cx-Qx-XQc" firstAttribute="top" secondItem="cuy-zk-xQO" secondAttribute="top" constant="90" id="It3-FW-vdn"/>
+                                    <constraint firstItem="2cx-Qx-XQc" firstAttribute="leading" secondItem="cuy-zk-xQO" secondAttribute="leading" constant="20" symbolic="YES" id="QkK-w9-GD9"/>
+                                    <constraint firstItem="Det-Mr-8a9" firstAttribute="leading" secondItem="cuy-zk-xQO" secondAttribute="leading" constant="20" symbolic="YES" id="R07-sI-KmX"/>
+                                    <constraint firstItem="BED-Cf-F1n" firstAttribute="top" secondItem="2cx-Qx-XQc" secondAttribute="bottom" id="Spg-Vc-2JO"/>
+                                    <constraint firstItem="4ab-Wa-eS4" firstAttribute="top" secondItem="BED-Cf-F1n" secondAttribute="bottom" constant="3" id="Uz4-Ht-P1g"/>
+                                    <constraint firstItem="LKm-fq-vQk" firstAttribute="centerY" secondItem="Det-Mr-8a9" secondAttribute="centerY" id="bZV-VA-NJX"/>
+                                    <constraint firstItem="WB0-Ox-RAw" firstAttribute="centerY" secondItem="puA-fb-r0H" secondAttribute="centerY" id="cXw-N5-Qnb"/>
+                                    <constraint firstAttribute="trailing" secondItem="2cx-Qx-XQc" secondAttribute="trailing" constant="20" symbolic="YES" id="fcr-bL-uIm"/>
+                                    <constraint firstAttribute="trailing" secondItem="puA-fb-r0H" secondAttribute="trailing" constant="20" symbolic="YES" id="g2t-bg-hNx"/>
+                                    <constraint firstAttribute="trailing" secondItem="4ab-Wa-eS4" secondAttribute="trailing" constant="20" symbolic="YES" id="hBE-N8-Nd4"/>
+                                    <constraint firstItem="puA-fb-r0H" firstAttribute="leading" secondItem="WB0-Ox-RAw" secondAttribute="trailing" constant="17" id="uAh-Wf-EyZ"/>
+                                    <constraint firstItem="4ab-Wa-eS4" firstAttribute="leading" secondItem="cuy-zk-xQO" secondAttribute="leading" constant="20" symbolic="YES" id="w32-Wd-PBj"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="cuy-zk-xQO" secondAttribute="trailing" id="27k-i4-EDV"/>
+                            <constraint firstItem="cuy-zk-xQO" firstAttribute="leading" secondItem="eu3-6y-a7N" secondAttribute="leading" id="DLB-1P-v38"/>
+                            <constraint firstItem="ThD-Fy-Z1N" firstAttribute="leading" secondItem="eu3-6y-a7N" secondAttribute="leading" id="VEE-wk-Ufh"/>
+                            <constraint firstAttribute="trailing" secondItem="ThD-Fy-Z1N" secondAttribute="trailing" id="b3x-Ls-p66"/>
+                            <constraint firstItem="cuy-zk-xQO" firstAttribute="top" secondItem="eu3-6y-a7N" secondAttribute="top" id="g36-py-JnG"/>
+                            <constraint firstAttribute="bottom" secondItem="cuy-zk-xQO" secondAttribute="bottom" id="onf-ck-jtr"/>
+                            <constraint firstItem="ThD-Fy-Z1N" firstAttribute="top" secondItem="eu3-6y-a7N" secondAttribute="top" constant="64" id="pxq-4K-rDI"/>
+                            <constraint firstAttribute="bottom" secondItem="ThD-Fy-Z1N" secondAttribute="bottom" constant="49" id="uST-t2-2zN"/>
+                        </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="600"/>
                     <connections>
                         <outlet property="activityView" destination="LKm-fq-vQk" id="4rc-ya-L2b"/>
                         <outlet property="buttonNextStep" destination="Det-Mr-8a9" id="TgL-qG-Sto"/>
                         <outlet property="contentView" destination="cuy-zk-xQO" id="0ck-ex-pvX"/>
                         <outlet property="labelPIN" destination="WB0-Ox-RAw" id="8eG-8O-dDl"/>
                         <outlet property="labelPasswordInfo" destination="BED-Cf-F1n" id="1yB-qL-abu"/>
-                        <outlet property="labelTitle" destination="ZkD-2s-BfP" id="bGB-Os-kla"/>
+                        <outlet property="passwordFieldHeight" destination="C33-QM-qQI" id="Wus-tt-SN0"/>
+                        <outlet property="passwordReenterHeight" destination="oZA-Gh-bU3" id="mbU-Qb-NAo"/>
                         <outlet property="passwordTextField" destination="4ab-Wa-eS4" id="UX3-ed-lcQ"/>
+                        <outlet property="passwordTextHeight" destination="ACb-Ju-eOZ" id="Oza-yx-Rfq"/>
                         <outlet property="pinTextField" destination="puA-fb-r0H" id="XGL-Ar-wHg"/>
                         <outlet property="reenterPasswordTextField" destination="QzV-Gk-Vrs" id="BBo-9o-lLA"/>
                         <outlet property="userNameTextField" destination="2cx-Qx-XQc" id="cIZ-zA-dnW"/>
@@ -3379,142 +3238,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pEL-dB-Vc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-123.5" y="-2656.5"/>
-        </scene>
-        <!--Re Login View Controller-->
-        <scene sceneID="eRa-qy-qsK">
-            <objects>
-                <viewController storyboardIdentifier="PINReLoginViewController" id="ObX-Wd-u7G" customClass="PINReLoginViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="J7M-t1-nOU"/>
-                        <viewControllerLayoutGuide type="bottom" id="nJs-eY-uH7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Bg1-dC-kHd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background_login.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="agP-lq-X4H">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KKg-DK-24f">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo_large.png" translatesAutoresizingMaskIntoConstraints="NO" id="5UU-KK-R7x">
-                                        <rect key="frame" x="55" y="37" width="211" height="71"/>
-                                    </imageView>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iUH-NW-Znt" userLabel="View - PINCode" customClass="APPINView">
-                                        <rect key="frame" x="53" y="156" width="214" height="44"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Szb-Pc-bx6" customClass="StylizedButton">
-                                        <rect key="frame" x="34" y="210" width="252" height="44"/>
-                                        <color key="backgroundColor" red="0.85882359740000003" green="0.23529413339999999" blue="0.2117647231" alpha="1" colorSpace="deviceRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <size key="titleShadowOffset" width="0.0" height="1"/>
-                                        <state key="normal" title="Login With Password">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonSwitchUserTouched:" destination="ObX-Wd-u7G" eventType="touchUpInside" id="Cox-0G-TQl"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PnN-rV-qtq">
-                                        <rect key="frame" x="0.0" y="334" width="320" height="40"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe to View Business Directory" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bv5-eJ-aMl" customClass="LatoLabel">
-                                                <rect key="frame" x="15" y="6" width="255" height="26"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <color key="shadowColor" red="0.078431372550000003" green="0.45882352939999999" blue="0.69019607839999997" alpha="1" colorSpace="deviceRGB"/>
-                                                <size key="shadowOffset" width="0.0" height="2"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="swipe-arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="IfN-2S-jcc">
-                                                <rect key="frame" x="257" y="10" width="36" height="20"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bns-ip-pfm">
-                                        <rect key="frame" x="0.0" y="437" width="320" height="40"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAN-gQ-Vd0" userLabel="Button - Forgot">
-                                                <rect key="frame" x="72" y="-2" width="148" height="44"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <size key="titleShadowOffset" width="0.0" height="2"/>
-                                                <state key="normal" title="Forgot PIN">
-                                                    <color key="titleShadowColor" red="0.047058823530000002" green="0.42352941179999998" blue="0.67450980390000004" alpha="1" colorSpace="deviceRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="buttonForgotTouched:" destination="ObX-Wd-u7G" eventType="touchUpInside" id="mmJ-nT-GLD"/>
-                                                </connections>
-                                            </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_forgot_password_arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="AJw-K5-BXE">
-                                                <rect key="frame" x="191" y="8" width="24" height="25"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="87k-In-8Rb" customClass="ButtonSelectorView">
-                                        <rect key="frame" x="53" y="116" width="213" height="30"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <rect key="contentStretch" x="0.49999999999999994" y="0.49999999999999994" width="1" height="1"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKI-Dd-pLU">
-                                <rect key="frame" x="6" y="24" width="24" height="24"/>
-                                <state key="normal" image="ico_nav_directory_white.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="Back" destination="ObX-Wd-u7G" eventType="touchUpInside" id="4Un-ot-mkQ"/>
-                                </connections>
-                            </button>
-                            <view alpha="0.29999999999999999" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4yY-mi-ey8" userLabel="Spinner View">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Woc-ke-jgt">
-                                        <rect key="frame" x="142" y="221" width="37" height="37"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RyW-nG-Ul5" userLabel="ErrorMessageView">
-                                <rect key="frame" x="0.0" y="-44" width="320" height="568"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background-errormessage.png" translatesAutoresizingMaskIntoConstraints="NO" id="4vb-kx-8Pe">
-                                        <rect key="frame" x="60" y="200" width="200" height="168"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Invalid PIN" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ise-AL-ggT" userLabel="ErrorMessageText" customClass="LatoLabel">
-                                        <rect key="frame" x="85" y="215" width="150" height="139"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="PINCodeView" destination="iUH-NW-Znt" id="1Nu-WP-Imw"/>
-                        <outlet property="backButton" destination="dKI-Dd-pLU" id="oZg-PI-YVy"/>
-                        <outlet property="contentView" destination="KKg-DK-24f" id="uOT-9y-nSC"/>
-                        <outlet property="errorMessageText" destination="Ise-AL-ggT" id="rBY-xc-LvW"/>
-                        <outlet property="errorMessageView" destination="RyW-nG-Ul5" id="qYy-k8-BwC"/>
-                        <outlet property="logoImage" destination="5UU-KK-R7x" id="y5f-Vf-moe"/>
-                        <outlet property="spinnerView" destination="4yY-mi-ey8" id="3zT-zF-JL9"/>
-                        <outlet property="swipeRightArrow" destination="IfN-2S-jcc" id="N1c-vm-znz"/>
-                        <outlet property="swipeText" destination="bv5-eJ-aMl" id="XCP-BE-Ark"/>
-                        <outlet property="usernameSelector" destination="87k-In-8Rb" id="Fms-Rk-y7r"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ppn-mZ-QMu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2107.5" y="-2684.5"/>
         </scene>
         <!--Import Wallet View Controller-->
         <scene sceneID="OWe-xc-3tR">
@@ -3882,14 +3605,9 @@
     <resources>
         <image name="BLE_Button.png" width="50" height="50"/>
         <image name="BLE_Logo.png" width="21" height="29"/>
-        <image name="BLE_connected.png" width="200" height="168"/>
-        <image name="BLE_photo.png" width="45" height="45"/>
-        <image name="UIButtonBarRefresh.png" width="18" height="22"/>
         <image name="back_arrow.png" width="30" height="30"/>
-        <image name="background-errormessage.png" width="200" height="168"/>
         <image name="background.jpg" width="320" height="568"/>
         <image name="background_header.png" width="320" height="568"/>
-        <image name="background_login.jpg" width="320" height="568"/>
         <image name="bd_cell_bottom.png" width="12" height="12"/>
         <image name="bd_cell_middle.png" width="6" height="6"/>
         <image name="bd_cell_top.png" width="12" height="12"/>
@@ -3898,13 +3616,10 @@
         <image name="btn_album.png" width="50" height="50"/>
         <image name="btn_blue.png" width="110" height="27"/>
         <image name="btn_export_dates.png" width="94" height="36"/>
-        <image name="btn_forgot_password_arrow.png" width="24" height="26"/>
         <image name="btn_info.png" width="24" height="25"/>
         <image name="btn_light.png" width="252" height="38"/>
         <image name="btn_right.png" width="22" height="22"/>
         <image name="btn_td_done.png" width="251" height="41"/>
-        <image name="copy_btn.png" width="80" height="42"/>
-        <image name="email_btn.png" width="80" height="42"/>
         <image name="emboss_down.png" width="20" height="21"/>
         <image name="emboss_up.png" width="291" height="193"/>
         <image name="ico_nav_directory_white.png" width="29" height="30"/>
@@ -3923,7 +3638,6 @@
         <image name="postcard-mountain-blue.jpg" width="843" height="568"/>
         <image name="postcard-mountain.png" width="844" height="568"/>
         <image name="scan_frame.png" width="271" height="226"/>
-        <image name="sms_btn.png" width="80" height="42"/>
         <image name="swipe-arrow.png" width="35" height="18"/>
         <image name="table_export.png" width="291" height="225"/>
     </resources>
