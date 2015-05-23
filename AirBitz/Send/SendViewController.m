@@ -291,6 +291,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
 
     [self updateViews:nil];
+    [self flashItemSelected:FLASH_ITEM_OFF];
+
 }
 
 - (void)setupNavBar
@@ -330,7 +332,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
 {
-//    [self.flashSelector selectItem:FLASH_ITEM_OFF];
+    [self flashItemSelected:FLASH_ITEM_OFF];
     if (SCAN_MODE_UNINITIALIZED == scanMode) {
         [self scanBLEstartCamera];
     }

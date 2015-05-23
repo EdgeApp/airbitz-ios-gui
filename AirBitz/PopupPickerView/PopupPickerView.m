@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "PopupPickerView.h"
+#import "MainViewController.h"
 
 #define DEFAULT_WIDTH           330
 
@@ -257,8 +258,12 @@ CGRect keyboardFrame;
 		{
 			heightSubtract = (frameInWindow.origin.y + frameInWindow.size.height) - (usableFrame.origin.y + usableFrame.size.height);
 		}
-		newFrame.size.height -= heightSubtract;
-		
+//		newFrame.size.height -= heightSubtract;
+
+        //
+        // We want full width!!
+        //
+        newFrame.size.width = [MainViewController getWidth];
         // set the new frame
         popup.frame = newFrame;
         

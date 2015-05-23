@@ -36,7 +36,7 @@
 
 	self.pickerTextView.delegate = self;
 
-    self.pickerTextView.popupPickerPosition = PopupPickerPosition_Above;
+    self.pickerTextView.popupPickerPosition = PopupPickerPosition_Below;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

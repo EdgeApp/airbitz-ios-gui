@@ -32,8 +32,11 @@
     unsigned int    _count;
     CGRect          _frameTableOriginal;
     CGPoint         _offsetTableOriginal;
-}
+    BOOL            bTableCellSelected;
+    float                           _viewSearchBarHeightOriginal;
 
+}
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewSearchBarsHeight;
 @property (nonatomic, weak) IBOutlet    UITableView     *tableView;
 @property (nonatomic, weak) IBOutlet    UIButton        *cancelButton;
 @property (nonatomic, weak) IBOutlet    UIButton        *doneButton;
@@ -81,6 +84,7 @@
 
     // get a callback when the search changes
     [self.textSearch addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
     // set up the specifics on our picker text view
     self.pickerTextNew.textField.returnKeyType = UIReturnKeyDone;
@@ -98,6 +102,8 @@
     self.pickerTextNew.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
     self.pickerTextNew.cropPointBottom = (!IS_IPHONE4 ? 351 : 263); // magic number
     self.pickerTextNew.delegate = self;
+
+    bTableCellSelected = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -177,7 +183,8 @@
 	cell.delegate = self;
 
     cell.pickerTextView.textField.returnKeyType = UIReturnKeyDone;
-    cell.pickerTextView.textField.font = [UIFont systemFontOfSize:14];
+    cell.pickerTextView.textField.font = [UIFont fontWithName:[Theme Singleton].appFont size:17];
+    cell.pickerTextView.textField.textColor = [UIColor whiteColor];
     cell.pickerTextView.textField.clearButtonMode = UITextFieldViewModeNever;
     cell.pickerTextView.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     cell.pickerTextView.textField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -611,6 +618,9 @@
 
 - (void)categoriesCellEndEditing:(CategoriesCell *)cell
 {
+    [self growSearchBarView];
+    [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+
     // change the value
     [self forceCategoryFieldValue:cell.pickerTextView.textField forPickerView:cell.pickerTextView];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -629,7 +639,7 @@
                         animations:^
         {
             // return the table to previous position and scroll position
-            self.tableView.frame = _frameTableOriginal;
+//            self.tableView.frame = _frameTableOriginal;
             [self.tableView setContentOffset:_offsetTableOriginal];
         }
                         completion:^(BOOL finished)
@@ -638,7 +648,7 @@
     }
     else
     {
-        self.tableView.frame = _frameTableOriginal;
+//        self.tableView.frame = _frameTableOriginal;
         [self.tableView setContentOffset:_offsetTableOriginal];
     }
     [self updateDisplay];
@@ -647,7 +657,9 @@
 - (BOOL)categoriesCellTextShouldReturn:(CategoriesCell *)cell
 {
 	[cell.pickerTextView.textField resignFirstResponder];
-
+    bTableCellSelected = NO;
+    [self growSearchBarView];
+    [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
 	return YES;
 }
 
@@ -661,6 +673,8 @@
     {
         [cell.pickerTextView.textField resignFirstResponder];
     }
+    [self growSearchBarView];
+    [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
 }
 
 - (void)categoriesCellDidShowPopup:(CategoriesCell *)cell
@@ -670,8 +684,10 @@
     // So the popup has now appear on the screen, here is what we will do
     // (beware the magic numbers!)
 
+    [self shrinkSearchBarView];
     // save the current scroll
     _offsetTableOriginal = self.tableView.contentOffset;
+    bTableCellSelected = YES;
 
     // animate it all
     [UIView animateWithDuration:0.35
@@ -679,33 +695,62 @@
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
-         // make the table the size of a single cell and put it right above the keyboard
-         CGRect frame = _frameTableOriginal;
-         frame.size.height = (!IS_IPHONE4 ? 40 : 40);
-         frame.origin.y = (!IS_IPHONE4 ? 305 : 217);
-         self.tableView.frame = frame;
+         CGRect frame;
 
+         [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, self.tableView.frame.size.height, 0)];
          // scroll the table to the cell that was selected
          NSIndexPath *pathOfTheCell = [self.tableView indexPathForCell:cell];
+
          [self.tableView scrollToRowAtIndexPath:pathOfTheCell atScrollPosition:UITableViewScrollPositionTop animated:NO];
 
-         // move the selection picker to the right place and at the right size
          frame = cell.pickerTextView.popupPicker.frame;
-         frame.size.height = (!IS_IPHONE4 ? 250 : 162);
-         frame.origin.y = (!IS_IPHONE4 ? 50 : 50);
+         frame.origin.y = [MainViewController getHeaderHeight] + cell.layer.frame.size.height;
+         if (IS_IPHONE4)
+         {
+             frame.size.height = frame.size.height * .75;
+         }
          cell.pickerTextView.popupPicker.frame = frame;
 
-         // move the arrow to the right spot
-         /*
-         frame = cell.pickerTextView.popupPicker.arrowImage.frame;
-         frame.origin.y = cell.pickerTextView.popupPicker.frame.size.height - 9;
-         cell.pickerTextView.popupPicker.arrowImage.frame = frame;
-          */
+
+
      }
                      completion:^(BOOL finished)
      {
 
      }];
+}
+
+- (void)shrinkSearchBarView
+{
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+                     {
+                         _viewSearchBarHeightOriginal = self.viewSearchBarsHeight.constant;
+                         self.viewSearchBarsHeight.constant = [MainViewController getHeaderHeight];
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished)
+                     {
+                     }];
+
+}
+
+- (void)growSearchBarView
+{
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+                     {
+                         self.viewSearchBarsHeight.constant = _viewSearchBarHeightOriginal;
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished)
+                     {
+                     }];
+
 }
 
 @end
