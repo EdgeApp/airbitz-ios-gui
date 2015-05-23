@@ -1439,7 +1439,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="294" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-nP-HJx" userLabel="Wallet Name" customClass="MontserratLabel">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-nP-HJx" userLabel="Wallet Name" customClass="MontserratLabel">
                                                             <rect key="frame" x="8" y="4" width="292" height="51"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1447,7 +1447,7 @@
                                                             <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <size key="shadowOffset" width="0.0" height="1"/>
                                                         </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="301" verticalHuggingPriority="252" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YUW-ey-Md7" userLabel="Amount" customClass="LatoLabel">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="301" verticalHuggingPriority="252" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YUW-ey-Md7" userLabel="Amount" customClass="LatoLabel">
                                                             <rect key="frame" x="310" y="4" width="60" height="51"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="EyM-cs-3rB"/>
@@ -1460,13 +1460,13 @@
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="9iF-nP-HJx" firstAttribute="top" secondItem="vKv-Bo-lvH" secondAttribute="top" constant="4" id="9z3-qs-7b7"/>
-                                                        <constraint firstItem="YUW-ey-Md7" firstAttribute="top" secondItem="vKv-Bo-lvH" secondAttribute="top" constant="4" id="Kro-GH-NMR"/>
-                                                        <constraint firstAttribute="bottom" secondItem="9iF-nP-HJx" secondAttribute="bottom" constant="4" id="NJB-vJ-mcy"/>
-                                                        <constraint firstAttribute="bottom" secondItem="YUW-ey-Md7" secondAttribute="bottom" constant="4" id="cnu-fd-xjd"/>
-                                                        <constraint firstAttribute="trailing" secondItem="YUW-ey-Md7" secondAttribute="trailing" constant="5" id="dGL-y2-0Vk"/>
-                                                        <constraint firstItem="9iF-nP-HJx" firstAttribute="leading" secondItem="vKv-Bo-lvH" secondAttribute="leading" constant="8" id="u4N-SX-y50"/>
-                                                        <constraint firstItem="YUW-ey-Md7" firstAttribute="leading" secondItem="9iF-nP-HJx" secondAttribute="trailing" constant="10" id="wyo-uJ-37K"/>
+                                                        <constraint firstItem="9iF-nP-HJx" firstAttribute="top" secondItem="vKv-Bo-lvH" secondAttribute="top" constant="20" symbolic="YES" id="9z3-qs-7b7"/>
+                                                        <constraint firstAttribute="bottom" secondItem="YUW-ey-Md7" secondAttribute="bottom" constant="20" symbolic="YES" id="LGa-vu-ZFb"/>
+                                                        <constraint firstAttribute="trailing" secondItem="YUW-ey-Md7" secondAttribute="trailing" constant="20" symbolic="YES" id="Lgd-bs-H0y"/>
+                                                        <constraint firstAttribute="bottom" secondItem="9iF-nP-HJx" secondAttribute="bottom" constant="20" symbolic="YES" id="NJB-vJ-mcy"/>
+                                                        <constraint firstItem="YUW-ey-Md7" firstAttribute="top" secondItem="vKv-Bo-lvH" secondAttribute="top" constant="20" symbolic="YES" id="Qbw-0B-KhB"/>
+                                                        <constraint firstItem="YUW-ey-Md7" firstAttribute="leading" secondItem="9iF-nP-HJx" secondAttribute="trailing" constant="8" symbolic="YES" id="Uhx-bQ-W6m"/>
+                                                        <constraint firstItem="9iF-nP-HJx" firstAttribute="leading" secondItem="vKv-Bo-lvH" secondAttribute="leading" constant="20" symbolic="YES" id="u4N-SX-y50"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2854,7 +2854,7 @@
                         <viewControllerLayoutGuide type="top" id="3HA-Gy-Y0a"/>
                         <viewControllerLayoutGuide type="bottom" id="com-9x-BkR"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nTP-NI-D0U">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="nTP-NI-D0U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>

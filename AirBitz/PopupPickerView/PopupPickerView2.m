@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "WalletHeaderView.h"
+#import "Util.h"
 
 #define DEFAULT_WIDTH           330
 
@@ -94,70 +95,6 @@ CGRect keyboardFrame;
 	//NSLog(@"HIDE: keyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 }
 
-//- (void)addCropLine:(CGPoint)pointOnScreen direction:(tPopupPickerPosition)cropDirection animated:(BOOL)animated
-//{
-//	float distance;
-//	CGPoint newPoint = [self.superview convertPoint:pointOnScreen fromView:self.window];
-//	switch (cropDirection)
-//	{
-//			case PopupPickerPosition_Above:
-//				distance = newPoint.y - availableSpace.origin.y;
-//				if (distance > 0)
-//				{
-//					availableSpace.origin.y += distance;
-//					availableSpace.size.height -= distance;
-//				}
-//				[self constrainToKeepoutsAnimated:animated];
-//			break;
-//			case PopupPickerPosition_Below:
-//				distance = (availableSpace.origin.y + availableSpace.size.height) - newPoint.y;
-//				if (distance > 0)
-//				{
-//					availableSpace.size.height -= distance;
-//				}
-//				[self constrainToKeepoutsAnimated:animated];
-//			break;
-//			default:
-//				NSLog(@"*** THIS CROP DIRECTION NOT SUPPORTED YET ***");
-//				break;
-//	}
-//}
-//
-//- (void)constrainToKeepoutsAnimated:(BOOL)animated
-//{
-//	float duration = 0.01;
-//	if (animated)
-//	{
-//		duration = 0.35;
-//	}
-//	[UIView animateWithDuration:duration delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut
-//					 animations:^
-//	 {
-//		 CGRect frame = self.frame;
-//
-//		 if(frame.origin.y < availableSpace.origin.y)
-//		 {
-//			 frame.size.height += (availableSpace.origin.y - frame.origin.y);
-//			 frame.origin.y -= (availableSpace.origin.y - frame.origin.y);
-//		 }
-//
-//		 if((frame.origin.y + frame.size.height) > (availableSpace.origin.y + availableSpace.size.height))
-//		 {
-//			 frame.size.height -= ((frame.origin.y + frame.size.height) - (availableSpace.origin.y + availableSpace.size.height));
-//		 }
-//
-//		 //also don't intersect keyboard
-//		 if((frame.origin.y + frame.size.height) > keyboardFrame.origin.y)
-//		 {
-//			 frame.size.height -= ((frame.origin.y + frame.size.height) - keyboardFrame.origin.y);
-//		 }
-//		 self.frame = frame;
-//	 }
-//	 completion:^(BOOL finished)
-//	 {
-//	 }];
-//}
-//
 - (void)dismiss
 {
     [UIView animateWithDuration:0.35
@@ -230,6 +167,32 @@ CGRect keyboardFrame;
         newFrame.origin.y = [MainViewController getHeaderHeight];
     }
     popup.frame = newFrame;
+
+
+    UIBlurEffect *blurEffect;
+    UIVisualEffectView    *blurEffectView;
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+    blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+
+//            [blurEffectView setFrame:self.frame];
+
+//            [self addSubview:blurEffectView];
+//            [self.superview insertSubview:blurEffectView belowSubview:self];
+//            [Util insertSubviewWithConstraints:self.superview child:blurEffectView belowSubView:self];
+//    [Util addSubviewWithConstraints:self child:blurEffectView];
+    [popup->m_viewBorder addSubview:blurEffectView];
+    blurEffectView.frame = popup->m_viewBorder.frame;
+
+//            UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
+//            UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
+//            [vibrancyEffectView setFrame:self.backgroundVibrancyView.bounds];
+//
+//            [[vibrancyEffectView contentView] addSubview:self.backgroundVibrancyView];
+//
+//            [[blurEffectView contentView] addSubview:vibrancyEffectView];
+//            vibrancyEffectView.center = blurEffectView.center;
+    [popup->m_viewBorder.layer setBackgroundColor:[UIColorFromARGB(0xFF000000) CGColor]];
+
     [popup setAlpha:0];
 
     [UIView animateWithDuration:0.35
@@ -250,27 +213,6 @@ CGRect keyboardFrame;
     // assign the delegate
 	popup.delegate = (id<PopupPickerView2Delegate>)parentView;
     
-    // select the row if one was specified
-//    if (selectedRow != -1)
-//    {
-//        //cw table wasn't scrolling to selected position because rows hadn't been filled in yet.  PerformSelector fixed it.
-//		[popup performSelectorOnMainThread:@selector(selectRow2:) withObject:[NSNumber numberWithInt:(int)selectedRow] waitUntilDone:NO];
-//    }
-    
-//    if(rounded) {
-//        // round the corners
-//        popup.layer.cornerRadius = 10;
-//        popup->innerView.layer.cornerRadius = 10;
-//        popup->m_viewBorder.layer.cornerRadius = 10;
-//
-//        // add drop shadow
-//        popup.layer.shadowColor = [UIColor blackColor].CGColor;
-//        popup.layer.shadowOpacity = 0.5;
-//        popup.layer.shadowRadius = 10;
-//        popup.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
-//    }
-//
-
     return popup;
 }
 

@@ -15,7 +15,7 @@
 @interface BlurView ()
 {
     UIToolbar *toolbarBlur;
-    UIView    *blurEffectView;
+    UIVisualEffectView    *blurEffectView;
     UIView *backgroundVibrancyView;
     BOOL bInitialized;
 }
@@ -49,7 +49,6 @@
 
     if (!bInitialized)
     {
-        if([UIVisualEffectView class]){
             UIBlurEffect *blurEffect;
 
             if (self.bSetBlurStyleExtraLight)
@@ -84,25 +83,6 @@
 //            [[blurEffectView contentView] addSubview:vibrancyEffectView];
 //            vibrancyEffectView.center = blurEffectView.center;
             [self.layer setBackgroundColor:[UIColorFromARGB(0x00000000) CGColor]];
-        }
-        else
-        {
-            if (self.bSetBlurStyleDark)
-            {
-                // No iOS8 blur capability which is needed to do a dark blur view
-                // Just do a dark tinted view with opacity
-                [self.layer setBackgroundColor:[UIColorFromARGB(0x80000000) CGColor]];
-            }
-            else
-            {
-                // iOS 7 whitish blur view can be faked with a UIToolBar
-                toolbarBlur = [[UIToolbar alloc] initWithFrame:self.frame];
-//                [self.superview insertSubview:toolbarBlur belowSubview:self];
-                [self.layer setBackgroundColor:[UIColorFromARGB(0x00000000) CGColor]];
-                [Util insertSubviewWithConstraints:self.superview child:toolbarBlur belowSubView:self];
-
-            }
-        }
         bInitialized = true;
 
     }

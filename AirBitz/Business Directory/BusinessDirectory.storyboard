@@ -27,7 +27,7 @@
                         <viewControllerLayoutGuide type="top" id="326-LJ-hWc"/>
                         <viewControllerLayoutGuide type="bottom" id="qrv-4Z-BZ5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kh9-bI-dsS" userLabel="View - Main">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kh9-bI-dsS" userLabel="View - Main">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y7n-uj-nhg" userLabel="View - Header">

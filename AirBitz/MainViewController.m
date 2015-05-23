@@ -443,7 +443,8 @@ MainViewController *singleton;
 
     if (_selectedViewController != _directoryViewController)
     {
-        [_selectedViewController.view removeFromSuperview];
+//        [_selectedViewController.view removeFromSuperview];
+        [MainViewController animateFadeOut:_selectedViewController.view remove:YES];
         _selectedViewController = _directoryViewController;
 
 //        [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
@@ -457,6 +458,8 @@ MainViewController *singleton;
 //    [MainViewController addChildView:_loginViewController.view];
     NSArray *constraints = [Util insertSubviewWithConstraints:singleton.view child:_loginViewController.view belowSubView:singleton.tabBar];
     _loginViewController.leftConstraint = [constraints objectAtIndex:0];
+    _loginViewController.leftConstraint.constant = 0;
+    [self.view layoutIfNeeded];
 
     [MainViewController hideTabBarAnimated:animated];
     [MainViewController hideNavBarAnimated:animated];
@@ -1780,6 +1783,7 @@ MainViewController *singleton;
 {
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [view setAlpha:1.0];
+    [view setOpaque:NO];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
