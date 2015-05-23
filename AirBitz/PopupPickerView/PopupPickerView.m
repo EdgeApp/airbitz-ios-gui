@@ -8,8 +8,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "PopupPickerView.h"
-#import "MainViewController.h"
-#import "Theme.h"
 
 #define DEFAULT_WIDTH           330
 
@@ -151,21 +149,6 @@ CGRect keyboardFrame;
 	 }];
 }
 
-- (void)dismiss
-{
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-                     {
-                         [self setAlpha:0];
-                     }
-                     completion:^(BOOL finished)
-                     {
-                         [self removeFromSuperview];
-                     }];
-}
-
 + (PopupPickerView *)CreateForView:(UIView *)parentView relativeToView:(UIView *)viewToPointTo relativePosition:(tPopupPickerPosition)position withStrings:(NSArray *)strings fromCategories:(NSArray *)categories selectedRow:(NSInteger)selectedRow /*maxCellsVisible:(NSInteger)maxCellsVisible*/ withWidth:(NSInteger)width withAccessory:(UIImage *)image andCellHeight:(NSInteger)cellHeight roundedEdgesAndShadow:(Boolean)rounded
 {
     // create the picker from the xib
@@ -182,7 +165,7 @@ CGRect keyboardFrame;
 
     // calculate the border thickness
 //    CGFloat borderThickness = (popup.frame.size.height - popup->table.frame.size.height) / 2.0;
-    CGFloat borderThickness = 0.0f;
+    CGFloat borderThickness = 10.0f;
     
     // set the strings and categories
 	popup.strings = strings;
@@ -275,54 +258,10 @@ CGRect keyboardFrame;
 			heightSubtract = (frameInWindow.origin.y + frameInWindow.size.height) - (usableFrame.origin.y + usableFrame.size.height);
 		}
 		newFrame.size.height -= heightSubtract;
-
-        //
-        // Hack. if passed in 'width' is -1. do a full screen popup. Full width and height from header to footer
-        // -paulvp
-        //
-
-        if (width == -1)
-        {
-            CGFloat newY;
-
-            newFrame.size.width = [MainViewController getWidth];
-            newFrame.origin.x = 0;
-            newFrame.size.height = [MainViewController getHeight] - [MainViewController getHeaderHeight] - [MainViewController getFooterHeight];
-
-            if (PopupPickerPosition_Below == position)
-            {
-                newFrame.origin.y = -[MainViewController getHeight];
-            }
-            else if (PopupPickerPosition_Above == position)
-            {
-                newFrame.origin.y = [MainViewController getHeight];
-            }
-            popup.frame = newFrame;
-            [popup setAlpha:0];
-
-            [UIView animateWithDuration:0.35
-                                  delay:0.0
-                                options:UIViewAnimationOptionCurveEaseInOut
-                             animations:^
-                             {
-                                 CGRect frame = popup.frame;
-                                 frame.origin.y = [MainViewController getHeaderHeight];
-                                 popup.frame = frame;
-                                 [popup setAlpha:1];
-
-                             }
-                             completion:^(BOOL finished)
-                             {
-                             }];
-
-        }
-        else
-        {
-            popup.frame = newFrame;
-        }
-
+		
         // set the new frame
-
+        popup.frame = newFrame;
+        
         // set up the pointer position
         /*
         CGRect arrowFrame = popup.arrowImage.frame;
@@ -719,9 +658,8 @@ CGRect keyboardFrame;
     cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:17.0];
     cell.textLabel.numberOfLines = 1;
     cell.textLabel.text = [_strings objectAtIndex:row];
-    cell.textLabel.textColor = [Theme Singleton].colorTextDark;
+    cell.textLabel.textColor = [UIColor blackColor];
     cell.accessoryView.hidden = YES;
-    cell.backgroundColor = [UIColor clearColor];
     if(self.categories) {
         NSInteger index = [self.categories indexOfObject:cell.textLabel.text];
         if(index == NSNotFound) {
@@ -750,9 +688,9 @@ CGRect keyboardFrame;
         [button addTarget:self action:@selector(accessoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
     }
     
-//    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.bounds.size.height-1, 320, 0.5)];
-//    separatorLineView.backgroundColor = [UIColor lightGrayColor];
-//    [cell.contentView addSubview:separatorLineView];
+    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.bounds.size.height-1, 320, 0.5)];
+    separatorLineView.backgroundColor = [UIColor lightGrayColor];
+    [cell.contentView addSubview:separatorLineView];
     
     return cell;
 }
