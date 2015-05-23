@@ -14,9 +14,11 @@
 #import "MontserratLabel.h"
 #import "PayeeCell.h"
 #import "Contact.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
 #define KEYBOARD_APPEAR_TIME_SECS   0.3
-#define TABLE_CELL_BACKGROUND_COLOR [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0]
+//#define TABLE_CELL_BACKGROUND_COLOR [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0]
 
 
 
@@ -68,7 +70,7 @@
     self.textFieldRecipient.tintColor = [UIColor whiteColor];
 
     // change visusals on table
-    self.tableContacts.backgroundColor = TABLE_CELL_BACKGROUND_COLOR;
+    self.tableContacts.backgroundColor = [UIColor clearColor];
     self.tableContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];     // This will remove extra separators from tableview
 
     // set the title based on why we were brought up
@@ -85,6 +87,16 @@
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.tableContacts setContentInset:UIEdgeInsetsMake(0, 0, [MainViewController getFooterHeight], 0)];
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:(self.mode == RecipientMode_Email ? @"Email Recipient" : @"SMS Recipient")];
+
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched:) fromObject:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -287,19 +299,19 @@
 {
     [self.textFieldRecipient resignFirstResponder];
 
-	[UIView animateWithDuration:EXIT_ANIM_TIME_SECS
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 CGRect frame = self.view.frame;
-		 frame.origin.x = frame.size.width;
-		 self.view.frame = frame;
-	 }
-                     completion:^(BOOL finished)
-	 {
+//	[UIView animateWithDuration:EXIT_ANIM_TIME_SECS
+//						  delay:0.0
+//						options:UIViewAnimationOptionCurveEaseInOut
+//					 animations:^
+//	 {
+//		 CGRect frame = self.view.frame;
+//		 frame.origin.x = frame.size.width;
+//		 self.view.frame = frame;
+//	 }
+//                     completion:^(BOOL finished)
+//	 {
 		 [self exit];
-	 }];
+//	 }];
 }
 
 - (void)exit
@@ -328,8 +340,10 @@
     Contact *contact = [self.arrayAutoComplete objectAtIndex:indexPath.row];
 
     cell.textLabel.text = contact.strName;
-    cell.backgroundColor = TABLE_CELL_BACKGROUND_COLOR;
+    cell.textLabel.textColor = [Theme Singleton].colorTextDark;
+    cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.detailTextLabel.textColor = [Theme Singleton].colorTextDark;
 
     // data
     if ([contact.strDataLabel length])
@@ -392,9 +406,7 @@
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {
-		 CGRect frame = self.tableContacts.frame;
-		 frame.size.height -= keyboardRect.size.height;
-		 self.tableContacts.frame = frame;
+         [self.tableContacts setContentInset:UIEdgeInsetsMake(0, 0, keyboardRect.size.height, 0)];
 	 }
                      completion:^(BOOL finished)
 	 {
@@ -412,9 +424,7 @@
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {
-		 CGRect frame = self.tableContacts.frame;
-		 frame.size.height += keyboardRect.size.height;
-		 self.tableContacts.frame = frame;
+         [self.tableContacts setContentInset:UIEdgeInsetsMake(0, 0, [MainViewController getFooterHeight], 0)];
 	 }
                      completion:^(BOOL finished)
 	 {

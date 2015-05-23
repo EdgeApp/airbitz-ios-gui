@@ -62,7 +62,7 @@ typedef enum eAddressPickerType
 static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 @interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelector2Delegate,FadingAlertViewDelegate,CBPeripheralManagerDelegate,
-                                     ShowWalletQRViewControllerDelegate, ImportWalletViewControllerDelegate,RecipientViewControllerDelegate>
+                                     ImportWalletViewControllerDelegate,RecipientViewControllerDelegate>
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
@@ -1999,26 +1999,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.recipientViewController.mode = mode;
 
     [MainViewController animateView:self.recipientViewController withBlur:NO];
-//    CGRect frame = self.view.bounds;
-//    frame.origin.x = frame.size.width;
-//    self.recipientViewController.view.frame = frame;
-//    [self.view addSubview:self.recipientViewController.view];
-//
-//    [UIView animateWithDuration:ENTER_ANIM_TIME_SECS
-//                          delay:0.0
-//                        options:UIViewAnimationOptionCurveEaseInOut
-//                     animations:^
-//                     {
-//                         self.recipientViewController.view.frame = self.view.bounds;
-//                     }
-//                     completion:^(BOOL finished)
-//                     {
-//                     }];
 }
 
 - (void)dismissRecipient
 {
-    [self.recipientViewController.view removeFromSuperview];
+    [MainViewController animateOut:self.recipientViewController withBlur:NO complete:nil];
     self.recipientViewController = nil;
 }
 

@@ -2089,48 +2089,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="iHP-uC-NCn">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wG6-fp-MyP" userLabel="View - Header">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="TEL-yh-7Q7">
-                                        <rect key="frame" x="0.0" y="-2" width="320" height="64"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbp-oq-xfV" userLabel="Button - back">
-                                        <rect key="frame" x="4" y="23" width="37" height="37"/>
-                                        <state key="normal" image="back_arrow.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonBackTouched:" destination="Uth-5U-uv9" eventType="touchUpInside" id="QAz-w2-Ibl"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L9R-Kh-hd1" userLabel="Button - info">
-                                        <rect key="frame" x="280" y="23" width="37" height="37"/>
-                                        <state key="normal" image="btn_info.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonInfoTouched:" destination="Uth-5U-uv9" eventType="touchUpInside" id="KVx-UB-XrQ"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email Recipient" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0b6-ws-V2S" customClass="MontserratLabel">
-                                        <rect key="frame" x="50" y="31" width="219" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <size key="shadowOffset" width="0.0" height="1"/>
-                                    </label>
-                                </subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wG6-fp-MyP" userLabel="BlurView" customClass="BlurView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XIU-xj-Hef" userLabel="View - Display">
-                                <rect key="frame" x="0.0" y="62" width="320" height="418"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XIU-xj-Hef" userLabel="View - Display">
+                                <rect key="frame" x="0.0" y="62" width="375" height="605"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Dx-DT-q9d" customClass="StylizedTextField">
-                                        <rect key="frame" x="50" y="10" width="219" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Dx-DT-q9d" customClass="StylizedTextField">
+                                        <rect key="frame" x="50" y="10" width="260" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="OKI-6i-U04"/>
+                                            <constraint firstAttribute="width" constant="260" id="Z3X-VO-eK6"/>
+                                        </constraints>
                                         <inset key="insetFor6xAndEarlier" minX="-30" minY="0.0" maxX="30" maxY="0.0"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -2139,9 +2113,9 @@
                                             <outlet property="delegate" destination="Uth-5U-uv9" id="bb5-9Y-mA4"/>
                                         </connections>
                                     </textField>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aec-ZO-LQA">
-                                        <rect key="frame" x="0.0" y="52" width="320" height="366"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aec-ZO-LQA">
+                                        <rect key="frame" x="0.0" y="52" width="385" height="494"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="Uth-5U-uv9" id="sFl-rj-CjC"/>
                                             <outlet property="delegate" destination="Uth-5U-uv9" id="fQP-0Z-70A"/>
@@ -2149,12 +2123,25 @@
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="aec-ZO-LQA" firstAttribute="leading" secondItem="XIU-xj-Hef" secondAttribute="leading" id="7D9-Qy-0YM"/>
+                                    <constraint firstItem="aec-ZO-LQA" firstAttribute="top" secondItem="0Dx-DT-q9d" secondAttribute="bottom" constant="12" id="Ea7-Ic-5EN"/>
+                                    <constraint firstAttribute="centerX" secondItem="0Dx-DT-q9d" secondAttribute="centerX" id="Sjk-j6-eBJ"/>
+                                    <constraint firstItem="0Dx-DT-q9d" firstAttribute="top" secondItem="XIU-xj-Hef" secondAttribute="top" constant="12" id="VTT-kw-ewb"/>
+                                    <constraint firstAttribute="bottom" secondItem="aec-ZO-LQA" secondAttribute="bottom" id="v2y-fv-fzm"/>
+                                    <constraint firstAttribute="trailing" secondItem="aec-ZO-LQA" secondAttribute="trailing" id="zQB-YX-j8W"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XIU-xj-Hef" secondAttribute="trailing" id="G3I-Tv-JU9"/>
+                            <constraint firstAttribute="bottom" secondItem="XIU-xj-Hef" secondAttribute="bottom" id="d4K-ig-LLw"/>
+                            <constraint firstItem="XIU-xj-Hef" firstAttribute="leading" secondItem="fIu-Iy-bQP" secondAttribute="leading" id="ehf-En-1hp"/>
+                            <constraint firstItem="XIU-xj-Hef" firstAttribute="top" secondItem="fIu-Iy-bQP" secondAttribute="top" constant="62" id="oKd-11-OBI"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="labelTitle" destination="0b6-ws-V2S" id="Fo0-Rh-Sjv"/>
                         <outlet property="tableContacts" destination="aec-ZO-LQA" id="yTz-y2-UA2"/>
                         <outlet property="textFieldRecipient" destination="0Dx-DT-q9d" id="dgf-nS-Owe"/>
                         <outlet property="viewDisplay" destination="XIU-xj-Hef" id="c5z-Tr-fyD"/>
