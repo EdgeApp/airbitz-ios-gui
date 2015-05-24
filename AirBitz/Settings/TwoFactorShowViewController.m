@@ -3,17 +3,17 @@
 #import "TwoFactorMenuViewController.h"
 #import "NotificationChecker.h"
 #import "MinCharTextField.h"
-#import "FadingAlertView.h"
 #import "ABC.h"
 #import "CoreBridge.h"
 #import "Util.h"
 #import "User.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
 @interface TwoFactorShowViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorMenuViewControllerDelegate>
 {
     NSString                    *_secret;
     TwoFactorMenuViewController *_tfaMenuViewController;
-    FadingAlertView             *_fadingAlert;
     BOOL                        _isOn;
     long                        _timeout;
 }
@@ -61,6 +61,13 @@
 {
     [super viewWillAppear:animated];
     _buttonImport.hidden = ![CoreBridge otpHasError];
+
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:[Theme Singleton].twoFactorText];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+
+
 }
 
 - (void)initUI
@@ -107,7 +114,7 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             _isOn = on == true ? YES : NO;
             [self updateTwoFactorUi:NO];
-            [self showFadingAlert:NSLocalizedString(@"Unable to determine two factor status", nil)];
+            [MainViewController fadingAlert:NSLocalizedString(@"Unable to determine two factor status", nil)];
         });
     }
 }
@@ -138,11 +145,11 @@
             [self checkRequest];
         });
         if (bMsg) {
-            [self showFadingAlert:NSLocalizedString(@"Two Factor Enabled", nil)];
+            [MainViewController fadingAlert:NSLocalizedString(@"Two Factor Enabled", nil)];
         }
     } else {
         if (bMsg) {
-            [self showFadingAlert:NSLocalizedString(@"Two Factor Disabled", nil)];
+            [MainViewController fadingAlert:NSLocalizedString(@"Two Factor Disabled", nil)];
         }
     }
 }
@@ -202,7 +209,7 @@
             _requestView.hidden = !pending;
         } else {
             _requestView.hidden = YES;
-            [self showFadingAlert:[Util errorMap:&error]];
+            [MainViewController fadingAlert:[Util errorMap:&error]];
         }
         _requestSpinner.hidden = YES;
     });
@@ -378,10 +385,10 @@
             tABC_CC cc = [self disableTwoFactor:&error];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (cc == ABC_CC_Ok) {
-                    [self showFadingAlert:NSLocalizedString(@"Request confirmed, Two Factor off.", nil)];
+                    [MainViewController fadingAlert:NSLocalizedString(@"Request confirmed, Two Factor off.", nil)];
                     [self updateTwoFactorUi:NO];
                 } else {
-                    [self showFadingAlert:[Util errorMap:&error]];
+                    [MainViewController fadingAlert:[Util errorMap:&error]];
                 }
                 _loadingSpinner.hidden = YES;
             });
@@ -416,10 +423,10 @@
                                             &Error);
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (cc == ABC_CC_Ok) {
-                    [self showFadingAlert:NSLocalizedString(@"Reset Cancelled", nil)];
+                    [MainViewController fadingAlert:NSLocalizedString(@"Reset Cancelled", nil)];
                     _requestView.hidden = YES;
                 } else {
-                    [self showFadingAlert:[Util errorMap:&Error]];
+                    [MainViewController fadingAlert:[Util errorMap:&Error]];
                 }
                 _loadingSpinner.hidden = YES;
             });
@@ -439,28 +446,12 @@
         _tfaMenuViewController = nil;
     }];
     if (!bBack && !success) {
-        [self showFadingAlert:NSLocalizedString(@("Unable to import secret"), nil)];
+        [MainViewController fadingAlert:NSLocalizedString(@("Unable to import secret"), nil)];
     }
     [self checkStatus:success];
 }
 
 #pragma mark - Misc Methods
-
-- (void)showFadingAlert:(NSString *)message
-{
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
-    _fadingAlert.message = message;
-    _fadingAlert.fadeDelay = 2;
-    _fadingAlert.fadeDuration = 1;
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showFading];
-}
-
-- (void)dismissErrorMessage
-{
-    [_fadingAlert dismiss:NO];
-    _fadingAlert = nil;
-}
 
 - (void)installLeftToRightSwipeDetection
 {
@@ -476,7 +467,6 @@
 
 - (void)exitWithBackButton:(BOOL)bBack
 {
-    [self dismissErrorMessage];
     [self.delegate twoFactorShowViewControllerDone:self withBackButton:bBack];
 }
 
