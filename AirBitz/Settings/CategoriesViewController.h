@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 @protocol CategoriesViewControllerDelegate;
 
-@interface CategoriesViewController : UIViewController
+@interface CategoriesViewController : AirbitzViewController
 
 @property (assign)            id<CategoriesViewControllerDelegate> delegate;
 

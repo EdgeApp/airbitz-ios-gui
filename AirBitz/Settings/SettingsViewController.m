@@ -407,25 +407,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	_passwordRecoveryController.delegate = self;
 	_passwordRecoveryController.mode = PassRecovMode_Change;
 
-//	CGRect frame = self.view.bounds;
-//	frame.origin.x = frame.size.width;
-//	_passwordRecoveryController.view.frame = frame;
-//	[self.view addSubview:_passwordRecoveryController.view];
-
     [Util addSubviewControllerWithConstraints:self.view child:_passwordRecoveryController];
+    [MainViewController animateSlideIn:_passwordRecoveryController];
 
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 _passwordRecoveryController.view.frame = self.view.bounds;
-	 }
-					 completion:^(BOOL finished)
-	 {
-         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-	 }];
 }
 
 - (void)bringUpCategoriesView
@@ -436,23 +420,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
         _categoriesController.delegate = self;
 
-        CGRect frame = self.view.bounds;
-        frame.origin.x = frame.size.width;
-        _categoriesController.view.frame = frame;
-        [self.view addSubview:_categoriesController.view];
+        [Util addSubviewControllerWithConstraints:self.view child:_categoriesController];
+        [MainViewController animateSlideIn:_categoriesController];
 
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.35
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^
-         {
-             _categoriesController.view.frame = self.view.bounds;
-         }
-                         completion:^(BOOL finished)
-         {
-             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-         }];
     }
 }
 
@@ -463,31 +433,21 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         _spendLimitsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SpendingLimitsViewController"];
         _spendLimitsController.delegate = self;
 
-        CGRect frame = self.view.bounds;
-        frame.origin.x = frame.size.width;
-        _spendLimitsController.view.frame = frame;
-        [self.view addSubview:_spendLimitsController.view];
+        [Util addSubviewControllerWithConstraints:self.view child:_spendLimitsController];
 
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.35
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^
-         {
-             _spendLimitsController.view.frame = self.view.bounds;
-         }
-                         completion:^(BOOL finished)
-         {
-             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-         }];
+        [MainViewController animateSlideIn:_spendLimitsController];
     }
 }
 
 - (void)bringUpTwoFactor
 {
-    _tfaViewController = (TwoFactorShowViewController *)[Util animateIn:@"TwoFactorShowViewController" storyboard:@"Settings"
-                                                       parentController:self];
+    UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
+    _tfaViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"TwoFactorShowViewController"];
     _tfaViewController.delegate = self;
+
+    [Util addSubviewControllerWithConstraints:self.view child:_tfaViewController];
+    [MainViewController animateSlideIn:_passwordRecoveryController];
+
 }
 
 - (void)bringUpDebugView
@@ -496,22 +456,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _debugViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"DebugViewController"];
     _debugViewController.delegate = self;
 
-    CGRect frame = self.view.bounds;
-    frame.origin.x = frame.size.width;
-    _debugViewController.view.frame = frame;
-    [self.view addSubview:_debugViewController.view];
+    [Util addSubviewControllerWithConstraints:self.view child:_debugViewController];
+    [MainViewController animateSlideIn:_debugViewController];
 
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-    {
-        _debugViewController.view.frame = self.view.bounds;
-    }
-                     completion:^(BOOL finished) {
-                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    }];
 }
 
 // returns how much the current first responder is obscured by the keyboard
@@ -1359,8 +1306,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 -(void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
 {
-	[controller.view removeFromSuperview];
-	_signUpController = nil;
+    [MainViewController animateOut:controller withBlur:NO complete:^(void)
+            {
+                    _signUpController = nil;
+            }];
 
     // re-load the current account settings
     _pAccountSettings = NULL;
@@ -1379,16 +1328,21 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)passwordRecoveryViewControllerDidFinish:(PasswordRecoveryViewController *)controller
 {
-	[controller.view removeFromSuperview];
-	_passwordRecoveryController = nil;
+    [MainViewController animateOut:controller withBlur:NO complete:^(void)
+            {
+                    _passwordRecoveryController = nil;
+            }];
+    [self updateViews];
 }
 
 #pragma mark - CategoriesViewController Delegate
 
 - (void)categoriesViewControllerDidFinish:(CategoriesViewController *)controller
 {
-	[controller.view removeFromSuperview];
-	_categoriesController = nil;
+    [MainViewController animateOut:controller withBlur:NO complete:^(void)
+            {
+                    _categoriesController = nil;
+            }];
     [self updateViews];
 }
 
@@ -1396,31 +1350,22 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)spendingLimitsViewControllerDone:(SpendingLimitsViewController *)controller withBackButton:(BOOL)bBack
 {
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 CGRect frame = self.view.bounds;
-		 frame.origin.x = frame.size.width;
-		 _spendLimitsController.view.frame = frame;
-	 }
-					 completion:^(BOOL finished)
-	 {
-		 [_spendLimitsController.view removeFromSuperview];
-		 _spendLimitsController = nil;
-         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-	 }];
+    [MainViewController animateOut:controller withBlur:NO complete:^(void)
+            {
+                    _spendLimitsController = nil;
+            }];
+    [self updateViews];
 }
 
 #pragma mark - TwoFactorShowViewControllerDelegate
 
 - (void)twoFactorShowViewControllerDone:(TwoFactorShowViewController *)controller withBackButton:(BOOL)bBack
 {
-    [Util animateOut:controller parentController:self complete:^(void) {
+    [MainViewController animateOut:controller withBlur:NO complete:^(void)
+    {
         _tfaViewController = nil;
     }];
+    [self updateViews];
 }
 
 #pragma mark - BooleanCell Delegate

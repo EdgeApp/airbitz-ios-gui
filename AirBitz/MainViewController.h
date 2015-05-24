@@ -21,6 +21,7 @@ typedef enum eNavBarSide
 @interface MainViewController : UIViewController
 
 + (void)addChildView: (UIView *)view;
++ (void)animateSlideIn:(AirbitzViewController *)viewController;
 + (void)animateFadeIn:(UIView *)view;
 + (void)animateFadeOut:(UIView *)view;
 + (void)animateFadeOut:(UIView *)view remove:(BOOL)removeFromView;

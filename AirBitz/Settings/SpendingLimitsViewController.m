@@ -8,19 +8,25 @@
 #import "Util.h"
 #import "FadingAlertView.h"
 #import "ABC.h"
+#import "MainViewController.h"
+#import "Theme.h"
+
+#define IPHONE4_SCROLL_OFFSET 45
 
 @interface SpendingLimitsViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
 {
     tABC_AccountSettings            *_pAccountSettings;
     FadingAlertView                 *_fadingAlert;
+    UITextField                     *_currentTextField;
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewContentTop;
 @property (nonatomic, weak) IBOutlet MinCharTextField           *passwordTextField;
 @property (nonatomic, weak) IBOutlet UIButton                   *buttonComplete;
 @property (nonatomic, weak) IBOutlet UISwitch                   *dailySpendLimitSwitch;
 @property (nonatomic, weak) IBOutlet UITextField                *dailySpendLimitField;
 @property (nonatomic, weak) IBOutlet UILabel                    *dailyDenomination;
-@property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
+//@property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
 
 @property (nonatomic, weak) IBOutlet UISwitch                   *pinSpendLimitSwitch;
 @property (nonatomic, weak) IBOutlet UITextField                *pinSpendLimitField;
@@ -49,15 +55,12 @@
         self.passwordTextField.hidden = YES;
     }
 
-    CGSize size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
-    self.scrollView.contentSize = size;
-
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
     // put the cursor in the user name field
-    [self.passwordTextField becomeFirstResponder];
+//    [self.passwordTextField becomeFirstResponder];
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
@@ -92,6 +95,32 @@
     _pinSpendLimitField.returnKeyType = UIReturnKeyDone;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+    [keyboardDoneButtonView sizeToFit];
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:nil];
+    UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                   style:UIBarButtonItemStyleBordered target:self
+                                                                  action:@selector(doneClicked:)];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:leftButton, flex, doneButton, nil]];
+    self.pinSpendLimitField.inputAccessoryView = keyboardDoneButtonView;
+    self.dailySpendLimitField.inputAccessoryView = keyboardDoneButtonView;
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:@"Spending Limits"];
+
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info) fromObject:self];
+
+}
+
+- (IBAction)doneClicked:(id)sender
+{
+    NSLog(@"Done Clicked.");
+    [self.view endEditing:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -108,18 +137,43 @@
 {
     NSDictionary *userInfo = [notification userInfo];
     CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat offset;
 
-    CGSize size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
-    if(IS_IPHONE4) {
-        size.height += keyboardFrame.size.height;
+    if(_currentTextField)
+    {
+        offset = _currentTextField.frame.origin.y + _currentTextField.frame.size.height + 5 - keyboardFrame.origin.y;
+
+        if (offset > 0)
+        {
+            [UIView animateWithDuration:0.35
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^
+                             {
+                                 self.viewContentTop.constant -= offset;
+                                 [self.view layoutIfNeeded];
+                             }
+                             completion:^(BOOL finished)
+                             {
+                             }];
+
+        }
     }
-    self.scrollView.contentSize = size;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    CGSize size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
-    self.scrollView.contentSize = size;
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+                     {
+                         self.viewContentTop.constant = 0;
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished)
+                     {
+                     }];
 }
 
 #pragma mark - Keyboard Delegate
@@ -135,6 +189,12 @@
     
     return YES;
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    _currentTextField = textField;
+}
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

@@ -168,26 +168,9 @@ typedef enum eAlertType
                 otherButtonTitles:@"OK", nil];
             [alert show];
         } else {
-            [self doBack];
+            [self exit];
         }
     }
-}
-
-- (void)doBack
-{
-    [UIView animateWithDuration:0.35
-                            delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                        animations:^
-        {
-            CGRect frame = self.view.frame;
-            frame.origin.x = frame.size.width;
-            self.view.frame = frame;
-        }
-                        completion:^(BOOL finished)
-        {
-            [self exit];
-        }];
 }
 
 - (IBAction)SkipThisStep
@@ -586,7 +569,7 @@ typedef enum eAlertType
     {
 		if (buttonIndex == 1)
 		{
-            [self doBack];
+            [self exit];
         }
     }
 	else

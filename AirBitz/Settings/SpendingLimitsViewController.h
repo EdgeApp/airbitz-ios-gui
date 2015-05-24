@@ -1,9 +1,10 @@
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 @protocol SpendingLimitsViewControllerDelegate;
 
-@interface SpendingLimitsViewController : UIViewController
+@interface SpendingLimitsViewController : AirbitzViewController
 
 @property (assign) id<SpendingLimitsViewControllerDelegate> delegate;
 

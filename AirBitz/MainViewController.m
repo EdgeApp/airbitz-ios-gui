@@ -1758,6 +1758,27 @@ MainViewController *singleton;
 ////    [singleton.view insertSubview:view aboveSubview:singleton.tabBar];
 //}
 
++ (void)animateSlideIn:(AirbitzViewController *)viewController
+{
+    viewController.leftConstraint.constant = [MainViewController getLargestDimension];
+    [viewController.view layoutIfNeeded];
+
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         viewController.leftConstraint.constant = 0;
+                         [viewController.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished) {
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+//                         cb();
+                     }];
+}
+
+
+
 + (void)animateFadeIn:(UIView *)view
 {
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];

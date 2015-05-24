@@ -366,19 +366,7 @@
 
 - (void)animatedExit
 {
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 CGRect frame = self.view.frame;
-		 frame.origin.x = frame.size.width;
-		 self.view.frame = frame;
-	 }
-                     completion:^(BOOL finished)
-	 {
-		 [self exit];
-	 }];
+     [self exit];
 }
 
 - (void)exit

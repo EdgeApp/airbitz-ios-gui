@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 @protocol DebugViewControllerDelegate;
 
-@interface DebugViewController : UIViewController
+@interface DebugViewController : AirbitzViewController
 
 @property (assign)          id<DebugViewControllerDelegate>  delegate;
 

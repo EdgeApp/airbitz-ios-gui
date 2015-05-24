@@ -147,19 +147,7 @@
 
 -(IBAction)Back:(id)sender
 {
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 CGRect frame = self.view.frame;
-		 frame.origin.x = frame.size.width;
-		 self.view.frame = frame;
-	 }
-	completion:^(BOOL finished)
-	 {
-		 [self exitWithBackButton:YES];
-	 }];
+     [self exitWithBackButton:YES];
 }
 
 - (IBAction)NextStep:(id)sender

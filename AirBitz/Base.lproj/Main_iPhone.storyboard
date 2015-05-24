@@ -25,6 +25,8 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -3446,131 +3448,158 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="3JP-TO-J9T">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="tEz-VJ-4xT">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spending Limits" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysZ-jm-fOP" userLabel="Label - Title" customClass="MontserratLabel">
-                                <rect key="frame" x="56" y="32" width="209" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EfP-yb-I9f">
-                                <rect key="frame" x="4" y="23" width="90" height="37"/>
-                                <inset key="imageEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" image="back_arrow.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="Back:" destination="Blx-7C-0My" eventType="touchUpInside" id="XWI-O5-Ix8"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SxD-NV-1cn" userLabel="Button - info">
-                                <rect key="frame" x="280" y="23" width="37" height="37"/>
-                                <state key="normal" image="btn_info.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="info" destination="Blx-7C-0My" eventType="touchUpInside" id="IDC-uV-EAx"/>
-                                </connections>
-                            </button>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hw5-kd-0sh">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hw5-kd-0sh" userLabel="Blur" customClass="BlurView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5YM-QX-mBC" userLabel="View -content">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7KB-8c-4PH">
-                                        <rect key="frame" x="0.0" y="-5" width="320" height="292"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5YM-QX-mBC">
-                                                <rect key="frame" x="0.0" y="5" width="320" height="504"/>
-                                                <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0Ma-6E-cjS" customClass="MinCharTextField">
-                                                        <rect key="frame" x="36" y="26" width="246" height="29"/>
-                                                        <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
-                                                    </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kjs-dz-76a" customClass="StylizedButton">
-                                                        <rect key="frame" x="35" y="206" width="251" height="41"/>
-                                                        <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
-                                                        <size key="titleShadowOffset" width="0.0" height="1"/>
-                                                        <state key="normal" title="Save">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="Complete:" destination="Blx-7C-0My" eventType="touchUpInside" id="VVI-q0-CUI"/>
-                                                        </connections>
-                                                    </button>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Daily Spending Limit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgY-Eq-QTK">
-                                                        <rect key="frame" x="36" y="63" width="196" height="19"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rl2-EJ-bXH">
-                                                        <rect key="frame" x="233" y="63" width="51" height="31"/>
-                                                        <color key="onTintColor" red="0.4549019608" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <connections>
-                                                            <action selector="switchFlipped:" destination="Blx-7C-0My" eventType="valueChanged" id="8y6-9S-DJw"/>
-                                                        </connections>
-                                                    </switch>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Daily Spend Limit" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o7c-0i-ioy" customClass="StylizedTextField">
-                                                        <rect key="frame" x="36" y="102" width="245" height="25"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Require PIN above amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rid-6B-Lv4">
-                                                        <rect key="frame" x="36" y="135" width="196" height="31"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yfg-YT-0Qv">
-                                                        <rect key="frame" x="233" y="135" width="51" height="31"/>
-                                                        <color key="onTintColor" red="0.4549019608" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <connections>
-                                                            <action selector="switchFlipped:" destination="Blx-7C-0My" eventType="valueChanged" id="A0l-cZ-RQ3"/>
-                                                        </connections>
-                                                    </switch>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PIN Spending Limit" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="egu-Uy-luw" customClass="StylizedTextField">
-                                                        <rect key="frame" x="36" y="174" width="245" height="25"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8Q-An-svf">
-                                                        <rect key="frame" x="233" y="174" width="42" height="25"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wl-Lb-K8l">
-                                                        <rect key="frame" x="233" y="102" width="42" height="25"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(Requires password above daily limit)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifv-G8-Cxe">
-                                                        <rect key="frame" x="36" y="77" width="246" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            </view>
-                                        </subviews>
-                                    </scrollView>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0Ma-6E-cjS" customClass="MinCharTextField">
+                                        <rect key="frame" x="48" y="84" width="280" height="30"/>
+                                        <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="dsE-PO-skK"/>
+                                            <constraint firstAttribute="width" constant="280" id="nKt-ds-Job"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kjs-dz-76a" customClass="StylizedButton">
+                                        <rect key="frame" x="48" y="276" width="280" height="50"/>
+                                        <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="hfw-Ww-AJg"/>
+                                        </constraints>
+                                        <size key="titleShadowOffset" width="0.0" height="1"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="Complete:" destination="Blx-7C-0My" eventType="touchUpInside" id="VVI-q0-CUI"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Spending Limit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgY-Eq-QTK">
+                                        <rect key="frame" x="48" y="122" width="223" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="19" id="zQR-Pd-Tl7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rl2-EJ-bXH">
+                                        <rect key="frame" x="279" y="122" width="51" height="31"/>
+                                        <color key="onTintColor" red="0.4549019608" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="switchFlipped:" destination="Blx-7C-0My" eventType="valueChanged" id="8y6-9S-DJw"/>
+                                        </connections>
+                                    </switch>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Daily Spend Limit" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o7c-0i-ioy" customClass="StylizedTextField">
+                                        <rect key="frame" x="48" y="161" width="280" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="kZy-p8-Hjy"/>
+                                        </constraints>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Require PIN above amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rid-6B-Lv4">
+                                        <rect key="frame" x="48" y="199" width="223" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="SL2-Ba-HTq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yfg-YT-0Qv">
+                                        <rect key="frame" x="279" y="199" width="51" height="31"/>
+                                        <color key="onTintColor" red="0.4549019608" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="switchFlipped:" destination="Blx-7C-0My" eventType="valueChanged" id="A0l-cZ-RQ3"/>
+                                        </connections>
+                                    </switch>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PIN Spending Limit" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="egu-Uy-luw" customClass="StylizedTextField">
+                                        <rect key="frame" x="48" y="238" width="280" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="YPk-83-lAq"/>
+                                        </constraints>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8Q-An-svf">
+                                        <rect key="frame" x="291" y="244" width="31" height="18"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wl-Lb-K8l">
+                                        <rect key="frame" x="291" y="167" width="31" height="18"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Requires password above daily limit)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifv-G8-Cxe">
+                                        <rect key="frame" x="48" y="136" width="223" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Rjp-wf-kxW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="yfg-YT-0Qv" firstAttribute="centerY" secondItem="Rid-6B-Lv4" secondAttribute="centerY" id="3g0-GW-i8K"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="leading" secondItem="o7c-0i-ioy" secondAttribute="leading" id="5bx-mF-vTE"/>
+                                    <constraint firstItem="S8Q-An-svf" firstAttribute="trailing" secondItem="egu-Uy-luw" secondAttribute="trailing" constant="-6" id="BHl-1d-H4g"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="leading" secondItem="0Ma-6E-cjS" secondAttribute="leading" id="FbT-RJ-kLl"/>
+                                    <constraint firstItem="Rl2-EJ-bXH" firstAttribute="top" secondItem="0Ma-6E-cjS" secondAttribute="bottom" constant="8" id="FfG-EB-4Pl"/>
+                                    <constraint firstItem="7wl-Lb-K8l" firstAttribute="trailing" secondItem="o7c-0i-ioy" secondAttribute="trailing" constant="-6" id="GHX-am-vxd"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="trailing" secondItem="yfg-YT-0Qv" secondAttribute="trailing" id="Gjh-Ih-BIP"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="leading" secondItem="sgY-Eq-QTK" secondAttribute="leading" id="MhF-fZ-mtH"/>
+                                    <constraint firstItem="7wl-Lb-K8l" firstAttribute="centerY" secondItem="o7c-0i-ioy" secondAttribute="centerY" id="Nys-Bs-qwG"/>
+                                    <constraint firstItem="Rl2-EJ-bXH" firstAttribute="leading" secondItem="ifv-G8-Cxe" secondAttribute="trailing" constant="8" id="REl-5Y-x3w"/>
+                                    <constraint firstItem="Rl2-EJ-bXH" firstAttribute="leading" secondItem="sgY-Eq-QTK" secondAttribute="trailing" constant="8" id="b3D-KH-EQn"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="top" secondItem="egu-Uy-luw" secondAttribute="bottom" constant="8" id="beh-4u-KYe"/>
+                                    <constraint firstItem="0Ma-6E-cjS" firstAttribute="top" secondItem="5YM-QX-mBC" secondAttribute="top" constant="84" id="c3X-iT-3RP"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="trailing" secondItem="Rl2-EJ-bXH" secondAttribute="trailing" id="cWm-5e-s05"/>
+                                    <constraint firstItem="yfg-YT-0Qv" firstAttribute="leading" secondItem="Rid-6B-Lv4" secondAttribute="trailing" constant="8" id="cwL-Xf-tM0"/>
+                                    <constraint firstItem="Rid-6B-Lv4" firstAttribute="top" secondItem="o7c-0i-ioy" secondAttribute="bottom" constant="8" id="d3j-Jt-YMP"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="trailing" secondItem="egu-Uy-luw" secondAttribute="trailing" id="dQp-QV-iK2"/>
+                                    <constraint firstItem="sgY-Eq-QTK" firstAttribute="top" secondItem="0Ma-6E-cjS" secondAttribute="bottom" constant="8" id="dps-RI-UjI"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="leading" secondItem="ifv-G8-Cxe" secondAttribute="leading" id="eR9-d0-DvT"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="leading" secondItem="Rid-6B-Lv4" secondAttribute="leading" id="fuM-Xx-1Nl"/>
+                                    <constraint firstAttribute="centerX" secondItem="0Ma-6E-cjS" secondAttribute="centerX" id="gGT-AM-uTC"/>
+                                    <constraint firstItem="S8Q-An-svf" firstAttribute="centerY" secondItem="egu-Uy-luw" secondAttribute="centerY" id="hxU-xg-uKB"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="trailing" secondItem="o7c-0i-ioy" secondAttribute="trailing" id="kxh-dM-Oq5"/>
+                                    <constraint firstItem="o7c-0i-ioy" firstAttribute="top" secondItem="ifv-G8-Cxe" secondAttribute="bottom" constant="4" id="oP3-hm-IbM"/>
+                                    <constraint firstItem="egu-Uy-luw" firstAttribute="top" secondItem="yfg-YT-0Qv" secondAttribute="bottom" constant="8" id="vCb-vg-X9H"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="trailing" secondItem="0Ma-6E-cjS" secondAttribute="trailing" id="wS7-bo-Uze"/>
+                                    <constraint firstItem="ifv-G8-Cxe" firstAttribute="top" secondItem="0Ma-6E-cjS" secondAttribute="bottom" constant="22" id="x20-3F-k8F"/>
+                                    <constraint firstItem="kjs-dz-76a" firstAttribute="leading" secondItem="egu-Uy-luw" secondAttribute="leading" id="zFT-Eg-51d"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hw5-kd-0sh" firstAttribute="leading" secondItem="hQE-km-hJR" secondAttribute="leading" id="1iV-Nl-HSz"/>
+                            <constraint firstItem="5YM-QX-mBC" firstAttribute="leading" secondItem="hQE-km-hJR" secondAttribute="leading" id="2Nj-35-MNv"/>
+                            <constraint firstItem="hw5-kd-0sh" firstAttribute="top" secondItem="hQE-km-hJR" secondAttribute="top" constant="64" id="8PK-sm-HXi"/>
+                            <constraint firstAttribute="bottom" secondItem="hw5-kd-0sh" secondAttribute="bottom" constant="49" id="JBU-pw-XjB"/>
+                            <constraint firstAttribute="trailing" secondItem="hw5-kd-0sh" secondAttribute="trailing" id="RKj-fC-5Qf"/>
+                            <constraint firstAttribute="trailing" secondItem="5YM-QX-mBC" secondAttribute="trailing" id="cLI-OC-aZU"/>
+                            <constraint firstAttribute="bottom" secondItem="5YM-QX-mBC" secondAttribute="bottom" constant="49" id="rKz-tL-FW2"/>
+                            <constraint firstItem="5YM-QX-mBC" firstAttribute="top" secondItem="hQE-km-hJR" secondAttribute="top" id="wUO-fa-Rwt"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="buttonComplete" destination="kjs-dz-76a" id="xTM-fS-R4J"/>
@@ -3581,7 +3610,7 @@
                         <outlet property="pinDenomination" destination="S8Q-An-svf" id="WBJ-FB-Y6I"/>
                         <outlet property="pinSpendLimitField" destination="egu-Uy-luw" id="xgw-Xl-v1O"/>
                         <outlet property="pinSpendLimitSwitch" destination="yfg-YT-0Qv" id="AVn-3j-fyu"/>
-                        <outlet property="scrollView" destination="7KB-8c-4PH" id="dN8-mY-1Ft"/>
+                        <outlet property="viewContentTop" destination="wUO-fa-Rwt" id="Aio-rp-Xr6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXm-Pr-QlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

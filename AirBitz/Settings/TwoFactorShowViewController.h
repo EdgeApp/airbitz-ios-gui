@@ -1,9 +1,10 @@
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 @protocol TwoFactorShowViewControllerDelegate;
 
-@interface TwoFactorShowViewController : UIViewController
+@interface TwoFactorShowViewController : AirbitzViewController
 
 @property (assign) id<TwoFactorShowViewControllerDelegate> delegate;
 
