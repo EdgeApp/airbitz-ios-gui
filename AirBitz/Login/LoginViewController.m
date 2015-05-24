@@ -188,6 +188,8 @@ static BOOL bInitialized = false;
 
     [self.PINusernameSelector.button setBackgroundImage:nil forState:UIControlStateNormal];
     [self.PINusernameSelector.button setBackgroundImage:nil forState:UIControlStateSelected];
+    [self.PINusernameSelector.button setBackgroundColor:[UIColor clearColor]];
+
     self.PINusernameSelector.textLabel.text = NSLocalizedString(@"", @"username");
     [self.PINusernameSelector setButtonWidth:_originalPINSelectorWidth];
     self.PINusernameSelector.accessoryImage = [UIImage imageNamed:@"btn_close.png"];

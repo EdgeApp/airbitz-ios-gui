@@ -11,13 +11,14 @@
 //	This will call you back with an item index whenever user selects a different item
 
 #import <UIKit/UIKit.h>
+#import "StylizedButton.h"
 
 @protocol ButtonSelectorDelegate;
 
 @interface ButtonSelectorView : UIView
 
 @property (nonatomic, weak) IBOutlet UILabel *textLabel;
-@property (nonatomic, weak) IBOutlet UIButton *button;
+@property (nonatomic, weak) IBOutlet StylizedButton *button;
 @property (nonatomic, strong) UIImage *accessoryImage;
 @property (nonatomic, assign) id<ButtonSelectorDelegate> delegate;
 @property (nonatomic, strong) NSArray *arrayItemsToSelect;			/* set this to an array of NSStrings that will appear in the drop-down */

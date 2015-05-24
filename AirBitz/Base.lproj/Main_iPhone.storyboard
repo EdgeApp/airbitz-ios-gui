@@ -2590,62 +2590,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="95i-im-Iyb">
-                                <rect key="frame" x="0.0" y="-44" width="320" height="656"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t4y-Jn-nkd">
-                                <rect key="frame" x="0.0" y="-1" width="320" height="62"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="J9G-iV-rGf">
-                                        <rect key="frame" x="0.0" y="-2" width="320" height="64"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address Request" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssD-pZ-zCO" customClass="MontserratLabel">
-                                        <rect key="frame" x="50" y="31" width="219" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <size key="shadowOffset" width="0.0" height="1"/>
-                                    </label>
-                                </subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t4y-Jn-nkd" customClass="BlurView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKh-rY-DMM" customClass="StylizedButton">
-                                <rect key="frame" x="20" y="264" width="119" height="41"/>
-                                <color key="backgroundColor" red="0.50196078431372548" green="0.76470588235294112" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <size key="titleShadowOffset" width="0.0" height="1"/>
-                                <state key="normal" title="OK">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="okay" destination="wbY-Uc-lWg" eventType="touchUpInside" id="rCd-xB-E3e"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="odP-aX-EhZ" customClass="StylizedButton">
-                                <rect key="frame" x="179" y="264" width="121" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="odP-aX-EhZ">
+                                <rect key="frame" x="0.0" y="205" width="160" height="45"/>
                                 <color key="backgroundColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                 <state key="normal" title="CANCEL">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="cancel" destination="wbY-Uc-lWg" eventType="touchUpInside" id="Snt-3K-C2N"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="An app has requested a bitcoin address to send money to. Please choose a wallet to receive funds:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcb-0y-fDf">
-                                <rect key="frame" x="20" y="69" width="280" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKh-rY-DMM">
+                                <rect key="frame" x="160" y="205" width="160" height="45"/>
+                                <color key="backgroundColor" red="0.50196078431372548" green="0.76470588235294112" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="enG-WK-Gyj"/>
+                                </constraints>
+                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                <state key="normal" title="OK">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="okay" destination="wbY-Uc-lWg" eventType="touchUpInside" id="rCd-xB-E3e"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An app has requested a bitcoin address to send money to. Please choose a wallet to receive funds:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcb-0y-fDf">
+                                <rect key="frame" x="20" y="75" width="280" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="ATo-ki-TdM"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aLV-IS-oin" userLabel="Wallet Selector" customClass="ButtonSelectorView">
-                                <rect key="frame" x="20" y="157" width="280" height="34"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLV-IS-oin" userLabel="Wallet Selector" customClass="ButtonSelectorView">
+                                <rect key="frame" x="20" y="163" width="280" height="34"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="9er-y4-Ex4"/>
+                                    <constraint firstAttribute="width" constant="280" id="elT-Ss-kYz"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Vcb-0y-fDf" secondAttribute="trailing" constant="20" symbolic="YES" id="22J-nY-Sjl"/>
+                            <constraint firstAttribute="bottom" secondItem="t4y-Jn-nkd" secondAttribute="bottom" id="9aQ-Sy-ygF"/>
+                            <constraint firstItem="t4y-Jn-nkd" firstAttribute="leading" secondItem="jTo-ZX-KmG" secondAttribute="leading" id="C2b-xY-ke6"/>
+                            <constraint firstItem="dKh-rY-DMM" firstAttribute="top" secondItem="aLV-IS-oin" secondAttribute="bottom" constant="8" symbolic="YES" id="K1c-QD-NC9"/>
+                            <constraint firstAttribute="trailing" secondItem="dKh-rY-DMM" secondAttribute="trailing" id="XBd-kv-vnZ"/>
+                            <constraint firstItem="dKh-rY-DMM" firstAttribute="leading" secondItem="odP-aX-EhZ" secondAttribute="trailing" id="Zla-9o-I9V"/>
+                            <constraint firstItem="aLV-IS-oin" firstAttribute="top" secondItem="Vcb-0y-fDf" secondAttribute="bottom" constant="8" symbolic="YES" id="bCG-cD-oMY"/>
+                            <constraint firstAttribute="centerX" secondItem="aLV-IS-oin" secondAttribute="centerX" id="dcd-Lv-cIz"/>
+                            <constraint firstItem="odP-aX-EhZ" firstAttribute="top" secondItem="dKh-rY-DMM" secondAttribute="top" id="kBJ-YV-KHW"/>
+                            <constraint firstItem="Vcb-0y-fDf" firstAttribute="leading" secondItem="jTo-ZX-KmG" secondAttribute="leading" constant="20" symbolic="YES" id="ndD-gt-GLU"/>
+                            <constraint firstItem="Vcb-0y-fDf" firstAttribute="top" secondItem="jTo-ZX-KmG" secondAttribute="top" constant="75" id="niB-2W-CjX"/>
+                            <constraint firstItem="t4y-Jn-nkd" firstAttribute="top" secondItem="jTo-ZX-KmG" secondAttribute="top" id="njA-WH-cTk"/>
+                            <constraint firstAttribute="trailing" secondItem="t4y-Jn-nkd" secondAttribute="trailing" id="rkb-I5-uCN"/>
+                            <constraint firstItem="odP-aX-EhZ" firstAttribute="leading" secondItem="jTo-ZX-KmG" secondAttribute="leading" id="sTp-4r-HkC"/>
+                            <constraint firstItem="odP-aX-EhZ" firstAttribute="bottom" secondItem="dKh-rY-DMM" secondAttribute="bottom" id="uYe-ia-y2w"/>
+                            <constraint firstItem="odP-aX-EhZ" firstAttribute="width" secondItem="dKh-rY-DMM" secondAttribute="width" id="wse-Gd-tGD"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -2655,7 +2671,86 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ywe-w2-9GL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1117" y="2886"/>
+            <point key="canvasLocation" x="911" y="2895"/>
+        </scene>
+        <!--Address Request Controller-->
+        <scene sceneID="iIo-2F-IaI">
+            <objects>
+                <viewController storyboardIdentifier="AddressRequestControllerBackup" id="aQO-kh-Gz7" customClass="AddressRequestController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nee-DV-omZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="WpR-3h-Wjz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mHf-Od-LUo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="HZP-pz-J6U">
+                                <rect key="frame" x="0.0" y="-44" width="320" height="656"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1uv-JA-0Qz">
+                                <rect key="frame" x="0.0" y="-1" width="320" height="62"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="TwJ-qR-IFn">
+                                        <rect key="frame" x="0.0" y="-2" width="320" height="64"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address Request" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfM-KZ-PyL" customClass="MontserratLabel">
+                                        <rect key="frame" x="50" y="31" width="219" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hem-5X-NQd" customClass="StylizedButton">
+                                <rect key="frame" x="20" y="264" width="119" height="41"/>
+                                <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                <state key="normal" title="OK">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="okay" destination="aQO-kh-Gz7" eventType="touchUpInside" id="qMC-Qh-zcV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rU8-xZ-8ef" customClass="StylizedButton">
+                                <rect key="frame" x="179" y="264" width="121" height="41"/>
+                                <color key="backgroundColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
+                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                <state key="normal" title="CANCEL">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancel" destination="aQO-kh-Gz7" eventType="touchUpInside" id="SOY-dG-hJO"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="An app has requested a bitcoin address to send money to. Please choose a wallet to receive funds:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="009-46-T2g">
+                                <rect key="frame" x="20" y="69" width="280" height="80"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eG3-1A-o5n" userLabel="Wallet Selector" customClass="ButtonSelectorView">
+                                <rect key="frame" x="20" y="157" width="280" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="message" destination="009-46-T2g" id="Dfc-VH-z4A"/>
+                        <outlet property="walletSelector" destination="eG3-1A-o5n" id="9rL-VK-Cwv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Op-Eb-MVi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1406" y="2880"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="FPq-1z-D1q">

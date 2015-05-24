@@ -9,6 +9,8 @@
 #import "Util.h"
 #import "User.h"
 #import "ABC.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
 #define X_SOURCE @"Airbitz"
 
@@ -55,6 +57,9 @@
     }
     [msg appendString:NSLocalizedString(@" Please choose a wallet to receive funds.", nil)];
     _message.text = msg;
+
+
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -66,6 +71,11 @@
 
 - (void)updateViews:(NSNotification *)notification
 {
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:@"Airbitz"];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+
     _walletSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
     [_walletSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
     _walletSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;

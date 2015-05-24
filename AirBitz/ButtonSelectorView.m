@@ -7,6 +7,7 @@
 //
 
 #import "ButtonSelectorView.h"
+#import "StylizedButton.h"
 
 #define TABLE_ROW_HEIGHT	37.0
 
@@ -39,9 +40,6 @@
         self.enabled = YES;
 		UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ButtonSelectorView~iphone" owner:self options:nil] objectAtIndex:0];
 		view.frame = self.bounds;
-		UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
-		[self.button setBackgroundImage:blue_button_image forState:UIControlStateNormal];
-		[self.button setBackgroundImage:blue_button_image forState:UIControlStateSelected];
         [self addSubview:view];
 		
 		_originalButtonFrame = self.button.frame;
