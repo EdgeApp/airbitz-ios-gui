@@ -939,6 +939,7 @@ static BOOL bInitialized = false;
     _bSuccess = NO;
     tABC_Error error;
 
+    [MainViewController showBackground:YES animate:YES];
     ABC_OtpKeySet([self.usernameSelector.textField.text UTF8String], (char *)[secret UTF8String], &error);
     tABC_CC cc = ABC_SignIn([self.usernameSelector.textField.text UTF8String],
                             [self.passwordTextField.text UTF8String], &error);

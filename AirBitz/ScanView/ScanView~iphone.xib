@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,21 +11,14 @@
             <rect key="frame" x="0.0" y="169" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="scan_frame.png" translatesAutoresizingMaskIntoConstraints="NO" id="RtE-Ds-ywh">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RtE-Ds-ywh">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                     </variation>
                 </imageView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yok-qc-LZ1" customClass="FlashSelectView">
-                    <rect key="frame" x="238" y="140" width="45" height="95"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="220" y="140" width="45" height="95"/>
-                    </variation>
-                </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Scan QR Code or use photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCv-W8-viC" customClass="LatoLabel">
-                    <rect key="frame" x="1" y="9" width="317" height="21"/>
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Scan QR Code or use photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCv-W8-viC" customClass="LatoLabel">
+                    <rect key="frame" x="0.0" y="0.0" width="210" height="21"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -35,8 +28,8 @@
                         <rect key="frame" x="-17" y="9" width="317" height="21"/>
                     </variation>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiR-Lm-rP0">
-                    <rect key="frame" x="32" y="185" width="50" height="50"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiR-Lm-rP0">
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                     <state key="normal" backgroundImage="btn_album.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -44,8 +37,8 @@
                         <rect key="frame" x="14" y="185" width="50" height="50"/>
                     </variation>
                 </button>
-                <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u87-TW-Oeb">
-                    <rect key="frame" x="32" y="133" width="50" height="50"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u87-TW-Oeb">
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                     <state key="normal" backgroundImage="BLE_Button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -53,8 +46,11 @@
                         <rect key="frame" x="14" y="133" width="50" height="50"/>
                     </variation>
                 </button>
-                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Camera unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Si-uB-G6o" customClass="LatoLabel">
-                    <rect key="frame" x="1" y="173" width="317" height="21"/>
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Si-uB-G6o" customClass="LatoLabel">
+                    <rect key="frame" x="0.0" y="290" width="600" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="npO-4w-iuu"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,8 +60,30 @@
                         <rect key="frame" x="0.0" y="173" width="300" height="21"/>
                     </variation>
                 </label>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yok-qc-LZ1" customClass="FlashSelectView">
+                    <rect key="frame" x="535" y="435" width="45" height="95"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="95" id="7IB-OP-WaF"/>
+                        <constraint firstAttribute="width" constant="45" id="LRu-lx-jNp"/>
+                    </constraints>
+                    <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="220" y="140" width="45" height="95"/>
+                    </variation>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="RtE-Ds-ywh" secondAttribute="bottom" id="0pO-8m-5m8"/>
+                <constraint firstAttribute="bottom" secondItem="Yok-qc-LZ1" secondAttribute="bottom" constant="70" id="6fj-9s-AEO"/>
+                <constraint firstAttribute="trailing" secondItem="8Si-uB-G6o" secondAttribute="trailing" id="AIH-7Q-H6x"/>
+                <constraint firstItem="RtE-Ds-ywh" firstAttribute="top" secondItem="Ifo-aO-zKK" secondAttribute="top" id="QQp-qG-gjH"/>
+                <constraint firstItem="8Si-uB-G6o" firstAttribute="leading" secondItem="Ifo-aO-zKK" secondAttribute="leading" id="bgs-cY-hHx"/>
+                <constraint firstAttribute="centerY" secondItem="8Si-uB-G6o" secondAttribute="centerY" id="c1b-o3-hN5"/>
+                <constraint firstAttribute="trailing" secondItem="RtE-Ds-ywh" secondAttribute="trailing" id="iyA-k0-8Cv"/>
+                <constraint firstAttribute="trailing" secondItem="Yok-qc-LZ1" secondAttribute="trailing" constant="20" id="xai-Nj-0eI"/>
+                <constraint firstItem="RtE-Ds-ywh" firstAttribute="leading" secondItem="Ifo-aO-zKK" secondAttribute="leading" id="yYL-1a-KwA"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bleButton" destination="u87-TW-Oeb" id="4SQ-3d-2bB"/>
@@ -79,6 +97,5 @@
     <resources>
         <image name="BLE_Button.png" width="50" height="50"/>
         <image name="btn_album.png" width="50" height="50"/>
-        <image name="scan_frame.png" width="271" height="226"/>
     </resources>
 </document>

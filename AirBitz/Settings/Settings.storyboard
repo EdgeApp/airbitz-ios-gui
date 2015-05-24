@@ -36,7 +36,6 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1182,49 +1181,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Vea-ZG-S17">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jpc-8y-bSv">
-                                <rect key="frame" x="0.0" y="-1" width="320" height="62"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="yDA-6e-Hhl">
-                                        <rect key="frame" x="0.0" y="-2" width="320" height="64"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAg-rQ-noR" userLabel="Button - back">
-                                        <rect key="frame" x="4" y="23" width="90" height="37"/>
-                                        <inset key="imageEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" image="back_arrow.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="Back:" destination="2YO-OD-D8V" eventType="touchUpInside" id="Z3A-mr-rwN"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Scan Two Factor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXh-0y-xdL" customClass="MontserratLabel">
-                                        <rect key="frame" x="50" y="31" width="219" height="21"/>
-                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <size key="shadowOffset" width="0.0" height="1"/>
-                                    </label>
-                                </subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mIP-Ro-Aet" userLabel="View -scanner">
+                                <rect key="frame" x="0.0" y="11" width="320" height="549"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mIP-Ro-Aet">
-                                <rect key="frame" x="0.0" y="136" width="320" height="275"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2O-cK-rod" userLabel="BlurView -black" customClass="BlurView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="80"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="jUn-eb-UdT"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleDark" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izr-Cl-Osv">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izr-Cl-Osv">
                                 <rect key="frame" x="10" y="69" width="300" height="67"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="67" id="uq6-Mj-Vbk"/>
+                                </constraints>
                                 <string key="text">Using the device that enabled 2 Factor Authentication, go to Settings -&gt; Two Factor. 
 Scan the QR code using this device</string>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="mIP-Ro-Aet" secondAttribute="bottom" id="4wx-oW-0Gu"/>
+                            <constraint firstItem="Izr-Cl-Osv" firstAttribute="leading" secondItem="2xP-DO-TVe" secondAttribute="leading" constant="20" symbolic="YES" id="AKg-bv-nFw"/>
+                            <constraint firstAttribute="trailing" secondItem="Izr-Cl-Osv" secondAttribute="trailing" constant="20" symbolic="YES" id="B9J-MI-ICz"/>
+                            <constraint firstItem="Izr-Cl-Osv" firstAttribute="top" secondItem="2xP-DO-TVe" secondAttribute="top" constant="69" id="FwH-I5-277"/>
+                            <constraint firstItem="g2O-cK-rod" firstAttribute="leading" secondItem="2xP-DO-TVe" secondAttribute="leading" id="Mgk-2H-nUd"/>
+                            <constraint firstItem="g2O-cK-rod" firstAttribute="top" secondItem="2xP-DO-TVe" secondAttribute="top" constant="64" id="cSf-Ly-8Ar"/>
+                            <constraint firstAttribute="trailing" secondItem="mIP-Ro-Aet" secondAttribute="trailing" id="dfb-s8-Brw"/>
+                            <constraint firstAttribute="trailing" secondItem="g2O-cK-rod" secondAttribute="trailing" id="qHl-YC-z5R"/>
+                            <constraint firstItem="mIP-Ro-Aet" firstAttribute="leading" secondItem="2xP-DO-TVe" secondAttribute="leading" id="qN4-wg-3CS"/>
+                            <constraint firstItem="mIP-Ro-Aet" firstAttribute="top" secondItem="2xP-DO-TVe" secondAttribute="top" id="rH7-wk-pje"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -1233,7 +1228,7 @@ Scan the QR code using this device</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pVX-Ng-3dv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="626.39999999999998" y="3424.0933333333332"/>
+            <point key="canvasLocation" x="626" y="3424"/>
         </scene>
     </scenes>
     <resources>

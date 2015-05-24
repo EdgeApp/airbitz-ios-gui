@@ -131,13 +131,19 @@
     _secret = controller.secret;
     _bSuccess = controller.bSuccess;
     if (!bBack) {
-        [self exit];
+        [MainViewController animateOut:controller withBlur:NO complete:^(void)
+        {
+            _tfaScanViewController = nil;
+            [self exit];
+        }];
     } else {
         [MainViewController animateOut:controller withBlur:NO complete:^(void)
         {
             _tfaScanViewController = nil;
+            [self viewWillAppear:YES];
         }];
     }
+
 }
 
 #pragma mark - Misc Methods

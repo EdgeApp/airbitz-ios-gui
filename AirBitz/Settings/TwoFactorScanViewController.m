@@ -6,6 +6,8 @@
 #import "Util.h"
 #import "ABC.h"
 #import "CoreBridge.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
 @interface TwoFactorScanViewController () 
     <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate,
@@ -43,6 +45,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:[Theme Singleton].twoFactorText];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].importText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
     [_scanView startQRReader];
 }
 
@@ -149,29 +155,6 @@
 - (void)tabBarButtonReselect:(NSNotification *)notification
 {
     [self Back:nil];
-}
-
-#pragma mark - Fading Alert Methods
-
-- (void)showFadingAlert:(NSString *)message
-{
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-    _fadingAlert.message = message;
-    _fadingAlert.fadeDelay = 2;
-    _fadingAlert.fadeDuration = 1;
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showFading];
-}
-
-- (void)dismissErrorMessage
-{
-    [_fadingAlert dismiss:NO];
-    _fadingAlert = nil;
-}
-
-- (void)fadingAlertDismissed:(FadingAlertView *)view
-{
-    _fadingAlert = nil;
 }
 
 @end
