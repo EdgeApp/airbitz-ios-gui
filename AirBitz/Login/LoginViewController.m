@@ -468,22 +468,8 @@ static BOOL bInitialized = false;
         _passwordRecoveryController.arrayQuestions = arrayQuestions;
         _passwordRecoveryController.strUserName = self.usernameSelector.textField.text;
 
-        CGRect frame = self.view.bounds;
-        frame.origin.x = frame.size.width;
-        _passwordRecoveryController.view.frame = frame;
-        [self.view addSubview:_passwordRecoveryController.view];
-
-
-        [UIView animateWithDuration:0.35
-                                delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                            animations:^
-            {
-                _passwordRecoveryController.view.frame = self.view.bounds;
-            }
-                            completion:^(BOOL finished)
-            {
-            }];
+        [MainViewController showNavBarAnimated:YES];
+        [MainViewController animateView:_passwordRecoveryController withBlur:NO];
     }
     else
     {
@@ -955,10 +941,12 @@ static BOOL bInitialized = false;
 
 - (void)passwordRecoveryViewControllerDidFinish:(PasswordRecoveryViewController *)controller
 {
-    [controller.view removeFromSuperview];
-    _passwordRecoveryController = nil;
-
-    [self finishIfLoggedIn:NO];
+    [MainViewController animateOut:controller withBlur:NO complete:^(void)
+    {
+        _passwordRecoveryController = nil;
+        [MainViewController hideNavBarAnimated:YES];
+        [self finishIfLoggedIn:NO];
+    }];
 }
 
 #pragma mark - Error Message

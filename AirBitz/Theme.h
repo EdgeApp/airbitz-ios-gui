@@ -26,6 +26,8 @@
 @property (nonatomic) UIColor *colorRequestTopTextField;
 @property (nonatomic) UIColor *colorRequestTopTextFieldPlaceholder;
 @property (nonatomic) UIColor *colorRequestBottomTextField;
+@property (nonatomic) UIColor *colorButtonGreen;
+
 @property (nonatomic) BOOL    bTranslucencyEnable;
 
 @property (nonatomic) NSString *appFont;
@@ -66,7 +68,7 @@
 @property (nonatomic) NSString *changePINText;
 @property (nonatomic) NSString *twoFactorText;
 @property (nonatomic) NSString *importText;
-
+@property (nonatomic) NSString *passwordRecoveryText;
 
 
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
@@ -83,6 +85,7 @@
 @property (nonatomic) CGFloat heightMinimumForQRScanFrame;
 @property (nonatomic) CGFloat heightSettingsTableCell;
 @property (nonatomic) CGFloat heightSettingsTableHeader;
+@property (nonatomic) CGFloat heightButton;
 
 
 @property (nonatomic) CGFloat animationDelayTimeDefault;

@@ -2655,7 +2655,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ywe-w2-9GL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1253" y="3582"/>
+            <point key="canvasLocation" x="1117" y="2886"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="FPq-1z-D1q">
@@ -3126,36 +3126,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ic0-bh-TmN">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="py1-u1-VHe">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password Recovery Setup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kf-YJ-8Zz" customClass="MontserratLabel">
-                                <rect key="frame" x="20" y="32" width="280" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nau-KH-Byu">
-                                <rect key="frame" x="4" y="23" width="37" height="37"/>
-                                <state key="normal" image="back_arrow.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="Back" destination="8PZ-sh-cHM" eventType="touchUpInside" id="DBO-e0-zh0"/>
-                                </connections>
-                            </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="peD-fG-VAk">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eu8-79-gg6" userLabel="BlurView" customClass="BlurView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="peD-fG-VAk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ptv-FV-w86">
-                                        <rect key="frame" x="15" y="9" width="291" height="36"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cix-f2-i3I">
+                                        <rect key="frame" x="122" y="80" width="132" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="DTk-6W-AME"/>
+                                            <constraint firstAttribute="width" constant="132" id="ghs-us-8sj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <inset key="titleEdgeInsets" minX="-10" minY="-1" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Skip This Step">
+                                            <color key="titleColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="SkipThisStep" destination="8PZ-sh-cHM" eventType="touchUpInside" id="S8V-oQ-dyX"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ptv-FV-w86" userLabel="View -password">
+                                        <rect key="frame" x="42" y="80" width="291" height="36"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PI3-NW-bVF" customClass="MinCharTextField">
-                                                <rect key="frame" x="33" y="4" width="225" height="29"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PI3-NW-bVF" customClass="MinCharTextField">
+                                                <rect key="frame" x="33" y="3" width="225" height="30"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="225" id="B3Z-nl-jcA"/>
+                                                    <constraint firstAttribute="height" constant="30" id="ehu-jd-8UZ"/>
+                                                </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
@@ -3164,60 +3170,60 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="centerY" secondItem="PI3-NW-bVF" secondAttribute="centerY" id="CNO-ed-Djs"/>
+                                            <constraint firstAttribute="width" constant="291" id="aPM-pi-MAR"/>
+                                            <constraint firstAttribute="centerX" secondItem="PI3-NW-bVF" secondAttribute="centerX" id="efI-lA-q8N"/>
+                                            <constraint firstAttribute="height" constant="36" id="j1M-Ha-yHp"/>
+                                        </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cix-f2-i3I">
-                                        <rect key="frame" x="96" y="13" width="132" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <inset key="titleEdgeInsets" minX="-10" minY="-1" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Skip This Step" backgroundImage="btn_blue.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="SkipThisStep" destination="8PZ-sh-cHM" eventType="touchUpInside" id="S8V-oQ-dyX"/>
-                                        </connections>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_rightArrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="B5d-ZE-zXF">
-                                        <rect key="frame" x="202" y="21" width="13" height="15"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIX-pR-SaU" customClass="StylizedButton">
-                                        <rect key="frame" x="36" y="403" width="251" height="41"/>
-                                        <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="Complete Signup">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="CompleteSignup" destination="8PZ-sh-cHM" eventType="touchUpInside" id="IdP-2Y-d6o"/>
-                                        </connections>
-                                    </button>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="KdO-iF-hlx">
-                                        <rect key="frame" x="250" y="392" width="20" height="20"/>
-                                    </activityIndicatorView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="Ptv-FV-w86" secondAttribute="centerX" id="bGs-NS-Bir"/>
+                                    <constraint firstItem="Ptv-FV-w86" firstAttribute="top" secondItem="peD-fG-VAk" secondAttribute="top" constant="80" id="blf-rA-xot"/>
+                                    <constraint firstItem="cix-f2-i3I" firstAttribute="top" secondItem="peD-fG-VAk" secondAttribute="top" constant="80" id="g3a-MF-oea"/>
+                                    <constraint firstAttribute="centerX" secondItem="cix-f2-i3I" secondAttribute="centerX" id="qbD-X8-kzT"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="8PZ-sh-cHM" id="9fH-OS-njE"/>
                                 </connections>
                             </scrollView>
-                            <view hidden="YES" alpha="0.30000001192092896" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gpK-tF-oyh" userLabel="Spinner View">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <view hidden="YES" alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpK-tF-oyh" userLabel="Spinner View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="t2d-P5-mkj">
-                                        <rect key="frame" x="142" y="265" width="37" height="37"/>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="t2d-P5-mkj">
+                                        <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="37" id="EVn-Qj-0XO"/>
+                                            <constraint firstAttribute="width" constant="37" id="Yud-FU-aUB"/>
+                                        </constraints>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="t2d-P5-mkj" secondAttribute="centerX" id="czn-kM-cPY"/>
+                                    <constraint firstAttribute="centerY" secondItem="t2d-P5-mkj" secondAttribute="centerY" id="ztU-OX-7Ki"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="eu8-79-gg6" secondAttribute="width" id="24w-Ec-dJD"/>
+                            <constraint firstItem="gpK-tF-oyh" firstAttribute="width" secondItem="n1Q-7c-DVU" secondAttribute="width" id="FII-fv-kqq"/>
+                            <constraint firstAttribute="centerX" secondItem="eu8-79-gg6" secondAttribute="centerX" id="LUd-KC-8hx"/>
+                            <constraint firstAttribute="centerY" secondItem="gpK-tF-oyh" secondAttribute="centerY" id="T5o-vV-QcA"/>
+                            <constraint firstAttribute="centerY" secondItem="peD-fG-VAk" secondAttribute="centerY" id="XyB-0g-1Ol"/>
+                            <constraint firstItem="peD-fG-VAk" firstAttribute="height" secondItem="n1Q-7c-DVU" secondAttribute="height" id="Z7C-OS-V1C"/>
+                            <constraint firstItem="gpK-tF-oyh" firstAttribute="height" secondItem="n1Q-7c-DVU" secondAttribute="height" id="aV8-OR-nVc"/>
+                            <constraint firstAttribute="height" secondItem="eu8-79-gg6" secondAttribute="height" id="bFh-f6-9As"/>
+                            <constraint firstItem="peD-fG-VAk" firstAttribute="width" secondItem="n1Q-7c-DVU" secondAttribute="width" id="cQO-nH-wtU"/>
+                            <constraint firstAttribute="centerX" secondItem="peD-fG-VAk" secondAttribute="centerX" id="fkR-VI-IZD"/>
+                            <constraint firstAttribute="centerY" secondItem="eu8-79-gg6" secondAttribute="centerY" id="jLi-jo-6kl"/>
+                            <constraint firstAttribute="centerX" secondItem="gpK-tF-oyh" secondAttribute="centerX" id="pT9-KH-MXZ"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityView" destination="KdO-iF-hlx" id="U2P-eH-Z61"/>
-                        <outlet property="buttonBack" destination="Nau-KH-Byu" id="AmM-MU-g2S"/>
                         <outlet property="buttonSkip" destination="cix-f2-i3I" id="Ceu-G7-iBJ"/>
-                        <outlet property="completeSignupButton" destination="gIX-pR-SaU" id="oee-cx-W2p"/>
-                        <outlet property="imageSkip" destination="B5d-ZE-zXF" id="TQF-fd-1iS"/>
-                        <outlet property="labelTitle" destination="9kf-YJ-8Zz" id="VeQ-yK-Mkd"/>
                         <outlet property="passwordField" destination="PI3-NW-bVF" id="edO-Rm-rog"/>
                         <outlet property="passwordView" destination="Ptv-FV-w86" id="Rqg-e3-JJO"/>
                         <outlet property="scrollView" destination="peD-fG-VAk" id="aIZ-za-GQs"/>
@@ -3630,7 +3636,6 @@
         <image name="bd_icon_phone.png" width="11" height="15"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
         <image name="btn_album.png" width="50" height="50"/>
-        <image name="btn_blue.png" width="110" height="27"/>
         <image name="btn_export_dates.png" width="94" height="36"/>
         <image name="btn_info.png" width="24" height="25"/>
         <image name="btn_light.png" width="252" height="38"/>
@@ -3646,7 +3651,6 @@
         <image name="icon_more.png" width="30" height="30"/>
         <image name="icon_not_approved.png" width="79" height="80"/>
         <image name="icon_request.png" width="30" height="30"/>
-        <image name="icon_rightArrow.png" width="13" height="15"/>
         <image name="icon_send.png" width="30" height="30"/>
         <image name="icon_wallet.png" width="30" height="30"/>
         <image name="logo_bitcoin.png" width="126" height="165"/>

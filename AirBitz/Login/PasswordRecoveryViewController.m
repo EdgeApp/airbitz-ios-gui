@@ -16,11 +16,13 @@
 #import "CoreBridge.h"
 #import "SignUpViewController.h"
 #import "CommonTypes.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
 #define NUM_QUESTION_ANSWER_BLOCKS	6
-#define QA_STARTING_Y_POSITION      67.0
+#define QA_STARTING_Y_POSITION      120
+#define RECOVER_STARTING_Y_POSITION 75
 
-#define RECOVERY_TOOLBAR_HEIGHT     54
 #define EXTRA_HEGIHT_FOR_IPHONE4    80
 
 typedef enum eAlertType
@@ -34,7 +36,7 @@ typedef enum eAlertType
     <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate,
      UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorMenuViewControllerDelegate>
 {
-	float                   _completeButtonToEmbossImageDistance;
+//	float                   _completeButtonToEmbossImageDistance;
 	UITextField             *_activeTextField;
 	CGSize                  _defaultContentSize;
 	tAlertType              _alertType;
@@ -44,9 +46,7 @@ typedef enum eAlertType
 }
 
 @property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
-@property (nonatomic, weak) IBOutlet UIButton                   *completeSignupButton;
-@property (nonatomic, weak) IBOutlet UIImageView                *embossImage;
-@property (nonatomic, weak) IBOutlet UIActivityIndicatorView    *activityView;
+@property (nonatomic, strong)          UIButton                   *completeSignupButton;
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonSkip;
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonBack;
 @property (weak, nonatomic) IBOutlet MontserratLabel            *labelTitle;
@@ -82,9 +82,7 @@ typedef enum eAlertType
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    _completeButtonToEmbossImageDistance = (self.embossImage.frame.origin.y + self.embossImage.frame.size.height) - self.completeSignupButton.frame.origin.y;
-
+    
 	self.arrayCategoryString	= [[NSMutableArray alloc] init];
 	self.arrayCategoryNumeric	= [[NSMutableArray alloc] init];
 	self.arrayCategoryMust      = [[NSMutableArray alloc] init];
@@ -94,8 +92,6 @@ typedef enum eAlertType
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
-    [self updateDisplayForMode:_mode];
 
     // set up our user blocking button
     self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -136,9 +132,20 @@ typedef enum eAlertType
         [self getPasswordRecoveryQuestionsComplete];
     }
 
+    [self updateDisplayForMode:_mode];
+
+    [self updateViews];
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+}
+
+-(void)updateViews
+{
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:[Theme Singleton].passwordRecoveryText];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].importText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
 
 -(void)dealloc
@@ -154,7 +161,7 @@ typedef enum eAlertType
 
 #pragma mark - Action Methods
 
-- (IBAction)Back
+- (void)Back
 {
     if (!self.buttonBack.hidden)
     {
@@ -203,7 +210,7 @@ typedef enum eAlertType
     return NO;
 }
 
-- (IBAction)CompleteSignup
+- (void)CompleteSignup
 {
 	//NSLog(@"Complete Signup");
 	//verify that all six questions have been selected
@@ -470,13 +477,15 @@ typedef enum eAlertType
 {
     if (bBlock)
     {
-        [self.activityView startAnimating];
-        self.buttonBlocker.hidden = NO;
+        [self showSpinner:YES];
+//        [self.activityView startAnimating];
+//        self.buttonBlocker.hidden = NO;
     }
     else
     {
-        [self.activityView stopAnimating];
-        self.buttonBlocker.hidden = YES;
+        [self showSpinner:NO];
+//        [self.activityView stopAnimating];
+//        self.buttonBlocker.hidden = YES;
     }
 }
 
@@ -516,21 +525,7 @@ typedef enum eAlertType
     self.signUpController.strAnswers = strAnswers;
     self.signUpController.delegate = self;
 
-    CGRect frame = self.view.bounds;
-    frame.origin.x = frame.size.width;
-    self.signUpController.view.frame = frame;
-    [self.view addSubview:self.signUpController.view];
-
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-     {
-         self.signUpController.view.frame = self.view.bounds;
-     }
-                     completion:^(BOOL finished)
-     {
-     }];
+    [MainViewController animateView:self.signUpController withBlur:NO];
 }
 
 
@@ -636,7 +631,11 @@ typedef enum eAlertType
     if (_bSuccess)
     {
         float posY = 0;
-        if(self.mode != PassRecovMode_Recover)
+        if(self.mode == PassRecovMode_Recover)
+        {
+            posY = RECOVER_STARTING_Y_POSITION;
+        }
+        else
         {
             posY = QA_STARTING_Y_POSITION;
         }
@@ -680,17 +679,32 @@ typedef enum eAlertType
 
 			posY += frame.size.height;
 		}
-		
-		//position complete Signup button below QA views
-		CGRect btnFrame = self.completeSignupButton.frame;
+
+        //position complete Signup button below QA views
+        self.completeSignupButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [self.completeSignupButton setTitle:@"Complete Sign Up" forState:UIControlStateNormal];
+        self.completeSignupButton.backgroundColor = [Theme Singleton].colorButtonGreen;
+        [self.completeSignupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.completeSignupButton.hidden = NO;
+        self.completeSignupButton.enabled = YES;
+        [self.completeSignupButton addTarget:self action:@selector(CompleteSignup) forControlEvents:UIControlEventTouchDown];
+
+        [self.scrollView addSubview:self.completeSignupButton];
+
+        [self.scrollView addSubview:self.completeSignupButton];
+        CGRect btnFrame = self.completeSignupButton.frame;
 		btnFrame.origin.y = posY;
+        btnFrame.origin.x = 0;
+        btnFrame.size.width = [MainViewController getWidth];
+        btnFrame.size.height = [Theme Singleton].heightButton;
 		self.completeSignupButton.frame = btnFrame;
-		size.height += btnFrame.size.height + 36.0;
+
+        size.height += btnFrame.size.height + 36.0;
 
         // add more if we have a tool bar
         if (_mode == PassRecovMode_Change)
         {
-            size.height += RECOVERY_TOOLBAR_HEIGHT;
+            size.height += [MainViewController getFooterHeight];
         }
 
         // add more if not iPhone5
@@ -698,11 +712,6 @@ typedef enum eAlertType
         {
             size.height += EXTRA_HEGIHT_FOR_IPHONE4;
         }
-		
-		//stretch emboss image to encompass Complete Signup button at its new location
-		CGRect embossFrame = self.embossImage.frame;
-		embossFrame.size.height = btnFrame.origin.y + _completeButtonToEmbossImageDistance - embossFrame.origin.y;
-		self.embossImage.frame = embossFrame;
 		
 		self.scrollView.contentSize = size;
 		_defaultContentSize = size;
@@ -893,15 +902,22 @@ typedef enum eAlertType
 
 -(void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
 {
-	[controller.view removeFromSuperview];
-	self.signUpController = nil;
-
-    // if they didn't just hit the back button
-    if (!bBack)
+    [MainViewController animateOut:controller withBlur:NO complete:^
     {
-        // then we are all done
-        [self exit];
-    }
+        self.signUpController = nil;
+
+        if (!bBack)
+        {
+            // then we are all done
+            [self exit];
+        }
+        else
+        {
+            [self updateViews];
+        }
+
+    }];
+    // if they didn't just hit the back button
 }
 
 #pragma mark - GestureReconizer methods

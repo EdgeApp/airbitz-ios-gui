@@ -13,7 +13,6 @@
 @interface TwoFactorMenuViewController ()
     <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorScanViewControllerDelegate>
 {
-    FadingAlertView             *_fadingAlert;
     TwoFactorScanViewController *_tfaScanViewController;
 }
 

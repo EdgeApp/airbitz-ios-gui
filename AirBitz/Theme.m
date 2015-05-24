@@ -59,6 +59,8 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorRequestTopTextFieldPlaceholder = UIColorFromARGB(0xffdddddd);
     self.colorRequestBottomTextField = self.colorTextDark;
 
+    self.colorButtonGreen = UIColorFromARGB(0xff80C342);
+
     self.appFont = @"Lato-Regular";
 
     self.backButtonText = NSLocalizedString(@"Back", @"Back button text on top left");
@@ -97,6 +99,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.changePINText                                      = NSLocalizedString(@"Change PIN", nil);
     self.twoFactorText                                      = NSLocalizedString(@"Two Factor", nil);
     self.importText                                         = NSLocalizedString(@"Import", nil);
+    self.passwordRecoveryText                               = NSLocalizedString(@"Password Recovery", nil);
 
     self.sendRequestButtonDisabled = 0.4f;
 
@@ -127,6 +130,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.elementPadding = 5; // Generic padding between elements
         self.heightSettingsTableCell            = 40.0;
         self.heightSettingsTableHeader          = 60.0;
+        self.heightButton                       = 45.0;
     }
     if (IS_MIN_IPHONE5)
     {
