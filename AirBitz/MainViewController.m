@@ -627,6 +627,7 @@ MainViewController *singleton;
         [titleLabelButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     }
     titleLabelButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16];
+    titleLabelButton.titleLabel.adjustsFontSizeToFitWidth = YES;
 
     if (!enable)
     {
