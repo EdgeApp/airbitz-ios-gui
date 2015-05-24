@@ -913,7 +913,11 @@ static BOOL bInitialized = false;
 {
     BOOL success = controller.bSuccess;
     NSString *secret = controller.secret;
-    [Util animateOut:controller parentController:self complete:^(void) {
+
+    [MainViewController hideNavBarAnimated:YES];
+
+    [MainViewController animateOut:controller withBlur:NO complete:^(void)
+    {
         _tfaMenuViewController = nil;
 
         if (!success) {

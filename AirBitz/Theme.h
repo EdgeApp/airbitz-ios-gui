@@ -65,6 +65,7 @@
 @property (nonatomic) NSString *changePasswordText;
 @property (nonatomic) NSString *changePINText;
 @property (nonatomic) NSString *twoFactorText;
+@property (nonatomic) NSString *importText;
 
 
 

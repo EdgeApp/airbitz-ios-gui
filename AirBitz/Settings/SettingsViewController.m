@@ -446,7 +446,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _tfaViewController.delegate = self;
 
     [Util addSubviewControllerWithConstraints:self.view child:_tfaViewController];
-    [MainViewController animateSlideIn:_passwordRecoveryController];
+    [MainViewController animateSlideIn:_tfaViewController];
 
 }
 

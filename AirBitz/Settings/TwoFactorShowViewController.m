@@ -20,7 +20,6 @@
 
 @property (nonatomic, weak) IBOutlet UIScrollView            *scrollView;
 @property (nonatomic, weak) IBOutlet MinCharTextField        *passwordTextField;
-@property (nonatomic, weak) IBOutlet UIButton                *buttonImport;
 @property (nonatomic, weak) IBOutlet UIView                  *requestView;
 @property (nonatomic, weak) IBOutlet UIButton                *buttonApprove;
 @property (nonatomic, weak) IBOutlet UIButton                *buttonCancel;
@@ -30,6 +29,8 @@
 @property (nonatomic, weak) IBOutlet UIView                  *loadingSpinner;
 @property (nonatomic, weak) IBOutlet UILabel                 *onOffLabel;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *requestSpinner;
+
+@property (nonatomic)                BOOL                    bNoImportButton;
 
 @end
 
@@ -60,14 +61,17 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    _buttonImport.hidden = ![CoreBridge otpHasError];
-
+    self.bNoImportButton = ![CoreBridge otpHasError];
     [MainViewController changeNavBarOwner:self];
+
+    [self updateViews];
+}
+
+- (void) updateViews
+{
     [MainViewController changeNavBarTitle:self title:[Theme Singleton].twoFactorText];
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-
-
+    [MainViewController changeNavBar:self title:[Theme Singleton].importText side:NAV_BAR_RIGHT button:true enable:!self.bNoImportButton action:@selector(Import:) fromObject:self];
 }
 
 - (void)initUI
@@ -285,18 +289,19 @@
         _requestView.hidden = YES;
         _requestView.hidden = YES;
         _requestSpinner.hidden = YES;
-        _buttonImport.hidden = NO;
+        self.bNoImportButton = NO;
     } else {
         _requestView.hidden = YES;
         _requestView.hidden = YES;
         _requestSpinner.hidden = YES;
         _viewQRCodeFrame.hidden = YES;
-        _buttonImport.hidden = YES;
+        self.bNoImportButton = YES;
     }
-    _buttonImport.hidden = ![CoreBridge otpHasError];
+    self.bNoImportButton = ![CoreBridge otpHasError];
     [self setText:on];
     _tfaEnabledSwitch.on = on;
     _loadingSpinner.hidden = YES;
+    [self updateViews];
 }
 
 - (void)setText:(BOOL)on
@@ -357,10 +362,15 @@
 
 - (IBAction)Import:(id)sender
 {
-    _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" storyboard:@"Settings" parentController:self];
+    UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
+    _tfaMenuViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"TwoFactorMenuViewController"];
     _tfaMenuViewController.delegate = self;
     _tfaMenuViewController.username = [User Singleton].name;
     _tfaMenuViewController.bStoreSecret = YES;
+
+    [Util addSubviewControllerWithConstraints:self.view child:_tfaMenuViewController];
+    [MainViewController animateSlideIn:_tfaMenuViewController];
+
     [self initUI];
 }
 
@@ -442,12 +452,17 @@
 - (void)twoFactorMenuViewControllerDone:(TwoFactorMenuViewController *)controller withBackButton:(BOOL)bBack
 {
     BOOL success = controller.bSuccess;
-    [Util animateOut:controller parentController:self complete:^(void) {
+    [MainViewController animateOut:controller withBlur:NO complete:^(void)
+    {
         _tfaMenuViewController = nil;
     }];
     if (!bBack && !success) {
         [MainViewController fadingAlert:NSLocalizedString(@("Unable to import secret"), nil)];
     }
+
+    [MainViewController changeNavBarOwner:self];
+
+    [self updateViews];
     [self checkStatus:success];
 }
 

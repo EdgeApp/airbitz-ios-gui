@@ -1,9 +1,10 @@
 
 #import <UIKit/UIKit.h>
+#import "AirbitzViewController.h"
 
 @protocol TwoFactorMenuViewControllerDelegate;
 
-@interface TwoFactorMenuViewController : UIViewController
+@interface TwoFactorMenuViewController : AirbitzViewController
 
 @property (assign) id<TwoFactorMenuViewControllerDelegate> delegate;
 @property (copy) NSString *secret;

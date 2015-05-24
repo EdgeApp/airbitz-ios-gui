@@ -7,6 +7,8 @@
 #import "ABC.h"
 #import "CoreBridge.h"
 #import "NSDate+Helper.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
 @interface TwoFactorMenuViewController ()
     <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorScanViewControllerDelegate>
@@ -81,6 +83,15 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MainViewController showNavBarAnimated:YES];
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:[Theme Singleton].twoFactorText];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].importText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+}
+
 - (IBAction)Back:(id)sender
 {
     [self exitWithBackButton:YES];
@@ -88,10 +99,15 @@
 
 - (IBAction)Scan:(id)sender
 {
-    _tfaScanViewController = (TwoFactorScanViewController *)[Util animateIn:@"TwoFactorScanViewController" storyboard:@"Settings" parentController:self];
+    UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
+    _tfaScanViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"TwoFactorScanViewController"];
     _tfaScanViewController.delegate = self;
     _tfaScanViewController.bStoreSecret = _bStoreSecret;
     _tfaScanViewController.bTestSecret = _bTestSecret;
+
+    [Util addSubviewControllerWithConstraints:self.view child:_tfaScanViewController];
+    [MainViewController animateSlideIn:_tfaScanViewController];
+
 }
 
 - (IBAction)Reset:(id)sender
@@ -101,10 +117,10 @@
         tABC_CC cc = ABC_OtpResetSet([_username UTF8String], &error);
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (cc == ABC_CC_Ok) {
-                [self showFadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
+                [MainViewController fadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
                 [CoreBridge otpClearError];
             } else {
-                [self showFadingAlert:[Util errorMap:&error]];
+                [MainViewController fadingAlert:[Util errorMap:&error]];
             }
         });
     });
@@ -117,7 +133,8 @@
     if (!bBack) {
         [self exit];
     } else {
-        [Util animateOut:controller parentController:self complete:^(void) {
+        [MainViewController animateOut:controller withBlur:NO complete:^(void)
+        {
             _tfaScanViewController = nil;
         }];
     }
@@ -139,7 +156,6 @@
 
 - (void)exitWithBackButton:(BOOL)bBack
 {
-    [self dismissErrorMessage];
     [self.delegate twoFactorMenuViewControllerDone:self withBackButton:bBack];
 }
 
@@ -156,24 +172,6 @@
 - (void)tabBarButtonReselect:(NSNotification *)notification
 {
     [self Back:nil];
-}
-
-#pragma mark - Fading Alert Methods
-
-- (void)showFadingAlert:(NSString *)message
-{
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
-    _fadingAlert.message = message;
-    _fadingAlert.fadeDelay = 2;
-    _fadingAlert.fadeDuration = 1;
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showFading];
-}
-
-- (void)dismissErrorMessage
-{
-    [_fadingAlert dismiss:NO];
-    _fadingAlert = nil;
 }
 
 @end

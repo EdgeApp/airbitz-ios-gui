@@ -36,6 +36,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -903,7 +904,7 @@
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                                 <state key="normal" title="DISABLE 2FA">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="confirmRequest:" destination="Ydf-KI-RbJ" eventType="touchUpInside" id="GY6-ga-vqH"/>
@@ -918,7 +919,7 @@
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                                 <state key="normal" title="KEEP 2FA">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="cancelRequest:" destination="Ydf-KI-RbJ" eventType="touchUpInside" id="Q7v-MV-Hp2"/>
@@ -1048,105 +1049,121 @@
                         <viewControllerLayoutGuide type="bottom" id="FEU-nm-C2v"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PXl-vb-IEQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="q5D-OG-A7d">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6x-zH-xvf">
-                                <rect key="frame" x="10" y="80" width="300" height="89"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyF-Xj-yeF" userLabel="BlurView" customClass="BlurView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6x-zH-xvf">
+                                <rect key="frame" x="20" y="80" width="280" height="78"/>
                                 <string key="text">This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. </string>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Paf-yd-bxm">
-                                <rect key="frame" x="0.0" y="3" width="320" height="62"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="3Qo-Qw-vBg">
-                                        <rect key="frame" x="0.0" y="-2" width="320" height="64"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFT-Rn-g3A" userLabel="Button - back">
-                                        <rect key="frame" x="4" y="23" width="90" height="37"/>
-                                        <inset key="imageEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" image="back_arrow.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="Back:" destination="UTI-It-wVp" eventType="touchUpInside" id="Gwv-Nj-me7"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Two Factor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAM-oi-p5b" customClass="MontserratLabel">
-                                        <rect key="frame" x="50" y="31" width="219" height="21"/>
-                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <size key="shadowOffset" width="0.0" height="1"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lqV-Y6-LKD" customClass="StylizedButton">
-                                <rect key="frame" x="67" y="369" width="185" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lqV-Y6-LKD">
+                                <rect key="frame" x="0.0" y="345" width="320" height="40"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="DaK-qw-6cd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                 <state key="normal" title="Request Reset">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="Reset:" destination="UTI-It-wVp" eventType="touchUpInside" id="mS4-cz-SXW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pki-9D-VwL" customClass="StylizedButton">
-                                <rect key="frame" x="67" y="182" width="185" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pki-9D-VwL">
+                                <rect key="frame" x="0.0" y="166" width="320" height="45"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="wE2-dd-L7O"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                 <state key="normal" title="Scan Token">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="Scan:" destination="UTI-It-wVp" eventType="touchUpInside" id="6aA-Do-TR5"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYl-WU-bNw">
-                                <rect key="frame" x="16" y="265" width="288" height="90"/>
+                            <label opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYl-WU-bNw">
+                                <rect key="frame" x="20" y="246" width="280" height="91"/>
                                 <string key="text">Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices</string>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="1" height="-1"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h6I-iF-k15">
-                                <rect key="frame" x="16" y="418" width="288" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6I-iF-k15">
+                                <rect key="frame" x="20" y="393" width="280" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="YfP-S0-GKK"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Two factor reset has been requested." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Qs-Xo-F5I">
-                                <rect key="frame" x="16" y="369" width="288" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Two factor reset has been requested" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxc-na-KPc">
+                                <rect key="frame" x="0.0" y="345" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="7NB-TV-oiU"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="-1"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="lqV-Y6-LKD" secondAttribute="trailing" id="1yz-Ib-otA"/>
+                            <constraint firstAttribute="bottom" secondItem="uyF-Xj-yeF" secondAttribute="bottom" id="2mb-s7-1Mb"/>
+                            <constraint firstAttribute="trailing" secondItem="bYl-WU-bNw" secondAttribute="trailing" constant="20" symbolic="YES" id="52L-tm-qFV"/>
+                            <constraint firstItem="pki-9D-VwL" firstAttribute="leading" secondItem="PXl-vb-IEQ" secondAttribute="leading" id="5Za-7U-nrn"/>
+                            <constraint firstItem="bYl-WU-bNw" firstAttribute="leading" secondItem="PXl-vb-IEQ" secondAttribute="leading" constant="20" symbolic="YES" id="ATc-g6-Okf"/>
+                            <constraint firstItem="pki-9D-VwL" firstAttribute="top" secondItem="T6x-zH-xvf" secondAttribute="bottom" constant="8" symbolic="YES" id="Dbg-zR-bvK"/>
+                            <constraint firstItem="hxc-na-KPc" firstAttribute="top" secondItem="bYl-WU-bNw" secondAttribute="bottom" constant="8" symbolic="YES" id="Gjp-Ww-QgB"/>
+                            <constraint firstItem="lqV-Y6-LKD" firstAttribute="leading" secondItem="PXl-vb-IEQ" secondAttribute="leading" id="Kk4-kE-gV0"/>
+                            <constraint firstAttribute="trailing" secondItem="T6x-zH-xvf" secondAttribute="trailing" constant="20" symbolic="YES" id="L7P-8l-ZlW"/>
+                            <constraint firstItem="bYl-WU-bNw" firstAttribute="top" secondItem="pki-9D-VwL" secondAttribute="bottom" constant="35" id="NOK-zo-ZyV"/>
+                            <constraint firstItem="hxc-na-KPc" firstAttribute="leading" secondItem="PXl-vb-IEQ" secondAttribute="leading" id="S2I-Id-ffB"/>
+                            <constraint firstAttribute="trailing" secondItem="uyF-Xj-yeF" secondAttribute="trailing" id="TcR-Ja-AMQ"/>
+                            <constraint firstAttribute="trailing" secondItem="pki-9D-VwL" secondAttribute="trailing" id="bhh-el-0qe"/>
+                            <constraint firstItem="uyF-Xj-yeF" firstAttribute="top" secondItem="PXl-vb-IEQ" secondAttribute="top" constant="64" id="fIo-6Z-NoU"/>
+                            <constraint firstAttribute="trailing" secondItem="hxc-na-KPc" secondAttribute="trailing" id="hvn-gu-IU9"/>
+                            <constraint firstItem="h6I-iF-k15" firstAttribute="top" secondItem="hxc-na-KPc" secondAttribute="bottom" constant="8" symbolic="YES" id="kVn-JJ-6i0"/>
+                            <constraint firstItem="T6x-zH-xvf" firstAttribute="top" secondItem="PXl-vb-IEQ" secondAttribute="top" constant="80" id="nhD-tP-Lmd"/>
+                            <constraint firstItem="lqV-Y6-LKD" firstAttribute="top" secondItem="bYl-WU-bNw" secondAttribute="bottom" constant="8" symbolic="YES" id="skE-Mb-ePk"/>
+                            <constraint firstItem="h6I-iF-k15" firstAttribute="leading" secondItem="PXl-vb-IEQ" secondAttribute="leading" constant="20" symbolic="YES" id="tjl-sc-BLF"/>
+                            <constraint firstItem="uyF-Xj-yeF" firstAttribute="leading" secondItem="PXl-vb-IEQ" secondAttribute="leading" id="xOW-c2-9NF"/>
+                            <constraint firstItem="T6x-zH-xvf" firstAttribute="leading" secondItem="PXl-vb-IEQ" secondAttribute="leading" constant="20" symbolic="YES" id="yg6-Tz-Vr9"/>
+                            <constraint firstAttribute="trailing" secondItem="h6I-iF-k15" secondAttribute="trailing" constant="20" symbolic="YES" id="z8V-1K-FCJ"/>
+                        </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="buttonReset" destination="lqV-Y6-LKD" id="gp6-7P-XYj"/>
                         <outlet property="buttonScan" destination="pki-9D-VwL" id="wWb-pf-hHa"/>
                         <outlet property="labelResetDate" destination="h6I-iF-k15" id="GRO-P8-8XG"/>
-                        <outlet property="labelResetDesc" destination="4Qs-Xo-F5I" id="nxW-IT-sM8"/>
+                        <outlet property="labelResetDesc" destination="hxc-na-KPc" id="3a7-KZ-gBd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vtj-Kk-IPk" userLabel="First Responder" sceneMemberID="firstResponder"/>

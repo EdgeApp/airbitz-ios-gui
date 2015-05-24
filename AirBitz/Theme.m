@@ -96,6 +96,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.changePasswordText                                 = NSLocalizedString(@"Change Password", nil);
     self.changePINText                                      = NSLocalizedString(@"Change PIN", nil);
     self.twoFactorText                                      = NSLocalizedString(@"Two Factor", nil);
+    self.importText                                         = NSLocalizedString(@"Import", nil);
 
     self.sendRequestButtonDisabled = 0.4f;
 
