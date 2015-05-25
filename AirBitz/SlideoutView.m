@@ -93,41 +93,48 @@
 
 - (void)showSlideout:(BOOL)show
 {
-    self.accountPicker.delegate = self;
-    
-    // set up the specifics on our picker text view
-    [self.accountPicker setTopMostView:self.otherAccountsView];
-    CGRect frame = self.accountPicker.frame;
-    frame.size.width = self.otherAccountsView.frame.size.width;
-    self.accountPicker.frame = frame;
-    [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
-    [self.accountPicker setRoundedAndShadowed:NO];
-    
-    tABC_AccountSettings *_pAccountSettings = NULL;
-    tABC_Error Error;
-    Error.code = ABC_CC_Ok;
-    ABC_LoadAccountSettings([[User Singleton].name UTF8String],
-                            [[User Singleton].password UTF8String],
-                            &_pAccountSettings,
-                            &Error);
-    int num = _pAccountSettings->currencyNum;
-    self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:YES];
-    
-    
-    self.accountText.text = [User Singleton].name;
-    [self.accountButton setAccessibilityLabel:[User Singleton].name];
-    
-    self.lowerViews.hidden = NO;
-    self.otherAccountsView.hidden = YES;
-    self.otherAccountsView.clipsToBounds = YES;
-    
-    CGRect lframe = self.lowerViews.frame;
-    CGRect oframe = self.otherAccountsView.frame;
-    oframe.size.height = lframe.size.height;
-    self.lowerViews.frame = lframe;
-    self.otherAccountsView.frame = oframe;
-    
-    [self showSlideout:show withAnimation:YES];
+    if ([User isLoggedIn])
+    {
+        self.accountPicker.delegate = self;
+
+        // set up the specifics on our picker text view
+        [self.accountPicker setTopMostView:self.otherAccountsView];
+        CGRect frame = self.accountPicker.frame;
+        frame.size.width = self.otherAccountsView.frame.size.width;
+        self.accountPicker.frame = frame;
+        [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
+        [self.accountPicker setRoundedAndShadowed:NO];
+
+        tABC_AccountSettings *_pAccountSettings = NULL;
+        tABC_Error Error;
+        Error.code = ABC_CC_Ok;
+        ABC_LoadAccountSettings([[User Singleton].name UTF8String],
+                [[User Singleton].password UTF8String],
+                &_pAccountSettings,
+                &Error);
+        int num = _pAccountSettings->currencyNum;
+        self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:YES];
+
+
+        self.accountText.text = [User Singleton].name;
+        [self.accountButton setAccessibilityLabel:[User Singleton].name];
+
+        self.lowerViews.hidden = NO;
+        self.otherAccountsView.hidden = YES;
+        self.otherAccountsView.clipsToBounds = YES;
+
+        CGRect lframe = self.lowerViews.frame;
+        CGRect oframe = self.otherAccountsView.frame;
+        oframe.size.height = lframe.size.height;
+        self.lowerViews.frame = lframe;
+        self.otherAccountsView.frame = oframe;
+
+        [self showSlideout:show withAnimation:YES];
+    }
+    else
+    {
+        [self showSlideout:NO withAnimation:YES];
+    }
 }
 
 - (void)showSlideout:(BOOL)show withAnimation:(BOOL)bAnimation
