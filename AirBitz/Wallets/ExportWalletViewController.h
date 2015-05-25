@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Wallet.h"
+#import "AirbitzViewController.h"
 
 @protocol ExportWalletViewControllerDelegate;
 
-@interface ExportWalletViewController : UIViewController
+@interface ExportWalletViewController : AirbitzViewController
 
 @property (assign)            id<ExportWalletViewControllerDelegate> delegate;
 

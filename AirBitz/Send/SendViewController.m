@@ -36,7 +36,6 @@
 #import "SendConfirmationViewController.h"
 #import "FlashSelectView.h"
 #import "User.h"
-#import "ButtonSelectorView.h"
 #import "CommonTypes.h"
 #import "Util.h"
 #import "InfoView.h"

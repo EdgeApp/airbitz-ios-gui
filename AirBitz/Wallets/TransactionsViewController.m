@@ -423,26 +423,9 @@
 
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         self.exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
-
         self.exportWalletViewController.delegate = self;
 
-        CGRect frame = self.view.bounds;
-        frame.origin.x = frame.size.width;
-        self.exportWalletViewController.view.frame = frame;
-        [self.view addSubview:self.exportWalletViewController.view];
-
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.35
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^
-         {
-             self.exportWalletViewController.view.frame = self.view.bounds;
-         }
-                         completion:^(BOOL finished)
-         {
-             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-         }];
+        [MainViewController animateView:self.exportWalletViewController withBlur:NO];
     }
 }
 
@@ -902,19 +885,6 @@
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
-//    [CoreBridge postToWalletsQueue:^(void) {
-//        [CoreBridge reloadWallet:self.wallet];
-//        [self getBizImagesForWallet:self.wallet];
-//
-//        dispatch_async(dispatch_get_main_queue(),^{
-//            [self.tableView reloadData];
-//            [self checkSearchArray];
-//            [MainViewController changeNavBarOwner:self];
-//            [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
-//            [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
-//            [self updateBalanceView];
-//        });
-//    }];
     [self dismissTransactionDetails];
     [self updateViews:nil];
 
@@ -1539,8 +1509,16 @@
 
 - (void)exportWalletViewControllerDidFinish:(ExportWalletViewController *)controller
 {
-    [controller.view removeFromSuperview];
-    self.exportWalletViewController = nil;
+    [MainViewController animateOut:controller withBlur:NO complete:^(void)
+    {
+        self.exportWalletViewController = nil;
+    }];
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+
+    [self updateViews:nil];
+
 }
 
 #pragma mark - Block Height Change
