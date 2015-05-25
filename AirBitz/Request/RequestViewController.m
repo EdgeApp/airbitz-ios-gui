@@ -101,7 +101,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (strong, nonatomic) NSData                    *dataToSend;
 @property (nonatomic, readwrite) NSInteger              sendDataIndex;
 @property (nonatomic, strong) NSArray                   *arrayContacts;
-@property (nonatomic, weak) IBOutlet UILabel			*connectedName;
+@property (nonatomic, strong) NSString			        *connectedName;
 @property (nonatomic, assign) int64_t                   amountSatoshiRequested;
 @property (nonatomic, assign) int64_t                   previousAmountSatoshiRequested;
 @property (nonatomic, assign) int64_t                   amountSatoshiReceived;
@@ -1416,14 +1416,14 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     NSString *line3;
     UIImage *image;
 
-    line1 = self.connectedName.text;
-    line2 = NSLocalizedString(@"Connected", "Popup text when BLE connects");
-    line3 = @"";
+    line1 = self.connectedName;
+    line2 = @"";
+    line3 = NSLocalizedString(@"Connected", "Popup text when BLE connects");
 
     //see if there is a match between advertised name and name in contacts.  If so, use the photo from contacts
     BOOL imageIsFromContacts = NO;
 
-    NSArray *arrayComponents = [self.connectedName.text componentsSeparatedByString:@" "];
+    NSArray *arrayComponents = [self.connectedName componentsSeparatedByString:@" "];
     if(arrayComponents.count >= 2)
     {
         //filter off the nickname.  We just want first name and last name
@@ -1728,7 +1728,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             NSString *userName = [[NSString alloc] initWithData:request.value encoding:NSUTF8StringEncoding];
             //NSLog(@"Received new string: %@", userName);
 
-            self.connectedName.text = userName;
+            self.connectedName = userName;
         }
     }
     [self showConnectedPopup];
