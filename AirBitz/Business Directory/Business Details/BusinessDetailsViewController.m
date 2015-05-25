@@ -901,22 +901,13 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 - (void)returnFromGallery
 {
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 CGRect frame = self.view.bounds;
-		 frame.origin.x = frame.size.width;
-		 galleryController.view.frame = frame;
-	 }
-					 completion:^(BOOL finished)
-	 {
-		 [galleryController.view removeFromSuperview];
-		 galleryController = nil;
-         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-	 }];
+    [MainViewController animateOut:galleryController withBlur:NO complete:^(void) {
+        [galleryController.view removeFromSuperview];
+        galleryController = nil;
+        [MainViewController showNavBarAnimated:YES];
+        [MainViewController showTabBarAnimated:YES];
+    }];
+
 }
 
 - (UIView*)customBottomViewForGalleryViewController:(UIPhotoGalleryViewController *)galleryViewController
@@ -939,24 +930,10 @@ typedef NS_ENUM(NSUInteger, CellType) {
         galleryController.initialIndex = index;
         galleryController.showStatusBar = YES;
         galleryController.dataSource = self;
-        
-        CGRect frame = self.view.bounds;
-        frame.origin.x = frame.size.width;
-        galleryController.view.frame = frame;
-        [self.view addSubview:galleryController.view];
-        
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.35
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^
-         {
-             galleryController.view.frame = self.view.bounds;
-         }
-                         completion:^(BOOL finished)
-         {
-             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-         }];
+
+        [MainViewController hideNavBarAnimated:YES];
+        [MainViewController hideTabBarAnimated:YES];
+        [MainViewController animateView:galleryController withBlur:NO];
     }
 }
 

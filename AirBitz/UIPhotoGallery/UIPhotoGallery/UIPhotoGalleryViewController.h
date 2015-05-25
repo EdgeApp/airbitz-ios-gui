@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPhotoGalleryView.h"
+#import "AirbitzViewController.h"
 
-@interface UIPhotoGalleryViewController : UIViewController<UIPhotoGalleryDataSource, UIPhotoGalleryDelegate> {
+@interface UIPhotoGalleryViewController : AirbitzViewController<UIPhotoGalleryDataSource, UIPhotoGalleryDelegate> {
     UIPhotoGalleryView *vPhotoGallery;
 }
 
