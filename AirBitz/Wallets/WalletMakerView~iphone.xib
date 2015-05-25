@@ -47,7 +47,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="sI7-DG-j5f"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
                     <state key="normal" title="CANCEL">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -59,7 +59,7 @@
                     <rect key="frame" x="160" y="114" width="160" height="50"/>
                     <color key="backgroundColor" red="0.50196081399917603" green="0.76470595598220825" blue="0.25882354378700256" alpha="1" colorSpace="deviceRGB"/>
                     <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
                     <state key="normal" title="DONE">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

@@ -15,7 +15,7 @@
                     <rect key="frame" x="-1024" y="-1024" width="2048" height="2048"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                     <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -52,7 +52,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="25">
                             <rect key="frame" x="0.0" y="215" width="160" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
-                            <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" size="button"/>
                             <state key="normal" title="Cancel">
                                 <color key="titleColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,7 +67,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="24">
                             <rect key="frame" x="160" y="215" width="160" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" size="button"/>
                             <state key="normal" title="OK">
                                 <color key="titleColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

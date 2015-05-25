@@ -52,7 +52,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="gcM-e4-DZy"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="21"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -61,7 +61,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="Z8C-je-KF0"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="21"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -70,7 +70,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="7Gi-XJ-c1N"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="21"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>

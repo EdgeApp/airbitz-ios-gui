@@ -24,7 +24,7 @@
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SQA-Az-gDI" customClass="LatoLabel">
                     <rect key="frame" x="0.0" y="8" width="96" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                     <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="0.0" height="1"/>
