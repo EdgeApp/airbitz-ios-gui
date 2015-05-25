@@ -74,17 +74,32 @@
                         <action selector="headerButton" destination="N7s-Lf-JN5" eventType="touchUpInside" id="7gl-Cl-sOr"/>
                     </connections>
                 </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Urh-AH-SxJ" userLabel="Button - export">
+                    <rect key="frame" x="202" y="4" width="37" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="M6o-Iz-sUd"/>
+                        <constraint firstAttribute="width" constant="37" id="yzO-RC-2Yc"/>
+                    </constraints>
+                    <state key="normal" image="btn_export.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="exportButton" destination="N7s-Lf-JN5" eventType="touchUpInside" id="WHM-A6-XL3"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.10588235294117647" green="0.37647058823529411" blue="0.63137254901960782" alpha="1" colorSpace="deviceRGB"/>
             <constraints>
                 <constraint firstItem="6kk-Hg-VIb" firstAttribute="leading" secondItem="N7s-Lf-JN5" secondAttribute="leading" constant="10" id="ByY-Rp-PAN"/>
+                <constraint firstAttribute="centerY" secondItem="Urh-AH-SxJ" secondAttribute="centerY" id="DfB-t3-UQ0"/>
+                <constraint firstItem="YqN-AD-qjb" firstAttribute="leading" secondItem="tzk-gl-KBi" secondAttribute="trailing" constant="2" id="OSt-og-bjE"/>
                 <constraint firstItem="IbZ-gX-b12" firstAttribute="leading" secondItem="6kk-Hg-VIb" secondAttribute="trailing" constant="8" symbolic="YES" id="PEs-Vi-S4J"/>
                 <constraint firstItem="tzk-gl-KBi" firstAttribute="top" secondItem="N7s-Lf-JN5" secondAttribute="top" id="QQE-5u-6zW"/>
                 <constraint firstItem="YqN-AD-qjb" firstAttribute="top" secondItem="N7s-Lf-JN5" secondAttribute="top" constant="8" id="Qhy-MR-7Wf"/>
                 <constraint firstAttribute="bottom" secondItem="YqN-AD-qjb" secondAttribute="bottom" constant="8" id="UF7-qA-YTg"/>
+                <constraint firstItem="IbZ-gX-b12" firstAttribute="leading" secondItem="Urh-AH-SxJ" secondAttribute="trailing" constant="10" id="WJO-Z8-14a"/>
                 <constraint firstAttribute="centerY" secondItem="IbZ-gX-b12" secondAttribute="centerY" id="YR2-et-xKk"/>
                 <constraint firstAttribute="trailing" secondItem="IbZ-gX-b12" secondAttribute="trailing" constant="8" id="aGw-Sn-QVX"/>
-                <constraint firstItem="YqN-AD-qjb" firstAttribute="leading" secondItem="tzk-gl-KBi" secondAttribute="trailing" constant="2" id="bBp-yo-2L1"/>
                 <constraint firstItem="6kk-Hg-VIb" firstAttribute="top" secondItem="N7s-Lf-JN5" secondAttribute="top" constant="5" id="eXQ-U1-znb"/>
                 <constraint firstAttribute="trailing" secondItem="YqN-AD-qjb" secondAttribute="trailing" constant="10" id="gv4-Rt-Kej"/>
                 <constraint firstAttribute="bottom" secondItem="6kk-Hg-VIb" secondAttribute="bottom" constant="5" id="i5o-UL-5dS"/>
@@ -98,6 +113,7 @@
             <connections>
                 <outlet property="btn_addWallet" destination="IbZ-gX-b12" id="jUr-Kk-r9j"/>
                 <outlet property="btn_expandCollapse" destination="Nvh-Ja-ygJ" id="GkC-jy-mX3"/>
+                <outlet property="btn_exportWallet" destination="Urh-AH-SxJ" id="RuW-Lp-GI2"/>
                 <outlet property="segmentedControlBTCUSD" destination="YqN-AD-qjb" id="Tz9-UJ-V9Y"/>
                 <outlet property="titleLabel" destination="6kk-Hg-VIb" id="n1t-fG-DVa"/>
             </connections>
@@ -106,6 +122,7 @@
     <resources>
         <image name="btn_add.png" width="36" height="36"/>
         <image name="btn_collapse_expand.png" width="22" height="22"/>
+        <image name="btn_export.png" width="36" height="36"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

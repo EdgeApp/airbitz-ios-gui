@@ -96,7 +96,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	NSTimer							*peripheralCleanupTimer; //used to remove BLE devices from table when they're no longer around
 	tScanMode						scanMode;
 	float							originalFrameHeight;
-    FadingAlertView2                 *_fadingAlert;
     BOOL                            bWalletListDropped;
     BOOL                            bFlashOn;
     UIAlertView                     *typeAddressAlertView;

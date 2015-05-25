@@ -95,6 +95,11 @@
     [self.delegate headerButton];
 }
 
+- (IBAction)exportButton
+{
+    [self.delegate exportWallet];
+}
+
 - (IBAction)addWallet
 {
     [self.delegate addWallet];

@@ -17,10 +17,12 @@
 #import "ExportWalletOptionsCell.h"
 #import "CommonTypes.h"
 #import "GDrive.h"
-#import "ButtonSelectorView.h"
+#import "ButtonSelectorView2.h"
 #import "CommonTypes.h"
 #import "FadingAlertView.h"
 #import "ABC.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
 #define WALLET_BUTTON_WIDTH         160
 
@@ -49,25 +51,23 @@ typedef enum eExportOption
 
 @interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate,
                                                  ExportWalletPDFViewControllerDelegate, GDriveDelegate, FadingAlertViewDelegate,
-                                                 UIGestureRecognizerDelegate, ButtonSelectorDelegate, UITextFieldDelegate>
+                                                 UIGestureRecognizerDelegate, ButtonSelector2Delegate, UITextFieldDelegate>
 {
-//    NSInteger _selectedWallet;
-	GDrive *drive;
-    MFMailComposeViewController *_mailComposer;
-    FadingAlertView *_fadingAlert;
+	GDrive                              *drive;
+    MFMailComposeViewController         *_mailComposer;
+    BOOL                                bWalletListDropped;
 }
 
-@property (weak, nonatomic) IBOutlet UIView         *viewDisplay;
-@property (weak, nonatomic) IBOutlet UIView         *viewPassword;
-@property (weak, nonatomic) IBOutlet UITableView    *tableView;
-@property (weak, nonatomic) IBOutlet UILabel        *labelFromDate;
-@property (weak, nonatomic) IBOutlet UILabel        *labelToDate;
-@property (weak, nonatomic) IBOutlet UIView			*viewHeader;
-@property (weak, nonatomic) IBOutlet ButtonSelectorView *buttonSelector;
-@property (nonatomic, weak) IBOutlet MinCharTextField   *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIView                     *viewPassword;
+@property (weak, nonatomic) IBOutlet UITableView                *tableView;
+//@property (weak, nonatomic) IBOutlet UILabel        *labelFromDate;
+//@property (weak, nonatomic) IBOutlet UILabel        *labelToDate;
+//@property (weak, nonatomic) IBOutlet UIView			*viewHeader;
+@property (weak, nonatomic) IBOutlet ButtonSelectorView2        *buttonSelector;
+@property (nonatomic, weak) IBOutlet MinCharTextField           *passwordTextField;
 
-@property (nonatomic, strong) ExportWalletPDFViewController *exportWalletPDFViewController;
-@property (nonatomic, strong) NSArray                       *arrayChoices;
+@property (nonatomic, strong) ExportWalletPDFViewController     *exportWalletPDFViewController;
+@property (nonatomic, strong) NSArray                           *arrayChoices;
 //@property (nonatomic, strong) NSArray                       *arrayWalletUUIDs;
 //@property (nonatomic, strong) NSArray                       *arrayWallets;
 
@@ -104,23 +104,18 @@ typedef enum eExportOption
     // This will remove extra separators from tableview
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
+    self.buttonSelector.delegate = self;
+
     self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 	self.tableView.delaysContentTouches = NO;
 
-    // resize ourselves to fit in area
-    [Util resizeView:self.view withDisplayView:self.viewDisplay];
-
-    [self updateDisplayLayout];
-
-    [self setWalletData];
-    
-    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
-                               (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year,
-                               [self displayFor12From24:(int) self.fromDateTime.hour], (int) self.fromDateTime.minute, self.fromDateTime.hour > 11 ? @"pm" : @"am"];
-    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
-                             (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year,
-                             [self displayFor12From24:(int) self.toDateTime.hour], (int) self.toDateTime.minute, self.toDateTime.hour > 11 ?  @"pm" : @"am"];
+//    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
+//                               (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year,
+//                               [self displayFor12From24:(int) self.fromDateTime.hour], (int) self.fromDateTime.minute, self.fromDateTime.hour > 11 ? @"pm" : @"am"];
+//    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
+//                             (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year,
+//                             [self displayFor12From24:(int) self.toDateTime.hour], (int) self.toDateTime.minute, self.toDateTime.hour > 11 ?  @"pm" : @"am"];
 
 
     //NSLog(@"type: %d", self.type);
@@ -128,6 +123,16 @@ typedef enum eExportOption
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
+
+    [self updateViews];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -141,44 +146,42 @@ typedef enum eExportOption
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)updateViews
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    {
+        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
+        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
 
-- (void)setWalletData
-{
-    self.buttonSelector.delegate = self;
-	self.buttonSelector.textLabel.text = @"";
-    [self.buttonSelector setButtonWidth:WALLET_BUTTON_WIDTH];
-    self.buttonSelector.button.titleLabel.font = [UIFont systemFontOfSize:12];
-    self.buttonSelector.button.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:15];
-    
-	self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-//    self.arrayWalletUUIDs = arrayWalletUUIDs;
-    
-//    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
-    
-//    _selectedWallet = [arrayWalletUUIDs indexOfObject:self.wallet.strUUID];
-//    if (_selectedWallet != NSNotFound)
-//	{
-		[self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-		self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
-//	}
-    
-//    // get an array of all the wallets
-//    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-//    NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
-//    [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets];
-//    [arrayWallets addObjectsFromArray:arrayArchivedWallets];
-//    self.arrayWallets = arrayWallets;
+        NSString *walletName;
+        walletName = [NSString stringWithFormat:@"Export From: %@ ↓", [CoreBridge Singleton].currentWallet.strName];
+
+        [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle) fromObject:self];
+        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        {
+            [FadingAlertView create:self.view
+                            message:[Theme Singleton].walletHasBeenArchivedText
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
+        }
+    }
 }
+
+- (void)didTapTitle
+{
+    if (bWalletListDropped)
+    {
+        [self.buttonSelector close];
+        bWalletListDropped = false;
+    }
+    else
+    {
+        [self.buttonSelector open];
+        bWalletListDropped = true;
+    }
+
+}
+
 
 #pragma mark - Keyboard Notifications
 
@@ -190,31 +193,17 @@ typedef enum eExportOption
 
 #pragma mark - Action Methods
 
-- (IBAction)buttonBackTouched:(id)sender
+- (void)buttonBackTouched
 {
-    [self animatedExit];
+    [self exit];
 }
 
-- (IBAction)buttonInfoTouched:(id)sender
+- (void)buttonInfoTouched
 {
     [InfoView CreateWithHTML:@"infoExportWalletOptions" forView:self.view];
 }
 
 #pragma mark - Misc Methods
-
-- (void)updateDisplayLayout
-{
-    // update for iPhone 4
-    if (IS_IPHONE4 )
-    {
-        // warning: magic numbers for iphone4 layout
-
-        CGRect frame = self.tableView.frame;
-        frame.size.height = 185;
-        self.tableView.frame = frame;
-        
-    }
-}
 
 - (int)displayFor12From24:(int)hour24
 {
@@ -242,7 +231,6 @@ typedef enum eExportOption
 	{
 		cell = [[ExportWalletOptionsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 	}
-	cell.bkgImage.image = bkgImage;
 
     NSInteger index = [[self.arrayChoices objectAtIndex:indexPath.row] integerValue];
     cell.name.text = [ARRAY_NAMES_FOR_OPTIONS objectAtIndex:index];
@@ -643,23 +631,6 @@ typedef enum eExportOption
     return (self.exportWalletPDFViewController != nil);
 }
 
-- (void)animatedExit
-{
-	[UIView animateWithDuration:0.35
-						  delay:0.0
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^
-	 {
-		 CGRect frame = self.view.frame;
-		 frame.origin.x = frame.size.width;
-		 self.view.frame = frame;
-	 }
-                     completion:^(BOOL finished)
-	 {
-		 [self exit];
-	 }];
-}
-
 - (void)exit
 {
     if (_mailComposer && _mailComposer.presentingViewController)
@@ -690,7 +661,7 @@ typedef enum eExportOption
 -(void)GDriveAuthControllerPresented
 {
 	NSLog(@"Auth Controller Presented");
-	[self.view bringSubviewToFront:self.viewHeader];
+//	[self.view bringSubviewToFront:self.viewHeader];
 }
 #pragma mark - UITableView Delegates
 
@@ -709,29 +680,29 @@ typedef enum eExportOption
 	UITableViewCell *cell;
     UIImage *cellImage;
 
-    if ([self.arrayChoices count] == 1)
-    {
-        cellImage = [UIImage imageNamed:@"bd_cell_middle"];
-    }
-    else
-    {
-
-        if (indexPath.row == 0)
-        {
-            cellImage = [UIImage imageNamed:@"bd_cell_top"];
-        }
-        else
-        {
-            if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1)
-            {
-                cellImage = [UIImage imageNamed:@"bd_cell_bottom"];
-            }
-            else
-            {
-                cellImage = [UIImage imageNamed:@"bd_cell_middle"];
-            }
-        }
-    }
+//    if ([self.arrayChoices count] == 1)
+//    {
+//        cellImage = [UIImage imageNamed:@"bd_cell_middle"];
+//    }
+//    else
+//    {
+//
+//        if (indexPath.row == 0)
+//        {
+//            cellImage = [UIImage imageNamed:@"bd_cell_top"];
+//        }
+//        else
+//        {
+//            if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1)
+//            {
+//                cellImage = [UIImage imageNamed:@"bd_cell_bottom"];
+//            }
+//            else
+//            {
+//                cellImage = [UIImage imageNamed:@"bd_cell_middle"];
+//            }
+//        }
+//    }
 
     cell = [self getOptionsCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
 
@@ -755,7 +726,7 @@ typedef enum eExportOption
     {
         if ([CoreBridge passwordExists] && ![CoreBridge passwordOk:self.passwordTextField.text])
         {
-            [self showFadingError:NSLocalizedString(@"Incorrect password", nil)];
+            [MainViewController fadingAlert:NSLocalizedString(@"Incorrect password", nil)];
             [self.passwordTextField becomeFirstResponder];
             [self.passwordTextField selectAll:nil];
         }
@@ -766,35 +737,15 @@ typedef enum eExportOption
     }
 }
 
-- (void)showFadingError:(NSString *)message
-{
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-    _fadingAlert.message = message;
-    _fadingAlert.fadeDelay = ERROR_MESSAGE_FADE_DELAY;
-    _fadingAlert.fadeDuration = ERROR_MESSAGE_FADE_DURATION;
-    [_fadingAlert showFading];
-}
-
-- (void)dismissErrorMessage
-{
-    [_fadingAlert dismiss:NO];
-    _fadingAlert = nil;
-}
-
-#pragma mark - FadingAlertView delegate
-
-- (void)fadingAlertDismissed:(FadingAlertView *)view
-{
-    _fadingAlert = nil;
-}
-
 #pragma mark - ButtonSelectorView delegate
 
-- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+- (void)ButtonSelector2:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
     [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    bWalletListDropped = NO;
+
 }
 
 
@@ -853,7 +804,7 @@ typedef enum eExportOption
 {
     if (![self haveSubViewsShowing])
     {
-        [self buttonBackTouched:nil];
+        [self buttonBackTouched];
     }
 }
 
@@ -864,7 +815,7 @@ typedef enum eExportOption
 {
     if (![self haveSubViewsShowing])
     {
-        [self buttonBackTouched:nil];
+        [self buttonBackTouched];
     }
 }
 

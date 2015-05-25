@@ -11,7 +11,6 @@
 @interface ExportWalletOptionsCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel     *name;
-@property (nonatomic, weak) IBOutlet UIImageView *bkgImage;
 @property (weak, nonatomic) IBOutlet UIImageView *imageIcon;
 
 @end

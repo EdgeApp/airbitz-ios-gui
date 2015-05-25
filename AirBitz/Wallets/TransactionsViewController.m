@@ -415,7 +415,7 @@
 }
 
 //- (IBAction)buttonExportTouched:(id)sender
-- (void)exportWallet:(Wallet *)wallet
+- (void)exportWallet
 {
 //    if (YES == [self canLeaveWalletNameField])
     {
@@ -1474,10 +1474,6 @@
             [renameAlert show];
         }
 
-        if (buttonIndex == 2)
-        {
-            [self exportWallet:longTapWallet];
-        }
     }
     else if (alertView == renameAlert)
     {
@@ -1573,7 +1569,7 @@
                                                   message:@""
                                                  delegate:self
                                         cancelButtonTitle:[Theme Singleton].cancelButtonText
-                                        otherButtonTitles:[Theme Singleton].renameButtonText,[Theme Singleton].exportButtonText,nil];
+                                        otherButtonTitles:[Theme Singleton].renameButtonText,nil];
         [longTapAlert show];
     } else {
         NSLog(@"gestureRecognizer.state = %d", gestureRecognizer.state);
@@ -1661,6 +1657,8 @@
     self.activeWalletsHeaderView.btn_expandCollapse.enabled = NO;
     self.activeWalletsHeaderView.segmentedControlBTCUSD.hidden = YES;
     self.activeWalletsHeaderView.segmentedControlBTCUSD.enabled = NO;
+    self.activeWalletsHeaderView.btn_exportWallet.hidden = NO;
+    self.activeWalletsHeaderView.btn_exportWallet.enabled = YES;
     self.activeWalletsHeaderView.delegate = self;
 
     _archiveCollapsed = [[NSUserDefaults standardUserDefaults] boolForKey:ARCHIVE_COLLAPSED];

@@ -491,23 +491,7 @@ typedef enum eDatePeriod
 //    self.exportWalletOptionsViewController.fromDateTime = self.fromDateTime;
 //    self.exportWalletOptionsViewController.toDateTime = self.toDateTime;
 
-    CGRect frame = self.view.bounds;
-    frame.origin.x = frame.size.width;
-    self.exportWalletOptionsViewController.view.frame = frame;
-    [self.view addSubview:self.exportWalletOptionsViewController.view];
-
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-     {
-         self.exportWalletOptionsViewController.view.frame = self.view.bounds;
-     }
-                     completion:^(BOOL finished)
-     {
-         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-     }];
+    [MainViewController animateView:self.exportWalletOptionsViewController withBlur:NO];
 }
 
 - (UIImage *)stretchableImage:(NSString *)imageName
@@ -594,13 +578,16 @@ typedef enum eDatePeriod
 
 - (void)exportWalletOptionsViewControllerDidFinish:(ExportWalletOptionsViewController *)controller
 {
-	[controller.view removeFromSuperview];
-	self.exportWalletOptionsViewController = nil;
+    [MainViewController animateOut:controller withBlur:NO complete:^(void) {
+        [controller.view removeFromSuperview];
+        self.exportWalletOptionsViewController = nil;
+        [self viewWillAppear:YES];
+    }];
 }
 
 #pragma mark - ButtonSelectorView delegate
 
-- (void)ButtonSelector:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
+- (void)ButtonSelector2:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
