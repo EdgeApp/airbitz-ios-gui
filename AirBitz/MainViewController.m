@@ -1862,6 +1862,11 @@ MainViewController *singleton;
 
 + (void)animateView:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur
 {
+    [MainViewController animateView:viewController withBlur:withBlur animate:YES];
+}
+
++ (void)animateView:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur animate:(BOOL)animated
+{
 
 
     [Util insertSubviewControllerWithConstraints:singleton.view child:viewController belowSubView:singleton.tabBar];
@@ -1875,23 +1880,31 @@ MainViewController *singleton;
         [singleton.view layoutIfNeeded];
     }
 
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-                     {
-                         viewController.leftConstraint.constant = 0;
-                         if (withBlur)
+    if (animated)
+    {
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
                          {
-                             singleton.blurViewLeft.constant = 0;
+                             viewController.leftConstraint.constant = 0;
+                             if (withBlur)
+                             {
+                                 singleton.blurViewLeft.constant = 0;
+                             }
+                             [singleton.view layoutIfNeeded];
                          }
-                         [singleton.view layoutIfNeeded];
-                     }
-                     completion:^(BOOL finished)
-                     {
-                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-                     }];
+                         completion:^(BOOL finished)
+                         {
+                             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                         }];
+    }
+//    else
+//    {
+//        viewController.leftConstraint.constant = 0;
+//        [singleton.view layoutIfNeeded];
+//    }
 }
 
 + (void)animateOut:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur complete:(void(^)(void))cb

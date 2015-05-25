@@ -11,6 +11,8 @@
 #import "categoryCell.h"
 #import "CJSONDeserializer.h"
 #import "Server.h"
+#import "Theme.h"
+#import "MainViewController.h"
 
 #define MODE_NAME	0
 #define MODE_LEVEL	1
@@ -49,6 +51,14 @@
 	[self loadCategories];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"More Categories", @"")];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -154,26 +164,6 @@
 		cell = [[categoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"categoryCell"];
 	}
 
-	if((row == 0) && (row == [tableView numberOfRowsInSection:indexPath.section] - 1))
-	{
-		cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_single"];
-	}
-	else
-	{
-		if(row == 0)
-		{
-			cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_top"];
-		}
-		else
-			if(row == [tableView numberOfRowsInSection:indexPath.section] - 1)
-			{
-				cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_bottom"];
-			}
-			else
-			{
-				cell.bkgImage.image = [UIImage imageNamed:@"bd_cell_middle"];
-			}
-	}
 	NSDictionary *dict = [categoriesArray objectAtIndex:indexPath.row];
 	if(mode == MODE_NAME)
 	{
@@ -189,7 +179,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 44.0;
+	return [Theme Singleton].heightSettingsTableCell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -369,13 +369,18 @@ typedef enum eRequestType
         }
     }
 
+    [self setupNavBar];
+
+    [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
+
+}
+
+- (void)setupNavBar
+{
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Transaction Details", @"Transaction Details header text")];
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Exit:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(info:) fromObject:self];
-
-    [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -671,28 +676,9 @@ typedef enum eRequestType
     businessDetailsController.bizId = bizId;
     businessDetailsController.latLong = location;
     businessDetailsController.delegate = self;
+
+    [MainViewController animateView:businessDetailsController withBlur:NO];
     
-    CGRect frame = self.view.bounds;
-    frame.origin.x = frame.size.width;
-    businessDetailsController.view.frame = frame;
-    [self.view addSubview: businessDetailsController.view];
-    
-    if (animated)
-    {
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration: 0.35
-                              delay: 0.0
-                            options: UIViewAnimationOptionCurveEaseInOut
-                         animations: ^
-         {
-             businessDetailsController.view.frame = self.view.bounds;
-         }
-                         completion: ^(BOOL finished)
-         {
-             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-             //self.dividerView.alpha = 0.0;
-         }];
-    }
 }
 
 - (void)dismissBusinessDetails
@@ -705,19 +691,11 @@ typedef enum eRequestType
 
 - (void)businessDetailsViewControllerDone: (BusinessDetailsViewController *)controller
 {
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^
-     {
-         CGRect frame = self.view.bounds;
-         frame.origin.x = frame.size.width;
-         businessDetailsController.view.frame = frame;
-     }
-                     completion: ^(BOOL finished)
-     {
-         [self dismissBusinessDetails];
-     }];
+    [MainViewController animateOut:controller withBlur:NO complete:^(void)
+    {
+        businessDetailsController = nil;
+        [self setupNavBar];
+    }];
 }
 
 #pragma mark - Misc Methods

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "AirbitzViewController.h"
 
 @protocol BusinessDetailsViewControllerDelegate;
 
-@interface BusinessDetailsViewController : UIViewController
+@interface BusinessDetailsViewController : AirbitzViewController
 
 //@property (nonatomic, strong) NSDictionary *businessGeneralInfo;
 @property (assign) id<BusinessDetailsViewControllerDelegate> delegate;

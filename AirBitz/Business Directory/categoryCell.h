@@ -10,6 +10,5 @@
 #import "LatoLabel.h"
 
 @interface categoryCell : UITableViewCell
-@property (nonatomic, weak) IBOutlet UIImageView *bkgImage;
 @property (nonatomic, weak) IBOutlet LatoLabel *categoryLabel;
 @end

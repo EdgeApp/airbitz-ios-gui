@@ -193,6 +193,7 @@ static bool bInitialized = false;
     self.tableView.tableFooterView = footerView;
 
     currentPage = 0;
+    bShowBackButton = NO;
 
     self.spinnerView.hidden = NO;
     self.mapView.delegate = self;
@@ -848,12 +849,14 @@ static bool bInitialized = false;
 - (void)hideBackButton
 {
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
+    bShowBackButton = NO;
 
 }
 
 - (void)showBackButton
 {
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    bShowBackButton = YES;
 }
 
 //
@@ -1322,6 +1325,8 @@ static bool bInitialized = false;
     businessDetailsController.latLong = location;
     businessDetailsController.delegate = self;
 
+//    [MainViewController animateView:businessDetailsController withBlur:NO animate:animated];
+
     CGRect frame = self.view.bounds;
     frame.origin.x = frame.size.width;
     businessDetailsController.view.frame = frame;
@@ -1345,39 +1350,30 @@ static bool bInitialized = false;
     }
 }
 
-- (void)animateBusinessDetailsOnScreen
-{
-    if (businessDetailsController)
-    {
-        return;
-    }
-    
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^
-    {
-        businessDetailsController.view.frame = self.view.bounds;
-    }
-                     completion: ^(BOOL finished)
-    {
-        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    }];
-}
+//- (void)animateBusinessDetailsOnScreen
+//{
+//    if (businessDetailsController)
+//    {
+//        return;
+//    }
+//
+//    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+//    [UIView animateWithDuration: 0.35
+//                          delay: 0.0
+//                        options: UIViewAnimationOptionCurveEaseInOut
+//                     animations: ^
+//    {
+//        businessDetailsController.view.frame = self.view.bounds;
+//    }
+//                     completion: ^(BOOL finished)
+//    {
+//        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+//    }];
+//}
 
 - (void)dismissBusinessDetails
 {
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^
-    {
-        CGRect frame = self.view.bounds;
-        frame.origin.x = frame.size.width;
-        businessDetailsController.view.frame = frame;
-    }
-                     completion: ^(BOOL finished)
+    [MainViewController animateOut:businessDetailsController withBlur:NO complete:^(void)
     {
         [businessDetailsController.view removeFromSuperview];
         businessDetailsController = nil;
@@ -1396,37 +1392,14 @@ static bool bInitialized = false;
     moreCategoriesController = [directoryStoryboard instantiateViewControllerWithIdentifier: @"MoreCategoriesViewController"];
 
     moreCategoriesController.delegate = self;
-
-    CGRect frame = self.view.bounds;
-    frame.origin.x = frame.size.width;
-    moreCategoriesController.view.frame = frame;
-    [self.view addSubview: moreCategoriesController.view];
+    [MainViewController animateView:moreCategoriesController withBlur:NO];
 
 
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^
-    {
-        moreCategoriesController.view.frame = self.view.bounds;
-    }
-                     completion: ^(BOOL finished)
-    {
-    }];
 }
 
 - (void)dismissMoreCategories
 {
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^
-    {
-        CGRect frame = self.view.bounds;
-        frame.origin.x = frame.size.width;
-        moreCategoriesController.view.frame = frame;
-    }
-                     completion: ^(BOOL finished)
+    [MainViewController animateOut:moreCategoriesController withBlur:NO complete:^(void)
     {
         [moreCategoriesController.view removeFromSuperview];
         moreCategoriesController = nil;
@@ -2304,6 +2277,7 @@ static bool bInitialized = false;
     {
         [self dismissBusinessDetails];
     }
+    [self setupNavBar];
 }
 
 #pragma mark MoreCategoriesViewControllerDelegates
@@ -2314,6 +2288,7 @@ static bool bInitialized = false;
     if (category)
     {
         [self transitionMode:DIRECTORY_MODE_SEARCH];
+        [self setupNavBar];
         [self.searchBarLocation becomeFirstResponder];
         self.searchBarSearch.text = category;
     }

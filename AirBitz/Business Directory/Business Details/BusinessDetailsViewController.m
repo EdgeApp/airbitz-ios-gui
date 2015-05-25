@@ -63,7 +63,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *imageLoadActivityView;
-@property (nonatomic, weak) IBOutlet UILabel *businessTitleLabel;
 @property (nonatomic, weak) IBOutlet UIView *imageArea;
 @property (nonatomic, weak) IBOutlet UILabel *categoriesLabel;
 @property (nonatomic, weak) IBOutlet UILabel *BTC_DiscountLabel;
@@ -142,7 +141,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 }
 
--(void)setCategories
+-(void)setCategoriesAndName
 {
 	NSMutableString *categoriesString = [[NSMutableString alloc] init];
 	NSArray *categoriesArray = [self.businessDetails objectForKey:@"categories"];
@@ -157,6 +156,9 @@ typedef NS_ENUM(NSUInteger, CellType) {
 		firstObject = NO;
 	}
 	self.categoriesLabel.text = categoriesString;
+
+//    [MainViewController changeNavBarTitle:self title:[self.businessDetails objectForKey:@"name"]];
+
 }
 
 -(void)setRibbon:(NSString *)ribbon
@@ -449,7 +451,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 				{
 					[self hideDiscountLabel];
 				}
-				[self setCategories];
+                [self setCategoriesAndName];
 			}
 			else
 			{
@@ -487,7 +489,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 					{
 						[self hideDiscountLabel];
 					}
-					[self setCategories];
+                    [self setCategoriesAndName];
 				}
 				else
 				{
@@ -501,8 +503,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 					
 					[self determineVisibleRows];
 					
-					self.businessTitleLabel.text = [self.businessDetails objectForKey:@"name"];
-                    [MainViewController changeNavBarTitle:self title:self.businessTitleLabel.text];
+                    [MainViewController changeNavBarTitle:self title:[self.businessDetails objectForKey:@"name"]];
 					
 					NSArray *daysOfOperation = [self.businessDetails objectForKey:@"hours"];
 					
