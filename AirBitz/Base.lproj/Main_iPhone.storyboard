@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jDp-Og-qtC">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -426,23 +425,9 @@
                         <outlet property="view" destination="of2-42-Lef" id="I0w-Df-2dv"/>
                     </connections>
                 </viewController>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" momentary="YES" id="aYH-JB-k1y">
-                    <rect key="frame" x="0.0" y="0.0" width="304" height="39"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <segments>
-                        <segment title="Transfer"/>
-                        <segment title="Address"/>
-                        <segment title="Photos"/>
-                        <segment title="Flash"/>
-                    </segments>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <action selector="segmentedControlAction:" destination="c1q-yF-WIr" eventType="valueChanged" id="Pax-89-fpY"/>
-                    </connections>
-                </segmentedControl>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pn1-ga-1fM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-628" y="-44"/>
+            <point key="canvasLocation" x="-653" y="-101"/>
         </scene>
         <!--Send Confirmation View Controller-->
         <scene sceneID="X59-5p-opO">
