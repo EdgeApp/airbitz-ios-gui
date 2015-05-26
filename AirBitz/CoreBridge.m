@@ -318,6 +318,16 @@ static BOOL bOtpError = NO;
 
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
+
++ (void)makeCurrentWalletWithUUID:(NSString *)strUUID
+{
+    if ([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet])
+    {
+        Wallet *wallet = [self selectWalletWithUUID:strUUID];
+        [self makeCurrentWallet:wallet];
+    }
+}
+
 + (void)makeCurrentWalletWithIndex:(NSIndexPath *)indexPath
 {
     //

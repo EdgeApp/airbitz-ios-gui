@@ -48,6 +48,7 @@
 + (void)reorderWallets: (NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
 + (void)makeCurrentWallet:(Wallet *)wallet;
 + (void)makeCurrentWalletWithIndex:(NSIndexPath *)indexPath;
++ (void)makeCurrentWalletWithUUID:(NSString *)strUUID;
 + (Wallet *)selectWalletWithUUID:(NSString *)strUUID;
 
 

@@ -668,6 +668,9 @@ MainViewController *singleton;
 
 -(void)launchViewControllerBasedOnAppMode
 {
+    if (_txDetailsController)
+        [self TransactionDetailsViewControllerDone:_txDetailsController];
+
 	switch(_appMode)
 	{
 		case APP_MODE_DIRECTORY:
@@ -1175,38 +1178,19 @@ MainViewController *singleton;
     _txDetailsController.bOldTransaction = NO;
     _txDetailsController.transactionDetailsMode = TD_MODE_RECEIVED;
 
-    NSArray *constraints = [Util insertSubviewWithConstraints:self.view child:_txDetailsController.view belowSubView:self.tabBar];
-    _txDetailsController.leftConstraint = [constraints objectAtIndex:0];
-    _txDetailsController.leftConstraint.constant = _txDetailsController.view.frame.size.width;
+    [MainViewController animateView:_txDetailsController withBlur:NO];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-    {
-        _txDetailsController.leftConstraint.constant = 0;
-        [self.view layoutIfNeeded];
-    }
-    completion:^(BOOL finished)
-    {
-        [MainViewController showTabBarAnimated:YES];
-    }];
 }
 
 -(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-    {
-        _txDetailsController.leftConstraint.constant = _txDetailsController.view.frame.size.width;
-        [self.view layoutIfNeeded];
-    }
-    completion:^(BOOL finished)
+
+    [MainViewController animateOut:controller withBlur:NO complete:^
     {
         [_txDetailsController.view removeFromSuperview];
         _txDetailsController = nil;
+        [MainViewController showNavBarAnimated:YES];
+        [MainViewController showTabBarAnimated:YES];
     }];
 }
 
@@ -1425,6 +1409,8 @@ MainViewController *singleton;
     {
         NSDictionary *dictData = [notification userInfo];
         _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+        [CoreBridge makeCurrentWalletWithUUID:_strWalletUUID];
+
 //        [_walletsViewController resetViews];
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
         _appMode = APP_MODE_WALLETS;
