@@ -1057,6 +1057,12 @@
 		DA4710631AD7363F006ACF2A /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4710621AD7363F006ACF2A /* BuySellViewController.m */; };
 		DA4710641AD7363F006ACF2A /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4710621AD7363F006ACF2A /* BuySellViewController.m */; };
 		DA4710651AD7363F006ACF2A /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4710621AD7363F006ACF2A /* BuySellViewController.m */; };
+		DA4A533D1B146187003754F8 /* emboss_down.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A533B1B146187003754F8 /* emboss_down.png */; };
+		DA4A533E1B146187003754F8 /* emboss_down.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A533B1B146187003754F8 /* emboss_down.png */; };
+		DA4A533F1B146187003754F8 /* emboss_down.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A533B1B146187003754F8 /* emboss_down.png */; };
+		DA4A53401B146187003754F8 /* emboss_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A533C1B146187003754F8 /* emboss_down@2x.png */; };
+		DA4A53411B146187003754F8 /* emboss_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A533C1B146187003754F8 /* emboss_down@2x.png */; };
+		DA4A53421B146187003754F8 /* emboss_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A533C1B146187003754F8 /* emboss_down@2x.png */; };
 		DA4F91A71AF569EA008C0BD4 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F91A61AF569EA008C0BD4 /* Theme.m */; };
 		DA4F91A81AF569EA008C0BD4 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F91A61AF569EA008C0BD4 /* Theme.m */; };
 		DA4F91A91AF569EA008C0BD4 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F91A61AF569EA008C0BD4 /* Theme.m */; };
@@ -1982,6 +1988,8 @@
 		DA1E7CA61A8C187F007C6C05 /* StylizedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedButton.m; sourceTree = "<group>"; };
 		DA4710611AD7363F006ACF2A /* BuySellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuySellViewController.h; sourceTree = "<group>"; };
 		DA4710621AD7363F006ACF2A /* BuySellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuySellViewController.m; sourceTree = "<group>"; };
+		DA4A533B1B146187003754F8 /* emboss_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emboss_down.png; path = Resources/Artwork/emboss_down.png; sourceTree = "<group>"; };
+		DA4A533C1B146187003754F8 /* emboss_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emboss_down@2x.png"; path = "Resources/Artwork/emboss_down@2x.png"; sourceTree = "<group>"; };
 		DA4F919D1AF569B7008C0BD4 /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
 		DA4F91A61AF569EA008C0BD4 /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
 		DA5101DF1AF9FD1100949855 /* FadingAlertView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FadingAlertView2.h; path = FadingAlert2/FadingAlertView2.h; sourceTree = "<group>"; };
@@ -2823,6 +2831,8 @@
 				DA06F6D31B0BDD78000BCA46 /* divider@2x.png */,
 				DA06F6D41B0BDD78000BCA46 /* drag_bar.png */,
 				DA06F6D51B0BDD78000BCA46 /* drag_bar@2x.png */,
+				DA4A533B1B146187003754F8 /* emboss_down.png */,
+				DA4A533C1B146187003754F8 /* emboss_down@2x.png */,
 				DA06F6DA1B0BDD78000BCA46 /* enable-camera.png */,
 				DA06F6DB1B0BDD78000BCA46 /* enable-contacts.png */,
 				DA06F6DC1B0BDD78000BCA46 /* flash_off.png */,
@@ -3425,6 +3435,7 @@
 				DA06F9F91B0BDD79000BCA46 /* icon_export_view.png in Resources */,
 				7D98AD4D19A7C550003D2BF6 /* ca-certificates.crt in Resources */,
 				DA06F9CF1B0BDD79000BCA46 /* icon_directory_dark@2x.png in Resources */,
+				DA4A53411B146187003754F8 /* emboss_down@2x.png in Resources */,
 				DA06FB2F1B0EE88E000BCA46 /* Settings.storyboard in Resources */,
 				DA06F9F31B0BDD79000BCA46 /* icon_export_sdcard.png in Resources */,
 				DA06F9B41B0BDD79000BCA46 /* icon_arrow.png in Resources */,
@@ -3598,6 +3609,7 @@
 				DA06F7C81B0BDD79000BCA46 /* bkg_dark_header.png in Resources */,
 				7D98AE3619A7C550003D2BF6 /* Lato-Light.ttf in Resources */,
 				DA06FA321B0BDD79000BCA46 /* icon_USD_dark.png in Resources */,
+				DA4A533E1B146187003754F8 /* emboss_down.png in Resources */,
 				DA06F9DE1B0BDD79000BCA46 /* icon_export_dropbox@2x.png in Resources */,
 				DA06FA0E1B0BDD79000BCA46 /* icon_not_approved.png in Resources */,
 				7D98AE3F19A7C550003D2BF6 /* Lato-Italic.ttf in Resources */,
@@ -3703,6 +3715,7 @@
 				DA06F9F81B0BDD79000BCA46 /* icon_export_view.png in Resources */,
 				7D987AFE1A48BA8C00958AAD /* BitcoinSent.mp3 in Resources */,
 				683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */,
+				DA4A53401B146187003754F8 /* emboss_down@2x.png in Resources */,
 				DA06FB2E1B0EE88E000BCA46 /* Settings.storyboard in Resources */,
 				DA06F9CE1B0BDD79000BCA46 /* icon_directory_dark@2x.png in Resources */,
 				DA06F9F21B0BDD79000BCA46 /* icon_export_sdcard.png in Resources */,
@@ -3876,6 +3889,7 @@
 				4C98CAEE199D6914000009B5 /* infoRecipient.html in Resources */,
 				DA06F7C71B0BDD79000BCA46 /* bkg_dark_header.png in Resources */,
 				DAE81D881AC204140064BA5D /* plugins in Resources */,
+				DA4A533D1B146187003754F8 /* emboss_down.png in Resources */,
 				DA06FA311B0BDD79000BCA46 /* icon_USD_dark.png in Resources */,
 				DA06F9DD1B0BDD79000BCA46 /* icon_export_dropbox@2x.png in Resources */,
 				DA06FA0D1B0BDD79000BCA46 /* icon_not_approved.png in Resources */,
@@ -3981,6 +3995,7 @@
 				DA06F9FA1B0BDD79000BCA46 /* icon_export_view.png in Resources */,
 				DAE864B11A88A58A00A17BD3 /* BitcoinSent.mp3 in Resources */,
 				DAE864B31A88A58A00A17BD3 /* ca-certificates.crt in Resources */,
+				DA4A53421B146187003754F8 /* emboss_down@2x.png in Resources */,
 				DA06FB301B0EE88E000BCA46 /* Settings.storyboard in Resources */,
 				DA06F9D01B0BDD79000BCA46 /* icon_directory_dark@2x.png in Resources */,
 				DA06F9F41B0BDD79000BCA46 /* icon_export_sdcard.png in Resources */,
@@ -4154,6 +4169,7 @@
 				DAE8659A1A88A58A00A17BD3 /* infoRecipient.html in Resources */,
 				DA06F7C91B0BDD79000BCA46 /* bkg_dark_header.png in Resources */,
 				DAE81D8A1AC204140064BA5D /* plugins in Resources */,
+				DA4A533F1B146187003754F8 /* emboss_down.png in Resources */,
 				DA06FA331B0BDD79000BCA46 /* icon_USD_dark.png in Resources */,
 				DA06F9DF1B0BDD79000BCA46 /* icon_export_dropbox@2x.png in Resources */,
 				DA06FA0F1B0BDD79000BCA46 /* icon_not_approved.png in Resources */,

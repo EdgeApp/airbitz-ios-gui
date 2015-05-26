@@ -35,15 +35,7 @@
 {
 	ConfirmationSliderView *cv;
 	
-	//if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-	{
-		cv = [[[NSBundle mainBundle] loadNibNamed:@"ConfirmationSliderView" owner:nil options:nil] objectAtIndex:0];
-	}
-	//else
-	//{
-		//cv = [[[NSBundle mainBundle] loadNibNamed:@"ConfirmationSliderView~ipad" owner:nil options:nil] objectAtIndex:0];
-		
-	//}
+    cv = [[[NSBundle mainBundle] loadNibNamed:@"ConfirmationSliderView" owner:nil options:nil] objectAtIndex:0];
 	[parentView addSubview:cv];
 	cv.frame = parentView.bounds;
 	cv.delegate = delegate;
