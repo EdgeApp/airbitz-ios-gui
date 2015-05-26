@@ -456,8 +456,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _debugViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"DebugViewController"];
     _debugViewController.delegate = self;
 
-    [Util addSubviewControllerWithConstraints:self.view child:_debugViewController];
-    [MainViewController animateSlideIn:_debugViewController];
+    [MainViewController animateView:_debugViewController withBlur:NO];
 
 }
 
@@ -1576,8 +1575,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 -(void) sendDebugViewControllerDidFinish:(DebugViewController *)controller
 {
-	[controller.view removeFromSuperview];
-	_debugViewController = nil;
+    [MainViewController animateOut:controller withBlur:NO complete:^
+    {
+        _debugViewController = nil;
+        [self updateViews];
+    }];
 }
 
 @end

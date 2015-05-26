@@ -11,6 +11,8 @@
 #import "User.h"
 #import "CoreBridge.h"
 #import "CommonTypes.h"
+#import "MainViewController.h"
+#import "Theme.h"
 
 @interface DebugViewController ()  <UIGestureRecognizerDelegate>
 {
@@ -56,7 +58,31 @@
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
+
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self setupNavBar];
+}
+
+- (void)setupNavBar
+{
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Debug Options", @"Debug screen header title")];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+}
+
+
+- (void)transactionDetailsExit
+{
+    // An async tx details happened and exited. Drop everything and kill ourselves or we'll
+    // corrupt the background. This is needed on every subview of a primary screen
+    [self.view removeFromSuperview];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -65,28 +91,14 @@
 
 #pragma mark - Actions Methods
 
-- (IBAction)back:(id)sender
+- (void)back
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-     {
-         CGRect frame = self.view.frame;
-         frame.origin.x = frame.size.width;
-         self.view.frame = frame;
-     }
-     completion:^(BOOL finished)
-     {
-         [self.delegate sendDebugViewControllerDidFinish:self];
-     }];
+    [self.delegate sendDebugViewControllerDidFinish:self];
 }
 
 - (IBAction)uploadLogs:(id)sender
 {
     NSLog(@"Uploading Logs\n");
-    NSString *buttonText = self.uploadLogsButton.titleLabel.text;
-    self.uploadLogsButton.titleLabel.text = @"Restarting watcher service";
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         tABC_Error Error;
@@ -94,7 +106,25 @@
                        [[User Singleton].password UTF8String],
                        &Error);
         dispatch_async(dispatch_get_main_queue(), ^(void){
-            self.uploadLogsButton.titleLabel.text = buttonText;
+            if (ABC_CC_Ok == Error.code)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
+                                                                message:@"Upload Succeeded"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
+                                                                message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+
         });
     });
 }
@@ -128,19 +158,19 @@
 	[self.view addGestureRecognizer:gesture];
 }
 
-// used by the guesture recognizer to ignore exit
+// used by the gesture recognizer to ignore exit
 - (BOOL)haveSubViewsShowing
 {
     return NO;
 }
 
-#pragma mark - GestureReconizer methods
+#pragma mark - GestureRecognizer methods
 
 - (void)didSwipeLeftToRight:(UIGestureRecognizer *)gestureRecognizer
 {
     if (![self haveSubViewsShowing])
     {
-        [self back:nil];
+        [self back];
     }
 }
 
@@ -151,7 +181,7 @@
 {
     if (![self haveSubViewsShowing])
     {
-        [self back:nil];
+        [self back];
     }
 }
 
