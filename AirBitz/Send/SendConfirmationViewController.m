@@ -178,8 +178,14 @@
                                                  name:NOTIFICATION_EXCHANGE_RATE_CHANGE
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
+}
 
-
+- (void)transactionDetailsExit
+{
+    // An async tx details happened and exited. Drop everything and kill ourselves or we'll
+    // corrupt the background. This is needed on every subview of a primary screen
+    [self.view removeFromSuperview];
 }
 
 - (void)updateViews:(NSNotification *)notification

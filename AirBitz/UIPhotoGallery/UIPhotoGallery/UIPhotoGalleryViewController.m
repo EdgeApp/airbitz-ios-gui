@@ -7,6 +7,7 @@
 //
 
 #import "UIPhotoGalleryViewController.h"
+#import "CommonTypes.h"
 
 @interface UIPhotoGalleryViewController () {
     BOOL statusBarHidden;
@@ -52,6 +53,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
+
+}
+
+- (void)transactionDetailsExit
+{
+    // An async tx details happened and exited. Drop everything and kill ourselves or we'll
+    // corrupt the background. This is needed on every subview of a primary screen
+    [self.view removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -104,6 +104,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = SINGLE_ROW_CELL_HEIGHT; // set to whatever your "average" cell height is
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(Back:) fromObject:self];
@@ -127,6 +128,15 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	gesture.direction = UISwipeGestureRecognizerDirectionRight;
 	[self.view addGestureRecognizer:gesture];
 }
+
+- (void)transactionDetailsExit
+{
+    // An async tx details happened and exited. Drop everything and kill ourselves or we'll
+    // corrupt the background. This is needed on every subview of a primary screen
+    [self.view removeFromSuperview];
+}
+
+
 
 -(void)didSwipe:(UIGestureRecognizer *)gestureRecognizer
 {
