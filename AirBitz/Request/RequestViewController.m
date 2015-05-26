@@ -66,7 +66,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
-//	ShowWalletQRViewController  *_qrViewController;
     ImportWalletViewController  *_importWalletViewController;
     tABC_TxDetails              _details;
     CGRect                      topFrame;
@@ -91,15 +90,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btcTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fiatWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fiatHeight;
-@property (weak, nonatomic) IBOutlet UILabel *statusLine1;
-@property (weak, nonatomic) IBOutlet UILabel *statusLine2;
-@property (weak, nonatomic) IBOutlet UILabel *statusLine3;
-@property (nonatomic, weak) IBOutlet UIImageView	*BLE_LogoImageView;
+@property (weak, nonatomic) IBOutlet UILabel            *statusLine1;
+@property (weak, nonatomic) IBOutlet UILabel            *statusLine2;
+@property (weak, nonatomic) IBOutlet UILabel            *statusLine3;
+@property (nonatomic, weak) IBOutlet UIImageView	    *BLE_LogoImageView;
 @property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
 @property (strong, nonatomic) CBMutableCharacteristic   *bitcoinURICharacteristic;
-@property (strong, nonatomic) CBMutableCharacteristic   *userNameCharacteristic;
-@property (strong, nonatomic) NSData                    *dataToSend;
-@property (nonatomic, readwrite) NSInteger              sendDataIndex;
 @property (nonatomic, strong) NSArray                   *arrayContacts;
 @property (nonatomic, strong) NSString			        *connectedName;
 @property (nonatomic, assign) int64_t                   amountSatoshiRequested;
@@ -154,10 +150,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-
-    // resize ourselves to fit in area
-//    [Util resizeView:self.view withDisplayView:nil];
 
 	self.keypadView.delegate = self;
     self.currentTopField = nil;
@@ -178,55 +170,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     _selectedTextField = self.USD_TextField;
     self.keypadView.calcMode = CALC_MODE_FIAT;
 
-
-
-
-//	self.buttonSelector.textLabel.text = NSLocalizedString(@"Wallet:", @"Label text on Request Bitcoin screen");
-//    [self.buttonSelector setButtonWidth:WALLET_REQUEST_BUTTON_WIDTH];
-
-//    self.nextButton.titleLabel.text = NSLocalizedString(@"Next", @"Button label to go to Show Wallet QR view");
-//    [self.nextButton setTitleColor:[UIColor colorWithWhite:1 alpha:1.0] forState:UIControlStateNormal];
-
-    //
-    // All logic below copied from ShowWalletQRView
-    //
-
-//    self.statusLabel.text = self.statusString;
-    //show first eight characters of address larger than rest
-
-//    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:NO]];
-
-//    if([LocalSettings controller].bDisableBLE)
-//    {
-//        self.BLE_LogoImageView.hidden = YES;
-//    }
-//    else
-//    {
-//        // Start up the CBPeripheralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
-//        NSTimeInterval curTime = CACurrentMediaTime();
-//        if((curTime - lastPeripheralBLEPowerOffNotificationTime) > 86400.0) //24 hours
-//        {
-//            _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(YES)}];
-//        }
-//        else
-//        {
-//            _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(NO)}];
-//        }
-//        lastPeripheralBLEPowerOffNotificationTime = curTime;
-//    }
-//
-    // Replace with fadingAlert2
-//    self.connectedView.alpha = 0.0;
-//    self.connectedPhoto.layer.cornerRadius = 8.0;
-//    self.connectedPhoto.layer.masksToBounds = YES;
-
     self.arrayContacts = @[];
     // load all the names from the address book
     [self generateListOfContactNames];
-
-    // add left to right swipe detection for going back
-//    [self installLeftToRightSwipeDetection];
-
 }
 
 -(void)awakeFromNib
@@ -241,13 +187,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     // create a dummy view to replace the keyboard if we are on a 4.5" screen
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-
-//	[self loadWalletInfo];
-
-//XXX	self.BTCLabel_TextField.text = [User Singleton].denominationLabel;
     [self.segmentedControlBTCUSD setTitle:[User Singleton].denominationLabel forSegmentAtIndex:1];
-//    self.BTC_TextField.inputView = !IS_IPHONE4 ? dummyView : self.keypadView;
-//    self.USD_TextField.inputView = !IS_IPHONE4 ? dummyView : self.keypadView;
     self.BTC_TextField.inputView = dummyView;
     self.USD_TextField.inputView = dummyView;
 	self.BTC_TextField.delegate = self;
@@ -263,7 +203,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [self changeCalculator:false show:false];
     }
 
-//    [self exchangeRateUpdate:nil];
     [MainViewController changeNavBarOwner:self];
 
     if (!bInitialized) {
@@ -410,32 +349,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 }
 
-//- (BOOL)transactionWasDonation
-//{
-//    return [self isDonation:amountSatoshi];
-//}
-//
-//
-//- (BOOL)isDonation:(SInt64)requestedSatoshis
-//{
-//    return YES == [LocalSettings controller].bMerchantMode && 0 == requestedSatoshis;
-//}
-//
-//- (SInt64)transactionDifference:(NSString *)walletUUID withTx:(NSString *) txId
-//{
-//    // If the request was 0, then this was a donation and it's up to payer to
-//    // determine amount to send
-//    if (_details.amountSatoshi > 0)
-//    {
-//        Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
-//        return transaction.amountSatoshi - _details.amountSatoshi;
-//    }
-//    else
-//    {
-//        return 0;
-//    }
-//}
-//
 - (void)resetViews
 {
     if (_importWalletViewController)
@@ -443,11 +356,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [_importWalletViewController.view removeFromSuperview];
         _importWalletViewController = nil;
     }
-//    if (_qrViewController)
-//    {
-//        [_qrViewController.view removeFromSuperview];
-//        _qrViewController = nil;
-//    }
+
     self.BTC_TextField.text = @"";
 	self.USD_TextField.text = @"";
     self.amountSatoshiReceived = 0;
@@ -472,10 +381,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [self changeCalculator:YES show:YES];
         [self.currentTopField becomeFirstResponder];
     }
-
 }
-
-
 
 - (IBAction)segmentedControlBTCUSDAction:(id)sender
 {
@@ -527,20 +433,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	[self.view endEditing:YES];
     [self bringUpImportWalletView];
 }
-
-//- (IBAction)QRCodeButton
-//{
-//    [self.view endEditing:YES];
-//    SInt64 amountSatoshi = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
-//    RequestState state = [self isDonation:amountSatoshi] ? kDonation : kRequest;
-//    [self LaunchQRCodeScreen:amountSatoshi withRequestState:state];
-//}
-//
-
-//
-// This is called from MainViewController to update QR code upon receiving funds
-//
-
 
 //
 // Implement the state machine of the QR code screen based on Merchant Mode, amount received, amount requested. All of which could change at any time.
@@ -633,11 +525,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         case kRequest:
         case kDone:
         {
-//            if (self.amountSatoshiRequested > 0)
-//            {
-//                NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
-//                self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiRequested],string];
-//            }
             self.statusLine2.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
             break;
         }
@@ -687,26 +574,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         });
     }];
 
-
-
-
-//    if(addressString.length >= 8)
-//    {
-//        self.addressLabel1.text = [addressString substringToIndex:8];
-//        [self.addressLabel1 sizeToFit];
-//        if(addressString.length > 8)
-//        {
-//            self.addressLabel2.text = [addressString substringFromIndex:8];
-//
-//            CGRect frame = self.addressLabel2.frame;
-//            float endX = frame.origin.x + frame.size.width;
-//            frame.origin.x = self.addressLabel1.frame.origin.x + self.addressLabel1.frame.size.width;
-//            frame.size.width = endX - frame.origin.x;
-//            self.addressLabel2.frame = frame;
-//        }
-//    }
-//    else
-
     if (incomingSatoshi)
     {
         [self showPaymentPopup:self.state amount:incomingSatoshi];
@@ -745,58 +612,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }];
 
     return self.state;
-
-//
-//    ShowWalletQRViewController *tempQRViewController = NULL;
-//    if (_qrViewController)
-//    {
-//        tempQRViewController = _qrViewController;
-//    }
-//    // bring up the qr code view controller
-//    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress requestURI:strRequestURI withAmount:requestAmount withDonation:donation withRequestState:state];
-
     NSLog(@"EXIT updateQRCode");
 
 }
-
-//- (void)LaunchQRCodeScreen:(SInt64)amountSatoshi withRequestState:(RequestState)state
-//{
-//    [self.view endEditing:YES];
-//
-//    SInt64 requestAmount = amountSatoshi;
-//    SInt64 donation = 0;
-//    if (kDonation == state)
-//    {
-//        // parameter represents the received donation amount
-//        requestAmount = 0;
-//        donation = amountSatoshi;
-//    }
-//
-//    NSString *strName = @"";
-//    NSString *strCategory = @"";
-//    NSString *strNotes = @"";
-//
-//    // get the QR Code image
-//    NSMutableString *strRequestID = [[NSMutableString alloc] init];
-//    NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
-//    NSMutableString *strRequestURI = [[NSMutableString alloc] init];
-//    UIImage *qrImage = [self createRequestQRImageFor:strName withNotes:strNotes withCategory:strCategory
-//        storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
-//        scaleAndSave:NO withAmount:requestAmount withRequestState:state];
-//
-//    ShowWalletQRViewController *tempQRViewController = NULL;
-//    if (_qrViewController)
-//    {
-//        tempQRViewController = _qrViewController;
-//    }
-//    // bring up the qr code view controller
-//    [self showQRCodeViewControllerWithQRImage:qrImage address:strRequestAddress requestURI:strRequestURI withAmount:requestAmount withDonation:donation withRequestState:state];
-//
-//    if (tempQRViewController)
-//    {
-//        [tempQRViewController.view removeFromSuperview];
-//    }
-//}
 
 #pragma mark - Notification Handlers
 
@@ -902,7 +720,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.btcWidth.constant = btcFrame.size.width;
     self.btcHeight.constant = btcFrame.size.height;
 
-//    self.currentTopField.frame = topFrame;
     UIColor *color = [UIColor lightGrayColor];
     NSString *string = NSLocalizedString(@"Enter Amount (optional)", "Placeholder text for Receive screen amount");
     self.currentTopField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:string attributes:@{NSForegroundColorAttributeName: [Theme Singleton].colorRequestTopTextFieldPlaceholder}];
@@ -921,7 +738,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     self.keypadView.textField = self.currentTopField;
 
-//    bottomField.frame = bottomFrame;
     bottomField.placeholder = @"";
     [bottomLabel setFont:[UIFont fontWithName:@"Lato-Regular" size:bottomTextSize]];
     [bottomLabel setTextColor:[Theme Singleton].colorRequestBottomTextField];
@@ -984,57 +800,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	}
 }
 
-//-(void)showQRCodeViewControllerWithQRImage:(UIImage *)image address:(NSString *)address requestURI:(NSString *)strRequestURI withAmount:(SInt64)amountSatoshi  withDonation:(SInt64)donation withRequestState:(RequestState)state
-//{
-//	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-//
-//    _qrViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShowWalletQRViewController"];
-//
-//    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-//	_qrViewController.delegate = self;
-//	_qrViewController.qrCodeImage = image;
-//	_qrViewController.addressString = address;
-//	_qrViewController.uriString = strRequestURI;
-//    _qrViewController.amountSatoshi = amountSatoshi;
-//    _qrViewController.donation = donation;
-//    _qrViewController.state = state;
-//
-//    if (kPartial == state)
-//    {
-//        NSMutableString *strBody = [[NSMutableString alloc] init];
-//
-//        [strBody appendString:NSLocalizedString(@"Partial Payment from ",nil)];
-//        [strBody appendFormat:@"%@ ", [CoreBridge formatSatoshi:self.originalAmountSatoshi withSymbol:true]];
-//        [strBody appendString:NSLocalizedString(@"Request ",nil)];
-//
-//        _qrViewController.statusString = [NSString stringWithFormat:@"%@", strBody];
-//    }
-//    else
-//    {
-//        _qrViewController.statusString = NSLocalizedString(@"Waiting for Payment...", @"Message on receive request screen");
-//    }
-//    _qrViewController.requestID = requestID;
-//    _qrViewController.walletUUID = wallet.strUUID;
-//    _qrViewController.txDetails = _details;
-//    _qrViewController.currencyNum = wallet.currencyNum;
-//	//CGRect frame = self.view.bounds;
-//	//_qrViewController.view.frame = frame;
-//	[self.view addSubview:_qrViewController.view];
-//	_qrViewController.view.alpha = 0.0;
-//
-//    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-//	[UIView animateWithDuration:0.35
-//						  delay:0.0
-//						options:UIViewAnimationOptionCurveEaseInOut
-//					 animations:^
-//	 {
-//		_qrViewController.view.alpha = 1.0;
-//	 }
-//    completion:^(BOOL finished)
-//    {
-//        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-//    }];
-//}
 
 // generates and returns a request qr image, stores request id in the given mutable string
 - (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes withCategory:(NSString *)strCategory 
@@ -1230,66 +995,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 }
 
-//- (void)loadWalletInfo
-//{
-//    [CoreBridge postToWalletsQueue:^(void) {
-//        // load all the non-archive wallets
-//        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-//        NSString *newWalletUUID = nil;
-//        int newWalletIndex = 0;
-//
-//        [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
-//
-//        // create the array of wallet names
-//        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
-//        for (int i = 0; i < [arrayWallets count]; i++)
-//        {
-//            Wallet *wallet = [arrayWallets objectAtIndex:i];
-//
-//            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
-//
-//            if ([_walletUUID length] == 0)
-//            {
-//                // walletID is uninitialized. Choose the primary wallet
-//                if (i == 0)
-//                {
-//                    newWalletUUID = wallet.strUUID;
-//                    newWalletIndex = i;
-//                }
-//            }
-//            else
-//            {
-//                if (_walletUUID == wallet.strUUID)
-//                    newWalletIndex = i;
-//            }
-//        }
-//
-//        dispatch_async(dispatch_get_main_queue(),^{
-//
-//            self.arrayWallets = arrayWallets;
-//            _selectedWalletIndex = newWalletIndex;
-//            if (newWalletIndex != nil)
-//                _walletUUID = newWalletUUID;
-//
-//            if (_selectedWalletIndex < [arrayWallets count])
-//            {
-//                Wallet *wallet = [self getCurrentWallet];
-//                self.keypadView.currencyNum = wallet.currencyNum;
-//
-//                self.buttonSelector.arrayItemsToSelect = [arrayWalletNames copy];
-//                [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-//                self.buttonSelector.selectedItemIndex = (int) _selectedWalletIndex;
-//                _btcLabel.text = [User Singleton].denominationLabel;
-//                _fiatLabel.text = wallet.currencyAbbrev;
-//
-//            }
-//
-//            [self updateTextFieldContents:YES];
-//        });
-//    }];
-//
-//}
-
 - (void)bringUpImportWalletView
 {
     if (nil == _importWalletViewController)
@@ -1343,30 +1048,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
     [CoreBridge makeCurrentWalletWithIndex:indexPath];
 
-//    _selectedWalletIndex = itemIndex;
-//
-//    // Update wallet UUID
-//    Wallet *wallet = [self getCurrentWallet];
-//    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-//    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
-//
-//    _walletUUID = wallet.strUUID;
-//
-//    self.keypadView.currencyNum = wallet.currencyNum;
-//    [self updateTextFieldContents:YES];
     bWalletListDropped = false;
 }
 
-//#pragma mark - ShowWalletQRViewController delegates
-//
-//- (void)ShowWalletQRViewControllerDone:(ShowWalletQRViewController *)controller
-//{
-//	[controller.view removeFromSuperview];
-//	_qrViewController = nil;
-//
-//    [self setFirstResponder];
-//}
-//
 #pragma mark - Textfield delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -1389,8 +1073,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     // Popup numpad
     [self changeCalculator:YES show:true];
 
-//	self.BTC_TextField.text = @"";
-//	self.USD_TextField.text = @"";
 }
 
 #pragma mark - Import Wallet Delegates
@@ -1405,7 +1087,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (Wallet *) getCurrentWallet
 {
-//    return [self.arrayWallets objectAtIndex:_selectedWalletIndex];
     return [CoreBridge Singleton].currentWallet;
 }
 
@@ -1456,18 +1137,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                      holdTime:DROP_DOWN_HOLD_TIME_DEFAULT
                  withDelegate:nil];
 
-//    [UIView animateWithDuration:3.0
-//                          delay:2.0
-//                        options:UIViewAnimationOptionCurveLinear
-//                     animations:^
-//                     {
-//                         self.connectedView.alpha = 0.0;
-//                         self.qrCodeImageView.alpha = 1.0;
-//                     }
-//                     completion:^(BOOL finished)
-//                     {
-//
-//                     }];
 }
 
 -(void)showPaymentPopup:(RequestState)state amount:(SInt64) amountSatoshi
@@ -1536,19 +1205,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                      holdTime:[Theme Singleton].alertHoldTimePaymentReceived
                  withDelegate:nil];
 
-//    self.connectedView.alpha = 1.0;
-//    self.qrCodeImageView.alpha = 0.0;
-//    [UIView animateWithDuration:duration
-//                          delay:delay
-//                        options:UIViewAnimationOptionCurveLinear
-//                     animations:^
-//                     {
-//                         self.connectedView.alpha = 0.0;
-//                         self.qrCodeImageView.alpha = 1.0;
-//                     }
-//                     completion:^(BOOL finished)
-//                     {
-//                     }];
 }
 
 #pragma mark address book
@@ -1617,8 +1273,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     Contact *contact = [[Contact alloc] init];
     contact.strName = strName;
-    //contact.strData = strData;
-    //contact.strDataLabel = strDataLabel;
     contact.imagePhoto = imagePhoto;
 
     [arrayContacts addObject:contact];

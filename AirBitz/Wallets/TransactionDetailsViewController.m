@@ -16,7 +16,6 @@
 #import "InfoView.h"
 #import "CalculatorView.h"
 #import "PickerTextView.h"
-#import "StylizedTextField.h"
 #import "DL_URLServer.h"
 #import "Server.h"
 #import "Location.h"
@@ -26,7 +25,6 @@
 #import "PayeeCell.h"
 #import "BusinessDetailsViewController.h"
 #import "Location.h"
-#import "CommonTypes.h"
 #import "PopupPickerView.h"
 #import "MainViewController.h"
 #import "Theme.h"
@@ -34,10 +32,6 @@
 
 #define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
 #define ARRAY_CATEGORY_PREFIXES_NOCOLON @[@"Expense",@"Income",@"Transfer",@"Exchange"]
-#define ARRAY_CATEGORY_PREFIX_EXPENSE    0
-#define ARRAY_CATEGORY_PREFIX_INCOME     1
-#define ARRAY_CATEGORY_PREFIX_TRANSFER   2
-#define ARRAY_CATEGORY_PREFIX_EXCHANGE   3
 
 #define PICKER_WIDTH                    160
 #define PICKER_CELL_HEIGHT              40
@@ -47,8 +41,6 @@
 #define PICKER_MAX_CELLS_VISIBLE 4
 
 #define USE_AUTOCOMPLETE_QUERY 0
-
-#define TEXTFIELD_VERTICAL_SPACE_OFFSET    7.0 /* how much space between screen header and textField when textField is scrolled all the way to the top */
 
 #define SEARCH_RADIUS        16093
 #define CACHE_AGE_SECS       (60 * 15) // 15 min
@@ -331,9 +323,6 @@ typedef enum eRequestType
 
         // push the calculator keypad to below the bottom of the screen
         _calculatorBottom.constant = -_keypadView.frame.size.height;
-//        frame = self.keypadView.frame;
-//        frame.origin.y = frame.origin.y + frame.size.height;
-//        self.keypadView.frame = frame;
     }
 
     NSMutableString *coinFormatted = [[NSMutableString alloc] init];
@@ -1576,8 +1565,7 @@ typedef enum eRequestType
         else if ([object isKindOfClass:[NSString class]])
         {
             NSString *strNameForImage = (NSString *) object;
-            //NSLog(@"\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎\ngot image for %@\n❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎", strNameForImage);
-            
+
             // remove it from our array of thumbnails we are currently retrieving
             [self.arrayThumbnailsRetrieving removeObject:strNameForImage];
 
@@ -1642,8 +1630,6 @@ typedef enum eRequestType
 
     CGRect scrollFrame = self.scrollableContentView.frame;
 
-    // WARNING: Lots of magic numbers - but we have to make this change quick for the demo
-
     if (textField == self.nameTextField)
     {
         [self updateAutoCompleteArray];
@@ -1654,7 +1640,6 @@ typedef enum eRequestType
     else
     {
         [self scrollContentViewBackToOriginalPosition];
-//        scrollFrame.origin.y = _originalScrollableContentFrame.origin.y;
     }
 
 
@@ -1743,11 +1728,6 @@ typedef enum eRequestType
 
     [self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
 
-    // highlight all the text
-    /*
-    NSRange range = [pickerTextView.textField.text rangeOfString:@":"];
-    UITextPosition *startPosition = [pickerTextView.textField positionFromPosition:pickerTextView.textField.beginningOfDocument offset:range.location + 1];
-     */
     [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.endOfDocument]];
 }
 
@@ -1810,17 +1790,6 @@ typedef enum eRequestType
     //       so we want the table to always be as large as it can be
 
     // first start the popup pickerit right under the control and squished down
-//    CGRect frame = self.pickerTextCategory.popupPicker.frame;
-//    frame.size.height = 20;
-//    //frame.size.height = 220; // magic number to make it as big as possible
-//    CGPoint pickerLocationScreen = [pickerTextView.superview convertPoint:pickerTextView.frame.origin toView:nil];
-//    frame.origin.y = pickerLocationScreen.y + pickerTextView.frame.size.height - 10;
-//    self.pickerTextCategory.popupPicker.frame = frame;
-//
-//    // now move the window up so that the category field is at the top
-//    CGRect scrollFrame = self.scrollableContentView.frame;
-//    scrollFrame.origin.y = -self.pickerTextCategory.frame.origin.y + 10;
-//    [self scrollContentViewToFrame:scrollFrame];
     CGFloat yOffset = [self scrollContentViewToFrame:self.pickerTextCategory.frame];
 
     CGRect frame = self.pickerTextCategory.popupPicker.frame;
@@ -1834,9 +1803,6 @@ typedef enum eRequestType
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
-//         CGRect frame = self.pickerTextCategory.popupPicker.frame;
-//         frame.origin.y = 130;
-//         frame.size.height = 220; // magic number to make it as big as possible
          self.pickerTextCategory.popupPicker.frame = frame;
      }
                      completion:^(BOOL finished)

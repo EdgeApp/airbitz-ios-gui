@@ -446,37 +446,6 @@ static BOOL bOtpError = NO;
     }
 }
 //
-//+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets
-//{
-//    [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets withTxs:YES];
-//}
-//
-//+ (void)reloadWallet:(Wallet *) wallet;
-//{
-//    tABC_Error Error;
-//    tABC_WalletInfo *pWalletInfo = NULL;
-//    tABC_CC result = ABC_GetWalletInfo([[User Singleton].name UTF8String],
-//                                       [[User Singleton].password UTF8String],
-//                                       [wallet.strUUID UTF8String],
-//                                       &pWalletInfo, &Error);
-//    if (ABC_CC_Ok == result && pWalletInfo != NULL)
-//    {
-//        wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
-//        wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
-//        wallet.archived = pWalletInfo->archived;
-//        wallet.balance = pWalletInfo->balanceSatoshi;
-//        wallet.currencyNum = pWalletInfo->currencyNum;
-//        [self loadTransactions:wallet];
-//    }
-//    else
-//    {
-//        NSLog(@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
-//        [Util printABC_Error:&Error];
-//    }
-//    ABC_FreeWalletInfo(pWalletInfo);
-//}
-//
-//
 // This triggers a switch of libbitcoin servers and possibly an update if new information comes in
 //
 + (void)refreshWallet:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb
@@ -2025,11 +1994,6 @@ static BOOL bOtpError = NO;
 
 }
 
-//- (void)notifyBlockHeight:(NSArray *)params
-//{
-//    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:self];
-//}
-
 - (void)notifyOtpRequired:(NSArray *)params
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_OTP_REQUIRED object:self];
@@ -2038,11 +2002,6 @@ static BOOL bOtpError = NO;
 - (void)notifyOtpSkew:(NSArray *)params
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_OTP_SKEW object:self];
-}
-
-- (void)notifyExchangeRate:(NSArray *)params
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:self];
 }
 
 - (void)notifyDataSync:(NSArray *)params

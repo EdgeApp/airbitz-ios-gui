@@ -30,7 +30,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <Social/Social.h>
-#import "SendViewController.h"
 #import "Notifications.h"
 #import "ABC.h"
 #import "SendConfirmationViewController.h"
@@ -56,18 +55,9 @@
 #import "Server.h"
 #import "PopupPickerView2.h"
 
-#define BLE_TIMEOUT                 1.0
-
-#define POPUP_PICKER_LOWEST_POINT   360
-#define POPUP_PICKER_TABLE_HEIGHT   (!IS_IPHONE4 ? 180 : 90)
-
 typedef enum eScanMode
 {
 	SCAN_MODE_UNINITIALIZED,
-    SCAN_MODE_BLE_QR,
-//	SCAN_MODE_BLE,
-//	SCAN_MODE_QR,
-	SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND
 }tScanMode;
 
 typedef enum eImportState
@@ -87,15 +77,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
 	ZBarReaderView                  *_readerView;
     ZBarReaderController            *_readerPicker;
-//	NSTimer                         *_startScannerTimer;
-//	int                             _selectedWalletIndex;
 	SendConfirmationViewController  *_sendConfirmationViewController;
-    BOOL                            _bUsingImagePicker;
-	SyncView                        *_syncingView;
 	NSTimeInterval					lastUpdateTime;	//used to remove BLE devices from table when they're no longer around
 	NSTimer							*peripheralCleanupTimer; //used to remove BLE devices from table when they're no longer around
 	tScanMode						scanMode;
-	float							originalFrameHeight;
     BOOL                            bWalletListDropped;
     BOOL                            bFlashOn;
     UIAlertView                     *typeAddressAlertView;
@@ -114,33 +99,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 @property (nonatomic, strong)   NSString                        *privateKey;
 @property (weak, nonatomic)     IBOutlet UIImageView            *scanFrame;
-//@property (weak, nonatomic)   IBOutlet FlashSelectView        *flashSelector;
 @property (nonatomic, strong)   IBOutlet ButtonSelectorView2    *buttonSelector;
-//@property (weak, nonatomic)   IBOutlet UIImageView            *imageTopFrame;
-//@property (weak, nonatomic)   IBOutlet UILabel                *labelSendTo;
-//@property (weak, nonatomic)   IBOutlet UIImageView            *imageSendTo;
-//@property (weak, nonatomic)   IBOutlet UIImageView            *imageFlashFrame;
-//@property (weak, nonatomic)   IBOutlet UIView					*bleView;
-//@property (weak, nonatomic)   IBOutlet UIView					*qrView;
 @property (nonatomic, strong)	IBOutlet UITableView			*tableView;
-//@property (nonatomic, weak)   IBOutlet UIButton				*ble_button;
+@property (nonatomic, strong)   NSArray                         *arrayChoicesIndexes;
+@property (nonatomic, strong)   PopupPickerView2                *popupPickerSendTo;
+@property (nonatomic, strong)   IBOutlet UILabel				*scanningErrorLabel;
 
-//@property (nonatomic, strong) NSArray   *arrayWallets;
-//@property (nonatomic, strong) NSArray   *arrayWalletNames;
-@property (nonatomic, strong) NSArray   *arrayChoicesIndexes;
-@property (nonatomic, strong) PopupPickerView2               *popupPickerSendTo;
-//@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *scanningSpinner;
-//@property (nonatomic, weak) IBOutlet UILabel				*scanningLabel;
-@property (nonatomic, strong) IBOutlet UILabel				*scanningErrorLabel;
-
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bleViewHeight;
-@property (strong, nonatomic) CBCentralManager      *centralManager;
-@property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
-@property (strong, nonatomic) NSMutableData         *data;
-@property (strong, nonatomic)  NSMutableArray		*peripheralContainers;
-@property (nonatomic, strong) NSArray                   *arrayContacts;
-@property (nonatomic, copy)	NSString				*advertisedPartialBitcoinAddress;
+@property (weak, nonatomic)     IBOutlet UISegmentedControl     *segmentedControl;
+@property (weak, nonatomic)     IBOutlet NSLayoutConstraint     *bleViewHeight;
+@property (strong, nonatomic)   CBCentralManager                *centralManager;
+@property (strong, nonatomic)   CBPeripheral                    *discoveredPeripheral;
+@property (strong, nonatomic)   NSMutableData                   *data;
+@property (strong, nonatomic)   NSMutableArray		            *peripheralContainers;
+@property (nonatomic, strong)   NSArray                         *arrayContacts;
+@property (nonatomic, copy)	    NSString				        *advertisedPartialBitcoinAddress;
 @end
 
 @implementation PeripheralContainer
@@ -164,7 +136,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
 	[super viewDidLoad];
 
-    _bUsingImagePicker = NO;
     bWalletListDropped = false;
 
 //    self.flashSelector.delegate = self;
@@ -220,11 +191,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [segmentedControl setEnabled:YES forSegmentAtIndex:0];
 
     _dataModel = kWIF;
-
-	//reset our frame's height in case it got changed by the image picker view controller
-//	CGRect frame = self.view.frame;
-//	frame.size.height = originalFrameHeight;
-//	self.view.frame = frame;
 
     [[NSNotificationCenter defaultCenter]
         addObserver:self
@@ -404,48 +370,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self startBLE];
 }
 
-//-(void)enableBLEMode
-//{
-//	if(scanMode != SCAN_MODE_BLE)
-//	{
-//		scanMode = SCAN_MODE_BLE;
-//		self.bleView.hidden = NO;
-//		self.qrView.hidden = YES;
-//		[self startBLE];
-//	}
-//}
-//
-//-(void)enableQRMode
-//{
-//	if(scanMode != SCAN_MODE_QR)
-//	{
-//		scanMode = SCAN_MODE_QR;
-//		self.bleView.hidden = YES;
-//		self.qrView.hidden = NO;
-//		//turns on QR code scanner.  Disables BLE
-//		[self stopBLE];
-//
-//        if ([[User Singleton] offerSendHelp]) {
-//            [self showFadingAlert:NSLocalizedString(@"Scan the QR code of payee to send payment", nil)
-//                        withDelay:FADING_HELP_DURATION];
-//        }
-//
-//#if !TARGET_IPHONE_SIMULATOR
-//		if([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive)
-//		{
-//			//NSLog(@" ^^^^^^^^^^^^^^^^ SPECIAL SCAN MODE.  WAIT UNTIL IN FOREGROUND ^^^^^^^^^^^^^^^^");
-//			scanMode = SCAN_MODE_QR_ENABLE_ONCE_IN_FOREGROUND;
-//		}
-//		else
-//		{
-//			//NSLog(@" ^^^^^^^^^^^^^^^^ NORMAL SCAN MODE.  START QR NOW ^^^^^^^^^^^^^^^^");
-//		}
-//#endif
-//
-//
-//	}
-//}
-
 #if TARGET_IPHONE_SIMULATOR
 
 -(void)startQRReader
@@ -491,26 +415,19 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if ([_readerView isDeviceAvailable])
     {
         [self.scanningErrorLabel setHidden:YES];
-//        [self.flashSelector setHidden:NO];
     }
     else
     {
         self.scanningErrorLabel.text = NSLocalizedString(@"Camera unavailable. Please enable camera access on your phone's Privacy Settings", @"");
         [self.scanningErrorLabel setHidden:NO];
-//        [self.flashSelector setHidden:YES];
     }
 
 	[self.view insertSubview:_readerView belowSubview:self.scanFrame];
 	_readerView.frame = self.scanFrame.frame;
-//    [Util addSubviewWithConstraints:self.scanFrame child:_readerView];
 	_readerView.readerDelegate = self;
 	_readerView.tracksSymbols = NO;
 	
 	_readerView.tag = READER_VIEW_TAG;
-//	if ([self.pickerTextSendTo.textField.text length])
-//	{
-//		_readerView.alpha = 0.0;
-//	}
 	[_readerView start];
 	[self flashItemSelected:FLASH_ITEM_OFF];
 }
@@ -520,8 +437,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (_readerView)
     {
         [_readerView stop];
-//        [_readerView removeFromSuperview];
-//        _readerView = nil;
     }
 }
 
@@ -1626,8 +1541,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self stopQRReader];
     [self stopBLE];
 
-    _bUsingImagePicker = YES;
-
     _readerPicker = [ZBarReaderController new];
     _readerPicker.readerDelegate = self;
     if ([ZBarReaderController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
@@ -1643,16 +1556,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #endif
 }
 
-//- (void)startCameraScanner:(NSTimer *)timer
-//{
-//	//will only switch to QR mode if there are no found BLE devices
-//	//NSLog(@"################## SCAN TIMER FIRED ######################");
-//	if(self.peripheralContainers.count == 0)
-//	{
-//		[self enableQRMode];
-//	}
-//}
-//
 - (NSArray *)createNewSendToChoices:(NSString *)strCur
 {
     BOOL bUseAll = YES;
@@ -1668,9 +1571,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
     NSMutableArray *arrayChoicesIndexes = [[NSMutableArray alloc] init];
 
-//    [arrayChoices addObject:[Theme Singleton].selectWalletTransferPopupHeaderText];
-//    [arrayChoicesIndexes addObject:[NSNumber numberWithInt:-1]];
-//
     for (int i = 0; i < [[CoreBridge Singleton].arrayWallets count]; i++)
     {
         // if this is not our currently selected wallet in the wallet selector
@@ -1697,8 +1597,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
 
     }
-//    [arrayChoices addObject:[Theme Singleton].cancelButtonText];
-//    [arrayChoicesIndexes addObject:[NSNumber numberWithInt:-1]];
 
     self.arrayChoicesIndexes = arrayChoicesIndexes;
 
@@ -1759,8 +1657,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
 {
-//    [self loadWalletInfo];
-//    self.qrView.hidden = YES;
     [_readerView start];
     [self startQRReader];
 
@@ -1772,9 +1668,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     scanMode = SCAN_MODE_UNINITIALIZED;
     if ([LocalSettings controller].bDisableBLE == NO) {
         [self enableAll];
-//        [self startBleTimeout:BLE_TIMEOUT];
-//    } else {
-//        [self startBleTimeout:0.0];
     }
 
     [self enableTableSelection];
@@ -1786,15 +1679,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)ButtonSelector2:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
 {
-//    _selectedWalletIndex = itemIndex;
-//    Wallet *wallet = [self.arrayWallets objectAtIndex:_selectedWalletIndex];
-//    [self.buttonSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-//    self.buttonSelector.selectedItemIndex = _selectedWalletIndex;
-//    bWalletListDropped = false;
-//    _walletUUID = wallet.strUUID;
-//
-//    NSString *walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
-//    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
     [CoreBridge makeCurrentWalletWithIndex:indexPath];
@@ -1828,7 +1712,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)reader
 {
     [reader dismissViewControllerAnimated:YES completion:nil];
-    _bUsingImagePicker = NO;
 
     self.loopbackState = LoopbackState_Cancelled;
     [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
@@ -1845,19 +1728,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     self.loopbackState = LoopbackState_Go;
     [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
 
-//    BOOL bSuccess = [self processZBarResults:(ZBarSymbolSet *) results andExit:YES];
-//
     [reader dismissViewControllerAnimated:YES completion:nil];
-    //[[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-    //[reader dismissModalViewControllerAnimated: YES];
-
-//    _bUsingImagePicker = NO;
-//
-//    if (!bSuccess)
-//    {
-//        //_startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
-//		[self startQRReader];
-//    }
 }
 
 - (void)readerControllerDidFailToRead:(ZBarReaderController*)reader
@@ -1866,52 +1737,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [reader dismissViewControllerAnimated:YES completion:nil];
     self.loopbackState = LoopbackState_Scan_Failed;
     [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
-//
-//    UIAlertView *alert = [[UIAlertView alloc]
-//                          initWithTitle:NSLocalizedString(@"QR Code Scan Failure", nil)
-//                          message:NSLocalizedString(@"Unable to scan QR code", nil)
-//                          delegate:nil
-//                          cancelButtonTitle:@"OK"
-//                          otherButtonTitles:nil];
-//    [alert show];
-//
-//    _bUsingImagePicker = NO;
-//   // _startScannerTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(startCameraScanner:) userInfo:nil repeats:NO];
-//   [self startQRReader];
 }
 
 #endif
 
-#pragma mark - PickerTextView Delegates
-
-//- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
-//{
-//    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
-//
-//    [pickerTextView updateChoices:arrayChoices];
-//}
-//
-//- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
-//{
-//    NSArray *arrayChoices = [self createNewSendToChoices:pickerTextView.textField.text];
-//
-//    [pickerTextView updateChoices:arrayChoices];
-//}
-//
-//- (BOOL)pickerTextViewShouldEndEditing:(PickerTextView *)pickerTextView
-//{
-//    // unhighlight text
-//    // note: for some reason, if we don't do this, the text won't select next time the user selects it
-//    [pickerTextView.textField setSelectedTextRange:[pickerTextView.textField textRangeFromPosition:pickerTextView.textField.beginningOfDocument toPosition:pickerTextView.textField.beginningOfDocument]];
-//
-//    return YES;
-//}
-//
-//- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
-//{
-//    //[self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];
-//}
-//
 - (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
 {
 	[pickerTextView.textField resignFirstResponder];
@@ -1921,9 +1750,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)processURI
 {
-//    if ([[CoreBridge Singleton].arrayWalletNames count] == 0 || [[CoreBridge Singleton].arrayWallets count] == 0) {
-//        [self loadWalletInfo];
-//    }
     // Added to wallet queue since wallets are loaded asynchronously
     [CoreBridge postToWalletsQueue:^(void) {
         dispatch_async(dispatch_get_main_queue(),^{
@@ -1980,7 +1806,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [view removeFromSuperview];
 }
 
-//- (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
 - (void)PopupPickerView2Selected:(PopupPickerView2 *)view onRow:(NSInteger)row userData:(id)data
 {
     tABC_Error error;
@@ -1996,8 +1821,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [self showSendConfirmationTo:spendTarget];
     }
     [view dismiss];
-
-//    [MainViewController animateFadeOut:view remove:YES];
 
 }
 

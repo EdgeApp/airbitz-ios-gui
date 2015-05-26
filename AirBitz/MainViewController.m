@@ -62,14 +62,12 @@ typedef enum eAppMode
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
 	AddressRequestController    *_addressRequestController;
-	TransactionsViewController       *_walletsViewController;
+	TransactionsViewController       *_transactionsViewController;
     SendViewController          *_importViewController;
     SendViewController          *_sendViewController;
-//	WalletsViewController       *_walletsViewController;
 	LoginViewController         *_loginViewController;
 	SettingsViewController      *_settingsViewController;
 	BuySellViewController       *_buySellViewController;
-	SendStatusViewController    *_sendStatusController;
     TransactionDetailsViewController *_txDetailsController;
     TwoFactorScanViewController      *_tfaScanViewController;
     SignUpViewController            *_signUpController;
@@ -219,8 +217,7 @@ MainViewController *singleton;
     _importViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
     _importViewController.delegate = self;
 
-    _walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
-//    _walletsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"WalletsViewController"];
+    _transactionsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
     UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
 	_settingsViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
 	_settingsViewController.delegate = self;
@@ -241,7 +238,6 @@ MainViewController *singleton;
 - (void) loadSlideOutViewConstraints
 {
     NSLayoutConstraint *x;
-//    NSArray *constraints = [Util insertSubviewWithConstraints:self.view child:slideoutView aboveSubView:self.view];
     UIView *parentView = self.view;
     NSMutableArray *constraints = [[NSMutableArray alloc] init];
 
@@ -421,17 +417,6 @@ MainViewController *singleton;
 
 +(void)moveSelectedViewController: (CGFloat) x
 {
-//    CGRect frame;
-//
-//    frame = singleton.selectedViewController.view.frame;
-//
-//    frame.origin.x = x;
-//
-//    singleton.selectedViewController.view.frame = frame;
-
-//    NSLog(@"Moving Blur from:%f to:%f", singleton.blurViewLeft.constant, x);
-//    NSLog(@"BlurView x:%f y:%f w:%f h:%f", singleton.blurView.frame.origin.x,singleton.blurView.frame.origin.y,singleton.blurView.frame.size.width,singleton.blurView.frame.size.height);
-//    NSLog(@"BlurViewContainer x:%f y:%f w:%f h:%f", singleton.blurViewContainer.frame.origin.x,singleton.blurViewContainer.frame.origin.y,singleton.blurViewContainer.frame.size.width,singleton.blurViewContainer.frame.size.height);
     singleton.selectedViewController.leftConstraint.constant = x;
     singleton.blurViewLeft.constant = x;
 
@@ -445,11 +430,8 @@ MainViewController *singleton;
 
     if (_selectedViewController != _directoryViewController)
     {
-//        [_selectedViewController.view removeFromSuperview];
         [MainViewController animateFadeOut:_selectedViewController.view remove:YES];
         _selectedViewController = _directoryViewController;
-
-//        [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
 
         NSArray *constraints = [Util insertSubviewWithConstraints:self.view child:_selectedViewController.view belowSubView:self.tabBar];
 
@@ -457,7 +439,6 @@ MainViewController *singleton;
     }
     [MainViewController animateFadeOut:_selectedViewController.view];
     [MainViewController moveSelectedViewController: -[MainViewController getLargestDimension]];
-//    [MainViewController addChildView:_loginViewController.view];
     NSArray *constraints = [Util insertSubviewWithConstraints:singleton.view child:_loginViewController.view belowSubView:singleton.tabBar];
     _loginViewController.leftConstraint = [constraints objectAtIndex:0];
     _loginViewController.leftConstraint.constant = 0;
@@ -717,11 +698,11 @@ MainViewController *singleton;
 		}
 		case APP_MODE_WALLETS:
 		{
-			if (_selectedViewController != _walletsViewController)
+			if (_selectedViewController != _transactionsViewController)
 			{
 				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
-                    [MainViewController animateSwapViewControllers:_walletsViewController out:_selectedViewController];
+                    [MainViewController animateSwapViewControllers:_transactionsViewController out:_selectedViewController];
 				}
 				else
 				{
@@ -789,54 +770,6 @@ MainViewController *singleton;
 {
 //    [_tabBar unlockButton:TAB_BAR_BUTTON_APP_MODE_SEND];
 //    [_tabBar unlockButton:TAB_BAR_BUTTON_APP_MODE_REQUEST];
-}
-
-#pragma mark - TabBarView delegates
-/*
--(void)tabBarView:(TabBarView *)view selectedSubview:(UIView *)subview reselected:(BOOL)bReselected
-{
-    tTabBarButton tabBarButton = (tTabBarButton) (subview.tag);
-	_appMode = (tAppMode)(subview.tag);
-
-    if (bReselected && _appMode == APP_MODE_MORE) {
-        [self launchViewControllerBasedOnAppMode]; // slideout if not out already
-    }
-    if (bReselected)
-    {
-        NSDictionary *dictNotification = @{ KEY_TAB_BAR_BUTTON_RESELECT_ID : [NSNumber numberWithInt:tabBarButton] };
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:self userInfo:dictNotification];
-    }
-    else
-    {
-        [self launchViewControllerBasedOnAppMode]; //will show login if necessary
-        [self updateChildViewSizeForTabBar];
-
-        // reset any data designed to drive the selection
-        _strWalletUUID = nil;
-        _strTxID = nil;
-    }
-}
-
-- (void)tabBarView:(TabBarView *)view selectedLockedSubview:(UIView *)subview
-{
-    if (!_fadingAlert) {
-        _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-        _fadingAlert.message = NSLocalizedString(@"Please wait until your wallets are loaded.", nil);
-        _fadingAlert.fadeDuration = 2;
-        _fadingAlert.fadeDelay = 2;
-        [_fadingAlert blockModal:NO];
-        [_fadingAlert show];
-    }
-}
-*/
-#pragma mark - RequestViewControllerDelegates
-
--(void)RequestViewControllerDone:(RequestViewController *)vc
-{
-	//cw this method currently not used
-	
-	//pop back to directory
-	//[self.tabBar selectButtonAtIndex:0];
 }
 
 #pragma mark - SettingsViewControllerDelegates
@@ -1059,27 +992,6 @@ MainViewController *singleton;
             [self handleReceiveFromQR:_strWalletUUID withTx:_strTxID];
         }
 
-//        if ([_requestViewController transactionWasDonation])
-//        {
-//            // launch the next QR view with the donation amount
-//            [_requestViewController updateQRCodeFromReceive:transaction.amountSatoshi withRequestState:kDonation];
-//            return;
-//        }
-//
-//        SInt64 txDiff = [_requestViewController transactionDifference:_strWalletUUID withTx:_strTxID];
-//        if (txDiff >= 0)
-//        {
-//            // Sender paid exact amount or too much
-//            [self handleReceiveFromQR:_strWalletUUID withTx:_strTxID];
-//            [[AudioController controller] playReceived];
-//        }
-//        else if (txDiff < 0)
-//        {
-//            // Sender didn't pay enough
-//            txDiff = fabs(txDiff);
-//            [_requestViewController updateQRCodeFromReceive:txDiff withRequestState:kPartial];
-//            [[AudioController controller] playPartialReceived];
-//        }
     }
     // Prevent displaying multiple alerts
     else if (_receivedAlert == nil)
@@ -1413,7 +1325,7 @@ MainViewController *singleton;
         _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
         [CoreBridge makeCurrentWalletWithUUID:_strWalletUUID];
 
-//        [_walletsViewController resetViews];
+//        [_transactionsViewController resetViews];
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
         _appMode = APP_MODE_WALLETS;
         [self launchViewControllerBasedOnAppMode];
@@ -1752,12 +1664,6 @@ MainViewController *singleton;
 }
 
 
-//+ (void)addChildView: (UIView *)view
-//{
-//    [Util insertSubviewWithConstraints:singleton.view child:view belowSubView:singleton.tabBar];
-////    [singleton.view insertSubview:view aboveSubview:singleton.tabBar];
-//}
-
 + (void)animateSlideIn:(AirbitzViewController *)viewController
 {
     viewController.leftConstraint.constant = [MainViewController getLargestDimension];
@@ -1818,13 +1724,6 @@ MainViewController *singleton;
 //                         cb();
                      }];
 }
-
-//+ (void)animateIn:(NSString *)identifier withBlur:(BOOL)withBlur
-//{
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-//    UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:identifier];
-//    [MainViewController animateView:controller.view withBlur:withBlur];
-//}
 
 + (NSArray *)animateSwapViewControllers:(AirbitzViewController *)in out:(AirbitzViewController *)out
 {
@@ -1941,9 +1840,9 @@ MainViewController *singleton;
     {
         NSLog(@"_selectedViewController == _directoryViewController");
     }
-    else if (_selectedViewController == _walletsViewController)
+    else if (_selectedViewController == _transactionsViewController)
     {
-        NSLog(@"_selectedViewController == _walletsViewController");
+        NSLog(@"_selectedViewController == _transactionsViewController");
     }
     else if (_selectedViewController == _loginViewController)
     {
