@@ -4856,7 +4856,7 @@
 					"./AirBitz/ABC-testnet",
 				);
 				INFOPLIST_FILE = "AirBitz/Airbitz-Testnet-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./AirBitz/DL_URLServer,
@@ -4891,7 +4891,7 @@
 					"./AirBitz/ABC-testnet",
 				);
 				INFOPLIST_FILE = "AirBitz/Airbitz-Testnet-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./AirBitz/DL_URLServer,
@@ -4999,7 +4999,7 @@
 					./AirBitz/ABC,
 				);
 				INFOPLIST_FILE = "AirBitz/AirBitz-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./AirBitz/DL_URLServer,
@@ -5032,7 +5032,7 @@
 					./AirBitz/ABC,
 				);
 				INFOPLIST_FILE = "AirBitz/AirBitz-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./AirBitz/DL_URLServer,
@@ -5065,7 +5065,7 @@
 					./AirBitz/ABC,
 				);
 				INFOPLIST_FILE = "Airbitz/Airbitz-Develop-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./AirBitz/DL_URLServer,
@@ -5098,7 +5098,7 @@
 					./AirBitz/ABC,
 				);
 				INFOPLIST_FILE = "Airbitz/Airbitz-Develop-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./AirBitz/DL_URLServer,
