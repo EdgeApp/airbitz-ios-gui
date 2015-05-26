@@ -16,8 +16,8 @@
 @property (nonatomic, copy)     NSString        *strName;
 @property (nonatomic, copy)     NSString        *strUserName;
 @property (nonatomic, assign)   int             currencyNum;
-@property (nonatomic, assign)   NSString        *currencyAbbrev;
-@property (nonatomic, assign)   NSString        *currencySymbol;
+@property (nonatomic, copy)     NSString        *currencyAbbrev;
+@property (nonatomic, copy)     NSString        *currencySymbol;
 @property (nonatomic, assign)   unsigned int    archived;
 @property (nonatomic, assign)   double          balance;
 @property (nonatomic, strong)   NSArray         *arrayTransactions;

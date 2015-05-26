@@ -645,6 +645,7 @@ static BOOL bOtpError = NO;
     wallet.currencyNum = pWalletInfo->currencyNum;
     wallet.currencyAbbrev = [CoreBridge currencyAbbrevLookup:wallet.currencyNum];
     wallet.currencySymbol = [CoreBridge currencySymbolLookup:wallet.currencyNum];
+    NSLog(@"      setWallet: Currency %d %s %s", pWalletInfo->currencyNum, wallet.currencyAbbrev, wallet.currencySymbol) ;
     wallet.loaded = wallet.currencyNum == -1 ? NO : YES;
     NSLog(@"EXIT setWallet: %s", [NSThread currentThread].name);
 }
@@ -1686,7 +1687,7 @@ static BOOL bOtpError = NO;
     NSNumber *c = [NSNumber numberWithInt:currencyNum];
     NSString *cached = [currencyCodesCache objectForKey:c];
     if (cached != nil) {
-        NSLog(@"EXIT currencyAbbrevLookup: %s", [NSThread currentThread].name);
+        NSLog(@"EXIT currencyAbbrevLookup CACHED code:%s thread:%s", cached, [NSThread currentThread].name);
         return cached;
     }
     tABC_Error error;
@@ -1699,12 +1700,12 @@ static BOOL bOtpError = NO;
             if (currencyNum == currencies[i].num) {
                 NSString *code = [NSString stringWithUTF8String:currencies[i].szCode];
                 [currencyCodesCache setObject:code forKey:c];
-                NSLog(@"EXIT currencyAbbrevLookup: %s", [NSThread currentThread].name);
+                NSLog(@"EXIT currencyAbbrevLookup code:%s thread:%s", code, [NSThread currentThread].name);
                 return code;
             }
         }
     }
-    NSLog(@"EXIT currencyAbbrevLookup: %s", [NSThread currentThread].name);
+    NSLog(@"EXIT currencyAbbrevLookup code:NULL thread:%s", [NSThread currentThread].name);
     return @"";
 }
 
