@@ -11,6 +11,7 @@
 
 - (void)startQRReader;
 - (void)stopQRReader;
+- (void)willRotateOrientation:(UIInterfaceOrientation) orientation;
 
 @end
 

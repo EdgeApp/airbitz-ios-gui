@@ -40,6 +40,8 @@
     [super viewDidLoad];
     _scanView = [ScanView CreateView:_scanViewHolder];
     _scanView.delegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willRotate:) name:NOTIFICATION_ROTATION_CHANGED object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -51,6 +53,17 @@
     [MainViewController changeNavBar:self title:[Theme Singleton].importText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
     [_scanView startQRReader];
 }
+
+- (void)willRotate:(NSNotification *)notification
+{
+    NSDictionary *dictData = [notification userInfo];
+    NSNumber *orientation = [dictData objectForKey:KEY_ROTATION_ORIENTATION];
+
+    [_scanView willRotateOrientation:[orientation intValue]];
+}
+
+
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {

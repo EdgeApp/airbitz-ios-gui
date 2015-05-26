@@ -238,6 +238,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
              object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sweepDoneCallback:) name:NOTIFICATION_SWEEP object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willRotate:) name:NOTIFICATION_ROTATION_CHANGED object:nil];
 
 
     //
@@ -291,6 +292,19 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self updateViews:nil];
     [self flashItemSelected:FLASH_ITEM_OFF];
 
+}
+
+- (void)willRotate:(NSNotification *)notification
+{
+    NSDictionary *dictData = [notification userInfo];
+    NSNumber *orientation = [dictData objectForKey:KEY_ROTATION_ORIENTATION];
+
+    [self rotateZbar:[orientation intValue]];
+}
+
+- (void)rotateZbar:(UIInterfaceOrientation) orientation
+{
+    [_readerView willRotateToInterfaceOrientation:orientation duration:0.35];
 }
 
 - (void)setupNavBar
@@ -472,6 +486,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
     // check camera state before proceeding
 	_readerView = [ZBarReaderView new];
+    [self rotateZbar:[[UIApplication sharedApplication] statusBarOrientation]];
+
     if ([_readerView isDeviceAvailable])
     {
         [self.scanningErrorLabel setHidden:YES];

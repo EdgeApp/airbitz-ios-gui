@@ -167,7 +167,6 @@ MainViewController *singleton;
     [self loadUserViews];
 
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
 
     // resgister for transaction details screen complete notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit:) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
@@ -196,11 +195,14 @@ MainViewController *singleton;
     [NotificationChecker initAll];
 }
 
-- (void)deviceOrientationDidChange
-{
-    NSLog(@"deviceOrientationDidChange %f %f %f %f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
- //XXX
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    UIInterfaceOrientation toOrientation = [[UIDevice currentDevice] orientation];
+    NSNumber *nOrientation = [NSNumber numberWithInteger:toOrientation];
+    NSDictionary *dictNotification = @{ KEY_ROTATION_ORIENTATION : nOrientation };
 
+    NSLog(@"Woohoo we WILL rotate %d", toOrientation);
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ROTATION_CHANGED object:self userInfo:dictNotification];
 }
 
 /**

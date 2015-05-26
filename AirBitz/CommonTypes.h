@@ -134,13 +134,16 @@ typedef enum eTabBarButton
 #define NOTIFICATION_VIEW_SWEEP_TX                      @"Notification_View_Sweep_Transaction_Details"
 #define NOTIFICATION_LOCK_TABBAR                        @"Lock_Tabbar"
 #define NOTIFICATION_UNLOCK_TABBAR                      @"Unlock_Tabbar"
-#define NOTIFICATION_WALLETS_CHANGED                     @"Wallets_Changed"
+#define NOTIFICATION_WALLETS_CHANGED                    @"Wallets_Changed"
+#define NOTIFICATION_ROTATION_CHANGED                   @"Rotation_Changed"
 
 #define KEY_ERROR_CODE                                  @"Error_Code"
 #define KEY_TX_DETAILS_EXITED_TX                        @"transaction"
 #define KEY_TX_DETAILS_EXITED_WALLET_UUID               @"walletUUID"
 #define KEY_TX_DETAILS_EXITED_WALLET_NAME               @"walletName"
 #define KEY_TX_DETAILS_EXITED_TX_ID                     @"transactionID"
+
+#define KEY_ROTATION_ORIENTATION                        @"orientation"
 
 #define KEY_SWEEP_CORE_CONDITION_CODE                   @"tABC_CC"
 #define KEY_SWEEP_TX_ID                                 @"transactionID"

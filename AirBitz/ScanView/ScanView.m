@@ -7,6 +7,8 @@
 #import "CommonTypes.h"
 #if !TARGET_IPHONE_SIMULATOR
 #import "ZBarSDK.h"
+#import "MainViewController.h"
+
 #endif
 
 @interface ScanView () <FlashSelectViewDelegate
@@ -40,13 +42,10 @@
 + (ScanView *)CreateView:(UIView *)parentView
 {
     ScanView *view = [[[NSBundle mainBundle] loadNibNamed:@"ScanView~iphone" owner:nil options:nil] objectAtIndex:0];
-    [parentView addSubview:view];
+    [Util addSubviewWithConstraints:parentView child:view];
     view.bleButton.hidden = YES;
     view.imgButton.hidden = YES;
 
-    CGRect frame = view.frame;
-    frame.origin.x = parentView.frame.origin.x;
-    view.frame = frame;
     return view;
 }
 
@@ -63,6 +62,11 @@
     [Util resizeView:self withDisplayView:nil];
     _flashSelector.delegate = self;
     _bUsingImagePicker = NO;
+}
+
+- (void)willRotateOrientation:(UIInterfaceOrientation) orientation
+{
+    [_readerView willRotateToInterfaceOrientation:orientation duration:0.35];
 }
 
 #if TARGET_IPHONE_SIMULATOR
@@ -101,6 +105,9 @@
 {
     // check camera state before proceeding
     _readerView = [ZBarReaderView new];
+
+    [_readerView willRotateToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0.35];
+
     if ([_readerView isDeviceAvailable]) {
         [_scanningErrorLabel setHidden:YES];
         [_flashSelector setHidden:NO];
