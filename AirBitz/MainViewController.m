@@ -1676,28 +1676,39 @@ MainViewController *singleton;
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
+    tAppMode newAppMode;
+
     if (item == [self.tabBar.items objectAtIndex:APP_MODE_DIRECTORY])
     {
-        _appMode = APP_MODE_DIRECTORY;
+        newAppMode = APP_MODE_DIRECTORY;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_REQUEST])
     {
-        _appMode = APP_MODE_REQUEST;
+        newAppMode = APP_MODE_REQUEST;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_SEND])
     {
-        _appMode = APP_MODE_SEND;
+        newAppMode = APP_MODE_SEND;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_WALLETS])
     {
-        _appMode = APP_MODE_WALLETS;
+        newAppMode = APP_MODE_WALLETS;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_MORE])
     {
-        _appMode = APP_MODE_MORE;
+        newAppMode = APP_MODE_MORE;
     }
 
-    [self launchViewControllerBasedOnAppMode];
+    if (newAppMode == _appMode && (newAppMode != APP_MODE_MORE))
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:self userInfo:nil];
+    }
+    else
+    {
+        _appMode = newAppMode;
+        [self launchViewControllerBasedOnAppMode];
+    }
+
 
 }
 
