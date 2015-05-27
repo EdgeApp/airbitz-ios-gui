@@ -1466,8 +1466,8 @@ MainViewController *singleton;
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
     [self resetViews:notification];
-    [MainViewController showTabBarAnimated:NO];
-    [MainViewController showNavBarAnimated:NO];
+    [MainViewController hideTabBarAnimated:NO];
+    [MainViewController hideNavBarAnimated:NO];
 
 }
 
