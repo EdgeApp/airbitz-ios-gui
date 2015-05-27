@@ -934,7 +934,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
 	
     NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-    if ([stringFromData rangeOfString:self.advertisedPartialBitcoinAddress].location == NSNotFound)
+    if ((self.advertisedPartialBitcoinAddress == nil) ||
+            (stringFromData == nil) ||
+            [stringFromData rangeOfString:self.advertisedPartialBitcoinAddress].location == NSNotFound)
     {
         //start at index 9 to skip over "bitcoin:".  Partial address is 10 characters long
         UIAlertView *alert = [[UIAlertView alloc]
@@ -1300,11 +1302,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 				}
 			}
 		}
-	}
-	if(imageIsFromContacts == NO)
-	{
-		scanCell.contactImage.image = [UIImage imageNamed:@"BLE_photo.png"];
-	}
+        if(imageIsFromContacts == NO)
+        {
+            scanCell.contactImage.image = [UIImage imageNamed:@"BLE_photo.png"];
+        }
+    }
+    else
+    {
+        // Invalid BLE request. Assign some warning text and image
+        scanCell.contactName.text = NSLocalizedString(@"Invalid Bluetooth Request", nil);
+        scanCell.contactName.textColor = scanCell.duplicateNamesLabel.textColor;
+        scanCell.contactBitcoinAddress.text = NSLocalizedString(@"Please have Requestor contact support", nil);
+        scanCell.contactBitcoinAddress.textColor = scanCell.duplicateNamesLabel.textColor;
+        scanCell.contactImage.image = [UIImage imageNamed:@"Warning_icon.png"];
+    }
     [scanCell layoutSubviews];
     return scanCell;
 }
