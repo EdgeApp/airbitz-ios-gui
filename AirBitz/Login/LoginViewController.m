@@ -624,17 +624,6 @@ static BOOL bInitialized = false;
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations:^
         {
-////             [self.usernameSelector dismissPopupPicker];
-////             self.swipeText.hidden = YES;
-////             self.swipeRightArrow.hidden = YES;
-////             self.titleText.hidden = YES;
-////             int iphone4heightadjust = 0;
-////             if(IS_IPHONE4) {
-////                 self.logoImage.frame = CGRectMake(_originalLogoFrame.origin.x, _originalLogoFrame.origin.y, _originalLogoFrame.size.width, _originalLogoFrame.size.height * 0.35);
-////                 iphone4heightadjust = -75;
-////             }
-////             self.credentialsView.frame = CGRectMake(_originalCredentialsFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + 10 + iphone4heightadjust, _originalCredentialsFrame.size.width, _originalCredentialsFrame.size.height);
-////             self.userEntryView.frame = CGRectMake(_originalUserEntryFrame.origin.x, _originalLogoFrame.origin.y + _originalLogoFrame.size.height + _originalCredentialsFrame.size.height + iphone4heightadjust, _originalUserEntryFrame.size.width, _originalUserEntryFrame.size.height);
                  if(self.usernameSelector.textField.isEditing)
                  {
                      [self.usernameSelector updateChoices:self.arrayAccounts];
@@ -662,14 +651,6 @@ static BOOL bInitialized = false;
              self.textBitcoinWalletHeight.constant = _originalTextBitcoinWalletHeight;
              [self.view layoutIfNeeded];
 
-//             self.swipeText.hidden = NO;
-//             self.swipeRightArrow.hidden = NO;
-//             self.titleText.hidden = NO;
-//             if(IS_IPHONE4) {
-//                 self.logoImage.frame = CGRectMake(_originalLogoFrame.origin.x, _originalLogoFrame.origin.y, _originalLogoFrame.size.width, _originalLogoFrame.size.height);
-//             }
-//             self.credentialsView.frame = CGRectMake(_originalCredentialsFrame.origin.x, _originalCredentialsFrame.origin.y, _originalCredentialsFrame.size.width, _originalCredentialsFrame.size.height);
-//             self.userEntryView.frame = CGRectMake(_originalUserEntryFrame.origin.x, _originalUserEntryFrame.origin.y, _originalUserEntryFrame.size.width, _originalUserEntryFrame.size.height);
          }
                          completion:^(BOOL finished)
          {
@@ -880,6 +861,7 @@ static BOOL bInitialized = false;
     _tfaMenuViewController.username = self.usernameSelector.textField.text;
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
+    _bTouchesEnabled = NO;
 }
 
 #pragma mark - SignUpManagerDelegate
@@ -888,11 +870,13 @@ static BOOL bInitialized = false;
 {
     [MainViewController showBackground:NO animate:YES];
     [MainViewController animateFadeIn:self.view];
+    _bTouchesEnabled = YES;
 }
 
 -(void)signupFinished
 {
     [self finishIfLoggedIn:YES];
+    _bTouchesEnabled = YES;
 }
 
 #pragma mark - TwoFactorScanViewControllerDelegate
@@ -903,6 +887,7 @@ static BOOL bInitialized = false;
     NSString *secret = controller.secret;
 
     [MainViewController hideNavBarAnimated:YES];
+    _bTouchesEnabled = YES;
 
     [MainViewController animateOut:controller withBlur:NO complete:^(void)
     {
@@ -918,6 +903,7 @@ static BOOL bInitialized = false;
         // Perform the two factor sign in
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             [self twoFactorSignIn:secret];
+
         });
     }];
 }
@@ -948,6 +934,8 @@ static BOOL bInitialized = false;
         _passwordRecoveryController = nil;
         [MainViewController hideNavBarAnimated:YES];
         [self finishIfLoggedIn:NO];
+        _bTouchesEnabled = YES;
+
     }];
 }
 
