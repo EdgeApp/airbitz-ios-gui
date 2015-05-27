@@ -588,9 +588,17 @@
     NSString *search = self.searchTextField.text;
     if (search != NULL && search.length > 0)
     {
-        [self.arraySearchTransactions removeAllObjects];
-        [CoreBridge searchTransactionsIn:[CoreBridge Singleton].currentWallet query:search addTo:self.arraySearchTransactions];
-        [self.tableView reloadData];
+        [CoreBridge clearTxSearchQueue];
+        [CoreBridge postToTxSearchQueue:^{
+            NSMutableArray *arraySearchTransactions = [[NSMutableArray alloc] init];
+            [CoreBridge searchTransactionsIn:[CoreBridge Singleton].currentWallet query:search addTo:arraySearchTransactions];
+            dispatch_async(dispatch_get_main_queue(),^{
+                [self.arraySearchTransactions removeAllObjects];
+                self.arraySearchTransactions = arraySearchTransactions;
+                [self.tableView reloadData];
+            });
+
+        }];
     }
     else if (![self searchEnabled])
     {

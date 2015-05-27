@@ -41,6 +41,7 @@ static int iLoginTimeSeconds = 0;
 static NSOperationQueue *exchangeQueue;
 static NSOperationQueue *dataQueue;
 static NSOperationQueue *walletsQueue;
+static NSOperationQueue *txSearchQueue;
 static NSMutableDictionary *watchers;
 static NSMutableDictionary *currencyCodesCache;
 static NSMutableDictionary *currencySymbolCache;
@@ -81,6 +82,8 @@ static BOOL bOtpError = NO;
         [dataQueue setMaxConcurrentOperationCount:1];
         walletsQueue = [[NSOperationQueue alloc] init];
         [walletsQueue setMaxConcurrentOperationCount:1];
+        txSearchQueue = [[NSOperationQueue alloc] init];
+        [txSearchQueue setMaxConcurrentOperationCount:1];
 
         watchers = [[NSMutableDictionary alloc] init];
         currencySymbolCache = [[NSMutableDictionary alloc] init];
@@ -115,6 +118,7 @@ static BOOL bOtpError = NO;
         dataQueue = nil;
         walletsQueue = nil;
         singleton = nil;
+        txSearchQueue = nil;
         bInitialized = NO;
         [CoreBridge cleanWallets];
     }
@@ -163,6 +167,8 @@ static BOOL bOtpError = NO;
     {
         [walletsQueue cancelAllOperations];
     }
+    if (txSearchQueue)
+        [txSearchQueue cancelAllOperations];
 
 }
 
@@ -174,6 +180,11 @@ static BOOL bOtpError = NO;
 + (void)postToWalletsQueue:(void(^)(void))cb;
 {
     [walletsQueue addOperationWithBlock:cb];
+}
+
++ (void)postToTxSearchQueue:(void(^)(void))cb;
+{
+    [txSearchQueue addOperationWithBlock:cb];
 }
 
 + (int)dataOperationCount
@@ -188,6 +199,11 @@ static BOOL bOtpError = NO;
 + (void)clearSyncQueue
 {
     [dataQueue cancelAllOperations];
+}
+
++ (void)clearTxSearchQueue;
+{
+    [txSearchQueue cancelAllOperations];
 }
 
 // select the wallet with the given UUID
