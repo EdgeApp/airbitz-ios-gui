@@ -298,6 +298,8 @@ typedef enum eExportOption
         pc.printInfo = printInfo;
         pc.showsPageRange = YES;
         NSData *dataExport = [self getExportDataInForm:self.type];
+        if (dataExport == nil)
+            return;
 
         if (self.type == WalletExportType_PrivateSeed)
         {
@@ -377,6 +379,9 @@ typedef enum eExportOption
 
         // set up the attachment
         NSData *dataExport = [self getExportDataInForm:self.type];
+        if (dataExport == nil)
+            return;
+
         NSString *strFilename = [NSString stringWithFormat:@"%@.%@", [CoreBridge Singleton].currentWallet.strName, [self suffixFor:self.type]];
         NSString *strMimeType = [self mimeTypeFor:self.type];
         [_mailComposer addAttachmentData:dataExport mimeType:strMimeType fileName:strFilename];
@@ -409,6 +414,8 @@ typedef enum eExportOption
 - (void)exportView
 {
     NSData *dataExport = [self getExportDataInForm:self.type];
+    if (dataExport == nil)
+        return;
 
     if (self.type ==  WalletExportType_PDF)
     {
@@ -480,16 +487,27 @@ typedef enum eExportOption
                                startTime, endTime, &szCsvData, &Error);
             if (ABC_CC_Ok != cc)
             {
+                NSString *title, *message;
+                if (ABC_CC_Empty_Wallet == cc)
+                {
+                    title = NSLocalizedString(@"Export Wallet Transactions", nil);
+                    message = NSLocalizedString(@"No Transactions in Wallet", nil);
+                }
+                else
+                {
+                    title = NSLocalizedString(@"Export Wallet Transactions error", nil);
+                    message = NSLocalizedString(@"CSV Export failed", nil);
+                }
                 UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle:NSLocalizedString(@"Export Wallet Transactions error", nil)
-                                      message:@"ABC_CsvExport failed"
+                                      initWithTitle:title
+                                      message:message
                                       delegate:nil
                                       cancelButtonTitle:@"OK"
                                       otherButtonTitles:nil];
                 [alert show];
                 [Util printABC_Error:&Error];
-                str = @"Error exporting transactions!";
-            } 
+                return nil;
+            }
             else
             {
                 str = [NSString stringWithCString:szCsvData encoding:NSASCIIStringEncoding];
@@ -646,6 +664,8 @@ typedef enum eExportOption
 	if(authenticated)
 	{
 		NSData *dataExport = [self getExportDataInForm:self.type];
+        if (dataExport == nil)
+            return;
 		NSString *strFilename = [NSString stringWithFormat:@"%@.%@", [CoreBridge Singleton].currentWallet.strName, [self suffixFor:self.type]];
 		NSString *strMimeType = [self mimeTypeFor:self.type];
 		
