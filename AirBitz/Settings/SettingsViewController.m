@@ -1299,6 +1299,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         default:
             break;
 	}
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - SignUpViewControllerDelegates
