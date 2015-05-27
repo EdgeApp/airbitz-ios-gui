@@ -61,7 +61,6 @@
     BOOL                                _archiveCollapsed;
 
     CGRect                              _transactionTableStartFrame;
-    BOOL                                _bSearchModeEnabled;
     BOOL                                _bWalletsShowing;
 //    CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
@@ -383,50 +382,31 @@
     [self resignAllResponders];
 }
 
-//- (IBAction)buttonSearchTouched:(id)sender
-//{
-//    if (YES == [self canLeaveWalletNameField])
-//    {
-//        [self resignAllResponders];
-//        [self transitionToSearch:YES];
-//    }
-//}
-
 - (IBAction)buttonRequestTouched:(id)sender
 {
-//    if (YES == [self canLeaveWalletNameField])
-    {
-        [self resignAllResponders];
-        NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: [CoreBridge Singleton].currentWallet.strUUID};
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET
-                                                            object:self userInfo:dictNotification];
-    }
+    [self resignAllResponders];
+    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: [CoreBridge Singleton].currentWallet.strUUID};
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET
+                                                        object:self userInfo:dictNotification];
 }
 
 - (IBAction)buttonSendTouched:(id)sender
 {
-//    if (YES == [self canLeaveWalletNameField])
-    {
-        [self resignAllResponders];
-        NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: [CoreBridge Singleton].currentWallet.strUUID };
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_SEND_FOR_WALLET
-                                                            object:self userInfo:dictNotification];
-    }
+    [self resignAllResponders];
+    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: [CoreBridge Singleton].currentWallet.strUUID };
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_SEND_FOR_WALLET
+                                                        object:self userInfo:dictNotification];
 }
 
-//- (IBAction)buttonExportTouched:(id)sender
 - (void)exportWallet
 {
-//    if (YES == [self canLeaveWalletNameField])
-    {
-        [self resignAllResponders];
+    [self resignAllResponders];
 
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-        self.exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
-        self.exportWalletViewController.delegate = self;
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    self.exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
+    self.exportWalletViewController.delegate = self;
 
-        [MainViewController animateView:self.exportWalletViewController withBlur:NO];
-    }
+    [MainViewController animateView:self.exportWalletViewController withBlur:NO];
 }
 
 #pragma mark - Misc Methods
@@ -916,7 +896,7 @@
             if (self.arraySearchTransactions.count == 0)
                 return 1;
             else
-                return self.arraySearchTransactions.count == 0;
+                return self.arraySearchTransactions.count;
         }
         else
         {
@@ -1057,7 +1037,7 @@
         cell.addressLabel.text = transaction.strAddress;
 
         // if we are in search  mode
-        if (_bSearchModeEnabled)
+        if ([self searchEnabled])
         {
             // confirmation becomes category
             cell.confirmationLabel.text = transaction.strCategory;
