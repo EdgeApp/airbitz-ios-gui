@@ -795,7 +795,6 @@ static BOOL bOtpError = NO;
                                            wallet.archived, &Error);
     if (ABC_CC_Ok == result)
     {
-        [CoreBridge refreshWallets];
         return true;
     }
     else
