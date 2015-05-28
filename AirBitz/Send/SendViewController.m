@@ -86,11 +86,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     ImportDataModel                 _dataModel;
     NSString                        *_sweptAddress;
     tImportState                    _state;
-    NSString                        *_sweptTXID;
     uint64_t                        _sweptAmount;
     UIAlertView                     *_sweptAlert;
     UIAlertView                     *_tweetAlert;
-    UIAlertView                     *_receivedAlert;
     NSTimer                         *_callbackTimer;
     NSString                        *_tweet;
 
@@ -548,19 +546,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     else if (_sweptAlert == alertView)
     {
         _sweptAlert = nil;
-        [self updateState];
-    }
-    else if (_receivedAlert == alertView)
-    {
-        if (1 == buttonIndex)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
-                                                                object:nil
-                                                              userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID: [CoreBridge Singleton].currentWallet.strUUID,
-                                                                      KEY_TX_DETAILS_EXITED_TX_ID:_sweptTXID}];
-        }
-
-        _receivedAlert = nil;
         [self updateState];
     }
 }
@@ -1461,9 +1446,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                     if (nil != _sweptAddress && _sweptAddress.length)
                     {
                         _state = ImportState_Importing;
-                        [self updateDisplay]; //XXX Will be needed for encrypted private keys
-
-                        // handle the case that the sweep callback is not triggered in a timely manner
+                        [self updateDisplay];
                         _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:30
                                                                           target:self
                                                                         selector:@selector(expireImport)
@@ -1856,7 +1839,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)updateState
 {
-    if (nil == _tweetAlert && nil == _sweptAlert && nil == _receivedAlert)
+    if (nil == _tweetAlert && nil == _sweptAlert)
     {
         _state = ImportState_PrivateKey;
         [self updateDisplay];
@@ -1891,10 +1874,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (_sweptAlert)
     {
         [_sweptAlert show];
-    }
-    if (_receivedAlert)
-    {
-        [_receivedAlert show];
     }
 
     if (kHBURI == _dataModel)
@@ -1946,7 +1925,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     NSDictionary *userInfo = [notification userInfo];
     tABC_CC result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
     uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
-    if (nil == _sweptAlert && nil == _receivedAlert)
+    if (nil == _sweptAlert)
     {
         _sweptAmount = amount;
 
@@ -1954,20 +1933,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         {
             if (0 < amount)
             {
-                // handle received bitcoin
-                _sweptTXID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
-                if (_sweptTXID && [_sweptTXID length])
-                {
-                    _receivedAlert = [[UIAlertView alloc]
-                            initWithTitle:NSLocalizedString(@"Received Funds", nil)
-                                  message:NSLocalizedString(@"Bitcoin received. Tap for details.", nil)
-                                 delegate:self
-                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                        otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
-                }
-                else
-                {
-                    _sweptTXID = nil;
+                NSString *sweptTXID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
+                if (sweptTXID && [sweptTXID length]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
+                                                                        object:nil
+                                                                    userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:[CoreBridge Singleton].currentWallet.strUUID,
+                                                                            KEY_TX_DETAILS_EXITED_TX_ID:sweptTXID}];
                 }
             }
             else if (kHBURI != _dataModel)
