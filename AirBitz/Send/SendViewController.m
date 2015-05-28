@@ -54,6 +54,7 @@
 #import "DL_URLServer.h"
 #import "Server.h"
 #import "PopupPickerView2.h"
+#import "CJSONDeserializer.h"
 
 typedef enum eScanMode
 {
@@ -70,7 +71,7 @@ typedef enum eImportState
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerView2Delegate,ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
- ,ZBarReaderDelegate, ZBarReaderViewDelegate
+ ,ZBarReaderDelegate, ZBarReaderViewDelegate, DL_URLRequestDelegate
 >
 {
 	ZBarReaderView                  *_readerView;
@@ -1880,8 +1881,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self presentViewController:slComposerSheet animated:YES completion:nil];
 }
 
-
-
 - (void)tweetCancelled
 {
     [MainViewController fadingAlert:NSLocalizedString(@"Import the private key again to retry Twitter", nil)];
@@ -1912,12 +1911,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                           withDelegate:self
                                     acceptableCacheAge:CACHE_24_HOURS
                                            cacheResult:YES];
-
-            _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:10
-                                                              target:self
-                                                            selector:@selector(expireImport)
-                                                            userInfo:nil
-                                                             repeats:NO];
         }
     }
 }
@@ -1926,7 +1919,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)expireImport
 {
     [MainViewController fadingAlertDismiss];
-    [MainViewController fadingAlert:NSLocalizedString(@"Import failed", nil)];
+    UIAlertView *alert = [[UIAlertView alloc]
+              initWithTitle:NSLocalizedString(@"Error", nil)
+                    message:NSLocalizedString(@"Import failed", nil)
+                    delegate:nil
+        cancelButtonTitle:@"OK"
+        otherButtonTitles:nil];
+    [alert show];
     _callbackTimer = nil;
 }
 
@@ -2003,6 +2002,59 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 #pragma mark - AlertView delegate
 
+#pragma mark - DLURLServer Callbacks
 
+- (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
+{
+    bool bSuccess = NO;
+    [self cancelImportExpirationTimer];
+
+    if (nil == _tweetAlert)
+    {
+        NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
+
+        NSError *myError;
+        NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
+        if (dict)
+        {
+            NSString *token = [dict objectForKey:@"token"];
+            _tweet = [dict objectForKey:@"tweet"];
+            if (token && _tweet)
+            {
+                if (0 == _sweptAmount)
+                {
+                    NSString *zmessage = [dict objectForKey:@"zero_message"];
+                    if (zmessage)
+                    {
+                        _tweetAlert = [[UIAlertView alloc]
+                                       initWithTitle:NSLocalizedString(@"Sorry", nil)
+                                       message:zmessage
+                                       delegate:self
+                                       cancelButtonTitle:@"No"
+                                       otherButtonTitles:@"OK", nil];
+                        [_tweetAlert show];
+                        bSuccess = YES;
+                    }
+                }
+                else
+                {
+                    NSString *message = [dict objectForKey:@"message"];
+                    if (message)
+                    {
+                        _tweetAlert = [[UIAlertView alloc]
+                                       initWithTitle:NSLocalizedString(@"Congratulations", nil)
+                                       message:message
+                                       delegate:self
+                                       cancelButtonTitle:@"No"
+                                       otherButtonTitles:@"OK", nil];
+                        [_tweetAlert show];
+                        bSuccess = YES;
+                    }
+                }
+            }
+        }
+    }
+}
 
 @end
