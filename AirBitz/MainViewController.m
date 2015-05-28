@@ -88,6 +88,7 @@ typedef enum eAppMode
 
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
+    FadingAlertView             *fadingAlertView;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *blurViewContainer;
@@ -1951,6 +1952,11 @@ MainViewController *singleton;
 + (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime
 {
     [FadingAlertView create:singleton.view message:message holdTime:holdTime];
+}
+
++ (void)fadingAlertDismiss
+{
+    [FadingAlertView dismiss:YES];
 }
 
 @end
