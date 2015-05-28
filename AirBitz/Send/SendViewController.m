@@ -1473,59 +1473,25 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 
-- (BOOL)processZBarResults:(ZBarSymbolSet *)syms
+- (void)processZBarResults:(ZBarSymbolSet *)syms
 {
-    BOOL bSuccess = YES;
 #if !TARGET_IPHONE_SIMULATOR
-
 	for (ZBarSymbol *sym in syms)
 	{
-        tABC_Error error;
 		NSString *text = (NSString *)sym.data;
-
         if (_bImportMode)
         {
-            if (nil != text && [text length])
-            {
+            if (nil != text && [text length]) {
                 self.privateKey = text;
-                [self performSelector:@selector(importWallet)
-                           withObject:nil
-                           afterDelay:0.0];
-
-                bSuccess = YES;
-            }
-
-            if (!bSuccess)
-            {
-                [MainViewController fadingAlert:NSLocalizedString(@"Invalid private key", nil)];
+                [self importWallet];
             }
         }
         else
         {
-            SpendTarget *spendTarget = [[SpendTarget alloc] init];
-            if ([spendTarget newSpend:text error:&error]) {
-                bSuccess = YES;
-                [self showSendConfirmationTo:spendTarget];
-                break;
-
-            } else {
-                bSuccess = NO;
-            }
+            [self trySpend:text];
         }
 	}
-
-//    if (bSuccess == NO)
-//    {
-//        UIAlertView *alert = [[UIAlertView alloc]
-//                initWithTitle:[Theme Singleton].invalidAddressPopupText
-//                      message:NSLocalizedString(@"", nil)
-//                     delegate:self
-//            cancelButtonTitle:@"OK"
-//            otherButtonTitles:nil];
-//        [alert show];
-//    }
 #endif
-    return bSuccess;
 }
 
 - (void)showImagePicker
@@ -1694,9 +1660,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 #if !TARGET_IPHONE_SIMULATOR
 - (void)readerView: (ZBarReaderView*) view didReadSymbols: (ZBarSymbolSet*) syms fromImage: (UIImage*) img
 {
-
     [self processZBarResults:syms];
-
 }
 #endif
 
@@ -1754,7 +1718,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)doProcessURI
 {
     tABC_Error error;
-    BOOL bSuccess = YES;
     SpendTarget *spendTarget = [[SpendTarget alloc] init];
     NSString *text = _addressTextField.text;
 
@@ -1766,31 +1729,32 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         {
             Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
             [spendTarget newTransfer:wallet.strUUID error:&error];
-            [self stopQRReader];
             [self showSendConfirmationTo:spendTarget];
 
         }
         else
         {
-            bSuccess = [spendTarget newSpend:text error:&error];
+            [self trySpend:text];
         }
-
-        if (!bSuccess)
-        {
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Invalid Bitcoin Address", nil)
-                                  message:NSLocalizedString(@"", nil)
-                                  delegate:self
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-            [alert show];
-        }
-        else
-        {
-            [self stopQRReader];
-            [self showSendConfirmationTo:spendTarget];
-        }
+        [self stopQRReader];
 	}
+}
+
+- (void)trySpend:(NSString *)text
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        tABC_Error error;
+        SpendTarget *spendTarget = [[SpendTarget alloc] init];
+        if ([spendTarget newSpend:text error:&error]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showSendConfirmationTo:spendTarget];
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
+            });
+        }
+    });
 }
 
 - (void)PopupPickerView2Cancelled:(PopupPickerView2 *)view userData:(id)data
