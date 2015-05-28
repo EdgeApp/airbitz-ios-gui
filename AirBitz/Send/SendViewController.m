@@ -63,9 +63,7 @@ typedef enum eScanMode
 typedef enum eImportState
 {
     ImportState_PrivateKey,
-    ImportState_EnterPassword,
-    ImportState_RetryPassword,
-    ImportState_Importing
+    ImportState_Importing,
 } tImportState;
 
 
@@ -1837,13 +1835,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)updateDisplay
 {
-    BOOL bHideEnter = YES;
-
-//    if ((![self.textPrivateKey isFirstResponder]) && ([self.textPrivateKey.text length] == 0))
-//    {
-//        bHideEnter = NO;
-//    }
-//
     if (_state == ImportState_PrivateKey)
     {
 //        self.viewDisplay.hidden = NO;
@@ -1851,46 +1842,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
     else
     {
-//        self.viewDisplay.hidden = YES;
-//        self.viewPassword.hidden = NO;
-//
-//        self.imageApproved.hidden = YES;
-//        self.imageNotApproved.hidden = YES;
-//        self.textPassword.hidden = YES;
-//        self.imagePasswordEmboss.hidden = YES;
-//        self.textPassword.enabled = NO;
-//
-//        if (_bPasswordRequired)
-//        {
-//            self.textPassword.hidden = NO;
-//            self.imagePasswordEmboss.hidden = NO;
-//        }
-//
-        if (_state == ImportState_EnterPassword)
-        {
-//            self.textPassword.enabled = YES;
-//            self.labelPasswordStatus.text = NSLocalizedString(@"Enter password to decode wallet", nil);
-//            self.textPassword.hidden = NO;
-//            self.imagePasswordEmboss.hidden = NO;
-        }
-        else if (_state == ImportState_RetryPassword)
-        {
-//            self.textPassword.enabled = YES;
-//            self.labelPasswordStatus.text = NSLocalizedString(@"Incorrect password.\nTry again", nil);
-//            self.textPassword.hidden = NO;
-//            self.imagePasswordEmboss.hidden = NO;
-//            self.imageNotApproved.hidden = NO;
-        }
-        else if (_state == ImportState_Importing)
+        if (_state == ImportState_Importing)
         {
             NSMutableString *statusMessage = [NSMutableString string];
-//            if (_bPasswordRequired)
-//            {
-//                [statusMessage appendString:NSLocalizedString(@"Password Correct.\n", nil)];
-//                self.imageApproved.hidden = NO;
-//            }
-            [statusMessage appendString:[[NSString alloc] initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), _sweptAddress]];
-//            self.labelPasswordStatus.text = [NSString stringWithString:statusMessage];
+            [statusMessage appendString:[[NSString alloc]
+                         initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), _sweptAddress]];
+            [MainViewController fadingAlert:statusMessage holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
         }
     }
 }
@@ -1968,8 +1925,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)expireImport
 {
+    [MainViewController fadingAlertDismiss];
     [MainViewController fadingAlert:NSLocalizedString(@"Import failed", nil)];
-    [self updateState];
     _callbackTimer = nil;
 }
 
@@ -1984,6 +1941,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)sweepDoneCallback:(NSNotification *)notification
 {
+    [MainViewController fadingAlertDismiss];
     [self cancelImportExpirationTimer];
 
     NSDictionary *userInfo = [notification userInfo];

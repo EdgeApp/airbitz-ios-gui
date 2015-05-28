@@ -2115,9 +2115,11 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     }
 
     // broadcast message out that the sweep is done
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SWEEP
-                                                        object:nil
-                                                      userInfo:sweepData];
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SWEEP
+                                                            object:nil
+                                                        userInfo:sweepData];
+    });
 }
 
 
