@@ -345,7 +345,7 @@
                                                     <constraint firstAttribute="height" constant="27" id="tgs-0g-W0Z"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drag_bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="4V6-Vv-Ai6">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drag_bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="4V6-Vv-Ai6">
                                                 <rect key="frame" x="0.0" y="-3" width="320" height="33"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="33" id="5Lf-8n-tg3"/>
@@ -881,7 +881,7 @@
         <image name="btn_right.png" width="22" height="22"/>
         <image name="darken_bottom_table_cell.png" width="320" height="111"/>
         <image name="divider.png" width="320" height="27"/>
-        <image name="drag_bar.png" width="320" height="33"/>
+        <image name="drag_bar.png" width="1600" height="33"/>
         <image name="logo.png" width="71" height="36"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
