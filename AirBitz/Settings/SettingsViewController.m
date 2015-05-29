@@ -456,8 +456,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _debugViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"DebugViewController"];
     _debugViewController.delegate = self;
 
-    [MainViewController animateView:_debugViewController withBlur:NO];
-
+    [Util addSubviewControllerWithConstraints:self.view child:_debugViewController];
+    [MainViewController animateSlideIn:_debugViewController];
 }
 
 // returns how much the current first responder is obscured by the keyboard

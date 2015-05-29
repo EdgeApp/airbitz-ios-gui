@@ -66,7 +66,9 @@
 
 - (void)willRotateOrientation:(UIInterfaceOrientation) orientation
 {
+#if !TARGET_IPHONE_SIMULATOR
     [_readerView willRotateToInterfaceOrientation:orientation duration:0.35];
+#endif
 }
 
 #if TARGET_IPHONE_SIMULATOR
