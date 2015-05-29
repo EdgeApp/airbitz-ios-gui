@@ -234,13 +234,13 @@
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="topOverviewCell" rowHeight="112" id="OSb-Tn-1Ba" customClass="topOverviewCell">
                                                 <rect key="frame" x="0.0" y="234" width="320" height="112"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" tableViewCell="OSb-Tn-1Ba" translatesAutoresizingMaskIntoConstraints="NO" id="8d9-XF-nIn">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OSb-Tn-1Ba" translatesAutoresizingMaskIntoConstraints="NO" id="8d9-XF-nIn">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6E-Xg-Tz3">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6E-Xg-Tz3">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="darken_bottom_table_cell.png" translatesAutoresizingMaskIntoConstraints="NO" id="Afa-Pw-qW2">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="darken_bottom_table_cell.png" translatesAutoresizingMaskIntoConstraints="NO" id="Afa-Pw-qW2">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
@@ -300,6 +300,7 @@
                                                     <constraint firstItem="8d9-XF-nIn" firstAttribute="top" secondItem="OSb-Tn-1Ba" secondAttribute="top" id="N9z-5o-wVu"/>
                                                     <constraint firstAttribute="trailing" secondItem="8d9-XF-nIn" secondAttribute="trailing" id="ZRi-W5-bHF"/>
                                                     <constraint firstItem="8d9-XF-nIn" firstAttribute="leading" secondItem="OSb-Tn-1Ba" secondAttribute="leading" id="pVL-2M-JCl"/>
+                                                    <constraint firstAttribute="bottom" secondItem="8d9-XF-nIn" secondAttribute="bottom" id="xzl-q8-NxL"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="addressLabel" destination="wy7-Kv-3ap" id="3F5-Cd-HpK"/>
