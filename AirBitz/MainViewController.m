@@ -1422,8 +1422,11 @@ MainViewController *singleton;
             [self launchBuySell:cs[2] provider:cs[1]];
         }
     } else if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:@"airbitz"]) {
-        // [self.tabBar selectButtonAtIndex:APP_MODE_SEND];
         if ([User isLoggedIn]) {
+            self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
+            _appMode = APP_MODE_SEND;
+            [self launchViewControllerBasedOnAppMode];
+
             [_sendViewController resetViews];
             _sendViewController.addressTextField.text = [uri absoluteString];
             [_sendViewController processURI];
