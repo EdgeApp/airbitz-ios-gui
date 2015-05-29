@@ -798,7 +798,6 @@ MainViewController *singleton;
 - (void)loginViewControllerDidLogin:(BOOL)bNewAccount
 {
 //    self.backgroundView.image = [Theme Singleton].backgroundApp;
-
     if (bNewAccount) {
         [FadingAlertView create:self.view
                         message:[Theme Singleton].creatingWalletText
@@ -816,6 +815,7 @@ MainViewController *singleton;
     [MainViewController showNavBarAnimated:YES];
 
     [self launchViewControllerBasedOnAppMode];
+    [MainViewController changeNavBarTitle:_selectedViewController title:@""];
 
     if (_uri)
     {
@@ -847,6 +847,7 @@ MainViewController *singleton;
     [MainViewController showNavBarAnimated:YES];
 
     [self launchViewControllerBasedOnAppMode];
+    [MainViewController changeNavBarTitle:_selectedViewController title:@""];
 
     // if the user has a password, increment PIN login count
     if ([CoreBridge passwordExists]) {
