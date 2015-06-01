@@ -111,8 +111,6 @@ typedef enum eTabBarButton
 	TAB_BAR_BUTTON_APP_MODE_MORE
 } tTabBarButton;
 
-#define DUST_AMOUNT 5430
-
 // notifications
 
 #define NOTIFICATION_MAIN_RESET                         @"Main_Views_Reset"

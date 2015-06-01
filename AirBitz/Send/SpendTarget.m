@@ -128,13 +128,13 @@
     return result;
 }
 
-- (BOOL)calcSendFees:(NSString *)walletUUID 
-           totalFees:(uint64_t *)totalFees
+- (tABC_Error)calcSendFees:(NSString *)walletUUID
+                 totalFees:(uint64_t *)totalFees
 {
     tABC_Error error;
     ABC_SpendGetFee([[User Singleton].name UTF8String],
         [walletUUID UTF8String], _pSpend, totalFees, &error);
-    return error.code  == ABC_CC_Ok ? YES : NO;
+    return error;
 }
 
 @end

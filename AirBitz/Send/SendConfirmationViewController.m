@@ -700,13 +700,13 @@
 - (void)calcFees
 {
     uint64_t fees = 0;
-    BOOL sufficent = [_spendTarget calcSendFees:[CoreBridge Singleton].currentWallet.strUUID totalFees:&fees];
+    tABC_Error errorCode = [_spendTarget calcSendFees:[CoreBridge Singleton].currentWallet.strUUID totalFees:&fees];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateFeeFieldContents:fees hasEnough:sufficent];
+        [self updateFeeFieldContents:fees error:&errorCode];
     });
 }
 
-- (void)updateFeeFieldContents:(uint64_t)txFees hasEnough:(BOOL)sufficientFunds
+- (void)updateFeeFieldContents:(uint64_t)txFees error:(tABC_Error *)calcError
 {
     UIColor *color, *colorConversionLabel;
     _maxAmountButton.selected = NO;
@@ -722,7 +722,7 @@
         colorConversionLabel = [UIColor darkGrayColor];
         [_maxAmountButton setBackgroundColor:UIColorFromARGB(0xFF72b83b) ];
     }
-    if (sufficientFunds)
+    if (ABC_CC_Ok == calcError->code)
     {
         tABC_Error error;
         double currencyFees = 0.0;
@@ -756,7 +756,7 @@
     }
     else
     {
-        NSString *message = NSLocalizedString(@"Insufficient funds", nil);
+        NSString *message = [Util errorMap:calcError];
         self.conversionLabel.text = message;
         self.conversionLabel.textColor = [UIColor redColor];
 
@@ -942,8 +942,6 @@
 {
     if (_spendTarget.pSpend->amount == 0) {
         [MainViewController fadingAlert:NSLocalizedString(@"Please enter an amount to send", nil)];
-    } else if (_spendTarget.pSpend->amount < DUST_AMOUNT) {
-        [self tooSmallAlert];
     } else {
         [self initiateSendRequest];
     }
@@ -951,17 +949,7 @@
 
 - (void)tooSmallAlert
 {
-    double currency;
-    tABC_Error error;
-    ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], DUST_AMOUNT, &currency, [CoreBridge Singleton].currentWallet.currencyNum, &error);
-    if (error.code == ABC_CC_Ok) {
-        [MainViewController fadingAlert:[NSString stringWithFormat:
-            NSLocalizedString(@"Amount is too small. Please send at least %@ (~%@)", nil),
-                [CoreBridge formatSatoshi:DUST_AMOUNT],
-                [CoreBridge formatCurrency:currency withCurrencyNum:[CoreBridge Singleton].currentWallet.currencyNum]]];
-    } else {
-        [MainViewController fadingAlert:NSLocalizedString(@"Amount is too small", nil)];
-    }
+    [MainViewController fadingAlert:NSLocalizedString(@"Amount is too small", nil)];
 }
 
 #pragma mark - Calculator delegates

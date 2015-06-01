@@ -21,7 +21,7 @@
                 error:(tABC_Error *)pError;
 
 - (uint64_t)maxSpendable:(NSString *)walletUUID;
-- (BOOL)calcSendFees:(NSString *)walletUUID
-           totalFees:(uint64_t *)totalFees;
+- (tABC_Error)calcSendFees:(NSString *)walletUUID
+                 totalFees:(uint64_t *)totalFees;
 
 @end

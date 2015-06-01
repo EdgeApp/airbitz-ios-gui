@@ -36,6 +36,8 @@
             return NSLocalizedString(@"This operation is not supported.", nil);
         case ABC_CC_InsufficientFunds:
             return NSLocalizedString(@"Insufficient funds", nil);
+        case ABC_CC_SpendDust:
+            return NSLocalizedString(@"Amount is too small", nil);
         case ABC_CC_Synchronizing:
             return NSLocalizedString(@"Synchronizing with the network.", nil);
         case ABC_CC_NonNumericPin:
