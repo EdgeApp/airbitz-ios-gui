@@ -13,17 +13,8 @@
 
 + (AnnotationContentView *)Create
 {
-	AnnotationContentView *av = nil;
-	
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-	{
-		av = [[[NSBundle mainBundle] loadNibNamed:@"AnnotationContentView" owner:nil options:nil] objectAtIndex:0];
-	}
-	/*else
-	{
-		av = [[[NSBundle mainBundle] loadNibNamed:@"HowToPlayView~ipad" owner:nil options:nil] objectAtIndex:0];
-		
-	}*/
+    AnnotationContentView *av =
+        [[[NSBundle mainBundle] loadNibNamed:@"AnnotationContentView" owner:nil options:nil] objectAtIndex:0];
 	av.bkg_image.layer.cornerRadius = 4.0;
 	[av addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:av action:@selector(AnnotationContentTapped:)]];
 	return av;
