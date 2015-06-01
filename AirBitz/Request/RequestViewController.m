@@ -356,6 +356,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [_importWalletViewController.view removeFromSuperview];
         _importWalletViewController = nil;
     }
+    if (_recipientViewController)
+    {
+        [_recipientViewController.view removeFromSuperview];
+        _recipientViewController = nil;
+    }
 
     self.BTC_TextField.text = @"";
 	self.USD_TextField.text = @"";
@@ -1648,12 +1653,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
     self.recipientViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RecipientViewController"];
-
     self.recipientViewController.delegate = self;
     self.recipientViewController.mode = mode;
 
     [Util addSubviewControllerWithConstraints:self.view child:self.recipientViewController];
-    [MainViewController animateView:self.recipientViewController withBlur:NO];
+    [MainViewController animateSlideIn:self.recipientViewController];
 }
 
 - (void)dismissRecipient
