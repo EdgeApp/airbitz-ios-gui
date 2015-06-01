@@ -1019,22 +1019,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	return cell;
 }
 
-- (ButtonOnlyCell *)getLogoutButton:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
-{
-    ButtonOnlyCell *cell;
-    static NSString *cellIdentifier = @"ButtonOnlyCell";
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (nil == cell)
-    {
-        cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    cell.delegate = self;
-    [cell.button setTitle:NSLocalizedString(@"Logout", @"settings text") forState:UIControlStateNormal];
-    cell.tag = (indexPath.section << 8) | (indexPath.row);
-    return cell;
-}
-
-
 - (ButtonOnlyCell *)getDebugButton:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
 {
     ButtonOnlyCell *cell;
