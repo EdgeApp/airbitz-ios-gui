@@ -1095,8 +1095,8 @@ MainViewController *singleton;
     _txDetailsController.bOldTransaction = NO;
     _txDetailsController.transactionDetailsMode = TD_MODE_RECEIVED;
 
-    [MainViewController animateView:_txDetailsController withBlur:NO];
-
+    [Util addSubviewControllerWithConstraints:singleton.view child:_txDetailsController];
+    [MainViewController animateSlideIn:_txDetailsController];
 }
 
 -(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller

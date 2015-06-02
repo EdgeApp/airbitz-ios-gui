@@ -491,7 +491,8 @@ typedef enum eDatePeriod
 //    self.exportWalletOptionsViewController.fromDateTime = self.fromDateTime;
 //    self.exportWalletOptionsViewController.toDateTime = self.toDateTime;
 
-    [MainViewController animateView:self.exportWalletOptionsViewController withBlur:NO];
+    [Util addSubviewControllerWithConstraints:self.view child:self.exportWalletOptionsViewController];
+    [MainViewController animateSlideIn:self.exportWalletOptionsViewController];
 }
 
 - (UIImage *)stretchableImage:(NSString *)imageName
