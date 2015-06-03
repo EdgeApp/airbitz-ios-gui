@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
             <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
@@ -15,21 +17,28 @@
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" customClass="FadingAlertView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRF-84-nZk" userLabel="BlurView" customClass="BlurView">
+                <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jc4-Ni-1VI" userLabel="View -dark">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="568" translatesAutoresizingMaskIntoConstraints="NO" id="OYT-Tf-r4L" userLabel="AlertGroup">
                     <rect key="frame" x="35" y="159" width="250" height="250"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0DF-hU-X03" userLabel="View -blue" customClass="BlurView">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRF-84-nZk" userLabel="BlurView" customClass="BlurView">
                             <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
-                            <color key="backgroundColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0DF-hU-X03" userLabel="View -blue" customClass="BlurView">
+                            <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="2is-5E-X7J" userLabel="Message" customClass="LatoLabel">
                             <rect key="frame" x="16" y="16" width="218" height="218"/>
                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Joy-6Y-Kdk" userLabel="Spinner">
@@ -53,7 +62,7 @@
                                         <constraint firstAttribute="height" constant="25" id="gcM-e4-DZy"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="21"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xIk-Ub-qbu" userLabel="Line2" customClass="LatoLabel">
@@ -62,7 +71,7 @@
                                         <constraint firstAttribute="height" constant="25" id="Z8C-je-KF0"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="21"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZOf-PC-P7M" userLabel="Line3" customClass="LatoLabel">
@@ -71,7 +80,7 @@
                                         <constraint firstAttribute="height" constant="25" id="7Gi-XJ-c1N"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="21"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -109,6 +118,10 @@
                         <constraint firstAttribute="trailing" secondItem="0DF-hU-X03" secondAttribute="trailing" id="ko3-Qt-6Na"/>
                         <constraint firstAttribute="centerX" secondItem="Joy-6Y-Kdk" secondAttribute="centerX" id="lEr-l3-sDs"/>
                         <constraint firstItem="0DF-hU-X03" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" id="p3J-8f-fes"/>
+                        <constraint firstItem="FRF-84-nZk" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" id="qhj-xo-h4V"/>
+                        <constraint firstItem="FRF-84-nZk" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" id="sCu-bU-Hwf"/>
+                        <constraint firstAttribute="trailing" secondItem="FRF-84-nZk" secondAttribute="trailing" id="sIC-sX-FGz"/>
+                        <constraint firstAttribute="bottom" secondItem="FRF-84-nZk" secondAttribute="bottom" id="yPv-NV-7UE"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -123,10 +136,10 @@
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="OYT-Tf-r4L" secondAttribute="centerX" id="0TW-Xh-kzy"/>
                 <constraint firstAttribute="centerY" secondItem="OYT-Tf-r4L" secondAttribute="centerY" id="1Ky-bz-xOK"/>
-                <constraint firstAttribute="trailing" secondItem="FRF-84-nZk" secondAttribute="trailing" id="G9M-Hj-BYa"/>
-                <constraint firstItem="FRF-84-nZk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Lni-nb-Leo"/>
-                <constraint firstAttribute="bottom" secondItem="FRF-84-nZk" secondAttribute="bottom" id="fsS-aV-Swo"/>
-                <constraint firstItem="FRF-84-nZk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="t1j-dD-4iK"/>
+                <constraint firstItem="jc4-Ni-1VI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FLh-5P-tkx"/>
+                <constraint firstItem="jc4-Ni-1VI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="K69-hZ-Zfp"/>
+                <constraint firstAttribute="trailing" secondItem="jc4-Ni-1VI" secondAttribute="trailing" id="YGX-89-0Wb"/>
+                <constraint firstAttribute="bottom" secondItem="jc4-Ni-1VI" secondAttribute="bottom" id="uFS-nF-7YK"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

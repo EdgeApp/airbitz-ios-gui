@@ -1171,8 +1171,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             delay = 4.0;
             duration = 2.0;
-            line1 = @"";
-            line2 = NSLocalizedString(@"** Warning **", @"** Warning ** text on partial payment");
+            line1 = NSLocalizedString(@"** Warning **", @"** Warning ** text on partial payment");
+            line2 = @"";
             line3 = NSLocalizedString(@"Partial Payment", @"Text on partial payment");
             image = [UIImage imageNamed:@"Warning_icon.png"];
             [[AudioController controller] playPartialReceived];

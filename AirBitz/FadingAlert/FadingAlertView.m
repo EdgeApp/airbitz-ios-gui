@@ -5,6 +5,7 @@
 #import "LatoLabel.h"
 #import "Theme.h"
 #import "MainViewController.h"
+#import "BlurView.h"
 
 #define ALERT_MESSAGE_FADE_DELAY 10
 #define ALERT_MESSAGE_FADE_DURATION 10
@@ -16,6 +17,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UIView             *parentView;
+@property (weak, nonatomic) IBOutlet BlurView           *blurView;
 @property (weak, nonatomic) IBOutlet LatoLabel          *connectedLine1;
 @property (weak, nonatomic) IBOutlet LatoLabel          *connectedLine2;
 @property (weak, nonatomic) IBOutlet LatoLabel          *connectedLine3;
@@ -90,6 +92,7 @@ static UIView *alert;
 
     singleton.parentView = parentView;
     singleton.alpha = 0.0;
+    singleton.blurView.alpha = 0;
     singleton.clipsToBounds = YES;
     singleton.holdTime          = holdTime;
 
@@ -150,6 +153,7 @@ static UIView *alert;
                         options:[Theme Singleton].animationCurveDefault
                      animations:^{
                          singleton.alpha = 1.0;
+                         singleton.blurView.alpha = 1.0;
                      }
                      completion:^(BOOL finished) {
                          if (FADING_ALERT_HOLD_TIME_FOREVER < holdTime)
