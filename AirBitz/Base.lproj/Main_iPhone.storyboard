@@ -451,22 +451,12 @@
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.49956154336734693" green="0.49956154336734693" blue="0.49956154336734693" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G2v-QN-NpV" userLabel="View - bitcoin amount">
                                         <rect key="frame" x="30" y="117" width="260" height="45"/>
                                         <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Fic-d9-oDx" customClass="LatoLabel">
-                                                <rect key="frame" x="119" y="12" width="132" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="132" id="SvL-pp-1Lz"/>
-                                                    <constraint firstAttribute="height" constant="21" id="haz-rP-Pf9"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="D9Y-q9-3fh" customClass="LatoLabel">
                                                 <rect key="frame" x="5" y="6" width="35" height="33"/>
                                                 <constraints>
@@ -483,6 +473,16 @@
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done"/>
                                             </textField>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Fic-d9-oDx" customClass="LatoLabel">
+                                                <rect key="frame" x="119" y="12" width="132" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="132" id="SvL-pp-1Lz"/>
+                                                    <constraint firstAttribute="height" constant="21" id="haz-rP-Pf9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -501,6 +501,13 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pdu-nu-njT" userLabel="View - USD amount">
                                         <rect key="frame" x="30" y="163" width="260" height="45"/>
                                         <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.0" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aWm-mP-gxj" userLabel="Stylized Text Field - USD" customClass="StylizedTextField">
+                                                <rect key="frame" x="43" y="5" width="217" height="36"/>
+                                                <inset key="insetFor6xAndEarlier" minX="-21" minY="0.0" maxX="21" maxY="0.0"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                                            </textField>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="HKk-4P-SL1" customClass="MontserratLabel">
                                                 <rect key="frame" x="119" y="12" width="132" height="21"/>
                                                 <constraints>
@@ -521,13 +528,6 @@
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.0" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aWm-mP-gxj" userLabel="Stylized Text Field - USD" customClass="StylizedTextField">
-                                                <rect key="frame" x="43" y="5" width="217" height="36"/>
-                                                <inset key="insetFor6xAndEarlier" minX="-21" minY="0.0" maxX="21" maxY="0.0"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
-                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
