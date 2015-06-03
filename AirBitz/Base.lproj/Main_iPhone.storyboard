@@ -852,6 +852,10 @@
                                     </activityIndicatorView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZ4-b5-fQ5" userLabel="Button -refresh">
                                         <rect key="frame" x="319" y="106" width="18" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="18" id="mF9-Se-50C"/>
+                                            <constraint firstAttribute="height" constant="22" id="nrZ-ve-3Rz"/>
+                                        </constraints>
                                         <state key="normal" image="UIButtonBarRefresh.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -963,6 +967,7 @@
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="5" id="jLA-xe-QYF"/>
                                     <constraint firstItem="jlL-oE-aWy" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="10" id="k3E-Yq-7CZ"/>
                                     <constraint firstItem="MRG-UO-gcm" firstAttribute="leading" secondItem="fHY-wl-t5s" secondAttribute="trailing" constant="5" id="rqK-Zs-E4V"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TZ4-b5-fQ5" secondAttribute="trailing" constant="15" id="sKJ-nI-ooZ"/>
                                     <constraint firstItem="jwC-1c-veH" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="tuc-7l-JlM"/>
                                     <constraint firstItem="TZ4-b5-fQ5" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="top" id="txE-62-q8z"/>
                                     <constraint firstItem="CiQ-7I-S7U" firstAttribute="bottom" secondItem="dY3-MX-MNV" secondAttribute="bottom" id="vSZ-mB-fmV"/>
