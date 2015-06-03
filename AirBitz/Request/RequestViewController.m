@@ -1182,6 +1182,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             delay = 7.0;
             duration = 2.0;
+            image = [UIImage imageNamed:@"bitcoin_symbol.png"];
             line1 = NSLocalizedString(@"Payment received", @"Text on payment recived popup");
             tABC_Error error;
             double currency;

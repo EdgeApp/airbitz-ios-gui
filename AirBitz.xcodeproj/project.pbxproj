@@ -527,12 +527,6 @@
 		DA06F7CA1B0BDD79000BCA46 /* bkg_dark_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64A1B0BDD77000BCA46 /* bkg_dark_header@2x.png */; };
 		DA06F7CB1B0BDD79000BCA46 /* bkg_dark_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64A1B0BDD77000BCA46 /* bkg_dark_header@2x.png */; };
 		DA06F7CC1B0BDD79000BCA46 /* bkg_dark_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64A1B0BDD77000BCA46 /* bkg_dark_header@2x.png */; };
-		DA06F7CD1B0BDD79000BCA46 /* BLE_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64B1B0BDD77000BCA46 /* BLE_Button@2x.png */; };
-		DA06F7CE1B0BDD79000BCA46 /* BLE_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64B1B0BDD77000BCA46 /* BLE_Button@2x.png */; };
-		DA06F7CF1B0BDD79000BCA46 /* BLE_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64B1B0BDD77000BCA46 /* BLE_Button@2x.png */; };
-		DA06F7D01B0BDD79000BCA46 /* BLE_connected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64C1B0BDD77000BCA46 /* BLE_connected@2x.png */; };
-		DA06F7D11B0BDD79000BCA46 /* BLE_connected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64C1B0BDD77000BCA46 /* BLE_connected@2x.png */; };
-		DA06F7D21B0BDD79000BCA46 /* BLE_connected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64C1B0BDD77000BCA46 /* BLE_connected@2x.png */; };
 		DA06F7D31B0BDD79000BCA46 /* BLE_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64D1B0BDD77000BCA46 /* BLE_Logo@2x.png */; };
 		DA06F7D41B0BDD79000BCA46 /* BLE_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64D1B0BDD77000BCA46 /* BLE_Logo@2x.png */; };
 		DA06F7D51B0BDD79000BCA46 /* BLE_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F64D1B0BDD77000BCA46 /* BLE_Logo@2x.png */; };
@@ -1159,6 +1153,15 @@
 		DAA8E9F71B1EDCB400BC870C /* ico_nav_directory_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9F01B1EDCB400BC870C /* ico_nav_directory_dark@3x.png */; };
 		DAA8E9F81B1EDCB400BC870C /* ico_nav_directory_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9F01B1EDCB400BC870C /* ico_nav_directory_dark@3x.png */; };
 		DAA8E9F91B1EDCB400BC870C /* ico_nav_directory_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9F01B1EDCB400BC870C /* ico_nav_directory_dark@3x.png */; };
+		DAA8E9FD1B1F93B800BC870C /* bitcoin_symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9FA1B1F93B800BC870C /* bitcoin_symbol.png */; };
+		DAA8E9FE1B1F93B800BC870C /* bitcoin_symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9FA1B1F93B800BC870C /* bitcoin_symbol.png */; };
+		DAA8E9FF1B1F93B800BC870C /* bitcoin_symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9FA1B1F93B800BC870C /* bitcoin_symbol.png */; };
+		DAA8EA001B1F93B800BC870C /* bitcoin_symbol@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9FB1B1F93B800BC870C /* bitcoin_symbol@2x.png */; };
+		DAA8EA011B1F93B800BC870C /* bitcoin_symbol@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9FB1B1F93B800BC870C /* bitcoin_symbol@2x.png */; };
+		DAA8EA021B1F93B800BC870C /* bitcoin_symbol@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9FB1B1F93B800BC870C /* bitcoin_symbol@2x.png */; };
+		DAA8EA031B1F93B800BC870C /* bitcoin_symbol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9FC1B1F93B800BC870C /* bitcoin_symbol@3x.png */; };
+		DAA8EA041B1F93B800BC870C /* bitcoin_symbol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9FC1B1F93B800BC870C /* bitcoin_symbol@3x.png */; };
+		DAA8EA051B1F93B800BC870C /* bitcoin_symbol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA8E9FC1B1F93B800BC870C /* bitcoin_symbol@3x.png */; };
 		DAA99D621AFDD49300A0E26E /* ButtonSelectorView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA99D611AFDD49200A0E26E /* ButtonSelectorView2.xib */; };
 		DAA99D681AFDD49E00A0E26E /* ButtonSelectorView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA99D671AFDD49E00A0E26E /* ButtonSelectorView2.m */; };
 		DAA99D6A1AFDE0BB00A0E26E /* ButtonSelectorView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA99D611AFDD49200A0E26E /* ButtonSelectorView2.xib */; };
@@ -1863,8 +1866,6 @@
 		DA06F6481B0BDD77000BCA46 /* bkg_categories@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bkg_categories@2x.png"; path = "Resources/Artwork/bkg_categories@2x.png"; sourceTree = "<group>"; };
 		DA06F6491B0BDD77000BCA46 /* bkg_dark_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bkg_dark_header.png; path = Resources/Artwork/bkg_dark_header.png; sourceTree = "<group>"; };
 		DA06F64A1B0BDD77000BCA46 /* bkg_dark_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bkg_dark_header@2x.png"; path = "Resources/Artwork/bkg_dark_header@2x.png"; sourceTree = "<group>"; };
-		DA06F64B1B0BDD77000BCA46 /* BLE_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BLE_Button@2x.png"; path = "Resources/Artwork/BLE_Button@2x.png"; sourceTree = "<group>"; };
-		DA06F64C1B0BDD77000BCA46 /* BLE_connected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BLE_connected@2x.png"; path = "Resources/Artwork/BLE_connected@2x.png"; sourceTree = "<group>"; };
 		DA06F64D1B0BDD77000BCA46 /* BLE_Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BLE_Logo@2x.png"; path = "Resources/Artwork/BLE_Logo@2x.png"; sourceTree = "<group>"; };
 		DA06F64E1B0BDD77000BCA46 /* BLE_photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BLE_photo@2x.png"; path = "Resources/Artwork/BLE_photo@2x.png"; sourceTree = "<group>"; };
 		DA06F6631B0BDD77000BCA46 /* btn_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_add.png; path = Resources/Artwork/btn_add.png; sourceTree = "<group>"; };
@@ -2092,6 +2093,9 @@
 		DAA8E9EE1B1EDCB400BC870C /* ico_nav_directory_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ico_nav_directory_dark.png; path = Resources/Artwork/ico_nav_directory_dark.png; sourceTree = "<group>"; };
 		DAA8E9EF1B1EDCB400BC870C /* ico_nav_directory_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico_nav_directory_dark@2x.png"; path = "Resources/Artwork/ico_nav_directory_dark@2x.png"; sourceTree = "<group>"; };
 		DAA8E9F01B1EDCB400BC870C /* ico_nav_directory_dark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico_nav_directory_dark@3x.png"; path = "Resources/Artwork/ico_nav_directory_dark@3x.png"; sourceTree = "<group>"; };
+		DAA8E9FA1B1F93B800BC870C /* bitcoin_symbol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bitcoin_symbol.png; path = Resources/Artwork/bitcoin_symbol.png; sourceTree = "<group>"; };
+		DAA8E9FB1B1F93B800BC870C /* bitcoin_symbol@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bitcoin_symbol@2x.png"; path = "Resources/Artwork/bitcoin_symbol@2x.png"; sourceTree = "<group>"; };
+		DAA8E9FC1B1F93B800BC870C /* bitcoin_symbol@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bitcoin_symbol@3x.png"; path = "Resources/Artwork/bitcoin_symbol@3x.png"; sourceTree = "<group>"; };
 		DAA99D611AFDD49200A0E26E /* ButtonSelectorView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonSelectorView2.xib; sourceTree = "<group>"; };
 		DAA99D671AFDD49E00A0E26E /* ButtonSelectorView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonSelectorView2.m; sourceTree = "<group>"; };
 		DAA99D691AFDD4AC00A0E26E /* ButtonSelectorView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonSelectorView2.h; sourceTree = "<group>"; };
@@ -2850,14 +2854,15 @@
 				DA06F6421B0BDD77000BCA46 /* bd_icon_yelp@2x.png */,
 				DA06F6431B0BDD77000BCA46 /* bd_sliderbubble.png */,
 				DA06F6441B0BDD77000BCA46 /* bd_sliderbubble@2x.png */,
+				DAA8E9FA1B1F93B800BC870C /* bitcoin_symbol.png */,
+				DAA8E9FB1B1F93B800BC870C /* bitcoin_symbol@2x.png */,
+				DAA8E9FC1B1F93B800BC870C /* bitcoin_symbol@3x.png */,
 				DA06F6451B0BDD77000BCA46 /* bitCoinAnnotation.png */,
 				DA06F6461B0BDD77000BCA46 /* bitCoinAnnotation@2x.png */,
 				DA06F6471B0BDD77000BCA46 /* bkg_categories.png */,
 				DA06F6481B0BDD77000BCA46 /* bkg_categories@2x.png */,
 				DA06F6491B0BDD77000BCA46 /* bkg_dark_header.png */,
 				DA06F64A1B0BDD77000BCA46 /* bkg_dark_header@2x.png */,
-				DA06F64B1B0BDD77000BCA46 /* BLE_Button@2x.png */,
-				DA06F64C1B0BDD77000BCA46 /* BLE_connected@2x.png */,
 				DA06F64D1B0BDD77000BCA46 /* BLE_Logo@2x.png */,
 				DA06F64E1B0BDD77000BCA46 /* BLE_photo@2x.png */,
 				DA06F6631B0BDD77000BCA46 /* btn_add.png */,
@@ -3593,6 +3598,7 @@
 				7D98AD6719A7C550003D2BF6 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DA06FA021B0BDD79000BCA46 /* icon_location@2x.png in Resources */,
 				7D987AFD1A48BA8C00958AAD /* BitcoinReceivedPartial.mp3 in Resources */,
+				DAA8EA011B1F93B800BC870C /* bitcoin_symbol@2x.png in Resources */,
 				DAA8E9CA1B1ED50B00BC870C /* icon_category_electronics@2x.png in Resources */,
 				DA06FAD41B0BDD79000BCA46 /* thumb.png in Resources */,
 				DA06F9001B0BDD79000BCA46 /* btn_right.png in Resources */,
@@ -3647,7 +3653,6 @@
 				DA06F7861B0BDD79000BCA46 /* bd_icon_facebook.png in Resources */,
 				DA06FA771B0BDD79000BCA46 /* postcard-mountain@2x.png in Resources */,
 				7DAD01F91A327441002C4A30 /* infoSpendingLimits.html in Resources */,
-				DA06F7CE1B0BDD79000BCA46 /* BLE_Button@2x.png in Resources */,
 				7D98ADC619A7C550003D2BF6 /* Lato-Hairline.ttf in Resources */,
 				DA06F9481B0BDD79000BCA46 /* btn_unselected@2x.png in Resources */,
 				DA06F9BA1B0BDD79000BCA46 /* icon_bitcoin_dark@2x.png in Resources */,
@@ -3659,6 +3664,7 @@
 				DA06F7AD1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06F9601B0BDD79000BCA46 /* darken_bottom_table_cell@2x.png in Resources */,
 				DA06FB041B0CC107000BCA46 /* gift_box@2x.png in Resources */,
+				DAA8E9FE1B1F93B800BC870C /* bitcoin_symbol.png in Resources */,
 				DA06FB3A1B0FEF32000BCA46 /* PopupPickerView2.xib in Resources */,
 				DA06F9A21B0BDD79000BCA46 /* h_seperator@2x.png in Resources */,
 				DAA8E9C11B1ED50B00BC870C /* icon_category_coffee_tea@2x.png in Resources */,
@@ -3703,6 +3709,7 @@
 				7D98AE0619A7C550003D2BF6 /* WalletExportPDF.pdf in Resources */,
 				DA06FA111B0BDD79000BCA46 /* icon_not_approved@2x.png in Resources */,
 				7D98AE0919A7C550003D2BF6 /* infoRequestQR.html in Resources */,
+				DAA8EA041B1F93B800BC870C /* bitcoin_symbol@3x.png in Resources */,
 				DA06FA3E1B0BDD79000BCA46 /* icon_wallet.png in Resources */,
 				7D98AE1019A7C550003D2BF6 /* Lato-HairlineItalic.ttf in Resources */,
 				DA06FB181B0EB355000BCA46 /* FadingAlertViewNew.xib in Resources */,
@@ -3775,7 +3782,6 @@
 				DA06F7B61B0BDD79000BCA46 /* bd_sliderbubble.png in Resources */,
 				7D98AE7619A7C550003D2BF6 /* infoImportWallet.html in Resources */,
 				7D98AE7A19A7C550003D2BF6 /* infoRequest.html in Resources */,
-				DA06F7D11B0BDD79000BCA46 /* BLE_connected@2x.png in Resources */,
 				DA06F9BD1B0BDD79000BCA46 /* icon_bitcoin_light.png in Resources */,
 				7D98AE8819A7C550003D2BF6 /* InfoPlist.strings in Resources */,
 				DA06FA531B0BDD79000BCA46 /* large-digit-input@2x.png in Resources */,
@@ -3893,6 +3899,7 @@
 				B5FD393118EFC35A00BE2670 /* WalletMakerView~iphone.xib in Resources */,
 				DA06FA011B0BDD79000BCA46 /* icon_location@2x.png in Resources */,
 				B5137C0718A40A8400DA4A34 /* Lato-Black.ttf in Resources */,
+				DAA8EA001B1F93B800BC870C /* bitcoin_symbol@2x.png in Resources */,
 				B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DAA8E9C91B1ED50B00BC870C /* icon_category_electronics@2x.png in Resources */,
 				DA06FAD31B0BDD79000BCA46 /* thumb.png in Resources */,
@@ -3948,7 +3955,6 @@
 				DA06F7851B0BDD79000BCA46 /* bd_icon_facebook.png in Resources */,
 				DA06FA761B0BDD79000BCA46 /* postcard-mountain@2x.png in Resources */,
 				B5137C1218A40A8400DA4A34 /* Montserrat-Regular.ttf in Resources */,
-				DA06F7CD1B0BDD79000BCA46 /* BLE_Button@2x.png in Resources */,
 				B5137C0918A40A8400DA4A34 /* Lato-Bold.ttf in Resources */,
 				DA06F9471B0BDD79000BCA46 /* btn_unselected@2x.png in Resources */,
 				DA06F9B91B0BDD79000BCA46 /* icon_bitcoin_dark@2x.png in Resources */,
@@ -3959,6 +3965,7 @@
 				DA06F7CA1B0BDD79000BCA46 /* bkg_dark_header@2x.png in Resources */,
 				DA06F7AC1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06F95F1B0BDD79000BCA46 /* darken_bottom_table_cell@2x.png in Resources */,
+				DAA8E9FD1B1F93B800BC870C /* bitcoin_symbol.png in Resources */,
 				DA06FB031B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA06FB341B0FEF0F000BCA46 /* PopupPickerView2.xib in Resources */,
 				DAA8E9C01B1ED50B00BC870C /* icon_category_coffee_tea@2x.png in Resources */,
@@ -4003,6 +4010,7 @@
 				DA06F9261B0BDD79000BCA46 /* btn_slider.png in Resources */,
 				4C5D8C6B192E6BC30015BB3C /* infoSettings.html in Resources */,
 				DA06FA101B0BDD79000BCA46 /* icon_not_approved@2x.png in Resources */,
+				DAA8EA031B1F93B800BC870C /* bitcoin_symbol@3x.png in Resources */,
 				4C7C1256193D2CFC0096338D /* WalletExportPDF.pdf in Resources */,
 				DA06FA3D1B0BDD79000BCA46 /* icon_wallet.png in Resources */,
 				DABA3486198DFEE300EFAB13 /* infoRequestQR.html in Resources */,
@@ -4075,7 +4083,6 @@
 				DA06F7B51B0BDD79000BCA46 /* bd_sliderbubble.png in Resources */,
 				B5FD393618F0A67100BE2670 /* transactionDetails.html in Resources */,
 				B57C209818C2502D005D7245 /* BalanceView~iphone.xib in Resources */,
-				DA06F7D01B0BDD79000BCA46 /* BLE_connected@2x.png in Resources */,
 				DA06F9BC1B0BDD79000BCA46 /* icon_bitcoin_light.png in Resources */,
 				7D8B59C61A328895000AC178 /* HockeySDKResources.bundle in Resources */,
 				DA06FA521B0BDD79000BCA46 /* large-digit-input@2x.png in Resources */,
@@ -4193,6 +4200,7 @@
 				DAE864C41A88A58A00A17BD3 /* WalletMakerView~iphone.xib in Resources */,
 				DA06FA031B0BDD79000BCA46 /* icon_location@2x.png in Resources */,
 				DAE864CC1A88A58A00A17BD3 /* Lato-Black.ttf in Resources */,
+				DAA8EA021B1F93B800BC870C /* bitcoin_symbol@2x.png in Resources */,
 				DAE864D01A88A58A00A17BD3 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DAA8E9CB1B1ED50B00BC870C /* icon_category_electronics@2x.png in Resources */,
 				DA06FAD51B0BDD79000BCA46 /* thumb.png in Resources */,
@@ -4248,7 +4256,6 @@
 				DA06F7871B0BDD79000BCA46 /* bd_icon_facebook.png in Resources */,
 				DA06FA781B0BDD79000BCA46 /* postcard-mountain@2x.png in Resources */,
 				DAE8651C1A88A58A00A17BD3 /* Montserrat-Regular.ttf in Resources */,
-				DA06F7CF1B0BDD79000BCA46 /* BLE_Button@2x.png in Resources */,
 				DAE865231A88A58A00A17BD3 /* Lato-Bold.ttf in Resources */,
 				DA06F9491B0BDD79000BCA46 /* btn_unselected@2x.png in Resources */,
 				DA06F9BB1B0BDD79000BCA46 /* icon_bitcoin_dark@2x.png in Resources */,
@@ -4259,6 +4266,7 @@
 				DA06F7CC1B0BDD79000BCA46 /* bkg_dark_header@2x.png in Resources */,
 				DA06F7AE1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06F9611B0BDD79000BCA46 /* darken_bottom_table_cell@2x.png in Resources */,
+				DAA8E9FF1B1F93B800BC870C /* bitcoin_symbol.png in Resources */,
 				DA06FB051B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA06FB3B1B0FEF33000BCA46 /* PopupPickerView2.xib in Resources */,
 				DAA8E9C21B1ED50B00BC870C /* icon_category_coffee_tea@2x.png in Resources */,
@@ -4303,6 +4311,7 @@
 				DA06F9281B0BDD79000BCA46 /* btn_slider.png in Resources */,
 				DAE865781A88A58A00A17BD3 /* infoSettings.html in Resources */,
 				DA06FA121B0BDD79000BCA46 /* icon_not_approved@2x.png in Resources */,
+				DAA8EA051B1F93B800BC870C /* bitcoin_symbol@3x.png in Resources */,
 				DAE8657B1A88A58A00A17BD3 /* WalletExportPDF.pdf in Resources */,
 				DA06FA3F1B0BDD79000BCA46 /* icon_wallet.png in Resources */,
 				DAE8657F1A88A58A00A17BD3 /* infoRequestQR.html in Resources */,
@@ -4375,7 +4384,6 @@
 				DA06F7B71B0BDD79000BCA46 /* bd_sliderbubble.png in Resources */,
 				DAE865E21A88A58A00A17BD3 /* transactionDetails.html in Resources */,
 				DAE865EB1A88A58A00A17BD3 /* BalanceView~iphone.xib in Resources */,
-				DA06F7D21B0BDD79000BCA46 /* BLE_connected@2x.png in Resources */,
 				DA06F9BE1B0BDD79000BCA46 /* icon_bitcoin_light.png in Resources */,
 				DAE865ED1A88A58A00A17BD3 /* HockeySDKResources.bundle in Resources */,
 				DA06FA541B0BDD79000BCA46 /* large-digit-input@2x.png in Resources */,
