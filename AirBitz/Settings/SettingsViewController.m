@@ -380,23 +380,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _signUpController.mode = mode;
     _signUpController.delegate = self;
 
-    CGRect frame = self.view.bounds;
-    frame.origin.x = frame.size.width;
-    _signUpController.view.frame = frame;
-    [self.view addSubview:_signUpController.view];
-
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-     {
-         _signUpController.view.frame = self.view.bounds;
-     }
-                     completion:^(BOOL finished)
-     {
-         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-     }];
+    [Util addSubviewControllerWithConstraints:self.view child:_signUpController];
+    [MainViewController animateSlideIn:_signUpController];
 }
 
 - (void)bringUpRecoveryQuestionsView
