@@ -387,7 +387,7 @@
                                             <outlet property="titleLabel" destination="baO-FH-Oy4" id="N57-hN-TZC"/>
                                         </connections>
                                     </view>
-                                    <view opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JMV-gs-E3H" userLabel="Spinner View">
+                                    <view hidden="YES" opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JMV-gs-E3H" userLabel="Spinner View">
                                         <rect key="frame" x="0.0" y="327" width="320" height="241"/>
                                         <subviews>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9ws-q3-jPv">

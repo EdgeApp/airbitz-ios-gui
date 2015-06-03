@@ -619,7 +619,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	{
 		if(self.businessDetails)
 		{
-//			[hoursCell.activityView stopAnimating];
+			[self.activityView stopAnimating];
 			NSArray *operatingDays = [self.businessDetails objectForKey:@"hours"];
 			NSMutableString *dayString = [[NSMutableString alloc] init];
 			NSMutableString *hoursString = [[NSMutableString alloc] init];
