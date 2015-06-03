@@ -385,9 +385,9 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xky-Rp-Nkh" customClass="StylizedButton">
-                                                            <rect key="frame" x="20" y="20" width="280" height="41"/>
-                                                            <color key="backgroundColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xky-Rp-Nkh" customClass="StylizedButton">
+                                                            <rect key="frame" x="0.0" y="7" width="320" height="41"/>
+                                                            <color key="backgroundColor" red="0.1333333333" green="0.56862745100000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="41" id="S09-eS-0zz"/>
@@ -402,8 +402,8 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="Xky-Rp-Nkh" firstAttribute="leading" secondItem="GNG-c4-rk8" secondAttribute="leading" constant="20" symbolic="YES" id="6We-LB-XgL"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Xky-Rp-Nkh" secondAttribute="trailing" constant="20" symbolic="YES" id="8Ik-De-BdN"/>
+                                                        <constraint firstItem="Xky-Rp-Nkh" firstAttribute="leading" secondItem="GNG-c4-rk8" secondAttribute="leading" id="6We-LB-XgL"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Xky-Rp-Nkh" secondAttribute="trailing" id="8Ik-De-BdN"/>
                                                         <constraint firstAttribute="centerY" secondItem="Xky-Rp-Nkh" secondAttribute="centerY" id="Zai-hB-Y0y"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
@@ -581,7 +581,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="th1-bn-E4x">
                                 <rect key="frame" x="0.0" y="568" width="188" height="50"/>
-                                <color key="backgroundColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.1333333333" green="0.56862745100000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="rew-A0-cMF"/>
                                 </constraints>
