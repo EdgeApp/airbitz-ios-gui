@@ -1994,7 +1994,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wG6-fp-MyP" userLabel="BlurView" customClass="BlurView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wG6-fp-MyP" userLabel="BlurView" customClass="BlurView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
@@ -2040,10 +2040,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wG6-fp-MyP" firstAttribute="leading" secondItem="fIu-Iy-bQP" secondAttribute="leadingMargin" constant="-16" id="AGF-82-XON"/>
                             <constraint firstAttribute="trailing" secondItem="XIU-xj-Hef" secondAttribute="trailing" id="G3I-Tv-JU9"/>
+                            <constraint firstItem="wG6-fp-MyP" firstAttribute="top" secondItem="fIu-Iy-bQP" secondAttribute="topMargin" id="YRf-Py-SQo"/>
                             <constraint firstAttribute="bottom" secondItem="XIU-xj-Hef" secondAttribute="bottom" id="d4K-ig-LLw"/>
                             <constraint firstItem="XIU-xj-Hef" firstAttribute="leading" secondItem="fIu-Iy-bQP" secondAttribute="leading" id="ehf-En-1hp"/>
+                            <constraint firstItem="Vxj-3f-WPc" firstAttribute="top" secondItem="wG6-fp-MyP" secondAttribute="bottom" id="ndX-Al-w4N"/>
                             <constraint firstItem="XIU-xj-Hef" firstAttribute="top" secondItem="fIu-Iy-bQP" secondAttribute="top" constant="62" id="oKd-11-OBI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wG6-fp-MyP" secondAttribute="trailing" constant="-16" id="ywv-qb-VVu"/>
                         </constraints>
                     </view>
                     <connections>
