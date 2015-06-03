@@ -182,6 +182,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     // create a dummy view to replace the keyboard if we are on a 4.5" screen
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     [self.segmentedControlBTCUSD setTitle:[User Singleton].denominationLabel forSegmentAtIndex:1];
+    _btcLabel.text = [User Singleton].denominationLabel;
+
     self.BTC_TextField.inputView = dummyView;
     self.USD_TextField.inputView = dummyView;
 	self.BTC_TextField.delegate = self;
