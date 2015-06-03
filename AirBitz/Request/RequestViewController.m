@@ -214,7 +214,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     [self changeTopField:true animate:false];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
 
@@ -571,9 +570,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         addressString = strRequestAddress;
         _uriString = strRequestURI;
-        [CoreBridge prioritizeAddress:addressString inWallet:[CoreBridge Singleton].currentWallet.strUUID];
 
         dispatch_async(dispatch_get_main_queue(),^{
+            [CoreBridge prioritizeAddress:addressString inWallet:[CoreBridge Singleton].currentWallet.strUUID];
             self.statusLine3.text = addressString;
             self.qrCodeImageView.image = qrImage;
         });
