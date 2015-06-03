@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jDp-Og-qtC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jDp-Og-qtC">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -1976,7 +1976,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wG6-fp-MyP" userLabel="BlurView" customClass="BlurView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wG6-fp-MyP" userLabel="BlurView" customClass="BlurView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
@@ -2022,10 +2022,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wG6-fp-MyP" firstAttribute="leading" secondItem="fIu-Iy-bQP" secondAttribute="leadingMargin" constant="-16" id="AGF-82-XON"/>
                             <constraint firstAttribute="trailing" secondItem="XIU-xj-Hef" secondAttribute="trailing" id="G3I-Tv-JU9"/>
+                            <constraint firstItem="wG6-fp-MyP" firstAttribute="top" secondItem="fIu-Iy-bQP" secondAttribute="topMargin" id="YRf-Py-SQo"/>
                             <constraint firstAttribute="bottom" secondItem="XIU-xj-Hef" secondAttribute="bottom" id="d4K-ig-LLw"/>
                             <constraint firstItem="XIU-xj-Hef" firstAttribute="leading" secondItem="fIu-Iy-bQP" secondAttribute="leading" id="ehf-En-1hp"/>
+                            <constraint firstItem="Vxj-3f-WPc" firstAttribute="top" secondItem="wG6-fp-MyP" secondAttribute="bottom" id="ndX-Al-w4N"/>
                             <constraint firstItem="XIU-xj-Hef" firstAttribute="top" secondItem="fIu-Iy-bQP" secondAttribute="top" constant="62" id="oKd-11-OBI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wG6-fp-MyP" secondAttribute="trailing" constant="-16" id="ywv-qb-VVu"/>
                         </constraints>
                     </view>
                     <connections>
