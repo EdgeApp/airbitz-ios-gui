@@ -119,6 +119,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 //    if (IS_IPHONE4)
     {
         self.heightListings = 90.0;
+        self.heightLoginScreenLogo = 70;
         self.heightWalletHeader = 44.0;
         self.heightSearchClues = 35.0;
         self.fadingAlertDropdownHeight = 80;
@@ -135,6 +136,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     if (IS_MIN_IPHONE5)
     {
         self.heightListings = 110.0;
+        self.heightLoginScreenLogo = 100;
         self.heightWalletHeader = 50.0;
         self.heightSearchClues = 40.0;
         self.heightBLETableCells = 55;
@@ -142,8 +144,8 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     }
     if (IS_MIN_IPHONE6)
     {
-        self.heightListings = 120.0;
         self.heightSearchClues = 45.0;
+        self.heightLoginScreenLogo = 120;
         self.heightBLETableCells = 65;
         self.heightPopupPicker = 60;
         self.heightSettingsTableCell            = 45.0;

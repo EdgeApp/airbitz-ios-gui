@@ -2593,7 +2593,7 @@
                                         <size key="shadowOffset" width="2" height="2"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpH-FO-ztL" userLabel="View - Username Pwd">
-                                        <rect key="frame" x="28" y="169" width="320" height="147"/>
+                                        <rect key="frame" x="28" y="161" width="320" height="147"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z92-xY-Nti" userLabel="View username picker" customClass="PickerTextView">
                                                 <rect key="frame" x="34" y="20" width="251" height="35"/>
@@ -2645,7 +2645,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHf-E8-N2q" userLabel="View - PIN and Username">
-                                        <rect key="frame" x="27" y="169" width="320" height="200"/>
+                                        <rect key="frame" x="27" y="161" width="320" height="200"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIc-w4-vLL" userLabel="View - PINCode" customClass="APPINView">
                                                 <rect key="frame" x="53" y="58" width="214" height="44"/>
@@ -2714,7 +2714,7 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUp-i4-uHt" userLabel="View - Create / Forgot">
-                                        <rect key="frame" x="28" y="324" width="320" height="107"/>
+                                        <rect key="frame" x="28" y="316" width="320" height="107"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iz-Uc-LTS" customClass="StylizedButton">
                                                 <rect key="frame" x="35" y="20" width="251" height="44"/>
@@ -2763,12 +2763,12 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="8XB-1A-1hO" secondAttribute="bottom" constant="20" symbolic="YES" id="524-9z-4e0"/>
                                     <constraint firstItem="LqE-iy-sKS" firstAttribute="top" secondItem="eTI-9q-uu0" secondAttribute="top" constant="20" symbolic="YES" id="6iW-d6-Qv9"/>
-                                    <constraint firstItem="kpH-FO-ztL" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" constant="8" symbolic="YES" id="AnO-5K-GCi"/>
+                                    <constraint firstItem="kpH-FO-ztL" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" id="AnO-5K-GCi"/>
                                     <constraint firstItem="nae-d6-xoW" firstAttribute="centerX" secondItem="LqE-iy-sKS" secondAttribute="centerX" id="DX0-zg-toi"/>
                                     <constraint firstItem="jLL-vF-Vbd" firstAttribute="centerY" secondItem="8XB-1A-1hO" secondAttribute="centerY" id="HhJ-C4-KBO"/>
                                     <constraint firstItem="nae-d6-xoW" firstAttribute="top" secondItem="LqE-iy-sKS" secondAttribute="bottom" constant="8" symbolic="YES" id="NZO-G9-2kT"/>
                                     <constraint firstAttribute="centerX" secondItem="BHf-E8-N2q" secondAttribute="centerX" id="Orr-nz-wcl"/>
-                                    <constraint firstItem="BHf-E8-N2q" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" constant="8" symbolic="YES" id="TAl-3p-bP9"/>
+                                    <constraint firstItem="BHf-E8-N2q" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" id="TAl-3p-bP9"/>
                                     <constraint firstAttribute="centerX" secondItem="8XB-1A-1hO" secondAttribute="centerX" id="UZF-mI-uqs"/>
                                     <constraint firstAttribute="centerX" secondItem="nae-d6-xoW" secondAttribute="centerX" id="Wg7-nU-ecP"/>
                                     <constraint firstAttribute="centerX" secondItem="bUp-i4-uHt" secondAttribute="centerX" id="Yqx-ez-xtP"/>

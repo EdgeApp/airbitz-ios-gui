@@ -63,7 +63,7 @@ typedef enum eLoginMode
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *usernameHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordHeight;
-@property (weak, nonatomic) IBOutlet UIButton *forgotPassworddButton;
+@property (weak, nonatomic) IBOutlet UIButton           *forgotPassworddButton;
 @property (weak, nonatomic) IBOutlet APPINView          *PINCodeView;
 @property (weak, nonatomic) IBOutlet ButtonSelectorView *PINusernameSelector;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textBitcoinWalletHeight;
@@ -121,7 +121,7 @@ static BOOL bInitialized = false;
     if (!bInitialized)
     {
         bInitialized = true;
-        _originalLogoHeight = self.logoHeight.constant;
+        _originalLogoHeight = self.logoHeight.constant = [Theme Singleton].heightLoginScreenLogo;
         _originalTextBitcoinWalletHeight = self.textBitcoinWalletHeight.constant;
         _originalUsernameHeight = self.usernameHeight.constant;
         _originalPasswordHeight = self.passwordHeight.constant;
@@ -629,7 +629,7 @@ static BOOL bInitialized = false;
                      [self.usernameSelector updateChoices:self.arrayAccounts];
                  }
 
-                 self.logoHeight.constant = _originalLogoHeight / 2;
+                 self.logoHeight.constant = _originalLogoHeight * 0.75;
                  self.textBitcoinWalletHeight.constant = 0;
 
                  [self.view layoutIfNeeded];

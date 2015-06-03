@@ -74,6 +74,7 @@
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
 @property (nonatomic) CGFloat elementPadding;
 @property (nonatomic) CGFloat heightListings;
+@property (nonatomic) CGFloat heightLoginScreenLogo;
 @property (nonatomic) CGFloat heightSearchClues;
 @property (nonatomic) CGFloat heightBLETableCells;
 @property (nonatomic) UIImage *backgroundLogin;
