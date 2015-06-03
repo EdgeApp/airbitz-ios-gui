@@ -244,7 +244,6 @@
 		7D98AD5B19A7C550003D2BF6 /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */; };
 		7D98AD6319A7C550003D2BF6 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFA18A40A8400DA4A34 /* Lato-Black.ttf */; };
 		7D98AD6719A7C550003D2BF6 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
-		7D98AD7219A7C550003D2BF6 /* InfoView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B561E1A418D2572D002DCDC2 /* InfoView~ipad.xib */; };
 		7D98AD8319A7C550003D2BF6 /* infoTransactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6E192E7D4A0015BB3C /* infoTransactionDetails.html */; };
 		7D98AD8519A7C550003D2BF6 /* PopupPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C3090191834AC006923DE /* PopupPickerView.xib */; };
 		7D98AD9E19A7C550003D2BF6 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137C0318A40A8400DA4A34 /* Lato-Regular.ttf */; };
@@ -349,7 +348,6 @@
 		B55A031D18EB569000845090 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55A031C18EB569000845090 /* CategoriesViewController.m */; };
 		B55D0FE818E233A80035DCC8 /* MinCharTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B55D0FE718E233A80035DCC8 /* MinCharTextField.m */; };
 		B561E1A618D2572D002DCDC2 /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B561E1A318D2572D002DCDC2 /* InfoView.m */; };
-		B561E1A718D2572D002DCDC2 /* InfoView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B561E1A418D2572D002DCDC2 /* InfoView~ipad.xib */; };
 		B561E1A818D2572D002DCDC2 /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B561E1A518D2572D002DCDC2 /* InfoView~iphone.xib */; };
 		B561E1AB18D2573F002DCDC2 /* DarkenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B561E1AA18D2573F002DCDC2 /* DarkenView.m */; };
 		B5628BE6199BD44D0077DA1C /* BLEScanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5628BE5199BD44D0077DA1C /* BLEScanCell.m */; };
@@ -1365,7 +1363,6 @@
 		DAE864C41A88A58A00A17BD3 /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FD393018EFC35A00BE2670 /* WalletMakerView~iphone.xib */; };
 		DAE864CC1A88A58A00A17BD3 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFA18A40A8400DA4A34 /* Lato-Black.ttf */; };
 		DAE864D01A88A58A00A17BD3 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
-		DAE864D81A88A58A00A17BD3 /* InfoView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B561E1A418D2572D002DCDC2 /* InfoView~ipad.xib */; };
 		DAE864E81A88A58A00A17BD3 /* infoTransactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6E192E7D4A0015BB3C /* infoTransactionDetails.html */; };
 		DAE864EA1A88A58A00A17BD3 /* PopupPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C3090191834AC006923DE /* PopupPickerView.xib */; };
 		DAE865001A88A58A00A17BD3 /* infoSpendingLimits.html in Resources */ = {isa = PBXBuildFile; fileRef = 687D2E7B1A09638200F1F9D1 /* infoSpendingLimits.html */; };
@@ -1700,7 +1697,6 @@
 		B55D0FE718E233A80035DCC8 /* MinCharTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MinCharTextField.m; path = AirBitz/MinCharTextField.m; sourceTree = SOURCE_ROOT; };
 		B561E1A218D2572D002DCDC2 /* InfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoView.h; sourceTree = "<group>"; };
 		B561E1A318D2572D002DCDC2 /* InfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoView.m; sourceTree = "<group>"; };
-		B561E1A418D2572D002DCDC2 /* InfoView~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InfoView~ipad.xib"; sourceTree = "<group>"; };
 		B561E1A518D2572D002DCDC2 /* InfoView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InfoView~iphone.xib"; sourceTree = "<group>"; };
 		B561E1A918D2573F002DCDC2 /* DarkenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DarkenView.h; sourceTree = "<group>"; };
 		B561E1AA18D2573F002DCDC2 /* DarkenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DarkenView.m; sourceTree = "<group>"; };
@@ -2735,7 +2731,6 @@
 				B5137C1918A41A4E00DA4A34 /* DL_URLServer */,
 				B561E1A218D2572D002DCDC2 /* InfoView.h */,
 				B561E1A318D2572D002DCDC2 /* InfoView.m */,
-				B561E1A418D2572D002DCDC2 /* InfoView~ipad.xib */,
 				B561E1A518D2572D002DCDC2 /* InfoView~iphone.xib */,
 				B5137C1318A40EDA00DA4A34 /* LatoLabel.h */,
 				B5137C1418A40EDA00DA4A34 /* LatoLabel.m */,
@@ -3598,7 +3593,6 @@
 				7D98AD6719A7C550003D2BF6 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DA06FA021B0BDD79000BCA46 /* icon_location@2x.png in Resources */,
 				7D987AFD1A48BA8C00958AAD /* BitcoinReceivedPartial.mp3 in Resources */,
-				7D98AD7219A7C550003D2BF6 /* InfoView~ipad.xib in Resources */,
 				DAA8E9CA1B1ED50B00BC870C /* icon_category_electronics@2x.png in Resources */,
 				DA06FAD41B0BDD79000BCA46 /* thumb.png in Resources */,
 				DA06F9001B0BDD79000BCA46 /* btn_right.png in Resources */,
@@ -3908,7 +3902,6 @@
 				DAA8E9D51B1ED50B00BC870C /* icon_category_gift_cards@3x.png in Resources */,
 				DA06FA461B0BDD79000BCA46 /* img_collapseExpandBlueDown@2x.png in Resources */,
 				DA06F78E1B0BDD79000BCA46 /* bd_icon_foursquare@2x.png in Resources */,
-				B561E1A718D2572D002DCDC2 /* InfoView~ipad.xib in Resources */,
 				DA06F9EC1B0BDD79000BCA46 /* icon_export_printer.png in Resources */,
 				DA06F9951B0BDD79000BCA46 /* flash-on@2x.png in Resources */,
 				4C5D8C73192E7D4A0015BB3C /* infoTransactionDetails.html in Resources */,
@@ -4209,7 +4202,6 @@
 				DAA8E9D71B1ED50B00BC870C /* icon_category_gift_cards@3x.png in Resources */,
 				DA06FA481B0BDD79000BCA46 /* img_collapseExpandBlueDown@2x.png in Resources */,
 				DA06F7901B0BDD79000BCA46 /* bd_icon_foursquare@2x.png in Resources */,
-				DAE864D81A88A58A00A17BD3 /* InfoView~ipad.xib in Resources */,
 				DA06F9EE1B0BDD79000BCA46 /* icon_export_printer.png in Resources */,
 				DA06F9971B0BDD79000BCA46 /* flash-on@2x.png in Resources */,
 				DAE864E81A88A58A00A17BD3 /* infoTransactionDetails.html in Resources */,

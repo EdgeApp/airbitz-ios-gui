@@ -9,11 +9,11 @@
 #import "DarkenView.h"
 #import "MainViewController.h"
 
-@interface InfoView () <DarkenViewDelegate, UIWebViewDelegate>
+@interface InfoView () <UIWebViewDelegate>
 {
 }
 
-@property (nonatomic, weak) IBOutlet DarkenView *darkenView;
+@property (nonatomic, weak) IBOutlet BlurView *darkenView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
 @end
@@ -24,16 +24,7 @@
 + (InfoView *)CreateWithDelegate:(id<InfoViewDelegate>)delegate
 {
 	InfoView *iv;
-	
-//	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-//	{
-		iv = [[[NSBundle mainBundle] loadNibNamed:@"InfoView~iphone" owner:nil options:nil] objectAtIndex:0];
-//	}
-//	else
-//	{
-//		iv = [[[NSBundle mainBundle] loadNibNamed:@"InfoView~ipad" owner:nil options:nil] objectAtIndex:0];
-//		
-//	}
+    iv = [[[NSBundle mainBundle] loadNibNamed:@"InfoView~iphone" owner:nil options:nil] objectAtIndex:0];
 	iv.delegate = delegate;
 	return iv;
 }
@@ -75,7 +66,6 @@
 	self.webView.delegate = self;
 	
 	
-	self.darkenView.delegate = self;
 	self.darkenView.alpha = 0.0;
 	self.contentView.alpha = 0.0;
 	self.contentView.transform = CGAffineTransformMakeScale(0.7, 0.7);
@@ -176,12 +166,6 @@
      {
          [self removeFromSuperview];
      }
-}
-
-
--(void)DarkenViewTapped:(DarkenView *)view
-{
-	[self Done:nil];
 }
 
 #pragma mark UIWebView delegates

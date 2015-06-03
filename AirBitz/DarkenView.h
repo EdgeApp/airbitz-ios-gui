@@ -6,10 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BlurView.h"
 
 @protocol DarkenViewDelegate;
 
-@interface DarkenView : UIView
+@interface DarkenView : BlurView
 
 @property (assign) id<DarkenViewDelegate> delegate;
 
