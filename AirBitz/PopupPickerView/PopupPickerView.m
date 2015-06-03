@@ -224,9 +224,9 @@ CGRect keyboardFrame;
     // if this is above or below
     if ((PopupPickerPosition_Below == position) || (PopupPickerPosition_Above == position))
     {
-        // set the X position directly under the center of the positioning view
-        newFrame.origin.x += (viewToPointTo.frame.size.width / 2);        // move to center of view
-        newFrame.origin.x -= (popup.frame.size.width / 2);          // bring it left so the center is under the view 
+//        // set the X position directly under the center of the positioning view
+//        newFrame.origin.x += (viewToPointTo.frame.size.width / 2);        // move to center of view
+//        newFrame.origin.x -= (popup.frame.size.width / 2);          // bring it left so the center is under the view
         
         if (PopupPickerPosition_Below == position)
         {
@@ -240,64 +240,34 @@ CGRect keyboardFrame;
             newFrame.origin.y -= newFrame.size.height;
 //            newFrame.origin.y -= popup.arrowImage.frame.size.height - 10;  // offset by arrow height
         }
-        
-        // makes sure the picker is within the parents bounds
-        if (newFrame.origin.x < 0.0)
-        {
-            newFrame.origin.x = 0.0;
-        }
-        else if ((newFrame.origin.x + newFrame.size.width) > parentFrameSize.width)
-        {
-            // it's off the right side of the window so bring it back
-            newFrame.origin.x = parentFrameSize.width - newFrame.size.width;
-        }
-        
+//
+//        // makes sure the picker is within the parents bounds
+//        if (newFrame.origin.x < 0.0)
+//        {
+//            newFrame.origin.x = 0.0;
+//        }
+//        else if ((newFrame.origin.x + newFrame.size.width) > parentFrameSize.width)
+//        {
+//            // it's off the right side of the window so bring it back
+//            newFrame.origin.x = parentFrameSize.width - newFrame.size.width;
+//        }
+//
 		float heightSubtract = 0.0;
 		CGRect frameInWindow = [viewToPointTo convertRect:newFrame toView:viewToPointTo.window];
 		if((frameInWindow.origin.y + frameInWindow.size.height) > (usableFrame.origin.y + usableFrame.size.height))
 		{
 			heightSubtract = (frameInWindow.origin.y + frameInWindow.size.height) - (usableFrame.origin.y + usableFrame.size.height);
 		}
-//		newFrame.size.height -= heightSubtract;
+		newFrame.size.height -= heightSubtract;
 
         //
         // We want full width!!
         //
+        newFrame.origin.x = 0;
         newFrame.size.width = [MainViewController getWidth];
         // set the new frame
         popup.frame = newFrame;
         
-        // set up the pointer position
-        /*
-        CGRect arrowFrame = popup.arrowImage.frame;
-        if (PopupPickerPosition_Below == position)
-        {
-            // move the arrow to the arrow height above the frame
-            arrowFrame.origin.y = 0.0 - (arrowFrame.size.height) + ARROW_INSET - 1;
-			
-			// rotate the image by 90 degrees CW
-            CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI * 0.5 );
-            [popup.arrowImage setTransform:rotate];
-        }
-        else // if (PopupPickerPosition_Above == position)
-        {
-            // move the arrow to the bottom of the frame
-            arrowFrame.origin.y = newFrame.size.height - ARROW_INSET - 1;
-            
-            // rotate the image by 90 degrees CCW
-            CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI * 1.5 );
-            [popup.arrowImage setTransform:rotate];
-        }
-
-        // we need the arrow to be centered on the button, start with the pos view in parent coords
-        CGRect frameForArrowRef = [viewToPointTo.superview convertRect:viewToPointTo.frame toView:popup];
-        
-        // put it in the center of the rect
-        arrowFrame.origin.x = frameForArrowRef.origin.x + (frameForArrowRef.size.width / 2.0) - (arrowFrame.size.width / 2.0);
-        
-        // set the final arrow location
-        popup.arrowImage.frame = arrowFrame;
-         */
     }
     else // if ((PopupPickerPosition_Left == position) || (PopupPickerPosition_Right == position))
     {

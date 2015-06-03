@@ -10,7 +10,7 @@
 #import "PickerTextView.h"
 
 #define PICKER_MAX_CELLS_VISIBLE        3
-#define PICKER_WIDTH                    320
+#define PICKER_WIDTH                    280
 #define PICKER_CELL_HEIGHT              44
 
 @interface PickerTextView () <UITextFieldDelegate, PopupPickerViewDelegate>
@@ -116,7 +116,7 @@
 
     [self configTextField];
     
-    _roundedAndShadowed = YES;
+    _roundedAndShadowed = NO;
 }
 
 - (void)setRoundedAndShadowed:(Boolean)rounded
