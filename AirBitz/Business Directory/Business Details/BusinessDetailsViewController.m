@@ -56,6 +56,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	NSMutableArray *imageURLs;
     NSMutableArray *rowTypes;
     NSMutableArray *socialRows;
+    UIView         *shareView;
 }
 
 @property (nonatomic, weak) IBOutlet UIImageView *darkenImageView;
@@ -614,6 +615,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 		//share cell
         commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_share.png"];
         commonCell.leftLabel.text = NSLocalizedString(@"Share", @"Share button text");
+        shareView = commonCell;
 	}
 	else if(cellType == kHours)
 	{
@@ -819,6 +821,10 @@ typedef NS_ENUM(NSUInteger, CellType) {
             NSArray *activityItems = [NSArray arrayWithObjects: msg, nil, nil];
             UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
             [activityController setValue:subject forKey:@"subject"];
+            if (shareView) {
+                activityController.popoverPresentationController.permittedArrowDirections = 0;
+                activityController.popoverPresentationController.sourceView = shareView;
+            }
             [self presentViewController:activityController animated:YES completion:nil];
             break;
         }

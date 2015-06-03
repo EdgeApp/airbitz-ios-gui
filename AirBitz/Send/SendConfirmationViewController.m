@@ -144,7 +144,7 @@
         self.addressLabel.textColor = [Theme Singleton].colorButtonGreen;
     }
     _bAddressIsWalletUUID = NO;
-    if ([NSString safeStringWithUTF8String:_spendTarget.pSpend->szDestUUID]) {
+    if ([[NSString safeStringWithUTF8String:_spendTarget.pSpend->szDestUUID] length]) {
         _bAddressIsWalletUUID = YES;
         _destUUID = [NSString safeStringWithUTF8String:_spendTarget.pSpend->szDestUUID];
         NSMutableArray *newArr = [[NSMutableArray alloc] init];
