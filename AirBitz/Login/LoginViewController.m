@@ -293,20 +293,17 @@ static BOOL bInitialized = false;
 - (IBAction)Back
 {
     //spring out
+    [MainViewController moveSelectedViewController:-self.view.frame.size.width];
+    [self.view layoutIfNeeded];
+
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
-         CGRect frame = self.view.frame;
-         if(frame.origin.x < 0)
-         {
-             self.leftConstraint.constant = -frame.size.width;
-         }
-         else
-         {
-             self.leftConstraint.constant = frame.size.width;
-         }
+         [MainViewController moveSelectedViewController:0.0];
+         [MainViewController setAlphaOfSelectedViewController:1.0];
+         self.leftConstraint.constant = self.view.frame.size.width;
          [self.view layoutIfNeeded];
      }
                      completion:^(BOOL finished)

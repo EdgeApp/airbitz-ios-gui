@@ -2805,17 +2805,17 @@
                                     <constraint firstAttribute="centerX" secondItem="kpH-FO-ztL" secondAttribute="centerX" id="vy5-ZF-fZP"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypw-4p-DZr" userLabel="Button - Business Directory">
-                                <rect key="frame" x="20" y="28" width="20" height="20"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypw-4p-DZr" userLabel="Button - Business Directory">
+                                <rect key="frame" x="15" y="35" width="30" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label=" ">
                                     <accessibilityTraits key="traits" none="YES" button="YES"/>
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Wbh-YZ-arV"/>
-                                    <constraint firstAttribute="width" constant="20" id="vLg-Vu-Ioh"/>
+                                    <constraint firstAttribute="height" constant="30" id="Wbh-YZ-arV"/>
+                                    <constraint firstAttribute="width" constant="30" id="vLg-Vu-Ioh"/>
                                 </constraints>
-                                <state key="normal" image="ico_nav_directory_white.png"/>
+                                <state key="normal" image="ico_nav_directory_dark.png"/>
                                 <connections>
                                     <action selector="Back" destination="zLx-xG-j1m" eventType="touchUpInside" id="Dko-mN-FWJ"/>
                                 </connections>
@@ -2842,12 +2842,12 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="eTI-9q-uu0" secondAttribute="trailing" id="6EF-l4-14T"/>
                             <constraint firstItem="eTI-9q-uu0" firstAttribute="leading" secondItem="nTP-NI-D0U" secondAttribute="leading" id="BWA-Vs-TVO"/>
-                            <constraint firstItem="Ypw-4p-DZr" firstAttribute="top" secondItem="3HA-Gy-Y0a" secondAttribute="bottom" constant="8" symbolic="YES" id="CkO-ck-ccS"/>
+                            <constraint firstItem="Ypw-4p-DZr" firstAttribute="top" secondItem="3HA-Gy-Y0a" secondAttribute="bottom" constant="15" id="CkO-ck-ccS"/>
                             <constraint firstItem="eTI-9q-uu0" firstAttribute="top" secondItem="3HA-Gy-Y0a" secondAttribute="bottom" id="Gcy-9j-wjf"/>
                             <constraint firstAttribute="trailing" secondItem="YZe-mr-te9" secondAttribute="trailing" id="HcA-CN-Rvd"/>
                             <constraint firstItem="com-9x-BkR" firstAttribute="top" secondItem="eTI-9q-uu0" secondAttribute="bottom" id="PNk-ZX-gye"/>
                             <constraint firstItem="YZe-mr-te9" firstAttribute="top" secondItem="nTP-NI-D0U" secondAttribute="top" id="fSg-Qa-vHJ"/>
-                            <constraint firstItem="Ypw-4p-DZr" firstAttribute="leading" secondItem="nTP-NI-D0U" secondAttribute="leading" constant="20" symbolic="YES" id="q4D-Og-rCx"/>
+                            <constraint firstItem="Ypw-4p-DZr" firstAttribute="leading" secondItem="nTP-NI-D0U" secondAttribute="leading" constant="15" id="q4D-Og-rCx"/>
                             <constraint firstItem="YZe-mr-te9" firstAttribute="leading" secondItem="nTP-NI-D0U" secondAttribute="leading" id="tJi-W5-G7d"/>
                             <constraint firstItem="com-9x-BkR" firstAttribute="top" secondItem="YZe-mr-te9" secondAttribute="bottom" id="vV6-hz-PX9"/>
                         </constraints>
@@ -3570,7 +3570,7 @@
         <image name="btn_td_done.png" width="251" height="41"/>
         <image name="emboss_down.png" width="20" height="21"/>
         <image name="emboss_up.png" width="291" height="193"/>
-        <image name="ico_nav_directory_white.png" width="29" height="30"/>
+        <image name="ico_nav_directory_dark.png" width="30" height="30"/>
         <image name="icon_approved.png" width="79" height="80"/>
         <image name="icon_directory.png" width="30" height="30"/>
         <image name="icon_export_dropbox.png" width="18" height="18"/>
