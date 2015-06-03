@@ -282,13 +282,14 @@
 
 - (void)updateViews:(NSNotification *)notification
 {
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if ([CoreBridge Singleton].arrayWallets
+            && [CoreBridge Singleton].currentWallet
+            && [CoreBridge Singleton].currentWallet.loaded)
     {
         [self getBizImagesForWallet:[CoreBridge Singleton].currentWallet];
         [self.tableView reloadData];
         [self updateBalanceView];
         [self updateWalletsView];
-
     }
 }
 
@@ -406,7 +407,8 @@
     self.exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
     self.exportWalletViewController.delegate = self;
 
-    [MainViewController animateView:self.exportWalletViewController withBlur:NO];
+    [Util addSubviewControllerWithConstraints:self.view child:self.exportWalletViewController];
+    [MainViewController animateSlideIn:self.exportWalletViewController];
 }
 
 #pragma mark - Misc Methods
@@ -547,23 +549,8 @@
     self.transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
     self.transactionDetailsController.photo = [self imageForTransaction:transaction];
 
-    NSArray *constraints = [Util addSubviewWithConstraints:self.view child:self.transactionDetailsController.view];
-    self.transactionDetailsController.leftConstraint = [constraints objectAtIndex:0];
-    self.transactionDetailsController.leftConstraint.constant = [MainViewController getLargestDimension];
-    [self.view layoutIfNeeded];
-
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-     {
-         self.transactionDetailsController.leftConstraint.constant = 0;
-         [self.view layoutIfNeeded];
-     }
-                     completion:^(BOOL finished)
-     {
-     }];
-    
+    [Util addSubviewControllerWithConstraints:self.view child:self.transactionDetailsController];
+    [MainViewController animateSlideIn:self.transactionDetailsController];
 }
 
 -(void)dismissTransactionDetails

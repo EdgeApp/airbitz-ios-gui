@@ -34,8 +34,8 @@
 - (void)setWithDate:(NSDate *)date
 {
     NSCalendar *gregorian = [NSCalendar currentCalendar];
-    NSDateComponents *dateComponents = [gregorian components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit |
-                                                              NSHourCalendarUnit | NSMinuteCalendarUnit |NSSecondCalendarUnit)
+    NSDateComponents *dateComponents = [gregorian components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear |
+                                                              NSCalendarUnitHour | NSCalendarUnitMinute |NSCalendarUnitSecond)
                                                     fromDate:date];
     self.day = [dateComponents day];
     self.month = [dateComponents month];

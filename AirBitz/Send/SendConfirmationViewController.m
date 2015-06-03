@@ -139,6 +139,10 @@
 //    [CoreBridge loadWallets:self.arrayWallets archived:nil withTxs:NO];
 //
     _sendTo = [NSString safeStringWithUTF8String:_spendTarget.pSpend->szName];
+    if (_spendTarget.pSpend->bSigned)
+    {
+        self.addressLabel.textColor = [Theme Singleton].colorButtonGreen;
+    }
     _bAddressIsWalletUUID = NO;
     if ([NSString safeStringWithUTF8String:_spendTarget.pSpend->szDestUUID]) {
         _bAddressIsWalletUUID = YES;

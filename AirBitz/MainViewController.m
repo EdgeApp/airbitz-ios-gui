@@ -181,8 +181,8 @@ MainViewController *singleton;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchViewSweep:) name:NOTIFICATION_VIEW_SWEEP_TX object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockTabbar) name:NOTIFICATION_LOCK_TABBAR object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockTabbar) name:NOTIFICATION_UNLOCK_TABBAR object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockTabbar) name:NOTIFICATION_WALLETS_LOADING object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockTabbar) name:NOTIFICATION_WALLETS_LOADED object:nil];
 
     // init and set API key
     [DL_URLServer initAll];
@@ -763,15 +763,18 @@ MainViewController *singleton;
 
 - (void)lockTabbar
 {
-    //XXX
-//    [_tabBar lockButton:TAB_BAR_BUTTON_APP_MODE_SEND];
-//    [_tabBar lockButton:TAB_BAR_BUTTON_APP_MODE_REQUEST];
+    UITabBarItem *item = self.tabBar.items[APP_MODE_SEND];
+    item.enabled = NO;
+    item = self.tabBar.items[APP_MODE_REQUEST];
+    item.enabled = NO;
 }
 
 - (void)unlockTabbar
 {
-//    [_tabBar unlockButton:TAB_BAR_BUTTON_APP_MODE_SEND];
-//    [_tabBar unlockButton:TAB_BAR_BUTTON_APP_MODE_REQUEST];
+    UITabBarItem *item = self.tabBar.items[APP_MODE_SEND];
+    item.enabled = YES;
+    item = self.tabBar.items[APP_MODE_REQUEST];
+    item.enabled = YES;
 }
 
 #pragma mark - SettingsViewControllerDelegates
@@ -1095,8 +1098,8 @@ MainViewController *singleton;
     _txDetailsController.bOldTransaction = NO;
     _txDetailsController.transactionDetailsMode = TD_MODE_RECEIVED;
 
-    [MainViewController animateView:_txDetailsController withBlur:NO];
-
+    [Util addSubviewControllerWithConstraints:singleton.view child:_txDetailsController];
+    [MainViewController animateSlideIn:_txDetailsController];
 }
 
 -(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller

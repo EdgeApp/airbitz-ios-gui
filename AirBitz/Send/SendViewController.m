@@ -40,7 +40,6 @@
 #import "InfoView.h"
 #import "ZBarSDK.h"
 #import "CoreBridge.h"
-#import "SyncView.h"
 #import "TransferService.h"
 #import "BLEScanCell.h"
 #import "Contact.h"
@@ -70,7 +69,7 @@ typedef enum eImportState
 
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerView2Delegate,ButtonSelector2Delegate, SyncViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
+@interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerView2Delegate,ButtonSelector2Delegate, CBCentralManagerDelegate, CBPeripheralDelegate
  ,ZBarReaderDelegate, ZBarReaderViewDelegate, DL_URLRequestDelegate
 >
 {
@@ -458,7 +457,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (IBAction)segmentedControlAction:(id)sender
 {
-    NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
+    NSArray *arrayChoices = [[NSArray alloc] init];
     UITextField *textField;
     NSString *title;
     NSString *placeholderText;
@@ -468,8 +467,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         case 0:
             arrayChoices = [self createNewSendToChoices:@""];
-
-
             self.popupPickerSendTo = [PopupPickerView2 CreateForView:self.view
                                                    relativePosition:PopupPicker2Position_Full_Rising
                                                         withStrings:arrayChoices
@@ -1657,12 +1654,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 #pragma mark - ZBar's Delegate methods
 
-#if !TARGET_IPHONE_SIMULATOR
 - (void)readerView: (ZBarReaderView*) view didReadSymbols: (ZBarSymbolSet*) syms fromImage: (UIImage*) img
 {
     [self processZBarResults:syms];
 }
-#endif
 
 #if !TARGET_IPHONE_SIMULATOR
 
