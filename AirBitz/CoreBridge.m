@@ -384,9 +384,11 @@ static BOOL bOtpError = NO;
 
 + (void)refreshWallets
 {
-    if ([CoreBridge Singleton].arrayWallets.count == 0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADING object:self];
-    }
+    dispatch_async(dispatch_get_main_queue(),^{
+        if ([CoreBridge Singleton].arrayWallets.count == 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADING object:self];
+        }
+    });
     [CoreBridge postToWalletsQueue:^(void) {
         NSLog(@"ENTER refreshWallets WalletQueue: %@", [NSThread currentThread].name);
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
