@@ -66,6 +66,11 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 + (void)login:(NSString *)name password:(NSString *)pword
 {
+    [User login:name password:pword setupPIN:NO];
+}
+
++ (void)login:(NSString *)name password:(NSString *)pword setupPIN:(BOOL)setupPIN
+{
     [User Singleton].name = name;
     [User Singleton].password = pword;
     [[User Singleton] loadSettings];
@@ -73,7 +78,12 @@ static User *singleton = nil;  // this will be the one and only object this stat
     [User Singleton].notifiedSend = NO;
     [User Singleton].notifiedRequest = NO;
     [User Singleton].notifiedBle = NO;
-    
+
+    if (setupPIN) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            [CoreBridge setupLoginPIN];
+        });
+    }
     [CoreBridge login];
 }
 

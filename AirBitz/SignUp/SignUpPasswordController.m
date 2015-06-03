@@ -134,7 +134,7 @@
                     self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
                     self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
                     
-                    [User login:self.manager.strUserName password:self.passwordTextField.text];
+                    [User login:self.manager.strUserName password:self.passwordTextField.text setupPIN:YES];
                     [super next];
                 }
                 else

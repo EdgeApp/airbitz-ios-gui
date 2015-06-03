@@ -57,6 +57,7 @@
 + (BOOL)isLoggedIn;
 + (BOOL)offerUserReview;
 + (void)login:(NSString *)user password:(NSString *)pword;
++ (void)login:(NSString *)user password:(NSString *)pword setupPIN:(BOOL)setupPIN;
 
 - (BOOL)offerRequestHelp;
 - (BOOL)offerSendHelp;

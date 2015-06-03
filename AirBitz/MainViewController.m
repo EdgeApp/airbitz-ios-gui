@@ -1367,8 +1367,7 @@ MainViewController *singleton;
 
 - (void)switchToSettingsView:(UIViewController *)controller
 {
-    _selectedViewController = controller;
-    [Util insertSubviewControllerWithConstraints:self.view child:_selectedViewController belowSubView:self.tabBar];
+    [MainViewController animateSwapViewControllers:_settingsViewController out:_selectedViewController];
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     _appMode = APP_MODE_MORE;
 }
