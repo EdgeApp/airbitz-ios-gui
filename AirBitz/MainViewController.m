@@ -1873,7 +1873,7 @@ MainViewController *singleton;
     NSLog(@"pleaseRestartRequestViewBecauseAppleSucksWithPresentController called");
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [NSThread sleepForTimeInterval:0.5f];
+        [NSThread sleepForTimeInterval:3.0f];
         dispatch_async(dispatch_get_main_queue(), ^{
 
             NSString *requestID = _requestViewController.requestID;

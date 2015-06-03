@@ -103,9 +103,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, assign) int64_t                   amountSatoshiReceived;
 @property (nonatomic, assign) RequestState              state;
 
-
-
-
 @property (assign) tABC_TxDetails txDetails;
 @property (nonatomic, strong) NSString *requestType;
 @property (nonatomic, strong) RecipientViewController   *recipientViewController;
@@ -117,20 +114,17 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlCopyEmailSMS;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calculatorBottom;
 @property (nonatomic, weak) IBOutlet CalculatorView     *keypadView;
-//@property (nonatomic, weak) IBOutlet UILabel            *BTCLabel_TextField;
 @property (nonatomic, weak) IBOutlet UITextField        *currentTopField;
 @property (nonatomic, weak) IBOutlet UITextField        *BTC_TextField;
-//@property (nonatomic, weak) IBOutlet UILabel            *USDLabel_TextField;
-//@property (nonatomic, weak) IBOutlet UILabel            *bottomBTCUSDLabel;
 @property (nonatomic, weak) IBOutlet UITextField        *USD_TextField;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView2 *buttonSelector; //wallet dropdown
 @property (nonatomic, weak) IBOutlet UILabel            *exchangeRateLabel;
-//@property (nonatomic, weak) IBOutlet UIButton           *nextButton;
+@property (nonatomic, weak) IBOutlet UIButton                *refreshButton;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *refreshSpinner;
 
 @property (nonatomic, copy)   NSString *strFullName;
 @property (nonatomic, copy)   NSString *strPhoneNumber;
 @property (nonatomic, copy)   NSString *strEMail;
-//@property (nonatomic, strong) NSArray  *arrayWallets;
 
 @end
 
@@ -371,6 +365,20 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 
 #pragma mark - Action Methods
+
+- (IBAction)Refresh
+{
+    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    {
+        _refreshButton.hidden = YES;
+        _refreshSpinner.hidden = NO;
+        [CoreBridge refreshWallet:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:^{
+            [NSThread sleepForTimeInterval:2.0f];
+            _refreshSpinner.hidden = YES;
+            _refreshButton.hidden = NO;
+        }];
+    }
+}
 
 - (IBAction)didTouchQRCode:(id)sender
 {

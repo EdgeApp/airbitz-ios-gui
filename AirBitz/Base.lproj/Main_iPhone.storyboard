@@ -847,6 +847,18 @@
                                             <constraint firstItem="5sd-ot-S1v" firstAttribute="leading" secondItem="MRG-UO-gcm" secondAttribute="leading" constant="10" id="ojw-f4-A0p"/>
                                         </constraints>
                                     </view>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="tx5-Cj-bnM">
+                                        <rect key="frame" x="317" y="107" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZ4-b5-fQ5" userLabel="Button -refresh">
+                                        <rect key="frame" x="319" y="106" width="18" height="22"/>
+                                        <state key="normal" image="UIButtonBarRefresh.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="Refresh" destination="Int-ih-AH6" eventType="touchUpInside" id="zLb-sb-8D4"/>
+                                        </connections>
+                                    </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jlL-oE-aWy">
                                         <rect key="frame" x="10" y="506" width="355" height="41"/>
                                         <constraints>
@@ -933,12 +945,15 @@
                                     <constraint firstItem="7N4-k1-c9H" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="LHn-2R-wnG"/>
                                     <constraint firstItem="NGg-Nn-BeH" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" symbolic="YES" id="Ogn-tw-gkF"/>
                                     <constraint firstItem="jlL-oE-aWy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rtQ-SU-6iS" secondAttribute="bottom" constant="8" symbolic="YES" id="Pab-mx-fWu"/>
+                                    <constraint firstItem="TZ4-b5-fQ5" firstAttribute="leading" secondItem="MRG-UO-gcm" secondAttribute="trailing" constant="22" id="PgA-8r-2P1"/>
                                     <constraint firstItem="3A3-3d-okn" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" symbolic="YES" id="QWc-yL-Ry2"/>
+                                    <constraint firstItem="tx5-Cj-bnM" firstAttribute="centerY" secondItem="TZ4-b5-fQ5" secondAttribute="centerY" id="Udv-7d-aNS"/>
                                     <constraint firstItem="dY3-MX-MNV" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="65" id="W6D-Zr-p4f"/>
                                     <constraint firstItem="CiQ-7I-S7U" firstAttribute="top" secondItem="dY3-MX-MNV" secondAttribute="top" id="WkI-Rk-9ou"/>
                                     <constraint firstAttribute="bottom" secondItem="FS5-S0-Rqp" secondAttribute="bottom" constant="49" id="aqf-C8-N7y"/>
                                     <constraint firstAttribute="trailing" secondItem="7N4-k1-c9H" secondAttribute="trailing" id="b0e-5R-pN1"/>
                                     <constraint firstAttribute="trailing" secondItem="NGg-Nn-BeH" secondAttribute="trailing" constant="20" symbolic="YES" id="bJx-Qh-GGH"/>
+                                    <constraint firstItem="tx5-Cj-bnM" firstAttribute="trailing" secondItem="TZ4-b5-fQ5" secondAttribute="trailing" id="bMX-ps-8RP"/>
                                     <constraint firstAttribute="bottom" secondItem="jlL-oE-aWy" secondAttribute="bottom" constant="57" id="dZ7-sF-hD9"/>
                                     <constraint firstItem="dY3-MX-MNV" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" constant="17" id="fDp-p2-zgx"/>
                                     <constraint firstItem="Fc7-23-ecF" firstAttribute="top" secondItem="Ug3-Vw-VAD" secondAttribute="top" id="gMl-Rt-5Oy"/>
@@ -949,6 +964,7 @@
                                     <constraint firstItem="jlL-oE-aWy" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="10" id="k3E-Yq-7CZ"/>
                                     <constraint firstItem="MRG-UO-gcm" firstAttribute="leading" secondItem="fHY-wl-t5s" secondAttribute="trailing" constant="5" id="rqK-Zs-E4V"/>
                                     <constraint firstItem="jwC-1c-veH" firstAttribute="top" secondItem="2Po-w8-mEf" secondAttribute="bottom" id="tuc-7l-JlM"/>
+                                    <constraint firstItem="TZ4-b5-fQ5" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="top" id="txE-62-q8z"/>
                                     <constraint firstItem="CiQ-7I-S7U" firstAttribute="bottom" secondItem="dY3-MX-MNV" secondAttribute="bottom" id="vSZ-mB-fmV"/>
                                     <constraint firstItem="MRG-UO-gcm" firstAttribute="top" secondItem="jwC-1c-veH" secondAttribute="bottom" constant="15" id="xuO-gI-Yu1"/>
                                 </constraints>
@@ -980,6 +996,8 @@
                         <outlet property="fiatWidth" destination="2jg-vD-63I" id="ngZ-an-ani"/>
                         <outlet property="keypadView" destination="FS5-S0-Rqp" id="Xh1-wc-LVQ"/>
                         <outlet property="qrCodeImageView" destination="5sd-ot-S1v" id="Tct-qD-0GX"/>
+                        <outlet property="refreshButton" destination="TZ4-b5-fQ5" id="GoR-nl-Bl4"/>
+                        <outlet property="refreshSpinner" destination="tx5-Cj-bnM" id="EcJ-3B-Mp9"/>
                         <outlet property="segmentedControlBTCUSD" destination="dqf-l4-9Zx" id="FOf-6y-9mP"/>
                         <outlet property="segmentedControlCopyEmailSMS" destination="jlL-oE-aWy" id="81Z-jp-5uQ"/>
                         <outlet property="statusLine1" destination="3A3-3d-okn" id="DBQ-L3-xO2"/>
@@ -3528,6 +3546,7 @@
     <resources>
         <image name="BLE_Button.png" width="50" height="50"/>
         <image name="BLE_Logo.png" width="21" height="29"/>
+        <image name="UIButtonBarRefresh.png" width="18" height="22"/>
         <image name="back_arrow.png" width="30" height="30"/>
         <image name="background.jpg" width="320" height="568"/>
         <image name="bd_cell_bottom.png" width="12" height="12"/>
