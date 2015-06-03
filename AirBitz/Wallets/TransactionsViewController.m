@@ -282,13 +282,14 @@
 
 - (void)updateViews:(NSNotification *)notification
 {
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if ([CoreBridge Singleton].arrayWallets
+            && [CoreBridge Singleton].currentWallet
+            && [CoreBridge Singleton].currentWallet.loaded)
     {
         [self getBizImagesForWallet:[CoreBridge Singleton].currentWallet];
         [self.tableView reloadData];
         [self updateBalanceView];
         [self updateWalletsView];
-
     }
 }
 
