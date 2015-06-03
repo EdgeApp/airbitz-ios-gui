@@ -831,10 +831,8 @@ static BOOL bInitialized = false;
     if (_bSuccess)
     {
         [User login:self.usernameSelector.textField.text
-           password:self.passwordTextField.text];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            [CoreBridge setupLoginPIN];
-        });
+           password:self.passwordTextField.text
+           setupPIN:YES];
         [self.delegate loginViewControllerDidLogin:NO];
     } else if (ABC_CC_InvalidOTP == _resultCode) {
         [MainViewController showBackground:NO animate:YES];
