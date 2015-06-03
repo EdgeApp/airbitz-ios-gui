@@ -59,11 +59,10 @@
 + (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
 + (int64_t)getTotalSentToday:(Wallet *)wallet;
 
-+ (void)setWalletOrder: (NSMutableArray *) arrayWallets archived:(NSMutableArray *) arrayArchivedWallets;
 + (bool)setWalletAttributes: (Wallet *) wallet;
 
 + (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions;
-+ (bool)storeTransaction: (Transaction *) transaction;
++ (void)storeTransaction:(Transaction *)transaction;
 
 + (int) currencyDecimalPlaces;
 + (int) maxDecimalPlaces;

@@ -400,7 +400,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
         self.firstLoginTime = earliest;
     }
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *difference = [calendar components:NSDayCalendarUnit
+    NSDateComponents *difference = [calendar components:NSCalendarUnitDay
                                                 fromDate:self.firstLoginTime
                                                     toDate:[NSDate date]
                                                 options:0];

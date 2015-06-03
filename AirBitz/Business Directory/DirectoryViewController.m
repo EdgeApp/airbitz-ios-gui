@@ -760,6 +760,8 @@ static bool bInitialized = false;
                              case DIRECTORY_MODE_SEARCH:
                                  [self.searchBarSearch becomeFirstResponder];
                                  break;
+                             default:
+                                 break;
                          }
                          NSLog(@"Directory Mode Transition %d -> %d\n", directoryMode, mode);
                          previousDirectoryMode = directoryMode;
