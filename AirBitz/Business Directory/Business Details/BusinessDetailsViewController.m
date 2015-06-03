@@ -105,9 +105,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
     self.tableView.estimatedRowHeight = SINGLE_ROW_CELL_HEIGHT; // set to whatever your "average" cell height is
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
-    [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(Back:) fromObject:self];
 
     [self.tableView setContentInset:UIEdgeInsetsMake([MainViewController getHeaderHeight],0,[MainViewController getFooterHeight],0)];
 
@@ -127,6 +124,16 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
 	gesture.direction = UISwipeGestureRecognizerDirectionRight;
 	[self.view addGestureRecognizer:gesture];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(Back:) fromObject:self];
+
+    if (self.businessDetails)
+        [MainViewController changeNavBarTitle:self title:[self.businessDetails objectForKey:@"name"]];
 }
 
 - (void)transactionDetailsExit
