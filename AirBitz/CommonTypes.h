@@ -130,8 +130,8 @@ typedef enum eTabBarButton
 #define NOTIFICATION_NOTIFICATION_RECEIVED              @"Notification_Received"
 #define NOTIFICATION_SWEEP                              @"Notification_Sweep"
 #define NOTIFICATION_VIEW_SWEEP_TX                      @"Notification_View_Sweep_Transaction_Details"
-#define NOTIFICATION_LOCK_TABBAR                        @"Lock_Tabbar"
-#define NOTIFICATION_UNLOCK_TABBAR                      @"Unlock_Tabbar"
+#define NOTIFICATION_WALLETS_LOADING                    @"Wallets_Loading"
+#define NOTIFICATION_WALLETS_LOADED                     @"Wallets_Loaded"
 #define NOTIFICATION_WALLETS_CHANGED                    @"Wallets_Changed"
 #define NOTIFICATION_ROTATION_CHANGED                   @"Rotation_Changed"
 

@@ -384,6 +384,9 @@ static BOOL bOtpError = NO;
 
 + (void)refreshWallets
 {
+    if ([CoreBridge Singleton].arrayWallets.count == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADING object:self];
+    }
     [CoreBridge postToWalletsQueue:^(void) {
         NSLog(@"ENTER refreshWallets WalletQueue: %s", [NSThread currentThread].name);
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
@@ -397,10 +400,14 @@ static BOOL bOtpError = NO;
         //
         // Update wallet names for various dropdowns
         //
+        int loadingCount = 0;
         for (int i = 0; i < [arrayWallets count]; i++)
         {
             Wallet *wallet = [arrayWallets objectAtIndex:i];
             [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+            if (!wallet.loaded) {
+                loadingCount++;
+            }
         }
 
         dispatch_async(dispatch_get_main_queue(),^{
@@ -409,6 +416,10 @@ static BOOL bOtpError = NO;
             singleton.arrayArchivedWallets = arrayArchivedWallets;
             singleton.arrayUUIDs = arrayUUIDs;
             singleton.arrayWalletNames = arrayWalletNames;
+            if (loadingCount == 0)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADED object:self];
+            }
             if (nil == singleton.currentWallet)
             {
                 if ([singleton.arrayWallets count] > 0)
