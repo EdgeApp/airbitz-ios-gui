@@ -16,7 +16,6 @@
 @interface SpendingLimitsViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
 {
     tABC_AccountSettings            *_pAccountSettings;
-    FadingAlertView                 *_fadingAlert;
     UITextField                     *_currentTextField;
 }
 
@@ -230,15 +229,12 @@
 
 - (IBAction)Complete:(id)sender
 {
-    _fadingAlert = [FadingAlertView CreateLoadingView:self.view withDelegate:nil];
-    [_fadingAlert show];
     [Util checkPasswordAsync:_passwordTextField.text withSelector:@selector(doComplete:) controller:self];
 }
 
 - (void)doComplete:(NSNumber *)authenticated
 {
     BOOL bAuthenticated = [authenticated boolValue];
-    [_fadingAlert dismiss:NO];
     if (bAuthenticated) {
         if (_dailySpendLimitSwitch.on) {
             [User Singleton].bDailySpendLimit = YES;

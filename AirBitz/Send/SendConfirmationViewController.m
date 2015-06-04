@@ -16,12 +16,11 @@
 #import "TransactionDetailsViewController.h"
 #import "CoreBridge.h"
 #import "Util.h"
-#import "CommonTypes.h"
-#import "FadingAlertView.h"
 #import "AudioController.h"
 #import "MainViewController.h"
 #import "Theme.h"
 #import "ButtonSelectorView2.h"
+#import "FadingAlertView.h"
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate,
@@ -803,8 +802,7 @@
 
 - (void)dismissErrorMessage
 {
-    [_fadingAlert dismiss:NO];
-    _fadingAlert = nil;
+    [FadingAlertView dismiss:YES];
 }
 
 #pragma mark infoView Delegates

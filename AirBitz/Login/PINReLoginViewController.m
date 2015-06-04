@@ -293,13 +293,7 @@
 - (void)showFadingError:(NSString *)message
 {
     [self.PINCodeView resignFirstResponder]; // hide keyboard
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-    _fadingAlert.message = message;
-    _fadingAlert.fadeDuration = 2;
-    _fadingAlert.fadeDelay = 5;
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showSpinner:NO];
-    [_fadingAlert showFading];
+    [FadingAlertView create:self.view message:message holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
 }
 
 #pragma mark - FadingAlertView delegate

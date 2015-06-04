@@ -98,8 +98,6 @@
 		7D6EDB7C19A66C82007C33AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7B19A66C82007C33AE /* CoreText.framework */; };
 		7D7783F21A07875E0043806B /* APPINView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7783EC1A07875E0043806B /* APPINView.m */; };
 		7D7783F31A07875E0043806B /* APPINView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7783EC1A07875E0043806B /* APPINView.m */; };
-		7D7FB25D1A0847B300E4BB44 /* PINReLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FB25C1A0847B300E4BB44 /* PINReLoginViewController.m */; };
-		7D7FB25E1A0847B300E4BB44 /* PINReLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FB25C1A0847B300E4BB44 /* PINReLoginViewController.m */; };
 		7D89E8C51A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8C41A2436480067F660 /* UIPhotoGalleryViewController+Slider.m */; };
 		7D89E8C61A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8C41A2436480067F660 /* UIPhotoGalleryViewController+Slider.m */; };
 		7D89E8CE1A245FC20067F660 /* NotificationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E8CD1A245FC20067F660 /* NotificationChecker.m */; };
@@ -131,7 +129,6 @@
 		7D98ACB619A7C550003D2BF6 /* BackgroundImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A96418EA0A42008F302C /* BackgroundImageManager.m */; };
 		7D98ACB719A7C550003D2BF6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2E9BE18DA911A008ACF88 /* LoginViewController.m */; };
 		7D98ACB819A7C550003D2BF6 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A97A18EA0A7F008F302C /* DirectoryViewController.m */; };
-		7D98ACB919A7C550003D2BF6 /* ShowWalletQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9CA18EA0FF0008F302C /* ShowWalletQRViewController.m */; };
 		7D98ACBA19A7C550003D2BF6 /* ExportWalletOptionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247B119352F730091C286 /* ExportWalletOptionsCell.m */; };
 		7D98ACBB19A7C550003D2BF6 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E7F57918E4AAD5009B5844 /* User.m */; };
 		7D98ACBC19A7C550003D2BF6 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FD394618F240E600BE2670 /* AutoCompleteTextField.m */; };
@@ -403,7 +400,6 @@
 		B5C0A9C318EA0DD8008F302C /* TransactionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9BC18EA0DD8008F302C /* TransactionsViewController.m */; };
 		B5C0A9C418EA0DD8008F302C /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9BE18EA0DD8008F302C /* WalletCell.m */; };
 		B5C0A9C818EA0E55008F302C /* FlashSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9C718EA0E55008F302C /* FlashSelectView.m */; };
-		B5C0A9CB18EA0FF0008F302C /* ShowWalletQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9CA18EA0FF0008F302C /* ShowWalletQRViewController.m */; };
 		B5E7F57A18E4AAD5009B5844 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E7F57918E4AAD5009B5844 /* User.m */; };
 		B5F2E9A518D3BFEF008ACF88 /* libbitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A218D3BFEF008ACF88 /* libbitcoin.a */; };
 		B5F2E9A618D3BFEF008ACF88 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A318D3BFEF008ACF88 /* libboost_system.a */; };
@@ -1209,7 +1205,6 @@
 		DAE864021A88A58A00A17BD3 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A97A18EA0A7F008F302C /* DirectoryViewController.m */; };
 		DAE864031A88A58A00A17BD3 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4672A19B604CA004F9923 /* DL_URLServer.m */; };
 		DAE864041A88A58A00A17BD3 /* UIPhotoGalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD22DE1A1E716C008C43FB /* UIPhotoGalleryView.m */; };
-		DAE864051A88A58A00A17BD3 /* ShowWalletQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9CA18EA0FF0008F302C /* ShowWalletQRViewController.m */; };
 		DAE864061A88A58A00A17BD3 /* TwoFactorShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13338F1A7AECA70051DE14 /* TwoFactorShowViewController.m */; };
 		DAE864071A88A58A00A17BD3 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806B2601A4A95960026A6F2 /* AudioController.m */; };
 		DAE864081A88A58A00A17BD3 /* ExportWalletOptionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7247B119352F730091C286 /* ExportWalletOptionsCell.m */; };
@@ -1250,7 +1245,6 @@
 		DAE8642D1A88A58A00A17BD3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A9B418EA0D99008F302C /* SettingsViewController.m */; };
 		DAE8642E1A88A58A00A17BD3 /* BD_Social_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1354B19FF13BA007D23CE /* BD_Social_Cell.m */; };
 		DAE8642F1A88A58A00A17BD3 /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98CAF7199FB545000009B5 /* LocalSettings.m */; };
-		DAE864301A88A58A00A17BD3 /* PINReLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FB25C1A0847B300E4BB44 /* PINReLoginViewController.m */; };
 		DAE864311A88A58A00A17BD3 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B516C1E718C54B06008CC6A1 /* NSDate+Helper.m */; };
 		DAE864321A88A58A00A17BD3 /* PopupPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C308F191834AC006923DE /* PopupPickerView.m */; };
 		DAE864331A88A58A00A17BD3 /* TwoFactorScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1333971A7B12E00051DE14 /* TwoFactorScanViewController.m */; };
@@ -1595,8 +1589,6 @@
 		7D6EDB7B19A66C82007C33AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		7D7783EB1A07875E0043806B /* APPINView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPINView.h; sourceTree = "<group>"; };
 		7D7783EC1A07875E0043806B /* APPINView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPINView.m; sourceTree = "<group>"; };
-		7D7FB25B1A0847B300E4BB44 /* PINReLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINReLoginViewController.h; sourceTree = "<group>"; };
-		7D7FB25C1A0847B300E4BB44 /* PINReLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINReLoginViewController.m; sourceTree = "<group>"; };
 		7D89E8C31A2436480067F660 /* UIPhotoGalleryViewController+Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIPhotoGalleryViewController+Slider.h"; path = "AirBitz/Business Directory/Business Details/UIPhotoGalleryViewController+Slider.h"; sourceTree = SOURCE_ROOT; };
 		7D89E8C41A2436480067F660 /* UIPhotoGalleryViewController+Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIPhotoGalleryViewController+Slider.m"; path = "AirBitz/Business Directory/Business Details/UIPhotoGalleryViewController+Slider.m"; sourceTree = SOURCE_ROOT; };
 		7D89E8CC1A245FC20067F660 /* NotificationChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationChecker.h; sourceTree = "<group>"; };
@@ -1794,8 +1786,6 @@
 		B5C0A9BF18EA0DD8008F302C /* WalletsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletsViewController.h; sourceTree = "<group>"; };
 		B5C0A9C618EA0E55008F302C /* FlashSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashSelectView.h; sourceTree = "<group>"; };
 		B5C0A9C718EA0E55008F302C /* FlashSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashSelectView.m; sourceTree = "<group>"; };
-		B5C0A9C918EA0FF0008F302C /* ShowWalletQRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowWalletQRViewController.h; sourceTree = "<group>"; };
-		B5C0A9CA18EA0FF0008F302C /* ShowWalletQRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowWalletQRViewController.m; sourceTree = "<group>"; };
 		B5E7F57818E4AAD5009B5844 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		B5E7F57918E4AAD5009B5844 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		B5F2E9A218D3BFEF008ACF88 /* libbitcoin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbitcoin.a; path = ABC/libbitcoin.a; sourceTree = "<group>"; };
@@ -3131,8 +3121,6 @@
 				DAE276131A9AEE8500E24523 /* AddressRequestController.m */,
 				B5C0A9A818EA0D09008F302C /* RequestViewController.h */,
 				B5C0A9A918EA0D09008F302C /* RequestViewController.m */,
-				B5C0A9C918EA0FF0008F302C /* ShowWalletQRViewController.h */,
-				B5C0A9CA18EA0FF0008F302C /* ShowWalletQRViewController.m */,
 				4C98CAEA199D53A2000009B5 /* RecipientViewController.h */,
 				4C98CAEB199D53A2000009B5 /* RecipientViewController.m */,
 			);
@@ -3272,8 +3260,6 @@
 				B5F2E9C318DB4B23008ACF88 /* PasswordRecoveryViewController.h */,
 				B5F2E9C418DB4B23008ACF88 /* PasswordRecoveryViewController.m */,
 				B5F2EB0D18DE018E008ACF88 /* QuestionAnswerView.h */,
-				7D7FB25B1A0847B300E4BB44 /* PINReLoginViewController.h */,
-				7D7FB25C1A0847B300E4BB44 /* PINReLoginViewController.m */,
 				B5F2EB0E18DE018E008ACF88 /* QuestionAnswerView.m */,
 				B5F2EB1018DE01CB008ACF88 /* QuestionAnswerView~iphone.xib */,
 				B5F2E9BF18DA911A008ACF88 /* SignUpViewController.h */,
@@ -4558,7 +4544,6 @@
 				7D98ACB819A7C550003D2BF6 /* DirectoryViewController.m in Sources */,
 				DAFF8FF51ADC9A46000BCBEF /* BuySellCell.m in Sources */,
 				4CA4672C19B604CA004F9923 /* DL_URLServer.m in Sources */,
-				7D98ACB919A7C550003D2BF6 /* ShowWalletQRViewController.m in Sources */,
 				DA1333911A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */,
 				6806B2621A4A95960026A6F2 /* AudioController.m in Sources */,
 				7D98ACBA19A7C550003D2BF6 /* ExportWalletOptionsCell.m in Sources */,
@@ -4664,7 +4649,6 @@
 				7D98AD0419A7C550003D2BF6 /* ExportWalletOptionsViewController.m in Sources */,
 				7D98AD0519A7C550003D2BF6 /* main.m in Sources */,
 				7D98AD0619A7C550003D2BF6 /* TextFieldCell.m in Sources */,
-				7D7FB25E1A0847B300E4BB44 /* PINReLoginViewController.m in Sources */,
 				7D98AD0719A7C550003D2BF6 /* Util.m in Sources */,
 				7D98AD0819A7C550003D2BF6 /* ExportWalletViewController.m in Sources */,
 				DA4710641AD7363F006ACF2A /* BuySellViewController.m in Sources */,
@@ -4704,7 +4688,6 @@
 				4CA4672B19B604CA004F9923 /* DL_URLServer.m in Sources */,
 				DAFF8FF41ADC9A46000BCBEF /* BuySellCell.m in Sources */,
 				7DFD22E31A1E716C008C43FB /* UIPhotoGalleryView.m in Sources */,
-				B5C0A9CB18EA0FF0008F302C /* ShowWalletQRViewController.m in Sources */,
 				DA1333901A7AECA70051DE14 /* TwoFactorShowViewController.m in Sources */,
 				6806B2611A4A95960026A6F2 /* AudioController.m in Sources */,
 				4C7247B219352F730091C286 /* ExportWalletOptionsCell.m in Sources */,
@@ -4751,7 +4734,6 @@
 				B5C0A9B518EA0D99008F302C /* SettingsViewController.m in Sources */,
 				7DB1354C19FF13BA007D23CE /* BD_Social_Cell.m in Sources */,
 				4C98CAF8199FB545000009B5 /* LocalSettings.m in Sources */,
-				7D7FB25D1A0847B300E4BB44 /* PINReLoginViewController.m in Sources */,
 				B516C1E818C54B07008CC6A1 /* NSDate+Helper.m in Sources */,
 				4C3C3093191834AC006923DE /* PopupPickerView.m in Sources */,
 				DA1333981A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */,
@@ -4850,7 +4832,6 @@
 				DAE864031A88A58A00A17BD3 /* DL_URLServer.m in Sources */,
 				DAFF8FF61ADC9A46000BCBEF /* BuySellCell.m in Sources */,
 				DAE864041A88A58A00A17BD3 /* UIPhotoGalleryView.m in Sources */,
-				DAE864051A88A58A00A17BD3 /* ShowWalletQRViewController.m in Sources */,
 				DAE864061A88A58A00A17BD3 /* TwoFactorShowViewController.m in Sources */,
 				DAE864071A88A58A00A17BD3 /* AudioController.m in Sources */,
 				DAE864081A88A58A00A17BD3 /* ExportWalletOptionsCell.m in Sources */,
@@ -4897,7 +4878,6 @@
 				DAE8642D1A88A58A00A17BD3 /* SettingsViewController.m in Sources */,
 				DAE8642E1A88A58A00A17BD3 /* BD_Social_Cell.m in Sources */,
 				DAE8642F1A88A58A00A17BD3 /* LocalSettings.m in Sources */,
-				DAE864301A88A58A00A17BD3 /* PINReLoginViewController.m in Sources */,
 				DAE864311A88A58A00A17BD3 /* NSDate+Helper.m in Sources */,
 				DAE864321A88A58A00A17BD3 /* PopupPickerView.m in Sources */,
 				DAE864331A88A58A00A17BD3 /* TwoFactorScanViewController.m in Sources */,

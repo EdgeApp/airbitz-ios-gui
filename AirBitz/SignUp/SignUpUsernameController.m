@@ -13,7 +13,6 @@
 @interface SignUpUsernameController () <UITextFieldDelegate>
 {
     UITextField                     *_activeTextField;
-    FadingAlertView                 *_fadingAlert;
 
 }
 
@@ -139,7 +138,7 @@
         self.manager.strUserName = [NSString stringWithFormat:@"%@",self.userNameTextField.text];
         [super next];
     } else {
-        [self dismissFading:NO];
+//        [self dismissFading:NO];
         UIAlertView *alert = [[UIAlertView alloc]
                 initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signin error alert")
                       message:[NSString stringWithFormat:@"Sign-Up failed:\n%@", _strReason]
@@ -153,20 +152,6 @@
 
 - (IBAction)buttonBlockerTouched:(id)sender
 {
-}
-
-#pragma mark - Fading Alert Delegate
-
-- (void)dismissFading:(BOOL)animated
-{
-    if (_fadingAlert) {
-        [_fadingAlert dismiss:animated];
-    }
-}
-
-- (void)fadingAlertDismissed:(FadingAlertView *)view
-{
-    _fadingAlert = nil;
 }
 
 #pragma mark - Misc Methods

@@ -655,12 +655,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)showFadingAlert:(NSString *)message
 {
-    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:nil];
-    _fadingAlert.message = NSLocalizedString(message, nil);
-    _fadingAlert.fadeDuration = 1;
-    _fadingAlert.fadeDelay = 5;
-    [_fadingAlert blockModal:NO];
-    [_fadingAlert showFading];
+    [MainViewController fadingAlert:message];
 }
 
 #pragma mark - Keyboard Hack

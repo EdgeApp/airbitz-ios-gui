@@ -11,7 +11,7 @@
 
 typedef enum eSignUpMode
 {
-    SignUpMode_SignUp,
+//    SignUpMode_SignUp,
     SignUpMode_ChangePassword,
     SignUpMode_ChangePasswordNoVerify,
     SignUpMode_ChangePIN,

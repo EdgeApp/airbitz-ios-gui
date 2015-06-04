@@ -29,7 +29,6 @@
 {
 	UITextField                     *_activeTextField;
 	PasswordVerifyView              *_passwordVerifyView;
-	FadingAlertView                 *_fadingAlert;
 	float                           _keyboardFrameOriginY;
 }
 
@@ -96,10 +95,7 @@
     self.buttonBlocker.hidden = YES;
     [self.view addSubview:self.buttonBlocker];
 
-    if ((self.strUserName
-            && [self.strUserName length] > 0
-            && _mode == SignUpMode_SignUp)
-            || _mode == SignUpMode_ChangePasswordNoVerify) {
+    if (_mode == SignUpMode_ChangePasswordNoVerify) {
         [self.passwordTextField becomeFirstResponder];
     } else {
         [self.userNameTextField becomeFirstResponder];
@@ -161,30 +157,24 @@
             // check the username and pin field
             if ([self fieldsAreValid] == YES)
             {
-                // if we are signing up a new account
-                if (_mode == SignUpMode_SignUp)
-                {
-                    _fadingAlert = [FadingAlertView CreateInsideView:self.view withDelegate:self];
-                    _fadingAlert.message = NSLocalizedString(@"Creating and securing account", nil);
-                    _fadingAlert.fadeDuration = 0;
-                    _fadingAlert.fadeDelay = 0;
-                    [_fadingAlert blockModal:YES];
-                    [_fadingAlert showSpinner:YES];
-                    [_fadingAlert show];
-
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                        tABC_Error error;
-                        ABC_CreateAccount([self.userNameTextField.text UTF8String], [self.passwordTextField.text UTF8String], &error);
-                        if (error.code == ABC_CC_Ok) {
-                            ABC_SetPIN([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String],
-                                [self.pinTextField.text UTF8String], &error);
-                        }
-                        _bSuccess = error.code;
-                        _strReason = [Util errorMap:&error];
-                        [self performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
-                    });
-                }
-                else if (_mode == SignUpMode_ChangePassword)
+//                // if we are signing up a new account
+//                if (_mode == SignUpMode_SignUp)
+//                {
+//                    [FadingAlertView create:self.view message:NSLocalizedString(@"Creating and securing account", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+//
+//                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+//                        tABC_Error error;
+//                        ABC_CreateAccount([self.userNameTextField.text UTF8String], [self.passwordTextField.text UTF8String], &error);
+//                        if (error.code == ABC_CC_Ok) {
+//                            ABC_SetPIN([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String],
+//                                [self.pinTextField.text UTF8String], &error);
+//                        }
+//                        _bSuccess = error.code;
+//                        _strReason = [Util errorMap:&error];
+//                        [self performSelectorOnMainThread:@selector(createAccountComplete) withObject:nil waitUntilDone:FALSE];
+//                    });
+//                }
+                if (_mode == SignUpMode_ChangePassword)
                 {
                     // get their old pen
                     [self blockUser:YES];
@@ -274,14 +264,7 @@
 
 - (void)dismissFading:(BOOL)animated
 {
-    if (_fadingAlert) {
-        [_fadingAlert dismiss:animated];
-    }
-}
-
-- (void)fadingAlertDismissed:(FadingAlertView *)view
-{
-    _fadingAlert = nil;
+    [FadingAlertView dismiss:YES];
 }
 
 #pragma mark - Misc Methods
@@ -301,31 +284,7 @@
     self.labelPasswordInfo.hidden = YES;
     self.imagePassword.hidden = YES;
 
-    if (mode == SignUpMode_SignUp)
-    {
-        NSAssert(0, @"Use SignUpManager");
-        [self.buttonNextStep setTitle:NSLocalizedString(@"Next Step", @"") forState:UIControlStateNormal];
-
-        self.passwordTextField.placeholder = NSLocalizedString(@"Password", @"");
-        self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter Password", @"");
-        self.userNameTextField.placeholder = NSLocalizedString(@"User Name", @"");
-        self.pinTextField.placeholder = NSLocalizedString(@"Create PIN", @"");
-
-        self.imageUserName.hidden = NO;
-        self.imageReenterPassword.hidden = NO;
-        self.labelPIN.hidden = NO;
-        self.imagePIN.hidden = NO;
-        self.userNameTextField.hidden = NO;
-        self.passwordTextField.hidden = NO;
-        self.reenterPasswordTextField.hidden = NO;
-        self.pinTextField.hidden = NO;
-        self.labelPasswordInfo.hidden = NO;
-        self.imagePassword.hidden = NO;
-
-        self.reenterPasswordTextField.returnKeyType = UIReturnKeyNext;
-        self.userNameTextField.secureTextEntry = NO;
-    }
-    else if (mode == SignUpMode_ChangePasswordNoVerify
+    if (mode == SignUpMode_ChangePasswordNoVerify
             || (_mode == SignUpMode_ChangePassword && ![CoreBridge passwordExists]))
     {
         self.title = [Theme Singleton].changePasswordText;
@@ -422,25 +381,7 @@
 {
     BOOL bUserNameFieldIsValid = YES;
 
-    // if we are signing up for a new account
-    if (_mode == SignUpMode_SignUp)
-    {
-//        // if nothing was entered
-//        if ([self.userNameTextField.text length] == 0)
-//        {
-//            bUserNameFieldIsValid = NO;
-//            UIAlertView *alert = [[UIAlertView alloc]
-//                                  initWithTitle:self.labelTitle.text
-//                                  message:[NSString stringWithFormat:@"%@ failed:\n%@",
-//                                           self.labelTitle.text,
-//                                           NSLocalizedString(@"You must enter a user name", @"")]
-//                                  delegate:nil
-//                                  cancelButtonTitle:@"OK"
-//                                  otherButtonTitles:nil];
-//            [alert show];
-//        }
-    }
-    else if (_mode == SignUpMode_ChangePasswordNoVerify
+    if (_mode == SignUpMode_ChangePasswordNoVerify
             || (![CoreBridge passwordExists] 
                 && (_mode == SignUpMode_ChangePassword
                     || _mode == SignUpMode_ChangePIN)))
@@ -477,7 +418,7 @@
 	BOOL bNewPasswordFieldsAreValid = YES;
 
     // if we are signing up for a new account or changing our password
-    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePassword) || (_mode == SignUpMode_ChangePasswordNoVerify) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
+    if ((_mode == SignUpMode_ChangePassword) || (_mode == SignUpMode_ChangePasswordNoVerify) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
         double secondsToCrack;
         tABC_Error Error;
@@ -543,7 +484,7 @@
     BOOL valid = YES;
 
     // if we are signing up for a new account
-    if ((_mode == SignUpMode_SignUp) || (_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
+    if ((_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
         if ([CoreBridge passwordExists] && self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
         {
