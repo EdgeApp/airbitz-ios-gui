@@ -31,7 +31,7 @@
 {
     [super viewDidLoad];
 
-    self.bShow = false;
+    self.bShow = NO;
     [self showHide];
     self.labelUsername.text = [NSString stringWithFormat:@"%@", self.manager.strUserName];
     self.labelPassword.text = [NSString stringWithFormat:@"%@", self.manager.strPassword];
@@ -45,21 +45,21 @@
 {
     if (self.bShow)
     {
-        self.labelInfo.hidden = true;
-        self.labelWriteIt.hidden = true;
-        self.viewShowHide.hidden = false;
+        self.labelInfo.hidden = YES;
+        self.labelWriteIt.hidden = YES;
+        self.viewShowHide.hidden = NO;
         [self.buttonShowHide setTitle:NSLocalizedString(@"Hide", "Hide") forState:UIControlStateNormal];
 
-        self.bShow = false;
+        self.bShow = NO;
     }
     else
     {
-        self.labelInfo.hidden = false;
-        self.labelWriteIt.hidden = false;
-        self.viewShowHide.hidden = true;
+        self.labelInfo.hidden = NO;
+        self.labelWriteIt.hidden = NO;
+        self.viewShowHide.hidden = YES;
         [self.buttonShowHide setTitle:NSLocalizedString(@"Show", "Show") forState:UIControlStateNormal];
 
-        self.bShow = true;
+        self.bShow = YES;
 
     }
 }
