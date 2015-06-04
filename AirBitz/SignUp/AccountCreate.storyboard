@@ -273,14 +273,12 @@ Your username and password are known only to you and never stored unencrypted.</
                             <constraint firstItem="hHD-NP-fM6" firstAttribute="top" secondItem="Cx6-mG-7Op" secondAttribute="bottom" constant="8" symbolic="YES" id="CAX-3f-IIm"/>
                             <constraint firstItem="RuU-Zx-pBJ" firstAttribute="top" secondItem="Cx6-mG-7Op" secondAttribute="bottom" constant="143" id="NxZ-mu-1ID"/>
                             <constraint firstItem="Cx6-mG-7Op" firstAttribute="leading" secondItem="u9u-cR-ilw" secondAttribute="leading" id="VnB-Z8-0Qc"/>
-                            <constraint firstItem="Cx6-mG-7Op" firstAttribute="top" secondItem="oID-Yo-O40" secondAttribute="bottom" constant="44" id="l2K-42-cKX"/>
                             <constraint firstAttribute="trailing" secondItem="Cx6-mG-7Op" secondAttribute="trailing" id="mAl-eN-x6j"/>
                             <constraint firstItem="Cx6-mG-7Op" firstAttribute="top" secondItem="u9u-cR-ilw" secondAttribute="top" constant="64" id="nmG-JF-Bse"/>
                             <constraint firstItem="hHD-NP-fM6" firstAttribute="trailing" secondItem="u9u-cR-ilw" secondAttribute="trailingMargin" id="yjt-wJ-d4s"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="nmG-JF-Bse"/>
                                 <exclude reference="NxZ-mu-1ID"/>
                             </mask>
                         </variation>
@@ -756,9 +754,9 @@ No one, including Airbitz, has any access to this information.</string>
                                 <exclude reference="VQh-8u-6zR"/>
                                 <exclude reference="ZhV-rT-Zkq"/>
                                 <exclude reference="jac-rr-W9j"/>
+                                <exclude reference="q41-gC-Kq5"/>
                                 <exclude reference="03D-2b-4LV"/>
                                 <exclude reference="jGj-lS-By8"/>
-                                <exclude reference="q41-gC-Kq5"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1281,11 +1279,11 @@ No one, including Airbitz, has any access to this information.</string>
                                 <exclude reference="ijG-21-uLZ"/>
                                 <exclude reference="kBL-kR-8l5"/>
                                 <exclude reference="rp4-1v-tcI"/>
+                                <exclude reference="IpX-Vr-ioJ"/>
+                                <exclude reference="fQj-Pj-oW0"/>
                                 <exclude reference="6Io-8w-56i"/>
                                 <exclude reference="c3m-cH-G99"/>
                                 <exclude reference="mdP-3r-JTB"/>
-                                <exclude reference="IpX-Vr-ioJ"/>
-                                <exclude reference="fQj-Pj-oW0"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1294,10 +1292,10 @@ No one, including Airbitz, has any access to this information.</string>
                                 <include reference="kBL-kR-8l5"/>
                                 <exclude reference="mN8-53-diQ"/>
                                 <include reference="rp4-1v-tcI"/>
-                                <exclude reference="c3m-cH-G99"/>
-                                <include reference="mdP-3r-JTB"/>
                                 <exclude reference="Hwx-Gn-T2l"/>
                                 <exclude reference="JgR-qK-lih"/>
+                                <exclude reference="c3m-cH-G99"/>
+                                <include reference="mdP-3r-JTB"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
