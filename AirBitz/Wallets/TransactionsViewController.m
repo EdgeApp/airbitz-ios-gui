@@ -26,7 +26,6 @@
 #import "Theme.h"
 #import "WalletHeaderView.h"
 #import "WalletCell.h"
-#import "FadingAlertView2.h"
 #import "WalletMakerView.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]

@@ -6,7 +6,6 @@
 #import "SignUpPasswordController.h"
 #import "MinCharTextField.h"
 #import "PasswordVerifyView.h"
-#import "FadingAlertView2.h"
 #import "ABC.h"
 #import "Util.h"
 #import "User.h"
@@ -19,9 +18,6 @@
 {
     UITextField                     *_activeTextField;
     PasswordVerifyView              *_passwordVerifyView;
-    FadingAlertView2                 *_fadingAlert;
-    float                           _keyboardFrameOriginY;
-
 }
 
 @property (nonatomic, weak) IBOutlet MinCharTextField *passwordTextField;
@@ -36,10 +32,6 @@
 @property (nonatomic, copy)     NSString                        *labelString;
 @property (nonatomic, assign)   BOOL                            bSuccess;
 @property (nonatomic, copy)     NSString                        *strReason;
-
-
-
-
 
 @end
 
@@ -69,11 +61,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    //NSLog(@"Adding keyboard notification");
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
+
     [self.pinTextField addTarget:self action:@selector(pinTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.passwordTextField addTarget:self action:@selector(passwordTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     
@@ -84,7 +73,6 @@
 {
     // NSLog(@"%s", __FUNCTION__);
     
-    //NSLog(@"Removing keyboard notification");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewWillDisappear:animated];
 }
@@ -107,13 +95,7 @@
     // check the new password fields
     if ([self newPasswordFieldsAreValid] == YES && [self fieldsAreValid] == YES)
     {
-        _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
-        [_fadingAlert messageTextSet:NSLocalizedString(@"Creating and securing account", nil)];
-        _fadingAlert.fadeDuration = 0;
-        _fadingAlert.fadeDelay = 0;
-        [_fadingAlert blockModal:YES];
-        [_fadingAlert showSpinner:YES];
-        [_fadingAlert show];
+        [FadingAlertView create:self.view message:NSLocalizedString(@"Creating and securing account", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             tABC_Error error;
@@ -126,7 +108,7 @@
             }
 
             dispatch_async(dispatch_get_main_queue(), ^{
-                [_fadingAlert dismiss:NO];
+                [FadingAlertView dismiss:YES];
                 if (error.code == ABC_CC_Ok)
                 {
                     _bSuccess = true;
@@ -141,14 +123,9 @@
                 {
                     _bSuccess = false;
                     _strReason = [Util errorMap:&error];
-                    _fadingAlert = [FadingAlertView2 CreateInsideView:self.view withDelegate:nil];
-                    [_fadingAlert blockModal:NO];
-                    [_fadingAlert messageTextSet:_strReason];
-                    _fadingAlert.fadeDuration = 2;
-                    _fadingAlert.fadeDelay = 5;
-                    [_fadingAlert showSpinner:NO];
-                    [_fadingAlert showFading];
-                 }
+
+                    [FadingAlertView create:self.view message:_strReason holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+                }
             });
         });
     }
@@ -250,61 +227,6 @@
     return valid;
 }
 
--(void)scrollTextFieldAboveKeyboard:(UITextField *)textField
-{
-//    if(_keyboardFrameOriginY) //set when keyboard is visible
-//    {
-//        CGRect textFieldFrame = [self.contentView convertRect:textField.frame toView:self.view.window];
-//
-//        float overlap = _keyboardFrameOriginY - (textFieldFrame.origin.y + textFieldFrame.size.height + KEYBOARD_MARGIN);
-//
-//        if(overlap < 0)
-//        {
-//            [UIView animateWithDuration:0.35
-//                                  delay: 0.0
-//                                options: UIViewAnimationOptionCurveEaseInOut
-//                             animations:^
-//             {
-//                 CGRect frame = self.contentView.frame;
-//                 frame.origin.y += overlap;
-//                 self.contentView.frame = frame;
-//             }
-//                             completion:^(BOOL finished)
-//             {
-//
-//             }];
-//        }
-//    }
-}
-
-
-#pragma mark - keyboard callbacks
-
-- (void)keyboardWillShow:(NSNotification *)notification
-{
-    //Get KeyboardFrame (in Window coordinates)
-    if(_activeTextField)
-    {
-        //NSLog(@"Keyboard will show for SignUpView");
-        NSDictionary *userInfo = [notification userInfo];
-        CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        
-        _keyboardFrameOriginY = keyboardFrame.origin.y;
-        
-        [self scrollTextFieldAboveKeyboard:_activeTextField];
-    }
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification
-{
-    if(_activeTextField)
-    {
-        //NSLog(@"Keyboard will hide for SignUpView");
-        _activeTextField = nil;
-    }
-    _keyboardFrameOriginY = 0.0;
-}
-
 #pragma mark - UITextField delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -350,10 +272,6 @@
                      {
                      }];
 
-    //won't do anything when a textField is tapped for the first time and no keyboard is visible because
-    //keyboardFrameOriginY isn't set yet (doestn' get set until KeyboardWillShow notification which occurs after this
-    //method is called.  But -scrollTextFieldAboveKeyboard gets called from the KeyboardWillShow notification
-    [self scrollTextFieldAboveKeyboard:textField];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

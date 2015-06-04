@@ -27,7 +27,6 @@
 #import "LocalSettings.h"
 #import "MainViewController.h"
 #import "Theme.h"
-#import "FadingAlertView2.h"
 #import "Contact.h"
 #import "TransferService.h"
 #import "AudioController.h"

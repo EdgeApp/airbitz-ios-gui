@@ -1060,12 +1060,6 @@
 		DA4F91A71AF569EA008C0BD4 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F91A61AF569EA008C0BD4 /* Theme.m */; };
 		DA4F91A81AF569EA008C0BD4 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F91A61AF569EA008C0BD4 /* Theme.m */; };
 		DA4F91A91AF569EA008C0BD4 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F91A61AF569EA008C0BD4 /* Theme.m */; };
-		DA5101E21AF9FD1100949855 /* FadingAlertView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5101E01AF9FD1100949855 /* FadingAlertView2.m */; };
-		DA5101E31AF9FD1100949855 /* FadingAlertView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5101E01AF9FD1100949855 /* FadingAlertView2.m */; };
-		DA5101E41AF9FD1100949855 /* FadingAlertView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5101E01AF9FD1100949855 /* FadingAlertView2.m */; };
-		DA5101E51AF9FD1100949855 /* FadingAlertView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA5101E11AF9FD1100949855 /* FadingAlertView2.xib */; };
-		DA5101E61AF9FD1100949855 /* FadingAlertView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA5101E11AF9FD1100949855 /* FadingAlertView2.xib */; };
-		DA5101E71AF9FD1100949855 /* FadingAlertView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA5101E11AF9FD1100949855 /* FadingAlertView2.xib */; };
 		DA5101EE1AFB35AD00949855 /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5101ED1AFB35AD00949855 /* BusinessDirectory.storyboard */; };
 		DA5101EF1AFB35AD00949855 /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5101ED1AFB35AD00949855 /* BusinessDirectory.storyboard */; };
 		DA5101F01AFB35AD00949855 /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5101ED1AFB35AD00949855 /* BusinessDirectory.storyboard */; };
@@ -2028,9 +2022,9 @@
 		DA06FAFD1B0CC107000BCA46 /* gift_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gift_box.png; path = Resources/Artwork/gift_box.png; sourceTree = "<group>"; };
 		DA06FAFE1B0CC107000BCA46 /* gift_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gift_box@2x.png"; path = "Resources/Artwork/gift_box@2x.png"; sourceTree = "<group>"; };
 		DA06FAFF1B0CC107000BCA46 /* gift_box@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gift_box@3x.png"; path = "Resources/Artwork/gift_box@3x.png"; sourceTree = "<group>"; };
-		DA06FB0D1B0E7CB2000BCA46 /* DropDownAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropDownAlertView.xib; path = FadingAlert2/DropDownAlertView.xib; sourceTree = "<group>"; };
-		DA06FB111B0E7CDD000BCA46 /* DropDownAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropDownAlertView.h; path = FadingAlert2/DropDownAlertView.h; sourceTree = "<group>"; };
-		DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropDownAlertView.m; path = FadingAlert2/DropDownAlertView.m; sourceTree = "<group>"; };
+		DA06FB0D1B0E7CB2000BCA46 /* DropDownAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropDownAlertView.xib; path = ../FadingAlert2/DropDownAlertView.xib; sourceTree = "<group>"; };
+		DA06FB111B0E7CDD000BCA46 /* DropDownAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropDownAlertView.h; path = ../FadingAlert2/DropDownAlertView.h; sourceTree = "<group>"; };
+		DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropDownAlertView.m; path = ../FadingAlert2/DropDownAlertView.m; sourceTree = "<group>"; };
 		DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FadingAlertViewNew.xib; path = ../FadingAlert2/FadingAlertViewNew.xib; sourceTree = "<group>"; };
 		DA06FB2D1B0EE88E000BCA46 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		DA06FB331B0FEF0F000BCA46 /* PopupPickerView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopupPickerView2.xib; path = PopupPickerView/PopupPickerView2.xib; sourceTree = "<group>"; };
@@ -2055,9 +2049,6 @@
 		DA4A533C1B146187003754F8 /* emboss_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emboss_down@2x.png"; path = "Resources/Artwork/emboss_down@2x.png"; sourceTree = "<group>"; };
 		DA4F919D1AF569B7008C0BD4 /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
 		DA4F91A61AF569EA008C0BD4 /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
-		DA5101DF1AF9FD1100949855 /* FadingAlertView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FadingAlertView2.h; path = FadingAlert2/FadingAlertView2.h; sourceTree = "<group>"; };
-		DA5101E01AF9FD1100949855 /* FadingAlertView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FadingAlertView2.m; path = FadingAlert2/FadingAlertView2.m; sourceTree = "<group>"; };
-		DA5101E11AF9FD1100949855 /* FadingAlertView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FadingAlertView2.xib; path = FadingAlert2/FadingAlertView2.xib; sourceTree = "<group>"; };
 		DA5101ED1AFB35AD00949855 /* BusinessDirectory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BusinessDirectory.storyboard; sourceTree = "<group>"; };
 		DA5509561A928E1300F57106 /* StylizedTextField2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField2.h; sourceTree = "<group>"; };
 		DA5509571A928E1300F57106 /* StylizedTextField2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField2.m; sourceTree = "<group>"; };
@@ -2439,6 +2430,9 @@
 				68C4AA221A0B4DD70010C837 /* FadingAlertView.m */,
 				68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */,
 				DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */,
+				DA06FB111B0E7CDD000BCA46 /* DropDownAlertView.h */,
+				DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */,
+				DA06FB0D1B0E7CB2000BCA46 /* DropDownAlertView.xib */,
 			);
 			name = FadingAlert;
 			path = "Google Drive";
@@ -2728,7 +2722,6 @@
 				6868AD1119516D7A006C3716 /* DebugViewController.h */,
 				6868AD1219516D7A006C3716 /* DebugViewController.m */,
 				68C4AA1C1A0B4DB50010C837 /* FadingAlert */,
-				DA5101EC1AF9FD7C00949855 /* FadingAlert2 */,
 				B505FB49193F7AC1007D4960 /* Google Drive */,
 				4C7247D0193564D20091C286 /* DateTime.m */,
 				4C5D8C52192AA1940015BB3C /* DDData */,
@@ -3317,19 +3310,6 @@
 			path = Plugins;
 			sourceTree = "<group>";
 		};
-		DA5101EC1AF9FD7C00949855 /* FadingAlert2 */ = {
-			isa = PBXGroup;
-			children = (
-				DA5101DF1AF9FD1100949855 /* FadingAlertView2.h */,
-				DA5101E01AF9FD1100949855 /* FadingAlertView2.m */,
-				DA5101E11AF9FD1100949855 /* FadingAlertView2.xib */,
-				DA06FB111B0E7CDD000BCA46 /* DropDownAlertView.h */,
-				DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */,
-				DA06FB0D1B0E7CB2000BCA46 /* DropDownAlertView.xib */,
-			);
-			name = FadingAlert2;
-			sourceTree = "<group>";
-		};
 		DAA5784819C23C8200E972FC /* Text */ = {
 			isa = PBXGroup;
 			children = (
@@ -3610,7 +3590,6 @@
 				7D98AD8319A7C550003D2BF6 /* infoTransactionDetails.html in Resources */,
 				DA06F9ED1B0BDD79000BCA46 /* icon_export_printer.png in Resources */,
 				DA06F9961B0BDD79000BCA46 /* flash-on@2x.png in Resources */,
-				DA5101E61AF9FD1100949855 /* FadingAlertView2.xib in Resources */,
 				DA06F96C1B0BDD79000BCA46 /* drag_bar@2x.png in Resources */,
 				DA06F9E11B0BDD79000BCA46 /* icon_export_email.png in Resources */,
 				7D98AD8519A7C550003D2BF6 /* PopupPickerView.xib in Resources */,
@@ -4018,7 +3997,6 @@
 				DA06F8811B0BDD79000BCA46 /* btn_collapse_expand.png in Resources */,
 				DA06F8931B0BDD79000BCA46 /* btn_dot.png in Resources */,
 				B5137C0C18A40A8400DA4A34 /* Lato-HairlineItalic.ttf in Resources */,
-				DA5101E51AF9FD1100949855 /* FadingAlertView2.xib in Resources */,
 				DA06FB061B0CC107000BCA46 /* gift_box@3x.png in Resources */,
 				DA06F8901B0BDD79000BCA46 /* btn_done@2x.png in Resources */,
 				DA06F7671B0BDD79000BCA46 /* 5-bars@2x.png in Resources */,
@@ -4319,7 +4297,6 @@
 				DA06F8831B0BDD79000BCA46 /* btn_collapse_expand.png in Resources */,
 				DA06F8951B0BDD79000BCA46 /* btn_dot.png in Resources */,
 				DAE865851A88A58A00A17BD3 /* Lato-HairlineItalic.ttf in Resources */,
-				DA5101E71AF9FD1100949855 /* FadingAlertView2.xib in Resources */,
 				DA06FB081B0CC107000BCA46 /* gift_box@3x.png in Resources */,
 				DA06F8921B0BDD79000BCA46 /* btn_done@2x.png in Resources */,
 				DA06F7691B0BDD79000BCA46 /* 5-bars@2x.png in Resources */,
@@ -4632,7 +4609,6 @@
 				7DFD22E41A1E716C008C43FB /* UIPhotoGalleryView.m in Sources */,
 				7D98ACDC19A7C550003D2BF6 /* NSDate+Helper.m in Sources */,
 				DA1333991A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */,
-				DA5101E31AF9FD1100949855 /* FadingAlertView2.m in Sources */,
 				7D89E8CF1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C61A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				DAE2763B1A9C033C00E24523 /* SignUpContactsController.m in Sources */,
@@ -4779,7 +4755,6 @@
 				B516C1E818C54B07008CC6A1 /* NSDate+Helper.m in Sources */,
 				4C3C3093191834AC006923DE /* PopupPickerView.m in Sources */,
 				DA1333981A7B12E00051DE14 /* TwoFactorScanViewController.m in Sources */,
-				DA5101E21AF9FD1100949855 /* FadingAlertView2.m in Sources */,
 				7D89E8CE1A245FC20067F660 /* NotificationChecker.m in Sources */,
 				7D89E8C51A2436480067F660 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				DAE2763A1A9C033C00E24523 /* SignUpContactsController.m in Sources */,
@@ -4926,7 +4901,6 @@
 				DAE864311A88A58A00A17BD3 /* NSDate+Helper.m in Sources */,
 				DAE864321A88A58A00A17BD3 /* PopupPickerView.m in Sources */,
 				DAE864331A88A58A00A17BD3 /* TwoFactorScanViewController.m in Sources */,
-				DA5101E41AF9FD1100949855 /* FadingAlertView2.m in Sources */,
 				DAE864341A88A58A00A17BD3 /* NotificationChecker.m in Sources */,
 				DAE864351A88A58A00A17BD3 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				DAE2763C1A9C033C00E24523 /* SignUpContactsController.m in Sources */,

@@ -22,7 +22,6 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "ButtonSelectorView2.h"
-#import "FadingAlertView2.h"
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate,
@@ -40,11 +39,7 @@
     BOOL                                _passwordRequired;
     NSString                            *_strReason;
     int                                 _callbackTimestamp;
-//	int                                 _selectedWalletIndex;
-    Transaction                         *_completedTransaction;    // nil until sendTransaction is successfully completed
-//    UITapGestureRecognizer              *tap;
     UIAlertView                         *_alert;
-    FadingAlertView2                    *_fadingAlert;
     NSTimer                             *_pinTimer;
     BOOL                        bWalletListDropped;
 
@@ -70,15 +65,11 @@
 @property (nonatomic, weak) IBOutlet UIButton               *helpButton;
 @property (nonatomic, weak) IBOutlet UILabel                *conversionLabel;
 @property (weak, nonatomic) IBOutlet UILabel                *labelPINTitle;
-@property (weak, nonatomic) IBOutlet UILabel                *txFeesLabel;
 @property (weak, nonatomic) IBOutlet UIImageView            *imagePINEmboss;
 @property (nonatomic, weak) IBOutlet UITextField            *withdrawlPIN;
 @property (nonatomic, weak) IBOutlet UIView                 *confirmSliderContainer;
-//@property (nonatomic, weak) IBOutlet UIButton               *btn_alwaysConfirm;
-//@property (weak, nonatomic) IBOutlet UILabel                *labelAlwaysConfirm;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
 
-//@property (nonatomic, strong) NSMutableArray                *arrayWallets;
 @property (nonatomic, strong) SendStatusViewController          *sendStatusController;
 @property (nonatomic, strong) TransactionDetailsViewController  *transactionDetailsController;
 @property (nonatomic, strong) InfoView                          *infoView;
@@ -134,10 +125,6 @@
     [self.viewDisplayArea bringSubviewToFront:self.amountFiatTextField];
     [self.viewDisplayArea bringSubviewToFront:self.withdrawlPIN];
 
-//    // Load up the wallets
-//    self.arrayWallets = [[NSMutableArray alloc] init];
-//    [CoreBridge loadWallets:self.arrayWallets archived:nil withTxs:NO];
-//
     _sendTo = [NSString safeStringWithUTF8String:_spendTarget.pSpend->szName];
     if (_spendTarget.pSpend->bSigned)
     {
@@ -155,7 +142,6 @@
                 _bAddressIsWalletUUID = YES;
             }
         }
-//        [CoreBridge Singleton].arrayWallets = newArr;
     }
 
     CGRect frame = self.keypadView.frame;
@@ -919,8 +905,6 @@
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
         } else if (_passwordRequired) {
-            _fadingAlert = [FadingAlertView2 CreateLoadingView:self.view withDelegate:nil];
-            [_fadingAlert show];
             [Util checkPasswordAsync:self.withdrawlPIN.text withSelector:@selector(handlePasswordCheck:) controller:self];
         } else {
             [self continueChecks];
@@ -932,7 +916,6 @@
 - (void)handlePasswordCheck:(NSNumber *)authenticated
 {
     BOOL bAuthenticated = [authenticated boolValue];
-    [_fadingAlert dismiss:NO];
     if (bAuthenticated) {
         [self continueChecks];
     } else {

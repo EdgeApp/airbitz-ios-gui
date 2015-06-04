@@ -7,7 +7,6 @@
 #import "User.h"
 #import "Util.h"
 #import "LocalSettings.h"
-#import "FadingAlertView2.h"
 
 #import "CoreBridge.h"
 

@@ -46,7 +46,6 @@
 #import "LocalSettings.h"
 #import "FadingAlertView.h"
 #import "ButtonSelectorView2.h"
-#import "FadingAlertView2.h"
 #import "MainViewController.h"
 #import "Theme.h"
 #import "SpendTarget.h"
