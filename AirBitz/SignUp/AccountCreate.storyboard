@@ -282,11 +282,6 @@ Your username and password are known only to you and never stored unencrypted.</
                                 <exclude reference="NxZ-mu-1ID"/>
                             </mask>
                         </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="nmG-JF-Bse"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="contentStartConstraint" destination="nmG-JF-Bse" id="Snj-ic-jln"/>
@@ -788,7 +783,7 @@ No one, including Airbitz, has any access to this information.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uu-dw-ssd" customClass="StylizedButton">
-                                <rect key="frame" x="185" y="412" width="119" height="41"/>
+                                <rect key="frame" x="185" y="422" width="119" height="41"/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="Ety-b4-KRH"/>
@@ -807,10 +802,10 @@ No one, including Airbitz, has any access to this information.</string>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KK6-aH-ad6">
-                                <rect key="frame" x="16" y="64" width="400" height="340"/>
+                                <rect key="frame" x="16" y="64" width="284" height="350"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write it Down!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wff-Il-8GU">
-                                        <rect key="frame" x="16" y="20" width="552" height="21"/>
+                                        <rect key="frame" x="16" y="20" width="436" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="RCK-Ad-JKl"/>
                                         </constraints>
@@ -830,27 +825,22 @@ No one, including Airbitz, has any access to this information.</string>
                                         </variation>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wES-c3-x79" userLabel="Toggle View">
-                                        <rect key="frame" x="0.0" y="192" width="320" height="95"/>
+                                        <rect key="frame" x="0.0" y="192" width="284" height="105"/>
                                         <subviews>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Your username and password are known only to you and never transmitted or stored unencrypted." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eB-ff-Ebh">
-                                                <rect key="frame" x="16" y="0.0" width="288" height="62"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Your username and password are known only to you and never transmitted or stored unencrypted." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eB-ff-Ebh">
+                                                <rect key="frame" x="0.0" y="0.0" width="284" height="51"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Write down and store securely" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcU-OX-5Hj">
-                                                <rect key="frame" x="39" y="60" width="242" height="34"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write down and store securely" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcU-OX-5Hj">
+                                                <rect key="frame" x="0.0" y="60" width="284" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="n5a-5E-38h"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                 <color key="textColor" red="0.74189814814814814" green="0.42449207604779388" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="n5a-5E-38h"/>
-                                                    </mask>
-                                                </variation>
                                                 <variation key="widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="n5a-5E-38h"/>
@@ -858,15 +848,17 @@ No one, including Airbitz, has any access to this information.</string>
                                                 </variation>
                                             </label>
                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0If-SH-SJz" userLabel="Credentials view">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="284" height="97"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJ6-mQ-mSV">
-                                                        <rect key="frame" x="8" y="0.0" width="91" height="30"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJ6-mQ-mSV">
+                                                        <rect key="frame" x="8" y="0.0" width="100" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="76" id="2cm-9J-BUQ"/>
                                                             <constraint firstAttribute="height" constant="21" id="5uv-Kk-F0w"/>
                                                             <constraint firstAttribute="height" constant="20" id="9vm-7c-hqP"/>
                                                             <constraint firstAttribute="width" constant="76" id="R3W-PS-wY3"/>
+                                                            <constraint firstAttribute="width" constant="100" id="wXc-Z3-rmZ"/>
+                                                            <constraint firstAttribute="height" constant="30" id="ywN-L5-SKh"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -888,10 +880,12 @@ No one, including Airbitz, has any access to this information.</string>
                                                             </mask>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqc-i8-gfC">
-                                                        <rect key="frame" x="8" y="25" width="91" height="30"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqc-i8-gfC">
+                                                        <rect key="frame" x="8" y="25" width="100" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="76" id="KSd-5F-HHz"/>
+                                                            <constraint firstAttribute="height" constant="30" id="Ybt-4H-m6n"/>
+                                                            <constraint firstAttribute="width" constant="100" id="oFm-R2-SqB"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -907,10 +901,12 @@ No one, including Airbitz, has any access to this information.</string>
                                                             </mask>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPi-8w-xQ4">
-                                                        <rect key="frame" x="8" y="50" width="91" height="30"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPi-8w-xQ4">
+                                                        <rect key="frame" x="8" y="50" width="100" height="30"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="SrF-2B-fNz"/>
                                                             <constraint firstAttribute="width" constant="40" id="Tna-xe-T1L"/>
+                                                            <constraint firstAttribute="width" constant="100" id="ocS-eu-WuZ"/>
                                                             <constraint firstAttribute="height" constant="21" id="rzm-Zu-1J3"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
@@ -929,10 +925,12 @@ No one, including Airbitz, has any access to this information.</string>
                                                             </mask>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="myname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="DUg-At-veb">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="myname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="DUg-At-veb">
                                                         <rect key="frame" x="119" y="0.0" width="160" height="30"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="bx5-ND-mrg"/>
                                                             <constraint firstAttribute="height" constant="21" id="cDA-tl-jVQ"/>
+                                                            <constraint firstAttribute="width" constant="160" id="taH-RA-cCz"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -948,15 +946,21 @@ No one, including Airbitz, has any access to this information.</string>
                                                             </mask>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="mypassword12345" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="tOB-4i-OVm">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mypassword12345" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="tOB-4i-OVm">
                                                         <rect key="frame" x="119" y="25" width="160" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="40z-b2-SZ4"/>
+                                                            <constraint firstAttribute="width" constant="160" id="99q-Qg-hjQ"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="1234" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzw-pH-bAR">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzw-pH-bAR">
                                                         <rect key="frame" x="119" y="50" width="160" height="30"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="GaP-cT-0va"/>
+                                                            <constraint firstAttribute="width" constant="160" id="LpQ-ny-IdX"/>
                                                             <constraint firstAttribute="height" constant="21" id="x4n-fr-EcW"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
@@ -981,11 +985,14 @@ No one, including Airbitz, has any access to this information.</string>
                                                 <constraints>
                                                     <constraint firstItem="DUg-At-veb" firstAttribute="width" secondItem="Gzw-pH-bAR" secondAttribute="width" id="1gW-MW-2gH"/>
                                                     <constraint firstItem="bPi-8w-xQ4" firstAttribute="width" secondItem="zqc-i8-gfC" secondAttribute="width" id="1qj-Gw-JMB"/>
+                                                    <constraint firstItem="tOB-4i-OVm" firstAttribute="leading" secondItem="bPi-8w-xQ4" secondAttribute="trailing" constant="11" id="2uG-pT-rzf"/>
                                                     <constraint firstItem="DUg-At-veb" firstAttribute="leading" secondItem="sJ6-mQ-mSV" secondAttribute="trailing" constant="6" id="3Nc-qk-dfW"/>
                                                     <constraint firstAttribute="bottom" secondItem="Gzw-pH-bAR" secondAttribute="bottom" constant="20" symbolic="YES" id="8SI-DD-ceL"/>
+                                                    <constraint firstItem="Gzw-pH-bAR" firstAttribute="leading" secondItem="bPi-8w-xQ4" secondAttribute="trailing" constant="11" id="GGP-aW-72Z"/>
                                                     <constraint firstItem="tOB-4i-OVm" firstAttribute="top" secondItem="DUg-At-veb" secondAttribute="bottom" constant="8" symbolic="YES" id="GzV-x4-XiF"/>
                                                     <constraint firstItem="zqc-i8-gfC" firstAttribute="leading" secondItem="0If-SH-SJz" secondAttribute="leading" constant="8" id="Haz-Vd-PAR"/>
                                                     <constraint firstItem="Gzw-pH-bAR" firstAttribute="leading" secondItem="tOB-4i-OVm" secondAttribute="leading" id="IUj-wP-aeh"/>
+                                                    <constraint firstItem="Gzw-pH-bAR" firstAttribute="top" secondItem="DUg-At-veb" secondAttribute="bottom" constant="20" id="K0v-xL-XMc"/>
                                                     <constraint firstItem="zqc-i8-gfC" firstAttribute="leading" secondItem="0If-SH-SJz" secondAttribute="leading" constant="20" symbolic="YES" id="KKW-m2-Iwd"/>
                                                     <constraint firstItem="Gzw-pH-bAR" firstAttribute="height" secondItem="sJ6-mQ-mSV" secondAttribute="height" id="Lld-ue-Oa4"/>
                                                     <constraint firstItem="Gzw-pH-bAR" firstAttribute="height" secondItem="DUg-At-veb" secondAttribute="height" id="Mw7-fp-IOh"/>
@@ -993,16 +1000,21 @@ No one, including Airbitz, has any access to this information.</string>
                                                     <constraint firstItem="bPi-8w-xQ4" firstAttribute="top" secondItem="zqc-i8-gfC" secondAttribute="bottom" constant="8" symbolic="YES" id="OgA-Hb-87C"/>
                                                     <constraint firstItem="bPi-8w-xQ4" firstAttribute="top" secondItem="zqc-i8-gfC" secondAttribute="bottom" constant="4" id="PQF-M1-MfI"/>
                                                     <constraint firstItem="bPi-8w-xQ4" firstAttribute="leading" secondItem="0If-SH-SJz" secondAttribute="leading" constant="20" symbolic="YES" id="R1d-fI-Fco"/>
+                                                    <constraint firstItem="bPi-8w-xQ4" firstAttribute="top" secondItem="sJ6-mQ-mSV" secondAttribute="bottom" constant="20" id="RNK-dn-xUz"/>
                                                     <constraint firstAttribute="trailing" secondItem="DUg-At-veb" secondAttribute="trailing" constant="20" symbolic="YES" id="RhS-OB-oz5"/>
                                                     <constraint firstItem="zqc-i8-gfC" firstAttribute="height" secondItem="sJ6-mQ-mSV" secondAttribute="height" id="TMI-zV-m54"/>
                                                     <constraint firstItem="Gzw-pH-bAR" firstAttribute="height" secondItem="tOB-4i-OVm" secondAttribute="height" id="Tho-50-7nN"/>
                                                     <constraint firstItem="zqc-i8-gfC" firstAttribute="height" secondItem="bPi-8w-xQ4" secondAttribute="height" id="VCc-qn-JhH"/>
                                                     <constraint firstItem="DUg-At-veb" firstAttribute="leading" secondItem="sJ6-mQ-mSV" secondAttribute="trailing" constant="8" symbolic="YES" id="VYh-tx-2M0"/>
+                                                    <constraint firstItem="DUg-At-veb" firstAttribute="top" secondItem="0If-SH-SJz" secondAttribute="top" id="VhX-qh-IFC"/>
                                                     <constraint firstItem="zqc-i8-gfC" firstAttribute="top" secondItem="sJ6-mQ-mSV" secondAttribute="bottom" constant="7" id="VwA-TB-HQj"/>
                                                     <constraint firstItem="tOB-4i-OVm" firstAttribute="leading" secondItem="zqc-i8-gfC" secondAttribute="trailing" constant="8" symbolic="YES" id="W4P-EN-1hC"/>
                                                     <constraint firstItem="zqc-i8-gfC" firstAttribute="width" secondItem="sJ6-mQ-mSV" secondAttribute="width" id="WTS-Kz-bPY"/>
                                                     <constraint firstItem="bPi-8w-xQ4" firstAttribute="leading" secondItem="0If-SH-SJz" secondAttribute="leading" constant="8" id="XHd-xV-QjF"/>
                                                     <constraint firstItem="sJ6-mQ-mSV" firstAttribute="top" secondItem="0If-SH-SJz" secondAttribute="top" constant="8" id="YjO-jR-TBC"/>
+                                                    <constraint firstItem="zqc-i8-gfC" firstAttribute="top" secondItem="0If-SH-SJz" secondAttribute="top" constant="25" id="aNl-AN-cOJ"/>
+                                                    <constraint firstItem="bPi-8w-xQ4" firstAttribute="leading" secondItem="0If-SH-SJz" secondAttribute="leading" constant="8" id="bi5-iV-u1G"/>
+                                                    <constraint firstItem="zqc-i8-gfC" firstAttribute="leading" secondItem="0If-SH-SJz" secondAttribute="leading" constant="8" id="blv-gR-VzS"/>
                                                     <constraint firstItem="sJ6-mQ-mSV" firstAttribute="leading" secondItem="0If-SH-SJz" secondAttribute="leading" constant="8" id="cEx-jb-NBH"/>
                                                     <constraint firstItem="zqc-i8-gfC" firstAttribute="top" secondItem="sJ6-mQ-mSV" secondAttribute="bottom" constant="8" symbolic="YES" id="cdY-S6-KDt"/>
                                                     <constraint firstItem="DUg-At-veb" firstAttribute="top" secondItem="0If-SH-SJz" secondAttribute="top" constant="20" symbolic="YES" id="ce0-g7-Xgb"/>
@@ -1012,11 +1024,15 @@ No one, including Airbitz, has any access to this information.</string>
                                                     <constraint firstItem="Gzw-pH-bAR" firstAttribute="top" secondItem="tOB-4i-OVm" secondAttribute="bottom" constant="8" symbolic="YES" id="gzH-Uq-g9C"/>
                                                     <constraint firstItem="zqc-i8-gfC" firstAttribute="width" secondItem="bPi-8w-xQ4" secondAttribute="width" id="h1K-ax-eqP"/>
                                                     <constraint firstItem="Gzw-pH-bAR" firstAttribute="height" secondItem="bPi-8w-xQ4" secondAttribute="height" id="kPR-gj-2vd"/>
+                                                    <constraint firstItem="sJ6-mQ-mSV" firstAttribute="leading" secondItem="0If-SH-SJz" secondAttribute="leading" constant="8" id="l71-q3-wgs"/>
+                                                    <constraint firstItem="sJ6-mQ-mSV" firstAttribute="top" secondItem="0If-SH-SJz" secondAttribute="top" id="lUf-WU-hUz"/>
                                                     <constraint firstItem="bPi-8w-xQ4" firstAttribute="width" secondItem="sJ6-mQ-mSV" secondAttribute="width" id="mGZ-ea-2wV"/>
                                                     <constraint firstAttribute="trailing" secondItem="tOB-4i-OVm" secondAttribute="trailing" constant="20" symbolic="YES" id="mZ4-cV-ZPQ"/>
                                                     <constraint firstAttribute="trailing" secondItem="tOB-4i-OVm" secondAttribute="trailing" id="nal-kl-vgr"/>
                                                     <constraint firstItem="DUg-At-veb" firstAttribute="width" secondItem="tOB-4i-OVm" secondAttribute="width" id="poH-Zn-K0D"/>
+                                                    <constraint firstItem="DUg-At-veb" firstAttribute="leading" secondItem="zqc-i8-gfC" secondAttribute="trailing" constant="11" id="qFB-Tf-36a"/>
                                                     <constraint firstAttribute="trailing" secondItem="DUg-At-veb" secondAttribute="trailing" id="tRA-Bg-mWd"/>
+                                                    <constraint firstItem="tOB-4i-OVm" firstAttribute="top" secondItem="0If-SH-SJz" secondAttribute="top" constant="25" id="ucL-ib-rzL"/>
                                                     <constraint firstItem="Gzw-pH-bAR" firstAttribute="leading" secondItem="DUg-At-veb" secondAttribute="leading" id="uuR-Sv-d0O"/>
                                                     <constraint firstItem="tOB-4i-OVm" firstAttribute="top" secondItem="zqc-i8-gfC" secondAttribute="top" id="vAH-bq-Cni"/>
                                                     <constraint firstItem="sJ6-mQ-mSV" firstAttribute="top" secondItem="0If-SH-SJz" secondAttribute="top" constant="20" symbolic="YES" id="wNZ-W3-tZ2"/>
@@ -1121,22 +1137,23 @@ No one, including Airbitz, has any access to this information.</string>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="4eB-ff-Ebh" firstAttribute="leading" secondItem="wES-c3-x79" secondAttribute="leading" constant="20" symbolic="YES" id="22D-Cc-ilX">
+                                            <constraint firstItem="4eB-ff-Ebh" firstAttribute="leading" secondItem="wES-c3-x79" secondAttribute="leading" id="22D-Cc-ilX">
                                                 <variation key="widthClass=compact" constant="0.0"/>
                                             </constraint>
-                                            <constraint firstItem="jcU-OX-5Hj" firstAttribute="top" secondItem="4eB-ff-Ebh" secondAttribute="bottom" constant="8" symbolic="YES" id="4Al-EG-OoC"/>
+                                            <constraint firstItem="jcU-OX-5Hj" firstAttribute="top" secondItem="4eB-ff-Ebh" secondAttribute="bottom" priority="999" constant="9" id="4Al-EG-OoC"/>
                                             <constraint firstAttribute="trailing" secondItem="jcU-OX-5Hj" secondAttribute="trailing" id="84d-St-m0f"/>
-                                            <constraint firstAttribute="height" constant="95" id="B12-tx-LiA"/>
+                                            <constraint firstAttribute="height" constant="105" id="B12-tx-LiA"/>
                                             <constraint firstItem="jcU-OX-5Hj" firstAttribute="leading" secondItem="wES-c3-x79" secondAttribute="leading" id="DO8-Sq-PeM"/>
                                             <constraint firstItem="0If-SH-SJz" firstAttribute="leading" secondItem="wES-c3-x79" secondAttribute="leading" id="HIZ-0Y-cy6"/>
+                                            <constraint firstAttribute="trailing" secondItem="4eB-ff-Ebh" secondAttribute="trailing" id="Kuz-pG-nvf"/>
                                             <constraint firstItem="0If-SH-SJz" firstAttribute="top" secondItem="wES-c3-x79" secondAttribute="top" id="L8D-gf-0Mx"/>
                                             <constraint firstAttribute="bottom" secondItem="jcU-OX-5Hj" secondAttribute="bottom" constant="20" symbolic="YES" id="Qx9-CR-U26">
                                                 <variation key="widthClass=compact" constant="10"/>
                                             </constraint>
-                                            <constraint firstAttribute="trailing" secondItem="4eB-ff-Ebh" secondAttribute="trailing" constant="20" symbolic="YES" id="SaH-wO-LLn">
+                                            <constraint firstAttribute="trailing" secondItem="4eB-ff-Ebh" secondAttribute="trailing" id="SaH-wO-LLn">
                                                 <variation key="widthClass=compact" constant="0.0"/>
                                             </constraint>
-                                            <constraint firstItem="4eB-ff-Ebh" firstAttribute="top" secondItem="wES-c3-x79" secondAttribute="top" constant="20" symbolic="YES" id="YCq-os-t5E">
+                                            <constraint firstItem="4eB-ff-Ebh" firstAttribute="top" secondItem="wES-c3-x79" secondAttribute="top" id="YCq-os-t5E">
                                                 <variation key="widthClass=compact" constant="0.0"/>
                                             </constraint>
                                             <constraint firstAttribute="trailing" secondItem="0If-SH-SJz" secondAttribute="trailing" constant="20" symbolic="YES" id="cmf-v8-8yW"/>
@@ -1146,7 +1163,6 @@ No one, including Airbitz, has any access to this information.</string>
                                             <constraint firstAttribute="bottom" secondItem="0If-SH-SJz" secondAttribute="bottom" constant="8" id="k1I-lo-eDP">
                                                 <variation key="widthClass=compact" constant="0.0"/>
                                             </constraint>
-                                            <constraint firstItem="jcU-OX-5Hj" firstAttribute="leading" secondItem="wES-c3-x79" secondAttribute="leading" constant="20" symbolic="YES" id="pHH-eX-R5N"/>
                                             <constraint firstAttribute="bottom" secondItem="0If-SH-SJz" secondAttribute="bottom" constant="20" symbolic="YES" id="pdR-ek-bbd"/>
                                         </constraints>
                                         <variation key="default">
@@ -1155,14 +1171,8 @@ No one, including Airbitz, has any access to this information.</string>
                                                 <exclude reference="gU9-VZ-qQK"/>
                                                 <exclude reference="jLr-mQ-EPm"/>
                                                 <exclude reference="pdR-ek-bbd"/>
-                                                <exclude reference="22D-Cc-ilX"/>
                                                 <exclude reference="SaH-wO-LLn"/>
-                                                <exclude reference="YCq-os-t5E"/>
-                                                <exclude reference="4Al-EG-OoC"/>
-                                                <exclude reference="84d-St-m0f"/>
-                                                <exclude reference="DO8-Sq-PeM"/>
                                                 <exclude reference="Qx9-CR-U26"/>
-                                                <exclude reference="pHH-eX-R5N"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -1175,11 +1185,10 @@ No one, including Airbitz, has any access to this information.</string>
                                                 <include reference="22D-Cc-ilX"/>
                                                 <include reference="SaH-wO-LLn"/>
                                                 <include reference="YCq-os-t5E"/>
-                                                <exclude reference="4Al-EG-OoC"/>
+                                                <include reference="4Al-EG-OoC"/>
                                                 <include reference="84d-St-m0f"/>
                                                 <include reference="DO8-Sq-PeM"/>
                                                 <include reference="Qx9-CR-U26"/>
-                                                <exclude reference="pHH-eX-R5N"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
@@ -1187,7 +1196,7 @@ No one, including Airbitz, has any access to this information.</string>
                                         </variation>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8f-q2-Sa7" customClass="StylizedButtonOutline">
-                                        <rect key="frame" x="16" y="295" width="85" height="34"/>
+                                        <rect key="frame" x="16" y="305" width="85" height="34"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="cUc-X7-GJg"/>
@@ -1226,7 +1235,7 @@ No one, including Airbitz, has any access to this information.</string>
                                     </constraint>
                                     <constraint firstAttribute="bottom" secondItem="W8f-q2-Sa7" secondAttribute="bottom" constant="11" id="j8F-Cb-rh2"/>
                                     <constraint firstItem="qwh-Mw-sul" firstAttribute="top" secondItem="wff-Il-8GU" secondAttribute="bottom" constant="8" symbolic="YES" id="riS-hE-AwI"/>
-                                    <constraint firstAttribute="trailing" secondItem="wES-c3-x79" secondAttribute="trailing" constant="80" id="xKI-vf-CHV">
+                                    <constraint firstAttribute="trailing" secondItem="wES-c3-x79" secondAttribute="trailing" id="xKI-vf-CHV">
                                         <variation key="widthClass=compact" constant="20" symbolic="YES"/>
                                     </constraint>
                                     <constraint firstItem="wES-c3-x79" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" id="xeV-MV-un4"/>
@@ -1234,6 +1243,7 @@ No one, including Airbitz, has any access to this information.</string>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="0oS-ve-4tH"/>
+                                        <exclude reference="etu-KW-Vpx"/>
                                         <exclude reference="br1-Xc-E16"/>
                                     </mask>
                                 </variation>
@@ -1253,6 +1263,7 @@ No one, including Airbitz, has any access to this information.</string>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nqJ-hb-Kll" firstAttribute="top" secondItem="6uu-dw-ssd" secondAttribute="bottom" constant="147" id="6Io-8w-56i"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KK6-aH-ad6" secondAttribute="trailing" id="C7j-UR-Sso"/>
                             <constraint firstItem="6uu-dw-ssd" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="bottom" constant="8" symbolic="YES" id="Hwx-Gn-T2l"/>
                             <constraint firstItem="6uu-dw-ssd" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="bottom" constant="8" id="IpX-Vr-ioJ"/>
                             <constraint firstItem="6uu-dw-ssd" firstAttribute="trailing" secondItem="gVb-bf-YdA" secondAttribute="trailingMargin" id="JgR-qK-lih"/>
@@ -1275,10 +1286,10 @@ No one, including Airbitz, has any access to this information.</string>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="C7j-UR-Sso"/>
                                 <exclude reference="JoB-Sb-VkL"/>
                                 <exclude reference="ijG-21-uLZ"/>
                                 <exclude reference="kBL-kR-8l5"/>
-                                <exclude reference="rp4-1v-tcI"/>
                                 <exclude reference="IpX-Vr-ioJ"/>
                                 <exclude reference="fQj-Pj-oW0"/>
                                 <exclude reference="6Io-8w-56i"/>
