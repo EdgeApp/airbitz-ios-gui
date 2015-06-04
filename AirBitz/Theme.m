@@ -61,6 +61,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorRequestBottomTextField = self.colorTextDark;
 
     self.colorButtonGreen = UIColorFromARGB(0xff80C342);
+    self.bdButtonBlue = UIColorFromARGB(0xff0079B9);
     self.colorsProfileIcons = [[NSMutableArray alloc] init];
 
     [self.colorsProfileIcons addObject:UIColorFromRGB(0xec6a5e)];
