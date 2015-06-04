@@ -601,18 +601,21 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	}
 	else if(cellType == kPhone)
 	{
+        commonCell.cellIcon.hidden = NO;
         commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_phone.png"];
 		commonCell.leftLabel.text = [self.businessDetails objectForKey:@"phone"];
 	}
 	else if(cellType == kWebsite)
 	{
 		//website cell
+        commonCell.cellIcon.hidden = NO;
         commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_web.png"];
 		commonCell.leftLabel.text = [self.businessDetails objectForKey:@"website"];
 	}
 	else if(cellType == kShare)
 	{
 		//share cell
+        commonCell.cellIcon.hidden = NO;
         commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_share.png"];
         commonCell.leftLabel.text = NSLocalizedString(@"Share", @"Share button text");
         shareView = commonCell;
@@ -682,6 +685,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
             NSLog(@"rightLabel: %@", commonCell.rightLabel.text);
 
             commonCell.rightIcon.hidden = YES;
+            commonCell.cellIcon.hidden = NO;
             commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_clock.png"];
 
         }
@@ -709,8 +713,9 @@ typedef NS_ENUM(NSUInteger, CellType) {
             NSNumber *socialType = [pair objectForKey:[NSNumber numberWithInt:row]];
             if (socialType)
             {
-                commonCell.leftLabel.text = [BD_Social_Cell getSocialTypeAsString:socialType];
+                commonCell.cellIcon.hidden = NO;
                 commonCell.cellIcon.image = [UIImage imageNamed:[BD_Social_Cell getSocialTypeImage:socialType]];
+                commonCell.leftLabel.text = [BD_Social_Cell getSocialTypeAsString:socialType];
                 break;
             }
         }
