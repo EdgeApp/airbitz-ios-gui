@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -183,18 +182,18 @@
                             </connections>
                         </view>
                         <view contentMode="scaleToFill" id="jpu-23-4kh" userLabel="buysellView" customClass="UIButton">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
+                            <rect key="frame" x="0.0" y="49" width="240" height="52"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_exchange.png" id="Zim-he-CkY">
-                                    <rect key="frame" x="29" y="12" width="26" height="26"/>
+                                    <rect key="frame" x="29" y="13" width="26" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
                                     </accessibility>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUY/SELL BITCOIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rWQ-uJ-DUX" userLabel="buysellText">
-                                    <rect key="frame" x="79" y="0.0" width="161" height="50"/>
+                                    <rect key="frame" x="79" y="1" width="161" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="">
                                         <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
@@ -215,7 +214,7 @@
                             </connections>
                         </view>
                         <view contentMode="scaleToFill" id="Lwy-1d-Qgs" userLabel="importView" customClass="UIButton">
-                            <rect key="frame" x="0.0" y="50" width="240" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gift_box.png" id="yTZ-dT-jac">
