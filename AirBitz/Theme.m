@@ -143,6 +143,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightSettingsTableCell            = 40.0;
         self.heightSettingsTableHeader          = 60.0;
         self.heightButton                       = 45.0;
+        self.buttonFontSize                     = 15.0;
     }
     if (IS_MIN_IPHONE5)
     {

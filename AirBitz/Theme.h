@@ -75,6 +75,7 @@
 
 
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
+@property (nonatomic) CGFloat buttonFontSize;
 @property (nonatomic) CGFloat elementPadding;
 @property (nonatomic) CGFloat heightListings;
 @property (nonatomic) CGFloat heightLoginScreenLogo;

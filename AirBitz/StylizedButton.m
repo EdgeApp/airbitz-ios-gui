@@ -5,6 +5,7 @@
 
 #import "StylizedButton.h"
 #import "Util.h"
+#import "Theme.h"
 
 @implementation StylizedButton
 
@@ -37,9 +38,8 @@
     }
     [self.layer setBorderColor:(__bridge CGColorRef)([UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8])];
     [self.layer setBorderWidth:1.0];
-    
-    
-    
+    [self.titleLabel setFont:[UIFont fontWithName:[Theme Singleton].appFont size:[Theme Singleton].buttonFontSize]];
+
 }
 
 - (id)initWithFrame:(CGRect)frame
