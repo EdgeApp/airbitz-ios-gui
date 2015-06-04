@@ -61,6 +61,16 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorRequestBottomTextField = self.colorTextDark;
 
     self.colorButtonGreen = UIColorFromARGB(0xff80C342);
+    self.colorsProfileIcons = [[NSMutableArray alloc] init];
+
+    [self.colorsProfileIcons addObject:UIColorFromRGB(0xec6a5e)];
+    [self.colorsProfileIcons addObject:UIColorFromRGB(0xff9c00)];
+    [self.colorsProfileIcons addObject:UIColorFromRGB(0xf4d347)];
+    [self.colorsProfileIcons addObject:UIColorFromRGB(0x7ccc52)];
+    [self.colorsProfileIcons addObject:UIColorFromRGB(0x66aee4)];
+    [self.colorsProfileIcons addObject:UIColorFromRGB(0x5ee0ec)];
+    [self.colorsProfileIcons addObject:UIColorFromRGB(0xb400ff)];
+    [self.colorsProfileIcons addObject:UIColorFromRGB(0x777777)];
 
     self.appFont = @"Lato-Regular";
 

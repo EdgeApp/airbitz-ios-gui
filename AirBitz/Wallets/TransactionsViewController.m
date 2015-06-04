@@ -252,25 +252,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
 
     [self updateViews:nil];
-//    [self.balanceViewPlaceholder refresh];
-
-//    if (self.arrayWallets == nil)
-//    {
-//        self.arrayWallets = [[NSMutableArray alloc] init];
-//        self.arrayArchivedWallets = [[NSMutableArray alloc] init];
-//    }
-//    [CoreBridge postToWalletsQueue:^(void) {
-//        [self reloadWallets:self.arrayWallets archived:self.arrayArchivedWallets];
-//
-//        dispatch_async(dispatch_get_main_queue(),^{
-//            [self getBizImagesForWallet:self.wallet];
-//            [self.tableView reloadData];
-//            [self.walletsTable reloadData];
-//            [self updateBalanceView];
-//
-//        });
-//    }];
-//
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -1015,7 +996,7 @@
         //
         if (bBlankCell)
         {
-            cell.addressLabel.textColor = [Theme Singleton].colorTextDark;
+//            cell.addressLabel.textColor = [Theme Singleton].colorTextDark;
             cell.dateLabel.text = @"";
             cell.confirmationLabel.text = @"";
             cell.amountLabel.text = @"";
@@ -1028,7 +1009,7 @@
         cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
 
         // address
-        cell.addressLabel.text = transaction.strAddress;
+        cell.addressLabel.text = transaction.strName;
 
         // if we are in search  mode
         if ([self searchEnabled])
@@ -1084,9 +1065,27 @@
         cell.amountLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
         // set the photo
         cell.imagePhoto.image = [self imageForTransaction:transaction];
-        cell.imagePhoto.hidden = (cell.imagePhoto.image == nil);
+//        cell.imagePhoto.hidden = (cell.imagePhoto.image == nil);
         cell.imagePhoto.layer.cornerRadius = 5;
         cell.imagePhoto.layer.masksToBounds = YES;
+
+        if (nil == cell.imagePhoto.image)
+        {
+            NSString *stringToHash;
+            if ([cell.addressLabel.text length] == 0)
+            {
+                // Random color based on txid
+                stringToHash = transaction.strID;
+            }
+            else
+            {
+                stringToHash = transaction.strName;
+            }
+            NSUInteger hash = [stringToHash hash];
+            hash = hash % [[Theme Singleton].colorsProfileIcons count];
+            UIColor *color = [[Theme Singleton].colorsProfileIcons objectAtIndex:hash];
+            [cell.imagePhoto.layer setBackgroundColor:[color CGColor]];
+        }
     
         CGFloat borderWidth = PHOTO_BORDER_WIDTH;
         cell.viewPhoto.layer.borderColor = [PHOTO_BORDER_COLOR CGColor];

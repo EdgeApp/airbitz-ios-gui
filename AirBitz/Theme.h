@@ -28,6 +28,9 @@
 @property (nonatomic) UIColor *colorRequestBottomTextField;
 @property (nonatomic) UIColor *colorButtonGreen;
 
+@property (nonatomic) NSMutableArray *colorsProfileIcons;
+
+
 @property (nonatomic) BOOL    bTranslucencyEnable;
 
 @property (nonatomic) NSString *appFont;
