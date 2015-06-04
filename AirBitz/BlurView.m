@@ -9,6 +9,7 @@
 
 #import "BlurView.h"
 #import "Util.h"
+#import "Theme.h"
 #import <UIKit/UIKit.h>
 #import <UIKit/UIToolbar.h>
 
@@ -17,12 +18,14 @@
     UIToolbar *toolbarBlur;
     UIVisualEffectView    *blurEffectView;
     UIView *backgroundVibrancyView;
+    UIView *nonBlur;
     BOOL bInitialized;
 }
 
 @property (nonatomic)  NSInteger blurStyle;
 @property (nonatomic)  BOOL       bSetBlurStyleExtraLight;
 @property (nonatomic)  BOOL       bSetBlurStyleDark;
+@property (nonatomic)  BOOL       bForceBlur;
 @property (nonatomic)  UIBlurEffectStyle currentBlurStyle;
 
 @end
@@ -49,100 +52,53 @@
 
     if (!bInitialized)
     {
-            UIBlurEffect *blurEffect;
+        UIBlurEffect *blurEffect;
 
-            if (self.bSetBlurStyleExtraLight)
-            {
-                self.currentBlurStyle = UIBlurEffectStyleExtraLight;
-            }
-            else if (self.bSetBlurStyleDark)
-            {
-                self.currentBlurStyle = UIBlurEffectStyleDark;
-            }
-            else
-            {
-                self.currentBlurStyle = UIBlurEffectStyleLight;
-            }
+        if (self.bSetBlurStyleExtraLight)
+        {
+            self.currentBlurStyle = UIBlurEffectStyleExtraLight;
+        }
+        else if (self.bSetBlurStyleDark)
+        {
+            self.currentBlurStyle = UIBlurEffectStyleDark;
+        }
+        else
+        {
+            self.currentBlurStyle = UIBlurEffectStyleLight;
+        }
+
+        if ([Theme Singleton].bTranslucencyEnable || self.bForceBlur)
+        {
             blurEffect = [UIBlurEffect effectWithStyle:self.currentBlurStyle];
 
             blurEffectView = (UIVisualEffectView *) [[UIVisualEffectView alloc] initWithEffect:blurEffect];
 
-//            [blurEffectView setFrame:self.frame];
-
-//            [self addSubview:blurEffectView];
-//            [self.superview insertSubview:blurEffectView belowSubview:self];
-//            [Util insertSubviewWithConstraints:self.superview child:blurEffectView belowSubView:self];
             [Util addSubviewWithConstraints:self child:blurEffectView];
-
-//            UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
-//            UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
-//            [vibrancyEffectView setFrame:self.backgroundVibrancyView.bounds];
-//
-//            [[vibrancyEffectView contentView] addSubview:self.backgroundVibrancyView];
-//
-//            [[blurEffectView contentView] addSubview:vibrancyEffectView];
-//            vibrancyEffectView.center = blurEffectView.center;
             [self.layer setBackgroundColor:[UIColorFromARGB(0x00000000) CGColor]];
+
+        }
+        else
+        {
+            CGRect frame = CGRectMake(0, 0, 10, 10);
+
+            nonBlur = [[UIView alloc] initWithFrame:frame];
+            if (self.bSetBlurStyleDark)
+            {
+                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xBB000000) CGColor]];
+            }
+            else if (self.bSetBlurStyleExtraLight || self.bForceWhite)
+            {
+                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF8F0F0F0) CGColor]];
+            }
+            else
+            {
+                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF03BB2FF) CGColor]];
+            }
+            [Util addSubviewWithConstraints:self child:nonBlur];
+        }
         bInitialized = true;
 
     }
-    else
-    {
-//        if (toolbarBlur)
-//        {
-//            toolbarBlur.frame = self.frame;
-//        }
-//        if (blurEffectView)
-//        {
-//            [blurEffectView setFrame:self.frame];
-//        }
-    }
-
-//    UIView *toolbarBlur = [[UIView alloc] initWithFrame:self.frame];
-//        [toolbarBlur.layer setBackgroundColor:[UIColorFromARGB(0x88aa0000) CGColor]];
-//
-//    [self addSubview:toolbarBlur];
-
-//    toolbarBlur.translatesAutoresizingMaskIntoConstraints = NO;
-//    [self addConstraint:[NSLayoutConstraint
-//            constraintWithItem:toolbarBlur
-//                     attribute:NSLayoutAttributeTrailing
-//                     relatedBy:NSLayoutRelationEqual
-//                        toItem:self
-//                     attribute:NSLayoutAttributeTrailing
-//                    multiplier:1.0
-//                      constant:0.0]];
-//
-//    [self addConstraint:[NSLayoutConstraint
-//            constraintWithItem:toolbarBlur
-//                     attribute:NSLayoutAttributeTop
-//                     relatedBy:NSLayoutRelationEqual
-//                        toItem:self
-//                     attribute:NSLayoutAttributeTop
-//                    multiplier:1.0
-//                      constant:0.0]];
-//
-//    [self addConstraint:[NSLayoutConstraint
-//            constraintWithItem:toolbarBlur
-//                     attribute:NSLayoutAttributeBottom
-//                     relatedBy:NSLayoutRelationEqual
-//                        toItem:self
-//                     attribute:NSLayoutAttributeBottom
-//                    multiplier:1.0
-//                      constant:0.0]];
-//
-//    [self addConstraint:[NSLayoutConstraint
-//            constraintWithItem:toolbarBlur
-//                     attribute:NSLayoutAttributeLeading
-//                     relatedBy:NSLayoutRelationEqual
-//                        toItem:self
-//                     attribute:NSLayoutAttributeLeading
-//                    multiplier:1.0
-//                      constant:0.0]];
-
-//    self.layer.cornerRadius = 8;
-//    self.clipsToBounds = YES;
-//    [self.layer setBackgroundColor:[UIColorFromARGB(0x14BDDCFF) CGColor]];
 
 }
 

@@ -29,6 +29,7 @@
 #import "CommonTypes.h"
 #import "Config.h"
 #import "Theme.h"
+#import "Util.h"
 
 //server defines (uncomment one)
 #define SERVER_MESSAGES_TO_SHOW		VERBOSE_MESSAGES_OFF
@@ -203,6 +204,11 @@ static bool bInitialized = false;
     _searchBarLocation.enablesReturnKeyAutomatically = NO;
 
     [self createSingleCalloutView];
+
+    if (![Theme Singleton].bTranslucencyEnable)
+    {
+        [self.view.layer setBackgroundColor:[UIColorFromARGB(0xF8F0F0F0) CGColor]];
+    }
 
     locateMeButtonDesiredAlpha = 1.0;
 

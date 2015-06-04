@@ -520,10 +520,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQu-aJ-TSX">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <items/>
-                            </toolbar>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bXI-Sv-ZdQ" userLabel="BlurView" customClass="BlurView">
+                                <rect key="frame" x="80" y="142" width="160" height="284"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.23137254901960785" green="0.69803921568627447" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BGr-Rg-RmT">
                                 <rect key="frame" x="142" y="320" width="37" height="37"/>
                             </activityIndicatorView>
@@ -657,15 +661,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="BGr-Rg-RmT" firstAttribute="top" secondItem="m5h-hH-PG6" secondAttribute="bottom" constant="300" id="6NW-ZW-yYu"/>
+                            <constraint firstItem="bXI-Sv-ZdQ" firstAttribute="top" secondItem="m5h-hH-PG6" secondAttribute="bottom" id="K3x-Tc-NXV"/>
                             <constraint firstAttribute="centerX" secondItem="BGr-Rg-RmT" secondAttribute="centerX" id="QJH-SH-r7I"/>
-                            <constraint firstItem="g31-Uw-ef5" firstAttribute="top" secondItem="UQu-aJ-TSX" secondAttribute="bottom" id="QrF-dn-vGR"/>
-                            <constraint firstItem="UQu-aJ-TSX" firstAttribute="top" secondItem="m5h-hH-PG6" secondAttribute="bottom" id="bIv-pu-pjw"/>
+                            <constraint firstAttribute="trailing" secondItem="bXI-Sv-ZdQ" secondAttribute="trailing" id="dwg-7f-JXZ"/>
                             <constraint firstAttribute="bottom" secondItem="fW9-fV-Lwx" secondAttribute="bottom" id="fNE-fp-GHV"/>
                             <constraint firstAttribute="centerX" secondItem="fW9-fV-Lwx" secondAttribute="centerX" id="gX6-S2-1rd"/>
+                            <constraint firstItem="g31-Uw-ef5" firstAttribute="top" secondItem="bXI-Sv-ZdQ" secondAttribute="bottom" id="gqI-Ag-1v4"/>
                             <constraint firstItem="fW9-fV-Lwx" firstAttribute="top" secondItem="ATO-J5-tNU" secondAttribute="top" id="k1k-li-kij"/>
-                            <constraint firstAttribute="trailing" secondItem="UQu-aJ-TSX" secondAttribute="trailing" id="mxe-UL-RMe"/>
-                            <constraint firstItem="UQu-aJ-TSX" firstAttribute="leading" secondItem="ATO-J5-tNU" secondAttribute="leading" id="oG7-LK-6DQ"/>
                             <constraint firstItem="fW9-fV-Lwx" firstAttribute="width" secondItem="ATO-J5-tNU" secondAttribute="width" id="xol-5W-IXb"/>
+                            <constraint firstItem="bXI-Sv-ZdQ" firstAttribute="leading" secondItem="ATO-J5-tNU" secondAttribute="leading" id="zyc-pE-xLK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zar-Wn-O95"/>

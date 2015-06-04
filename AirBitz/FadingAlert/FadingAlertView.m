@@ -15,7 +15,7 @@
 + (void)fadeOutView:(UIView *)view completion:(void (^)(BOOL finished))completion;
 + (void)hideAlertByTap:(UITapGestureRecognizer *)sender;
 
-
+@property (weak, nonatomic) IBOutlet UIView             *darkView;
 @property (weak, nonatomic) IBOutlet UIView             *parentView;
 @property (weak, nonatomic) IBOutlet BlurView           *blurView;
 @property (weak, nonatomic) IBOutlet LatoLabel          *connectedLine1;
@@ -96,17 +96,13 @@ static UIView *alert;
     singleton.clipsToBounds = YES;
     singleton.holdTime          = holdTime;
 
-    singleton.alertGroupView.layer.masksToBounds = NO;
-    singleton.alertGroupView.layer.shadowOffset = CGSizeMake(0.0, 0.0);
-    singleton.alertGroupView.layer.shadowRadius = 10;
-    singleton.alertGroupView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    singleton.alertGroupView.layer.shadowOpacity = 0.4;
-
     singleton.connectedPhoto.image = image;
     singleton.connectedLine1.text = line1;
     singleton.connectedLine2.text = line2;
     singleton.connectedLine3.text = line3;
     singleton.messageText.text = message;
+
+    singleton.alertGroupView.layer.masksToBounds = YES;
 
     singleton.alertGroupView.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     singleton.alertGroupView.layer.shadowRadius = 10;
@@ -145,6 +141,12 @@ static UIView *alert;
 
     if (FADING_ALERT_HOLD_TIME_DEFAULT == holdTime)
         holdTime = [Theme Singleton].alertHoldTimeDefault;
+
+    if (![Theme Singleton].bTranslucencyEnable)
+    {
+        singleton.darkView.hidden = YES;
+    }
+
 
     [parentView addSubview:singleton];
 

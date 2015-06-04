@@ -10,4 +10,7 @@
 
 @interface BlurView : UIView
 
+@property (nonatomic)  BOOL       bForceWhite;
+
+
 @end
