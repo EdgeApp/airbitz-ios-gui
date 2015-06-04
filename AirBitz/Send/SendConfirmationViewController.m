@@ -869,12 +869,12 @@
         NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
         NSString *entry = _pinRequired ? @"PIN" : @"password";
         if(remaining < 1.5) {
-            [MainViewController fadingAlert:[NSString stringWithFormat:
+            [self fadingAlertDelayed:[NSString stringWithFormat:
                 NSLocalizedString(@"Please wait 1 second before retrying %@", nil), entry]];
         }
         else
         {
-            [MainViewController fadingAlert:[NSString stringWithFormat:
+           [self fadingAlertDelayed:[NSString stringWithFormat:
                 NSLocalizedString(@"Please wait %.0f seconds before retrying %@", nil), remaining, entry]];
         }
     }
@@ -882,7 +882,7 @@
     {
         //make sure PIN is good
         if (_pinRequired && !self.withdrawlPIN.text.length) {
-            [MainViewController fadingAlert:NSLocalizedString(@"Please enter your PIN", nil)];
+            [self fadingAlertDelayed:NSLocalizedString(@"Please enter your PIN", nil)];
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
             [_confirmationSlider resetIn:1.0];
@@ -894,11 +894,11 @@
             if (kInvalidEntryWait == [user sendInvalidEntry])
             {
                 NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
-                [MainViewController fadingAlert:[NSString stringWithFormat:NSLocalizedString(@"Incorrect PIN. Please wait %.0f seconds and try again.", nil), remaining]];
+                [self fadingAlertDelayed:[NSString stringWithFormat:NSLocalizedString(@"Incorrect PIN. Please wait %.0f seconds and try again.", nil), remaining]];
             }
             else
             {
-                [MainViewController fadingAlert:NSLocalizedString(@"Incorrect PIN", nil)];
+                [self fadingAlertDelayed:NSLocalizedString(@"Incorrect PIN", nil)];
             }
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
@@ -909,6 +909,16 @@
         }
     }
     [_confirmationSlider resetIn:1.0];
+}
+
+- (void)fadingAlertDelayed:(NSString *)message
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NSThread sleepForTimeInterval:0.2f];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MainViewController fadingAlert:message];
+        });
+    });
 }
 
 - (void)handlePasswordCheck:(NSNumber *)authenticated
@@ -926,7 +936,7 @@
 - (void)continueChecks
 {
     if (_spendTarget.pSpend->amount == 0) {
-        [MainViewController fadingAlert:NSLocalizedString(@"Please enter an amount to send", nil)];
+        [self fadingAlertDelayed:NSLocalizedString(@"Please enter an amount to send", nil)];
     } else {
         [self initiateSendRequest];
     }
@@ -934,7 +944,7 @@
 
 - (void)tooSmallAlert
 {
-    [MainViewController fadingAlert:NSLocalizedString(@"Amount is too small", nil)];
+    [self fadingAlertDelayed:NSLocalizedString(@"Amount is too small", nil)];
 }
 
 #pragma mark - Calculator delegates
