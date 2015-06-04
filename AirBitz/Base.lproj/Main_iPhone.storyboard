@@ -154,7 +154,7 @@
                                     <tabBarItem title="Send" image="icon_send.png" id="6Ey-Xn-GTe">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
-                                    <tabBarItem title="Wallets" image="icon_wallet.png" id="j3q-OI-el3">
+                                    <tabBarItem title="Transactions" image="icon_wallet.png" id="j3q-OI-el3" userLabel="Transactions">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
                                     <tabBarItem title="More" image="icon_more.png" id="sAy-bR-lqd">
