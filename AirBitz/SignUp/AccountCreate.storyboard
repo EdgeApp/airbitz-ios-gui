@@ -282,11 +282,6 @@ Your username and password are known only to you and never stored unencrypted.</
                                 <exclude reference="NxZ-mu-1ID"/>
                             </mask>
                         </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="nmG-JF-Bse"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="contentStartConstraint" destination="nmG-JF-Bse" id="Snj-ic-jln"/>
