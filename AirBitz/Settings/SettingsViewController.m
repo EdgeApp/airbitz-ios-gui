@@ -771,7 +771,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 #pragma mark - Custom Table Cells
 
-- (RadioButtonCell *)getRadioButtonCellForTableView:(UITableView *)tableView withImage:(UIImage *)bkgImage andIndexPath:(NSIndexPath *)indexPath
+- (RadioButtonCell *)getRadioButtonCellForTableView:(UITableView *)tableView andIndexPath:(NSIndexPath *)indexPath
 {
 	RadioButtonCell *cell;
 	static NSString *cellIdentifier = @"RadioButtonCell";
@@ -801,11 +801,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	return cell;
 }
 
-- (PlainCell *)getPlainCellForTableView:(UITableView *)tableView withImage:(UIImage *)bkgImage andIndexPath:(NSIndexPath *)indexPath
+- (PlainCell *)getPlainCellForTableView:(UITableView *)tableView andIndexPath:(NSIndexPath *)indexPath
 {
 	PlainCell *cell;
 	static NSString *cellIdentifier = @"PlainCell";
-	
+
 	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (nil == cell)
 	{
@@ -838,13 +838,13 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			cell.name.text = NSLocalizedString(@"2 Factor (Enhanced Security)", nil);
         }
     }
-	
+
     cell.tag = (indexPath.section << 8) | (indexPath.row);
 
 	return cell;
 }
 
-- (TextFieldCell *)getTextFieldCellForTableView:(UITableView *)tableView withImage:(UIImage *)bkgImage andIndexPath:(NSIndexPath *)indexPath
+- (TextFieldCell *)getTextFieldCellForTableView:(UITableView *)tableView andIndexPath:(NSIndexPath *)indexPath
 {
 	TextFieldCell *cell;
 	static NSString *cellIdentifier = @"TextFieldCell";
@@ -901,7 +901,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	return cell;
 }
 
-- (BooleanCell *)getBooleanCellForTableView:(UITableView *)tableView withImage:(UIImage *)bkgImage andIndexPath:(NSIndexPath *)indexPath
+- (BooleanCell *)getBooleanCellForTableView:(UITableView *)tableView andIndexPath:(NSIndexPath *)indexPath
 {
 	BooleanCell *cell;
 	static NSString *cellIdentifier = @"BooleanCell";
@@ -954,7 +954,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	return cell;
 }
 
-- (ButtonCell *)getButtonCellForTableView:(UITableView *)tableView withImage:(UIImage *)bkgImage andIndexPath:(NSIndexPath *)indexPath
+- (ButtonCell *)getButtonCellForTableView:(UITableView *)tableView andIndexPath:(NSIndexPath *)indexPath
 {
 	ButtonCell *cell;
 	static NSString *cellIdentifier = @"ButtonCell";
@@ -1118,7 +1118,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		label.text = NSLocalizedString(@"", nil);
 	}
-	return cell;
+    cell.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = [[UIImageView alloc] initWithFrame:cell.bounds];
+    cell.selectedBackgroundView.contentMode = cell.backgroundView.contentMode;
+
+    return cell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1129,86 +1133,59 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	}
 	else
 	{
-		UIImage *cellImage;
-		if ((indexPath.section == SECTION_OPTIONS) || ([tableView numberOfRowsInSection:indexPath.section] == 1))
-		{
-			cellImage = [UIImage imageNamed:@"bd_cell_single"];
-		}
-		else
-		{
-			if (indexPath.row == 0)
-			{
-				cellImage = [UIImage imageNamed:@"bd_cell_top"];
-				//backgroundColor = [UIColor redColor];
-			}
-			else
-			{
-				if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1)
-				{
-					cellImage = [UIImage imageNamed:@"bd_cell_bottom"];
-					//backgroundColor = [UIColor greenColor];
-				}
-				else
-				{
-					cellImage = [UIImage imageNamed:@"bd_cell_middle"];
-					//backgroundColor = [UIColor blueColor];
-				}
-			}
-		}
-		
 		if (indexPath.section == SECTION_BITCOIN_DENOMINATION)
 		{
-			cell = [self getRadioButtonCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
+			cell = [self getRadioButtonCellForTableView:tableView andIndexPath:(NSIndexPath *)indexPath];
 		}
 		else if (indexPath.section == SECTION_USERNAME)
 		{
-            cell = [self getPlainCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+            cell = [self getPlainCellForTableView:tableView andIndexPath:indexPath];
 		}
         else if (indexPath.section == SECTION_NAME)
 		{
 			if (indexPath.row == ROW_SEND_NAME)
 			{
-				cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+				cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
 			}
 			else
 			{
-				cell = [self getTextFieldCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
+				cell = [self getTextFieldCellForTableView:tableView andIndexPath:(NSIndexPath *)indexPath];
 			}
 		}
 		else if (indexPath.section == SECTION_OPTIONS)
 		{
             if (indexPath.row == ROW_CHANGE_CATEGORIES || indexPath.row == ROW_SPEND_LIMITS || indexPath.row == ROW_TFA)
             {
-                cell = [self getPlainCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+                cell = [self getPlainCellForTableView:tableView andIndexPath:indexPath];
             }
             else if (indexPath.row == ROW_MERCHANT_MODE)
             {
-				cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+				cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
             }
             else if (indexPath.row == ROW_BLE)
             {
                 if (_showBluetoothOption)
                 {
-                    cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+                    cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
                 }
                 else
                 {
                     NSIndexPath *temp = [NSIndexPath indexPathForRow:ROW_PIN_RELOGIN inSection:indexPath.section];
-                    cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:temp];
+                    cell = [self getBooleanCellForTableView:tableView andIndexPath:temp];
                 }
             }
             else if (indexPath.row == ROW_PIN_RELOGIN)
             {
-				cell = [self getBooleanCellForTableView:tableView withImage:cellImage andIndexPath:indexPath];
+				cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
             }
             else
             {
-                cell = [self getButtonCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
+                cell = [self getButtonCellForTableView:tableView andIndexPath:(NSIndexPath *)indexPath];
             }
 		}
 		else if (indexPath.section == SECTION_DEFAULT_EXCHANGE)
 		{
-			cell = [self getButtonCellForTableView:tableView withImage:cellImage andIndexPath:(NSIndexPath *)indexPath];
+			cell = [self getButtonCellForTableView:tableView andIndexPath:(NSIndexPath *)indexPath];
 		}
 	}
 
