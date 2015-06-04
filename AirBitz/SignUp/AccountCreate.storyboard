@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
@@ -260,6 +273,7 @@ Your username and password are known only to you and never stored unencrypted.</
                             <constraint firstItem="hHD-NP-fM6" firstAttribute="top" secondItem="Cx6-mG-7Op" secondAttribute="bottom" constant="8" symbolic="YES" id="CAX-3f-IIm"/>
                             <constraint firstItem="RuU-Zx-pBJ" firstAttribute="top" secondItem="Cx6-mG-7Op" secondAttribute="bottom" constant="143" id="NxZ-mu-1ID"/>
                             <constraint firstItem="Cx6-mG-7Op" firstAttribute="leading" secondItem="u9u-cR-ilw" secondAttribute="leading" id="VnB-Z8-0Qc"/>
+                            <constraint firstItem="Cx6-mG-7Op" firstAttribute="top" secondItem="oID-Yo-O40" secondAttribute="bottom" constant="44" id="l2K-42-cKX"/>
                             <constraint firstAttribute="trailing" secondItem="Cx6-mG-7Op" secondAttribute="trailing" id="mAl-eN-x6j"/>
                             <constraint firstItem="Cx6-mG-7Op" firstAttribute="top" secondItem="u9u-cR-ilw" secondAttribute="top" constant="64" id="nmG-JF-Bse"/>
                             <constraint firstItem="hHD-NP-fM6" firstAttribute="trailing" secondItem="u9u-cR-ilw" secondAttribute="trailingMargin" id="yjt-wJ-d4s"/>
@@ -415,7 +429,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                         <viewControllerLayoutGuide type="bottom" id="GV0-Wy-hRA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="J6e-cx-UFZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-Ha-otG">
@@ -596,7 +610,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                         <viewControllerLayoutGuide type="bottom" id="HlJ-FS-TQK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kLp-dz-2xL">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4H-Hm-IKW">
@@ -772,11 +786,11 @@ No one, including Airbitz, has any access to this information.</string>
                         <viewControllerLayoutGuide type="bottom" id="nqJ-hb-Kll"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gVb-bf-YdA">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uu-dw-ssd" customClass="StylizedButton">
-                                <rect key="frame" x="465" y="412" width="119" height="41"/>
+                                <rect key="frame" x="185" y="412" width="119" height="41"/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="Ety-b4-KRH"/>
@@ -820,13 +834,13 @@ No one, including Airbitz, has any access to this information.</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wES-c3-x79" userLabel="Toggle View">
                                         <rect key="frame" x="0.0" y="192" width="320" height="95"/>
                                         <subviews>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your username and password are known only to you and never transmitted or stored unencrypted." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eB-ff-Ebh">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Your username and password are known only to you and never transmitted or stored unencrypted." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eB-ff-Ebh">
                                                 <rect key="frame" x="16" y="0.0" width="288" height="62"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Write down and store securely" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcU-OX-5Hj">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Write down and store securely" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcU-OX-5Hj">
                                                 <rect key="frame" x="39" y="60" width="242" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="n5a-5E-38h"/>
@@ -848,7 +862,7 @@ No one, including Airbitz, has any access to this information.</string>
                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0If-SH-SJz" userLabel="Credentials view">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJ6-mQ-mSV">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJ6-mQ-mSV">
                                                         <rect key="frame" x="8" y="0.0" width="91" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="76" id="2cm-9J-BUQ"/>
@@ -876,7 +890,7 @@ No one, including Airbitz, has any access to this information.</string>
                                                             </mask>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqc-i8-gfC">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqc-i8-gfC">
                                                         <rect key="frame" x="8" y="25" width="91" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="76" id="KSd-5F-HHz"/>
@@ -895,7 +909,7 @@ No one, including Airbitz, has any access to this information.</string>
                                                             </mask>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPi-8w-xQ4">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPi-8w-xQ4">
                                                         <rect key="frame" x="8" y="50" width="91" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="Tna-xe-T1L"/>
@@ -917,7 +931,7 @@ No one, including Airbitz, has any access to this information.</string>
                                                             </mask>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="myname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="DUg-At-veb">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="myname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="DUg-At-veb">
                                                         <rect key="frame" x="119" y="0.0" width="160" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="cDA-tl-jVQ"/>
@@ -936,13 +950,13 @@ No one, including Airbitz, has any access to this information.</string>
                                                             </mask>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mypassword12345" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="tOB-4i-OVm">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="mypassword12345" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="tOB-4i-OVm">
                                                         <rect key="frame" x="119" y="25" width="160" height="30"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1234" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzw-pH-bAR">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="1234" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzw-pH-bAR">
                                                         <rect key="frame" x="119" y="50" width="160" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="x4n-fr-EcW"/>
@@ -1267,11 +1281,11 @@ No one, including Airbitz, has any access to this information.</string>
                                 <exclude reference="ijG-21-uLZ"/>
                                 <exclude reference="kBL-kR-8l5"/>
                                 <exclude reference="rp4-1v-tcI"/>
-                                <exclude reference="IpX-Vr-ioJ"/>
-                                <exclude reference="fQj-Pj-oW0"/>
                                 <exclude reference="6Io-8w-56i"/>
                                 <exclude reference="c3m-cH-G99"/>
                                 <exclude reference="mdP-3r-JTB"/>
+                                <exclude reference="IpX-Vr-ioJ"/>
+                                <exclude reference="fQj-Pj-oW0"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1280,10 +1294,10 @@ No one, including Airbitz, has any access to this information.</string>
                                 <include reference="kBL-kR-8l5"/>
                                 <exclude reference="mN8-53-diQ"/>
                                 <include reference="rp4-1v-tcI"/>
-                                <exclude reference="Hwx-Gn-T2l"/>
-                                <exclude reference="JgR-qK-lih"/>
                                 <exclude reference="c3m-cH-G99"/>
                                 <include reference="mdP-3r-JTB"/>
+                                <exclude reference="Hwx-Gn-T2l"/>
+                                <exclude reference="JgR-qK-lih"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
