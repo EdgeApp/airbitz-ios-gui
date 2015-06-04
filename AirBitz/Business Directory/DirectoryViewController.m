@@ -30,6 +30,7 @@
 #import "Config.h"
 #import "Theme.h"
 #import "Util.h"
+#import "User.h"
 
 //server defines (uncomment one)
 #define SERVER_MESSAGES_TO_SHOW		VERBOSE_MESSAGES_OFF
@@ -205,11 +206,6 @@ static bool bInitialized = false;
 
     [self createSingleCalloutView];
 
-    if (![Theme Singleton].bTranslucencyEnable)
-    {
-        [self.view.layer setBackgroundColor:[UIColorFromARGB(0xF8F0F0F0) CGColor]];
-    }
-
     locateMeButtonDesiredAlpha = 1.0;
 
     UIPanGestureRecognizer *panRec = [[UIPanGestureRecognizer alloc] initWithTarget: self action: @selector(didDragMap:)];
@@ -310,6 +306,12 @@ static bool bInitialized = false;
         bInitialized = true;
 
     }
+
+    if (![Theme Singleton].bTranslucencyEnable || [User isLoggedIn])
+    {
+        [self.view.layer setBackgroundColor:[UIColorFromARGB(0xF8F0F0F0) CGColor]];
+    }
+
     [self transitionMode:DIRECTORY_MODE_LISTING];
 }
 

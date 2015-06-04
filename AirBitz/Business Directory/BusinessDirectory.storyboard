@@ -74,7 +74,7 @@
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyK-ph-99S" userLabel="Button - Category 1">
                                                             <rect key="frame" x="0.0" y="0.0" width="160" height="53"/>
-                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="Restaurants" image="icon_category_restaurants.png">
@@ -87,7 +87,7 @@
                                                         </button>
                                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a78-ih-LDk" userLabel="Button - Category 2">
                                                             <rect key="frame" x="0.0" y="53" width="160" height="53"/>
-                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="Coffee &amp; Tea" image="icon_category_coffee_tea.png">
@@ -100,7 +100,7 @@
                                                         </button>
                                                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWr-pd-hBY" userLabel="Button - Category 3">
                                                             <rect key="frame" x="0.0" y="106" width="160" height="53"/>
-                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="ATMs" image="icon_category_atm.png">
@@ -113,7 +113,7 @@
                                                         </button>
                                                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sfb-cf-6wF" userLabel="Button - Category 4">
                                                             <rect key="frame" x="0.0" y="159" width="320" height="53"/>
-                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                             <state key="normal" title="More Categories">
                                                                 <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -124,7 +124,7 @@
                                                         </button>
                                                         <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1E-1G-btq" userLabel="Button - Category 5">
                                                             <rect key="frame" x="160" y="0.0" width="160" height="53"/>
-                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="Gift Cards" image="icon_category_gift_cards.png">
@@ -137,7 +137,7 @@
                                                         </button>
                                                         <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTm-at-TUR" userLabel="Button - Category 6">
                                                             <rect key="frame" x="160" y="53" width="160" height="53"/>
-                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="Electronics" image="icon_category_electronics.png">
@@ -150,7 +150,7 @@
                                                         </button>
                                                         <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGS-YR-zt1" userLabel="Button - Category 7">
                                                             <rect key="frame" x="160" y="106" width="160" height="53"/>
-                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="Shopping" image="icon_category_shopping.png">
@@ -161,6 +161,34 @@
                                                                 <action selector="CategoryButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="TAX-mb-fN8"/>
                                                             </connections>
                                                         </button>
+                                                        <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Alp-5P-Y9D" userLabel="View -bar">
+                                                            <rect key="frame" x="0.0" y="53" width="320" height="1"/>
+                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="ugx-2C-fww"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view alpha="0.40000000000000002" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Q2-I8-CpU" userLabel="View -bar">
+                                                            <rect key="frame" x="0.0" y="106" width="320" height="1"/>
+                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="arf-hO-6rI"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view alpha="0.40000000000000002" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kb8-zF-1Hk" userLabel="View -bar">
+                                                            <rect key="frame" x="0.0" y="159" width="320" height="0.0"/>
+                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="UkM-DX-Hy3"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view alpha="0.40000000000000002" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uda-xQ-uUB" userLabel="View -bar vertical">
+                                                            <rect key="frame" x="160" y="0.0" width="0.0" height="159"/>
+                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="1" id="vME-PY-gHh"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -170,14 +198,20 @@
                                                         <constraint firstItem="GGS-YR-zt1" firstAttribute="top" secondItem="kTm-at-TUR" secondAttribute="bottom" id="6N1-lp-wbE"/>
                                                         <constraint firstItem="sWr-pd-hBY" firstAttribute="top" secondItem="a78-ih-LDk" secondAttribute="bottom" id="6nL-Cj-zUn"/>
                                                         <constraint firstAttribute="bottom" secondItem="Sfb-cf-6wF" secondAttribute="bottom" id="80s-Fu-UtD"/>
+                                                        <constraint firstItem="Alp-5P-Y9D" firstAttribute="trailing" secondItem="kTm-at-TUR" secondAttribute="trailing" id="8ty-XD-JTc"/>
                                                         <constraint firstAttribute="trailing" secondItem="GGS-YR-zt1" secondAttribute="trailing" id="Bsq-I6-o0N"/>
                                                         <constraint firstItem="Sfb-cf-6wF" firstAttribute="top" secondItem="sWr-pd-hBY" secondAttribute="bottom" id="EkR-mY-eFX"/>
                                                         <constraint firstItem="sWr-pd-hBY" firstAttribute="height" secondItem="b1E-1G-btq" secondAttribute="height" id="GQo-f4-5ch"/>
+                                                        <constraint firstItem="Alp-5P-Y9D" firstAttribute="top" secondItem="kTm-at-TUR" secondAttribute="top" id="ICb-2X-Hj2"/>
                                                         <constraint firstAttribute="trailing" secondItem="kTm-at-TUR" secondAttribute="trailing" id="KQ7-gA-BmB"/>
                                                         <constraint firstItem="sWr-pd-hBY" firstAttribute="height" secondItem="oyK-ph-99S" secondAttribute="height" id="NeY-xc-G7D"/>
+                                                        <constraint firstItem="Uda-xQ-uUB" firstAttribute="leading" secondItem="kTm-at-TUR" secondAttribute="leading" id="OIy-JZ-juq"/>
                                                         <constraint firstItem="a78-ih-LDk" firstAttribute="top" secondItem="oyK-ph-99S" secondAttribute="bottom" id="Ops-ES-lIC"/>
                                                         <constraint firstAttribute="trailing" secondItem="Sfb-cf-6wF" secondAttribute="trailing" id="PUX-tu-Qob"/>
                                                         <constraint firstItem="Sfb-cf-6wF" firstAttribute="height" secondItem="sWr-pd-hBY" secondAttribute="height" id="QFA-yn-v5E"/>
+                                                        <constraint firstItem="9Q2-I8-CpU" firstAttribute="trailing" secondItem="GGS-YR-zt1" secondAttribute="trailing" id="QKp-Fl-lfQ"/>
+                                                        <constraint firstItem="Alp-5P-Y9D" firstAttribute="leading" secondItem="a78-ih-LDk" secondAttribute="leading" id="RFK-QK-otO"/>
+                                                        <constraint firstItem="9Q2-I8-CpU" firstAttribute="top" secondItem="GGS-YR-zt1" secondAttribute="top" id="STK-n1-9B6"/>
                                                         <constraint firstItem="a78-ih-LDk" firstAttribute="leading" secondItem="P8l-kL-Lmr" secondAttribute="leading" id="T0t-Xx-po9"/>
                                                         <constraint firstItem="sWr-pd-hBY" firstAttribute="height" secondItem="GGS-YR-zt1" secondAttribute="height" id="UbP-Vg-SZh"/>
                                                         <constraint firstItem="GGS-YR-zt1" firstAttribute="width" secondItem="sWr-pd-hBY" secondAttribute="width" id="Udr-0A-bvi"/>
@@ -187,13 +221,19 @@
                                                         <constraint firstItem="b1E-1G-btq" firstAttribute="top" secondItem="P8l-kL-Lmr" secondAttribute="top" id="ZZ0-yv-qGg"/>
                                                         <constraint firstItem="kTm-at-TUR" firstAttribute="top" secondItem="b1E-1G-btq" secondAttribute="bottom" id="a72-4D-cuA"/>
                                                         <constraint firstItem="b1E-1G-btq" firstAttribute="leading" secondItem="oyK-ph-99S" secondAttribute="trailing" id="amI-FC-UyM"/>
+                                                        <constraint firstItem="Uda-xQ-uUB" firstAttribute="bottom" secondItem="sWr-pd-hBY" secondAttribute="bottom" id="diM-2I-Hri"/>
                                                         <constraint firstAttribute="height" constant="212" id="e93-bb-5es"/>
+                                                        <constraint firstItem="9Q2-I8-CpU" firstAttribute="leading" secondItem="sWr-pd-hBY" secondAttribute="leading" id="hKI-ej-WB1"/>
                                                         <constraint firstItem="sWr-pd-hBY" firstAttribute="height" secondItem="a78-ih-LDk" secondAttribute="height" id="i9t-F0-UCW"/>
                                                         <constraint firstItem="GGS-YR-zt1" firstAttribute="width" secondItem="b1E-1G-btq" secondAttribute="width" id="iRM-bh-Nf1"/>
+                                                        <constraint firstItem="Kb8-zF-1Hk" firstAttribute="leading" secondItem="sWr-pd-hBY" secondAttribute="leading" id="kLg-js-Spk"/>
                                                         <constraint firstItem="Sfb-cf-6wF" firstAttribute="top" secondItem="GGS-YR-zt1" secondAttribute="bottom" id="kMD-Qt-HLI"/>
+                                                        <constraint firstItem="Kb8-zF-1Hk" firstAttribute="top" secondItem="Sfb-cf-6wF" secondAttribute="top" id="l4I-CX-WQZ"/>
                                                         <constraint firstItem="oyK-ph-99S" firstAttribute="top" secondItem="P8l-kL-Lmr" secondAttribute="top" id="mRx-67-Dii"/>
                                                         <constraint firstItem="GGS-YR-zt1" firstAttribute="width" secondItem="kTm-at-TUR" secondAttribute="width" id="oqg-Pb-35A"/>
                                                         <constraint firstItem="Sfb-cf-6wF" firstAttribute="leading" secondItem="P8l-kL-Lmr" secondAttribute="leading" id="sxs-qg-bRM"/>
+                                                        <constraint firstItem="Kb8-zF-1Hk" firstAttribute="trailing" secondItem="GGS-YR-zt1" secondAttribute="trailing" id="t2y-9F-AOd"/>
+                                                        <constraint firstItem="Uda-xQ-uUB" firstAttribute="top" secondItem="oyK-ph-99S" secondAttribute="top" id="vVO-1s-A3b"/>
                                                         <constraint firstItem="GGS-YR-zt1" firstAttribute="width" secondItem="a78-ih-LDk" secondAttribute="width" id="xqb-Ne-c88"/>
                                                     </constraints>
                                                 </view>
