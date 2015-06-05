@@ -4,6 +4,7 @@
 #define FADING_ALERT_HOLD_TIME_DEFAULT                  0  // Forces use of Theme.m hold time settings
 #define FADING_ALERT_HOLD_TIME_FOREVER                  -1 // Hold the alert until dismissed
 #define FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER     -2 // Hold the alert until dismissed. Include a spinner
+#define FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP        9999999 // Hold the alert until dismissed or tapped
 
 
 @protocol FadingAlertViewDelegate;

@@ -1436,9 +1436,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         [self blockUser:YES];
         self.popupPicker = [PopupPickerView2 CreateForView:self.viewMain
-                                             relativePosition:popupPosition
-                                              withStrings:arrayPopupChoices
-                                            withAccessory:nil
+                                          relativePosition:popupPosition
+                                               withStrings:arrayPopupChoices
+                                             withAccessory:nil
                                                 headerText:headerText
                             ];
         self.popupPicker.userData = cell;
@@ -1472,6 +1472,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             if (_pAccountSettings)
             {
                 _pAccountSettings->currencyNum = [[self.arrayCurrencyNums objectAtIndex:row] intValue];
+                [FadingAlertView create:self.view message:[Theme Singleton].defaultCurrencyInfoText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }
         }
     }
