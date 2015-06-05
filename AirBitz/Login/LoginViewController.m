@@ -304,7 +304,7 @@ static BOOL bInitialized = false;
          [MainViewController moveSelectedViewController:0.0];
          [MainViewController setAlphaOfSelectedViewController:1.0];
          self.leftConstraint.constant = self.view.frame.size.width;
-         [self.view layoutIfNeeded];
+         [self.view.superview layoutIfNeeded];
      }
                      completion:^(BOOL finished)
      {
@@ -718,30 +718,29 @@ static BOOL bInitialized = false;
     if(xOffset < 0) xOffset = -xOffset;
     if(xOffset < self.view.frame.size.width / 2)
     {
+        [self.view.superview layoutIfNeeded];
+
         //spring back
+        if (self.view.frame.origin.x > 0)
+        {
+            // sliding to right. Move directory back to left
+            [MainViewController moveSelectedViewController:-self.view.frame.size.width];
+        }
+        else if (self.view.frame.origin.x < 0)
+        {
+            // sliding to left. Move directory back to right
+            [MainViewController moveSelectedViewController:self.view.frame.size.width];
+        }
+
+//        [MainViewController setAlphaOfSelectedViewController:0.0];
+        self.leftConstraint.constant = 0;
+
         [UIView animateWithDuration:0.35
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
-             if (self.view.frame.origin.x > 0)
-             {
-                 // sliding to right. Move directory back to left
-                 [MainViewController moveSelectedViewController:-self.view.frame.size.width];
-             }
-             else if (self.view.frame.origin.x < 0)
-             {
-                 // sliding to left. Move directory back to right
-                 [MainViewController moveSelectedViewController:self.view.frame.size.width];
-             }
-
-             [MainViewController setAlphaOfSelectedViewController:0.0];
-             self.leftConstraint.constant = 0;
-//             CGRect frame = self.view.frame;
-//            frame.origin.x = 0.0;
-//             self.view.frame = frame;
-
-             [self.view layoutIfNeeded];
+             [self.view.superview layoutIfNeeded];
          }
         completion:^(BOOL finished)
          {
@@ -750,28 +749,32 @@ static BOOL bInitialized = false;
     else
     {
         //spring out
+        [self.view.superview layoutIfNeeded];
+
+        CGRect frame = self.view.frame;
+        if(frame.origin.x < 0)
+        {
+            self.leftConstraint.constant = -frame.size.width;
+        }
+        else
+        {
+            self.leftConstraint.constant = frame.size.width;
+        }
+        [MainViewController moveSelectedViewController:0.0];
+        [MainViewController setAlphaOfSelectedViewController:1.0];
+
         [UIView animateWithDuration:0.35
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
-             CGRect frame = self.view.frame;
-             if(frame.origin.x < 0)
-             {
-                 self.leftConstraint.constant = -frame.size.width;
-             }
-             else
-             {
-                 self.leftConstraint.constant = frame.size.width;
-             }
-             [MainViewController moveSelectedViewController:0.0];
-
-             [MainViewController setAlphaOfSelectedViewController:1.0];
-//             self.view.frame = frame;
-             [self.view layoutIfNeeded];
+             [self.view setAlpha:0];
+             [self.view.superview layoutIfNeeded];
          }
          completion:^(BOOL finished)
          {
+             self.leftConstraint.constant = 0;
+             [self.view layoutIfNeeded];
              [self.delegate loginViewControllerDidAbort];
          }];
     }

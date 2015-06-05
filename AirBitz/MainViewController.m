@@ -156,15 +156,6 @@ MainViewController *singleton;
     });
 #endif
 
-	// Do any additional setup after loading the view.
-	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-    UIStoryboard *directoryStoryboard = [UIStoryboard storyboardWithName:@"BusinessDirectory" bundle: nil];
-	_directoryViewController = [directoryStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
-	_loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-	_loginViewController.delegate = self;
-
-    [self loadUserViews];
-
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 
     // resgister for transaction details screen complete notification
@@ -278,6 +269,15 @@ MainViewController *singleton;
 #else
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHideTabBar:) name:NOTIFICATION_SHOW_TAB_BAR object:nil];
 #endif
+    // Do any additional setup after loading the view.
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    UIStoryboard *directoryStoryboard = [UIStoryboard storyboardWithName:@"BusinessDirectory" bundle: nil];
+    _directoryViewController = [directoryStoryboard instantiateViewControllerWithIdentifier:@"DirectoryViewController"];
+    _loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    _loginViewController.delegate = self;
+
+    [self loadUserViews];
+
 
 
     // Launch biz dir into background
@@ -428,7 +428,6 @@ MainViewController *singleton;
 -(void)showLogin:(BOOL)animated withPIN:(BOOL)bWithPIN
 {
     [LoginViewController setModePIN:bWithPIN];
-    _loginViewController.leftConstraint.constant = 0;
     [self.view layoutIfNeeded];
 
     if (_selectedViewController != _directoryViewController)
@@ -440,16 +439,38 @@ MainViewController *singleton;
 
         _selectedViewController.leftConstraint = [constraints objectAtIndex:0];
     }
-    [MainViewController animateFadeOut:_selectedViewController.view];
-    [MainViewController moveSelectedViewController: -[MainViewController getLargestDimension]];
-    NSArray *constraints = [Util insertSubviewWithConstraints:singleton.view child:_loginViewController.view belowSubView:singleton.tabBar];
+
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [_selectedViewController.view setAlpha:1.0];
+    [_selectedViewController.view setOpaque:NO];
+    NSArray *constraints = [Util insertSubviewWithConstraints:self.view child:_loginViewController.view belowSubView:singleton.tabBar];
     _loginViewController.leftConstraint = [constraints objectAtIndex:0];
     _loginViewController.leftConstraint.constant = 0;
+    [_loginViewController.view setAlpha:0.0];
     [self.view layoutIfNeeded];
+
+    [_selectedViewController.view setAlpha:0.0];
+    _selectedViewController.leftConstraint.constant = -[MainViewController getLargestDimension];
+    self.blurViewLeft.constant = -[MainViewController getLargestDimension];
+    [_loginViewController.view setAlpha:1.0];
+
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished) {
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                     }];
+
+
+//    [MainViewController animateFadeOut:_selectedViewController.view];
+//    [MainViewController moveSelectedViewController: -[MainViewController getWidth]];
 
     [MainViewController hideTabBarAnimated:animated];
     [MainViewController hideNavBarAnimated:animated];
-    [MainViewController animateFadeIn:_loginViewController.view];
+//    [MainViewController animateFadeIn:_loginViewController.view];
     [MainViewController showBackground:NO animate:YES];
 
 }
@@ -471,12 +492,14 @@ MainViewController *singleton;
 {
     if(animated)
     {
+        [singleton.view layoutIfNeeded];
+
+        singleton.tabBarBottom.constant = 0;
         [UIView animateWithDuration:0.25
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
                          {
-                             singleton.tabBarBottom.constant = 0;
                              [singleton.view layoutIfNeeded];
 
                          }
@@ -497,14 +520,14 @@ MainViewController *singleton;
 
     if(animated)
     {
+        [singleton.view layoutIfNeeded];
+
+        singleton.navBarTop.constant = 0;
         [UIView animateWithDuration:0.25
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
                          {
-
-                             singleton.navBarTop.constant = 0;
-
                              [singleton.view layoutIfNeeded];
                          }
                          completion:^(BOOL finished)
@@ -525,14 +548,14 @@ MainViewController *singleton;
 
 	if(animated)
 	{
+        [singleton.view layoutIfNeeded];
+
+        singleton.tabBarBottom.constant = -singleton.tabBar.frame.size.height;
 		[UIView animateWithDuration:0.25
 							  delay:0.0
 							options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
 		 {
-
-             singleton.tabBarBottom.constant = -singleton.tabBar.frame.size.height;
-
              [singleton.view layoutIfNeeded];
 		 }
 		completion:^(BOOL finished)
@@ -551,14 +574,14 @@ MainViewController *singleton;
 
     if(animated)
     {
+        [singleton.view layoutIfNeeded];
+
+        singleton.navBarTop.constant = -singleton.navBar.frame.size.height;
         [UIView animateWithDuration:0.25
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
                          {
-
-                             singleton.navBarTop.constant = -singleton.navBar.frame.size.height;
-
                              [singleton.view layoutIfNeeded];
                          }
                          completion:^(BOOL finished)
@@ -1678,12 +1701,12 @@ MainViewController *singleton;
     viewController.leftConstraint.constant = [MainViewController getLargestDimension];
     [viewController.view layoutIfNeeded];
 
+    viewController.leftConstraint.constant = 0;
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
-                         viewController.leftConstraint.constant = 0;
                          [viewController.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
@@ -1698,11 +1721,14 @@ MainViewController *singleton;
 {
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [view setAlpha:0.0];
+    [view.superview layoutIfNeeded];
+
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [view setAlpha:1.0];
+                         [view.superview layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
@@ -1720,11 +1746,14 @@ MainViewController *singleton;
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [view setAlpha:1.0];
     [view setOpaque:NO];
+    [view.superview layoutIfNeeded];
+
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [view setAlpha:0.0];
+                         [view.superview layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
@@ -1745,18 +1774,17 @@ MainViewController *singleton;
     singleton.blurViewLeft.constant = 0;
     [singleton.view layoutIfNeeded];
 
+    in.leftConstraint.constant = 0;
+    singleton.blurViewLeft.constant = 0;
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.20
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
                      {
-                         in.leftConstraint.constant = 0;
-                         singleton.blurViewLeft.constant = 0;
                          [singleton.blurViewContainer setAlpha:1];
                          [out.view setAlpha:0.0];
                          [in.view setAlpha:1.0];
-
                          [singleton.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished)
@@ -1786,7 +1814,13 @@ MainViewController *singleton;
         singleton.blurViewLeft.constant = [MainViewController getLargestDimension];
         [singleton.view layoutIfNeeded];
     }
+    [singleton.view layoutIfNeeded];
 
+    viewController.leftConstraint.constant = 0;
+    if (withBlur)
+    {
+        singleton.blurViewLeft.constant = 0;
+    }
     if (animated)
     {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
@@ -1795,11 +1829,6 @@ MainViewController *singleton;
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
                          {
-                             viewController.leftConstraint.constant = 0;
-                             if (withBlur)
-                             {
-                                 singleton.blurViewLeft.constant = 0;
-                             }
                              [singleton.view layoutIfNeeded];
                          }
                          completion:^(BOOL finished)
@@ -1820,14 +1849,15 @@ MainViewController *singleton;
 
     if (withBlur)
         singleton.blurViewLeft.constant = 0;
+    [singleton.view layoutIfNeeded];
 
+    viewController.leftConstraint.constant = [MainViewController getLargestDimension];
+    if (withBlur)
+        singleton.blurViewLeft.constant = [MainViewController getLargestDimension];
     [UIView animateWithDuration:0.35
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
-                         viewController.leftConstraint.constant = [MainViewController getLargestDimension];
-                         if (withBlur)
-                             singleton.blurViewLeft.constant = [MainViewController getLargestDimension];
                          [singleton.view layoutIfNeeded];
 
                      }
