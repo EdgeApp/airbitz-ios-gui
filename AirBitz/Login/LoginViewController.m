@@ -215,6 +215,8 @@ static BOOL bInitialized = false;
         self.credentialsPINView.hidden = false;
         self.credentialsView.hidden = true;
         self.userEntryView.hidden = true;
+        [self.passwordTextField resignFirstResponder];
+        [self.usernameSelector.textField resignFirstResponder];
         [self.PINCodeView becomeFirstResponder];
     }
     else
@@ -223,6 +225,8 @@ static BOOL bInitialized = false;
         self.credentialsPINView.hidden = true;
         self.credentialsView.hidden = false;
         self.userEntryView.hidden = false;
+        [self.passwordTextField resignFirstResponder];
+        [self.usernameSelector.textField resignFirstResponder];
         [self.PINCodeView resignFirstResponder];
     }
 
@@ -239,11 +243,6 @@ static BOOL bInitialized = false;
         self.usernameHeight.constant = _originalUsernameHeight;
         self.passwordHeight.constant = _originalPasswordHeight;
         self.forgotPassworddButton.hidden = false;
-
-        if (_mode == MODE_ENTERING_USERNAME)
-        {
-            [self.usernameSelector.textField becomeFirstResponder];
-        }
     }
 
 
