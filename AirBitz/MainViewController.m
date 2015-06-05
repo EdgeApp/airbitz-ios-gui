@@ -228,7 +228,8 @@ MainViewController *singleton;
 	_buySellViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"BuySellViewController"];
     _buySellViewController.delegate = self;
 
-    slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
+    if (nil == slideoutView)
+        slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
     [self loadSlideOutViewConstraints];
 
     _otpRequiredAlert = nil;
