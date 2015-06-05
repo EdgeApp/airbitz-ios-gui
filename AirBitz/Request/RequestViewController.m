@@ -413,9 +413,15 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if(segmentedControlCopyEmailSMS.selectedSegmentIndex == 0)
     {
         UIPasteboard *pb = [UIPasteboard generalPasteboard];
-        [pb setString:addressString];
-
-        [MainViewController fadingAlert:NSLocalizedString(@"Request is copied to the clipboard", nil)];
+        if (pb && addressString)
+        {
+            [pb setString:addressString];
+            [MainViewController fadingAlert:NSLocalizedString(@"Request is copied to the clipboard", nil)];
+        }
+        else
+        {
+            [MainViewController fadingAlert:NSLocalizedString(@"Error occured copying to the clipboard", nil)];
+        }
     }
     else if(segmentedControlCopyEmailSMS.selectedSegmentIndex == 1)
     {

@@ -219,8 +219,13 @@ MainViewController *singleton;
 	_buySellViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"BuySellViewController"];
     _buySellViewController.delegate = self;
 
-    if (nil == slideoutView)
-        slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
+    if (slideoutView)
+    {
+        [slideoutView removeFromSuperview];
+        slideoutView = nil;
+    }
+
+    slideoutView = [SlideoutView CreateWithDelegate:self parentView:self.view withTab:self.tabBar];
     [self loadSlideOutViewConstraints];
 
     _otpRequiredAlert = nil;
@@ -444,7 +449,7 @@ MainViewController *singleton;
     [_selectedViewController.view setAlpha:1.0];
     [_selectedViewController.view setOpaque:NO];
     NSArray *constraints = [Util insertSubviewWithConstraints:self.view child:_loginViewController.view belowSubView:singleton.tabBar];
-    _loginViewController.leftConstraint = [constraints objectAtIndex:0];
+    _loginViewController.leftConstraint = constraints[0];
     _loginViewController.leftConstraint.constant = 0;
     [_loginViewController.view setAlpha:0.0];
     [self.view layoutIfNeeded];
