@@ -13,6 +13,7 @@
 @interface CommonOverviewCell : UITableViewCell
 
 @property (nonatomic, copy) NSString *ribbon;
+@property (assign)          BOOL             bInitialized;
 @property (nonatomic, weak) IBOutlet UILabel *addressLabel;
 @property (nonatomic, weak) IBOutlet UILabel *businessNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *bitCoinLabel;

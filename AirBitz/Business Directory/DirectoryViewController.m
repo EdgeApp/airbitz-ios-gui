@@ -1778,10 +1778,37 @@ static bool bInitialized = false;
             UIImageView *imageView = cell.backgroundImageView;
             imageView.clipsToBounds = YES;
             imageView.image = [backgroundImages imageForBusiness: businessInfo];
-            //((UIImageView *)cell.selectedBackgroundView).image = [backgroundImages darkImageForBusiness:businessInfo];
 //			NSLog(@"SelectedBackgroundView: %@", cell.selectedBackgroundView);
-//cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
 //NSLog(@"ImageView: %@, image: %@", cell.backgroundView, imageView.image);
+
+            if (imageView.image)
+            {
+                if (!cell.bInitialized)
+                {
+                    UIImageView *imageView = cell.backgroundImageView;
+
+                    // Set black gradient image over layer
+                    CAGradientLayer *gradient = [CAGradientLayer layer];
+                    gradient.frame = imageView.frame;
+
+                    // Add colors to layer
+                    UIColor *topColor = UIColorFromARGB(0x00000000);
+                    UIColor *centerColor = UIColorFromARGB(0x48000000);
+                    UIColor *endColor = UIColorFromARGB(0xa0000000);
+
+                    gradient.colors = @[(id) topColor.CGColor,
+                            (id) centerColor.CGColor,
+                            (id) endColor.CGColor];
+
+                    [imageView.layer insertSublayer:gradient atIndex:0];
+                    cell.bInitialized = YES;
+                }
+                imageView.hidden = NO;
+            }
+            else
+            {
+                imageView.hidden = YES;
+            }
 
             cell.bitCoinLabel.hidden = NO;
 #if SHOW_SERVER_PAGE

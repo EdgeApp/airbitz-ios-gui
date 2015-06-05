@@ -168,7 +168,7 @@
                                                                 <constraint firstAttribute="height" constant="1" id="ugx-2C-fww"/>
                                                             </constraints>
                                                         </view>
-                                                        <view alpha="0.40000000000000002" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Q2-I8-CpU" userLabel="View -bar">
+                                                        <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Q2-I8-CpU" userLabel="View -bar">
                                                             <rect key="frame" x="0.0" y="106" width="320" height="1"/>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -286,7 +286,7 @@
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6E-Xg-Tz3">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="darken_bottom_table_cell.png" translatesAutoresizingMaskIntoConstraints="NO" id="Afa-Pw-qW2">
+                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="darken_bottom_table_cell.png" translatesAutoresizingMaskIntoConstraints="NO" id="Afa-Pw-qW2">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
@@ -930,7 +930,7 @@
         <image name="btn_blue.png" width="110" height="27"/>
         <image name="btn_locateMe.png" width="39" height="39"/>
         <image name="btn_right.png" width="22" height="22"/>
-        <image name="darken_bottom_table_cell.png" width="320" height="111"/>
+        <image name="darken_bottom_table_cell.png" width="160" height="56"/>
         <image name="divider.png" width="320" height="27"/>
         <image name="drag_bar.png" width="1600" height="33"/>
         <image name="icon_category_atm.png" width="30" height="30"/>
