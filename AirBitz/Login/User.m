@@ -26,7 +26,7 @@
 #define REVIEW_LOGIN_COUNT 7
 #define REVIEW_TX_COUNT    7
 
-#define FORCE_HELP_SCREENS 1
+#define FORCE_HELP_SCREENS 0
 
 static BOOL bInitialized = NO;
 
