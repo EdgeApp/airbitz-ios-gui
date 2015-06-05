@@ -358,7 +358,14 @@
 - (void)info: (UIButton *)sender
 {
     [self resignAllResponders];
-    [InfoView CreateWithHTML:@"infoTransactions" forView:self.view];
+    if (_bWalletsShowing)
+    {
+        [InfoView CreateWithHTML:@"infoWallets" forView:self.view];
+    }
+    else
+    {
+        [InfoView CreateWithHTML:@"infoTransactions" forView:self.view];
+    }
 }
 
 - (IBAction)buttonBlockerTouched:(id)sender
