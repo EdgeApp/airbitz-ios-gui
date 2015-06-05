@@ -27,6 +27,7 @@
 @property (nonatomic) UIColor *colorRequestTopTextFieldPlaceholder;
 @property (nonatomic) UIColor *colorRequestBottomTextField;
 @property (nonatomic) UIColor *colorButtonGreen;
+@property (nonatomic) UIColor *colorButtonBlue;
 @property (nonatomic) UIColor *bdButtonBlue;
 
 @property (nonatomic) NSMutableArray *colorsProfileIcons;

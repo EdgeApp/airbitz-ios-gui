@@ -50,8 +50,10 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorTextDark = UIColorFromARGB(0xff0C578C);;
     self.colorTextLink = UIColorFromARGB(0xFF007aFF);
     self.deleteAccountWarning = NSLocalizedString(@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.", @"Delete Account Warning");
-    self.colorSendButton = UIColorFromARGB(0xFF80c342);
-    self.colorRequestButton = UIColorFromARGB(0xff2291cf);
+    self.colorButtonGreen = UIColorFromARGB(0xff80C342);
+    self.colorButtonBlue = UIColorFromARGB(0xff2291CF);
+    self.colorSendButton = self.colorButtonBlue;
+    self.colorRequestButton = self.colorButtonGreen;
 
     self.colorRequestButtonDisabled = UIColorFromARGB(0x5580c342);
     self.colorSendButtonDisabled = UIColorFromARGB(0x55006698);
@@ -60,7 +62,6 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorRequestTopTextFieldPlaceholder = UIColorFromARGB(0xffdddddd);
     self.colorRequestBottomTextField = self.colorTextDark;
 
-    self.colorButtonGreen = UIColorFromARGB(0xff80C342);
     self.bdButtonBlue = UIColorFromARGB(0xff0079B9);
     self.colorsProfileIcons = [[NSMutableArray alloc] init];
 

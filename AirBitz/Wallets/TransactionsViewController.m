@@ -1075,20 +1075,32 @@
 
         if (nil == cell.imagePhoto.image)
         {
-            NSString *stringToHash;
-            if ([cell.addressLabel.text length] == 0)
+            if (transaction.amountSatoshi < 0)
             {
-                // Random color based on txid
-                stringToHash = transaction.strID;
+                UIColor *color = [Theme Singleton].colorSendButton;
+                [cell.imagePhoto.layer setBackgroundColor:[color CGColor]];
+                cell.imagePhoto.image = [UIImage imageNamed:@"icon_send_padded.png"];
             }
             else
             {
-                stringToHash = transaction.strName;
+                UIColor *color = [Theme Singleton].colorRequestButton;
+                [cell.imagePhoto.layer setBackgroundColor:[color CGColor]];
+                cell.imagePhoto.image = [UIImage imageNamed:@"icon_request_padded.png"];
             }
-            NSUInteger hash = [stringToHash hash];
-            hash = hash % [[Theme Singleton].colorsProfileIcons count];
-            UIColor *color = [[Theme Singleton].colorsProfileIcons objectAtIndex:hash];
-            [cell.imagePhoto.layer setBackgroundColor:[color CGColor]];
+//            NSString *stringToHash;
+//            if ([cell.addressLabel.text length] == 0)
+//            {
+//                // Random color based on txid
+//                stringToHash = transaction.strID;
+//            }
+//            else
+//            {
+//                stringToHash = transaction.strName;
+//            }
+//            NSUInteger hash = [stringToHash hash];
+//            hash = hash % [[Theme Singleton].colorsProfileIcons count];
+//            UIColor *color = [[Theme Singleton].colorsProfileIcons objectAtIndex:hash];
+//            [cell.imagePhoto.layer setBackgroundColor:[color CGColor]];
         }
     
         CGFloat borderWidth = PHOTO_BORDER_WIDTH;
