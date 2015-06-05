@@ -1171,6 +1171,12 @@
 		DAD9A4AD1B213F0B00CB3EA4 /* icon_request_padded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4A91B213F0B00CB3EA4 /* icon_request_padded@2x.png */; };
 		DAD9A4AE1B213F0B00CB3EA4 /* icon_request_padded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4A91B213F0B00CB3EA4 /* icon_request_padded@2x.png */; };
 		DAD9A4AF1B213F0B00CB3EA4 /* icon_request_padded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4A91B213F0B00CB3EA4 /* icon_request_padded@2x.png */; };
+		DAD9A4B11B217C2500CB3EA4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B01B217C2500CB3EA4 /* LaunchScreen.xib */; };
+		DAD9A4B21B217C2500CB3EA4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B01B217C2500CB3EA4 /* LaunchScreen.xib */; };
+		DAD9A4B31B217C2500CB3EA4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B01B217C2500CB3EA4 /* LaunchScreen.xib */; };
+		DAD9A4B51B21804100CB3EA4 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B41B21804100CB3EA4 /* background_launch.png */; };
+		DAD9A4B61B21804100CB3EA4 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B41B21804100CB3EA4 /* background_launch.png */; };
+		DAD9A4B71B21804100CB3EA4 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B41B21804100CB3EA4 /* background_launch.png */; };
 		DAE276141A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
 		DAE276151A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
 		DAE276161A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
@@ -2095,6 +2101,8 @@
 		DAD9A4951B213EA500CB3EA4 /* icon_send_padded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_send_padded@2x.png"; path = "Resources/Artwork/icon_send_padded@2x.png"; sourceTree = "<group>"; };
 		DAD9A4A81B213F0B00CB3EA4 /* icon_request_padded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_request_padded.png; path = Resources/Artwork/icon_request_padded.png; sourceTree = "<group>"; };
 		DAD9A4A91B213F0B00CB3EA4 /* icon_request_padded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_request_padded@2x.png"; path = "Resources/Artwork/icon_request_padded@2x.png"; sourceTree = "<group>"; };
+		DAD9A4B01B217C2500CB3EA4 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = DL_URLServer/LaunchScreen.xib; sourceTree = "<group>"; };
+		DAD9A4B41B21804100CB3EA4 /* background_launch.png */ = {isa = PBXFileReference; explicitFileType = compiled; name = background_launch.png; path = Resources/Artwork/background_launch.png; sourceTree = "<group>"; };
 		DAE276121A9AEE8500E24523 /* AddressRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressRequestController.h; sourceTree = "<group>"; };
 		DAE276131A9AEE8500E24523 /* AddressRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressRequestController.m; sourceTree = "<group>"; };
 		DAE276201A9BF68100E24523 /* SignUpUsernameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpUsernameController.h; path = SignUp/SignUpUsernameController.h; sourceTree = "<group>"; };
@@ -2731,6 +2739,7 @@
 				B561E1A218D2572D002DCDC2 /* InfoView.h */,
 				B561E1A318D2572D002DCDC2 /* InfoView.m */,
 				B561E1A518D2572D002DCDC2 /* InfoView~iphone.xib */,
+				DAD9A4B01B217C2500CB3EA4 /* LaunchScreen.xib */,
 				B5137C1318A40EDA00DA4A34 /* LatoLabel.h */,
 				B5137C1418A40EDA00DA4A34 /* LatoLabel.m */,
 				B5F2E9BC18DA911A008ACF88 /* Login */,
@@ -2829,6 +2838,7 @@
 				DA06F6291B0BDD77000BCA46 /* 5-bars@2x.png */,
 				DA06F62A1B0BDD77000BCA46 /* background_header.png */,
 				DA06F62B1B0BDD77000BCA46 /* background_header@2x.png */,
+				DAD9A4B41B21804100CB3EA4 /* background_launch.png */,
 				DA06F6311B0BDD77000BCA46 /* bd_icon_clock.png */,
 				DA06F6321B0BDD77000BCA46 /* bd_icon_clock@2x.png */,
 				DA06F6331B0BDD77000BCA46 /* bd_icon_facebook.png */,
@@ -3584,6 +3594,7 @@
 				DA06FAD41B0BDD79000BCA46 /* thumb.png in Resources */,
 				DA06F9001B0BDD79000BCA46 /* btn_right.png in Resources */,
 				DA06FA351B0BDD79000BCA46 /* icon_USD_dark@2x.png in Resources */,
+				DAD9A4B61B21804100CB3EA4 /* background_launch.png in Resources */,
 				DA06F9841B0BDD79000BCA46 /* flash_off@2x.png in Resources */,
 				DAA8E9D61B1ED50B00BC870C /* icon_category_gift_cards@3x.png in Resources */,
 				DA06FA471B0BDD79000BCA46 /* img_collapseExpandBlueDown@2x.png in Resources */,
@@ -3603,6 +3614,7 @@
 				DAD9A4971B213EA500CB3EA4 /* icon_send_padded.png in Resources */,
 				7DFD23121A1FF98A008C43FB /* UIPhotoGallerySliderView.xib in Resources */,
 				DA06F97B1B0BDD79000BCA46 /* enable-camera.png in Resources */,
+				DAD9A4B21B217C2500CB3EA4 /* LaunchScreen.xib in Resources */,
 				DA06F8611B0BDD79000BCA46 /* btn_camera@2x.png in Resources */,
 				DA06F7BC1B0BDD79000BCA46 /* bitCoinAnnotation.png in Resources */,
 				DAA8E9B51B1ED50B00BC870C /* icon_category_atm.png in Resources */,
@@ -3887,6 +3899,7 @@
 				DAA8E9C91B1ED50B00BC870C /* icon_category_electronics@2x.png in Resources */,
 				DA06FAD31B0BDD79000BCA46 /* thumb.png in Resources */,
 				DA06F8FF1B0BDD79000BCA46 /* btn_right.png in Resources */,
+				DAD9A4B51B21804100CB3EA4 /* background_launch.png in Resources */,
 				DA06FA341B0BDD79000BCA46 /* icon_USD_dark@2x.png in Resources */,
 				DA06F9831B0BDD79000BCA46 /* flash_off@2x.png in Resources */,
 				DAA8E9D51B1ED50B00BC870C /* icon_category_gift_cards@3x.png in Resources */,
@@ -3906,6 +3919,7 @@
 				DAD9A4961B213EA500CB3EA4 /* icon_send_padded.png in Resources */,
 				DA06F7A91B0BDD79000BCA46 /* bd_icon_web.png in Resources */,
 				DA06F85D1B0BDD79000BCA46 /* btn_camera.png in Resources */,
+				DAD9A4B11B217C2500CB3EA4 /* LaunchScreen.xib in Resources */,
 				B5137C1018A40A8400DA4A34 /* Lato-Regular.ttf in Resources */,
 				DA06F97A1B0BDD79000BCA46 /* enable-camera.png in Resources */,
 				DA06F8601B0BDD79000BCA46 /* btn_camera@2x.png in Resources */,
@@ -4190,6 +4204,7 @@
 				DAA8E9CB1B1ED50B00BC870C /* icon_category_electronics@2x.png in Resources */,
 				DA06FAD51B0BDD79000BCA46 /* thumb.png in Resources */,
 				DA06F9011B0BDD79000BCA46 /* btn_right.png in Resources */,
+				DAD9A4B71B21804100CB3EA4 /* background_launch.png in Resources */,
 				DA06FA361B0BDD79000BCA46 /* icon_USD_dark@2x.png in Resources */,
 				DA06F9851B0BDD79000BCA46 /* flash_off@2x.png in Resources */,
 				DAA8E9D71B1ED50B00BC870C /* icon_category_gift_cards@3x.png in Resources */,
@@ -4209,6 +4224,7 @@
 				DAD9A4981B213EA500CB3EA4 /* icon_send_padded.png in Resources */,
 				DA06F7AB1B0BDD79000BCA46 /* bd_icon_web.png in Resources */,
 				DA06F85F1B0BDD79000BCA46 /* btn_camera.png in Resources */,
+				DAD9A4B31B217C2500CB3EA4 /* LaunchScreen.xib in Resources */,
 				DAE865061A88A58A00A17BD3 /* Lato-Regular.ttf in Resources */,
 				DA06F97C1B0BDD79000BCA46 /* enable-camera.png in Resources */,
 				DA06F8621B0BDD79000BCA46 /* btn_camera@2x.png in Resources */,
@@ -5009,7 +5025,6 @@
 			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -5045,7 +5060,6 @@
 			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -5155,7 +5169,6 @@
 			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -5189,7 +5202,6 @@
 			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -5223,7 +5235,6 @@
 			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Develop";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -5257,7 +5268,6 @@
 			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Develop";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
