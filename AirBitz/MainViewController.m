@@ -1560,13 +1560,15 @@ MainViewController *singleton;
 - (void)slideoutLogout
 {
     [slideoutView showSlideout:NO withAnimation:NO];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [MainViewController fadingAlert:NSLocalizedString(@"Please wait while Airbitz gracefully exits your account", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[User Singleton] clear];
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
+    [MainViewController fadingAlertDismiss];
+//        dispatch_async(dispatch_get_main_queue(), ^(void) {
             [self SettingsViewControllerDone:nil];
             [self launchViewControllerBasedOnAppMode];
-        });
-    });
+//        });
+//    });
 }
 
 - (void)slideoutBuySell
