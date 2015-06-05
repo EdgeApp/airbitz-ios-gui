@@ -677,12 +677,10 @@ typedef NS_ENUM(NSUInteger, CellType) {
 			commonCell.leftLabel.text = [dayString copy];
             commonCell.leftLabel.numberOfLines = leftLines;
             commonCell.leftLabel.textColor = [UIColor blackColor];
-            NSLog(@"leftLabel: %@", commonCell.leftLabel.text);
 
 			commonCell.rightLabel.text = [hoursString copy];
             commonCell.rightLabel.numberOfLines = rightLines;
             commonCell.rightLabel.textColor = [UIColor blackColor];
-            NSLog(@"rightLabel: %@", commonCell.rightLabel.text);
 
             commonCell.rightIcon.hidden = YES;
             commonCell.cellIcon.hidden = NO;
@@ -714,6 +712,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
             if (socialType)
             {
                 commonCell.cellIcon.hidden = NO;
+                commonCell.rightIcon.hidden = NO;
+                commonCell.leftLabel.textColor = [Theme Singleton].bdButtonBlue;
                 commonCell.cellIcon.image = [UIImage imageNamed:[BD_Social_Cell getSocialTypeImage:socialType]];
                 commonCell.leftLabel.text = [BD_Social_Cell getSocialTypeAsString:socialType];
                 break;
