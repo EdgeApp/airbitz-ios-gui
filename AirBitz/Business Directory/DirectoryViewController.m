@@ -1783,10 +1783,26 @@ static bool bInitialized = false;
 
             if (imageView.image)
             {
-                if (!cell.bInitialized)
+//                if (!cell.bInitialized)
                 {
                     UIImageView *imageView = cell.backgroundImageView;
 
+
+                    CAGradientLayer *layer = [imageView.layer valueForKey:@"GradientLayer"];
+                    if (layer)
+                    {
+                        // Remove gradient and re-add below
+                        [layer removeFromSuperlayer];
+                        [imageView.layer setValue:nil forKey:@"GradientLayer"];
+                        layer = nil;
+                    }
+                    CGRect frame = imageView.frame;
+                    frame.size.width = [MainViewController getWidth];
+                    frame.size.height = [Theme Singleton].heightListings;
+
+                    imageView.frame = frame;
+
+//                    NSLog(@"row=%d imagewidth=%f width=%f boundswidth=%f", row, imageView.frame.size.width, [MainViewController getWidth], cell.bounds.size.width);
                     // Set black gradient image over layer
                     CAGradientLayer *gradient = [CAGradientLayer layer];
                     gradient.frame = imageView.frame;
@@ -1801,6 +1817,7 @@ static bool bInitialized = false;
                             (id) endColor.CGColor];
 
                     [imageView.layer insertSublayer:gradient atIndex:0];
+                    [imageView.layer setValue:gradient forKey:@"GradientLayer"];
                     cell.bInitialized = YES;
                 }
                 imageView.hidden = NO;
