@@ -16,6 +16,8 @@
 #import "CommonTypes.h"
 #import "MainViewController.h"
 
+#define SHOW_BUY_SELL 0
+
 @interface SlideoutView () <PickerTextViewDelegate >
 
 {
@@ -96,6 +98,9 @@
     if ([User isLoggedIn])
     {
         self.accountPicker.delegate = self;
+
+        _buySellButton.hidden = !SHOW_BUY_SELL;
+        _buySellDivider.hidden = !SHOW_BUY_SELL;
 
         // set up the specifics on our picker text view
         [self.accountPicker setTopMostView:self.otherAccountsView];

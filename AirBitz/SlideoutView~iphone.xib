@@ -246,12 +246,12 @@
                             </connections>
                         </view>
                         <view contentMode="scaleToFill" id="I1t-ii-re1" userLabel="divider1">
-                            <rect key="frame" x="0.0" y="49" width="240" height="1"/>
+                            <rect key="frame" x="0.0" y="100" width="240" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="Jo0-RP-ZNs" userLabel="divider1">
-                            <rect key="frame" x="0.0" y="100" width="240" height="1"/>
+                            <rect key="frame" x="0.0" y="49" width="240" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
