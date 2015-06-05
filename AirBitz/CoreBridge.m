@@ -1352,6 +1352,10 @@ static BOOL bOtpError = NO;
 
 + (void)logout
 {
+    // XXX: prevents crashing on logout
+    while ([walletsQueue operationCount] > 0) {
+        [NSThread sleepForTimeInterval:.2];
+    }
     [CoreBridge stopWatchers];
     [CoreBridge stopQueues];
     [CoreBridge cleanWallets];
