@@ -186,7 +186,7 @@
         self.walletSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
         self.keypadView.currencyNum = [CoreBridge Singleton].currentWallet.currencyNum;
 
-        NSString *walletName = [NSString stringWithFormat:@"From: %@ ↓", [CoreBridge Singleton].currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:@"From: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
         {

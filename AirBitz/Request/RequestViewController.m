@@ -234,7 +234,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
 
-        NSString *walletName = [NSString stringWithFormat:@"To: %@ ↓", [CoreBridge Singleton].currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 
         self.keypadView.currencyNum = [CoreBridge Singleton].currentWallet.currencyNum;
@@ -248,7 +248,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
         }
     }
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
 }
@@ -986,7 +986,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 //    NSString *walletName;
 //
-//    walletName = [NSString stringWithFormat:@"To: %@ ↓", wallet.strName];
+//    walletName = [NSString stringWithFormat:@"To: %@ ▼", wallet.strName];
 //
 //    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
     [self updateQRCode:0];
@@ -1005,6 +1005,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [self.buttonSelector open];
         bWalletListDropped = true;
     }
+    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+
 
 }
 

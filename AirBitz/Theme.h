@@ -40,6 +40,7 @@
 @property (nonatomic) NSString *infoButtonText;
 @property (nonatomic) NSString *doneButtonText;
 @property (nonatomic) NSString *cancelButtonText;
+@property (nonatomic) NSString *closeButtonText;
 @property (nonatomic) NSString *exportButtonText;
 @property (nonatomic) NSString *renameButtonText;
 @property (nonatomic) NSString *deleteAccountWarning;

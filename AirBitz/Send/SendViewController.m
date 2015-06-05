@@ -271,7 +271,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)setupNavBar
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 }
 
@@ -293,6 +293,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [self.buttonSelector open];
         bWalletListDropped = true;
     }
+    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
 
 }
 
@@ -1344,9 +1345,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
         NSString *walletName;
         if (self.bImportMode)
-            walletName = [NSString stringWithFormat:@"Import To: %@ ↓", [CoreBridge Singleton].currentWallet.strName];
+            walletName = [NSString stringWithFormat:@"Import To: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
         else
-            walletName = [NSString stringWithFormat:@"From: %@ ↓", [CoreBridge Singleton].currentWallet.strName];
+            walletName = [NSString stringWithFormat:@"From: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))

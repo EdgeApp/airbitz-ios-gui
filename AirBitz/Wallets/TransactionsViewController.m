@@ -198,12 +198,15 @@
         destination = -[MainViewController getLargestDimension];
         _bWalletsShowing = false;
 
+
     }
     else
     {
         destination = [MainViewController getHeaderHeight];
         _bWalletsShowing = true;
     }
+
+    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:_bWalletsShowing action:@selector(toggleWalletDropdown:) fromObject:self];
 
     [UIView animateWithDuration: 0.35
                           delay: 0.0
@@ -228,8 +231,10 @@
     [self performSelector:@selector(resetTableHideSearch) withObject:nil afterDelay:0.0f];
 //    [self resetTableHideSearch];
 
+    _bWalletsShowing = false;
+
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:_bWalletsShowing action:@selector(toggleWalletDropdown:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
     self.buttonRequest.enabled = false;
@@ -237,7 +242,6 @@
     [self.buttonSend setAlpha:0.4];
     [self.buttonRequest setAlpha:0.4];
 
-    _bWalletsShowing = false;
     self.walletsViewTop.constant = -[MainViewController getLargestDimension];
 
     self.walletsView.layer.masksToBounds = NO;
@@ -436,7 +440,7 @@
 
     NSString *walletName;
 
-    walletName = [NSString stringWithFormat:@"%@ ↓", [CoreBridge Singleton].currentWallet.strName];
+    walletName = [NSString stringWithFormat:@"%@ ▼", [CoreBridge Singleton].currentWallet.strName];
 
     [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(toggleWalletDropdown:) fromObject:self];
 
@@ -731,7 +735,7 @@
     }
 
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:_bWalletsShowing action:@selector(toggleWalletDropdown:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
     [self dismissTransactionDetails];
@@ -1265,7 +1269,7 @@
         self.exportWalletViewController = nil;
     }];
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
     [self updateViews:nil];
