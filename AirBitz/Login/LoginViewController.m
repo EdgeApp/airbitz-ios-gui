@@ -239,10 +239,21 @@ static BOOL bInitialized = false;
     }
     else
     {
-        self.usernameSelector.textField.hidden = false;
+        [self.view.superview layoutIfNeeded];
         self.usernameHeight.constant = _originalUsernameHeight;
         self.passwordHeight.constant = _originalPasswordHeight;
-        self.forgotPassworddButton.hidden = false;
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+                         {
+                             self.usernameSelector.textField.hidden = false;
+                             self.forgotPassworddButton.hidden = false;
+                             [self.view.superview layoutIfNeeded];
+                         }
+                         completion:^(BOOL finished)
+                         {
+                         }];
     }
 
 
