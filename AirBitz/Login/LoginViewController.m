@@ -396,6 +396,11 @@ static BOOL bInitialized = false;
                     [self.passwordTextField.text UTF8String], &error);
             _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
             _strReason = [Util errorMap:&error];
+
+            // Core doesn't return anything specific for the case where network is down.
+            // Make up a better response in this case
+            if (error.code == ABC_CC_Error)
+                _strReason = NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil);
             _resultCode = error.code;
             [self performSelectorOnMainThread:@selector(signInComplete) withObject:nil waitUntilDone:FALSE];
         });
@@ -524,8 +529,16 @@ static BOOL bInitialized = false;
                 }
                 default:
                 {
+                    NSString *reason;
                     [MainViewController showBackground:NO animate:YES];
-                    [MainViewController fadingAlert:[Util errorMap:&error]];
+                    // Core doesn't return anything specific for the case where network is down.
+                    // Make up a better response in this case
+                    if (error.code == ABC_CC_Error)
+                        reason = NSLocalizedString(@"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline", nil);
+                    else
+                        reason = [Util errorMap:&error];
+
+                    [MainViewController fadingAlert:reason];
                     [self.PINCodeView becomeFirstResponder];
 
                 }
