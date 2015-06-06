@@ -406,6 +406,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
     // check camera state before proceeding
 	_readerView = [ZBarReaderView new];
+    _readerView.torchMode = AVCaptureTorchModeOff;
     [self rotateZbar:[[UIApplication sharedApplication] statusBarOrientation]];
 
     if ([_readerView isDeviceAvailable])

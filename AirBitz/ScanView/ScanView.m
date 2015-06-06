@@ -107,6 +107,7 @@
 {
     // check camera state before proceeding
     _readerView = [ZBarReaderView new];
+    _readerView.torchMode = AVCaptureTorchModeOff;
 
     [_readerView willRotateToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0.35];
 
