@@ -334,8 +334,8 @@ static BOOL bInitialized = false;
         //
         // Set the PIN username default
         //
-        UIFont *boldFont = [UIFont fontWithName:@"Lato-Bold" size:self.PINusernameSelector.button.titleLabel.font.pointSize];
-        UIFont *regularFont = [UIFont fontWithName:@"Lato-Regular" size:self.PINusernameSelector.button.titleLabel.font.pointSize];
+        UIFont *boldFont = [UIFont fontWithName:@"Lato-Bold" size:[Theme Singleton].fontSizeEnterPINText];
+        UIFont *regularFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
         UIColor *boldColor = [UIColor colorWithRed:60./255. green:140.5/255. blue:200/255. alpha:1.];
         UIColor *regularColor = [UIColor grayColor];
         NSString *title = [NSString stringWithFormat:@"Enter PIN for (%@)",

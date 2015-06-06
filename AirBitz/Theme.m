@@ -127,7 +127,6 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.alertHoldTimePaymentReceived           = 10;       // Hold time for payments
     self.alertHoldTimeHelpPopups                = 6.0;      // Hold time for auto popup help
 
-
     self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];
     self.backgroundLogin = [UIImage imageNamed:@"postcard-mountain.png"];
 
@@ -148,6 +147,8 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightSettingsTableHeader          = 60.0;
         self.heightButton                       = 45.0;
         self.buttonFontSize                     = 15.0;
+        self.fontSizeEnterPINText               = 16.0;     // Font size for PIN login screen "Enter PIN"
+
     }
     if (IS_MIN_IPHONE5)
     {
@@ -166,6 +167,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightPopupPicker = 60;
         self.heightSettingsTableCell            = 45.0;
         self.heightSettingsTableHeader          = 65.0;
+        self.fontSizeEnterPINText               = 18.0;     // Font size for PIN login screen "Enter PIN"
     }
     if (IS_MIN_IPHONE6_PLUS)
     {
@@ -178,6 +180,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     if (IS_MIN_IPAD_MINI)
     {
         self.heightBLETableCells = 75;
+        self.fontSizeEnterPINText               = 20.0;     // Font size for PIN login screen "Enter PIN"
     }
 
     NSLog(@"***Device Type: %@ %@", [self platform], [self platformString]);

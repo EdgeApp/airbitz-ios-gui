@@ -96,6 +96,8 @@
 @property (nonatomic) CGFloat heightSettingsTableHeader;
 @property (nonatomic) CGFloat heightButton;
 
+@property (nonatomic) CGFloat fontSizeEnterPINText;
+
 
 @property (nonatomic) CGFloat animationDelayTimeDefault;
 @property (nonatomic) CGFloat animationDurationTimeDefault;
