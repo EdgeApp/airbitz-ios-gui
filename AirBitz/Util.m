@@ -422,6 +422,9 @@
 
     [childView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
+    NSAssert(viewsDictionary, @"viewsDictionary NULL");
+    NSAssert(parentView, @"parent NULL");
+    NSAssert(belowView, @"belowView NULL");
     [parentView insertSubview:childView belowSubview:belowView];
 
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
