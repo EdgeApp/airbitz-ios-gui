@@ -399,6 +399,7 @@ MainViewController *singleton;
     {
         [singleton.backgroundView setAlpha:bvStart];
         [singleton.backgroundViewBlue setAlpha:bvbStart];
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [UIView animateWithDuration:1.0
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
@@ -406,6 +407,7 @@ MainViewController *singleton;
                          {
                              [singleton.backgroundView setAlpha:bvEnd];
                              [singleton.backgroundViewBlue setAlpha:bvbEnd];
+                             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                          }
                          completion:completion];
     }
@@ -500,6 +502,7 @@ MainViewController *singleton;
         [singleton.view layoutIfNeeded];
 
         singleton.tabBarBottom.constant = 0;
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [UIView animateWithDuration:0.25
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
@@ -511,6 +514,7 @@ MainViewController *singleton;
                          completion:^(BOOL finished)
                          {
                              NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+                             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 
                          }];
     }
@@ -528,6 +532,7 @@ MainViewController *singleton;
         [singleton.view layoutIfNeeded];
 
         singleton.navBarTop.constant = 0;
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [UIView animateWithDuration:0.25
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
@@ -538,6 +543,7 @@ MainViewController *singleton;
                          completion:^(BOOL finished)
                          {
                              NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+                             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                          }];
     }
     else
@@ -556,17 +562,19 @@ MainViewController *singleton;
         [singleton.view layoutIfNeeded];
 
         singleton.tabBarBottom.constant = -singleton.tabBar.frame.size.height;
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 		[UIView animateWithDuration:0.25
 							  delay:0.0
 							options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
-		 {
+        {
              [singleton.view layoutIfNeeded];
-		 }
+		}
 		completion:^(BOOL finished)
-		 {
-			NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
-		 }];
+		{
+            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+            NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+		}];
 	}
 	else
 	{
@@ -582,6 +590,7 @@ MainViewController *singleton;
         [singleton.view layoutIfNeeded];
 
         singleton.navBarTop.constant = -singleton.navBar.frame.size.height;
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [UIView animateWithDuration:0.25
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
@@ -591,6 +600,7 @@ MainViewController *singleton;
                          }
                          completion:^(BOOL finished)
                          {
+                             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                              NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                          }];
     }
@@ -1843,11 +1853,10 @@ MainViewController *singleton;
                              [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                          }];
     }
-//    else
-//    {
-//        viewController.leftConstraint.constant = 0;
-//        [singleton.view layoutIfNeeded];
-//    }
+    else
+    {
+        [singleton.view layoutIfNeeded];
+    }
 }
 
 + (void)animateOut:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur complete:(void(^)(void))cb
