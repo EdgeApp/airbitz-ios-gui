@@ -573,21 +573,24 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
     }
 
+    Wallet *wallet = [self getCurrentWallet];
+    NSString *strUUID = wallet.strUUID;
+    int currencyNum = wallet.currencyNum;
+
     //
     // Change the QR code. This is a slow call so put it in a queue
     //
     [CoreBridge postToWalletsQueue:^(void) {
 
-        UIImage *qrImage = [self createRequestQRImageFor:strName withNotes:strNotes withCategory:strCategory
+        UIImage *qrImage = [self createRequestQRImageFor:strName walletUUID:strUUID currencyNum:currencyNum withNotes:strNotes withCategory:strCategory
                                         storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
                                             scaleAndSave:NO withAmount:remaining];
-
 
         addressString = strRequestAddress;
         _uriString = strRequestURI;
 
         dispatch_async(dispatch_get_main_queue(),^{
-            [CoreBridge prioritizeAddress:addressString inWallet:[CoreBridge Singleton].currentWallet.strUUID];
+            [CoreBridge prioritizeAddress:addressString inWallet:strUUID];
             self.statusLine3.text = addressString;
             self.qrCodeImageView.image = qrImage;
         });
@@ -767,15 +770,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 }
 
-- (const char *)createReceiveRequestFor:(NSString *)strName withNotes:(NSString *)strNotes 
+- (const char *)createReceiveRequestFor:(NSString *)strName walletUUID:(NSString *)strUUID currencyNum:(int)currencyNum withNotes:(NSString *)strNotes
     withCategory:(NSString *)strCategory withAmount:(SInt64)amountSatoshi
 {
 	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
 	tABC_CC result;
 	double currency;
 	tABC_Error error;
-
-    Wallet *wallet = [self getCurrentWallet];
 
 	//first need to create a transaction details struct
     memset(&_details, 0, sizeof(tABC_TxDetails));
@@ -787,7 +788,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	_details.amountFeesMinersSatoshi = 0;
 	
 	result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                   _details.amountSatoshi, &currency, wallet.currencyNum, &error);
+                                   _details.amountSatoshi, &currency, currencyNum, &error);
 	if (result == ABC_CC_Ok)
 	{
 		_details.amountCurrency = currency;
@@ -804,7 +805,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     // create the request
 	result = ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
                                       [[User Singleton].password UTF8String],
-                                      [wallet.strUUID UTF8String],
+                                      [strUUID UTF8String],
                                       &_details,
                                       &pRequestID,
                                       &error);
@@ -821,7 +822,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 
 // generates and returns a request qr image, stores request id in the given mutable string
-- (UIImage *)createRequestQRImageFor:(NSString *)strName withNotes:(NSString *)strNotes withCategory:(NSString *)strCategory 
+- (UIImage *)createRequestQRImageFor:(NSString *)strName walletUUID:(NSString *)strUUID currencyNum:(int)currencyNum withNotes:(NSString *)strNotes withCategory:(NSString *)strCategory
     storeRequestIDIn:(NSMutableString *)strRequestID storeRequestURI:(NSMutableString *)strRequestURI 
     storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave 
     withAmount:(SInt64)amountSatoshi
@@ -838,16 +839,15 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     char *pszURI = NULL;
     tABC_Error error;
 
-    const char *szRequestID = [self createReceiveRequestFor:strName withNotes:strNotes
+    const char *szRequestID = [self createReceiveRequestFor:strName walletUUID:strUUID currencyNum:currencyNum withNotes:strNotes
         withCategory:strCategory withAmount:amountSatoshi];
     self.requestID = [NSString stringWithUTF8String:szRequestID];
 
     if (szRequestID)
     {
-        Wallet *wallet = [self getCurrentWallet];
         tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
                                            [[User Singleton].password UTF8String],
-                                           [wallet.strUUID UTF8String],
+                                           [strUUID UTF8String],
                                                    szRequestID,
                                                    &pszURI,
                                                    &pData,
