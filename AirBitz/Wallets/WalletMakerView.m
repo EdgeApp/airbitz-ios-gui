@@ -240,6 +240,7 @@
 {
     [self blockUser:NO];
     _bCreatingWallet = NO;
+    [CoreBridge startWatchers];
     [CoreBridge refreshWallets];
 
     //NSLog(@"Wallet create complete");
