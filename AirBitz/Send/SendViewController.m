@@ -334,6 +334,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (_sendConfirmationViewController)
     {
         [_sendConfirmationViewController.view removeFromSuperview];
+        _sendConfirmationViewController.delegate = nil;
         _sendConfirmationViewController = nil;
     }
 }

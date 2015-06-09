@@ -201,8 +201,17 @@ MainViewController *singleton;
 - (void)loadUserViews
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    if (_requestViewController) {
+        [_requestViewController resetViews];
+        _requestViewController = nil;
+    }
 	_requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
 	_requestViewController.delegate = self;
+
+    if (_sendViewController) {
+        [_sendViewController resetViews];
+        _sendViewController = nil;
+    }
 	_sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
     _sendViewController.delegate = self;
 
@@ -210,10 +219,14 @@ MainViewController *singleton;
     _importViewController.delegate = self;
 
     _transactionsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionsViewController"];
+
+    if (_settingsViewController) {
+        [_settingsViewController resetViews];
+        _settingsViewController = nil;
+    }
     UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
     _settingsViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
     _settingsViewController.delegate = self;
-    [_settingsViewController resetViews];
 
 	UIStoryboard *pluginStoryboard = [UIStoryboard storyboardWithName:@"Plugins" bundle: nil];
 	_buySellViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"BuySellViewController"];
@@ -1571,14 +1584,14 @@ MainViewController *singleton;
 {
     [slideoutView showSlideout:NO withAnimation:NO];
     [MainViewController fadingAlert:NSLocalizedString(@"Please wait while Airbitz gracefully exits your account", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[User Singleton] clear];
+
+    // Log the user out and reset UI
+    [self loadUserViews];
+    [[User Singleton] clear];
+
     [MainViewController fadingAlertDismiss];
-//        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            [self SettingsViewControllerDone:nil];
-            [self launchViewControllerBasedOnAppMode];
-//        });
-//    });
+    [self SettingsViewControllerDone:nil];
+    [self launchViewControllerBasedOnAppMode];
 }
 
 - (void)slideoutBuySell
