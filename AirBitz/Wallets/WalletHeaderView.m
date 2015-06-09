@@ -92,17 +92,23 @@
 
 - (IBAction)headerButton
 {
-    [self.delegate headerButton];
+    if ([self.delegate respondsToSelector:@selector(headerButton)]) {
+        [self.delegate headerButton];
+    }
 }
 
 - (IBAction)exportButton
 {
-    [self.delegate exportWallet];
+    if ([self.delegate respondsToSelector:@selector(exportWallet)]) {
+        [self.delegate exportWallet];
+    }
 }
 
 - (IBAction)addWallet
 {
-    [self.delegate addWallet];
+    if ([self.delegate respondsToSelector:@selector(addWallet)]) {
+        [self.delegate addWallet];
+    }
 }
 
 - (IBAction)segmentedControlAction:(id)sender {
