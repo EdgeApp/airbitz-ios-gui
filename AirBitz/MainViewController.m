@@ -397,6 +397,7 @@ MainViewController *singleton;
 + (void)showBackground:(BOOL)loggedIn animate:(BOOL)animated completion:(void (^)(BOOL finished))completion
 {
     CGFloat bvStart, bvEnd, bvbStart, bvbEnd;
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 
     if (loggedIn)
     {
@@ -412,7 +413,6 @@ MainViewController *singleton;
     {
         [singleton.backgroundView setAlpha:bvStart];
         [singleton.backgroundViewBlue setAlpha:bvbStart];
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [UIView animateWithDuration:1.0
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
@@ -420,14 +420,19 @@ MainViewController *singleton;
                          {
                              [singleton.backgroundView setAlpha:bvEnd];
                              [singleton.backgroundViewBlue setAlpha:bvbEnd];
-                             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                          }
-                         completion:completion];
+                         completion:^(BOOL finished){
+                            if (completion) {
+                                completion(finished);
+                            }
+                            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                         }];
     }
     else
     {
         [singleton.backgroundView setAlpha:bvEnd];
         [singleton.backgroundViewBlue setAlpha:bvbEnd];
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }
 
 }
