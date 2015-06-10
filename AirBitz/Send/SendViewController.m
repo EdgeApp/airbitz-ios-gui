@@ -281,6 +281,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     [self willResignActive];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self cancelImportExpirationTimer];
 }
 
 - (void)didTapTitle: (UIButton *)sender
