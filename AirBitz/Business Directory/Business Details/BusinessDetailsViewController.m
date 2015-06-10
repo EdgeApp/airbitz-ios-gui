@@ -913,14 +913,29 @@ typedef NS_ENUM(NSUInteger, CellType) {
     CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     CGRect topFrame = CGRectMake(0, 0,
                                  self.view.frame.size.width, statusBarHeight + MINIMUM_BUTTON_SIZE);
+
     UIView *topView = [[UIView alloc] initWithFrame:topFrame];
     topView.backgroundColor = [UIColor clearColor];
-    
+
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = topView.frame;
+
+    // Add colors to layer
+    UIColor *topColor = UIColorFromARGB(0xa0000000);
+    UIColor *centerColor = UIColorFromARGB(0x48000000);
+    UIColor *endColor = UIColorFromARGB(0x00000000);
+
+    gradient.colors = @[(id) topColor.CGColor,
+            (id) centerColor.CGColor,
+            (id) endColor.CGColor];
+
+    [topView.layer insertSublayer:gradient atIndex:0];
+
     UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeCustom];
     CGRect btnFrame = CGRectMake(self.view.frame.size.width - MINIMUM_BUTTON_SIZE, statusBarHeight,
                                  MINIMUM_BUTTON_SIZE, MINIMUM_BUTTON_SIZE);
     btnDone.frame = btnFrame;
-    [btnDone setBackgroundImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
+    [btnDone setBackgroundImage:[UIImage imageNamed:@"btn_close_white.png"] forState:UIControlStateNormal];
     [btnDone addTarget:self
                 action:@selector(returnFromGallery)
       forControlEvents:UIControlEventTouchUpInside];
