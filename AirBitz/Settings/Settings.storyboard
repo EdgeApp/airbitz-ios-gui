@@ -552,7 +552,7 @@
                                             <constraint firstAttribute="width" constant="38" id="d0f-tk-tw3"/>
                                             <constraint firstAttribute="height" constant="31" id="hvO-Td-dyO"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="btn_addCategory.png">
+                                        <state key="normal" backgroundImage="btn_add_black.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1242,7 +1242,7 @@ Scan the QR code using this device</string>
     </scenes>
     <resources>
         <image name="bkg_textfield.png" width="844" height="568"/>
-        <image name="btn_addCategory.png" width="38" height="31"/>
+        <image name="btn_add_black.png" width="38" height="31"/>
         <image name="btn_close.png" width="38" height="31"/>
         <image name="btn_right.png" width="22" height="22"/>
         <image name="icon_search.png" width="14" height="15"/>

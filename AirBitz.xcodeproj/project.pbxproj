@@ -482,9 +482,6 @@
 		DA06F8181B0BDD79000BCA46 /* btn_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F6641B0BDD77000BCA46 /* btn_add@2x.png */; };
 		DA06F8191B0BDD79000BCA46 /* btn_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F6641B0BDD77000BCA46 /* btn_add@2x.png */; };
 		DA06F81A1B0BDD79000BCA46 /* btn_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F6641B0BDD77000BCA46 /* btn_add@2x.png */; };
-		DA06F81E1B0BDD79000BCA46 /* btn_addCategory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F6661B0BDD77000BCA46 /* btn_addCategory@2x.png */; };
-		DA06F81F1B0BDD79000BCA46 /* btn_addCategory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F6661B0BDD77000BCA46 /* btn_addCategory@2x.png */; };
-		DA06F8201B0BDD79000BCA46 /* btn_addCategory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F6661B0BDD77000BCA46 /* btn_addCategory@2x.png */; };
 		DA06F87E1B0BDD79000BCA46 /* btn_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F6861B0BDD77000BCA46 /* btn_close@2x.png */; };
 		DA06F87F1B0BDD79000BCA46 /* btn_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F6861B0BDD77000BCA46 /* btn_close@2x.png */; };
 		DA06F8801B0BDD79000BCA46 /* btn_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F6861B0BDD77000BCA46 /* btn_close@2x.png */; };
@@ -833,6 +830,15 @@
 		DABB756E1B2824BF004E350D /* btn_close_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB75671B2824BF004E350D /* btn_close_white@3x.png */; };
 		DABB756F1B2824BF004E350D /* btn_close_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB75671B2824BF004E350D /* btn_close_white@3x.png */; };
 		DABB75701B2824BF004E350D /* btn_close_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB75671B2824BF004E350D /* btn_close_white@3x.png */; };
+		DABB75741B2840D9004E350D /* btn_add_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB75711B2840D9004E350D /* btn_add_black@2x.png */; };
+		DABB75751B2840D9004E350D /* btn_add_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB75711B2840D9004E350D /* btn_add_black@2x.png */; };
+		DABB75761B2840D9004E350D /* btn_add_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB75711B2840D9004E350D /* btn_add_black@2x.png */; };
+		DABB75771B2840D9004E350D /* btn_add_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB75721B2840D9004E350D /* btn_add_black@3x.png */; };
+		DABB75781B2840D9004E350D /* btn_add_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB75721B2840D9004E350D /* btn_add_black@3x.png */; };
+		DABB75791B2840D9004E350D /* btn_add_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB75721B2840D9004E350D /* btn_add_black@3x.png */; };
+		DABB757F1B2840E4004E350D /* btn_add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB757D1B2840E4004E350D /* btn_add@3x.png */; };
+		DABB75801B2840E4004E350D /* btn_add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB757D1B2840E4004E350D /* btn_add@3x.png */; };
+		DABB75811B2840E4004E350D /* btn_add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB757D1B2840E4004E350D /* btn_add@3x.png */; };
 		DAD9A4991B213EA500CB3EA4 /* icon_send_padded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4951B213EA500CB3EA4 /* icon_send_padded@2x.png */; };
 		DAD9A49A1B213EA500CB3EA4 /* icon_send_padded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4951B213EA500CB3EA4 /* icon_send_padded@2x.png */; };
 		DAD9A49B1B213EA500CB3EA4 /* icon_send_padded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4951B213EA500CB3EA4 /* icon_send_padded@2x.png */; };
@@ -1520,7 +1526,6 @@
 		DA06F64D1B0BDD77000BCA46 /* BLE_Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BLE_Logo@2x.png"; path = "Resources/Artwork/BLE_Logo@2x.png"; sourceTree = "<group>"; };
 		DA06F64E1B0BDD77000BCA46 /* BLE_photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BLE_photo@2x.png"; path = "Resources/Artwork/BLE_photo@2x.png"; sourceTree = "<group>"; };
 		DA06F6641B0BDD77000BCA46 /* btn_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_add@2x.png"; path = "Resources/Artwork/btn_add@2x.png"; sourceTree = "<group>"; };
-		DA06F6661B0BDD77000BCA46 /* btn_addCategory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_addCategory@2x.png"; path = "Resources/Artwork/btn_addCategory@2x.png"; sourceTree = "<group>"; };
 		DA06F6861B0BDD77000BCA46 /* btn_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_close@2x.png"; path = "Resources/Artwork/btn_close@2x.png"; sourceTree = "<group>"; };
 		DA06F6881B0BDD77000BCA46 /* btn_collapse_expand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_collapse_expand@2x.png"; path = "Resources/Artwork/btn_collapse_expand@2x.png"; sourceTree = "<group>"; };
 		DA06F68A1B0BDD77000BCA46 /* btn_deleteCategory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_deleteCategory@2x.png"; path = "Resources/Artwork/btn_deleteCategory@2x.png"; sourceTree = "<group>"; };
@@ -1657,6 +1662,9 @@
 		DABA3485198DFEE300EFAB13 /* infoRequestQR.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoRequestQR.html; sourceTree = "<group>"; };
 		DABB75661B2824BF004E350D /* btn_close_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_close_white@2x.png"; path = "Resources/Artwork/btn_close_white@2x.png"; sourceTree = "<group>"; };
 		DABB75671B2824BF004E350D /* btn_close_white@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_close_white@3x.png"; path = "Resources/Artwork/btn_close_white@3x.png"; sourceTree = "<group>"; };
+		DABB75711B2840D9004E350D /* btn_add_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_add_black@2x.png"; path = "Resources/Artwork/btn_add_black@2x.png"; sourceTree = "<group>"; };
+		DABB75721B2840D9004E350D /* btn_add_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_add_black@3x.png"; path = "Resources/Artwork/btn_add_black@3x.png"; sourceTree = "<group>"; };
+		DABB757D1B2840E4004E350D /* btn_add@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_add@3x.png"; path = "Resources/Artwork/btn_add@3x.png"; sourceTree = "<group>"; };
 		DAD9A4951B213EA500CB3EA4 /* icon_send_padded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_send_padded@2x.png"; path = "Resources/Artwork/icon_send_padded@2x.png"; sourceTree = "<group>"; };
 		DAD9A4A91B213F0B00CB3EA4 /* icon_request_padded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_request_padded@2x.png"; path = "Resources/Artwork/icon_request_padded@2x.png"; sourceTree = "<group>"; };
 		DAD9A4B01B217C2500CB3EA4 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = DL_URLServer/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -2412,8 +2420,10 @@
 				DA06F6461B0BDD77000BCA46 /* bitCoinAnnotation@2x.png */,
 				DA06F64D1B0BDD77000BCA46 /* BLE_Logo@2x.png */,
 				DA06F64E1B0BDD77000BCA46 /* BLE_photo@2x.png */,
+				DABB75711B2840D9004E350D /* btn_add_black@2x.png */,
+				DABB75721B2840D9004E350D /* btn_add_black@3x.png */,
 				DA06F6641B0BDD77000BCA46 /* btn_add@2x.png */,
-				DA06F6661B0BDD77000BCA46 /* btn_addCategory@2x.png */,
+				DABB757D1B2840E4004E350D /* btn_add@3x.png */,
 				DA06F6861B0BDD77000BCA46 /* btn_close@2x.png */,
 				DABB75661B2824BF004E350D /* btn_close_white@2x.png */,
 				DABB75671B2824BF004E350D /* btn_close_white@3x.png */,
@@ -2969,6 +2979,7 @@
 				DA06F7D71B0BDD79000BCA46 /* BLE_photo@2x.png in Resources */,
 				DA06FAE31B0BDD79000BCA46 /* UIButtonBarRefresh@2x.png in Resources */,
 				DA06FA651B0BDD79000BCA46 /* logo@2x.png in Resources */,
+				DABB75801B2840E4004E350D /* btn_add@3x.png in Resources */,
 				7D98AD3A19A7C550003D2BF6 /* WalletExportQuicken.QIF in Resources */,
 				7D98AD3F19A7C550003D2BF6 /* infoExportWallet.html in Resources */,
 				DA06F8851B0BDD79000BCA46 /* btn_collapse_expand@2x.png in Resources */,
@@ -2994,6 +3005,7 @@
 				DA06F7B31B0BDD79000BCA46 /* bd_icon_yelp@2x.png in Resources */,
 				DA06FA711B0BDD79000BCA46 /* postcard-mountain-blue@2x.jpg in Resources */,
 				DA06F9A81B0BDD79000BCA46 /* ico_nav_directory_white@2x.png in Resources */,
+				DABB75751B2840D9004E350D /* btn_add_black@2x.png in Resources */,
 				DAA8E9B81B1ED50B00BC870C /* icon_category_atm@2x.png in Resources */,
 				7D98AD5B19A7C550003D2BF6 /* WalletMakerView~iphone.xib in Resources */,
 				DAA8E9BB1B1ED50B00BC870C /* icon_category_atm@3x.png in Resources */,
@@ -3071,6 +3083,7 @@
 				DA06F9E41B0BDD79000BCA46 /* icon_export_email@2x.png in Resources */,
 				7D98ADFA19A7C550003D2BF6 /* ConfirmationSliderView.xib in Resources */,
 				DA06FA591B0BDD79000BCA46 /* logo_bitcoin@2x.png in Resources */,
+				DABB75781B2840D9004E350D /* btn_add_black@3x.png in Resources */,
 				7D98ADFB19A7C550003D2BF6 /* Lato-BoldItalic.ttf in Resources */,
 				DAA8E9C41B1ED50B00BC870C /* icon_category_coffee_tea@3x.png in Resources */,
 				7D98AE0119A7C550003D2BF6 /* WalletHeaderView~iphone.xib in Resources */,
@@ -3111,7 +3124,6 @@
 				7D98AE5519A7C550003D2BF6 /* San Diego.gpx in Resources */,
 				DA06F88B1B0BDD79000BCA46 /* btn_deleteCategory@2x.png in Resources */,
 				DA06F9C01B0BDD79000BCA46 /* icon_bitcoin_light@2x.png in Resources */,
-				DA06F81F1B0BDD79000BCA46 /* btn_addCategory@2x.png in Resources */,
 				DA06FA4D1B0BDD79000BCA46 /* large-digit-input_selected@2x.png in Resources */,
 				E2067BA81AC312B300E17C36 /* SlideoutView~iphone.xib in Resources */,
 				DA06F8D31B0BDD79000BCA46 /* btn_locateMe@2x.png in Resources */,
@@ -3163,6 +3175,7 @@
 				DA06F7D61B0BDD79000BCA46 /* BLE_photo@2x.png in Resources */,
 				DA06FAE21B0BDD79000BCA46 /* UIButtonBarRefresh@2x.png in Resources */,
 				DA06FA641B0BDD79000BCA46 /* logo@2x.png in Resources */,
+				DABB757F1B2840E4004E350D /* btn_add@3x.png in Resources */,
 				7D987AFA1A48BA8C00958AAD /* BitcoinReceived.mp3 in Resources */,
 				4C7C1257193D2CFC0096338D /* WalletExportQuicken.QIF in Resources */,
 				DA06F8841B0BDD79000BCA46 /* btn_collapse_expand@2x.png in Resources */,
@@ -3188,6 +3201,7 @@
 				7D8B59C41A328895000AC178 /* HockeySDK.xcconfig in Resources */,
 				DA06F7B21B0BDD79000BCA46 /* bd_icon_yelp@2x.png in Resources */,
 				DA06FA701B0BDD79000BCA46 /* postcard-mountain-blue@2x.jpg in Resources */,
+				DABB75741B2840D9004E350D /* btn_add_black@2x.png in Resources */,
 				DA06F9A71B0BDD79000BCA46 /* ico_nav_directory_white@2x.png in Resources */,
 				DAA8E9B71B1ED50B00BC870C /* icon_category_atm@2x.png in Resources */,
 				DAA8E9BA1B1ED50B00BC870C /* icon_category_atm@3x.png in Resources */,
@@ -3265,6 +3279,7 @@
 				DA06FA821B0BDD79000BCA46 /* ribbon@2x.png in Resources */,
 				7DEE7DF519F8645200FD2FB6 /* infoInsufficientFunds.html in Resources */,
 				DA06F9E31B0BDD79000BCA46 /* icon_export_email@2x.png in Resources */,
+				DABB75771B2840D9004E350D /* btn_add_black@3x.png in Resources */,
 				7DAE1F4819A3C6A400BF5C60 /* infoSendConfirmation.html in Resources */,
 				DA06FA581B0BDD79000BCA46 /* logo_bitcoin@2x.png in Resources */,
 				DAA8E9C31B1ED50B00BC870C /* icon_category_coffee_tea@3x.png in Resources */,
@@ -3305,7 +3320,6 @@
 				B5137C0818A40A8400DA4A34 /* Lato-BlackItalic.ttf in Resources */,
 				DA06F88A1B0BDD79000BCA46 /* btn_deleteCategory@2x.png in Resources */,
 				DA06F9BF1B0BDD79000BCA46 /* icon_bitcoin_light@2x.png in Resources */,
-				DA06F81E1B0BDD79000BCA46 /* btn_addCategory@2x.png in Resources */,
 				DA06FA4C1B0BDD79000BCA46 /* large-digit-input_selected@2x.png in Resources */,
 				DAA5782919C1632000E972FC /* emailTemplate.html in Resources */,
 				DA06F8D21B0BDD79000BCA46 /* btn_locateMe@2x.png in Resources */,
@@ -3357,6 +3371,7 @@
 				DA06F7D81B0BDD79000BCA46 /* BLE_photo@2x.png in Resources */,
 				DA06FAE41B0BDD79000BCA46 /* UIButtonBarRefresh@2x.png in Resources */,
 				DA06FA661B0BDD79000BCA46 /* logo@2x.png in Resources */,
+				DABB75811B2840E4004E350D /* btn_add@3x.png in Resources */,
 				DAE8649C1A88A58A00A17BD3 /* BitcoinReceived.mp3 in Resources */,
 				DAE8649D1A88A58A00A17BD3 /* WalletExportQuicken.QIF in Resources */,
 				DA06F8861B0BDD79000BCA46 /* btn_collapse_expand@2x.png in Resources */,
@@ -3382,6 +3397,7 @@
 				DAE864C01A88A58A00A17BD3 /* HockeySDK.xcconfig in Resources */,
 				DA06F7B41B0BDD79000BCA46 /* bd_icon_yelp@2x.png in Resources */,
 				DA06FA721B0BDD79000BCA46 /* postcard-mountain-blue@2x.jpg in Resources */,
+				DABB75761B2840D9004E350D /* btn_add_black@2x.png in Resources */,
 				DA06F9A91B0BDD79000BCA46 /* ico_nav_directory_white@2x.png in Resources */,
 				DAA8E9B91B1ED50B00BC870C /* icon_category_atm@2x.png in Resources */,
 				DAA8E9BC1B1ED50B00BC870C /* icon_category_atm@3x.png in Resources */,
@@ -3459,6 +3475,7 @@
 				DA06FA841B0BDD79000BCA46 /* ribbon@2x.png in Resources */,
 				DAE8655D1A88A58A00A17BD3 /* infoInsufficientFunds.html in Resources */,
 				DA06F9E51B0BDD79000BCA46 /* icon_export_email@2x.png in Resources */,
+				DABB75791B2840D9004E350D /* btn_add_black@3x.png in Resources */,
 				DAE865601A88A58A00A17BD3 /* infoSendConfirmation.html in Resources */,
 				DA06FA5A1B0BDD79000BCA46 /* logo_bitcoin@2x.png in Resources */,
 				DAA8E9C51B1ED50B00BC870C /* icon_category_coffee_tea@3x.png in Resources */,
@@ -3499,7 +3516,6 @@
 				DAE865CA1A88A58A00A17BD3 /* Lato-BlackItalic.ttf in Resources */,
 				DA06F88C1B0BDD79000BCA46 /* btn_deleteCategory@2x.png in Resources */,
 				DA06F9C11B0BDD79000BCA46 /* icon_bitcoin_light@2x.png in Resources */,
-				DA06F8201B0BDD79000BCA46 /* btn_addCategory@2x.png in Resources */,
 				DA06FA4E1B0BDD79000BCA46 /* large-digit-input_selected@2x.png in Resources */,
 				DAE865CB1A88A58A00A17BD3 /* emailTemplate.html in Resources */,
 				DA06F8D41B0BDD79000BCA46 /* btn_locateMe@2x.png in Resources */,

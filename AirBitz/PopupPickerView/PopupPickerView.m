@@ -638,7 +638,7 @@ CGRect keyboardFrame;
     if(self.categories) {
         NSInteger index = [self.categories indexOfObject:cell.textLabel.text];
         if(index == NSNotFound) {
-            UIImage *image = [UIImage imageNamed:@"btn_addCategory.png"];
+            UIImage *image = [UIImage imageNamed:@"btn_add_black.png"];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
             button.frame = frame;
