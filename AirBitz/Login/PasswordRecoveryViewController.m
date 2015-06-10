@@ -686,14 +686,13 @@ typedef enum eAlertType
 
         //position complete Signup button below QA views
         self.completeSignupButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [self.completeSignupButton setTitle:@"Complete Sign Up" forState:UIControlStateNormal];
+        [self updateDisplayForMode:self.mode];
+
         self.completeSignupButton.backgroundColor = [Theme Singleton].colorButtonGreen;
         [self.completeSignupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.completeSignupButton.hidden = NO;
         self.completeSignupButton.enabled = YES;
         [self.completeSignupButton addTarget:self action:@selector(CompleteSignup) forControlEvents:UIControlEventTouchDown];
-
-        [self.scrollView addSubview:self.completeSignupButton];
 
         [self.scrollView addSubview:self.completeSignupButton];
         CGRect btnFrame = self.completeSignupButton.frame;
