@@ -24,7 +24,7 @@
 #define CURRENCY_NUM_USD                840
 #define CURRENCY_NUM_EUR                978
 
-#define FILE_SYNC_FREQUENCY_SECONDS     10
+#define FILE_SYNC_FREQUENCY_SECONDS     30
 #define NOTIFY_DATA_SYNC_DELAY          1
 
 #define DOLLAR_CURRENCY_NUMBER	840
