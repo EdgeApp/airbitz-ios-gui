@@ -26,7 +26,9 @@ static NSString *currentHtml = nil;
 + (InfoView *)CreateWithDelegate:(id<InfoViewDelegate>)delegate
 {
     if (currentView) {
-        [currentView dismiss];
+        [currentView removeFromSuperview];
+        currentView = nil;
+        currentHtml = nil;
     }
     InfoView *iv;
     iv = [[[NSBundle mainBundle] loadNibNamed:@"InfoView~iphone" owner:nil options:nil] objectAtIndex:0];
@@ -44,7 +46,9 @@ static NSString *currentHtml = nil;
     }
     // If not, dismiss any current help pages
     if (currentView) {
-        [currentView dismiss];
+        [currentView removeFromSuperview];
+        currentView = nil;
+        currentHtml = nil;
     }
 	InfoView *iv;
 
