@@ -54,6 +54,8 @@
 #import "PopupPickerView2.h"
 #import "CJSONDeserializer.h"
 
+#define IMPORT_TIMEOUT 60
+
 typedef enum eScanMode
 {
 	SCAN_MODE_UNINITIALIZED,
@@ -1449,7 +1451,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                     {
                         _state = ImportState_Importing;
                         [self updateDisplay];
-                        _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:30
+                        _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:IMPORT_TIMEOUT
                                                                           target:self
                                                                         selector:@selector(expireImport)
                                                                         userInfo:nil
