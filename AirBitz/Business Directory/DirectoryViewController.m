@@ -1402,9 +1402,8 @@ static bool bInitialized = false;
     moreCategoriesController = [directoryStoryboard instantiateViewControllerWithIdentifier: @"MoreCategoriesViewController"];
 
     moreCategoriesController.delegate = self;
-    [MainViewController animateView:moreCategoriesController withBlur:NO];
-
-
+    [Util addSubviewControllerWithConstraints:self.view child:moreCategoriesController];
+    [MainViewController animateSlideIn:moreCategoriesController];
 }
 
 - (void)dismissMoreCategories
