@@ -238,8 +238,8 @@
                     {
                         // no callback on this one so tell them it was a success
                         UIAlertView *alert = [[UIAlertView alloc]
-                                                initWithTitle:@"Sign Up"
-                                                message:NSLocalizedString(@"PIN successfully changed.", @"")
+                                                initWithTitle:NSLocalizedString(@"PIN successfully changed.", @"")
+                                                message:nil
                                                 delegate:self
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
