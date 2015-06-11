@@ -54,7 +54,7 @@
 #import "PopupPickerView2.h"
 #import "CJSONDeserializer.h"
 
-#define IMPORT_TIMEOUT 60
+#define IMPORT_TIMEOUT 30
 
 typedef enum eScanMode
 {
