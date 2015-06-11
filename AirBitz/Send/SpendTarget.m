@@ -119,6 +119,11 @@
     }
 }
 
+- (BOOL)isMutable
+{
+    return _pSpend->amountMutable == true ? YES : NO;
+}
+
 - (uint64_t)maxSpendable:(NSString *)walletUUID
 {
     tABC_Error error;

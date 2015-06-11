@@ -20,6 +20,7 @@
                  fiat:(double)fiatAmount
                 error:(tABC_Error *)pError;
 
+- (BOOL)isMutable;
 - (uint64_t)maxSpendable:(NSString *)walletUUID;
 - (tABC_Error)calcSendFees:(NSString *)walletUUID
                  totalFees:(uint64_t *)totalFees;

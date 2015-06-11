@@ -254,9 +254,7 @@
     [super viewWillAppear:animated];
 //    [self.view addGestureRecognizer:tap];
     self.amountBTCTextField.text = [CoreBridge formatSatoshi:_spendTarget.pSpend->amount withSymbol:false];
-
-    self.maxAmountButton.hidden = !_bAdvanceToTx;
-    self.walletSelector.enabled = _bAdvanceToTx;
+    self.maxAmountButton.hidden = ![_spendTarget isMutable];
 
     NSString *prefix;
     NSString *suffix;
@@ -817,7 +815,13 @@
 #pragma mark - UITextField delegates
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    return textField == _withdrawlPIN || _bAdvanceToTx;
+    if (textField == _withdrawlPIN) {
+        return YES;
+    }
+    if (![_spendTarget isMutable]) {
+        return NO;
+    }
+    return _bAdvanceToTx;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
