@@ -945,6 +945,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 - (void)returnFromGallery
 {
+    [MainViewController lockSidebar:NO];
     [MainViewController animateOut:galleryController withBlur:NO complete:^(void) {
         [galleryController.view removeFromSuperview];
         galleryController = nil;
@@ -977,7 +978,10 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
         [MainViewController hideNavBarAnimated:YES];
         [MainViewController hideTabBarAnimated:YES];
-        [MainViewController animateView:galleryController withBlur:NO];
+        [MainViewController lockSidebar:YES];
+
+        [Util addSubviewControllerWithConstraints:self.view child:galleryController];
+        [MainViewController animateSlideIn:galleryController];
     }
 }
 

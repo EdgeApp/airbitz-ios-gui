@@ -85,6 +85,7 @@ typedef enum eAppMode
     NSURL                       *_uri;
     InfoView                    *_notificationInfoView;
     BOOL                        firstLaunch;
+    BOOL                        sideBarLocked;
 
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
@@ -244,6 +245,7 @@ MainViewController *singleton;
     _otpRequiredAlert = nil;
     _otpSkewAlert = nil;
     firstLaunch = YES;
+    sideBarLocked = NO;
     [self.view layoutIfNeeded];
 }
 
@@ -627,6 +629,11 @@ MainViewController *singleton;
         singleton.navBarTop.constant = -singleton.navBar.frame.size.height;
         [singleton.view layoutIfNeeded];
     }
+}
+ 
++ (void)lockSidebar:(BOOL)locked
+{
+    singleton->sideBarLocked = locked;
 }
 
 +(UIViewController *)getSelectedViewController
@@ -1638,7 +1645,7 @@ MainViewController *singleton;
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *) recognizer {
-    if ([User isLoggedIn]) {
+    if ([User isLoggedIn] && !sideBarLocked) {
         if (![slideoutView isOpen]) {
             [slideoutView handleRecognizer:recognizer fromBlock:NO];
         }
