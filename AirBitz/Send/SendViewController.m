@@ -94,7 +94,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 
 }
-@property (nonatomic, strong)   NSString                        *privateKey;
 @property (weak, nonatomic)     IBOutlet UIImageView            *scanFrame;
 @property (nonatomic, strong)   IBOutlet ButtonSelectorView2    *buttonSelector;
 @property (nonatomic, strong)	IBOutlet UITableView			*tableView;
@@ -1406,26 +1405,26 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 
-- (void)importWallet
+- (BOOL)importWallet:(NSString *)privateKey
 {
     bool bSuccess = NO;
 
-    if (self.privateKey)
+    if (privateKey)
     {
-        self.privateKey = [self.privateKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([self.privateKey length])
+        privateKey = [privateKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([privateKey length])
         {
-            NSRange schemeMarkerRange = [self.privateKey rangeOfString:@"://"];
+            NSRange schemeMarkerRange = [privateKey rangeOfString:@"://"];
             if (NSNotFound != schemeMarkerRange.location)
             {
-                NSString *scheme = [self.privateKey substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
+                NSString *scheme = [privateKey substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
                 if (nil != scheme && 0 != [scheme length])
                 {
                     if (NSNotFound != [scheme rangeOfString:HIDDEN_BITZ_URI_SCHEME].location)
                     {
                         _dataModel = kHBURI;
 
-                        self.privateKey = [self.privateKey substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
+                        privateKey = [privateKey substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
 
                         bSuccess = YES;
                     }
@@ -1444,7 +1443,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 {
                     // private key is a valid format
                     // attempt to sweep it
-                    _sweptAddress = [CoreBridge sweepKey:self.privateKey
+                    _sweptAddress = [CoreBridge sweepKey:privateKey
                                               intoWallet:[CoreBridge Singleton].currentWallet.strUUID
                                             withCallback:ABC_Sweep_Complete_Callback];
 
@@ -1475,6 +1474,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [MainViewController fadingAlert:NSLocalizedString(@"Invalid private key", nil)];
         [self updateState];
     }
+    return bSuccess;
 }
 
 
@@ -1486,10 +1486,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		NSString *text = (NSString *)sym.data;
         if (_bImportMode)
         {
-            if (nil != text && [text length]) {
-                self.privateKey = text;
-                [self importWallet];
-            }
+            [self importWallet:text];
         }
         else
         {
@@ -1737,9 +1734,17 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            [self trySpend:text];
+            if (_bImportMode)
+            {
+                if ([self importWallet:text]) {
+                    [self stopQRReader];
+                }
+            }
+            else
+            {
+                [self trySpend:text];
+            }
         }
-        [self stopQRReader];
 	}
 }
 
@@ -1750,6 +1755,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         SpendTarget *spendTarget = [[SpendTarget alloc] init];
         if ([spendTarget newSpend:text error:&error]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self stopQRReader];
                 [self showSendConfirmationTo:spendTarget];
             });
         } else {
