@@ -76,7 +76,8 @@
                      txId:(NSString *)txId
                fiatAmount:(double)fiatAmount
 {
-    NSString *categoryText = NSLocalizedString(@"Transfer:Wallet:", nil);
+    NSString *transferCategory = NSLocalizedString(@"Transfer:Wallet:", nil);
+    NSString *spendCategory = NSLocalizedString(@"Expense:", nil);
 
     tABC_Error error;
     tABC_TxInfo *pTrans = NULL;
@@ -90,7 +91,9 @@
     if (ABC_CC_Ok == error.code) {
         if (destWallet) {
             pTrans->pDetails->szName = strdup([destWallet.strName UTF8String]);
-            pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", categoryText, destWallet.strName] UTF8String]);
+            pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", transferCategory, destWallet.strName] UTF8String]);
+        } else {
+            pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@", spendCategory] UTF8String]);
         }
         if (fiatAmount > 0) {
             pTrans->pDetails->amountCurrency = fiatAmount;
@@ -108,7 +111,7 @@
             [destWallet.strUUID UTF8String], [txId UTF8String], &pTrans, &error);
         if (ABC_CC_Ok == error.code) {
             pTrans->pDetails->szName = strdup([srcWallet.strName UTF8String]);
-            pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", categoryText, srcWallet.strName] UTF8String]);
+            pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", transferCategory, srcWallet.strName] UTF8String]);
 
             ABC_SetTransactionDetails([[User Singleton].name UTF8String], NULL,
                 [destWallet.strUUID UTF8String], [txId UTF8String],
