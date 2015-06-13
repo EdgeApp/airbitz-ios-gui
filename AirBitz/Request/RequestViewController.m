@@ -101,6 +101,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, assign) int64_t                   previousAmountSatoshiRequested;
 @property (nonatomic, assign) int64_t                   amountSatoshiReceived;
 @property (nonatomic, assign) RequestState              state;
+@property (nonatomic, strong) NSTimer                   *qrTimer;
 
 @property (assign) tABC_TxDetails txDetails;
 @property (nonatomic, strong) NSString *requestType;
@@ -575,26 +576,21 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     Wallet *wallet = [self getCurrentWallet];
     NSString *strUUID = wallet.strUUID;
-    int currencyNum = wallet.currencyNum;
+    NSNumber *nsCurrencyNum = [NSNumber numberWithInt:wallet.currencyNum];
+    NSNumber *nsRemaining = [NSNumber numberWithLongLong:remaining];
 
     //
-    // Change the QR code. This is a slow call so put it in a queue
+    // Change the QR code. This is a slow call so put it in a queue and timer. Timer fires every 1 second
     //
-    [CoreBridge postToWalletsQueue:^(void) {
 
-        UIImage *qrImage = [self createRequestQRImageFor:strName walletUUID:strUUID currencyNum:currencyNum withNotes:strNotes withCategory:strCategory
-                                        storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
-                                            scaleAndSave:NO withAmount:remaining];
+    if (self.qrTimer)
+        [self.qrTimer invalidate];
 
-        addressString = strRequestAddress;
-        _uriString = strRequestURI;
+    NSArray *args = [NSArray arrayWithObjects:strName,strUUID,nsCurrencyNum,strNotes,strCategory,strRequestID,strRequestURI,strRequestAddress,nsRemaining,nil];
 
-        dispatch_async(dispatch_get_main_queue(),^{
-            [CoreBridge prioritizeAddress:addressString inWallet:strUUID];
-            self.statusLine3.text = addressString;
-            self.qrCodeImageView.image = qrImage;
-        });
-    }];
+    NSLog(@"updateQRCode setTimer req=%d", [nsRemaining longLongValue]);
+    self.qrTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].qrCodeGenDelayTime target:self selector:@selector(updateQRAsync:) userInfo:args repeats:NO];
+
 
     if (incomingSatoshi)
     {
@@ -606,10 +602,47 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         self.BLE_LogoImageView.hidden = YES;
     }
 
-    //
-    // If request has changed or is brand new, startup the BLE manager and start broadcasting
-    //
-    [CoreBridge postToWalletsQueue:^(void) {
+    return self.state;
+    NSLog(@"EXIT updateQRCode");
+
+}
+
+- (void)updateQRAsync:(NSTimer *)timer
+{
+    NSArray *args = [timer userInfo];
+    int i = 0;
+
+    NSString *strName = [args objectAtIndex:i++];
+    NSString *strUUID = [args objectAtIndex:i++];
+    NSNumber *nsCurrencyNum = [args objectAtIndex:i++];
+    int currencyNum = [nsCurrencyNum intValue];
+
+    NSString *strNotes = [args objectAtIndex:i++];
+    NSString *strCategory = [args objectAtIndex:i++];
+    NSString *strRequestID = [args objectAtIndex:i++];
+    NSString *strRequestURI = [args objectAtIndex:i++];
+    NSString *strRequestAddress = [args objectAtIndex:i++];
+    NSNumber *nsRemaining = [args objectAtIndex:i++];
+
+    SInt64 remaining = [nsRemaining longLongValue];
+
+    [CoreBridge postToGenQRQueue:^(void) {
+
+        NSLog(@"updateQRAsync Do actual QR update str=%d",remaining);
+        UIImage *qrImage = [self createRequestQRImageFor:strName walletUUID:strUUID currencyNum:currencyNum withNotes:strNotes withCategory:strCategory
+                                        storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
+                                            scaleAndSave:NO withAmount:remaining];
+
+        addressString = strRequestAddress;
+        _uriString = strRequestURI;
+
+        [CoreBridge prioritizeAddress:addressString inWallet:strUUID];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            self.statusLine3.text = addressString;
+            self.qrCodeImageView.image = qrImage;
+        });
+
         if(self.peripheralManager.isAdvertising) {
             NSLog(@"Removing all BLE services and stopping advertising");
             [self.peripheralManager removeAllServices];
@@ -632,9 +665,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             lastPeripheralBLEPowerOffNotificationTime = curTime;
         }
     }];
-
-    return self.state;
-    NSLog(@"EXIT updateQRCode");
 
 }
 
@@ -992,13 +1022,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
 	}
 
-//    NSString *walletName;
-//
-//    walletName = [NSString stringWithFormat:@"To: %@ ▼", wallet.strName];
-//
-//    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
     [self updateQRCode:0];
-//
 }
 
 - (void)didTapTitle: (UIButton *)sender

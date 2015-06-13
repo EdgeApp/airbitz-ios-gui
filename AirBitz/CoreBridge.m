@@ -40,6 +40,7 @@ static int iLoginTimeSeconds = 0;
 static NSOperationQueue *exchangeQueue;
 static NSOperationQueue *dataQueue;
 static NSOperationQueue *walletsQueue;
+static NSOperationQueue *genQRQueue;
 static NSOperationQueue *txSearchQueue;
 static NSMutableDictionary *watchers;
 static NSMutableDictionary *currencyCodesCache;
@@ -81,6 +82,8 @@ static BOOL bOtpError = NO;
         [dataQueue setMaxConcurrentOperationCount:1];
         walletsQueue = [[NSOperationQueue alloc] init];
         [walletsQueue setMaxConcurrentOperationCount:1];
+        genQRQueue = [[NSOperationQueue alloc] init];
+        [genQRQueue setMaxConcurrentOperationCount:1];
         txSearchQueue = [[NSOperationQueue alloc] init];
         [txSearchQueue setMaxConcurrentOperationCount:1];
 
@@ -116,6 +119,7 @@ static BOOL bOtpError = NO;
         exchangeQueue = nil;
         dataQueue = nil;
         walletsQueue = nil;
+        genQRQueue = nil;
         singleton = nil;
         txSearchQueue = nil;
         bInitialized = NO;
@@ -166,6 +170,10 @@ static BOOL bOtpError = NO;
     {
         [walletsQueue cancelAllOperations];
     }
+    if (genQRQueue)
+    {
+        [genQRQueue cancelAllOperations];
+    }
     if (txSearchQueue)
         [txSearchQueue cancelAllOperations];
 
@@ -181,6 +189,11 @@ static BOOL bOtpError = NO;
     [walletsQueue addOperationWithBlock:cb];
 }
 
++ (void)postToGenQRQueue:(void(^)(void))cb;
+{
+    [genQRQueue addOperationWithBlock:cb];
+}
+
 + (void)postToTxSearchQueue:(void(^)(void))cb;
 {
     [txSearchQueue addOperationWithBlock:cb];
@@ -192,6 +205,7 @@ static BOOL bOtpError = NO;
     total += dataQueue == nil     ? 0 : [dataQueue operationCount];
     total += exchangeQueue == nil ? 0 : [exchangeQueue operationCount];
     total += walletsQueue == nil  ? 0 : [walletsQueue operationCount];
+    total += genQRQueue == nil  ? 0 : [genQRQueue operationCount];
     return total;
 }
 

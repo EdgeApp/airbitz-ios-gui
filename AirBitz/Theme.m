@@ -127,6 +127,8 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.alertHoldTimePaymentReceived           = 10;       // Hold time for payments
     self.alertHoldTimeHelpPopups                = 6.0;      // Hold time for auto popup help
 
+    self.qrCodeGenDelayTime                     = 0.75;     // Timer delay after keypad entry before new QR code is generated
+
     self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];
     self.backgroundLogin = [UIImage imageNamed:@"postcard-mountain.png"];
 
