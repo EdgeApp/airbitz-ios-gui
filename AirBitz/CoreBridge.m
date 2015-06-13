@@ -293,7 +293,7 @@ static BOOL bOtpError = NO;
 
 + (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx
 {
-    NSLog(@"ENTER loadWallets: %@", [NSThread currentThread].name);
+    ABLog(2,@"ENTER loadWallets: %@", [NSThread currentThread].name);
     tABC_Error Error;
     tABC_WalletInfo **aWalletInfo = NULL;
     unsigned int nCount;
@@ -329,11 +329,11 @@ static BOOL bOtpError = NO;
     }
     else
     {
-        NSLog(@("Error: CoreBridge.loadWallets:  %s\n"), Error.szDescription);
+        ABLog(2,@("Error: CoreBridge.loadWallets:  %s\n"), Error.szDescription);
         [Util printABC_Error:&Error];
     }
     ABC_FreeWalletInfoArray(aWalletInfo, nCount);
-    NSLog(@"EXIT loadWallets: %@", [NSThread currentThread].name);
+    ABLog(2,@"EXIT loadWallets: %@", [NSThread currentThread].name);
 
 }
 
@@ -403,7 +403,7 @@ static BOOL bOtpError = NO;
         }
     });
     [CoreBridge postToWalletsQueue:^(void) {
-        NSLog(@"ENTER refreshWallets WalletQueue: %@", [NSThread currentThread].name);
+        ABLog(2,@"ENTER refreshWallets WalletQueue: %@", [NSThread currentThread].name);
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
         NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
         NSMutableArray *arrayUUIDs = [[NSMutableArray alloc] init];
@@ -426,7 +426,7 @@ static BOOL bOtpError = NO;
         }
 
         dispatch_async(dispatch_get_main_queue(),^{
-            NSLog(@"ENTER refreshWallets MainQueue: %@", [NSThread currentThread].name);
+            ABLog(2,@"ENTER refreshWallets MainQueue: %@", [NSThread currentThread].name);
             singleton.arrayWallets = arrayWallets;
             singleton.arrayArchivedWallets = arrayArchivedWallets;
             singleton.arrayUUIDs = arrayUUIDs;
@@ -451,10 +451,10 @@ static BOOL bOtpError = NO;
             }
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED
                                                                 object:self userInfo:nil];
-            NSLog(@"EXIT refreshWallets MainQueue: %@", [NSThread currentThread].name);
+            ABLog(2,@"EXIT refreshWallets MainQueue: %@", [NSThread currentThread].name);
 
         });
-        NSLog(@"EXIT refreshWallets WalletQueue: %@", [NSThread currentThread].name);
+        ABLog(2,@"EXIT refreshWallets WalletQueue: %@", [NSThread currentThread].name);
     }];
 
 }
@@ -530,7 +530,7 @@ static BOOL bOtpError = NO;
     }
     else
     {
-        NSLog(@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
+        ABLog(2,@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
         [Util printABC_Error:&Error];
     }
     ABC_FreeWalletInfo(pWalletInfo);
@@ -545,7 +545,7 @@ static BOOL bOtpError = NO;
     Wallet *wallet = [CoreBridge getWallet: walletUUID];
     if (wallet == nil)
     {
-        NSLog(@("Could not find wallet for %@"), walletUUID);
+        ABLog(2,@("Could not find wallet for %@"), walletUUID);
         return nil;
     }
     tABC_CC result = ABC_GetTransaction([[User Singleton].name UTF8String],
@@ -559,7 +559,7 @@ static BOOL bOtpError = NO;
     }
     else
     {
-        NSLog(@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
+        ABLog(2,@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
         [Util printABC_Error:&Error];
     }
     ABC_FreeTransaction(pTrans);
@@ -635,7 +635,7 @@ static BOOL bOtpError = NO;
     }
     else
     {
-        NSLog(@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
+        ABLog(2,@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
         [Util printABC_Error:&Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
@@ -643,7 +643,7 @@ static BOOL bOtpError = NO;
 
 + (void)setWallet:(Wallet *) wallet withInfo:(tABC_WalletInfo *) pWalletInfo
 {
-    NSLog(@"ENTER setWallet: %@", [NSThread currentThread].name);
+    ABLog(2,@"ENTER setWallet: %@", [NSThread currentThread].name);
     wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
     wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
     wallet.archived = pWalletInfo->archived;
@@ -651,9 +651,9 @@ static BOOL bOtpError = NO;
     wallet.currencyNum = pWalletInfo->currencyNum;
     wallet.currencyAbbrev = [CoreBridge currencyAbbrevLookup:wallet.currencyNum];
     wallet.currencySymbol = [CoreBridge currencySymbolLookup:wallet.currencyNum];
-    NSLog(@"      setWallet: Currency %d %@ %@", pWalletInfo->currencyNum, wallet.currencyAbbrev, wallet.currencySymbol) ;
+    ABLog(2,@"      setWallet: Currency %d %@ %@", pWalletInfo->currencyNum, wallet.currencyAbbrev, wallet.currencySymbol) ;
     wallet.loaded = wallet.currencyNum == -1 ? NO : YES;
-    NSLog(@"EXIT setWallet: %@", [NSThread currentThread].name);
+    ABLog(2,@"EXIT setWallet: %@", [NSThread currentThread].name);
 }
 
 + (void)setTransaction:(Wallet *) wallet transaction:(Transaction *) transaction coreTx:(tABC_TxInfo *) pTrans
@@ -741,7 +741,7 @@ static BOOL bOtpError = NO;
     }
     else 
     {
-        NSLog(@("Error: CoreBridge.searchTransactionsIn:  %s\n"), Error.szDescription);
+        ABLog(2,@("Error: CoreBridge.searchTransactionsIn:  %s\n"), Error.szDescription);
         [Util printABC_Error:&Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
@@ -799,7 +799,7 @@ static BOOL bOtpError = NO;
                            (char *)[ids UTF8String],
                            &Error) != ABC_CC_Ok)
     {
-        NSLog(@("Error: CoreBridge.reorderWallets:  %s\n"), Error.szDescription);
+        ABLog(2,@("Error: CoreBridge.reorderWallets:  %s\n"), Error.szDescription);
         [Util printABC_Error:&Error];
     }
 
@@ -819,7 +819,7 @@ static BOOL bOtpError = NO;
     }
     else
     {
-        NSLog(@("Error: CoreBridge.setWalletAttributes:  %s\n"), Error.szDescription);
+        ABLog(2,@("Error: CoreBridge.setWalletAttributes:  %s\n"), Error.szDescription);
         [Util printABC_Error:&Error];
         return false;
     }
@@ -837,7 +837,7 @@ static BOOL bOtpError = NO;
                 [transaction.strID UTF8String],
                 &pDetails, &Error);
         if (ABC_CC_Ok != result) {
-            NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
+            ABLog(2,@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
             [Util printABC_Error:&Error];
 //            return false;
             return;
@@ -856,7 +856,7 @@ static BOOL bOtpError = NO;
                 pDetails, &Error);
 
         if (ABC_CC_Ok != result) {
-            NSLog(@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
+            ABLog(2,@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
             [Util printABC_Error:&Error];
 //            return false;
             return;
@@ -1691,29 +1691,29 @@ static BOOL bOtpError = NO;
 
 + (NSString *)currencyAbbrevLookup:(int)currencyNum
 {
-    NSLog(@"ENTER currencyAbbrevLookup: %@", [NSThread currentThread].name);
+    ABLog(2,@"ENTER currencyAbbrevLookup: %@", [NSThread currentThread].name);
     NSNumber *c = [NSNumber numberWithInt:currencyNum];
     NSString *cached = [currencyCodesCache objectForKey:c];
     if (cached != nil) {
-        NSLog(@"EXIT currencyAbbrevLookup CACHED code:%@ thread:%@", cached, [NSThread currentThread].name);
+        ABLog(2,@"EXIT currencyAbbrevLookup CACHED code:%@ thread:%@", cached, [NSThread currentThread].name);
         return cached;
     }
     tABC_Error error;
     int currencyCount;
     tABC_Currency *currencies = NULL;
     ABC_GetCurrencies(&currencies, &currencyCount, &error);
-    NSLog(@"CALLED ABC_GetCurrencies: %@ currencyCount:%d", [NSThread currentThread].name, currencyCount);
+    ABLog(2,@"CALLED ABC_GetCurrencies: %@ currencyCount:%d", [NSThread currentThread].name, currencyCount);
     if (error.code == ABC_CC_Ok) {
         for (int i = 0; i < currencyCount; ++i) {
             if (currencyNum == currencies[i].num) {
                 NSString *code = [NSString stringWithUTF8String:currencies[i].szCode];
                 [currencyCodesCache setObject:code forKey:c];
-                NSLog(@"EXIT currencyAbbrevLookup code:%@ thread:%@", code, [NSThread currentThread].name);
+                ABLog(2,@"EXIT currencyAbbrevLookup code:%@ thread:%@", code, [NSThread currentThread].name);
                 return code;
             }
         }
     }
-    NSLog(@"EXIT currencyAbbrevLookup code:NULL thread:%@", [NSThread currentThread].name);
+    ABLog(2,@"EXIT currencyAbbrevLookup code:NULL thread:%@", [NSThread currentThread].name);
     return @"";
 }
 
@@ -2096,7 +2096,7 @@ static BOOL bOtpError = NO;
     if (szSecret) {
         free(szSecret);
     }
-    NSLog(@("SECRET: %@"), secret);
+    ABLog(2,@("SECRET: %@"), secret);
     return secret;
 }
 

@@ -461,10 +461,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         CGFloat distFromBottom = frontWindow.frame.size.height - pointInWindow.y;
         obscureAmount = (_keyboardHeight + theView.frame.size.height) - distFromBottom;
 
-        //NSLog(@"y coord = %f", theView.frame.origin.y);
-        //NSLog(@"y coord in window = %f", pointInWindow.y);
-        //NSLog(@"dist from bottom = %f", distFromBottom);
-        //NSLog(@"amount Obscured = %f", obscureAmount);
+        //ABLog(2,@"y coord = %f", theView.frame.origin.y);
+        //ABLog(2,@"y coord in window = %f", pointInWindow.y);
+        //ABLog(2,@"dist from bottom = %f", distFromBottom);
+        //ABLog(2,@"amount Obscured = %f", obscureAmount);
     }
 
     return obscureAmount;
@@ -479,15 +479,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     obscureAmount += (CGFloat) DISTANCE_ABOVE_KEYBOARD;
 
     // if obscured too much
-    //NSLog(@"obscure amount final = %f", obscureAmount);
+    //ABLog(2,@"obscure amount final = %f", obscureAmount);
     if (obscureAmount != 0.0)
     {
         // it is obscured so move it to compensate
-        //NSLog(@"need to compensate");
+        //ABLog(2,@"need to compensate");
         newFrame.origin.y -= obscureAmount;
     }
 
-    //NSLog(@"old origin: %f, new origin: %f", _frameStart.origin.y, newFrame.origin.y);
+    //ABLog(2,@"old origin: %f, new origin: %f", _frameStart.origin.y, newFrame.origin.y);
 
     // if our new position puts us lower then we were originally
     if (newFrame.origin.y > _frameStart.origin.y)
@@ -1196,7 +1196,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//NSLog(@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
+	//ABLog(2,@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
 
     // NOTE: if it isn't handled in here it is probably handled in a cell callback (e.g., buttonCellButtonPressed)
 

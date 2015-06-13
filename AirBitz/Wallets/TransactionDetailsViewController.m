@@ -795,7 +795,7 @@ typedef enum eRequestType
 
     // store the final
     self.arrayContacts = arrayContacts;
-    //NSLog(@"contacts: %@", self.arrayContacts);
+    //ABLog(2,@"contacts: %@", self.arrayContacts);
 }
 
 - (UIImage *)stretchableImage:(NSString *)imageName
@@ -1225,7 +1225,7 @@ typedef enum eRequestType
     }
     else
     {
-        //NSLog(@"string already contains ll");
+        //ABLog(2,@"string already contains ll");
     }
 }
 
@@ -1330,7 +1330,7 @@ typedef enum eRequestType
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
-//    NSLog(@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
+//    ABLog(2,@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
 
 }
 
@@ -1462,7 +1462,7 @@ typedef enum eRequestType
 
             NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
 
-            //NSLog(@"Results download returned: %@", jsonString );
+            //ABLog(2,@"Results download returned: %@", jsonString );
 
             NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
             NSError *myError;
@@ -1547,7 +1547,7 @@ typedef enum eRequestType
                                 NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
                                 if (strThumbnail && strThumbnail != (id)[NSNull null])
                                 {
-                                    //NSLog(@"thumbnail path: %@", strThumbnail);
+                                    //ABLog(2,@"thumbnail path: %@", strThumbnail);
                                     [self.dictThumbnailURLs setObject:strThumbnail forKey:strName];
                                 }
                             }
@@ -1821,7 +1821,7 @@ typedef enum eRequestType
     // add string to categories, update arrays
     NSInteger index = [self.arrayCategories indexOfObject:catString];
     if(index == NSNotFound) {
-        NSLog(@"ADD CATEGORY: adding category = %@", catString);
+        ABLog(2,@"ADD CATEGORY: adding category = %@", catString);
         [self addCategory: catString];
         NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.arrayCategories];
         [array addObject:catString];
@@ -1853,12 +1853,12 @@ typedef enum eRequestType
     frame = self.pickerTextCategory.popupPicker.frame;
     frame.size.height = keyboardFrame.origin.y - self.pickerTextCategory.popupPicker.frame.origin.y;
     self.pickerTextCategory.popupPicker.frame = frame;
-    //NSLog(@"keyboard will show");
+    //ABLog(2,@"keyboard will show");
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    //NSLog(@"keyboard will hide");
+    //ABLog(2,@"keyboard will hide");
 
     if (_activeTextField.returnKeyType == UIReturnKeyDone)
     {

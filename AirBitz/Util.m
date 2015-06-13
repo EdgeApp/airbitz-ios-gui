@@ -11,6 +11,21 @@
 #import "CommonTypes.h"
 #import "AirbitzViewController.h"
 
+void abDebugLog(int level, NSString *statement) {
+    if (level <= DEBUG_LEVEL)
+    {
+        static NSDateFormatter *timeStampFormat;
+        if (!timeStampFormat) {
+            timeStampFormat = [[NSDateFormatter alloc] init];
+            [timeStampFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+            [timeStampFormat setTimeZone:[NSTimeZone systemTimeZone]];
+        }
+
+        printf("%s\n",[[NSString stringWithFormat:@"<%@> %@",
+                                                  [timeStampFormat stringFromDate:[NSDate date]],statement] UTF8String]);
+    }
+}
+
 @implementation Util
 
 + (NSString *)errorMap:(const tABC_Error *)pError

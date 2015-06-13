@@ -8,6 +8,7 @@
 
 #import "ButtonSelectorView2.h"
 #import "BlurView.h"
+#import "Util.h"
 
 #define TABLE_ROW_HEIGHT	50.0
 #define TABLE_HEIGHT_PADDING 25.0
@@ -59,7 +60,7 @@
 
 - (id)drawRect:(CGRect)rect
 {
-    NSLog(@"ButtonSelector2: drawRect");
+    ABLog(2,@"ButtonSelector2: drawRect");
     self.enabled = YES;
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ButtonSelectorView2" owner:self options:nil] objectAtIndex:0];
     view.frame = self.bounds;
@@ -347,7 +348,7 @@
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
 	cell.textLabel.textColor = [UIColor darkGrayColor];
     cell.backgroundColor = [UIColor clearColor];
-	//NSLog(@"Row: %i, text: %@", indexPath.row, cell.textLabel.text);
+	//ABLog(2,@"Row: %i, text: %@", indexPath.row, cell.textLabel.text);
     
     if (self.accessoryImage) {
         UIImage *image = self.accessoryImage;

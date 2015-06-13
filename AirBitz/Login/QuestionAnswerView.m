@@ -277,13 +277,13 @@
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
     cell.textLabel.numberOfLines = 0;
 	cell.textLabel.text = [dict objectForKey:@"question"];
-	//NSLog(@"Row: %i, text: %@", indexPath.row, cell.textLabel.text);
+	//ABLog(2,@"Row: %i, text: %@", indexPath.row, cell.textLabel.text);
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//NSLog(@"Selected row: %i", indexPath.row);
+	//ABLog(2,@"Selected row: %i", indexPath.row);
 	_dict = [self.availableQuestions objectAtIndex:indexPath.row];
 	//[self hideTable];
     [self QuestionButton];

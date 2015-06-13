@@ -11,6 +11,16 @@
 #import "ABC.h"
 #import "CoreBridge.h"
 
+@import Foundation.NSString;
+
+#define DEBUG_LEVEL 0
+
+#define ABLog(level, format_string,...) \
+    ((abDebugLog(level, [NSString stringWithFormat:format_string,##__VA_ARGS__])))
+
+void abDebugLog(int level, NSString *statement);
+
+
 @class AirbitzViewController;
 
 #define UIColorFromRGB(rgbValue) \

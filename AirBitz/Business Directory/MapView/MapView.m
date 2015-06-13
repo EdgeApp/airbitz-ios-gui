@@ -225,7 +225,7 @@
 				{
 					ann = (Annotation*)[[Annotation alloc] initWithCoordinate:loc.m_latlong]; //loc.m_latlong
 					((Annotation *)ann).m_bibbit = loc;
-					//NSLog(@"Name: %@, length:%d", loc.m_name, [loc.m_name length]);
+					//ABLog(2,@"Name: %@, length:%d", loc.m_name, [loc.m_name length]);
 					if([loc.m_name length])
 					{
 						((Annotation *)ann).m_title = loc.m_name;

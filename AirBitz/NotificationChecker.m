@@ -15,6 +15,7 @@
 #import "User.h"
 #import "ABC.h"
 #import "CoreBridge.h"
+#import "Util.h"
 
 #define OTP_NOTIFICATION          @"otp_notification"
 #define OTP_TIME                  @"otp_time"
@@ -56,10 +57,10 @@ static NotificationChecker *singleton = nil;
 
 + (void)requestNotifications
 {
-    NSLog(@"ENTER requestNotifications\n");
+    ABLog(2,@"ENTER requestNotifications\n");
     [singleton checkOtpResetPending];
     [singleton checkDirectoryNotifications];
-    NSLog(@"EXIT requestNotifications\n");
+    ABLog(2,@"EXIT requestNotifications\n");
 }
 
 + (NSDictionary *)haveNotifications
@@ -117,7 +118,7 @@ static NotificationChecker *singleton = nil;
 
 - (NSDictionary *)getFirstUnseenNotification
 {
-    NSLog(@"ENTER getFirstUnseenNotification\n");
+    ABLog(2,@"ENTER getFirstUnseenNotification\n");
 
     NSArray *arrays = @[[LocalSettings controller].notifications,
                         [LocalSettings controller].otpNotifications];
@@ -126,20 +127,20 @@ static NotificationChecker *singleton = nil;
         for (NSDictionary *notif in array) {
             NSNumber *seen = [notif objectForKey:NOTIFICATION_SEEN_KEY];
             if (nil == seen || ![seen boolValue]) {
-                NSLog(@"EXIT getFirstUnseenNotification: %@\n", notif);
+                ABLog(2,@"EXIT getFirstUnseenNotification: %@\n", notif);
                 return notif;
             }
             i++;
         }
     }
-    NSLog(@"EXIT getFirstUnseenNotification: nil\n");
+    ABLog(2,@"EXIT getFirstUnseenNotification: nil\n");
 
     return nil;
 }
 
 - (void)postNotification
 {
-    NSLog(@"GO postNotification\n");
+    ABLog(2,@"GO postNotification\n");
 
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NOTIFICATION_RECEIVED object:self];
 }
@@ -148,7 +149,7 @@ static NotificationChecker *singleton = nil;
 //
 + (BOOL)setNotificationSeen:(NSDictionary *)setSeenNotif
 {
-    NSLog(@"ENTER setNotificationSeen\n");
+    ABLog(2,@"ENTER setNotificationSeen\n");
 
     NSArray *arrays = @[[LocalSettings controller].notifications,
             [LocalSettings controller].otpNotifications];
@@ -171,7 +172,7 @@ static NotificationChecker *singleton = nil;
                     [array replaceObjectAtIndex:i withObject:temp];
 
                     [LocalSettings saveAll];
-                    NSLog(@"EXIT setNotificationSeen: true %@\n",notif);
+                    ABLog(2,@"EXIT setNotificationSeen: true %@\n",notif);
 
                     return true;
                 }
@@ -179,7 +180,7 @@ static NotificationChecker *singleton = nil;
             i++;
         }
     }
-    NSLog(@"EXIT setNotificationSeen: false\n");
+    ABLog(2,@"EXIT setNotificationSeen: false\n");
     return false;
 }
 
@@ -209,7 +210,7 @@ static NotificationChecker *singleton = nil;
 
 - (void)checkNotifications
 {
-    NSLog(@"ENTER checkNotifications\n");
+    ABLog(2,@"ENTER checkNotifications\n");
     [self checkOtpResetPending];
     [self performSelectorOnMainThread:@selector(checkDirectoryNotifications) withObject:nil waitUntilDone:FALSE];
 
@@ -220,7 +221,7 @@ static NotificationChecker *singleton = nil;
         [self performSelectorOnMainThread:@selector(postNotification) withObject:nil waitUntilDone:FALSE];
 //        [self postNotification];
     }
-    NSLog(@"EXIT checkNotifications\n");
+    ABLog(2,@"EXIT checkNotifications\n");
 }
 
 + (void)resetOtpNotifications
@@ -341,7 +342,7 @@ exit:
 {
     NSString *jsonString = [[NSString alloc] initWithBytes: [data bytes] length: [data length] encoding: NSUTF8StringEncoding];
     
-    //    NSLog(@"Results download returned: %@", jsonString );
+    //    ABLog(2,@"Results download returned: %@", jsonString );
     
     NSData *jsonData = [jsonString dataUsingEncoding: NSUTF32BigEndianStringEncoding];
     NSError *myError;

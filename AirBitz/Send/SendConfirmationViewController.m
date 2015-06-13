@@ -240,7 +240,7 @@
     }
     else
     {
-        NSLog(@"Text changed for some field");
+        ABLog(2,@"Text changed for some field");
     }
 }
 
@@ -587,7 +587,7 @@
 - (void)showTransactionDetails:(NSArray *)params
 {
     if ([params count] < 2) {
-        NSLog(@"Not enought args\n");
+        ABLog(2,@"Not enought args\n");
         return;
     }
     NSString *walletUUID = params[0];

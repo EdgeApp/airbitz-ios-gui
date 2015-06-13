@@ -192,7 +192,7 @@ MainViewController *singleton;
     NSNumber *nOrientation = [NSNumber numberWithInteger:toOrientation];
     NSDictionary *dictNotification = @{ KEY_ROTATION_ORIENTATION : nOrientation };
 
-    NSLog(@"Woohoo we WILL rotate %d", toOrientation);
+    ABLog(2,@"Woohoo we WILL rotate %d", toOrientation);
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ROTATION_CHANGED object:self userInfo:dictNotification];
 }
 
@@ -311,11 +311,11 @@ MainViewController *singleton;
 
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
 
-    NSLog(@"navBar:%f %f\ntabBar: %f %f\n",
+    ABLog(2,@"navBar:%f %f\ntabBar: %f %f\n",
             self.navBar.frame.origin.y, self.navBar.frame.size.height,
             self.tabBar.frame.origin.y, self.tabBar.frame.size.height);
 
-    NSLog(@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
+    ABLog(2,@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
 
 
     [self.tabBar setTranslucent:[Theme Singleton].bTranslucencyEnable];
@@ -533,7 +533,7 @@ MainViewController *singleton;
                          }
                          completion:^(BOOL finished)
                          {
-                             NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+                             ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                              [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 
                          }];
@@ -562,7 +562,7 @@ MainViewController *singleton;
                          }
                          completion:^(BOOL finished)
                          {
-                             NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+                             ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                              [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                          }];
     }
@@ -593,7 +593,7 @@ MainViewController *singleton;
 		completion:^(BOOL finished)
 		{
             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-            NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+            ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
 		}];
 	}
 	else
@@ -621,7 +621,7 @@ MainViewController *singleton;
                          completion:^(BOOL finished)
                          {
                              [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-                             NSLog(@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+                             ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                          }];
     }
     else
@@ -1575,7 +1575,7 @@ MainViewController *singleton;
 
 - (void)slideoutAccount
 {
-    NSLog(@"MainViewController.slideoutAccount");
+    ABLog(2,@"MainViewController.slideoutAccount");
 }
 
 - (void)slideoutSettings
@@ -1914,34 +1914,34 @@ MainViewController *singleton;
 {
     if (_selectedViewController == nil)
     {
-        NSLog(@"_selectedViewController == nil");
+        ABLog(2,@"_selectedViewController == nil");
     }
     else if (_selectedViewController == _directoryViewController)
     {
-        NSLog(@"_selectedViewController == _directoryViewController");
+        ABLog(2,@"_selectedViewController == _directoryViewController");
     }
     else if (_selectedViewController == _transactionsViewController)
     {
-        NSLog(@"_selectedViewController == _transactionsViewController");
+        ABLog(2,@"_selectedViewController == _transactionsViewController");
     }
     else if (_selectedViewController == _loginViewController)
     {
-        NSLog(@"_selectedViewController == _loginViewController");
+        ABLog(2,@"_selectedViewController == _loginViewController");
     }
     else if (_selectedViewController == _sendViewController)
     {
-        NSLog(@"_selectedViewController == _sendViewController");
+        ABLog(2,@"_selectedViewController == _sendViewController");
     }
     else if (_selectedViewController == _requestViewController)
     {
-        NSLog(@"_selectedViewController == _requestViewController");
+        ABLog(2,@"_selectedViewController == _requestViewController");
     }
 }
 
 #pragma RequestViewController delegate
 -(void)pleaseRestartRequestViewBecauseAppleSucksWithPresentController
 {
-    NSLog(@"pleaseRestartRequestViewBecauseAppleSucksWithPresentController called");
+    ABLog(2,@"pleaseRestartRequestViewBecauseAppleSucksWithPresentController called");
 
     NSString *requestID = _requestViewController.requestID;
     AirbitzViewController *fakeViewController;
@@ -1963,7 +1963,7 @@ MainViewController *singleton;
 -(void)pleaseRestartSendViewBecauseAppleSucksWithPresentController
 {
     SendViewController *tempSend;
-    NSLog(@"pleaseRestartSendViewBecauseAppleSucksWithPresentController called");
+    ABLog(2,@"pleaseRestartSendViewBecauseAppleSucksWithPresentController called");
     NSAssert((_selectedViewController == _sendViewController) || (_selectedViewController == _importViewController), @"Must be Import or Send View Controllers");
     tempSend = _selectedViewController;
     ZBarSymbolSet *zBarSymbolSet = tempSend.zBarSymbolSet;

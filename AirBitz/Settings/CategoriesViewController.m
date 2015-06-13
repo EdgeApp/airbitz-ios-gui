@@ -667,7 +667,7 @@
 
 - (void)categoriesCellDidShowPopup:(CategoriesCell *)cell
 {
-    //NSLog(@"Did show show cell popup");
+    //ABLog(2,@"Did show show cell popup");
 
     // So the popup has now appear on the screen, here is what we will do
     // (beware the magic numbers!)

@@ -10,6 +10,7 @@
 #import "CommonTypes.h"
 #import "ABC.h"
 #import "Config.h"
+#import "Util.h"
 
 
 /////// TEMP UNTIL WE GET FUNCTIONALITY IN THE CORE
@@ -179,7 +180,7 @@ extern void QRcode_free(QRcode *qrcode);
         UIPrintInteractionCompletionHandler completionHandler =
         ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
             if(!completed && error){
-                NSLog(@"Print failed - domain: %@ error code %u", error.domain, (unsigned int)error.code);
+                ABLog(2,@"Print failed - domain: %@ error code %u", error.domain, (unsigned int)error.code);
             }
         };
 
@@ -235,7 +236,7 @@ extern void QRcode_free(QRcode *qrcode);
 
         CGFloat spacing = (needToFit - totalSizeUsed) / ([arrayControls count] + 2);
 
-        //NSLog(@"needToFit: %f, totalSizeUsed: %f, spacing: %f", needToFit, totalSizeUsed, spacing);
+        //ABLog(2,@"needToFit: %f, totalSizeUsed: %f, spacing: %f", needToFit, totalSizeUsed, spacing);
 
         for (int i = 0; i < [arrayControls count]; i++)
         {

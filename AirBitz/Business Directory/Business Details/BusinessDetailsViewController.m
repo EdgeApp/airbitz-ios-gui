@@ -111,7 +111,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
     //get business details
 	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/?ll=%f,%f", SERVER_API, self.bizId, self.latLong.latitude, self.latLong.longitude];
-	//NSLog(@"Requesting: %@", requestURL);
+	//ABLog(2,@"Requesting: %@", requestURL);
 	[[DL_URLServer controller] issueRequestURL:requestURL
 									withParams:nil
 									withObject:nil
@@ -279,7 +279,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 		CLGeocoder *geocoder = [[CLGeocoder alloc] init];
 		[geocoder geocodeAddressString:address completionHandler:^(NSArray *placemarks, NSError *error)
 		 {
-			 NSLog(@"error: %li", (long)error.code);
+			 ABLog(2,@"error: %li", (long)error.code);
 			 
 			 // Convert the CLPlacemark to an MKPlacemark
 			 // Note: There's no error checking for a failed geocode
@@ -404,7 +404,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 				if([tag isEqualToString:@"Primary"])
 				{
 					//found primary image
-					//NSLog(@"Found primary tag at object index: %i", count);
+					//ABLog(2,@"Found primary tag at object index: %i", count);
 					primaryImage = count;
 					break;
 				}
@@ -431,7 +431,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 			{
 				NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
 				
-				//NSLog(@"Results download returned: %@", jsonString );
+				//ABLog(2,@"Results download returned: %@", jsonString );
 				
 				NSError *myError;
 				NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
@@ -513,7 +513,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 				{
 					NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
 					
-					//NSLog(@"Results download returned: %@", jsonString );
+					//ABLog(2,@"Results download returned: %@", jsonString );
 					
 					NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
 					NSError *myError;
@@ -544,7 +544,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 					
 					//Get image URLs
 					NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/photos/", SERVER_API, self.bizId];
-					//NSLog(@"Requesting: %@ for row: %i", requestURL, row);
+					//ABLog(2,@"Requesting: %@ for row: %i", requestURL, row);
 					[[DL_URLServer controller] issueRequestURL:requestURL
 													withParams:nil
 													withObject:imageURLs
@@ -746,7 +746,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	}
 	else if(cellType == kDetails)
 	{
-		//NSLog(@"returning details cell height of %f", detailsCellHeight);
+		//ABLog(2,@"returning details cell height of %f", detailsCellHeight);
 		return detailsCellHeight;
 	}
 	else if(cellType == kWebsite)
@@ -866,7 +866,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	//NSLog(@"Clicked button %li", (long)buttonIndex);
+	//ABLog(2,@"Clicked button %li", (long)buttonIndex);
 	if(buttonIndex == 1)
 	{
 		[self callBusinessNumber];

@@ -10,6 +10,7 @@
 #import "DL_URLServer.h"
 #import "Server.h"
 #import "UIImage+Colorize.h"
+#import "Util.h"
 
 @interface BackgroundImageManager () <DL_URLRequestDelegate>
 {
@@ -44,9 +45,9 @@
 		if(imageInfo.count)
 		{
 			NSString *imageURL = [imageInfo objectForKey:@"thumbnail"];
-			//NSLog(@"imageURL: %@", imageURL);
+			//ABLog(2,@"imageURL: %@", imageURL);
 			NSString *requestURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, imageURL];
-			//NSLog(@"Requesting: %@ for row: %i", requestURL, row);
+			//ABLog(2,@"Requesting: %@ for row: %i", requestURL, row);
 			[[DL_URLServer controller] issueRequestURL:requestURL
 											withParams:nil
 											withObject:[business objectForKey:@"bizId"]
@@ -56,7 +57,7 @@
 		}
 		else
 		{
-			NSLog(@"No image for %@", [business objectForKey:@"name"]);
+			ABLog(2,@"No image for %@", [business objectForKey:@"name"]);
 		}
 	}
 }
@@ -64,7 +65,7 @@
 -(UIImage *)imageForBusiness:(NSDictionary *)business
 {
 	UIImage *image = [images objectForKey:[business objectForKey:@"bizId"]];
-	//NSLog(@"Image %f, %f for row: %i", image.size.width, image.size.height, row);
+	//ABLog(2,@"Image %f, %f for row: %i", image.size.width, image.size.height, row);
 	return image;
 }
 

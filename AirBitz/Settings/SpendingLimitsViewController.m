@@ -116,7 +116,7 @@
 
 - (IBAction)doneClicked:(id)sender
 {
-    NSLog(@"Done Clicked.");
+    ABLog(2,@"Done Clicked.");
     [self.view endEditing:YES];
 }
 

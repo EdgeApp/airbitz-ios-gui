@@ -108,7 +108,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-	//NSLog(@"Adding keyboard notification");
+	//ABLog(2,@"Adding keyboard notification");
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -126,9 +126,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-   // NSLog(@"%s", __FUNCTION__);
+   // ABLog(2,@"%s", __FUNCTION__);
     
-	//NSLog(@"Removing keyboard notification");
+	//ABLog(2,@"Removing keyboard notification");
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewWillDisappear:animated];
 }
@@ -538,7 +538,7 @@
 	{
 		CGRect textFieldFrame = [self.contentView convertRect:_activeTextField.frame toView:self.view.window];
 		float overlap = self.contentView.frame.origin.y + _keyboardFrameOriginY - KEYBOARD_MARGIN - (textFieldFrame.origin.y + textFieldFrame.size.height);
-		//NSLog(@"Overlap: %f", overlap);
+		//ABLog(2,@"Overlap: %f", overlap);
 		if(overlap < 0)
 		{
 			[UIView animateWithDuration:0.35
@@ -582,7 +582,7 @@
 	//Get KeyboardFrame (in Window coordinates)
 	if(_activeTextField)
 	{
-		//NSLog(@"Keyboard will show for SignUpView");
+		//ABLog(2,@"Keyboard will show for SignUpView");
 		NSDictionary *userInfo = [notification userInfo];
 		CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
@@ -596,7 +596,7 @@
 {
 	if(_activeTextField)
 	{
-		//NSLog(@"Keyboard will hide for SignUpView");
+		//ABLog(2,@"Keyboard will hide for SignUpView");
 		_activeTextField = nil;
 	}
 	_keyboardFrameOriginY = 0.0;
@@ -620,7 +620,7 @@
 {
 	//called when user taps on either search textField or location textField
 	
-	//NSLog(@"TextField began editing");
+	//ABLog(2,@"TextField began editing");
 	_activeTextField = textField;
 	if(textField == self.passwordTextField)
 	{

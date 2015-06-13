@@ -2906,6 +2906,9 @@
 					B5675B4718A17F6F002E0703 = {
 						DevelopmentTeam = G5LQ7MERPK;
 					};
+					DAE863F41A88A58A00A17BD3 = {
+						DevelopmentTeam = G5LQ7MERPK;
+					};
 				};
 			};
 			buildConfigurationList = B5675B4318A17F6F002E0703 /* Build configuration list for PBXProject "AirBitz" */;
@@ -4359,6 +4362,8 @@
 			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Develop";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -4382,6 +4387,7 @@
 					"/Users/timhorton/airbitz/builds/develop-mainnet/abc/abc-ios-universal/lib",
 				);
 				PRODUCT_NAME = "Airbitz Develop";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4392,6 +4398,8 @@
 			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Develop";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -4415,6 +4423,7 @@
 					"/Users/timhorton/airbitz/builds/develop-mainnet/abc/abc-ios-universal/lib",
 				);
 				PRODUCT_NAME = "Airbitz Develop";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

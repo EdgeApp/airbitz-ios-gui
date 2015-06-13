@@ -352,11 +352,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		for (NSInteger i = numPeripherals - 1; i>= 0; i--)
 		{
 			PeripheralContainer *pc = [self.peripheralContainers objectAtIndex:i];
-			//NSLog(@"Last: %f Current: %f", [pc.lastAdvertisingTime floatValue], currentTime);
+			//ABLog(2,@"Last: %f Current: %f", [pc.lastAdvertisingTime floatValue], currentTime);
 			if(currentTime - [pc.lastAdvertisingTime doubleValue] > 1.0)
 			{
 				//haven't heard from this peripheral in a while.  Kill it.
-				//NSLog(@"Removing peripheral");
+				//ABLog(2,@"Removing peripheral");
 				[self.peripheralContainers removeObjectAtIndex:i];
 				[self updateTable];
 			}
@@ -604,7 +604,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	
     // assign final
     self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];
-   // NSLog(@"contacts: %@", self.arrayContacts);
+   // ABLog(2,@"contacts: %@", self.arrayContacts);
 }
 
 - (void)addContactInfo:(ABRecordRef)person withName:(NSString *)strName toArray:(NSMutableArray *)arrayContacts
@@ -633,7 +633,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (!self.bImportMode)
     {
-        //NSLog(@"################## STARTED BLE ######################");
+        //ABLog(2,@"################## STARTED BLE ######################");
         [self scan];
         //kick off peripheral cleanup timer (removes peripherals from table when they're no longer in range)
         peripheralCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(cleanupPeripherals:) userInfo:nil repeats:YES];
@@ -644,9 +644,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (!self.bImportMode)
     {
-        //NSLog(@"################## STOPPED BLE ######################");
+        //ABLog(2,@"################## STOPPED BLE ######################");
         [self.centralManager stopScan];
-        //NSLog(@"Getting rid of timer");
+        //ABLog(2,@"Getting rid of timer");
         [peripheralCleanupTimer invalidate];
     }
 }
@@ -658,7 +658,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-//	NSLog(@"DID UPDATE STATE");
+//	ABLog(2,@"DID UPDATE STATE");
 
     if (central.state != CBCentralManagerStatePoweredOn)
 	{
@@ -667,7 +667,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
 	else
 	{
-		NSLog(@"POWERED ON");
+		ABLog(2,@"POWERED ON");
         [self startBLE];
 //		[self enableBLEMode];
 //		self.ble_button.hidden = NO;
@@ -679,13 +679,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)scan
 {
-	//NSLog(@"################## BLE SCAN STARTED ######################");
+	//ABLog(2,@"################## BLE SCAN STARTED ######################");
     _data = [[NSMutableData alloc] init];
 	self.peripheralContainers = nil;
 	[self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]]
                                                 options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES}];
     
-    //NSLog(@"Scanning started");
+    //ABLog(2,@"Scanning started");
 }
 
 /*
@@ -786,7 +786,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 			[self updateTable];
 		}
     }
-//    NSLog(@"Discovered %@ at %@ with adv data: %@", peripheral.name, RSSI, advertisementData);
+//    ABLog(2,@"Discovered %@ at %@ with adv data: %@", peripheral.name, RSSI, advertisementData);
 }
 
 
@@ -794,7 +794,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    NSLog(@"Failed to connect to %@. (%@)", peripheral, [error localizedDescription]);
+    ABLog(2,@"Failed to connect to %@. (%@)", peripheral, [error localizedDescription]);
     [self cleanup];
 }
 
@@ -803,11 +803,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-//    NSLog(@"Peripheral Connected");
+//    ABLog(2,@"Peripheral Connected");
     
     // Stop scanning
     [self.centralManager stopScan];
-//    NSLog(@"Scanning stopped");
+//    ABLog(2,@"Scanning stopped");
     
     // Clear the data that we may already have
     [self.data setLength:0];
@@ -826,7 +826,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (error)
 	{
-        NSLog(@"Error discovering services: %@", [error localizedDescription]);
+        ABLog(2,@"Error discovering services: %@", [error localizedDescription]);
         [self cleanup];
         return;
     }
@@ -848,7 +848,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     // Deal with errors (if any)
     if (error) {
-        NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
+        ABLog(2,@"Error discovering characteristics: %@", [error localizedDescription]);
         [self cleanup];
         return;
     }
@@ -904,7 +904,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 			
 			[peripheral writeValue:[fullName dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
 			
-//			NSLog(@"Writing: %@ to peripheral", fullName);
+//			ABLog(2,@"Writing: %@ to peripheral", fullName);
         }
     }
     
@@ -917,7 +917,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (error)
 	{
-        NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
+        ABLog(2,@"Error discovering characteristics: %@", [error localizedDescription]);
         return;
     }
 	
@@ -983,7 +983,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (error)
 	{
-        NSLog(@"Error changing notification state: %@", error.localizedDescription);
+        ABLog(2,@"Error changing notification state: %@", error.localizedDescription);
     }
     
     // Exit if it's not the transfer characteristic
@@ -995,7 +995,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (!characteristic.isNotifying)
 	{
         // so disconnect from the peripheral
-        NSLog(@"Notification stopped on %@.  Disconnecting", characteristic);
+        ABLog(2,@"Notification stopped on %@.  Disconnecting", characteristic);
         [self.centralManager cancelPeripheralConnection:peripheral];
     }
 }
@@ -1003,7 +1003,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 -(void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
 {
-	NSLog(@"Did Modify Services: %@", invalidatedServices);
+	ABLog(2,@"Did Modify Services: %@", invalidatedServices);
 }
 
 
@@ -1011,7 +1011,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    //NSLog(@"Did disconnect because: %@", error.description);
+    //ABLog(2,@"Did disconnect because: %@", error.description);
 	self.peripheralContainers = nil;
     self.discoveredPeripheral = nil;
     
@@ -1030,7 +1030,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 -(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        NSLog(@"Error writing value for characteristic: %@", error.localizedDescription);
+        ABLog(2,@"Error writing value for characteristic: %@", error.localizedDescription);
         return;
     }
 
@@ -1120,7 +1120,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     printf("UUID : %s\r\n",CFStringGetCStringPtr(s, 0));
     CFRelease(s);
     printf("RSSI : %d\r\n",[peripheralContainer.peripheral.RSSI intValue]);
-    NSLog(@"Name : %@\r\n",peripheralContainer.peripheral.name);
+    ABLog(2,@"Name : %@\r\n",peripheralContainer.peripheral.name);
 	BOOL connected = NO;
 	if(peripheralContainer.peripheral.state == CBPeripheralStateConnected)
 	{
@@ -1316,7 +1316,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-	//NSLog(@"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Selecting row: %li", (long)indexPath.row);
+	//ABLog(2,@"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Selecting row: %li", (long)indexPath.row);
 	
 	tableView.allowsSelection = NO;
 	//attempt to connect to this peripheral
@@ -1331,7 +1331,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	self.discoveredPeripheral = pc.peripheral;
 	
 	// And connect
-	//NSLog(@"Connecting to peripheral %@", pc.peripheral);
+	//ABLog(2,@"Connecting to peripheral %@", pc.peripheral);
 	[self.centralManager connectPeripheral:pc.peripheral options:nil];
 }
 
@@ -1379,7 +1379,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     _sendConfirmationViewController.spendTarget = spendTarget;
 //    _sendConfirmationViewController.wallet = [CoreBridge Singleton].currentWallet;
 
-    //NSLog(@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
+    //ABLog(2,@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
 	
 //	CGRect frame = self.view.bounds;
 //	frame.origin.x = frame.size.width;
@@ -1569,7 +1569,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)toggleFlash
 {
 
-    //NSLog(@"Flash Item Selected: %i", flashType);
+    //ABLog(2,@"Flash Item Selected: %i", flashType);
     if (bFlashOn)
     {
         [self flashItemSelected:FLASH_ITEM_OFF];

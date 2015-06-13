@@ -316,7 +316,7 @@
     CGPoint location = [recognizer locationInView:self->_parentView];
     int openLeftX = self->_parentView.bounds.size.width - self.bounds.size.width;
     bool halfwayOut = location.x < self->_parentView.bounds.size.width - self.bounds.size.width / 2;
-    NSLog(@"transX, locX, centerX: %f %f %f", translation.x, location.x, self.center.x);
+    ABLog(2,@"transX, locX, centerX: %f %f %f", translation.x, location.x, self.center.x);
     
     if(recognizer.state == UIGestureRecognizerStateEnded)
     {

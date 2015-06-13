@@ -13,6 +13,7 @@
 #import "CommonTypes.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "Util.h"
 
 @interface DebugViewController ()  <UIGestureRecognizerDelegate>
 {
@@ -98,7 +99,7 @@
 
 - (IBAction)uploadLogs:(id)sender
 {
-    NSLog(@"Uploading Logs\n");
+    ABLog(2,@"Uploading Logs\n");
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         tABC_Error Error;
@@ -131,7 +132,7 @@
 
 - (IBAction)clearWatcher:(id)sender
 {
-    NSLog(@"Clearing Watcher\n");
+    ABLog(2,@"Clearing Watcher\n");
     NSString *buttonText = self.clearWatcherButton.titleLabel.text;
 //    NSMutableArray *wallets = [[NSMutableArray alloc] init];
 //    NSMutableArray *archived = [[NSMutableArray alloc] init];

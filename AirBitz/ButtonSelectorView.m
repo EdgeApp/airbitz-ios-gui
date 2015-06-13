@@ -8,6 +8,7 @@
 
 #import "ButtonSelectorView.h"
 #import "StylizedButton.h"
+#import "Util.h"
 
 #define TABLE_ROW_HEIGHT	37.0
 
@@ -305,7 +306,7 @@
 	cell.textLabel.minimumScaleFactor = 0.5;
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
 	//cell.textLabel.textColor = [UIColor redColor];
-	//NSLog(@"Row: %i, text: %@", indexPath.row, cell.textLabel.text);
+	//ABLog(2,@"Row: %i, text: %@", indexPath.row, cell.textLabel.text);
     
     if (self.accessoryImage) {
         UIImage *image = self.accessoryImage;
