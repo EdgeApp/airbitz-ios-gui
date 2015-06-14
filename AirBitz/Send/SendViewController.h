@@ -30,7 +30,7 @@ typedef enum eLoopbackState
 
 @interface SendViewController : AirbitzViewController
 
-@property (nonatomic, weak) ZBarSymbolSet           *zBarSymbolSet;
+@property (nonatomic, strong) ZBarSymbolSet           *zBarSymbolSet;
 @property (nonatomic, weak) IBOutlet UITextField    *addressTextField;
 @property (nonatomic)       tLoopbackState          loopbackState;
 @property (nonatomic)       BOOL                    bImportMode;
@@ -45,7 +45,6 @@ typedef enum eLoopbackState
 @protocol SendViewControllerDelegate <NSObject>
 
 @required
--(void)pleaseRestartSendViewBecauseAppleSucksWithPresentController;
 @optional
 
 

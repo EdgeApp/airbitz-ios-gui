@@ -204,7 +204,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 
     //
-    // This might be a loopback from pleaseRestartSendViewBecauseAppleSucksWithPresentController
+    // This might be a loopback from presentViewController
     // Check params and go
     //
 
@@ -1492,7 +1492,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     _readerPicker.showsHelpOnFail = NO;
 
     [self presentViewController:_readerPicker animated:YES completion:nil];
-    [MainViewController animateFadeOut:self.view];
 
 #endif
 }
@@ -1652,8 +1651,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [reader dismissViewControllerAnimated:YES completion:nil];
 
     self.loopbackState = LoopbackState_Cancelled;
-    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
-	
+
 	//cw viewWillAppear will get called which will switch us back into BLE mode
 }
 
@@ -1664,7 +1662,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     self.zBarSymbolSet = (ZBarSymbolSet *) results;
     self.loopbackState = LoopbackState_Go;
-    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
 
     [reader dismissViewControllerAnimated:YES completion:nil];
 }
@@ -1674,7 +1671,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     [reader dismissViewControllerAnimated:YES completion:nil];
     self.loopbackState = LoopbackState_Scan_Failed;
-    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
 }
 
 #endif

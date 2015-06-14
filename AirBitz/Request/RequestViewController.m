@@ -1597,7 +1597,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         [self presentViewController:mailComposer animated:YES completion:nil];
 
-        [MainViewController animateFadeOut:self.view];
         _requestType = [Theme Singleton].emailText;
     }
     else
@@ -1651,7 +1650,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         controller.messageComposeDelegate = self;
 
         [self presentViewController:controller animated:YES completion:nil];
-        [MainViewController animateFadeOut:self.view];
 
         _requestType = [Theme Singleton].smsText;
     }
@@ -1739,8 +1737,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         [Util printABC_Error:&Error];
     }
-
-    [self.delegate pleaseRestartRequestViewBecauseAppleSucksWithPresentController];
 
 }
 

@@ -282,7 +282,17 @@ MainViewController *singleton;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	self.tabBar.delegate = self;
+    //
+    // If this has already been initialized. Don't initialize again. Just jump to launchViewControllerBasedOnAppMode with current appMode
+    //
+
+    if (self.tabBar.delegate == self)
+    {
+        [self launchViewControllerBasedOnAppMode];
+        return;
+    }
+
+    self.tabBar.delegate = self;
 
 	//originalTabBarPosition = self.tabBar.frame.origin;
 #if DIRECTORY_ONLY
@@ -1950,79 +1960,6 @@ MainViewController *singleton;
     {
         ABLog(2,@"_selectedViewController == _requestViewController");
     }
-}
-
-#pragma RequestViewController delegate
--(void)pleaseRestartRequestViewBecauseAppleSucksWithPresentController
-{
-    ABLog(2,@"pleaseRestartRequestViewBecauseAppleSucksWithPresentController called");
-
-    NSString *requestID = _requestViewController.requestID;
-    AirbitzViewController *fakeViewController;
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    fakeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AirbitzViewController"];
-
-    [MainViewController animateSwapViewControllers:fakeViewController out:_requestViewController];
-    _requestViewController = nil;
-    _requestViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"RequestViewController"];
-
-    _requestViewController.delegate = self;
-    _requestViewController.requestID = requestID;
-    _requestViewController.bDoFinalizeTx = YES;
-    [MainViewController animateSwapViewControllers:_requestViewController out:fakeViewController];
-}
-
-
-#pragma SendViewController delegate
--(void)pleaseRestartSendViewBecauseAppleSucksWithPresentController
-{
-    SendViewController *tempSend;
-    ABLog(2,@"pleaseRestartSendViewBecauseAppleSucksWithPresentController called");
-    NSAssert((_selectedViewController == _sendViewController) || (_selectedViewController == _importViewController), @"Must be Import or Send View Controllers");
-    tempSend = _selectedViewController;
-    ZBarSymbolSet *zBarSymbolSet = tempSend.zBarSymbolSet;
-    BOOL bImportMode = tempSend.bImportMode;
-    tLoopbackState loopbackState = tempSend.loopbackState;
-    tempSend = nil;
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [NSThread sleepForTimeInterval:0.5f];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            AirbitzViewController *fakeViewController;
-            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-
-            fakeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AirbitzViewController"];
-
-            if (bImportMode)
-            {
-                NSAssert(_selectedViewController == _importViewController, @"Must be Import");
-                [MainViewController animateSwapViewControllers:fakeViewController out:_importViewController];
-                _importViewController = nil;
-                _importViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
-
-                _importViewController.zBarSymbolSet = zBarSymbolSet;
-                _importViewController.bImportMode = bImportMode;
-                _importViewController.delegate = self;
-                _importViewController.loopbackState = loopbackState;
-                [MainViewController animateSwapViewControllers:_importViewController out:fakeViewController];
-
-            }
-            else
-            {
-                NSAssert(_selectedViewController == _sendViewController, @"Must be Send");
-                [MainViewController animateSwapViewControllers:fakeViewController out:_sendViewController];
-                _sendViewController = nil;
-                _sendViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendViewController"];
-
-                _sendViewController.zBarSymbolSet = zBarSymbolSet;
-                _sendViewController.bImportMode = bImportMode;
-                _sendViewController.delegate = self;
-                _sendViewController.loopbackState = loopbackState;
-                [MainViewController animateSwapViewControllers:_sendViewController out:fakeViewController];
-
-            }
-        });
-    });
 }
 
 
