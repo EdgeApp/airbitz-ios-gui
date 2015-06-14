@@ -1329,7 +1329,6 @@ static BOOL bOtpError = NO;
 
 + (void)logout
 {
-    [CoreBridge stopWatchers];
     [CoreBridge stopQueues];
 
     NSUInteger wq, dq, gq, txq;
@@ -1349,6 +1348,7 @@ static BOOL bOtpError = NO;
         [NSThread sleepForTimeInterval:.2];
     }
 
+    [CoreBridge stopWatchers];
     [CoreBridge cleanWallets];
 
     tABC_Error Error;

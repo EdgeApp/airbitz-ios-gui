@@ -276,6 +276,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [self.peripheralManager stopAdvertising];
         _peripheralManager = nil;
     }
+    if (self.qrTimer)
+        [self.qrTimer invalidate];
+
     [CoreBridge prioritizeAddress:nil inWallet:[CoreBridge Singleton].currentWallet.strUUID];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

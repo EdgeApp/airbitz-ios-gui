@@ -1638,10 +1638,9 @@ MainViewController *singleton;
                     message:NSLocalizedString(@"Please wait while Airbitz gracefully exits your account. This may take a while on slow networks", nil)
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
                 // Log the user out and reset UI
-                [self loadUserViews];
                 [[User Singleton] clear];
 
-                [self SettingsViewControllerDone:nil];
+                [self loadUserViews];
                 [self launchViewControllerBasedOnAppMode];
 
                 [FadingAlertView dismiss:YES];
