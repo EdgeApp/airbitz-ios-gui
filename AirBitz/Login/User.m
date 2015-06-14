@@ -150,6 +150,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
         self.lastName = pSettings->szLastName ? [NSString stringWithUTF8String:pSettings->szLastName] : nil;
         self.nickName = pSettings->szNickname ? [NSString stringWithUTF8String:pSettings->szNickname] : nil;
         self.fullName = pSettings->szFullName ? [NSString stringWithUTF8String:pSettings->szFullName] : nil;
+        self.strPIN   = pSettings->szPIN ? [NSString stringWithUTF8String:pSettings->szPIN] : nil;
         self.bNameOnPayments = pSettings->bNameOnPayments;
 
         [self loadLocalSettings:pSettings];

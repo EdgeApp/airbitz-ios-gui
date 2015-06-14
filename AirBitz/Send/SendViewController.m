@@ -861,29 +861,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		{
 			
             // Write username to this characteristic
-			tABC_AccountSettings            *pAccountSettings;
-			tABC_Error Error;
-			Error.code = ABC_CC_Ok;
-			
-			// load the current account settings
-			pAccountSettings = NULL;
-			ABC_LoadAccountSettings([[User Singleton].name UTF8String],
-									[[User Singleton].password UTF8String],
-									&pAccountSettings,
-									&Error);
-			[Util printABC_Error:&Error];
-			
-			BOOL sendName = NO;
-			if (pAccountSettings)
-			{
-				if(pAccountSettings->bNameOnPayments)
-				{
-					sendName = YES;
-				}
-				ABC_FreeAccountSettings(pAccountSettings);
-			}
-			
-			
+			BOOL sendName = [User Singleton].bNameOnPayments;
+
 			NSString *fullName = @" ";
 			if(sendName)
 			{

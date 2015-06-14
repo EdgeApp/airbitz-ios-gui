@@ -110,14 +110,8 @@
         [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
         [self.accountPicker setRoundedAndShadowed:NO];
 
-        tABC_AccountSettings *_pAccountSettings = NULL;
-        tABC_Error Error;
-        Error.code = ABC_CC_Ok;
-        ABC_LoadAccountSettings([[User Singleton].name UTF8String],
-                [[User Singleton].password UTF8String],
-                &_pAccountSettings,
-                &Error);
-        int num = _pAccountSettings->currencyNum;
+        int num = [User Singleton].defaultCurrencyNum;
+
         self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:YES];
 
 

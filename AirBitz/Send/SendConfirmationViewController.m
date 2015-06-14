@@ -893,7 +893,7 @@
             return;
         }
 
-        NSString *PIN = [CoreBridge getPIN];
+        NSString *PIN = [User Singleton].strPIN;
         if (_pinRequired && ![self.withdrawlPIN.text isEqualToString:PIN]) {
             if (kInvalidEntryWait == [user sendInvalidEntry])
             {

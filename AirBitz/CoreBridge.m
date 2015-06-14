@@ -1197,30 +1197,6 @@ static BOOL bOtpError = NO;
     return bResult;
 }
 
-+ (NSString *)getPIN
-{
-    tABC_Error error;
-    char *szPIN = NULL;
-    NSString *storedPIN = nil;
-
-    NSString *name = [User Singleton].name;
-    if (name && 0 < name.length)
-    {
-        NSString *pass = [User Singleton].password;
-        const char *password = (nil == pass ? NULL : [pass UTF8String]);
-        const char *username = [name UTF8String];
-        ABC_GetPIN(username,
-                   password,
-                   &szPIN, &error);
-        [Util printABC_Error:&error];
-    }
-    if (szPIN) {
-        storedPIN = [NSString stringWithUTF8String:szPIN];
-    }
-    free(szPIN);
-    return storedPIN;
-}
-
 + (bool)PINLoginExists
 {
     NSString *username = [LocalSettings controller].cachedUsername;

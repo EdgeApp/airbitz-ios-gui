@@ -34,17 +34,6 @@
 + (void)postToTxSearchQueue:(void(^)(void))cb;
 + (int)dataOperationCount;
 
-
-// Old methods. Need to deprecate
-//+ (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs;
-//+ (void)loadWallets:(NSMutableArray *)arrayWallets;
-//+ (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx;
-//+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx;
-//+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets;
-//+ (void)reloadWallet: (Wallet *) wallet;
-// XXX DELETE ABOVE WHEN FULLY CLEANED UP TO USE NEW METHODS -paulvp
-
-
 // New methods
 + (void)refreshWallets;
 + (void)refreshWallet:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb;
@@ -83,7 +72,6 @@
                                     errorMsg:(NSMutableString *)error;
 + (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName status:(tABC_Error *)error;
 + (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet;
-+ (NSString *)getPIN;
 + (bool)PINLoginExists;
 + (bool)PINLoginExists:(NSString *)username;
 + (void)deletePINLogin;
