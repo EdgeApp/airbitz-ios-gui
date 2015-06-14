@@ -539,7 +539,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     self.statusLine1.text = @"";
     self.statusLine2.text = @"";
-    self.statusLine3.text = @"";
 
     switch (self.state) {
         case kRequest:
