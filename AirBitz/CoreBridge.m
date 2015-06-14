@@ -568,36 +568,23 @@ static BOOL bOtpError = NO;
 
 + (int64_t)getTotalSentToday:(Wallet *)wallet
 {
-    tABC_Error Error;
-    unsigned int tCount = 0;
     int64_t total = 0;
-    tABC_TxInfo **aTransactions = NULL;
 
-    NSDate *date = [NSDate date];
-    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
-    NSUInteger preservedComponents = (NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay);
-    NSDate *thisMorning = [calendar dateFromComponents:[calendar components:preservedComponents fromDate:date]];
-    
-    tABC_CC result = ABC_GetTransactions([[User Singleton].name UTF8String],
-                                         [[User Singleton].password UTF8String],
-                                         [wallet.strUUID UTF8String],
-                                         [thisMorning timeIntervalSince1970],
-                                         [thisMorning timeIntervalSince1970] + 1000 * 60 * 60 * 24,
-                                         &aTransactions,
-                                         &tCount, &Error);
-    if (ABC_CC_Ok == result) {
-        for (int j = tCount - 1; j >= 0; --j) {
-            tABC_TxInfo *pTrans = aTransactions[j];
-            // Is this a spend?
-            if (pTrans->pDetails->amountSatoshi < 0) {
-                total += pTrans->pDetails->amountSatoshi * -1;
+    if ([wallet.arrayTransactions count] == 0)
+        return 0;
+
+    for (Transaction *t in wallet.arrayTransactions)
+    {
+        if ([[NSCalendar currentCalendar] isDateInToday:t.date])
+        {
+            if (t.amountSatoshi < 0)
+            {
+                total += t.amountSatoshi * -1;
             }
         }
-    } else {
-        [Util printABC_Error:&Error];
     }
-    ABC_FreeTransactions(aTransactions, tCount);
     return total;
+
 }
 
 + (void) loadTransactions: (Wallet *) wallet
