@@ -1410,29 +1410,23 @@ static BOOL bOtpError = NO;
 + (void)connectWatchers
 {
     if ([User isLoggedIn]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        [CoreBridge loadWalletUUIDs:arrayWallets];
+        for (NSString *uuid in arrayWallets)
         {
-            NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-            [CoreBridge loadWalletUUIDs:arrayWallets];
-            for (NSString *uuid in arrayWallets)
-            {
-                [CoreBridge connectWatcher:uuid];
-            }
-        });
+            [CoreBridge connectWatcher:uuid];
+        }
     }
 }
 
 + (void)connectWatcher:(NSString *)uuid
 {
     if ([User isLoggedIn]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-        {
-            tABC_Error Error;
-            ABC_WatcherConnect([uuid UTF8String], &Error);
+        tABC_Error Error;
+        ABC_WatcherConnect([uuid UTF8String], &Error);
 
-            [Util printABC_Error:&Error];
-            [self watchAddresses:uuid];
-        });
+        [Util printABC_Error:&Error];
+        [self watchAddresses:uuid];
     }
 }
 
