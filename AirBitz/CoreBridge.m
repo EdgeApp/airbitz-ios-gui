@@ -1420,21 +1420,29 @@ static BOOL bOtpError = NO;
 + (void)connectWatchers
 {
     if ([User isLoggedIn]) {
-        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-        [CoreBridge loadWalletUUIDs: arrayWallets];
-        for (NSString *uuid in arrayWallets) {
-            [CoreBridge connectWatcher:uuid];
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+        {
+            NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+            [CoreBridge loadWalletUUIDs:arrayWallets];
+            for (NSString *uuid in arrayWallets)
+            {
+                [CoreBridge connectWatcher:uuid];
+            }
+        });
     }
 }
 
 + (void)connectWatcher:(NSString *)uuid
 {
     if ([User isLoggedIn]) {
-        tABC_Error Error;
-        ABC_WatcherConnect([uuid UTF8String], &Error);
-        [Util printABC_Error:&Error];
-        [self watchAddresses:uuid];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+        {
+            tABC_Error Error;
+            ABC_WatcherConnect([uuid UTF8String], &Error);
+
+            [Util printABC_Error:&Error];
+            [self watchAddresses:uuid];
+        });
     }
 }
 
@@ -1639,12 +1647,10 @@ static BOOL bOtpError = NO;
             [Util printABC_Error: &error];
 
             // Start watcher if the data has not been fetch
-            dispatch_async(dispatch_get_main_queue(),^{
-                if (!bDataFetched) {
-                    [CoreBridge connectWatcher:uuid];
-                    [CoreBridge requestExchangeRateUpdate:nil];
-                }
-            });
+            if (!bDataFetched) {
+                [CoreBridge connectWatcher:uuid];
+                [CoreBridge requestExchangeRateUpdate:nil];
+            }
         }];
     }
     // Mark data as sync'd
