@@ -1595,15 +1595,7 @@ MainViewController *singleton;
 - (void)slideoutLogout
 {
     [slideoutView showSlideout:NO withAnimation:NO];
-    [MainViewController fadingAlert:NSLocalizedString(@"Please wait while Airbitz gracefully exits your account", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-
-    // Log the user out and reset UI
-    [self loadUserViews];
-    [[User Singleton] clear];
-
-    [MainViewController fadingAlertDismiss];
-    [self SettingsViewControllerDone:nil];
-    [self launchViewControllerBasedOnAppMode];
+    [self logout];
 }
 
 - (void)slideoutBuySell
@@ -1627,6 +1619,23 @@ MainViewController *singleton;
             [slideoutView showSlideout:NO];
         }
     }
+}
+
+- (void)logout
+{
+    [FadingAlertView create:self.view
+                    message:NSLocalizedString(@"Please wait while Airbitz gracefully exits your account. This may take a while on slow networks", nil)
+                   holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
+                // Log the user out and reset UI
+                [self loadUserViews];
+                [[User Singleton] clear];
+
+                [self SettingsViewControllerDone:nil];
+                [self launchViewControllerBasedOnAppMode];
+
+                [FadingAlertView dismiss:YES];
+            }];
+
 }
 
 #pragma mark - Slideout Methods

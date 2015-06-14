@@ -1329,12 +1329,26 @@ static BOOL bOtpError = NO;
 
 + (void)logout
 {
-    // XXX: prevents crashing on logout
-    while ([walletsQueue operationCount] > 0) {
-        [NSThread sleepForTimeInterval:.2];
-    }
     [CoreBridge stopWatchers];
     [CoreBridge stopQueues];
+
+    NSUInteger wq, dq, gq, txq;
+
+    // XXX: prevents crashing on logout
+    while (YES)
+    {
+        wq = [walletsQueue operationCount];
+        dq = [dataQueue operationCount];
+        gq = [genQRQueue operationCount];
+        txq = [txSearchQueue operationCount];
+
+        if (0 == (wq + dq + gq + txq))
+            break;
+
+        ABLog(0, @"Waiting for queues to complete wq=%d dq=%d gq=%d txq=%d", wq, dq, gq, txq);
+        [NSThread sleepForTimeInterval:.2];
+    }
+
     [CoreBridge cleanWallets];
 
     tABC_Error Error;
