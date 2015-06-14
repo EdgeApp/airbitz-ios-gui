@@ -557,6 +557,8 @@
                      completion:^(BOOL finished)
      {
          [self.transactionDetailsController.view removeFromSuperview];
+         [self.transactionDetailsController removeFromParentViewController];
+
          self.transactionDetailsController = nil;
      }];
 }

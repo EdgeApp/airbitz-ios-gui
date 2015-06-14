@@ -284,6 +284,39 @@ void abDebugLog(int level, NSString *statement) {
     }];
 }
 
++ (void)animateControllerFadeOut:(UIViewController *)viewController
+{
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [viewController.view setAlpha:1.0];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         [viewController.view setAlpha:0.0];
+                     }
+                     completion:^(BOOL finished) {
+                         [viewController.view removeFromSuperview];
+                         [viewController removeFromParentViewController];
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                     }];
+}
+
++ (void)animateControllerFadeIn:(UIViewController *)viewController
+{
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [viewController.view setAlpha:0.0];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         [viewController.view setAlpha:1.0];
+                     }
+                     completion:^(BOOL finished) {
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                     }];
+}
+
+
 + (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height
 {
 	//converts raw monochrome bitmap data (each byte is a 1 or a 0 representing a pixel) into a UIImage

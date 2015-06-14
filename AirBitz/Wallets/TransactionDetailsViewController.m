@@ -672,8 +672,9 @@ typedef enum eRequestType
 
 - (void)dismissBusinessDetails
 {
-     [businessDetailsController.view removeFromSuperview];
-     businessDetailsController = nil;
+    [businessDetailsController.view removeFromSuperview];
+    [businessDetailsController removeFromParentViewController];
+    businessDetailsController = nil;
 }
 
 #pragma mark BusinessDetailsViewControllerDelegates

@@ -336,6 +336,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (_sendConfirmationViewController)
     {
         [_sendConfirmationViewController.view removeFromSuperview];
+        [_sendConfirmationViewController removeFromParentViewController];
         _sendConfirmationViewController.delegate = nil;
         _sendConfirmationViewController = nil;
     }
@@ -1603,6 +1604,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     self.addressTextField.text = @"";
     //[self startCameraScanner:nil];
 	[_sendConfirmationViewController.view removeFromSuperview];
+    [_sendConfirmationViewController removeFromParentViewController];
 	_sendConfirmationViewController = nil;
 	
     scanMode = SCAN_MODE_UNINITIALIZED;

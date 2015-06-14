@@ -580,7 +580,6 @@ typedef enum eDatePeriod
 - (void)exportWalletOptionsViewControllerDidFinish:(ExportWalletOptionsViewController *)controller
 {
     [MainViewController animateOut:controller withBlur:NO complete:^(void) {
-        [controller.view removeFromSuperview];
         self.exportWalletOptionsViewController = nil;
         [self viewWillAppear:YES];
     }];

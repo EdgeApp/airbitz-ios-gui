@@ -236,6 +236,7 @@ MainViewController *singleton;
     if (slideoutView)
     {
         [slideoutView removeFromSuperview];
+
         slideoutView = nil;
     }
 
@@ -856,6 +857,7 @@ MainViewController *singleton;
 	[MainViewController showTabBarAnimated:YES];
     [MainViewController showNavBarAnimated:YES];
 	[_loginViewController.view removeFromSuperview];
+    [_loginViewController removeFromParentViewController];
 }
 
 - (void)loginViewControllerDidLogin:(BOOL)bNewAccount
@@ -1167,6 +1169,7 @@ MainViewController *singleton;
     [MainViewController animateOut:controller withBlur:NO complete:^
     {
         [_txDetailsController.view removeFromSuperview];
+        [_txDetailsController removeFromParentViewController];
         _txDetailsController = nil;
         [MainViewController showNavBarAnimated:YES];
         [MainViewController showTabBarAnimated:YES];
@@ -1547,6 +1550,7 @@ MainViewController *singleton;
     if (_selectedViewController != nil)
     {
         [_selectedViewController.view removeFromSuperview];
+        [_selectedViewController removeFromParentViewController];
         _selectedViewController = nil;
     }
     [self launchViewControllerBasedOnAppMode];
@@ -1596,6 +1600,8 @@ MainViewController *singleton;
 - (void)slideoutBuySell
 {
     [_selectedViewController.view removeFromSuperview];
+    [_selectedViewController removeFromParentViewController];
+
     _selectedViewController = _buySellViewController;
     [Util insertSubviewControllerWithConstraints:self child:_selectedViewController belowSubView:self.tabBar];
 //    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
@@ -1661,6 +1667,8 @@ MainViewController *singleton;
 -(void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
 {
     [controller.view removeFromSuperview];
+    [controller removeFromParentViewController];
+
     _signUpController = nil;
 }
 
@@ -1836,6 +1844,7 @@ MainViewController *singleton;
                      completion:^(BOOL finished)
                      {
                          [out.view removeFromSuperview];
+                         [out removeFromParentViewController];
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                      }];
     return;
@@ -1908,6 +1917,7 @@ MainViewController *singleton;
                      }
                      completion:^(BOOL finished) {
                          [viewController.view removeFromSuperview];
+                         [viewController removeFromParentViewController];
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                          if(cb != nil)
                              cb();

@@ -815,6 +815,7 @@ typedef enum eExportOption
 - (void)exportWalletPDFViewControllerDidFinish:(ExportWalletPDFViewController *)controller
 {
 	[controller.view removeFromSuperview];
+    [controller removeFromParentViewController];
 	self.exportWalletPDFViewController = nil;
 }
 

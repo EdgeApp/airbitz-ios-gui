@@ -175,6 +175,7 @@
     // An async tx details happened and exited. Drop everything and kill ourselves or we'll
     // corrupt the background. This is needed on every subview of a primary screen
     [self.view removeFromSuperview];
+    [self removeFromParentViewController];
 }
 
 - (void)updateViews:(NSNotification *)notification
@@ -428,41 +429,16 @@
     self.sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
 
 
-
-    CGRect frame = self.view.bounds;
-    //frame.origin.x = frame.size.width;
-    self.sendStatusController.view.frame = frame;
-    [self.view addSubview:self.sendStatusController.view];
-    self.sendStatusController.view.alpha = 0.0;
+    [Util addSubviewControllerWithConstraints:self child:self.sendStatusController];
 
     self.sendStatusController.messageLabel.text = NSLocalizedString(@"Sending...", @"status message");
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-     {
-         self.sendStatusController.view.alpha = 1.0;
-     }
-     completion:^(BOOL finished)
-     {
-     }];
+    [Util animateControllerFadeIn:self.sendStatusController];
 }
 
 - (void)hideSendStatus
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-    {
-        self.sendStatusController.view.alpha = 0.0;
-    }
-    completion:^(BOOL finished)
-    {
-        [self.sendStatusController.view removeFromSuperview];
-        self.sendStatusController = nil;
-    }];
+    [Util animateControllerFadeOut:self.sendStatusController];
 }
 
 - (void)initiateSendRequest
@@ -972,9 +948,11 @@
 - (void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
 {
     [controller.view removeFromSuperview];
+    [controller removeFromParentViewController];
     self.transactionDetailsController = nil;
 
     [self.sendStatusController.view removeFromSuperview];
+    [self.sendStatusController removeFromParentViewController];
     self.sendStatusController = nil;
 
     [self.delegate sendConfirmationViewControllerDidFinish:self];

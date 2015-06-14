@@ -610,31 +610,37 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     if (_signUpController)
     {
         [_signUpController.view removeFromSuperview];
+        [_signUpController removeFromParentViewController];
         _signUpController = nil;
     }
     if (_passwordRecoveryController)
     {
         [_passwordRecoveryController.view removeFromSuperview];
+        [_passwordRecoveryController removeFromParentViewController];
         _passwordRecoveryController = nil;
     }
     if (_categoriesController)
     {
         [_categoriesController.view removeFromSuperview];
+        [_categoriesController removeFromParentViewController];
         _categoriesController = nil;
     }
     if (_spendLimitsController)
     {
         [_spendLimitsController.view removeFromSuperview];
+        [_spendLimitsController removeFromParentViewController];
         _spendLimitsController = nil;
     }
     if (_tfaViewController)
     {
         [_tfaViewController.view removeFromSuperview];
+        [_tfaViewController removeFromParentViewController];
         _tfaViewController = nil;
     }
     if (_debugViewController)
     {
         [_debugViewController.view removeFromSuperview];
+        [_debugViewController removeFromParentViewController];
         _debugViewController = nil;
     }
     

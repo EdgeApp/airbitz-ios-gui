@@ -142,6 +142,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
     // An async tx details happened and exited. Drop everything and kill ourselves or we'll
     // corrupt the background. This is needed on every subview of a primary screen
     [self.view removeFromSuperview];
+    [self removeFromParentViewController];
 }
 
 
@@ -947,7 +948,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 {
     [MainViewController lockSidebar:NO];
     [MainViewController animateOut:galleryController withBlur:NO complete:^(void) {
-        [galleryController.view removeFromSuperview];
         galleryController = nil;
         [MainViewController showNavBarAnimated:YES];
         [MainViewController showTabBarAnimated:YES];

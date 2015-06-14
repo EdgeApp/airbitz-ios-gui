@@ -349,11 +349,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if (_importWalletViewController)
     {
         [_importWalletViewController.view removeFromSuperview];
+        [_importWalletViewController removeFromParentViewController];
         _importWalletViewController = nil;
     }
     if (_recipientViewController)
     {
         [_recipientViewController.view removeFromSuperview];
+        [_recipientViewController removeFromParentViewController];
         _recipientViewController = nil;
     }
 
@@ -1127,6 +1129,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (void)importWalletViewControllerDidFinish:(ImportWalletViewController *)controller
 {
 	[controller.view removeFromSuperview];
+    [controller removeFromParentViewController];
 	_importWalletViewController = nil;
 
     [self setFirstResponder];

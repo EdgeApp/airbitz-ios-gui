@@ -94,10 +94,15 @@
     else if (_current == _signupWriteItController)
     {
         [_signupUsernameController.view removeFromSuperview];
+        [_signupUsernameController removeFromParentViewController];
         [_signupPasswordController.view removeFromSuperview];
+        [_signupPasswordController removeFromParentViewController];
         [_signupHandleController.view removeFromSuperview];
+        [_signupHandleController removeFromParentViewController];
         [_signupCameraController.view removeFromSuperview];
+        [_signupCameraController removeFromParentViewController];
         [_signupContactController.view removeFromSuperview];
+        [_signupContactController removeFromParentViewController];
         [MainViewController animateOut:_signupWriteItController withBlur:NO complete:^(void) {
             _signupUsernameController = nil;
             _current = nil;

@@ -1385,7 +1385,6 @@ static bool bInitialized = false;
 {
     [MainViewController animateOut:businessDetailsController withBlur:NO complete:^(void)
     {
-        [businessDetailsController.view removeFromSuperview];
         businessDetailsController = nil;
         [self setupNavBar];
     }];
@@ -1410,7 +1409,6 @@ static bool bInitialized = false;
 {
     [MainViewController animateOut:moreCategoriesController withBlur:NO complete:^(void)
     {
-        [moreCategoriesController.view removeFromSuperview];
         moreCategoriesController = nil;
     }];
 }
@@ -2395,20 +2393,11 @@ static bool bInitialized = false;
 
     if (returned)
     {
-        /*if((CACurrentMediaTime() - tapTimer) < TAP_TIME_THRESHOLD)
-        {
-            //cw here:  probably handle the animation onscreen from within CommonOverviewCell
-            [self animateBusinessDetailsOnScreen];
-        }
-        else*/
-        {
-            [businessDetailsController.view removeFromSuperview];
-            businessDetailsController = nil;
-            [self setupNavBar];
-        }
+        [businessDetailsController.view removeFromSuperview];
+        [businessDetailsController removeFromParentViewController];
+        businessDetailsController = nil;
+        [self setupNavBar];
     }
-    //self.tableView.canCancelContentTouches = YES;
-    //self.tableView.delaysContentTouches = YES;
 }
 
 - (void)OverviewCellDraggedWithOffset: (float)xOffset
@@ -2424,6 +2413,7 @@ static bool bInitialized = false;
 {
     //ABLog(2,@"Removing business details controller");
     [businessDetailsController.view removeFromSuperview];
+    [businessDetailsController removeFromParentViewController];
     businessDetailsController = nil;
     [self setupNavBar];
 }
