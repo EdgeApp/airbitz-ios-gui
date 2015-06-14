@@ -1082,6 +1082,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
+    self.amountSatoshiReceived = 0;
 	[self updateTextFieldContents:YES];
 }
 
