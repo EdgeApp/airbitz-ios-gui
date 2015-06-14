@@ -666,7 +666,7 @@ typedef enum eRequestType
     businessDetailsController.latLong = location;
     businessDetailsController.delegate = self;
 
-    [Util addSubviewControllerWithConstraints:self.view child:businessDetailsController];
+    [Util addSubviewControllerWithConstraints:self child:businessDetailsController];
     [MainViewController animateSlideIn:businessDetailsController];
 }
 

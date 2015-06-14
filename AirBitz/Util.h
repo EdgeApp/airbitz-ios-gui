@@ -13,7 +13,7 @@
 
 @import Foundation.NSString;
 
-#define DEBUG_LEVEL 0
+#define DEBUG_LEVEL 2
 
 #define ABLog(level, format_string,...) \
     ((abDebugLog(level, [NSString stringWithFormat:format_string,##__VA_ARGS__])))
@@ -59,12 +59,12 @@ void abDebugLog(int level, NSString *statement);
 + (NSString *)urlencode:(NSString *)url;
 + (NSMutableDictionary *)getUrlParameters:(NSURL *)url;
 + (BOOL)isValidCategory:(NSString *)category;
-+ (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView belowSubView:(UIView *)belowView;
-+ (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView aboveSubView:(UIView *)aboveView;
++ (NSArray *)insertSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController belowSubView:(UIView *)belowView;
++ (NSArray *)insertSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController aboveSubView:(UIView *)aboveView;
++ (NSArray *)addSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController;
 + (NSArray *)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView;
-+ (NSArray *)insertSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController belowSubView:(UIView *)belowView;
-+ (NSArray *)insertSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController aboveSubView:(UIView *)aboveView;
-+ (NSArray *)addSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController;
+
+
 
 @end
 

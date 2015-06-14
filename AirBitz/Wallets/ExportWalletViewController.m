@@ -491,7 +491,7 @@ typedef enum eDatePeriod
 //    self.exportWalletOptionsViewController.fromDateTime = self.fromDateTime;
 //    self.exportWalletOptionsViewController.toDateTime = self.toDateTime;
 
-    [Util addSubviewControllerWithConstraints:self.view child:self.exportWalletOptionsViewController];
+    [Util addSubviewControllerWithConstraints:self child:self.exportWalletOptionsViewController];
     [MainViewController animateSlideIn:self.exportWalletOptionsViewController];
 }
 

@@ -462,17 +462,13 @@ MainViewController *singleton;
         [MainViewController animateFadeOut:_selectedViewController.view remove:YES];
         _selectedViewController = _directoryViewController;
 
-        NSArray *constraints = [Util insertSubviewWithConstraints:self.view child:_selectedViewController.view belowSubView:self.tabBar];
-
-        _selectedViewController.leftConstraint = [constraints objectAtIndex:0];
+        [Util insertSubviewControllerWithConstraints:self child:_selectedViewController belowSubView:self.tabBar];
     }
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [_selectedViewController.view setAlpha:1.0];
     [_selectedViewController.view setOpaque:NO];
-    NSArray *constraints = [Util insertSubviewWithConstraints:self.view child:_loginViewController.view belowSubView:singleton.tabBar];
-    _loginViewController.leftConstraint = constraints[0];
-    _loginViewController.leftConstraint.constant = 0;
+    [Util insertSubviewControllerWithConstraints:self child:_loginViewController belowSubView:singleton.tabBar];
     [_loginViewController.view setAlpha:0.0];
     [self.view layoutIfNeeded];
 
@@ -962,8 +958,7 @@ MainViewController *singleton;
     _signUpController.mode = SignUpMode_ChangePasswordNoVerify;
     _signUpController.delegate = self;
 
-    NSArray *constraints = [Util addSubviewWithConstraints:self.view child:_signUpController.view];
-    _signUpController.leftConstraint = [constraints objectAtIndex:0];
+    [Util addSubviewControllerWithConstraints:self child:_signUpController];
     _signUpController.leftConstraint.constant = _signUpController.view.frame.size.width;
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
@@ -1162,7 +1157,7 @@ MainViewController *singleton;
     _txDetailsController.bOldTransaction = NO;
     _txDetailsController.transactionDetailsMode = TD_MODE_RECEIVED;
 
-    [Util addSubviewControllerWithConstraints:singleton.view child:_txDetailsController];
+    [Util addSubviewControllerWithConstraints:self child:_txDetailsController];
     [MainViewController animateSlideIn:_txDetailsController];
 }
 
@@ -1602,7 +1597,7 @@ MainViewController *singleton;
 {
     [_selectedViewController.view removeFromSuperview];
     _selectedViewController = _buySellViewController;
-    [Util insertSubviewControllerWithConstraints:self.view child:_selectedViewController belowSubView:self.tabBar];
+    [Util insertSubviewControllerWithConstraints:self child:_selectedViewController belowSubView:self.tabBar];
 //    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     [slideoutView showSlideout:NO];
@@ -1814,9 +1809,9 @@ MainViewController *singleton;
                      }];
 }
 
-+ (NSArray *)animateSwapViewControllers:(AirbitzViewController *)in out:(AirbitzViewController *)out
++ (void)animateSwapViewControllers:(AirbitzViewController *)in out:(AirbitzViewController *)out
 {
-    NSArray *constraints = [Util insertSubviewControllerWithConstraints:singleton.view child:in belowSubView:singleton.tabBar];
+    [Util insertSubviewControllerWithConstraints:singleton child:in belowSubView:singleton.tabBar];
 
     singleton.selectedViewController = in;
 
@@ -1843,7 +1838,7 @@ MainViewController *singleton;
                          [out.view removeFromSuperview];
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                      }];
-    return constraints;
+    return;
 }
 
 + (void)animateView:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur
@@ -1855,7 +1850,7 @@ MainViewController *singleton;
 {
 
 
-    [Util insertSubviewControllerWithConstraints:singleton.view child:viewController belowSubView:singleton.tabBar];
+    [Util insertSubviewControllerWithConstraints:singleton child:viewController belowSubView:singleton.tabBar];
 
     viewController.leftConstraint.constant = viewController.view.frame.size.width;
     [singleton.view layoutIfNeeded];

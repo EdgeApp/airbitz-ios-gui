@@ -1679,7 +1679,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.recipientViewController.delegate = self;
     self.recipientViewController.mode = mode;
 
-    [Util addSubviewControllerWithConstraints:self.view child:self.recipientViewController];
+    [Util addSubviewControllerWithConstraints:self child:self.recipientViewController];
     [MainViewController animateSlideIn:self.recipientViewController];
 }
 

@@ -1367,7 +1367,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     [_readerView stop];
 
-    [Util addSubviewWithConstraints:self.view child:_sendConfirmationViewController.view];
+    [Util addSubviewControllerWithConstraints:self child:_sendConfirmationViewController];
 	
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[UIView animateWithDuration:0.35

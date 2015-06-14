@@ -398,7 +398,7 @@
     self.exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
     self.exportWalletViewController.delegate = self;
 
-    [Util addSubviewControllerWithConstraints:self.view child:self.exportWalletViewController];
+    [Util addSubviewControllerWithConstraints:self child:self.exportWalletViewController];
     [MainViewController animateSlideIn:self.exportWalletViewController];
 }
 
@@ -540,7 +540,7 @@
     self.transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
     self.transactionDetailsController.photo = [self imageForTransaction:transaction];
 
-    [Util addSubviewControllerWithConstraints:self.view child:self.transactionDetailsController];
+    [Util addSubviewControllerWithConstraints:self child:self.transactionDetailsController];
     [MainViewController animateSlideIn:self.transactionDetailsController];
 }
 

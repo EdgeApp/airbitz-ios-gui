@@ -380,7 +380,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _signUpController.mode = mode;
     _signUpController.delegate = self;
 
-    [Util addSubviewControllerWithConstraints:self.view child:_signUpController];
+    [Util addSubviewControllerWithConstraints:self child:_signUpController];
     [MainViewController animateSlideIn:_signUpController];
 }
 
@@ -392,7 +392,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	_passwordRecoveryController.delegate = self;
 	_passwordRecoveryController.mode = PassRecovMode_Change;
 
-    [Util addSubviewControllerWithConstraints:self.view child:_passwordRecoveryController];
+    [Util addSubviewControllerWithConstraints:self child:_passwordRecoveryController];
     [MainViewController animateSlideIn:_passwordRecoveryController];
 
 }
@@ -405,7 +405,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
         _categoriesController.delegate = self;
 
-        [Util addSubviewControllerWithConstraints:self.view child:_categoriesController];
+        [Util addSubviewControllerWithConstraints:self child:_categoriesController];
         [MainViewController animateSlideIn:_categoriesController];
 
     }
@@ -418,7 +418,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         _spendLimitsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SpendingLimitsViewController"];
         _spendLimitsController.delegate = self;
 
-        [Util addSubviewControllerWithConstraints:self.view child:_spendLimitsController];
+        [Util addSubviewControllerWithConstraints:self child:_spendLimitsController];
 
         [MainViewController animateSlideIn:_spendLimitsController];
     }
@@ -430,7 +430,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _tfaViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"TwoFactorShowViewController"];
     _tfaViewController.delegate = self;
 
-    [Util addSubviewControllerWithConstraints:self.view child:_tfaViewController];
+    [Util addSubviewControllerWithConstraints:self child:_tfaViewController];
     [MainViewController animateSlideIn:_tfaViewController];
 
 }
@@ -441,7 +441,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _debugViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"DebugViewController"];
     _debugViewController.delegate = self;
 
-    [Util addSubviewControllerWithConstraints:self.view child:_debugViewController];
+    [Util addSubviewControllerWithConstraints:self child:_debugViewController];
     [MainViewController animateSlideIn:_debugViewController];
 }
 

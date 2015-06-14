@@ -368,7 +368,7 @@
     _tfaMenuViewController.username = [User Singleton].name;
     _tfaMenuViewController.bStoreSecret = YES;
 
-    [Util addSubviewControllerWithConstraints:self.view child:_tfaMenuViewController];
+    [Util addSubviewControllerWithConstraints:self child:_tfaMenuViewController];
     [MainViewController animateSlideIn:_tfaMenuViewController];
 
     [self initUI];

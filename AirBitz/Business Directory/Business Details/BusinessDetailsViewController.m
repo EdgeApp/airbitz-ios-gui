@@ -980,7 +980,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
         [MainViewController hideTabBarAnimated:YES];
         [MainViewController lockSidebar:YES];
 
-        [Util addSubviewControllerWithConstraints:self.view child:galleryController];
+        [Util addSubviewControllerWithConstraints:self child:galleryController];
         [MainViewController animateSlideIn:galleryController];
     }
 }
