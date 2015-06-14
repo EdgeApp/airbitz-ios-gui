@@ -165,7 +165,8 @@ static UIView *alert;
                      completion:^(BOOL finished) {
                          if (FADING_ALERT_HOLD_TIME_FOREVER < holdTime)
                              singleton.dismissTimer = [NSTimer scheduledTimerWithTimeInterval:holdTime target:singleton selector:@selector(dismiss) userInfo:nil repeats:NO];
-                         cb();
+                         if (cb)
+                             cb();
                      }];
     return;
 }
