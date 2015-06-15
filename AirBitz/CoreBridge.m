@@ -400,6 +400,11 @@ static BOOL bOtpError = NO;
 
 + (void)refreshWallets
 {
+    [CoreBridge refreshWallets:nil];
+}
+
++ (void)refreshWallets:(void(^)(void))cb
+{
     dispatch_async(dispatch_get_main_queue(),^{
         if ([CoreBridge Singleton].arrayWallets.count == 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADING object:self];
@@ -455,6 +460,8 @@ static BOOL bOtpError = NO;
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED
                                                                 object:self userInfo:nil];
             ABLog(2,@"EXIT refreshWallets MainQueue: %@", [NSThread currentThread].name);
+
+            if (cb) cb();
 
         });
         ABLog(2,@"EXIT refreshWallets WalletQueue: %@", [NSThread currentThread].name);
@@ -519,25 +526,36 @@ static BOOL bOtpError = NO;
 
 + (Wallet *)getWallet: (NSString *)walletUUID
 {
-    tABC_Error Error;
-    Wallet *wallet = nil;
-    tABC_WalletInfo *pWalletInfo = NULL;
-    tABC_CC result = ABC_GetWalletInfo([[User Singleton].name UTF8String],
-                                       [[User Singleton].password UTF8String],
-                                       [walletUUID UTF8String],
-                                       &pWalletInfo, &Error);
-    if (ABC_CC_Ok == result && pWalletInfo != NULL)
+//    tABC_Error Error;
+//    Wallet *wallet = nil;
+//    tABC_WalletInfo *pWalletInfo = NULL;
+//    tABC_CC result = ABC_GetWalletInfo([[User Singleton].name UTF8String],
+//                                       [[User Singleton].password UTF8String],
+//                                       [walletUUID UTF8String],
+//                                       &pWalletInfo, &Error);
+//    if (ABC_CC_Ok == result && pWalletInfo != NULL)
+//    {
+//        wallet = [[Wallet alloc] init];
+//        [CoreBridge setWallet:wallet withInfo:pWalletInfo];
+//    }
+//    else
+//    {
+//        ABLog(2,@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
+//        [Util printABC_Error:&Error];
+//    }
+//    ABC_FreeWalletInfo(pWalletInfo);
+
+    for (Wallet *w in singleton.arrayWallets)
     {
-        wallet = [[Wallet alloc] init];
-        [CoreBridge setWallet:wallet withInfo:pWalletInfo];
+        if ([w.strUUID isEqualToString:walletUUID])
+            return w;
     }
-    else
+    for (Wallet *w in singleton.arrayArchivedWallets)
     {
-        ABLog(2,@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
+        if ([w.strUUID isEqualToString:walletUUID])
+            return w;
     }
-    ABC_FreeWalletInfo(pWalletInfo);
-    return wallet;
+    return nil;
 }
 
 + (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
@@ -2007,9 +2025,10 @@ static BOOL bOtpError = NO;
 {
     if ([params count] > 0)
     {
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_RECEIVED object:self userInfo:params[0]];
-        [CoreBridge refreshWallets];
+        [CoreBridge refreshWallets:^
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_RECEIVED object:self userInfo:params[0]];
+        }];
     }
 
 }
@@ -2026,11 +2045,18 @@ static BOOL bOtpError = NO;
 
 - (void)notifyDataSync:(NSArray *)params
 {
-    // if there are new wallets, we need to start their watchers
-    [CoreBridge startWatchers];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:self];
-    [CoreBridge refreshWallets];
+    int numWallets = [singleton.arrayWallets count] + [singleton.arrayArchivedWallets count];
 
+    [CoreBridge refreshWallets:^
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:self];
+
+        // if there are new wallets, we need to start their watchers
+        if ([singleton.arrayWallets count] + [singleton.arrayArchivedWallets count] != numWallets)
+        {
+            [CoreBridge startWatchers];
+        }
+    }];
 }
 
 - (void)notifyDataSyncDelayed:(NSArray *)params
