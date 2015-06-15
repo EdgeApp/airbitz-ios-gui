@@ -176,6 +176,8 @@ static BOOL bOtpError = NO;
     }
     if (txSearchQueue)
         [txSearchQueue cancelAllOperations];
+    if (exchangeQueue)
+        [exchangeQueue cancelAllOperations];
 
 }
 
@@ -206,6 +208,7 @@ static BOOL bOtpError = NO;
     total += exchangeQueue == nil ? 0 : [exchangeQueue operationCount];
     total += walletsQueue == nil  ? 0 : [walletsQueue operationCount];
     total += genQRQueue == nil  ? 0 : [genQRQueue operationCount];
+    total += txSearchQueue == nil  ? 0 : [txSearchQueue operationCount];
     return total;
 }
 
@@ -1331,7 +1334,7 @@ static BOOL bOtpError = NO;
 {
     [CoreBridge stopQueues];
 
-    NSUInteger wq, dq, gq, txq;
+    NSUInteger wq, dq, gq, txq, eq;
 
     // XXX: prevents crashing on logout
     while (YES)
@@ -1340,8 +1343,9 @@ static BOOL bOtpError = NO;
         dq = [dataQueue operationCount];
         gq = [genQRQueue operationCount];
         txq = [txSearchQueue operationCount];
+        eq = [exchangeQueue operationCount];
 
-        if (0 == (wq + dq + gq + txq))
+        if (0 == (wq + dq + gq + txq + eq))
             break;
 
         ABLog(0, @"Waiting for queues to complete wq=%d dq=%d gq=%d txq=%d", wq, dq, gq, txq);
