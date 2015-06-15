@@ -1759,6 +1759,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
 
         SpendTarget *spendTarget = [[SpendTarget alloc] init];
+        spendTarget.destWallet = wallet;
         [spendTarget newTransfer:wallet.strUUID error:&error];
         [self stopQRReader];
         [self showSendConfirmationTo:spendTarget];

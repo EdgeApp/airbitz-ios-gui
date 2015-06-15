@@ -132,6 +132,7 @@
     _bAddressIsWalletUUID = NO;
     if ([[NSString safeStringWithUTF8String:_spendTarget.pSpend->szDestUUID] length]) {
         _bAddressIsWalletUUID = YES;
+        NSAssert((_spendTarget.destWallet != nil), @"Empty destWallet");
         _destUUID = [NSString safeStringWithUTF8String:_spendTarget.pSpend->szDestUUID];
         NSMutableArray *newArr = [[NSMutableArray alloc] init];
         for (Wallet *w in [CoreBridge Singleton].arrayWallets) {
@@ -448,49 +449,19 @@
         [self performSelectorOnMainThread:@selector(showSendStatus:) withObject:nil waitUntilDone:FALSE];
         _callbackTimestamp = [[NSDate date] timeIntervalSince1970];
 
+        _spendTarget.srcWallet = [CoreBridge Singleton].currentWallet;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             tABC_Error error;
-            NSString *txId = [_spendTarget approve:[CoreBridge Singleton].currentWallet.strUUID
-                                              fiat:_overrideCurrency
+            NSString *txId = [_spendTarget approve:_overrideCurrency
                                              error:&error];
             if (error.code == ABC_CC_Ok) {
-                [self txSendSuccess:[CoreBridge Singleton].currentWallet.strUUID withTx:txId];
+                [self txSendSuccess:_spendTarget.srcWallet withTx:txId];
             } else {
                 [self txSendFailed:error];
             }
         });
     }
 }
-
-//- (void)setWalletFromIndex:(int)walletIdx
-//{
-//    _selectedWalletIndex = walletIdx;
-//    if ([CoreBridge Singleton].arrayWallets && walletIdx < [[CoreBridge Singleton].arrayWallets count]) {
-//        self.wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:_selectedWalletIndex];
-//    }
-//}
-//
-//- (void)setWalletLabel
-//{
-//    if (self.wallet && [CoreBridge Singleton].arrayWallets) {
-//        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[[CoreBridge Singleton].arrayWallets count]];
-//        _selectedWalletIndex = 0;
-//        for (int i = 0; i < [[CoreBridge Singleton].arrayWallets count]; i++) {
-//            Wallet *w = [[CoreBridge Singleton].arrayWallets objectAtIndex:i];
-//            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", w.strName, [CoreBridge formatSatoshi:w.balance]]];
-//
-//            if ([self.wallet.strUUID isEqualToString:w.strUUID]) {
-//                _selectedWalletIndex = i;
-//            }
-//        }
-//        self.walletSelector.arrayItemsToSelect = [arrayWalletNames copy];
-//        [self.walletSelector.button setTitle:[NSString stringWithFormat:@"%@ (%@)", self.wallet.strName, [CoreBridge formatSatoshi:self.wallet.balance]]
-//            forState:UIControlStateNormal];
-//        self.walletSelector.selectedItemIndex = (int) _selectedWalletIndex;
-//        [MainViewController changeNavBarTitleWithButton:self title:self.wallet.strName action:@selector(didTapTitle:) fromObject:self];
-//
-//    }
-//}
 
 - (void)didTapTitle: (UIButton *)sender
 {
@@ -566,10 +537,9 @@
         ABLog(2,@"Not enought args\n");
         return;
     }
-    NSString *walletUUID = params[0];
+    Wallet *wallet = params[0];
     NSString *txId = params[1];
-    Wallet *wallet = [CoreBridge getWallet:walletUUID];
-    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    Transaction *transaction = [CoreBridge getTransaction:wallet.strUUID withTx:txId];
     [self launchTransactionDetailsWithTransaction:wallet withTx:transaction];
 }
 
@@ -960,9 +930,9 @@
 
 #pragma mark - ABC Callbacks
 
-- (void)txSendSuccess:(NSString *)walletUUID withTx:(NSString *)txId
+- (void)txSendSuccess:(Wallet *)wallet withTx:(NSString *)txId
 {
-    NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
+    NSArray *params = [NSArray arrayWithObjects: wallet, txId, nil];
     [[AudioController controller] playSent];
 
     int maxDelay = 3;
