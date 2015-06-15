@@ -1564,14 +1564,21 @@ static BOOL bOtpError = NO;
 
 + (void)requestExchangeRateUpdate:(NSTimer *)object
 {
+    dispatch_async(dispatch_get_main_queue(),^
+    {
+        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
 
-    [exchangeQueue addOperationWithBlock:^{
-        [[NSThread currentThread] setName:@"Exchange Rate Update"];
-        [CoreBridge requestExchangeUpdateBlocking];
-    }];
+        arrayWallets = singleton.arrayWallets;
+        [arrayWallets addObjectsFromArray:singleton.arrayArchivedWallets];
+
+        [exchangeQueue addOperationWithBlock:^{
+            [[NSThread currentThread] setName:@"Exchange Rate Update"];
+            [CoreBridge requestExchangeUpdateBlocking:arrayWallets];
+        }];
+    });
 }
 
-+ (void)requestExchangeUpdateBlocking
++ (void)requestExchangeUpdateBlocking:(NSMutableArray *)wallets
 {
     if ([User isLoggedIn])
     {
@@ -1581,9 +1588,6 @@ static BOOL bOtpError = NO;
                                       [[User Singleton].password UTF8String],
                                       [User Singleton].defaultCurrencyNum, &error);
         [Util printABC_Error: &error];
-
-        NSMutableArray *wallets = [[NSMutableArray alloc] init];
-        [CoreBridge loadWallets:wallets withTxs:NO];
 
         // Check each wallet is up to date
         for (Wallet *w in wallets)
