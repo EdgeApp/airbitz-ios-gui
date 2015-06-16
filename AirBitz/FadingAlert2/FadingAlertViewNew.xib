@@ -40,6 +40,7 @@
                         </label>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Joy-6Y-Kdk" userLabel="Spinner">
                             <rect key="frame" x="107" y="193" width="37" height="37"/>
+                            <color key="color" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </activityIndicatorView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOK-yM-OiA" userLabel="View -multiline">
                             <rect key="frame" x="16" y="16" width="218" height="218"/>
