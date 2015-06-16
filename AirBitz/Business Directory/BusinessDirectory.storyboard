@@ -930,15 +930,15 @@
         <image name="btn_blue.png" width="110" height="27"/>
         <image name="btn_locateMe.png" width="39" height="39"/>
         <image name="btn_right.png" width="22" height="22"/>
-        <image name="darken_bottom_table_cell.png" width="160" height="56"/>
+        <image name="darken_bottom_table_cell.png" width="5" height="111"/>
         <image name="divider.png" width="320" height="27"/>
         <image name="drag_bar.png" width="1600" height="33"/>
-        <image name="icon_category_atm.png" width="30" height="30"/>
-        <image name="icon_category_coffee_tea.png" width="30" height="30"/>
-        <image name="icon_category_electronics.png" width="30" height="30"/>
-        <image name="icon_category_gift_cards.png" width="30" height="30"/>
-        <image name="icon_category_restaurants.png" width="30" height="30"/>
-        <image name="icon_category_shopping.png" width="30" height="30"/>
+        <image name="icon_category_atm.png" width="36" height="36"/>
+        <image name="icon_category_coffee_tea.png" width="36" height="36"/>
+        <image name="icon_category_electronics.png" width="36" height="36"/>
+        <image name="icon_category_gift_cards.png" width="36" height="36"/>
+        <image name="icon_category_restaurants.png" width="36" height="36"/>
+        <image name="icon_category_shopping.png" width="36" height="36"/>
         <image name="logo.png" width="70" height="36"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

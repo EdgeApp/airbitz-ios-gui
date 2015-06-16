@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
@@ -80,7 +79,7 @@
                         <constraint firstAttribute="height" constant="37" id="M6o-Iz-sUd"/>
                         <constraint firstAttribute="width" constant="37" id="yzO-RC-2Yc"/>
                     </constraints>
-                    <state key="normal" image="btn_export.png">
+                    <state key="normal" image="btn_export_white.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -121,8 +120,8 @@
     </objects>
     <resources>
         <image name="btn_add.png" width="36" height="36"/>
-        <image name="btn_collapse_expand.png" width="22" height="22"/>
-        <image name="btn_export.png" width="36" height="36"/>
+        <image name="btn_collapse_expand.png" width="36" height="36"/>
+        <image name="btn_export_white.png" width="36" height="36"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
