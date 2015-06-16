@@ -880,10 +880,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         self.requestID = [NSString stringWithUTF8String:szRequestID];
 
-        Wallet *wallet = [self getCurrentWallet];
         tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
                                            [[User Singleton].password UTF8String],
-                                           [wallet.strUUID UTF8String],
+                                           [strUUID UTF8String],
                                                    szRequestID,
                                                    &pszURI,
                                                    &pData,
