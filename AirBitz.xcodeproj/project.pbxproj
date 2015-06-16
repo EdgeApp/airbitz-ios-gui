@@ -810,6 +810,9 @@
 		DA5A95C01B301CAE00CFA7C1 /* icon_settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95B91B301CAE00CFA7C1 /* icon_settings@3x.png */; };
 		DA5A95C11B301CAE00CFA7C1 /* icon_settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95B91B301CAE00CFA7C1 /* icon_settings@3x.png */; };
 		DA5A95C21B301CAE00CFA7C1 /* icon_settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95B91B301CAE00CFA7C1 /* icon_settings@3x.png */; };
+		DA5A95C41B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95C31B3020B000CFA7C1 /* ico_nav_directory_dark.png */; };
+		DA5A95C51B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95C31B3020B000CFA7C1 /* ico_nav_directory_dark.png */; };
+		DA5A95C61B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95C31B3020B000CFA7C1 /* ico_nav_directory_dark.png */; };
 		DA6645251B07175A00B04C5B /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6645241B07175A00B04C5B /* BlurView.m */; };
 		DA6645261B07277E00B04C5B /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6645241B07175A00B04C5B /* BlurView.m */; };
 		DA6645271B07277F00B04C5B /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6645241B07175A00B04C5B /* BlurView.m */; };
@@ -1704,6 +1707,7 @@
 		DA5A95B71B301CAE00CFA7C1 /* icon_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_settings.png; path = Resources/Artwork/icon_settings.png; sourceTree = "<group>"; };
 		DA5A95B81B301CAE00CFA7C1 /* icon_settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_settings@2x.png"; path = "Resources/Artwork/icon_settings@2x.png"; sourceTree = "<group>"; };
 		DA5A95B91B301CAE00CFA7C1 /* icon_settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_settings@3x.png"; path = "Resources/Artwork/icon_settings@3x.png"; sourceTree = "<group>"; };
+		DA5A95C31B3020B000CFA7C1 /* ico_nav_directory_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ico_nav_directory_dark.png; path = Resources/Artwork/ico_nav_directory_dark.png; sourceTree = "<group>"; };
 		DA66451F1B07174A00B04C5B /* BlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurView.h; sourceTree = "<group>"; };
 		DA6645241B07175A00B04C5B /* BlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurView.m; sourceTree = "<group>"; };
 		DA66454A1B0B37F000B04C5B /* AirbitzViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirbitzViewController.h; sourceTree = "<group>"; };
@@ -2534,6 +2538,7 @@
 				DA06FAFF1B0CC107000BCA46 /* gift_box@3x.png */,
 				DA06F6E51B0BDD78000BCA46 /* Green-check@2x.png */,
 				DA06F6E71B0BDD78000BCA46 /* h_seperator@2x.png */,
+				DA5A95C31B3020B000CFA7C1 /* ico_nav_directory_dark.png */,
 				DAA8E9EF1B1EDCB400BC870C /* ico_nav_directory_dark@2x.png */,
 				DAA8E9F01B1EDCB400BC870C /* ico_nav_directory_dark@3x.png */,
 				DA06F6E91B0BDD78000BCA46 /* ico_nav_directory_white@2x.png */,
@@ -3161,6 +3166,7 @@
 				DAA8E9D31B1ED50B00BC870C /* icon_category_gift_cards@2x.png in Resources */,
 				DA06F7AD1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06FB041B0CC107000BCA46 /* gift_box@2x.png in Resources */,
+				DA5A95C51B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */,
 				DA06FB3A1B0FEF32000BCA46 /* PopupPickerView2.xib in Resources */,
 				DA06F9A21B0BDD79000BCA46 /* h_seperator@2x.png in Resources */,
 				DAA8E9C11B1ED50B00BC870C /* icon_category_coffee_tea@2x.png in Resources */,
@@ -3378,6 +3384,7 @@
 				DA06F9B91B0BDD79000BCA46 /* icon_bitcoin_dark@2x.png in Resources */,
 				DA06F9AD1B0BDD79000BCA46 /* icon_approved.png in Resources */,
 				DAA8E9D21B1ED50B00BC870C /* icon_category_gift_cards@2x.png in Resources */,
+				DA5A95C41B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */,
 				DA06F7AC1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06FB031B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA06FB341B0FEF0F000BCA46 /* PopupPickerView2.xib in Resources */,
@@ -3595,6 +3602,7 @@
 				DA06F9BB1B0BDD79000BCA46 /* icon_bitcoin_dark@2x.png in Resources */,
 				DA06F9AF1B0BDD79000BCA46 /* icon_approved.png in Resources */,
 				DAA8E9D41B1ED50B00BC870C /* icon_category_gift_cards@2x.png in Resources */,
+				DA5A95C61B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */,
 				DA06F7AE1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06FB051B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA06FB3B1B0FEF33000BCA46 /* PopupPickerView2.xib in Resources */,
