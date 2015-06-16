@@ -1362,8 +1362,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         // update the display by reloading the table
         [self.tableView reloadData];
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-        {
+        [CoreBridge postToMiscQueue:^{
+
             if (theSwitch.on)
             {
                 [CoreBridge setupLoginPIN];
@@ -1372,7 +1372,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             {
                 [CoreBridge deletePINLogin];
             }
-        });
+        }];
     }
 }
 

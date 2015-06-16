@@ -32,6 +32,7 @@
 + (void)postToWalletsQueue:(void(^)(void))cb;
 + (void)postToGenQRQueue:(void(^)(void))cb;
 + (void)postToTxSearchQueue:(void(^)(void))cb;
++ (void)postToMiscQueue:(void(^)(void))cb;
 + (int)dataOperationCount;
 
 // New methods

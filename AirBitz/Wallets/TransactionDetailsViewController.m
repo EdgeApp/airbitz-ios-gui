@@ -520,7 +520,7 @@ typedef enum eRequestType
         [CoreBridge storeTransaction: self.transaction];
     }
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
+    [CoreBridge postToMiscQueue:^{
         if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
             _recoveryAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
@@ -536,7 +536,7 @@ typedef enum eRequestType
                 [self exit:YES];
             });
         }
-    });
+    }];
 }
 
 - (IBAction)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data

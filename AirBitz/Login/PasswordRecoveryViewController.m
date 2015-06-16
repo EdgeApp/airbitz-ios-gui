@@ -107,7 +107,7 @@ typedef enum eAlertType
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        [CoreBridge postToMiscQueue:^{
             tABC_Error Error;
             tABC_QuestionChoices *pQuestionChoices = NULL;
             tABC_CC result = ABC_GetQuestionChoices(&pQuestionChoices, &Error);
@@ -124,7 +124,7 @@ typedef enum eAlertType
                 }
                 [self performSelectorOnMainThread:@selector(getPasswordRecoveryQuestionsComplete) withObject:nil waitUntilDone:FALSE];
             });
-        });
+        }];
     }
     else
     {
@@ -335,7 +335,7 @@ typedef enum eAlertType
 {
     _bSuccess = NO;
     [self showSpinner:YES];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [CoreBridge postToMiscQueue:^{
         tABC_Error error;
         BOOL bSuccess = [CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName status:&error];
         NSArray *params = [NSArray arrayWithObjects:strAnswers, nil];
@@ -350,7 +350,7 @@ typedef enum eAlertType
             }
             [self performSelectorOnMainThread:@selector(checkRecoveryAnswersResponse:) withObject:params waitUntilDone:NO];
         });
-    });
+    }];
 }
 
 - (void)checkRecoveryAnswersResponse:(NSArray *)params
@@ -440,7 +440,7 @@ typedef enum eAlertType
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [CoreBridge postToMiscQueue:^{
         tABC_Error error;
         ABC_SetAccountRecoveryQuestions([[User Singleton].name UTF8String],
                                                 [password UTF8String],
@@ -450,7 +450,7 @@ typedef enum eAlertType
         _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
         _strReason = [Util errorMap:&error];
         [self performSelectorOnMainThread:@selector(setRecoveryComplete) withObject:nil waitUntilDone:FALSE];
-    });
+    }];
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions

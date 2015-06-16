@@ -397,7 +397,7 @@
         _selectedTextField = self.amountBTCTextField;
 
         // We use a serial queue for this calculation
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [CoreBridge postToMiscQueue:^{
             int64_t maxAmount = [_spendTarget maxSpendable:[CoreBridge Singleton].currentWallet.strUUID];
             dispatch_async(dispatch_get_main_queue(), ^{
                 _maxLocked = NO;
@@ -410,7 +410,7 @@
                     [self.withdrawlPIN becomeFirstResponder];
                 }
             });
-        });
+        }];
     }
 }
 
@@ -450,7 +450,7 @@
         _callbackTimestamp = [[NSDate date] timeIntervalSince1970];
 
         _spendTarget.srcWallet = [CoreBridge Singleton].currentWallet;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        [CoreBridge postToMiscQueue:^{
             tABC_Error error;
             NSString *txId = [_spendTarget approve:_overrideCurrency
                                              error:&error];
@@ -459,7 +459,7 @@
             } else {
                 [self txSendFailed:error];
             }
-        });
+        }];
     }
 }
 
@@ -625,9 +625,9 @@
         self.helpButton.hidden = YES;
         return;
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [CoreBridge postToMiscQueue:^{
         [self calcFees];
-    });
+    }];
 }
 
 - (void)calcFees
@@ -863,12 +863,12 @@
 
 - (void)fadingAlertDelayed:(NSString *)message
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [CoreBridge postToMiscQueue:^{
         [NSThread sleepForTimeInterval:0.2f];
         dispatch_async(dispatch_get_main_queue(), ^{
             [MainViewController fadingAlert:message];
         });
-    });
+    }];
 }
 
 - (void)handlePasswordCheck:(NSNumber *)authenticated

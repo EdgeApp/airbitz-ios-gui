@@ -102,7 +102,7 @@
 {
     ABLog(2,@"Uploading Logs\n");
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [CoreBridge postToMiscQueue:^{
         tABC_Error Error;
         ABC_UploadLogs([[User Singleton].name UTF8String],
                        [[User Singleton].password UTF8String],
@@ -128,7 +128,7 @@
             }
 
         });
-    });
+    }];
 }
 
 - (IBAction)clearWatcher:(id)sender
@@ -142,13 +142,13 @@
 
     self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [CoreBridge postToMiscQueue:^{
         [CoreBridge stopWatchers];
         [CoreBridge startWatchers];
         dispatch_async(dispatch_get_main_queue(), ^(void){
             self.clearWatcherButton.titleLabel.text = buttonText;
         });
-    });
+    }];
 }
 
 #pragma mark - Misc Methods

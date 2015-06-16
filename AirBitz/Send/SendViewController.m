@@ -1727,7 +1727,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)trySpend:(NSString *)text
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [CoreBridge postToMiscQueue:^{
         tABC_Error error;
         SpendTarget *spendTarget = [[SpendTarget alloc] init];
         if ([spendTarget newSpend:text error:&error]) {
@@ -1740,7 +1740,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
             });
         }
-    });
+    }];
 }
 
 - (void)PopupPickerView2Cancelled:(PopupPickerView2 *)view userData:(id)data
