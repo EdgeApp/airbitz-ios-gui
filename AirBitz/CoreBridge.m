@@ -1568,19 +1568,25 @@ static BOOL bOtpError = NO;
 {
     dispatch_async(dispatch_get_main_queue(),^
     {
-        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+        NSMutableArray *arrayCurrencyNums= [[NSMutableArray alloc] init];
 
-        arrayWallets = singleton.arrayWallets;
-        [arrayWallets addObjectsFromArray:singleton.arrayArchivedWallets];
+        for (Wallet *w in singleton.arrayWallets)
+        {
+            [arrayCurrencyNums addObject:[NSNumber numberWithInteger:w.currencyNum]];
+        }
+        for (Wallet *w in singleton.arrayArchivedWallets)
+        {
+            [arrayCurrencyNums addObject:[NSNumber numberWithInteger:w.currencyNum]];
+        }
 
         [exchangeQueue addOperationWithBlock:^{
             [[NSThread currentThread] setName:@"Exchange Rate Update"];
-            [CoreBridge requestExchangeUpdateBlocking:arrayWallets];
+            [CoreBridge requestExchangeUpdateBlocking:arrayCurrencyNums];
         }];
     });
 }
 
-+ (void)requestExchangeUpdateBlocking:(NSMutableArray *)wallets
++ (void)requestExchangeUpdateBlocking:(NSMutableArray *)currencyNums
 {
     if ([User isLoggedIn])
     {
@@ -1592,12 +1598,12 @@ static BOOL bOtpError = NO;
         [Util printABC_Error: &error];
 
         // Check each wallet is up to date
-        for (Wallet *w in wallets)
+        for (NSNumber *n in currencyNums)
         {
             // We pass no callback so this call is blocking
             ABC_RequestExchangeRateUpdate([[User Singleton].name UTF8String],
                                           [[User Singleton].password UTF8String],
-                                          w.currencyNum, &error);
+                                          [n intValue], &error);
             [Util printABC_Error: &error];
         }
 
