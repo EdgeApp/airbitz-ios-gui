@@ -1491,11 +1491,7 @@ static BOOL bOtpError = NO;
             [Util printABC_Error:&Error];
         }];
 
-        ABC_WatchAddresses([[User Singleton].name UTF8String],
-                            [[User Singleton].password UTF8String],
-                            szUUID, &Error);
-        [Util printABC_Error:&Error];
-
+        [CoreBridge watchAddresses:walletUUID];
         if (bDataFetched) {
             [CoreBridge connectWatcher:walletUUID];
         }
