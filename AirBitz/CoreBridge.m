@@ -1551,13 +1551,13 @@ static BOOL bOtpError = NO;
 
 + (void)watchAddresses: (NSString *) walletUUID
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [CoreBridge postToWalletsQueue:^{
         tABC_Error Error;
         ABC_WatchAddresses([[User Singleton].name UTF8String],
                         [[User Singleton].password UTF8String],
                         [walletUUID UTF8String], &Error);
         [Util printABC_Error: &Error];
-    });
+    }];
 }
 
 + (void)requestExchangeRateUpdate:(NSTimer *)object
