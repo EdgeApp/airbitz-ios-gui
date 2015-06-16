@@ -155,7 +155,7 @@
                                     <tabBarItem title="Send" image="icon_send.png" id="6Ey-Xn-GTe">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
-                                    <tabBarItem title="Transactions" image="icon_wallet.png" id="j3q-OI-el3" userLabel="Transactions">
+                                    <tabBarItem title="Transactions" image="icon_transactions.png" id="j3q-OI-el3" userLabel="Transactions">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
                                     <tabBarItem title="More" image="icon_more.png" id="sAy-bR-lqd">
@@ -3587,15 +3587,15 @@
         <image name="btn_td_done.png" width="251" height="41"/>
         <image name="emboss_down.png" width="20" height="21"/>
         <image name="emboss_up.png" width="291" height="193"/>
-        <image name="ico_nav_directory_dark.png" width="30" height="30"/>
+        <image name="ico_nav_directory_dark.png" width="36" height="36"/>
         <image name="icon_approved.png" width="79" height="80"/>
-        <image name="icon_directory.png" width="30" height="30"/>
+        <image name="icon_directory.png" width="36" height="36"/>
         <image name="icon_export_dropbox.png" width="18" height="17"/>
-        <image name="icon_more.png" width="30" height="30"/>
+        <image name="icon_more.png" width="36" height="36"/>
         <image name="icon_not_approved.png" width="79" height="80"/>
-        <image name="icon_request.png" width="30" height="30"/>
-        <image name="icon_send.png" width="30" height="30"/>
-        <image name="icon_wallet.png" width="30" height="30"/>
+        <image name="icon_request.png" width="36" height="36"/>
+        <image name="icon_send.png" width="36" height="36"/>
+        <image name="icon_transactions.png" width="36" height="36"/>
         <image name="logo_bitcoin.png" width="126" height="165"/>
         <image name="logo_large.png" width="208" height="106"/>
         <image name="postcard-mountain-blue.jpg" width="843" height="568"/>

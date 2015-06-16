@@ -828,15 +828,15 @@
 		DA5A95F41B302C9E00CFA7C1 /* icon_send@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95ED1B302C9E00CFA7C1 /* icon_send@3x.png */; };
 		DA5A95F51B302C9E00CFA7C1 /* icon_send@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95ED1B302C9E00CFA7C1 /* icon_send@3x.png */; };
 		DA5A95F61B302C9E00CFA7C1 /* icon_send@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95ED1B302C9E00CFA7C1 /* icon_send@3x.png */; };
-		DA5A95FA1B302CAC00CFA7C1 /* icon_wallet.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95F71B302CAC00CFA7C1 /* icon_wallet.png */; };
-		DA5A95FB1B302CAC00CFA7C1 /* icon_wallet.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95F71B302CAC00CFA7C1 /* icon_wallet.png */; };
-		DA5A95FC1B302CAC00CFA7C1 /* icon_wallet.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95F71B302CAC00CFA7C1 /* icon_wallet.png */; };
-		DA5A95FD1B302CAC00CFA7C1 /* icon_wallet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95F81B302CAC00CFA7C1 /* icon_wallet@2x.png */; };
-		DA5A95FE1B302CAC00CFA7C1 /* icon_wallet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95F81B302CAC00CFA7C1 /* icon_wallet@2x.png */; };
-		DA5A95FF1B302CAC00CFA7C1 /* icon_wallet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95F81B302CAC00CFA7C1 /* icon_wallet@2x.png */; };
-		DA5A96001B302CAC00CFA7C1 /* icon_wallet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95F91B302CAC00CFA7C1 /* icon_wallet@3x.png */; };
-		DA5A96011B302CAC00CFA7C1 /* icon_wallet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95F91B302CAC00CFA7C1 /* icon_wallet@3x.png */; };
-		DA5A96021B302CAC00CFA7C1 /* icon_wallet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95F91B302CAC00CFA7C1 /* icon_wallet@3x.png */; };
+		DA5A96061B30301E00CFA7C1 /* icon_transactions.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A96031B30301E00CFA7C1 /* icon_transactions.png */; };
+		DA5A96071B30301E00CFA7C1 /* icon_transactions.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A96031B30301E00CFA7C1 /* icon_transactions.png */; };
+		DA5A96081B30301E00CFA7C1 /* icon_transactions.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A96031B30301E00CFA7C1 /* icon_transactions.png */; };
+		DA5A96091B30301E00CFA7C1 /* icon_transactions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A96041B30301E00CFA7C1 /* icon_transactions@2x.png */; };
+		DA5A960A1B30301E00CFA7C1 /* icon_transactions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A96041B30301E00CFA7C1 /* icon_transactions@2x.png */; };
+		DA5A960B1B30301E00CFA7C1 /* icon_transactions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A96041B30301E00CFA7C1 /* icon_transactions@2x.png */; };
+		DA5A960C1B30301E00CFA7C1 /* icon_transactions@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A96051B30301E00CFA7C1 /* icon_transactions@3x.png */; };
+		DA5A960D1B30301E00CFA7C1 /* icon_transactions@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A96051B30301E00CFA7C1 /* icon_transactions@3x.png */; };
+		DA5A960E1B30301E00CFA7C1 /* icon_transactions@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A96051B30301E00CFA7C1 /* icon_transactions@3x.png */; };
 		DA6645251B07175A00B04C5B /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6645241B07175A00B04C5B /* BlurView.m */; };
 		DA6645261B07277E00B04C5B /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6645241B07175A00B04C5B /* BlurView.m */; };
 		DA6645271B07277F00B04C5B /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6645241B07175A00B04C5B /* BlurView.m */; };
@@ -1737,9 +1737,9 @@
 		DA5A95EB1B302C9E00CFA7C1 /* icon_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_send.png; path = Resources/Artwork/icon_send.png; sourceTree = "<group>"; };
 		DA5A95EC1B302C9E00CFA7C1 /* icon_send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_send@2x.png"; path = "Resources/Artwork/icon_send@2x.png"; sourceTree = "<group>"; };
 		DA5A95ED1B302C9E00CFA7C1 /* icon_send@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_send@3x.png"; path = "Resources/Artwork/icon_send@3x.png"; sourceTree = "<group>"; };
-		DA5A95F71B302CAC00CFA7C1 /* icon_wallet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_wallet.png; path = Resources/Artwork/icon_wallet.png; sourceTree = "<group>"; };
-		DA5A95F81B302CAC00CFA7C1 /* icon_wallet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_wallet@2x.png"; path = "Resources/Artwork/icon_wallet@2x.png"; sourceTree = "<group>"; };
-		DA5A95F91B302CAC00CFA7C1 /* icon_wallet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_wallet@3x.png"; path = "Resources/Artwork/icon_wallet@3x.png"; sourceTree = "<group>"; };
+		DA5A96031B30301E00CFA7C1 /* icon_transactions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_transactions.png; path = Resources/Artwork/icon_transactions.png; sourceTree = "<group>"; };
+		DA5A96041B30301E00CFA7C1 /* icon_transactions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_transactions@2x.png"; path = "Resources/Artwork/icon_transactions@2x.png"; sourceTree = "<group>"; };
+		DA5A96051B30301E00CFA7C1 /* icon_transactions@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_transactions@3x.png"; path = "Resources/Artwork/icon_transactions@3x.png"; sourceTree = "<group>"; };
 		DA66451F1B07174A00B04C5B /* BlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurView.h; sourceTree = "<group>"; };
 		DA6645241B07175A00B04C5B /* BlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurView.m; sourceTree = "<group>"; };
 		DA66454A1B0B37F000B04C5B /* AirbitzViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirbitzViewController.h; sourceTree = "<group>"; };
@@ -2629,11 +2629,11 @@
 				DA5A95A71B301C9800CFA7C1 /* icon_settings_dark.png */,
 				DA5A95A81B301C9800CFA7C1 /* icon_settings_dark@2x.png */,
 				DA5A95A91B301C9800CFA7C1 /* icon_settings_dark@3x.png */,
+				DA5A96031B30301E00CFA7C1 /* icon_transactions.png */,
+				DA5A96041B30301E00CFA7C1 /* icon_transactions@2x.png */,
+				DA5A96051B30301E00CFA7C1 /* icon_transactions@3x.png */,
 				DA06F7181B0BDD78000BCA46 /* icon_USD_dark@2x.png */,
 				DA06F71A1B0BDD78000BCA46 /* icon_USD_light@2x.png */,
-				DA5A95F71B302CAC00CFA7C1 /* icon_wallet.png */,
-				DA5A95F81B302CAC00CFA7C1 /* icon_wallet@2x.png */,
-				DA5A95F91B302CAC00CFA7C1 /* icon_wallet@3x.png */,
 				DA06F71E1B0BDD78000BCA46 /* img_collapseExpandBlueDown@2x.png */,
 				DA06F7201B0BDD78000BCA46 /* large-digit-input_selected@2x.png */,
 				DA06F7221B0BDD78000BCA46 /* large-digit-input@2x.png */,
@@ -3159,6 +3159,7 @@
 				DAA8EA011B1F93B800BC870C /* bitcoin_symbol@2x.png in Resources */,
 				DA5A95BB1B301CAE00CFA7C1 /* icon_settings.png in Resources */,
 				DAA8E9CA1B1ED50B00BC870C /* icon_category_electronics@2x.png in Resources */,
+				DA5A96071B30301E00CFA7C1 /* icon_transactions.png in Resources */,
 				DA06FA351B0BDD79000BCA46 /* icon_USD_dark@2x.png in Resources */,
 				DAD9A4B61B21804100CB3EA4 /* background_launch.png in Resources */,
 				DA06F9841B0BDD79000BCA46 /* flash_off@2x.png in Resources */,
@@ -3200,12 +3201,12 @@
 				DA06F9901B0BDD79000BCA46 /* flash-off@2x.png in Resources */,
 				DA06FA771B0BDD79000BCA46 /* postcard-mountain@2x.png in Resources */,
 				7DAD01F91A327441002C4A30 /* infoSpendingLimits.html in Resources */,
-				DA5A96011B302CAC00CFA7C1 /* icon_wallet@3x.png in Resources */,
 				7D98ADC619A7C550003D2BF6 /* Lato-Hairline.ttf in Resources */,
 				DA06F9481B0BDD79000BCA46 /* btn_unselected@2x.png in Resources */,
 				DAC250901B2E037F006AB863 /* darken_bottom_table_cell.png in Resources */,
 				DA5A95D11B3023ED00CFA7C1 /* icon_directory@3x.png in Resources */,
 				DA06F9BA1B0BDD79000BCA46 /* icon_bitcoin_dark@2x.png in Resources */,
+				DA5A960D1B30301E00CFA7C1 /* icon_transactions@3x.png in Resources */,
 				DA06F9AE1B0BDD79000BCA46 /* icon_approved.png in Resources */,
 				DA5A95E31B302C9000CFA7C1 /* icon_request.png in Resources */,
 				DAA8E9D31B1ED50B00BC870C /* icon_category_gift_cards@2x.png in Resources */,
@@ -3213,7 +3214,6 @@
 				DA06FB041B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA5A95C51B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */,
 				DA06FB3A1B0FEF32000BCA46 /* PopupPickerView2.xib in Resources */,
-				DA5A95FE1B302CAC00CFA7C1 /* icon_wallet@2x.png in Resources */,
 				DA06F9A21B0BDD79000BCA46 /* h_seperator@2x.png in Resources */,
 				DAA8E9C11B1ED50B00BC870C /* icon_category_coffee_tea@2x.png in Resources */,
 				7D98ADD119A7C550003D2BF6 /* Montserrat-Bold.ttf in Resources */,
@@ -3235,7 +3235,6 @@
 				DA5A95DA1B302C8000CFA7C1 /* icon_more@2x.png in Resources */,
 				DA5A959A1B301C4100CFA7C1 /* icon_logout@2x.png in Resources */,
 				DA5A95821B300A6400CFA7C1 /* btn_export_white.png in Resources */,
-				DA5A95FB1B302CAC00CFA7C1 /* icon_wallet.png in Resources */,
 				DA06F9EA1B0BDD79000BCA46 /* icon_export_google@2x.png in Resources */,
 				7D98ADEA19A7C550003D2BF6 /* info.html in Resources */,
 				DA5A959D1B301C4100CFA7C1 /* icon_logout@3x.png in Resources */,
@@ -3285,6 +3284,7 @@
 				DAA8E9F81B1EDCB400BC870C /* ico_nav_directory_dark@3x.png in Resources */,
 				DAA5782A19C1632000E972FC /* emailTemplate.html in Resources */,
 				7D98AE5119A7C550003D2BF6 /* Main_iPhone.storyboard in Resources */,
+				DA5A960A1B30301E00CFA7C1 /* icon_transactions@2x.png in Resources */,
 				DA5101EF1AFB35AD00949855 /* BusinessDirectory.storyboard in Resources */,
 				DA06F79B1B0BDD79000BCA46 /* bd_icon_phone@2x.png in Resources */,
 				DA06F7591B0BDD79000BCA46 /* 0-bars@2x.png in Resources */,
@@ -3385,6 +3385,7 @@
 				DAA8EA001B1F93B800BC870C /* bitcoin_symbol@2x.png in Resources */,
 				DA5A95BA1B301CAE00CFA7C1 /* icon_settings.png in Resources */,
 				B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */,
+				DA5A96061B30301E00CFA7C1 /* icon_transactions.png in Resources */,
 				DAA8E9C91B1ED50B00BC870C /* icon_category_electronics@2x.png in Resources */,
 				DAD9A4B51B21804100CB3EA4 /* background_launch.png in Resources */,
 				DA06FA341B0BDD79000BCA46 /* icon_USD_dark@2x.png in Resources */,
@@ -3426,12 +3427,12 @@
 				B57C209A18C25042005D7245 /* BalanceView~ipad.xib in Resources */,
 				DA06F7D31B0BDD79000BCA46 /* BLE_Logo@2x.png in Resources */,
 				DA06F98F1B0BDD79000BCA46 /* flash-off@2x.png in Resources */,
-				DA5A96001B302CAC00CFA7C1 /* icon_wallet@3x.png in Resources */,
 				DA06FA761B0BDD79000BCA46 /* postcard-mountain@2x.png in Resources */,
 				B5137C1218A40A8400DA4A34 /* Montserrat-Regular.ttf in Resources */,
 				DAC2508F1B2E037F006AB863 /* darken_bottom_table_cell.png in Resources */,
 				DA5A95D01B3023ED00CFA7C1 /* icon_directory@3x.png in Resources */,
 				B5137C0918A40A8400DA4A34 /* Lato-Bold.ttf in Resources */,
+				DA5A960C1B30301E00CFA7C1 /* icon_transactions@3x.png in Resources */,
 				DA06F9471B0BDD79000BCA46 /* btn_unselected@2x.png in Resources */,
 				DA5A95E21B302C9000CFA7C1 /* icon_request.png in Resources */,
 				DA06F9B91B0BDD79000BCA46 /* icon_bitcoin_dark@2x.png in Resources */,
@@ -3439,7 +3440,6 @@
 				DAA8E9D21B1ED50B00BC870C /* icon_category_gift_cards@2x.png in Resources */,
 				DA5A95C41B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */,
 				DA06F7AC1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
-				DA5A95FD1B302CAC00CFA7C1 /* icon_wallet@2x.png in Resources */,
 				DA06FB031B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA06FB341B0FEF0F000BCA46 /* PopupPickerView2.xib in Resources */,
 				DAA8E9C01B1ED50B00BC870C /* icon_category_coffee_tea@2x.png in Resources */,
@@ -3461,7 +3461,6 @@
 				DA5A95D91B302C8000CFA7C1 /* icon_more@2x.png in Resources */,
 				DA5A95991B301C4100CFA7C1 /* icon_logout@2x.png in Resources */,
 				DA5A95811B300A6400CFA7C1 /* btn_export_white.png in Resources */,
-				DA5A95FA1B302CAC00CFA7C1 /* icon_wallet.png in Resources */,
 				DAE2762B1A9BFDFD00E24523 /* AccountCreate.storyboard in Resources */,
 				DA06F7641B0BDD79000BCA46 /* 4-bars@2x.png in Resources */,
 				DA5A959C1B301C4100CFA7C1 /* icon_logout@3x.png in Resources */,
@@ -3511,6 +3510,7 @@
 				DAA8E9F71B1EDCB400BC870C /* ico_nav_directory_dark@3x.png in Resources */,
 				B5137C0E18A40A8400DA4A34 /* Lato-Light.ttf in Resources */,
 				B5137C0D18A40A8400DA4A34 /* Lato-Italic.ttf in Resources */,
+				DA5A96091B30301E00CFA7C1 /* icon_transactions@2x.png in Resources */,
 				B5F2EB1118DE01CB008ACF88 /* QuestionAnswerView~iphone.xib in Resources */,
 				DA06F79A1B0BDD79000BCA46 /* bd_icon_phone@2x.png in Resources */,
 				DA06F7581B0BDD79000BCA46 /* 0-bars@2x.png in Resources */,
@@ -3611,6 +3611,7 @@
 				DAA8EA021B1F93B800BC870C /* bitcoin_symbol@2x.png in Resources */,
 				DA5A95BC1B301CAE00CFA7C1 /* icon_settings.png in Resources */,
 				DAE864D01A88A58A00A17BD3 /* GTMOAuth2ViewTouch.xib in Resources */,
+				DA5A96081B30301E00CFA7C1 /* icon_transactions.png in Resources */,
 				DAA8E9CB1B1ED50B00BC870C /* icon_category_electronics@2x.png in Resources */,
 				DAD9A4B71B21804100CB3EA4 /* background_launch.png in Resources */,
 				DA06FA361B0BDD79000BCA46 /* icon_USD_dark@2x.png in Resources */,
@@ -3652,12 +3653,12 @@
 				DAE8651A1A88A58A00A17BD3 /* BalanceView~ipad.xib in Resources */,
 				DA06F7D51B0BDD79000BCA46 /* BLE_Logo@2x.png in Resources */,
 				DA06F9911B0BDD79000BCA46 /* flash-off@2x.png in Resources */,
-				DA5A96021B302CAC00CFA7C1 /* icon_wallet@3x.png in Resources */,
 				DA06FA781B0BDD79000BCA46 /* postcard-mountain@2x.png in Resources */,
 				DAE8651C1A88A58A00A17BD3 /* Montserrat-Regular.ttf in Resources */,
 				DAC250911B2E037F006AB863 /* darken_bottom_table_cell.png in Resources */,
 				DA5A95D21B3023ED00CFA7C1 /* icon_directory@3x.png in Resources */,
 				DAE865231A88A58A00A17BD3 /* Lato-Bold.ttf in Resources */,
+				DA5A960E1B30301E00CFA7C1 /* icon_transactions@3x.png in Resources */,
 				DA06F9491B0BDD79000BCA46 /* btn_unselected@2x.png in Resources */,
 				DA5A95E41B302C9000CFA7C1 /* icon_request.png in Resources */,
 				DA06F9BB1B0BDD79000BCA46 /* icon_bitcoin_dark@2x.png in Resources */,
@@ -3665,7 +3666,6 @@
 				DAA8E9D41B1ED50B00BC870C /* icon_category_gift_cards@2x.png in Resources */,
 				DA5A95C61B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */,
 				DA06F7AE1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
-				DA5A95FF1B302CAC00CFA7C1 /* icon_wallet@2x.png in Resources */,
 				DA06FB051B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA06FB3B1B0FEF33000BCA46 /* PopupPickerView2.xib in Resources */,
 				DAA8E9C21B1ED50B00BC870C /* icon_category_coffee_tea@2x.png in Resources */,
@@ -3687,7 +3687,6 @@
 				DA5A95DB1B302C8000CFA7C1 /* icon_more@2x.png in Resources */,
 				DA5A959B1B301C4100CFA7C1 /* icon_logout@2x.png in Resources */,
 				DA5A95831B300A6400CFA7C1 /* btn_export_white.png in Resources */,
-				DA5A95FC1B302CAC00CFA7C1 /* icon_wallet.png in Resources */,
 				DAE2762D1A9BFDFD00E24523 /* AccountCreate.storyboard in Resources */,
 				DA06F7661B0BDD79000BCA46 /* 4-bars@2x.png in Resources */,
 				DA5A959E1B301C4100CFA7C1 /* icon_logout@3x.png in Resources */,
@@ -3737,6 +3736,7 @@
 				DAA8E9F91B1EDCB400BC870C /* ico_nav_directory_dark@3x.png in Resources */,
 				DAE865B51A88A58A00A17BD3 /* Lato-Light.ttf in Resources */,
 				DAE865BE1A88A58A00A17BD3 /* Lato-Italic.ttf in Resources */,
+				DA5A960B1B30301E00CFA7C1 /* icon_transactions@2x.png in Resources */,
 				DAE865C81A88A58A00A17BD3 /* QuestionAnswerView~iphone.xib in Resources */,
 				DA06F79C1B0BDD79000BCA46 /* bd_icon_phone@2x.png in Resources */,
 				DA06F75A1B0BDD79000BCA46 /* 0-bars@2x.png in Resources */,
