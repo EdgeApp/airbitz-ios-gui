@@ -514,9 +514,9 @@ static BOOL bOtpError = NO;
 //
 + (void)refreshWallet:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb
 {
+    [CoreBridge connectWatcher:walletUUID];
     [CoreBridge postToMiscQueue:^{
         // Reconnect the watcher for this wallet
-        [CoreBridge connectWatcher:walletUUID];
         if (bData) {
                 // Clear data sync queue and sync the current wallet immediately
                 [dataQueue cancelAllOperations];
@@ -1569,13 +1569,11 @@ static BOOL bOtpError = NO;
 
 + (void)watchAddresses: (NSString *) walletUUID
 {
-    [CoreBridge postToMiscQueue:^{
-        tABC_Error Error;
-        ABC_WatchAddresses([[User Singleton].name UTF8String],
-                        [[User Singleton].password UTF8String],
-                        [walletUUID UTF8String], &Error);
-        [Util printABC_Error: &Error];
-    }];
+    tABC_Error Error;
+    ABC_WatchAddresses([[User Singleton].name UTF8String],
+                    [[User Singleton].password UTF8String],
+                    [walletUUID UTF8String], &Error);
+    [Util printABC_Error: &Error];
 }
 
 + (void)requestExchangeRateUpdate:(NSTimer *)object
