@@ -128,6 +128,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.alertHoldTimeHelpPopups                = 6.0;      // Hold time for auto popup help
 
     self.qrCodeGenDelayTime                     = 0.75;     // Timer delay after keypad entry before new QR code is generated
+    self.rotateServerInterval                   = 15.0;     // How long (in seconds) before we rotate libbitcoin servers while waiting on QR code screen
 
     self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];
     self.backgroundLogin = [UIImage imageNamed:@"postcard-mountain.png"];

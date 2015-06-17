@@ -102,6 +102,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, assign) int64_t                   amountSatoshiReceived;
 @property (nonatomic, assign) RequestState              state;
 @property (nonatomic, strong) NSTimer                   *qrTimer;
+@property (nonatomic, strong) NSTimer                   *rotateServerTimer;
 
 @property (assign) tABC_TxDetails txDetails;
 @property (nonatomic, strong) NSString *requestType;
@@ -225,6 +226,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         _bDoFinalizeTx = NO;
     }
 
+    self.rotateServerTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].rotateServerInterval target:self selector:@selector(refreshBackground) userInfo:nil repeats:YES];
+
 }
 
 - (void)updateViews:(NSNotification *)notification
@@ -278,6 +281,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     if (self.qrTimer)
         [self.qrTimer invalidate];
+    if (self.rotateServerTimer)
+        [self.rotateServerTimer invalidate];
 
     [CoreBridge prioritizeAddress:nil inWallet:[CoreBridge Singleton].currentWallet.strUUID];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -378,11 +383,20 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         _refreshButton.hidden = YES;
         _refreshSpinner.hidden = NO;
-        [CoreBridge refreshWallet:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:^{
+        [CoreBridge rotateWalletServer:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:^
+        {
             [NSThread sleepForTimeInterval:2.0f];
             _refreshSpinner.hidden = YES;
             _refreshButton.hidden = NO;
         }];
+    }
+}
+
+- (void)refreshBackground
+{
+    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    {
+        [CoreBridge rotateWalletServer:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:nil];
     }
 }
 

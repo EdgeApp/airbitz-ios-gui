@@ -108,6 +108,7 @@
 @property (nonatomic) CGFloat alertHoldTimeHelpPopups;
 
 @property (nonatomic) CGFloat qrCodeGenDelayTime;
+@property (nonatomic) CGFloat rotateServerInterval;
 
 + (void)initAll;
 + (void)freeAll;

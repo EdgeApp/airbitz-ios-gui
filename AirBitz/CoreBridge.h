@@ -37,7 +37,7 @@
 
 // New methods
 + (void)refreshWallets;
-+ (void)refreshWallet:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb;
++ (void)rotateWalletServer:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb;
 + (void)reorderWallets: (NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
 + (void)makeCurrentWallet:(Wallet *)wallet;
 + (void)makeCurrentWalletWithIndex:(NSIndexPath *)indexPath;

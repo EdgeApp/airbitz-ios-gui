@@ -1352,8 +1352,9 @@
 
 - (void)refresh:(id)sender
 {
-    [CoreBridge refreshWallet:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:^{
-        [(UIRefreshControl *)sender endRefreshing];
+    [CoreBridge rotateWalletServer:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:^
+    {
+        [(UIRefreshControl *) sender endRefreshing];
     }];
 }
 

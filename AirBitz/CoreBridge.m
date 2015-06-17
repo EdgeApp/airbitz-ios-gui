@@ -512,7 +512,7 @@ static BOOL bOtpError = NO;
 //
 // This triggers a switch of libbitcoin servers and possibly an update if new information comes in
 //
-+ (void)refreshWallet:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb
++ (void)rotateWalletServer:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb
 {
     [CoreBridge connectWatcher:walletUUID];
     [CoreBridge postToMiscQueue:^{
@@ -530,12 +530,12 @@ static BOOL bOtpError = NO;
                             &error);
                 [Util printABC_Error: &error];
                 dispatch_async(dispatch_get_main_queue(),^{
-                    cb();
+                    if (cb) cb();
                 });
             }];
         } else {
             dispatch_async(dispatch_get_main_queue(),^{
-                cb();
+                if (cb) cb();
             });
         }
     }];
