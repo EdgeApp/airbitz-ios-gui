@@ -99,6 +99,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -154,7 +155,7 @@
                                     <tabBarItem title="Send" image="icon_send.png" id="6Ey-Xn-GTe">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
-                                    <tabBarItem title="Transactions" image="icon_wallet.png" id="j3q-OI-el3" userLabel="Transactions">
+                                    <tabBarItem title="Transactions" image="icon_transactions.png" id="j3q-OI-el3" userLabel="Transactions">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
                                     <tabBarItem title="More" image="icon_more.png" id="sAy-bR-lqd">
@@ -816,6 +817,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MRG-UO-gcm" userLabel="View -QR Code">
                                         <rect key="frame" x="78" y="106" width="219" height="219"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generating QR Code..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="oOB-dD-cy2">
+                                                <rect key="frame" x="10" y="10" width="199" height="199"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5sd-ot-S1v" userLabel="qrCodeImage">
                                                 <rect key="frame" x="10" y="10" width="199" height="199"/>
                                             </imageView>
@@ -835,16 +842,20 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MRG-UO-gcm" secondAttribute="height" multiplier="1:1" id="1Yx-WK-Qo5"/>
+                                            <constraint firstItem="oOB-dD-cy2" firstAttribute="leading" secondItem="5sd-ot-S1v" secondAttribute="leading" id="67V-D4-I5s"/>
                                             <constraint firstItem="cuf-lh-wIN" firstAttribute="leading" secondItem="MRG-UO-gcm" secondAttribute="leading" id="C9f-9g-iee"/>
                                             <constraint firstAttribute="trailing" secondItem="cuf-lh-wIN" secondAttribute="trailing" id="Fj8-8E-Zcb"/>
                                             <constraint firstAttribute="bottom" secondItem="cuf-lh-wIN" secondAttribute="bottom" id="OTJ-Tj-btb"/>
                                             <constraint firstAttribute="bottom" secondItem="5sd-ot-S1v" secondAttribute="bottom" constant="10" id="VGJ-HT-Mob"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="XyV-AG-oOE"/>
+                                            <constraint firstItem="oOB-dD-cy2" firstAttribute="top" secondItem="5sd-ot-S1v" secondAttribute="top" id="Xyc-rQ-ia7"/>
+                                            <constraint firstItem="oOB-dD-cy2" firstAttribute="trailing" secondItem="5sd-ot-S1v" secondAttribute="trailing" id="YTr-bm-DKm"/>
                                             <constraint firstAttribute="trailing" secondItem="5sd-ot-S1v" secondAttribute="trailing" constant="10" id="Zx1-Aw-mbe"/>
                                             <constraint firstItem="cuf-lh-wIN" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="top" id="bg2-Qh-3d8"/>
                                             <constraint firstItem="5sd-ot-S1v" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="top" constant="10" id="iUD-7Z-rPi"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="mUM-u4-pOS"/>
                                             <constraint firstItem="5sd-ot-S1v" firstAttribute="leading" secondItem="MRG-UO-gcm" secondAttribute="leading" constant="10" id="ojw-f4-A0p"/>
+                                            <constraint firstItem="oOB-dD-cy2" firstAttribute="bottom" secondItem="5sd-ot-S1v" secondAttribute="bottom" id="x7u-OR-L8N"/>
                                         </constraints>
                                     </view>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="tx5-Cj-bnM">
@@ -889,7 +900,7 @@
                                         <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Status Line 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NGg-Nn-BeH" userLabel="Status Line 2">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NGg-Nn-BeH" userLabel="Status Line 2">
                                         <rect key="frame" x="20" y="356" width="335" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="L38-8w-StF"/>
@@ -900,7 +911,7 @@
                                         <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Status Line 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtQ-SU-6iS">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtQ-SU-6iS">
                                         <rect key="frame" x="20" y="379" width="335" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="u2z-WZ-GnH"/>
@@ -2766,8 +2777,8 @@
                                                     <action selector="SignUp" destination="zLx-xG-j1m" eventType="touchUpInside" id="BMw-Co-GHv"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVo-M5-ZXk" userLabel="Button - Forgot">
-                                                <rect key="frame" x="55" y="72" width="210" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVo-M5-ZXk" userLabel="Button - Forgot">
+                                                <rect key="frame" x="55" y="72" width="210" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="210" id="XDE-2H-ftF"/>
                                                 </constraints>
@@ -3576,21 +3587,21 @@
         <image name="btn_td_done.png" width="251" height="41"/>
         <image name="emboss_down.png" width="20" height="21"/>
         <image name="emboss_up.png" width="291" height="193"/>
-        <image name="ico_nav_directory_dark.png" width="30" height="30"/>
+        <image name="ico_nav_directory_dark.png" width="36" height="36"/>
         <image name="icon_approved.png" width="79" height="80"/>
-        <image name="icon_directory.png" width="30" height="30"/>
-        <image name="icon_export_dropbox.png" width="18" height="18"/>
-        <image name="icon_more.png" width="30" height="30"/>
+        <image name="icon_directory.png" width="36" height="36"/>
+        <image name="icon_export_dropbox.png" width="18" height="17"/>
+        <image name="icon_more.png" width="36" height="36"/>
         <image name="icon_not_approved.png" width="79" height="80"/>
-        <image name="icon_request.png" width="30" height="30"/>
-        <image name="icon_send.png" width="30" height="30"/>
-        <image name="icon_wallet.png" width="30" height="30"/>
+        <image name="icon_request.png" width="36" height="36"/>
+        <image name="icon_send.png" width="36" height="36"/>
+        <image name="icon_transactions.png" width="36" height="36"/>
         <image name="logo_bitcoin.png" width="126" height="165"/>
         <image name="logo_large.png" width="208" height="106"/>
         <image name="postcard-mountain-blue.jpg" width="843" height="568"/>
-        <image name="postcard-mountain.png" width="844" height="568"/>
+        <image name="postcard-mountain.png" width="843" height="568"/>
         <image name="scan_frame.png" width="271" height="226"/>
-        <image name="swipe-arrow.png" width="35" height="18"/>
+        <image name="swipe-arrow.png" width="34" height="18"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

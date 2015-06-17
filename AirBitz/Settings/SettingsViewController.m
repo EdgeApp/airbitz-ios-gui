@@ -380,7 +380,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _signUpController.mode = mode;
     _signUpController.delegate = self;
 
-    [Util addSubviewControllerWithConstraints:self.view child:_signUpController];
+    [Util addSubviewControllerWithConstraints:self child:_signUpController];
     [MainViewController animateSlideIn:_signUpController];
 }
 
@@ -392,7 +392,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	_passwordRecoveryController.delegate = self;
 	_passwordRecoveryController.mode = PassRecovMode_Change;
 
-    [Util addSubviewControllerWithConstraints:self.view child:_passwordRecoveryController];
+    [Util addSubviewControllerWithConstraints:self child:_passwordRecoveryController];
     [MainViewController animateSlideIn:_passwordRecoveryController];
 
 }
@@ -405,7 +405,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
         _categoriesController.delegate = self;
 
-        [Util addSubviewControllerWithConstraints:self.view child:_categoriesController];
+        [Util addSubviewControllerWithConstraints:self child:_categoriesController];
         [MainViewController animateSlideIn:_categoriesController];
 
     }
@@ -418,7 +418,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         _spendLimitsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SpendingLimitsViewController"];
         _spendLimitsController.delegate = self;
 
-        [Util addSubviewControllerWithConstraints:self.view child:_spendLimitsController];
+        [Util addSubviewControllerWithConstraints:self child:_spendLimitsController];
 
         [MainViewController animateSlideIn:_spendLimitsController];
     }
@@ -430,7 +430,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _tfaViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"TwoFactorShowViewController"];
     _tfaViewController.delegate = self;
 
-    [Util addSubviewControllerWithConstraints:self.view child:_tfaViewController];
+    [Util addSubviewControllerWithConstraints:self child:_tfaViewController];
     [MainViewController animateSlideIn:_tfaViewController];
 
 }
@@ -441,7 +441,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     _debugViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"DebugViewController"];
     _debugViewController.delegate = self;
 
-    [Util addSubviewControllerWithConstraints:self.view child:_debugViewController];
+    [Util addSubviewControllerWithConstraints:self child:_debugViewController];
     [MainViewController animateSlideIn:_debugViewController];
 }
 
@@ -461,10 +461,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         CGFloat distFromBottom = frontWindow.frame.size.height - pointInWindow.y;
         obscureAmount = (_keyboardHeight + theView.frame.size.height) - distFromBottom;
 
-        //NSLog(@"y coord = %f", theView.frame.origin.y);
-        //NSLog(@"y coord in window = %f", pointInWindow.y);
-        //NSLog(@"dist from bottom = %f", distFromBottom);
-        //NSLog(@"amount Obscured = %f", obscureAmount);
+        //ABLog(2,@"y coord = %f", theView.frame.origin.y);
+        //ABLog(2,@"y coord in window = %f", pointInWindow.y);
+        //ABLog(2,@"dist from bottom = %f", distFromBottom);
+        //ABLog(2,@"amount Obscured = %f", obscureAmount);
     }
 
     return obscureAmount;
@@ -479,15 +479,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     obscureAmount += (CGFloat) DISTANCE_ABOVE_KEYBOARD;
 
     // if obscured too much
-    //NSLog(@"obscure amount final = %f", obscureAmount);
+    //ABLog(2,@"obscure amount final = %f", obscureAmount);
     if (obscureAmount != 0.0)
     {
         // it is obscured so move it to compensate
-        //NSLog(@"need to compensate");
+        //ABLog(2,@"need to compensate");
         newFrame.origin.y -= obscureAmount;
     }
 
-    //NSLog(@"old origin: %f, new origin: %f", _frameStart.origin.y, newFrame.origin.y);
+    //ABLog(2,@"old origin: %f, new origin: %f", _frameStart.origin.y, newFrame.origin.y);
 
     // if our new position puts us lower then we were originally
     if (newFrame.origin.y > _frameStart.origin.y)
@@ -610,31 +610,37 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     if (_signUpController)
     {
         [_signUpController.view removeFromSuperview];
+        [_signUpController removeFromParentViewController];
         _signUpController = nil;
     }
     if (_passwordRecoveryController)
     {
         [_passwordRecoveryController.view removeFromSuperview];
+        [_passwordRecoveryController removeFromParentViewController];
         _passwordRecoveryController = nil;
     }
     if (_categoriesController)
     {
         [_categoriesController.view removeFromSuperview];
+        [_categoriesController removeFromParentViewController];
         _categoriesController = nil;
     }
     if (_spendLimitsController)
     {
         [_spendLimitsController.view removeFromSuperview];
+        [_spendLimitsController removeFromParentViewController];
         _spendLimitsController = nil;
     }
     if (_tfaViewController)
     {
         [_tfaViewController.view removeFromSuperview];
+        [_tfaViewController removeFromParentViewController];
         _tfaViewController = nil;
     }
     if (_debugViewController)
     {
         [_debugViewController.view removeFromSuperview];
+        [_debugViewController removeFromParentViewController];
         _debugViewController = nil;
     }
     
@@ -1196,7 +1202,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//NSLog(@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
+	//ABLog(2,@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
 
     // NOTE: if it isn't handled in here it is probably handled in a cell callback (e.g., buttonCellButtonPressed)
 
@@ -1356,8 +1362,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         // update the display by reloading the table
         [self.tableView reloadData];
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-        {
+        [CoreBridge postToMiscQueue:^{
+
             if (theSwitch.on)
             {
                 [CoreBridge setupLoginPIN];
@@ -1366,7 +1372,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             {
                 [CoreBridge deletePINLogin];
             }
-        });
+        }];
     }
 }
 

@@ -154,7 +154,7 @@
 		}
 		
 		UILabel* label = (UILabel *)[self viewWithTag:i + 20];
-		//NSLog(@"curent tag: %i for view: %@", i, label);
+		//ABLog(2,@"curent tag: %i for view: %@", i, label);
 		if(label)
 		{
 			label.text = [NSString stringWithFormat:@"%s", pRule->szDescription];

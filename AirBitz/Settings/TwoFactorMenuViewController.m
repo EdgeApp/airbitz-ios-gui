@@ -104,7 +104,7 @@
     _tfaScanViewController.bStoreSecret = _bStoreSecret;
     _tfaScanViewController.bTestSecret = _bTestSecret;
 
-    [Util addSubviewControllerWithConstraints:self.view child:_tfaScanViewController];
+    [Util addSubviewControllerWithConstraints:self child:_tfaScanViewController];
     [MainViewController animateSlideIn:_tfaScanViewController];
 
 }

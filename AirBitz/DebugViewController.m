@@ -13,6 +13,7 @@
 #import "CommonTypes.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "Util.h"
 
 @interface DebugViewController ()  <UIGestureRecognizerDelegate>
 {
@@ -81,6 +82,7 @@
     // An async tx details happened and exited. Drop everything and kill ourselves or we'll
     // corrupt the background. This is needed on every subview of a primary screen
     [self.view removeFromSuperview];
+    [self removeFromParentViewController];
 }
 
 
@@ -98,9 +100,9 @@
 
 - (IBAction)uploadLogs:(id)sender
 {
-    NSLog(@"Uploading Logs\n");
+    ABLog(2,@"Uploading Logs\n");
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [CoreBridge postToMiscQueue:^{
         tABC_Error Error;
         ABC_UploadLogs([[User Singleton].name UTF8String],
                        [[User Singleton].password UTF8String],
@@ -126,12 +128,12 @@
             }
 
         });
-    });
+    }];
 }
 
 - (IBAction)clearWatcher:(id)sender
 {
-    NSLog(@"Clearing Watcher\n");
+    ABLog(2,@"Clearing Watcher\n");
     NSString *buttonText = self.clearWatcherButton.titleLabel.text;
 //    NSMutableArray *wallets = [[NSMutableArray alloc] init];
 //    NSMutableArray *archived = [[NSMutableArray alloc] init];
@@ -140,13 +142,13 @@
 
     self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [CoreBridge postToMiscQueue:^{
         [CoreBridge stopWatchers];
         [CoreBridge startWatchers];
         dispatch_async(dispatch_get_main_queue(), ^(void){
             self.clearWatcherButton.titleLabel.text = buttonText;
         });
-    });
+    }];
 }
 
 #pragma mark - Misc Methods

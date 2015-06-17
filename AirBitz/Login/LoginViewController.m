@@ -616,7 +616,7 @@ static BOOL bInitialized = false;
 {
     [self updateDisplayForKeyboard:YES];
 
-    //NSLog(@"Keyboard will show for SignUpView");
+    //ABLog(2,@"Keyboard will show for SignUpView");
     NSDictionary *userInfo = [notification userInfo];
     CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
@@ -825,7 +825,7 @@ static BOOL bInitialized = false;
     }
     else if (_mode == MODE_NO_USERS)
     {
-        NSLog(@"XXX error. should not happen");
+        ABLog(2,@"XXX error. should not happen");
     }
 
     // highlight all of the text

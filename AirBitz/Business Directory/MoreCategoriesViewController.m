@@ -111,7 +111,7 @@
 		}
 	}
 	
-	//NSLog(@"New categories: %@", categoriesArray);
+	//ABLog(2,@"New categories: %@", categoriesArray);
 }
 
 -(IBAction)back
@@ -203,7 +203,7 @@
 	NSString *nextQuery = [dictFromServer objectForKey:@"next"];
 	if(nextQuery && (nextQuery != (id)[NSNull null]))
 	{
-		//NSLog(@"Loading next: %@", nextQuery);
+		//ABLog(2,@"Loading next: %@", nextQuery);
 		//NSString *serverQuery = [NSString stringWithFormat:@"%@/categories/?sort=level", SERVER_API];
 	
 		[[DL_URLServer controller] issueRequestURL:nextQuery
@@ -216,7 +216,7 @@
 	}
 	else
 	{
-		//NSLog(@"Results: %@", categoriesArray);
+		//ABLog(2,@"Results: %@", categoriesArray);
 		[self pruneFirstThreeLevelsFromCategories];
 		[self.activityView stopAnimating];
 		[self.tableView reloadData];

@@ -38,7 +38,6 @@
 
 @required
 -(void)RequestViewControllerDone:(RequestViewController *)vc;
--(void)pleaseRestartRequestViewBecauseAppleSucksWithPresentController;
 
 @end
 

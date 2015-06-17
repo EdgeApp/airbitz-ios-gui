@@ -10,10 +10,11 @@
 #import "Wallet.h"
 #import "ABC.h"
 #import "SpendTarget.h"
+#import "AirbitzViewController.h"
 
 @protocol SendConfirmationViewControllerDelegate;
 
-@interface SendConfirmationViewController : UIViewController
+@interface SendConfirmationViewController : AirbitzViewController
 
 
 @property (assign)              id<SendConfirmationViewControllerDelegate>  delegate;

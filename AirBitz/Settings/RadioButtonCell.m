@@ -66,7 +66,7 @@
 		UIView *scrollView = self.subviews[0];
 		for (UIView * view in scrollView.subviews)
 		{
-			//NSLog(@"Class: %@", NSStringFromClass([view class]));
+			//ABLog(2,@"Class: %@", NSStringFromClass([view class]));
 			if ([NSStringFromClass([view class]) rangeOfString: @"Reorder"].location != NSNotFound)
 			{
 				for (UIView * subview in view.subviews)

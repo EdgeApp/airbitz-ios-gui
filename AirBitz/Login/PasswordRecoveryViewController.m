@@ -88,7 +88,7 @@ typedef enum eAlertType
 	self.arrayCategoryMust      = [[NSMutableArray alloc] init];
 	self.arrayChosenQuestions	= [[NSMutableArray alloc] init];
 
-	//NSLog(@"Adding keyboard notification");
+	//ABLog(2,@"Adding keyboard notification");
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -107,7 +107,7 @@ typedef enum eAlertType
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        [CoreBridge postToMiscQueue:^{
             tABC_Error Error;
             tABC_QuestionChoices *pQuestionChoices = NULL;
             tABC_CC result = ABC_GetQuestionChoices(&pQuestionChoices, &Error);
@@ -124,7 +124,7 @@ typedef enum eAlertType
                 }
                 [self performSelectorOnMainThread:@selector(getPasswordRecoveryQuestionsComplete) withObject:nil waitUntilDone:FALSE];
             });
-        });
+        }];
     }
     else
     {
@@ -216,7 +216,7 @@ typedef enum eAlertType
 
 - (void)CompleteSignup
 {
-	//NSLog(@"Complete Signup");
+	//ABLog(2,@"Complete Signup");
 	//verify that all six questions have been selected
 	BOOL allQuestionsSelected = YES;
 	BOOL allAnswersValid = YES;
@@ -335,7 +335,7 @@ typedef enum eAlertType
 {
     _bSuccess = NO;
     [self showSpinner:YES];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [CoreBridge postToMiscQueue:^{
         tABC_Error error;
         BOOL bSuccess = [CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName status:&error];
         NSArray *params = [NSArray arrayWithObjects:strAnswers, nil];
@@ -350,7 +350,7 @@ typedef enum eAlertType
             }
             [self performSelectorOnMainThread:@selector(checkRecoveryAnswersResponse:) withObject:params waitUntilDone:NO];
         });
-    });
+    }];
 }
 
 - (void)checkRecoveryAnswersResponse:(NSArray *)params
@@ -440,7 +440,7 @@ typedef enum eAlertType
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [CoreBridge postToMiscQueue:^{
         tABC_Error error;
         ABC_SetAccountRecoveryQuestions([[User Singleton].name UTF8String],
                                                 [password UTF8String],
@@ -450,7 +450,7 @@ typedef enum eAlertType
         _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
         _strReason = [Util errorMap:&error];
         [self performSelectorOnMainThread:@selector(setRecoveryComplete) withObject:nil waitUntilDone:FALSE];
-    });
+    }];
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions
@@ -602,7 +602,7 @@ typedef enum eAlertType
 		if (distanceToMove > 0)
 		{
 			//need to scroll
-			//NSLog(@"Scrolling %f", distanceToMove);
+			//ABLog(2,@"Scrolling %f", distanceToMove);
 			CGPoint curContentOffset = self.scrollView.contentOffset;
 			curContentOffset.y += distanceToMove;
 			[self.scrollView setContentOffset:curContentOffset animated:YES];
@@ -618,7 +618,7 @@ typedef enum eAlertType
 {
 	if (_activeTextField)
 	{
-		//NSLog(@"Keyboard will hide for Login View Controller");
+		//ABLog(2,@"Keyboard will hide for Login View Controller");
 
 		_activeTextField = nil;
 	}
@@ -686,14 +686,13 @@ typedef enum eAlertType
 
         //position complete Signup button below QA views
         self.completeSignupButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [self.completeSignupButton setTitle:@"Complete Sign Up" forState:UIControlStateNormal];
+        [self updateDisplayForMode:self.mode];
+
         self.completeSignupButton.backgroundColor = [Theme Singleton].colorButtonGreen;
         [self.completeSignupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.completeSignupButton.hidden = NO;
         self.completeSignupButton.enabled = YES;
         [self.completeSignupButton addTarget:self action:@selector(CompleteSignup) forControlEvents:UIControlEventTouchDown];
-
-        [self.scrollView addSubview:self.completeSignupButton];
 
         [self.scrollView addSubview:self.completeSignupButton];
         CGRect btnFrame = self.completeSignupButton.frame;
@@ -722,7 +721,7 @@ typedef enum eAlertType
     }
     else
     {
-        //NSLog(@"%@", [NSString stringWithFormat:@"Account creation failed\n%@", strReason]);
+        //ABLog(2,@"%@", [NSString stringWithFormat:@"Account creation failed\n%@", strReason]);
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:self.labelTitle.text
 							  message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, self.strReason]
@@ -867,7 +866,7 @@ typedef enum eAlertType
 
 - (void)QuestionAnswerView:(QuestionAnswerView *)view didSelectQuestion:(NSDictionary *)question oldQuestion:(NSString *)oldQuestion
 {
-	//NSLog(@"Selected Question: %@", [question objectForKey:@"question"]);
+	//ABLog(2,@"Selected Question: %@", [question objectForKey:@"question"]);
 	[self.arrayChosenQuestions addObject:[question objectForKey:@"question"]];
 	
 	[self.arrayChosenQuestions removeObject:oldQuestion];
@@ -878,7 +877,7 @@ typedef enum eAlertType
 
 - (void)QuestionAnswerView:(QuestionAnswerView *)view didSelectAnswerField:(UITextField *)textField
 {
-	//NSLog(@"Answer field selected");
+	//ABLog(2,@"Answer field selected");
 	_activeTextField = textField;
 }
 

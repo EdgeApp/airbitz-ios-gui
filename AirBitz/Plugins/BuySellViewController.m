@@ -126,6 +126,8 @@
 {
     if (_pluginViewController != nil) {
         [_pluginViewController.view removeFromSuperview];
+        [_pluginViewController removeFromParentViewController];
+
     }
     UIStoryboard *pluginStoryboard = [UIStoryboard storyboardWithName:@"Plugins" bundle: nil];
     _pluginViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"PluginViewController"];

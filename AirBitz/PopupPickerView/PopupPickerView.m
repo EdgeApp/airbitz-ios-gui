@@ -9,6 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PopupPickerView.h"
 #import "MainViewController.h"
+#import "Util.h"
 
 #define DEFAULT_WIDTH           330
 
@@ -77,13 +78,13 @@ CGRect keyboardFrame;
 {
 	// Get the size of the keyboard.
 	keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	//NSLog(@"SHOW: KeyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
+	//ABLog(2,@"SHOW: KeyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
 {
 	keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	//NSLog(@"HIDE: keyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
+	//ABLog(2,@"HIDE: keyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 }
 
 - (void)addCropLine:(CGPoint)pointOnScreen direction:(tPopupPickerPosition)cropDirection animated:(BOOL)animated
@@ -110,7 +111,7 @@ CGRect keyboardFrame;
 				[self constrainToKeepoutsAnimated:animated];
 			break;
 			default:
-				NSLog(@"*** THIS CROP DIRECTION NOT SUPPORTED YET ***");
+				ABLog(2,@"*** THIS CROP DIRECTION NOT SUPPORTED YET ***");
 				break;
 	}
 }
@@ -490,7 +491,7 @@ CGRect keyboardFrame;
 
 -(void)selectRow:(NSInteger)row
 {
-	//NSLog(@"Select Row");
+	//ABLog(2,@"Select Row");
 	NSIndexPath *ip=[NSIndexPath indexPathForRow:row inSection:0];
 	[table selectRowAtIndexPath:ip animated:NO scrollPosition:UITableViewScrollPositionTop];
 	[table scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
@@ -586,7 +587,7 @@ CGRect keyboardFrame;
         }
     }
 
-	//NSLog(@"Number of rows: %i", nRows);
+	//ABLog(2,@"Number of rows: %i", nRows);
     return nRows;
 }
 
@@ -638,7 +639,7 @@ CGRect keyboardFrame;
     if(self.categories) {
         NSInteger index = [self.categories indexOfObject:cell.textLabel.text];
         if(index == NSNotFound) {
-            UIImage *image = [UIImage imageNamed:@"btn_addCategory.png"];
+            UIImage *image = [UIImage imageNamed:@"btn_add_black.png"];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
             button.frame = frame;

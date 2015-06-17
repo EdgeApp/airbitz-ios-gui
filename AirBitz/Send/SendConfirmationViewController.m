@@ -132,6 +132,7 @@
     _bAddressIsWalletUUID = NO;
     if ([[NSString safeStringWithUTF8String:_spendTarget.pSpend->szDestUUID] length]) {
         _bAddressIsWalletUUID = YES;
+        NSAssert((_spendTarget.destWallet != nil), @"Empty destWallet");
         _destUUID = [NSString safeStringWithUTF8String:_spendTarget.pSpend->szDestUUID];
         NSMutableArray *newArr = [[NSMutableArray alloc] init];
         for (Wallet *w in [CoreBridge Singleton].arrayWallets) {
@@ -175,6 +176,7 @@
     // An async tx details happened and exited. Drop everything and kill ourselves or we'll
     // corrupt the background. This is needed on every subview of a primary screen
     [self.view removeFromSuperview];
+    [self removeFromParentViewController];
 }
 
 - (void)updateViews:(NSNotification *)notification
@@ -240,7 +242,7 @@
     }
     else
     {
-        NSLog(@"Text changed for some field");
+        ABLog(2,@"Text changed for some field");
     }
 }
 
@@ -254,9 +256,7 @@
     [super viewWillAppear:animated];
 //    [self.view addGestureRecognizer:tap];
     self.amountBTCTextField.text = [CoreBridge formatSatoshi:_spendTarget.pSpend->amount withSymbol:false];
-
-    self.maxAmountButton.hidden = !_bAdvanceToTx;
-    self.walletSelector.enabled = _bAdvanceToTx;
+    self.maxAmountButton.hidden = ![_spendTarget isMutable];
 
     NSString *prefix;
     NSString *suffix;
@@ -397,7 +397,7 @@
         _selectedTextField = self.amountBTCTextField;
 
         // We use a serial queue for this calculation
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [CoreBridge postToMiscQueue:^{
             int64_t maxAmount = [_spendTarget maxSpendable:[CoreBridge Singleton].currentWallet.strUUID];
             dispatch_async(dispatch_get_main_queue(), ^{
                 _maxLocked = NO;
@@ -410,7 +410,7 @@
                     [self.withdrawlPIN becomeFirstResponder];
                 }
             });
-        });
+        }];
     }
 }
 
@@ -430,41 +430,16 @@
     self.sendStatusController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendStatusViewController"];
 
 
-
-    CGRect frame = self.view.bounds;
-    //frame.origin.x = frame.size.width;
-    self.sendStatusController.view.frame = frame;
-    [self.view addSubview:self.sendStatusController.view];
-    self.sendStatusController.view.alpha = 0.0;
+    [Util addSubviewControllerWithConstraints:self child:self.sendStatusController];
 
     self.sendStatusController.messageLabel.text = NSLocalizedString(@"Sending...", @"status message");
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-     {
-         self.sendStatusController.view.alpha = 1.0;
-     }
-     completion:^(BOOL finished)
-     {
-     }];
+    [Util animateControllerFadeIn:self.sendStatusController];
 }
 
 - (void)hideSendStatus
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^
-    {
-        self.sendStatusController.view.alpha = 0.0;
-    }
-    completion:^(BOOL finished)
-    {
-        [self.sendStatusController.view removeFromSuperview];
-        self.sendStatusController = nil;
-    }];
+    [Util animateControllerFadeOut:self.sendStatusController];
 }
 
 - (void)initiateSendRequest
@@ -474,49 +449,19 @@
         [self performSelectorOnMainThread:@selector(showSendStatus:) withObject:nil waitUntilDone:FALSE];
         _callbackTimestamp = [[NSDate date] timeIntervalSince1970];
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        _spendTarget.srcWallet = [CoreBridge Singleton].currentWallet;
+        [CoreBridge postToMiscQueue:^{
             tABC_Error error;
-            NSString *txId = [_spendTarget approve:[CoreBridge Singleton].currentWallet.strUUID
-                                              fiat:_overrideCurrency
+            NSString *txId = [_spendTarget approve:_overrideCurrency
                                              error:&error];
             if (error.code == ABC_CC_Ok) {
-                [self txSendSuccess:[CoreBridge Singleton].currentWallet.strUUID withTx:txId];
+                [self txSendSuccess:_spendTarget.srcWallet withTx:txId];
             } else {
                 [self txSendFailed:error];
             }
-        });
+        }];
     }
 }
-
-//- (void)setWalletFromIndex:(int)walletIdx
-//{
-//    _selectedWalletIndex = walletIdx;
-//    if ([CoreBridge Singleton].arrayWallets && walletIdx < [[CoreBridge Singleton].arrayWallets count]) {
-//        self.wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:_selectedWalletIndex];
-//    }
-//}
-//
-//- (void)setWalletLabel
-//{
-//    if (self.wallet && [CoreBridge Singleton].arrayWallets) {
-//        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] initWithCapacity:[[CoreBridge Singleton].arrayWallets count]];
-//        _selectedWalletIndex = 0;
-//        for (int i = 0; i < [[CoreBridge Singleton].arrayWallets count]; i++) {
-//            Wallet *w = [[CoreBridge Singleton].arrayWallets objectAtIndex:i];
-//            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", w.strName, [CoreBridge formatSatoshi:w.balance]]];
-//
-//            if ([self.wallet.strUUID isEqualToString:w.strUUID]) {
-//                _selectedWalletIndex = i;
-//            }
-//        }
-//        self.walletSelector.arrayItemsToSelect = [arrayWalletNames copy];
-//        [self.walletSelector.button setTitle:[NSString stringWithFormat:@"%@ (%@)", self.wallet.strName, [CoreBridge formatSatoshi:self.wallet.balance]]
-//            forState:UIControlStateNormal];
-//        self.walletSelector.selectedItemIndex = (int) _selectedWalletIndex;
-//        [MainViewController changeNavBarTitleWithButton:self title:self.wallet.strName action:@selector(didTapTitle:) fromObject:self];
-//
-//    }
-//}
 
 - (void)didTapTitle: (UIButton *)sender
 {
@@ -589,13 +534,12 @@
 - (void)showTransactionDetails:(NSArray *)params
 {
     if ([params count] < 2) {
-        NSLog(@"Not enought args\n");
+        ABLog(2,@"Not enought args\n");
         return;
     }
-    NSString *walletUUID = params[0];
+    Wallet *wallet = params[0];
     NSString *txId = params[1];
-    Wallet *wallet = [CoreBridge getWallet:walletUUID];
-    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    Transaction *transaction = [CoreBridge getTransaction:wallet.strUUID withTx:txId];
     [self launchTransactionDetailsWithTransaction:wallet withTx:transaction];
 }
 
@@ -681,9 +625,9 @@
         self.helpButton.hidden = YES;
         return;
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [CoreBridge postToMiscQueue:^{
         [self calcFees];
-    });
+    }];
 }
 
 - (void)calcFees
@@ -817,7 +761,13 @@
 #pragma mark - UITextField delegates
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    return textField == _withdrawlPIN || _bAdvanceToTx;
+    if (textField == _withdrawlPIN) {
+        return YES;
+    }
+    if (![_spendTarget isMutable]) {
+        return NO;
+    }
+    return _bAdvanceToTx;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -889,7 +839,7 @@
             return;
         }
 
-        NSString *PIN = [CoreBridge getPIN];
+        NSString *PIN = [User Singleton].strPIN;
         if (_pinRequired && ![self.withdrawlPIN.text isEqualToString:PIN]) {
             if (kInvalidEntryWait == [user sendInvalidEntry])
             {
@@ -913,12 +863,12 @@
 
 - (void)fadingAlertDelayed:(NSString *)message
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [CoreBridge postToMiscQueue:^{
         [NSThread sleepForTimeInterval:0.2f];
         dispatch_async(dispatch_get_main_queue(), ^{
             [MainViewController fadingAlert:message];
         });
-    });
+    }];
 }
 
 - (void)handlePasswordCheck:(NSNumber *)authenticated
@@ -968,9 +918,11 @@
 - (void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
 {
     [controller.view removeFromSuperview];
+    [controller removeFromParentViewController];
     self.transactionDetailsController = nil;
 
     [self.sendStatusController.view removeFromSuperview];
+    [self.sendStatusController removeFromParentViewController];
     self.sendStatusController = nil;
 
     [self.delegate sendConfirmationViewControllerDidFinish:self];
@@ -978,9 +930,9 @@
 
 #pragma mark - ABC Callbacks
 
-- (void)txSendSuccess:(NSString *)walletUUID withTx:(NSString *)txId
+- (void)txSendSuccess:(Wallet *)wallet withTx:(NSString *)txId
 {
-    NSArray *params = [NSArray arrayWithObjects: walletUUID, txId, nil];
+    NSArray *params = [NSArray arrayWithObjects: wallet, txId, nil];
     [[AudioController controller] playSent];
 
     int maxDelay = 3;

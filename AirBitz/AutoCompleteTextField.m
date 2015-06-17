@@ -12,6 +12,7 @@
 #import "Server.h"
 #import "Location.h"
 #import "CJSONDeserializer.h"
+#import "Util.h"
 
 #define USE_AUTOCOMPLETE_QUERY 0
 
@@ -148,7 +149,7 @@
 		
 		contactsArray = allNames;
 		autoCompleteResults = allNames; //start autoCompleteResults with something (don't have business names at this point)
-		NSLog(@"All Email %@", contactsArray);
+		ABLog(2,@"All Email %@", contactsArray);
 	}
 }
 
@@ -210,7 +211,7 @@
 	}
 	else
 	{
-		//NSLog(@"string already contains ll");
+		//ABLog(2,@"string already contains ll");
 	}
 }
 
@@ -249,7 +250,7 @@
 	
 	if(urlString != (id)[NSNull null])
 	{
-		NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+		ABLog(2,@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
 		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 										withParams:nil
 										withObject:self
@@ -264,7 +265,7 @@
 	
 	if(urlString != (id)[NSNull null])
 	{
-		NSLog(@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+		ABLog(2,@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
 		[[DL_URLServer controller] issueRequestURL:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 										withParams:nil
 										withObject:self
@@ -356,7 +357,7 @@
 
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring
 {
-    NSLog(@"Search Text %@",substring);
+    ABLog(2,@"Search Text %@",substring);
     
     [foundContactsArray removeAllObjects];
     
@@ -432,7 +433,7 @@
 {
 	NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
 	
-	//NSLog(@"Results download returned: %@", jsonString );
+	//ABLog(2,@"Results download returned: %@", jsonString );
 	
 	NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
 	NSError *myError;
@@ -440,7 +441,7 @@
 	
 	
 	NSArray *searchResultsArray;
-	//NSLog(@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
+	//ABLog(2,@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
 	searchResultsArray = [[dictFromServer objectForKey:@"results"] mutableCopy];
 
 	//build array of business (prune categories out of list)
@@ -466,11 +467,11 @@
 
 	if(searchResultsArray.count)
 	{
-		NSLog(@"Results: %@", foundBusinessNames);
+		ABLog(2,@"Results: %@", foundBusinessNames);
 	}
 	else
 	{
-		NSLog(@"SEARCH RESULTS ARRAY IS EMPTY!");
+		ABLog(2,@"SEARCH RESULTS ARRAY IS EMPTY!");
 	}
 	if (([foundContactsArray count] > 0) || (foundBusinessNames.count))
     {

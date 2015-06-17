@@ -53,18 +53,17 @@
     return pError->code == ABC_CC_Ok ? YES : NO;
 }
 
-- (NSString *)approve:(NSString *)walletUUID
-                 fiat:(double)fiatAmount
+- (NSString *)approve:(double)fiatAmount
                 error:(tABC_Error *)pError
 {
     char *szTxId = NULL;
     NSString *txId = nil;
 
-    ABC_SpendApprove([[User Singleton].name UTF8String], [walletUUID UTF8String],
+    ABC_SpendApprove([[User Singleton].name UTF8String], [self.srcWallet.strUUID UTF8String],
             _pSpend, &szTxId, pError);
     if (pError->code == ABC_CC_Ok) {
         txId = [NSString stringWithUTF8String:szTxId];
-        [self updateTransaction:walletUUID txId:txId fiatAmount:fiatAmount];
+        [self updateTransaction:txId fiatAmount:fiatAmount];
     }
     if (NULL != szTxId) {
         free(szTxId);
@@ -72,51 +71,56 @@
     return txId;
 }
 
-- (void)updateTransaction:(NSString *)walletUUID
-                     txId:(NSString *)txId
+- (void)updateTransaction:(NSString *)txId
                fiatAmount:(double)fiatAmount
 {
-    NSString *categoryText = NSLocalizedString(@"Transfer:Wallet:", nil);
+    NSString *transferCategory = NSLocalizedString(@"Transfer:Wallet:", nil);
+    NSString *spendCategory = NSLocalizedString(@"Expense:", nil);
 
     tABC_Error error;
     tABC_TxInfo *pTrans = NULL;
-    Wallet *destWallet = nil;
-    Wallet *srcWallet = [CoreBridge getWallet:walletUUID];
     if (_pSpend->szDestUUID) {
-        destWallet = [CoreBridge getWallet:[NSString safeStringWithUTF8String:_pSpend->szDestUUID]];
+        NSAssert((self.destWallet), @"destWallet missing");
     }
     ABC_GetTransaction([[User Singleton].name UTF8String], NULL,
-        [walletUUID UTF8String], [txId UTF8String], &pTrans, &error);
+        [self.srcWallet.strUUID UTF8String], [txId UTF8String], &pTrans, &error);
     if (ABC_CC_Ok == error.code) {
-        if (destWallet) {
-            pTrans->pDetails->szName = strdup([destWallet.strName UTF8String]);
-            pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", categoryText, destWallet.strName] UTF8String]);
+        if (self.destWallet) {
+            pTrans->pDetails->szName = strdup([self.destWallet.strName UTF8String]);
+            pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", transferCategory, self.destWallet.strName] UTF8String]);
+        } else {
+            pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@", spendCategory] UTF8String]);
         }
         if (fiatAmount > 0) {
             pTrans->pDetails->amountCurrency = fiatAmount;
         }
         ABC_SetTransactionDetails([[User Singleton].name UTF8String], NULL,
-            [walletUUID UTF8String], [txId UTF8String],
+            [self.srcWallet.strUUID UTF8String], [txId UTF8String],
             pTrans->pDetails, &error);
     }
     ABC_FreeTransaction(pTrans);
     pTrans = NULL;
 
     // This was a transfer
-    if (destWallet) {
+    if (self.destWallet) {
         ABC_GetTransaction([[User Singleton].name UTF8String], NULL,
-            [destWallet.strUUID UTF8String], [txId UTF8String], &pTrans, &error);
+            [self.destWallet.strUUID UTF8String], [txId UTF8String], &pTrans, &error);
         if (ABC_CC_Ok == error.code) {
-            pTrans->pDetails->szName = strdup([srcWallet.strName UTF8String]);
-            pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", categoryText, srcWallet.strName] UTF8String]);
+            pTrans->pDetails->szName = strdup([self.srcWallet.strName UTF8String]);
+            pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", transferCategory, self.srcWallet.strName] UTF8String]);
 
             ABC_SetTransactionDetails([[User Singleton].name UTF8String], NULL,
-                [destWallet.strUUID UTF8String], [txId UTF8String],
+                [self.destWallet.strUUID UTF8String], [txId UTF8String],
                 pTrans->pDetails, &error);
         }
         ABC_FreeTransaction(pTrans);
         pTrans = NULL;
     }
+}
+
+- (BOOL)isMutable
+{
+    return _pSpend->amountMutable == true ? YES : NO;
 }
 
 - (uint64_t)maxSpendable:(NSString *)walletUUID

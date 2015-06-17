@@ -49,6 +49,7 @@ typedef enum eNavBarSide
 +(void)showNavBarAnimated:(BOOL)animated;
 +(void)hideTabBarAnimated:(BOOL)animated;
 +(void)hideNavBarAnimated:(BOOL)animated;
++(void)lockSidebar:(BOOL)locked;
 +(AirbitzViewController *)getSelectedViewController;
 +(void)moveSelectedViewController: (CGFloat) x;
 +(void)setAlphaOfSelectedViewController: (CGFloat) alpha;

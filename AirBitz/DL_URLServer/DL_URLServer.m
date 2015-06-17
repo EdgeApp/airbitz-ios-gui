@@ -11,13 +11,14 @@
 #import <netinet/in.h>
 #import "DL_URLServer.h"
 #import <AFNetworking/AFSecurityPolicy.h>
+#import "Util.h"
 
 #define LIBRARY_VERSION		@"2.3"
 
 #define DebugLog(m, s, ... ) { \
                                 if (self.verboseMessageMask & m) \
                                 { \
-                                    NSLog( @"%@", [NSString stringWithFormat:(s), ##__VA_ARGS__] ); \
+                                    ABLog(2, @"%@", [NSString stringWithFormat:(s), ##__VA_ARGS__] ); \
                                 } \
                              }
 
@@ -147,7 +148,7 @@ __strong static DL_URLServer *singleton = nil;  // this will be the one and only
         singleton.securityPolicy.validatesCertificateChain = NO;
         bInitialized = YES;
 	}
-    //NSLog(@"%@", singleton);
+    //ABLog(2,@"%@", singleton);
 }
 
 + (void)freeAll
@@ -168,7 +169,7 @@ __strong static DL_URLServer *singleton = nil;  // this will be the one and only
 {
     if (!singleton)
     {
-        NSLog(@"DL_URLServer: WARNING - not initialized");
+        ABLog(2,@"DL_URLServer: WARNING - not initialized");
     }
     return singleton;
 }
@@ -396,7 +397,7 @@ __strong static DL_URLServer *singleton = nil;  // this will be the one and only
 				[req addValue:[self.headerRequests objectForKey:key] forHTTPHeaderField:key];
 			}
 		}
-		//NSLog(@"Added API Key");
+		//ABLog(2,@"Added API Key");
 		
         // old
         //request.connection = [[NSURLConnection alloc] initWithRequest:req delegate:self];
@@ -515,7 +516,7 @@ __strong static DL_URLServer *singleton = nil;  // this will be the one and only
     // now add this one
     [self.arrayCachedResults addObject:request];
     
-    //NSLog(@"Cache size: %d", [self.arrayCachedResults count]);
+    //ABLog(2,@"Cache size: %d", [self.arrayCachedResults count]);
 }
 
 #pragma mark - Public Methods

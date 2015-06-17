@@ -176,7 +176,7 @@
     currencyNum = [[User Singleton] defaultCurrencyNum];
     currencyString = [CoreBridge currencyAbbrevLookup:currencyNum];
 //	[self.buttonSelectorView.button setTitle:currencyString forState:UIControlStateNormal];
-//    NSLog(self.buttonSelectorView.button.currentTitle);
+//    ABLog(2,self.buttonSelectorView.button.currentTitle);
 
     _currencyChoice = (int) [arrayCurrencyCodes indexOfObject:currencyString];
     [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];
@@ -240,9 +240,10 @@
 {
     [self blockUser:NO];
     _bCreatingWallet = NO;
+    [CoreBridge startWatchers];
     [CoreBridge refreshWallets];
 
-    //NSLog(@"Wallet create complete");
+    //ABLog(2,@"Wallet create complete");
     if (_bSuccess)
     {
         [self exit];

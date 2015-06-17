@@ -21,6 +21,7 @@
 #import "NotificationChecker.h"
 #import "NSString+StripHTML.h"
 #import "Reachability.h"
+#import "Util.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
@@ -88,18 +89,18 @@ NSDate *logoutDate = NULL;
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
-    NSLog(@"ENTER performFetch...\n");
+    ABLog(2,@"ENTER performFetch...\n");
 
     bool bDidNotification = [self showNotifications];
 
     if (bDidNotification)
     {
-        NSLog(@"EXIT performFetch() NewData...\n");
+        ABLog(2,@"EXIT performFetch() NewData...\n");
         completionHandler(UIBackgroundFetchResultNewData);
     }
     else
     {
-        NSLog(@"EXIT performFetch() NoData...\n");
+        ABLog(2,@"EXIT performFetch() NoData...\n");
         completionHandler(UIBackgroundFetchResultNoData);
     }
 }
@@ -242,7 +243,7 @@ NSDate *logoutDate = NULL;
 
 - (BOOL)showNotifications
 {
-    NSLog(@"ENTER showNotifications\n");
+    ABLog(2,@"ENTER showNotifications\n");
 
     bool bDidNotification = false;
 
@@ -253,7 +254,7 @@ NSDate *logoutDate = NULL;
         NSDictionary *notif = [NotificationChecker unseenNotification];
         while (notif)
         {
-            NSLog(@"IN showNotifications: while loop\n");
+            ABLog(2,@"IN showNotifications: while loop\n");
 
             UILocalNotification *localNotif = [[UILocalNotification alloc] init];
             
@@ -279,7 +280,7 @@ NSDate *logoutDate = NULL;
         };
     }
 
-    NSLog(@"EXIT showNotifications\n");
+    ABLog(2,@"EXIT showNotifications\n");
 
     return bDidNotification;
 }

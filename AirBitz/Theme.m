@@ -127,6 +127,9 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.alertHoldTimePaymentReceived           = 10;       // Hold time for payments
     self.alertHoldTimeHelpPopups                = 6.0;      // Hold time for auto popup help
 
+    self.qrCodeGenDelayTime                     = 0.75;     // Timer delay after keypad entry before new QR code is generated
+    self.rotateServerInterval                   = 15.0;     // How long (in seconds) before we rotate libbitcoin servers while waiting on QR code screen
+
     self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];
     self.backgroundLogin = [UIImage imageNamed:@"postcard-mountain.png"];
 
@@ -183,7 +186,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.fontSizeEnterPINText               = 20.0;     // Font size for PIN login screen "Enter PIN"
     }
 
-    NSLog(@"***Device Type: %@ %@", [self platform], [self platformString]);
+    ABLog(2,@"***Device Type: %@ %@", [self platform], [self platformString]);
 
     NSString *devtype = [self platform];
 

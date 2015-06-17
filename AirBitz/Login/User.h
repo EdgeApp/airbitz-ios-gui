@@ -25,6 +25,7 @@
 @property (nonatomic, copy) NSString* lastName;
 @property (nonatomic, copy) NSString* nickName;
 @property (nonatomic, copy) NSString* fullName;
+@property (nonatomic, copy) NSString* strPIN;
 @property (nonatomic) bool bNameOnPayments;
 @property (nonatomic, copy) NSString* denominationLabelShort;
 @property (nonatomic) bool bDailySpendLimit;

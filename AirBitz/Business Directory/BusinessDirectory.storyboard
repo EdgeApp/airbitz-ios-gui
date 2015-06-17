@@ -584,7 +584,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="darken_bottom_table_cell.png" translatesAutoresizingMaskIntoConstraints="NO" id="PLV-qj-cYH">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="darken_bottom_table_cell.png" translatesAutoresizingMaskIntoConstraints="NO" id="PLV-qj-cYH">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </imageView>
@@ -930,16 +930,16 @@
         <image name="btn_blue.png" width="110" height="27"/>
         <image name="btn_locateMe.png" width="39" height="39"/>
         <image name="btn_right.png" width="22" height="22"/>
-        <image name="darken_bottom_table_cell.png" width="160" height="56"/>
+        <image name="darken_bottom_table_cell.png" width="5" height="111"/>
         <image name="divider.png" width="320" height="27"/>
         <image name="drag_bar.png" width="1600" height="33"/>
-        <image name="icon_category_atm.png" width="30" height="30"/>
-        <image name="icon_category_coffee_tea.png" width="30" height="30"/>
-        <image name="icon_category_electronics.png" width="30" height="30"/>
-        <image name="icon_category_gift_cards.png" width="30" height="30"/>
-        <image name="icon_category_restaurants.png" width="30" height="30"/>
-        <image name="icon_category_shopping.png" width="30" height="30"/>
-        <image name="logo.png" width="71" height="36"/>
+        <image name="icon_category_atm.png" width="36" height="36"/>
+        <image name="icon_category_coffee_tea.png" width="36" height="36"/>
+        <image name="icon_category_electronics.png" width="36" height="36"/>
+        <image name="icon_category_gift_cards.png" width="36" height="36"/>
+        <image name="icon_category_restaurants.png" width="36" height="36"/>
+        <image name="icon_category_shopping.png" width="36" height="36"/>
+        <image name="logo.png" width="70" height="36"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

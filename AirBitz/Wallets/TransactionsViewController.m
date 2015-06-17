@@ -189,7 +189,7 @@
 
 - (void)toggleWalletDropdown: (UIButton *)sender
 {
-    NSLog(@"didTapWalletName: Hello world\n");
+    ABLog(2,@"didTapWalletName: Hello world\n");
 
     CGFloat destination;
 
@@ -398,7 +398,7 @@
     self.exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
     self.exportWalletViewController.delegate = self;
 
-    [Util addSubviewControllerWithConstraints:self.view child:self.exportWalletViewController];
+    [Util addSubviewControllerWithConstraints:self child:self.exportWalletViewController];
     [MainViewController animateSlideIn:self.exportWalletViewController];
 }
 
@@ -540,7 +540,7 @@
     self.transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
     self.transactionDetailsController.photo = [self imageForTransaction:transaction];
 
-    [Util addSubviewControllerWithConstraints:self.view child:self.transactionDetailsController];
+    [Util addSubviewControllerWithConstraints:self child:self.transactionDetailsController];
     [MainViewController animateSlideIn:self.transactionDetailsController];
 }
 
@@ -557,6 +557,8 @@
                      completion:^(BOOL finished)
      {
          [self.transactionDetailsController.view removeFromSuperview];
+         [self.transactionDetailsController removeFromParentViewController];
+
          self.transactionDetailsController = nil;
      }];
 }
@@ -685,7 +687,7 @@
 {
     //get business details
 	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, transaction.bizId];
-	//NSLog(@"Requesting: %@", requestURL);
+	//ABLog(2,@"Requesting: %@", requestURL);
 	[[DL_URLServer controller] issueRequestURL:requestURL
 									withParams:nil
 									withObject:nil
@@ -851,7 +853,7 @@
             case WALLET_SECTION_ACTIVE:
 
                 //CellIdentifier = @"WalletsHeader";
-                //NSLog(@"Active wallets header view: %@", activeWalletsHeaderView);
+                //ABLog(2,@"Active wallets header view: %@", activeWalletsHeaderView);
                 return _activeWalletsHeaderView;
 
             case WALLET_SECTION_ARCHIVED:
@@ -1163,14 +1165,14 @@
 {
     //XXX
     // Need to lock table header & shrink toggle bar
-    NSLog(@"TransactionsView: searchBarTextDidBeginEditing");
+    ABLog(2,@"TransactionsView: searchBarTextDidBeginEditing");
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar;
 {
     //XXX
     // Need to unlock table header & grow toggle bar
-    NSLog(@"TransactionsView: searchBarTextDidEndEditing");
+    ABLog(2,@"TransactionsView: searchBarTextDidEndEditing");
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)text
@@ -1197,7 +1199,7 @@
             {
                 NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
 
-				//NSLog(@"Results download returned: %@", jsonString );
+				//ABLog(2,@"Results download returned: %@", jsonString );
 
                 NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
                 NSError *myError;
@@ -1260,7 +1262,7 @@
             //        // need at least one character in a wallet name
             if ([textField.text length])
             {
-                //NSLog(@"rename wallet to: %@", textField.text);
+                //ABLog(2,@"rename wallet to: %@", textField.text);
                 tABC_Error error;
                 ABC_RenameWallet([[User Singleton].name UTF8String],
                                  [[User Singleton].password UTF8String],
@@ -1304,9 +1306,9 @@
 
     NSIndexPath *indexPath = [self.walletsTable indexPathForRowAtPoint:p];
     if (indexPath == nil) {
-        NSLog(@"long press on table view but not on a row");
+        ABLog(2,@"long press on table view but not on a row");
     } else if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"long press on table view at section %d, row %d", indexPath.section, indexPath.row);
+        ABLog(2,@"long press on table view at section %d, row %d", indexPath.section, indexPath.row);
         if (indexPath.section == WALLET_SECTION_ACTIVE)
         {
             longTapWallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:indexPath.row];
@@ -1322,7 +1324,7 @@
                                         otherButtonTitles:[Theme Singleton].renameButtonText,nil];
         [longTapAlert show];
     } else {
-        NSLog(@"gestureRecognizer.state = %d", gestureRecognizer.state);
+        ABLog(2,@"gestureRecognizer.state = %d", gestureRecognizer.state);
     }
 }
 
@@ -1350,8 +1352,9 @@
 
 - (void)refresh:(id)sender
 {
-    [CoreBridge refreshWallet:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:^{
-        [(UIRefreshControl *)sender endRefreshing];
+    [CoreBridge rotateWalletServer:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:^
+    {
+        [(UIRefreshControl *) sender endRefreshing];
     }];
 }
 
@@ -1504,7 +1507,7 @@
     {
         _archiveCollapsed = YES;
         NSInteger countOfRowsToDelete = [CoreBridge Singleton].arrayArchivedWallets.count;
-        //NSLog(@"Rows to collapse: %i", countOfRowsToDelete);
+        //ABLog(2,@"Rows to collapse: %i", countOfRowsToDelete);
         if (countOfRowsToDelete > 0)
         {
             NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];

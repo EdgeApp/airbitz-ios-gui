@@ -54,6 +54,8 @@
 #import "PopupPickerView2.h"
 #import "CJSONDeserializer.h"
 
+#define IMPORT_TIMEOUT 30
+
 typedef enum eScanMode
 {
 	SCAN_MODE_UNINITIALIZED,
@@ -92,7 +94,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 
 }
-@property (nonatomic, strong)   NSString                        *privateKey;
 @property (weak, nonatomic)     IBOutlet UIImageView            *scanFrame;
 @property (nonatomic, strong)   IBOutlet ButtonSelectorView2    *buttonSelector;
 @property (nonatomic, strong)	IBOutlet UITableView			*tableView;
@@ -203,7 +204,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 
     //
-    // This might be a loopback from pleaseRestartSendViewBecauseAppleSucksWithPresentController
+    // This might be a loopback from presentViewController
     // Check params and go
     //
 
@@ -279,6 +280,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     [self willResignActive];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self cancelImportExpirationTimer];
 }
 
 - (void)didTapTitle: (UIButton *)sender
@@ -334,6 +336,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (_sendConfirmationViewController)
     {
         [_sendConfirmationViewController.view removeFromSuperview];
+        [_sendConfirmationViewController removeFromParentViewController];
+        _sendConfirmationViewController.delegate = nil;
         _sendConfirmationViewController = nil;
     }
 }
@@ -349,11 +353,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		for (NSInteger i = numPeripherals - 1; i>= 0; i--)
 		{
 			PeripheralContainer *pc = [self.peripheralContainers objectAtIndex:i];
-			//NSLog(@"Last: %f Current: %f", [pc.lastAdvertisingTime floatValue], currentTime);
+			//ABLog(2,@"Last: %f Current: %f", [pc.lastAdvertisingTime floatValue], currentTime);
 			if(currentTime - [pc.lastAdvertisingTime doubleValue] > 1.0)
 			{
 				//haven't heard from this peripheral in a while.  Kill it.
-				//NSLog(@"Removing peripheral");
+				//ABLog(2,@"Removing peripheral");
 				[self.peripheralContainers removeObjectAtIndex:i];
 				[self updateTable];
 			}
@@ -601,7 +605,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	
     // assign final
     self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];
-   // NSLog(@"contacts: %@", self.arrayContacts);
+   // ABLog(2,@"contacts: %@", self.arrayContacts);
 }
 
 - (void)addContactInfo:(ABRecordRef)person withName:(NSString *)strName toArray:(NSMutableArray *)arrayContacts
@@ -630,7 +634,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (!self.bImportMode)
     {
-        //NSLog(@"################## STARTED BLE ######################");
+        //ABLog(2,@"################## STARTED BLE ######################");
         [self scan];
         //kick off peripheral cleanup timer (removes peripherals from table when they're no longer in range)
         peripheralCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(cleanupPeripherals:) userInfo:nil repeats:YES];
@@ -641,9 +645,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (!self.bImportMode)
     {
-        //NSLog(@"################## STOPPED BLE ######################");
+        //ABLog(2,@"################## STOPPED BLE ######################");
         [self.centralManager stopScan];
-        //NSLog(@"Getting rid of timer");
+        //ABLog(2,@"Getting rid of timer");
         [peripheralCleanupTimer invalidate];
     }
 }
@@ -655,7 +659,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-//	NSLog(@"DID UPDATE STATE");
+//	ABLog(2,@"DID UPDATE STATE");
 
     if (central.state != CBCentralManagerStatePoweredOn)
 	{
@@ -664,7 +668,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
 	else
 	{
-		NSLog(@"POWERED ON");
+		ABLog(2,@"POWERED ON");
         [self startBLE];
 //		[self enableBLEMode];
 //		self.ble_button.hidden = NO;
@@ -676,13 +680,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)scan
 {
-	//NSLog(@"################## BLE SCAN STARTED ######################");
+	//ABLog(2,@"################## BLE SCAN STARTED ######################");
     _data = [[NSMutableData alloc] init];
 	self.peripheralContainers = nil;
 	[self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]]
                                                 options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES}];
     
-    //NSLog(@"Scanning started");
+    //ABLog(2,@"Scanning started");
 }
 
 /*
@@ -783,7 +787,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 			[self updateTable];
 		}
     }
-//    NSLog(@"Discovered %@ at %@ with adv data: %@", peripheral.name, RSSI, advertisementData);
+//    ABLog(2,@"Discovered %@ at %@ with adv data: %@", peripheral.name, RSSI, advertisementData);
 }
 
 
@@ -791,7 +795,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    NSLog(@"Failed to connect to %@. (%@)", peripheral, [error localizedDescription]);
+    ABLog(2,@"Failed to connect to %@. (%@)", peripheral, [error localizedDescription]);
     [self cleanup];
 }
 
@@ -800,11 +804,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-//    NSLog(@"Peripheral Connected");
+//    ABLog(2,@"Peripheral Connected");
     
     // Stop scanning
     [self.centralManager stopScan];
-//    NSLog(@"Scanning stopped");
+//    ABLog(2,@"Scanning stopped");
     
     // Clear the data that we may already have
     [self.data setLength:0];
@@ -823,7 +827,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (error)
 	{
-        NSLog(@"Error discovering services: %@", [error localizedDescription]);
+        ABLog(2,@"Error discovering services: %@", [error localizedDescription]);
         [self cleanup];
         return;
     }
@@ -845,7 +849,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     // Deal with errors (if any)
     if (error) {
-        NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
+        ABLog(2,@"Error discovering characteristics: %@", [error localizedDescription]);
         [self cleanup];
         return;
     }
@@ -858,29 +862,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		{
 			
             // Write username to this characteristic
-			tABC_AccountSettings            *pAccountSettings;
-			tABC_Error Error;
-			Error.code = ABC_CC_Ok;
-			
-			// load the current account settings
-			pAccountSettings = NULL;
-			ABC_LoadAccountSettings([[User Singleton].name UTF8String],
-									[[User Singleton].password UTF8String],
-									&pAccountSettings,
-									&Error);
-			[Util printABC_Error:&Error];
-			
-			BOOL sendName = NO;
-			if (pAccountSettings)
-			{
-				if(pAccountSettings->bNameOnPayments)
-				{
-					sendName = YES;
-				}
-				ABC_FreeAccountSettings(pAccountSettings);
-			}
-			
-			
+			BOOL sendName = [User Singleton].bNameOnPayments;
+
 			NSString *fullName = @" ";
 			if(sendName)
 			{
@@ -901,7 +884,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 			
 			[peripheral writeValue:[fullName dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
 			
-//			NSLog(@"Writing: %@ to peripheral", fullName);
+//			ABLog(2,@"Writing: %@ to peripheral", fullName);
         }
     }
     
@@ -914,7 +897,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (error)
 	{
-        NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
+        ABLog(2,@"Error discovering characteristics: %@", [error localizedDescription]);
         return;
     }
 	
@@ -980,7 +963,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (error)
 	{
-        NSLog(@"Error changing notification state: %@", error.localizedDescription);
+        ABLog(2,@"Error changing notification state: %@", error.localizedDescription);
     }
     
     // Exit if it's not the transfer characteristic
@@ -992,7 +975,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (!characteristic.isNotifying)
 	{
         // so disconnect from the peripheral
-        NSLog(@"Notification stopped on %@.  Disconnecting", characteristic);
+        ABLog(2,@"Notification stopped on %@.  Disconnecting", characteristic);
         [self.centralManager cancelPeripheralConnection:peripheral];
     }
 }
@@ -1000,7 +983,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 -(void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
 {
-	NSLog(@"Did Modify Services: %@", invalidatedServices);
+	ABLog(2,@"Did Modify Services: %@", invalidatedServices);
 }
 
 
@@ -1008,7 +991,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    //NSLog(@"Did disconnect because: %@", error.description);
+    //ABLog(2,@"Did disconnect because: %@", error.description);
 	self.peripheralContainers = nil;
     self.discoveredPeripheral = nil;
     
@@ -1027,7 +1010,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 -(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        NSLog(@"Error writing value for characteristic: %@", error.localizedDescription);
+        ABLog(2,@"Error writing value for characteristic: %@", error.localizedDescription);
         return;
     }
 
@@ -1117,7 +1100,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     printf("UUID : %s\r\n",CFStringGetCStringPtr(s, 0));
     CFRelease(s);
     printf("RSSI : %d\r\n",[peripheralContainer.peripheral.RSSI intValue]);
-    NSLog(@"Name : %@\r\n",peripheralContainer.peripheral.name);
+    ABLog(2,@"Name : %@\r\n",peripheralContainer.peripheral.name);
 	BOOL connected = NO;
 	if(peripheralContainer.peripheral.state == CBPeripheralStateConnected)
 	{
@@ -1313,7 +1296,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-	//NSLog(@"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Selecting row: %li", (long)indexPath.row);
+	//ABLog(2,@"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Selecting row: %li", (long)indexPath.row);
 	
 	tableView.allowsSelection = NO;
 	//attempt to connect to this peripheral
@@ -1328,7 +1311,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	self.discoveredPeripheral = pc.peripheral;
 	
 	// And connect
-	//NSLog(@"Connecting to peripheral %@", pc.peripheral);
+	//ABLog(2,@"Connecting to peripheral %@", pc.peripheral);
 	[self.centralManager connectPeripheral:pc.peripheral options:nil];
 }
 
@@ -1376,7 +1359,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     _sendConfirmationViewController.spendTarget = spendTarget;
 //    _sendConfirmationViewController.wallet = [CoreBridge Singleton].currentWallet;
 
-    //NSLog(@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
+    //ABLog(2,@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
 	
 //	CGRect frame = self.view.bounds;
 //	frame.origin.x = frame.size.width;
@@ -1385,7 +1368,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     [_readerView stop];
 
-    [Util addSubviewWithConstraints:self.view child:_sendConfirmationViewController.view];
+    [Util addSubviewControllerWithConstraints:self child:_sendConfirmationViewController];
 	
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[UIView animateWithDuration:0.35
@@ -1402,26 +1385,26 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 
-- (void)importWallet
+- (BOOL)importWallet:(NSString *)privateKey
 {
     bool bSuccess = NO;
 
-    if (self.privateKey)
+    if (privateKey)
     {
-        self.privateKey = [self.privateKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([self.privateKey length])
+        privateKey = [privateKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([privateKey length])
         {
-            NSRange schemeMarkerRange = [self.privateKey rangeOfString:@"://"];
+            NSRange schemeMarkerRange = [privateKey rangeOfString:@"://"];
             if (NSNotFound != schemeMarkerRange.location)
             {
-                NSString *scheme = [self.privateKey substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
+                NSString *scheme = [privateKey substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
                 if (nil != scheme && 0 != [scheme length])
                 {
                     if (NSNotFound != [scheme rangeOfString:HIDDEN_BITZ_URI_SCHEME].location)
                     {
                         _dataModel = kHBURI;
 
-                        self.privateKey = [self.privateKey substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
+                        privateKey = [privateKey substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
 
                         bSuccess = YES;
                     }
@@ -1440,7 +1423,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 {
                     // private key is a valid format
                     // attempt to sweep it
-                    _sweptAddress = [CoreBridge sweepKey:self.privateKey
+                    _sweptAddress = [CoreBridge sweepKey:privateKey
                                               intoWallet:[CoreBridge Singleton].currentWallet.strUUID
                                             withCallback:ABC_Sweep_Complete_Callback];
 
@@ -1448,7 +1431,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                     {
                         _state = ImportState_Importing;
                         [self updateDisplay];
-                        _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:30
+                        _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:IMPORT_TIMEOUT
                                                                           target:self
                                                                         selector:@selector(expireImport)
                                                                         userInfo:nil
@@ -1471,6 +1454,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [MainViewController fadingAlert:NSLocalizedString(@"Invalid private key", nil)];
         [self updateState];
     }
+    return bSuccess;
 }
 
 
@@ -1482,10 +1466,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		NSString *text = (NSString *)sym.data;
         if (_bImportMode)
         {
-            if (nil != text && [text length]) {
-                self.privateKey = text;
-                [self importWallet];
-            }
+            [self importWallet:text];
         }
         else
         {
@@ -1511,7 +1492,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     _readerPicker.showsHelpOnFail = NO;
 
     [self presentViewController:_readerPicker animated:YES completion:nil];
-    [MainViewController animateFadeOut:self.view];
 
 #endif
 }
@@ -1568,7 +1548,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)toggleFlash
 {
 
-    //NSLog(@"Flash Item Selected: %i", flashType);
+    //ABLog(2,@"Flash Item Selected: %i", flashType);
     if (bFlashOn)
     {
         [self flashItemSelected:FLASH_ITEM_OFF];
@@ -1623,6 +1603,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     self.addressTextField.text = @"";
     //[self startCameraScanner:nil];
 	[_sendConfirmationViewController.view removeFromSuperview];
+    [_sendConfirmationViewController removeFromParentViewController];
 	_sendConfirmationViewController = nil;
 	
     scanMode = SCAN_MODE_UNINITIALIZED;
@@ -1670,8 +1651,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [reader dismissViewControllerAnimated:YES completion:nil];
 
     self.loopbackState = LoopbackState_Cancelled;
-    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
-	
+
 	//cw viewWillAppear will get called which will switch us back into BLE mode
 }
 
@@ -1682,7 +1662,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     self.zBarSymbolSet = (ZBarSymbolSet *) results;
     self.loopbackState = LoopbackState_Go;
-    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
 
     [reader dismissViewControllerAnimated:YES completion:nil];
 }
@@ -1692,7 +1671,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     [reader dismissViewControllerAnimated:YES completion:nil];
     self.loopbackState = LoopbackState_Scan_Failed;
-    [self.delegate pleaseRestartSendViewBecauseAppleSucksWithPresentController];
 }
 
 #endif
@@ -1733,19 +1711,28 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            [self trySpend:text];
+            if (_bImportMode)
+            {
+                if ([self importWallet:text]) {
+                    [self stopQRReader];
+                }
+            }
+            else
+            {
+                [self trySpend:text];
+            }
         }
-        [self stopQRReader];
 	}
 }
 
 - (void)trySpend:(NSString *)text
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [CoreBridge postToMiscQueue:^{
         tABC_Error error;
         SpendTarget *spendTarget = [[SpendTarget alloc] init];
         if ([spendTarget newSpend:text error:&error]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self stopQRReader];
                 [self showSendConfirmationTo:spendTarget];
             });
         } else {
@@ -1753,7 +1740,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
             });
         }
-    });
+    }];
 }
 
 - (void)PopupPickerView2Cancelled:(PopupPickerView2 *)view userData:(id)data
@@ -1772,6 +1759,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
 
         SpendTarget *spendTarget = [[SpendTarget alloc] init];
+        spendTarget.destWallet = wallet;
         [spendTarget newTransfer:wallet.strUUID error:&error];
         [self stopQRReader];
         [self showSendConfirmationTo:spendTarget];

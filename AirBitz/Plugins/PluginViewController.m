@@ -124,7 +124,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *url = [request URL].absoluteString;
-    NSLog(@("url: %@"), url);
+    ABLog(2,@("url: %@"), url);
     if ([[url lowercaseString] hasPrefix:PROTOCOL]) {
         url = [url substringFromIndex:PROTOCOL.length];
         url = [url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -135,13 +135,13 @@ static const NSString *PROTOCOL = @"bridge://";
                                   options:kNilOptions
                                   error:&jsonError];
         if (jsonError != nil) {
-            NSLog(@"Error parsing JSON for the url %@",url);
+            ABLog(2,@"Error parsing JSON for the url %@",url);
             return NO;
         }
 
         NSString *functionName = [callInfo objectForKey:@"functionName"];
         if (functionName == nil) {
-            NSLog(@"Missing function name");
+            ABLog(2,@"Missing function name");
             return NO;
         }
 
@@ -182,7 +182,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)execFunction:(NSString *)name withCbid:cbid withArgs:(NSDictionary *)args
 {
-    NSLog(@("execFunction %@"), name);
+    ABLog(2,@("execFunction %@"), name);
 
     NSDictionary *params = @{@"cbid": cbid, @"args": args};
     if ([_functions objectForKey:name] != nil) {
@@ -199,14 +199,14 @@ static const NSString *PROTOCOL = @"bridge://";
     NSError *jsonError;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:args options:0 error:&jsonError];
     if (jsonError != nil) {
-        NSLog(@"Error creating JSON from the response  : %@", [jsonError localizedDescription]);
+        ABLog(2,@"Error creating JSON from the response  : %@", [jsonError localizedDescription]);
         return;
     }
 
     NSString *resp = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSLog(@"resp = %@", resp);
+    ABLog(2,@"resp = %@", resp);
     if (resp == nil) {
-        NSLog(@"resp is null. count = %d", [args count]);
+        ABLog(2,@"resp is null. count = %d", [args count]);
     }
     [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz._results[%@]=%@", cbid, resp]];
 }
@@ -216,14 +216,14 @@ static const NSString *PROTOCOL = @"bridge://";
     NSError *jsonError;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:args options:0 error:&jsonError];
     if (jsonError != nil) {
-        NSLog(@"Error creating JSON from the response  : %@", [jsonError localizedDescription]);
+        ABLog(2,@"Error creating JSON from the response  : %@", [jsonError localizedDescription]);
         return;
     }
 
     NSString *resp = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSLog(@"resp = %@", resp);
+    ABLog(2,@"resp = %@", resp);
     if (resp == nil) {
-        NSLog(@"resp is null. count = %d", [args count]);
+        ABLog(2,@"resp is null. count = %d", [args count]);
     }
     [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz._callbacks[%@]('%@');", cbid, resp]];
 }

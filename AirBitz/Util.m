@@ -11,6 +11,21 @@
 #import "CommonTypes.h"
 #import "AirbitzViewController.h"
 
+void abDebugLog(int level, NSString *statement) {
+    if (level <= DEBUG_LEVEL)
+    {
+        static NSDateFormatter *timeStampFormat;
+        if (!timeStampFormat) {
+            timeStampFormat = [[NSDateFormatter alloc] init];
+            [timeStampFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+            [timeStampFormat setTimeZone:[NSTimeZone systemTimeZone]];
+        }
+
+        printf("%s\n",[[NSString stringWithFormat:@"<%@> %@",
+                                                  [timeStampFormat stringFromDate:[NSDate date]],statement] UTF8String]);
+    }
+}
+
 @implementation Util
 
 + (NSString *)errorMap:(const tABC_Error *)pError
@@ -269,6 +284,39 @@
     }];
 }
 
++ (void)animateControllerFadeOut:(UIViewController *)viewController
+{
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [viewController.view setAlpha:1.0];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         [viewController.view setAlpha:0.0];
+                     }
+                     completion:^(BOOL finished) {
+                         [viewController.view removeFromSuperview];
+                         [viewController removeFromParentViewController];
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                     }];
+}
+
++ (void)animateControllerFadeIn:(UIViewController *)viewController
+{
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [viewController.view setAlpha:0.0];
+    [UIView animateWithDuration:0.35
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         [viewController.view setAlpha:1.0];
+                     }
+                     completion:^(BOOL finished) {
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                     }];
+}
+
+
 + (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height
 {
 	//converts raw monochrome bitmap data (each byte is a 1 or a 0 representing a pixel) into a UIImage
@@ -398,25 +446,96 @@
             || [category hasPrefix:NSLocalizedString(@"Exchange", nil)];
 }
 
-+ (NSArray *)insertSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController belowSubView:(UIView *)belowView
++ (NSArray *)insertSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController belowSubView:(UIView *)belowView
 {
-    NSArray *constraints = [Util insertSubviewWithConstraints:parentView child:childViewController.view belowSubView:belowView];
-    childViewController.leftConstraint = [constraints objectAtIndex:0];
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+
+    [childViewController.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    UIView *childView = childViewController.view;
+    UIView *parentView = parentViewController.view;
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
+    NSAssert(viewsDictionary, @"viewsDictionary NULL");
+    NSAssert(parentView, @"parent NULL");
+    NSAssert(belowView, @"belowView NULL");
+
+    [childViewController willMoveToParentViewController:parentViewController];
+    [parentView insertSubview:childView belowSubview:belowView];
+    [parentViewController addChildViewController:childViewController];
+    [childViewController didMoveToParentViewController:parentViewController];
+
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+
+    [parentView addConstraints:constraints];
+    [parentView layoutIfNeeded];
+    childViewController.leftConstraint = constraints[0];
+
     return constraints;
+
 }
-+ (NSArray *)insertSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController aboveSubView:(UIView *)aboveView
+
++ (NSArray *)insertSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController aboveSubView:(UIView *)aboveView
 {
-    NSArray *constraints = [Util insertSubviewWithConstraints:parentView child:childViewController.view aboveSubView:aboveView];
-    childViewController.leftConstraint = [constraints objectAtIndex:0];
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+
+    [childViewController.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    UIView *childView = childViewController.view;
+    UIView *parentView = parentViewController.view;
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
+    NSAssert(viewsDictionary, @"viewsDictionary NULL");
+    NSAssert(parentView, @"parent NULL");
+    NSAssert(aboveView, @"aboveView NULL");
+
+    [childViewController willMoveToParentViewController:parentViewController];
+    [parentView insertSubview:childView aboveSubview:aboveView];
+    [parentViewController addChildViewController:childViewController];
+    [childViewController didMoveToParentViewController:parentViewController];
+
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+
+    [parentView addConstraints:constraints];
+    [parentView layoutIfNeeded];
+    childViewController.leftConstraint = constraints[0];
+
     return constraints;
+
 }
-+ (NSArray *)addSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController
+
++ (NSArray *)addSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController
 {
-    NSArray *constraints = [Util addSubviewWithConstraints:parentView child:childViewController.view];
-    childViewController.leftConstraint = [constraints objectAtIndex:0];
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+
+    [childViewController.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    UIView *childView = childViewController.view;
+    UIView *parentView = parentViewController.view;
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
+    NSAssert(viewsDictionary, @"viewsDictionary NULL");
+    NSAssert(parentView, @"parent NULL");
+
+    [childViewController willMoveToParentViewController:parentViewController];
+    [parentView addSubview:childView];
+    [parentViewController addChildViewController:childViewController];
+    [childViewController didMoveToParentViewController:parentViewController];
+
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
+
+    [parentView addConstraints:constraints];
+    [parentView layoutIfNeeded];
+    childViewController.leftConstraint = constraints[0];
+
     return constraints;
+
 }
-+ (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView belowSubView:(UIView *)belowView
+
++ (NSArray *)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView
 {
     NSMutableArray *constraints = [[NSMutableArray alloc] init];
 
@@ -424,45 +543,9 @@
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
     NSAssert(viewsDictionary, @"viewsDictionary NULL");
     NSAssert(parentView, @"parent NULL");
-    NSAssert(belowView, @"belowView NULL");
-    [parentView insertSubview:childView belowSubview:belowView];
 
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
-
-    [parentView addConstraints:constraints];
-    [parentView layoutIfNeeded];
-
-    return constraints;
-
-}
-+ (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView aboveSubView:(UIView *)aboveView
-{
-    NSMutableArray *constraints = [[NSMutableArray alloc] init];
-
-    [childView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
-    [parentView insertSubview:childView aboveSubview:aboveView];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
-
-    [parentView addConstraints:constraints];
-    [parentView layoutIfNeeded];
-
-    return constraints;
-
-}
-+ (NSArray *)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView
-{
-    NSMutableArray *constraints = [[NSMutableArray alloc] init];
-
-    [childView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
     [parentView addSubview:childView];
+
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]" options:0 metrics:nil views:viewsDictionary]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[parentView(==childView)]" options:0 metrics:nil views:viewsDictionary]];
@@ -472,8 +555,8 @@
     [parentView layoutIfNeeded];
 
     return constraints;
-}
 
+}
 
 @end
 

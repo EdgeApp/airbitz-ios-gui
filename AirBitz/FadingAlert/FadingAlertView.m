@@ -71,15 +71,20 @@ static UIView *alert;
 
 + (void)create:(UIView *)parentView message:(NSString *)message
 {
-    [FadingAlertView create:parentView message:message image:nil line1:nil line2:nil line3:nil holdTime:FADING_ALERT_HOLD_TIME_DEFAULT withDelegate:nil];
+    [FadingAlertView create:parentView message:message image:nil line1:nil line2:nil line3:nil holdTime:FADING_ALERT_HOLD_TIME_DEFAULT withDelegate:nil notify:nil];
 }
 
 + (void)create:(UIView *)parentView message:(NSString *)message holdTime:(CGFloat)holdTime
 {
-    [FadingAlertView create:parentView message:message image:nil line1:nil line2:nil line3:nil holdTime:holdTime withDelegate:nil];
+    [FadingAlertView create:parentView message:message image:nil line1:nil line2:nil line3:nil holdTime:holdTime withDelegate:nil notify:nil];
 }
 
-+ (void)create:(UIView *)parentView message:(NSString *)message image:(UIImage *)image line1:(NSString *)line1 line2:(NSString *)line2 line3:(NSString *)line3 holdTime:(CGFloat)holdTime withDelegate:(id<FadingAlertViewDelegate>)delegate
++ (void)create:(UIView *)parentView message:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb
+{
+    [FadingAlertView create:parentView message:message image:nil line1:nil line2:nil line3:nil holdTime:holdTime withDelegate:nil notify:cb];
+}
+
++ (void)create:(UIView *)parentView message:(NSString *)message image:(UIImage *)image line1:(NSString *)line1 line2:(NSString *)line2 line3:(NSString *)line3 holdTime:(CGFloat)holdTime withDelegate:(id<FadingAlertViewDelegate>)delegate notify:(void(^)(void))cb
 {
     // Before anything else. Dismiss any previous alerts and kill the timer
     // Do this first so it calls the previous delegate
@@ -160,6 +165,8 @@ static UIView *alert;
                      completion:^(BOOL finished) {
                          if (FADING_ALERT_HOLD_TIME_FOREVER < holdTime)
                              singleton.dismissTimer = [NSTimer scheduledTimerWithTimeInterval:holdTime target:singleton selector:@selector(dismiss) userInfo:nil repeats:NO];
+                         if (cb)
+                             cb();
                      }];
     return;
 }

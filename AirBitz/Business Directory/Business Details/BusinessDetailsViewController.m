@@ -111,7 +111,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
     //get business details
 	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/?ll=%f,%f", SERVER_API, self.bizId, self.latLong.latitude, self.latLong.longitude];
-	//NSLog(@"Requesting: %@", requestURL);
+	//ABLog(2,@"Requesting: %@", requestURL);
 	[[DL_URLServer controller] issueRequestURL:requestURL
 									withParams:nil
 									withObject:nil
@@ -142,6 +142,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
     // An async tx details happened and exited. Drop everything and kill ourselves or we'll
     // corrupt the background. This is needed on every subview of a primary screen
     [self.view removeFromSuperview];
+    [self removeFromParentViewController];
 }
 
 
@@ -279,7 +280,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 		CLGeocoder *geocoder = [[CLGeocoder alloc] init];
 		[geocoder geocodeAddressString:address completionHandler:^(NSArray *placemarks, NSError *error)
 		 {
-			 NSLog(@"error: %li", (long)error.code);
+			 ABLog(2,@"error: %li", (long)error.code);
 			 
 			 // Convert the CLPlacemark to an MKPlacemark
 			 // Note: There's no error checking for a failed geocode
@@ -404,7 +405,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 				if([tag isEqualToString:@"Primary"])
 				{
 					//found primary image
-					//NSLog(@"Found primary tag at object index: %i", count);
+					//ABLog(2,@"Found primary tag at object index: %i", count);
 					primaryImage = count;
 					break;
 				}
@@ -431,7 +432,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 			{
 				NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
 				
-				//NSLog(@"Results download returned: %@", jsonString );
+				//ABLog(2,@"Results download returned: %@", jsonString );
 				
 				NSError *myError;
 				NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
@@ -513,7 +514,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 				{
 					NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
 					
-					//NSLog(@"Results download returned: %@", jsonString );
+					//ABLog(2,@"Results download returned: %@", jsonString );
 					
 					NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
 					NSError *myError;
@@ -544,7 +545,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 					
 					//Get image URLs
 					NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/photos/", SERVER_API, self.bizId];
-					//NSLog(@"Requesting: %@ for row: %i", requestURL, row);
+					//ABLog(2,@"Requesting: %@ for row: %i", requestURL, row);
 					[[DL_URLServer controller] issueRequestURL:requestURL
 													withParams:nil
 													withObject:imageURLs
@@ -746,7 +747,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	}
 	else if(cellType == kDetails)
 	{
-		//NSLog(@"returning details cell height of %f", detailsCellHeight);
+		//ABLog(2,@"returning details cell height of %f", detailsCellHeight);
 		return detailsCellHeight;
 	}
 	else if(cellType == kWebsite)
@@ -866,7 +867,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	//NSLog(@"Clicked button %li", (long)buttonIndex);
+	//ABLog(2,@"Clicked button %li", (long)buttonIndex);
 	if(buttonIndex == 1)
 	{
 		[self callBusinessNumber];
@@ -913,14 +914,29 @@ typedef NS_ENUM(NSUInteger, CellType) {
     CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     CGRect topFrame = CGRectMake(0, 0,
                                  self.view.frame.size.width, statusBarHeight + MINIMUM_BUTTON_SIZE);
+
     UIView *topView = [[UIView alloc] initWithFrame:topFrame];
     topView.backgroundColor = [UIColor clearColor];
-    
+
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = topView.frame;
+
+    // Add colors to layer
+    UIColor *topColor = UIColorFromARGB(0xa0000000);
+    UIColor *centerColor = UIColorFromARGB(0x48000000);
+    UIColor *endColor = UIColorFromARGB(0x00000000);
+
+    gradient.colors = @[(id) topColor.CGColor,
+            (id) centerColor.CGColor,
+            (id) endColor.CGColor];
+
+    [topView.layer insertSublayer:gradient atIndex:0];
+
     UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeCustom];
     CGRect btnFrame = CGRectMake(self.view.frame.size.width - MINIMUM_BUTTON_SIZE, statusBarHeight,
                                  MINIMUM_BUTTON_SIZE, MINIMUM_BUTTON_SIZE);
     btnDone.frame = btnFrame;
-    [btnDone setBackgroundImage:[UIImage imageNamed:@"btn_close"] forState:UIControlStateNormal];
+    [btnDone setBackgroundImage:[UIImage imageNamed:@"btn_close_white.png"] forState:UIControlStateNormal];
     [btnDone addTarget:self
                 action:@selector(returnFromGallery)
       forControlEvents:UIControlEventTouchUpInside];
@@ -930,8 +946,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 - (void)returnFromGallery
 {
+    [MainViewController lockSidebar:NO];
     [MainViewController animateOut:galleryController withBlur:NO complete:^(void) {
-        [galleryController.view removeFromSuperview];
         galleryController = nil;
         [MainViewController showNavBarAnimated:YES];
         [MainViewController showTabBarAnimated:YES];
@@ -962,7 +978,10 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
         [MainViewController hideNavBarAnimated:YES];
         [MainViewController hideTabBarAnimated:YES];
-        [MainViewController animateView:galleryController withBlur:NO];
+        [MainViewController lockSidebar:YES];
+
+        [Util addSubviewControllerWithConstraints:self child:galleryController];
+        [MainViewController animateSlideIn:galleryController];
     }
 }
 

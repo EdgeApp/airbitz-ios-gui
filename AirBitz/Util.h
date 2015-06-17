@@ -11,6 +11,16 @@
 #import "ABC.h"
 #import "CoreBridge.h"
 
+@import Foundation.NSString;
+
+#define DEBUG_LEVEL 0
+
+#define ABLog(level, format_string,...) \
+    ((abDebugLog(level, [NSString stringWithFormat:format_string,##__VA_ARGS__])))
+
+void abDebugLog(int level, NSString *statement);
+
+
 @class AirbitzViewController;
 
 #define UIColorFromRGB(rgbValue) \
@@ -43,18 +53,20 @@
 + (UIViewController *)animateIn:(NSString *)identifier storyboard:(NSString *)storyboardName parentController:(UIViewController *)parent;
 + (UIViewController *)animateController:(UIViewController *)controller parentController:(UIViewController *)parent;
 + (void)animateOut:(UIViewController *)controller parentController:(UIViewController *)parent complete:(void(^)(void))cb;
++ (void)animateControllerFadeOut:(UIViewController *)viewController;
++ (void)animateControllerFadeIn:(UIViewController *)viewController;
 
 + (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height;
 + (void)checkPasswordAsync:(NSString *)password withSelector:(SEL)selector controller:(UIViewController *)controller;
 + (NSString *)urlencode:(NSString *)url;
 + (NSMutableDictionary *)getUrlParameters:(NSURL *)url;
 + (BOOL)isValidCategory:(NSString *)category;
-+ (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView belowSubView:(UIView *)belowView;
-+ (NSArray *)insertSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView aboveSubView:(UIView *)aboveView;
++ (NSArray *)insertSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController belowSubView:(UIView *)belowView;
++ (NSArray *)insertSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController aboveSubView:(UIView *)aboveView;
++ (NSArray *)addSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController;
 + (NSArray *)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView;
-+ (NSArray *)insertSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController belowSubView:(UIView *)belowView;
-+ (NSArray *)insertSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController aboveSubView:(UIView *)aboveView;
-+ (NSArray *)addSubviewControllerWithConstraints:(UIView *)parentView child:(AirbitzViewController *)childViewController;
+
+
 
 @end
 

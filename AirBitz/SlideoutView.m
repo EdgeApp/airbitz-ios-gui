@@ -110,14 +110,8 @@
         [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
         [self.accountPicker setRoundedAndShadowed:NO];
 
-        tABC_AccountSettings *_pAccountSettings = NULL;
-        tABC_Error Error;
-        Error.code = ABC_CC_Ok;
-        ABC_LoadAccountSettings([[User Singleton].name UTF8String],
-                [[User Singleton].password UTF8String],
-                &_pAccountSettings,
-                &Error);
-        int num = _pAccountSettings->currencyNum;
+        int num = [User Singleton].defaultCurrencyNum;
+
         self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:YES];
 
 
@@ -316,7 +310,7 @@
     CGPoint location = [recognizer locationInView:self->_parentView];
     int openLeftX = self->_parentView.bounds.size.width - self.bounds.size.width;
     bool halfwayOut = location.x < self->_parentView.bounds.size.width - self.bounds.size.width / 2;
-    NSLog(@"transX, locX, centerX: %f %f %f", translation.x, location.x, self.center.x);
+    ABLog(2,@"transX, locX, centerX: %f %f %f", translation.x, location.x, self.center.x);
     
     if(recognizer.state == UIGestureRecognizerStateEnded)
     {
