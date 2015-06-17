@@ -36,19 +36,6 @@
 
 -(void)initMyVariables
 {
-//	[self setTintColor:[UIColor whiteColor]];
-//	[self setPlaceholderTextColor];
-	
-	
-	//UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    /*
-	UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 15.0, 15.0)];
-	[button setImage:[UIImage imageNamed:@"clearButton.png"] forState:UIControlStateNormal];
-	[button setFrame:CGRectMake(0.0f, 0.0f, 15.0f, 15.0f)]; // Required for iOS7
-	[button addTarget:self action:@selector(doClear) forControlEvents:UIControlEventTouchUpInside];
-	self.rightView = button;
-	self.rightViewMode = self.clearButtonMode;
-*/
 
     if (!bInitialized)
     {
@@ -92,7 +79,7 @@
             }
             else
             {
-                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF0B8DCFF) CGColor]];
+                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF0CEE8FF) CGColor]];
             }
             [Util addSubviewWithConstraints:self child:nonBlur];
         }
