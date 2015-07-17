@@ -75,7 +75,6 @@
 		6861FE681950DFB100CDF24E /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861FE671950DFB100CDF24E /* TxOutput.m */; };
 		6868AD1319516D7A006C3716 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6868AD1219516D7A006C3716 /* DebugViewController.m */; };
 		686BED9E195D5A7C0053A09E /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BED9D195D5A7C0053A09E /* libsecp256k1.a */; };
-		686BEDA4195D5A970053A09E /* libbitcoin-watcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BEDA3195D5A970053A09E /* libbitcoin-watcher.a */; };
 		686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
 		686C24871935608400F8E445 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
@@ -212,7 +211,6 @@
 		7D98AD1319A7C550003D2BF6 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5628BF3199BE87B0077DA1C /* CoreBluetooth.framework */; };
 		7D98AD1419A7C550003D2BF6 /* libcsv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C40BC5D4199479CF00149E12 /* libcsv.a */; };
 		7D98AD1519A7C550003D2BF6 /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809FB99196F9EEB0076CA4D /* libgit2.a */; };
-		7D98AD1619A7C550003D2BF6 /* libbitcoin-watcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BEDA3195D5A970053A09E /* libbitcoin-watcher.a */; };
 		7D98AD1719A7C550003D2BF6 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BED9D195D5A7C0053A09E /* libsecp256k1.a */; };
 		7D98AD1819A7C550003D2BF6 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
 		7D98AD1A19A7C550003D2BF6 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
@@ -1084,7 +1082,6 @@
 		DAE864761A88A58A00A17BD3 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5628BF3199BE87B0077DA1C /* CoreBluetooth.framework */; };
 		DAE864771A88A58A00A17BD3 /* libcsv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C40BC5D4199479CF00149E12 /* libcsv.a */; };
 		DAE864781A88A58A00A17BD3 /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809FB99196F9EEB0076CA4D /* libgit2.a */; };
-		DAE864791A88A58A00A17BD3 /* libbitcoin-watcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BEDA3195D5A970053A09E /* libbitcoin-watcher.a */; };
 		DAE8647A1A88A58A00A17BD3 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BED9D195D5A7C0053A09E /* libsecp256k1.a */; };
 		DAE8647B1A88A58A00A17BD3 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
 		DAE8647C1A88A58A00A17BD3 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
@@ -1827,7 +1824,6 @@
 				7D98AD1319A7C550003D2BF6 /* CoreBluetooth.framework in Frameworks */,
 				7D98AD1419A7C550003D2BF6 /* libcsv.a in Frameworks */,
 				7D98AD1519A7C550003D2BF6 /* libgit2.a in Frameworks */,
-				7D98AD1619A7C550003D2BF6 /* libbitcoin-watcher.a in Frameworks */,
 				7D98AD1719A7C550003D2BF6 /* libsecp256k1.a in Frameworks */,
 				7D98AD1819A7C550003D2BF6 /* libsodium.a in Frameworks */,
 				7D98AD1A19A7C550003D2BF6 /* libzmq.a in Frameworks */,
@@ -1875,7 +1871,6 @@
 				B5628BF4199BE87B0077DA1C /* CoreBluetooth.framework in Frameworks */,
 				C40BC5D5199479CF00149E12 /* libcsv.a in Frameworks */,
 				6809FB9A196F9EEB0076CA4D /* libgit2.a in Frameworks */,
-				686BEDA4195D5A970053A09E /* libbitcoin-watcher.a in Frameworks */,
 				686BED9E195D5A7C0053A09E /* libsecp256k1.a in Frameworks */,
 				684C0E521936B97000AB9807 /* libsodium.a in Frameworks */,
 				686C24871935608400F8E445 /* libzmq.a in Frameworks */,
@@ -1924,7 +1919,6 @@
 				DAE864761A88A58A00A17BD3 /* CoreBluetooth.framework in Frameworks */,
 				DAE864771A88A58A00A17BD3 /* libcsv.a in Frameworks */,
 				DAE864781A88A58A00A17BD3 /* libgit2.a in Frameworks */,
-				DAE864791A88A58A00A17BD3 /* libbitcoin-watcher.a in Frameworks */,
 				DAE8647A1A88A58A00A17BD3 /* libsecp256k1.a in Frameworks */,
 				DAE8647B1A88A58A00A17BD3 /* libsodium.a in Frameworks */,
 				DAE8647C1A88A58A00A17BD3 /* libzmq.a in Frameworks */,
