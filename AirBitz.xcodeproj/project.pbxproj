@@ -4396,7 +4396,6 @@
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-					"/Users/timhorton/airbitz/builds/develop-mainnet/abc/abc-ios-universal/lib",
 				);
 				PRODUCT_NAME = "Airbitz Testnet";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4431,7 +4430,6 @@
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-					"/Users/timhorton/airbitz/builds/develop-mainnet/abc/abc-ios-universal/lib",
 				);
 				PRODUCT_NAME = "Airbitz Testnet";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4538,7 +4536,6 @@
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC",
-					"/Users/timhorton/airbitz/builds/develop-mainnet/abc/abc-ios-universal/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4571,7 +4568,6 @@
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC",
-					"/Users/timhorton/airbitz/builds/develop-mainnet/abc/abc-ios-universal/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4606,7 +4602,6 @@
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC",
-					"/Users/timhorton/airbitz/builds/develop-mainnet/abc/abc-ios-universal/lib",
 				);
 				PRODUCT_NAME = "Airbitz Develop";
 				PROVISIONING_PROFILE = "";
@@ -4642,7 +4637,6 @@
 					./AirBitz/ABC,
 					./AirBitz/ZBarSDK,
 					"$(PROJECT_DIR)/AirBitz/ABC",
-					"/Users/timhorton/airbitz/builds/develop-mainnet/abc/abc-ios-universal/lib",
 				);
 				PRODUCT_NAME = "Airbitz Develop";
 				PROVISIONING_PROFILE = "";
