@@ -18,8 +18,7 @@
 @property (assign) id<RequestViewControllerDelegate> delegate;
 //@property (nonatomic, strong) NSString  *walletUUID;
 @property (nonatomic, readwrite) SInt64 originalAmountSatoshi;
-@property (nonatomic, readwrite) BOOL bDoFinalizeTx;
-@property (nonatomic, weak) NSString                    *requestID;
+@property (nonatomic, strong) NSString                    *requestID;
 
 
 - (BOOL)showingQRCode:(NSString *)walletUUID withTx:(NSString *)txId;

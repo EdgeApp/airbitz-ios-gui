@@ -220,12 +220,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     [self updateViews:nil];
 
-    if (_bDoFinalizeTx)
-    {
-        [self finalizeRequest];
-        _bDoFinalizeTx = NO;
-    }
-
     self.rotateServerTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].rotateServerInterval target:self selector:@selector(refreshBackground) userInfo:nil repeats:YES];
 
     // Tweak the colors of fonts if we're in non-blur mode as the background will be too bright to have a white font
@@ -1750,6 +1744,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                         _requestType,
                         [dateFormatter stringFromDate:now]];
     _txDetails.szNotes = (char *)[notes UTF8String];
+    _txDetails.szCategory = (char *) "";
     tABC_Error Error;
     // Update the Details
     if (ABC_CC_Ok != ABC_ModifyReceiveRequest([[User Singleton].name UTF8String],
@@ -1815,6 +1810,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles: nil];
             [alert show];
+            [self finalizeRequest];
         }
             break;
 
@@ -1846,6 +1842,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         case MFMailComposeResultSent:
             strMsg = NSLocalizedString(@"Email sent", nil);
+            [self finalizeRequest];
             break;
 
         case MFMailComposeResultFailed:
