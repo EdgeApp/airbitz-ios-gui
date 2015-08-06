@@ -104,7 +104,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, strong) NSTimer                   *qrTimer;
 @property (nonatomic, strong) NSTimer                   *rotateServerTimer;
 
-@property (assign) tABC_TxDetails txDetails;
 @property (nonatomic, strong) NSString *requestType;
 @property (nonatomic, strong) RecipientViewController   *recipientViewController;
 @property (weak, nonatomic) IBOutlet UILabel *btcLabel;
@@ -1726,37 +1725,48 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)saveRequest
 {
+    tABC_TxDetails txDetails;
+    memset(&txDetails, 0, sizeof(tABC_TxDetails));
     if (_strFullName) {
-        _txDetails.szName = (char *)[_strFullName UTF8String];
+        txDetails.szName = (char *)[_strFullName UTF8String];
     } else if (_strEMail) {
-        _txDetails.szName = (char *)[_strEMail UTF8String];
+        txDetails.szName = (char *)[_strEMail UTF8String];
     } else if (_strPhoneNumber) {
-        _txDetails.szName = (char *)[_strPhoneNumber UTF8String];
+        txDetails.szName = (char *)[_strPhoneNumber UTF8String];
     }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     NSDate *now = [NSDate date];
 
+    Wallet *wallet = [CoreBridge Singleton].currentWallet;
+    txDetails.amountSatoshi = _amountSatoshiRequested;
+
+    double currency;
+    tABC_Error error;
+	if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+            txDetails.amountSatoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
+	{
+		txDetails.amountCurrency = currency;
+	}
+
+    // Set notes
     NSMutableString *notes = [[NSMutableString alloc] init];
     [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ on %@.", nil),
-                        [CoreBridge formatSatoshi:_txDetails.amountSatoshi],
-                        [CoreBridge formatCurrency:_txDetails.amountCurrency withCurrencyNum:[CoreBridge Singleton].currentWallet.currencyNum],
-                        _requestType,
-                        [dateFormatter stringFromDate:now]];
-    _txDetails.szNotes = (char *)[notes UTF8String];
-    _txDetails.szCategory = (char *) "";
-    tABC_Error Error;
+                        [CoreBridge formatSatoshi:txDetails.amountSatoshi],
+                        [CoreBridge formatCurrency:txDetails.amountCurrency withCurrencyNum:wallet.currencyNum],
+                        _requestType, [dateFormatter stringFromDate:now]];
+    txDetails.szNotes = (char *)[notes UTF8String];
+    txDetails.szCategory = (char *) "Income:";
     // Update the Details
     if (ABC_CC_Ok != ABC_ModifyReceiveRequest([[User Singleton].name UTF8String],
             [[User Singleton].password UTF8String],
             [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
             [self.requestID UTF8String],
-            &_txDetails,
-            &Error))
+            &txDetails,
+            &error))
     {
-        [Util printABC_Error:&Error];
+        [Util printABC_Error:&error];
     }
-
 }
 
 - (void)finalizeRequest
