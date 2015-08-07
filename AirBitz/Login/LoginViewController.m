@@ -257,6 +257,38 @@ static BOOL bInitialized = false;
     }
 
 
+    UITapGestureRecognizer *debug = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(uploadLog)];
+    debug.numberOfTapsRequired = 5;
+    [_logoImage addGestureRecognizer:debug];
+    [_logoImage setUserInteractionEnabled:YES];
+}
+
+- (void)uploadLog {
+    _spinnerView.hidden = NO;
+    [_logoImage setUserInteractionEnabled:NO];
+    [CoreBridge postToMiscQueue:^{
+        tABC_Error error;
+        ABC_UploadLogs([[User Singleton].name UTF8String], NULL, &error);
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            if (ABC_CC_Ok == error.code) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
+                                                                message:@"Upload Succeeded"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
+                                                                message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+            [_logoImage setUserInteractionEnabled:YES];
+            _spinnerView.hidden = YES;
+        });
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
