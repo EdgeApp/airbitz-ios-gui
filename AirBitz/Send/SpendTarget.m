@@ -89,7 +89,9 @@
             pTrans->pDetails->szName = strdup([self.destWallet.strName UTF8String]);
             pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", transferCategory, self.destWallet.strName] UTF8String]);
         } else {
-            pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@", spendCategory] UTF8String]);
+            if (!pTrans->pDetails->szCategory) {
+                pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@", spendCategory] UTF8String]);
+            }
         }
         if (fiatAmount > 0) {
             pTrans->pDetails->amountCurrency = fiatAmount;
