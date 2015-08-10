@@ -596,8 +596,11 @@ typedef NS_ENUM(NSUInteger, CellType) {
 		if(self.businessDetails)
 		{
             commonCell.leftLabel.numberOfLines = 2;
-			commonCell.leftLabel.text = [NSString stringWithFormat:@"%@\n%@, %@  %@", [self.businessDetails objectForKey:@"address"],
-                            [self.businessDetails objectForKey:@"city"], [self.businessDetails objectForKey:@"state"], [self.businessDetails objectForKey:@"postalcode"]];
+			commonCell.leftLabel.text = [NSString stringWithFormat:@"%@\n%@, %@, %@ %@", [self.businessDetails objectForKey:@"address"],
+                            [self.businessDetails objectForKey:@"city"],
+                            [self.businessDetails objectForKey:@"state"],
+                            [self.businessDetails objectForKey:@"country"],
+                            [self.businessDetails objectForKey:@"postalcode"]];
 		}
 	}
 	else if(cellType == kPhone)
