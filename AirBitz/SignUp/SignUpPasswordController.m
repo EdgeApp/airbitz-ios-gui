@@ -140,7 +140,8 @@
 - (BOOL)newPasswordFieldsAreValid
 {
     // Allow accounts with an empty password
-    if ([self.passwordTextField.text length] == 0) {
+    if ([self.passwordTextField.text length] == 0
+            && [self.reenterPasswordTextField.text length] == 0) {
         return YES;
     }
 
