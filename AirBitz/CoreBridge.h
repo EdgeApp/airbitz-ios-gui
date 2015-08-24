@@ -90,6 +90,8 @@
 + (void)startWatchers;
 + (void)startWatcher:(NSString *)walletUUID;
 + (void)stopWatchers;
++ (void)restoreConnectivity;
++ (void)lostConnectivity;
 + (void)prioritizeAddress:(NSString *)address inWallet:(NSString *)walletUUID;
 + (bool)isTestNet;
 + (NSString *)coreVersion;

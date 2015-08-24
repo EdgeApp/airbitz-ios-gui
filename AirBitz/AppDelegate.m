@@ -299,8 +299,7 @@ NSDate *logoutDate = NULL;
 {
     Reachability *reachability = (Reachability *)[notification object];
     if ([reachability isReachable]) {
-        [CoreBridge connectWatchers];
-        [CoreBridge startQueues];
+        [CoreBridge restoreConnectivity];
     }
 }
 

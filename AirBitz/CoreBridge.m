@@ -37,12 +37,14 @@ const int RECOVERY_REMINDER_COUNT = 2;
 static BOOL bInitialized = NO;
 static BOOL bDataFetched = NO;
 static int iLoginTimeSeconds = 0;
+static NSOperationQueue *watcherQueue;
 static NSOperationQueue *exchangeQueue;
 static NSOperationQueue *dataQueue;
 static NSOperationQueue *walletsQueue;
 static NSOperationQueue *genQRQueue;
 static NSOperationQueue *txSearchQueue;
 static NSOperationQueue *miscQueue;
+static NSLock *watcherLock;
 static NSMutableDictionary *watchers;
 static NSMutableDictionary *currencyCodesCache;
 static NSMutableDictionary *currencySymbolCache;
@@ -77,6 +79,8 @@ static BOOL bOtpError = NO;
 {
     if (NO == bInitialized)
     {
+        watcherQueue = [[NSOperationQueue alloc] init];
+        [watcherQueue setMaxConcurrentOperationCount:1];
         exchangeQueue = [[NSOperationQueue alloc] init];
         [exchangeQueue setMaxConcurrentOperationCount:1];
         dataQueue = [[NSOperationQueue alloc] init];
@@ -91,6 +95,8 @@ static BOOL bOtpError = NO;
         [miscQueue setMaxConcurrentOperationCount:8];
 
         watchers = [[NSMutableDictionary alloc] init];
+        watcherLock = [[NSLock alloc] init];
+
         currencySymbolCache = [[NSMutableDictionary alloc] init];
         currencyCodesCache = [[NSMutableDictionary alloc] init];
 
@@ -126,6 +132,7 @@ static BOOL bOtpError = NO;
         singleton = nil;
         txSearchQueue = nil;
         miscQueue = nil;
+        watcherQueue = nil;
         bInitialized = NO;
         [CoreBridge cleanWallets];
     }
@@ -156,34 +163,28 @@ static BOOL bOtpError = NO;
 
 + (void)stopQueues
 {
-    if (_exchangeTimer)
-    {
+    if (_exchangeTimer) {
         [_exchangeTimer invalidate];
         _exchangeTimer = nil;
     }
-    if (_dataSyncTimer)
-    {
+    if (_dataSyncTimer) {
         [_dataSyncTimer invalidate];
         _dataSyncTimer = nil;
     }
     if (dataQueue)
-    {
         [dataQueue cancelAllOperations];
-    }
     if (walletsQueue)
-    {
         [walletsQueue cancelAllOperations];
-    }
     if (genQRQueue)
-    {
         [genQRQueue cancelAllOperations];
-    }
     if (txSearchQueue)
         [txSearchQueue cancelAllOperations];
     if (exchangeQueue)
         [exchangeQueue cancelAllOperations];
     if (miscQueue)
         [miscQueue cancelAllOperations];
+    if (watcherQueue)
+        [watcherQueue cancelAllOperations];
 
 }
 
@@ -221,6 +222,7 @@ static BOOL bOtpError = NO;
     total += genQRQueue == nil  ? 0 : [genQRQueue operationCount];
     total += txSearchQueue == nil  ? 0 : [txSearchQueue operationCount];
     total += miscQueue == nil  ? 0 : [miscQueue operationCount];
+    total += watcherQueue == nil  ? 0 : [watcherQueue operationCount];
     return total;
 }
 
@@ -311,48 +313,50 @@ static BOOL bOtpError = NO;
     }
 }
 
++ (Wallet *)createLoadingWallet:(NSString *)uuid
+{
+    Wallet *wallet = [[Wallet alloc] init];
+    wallet.strUUID = uuid;
+    wallet.strName = @"Loading...";
+    wallet.currencyNum = -1;
+    wallet.balance = 0;
+    wallet.loaded = NO;
+    return wallet;
+}
+
 + (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx
 {
     ABLog(2,@"ENTER loadWallets: %@", [NSThread currentThread].name);
-    tABC_Error Error;
-    tABC_WalletInfo **aWalletInfo = NULL;
-    unsigned int nCount;
 
+    NSMutableArray *arrayUuids = [[NSMutableArray alloc] init];
+    [CoreBridge loadWalletUUIDs:arrayUuids];
 
-
-    tABC_CC result = ABC_GetWallets([[User Singleton].name UTF8String],
-                                    [[User Singleton].password UTF8String],
-                                    &aWalletInfo, &nCount, &Error);
-    if (ABC_CC_Ok == result)
-    {
-        if (aWalletInfo)
-        {
-            unsigned int i;
-            for (i = 0; i < nCount; ++i)
-            {
-                Wallet *wallet;
-                tABC_WalletInfo *pWalletInfo = aWalletInfo[i];
-                // If entry is NULL skip it
-                if (!pWalletInfo)
-                {
-                    continue;
-                }
-
-                wallet = [[Wallet alloc] init];
+    for (NSString *uuid in arrayUuids) {
+        if (![CoreBridge watcherExists:uuid]) {
+            Wallet *wallet = [CoreBridge createLoadingWallet:uuid];
+            [arrayWallets addObject:wallet];
+        } else {
+            tABC_Error Error;
+            tABC_WalletInfo *pWalletInfo = NULL;
+            tABC_CC result = ABC_GetWalletInfo(
+                    [[User Singleton].name UTF8String],
+                    [[User Singleton].password UTF8String],
+                    [uuid UTF8String],
+                    &pWalletInfo, &Error);
+            if (ABC_CC_Ok == result && pWalletInfo != NULL) {
+                Wallet *wallet = [[Wallet alloc] init];
                 [CoreBridge setWallet:wallet withInfo:pWalletInfo];
                 [arrayWallets addObject:wallet];
                 if (bWithTx) {
-                    [self loadTransactions: wallet];
+                    [self loadTransactions:wallet];
                 }
+            } else {
+                ABLog(2,@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
+                [Util printABC_Error:&Error];
             }
+            ABC_FreeWalletInfo(pWalletInfo);
         }
     }
-    else
-    {
-        ABLog(2,@("Error: CoreBridge.loadWallets:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
-    }
-    ABC_FreeWalletInfoArray(aWalletInfo, nCount);
     ABLog(2,@"EXIT loadWallets: %@", [NSThread currentThread].name);
 
 }
@@ -518,9 +522,12 @@ static BOOL bOtpError = NO;
     [CoreBridge postToMiscQueue:^{
         // Reconnect the watcher for this wallet
         if (bData) {
-                // Clear data sync queue and sync the current wallet immediately
-                [dataQueue cancelAllOperations];
-                [dataQueue addOperationWithBlock:^{
+            // Clear data sync queue and sync the current wallet immediately
+            [dataQueue cancelAllOperations];
+            [dataQueue addOperationWithBlock:^{
+                if (![User isLoggedIn]) {
+                    return;
+                }
                 tABC_Error error;
                 ABC_DataSyncWallet([[User Singleton].name UTF8String],
                             [[User Singleton].password UTF8String],
@@ -1358,18 +1365,38 @@ static BOOL bOtpError = NO;
     [LocalSettings saveAll];
     bDataFetched = NO;
     bOtpError = NO;
-    [CoreBridge startWatchers];
-    [CoreBridge startQueues];
-    [CoreBridge refreshWallets];
+    [CoreBridge startAsyncTasks];
 
     iLoginTimeSeconds = (int) [[NSDate date] timeIntervalSince1970];
 }
 
-+ (void)logout
++ (void)startAsyncTasks
+{
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWalletUUIDs: arrayWallets];
+    for (NSString *uuid in arrayWallets) {
+        [watcherQueue addOperationWithBlock:^(void) {
+            tABC_Error error;
+            ABC_WalletLoad([[User Singleton].name UTF8String], [uuid UTF8String], &error);
+            [Util printABC_Error:&error];
+        }];
+        [watcherQueue addOperationWithBlock:^(void) {
+            [CoreBridge startWatcher:uuid];
+        }];
+    }
+    [watcherQueue addOperationWithBlock:^(void) {
+        [CoreBridge startQueues];
+    }];
+    [watcherQueue addOperationWithBlock:^(void) {
+        [CoreBridge refreshWallets];
+    }];
+}
+
++ (void)stopAsyncTasks
 {
     [CoreBridge stopQueues];
 
-    NSUInteger wq, dq, gq, txq, eq, mq;
+    NSUInteger wq, dq, gq, txq, eq, mq, waq;
 
     // XXX: prevents crashing on logout
     while (YES)
@@ -1380,16 +1407,24 @@ static BOOL bOtpError = NO;
         txq = [txSearchQueue operationCount];
         eq = [exchangeQueue operationCount];
         mq = [miscQueue operationCount];
+        waq = [watcherQueue operationCount];
 
-        if (0 == (wq + dq + gq + txq + eq +mq))
+        if (0 == (wq + dq + gq + txq + eq + mq + waq))
             break;
 
-        ABLog(0, @"Waiting for queues to complete wq=%d dq=%d gq=%d txq=%d mq=%d", wq, dq, gq, txq, mq);
+        ABLog(0,
+            @"Waiting for queues to complete wq=%d dq=%d gq=%d txq=%d mq=%d wq=%d",
+            wq, dq, gq, txq, mq, waq);
         [NSThread sleepForTimeInterval:.2];
     }
 
     [CoreBridge stopWatchers];
     [CoreBridge cleanWallets];
+}
+
++ (void)logout
+{
+    [CoreBridge stopAsyncTasks];
 
     tABC_Error Error;
     tABC_CC result = ABC_ClearKeyCache(&Error);
@@ -1440,7 +1475,9 @@ static BOOL bOtpError = NO;
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
     [CoreBridge loadWalletUUIDs: arrayWallets];
     for (NSString *uuid in arrayWallets) {
-        [CoreBridge startWatcher:uuid];
+        [watcherQueue addOperationWithBlock:^(void) {
+            [CoreBridge startWatcher:uuid];
+        }];
     }
     if (bDataFetched) {
         [CoreBridge connectWatchers];
@@ -1461,13 +1498,15 @@ static BOOL bOtpError = NO;
 
 + (void)connectWatcher:(NSString *)uuid
 {
-    if ([User isLoggedIn]) {
-        tABC_Error Error;
-        ABC_WatcherConnect([uuid UTF8String], &Error);
+    [watcherQueue addOperationWithBlock:^(void) {
+        if ([User isLoggedIn]) {
+            tABC_Error Error;
+            ABC_WatcherConnect([uuid UTF8String], &Error);
 
-        [Util printABC_Error:&Error];
-        [self watchAddresses:uuid];
-    }
+            [Util printABC_Error:&Error];
+            [self watchAddresses:uuid];
+        }
+    }];
 }
 
 + (void)disconnectWatchers
@@ -1485,20 +1524,49 @@ static BOOL bOtpError = NO;
     }
 }
 
++ (BOOL)watcherExists:(NSString *)uuid
+{
+    [watcherLock lock];
+    BOOL exists = [watchers objectForKey:uuid] == nil ? NO : YES;
+    [watcherLock unlock];
+    return exists;
+}
+
++ (NSOperationQueue *)watcherGet:(NSString *)uuid
+{
+    [watcherLock lock];
+    NSOperationQueue *queue = [watchers objectForKey:uuid];
+    [watcherLock unlock];
+    return queue;
+}
+
++ (void)watcherSet:(NSString *)uuid queue:(NSOperationQueue *)queue
+{
+    [watcherLock lock];
+    [watchers setObject:queue forKey:uuid];
+    [watcherLock unlock];
+}
+
++ (void)watcherRemove:(NSString *)uuid
+{
+    [watcherLock lock];
+    [watchers removeObjectForKey:uuid];
+    [watcherLock unlock];
+}
+
 + (void)startWatcher:(NSString *) walletUUID
 {
-    const char *szUUID = [walletUUID UTF8String];
-    if ([watchers objectForKey:walletUUID] == nil)
+    if (![CoreBridge watcherExists:walletUUID])
     {
         tABC_Error Error;
+        const char *szUUID = [walletUUID UTF8String];
         ABC_WatcherStart([[User Singleton].name UTF8String],
                         [[User Singleton].password UTF8String],
                         szUUID, &Error);
         [Util printABC_Error: &Error];
 
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        [watchers setObject:queue forKey:walletUUID];
-
+        [CoreBridge watcherSet:walletUUID queue:queue];
         [queue addOperationWithBlock:^{
             [queue setName:walletUUID];
             tABC_Error Error;
@@ -1529,14 +1597,14 @@ static BOOL bOtpError = NO;
     // wait for threads to finish
     for (NSString *uuid in arrayWallets)
     {
-        NSOperationQueue *queue = [watchers objectForKey:uuid];
+        NSOperationQueue *queue = [CoreBridge watcherGet:uuid];
         if (queue == nil) {
             continue;
         }
         // Wait until operations complete
         [queue waitUntilAllOperationsAreFinished];
         // Remove the watcher from the dictionary
-        [watchers removeObjectForKey:uuid];
+        [CoreBridge watcherRemove:uuid];
     }
     // Destroy watchers
     for (NSString *uuid in arrayWallets)
@@ -1545,6 +1613,18 @@ static BOOL bOtpError = NO;
         ABC_WatcherDelete([uuid UTF8String], &Error);
         [Util printABC_Error: &Error];
     }
+}
+
++ (void)restoreConnectivity
+{
+    [CoreBridge connectWatchers];
+    [watcherQueue addOperationWithBlock:^(void) {
+        [CoreBridge startQueues];
+    }];
+}
+
++ (void)lostConnectivity
+{
 }
 
 + (void)prioritizeAddress:(NSString *)address inWallet:(NSString *)walletUUID
