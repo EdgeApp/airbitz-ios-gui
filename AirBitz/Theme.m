@@ -114,6 +114,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.twoFactorText                                      = NSLocalizedString(@"Two Factor", nil);
     self.importText                                         = NSLocalizedString(@"Import", nil);
     self.passwordRecoveryText                               = NSLocalizedString(@"Password Recovery", nil);
+    self.passwordMismatchText                               = NSLocalizedString(@"Password does not match re-entered password", @"");
     self.defaultCurrencyInfoText                            = NSLocalizedString(@"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.", nil);
 
     self.sendRequestButtonDisabled = 0.4f;

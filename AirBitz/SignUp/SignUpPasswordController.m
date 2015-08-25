@@ -140,9 +140,13 @@
 - (BOOL)newPasswordFieldsAreValid
 {
     // Allow accounts with an empty password
-    if ([self.passwordTextField.text length] == 0
-            && [self.reenterPasswordTextField.text length] == 0) {
-        return YES;
+    if ([self.passwordTextField.text length] == 0) {
+        if ([self.reenterPasswordTextField.text length] == 0) {
+            return YES;
+        } else {
+            [self showPasswordMismatch];
+            return false;
+        }
     }
 
     BOOL bNewPasswordFieldsAreValid = YES;
@@ -187,19 +191,22 @@
         else if ([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text] == NO)
         {
             bNewPasswordFieldsAreValid = NO;
-            UIAlertView *alert = [[UIAlertView alloc]
-                    initWithTitle:self.labelString
-                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                                             self.labelString,
-                                          NSLocalizedString(@"Password does not match re-entered password", @"")]
-                         delegate:nil
-                cancelButtonTitle:@"OK"
-                otherButtonTitles:nil];
-            [alert show];
+            [self showPasswordMismatch];
         }
     }
 
     return bNewPasswordFieldsAreValid;
+}
+
+- (void)showPasswordMismatch
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+            initWithTitle:self.labelString
+                    message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelString, [Theme Singleton].passwordMismatchText]
+                    delegate:nil
+        cancelButtonTitle:@"OK"
+        otherButtonTitles:nil];
+    [alert show];
 }
 
 // checks the pin field

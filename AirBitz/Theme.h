@@ -75,6 +75,7 @@
 @property (nonatomic) NSString *twoFactorText;
 @property (nonatomic) NSString *importText;
 @property (nonatomic) NSString *passwordRecoveryText;
+@property (nonatomic) NSString *passwordMismatchText;
 @property (nonatomic) NSString *defaultCurrencyInfoText;
 
 
