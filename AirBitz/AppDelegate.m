@@ -229,16 +229,16 @@ NSDate *logoutDate = NULL;
 // If the app is *not* active, log the user out
 - (void)autoLogout
 {
+    [Keychain setKeychainData:nil key:USERNAME_KEY authenticated:YES];
+    [Keychain setKeychainData:nil key:PIN_KEY authenticated:YES];
+    [Keychain setKeychainData:nil key:PASSWORD_KEY authenticated:YES];
+
     if (![self isAppActive])
     {
         [[User Singleton] clear];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
     }
     [self bgLogoutCleanup];
-
-    [Keychain setKeychainData:nil key:USERNAME_KEY authenticated:YES];
-    [Keychain setKeychainData:nil key:PIN_KEY authenticated:YES];
-    [Keychain setKeychainData:nil key:PASSWORD_KEY authenticated:YES];
 
 }
 
