@@ -322,6 +322,12 @@ static BOOL bOtpError = NO;
     wallet.currencyNum = -1;
     wallet.balance = 0;
     wallet.loaded = NO;
+
+    bool archived = false;
+    tABC_Error error;
+    ABC_WalletArchived([[User Singleton].name UTF8String], [uuid UTF8String], &archived, &error);
+    wallet.archived = archived ? YES : NO;
+
     return wallet;
 }
 
@@ -1380,16 +1386,19 @@ static BOOL bOtpError = NO;
             tABC_Error error;
             ABC_WalletLoad([[User Singleton].name UTF8String], [uuid UTF8String], &error);
             [Util printABC_Error:&error];
-        }];
-        [watcherQueue addOperationWithBlock:^(void) {
             [CoreBridge startWatcher:uuid];
+            [CoreBridge refreshWallets];
         }];
     }
     [watcherQueue addOperationWithBlock:^(void) {
-        [CoreBridge startQueues];
+        dispatch_async(dispatch_get_main_queue(),^{
+            [CoreBridge startQueues];
+        });
     }];
     [watcherQueue addOperationWithBlock:^(void) {
-        [CoreBridge refreshWallets];
+        dispatch_async(dispatch_get_main_queue(),^{
+            [CoreBridge refreshWallets];
+        });
     }];
 }
 
@@ -1477,9 +1486,7 @@ static BOOL bOtpError = NO;
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
     [CoreBridge loadWalletUUIDs: arrayWallets];
     for (NSString *uuid in arrayWallets) {
-        [watcherQueue addOperationWithBlock:^(void) {
-            [CoreBridge startWatcher:uuid];
-        }];
+        [CoreBridge startWatcher:uuid];
     }
     if (bDataFetched) {
         [CoreBridge connectWatchers];
@@ -1500,7 +1507,7 @@ static BOOL bOtpError = NO;
 
 + (void)connectWatcher:(NSString *)uuid
 {
-    [watcherQueue addOperationWithBlock:^(void) {
+    dispatch_async(dispatch_get_main_queue(),^{
         if ([User isLoggedIn]) {
             tABC_Error Error;
             ABC_WatcherConnect([uuid UTF8String], &Error);
@@ -1508,7 +1515,7 @@ static BOOL bOtpError = NO;
             [Util printABC_Error:&Error];
             [self watchAddresses:uuid];
         }
-    }];
+    });
 }
 
 + (void)disconnectWatchers
@@ -1558,32 +1565,34 @@ static BOOL bOtpError = NO;
 
 + (void)startWatcher:(NSString *) walletUUID
 {
-    if (![CoreBridge watcherExists:walletUUID])
-    {
-        tABC_Error Error;
-        const char *szUUID = [walletUUID UTF8String];
-        ABC_WatcherStart([[User Singleton].name UTF8String],
-                        [[User Singleton].password UTF8String],
-                        szUUID, &Error);
-        [Util printABC_Error: &Error];
-
-        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        [CoreBridge watcherSet:walletUUID queue:queue];
-        [queue addOperationWithBlock:^{
-            [queue setName:walletUUID];
+    dispatch_async(dispatch_get_main_queue(),^{
+        if (![CoreBridge watcherExists:walletUUID]) {
             tABC_Error Error;
-            ABC_WatcherLoop([walletUUID UTF8String],
-                    ABC_BitCoin_Event_Callback,
-                    (__bridge void *) singleton,
-                    &Error);
-            [Util printABC_Error:&Error];
-        }];
+            const char *szUUID = [walletUUID UTF8String];
+            ABC_WatcherStart([[User Singleton].name UTF8String],
+                            [[User Singleton].password UTF8String],
+                            szUUID, &Error);
+            [Util printABC_Error: &Error];
 
-        [CoreBridge watchAddresses:walletUUID];
-        if (bDataFetched) {
-            [CoreBridge connectWatcher:walletUUID];
+            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+            [CoreBridge watcherSet:walletUUID queue:queue];
+            [queue addOperationWithBlock:^{
+                [queue setName:walletUUID];
+                tABC_Error Error;
+                ABC_WatcherLoop([walletUUID UTF8String],
+                        ABC_BitCoin_Event_Callback,
+                        (__bridge void *) singleton,
+                        &Error);
+                [Util printABC_Error:&Error];
+            }];
+
+            [CoreBridge watchAddresses:walletUUID];
+            if (bDataFetched) {
+                [CoreBridge connectWatcher:walletUUID];
+            }
+            [CoreBridge requestWalletDataSync:walletUUID];
         }
-    }
+    });
 }
 
 + (void)stopWatchers
@@ -1620,9 +1629,7 @@ static BOOL bOtpError = NO;
 + (void)restoreConnectivity
 {
     [CoreBridge connectWatchers];
-    [watcherQueue addOperationWithBlock:^(void) {
-        [CoreBridge startQueues];
-    }];
+    [CoreBridge startQueues];
 }
 
 + (void)lostConnectivity
@@ -1748,28 +1755,33 @@ static BOOL bOtpError = NO;
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
     [CoreBridge loadWalletUUIDs: arrayWallets];
     for (NSString *uuid in arrayWallets) {
-        [dataQueue addOperationWithBlock:^{
-            tABC_Error error;
-            ABC_DataSyncWallet([[User Singleton].name UTF8String],
-                            [[User Singleton].password UTF8String],
-                            [uuid UTF8String],
-                            ABC_BitCoin_Event_Callback,
-                            (__bridge void *) singleton,
-                            &error);
-            [Util printABC_Error: &error];
-
-            // Start watcher if the data has not been fetch
-            if (!bDataFetched) {
-                [CoreBridge connectWatcher:uuid];
-                [CoreBridge requestExchangeRateUpdate:nil];
-            }
-        }];
+        [CoreBridge requestWalletDataSync:uuid];
     }
     // Mark data as sync'd
     [dataQueue addOperationWithBlock:^{
         dispatch_async(dispatch_get_main_queue(),^{
             bDataFetched = YES;
         });
+    }];
+}
+
++ (void)requestWalletDataSync:(NSString *)uuid
+{
+    [dataQueue addOperationWithBlock:^{
+        tABC_Error error;
+        ABC_DataSyncWallet([[User Singleton].name UTF8String],
+                        [[User Singleton].password UTF8String],
+                        [uuid UTF8String],
+                        ABC_BitCoin_Event_Callback,
+                        (__bridge void *) singleton,
+                        &error);
+        [Util printABC_Error: &error];
+
+        // Start watcher if the data has not been fetch
+        if (!bDataFetched) {
+            [CoreBridge connectWatcher:uuid];
+            [CoreBridge requestExchangeRateUpdate:nil];
+        }
     }];
 }
 
