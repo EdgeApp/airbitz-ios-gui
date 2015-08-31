@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		17C92258FEBAD8A39BBFD0FC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E47C0EC32EE29D34C5A03A0B /* libPods.a */; };
+		346441888B4FEEADFEA96929 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464428EE3E428ED04D5A79D /* Keychain.m */; };
 		346443C3E8845FA868E63AEA /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
+		346449DA2188D84932C47A50 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464428EE3E428ED04D5A79D /* Keychain.m */; };
 		34644B2B5788D8A8EBC9F0E5 /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
 		34644B507781CF1F8E7D5301 /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
 		34644DFBC522F75CE8481CB6 /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
 		34644F1EE31C431DADB1F99C /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
+		34644F2A1881D1C4ADD87444 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464428EE3E428ED04D5A79D /* Keychain.m */; };
 		34644F47B5DBBBDBD702E03F /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
 		4C08A6DB18C29CEF0071B87C /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D318C29CEF0071B87C /* libabc.a */; };
 		4C08A6DC18C29CEF0071B87C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D418C29CEF0071B87C /* libcrypto.a */; };
@@ -935,6 +938,9 @@
 		DAD9A4B51B21804100CB3EA4 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B41B21804100CB3EA4 /* background_launch.png */; };
 		DAD9A4B61B21804100CB3EA4 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B41B21804100CB3EA4 /* background_launch.png */; };
 		DAD9A4B71B21804100CB3EA4 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B41B21804100CB3EA4 /* background_launch.png */; };
+		DADA8B061B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DADA8B001B941CF100FAAEA3 /* NSMutableData+Secure.m */; };
+		DADA8B071B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DADA8B001B941CF100FAAEA3 /* NSMutableData+Secure.m */; };
+		DADA8B081B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DADA8B001B941CF100FAAEA3 /* NSMutableData+Secure.m */; };
 		DAE276141A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
 		DAE276151A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
 		DAE276161A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
@@ -1227,9 +1233,11 @@
 /* Begin PBXFileReference section */
 		188D8A965DB464149F922F3B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3464417D3C4E858FE232DCD2 /* StylizedButtonOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedButtonOutline.h; sourceTree = "<group>"; };
+		3464428EE3E428ED04D5A79D /* Keychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keychain.m; sourceTree = "<group>"; };
 		346446F326CD2FB38A4B0DE1 /* SignUpWriteItController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpWriteItController.h; path = SignUp/SignUpWriteItController.h; sourceTree = "<group>"; };
 		346448D77123858DD23C231B /* StylizedButtonOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedButtonOutline.m; sourceTree = "<group>"; };
 		34644A61390FB99D07036E91 /* SignUpWriteItController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpWriteItController.m; path = SignUp/SignUpWriteItController.m; sourceTree = "<group>"; };
+		34644F74929069B539AACA12 /* Keychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keychain.h; sourceTree = "<group>"; };
 		3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4C08A6D318C29CEF0071B87C /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = ABC/libabc.a; sourceTree = "<group>"; };
 		4C08A6D418C29CEF0071B87C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ABC/libcrypto.a; sourceTree = "<group>"; };
@@ -1776,6 +1784,8 @@
 		DAD9A4A91B213F0B00CB3EA4 /* icon_request_padded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_request_padded@2x.png"; path = "Resources/Artwork/icon_request_padded@2x.png"; sourceTree = "<group>"; };
 		DAD9A4B01B217C2500CB3EA4 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = DL_URLServer/LaunchScreen.xib; sourceTree = "<group>"; };
 		DAD9A4B41B21804100CB3EA4 /* background_launch.png */ = {isa = PBXFileReference; explicitFileType = compiled; name = background_launch.png; path = Resources/Artwork/background_launch.png; sourceTree = "<group>"; };
+		DADA8AFF1B941CF100FAAEA3 /* NSMutableData+Secure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+Secure.h"; sourceTree = "<group>"; };
+		DADA8B001B941CF100FAAEA3 /* NSMutableData+Secure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+Secure.m"; sourceTree = "<group>"; };
 		DAE276121A9AEE8500E24523 /* AddressRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressRequestController.h; sourceTree = "<group>"; };
 		DAE276131A9AEE8500E24523 /* AddressRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressRequestController.m; sourceTree = "<group>"; };
 		DAE276201A9BF68100E24523 /* SignUpUsernameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpUsernameController.h; path = SignUp/SignUpUsernameController.h; sourceTree = "<group>"; };
@@ -1956,6 +1966,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34644B236044819AF2B4551B /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				3464428EE3E428ED04D5A79D /* Keychain.m */,
+				34644F74929069B539AACA12 /* Keychain.h */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 		4C08A6D118C29CDC0071B87C /* ABC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2433,6 +2452,7 @@
 				4C3C30A2191C1C90006923DE /* PickerTextView */,
 				4C3C308B1918347F006923DE /* PopupPickerView */,
 				B5C0A9A718EA0D09008F302C /* Request */,
+				DADA8AFC1B941CC400FAAEA3 /* SecureData */,
 				B5C0A9AB18EA0D78008F302C /* Send */,
 				DA13339A1A7B203C0051DE14 /* ScanView */,
 				B5004A2618A5C755003560A4 /* Server.h */,
@@ -2464,6 +2484,7 @@
 				B5675B5218A17F6F002E0703 /* Supporting Files */,
 				346448D77123858DD23C231B /* StylizedButtonOutline.m */,
 				3464417D3C4E858FE232DCD2 /* StylizedButtonOutline.h */,
+				34644B236044819AF2B4551B /* Keychain */,
 			);
 			path = AirBitz;
 			sourceTree = "<group>";
@@ -2916,6 +2937,15 @@
 				DAA5784C19C272C400E972FC /* SMSTemplate.txt */,
 			);
 			name = Text;
+			sourceTree = "<group>";
+		};
+		DADA8AFC1B941CC400FAAEA3 /* SecureData */ = {
+			isa = PBXGroup;
+			children = (
+				DADA8AFF1B941CF100FAAEA3 /* NSMutableData+Secure.h */,
+				DADA8B001B941CF100FAAEA3 /* NSMutableData+Secure.m */,
+			);
+			name = SecureData;
 			sourceTree = "<group>";
 		};
 		DAE2761F1A9BF66000E24523 /* SignUp */ = {
@@ -4026,6 +4056,7 @@
 				DA6645511B0B408700B04C5B /* AirbitzViewController.m in Sources */,
 				7D98ACF719A7C550003D2BF6 /* Location.m in Sources */,
 				7D98ACF819A7C550003D2BF6 /* CoreBridge.m in Sources */,
+				DADA8B071B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */,
 				7D98ACF919A7C550003D2BF6 /* BalanceView.m in Sources */,
 				7D98ACFA19A7C550003D2BF6 /* BooleanCell.m in Sources */,
 				7D98ACFC19A7C550003D2BF6 /* CJSONDeserializer.m in Sources */,
@@ -4059,6 +4090,7 @@
 				7D98AD1019A7C550003D2BF6 /* PickerTextView.m in Sources */,
 				34644B507781CF1F8E7D5301 /* SignUpWriteItController.m in Sources */,
 				34644F1EE31C431DADB1F99C /* StylizedButtonOutline.m in Sources */,
+				346449DA2188D84932C47A50 /* Keychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4168,6 +4200,7 @@
 				687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */,
 				B57C209618C25011005D7245 /* BalanceView.m in Sources */,
 				B55A031118EA538500845090 /* BooleanCell.m in Sources */,
+				DADA8B061B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */,
 				68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */,
 				B5137C3918A435BD00DA4A34 /* CJSONDeserializer.m in Sources */,
 				B5C0A9AA18EA0D09008F302C /* RequestViewController.m in Sources */,
@@ -4201,6 +4234,7 @@
 				4C3C30A5191C1CAF006923DE /* PickerTextView.m in Sources */,
 				34644F47B5DBBBDBD702E03F /* SignUpWriteItController.m in Sources */,
 				34644DFBC522F75CE8481CB6 /* StylizedButtonOutline.m in Sources */,
+				34644F2A1881D1C4ADD87444 /* Keychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4310,6 +4344,7 @@
 				DAE864521A88A58A00A17BD3 /* CoreBridge.m in Sources */,
 				DAE864531A88A58A00A17BD3 /* BalanceView.m in Sources */,
 				DAE864541A88A58A00A17BD3 /* BooleanCell.m in Sources */,
+				DADA8B081B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */,
 				DAE864561A88A58A00A17BD3 /* SpendingLimitsViewController.m in Sources */,
 				DAE864571A88A58A00A17BD3 /* CJSONDeserializer.m in Sources */,
 				DAE864581A88A58A00A17BD3 /* RequestViewController.m in Sources */,
@@ -4343,6 +4378,7 @@
 				DAE8646E1A88A58A00A17BD3 /* PickerTextView.m in Sources */,
 				346443C3E8845FA868E63AEA /* SignUpWriteItController.m in Sources */,
 				34644B2B5788D8A8EBC9F0E5 /* StylizedButtonOutline.m in Sources */,
+				346441888B4FEEADFEA96929 /* Keychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

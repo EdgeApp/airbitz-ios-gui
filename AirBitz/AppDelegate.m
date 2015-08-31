@@ -22,6 +22,7 @@
 #import "NSString+StripHTML.h"
 #import "Reachability.h"
 #import "Util.h"
+#import "Keychain.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
@@ -234,6 +235,11 @@ NSDate *logoutDate = NULL;
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
     }
     [self bgLogoutCleanup];
+
+    [Keychain setKeychainData:nil key:USERNAME_KEY authenticated:YES];
+    [Keychain setKeychainData:nil key:PIN_KEY authenticated:YES];
+    [Keychain setKeychainData:nil key:PASSWORD_KEY authenticated:YES];
+
 }
 
 - (BOOL)isAppActive

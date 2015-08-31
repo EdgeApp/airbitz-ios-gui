@@ -7,6 +7,7 @@
 #import "User.h"
 #import "Util.h"
 #import "LocalSettings.h"
+#import "Keychain.h"
 
 #import "CoreBridge.h"
 
@@ -1428,6 +1429,7 @@ static BOOL bOtpError = NO;
 
     tABC_Error Error;
     tABC_CC result = ABC_ClearKeyCache(&Error);
+
     if (ABC_CC_Ok != result)
     {
         [Util printABC_Error:&Error];

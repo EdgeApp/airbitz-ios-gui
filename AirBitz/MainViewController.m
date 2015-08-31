@@ -41,6 +41,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "DropDownAlertView.h"
+#import "Keychain.h"
 
 typedef enum eAppMode
 {
@@ -1604,6 +1605,7 @@ MainViewController *singleton;
 - (void)slideoutLogout
 {
     [slideoutView showSlideout:NO withAnimation:NO];
+
     [self logout];
 }
 
@@ -1645,6 +1647,9 @@ MainViewController *singleton;
 
                 [FadingAlertView dismiss:YES];
             }];
+    [Keychain setKeychainData:nil key:USERNAME_KEY authenticated:YES];
+    [Keychain setKeychainData:nil key:PIN_KEY authenticated:YES];
+    [Keychain setKeychainData:nil key:PASSWORD_KEY authenticated:YES];
 
 }
 

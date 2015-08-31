@@ -26,6 +26,8 @@
 #import "APPINView.h"
 #import "Theme.h"
 #import "FadingAlertView.h"
+#import "Keychain.h"
+#import "NSMutableData+Secure.h"
 
 typedef enum eLoginMode
 {
@@ -261,6 +263,42 @@ static BOOL bInitialized = false;
     debug.numberOfTapsRequired = 5;
     [_logoImage addGestureRecognizer:debug];
     [_logoImage setUserInteractionEnabled:YES];
+
+
+    //
+    // Look for cached username & password or PIN in the keychain. Use it if present
+    //
+    NSError *error = nil;
+    NSString *kcUsername = [Keychain getKeychainString:USERNAME_KEY error:&error];
+
+    if (!error)
+    {
+        if ([kcUsername isEqualToString:[LocalSettings controller].cachedUsername])
+        {
+            error = nil;
+            NSString *kcPassword = [Keychain getKeychainString:PASSWORD_KEY error:&error];
+            if (!error && [kcPassword length] >= 10)
+            {
+                // try to login
+                self.usernameSelector.textField.text = kcUsername;
+                self.passwordTextField.text = kcPassword;
+                [self SignIn];
+            }
+            else
+            {
+                error = nil;
+                NSString *kcPIN = [Keychain getKeychainString:PIN_KEY error:&error];
+                if (!error && [kcPIN length] == 4)
+                {
+                    // try to login w/PIN
+                    [self signIn:kcPIN];
+                }
+
+            }
+        }
+    }
+
+
 }
 
 - (void)uploadLog {
@@ -542,6 +580,16 @@ static BOOL bInitialized = false;
                     [User login:[LocalSettings controller].cachedUsername password:NULL];
                     [[User Singleton] resetPINLoginInvalidEntryCount];
                     [self.delegate LoginViewControllerDidPINLogin];
+                    [Keychain setKeychainString:[LocalSettings controller].cachedUsername
+                                            key:USERNAME_KEY
+                                  authenticated:YES];
+                    [Keychain setKeychainString:PINCode
+                                            key:PIN_KEY
+                                  authenticated:YES];
+                    [Keychain setKeychainData:nil
+                                          key:PASSWORD_KEY
+                                authenticated:YES];
+
                     break;
                 }
                 case ABC_CC_BadPassword:
@@ -892,6 +940,16 @@ static BOOL bInitialized = false;
            password:self.passwordTextField.text
            setupPIN:YES];
         [self.delegate loginViewControllerDidLogin:NO];
+        [Keychain setKeychainString:[LocalSettings controller].cachedUsername
+                                key:USERNAME_KEY
+                      authenticated:YES];
+        [Keychain setKeychainString:self.passwordTextField.text
+                                key:PASSWORD_KEY
+                      authenticated:YES];
+        [Keychain setKeychainData:nil
+                              key:PIN_KEY
+                    authenticated:YES];
+
     } else if (ABC_CC_InvalidOTP == _resultCode) {
         [MainViewController showBackground:NO animate:YES];
         [self launchTwoFactorMenu];
