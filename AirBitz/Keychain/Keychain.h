@@ -11,6 +11,8 @@
 #define USERNAME_KEY            @"key_username"
 #define PASSWORD_KEY            @"key_password"
 #define PIN_KEY                 @"key_pin"
+#define RELOGIN_KEY             @"key_relogin"
+#define USE_TOUCHID_KEY         @"key_use_touchid"
 #define SEC_ATTR_SERVICE        @"co.airbitz.airbitz"
 
 @interface Keychain : NSObject
@@ -18,6 +20,11 @@
 + (BOOL) setKeychainData:(NSData *)data key:(NSString *)key authenticated:(BOOL) authenticated;
 + (NSData *) getKeychainData:(NSString *)key error:(NSError **)error;
 + (BOOL) setKeychainString:(NSString *)s key:(NSString *)key authenticated:(BOOL) authenticated;
++ (BOOL) setKeychainInt:(int64_t) i key:(NSString *)key authenticated:(BOOL) authenticated;
++ (int64_t) getKeychainInt:(NSString *)key error:(NSError **)error;
+
 + (NSString *) getKeychainString:(NSString *)key error:(NSError **)error;
++ (BOOL)authenticateTouchID:(NSString *)promptString fallbackString:(NSString *)fallbackString;
+
 
 @end

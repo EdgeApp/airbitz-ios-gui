@@ -229,9 +229,9 @@ NSDate *logoutDate = NULL;
 // If the app is *not* active, log the user out
 - (void)autoLogout
 {
-    [Keychain setKeychainData:nil key:USERNAME_KEY authenticated:YES];
-    [Keychain setKeychainData:nil key:PIN_KEY authenticated:YES];
-    [Keychain setKeychainData:nil key:PASSWORD_KEY authenticated:YES];
+    // App will not auto login but we will retain login credentials
+    // inside iOS Keychain so we can use TouchID
+    [Keychain setKeychainData:nil key:RELOGIN_KEY authenticated:YES];
 
     if (![self isAppActive])
     {

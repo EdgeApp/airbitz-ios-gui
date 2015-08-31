@@ -9,6 +9,8 @@
 
 #import "Keychain.h"
 #import "NSMutableData+Secure.h"
+#import "Theme.h"
+#import <LocalAuthentication/LocalAuthentication.h>
 
 @implementation Keychain
 
@@ -89,6 +91,67 @@
         return (d) ? CFBridgingRelease(CFStringCreateFromExternalRepresentation(SecureAllocator(), (CFDataRef)d,
                 kCFStringEncodingUTF8)) : nil;
     }
+}
+
++ (BOOL) setKeychainInt:(int64_t) i key:(NSString *)key authenticated:(BOOL) authenticated;
+{
+    @autoreleasepool {
+        NSMutableData *d = [NSMutableData secureDataWithLength:sizeof(int64_t)];
+
+        *(int64_t *)d.mutableBytes = i;
+        return [self setKeychainData:d key:key authenticated:authenticated];
+    }
+}
+
++ (int64_t) getKeychainInt:(NSString *)key error:(NSError **)error;
+{
+    @autoreleasepool {
+        NSData *d = [self getKeychainData:key error:error];
+
+        return (d.length == sizeof(int64_t)) ? *(int64_t *)d.bytes : 0;
+    }
+}
+
+// Authenticate w/touchID
++ (BOOL)authenticateTouchID:(NSString *)promptString fallbackString:(NSString *)fallbackString;
+{
+    LAContext *context = [LAContext new];
+    NSError *error = nil;
+    __block NSInteger authcode = 0;
+
+    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error])
+    {
+        context.localizedFallbackTitle = fallbackString;
+
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+                localizedReason:(promptString.length > 0 ? promptString : @" ") reply:^(BOOL success, NSError *error)
+                {
+                    authcode = (success) ? 1 : error.code;
+                }];
+
+        while (authcode == 0) {
+            [[NSRunLoop mainRunLoop] limitDateForMode:NSDefaultRunLoopMode];
+        }
+
+        if (authcode == LAErrorAuthenticationFailed)
+        {
+            return NO;
+        }
+        else if (authcode == 1)
+        {
+            return YES;
+        }
+        else if (authcode == LAErrorUserCancel || authcode == LAErrorSystemCancel)
+        {
+            return NO;
+        }
+    }
+    else if (error)
+    {
+        NSLog(@"[LAContext canEvaluatePolicy:] %@", error.localizedDescription);
+    }
+
+    return NO;
 }
 
 @end

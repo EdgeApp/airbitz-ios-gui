@@ -116,6 +116,9 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.passwordRecoveryText                               = NSLocalizedString(@"Password Recovery", nil);
     self.passwordMismatchText                               = NSLocalizedString(@"Password does not match re-entered password", @"");
     self.defaultCurrencyInfoText                            = NSLocalizedString(@"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.", nil);
+    self.touchIDPromptText                                  = NSLocalizedString(@"Touch to login user", @"Touch ID prompt text");
+    self.usePINText                                         = NSLocalizedString(@"Use PIN", @"Touch ID [Use PIN] button");
+    self.usePasswordText                                    = NSLocalizedString(@"Use Password", @"Touch ID [Use Password] button");
 
     self.sendRequestButtonDisabled = 0.4f;
 

@@ -265,40 +265,6 @@ static BOOL bInitialized = false;
     [_logoImage setUserInteractionEnabled:YES];
 
 
-    //
-    // Look for cached username & password or PIN in the keychain. Use it if present
-    //
-    NSError *error = nil;
-    NSString *kcUsername = [Keychain getKeychainString:USERNAME_KEY error:&error];
-
-    if (!error)
-    {
-        if ([kcUsername isEqualToString:[LocalSettings controller].cachedUsername])
-        {
-            error = nil;
-            NSString *kcPassword = [Keychain getKeychainString:PASSWORD_KEY error:&error];
-            if (!error && [kcPassword length] >= 10)
-            {
-                // try to login
-                self.usernameSelector.textField.text = kcUsername;
-                self.passwordTextField.text = kcPassword;
-                [self SignIn];
-            }
-            else
-            {
-                error = nil;
-                NSString *kcPIN = [Keychain getKeychainString:PIN_KEY error:&error];
-                if (!error && [kcPIN length] == 4)
-                {
-                    // try to login w/PIN
-                    [self signIn:kcPIN];
-                }
-
-            }
-        }
-    }
-
-
 }
 
 - (void)uploadLog {
@@ -329,9 +295,97 @@ static BOOL bInitialized = false;
     }];
 }
 
+typedef enum eReloginState
+{
+    RELOGIN_DISABLE = 0,
+    RELOGIN_USE_PASSWORD,
+    RELOGIN_USE_PIN
+}tReloginState;
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
+    //
+    // Look for cached username & password or PIN in the keychain. Use it if present
+    //
+    NSError *error = nil;
+    tReloginState reloginState = RELOGIN_DISABLE;
+
+    int64_t bRelogin = [Keychain getKeychainInt:RELOGIN_KEY error:&error];
+    if (error) return;
+
+    error = nil;
+    int64_t bUseTouchID = [Keychain getKeychainInt:USE_TOUCHID_KEY error:&error];
+    if (error) return;
+
+    if (!bRelogin && !bUseTouchID) return;
+
+    error = nil;
+    NSString *kcUsername = [Keychain getKeychainString:USERNAME_KEY error:&error];
+    if (error) return;
+
+    error = nil;
+    NSString *kcPassword = [Keychain getKeychainString:PASSWORD_KEY error:&error];
+    if (error) return;
+
+    error = nil;
+    NSString *kcPIN = [Keychain getKeychainString:PIN_KEY error:&error];
+    if (error) return;
+
+    if ([kcUsername isEqualToString:[LocalSettings controller].cachedUsername])
+    {
+        if ([kcPassword length] >= 10)
+        {
+            reloginState = RELOGIN_USE_PASSWORD;
+        }
+        else
+        {
+            if ([kcPIN length] == 4)
+            {
+                reloginState = RELOGIN_USE_PIN;
+            }
+        }
+    }
+
+    if (reloginState)
+    {
+        if (bUseTouchID && !bRelogin)
+        {
+            NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",[Theme Singleton].touchIDPromptText, kcUsername];
+            NSString *fallbackString;
+
+            if (reloginState == RELOGIN_USE_PIN)
+                fallbackString = [Theme Singleton].usePINText;
+            else if (reloginState == RELOGIN_USE_PASSWORD)
+                fallbackString = [Theme Singleton].usePasswordText;
+
+            if ([Keychain authenticateTouchID:prompt fallbackString:fallbackString]) {
+                bRelogin = YES;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        if (bRelogin)
+        {
+            if (reloginState == RELOGIN_USE_PASSWORD)
+            {
+                // try to login
+                self.usernameSelector.textField.text = kcUsername;
+                self.passwordTextField.text = kcPassword;
+                [self showSpinner:YES];
+                [self SignIn];
+            }
+            else if (reloginState == RELOGIN_USE_PIN)
+            {
+                [self showSpinner:YES];
+                [self signIn:kcPIN];
+            }
+        }
+
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -586,6 +640,12 @@ static BOOL bInitialized = false;
                     [Keychain setKeychainString:PINCode
                                             key:PIN_KEY
                                   authenticated:YES];
+                    [Keychain setKeychainInt:1
+                                         key:RELOGIN_KEY
+                               authenticated:YES];
+                    [Keychain setKeychainInt:1
+                                         key:USE_TOUCHID_KEY
+                               authenticated:YES];
                     [Keychain setKeychainData:nil
                                           key:PASSWORD_KEY
                                 authenticated:YES];
@@ -946,6 +1006,12 @@ static BOOL bInitialized = false;
         [Keychain setKeychainString:self.passwordTextField.text
                                 key:PASSWORD_KEY
                       authenticated:YES];
+        [Keychain setKeychainInt:1
+                             key:RELOGIN_KEY
+                   authenticated:YES];
+        [Keychain setKeychainInt:1
+                             key:USE_TOUCHID_KEY
+                   authenticated:YES];
         [Keychain setKeychainData:nil
                               key:PIN_KEY
                     authenticated:YES];

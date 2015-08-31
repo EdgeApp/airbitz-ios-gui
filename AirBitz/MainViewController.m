@@ -1647,9 +1647,7 @@ MainViewController *singleton;
 
                 [FadingAlertView dismiss:YES];
             }];
-    [Keychain setKeychainData:nil key:USERNAME_KEY authenticated:YES];
-    [Keychain setKeychainData:nil key:PIN_KEY authenticated:YES];
-    [Keychain setKeychainData:nil key:PASSWORD_KEY authenticated:YES];
+    [Keychain setKeychainData:nil key:RELOGIN_KEY authenticated:YES];
 
 }
 

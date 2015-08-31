@@ -77,6 +77,10 @@
 @property (nonatomic) NSString *passwordRecoveryText;
 @property (nonatomic) NSString *passwordMismatchText;
 @property (nonatomic) NSString *defaultCurrencyInfoText;
+@property (nonatomic) NSString *touchIDPromptText;
+@property (nonatomic) NSString *usePINText;
+@property (nonatomic) NSString *usePasswordText;
+
 
 
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
