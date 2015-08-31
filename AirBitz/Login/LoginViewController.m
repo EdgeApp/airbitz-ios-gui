@@ -634,21 +634,11 @@ typedef enum eReloginState
                     [User login:[LocalSettings controller].cachedUsername password:NULL];
                     [[User Singleton] resetPINLoginInvalidEntryCount];
                     [self.delegate LoginViewControllerDidPINLogin];
-                    [Keychain setKeychainString:[LocalSettings controller].cachedUsername
-                                            key:USERNAME_KEY
-                                  authenticated:YES];
-                    [Keychain setKeychainString:PINCode
-                                            key:PIN_KEY
-                                  authenticated:YES];
-                    [Keychain setKeychainInt:1
-                                         key:RELOGIN_KEY
-                               authenticated:YES];
-                    [Keychain setKeychainInt:1
-                                         key:USE_TOUCHID_KEY
-                               authenticated:YES];
-                    [Keychain setKeychainData:nil
-                                          key:PASSWORD_KEY
-                                authenticated:YES];
+
+                    [Keychain updateLoginKeychainInfo:[LocalSettings controller].cachedUsername
+                                                  pin:PINCode
+                                             password:nil
+                                              relogin:YES];
 
                     break;
                 }
@@ -1000,21 +990,11 @@ typedef enum eReloginState
            password:self.passwordTextField.text
            setupPIN:YES];
         [self.delegate loginViewControllerDidLogin:NO];
-        [Keychain setKeychainString:[LocalSettings controller].cachedUsername
-                                key:USERNAME_KEY
-                      authenticated:YES];
-        [Keychain setKeychainString:self.passwordTextField.text
-                                key:PASSWORD_KEY
-                      authenticated:YES];
-        [Keychain setKeychainInt:1
-                             key:RELOGIN_KEY
-                   authenticated:YES];
-        [Keychain setKeychainInt:1
-                             key:USE_TOUCHID_KEY
-                   authenticated:YES];
-        [Keychain setKeychainData:nil
-                              key:PIN_KEY
-                    authenticated:YES];
+
+        [Keychain updateLoginKeychainInfo:[LocalSettings controller].cachedUsername
+                                      pin:nil
+                                 password:self.passwordTextField.text
+                                  relogin:YES];
 
     } else if (ABC_CC_InvalidOTP == _resultCode) {
         [MainViewController showBackground:NO animate:YES];

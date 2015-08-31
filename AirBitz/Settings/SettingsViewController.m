@@ -31,6 +31,7 @@
 #import "Theme.h"
 #import "MainViewController.h"
 #import "PopupPickerView.h"
+#import "Keychain.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
@@ -74,6 +75,7 @@
 #define ROW_MERCHANT_MODE               5
 #define ROW_BLE                         6
 #define ROW_PIN_RELOGIN                 7
+#define ROW_TOUCHID                     8
 
 #define ARRAY_EXCHANGES     @[@"Bitstamp", @"BraveNewCoin", @"Coinbase"]
 
@@ -953,6 +955,18 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                 cell.state.userInteractionEnabled = NO;
             }
         }
+        else if (indexPath.row == ROW_TOUCHID)
+        {
+            cell.name.text = NSLocalizedString(@"Use TouchID", @"settings text");
+            if(_pAccountSettings) {
+                [cell.state setOn:!_pAccountSettings->bDisableFingerprintLogin animated:NO];
+            }
+            if ([CoreBridge passwordExists] && 1) {
+                cell.state.userInteractionEnabled = YES;
+            } else {
+                cell.state.userInteractionEnabled = NO;
+            }
+        }
     }
 	
     cell.tag = (indexPath.section << 8) | (indexPath.row);
@@ -1052,11 +1066,11 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			//assumes bluetooth option is last of the options.
 			if(_showBluetoothOption)
 			{
-				return 8;
+				return 9;
 			}
 			else
 			{
-				return 7; //return 7 to not show the Bluetooth cell.
+				return 8; //return 7 to not show the Bluetooth cell.
 			}
             break;
 
@@ -1183,6 +1197,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             else if (indexPath.row == ROW_PIN_RELOGIN)
             {
 				cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
+            }
+            else if (indexPath.row == ROW_TOUCHID)
+            {
+                cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
             }
             else
             {
@@ -1362,6 +1380,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         // update the display by reloading the table
         [self.tableView reloadData];
 
+        [Keychain disableKeychainBasedOnSettings];
+
         [CoreBridge postToMiscQueue:^{
 
             if (theSwitch.on)
@@ -1373,6 +1393,27 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                 [CoreBridge deletePINLogin];
             }
         }];
+    }
+    else if ((section == SECTION_OPTIONS) && (row == ROW_TOUCHID))
+    {
+        _pAccountSettings->bDisableFingerprintLogin = !theSwitch.on;
+        [self saveSettings];
+
+        // update the display by reloading the table
+        [self.tableView reloadData];
+
+        [Keychain disableKeychainBasedOnSettings];
+//        [CoreBridge postToMiscQueue:^{
+//
+//            if (theSwitch.on)
+//            {
+//                [CoreBridge setupLoginPIN];
+//            }
+//            else
+//            {
+//                [CoreBridge deletePINLogin];
+//            }
+//        }];
     }
 }
 

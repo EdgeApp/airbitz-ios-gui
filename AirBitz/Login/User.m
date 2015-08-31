@@ -158,6 +158,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
         self.bSpendRequirePin = pSettings->bSpendRequirePin;
         self.spendRequirePinSatoshis = pSettings->spendRequirePinSatoshis;
         self.bDisablePINLogin = pSettings->bDisablePINLogin;
+        self.bDisableFingerprintLogin = pSettings->bDisableFingerprintLogin;
     }
     else
     {

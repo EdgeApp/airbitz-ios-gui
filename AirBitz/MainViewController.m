@@ -1647,8 +1647,7 @@ MainViewController *singleton;
 
                 [FadingAlertView dismiss:YES];
             }];
-    [Keychain setKeychainData:nil key:RELOGIN_KEY authenticated:YES];
-
+    [Keychain disableRelogin];
 }
 
 #pragma mark - Slideout Methods

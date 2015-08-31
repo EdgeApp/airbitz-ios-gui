@@ -26,5 +26,13 @@
 + (NSString *) getKeychainString:(NSString *)key error:(NSError **)error;
 + (BOOL)authenticateTouchID:(NSString *)promptString fallbackString:(NSString *)fallbackString;
 
++ (void) disableRelogin;
++ (void) disableTouchID;
++ (BOOL) disableKeychainBasedOnSettings;
++ (void) clearKeychainInfo;
++ (void) updateLoginKeychainInfo:(NSString *)username
+                             pin:(NSString *)PINCode
+                        password:(NSString *)password
+                         relogin:(BOOL) bRelogin;
 
 @end

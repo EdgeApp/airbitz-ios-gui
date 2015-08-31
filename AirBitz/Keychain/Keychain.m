@@ -10,6 +10,8 @@
 #import "Keychain.h"
 #import "NSMutableData+Secure.h"
 #import "Theme.h"
+#import "User.h"
+#import "LocalSettings.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 
 @implementation Keychain
@@ -152,6 +154,76 @@
     }
 
     return NO;
+}
+
++ (void) disableRelogin;
+{
+    [Keychain setKeychainData:nil
+                          key:RELOGIN_KEY
+                authenticated:YES];
+}
+
++ (void) disableTouchID;
+{
+    [Keychain setKeychainData:nil
+                          key:USE_TOUCHID_KEY
+                authenticated:YES];
+}
+
++ (void) clearKeychainInfo;
+{
+    [Keychain setKeychainData:nil
+                          key:USERNAME_KEY
+                authenticated:YES];
+    [Keychain setKeychainData:nil
+                          key:PASSWORD_KEY
+                authenticated:YES];
+    [Keychain setKeychainData:nil
+                          key:PIN_KEY
+                authenticated:YES];
+    [Keychain setKeychainData:nil
+                          key:RELOGIN_KEY
+                authenticated:YES];
+    [Keychain setKeychainData:nil
+                          key:USE_TOUCHID_KEY
+                authenticated:YES];
+}
+
++ (BOOL) disableKeychainBasedOnSettings;
+{
+    if ([User Singleton].bDisablePINLogin && [User Singleton].bDisableFingerprintLogin)
+    {
+        // If user has disabled TouchID and PIN relogin, then do not use Keychain at all for maximum security
+        [self clearKeychainInfo];
+        return YES;
+    }
+
+    return NO;
+}
+
++ (void) updateLoginKeychainInfo:(NSString *)username
+                             pin:(NSString *)PINCode
+                        password:(NSString *)password
+                         relogin:(BOOL) bRelogin;
+{
+    if ([self disableKeychainBasedOnSettings])
+        return;
+
+    [Keychain setKeychainString:username
+                            key:USERNAME_KEY
+                  authenticated:YES];
+    [Keychain setKeychainString:PINCode
+                            key:PIN_KEY
+                  authenticated:YES];
+    [Keychain setKeychainInt:bRelogin
+                         key:RELOGIN_KEY
+               authenticated:YES];
+    [Keychain setKeychainString:password
+                          key:PASSWORD_KEY
+                authenticated:YES];
+    [Keychain setKeychainInt:[User Singleton].bDisableFingerprintLogin ? 0 : 1
+                         key:USE_TOUCHID_KEY
+               authenticated:YES];
 }
 
 @end

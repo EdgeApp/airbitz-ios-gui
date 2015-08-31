@@ -231,7 +231,7 @@ NSDate *logoutDate = NULL;
 {
     // App will not auto login but we will retain login credentials
     // inside iOS Keychain so we can use TouchID
-    [Keychain setKeychainData:nil key:RELOGIN_KEY authenticated:YES];
+    [Keychain disableRelogin];
 
     if (![self isAppActive])
     {
