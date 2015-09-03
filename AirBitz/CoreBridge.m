@@ -194,6 +194,11 @@ static BOOL bOtpError = NO;
     [dataQueue addOperationWithBlock:cb];
 }
 
++ (void)postToLoadedQueue:(void(^)(void))cb;
+{
+    [watcherQueue addOperationWithBlock:cb];
+}
+
 + (void)postToWalletsQueue:(void(^)(void))cb;
 {
     [walletsQueue addOperationWithBlock:cb];

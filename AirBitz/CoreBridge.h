@@ -29,6 +29,7 @@
 + (void)postToSyncQueue:(void(^)(void))cb;
 + (void)clearSyncQueue;
 + (void)clearTxSearchQueue;
++ (void)postToLoadedQueue:(void(^)(void))cb;
 + (void)postToWalletsQueue:(void(^)(void))cb;
 + (void)postToGenQRQueue:(void(^)(void))cb;
 + (void)postToTxSearchQueue:(void(^)(void))cb;

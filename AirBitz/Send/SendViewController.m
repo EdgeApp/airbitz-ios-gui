@@ -1685,10 +1685,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)processURI
 {
     // Added to wallet queue since wallets are loaded asynchronously
-    [CoreBridge postToWalletsQueue:^(void) {
-        dispatch_async(dispatch_get_main_queue(),^{
-            [self doProcessURI];
-        });
+    [MainViewController fadingAlert:NSLocalizedString(@"Loading...", nil)
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    [CoreBridge postToLoadedQueue:^(void) {
+        [CoreBridge postToWalletsQueue:^(void) {
+            dispatch_async(dispatch_get_main_queue(),^{
+                [self doProcessURI];
+            });
+        }];
     }];
 }
 
@@ -1707,10 +1711,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
             [spendTarget newTransfer:wallet.strUUID error:&error];
             [self showSendConfirmationTo:spendTarget];
-
+            [MainViewController fadingAlertDismiss];
         }
         else
         {
+            [MainViewController fadingAlertDismiss];
             if (_bImportMode)
             {
                 if ([self importWallet:text]) {
