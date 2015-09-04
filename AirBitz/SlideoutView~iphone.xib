@@ -113,14 +113,14 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_logout.png" id="PFZ-VL-MPA">
-                                    <rect key="frame" x="29" y="12" width="26" height="26"/>
+                                    <rect key="frame" x="29" y="15" width="26" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
                                     </accessibility>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOGOUT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BCk-jF-SE5" userLabel="logoutText">
-                                    <rect key="frame" x="79" y="15" width="95" height="21"/>
+                                    <rect key="frame" x="79" y="17" width="95" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="">
                                         <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
@@ -152,7 +152,7 @@
                                     </accessibility>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WALLETS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lr4-kO-HCW" userLabel="logoutText">
-                                    <rect key="frame" x="79" y="15" width="95" height="21"/>
+                                    <rect key="frame" x="79" y="14" width="95" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="">
                                         <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
