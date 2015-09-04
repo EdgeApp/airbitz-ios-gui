@@ -61,7 +61,7 @@
     
     NSString *address = [NSString stringWithFormat:@"%@", [self.appGroupSharedUserDefs objectForKey:APP_GROUP_LAST_ADDRESS_KEY]];
     self.addressLabel.text = address;
-    NSString *accountWallet = [NSString stringWithFormat:@"[ %@ : %@ ]",
+    NSString *accountWallet = [NSString stringWithFormat:@"Account: %@ / %@",
                     [self.appGroupSharedUserDefs stringForKey:APP_GROUP_LAST_ACCOUNT_KEY],
                     [self.appGroupSharedUserDefs objectForKey:APP_GROUP_LAST_WALLET_KEY]];
 
