@@ -14,6 +14,8 @@
 
 @interface TransactionsViewController : AirbitzViewController
 
+- (void) dropdownWallets:(BOOL)bDropdown;
+
 @property (assign) id<TransactionsViewControllerDelegate> delegate;
 //@property (nonatomic, strong) Wallet *wallet;
 

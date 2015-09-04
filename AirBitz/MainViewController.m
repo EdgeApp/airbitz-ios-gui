@@ -1640,6 +1640,24 @@ MainViewController *singleton;
     [slideoutView showSlideout:NO];
 }
 
+- (void)slideoutWallets
+{
+    if (_selectedViewController == _transactionsViewController)
+    {
+        [_transactionsViewController dropdownWallets:YES];
+    }
+    else
+    {
+        if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
+            [MainViewController animateSwapViewControllers:_transactionsViewController out:_selectedViewController];
+            self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
+            [_transactionsViewController dropdownWallets:YES];
+        }
+    }
+    [slideoutView showSlideout:NO];
+
+}
+
 - (void)slideoutImport
 {
     if (_selectedViewController != _importViewController)

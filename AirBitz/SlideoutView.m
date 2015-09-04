@@ -39,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet UIButton               *logoutButton;
 @property (weak, nonatomic) IBOutlet UIButton               *settingsButton;
 @property (weak, nonatomic) IBOutlet UIView                 *buySellDivider;
+@property (weak, nonatomic) IBOutlet UIButton               *walletsButton;
 
 @property (nonatomic, strong) NSArray                       *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
@@ -226,7 +227,13 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutImport)]) {
         [self.delegate slideoutImport];
     }
+}
 
+- (IBAction)walletsTouched:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWallets)]) {
+        [self.delegate slideoutWallets];
+    }
 }
 
 

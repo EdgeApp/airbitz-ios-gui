@@ -187,6 +187,18 @@
 
 }
 
+- (void) dropdownWallets:(BOOL)bDropdown;
+{
+    if (bDropdown && !_bWalletsShowing)
+    {
+        [self toggleWalletDropdown:nil];
+    }
+    else if (!bDropdown && _bWalletsShowing)
+    {
+        [self toggleWalletDropdown:nil];
+    }
+}
+
 - (void)toggleWalletDropdown: (UIButton *)sender
 {
     ABLog(2,@"didTapWalletName: Hello world\n");
