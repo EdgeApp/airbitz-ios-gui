@@ -1686,11 +1686,15 @@ static BOOL bOtpError = NO;
 
         for (Wallet *w in singleton.arrayWallets)
         {
-            [arrayCurrencyNums addObject:[NSNumber numberWithInteger:w.currencyNum]];
+            if (w.loaded) {
+                [arrayCurrencyNums addObject:[NSNumber numberWithInteger:w.currencyNum]];
+            }
         }
         for (Wallet *w in singleton.arrayArchivedWallets)
         {
-            [arrayCurrencyNums addObject:[NSNumber numberWithInteger:w.currencyNum]];
+            if (w.loaded) {
+                [arrayCurrencyNums addObject:[NSNumber numberWithInteger:w.currencyNum]];
+            }
         }
 
         [exchangeQueue addOperationWithBlock:^{
