@@ -32,6 +32,7 @@
 #import "AudioController.h"
 #import "RecipientViewController.h"
 #import "DropDownAlertView.h"
+#import "AppGroupConstants.h"
 
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
@@ -661,6 +662,21 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             self.statusLine3.text = addressString;
             self.qrCodeImageView.image = qrImage;
         });
+
+        //
+        // Save QR and address in shared data so Widget can access it
+        //
+        static NSUserDefaults *tempSharedUserDefs = nil;
+
+        if (!tempSharedUserDefs) tempSharedUserDefs = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUP_ID];
+
+        NSData *imageData = UIImagePNGRepresentation(qrImage);
+
+        [tempSharedUserDefs setObject:imageData forKey:APP_GROUP_LAST_QR_IMAGE_KEY];
+        [tempSharedUserDefs setObject:addressString forKey:APP_GROUP_LAST_ADDRESS_KEY];
+        [tempSharedUserDefs setObject:[CoreBridge Singleton].currentWallet.strName forKey:APP_GROUP_LAST_WALLET_KEY];
+        [tempSharedUserDefs setObject:[User Singleton].name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
+        [tempSharedUserDefs synchronize];
 
         if(self.peripheralManager.isAdvertising) {
             ABLog(2,@"Removing all BLE services and stopping advertising");
