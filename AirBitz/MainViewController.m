@@ -1511,11 +1511,22 @@ MainViewController *singleton;
             _appMode = APP_MODE_SEND;
             [self launchViewControllerBasedOnAppMode];
 
-            [_sendViewController resetViews];
-            _sendViewController.addressTextField.text = [uri absoluteString];
-            [_sendViewController processURI];
+            if ([uri.host isEqual:@"sendqr"] || [uri.path isEqual:@"/sendqr"])
+            {
+                [_sendViewController resetViews];
+                self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
+                _appMode = APP_MODE_SEND;
+                [self launchViewControllerBasedOnAppMode];
+            }
+            else
+            {
+                [_sendViewController resetViews];
+                _sendViewController.addressTextField.text = [uri absoluteString];
+                [_sendViewController processURI];
+            }
         } else {
             _uri = uri;
+
         }
     } else if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:@"airbitz-ret"]
                || [uri.host isEqualToString:@"x-callback-url"]) {

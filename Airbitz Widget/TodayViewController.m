@@ -10,6 +10,8 @@
 #import "AppGroupConstants.h"
 #import <NotificationCenter/NotificationCenter.h>
 
+#define SEND_URL @"airbitz://x-callback-url/sendqr"
+
 @interface TodayViewController () <NCWidgetProviding>
 @property (nonatomic, strong) NSUserDefaults *appGroupSharedUserDefs;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
@@ -69,5 +71,12 @@
     
     completionHandler(NCUpdateResultNewData);
 }
+
+- (IBAction)ButtonScanQR:(id)sender
+{
+    [self.extensionContext openURL:[NSURL URLWithString:SEND_URL] completionHandler:nil];
+}
+
+
 
 @end

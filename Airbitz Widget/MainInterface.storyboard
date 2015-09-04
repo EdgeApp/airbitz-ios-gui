@@ -30,13 +30,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hU2-5r-woL" userLabel="Right View container">
                                 <rect key="frame" x="204" y="20" width="116" height="180"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="enable-camera.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Cw-pS-78D">
-                                        <rect key="frame" x="28" y="92" width="60" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="CZz-Q6-aXB"/>
-                                            <constraint firstAttribute="width" constant="60" id="IFl-qd-ZMF"/>
-                                        </constraints>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQB-TM-9HQ">
                                         <rect key="frame" x="39" y="12" width="37.5" height="20"/>
                                         <constraints>
@@ -74,18 +67,31 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIw-mO-3VN">
+                                        <rect key="frame" x="28" y="99" width="60" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="TSF-LC-Rxc"/>
+                                            <constraint firstAttribute="height" constant="50" id="yZp-uq-t36"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="enable-camera.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="ButtonScanQR:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="cIm-mv-9Li"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="9Cw-pS-78D" secondAttribute="bottom" constant="28" id="7aX-qV-Iks"/>
                                     <constraint firstItem="NiJ-rT-MKF" firstAttribute="top" secondItem="pzG-q0-KJ4" secondAttribute="bottom" constant="2" id="9Eo-CW-v1f"/>
+                                    <constraint firstItem="Lt8-cl-BMW" firstAttribute="top" secondItem="WIw-mO-3VN" secondAttribute="bottom" constant="1" id="A2d-Et-p84"/>
                                     <constraint firstAttribute="centerX" secondItem="NiJ-rT-MKF" secondAttribute="centerX" id="AMl-qa-oSX"/>
                                     <constraint firstItem="NiJ-rT-MKF" firstAttribute="top" secondItem="hU2-5r-woL" secondAttribute="top" constant="56" id="CVI-mB-M7z"/>
                                     <constraint firstAttribute="centerX" secondItem="Lt8-cl-BMW" secondAttribute="centerX" id="InY-ux-VjU"/>
+                                    <constraint firstAttribute="centerX" secondItem="WIw-mO-3VN" secondAttribute="centerX" id="Psp-Fu-hfT"/>
                                     <constraint firstItem="pzG-q0-KJ4" firstAttribute="top" secondItem="gQB-TM-9HQ" secondAttribute="bottom" constant="2" id="RYf-GK-VQV"/>
                                     <constraint firstItem="gQB-TM-9HQ" firstAttribute="top" secondItem="hU2-5r-woL" secondAttribute="top" id="SSY-Kl-0Oa"/>
                                     <constraint firstAttribute="centerX" secondItem="gQB-TM-9HQ" secondAttribute="centerX" id="VBc-TP-2S7"/>
-                                    <constraint firstAttribute="centerX" secondItem="9Cw-pS-78D" secondAttribute="centerX" id="aKi-yH-g2A"/>
                                     <constraint firstAttribute="bottom" secondItem="Lt8-cl-BMW" secondAttribute="bottom" id="apd-yz-U3E"/>
                                     <constraint firstAttribute="centerX" secondItem="pzG-q0-KJ4" secondAttribute="centerX" id="fIs-yB-PZ7"/>
                                 </constraints>
@@ -104,8 +110,8 @@
                                     <constraint firstAttribute="width" secondItem="4bu-cP-g7s" secondAttribute="height" multiplier="1:1" id="uRA-Sy-c6m"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1zoi3j4ghu34iuhfgkjh23f" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="A4q-0O-uN1">
-                                <rect key="frame" x="20" y="205" width="282" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1zoi3j4ghu34iuhfgkjh23f" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="A4q-0O-uN1">
+                                <rect key="frame" x="20" y="205" width="280" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="CYI-8E-JWL"/>
                                 </constraints>
@@ -113,8 +119,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="From account [ paul : My Wallet ]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z1F-d1-zBa">
-                                <rect key="frame" x="20" y="223" width="282" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From account [ paul : My Wallet ]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z1F-d1-zBa">
+                                <rect key="frame" x="20" y="223" width="280" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="XLb-N1-uwv"/>
                                 </constraints>
@@ -153,12 +159,11 @@
                         <outlet property="addressLabel" destination="A4q-0O-uN1" id="xcu-pl-uOo"/>
                         <outlet property="qrCodeImage" destination="4bu-cP-g7s" id="hol-vh-Att"/>
                         <outlet property="qrViewBackground" destination="7JQ-IL-Z40" id="zjj-um-8Wt"/>
-                        <outlet property="scanButton" destination="9Cw-pS-78D" id="2y4-51-wYa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="352" y="281"/>
+            <point key="canvasLocation" x="303" y="215"/>
         </scene>
     </scenes>
     <resources>
