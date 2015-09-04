@@ -45,6 +45,7 @@
 + (void)makeCurrentWalletWithUUID:(NSString *)strUUID;
 + (Wallet *)selectWalletWithUUID:(NSString *)strUUID;
 
++ (void)updateWidgetQRCode;
 
 
 + (Wallet *)getWallet: (NSString *)walletUUID;

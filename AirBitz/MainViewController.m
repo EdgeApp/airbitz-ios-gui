@@ -1097,6 +1097,14 @@ MainViewController *singleton;
             }
         });
     }
+
+    //
+    // If we just received money on the currentWallet then update the Widget's address & QRcode
+    //
+    if ([_strWalletUUID isEqualToString:[CoreBridge Singleton].currentWallet.strUUID])
+    {
+        [CoreBridge updateWidgetQRCode];
+    }
 }
 
 - (void)handleReceiveFromQR:(NSString *)walletUUID withTx:(NSString *)txId

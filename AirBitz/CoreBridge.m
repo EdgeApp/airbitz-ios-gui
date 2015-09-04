@@ -10,6 +10,7 @@
 #import "Keychain.h"
 
 #import "CoreBridge.h"
+#import "AppGroupConstants.h"
 
 #import <pthread.h>
 
@@ -381,7 +382,7 @@ static BOOL bOtpError = NO;
         singleton.currentWalletID = (int) [singleton.arrayWallets indexOfObject:singleton.currentWallet];
     }
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
+    [CoreBridge postNotificationWalletsChanged];
 }
 
 + (void)makeCurrentWalletWithUUID:(NSString *)strUUID
@@ -416,8 +417,7 @@ static BOOL bOtpError = NO;
         }
     }
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED
-                                                        object:self userInfo:nil];
+    [CoreBridge postNotificationWalletsChanged];
 
 }
 
@@ -490,8 +490,8 @@ static BOOL bOtpError = NO;
                 singleton.currentWallet = [self selectWalletWithUUID:lastCurrentWalletUUID];
                 singleton.currentWalletID = (int) [singleton.arrayWallets indexOfObject:singleton.currentWallet];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED
-                                                                object:self userInfo:nil];
+            [CoreBridge postNotificationWalletsChanged];
+
             ABLog(2,@"EXIT refreshWallets MainQueue: %@", [NSThread currentThread].name);
 
             if (cb) cb();
@@ -501,6 +501,14 @@ static BOOL bOtpError = NO;
     }];
 
 }
+
++ (void) postNotificationWalletsChanged
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED
+                                                        object:self userInfo:nil];
+    [CoreBridge updateWidgetQRCode];
+}
+
 
 + (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx
 {
@@ -1910,6 +1918,113 @@ static BOOL bOtpError = NO;
     }
     ABC_FreeAccountSettings(pSettings);
     return cc == ABC_CC_Ok;
+}
+
++ (void)updateWidgetQRCode;
+{
+
+    if (!singleton.currentWallet || !singleton.currentWallet.strUUID)
+        return;
+
+    NSString *strUUID = singleton.currentWallet.strUUID;
+
+    [CoreBridge postToGenQRQueue:^(void) {
+
+        //creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
+        tABC_CC result;
+        double currency;
+        tABC_Error error;
+        tABC_TxDetails _details;
+
+        //first need to create a transaction details struct
+        memset(&_details, 0, sizeof(tABC_TxDetails));
+
+        _details.amountSatoshi = 0;
+
+        //the true fee values will be set by the core
+        _details.amountFeesAirbitzSatoshi = 0;
+        _details.amountFeesMinersSatoshi = 0;
+        _details.amountCurrency = 0;
+
+        _details.szName = (char *) [[User Singleton].fullName UTF8String];
+        _details.szNotes = (char *) [@"" UTF8String];
+        _details.szCategory = (char *) [@"" UTF8String];
+        _details.attributes = 0x0; //for our own use (not used by the core)
+        _details.bizId = 0;
+
+        //
+        // Must free all these before we leave
+        //
+        char *pRequestID = NULL;
+        char *pszURI = NULL;
+        unsigned char *pData = NULL;
+        char *szRequestAddress = NULL;
+
+        // create the request
+        result = ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
+                [[User Singleton].password UTF8String],
+                [strUUID UTF8String],
+                &_details,
+                &pRequestID,
+                &error);
+
+        if (result == ABC_CC_Ok)
+        {
+            unsigned int width = 0;
+            UIImage *qrImage;
+
+            result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
+                    [[User Singleton].password UTF8String],
+                    [strUUID UTF8String],
+                    pRequestID,
+                    &pszURI,
+                    &pData,
+                    &width,
+                    &error);
+
+            if (result == ABC_CC_Ok)
+            {
+                qrImage = [Util dataToImage:pData withWidth:width andHeight:width];
+
+
+                tABC_CC result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
+                        [[User Singleton].password UTF8String],
+                        [strUUID UTF8String],
+                        pRequestID,
+                        &szRequestAddress,
+                        &error);
+
+                if (result == ABC_CC_Ok)
+                {
+                    NSMutableString *addressString = [[NSMutableString alloc] init];
+                    [addressString appendFormat:@"%s", szRequestAddress];
+
+                    //
+                    // Save QR and address in shared data so Widget can access it
+                    //
+                    static NSUserDefaults *tempSharedUserDefs = nil;
+
+                    if (!tempSharedUserDefs) tempSharedUserDefs = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUP_ID];
+
+                    NSData *imageData = UIImagePNGRepresentation(qrImage);
+
+                    [tempSharedUserDefs setObject:imageData forKey:APP_GROUP_LAST_QR_IMAGE_KEY];
+                    [tempSharedUserDefs setObject:addressString forKey:APP_GROUP_LAST_ADDRESS_KEY];
+                    [tempSharedUserDefs setObject:[CoreBridge Singleton].currentWallet.strName forKey:APP_GROUP_LAST_WALLET_KEY];
+                    [tempSharedUserDefs setObject:[User Singleton].name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
+                    [tempSharedUserDefs synchronize];
+                }
+            }
+        }
+
+        if (pRequestID) free(pRequestID);
+        if (pszURI) free(pszURI);
+        if (pData) free(pData);
+        if (szRequestAddress) free(szRequestAddress);
+    }];
+
+
+
 }
 
 + (void)setupNewAccount
