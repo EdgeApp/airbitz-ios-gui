@@ -469,6 +469,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     UITextField *textField;
     NSString *title;
     NSString *placeholderText;
+    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+    NSString *clipboard = [pb string];
+    NSString *pasteString;
 
 
     switch (segmentedControl.selectedSegmentIndex)
@@ -495,11 +498,21 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 title = [Theme Singleton].enterBitcoinAddressPopupText;
                 placeholderText = [Theme Singleton].enterBitcoinAddressPlaceholder;
             }
+            if ([clipboard length] >= 10)
+            {
+                pasteString = [NSString stringWithFormat:@"%@ \"%@...\"", @"Paste", [clipboard substringToIndex:10]];
+            }
+            else
+            {
+                pasteString = nil;
+            }
+
             typeAddressAlertView =[[UIAlertView alloc ] initWithTitle:title
                                                               message:nil
                                                              delegate:self
                                                     cancelButtonTitle:[Theme Singleton].cancelButtonText
-                                                    otherButtonTitles:[Theme Singleton].doneButtonText, nil];
+//                                                    otherButtonTitles:[Theme Singleton].doneButtonText, nil];
+                                                    otherButtonTitles:[Theme Singleton].doneButtonText, pasteString, nil];
             typeAddressAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
             textField = [typeAddressAlertView textFieldAtIndex:0];
             textField.placeholder = placeholderText;
@@ -530,8 +543,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (alertView == typeAddressAlertView)
     {
-        _addressTextField.text = [alertView textFieldAtIndex:0].text;
-        [self processURI];
+        if (1 == buttonIndex)
+        {
+            _addressTextField.text = [alertView textFieldAtIndex:0].text;
+        }
+        else if (2 == buttonIndex)
+        {
+            UIPasteboard *pb = [UIPasteboard generalPasteboard];
+            _addressTextField.text = [pb string];
+        }
+        if (buttonIndex > 0) // 0 == CANCEL
+        {
+            if ([_addressTextField.text length] > 0)
+                [self processURI];
+        }
     }
     else if (_tweetAlert == alertView)
     {
@@ -1685,7 +1710,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)processURI
 {
     // Added to wallet queue since wallets are loaded asynchronously
-    [MainViewController fadingAlert:NSLocalizedString(@"Loading...", nil)
+    [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
     [CoreBridge postToLoadedQueue:^(void) {
         [CoreBridge postToWalletsQueue:^(void) {
@@ -1715,12 +1740,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            [MainViewController fadingAlertDismiss];
             if (_bImportMode)
             {
                 if ([self importWallet:text]) {
                     [self stopQRReader];
                 }
+                [MainViewController fadingAlertDismiss];
             }
             else
             {
@@ -1739,6 +1764,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self stopQRReader];
                 [self showSendConfirmationTo:spendTarget];
+                [MainViewController fadingAlertDismiss];
+
             });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
