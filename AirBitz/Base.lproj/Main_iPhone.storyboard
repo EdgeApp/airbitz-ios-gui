@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jDp-Og-qtC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jDp-Og-qtC">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -2196,8 +2196,8 @@
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
                                             </textField>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="USD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EuE-s0-NQ2" userLabel="Lato Label - USD" customClass="LatoLabel">
-                                                <rect key="frame" x="254" y="200" width="36" height="22"/>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EuE-s0-NQ2" userLabel="Lato Label - USD" customClass="LatoLabel">
+                                                <rect key="frame" x="255" y="200.5" width="35" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -2378,16 +2378,22 @@
                                     <constraint firstAttribute="height" constant="230" id="CcB-Pg-xHy"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1mF-Xh-ACO">
+                                <rect key="frame" x="141" y="221" width="37" height="37"/>
+                                <color key="color" cocoaTouchSystemColor="lightTextColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="sWd-a3-a0e" secondAttribute="bottom" id="0sQ-S7-GFf"/>
                             <constraint firstAttribute="trailing" secondItem="XNd-9N-hLm" secondAttribute="trailing" id="ASE-oQ-hVZ"/>
                             <constraint firstItem="0rs-Ud-plE" firstAttribute="leading" secondItem="OsK-pM-gst" secondAttribute="leading" id="H6M-vB-aMJ"/>
+                            <constraint firstAttribute="centerY" secondItem="1mF-Xh-ACO" secondAttribute="centerY" id="IUe-Zi-bmR"/>
                             <constraint firstItem="sWd-a3-a0e" firstAttribute="top" secondItem="OsK-pM-gst" secondAttribute="top" id="KUj-rX-q0B"/>
                             <constraint firstAttribute="bottom" secondItem="XNd-9N-hLm" secondAttribute="bottom" constant="-230" id="YUU-FC-VUU"/>
                             <constraint firstItem="sWd-a3-a0e" firstAttribute="leading" secondItem="OsK-pM-gst" secondAttribute="leading" id="hn5-dF-k7C"/>
                             <constraint firstItem="62n-fU-e54" firstAttribute="top" secondItem="0rs-Ud-plE" secondAttribute="bottom" id="lWb-9f-2fy"/>
+                            <constraint firstAttribute="centerX" secondItem="1mF-Xh-ACO" secondAttribute="centerX" id="lha-og-J8a"/>
                             <constraint firstItem="0rs-Ud-plE" firstAttribute="top" secondItem="N6m-Z5-YaG" secondAttribute="bottom" id="oBP-MA-o9R"/>
                             <constraint firstAttribute="trailing" secondItem="sWd-a3-a0e" secondAttribute="trailing" id="oMO-Ni-vgq"/>
                             <constraint firstAttribute="trailing" secondItem="0rs-Ud-plE" secondAttribute="trailing" id="okt-zO-jEL"/>
@@ -2416,6 +2422,7 @@
                         <outlet property="pickerTextCategory" destination="bOm-nJ-2Ot" id="zBf-0j-yyq"/>
                         <outlet property="scrollableContentBottom" destination="rvP-rH-SZk" id="LaK-zL-qQ6"/>
                         <outlet property="scrollableContentView" destination="8ur-EV-QC9" id="brw-Ba-G3c"/>
+                        <outlet property="spinnerView" destination="1mF-Xh-ACO" id="BVp-SA-yZB"/>
                         <outlet property="viewPhoto" destination="vVP-r3-rch" id="mwp-BO-WyI"/>
                         <outlet property="walletLabel" destination="ZW8-Za-VVy" id="bUD-dm-roi"/>
                     </connections>

@@ -84,6 +84,7 @@ typedef enum eRequestType
 @property (nonatomic, weak) IBOutlet UIView                 *contentView;
 @property (nonatomic, weak) IBOutlet UIView                 *scrollableContentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calculatorBottom;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
 
 @property (weak, nonatomic) IBOutlet UIView                 *viewPhoto;
 @property (weak, nonatomic) IBOutlet UIButton               *imagePhotoButton;
@@ -159,6 +160,7 @@ typedef enum eRequestType
     self.arrayThumbnailsToRetrieve = [[NSMutableArray alloc] init];
     self.arrayThumbnailsRetrieving = [[NSMutableArray alloc] init];
     self.arrayAutoCompleteQueries = [[NSMutableArray alloc] init];
+    [self.spinnerView startAnimating];
 
     // if there is a photo, then add it as the first photo in our images
     if (self.photo)
@@ -290,6 +292,8 @@ typedef enum eRequestType
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
+
+    self.spinnerView.hidden = YES;
 
     if (_originalFrame.size.height == 0)
     {
@@ -517,10 +521,11 @@ typedef enum eRequestType
 
     if (bSomethingChanged)
     {
+        self.spinnerView.hidden = NO;
         [CoreBridge storeTransaction: self.transaction];
     }
 
-    [CoreBridge postToMiscQueue:^{
+    [CoreBridge postToTxSearchQueue:^{
         if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
             _recoveryAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
