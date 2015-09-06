@@ -144,7 +144,7 @@
                             <rect key="frame" x="0.0" y="405" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_logout.png" id="Bge-Z2-aZb">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_wallet_dark.png" id="Bge-Z2-aZb">
                                     <rect key="frame" x="29" y="12" width="26" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration">
@@ -325,6 +325,7 @@
         <image name="icon_exchange.png" width="38" height="38"/>
         <image name="icon_logout.png" width="36" height="36"/>
         <image name="icon_settings_dark.png" width="32" height="32"/>
+        <image name="icon_wallet_dark.png" width="36" height="36"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -689,6 +689,15 @@
 		DA13339E1A7B203C0051DE14 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13339C1A7B203C0051DE14 /* ScanView.m */; };
 		DA1333A01A7B20840051DE14 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */; };
 		DA1333A11A7B20840051DE14 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */; };
+		DA1530911B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308E1B9BBBD8007B24D3 /* icon_wallet_dark.png */; };
+		DA1530921B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308E1B9BBBD8007B24D3 /* icon_wallet_dark.png */; };
+		DA1530931B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308E1B9BBBD8007B24D3 /* icon_wallet_dark.png */; };
+		DA1530941B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308F1B9BBBD8007B24D3 /* icon_wallet_dark@2x.png */; };
+		DA1530951B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308F1B9BBBD8007B24D3 /* icon_wallet_dark@2x.png */; };
+		DA1530961B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308F1B9BBBD8007B24D3 /* icon_wallet_dark@2x.png */; };
+		DA1530971B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA1530901B9BBBD8007B24D3 /* icon_wallet_dark@3x.png */; };
+		DA1530981B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA1530901B9BBBD8007B24D3 /* icon_wallet_dark@3x.png */; };
+		DA1530991B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA1530901B9BBBD8007B24D3 /* icon_wallet_dark@3x.png */; };
 		DA15B98D1AC0D72500B229A5 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */; };
 		DA15B98E1AC0D72500B229A5 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */; };
 		DA15B98F1AC0D72500B229A5 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */; };
@@ -1755,6 +1764,9 @@
 		DA13339C1A7B203C0051DE14 /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
 		DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ScanView~iphone.xib"; sourceTree = "<group>"; };
 		DA14ABCA1A8066A300C30F08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		DA15308E1B9BBBD8007B24D3 /* icon_wallet_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_wallet_dark.png; path = Resources/Artwork/icon_wallet_dark.png; sourceTree = "<group>"; };
+		DA15308F1B9BBBD8007B24D3 /* icon_wallet_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_wallet_dark@2x.png"; path = "Resources/Artwork/icon_wallet_dark@2x.png"; sourceTree = "<group>"; };
+		DA1530901B9BBBD8007B24D3 /* icon_wallet_dark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_wallet_dark@3x.png"; path = "Resources/Artwork/icon_wallet_dark@3x.png"; sourceTree = "<group>"; };
 		DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Plugins.storyboard; sourceTree = "<group>"; };
 		DA15B98B1AC0D72500B229A5 /* PluginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginViewController.h; sourceTree = "<group>"; };
 		DA15B98C1AC0D72500B229A5 /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginViewController.m; sourceTree = "<group>"; };
@@ -2742,6 +2754,9 @@
 				DA5A96051B30301E00CFA7C1 /* icon_transactions@3x.png */,
 				DA06F7181B0BDD78000BCA46 /* icon_USD_dark@2x.png */,
 				DA06F71A1B0BDD78000BCA46 /* icon_USD_light@2x.png */,
+				DA15308E1B9BBBD8007B24D3 /* icon_wallet_dark.png */,
+				DA15308F1B9BBBD8007B24D3 /* icon_wallet_dark@2x.png */,
+				DA1530901B9BBBD8007B24D3 /* icon_wallet_dark@3x.png */,
 				DA06F71E1B0BDD78000BCA46 /* img_collapseExpandBlueDown@2x.png */,
 				DA06F7201B0BDD78000BCA46 /* large-digit-input_selected@2x.png */,
 				DA06F7221B0BDD78000BCA46 /* large-digit-input@2x.png */,
@@ -3398,6 +3413,7 @@
 				DA06F7AD1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06FB041B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA5A95C51B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */,
+				DA1530981B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */,
 				DA06FB3A1B0FEF32000BCA46 /* PopupPickerView2.xib in Resources */,
 				DA06F9A21B0BDD79000BCA46 /* h_seperator@2x.png in Resources */,
 				DAA8E9C11B1ED50B00BC870C /* icon_category_coffee_tea@2x.png in Resources */,
@@ -3408,6 +3424,7 @@
 				DAA8E9DF1B1ED50B00BC870C /* icon_category_restaurants@3x.png in Resources */,
 				DA5A95A21B301C5D00CFA7C1 /* icon_account_secure@2x.png in Resources */,
 				DA06FA951B0BDD79000BCA46 /* swipe-arrow@2x.png in Resources */,
+				DA1530921B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */,
 				DA1333A11A7B20840051DE14 /* ScanView~iphone.xib in Resources */,
 				DA5A95F21B302C9E00CFA7C1 /* icon_send@2x.png in Resources */,
 				DAA8E9F51B1EDCB400BC870C /* ico_nav_directory_dark@2x.png in Resources */,
@@ -3510,6 +3527,7 @@
 				DA06FA231B0BDD79000BCA46 /* icon_search@2x.png in Resources */,
 				DAE81D891AC204140064BA5D /* plugins in Resources */,
 				DA06F8191B0BDD79000BCA46 /* btn_add@2x.png in Resources */,
+				DA1530951B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */,
 				DA06FB0F1B0E7CB2000BCA46 /* DropDownAlertView.xib in Resources */,
 				DA5A95A51B301C5D00CFA7C1 /* icon_account_secure@3x.png in Resources */,
 				DAD9A4AE1B213F0B00CB3EA4 /* icon_request_padded@2x.png in Resources */,
@@ -3526,6 +3544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA06F7A01B0BDD79000BCA46 /* bd_icon_share@2x.png in Resources */,
+				DA1530971B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */,
 				DA06F7D61B0BDD79000BCA46 /* BLE_photo@2x.png in Resources */,
 				DA06FAE21B0BDD79000BCA46 /* UIButtonBarRefresh@2x.png in Resources */,
 				DA06FA641B0BDD79000BCA46 /* logo@2x.png in Resources */,
@@ -3648,6 +3667,7 @@
 				DA5A95811B300A6400CFA7C1 /* btn_export_white.png in Resources */,
 				DAE2762B1A9BFDFD00E24523 /* AccountCreate.storyboard in Resources */,
 				DA06F7641B0BDD79000BCA46 /* 4-bars@2x.png in Resources */,
+				DA1530911B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */,
 				DA5A959C1B301C4100CFA7C1 /* icon_logout@3x.png in Resources */,
 				DA06F9E91B0BDD79000BCA46 /* icon_export_google@2x.png in Resources */,
 				DA5A95841B300A6400CFA7C1 /* btn_export_white@2x.png in Resources */,
@@ -3704,6 +3724,7 @@
 				DA06FA4C1B0BDD79000BCA46 /* large-digit-input_selected@2x.png in Resources */,
 				DAA5782919C1632000E972FC /* emailTemplate.html in Resources */,
 				DA06F8D21B0BDD79000BCA46 /* btn_locateMe@2x.png in Resources */,
+				DA1530941B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */,
 				DABB756B1B2824BF004E350D /* btn_close_white@2x.png in Resources */,
 				DAA8E9DB1B1ED50B00BC870C /* icon_category_restaurants@2x.png in Resources */,
 				DA06FA3A1B0BDD79000BCA46 /* icon_USD_light@2x.png in Resources */,
@@ -3860,6 +3881,7 @@
 				DA06F9AF1B0BDD79000BCA46 /* icon_approved.png in Resources */,
 				DAA8E9D41B1ED50B00BC870C /* icon_category_gift_cards@2x.png in Resources */,
 				DA5A95C61B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */,
+				DA1530991B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */,
 				DA06F7AE1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06FB051B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA06FB3B1B0FEF33000BCA46 /* PopupPickerView2.xib in Resources */,
@@ -3870,6 +3892,7 @@
 				DAE8653B1A88A58A00A17BD3 /* Montserrat-Bold.ttf in Resources */,
 				DA5A95A31B301C5D00CFA7C1 /* icon_account_secure@2x.png in Resources */,
 				DA06FAD81B0BDD79000BCA46 /* thumb@2x.png in Resources */,
+				DA1530931B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */,
 				DAA8E9E01B1ED50B00BC870C /* icon_category_restaurants@3x.png in Resources */,
 				DA5A95F31B302C9E00CFA7C1 /* icon_send@2x.png in Resources */,
 				DA06FA961B0BDD79000BCA46 /* swipe-arrow@2x.png in Resources */,
@@ -3972,6 +3995,7 @@
 				DA06FA241B0BDD79000BCA46 /* icon_search@2x.png in Resources */,
 				DAE8661D1A88A58A00A17BD3 /* infoWallets.html in Resources */,
 				DA06F81A1B0BDD79000BCA46 /* btn_add@2x.png in Resources */,
+				DA1530961B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */,
 				DA06FB101B0E7CB2000BCA46 /* DropDownAlertView.xib in Resources */,
 				DA5A95A61B301C5D00CFA7C1 /* icon_account_secure@3x.png in Resources */,
 				DAD9A4AF1B213F0B00CB3EA4 /* icon_request_padded@2x.png in Resources */,
@@ -4713,7 +4737,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos8.4;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -4746,7 +4770,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos8.4;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4840,9 +4864,10 @@
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -4862,9 +4887,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
