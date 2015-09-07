@@ -38,7 +38,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 static BOOL bInitialized = NO;
 static BOOL bDataFetched = NO;
-static int iLoginTimeSeconds = 0;
+static long iLoginTimeSeconds = 0;
 static NSOperationQueue *watcherQueue;
 static NSOperationQueue *exchangeQueue;
 static NSOperationQueue *dataQueue;
@@ -1370,7 +1370,7 @@ static BOOL bOtpError = NO;
 
 + (BOOL)recentlyLoggedIn
 {
-    int now = [[NSDate date] timeIntervalSince1970];
+    long now = (long) [[NSDate date] timeIntervalSince1970];
     return now - iLoginTimeSeconds <= PIN_REQUIRED_PERIOD_SECONDS;
 }
 
@@ -1387,7 +1387,45 @@ static BOOL bOtpError = NO;
     bOtpError = NO;
     [CoreBridge startAsyncTasks];
 
-    iLoginTimeSeconds = (int) [[NSDate date] timeIntervalSince1970];
+    iLoginTimeSeconds = [CoreBridge saveLogoutDate];
+}
+
++ (BOOL)didLoginExpire;
+{
+    NSDate *logoutDate = nil;
+    NSError *error = nil;
+
+    long logoutTimeStamp = [Keychain getKeychainInt:LOGIN_TIME_KEY error:&error];
+
+    if (error) return YES;
+    if (!logoutTimeStamp) return YES;
+
+    long currentTimeStamp = [[NSDate date] timeIntervalSince1970];
+
+    if (currentTimeStamp > logoutTimeStamp)
+    {
+        return YES;
+    }
+
+    return NO;
+}
+
+//
+// Saves the UNIX timestamp when user should be auto logged out
+// Returns the current time
+//
+
++ (long) saveLogoutDate;
+{
+    long currentTimeStamp = (long) [[NSDate date] timeIntervalSince1970];
+    long logoutTime = currentTimeStamp + (60 * [User Singleton].minutesAutoLogout);
+
+    // Save in iOS Keychain
+    [Keychain setKeychainInt:logoutTime
+                         key:LOGIN_TIME_KEY
+               authenticated:YES];
+
+    return currentTimeStamp;
 }
 
 + (void)startAsyncTasks

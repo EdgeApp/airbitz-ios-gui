@@ -44,6 +44,8 @@
 + (void)makeCurrentWalletWithIndex:(NSIndexPath *)indexPath;
 + (void)makeCurrentWalletWithUUID:(NSString *)strUUID;
 + (Wallet *)selectWalletWithUUID:(NSString *)strUUID;
++ (long) saveLogoutDate;
++ (BOOL)didLoginExpire;
 
 + (void)updateWidgetQRCode;
 

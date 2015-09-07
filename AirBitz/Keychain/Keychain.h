@@ -13,6 +13,7 @@
 #define PIN_KEY                 @"key_pin"
 #define RELOGIN_KEY             @"key_relogin"
 #define USE_TOUCHID_KEY         @"key_use_touchid"
+#define LOGIN_TIME_KEY          @"key_logintime"
 #define SEC_ATTR_SERVICE        @"co.airbitz.airbitz"
 
 @interface Keychain : NSObject

@@ -305,6 +305,20 @@ typedef enum eReloginState
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
+    [self autoReloginIfPossible];
+}
+
+- (void) autoReloginIfPossible
+{
+    //
+    // If login expired, then just return
+    //
+    if ([CoreBridge didLoginExpire])
+    {
+        [Keychain disableRelogin];
+        return;
+    }
+
     //
     // Look for cached username & password or PIN in the keychain. Use it if present
     //

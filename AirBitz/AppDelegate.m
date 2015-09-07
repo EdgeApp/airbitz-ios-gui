@@ -26,7 +26,6 @@
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
-NSDate *logoutDate = NULL;
 
 @implementation AppDelegate
 
@@ -114,9 +113,7 @@ NSDate *logoutDate = NULL;
 
     if ([User isLoggedIn])
     {
-        logoutDate = [NSDate date];
-        
-        // multiply to get the time in seconds
+        [CoreBridge saveLogoutDate];
     }
 }
 
@@ -214,17 +211,18 @@ NSDate *logoutDate = NULL;
 // or network fetch log the user out
 - (void)checkLoginExpired
 {
-    if (!logoutDate || ![User isLoggedIn])
+    BOOL bLoginExpired;
+
+    bLoginExpired = [CoreBridge didLoginExpire];
+
+    if (!bLoginExpired || ![User isLoggedIn])
     {
         return;
     }
-    NSDate *now = [NSDate date];
-    // divide to get the time in minutes
-    int minutes = [now timeIntervalSinceDate:logoutDate] / 60.0;
-    if (minutes >= [User Singleton].minutesAutoLogout) {
-        [self autoLogout];
-    }
+
+    [self autoLogout];
 }
+
 
 // If the app is *not* active, log the user out
 - (void)autoLogout
