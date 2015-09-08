@@ -79,7 +79,6 @@
 		6861FE681950DFB100CDF24E /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861FE671950DFB100CDF24E /* TxOutput.m */; };
 		6868AD1319516D7A006C3716 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6868AD1219516D7A006C3716 /* DebugViewController.m */; };
 		686BED9E195D5A7C0053A09E /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BED9D195D5A7C0053A09E /* libsecp256k1.a */; };
-		686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
 		686C24871935608400F8E445 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
 		687D2E7C1A09638200F1F9D1 /* infoSpendingLimits.html in Resources */ = {isa = PBXBuildFile; fileRef = 687D2E7B1A09638200F1F9D1 /* infoSpendingLimits.html */; };
@@ -95,7 +94,6 @@
 		7D5E1CE719AFB2D400943A81 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CCD19AFB2D400943A81 /* libcurl.a */; };
 		7D5E1CE919AFB2D400943A81 /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CCF19AFB2D400943A81 /* libjansson.a */; };
 		7D5E1CEA19AFB2D400943A81 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD019AFB2D400943A81 /* libqrencode.a */; };
-		7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD519AFB2D400943A81 /* libwallet.a */; };
 		7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD619AFB2D400943A81 /* libz.a */; };
 		7D5E1CF419AFB34C00943A81 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CF319AFB34C00943A81 /* libssl.a */; };
 		7D6EDB7C19A66C82007C33AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7B19A66C82007C33AE /* CoreText.framework */; };
@@ -231,7 +229,6 @@
 		7D98AD2819A7C550003D2BF6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1D18A41AAC00DA4A34 /* CFNetwork.framework */; };
 		7D98AD2A19A7C550003D2BF6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4D18A17F6F002E0703 /* CoreGraphics.framework */; };
 		7D98AD2B19A7C550003D2BF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4F18A17F6F002E0703 /* UIKit.framework */; };
-		7D98AD2C19A7C550003D2BF6 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
 		7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4B18A17F6F002E0703 /* Foundation.framework */; };
 		7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		7D98AD3A19A7C550003D2BF6 /* WalletExportQuicken.QIF in Resources */ = {isa = PBXBuildFile; fileRef = 4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */; };
@@ -401,7 +398,6 @@
 		B5E7F57A18E4AAD5009B5844 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E7F57918E4AAD5009B5844 /* User.m */; };
 		B5F2E9A518D3BFEF008ACF88 /* libbitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A218D3BFEF008ACF88 /* libbitcoin.a */; };
 		B5F2E9A618D3BFEF008ACF88 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A318D3BFEF008ACF88 /* libboost_system.a */; };
-		B5F2E9A718D3BFEF008ACF88 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A418D3BFEF008ACF88 /* libwallet.a */; };
 		B5F2E9AA18D4AF6C008ACF88 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9A918D4AF6C008ACF88 /* info.html */; };
 		B5F2E9C118DA911A008ACF88 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2E9BE18DA911A008ACF88 /* LoginViewController.m */; };
 		B5F2E9C218DA911A008ACF88 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2E9C018DA911A008ACF88 /* SignUpViewController.m */; };
@@ -1126,8 +1122,6 @@
 		DAE8648C1A88A58A00A17BD3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4D18A17F6F002E0703 /* CoreGraphics.framework */; };
 		DAE8648D1A88A58A00A17BD3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4F18A17F6F002E0703 /* UIKit.framework */; };
 		DAE8648E1A88A58A00A17BD3 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D8B59BE1A328895000AC178 /* HockeySDK.framework */; };
-		DAE8648F1A88A58A00A17BD3 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
-		DAE864901A88A58A00A17BD3 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A418D3BFEF008ACF88 /* libwallet.a */; };
 		DAE864911A88A58A00A17BD3 /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D618C29CEF0071B87C /* libjansson.a */; };
 		DAE864921A88A58A00A17BD3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D418C29CEF0071B87C /* libcrypto.a */; };
 		DAE864931A88A58A00A17BD3 /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D318C29CEF0071B87C /* libabc.a */; };
@@ -1942,7 +1936,6 @@
 				7D98AD2819A7C550003D2BF6 /* CFNetwork.framework in Frameworks */,
 				7D98AD2A19A7C550003D2BF6 /* CoreGraphics.framework in Frameworks */,
 				7D98AD2B19A7C550003D2BF6 /* UIKit.framework in Frameworks */,
-				7D98AD2C19A7C550003D2BF6 /* libbitcoin-client.a in Frameworks */,
 				7D5E1CF419AFB34C00943A81 /* libssl.a in Frameworks */,
 				7D5E1CE319AFB2D400943A81 /* libboost_system.a in Frameworks */,
 				7D5E1CE919AFB2D400943A81 /* libjansson.a in Frameworks */,
@@ -1950,7 +1943,6 @@
 				7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */,
 				7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */,
 				7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */,
-				7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */,
 				17C92258FEBAD8A39BBFD0FC /* libPods.a in Frameworks */,
 				7D8B59C31A328895000AC178 /* HockeySDK.framework in Frameworks */,
 			);
@@ -1991,8 +1983,6 @@
 				B5675B4E18A17F6F002E0703 /* CoreGraphics.framework in Frameworks */,
 				B5675B5018A17F6F002E0703 /* UIKit.framework in Frameworks */,
 				7D8B59C21A328895000AC178 /* HockeySDK.framework in Frameworks */,
-				686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */,
-				B5F2E9A718D3BFEF008ACF88 /* libwallet.a in Frameworks */,
 				4C08A6DE18C29CEF0071B87C /* libjansson.a in Frameworks */,
 				4C08A6DC18C29CEF0071B87C /* libcrypto.a in Frameworks */,
 				4C08A6DB18C29CEF0071B87C /* libabc.a in Frameworks */,
@@ -2047,8 +2037,6 @@
 				DAE8648C1A88A58A00A17BD3 /* CoreGraphics.framework in Frameworks */,
 				DAE8648D1A88A58A00A17BD3 /* UIKit.framework in Frameworks */,
 				DAE8648E1A88A58A00A17BD3 /* HockeySDK.framework in Frameworks */,
-				DAE8648F1A88A58A00A17BD3 /* libbitcoin-client.a in Frameworks */,
-				DAE864901A88A58A00A17BD3 /* libwallet.a in Frameworks */,
 				DAE864911A88A58A00A17BD3 /* libjansson.a in Frameworks */,
 				DAE864921A88A58A00A17BD3 /* libcrypto.a in Frameworks */,
 				DAE864931A88A58A00A17BD3 /* libabc.a in Frameworks */,
