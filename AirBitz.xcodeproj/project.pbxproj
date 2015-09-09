@@ -853,7 +853,6 @@
 		DA72494C1B95195200E104A4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA72494B1B95195200E104A4 /* NotificationCenter.framework */; };
 		DA7249521B95195200E104A4 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7249511B95195200E104A4 /* TodayViewController.m */; };
 		DA7249541B95195200E104A4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7249531B95195200E104A4 /* MainInterface.storyboard */; };
-		DA7249571B95195200E104A4 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA72494A1B95195200E104A4 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DA8B5ABB1A79640B00DDED09 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA8B5ABA1A79640B00DDED09 /* api.cer */; };
 		DA8B5AC01A79864800DDED09 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA8B5ABA1A79640B00DDED09 /* api.cer */; };
 		DAA5782919C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
@@ -937,8 +936,6 @@
 		DAC2508F1B2E037F006AB863 /* darken_bottom_table_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC2508E1B2E037F006AB863 /* darken_bottom_table_cell.png */; };
 		DAC250901B2E037F006AB863 /* darken_bottom_table_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC2508E1B2E037F006AB863 /* darken_bottom_table_cell.png */; };
 		DAC250911B2E037F006AB863 /* darken_bottom_table_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC2508E1B2E037F006AB863 /* darken_bottom_table_cell.png */; };
-		DAD6A7111B99537D009192EA /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA72494A1B95195200E104A4 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		DAD6A7151B99538B009192EA /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA72494A1B95195200E104A4 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DAD9A4991B213EA500CB3EA4 /* icon_send_padded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4951B213EA500CB3EA4 /* icon_send_padded@2x.png */; };
 		DAD9A49A1B213EA500CB3EA4 /* icon_send_padded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4951B213EA500CB3EA4 /* icon_send_padded@2x.png */; };
 		DAD9A49B1B213EA500CB3EA4 /* icon_send_padded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4951B213EA500CB3EA4 /* icon_send_padded@2x.png */; };
@@ -1239,64 +1236,7 @@
 			remoteGlobalIDString = 4F1AD9020B71603F00DC0485;
 			remoteInfo = DevelopmentTestTool;
 		};
-		DA7249551B95195200E104A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5675B4018A17F6F002E0703 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DA7249491B95195200E104A4;
-			remoteInfo = "Airbitz Widget";
-		};
-		DAD6A7121B99537D009192EA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5675B4018A17F6F002E0703 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DA7249491B95195200E104A4;
-			remoteInfo = "Airbitz Widget";
-		};
-		DAD6A7161B99538B009192EA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5675B4018A17F6F002E0703 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DA7249491B95195200E104A4;
-			remoteInfo = "Airbitz Widget";
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		DA72495F1B95195200E104A4 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				DA7249571B95195200E104A4 /* Airbitz Widget.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DAD6A7141B99537D009192EA /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				DAD6A7111B99537D009192EA /* Airbitz Widget.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DAD6A7181B99538B009192EA /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				DAD6A7151B99538B009192EA /* Airbitz Widget.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		188D8A965DB464149F922F3B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -3122,12 +3062,10 @@
 				7D98AD3719A7C550003D2BF6 /* Resources */,
 				7D98AE9519A7C550003D2BF6 /* Run HockeyApp build agent */,
 				7DFD22EE1A1ECC59008C43FB /* Copy Pods Resources */,
-				DAD6A7141B99537D009192EA /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DAD6A7131B99537D009192EA /* PBXTargetDependency */,
 			);
 			name = "Airbitz-Testnet";
 			productName = AirBitz;
@@ -3144,12 +3082,10 @@
 				B5675B4618A17F6F002E0703 /* Resources */,
 				7D6EDB7619A66C50007C33AE /* Run HockeyApp build agent */,
 				AB35436AC4AF35BB26BEAB95 /* Copy Pods Resources */,
-				DAD6A7181B99538B009192EA /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DAD6A7171B99538B009192EA /* PBXTargetDependency */,
 			);
 			name = Airbitz;
 			productName = AirBitz;
@@ -3183,12 +3119,10 @@
 				DAE864991A88A58A00A17BD3 /* Resources */,
 				DAE866241A88A58A00A17BD3 /* Run HockeyApp build agent */,
 				DAE866251A88A58A00A17BD3 /* Copy Pods Resources */,
-				DA72495F1B95195200E104A4 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DA7249561B95195200E104A4 /* PBXTargetDependency */,
 			);
 			name = "Airbitz-Develop";
 			productName = AirBitz;
@@ -4574,24 +4508,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		DA7249561B95195200E104A4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DA7249491B95195200E104A4 /* Airbitz Widget */;
-			targetProxy = DA7249551B95195200E104A4 /* PBXContainerItemProxy */;
-		};
-		DAD6A7131B99537D009192EA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DA7249491B95195200E104A4 /* Airbitz Widget */;
-			targetProxy = DAD6A7121B99537D009192EA /* PBXContainerItemProxy */;
-		};
-		DAD6A7171B99538B009192EA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DA7249491B95195200E104A4 /* Airbitz Widget */;
-			targetProxy = DAD6A7161B99538B009192EA /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B5675B5418A17F6F002E0703 /* InfoPlist.strings */ = {
