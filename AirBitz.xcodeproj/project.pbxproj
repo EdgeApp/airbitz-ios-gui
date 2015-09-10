@@ -855,6 +855,7 @@
 		DA7249541B95195200E104A4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7249531B95195200E104A4 /* MainInterface.storyboard */; };
 		DA8B5ABB1A79640B00DDED09 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA8B5ABA1A79640B00DDED09 /* api.cer */; };
 		DA8B5AC01A79864800DDED09 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA8B5ABA1A79640B00DDED09 /* api.cer */; };
+		DA8BA4971BA145D1005E8E92 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA72494A1B95195200E104A4 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DAA5782919C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
 		DAA5782A19C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
 		DAA5784D19C272C400E972FC /* SMSTemplate.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAA5784C19C272C400E972FC /* SMSTemplate.txt */; };
@@ -1236,7 +1237,28 @@
 			remoteGlobalIDString = 4F1AD9020B71603F00DC0485;
 			remoteInfo = DevelopmentTestTool;
 		};
+		DA8BA4981BA145D1005E8E92 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5675B4018A17F6F002E0703 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA7249491B95195200E104A4;
+			remoteInfo = "Airbitz Widget";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DA8BA49E1BA145D1005E8E92 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DA8BA4971BA145D1005E8E92 /* Airbitz Widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		188D8A965DB464149F922F3B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -3119,10 +3141,12 @@
 				DAE864991A88A58A00A17BD3 /* Resources */,
 				DAE866241A88A58A00A17BD3 /* Run HockeyApp build agent */,
 				DAE866251A88A58A00A17BD3 /* Copy Pods Resources */,
+				DA8BA49E1BA145D1005E8E92 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DA8BA4991BA145D1005E8E92 /* PBXTargetDependency */,
 			);
 			name = "Airbitz-Develop";
 			productName = AirBitz;
@@ -4509,6 +4533,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		DA8BA4991BA145D1005E8E92 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA7249491B95195200E104A4 /* Airbitz Widget */;
+			targetProxy = DA8BA4981BA145D1005E8E92 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		B5675B5418A17F6F002E0703 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -4785,7 +4817,7 @@
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Airbitz Widget/Airbitz Widget.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Airbitz Inc (G5LQ7MERPK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4798,7 +4830,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7fea275a-78f2-4309-a6c1-515887cf8fa7";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
