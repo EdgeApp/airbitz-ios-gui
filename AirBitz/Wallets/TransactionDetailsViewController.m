@@ -203,7 +203,7 @@ typedef enum eRequestType
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
     self.pickerTextCategory.textField.returnKeyType = UIReturnKeyDone;
-    self.notesTextView.returnKeyType = UIReturnKeyDone;
+    self.notesTextView.returnKeyType = UIReturnKeyDefault;
 
     // load all the names from the address book
     [self generateListOfContactNames];
@@ -234,8 +234,6 @@ typedef enum eRequestType
     self.pickerTextCategory.textField.tintColor = [UIColor whiteColor];
     [self.pickerTextCategory setTopMostView:self.view];
     [self.pickerTextCategory setCategories:self.arrayCategories];
-    //self.pickerTextCategory.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
-//    self.pickerTextCategory.cropPointBottom = 360; // magic number
     self.pickerTextCategory.delegate = self;
 
     _bizId = self.transaction.bizId;
@@ -247,6 +245,15 @@ typedef enum eRequestType
     self.nameTextField.text = self.transaction.strName;
     self.notesTextView.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
+
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
+
+    UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:nil action:@selector(notesTextViewDone)];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    toolbar.items = [NSArray arrayWithObjects:leftButton, flex, barButton, nil];
+
+    self.notesTextView.inputAccessoryView = toolbar;
 
     NSString *strPrefix;
     strPrefix = [self categoryPrefix:self.pickerTextCategory.textField.text];
@@ -1597,16 +1604,6 @@ typedef enum eRequestType
 
 #pragma mark - UITextView delegates
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    if ([text isEqualToString:(NSString *) @"\n"])
-    {
-        [self scrollContentViewBackToOriginalPosition];
-        [textView resignFirstResponder];
-    }
-    return YES;
-}
-
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     _activeTextView = textView;
@@ -1615,11 +1612,25 @@ typedef enum eRequestType
     
     if (textView == self.notesTextView)
     {
-//        scrollFrame.origin.y = -self.notesTextView.frame.origin.y + 30;
         [self scrollContentViewToFrame:self.notesTextView.frame];
         [self dismissPayeeTable];
     }
     
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    if (textView == self.notesTextView) {
+        [self scrollContentViewBackToOriginalPosition];
+        return YES;
+    }
+    return NO;
+}
+
+- (void)notesTextViewDone
+{
+    [self.notesTextView resignFirstResponder];
+
 }
 
 #pragma mark - UITextField delegates
