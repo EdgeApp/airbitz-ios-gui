@@ -80,6 +80,8 @@
 @property (nonatomic) NSString *touchIDPromptText;
 @property (nonatomic) NSString *usePINText;
 @property (nonatomic) NSString *usePasswordText;
+@property (nonatomic) NSString *twofactorWarningText;
+
 
 
 

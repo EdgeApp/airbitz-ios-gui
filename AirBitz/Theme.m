@@ -119,6 +119,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.touchIDPromptText                                  = NSLocalizedString(@"Touch to login user", @"Touch ID prompt text");
     self.usePINText                                         = NSLocalizedString(@"Use PIN", @"Touch ID [Use PIN] button");
     self.usePasswordText                                    = NSLocalizedString(@"Use Password", @"Touch ID [Use Password] button");
+    self.twofactorWarningText                               = NSLocalizedString(@"Two Factor Enabled\n\n** Warning **\n\nIf you lose your device or uninstall the Airbitz app, it will take 7 days to disable 2FA and access your account.\"", @"2FA warning on enable");
 
     self.sendRequestButtonDisabled = 0.4f;
 
