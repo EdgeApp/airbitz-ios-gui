@@ -2643,6 +2643,15 @@
                                         <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="2" height="2"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PwH-1d-Cnf" userLabel="Outside Tap Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="OutsideTapButton:" destination="zLx-xG-j1m" eventType="touchUpInside" id="l6s-ta-B5q"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpH-FO-ztL" userLabel="View - Username Pwd">
                                         <rect key="frame" x="28" y="161" width="320" height="147"/>
                                         <subviews>
@@ -2814,18 +2823,22 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="8XB-1A-1hO" secondAttribute="bottom" constant="20" symbolic="YES" id="524-9z-4e0"/>
                                     <constraint firstItem="LqE-iy-sKS" firstAttribute="top" secondItem="eTI-9q-uu0" secondAttribute="top" constant="20" symbolic="YES" id="6iW-d6-Qv9"/>
+                                    <constraint firstAttribute="trailing" secondItem="PwH-1d-Cnf" secondAttribute="trailing" id="8Oo-6I-9FC"/>
+                                    <constraint firstItem="PwH-1d-Cnf" firstAttribute="top" secondItem="eTI-9q-uu0" secondAttribute="top" id="9Du-lx-I5x"/>
                                     <constraint firstItem="kpH-FO-ztL" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" id="AnO-5K-GCi"/>
                                     <constraint firstItem="nae-d6-xoW" firstAttribute="centerX" secondItem="LqE-iy-sKS" secondAttribute="centerX" id="DX0-zg-toi"/>
                                     <constraint firstItem="jLL-vF-Vbd" firstAttribute="centerY" secondItem="8XB-1A-1hO" secondAttribute="centerY" id="HhJ-C4-KBO"/>
                                     <constraint firstItem="nae-d6-xoW" firstAttribute="top" secondItem="LqE-iy-sKS" secondAttribute="bottom" constant="8" symbolic="YES" id="NZO-G9-2kT"/>
                                     <constraint firstAttribute="centerX" secondItem="BHf-E8-N2q" secondAttribute="centerX" id="Orr-nz-wcl"/>
                                     <constraint firstItem="BHf-E8-N2q" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" id="TAl-3p-bP9"/>
+                                    <constraint firstItem="PwH-1d-Cnf" firstAttribute="leading" secondItem="eTI-9q-uu0" secondAttribute="leading" id="TwT-zr-iUz"/>
                                     <constraint firstAttribute="centerX" secondItem="8XB-1A-1hO" secondAttribute="centerX" id="UZF-mI-uqs"/>
                                     <constraint firstAttribute="centerX" secondItem="nae-d6-xoW" secondAttribute="centerX" id="Wg7-nU-ecP"/>
                                     <constraint firstAttribute="centerX" secondItem="bUp-i4-uHt" secondAttribute="centerX" id="Yqx-ez-xtP"/>
                                     <constraint firstAttribute="centerX" secondItem="LqE-iy-sKS" secondAttribute="centerX" id="gMX-zi-xrg"/>
                                     <constraint firstItem="bUp-i4-uHt" firstAttribute="top" secondItem="kpH-FO-ztL" secondAttribute="bottom" constant="8" symbolic="YES" id="jGF-Bd-eNG"/>
                                     <constraint firstItem="jLL-vF-Vbd" firstAttribute="leading" secondItem="8XB-1A-1hO" secondAttribute="trailing" id="qg6-OB-iqn"/>
+                                    <constraint firstAttribute="bottom" secondItem="PwH-1d-Cnf" secondAttribute="bottom" id="tBn-Vm-e0Y"/>
                                     <constraint firstAttribute="centerX" secondItem="kpH-FO-ztL" secondAttribute="centerX" id="vy5-ZF-fZP"/>
                                 </constraints>
                             </view>

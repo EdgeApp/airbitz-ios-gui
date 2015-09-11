@@ -459,6 +459,11 @@ typedef enum eReloginState
      }];
 }
 
+- (IBAction)OutsideTapButton:(id)sender {
+    [self.PINusernameSelector close];
+    [self.usernameSelector dismissPopupPicker];
+}
+
 #pragma mark - Misc Methods
 
 - (void)updateUsernameSelector:(NSString *)username
