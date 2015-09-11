@@ -782,7 +782,9 @@ MainViewController *singleton;
 				{
                     [self showFastestLogin];
 				}
-			}
+			} else {
+                [_transactionsViewController dropdownWallets:NO];
+            }
 			break;
 		}
 		case APP_MODE_MORE:
