@@ -316,7 +316,6 @@ typedef enum eReloginState
     if ([CoreBridge didLoginExpire])
     {
         [Keychain disableRelogin];
-        return;
     }
 
     //

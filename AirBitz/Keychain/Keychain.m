@@ -191,6 +191,10 @@
 
 + (BOOL) disableKeychainBasedOnSettings;
 {
+    [Keychain setKeychainInt:[User Singleton].bDisableFingerprintLogin ? 0 : 1
+                         key:USE_TOUCHID_KEY
+               authenticated:YES];
+
     if ([User Singleton].bDisablePINLogin && [User Singleton].bDisableFingerprintLogin)
     {
         // If user has disabled TouchID and PIN relogin, then do not use Keychain at all for maximum security
@@ -221,9 +225,6 @@
     [Keychain setKeychainString:password
                           key:PASSWORD_KEY
                 authenticated:YES];
-    [Keychain setKeychainInt:[User Singleton].bDisableFingerprintLogin ? 0 : 1
-                         key:USE_TOUCHID_KEY
-               authenticated:YES];
 }
 
 @end
