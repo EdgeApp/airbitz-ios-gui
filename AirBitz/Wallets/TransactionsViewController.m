@@ -61,6 +61,8 @@
 
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bWalletsShowing;
+    BOOL                                _bNewDeviceLogin;
+    BOOL                                _bShowingWalletsLoadingAlert;
 //    CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
     CGRect                              _frameTableWithSearchNoKeyboard;
@@ -95,8 +97,10 @@
 @property (nonatomic, strong) NSMutableDictionary   *dictBizImages; // images for businesses
 @property (nonatomic, strong) NSMutableDictionary   *dictImageRequests;
 
-@property (nonatomic, strong) TransactionDetailsViewController    *transactionDetailsController;
-@property (nonatomic, strong) ExportWalletViewController          *exportWalletViewController;
+@property (nonatomic, strong) TransactionDetailsViewController      *transactionDetailsController;
+@property (nonatomic, strong) ExportWalletViewController            *exportWalletViewController;
+@property (nonatomic, strong) NSTimer                               *walletLoadingTimer;
+
 
 
 @end
@@ -131,17 +135,10 @@
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-//    self.wallet = nil;
-
-//    self.textWalletName.text = self.wallet.strName;
-//    self.textWalletName.font = [UIFont systemFontOfSize:18];
-//    self.textWalletName.autocapitalizationType = UITextAutocapitalizationTypeWords;
-//    self.searchTextField.font = [UIFont fontWithName:@"Montserrat-Regular" size:self.searchTextField.font.pointSize];
-//    [self.searchTextField addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
-//    [self.textWalletName addTarget:self action:@selector(searchTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
 
     self.walletMakerView.hidden = YES;
     self.walletMakerView.delegate = self;
+    self.walletLoadingTimer = nil;
 
     // set up our user blocking button
     self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -149,14 +146,10 @@
     [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
     self.buttonBlocker.frame = self.view.bounds;
     self.buttonBlocker.hidden = YES;
-    //self.buttonBlocker.backgroundColor = [UIColor greenColor];
     [self.view addSubview:self.buttonBlocker];
-//    [self.view bringSubviewToFront:self.textWalletName];
-//    [self.view bringSubviewToFront:self.viewSearch];
 
-//    _searchShowingFrame = self.viewSearch.frame;
-
-    _bWalletsShowing = false;
+    _bWalletsShowing = NO;
+    _bShowingWalletsLoadingAlert = NO;
     _balanceView = [BalanceView CreateWithDelegate:self];
     [self.balanceViewPlaceholder addSubview:_balanceView];
 
@@ -171,20 +164,7 @@
 
     _transactionTableStartFrame = self.tableView.frame;
 
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(updateViews:)
-//                                                 name:NOTIFICATION_BLOCK_HEIGHT_CHANGE object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(updateViews:)
-//                                                 name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
-
     [self initializeWalletsTable];
-
-
-    // add left to right swipe detection for going back
-//    [self installLeftToRightSwipeDetection];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-
 }
 
 - (void) dropdownWallets:(BOOL)bDropdown;
@@ -199,6 +179,11 @@
     }
 }
 
+- (void) setNewDeviceLogin:(BOOL)bNewDeviceLogin;
+{
+    _bNewDeviceLogin = bNewDeviceLogin;
+}
+
 - (void)toggleWalletDropdown: (UIButton *)sender
 {
     ABLog(2,@"didTapWalletName: Hello world\n");
@@ -209,8 +194,6 @@
     {
         destination = -[MainViewController getLargestDimension];
         _bWalletsShowing = false;
-
-
     }
     else
     {
@@ -241,7 +224,6 @@
     [super viewWillAppear:animated];
 
     [self performSelector:@selector(resetTableHideSearch) withObject:nil afterDelay:0.0f];
-//    [self resetTableHideSearch];
 
     _bWalletsShowing = false;
 
@@ -276,6 +258,16 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+- (void)dismissWalletLoadingTimer
+{
+    [MainViewController fadingAlertDismiss];
+    [self.walletLoadingTimer invalidate];
+    self.walletLoadingTimer = nil;
+    _bNewDeviceLogin = NO;
+    _bShowingWalletsLoadingAlert = NO;
+}
+
 - (void)updateViews:(NSNotification *)notification
 {
     if ([CoreBridge Singleton].arrayWallets
@@ -286,7 +278,82 @@
         [self.tableView reloadData];
         [self updateBalanceView];
         [self updateWalletsView];
+
+        if (!_bNewDeviceLogin)
+        {
+            if (_bShowingWalletsLoadingAlert)
+            {
+                [MainViewController fadingAlertDismiss];
+                _bShowingWalletsLoadingAlert = NO;
+            }
+            return;
+        }
+
     }
+    else if (!_bNewDeviceLogin)
+    {
+        if (!_bShowingWalletsLoadingAlert)
+        {
+            [MainViewController fadingAlert:[Theme Singleton].loadingTransactionsText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+            _bShowingWalletsLoadingAlert = YES;
+        }
+        return;
+    }
+
+    //
+    // For new device logins
+    //
+    if (_bNewDeviceLogin) // Should be assert
+    {
+        if (![CoreBridge Singleton].bAllWalletsLoaded)
+        {
+            //
+            // Wallets are loading from Git. Show popup with wallets loading status
+            //
+            NSString *walletsLoading;
+            if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].numTotalWallets > 1) {
+                walletsLoading = [NSString stringWithFormat:@"%@\n\n%d of %d\n\n%@",
+                                                            [Theme Singleton].loadingWalletsText,
+                                                            [CoreBridge Singleton].numWalletsLoaded + 1,
+                                                            [CoreBridge Singleton].numTotalWallets,
+                                                            [Theme Singleton].loadingWalletsNewDeviceText];
+            }
+            else
+            {
+                walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
+                                                            [Theme Singleton].loadingWalletsText,
+                                                            [Theme Singleton].loadingWalletsNewDeviceText];
+            }
+            [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        }
+        else
+        {
+            //
+            // Wallets are *kinda* loaded now. At least they're loaded from Git. But transactions still have to
+            // be loaded from the blockchain. Hack: set a timer that checks if we've received a WALLETS_CHANGED update
+            // within the past 15 seconds. If not, then assume the wallets have all been fully synced. If we get an
+            // update, then reset the timer and wait another 30 seconds.
+            //
+            if (self.walletLoadingTimer)
+            {
+                [self.walletLoadingTimer invalidate];
+                self.walletLoadingTimer = nil;
+            }
+            else
+            {
+                [MainViewController fadingAlert:[Theme Singleton].loadingTransactionsText
+                                       holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+            }
+            self.walletLoadingTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].walletLoadingTimerInterval
+                                                                       target:self
+                                                                     selector:@selector(dismissWalletLoadingTimer)
+                                                                     userInfo:nil
+                                                                      repeats:NO];
+
+        }
+        _bShowingWalletsLoadingAlert = YES;
+    }
+
 }
 
 -(void)updateWalletsView

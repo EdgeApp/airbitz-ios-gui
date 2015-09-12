@@ -87,6 +87,7 @@ typedef enum eAppMode
     InfoView                    *_notificationInfoView;
     BOOL                        firstLaunch;
     BOOL                        sideBarLocked;
+    BOOL                        _bNewDeviceLogin;
 
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
@@ -133,6 +134,8 @@ MainViewController *singleton;
     [FadingAlertView initAll];
 
     singleton = self;
+
+    _bNewDeviceLogin = NO;
 
     NSMutableData *seedData = [[NSMutableData alloc] init];
     [self fillSeedData:seedData];
@@ -776,6 +779,9 @@ MainViewController *singleton;
 			{
 				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
+                    [_transactionsViewController setNewDeviceLogin:_bNewDeviceLogin];
+                    _bNewDeviceLogin = NO;
+
                     [MainViewController animateSwapViewControllers:_transactionsViewController out:_selectedViewController];
 				}
 				else
@@ -873,9 +879,12 @@ MainViewController *singleton;
     [_loginViewController removeFromParentViewController];
 }
 
-- (void)loginViewControllerDidLogin:(BOOL)bNewAccount
+-(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice;
 {
 //    self.backgroundView.image = [Theme Singleton].backgroundApp;
+
+    _bNewDeviceLogin = bNewDevice;
+
     if (bNewAccount) {
         [FadingAlertView create:self.view
                         message:[Theme Singleton].creatingWalletText

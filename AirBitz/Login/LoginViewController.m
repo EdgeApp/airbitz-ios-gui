@@ -46,6 +46,7 @@ typedef enum eLoginMode
     CGPoint                         _firstTouchPoint;
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
+    BOOL                            _bNewDeviceLogin;
     NSString                        *_strReason;
     NSString                        *_account;
     tABC_CC                         _resultCode;
@@ -207,6 +208,7 @@ static BOOL bInitialized = false;
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1];
 
     _bTouchesEnabled = YES;
+    _bNewDeviceLogin = NO;
 
     [self getAllAccounts];
     [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
@@ -1002,12 +1004,18 @@ typedef enum eReloginState
 {
     [self showSpinner:NO];
     [CoreBridge otpSetError:_resultCode];
+
+    if (![self.arrayAccounts containsObject:self.usernameSelector.textField.text])
+    {
+        _bNewDeviceLogin = YES;
+    }
+
     if (_bSuccess)
     {
         [User login:self.usernameSelector.textField.text
            password:self.passwordTextField.text
            setupPIN:YES];
-        [self.delegate loginViewControllerDidLogin:NO];
+        [self.delegate loginViewControllerDidLogin:NO newDevice:_bNewDeviceLogin];
 
         [Keychain updateLoginKeychainInfo:[LocalSettings controller].cachedUsername
                                       pin:nil
@@ -1138,7 +1146,7 @@ typedef enum eReloginState
     {
         _bSuccess = YES;
 
-        [self.delegate loginViewControllerDidLogin:bNewAccount];
+        [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:NO];
     }
 }
 

@@ -81,6 +81,9 @@
 @property (nonatomic) NSString *usePINText;
 @property (nonatomic) NSString *usePasswordText;
 @property (nonatomic) NSString *twofactorWarningText;
+@property (nonatomic) NSString *loadingWalletsText;
+@property (nonatomic) NSString *loadingWalletsNewDeviceText;
+@property (nonatomic) NSString *loadingTransactionsText;
 
 
 
@@ -116,6 +119,7 @@
 
 @property (nonatomic) CGFloat qrCodeGenDelayTime;
 @property (nonatomic) CGFloat rotateServerInterval;
+@property (nonatomic) CGFloat walletLoadingTimerInterval;
 
 + (void)initAll;
 + (void)freeAll;

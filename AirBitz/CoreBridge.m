@@ -429,6 +429,9 @@ static BOOL bOtpError = NO;
     singleton.arrayUUIDs = nil;
     singleton.currentWallet = nil;
     singleton.currentWalletID = 0;
+    singleton.numWalletsLoaded = 0;
+    singleton.numTotalWallets = 0;
+    singleton.bAllWalletsLoaded = NO;
 }
 
 + (void)refreshWallets
@@ -466,16 +469,33 @@ static BOOL bOtpError = NO;
             }
         }
 
+        for (int i = 0; i < [arrayArchivedWallets count]; i++)
+        {
+            Wallet *wallet = [arrayArchivedWallets objectAtIndex:i];
+            if (!wallet.loaded) {
+                loadingCount++;
+            }
+        }
+
         dispatch_async(dispatch_get_main_queue(),^{
             ABLog(2,@"ENTER refreshWallets MainQueue: %@", [NSThread currentThread].name);
             singleton.arrayWallets = arrayWallets;
             singleton.arrayArchivedWallets = arrayArchivedWallets;
             singleton.arrayUUIDs = arrayUUIDs;
             singleton.arrayWalletNames = arrayWalletNames;
+            singleton.numTotalWallets = [arrayWallets count] + [arrayArchivedWallets count];
+            singleton.numWalletsLoaded = singleton.numTotalWallets  - loadingCount;
+
             if (loadingCount == 0)
             {
+                singleton.bAllWalletsLoaded = YES;
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADED object:self];
             }
+            else
+            {
+                singleton.bAllWalletsLoaded = NO;
+            }
+
             if (nil == singleton.currentWallet)
             {
                 if ([singleton.arrayWallets count] > 0)

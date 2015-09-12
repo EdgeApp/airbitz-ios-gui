@@ -120,6 +120,11 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.usePINText                                         = NSLocalizedString(@"Use PIN", @"Touch ID [Use PIN] button");
     self.usePasswordText                                    = NSLocalizedString(@"Use Password", @"Touch ID [Use Password] button");
     self.twofactorWarningText                               = NSLocalizedString(@"Two Factor Enabled\n\n** Warning **\n\nIf you lose your device or uninstall the Airbitz app, it will take 7 days to disable 2FA and access your account.\"", @"2FA warning on enable");
+    self.loadingWalletsText                                 = NSLocalizedString(@"Loading Wallets...", @"Loading wallets alert text");
+    self.loadingWalletsNewDeviceText                        = NSLocalizedString(@"This may take a few minutes as it is the first time logging into this device.", @"Loading Wallets alert text");
+    self.loadingTransactionsText                            = NSLocalizedString(@"Loading Transactions...", @"Loading Transactions alert text");
+
+//    self.                         = NSLocalizedString(@"", @"");
 
     self.sendRequestButtonDisabled = 0.4f;
 
@@ -134,6 +139,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 
     self.qrCodeGenDelayTime                     = 0.75;     // Timer delay after keypad entry before new QR code is generated
     self.rotateServerInterval                   = 15.0;     // How long (in seconds) before we rotate libbitcoin servers while waiting on QR code screen
+    self.walletLoadingTimerInterval             = 30.0;     // How long to wait between wallet updates on new device logins before we consider the account fully loaded
 
     self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];
     self.backgroundLogin = [UIImage imageNamed:@"postcard-mountain.png"];
