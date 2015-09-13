@@ -2894,6 +2894,7 @@
                         <outlet property="PINCodeView" destination="DIc-w4-vLL" id="VK1-PT-9eC"/>
                         <outlet property="PINusernameSelector" destination="VWS-p6-0xj" id="BKI-59-q7h"/>
                         <outlet property="backButton" destination="Ypw-4p-DZr" id="Gdl-4p-iBe"/>
+                        <outlet property="buttonOutsideTap" destination="PwH-1d-Cnf" id="Td0-PY-ZnQ"/>
                         <outlet property="contentView" destination="eTI-9q-uu0" id="9Og-HH-DYd"/>
                         <outlet property="credentialsPINView" destination="BHf-E8-N2q" id="YXf-Zn-gQZ"/>
                         <outlet property="credentialsView" destination="kpH-FO-ztL" id="UiA-5C-OgI"/>
