@@ -1175,20 +1175,6 @@
                 [cell.imagePhoto.layer setBackgroundColor:[color CGColor]];
                 cell.imagePhoto.image = [UIImage imageNamed:@"icon_request_padded.png"];
             }
-//            NSString *stringToHash;
-//            if ([cell.addressLabel.text length] == 0)
-//            {
-//                // Random color based on txid
-//                stringToHash = transaction.strID;
-//            }
-//            else
-//            {
-//                stringToHash = transaction.strName;
-//            }
-//            NSUInteger hash = [stringToHash hash];
-//            hash = hash % [[Theme Singleton].colorsProfileIcons count];
-//            UIColor *color = [[Theme Singleton].colorsProfileIcons objectAtIndex:hash];
-//            [cell.imagePhoto.layer setBackgroundColor:[color CGColor]];
         }
     
         CGFloat borderWidth = PHOTO_BORDER_WIDTH;
