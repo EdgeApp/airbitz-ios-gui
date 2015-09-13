@@ -964,8 +964,8 @@
     NSString *title = NSLocalizedString(@"Error during send", nil);
     NSString *message = [Util errorMap:&Error];
     NSArray *params = [NSArray arrayWithObjects: title, message, nil];
-    [_confirmationSlider resetIn:1.0];
     dispatch_async(dispatch_get_main_queue(), ^(void) {
+        [_confirmationSlider resetIn:1.0];
         if (_bAdvanceToTx) {
             [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
         } else {
