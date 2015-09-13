@@ -410,7 +410,7 @@ static BOOL bOtpError = NO;
     }
     else
     {
-        if ([singleton.arrayWallets count] > indexPath.row)
+        if ([singleton.arrayArchivedWallets count] > indexPath.row)
         {
             singleton.currentWallet = [singleton.arrayArchivedWallets objectAtIndex:indexPath.row];
             singleton.currentWalletID = (int) [singleton.arrayArchivedWallets indexOfObject:singleton.currentWallet];
