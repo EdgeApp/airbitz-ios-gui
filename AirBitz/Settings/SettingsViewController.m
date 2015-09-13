@@ -935,8 +935,19 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         if (indexPath.row == ROW_BLE)
         {
-			cell.name.text = NSLocalizedString(@"Bluetooth", @"settings text");
-            [cell.state setOn:!LocalSettings.controller.bDisableBLE animated:NO];
+            if (_showBluetoothOption)
+            {
+                cell.name.text = NSLocalizedString(@"Bluetooth", @"settings text");
+                [cell.state setOn:!LocalSettings.controller.bDisableBLE animated:NO];
+                cell.state.userInteractionEnabled = YES;
+            }
+            else
+            {
+                cell.name.text = NSLocalizedString(@"Enable Bluetooth in System Settings", @"settings text");
+                [cell.state setOn:NO animated:NO];
+                cell.state.userInteractionEnabled = NO;
+            }
+
         }
         else if (indexPath.row == ROW_MERCHANT_MODE)
         {
@@ -1063,15 +1074,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_OPTIONS:
-			//assumes bluetooth option is last of the options.
-			if(_showBluetoothOption)
-			{
-				return 9;
-			}
-			else
-			{
-				return 8; //return 7 to not show the Bluetooth cell.
-			}
+            return 9;
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
@@ -1184,15 +1187,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             }
             else if (indexPath.row == ROW_BLE)
             {
-                if (_showBluetoothOption)
-                {
-                    cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
-                }
-                else
-                {
-                    NSIndexPath *temp = [NSIndexPath indexPathForRow:ROW_PIN_RELOGIN inSection:indexPath.section];
-                    cell = [self getBooleanCellForTableView:tableView andIndexPath:temp];
-                }
+                cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
             }
             else if (indexPath.row == ROW_PIN_RELOGIN)
             {
@@ -1403,17 +1398,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         [self.tableView reloadData];
 
         [Keychain disableKeychainBasedOnSettings];
-//        [CoreBridge postToMiscQueue:^{
-//
-//            if (theSwitch.on)
-//            {
-//                [CoreBridge setupLoginPIN];
-//            }
-//            else
-//            {
-//                [CoreBridge deletePINLogin];
-//            }
-//        }];
     }
 }
 
