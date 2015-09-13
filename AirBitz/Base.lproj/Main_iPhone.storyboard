@@ -2644,7 +2644,7 @@
                                         <size key="shadowOffset" width="2" height="2"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PwH-1d-Cnf" userLabel="Outside Tap Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="577"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2838,7 +2838,7 @@
                                     <constraint firstAttribute="centerX" secondItem="LqE-iy-sKS" secondAttribute="centerX" id="gMX-zi-xrg"/>
                                     <constraint firstItem="bUp-i4-uHt" firstAttribute="top" secondItem="kpH-FO-ztL" secondAttribute="bottom" constant="8" symbolic="YES" id="jGF-Bd-eNG"/>
                                     <constraint firstItem="jLL-vF-Vbd" firstAttribute="leading" secondItem="8XB-1A-1hO" secondAttribute="trailing" id="qg6-OB-iqn"/>
-                                    <constraint firstAttribute="bottom" secondItem="PwH-1d-Cnf" secondAttribute="bottom" id="tBn-Vm-e0Y"/>
+                                    <constraint firstItem="8XB-1A-1hO" firstAttribute="top" secondItem="PwH-1d-Cnf" secondAttribute="bottom" constant="20" id="s0w-Ni-s53"/>
                                     <constraint firstAttribute="centerX" secondItem="kpH-FO-ztL" secondAttribute="centerX" id="vy5-ZF-fZP"/>
                                 </constraints>
                             </view>

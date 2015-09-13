@@ -89,6 +89,7 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet PickerTextView   *usernameSelector;
 @property (nonatomic, strong) NSArray   *arrayAccounts;
 @property (nonatomic, strong) NSArray   *otherAccounts;
+@property (weak, nonatomic) IBOutlet UIButton *buttonOutsideTap;
 
 @end
 
@@ -118,6 +119,7 @@ static BOOL bInitialized = false;
     self.PINCodeView.delegate = self;
     self.PINusernameSelector.delegate = self;
     self.spinnerView.hidden = YES;
+    self.buttonOutsideTap.enabled = NO;
 
     [self getAllAccounts];
 
@@ -464,6 +466,7 @@ typedef enum eReloginState
 - (IBAction)OutsideTapButton:(id)sender {
     [self.PINusernameSelector close];
     [self.usernameSelector dismissPopupPicker];
+    self.buttonOutsideTap.enabled = NO;
 }
 
 #pragma mark - Misc Methods
@@ -1186,6 +1189,7 @@ typedef enum eReloginState
 {
     [self.usernameSelector.textField resignFirstResponder];
     [self.usernameSelector dismissPopupPicker];
+    self.buttonOutsideTap.enabled = NO;
     
     // set the text field to the choice
     NSString *account = [self.arrayAccounts objectAtIndex:row];
@@ -1229,6 +1233,8 @@ typedef enum eReloginState
                           otherButtonTitles:@"Yes", nil];
     [alert show];
     [self.usernameSelector dismissPopupPicker];
+    self.buttonOutsideTap.enabled = NO;
+
 }
 
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
@@ -1251,6 +1257,7 @@ typedef enum eReloginState
         pickerTextView.popupPicker.frame = frame;
         
     }
+    self.buttonOutsideTap.enabled = YES;
 
 }
 
@@ -1262,16 +1269,19 @@ typedef enum eReloginState
     if ([pickerTextView.textField.text length] > 0)
     {
         [pickerTextView dismissPopupPicker];
+        self.buttonOutsideTap.enabled = NO;
     }
     else if ([pickerTextView.textField.text length] == 0)
     {
         [pickerTextView createPopupPicker];
+        self.buttonOutsideTap.enabled = YES;
     }
 }
 
 - (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView;
 {
     [pickerTextView dismissPopupPicker];
+    self.buttonOutsideTap.enabled = NO;
 }
 
 #pragma mark - UIAlertView Delegate
@@ -1310,12 +1320,14 @@ typedef enum eReloginState
 {
     [self.PINusernameSelector.textLabel resignFirstResponder];
     [self.PINCodeView resignFirstResponder];
+    self.buttonOutsideTap.enabled = YES;
 
 }
 
 - (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view
 {
     [self.PINCodeView becomeFirstResponder];
+    self.buttonOutsideTap.enabled = NO;
 
 }
 
