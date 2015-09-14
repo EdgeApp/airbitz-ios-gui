@@ -458,6 +458,7 @@ static BOOL bOtpError = NO;
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADING object:self];
         }
     });
+    [CoreBridge postToWatcherQueue:^(void) {
     [CoreBridge postToWalletsQueue:^(void) {
         ABLog(2,@"ENTER refreshWallets WalletQueue: %@", [NSThread currentThread].name);
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
@@ -530,6 +531,7 @@ static BOOL bOtpError = NO;
 
         });
         ABLog(2,@"EXIT refreshWallets WalletQueue: %@", [NSThread currentThread].name);
+    }];
     }];
 
 }
@@ -1424,15 +1426,14 @@ static BOOL bOtpError = NO;
 
 + (BOOL)didLoginExpire;
 {
-    NSDate *logoutDate = nil;
     NSError *error = nil;
 
-    long logoutTimeStamp = [Keychain getKeychainInt:LOGIN_TIME_KEY error:&error];
+    long long logoutTimeStamp = [Keychain getKeychainInt:LOGIN_TIME_KEY error:&error];
 
     if (error) return YES;
     if (!logoutTimeStamp) return YES;
 
-    long currentTimeStamp = [[NSDate date] timeIntervalSince1970];
+    long long currentTimeStamp = [[NSDate date] timeIntervalSince1970];
 
     if (currentTimeStamp > logoutTimeStamp)
     {
