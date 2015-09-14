@@ -324,7 +324,10 @@
                                                             [Theme Singleton].loadingWalletsText,
                                                             [Theme Singleton].loadingWalletsNewDeviceText];
             }
-            [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+            if (_bShowingWalletsLoadingAlert)
+                [MainViewController fadingAlertUpdate:walletsLoading];
+            else
+                [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
         }
         else
         {
@@ -341,8 +344,11 @@
             }
             else
             {
-                [MainViewController fadingAlert:[Theme Singleton].loadingTransactionsText
-                                       holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+                if (_bShowingWalletsLoadingAlert)
+                    [MainViewController fadingAlertUpdate:[Theme Singleton].loadingTransactionsText];
+                else
+                    [MainViewController fadingAlert:[Theme Singleton].loadingTransactionsText
+                                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
             }
             self.walletLoadingTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].walletLoadingTimerInterval
                                                                        target:self

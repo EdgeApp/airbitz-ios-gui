@@ -65,6 +65,7 @@ typedef enum eNavBarSide
 + (void)fadingAlertHelpPopup:(NSString *)message;
 + (void)fadingAlert:(NSString *)message;
 + (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime;
++ (void)fadingAlertUpdate:(NSString *)message;
 + (void)fadingAlertDismiss;
 
 @end

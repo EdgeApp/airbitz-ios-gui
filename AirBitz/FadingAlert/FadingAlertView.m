@@ -171,6 +171,11 @@ static UIView *alert;
     return;
 }
 
++ (void)update:(NSString *)message;
+{
+    singleton.messageText.text = message;
+}
+
 - (void)dismiss
 {
     [FadingAlertView dismiss:NO];

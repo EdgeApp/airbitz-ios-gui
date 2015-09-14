@@ -2027,6 +2027,11 @@ MainViewController *singleton;
     [FadingAlertView create:singleton.view message:message holdTime:holdTime];
 }
 
++ (void)fadingAlertUpdate:(NSString *)message
+{
+    [FadingAlertView update:message];
+}
+
 + (void)fadingAlertDismiss
 {
     [FadingAlertView dismiss:YES];
