@@ -209,7 +209,6 @@ static BOOL bInitialized = false;
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1];
 
     _bTouchesEnabled = YES;
-    _bNewDeviceLogin = NO;
 
     [self getAllAccounts];
     [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
