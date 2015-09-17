@@ -96,6 +96,9 @@
     if ([self newPasswordFieldsAreValid] == YES && [self fieldsAreValid] == YES)
     {
         [FadingAlertView create:self.view message:NSLocalizedString(@"Creating and securing account", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        [_passwordTextField resignFirstResponder];
+        [_reenterPasswordTextField resignFirstResponder];
+        [_pinTextField resignFirstResponder];
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             tABC_Error error;
@@ -118,6 +121,7 @@
                     
                     [User login:self.manager.strUserName password:self.passwordTextField.text setupPIN:YES];
                     [CoreBridge setupNewAccount];
+
                     [super next];
                 }
                 else
