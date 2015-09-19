@@ -323,29 +323,16 @@ typedef enum eReloginState
     //
     // Look for cached username & password or PIN in the keychain. Use it if present
     //
-    NSError *error = nil;
     tReloginState reloginState = RELOGIN_DISABLE;
 
-    int64_t bRelogin = [Keychain getKeychainInt:RELOGIN_KEY error:&error];
-    if (error) return;
-
-    error = nil;
-    int64_t bUseTouchID = [Keychain getKeychainInt:USE_TOUCHID_KEY error:&error];
-    if (error) return;
+    int64_t bRelogin = [Keychain getKeychainInt:RELOGIN_KEY error:nil];
+    int64_t bUseTouchID = [Keychain getKeychainInt:USE_TOUCHID_KEY error:nil];
 
     if (!bRelogin && !bUseTouchID) return;
 
-    error = nil;
-    NSString *kcUsername = [Keychain getKeychainString:USERNAME_KEY error:&error];
-    if (error) return;
-
-    error = nil;
-    NSString *kcPassword = [Keychain getKeychainString:PASSWORD_KEY error:&error];
-    if (error) return;
-
-    error = nil;
-    NSString *kcPIN = [Keychain getKeychainString:PIN_KEY error:&error];
-    if (error) return;
+    NSString *kcUsername = [Keychain getKeychainString:USERNAME_KEY error:nil];
+    NSString *kcPassword = [Keychain getKeychainString:PASSWORD_KEY error:nil];
+    NSString *kcPIN = [Keychain getKeychainString:PIN_KEY error:nil];
 
     if ([kcUsername isEqualToString:[LocalSettings controller].cachedUsername])
     {

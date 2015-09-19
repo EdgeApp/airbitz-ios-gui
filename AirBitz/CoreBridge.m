@@ -1426,11 +1426,8 @@ static BOOL bOtpError = NO;
 
 + (BOOL)didLoginExpire;
 {
-    NSError *error = nil;
+    long long logoutTimeStamp = [Keychain getKeychainInt:LOGIN_TIME_KEY error:nil];
 
-    long long logoutTimeStamp = [Keychain getKeychainInt:LOGIN_TIME_KEY error:&error];
-
-    if (error) return YES;
     if (!logoutTimeStamp) return YES;
 
     long long currentTimeStamp = [[NSDate date] timeIntervalSince1970];
