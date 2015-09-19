@@ -230,14 +230,12 @@ static Location *singleton = nil;  // this will be the one and only object this 
 	}
 }
 
-#ifdef __IPHONE_8_0
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
-    if (kCLAuthorizationStatusAuthorizedWhenInUse == status || kCLAuthorizationStatusAuthorized == status) {
+    if (kCLAuthorizationStatusAuthorizedWhenInUse == status || kCLAuthorizationStatusAuthorizedAlways == status) {
         [self.locationManager startUpdatingLocation];
     }
 }
-#endif
 
 -(void)timerFired:(NSTimer *)timer
 {

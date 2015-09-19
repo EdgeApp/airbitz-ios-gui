@@ -19,5 +19,4 @@
 @protocol BuySellViewControllerDelegate <NSObject>
 
 @required
-- (void)BuySellViewControllerDone:(BuySellViewController *)vc;
 @end

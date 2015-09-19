@@ -304,7 +304,7 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     CGPoint translation = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:gestureRecognizer.view.superview];
-    return fabsf(translation.x) > fabsf(translation.y);
+    return fabs(translation.x) > fabs(translation.y);
 }
 
 - (void)handleRecognizer:(UIPanGestureRecognizer *)recognizer fromBlock:(bool) block

@@ -380,7 +380,7 @@ typedef enum eRequestType
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Transaction Details", @"Transaction Details header text")];
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Exit:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -754,29 +754,6 @@ typedef enum eRequestType
     CFErrorRef error;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 
-    __block BOOL accessGranted = NO;
-
-    if (ABAddressBookRequestAccessWithCompletion != NULL)
-    {
-        // we're on iOS 6
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
-                                                 {
-                                                     accessGranted = granted;
-                                                     dispatch_semaphore_signal(sema);
-                                                 });
-
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        //dispatch_release(sema);
-    }
-    else
-    {
-        // we're on iOS 5 or older
-        accessGranted = YES;
-    }
-
-    if (accessGranted)
     {
         CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
         for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
@@ -1608,8 +1585,6 @@ typedef enum eRequestType
 {
     _activeTextView = textView;
     
-    CGRect scrollFrame = self.scrollableContentView.frame;
-    
     if (textView == self.notesTextView)
     {
         [self scrollContentViewToFrame:self.notesTextView.frame];
@@ -1644,8 +1619,6 @@ typedef enum eRequestType
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     _activeTextField = textField;
-
-    CGRect scrollFrame = self.scrollableContentView.frame;
 
     if (textField == self.nameTextField)
     {

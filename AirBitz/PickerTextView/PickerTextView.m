@@ -50,7 +50,7 @@
 {
 	[self.textField removeFromSuperview];
 	
-    self.textField = newTextField;
+    self.textField = (StylizedTextField *)newTextField;
 
 	self.textField.frame = self.bounds;
 	[self addSubview:self.textField];

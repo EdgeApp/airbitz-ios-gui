@@ -15,7 +15,6 @@
 
 @interface BlurView ()
 {
-    UIToolbar *toolbarBlur;
     UIVisualEffectView    *blurEffectView;
     UIView *backgroundVibrancyView;
     UIView *nonBlur;
@@ -23,9 +22,6 @@
 }
 
 @property (nonatomic)  NSInteger blurStyle;
-@property (nonatomic)  BOOL       bSetBlurStyleExtraLight;
-@property (nonatomic)  BOOL       bSetBlurStyleDark;
-@property (nonatomic)  BOOL       bForceBlur;
 @property (nonatomic)  UIBlurEffectStyle currentBlurStyle;
 
 @end

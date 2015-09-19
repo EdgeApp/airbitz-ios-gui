@@ -589,29 +589,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     CFErrorRef error;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 	
-    __block BOOL accessGranted = NO;
-	
-    if (ABAddressBookRequestAccessWithCompletion != NULL)
-    {
-        // we're on iOS 6
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-		
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
-                                                 {
-                                                     accessGranted = granted;
-                                                     dispatch_semaphore_signal(sema);
-                                                 });
-		
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        //dispatch_release(sema);
-    }
-    else
-    {
-        // we're on iOS 5 or older
-        accessGranted = YES;
-    }
-	
-    if (accessGranted)
     {
         CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
         for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
@@ -1125,8 +1102,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //    printf("Peripheral Info :\r\n");
 //    printf("UUID : %s\r\n",CFStringGetCStringPtr(s, 0));
 //    CFRelease(s);
-    printf("RSSI : %d\r\n",[peripheralContainer.peripheral.RSSI intValue]);
-    ABLog(2,@"Name : %@\r\n",peripheralContainer.peripheral.name);
+//    printf("RSSI : %d\r\n",[peripheralContainer.peripheral.RSSI intValue]);
+//    ABLog(2,@"Name : %@\r\n",peripheralContainer.peripheral.name);
 	BOOL connected = NO;
 	if(peripheralContainer.peripheral.state == CBPeripheralStateConnected)
 	{

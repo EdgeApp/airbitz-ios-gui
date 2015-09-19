@@ -222,40 +222,14 @@
 
 -(void)scrollTextFieldAboveKeyboard:(UITextField *)textField
 {
-//    if(_keyboardFrameOriginY) //set when keyboard is visible
-//    {
-//        CGRect textFieldFrame = [self.contentView convertRect:_activeTextField.frame toView:self.view.window];
-//        float overlap = self.contentView.frame.origin.y + _keyboardFrameOriginY - KEYBOARD_MARGIN - (textFieldFrame.origin.y + textFieldFrame.size.height);
-//        //ABLog(2,@"Overlap: %f", overlap);
-//        if(overlap < 0)
-//        {
-//            [UIView animateWithDuration:0.35
-//                                  delay: 0.0
-//                                options: UIViewAnimationOptionCurveEaseInOut
-//                             animations:^
-//                             {
-//                                 CGRect frame = self.contentView.frame;
-//                                 frame.origin.y = overlap;
-//                                 self.contentView.frame = frame;
-//                             }
-//                             completion:^(BOOL finished)
-//                             {
-//
-//                             }];
-//        }
-//    }
+    
 }
-//
+
 - (void)installLeftToRightSwipeDetection
 {
     UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
     gesture.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:gesture];
-}
-
-- (void)back
-{
-    [super back];
 }
 
 - (void)exitWithBackButton:(BOOL)bBack

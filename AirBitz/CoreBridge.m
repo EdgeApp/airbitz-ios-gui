@@ -496,7 +496,7 @@ static BOOL bOtpError = NO;
                 singleton.arrayArchivedWallets = arrayArchivedWallets;
                 singleton.arrayUUIDs = arrayUUIDs;
                 singleton.arrayWalletNames = arrayWalletNames;
-                singleton.numTotalWallets = [arrayWallets count] + [arrayArchivedWallets count];
+                singleton.numTotalWallets = (int) ([arrayWallets count] + [arrayArchivedWallets count]);
                 singleton.numWalletsLoaded = singleton.numTotalWallets  - loadingCount;
 
                 if (loadingCount == 0)
@@ -1487,24 +1487,24 @@ static BOOL bOtpError = NO;
 {
     [CoreBridge stopQueues];
 
-    NSUInteger wq, dq, gq, txq, eq, mq, lq;
+    unsigned long wq, dq, gq, txq, eq, mq, lq;
 
     // XXX: prevents crashing on logout
     while (YES)
     {
-        wq = [walletsQueue operationCount];
-        dq = [dataQueue operationCount];
-        gq = [genQRQueue operationCount];
-        txq = [txSearchQueue operationCount];
-        eq = [exchangeQueue operationCount];
-        mq = [miscQueue operationCount];
-        lq = [loadedQueue operationCount];
+        wq = (unsigned long)[walletsQueue operationCount];
+        dq = (unsigned long)[dataQueue operationCount];
+        gq = (unsigned long)[genQRQueue operationCount];
+        txq = (unsigned long)[txSearchQueue operationCount];
+        eq = (unsigned long)[exchangeQueue operationCount];
+        mq = (unsigned long)[miscQueue operationCount];
+        lq = (unsigned long)[loadedQueue operationCount];
 
         if (0 == (wq + dq + gq + txq + eq + mq + lq))
             break;
 
         ABLog(0,
-            @"Waiting for queues to complete wq=%d dq=%d gq=%d txq=%d eq=%d mq=%d lq=%d",
+            @"Waiting for queues to complete wq=%lu dq=%lu gq=%lu txq=%lu eq=%lu mq=%lu lq=%lu",
             wq, dq, gq, txq, eq, mq, lq);
         [NSThread sleepForTimeInterval:.2];
     }
@@ -2014,7 +2014,6 @@ static BOOL bOtpError = NO;
 
         //creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
         tABC_CC result;
-        double currency;
         tABC_Error error;
         tABC_TxDetails _details;
 
@@ -2365,7 +2364,7 @@ static BOOL bOtpError = NO;
 
 - (void)notifyDataSync:(NSArray *)params
 {
-    int numWallets = [singleton.arrayWallets count] + [singleton.arrayArchivedWallets count];
+    unsigned long numWallets = [singleton.arrayWallets count] + [singleton.arrayArchivedWallets count];
 
     [CoreBridge refreshWallets:^
     {

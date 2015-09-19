@@ -61,8 +61,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-
     [self.pinTextField addTarget:self action:@selector(pinTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.passwordTextField addTarget:self action:@selector(passwordTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     
@@ -84,11 +82,6 @@
 }
 
 #pragma mark - Action Methods
-
--(IBAction)back:(id)sender
-{
-    [super back];
-}
 
 - (void)next
 {

@@ -13,5 +13,4 @@
 
 - (void)next;
 
-- (void)back;
 @end

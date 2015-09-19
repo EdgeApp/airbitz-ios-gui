@@ -681,29 +681,6 @@
     CFErrorRef error;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 
-    __block BOOL accessGranted = NO;
-
-    if (ABAddressBookRequestAccessWithCompletion != NULL)
-    {
-        // we're on iOS 6
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
-                                                 {
-                                                     accessGranted = granted;
-                                                     dispatch_semaphore_signal(sema);
-                                                 });
-
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        //dispatch_release(sema);
-    }
-    else
-    {
-        // we're on iOS 5 or older
-        accessGranted = YES;
-    }
-
-    if (accessGranted)
     {
         CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
         for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
@@ -1052,7 +1029,6 @@
 
     UITableViewCell *finalCell;
     NSInteger row = [indexPath row];
-    NSInteger section = [indexPath section];
     {
         TransactionCell *cell;
         Wallet *wallet = [CoreBridge Singleton].currentWallet;
@@ -1379,7 +1355,7 @@
     if (indexPath == nil) {
         ABLog(2,@"long press on table view but not on a row");
     } else if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        ABLog(2,@"long press on table view at section %d, row %d", indexPath.section, indexPath.row);
+        ABLog(2,@"long press on table view at section %d, row %d", (int) indexPath.section, (int) indexPath.row);
         if (indexPath.section == WALLET_SECTION_ACTIVE)
         {
             longTapWallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:indexPath.row];
@@ -1395,7 +1371,7 @@
                                         otherButtonTitles:[Theme Singleton].renameButtonText,nil];
         [longTapAlert show];
     } else {
-        ABLog(2,@"gestureRecognizer.state = %d", gestureRecognizer.state);
+        ABLog(2,@"gestureRecognizer.state = %d", (int)gestureRecognizer.state);
     }
 }
 

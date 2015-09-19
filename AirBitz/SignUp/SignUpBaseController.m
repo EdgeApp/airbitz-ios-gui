@@ -21,9 +21,4 @@
     [self.manager next];
 }
 
-- (IBAction)back 
-{
-    [self.manager back];
-}
-
 @end

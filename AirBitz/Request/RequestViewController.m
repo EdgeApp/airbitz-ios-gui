@@ -62,7 +62,7 @@ typedef enum eAddressPickerType
 static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 @interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelector2Delegate,FadingAlertViewDelegate,CBPeripheralManagerDelegate,
-                                     ImportWalletViewControllerDelegate,RecipientViewControllerDelegate>
+                                     ImportWalletViewControllerDelegate,RecipientViewControllerDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
@@ -77,7 +77,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     NSString                    *statusString;
     NSString                    *addressString;
     NSString                    *_uriString;
-    NSMutableString                    *previousWalletUUID;
+    NSString                    *previousWalletUUID;
     BOOL                        bLastCalculatorState;
     tAddressPickerType          _addressPickerType;
 
@@ -563,6 +563,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     switch (self.state) {
         case kRequest:
+        case kNone:
         case kDone:
         {
             self.statusLine2.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
@@ -741,7 +742,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     UILabel *bottomLabel;
     UILabel *topLabel;
     CGRect fiatFrame, btcFrame;
-    Wallet *wallet = [self getCurrentWallet];
 
     if (bFiat)
     {
@@ -792,7 +792,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.btcWidth.constant = btcFrame.size.width;
     self.btcHeight.constant = btcFrame.size.height;
 
-    UIColor *color = [UIColor lightGrayColor];
     NSString *string = NSLocalizedString(@"Enter Amount (optional)", "Placeholder text for Receive screen amount");
     self.currentTopField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:string attributes:@{NSForegroundColorAttributeName: [Theme Singleton].colorRequestTopTextFieldPlaceholder}];
 
@@ -1285,29 +1284,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     CFErrorRef error;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 
-    __block BOOL accessGranted = NO;
-
-    if (ABAddressBookRequestAccessWithCompletion != NULL)
-    {
-        // we're on iOS 6
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
-        {
-            accessGranted = granted;
-            dispatch_semaphore_signal(sema);
-        });
-
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        //dispatch_release(sema);
-    }
-    else
-    {
-        // we're on iOS 5 or older
-        accessGranted = YES;
-    }
-
-    if (accessGranted)
     {
         CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
         for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
@@ -1710,13 +1686,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [self updateViews:nil];
 }
 
-- (void)installLeftToRightSwipeDetection
-{
-    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
-    gesture.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:gesture];
-}
-
 // used by the guesture recognizer to ignore exit
 - (BOOL)haveSubViewsShowing
 {
@@ -1912,6 +1881,5 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     [self dismissRecipient];
 }
-
 
 @end

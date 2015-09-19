@@ -11,6 +11,9 @@
 @interface BlurView : UIView
 
 @property (nonatomic)  BOOL       bForceWhite;
+@property (nonatomic)  BOOL       bSetBlurStyleExtraLight;
+@property (nonatomic)  BOOL       bSetBlurStyleDark;
+@property (nonatomic)  BOOL       bForceBlur;
 
 
 @end

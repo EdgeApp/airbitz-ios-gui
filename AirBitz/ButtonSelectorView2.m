@@ -17,7 +17,7 @@
 {
 	CGRect      _originalButtonFrame;
 	UITableView *_selectionTable;
-    BlurView   *_blurView;
+    UIToolbar   *_blurView;
 	CGRect      _originalFrame;
 	float       _amountToGrow;
 }
@@ -40,67 +40,28 @@
 {
     if ((self = [super initWithCoder:aDecoder]))
 	{
-//        self.enabled = YES;
-//		UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ButtonSelectorView2" owner:self options:nil] objectAtIndex:0];
-//		view.frame = self.bounds;
-//        [view setBackgroundColor:[UIColor clearColor]];
-////		UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
-////		[self.button setBackgroundImage:blue_button_image forState:UIControlStateNormal];
-////		[self.button setBackgroundImage:blue_button_image forState:UIControlStateSelected];
-//        [self addSubview:view];
-//        [self.superview insertSubview:view aboveSubview:self];
-////
-//		_originalButtonFrame = self.button.frame;
-//		_originalFrame = self.frame;
-//		//cw temp
-//		//self.arrayItemsToSelect = [NSArray arrayWithObjects:@"item 1", @"item 2", @"item 3", @"item 4", @"item 5", @"item 6", @"item 7", @"item 8", @"item 9", @"item 10", @"item 11", @"item 12" , nil];
     }
     return self;
 }
 
-- (id)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect)rect
 {
     ABLog(2,@"ButtonSelector2: drawRect");
     self.enabled = YES;
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ButtonSelectorView2" owner:self options:nil] objectAtIndex:0];
     view.frame = self.bounds;
     [view setBackgroundColor:[UIColor clearColor]];
-//		UIImage *blue_button_image = [self stretchableImage:@"btn_blue.png"];
-//		[self.button setBackgroundImage:blue_button_image forState:UIControlStateNormal];
-//		[self.button setBackgroundImage:blue_button_image forState:UIControlStateSelected];
     [self addSubview:view];
-//    [self.superview insertSubview:view aboveSubview:self];
-//
     _originalButtonFrame = self.button.frame;
     _originalFrame = self.frame;
-    //cw temp
-    //self.arrayItemsToSelect = [NSArray arrayWithObjects:@"item 1", @"item 2", @"item 3", @"item 4", @"item 5", @"item 6", @"item 7", @"item 8", @"item 9", @"item 10", @"item 11", @"item 12" , nil];
-    return self;
+    return;
 }
 
 - (void)setButtonWidth:(CGFloat)width
 {
-//    CGFloat distFromButton = self.button.frame.origin.x - (self.textLabel.frame.origin.x + self.textLabel.frame.size.width);
-//
-//    CGRect frameLabel = self.textLabel.frame;
-//    frameLabel.size.width += (self.button.frame.size.width - width);
-//    self.textLabel.frame = frameLabel;
-//
-//    CGRect frameButton = self.button.frame;
-//    frameButton.origin.x += (frameButton.size.width - width);
-//    frameButton.size.width = width;
-//
-//    self.button.frame = frameButton;
     _originalButtonFrame = self.button.frame;
 
 }
-
-//- (UIImage *)stretchableImage:(NSString *)imageName
-//{
-//	UIImage *img = [UIImage imageNamed:imageName];
-//	UIImage *stretchable = [img resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)]; //top, left, bottom, right
-//	return stretchable;
-//}
 
 - (void)open
 {
@@ -142,47 +103,20 @@
 		//animate button width (wider)
 		self.button.selected = YES;
 
-//        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-//		[UIView animateWithDuration:0.25
-//							  delay:0.0
-//							options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
-//						 animations:^
-//		 {
-//			 CGRect frame = self.button.frame;
-//			 float distance = frame.origin.x - self.textLabel.frame.origin.x;
-//			 frame.origin.x -= distance;
-//			 frame.size.width += distance;
-//			 self.button.frame = frame;
-//			 self.textLabel.alpha = 0.0;
-//
-//		 }
-//						 completion:^(BOOL finished)
-//		 {
-             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-			 [self showTable];
-//		 }];
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+        [self showTable];
 	}
 }
 
 - (void)showTable
 {
     float yOriginOffset;
-//    if ([self.textLabel.text isEqualToString:@""])
-//    {
     if (self.button.enabled == false)
         yOriginOffset = 0;
     else
         yOriginOffset = self.button.frame.size.height;
-//    }
-//    else
-//    {
-//        yOriginOffset = self.button.frame.size.height / 2;
-//    }
 	
 	CGRect tableFrame = self.frame;
-//	tableFrame.origin.x += 1.0;
-//	tableFrame.size.width -= 2.0;
-//	tableFrame.origin.y += yOriginOffset;
 	tableFrame.size.height = 0.0;
 
     _blurView = [[UIToolbar alloc] initWithFrame:tableFrame];
@@ -229,13 +163,6 @@
 		 myFrame.size.height = frame.origin.y + frame.size.height;
 		 self.frame = myFrame;
 		 
-		 //animate our container's frame (if we have a container)
-//		 if(self.containerView)
-//		 {
-//			 frame = self.containerView.frame;
-//			 frame.size.height += _amountToGrow;
-//			 self.containerView.frame = frame;
-//		 }
 	 }
 	 completion:^(BOOL finished)
 	 {
@@ -249,7 +176,7 @@
 {
     if (self.delegate)
     {
-        if ([self.delegate respondsToSelector:@selector(ButtonSelectorWillHideTable:)])
+        if ([self.delegate respondsToSelector:@selector(ButtonSelector2WillHideTable:)])
         {
             [self.delegate ButtonSelector2WillHideTable:self];
         }
@@ -269,12 +196,6 @@
 		 
 		 self.frame = _originalFrame;
 		 
-//		 if (self.containerView)
-//		 {
-//			 frame = self.containerView.frame;
-//			 frame.size.height -= _amountToGrow;
-//			 self.containerView.frame = frame;
-//		 }
 		 
 	 }
 					 completion:^(BOOL finished)
@@ -286,7 +207,6 @@
 						  animations:^
 		  {
 			  self.button.frame = _originalButtonFrame;
-//			  self.textLabel.alpha = 1.0;
 		  }
 						  completion:^(BOOL finished)
 		  {
@@ -336,10 +256,6 @@
 	{
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
-        
-//        UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.bounds.size.height-6, 320, 0.5)];/// change size as you need.
-//        separatorLineView.backgroundColor = [UIColor grayColor];// you can also put image here
-//        [cell.contentView addSubview:separatorLineView];
     }
     
     cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:17.0];
@@ -348,7 +264,6 @@
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
 	cell.textLabel.textColor = [UIColor darkGrayColor];
     cell.backgroundColor = [UIColor clearColor];
-	//ABLog(2,@"Row: %i, text: %@", indexPath.row, cell.textLabel.text);
     
     if (self.accessoryImage) {
         UIImage *image = self.accessoryImage;

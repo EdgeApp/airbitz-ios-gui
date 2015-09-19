@@ -192,11 +192,11 @@ MainViewController *singleton;
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    UIInterfaceOrientation toOrientation = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation toOrientation = (UIInterfaceOrientation)[[UIDevice currentDevice] orientation];
     NSNumber *nOrientation = [NSNumber numberWithInteger:toOrientation];
     NSDictionary *dictNotification = @{ KEY_ROTATION_ORIENTATION : nOrientation };
 
-    ABLog(2,@"Woohoo we WILL rotate %d", toOrientation);
+    ABLog(2,@"Woohoo we WILL rotate %d", (int)toOrientation);
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ROTATION_CHANGED object:self userInfo:dictNotification];
 }
 
@@ -1735,7 +1735,7 @@ MainViewController *singleton;
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    tAppMode newAppMode;
+    tAppMode newAppMode = APP_MODE_DIRECTORY;
 
     if (item == [self.tabBar.items objectAtIndex:APP_MODE_DIRECTORY])
     {

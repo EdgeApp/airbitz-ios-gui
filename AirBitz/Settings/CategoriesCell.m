@@ -8,7 +8,7 @@
 
 #import "CategoriesCell.h"
 
-@interface CategoriesCell () <PickerTextViewDelegate>
+@interface CategoriesCell () <PickerTextView3Delegate>
 
 {
 }
@@ -64,7 +64,7 @@
 
 #pragma mark - PickerTextView Delegates
 
-- (BOOL)pickerTextViewFieldShouldChange:(PickerTextView *)pickerTextView charactersInRange:(NSRange)range replacementString:(NSString *)string
+- (BOOL)pickerTextViewFieldShouldChange:(PickerTextView3 *)pickerTextView charactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if (nil != self.delegate)
     {
@@ -77,7 +77,7 @@
     return YES;
 }
 
-- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView
+- (void)pickerTextView3FieldDidChange:(PickerTextView3 *)pickerTextView
 {
 	if ([self.delegate respondsToSelector:@selector(categoriesCellTextDidChange:)])
 	{
@@ -85,7 +85,7 @@
 	}
 }
 
-- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
+- (void)pickerTextViewFieldDidBeginEditing:(PickerTextView3 *)pickerTextView
 {
 	if ([self.delegate respondsToSelector:@selector(categoriesCellBeganEditing:)])
 	{
@@ -93,7 +93,7 @@
 	}
 }
 
-- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView
+- (void)pickerTextViewFieldDidEndEditing:(PickerTextView3 *)pickerTextView
 {
 	if ([self.delegate respondsToSelector:@selector(categoriesCellEndEditing:)])
 	{
@@ -101,7 +101,7 @@
 	}
 }
 
-- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
+- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView3 *)pickerTextView
 {
     if (nil != self.delegate)
     {
@@ -119,7 +119,7 @@
 	return YES;
 }
 
-- (void)pickerTextViewPopupSelected:(PickerTextView *)view onRow:(NSInteger)row
+- (void)pickerTextViewPopupSelected:(PickerTextView3 *)view onRow:(NSInteger)row
 {
     BOOL bHandled = NO;
 
@@ -140,7 +140,7 @@
     }
 }
 
-- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
+- (void)pickerTextViewFieldDidShowPopup:(PickerTextView3 *)pickerTextView
 {
     if (self.delegate)
     {

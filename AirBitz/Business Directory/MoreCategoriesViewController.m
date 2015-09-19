@@ -157,7 +157,6 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSInteger row = [indexPath row];
 	categoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"categoryCell"];
 	if (nil == cell)
 	{

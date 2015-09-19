@@ -12,9 +12,6 @@
 
 @interface FadingAlertView ()
 
-+ (void)fadeOutView:(UIView *)view completion:(void (^)(BOOL finished))completion;
-+ (void)hideAlertByTap:(UITapGestureRecognizer *)sender;
-
 @property (weak, nonatomic) IBOutlet UIView             *darkView;
 @property (weak, nonatomic) IBOutlet UIView             *parentView;
 @property (weak, nonatomic) IBOutlet BlurView           *blurView;

@@ -18,7 +18,6 @@
 - (id)initWithController:(UIViewController *)parentController;
 - (void)startSignup;
 - (void)next;
-- (void)back;
 
 @end
 

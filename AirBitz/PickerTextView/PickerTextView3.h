@@ -10,11 +10,11 @@
 #import "PopupPickerView.h"
 #import "StylizedTextField3.h"
 
-@protocol PickerTextViewDelegate;
+@protocol PickerTextView3Delegate;
 
 @interface PickerTextView3 : UIView
 
-@property (nonatomic, assign) id<PickerTextViewDelegate>    delegate;
+@property (nonatomic, assign) id<PickerTextView3Delegate>    delegate;
 @property (nonatomic, strong) StylizedTextField3             *textField;
 @property (nonatomic, strong) PopupPickerView               *popupPicker; //nil until picker actually appears
 @property (nonatomic, assign) tPopupPickerPosition          popupPickerPosition;
@@ -36,7 +36,7 @@
 
 @end
 
-@protocol PickerTextViewDelegate <NSObject>
+@protocol PickerTextView3Delegate <NSObject>
 
 @required
 

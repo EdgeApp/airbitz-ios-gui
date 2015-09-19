@@ -1407,7 +1407,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
     NSInteger section = (cell.tag >> 8);
     NSInteger row = cell.tag & 0xff;
-    NSInteger pickerWidth = PICKER_WIDTH;
     tPopupPicker2Position popupPosition = PopupPicker2Position_Full_Fading;
     NSString *headerText;
 

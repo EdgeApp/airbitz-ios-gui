@@ -145,44 +145,19 @@
     CFErrorRef error;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 
-    __block BOOL accessGranted = NO;
-
-    if (ABAddressBookRequestAccessWithCompletion != NULL)
+    CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+    for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
     {
-        // we're on iOS 6
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        ABRecordRef person = CFArrayGetValueAtIndex(people, i);
 
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
-                                                 {
-                                                     accessGranted = granted;
-                                                     dispatch_semaphore_signal(sema);
-                                                 });
-
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        //dispatch_release(sema);
-    }
-    else
-    {
-        // we're on iOS 5 or older
-        accessGranted = YES;
-    }
-
-    if (accessGranted)
-    {
-        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
-        for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
+        NSString *strFullName = [Util getNameFromAddressRecord:person];
+        if ([strFullName length])
         {
-            ABRecordRef person = CFArrayGetValueAtIndex(people, i);
-
-            NSString *strFullName = [Util getNameFromAddressRecord:person];
-            if ([strFullName length])
-            {
-                // add this contact
-                [self addContactInfo:person withName:strFullName toArray:arrayContacts];
-            }
+            // add this contact
+            [self addContactInfo:person withName:strFullName toArray:arrayContacts];
         }
-        CFRelease(people);
     }
+    CFRelease(people);
 
     // assign final
     self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];

@@ -206,7 +206,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *resp = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     ABLog(2,@"resp = %@", resp);
     if (resp == nil) {
-        ABLog(2,@"resp is null. count = %d", [args count]);
+        ABLog(2,@"resp is null. count = %d", (unsigned int)[args count]);
     }
     [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz._results[%@]=%@", cbid, resp]];
 }
@@ -223,7 +223,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *resp = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     ABLog(2,@"resp = %@", resp);
     if (resp == nil) {
-        ABLog(2,@"resp is null. count = %d", [args count]);
+        ABLog(2,@"resp is null. count = %d", (int)[args count]);
     }
     [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz._callbacks[%@]('%@');", cbid, resp]];
 }
@@ -377,7 +377,6 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)clearData:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
     if ([self pluginDataClear:_plugin.pluginId]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
@@ -425,7 +424,7 @@ static const NSString *PROTOCOL = @"bridge://";
                           [[args objectForKey:@"currencyNum"] intValue],
                           &satoshis, &error);
     if (error.code == ABC_CC_Ok) {
-        [self setJsResults:cbid withArgs:[self jsonResult:[NSNumber numberWithLong:satoshis]]];
+        [self setJsResults:cbid withArgs:[self jsonResult:[NSNumber numberWithLongLong:satoshis]]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
     }
@@ -487,7 +486,6 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)showNavBar:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:YES]];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
@@ -496,7 +494,6 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)hideNavBar:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_TAB_BAR object:[NSNumber numberWithBool:NO]];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
@@ -505,7 +502,6 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)uiExit:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
 
     if ([self.delegate respondsToSelector:@selector(PluginViewControllerDone:)]) {
         [self.delegate PluginViewControllerDone:self];
@@ -516,7 +512,6 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)navStackClear:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
 
     _navStack = [[NSMutableArray alloc] init];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
@@ -534,7 +529,6 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)navStackPop:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
 
     [_navStack removeLastObject];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
@@ -681,7 +675,7 @@ static const NSString *PROTOCOL = @"bridge://";
         }
     }
 
-    BOOL *picker = NO;
+    BOOL picker = NO;
     for (UIView* peripheralView in [self getKeyboardViews:keyboardWindow]) {
         if ([[peripheralView description] hasPrefix:@"<UIWebSelectSinglePicker"]
                 || [[peripheralView description] hasPrefix:@"<UIDatePicker"]) {
