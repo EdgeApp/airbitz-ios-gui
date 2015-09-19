@@ -766,7 +766,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 			for(int i = 0; i < self.peripheralContainers.count; i++)
 			{
 				PeripheralContainer *container = [self.peripheralContainers objectAtIndex:i];
-				if ([self UUIDSAreEqual:container.peripheral.UUID u2:peripheral.UUID])
+				if ([container.peripheral.identifier.UUIDString isEqualToString:peripheral.identifier.UUIDString])
 				{
 					[self.peripheralContainers replaceObjectAtIndex:i withObject:pc];
 					// printf("Duplicate UUID found updating ...\r\n");
@@ -1102,9 +1102,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         PeripheralContainer *p = [self.peripheralContainers objectAtIndex:i];
 		
-        CFStringRef s = CFUUIDCreateString(NULL, p.peripheral.UUID);
-        printf("%d  |  %s\r\n",i,CFStringGetCStringPtr(s, 0));
-        CFRelease(s);
+//        CFStringRef s = p.peripheral.identifier.UUIDString;
+//        CFStringRef s = CFUUIDCreateString(NULL, p.peripheral.identifier.UUIDString);
+//        printf("%d  |  %s\r\n",i,CFStringGetCStringPtr(s, 0));
+//        CFRelease(s);
         [self printPeripheralInfo:p];
     }
 }
@@ -1119,11 +1120,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void) printPeripheralInfo:(PeripheralContainer*)peripheralContainer
 {
-    CFStringRef s = CFUUIDCreateString(NULL, peripheralContainer.peripheral.UUID);
-    printf("------------------------------------\r\n");
-    printf("Peripheral Info :\r\n");
-    printf("UUID : %s\r\n",CFStringGetCStringPtr(s, 0));
-    CFRelease(s);
+//    CFStringRef s = CFUUIDCreateString(NULL, peripheralContainer.peripheral.UUID);
+//    printf("------------------------------------\r\n");
+//    printf("Peripheral Info :\r\n");
+//    printf("UUID : %s\r\n",CFStringGetCStringPtr(s, 0));
+//    CFRelease(s);
     printf("RSSI : %d\r\n",[peripheralContainer.peripheral.RSSI intValue]);
     ABLog(2,@"Name : %@\r\n",peripheralContainer.peripheral.name);
 	BOOL connected = NO;
