@@ -74,7 +74,6 @@
 		68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */; };
 		683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
 		684861AC1A0C01C5008E53F8 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C4AA221A0B4DD70010C837 /* FadingAlertView.m */; };
-		684861B11A0C01D7008E53F8 /* FadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */; };
 		684C0E521936B97000AB9807 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
 		6861FE681950DFB100CDF24E /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861FE671950DFB100CDF24E /* TxOutput.m */; };
 		6868AD1319516D7A006C3716 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6868AD1219516D7A006C3716 /* DebugViewController.m */; };
@@ -85,7 +84,6 @@
 		6893E6CA19783FED0092DA04 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6893E6C919783FED0092DA04 /* SyncView.m */; };
 		68C3285719804BFE007DA4C2 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */; };
 		68C4AA241A0B4DD70010C837 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C4AA221A0B4DD70010C837 /* FadingAlertView.m */; };
-		68C4AA251A0B4DD70010C837 /* FadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */; };
 		6A587502F675B6C6ECA2BB1B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E47C0EC32EE29D34C5A03A0B /* libPods.a */; };
 		7D5E1CD819AFB2D400943A81 /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CBE19AFB2D400943A81 /* libabc.a */; };
 		7D5E1CDB19AFB2D400943A81 /* libbitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CC119AFB2D400943A81 /* libbitcoin.a */; };
@@ -1153,7 +1151,6 @@
 		DAE8652F1A88A58A00A17BD3 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFE18A40A8400DA4A34 /* Lato-Hairline.ttf */; };
 		DAE8653B1A88A58A00A17BD3 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137C0518A40A8400DA4A34 /* Montserrat-Bold.ttf */; };
 		DAE865411A88A58A00A17BD3 /* infoSend.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6D192E7D4A0015BB3C /* infoSend.html */; };
-		DAE8654C1A88A58A00A17BD3 /* FadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */; };
 		DAE865571A88A58A00A17BD3 /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B561E1A518D2572D002DCDC2 /* InfoView~iphone.xib */; };
 		DAE865581A88A58A00A17BD3 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56553EB18ECC8C2005B35E1 /* CalculatorView~iphone.xib */; };
 		DAE8655B1A88A58A00A17BD3 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9A918D4AF6C008ACF88 /* info.html */; };
@@ -1383,7 +1380,6 @@
 		68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SyncView~iphone.xib"; sourceTree = "<group>"; };
 		68C4AA211A0B4DD70010C837 /* FadingAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FadingAlertView.h; path = AirBitz/FadingAlert/FadingAlertView.h; sourceTree = SOURCE_ROOT; };
 		68C4AA221A0B4DD70010C837 /* FadingAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FadingAlertView.m; path = AirBitz/FadingAlert/FadingAlertView.m; sourceTree = SOURCE_ROOT; };
-		68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FadingAlertView.xib; path = AirBitz/FadingAlert/FadingAlertView.xib; sourceTree = SOURCE_ROOT; };
 		6BECB1B8C9CE1002526F24AB /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; };
 		7D5E1CBE19AFB2D400943A81 /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = "ABC-testnet/libabc.a"; sourceTree = "<group>"; };
 		7D5E1CC119AFB2D400943A81 /* libbitcoin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbitcoin.a; path = "ABC-testnet/libbitcoin.a"; sourceTree = "<group>"; };
@@ -2175,7 +2171,6 @@
 			children = (
 				68C4AA211A0B4DD70010C837 /* FadingAlertView.h */,
 				68C4AA221A0B4DD70010C837 /* FadingAlertView.m */,
-				68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */,
 				DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */,
 				DA06FB111B0E7CDD000BCA46 /* DropDownAlertView.h */,
 				DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */,
@@ -3420,7 +3415,6 @@
 				DA5A95761B3009EC00CFA7C1 /* btn_collapse_expand.png in Resources */,
 				DA06FA1D1B0BDD79000BCA46 /* icon_rightArrow@2x.png in Resources */,
 				DA06FA7D1B0BDD79000BCA46 /* Red-X@2x.png in Resources */,
-				684861B11A0C01D7008E53F8 /* FadingAlertView.xib in Resources */,
 				DA5A95911B300A6400CFA7C1 /* btn_export@3x.png in Resources */,
 				7D98AE3619A7C550003D2BF6 /* Lato-Light.ttf in Resources */,
 				DA06F9DE1B0BDD79000BCA46 /* icon_export_dropbox@2x.png in Resources */,
@@ -3606,7 +3600,6 @@
 				DAA8E9F41B1EDCB400BC870C /* ico_nav_directory_dark@2x.png in Resources */,
 				DA5A956C1B3009C000CFA7C1 /* btn_close.png in Resources */,
 				DAA8E9E41B1ED50B00BC870C /* icon_category_shopping@2x.png in Resources */,
-				68C4AA251A0B4DD70010C837 /* FadingAlertView.xib in Resources */,
 				DAA8E9E71B1ED50B00BC870C /* icon_category_shopping@3x.png in Resources */,
 				DA5A95D91B302C8000CFA7C1 /* icon_more@2x.png in Resources */,
 				DA5A95991B301C4100CFA7C1 /* icon_logout@2x.png in Resources */,
@@ -3846,7 +3839,6 @@
 				DAA8E9F61B1EDCB400BC870C /* ico_nav_directory_dark@2x.png in Resources */,
 				DA5A956E1B3009C000CFA7C1 /* btn_close.png in Resources */,
 				DAA8E9E61B1ED50B00BC870C /* icon_category_shopping@2x.png in Resources */,
-				DAE8654C1A88A58A00A17BD3 /* FadingAlertView.xib in Resources */,
 				DAA8E9E91B1ED50B00BC870C /* icon_category_shopping@3x.png in Resources */,
 				DA5A95DB1B302C8000CFA7C1 /* icon_more@2x.png in Resources */,
 				DA5A959B1B301C4100CFA7C1 /* icon_logout@2x.png in Resources */,
