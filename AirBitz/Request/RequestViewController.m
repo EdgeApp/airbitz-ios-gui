@@ -608,7 +608,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     NSArray *args = [NSArray arrayWithObjects:strName,strUUID,nsCurrencyNum,strNotes,strCategory,strRequestID,strRequestURI,strRequestAddress,nsRemaining,nil];
 
-    ABLog(2,@"updateQRCode setTimer req=%d", [nsRemaining longLongValue]);
+    ABLog(2,@"updateQRCode setTimer req=%llu", [nsRemaining longLongValue]);
     self.qrTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].qrCodeGenDelayTime target:self selector:@selector(updateQRAsync:) userInfo:args repeats:NO];
 
 
@@ -639,16 +639,16 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     NSString *strNotes = [args objectAtIndex:i++];
     NSString *strCategory = [args objectAtIndex:i++];
-    NSString *strRequestID = [args objectAtIndex:i++];
-    NSString *strRequestURI = [args objectAtIndex:i++];
-    NSString *strRequestAddress = [args objectAtIndex:i++];
+    NSMutableString *strRequestID = [args objectAtIndex:i++];
+    NSMutableString *strRequestURI = [args objectAtIndex:i++];
+    NSMutableString *strRequestAddress = [args objectAtIndex:i++];
     NSNumber *nsRemaining = [args objectAtIndex:i++];
 
     SInt64 remaining = [nsRemaining longLongValue];
 
     [CoreBridge postToGenQRQueue:^(void) {
 
-        ABLog(2,@"updateQRAsync Do actual QR update str=%d",remaining);
+        ABLog(2,@"updateQRAsync Do actual QR update str=%llu",remaining);
         UIImage *qrImage = [self createRequestQRImageFor:strName walletUUID:strUUID currencyNum:currencyNum withNotes:strNotes withCategory:strCategory
                                         storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
                                             scaleAndSave:NO withAmount:remaining];
