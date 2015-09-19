@@ -459,79 +459,79 @@ static BOOL bOtpError = NO;
         }
     });
     [CoreBridge postToWatcherQueue:^(void) {
-    [CoreBridge postToWalletsQueue:^(void) {
-        ABLog(2,@"ENTER refreshWallets WalletQueue: %@", [NSThread currentThread].name);
-        NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-        NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
-        NSMutableArray *arrayUUIDs = [[NSMutableArray alloc] init];
-        NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] init];
+        [CoreBridge postToWalletsQueue:^(void) {
+            ABLog(2,@"ENTER refreshWallets WalletQueue: %@", [NSThread currentThread].name);
+            NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+            NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
+            NSMutableArray *arrayUUIDs = [[NSMutableArray alloc] init];
+            NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] init];
 
-        [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets withTxs:true];
-        [CoreBridge loadWalletUUIDs:arrayUUIDs];
+            [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets withTxs:true];
+            [CoreBridge loadWalletUUIDs:arrayUUIDs];
 
-        //
-        // Update wallet names for various dropdowns
-        //
-        int loadingCount = 0;
-        for (int i = 0; i < [arrayWallets count]; i++)
-        {
-            Wallet *wallet = [arrayWallets objectAtIndex:i];
-            [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
-            if (!wallet.loaded) {
-                loadingCount++;
-            }
-        }
-
-        for (int i = 0; i < [arrayArchivedWallets count]; i++)
-        {
-            Wallet *wallet = [arrayArchivedWallets objectAtIndex:i];
-            if (!wallet.loaded) {
-                loadingCount++;
-            }
-        }
-
-        dispatch_async(dispatch_get_main_queue(),^{
-            ABLog(2,@"ENTER refreshWallets MainQueue: %@", [NSThread currentThread].name);
-            singleton.arrayWallets = arrayWallets;
-            singleton.arrayArchivedWallets = arrayArchivedWallets;
-            singleton.arrayUUIDs = arrayUUIDs;
-            singleton.arrayWalletNames = arrayWalletNames;
-            singleton.numTotalWallets = [arrayWallets count] + [arrayArchivedWallets count];
-            singleton.numWalletsLoaded = singleton.numTotalWallets  - loadingCount;
-
-            if (loadingCount == 0)
+            //
+            // Update wallet names for various dropdowns
+            //
+            int loadingCount = 0;
+            for (int i = 0; i < [arrayWallets count]; i++)
             {
-                singleton.bAllWalletsLoaded = YES;
-                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADED object:self];
-            }
-            else
-            {
-                singleton.bAllWalletsLoaded = NO;
-            }
-
-            if (nil == singleton.currentWallet)
-            {
-                if ([singleton.arrayWallets count] > 0)
-                {
-                    singleton.currentWallet = [arrayWallets objectAtIndex:0];
+                Wallet *wallet = [arrayWallets objectAtIndex:i];
+                [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+                if (!wallet.loaded) {
+                    loadingCount++;
                 }
-                singleton.currentWalletID = 0;
             }
-            else
+
+            for (int i = 0; i < [arrayArchivedWallets count]; i++)
             {
-                NSString *lastCurrentWalletUUID = singleton.currentWallet.strUUID;
-                singleton.currentWallet = [self selectWalletWithUUID:lastCurrentWalletUUID];
-                singleton.currentWalletID = (int) [singleton.arrayWallets indexOfObject:singleton.currentWallet];
+                Wallet *wallet = [arrayArchivedWallets objectAtIndex:i];
+                if (!wallet.loaded) {
+                    loadingCount++;
+                }
             }
-            [CoreBridge postNotificationWalletsChanged];
 
-            ABLog(2,@"EXIT refreshWallets MainQueue: %@", [NSThread currentThread].name);
+            dispatch_async(dispatch_get_main_queue(),^{
+                ABLog(2,@"ENTER refreshWallets MainQueue: %@", [NSThread currentThread].name);
+                singleton.arrayWallets = arrayWallets;
+                singleton.arrayArchivedWallets = arrayArchivedWallets;
+                singleton.arrayUUIDs = arrayUUIDs;
+                singleton.arrayWalletNames = arrayWalletNames;
+                singleton.numTotalWallets = [arrayWallets count] + [arrayArchivedWallets count];
+                singleton.numWalletsLoaded = singleton.numTotalWallets  - loadingCount;
 
-            if (cb) cb();
+                if (loadingCount == 0)
+                {
+                    singleton.bAllWalletsLoaded = YES;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADED object:self];
+                }
+                else
+                {
+                    singleton.bAllWalletsLoaded = NO;
+                }
 
-        });
-        ABLog(2,@"EXIT refreshWallets WalletQueue: %@", [NSThread currentThread].name);
-    }];
+                if (nil == singleton.currentWallet)
+                {
+                    if ([singleton.arrayWallets count] > 0)
+                    {
+                        singleton.currentWallet = [arrayWallets objectAtIndex:0];
+                    }
+                    singleton.currentWalletID = 0;
+                }
+                else
+                {
+                    NSString *lastCurrentWalletUUID = singleton.currentWallet.strUUID;
+                    singleton.currentWallet = [self selectWalletWithUUID:lastCurrentWalletUUID];
+                    singleton.currentWalletID = (int) [singleton.arrayWallets indexOfObject:singleton.currentWallet];
+                }
+                [CoreBridge postNotificationWalletsChanged];
+
+                ABLog(2,@"EXIT refreshWallets MainQueue: %@", [NSThread currentThread].name);
+
+                if (cb) cb();
+
+            });
+            ABLog(2,@"EXIT refreshWallets WalletQueue: %@", [NSThread currentThread].name);
+        }];
     }];
 
 }
