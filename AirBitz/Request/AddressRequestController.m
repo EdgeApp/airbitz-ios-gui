@@ -20,6 +20,7 @@
     NSString *strName;
     NSString *strCategory;
     NSString *strNotes;
+    NSNumber *maxNumberAddresses;
 //    Wallet   *wallet;
 }
 
@@ -88,6 +89,7 @@
         strName = [dict objectForKey:@"x-source"] ? [dict objectForKey:@"x-source"] : @"";
         strNotes = [dict objectForKey:@"notes"] ? [dict objectForKey:@"notes"] : @"";
         strCategory = [dict objectForKey:@"category"] ? [dict objectForKey:@"category"] : @"";
+        maxNumberAddresses = [dict objectForKey:@"max-number"] ? [dict objectForKey:@"max-number"] : [NSNumber numberWithInt:1];
         _successUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-success"]];
         _errorUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-error"]];
         _cancelUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-cancel"]];
@@ -138,9 +140,9 @@
         NSString *url = [_successUrl absoluteString];
         NSMutableString *query;
         if ([url rangeOfString:@"?"].location == NSNotFound) {
-            query = [[NSMutableString alloc] initWithFormat: @"%@?addr=%@", url, [Util urlencode:strRequestURI]];
+            query = [[NSMutableString alloc] initWithFormat: @"%@?address=%@", url, [Util urlencode:strRequestURI]];
         } else {
-            query = [[NSMutableString alloc] initWithFormat: @"%@&addr=%@", url, [Util urlencode:strRequestURI]];
+            query = [[NSMutableString alloc] initWithFormat: @"%@&address=%@", url, [Util urlencode:strRequestURI]];
         }
         [query appendFormat:@"&x-source=%@", X_SOURCE];
         if ([[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]]) {
