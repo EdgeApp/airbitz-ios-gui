@@ -32,6 +32,7 @@
 #define DOLLAR_CURRENCY_NUMBER	840
 
 static NSDictionary *_localeAsCurrencyNum;
+static long long _logoutTimeStamp = 0;
 
 const int64_t RECOVERY_REMINDER_AMOUNT = 10000000;
 const int RECOVERY_REMINDER_COUNT = 2;
@@ -1424,15 +1425,23 @@ static BOOL bOtpError = NO;
     iLoginTimeSeconds = [CoreBridge saveLogoutDate];
 }
 
-+ (BOOL)didLoginExpire;
++ (BOOL)didLoginExpire:(NSString *)username;
 {
-    long long logoutTimeStamp = [Keychain getKeychainInt:LOGIN_TIME_KEY error:nil];
+    //
+    // If app was killed then the static var _logoutTimeStamp will be zero so we'll pull the cached value
+    // from the iOS Keychain. Also, on non A7 processors, we won't save anything in the keychain so we need
+    // the static var to take care of cases where app is not killed.
+    //
+    if (0 == _logoutTimeStamp)
+    {
+        _logoutTimeStamp = [Keychain getKeychainInt:[Keychain createKeyWithUsername:[LocalSettings controller].cachedUsername key:LOGOUT_TIME_KEY] error:nil];
+    }
 
-    if (!logoutTimeStamp) return YES;
+    if (!_logoutTimeStamp) return YES;
 
     long long currentTimeStamp = [[NSDate date] timeIntervalSince1970];
 
-    if (currentTimeStamp > logoutTimeStamp)
+    if (currentTimeStamp > _logoutTimeStamp)
     {
         return YES;
     }
@@ -1448,11 +1457,11 @@ static BOOL bOtpError = NO;
 + (long) saveLogoutDate;
 {
     long currentTimeStamp = (long) [[NSDate date] timeIntervalSince1970];
-    long logoutTime = currentTimeStamp + (60 * [User Singleton].minutesAutoLogout);
+    _logoutTimeStamp = currentTimeStamp + (60 * [User Singleton].minutesAutoLogout);
 
     // Save in iOS Keychain
-    [Keychain setKeychainInt:logoutTime
-                         key:LOGIN_TIME_KEY
+    [Keychain setKeychainInt:_logoutTimeStamp
+                         key:[Keychain createKeyWithUsername:[User Singleton].name key:LOGOUT_TIME_KEY]
                authenticated:YES];
 
     return currentTimeStamp;

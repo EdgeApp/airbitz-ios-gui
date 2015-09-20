@@ -21,6 +21,8 @@
 @property (nonatomic, retain)   NSMutableArray  *notifications;
 @property (nonatomic, retain)   NSMutableArray  *otpNotifications;
 @property (nonatomic, retain)   NSString        *clientID;
+@property (nonatomic, retain)   NSMutableArray  *touchIDUsersEnabled;
+@property (nonatomic, retain)   NSMutableArray  *touchIDUsersDisabled;
 
 + (void)initAll;
 + (void)freeAll;

@@ -18,7 +18,10 @@
 
 - (void)bringUpSignUpViewInMode:(tSignUpMode)mode;
 - (void)bringUpRecoveryQuestionsView;
+- (void)bringUpEnableTouchIDWithPassword;
 - (void)resetViews;
++ (void) enableTouchID;
++ (void) disableTouchID;
 
 @end
 

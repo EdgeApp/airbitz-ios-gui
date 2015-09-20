@@ -213,7 +213,20 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 {
     BOOL bLoginExpired;
 
-    bLoginExpired = [CoreBridge didLoginExpire];
+    NSString *username;
+    if ([User isLoggedIn])
+        username = [User Singleton].name;
+    else
+        username = [LocalSettings controller].cachedUsername;
+
+    bLoginExpired = [CoreBridge didLoginExpire:username];
+
+    if (bLoginExpired)
+    {
+        // App will not auto login but we will retain login credentials
+        // inside iOS Keychain so we can use TouchID
+        [Keychain disableRelogin:username];
+    }
 
     if (!bLoginExpired || ![User isLoggedIn])
     {
@@ -227,9 +240,6 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 // If the app is *not* active, log the user out
 - (void)autoLogout
 {
-    // App will not auto login but we will retain login credentials
-    // inside iOS Keychain so we can use TouchID
-    [Keychain disableRelogin];
 
     if (![self isAppActive])
     {

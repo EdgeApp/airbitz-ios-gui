@@ -8,12 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#define USERNAME_KEY            @"key_username"
 #define PASSWORD_KEY            @"key_password"
-#define PIN_KEY                 @"key_pin"
 #define RELOGIN_KEY             @"key_relogin"
 #define USE_TOUCHID_KEY         @"key_use_touchid"
-#define LOGIN_TIME_KEY          @"key_logintime"
+#define LOGOUT_TIME_KEY          @"key_logout_time"
 #define SEC_ATTR_SERVICE        @"co.airbitz.airbitz"
 
 @interface Keychain : NSObject
@@ -25,15 +23,20 @@
 + (int64_t) getKeychainInt:(NSString *)key error:(NSError **)error;
 
 + (NSString *) getKeychainString:(NSString *)key error:(NSError **)error;
++ (NSString *) createKeyWithUsername:(NSString *)username key:(NSString *)key;
+
 + (BOOL)authenticateTouchID:(NSString *)promptString fallbackString:(NSString *)fallbackString;
 
-+ (void) disableRelogin;
-+ (void) disableTouchID;
++ (void) disableRelogin:(NSString *)username;
++ (void) disableTouchID:(NSString *)username;
 + (BOOL) disableKeychainBasedOnSettings;
 + (void) clearKeychainInfo;
 + (void) updateLoginKeychainInfo:(NSString *)username
-                             pin:(NSString *)PINCode
                         password:(NSString *)password
-                         relogin:(BOOL) bRelogin;
+                      useTouchID:(BOOL) bUseTouchID;
++ (void) updateLoginKeychainInfo:(NSString *)username
+                        password:(NSString *)password
+                         relogin:(BOOL) bRelogin
+                      useTouchID:(BOOL) bUseTouchID;
 
 @end

@@ -114,6 +114,11 @@
     }
 }
 
++ (NSString *) createKeyWithUsername:(NSString *)username key:(NSString *)key;
+{
+    return [NSString stringWithFormat:@"%@___%@",username,key];
+}
+
 // Authenticate w/touchID
 + (BOOL)authenticateTouchID:(NSString *)promptString fallbackString:(NSString *)fallbackString;
 {
@@ -156,46 +161,45 @@
     return NO;
 }
 
-+ (void) disableRelogin;
++ (void) disableRelogin:(NSString *)username;
 {
     [Keychain setKeychainData:nil
-                          key:RELOGIN_KEY
+                          key:[Keychain createKeyWithUsername:username key:RELOGIN_KEY]
                 authenticated:YES];
 }
 
-+ (void) disableTouchID;
++ (void) disableTouchID:(NSString *)username;
 {
     [Keychain setKeychainData:nil
-                          key:USE_TOUCHID_KEY
+                          key:[Keychain createKeyWithUsername:username key:USE_TOUCHID_KEY]
                 authenticated:YES];
 }
 
-+ (void) clearKeychainInfo;
++ (void) clearKeychainInfo:(NSString *)username;
 {
     [Keychain setKeychainData:nil
-                          key:USERNAME_KEY
+                          key:[Keychain createKeyWithUsername:username key:PASSWORD_KEY]
                 authenticated:YES];
     [Keychain setKeychainData:nil
-                          key:PASSWORD_KEY
+                          key:[Keychain createKeyWithUsername:username key:RELOGIN_KEY]
                 authenticated:YES];
     [Keychain setKeychainData:nil
-                          key:PIN_KEY
-                authenticated:YES];
-    [Keychain setKeychainData:nil
-                          key:RELOGIN_KEY
-                authenticated:YES];
-    [Keychain setKeychainData:nil
-                          key:USE_TOUCHID_KEY
+                          key:[Keychain createKeyWithUsername:username key:USE_TOUCHID_KEY]
                 authenticated:YES];
 }
 
 + (BOOL) disableKeychainBasedOnSettings;
 {
-    [Keychain setKeychainInt:[User Singleton].bDisableFingerprintLogin ? 0 : 1
-                         key:USE_TOUCHID_KEY
+    BOOL disableFingerprint = NO;
+
+    if ([[LocalSettings controller].touchIDUsersDisabled indexOfObject:[User Singleton].name] != NSNotFound)
+        disableFingerprint = YES;
+
+    [Keychain setKeychainInt:disableFingerprint ? 0 : 1
+                         key:[Keychain createKeyWithUsername:[User Singleton].name key:USE_TOUCHID_KEY]
                authenticated:YES];
 
-    if ([User Singleton].bDisablePINLogin && [User Singleton].bDisableFingerprintLogin)
+    if ([User Singleton].bDisablePINLogin && disableFingerprint)
     {
         // If user has disabled TouchID and PIN relogin, then do not use Keychain at all for maximum security
         [self clearKeychainInfo];
@@ -206,25 +210,47 @@
 }
 
 + (void) updateLoginKeychainInfo:(NSString *)username
-                             pin:(NSString *)PINCode
                         password:(NSString *)password
-                         relogin:(BOOL) bRelogin;
+                         relogin:(BOOL) bRelogin
+                      useTouchID:(BOOL) bUseTouchID;
 {
     if ([self disableKeychainBasedOnSettings])
         return;
 
-    [Keychain setKeychainString:username
-                            key:USERNAME_KEY
-                  authenticated:YES];
-    [Keychain setKeychainString:PINCode
-                            key:PIN_KEY
-                  authenticated:YES];
+    NSString *name = [User Singleton].name;
+    
     [Keychain setKeychainInt:bRelogin
-                         key:RELOGIN_KEY
+                         key:[Keychain createKeyWithUsername:[User Singleton].name key:RELOGIN_KEY]
+               authenticated:YES];
+    [Keychain setKeychainInt:bUseTouchID
+                         key:[Keychain createKeyWithUsername:[User Singleton].name key:USE_TOUCHID_KEY]
                authenticated:YES];
     [Keychain setKeychainString:password
-                          key:PASSWORD_KEY
+                            key:[Keychain createKeyWithUsername:[User Singleton].name key:PASSWORD_KEY]
                 authenticated:YES];
+}
+
++ (void) updateLoginKeychainInfo:(NSString *)username
+                        password:(NSString *)password
+                      useTouchID:(BOOL) bUseTouchID;
+{
+    if ([self disableKeychainBasedOnSettings])
+        return;
+
+    NSString *name = [User Singleton].name;
+
+    [Keychain setKeychainInt:1
+                         key:[Keychain createKeyWithUsername:[User Singleton].name key:RELOGIN_KEY]
+               authenticated:YES];
+    [Keychain setKeychainInt:bUseTouchID
+                         key:[Keychain createKeyWithUsername:[User Singleton].name key:USE_TOUCHID_KEY]
+               authenticated:YES];
+    if (password != nil)
+    {
+        [Keychain setKeychainString:password
+                                key:[Keychain createKeyWithUsername:[User Singleton].name key:PASSWORD_KEY]
+                      authenticated:YES];
+    }
 }
 
 @end

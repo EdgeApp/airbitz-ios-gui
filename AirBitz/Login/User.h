@@ -33,7 +33,6 @@
 @property (nonatomic) bool bSpendRequirePin;
 @property (nonatomic) int64_t spendRequirePinSatoshis;
 @property (nonatomic) bool bDisablePINLogin;
-@property (nonatomic) bool bDisableFingerprintLogin;
 @property (nonatomic) NSUInteger sendInvalidEntryCount;
 @property (nonatomic) NSUInteger sendState;
 @property (nonatomic) NSRunLoop *runLoop;

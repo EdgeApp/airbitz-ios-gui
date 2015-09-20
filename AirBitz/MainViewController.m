@@ -956,8 +956,6 @@ MainViewController *singleton;
     [self installRightToLeftSwipeDetection];
 }
 
-
-
 - (void)showPasswordCheckAlert
 {
     NSString *title = NSLocalizedString(@"Remember your password?", nil);
@@ -1684,6 +1682,7 @@ MainViewController *singleton;
 
 - (void)logout
 {
+    [Keychain disableRelogin:[User Singleton].name];
     [FadingAlertView create:self.view
                     message:NSLocalizedString(@"Please wait while Airbitz gracefully exits your account. This may take a while on slow networks.", nil)
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
@@ -1695,7 +1694,6 @@ MainViewController *singleton;
 
                 [FadingAlertView dismiss:YES];
             }];
-    [Keychain disableRelogin];
 }
 
 #pragma mark - Slideout Methods

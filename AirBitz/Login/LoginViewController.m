@@ -28,6 +28,7 @@
 #import "FadingAlertView.h"
 #import "Keychain.h"
 #import "NSMutableData+Secure.h"
+#import "SettingsViewController.h"
 
 typedef enum eLoginMode
 {
@@ -60,6 +61,7 @@ typedef enum eLoginMode
     CGFloat                         _originalPasswordWidth;
     CGFloat                         _originalPINSelectorWidth;
     CGFloat                         _originalTextBitcoinWalletHeight;
+    UIAlertView                     *_enableTouchIDAlertView;
 
 }
 
@@ -266,7 +268,6 @@ static BOOL bInitialized = false;
     [_logoImage addGestureRecognizer:debug];
     [_logoImage setUserInteractionEnabled:YES];
 
-
 }
 
 - (void)uploadLog {
@@ -301,23 +302,23 @@ typedef enum eReloginState
 {
     RELOGIN_DISABLE = 0,
     RELOGIN_USE_PASSWORD,
-    RELOGIN_USE_PIN
 }tReloginState;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
-    [self autoReloginIfPossible];
+    [self autoReloginOrTouchIDIfPossible];
 }
 
-- (void) autoReloginIfPossible
+- (void)autoReloginOrTouchIDIfPossible
 {
+    NSString *username = [LocalSettings controller].cachedUsername;
+
     //
-    // If login expired, then just return
+    // If login expired, then disable relogin but continue validation of TouchID
     //
-    if ([CoreBridge didLoginExpire])
+    if ([CoreBridge didLoginExpire:username])
     {
-        [Keychain disableRelogin];
+        [Keychain disableRelogin:username];
     }
 
     //
@@ -325,40 +326,31 @@ typedef enum eReloginState
     //
     tReloginState reloginState = RELOGIN_DISABLE;
 
-    int64_t bRelogin = [Keychain getKeychainInt:RELOGIN_KEY error:nil];
-    int64_t bUseTouchID = [Keychain getKeychainInt:USE_TOUCHID_KEY error:nil];
 
-    if (!bRelogin && !bUseTouchID) return;
+    NSString *strReloginKey  = [Keychain createKeyWithUsername:username key:RELOGIN_KEY];
+    NSString *strUseTouchID  = [Keychain createKeyWithUsername:username key:USE_TOUCHID_KEY];
+    NSString *strPasswordKey = [Keychain createKeyWithUsername:username key:PASSWORD_KEY];
+    
+    int64_t bRelogin = [Keychain getKeychainInt:strReloginKey error:nil];
+    int64_t bUseTouchID = [Keychain getKeychainInt:strUseTouchID error:nil];
+    NSString *kcPassword = [Keychain getKeychainString:strPasswordKey error:nil];
 
-    NSString *kcUsername = [Keychain getKeychainString:USERNAME_KEY error:nil];
-    NSString *kcPassword = [Keychain getKeychainString:PASSWORD_KEY error:nil];
-    NSString *kcPIN = [Keychain getKeychainString:PIN_KEY error:nil];
+    if (!bRelogin && !bUseTouchID)
+        return;
 
-    if ([kcUsername isEqualToString:[LocalSettings controller].cachedUsername])
+    if ([kcPassword length] >= 10)
     {
-        if ([kcPassword length] >= 10)
-        {
-            reloginState = RELOGIN_USE_PASSWORD;
-        }
-        else
-        {
-            if ([kcPIN length] == 4)
-            {
-                reloginState = RELOGIN_USE_PIN;
-            }
-        }
+        reloginState = RELOGIN_USE_PASSWORD;
     }
 
     if (reloginState)
     {
         if (bUseTouchID && !bRelogin)
         {
-            NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",[Theme Singleton].touchIDPromptText, kcUsername];
+            NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",[Theme Singleton].touchIDPromptText, username];
             NSString *fallbackString;
 
-            if (reloginState == RELOGIN_USE_PIN)
-                fallbackString = [Theme Singleton].usePINText;
-            else if (reloginState == RELOGIN_USE_PASSWORD)
+            if (reloginState == RELOGIN_USE_PASSWORD)
                 fallbackString = [Theme Singleton].usePasswordText;
 
             if ([Keychain authenticateTouchID:prompt fallbackString:fallbackString]) {
@@ -375,15 +367,10 @@ typedef enum eReloginState
             if (reloginState == RELOGIN_USE_PASSWORD)
             {
                 // try to login
-                self.usernameSelector.textField.text = kcUsername;
+                self.usernameSelector.textField.text = username;
                 self.passwordTextField.text = kcPassword;
                 [self showSpinner:YES];
                 [self SignIn];
-            }
-            else if (reloginState == RELOGIN_USE_PIN)
-            {
-                [self showSpinner:YES];
-                [self signIn:kcPIN];
             }
         }
 
@@ -643,10 +630,34 @@ typedef enum eReloginState
                     [[User Singleton] resetPINLoginInvalidEntryCount];
                     [self.delegate LoginViewControllerDidPINLogin];
 
-                    [Keychain updateLoginKeychainInfo:[LocalSettings controller].cachedUsername
-                                                  pin:PINCode
-                                             password:nil
-                                              relogin:YES];
+                    //
+                    // Check if user has not yet been asked to enable touchID on this device
+                    //
+
+                    BOOL onEnabled  = ( [[LocalSettings controller].touchIDUsersEnabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+                    BOOL onDisabled = ( [[LocalSettings controller].touchIDUsersDisabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+
+                    if (!onEnabled && !onDisabled)
+                    {
+                        //
+                        // Ask if they want TouchID enabled for this user on this device
+                        //
+                        NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
+                        NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
+                        _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                                             message:message
+                                                                            delegate:self
+                                                                   cancelButtonTitle:@"Later"
+                                                                   otherButtonTitles:@"OK", nil];
+                        _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
+                        [_enableTouchIDAlertView show];
+                    }
+                    else
+                    {
+                        [Keychain updateLoginKeychainInfo:[User Singleton].name
+                                                 password:[User Singleton].password
+                                               useTouchID:!onDisabled];
+                    }
 
                     break;
                 }
@@ -697,6 +708,8 @@ typedef enum eReloginState
 
 
 }
+
+
 
 
 #pragma mark - Misc Methods
@@ -1007,10 +1020,34 @@ typedef enum eReloginState
            setupPIN:YES];
         [self.delegate loginViewControllerDidLogin:NO newDevice:bNewDeviceLogin];
 
-        [Keychain updateLoginKeychainInfo:[LocalSettings controller].cachedUsername
-                                      pin:nil
-                                 password:self.passwordTextField.text
-                                  relogin:YES];
+        //
+        // Check if user has not yet been asked to enable touchID on this device
+        //
+
+        BOOL onEnabled  = ( [[LocalSettings controller].touchIDUsersEnabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+        BOOL onDisabled = ( [[LocalSettings controller].touchIDUsersDisabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+
+        if (!onEnabled && !onDisabled)
+        {
+            //
+            // Ask if they want TouchID enabled for this user on this device
+            //
+            NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
+            NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
+            _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                                 message:message
+                                                                delegate:self
+                                                       cancelButtonTitle:@"Later"
+                                                       otherButtonTitles:@"OK", nil];
+            _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
+            [_enableTouchIDAlertView show];
+        }
+        else
+        {
+            [Keychain updateLoginKeychainInfo:[User Singleton].name
+                                     password:[User Singleton].password
+                                   useTouchID:!onDisabled];
+        }
 
     } else if (ABC_CC_InvalidOTP == _resultCode) {
         [MainViewController showBackground:NO animate:YES];
@@ -1186,10 +1223,13 @@ typedef enum eReloginState
         bPINModeEnabled = true;
         [self viewDidLoad];
         [self viewWillAppear:true];
+        [self autoReloginOrTouchIDIfPossible];
     }
-    else {
+    else
+    {
         self.usernameSelector.textField.text = account;
         [self.usernameSelector dismissPopupPicker];
+        [self autoReloginOrTouchIDIfPossible];
     }
 }
 
@@ -1275,6 +1315,25 @@ typedef enum eReloginState
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    if (alertView == _enableTouchIDAlertView)
+    {
+        if (0 == buttonIndex)
+        {
+            [SettingsViewController disableTouchID];
+        }
+        else
+        {
+            if ([[User Singleton].password length] > 0)
+                [SettingsViewController enableTouchID];
+            else
+            {
+                // Call SettingsViewController to popup password alert
+#warning "****************** Need to impelment -paulvp ******************"
+            }
+        }
+
+        return;
+    }
     [self.usernameSelector.textField resignFirstResponder];
     // if they said they wanted to delete the account
     if (buttonIndex == 1)
@@ -1293,12 +1352,14 @@ typedef enum eReloginState
     if([CoreBridge PINLoginExists:[LocalSettings controller].cachedUsername])
     {
         [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
+        [self autoReloginOrTouchIDIfPossible];
     }
     else
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self viewDidLoad];
             [self viewWillAppear:true];
+            [self autoReloginOrTouchIDIfPossible];
         }];
     }
 }
