@@ -145,7 +145,7 @@ __strong static DL_URLServer *singleton = nil;  // this will be the one and only
 	{
         singleton = [[DL_URLServer alloc] init];
         singleton.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
-//        singleton.securityPolicy.validatesCertificateChain = NO;
+        singleton.securityPolicy.validatesCertificateChain = NO;
         bInitialized = YES;
 	}
     //ABLog(2,@"%@", singleton);
