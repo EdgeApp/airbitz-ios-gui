@@ -75,7 +75,7 @@
             }
             else
             {
-                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF0CEE8FF) CGColor]];
+                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF0E2E7EE) CGColor]];
             }
             [Util addSubviewWithConstraints:self child:nonBlur];
         }

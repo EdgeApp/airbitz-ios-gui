@@ -222,14 +222,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     self.rotateServerTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].rotateServerInterval target:self selector:@selector(refreshBackground) userInfo:nil repeats:YES];
 
-    // Tweak the colors of fonts if we're in non-blur mode as the background will be too bright to have a white font
-    if (![Theme Singleton].bTranslucencyEnable)
-    {
-        [self.statusLine1 setTextColor:[Theme Singleton].colorTextDark];
-        [self.statusLine2 setTextColor:[Theme Singleton].colorTextDark];
-        [self.statusLine3 setTextColor:[Theme Singleton].colorTextDark];
-        [self.segmentedControlCopyEmailSMS setTintColor:[Theme Singleton].colorTextDark];
-    }
+    [self.statusLine1 setTextColor:[Theme Singleton].colorTextDark];
+    [self.statusLine2 setTextColor:[Theme Singleton].colorTextDark];
+    [self.statusLine3 setTextColor:[Theme Singleton].colorTextDark];
+    [self.segmentedControlCopyEmailSMS setTintColor:[Theme Singleton].colorTextDark];
 }
 
 - (void)updateViews:(NSNotification *)notification
