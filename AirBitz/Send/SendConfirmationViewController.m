@@ -414,6 +414,8 @@
                 [self updateTextFieldContents];
                 if (_pinRequired || _passwordRequired) {
                     [self.withdrawlPIN becomeFirstResponder];
+                } else {
+                    [self dismissKeyboard];
                 }
             });
         }];
