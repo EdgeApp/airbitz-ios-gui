@@ -19,6 +19,9 @@
 @property (nonatomic, strong) NSMutableArray            *arrayUUIDs;
 @property (nonatomic, strong) Wallet                    *currentWallet;
 @property (nonatomic)         int                       currentWalletID;
+@property (nonatomic)         BOOL                      bAllWalletsLoaded;
+@property (nonatomic)         int                       numWalletsLoaded;
+@property (nonatomic)         int                       numTotalWallets;
 
 
 + (CoreBridge *)Singleton;
@@ -29,6 +32,7 @@
 + (void)postToSyncQueue:(void(^)(void))cb;
 + (void)clearSyncQueue;
 + (void)clearTxSearchQueue;
++ (void)postToLoadedQueue:(void(^)(void))cb;
 + (void)postToWalletsQueue:(void(^)(void))cb;
 + (void)postToGenQRQueue:(void(^)(void))cb;
 + (void)postToTxSearchQueue:(void(^)(void))cb;
@@ -43,7 +47,10 @@
 + (void)makeCurrentWalletWithIndex:(NSIndexPath *)indexPath;
 + (void)makeCurrentWalletWithUUID:(NSString *)strUUID;
 + (Wallet *)selectWalletWithUUID:(NSString *)strUUID;
++ (long) saveLogoutDate;
++ (BOOL)didLoginExpire:(NSString *)username;
 
++ (void)updateWidgetQRCode;
 
 
 + (Wallet *)getWallet: (NSString *)walletUUID;
@@ -90,6 +97,8 @@
 + (void)startWatchers;
 + (void)startWatcher:(NSString *)walletUUID;
 + (void)stopWatchers;
++ (void)restoreConnectivity;
++ (void)lostConnectivity;
 + (void)prioritizeAddress:(NSString *)address inWallet:(NSString *)walletUUID;
 + (bool)isTestNet;
 + (NSString *)coreVersion;

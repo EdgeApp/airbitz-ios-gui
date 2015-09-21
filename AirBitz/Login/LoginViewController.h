@@ -26,7 +26,7 @@
 
 @required
 -(void)loginViewControllerDidAbort;
--(void)loginViewControllerDidLogin:(BOOL)bNewAccount;
+-(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice;
 -(void)LoginViewControllerDidPINLogin;
 
 @end

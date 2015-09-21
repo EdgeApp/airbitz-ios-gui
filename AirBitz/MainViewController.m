@@ -41,6 +41,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "DropDownAlertView.h"
+#import "Keychain.h"
 
 typedef enum eAppMode
 {
@@ -86,6 +87,7 @@ typedef enum eAppMode
     InfoView                    *_notificationInfoView;
     BOOL                        firstLaunch;
     BOOL                        sideBarLocked;
+    BOOL                        _bNewDeviceLogin;
 
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
@@ -132,6 +134,8 @@ MainViewController *singleton;
     [FadingAlertView initAll];
 
     singleton = self;
+
+    _bNewDeviceLogin = NO;
 
     NSMutableData *seedData = [[NSMutableData alloc] init];
     [self fillSeedData:seedData];
@@ -188,11 +192,11 @@ MainViewController *singleton;
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    UIInterfaceOrientation toOrientation = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation toOrientation = (UIInterfaceOrientation)[[UIDevice currentDevice] orientation];
     NSNumber *nOrientation = [NSNumber numberWithInteger:toOrientation];
     NSDictionary *dictNotification = @{ KEY_ROTATION_ORIENTATION : nOrientation };
 
-    ABLog(2,@"Woohoo we WILL rotate %d", toOrientation);
+    ABLog(2,@"Woohoo we WILL rotate %d", (int)toOrientation);
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ROTATION_CHANGED object:self userInfo:dictNotification];
 }
 
@@ -775,13 +779,18 @@ MainViewController *singleton;
 			{
 				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
 				{
+                    [_transactionsViewController setNewDeviceLogin:_bNewDeviceLogin];
+                    _bNewDeviceLogin = NO;
+
                     [MainViewController animateSwapViewControllers:_transactionsViewController out:_selectedViewController];
 				}
 				else
 				{
                     [self showFastestLogin];
 				}
-			}
+			} else {
+                [_transactionsViewController dropdownWallets:NO];
+            }
 			break;
 		}
 		case APP_MODE_MORE:
@@ -870,9 +879,12 @@ MainViewController *singleton;
     [_loginViewController removeFromParentViewController];
 }
 
-- (void)loginViewControllerDidLogin:(BOOL)bNewAccount
+-(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice;
 {
 //    self.backgroundView.image = [Theme Singleton].backgroundApp;
+
+    _bNewDeviceLogin = bNewDevice;
+
     if (bNewAccount) {
         [FadingAlertView create:self.view
                         message:[Theme Singleton].creatingWalletText
@@ -943,8 +955,6 @@ MainViewController *singleton;
     // add right to left swipe detection for slideout
     [self installRightToLeftSwipeDetection];
 }
-
-
 
 - (void)showPasswordCheckAlert
 {
@@ -1095,6 +1105,14 @@ MainViewController *singleton;
                 [_receivedAlert dismissWithClickedButtonIndex:0 animated:YES];
             }
         });
+    }
+
+    //
+    // If we just received money on the currentWallet then update the Widget's address & QRcode
+    //
+    if ([_strWalletUUID isEqualToString:[CoreBridge Singleton].currentWallet.strUUID])
+    {
+        [CoreBridge updateWidgetQRCode];
     }
 }
 
@@ -1502,11 +1520,22 @@ MainViewController *singleton;
             _appMode = APP_MODE_SEND;
             [self launchViewControllerBasedOnAppMode];
 
-            [_sendViewController resetViews];
-            _sendViewController.addressTextField.text = [uri absoluteString];
-            [_sendViewController processURI];
+            if ([uri.host isEqual:@"sendqr"] || [uri.path isEqual:@"/sendqr"])
+            {
+                [_sendViewController resetViews];
+                self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
+                _appMode = APP_MODE_SEND;
+                [self launchViewControllerBasedOnAppMode];
+            }
+            else
+            {
+                [_sendViewController resetViews];
+                _sendViewController.addressTextField.text = [uri absoluteString];
+                [_sendViewController processURI];
+            }
         } else {
             _uri = uri;
+
         }
     } else if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:@"airbitz-ret"]
                || [uri.host isEqualToString:@"x-callback-url"]) {
@@ -1604,6 +1633,7 @@ MainViewController *singleton;
 - (void)slideoutLogout
 {
     [slideoutView showSlideout:NO withAnimation:NO];
+
     [self logout];
 }
 
@@ -1617,6 +1647,25 @@ MainViewController *singleton;
 //    [self.view insertSubview:_selectedViewController.view belowSubview:self.tabBar];
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     [slideoutView showSlideout:NO];
+}
+
+- (void)slideoutWallets
+{
+    if (_selectedViewController == _transactionsViewController)
+    {
+        [_transactionsViewController dismissTransactionDetails];
+        [_transactionsViewController dropdownWallets:YES];
+    }
+    else
+    {
+        if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
+            [MainViewController animateSwapViewControllers:_transactionsViewController out:_selectedViewController];
+            self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
+            [_transactionsViewController dropdownWallets:YES];
+        }
+    }
+    [slideoutView showSlideout:NO];
+
 }
 
 - (void)slideoutImport
@@ -1634,8 +1683,9 @@ MainViewController *singleton;
 
 - (void)logout
 {
+    [Keychain disableRelogin:[User Singleton].name];
     [FadingAlertView create:self.view
-                    message:NSLocalizedString(@"Please wait while Airbitz gracefully exits your account. This may take awhile on slow networks", nil)
+                    message:NSLocalizedString(@"Please wait while Airbitz gracefully exits your account. This may take a while on slow networks.", nil)
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
                 // Log the user out and reset UI
                 [[User Singleton] clear];
@@ -1645,7 +1695,6 @@ MainViewController *singleton;
 
                 [FadingAlertView dismiss:YES];
             }];
-
 }
 
 #pragma mark - Slideout Methods
@@ -1685,7 +1734,7 @@ MainViewController *singleton;
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    tAppMode newAppMode;
+    tAppMode newAppMode = APP_MODE_DIRECTORY;
 
     if (item == [self.tabBar.items objectAtIndex:APP_MODE_DIRECTORY])
     {
@@ -1975,6 +2024,11 @@ MainViewController *singleton;
 + (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime
 {
     [FadingAlertView create:singleton.view message:message holdTime:holdTime];
+}
+
++ (void)fadingAlertUpdate:(NSString *)message
+{
+    [FadingAlertView update:message];
 }
 
 + (void)fadingAlertDismiss

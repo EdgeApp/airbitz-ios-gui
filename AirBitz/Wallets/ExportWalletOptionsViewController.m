@@ -24,8 +24,6 @@
 #import "MainViewController.h"
 #import "Theme.h"
 
-#define WALLET_BUTTON_WIDTH         160
-
 #define CELL_HEIGHT 45.0
 
 #define ARRAY_CHOICES_FOR_TYPES @[ \

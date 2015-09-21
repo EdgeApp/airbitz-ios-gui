@@ -469,6 +469,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     UITextField *textField;
     NSString *title;
     NSString *placeholderText;
+    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+    NSString *clipboard = [pb string];
+    NSString *pasteString;
 
 
     switch (segmentedControl.selectedSegmentIndex)
@@ -495,11 +498,21 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 title = [Theme Singleton].enterBitcoinAddressPopupText;
                 placeholderText = [Theme Singleton].enterBitcoinAddressPlaceholder;
             }
+            if ([clipboard length] >= 10)
+            {
+                pasteString = [NSString stringWithFormat:@"%@ \"%@...\"", @"Paste", [clipboard substringToIndex:10]];
+            }
+            else
+            {
+                pasteString = nil;
+            }
+
             typeAddressAlertView =[[UIAlertView alloc ] initWithTitle:title
                                                               message:nil
                                                              delegate:self
                                                     cancelButtonTitle:[Theme Singleton].cancelButtonText
-                                                    otherButtonTitles:[Theme Singleton].doneButtonText, nil];
+//                                                    otherButtonTitles:[Theme Singleton].doneButtonText, nil];
+                                                    otherButtonTitles:[Theme Singleton].doneButtonText, pasteString, nil];
             typeAddressAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
             textField = [typeAddressAlertView textFieldAtIndex:0];
             textField.placeholder = placeholderText;
@@ -530,8 +543,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (alertView == typeAddressAlertView)
     {
-        _addressTextField.text = [alertView textFieldAtIndex:0].text;
-        [self processURI];
+        if (1 == buttonIndex)
+        {
+            _addressTextField.text = [alertView textFieldAtIndex:0].text;
+        }
+        else if (2 == buttonIndex)
+        {
+            UIPasteboard *pb = [UIPasteboard generalPasteboard];
+            _addressTextField.text = [pb string];
+        }
+        if (buttonIndex > 0) // 0 == CANCEL
+        {
+            if ([_addressTextField.text length] > 0)
+                [self processURI];
+        }
     }
     else if (_tweetAlert == alertView)
     {
@@ -564,29 +589,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     CFErrorRef error;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 	
-    __block BOOL accessGranted = NO;
-	
-    if (ABAddressBookRequestAccessWithCompletion != NULL)
-    {
-        // we're on iOS 6
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-		
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
-                                                 {
-                                                     accessGranted = granted;
-                                                     dispatch_semaphore_signal(sema);
-                                                 });
-		
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        //dispatch_release(sema);
-    }
-    else
-    {
-        // we're on iOS 5 or older
-        accessGranted = YES;
-    }
-	
-    if (accessGranted)
     {
         CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
         for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
@@ -741,7 +743,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 			for(int i = 0; i < self.peripheralContainers.count; i++)
 			{
 				PeripheralContainer *container = [self.peripheralContainers objectAtIndex:i];
-				if ([self UUIDSAreEqual:container.peripheral.UUID u2:peripheral.UUID])
+				if ([container.peripheral.identifier.UUIDString isEqualToString:peripheral.identifier.UUIDString])
 				{
 					[self.peripheralContainers replaceObjectAtIndex:i withObject:pc];
 					// printf("Duplicate UUID found updating ...\r\n");
@@ -1077,9 +1079,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         PeripheralContainer *p = [self.peripheralContainers objectAtIndex:i];
 		
-        CFStringRef s = CFUUIDCreateString(NULL, p.peripheral.UUID);
-        printf("%d  |  %s\r\n",i,CFStringGetCStringPtr(s, 0));
-        CFRelease(s);
+//        CFStringRef s = p.peripheral.identifier.UUIDString;
+//        CFStringRef s = CFUUIDCreateString(NULL, p.peripheral.identifier.UUIDString);
+//        printf("%d  |  %s\r\n",i,CFStringGetCStringPtr(s, 0));
+//        CFRelease(s);
         [self printPeripheralInfo:p];
     }
 }
@@ -1094,13 +1097,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void) printPeripheralInfo:(PeripheralContainer*)peripheralContainer
 {
-    CFStringRef s = CFUUIDCreateString(NULL, peripheralContainer.peripheral.UUID);
-    printf("------------------------------------\r\n");
-    printf("Peripheral Info :\r\n");
-    printf("UUID : %s\r\n",CFStringGetCStringPtr(s, 0));
-    CFRelease(s);
-    printf("RSSI : %d\r\n",[peripheralContainer.peripheral.RSSI intValue]);
-    ABLog(2,@"Name : %@\r\n",peripheralContainer.peripheral.name);
+//    CFStringRef s = CFUUIDCreateString(NULL, peripheralContainer.peripheral.UUID);
+//    printf("------------------------------------\r\n");
+//    printf("Peripheral Info :\r\n");
+//    printf("UUID : %s\r\n",CFStringGetCStringPtr(s, 0));
+//    CFRelease(s);
+//    printf("RSSI : %d\r\n",[peripheralContainer.peripheral.RSSI intValue]);
+//    ABLog(2,@"Name : %@\r\n",peripheralContainer.peripheral.name);
 	BOOL connected = NO;
 	if(peripheralContainer.peripheral.state == CBPeripheralStateConnected)
 	{
@@ -1685,10 +1688,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)processURI
 {
     // Added to wallet queue since wallets are loaded asynchronously
-    [CoreBridge postToWalletsQueue:^(void) {
-        dispatch_async(dispatch_get_main_queue(),^{
-            [self doProcessURI];
-        });
+    [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    [CoreBridge postToLoadedQueue:^(void) {
+        [CoreBridge postToWalletsQueue:^(void) {
+            dispatch_async(dispatch_get_main_queue(),^{
+                [self doProcessURI];
+            });
+        }];
     }];
 }
 
@@ -1707,7 +1714,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
             [spendTarget newTransfer:wallet.strUUID error:&error];
             [self showSendConfirmationTo:spendTarget];
-
+            [MainViewController fadingAlertDismiss];
         }
         else
         {
@@ -1716,6 +1723,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 if ([self importWallet:text]) {
                     [self stopQRReader];
                 }
+                [MainViewController fadingAlertDismiss];
             }
             else
             {
@@ -1734,6 +1742,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self stopQRReader];
                 [self showSendConfirmationTo:spendTarget];
+                [MainViewController fadingAlertDismiss];
+
             });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{

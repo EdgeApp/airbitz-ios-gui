@@ -84,6 +84,7 @@ typedef enum eRequestType
 @property (nonatomic, weak) IBOutlet UIView                 *contentView;
 @property (nonatomic, weak) IBOutlet UIView                 *scrollableContentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calculatorBottom;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
 
 @property (weak, nonatomic) IBOutlet UIView                 *viewPhoto;
 @property (weak, nonatomic) IBOutlet UIButton               *imagePhotoButton;
@@ -159,6 +160,7 @@ typedef enum eRequestType
     self.arrayThumbnailsToRetrieve = [[NSMutableArray alloc] init];
     self.arrayThumbnailsRetrieving = [[NSMutableArray alloc] init];
     self.arrayAutoCompleteQueries = [[NSMutableArray alloc] init];
+    [self.spinnerView startAnimating];
 
     // if there is a photo, then add it as the first photo in our images
     if (self.photo)
@@ -201,7 +203,7 @@ typedef enum eRequestType
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
     self.pickerTextCategory.textField.returnKeyType = UIReturnKeyDone;
-    self.notesTextView.returnKeyType = UIReturnKeyDone;
+    self.notesTextView.returnKeyType = UIReturnKeyDefault;
 
     // load all the names from the address book
     [self generateListOfContactNames];
@@ -232,8 +234,6 @@ typedef enum eRequestType
     self.pickerTextCategory.textField.tintColor = [UIColor whiteColor];
     [self.pickerTextCategory setTopMostView:self.view];
     [self.pickerTextCategory setCategories:self.arrayCategories];
-    //self.pickerTextCategory.pickerMaxChoicesVisible = PICKER_MAX_CELLS_VISIBLE;
-//    self.pickerTextCategory.cropPointBottom = 360; // magic number
     self.pickerTextCategory.delegate = self;
 
     _bizId = self.transaction.bizId;
@@ -245,6 +245,15 @@ typedef enum eRequestType
     self.nameTextField.text = self.transaction.strName;
     self.notesTextView.text = self.transaction.strNotes;
     self.pickerTextCategory.textField.text = self.transaction.strCategory;
+
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
+
+    UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:nil action:@selector(notesTextViewDone)];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    toolbar.items = [NSArray arrayWithObjects:leftButton, flex, barButton, nil];
+
+    self.notesTextView.inputAccessoryView = toolbar;
 
     NSString *strPrefix;
     strPrefix = [self categoryPrefix:self.pickerTextCategory.textField.text];
@@ -290,6 +299,8 @@ typedef enum eRequestType
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
+
+    self.spinnerView.hidden = YES;
 
     if (_originalFrame.size.height == 0)
     {
@@ -369,7 +380,7 @@ typedef enum eRequestType
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Transaction Details", @"Transaction Details header text")];
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Exit:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -517,10 +528,11 @@ typedef enum eRequestType
 
     if (bSomethingChanged)
     {
+        self.spinnerView.hidden = NO;
         [CoreBridge storeTransaction: self.transaction];
     }
 
-    [CoreBridge postToMiscQueue:^{
+    [CoreBridge postToTxSearchQueue:^{
         if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
             _recoveryAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
@@ -742,29 +754,6 @@ typedef enum eRequestType
     CFErrorRef error;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 
-    __block BOOL accessGranted = NO;
-
-    if (ABAddressBookRequestAccessWithCompletion != NULL)
-    {
-        // we're on iOS 6
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
-                                                 {
-                                                     accessGranted = granted;
-                                                     dispatch_semaphore_signal(sema);
-                                                 });
-
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        //dispatch_release(sema);
-    }
-    else
-    {
-        // we're on iOS 5 or older
-        accessGranted = YES;
-    }
-
-    if (accessGranted)
     {
         CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
         for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
@@ -1592,29 +1581,31 @@ typedef enum eRequestType
 
 #pragma mark - UITextView delegates
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    if ([text isEqualToString:(NSString *) @"\n"])
-    {
-        [self scrollContentViewBackToOriginalPosition];
-        [textView resignFirstResponder];
-    }
-    return YES;
-}
-
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     _activeTextView = textView;
     
-    CGRect scrollFrame = self.scrollableContentView.frame;
-    
     if (textView == self.notesTextView)
     {
-//        scrollFrame.origin.y = -self.notesTextView.frame.origin.y + 30;
         [self scrollContentViewToFrame:self.notesTextView.frame];
         [self dismissPayeeTable];
     }
     
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    if (textView == self.notesTextView) {
+        [self scrollContentViewBackToOriginalPosition];
+        return YES;
+    }
+    return NO;
+}
+
+- (void)notesTextViewDone
+{
+    [self.notesTextView resignFirstResponder];
+
 }
 
 #pragma mark - UITextField delegates
@@ -1628,8 +1619,6 @@ typedef enum eRequestType
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     _activeTextField = textField;
-
-    CGRect scrollFrame = self.scrollableContentView.frame;
 
     if (textField == self.nameTextField)
     {

@@ -32,15 +32,11 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView            *imageEditBox;
-//@property (nonatomic, weak) IBOutlet ButtonSelectorView2    *buttonSelectorView;
 @property (weak, nonatomic) IBOutlet UILabel                *labelOnline;
 @property (weak, nonatomic) IBOutlet UILabel                *labelOffline;
 @property (weak, nonatomic) IBOutlet UISwitch               *switchOnlineOffline;
-//@property (weak, nonatomic) IBOutlet UIView                 *viewBlocker;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-//@property (nonatomic, strong)   NSArray                     *arrayCurrencyNums;
-//@property (nonatomic, strong)   NSArray                     *arrayCurrencyCodes;
 @property (nonatomic, copy)     NSString                    *strReason;
 @property (nonatomic, assign)   BOOL                        bSuccess;
 @property (weak, nonatomic) IBOutlet PopupPickerView *popupPickerCurrency;
@@ -62,17 +58,14 @@
     return self;
 }
 
-//- (id)initWithCoder:(NSCoder *)aDecoder
-- (id)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect)rect
 {
-//    if ((self = [super initWithCoder:aDecoder]))
 	{
 		UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"WalletMakerView~iphone" owner:self options:nil] objectAtIndex:0];
 		view.frame = self.bounds;
         [self addSubview:view];
 
         self.textField.delegate = self;
-//		self.buttonSelectorView.delegate = self;
 
         _bCreatingWallet = NO;
 		
@@ -98,18 +91,11 @@
                 [arrayCurrencyCodes addObject:[NSString stringWithUTF8String:currencyArray[i].szCode]];
 			}
 
-//			self.buttonSelectorView.arrayItemsToSelect = arrayCurrencyStrings;
-//            [self.buttonSelectorView.button setBackgroundImage:nil forState:UIControlStateNormal];
-//            [self.buttonSelectorView.button setBackgroundImage:nil forState:UIControlStateSelected];
-//            self.buttonSelectorView.textLabel.text = @"";
-
-//            self.arrayCurrencyNums = arrayCurrencyNums;
-//            self.arrayCurrencyCodes = arrayCurrencyCodes;
 		}
 
         [self reset];
     }
-    return self;
+    return;
 }
 
 #pragma mark - Action Methods
@@ -286,7 +272,7 @@
 
 - (IBAction)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
 {
-   _currencyChoice = row;
+    _currencyChoice = (int) row;
     NSNumber *currencyNum = [arrayCurrencyNums objectAtIndex:_currencyChoice];
     NSString *currencyString = [CoreBridge currencyAbbrevLookup:[currencyNum intValue]];
 

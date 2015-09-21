@@ -49,7 +49,7 @@
 {
 	[self.textField removeFromSuperview];
 	
-    self.textField = newTextField;
+    self.textField = (StylizedTextField3 *)newTextField;
 
 	self.textField.frame = self.bounds;
 	[self addSubview:self.textField];
@@ -342,7 +342,7 @@
 
 - (void) PopupPickerViewDidTouchAccessory:(PopupPickerView *)view categoryString:(NSString *)catString
 {
-    if ([self.delegate respondsToSelector:@selector(pickerTextViewDidAddCategory:categoryString:)])
+    if ([self.delegate respondsToSelector:@selector(pickerTextViewDidTouchAccessory:categoryString:)])
     {
         [self.delegate pickerTextViewDidTouchAccessory:self categoryString:catString];
     }

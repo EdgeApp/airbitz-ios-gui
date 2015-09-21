@@ -22,10 +22,10 @@
 #import "NSString+StripHTML.h"
 #import "Reachability.h"
 #import "Util.h"
+#import "Keychain.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
-NSDate *logoutDate = NULL;
 
 @implementation AppDelegate
 
@@ -113,9 +113,7 @@ NSDate *logoutDate = NULL;
 
     if ([User isLoggedIn])
     {
-        logoutDate = [NSDate date];
-        
-        // multiply to get the time in seconds
+        [CoreBridge saveLogoutDate];
     }
 }
 
@@ -213,27 +211,43 @@ NSDate *logoutDate = NULL;
 // or network fetch log the user out
 - (void)checkLoginExpired
 {
-    if (!logoutDate || ![User isLoggedIn])
+    BOOL bLoginExpired;
+
+    NSString *username;
+    if ([User isLoggedIn])
+        username = [User Singleton].name;
+    else
+        username = [LocalSettings controller].cachedUsername;
+
+    bLoginExpired = [CoreBridge didLoginExpire:username];
+
+    if (bLoginExpired)
+    {
+        // App will not auto login but we will retain login credentials
+        // inside iOS Keychain so we can use TouchID
+        [Keychain disableRelogin:username];
+    }
+
+    if (!bLoginExpired || ![User isLoggedIn])
     {
         return;
     }
-    NSDate *now = [NSDate date];
-    // divide to get the time in minutes
-    int minutes = [now timeIntervalSinceDate:logoutDate] / 60.0;
-    if (minutes >= [User Singleton].minutesAutoLogout) {
-        [self autoLogout];
-    }
+
+    [self autoLogout];
 }
+
 
 // If the app is *not* active, log the user out
 - (void)autoLogout
 {
+
     if (![self isAppActive])
     {
         [[User Singleton] clear];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
     }
     [self bgLogoutCleanup];
+
 }
 
 - (BOOL)isAppActive
@@ -299,8 +313,7 @@ NSDate *logoutDate = NULL;
 {
     Reachability *reachability = (Reachability *)[notification object];
     if ([reachability isReachable]) {
-        [CoreBridge connectWatchers];
-        [CoreBridge startQueues];
+        [CoreBridge restoreConnectivity];
     }
 }
 

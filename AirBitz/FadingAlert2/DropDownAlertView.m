@@ -11,7 +11,6 @@
 @interface DropDownAlertView ()
 {
 }
-- (void)fadeOutView:(UIView *)view completion:(void (^)(BOOL finished))completion;
 - (void)hideAlertByTap:(UITapGestureRecognizer *)sender;
 
 @property (weak, nonatomic) IBOutlet UIView *parentView;

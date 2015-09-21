@@ -75,7 +75,17 @@
 @property (nonatomic) NSString *twoFactorText;
 @property (nonatomic) NSString *importText;
 @property (nonatomic) NSString *passwordRecoveryText;
+@property (nonatomic) NSString *passwordMismatchText;
 @property (nonatomic) NSString *defaultCurrencyInfoText;
+@property (nonatomic) NSString *touchIDPromptText;
+@property (nonatomic) NSString *usePINText;
+@property (nonatomic) NSString *usePasswordText;
+@property (nonatomic) NSString *twofactorWarningText;
+@property (nonatomic) NSString *loadingWalletsText;
+@property (nonatomic) NSString *loadingWalletsNewDeviceText;
+@property (nonatomic) NSString *loadingTransactionsText;
+
+
 
 
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
@@ -109,6 +119,7 @@
 
 @property (nonatomic) CGFloat qrCodeGenDelayTime;
 @property (nonatomic) CGFloat rotateServerInterval;
+@property (nonatomic) CGFloat walletLoadingTimerInterval;
 
 + (void)initAll;
 + (void)freeAll;

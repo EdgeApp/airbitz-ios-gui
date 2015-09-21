@@ -25,7 +25,7 @@
 
 #define POPUP_STROKE_WIDTH		0.0	//width of the thin border around the entire popup picker
 
-@interface PopupPickerView2 () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
+@interface PopupPickerView2 () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, WalletHeaderViewDelegate>
 {
     BOOL                        _bShowOptions;
     BOOL                        _bDisableBackgroundTouch;
@@ -146,10 +146,6 @@ CGRect keyboardFrame;
     // set new height and width
     popup.frame = newFrame;
     
-    // calculate the parent's size (for use later)
-    CGSize parentFrameSize = parentView.frame.size;
-    CGFloat newY;
-
     newFrame.size.width = [MainViewController getWidth];
     newFrame.origin.x = 0;
     newFrame.size.height = [MainViewController getHeight] - [MainViewController getHeaderHeight] - [MainViewController getFooterHeight];

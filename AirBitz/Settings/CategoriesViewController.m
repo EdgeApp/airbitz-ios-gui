@@ -26,7 +26,7 @@
 
 #define POS_THRESHOLD_TO_GET_3_CHOICES  180.0
 
-@interface CategoriesViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate, CategoriesCellDelegate, PickerTextViewDelegate>
+@interface CategoriesViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate, CategoriesCellDelegate, PickerTextView3Delegate>
 {
     char            **_aszCategories;
     unsigned int    _count;
@@ -84,7 +84,6 @@
 
     // get a callback when the search changes
     [self.textSearch addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
     // set up the specifics on our picker text view
     self.pickerTextNew.textField.returnKeyType = UIReturnKeyDone;

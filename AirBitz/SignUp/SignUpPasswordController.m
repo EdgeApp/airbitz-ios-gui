@@ -61,8 +61,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-
     [self.pinTextField addTarget:self action:@selector(pinTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.passwordTextField addTarget:self action:@selector(passwordTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     
@@ -85,17 +83,15 @@
 
 #pragma mark - Action Methods
 
--(IBAction)back:(id)sender
-{
-    [super back];
-}
-
 - (void)next
 {
     // check the new password fields
     if ([self newPasswordFieldsAreValid] == YES && [self fieldsAreValid] == YES)
     {
         [FadingAlertView create:self.view message:NSLocalizedString(@"Creating and securing account", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        [_passwordTextField resignFirstResponder];
+        [_reenterPasswordTextField resignFirstResponder];
+        [_pinTextField resignFirstResponder];
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             tABC_Error error;
@@ -118,6 +114,7 @@
                     
                     [User login:self.manager.strUserName password:self.passwordTextField.text setupPIN:YES];
                     [CoreBridge setupNewAccount];
+
                     [super next];
                 }
                 else
@@ -140,9 +137,13 @@
 - (BOOL)newPasswordFieldsAreValid
 {
     // Allow accounts with an empty password
-    if ([self.passwordTextField.text length] == 0
-            && [self.reenterPasswordTextField.text length] == 0) {
-        return YES;
+    if ([self.passwordTextField.text length] == 0) {
+        if ([self.reenterPasswordTextField.text length] == 0) {
+            return YES;
+        } else {
+            [self showPasswordMismatch];
+            return false;
+        }
     }
 
     BOOL bNewPasswordFieldsAreValid = YES;
@@ -187,19 +188,22 @@
         else if ([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text] == NO)
         {
             bNewPasswordFieldsAreValid = NO;
-            UIAlertView *alert = [[UIAlertView alloc]
-                    initWithTitle:self.labelString
-                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                                             self.labelString,
-                                          NSLocalizedString(@"Password does not match re-entered password", @"")]
-                         delegate:nil
-                cancelButtonTitle:@"OK"
-                otherButtonTitles:nil];
-            [alert show];
+            [self showPasswordMismatch];
         }
     }
 
     return bNewPasswordFieldsAreValid;
+}
+
+- (void)showPasswordMismatch
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+            initWithTitle:self.labelString
+                    message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelString, [Theme Singleton].passwordMismatchText]
+                    delegate:nil
+        cancelButtonTitle:@"OK"
+        otherButtonTitles:nil];
+    [alert show];
 }
 
 // checks the pin field

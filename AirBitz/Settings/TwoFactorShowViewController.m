@@ -149,7 +149,7 @@
             [self checkRequest];
         });
         if (bMsg) {
-            [MainViewController fadingAlert:NSLocalizedString(@"Two Factor Enabled", nil)];
+            [MainViewController fadingAlert:[Theme Singleton].twofactorWarningText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
         }
     } else {
         if (bMsg) {

@@ -155,6 +155,7 @@
     _totalSentToday = [CoreBridge getTotalSentToday:[CoreBridge Singleton].currentWallet];
 
     [self checkAuthorization];
+    [_confirmationSlider resetIn:0.1];
 
     // add left to right swipe detection for going back
 //    [self installLeftToRightSwipeDetection];
@@ -169,6 +170,11 @@
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
+}
+
+- (void)viewWillAppear
+{
+    [_confirmationSlider resetIn:0.1];
 }
 
 - (void)transactionDetailsExit
@@ -408,6 +414,8 @@
                 [self updateTextFieldContents];
                 if (_pinRequired || _passwordRequired) {
                     [self.withdrawlPIN becomeFirstResponder];
+                } else {
+                    [self dismissKeyboard];
                 }
             });
         }];
@@ -827,6 +835,7 @@
            [self fadingAlertDelayed:[NSString stringWithFormat:
                 NSLocalizedString(@"Please wait %.0f seconds before retrying %@", nil), remaining, entry]];
         }
+        [_confirmationSlider resetIn:remaining];
     }
     else
     {
@@ -858,7 +867,6 @@
             [self continueChecks];
         }
     }
-    [_confirmationSlider resetIn:1.0];
 }
 
 - (void)fadingAlertDelayed:(NSString *)message
@@ -880,6 +888,7 @@
         [MainViewController fadingAlert:NSLocalizedString(@"Incorrect password", nil)];
         [_withdrawlPIN becomeFirstResponder];
         [_withdrawlPIN selectAll:nil];
+        [_confirmationSlider resetIn:1.0];
     }
 }
 
@@ -949,6 +958,7 @@
             }
             [self hideSendStatus];
         }
+        [_confirmationSlider resetIn:1.0];
     });
 }
 
@@ -958,6 +968,7 @@
     NSString *message = [Util errorMap:&Error];
     NSArray *params = [NSArray arrayWithObjects: title, message, nil];
     dispatch_async(dispatch_get_main_queue(), ^(void) {
+        [_confirmationSlider resetIn:1.0];
         if (_bAdvanceToTx) {
             [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
         } else {

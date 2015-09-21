@@ -382,7 +382,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
             NSNumber *typeEnum = [BD_Social_Cell getSocialTypeAsEnum:type];
             if (typeEnum != [NSNumber numberWithInt:kNull])
             {
-                NSDictionary *rowData = @{[NSNumber numberWithInt:[rowTypes count]] : typeEnum};
+                NSDictionary *rowData = @{[NSNumber numberWithInt:(int)[rowTypes count]] : typeEnum};
                 [socialRows addObject:rowData];
 
                 [rowTypes addObject:[NSNumber numberWithInt:kSocial]];
@@ -709,7 +709,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	{
         for (NSDictionary *pair in socialRows)
         {
-            NSNumber *socialType = [pair objectForKey:[NSNumber numberWithInt:row]];
+            NSNumber *socialType = [pair objectForKey:[NSNumber numberWithInt:(int)row]];
             if (socialType)
             {
                 commonCell.cellIcon.hidden = NO;
@@ -846,7 +846,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
                     NSNumber *typeEnum = [BD_Social_Cell getSocialTypeAsEnum:type];
                     for (NSDictionary *pair in socialRows)
                     {
-                        NSNumber *socialType = [pair objectForKey:[NSNumber numberWithInt:indexPath.row]];
+                        NSNumber *socialType = [pair objectForKey:[NSNumber numberWithInt:(int)indexPath.row]];
                         if (typeEnum == socialType)
                         {
                             NSString *urlStr = [data objectForKey:@"social_url"];

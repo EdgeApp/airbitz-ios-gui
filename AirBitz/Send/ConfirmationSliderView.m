@@ -13,10 +13,12 @@
 @interface ConfirmationSliderView ()
 {
 	CGPoint touchOffset;
-	CGRect originalButtonFrame;
+	CGRect  originalButtonFrame;
+	BOOL 	bAllowTouches;
 }
 @property (nonatomic, weak) IBOutlet UIImageView *button;
 @property (nonatomic, weak) IBOutlet UILabel *confirmText;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
 
 @end
 
@@ -28,6 +30,8 @@
     if (self) {
         // Initialization code
     }
+	bAllowTouches = YES;
+    self.spinnerView.hidden = YES;
     return self;
 }
 
@@ -45,6 +49,9 @@
 
 -(void)resetIn:(NSTimeInterval)timeToReset
 {
+	bAllowTouches = YES;
+    self.spinnerView.hidden = YES;
+    [self.spinnerView startAnimating];
 	[self animateToOriginalPositionWithDelay:timeToReset];
 }
 
@@ -66,6 +73,8 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+	if (!bAllowTouches) return;
+
 	UITouch *touch = [touches anyObject];
 	CGPoint touchPoint = [touch locationInView:self];
 	
@@ -79,6 +88,8 @@
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+	if (!bAllowTouches) return;
+
 	UITouch *touch = [touches anyObject];
 	CGPoint touchPoint = [touch locationInView:self];
 	
@@ -105,6 +116,8 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+	if (!bAllowTouches) return;
+
 	if((self.button.frame.origin.x + (self.button.frame.size.width / 2.0)) > (self.bounds.size.width * CONFIRMATION_THRESHOLD))
 	{
 		//slide back
@@ -125,6 +138,8 @@
 		 completion:^(BOOL finished)
 		 {
 			[self.delegate ConfirmationSliderDidConfirm:self];
+			 bAllowTouches = NO;
+             self.spinnerView.hidden = NO;
 		 }];
 	}
 }

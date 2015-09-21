@@ -32,6 +32,7 @@
 #import "AudioController.h"
 #import "RecipientViewController.h"
 #import "DropDownAlertView.h"
+#import "AppGroupConstants.h"
 
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
@@ -61,7 +62,7 @@ typedef enum eAddressPickerType
 static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 @interface RequestViewController () <UITextFieldDelegate, CalculatorViewDelegate, ButtonSelector2Delegate,FadingAlertViewDelegate,CBPeripheralManagerDelegate,
-                                     ImportWalletViewControllerDelegate,RecipientViewControllerDelegate>
+                                     ImportWalletViewControllerDelegate,RecipientViewControllerDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
@@ -76,7 +77,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     NSString                    *statusString;
     NSString                    *addressString;
     NSString                    *_uriString;
-    NSMutableString                    *previousWalletUUID;
+    NSString                    *previousWalletUUID;
     BOOL                        bLastCalculatorState;
     tAddressPickerType          _addressPickerType;
 
@@ -221,14 +222,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     self.rotateServerTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].rotateServerInterval target:self selector:@selector(refreshBackground) userInfo:nil repeats:YES];
 
-    // Tweak the colors of fonts if we're in non-blur mode as the background will be too bright to have a white font
-    if (![Theme Singleton].bTranslucencyEnable)
-    {
-        [self.statusLine1 setTextColor:[Theme Singleton].colorTextDark];
-        [self.statusLine2 setTextColor:[Theme Singleton].colorTextDark];
-        [self.statusLine3 setTextColor:[Theme Singleton].colorTextDark];
-        [self.segmentedControlCopyEmailSMS setTintColor:[Theme Singleton].colorTextDark];
-    }
+    [self.statusLine1 setTextColor:[Theme Singleton].colorTextDark];
+    [self.statusLine2 setTextColor:[Theme Singleton].colorTextDark];
+    [self.statusLine3 setTextColor:[Theme Singleton].colorTextDark];
+    [self.segmentedControlCopyEmailSMS setTintColor:[Theme Singleton].colorTextDark];
 }
 
 - (void)updateViews:(NSNotification *)notification
@@ -562,6 +559,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     switch (self.state) {
         case kRequest:
+        case kNone:
         case kDone:
         {
             self.statusLine2.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
@@ -607,7 +605,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     NSArray *args = [NSArray arrayWithObjects:strName,strUUID,nsCurrencyNum,strNotes,strCategory,strRequestID,strRequestURI,strRequestAddress,nsRemaining,nil];
 
-    ABLog(2,@"updateQRCode setTimer req=%d", [nsRemaining longLongValue]);
+    ABLog(2,@"updateQRCode setTimer req=%llu", [nsRemaining longLongValue]);
     self.qrTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].qrCodeGenDelayTime target:self selector:@selector(updateQRAsync:) userInfo:args repeats:NO];
 
 
@@ -638,16 +636,16 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     NSString *strNotes = [args objectAtIndex:i++];
     NSString *strCategory = [args objectAtIndex:i++];
-    NSString *strRequestID = [args objectAtIndex:i++];
-    NSString *strRequestURI = [args objectAtIndex:i++];
-    NSString *strRequestAddress = [args objectAtIndex:i++];
+    NSMutableString *strRequestID = [args objectAtIndex:i++];
+    NSMutableString *strRequestURI = [args objectAtIndex:i++];
+    NSMutableString *strRequestAddress = [args objectAtIndex:i++];
     NSNumber *nsRemaining = [args objectAtIndex:i++];
 
     SInt64 remaining = [nsRemaining longLongValue];
 
     [CoreBridge postToGenQRQueue:^(void) {
 
-        ABLog(2,@"updateQRAsync Do actual QR update str=%d",remaining);
+        ABLog(2,@"updateQRAsync Do actual QR update str=%llu",remaining);
         UIImage *qrImage = [self createRequestQRImageFor:strName walletUUID:strUUID currencyNum:currencyNum withNotes:strNotes withCategory:strCategory
                                         storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
                                             scaleAndSave:NO withAmount:remaining];
@@ -740,7 +738,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     UILabel *bottomLabel;
     UILabel *topLabel;
     CGRect fiatFrame, btcFrame;
-    Wallet *wallet = [self getCurrentWallet];
 
     if (bFiat)
     {
@@ -791,7 +788,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.btcWidth.constant = btcFrame.size.width;
     self.btcHeight.constant = btcFrame.size.height;
 
-    UIColor *color = [UIColor lightGrayColor];
     NSString *string = NSLocalizedString(@"Enter Amount (optional)", "Placeholder text for Receive screen amount");
     self.currentTopField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:string attributes:@{NSForegroundColorAttributeName: [Theme Singleton].colorRequestTopTextFieldPlaceholder}];
 
@@ -1284,29 +1280,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     CFErrorRef error;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 
-    __block BOOL accessGranted = NO;
-
-    if (ABAddressBookRequestAccessWithCompletion != NULL)
-    {
-        // we're on iOS 6
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
-        {
-            accessGranted = granted;
-            dispatch_semaphore_signal(sema);
-        });
-
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        //dispatch_release(sema);
-    }
-    else
-    {
-        // we're on iOS 5 or older
-        accessGranted = YES;
-    }
-
-    if (accessGranted)
     {
         CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
         for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
@@ -1709,13 +1682,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [self updateViews:nil];
 }
 
-- (void)installLeftToRightSwipeDetection
-{
-    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeLeftToRight:)];
-    gesture.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:gesture];
-}
-
 // used by the guesture recognizer to ignore exit
 - (BOOL)haveSubViewsShowing
 {
@@ -1911,6 +1877,5 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     [self dismissRecipient];
 }
-
 
 @end

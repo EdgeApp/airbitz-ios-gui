@@ -15,7 +15,6 @@
 
 @interface BlurView ()
 {
-    UIToolbar *toolbarBlur;
     UIVisualEffectView    *blurEffectView;
     UIView *backgroundVibrancyView;
     UIView *nonBlur;
@@ -23,9 +22,6 @@
 }
 
 @property (nonatomic)  NSInteger blurStyle;
-@property (nonatomic)  BOOL       bSetBlurStyleExtraLight;
-@property (nonatomic)  BOOL       bSetBlurStyleDark;
-@property (nonatomic)  BOOL       bForceBlur;
 @property (nonatomic)  UIBlurEffectStyle currentBlurStyle;
 
 @end
@@ -79,7 +75,7 @@
             }
             else
             {
-                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF0CEE8FF) CGColor]];
+                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF0E2E7EE) CGColor]];
             }
             [Util addSubviewWithConstraints:self child:nonBlur];
         }

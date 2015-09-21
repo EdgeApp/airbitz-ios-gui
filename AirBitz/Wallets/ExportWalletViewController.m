@@ -21,8 +21,6 @@
 
 #define STARTING_YEAR               2014
 
-#define WALLET_BUTTON_WIDTH         160
-
 #define PICKER_COL_MONTH        0
 #define PICKER_COL_DAY          1
 #define PICKER_COL_YEAR         2
@@ -42,7 +40,7 @@ typedef enum eDatePeriod
     DatePeriod_ThisYear
 } tDatePeriod;
 
-@interface ExportWalletViewController () <ExportWalletOptionsViewControllerDelegate, ButtonSelector2Delegate, PopupWheelPickerViewDelegate, UIGestureRecognizerDelegate>
+@interface ExportWalletViewController () <ExportWalletOptionsViewControllerDelegate, ButtonSelector2Delegate, UIGestureRecognizerDelegate>
 {
     tDatePeriod                         _datePeriod; // chosen with the 3 buttons
     BOOL                                bWalletListDropped;
@@ -91,16 +89,6 @@ typedef enum eDatePeriod
     // Do any additional setup after loading the view.
 
     // resize ourselves to fit in area
-
-//    self.fromDateTime = [[DateTime alloc] init];
-//    [self.fromDateTime setWithCurrentDateAndTime];
-//    self.fromDateTime.second = 0;
-//    self.toDateTime = [[DateTime alloc] init];
-//    [self.toDateTime setWithCurrentDateAndTime];
-//    self.fromDateTime.second = 0;
-//
-//    _datePeriod = DatePeriod_None;
-//    [self updateDisplay];
 
     self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
     self.buttonBlocker.backgroundColor = [UIColor clearColor];

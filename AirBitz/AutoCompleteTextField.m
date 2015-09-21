@@ -107,50 +107,25 @@
 	CFErrorRef error;
 	ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 	
-	__block BOOL accessGranted = NO;
-	
-	if (ABAddressBookRequestAccessWithCompletion != NULL)
+	CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+	NSMutableArray *allNames = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(people)];
+	for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
 	{
-		// we're on iOS 6
-		dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-		
-		ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
-												 {
-													 accessGranted = granted;
-													 dispatch_semaphore_signal(sema);
-												 });
-		
-		dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-		//dispatch_release(sema);
+		ABRecordRef person = CFArrayGetValueAtIndex(people, i);
+
+		NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+		NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
+
+
+		[allNames addObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName]];
+		CFRelease((__bridge CFTypeRef)firstName);
+		CFRelease((__bridge CFTypeRef)lastName);
 	}
-	else
-	{
-		// we're on iOS 5 or older
-		accessGranted = YES;
-	}
-	
-	if (accessGranted)
-	{
-		CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
-		NSMutableArray *allNames = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(people)];
-		for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
-		{
-			ABRecordRef person = CFArrayGetValueAtIndex(people, i);
-			
-			NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
-			NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
-			
-			
-			[allNames addObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName]];
-            CFRelease((__bridge CFTypeRef)firstName);
-            CFRelease((__bridge CFTypeRef)lastName);
-		}
-        CFRelease(people);
-		
-		contactsArray = allNames;
-		autoCompleteResults = allNames; //start autoCompleteResults with something (don't have business names at this point)
-		ABLog(2,@"All Email %@", contactsArray);
-	}
+	CFRelease(people);
+
+	contactsArray = allNames;
+	autoCompleteResults = allNames; //start autoCompleteResults with something (don't have business names at this point)
+	ABLog(2,@"All Email %@", contactsArray);
 }
 
 -(void)hideTableViewAnimated:(BOOL)animated

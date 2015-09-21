@@ -31,6 +31,7 @@
 #import "Theme.h"
 #import "MainViewController.h"
 #import "PopupPickerView.h"
+#import "Keychain.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
@@ -74,6 +75,7 @@
 #define ROW_MERCHANT_MODE               5
 #define ROW_BLE                         6
 #define ROW_PIN_RELOGIN                 7
+#define ROW_TOUCHID                     8
 
 #define ARRAY_EXCHANGES     @[@"Bitstamp", @"BraveNewCoin", @"Coinbase"]
 
@@ -133,6 +135,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	BOOL							_showBluetoothOption;
     CGRect                          _frameStart;
     CGFloat                         _keyboardHeight;
+    UIAlertView                     *_passwordCheckAlert;
+    UIAlertView                     *_passwordIncorrectAlert;
+    NSString                        *_tempPassword;
+
 }
 
 @property (nonatomic, weak) IBOutlet UITableView    *tableView;
@@ -171,6 +177,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 	self.tableView.delaysContentTouches = NO;
+    _tempPassword = nil;
 
     self.popupPicker = nil;
     self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -933,8 +940,19 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         if (indexPath.row == ROW_BLE)
         {
-			cell.name.text = NSLocalizedString(@"Bluetooth", @"settings text");
-            [cell.state setOn:!LocalSettings.controller.bDisableBLE animated:NO];
+            if (_showBluetoothOption)
+            {
+                cell.name.text = NSLocalizedString(@"Bluetooth", @"settings text");
+                [cell.state setOn:!LocalSettings.controller.bDisableBLE animated:NO];
+                cell.state.userInteractionEnabled = YES;
+            }
+            else
+            {
+                cell.name.text = NSLocalizedString(@"Enable Bluetooth in System Settings", @"settings text");
+                [cell.state setOn:NO animated:NO];
+                cell.state.userInteractionEnabled = NO;
+            }
+
         }
         else if (indexPath.row == ROW_MERCHANT_MODE)
         {
@@ -952,6 +970,31 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             } else {
                 cell.state.userInteractionEnabled = NO;
             }
+        }
+        else if (indexPath.row == ROW_TOUCHID)
+        {
+            if (! [Keychain bHasSecureEnclave])
+            {
+                cell.name.text = NSLocalizedString(@"TouchID: Unsupported Device", @"settings text");
+                cell.state.userInteractionEnabled = NO;
+                [cell.state setOn:NO animated:NO];
+            }
+            else
+            {
+                cell.name.text = NSLocalizedString(@"Use TouchID", @"settings text");
+
+                if ([[LocalSettings controller].touchIDUsersDisabled indexOfObject:[User Singleton].name] != NSNotFound)
+                    [cell.state setOn:NO animated:NO];
+                else
+                    [cell.state setOn:YES animated:NO];
+
+                if ([CoreBridge passwordExists] && 1) {
+                    cell.state.userInteractionEnabled = YES;
+                } else {
+                    cell.state.userInteractionEnabled = NO;
+                }
+            }
+
         }
     }
 	
@@ -1049,15 +1092,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             break;
 
         case SECTION_OPTIONS:
-			//assumes bluetooth option is last of the options.
-			if(_showBluetoothOption)
-			{
-				return 8;
-			}
-			else
-			{
-				return 7; //return 7 to not show the Bluetooth cell.
-			}
+            return 9;
             break;
 
         case SECTION_DEFAULT_EXCHANGE:
@@ -1170,19 +1205,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             }
             else if (indexPath.row == ROW_BLE)
             {
-                if (_showBluetoothOption)
-                {
-                    cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
-                }
-                else
-                {
-                    NSIndexPath *temp = [NSIndexPath indexPathForRow:ROW_PIN_RELOGIN inSection:indexPath.section];
-                    cell = [self getBooleanCellForTableView:tableView andIndexPath:temp];
-                }
+                cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
             }
             else if (indexPath.row == ROW_PIN_RELOGIN)
             {
 				cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
+            }
+            else if (indexPath.row == ROW_TOUCHID)
+            {
+                cell = [self getBooleanCellForTableView:tableView andIndexPath:indexPath];
             }
             else
             {
@@ -1362,6 +1393,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         // update the display by reloading the table
         [self.tableView reloadData];
 
+        [Keychain disableKeychainBasedOnSettings];
+
         [CoreBridge postToMiscQueue:^{
 
             if (theSwitch.on)
@@ -1374,6 +1407,55 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             }
         }];
     }
+    else if ((section == SECTION_OPTIONS) && (row == ROW_TOUCHID))
+    {
+        if (!theSwitch.on)
+        {
+            [SettingsViewController disableTouchID];
+        }
+        else
+        {
+            //
+            // Check if we have a cached password. If so just enable touchID
+            // If not, ask them for their password.
+            //
+            if ([[User Singleton].password length] > 0)
+            {
+                [SettingsViewController enableTouchID];
+            }
+            else
+            {
+                [self showPasswordCheckAlertForTouchID];
+            }
+
+        }
+
+        // update the display by reloading the table
+        [self.tableView reloadData];
+
+//        [Keychain disableKeychainBasedOnSettings];
+    }
+}
+
++ (void) enableTouchID;
+{
+    [[LocalSettings controller].touchIDUsersDisabled removeObject:[User Singleton].name];
+    [[LocalSettings controller].touchIDUsersEnabled addObject:[User Singleton].name];
+    [LocalSettings saveAll];
+    [Keychain updateLoginKeychainInfo:[User Singleton].name
+                             password:[User Singleton].password
+                           useTouchID:YES];
+}
+
++ (void) disableTouchID;
+{
+    // Disable TouchID in LocalSettings
+    [[LocalSettings controller].touchIDUsersDisabled addObject:[User Singleton].name];
+    [[LocalSettings controller].touchIDUsersEnabled removeObject:[User Singleton].name];
+    [LocalSettings saveAll];
+    [Keychain updateLoginKeychainInfo:[User Singleton].name
+                             password:[User Singleton].password
+                           useTouchID:NO];
 }
 
 #pragma mark - ButtonCell Delegate
@@ -1382,7 +1464,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
     NSInteger section = (cell.tag >> 8);
     NSInteger row = cell.tag & 0xff;
-    NSInteger pickerWidth = PICKER_WIDTH;
     tPopupPicker2Position popupPosition = PopupPicker2Position_Full_Fading;
     NSString *headerText;
 
@@ -1539,5 +1620,89 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         [self updateViews];
     }];
 }
+
+#pragma mark - UIAlertView callbacks
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (alertView == _passwordCheckAlert)
+    {
+        if (0 == buttonIndex)
+        {
+            //
+            // Need to disable TouchID in settings.
+            //
+            // Disable TouchID in LocalSettings
+            [SettingsViewController disableTouchID];
+            [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
+        }
+        else
+        {
+            //
+            // Check the password
+            //
+            _tempPassword = [[alertView textFieldAtIndex:0] text];
+
+            [Util checkPasswordAsync:_tempPassword
+                        withSelector:@selector(handlePasswordResults:)
+                          controller:self];
+            [MainViewController fadingAlert:NSLocalizedString(@"Checking password...", nil)
+                                   holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        }
+    }
+    else if (_passwordIncorrectAlert == alertView)
+    {
+        if (buttonIndex == 0)
+        {
+            [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
+            [SettingsViewController disableTouchID];
+        }
+        else if (buttonIndex == 1)
+        {
+            [self showPasswordCheckAlertForTouchID];
+        }
+    }
+}
+
+- (void)showPasswordCheckAlertForTouchID
+{
+    // Popup to ask user for their password
+    NSString *title = NSLocalizedString(@"Touch ID", nil);
+    NSString *message = NSLocalizedString(@"Please enter your password to enable Touch ID", nil);
+    // show password reminder test
+    _passwordCheckAlert = [[UIAlertView alloc] initWithTitle:title
+                                                     message:message
+                                                    delegate:self
+                                           cancelButtonTitle:@"Later"
+                                           otherButtonTitles:@"OK", nil];
+    _passwordCheckAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
+    [_passwordCheckAlert show];
+}
+
+- (void)handlePasswordResults:(NSNumber *)authenticated
+{
+    BOOL bAuthenticated = [authenticated boolValue];
+    if (bAuthenticated)
+    {
+        [User Singleton].password = _tempPassword;
+        _tempPassword = nil;
+        [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
+
+        // Enable Touch ID
+        [SettingsViewController enableTouchID];
+
+    }
+    else
+    {
+        _passwordIncorrectAlert = [[UIAlertView alloc]
+                initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
+                      message:NSLocalizedString(@"Try again?", nil)
+                     delegate:self
+            cancelButtonTitle:@"NO"
+            otherButtonTitles:@"YES", nil];
+        [_passwordIncorrectAlert show];
+    }
+}
+
 
 @end

@@ -39,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet UIButton               *logoutButton;
 @property (weak, nonatomic) IBOutlet UIButton               *settingsButton;
 @property (weak, nonatomic) IBOutlet UIView                 *buySellDivider;
+@property (weak, nonatomic) IBOutlet UIButton               *walletsButton;
 
 @property (nonatomic, strong) NSArray                       *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
@@ -226,7 +227,13 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutImport)]) {
         [self.delegate slideoutImport];
     }
+}
 
+- (IBAction)walletsTouched:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWallets)]) {
+        [self.delegate slideoutWallets];
+    }
 }
 
 
@@ -297,7 +304,7 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     CGPoint translation = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:gestureRecognizer.view.superview];
-    return fabsf(translation.x) > fabsf(translation.y);
+    return fabs(translation.x) > fabs(translation.y);
 }
 
 - (void)handleRecognizer:(UIPanGestureRecognizer *)recognizer fromBlock:(bool) block

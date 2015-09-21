@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PickerTextview.h"
+#import "PickerTextview3.h"
 
 @protocol CategoriesCellDelegate;
 
 @interface CategoriesCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet PickerTextView *pickerTextView;
+@property (nonatomic, weak) IBOutlet PickerTextView3 *pickerTextView;
 
 @property (assign) id<CategoriesCellDelegate> delegate;
 @property (nonatomic, assign) NSInteger       pickerMaxChoicesVisible;

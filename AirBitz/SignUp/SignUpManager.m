@@ -63,7 +63,7 @@
     }
     else if (_current == _signupPasswordController)
     {
-        [MainViewController changeNavBar:self title:@"" side:NAV_BAR_LEFT button:false enable:false action:@selector(back:) fromObject:self];
+        [MainViewController changeNavBar:_signupUsernameController title:@"" side:NAV_BAR_LEFT button:false enable:false action:@selector(back:) fromObject:_signupUsernameController];
         if(!_bHasCameraAccess) {
             [self launchCameraController];
         }
@@ -137,9 +137,9 @@
     _signupUsernameController = (SignUpUsernameController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpUsernameController"];
     _signupUsernameController.manager = self;
     _current = _signupUsernameController;
-    [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Sign Up", @"Sign Up title bar text")];
-    [MainViewController changeNavBar:self title:[Theme Singleton].exitButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
+    [MainViewController changeNavBarOwner:_signupUsernameController];
+    [MainViewController changeNavBarTitle:_signupUsernameController title:NSLocalizedString(@"Sign Up", @"Sign Up title bar text")];
+    [MainViewController changeNavBar:_signupUsernameController title:[Theme Singleton].exitButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
     [MainViewController animateView:_signupUsernameController withBlur:YES];
 }
 

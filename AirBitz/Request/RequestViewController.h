@@ -36,7 +36,6 @@
 @protocol RequestViewControllerDelegate <NSObject>
 
 @required
--(void)RequestViewControllerDone:(RequestViewController *)vc;
 
 @end
 

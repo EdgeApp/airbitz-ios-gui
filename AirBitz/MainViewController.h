@@ -18,15 +18,13 @@ typedef enum eNavBarSide
     NAV_BAR_RIGHT
 } tNavBarSide;
 
-@interface MainViewController : UIViewController
+@interface MainViewController : AirbitzViewController
 
-+ (void)addChildView: (UIView *)view;
 + (void)animateSlideIn:(AirbitzViewController *)viewController;
 + (void)animateFadeIn:(UIView *)view;
 + (void)animateFadeOut:(UIView *)view;
 + (void)animateFadeOut:(UIView *)view remove:(BOOL)removeFromView;
 
-+ (void)animateIn:(NSString *)identifier withBlur:(BOOL)withBlur;
 + (void)animateView:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur;
 + (void)animateView:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur animate:(BOOL)animated;
 + (void)animateOut:(AirbitzViewController *)viewController withBlur:(BOOL)withBlur complete:(void(^)(void))cb;
@@ -65,6 +63,7 @@ typedef enum eNavBarSide
 + (void)fadingAlertHelpPopup:(NSString *)message;
 + (void)fadingAlert:(NSString *)message;
 + (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime;
++ (void)fadingAlertUpdate:(NSString *)message;
 + (void)fadingAlertDismiss;
 
 @end

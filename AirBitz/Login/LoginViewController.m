@@ -26,6 +26,9 @@
 #import "APPINView.h"
 #import "Theme.h"
 #import "FadingAlertView.h"
+#import "Keychain.h"
+#import "NSMutableData+Secure.h"
+#import "SettingsViewController.h"
 
 typedef enum eLoginMode
 {
@@ -58,6 +61,10 @@ typedef enum eLoginMode
     CGFloat                         _originalPasswordWidth;
     CGFloat                         _originalPINSelectorWidth;
     CGFloat                         _originalTextBitcoinWalletHeight;
+    UIAlertView                     *_enableTouchIDAlertView;
+    UIAlertView                     *_passwordCheckAlert;
+    UIAlertView                     *_passwordIncorrectAlert;
+    NSString                        *_tempPassword;
 
 }
 
@@ -86,6 +93,7 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet PickerTextView   *usernameSelector;
 @property (nonatomic, strong) NSArray   *arrayAccounts;
 @property (nonatomic, strong) NSArray   *otherAccounts;
+@property (weak, nonatomic) IBOutlet UIButton *buttonOutsideTap;
 
 @end
 
@@ -115,6 +123,7 @@ static BOOL bInitialized = false;
     self.PINCodeView.delegate = self;
     self.PINusernameSelector.delegate = self;
     self.spinnerView.hidden = YES;
+    self.buttonOutsideTap.enabled = NO;
 
     [self getAllAccounts];
 
@@ -261,6 +270,7 @@ static BOOL bInitialized = false;
     debug.numberOfTapsRequired = 5;
     [_logoImage addGestureRecognizer:debug];
     [_logoImage setUserInteractionEnabled:YES];
+
 }
 
 - (void)uploadLog {
@@ -291,9 +301,85 @@ static BOOL bInitialized = false;
     }];
 }
 
+typedef enum eReloginState
+{
+    RELOGIN_DISABLE = 0,
+    RELOGIN_USE_PASSWORD,
+}tReloginState;
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self autoReloginOrTouchIDIfPossible];
+}
 
+- (void)autoReloginOrTouchIDIfPossible
+{
+    if (! [Keychain bHasSecureEnclave] ) return;
+
+    NSString *username = [LocalSettings controller].cachedUsername;
+
+    //
+    // If login expired, then disable relogin but continue validation of TouchID
+    //
+    if ([CoreBridge didLoginExpire:username])
+    {
+        [Keychain disableRelogin:username];
+    }
+
+    //
+    // Look for cached username & password or PIN in the keychain. Use it if present
+    //
+    tReloginState reloginState = RELOGIN_DISABLE;
+
+
+    NSString *strReloginKey  = [Keychain createKeyWithUsername:username key:RELOGIN_KEY];
+    NSString *strUseTouchID  = [Keychain createKeyWithUsername:username key:USE_TOUCHID_KEY];
+    NSString *strPasswordKey = [Keychain createKeyWithUsername:username key:PASSWORD_KEY];
+    
+    int64_t bRelogin = [Keychain getKeychainInt:strReloginKey error:nil];
+    int64_t bUseTouchID = [Keychain getKeychainInt:strUseTouchID error:nil];
+    NSString *kcPassword = [Keychain getKeychainString:strPasswordKey error:nil];
+
+    if (!bRelogin && !bUseTouchID)
+        return;
+
+    if ([kcPassword length] >= 10)
+    {
+        reloginState = RELOGIN_USE_PASSWORD;
+    }
+
+    if (reloginState)
+    {
+        if (bUseTouchID && !bRelogin)
+        {
+            NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",[Theme Singleton].touchIDPromptText, username];
+            NSString *fallbackString;
+
+            if (reloginState == RELOGIN_USE_PASSWORD)
+                fallbackString = [Theme Singleton].usePasswordText;
+
+            if ([Keychain authenticateTouchID:prompt fallbackString:fallbackString]) {
+                bRelogin = YES;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        if (bRelogin)
+        {
+            if (reloginState == RELOGIN_USE_PASSWORD)
+            {
+                // try to login
+                self.usernameSelector.textField.text = username;
+                self.passwordTextField.text = kcPassword;
+                [self showSpinner:YES];
+                [self SignIn];
+            }
+        }
+
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -352,6 +438,12 @@ static BOOL bInitialized = false;
      {
          [self.delegate loginViewControllerDidAbort];
      }];
+}
+
+- (IBAction)OutsideTapButton:(id)sender {
+    [self.PINusernameSelector close];
+    [self.usernameSelector dismissPopupPicker];
+    self.buttonOutsideTap.enabled = NO;
 }
 
 #pragma mark - Misc Methods
@@ -542,6 +634,39 @@ static BOOL bInitialized = false;
                     [User login:[LocalSettings controller].cachedUsername password:NULL];
                     [[User Singleton] resetPINLoginInvalidEntryCount];
                     [self.delegate LoginViewControllerDidPINLogin];
+
+                    if ([Keychain bHasSecureEnclave])
+                    {
+                        //
+                        // Check if user has not yet been asked to enable touchID on this device
+                        //
+
+                        BOOL onEnabled  = ( [[LocalSettings controller].touchIDUsersEnabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+                        BOOL onDisabled = ( [[LocalSettings controller].touchIDUsersDisabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+
+                        if (!onEnabled && !onDisabled)
+                        {
+                            //
+                            // Ask if they want TouchID enabled for this user on this device
+                            //
+                            NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
+                            NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
+                            _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                                                 message:message
+                                                                                delegate:self
+                                                                       cancelButtonTitle:@"Later"
+                                                                       otherButtonTitles:@"OK", nil];
+                            _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
+                            [_enableTouchIDAlertView show];
+                        }
+                        else
+                        {
+                            [Keychain updateLoginKeychainInfo:[User Singleton].name
+                                                     password:[User Singleton].password
+                                                   useTouchID:!onDisabled];
+                        }
+                    }
+
                     break;
                 }
                 case ABC_CC_BadPassword:
@@ -591,6 +716,8 @@ static BOOL bInitialized = false;
 
 
 }
+
+
 
 
 #pragma mark - Misc Methods
@@ -884,14 +1011,55 @@ static BOOL bInitialized = false;
 
 - (void)signInComplete
 {
+    BOOL    bNewDeviceLogin;
+
     [self showSpinner:NO];
     [CoreBridge otpSetError:_resultCode];
+
+    if ([self.arrayAccounts containsObject:self.usernameSelector.textField.text])
+        bNewDeviceLogin = NO;
+    else
+        bNewDeviceLogin = YES;
+
     if (_bSuccess)
     {
         [User login:self.usernameSelector.textField.text
            password:self.passwordTextField.text
            setupPIN:YES];
-        [self.delegate loginViewControllerDidLogin:NO];
+        [self.delegate loginViewControllerDidLogin:NO newDevice:bNewDeviceLogin];
+
+        if ([Keychain bHasSecureEnclave])
+        {
+            //
+            // Check if user has not yet been asked to enable touchID on this device
+            //
+
+            BOOL onEnabled  = ( [[LocalSettings controller].touchIDUsersEnabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+            BOOL onDisabled = ( [[LocalSettings controller].touchIDUsersDisabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+
+            if (!onEnabled && !onDisabled)
+            {
+                //
+                // Ask if they want TouchID enabled for this user on this device
+                //
+                NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
+                NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
+                _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                                     message:message
+                                                                    delegate:self
+                                                           cancelButtonTitle:@"Later"
+                                                           otherButtonTitles:@"OK", nil];
+                _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
+                [_enableTouchIDAlertView show];
+            }
+            else
+            {
+                [Keychain updateLoginKeychainInfo:[User Singleton].name
+                                         password:[User Singleton].password
+                                       useTouchID:!onDisabled];
+            }
+        }
+
     } else if (ABC_CC_InvalidOTP == _resultCode) {
         [MainViewController showBackground:NO animate:YES];
         [self launchTwoFactorMenu];
@@ -1015,8 +1183,9 @@ static BOOL bInitialized = false;
     if([User isLoggedIn])
     {
         _bSuccess = YES;
+        [SettingsViewController enableTouchID];
 
-        [self.delegate loginViewControllerDidLogin:bNewAccount];
+        [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:NO];
     }
 }
 
@@ -1056,6 +1225,7 @@ static BOOL bInitialized = false;
 {
     [self.usernameSelector.textField resignFirstResponder];
     [self.usernameSelector dismissPopupPicker];
+    self.buttonOutsideTap.enabled = NO;
     
     // set the text field to the choice
     NSString *account = [self.arrayAccounts objectAtIndex:row];
@@ -1065,10 +1235,13 @@ static BOOL bInitialized = false;
         bPINModeEnabled = true;
         [self viewDidLoad];
         [self viewWillAppear:true];
+        [self autoReloginOrTouchIDIfPossible];
     }
-    else {
+    else
+    {
         self.usernameSelector.textField.text = account;
         [self.usernameSelector dismissPopupPicker];
+        [self autoReloginOrTouchIDIfPossible];
     }
 }
 
@@ -1099,6 +1272,8 @@ static BOOL bInitialized = false;
                           otherButtonTitles:@"Yes", nil];
     [alert show];
     [self.usernameSelector dismissPopupPicker];
+    self.buttonOutsideTap.enabled = NO;
+
 }
 
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
@@ -1121,6 +1296,7 @@ static BOOL bInitialized = false;
         pickerTextView.popupPicker.frame = frame;
         
     }
+    self.buttonOutsideTap.enabled = YES;
 
 }
 
@@ -1132,22 +1308,82 @@ static BOOL bInitialized = false;
     if ([pickerTextView.textField.text length] > 0)
     {
         [pickerTextView dismissPopupPicker];
+        self.buttonOutsideTap.enabled = NO;
     }
     else if ([pickerTextView.textField.text length] == 0)
     {
         [pickerTextView createPopupPicker];
+        self.buttonOutsideTap.enabled = YES;
     }
 }
 
 - (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView;
 {
     [pickerTextView dismissPopupPicker];
+    self.buttonOutsideTap.enabled = NO;
 }
 
 #pragma mark - UIAlertView Delegate
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    if (alertView == _enableTouchIDAlertView)
+    {
+        if (0 == buttonIndex)
+        {
+            [SettingsViewController disableTouchID];
+        }
+        else
+        {
+            if ([[User Singleton].password length] > 0)
+                [SettingsViewController enableTouchID];
+            else
+            {
+                [self showPasswordCheckAlertForTouchID];
+            }
+        }
+
+        return;
+    }
+    else if (alertView == _passwordCheckAlert)
+    {
+        if (0 == buttonIndex)
+        {
+            //
+            // Need to disable TouchID in settings.
+            //
+            // Disable TouchID in LocalSettings
+            [SettingsViewController disableTouchID];
+            [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
+        }
+        else
+        {
+            //
+            // Check the password
+            //
+            _tempPassword = [[alertView textFieldAtIndex:0] text];
+
+            [Util checkPasswordAsync:_tempPassword
+                        withSelector:@selector(handlePasswordResults:)
+                          controller:self];
+            [MainViewController fadingAlert:NSLocalizedString(@"Checking password...", nil)
+                                   holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        }
+        return;
+    }
+    else if (_passwordIncorrectAlert == alertView)
+    {
+        if (buttonIndex == 0)
+        {
+            [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
+            [SettingsViewController disableTouchID];
+        }
+        else if (buttonIndex == 1)
+        {
+            [self showPasswordCheckAlertForTouchID];
+        }
+    }
+
     [self.usernameSelector.textField resignFirstResponder];
     // if they said they wanted to delete the account
     if (buttonIndex == 1)
@@ -1158,6 +1394,47 @@ static BOOL bInitialized = false;
     }
 }
 
+- (void)showPasswordCheckAlertForTouchID
+{
+    // Popup to ask user for their password
+    NSString *title = NSLocalizedString(@"Touch ID", nil);
+    NSString *message = NSLocalizedString(@"Please enter your password to enable Touch ID", nil);
+    // show password reminder test
+    _passwordCheckAlert = [[UIAlertView alloc] initWithTitle:title
+                                                     message:message
+                                                    delegate:self
+                                           cancelButtonTitle:@"Later"
+                                           otherButtonTitles:@"OK", nil];
+    _passwordCheckAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
+    [_passwordCheckAlert show];
+}
+
+- (void)handlePasswordResults:(NSNumber *)authenticated
+{
+    BOOL bAuthenticated = [authenticated boolValue];
+    if (bAuthenticated)
+    {
+        [User Singleton].password = _tempPassword;
+        _tempPassword = nil;
+        [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
+
+        // Enable Touch ID
+        [SettingsViewController enableTouchID];
+
+    }
+    else
+    {
+        _passwordIncorrectAlert = [[UIAlertView alloc]
+                initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
+                      message:NSLocalizedString(@"Try again?", nil)
+                     delegate:self
+            cancelButtonTitle:@"NO"
+            otherButtonTitles:@"YES", nil];
+        [_passwordIncorrectAlert show];
+    }
+}
+
+
 #pragma mark - ButtonSelectorView delegates
 
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
@@ -1166,12 +1443,14 @@ static BOOL bInitialized = false;
     if([CoreBridge PINLoginExists:[LocalSettings controller].cachedUsername])
     {
         [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
+        [self autoReloginOrTouchIDIfPossible];
     }
     else
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self viewDidLoad];
             [self viewWillAppear:true];
+            [self autoReloginOrTouchIDIfPossible];
         }];
     }
 }
@@ -1180,12 +1459,14 @@ static BOOL bInitialized = false;
 {
     [self.PINusernameSelector.textLabel resignFirstResponder];
     [self.PINCodeView resignFirstResponder];
+    self.buttonOutsideTap.enabled = YES;
 
 }
 
 - (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view
 {
     [self.PINCodeView becomeFirstResponder];
+    self.buttonOutsideTap.enabled = NO;
 
 }
 

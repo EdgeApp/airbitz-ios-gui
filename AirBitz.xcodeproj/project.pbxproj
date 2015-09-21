@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		17C92258FEBAD8A39BBFD0FC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E47C0EC32EE29D34C5A03A0B /* libPods.a */; };
+		346441888B4FEEADFEA96929 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464428EE3E428ED04D5A79D /* Keychain.m */; };
 		346443C3E8845FA868E63AEA /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
+		346449DA2188D84932C47A50 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464428EE3E428ED04D5A79D /* Keychain.m */; };
 		34644B2B5788D8A8EBC9F0E5 /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
 		34644B507781CF1F8E7D5301 /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
 		34644DFBC522F75CE8481CB6 /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
+		34644ECA590CFC13F9E6DD79 /* airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 34644FF34889F908A681A698 /* airbitz.entitlements */; };
 		34644F1EE31C431DADB1F99C /* StylizedButtonOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448D77123858DD23C231B /* StylizedButtonOutline.m */; };
+		34644F2A1881D1C4ADD87444 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464428EE3E428ED04D5A79D /* Keychain.m */; };
 		34644F47B5DBBBDBD702E03F /* SignUpWriteItController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644A61390FB99D07036E91 /* SignUpWriteItController.m */; };
 		4C08A6DB18C29CEF0071B87C /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D318C29CEF0071B87C /* libabc.a */; };
 		4C08A6DC18C29CEF0071B87C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D418C29CEF0071B87C /* libcrypto.a */; };
@@ -70,19 +74,16 @@
 		68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68390DB61A0406D600D3789F /* SpendingLimitsViewController.m */; };
 		683D95B81989F14B0082BC1A /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = 683D95B71989F14B0082BC1A /* ca-certificates.crt */; };
 		684861AC1A0C01C5008E53F8 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C4AA221A0B4DD70010C837 /* FadingAlertView.m */; };
-		684861B11A0C01D7008E53F8 /* FadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */; };
 		684C0E521936B97000AB9807 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C0E511936B97000AB9807 /* libsodium.a */; };
 		6861FE681950DFB100CDF24E /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861FE671950DFB100CDF24E /* TxOutput.m */; };
 		6868AD1319516D7A006C3716 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6868AD1219516D7A006C3716 /* DebugViewController.m */; };
 		686BED9E195D5A7C0053A09E /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686BED9D195D5A7C0053A09E /* libsecp256k1.a */; };
-		686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
 		686C24871935608400F8E445 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24861935608400F8E445 /* libzmq.a */; };
 		687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 687C1B051927FF81003A83E8 /* CoreBridge.m */; };
 		687D2E7C1A09638200F1F9D1 /* infoSpendingLimits.html in Resources */ = {isa = PBXBuildFile; fileRef = 687D2E7B1A09638200F1F9D1 /* infoSpendingLimits.html */; };
 		6893E6CA19783FED0092DA04 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6893E6C919783FED0092DA04 /* SyncView.m */; };
 		68C3285719804BFE007DA4C2 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */; };
 		68C4AA241A0B4DD70010C837 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C4AA221A0B4DD70010C837 /* FadingAlertView.m */; };
-		68C4AA251A0B4DD70010C837 /* FadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */; };
 		6A587502F675B6C6ECA2BB1B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E47C0EC32EE29D34C5A03A0B /* libPods.a */; };
 		7D5E1CD819AFB2D400943A81 /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CBE19AFB2D400943A81 /* libabc.a */; };
 		7D5E1CDB19AFB2D400943A81 /* libbitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CC119AFB2D400943A81 /* libbitcoin.a */; };
@@ -91,7 +92,6 @@
 		7D5E1CE719AFB2D400943A81 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CCD19AFB2D400943A81 /* libcurl.a */; };
 		7D5E1CE919AFB2D400943A81 /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CCF19AFB2D400943A81 /* libjansson.a */; };
 		7D5E1CEA19AFB2D400943A81 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD019AFB2D400943A81 /* libqrencode.a */; };
-		7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD519AFB2D400943A81 /* libwallet.a */; };
 		7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CD619AFB2D400943A81 /* libz.a */; };
 		7D5E1CF419AFB34C00943A81 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5E1CF319AFB34C00943A81 /* libssl.a */; };
 		7D6EDB7C19A66C82007C33AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EDB7B19A66C82007C33AE /* CoreText.framework */; };
@@ -227,7 +227,6 @@
 		7D98AD2819A7C550003D2BF6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5137C1D18A41AAC00DA4A34 /* CFNetwork.framework */; };
 		7D98AD2A19A7C550003D2BF6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4D18A17F6F002E0703 /* CoreGraphics.framework */; };
 		7D98AD2B19A7C550003D2BF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4F18A17F6F002E0703 /* UIKit.framework */; };
-		7D98AD2C19A7C550003D2BF6 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
 		7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4B18A17F6F002E0703 /* Foundation.framework */; };
 		7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C90463018C91E7A00179D9C /* libzbar.a */; };
 		7D98AD3A19A7C550003D2BF6 /* WalletExportQuicken.QIF in Resources */ = {isa = PBXBuildFile; fileRef = 4C7C1255193D2CFC0096338D /* WalletExportQuicken.QIF */; };
@@ -397,7 +396,6 @@
 		B5E7F57A18E4AAD5009B5844 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E7F57918E4AAD5009B5844 /* User.m */; };
 		B5F2E9A518D3BFEF008ACF88 /* libbitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A218D3BFEF008ACF88 /* libbitcoin.a */; };
 		B5F2E9A618D3BFEF008ACF88 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A318D3BFEF008ACF88 /* libboost_system.a */; };
-		B5F2E9A718D3BFEF008ACF88 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A418D3BFEF008ACF88 /* libwallet.a */; };
 		B5F2E9AA18D4AF6C008ACF88 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9A918D4AF6C008ACF88 /* info.html */; };
 		B5F2E9C118DA911A008ACF88 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2E9BE18DA911A008ACF88 /* LoginViewController.m */; };
 		B5F2E9C218DA911A008ACF88 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F2E9C018DA911A008ACF88 /* SignUpViewController.m */; };
@@ -685,6 +683,15 @@
 		DA13339E1A7B203C0051DE14 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA13339C1A7B203C0051DE14 /* ScanView.m */; };
 		DA1333A01A7B20840051DE14 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */; };
 		DA1333A11A7B20840051DE14 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */; };
+		DA1530911B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308E1B9BBBD8007B24D3 /* icon_wallet_dark.png */; };
+		DA1530921B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308E1B9BBBD8007B24D3 /* icon_wallet_dark.png */; };
+		DA1530931B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308E1B9BBBD8007B24D3 /* icon_wallet_dark.png */; };
+		DA1530941B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308F1B9BBBD8007B24D3 /* icon_wallet_dark@2x.png */; };
+		DA1530951B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308F1B9BBBD8007B24D3 /* icon_wallet_dark@2x.png */; };
+		DA1530961B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA15308F1B9BBBD8007B24D3 /* icon_wallet_dark@2x.png */; };
+		DA1530971B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA1530901B9BBBD8007B24D3 /* icon_wallet_dark@3x.png */; };
+		DA1530981B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA1530901B9BBBD8007B24D3 /* icon_wallet_dark@3x.png */; };
+		DA1530991B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA1530901B9BBBD8007B24D3 /* icon_wallet_dark@3x.png */; };
 		DA15B98D1AC0D72500B229A5 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */; };
 		DA15B98E1AC0D72500B229A5 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */; };
 		DA15B98F1AC0D72500B229A5 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */; };
@@ -841,8 +848,12 @@
 		DA6645501B0B408600B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
 		DA6645511B0B408700B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
 		DA6645521B0B408700B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
+		DA72494C1B95195200E104A4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA72494B1B95195200E104A4 /* NotificationCenter.framework */; };
+		DA7249521B95195200E104A4 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7249511B95195200E104A4 /* TodayViewController.m */; };
+		DA7249541B95195200E104A4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7249531B95195200E104A4 /* MainInterface.storyboard */; };
 		DA8B5ABB1A79640B00DDED09 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA8B5ABA1A79640B00DDED09 /* api.cer */; };
 		DA8B5AC01A79864800DDED09 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA8B5ABA1A79640B00DDED09 /* api.cer */; };
+		DA8BA4971BA145D1005E8E92 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA72494A1B95195200E104A4 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DAA5782919C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
 		DAA5782A19C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
 		DAA5784D19C272C400E972FC /* SMSTemplate.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAA5784C19C272C400E972FC /* SMSTemplate.txt */; };
@@ -920,6 +931,7 @@
 		DABB757F1B2840E4004E350D /* btn_add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB757D1B2840E4004E350D /* btn_add@3x.png */; };
 		DABB75801B2840E4004E350D /* btn_add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB757D1B2840E4004E350D /* btn_add@3x.png */; };
 		DABB75811B2840E4004E350D /* btn_add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB757D1B2840E4004E350D /* btn_add@3x.png */; };
+		DABBC77D1B98E8DB00D39A90 /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = DA06F6DA1B0BDD78000BCA46 /* enable-camera.png */; };
 		DAC2508F1B2E037F006AB863 /* darken_bottom_table_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC2508E1B2E037F006AB863 /* darken_bottom_table_cell.png */; };
 		DAC250901B2E037F006AB863 /* darken_bottom_table_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC2508E1B2E037F006AB863 /* darken_bottom_table_cell.png */; };
 		DAC250911B2E037F006AB863 /* darken_bottom_table_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC2508E1B2E037F006AB863 /* darken_bottom_table_cell.png */; };
@@ -935,6 +947,9 @@
 		DAD9A4B51B21804100CB3EA4 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B41B21804100CB3EA4 /* background_launch.png */; };
 		DAD9A4B61B21804100CB3EA4 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B41B21804100CB3EA4 /* background_launch.png */; };
 		DAD9A4B71B21804100CB3EA4 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A4B41B21804100CB3EA4 /* background_launch.png */; };
+		DADA8B061B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DADA8B001B941CF100FAAEA3 /* NSMutableData+Secure.m */; };
+		DADA8B071B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DADA8B001B941CF100FAAEA3 /* NSMutableData+Secure.m */; };
+		DADA8B081B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DADA8B001B941CF100FAAEA3 /* NSMutableData+Secure.m */; };
 		DAE276141A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
 		DAE276151A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
 		DAE276161A9AEE8500E24523 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE276131A9AEE8500E24523 /* AddressRequestController.m */; };
@@ -1103,8 +1118,6 @@
 		DAE8648C1A88A58A00A17BD3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4D18A17F6F002E0703 /* CoreGraphics.framework */; };
 		DAE8648D1A88A58A00A17BD3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5675B4F18A17F6F002E0703 /* UIKit.framework */; };
 		DAE8648E1A88A58A00A17BD3 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D8B59BE1A328895000AC178 /* HockeySDK.framework */; };
-		DAE8648F1A88A58A00A17BD3 /* libbitcoin-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C24821935601400F8E445 /* libbitcoin-client.a */; };
-		DAE864901A88A58A00A17BD3 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2E9A418D3BFEF008ACF88 /* libwallet.a */; };
 		DAE864911A88A58A00A17BD3 /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D618C29CEF0071B87C /* libjansson.a */; };
 		DAE864921A88A58A00A17BD3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D418C29CEF0071B87C /* libcrypto.a */; };
 		DAE864931A88A58A00A17BD3 /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C08A6D318C29CEF0071B87C /* libabc.a */; };
@@ -1138,7 +1151,6 @@
 		DAE8652F1A88A58A00A17BD3 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137BFE18A40A8400DA4A34 /* Lato-Hairline.ttf */; };
 		DAE8653B1A88A58A00A17BD3 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5137C0518A40A8400DA4A34 /* Montserrat-Bold.ttf */; };
 		DAE865411A88A58A00A17BD3 /* infoSend.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D8C6D192E7D4A0015BB3C /* infoSend.html */; };
-		DAE8654C1A88A58A00A17BD3 /* FadingAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */; };
 		DAE865571A88A58A00A17BD3 /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B561E1A518D2572D002DCDC2 /* InfoView~iphone.xib */; };
 		DAE865581A88A58A00A17BD3 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56553EB18ECC8C2005B35E1 /* CalculatorView~iphone.xib */; };
 		DAE8655B1A88A58A00A17BD3 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = B5F2E9A918D4AF6C008ACF88 /* info.html */; };
@@ -1222,14 +1234,39 @@
 			remoteGlobalIDString = 4F1AD9020B71603F00DC0485;
 			remoteInfo = DevelopmentTestTool;
 		};
+		DA8BA4981BA145D1005E8E92 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5675B4018A17F6F002E0703 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA7249491B95195200E104A4;
+			remoteInfo = "Airbitz Widget";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DA8BA49E1BA145D1005E8E92 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DA8BA4971BA145D1005E8E92 /* Airbitz Widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		188D8A965DB464149F922F3B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3464407797F8700740E99592 /* AppGroupConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppGroupConstants.h; sourceTree = "<group>"; };
 		3464417D3C4E858FE232DCD2 /* StylizedButtonOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedButtonOutline.h; sourceTree = "<group>"; };
+		3464428EE3E428ED04D5A79D /* Keychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keychain.m; sourceTree = "<group>"; };
 		346446F326CD2FB38A4B0DE1 /* SignUpWriteItController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpWriteItController.h; path = SignUp/SignUpWriteItController.h; sourceTree = "<group>"; };
 		346448D77123858DD23C231B /* StylizedButtonOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedButtonOutline.m; sourceTree = "<group>"; };
 		34644A61390FB99D07036E91 /* SignUpWriteItController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpWriteItController.m; path = SignUp/SignUpWriteItController.m; sourceTree = "<group>"; };
+		34644F74929069B539AACA12 /* Keychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keychain.h; sourceTree = "<group>"; };
+		34644FF34889F908A681A698 /* airbitz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = file.entitlements; path = airbitz.entitlements; sourceTree = "<group>"; };
 		3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4C08A6D318C29CEF0071B87C /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = ABC/libabc.a; sourceTree = "<group>"; };
 		4C08A6D418C29CEF0071B87C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ABC/libcrypto.a; sourceTree = "<group>"; };
@@ -1343,7 +1380,6 @@
 		68C3285619804BFE007DA4C2 /* SyncView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SyncView~iphone.xib"; sourceTree = "<group>"; };
 		68C4AA211A0B4DD70010C837 /* FadingAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FadingAlertView.h; path = AirBitz/FadingAlert/FadingAlertView.h; sourceTree = SOURCE_ROOT; };
 		68C4AA221A0B4DD70010C837 /* FadingAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FadingAlertView.m; path = AirBitz/FadingAlert/FadingAlertView.m; sourceTree = SOURCE_ROOT; };
-		68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FadingAlertView.xib; path = AirBitz/FadingAlert/FadingAlertView.xib; sourceTree = SOURCE_ROOT; };
 		6BECB1B8C9CE1002526F24AB /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; };
 		7D5E1CBE19AFB2D400943A81 /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = "ABC-testnet/libabc.a"; sourceTree = "<group>"; };
 		7D5E1CC119AFB2D400943A81 /* libbitcoin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbitcoin.a; path = "ABC-testnet/libbitcoin.a"; sourceTree = "<group>"; };
@@ -1680,6 +1716,9 @@
 		DA13339C1A7B203C0051DE14 /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
 		DA13339F1A7B20840051DE14 /* ScanView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ScanView~iphone.xib"; sourceTree = "<group>"; };
 		DA14ABCA1A8066A300C30F08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		DA15308E1B9BBBD8007B24D3 /* icon_wallet_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_wallet_dark.png; path = Resources/Artwork/icon_wallet_dark.png; sourceTree = "<group>"; };
+		DA15308F1B9BBBD8007B24D3 /* icon_wallet_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_wallet_dark@2x.png"; path = "Resources/Artwork/icon_wallet_dark@2x.png"; sourceTree = "<group>"; };
+		DA1530901B9BBBD8007B24D3 /* icon_wallet_dark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_wallet_dark@3x.png"; path = "Resources/Artwork/icon_wallet_dark@3x.png"; sourceTree = "<group>"; };
 		DA15B98A1AC0D72500B229A5 /* Plugins.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Plugins.storyboard; sourceTree = "<group>"; };
 		DA15B98B1AC0D72500B229A5 /* PluginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginViewController.h; sourceTree = "<group>"; };
 		DA15B98C1AC0D72500B229A5 /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginViewController.m; sourceTree = "<group>"; };
@@ -1741,6 +1780,12 @@
 		DA6645241B07175A00B04C5B /* BlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurView.m; sourceTree = "<group>"; };
 		DA66454A1B0B37F000B04C5B /* AirbitzViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirbitzViewController.h; sourceTree = "<group>"; };
 		DA66454F1B0B408600B04C5B /* AirbitzViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirbitzViewController.m; sourceTree = "<group>"; };
+		DA72494A1B95195200E104A4 /* Airbitz Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Airbitz Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA72494B1B95195200E104A4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		DA72494F1B95195200E104A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA7249501B95195200E104A4 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		DA7249511B95195200E104A4 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		DA7249531B95195200E104A4 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		DA8B5ABA1A79640B00DDED09 /* api.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = api.cer; sourceTree = "<group>"; };
 		DAA5782819C1632000E972FC /* emailTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = emailTemplate.html; sourceTree = "<group>"; };
 		DAA5784C19C272C400E972FC /* SMSTemplate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SMSTemplate.txt; path = Resources/Text/SMSTemplate.txt; sourceTree = "<group>"; };
@@ -1772,10 +1817,16 @@
 		DABB75721B2840D9004E350D /* btn_add_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_add_black@3x.png"; path = "Resources/Artwork/btn_add_black@3x.png"; sourceTree = "<group>"; };
 		DABB757D1B2840E4004E350D /* btn_add@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_add@3x.png"; path = "Resources/Artwork/btn_add@3x.png"; sourceTree = "<group>"; };
 		DAC2508E1B2E037F006AB863 /* darken_bottom_table_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = darken_bottom_table_cell.png; path = Resources/Artwork/darken_bottom_table_cell.png; sourceTree = "<group>"; };
+		DAD6A7071B992C34009192EA /* Airbitz Develop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Airbitz Develop.entitlements"; sourceTree = "<group>"; };
+		DAD6A7091B992C5E009192EA /* Airbitz Testnet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Airbitz Testnet.entitlements"; sourceTree = "<group>"; };
+		DAD6A70A1B992C6A009192EA /* Airbitz Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Airbitz Widget.entitlements"; sourceTree = "<group>"; };
+		DAD6A7101B993054009192EA /* Airbitz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Airbitz.entitlements; path = Airbitz/Airbitz.entitlements; sourceTree = "<group>"; };
 		DAD9A4951B213EA500CB3EA4 /* icon_send_padded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_send_padded@2x.png"; path = "Resources/Artwork/icon_send_padded@2x.png"; sourceTree = "<group>"; };
 		DAD9A4A91B213F0B00CB3EA4 /* icon_request_padded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_request_padded@2x.png"; path = "Resources/Artwork/icon_request_padded@2x.png"; sourceTree = "<group>"; };
 		DAD9A4B01B217C2500CB3EA4 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = DL_URLServer/LaunchScreen.xib; sourceTree = "<group>"; };
 		DAD9A4B41B21804100CB3EA4 /* background_launch.png */ = {isa = PBXFileReference; explicitFileType = compiled; name = background_launch.png; path = Resources/Artwork/background_launch.png; sourceTree = "<group>"; };
+		DADA8AFF1B941CF100FAAEA3 /* NSMutableData+Secure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+Secure.h"; sourceTree = "<group>"; };
+		DADA8B001B941CF100FAAEA3 /* NSMutableData+Secure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+Secure.m"; sourceTree = "<group>"; };
 		DAE276121A9AEE8500E24523 /* AddressRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressRequestController.h; sourceTree = "<group>"; };
 		DAE276131A9AEE8500E24523 /* AddressRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressRequestController.m; sourceTree = "<group>"; };
 		DAE276201A9BF68100E24523 /* SignUpUsernameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpUsernameController.h; path = SignUp/SignUpUsernameController.h; sourceTree = "<group>"; };
@@ -1843,7 +1894,6 @@
 				7D98AD2819A7C550003D2BF6 /* CFNetwork.framework in Frameworks */,
 				7D98AD2A19A7C550003D2BF6 /* CoreGraphics.framework in Frameworks */,
 				7D98AD2B19A7C550003D2BF6 /* UIKit.framework in Frameworks */,
-				7D98AD2C19A7C550003D2BF6 /* libbitcoin-client.a in Frameworks */,
 				7D5E1CF419AFB34C00943A81 /* libssl.a in Frameworks */,
 				7D5E1CE319AFB2D400943A81 /* libboost_system.a in Frameworks */,
 				7D5E1CE919AFB2D400943A81 /* libjansson.a in Frameworks */,
@@ -1851,7 +1901,6 @@
 				7D5E1CF019AFB2D400943A81 /* libz.a in Frameworks */,
 				7D98AD3319A7C550003D2BF6 /* Foundation.framework in Frameworks */,
 				7D98AD3619A7C550003D2BF6 /* libzbar.a in Frameworks */,
-				7D5E1CEF19AFB2D400943A81 /* libwallet.a in Frameworks */,
 				17C92258FEBAD8A39BBFD0FC /* libPods.a in Frameworks */,
 				7D8B59C31A328895000AC178 /* HockeySDK.framework in Frameworks */,
 			);
@@ -1892,8 +1941,6 @@
 				B5675B4E18A17F6F002E0703 /* CoreGraphics.framework in Frameworks */,
 				B5675B5018A17F6F002E0703 /* UIKit.framework in Frameworks */,
 				7D8B59C21A328895000AC178 /* HockeySDK.framework in Frameworks */,
-				686C24831935601400F8E445 /* libbitcoin-client.a in Frameworks */,
-				B5F2E9A718D3BFEF008ACF88 /* libwallet.a in Frameworks */,
 				4C08A6DE18C29CEF0071B87C /* libjansson.a in Frameworks */,
 				4C08A6DC18C29CEF0071B87C /* libcrypto.a in Frameworks */,
 				4C08A6DB18C29CEF0071B87C /* libabc.a in Frameworks */,
@@ -1902,6 +1949,14 @@
 				4C08A6DD18C29CEF0071B87C /* libcurl.a in Frameworks */,
 				4C90463118C91E7A00179D9C /* libzbar.a in Frameworks */,
 				6A587502F675B6C6ECA2BB1B /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA7249471B95195200E104A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA72494C1B95195200E104A4 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1940,8 +1995,6 @@
 				DAE8648C1A88A58A00A17BD3 /* CoreGraphics.framework in Frameworks */,
 				DAE8648D1A88A58A00A17BD3 /* UIKit.framework in Frameworks */,
 				DAE8648E1A88A58A00A17BD3 /* HockeySDK.framework in Frameworks */,
-				DAE8648F1A88A58A00A17BD3 /* libbitcoin-client.a in Frameworks */,
-				DAE864901A88A58A00A17BD3 /* libwallet.a in Frameworks */,
 				DAE864911A88A58A00A17BD3 /* libjansson.a in Frameworks */,
 				DAE864921A88A58A00A17BD3 /* libcrypto.a in Frameworks */,
 				DAE864931A88A58A00A17BD3 /* libabc.a in Frameworks */,
@@ -1956,6 +2009,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34644B236044819AF2B4551B /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				3464428EE3E428ED04D5A79D /* Keychain.m */,
+				34644F74929069B539AACA12 /* Keychain.h */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 		4C08A6D118C29CDC0071B87C /* ABC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2109,7 +2171,6 @@
 			children = (
 				68C4AA211A0B4DD70010C837 /* FadingAlertView.h */,
 				68C4AA221A0B4DD70010C837 /* FadingAlertView.m */,
-				68C4AA231A0B4DD70010C837 /* FadingAlertView.xib */,
 				DA06FB161B0EB355000BCA46 /* FadingAlertViewNew.xib */,
 				DA06FB111B0E7CDD000BCA46 /* DropDownAlertView.h */,
 				DA06FB121B0E7D03000BCA46 /* DropDownAlertView.m */,
@@ -2304,8 +2365,12 @@
 		B5675B3F18A17F6F002E0703 = {
 			isa = PBXGroup;
 			children = (
+				DAD6A7101B993054009192EA /* Airbitz.entitlements */,
+				DAD6A7091B992C5E009192EA /* Airbitz Testnet.entitlements */,
+				DAD6A7071B992C34009192EA /* Airbitz Develop.entitlements */,
 				B57288F7193518F600417426 /* San Diego.gpx */,
 				B5675B5118A17F6F002E0703 /* AirBitz */,
+				DA72494D1B95195200E104A4 /* Airbitz Widget */,
 				B5675B4A18A17F6F002E0703 /* Frameworks */,
 				B5675B4918A17F6F002E0703 /* Products */,
 				E9B30ECB4BB83AB9C4A56899 /* Pods */,
@@ -2318,6 +2383,7 @@
 				B5675B4818A17F6F002E0703 /* Airbitz.app */,
 				7D98AE9919A7C550003D2BF6 /* Airbitz Testnet.app */,
 				DAE866291A88A58A00A17BD3 /* Airbitz Develop.app */,
+				DA72494A1B95195200E104A4 /* Airbitz Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2358,6 +2424,7 @@
 				B5675B4F18A17F6F002E0703 /* UIKit.framework */,
 				B5675B6D18A17F6F002E0703 /* XCTest.framework */,
 				E47C0EC32EE29D34C5A03A0B /* libPods.a */,
+				DA72494B1B95195200E104A4 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2433,6 +2500,7 @@
 				4C3C30A2191C1C90006923DE /* PickerTextView */,
 				4C3C308B1918347F006923DE /* PopupPickerView */,
 				B5C0A9A718EA0D09008F302C /* Request */,
+				DADA8AFC1B941CC400FAAEA3 /* SecureData */,
 				B5C0A9AB18EA0D78008F302C /* Send */,
 				DA13339A1A7B203C0051DE14 /* ScanView */,
 				B5004A2618A5C755003560A4 /* Server.h */,
@@ -2464,6 +2532,9 @@
 				B5675B5218A17F6F002E0703 /* Supporting Files */,
 				346448D77123858DD23C231B /* StylizedButtonOutline.m */,
 				3464417D3C4E858FE232DCD2 /* StylizedButtonOutline.h */,
+				34644B236044819AF2B4551B /* Keychain */,
+				3464407797F8700740E99592 /* AppGroupConstants.h */,
+				34644FF34889F908A681A698 /* airbitz.entitlements */,
 			);
 			path = AirBitz;
 			sourceTree = "<group>";
@@ -2628,6 +2699,9 @@
 				DA5A96051B30301E00CFA7C1 /* icon_transactions@3x.png */,
 				DA06F7181B0BDD78000BCA46 /* icon_USD_dark@2x.png */,
 				DA06F71A1B0BDD78000BCA46 /* icon_USD_light@2x.png */,
+				DA15308E1B9BBBD8007B24D3 /* icon_wallet_dark.png */,
+				DA15308F1B9BBBD8007B24D3 /* icon_wallet_dark@2x.png */,
+				DA1530901B9BBBD8007B24D3 /* icon_wallet_dark@3x.png */,
 				DA06F71E1B0BDD78000BCA46 /* img_collapseExpandBlueDown@2x.png */,
 				DA06F7201B0BDD78000BCA46 /* large-digit-input_selected@2x.png */,
 				DA06F7221B0BDD78000BCA46 /* large-digit-input@2x.png */,
@@ -2910,12 +2984,41 @@
 			path = Plugins;
 			sourceTree = "<group>";
 		};
+		DA72494D1B95195200E104A4 /* Airbitz Widget */ = {
+			isa = PBXGroup;
+			children = (
+				DAD6A70A1B992C6A009192EA /* Airbitz Widget.entitlements */,
+				DA7249501B95195200E104A4 /* TodayViewController.h */,
+				DA7249511B95195200E104A4 /* TodayViewController.m */,
+				DA7249531B95195200E104A4 /* MainInterface.storyboard */,
+				DA72494E1B95195200E104A4 /* Supporting Files */,
+			);
+			path = "Airbitz Widget";
+			sourceTree = "<group>";
+		};
+		DA72494E1B95195200E104A4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA72494F1B95195200E104A4 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		DAA5784819C23C8200E972FC /* Text */ = {
 			isa = PBXGroup;
 			children = (
 				DAA5784C19C272C400E972FC /* SMSTemplate.txt */,
 			);
 			name = Text;
+			sourceTree = "<group>";
+		};
+		DADA8AFC1B941CC400FAAEA3 /* SecureData */ = {
+			isa = PBXGroup;
+			children = (
+				DADA8AFF1B941CF100FAAEA3 /* NSMutableData+Secure.h */,
+				DADA8B001B941CF100FAAEA3 /* NSMutableData+Secure.m */,
+			);
+			name = SecureData;
 			sourceTree = "<group>";
 		};
 		DAE2761F1A9BF66000E24523 /* SignUp */ = {
@@ -3006,6 +3109,23 @@
 			productReference = B5675B4818A17F6F002E0703 /* Airbitz.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DA7249491B95195200E104A4 /* Airbitz Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA72495E1B95195200E104A4 /* Build configuration list for PBXNativeTarget "Airbitz Widget" */;
+			buildPhases = (
+				DA7249461B95195200E104A4 /* Sources */,
+				DA7249471B95195200E104A4 /* Frameworks */,
+				DA7249481B95195200E104A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Airbitz Widget";
+			productName = "Airbitz Widget";
+			productReference = DA72494A1B95195200E104A4 /* Airbitz Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		DAE863F41A88A58A00A17BD3 /* Airbitz-Develop */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DAE866261A88A58A00A17BD3 /* Build configuration list for PBXNativeTarget "Airbitz-Develop" */;
@@ -3016,10 +3136,12 @@
 				DAE864991A88A58A00A17BD3 /* Resources */,
 				DAE866241A88A58A00A17BD3 /* Run HockeyApp build agent */,
 				DAE866251A88A58A00A17BD3 /* Copy Pods Resources */,
+				DA8BA49E1BA145D1005E8E92 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DA8BA4991BA145D1005E8E92 /* PBXTargetDependency */,
 			);
 			name = "Airbitz-Develop";
 			productName = AirBitz;
@@ -3037,12 +3159,36 @@
 				TargetAttributes = {
 					7D98ACAB19A7C550003D2BF6 = {
 						DevelopmentTeam = G5LQ7MERPK;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					B5675B4718A17F6F002E0703 = {
 						DevelopmentTeam = G5LQ7MERPK;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					DA7249491B95195200E104A4 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = G5LQ7MERPK;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					DAE863F41A88A58A00A17BD3 = {
 						DevelopmentTeam = G5LQ7MERPK;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -3068,6 +3214,7 @@
 				B5675B4718A17F6F002E0703 /* Airbitz */,
 				7D98ACAB19A7C550003D2BF6 /* Airbitz-Testnet */,
 				DAE863F41A88A58A00A17BD3 /* Airbitz-Develop */,
+				DA7249491B95195200E104A4 /* Airbitz Widget */,
 			);
 		};
 /* End PBXProject section */
@@ -3207,6 +3354,7 @@
 				DA06F7AD1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06FB041B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA5A95C51B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */,
+				DA1530981B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */,
 				DA06FB3A1B0FEF32000BCA46 /* PopupPickerView2.xib in Resources */,
 				DA06F9A21B0BDD79000BCA46 /* h_seperator@2x.png in Resources */,
 				DAA8E9C11B1ED50B00BC870C /* icon_category_coffee_tea@2x.png in Resources */,
@@ -3217,6 +3365,7 @@
 				DAA8E9DF1B1ED50B00BC870C /* icon_category_restaurants@3x.png in Resources */,
 				DA5A95A21B301C5D00CFA7C1 /* icon_account_secure@2x.png in Resources */,
 				DA06FA951B0BDD79000BCA46 /* swipe-arrow@2x.png in Resources */,
+				DA1530921B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */,
 				DA1333A11A7B20840051DE14 /* ScanView~iphone.xib in Resources */,
 				DA5A95F21B302C9E00CFA7C1 /* icon_send@2x.png in Resources */,
 				DAA8E9F51B1EDCB400BC870C /* ico_nav_directory_dark@2x.png in Resources */,
@@ -3266,7 +3415,6 @@
 				DA5A95761B3009EC00CFA7C1 /* btn_collapse_expand.png in Resources */,
 				DA06FA1D1B0BDD79000BCA46 /* icon_rightArrow@2x.png in Resources */,
 				DA06FA7D1B0BDD79000BCA46 /* Red-X@2x.png in Resources */,
-				684861B11A0C01D7008E53F8 /* FadingAlertView.xib in Resources */,
 				DA5A95911B300A6400CFA7C1 /* btn_export@3x.png in Resources */,
 				7D98AE3619A7C550003D2BF6 /* Lato-Light.ttf in Resources */,
 				DA06F9DE1B0BDD79000BCA46 /* icon_export_dropbox@2x.png in Resources */,
@@ -3319,6 +3467,7 @@
 				DA06FA231B0BDD79000BCA46 /* icon_search@2x.png in Resources */,
 				DAE81D891AC204140064BA5D /* plugins in Resources */,
 				DA06F8191B0BDD79000BCA46 /* btn_add@2x.png in Resources */,
+				DA1530951B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */,
 				DA06FB0F1B0E7CB2000BCA46 /* DropDownAlertView.xib in Resources */,
 				DA5A95A51B301C5D00CFA7C1 /* icon_account_secure@3x.png in Resources */,
 				DAD9A4AE1B213F0B00CB3EA4 /* icon_request_padded@2x.png in Resources */,
@@ -3335,6 +3484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA06F7A01B0BDD79000BCA46 /* bd_icon_share@2x.png in Resources */,
+				DA1530971B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */,
 				DA06F7D61B0BDD79000BCA46 /* BLE_photo@2x.png in Resources */,
 				DA06FAE21B0BDD79000BCA46 /* UIButtonBarRefresh@2x.png in Resources */,
 				DA06FA641B0BDD79000BCA46 /* logo@2x.png in Resources */,
@@ -3450,13 +3600,13 @@
 				DAA8E9F41B1EDCB400BC870C /* ico_nav_directory_dark@2x.png in Resources */,
 				DA5A956C1B3009C000CFA7C1 /* btn_close.png in Resources */,
 				DAA8E9E41B1ED50B00BC870C /* icon_category_shopping@2x.png in Resources */,
-				68C4AA251A0B4DD70010C837 /* FadingAlertView.xib in Resources */,
 				DAA8E9E71B1ED50B00BC870C /* icon_category_shopping@3x.png in Resources */,
 				DA5A95D91B302C8000CFA7C1 /* icon_more@2x.png in Resources */,
 				DA5A95991B301C4100CFA7C1 /* icon_logout@2x.png in Resources */,
 				DA5A95811B300A6400CFA7C1 /* btn_export_white.png in Resources */,
 				DAE2762B1A9BFDFD00E24523 /* AccountCreate.storyboard in Resources */,
 				DA06F7641B0BDD79000BCA46 /* 4-bars@2x.png in Resources */,
+				DA1530911B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */,
 				DA5A959C1B301C4100CFA7C1 /* icon_logout@3x.png in Resources */,
 				DA06F9E91B0BDD79000BCA46 /* icon_export_google@2x.png in Resources */,
 				DA5A95841B300A6400CFA7C1 /* btn_export_white@2x.png in Resources */,
@@ -3513,6 +3663,7 @@
 				DA06FA4C1B0BDD79000BCA46 /* large-digit-input_selected@2x.png in Resources */,
 				DAA5782919C1632000E972FC /* emailTemplate.html in Resources */,
 				DA06F8D21B0BDD79000BCA46 /* btn_locateMe@2x.png in Resources */,
+				DA1530941B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */,
 				DABB756B1B2824BF004E350D /* btn_close_white@2x.png in Resources */,
 				DAA8E9DB1B1ED50B00BC870C /* icon_category_restaurants@2x.png in Resources */,
 				DA06FA3A1B0BDD79000BCA46 /* icon_USD_light@2x.png in Resources */,
@@ -3553,6 +3704,16 @@
 				DA06FAF11B0BDD79000BCA46 /* write-it-down.png in Resources */,
 				DA06F75E1B0BDD79000BCA46 /* 2-bars@2x.png in Resources */,
 				DA5A958A1B300A6400CFA7C1 /* btn_export.png in Resources */,
+				34644ECA590CFC13F9E6DD79 /* airbitz.entitlements in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA7249481B95195200E104A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA7249541B95195200E104A4 /* MainInterface.storyboard in Resources */,
+				DABBC77D1B98E8DB00D39A90 /* enable-camera.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3659,6 +3820,7 @@
 				DA06F9AF1B0BDD79000BCA46 /* icon_approved.png in Resources */,
 				DAA8E9D41B1ED50B00BC870C /* icon_category_gift_cards@2x.png in Resources */,
 				DA5A95C61B3020B000CFA7C1 /* ico_nav_directory_dark.png in Resources */,
+				DA1530991B9BBBD8007B24D3 /* icon_wallet_dark@3x.png in Resources */,
 				DA06F7AE1B0BDD79000BCA46 /* bd_icon_web@2x.png in Resources */,
 				DA06FB051B0CC107000BCA46 /* gift_box@2x.png in Resources */,
 				DA06FB3B1B0FEF33000BCA46 /* PopupPickerView2.xib in Resources */,
@@ -3669,6 +3831,7 @@
 				DAE8653B1A88A58A00A17BD3 /* Montserrat-Bold.ttf in Resources */,
 				DA5A95A31B301C5D00CFA7C1 /* icon_account_secure@2x.png in Resources */,
 				DA06FAD81B0BDD79000BCA46 /* thumb@2x.png in Resources */,
+				DA1530931B9BBBD8007B24D3 /* icon_wallet_dark.png in Resources */,
 				DAA8E9E01B1ED50B00BC870C /* icon_category_restaurants@3x.png in Resources */,
 				DA5A95F31B302C9E00CFA7C1 /* icon_send@2x.png in Resources */,
 				DA06FA961B0BDD79000BCA46 /* swipe-arrow@2x.png in Resources */,
@@ -3676,7 +3839,6 @@
 				DAA8E9F61B1EDCB400BC870C /* ico_nav_directory_dark@2x.png in Resources */,
 				DA5A956E1B3009C000CFA7C1 /* btn_close.png in Resources */,
 				DAA8E9E61B1ED50B00BC870C /* icon_category_shopping@2x.png in Resources */,
-				DAE8654C1A88A58A00A17BD3 /* FadingAlertView.xib in Resources */,
 				DAA8E9E91B1ED50B00BC870C /* icon_category_shopping@3x.png in Resources */,
 				DA5A95DB1B302C8000CFA7C1 /* icon_more@2x.png in Resources */,
 				DA5A959B1B301C4100CFA7C1 /* icon_logout@2x.png in Resources */,
@@ -3771,6 +3933,7 @@
 				DA06FA241B0BDD79000BCA46 /* icon_search@2x.png in Resources */,
 				DAE8661D1A88A58A00A17BD3 /* infoWallets.html in Resources */,
 				DA06F81A1B0BDD79000BCA46 /* btn_add@2x.png in Resources */,
+				DA1530961B9BBBD8007B24D3 /* icon_wallet_dark@2x.png in Resources */,
 				DA06FB101B0E7CB2000BCA46 /* DropDownAlertView.xib in Resources */,
 				DA5A95A61B301C5D00CFA7C1 /* icon_account_secure@3x.png in Resources */,
 				DAD9A4AF1B213F0B00CB3EA4 /* icon_request_padded@2x.png in Resources */,
@@ -4026,6 +4189,7 @@
 				DA6645511B0B408700B04C5B /* AirbitzViewController.m in Sources */,
 				7D98ACF719A7C550003D2BF6 /* Location.m in Sources */,
 				7D98ACF819A7C550003D2BF6 /* CoreBridge.m in Sources */,
+				DADA8B071B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */,
 				7D98ACF919A7C550003D2BF6 /* BalanceView.m in Sources */,
 				7D98ACFA19A7C550003D2BF6 /* BooleanCell.m in Sources */,
 				7D98ACFC19A7C550003D2BF6 /* CJSONDeserializer.m in Sources */,
@@ -4059,6 +4223,7 @@
 				7D98AD1019A7C550003D2BF6 /* PickerTextView.m in Sources */,
 				34644B507781CF1F8E7D5301 /* SignUpWriteItController.m in Sources */,
 				34644F1EE31C431DADB1F99C /* StylizedButtonOutline.m in Sources */,
+				346449DA2188D84932C47A50 /* Keychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4168,6 +4333,7 @@
 				687C1B061927FF81003A83E8 /* CoreBridge.m in Sources */,
 				B57C209618C25011005D7245 /* BalanceView.m in Sources */,
 				B55A031118EA538500845090 /* BooleanCell.m in Sources */,
+				DADA8B061B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */,
 				68390DB71A0406D700D3789F /* SpendingLimitsViewController.m in Sources */,
 				B5137C3918A435BD00DA4A34 /* CJSONDeserializer.m in Sources */,
 				B5C0A9AA18EA0D09008F302C /* RequestViewController.m in Sources */,
@@ -4201,6 +4367,15 @@
 				4C3C30A5191C1CAF006923DE /* PickerTextView.m in Sources */,
 				34644F47B5DBBBDBD702E03F /* SignUpWriteItController.m in Sources */,
 				34644DFBC522F75CE8481CB6 /* StylizedButtonOutline.m in Sources */,
+				34644F2A1881D1C4ADD87444 /* Keychain.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA7249461B95195200E104A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA7249521B95195200E104A4 /* TodayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4310,6 +4485,7 @@
 				DAE864521A88A58A00A17BD3 /* CoreBridge.m in Sources */,
 				DAE864531A88A58A00A17BD3 /* BalanceView.m in Sources */,
 				DAE864541A88A58A00A17BD3 /* BooleanCell.m in Sources */,
+				DADA8B081B941CF100FAAEA3 /* NSMutableData+Secure.m in Sources */,
 				DAE864561A88A58A00A17BD3 /* SpendingLimitsViewController.m in Sources */,
 				DAE864571A88A58A00A17BD3 /* CJSONDeserializer.m in Sources */,
 				DAE864581A88A58A00A17BD3 /* RequestViewController.m in Sources */,
@@ -4343,10 +4519,19 @@
 				DAE8646E1A88A58A00A17BD3 /* PickerTextView.m in Sources */,
 				346443C3E8845FA868E63AEA /* SignUpWriteItController.m in Sources */,
 				34644B2B5788D8A8EBC9F0E5 /* StylizedButtonOutline.m in Sources */,
+				346441888B4FEEADFEA96929 /* Keychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DA8BA4991BA145D1005E8E92 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA7249491B95195200E104A4 /* Airbitz Widget */;
+			targetProxy = DA8BA4981BA145D1005E8E92 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B5675B5418A17F6F002E0703 /* InfoPlist.strings */ = {
@@ -4374,6 +4559,9 @@
 			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
+				CODE_SIGN_ENTITLEMENTS = "Airbitz Testnet.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -4398,6 +4586,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "Airbitz Testnet";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4408,6 +4597,9 @@
 			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
+				CODE_SIGN_ENTITLEMENTS = "Airbitz Testnet.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -4432,6 +4624,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "Airbitz Testnet";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4454,6 +4647,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				"CODE_SIGN_RESOURCE_RULES_PATH[sdk=*]" = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -4470,9 +4664,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos8.4;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -4493,7 +4687,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Airbitz Inc (G5LQ7MERPK)";
+				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				"CODE_SIGN_RESOURCE_RULES_PATH[sdk=*]" = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -4504,8 +4699,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				SDKROOT = iphoneos;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				SDKROOT = iphoneos8.4;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4516,6 +4711,9 @@
 			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -4538,6 +4736,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4548,6 +4747,9 @@
 			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Airbitz Inc (G5LQ7MERPK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Airbitz Inc (G5LQ7MERPK)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AirBitz/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -4570,8 +4772,58 @@
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d4b5d2d1-edc7-4a75-b301-ec74d5cb7c88";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		DA7249581B95195200E104A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "Airbitz Widget/Airbitz Widget.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DA7249591B95195200E104A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "Airbitz Widget/Airbitz Widget.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Airbitz Inc (G5LQ7MERPK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7fea275a-78f2-4309-a6c1-515887cf8fa7";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4580,6 +4832,7 @@
 			baseConfigurationReference = 3FCE1AA2ECD7B6EEEA025CED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Develop";
+				CODE_SIGN_ENTITLEMENTS = "Airbitz Develop.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4615,7 +4868,8 @@
 			baseConfigurationReference = 188D8A965DB464149F922F3B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Develop";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "Airbitz Develop.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Airbitz Inc (G5LQ7MERPK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4639,7 +4893,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "Airbitz Develop";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ab9350a8-0e9e-4034-8024-e69e019dd5c1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4671,6 +4925,15 @@
 			buildConfigurations = (
 				B5675B7E18A17F6F002E0703 /* Debug */,
 				B5675B7F18A17F6F002E0703 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA72495E1B95195200E104A4 /* Build configuration list for PBXNativeTarget "Airbitz Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA7249581B95195200E104A4 /* Debug */,
+				DA7249591B95195200E104A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
