@@ -1653,6 +1653,7 @@ MainViewController *singleton;
 {
     if (_selectedViewController == _transactionsViewController)
     {
+        [_transactionsViewController dismissTransactionDetails];
         [_transactionsViewController dropdownWallets:YES];
     }
     else
