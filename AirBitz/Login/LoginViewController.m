@@ -1175,6 +1175,7 @@ typedef enum eReloginState
     if([User isLoggedIn])
     {
         _bSuccess = YES;
+        [SettingsViewController enableTouchID];
 
         [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:NO];
     }
