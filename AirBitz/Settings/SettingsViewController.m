@@ -404,10 +404,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 }
 
-- (void)bringUpEnableTouchIDWithPassword;
-{
-}
-
 - (void)bringUpCategoriesView
 {
     {
@@ -1419,7 +1415,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             }
             else
             {
-                [self showPasswordCheckAlert];
+                [self showPasswordCheckAlertForTouchID];
             }
 
         }
@@ -1629,7 +1625,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             // Disable TouchID in LocalSettings
             [SettingsViewController disableTouchID];
             [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
-            [SettingsViewController disableTouchID];
         }
         else
         {
@@ -1654,12 +1649,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         }
         else if (buttonIndex == 1)
         {
-            [self showPasswordCheckAlert];
+            [self showPasswordCheckAlertForTouchID];
         }
     }
 }
 
-- (void)showPasswordCheckAlert
+- (void)showPasswordCheckAlertForTouchID
 {
     // Popup to ask user for their password
     NSString *title = NSLocalizedString(@"Touch ID", nil);

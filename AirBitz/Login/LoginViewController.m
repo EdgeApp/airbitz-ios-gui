@@ -62,6 +62,9 @@ typedef enum eLoginMode
     CGFloat                         _originalPINSelectorWidth;
     CGFloat                         _originalTextBitcoinWalletHeight;
     UIAlertView                     *_enableTouchIDAlertView;
+    UIAlertView                     *_passwordCheckAlert;
+    UIAlertView                     *_passwordIncorrectAlert;
+    NSString                        *_tempPassword;
 
 }
 
@@ -1327,13 +1330,51 @@ typedef enum eReloginState
                 [SettingsViewController enableTouchID];
             else
             {
-                // Call SettingsViewController to popup password alert
-#warning "****************** Need to impelment -paulvp ******************"
+                [self showPasswordCheckAlertForTouchID];
             }
         }
 
         return;
     }
+    else if (alertView == _passwordCheckAlert)
+    {
+        if (0 == buttonIndex)
+        {
+            //
+            // Need to disable TouchID in settings.
+            //
+            // Disable TouchID in LocalSettings
+            [SettingsViewController disableTouchID];
+            [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
+        }
+        else
+        {
+            //
+            // Check the password
+            //
+            _tempPassword = [[alertView textFieldAtIndex:0] text];
+
+            [Util checkPasswordAsync:_tempPassword
+                        withSelector:@selector(handlePasswordResults:)
+                          controller:self];
+            [MainViewController fadingAlert:NSLocalizedString(@"Checking password...", nil)
+                                   holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        }
+        return;
+    }
+    else if (_passwordIncorrectAlert == alertView)
+    {
+        if (buttonIndex == 0)
+        {
+            [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
+            [SettingsViewController disableTouchID];
+        }
+        else if (buttonIndex == 1)
+        {
+            [self showPasswordCheckAlertForTouchID];
+        }
+    }
+
     [self.usernameSelector.textField resignFirstResponder];
     // if they said they wanted to delete the account
     if (buttonIndex == 1)
@@ -1343,6 +1384,47 @@ typedef enum eReloginState
         [self.usernameSelector dismissPopupPicker];
     }
 }
+
+- (void)showPasswordCheckAlertForTouchID
+{
+    // Popup to ask user for their password
+    NSString *title = NSLocalizedString(@"Touch ID", nil);
+    NSString *message = NSLocalizedString(@"Please enter your password to enable Touch ID", nil);
+    // show password reminder test
+    _passwordCheckAlert = [[UIAlertView alloc] initWithTitle:title
+                                                     message:message
+                                                    delegate:self
+                                           cancelButtonTitle:@"Later"
+                                           otherButtonTitles:@"OK", nil];
+    _passwordCheckAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
+    [_passwordCheckAlert show];
+}
+
+- (void)handlePasswordResults:(NSNumber *)authenticated
+{
+    BOOL bAuthenticated = [authenticated boolValue];
+    if (bAuthenticated)
+    {
+        [User Singleton].password = _tempPassword;
+        _tempPassword = nil;
+        [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
+
+        // Enable Touch ID
+        [SettingsViewController enableTouchID];
+
+    }
+    else
+    {
+        _passwordIncorrectAlert = [[UIAlertView alloc]
+                initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
+                      message:NSLocalizedString(@"Try again?", nil)
+                     delegate:self
+            cancelButtonTitle:@"NO"
+            otherButtonTitles:@"YES", nil];
+        [_passwordIncorrectAlert show];
+    }
+}
+
 
 #pragma mark - ButtonSelectorView delegates
 
