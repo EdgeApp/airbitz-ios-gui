@@ -886,6 +886,7 @@
         [MainViewController fadingAlert:NSLocalizedString(@"Incorrect password", nil)];
         [_withdrawlPIN becomeFirstResponder];
         [_withdrawlPIN selectAll:nil];
+        [_confirmationSlider resetIn:1.0];
     }
 }
 
