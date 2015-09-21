@@ -24,6 +24,7 @@
 
 + (NSString *) getKeychainString:(NSString *)key error:(NSError **)error;
 + (NSString *) createKeyWithUsername:(NSString *)username key:(NSString *)key;
++ (BOOL) bHasSecureEnclave;
 
 + (BOOL)authenticateTouchID:(NSString *)promptString fallbackString:(NSString *)fallbackString;
 

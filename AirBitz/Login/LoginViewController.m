@@ -314,6 +314,8 @@ typedef enum eReloginState
 
 - (void)autoReloginOrTouchIDIfPossible
 {
+    if (! [Keychain bHasSecureEnclave] ) return;
+
     NSString *username = [LocalSettings controller].cachedUsername;
 
     //
@@ -633,33 +635,36 @@ typedef enum eReloginState
                     [[User Singleton] resetPINLoginInvalidEntryCount];
                     [self.delegate LoginViewControllerDidPINLogin];
 
-                    //
-                    // Check if user has not yet been asked to enable touchID on this device
-                    //
-
-                    BOOL onEnabled  = ( [[LocalSettings controller].touchIDUsersEnabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
-                    BOOL onDisabled = ( [[LocalSettings controller].touchIDUsersDisabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
-
-                    if (!onEnabled && !onDisabled)
+                    if ([Keychain bHasSecureEnclave])
                     {
                         //
-                        // Ask if they want TouchID enabled for this user on this device
+                        // Check if user has not yet been asked to enable touchID on this device
                         //
-                        NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
-                        NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
-                        _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
-                                                                             message:message
-                                                                            delegate:self
-                                                                   cancelButtonTitle:@"Later"
-                                                                   otherButtonTitles:@"OK", nil];
-                        _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
-                        [_enableTouchIDAlertView show];
-                    }
-                    else
-                    {
-                        [Keychain updateLoginKeychainInfo:[User Singleton].name
-                                                 password:[User Singleton].password
-                                               useTouchID:!onDisabled];
+
+                        BOOL onEnabled  = ( [[LocalSettings controller].touchIDUsersEnabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+                        BOOL onDisabled = ( [[LocalSettings controller].touchIDUsersDisabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+
+                        if (!onEnabled && !onDisabled)
+                        {
+                            //
+                            // Ask if they want TouchID enabled for this user on this device
+                            //
+                            NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
+                            NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
+                            _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                                                 message:message
+                                                                                delegate:self
+                                                                       cancelButtonTitle:@"Later"
+                                                                       otherButtonTitles:@"OK", nil];
+                            _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
+                            [_enableTouchIDAlertView show];
+                        }
+                        else
+                        {
+                            [Keychain updateLoginKeychainInfo:[User Singleton].name
+                                                     password:[User Singleton].password
+                                                   useTouchID:!onDisabled];
+                        }
                     }
 
                     break;
@@ -1023,33 +1028,36 @@ typedef enum eReloginState
            setupPIN:YES];
         [self.delegate loginViewControllerDidLogin:NO newDevice:bNewDeviceLogin];
 
-        //
-        // Check if user has not yet been asked to enable touchID on this device
-        //
-
-        BOOL onEnabled  = ( [[LocalSettings controller].touchIDUsersEnabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
-        BOOL onDisabled = ( [[LocalSettings controller].touchIDUsersDisabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
-
-        if (!onEnabled && !onDisabled)
+        if ([Keychain bHasSecureEnclave])
         {
             //
-            // Ask if they want TouchID enabled for this user on this device
+            // Check if user has not yet been asked to enable touchID on this device
             //
-            NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
-            NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
-            _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
-                                                                 message:message
-                                                                delegate:self
-                                                       cancelButtonTitle:@"Later"
-                                                       otherButtonTitles:@"OK", nil];
-            _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
-            [_enableTouchIDAlertView show];
-        }
-        else
-        {
-            [Keychain updateLoginKeychainInfo:[User Singleton].name
-                                     password:[User Singleton].password
-                                   useTouchID:!onDisabled];
+
+            BOOL onEnabled  = ( [[LocalSettings controller].touchIDUsersEnabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+            BOOL onDisabled = ( [[LocalSettings controller].touchIDUsersDisabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
+
+            if (!onEnabled && !onDisabled)
+            {
+                //
+                // Ask if they want TouchID enabled for this user on this device
+                //
+                NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
+                NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
+                _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                                     message:message
+                                                                    delegate:self
+                                                           cancelButtonTitle:@"Later"
+                                                           otherButtonTitles:@"OK", nil];
+                _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
+                [_enableTouchIDAlertView show];
+            }
+            else
+            {
+                [Keychain updateLoginKeychainInfo:[User Singleton].name
+                                         password:[User Singleton].password
+                                       useTouchID:!onDisabled];
+            }
         }
 
     } else if (ABC_CC_InvalidOTP == _resultCode) {

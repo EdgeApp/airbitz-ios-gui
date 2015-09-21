@@ -973,18 +973,28 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         }
         else if (indexPath.row == ROW_TOUCHID)
         {
-            cell.name.text = NSLocalizedString(@"Use TouchID", @"settings text");
-            
-            if ([[LocalSettings controller].touchIDUsersDisabled indexOfObject:[User Singleton].name] != NSNotFound)
-                [cell.state setOn:NO animated:NO];
-            else
-                [cell.state setOn:YES animated:NO];
-            
-            if ([CoreBridge passwordExists] && 1) {
-                cell.state.userInteractionEnabled = YES;
-            } else {
+            if (! [Keychain bHasSecureEnclave])
+            {
+                cell.name.text = NSLocalizedString(@"TouchID: Unsupported Device", @"settings text");
                 cell.state.userInteractionEnabled = NO;
+                [cell.state setOn:NO animated:NO];
             }
+            else
+            {
+                cell.name.text = NSLocalizedString(@"Use TouchID", @"settings text");
+
+                if ([[LocalSettings controller].touchIDUsersDisabled indexOfObject:[User Singleton].name] != NSNotFound)
+                    [cell.state setOn:NO animated:NO];
+                else
+                    [cell.state setOn:YES animated:NO];
+
+                if ([CoreBridge passwordExists] && 1) {
+                    cell.state.userInteractionEnabled = YES;
+                } else {
+                    cell.state.userInteractionEnabled = NO;
+                }
+            }
+
         }
     }
 	

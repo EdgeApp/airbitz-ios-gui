@@ -19,8 +19,9 @@
 + (BOOL) setKeychainData:(NSData *)data key:(NSString *)key authenticated:(BOOL) authenticated;
 {
     if (! key) return NO;
+    if (![Keychain bHasSecureEnclave]) return NO;
 
-    id accessible = (authenticated) ? (__bridge id)kSecAttrAccessibleWhenUnlockedThisDeviceOnly :
+        id accessible = (authenticated) ? (__bridge id)kSecAttrAccessibleWhenUnlockedThisDeviceOnly :
             (__bridge id)kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly;
     NSDictionary *query = @{(__bridge id)kSecClass:(__bridge id)kSecClassGenericPassword,
             (__bridge id)kSecAttrService:SEC_ATTR_SERVICE,
@@ -119,6 +120,19 @@
     return [NSString stringWithFormat:@"%@___%@",username,key];
 }
 
++ (BOOL) bHasSecureEnclave;
+{
+    LAContext *context = [LAContext new];
+    NSError *error = nil;
+
+    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error])
+    {
+        return YES;
+    }
+
+    return NO;
+}
+
 // Authenticate w/touchID
 + (BOOL)authenticateTouchID:(NSString *)promptString fallbackString:(NSString *)fallbackString;
 {
@@ -191,6 +205,8 @@
 + (BOOL) disableKeychainBasedOnSettings;
 {
     BOOL disableFingerprint = NO;
+    if (![Keychain bHasSecureEnclave])
+        return YES;
 
     if ([[LocalSettings controller].touchIDUsersDisabled indexOfObject:[User Singleton].name] != NSNotFound)
         disableFingerprint = YES;
