@@ -301,6 +301,7 @@
 		7DFD23111A1FF98A008C43FB /* UIPhotoGallerySliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFD230E1A1FF98A008C43FB /* UIPhotoGallerySliderView.xib */; };
 		7DFD23121A1FF98A008C43FB /* UIPhotoGallerySliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFD230E1A1FF98A008C43FB /* UIPhotoGallerySliderView.xib */; };
 		7DFF2F8B1A02E50E00813733 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFF2F8A1A02E50E00813733 /* MessageUI.framework */; };
+		A60FCC021BB09B8500627FF4 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA72494A1B95195200E104A4 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
 		B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */; };
@@ -853,7 +854,6 @@
 		DA7249541B95195200E104A4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7249531B95195200E104A4 /* MainInterface.storyboard */; };
 		DA8B5ABB1A79640B00DDED09 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA8B5ABA1A79640B00DDED09 /* api.cer */; };
 		DA8B5AC01A79864800DDED09 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA8B5ABA1A79640B00DDED09 /* api.cer */; };
-		DA8BA4971BA145D1005E8E92 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA72494A1B95195200E104A4 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DAA5782919C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
 		DAA5782A19C1632000E972FC /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DAA5782819C1632000E972FC /* emailTemplate.html */; };
 		DAA5784D19C272C400E972FC /* SMSTemplate.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAA5784C19C272C400E972FC /* SMSTemplate.txt */; };
@@ -1206,6 +1206,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A60FCC031BB09B8500627FF4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5675B4018A17F6F002E0703 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA7249491B95195200E104A4;
+			remoteInfo = "Airbitz Widget";
+		};
 		B50504F6193F7AC4007D4960 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B505FB4B193F7AC1007D4960 /* GTL.xcodeproj */;
@@ -1234,23 +1241,16 @@
 			remoteGlobalIDString = 4F1AD9020B71603F00DC0485;
 			remoteInfo = DevelopmentTestTool;
 		};
-		DA8BA4981BA145D1005E8E92 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5675B4018A17F6F002E0703 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DA7249491B95195200E104A4;
-			remoteInfo = "Airbitz Widget";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		DA8BA49E1BA145D1005E8E92 /* Embed App Extensions */ = {
+		A60FCC051BB09B8500627FF4 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				DA8BA4971BA145D1005E8E92 /* Airbitz Widget.appex in Embed App Extensions */,
+				A60FCC021BB09B8500627FF4 /* Airbitz Widget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3099,10 +3099,12 @@
 				B5675B4618A17F6F002E0703 /* Resources */,
 				7D6EDB7619A66C50007C33AE /* Run HockeyApp build agent */,
 				AB35436AC4AF35BB26BEAB95 /* Copy Pods Resources */,
+				A60FCC051BB09B8500627FF4 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A60FCC041BB09B8500627FF4 /* PBXTargetDependency */,
 			);
 			name = Airbitz;
 			productName = AirBitz;
@@ -3136,12 +3138,10 @@
 				DAE864991A88A58A00A17BD3 /* Resources */,
 				DAE866241A88A58A00A17BD3 /* Run HockeyApp build agent */,
 				DAE866251A88A58A00A17BD3 /* Copy Pods Resources */,
-				DA8BA49E1BA145D1005E8E92 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DA8BA4991BA145D1005E8E92 /* PBXTargetDependency */,
 			);
 			name = "Airbitz-Develop";
 			productName = AirBitz;
@@ -4526,10 +4526,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		DA8BA4991BA145D1005E8E92 /* PBXTargetDependency */ = {
+		A60FCC041BB09B8500627FF4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DA7249491B95195200E104A4 /* Airbitz Widget */;
-			targetProxy = DA8BA4981BA145D1005E8E92 /* PBXContainerItemProxy */;
+			targetProxy = A60FCC031BB09B8500627FF4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4772,7 +4772,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d4b5d2d1-edc7-4a75-b301-ec74d5cb7c88";
+				PROVISIONING_PROFILE = "2d15c9d8-e4f6-405d-afe5-467b315a3fe7";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4810,7 +4810,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Airbitz Widget/Airbitz Widget.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Airbitz Inc (G5LQ7MERPK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Airbitz Inc (G5LQ7MERPK)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4822,7 +4822,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7fea275a-78f2-4309-a6c1-515887cf8fa7";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -4893,7 +4893,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "Airbitz Develop";
-				PROVISIONING_PROFILE = "ab9350a8-0e9e-4034-8024-e69e019dd5c1";
+				PROVISIONING_PROFILE = "0da6bd46-b3d2-4558-92ce-d2fe4832878a";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
