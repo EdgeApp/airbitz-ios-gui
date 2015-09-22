@@ -979,6 +979,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                 cell.state.userInteractionEnabled = NO;
                 [cell.state setOn:NO animated:NO];
             }
+            else if (![CoreBridge passwordExists])
+            {
+                cell.name.text = NSLocalizedString(@"TouchID: Set password first", @"settings text");
+                cell.state.userInteractionEnabled = NO;
+                [cell.state setOn:NO animated:NO];
+            }
             else
             {
                 cell.name.text = NSLocalizedString(@"Use TouchID", @"settings text");

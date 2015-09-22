@@ -635,7 +635,7 @@ typedef enum eReloginState
                     [[User Singleton] resetPINLoginInvalidEntryCount];
                     [self.delegate LoginViewControllerDidPINLogin];
 
-                    if ([Keychain bHasSecureEnclave])
+                    if ([Keychain bHasSecureEnclave] && [CoreBridge passwordExists])
                     {
                         //
                         // Check if user has not yet been asked to enable touchID on this device
