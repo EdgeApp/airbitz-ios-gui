@@ -849,6 +849,7 @@
 		DA6645501B0B408600B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
 		DA6645511B0B408700B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
 		DA6645521B0B408700B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
+		DA6C24461BB11CC10080F101 /* QR-bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6C24451BB11CC10080F101 /* QR-bracket.png */; settings = {ASSET_TAGS = (); }; };
 		DA72494C1B95195200E104A4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA72494B1B95195200E104A4 /* NotificationCenter.framework */; };
 		DA7249521B95195200E104A4 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7249511B95195200E104A4 /* TodayViewController.m */; };
 		DA7249541B95195200E104A4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7249531B95195200E104A4 /* MainInterface.storyboard */; };
@@ -1780,6 +1781,7 @@
 		DA6645241B07175A00B04C5B /* BlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurView.m; sourceTree = "<group>"; };
 		DA66454A1B0B37F000B04C5B /* AirbitzViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirbitzViewController.h; sourceTree = "<group>"; };
 		DA66454F1B0B408600B04C5B /* AirbitzViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirbitzViewController.m; sourceTree = "<group>"; };
+		DA6C24451BB11CC10080F101 /* QR-bracket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "QR-bracket.png"; path = "Resources/Artwork/QR-bracket.png"; sourceTree = "<group>"; };
 		DA72494A1B95195200E104A4 /* Airbitz Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Airbitz Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA72494B1B95195200E104A4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		DA72494F1B95195200E104A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2711,6 +2713,7 @@
 				DA06F72A1B0BDD78000BCA46 /* password_dot@2x.png */,
 				DA06F72C1B0BDD78000BCA46 /* postcard-mountain-blue@2x.jpg */,
 				DA06F72E1B0BDD78000BCA46 /* postcard-mountain@2x.png */,
+				DA6C24451BB11CC10080F101 /* QR-bracket.png */,
 				DA06F7301B0BDD78000BCA46 /* Red-X@2x.png */,
 				DA06F7321B0BDD78000BCA46 /* ribbon@2x.png */,
 				DA06F7381B0BDD78000BCA46 /* swipe-arrow@2x.png */,
@@ -3712,6 +3715,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA6C24461BB11CC10080F101 /* QR-bracket.png in Resources */,
 				DA7249541B95195200E104A4 /* MainInterface.storyboard in Resources */,
 				DABBC77D1B98E8DB00D39A90 /* enable-camera.png in Resources */,
 			);
@@ -4774,7 +4778,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2d15c9d8-e4f6-405d-afe5-467b315a3fe7";
+				PROVISIONING_PROFILE = "8a41bf21-20f0-4632-b283-d1360b5aca4f";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
