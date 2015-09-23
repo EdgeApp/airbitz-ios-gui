@@ -861,6 +861,8 @@
             }
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
+            [_confirmationSlider resetIn:1.0];
+
         } else if (_passwordRequired) {
             [Util checkPasswordAsync:self.withdrawlPIN.text withSelector:@selector(handlePasswordCheck:) controller:self];
         } else {
@@ -896,6 +898,7 @@
 {
     if (_spendTarget.pSpend->amount == 0) {
         [self fadingAlertDelayed:NSLocalizedString(@"Please enter an amount to send", nil)];
+        [_confirmationSlider resetIn:1.0];
     } else {
         [self initiateSendRequest];
     }

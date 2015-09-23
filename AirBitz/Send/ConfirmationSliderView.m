@@ -137,9 +137,9 @@
 		 }
 		 completion:^(BOOL finished)
 		 {
-			[self.delegate ConfirmationSliderDidConfirm:self];
 			 bAllowTouches = NO;
              self.spinnerView.hidden = NO;
+			 [self.delegate ConfirmationSliderDidConfirm:self];
 		 }];
 	}
 }
