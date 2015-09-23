@@ -1696,6 +1696,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
         // Enable Touch ID
         [SettingsViewController enableTouchID];
+        [self.tableView reloadData];
 
     }
     else
