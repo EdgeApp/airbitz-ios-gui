@@ -244,7 +244,18 @@ typedef enum eRequestType
     self.dateLabel.text = [dateFormatter stringFromDate:self.transaction.date];
     self.nameTextField.text = self.transaction.strName;
     self.notesTextView.text = self.transaction.strNotes;
-    self.pickerTextCategory.textField.text = self.transaction.strCategory;
+
+    if ([self.transaction.strCategory length] > 1)
+    {
+        self.pickerTextCategory.textField.text = self.transaction.strCategory;
+    }
+    else
+    {
+        if (_transaction.amountSatoshi < 0)
+            self.pickerTextCategory.textField.text = @"Expense:";
+        else
+            self.pickerTextCategory.textField.text = @"Income:";
+    }
 
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
 
