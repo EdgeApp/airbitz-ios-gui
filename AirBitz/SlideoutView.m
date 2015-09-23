@@ -98,36 +98,40 @@
 {
     if ([User isLoggedIn])
     {
-        self.accountPicker.delegate = self;
+        if (show)
+        {
+            self.accountPicker.delegate = self;
 
-        _buySellButton.hidden = !SHOW_BUY_SELL;
-        _buySellDivider.hidden = !SHOW_BUY_SELL;
+            _buySellButton.hidden = !SHOW_BUY_SELL;
+            _buySellDivider.hidden = !SHOW_BUY_SELL;
 
-        // set up the specifics on our picker text view
-        [self.accountPicker setTopMostView:self.otherAccountsView];
-        CGRect frame = self.accountPicker.frame;
-        frame.size.width = self.otherAccountsView.frame.size.width;
-        self.accountPicker.frame = frame;
-        [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
-        [self.accountPicker setRoundedAndShadowed:NO];
+            // set up the specifics on our picker text view
+            [self.accountPicker setTopMostView:self.otherAccountsView];
+            CGRect frame = self.accountPicker.frame;
+            frame.size.width = self.otherAccountsView.frame.size.width;
+            self.accountPicker.frame = frame;
+            [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
+            [self.accountPicker setRoundedAndShadowed:NO];
 
-        int num = [User Singleton].defaultCurrencyNum;
+            int num = [User Singleton].defaultCurrencyNum;
 
-        self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:YES];
+            self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:YES];
 
 
-        self.accountText.text = [User Singleton].name;
-        [self.accountButton setAccessibilityLabel:[User Singleton].name];
+            self.accountText.text = [User Singleton].name;
+            [self.accountButton setAccessibilityLabel:[User Singleton].name];
 
-        self.lowerViews.hidden = NO;
-        self.otherAccountsView.hidden = YES;
-        self.otherAccountsView.clipsToBounds = YES;
+            self.lowerViews.hidden = NO;
+            self.otherAccountsView.hidden = YES;
+            self.otherAccountsView.clipsToBounds = YES;
 
-        CGRect lframe = self.lowerViews.frame;
-        CGRect oframe = self.otherAccountsView.frame;
-        oframe.size.height = lframe.size.height;
-        self.lowerViews.frame = lframe;
-        self.otherAccountsView.frame = oframe;
+            CGRect lframe = self.lowerViews.frame;
+            CGRect oframe = self.otherAccountsView.frame;
+            oframe.size.height = lframe.size.height;
+            self.lowerViews.frame = lframe;
+            self.otherAccountsView.frame = oframe;
+
+        }
 
         [self showSlideout:show withAnimation:YES];
     }
@@ -141,8 +145,11 @@
 {
     if (!show)
     {
-//        CGRect frame = self.frame;
-//        frame.origin.x = frame.origin.x + frame.size.width;
+        if(!self.otherAccountsView.hidden)
+        {
+            [self accountTouched];
+        }
+
         if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWillClose:)]) {
             [self.delegate slideoutWillClose:self];
         }
