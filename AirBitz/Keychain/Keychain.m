@@ -218,7 +218,7 @@
     if ([User Singleton].bDisablePINLogin && disableFingerprint)
     {
         // If user has disabled TouchID and PIN relogin, then do not use Keychain at all for maximum security
-        [self clearKeychainInfo];
+        [Keychain clearKeychainInfo:[User Singleton].name];
         return YES;
     }
 

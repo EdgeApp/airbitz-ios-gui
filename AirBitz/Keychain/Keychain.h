@@ -31,7 +31,7 @@
 + (void) disableRelogin:(NSString *)username;
 + (void) disableTouchID:(NSString *)username;
 + (BOOL) disableKeychainBasedOnSettings;
-+ (void) clearKeychainInfo;
++ (void) clearKeychainInfo:(NSString *)username;
 + (void) updateLoginKeychainInfo:(NSString *)username
                         password:(NSString *)password
                       useTouchID:(BOOL) bUseTouchID;
