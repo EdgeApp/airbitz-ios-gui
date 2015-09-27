@@ -124,8 +124,98 @@ static BOOL bOtpError = NO;
         bInitialized = YES;
 
         [CoreBridge cleanWallets];
+
+        tABC_Error Error;
+        tABC_Currency       *aCurrencies;
+        int                 currencyCount;
+
+        Error.code = ABC_CC_Ok;
+
+        NSMutableData *seedData = [[NSMutableData alloc] init];
+        [CoreBridge fillSeedData:seedData];
+
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *docs_dir = [paths objectAtIndex:0];
+        NSString *ca_path = [[NSBundle mainBundle] pathForResource:@"ca-certificates" ofType:@"crt"];
+
+        Error.code = ABC_CC_Ok;
+        ABC_Initialize([docs_dir UTF8String],
+                [ca_path UTF8String],
+                (unsigned char *)[seedData bytes],
+                (unsigned int)[seedData length],
+                &Error);
+        [Util printABC_Error:&Error];
+
+        // Fetch general info as soon as possible
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            tABC_Error error;
+            ABC_GeneralInfoUpdate(&error);
+            [Util printABC_Error:&error];
+        });
+
+        Error.code = ABC_CC_Ok;
+
+        // get the currencies
+        aCurrencies = NULL;
+        ABC_GetCurrencies(&aCurrencies, &currencyCount, &Error);
+        [Util printABC_Error:&Error];
+
+        singleton.currencyCount = currencyCount;
+        // set up our internal currency arrays
+        NSMutableArray *arrayCurrencyCodes = [[NSMutableArray alloc] initWithCapacity:singleton.currencyCount];
+        NSMutableArray *arrayCurrencyNums = [[NSMutableArray alloc] initWithCapacity:singleton.currencyCount];
+        NSMutableArray *arrayCurrencyStrings = [[NSMutableArray alloc] init];
+        for (int i = 0; i < singleton.currencyCount; i++)
+        {
+            [arrayCurrencyStrings addObject:[NSString stringWithFormat:@"%s - %@",
+                                                                       aCurrencies[i].szCode,
+                                                                       [NSString stringWithUTF8String:aCurrencies[i].szDescription]]];
+            [arrayCurrencyNums addObject:[NSNumber numberWithInt:aCurrencies[i].num]];
+            [arrayCurrencyCodes addObject:[NSString stringWithUTF8String:aCurrencies[i].szCode]];
+        }
+        singleton.arrayCurrencyCodes = arrayCurrencyCodes;
+        singleton.arrayCurrencyNums = arrayCurrencyNums;
+        singleton.arrayCurrencyStrings = arrayCurrencyStrings;
     }
 }
+
++ (void)fillSeedData:(NSMutableData *)data
+{
+    NSMutableString *strSeed = [[NSMutableString alloc] init];
+
+    // add the advertiser identifier
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)])
+    {
+        [strSeed appendString:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    }
+
+    // add the UUID
+    CFUUIDRef theUUID = CFUUIDCreate(NULL);
+    CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+    CFRelease(theUUID);
+    [strSeed appendString:[[NSString alloc] initWithString:(__bridge NSString *)string]];
+    CFRelease(string);
+
+    // add the device name
+    [strSeed appendString:[[UIDevice currentDevice] name]];
+
+    // add the string to the data
+    [data appendData:[strSeed dataUsingEncoding:NSUTF8StringEncoding]];
+
+    double time = CACurrentMediaTime();
+
+    [data appendBytes:&time length:sizeof(double)];
+
+    UInt32 randomBytes = 0;
+    if (0 == SecRandomCopyBytes(kSecRandomDefault, sizeof(int), (uint8_t*)&randomBytes)) {
+        [data appendBytes:&randomBytes length:sizeof(UInt32)];
+    }
+
+    u_int32_t rand = arc4random();
+    [data appendBytes:&rand length:sizeof(u_int32_t)];
+}
+
+
 
 + (void)freeAll
 {

@@ -433,7 +433,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNY-oK-5F5">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNY-oK-5F5" userLabel="View - Main">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uak-ip-kgV" customClass="LatoLabel">
@@ -510,15 +510,24 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                                             </textField>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="HKk-4P-SL1" customClass="LatoLabel">
-                                                <rect key="frame" x="119" y="12" width="132" height="21"/>
+                                                <rect key="frame" x="161" y="12" width="90" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="S6h-Nq-Gdt"/>
-                                                    <constraint firstAttribute="width" constant="132" id="n51-0S-edB"/>
+                                                    <constraint firstAttribute="width" constant="90" id="n51-0S-edB"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.65098039215686276" green="0.87450980392156863" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcd-qy-Jjm" userLabel="Change fiat button">
+                                                <rect key="frame" x="161" y="12" width="90" height="21"/>
+                                                <state key="normal" title="Button">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="ChangeFiatButton:" destination="mXe-0d-x2m" eventType="touchUpInside" id="5ca-jn-AvX"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="GNf-rJ-hJ5" customClass="LatoLabel">
                                                 <rect key="frame" x="5" y="7" width="35" height="32"/>
                                                 <constraints>
@@ -536,11 +545,15 @@
                                             <constraint firstAttribute="centerY" secondItem="aWm-mP-gxj" secondAttribute="centerY" id="3ue-Sx-gBH"/>
                                             <constraint firstAttribute="trailing" secondItem="HKk-4P-SL1" secondAttribute="trailing" constant="9" id="6Mm-0q-Sv2"/>
                                             <constraint firstItem="GNf-rJ-hJ5" firstAttribute="leading" secondItem="pdu-nu-njT" secondAttribute="leading" constant="5" id="9hr-mZ-A3K"/>
+                                            <constraint firstItem="HKk-4P-SL1" firstAttribute="leading" secondItem="kcd-qy-Jjm" secondAttribute="leading" id="CGE-Ix-wAB"/>
                                             <constraint firstAttribute="centerY" secondItem="GNf-rJ-hJ5" secondAttribute="centerY" id="Fnq-cz-G7q"/>
+                                            <constraint firstItem="HKk-4P-SL1" firstAttribute="bottom" secondItem="kcd-qy-Jjm" secondAttribute="bottom" id="Lh9-Fn-b7E"/>
                                             <constraint firstItem="aWm-mP-gxj" firstAttribute="leading" secondItem="GNf-rJ-hJ5" secondAttribute="trailing" constant="3" id="N2y-Bj-Qr2"/>
                                             <constraint firstItem="aWm-mP-gxj" firstAttribute="top" secondItem="pdu-nu-njT" secondAttribute="top" constant="5" id="RGH-oo-WXp"/>
+                                            <constraint firstItem="HKk-4P-SL1" firstAttribute="trailing" secondItem="kcd-qy-Jjm" secondAttribute="trailing" id="RN0-Nr-ePa"/>
                                             <constraint firstAttribute="centerY" secondItem="HKk-4P-SL1" secondAttribute="centerY" id="WNT-ch-nW8"/>
                                             <constraint firstAttribute="trailing" secondItem="aWm-mP-gxj" secondAttribute="trailing" id="kp7-E7-RkL"/>
+                                            <constraint firstItem="HKk-4P-SL1" firstAttribute="top" secondItem="kcd-qy-Jjm" secondAttribute="top" id="llx-ZT-Weo"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exchange Rate Loading..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aX-Dw-7XD" customClass="LatoLabel">
@@ -2197,7 +2210,7 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
                                             </textField>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EuE-s0-NQ2" userLabel="Lato Label - USD" customClass="LatoLabel">
-                                                <rect key="frame" x="255" y="200.5" width="35" height="21.5"/>
+                                                <rect key="frame" x="255" y="201" width="35" height="22"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -2380,7 +2393,7 @@
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1mF-Xh-ACO">
                                 <rect key="frame" x="141" y="221" width="37" height="37"/>
-                                <color key="color" cocoaTouchSystemColor="lightTextColor"/>
+                                <color key="color" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

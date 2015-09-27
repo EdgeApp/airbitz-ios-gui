@@ -49,6 +49,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorTextBright = [UIColor whiteColor];
     self.colorTextDark = UIColorFromARGB(0xff0C578C);;
     self.colorTextLink = UIColorFromARGB(0xFF007aFF);
+    self.colorTextLinkOnDark = UIColorFromARGB(0xFFBFDFFF);
     self.deleteAccountWarning = NSLocalizedString(@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.", @"Delete Account Warning");
     self.colorButtonGreen = UIColorFromARGB(0xff80C342);
     self.colorButtonBlue = UIColorFromARGB(0xff2291CF);

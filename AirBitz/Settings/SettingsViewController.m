@@ -121,7 +121,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                                       CBCentralManagerDelegate>
 {
     tABC_Currency                   *_aCurrencies;
-    int                             _currencyCount;
 	tABC_AccountSettings            *_pAccountSettings;
 	TextFieldCell                   *_activeTextFieldCell;
 	UITapGestureRecognizer          *_tapGesture;
@@ -148,9 +147,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 @property (nonatomic, strong) PopupWheelPickerView  *popupWheelPicker;
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 
-@property (nonatomic, strong) NSArray               *arrayCurrencyCodes;
-@property (nonatomic, strong) NSArray               *arrayCurrencyNums;
-@property (nonatomic, strong) NSArray               *arrayCurrencyStrings;
 @property (nonatomic, strong) CBCentralManager		*centralManager;
 @end
 
@@ -229,27 +225,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {	
 	tABC_Error Error;
     Error.code = ABC_CC_Ok;
-
-    // get the currencies
-    _aCurrencies = NULL;
-    ABC_GetCurrencies(&_aCurrencies, &_currencyCount, &Error);
-    [Util printABC_Error:&Error];
-
-    // set up our internal currency arrays
-    NSMutableArray *arrayCurrencyCodes = [[NSMutableArray alloc] initWithCapacity:_currencyCount];
-    NSMutableArray *arrayCurrencyNums = [[NSMutableArray alloc] initWithCapacity:_currencyCount];
-    NSMutableArray *arrayCurrencyStrings = [[NSMutableArray alloc] init];
-    for (int i = 0; i < _currencyCount; i++)
-    {
-        [arrayCurrencyStrings addObject:[NSString stringWithFormat:@"%s - %@",
-                                        _aCurrencies[i].szCode,
-                                        [NSString stringWithUTF8String:_aCurrencies[i].szDescription]]];
-        [arrayCurrencyNums addObject:[NSNumber numberWithInt:_aCurrencies[i].num]];
-        [arrayCurrencyCodes addObject:[NSString stringWithUTF8String:_aCurrencies[i].szCode]];
-    }
-    self.arrayCurrencyCodes = arrayCurrencyCodes;
-    self.arrayCurrencyNums = arrayCurrencyNums;
-    self.arrayCurrencyStrings = arrayCurrencyStrings;
 
     // load the current account settings
     _pAccountSettings = NULL;
@@ -468,10 +443,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         CGFloat distFromBottom = frontWindow.frame.size.height - pointInWindow.y;
         obscureAmount = (_keyboardHeight + theView.frame.size.height) - distFromBottom;
 
-        //ABLog(2,@"y coord = %f", theView.frame.origin.y);
-        //ABLog(2,@"y coord in window = %f", pointInWindow.y);
-        //ABLog(2,@"dist from bottom = %f", distFromBottom);
-        //ABLog(2,@"amount Obscured = %f", obscureAmount);
     }
 
     return obscureAmount;
@@ -1032,10 +1003,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			cell.name.text = NSLocalizedString(@"Default Currency", @"settings text");
             if (_pAccountSettings)
             {
-                NSInteger indexCurrency = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
+                NSInteger indexCurrency = [[CoreBridge Singleton].arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
                 if (indexCurrency != NSNotFound)
                 {
-                    [cell.button setTitle:[self.arrayCurrencyCodes objectAtIndex:indexCurrency] forState:UIControlStateNormal];
+                    [cell.button setTitle:[[CoreBridge Singleton].arrayCurrencyCodes objectAtIndex:indexCurrency] forState:UIControlStateNormal];
                 }
             }
 		}
@@ -1496,13 +1467,13 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         {
             if (_pAccountSettings)
             {
-                curChoice = [self.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
+                curChoice = [[CoreBridge Singleton].arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
                 if (curChoice == NSNotFound)
                 {
                     curChoice = -1;
                 }
             }
-            arrayPopupChoices = self.arrayCurrencyStrings;
+            arrayPopupChoices = [CoreBridge Singleton].arrayCurrencyStrings;
             popupPosition = PopupPicker2Position_Full_Fading;
             headerText = @"Default Currency";
 
@@ -1564,7 +1535,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         {
             if (_pAccountSettings)
             {
-                _pAccountSettings->currencyNum = [[self.arrayCurrencyNums objectAtIndex:row] intValue];
+                _pAccountSettings->currencyNum = [[[CoreBridge Singleton].arrayCurrencyNums objectAtIndex:row] intValue];
                 [FadingAlertView create:self.view message:[Theme Singleton].defaultCurrencyInfoText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }
         }

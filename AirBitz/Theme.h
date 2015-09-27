@@ -16,6 +16,7 @@
 
 // User Settings
 @property (nonatomic) UIColor *colorTextLink;
+@property (nonatomic) UIColor *colorTextLinkOnDark;
 @property (nonatomic) UIColor *colorSendButton;
 @property (nonatomic) UIColor *colorRequestButton;
 @property (nonatomic) UIColor *colorSendButtonDisabled;

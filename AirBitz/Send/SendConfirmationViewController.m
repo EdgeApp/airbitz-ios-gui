@@ -21,6 +21,7 @@
 #import "Theme.h"
 #import "ButtonSelectorView2.h"
 #import "FadingAlertView.h"
+#import "PopupPickerView2.h"
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate,
@@ -40,7 +41,9 @@
     int                                 _callbackTimestamp;
     UIAlertView                         *_alert;
     NSTimer                             *_pinTimer;
-    BOOL                        bWalletListDropped;
+    BOOL                                bWalletListDropped;
+    BOOL                                _currencyNumOverride;
+    int                                 _currencyNum;
 
 }
 
@@ -49,7 +52,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView            *imageTopEmboss;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendFromTitle;
-@property (weak, nonatomic) IBOutlet ButtonSelectorView2     *walletSelector;
+@property (weak, nonatomic) IBOutlet ButtonSelectorView2    *walletSelector;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendToTitle;
 @property (nonatomic, weak) IBOutlet UILabel                *addressLabel;
 @property (weak, nonatomic) IBOutlet UIView                 *viewBTC;
@@ -68,6 +71,8 @@
 @property (nonatomic, weak) IBOutlet UITextField            *withdrawlPIN;
 @property (nonatomic, weak) IBOutlet UIView                 *confirmSliderContainer;
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
+@property (nonatomic, strong) PopupPickerView2              *popupPicker;
+
 
 @property (nonatomic, strong) SendStatusViewController          *sendStatusController;
 @property (nonatomic, strong) TransactionDetailsViewController  *transactionDetailsController;
@@ -192,7 +197,11 @@
         self.walletSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
         [self.walletSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
         self.walletSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
-        self.keypadView.currencyNum = [CoreBridge Singleton].currentWallet.currencyNum;
+
+        if (_currencyNumOverride)
+            self.keypadView.currencyNum = _currencyNum;
+        else
+            self.keypadView.currencyNum = [CoreBridge Singleton].currentWallet.currencyNum;
 
         NSString *walletName = [NSString stringWithFormat:@"From: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
@@ -277,16 +286,17 @@
     {
         self.addressLabel.text = _sendTo;
     }
-    
-    
-    
+
+    _currencyNumOverride = NO;
+    _currencyNum = [CoreBridge Singleton].currentWallet.currencyNum;
+    self.amountFiatLabel.textColor = [Theme Singleton].colorTextLinkOnDark;
     
     tABC_CC result;
     double currency;
     tABC_Error error;
     
     result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                   _spendTarget.pSpend->amount, &currency, [CoreBridge Singleton].currentWallet.currencyNum, &error);
+                                   _spendTarget.pSpend->amount, &currency, _currencyNum, &error);
                 
     if(result == ABC_CC_Ok)
     {
@@ -382,18 +392,30 @@
      }];
 }
 
-//- (IBAction)alwaysConfirm:(UIButton *)sender
-//{
-//    if(sender.selected)
-//    {
-//        sender.selected = NO;
-//    }
-//    else
-//    {
-//        sender.selected = YES;
-//    }
-//}
-//
+- (IBAction)ChangeFiatButton:(id)sender
+{
+    tPopupPicker2Position popupPosition = PopupPicker2Position_Full_Fading;
+    NSString *headerText;
+
+    NSInteger curChoice = -1;
+    NSArray *arrayPopupChoices = nil;
+
+    arrayPopupChoices = [CoreBridge Singleton].arrayCurrencyStrings;
+    popupPosition = PopupPicker2Position_Full_Fading;
+    headerText = NSLocalizedString(@"Select Currency", nil);
+
+    self.popupPicker = [PopupPickerView2 CreateForView:self.viewDisplayArea
+                                      relativePosition:popupPosition
+                                           withStrings:arrayPopupChoices
+                                         withAccessory:nil
+                                            headerText:headerText
+    ];
+    self.popupPicker.userData = nil;
+    //prevent popup from extending behind tool bar
+    self.popupPicker.delegate = self;
+
+}
+
 - (IBAction)selectMaxAmount
 {
     [self dismissErrorMessage];
@@ -419,6 +441,33 @@
                 }
             });
         }];
+    }
+}
+
+#pragma mark - Popup Picker Delegate Methods
+
+- (void)PopupPickerView2Selected:(PopupPickerView2 *)view onRow:(NSInteger)row userData:(id)data
+{
+    _currencyNum = [[[CoreBridge Singleton].arrayCurrencyNums objectAtIndex:row] intValue];
+    _currencyNumOverride = YES;
+
+    [self dismissPopupPicker];
+
+    [self updateViews:nil];
+}
+
+- (void)PopupPickerView2Cancelled:(PopupPickerView2 *)view userData:(id)data
+{
+    // dismiss the picker
+    [self dismissPopupPicker];
+}
+
+- (void)dismissPopupPicker
+{
+    if (self.popupPicker)
+    {
+        [self.popupPicker removeFromSuperview];
+        self.popupPicker = nil;
     }
 }
 
@@ -561,7 +610,7 @@
     {
         _spendTarget.pSpend->amount = [CoreBridge denominationToSatoshi: self.amountBTCTextField.text];
         if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                  _spendTarget.pSpend->amount, &currency, [CoreBridge Singleton].currentWallet.currencyNum, &error) == ABC_CC_Ok)
+                                  _spendTarget.pSpend->amount, &currency, _currencyNum, &error) == ABC_CC_Ok)
         {
             self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
@@ -570,7 +619,7 @@
     {
         currency = [self.amountFiatTextField.text doubleValue];
         if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                  currency, [CoreBridge Singleton].currentWallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
+                                  currency, _currencyNum, &satoshi, &error) == ABC_CC_Ok)
         {
             _spendTarget.pSpend->amount = satoshi;
             self.amountBTCTextField.text = [CoreBridge formatSatoshi:satoshi
@@ -580,9 +629,9 @@
     }
     self.amountBTCSymbol.text = [User Singleton].denominationLabelShort;
     self.amountBTCLabel.text = [User Singleton].denominationLabel;
-    self.amountFiatSymbol.text = [CoreBridge currencySymbolLookup:[CoreBridge Singleton].currentWallet.currencyNum];
-    self.amountFiatLabel.text = [CoreBridge currencyAbbrevLookup:[CoreBridge Singleton].currentWallet.currencyNum];
-    self.conversionLabel.text = [CoreBridge conversionString:[CoreBridge Singleton].currentWallet];
+    self.amountFiatSymbol.text = [CoreBridge currencySymbolLookup:_currencyNum];
+    self.amountFiatLabel.text = [CoreBridge currencyAbbrevLookup:_currencyNum];
+    self.conversionLabel.text = [CoreBridge conversionStringFromNum:_currencyNum withAbbrev:YES];
 
     [self checkAuthorization];
     [self startCalcFees];
@@ -624,7 +673,7 @@
     // Don't caculate fees until there is a value
     if (_spendTarget.pSpend->amount == 0)
     {
-        self.conversionLabel.text = [CoreBridge conversionString:[CoreBridge Singleton].currentWallet];
+        self.conversionLabel.text = [CoreBridge conversionStringFromNum:_currencyNum withAbbrev:YES];
         self.conversionLabel.textColor = [UIColor darkGrayColor];
         self.amountBTCTextField.textColor = [UIColor whiteColor];
         self.amountFiatTextField.textColor = [UIColor whiteColor];
@@ -679,19 +728,19 @@
         [coinFeeString appendString:[User Singleton].denominationLabel];
 
         if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
-                                  txFees, &currencyFees, [CoreBridge Singleton].currentWallet.currencyNum, &error) == ABC_CC_Ok)
+                                  txFees, &currencyFees, _currencyNum, &error) == ABC_CC_Ok)
         {
             [fiatFeeString appendString:@"+ "];
             [fiatFeeString appendString:[CoreBridge formatCurrency:currencyFees
-                                                   withCurrencyNum:[CoreBridge Singleton].currentWallet.currencyNum
+                                                   withCurrencyNum:_currencyNum
                                                         withSymbol:false]];
             [fiatFeeString appendString:@" "];
-            [fiatFeeString appendString:[CoreBridge Singleton].currentWallet.currencyAbbrev];
+            [fiatFeeString appendString:[CoreBridge currencyAbbrevLookup:_currencyNum]];
         }
         self.amountBTCLabel.text = coinFeeString; 
         self.amountFiatLabel.text = fiatFeeString;
-        self.conversionLabel.text = [CoreBridge conversionString:[CoreBridge Singleton].currentWallet];
-        
+        self.conversionLabel.text = [CoreBridge conversionStringFromNum:_currencyNum withAbbrev:YES];
+
         self.helpButton.hidden = YES;
         self.conversionLabel.layer.shadowOpacity = 0.0f;
     }

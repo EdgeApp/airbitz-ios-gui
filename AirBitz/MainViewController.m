@@ -137,30 +137,6 @@ MainViewController *singleton;
 
     _bNewDeviceLogin = NO;
 
-    NSMutableData *seedData = [[NSMutableData alloc] init];
-    [self fillSeedData:seedData];
-#if !DIRECTORY_ONLY
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docs_dir = [paths objectAtIndex:0];
-    NSString *ca_path = [[NSBundle mainBundle] pathForResource:@"ca-certificates" ofType:@"crt"];
-
-    tABC_Error Error;
-    Error.code = ABC_CC_Ok;
-    ABC_Initialize([docs_dir UTF8String],
-                   [ca_path UTF8String],
-                   (unsigned char *)[seedData bytes],
-                   (unsigned int)[seedData length],
-                   &Error);
-    [Util printABC_Error:&Error];
-
-    // Fetch general info as soon as possible
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        tABC_Error error;
-        ABC_GeneralInfoUpdate(&error);
-        [Util printABC_Error:&error];
-    });
-#endif
-
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 
     // resgister for transaction details screen complete notification
@@ -352,42 +328,6 @@ MainViewController *singleton;
 
 #pragma mark - Misc Methods
 
-
-- (void)fillSeedData:(NSMutableData *)data
-{
-    NSMutableString *strSeed = [[NSMutableString alloc] init];
-
-    // add the advertiser identifier
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)])
-    {
-        [strSeed appendString:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-    }
-
-    // add the UUID
-    CFUUIDRef theUUID = CFUUIDCreate(NULL);
-    CFStringRef string = CFUUIDCreateString(NULL, theUUID);
-    CFRelease(theUUID);
-    [strSeed appendString:[[NSString alloc] initWithString:(__bridge NSString *)string]];
-    CFRelease(string);
-
-    // add the device name
-    [strSeed appendString:[[UIDevice currentDevice] name]];
-
-    // add the string to the data
-    [data appendData:[strSeed dataUsingEncoding:NSUTF8StringEncoding]];
-
-    double time = CACurrentMediaTime();
-
-    [data appendBytes:&time length:sizeof(double)];
-
-    UInt32 randomBytes = 0;
-    if (0 == SecRandomCopyBytes(kSecRandomDefault, sizeof(int), (uint8_t*)&randomBytes)) {
-        [data appendBytes:&randomBytes length:sizeof(UInt32)];
-    }
-
-    u_int32_t rand = arc4random();
-    [data appendBytes:&rand length:sizeof(u_int32_t)];
-}
 
 -(void)showFastestLogin
 {

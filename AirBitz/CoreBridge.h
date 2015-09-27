@@ -18,10 +18,14 @@
 @property (nonatomic, strong) NSMutableArray            *arrayWalletNames;
 @property (nonatomic, strong) NSMutableArray            *arrayUUIDs;
 @property (nonatomic, strong) Wallet                    *currentWallet;
+@property (nonatomic, strong) NSArray                   *arrayCurrencyCodes;
+@property (nonatomic, strong) NSArray                   *arrayCurrencyNums;
+@property (nonatomic, strong) NSArray                   *arrayCurrencyStrings;
 @property (nonatomic)         int                       currentWalletID;
 @property (nonatomic)         BOOL                      bAllWalletsLoaded;
 @property (nonatomic)         int                       numWalletsLoaded;
 @property (nonatomic)         int                       numTotalWallets;
+@property (nonatomic)         int                       currencyCount;
 
 
 + (CoreBridge *)Singleton;
