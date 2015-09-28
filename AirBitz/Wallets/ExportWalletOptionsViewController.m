@@ -653,7 +653,12 @@ typedef enum eExportOption
     {
         [_mailComposer.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
-	[self.delegate exportWalletOptionsViewControllerDidFinish:self];
+
+    if([self.delegate respondsToSelector:@selector(exportWalletOptionsViewControllerDidFinish:)])
+    {
+        [self.delegate exportWalletOptionsViewControllerDidFinish:self];
+    }
+
 }
 
 #pragma mark - GDrive Delegates
