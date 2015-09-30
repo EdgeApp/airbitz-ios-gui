@@ -115,6 +115,8 @@
 + (void)otpSetError:(tABC_CC)cc;
 + (BOOL)otpHasError;
 + (void)otpClearError;
++ (NSString *) bitidParseURI:(NSString *)uri;
++ (BOOL) bitidLogin:(NSString *)uri;
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo);
 void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);

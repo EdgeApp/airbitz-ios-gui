@@ -2525,6 +2525,36 @@ static BOOL bOtpError = NO;
     return secret;
 }
 
++ (NSString *) bitidParseURI:(NSString *)uri;
+{
+    tABC_Error error;
+    char *szURLDomain = NULL;
+    NSString *urlDomain;
+
+    ABC_BitidParseUri([[User Singleton].name UTF8String], nil, [uri UTF8String], &szURLDomain, &error);
+
+    if (error.code == ABC_CC_Ok && szURLDomain) {
+        urlDomain = [NSString stringWithUTF8String:szURLDomain];
+    }
+    if (szURLDomain) {
+        free(szURLDomain);
+    }
+    ABLog(2,@("bitidParseURI domain: %@"), urlDomain);
+    return urlDomain;
+
+}
+
++ (BOOL) bitidLogin:(NSString *)uri;
+{
+    tABC_Error error;
+
+    ABC_BitidLogin([[User Singleton].name UTF8String], nil, [uri UTF8String], &error);
+
+    if (error.code == ABC_CC_Ok)
+        return YES;
+    return NO;
+}
+
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
     CoreBridge *coreBridge = (__bridge id) pInfo->pData;

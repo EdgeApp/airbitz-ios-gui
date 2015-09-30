@@ -1454,7 +1454,7 @@ MainViewController *singleton;
         if ([cs count] == 3) {
             [self launchBuySell:cs[2] provider:cs[1]];
         }
-    } else if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:@"airbitz"]) {
+    } else if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:@"airbitz"] || [uri.scheme isEqualToString:@"bitid"]) {
         if ([User isLoggedIn]) {
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
             _appMode = APP_MODE_SEND;

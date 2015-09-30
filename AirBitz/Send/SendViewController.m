@@ -89,8 +89,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     uint64_t                        _sweptAmount;
     UIAlertView                     *_sweptAlert;
     UIAlertView                     *_tweetAlert;
+    UIAlertView                     *_bitidAlert;
     NSTimer                         *_callbackTimer;
     NSString                        *_tweet;
+    NSString                        *_bitidURI;
+
 
 
 }
@@ -577,6 +580,27 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         _sweptAlert = nil;
         [self updateState];
+    }
+    else if (_bitidAlert == alertView)
+    {
+        if (buttonIndex > 0)
+        {
+            [CoreBridge postToMiscQueue:^{
+                BOOL success = [CoreBridge bitidLogin:_bitidURI];
+                dispatch_async(dispatch_get_main_queue(),^{
+                    if (success)
+                    {
+                        [MainViewController fadingAlert:NSLocalizedString(@"Successfully Logged In",nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                    }
+                    else
+                    {
+                        [MainViewController fadingAlert:NSLocalizedString(@"Error Logging In",nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                    }
+
+
+                });
+            }];
+        }
     }
 }
 
@@ -1473,7 +1497,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            [self trySpend:text];
+//            [self trySpend:text];
+            _addressTextField.text = text;
+            [self processURI];
         }
 	}
 #endif
@@ -1687,19 +1713,34 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)processURI
 {
-    // Added to wallet queue since wallets are loaded asynchronously
+    NSString *bitidDomainURL = [CoreBridge bitidParseURI:_addressTextField.text];
+    if (bitidDomainURL)
+    {
+        _bitidURI = _addressTextField.text;
+        _bitidAlert = [[UIAlertView alloc]
+                initWithTitle:NSLocalizedString(@"BitID Login", nil)
+                      message:bitidDomainURL
+                     delegate:self
+            cancelButtonTitle:@"No"
+            otherButtonTitles:@"Yes",nil];
+        [_bitidAlert show];
+        return;
+    }
+
+    // If it's not BitID, then put into wallets queue since
+    // wallets are loaded asynchronously
     [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
     [CoreBridge postToLoadedQueue:^(void) {
         [CoreBridge postToWalletsQueue:^(void) {
             dispatch_async(dispatch_get_main_queue(),^{
-                [self doProcessURI];
+                [self doProcessSpendURI];
             });
         }];
     }];
 }
 
-- (void)doProcessURI
+- (void)doProcessSpendURI
 {
     tABC_Error error;
     SpendTarget *spendTarget = [[SpendTarget alloc] init];
@@ -1709,8 +1750,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	{
         // see if the text corresponds to one of the wallets
         NSInteger index = [[CoreBridge Singleton].arrayWalletNames indexOfObject:text];
-        if (index != NSNotFound)
-        {
+        if (index != NSNotFound) {
             Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
             [spendTarget newTransfer:wallet.strUUID error:&error];
             [self showSendConfirmationTo:spendTarget];
