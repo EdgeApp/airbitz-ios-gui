@@ -146,9 +146,12 @@
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 
     CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+    if (nil == people) return;
+
     for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
     {
         ABRecordRef person = CFArrayGetValueAtIndex(people, i);
+        if (nil == person) continue;
 
         NSString *strFullName = [Util getNameFromAddressRecord:person];
         if ([strFullName length])
