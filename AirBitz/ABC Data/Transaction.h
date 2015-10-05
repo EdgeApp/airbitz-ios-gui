@@ -19,7 +19,7 @@
 @property (nonatomic, strong)   NSDate          *date;
 @property (nonatomic, assign)   BOOL            bConfirmed;
 @property (nonatomic, assign)   BOOL            bSyncing;
-@property (nonatomic, assign)   unsigned int    confirmations;
+@property (nonatomic, assign)   int             confirmations;
 @property (nonatomic, assign)   SInt64			amountSatoshi;
 @property (nonatomic, assign)   double          amountFiat;
 @property (nonatomic, assign)   SInt64			minerFees;
