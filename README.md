@@ -28,16 +28,25 @@ Set your `$REPO_DIR` to whatever you want.
 
     cd $REPO_DIR
     git clone git@github.com:Airbitz/airbitz-core.git
-    cd airbitz-core
-    cd deps
-    make
+    cd airbitz-core/abcd
+    cp config.h.example config.h
+
+    # Put API keys into fields in config.h
 
 ## Build Airbitz iOS in xcode
 
     cd $REPO_DIR
     git clone git@github.com:Airbitz/airbitz-ios-gui.git
+    
+    cd AirBitz
+    cp Config.h.example Config.h
 
-    # Build and Copy files into project
+    # Paste API keys from Airbitz into Config.h fields
+
+    # Go back up one directory
+    cd ..
+
+    # Build ABC and Copy files into project. This could take 30-60 mins
     ./mkabc
 
     # Install the pods
