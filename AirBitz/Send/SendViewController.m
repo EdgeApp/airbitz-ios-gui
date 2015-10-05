@@ -1716,19 +1716,19 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)processURI
 {
-    NSString *bitidDomainURL = [CoreBridge bitidParseURI:_addressTextField.text];
-    if (bitidDomainURL)
-    {
-        _bitidURI = _addressTextField.text;
-        _bitidAlert = [[UIAlertView alloc]
-                initWithTitle:NSLocalizedString(@"BitID Login", nil)
-                      message:bitidDomainURL
-                     delegate:self
-            cancelButtonTitle:@"No"
-            otherButtonTitles:@"Yes",nil];
-        [_bitidAlert show];
-        return;
-    }
+//    NSString *bitidDomainURL = [CoreBridge bitidParseURI:_addressTextField.text];
+//    if (bitidDomainURL)
+//    {
+//        _bitidURI = _addressTextField.text;
+//        _bitidAlert = [[UIAlertView alloc]
+//                initWithTitle:NSLocalizedString(@"BitID Login", nil)
+//                      message:bitidDomainURL
+//                     delegate:self
+//            cancelButtonTitle:@"No"
+//            otherButtonTitles:@"Yes",nil];
+//        [_bitidAlert show];
+//        return;
+//    }
 
     // If it's not BitID, then put into wallets queue since
     // wallets are loaded asynchronously
