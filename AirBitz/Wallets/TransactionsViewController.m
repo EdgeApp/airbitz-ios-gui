@@ -1109,6 +1109,11 @@
                 cell.confirmationLabel.text = NSLocalizedString(@"Synchronizing", nil);
                 cell.confirmationLabel.textColor = COLOR_BALANCE;
             }
+            else if (transaction.confirmations < 0)
+            {
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"Warning: Transaction Double Spent"];
+                cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+            }
             else if (transaction.confirmations == 0)
             {
                 cell.confirmationLabel.text = [NSString stringWithFormat:@"Pending"];

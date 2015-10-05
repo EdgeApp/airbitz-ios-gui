@@ -851,7 +851,7 @@ static BOOL bOtpError = NO;
     }
     bool bSyncing = NO;
     transaction.confirmations = [self calcTxConfirmations:wallet
-                                                 withTxId:transaction.strMallealbeID
+                                                 withTxId:transaction.strID
                                                 isSyncing:&bSyncing];
     transaction.bConfirmed = transaction.confirmations >= CONFIRMED_CONFIRMATION_COUNT;
     transaction.bSyncing = bSyncing;
@@ -874,18 +874,21 @@ static BOOL bOtpError = NO;
     transaction.bizId = pTrans->pDetails->bizId;
 }
 
-+ (unsigned int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId isSyncing:(bool *)syncing
++ (int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId isSyncing:(bool *)syncing
 {
     tABC_Error Error;
-    unsigned int txHeight = 0;
-    unsigned int blockHeight = 0;
+    int txHeight = 0;
+    int blockHeight = 0;
     *syncing = NO;
     if ([wallet.strUUID length] == 0 || [txId length] == 0) {
         return 0;
     }
     if (ABC_TxHeight([wallet.strUUID UTF8String], [txId UTF8String], &txHeight, &Error) != ABC_CC_Ok) {
         *syncing = YES;
-        return 0;
+        if (txHeight < 0)
+            return txHeight;
+        else
+            return 0;
     }
     if (ABC_BlockHeight([wallet.strUUID UTF8String], &blockHeight, &Error) != ABC_CC_Ok) {
         *syncing = YES;
