@@ -301,7 +301,6 @@
 		7DFD23111A1FF98A008C43FB /* UIPhotoGallerySliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFD230E1A1FF98A008C43FB /* UIPhotoGallerySliderView.xib */; };
 		7DFD23121A1FF98A008C43FB /* UIPhotoGallerySliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFD230E1A1FF98A008C43FB /* UIPhotoGallerySliderView.xib */; };
 		7DFF2F8B1A02E50E00813733 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFF2F8A1A02E50E00813733 /* MessageUI.framework */; };
-		A60FCC021BB09B8500627FF4 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA72494A1B95195200E104A4 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B50501C4193F7AC3007D4960 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B505FB4A193F7AC1007D4960 /* DriveLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B50501C7193F7AC3007D4960 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B505FB51193F7AC1007D4960 /* GTMOAuth2ViewTouch.xib */; };
 		B5050566193F7D2B007D4960 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = B5050548193F7D2B007D4960 /* GTLDrive_Sources.m */; };
@@ -849,7 +848,7 @@
 		DA6645501B0B408600B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
 		DA6645511B0B408700B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
 		DA6645521B0B408700B04C5B /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA66454F1B0B408600B04C5B /* AirbitzViewController.m */; };
-		DA6C24461BB11CC10080F101 /* QR-bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6C24451BB11CC10080F101 /* QR-bracket.png */; settings = {ASSET_TAGS = (); }; };
+		DA6C24461BB11CC10080F101 /* QR-bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6C24451BB11CC10080F101 /* QR-bracket.png */; };
 		DA72494C1B95195200E104A4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA72494B1B95195200E104A4 /* NotificationCenter.framework */; };
 		DA7249521B95195200E104A4 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7249511B95195200E104A4 /* TodayViewController.m */; };
 		DA7249541B95195200E104A4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7249531B95195200E104A4 /* MainInterface.storyboard */; };
@@ -1207,13 +1206,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A60FCC031BB09B8500627FF4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5675B4018A17F6F002E0703 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DA7249491B95195200E104A4;
-			remoteInfo = "Airbitz Widget";
-		};
 		B50504F6193F7AC4007D4960 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B505FB4B193F7AC1007D4960 /* GTL.xcodeproj */;
@@ -1243,20 +1235,6 @@
 			remoteInfo = DevelopmentTestTool;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		A60FCC051BB09B8500627FF4 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				A60FCC021BB09B8500627FF4 /* Airbitz Widget.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		188D8A965DB464149F922F3B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -3102,12 +3080,10 @@
 				B5675B4618A17F6F002E0703 /* Resources */,
 				7D6EDB7619A66C50007C33AE /* Run HockeyApp build agent */,
 				AB35436AC4AF35BB26BEAB95 /* Copy Pods Resources */,
-				A60FCC051BB09B8500627FF4 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A60FCC041BB09B8500627FF4 /* PBXTargetDependency */,
 			);
 			name = Airbitz;
 			productName = AirBitz;
@@ -4528,14 +4504,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		A60FCC041BB09B8500627FF4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DA7249491B95195200E104A4 /* Airbitz Widget */;
-			targetProxy = A60FCC031BB09B8500627FF4 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B5675B5418A17F6F002E0703 /* InfoPlist.strings */ = {

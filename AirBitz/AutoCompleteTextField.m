@@ -108,10 +108,13 @@
 	ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
 	
 	CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+	if (nil == people) return;
+
 	NSMutableArray *allNames = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(people)];
 	for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
 	{
 		ABRecordRef person = CFArrayGetValueAtIndex(people, i);
+		if (nil == person) continue;
 
 		NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
 		NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
