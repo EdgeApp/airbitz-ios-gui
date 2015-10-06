@@ -1816,6 +1816,17 @@ static BOOL bOtpError = NO;
     while ([watcherQueue operationCount]);
 }
 
++ (void)deleteWatcherCache;
+{
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWalletUUIDs:arrayWallets];
+    // stop watchers
+    for (NSString *uuid in arrayWallets) {
+        tABC_Error error;
+        ABC_WatcherDeleteCache([uuid UTF8String], &error);
+    }
+}
+
 + (void)restoreConnectivity
 {
     [CoreBridge connectWatchers];

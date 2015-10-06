@@ -101,6 +101,7 @@
 + (void)startWatchers;
 + (void)startWatcher:(NSString *)walletUUID;
 + (void)stopWatchers;
++ (void)deleteWatcherCache;
 + (void)restoreConnectivity;
 + (void)lostConnectivity;
 + (void)prioritizeAddress:(NSString *)address inWallet:(NSString *)walletUUID;
