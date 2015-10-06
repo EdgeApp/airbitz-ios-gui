@@ -142,8 +142,9 @@
 
     self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
 
-    [CoreBridge postToMiscQueue:^{
+    [CoreBridge postToWalletsQueue:^{
         [CoreBridge stopWatchers];
+        [CoreBridge deleteWatcherCache];
         [CoreBridge startWatchers];
         dispatch_async(dispatch_get_main_queue(), ^(void){
             self.clearWatcherButton.titleLabel.text = buttonText;
