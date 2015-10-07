@@ -4596,7 +4596,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "Airbitz Testnet";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "36c63d35-c64f-416b-8e7e-1cecd1571370";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
