@@ -1,0 +1,789 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09E7B90DE94333BDB8D48513 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C88A91632A7616E92B4670D /* libPods.a */; };
+		DA9ED6ED1BC607FA0063DA07 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */; settings = {ASSET_TAGS = (); }; };
+		DA9ED6F11BC607FA0063DA07 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */; };
+		DA9ED6F41BC607FA0063DA07 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED6F21BC607FA0063DA07 /* MainInterface.storyboard */; };
+		DA9ED6F81BC607FA0063DA07 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DA9ED7351BC60AA90063DA07 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7241BC60AA90063DA07 /* AssetsLibrary.framework */; };
+		DA9ED7361BC60AA90063DA07 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7251BC60AA90063DA07 /* AudioToolbox.framework */; };
+		DA9ED7371BC60AA90063DA07 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7261BC60AA90063DA07 /* AVFoundation.framework */; };
+		DA9ED7381BC60AA90063DA07 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7271BC60AA90063DA07 /* CFNetwork.framework */; };
+		DA9ED7391BC60AA90063DA07 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7281BC60AA90063DA07 /* CoreAudio.framework */; };
+		DA9ED73A1BC60AA90063DA07 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7291BC60AA90063DA07 /* CoreBluetooth.framework */; };
+		DA9ED73B1BC60AA90063DA07 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED72A1BC60AA90063DA07 /* CoreGraphics.framework */; };
+		DA9ED73C1BC60AA90063DA07 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED72B1BC60AA90063DA07 /* CoreMedia.framework */; };
+		DA9ED73D1BC60AA90063DA07 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED72C1BC60AA90063DA07 /* CoreText.framework */; };
+		DA9ED73E1BC60AA90063DA07 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED72D1BC60AA90063DA07 /* CoreVideo.framework */; };
+		DA9ED73F1BC60AA90063DA07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED72E1BC60AA90063DA07 /* Foundation.framework */; };
+		DA9ED7401BC60AA90063DA07 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED72F1BC60AA90063DA07 /* MapKit.framework */; };
+		DA9ED7411BC60AA90063DA07 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7301BC60AA90063DA07 /* MessageUI.framework */; };
+		DA9ED7421BC60AA90063DA07 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7311BC60AA90063DA07 /* QuartzCore.framework */; };
+		DA9ED7431BC60AA90063DA07 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7321BC60AA90063DA07 /* QuickLook.framework */; };
+		DA9ED7441BC60AA90063DA07 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7331BC60AA90063DA07 /* SystemConfiguration.framework */; };
+		DA9ED7451BC60AA90063DA07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7341BC60AA90063DA07 /* UIKit.framework */; };
+		DAD1AD7C1BC6065100C648C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7B1BC6065100C648C4 /* main.m */; };
+		DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
+		DAD1AD821BC6065100C648C4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD811BC6065100C648C4 /* ViewController.m */; };
+		DAD1AD851BC6065100C648C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD831BC6065100C648C4 /* Main.storyboard */; };
+		DAD1AD871BC6065100C648C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD861BC6065100C648C4 /* Assets.xcassets */; };
+		DAD1AD8A1BC6065100C648C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD881BC6065100C648C4 /* LaunchScreen.storyboard */; };
+		DAD1AD951BC6065100C648C4 /* AirbitzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD941BC6065100C648C4 /* AirbitzTests.m */; };
+		DAD1ADA01BC6065100C648C4 /* AirbitzUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DA9ED6F61BC607FA0063DA07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DAD1AD6F1BC6065100C648C4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA9ED6E91BC607FA0063DA07;
+			remoteInfo = "Airbitz Widget";
+		};
+		DAD1AD911BC6065100C648C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DAD1AD6F1BC6065100C648C4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DAD1AD761BC6065100C648C4;
+			remoteInfo = Airbitz;
+		};
+		DAD1AD9C1BC6065100C648C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DAD1AD6F1BC6065100C648C4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DAD1AD761BC6065100C648C4;
+			remoteInfo = Airbitz;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DA9ED6FC1BC607FA0063DA07 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DA9ED6F81BC607FA0063DA07 /* Airbitz Widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0C88A91632A7616E92B4670D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Airbitz Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		DA9ED6EF1BC607FA0063DA07 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		DA9ED6F31BC607FA0063DA07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		DA9ED6F51BC607FA0063DA07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA9ED7241BC60AA90063DA07 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		DA9ED7251BC60AA90063DA07 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DA9ED7261BC60AA90063DA07 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DA9ED7271BC60AA90063DA07 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		DA9ED7281BC60AA90063DA07 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		DA9ED7291BC60AA90063DA07 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		DA9ED72A1BC60AA90063DA07 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DA9ED72B1BC60AA90063DA07 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		DA9ED72C1BC60AA90063DA07 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		DA9ED72D1BC60AA90063DA07 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		DA9ED72E1BC60AA90063DA07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DA9ED72F1BC60AA90063DA07 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		DA9ED7301BC60AA90063DA07 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		DA9ED7311BC60AA90063DA07 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DA9ED7321BC60AA90063DA07 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		DA9ED7331BC60AA90063DA07 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DA9ED7341BC60AA90063DA07 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAD1AD7B1BC6065100C648C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DAD1AD801BC6065100C648C4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DAD1AD811BC6065100C648C4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DAD1AD841BC6065100C648C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DAD1AD861BC6065100C648C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DAD1AD891BC6065100C648C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DAD1AD8B1BC6065100C648C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAD1AD901BC6065100C648C4 /* AirbitzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirbitzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAD1AD941BC6065100C648C4 /* AirbitzTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirbitzTests.m; sourceTree = "<group>"; };
+		DAD1AD961BC6065100C648C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAD1AD9B1BC6065100C648C4 /* AirbitzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirbitzUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirbitzUITests.m; sourceTree = "<group>"; };
+		DAD1ADA11BC6065100C648C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DA9ED6E71BC607FA0063DA07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA9ED6ED1BC607FA0063DA07 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD1AD741BC6065100C648C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA9ED7351BC60AA90063DA07 /* AssetsLibrary.framework in Frameworks */,
+				DA9ED7361BC60AA90063DA07 /* AudioToolbox.framework in Frameworks */,
+				DA9ED7371BC60AA90063DA07 /* AVFoundation.framework in Frameworks */,
+				DA9ED7381BC60AA90063DA07 /* CFNetwork.framework in Frameworks */,
+				DA9ED7391BC60AA90063DA07 /* CoreAudio.framework in Frameworks */,
+				DA9ED73A1BC60AA90063DA07 /* CoreBluetooth.framework in Frameworks */,
+				DA9ED73B1BC60AA90063DA07 /* CoreGraphics.framework in Frameworks */,
+				DA9ED73C1BC60AA90063DA07 /* CoreMedia.framework in Frameworks */,
+				DA9ED73D1BC60AA90063DA07 /* CoreText.framework in Frameworks */,
+				DA9ED73E1BC60AA90063DA07 /* CoreVideo.framework in Frameworks */,
+				DA9ED73F1BC60AA90063DA07 /* Foundation.framework in Frameworks */,
+				DA9ED7401BC60AA90063DA07 /* MapKit.framework in Frameworks */,
+				DA9ED7411BC60AA90063DA07 /* MessageUI.framework in Frameworks */,
+				DA9ED7421BC60AA90063DA07 /* QuartzCore.framework in Frameworks */,
+				DA9ED7431BC60AA90063DA07 /* QuickLook.framework in Frameworks */,
+				DA9ED7441BC60AA90063DA07 /* SystemConfiguration.framework in Frameworks */,
+				DA9ED7451BC60AA90063DA07 /* UIKit.framework in Frameworks */,
+				09E7B90DE94333BDB8D48513 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD1AD8D1BC6065100C648C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD1AD981BC6065100C648C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		344438B8948D894D296136BA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */,
+				0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DA9ED6EB1BC607FA0063DA07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA9ED7241BC60AA90063DA07 /* AssetsLibrary.framework */,
+				DA9ED7251BC60AA90063DA07 /* AudioToolbox.framework */,
+				DA9ED7261BC60AA90063DA07 /* AVFoundation.framework */,
+				DA9ED7271BC60AA90063DA07 /* CFNetwork.framework */,
+				DA9ED7281BC60AA90063DA07 /* CoreAudio.framework */,
+				DA9ED7291BC60AA90063DA07 /* CoreBluetooth.framework */,
+				DA9ED72A1BC60AA90063DA07 /* CoreGraphics.framework */,
+				DA9ED72B1BC60AA90063DA07 /* CoreMedia.framework */,
+				DA9ED72C1BC60AA90063DA07 /* CoreText.framework */,
+				DA9ED72D1BC60AA90063DA07 /* CoreVideo.framework */,
+				DA9ED72E1BC60AA90063DA07 /* Foundation.framework */,
+				DA9ED72F1BC60AA90063DA07 /* MapKit.framework */,
+				DA9ED7301BC60AA90063DA07 /* MessageUI.framework */,
+				DA9ED7311BC60AA90063DA07 /* QuartzCore.framework */,
+				DA9ED7321BC60AA90063DA07 /* QuickLook.framework */,
+				DA9ED7331BC60AA90063DA07 /* SystemConfiguration.framework */,
+				DA9ED7341BC60AA90063DA07 /* UIKit.framework */,
+				DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */,
+				0C88A91632A7616E92B4670D /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DA9ED6EE1BC607FA0063DA07 /* Airbitz Widget */ = {
+			isa = PBXGroup;
+			children = (
+				DA9ED6EF1BC607FA0063DA07 /* TodayViewController.h */,
+				DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */,
+				DA9ED6F21BC607FA0063DA07 /* MainInterface.storyboard */,
+				DA9ED6F51BC607FA0063DA07 /* Info.plist */,
+			);
+			path = "Airbitz Widget";
+			sourceTree = "<group>";
+		};
+		DAD1AD6E1BC6065100C648C4 = {
+			isa = PBXGroup;
+			children = (
+				DAD1AD791BC6065100C648C4 /* Airbitz */,
+				DAD1AD931BC6065100C648C4 /* AirbitzTests */,
+				DAD1AD9E1BC6065100C648C4 /* AirbitzUITests */,
+				DA9ED6EE1BC607FA0063DA07 /* Airbitz Widget */,
+				DA9ED6EB1BC607FA0063DA07 /* Frameworks */,
+				DAD1AD781BC6065100C648C4 /* Products */,
+				344438B8948D894D296136BA /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		DAD1AD781BC6065100C648C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DAD1AD771BC6065100C648C4 /* Airbitz.app */,
+				DAD1AD901BC6065100C648C4 /* AirbitzTests.xctest */,
+				DAD1AD9B1BC6065100C648C4 /* AirbitzUITests.xctest */,
+				DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DAD1AD791BC6065100C648C4 /* Airbitz */ = {
+			isa = PBXGroup;
+			children = (
+				DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */,
+				DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */,
+				DAD1AD801BC6065100C648C4 /* ViewController.h */,
+				DAD1AD811BC6065100C648C4 /* ViewController.m */,
+				DAD1AD831BC6065100C648C4 /* Main.storyboard */,
+				DAD1AD861BC6065100C648C4 /* Assets.xcassets */,
+				DAD1AD881BC6065100C648C4 /* LaunchScreen.storyboard */,
+				DAD1AD8B1BC6065100C648C4 /* Info.plist */,
+				DAD1AD7A1BC6065100C648C4 /* Supporting Files */,
+			);
+			path = Airbitz;
+			sourceTree = "<group>";
+		};
+		DAD1AD7A1BC6065100C648C4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DAD1AD7B1BC6065100C648C4 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DAD1AD931BC6065100C648C4 /* AirbitzTests */ = {
+			isa = PBXGroup;
+			children = (
+				DAD1AD941BC6065100C648C4 /* AirbitzTests.m */,
+				DAD1AD961BC6065100C648C4 /* Info.plist */,
+			);
+			path = AirbitzTests;
+			sourceTree = "<group>";
+		};
+		DAD1AD9E1BC6065100C648C4 /* AirbitzUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */,
+				DAD1ADA11BC6065100C648C4 /* Info.plist */,
+			);
+			path = AirbitzUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DA9ED6E91BC607FA0063DA07 /* Airbitz Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA9ED6FB1BC607FA0063DA07 /* Build configuration list for PBXNativeTarget "Airbitz Widget" */;
+			buildPhases = (
+				DA9ED6E61BC607FA0063DA07 /* Sources */,
+				DA9ED6E71BC607FA0063DA07 /* Frameworks */,
+				DA9ED6E81BC607FA0063DA07 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Airbitz Widget";
+			productName = "Airbitz Widget";
+			productReference = DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		DAD1AD761BC6065100C648C4 /* Airbitz */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAD1ADA41BC6065100C648C4 /* Build configuration list for PBXNativeTarget "Airbitz" */;
+			buildPhases = (
+				DF63B0E9B5BB0C91752C2F4F /* Check Pods Manifest.lock */,
+				DAD1AD731BC6065100C648C4 /* Sources */,
+				DAD1AD741BC6065100C648C4 /* Frameworks */,
+				DAD1AD751BC6065100C648C4 /* Resources */,
+				DA9ED6FC1BC607FA0063DA07 /* Embed App Extensions */,
+				6861DED29A6F9662DAB11141 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA9ED6F71BC607FA0063DA07 /* PBXTargetDependency */,
+			);
+			name = Airbitz;
+			productName = Airbitz;
+			productReference = DAD1AD771BC6065100C648C4 /* Airbitz.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DAD1AD8F1BC6065100C648C4 /* AirbitzTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAD1ADA71BC6065100C648C4 /* Build configuration list for PBXNativeTarget "AirbitzTests" */;
+			buildPhases = (
+				DAD1AD8C1BC6065100C648C4 /* Sources */,
+				DAD1AD8D1BC6065100C648C4 /* Frameworks */,
+				DAD1AD8E1BC6065100C648C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DAD1AD921BC6065100C648C4 /* PBXTargetDependency */,
+			);
+			name = AirbitzTests;
+			productName = AirbitzTests;
+			productReference = DAD1AD901BC6065100C648C4 /* AirbitzTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DAD1AD9A1BC6065100C648C4 /* AirbitzUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAD1ADAA1BC6065100C648C4 /* Build configuration list for PBXNativeTarget "AirbitzUITests" */;
+			buildPhases = (
+				DAD1AD971BC6065100C648C4 /* Sources */,
+				DAD1AD981BC6065100C648C4 /* Frameworks */,
+				DAD1AD991BC6065100C648C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DAD1AD9D1BC6065100C648C4 /* PBXTargetDependency */,
+			);
+			name = AirbitzUITests;
+			productName = AirbitzUITests;
+			productReference = DAD1AD9B1BC6065100C648C4 /* AirbitzUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DAD1AD6F1BC6065100C648C4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = Airbitz;
+				TargetAttributes = {
+					DA9ED6E91BC607FA0063DA07 = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					DAD1AD761BC6065100C648C4 = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					DAD1AD8F1BC6065100C648C4 = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = DAD1AD761BC6065100C648C4;
+					};
+					DAD1AD9A1BC6065100C648C4 = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = DAD1AD761BC6065100C648C4;
+					};
+				};
+			};
+			buildConfigurationList = DAD1AD721BC6065100C648C4 /* Build configuration list for PBXProject "Airbitz" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DAD1AD6E1BC6065100C648C4;
+			productRefGroup = DAD1AD781BC6065100C648C4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DAD1AD761BC6065100C648C4 /* Airbitz */,
+				DAD1AD8F1BC6065100C648C4 /* AirbitzTests */,
+				DAD1AD9A1BC6065100C648C4 /* AirbitzUITests */,
+				DA9ED6E91BC607FA0063DA07 /* Airbitz Widget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DA9ED6E81BC607FA0063DA07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA9ED6F41BC607FA0063DA07 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD1AD751BC6065100C648C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAD1AD8A1BC6065100C648C4 /* LaunchScreen.storyboard in Resources */,
+				DAD1AD871BC6065100C648C4 /* Assets.xcassets in Resources */,
+				DAD1AD851BC6065100C648C4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD1AD8E1BC6065100C648C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD1AD991BC6065100C648C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6861DED29A6F9662DAB11141 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF63B0E9B5BB0C91752C2F4F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DA9ED6E61BC607FA0063DA07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA9ED6F11BC607FA0063DA07 /* TodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD1AD731BC6065100C648C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAD1AD821BC6065100C648C4 /* ViewController.m in Sources */,
+				DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */,
+				DAD1AD7C1BC6065100C648C4 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD1AD8C1BC6065100C648C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAD1AD951BC6065100C648C4 /* AirbitzTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD1AD971BC6065100C648C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAD1ADA01BC6065100C648C4 /* AirbitzUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DA9ED6F71BC607FA0063DA07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA9ED6E91BC607FA0063DA07 /* Airbitz Widget */;
+			targetProxy = DA9ED6F61BC607FA0063DA07 /* PBXContainerItemProxy */;
+		};
+		DAD1AD921BC6065100C648C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DAD1AD761BC6065100C648C4 /* Airbitz */;
+			targetProxy = DAD1AD911BC6065100C648C4 /* PBXContainerItemProxy */;
+		};
+		DAD1AD9D1BC6065100C648C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DAD1AD761BC6065100C648C4 /* Airbitz */;
+			targetProxy = DAD1AD9C1BC6065100C648C4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DA9ED6F21BC607FA0063DA07 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA9ED6F31BC607FA0063DA07 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		DAD1AD831BC6065100C648C4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD1AD841BC6065100C648C4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DAD1AD881BC6065100C648C4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD1AD891BC6065100C648C4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DA9ED6F91BC607FA0063DA07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz.Airbitz-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DA9ED6FA1BC607FA0063DA07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz.Airbitz-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		DAD1ADA21BC6065100C648C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DAD1ADA31BC6065100C648C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DAD1ADA51BC6065100C648C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Airbitz/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.Airbitz;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DAD1ADA61BC6065100C648C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Airbitz/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.Airbitz;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DAD1ADA81BC6065100C648C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = AirbitzTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Airbitz.app/Airbitz";
+			};
+			name = Debug;
+		};
+		DAD1ADA91BC6065100C648C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = AirbitzTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Airbitz.app/Airbitz";
+			};
+			name = Release;
+		};
+		DAD1ADAB1BC6065100C648C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AirbitzUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Airbitz;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		DAD1ADAC1BC6065100C648C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AirbitzUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Airbitz;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DA9ED6FB1BC607FA0063DA07 /* Build configuration list for PBXNativeTarget "Airbitz Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA9ED6F91BC607FA0063DA07 /* Debug */,
+				DA9ED6FA1BC607FA0063DA07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAD1AD721BC6065100C648C4 /* Build configuration list for PBXProject "Airbitz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAD1ADA21BC6065100C648C4 /* Debug */,
+				DAD1ADA31BC6065100C648C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAD1ADA41BC6065100C648C4 /* Build configuration list for PBXNativeTarget "Airbitz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAD1ADA51BC6065100C648C4 /* Debug */,
+				DAD1ADA61BC6065100C648C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAD1ADA71BC6065100C648C4 /* Build configuration list for PBXNativeTarget "AirbitzTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAD1ADA81BC6065100C648C4 /* Debug */,
+				DAD1ADA91BC6065100C648C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAD1ADAA1BC6065100C648C4 /* Build configuration list for PBXNativeTarget "AirbitzUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAD1ADAB1BC6065100C648C4 /* Debug */,
+				DAD1ADAC1BC6065100C648C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DAD1AD6F1BC6065100C648C4 /* Project object */;
+}

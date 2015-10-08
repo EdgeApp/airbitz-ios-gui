@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -u
+set -e
+
+CURRENT_DIR=$( /bin/pwd )
+
+mkdir -m 0775 -p AirBitz/ABC/
+mkdir -m 0775 -p AirBitz/ABC-testnet/
+
+touch ../airbitz-core/deps/recipes/abc
+
+if [ "${1-}" = "testnet" ]; then
+    shift
+    ( cd ../airbitz-core/deps; make BUILD_DIR=${CURRENT_DIR}/../airbitz-core/deps/build-testnet ENABLE_TESTNET=1 $@ )
+    rm -rf Airbitz/ABC-testnet/*
+    cp -a ../airbitz-core/deps/build-testnet/abc/abc-ios-universal/include/* AirBitz/ABC-testnet/
+    cp -a ../airbitz-core/deps/build-testnet/abc/abc-ios-universal/lib/* AirBitz/ABC-testnet/
+else
+    ( cd ../airbitz-core/deps; make BUILD_DIR=${CURRENT_DIR}/../airbitz-core/deps/build $@ )
+    rm -rf Airbitz/ABC/*
+    cp -a ../airbitz-core/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
+    cp -a ../airbitz-core/deps/build/abc/abc-ios-universal/lib/* AirBitz/ABC/
+fi
+

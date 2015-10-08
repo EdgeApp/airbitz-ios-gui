@@ -1,0 +1,81 @@
+#!/bin/bash
+#
+# (Above line comes out when placing in Xcode scheme)
+#
+
+function run {
+    "$@"
+    local status=$?
+    if [ $status -ne 0 ]; then
+        echo "error with $1" >&2
+        exit 1
+    fi
+    return $status
+}
+ 
+function logger {
+    echo $@
+    echo $@ >> $LOG    
+}
+
+notes=$(< "./relnotes.txt")
+list="Internal"
+if [ "$6" = "testnet" ]; then
+  net="Testnet"
+  mainnetnotes=""
+else
+  net="Mainnet: USES REAL BITCOIN"
+  mainnetnotes=$(< "./mainnetnotes.txt")
+fi
+
+PRODUCT_NAME=Airbitz
+API_TOKEN=$3
+TEAM_TOKEN=$4
+SIGNING_IDENTITY=$5
+PROVISIONING_PROFILE=$6
+LOG="/tmp/testflight.log"
+ 
+DATE=$( /bin/date +"%Y-%m-%d" )
+ARCHIVE=$( /bin/ls -t "${HOME}/Library/Developer/Xcode/Archives/${DATE}" | /usr/bin/grep xcarchive | /usr/bin/sed -n 1p )
+DSYM="${HOME}/Library/Developer/Xcode/Archives/${DATE}/${ARCHIVE}/dSYMs/${PRODUCT_NAME}.app.dSYM"
+APP="${HOME}/Library/Developer/Xcode/Archives/${DATE}/${ARCHIVE}/Products/Applications/${PRODUCT_NAME}.app"
+ 
+dir="${HOME}/Library/MobileDevice/Provisioning Profiles"
+for f in "$dir"/*; do
+  profile="$f"
+  echo "Found Provisioning Profile: $profile"
+done
+
+#/usr/bin/open -a /Applications/Utilities/Console.app $LOG
+ 
+logger "Creating .ipa for ${PRODUCT_NAME} --sign ${SIGNING_IDENTITY} --embed $profile ... "
+#echo "Creating .ipa for ${PRODUCT_NAME}"
+
+/bin/rm "/tmp/${PRODUCT_NAME}.ipa"
+run /usr/bin/xcrun -sdk iphoneos PackageApplication -v "${APP}" -o "/tmp/${PRODUCT_NAME}.ipa" --sign "${SIGNING_IDENTITY}" --embed "$profile"
+ 
+#echo "done." >> $LOG
+logger "Created .ipa for ${PRODUCT_NAME}"
+ 
+#echo -n "Zipping .dSYM for ${PRODUCT_NAME}..." >> $LOG
+logger "Zipping .dSYM for ${PRODUCT_NAME}"
+ 
+/bin/rm "/tmp/${PRODUCT_NAME}.dSYM.zip"
+run /usr/bin/zip -r "/tmp/${PRODUCT_NAME}.dSYM.zip" "${DSYM}"
+ 
+#echo "done." >> $LOG
+logger "Created .dSYM for ${PRODUCT_NAME}"
+ 
+#echo -n "Uploading to TestFlight... " >> $LOG
+logger "Uploading to TestFlight"
+ 
+run /usr/bin/curl "http://testflightapp.com/api/builds.json" \
+  -F file=@"/tmp/${PRODUCT_NAME}.ipa" \
+  -F dsym=@"/tmp/${PRODUCT_NAME}.dSYM.zip" \
+  -F api_token="${API_TOKEN}" \
+  -F team_token="${TEAM_TOKEN}" \
+  -F distribution_lists="${list}" \
+  -F notes="Airbitz Wallet & Business Directory\n\nv $1 ($2)\n\n${net}\n${mainnetnotes}\n\n${notes}"
+ 
+#echo "done." >> $LOG
+logger "Uploaded to TestFlight" 
