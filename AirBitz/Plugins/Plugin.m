@@ -26,39 +26,21 @@ static NSMutableArray *plugins;
         plugins = [[NSMutableArray alloc] init];
 
         Plugin *plugin;
-        if (isTestnet) {
-            plugin = [[Plugin alloc] init];
-            plugin.pluginId = @"com.glidera.us";
-            plugin.provider = @"glidera";
-            plugin.country = @"US";
-            plugin.sourceFile = @"glidera";
-            plugin.sourceExtension = @"html";
-            plugin.name = @"Glidera USA";
-            plugin.env = @{
-                @"COUNTRY_CODE": @"US",
-                @"COUNTRY_NAME": @"United States",
-                @"CURRENCY_CODE": @"840",
-                @"CURRENCY_ABBREV": @"USD",
-                @"SANDBOX": (isTestnet ? @"true" : @"false"),
-                @"GLIDERA_PARTNER_TOKEN": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY)
-            };
-            [plugins addObject:plugin];
-        }
-
         plugin = [[Plugin alloc] init];
-        plugin.pluginId = @"com.glidera.ca";
-        plugin.sourceFile = @"glidera";
+        plugin.pluginId = @"com.glidera.us";
         plugin.provider = @"glidera";
-        plugin.country = @"CA";
+        plugin.country = @"US";
+        plugin.sourceFile = @"glidera";
         plugin.sourceExtension = @"html";
-        plugin.name = @"Glidera Canada";
+        plugin.name = @"Glidera US (beta)";
         plugin.env = @{
-            @"COUNTRY_CODE": @"CA",
-            @"COUNTRY_NAME": @"Canada",
-            @"CURRENCY_CODE": @"124",
-            @"CURRENCY_ABBREV": @"CAD",
+            @"COUNTRY_CODE": @"US",
+            @"COUNTRY_NAME": @"United States",
+            @"CURRENCY_CODE": @"840",
+            @"CURRENCY_ABBREV": @"USD",
             @"SANDBOX": (isTestnet ? @"true" : @"false"),
-            @"GLIDERA_PARTNER_TOKEN": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY)
+            @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
+            @"REDIRECT_URI": [NSString stringWithFormat:@"airbitz://plugin/glidera/%@/", plugin.country]
         };
         [plugins addObject:plugin];
 

@@ -16,7 +16,7 @@
 #import "CommonTypes.h"
 #import "MainViewController.h"
 
-#define SHOW_BUY_SELL 0
+#define SHOW_BUY_SELL 1
 
 @interface SlideoutView () <PickerTextViewDelegate >
 

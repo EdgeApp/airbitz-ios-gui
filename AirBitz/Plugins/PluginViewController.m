@@ -10,6 +10,8 @@
 #import "FadingAlertView.h"
 #import "CoreBridge.h"
 #import "SendConfirmationViewController.h"
+#import "MainViewController.h"
+#import "Theme.h"
 #import "Util.h"
 #import "Notifications.h"
 #import "CommonTypes.h"
@@ -50,6 +52,9 @@ static const NSString *PROTOCOL = @"bridge://";
 
     _navStack = [[NSMutableArray alloc] init];
     _functions = @{
+                     @"bitidAddress":NSStringFromSelector(@selector(bitidAddress:)),
+                     @"bitidSignature":NSStringFromSelector(@selector(bitidSignature:)),
+                     @"selectedWallet":NSStringFromSelector(@selector(selectedWallet:)),
                      @"wallets":NSStringFromSelector(@selector(wallets:)),
         @"createReceiveRequest":NSStringFromSelector(@selector(createReceiveRequest:)),
                 @"requestSpend":NSStringFromSelector(@selector(launchSpendConfirmation:)),
@@ -87,6 +92,9 @@ static const NSString *PROTOCOL = @"bridge://";
 
     [self resizeFrame:YES];
     [super viewWillAppear:animated];
+
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -230,7 +238,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
 #pragma mark - Action Methods
 
-- (IBAction)Back
+- (IBAction)Back:(id)sender
 {
     if (_sendConfirmationViewController != nil) {
         [self sendConfirmationViewControllerDidFinish:_sendConfirmationViewController
@@ -254,6 +262,37 @@ static const NSString *PROTOCOL = @"bridge://";
 }
 
 #pragma mark - Core Functions
+
+- (void)bitidAddress:(NSDictionary *)params
+{
+    NSDictionary *args = [params objectForKey:@"args"];
+    NSString *uri = [args objectForKey:@"uri"];
+    NSString *msg = [args objectForKey:@"message"];
+    BitidSignature *bitid = [CoreBridge bitidSign:uri msg:msg];
+
+    [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.address]];
+}
+
+- (void)bitidSignature:(NSDictionary *)params
+{
+    NSDictionary *args = [params objectForKey:@"args"];
+    NSString *uri = [args objectForKey:@"uri"];
+    NSString *msg = [args objectForKey:@"message"];
+    BitidSignature *bitid = [CoreBridge bitidSign:uri msg:msg];
+
+    [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.signature]];
+}
+
+- (void)selectedWallet:(NSDictionary *)params
+{
+    Wallet *w = [CoreBridge Singleton].currentWallet;
+    NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
+    [d setObject:w.strUUID forKey:@"id"];
+    [d setObject:w.strName forKey:@"name"];
+    [d setObject:[NSNumber numberWithInt:w.currencyNum] forKey:@"currencyNum"];
+    [d setObject:[NSNumber numberWithLong:w.balance] forKey:@"balance"];
+    [self callJsFunction:[params objectForKey:@"cbid"] withArgs:[self jsonResult:d]];
+}
 
 - (void)wallets:(NSDictionary *)params
 {

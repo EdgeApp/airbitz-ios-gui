@@ -56,6 +56,14 @@ static NSMutableDictionary *currencySymbolCache;
 
 static CoreBridge *singleton = nil;
 
+@implementation BitidSignature
+- (id)init
+{
+   self = [super init];
+   return self;
+}
+@end
+
 @interface CoreBridge ()
 {
 }
@@ -2567,6 +2575,29 @@ static BOOL bOtpError = NO;
     if (error.code == ABC_CC_Ok)
         return YES;
     return NO;
+}
+
++ (BitidSignature *)bitidSign:(NSString *)uri msg:(NSString *)message 
+{
+    tABC_Error error;
+    char *szAddress = NULL;
+    char *szSignature = NULL;
+    BitidSignature *bitid = [[BitidSignature alloc] init];
+
+    tABC_CC result = ABC_BitidSign(
+        [[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+        [uri UTF8String], [message UTF8String], &szAddress, &szSignature, &error);
+    if (result == ABC_CC_Ok) {
+        bitid.address = [NSString stringWithUTF8String:szAddress];
+        bitid.signature = [NSString stringWithUTF8String:szSignature];
+    }
+    if (szAddress) {
+        free(szAddress);
+    }
+    if (szSignature) {
+        free(szSignature);
+    }
+    return bitid;
 }
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)

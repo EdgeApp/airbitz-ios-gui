@@ -11,6 +11,11 @@
 #define CONFIRMED_CONFIRMATION_COUNT 6
 #define PIN_REQUIRED_PERIOD_SECONDS     120
 
+@interface BitidSignature : NSObject
+@property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) NSString *signature;
+@end
+
 @interface CoreBridge : NSObject
 
 @property (nonatomic, strong) NSMutableArray            *arrayWallets;
@@ -118,6 +123,7 @@
 + (void)otpClearError;
 + (NSString *) bitidParseURI:(NSString *)uri;
 + (BOOL) bitidLogin:(NSString *)uri;
++ (BitidSignature *) bitidSign:(NSString *)uri msg:(NSString *)msg;
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo);
 void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
