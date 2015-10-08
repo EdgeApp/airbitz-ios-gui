@@ -99,7 +99,6 @@
 		DA9EE0CC1BC61F920063DA07 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED82E1BC61F8F0063DA07 /* SMCalloutView.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EE0CD1BC61F920063DA07 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8311BC61F8F0063DA07 /* DDData.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EE0CE1BC61F920063DA07 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8341BC61F8F0063DA07 /* DL_URLServer.m */; settings = {ASSET_TAGS = (); }; };
-		DA9EE0CF1BC61F920063DA07 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED8351BC61F8F0063DA07 /* LaunchScreen.xib */; settings = {ASSET_TAGS = (); }; };
 		DA9EE0D01BC61F920063DA07 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8381BC61F8F0063DA07 /* FadingAlertView.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EE0D11BC61F920063DA07 /* DropDownAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED83B1BC61F8F0063DA07 /* DropDownAlertView.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EE0D21BC61F920063DA07 /* DropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83C1BC61F8F0063DA07 /* DropDownAlertView.xib */; settings = {ASSET_TAGS = (); }; };
@@ -451,11 +450,11 @@
 		DA9EEFA11BC63E670063DA07 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEFA01BC63E670063DA07 /* HockeySDK.framework */; };
 		DA9EEFA31BC63F000063DA07 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEFA21BC63F000063DA07 /* libc++.tbd */; };
 		DA9EEFAB1BC70AF10063DA07 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEFAA1BC70AF10063DA07 /* libiconv.tbd */; };
+		DA9EEFAD1BC70CA00063DA07 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAC1BC70CA00063DA07 /* Main_iPhone.storyboard */; settings = {ASSET_TAGS = (); }; };
+		DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		DAD1AD7C1BC6065100C648C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7B1BC6065100C648C4 /* main.m */; };
 		DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
-		DAD1AD851BC6065100C648C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD831BC6065100C648C4 /* Main.storyboard */; };
-		DAD1AD871BC6065100C648C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD861BC6065100C648C4 /* Assets.xcassets */; };
-		DAD1AD8A1BC6065100C648C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD881BC6065100C648C4 /* LaunchScreen.storyboard */; };
 		DAD1AD951BC6065100C648C4 /* AirbitzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD941BC6065100C648C4 /* AirbitzTests.m */; };
 		DAD1ADA01BC6065100C648C4 /* AirbitzUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */; };
 /* End PBXBuildFile section */
@@ -685,7 +684,6 @@
 		DA9ED8311BC61F8F0063DA07 /* DDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDData.m; sourceTree = "<group>"; };
 		DA9ED8331BC61F8F0063DA07 /* DL_URLServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DL_URLServer.h; sourceTree = "<group>"; };
 		DA9ED8341BC61F8F0063DA07 /* DL_URLServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DL_URLServer.m; sourceTree = "<group>"; };
-		DA9ED8351BC61F8F0063DA07 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		DA9ED8371BC61F8F0063DA07 /* FadingAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FadingAlertView.h; sourceTree = "<group>"; };
 		DA9ED8381BC61F8F0063DA07 /* FadingAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FadingAlertView.m; sourceTree = "<group>"; };
 		DA9ED83A1BC61F8F0063DA07 /* DropDownAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownAlertView.h; sourceTree = "<group>"; };
@@ -1149,13 +1147,12 @@
 		DA9EEFA01BC63E670063DA07 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
 		DA9EEFA21BC63F000063DA07 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		DA9EEFAA1BC70AF10063DA07 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		DA9EEFAC1BC70CA00063DA07 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
+		DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD7B1BC6065100C648C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		DAD1AD841BC6065100C648C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DAD1AD861BC6065100C648C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DAD1AD891BC6065100C648C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DAD1AD901BC6065100C648C4 /* AirbitzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirbitzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD941BC6065100C648C4 /* AirbitzTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirbitzTests.m; sourceTree = "<group>"; };
 		DAD1AD961BC6065100C648C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1384,7 +1381,6 @@
 			children = (
 				DA9ED8331BC61F8F0063DA07 /* DL_URLServer.h */,
 				DA9ED8341BC61F8F0063DA07 /* DL_URLServer.m */,
-				DA9ED8351BC61F8F0063DA07 /* LaunchScreen.xib */,
 			);
 			path = DL_URLServer;
 			sourceTree = "<group>";
@@ -2207,6 +2203,8 @@
 				DA9EE04D1BC61F920063DA07 /* UIPhotoGallery */,
 				DA9EE07D1BC61F920063DA07 /* Wallets */,
 				DA9EE09C1BC61F920063DA07 /* ZBarSDK */,
+				DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */,
+				DA9EEFAC1BC70CA00063DA07 /* Main_iPhone.storyboard */,
 				DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */,
 				DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */,
 				DA9EE5C11BC62F6B0063DA07 /* AppGroupConstants.h */,
@@ -2293,10 +2291,7 @@
 				DA9ED7CA1BC61E680063DA07 /* Util.m */,
 				DA9ED7CB1BC61E680063DA07 /* ViewController.h */,
 				DA9ED7CC1BC61E680063DA07 /* ViewController.m */,
-				DAD1AD831BC6065100C648C4 /* Main.storyboard */,
-				DAD1AD861BC6065100C648C4 /* Assets.xcassets */,
 				DA9ED74B1BC61B980063DA07 /* Airbitz-Info.plist */,
-				DAD1AD881BC6065100C648C4 /* LaunchScreen.storyboard */,
 				DAD1AD7A1BC6065100C648C4 /* Supporting Files */,
 			);
 			path = Airbitz;
@@ -2495,6 +2490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA9ED6F41BC607FA0063DA07 /* MainInterface.storyboard in Resources */,
+				DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2537,7 +2533,6 @@
 				DA9EE4AC1BC61F920063DA07 /* icon_more@4x.png in Resources */,
 				DA9EE4ED1BC61F920063DA07 /* Lato-Italic.ttf in Resources */,
 				DA9EE46B1BC61F920063DA07 /* enable-camera.png in Resources */,
-				DAD1AD8A1BC6065100C648C4 /* LaunchScreen.storyboard in Resources */,
 				DA9EE4811BC61F920063DA07 /* icon_approved@2x.png in Resources */,
 				DA9EE4461BC61F920063DA07 /* btn_close@3x.png in Resources */,
 				DA9EE48B1BC61F920063DA07 /* icon_category_coffee_tea@2x.png in Resources */,
@@ -2624,7 +2619,6 @@
 				DA9EE4D11BC61F920063DA07 /* large-digit-input@2x.png in Resources */,
 				DA9EE4501BC61F920063DA07 /* btn_collapse_expand@4x.png in Resources */,
 				DA9EE4AD1BC61F920063DA07 /* icon_not_approved@2x.png in Resources */,
-				DAD1AD871BC6065100C648C4 /* Assets.xcassets in Resources */,
 				DA9ED7E21BC61E680063DA07 /* LaunchScreen.xib in Resources */,
 				DA9EE4E91BC61F920063DA07 /* Lato-Bold.ttf in Resources */,
 				DA9EE4561BC61F920063DA07 /* btn_export.psd in Resources */,
@@ -2664,6 +2658,7 @@
 				DA9EE4CF1BC61F920063DA07 /* img_collapseExpandBlueDown@2x.png in Resources */,
 				DA9EE4251BC61F920063DA07 /* 3-bars@2x.png in Resources */,
 				DA9EE4341BC61F920063DA07 /* bitcoin_symbol@2x.png in Resources */,
+				DA9EEFAD1BC70CA00063DA07 /* Main_iPhone.storyboard in Resources */,
 				DA9EE4BA1BC61F920063DA07 /* icon_settings.png in Resources */,
 				DA9EE5081BC61F920063DA07 /* bg_app.jpg in Resources */,
 				DA9EE4DB1BC61F920063DA07 /* ribbon@2x.png in Resources */,
@@ -2683,6 +2678,7 @@
 				DA9EE43B1BC61F920063DA07 /* btn_add@2x.png in Resources */,
 				DA9EE4A51BC61F920063DA07 /* icon_logout.png in Resources */,
 				DA9EE4151BC61F920063DA07 /* Plugins.storyboard in Resources */,
+				DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */,
 				DA9EE4431BC61F920063DA07 /* btn_close.ai in Resources */,
 				DA9EE5031BC61F920063DA07 /* transactionDetails.html in Resources */,
 				DA9EE4BC1BC61F920063DA07 /* icon_settings@3x.png in Resources */,
@@ -2717,7 +2713,6 @@
 				DA9EE4AF1BC61F920063DA07 /* icon_request@2x.png in Resources */,
 				DA9EE4D61BC61F920063DA07 /* password_dot@2x.png in Resources */,
 				DA9EE4791BC61F920063DA07 /* ico_nav_directory_dark@2x.png in Resources */,
-				DA9EE0CF1BC61F920063DA07 /* LaunchScreen.xib in Resources */,
 				DA9EE0C41BC61F920063DA07 /* AnnotationContentView.xib in Resources */,
 				DA9EE4A41BC61F920063DA07 /* icon_location@2x.png in Resources */,
 				DA9EE40D1BC61F920063DA07 /* QuestionAnswerView~iphone.xib in Resources */,
@@ -2764,7 +2759,6 @@
 				DA9EE50F1BC61F920063DA07 /* ConfirmationSliderView.xib in Resources */,
 				DA9EE4F71BC61F920063DA07 /* infoImportWallet.html in Resources */,
 				DA9ED7F41BC61E680063DA07 /* SyncView~iphone.xib in Resources */,
-				DAD1AD851BC6065100C648C4 /* Main.storyboard in Resources */,
 				DA9EE4EB1BC61F920063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EE4D51BC61F920063DA07 /* logo_large@2x.png in Resources */,
 				DA9EE4541BC61F920063DA07 /* btn_collapse_expand_black@4x.png in Resources */,
@@ -3019,22 +3013,6 @@
 				DA9ED6F31BC607FA0063DA07 /* Base */,
 			);
 			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
-		DAD1AD831BC6065100C648C4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DAD1AD841BC6065100C648C4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		DAD1AD881BC6065100C648C4 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DAD1AD891BC6065100C648C4 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
