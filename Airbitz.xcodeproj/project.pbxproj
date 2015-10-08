@@ -311,7 +311,6 @@
 		DA9EE4D61BC61F920063DA07 /* password_dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB51BC61F920063DA07 /* password_dot@2x.png */; settings = {ASSET_TAGS = (); }; };
 		DA9EE4D71BC61F920063DA07 /* postcard-mountain-blue@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB61BC61F920063DA07 /* postcard-mountain-blue@2x.jpg */; settings = {ASSET_TAGS = (); }; };
 		DA9EE4D81BC61F920063DA07 /* postcard-mountain@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB71BC61F920063DA07 /* postcard-mountain@2x.png */; settings = {ASSET_TAGS = (); }; };
-		DA9EE4D91BC61F920063DA07 /* QR-bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB81BC61F920063DA07 /* QR-bracket.png */; settings = {ASSET_TAGS = (); }; };
 		DA9EE4DA1BC61F920063DA07 /* Red-X@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB91BC61F920063DA07 /* Red-X@2x.png */; settings = {ASSET_TAGS = (); }; };
 		DA9EE4DB1BC61F920063DA07 /* ribbon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFBA1BC61F920063DA07 /* ribbon@2x.png */; settings = {ASSET_TAGS = (); }; };
 		DA9EE4DC1BC61F920063DA07 /* swipe-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFBB1BC61F920063DA07 /* swipe-arrow@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -453,6 +452,8 @@
 		DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		DA9EEFB31BC721BD0063DA07 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB11BC721BD0063DA07 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
 		DA9EEFB41BC721BD0063DA07 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */; settings = {ASSET_TAGS = (); }; };
+		DA9EEFB81BC724B00063DA07 /* QR-bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB71BC724B00063DA07 /* QR-bracket.png */; settings = {ASSET_TAGS = (); }; };
+		DA9EEFB91BC724B00063DA07 /* QR-bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB71BC724B00063DA07 /* QR-bracket.png */; settings = {ASSET_TAGS = (); }; };
 		DAD1AD7C1BC6065100C648C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7B1BC6065100C648C4 /* main.m */; };
 		DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
 		DAD1AD951BC6065100C648C4 /* AirbitzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD941BC6065100C648C4 /* AirbitzTests.m */; };
@@ -916,7 +917,6 @@
 		DA9EDFB51BC61F920063DA07 /* password_dot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password_dot@2x.png"; sourceTree = "<group>"; };
 		DA9EDFB61BC61F920063DA07 /* postcard-mountain-blue@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "postcard-mountain-blue@2x.jpg"; sourceTree = "<group>"; };
 		DA9EDFB71BC61F920063DA07 /* postcard-mountain@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "postcard-mountain@2x.png"; sourceTree = "<group>"; };
-		DA9EDFB81BC61F920063DA07 /* QR-bracket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QR-bracket.png"; sourceTree = "<group>"; };
 		DA9EDFB91BC61F920063DA07 /* Red-X@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Red-X@2x.png"; sourceTree = "<group>"; };
 		DA9EDFBA1BC61F920063DA07 /* ribbon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ribbon@2x.png"; sourceTree = "<group>"; };
 		DA9EDFBB1BC61F920063DA07 /* swipe-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swipe-arrow@2x.png"; sourceTree = "<group>"; };
@@ -1149,6 +1149,7 @@
 		DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Airbitz.entitlements; sourceTree = "<group>"; };
 		DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Airbitz Widget.entitlements"; sourceTree = "<group>"; };
+		DA9EEFB71BC724B00063DA07 /* QR-bracket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QR-bracket.png"; sourceTree = "<group>"; };
 		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD7B1BC6065100C648C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1704,7 +1705,7 @@
 				DA9EDFB51BC61F920063DA07 /* password_dot@2x.png */,
 				DA9EDFB61BC61F920063DA07 /* postcard-mountain-blue@2x.jpg */,
 				DA9EDFB71BC61F920063DA07 /* postcard-mountain@2x.png */,
-				DA9EDFB81BC61F920063DA07 /* QR-bracket.png */,
+				DA9EEFB71BC724B00063DA07 /* QR-bracket.png */,
 				DA9EDFB91BC61F920063DA07 /* Red-X@2x.png */,
 				DA9EDFBA1BC61F920063DA07 /* ribbon@2x.png */,
 				DA9EDFBB1BC61F920063DA07 /* swipe-arrow@2x.png */,
@@ -2501,6 +2502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA9EEFB31BC721BD0063DA07 /* Info.plist in Resources */,
+				DA9EEFB91BC724B00063DA07 /* QR-bracket.png in Resources */,
 				DA9EEFB41BC721BD0063DA07 /* MainInterface.storyboard in Resources */,
 				DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */,
 			);
@@ -2645,7 +2647,6 @@
 				DA9EE4451BC61F920063DA07 /* btn_close@2x.png in Resources */,
 				DA9EE4281BC61F920063DA07 /* background_launch.png in Resources */,
 				DA9EE4991BC61F920063DA07 /* icon_directory.png in Resources */,
-				DA9EE4D91BC61F920063DA07 /* QR-bracket.png in Resources */,
 				DA9EE4931BC61F920063DA07 /* icon_category_restaurants.png in Resources */,
 				DA9EE4CB1BC61F920063DA07 /* icon_wallet_dark.png in Resources */,
 				DA9EE55F1BC61F930063DA07 /* WalletHeaderView~iphone.xib in Resources */,
@@ -2734,6 +2735,7 @@
 				DA9EE4C51BC61F920063DA07 /* icon_transactions@4x.png in Resources */,
 				DA9EE0D41BC61F920063DA07 /* FadingAlertViewNew.xib in Resources */,
 				DA9EE4E41BC61F920063DA07 /* BitcoinSent.mp3 in Resources */,
+				DA9EEFB81BC724B00063DA07 /* QR-bracket.png in Resources */,
 				DA9EE4361BC61F920063DA07 /* bitCoinAnnotation@2x.png in Resources */,
 				DA9EE48C1BC61F920063DA07 /* icon_category_coffee_tea@3x.png in Resources */,
 				DA9EE5011BC61F920063DA07 /* infoTransactions.html in Resources */,
