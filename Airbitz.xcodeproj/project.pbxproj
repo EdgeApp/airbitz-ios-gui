@@ -1147,6 +1147,8 @@
 		DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DA9EEFB11BC721BD0063DA07 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Airbitz.entitlements; sourceTree = "<group>"; };
+		DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Airbitz Widget.entitlements"; sourceTree = "<group>"; };
 		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD7B1BC6065100C648C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1273,6 +1275,7 @@
 		DA9ED6EE1BC607FA0063DA07 /* Airbitz Widget */ = {
 			isa = PBXGroup;
 			children = (
+				DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */,
 				DA9EEFB11BC721BD0063DA07 /* Info.plist */,
 				DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */,
 				DA9ED6EF1BC607FA0063DA07 /* TodayViewController.h */,
@@ -2177,6 +2180,7 @@
 		DAD1AD791BC6065100C648C4 /* Airbitz */ = {
 			isa = PBXGroup;
 			children = (
+				DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */,
 				DA9EE5901BC61FBD0063DA07 /* ABC */,
 				DA9ED7FC1BC61F8F0063DA07 /* ABC Data */,
 				DA9ED8031BC61F8F0063DA07 /* Business Directory */,
@@ -2407,10 +2411,21 @@
 				TargetAttributes = {
 					DA9ED6E91BC607FA0063DA07 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = G5LQ7MERPK;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					DAD1AD761BC6065100C648C4 = {
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = G5LQ7MERPK;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					DAD1AD8F1BC6065100C648C4 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -3006,6 +3021,7 @@
 		DA9ED6F91BC607FA0063DA07 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Airbitz Widget/Airbitz Widget.entitlements";
 				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.airbitz.Airbitz-Widget";
@@ -3017,6 +3033,7 @@
 		DA9ED6FA1BC607FA0063DA07 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Airbitz Widget/Airbitz Widget.entitlements";
 				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.airbitz.Airbitz-Widget";
