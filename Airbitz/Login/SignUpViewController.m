@@ -12,7 +12,7 @@
 #import "MinCharTextField.h"
 #import "User.h"
 #import "Config.h"
-#import "MontserratLabel.h"
+#import "LatoLabel.h"
 #import "LatoLabel.h"
 #import "Util.h"
 #import "CoreBridge.h"
@@ -35,11 +35,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordTextHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordFieldHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordReenterHeight;
-@property (weak, nonatomic) IBOutlet MontserratLabel            *labelUserName;
+@property (weak, nonatomic) IBOutlet LatoLabel                  *labelUserName;
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonNextStep;
 @property (weak, nonatomic) IBOutlet UIImageView                *imageUserName;
 @property (weak, nonatomic) IBOutlet UIImageView                *imageReenterPassword;
-@property (weak, nonatomic) IBOutlet MontserratLabel            *labelPIN;
+@property (weak, nonatomic) IBOutlet LatoLabel                  *labelPIN;
 @property (weak, nonatomic) IBOutlet UIImageView                *imagePIN;
 @property (nonatomic, weak) IBOutlet MinCharTextField           *userNameTextField;
 @property (nonatomic, weak) IBOutlet MinCharTextField           *passwordTextField;

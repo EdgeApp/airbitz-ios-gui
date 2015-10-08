@@ -11,7 +11,7 @@
 #import "QuestionAnswerView.h"
 #import "ABC.h"
 #import "User.h"
-#import "MontserratLabel.h"
+#import "LatoLabel.h"
 #import "Util.h"
 #import "CoreBridge.h"
 #import "SignUpViewController.h"
@@ -49,7 +49,7 @@ typedef enum eAlertType
 @property (nonatomic, strong)          UIButton                   *completeSignupButton;
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonSkip;
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonBack;
-@property (weak, nonatomic) IBOutlet MontserratLabel            *labelTitle;
+@property (weak, nonatomic) IBOutlet LatoLabel                  *labelTitle;
 @property (weak, nonatomic) IBOutlet UIImageView                *imageSkip;
 @property (nonatomic, weak) IBOutlet UIView                     *spinnerView;
 @property (nonatomic, weak) IBOutlet UIView                     *passwordView;

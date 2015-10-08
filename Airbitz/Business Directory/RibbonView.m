@@ -132,7 +132,7 @@
         
         label.adjustsFontSizeToFitWidth = YES;
         
-        label.font = [UIFont fontWithName:@"Montserrat-Bold" size:11.0];
+        label.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
         
         self.tag = TAG_RIBBON_VIEW;
         [self addSubview:label];

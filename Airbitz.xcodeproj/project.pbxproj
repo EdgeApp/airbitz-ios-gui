@@ -54,7 +54,6 @@
 		DA9ED7E21BC61E680063DA07 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7A11BC61E680063DA07 /* LaunchScreen.xib */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7E41BC61E680063DA07 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A41BC61E680063DA07 /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7E51BC61E680063DA07 /* MinCharTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A61BC61E680063DA07 /* MinCharTextField.m */; settings = {ASSET_TAGS = (); }; };
-		DA9ED7E61BC61E680063DA07 /* MontserratLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A81BC61E680063DA07 /* MontserratLabel.m */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7E71BC61E680063DA07 /* NotificationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AA1BC61E680063DA07 /* NotificationChecker.m */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7E81BC61E680063DA07 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AD1BC61E680063DA07 /* NSDate+Helper.m */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7E91BC61E680063DA07 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AF1BC61E680063DA07 /* NSMutableData+Secure.m */; settings = {ASSET_TAGS = (); }; };
@@ -596,8 +595,6 @@
 		DA9ED7A41BC61E680063DA07 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		DA9ED7A51BC61E680063DA07 /* MinCharTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinCharTextField.h; sourceTree = "<group>"; };
 		DA9ED7A61BC61E680063DA07 /* MinCharTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinCharTextField.m; sourceTree = "<group>"; };
-		DA9ED7A71BC61E680063DA07 /* MontserratLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MontserratLabel.h; sourceTree = "<group>"; };
-		DA9ED7A81BC61E680063DA07 /* MontserratLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MontserratLabel.m; sourceTree = "<group>"; };
 		DA9ED7A91BC61E680063DA07 /* NotificationChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationChecker.h; sourceTree = "<group>"; };
 		DA9ED7AA1BC61E680063DA07 /* NotificationChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationChecker.m; sourceTree = "<group>"; };
 		DA9ED7AB1BC61E680063DA07 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
@@ -2253,8 +2250,6 @@
 				DA9ED7A41BC61E680063DA07 /* MainViewController.m */,
 				DA9ED7A51BC61E680063DA07 /* MinCharTextField.h */,
 				DA9ED7A61BC61E680063DA07 /* MinCharTextField.m */,
-				DA9ED7A71BC61E680063DA07 /* MontserratLabel.h */,
-				DA9ED7A81BC61E680063DA07 /* MontserratLabel.m */,
 				DA9ED7A91BC61E680063DA07 /* NotificationChecker.h */,
 				DA9ED7AA1BC61E680063DA07 /* NotificationChecker.m */,
 				DA9ED7AB1BC61E680063DA07 /* Notifications.h */,
@@ -2838,7 +2833,6 @@
 				DA9EE4101BC61F920063DA07 /* PickerTextView.m in Sources */,
 				DA9EE52C1BC61F930063DA07 /* SignUpUsernameController.m in Sources */,
 				DA9EE52D1BC61F930063DA07 /* SignUpWriteItController.m in Sources */,
-				DA9ED7E61BC61E680063DA07 /* MontserratLabel.m in Sources */,
 				DA9EE5291BC61F930063DA07 /* SignUpHandleController.m in Sources */,
 				DA9EE5231BC61F930063DA07 /* TwoFactorScanViewController.m in Sources */,
 				DA9EE55E1BC61F930063DA07 /* WalletHeaderView.m in Sources */,

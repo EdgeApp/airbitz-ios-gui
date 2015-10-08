@@ -11,7 +11,7 @@
 #import "Util.h"
 #import "StylizedTextField.h"
 #import "InfoView.h"
-#import "MontserratLabel.h"
+#import "LatoLabel.h"
 #import "PayeeCell.h"
 #import "Contact.h"
 #import "MainViewController.h"
@@ -25,7 +25,7 @@
 @interface RecipientViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView             *viewDisplay;
-@property (weak, nonatomic) IBOutlet MontserratLabel    *labelTitle;
+@property (weak, nonatomic) IBOutlet LatoLabel          *labelTitle;
 @property (weak, nonatomic) IBOutlet StylizedTextField  *textFieldRecipient;
 @property (weak, nonatomic) IBOutlet UITableView        *tableContacts;
 
