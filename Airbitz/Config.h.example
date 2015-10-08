@@ -1,0 +1,32 @@
+//
+//  Config.h
+//  AirBitz
+//
+//  Created by Carson Whitsett on 3/28/14.
+//  Copyright (c) 2014 AirBitz. All rights reserved.
+//
+//  Compile-time configurations.  Should all be zero for deployment
+
+#ifndef AirBitz_Config_h
+#define AirBitz_Config_h
+
+#define AUTH_TOKEN                      @"0000000000000000000000000000000000000000"
+//android token? 0000000000000000000000000000000000000000
+
+#define HOCKEY_MANAGER_ID               @"00000000000000000000000000000000"
+
+#define PRIVATE_KEY                     @"000000000000000000000000000000000000000000000000000"
+#define PUBLIC_ADDRESS                  @"0000000000000000000000000000000000"
+
+/* These should be 0 for deployment */
+#define AIRBITZ_IOS_DEBUG               0   /* set to 1 while debugging */
+#define DIRECTORY_ONLY                  0   /* set to 0 for wallet and directory, set to 1 for just directory */
+#define HARD_CODED_LOGIN                0   /* set to 1 to auto login with credientials below (used for testing) */
+
+#define HARD_CODED_LOGIN_NAME           @"000000000"
+#define HARD_CODED_LOGIN_PASSWORD       @"000000 000000000"
+
+#define GLIDERA_API_KEY                 @"0000000000000000"
+#define GLIDERA_API_SANDBOX_KEY         @"0000000000000000"
+
+#endif
