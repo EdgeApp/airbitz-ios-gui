@@ -52,7 +52,6 @@
 		DA9ED7E01BC61E680063DA07 /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED79E1BC61E680063DA07 /* InfoView~iphone.xib */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7E11BC61E680063DA07 /* LatoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A01BC61E680063DA07 /* LatoLabel.m */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7E21BC61E680063DA07 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7A11BC61E680063DA07 /* LaunchScreen.xib */; settings = {ASSET_TAGS = (); }; };
-		DA9ED7E31BC61E680063DA07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A21BC61E680063DA07 /* main.m */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7E41BC61E680063DA07 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A41BC61E680063DA07 /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7E51BC61E680063DA07 /* MinCharTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A61BC61E680063DA07 /* MinCharTextField.m */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7E61BC61E680063DA07 /* MontserratLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A81BC61E680063DA07 /* MontserratLabel.m */; settings = {ASSET_TAGS = (); }; };
@@ -430,14 +429,7 @@
 		DA9EE5631BC61F930063DA07 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE0B41BC61F920063DA07 /* libzbar.a */; settings = {ASSET_TAGS = (); }; };
 		DA9EE5A81BC61FBD0063DA07 /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE5921BC61FBD0063DA07 /* libabc.a */; settings = {ASSET_TAGS = (); }; };
 		DA9EE5A91BC61FBE0063DA07 /* libbitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE5931BC61FBD0063DA07 /* libbitcoin.a */; settings = {ASSET_TAGS = (); }; };
-		DA9EE5AA1BC61FBE0063DA07 /* libboost_atomic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE5941BC61FBD0063DA07 /* libboost_atomic.a */; settings = {ASSET_TAGS = (); }; };
-		DA9EE5AB1BC61FBE0063DA07 /* libboost_chrono.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE5951BC61FBD0063DA07 /* libboost_chrono.a */; settings = {ASSET_TAGS = (); }; };
-		DA9EE5AC1BC61FBE0063DA07 /* libboost_date_time.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE5961BC61FBD0063DA07 /* libboost_date_time.a */; settings = {ASSET_TAGS = (); }; };
-		DA9EE5AD1BC61FBE0063DA07 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE5971BC61FBD0063DA07 /* libboost_filesystem.a */; settings = {ASSET_TAGS = (); }; };
-		DA9EE5AE1BC61FBE0063DA07 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE5981BC61FBD0063DA07 /* libboost_program_options.a */; settings = {ASSET_TAGS = (); }; };
-		DA9EE5AF1BC61FBE0063DA07 /* libboost_regex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE5991BC61FBD0063DA07 /* libboost_regex.a */; settings = {ASSET_TAGS = (); }; };
 		DA9EE5B01BC61FBE0063DA07 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE59A1BC61FBD0063DA07 /* libboost_system.a */; settings = {ASSET_TAGS = (); }; };
-		DA9EE5B11BC61FBE0063DA07 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE59B1BC61FBD0063DA07 /* libboost_thread.a */; settings = {ASSET_TAGS = (); }; };
 		DA9EE5B21BC61FBE0063DA07 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE59C1BC61FBD0063DA07 /* libcrypto.a */; settings = {ASSET_TAGS = (); }; };
 		DA9EE5B31BC61FBE0063DA07 /* libcsv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE59D1BC61FBD0063DA07 /* libcsv.a */; settings = {ASSET_TAGS = (); }; };
 		DA9EE5B41BC61FBE0063DA07 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE59E1BC61FBD0063DA07 /* libcurl.a */; settings = {ASSET_TAGS = (); }; };
@@ -455,6 +447,9 @@
 		DA9EEC461BC6332F0063DA07 /* GDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE5C51BC6332C0063DA07 /* GDrive.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EEC471BC6332F0063DA07 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE5CA1BC6332C0063DA07 /* GTLDrive_Sources.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EEC481BC6332F0063DA07 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE5CB1BC6332C0063DA07 /* GTMOAuth2ViewTouch.xib */; settings = {ASSET_TAGS = (); }; };
+		DA9EEF9F1BC63D040063DA07 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEF9E1BC63D040063DA07 /* Social.framework */; };
+		DA9EEFA11BC63E670063DA07 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEFA01BC63E670063DA07 /* HockeySDK.framework */; };
+		DA9EEFA31BC63F000063DA07 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEFA21BC63F000063DA07 /* libc++.tbd */; };
 		DAD1AD7C1BC6065100C648C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7B1BC6065100C648C4 /* main.m */; };
 		DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
 		DAD1AD851BC6065100C648C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD831BC6065100C648C4 /* Main.storyboard */; };
@@ -1149,6 +1144,9 @@
 		DA9EE5C91BC6332C0063DA07 /* GTLDrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLDrive.h; sourceTree = "<group>"; };
 		DA9EE5CA1BC6332C0063DA07 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
 		DA9EE5CB1BC6332C0063DA07 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
+		DA9EEF9E1BC63D040063DA07 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		DA9EEFA01BC63E670063DA07 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
+		DA9EEFA21BC63F000063DA07 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD7B1BC6065100C648C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1177,47 +1175,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA9EE5AE1BC61FBE0063DA07 /* libboost_program_options.a in Frameworks */,
-				DA9ED7351BC60AA90063DA07 /* AssetsLibrary.framework in Frameworks */,
-				DA9EE5631BC61F930063DA07 /* libzbar.a in Frameworks */,
+				DA9EE5B71BC61FBE0063DA07 /* libprotobuf-lite.a in Frameworks */,
 				DA9ED7361BC60AA90063DA07 /* AudioToolbox.framework in Frameworks */,
+				DA9EEF9F1BC63D040063DA07 /* Social.framework in Frameworks */,
+				DA9ED7351BC60AA90063DA07 /* AssetsLibrary.framework in Frameworks */,
+				DA9ED7431BC60AA90063DA07 /* QuickLook.framework in Frameworks */,
+				DA9ED7411BC60AA90063DA07 /* MessageUI.framework in Frameworks */,
+				DA9ED73D1BC60AA90063DA07 /* CoreText.framework in Frameworks */,
+				DA9ED73A1BC60AA90063DA07 /* CoreBluetooth.framework in Frameworks */,
+				DA9EE5B31BC61FBE0063DA07 /* libcsv.a in Frameworks */,
+				DA9EE5B51BC61FBE0063DA07 /* libgit2.a in Frameworks */,
 				DA9EE5B91BC61FBE0063DA07 /* libsecp256k1.a in Frameworks */,
-				DA9ED7371BC60AA90063DA07 /* AVFoundation.framework in Frameworks */,
-				DA9EE5B81BC61FBE0063DA07 /* libqrencode.a in Frameworks */,
-				DA9EE5B61BC61FBE0063DA07 /* libjansson.a in Frameworks */,
-				DA9EE5B01BC61FBE0063DA07 /* libboost_system.a in Frameworks */,
 				DA9EE5BA1BC61FBE0063DA07 /* libsodium.a in Frameworks */,
-				DA9EE5AD1BC61FBE0063DA07 /* libboost_filesystem.a in Frameworks */,
 				DA9EE5BD1BC61FBE0063DA07 /* libzmq.a in Frameworks */,
 				DA9EE5BC1BC61FBE0063DA07 /* libz.a in Frameworks */,
-				DA9ED7381BC60AA90063DA07 /* CFNetwork.framework in Frameworks */,
-				DA9ED7391BC60AA90063DA07 /* CoreAudio.framework in Frameworks */,
-				DA9EE5B71BC61FBE0063DA07 /* libprotobuf-lite.a in Frameworks */,
-				DA9ED73A1BC60AA90063DA07 /* CoreBluetooth.framework in Frameworks */,
-				DA9EE5B11BC61FBE0063DA07 /* libboost_thread.a in Frameworks */,
-				DA9EE5A81BC61FBD0063DA07 /* libabc.a in Frameworks */,
-				DA9EE5B31BC61FBE0063DA07 /* libcsv.a in Frameworks */,
-				DA9ED73B1BC60AA90063DA07 /* CoreGraphics.framework in Frameworks */,
-				DA9ED73C1BC60AA90063DA07 /* CoreMedia.framework in Frameworks */,
-				DA9EE5A91BC61FBE0063DA07 /* libbitcoin.a in Frameworks */,
-				DA9ED73D1BC60AA90063DA07 /* CoreText.framework in Frameworks */,
+				DA9EE5B01BC61FBE0063DA07 /* libboost_system.a in Frameworks */,
 				DA9ED73E1BC60AA90063DA07 /* CoreVideo.framework in Frameworks */,
-				DA9EE5B21BC61FBE0063DA07 /* libcrypto.a in Frameworks */,
-				DA9EE5AC1BC61FBE0063DA07 /* libboost_date_time.a in Frameworks */,
-				DA9EE5B51BC61FBE0063DA07 /* libgit2.a in Frameworks */,
-				DA9ED73F1BC60AA90063DA07 /* Foundation.framework in Frameworks */,
-				DA9ED7401BC60AA90063DA07 /* MapKit.framework in Frameworks */,
-				DA9ED7411BC60AA90063DA07 /* MessageUI.framework in Frameworks */,
-				DA9EE5AB1BC61FBE0063DA07 /* libboost_chrono.a in Frameworks */,
-				DA9ED7421BC60AA90063DA07 /* QuartzCore.framework in Frameworks */,
-				DA9EE5BB1BC61FBE0063DA07 /* libssl.a in Frameworks */,
-				DA9EE5AF1BC61FBE0063DA07 /* libboost_regex.a in Frameworks */,
-				DA9EE5B41BC61FBE0063DA07 /* libcurl.a in Frameworks */,
-				DA9EE5AA1BC61FBE0063DA07 /* libboost_atomic.a in Frameworks */,
-				DA9ED7431BC60AA90063DA07 /* QuickLook.framework in Frameworks */,
+				DA9ED7391BC60AA90063DA07 /* CoreAudio.framework in Frameworks */,
+				DA9ED73C1BC60AA90063DA07 /* CoreMedia.framework in Frameworks */,
 				DA9EEC451BC6332E0063DA07 /* DriveLib.a in Frameworks */,
+				DA9ED7371BC60AA90063DA07 /* AVFoundation.framework in Frameworks */,
+				DA9ED7421BC60AA90063DA07 /* QuartzCore.framework in Frameworks */,
+				DA9ED7401BC60AA90063DA07 /* MapKit.framework in Frameworks */,
 				DA9ED7441BC60AA90063DA07 /* SystemConfiguration.framework in Frameworks */,
+				DA9EE5B81BC61FBE0063DA07 /* libqrencode.a in Frameworks */,
+				DA9EEFA31BC63F000063DA07 /* libc++.tbd in Frameworks */,
+				DA9ED7381BC60AA90063DA07 /* CFNetwork.framework in Frameworks */,
+				DA9EE5BB1BC61FBE0063DA07 /* libssl.a in Frameworks */,
+				DA9ED73B1BC60AA90063DA07 /* CoreGraphics.framework in Frameworks */,
 				DA9ED7451BC60AA90063DA07 /* UIKit.framework in Frameworks */,
+				DA9EEFA11BC63E670063DA07 /* HockeySDK.framework in Frameworks */,
+				DA9EE5B61BC61FBE0063DA07 /* libjansson.a in Frameworks */,
+				DA9EE5B21BC61FBE0063DA07 /* libcrypto.a in Frameworks */,
+				DA9EE5A81BC61FBD0063DA07 /* libabc.a in Frameworks */,
+				DA9EE5A91BC61FBE0063DA07 /* libbitcoin.a in Frameworks */,
+				DA9ED73F1BC60AA90063DA07 /* Foundation.framework in Frameworks */,
+				DA9EE5B41BC61FBE0063DA07 /* libcurl.a in Frameworks */,
+				DA9EE5631BC61F930063DA07 /* libzbar.a in Frameworks */,
 				09E7B90DE94333BDB8D48513 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1251,6 +1245,9 @@
 		DA9ED6EB1BC607FA0063DA07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA9EEFA21BC63F000063DA07 /* libc++.tbd */,
+				DA9EEFA01BC63E670063DA07 /* HockeySDK.framework */,
+				DA9EEF9E1BC63D040063DA07 /* Social.framework */,
 				DA9ED7241BC60AA90063DA07 /* AssetsLibrary.framework */,
 				DA9ED7251BC60AA90063DA07 /* AudioToolbox.framework */,
 				DA9ED7261BC60AA90063DA07 /* AVFoundation.framework */,
@@ -2958,7 +2955,6 @@
 				DA9EE5531BC61F930063DA07 /* CommonCell.m in Sources */,
 				DA9EE51B1BC61F930063DA07 /* LocalSettings.m in Sources */,
 				DA9ED7D31BC61E680063DA07 /* ButtonSelectorView.m in Sources */,
-				DA9ED7E31BC61E680063DA07 /* main.m in Sources */,
 				DA9ED7F31BC61E680063DA07 /* SyncView.m in Sources */,
 				DA9EE55D1BC61F930063DA07 /* WalletCell.m in Sources */,
 				DA9EE52F1BC61F930063DA07 /* CDataScanner.m in Sources */,
@@ -3045,7 +3041,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz.Airbitz-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.airbitz.Airbitz-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -3056,7 +3052,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz.Airbitz-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.airbitz.Airbitz-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -3082,6 +3078,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3126,6 +3123,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3153,10 +3151,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
-					"$(PROJECT_DIR)/Airbitz/UIPhotoGallery/PhotoGalleryExample/Vendors",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3194,10 +3192,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
-					"$(PROJECT_DIR)/Airbitz/UIPhotoGallery/PhotoGalleryExample/Vendors",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

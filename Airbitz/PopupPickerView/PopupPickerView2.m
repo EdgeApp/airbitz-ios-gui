@@ -56,8 +56,8 @@
 
 @implementation PopupPickerView2
 
-CGRect usableFrame;
-CGRect keyboardFrame;
+CGRect usableFrame2;
+CGRect keyboardFrame2;
 
 +(void)initAll
 {
@@ -71,8 +71,8 @@ CGRect keyboardFrame;
 												 name:UIKeyboardWillHideNotification
 											   object:nil];
 	UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-	usableFrame = window.frame;
-	keyboardFrame = CGRectMake(0, window.frame.origin.y + window.frame.size.height, 0, 0);
+	usableFrame2 = window.frame;
+	keyboardFrame2 = CGRectMake(0, window.frame.origin.y + window.frame.size.height, 0, 0);
 }
 
 +(void)freeAll
@@ -85,13 +85,13 @@ CGRect keyboardFrame;
 + (void)keyboardWasShown:(NSNotification *)notification
 {
 	// Get the size of the keyboard.
-	keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	keyboardFrame2 = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 	//ABLog(2,@"SHOW: KeyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
 {
-	keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	keyboardFrame2 = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 	//ABLog(2,@"HIDE: keyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 }
 

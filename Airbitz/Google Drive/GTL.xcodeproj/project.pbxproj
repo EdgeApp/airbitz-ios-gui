@@ -20,7 +20,6 @@
 		4F18174E1134982E009F7FD1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F18174C1134982E009F7FD1 /* Security.framework */; };
 		4F18174F1134982E009F7FD1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F18174C1134982E009F7FD1 /* Security.framework */; };
 		4F1817511134982E009F7FD1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F18174C1134982E009F7FD1 /* Security.framework */; };
-		4F1AD90D0B71607400DC0485 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD90C0B71607400DC0485 /* main.m */; };
 		4F1ADAB10B7168F300DC0485 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		4F2449B7121F3E2A00FEE1DA /* GTMHTTPFetcherTestServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2449B4121F3E2A00FEE1DA /* GTMHTTPFetcherTestServer.m */; };
 		4F2449B8121F3E2A00FEE1DA /* GTMHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2449B6121F3E2A00FEE1DA /* GTMHTTPServer.m */; };
@@ -269,7 +268,6 @@
 		4F16476A1370C8F80096E878 /* TaskBatch1.response.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TaskBatch1.response.txt; path = Tests/Data/TaskBatch1.response.txt; sourceTree = "<group>"; };
 		4F18174C1134982E009F7FD1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		4F1AD9020B71603F00DC0485 /* DevelopmentTestTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DevelopmentTestTool; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F1AD90C0B71607400DC0485 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Tests/main.m; sourceTree = "<group>"; };
 		4F2449B3121F3E2A00FEE1DA /* GTMHTTPFetcherTestServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcherTestServer.h; path = HTTPFetcher/Tests/GTMHTTPFetcherTestServer.h; sourceTree = "<group>"; };
 		4F2449B4121F3E2A00FEE1DA /* GTMHTTPFetcherTestServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcherTestServer.m; path = HTTPFetcher/Tests/GTMHTTPFetcherTestServer.m; sourceTree = "<group>"; };
 		4F2449B5121F3E2A00FEE1DA /* GTMHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPServer.h; path = HTTPFetcher/Tests/GTMHTTPServer.h; sourceTree = "<group>"; };
@@ -560,7 +558,6 @@
 		4FA9C7410B72AB1600DA5920 /* Test Tool */ = {
 			isa = PBXGroup;
 			children = (
-				4F1AD90C0B71607400DC0485 /* main.m */,
 			);
 			name = "Test Tool";
 			sourceTree = "<group>";
@@ -737,7 +734,7 @@
 			name = GTLUnitTests;
 			productName = GTLUnitTests;
 			productReference = 4F12027D11A4CA2F00BEB470 /* GTLUnitTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		4F1AD9010B71603F00DC0485 /* DevelopmentTestTool */ = {
 			isa = PBXNativeTarget;
@@ -929,7 +926,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F1AD90D0B71607400DC0485 /* main.m in Sources */,
 				4F697FAF131C1A4100A5AB6A /* GTMOAuth2Authentication.m in Sources */,
 				4F697FC2131C1A7A00A5AB6A /* GTMOAuth2SignIn.m in Sources */,
 				4F698075131C1F1D00A5AB6A /* GTMGatherInputStream.m in Sources */,
