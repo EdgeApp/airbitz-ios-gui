@@ -1,4 +1,0 @@
-mkdir -p Airbitz/ABC-testnet
-rm -rf Airbitz/ABC-testnet/*
-cp -a ../airbitz-core/deps/build-testnet/abc/abc-ios-universal/include/* AirBitz/ABC-testnet/
-cp -a ../airbitz-core/deps/build-testnet/abc/abc-ios-universal/lib/* AirBitz/ABC-testnet/

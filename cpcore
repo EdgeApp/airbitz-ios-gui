@@ -1,4 +1,0 @@
-mkdir -p Airbitz/ABC
-rm -rf Airbitz/ABC/*
-cp -a ../airbitz-core/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
-cp -a ../airbitz-core/deps/build/abc/abc-ios-universal/lib/* AirBitz/ABC/

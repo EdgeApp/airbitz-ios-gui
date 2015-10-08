@@ -1,2 +1,0 @@
-rm -f ~/Library/MobileDevice/Provisioning\ Profiles/Airbitz_Dev_Team.mobileprovision
-cp -a ~/Airbitz/Google\ Drive/Airbitz-Shared/ProvisioningProfiles/Airbitz_Dev_Team.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
