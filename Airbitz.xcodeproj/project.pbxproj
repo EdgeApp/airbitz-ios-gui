@@ -450,6 +450,7 @@
 		DA9EEF9F1BC63D040063DA07 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEF9E1BC63D040063DA07 /* Social.framework */; };
 		DA9EEFA11BC63E670063DA07 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEFA01BC63E670063DA07 /* HockeySDK.framework */; };
 		DA9EEFA31BC63F000063DA07 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEFA21BC63F000063DA07 /* libc++.tbd */; };
+		DA9EEFAB1BC70AF10063DA07 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEFAA1BC70AF10063DA07 /* libiconv.tbd */; };
 		DAD1AD7C1BC6065100C648C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7B1BC6065100C648C4 /* main.m */; };
 		DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
 		DAD1AD851BC6065100C648C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD831BC6065100C648C4 /* Main.storyboard */; };
@@ -1147,6 +1148,7 @@
 		DA9EEF9E1BC63D040063DA07 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		DA9EEFA01BC63E670063DA07 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
 		DA9EEFA21BC63F000063DA07 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		DA9EEFAA1BC70AF10063DA07 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD7B1BC6065100C648C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1175,6 +1177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA9EEFAB1BC70AF10063DA07 /* libiconv.tbd in Frameworks */,
 				DA9EE5B71BC61FBE0063DA07 /* libprotobuf-lite.a in Frameworks */,
 				DA9ED7361BC60AA90063DA07 /* AudioToolbox.framework in Frameworks */,
 				DA9EEF9F1BC63D040063DA07 /* Social.framework in Frameworks */,
@@ -1245,6 +1248,7 @@
 		DA9ED6EB1BC607FA0063DA07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA9EEFAA1BC70AF10063DA07 /* libiconv.tbd */,
 				DA9EEFA21BC63F000063DA07 /* libc++.tbd */,
 				DA9EEFA01BC63E670063DA07 /* HockeySDK.framework */,
 				DA9EEF9E1BC63D040063DA07 /* Social.framework */,
