@@ -10,7 +10,6 @@
 		09E7B90DE94333BDB8D48513 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C88A91632A7616E92B4670D /* libPods.a */; };
 		DA9ED6ED1BC607FA0063DA07 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */; settings = {ASSET_TAGS = (); }; };
 		DA9ED6F11BC607FA0063DA07 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */; };
-		DA9ED6F41BC607FA0063DA07 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED6F21BC607FA0063DA07 /* MainInterface.storyboard */; };
 		DA9ED6F81BC607FA0063DA07 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DA9ED7351BC60AA90063DA07 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7241BC60AA90063DA07 /* AssetsLibrary.framework */; };
 		DA9ED7361BC60AA90063DA07 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7251BC60AA90063DA07 /* AudioToolbox.framework */; };
@@ -452,6 +451,8 @@
 		DA9EEFAD1BC70CA00063DA07 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAC1BC70CA00063DA07 /* Main_iPhone.storyboard */; settings = {ASSET_TAGS = (); }; };
 		DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		DA9EEFB31BC721BD0063DA07 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB11BC721BD0063DA07 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
+		DA9EEFB41BC721BD0063DA07 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */; settings = {ASSET_TAGS = (); }; };
 		DAD1AD7C1BC6065100C648C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7B1BC6065100C648C4 /* main.m */; };
 		DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
 		DAD1AD951BC6065100C648C4 /* AirbitzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD941BC6065100C648C4 /* AirbitzTests.m */; };
@@ -532,8 +533,6 @@
 		DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		DA9ED6EF1BC607FA0063DA07 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
 		DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
-		DA9ED6F31BC607FA0063DA07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		DA9ED6F51BC607FA0063DA07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA9ED7241BC60AA90063DA07 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		DA9ED7251BC60AA90063DA07 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DA9ED7261BC60AA90063DA07 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1146,6 +1145,8 @@
 		DA9EEFAA1BC70AF10063DA07 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		DA9EEFAC1BC70CA00063DA07 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
 		DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DA9EEFB11BC721BD0063DA07 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD7B1BC6065100C648C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1272,10 +1273,10 @@
 		DA9ED6EE1BC607FA0063DA07 /* Airbitz Widget */ = {
 			isa = PBXGroup;
 			children = (
+				DA9EEFB11BC721BD0063DA07 /* Info.plist */,
+				DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */,
 				DA9ED6EF1BC607FA0063DA07 /* TodayViewController.h */,
 				DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */,
-				DA9ED6F21BC607FA0063DA07 /* MainInterface.storyboard */,
-				DA9ED6F51BC607FA0063DA07 /* Info.plist */,
 			);
 			path = "Airbitz Widget";
 			sourceTree = "<group>";
@@ -2484,7 +2485,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA9ED6F41BC607FA0063DA07 /* MainInterface.storyboard in Resources */,
+				DA9EEFB31BC721BD0063DA07 /* Info.plist in Resources */,
+				DA9EEFB41BC721BD0063DA07 /* MainInterface.storyboard in Resources */,
 				DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2999,17 +3001,6 @@
 			targetProxy = DAD1AD9C1BC6065100C648C4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		DA9ED6F21BC607FA0063DA07 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA9ED6F31BC607FA0063DA07 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		DA9ED6F91BC607FA0063DA07 /* Debug */ = {
