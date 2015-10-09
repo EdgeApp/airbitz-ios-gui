@@ -2009,7 +2009,7 @@
 		DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Airbitz Widget.entitlements"; sourceTree = "<group>"; };
 		DA9EEFB71BC724B00063DA07 /* QR-bracket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QR-bracket.png"; sourceTree = "<group>"; };
 		DA9EF5131BC7285D0063DA07 /* Airbitz-Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz-Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA9EF6D81BC729FA0063DA07 /* Airbitz-Testnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz-Testnet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Testnet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9EF6E01BC730400063DA07 /* Airbitz-Develop-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Airbitz-Develop-Info.plist"; sourceTree = "<group>"; };
 		DA9EF6E61BC7304C0063DA07 /* Airbitz-Testnet-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Airbitz-Testnet-Info.plist"; sourceTree = "<group>"; };
 		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3122,7 +3122,7 @@
 				DAD1AD9B1BC6065100C648C4 /* AirbitzUITests.xctest */,
 				DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */,
 				DA9EF5131BC7285D0063DA07 /* Airbitz-Develop.app */,
-				DA9EF6D81BC729FA0063DA07 /* Airbitz-Testnet.app */,
+				DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3330,7 +3330,7 @@
 			);
 			name = "Airbitz-Testnet";
 			productName = Airbitz;
-			productReference = DA9EF6D81BC729FA0063DA07 /* Airbitz-Testnet.app */;
+			productReference = DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DAD1AD761BC6065100C648C4 /* Airbitz */ = {
@@ -4952,7 +4952,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.develop;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Airbitz Develop";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -4993,7 +4993,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.develop;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Airbitz Develop";
 				PROVISIONING_PROFILE = "0da6bd46-b3d2-4558-92ce-d2fe4832878a";
 			};
 			name = Release;
@@ -5034,7 +5034,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.testnet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Airbitz Testnet";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -5075,7 +5075,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.testnet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Airbitz Testnet";
 				PROVISIONING_PROFILE = "36c63d35-c64f-416b-8e7e-1cecd1571370";
 			};
 			name = Release;
