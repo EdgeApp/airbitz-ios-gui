@@ -4,6 +4,8 @@
 //
 
 #import "BuySellViewController.h"
+#import "MainViewController.h"
+#import "Theme.h"
 #import "BuySellCell.h"
 #import "PluginViewController.h"
 #import "WalletHeaderView.h"
@@ -42,6 +44,9 @@
     _activePluginsView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"", nil) collapse:NO];
     _activePluginsView.btn_expandCollapse.hidden = YES;
     _activePluginsView.btn_addWallet.hidden = YES;
+
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -59,7 +64,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 44.0;
+    return 0.0;
 }
 
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -133,7 +138,6 @@
     _pluginViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"PluginViewController"];
     _pluginViewController.delegate = self;
     _pluginViewController.plugin = plugin;
-
     [Util animateController:_pluginViewController parentController:self];
 }
 
@@ -141,6 +145,8 @@
 
 - (void)PluginViewControllerDone:(PluginViewController *)controller
 {
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:@"" side:NAV_BAR_LEFT button:false enable:false action:nil fromObject:self];
     [Util animateOut:controller parentController:self complete:^(void) {
         _pluginViewController = nil;
     }];
