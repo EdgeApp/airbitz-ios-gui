@@ -77,7 +77,7 @@ static const NSString *PROTOCOL = @"bridge://";
                  @"navStackPop":NSStringFromSelector(@selector(navStackPop:))
     };
 
-    NSString *localFilePath = [[NSBundle mainBundle] pathForResource:_plugin.sourceFile ofType:_plugin.sourceExtension inDirectory:@"plugins"];
+    NSString *localFilePath = [[NSBundle mainBundle] pathForResource:_plugin.sourceFile ofType:_plugin.sourceExtension];
     NSURLRequest *localRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localFilePath]];
     _webView.delegate = self;
     _webView.backgroundColor = [UIColor clearColor];
