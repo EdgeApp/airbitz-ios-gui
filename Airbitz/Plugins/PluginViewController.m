@@ -132,7 +132,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *url = [request URL].absoluteString;
-    ABLog(2,@("url: %@"), url);
+    NSLog(@("url: %@"), url);
     if ([[url lowercaseString] hasPrefix:PROTOCOL]) {
         url = [url substringFromIndex:PROTOCOL.length];
         url = [url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -156,6 +156,13 @@ static const NSString *PROTOCOL = @"bridge://";
         NSString *cbid = [callInfo objectForKey:@"cbid"];
         NSDictionary *args = [callInfo objectForKey:@"args"];
         [self execFunction:functionName withCbid:cbid withArgs:args];
+        return NO;
+    } else if ([[url lowercaseString] hasPrefix:@"airbitz://plugin"]) {
+        NSURL *base = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:_plugin.sourceFile
+                                                                             ofType:_plugin.sourceExtension]];
+        NSString *newUrlString = [NSString stringWithFormat:@"%@?%@", [base absoluteString], [request URL].query];
+        NSURL *newUrl = [NSURL URLWithString:newUrlString];
+        [_webView loadRequest:[NSURLRequest requestWithURL:newUrl]];
         return NO;
     }
     return YES;
