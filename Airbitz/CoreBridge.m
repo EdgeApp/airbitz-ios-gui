@@ -1578,7 +1578,6 @@ static BOOL bOtpError = NO;
             ABC_WalletLoad([[User Singleton].name UTF8String], [uuid UTF8String], &error);
             [Util printABC_Error:&error];
             [CoreBridge startWatcher:uuid];
-            [CoreBridge refreshWallets];
         }];
     }
     [CoreBridge postToLoadedQueue:^{
