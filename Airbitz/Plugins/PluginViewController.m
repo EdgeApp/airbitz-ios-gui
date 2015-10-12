@@ -571,8 +571,9 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
+    BOOL showSpinner = [[args objectForKey:@"showSpinner"] boolValue];
 
-    [self showFadingAlert:[args objectForKey:@"message"]];
+    [self showFadingAlert:[args objectForKey:@"message"] showSpinner:showSpinner];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
 }
 
@@ -749,9 +750,13 @@ static const NSString *PROTOCOL = @"bridge://";
 
 #pragma - Fading Alert
 
-- (void)showFadingAlert:(NSString *)message
+- (void)showFadingAlert:(NSString *)message showSpinner:(BOOL)showSpinner
 {
-    [MainViewController fadingAlert:message];
+    CGFloat duration = FADING_ALERT_HOLD_TIME_DEFAULT;
+    if (showSpinner) {
+        duration = FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER; 
+    }
+    [MainViewController fadingAlert:message holdTime:duration];
 }
 
 #pragma mark - Keyboard Hack
