@@ -137,6 +137,7 @@ static const NSString *PROTOCOL = @"bridge://";
     [CoreBridge makeCurrentWalletWithIndex:indexPath];
 
     bWalletListDropped = false;
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
