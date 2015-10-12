@@ -111,18 +111,29 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
                             </webView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ads-zQ-ZgH" customClass="ButtonSelectorView2">
+                                <rect key="frame" x="0.0" y="64" width="320" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="kOE-Ud-JF5"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottomMargin" secondItem="orU-ss-tcY" secondAttribute="bottom" id="4ux-u5-SIy"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="orU-ss-tcY" secondAttribute="bottom" constant="-64" id="4ux-u5-SIy"/>
+                            <constraint firstItem="ads-zQ-ZgH" firstAttribute="leading" secondItem="orU-ss-tcY" secondAttribute="leading" id="7GA-ir-JuC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="orU-ss-tcY" secondAttribute="trailing" constant="-20" id="EB1-GY-nwf"/>
+                            <constraint firstItem="ads-zQ-ZgH" firstAttribute="trailing" secondItem="orU-ss-tcY" secondAttribute="trailing" id="YIN-iy-MMb"/>
                             <constraint firstItem="orU-ss-tcY" firstAttribute="top" secondItem="MfZ-w3-Zth" secondAttribute="bottom" constant="44" id="bc0-6I-IBn"/>
+                            <constraint firstItem="ads-zQ-ZgH" firstAttribute="top" secondItem="orU-ss-tcY" secondAttribute="top" id="ggI-vh-v3g"/>
                             <constraint firstItem="orU-ss-tcY" firstAttribute="leading" secondItem="AyY-JU-WtW" secondAttribute="leadingMargin" constant="-20" id="kbX-cF-3Wh"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
+                        <outlet property="buttonSelector" destination="ads-zQ-ZgH" id="C0M-bU-whS"/>
                         <outlet property="webView" destination="orU-ss-tcY" id="62W-iZ-pjq"/>
                     </connections>
                 </viewController>
