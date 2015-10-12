@@ -47,6 +47,7 @@
 
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBarTitleWithButton:self title:[Theme Singleton].buySellText action:nil fromObject:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated

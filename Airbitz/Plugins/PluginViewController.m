@@ -4,6 +4,7 @@
 //
 
 #import "PluginViewController.h"
+#import "ButtonSelectorView2.h"
 #import "ABC.h"
 #import "Config.h"
 #import "User.h"
@@ -28,11 +29,13 @@ static const NSString *PROTOCOL = @"bridge://";
     Wallet                         *_sendWallet;
     NSMutableArray                 *_navStack;
     NSDictionary                   *_functions;
+    BOOL                           bWalletListDropped;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel            *titleLabel;
 @property (nonatomic, retain) IBOutlet UIButton           *backButton;
 @property (nonatomic, retain) IBOutlet UIWebView          *webView;
+@property (nonatomic, weak)   IBOutlet ButtonSelectorView2 *buttonSelector; //wallet dropdown
 
 @end
 
@@ -50,6 +53,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     [super viewDidLoad];
 
+    bWalletListDropped = false;
     _navStack = [[NSMutableArray alloc] init];
     _functions = @{
                      @"bitidAddress":NSStringFromSelector(@selector(bitidAddress:)),
@@ -87,20 +91,73 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
     [self resizeFrame:YES];
     [super viewWillAppear:animated];
 
+	self.buttonSelector.delegate = self;
+    [self.buttonSelector disableButton];
+
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBarTitleWithButton:self title:[Theme Singleton].buySellText action:nil fromObject:self];
+
+    [self updateViews:nil];
+}
+
+- (void)updateViews:(NSNotification *)notification
+{
+    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    {
+        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
+        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+
+        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+        [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
+    }
+    if (bWalletListDropped) {
+        [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+    } else {
+        [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    }
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+
+}
+
+#pragma mark - ButtonSelectorView2 delegates
+
+- (void)ButtonSelector2:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
+{
+    NSIndexPath *indexPath = [[NSIndexPath alloc]init];
+    indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
+    [CoreBridge makeCurrentWalletWithIndex:indexPath];
+
+    bWalletListDropped = false;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)didTapTitle: (UIButton *)sender
+{
+    if (bWalletListDropped)
+    {
+        [self.buttonSelector close];
+        bWalletListDropped = false;
+        [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    }
+    else
+    {
+        [self.buttonSelector open];
+        bWalletListDropped = true;
+        [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+    }
 }
 
 - (void)resizeFrame:(BOOL)withTabBar
