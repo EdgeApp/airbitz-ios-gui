@@ -115,8 +115,10 @@ static const NSString *PROTOCOL = @"bridge://";
         [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
 
-        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:@"%@ ▼", [CoreBridge Singleton].currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
+
+        [self notifyWalletChanged];
     }
     if (bWalletListDropped) {
         [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
@@ -346,14 +348,41 @@ static const NSString *PROTOCOL = @"bridge://";
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.signature]];
 }
 
-- (void)selectedWallet:(NSDictionary *)params
+- (NSMutableDictionary *)walletToDict:(Wallet *)w
 {
-    Wallet *w = [CoreBridge Singleton].currentWallet;
     NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
     [d setObject:w.strUUID forKey:@"id"];
     [d setObject:w.strName forKey:@"name"];
     [d setObject:[NSNumber numberWithInt:w.currencyNum] forKey:@"currencyNum"];
     [d setObject:[NSNumber numberWithLong:w.balance] forKey:@"balance"];
+    return d;
+}
+
+- (void)notifyWalletChanged
+{
+    NSMutableDictionary *d = [self walletToDict:[CoreBridge Singleton].currentWallet];
+    NSDictionary *data = [self jsonResult:d];
+
+    NSError *jsonError;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&jsonError];
+    if (jsonError != nil) {
+        ABLog(2,@"Error creating JSON from the response  : %@", [jsonError localizedDescription]);
+        return;
+    }
+
+    NSString *resp = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    ABLog(2,@"resp = %@", resp);
+    if (resp == nil) {
+        ABLog(2,@"resp is null. count = %d", (unsigned int)[data count]);
+    }
+    if (_webView) {
+        [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz._bridge.walletChanged('%@');", resp]];
+    }
+}
+
+- (void)selectedWallet:(NSDictionary *)params
+{
+    NSMutableDictionary *d = [self walletToDict:[CoreBridge Singleton].currentWallet];
     [self callJsFunction:[params objectForKey:@"cbid"] withArgs:[self jsonResult:d]];
 }
 
