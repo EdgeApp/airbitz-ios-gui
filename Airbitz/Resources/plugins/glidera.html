@@ -1141,10 +1141,11 @@ function _bridge() {
       return _handleBlocking(_native('getConfig', newId(), {'key': key}, true));
     },
 
-    showAlert: function(title, message) {
+    showAlert: function(title, message, options) {
       return _handleBlocking(_native('showAlert', newId(), {
         'title': title,
-        'message': message
+        'message': message,
+        'showSpinner': options['showSpinner']
       }, true));
     },
 
@@ -1278,8 +1279,8 @@ function _bridge() {
     Airbitz._listeners[currencyNum].splice(i, 1);
   };
 
-  Airbitz.ui.showAlert = function(title, message) {
-    Airbitz._bridge.showAlert(title, message);
+  Airbitz.ui.showAlert = function(title, message, options) {
+    Airbitz._bridge.showAlert(title, message, options || {});
   };
 
   Airbitz.ui.title = function(s) {
@@ -9639,6 +9640,7 @@ var Glidera = (function () {
 
     $scope.saveUserAccount = function() {
       Airbitz.ui.title('Saving...');
+      Airbitz.ui.showAlert('Saved', 'Saving information...', {'showSpinner': true});
       UserFactory.updateUserAccount($scope.account).then(function() {
         Airbitz.ui.showAlert('Saved', 'User information has been updated.');
         $state.go('dashboard');
@@ -10248,6 +10250,7 @@ var app = angular.module('app.core', [
                   ? glideraFactory.sandboxAddress : request['address'];
       if (address) {
         var opts = {'priceUuid': Prices.buyUuid()};
+        Airbitz.ui.showAlert('Processing', 'Processing order...', {'showSpinner': true});
         glideraFactory.buy(TwoFactor.getCode(), address, qty, opts, function(e, r, b) {
           console.log(JSON.stringify(b));
           if (r == 200) {
