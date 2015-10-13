@@ -614,20 +614,14 @@ typedef enum eRequestType
     NSMutableString *outAddresses = [[NSMutableString alloc] init];
     NSMutableString *baseUrl = [[NSMutableString alloc] init];
     if ([CoreBridge isTestNet]) {
-        [baseUrl appendString:@"https://www.biteasy.com/testnet"];
+        [baseUrl appendString:@"https://testnet.blockexplorer.com/"];
     } else {
-        [baseUrl appendString:@"https://insight.bitpay.com"];
+        [baseUrl appendString:@"https://blockexplorer.com/"];
     }
     for (TxOutput *t in self.transaction.outputs) {
         NSString *val = [CoreBridge formatSatoshi:t.value];
-        NSString *html;
-        if ([CoreBridge isTestNet]) {
-            html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/addresses/%@\">%@</a></div><div>%@</div>"),
-                            baseUrl, t.strAddress, t.strAddress, val];
-        } else {
-            html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
-                            baseUrl, t.strAddress, t.strAddress, val];
-        }
+        NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
+                          baseUrl, t.strAddress, t.strAddress, val];
         if (t.bInput) {
             [inAddresses appendString:html];
             totalSent += t.value;
@@ -636,15 +630,8 @@ typedef enum eRequestType
         }
     }
     totalSent -= fees;
-    NSString *txIdLink;
-
-    if ([CoreBridge isTestNet]) {
-        txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/transactions/%@\">%@</a></div>",
-                                              baseUrl, self.transaction.strMallealbeID, self.transaction.strMallealbeID];
-    } else {
-        txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
-                                              baseUrl, self.transaction.strMallealbeID, self.transaction.strMallealbeID];
-    }
+    NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
+                                   baseUrl, self.transaction.strMallealbeID, self.transaction.strMallealbeID];
     //transaction ID
     content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
     //Total sent
