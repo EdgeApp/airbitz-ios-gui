@@ -101,14 +101,13 @@ static const NSString *PROTOCOL = @"bridge://";
 	self.buttonSelector.delegate = self;
     [self.buttonSelector disableButton];
 
-    [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBarTitleWithButton:self title:[Theme Singleton].buySellText action:nil fromObject:self];
 
     [self updateViews:nil];
 }
 
 - (void)updateViews:(NSNotification *)notification
 {
+    [MainViewController changeNavBarOwner:self];
     if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
     {
         self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
@@ -118,7 +117,9 @@ static const NSString *PROTOCOL = @"bridge://";
         NSString *walletName = [NSString stringWithFormat:@"%@ ▼", [CoreBridge Singleton].currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 
-        [self notifyWalletChanged];
+        if (nil == notification) {
+            [self notifyWalletChanged];
+        }
     }
     if (bWalletListDropped) {
         [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
@@ -757,6 +758,7 @@ static const NSString *PROTOCOL = @"bridge://";
                                       withError:(BOOL)bError
                                        withTxId:(NSString *)txId
 {
+    [self updateViews:[NSNotification notificationWithName:@"SkipUpdate" object:nil]];
     [Util animateOut:_sendConfirmationViewController parentController:self complete:^(void) {
         // hide calculator
         if (bBack) {
