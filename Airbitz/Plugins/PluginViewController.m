@@ -101,7 +101,6 @@ static const NSString *PROTOCOL = @"bridge://";
 	self.buttonSelector.delegate = self;
     [self.buttonSelector disableButton];
 
-
     [self updateViews:nil];
 }
 
@@ -117,7 +116,7 @@ static const NSString *PROTOCOL = @"bridge://";
         NSString *walletName = [NSString stringWithFormat:@"%@ ▼", [CoreBridge Singleton].currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 
-        if (nil == notification) {
+        if (notification == nil || ![notification.name isEqualToString:@"Skip"]) {
             [self notifyWalletChanged];
         }
     }
@@ -758,7 +757,7 @@ static const NSString *PROTOCOL = @"bridge://";
                                       withError:(BOOL)bError
                                        withTxId:(NSString *)txId
 {
-    [self updateViews:[NSNotification notificationWithName:@"SkipUpdate" object:nil]];
+    [self updateViews:[NSNotification notificationWithName:@"Skip" object:nil]];
     [Util animateOut:_sendConfirmationViewController parentController:self complete:^(void) {
         // hide calculator
         if (bBack) {
