@@ -68,7 +68,6 @@
 				<string>bitid</string>
 			</array>
 		</dict>
-
 	</array>
 	<key>CFBundleVersion</key>
 	<string>99999999-99</string>
@@ -113,6 +112,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
