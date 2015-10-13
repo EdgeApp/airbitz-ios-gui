@@ -9883,13 +9883,13 @@ var Glidera = (function () {
           $state.go('dashboard');
           Airbitz.ui.showAlert('Error', 'Please verify your email address before continuing.');
         } else {
-          Airbitz.ui.showAlert('Error', errorMap(res.code));
+          Airbitz.ui.showAlert('Error', errorMap(res.code, res.message));
         }
       }
     }
   }
 
-  function errorMap(code) {
+  function errorMap(code, message) {
     if (415 == code) {
       return "Unsupported media type";
     } else if (400 == code) {
@@ -9901,7 +9901,7 @@ var Glidera = (function () {
     } else if (1100 == code) {
       return "Missing required parameter";
     } else if (1101 == code) {
-      return "Invalid parameter value";
+      return "Error submitting transaction to the network";
     } else if (2001 == code) {
       return "Invalid or incorrect access_token";
     } else if (2002 == code) {
@@ -9954,6 +9954,8 @@ var Glidera = (function () {
       return "Transaction cannot be processed because daily limit would be exceeded";
     } else if (3125 == code) {
       return "Cannot update because no information has changed";
+    } else if (9999 == code) {
+      return message;
     } else {
       return "An error occurred";
     }
@@ -10335,12 +10337,12 @@ var app = angular.module('app.core', [
               d.reject({"code": "IgnoreAction"});
             } else {
               d.resolve({'sellAddress': data.sellAddress,
-                        'refundAddress': data.refundAddress,
-                        'signedTx': res});
+                         'refundAddress': data.refundAddress,
+                         'signedTx': res});
             }
           },
           error: function() {
-            d.reject();
+            d.reject({"code": "9999", "message": "Error during send"});
           }
         });
         return d.promise;
@@ -10489,6 +10491,9 @@ var app = angular.module('app.core', [
       if (!UserFactory.isAuthorized() && !next.match(/state=/)) {
         console.log('Not registered. Redirecting to registration form.');
         $location.path('/authorizeRedirect/');
+        return;
+      }
+      if (current.match(/\.html#\/verify\/twofa/)) {
         return;
       }
       if (!skip && !next.match(/Redirect/)) {
