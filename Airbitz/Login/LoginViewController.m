@@ -65,6 +65,7 @@ typedef enum eLoginMode
     UIAlertView                     *_passwordCheckAlert;
     UIAlertView                     *_passwordIncorrectAlert;
     NSString                        *_tempPassword;
+    NSString                        *_tempPin;
 
 }
 
@@ -387,6 +388,8 @@ typedef enum eReloginState
     [self dismissErrorMessage];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.PINCodeView.PINCode = nil;
+    _tempPin = nil;
+    _tempPassword = nil;
     [super viewWillDisappear:animated];
 }
 
@@ -621,6 +624,7 @@ typedef enum eReloginState
 {
     [MainViewController showBackground:YES animate:YES];
 
+    _tempPin = PINCode;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
     {
         tABC_Error error;
@@ -684,6 +688,13 @@ typedef enum eReloginState
                     }
                     break;
                 }
+
+                case ABC_CC_InvalidOTP: {
+                    [MainViewController showBackground:NO animate:YES];
+                    [self launchTwoFactorMenu];
+                    break;
+                }
+
                 default:
                 {
                     NSString *reason;
@@ -1065,11 +1076,7 @@ typedef enum eReloginState
         [self launchTwoFactorMenu];
     } else {
         [MainViewController showBackground:NO animate:YES];
-        if (ABC_CC_InvalidOTP == _resultCode) {
-            [self launchTwoFactorMenu];
-        } else {
-            [MainViewController fadingAlert:_strReason];
-        }
+        [MainViewController fadingAlert:_strReason];
         [User Singleton].name = nil;
         [User Singleton].password = nil; 
     }
@@ -1136,10 +1143,14 @@ typedef enum eReloginState
 
     [MainViewController showBackground:YES animate:YES];
     ABC_OtpKeySet([self.usernameSelector.textField.text UTF8String], (char *)[secret UTF8String], &error);
-    tABC_CC cc = ABC_SignIn([self.usernameSelector.textField.text UTF8String],
-                            [self.passwordTextField.text UTF8String], &error);
+    if (bPINModeEnabled) {
+        [CoreBridge PINLoginWithPIN:_tempPin error:&error];
+    } else {
+        ABC_SignIn([self.usernameSelector.textField.text UTF8String],
+                   [self.passwordTextField.text UTF8String], &error);
+    }
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        _bSuccess = cc == ABC_CC_Ok; 
+        _bSuccess = error.code == ABC_CC_Ok;
         _strReason = [Util errorMap:&error];
         _resultCode = error.code;
         [self signInComplete];
