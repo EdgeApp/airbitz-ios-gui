@@ -1735,9 +1735,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 _addressRequestController.url = uri;
                 _addressRequestController.delegate = self;
                 
-//                [MainViewController animateView:_addressRequestController withBlur:YES];
-//                [Util animateController:_addressRequestController parentController:self];
-                [Util animateController:_addressRequestController parentController:self];
+                [MainViewController animateView:_addressRequestController withBlur:YES];
                 [MainViewController showTabBarAnimated:YES];
                 [MainViewController showNavBarAnimated:YES];
                 return;
@@ -1756,10 +1754,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     [MainViewController animateOut:vc withBlur:NO complete:^(void) {
         _addressRequestController = nil;
+        [self setupNavBar];
+        [self updateViews:nil];
     }];
     
-    [MainViewController showTabBarAnimated:NO];
-    [MainViewController showNavBarAnimated:NO];
 }
 
 - (void)doProcessSpendURI
