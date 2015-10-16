@@ -53,6 +53,7 @@
 #import "Server.h"
 #import "PopupPickerView2.h"
 #import "CJSONDeserializer.h"
+#import "AddressRequestController.h"
 
 #define IMPORT_TIMEOUT 30
 
@@ -71,12 +72,14 @@ typedef enum eImportState
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerView2Delegate,ButtonSelector2Delegate, CBCentralManagerDelegate, CBPeripheralDelegate
- ,ZBarReaderDelegate, ZBarReaderViewDelegate, DL_URLRequestDelegate
+ ,ZBarReaderDelegate, ZBarReaderViewDelegate, DL_URLRequestDelegate, AddressRequestControllerDelegate
 >
 {
 	ZBarReaderView                  *_readerView;
     ZBarReaderController            *_readerPicker;
 	SendConfirmationViewController  *_sendConfirmationViewController;
+    AddressRequestController        *_addressRequestController;
+
 	NSTimeInterval					lastUpdateTime;	//used to remove BLE devices from table when they're no longer around
 	NSTimer							*peripheralCleanupTimer; //used to remove BLE devices from table when they're no longer around
 	tScanMode						scanMode;
@@ -145,7 +148,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	self.arrayContacts = @[];
 	// load all the names from the address book
     [self generateListOfContactNames];
-
 
     [self updateDisplay];
 
@@ -1387,14 +1389,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 	_sendConfirmationViewController.delegate = self;
     _sendConfirmationViewController.spendTarget = spendTarget;
-//    _sendConfirmationViewController.wallet = [CoreBridge Singleton].currentWallet;
-
-    //ABLog(2,@"Sending to: %@, isUUID: %@, wallet: %@", _sendConfirmationViewController.sendToAddress, (_sendConfirmationViewController.bAddressIsWalletUUID ? @"YES" : @"NO"), _sendConfirmationViewController.wallet.strName);
-	
-//	CGRect frame = self.view.bounds;
-//	frame.origin.x = frame.size.width;
-//	_sendConfirmationViewController.view.frame = frame;
-//	[self.view addSubview:_sendConfirmationViewController.view];
 
     [_readerView stop];
 
@@ -1729,12 +1723,41 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [_bitidAlert show];
         return;
     }
+    else
+    {
+        NSURL *uri = [NSURL URLWithString:_addressTextField.text];
+        
+        if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:@"airbitz-ret"]
+            || [uri.host isEqualToString:@"x-callback-url"]) {
+            if ([User isLoggedIn]) {
+                UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+                _addressRequestController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AddressRequestController"];
+                _addressRequestController.url = uri;
+                _addressRequestController.delegate = self;
+                
+                [MainViewController animateView:_addressRequestController withBlur:YES];
+                [MainViewController showTabBarAnimated:YES];
+                [MainViewController showNavBarAnimated:YES];
+                return;
+            }
+        }
+    }
 
     // If it's not BitID, then put into wallets queue since
     // wallets are loaded asynchronously
     [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
     [self doProcessSpendURI];
+}
+
+-(void)AddressRequestControllerDone:(AddressRequestController *)vc
+{
+    [MainViewController animateOut:vc withBlur:NO complete:^(void) {
+        _addressRequestController = nil;
+        [self setupNavBar];
+        [self updateViews:nil];
+    }];
+    
 }
 
 - (void)doProcessSpendURI

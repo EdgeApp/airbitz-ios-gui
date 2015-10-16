@@ -5,7 +5,7 @@
 
 #import "AddressRequestController.h"
 #import "CommonTypes.h"
-#import "ButtonSelectorView.h"
+#import "ButtonSelectorView2.h"
 #import "Util.h"
 #import "User.h"
 #import "ABC.h"
@@ -14,19 +14,18 @@
 
 #define X_SOURCE @"Airbitz"
 
-@interface AddressRequestController () <UITextFieldDelegate,  ButtonSelectorDelegate>
+@interface AddressRequestController () <UITextFieldDelegate,  ButtonSelector2Delegate>
 {
-//	int _selectedWalletIndex;
     NSString *strName;
     NSString *strCategory;
     NSString *strNotes;
     NSNumber *maxNumberAddresses;
-//    Wallet   *wallet;
+    BOOL      bWalletListDropped;
+
 }
 
-@property (nonatomic, weak) IBOutlet ButtonSelectorView *walletSelector;
 @property (nonatomic, weak) IBOutlet UILabel *message;
-//@property (nonatomic, strong) NSArray  *arrayWallets;
+@property (weak, nonatomic) IBOutlet ButtonSelectorView2 *buttonSelector;
 
 @end
 
@@ -44,10 +43,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	_walletSelector.delegate = self;
-    _walletSelector.textLabel.text = NSLocalizedString(@"Wallet:", nil);
-    [_walletSelector setButtonWidth:200];
-//    [self loadWalletInfo];
+    bWalletListDropped = NO;
+
+	self.buttonSelector.delegate = self;
+    [self.buttonSelector disableButton];
     [self validateUri];
 
     NSMutableString *msg = [[NSMutableString alloc] init];
@@ -73,13 +72,50 @@
 - (void)updateViews:(NSNotification *)notification
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBarTitle:self title:@"Airbitz"];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    
+    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    {
+        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
+        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        
+        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+        [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
+        
+        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        {
+            [FadingAlertView create:self.view
+                            message:[Theme Singleton].walletHasBeenArchivedText
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
+        }
+    }
+    
+    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:NO action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:NO action:nil fromObject:self];
+    
+//    [MainViewController changeNavBarOwner:self];
+//    [MainViewController changeNavBarTitle:self title:@"Airbitz"];
+//    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+//    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+//
+//    _walletSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
+//    [_walletSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
+//    _walletSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+}
 
-    _walletSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-    [_walletSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-    _walletSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+- (void)didTapTitle: (UIButton *)sender
+{
+    if (bWalletListDropped)
+    {
+        [self.buttonSelector close];
+        bWalletListDropped = false;
+    }
+    else
+    {
+        [self.buttonSelector open];
+        bWalletListDropped = true;
+    }
+    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
 }
 
 - (void)validateUri
@@ -90,9 +126,19 @@
         strNotes = [dict objectForKey:@"notes"] ? [dict objectForKey:@"notes"] : @"";
         strCategory = [dict objectForKey:@"category"] ? [dict objectForKey:@"category"] : @"";
         maxNumberAddresses = [dict objectForKey:@"max-number"] ? [dict objectForKey:@"max-number"] : [NSNumber numberWithInt:1];
-        _successUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-success"]];
-        _errorUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-error"]];
-        _cancelUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-cancel"]];
+        NSString *strSuccess = [dict objectForKey:@"x-success"] ? [dict objectForKey:@"x-success"] : @"";
+        NSString *strError = [dict objectForKey:@"x-error"] ? [dict objectForKey:@"x-error"] : @"";
+        NSString *strCancel = [dict objectForKey:@"x-cancel"] ? [dict objectForKey:@"x-cancel"] : @"";
+        
+        _successUrl = _errorUrl = _cancelUrl = nil;
+        
+        if ([strSuccess length])
+            _successUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-success"]];
+        if ([strError length])
+            _errorUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-error"]];
+        if ([strCancel length])
+            _cancelUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-cancel"]];
+        
     } else {
         strName = @"";
         strCategory = @"";
@@ -100,31 +146,6 @@
     }
 }
 
-//- (void)loadWalletInfo
-//{
-//    // load all the non-archive wallets
-//    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-//    [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
-//
-//    // create the array of wallet names
-//    _selectedWalletIndex = 0;
-//
-//    NSMutableArray *arrayWalletNames =
-//        [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
-//    for (int i = 0; i < [arrayWallets count]; i++) {
-//        Wallet *w = [arrayWallets objectAtIndex:i];
-//        [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)",
-//            w.strName, [CoreBridge formatSatoshi:w.balance]]];
-//    }
-//    if (_selectedWalletIndex < [arrayWallets count]) {
-//        wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
-//        _walletSelector.arrayItemsToSelect = [arrayWalletNames copy];
-//        [_walletSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-//        _walletSelector.selectedItemIndex = (int) _selectedWalletIndex;
-//    }
-//    self.arrayWallets = arrayWallets;
-//}
-//
 #pragma mark - Action Methods
 
 - (IBAction)okay
@@ -159,20 +180,20 @@
 
 - (IBAction)cancel
 {
-    if (_cancelUrl == nil) {
-        _cancelUrl = _errorUrl;
-    }
-    if (_cancelUrl) {
-        NSString *url = [_cancelUrl absoluteString];
-        NSMutableString *query;
-        NSString *cancelMessage = [Util urlencode:NSLocalizedString(@"User cancelled the request.", nil)];
-        if ([url rangeOfString:@"?"].location == NSNotFound) {
-            query = [[NSMutableString alloc] initWithFormat: @"%@?addr=&cancelMessage=%@", url, cancelMessage];
-        } else {
-            query = [[NSMutableString alloc] initWithFormat: @"%@&addr=&cancelMessage=%@", url, cancelMessage];
-        }
-        [[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]];
-    }
+//    if (_cancelUrl == nil) {
+//        _cancelUrl = _errorUrl;
+//    }
+//    if (_cancelUrl) {
+//        NSString *url = [_cancelUrl absoluteString];
+//        NSMutableString *query;
+//        NSString *cancelMessage = [Util urlencode:NSLocalizedString(@"User cancelled the request.", nil)];
+//        if ([url rangeOfString:@"?"].location == NSNotFound) {
+//            query = [[NSMutableString alloc] initWithFormat: @"%@?addr=&cancelMessage=%@", url, cancelMessage];
+//        } else {
+//            query = [[NSMutableString alloc] initWithFormat: @"%@&addr=&cancelMessage=%@", url, cancelMessage];
+//        }
+//        [[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]];
+//    }
     // finish
     [self.delegate AddressRequestControllerDone:self];
 }
@@ -272,11 +293,13 @@
 
 #pragma mark - ButtonSelectorView delegates
 
-- (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
+- (void)ButtonSelector2:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
     [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    
+    bWalletListDropped = false;
 }
 
 @end
