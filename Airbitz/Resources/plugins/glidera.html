@@ -572,7 +572,6 @@ html body .list-group a.list-group-item {
   color: #003e61;
   background: white;
   font-size: 20px;
-  border: 0;
   border-radius: 0px;
   cursor: pointer;
 }
@@ -9286,7 +9285,8 @@ var Glidera = (function () {
                 ? Prices.currentBuy.price : Prices.currentSell.price;
       var btcValue = input / parseFloat(price);
       $scope.order.orderValueSatoshi = btcValue * 100000000;
-      $scope.order.orderBtcInput = parseFloat($filter('roundBtc')(btcValue));
+      $scope.order.orderValueInput = parseFloat($filter('roundBtc')(btcValue));
+      $scope.order.orderBtcInput = btcValue;
     };
 
     $scope.convertBtcValue = function(input) {
@@ -11191,37 +11191,6 @@ try {
   module = angular.module('app', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('app/prices/partials/expires.html',
-    '<div class="live-price-expiration">\n' +
-    '  <span class="expiration-label">Expires</span> <span class="expiration-data">{{ expires }}</span>\n' +
-    '</div>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('app');
-} catch (e) {
-  module = angular.module('app', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('app/prices/partials/rate.html',
-    '<div class="live-price-rate">\n' +
-    '  <div class="price-rate-data">{{ price }} {{ currency }} </div>\n' +
-    '  <div class="price-rate-label">BTC Rate</div>\n' +
-    '</div>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('app');
-} catch (e) {
-  module = angular.module('app', []);
-}
-module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/limits/partials/buy.html',
     '<div class="buy-limits">\n' +
     '  <div class="limit-buy-daily">\n' +
@@ -11296,6 +11265,37 @@ module.run(['$templateCache', function($templateCache) {
     '    <span class="limit-label">Monthly</span> <span class="limit-data">{{ limits.monthlySellRemaining | currency:"$" }}</span>\n' +
     '  </div>\n' +
     '</div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('app');
+} catch (e) {
+  module = angular.module('app', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('app/prices/partials/expires.html',
+    '<div class="live-price-expiration">\n' +
+    '  <span class="expiration-label">Expires</span> <span class="expiration-data">{{ expires }}</span>\n' +
+    '</div>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('app');
+} catch (e) {
+  module = angular.module('app', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('app/prices/partials/rate.html',
+    '<div class="live-price-rate">\n' +
+    '  <div class="price-rate-data">{{ price }} {{ currency }} </div>\n' +
+    '  <div class="price-rate-label">BTC Rate</div>\n' +
+    '</div>\n' +
+    '');
 }]);
 })();
 
