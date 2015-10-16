@@ -16,17 +16,14 @@
 
 @interface AddressRequestController () <UITextFieldDelegate,  ButtonSelectorDelegate>
 {
-//	int _selectedWalletIndex;
     NSString *strName;
     NSString *strCategory;
     NSString *strNotes;
     NSNumber *maxNumberAddresses;
-//    Wallet   *wallet;
 }
 
 @property (nonatomic, weak) IBOutlet ButtonSelectorView *walletSelector;
 @property (nonatomic, weak) IBOutlet UILabel *message;
-//@property (nonatomic, strong) NSArray  *arrayWallets;
 
 @end
 
@@ -47,7 +44,6 @@
 	_walletSelector.delegate = self;
     _walletSelector.textLabel.text = NSLocalizedString(@"Wallet:", nil);
     [_walletSelector setButtonWidth:200];
-//    [self loadWalletInfo];
     [self validateUri];
 
     NSMutableString *msg = [[NSMutableString alloc] init];
@@ -90,9 +86,19 @@
         strNotes = [dict objectForKey:@"notes"] ? [dict objectForKey:@"notes"] : @"";
         strCategory = [dict objectForKey:@"category"] ? [dict objectForKey:@"category"] : @"";
         maxNumberAddresses = [dict objectForKey:@"max-number"] ? [dict objectForKey:@"max-number"] : [NSNumber numberWithInt:1];
-        _successUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-success"]];
-        _errorUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-error"]];
-        _cancelUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-cancel"]];
+        NSString *strSuccess = [dict objectForKey:@"x-success"] ? [dict objectForKey:@"x-success"] : @"";
+        NSString *strError = [dict objectForKey:@"x-error"] ? [dict objectForKey:@"x-error"] : @"";
+        NSString *strCancel = [dict objectForKey:@"x-cancel"] ? [dict objectForKey:@"x-cancel"] : @"";
+        
+        _successUrl = _errorUrl = _cancelUrl = nil;
+        
+        if ([strSuccess length])
+            _successUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-success"]];
+        if ([strError length])
+            _errorUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-error"]];
+        if ([strCancel length])
+            _cancelUrl = [[NSURL alloc] initWithString:[dict objectForKey:@"x-cancel"]];
+        
     } else {
         strName = @"";
         strCategory = @"";
@@ -100,31 +106,6 @@
     }
 }
 
-//- (void)loadWalletInfo
-//{
-//    // load all the non-archive wallets
-//    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-//    [CoreBridge loadWallets:arrayWallets archived:nil withTxs:NO];
-//
-//    // create the array of wallet names
-//    _selectedWalletIndex = 0;
-//
-//    NSMutableArray *arrayWalletNames =
-//        [[NSMutableArray alloc] initWithCapacity:[arrayWallets count]];
-//    for (int i = 0; i < [arrayWallets count]; i++) {
-//        Wallet *w = [arrayWallets objectAtIndex:i];
-//        [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)",
-//            w.strName, [CoreBridge formatSatoshi:w.balance]]];
-//    }
-//    if (_selectedWalletIndex < [arrayWallets count]) {
-//        wallet = [arrayWallets objectAtIndex:_selectedWalletIndex];
-//        _walletSelector.arrayItemsToSelect = [arrayWalletNames copy];
-//        [_walletSelector.button setTitle:wallet.strName forState:UIControlStateNormal];
-//        _walletSelector.selectedItemIndex = (int) _selectedWalletIndex;
-//    }
-//    self.arrayWallets = arrayWallets;
-//}
-//
 #pragma mark - Action Methods
 
 - (IBAction)okay
