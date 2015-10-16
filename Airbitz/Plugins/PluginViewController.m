@@ -66,6 +66,7 @@ static const NSString *PROTOCOL = @"bridge://";
                    @"writeData":NSStringFromSelector(@selector(writeData:)),
                    @"clearData":NSStringFromSelector(@selector(clearData:)),
                     @"readData":NSStringFromSelector(@selector(readData:)),
+          @"getBtcDenomination":NSStringFromSelector(@selector(getBtcDenomination:)),
            @"satoshiToCurrency":NSStringFromSelector(@selector(satoshiToCurrency:)),
            @"currencyToSatoshi":NSStringFromSelector(@selector(currencyToSatoshi:)),
                @"formatSatoshi":NSStringFromSelector(@selector(formatSatoshi:)),
@@ -102,6 +103,7 @@ static const NSString *PROTOCOL = @"bridge://";
     [self.buttonSelector disableButton];
 
     [self updateViews:nil];
+    [self notifyDenominationChange];
 }
 
 - (void)updateViews:(NSNotification *)notification
@@ -378,7 +380,29 @@ static const NSString *PROTOCOL = @"bridge://";
     }
     if (_webView) {
         [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz._bridge.walletChanged('%@');", resp]];
+        [self notifyDenominationChange];
     }
+}
+
+- (void)notifyDenominationChange
+{
+    NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
+    [d setObject:[User Singleton].denominationLabel forKey:@"value"];
+    NSDictionary *data = [self jsonResult:d];
+
+    NSError *jsonError;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&jsonError];
+    if (jsonError != nil) {
+        ABLog(2,@"Error creating JSON from the response  : %@", [jsonError localizedDescription]);
+        return;
+    }
+
+    NSString *resp = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    ABLog(2,@"resp = %@", resp);
+    if (resp == nil) {
+        ABLog(2,@"resp is null. count = %d", (unsigned int)[data count]);
+    }
+    [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz._bridge.denominationUpdate('%@');", resp]];
 }
 
 - (void)selectedWallet:(NSDictionary *)params
@@ -521,6 +545,13 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
     NSString *value = [self pluginDataGet:_plugin.pluginId withKey:[args objectForKey:@"key"]];
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:value]];
+}
+
+- (void)getBtcDenomination:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+    [self setJsResults:cbid withArgs:[self jsonResult:[User Singleton].denominationLabel]];
 }
 
 - (void)satoshiToCurrency:(NSDictionary *)params
