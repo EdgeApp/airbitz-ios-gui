@@ -384,7 +384,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
     if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
     {
-        [CoreBridge rotateWalletServer:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:nil];
+//        [CoreBridge rotateWalletServer:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:nil];
     }
 }
 
