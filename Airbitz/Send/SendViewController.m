@@ -1762,54 +1762,51 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)doProcessSpendURI
 {
-    [CoreBridge postToWalletsQueue:^(void)
+    while ([CoreBridge Singleton].currentWallet.loaded != YES)
     {
-        while ([CoreBridge Singleton].currentWallet.loaded != YES)
+        ABLog(1,@"Waiting for wallet to load: %@", [CoreBridge Singleton].currentWallet.strName);
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        tABC_Error error;
+        SpendTarget *spendTarget = [[SpendTarget alloc] init];
+        NSString *text = _addressTextField.text;
+        
+        if (text.length)
         {
-            ABLog(1,@"Waiting for wallet to load: %@", [CoreBridge Singleton].currentWallet.strName);
-        }
-
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-            tABC_Error error;
-            SpendTarget *spendTarget = [[SpendTarget alloc] init];
-            NSString *text = _addressTextField.text;
-
-            if (text.length)
+            // see if the text corresponds to one of the loaded wallets
+            NSInteger index = [[CoreBridge Singleton].arrayWalletNames indexOfObject:text];
+            Wallet *wallet = nil;
+            if (index != NSNotFound)
             {
-                // see if the text corresponds to one of the loaded wallets
-                NSInteger index = [[CoreBridge Singleton].arrayWalletNames indexOfObject:text];
-                Wallet *wallet = nil;
-                if (index != NSNotFound)
+                wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
+                if (wallet.loaded)
                 {
-                    wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
-                    if (wallet.loaded)
-                    {
-                        [spendTarget newTransfer:wallet.strUUID error:&error];
-                        [self showSendConfirmationTo:spendTarget];
-                        [MainViewController fadingAlertDismiss];
-                    }
-
+                    [spendTarget newTransfer:wallet.strUUID error:&error];
+                    [self showSendConfirmationTo:spendTarget];
+                    [MainViewController fadingAlertDismiss];
                 }
-
-                if (!wallet || !wallet.loaded)
+                
+            }
+            
+            if (!wallet || !wallet.loaded)
+            {
+                if (_bImportMode)
                 {
-                    if (_bImportMode)
+                    if ([self importWallet:text])
                     {
-                        if ([self importWallet:text])
-                        {
-                            [self stopQRReader];
-                        }
-                        [MainViewController fadingAlertDismiss];
+                        [self stopQRReader];
                     }
-                    else
-                    {
-                        [self trySpend:text];
-                    }
+                    [MainViewController fadingAlertDismiss];
+                }
+                else
+                {
+                    [self trySpend:text];
                 }
             }
-        });
-    }];
+        }
+    });
 }
 
 - (void)trySpend:(NSString *)text
