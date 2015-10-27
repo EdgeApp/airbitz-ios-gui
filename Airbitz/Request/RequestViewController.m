@@ -92,7 +92,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, weak) IBOutlet UIImageView	    *BLE_LogoImageView;
 @property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
 @property (strong, nonatomic) CBMutableCharacteristic   *bitcoinURICharacteristic;
-@property (nonatomic, strong) NSArray                   *arrayContacts;
 @property (nonatomic, strong) NSString			        *connectedName;
 @property (nonatomic, assign) int64_t                   amountSatoshiRequested;
 @property (nonatomic, assign) int64_t                   previousAmountSatoshiRequested;
@@ -161,9 +160,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     _selectedTextField = self.USD_TextField;
     self.keypadView.calcMode = CALC_MODE_FIAT;
 
-    self.arrayContacts = @[];
     // load all the names from the address book
-    [self generateListOfContactNames];
+    [MainViewController generateListOfContactNames];
 }
 
 -(void)awakeFromNib
@@ -1117,15 +1115,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         NSString *firstName = [arrayComponents objectAtIndex:0];
         NSString *lastName = [arrayComponents objectAtIndex:1];
         NSString *name = [NSString stringWithFormat:@"%@ %@", firstName, lastName ];
-        for (Contact *contact in self.arrayContacts)
-        {
-            if([[name uppercaseString] isEqualToString:[contact.strName uppercaseString]])
-            {
-                image = contact.imagePhoto;
-                imageIsFromContacts = YES;
-                break;
-            }
-        }
+
+        image = [[MainViewController Singleton].dictImages objectForKey:[name lowercaseString]];
+        if (image)
+            imageIsFromContacts = YES;
     }
 
 
@@ -1214,55 +1207,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 }
 
-#pragma mark address book
-
-- (void)generateListOfContactNames
-{
-    NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
-
-    CFErrorRef error;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-
-    {
-        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
-        if (nil == people) return;
-        for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
-        {
-            ABRecordRef person = CFArrayGetValueAtIndex(people, i);
-            if (nil == person) continue;
-
-            NSString *strFullName = [Util getNameFromAddressRecord:person];
-            if ([strFullName length])
-            {
-                // add this contact
-                [self addContactInfo:person withName:strFullName toArray:arrayContacts];
-            }
-        }
-        CFRelease(people);
-    }
-
-    // assign final
-    self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];
-    //ABLog(2,@"contacts: %@", self.arrayContacts);
-}
-
-- (void)addContactInfo:(ABRecordRef)person withName:(NSString *)strName toArray:(NSMutableArray *)arrayContacts
-{
-    UIImage *imagePhoto = nil;
-
-    // does this contact has an image
-    if (ABPersonHasImageData(person))
-    {
-        NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
-        imagePhoto = [UIImage imageWithData:data];
-    }
-
-    Contact *contact = [[Contact alloc] init];
-    contact.strName = strName;
-    contact.imagePhoto = imagePhoto;
-
-    [arrayContacts addObject:contact];
-}
 
 #pragma mark - CBPeripheral methods
 

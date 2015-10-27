@@ -113,7 +113,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 @property (strong, nonatomic)   CBPeripheral                    *discoveredPeripheral;
 @property (strong, nonatomic)   NSMutableData                   *data;
 @property (strong, nonatomic)   NSMutableArray		            *peripheralContainers;
-@property (nonatomic, strong)   NSArray                         *arrayContacts;
 @property (nonatomic, copy)	    NSString				        *advertisedPartialBitcoinAddress;
 @end
 
@@ -140,14 +139,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     bWalletListDropped = false;
 
-//    self.flashSelector.delegate = self;
-	self.buttonSelector.delegate = self;
+    self.buttonSelector.delegate = self;
     [self.buttonSelector disableButton];
 
     self.addressTextField.delegate = self;
-	self.arrayContacts = @[];
-	// load all the names from the address book
-    [self generateListOfContactNames];
+
+    // load all the names from the address book
+    [MainViewController generateListOfContactNames];
 
     [self updateDisplay];
 
@@ -606,58 +604,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
 }
 
-#pragma mark address book
-
-- (void)generateListOfContactNames
-{
-    NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
-	
-    CFErrorRef error;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-	
-    {
-        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
-        if (nil == people) return;
-
-        for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
-        {
-            ABRecordRef person = CFArrayGetValueAtIndex(people, i);
-            if (nil == person) continue;
-
-            NSString *strFullName = [Util getNameFromAddressRecord:person];
-            if ([strFullName length])
-            {
-                // add this contact
-                [self addContactInfo:person withName:strFullName toArray:arrayContacts];
-            }
-        }
-        CFRelease(people);
-    }
-	
-    // assign final
-    self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];
-   // ABLog(2,@"contacts: %@", self.arrayContacts);
-}
-
-- (void)addContactInfo:(ABRecordRef)person withName:(NSString *)strName toArray:(NSMutableArray *)arrayContacts
-{
-    UIImage *imagePhoto = nil;
-	
-    // does this contact has an image
-    if (ABPersonHasImageData(person))
-    {
-        NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
-        imagePhoto = [UIImage imageWithData:data];
-    }
-	
-	Contact *contact = [[Contact alloc] init];
-	contact.strName = strName;
-	//contact.strData = strData;
-	//contact.strDataLabel = strDataLabel;
-	contact.imagePhoto = imagePhoto;
-	
-	[arrayContacts addObject:contact];
-}
 
 #pragma mark - BLE Central Methods
 
@@ -1279,15 +1225,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 				NSString *firstName = [arrayComponents objectAtIndex:0];
 				NSString *lastName = [arrayComponents objectAtIndex:1];
 				NSString *name = [NSString stringWithFormat:@"%@ %@", firstName, lastName ];
-				for (Contact *contact in self.arrayContacts)
-				{
-					if([[name uppercaseString] isEqualToString:[contact.strName uppercaseString]])
-					{
-						scanCell.contactImage.image = contact.imagePhoto;
-						imageIsFromContacts = YES;
-						break;
-					}
-				}
+                scanCell.contactImage.image = [[MainViewController Singleton].dictImages objectForKey:[name lowercaseString]];
+                if (scanCell.contactImage.image)
+                    imageIsFromContacts = YES;
+
 				if([self nameIsDuplicate:name])
 				{
 					scanCell.duplicateNamesLabel.hidden = NO;
