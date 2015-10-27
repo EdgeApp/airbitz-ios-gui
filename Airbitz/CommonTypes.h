@@ -134,6 +134,7 @@ typedef enum eTabBarButton
 #define NOTIFICATION_WALLETS_LOADED                     @"Wallets_Loaded"
 #define NOTIFICATION_WALLETS_CHANGED                    @"Wallets_Changed"
 #define NOTIFICATION_ROTATION_CHANGED                   @"Rotation_Changed"
+#define NOTIFICATION_CONTACTS_CHANGED                   @"Contacts_Changed"
 
 #define KEY_ERROR_CODE                                  @"Error_Code"
 #define KEY_TX_DETAILS_EXITED_TX                        @"transaction"

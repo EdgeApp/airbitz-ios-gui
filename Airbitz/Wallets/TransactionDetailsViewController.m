@@ -120,14 +120,8 @@ typedef enum eRequestType
 @property (weak, nonatomic) IBOutlet UIButton               *buttonBack;
 
 @property (nonatomic, strong)        NSArray                *arrayCategories;
-@property (nonatomic, strong)        NSArray                *arrayContacts;
-@property (nonatomic, strong)        NSMutableArray         *arrayNearBusinesses; // businesses that match distance criteria
 @property (nonatomic, strong)        NSMutableArray         *arrayOtherBusinesses;    // businesses found using auto complete
 @property (nonatomic, strong)        NSArray                *arrayAutoComplete; // array displayed in the drop-down table when user is entering a name
-@property (nonatomic, strong)        NSMutableDictionary    *dictImages; // images for the contacts and businesses
-@property (nonatomic, strong)        NSMutableDictionary    *dictAddresses; // addresses for the contacts and businesses
-@property (nonatomic, strong)        NSMutableDictionary    *dictThumbnailURLs; // urls for business thumbnails
-@property (nonatomic, strong)        NSMutableDictionary    *dictBizIds; // bizIds for the businesses
 @property (nonatomic, strong)        NSMutableArray         *arrayThumbnailsToRetrieve; // array of names of businesses for which images need to be retrieved
 @property (nonatomic, strong)        NSMutableArray         *arrayThumbnailsRetrieving; // array of names of businesses for which images are currently being retrieved
 @property (nonatomic, strong)        NSMutableArray         *arrayAutoCompleteQueries; // array of names for which autocomplete queries have been made
@@ -150,28 +144,30 @@ typedef enum eRequestType
     [super viewDidLoad];
 
     // initialize arrays
-    self.arrayNearBusinesses = [[NSMutableArray alloc] init];
-    self.arrayOtherBusinesses = [[NSMutableArray alloc] init];
     self.arrayAutoComplete = @[];
-    self.dictImages = [[NSMutableDictionary alloc] init];
-    self.dictAddresses = [[NSMutableDictionary alloc] init];
-    self.dictThumbnailURLs = [[NSMutableDictionary alloc] init];
-    self.dictBizIds = [[NSMutableDictionary alloc] init];
+    self.arrayOtherBusinesses = [[NSMutableArray alloc] init];
     self.arrayThumbnailsToRetrieve = [[NSMutableArray alloc] init];
     self.arrayThumbnailsRetrieving = [[NSMutableArray alloc] init];
     self.arrayAutoCompleteQueries = [[NSMutableArray alloc] init];
+
     [self.spinnerView startAnimating];
 
+    // load all the names from the address book
+    [MainViewController generateListOfContactNames];
+    
+    // get the list of businesses
+    [MainViewController generateListOfNearBusinesses];
+    
     // if there is a photo, then add it as the first photo in our images
     if (self.photo)
     {
-        [self.dictImages setObject:self.photo forKey:self.transaction.strName];
+        [MainViewController Singleton].dictImages[[self.transaction.strName lowercaseString]] = self.photo;
     }
 
     // if there is a biz id, add this biz as the first bizid
     if (self.transaction.bizId)
     {
-        [self.dictBizIds setObject:[NSNumber numberWithInt:self.transaction.bizId] forKey:self.transaction.strName];
+        [MainViewController Singleton].dictBizIds[[self.transaction.strName lowercaseString]] = @(self.transaction.bizId);
     }
 
     // resize ourselves to fit in area
@@ -194,9 +190,6 @@ typedef enum eRequestType
     self.buttonBlocker.hidden = YES;
     [self.scrollableContentView addSubview:self.buttonBlocker];
     
-    // get the list of businesses
-    [self generateListOfNearBusinesses];
-
     // update our array of categories
     [self loadCategories];
 
@@ -204,9 +197,6 @@ typedef enum eRequestType
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
     self.pickerTextCategory.textField.returnKeyType = UIReturnKeyDone;
     self.notesTextView.returnKeyType = UIReturnKeyDefault;
-
-    // load all the names from the address book
-    [self generateListOfContactNames];
 
     self.keypadView.delegate = self;
     self.keypadView.textField = self.fiatTextField;
@@ -298,7 +288,8 @@ typedef enum eRequestType
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAll) name:NOTIFICATION_CONTACTS_CHANGED object:nil];
+
     [Location initAllWithDelegate: self];
 }
 
@@ -709,7 +700,7 @@ typedef enum eRequestType
     BOOL bHavePhoto = NO;
 
     // look for the name in our images
-    UIImage *imageForPhoto = [self.dictImages objectForKey:self.nameTextField.text];
+    UIImage *imageForPhoto = [MainViewController Singleton].dictImages[[self.nameTextField.text lowercaseString]];
     if (imageForPhoto)
     {
         self.imagePhoto.image = imageForPhoto;
@@ -725,75 +716,12 @@ typedef enum eRequestType
 - (void)updateBizId
 {
     _bizId = 0;
-    NSNumber *numBizId = [self.dictBizIds objectForKey:self.nameTextField.text];
+    NSNumber *numBizId;
+    numBizId = [MainViewController Singleton].dictBizIds[[self.nameTextField.text lowercaseString]];
     if (numBizId)
     {
-        _bizId = [numBizId intValue];
+        _bizId = (unsigned int) [numBizId intValue];
     }
-}
-
-- (void)generateListOfNearBusinesses
-{
-    // create the search query
-    NSMutableString *strURL = [[NSMutableString alloc] init];
-    [strURL appendString:[NSString stringWithFormat:@"%@/search/?radius=%d&sort=%d", SERVER_API, SEARCH_RADIUS, SORT_RESULT_DISTANCE]];
-
-    // add our location
-    [self addLocationToQuery:strURL];
-
-    // run the search
-    [self issueRequests:@{strURL : [NSNumber numberWithInt:RequestType_BusinessesNear]} ];
-}
-
-- (void)generateListOfContactNames
-{
-    NSMutableArray *arrayContacts = [[NSMutableArray alloc] init];
-
-    CFErrorRef error;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-
-    {
-        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
-        if (nil == people) return;
-
-        for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
-        {
-            ABRecordRef person = CFArrayGetValueAtIndex(people, i);
-            if (nil == person) continue;
-
-            NSString *strFullName = [Util getNameFromAddressRecord:person];
-            if ([strFullName length])
-            {
-                if ([arrayContacts indexOfObject:strFullName] == NSNotFound)
-                {
-                    // add this contact
-                    [arrayContacts addObject:strFullName];
-
-                    // does this contact has an image
-                    if (ABPersonHasImageData(person))
-                    {
-                        NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
-                        if(data)
-                        {
-                            [self.dictImages setObject:[UIImage imageWithData:data] forKey:strFullName];
-                        }
-                    }
-                }
-            }
-        }
-        CFRelease(people);
-    }
-
-    // store the final
-    self.arrayContacts = arrayContacts;
-    //ABLog(2,@"contacts: %@", self.arrayContacts);
-}
-
-- (UIImage *)stretchableImage:(NSString *)imageName
-{
-    UIImage *img = [UIImage imageNamed:imageName];
-    UIImage *stretchable = [img resizableImageWithCapInsets:UIEdgeInsetsMake(10,10,10,10)]; //top, left, bottom, right
-    return stretchable;
 }
 
 - (CGFloat)scrollContentViewToFrame:(CGRect) frame
@@ -1080,7 +1008,7 @@ typedef enum eRequestType
             NSMutableArray *arrayAutoComplete = [[NSMutableArray alloc] init];
 
             // go through all the near businesses
-            for (NSString *strBusiness in self.arrayNearBusinesses)
+            for (NSString *strBusiness in [MainViewController Singleton].arrayNearBusinesses)
             {
                 // if it matches what the user has currently typed
                 if ([strBusiness rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound)
@@ -1094,7 +1022,7 @@ typedef enum eRequestType
             }
 
             // go through all the contacts
-            for (NSString *strContact in self.arrayContacts)
+            for (NSString *strContact in [MainViewController Singleton].arrayContacts)
             {
                 // if it matches what the user has currently typed
                 if ([strContact rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound)
@@ -1113,7 +1041,7 @@ typedef enum eRequestType
                     if ([strBusiness rangeOfString:strTerm options:NSCaseInsensitiveSearch].location != NSNotFound)
                     {
                         // if it isn't already in the near array
-                        if (![self.arrayNearBusinesses containsObject:strBusiness])
+                        if (![[MainViewController Singleton].arrayNearBusinesses containsObject:strBusiness])
                         {
                             // add this business to the auto complete array
                             [arrayAutoComplete addObject:strBusiness];
@@ -1135,17 +1063,17 @@ typedef enum eRequestType
             if (self.transactionDetailsMode == TD_MODE_RECEIVED)
             {
                 // this is a receive so use the address book
-                self.arrayAutoComplete = self.arrayContacts;
+                self.arrayAutoComplete = [MainViewController Singleton].arrayContacts;
             }
             else
             {
                 // this is a sent so we must be looking for businesses
 
                 // since nothing in payee yet, just populate with businesses (already sorted by distance)
-                self.arrayAutoComplete = self.arrayNearBusinesses;
+                self.arrayAutoComplete = [MainViewController Singleton].arrayNearBusinesses;
 
                 // make sure we have the thumbnails for all of these businesses
-                for (NSString *strName in self.arrayNearBusinesses)
+                for (NSString *strName in [MainViewController Singleton].arrayNearBusinesses)
                 {
                     [self ifNeededResolveThumbnailForBusiness:strName];
                 }
@@ -1178,18 +1106,18 @@ typedef enum eRequestType
 - (void)ifNeededResolveThumbnailForBusiness:(NSString *)strName
 {
     // if we don't already have it, it isn't being resolved and it isn't queued to be resolved
-    if ((nil == [self.dictImages objectForKey:strName]) &&
-        (NO == [self.arrayThumbnailsRetrieving containsObject:strName]) &&
-        (NO == [self.arrayThumbnailsToRetrieve containsObject:strName]))
+    if ((nil == [MainViewController Singleton].dictImages[[strName lowercaseString]]) &&
+        (NO == [self.arrayThumbnailsRetrieving containsObject:[strName lowercaseString]]) &&
+        (NO == [self.arrayThumbnailsToRetrieve containsObject:[strName lowercaseString]]))
     {
         // add it to those to retrieve
-        [self.arrayThumbnailsToRetrieve addObject:strName];
+        [self.arrayThumbnailsToRetrieve addObject:[strName lowercaseString]];
     }
 }
 
 - (void)getThumbnailForBusiness:(NSString *)strName
 {
-    NSString *strThumbnailURL = [self.dictThumbnailURLs objectForKey:strName];
+    NSString *strThumbnailURL = [MainViewController Singleton].dictThumbnailURLs[[strName lowercaseString]];
 
     if (strThumbnailURL)
     {
@@ -1223,7 +1151,7 @@ typedef enum eRequestType
 - (void)getAutoCompleteResultsFor:(NSString *)strName
 {
     // if we haven't already run this query
-    if (NO == [self.arrayAutoCompleteQueries containsObject:strName])
+    if (NO == [self.arrayAutoCompleteQueries containsObject:[strName lowercaseString]])
     {
         [self.arrayAutoCompleteQueries addObject:strName];
 
@@ -1400,10 +1328,10 @@ typedef enum eRequestType
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     // address
-    cell.detailTextLabel.text = [self.dictAddresses objectForKey:cell.textLabel.text];
+    cell.detailTextLabel.text = [MainViewController Singleton].dictAddresses[[cell.textLabel.text lowercaseString]];
 
     // image
-    UIImage *imageForCell = [self.dictImages objectForKey:cell.textLabel.text];
+    UIImage *imageForCell = [MainViewController Singleton].dictImages[[cell.textLabel.text lowercaseString]];
     if (imageForCell == nil)
     {
         UIGraphicsBeginImageContextWithOptions(CGSizeMake(1, 1), NO, 0.0);
@@ -1479,68 +1407,12 @@ typedef enum eRequestType
                             NSNumber *numBizId = [dict objectForKey:@"bizId"];
                             if (numBizId && numBizId != (id)[NSNull null])
                             {
-                                [self.dictBizIds setObject:[NSNumber numberWithInt:[numBizId intValue]] forKey:strName];
+                                [MainViewController Singleton].dictBizIds[[strName lowercaseString]] = @([numBizId intValue]);
                             }
 
                             NSString *strThumbnail = [dict objectForKey:@"square_image"];
                             if (strThumbnail && strThumbnail != (id)[NSNull null]) {
-                                [self.dictThumbnailURLs setObject:strThumbnail forKey:strName];
-                            }
-                        }
-                    }
-                }
-                else if (requestType == RequestType_BusinessesNear)
-                {
-                    NSMutableArray *arrayBusinesses = self.arrayNearBusinesses;
-
-                    for (NSDictionary *dict in searchResultsArray)
-                    {
-                        NSString *strName = [dict objectForKey:@"name"];
-                        if (strName && strName != (id)[NSNull null])
-                        {
-                            [arrayBusinesses addObject:strName];
-
-                            // create the address
-                            NSMutableString *strAddress = [[NSMutableString alloc] init];
-                            NSString *strField = nil;
-                            if (nil != (strField = [dict objectForKey:@"address"]))
-                            {
-                                [strAddress appendString:strField];
-                            }
-                            if (nil != (strField = [dict objectForKey:@"city"]))
-                            {
-                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
-                            }
-                            if (nil != (strField = [dict objectForKey:@"state"]))
-                            {
-                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
-                            }
-                            if (nil != (strField = [dict objectForKey:@"postalcode"]))
-                            {
-                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @" " : @""), strField];
-                            }
-                            if ([strAddress length])
-                            {
-                                [self.dictAddresses setObject:strAddress forKey:strName];
-                            }
-
-                            // set the biz id if available
-                            NSNumber *numBizId = [dict objectForKey:@"bizId"];
-                            if (numBizId && numBizId != (id)[NSNull null])
-                            {
-                                [self.dictBizIds setObject:[NSNumber numberWithInt:[numBizId intValue]] forKey:strName];
-                            }
-
-                            // check if we can get a thumbnail
-                            NSDictionary *dictProfileImage = [dict objectForKey:@"square_image"];
-                            if (dictProfileImage && dictProfileImage != (id)[NSNull null])
-                            {
-                                NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
-                                if (strThumbnail && strThumbnail != (id)[NSNull null])
-                                {
-                                    //ABLog(2,@"thumbnail path: %@", strThumbnail);
-                                    [self.dictThumbnailURLs setObject:strThumbnail forKey:strName];
-                                }
+                                [MainViewController Singleton].dictThumbnailURLs[[strName lowercaseString]] = strThumbnail;
                             }
                         }
                     }
@@ -1561,10 +1433,10 @@ typedef enum eRequestType
             [self.arrayThumbnailsRetrieving removeObject:strNameForImage];
 
             // if we don't have an image for this yet
-            if (nil == [self.dictImages objectForKey:strNameForImage])
+            if (nil == [MainViewController Singleton].dictImages[[strNameForImage lowercaseString]])
             {
                 UIImage *srcImage = [UIImage imageWithData:data];
-                [self.dictImages setObject:srcImage forKey:strNameForImage];
+                [MainViewController Singleton].dictImages[[strNameForImage lowercaseString]] = srcImage;
 
                 // reload the table so it can get at the image if it needs it
                 [self performSelector:@selector(reloadAutoCompleteTable) withObject:nil afterDelay:0.0];
@@ -1623,10 +1495,10 @@ typedef enum eRequestType
 
     if (textField == self.nameTextField)
     {
+        [self spawnPayeeTableInFrame];
         [self updateAutoCompleteArray];
         [self scrollContentViewToFrame:self.nameTextField.frame];
         [self.view layoutIfNeeded];
-        [self spawnPayeeTableInFrame];
     }
     else
     {
@@ -1665,10 +1537,15 @@ typedef enum eRequestType
 {
     if (textField == self.nameTextField)
     {
-        [self updateAutoCompleteArray];
-        [self updateBizId];
-        [self updatePhoto];
+        [self updateAll];
     }
+}
+
+- (void)updateAll
+{
+    [self updateAutoCompleteArray];
+    [self updateBizId];
+    [self updatePhoto];
 }
 
 #pragma mark - PickerTextView Delegates

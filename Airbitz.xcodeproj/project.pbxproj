@@ -30,7 +30,6 @@
 		DA9ED7451BC60AA90063DA07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7341BC60AA90063DA07 /* UIKit.framework */; };
 		DA9ED74C1BC61B980063DA07 /* Airbitz-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED74B1BC61B980063DA07 /* Airbitz-Info.plist */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7CD1BC61E680063DA07 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED77D1BC61E670063DA07 /* AudioController.m */; settings = {ASSET_TAGS = (); }; };
-		DA9ED7CE1BC61E680063DA07 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED77F1BC61E670063DA07 /* AutoCompleteTextField.m */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7CF1BC61E680063DA07 /* BalanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7811BC61E670063DA07 /* BalanceView.m */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7D01BC61E680063DA07 /* BalanceView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7821BC61E670063DA07 /* BalanceView~ipad.xib */; settings = {ASSET_TAGS = (); }; };
 		DA9ED7D11BC61E680063DA07 /* BalanceView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7831BC61E670063DA07 /* BalanceView~iphone.xib */; settings = {ASSET_TAGS = (); }; };
@@ -518,7 +517,6 @@
 		DA9EF3951BC7285D0063DA07 /* WalletMakerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0981BC61F920063DA07 /* WalletMakerView.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EF3961BC7285D0063DA07 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE41BC61F910063DA07 /* Plugin.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EF3971BC7285D0063DA07 /* SlideoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7B51BC61E680063DA07 /* SlideoutView.m */; settings = {ASSET_TAGS = (); }; };
-		DA9EF3981BC7285D0063DA07 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED77F1BC61E670063DA07 /* AutoCompleteTextField.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EF3991BC7285D0063DA07 /* PasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC91BC61F910063DA07 /* PasswordRecoveryViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EF39A1BC7285D0063DA07 /* LatoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A01BC61E680063DA07 /* LatoLabel.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EF39B1BC7285D0063DA07 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED81A1BC61F8F0063DA07 /* Annotation.m */; settings = {ASSET_TAGS = (); }; };
@@ -953,7 +951,6 @@
 		DA9EF55C1BC729FA0063DA07 /* WalletMakerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0981BC61F920063DA07 /* WalletMakerView.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EF55D1BC729FA0063DA07 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE41BC61F910063DA07 /* Plugin.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EF55E1BC729FA0063DA07 /* SlideoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7B51BC61E680063DA07 /* SlideoutView.m */; settings = {ASSET_TAGS = (); }; };
-		DA9EF55F1BC729FA0063DA07 /* AutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED77F1BC61E670063DA07 /* AutoCompleteTextField.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EF5601BC729FA0063DA07 /* PasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC91BC61F910063DA07 /* PasswordRecoveryViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EF5611BC729FA0063DA07 /* LatoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A01BC61E680063DA07 /* LatoLabel.m */; settings = {ASSET_TAGS = (); }; };
 		DA9EF5621BC729FA0063DA07 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED81A1BC61F8F0063DA07 /* Annotation.m */; settings = {ASSET_TAGS = (); }; };
@@ -1482,8 +1479,6 @@
 		DA9ED74B1BC61B980063DA07 /* Airbitz-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Airbitz-Info.plist"; sourceTree = "<group>"; };
 		DA9ED77C1BC61E670063DA07 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
 		DA9ED77D1BC61E670063DA07 /* AudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioController.m; sourceTree = "<group>"; };
-		DA9ED77E1BC61E670063DA07 /* AutoCompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCompleteTextField.h; sourceTree = "<group>"; };
-		DA9ED77F1BC61E670063DA07 /* AutoCompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCompleteTextField.m; sourceTree = "<group>"; };
 		DA9ED7801BC61E670063DA07 /* BalanceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceView.h; sourceTree = "<group>"; };
 		DA9ED7811BC61E670063DA07 /* BalanceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceView.m; sourceTree = "<group>"; };
 		DA9ED7821BC61E670063DA07 /* BalanceView~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "BalanceView~ipad.xib"; sourceTree = "<group>"; };
@@ -3351,8 +3346,6 @@
 				DA9EE5BF1BC62F430063DA07 /* AirbitzViewController.m */,
 				DA9ED77C1BC61E670063DA07 /* AudioController.h */,
 				DA9ED77D1BC61E670063DA07 /* AudioController.m */,
-				DA9ED77E1BC61E670063DA07 /* AutoCompleteTextField.h */,
-				DA9ED77F1BC61E670063DA07 /* AutoCompleteTextField.m */,
 				DA9ED7801BC61E670063DA07 /* BalanceView.h */,
 				DA9ED7811BC61E670063DA07 /* BalanceView.m */,
 				DA9ED7821BC61E670063DA07 /* BalanceView~ipad.xib */,
@@ -3620,7 +3613,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DAD1AD721BC6065100C648C4 /* Build configuration list for PBXProject "Airbitz" */;
+			buildConfigurationList = DAD1AD721BC6065100C648C4 /* Build configuration list for PBXProject "AirBitz" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -4685,7 +4678,6 @@
 				DA9EF3951BC7285D0063DA07 /* WalletMakerView.m in Sources */,
 				DA9EF3961BC7285D0063DA07 /* Plugin.m in Sources */,
 				DA9EF3971BC7285D0063DA07 /* SlideoutView.m in Sources */,
-				DA9EF3981BC7285D0063DA07 /* AutoCompleteTextField.m in Sources */,
 				DA9EF3991BC7285D0063DA07 /* PasswordRecoveryViewController.m in Sources */,
 				DA9EF39A1BC7285D0063DA07 /* LatoLabel.m in Sources */,
 				DA9EF39B1BC7285D0063DA07 /* Annotation.m in Sources */,
@@ -4829,7 +4821,6 @@
 				DA9EF55C1BC729FA0063DA07 /* WalletMakerView.m in Sources */,
 				DA9EF55D1BC729FA0063DA07 /* Plugin.m in Sources */,
 				DA9EF55E1BC729FA0063DA07 /* SlideoutView.m in Sources */,
-				DA9EF55F1BC729FA0063DA07 /* AutoCompleteTextField.m in Sources */,
 				DA9EF5601BC729FA0063DA07 /* PasswordRecoveryViewController.m in Sources */,
 				DA9EF5611BC729FA0063DA07 /* LatoLabel.m in Sources */,
 				DA9EF5621BC729FA0063DA07 /* Annotation.m in Sources */,
@@ -4973,7 +4964,6 @@
 				DA9EE5601BC61F930063DA07 /* WalletMakerView.m in Sources */,
 				DA9EE4141BC61F920063DA07 /* Plugin.m in Sources */,
 				DA9ED7EC1BC61E680063DA07 /* SlideoutView.m in Sources */,
-				DA9ED7CE1BC61E680063DA07 /* AutoCompleteTextField.m in Sources */,
 				DA9EE4071BC61F920063DA07 /* PasswordRecoveryViewController.m in Sources */,
 				DA9ED7E11BC61E680063DA07 /* LatoLabel.m in Sources */,
 				DA9EE0C21BC61F920063DA07 /* Annotation.m in Sources */,
@@ -5515,7 +5505,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DAD1AD721BC6065100C648C4 /* Build configuration list for PBXProject "Airbitz" */ = {
+		DAD1AD721BC6065100C648C4 /* Build configuration list for PBXProject "AirBitz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DAD1ADA21BC6065100C648C4 /* Debug */,

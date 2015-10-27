@@ -92,10 +92,6 @@
 
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray        *arraySearchTransactions;
-//@property (nonatomic, strong) NSArray               *arrayNonSearchViews;
-@property (nonatomic, strong) NSMutableDictionary   *dictContactImages; // images for the contacts
-@property (nonatomic, strong) NSMutableDictionary   *dictBizImages; // images for businesses
-@property (nonatomic, strong) NSMutableDictionary   *dictImageRequests;
 
 @property (nonatomic, strong) TransactionDetailsViewController      *transactionDetailsController;
 @property (nonatomic, strong) ExportWalletViewController            *exportWalletViewController;
@@ -126,12 +122,9 @@
 
     // alloc the arrays
     self.arraySearchTransactions = [[NSMutableArray alloc] init];
-    self.dictContactImages = [[NSMutableDictionary alloc] init];
-    self.dictBizImages = [[NSMutableDictionary alloc] init];
-    self.dictImageRequests = [[NSMutableDictionary alloc] init];
 
     // load all the names from the address book
-    [self loadContactImages];
+    [MainViewController generateListOfContactNames];
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -676,38 +669,6 @@
     return self.searchTextField.text.length > 0;
 }
 
-- (void)loadContactImages
-{
-    CFErrorRef error;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-
-    {
-        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
-        if (nil == people) return;
-
-        for (CFIndex i = 0; i < CFArrayGetCount(people); i++)
-        {
-            ABRecordRef person = CFArrayGetValueAtIndex(people, i);
-            if (nil == person) continue;
-
-            NSString *strFullName = [Util getNameFromAddressRecord:person];
-            if ([strFullName length])
-            {
-                // if this contact has an image and we don't have one yet
-                if ((ABPersonHasImageData(person)) && (nil == [self.dictContactImages objectForKey:strFullName]))
-                {
-                    NSData *data = (__bridge_transfer NSData*)ABPersonCopyImageData(person);
-					if(data)
-					{
-						[self.dictContactImages setObject:[UIImage imageWithData:data] forKey:strFullName];
-					}
-                }
-            }
-        }
-        CFRelease(people);
-    }
-}
-
 - (UIImage *)imageForTransaction:(Transaction *)transaction
 {
     UIImage *image = nil;
@@ -718,13 +679,14 @@
         if (transaction.bizId)
         {
             // get the image for this bizId
-            image = [self.dictBizImages objectForKey:[NSNumber numberWithInt:transaction.bizId]];
+            image = [MainViewController Singleton].dictBizImages[@(transaction.bizId)];
         }
 
         if (image == nil)
         {
             // find the image from the contacts
-            image = [self.dictContactImages objectForKey:transaction.strName];
+            image = [MainViewController Singleton].dictImages[[transaction.strName lowercaseString]];
+            ABLog(2, @"Looking for image for %@. Found image = %lx", transaction.strName, (unsigned long) image);
         }
     }
 
@@ -739,7 +701,7 @@
         if (transaction.bizId)
         {
             // if we don't have an image for this biz id
-            if (nil == [self.dictBizImages objectForKey:[NSNumber numberWithInt:transaction.bizId]])
+            if (nil == [MainViewController Singleton].dictBizImages[@(transaction.bizId)])
             {
                 // start by getting the biz details...this will kick of a retreive of the images
                 [self getBizDetailsForTransaction:transaction];
@@ -765,12 +727,12 @@
 - (void)performImageRequests
 {
 
-    for (NSNumber *numBizId in [self.dictImageRequests allKeys])
+    for (NSNumber *numBizId in [[MainViewController Singleton].dictImageRequests allKeys])
     {
-        NSString *strThumbnailURL = [self.dictImageRequests objectForKey:numBizId];
+        NSString *strThumbnailURL = [MainViewController Singleton].dictImageRequests[numBizId];
 
         // remove this request
-        [self.dictImageRequests removeObjectForKey:numBizId];
+        [[MainViewController Singleton].dictImageRequests removeObjectForKey:numBizId];
 
         // create the url string
         NSString *strURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, strThumbnailURL];
@@ -805,7 +767,7 @@
     // if we got a new photo
     if (controller.transaction.bizId && controller.photo)
     {
-        [self.dictBizImages setObject:controller.photo forKey:[NSNumber numberWithInt:controller.transaction.bizId]];
+        [[MainViewController Singleton].dictBizImages setObject:controller.photo forKey:[NSNumber numberWithInt:controller.transaction.bizId]];
     }
 
     [MainViewController changeNavBarOwner:self];
@@ -1270,7 +1232,7 @@
                         if (strImageURL)
                         {
                             // at the request to our dictionary and issue code to perform them
-                            [self.dictImageRequests setObject:strImageURL forKey:numBizId];
+                            [[MainViewController Singleton].dictImageRequests setObject:strImageURL forKey:numBizId];
                             [self performSelector:@selector(performImageRequests) withObject:nil afterDelay:0.0];
                         }
                     }
@@ -1280,7 +1242,7 @@
             {
                 NSNumber *numBizId = (NSNumber *) object;
                 UIImage *srcImage = [UIImage imageWithData:data];
-                [self.dictBizImages setObject:srcImage forKey:numBizId];
+                [[MainViewController Singleton].dictBizImages setObject:srcImage forKey:numBizId];
                 [self.tableView reloadData];
             }
         }
