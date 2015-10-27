@@ -1686,8 +1686,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     // If it's not BitID, then put into wallets queue since
     // wallets are loaded asynchronously
-    [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
-                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
     [self doProcessSpendURI];
 }
 
@@ -1703,13 +1701,21 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)doProcessSpendURI
 {
-    while ([CoreBridge Singleton].currentWallet.loaded != YES)
-    {
-        ABLog(1,@"Waiting for wallet to load: %@", [CoreBridge Singleton].currentWallet.strName);
-    }
-    
     dispatch_async(dispatch_get_main_queue(), ^
     {
+        if ([CoreBridge Singleton].currentWallet.loaded != YES)
+        {
+            [MainViewController fadingAlert:NSLocalizedString(@"Loading Wallet...", nil)
+                                   holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        }
+        while ([CoreBridge Singleton].currentWallet.loaded != YES)
+        {
+            ABLog(1,@"Waiting for wallet to load: %@", [CoreBridge Singleton].currentWallet.strName);
+        }
+
+        [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
+                               holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+
         tABC_Error error;
         SpendTarget *spendTarget = [[SpendTarget alloc] init];
         NSString *text = _addressTextField.text;
