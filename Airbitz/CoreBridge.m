@@ -290,8 +290,6 @@ static BOOL bOtpError = NO;
         [miscQueue cancelAllOperations];
     if (loadedQueue)
         [loadedQueue cancelAllOperations];
-//    if (watcherQueue)
-//        [watcherQueue cancelAllOperations];
 
 }
 
@@ -338,7 +336,6 @@ static BOOL bOtpError = NO;
     total += walletsQueue == nil  ? 0 : [walletsQueue operationCount];
     total += genQRQueue == nil  ? 0 : [genQRQueue operationCount];
     total += txSearchQueue == nil  ? 0 : [txSearchQueue operationCount];
-    total += miscQueue == nil  ? 0 : [miscQueue operationCount];
     total += loadedQueue == nil  ? 0 : [loadedQueue operationCount];
     total += watcherQueue == nil  ? 0 : [watcherQueue operationCount];
     return total;
@@ -1521,7 +1518,14 @@ static BOOL bOtpError = NO;
     [LocalSettings saveAll];
     bDataFetched = NO;
     bOtpError = NO;
-    [CoreBridge startAsyncTasks];
+    [CoreBridge startPrimaryWallet];
+    [CoreBridge postToWatcherQueue: ^
+    {
+        [CoreBridge postToLoadedQueue:^
+        {
+            [CoreBridge startAsyncTasks];
+        }];
+    }];
 
     iLoginTimeSeconds = [CoreBridge saveLogoutDate];
 }
@@ -1568,11 +1572,34 @@ static BOOL bOtpError = NO;
     return currentTimeStamp;
 }
 
++ (void)startPrimaryWallet;
+{
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [CoreBridge loadWalletUUIDs: arrayWallets];
+    NSString *uuid = arrayWallets[0];
+    [CoreBridge postToLoadedQueue:^{
+        tABC_Error error;
+        ABC_WalletLoad([[User Singleton].name UTF8String], [uuid UTF8String], &error);
+        [Util printABC_Error:&error];
+        [CoreBridge startWatcher:uuid];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [CoreBridge refreshWallets];
+        });
+    }];
+}
+
 + (void)startAsyncTasks
 {
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
     [CoreBridge loadWalletUUIDs: arrayWallets];
+    bool bIsFirstWallet = YES;
     for (NSString *uuid in arrayWallets) {
+        if (bIsFirstWallet)
+        {
+            bIsFirstWallet = NO;
+            continue;
+        }
         [CoreBridge postToLoadedQueue:^{
             tABC_Error error;
             ABC_WalletLoad([[User Singleton].name UTF8String], [uuid UTF8String], &error);
@@ -1760,7 +1787,6 @@ static BOOL bOtpError = NO;
 
 + (void)startWatcher:(NSString *) walletUUID
 {
-//    dispatch_async(dispatch_get_main_queue(),^{
     [CoreBridge postToWatcherQueue: ^{
         if (![CoreBridge watcherExists:walletUUID]) {
             tABC_Error Error;
@@ -1789,7 +1815,6 @@ static BOOL bOtpError = NO;
             [CoreBridge requestWalletDataSync:walletUUID];
         }
     }];
-//    });
 }
 
 + (void)stopWatchers
