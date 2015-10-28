@@ -477,7 +477,9 @@ typedef enum eRequestType
 - (IBAction)Done
 {
     BOOL bSomethingChanged = false;
+    self.spinnerView.hidden = NO;
 
+    ABLog(1, @"Calling [DL_URLServer.controller cancelAllRequestsForDelegate]");
     [DL_URLServer.controller cancelAllRequestsForDelegate:self];
 
     [self resignAllResponders];
@@ -530,7 +532,6 @@ typedef enum eRequestType
 
     if (bSomethingChanged)
     {
-        self.spinnerView.hidden = NO;
         [CoreBridge storeTransaction: self.transaction];
     }
 
