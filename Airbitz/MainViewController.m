@@ -345,7 +345,7 @@ MainViewController *singleton;
 }
 
 
-+ (void)generateListOfContactNames;
++ (void)generateListOfContactNames
 {
     if ([MainViewController Singleton].arrayContacts)
         return;
@@ -354,6 +354,12 @@ MainViewController *singleton;
     
     CFErrorRef error;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+
+    ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+        if (granted) {
+            [MainViewController Singleton].arrayContacts = nil;
+        }
+    });
     
     {
         CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
