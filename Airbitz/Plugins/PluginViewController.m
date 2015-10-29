@@ -82,6 +82,7 @@ static const NSString *PROTOCOL = @"bridge://";
                  @"navStackPop":NSStringFromSelector(@selector(navStackPop:))
     };
 
+    [NSHTTPCookieStorage sharedHTTPCookieStorage].cookieAcceptPolicy = NSHTTPCookieAcceptPolicyAlways;
     NSString *localFilePath = [[NSBundle mainBundle] pathForResource:_plugin.sourceFile ofType:_plugin.sourceExtension];
     NSURLRequest *localRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localFilePath]];
     _webView.delegate = self;
