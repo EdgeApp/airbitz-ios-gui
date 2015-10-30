@@ -1576,17 +1576,19 @@ static BOOL bOtpError = NO;
 {
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
     [CoreBridge loadWalletUUIDs: arrayWallets];
-    NSString *uuid = arrayWallets[0];
-    [CoreBridge postToLoadedQueue:^{
-        tABC_Error error;
-        ABC_WalletLoad([[User Singleton].name UTF8String], [uuid UTF8String], &error);
-        [Util printABC_Error:&error];
-        [CoreBridge startWatcher:uuid];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [CoreBridge refreshWallets];
-        });
-    }];
+    if (0 < [arrayWallets count]) {
+        NSString *uuid = arrayWallets[0];
+        [CoreBridge postToLoadedQueue:^{
+            tABC_Error error;
+            ABC_WalletLoad([[User Singleton].name UTF8String], [uuid UTF8String], &error);
+            [Util printABC_Error:&error];
+            [CoreBridge startWatcher:uuid];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [CoreBridge refreshWallets];
+            });
+        }];
+    }
 }
 
 + (void)startAsyncTasks
