@@ -891,7 +891,10 @@ static BOOL bOtpError = NO;
     if (ABC_TxHeight([wallet.strUUID UTF8String], [txId UTF8String], &txHeight, &Error) != ABC_CC_Ok) {
         *syncing = YES;
         if (txHeight < 0)
+        {
+            ABLog(0, @"calcTxConfirmations returning negative txHeight=%d", txHeight);
             return txHeight;
+        }
         else
             return 0;
     }
@@ -902,7 +905,14 @@ static BOOL bOtpError = NO;
     if (txHeight == 0 || blockHeight == 0) {
         return 0;
     }
-    return (blockHeight - txHeight) + 1;
+    
+    int retHeight = (blockHeight - txHeight) + 1;
+    
+    if (retHeight < 0)
+    {
+        ABLog(0, @"calcTxConfirmations returning negative retHeight=%d", retHeight);
+    }
+    return retHeight;
 }
 
 + (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions 
