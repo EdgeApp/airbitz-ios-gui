@@ -910,7 +910,7 @@ static BOOL bOtpError = NO;
     
     if (retHeight < 0)
     {
-        ABLog(0, @"calcTxConfirmations returning negative retHeight=%d", retHeight);
+        retHeight = 0;
     }
     return retHeight;
 }
