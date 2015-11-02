@@ -814,6 +814,7 @@ static BOOL bOtpError = NO;
             t.balance = bal;
         }
         wallet.arrayTransactions = arrayTransactions;
+        wallet.balance = bal;
     }
     else
     {
