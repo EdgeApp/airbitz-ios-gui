@@ -7,6 +7,7 @@
 #import "Wallet.h"
 #import "Transaction.h"
 #import "FadingAlertView.h"
+#import "Theme.h"
 
 #define CONFIRMED_CONFIRMATION_COUNT 6
 #define PIN_REQUIRED_PERIOD_SECONDS     120

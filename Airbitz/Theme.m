@@ -131,6 +131,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.confirmationText                                   = NSLocalizedString(@"Confirmation", @"Num of confirmations in transaction list");
     self.confirmationsText                                  = NSLocalizedString(@"Confirmations", @"Num of confirmations in transaction list");
     self.confirmedText                                      = NSLocalizedString(@"Confirmed", @"Confirmed status in transaction list");
+    self.loadingText                                        = NSLocalizedString(@"Loading", @"Loading...");
 
 //    self.                         = NSLocalizedString(@"", @"");
 

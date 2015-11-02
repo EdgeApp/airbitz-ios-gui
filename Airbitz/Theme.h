@@ -93,6 +93,7 @@
 @property (nonatomic) NSString *confirmedText;
 @property (nonatomic) NSString *confirmationText;
 @property (nonatomic) NSString *confirmationsText;
+@property (nonatomic) NSString *loadingText;
 
 
 
