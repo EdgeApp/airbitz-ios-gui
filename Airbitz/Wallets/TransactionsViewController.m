@@ -1068,32 +1068,32 @@
         {
             if (transaction.bSyncing)
             {
-                cell.confirmationLabel.text = NSLocalizedString(@"Synchronizing", nil);
+                cell.confirmationLabel.text = [Theme Singleton].synchronizingText;
                 cell.confirmationLabel.textColor = COLOR_BALANCE;
             }
             else if (transaction.confirmations < 0)
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"Warning: Transaction Double Spent"];
+                cell.confirmationLabel.text = [Theme Singleton].doubleSpendText;
                 cell.confirmationLabel.textColor = COLOR_NEGATIVE;
             }
             else if (transaction.confirmations == 0)
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"Pending"];
+                cell.confirmationLabel.text = [Theme Singleton].pendingText;
                 cell.confirmationLabel.textColor = COLOR_NEGATIVE;
             }
             else if (transaction.confirmations == 1)
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmation", transaction.confirmations];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", transaction.confirmations, [Theme Singleton].confirmationText];
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
             else if (transaction.confirmations >= CONFIRMED_CONFIRMATION_COUNT)
             {
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
-                cell.confirmationLabel.text = NSLocalizedString(@"Confirmed", nil);
+                cell.confirmationLabel.text = [Theme Singleton].confirmedText;
             }
             else
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i Confirmations", transaction.confirmations];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", transaction.confirmations, [Theme Singleton].confirmationsText];
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
 

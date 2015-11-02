@@ -125,6 +125,12 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.loadingWalletsText                                 = NSLocalizedString(@"Loading Wallets...", @"Loading wallets alert text");
     self.loadingWalletsNewDeviceText                        = NSLocalizedString(@"This may take a few minutes as it is the first time logging into this device.", @"Loading Wallets alert text");
     self.loadingTransactionsText                            = NSLocalizedString(@"Loading Transactions...", @"Loading Transactions alert text");
+    self.synchronizingText                                  = NSLocalizedString(@"Synchronizing", @"Synchronizing text in confirmation textfield");
+    self.pendingText                                        = NSLocalizedString(@"Pending", @"Pending status in transaction list");
+    self.doubleSpendText                                    = NSLocalizedString(@"Warning: Double Spend", @"Double spend status in transaction list");
+    self.confirmationText                                   = NSLocalizedString(@"Confirmation", @"Num of confirmations in transaction list");
+    self.confirmationsText                                  = NSLocalizedString(@"Confirmations", @"Num of confirmations in transaction list");
+    self.confirmedText                                      = NSLocalizedString(@"Confirmed", @"Confirmed status in transaction list");
 
 //    self.                         = NSLocalizedString(@"", @"");
 
