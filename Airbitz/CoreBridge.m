@@ -713,25 +713,6 @@ static BOOL bOtpError = NO;
 
 + (Wallet *)getWallet: (NSString *)walletUUID
 {
-//    tABC_Error Error;
-//    Wallet *wallet = nil;
-//    tABC_WalletInfo *pWalletInfo = NULL;
-//    tABC_CC result = ABC_GetWalletInfo([[User Singleton].name UTF8String],
-//                                       [[User Singleton].password UTF8String],
-//                                       [walletUUID UTF8String],
-//                                       &pWalletInfo, &Error);
-//    if (ABC_CC_Ok == result && pWalletInfo != NULL)
-//    {
-//        wallet = [[Wallet alloc] init];
-//        [CoreBridge setWallet:wallet withInfo:pWalletInfo];
-//    }
-//    else
-//    {
-//        ABLog(2,@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
-//        [Util printABC_Error:&Error];
-//    }
-//    ABC_FreeWalletInfo(pWalletInfo);
-
     for (Wallet *w in singleton.arrayWallets)
     {
         if ([w.strUUID isEqualToString:walletUUID])
@@ -835,21 +816,6 @@ static BOOL bOtpError = NO;
         [Util printABC_Error:&Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
-}
-
-+ (void)setWallet:(Wallet *) wallet withInfo:(tABC_WalletInfo *) pWalletInfo
-{
-    ABLog(2,@"ENTER setWallet: %@", [NSThread currentThread].name);
-    wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
-    wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
-    wallet.archived = pWalletInfo->archived;
-    wallet.balance = pWalletInfo->balanceSatoshi;
-    wallet.currencyNum = pWalletInfo->currencyNum;
-    wallet.currencyAbbrev = [CoreBridge currencyAbbrevLookup:wallet.currencyNum];
-    wallet.currencySymbol = [CoreBridge currencySymbolLookup:wallet.currencyNum];
-    ABLog(2,@"      setWallet: Currency %d %@ %@", pWalletInfo->currencyNum, wallet.currencyAbbrev, wallet.currencySymbol) ;
-    wallet.loaded = wallet.currencyNum == -1 ? NO : YES;
-    ABLog(2,@"EXIT setWallet: %@", [NSThread currentThread].name);
 }
 
 + (void)setTransaction:(Wallet *) wallet transaction:(Transaction *) transaction coreTx:(tABC_TxInfo *) pTrans
