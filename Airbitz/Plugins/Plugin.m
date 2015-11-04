@@ -36,7 +36,8 @@ static NSMutableArray *plugins;
         plugin.env = @{
             @"SANDBOX": (isTestnet ? @"true" : @"false"),
             @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
-            @"REDIRECT_URI": [NSString stringWithFormat:@"airbitz://plugin/glidera/%@/", plugin.country]
+            @"REDIRECT_URI": [NSString stringWithFormat:@"airbitz://plugin/glidera/%@/", plugin.country],
+            @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
         };
         [plugins addObject:plugin];
 
