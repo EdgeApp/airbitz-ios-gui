@@ -257,7 +257,7 @@
                                                                 <constraint firstAttribute="width" secondItem="Tb9-gC-0YS" secondAttribute="height" multiplier="1:1" id="tMq-ay-u2T"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gHX-Xq-QLY" userLabel="Label -top" customClass="MontserratLabel">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gHX-Xq-QLY" userLabel="Label -top" customClass="LatoLabel">
                                                             <rect key="frame" x="93" y="5" width="227" height="19"/>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -272,7 +272,7 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Duplicate Names)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Hba-dd-to8" customClass="MontserratLabel">
+                                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Duplicate Names)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Hba-dd-to8" customClass="LatoLabel">
                                                             <rect key="frame" x="216" y="26" width="104" height="19"/>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                                             <color key="textColor" red="0.95294123888015747" green="0.4745098352432251" blue="0.14901961386203766" alpha="1" colorSpace="deviceRGB"/>
@@ -1078,7 +1078,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0QH-Cd-JVq" userLabel="Label - Wallet Name" customClass="MontserratLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0QH-Cd-JVq" userLabel="Label - Wallet Name" customClass="LatoLabel">
                                                     <rect key="frame" x="20" y="4" width="289" height="36"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                     <color key="textColor" red="0.25490196078431371" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
@@ -1364,7 +1364,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-nP-HJx" userLabel="Wallet Name" customClass="MontserratLabel">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-nP-HJx" userLabel="Wallet Name" customClass="LatoLabel">
                                                             <rect key="frame" x="8" y="4" width="292" height="51"/>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                             <color key="textColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1779,7 +1779,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Export" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzM-6V-ckO" customClass="MontserratLabel">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Export" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzM-6V-ckO" customClass="LatoLabel">
                                         <rect key="frame" x="50" y="33" width="219" height="22"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1844,7 +1844,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="EL5-zA-Ryy">
                                         <rect key="frame" x="0.0" y="-2" width="320" height="64"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Offline Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4KX-hj-tJA" customClass="MontserratLabel">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Offline Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4KX-hj-tJA" customClass="LatoLabel">
                                         <rect key="frame" x="50" y="31" width="219" height="21"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1921,7 +1921,7 @@
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="lC8-8u-W1f">
                                                         <rect key="frame" x="258" y="12" width="22" height="22"/>
                                                     </imageView>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Copy Public Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Maf-2U-Gv8" customClass="MontserratLabel">
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Copy Public Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Maf-2U-Gv8" customClass="LatoLabel">
                                                         <rect key="frame" x="29" y="12" width="218" height="21"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                         <color key="textColor" red="0.23529411759999999" green="0.21960784310000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
@@ -1950,7 +1950,7 @@
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="AuW-en-YFC">
                                                         <rect key="frame" x="258" y="12" width="22" height="22"/>
                                                     </imageView>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="External Storage / Print" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Nr-wB-OaB" customClass="MontserratLabel">
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="External Storage / Print" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Nr-wB-OaB" customClass="LatoLabel">
                                                         <rect key="frame" x="29" y="12" width="218" height="21"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                         <color key="textColor" red="0.23529411759999999" green="0.21960784310000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
@@ -2213,7 +2213,7 @@
                                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <size key="shadowOffset" width="0.0" height="1"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ClG-um-kmI" customClass="MontserratLabel">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ClG-um-kmI" customClass="LatoLabel">
                                                 <rect key="frame" x="25" y="234" width="82" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="eTy-7s-JXE"/>
@@ -2230,7 +2230,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="OWt-77-x9Y"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8T-Xw-aVE" customClass="MontserratLabel">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8T-Xw-aVE" customClass="LatoLabel">
                                                 <rect key="frame" x="25" y="290" width="82" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="Xz2-4g-oKX"/>
@@ -2984,7 +2984,7 @@
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
                                     </textField>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 Digit PIN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WB0-Ox-RAw" customClass="MontserratLabel">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 Digit PIN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WB0-Ox-RAw" customClass="LatoLabel">
                                         <rect key="frame" x="20" y="311" width="191" height="17"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                         <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -3245,7 +3245,7 @@
                                     <action selector="buttonInfoTouched:" destination="4nQ-Do-qeh" eventType="touchUpInside" id="toV-06-AkO"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Import Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51g-oU-QIB" customClass="MontserratLabel">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Import Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51g-oU-QIB" customClass="LatoLabel">
                                 <rect key="frame" x="46" y="32" width="219" height="22"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

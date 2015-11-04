@@ -1255,28 +1255,26 @@ MainViewController *singleton;
     // Prevent displaying multiple alerts
     else if (_receivedAlert == nil)
     {
-        NSString *title = NSLocalizedString(@"Received Funds", nil);
-        NSString *msg = NSLocalizedString(@"Bitcoin received. Tap for details.", nil);
-        if (transaction && transaction.amountSatoshi < 0) {
-            title = NSLocalizedString(@"Sent Funds", nil);
-            msg = NSLocalizedString(@"Bitcoin sent. Tap for details.", nil);
+        if (transaction && transaction.amountSatoshi >= 0) {
+            NSString *title = NSLocalizedString(@"Received Funds", nil);
+            NSString *msg = NSLocalizedString(@"Bitcoin received. Tap for details.", nil);
+            [[AudioController controller] playReceived];
+            _receivedAlert = [[UIAlertView alloc]
+                              initWithTitle:title
+                              message:msg
+                              delegate:self
+                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                              otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+            [_receivedAlert show];
+            // Wait 5 seconds and dimiss
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+                if (_receivedAlert)
+                {
+                    [_receivedAlert dismissWithClickedButtonIndex:0 animated:YES];
+                }
+            });
         }
-        [[AudioController controller] playReceived];
-        _receivedAlert = [[UIAlertView alloc]
-                                initWithTitle:title
-                                message:msg
-                                delegate:self
-                                cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
-        [_receivedAlert show];
-        // Wait 5 seconds and dimiss
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-            if (_receivedAlert)
-            {
-                [_receivedAlert dismissWithClickedButtonIndex:0 animated:YES];
-            }
-        });
     }
 
     //

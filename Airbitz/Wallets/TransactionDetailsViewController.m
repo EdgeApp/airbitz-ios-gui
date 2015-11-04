@@ -608,7 +608,7 @@ typedef enum eRequestType
     if ([CoreBridge isTestNet]) {
         [baseUrl appendString:@"https://testnet.blockexplorer.com/"];
     } else {
-        [baseUrl appendString:@"https://blockexplorer.com/"];
+        [baseUrl appendString:@"https://insight.bitpay.com/"];
     }
     for (TxOutput *t in self.transaction.outputs) {
         NSString *val = [CoreBridge formatSatoshi:t.value];

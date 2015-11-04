@@ -87,6 +87,13 @@
 @property (nonatomic) NSString *loadingWalletsText;
 @property (nonatomic) NSString *loadingWalletsNewDeviceText;
 @property (nonatomic) NSString *loadingTransactionsText;
+@property (nonatomic) NSString *synchronizingText;
+@property (nonatomic) NSString *doubleSpendText;
+@property (nonatomic) NSString *pendingText;
+@property (nonatomic) NSString *confirmedText;
+@property (nonatomic) NSString *confirmationText;
+@property (nonatomic) NSString *confirmationsText;
+@property (nonatomic) NSString *loadingText;
 
 
 

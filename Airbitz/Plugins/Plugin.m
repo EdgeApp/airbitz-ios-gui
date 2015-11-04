@@ -32,15 +32,12 @@ static NSMutableArray *plugins;
         plugin.country = @"US";
         plugin.sourceFile = @"glidera";
         plugin.sourceExtension = @"html";
-        plugin.name = @"Glidera US (beta)";
+        plugin.name = @"Glidera US/Canada (beta)";
         plugin.env = @{
-            @"COUNTRY_CODE": @"US",
-            @"COUNTRY_NAME": @"United States",
-            @"CURRENCY_CODE": @"840",
-            @"CURRENCY_ABBREV": @"USD",
             @"SANDBOX": (isTestnet ? @"true" : @"false"),
             @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
-            @"REDIRECT_URI": [NSString stringWithFormat:@"airbitz://plugin/glidera/%@/", plugin.country]
+            @"REDIRECT_URI": [NSString stringWithFormat:@"airbitz://plugin/glidera/%@/", plugin.country],
+            @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
         };
         [plugins addObject:plugin];
 

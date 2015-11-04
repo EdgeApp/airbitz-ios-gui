@@ -428,17 +428,49 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (Wallet *)createLoadingWallet:(NSString *)uuid
++ (Wallet *)getWalletFromCore:(NSString *)uuid
 {
+    tABC_Error error;
     Wallet *wallet = [[Wallet alloc] init];
     wallet.strUUID = uuid;
-    wallet.strName = @"Loading...";
+    wallet.strName = [Theme Singleton].loadingText;
     wallet.currencyNum = -1;
     wallet.balance = 0;
     wallet.loaded = NO;
 
+    if ([CoreBridge watcherExists:uuid]) {
+        char *szName = NULL;
+        ABC_WalletName([[User Singleton].name UTF8String], [uuid UTF8String], &szName, &error);
+        if (error.code == ABC_CC_Ok) {
+            wallet.strName = [NSString safeStringWithUTF8String:szName];
+        }
+        if (szName) {
+            free(szName);
+        }
+
+        int currencyNum;
+        ABC_WalletCurrency([[User Singleton].name UTF8String], [uuid UTF8String], &currencyNum, &error);
+        if (error.code == ABC_CC_Ok) {
+            wallet.currencyNum = currencyNum;
+            wallet.currencyAbbrev = [CoreBridge currencyAbbrevLookup:wallet.currencyNum];
+            wallet.currencySymbol = [CoreBridge currencySymbolLookup:wallet.currencyNum];
+            wallet.loaded = YES;
+        } else {
+            wallet.loaded = NO;
+            wallet.currencyNum = -1;
+            wallet.strName = [Theme Singleton].loadingText;
+        }
+
+        int64_t balance;
+        ABC_WalletBalance([[User Singleton].name UTF8String], [uuid UTF8String], &balance, &error);
+        if (error.code == ABC_CC_Ok) {
+            wallet.balance = balance;
+        } else {
+            wallet.balance = 0;
+        }
+    }
+
     bool archived = false;
-    tABC_Error error;
     ABC_WalletArchived([[User Singleton].name UTF8String], [uuid UTF8String], &archived, &error);
     wallet.archived = archived ? YES : NO;
 
@@ -453,30 +485,11 @@ static BOOL bOtpError = NO;
     [CoreBridge loadWalletUUIDs:arrayUuids];
 
     for (NSString *uuid in arrayUuids) {
-        if (![CoreBridge watcherExists:uuid]) {
-            Wallet *wallet = [CoreBridge createLoadingWallet:uuid];
-            [arrayWallets addObject:wallet];
-        } else {
-            tABC_Error Error;
-            tABC_WalletInfo *pWalletInfo = NULL;
-            tABC_CC result = ABC_GetWalletInfo(
-                    [[User Singleton].name UTF8String],
-                    [[User Singleton].password UTF8String],
-                    [uuid UTF8String],
-                    &pWalletInfo, &Error);
-            if (ABC_CC_Ok == result && pWalletInfo != NULL) {
-                Wallet *wallet = [[Wallet alloc] init];
-                [CoreBridge setWallet:wallet withInfo:pWalletInfo];
-                [arrayWallets addObject:wallet];
-                if (bWithTx) {
-                    [self loadTransactions:wallet];
-                }
-            } else {
-                ABLog(2,@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
-                [Util printABC_Error:&Error];
-            }
-            ABC_FreeWalletInfo(pWalletInfo);
+        Wallet *wallet = [CoreBridge getWalletFromCore:uuid];
+        if (bWithTx && wallet.loaded) {
+            [self loadTransactions:wallet];
         }
+        [arrayWallets addObject:wallet];
     }
     ABLog(2,@"EXIT loadWallets: %@", [NSThread currentThread].name);
 
@@ -700,25 +713,6 @@ static BOOL bOtpError = NO;
 
 + (Wallet *)getWallet: (NSString *)walletUUID
 {
-//    tABC_Error Error;
-//    Wallet *wallet = nil;
-//    tABC_WalletInfo *pWalletInfo = NULL;
-//    tABC_CC result = ABC_GetWalletInfo([[User Singleton].name UTF8String],
-//                                       [[User Singleton].password UTF8String],
-//                                       [walletUUID UTF8String],
-//                                       &pWalletInfo, &Error);
-//    if (ABC_CC_Ok == result && pWalletInfo != NULL)
-//    {
-//        wallet = [[Wallet alloc] init];
-//        [CoreBridge setWallet:wallet withInfo:pWalletInfo];
-//    }
-//    else
-//    {
-//        ABLog(2,@("Error: CoreBridge.reloadWallets:  %s\n"), Error.szDescription);
-//        [Util printABC_Error:&Error];
-//    }
-//    ABC_FreeWalletInfo(pWalletInfo);
-
     for (Wallet *w in singleton.arrayWallets)
     {
         if ([w.strUUID isEqualToString:walletUUID])
@@ -814,6 +808,7 @@ static BOOL bOtpError = NO;
             t.balance = bal;
         }
         wallet.arrayTransactions = arrayTransactions;
+        wallet.balance = bal;
     }
     else
     {
@@ -821,21 +816,6 @@ static BOOL bOtpError = NO;
         [Util printABC_Error:&Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
-}
-
-+ (void)setWallet:(Wallet *) wallet withInfo:(tABC_WalletInfo *) pWalletInfo
-{
-    ABLog(2,@"ENTER setWallet: %@", [NSThread currentThread].name);
-    wallet.strUUID = [NSString stringWithUTF8String: pWalletInfo->szUUID];
-    wallet.strName = [NSString stringWithUTF8String: pWalletInfo->szName];
-    wallet.archived = pWalletInfo->archived;
-    wallet.balance = pWalletInfo->balanceSatoshi;
-    wallet.currencyNum = pWalletInfo->currencyNum;
-    wallet.currencyAbbrev = [CoreBridge currencyAbbrevLookup:wallet.currencyNum];
-    wallet.currencySymbol = [CoreBridge currencySymbolLookup:wallet.currencyNum];
-    ABLog(2,@"      setWallet: Currency %d %@ %@", pWalletInfo->currencyNum, wallet.currencyAbbrev, wallet.currencySymbol) ;
-    wallet.loaded = wallet.currencyNum == -1 ? NO : YES;
-    ABLog(2,@"EXIT setWallet: %@", [NSThread currentThread].name);
 }
 
 + (void)setTransaction:(Wallet *) wallet transaction:(Transaction *) transaction coreTx:(tABC_TxInfo *) pTrans
@@ -891,7 +871,10 @@ static BOOL bOtpError = NO;
     if (ABC_TxHeight([wallet.strUUID UTF8String], [txId UTF8String], &txHeight, &Error) != ABC_CC_Ok) {
         *syncing = YES;
         if (txHeight < 0)
+        {
+            ABLog(0, @"calcTxConfirmations returning negative txHeight=%d", txHeight);
             return txHeight;
+        }
         else
             return 0;
     }
@@ -902,7 +885,14 @@ static BOOL bOtpError = NO;
     if (txHeight == 0 || blockHeight == 0) {
         return 0;
     }
-    return (blockHeight - txHeight) + 1;
+    
+    int retHeight = (blockHeight - txHeight) + 1;
+    
+    if (retHeight < 0)
+    {
+        retHeight = 0;
+    }
+    return retHeight;
 }
 
 + (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions 
