@@ -94,9 +94,10 @@
 @property (nonatomic) NSString *confirmationText;
 @property (nonatomic) NSString *confirmationsText;
 @property (nonatomic) NSString *loadingText;
-
-
-
+@property (nonatomic) NSString *uploadingLogText;
+@property (nonatomic) NSString *uploadSuccessfulText;
+@property (nonatomic) NSString *uploadFailedText;
+@property (nonatomic) NSString *watcherClearedText;
 
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
 @property (nonatomic) CGFloat buttonFontSize;

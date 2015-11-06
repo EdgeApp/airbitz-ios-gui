@@ -101,6 +101,7 @@
 - (IBAction)uploadLogs:(id)sender
 {
     ABLog(2,@"Uploading Logs\n");
+    [MainViewController fadingAlert:[Theme Singleton].uploadingLogText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
 
     [CoreBridge postToMiscQueue:^{
         tABC_Error Error;
@@ -110,21 +111,11 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             if (ABC_CC_Ok == Error.code)
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
-                                                                message:@"Upload Succeeded"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-                [alert show];
+                [MainViewController fadingAlert:[Theme Singleton].uploadSuccessfulText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }
             else
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
-                                                                message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-                [alert show];
+                [MainViewController fadingAlert:[Theme Singleton].uploadFailedText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }
 
         });
@@ -148,6 +139,7 @@
         [CoreBridge startWatchers];
         dispatch_async(dispatch_get_main_queue(), ^(void){
             self.clearWatcherButton.titleLabel.text = buttonText;
+            [MainViewController fadingAlert:[Theme Singleton].watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
         });
     }];
 }

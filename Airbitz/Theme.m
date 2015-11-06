@@ -132,6 +132,10 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.confirmationsText                                  = NSLocalizedString(@"Confirmations", @"Num of confirmations in transaction list");
     self.confirmedText                                      = NSLocalizedString(@"Confirmed", @"Confirmed status in transaction list");
     self.loadingText                                        = NSLocalizedString(@"Loading", @"Loading...");
+    self.uploadingLogText                                   = NSLocalizedString(@"Uploading logfile. Please wait...", @"Uploading logfile fading popup");
+    self.uploadSuccessfulText                               = NSLocalizedString(@"Upload Successful", @"Upload Successful fading popup");
+    self.uploadFailedText                                   = NSLocalizedString(@"Upload Failed", @"Upload Failed");
+    self.watcherClearedText                                 = NSLocalizedString(@"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync", @"Watcher Database Cleared popup text");
 
 //    self.                         = NSLocalizedString(@"", @"");
 
