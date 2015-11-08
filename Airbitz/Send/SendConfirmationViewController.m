@@ -868,6 +868,7 @@
 - (void)ConfirmationSliderDidConfirm:(ConfirmationSliderView *)controller
 {
     [self dismissErrorMessage];
+    [self dismissKeyboard];
 
     User *user = [User Singleton];
 
