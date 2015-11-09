@@ -839,12 +839,17 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 	if (result == ABC_CC_Ok)
 	{
-		return pRequestID;
+        result = ABC_ModifyReceiveRequest([[User Singleton].name UTF8String],
+                                          [[User Singleton].password UTF8String],
+                                          [strUUID UTF8String],
+                                          pRequestID,
+                                          &_details,
+                                          &error);
+        if (ABC_CC_Ok == result)
+            return pRequestID;
 	}
-	else
-	{
-		return 0;
-	}
+    
+    return 0;
 }
 
 
