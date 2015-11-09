@@ -136,6 +136,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    [MainViewController fadingAlertDismiss];
 
     bWalletListDropped = false;
 
