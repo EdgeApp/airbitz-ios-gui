@@ -480,7 +480,7 @@ static const NSString *PROTOCOL = @"bridge://";
 	details.attributes = 0x0;
     details.bizId = 0;
 
-	char *pRequestID;
+	char *pRequestID = NULL;
 
     // create the request
 	ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
@@ -488,16 +488,33 @@ static const NSString *PROTOCOL = @"bridge://";
                              [wallet.strUUID UTF8String],
                              &details, &pRequestID, &error);
 	if (error.code == ABC_CC_Ok) {
-        NSString *requestId = [NSString stringWithUTF8String:pRequestID];
-        NSString *address = [self getRequestAddress:pRequestID withWallet:wallet];
-        NSDictionary *d = @{@"requestId": requestId, @"address": address};
-        results = [self jsonResult:d];
-        if (pRequestID) {
-            free(pRequestID);
+        ABC_ModifyReceiveRequest([[User Singleton].name UTF8String],
+                                 [[User Singleton].password UTF8String],
+                                 [wallet.strUUID UTF8String],
+                                 pRequestID,
+                                 &details,
+                                 &error);
+        
+        if (ABC_CC_Ok == error.code)
+        {
+            NSString *requestId = [NSString stringWithUTF8String:pRequestID];
+            NSString *address = [self getRequestAddress:pRequestID withWallet:wallet];
+            NSDictionary *d = @{@"requestId": requestId, @"address": address};
+            results = [self jsonResult:d];
+        }
+        else
+        {
+            results = [self jsonError];
         }
 	} else {
         results = [self jsonError];
 	}
+    
+    if (pRequestID)
+    {
+        free(pRequestID);
+    }
+
     [self callJsFunction:cbid withArgs:results];
 }
 
