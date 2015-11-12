@@ -38,6 +38,12 @@
 @property (nonatomic) BOOL    bTranslucencyEnable;
 
 @property (nonatomic) NSString *appFont;
+
+@property (nonatomic) NSString *appTitle;
+@property (nonatomic) NSString *supportEmail;
+@property (nonatomic) NSString *appStoreLink;
+@property (nonatomic) NSString *playStoreLink;
+
 @property (nonatomic) NSString *backButtonText;
 @property (nonatomic) NSString *exitButtonText;
 @property (nonatomic) NSString *helpButtonText;

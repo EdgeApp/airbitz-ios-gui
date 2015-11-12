@@ -7,6 +7,7 @@
 
 #import "InfoView.h"
 #import "DarkenView.h"
+#import "Util.h"
 #import "MainViewController.h"
 
 @interface InfoView () <UIWebViewDelegate, UIScrollViewDelegate>
@@ -80,7 +81,10 @@ static NSString *currentHtml = nil;
 
     [iv enableScrolling:YES];
 	NSString* path = [[NSBundle mainBundle] pathForResource:strHTML ofType:@"html"];
-	iv.htmlInfoToDisplay = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    [Util replaceHtmlTags:&content];
+
+    iv.htmlInfoToDisplay = content;
     [theView addSubview:iv];
     currentView = iv;
     currentHtml = strHTML;

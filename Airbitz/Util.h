@@ -65,7 +65,7 @@ void abDebugLog(int level, NSString *statement);
 + (NSArray *)insertSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController aboveSubView:(UIView *)aboveView;
 + (NSArray *)addSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController;
 + (NSArray *)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView;
-
++ (void)replaceHtmlTags:(NSString **) strContent;
 
 
 @end

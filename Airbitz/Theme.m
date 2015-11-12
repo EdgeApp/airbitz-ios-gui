@@ -45,6 +45,11 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 {
     self = [super init];
 
+    self.appTitle = @"Airbitz";
+    self.supportEmail = @"support@airbitz.co";
+    self.appStoreLink = @"https://itunes.apple.com/us/app/airbitz/id843536046";
+    self.playStoreLink = @"https://play.google.com/store/apps/details?id=com.airbitz";
+
     //    self.denomination = 100000000;
     self.colorTextBright = [UIColor whiteColor];
     self.colorTextDark = UIColorFromARGB(0xff0C578C);;
@@ -121,7 +126,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.touchIDPromptText                                  = NSLocalizedString(@"Touch to login user", @"Touch ID prompt text");
     self.usePINText                                         = NSLocalizedString(@"Use PIN", @"Touch ID [Use PIN] button");
     self.usePasswordText                                    = NSLocalizedString(@"Use Password", @"Touch ID [Use Password] button");
-    self.twofactorWarningText                               = NSLocalizedString(@"Two Factor Enabled\n\n** Warning **\n\nIf you lose your device or uninstall the Airbitz app, it will take 7 days to disable 2FA and access your account.\"", @"2FA warning on enable");
+    self.twofactorWarningText                               = NSLocalizedString(@"Two Factor Enabled\n\n** Warning **\n\nIf you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"", @"2FA warning on enable");
     self.loadingWalletsText                                 = NSLocalizedString(@"Loading Wallets...", @"Loading wallets alert text");
     self.loadingWalletsNewDeviceText                        = NSLocalizedString(@"This may take a few minutes as it is the first time logging into this device.", @"Loading Wallets alert text");
     self.loadingTransactionsText                            = NSLocalizedString(@"Loading Transactions...", @"Loading Transactions alert text");

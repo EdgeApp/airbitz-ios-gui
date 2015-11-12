@@ -423,14 +423,10 @@ static bool bInitialized = false;
     [iv enableScrolling: NO];
     [self.view addSubview: iv];
 
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-
-    NSString *versionbuild = [NSString stringWithFormat:@"%@ %@", version, build];
-
     NSString *path = [[NSBundle mainBundle] pathForResource: @"info" ofType: @"html"];
     NSString *content = [NSString stringWithContentsOfFile: path encoding: NSUTF8StringEncoding error: NULL];
-    iv.htmlInfoToDisplay = [content stringByReplacingOccurrencesOfString: @"*" withString: versionbuild];;
+    [Util replaceHtmlTags:&content];
+    iv.htmlInfoToDisplay = content;
 }
 
 #pragma mark Back Button
