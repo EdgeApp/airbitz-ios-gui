@@ -163,9 +163,9 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.rotateServerInterval                   = 15.0;     // How long (in seconds) before we rotate libbitcoin servers while waiting on QR code screen
     self.walletLoadingTimerInterval             = 30.0;     // How long to wait between wallet updates on new device logins before we consider the account fully loaded
 
-    self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];
-    self.backgroundLogin = [UIImage imageNamed:@"postcard-mountain.png"];
-
+    self.backgroundApp = [UIImage imageNamed:@"background-fade.jpg"];
+    self.backgroundLogin = [UIImage imageNamed:@"background.jpg"];
+    
 //    if (IS_IPHONE4)
     {
         self.heightListings = 90.0;
