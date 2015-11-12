@@ -1387,7 +1387,7 @@
                                                     <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" translatesAutoresizingMaskIntoConstraints="NO" id="eY0-zc-Tda" userLabel="Image View - photo">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="eY0-zc-Tda" userLabel="Image View - photo">
                                                     <rect key="frame" x="9" y="11" width="50" height="50"/>
                                                     <animations/>
                                                     <constraints>
@@ -2312,7 +2312,7 @@
                                                             <action selector="imagePhotoTouched:" destination="Gtr-aC-t0S" eventType="touchUpInside" id="x0R-0X-158"/>
                                                         </connections>
                                                     </button>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" translatesAutoresizingMaskIntoConstraints="NO" id="bWb-oS-cFc">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="bWb-oS-cFc">
                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                         <animations/>
                                                         <constraints>
@@ -2664,7 +2664,7 @@
                                         </constraints>
                                         <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </activityIndicatorView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" translatesAutoresizingMaskIntoConstraints="NO" id="CRP-JF-TAp">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="CRP-JF-TAp">
                                         <rect key="frame" x="125" y="241" width="126" height="165"/>
                                         <animations/>
                                         <constraints>
@@ -3913,7 +3913,7 @@
         <image name="icon_request.png" width="36" height="36"/>
         <image name="icon_send.png" width="36" height="36"/>
         <image name="icon_transactions.png" width="36" height="36"/>
-        <image name="logo_bitcoin.png" width="126" height="165"/>
+        <image name="logo_icon.png" width="126" height="165"/>
         <image name="logo_large.png" width="208" height="106"/>
         <image name="postcard-mountain-blue.jpg" width="843" height="568"/>
         <image name="postcard-mountain.png" width="843" height="568"/>
