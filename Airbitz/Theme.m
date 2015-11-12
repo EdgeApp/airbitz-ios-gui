@@ -46,16 +46,13 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self = [super init];
 
     self.appTitle = @"Airbitz";
+    self.appHomepage = @"https://coinbtm.com";
     self.supportEmail = @"support@airbitz.co";
     self.appStoreLink = @"https://itunes.apple.com/us/app/airbitz/id843536046";
     self.playStoreLink = @"https://play.google.com/store/apps/details?id=com.airbitz";
-
-#ifdef WL_COINBTM
-    self.appTitle = @"Rack";
-    self.supportEmail = @"support@coinbtm.com";
-    self.appStoreLink = @"https://itunes.apple.com/us/app/airbitz/id843536046";
-    self.playStoreLink = @"https://play.google.com/store/apps/details?id=com.airbitz";
-#endif
+    self.appLogoWhiteLink = @"https://airbitz.co/static/img/logo-nav.png";
+    self.appDesignedBy = NSLocalizedString(@"Designed and Built by Airbitz in",nil);
+    self.appCompanyLocation = NSLocalizedString(@"San Diego, California, USA", nil);
 
     //    self.denomination = 100000000;
     self.colorTextBright = [UIColor whiteColor];

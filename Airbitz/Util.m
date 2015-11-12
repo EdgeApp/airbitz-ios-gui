@@ -112,6 +112,10 @@ void abDebugLog(int level, NSString *statement) {
             @"[[abtag APP_TITLE]]",
             @"[[abtag APP_STORE_LINK]]",
             @"[[abtag PLAY_STORE_LINK]]",
+            @"[[abtag APP_HOMEPAGE]]",
+            @"[[abtag APP_LOGO_WHITE_LINK]]",
+            @"[[abtag APP_DESIGNED_BY]]",
+            @"[[abtag APP_COMPANY_LOCATION]]",
             @"[[abtag APP_VERSION]]",
                     nil];
 
@@ -119,6 +123,10 @@ void abDebugLog(int level, NSString *statement) {
             [Theme Singleton].appTitle,
             [Theme Singleton].appStoreLink,
             [Theme Singleton].playStoreLink,
+            [Theme Singleton].appHomepage,
+            [Theme Singleton].appLogoWhiteLink,
+            [Theme Singleton].appDesignedBy,
+            [Theme Singleton].appCompanyLocation,
             versionbuild,
                     nil];
 
