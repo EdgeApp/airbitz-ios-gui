@@ -1511,6 +1511,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                                                       encoding:NSUTF8StringEncoding
                                                          error:&error];
         [self replaceRequestTags:&content];
+        [Util replaceHtmlTags:&content];
 
         // create the attachment
         UIImage *imageAttachment = [self imageWithImage:self.qrCodeImageView.image scaledToSize:CGSizeMake(QR_ATTACHMENT_WIDTH, QR_ATTACHMENT_WIDTH)];
