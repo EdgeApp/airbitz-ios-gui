@@ -16,7 +16,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" id="AQO-eB-WGC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_icon.png" id="AQO-eB-WGC">
                     <rect key="frame" x="171" y="170" width="139" height="139"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -29,6 +29,6 @@
     </objects>
     <resources>
         <image name="background_launch.png" width="640" height="640"/>
-        <image name="logo_bitcoin.png" width="126" height="165"/>
+        <image name="logo_icon.png" width="126" height="165"/>
     </resources>
 </document>
