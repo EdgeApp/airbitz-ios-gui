@@ -1448,6 +1448,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                                                       encoding:NSUTF8StringEncoding
                                                          error:&error];
         [self replaceRequestTags:&content];
+        [Util replaceHtmlTags:&content];
 
         MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
 
@@ -1460,11 +1461,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         if ([User Singleton].bNameOnPayments && [User Singleton].fullName)
         {
-            subject = [NSString stringWithFormat:@"Airbitz Bitcoin Request from %@", [User Singleton].fullName];
+            subject = [NSString stringWithFormat:@"%@ Bitcoin Request from %@", [Theme Singleton].appTitle, [User Singleton].fullName];
         }
         else
         {
-            subject = [NSString stringWithFormat:@"Airbitz Bitcoin Request"];
+            subject = [NSString stringWithFormat:@"%@ Bitcoin Request", [Theme Singleton].appTitle];
         }
 
         [mailComposer setSubject:NSLocalizedString(subject, nil)];
@@ -1652,7 +1653,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         case MessageComposeResultCancelled:
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Airbitz"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Theme Singleton].appTitle
                                                             message:@"SMS cancelled"
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
@@ -1663,7 +1664,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         case MessageComposeResultFailed:
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Airbitz"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Theme Singleton].appTitle
                                                             message:@"Error sending SMS"
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
@@ -1674,7 +1675,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         case MessageComposeResultSent:
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Airbitz"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Theme Singleton].appTitle
                                                             message:@"SMS sent"
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
@@ -1761,7 +1762,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Airbitz"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Theme Singleton].appTitle
                                                         message:(controller.mode == RecipientMode_SMS ? @"SMS cancelled" : @"Email cancelled")
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"OK", nil)
