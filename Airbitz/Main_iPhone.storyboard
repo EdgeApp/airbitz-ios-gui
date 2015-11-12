@@ -116,13 +116,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="postcard-mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-NB-3KY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-NB-3KY">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="postcard-mountain-blue.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="I33-Mp-005">
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-fade.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="I33-Mp-005">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3891,6 +3891,7 @@
         <image name="BLE_Logo.png" width="21" height="29"/>
         <image name="UIButtonBarRefresh.png" width="18" height="22"/>
         <image name="back_arrow.png" width="30" height="30"/>
+        <image name="background-fade.jpg" width="640" height="640"/>
         <image name="background.jpg" width="320" height="568"/>
         <image name="bd_cell_bottom.png" width="12" height="12"/>
         <image name="bd_cell_middle.png" width="6" height="6"/>
@@ -3915,8 +3916,6 @@
         <image name="icon_transactions.png" width="36" height="36"/>
         <image name="logo_icon.png" width="126" height="165"/>
         <image name="logo_large.png" width="208" height="106"/>
-        <image name="postcard-mountain-blue.jpg" width="843" height="568"/>
-        <image name="postcard-mountain.png" width="843" height="568"/>
         <image name="scan_frame.png" width="271" height="226"/>
         <image name="swipe-arrow.png" width="34" height="18"/>
     </resources>
