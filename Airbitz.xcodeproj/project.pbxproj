@@ -487,6 +487,12 @@
 		DA27C1021BF457EE0021F356 /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA27C0FE1BF457EE0021F356 /* background@2x.jpg */; };
 		DA27C1031BF457EE0021F356 /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA27C0FE1BF457EE0021F356 /* background@2x.jpg */; };
 		DA27C1041BF457EE0021F356 /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA27C0FE1BF457EE0021F356 /* background@2x.jpg */; };
+		DA27C1071BF4594A0021F356 /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA27C1051BF4594A0021F356 /* background-fade@2x.jpg */; };
+		DA27C1081BF4594A0021F356 /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA27C1061BF4594A0021F356 /* background@2x.jpg */; };
+		DA27C10A1BF45B530021F356 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DA27C1091BF45B530021F356 /* background_launch.png */; };
+		DA27C10B1BF45BD50021F356 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7A11BC61E680063DA07 /* LaunchScreen.xib */; };
+		DA27C10C1BF45BD50021F356 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7A11BC61E680063DA07 /* LaunchScreen.xib */; };
+		DA27C10D1BF45BD60021F356 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7A11BC61E680063DA07 /* LaunchScreen.xib */; };
 		DA9ED6ED1BC607FA0063DA07 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */; };
 		DA9ED6F11BC607FA0063DA07 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */; };
 		DA9ED6F81BC607FA0063DA07 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -528,7 +534,6 @@
 		DA9ED7DF1BC61E680063DA07 /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED79D1BC61E670063DA07 /* InfoView.m */; };
 		DA9ED7E01BC61E680063DA07 /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED79E1BC61E680063DA07 /* InfoView~iphone.xib */; };
 		DA9ED7E11BC61E680063DA07 /* LatoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A01BC61E680063DA07 /* LatoLabel.m */; };
-		DA9ED7E21BC61E680063DA07 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7A11BC61E680063DA07 /* LaunchScreen.xib */; };
 		DA9ED7E41BC61E680063DA07 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A41BC61E680063DA07 /* MainViewController.m */; };
 		DA9ED7E51BC61E680063DA07 /* MinCharTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A61BC61E680063DA07 /* MinCharTextField.m */; };
 		DA9ED7E71BC61E680063DA07 /* NotificationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AA1BC61E680063DA07 /* NotificationChecker.m */; };
@@ -1208,7 +1213,6 @@
 		DA9EF4791BC7285D0063DA07 /* large-digit-input@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB01BC61F920063DA07 /* large-digit-input@2x.png */; };
 		DA9EF47A1BC7285D0063DA07 /* btn_collapse_expand@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF2D1BC61F910063DA07 /* btn_collapse_expand@4x.png */; };
 		DA9EF47B1BC7285D0063DA07 /* icon_not_approved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF8A1BC61F910063DA07 /* icon_not_approved@2x.png */; };
-		DA9EF47C1BC7285D0063DA07 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7A11BC61E680063DA07 /* LaunchScreen.xib */; };
 		DA9EF47D1BC7285D0063DA07 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCC1BC61F920063DA07 /* Lato-Bold.ttf */; };
 		DA9EF47F1BC7285D0063DA07 /* icon_bitcoin_symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF621BC61F910063DA07 /* icon_bitcoin_symbol.png */; };
 		DA9EF4801BC7285D0063DA07 /* icon_export_printer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF7E1BC61F910063DA07 /* icon_export_printer@2x.png */; };
@@ -1637,7 +1641,6 @@
 		DA9EF6401BC729FA0063DA07 /* large-digit-input@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB01BC61F920063DA07 /* large-digit-input@2x.png */; };
 		DA9EF6411BC729FA0063DA07 /* btn_collapse_expand@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF2D1BC61F910063DA07 /* btn_collapse_expand@4x.png */; };
 		DA9EF6421BC729FA0063DA07 /* icon_not_approved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF8A1BC61F910063DA07 /* icon_not_approved@2x.png */; };
-		DA9EF6431BC729FA0063DA07 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7A11BC61E680063DA07 /* LaunchScreen.xib */; };
 		DA9EF6441BC729FA0063DA07 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCC1BC61F920063DA07 /* Lato-Bold.ttf */; };
 		DA9EF6461BC729FA0063DA07 /* icon_bitcoin_symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF621BC61F910063DA07 /* icon_bitcoin_symbol.png */; };
 		DA9EF6471BC729FA0063DA07 /* icon_export_printer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF7E1BC61F910063DA07 /* icon_export_printer@2x.png */; };
@@ -1950,6 +1953,9 @@
 		DA27C0FB1BF44EA20021F356 /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Theme.m; path = CoinBTM/Theme.m; sourceTree = "<group>"; };
 		DA27C0FD1BF457EE0021F356 /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DA27C0FE1BF457EE0021F356 /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
+		DA27C1051BF4594A0021F356 /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "background-fade@2x.jpg"; path = "CoinBTM/background-fade@2x.jpg"; sourceTree = "<group>"; };
+		DA27C1061BF4594A0021F356 /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "background@2x.jpg"; path = "CoinBTM/background@2x.jpg"; sourceTree = "<group>"; };
+		DA27C1091BF45B530021F356 /* background_launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_launch.png; path = CoinBTM/background_launch.png; sourceTree = "<group>"; };
 		DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Airbitz Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		DA9ED6EF1BC607FA0063DA07 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
@@ -2913,9 +2919,12 @@
 			isa = PBXGroup;
 			children = (
 				DA27C0FB1BF44EA20021F356 /* Theme.m */,
+				DA27C1091BF45B530021F356 /* background_launch.png */,
 				DA27C0E61BF443010021F356 /* logo_icon@2x.png */,
 				DA27C0E71BF443010021F356 /* logo_large@2x.png */,
 				DA27C0E81BF443010021F356 /* logo@2x.png */,
+				DA27C1051BF4594A0021F356 /* background-fade@2x.jpg */,
+				DA27C1061BF4594A0021F356 /* background@2x.jpg */,
 				DA27C0E01BF43B510021F356 /* CoinBTM Widget.plist */,
 				DA27C0DE1BF43B450021F356 /* CoinBTM-Info.plist */,
 				DA27C0DB1BF43B130021F356 /* CoinBTM.entitlements */,
@@ -4318,6 +4327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA27C1071BF4594A0021F356 /* background-fade@2x.jpg in Resources */,
 				DA27BFC61BF431010021F356 /* icon_logout@2x.png in Resources */,
 				DA27BFC71BF431010021F356 /* btn_locateMe@2x.png in Resources */,
 				DA27BFC81BF431010021F356 /* icon_settings@2x.png in Resources */,
@@ -4387,6 +4397,8 @@
 				DA27C0081BF431010021F356 /* large-digit-input_selected@2x.png in Resources */,
 				DA27C0091BF431010021F356 /* BalanceView~ipad.xib in Resources */,
 				DA27C00B1BF431010021F356 /* btn_add@3x.png in Resources */,
+				DA27C10A1BF45B530021F356 /* background_launch.png in Resources */,
+				DA27C1081BF4594A0021F356 /* background@2x.jpg in Resources */,
 				DA27C00C1BF431010021F356 /* btn_collapse_expand_black.png in Resources */,
 				DA27C00D1BF431010021F356 /* btn_export@2x.png in Resources */,
 				DA27C00E1BF431010021F356 /* icon_bitcoin_dark@2x.png in Resources */,
@@ -4612,6 +4624,7 @@
 				DA9EF4131BC7285D0063DA07 /* btn_export@3x.png in Resources */,
 				DA9EF4141BC7285D0063DA07 /* bd_icon_foursquare@2x.png in Resources */,
 				DA9EF4151BC7285D0063DA07 /* icon_category_restaurants@2x.png in Resources */,
+				DA27C10B1BF45BD50021F356 /* LaunchScreen.xib in Resources */,
 				DA9EF4171BC7285D0063DA07 /* btn_add_black@3x.png in Resources */,
 				DA9EF4181BC7285D0063DA07 /* ButtonSelectorView2.xib in Resources */,
 				DA9EF4191BC7285D0063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
@@ -4711,7 +4724,6 @@
 				DA9EF4791BC7285D0063DA07 /* large-digit-input@2x.png in Resources */,
 				DA9EF47A1BC7285D0063DA07 /* btn_collapse_expand@4x.png in Resources */,
 				DA9EF47B1BC7285D0063DA07 /* icon_not_approved@2x.png in Resources */,
-				DA9EF47C1BC7285D0063DA07 /* LaunchScreen.xib in Resources */,
 				DA9EF47D1BC7285D0063DA07 /* Lato-Bold.ttf in Resources */,
 				DA9EF47F1BC7285D0063DA07 /* icon_bitcoin_symbol.png in Resources */,
 				DA9EF4801BC7285D0063DA07 /* icon_export_printer@2x.png in Resources */,
@@ -4878,6 +4890,7 @@
 				DA9EF5DA1BC729FA0063DA07 /* btn_export@3x.png in Resources */,
 				DA9EF5DB1BC729FA0063DA07 /* bd_icon_foursquare@2x.png in Resources */,
 				DA9EF5DC1BC729FA0063DA07 /* icon_category_restaurants@2x.png in Resources */,
+				DA27C10D1BF45BD60021F356 /* LaunchScreen.xib in Resources */,
 				DA9EF5DE1BC729FA0063DA07 /* btn_add_black@3x.png in Resources */,
 				DA9EF5DF1BC729FA0063DA07 /* ButtonSelectorView2.xib in Resources */,
 				DA9EF5E01BC729FA0063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
@@ -4978,7 +4991,6 @@
 				DA9EF6401BC729FA0063DA07 /* large-digit-input@2x.png in Resources */,
 				DA9EF6411BC729FA0063DA07 /* btn_collapse_expand@4x.png in Resources */,
 				DA9EF6421BC729FA0063DA07 /* icon_not_approved@2x.png in Resources */,
-				DA9EF6431BC729FA0063DA07 /* LaunchScreen.xib in Resources */,
 				DA9EF6441BC729FA0063DA07 /* Lato-Bold.ttf in Resources */,
 				DA9EF6461BC729FA0063DA07 /* icon_bitcoin_symbol.png in Resources */,
 				DA9EF6471BC729FA0063DA07 /* icon_export_printer@2x.png in Resources */,
@@ -5241,7 +5253,6 @@
 				DA9EE4D11BC61F920063DA07 /* large-digit-input@2x.png in Resources */,
 				DA9EE4501BC61F920063DA07 /* btn_collapse_expand@4x.png in Resources */,
 				DA9EE4AD1BC61F920063DA07 /* icon_not_approved@2x.png in Resources */,
-				DA9ED7E21BC61E680063DA07 /* LaunchScreen.xib in Resources */,
 				DA9EE4E91BC61F920063DA07 /* Lato-Bold.ttf in Resources */,
 				DA9EE4851BC61F920063DA07 /* icon_bitcoin_symbol.png in Resources */,
 				DA9EE4A11BC61F920063DA07 /* icon_export_printer@2x.png in Resources */,
@@ -5324,6 +5335,7 @@
 				DA9EE4B01BC61F920063DA07 /* icon_request@3x.png in Resources */,
 				DA9EE4B31BC61F920063DA07 /* icon_rightArrow@2x.png in Resources */,
 				DA9EE4DA1BC61F920063DA07 /* Red-X@2x.png in Resources */,
+				DA27C10C1BF45BD50021F356 /* LaunchScreen.xib in Resources */,
 				DA9EE4E51BC61F920063DA07 /* api.cer in Resources */,
 				DA9EE43A1BC61F920063DA07 /* btn_add.png in Resources */,
 				DA27C0FF1BF457EE0021F356 /* background-fade@2x.jpg in Resources */,
