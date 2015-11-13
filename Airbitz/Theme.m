@@ -46,7 +46,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self = [super init];
 
     self.appTitle = @"Airbitz";
-    self.appHomepage = @"https://coinbtm.com";
+    self.appHomepage = @"https://airbitz.co";
     self.supportEmail = @"support@airbitz.co";
     self.appStoreLink = @"https://itunes.apple.com/us/app/airbitz/id843536046";
     self.playStoreLink = @"https://play.google.com/store/apps/details?id=com.airbitz";
