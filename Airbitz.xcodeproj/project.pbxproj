@@ -446,7 +446,6 @@
 		DA27C0B51BF431010021F356 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD11BC61F920063DA07 /* Lato-Light.ttf */; };
 		DA27C0B61BF431010021F356 /* infoSettings.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFE31BC61F920063DA07 /* infoSettings.html */; };
 		DA27C0B71BF431010021F356 /* icon_account_secure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5A1BC61F910063DA07 /* icon_account_secure@2x.png */; };
-		DA27C0B81BF431010021F356 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB21BC61F920063DA07 /* logo@2x.png */; };
 		DA27C0B91BF431010021F356 /* btn_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF3D1BC61F910063DA07 /* btn_selected@2x.png */; };
 		DA27C0BA1BF431010021F356 /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD81BC61F920063DA07 /* emailTemplate.html */; };
 		DA27C0BB1BF431010021F356 /* icon_account_secure@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5C1BC61F910063DA07 /* icon_account_secure@4x.png */; };
@@ -459,7 +458,6 @@
 		DA27C0C21BF431010021F356 /* infoImportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDC1BC61F920063DA07 /* infoImportWallet.html */; };
 		DA27C0C31BF431010021F356 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7C31BC61E680063DA07 /* SyncView~iphone.xib */; };
 		DA27C0C41BF431010021F356 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCE1BC61F920063DA07 /* Lato-Hairline.ttf */; };
-		DA27C0C51BF431010021F356 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB41BC61F920063DA07 /* logo_large@2x.png */; };
 		DA27C0C61BF431010021F356 /* btn_collapse_expand_black@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF311BC61F910063DA07 /* btn_collapse_expand_black@4x.png */; };
 		DA27C0C71BF431010021F356 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
 		DA27C0C81BF431010021F356 /* infoSpendingLimits.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFE41BC61F920063DA07 /* infoSpendingLimits.html */; };
@@ -4571,7 +4569,6 @@
 				DA27C0B51BF431010021F356 /* Lato-Light.ttf in Resources */,
 				DA27C0B61BF431010021F356 /* infoSettings.html in Resources */,
 				DA27C0B71BF431010021F356 /* icon_account_secure@2x.png in Resources */,
-				DA27C0B81BF431010021F356 /* logo@2x.png in Resources */,
 				DA27C0B91BF431010021F356 /* btn_selected@2x.png in Resources */,
 				DA27C0BA1BF431010021F356 /* emailTemplate.html in Resources */,
 				DA27C0BB1BF431010021F356 /* icon_account_secure@4x.png in Resources */,
@@ -4584,7 +4581,6 @@
 				DA27C0C21BF431010021F356 /* infoImportWallet.html in Resources */,
 				DA27C0C31BF431010021F356 /* SyncView~iphone.xib in Resources */,
 				DA27C0C41BF431010021F356 /* Lato-Hairline.ttf in Resources */,
-				DA27C0C51BF431010021F356 /* logo_large@2x.png in Resources */,
 				DA27C0C61BF431010021F356 /* btn_collapse_expand_black@4x.png in Resources */,
 				DA27C0C71BF431010021F356 /* btn_close_white.png in Resources */,
 				DA27C0C81BF431010021F356 /* infoSpendingLimits.html in Resources */,
