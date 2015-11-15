@@ -29,6 +29,7 @@
 #import "Keychain.h"
 #import "NSMutableData+Secure.h"
 #import "SettingsViewController.h"
+#import "InfoView.h"
 
 typedef enum eLoginMode
 {
@@ -41,7 +42,7 @@ typedef enum eLoginMode
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate >
+    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
@@ -310,6 +311,26 @@ typedef enum eReloginState
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    [[User Singleton] loadLocalSettings:nil];
+    
+    //
+    // Check if Disclaimer has ever been displayed on this device. If not, display it now
+    //
+    if ([[User Singleton] offerDisclaimer])
+    {
+        [InfoView CreateWithHTML:@"infoDisclaimer" forView:self.view agreeButton:YES delegate:self];
+    }
+    else
+    {
+        [self autoReloginOrTouchIDIfPossible];
+    }
+    
+}
+
+#pragma InfoViewDelegate
+- (void) InfoViewFinished:(InfoView *)infoView
+{
     [self autoReloginOrTouchIDIfPossible];
 }
 

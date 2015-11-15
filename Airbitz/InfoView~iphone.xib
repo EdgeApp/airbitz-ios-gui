@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -15,10 +21,12 @@
                     <subviews>
                         <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsU-OI-S1F">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="496"/>
+                            <animations/>
                             <items/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </toolbar>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -36,16 +44,19 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uvf-Ht-oNk" userLabel="BlurView">
                             <rect key="frame" x="0.0" y="0.0" width="280" height="456"/>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="8zR-Wo-WM3">
                             <rect key="frame" x="108" y="20" width="64" height="36"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="64" id="UHF-Ld-Zwx"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IzD-YB-joX">
                             <rect key="frame" x="225" y="20" width="35" height="35"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="U5a-In-YqC"/>
                                 <constraint firstAttribute="height" constant="35" id="kBG-Ls-rUE"/>
@@ -58,28 +69,49 @@
                             </connections>
                         </button>
                         <webView contentMode="scaleToFill" paginationMode="topToBottom" translatesAutoresizingMaskIntoConstraints="NO" id="1YQ-Ab-i4K">
-                            <rect key="frame" x="0.0" y="64" width="280" height="392"/>
+                            <rect key="frame" x="0.0" y="64" width="280" height="342"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </webView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sls-ic-b1n">
+                            <rect key="frame" x="0.0" y="406" width="280" height="50"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.33333333333333331" green="0.55294117647058827" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="My0-5s-tvL"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                            <state key="normal" title="Agree ">
+                                <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </state>
+                            <connections>
+                                <action selector="IAgreeButton:" destination="0sA-bv-uep" eventType="touchUpInside" id="Cqs-NV-rb4"/>
+                            </connections>
+                        </button>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="1YQ-Ab-i4K" secondAttribute="bottom" id="09d-4U-fJx"/>
                         <constraint firstAttribute="centerX" secondItem="8zR-Wo-WM3" secondAttribute="centerX" id="3kq-d8-Juz"/>
+                        <constraint firstItem="sls-ic-b1n" firstAttribute="top" secondItem="1YQ-Ab-i4K" secondAttribute="bottom" id="6Mi-CX-Uxs"/>
                         <constraint firstAttribute="trailing" secondItem="uvf-Ht-oNk" secondAttribute="trailing" id="A0o-FH-K5m"/>
                         <constraint firstAttribute="bottom" secondItem="uvf-Ht-oNk" secondAttribute="bottom" id="R4Y-Jj-pZn"/>
                         <constraint firstAttribute="trailing" secondItem="1YQ-Ab-i4K" secondAttribute="trailing" id="UiM-bE-5BM"/>
                         <constraint firstItem="uvf-Ht-oNk" firstAttribute="top" secondItem="2NU-VG-WLr" secondAttribute="top" id="Ved-8F-9vs"/>
                         <constraint firstItem="1YQ-Ab-i4K" firstAttribute="top" secondItem="8zR-Wo-WM3" secondAttribute="bottom" constant="8" symbolic="YES" id="WJ6-g3-AGo"/>
                         <constraint firstItem="IzD-YB-joX" firstAttribute="top" secondItem="2NU-VG-WLr" secondAttribute="top" constant="20" symbolic="YES" id="aKC-ok-o9q"/>
+                        <constraint firstAttribute="bottom" secondItem="sls-ic-b1n" secondAttribute="bottom" id="cgW-cQ-a6m"/>
                         <constraint firstAttribute="trailing" secondItem="IzD-YB-joX" secondAttribute="trailing" constant="20" symbolic="YES" id="cl8-jC-KVW"/>
                         <constraint firstItem="1YQ-Ab-i4K" firstAttribute="leading" secondItem="2NU-VG-WLr" secondAttribute="leading" id="gpY-K2-2dR"/>
+                        <constraint firstItem="sls-ic-b1n" firstAttribute="leading" secondItem="1YQ-Ab-i4K" secondAttribute="leading" id="kSY-3Y-HKu"/>
                         <constraint firstItem="uvf-Ht-oNk" firstAttribute="leading" secondItem="2NU-VG-WLr" secondAttribute="leading" id="kwt-fE-8Jv"/>
                         <constraint firstItem="8zR-Wo-WM3" firstAttribute="top" secondItem="2NU-VG-WLr" secondAttribute="top" constant="20" symbolic="YES" id="pmu-jK-qaX"/>
+                        <constraint firstItem="sls-ic-b1n" firstAttribute="trailing" secondItem="1YQ-Ab-i4K" secondAttribute="trailing" id="rgf-RJ-skZ"/>
                     </constraints>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
@@ -95,6 +127,9 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="agreeButton" destination="sls-ic-b1n" id="QJV-j6-pa0"/>
+                <outlet property="agreeButtonHeight" destination="My0-5s-tvL" id="cQ9-sz-SaH"/>
+                <outlet property="closeButton" destination="IzD-YB-joX" id="0aG-KB-KSn"/>
                 <outlet property="contentView" destination="2NU-VG-WLr" id="46C-lA-nJM"/>
                 <outlet property="darkenView" destination="yDO-SF-K6j" id="Jo2-HI-xUi"/>
                 <outlet property="webView" destination="1YQ-Ab-i4K" id="Zjt-BZ-TbE"/>
@@ -103,11 +138,6 @@
     </objects>
     <resources>
         <image name="btn_close.png" width="36" height="36"/>
-        <image name="logo.png" width="71" height="36"/>
+        <image name="logo.png" width="70" height="36"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
