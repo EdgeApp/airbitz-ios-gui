@@ -1628,7 +1628,8 @@ static BOOL bOtpError = NO;
         mq = (unsigned long)[miscQueue operationCount];
         lq = (unsigned long)[loadedQueue operationCount];
 
-        if (0 == (wq + dq + gq + txq + eq + mq + lq))
+//        if (0 == (wq + dq + gq + txq + eq + mq + lq))
+        if (0 == (wq + gq + txq + eq + mq + lq))
             break;
 
         ABLog(0,
@@ -2501,6 +2502,9 @@ static BOOL bOtpError = NO;
 
 - (void)notifyDataSync:(NSArray *)params
 {
+    if (! [User isLoggedIn])
+        return;
+
     unsigned long numWallets = [singleton.arrayWallets count] + [singleton.arrayArchivedWallets count];
 
     [CoreBridge refreshWallets:^
@@ -2520,6 +2524,10 @@ static BOOL bOtpError = NO;
     if (_notificationTimer) {
         [_notificationTimer invalidate];
     }
+
+    if (! [User isLoggedIn])
+        return;
+
     _notificationTimer = [NSTimer scheduledTimerWithTimeInterval:NOTIFY_DATA_SYNC_DELAY
         target:self
         selector:@selector(notifyDataSync:)
