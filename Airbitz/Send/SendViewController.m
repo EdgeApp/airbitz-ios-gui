@@ -1700,60 +1700,76 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     
 }
 
+
 - (void)doProcessSpendURI
 {
-    dispatch_async(dispatch_get_main_queue(), ^
-    {
-        if ([CoreBridge Singleton].currentWallet.loaded != YES)
-        {
-            [MainViewController fadingAlert:NSLocalizedString(@"Loading Wallet...", nil)
-                                   holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-        }
-        while ([CoreBridge Singleton].currentWallet.loaded != YES)
-        {
-            ABLog(1,@"Waiting for wallet to load: %@", [CoreBridge Singleton].currentWallet.strName);
-        }
+    [self doProcessSpendURI:0];
+}
 
-        [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
-                               holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-
-        tABC_Error error;
-        SpendTarget *spendTarget = [[SpendTarget alloc] init];
-        NSString *text = _addressTextField.text;
+- (void)doProcessSpendURI:(int) numRecursions;
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        if (numRecursions)
+        {
+            [NSThread sleepForTimeInterval:0.5f];
+        }
         
-        if (text.length)
-        {
-            // see if the text corresponds to one of the loaded wallets
-            NSInteger index = [[CoreBridge Singleton].arrayWalletNames indexOfObject:text];
-            Wallet *wallet = nil;
-            if (index != NSNotFound)
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if ([CoreBridge Singleton].currentWallet.loaded != YES)
             {
-                wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
-                if (wallet.loaded)
-                {
-                    [spendTarget newTransfer:wallet.strUUID error:&error];
-                    [self showSendConfirmationTo:spendTarget];
-                    [MainViewController fadingAlertDismiss];
-                }
+                // If the current wallet isn't loaded, callback into doProcessSpendURI and sleep
+                ABLog(1,@"Waiting for wallet to load: %@", [CoreBridge Singleton].currentWallet.strName);
                 
+                if (numRecursions < 2)
+                    [MainViewController fadingAlert:NSLocalizedString(@"Loading Wallet...", nil)
+                                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+
+                [self doProcessSpendURI:(numRecursions+1)];
+                return;
             }
             
-            if (!wallet || !wallet.loaded)
+            [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
+                                   holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+            
+            tABC_Error error;
+            SpendTarget *spendTarget = [[SpendTarget alloc] init];
+            NSString *text = _addressTextField.text;
+            
+            if (text.length)
             {
-                if (_bImportMode)
+                // see if the text corresponds to one of the loaded wallets
+                NSInteger index = [[CoreBridge Singleton].arrayWalletNames indexOfObject:text];
+                Wallet *wallet = nil;
+                if (index != NSNotFound)
                 {
-                    if ([self importWallet:text])
+                    wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
+                    if (wallet.loaded)
                     {
-                        [self stopQRReader];
+                        [spendTarget newTransfer:wallet.strUUID error:&error];
+                        [self showSendConfirmationTo:spendTarget];
+                        [MainViewController fadingAlertDismiss];
                     }
-                    [MainViewController fadingAlertDismiss];
+                    
                 }
-                else
+                
+                if (!wallet || !wallet.loaded)
                 {
-                    [self trySpend:text];
+                    if (_bImportMode)
+                    {
+                        if ([self importWallet:text])
+                        {
+                            [self stopQRReader];
+                        }
+                        [MainViewController fadingAlertDismiss];
+                    }
+                    else
+                    {
+                        [self trySpend:text];
+                    }
                 }
             }
-        }
+        });
     });
 }
 
