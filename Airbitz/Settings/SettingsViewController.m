@@ -1427,12 +1427,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 + (void) disableTouchID;
 {
     // Disable TouchID in LocalSettings
-    [[LocalSettings controller].touchIDUsersDisabled addObject:[User Singleton].name];
-    [[LocalSettings controller].touchIDUsersEnabled removeObject:[User Singleton].name];
-    [LocalSettings saveAll];
-    [Keychain updateLoginKeychainInfo:[User Singleton].name
-                             password:[User Singleton].password
-                           useTouchID:NO];
+    if ([User Singleton].name)
+    {
+        [[LocalSettings controller].touchIDUsersDisabled addObject:[User Singleton].name];
+        [[LocalSettings controller].touchIDUsersEnabled removeObject:[User Singleton].name];
+        [LocalSettings saveAll];
+        [Keychain updateLoginKeychainInfo:[User Singleton].name
+                                 password:[User Singleton].password
+                               useTouchID:NO];        
+    }
 }
 
 #pragma mark - ButtonCell Delegate
