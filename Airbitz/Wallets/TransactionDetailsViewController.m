@@ -1214,11 +1214,20 @@ typedef enum eRequestType
         _bDoneSentToDelegate = YES;
         [self.delegate TransactionDetailsViewControllerDone:self];
         if (bNotifyExit) {
-            NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_TX            : self.transaction,
-                                                KEY_TX_DETAILS_EXITED_WALLET_UUID   : self.transaction.strWalletUUID,
-                                                KEY_TX_DETAILS_EXITED_WALLET_NAME   : self.transaction.strWalletName,
-                                                KEY_TX_DETAILS_EXITED_TX_ID         : self.transaction.strID
-                                                };
+            NSDictionary *dictNotification;
+            if (self.transaction)
+            {
+                dictNotification = @{ KEY_TX_DETAILS_EXITED_TX            : self.transaction,
+                                                    KEY_TX_DETAILS_EXITED_WALLET_UUID   : self.transaction.strWalletUUID,
+                                                    KEY_TX_DETAILS_EXITED_WALLET_NAME   : self.transaction.strWalletName,
+                                                    KEY_TX_DETAILS_EXITED_TX_ID         : self.transaction.strID
+                                                    };
+            }
+            else
+            {
+                dictNotification = nil;
+            }
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:self userInfo:dictNotification];
         }
     }
