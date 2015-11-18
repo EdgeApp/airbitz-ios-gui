@@ -331,6 +331,7 @@ typedef enum eReloginState
 #pragma InfoViewDelegate
 - (void) InfoViewFinished:(InfoView *)infoView
 {
+    [infoView removeFromSuperview];
     [self autoReloginOrTouchIDIfPossible];
 }
 
