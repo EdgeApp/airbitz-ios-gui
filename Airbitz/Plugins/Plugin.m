@@ -32,7 +32,7 @@ static NSMutableArray *plugins;
         plugin.country = @"US";
         plugin.sourceFile = @"glidera";
         plugin.sourceExtension = @"html";
-        plugin.name = @"Glidera US/Canada (beta)";
+        plugin.name = @"Glidera US/Canada";
         plugin.env = @{
             @"SANDBOX": (isTestnet ? @"true" : @"false"),
             @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
