@@ -4,6 +4,7 @@
 #import "Transaction.h"
 #import "TxOutput.h"
 #import "ABC.h"
+#import "Config.h"
 #import "User.h"
 #import "Util.h"
 #import "LocalSettings.h"
@@ -149,6 +150,9 @@ static BOOL bOtpError = NO;
         Error.code = ABC_CC_Ok;
         ABC_Initialize([docs_dir UTF8String],
                 [ca_path UTF8String],
+                API_KEY_HEADER,
+                CHAIN_API_USERPWD,
+                HIDDENBITZ_KEY,
                 (unsigned char *)[seedData bytes],
                 (unsigned int)[seedData length],
                 &Error);

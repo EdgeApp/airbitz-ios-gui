@@ -10,6 +10,10 @@
 #ifndef AirBitz_Config_h
 #define AirBitz_Config_h
 
+#define API_KEY_HEADER                  "0000000000"
+#define CHAIN_API_USERPWD               "0000000000"
+#define HIDDENBITZ_KEY                  "0000000000"
+
 #define AUTH_TOKEN                      @"0000000000000000000000000000000000000000"
 //android token? 0000000000000000000000000000000000000000
 
