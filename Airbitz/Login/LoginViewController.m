@@ -319,6 +319,10 @@ typedef enum eReloginState
     //
     if ([[User Singleton] offerDisclaimer])
     {
+        [self.passwordTextField resignFirstResponder];
+        [self.usernameSelector.textField resignFirstResponder];
+        [self.PINCodeView resignFirstResponder];
+
         [InfoView CreateWithHTML:@"infoDisclaimer" forView:self.view agreeButton:YES delegate:self];
     }
     else
@@ -332,6 +336,11 @@ typedef enum eReloginState
 - (void) InfoViewFinished:(InfoView *)infoView
 {
     [infoView removeFromSuperview];
+    if (bPINModeEnabled)
+        [self.PINCodeView becomeFirstResponder];
+    else
+        [self.PINCodeView resignFirstResponder];
+
     [self autoReloginOrTouchIDIfPossible];
 }
 
