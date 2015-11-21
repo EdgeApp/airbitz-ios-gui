@@ -53,7 +53,7 @@ static NSMutableArray *plugins;
                        @"BRAND": @"Starbucks",
                        };
 
-//        [plugins addObject:plugin];
+        [plugins addObject:plugin];
 
         bInitialized = YES;
     }
