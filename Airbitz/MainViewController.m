@@ -1592,9 +1592,12 @@ MainViewController *singleton;
     // if the wallet tab is not already open, bring it up with this wallet
     if (APP_MODE_WALLETS != _appMode)
     {
-        NSDictionary *dictData = [notification userInfo];
-        _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
-        [CoreBridge makeCurrentWalletWithUUID:_strWalletUUID];
+        if (notification)
+        {
+            NSDictionary *dictData = [notification userInfo];
+            _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+            [CoreBridge makeCurrentWalletWithUUID:_strWalletUUID];
+        }
 
 //        [_transactionsViewController resetViews];
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];

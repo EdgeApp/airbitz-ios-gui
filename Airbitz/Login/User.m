@@ -15,6 +15,7 @@
 #define SPENDING_LIMIT_ENABLED @"spending_limit_enabled"
 
 #define REVIEW_NOTIFIED @"review_notified"
+#define DISCLAIMER_VIEWED @"disclaimer_viewed"
 #define FIRST_LOGIN_TIME @"first_login_time"
 #define LOGIN_COUNT @"login_count"
 #define REQUEST_VIEW_COUNT @"request_view_count"
@@ -103,6 +104,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.runLoop = [NSRunLoop currentRunLoop];
     self.PINLoginInvalidEntryCount = 0;
     self.reviewNotified = NO;
+    self.disclaimerViewed = NO;
     self.loginCount = 0;
     self.needsPasswordCheck = NO;
     self.firstLoginTime = nil;
@@ -174,6 +176,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
 - (void)loadLocalSettings:(tABC_AccountSettings *)pSettings
 {
     NSUserDefaults *localConfig = [NSUserDefaults standardUserDefaults];
+    self.disclaimerViewed = [localConfig boolForKey:DISCLAIMER_VIEWED];
     self.reviewNotified = [localConfig boolForKey:REVIEW_NOTIFIED];
     self.firstLoginTime = [localConfig objectForKey:FIRST_LOGIN_TIME];
     self.loginCount = [localConfig integerForKey:LOGIN_COUNT];
@@ -186,9 +189,12 @@ static User *singleton = nil;  // this will be the one and only object this stat
         self.dailySpendLimitSatoshis = [[localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]] unsignedLongLongValue];
         self.bDailySpendLimit = [localConfig boolForKey:[self userKey:SPENDING_LIMIT_ENABLED]];
     } else {
-        self.dailySpendLimitSatoshis = pSettings->dailySpendLimitSatoshis;
-        self.bDailySpendLimit = pSettings->bDailySpendLimit > 0;
-        [self saveLocalSettings];
+        if (pSettings)
+        {
+            self.dailySpendLimitSatoshis = pSettings->dailySpendLimitSatoshis;
+            self.bDailySpendLimit = pSettings->bDailySpendLimit > 0;
+            [self saveLocalSettings];
+        }
     }
 }
 
@@ -199,6 +205,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     [localConfig setBool:_bDailySpendLimit forKey:[self userKey:SPENDING_LIMIT_ENABLED]];
 
     [localConfig setBool:self.reviewNotified forKey:REVIEW_NOTIFIED];
+    [localConfig setBool:self.disclaimerViewed forKey:DISCLAIMER_VIEWED];
     [localConfig setObject:self.firstLoginTime forKey:FIRST_LOGIN_TIME];
     [localConfig setInteger:self.loginCount forKey:LOGIN_COUNT];
     [localConfig setInteger:self.requestViewCount forKey:REQUEST_VIEW_COUNT];
@@ -298,6 +305,20 @@ static User *singleton = nil;  // this will be the one and only object this stat
                 || pinLoginCount == 100) {
             _needsPasswordCheck = YES;
         }
+    }
+}
+
+- (BOOL)offerDisclaimer;
+{
+    if (self.disclaimerViewed)
+    {
+        return NO;
+    }
+    else
+    {
+        self.disclaimerViewed = YES;
+        [self saveLocalSettings];
+        return YES;
     }
 }
 

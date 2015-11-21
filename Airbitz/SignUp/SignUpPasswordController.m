@@ -297,6 +297,22 @@
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString*)string;   // return NO to not change text
+{
+    if (textField == self.pinTextField)
+    {
+        NSString *newString = [[string componentsSeparatedByCharactersInSet:
+                                [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                               componentsJoinedByString:@""];
+        if (![newString isEqualToString:string])
+        {
+            [MainViewController fadingAlert:[Theme Singleton].PINOnlyNumbersText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+            return NO;
+        }
+    }
+    return YES;
+}
+
 - (void)pinTextFieldChanged:(UITextField *)textField
 {
     if (textField.text.length == 4)

@@ -698,7 +698,7 @@
     for (Transaction *transaction in wallet.arrayTransactions)
     {
         // if this transaction has a biz id
-        if (transaction.bizId)
+        if (transaction && transaction.bizId)
         {
             // if we don't have an image for this biz id
             if (nil == [MainViewController Singleton].dictBizImages[@(transaction.bizId)])

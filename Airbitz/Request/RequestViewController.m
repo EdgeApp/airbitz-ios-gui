@@ -609,6 +609,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (void)updateQRAsync:(NSTimer *)timer
 {
     NSArray *args = [timer userInfo];
+    
+    if ([args count] != 9)
+        return;
+    
     int i = 0;
 
     NSString *strName = [args objectAtIndex:i++];
