@@ -88,6 +88,12 @@
     return UITableViewCellEditingStyleNone;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    return [Theme Singleton].heightBLETableCells;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"BuySellCell";
