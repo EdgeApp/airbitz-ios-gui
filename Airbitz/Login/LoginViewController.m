@@ -48,6 +48,7 @@ typedef enum eLoginMode
     CGPoint                         _firstTouchPoint;
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
+    BOOL                            _bUsedTouchIDToLogin;
     NSString                        *_strReason;
     NSString                        *_account;
     tABC_CC                         _resultCode;
@@ -216,6 +217,7 @@ static BOOL bInitialized = false;
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1];
 
     _bTouchesEnabled = YES;
+    _bUsedTouchIDToLogin = NO;
 
     [self getAllAccounts];
     [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
@@ -346,6 +348,8 @@ typedef enum eReloginState
 
 - (void)autoReloginOrTouchIDIfPossible
 {
+    _bUsedTouchIDToLogin = NO;
+    
     if (! [Keychain bHasSecureEnclave] ) return;
 
     NSString *username = [LocalSettings controller].cachedUsername;
@@ -392,6 +396,7 @@ typedef enum eReloginState
 
             if ([Keychain authenticateTouchID:prompt fallbackString:fallbackString]) {
                 bRelogin = YES;
+                _bUsedTouchIDToLogin = YES;
             }
             else
             {
@@ -1068,7 +1073,7 @@ typedef enum eReloginState
         [User login:self.usernameSelector.textField.text
            password:self.passwordTextField.text
            setupPIN:YES];
-        [self.delegate loginViewControllerDidLogin:NO newDevice:bNewDeviceLogin];
+        [self.delegate loginViewControllerDidLogin:NO newDevice:bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
 
         if ([Keychain bHasSecureEnclave])
         {
@@ -1227,7 +1232,7 @@ typedef enum eReloginState
         _bSuccess = YES;
         [SettingsViewController enableTouchID];
 
-        [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:NO];
+        [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:NO usedTouchID:NO];
     }
 }
 

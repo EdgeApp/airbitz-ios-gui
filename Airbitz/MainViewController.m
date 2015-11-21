@@ -1051,7 +1051,7 @@ MainViewController *singleton;
     [_loginViewController removeFromParentViewController];
 }
 
--(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice;
+-(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice usedTouchID:(BOOL)bUsedTouchID;
 {
 //    self.backgroundView.image = [Theme Singleton].backgroundApp;
 
@@ -1076,10 +1076,17 @@ MainViewController *singleton;
     [self launchViewControllerBasedOnAppMode];
     [MainViewController changeNavBarTitle:_selectedViewController title:@""];
 
+    // if the user logged in through TouchID, increment PIN login count
+    if (bUsedTouchID) {
+        [[User Singleton] incPINorTouchIDLogin];
+    }
+
     if (_uri)
     {
         [self processBitcoinURI:_uri];
         _uri = nil;
+    } else if ([User Singleton].needsPasswordCheck) {
+        [self showPasswordCheckAlert];
     } else {
         [self checkUserReview];
     }
@@ -1110,7 +1117,7 @@ MainViewController *singleton;
 
     // if the user has a password, increment PIN login count
     if ([CoreBridge passwordExists]) {
-        [[User Singleton] incPinLogin];
+        [[User Singleton] incPINorTouchIDLogin];
     }
 
     if (_uri) {
