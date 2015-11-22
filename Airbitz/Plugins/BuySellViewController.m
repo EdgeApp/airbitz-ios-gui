@@ -45,14 +45,15 @@
     _activePluginsView.btn_expandCollapse.hidden = YES;
     _activePluginsView.btn_addWallet.hidden = YES;
 
-    [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitleWithButton:self title:[Theme Singleton].buySellText action:nil fromObject:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBarTitle:self title:[Theme Singleton].buySellText];
     _pluginTable.editing = NO;
 }
 
@@ -153,7 +154,10 @@
 - (void)PluginViewControllerDone:(PluginViewController *)controller
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:@"" side:NAV_BAR_LEFT button:false enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBarTitle:self title:[Theme Singleton].buySellText];
+;
     [Util animateOut:controller parentController:self complete:^(void) {
         _pluginViewController = nil;
     }];
