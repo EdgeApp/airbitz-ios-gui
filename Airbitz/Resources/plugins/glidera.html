@@ -601,26 +601,26 @@ html body .list-group a.list-group-item:last-child {
   border-bottom: 1px solid #ddd;
 }
 html body input::-webkit-input-placeholder {
-  color: #777;
+  color: #aaa;
 }
 html body input::-moz-placeholder {
   /* Firefox 18- */
-  color: #777;
+  color: #aaa;
 }
 html body input:::-moz-placeholder {
   /* Firefox 19+ */
-  color: #777;
+  color: #aaa;
 }
 html body input::-ms-input-placeholder {
-  color: #777;
+  color: #aaa;
 }
 html body input[type='text'],
 html body input[type='number'],
 html body input[type='tel'],
 html body input[type='email'],
 html body input[type='date'] {
-  background: rgba(0, 0, 0, 0.3);
-  color: #fff;
+  background: rgba(128, 128, 128, 0.1);
+  color: #444;
   border: none;
   border-bottom: 1px solid #999;
   border-radius: 5 !important;
@@ -635,11 +635,11 @@ html body .input-group input[type="tel"] {
   width: 100%;
   padding: 6px 12px;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
-  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
+  /*-webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;*/
+  /*-o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;*/
+  /*transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;*/
 }
 html body .form-group input[type="text"].large,
 html body .input-group input[type="text"].large,
@@ -649,7 +649,7 @@ html body .form-group input[type="tel"].large,
 html body .input-group input[type="tel"].large {
   height: auto;
   padding: 4px 12px;
-  font-size: 175%;
+  font-size: 150%;
   border: none;
 }
 html body .form-group input[type="text"].left-square,
@@ -734,7 +734,7 @@ html body h4,
 html body h5,
 html body h6 {
   color: #000;
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+  /*text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);*/
 }
 html body hr {
   margin: 20px 0;
@@ -825,12 +825,12 @@ html body .user-account-form {
   text-transform: uppercase;
   letter-spacing: -1px;
   color: #000;
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+  /*text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);*/
 }
 .buy-limits {
   float: left;
   width: 100%;
-  font-size: 12px;
+  font-size: 13px;
 }
 .buy-limits .limit-label {
   display: inline-block;
@@ -848,7 +848,7 @@ html body .user-account-form {
 .sell-limits {
   float: left;
   width: 100%;
-  font-size: 12px;
+  font-size: 13px;
 }
 .sell-limits .limit-label {
   display: inline-block;
@@ -871,7 +871,7 @@ html body .user-account-form {
   margin-right: 10px;
 }
 .disclaimer p {
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+  /*text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);*/
 }
 .exchange-sign-up h2 {
   margin-bottom: 20px;
@@ -949,7 +949,7 @@ html body .user-account-form {
   text-transform: uppercase;
 }
 .transactions .table td {
-  font-size: 10px;
+  font-size: 14px;
   padding: 10px 15px;
 }
 .transactions .table.table-striped tbody tr.processing td.total,
@@ -1038,7 +1038,44 @@ html body .user-account-form {
   position: relative;
   bottom: auto;
 }
-
+button.btn-add.btn {
+  width: 100px;
+  height: 100px;
+  font-weight: bold;
+  font-size: 30px;
+  border-radius: 50px;
+  margin: 20px;
+  background-color: #2291CF;
+}
+.fold-loading-spin {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+.main {
+  display: none;
+}
+.barcode {
+  width: 200px;
+  height: 65px;
+}
+#user-cards .item {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.add-buttons {
+  text-align: left;
+}
+.collection .collection-item.avatar.card-list {
+  padding: 10px 20px;
+}
+.card-content.card-info-main {
+  padding: 0;
+  margin: 0;
+}
 /* Fixes flicker issues seen in Safari */
 .ng-trans-fade.ng-enter {
   display: none;
@@ -1289,6 +1326,7 @@ function _bridge() {
     return Airbitz._bridge.bitidSignature(uri, message);
   };
 
+  // Options has callback functions success and error.
   Airbitz.core.selectedWallet = function(options) {
     Airbitz._bridge.selectedWallet(options);
   };
@@ -1305,6 +1343,7 @@ function _bridge() {
     Airbitz._bridge.finalizeRequest(wallet, requestId);
   },
 
+  // Takes a spend request and sends user to send confirmation screen to spend.
   Airbitz.core.requestSpend = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
     Airbitz._bridge.requestSpend(wallet, toAddress, amountSatoshi, amountFiat, options);
   };
@@ -1313,13 +1352,15 @@ function _bridge() {
     Airbitz._bridge.writeData(key, JSON.stringify(data));
   };
 
+  // Clears all data stored by the plugin.
   Airbitz.core.clearData = function() {
     Airbitz._bridge.clearData();
   };
 
+  // Retrives data for a JSON key stored for the plugin.
   Airbitz.core.readData = function(key) {
     var data = Airbitz._bridge.readData(key);
-    return (data && data !== 'undefined') ? JSON.parse(data) : data;
+    return (data && data !== 'undefined') ? JSON.parse(data) : null;
   };
 
   Airbitz.core.getBtcDenomination = function() {
@@ -1346,10 +1387,14 @@ function _bridge() {
     return Airbitz._bridge.getConfig(key);
   };
 
+  /* Callback is called when wallet is changed AND every time plugin is created.
+  ** Callback is provided wallet as parameter.
+  */
   Airbitz.core.setWalletChangeListener = function(callback) {
     Airbitz._walletListener = callback;
   };
 
+  //
   Airbitz._bridge.walletChanged = function(newWallet) {
     if (Airbitz._walletListener) {
       var j = JSON.parse(newWallet);
@@ -9308,19 +9353,19 @@ var Glidera = (function () {
       $scope.order.orderFiatInput = parseFloat($filter('roundFiat')(parseFloat(output)));
     };
     $scope.next = function() {
-      if ($scope.order.orderAction == 'buy' && !Limits.isBuyAllowed($scope.order.orderBtcInput)) {
-        Airbitz.ui.showAlert('Error', 'The buy limit will be exceeded. Please reduce your buy amount.');
-        return;
-      } else if ($scope.order.orderAction == 'sell' && !Limits.isSellAllowed($scope.order.orderBtcInput)) {
-        Airbitz.ui.showAlert('Error', 'The sell limit will be exceeded. Please reduce your sell amount.');
-        return;
-      }
       // Trim extra decimals off BTC amount
       try {
         $scope.order.orderBtcInput = parseFloat($scope.order.orderBtcInput).toFixed(8);
       } catch (e) {
         console.log('Unable to round btc input');
         console.log(JSON.stringify($scope.order));
+      }
+      if ($scope.order.orderAction == 'buy' && !Limits.isBuyAllowed($scope.order.orderBtcInput)) {
+        Airbitz.ui.showAlert('Error', 'The buy limit will be exceeded. Please reduce your buy amount.');
+        return;
+      } else if ($scope.order.orderAction == 'sell' && !Limits.isSellAllowed($scope.order.orderBtcInput)) {
+        Airbitz.ui.showAlert('Error', 'The sell limit will be exceeded. Please reduce your sell amount.');
+        return;
       }
       var d = $scope.order.orderAction == 'buy' ? Prices.setBuyQty($scope.order.orderBtcInput) : Prices.setSellQty($scope.order.orderBtcInput);
       d.then(function() {
@@ -11055,7 +11100,7 @@ module.run(['$templateCache', function($templateCache) {
     '        type="number"\n' +
     '        id="inputVerificationCode"\n' +
     '        class="large text-center"\n' +
-    '        placeholder="Your Code"\n' +
+    '        placeholder="Enter Code"\n' +
     '        autocorrect="off"\n' +
     '        autocomplete="off"\n' +
     '        ng-model="verificationCode"\n' +
@@ -11322,8 +11367,8 @@ module.run(['$templateCache', function($templateCache) {
     '        <table class="table-mini">\n' +
     '          <tr>\n' +
     '            <td class="datetime text-left">\n' +
-    '              <span ng-if="t.estimatedDeliveryDate" class="date"><span class="est-label">Est. Delivery</span> {{ t.estimatedDeliveryDate }}</span>\n' +
-    '              <span ng-if="!t.estimatedDeliveryDate && t.transactionDate" class="date">{{ (t.transactionDate | date:\'yyyy-MM-dd\') }} <span class="seperator">|<span> <span class="time">{{ t.transactionDate | date:\'h:m a\' }}</span></span>\n' +
+    '              <span ng-if="t.estimatedDeliveryDate" class="date"><span class="est-label">Est. Delivery</span> {{ t.estimatedDeliveryDate | | date:\'yyyy-MM-dd\' }}</span>\n' +
+    '              <span ng-if="!t.estimatedDeliveryDate && t.transactionDate" class="date">{{ (t.transactionDate | date:\'yyyy-MM-dd\') }} <span class="seperator">|<span> <span class="time">{{ t.transactionDate | date:\'h:mm a\' }}</span></span>\n' +
     '            </td>\n' +
     '          </tr>\n' +
     '          <tr>\n' +
@@ -11667,8 +11712,8 @@ module.run(['$templateCache', function($templateCache) {
     '          <table class="table-mini">\n' +
     '            <tr>\n' +
     '              <td class="datetime text-left">\n' +
-    '                <span ng-if="t.estimatedDeliveryDate" class="date"><span class="est-label">Est. Delivery</span> {{ t.estimatedDeliveryDate }}</span>\n' +
-    '                <span ng-if="!t.estimatedDeliveryDate && t.transactionDate" class="date">{{ (t.transactionDate | date:\'yyyy-MM-dd\') }} <span class="seperator">|<span> <span class="time">{{ t.transactionDate | date:\'h:m a\' }}</span></span>\n' +
+    '                <span ng-if="t.estimatedDeliveryDate" class="date"><span class="est-label">Est. Delivery</span> {{ t.estimatedDeliveryDate | date:\'yyyy-MM-dd\' }}</span>\n' +
+    '                <span ng-if="!t.estimatedDeliveryDate && t.transactionDate" class="date">{{ (t.transactionDate | date:\'yyyy-MM-dd\') }} <span class="seperator">|<span> <span class="time">{{ t.transactionDate | date:\'h:mm a\' }}</span></span>\n' +
     '              </td>\n' +
     '            </tr>\n' +
     '            <tr>\n' +
@@ -11881,7 +11926,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group">\n' +
     '      <label for="inputFirstName" class="">Name</label>\n' +
     '      <input ng-model="account.firstName" ng-required="true"\n' +
-    '      type="text" id="inputFirstName" class="form-control"\n' +
+    '      type="text" id="inputFirstName" class="form-control large"\n' +
     '      placeholder="First name" autofocus="true" autocomplete="off" autocorrect="off"\n' +
     '      name="firstName"\n' +
     '      required="" />\n' +
@@ -11893,7 +11938,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group">\n' +
     '      <label for="inputLastName" class="sr-only">Last</label>\n' +
     '      <input ng-model="account.lastName" ng-required="true"\n' +
-    '      type="text" id="inputLastName" class="form-control"\n' +
+    '      type="text" id="inputLastName" class="form-control large"\n' +
     '      placeholder="Last name" autofocus="" autocomplete="off" autocorrect="off"\n' +
     '      name="lastName"\n' +
     '      required="" />\n' +
@@ -11905,7 +11950,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group">\n' +
     '      <label for="inputAddress" class="">Address</label>\n' +
     '      <input ng-model="account.address1"\n' +
-    '      type="text" id="inputAddressStreet" class="form-control"\n' +
+    '      type="text" id="inputAddressStreet" class="form-control large"\n' +
     '      placeholder="Address" autofocus="" autocomplete="off" autocorrect="off"\n' +
     '      name="address"\n' +
     '      required="" />\n' +
@@ -11917,14 +11962,14 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group">\n' +
     '      <label for="inputAddress2" class="sr-only">Address 2</label>\n' +
     '      <input ng-model="account.address2"\n' +
-    '      type="text" id="inputAddressStreet2" class="form-control"\n' +
+    '      type="text" id="inputAddressStreet2" class="form-control large"\n' +
     '      placeholder="Address 2" autofocus="" autocomplete="off" autocorrect="off" />\n' +
     '    </div>\n' +
     '\n' +
     '    <div class="form-group">\n' +
     '      <label for="inputAddressCity" class="sr-only">City</label>\n' +
     '      <input ng-model="account.city"\n' +
-    '      type="text" id="inputAddressCity" class="form-control"\n' +
+    '      type="text" id="inputAddressCity" class="form-control large"\n' +
     '      placeholder="City" autofocus="" autocomplete="off" autocorrect="off"\n' +
     '      name="city"\n' +
     '      required="" />\n' +
@@ -11937,7 +11982,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <div class="no-pad-left form-group col-xs-6">\n' +
     '        <label for="inputAddressZip" class="sr-only">Postal Code</label>\n' +
     '        <input ng-model="account.zipCode"\n' +
-    '        type="text" id="inputAddressZip" class="form-control"\n' +
+    '        type="text" id="inputAddressZip" class="form-control large"\n' +
     '        placeholder="Postal Code" autofocus="" autocomplete="off" autocorrect="off"\n' +
     '        name="zip"\n' +
     '        required="" />\n' +
@@ -11947,7 +11992,7 @@ module.run(['$templateCache', function($templateCache) {
     '        </div>\n' +
     '      </div>\n' +
     '      <div class="no-pad-right form-group col-xs-6">\n' +
-    '        <select ng-options="o.name for o in states" ng-model="account.state" class="form-control"\n' +
+    '        <select ng-options="o.name for o in states" ng-model="account.state" class="form-control large"\n' +
     '          name="state" required="" />\n' +
     '          <option value="">Select a {{ countryStateText }}</option>\n' +
     '        </select>\n' +
@@ -11960,7 +12005,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group">\n' +
     '      <label for="inputDob" class="">Date of Birth</label>\n' +
     '      <input ng-model="account.birthDate"\n' +
-    '        type="date" id="inputDob" class="form-control" placeholder="YYYY-MM-DD" autofocus=""\n' +
+    '        type="date" id="inputDob" class="form-control large" placeholder="YYYY-MM-DD" autofocus=""\n' +
     '        autocomplete="off"\n' +
     '        name="dob"\n' +
     '        required="" />\n' +
@@ -11972,7 +12017,7 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '    <div class="form-group" ng-show="exchange.countryCode == \'CA\'">\n' +
     '        <label for="inputOccupation" class="">Occupation</label>\n' +
-    '        <select ng-options="o.name for o in occupations" ng-model="account.occupation" class="form-control"\n' +
+    '        <select ng-options="o.name for o in occupations" ng-model="account.occupation" class="form-control large"\n' +
     '                name="occupation"\n' +
     '                required="" />\n' +
     '            <option value="">Select an Occupation</option>\n' +
@@ -11986,7 +12031,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group" ng-show="exchange.countryCode == \'CA\' && account.occupation.id == OTHER">\n' +
     '      <label for="inputEmployerName" class="">Employer Name</label>\n' +
     '      <input ng-model="account.employerName" ng-required="true"\n' +
-    '             type="text" id="inputEmployerName" class="form-control"\n' +
+    '             type="text" id="inputEmployerName" class="form-control large"\n' +
     '             placeholder="Employer name" autofocus="true" autocomplete="off" autocorrect="off"\n' +
     '             name="employerName" \n' +
     '             ng-required="account.occupation.id == OTHER"/>\n' +
@@ -11998,7 +12043,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group" ng-show="exchange.countryCode == \'CA\' && account.occupation.id == OTHER">\n' +
     '      <label for="inputEmployerDescription" class="">Employer Description</label>\n' +
     '      <input ng-model="account.employerDescription" ng-required="true"\n' +
-    '             type="text" id="inputEmployerDescription" class="form-control"\n' +
+    '             type="text" id="inputEmployerDescription" class="form-control large"\n' +
     '             placeholder="Employer Description" autocomplete="off" autocorrect="off"\n' +
     '             name="employerDescription"\n' +
     '             ng-required="account.occupation.id == OTHER" />\n' +
@@ -12080,7 +12125,7 @@ module.run(['$templateCache', function($templateCache) {
     '      </div>\n' +
     '      <div class="form-group col-xs-12">\n' +
     '        <input ng-model="account.phone" name="phone" type="tel" id="inputPhone"\n' +
-    '               class="large glass-input form-control"\n' +
+    '               class="large form-control"\n' +
     '               placeholder="Enter Your Phone #"\n' +
     '               autofocus="true"\n' +
     '               autocomplete="off"\n' +
@@ -12105,7 +12150,7 @@ module.run(['$templateCache', function($templateCache) {
     '    </div>\n' +
     '\n' +
     '    <div class="row" style="margin: 20px 0">\n' +
-    '      <p><label class="label label-warning">Note</label> Phone must be able to receive SMS text messages.</p>\n' +
+    '      <p>Phone must be able to receive SMS text messages.</p>\n' +
     '    </div>\n' +
     '\n' +
     '  </form>\n' +
@@ -12114,7 +12159,7 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '<div class="row" style="margin-top: 40px;">\n' +
     '  <div class="col-xs-6 no-pad">\n' +
-    '    <button type="button" ng-click="cancelSignup()" class="btn btn-lg btn-block btn-link">Cancel</button>\n' +
+    '    <button type="button" ng-click="cancelSignup()" class="btn btn-lg btn-block">Cancel</button>\n' +
     '  </div>\n' +
     '  <div class="col-xs-6 no-pad">\n' +
     '    <button type="submit"\n' +
