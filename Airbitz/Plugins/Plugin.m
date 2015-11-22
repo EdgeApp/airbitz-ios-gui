@@ -27,22 +27,6 @@ static NSMutableArray *plugins;
 
         Plugin *plugin;
         plugin = [[Plugin alloc] init];
-        plugin.pluginId = @"com.glidera.us";
-        plugin.provider = @"glidera";
-        plugin.country = @"US";
-        plugin.sourceFile = @"glidera";
-        plugin.sourceExtension = @"html";
-        plugin.name = @"Glidera US/Canada";
-        plugin.env = @{
-            @"SANDBOX": (isTestnet ? @"true" : @"false"),
-            @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
-            @"REDIRECT_URI": [NSString stringWithFormat:@"airbitz://plugin/glidera/%@/", plugin.country],
-            @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
-        };
-
-        [plugins addObject:plugin];
-
-        plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.foldapp";
         plugin.provider = @"foldapp";
         plugin.country = @"US";
@@ -53,6 +37,22 @@ static NSMutableArray *plugins;
                        @"BRAND": @"Starbucks",
                        };
 
+        [plugins addObject:plugin];
+
+        plugin = [[Plugin alloc] init];
+        plugin.pluginId = @"com.glidera.us";
+        plugin.provider = @"glidera";
+        plugin.country = @"US";
+        plugin.sourceFile = @"glidera";
+        plugin.sourceExtension = @"html";
+        plugin.name = @"Buy/Sell Bitcoin (US/Canada)";
+        plugin.env = @{
+                       @"SANDBOX": (isTestnet ? @"true" : @"false"),
+                       @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
+                       @"REDIRECT_URI": [NSString stringWithFormat:@"airbitz://plugin/glidera/%@/", plugin.country],
+                       @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+                       };
+        
         [plugins addObject:plugin];
 
         bInitialized = YES;
