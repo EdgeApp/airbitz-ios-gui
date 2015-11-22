@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Lato-Regular.ttf">
@@ -28,6 +29,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O8N-2d-FwL" userLabel="exchangeText">
                             <rect key="frame" x="45" y="0.0" width="330" height="42"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" none="YES"/>
                             </accessibility>
@@ -38,14 +40,16 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_bitcoin_symbol.png" id="Sdh-3N-JpN">
                             <rect key="frame" x="10" y="9" width="22" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <accessibility key="accessibilityConfiguration">
-                                <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                             </accessibility>
                         </imageView>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" red="0.15854966810000001" green="0.2440926645" blue="0.36231674380000001" alpha="1" colorSpace="calibratedRGB"/>
                     <accessibility key="accessibilityConfiguration">
-                        <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                        <accessibilityTraits key="traits" notEnabled="YES"/>
                     </accessibility>
                 </view>
                 <view contentMode="scaleToFill" id="EpU-B2-VTR" userLabel="accountView" customClass="UIButton">
@@ -55,13 +59,15 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_account_secure.png" id="nOJ-e4-e5b">
                             <rect key="frame" x="20" y="14" width="42" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <accessibility key="accessibilityConfiguration">
-                                <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                             </accessibility>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vsf-Ms-1Ff" userLabel="accountText">
                             <rect key="frame" x="79" y="0.0" width="161" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <accessibility key="accessibilityConfiguration" hint="the currently logged in account" label="">
                                 <accessibilityTraits key="traits" none="YES"/>
                             </accessibility>
@@ -72,21 +78,24 @@
                         <view contentMode="scaleToFill" id="TCb-b7-HfE" userLabel="divider1">
                             <rect key="frame" x="0.0" y="69" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <imageView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow.png" id="dFV-3F-fjN">
                             <rect key="frame" x="208" y="31" width="24" height="10"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <accessibility key="accessibilityConfiguration">
-                                <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                             </accessibility>
                         </imageView>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" red="0.85657793209999999" green="0.85657793209999999" blue="0.85657793209999999" alpha="1" colorSpace="calibratedRGB"/>
                     <accessibility key="accessibilityConfiguration" label="">
-                        <accessibilityTraits key="traits" none="YES" button="YES"/>
+                        <accessibilityTraits key="traits" button="YES"/>
                         <bool key="isElement" value="YES"/>
                     </accessibility>
                     <connections>
@@ -99,9 +108,11 @@
                     <subviews>
                         <view contentMode="scaleToFill" id="8L6-iO-nWG" userLabel="View username picker" customClass="PickerTextView">
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="WFe-bF-Laf" userLabel="lowerViews">
@@ -115,15 +126,17 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_logout.png" id="PFZ-VL-MPA">
                                     <rect key="frame" x="29" y="15" width="26" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration">
-                                        <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                     </accessibility>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOGOUT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BCk-jF-SE5" userLabel="logoutText">
                                     <rect key="frame" x="79" y="17" width="95" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration" label="">
-                                        <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                        <accessibilityTraits key="traits" notEnabled="YES"/>
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
@@ -131,9 +144,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <accessibility key="accessibilityConfiguration" label="Logout">
-                                <accessibilityTraits key="traits" none="YES" button="YES" staticText="YES"/>
+                                <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                 <bool key="isElement" value="YES"/>
                             </accessibility>
                             <connections>
@@ -147,15 +161,17 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_wallet_dark.png" id="Bge-Z2-aZb">
                                     <rect key="frame" x="29" y="12" width="26" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration">
-                                        <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                     </accessibility>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WALLETS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lr4-kO-HCW" userLabel="logoutText">
                                     <rect key="frame" x="79" y="14" width="95" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration" label="">
-                                        <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                        <accessibilityTraits key="traits" notEnabled="YES"/>
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
@@ -163,9 +179,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <accessibility key="accessibilityConfiguration" label="Logout">
-                                <accessibilityTraits key="traits" none="YES" button="YES" staticText="YES"/>
+                                <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                 <bool key="isElement" value="YES"/>
                             </accessibility>
                             <connections>
@@ -175,11 +192,13 @@
                         <view contentMode="scaleToFill" id="iNr-7k-HKh" userLabel="divider1">
                             <rect key="frame" x="0.0" y="505" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="6sW-mE-1UL" userLabel="divider1">
                             <rect key="frame" x="0.0" y="454" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="xna-m1-9hx" userLabel="settingsView" customClass="UIButton">
@@ -189,15 +208,17 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_settings_dark.png" id="4PE-14-Bju">
                                     <rect key="frame" x="30" y="13" width="26" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration">
-                                        <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                     </accessibility>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zac-Lf-J4y" userLabel="settingsText">
                                     <rect key="frame" x="79" y="15" width="107" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration" label="">
-                                        <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                        <accessibilityTraits key="traits" notEnabled="YES"/>
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
@@ -205,9 +226,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <accessibility key="accessibilityConfiguration" label="Settings">
-                                <accessibilityTraits key="traits" none="YES" button="YES" staticText="YES"/>
+                                <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                 <bool key="isElement" value="YES"/>
                             </accessibility>
                             <connections>
@@ -221,15 +243,17 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_exchange.png" id="Zim-he-CkY">
                                     <rect key="frame" x="29" y="13" width="26" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration">
-                                        <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                     </accessibility>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUY/SELL BITCOIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rWQ-uJ-DUX" userLabel="buysellText">
                                     <rect key="frame" x="79" y="1" width="161" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration" label="">
-                                        <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                        <accessibilityTraits key="traits" notEnabled="YES"/>
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
@@ -237,9 +261,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <accessibility key="accessibilityConfiguration" label="Buy or Sell">
-                                <accessibilityTraits key="traits" none="YES" button="YES" staticText="YES"/>
+                                <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                 <bool key="isElement" value="YES"/>
                             </accessibility>
                             <connections>
@@ -253,15 +278,17 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gift_box.png" id="yTZ-dT-jac">
                                     <rect key="frame" x="29" y="12" width="26" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration">
-                                        <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                     </accessibility>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMPORT GIFT CARD (private key)" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xju-3Y-EvK" userLabel="importText">
                                     <rect key="frame" x="79" y="0.0" width="161" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration" label="">
-                                        <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                        <accessibilityTraits key="traits" notEnabled="YES"/>
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
@@ -269,9 +296,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <accessibility key="accessibilityConfiguration" label="Buy or Sell">
-                                <accessibilityTraits key="traits" none="YES" button="YES" staticText="YES"/>
+                                <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                 <bool key="isElement" value="YES"/>
                             </accessibility>
                             <connections>
@@ -281,22 +309,27 @@
                         <view contentMode="scaleToFill" id="I1t-ii-re1" userLabel="divider1">
                             <rect key="frame" x="0.0" y="100" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="Jo0-RP-ZNs" userLabel="divider1">
                             <rect key="frame" x="0.0" y="49" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="T0W-Ha-PEK" userLabel="divider1">
                             <rect key="frame" x="0.0" y="404" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -308,6 +341,7 @@
                 <outlet property="buySellButton" destination="jpu-23-4kh" id="Gzm-Dc-9Qt"/>
                 <outlet property="buySellDivider" destination="I1t-ii-re1" id="mtc-ld-1GY"/>
                 <outlet property="conversionText" destination="O8N-2d-FwL" id="Bml-x3-ife"/>
+                <outlet property="importGiftCardButton" destination="Lwy-1d-Qgs" id="rz3-xo-Vmf"/>
                 <outlet property="logoutButton" destination="GIG-Sd-O0c" id="G8X-1c-MlU"/>
                 <outlet property="lowerViews" destination="WFe-bF-Laf" id="Oyd-RS-Y5j"/>
                 <outlet property="otherAccountsView" destination="BN8-sG-2n3" id="iwC-WI-kIH"/>
@@ -327,9 +361,4 @@
         <image name="icon_settings_dark.png" width="32" height="32"/>
         <image name="icon_wallet_dark.png" width="36" height="36"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
