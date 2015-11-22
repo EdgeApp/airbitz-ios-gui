@@ -107,8 +107,14 @@
     Plugin *plugin = [[Plugin getPlugins] objectAtIndex:row];
     [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
     cell.text.text = plugin.name;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
  
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [Theme Singleton].colorBackgroundHighlight;
+    bgColorView.layer.masksToBounds = YES;
+    cell.selectedBackgroundView = bgColorView;
+    
     return cell;
 }
 
@@ -117,6 +123,7 @@
     NSInteger row = [indexPath row];
     Plugin *plugin = [[Plugin getPlugins] objectAtIndex:row];
     [self launchPlugin:plugin];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider

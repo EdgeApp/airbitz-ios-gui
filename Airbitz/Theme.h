@@ -31,6 +31,7 @@
 @property (nonatomic) UIColor *colorButtonGreen;
 @property (nonatomic) UIColor *colorButtonBlue;
 @property (nonatomic) UIColor *bdButtonBlue;
+@property (nonatomic) UIColor *colorBackgroundHighlight;
 
 @property (nonatomic) NSMutableArray *colorsProfileIcons;
 
