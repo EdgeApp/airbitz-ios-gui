@@ -1051,7 +1051,7 @@ MainViewController *singleton;
     [_loginViewController removeFromParentViewController];
 }
 
--(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice;
+-(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice usedTouchID:(BOOL)bUsedTouchID;
 {
 //    self.backgroundView.image = [Theme Singleton].backgroundApp;
 
@@ -1076,10 +1076,17 @@ MainViewController *singleton;
     [self launchViewControllerBasedOnAppMode];
     [MainViewController changeNavBarTitle:_selectedViewController title:@""];
 
+    // if the user logged in through TouchID, increment PIN login count
+    if (bUsedTouchID) {
+        [[User Singleton] incPINorTouchIDLogin];
+    }
+
     if (_uri)
     {
         [self processBitcoinURI:_uri];
         _uri = nil;
+    } else if ([User Singleton].needsPasswordCheck) {
+        [self showPasswordCheckAlert];
     } else {
         [self checkUserReview];
     }
@@ -1110,7 +1117,7 @@ MainViewController *singleton;
 
     // if the user has a password, increment PIN login count
     if ([CoreBridge passwordExists]) {
-        [[User Singleton] incPinLogin];
+        [[User Singleton] incPINorTouchIDLogin];
     }
 
     if (_uri) {
@@ -1207,12 +1214,17 @@ MainViewController *singleton;
 
 - (void)checkUserReview
 {
+
+
+    NSString *str = NSLocalizedString(@"How are you liking %@?", @"Like Airbitz popup");
+    NSString *str2 = [NSString stringWithFormat:str, [Theme Singleton].appTitle];
+
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
         if([User offerUserReview]) {
             _userReviewAlert = [[UIAlertView alloc]
-                                    initWithTitle:NSLocalizedString(@"Airbitz", nil)
-                                    message:NSLocalizedString(@"How are you liking Airbitz?", nil)
+                                    initWithTitle:[Theme Singleton].appTitle
+                                    message:str2
                                     delegate:self
                                     cancelButtonTitle:NSLocalizedString(@"Not so good", nil)
                                     otherButtonTitles:NSLocalizedString(@"It's great", nil), nil];
@@ -1477,8 +1489,8 @@ MainViewController *singleton;
     if ([MFMailComposeViewController canSendMail])
     {
         MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
-        [mailComposer setToRecipients:[NSArray arrayWithObjects:@"support@airbitz.co", nil]];
-        NSString *subject = [NSString stringWithFormat:@"Airbitz Feedback"];
+        [mailComposer setToRecipients:[NSArray arrayWithObjects:[Theme Singleton].supportEmail, nil]];
+        NSString *subject = [NSString stringWithFormat:@"%@ Feedback", [Theme Singleton].appTitle];
         [mailComposer setSubject:NSLocalizedString(subject, nil)];
         mailComposer.mailComposeDelegate = self;
         [self presentViewController:mailComposer animated:YES completion:nil];
@@ -1486,9 +1498,9 @@ MainViewController *singleton;
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"Can't send e-mail"
+                                                        message:NSLocalizedString(@"Can't send e-mail",nil)
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(@"OK",nil)
                                               otherButtonTitles:nil];
         [alert show];
     }
@@ -1498,7 +1510,7 @@ MainViewController *singleton;
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    NSString *strTitle = NSLocalizedString(@"AirBitz", nil);
+    NSString *strTitle = [Theme Singleton].appTitle;
     NSString *strMsg = nil;
     
     switch (result)
@@ -1587,9 +1599,12 @@ MainViewController *singleton;
     // if the wallet tab is not already open, bring it up with this wallet
     if (APP_MODE_WALLETS != _appMode)
     {
-        NSDictionary *dictData = [notification userInfo];
-        _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
-        [CoreBridge makeCurrentWalletWithUUID:_strWalletUUID];
+        if (notification)
+        {
+            NSDictionary *dictData = [notification userInfo];
+            _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
+            [CoreBridge makeCurrentWalletWithUUID:_strWalletUUID];
+        }
 
 //        [_transactionsViewController resetViews];
         self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
@@ -1852,9 +1867,11 @@ MainViewController *singleton;
 
 - (void)logout
 {
+    NSString *str = NSLocalizedString(@"Please wait while %@ gracefully exits your account. This may take a while on slow networks.", nil);
+
     [Keychain disableRelogin:[User Singleton].name];
     [FadingAlertView create:self.view
-                    message:NSLocalizedString(@"Please wait while Airbitz gracefully exits your account. This may take a while on slow networks.", nil)
+                    message:[NSString stringWithFormat:str, [Theme Singleton].appTitle]
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
                 // Log the user out and reset UI
                 [[User Singleton] clear];

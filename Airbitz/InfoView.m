@@ -7,15 +7,19 @@
 
 #import "InfoView.h"
 #import "DarkenView.h"
+#import "Util.h"
 #import "MainViewController.h"
 
-@interface InfoView () <UIWebViewDelegate>
+@interface InfoView () <UIWebViewDelegate, UIScrollViewDelegate>
 {
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *agreeButtonHeight;
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (nonatomic, weak) IBOutlet BlurView *darkenView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, assign)       BOOL bAgreeButton;
 @end
 
 @implementation InfoView
@@ -35,10 +39,21 @@ static NSString *currentHtml = nil;
     iv.delegate = delegate;
     currentView = iv;
     currentHtml = nil;
+    iv.bAgreeButton = NO;
+    iv.agreeButtonHeight.constant = 0;
+    iv.agreeButton.hidden = YES;
     return iv;
 }
 
-+ (InfoView *)CreateWithHTML:(NSString *)strHTML forView:(UIView *)theView
++ (InfoView *)CreateWithHTML:(NSString *)strHTML forView:(UIView *)theView;
+{
+    return [InfoView CreateWithHTML:strHTML forView:theView agreeButton:NO delegate:nil];
+}
+
++ (InfoView *)CreateWithHTML:(NSString *)strHTML
+                     forView:(UIView *)theView
+                 agreeButton:(BOOL)bAgreeButton
+                    delegate:(id<InfoViewDelegate>) delegate;
 {
     // Are we already showing this help page?
     if (currentHtml && [strHTML isEqualToString:currentHtml]) {
@@ -61,14 +76,32 @@ static NSString *currentHtml = nil;
     frame.size.height -= [MainViewController getFooterHeight] + [MainViewController getHeaderHeight];
 
     iv.frame = frame;
-	iv.delegate = nil;
+	iv.delegate = delegate;
+    iv.webView.scrollView.delegate = iv;
 
     [iv enableScrolling:YES];
 	NSString* path = [[NSBundle mainBundle] pathForResource:strHTML ofType:@"html"];
-	iv.htmlInfoToDisplay = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    [Util replaceHtmlTags:&content];
+
+    iv.htmlInfoToDisplay = content;
     [theView addSubview:iv];
     currentView = iv;
     currentHtml = strHTML;
+
+    iv.agreeButtonHeight.constant  = 0;
+
+    iv.bAgreeButton = bAgreeButton;
+    if (bAgreeButton)
+    {
+        iv.agreeButton.hidden = NO;
+        iv.closeButton.hidden = YES;
+    }
+    else
+    {
+        iv.agreeButton.hidden = YES;
+        iv.closeButton.hidden = NO;
+    }
 
 	return iv;
 }
@@ -148,6 +181,10 @@ static NSString *currentHtml = nil;
 	[self initMyVariables];
 }
 
+- (IBAction)IAgreeButton:(id)sender {
+    [self Done:nil];
+}
+
 -(IBAction)Done:(UIButton *)sender
 {
 	[UIView animateWithDuration:0.25
@@ -197,6 +234,21 @@ static NSString *currentHtml = nil;
     }
 	
     return YES;
+}
+
+#pragma mark UIScrollView delegates
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    float bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
+    if (bottomEdge >= scrollView.contentSize.height)
+    {
+        // we are at the end
+        if (self.bAgreeButton)
+        {
+            self.agreeButtonHeight.constant = 50;
+            self.agreeButton.hidden = NO;
+        }
+    }
 }
 
 @end

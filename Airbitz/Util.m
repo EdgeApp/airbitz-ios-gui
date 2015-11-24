@@ -44,7 +44,7 @@ void abDebugLog(int level, NSString *statement) {
             return NSLocalizedString(@"Wallet does not exist.", nil);
         case ABC_CC_URLError:
         case ABC_CC_ServerError:
-            return NSLocalizedString(@"Unable to connect to Airbitz server. Please try again later.", nil);
+            return NSLocalizedString(@"Unable to connect to servers. Please try again later.", nil);
         case ABC_CC_NoRecoveryQuestions:
             return NSLocalizedString(@"No recovery questions are available for this user", nil);
         case ABC_CC_NotSupported:
@@ -95,6 +95,49 @@ void abDebugLog(int level, NSString *statement) {
             return NSLocalizedString(@"An error has occurred.", nil);
     }
 }
+
++ (void)replaceHtmlTags:(NSString **) strContent;
+{
+    if (*strContent == NULL)
+    {
+        return;
+    }
+
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+
+    NSString *versionbuild = [NSString stringWithFormat:@"%@ %@", version, build];
+
+    NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
+            @"[[abtag APP_TITLE]]",
+            @"[[abtag APP_STORE_LINK]]",
+            @"[[abtag PLAY_STORE_LINK]]",
+            @"[[abtag APP_HOMEPAGE]]",
+            @"[[abtag APP_LOGO_WHITE_LINK]]",
+            @"[[abtag APP_DESIGNED_BY]]",
+            @"[[abtag APP_COMPANY_LOCATION]]",
+            @"[[abtag APP_VERSION]]",
+                    nil];
+
+    NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
+            [Theme Singleton].appTitle,
+            [Theme Singleton].appStoreLink,
+            [Theme Singleton].playStoreLink,
+            [Theme Singleton].appHomepage,
+            [Theme Singleton].appLogoWhiteLink,
+            [Theme Singleton].appDesignedBy,
+            [Theme Singleton].appCompanyLocation,
+            versionbuild,
+                    nil];
+
+    for (int i=0; i<[searchList count];i++)
+    {
+        *strContent = [*strContent stringByReplacingOccurrencesOfString:[searchList objectAtIndex:i]
+                                                             withString:[replaceList objectAtIndex:i]];
+    }
+
+}
+
 
 + (void)printABC_Error:(const tABC_Error *)pError
 {

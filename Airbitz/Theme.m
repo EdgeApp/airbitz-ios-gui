@@ -45,6 +45,15 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 {
     self = [super init];
 
+    self.appTitle = @"Airbitz";
+    self.appHomepage = @"https://airbitz.co";
+    self.supportEmail = @"support@airbitz.co";
+    self.appStoreLink = @"https://itunes.apple.com/us/app/airbitz/id843536046";
+    self.playStoreLink = @"https://play.google.com/store/apps/details?id=com.airbitz";
+    self.appLogoWhiteLink = @"https://airbitz.co/static/img/logo-nav.png";
+    self.appDesignedBy = NSLocalizedString(@"Designed and Built by Airbitz in",nil);
+    self.appCompanyLocation = NSLocalizedString(@"San Diego, California, USA", nil);
+
     //    self.denomination = 100000000;
     self.colorTextBright = [UIColor whiteColor];
     self.colorTextDark = UIColorFromARGB(0xff0C578C);;
@@ -64,6 +73,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorRequestBottomTextField = self.colorTextDark;
 
     self.bdButtonBlue = UIColorFromARGB(0xff0079B9);
+    self.colorBackgroundHighlight = [UIColor colorWithRed:(76.0/255.0) green:(161.0/255.0) blue:(255.0/255.0) alpha:0.25];
     self.colorsProfileIcons = [[NSMutableArray alloc] init];
 
     [self.colorsProfileIcons addObject:UIColorFromRGB(0xec6a5e)];
@@ -121,7 +131,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.touchIDPromptText                                  = NSLocalizedString(@"Touch to login user", @"Touch ID prompt text");
     self.usePINText                                         = NSLocalizedString(@"Use PIN", @"Touch ID [Use PIN] button");
     self.usePasswordText                                    = NSLocalizedString(@"Use Password", @"Touch ID [Use Password] button");
-    self.twofactorWarningText                               = NSLocalizedString(@"Two Factor Enabled\n\n** Warning **\n\nIf you lose your device or uninstall the Airbitz app, it will take 7 days to disable 2FA and access your account.\"", @"2FA warning on enable");
+    self.twofactorWarningText                               = NSLocalizedString(@"Two Factor Enabled\n\n** Warning **\n\nIf you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"", @"2FA warning on enable");
     self.loadingWalletsText                                 = NSLocalizedString(@"Loading Wallets...", @"Loading wallets alert text");
     self.loadingWalletsNewDeviceText                        = NSLocalizedString(@"This may take a few minutes as it is the first time logging into this device.", @"Loading Wallets alert text");
     self.loadingTransactionsText                            = NSLocalizedString(@"Loading Transactions...", @"Loading Transactions alert text");
@@ -136,6 +146,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.uploadSuccessfulText                               = NSLocalizedString(@"Upload Successful", @"Upload Successful fading popup");
     self.uploadFailedText                                   = NSLocalizedString(@"Upload Failed", @"Upload Failed");
     self.watcherClearedText                                 = NSLocalizedString(@"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync", @"Watcher Database Cleared popup text");
+    self.PINOnlyNumbersText                                 = NSLocalizedString(@"Only numbers allowed in PIN", @"");
 
 //    self.                         = NSLocalizedString(@"", @"");
 
@@ -154,9 +165,9 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.rotateServerInterval                   = 15.0;     // How long (in seconds) before we rotate libbitcoin servers while waiting on QR code screen
     self.walletLoadingTimerInterval             = 30.0;     // How long to wait between wallet updates on new device logins before we consider the account fully loaded
 
-    self.backgroundApp = [UIImage imageNamed:@"postcard-mountain-blue.jpg"];
-    self.backgroundLogin = [UIImage imageNamed:@"postcard-mountain.png"];
-
+    self.backgroundApp = [UIImage imageNamed:@"background-fade.jpg"];
+    self.backgroundLogin = [UIImage imageNamed:@"background.jpg"];
+    
 //    if (IS_IPHONE4)
     {
         self.heightListings = 90.0;

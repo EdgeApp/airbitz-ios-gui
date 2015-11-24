@@ -101,6 +101,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -116,13 +117,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="postcard-mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-NB-3KY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-NB-3KY">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="postcard-mountain-blue.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="I33-Mp-005">
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-fade.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="I33-Mp-005">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -158,7 +159,7 @@
                                     <tabBarItem title="Request" image="icon_request.png" id="uTa-MB-0Sl">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
-                                    <tabBarItem title="Send" image="icon_send.png" id="6Ey-Xn-GTe">
+                                    <tabBarItem title="Scan" image="icon_send.png" id="6Ey-Xn-GTe">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
                                     <tabBarItem title="Transactions" image="icon_transactions.png" id="j3q-OI-el3" userLabel="Transactions">
@@ -342,7 +343,25 @@
                                     <constraint firstAttribute="bottom" secondItem="9C3-ej-2l9" secondAttribute="bottom" id="fnB-bp-z3b"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrj-OZ-WpR" userLabel="BlurView" customClass="BlurView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3w-fU-j91" userLabel="Top BlurView" customClass="BlurView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="40"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="fxj-vv-ZSu"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleDark" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR to Send Funds or Login with BitID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-n1-ybU" userLabel="Scan QR to Send or Login with BitID">
+                                <rect key="frame" x="0.0" y="64" width="320" height="40"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrj-OZ-WpR" userLabel="Bottom BlurView" customClass="BlurView">
                                 <rect key="frame" x="0.0" y="377" width="320" height="54"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -400,6 +419,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="IsP-NR-ytZ" secondAttribute="bottom" id="0tx-rQ-VTX"/>
+                            <constraint firstItem="cYL-n1-ybU" firstAttribute="bottom" secondItem="p3w-fU-j91" secondAttribute="bottom" id="2zi-2k-ryo"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="bottom" secondItem="jrj-OZ-WpR" secondAttribute="bottom" id="BD7-Mw-Htv"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="CRv-kb-3AU"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="top" secondItem="jrj-OZ-WpR" secondAttribute="top" id="FE7-MO-dAU"/>
@@ -412,12 +432,18 @@
                             <constraint firstItem="g9e-kM-2rC" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="Rlk-dD-FSj"/>
                             <constraint firstAttribute="trailing" secondItem="Wik-w7-rsL" secondAttribute="trailing" id="WB1-u2-Kp5"/>
                             <constraint firstItem="aan-73-l0U" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" constant="10" id="XGu-8e-3kr"/>
+                            <constraint firstItem="cYL-n1-ybU" firstAttribute="trailing" secondItem="p3w-fU-j91" secondAttribute="trailing" id="ZGq-0v-6Xy"/>
                             <constraint firstAttribute="trailing" secondItem="g9e-kM-2rC" secondAttribute="trailing" id="a1j-fU-gWs"/>
                             <constraint firstItem="IsP-NR-ytZ" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="gIb-dm-Eyq"/>
                             <constraint firstAttribute="bottom" secondItem="Wik-w7-rsL" secondAttribute="bottom" constant="49" id="jMR-HN-Qff"/>
+                            <constraint firstItem="cYL-n1-ybU" firstAttribute="top" secondItem="p3w-fU-j91" secondAttribute="top" id="oLv-Oy-6dx"/>
+                            <constraint firstAttribute="trailing" secondItem="p3w-fU-j91" secondAttribute="trailing" id="qI8-gw-Y7C"/>
+                            <constraint firstItem="cYL-n1-ybU" firstAttribute="leading" secondItem="p3w-fU-j91" secondAttribute="leading" id="qTq-d6-26Y"/>
                             <constraint firstItem="aan-73-l0U" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" constant="70" id="sQL-hq-oPg"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="top" secondItem="V8c-6o-ibr" secondAttribute="bottom" id="sbw-6l-sjS"/>
                             <constraint firstAttribute="trailing" secondItem="V8c-6o-ibr" secondAttribute="trailing" id="uVA-Gd-QqU"/>
+                            <constraint firstItem="p3w-fU-j91" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" constant="64" id="uuz-aN-cYY"/>
+                            <constraint firstItem="p3w-fU-j91" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="xOx-C4-Uvh"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="trailing" secondItem="jrj-OZ-WpR" secondAttribute="trailing" id="yAN-pG-hzZ"/>
                         </constraints>
                     </view>
@@ -1387,7 +1413,7 @@
                                                     <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" translatesAutoresizingMaskIntoConstraints="NO" id="eY0-zc-Tda" userLabel="Image View - photo">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="eY0-zc-Tda" userLabel="Image View - photo">
                                                     <rect key="frame" x="9" y="11" width="50" height="50"/>
                                                     <animations/>
                                                     <constraints>
@@ -2312,7 +2338,7 @@
                                                             <action selector="imagePhotoTouched:" destination="Gtr-aC-t0S" eventType="touchUpInside" id="x0R-0X-158"/>
                                                         </connections>
                                                     </button>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" translatesAutoresizingMaskIntoConstraints="NO" id="bWb-oS-cFc">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="bWb-oS-cFc">
                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                         <animations/>
                                                         <constraints>
@@ -2664,7 +2690,7 @@
                                         </constraints>
                                         <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </activityIndicatorView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bitcoin.png" translatesAutoresizingMaskIntoConstraints="NO" id="CRP-JF-TAp">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="CRP-JF-TAp">
                                         <rect key="frame" x="125" y="241" width="126" height="165"/>
                                         <animations/>
                                         <constraints>
@@ -3891,7 +3917,8 @@
         <image name="BLE_Logo.png" width="21" height="29"/>
         <image name="UIButtonBarRefresh.png" width="18" height="22"/>
         <image name="back_arrow.png" width="30" height="30"/>
-        <image name="background.jpg" width="320" height="568"/>
+        <image name="background-fade.jpg" width="843" height="568"/>
+        <image name="background.jpg" width="843" height="568"/>
         <image name="bd_cell_bottom.png" width="12" height="12"/>
         <image name="bd_cell_middle.png" width="6" height="6"/>
         <image name="bd_cell_top.png" width="12" height="12"/>
@@ -3913,10 +3940,8 @@
         <image name="icon_request.png" width="36" height="36"/>
         <image name="icon_send.png" width="36" height="36"/>
         <image name="icon_transactions.png" width="36" height="36"/>
-        <image name="logo_bitcoin.png" width="126" height="165"/>
+        <image name="logo_icon.png" width="126" height="165"/>
         <image name="logo_large.png" width="208" height="106"/>
-        <image name="postcard-mountain-blue.jpg" width="843" height="568"/>
-        <image name="postcard-mountain.png" width="843" height="568"/>
         <image name="scan_frame.png" width="271" height="226"/>
         <image name="swipe-arrow.png" width="34" height="18"/>
     </resources>

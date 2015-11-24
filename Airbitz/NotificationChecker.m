@@ -193,33 +193,23 @@ static NotificationChecker *singleton = nil;
     }
     _notificationTimer = [NSTimer scheduledTimerWithTimeInterval:NOTIF_PULL_REFRESH_INTERVAL_SECONDS
                                                           target:self
-                                                        selector:@selector(checkNotificationsAsync:)
+                                                        selector:@selector(checkNotifications)
                                                         userInfo:nil
                                                          repeats:YES];
 
     [_notificationTimer fire];
 }
 
-- (void)checkNotificationsAsync:(NSTimer *)timer
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
-        [self checkNotifications];
-    
-    });
-}
-
 - (void)checkNotifications
 {
     ABLog(2,@"ENTER checkNotifications\n");
     [self checkOtpResetPending];
-    [self performSelectorOnMainThread:@selector(checkDirectoryNotifications) withObject:nil waitUntilDone:FALSE];
 
-//    [self checkDirectoryNotifications];
+    [self checkDirectoryNotifications];
 
     if ([self getFirstUnseenNotification] != nil)
     {
-        [self performSelectorOnMainThread:@selector(postNotification) withObject:nil waitUntilDone:FALSE];
-//        [self postNotification];
+        [self postNotification];
     }
     ABLog(2,@"EXIT checkNotifications\n");
 }

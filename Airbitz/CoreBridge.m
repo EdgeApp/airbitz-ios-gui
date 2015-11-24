@@ -1084,13 +1084,13 @@ static BOOL bOtpError = NO;
     int decimalPlaces = 5;
     switch ([[User Singleton] denominationType]) {
         case ABC_DENOMINATION_BTC:
-            decimalPlaces = 5;
+            decimalPlaces = 6;
             break;
         case ABC_DENOMINATION_MBTC:
             decimalPlaces = 3;
             break;
         case ABC_DENOMINATION_UBTC:
-            decimalPlaces = 2;
+            decimalPlaces = 0;
             break;
     }
     return decimalPlaces;

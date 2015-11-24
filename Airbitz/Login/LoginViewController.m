@@ -29,6 +29,7 @@
 #import "Keychain.h"
 #import "NSMutableData+Secure.h"
 #import "SettingsViewController.h"
+#import "InfoView.h"
 
 typedef enum eLoginMode
 {
@@ -41,12 +42,13 @@ typedef enum eLoginMode
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate >
+    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
+    BOOL                            _bUsedTouchIDToLogin;
     NSString                        *_strReason;
     NSString                        *_account;
     tABC_CC                         _resultCode;
@@ -215,6 +217,7 @@ static BOOL bInitialized = false;
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1];
 
     _bTouchesEnabled = YES;
+    _bUsedTouchIDToLogin = NO;
 
     [self getAllAccounts];
     [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
@@ -310,11 +313,43 @@ typedef enum eReloginState
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    [[User Singleton] loadLocalSettings:nil];
+    
+    //
+    // Check if Disclaimer has ever been displayed on this device. If not, display it now
+    //
+    if ([[User Singleton] offerDisclaimer])
+    {
+        [self.passwordTextField resignFirstResponder];
+        [self.usernameSelector.textField resignFirstResponder];
+        [self.PINCodeView resignFirstResponder];
+
+        [InfoView CreateWithHTML:@"infoDisclaimer" forView:self.view agreeButton:YES delegate:self];
+    }
+    else
+    {
+        [self autoReloginOrTouchIDIfPossible];
+    }
+    
+}
+
+#pragma InfoViewDelegate
+- (void) InfoViewFinished:(InfoView *)infoView
+{
+    [infoView removeFromSuperview];
+    if (bPINModeEnabled)
+        [self.PINCodeView becomeFirstResponder];
+    else
+        [self.PINCodeView resignFirstResponder];
+
     [self autoReloginOrTouchIDIfPossible];
 }
 
 - (void)autoReloginOrTouchIDIfPossible
 {
+    _bUsedTouchIDToLogin = NO;
+    
     if (! [Keychain bHasSecureEnclave] ) return;
 
     NSString *username = [LocalSettings controller].cachedUsername;
@@ -361,6 +396,7 @@ typedef enum eReloginState
 
             if ([Keychain authenticateTouchID:prompt fallbackString:fallbackString]) {
                 bRelogin = YES;
+                _bUsedTouchIDToLogin = YES;
             }
             else
             {
@@ -1037,7 +1073,7 @@ typedef enum eReloginState
         [User login:self.usernameSelector.textField.text
            password:self.passwordTextField.text
            setupPIN:YES];
-        [self.delegate loginViewControllerDidLogin:NO newDevice:bNewDeviceLogin];
+        [self.delegate loginViewControllerDidLogin:NO newDevice:bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
 
         if ([Keychain bHasSecureEnclave])
         {
@@ -1196,7 +1232,7 @@ typedef enum eReloginState
         _bSuccess = YES;
         [SettingsViewController enableTouchID];
 
-        [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:NO];
+        [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:NO usedTouchID:NO];
     }
 }
 

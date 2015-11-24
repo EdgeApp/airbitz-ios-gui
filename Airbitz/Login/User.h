@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CommonTypes.h"
+#import "ABC.h"
 
 @interface User : NSObject
 
@@ -39,6 +40,7 @@
 @property (nonatomic) NSTimer *sendInvalidEntryTimer;
 @property (nonatomic) NSUInteger PINLoginInvalidEntryCount;
 @property (nonatomic) bool reviewNotified;
+@property (nonatomic) bool disclaimerViewed;
 @property (nonatomic) NSDate *firstLoginTime;
 @property (nonatomic) NSInteger loginCount;
 @property (nonatomic) NSInteger pinLoginCount;
@@ -64,6 +66,7 @@
 - (BOOL)offerSendHelp;
 - (BOOL)offerBleHelp;
 - (BOOL)offerWalletHelp;
+- (BOOL)offerDisclaimer;
 
 - (id)init;
 - (void)clear;
@@ -75,6 +78,8 @@
 - (NSTimeInterval)getRemainingInvalidEntryWait;
 - (bool)haveExceededPINLoginInvalidEntries;
 - (void)resetPINLoginInvalidEntryCount;
-- (void)incPinLogin;
+- (void)incPINorTouchIDLogin;
+- (void)loadLocalSettings:(tABC_AccountSettings *)pSettings;
+
 
 @end

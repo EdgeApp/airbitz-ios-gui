@@ -45,14 +45,15 @@
     _activePluginsView.btn_expandCollapse.hidden = YES;
     _activePluginsView.btn_addWallet.hidden = YES;
 
-    [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitleWithButton:self title:[Theme Singleton].buySellText action:nil fromObject:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [MainViewController changeNavBarOwner:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBarTitle:self title:[Theme Singleton].buySellText];
     _pluginTable.editing = NO;
 }
 
@@ -88,6 +89,12 @@
     return UITableViewCellEditingStyleNone;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    return [Theme Singleton].heightBLETableCells;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"BuySellCell";
@@ -100,8 +107,14 @@
     Plugin *plugin = [[Plugin getPlugins] objectAtIndex:row];
     [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
     cell.text.text = plugin.name;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
  
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [Theme Singleton].colorBackgroundHighlight;
+    bgColorView.layer.masksToBounds = YES;
+    cell.selectedBackgroundView = bgColorView;
+    
     return cell;
 }
 
@@ -110,6 +123,7 @@
     NSInteger row = [indexPath row];
     Plugin *plugin = [[Plugin getPlugins] objectAtIndex:row];
     [self launchPlugin:plugin];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider
@@ -147,7 +161,10 @@
 - (void)PluginViewControllerDone:(PluginViewController *)controller
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:@"" side:NAV_BAR_LEFT button:false enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBarTitle:self title:[Theme Singleton].buySellText];
+;
     [Util animateOut:controller parentController:self complete:^(void) {
         _pluginViewController = nil;
     }];

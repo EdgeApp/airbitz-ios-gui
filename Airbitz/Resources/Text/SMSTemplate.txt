@@ -12,7 +12,7 @@ Address: [[abtag ADDRESS]]
 Amount: [[abtag AMOUNT_BTC]] BTC
 Amount: [[abtag AMOUNT_BITS]] bits
 
-Sent from the Airbitz Mobile Bitcoin Wallet + Business Directory
+Sent from the [[abtag APP_TITLE]] Mobile Bitcoin Wallet + Business Directory
 
-Download Airbitz for iOS or Android
+Download [[abtag APP_TITLE]] for iOS or Android
 https://airbitz.co/app

@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIView                 *accountArrow;
 @property (weak, nonatomic) IBOutlet UIView                 *otherAccountsView;
 @property (weak, nonatomic) IBOutlet UIView                 *lowerViews;
+@property (weak, nonatomic) IBOutlet UIButton               *importGiftCardButton;
 @property (weak, nonatomic) IBOutlet UIButton               *buySellButton;
 @property (weak, nonatomic) IBOutlet UIButton               *accountButton;
 @property (weak, nonatomic) IBOutlet UIButton               *logoutButton;
@@ -57,10 +58,12 @@
     v->_parentView = parentView;
     v->_open = NO;
 
-    UIColor *back = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.05];
+    UIColor *back = [Theme Singleton].colorBackgroundHighlight;
     [v->_logoutButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_settingsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_buySellButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
+    [v->_walletsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
+    [v->_importGiftCardButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     return v;
 }
 
