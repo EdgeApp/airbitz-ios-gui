@@ -456,6 +456,7 @@
                         <outlet property="scanFrame" destination="IsP-NR-ytZ" id="WAe-eF-Ooy"/>
                         <outlet property="segmentedControl" destination="AOi-Wp-bVq" id="Ryr-z6-A2U"/>
                         <outlet property="tableView" destination="9C3-ej-2l9" id="sGK-l5-2nZ"/>
+                        <outlet property="topTextLabel" destination="cYL-n1-ybU" id="hGX-Ir-Hgd"/>
                         <outlet property="view" destination="of2-42-Lef" id="I0w-Df-2dv"/>
                     </connections>
                 </viewController>
