@@ -147,6 +147,8 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.uploadFailedText                                   = NSLocalizedString(@"Upload Failed", @"Upload Failed");
     self.watcherClearedText                                 = NSLocalizedString(@"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync", @"Watcher Database Cleared popup text");
     self.PINOnlyNumbersText                                 = NSLocalizedString(@"Only numbers allowed in PIN", @"");
+    self.scanQrToSendFundsText                              = NSLocalizedString(@"Scan QR to Send or Login with BitID", @"Text at top of Send screen");
+    self.scanQrToImportPrivateKeyOrGiftCard                 = NSLocalizedString(@"Scan QR to Import Private Key/Gift Card", @"Text at top of Import screen");
 
 //    self.                         = NSLocalizedString(@"", @"");
 

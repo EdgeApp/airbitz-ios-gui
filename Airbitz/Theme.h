@@ -110,6 +110,8 @@
 @property (nonatomic) NSString *uploadFailedText;
 @property (nonatomic) NSString *watcherClearedText;
 @property (nonatomic) NSString *PINOnlyNumbersText;
+@property (nonatomic) NSString *scanQrToSendFundsText;
+@property (nonatomic) NSString *scanQrToImportPrivateKeyOrGiftCard;
 
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
 @property (nonatomic) CGFloat buttonFontSize;

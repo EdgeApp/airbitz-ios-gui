@@ -106,6 +106,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, strong)   NSArray                         *arrayChoicesIndexes;
 @property (nonatomic, strong)   PopupPickerView2                *popupPickerSendTo;
 @property (nonatomic, strong)   IBOutlet UILabel				*scanningErrorLabel;
+@property (weak, nonatomic)     IBOutlet UILabel                *topTextLabel;
 
 @property (weak, nonatomic)     IBOutlet UISegmentedControl     *segmentedControl;
 @property (weak, nonatomic)     IBOutlet NSLayoutConstraint     *bleViewHeight;
@@ -137,7 +138,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
 	[super viewDidLoad];
     [MainViewController fadingAlertDismiss];
-
+    
     bWalletListDropped = false;
 
     self.buttonSelector.delegate = self;
@@ -245,10 +246,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     if (_bImportMode)
     {
-        //XXX add Import help
+        self.topTextLabel.text = [Theme Singleton].scanQrToImportPrivateKeyOrGiftCard;
     }
     else
     {
+        self.topTextLabel.text = [Theme Singleton].scanQrToSendFundsText;
         if ([[User Singleton] offerSendHelp])
         {
             [MainViewController fadingAlertHelpPopup:[Theme Singleton].sendScreenHelpText];
