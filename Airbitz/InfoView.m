@@ -90,18 +90,10 @@ static NSString *currentHtml = nil;
     currentHtml = strHTML;
 
     iv.agreeButtonHeight.constant  = 0;
+    iv.agreeButton.hidden = YES;
 
     iv.bAgreeButton = bAgreeButton;
-    if (bAgreeButton)
-    {
-        iv.agreeButton.hidden = NO;
-        iv.closeButton.hidden = YES;
-    }
-    else
-    {
-        iv.agreeButton.hidden = YES;
-        iv.closeButton.hidden = NO;
-    }
+    iv.closeButton.hidden = bAgreeButton;
 
 	return iv;
 }
