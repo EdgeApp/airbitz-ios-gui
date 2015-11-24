@@ -1038,44 +1038,7 @@ html body .user-account-form {
   position: relative;
   bottom: auto;
 }
-button.btn-add.btn {
-  width: 100px;
-  height: 100px;
-  font-weight: bold;
-  font-size: 30px;
-  border-radius: 50px;
-  margin: 20px;
-  background-color: #2291CF;
-}
-.fold-loading-spin {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  /* bring your own prefixes */
-  transform: translate(-50%, -50%);
-}
-.main {
-  display: none;
-}
-.barcode {
-  width: 200px;
-  height: 65px;
-}
-#user-cards .item {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-.add-buttons {
-  text-align: left;
-}
-.collection .collection-item.avatar.card-list {
-  padding: 10px 20px;
-}
-.card-content.card-info-main {
-  padding: 0;
-  margin: 0;
-}
+
 /* Fixes flicker issues seen in Safari */
 .ng-trans-fade.ng-enter {
   display: none;
@@ -1326,7 +1289,6 @@ function _bridge() {
     return Airbitz._bridge.bitidSignature(uri, message);
   };
 
-  // Options has callback functions success and error.
   Airbitz.core.selectedWallet = function(options) {
     Airbitz._bridge.selectedWallet(options);
   };
@@ -1343,7 +1305,6 @@ function _bridge() {
     Airbitz._bridge.finalizeRequest(wallet, requestId);
   },
 
-  // Takes a spend request and sends user to send confirmation screen to spend.
   Airbitz.core.requestSpend = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
     Airbitz._bridge.requestSpend(wallet, toAddress, amountSatoshi, amountFiat, options);
   };
@@ -1352,15 +1313,13 @@ function _bridge() {
     Airbitz._bridge.writeData(key, JSON.stringify(data));
   };
 
-  // Clears all data stored by the plugin.
   Airbitz.core.clearData = function() {
     Airbitz._bridge.clearData();
   };
 
-  // Retrives data for a JSON key stored for the plugin.
   Airbitz.core.readData = function(key) {
     var data = Airbitz._bridge.readData(key);
-    return (data && data !== 'undefined') ? JSON.parse(data) : null;
+    return (data && data !== 'undefined') ? JSON.parse(data) : data;
   };
 
   Airbitz.core.getBtcDenomination = function() {
@@ -1387,14 +1346,10 @@ function _bridge() {
     return Airbitz._bridge.getConfig(key);
   };
 
-  /* Callback is called when wallet is changed AND every time plugin is created.
-  ** Callback is provided wallet as parameter.
-  */
   Airbitz.core.setWalletChangeListener = function(callback) {
     Airbitz._walletListener = callback;
   };
 
-  //
   Airbitz._bridge.walletChanged = function(newWallet) {
     if (Airbitz._walletListener) {
       var j = JSON.parse(newWallet);
@@ -11327,6 +11282,10 @@ module.run(['$templateCache', function($templateCache) {
     '        <tr>\n' +
     '          <td>Total</td>\n' +
     '          <td>{{ exchange.currencySymbol }}{{ priceObj.total || 0 | roundFiat }} {{ exchange.currency }}</td>\n' +
+    '        </tr>\n' +
+    '        <tr>\n' +
+    '          <td>Estimated Delivery:</td>\n' +
+    '          <td>4 Business Days</td>\n' +
     '        </tr>\n' +
     '      </tbody>\n' +
     '    </table>\n' +
