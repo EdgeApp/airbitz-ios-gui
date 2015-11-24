@@ -1895,8 +1895,8 @@
 		DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
 		DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DA10BB971BFF90980086AD8B /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
-		DA10BD7D1BFF9E330086AD8B /* Rack Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rack Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA10BD821BFF9E330086AD8B /* Rack Wallet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Rack Wallet-Info.plist"; path = "/Users/paul/git/airbitz-ios-gui-private-wl/RackWallet/Rack Wallet-Info.plist"; sourceTree = "<absolute>"; };
+		DA10BD7D1BFF9E330086AD8B /* RackWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RackWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA10BD821BFF9E330086AD8B /* RackWallet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "RackWallet-Info.plist"; path = "/Users/paul/git/airbitz-ios-gui-private-wl/RackWallet/RackWallet-Info.plist"; sourceTree = "<absolute>"; };
 		DA10BD901BFF9E4A0086AD8B /* Rack Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Rack Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA10BD911BFF9E4A0086AD8B /* Rack Wallet Widget-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Rack Wallet Widget-Info.plist"; path = "/Users/paul/git/airbitz-ios-gui-private-wl/RackWallet/Rack Wallet Widget-Info.plist"; sourceTree = "<absolute>"; };
 		DA10BD931BFFA8770086AD8B /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
@@ -2857,7 +2857,7 @@
 			children = (
 				DA10BDCB1C0014690086AD8B /* Rack Wallet.entitlements */,
 				DA10BDCC1C0014690086AD8B /* Rack Widget.entitlements */,
-				DA10BD821BFF9E330086AD8B /* Rack Wallet-Info.plist */,
+				DA10BD821BFF9E330086AD8B /* RackWallet-Info.plist */,
 				DA10BD911BFF9E4A0086AD8B /* Rack Wallet Widget-Info.plist */,
 				DA10BD931BFFA8770086AD8B /* background-fade@2x.jpg */,
 				DA10BD941BFFA8770086AD8B /* background@2x.jpg */,
@@ -3798,7 +3798,7 @@
 				DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */,
 				DA9EF5131BC7285D0063DA07 /* Airbitz Develop.app */,
 				DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */,
-				DA10BD7D1BFF9E330086AD8B /* Rack Wallet.app */,
+				DA10BD7D1BFF9E330086AD8B /* RackWallet.app */,
 				DA10BD901BFF9E4A0086AD8B /* Rack Widget.appex */,
 			);
 			name = Products;
@@ -3954,9 +3954,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DA10BBA81BFF9E330086AD8B /* Rack Wallet */ = {
+		DA10BBA81BFF9E330086AD8B /* RackWallet */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA10BD7A1BFF9E330086AD8B /* Build configuration list for PBXNativeTarget "Rack Wallet" */;
+			buildConfigurationList = DA10BD7A1BFF9E330086AD8B /* Build configuration list for PBXNativeTarget "RackWallet" */;
 			buildPhases = (
 				DA10BBAB1BFF9E330086AD8B /* Check Pods Manifest.lock */,
 				DA10BBAC1BFF9E330086AD8B /* Sources */,
@@ -3971,9 +3971,9 @@
 			dependencies = (
 				DA10BDC71C0012B20086AD8B /* PBXTargetDependency */,
 			);
-			name = "Rack Wallet";
-			productName = Airbitz;
-			productReference = DA10BD7D1BFF9E330086AD8B /* Rack Wallet.app */;
+			name = RackWallet;
+			productName = "Rack Wallet";
+			productReference = DA10BD7D1BFF9E330086AD8B /* RackWallet.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA10BD831BFF9E4A0086AD8B /* Rack Widget */ = {
@@ -3989,7 +3989,7 @@
 			dependencies = (
 			);
 			name = "Rack Widget";
-			productName = "Airbitz Widget";
+			productName = "Rack Widget";
 			productReference = DA10BD901BFF9E4A0086AD8B /* Rack Widget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
@@ -4191,7 +4191,7 @@
 				DAD1AD8F1BC6065100C648C4 /* AirbitzTests */,
 				DAD1AD9A1BC6065100C648C4 /* AirbitzUITests */,
 				DA9ED6E91BC607FA0063DA07 /* Airbitz Widget */,
-				DA10BBA81BFF9E330086AD8B /* Rack Wallet */,
+				DA10BBA81BFF9E330086AD8B /* RackWallet */,
 				DA10BD831BFF9E4A0086AD8B /* Rack Widget */,
 			);
 		};
@@ -6113,7 +6113,7 @@
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "RackWallet/Rack Wallet-Info.plist";
+				INFOPLIST_FILE = "RackWallet/RackWallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6154,7 +6154,7 @@
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "RackWallet/Rack Wallet-Info.plist";
+				INFOPLIST_FILE = "RackWallet/RackWallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6611,7 +6611,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DA10BD7A1BFF9E330086AD8B /* Build configuration list for PBXNativeTarget "Rack Wallet" */ = {
+		DA10BD7A1BFF9E330086AD8B /* Build configuration list for PBXNativeTarget "RackWallet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA10BD7B1BFF9E330086AD8B /* Debug */,
