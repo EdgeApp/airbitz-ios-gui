@@ -73,6 +73,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorRequestBottomTextField = self.colorTextDark;
 
     self.bdButtonBlue = UIColorFromARGB(0xff0079B9);
+    self.colorBackgroundHighlight = [UIColor colorWithRed:(76.0/255.0) green:(161.0/255.0) blue:(255.0/255.0) alpha:0.25];
     self.colorsProfileIcons = [[NSMutableArray alloc] init];
 
     [self.colorsProfileIcons addObject:UIColorFromRGB(0xec6a5e)];
@@ -123,7 +124,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.changePINText                                      = NSLocalizedString(@"Change PIN", nil);
     self.twoFactorText                                      = NSLocalizedString(@"Two Factor", nil);
     self.importText                                         = NSLocalizedString(@"Import", nil);
-    self.buySellText                                        = NSLocalizedString(@"Buy/Sell (Beta)", nil);
+    self.buySellText                                        = NSLocalizedString(@"Buy/Sell Bitcoin", nil);
     self.passwordRecoveryText                               = NSLocalizedString(@"Password Recovery", nil);
     self.passwordMismatchText                               = NSLocalizedString(@"Password does not match re-entered password", @"");
     self.defaultCurrencyInfoText                            = NSLocalizedString(@"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.", nil);
@@ -145,6 +146,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.uploadSuccessfulText                               = NSLocalizedString(@"Upload Successful", @"Upload Successful fading popup");
     self.uploadFailedText                                   = NSLocalizedString(@"Upload Failed", @"Upload Failed");
     self.watcherClearedText                                 = NSLocalizedString(@"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync", @"Watcher Database Cleared popup text");
+    self.PINOnlyNumbersText                                 = NSLocalizedString(@"Only numbers allowed in PIN", @"");
 
 //    self.                         = NSLocalizedString(@"", @"");
 
@@ -165,7 +167,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 
     self.backgroundApp = [UIImage imageNamed:@"background-fade.jpg"];
     self.backgroundLogin = [UIImage imageNamed:@"background.jpg"];
-
+    
 //    if (IS_IPHONE4)
     {
         self.heightListings = 90.0;
