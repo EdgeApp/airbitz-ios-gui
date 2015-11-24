@@ -914,7 +914,15 @@
             [_confirmationSlider resetIn:1.0];
 
         } else if (_passwordRequired) {
-            [Util checkPasswordAsync:self.withdrawlPIN.text withSelector:@selector(handlePasswordCheck:) controller:self];
+            BOOL matched = [CoreBridge passwordOk:self.withdrawlPIN.text];
+            if (matched) {
+                [self continueChecks];
+            } else {
+                [self fadingAlertDelayed:NSLocalizedString(@"Incorrect password", nil)];
+                [_withdrawlPIN becomeFirstResponder];
+                [_withdrawlPIN selectAll:nil];
+                [_confirmationSlider resetIn:1.0];
+            }
         } else {
             [self continueChecks];
         }
@@ -929,19 +937,6 @@
             [MainViewController fadingAlert:message];
         });
     }];
-}
-
-- (void)handlePasswordCheck:(NSNumber *)authenticated
-{
-    BOOL bAuthenticated = [authenticated boolValue];
-    if (bAuthenticated) {
-        [self continueChecks];
-    } else {
-        [MainViewController fadingAlert:NSLocalizedString(@"Incorrect password", nil)];
-        [_withdrawlPIN becomeFirstResponder];
-        [_withdrawlPIN selectAll:nil];
-        [_confirmationSlider resetIn:1.0];
-    }
 }
 
 - (void)continueChecks
