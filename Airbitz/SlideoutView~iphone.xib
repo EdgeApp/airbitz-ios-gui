@@ -131,7 +131,7 @@
                                         <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                     </accessibility>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUY/SELL/SPEND BITCOIN" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rWQ-uJ-DUX" userLabel="buysellText">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUY/SELL BITCOIN" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rWQ-uJ-DUX" userLabel="buysellText">
                                     <rect key="frame" x="79" y="0.0" width="161" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <animations/>
