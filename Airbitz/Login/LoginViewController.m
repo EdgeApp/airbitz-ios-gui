@@ -184,6 +184,12 @@ static BOOL bInitialized = false;
     self.titleText.layer.shadowColor = [[UIColor whiteColor] CGColor];
     self.titleText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
+    self.PINusernameSelector.button.layer.shadowRadius = 3.0f;
+    self.PINusernameSelector.button.layer.shadowOpacity = 1.0f;
+    self.PINusernameSelector.button.layer.masksToBounds = NO;
+    self.PINusernameSelector.button.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.PINusernameSelector.button.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    
     self.forgotPassworddButton.layer.shadowRadius = 3.0f;
     self.forgotPassworddButton.layer.shadowOpacity = 1.0f;
     self.forgotPassworddButton.layer.masksToBounds = NO;
