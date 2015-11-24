@@ -101,6 +101,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -158,7 +159,7 @@
                                     <tabBarItem title="Request" image="icon_request.png" id="uTa-MB-0Sl">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
-                                    <tabBarItem title="Send" image="icon_send.png" id="6Ey-Xn-GTe">
+                                    <tabBarItem title="Scan" image="icon_send.png" id="6Ey-Xn-GTe">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
                                     <tabBarItem title="Transactions" image="icon_transactions.png" id="j3q-OI-el3" userLabel="Transactions">
@@ -342,7 +343,25 @@
                                     <constraint firstAttribute="bottom" secondItem="9C3-ej-2l9" secondAttribute="bottom" id="fnB-bp-z3b"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrj-OZ-WpR" userLabel="BlurView" customClass="BlurView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3w-fU-j91" userLabel="Top BlurView" customClass="BlurView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="40"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="fxj-vv-ZSu"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleDark" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR to Send Funds or Login with BitID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-n1-ybU" userLabel="Scan QR to Send or Login with BitID">
+                                <rect key="frame" x="0.0" y="64" width="320" height="40"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrj-OZ-WpR" userLabel="Bottom BlurView" customClass="BlurView">
                                 <rect key="frame" x="0.0" y="377" width="320" height="54"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -400,6 +419,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="IsP-NR-ytZ" secondAttribute="bottom" id="0tx-rQ-VTX"/>
+                            <constraint firstItem="cYL-n1-ybU" firstAttribute="bottom" secondItem="p3w-fU-j91" secondAttribute="bottom" id="2zi-2k-ryo"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="bottom" secondItem="jrj-OZ-WpR" secondAttribute="bottom" id="BD7-Mw-Htv"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="CRv-kb-3AU"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="top" secondItem="jrj-OZ-WpR" secondAttribute="top" id="FE7-MO-dAU"/>
@@ -412,12 +432,18 @@
                             <constraint firstItem="g9e-kM-2rC" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="Rlk-dD-FSj"/>
                             <constraint firstAttribute="trailing" secondItem="Wik-w7-rsL" secondAttribute="trailing" id="WB1-u2-Kp5"/>
                             <constraint firstItem="aan-73-l0U" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" constant="10" id="XGu-8e-3kr"/>
+                            <constraint firstItem="cYL-n1-ybU" firstAttribute="trailing" secondItem="p3w-fU-j91" secondAttribute="trailing" id="ZGq-0v-6Xy"/>
                             <constraint firstAttribute="trailing" secondItem="g9e-kM-2rC" secondAttribute="trailing" id="a1j-fU-gWs"/>
                             <constraint firstItem="IsP-NR-ytZ" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="gIb-dm-Eyq"/>
                             <constraint firstAttribute="bottom" secondItem="Wik-w7-rsL" secondAttribute="bottom" constant="49" id="jMR-HN-Qff"/>
+                            <constraint firstItem="cYL-n1-ybU" firstAttribute="top" secondItem="p3w-fU-j91" secondAttribute="top" id="oLv-Oy-6dx"/>
+                            <constraint firstAttribute="trailing" secondItem="p3w-fU-j91" secondAttribute="trailing" id="qI8-gw-Y7C"/>
+                            <constraint firstItem="cYL-n1-ybU" firstAttribute="leading" secondItem="p3w-fU-j91" secondAttribute="leading" id="qTq-d6-26Y"/>
                             <constraint firstItem="aan-73-l0U" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" constant="70" id="sQL-hq-oPg"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="top" secondItem="V8c-6o-ibr" secondAttribute="bottom" id="sbw-6l-sjS"/>
                             <constraint firstAttribute="trailing" secondItem="V8c-6o-ibr" secondAttribute="trailing" id="uVA-Gd-QqU"/>
+                            <constraint firstItem="p3w-fU-j91" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" constant="64" id="uuz-aN-cYY"/>
+                            <constraint firstItem="p3w-fU-j91" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="xOx-C4-Uvh"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="trailing" secondItem="jrj-OZ-WpR" secondAttribute="trailing" id="yAN-pG-hzZ"/>
                         </constraints>
                     </view>
@@ -3891,8 +3917,8 @@
         <image name="BLE_Logo.png" width="21" height="29"/>
         <image name="UIButtonBarRefresh.png" width="18" height="22"/>
         <image name="back_arrow.png" width="30" height="30"/>
-        <image name="background-fade.jpg" width="640" height="640"/>
-        <image name="background.jpg" width="320" height="568"/>
+        <image name="background-fade.jpg" width="843" height="568"/>
+        <image name="background.jpg" width="843" height="568"/>
         <image name="bd_cell_bottom.png" width="12" height="12"/>
         <image name="bd_cell_middle.png" width="6" height="6"/>
         <image name="bd_cell_top.png" width="12" height="12"/>

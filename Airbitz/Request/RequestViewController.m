@@ -1200,6 +1200,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         default:
         {
+            if ([LocalSettings controller].bMerchantMode && self.state == kDone)
+            {
+                // In merchant mode, popup up the keyboard after a full payment is made
+                [self changeCalculator:YES show:YES];
+            }
             [[AudioController controller] playReceived];
             return;
         }

@@ -1002,6 +1002,8 @@
         cell = [self getTransactionCellForTableView:tableView];
         [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
 
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        
         Transaction *transaction = NULL;
         BOOL bBlankCell = NO;
         if ([self searchEnabled])
@@ -1141,6 +1143,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     if (tableView == self.tableView)
     {
 
@@ -1434,6 +1438,8 @@
     //wallet cell
     cell = [self getWalletCellForTableView:tableView];
     [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
+
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 
     if (nil == [CoreBridge Singleton].arrayWallets)
         return cell;
