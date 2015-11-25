@@ -69,9 +69,9 @@
 
 - (void) updateViews
 {
-    [MainViewController changeNavBarTitle:self title:[Theme Singleton].twoFactorText];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].importText side:NAV_BAR_RIGHT button:true enable:!self.bNoImportButton action:@selector(Import:) fromObject:self];
+    [MainViewController changeNavBarTitle:self title:twoFactorText];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:importText side:NAV_BAR_RIGHT button:true enable:!self.bNoImportButton action:@selector(Import:) fromObject:self];
 }
 
 - (void)initUI
@@ -149,7 +149,7 @@
             [self checkRequest];
         });
         if (bMsg) {
-            [MainViewController fadingAlert:[Theme Singleton].twofactorWarningText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+            [MainViewController fadingAlert:twofactorWarningText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
         }
     } else {
         if (bMsg) {

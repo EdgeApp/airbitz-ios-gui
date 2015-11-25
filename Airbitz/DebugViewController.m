@@ -14,6 +14,7 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "Util.h"
+#import "Strings.h"
 
 @interface DebugViewController ()  <UIGestureRecognizerDelegate>
 {
@@ -72,8 +73,8 @@
 {
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Debug Options", @"Debug screen header title")];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
 
 
@@ -101,7 +102,7 @@
 - (IBAction)uploadLogs:(id)sender
 {
     ABLog(2,@"Uploading Logs\n");
-    [MainViewController fadingAlert:[Theme Singleton].uploadingLogText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    [MainViewController fadingAlert:uploadingLogText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
 
     [CoreBridge postToMiscQueue:^{
         tABC_Error Error;
@@ -111,11 +112,11 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             if (ABC_CC_Ok == Error.code)
             {
-                [MainViewController fadingAlert:[Theme Singleton].uploadSuccessfulText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                [MainViewController fadingAlert:uploadSuccessfulText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }
             else
             {
-                [MainViewController fadingAlert:[Theme Singleton].uploadFailedText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                [MainViewController fadingAlert:uploadFailedText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }
 
         });
@@ -139,7 +140,7 @@
         [CoreBridge startWatchers];
         dispatch_async(dispatch_get_main_queue(), ^(void){
             self.clearWatcherButton.titleLabel.text = buttonText;
-            [MainViewController fadingAlert:[Theme Singleton].watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+            [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
         });
     }];
 }

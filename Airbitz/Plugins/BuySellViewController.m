@@ -51,9 +51,9 @@
 {
     [super viewWillAppear:animated];
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitle:self title:[Theme Singleton].buySellText];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBarTitle:self title:buySellText];
     _pluginTable.editing = NO;
 }
 
@@ -161,9 +161,9 @@
 - (void)PluginViewControllerDone:(PluginViewController *)controller
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitle:self title:[Theme Singleton].buySellText];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBarTitle:self title:buySellText];
 ;
     [Util animateOut:controller parentController:self complete:^(void) {
         _pluginViewController = nil;

@@ -231,7 +231,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     else if (self.loopbackState == LoopbackState_Invalid_Address)
     {
         UIAlertView *alert = [[UIAlertView alloc]
-                initWithTitle:[Theme Singleton].invalidAddressPopupText
+                initWithTitle:invalidAddressPopupText
                       message:NSLocalizedString(@"", nil)
                      delegate:self
             cancelButtonTitle:@"OK"
@@ -246,14 +246,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     if (_bImportMode)
     {
-        self.topTextLabel.text = [Theme Singleton].scanQrToImportPrivateKeyOrGiftCard;
+        self.topTextLabel.text = scanQrToImportPrivateKeyOrGiftCard;
     }
     else
     {
-        self.topTextLabel.text = [Theme Singleton].scanQrToSendFundsText;
+        self.topTextLabel.text = scanQrToSendFundsText;
         if ([[User Singleton] offerSendHelp])
         {
-            [MainViewController fadingAlertHelpPopup:[Theme Singleton].sendScreenHelpText];
+            [MainViewController fadingAlertHelpPopup:sendScreenHelpText];
         }
     }
 
@@ -278,8 +278,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)setupNavBar
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -301,7 +301,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [self.buttonSelector open];
         bWalletListDropped = true;
     }
-    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
 
 }
 
@@ -488,7 +488,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                                    relativePosition:PopupPicker2Position_Full_Rising
                                                         withStrings:arrayChoices
                                                       withAccessory:nil
-                                                         headerText:[Theme Singleton].selectWalletTransferPopupHeaderText
+                                                         headerText:selectWalletTransferPopupHeaderText
             ];
             self.popupPickerSendTo.delegate = self;
             // Do Transfer
@@ -496,13 +496,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         case 1:
             if (_bImportMode)
             {
-                title = [Theme Singleton].enterPrivateKeyPopupText;
-                placeholderText = [Theme Singleton].enterPrivateKeyPlaceholder;
+                title = enterPrivateKeyPopupText;
+                placeholderText = enterPrivateKeyPlaceholder;
             }
             else
             {
-                title = [Theme Singleton].enterBitcoinAddressPopupText;
-                placeholderText = [Theme Singleton].enterBitcoinAddressPlaceholder;
+                title = enterBitcoinAddressPopupText;
+                placeholderText = enterBitcoinAddressPlaceholder;
             }
             if ([clipboard length] >= 10)
             {
@@ -516,9 +516,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             typeAddressAlertView =[[UIAlertView alloc ] initWithTitle:title
                                                               message:nil
                                                              delegate:self
-                                                    cancelButtonTitle:[Theme Singleton].cancelButtonText
-//                                                    otherButtonTitles:[Theme Singleton].doneButtonText, nil];
-                                                    otherButtonTitles:[Theme Singleton].doneButtonText, pasteString, nil];
+                                                    cancelButtonTitle:cancelButtonText
+//                                                    otherButtonTitles:doneButtonText, nil];
+                                                    otherButtonTitles:doneButtonText, pasteString, nil];
             typeAddressAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
             textField = [typeAddressAlertView textFieldAtIndex:0];
             textField.placeholder = placeholderText;
@@ -1316,7 +1316,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
         {
             [FadingAlertView create:self.view
-                            message:[Theme Singleton].walletHasBeenArchivedText
+                            message:walletHasBeenArchivedText
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
         }
 

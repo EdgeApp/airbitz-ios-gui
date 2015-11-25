@@ -208,10 +208,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)updateViews
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBarTitle:self title:[Theme Singleton].settingsText];
+    [MainViewController changeNavBarTitle:self title:settingsText];
 
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(Info) fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(Info) fromObject:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -1539,7 +1539,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             if (_pAccountSettings)
             {
                 _pAccountSettings->currencyNum = [[[CoreBridge Singleton].arrayCurrencyNums objectAtIndex:row] intValue];
-                [FadingAlertView create:self.view message:[Theme Singleton].defaultCurrencyInfoText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                [FadingAlertView create:self.view message:defaultCurrencyInfoText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }
         }
     }

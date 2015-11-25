@@ -1059,7 +1059,7 @@ MainViewController *singleton;
 
     if (bNewAccount) {
         [FadingAlertView create:self.view
-                        message:[Theme Singleton].creatingWalletText
+                        message:creatingWalletText
                        holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
         [CoreBridge setupNewAccount];
     }
@@ -1179,13 +1179,13 @@ MainViewController *singleton;
 
 - (void)showPasswordCheckSkip
 {
-    [MainViewController fadingAlertHelpPopup:[Theme Singleton].createAccountAndTransferFundsText];
+    [MainViewController fadingAlertHelpPopup:createAccountAndTransferFundsText];
 }
 
 - (void)showPasswordSetAlert
 {
     NSString *title = NSLocalizedString(@"No password set", nil);
-    NSString *message = [Theme Singleton].createPasswordForAccountText;
+    NSString *message = createPasswordForAccountText;
     // show password reminder test
     _passwordSetAlert = [[UIAlertView alloc]
             initWithTitle:title
@@ -1217,13 +1217,13 @@ MainViewController *singleton;
 
 
     NSString *str = NSLocalizedString(@"How are you liking %@?", @"Like Airbitz popup");
-    NSString *str2 = [NSString stringWithFormat:str, [Theme Singleton].appTitle];
+    NSString *str2 = [NSString stringWithFormat:str, appTitle];
 
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
         if([User offerUserReview]) {
             _userReviewAlert = [[UIAlertView alloc]
-                                    initWithTitle:[Theme Singleton].appTitle
+                                    initWithTitle:appTitle
                                     message:str2
                                     delegate:self
                                     cancelButtonTitle:NSLocalizedString(@"Not so good", nil)
@@ -1489,8 +1489,8 @@ MainViewController *singleton;
     if ([MFMailComposeViewController canSendMail])
     {
         MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
-        [mailComposer setToRecipients:[NSArray arrayWithObjects:[Theme Singleton].supportEmail, nil]];
-        NSString *subject = [NSString stringWithFormat:@"%@ Feedback", [Theme Singleton].appTitle];
+        [mailComposer setToRecipients:[NSArray arrayWithObjects:supportEmail, nil]];
+        NSString *subject = [NSString stringWithFormat:@"%@ Feedback", appTitle];
         [mailComposer setSubject:NSLocalizedString(subject, nil)];
         mailComposer.mailComposeDelegate = self;
         [self presentViewController:mailComposer animated:YES completion:nil];
@@ -1510,7 +1510,7 @@ MainViewController *singleton;
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    NSString *strTitle = [Theme Singleton].appTitle;
+    NSString *strTitle = appTitle;
     NSString *strMsg = nil;
     
     switch (result)
@@ -1871,7 +1871,7 @@ MainViewController *singleton;
 
     [Keychain disableRelogin:[User Singleton].name];
     [FadingAlertView create:self.view
-                    message:[NSString stringWithFormat:str, [Theme Singleton].appTitle]
+                    message:[NSString stringWithFormat:str, appTitle]
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
                 // Log the user out and reset UI
                 [[User Singleton] clear];

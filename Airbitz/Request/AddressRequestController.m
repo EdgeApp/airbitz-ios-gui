@@ -85,18 +85,18 @@
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
         {
             [FadingAlertView create:self.view
-                            message:[Theme Singleton].walletHasBeenArchivedText
+                            message:walletHasBeenArchivedText
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
         }
     }
     
-    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:NO action:nil fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:NO action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:NO action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:NO action:nil fromObject:self];
     
 //    [MainViewController changeNavBarOwner:self];
 //    [MainViewController changeNavBarTitle:self title:@"Airbitz"];
-//    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
-//    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+//    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+//    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 //
 //    _walletSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
 //    [_walletSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
@@ -115,7 +115,7 @@
         [self.buttonSelector open];
         bWalletListDropped = true;
     }
-    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
 }
 
 - (void)validateUri

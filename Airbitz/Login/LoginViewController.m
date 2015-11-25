@@ -394,11 +394,11 @@ typedef enum eReloginState
     {
         if (bUseTouchID && !bRelogin)
         {
-            NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",[Theme Singleton].touchIDPromptText, username];
+            NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",touchIDPromptText, username];
             NSString *fallbackString;
 
             if (reloginState == RELOGIN_USE_PASSWORD)
-                fallbackString = [Theme Singleton].usePasswordText;
+                fallbackString = usePasswordText;
 
             if ([Keychain authenticateTouchID:prompt fallbackString:fallbackString]) {
                 bRelogin = YES;
@@ -1315,8 +1315,7 @@ typedef enum eReloginState
 - (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
 {
     _account = string;
-    NSString *message = [NSString stringWithFormat:[Theme Singleton].deleteAccountWarning,
-                       string];
+    NSString *message = [NSString stringWithFormat:deleteAccountWarning, string];
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:NSLocalizedString(@"Delete Account", nil)
                           message:NSLocalizedString(message, nil)
@@ -1526,7 +1525,7 @@ typedef enum eReloginState
 - (void)ButtonSelectorDidTouchAccessory:(ButtonSelectorView *)selector accountString:(NSString *)string
 {
     _account = string;
-    NSString *message = [NSString stringWithFormat:[Theme Singleton].deleteAccountWarning,
+    NSString *message = [NSString stringWithFormat:deleteAccountWarning,
                                                    string];
     UIAlertView *alert = [[UIAlertView alloc]
             initWithTitle:NSLocalizedString(@"Delete Account", @"Delete Account")

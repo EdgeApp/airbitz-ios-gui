@@ -130,8 +130,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(Back:) fromObject:self];
 
     if (self.businessDetails)
         [MainViewController changeNavBarTitle:self title:[self.businessDetails objectForKey:@"name"]];

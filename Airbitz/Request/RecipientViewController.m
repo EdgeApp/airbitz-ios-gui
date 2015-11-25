@@ -95,8 +95,8 @@
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:(self.mode == RecipientMode_Email ? @"Email Recipient" : @"SMS Recipient")];
 
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched:) fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched:) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched:) fromObject:self];
 }
 
 - (void)didReceiveMemoryWarning

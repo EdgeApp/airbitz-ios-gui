@@ -1403,6 +1403,8 @@
 /* Begin PBXFileReference section */
 		0C88A91632A7616E92B4670D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		34644A774ED9B0786711E100 /* BrandStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStrings.h; sourceTree = "<group>"; };
+		34644A95F98F7C787C35866F /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
 		61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
 		DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
@@ -3251,6 +3253,7 @@
 				DA9ED7831BC61E670063DA07 /* BalanceView~iphone.xib */,
 				DA9ED7841BC61E670063DA07 /* BlurView.h */,
 				DA9ED7851BC61E670063DA07 /* BlurView.m */,
+				34644A774ED9B0786711E100 /* BrandStrings.h */,
 				DA9ED7861BC61E670063DA07 /* ButtonSelectorView.h */,
 				DA9ED7871BC61E670063DA07 /* ButtonSelectorView.m */,
 				DA9ED7881BC61E670063DA07 /* ButtonSelectorView~iphone.xib */,
@@ -3298,6 +3301,7 @@
 				DA9ED7B41BC61E680063DA07 /* SlideoutView.h */,
 				DA9ED7B51BC61E680063DA07 /* SlideoutView.m */,
 				DA9ED7B61BC61E680063DA07 /* SlideoutView~iphone.xib */,
+				34644A95F98F7C787C35866F /* Strings.h */,
 				DA9ED7B71BC61E680063DA07 /* StylizedButton.h */,
 				DA9ED7B81BC61E680063DA07 /* StylizedButton.m */,
 				DA9ED7B91BC61E680063DA07 /* StylizedButtonOutline.h */,
