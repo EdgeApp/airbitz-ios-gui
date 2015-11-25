@@ -6167,7 +6167,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.coinbtm.rackwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4611177-34b3-4954-80af-0a4675a1913a";
+				PROVISIONING_PROFILE = "53941878-70e6-4e69-997c-2ba4a14dbe67";
 			};
 			name = Release;
 		};
@@ -6195,7 +6195,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.coinbtm.rackwallet.Rack-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0bb3cf74-bfb2-4a86-8a26-e632d685d1d5";
+				PROVISIONING_PROFILE = "698cedb4-e43b-47a2-bc8a-e5c2e7225cd7";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
