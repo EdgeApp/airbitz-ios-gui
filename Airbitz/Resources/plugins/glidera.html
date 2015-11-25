@@ -10013,7 +10013,7 @@ var Glidera = (function () {
       val = parseFloat(val);
       var d = Airbitz.cryptoDenom;
       if (d == "mBTC") {
-        return (val * 100).toFixed(to || 3);
+        return (val * 1000).toFixed(to || 3);
       } else if (d == "bits") {
         return (val * 1000000).toFixed(to || 2);
       }
