@@ -191,7 +191,7 @@ typedef enum eRequestType
     [self.scrollableContentView addSubview:self.buttonBlocker];
     
     // update our array of categories
-    [self loadCategories];
+    self.arrayCategories = [CoreBridge Singleton].arrayCategories;
 
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
@@ -490,7 +490,7 @@ typedef enum eRequestType
     [strFullCategory appendString:self.pickerTextCategory.textField.text];
         
     // add the category if we didn't have it
-    [self addCategory: strFullCategory];
+    [CoreBridge addCategory:strFullCategory];
 
     if (![self.transaction.strCategory isEqualToString:strFullCategory])
     {
@@ -944,58 +944,6 @@ typedef enum eRequestType
     [self.categoryPopupPicker resignFirstResponder];
     [self dismissPayeeTable];
     [self scrollContentViewBackToOriginalPosition];
-}
-
-- (void)loadCategories
-{
-    char            **aszCategories = NULL;
-    unsigned int    countCategories = 0;
-
-    // get the categories from the core
-    tABC_Error Error;
-    ABC_GetCategories([[User Singleton].name UTF8String],
-                      [[User Singleton].password UTF8String],
-                      &aszCategories,
-                      &countCategories,
-                      &Error);
-    [Util printABC_Error:&Error];
-
-    // store them in our own array
-    NSMutableArray *arrayCategories = [[NSMutableArray alloc] init];
-    if (aszCategories)
-    {
-        for (int i = 0; i < countCategories; i++)
-        {
-            [arrayCategories addObject:[NSString stringWithUTF8String:aszCategories[i]]];
-        }
-    }
-
-    // store the final as storted
-    self.arrayCategories = [arrayCategories sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-
-    // free the core categories
-    if (aszCategories != NULL)
-    {
-        [Util freeStringArray:aszCategories count:countCategories];
-    }
-}
-
-- (void)addCategory:(NSString *)strCategory
-{
-    // check and see if there is more text than just the prefix
-    //if ([ARRAY_CATEGORY_PREFIXES indexOfObject:strCategory] == NSNotFound)
-    {
-        // check and see that it doesn't already exist
-        if ([self.arrayCategories indexOfObject:strCategory] == NSNotFound)
-        {
-            // add the category to the core
-            tABC_Error Error;
-            ABC_AddCategory([[User Singleton].name UTF8String],
-                            [[User Singleton].password UTF8String],
-                            (char *)[strCategory UTF8String], &Error);
-            [Util printABC_Error:&Error];
-        }
-    }
 }
 
 - (void)updateAutoCompleteArray
@@ -1701,7 +1649,7 @@ typedef enum eRequestType
     NSInteger index = [self.arrayCategories indexOfObject:catString];
     if(index == NSNotFound) {
         ABLog(2,@"ADD CATEGORY: adding category = %@", catString);
-        [self addCategory: catString];
+        [CoreBridge addCategory:catString];
         NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.arrayCategories];
         [array addObject:catString];
         self.arrayCategories = [array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
