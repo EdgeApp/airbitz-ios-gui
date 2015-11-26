@@ -26,18 +26,18 @@ static NSMutableArray *plugins;
         plugins = [[NSMutableArray alloc] init];
 
         Plugin *plugin;
-//        plugin = [[Plugin alloc] init];
-//        plugin.pluginId = @"com.foldapp";
-//        plugin.provider = @"foldapp";
-//        plugin.country = @"US";
-//        plugin.sourceFile = @"foldapp";
-//        plugin.sourceExtension = @"html";
-//        plugin.name = @"20% Off Starbucks";
-//        plugin.env = @{
-//                       @"BRAND": @"Starbucks",
-//                       };
-//
-//        [plugins addObject:plugin];
+        plugin = [[Plugin alloc] init];
+        plugin.pluginId = @"com.foldapp";
+        plugin.provider = @"foldapp";
+        plugin.country = @"US";
+        plugin.sourceFile = @"foldapp";
+        plugin.sourceExtension = @"html";
+        plugin.name = @"20% Off Starbucks";
+        plugin.env = @{
+                       @"BRAND": @"Starbucks",
+                       };
+
+        [plugins addObject:plugin];
 
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.glidera.us";

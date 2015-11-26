@@ -4,6 +4,7 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="FoldApp Interface for Airbitz">
   <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <style>
 /*!
  * Bootstrap v3.3.2 (http://getbootstrap.com)
@@ -9695,14 +9696,28 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     margin-bottom: 5em; } }
 
 </style>
+<template id="how-it-works">
+	<div class="step-1">
+		<h5>Load</h5>
+		<p>Visit your local BRAND_NAME. Select the card amount you want and confirm your payment.</p>
+	</div>
+	<div class="step-2">
+		<h5>Pay</h5>
+		<p>Place your order with the barista. Pay for your order by scanning the barcode on your phone.</p>
+	</div>
+	<div class="step-3">
+		<h5>Enjoy</h5>
+		<p>You’re done! Enjoy your coffee! If you have any trouble, please email <a href="mailto:support@airbitz.co?Subject=Need help with Fold">support@airbitz.co</a></p>
+	</div>
+</template>
 <template id="card-template">
-	<div class="item card">
+	<div class="item card gift-card">
 	  	<div class="row">
 	  		<div class="col-md-12">
 				<div class="title-header">Spend Bitcoin at Starbucks</div>
-				<div class="title-header-2">& Save 20%</div>
+				<div class="title-header-2">&amp; Save 20%</div>
 				<div class="card-image">
-					<div class="card-barcode"></div>
+					<div class="card-barcode"><div class="material-placeholder"><img class="barcode materialboxed" src=""></div></div>
 					<div class="card-number"></div>
 					<div class="card-balance">Current Balance</div>
 					<div class="card-balance-amt"></div>
@@ -9713,9 +9728,9 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 </template>
 <template id="add-template">
 	<li class="collection-item avatar card-list">
-		<span class="card-value" value=""></span>
-		<div class="secondary-content ">
-			<button type="button" class="buy-card">Buy</button>
+		<span class="title"><h4 class="card-value" value=""></h4></span>
+		<div class="secondary-content">
+			<button type="button" class="buy-card btn-floating btn-large waves-effect waves-light green"><i class="material-icons medium">add</i></button>
 		</div>
 	</li>
 </template>
@@ -9723,7 +9738,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 <body>
 	<div class="container-fluid">
 		<h3 class="text-center fold-loading">
-	    	<i class="fa fa-spinner fa-spin"></i> Loading
+	    	Loading
 	    	<div class="fold-loading-spin">
 		    	<div class="preloader-wrapper big active">
 			        <div class="spinner-layer spinner-blue-only">
@@ -9741,6 +9756,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 	  	<center class="main">
 	  		<header>
 				<img src="https://airbitz.co/go/wp-content/uploads/2015/11/starbucks-96.png">
+				<i class="fa fa-question-circle right"></i>
 			</header>
 			<main>
 			  	<div id="user-cards" class="owl-carousel owl-theme">
@@ -11706,6 +11722,7 @@ document.title = brand;
 function toggleUi() {
 	$(".fold-loading").css("display", "none");
 	$(".main").css("display", "inline");
+	setInterval(Account.pingCards, 5000);
 }
 
 function supportsTemplate() {
@@ -11756,6 +11773,8 @@ function sRequest(url, json, handleReponse) {
 var Account = {
 	exists: $.Deferred(),
 	logged_in: $.Deferred(),
+	all_cards: [],
+	owl: $("#user-cards"),
 	create: function() {
 		console.log("Creating user.");
 		url = fold_api + "users";
@@ -11790,28 +11809,35 @@ var Account = {
 			$(".balance-amt").text("$" + balances["balances"][0]["amount"]);
 		});
 	},
-	updateCards: function() { // Updates the UI with cards the user has purchased.
+	clearOwl: function() {
+		//document.querySelector("#user-cards").innerHTML = "";
+		for(cards in all_cards) {
+			("#user-cards").data('owlCarousel').removeItem();
+		}
+	},
+	updateCards: function(doneUpdating) { // Updates the UI with cards the user has purchased.
 		user.getInfo("cards", function(all_card_info) {
-			//console.log("User's cards: " + JSON.stringify(all_card_info));
+			console.log("User's cards: " + JSON.stringify(all_card_info));
 			cards = all_card_info["cards"];
-			document.querySelector("#user-cards").innerHTML = "";
 			for(numOfCards in cards) {
 				//console.log("Number of cards: " + numOfCards);
-				
-				id = cards[numOfCards]["id"];
-				card_num = cards[numOfCards]["code"][0];
-				bal = cards[numOfCards]["balance"][0]["formatted"]["fewer_trailing_zeros"]; // e.g. $5
-				//console.log("Card " + id + " has card num, " + card_num);
-				
+				card = new Card(
+					cards[numOfCards]["id"],
+					cards[numOfCards]["code"][0],
+					cards[numOfCards]["balance"][0]["formatted"]["fewer_trailing_zeros"] // e.g. $5
+				);
+				Account.all_cards[numOfCards] = card;
+				//console.log("Card " + card.id + " has card num, " + card.num);
 				var card_html = document.querySelector('#card-template').content;
 				
-				card_html.querySelector(".card-barcode").innerHTML = "<img class=\"barcode materialboxed\" src=\"" + fold_api + "my/cards/" + id + "/barcode/png" + "\">";
-				card_html.querySelector(".card-balance-amt").innerText = bal;
-				card_html.querySelector(".card-number").innerText = card_num;
+				card_html.querySelector(".gift-card").setAttribute("card", card.id);
+				card_html.querySelector(".card-barcode").innerHTML = "<img class=\"barcode materialboxed\" src=\"" + fold_api + "my/cards/" + card.id + "/barcode/png" + "\">";
+				card_html.querySelector(".card-balance-amt").innerText = card.bal;
+				card_html.querySelector(".card-number").innerText = card.num;
 				document.querySelector("#user-cards").appendChild( document.importNode(card_html, true) );
 				$('.materialboxed').materialbox();
 			}
-			$("#user-cards").owlCarousel({ // Activate owl Carousel for cards.
+			Account.owl.owlCarousel({ // Activate owl Carousel for cards.
 			    //navigation : true, // Show next and prev buttons
 			    slideSpeed : 300,
 			    paginationSpeed : 400,
@@ -11824,9 +11850,15 @@ var Account = {
 			    // itemsTablet: false,
 			    // itemsMobile : false
 			});
+		doneUpdating();
 		});
 	},
-	listCards: function() { // Updates the UI with cards avaliable to purchase from Fold.
+	pingCards: function() {
+		for(numOfCards in Account.all_cards) {
+			Account.all_cards[numOfCards].update();
+		}
+	},
+	listCards: function(doneListing) { // Updates the UI with cards avaliable to purchase from Fold.
 		this.getInfo("brands", function(cards_avil) {
 			var all_brands = cards_avil["brands"];
 			var brands_cards = "";
@@ -11839,9 +11871,10 @@ var Account = {
 			console.log(JSON.stringify(brands_cards["card_values"]));
 			user.getBal(function(total_bal) {
 				user.total_bal = total_bal;
+				var maxBal = parseInt(brands_cards["soft_max_total"][0]["amount"]);
 				console.log("User bal: " + user.total_bal);
-				console.log("Max: " + JSON.stringify(brands_cards["soft_max_total"][0]["amount"]));
-				if(brands_cards["soft_max_total"][0]["amount"] >= user.total_bal) {
+				console.log("Max: " + maxBal);
+				if(maxBal >= user.total_bal) {
 					var card_vals = brands_cards["card_values"];
 					document.querySelector(".add-buttons").innerHTML = "";
 					for(numOfVals in card_vals) {
@@ -11855,6 +11888,7 @@ var Account = {
 				  		user.purchaseCard($(this).parent().parent().find(".card-value").attr("value"));
 					});
 				}
+				doneListing();
 			});
 		}, "");
 	},
@@ -11864,7 +11898,7 @@ var Account = {
 			handleResponse(response);
 		});
 	},
-	getBal: function(handleResponse) {
+	getBal: function(handleResponse) { // Get total balance of user. Return 0 if user doesn't have bal.
 		this.getInfo("balances?currency=USD", function(balances) {
 			console.log(balances);
 			try {
@@ -11888,28 +11922,29 @@ var Account = {
 		url = fold_api + "my/orders";
 		console.log("Getting new order");
 		sRequest(url, newOrder, function(r) {
-		console.log("Order: " + JSON.stringify(r));
-		amt = (r["orders"][0]["price"]["amount"] * 100000000);
-		toAddr = r["orders"][0]["payment"][0]["address"];
-		console.log("Spending " + amt + " from wallet: " + user.abWallet + " to: " + toAddr);
-		console.log("Fiat amt: " + denomination)
-		Airbitz.core.requestSpend(Account.abWallet,
-			toAddr, amt, denomination, {
-        	label: 'Fold',
-        	category: 'Expense:Coffee Shops',
-        	notes: brand + " $" + String(denomination) + " gift card.",
-        	success: function(rawtx) {
-        		console.log("Funds were sent.");
-        		$(".balance-amt").prepend("Loading...");
-        		setTimeout(function() { 
-        			user.updateCards();
-        			user.updateBalance();
-        		}, 5000);
-        	},
-        	error: function() {
-        		console.log("Funds were not sent.");
-        	}
-        });
+			console.log("Order: " + JSON.stringify(r));
+			amt = (r["orders"][0]["price"]["amount"] * 100000000);
+			toAddr = r["orders"][0]["payment"][0]["address"];
+			console.log("Spending " + amt + " from wallet: " + user.abWallet + " to: " + toAddr);
+			console.log("Fiat amt: " + denomination)
+			Airbitz.core.requestSpend(Account.abWallet,
+				toAddr, amt, denomination, {
+	        	label: 'Fold',
+	        	category: 'Expense:Coffee Shops',
+	        	notes: brand + " $" + String(denomination) + " gift card.",
+	        	success: function(rawtx) {
+	        		console.log("Funds were sent.");
+	        		$(".balance-amt").prepend("Loading...");
+	        		setTimeout(function() {
+	        			user.clearOwl();
+	        			user.updateCards();
+	        			user.updateBalance();
+	        		}, 5000);
+	        	},
+	        	error: function() {
+	        		console.log("Funds were not sent.");
+	        	}
+	        });
 		});
 	},
 	approveOrder: function(order_id) { // Manually Approve an order
@@ -11923,6 +11958,34 @@ var Account = {
 		});
 	}
 }
+
+function Card(id, num, bal) {
+	this.id = id;
+	this.num = num;
+	this.bal = bal;
+}
+Card.prototype.ping = function() { // Tell Fold we need to check this balance to see if the user has spent it.
+	console.log("Pinging card.");
+	var url = fold_api + "my/cards/" + this.id + "/ping";
+	console.log(url);
+	$.post(url);
+}
+Card.prototype.update = function() { // Update UI with info Fold has about card.
+	cardSelector = "[card=" + this.id + "]";
+	this.ping();
+	console.log("id is: " + this.id);
+	$.get(fold_api + "my/cards/" + this.id).done(function(cardInfo) {
+		cardInfo = cardInfo["cards"][0];
+		$(cardSelector).children(".card-info-main").children(".card-balance").children(".card-balance-amt").text( cardInfo["balance"][0]["formatted"]["all_decimal_places"] );
+		$(cardSelector).find("card-number").text( cardInfo["code"] );
+	});
+}
+Card.prototype.remove = function() { // Remove card from UI
+	if(this.bal == 0) {
+
+	}
+}
+
 // Main
 var user = Object.create(Account);
 
@@ -11953,9 +12016,12 @@ $.when(user.exists).done(function(data) {
 $(function() {
 	$.when(user.logged_in).done(function(data) {
 		console.log("Updating UI");
-		user.listCards(); // Start getting avaliable cards for sale.
-		user.updateCards();
-		// user.updateBalance();
+		user.listCards(function() { // Start getting avaliable cards for sale.
+			user.updateCards(function() {
+				toggleUi();
+			});
+			// user.updateBalance();
+		}); 
 		user.getInfo("profile", function(response) {
 			//console.log(response);
 			//console.log(response["logged_in"]);
@@ -11963,7 +12029,6 @@ $(function() {
 				//console.log(response);
 			});
 		// Done loading.
-		toggleUi();
 		});
 	});
 });
