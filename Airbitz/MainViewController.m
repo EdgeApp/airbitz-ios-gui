@@ -1119,7 +1119,7 @@ MainViewController *singleton;
     if ([CoreBridge passwordExists]) {
         [[User Singleton] incPINorTouchIDLogin];
     }
-
+    
     if (_uri) {
         [self processBitcoinURI:_uri];
         _uri = nil;

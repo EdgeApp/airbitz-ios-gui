@@ -80,7 +80,8 @@
     _frameTableOriginal = self.tableView.frame;
 
     // load the categories
-    [self loadCategories];
+    self.arrayCategories = [[CoreBridge Singleton].arrayCategories mutableCopy];
+    [self updateDisplay];
 
     // get a callback when the search changes
     [self.textSearch addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
@@ -162,7 +163,7 @@
 
 - (IBAction)Done
 {
-    [self saveCategories];
+    [CoreBridge saveCategories:self.arrayCategories];
     [self animatedExit];
 }
 
@@ -197,69 +198,6 @@
     cell.pickerTextView.textField.text = [self.arrayDisplay objectAtIndex:indexPath.row];
 
 	return cell;
-}
-
-// load the categories from the core
-- (void)loadCategories
-{
-    _aszCategories = NULL;
-    _count = 0;
-
-    // get the categories from the core
-    tABC_Error Error;
-    ABC_GetCategories([[User Singleton].name UTF8String],
-                      [[User Singleton].password UTF8String],
-                      &_aszCategories,
-                      &_count,
-                      &Error);
-    [Util printABC_Error:&Error];
-
-    // store them in our own array
-    self.arrayCategories = [[NSMutableArray alloc] init];
-    if (_aszCategories)
-    {
-        for (int i = 0; i < _count; i++)
-        {
-            [self.arrayCategories addObject:[NSString stringWithUTF8String:_aszCategories[i]]];
-        }
-    }
-    
-    [self.arrayCategories sortUsingSelector:@selector(localizedCompare:)];
-    [self updateDisplay];
-}
-
-// saves the categories to the core
-- (void)saveCategories
-{
-    tABC_Error Error;
-
-    // got through the existing categories
-    for (int i = 0; i < _count; i++)
-    {
-        // create an NSString version of the category
-        NSString *strCategory = [NSString stringWithUTF8String:_aszCategories[i]];
-
-        // if this category is in our new list
-        if ([self.arrayCategories containsObject:strCategory])
-        {
-            // remove it from our new list since it is already there
-            [self.arrayCategories removeObject:strCategory];
-        }
-        else
-        {
-            // it doesn't exist in our new list so delete it from the core
-            ABC_RemoveCategory([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], _aszCategories[i], &Error);
-            [Util printABC_Error:&Error];
-        }
-    }
-
-    // add any categories from our new list that didn't exist in the core list
-    for (int i = 0; i < [self.arrayCategories count]; i++)
-    {
-        NSString *strCategory = [self.arrayCategories objectAtIndex:i];
-        ABC_AddCategory([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], (char *)[strCategory UTF8String], &Error);
-        [Util printABC_Error:&Error];
-    }
 }
 
 - (void)updateDisplay
