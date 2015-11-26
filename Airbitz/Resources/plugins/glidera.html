@@ -11326,7 +11326,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <table class="table-mini">\n' +
     '          <tr>\n' +
     '            <td class="datetime text-left">\n' +
-    '              <span ng-if="t.estimatedDeliveryDate" class="date"><span class="est-label">Est. Delivery</span> {{ t.estimatedDeliveryDate | | date:\'yyyy-MM-dd\' }}</span>\n' +
+    '              <span ng-if="t.estimatedDeliveryDate" class="date"><span class="est-label">Est. Delivery</span> {{ t.estimatedDeliveryDate | date:\'yyyy-MM-dd\' }}</span>\n' +
     '              <span ng-if="!t.estimatedDeliveryDate && t.transactionDate" class="date">{{ (t.transactionDate | date:\'yyyy-MM-dd\') }} <span class="seperator">|<span> <span class="time">{{ t.transactionDate | date:\'h:mm a\' }}</span></span>\n' +
     '            </td>\n' +
     '          </tr>\n' +
