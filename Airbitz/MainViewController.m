@@ -104,6 +104,7 @@ typedef enum eAppMode
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
     FadingAlertView             *fadingAlertView;
+
 }
 
 @property (weak, nonatomic) IBOutlet UIView *blurViewContainer;
@@ -117,6 +118,8 @@ typedef enum eAppMode
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundViewBlue;
 @property AirbitzViewController                  *selectedViewController;
 @property UIViewController            *navBarOwnerViewController;
+@property (strong, nonatomic)        AFHTTPRequestOperationManager *afmanager;
+
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -161,8 +164,7 @@ MainViewController *singleton;
     self.dictBizImages = [[NSMutableDictionary alloc] init];
     self.dictImageRequests = [[NSMutableDictionary alloc] init];
     self.arrayNearBusinesses = [[NSMutableArray alloc] init];
-
-
+    
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 
     // resgister for transaction details screen complete notification
@@ -188,8 +190,18 @@ MainViewController *singleton;
     [[DL_URLServer controller] setHeaderRequestValue:token forKey: @"Authorization"];
     [[DL_URLServer controller] setHeaderRequestValue:[LocalSettings controller].clientID forKey:@"X-Client-ID"];
     [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
+
+    self.afmanager = [AFHTTPRequestOperationManager manager];
+    [self.afmanager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
+    [self.afmanager.requestSerializer setValue:[LocalSettings controller].clientID forHTTPHeaderField:@"X-Client-ID"];
+    [self.afmanager.requestSerializer setTimeoutInterval:10];
     
     [NotificationChecker initAll];
+}
+
++ (AFHTTPRequestOperationManager *) createAFManager;
+{
+    return singleton.afmanager;
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {

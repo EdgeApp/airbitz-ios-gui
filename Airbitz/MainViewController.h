@@ -10,6 +10,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AirbitzViewController.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+
 
 typedef enum eNavBarSide
 {
@@ -73,8 +76,7 @@ typedef enum eNavBarSide
 + (void)generateListOfContactNames;
 + (void)generateListOfNearBusinesses;
 
-
-
++ (AFHTTPRequestOperationManager *) createAFManager;
 
 + (void)fadingAlertHelpPopup:(NSString *)message;
 + (void)fadingAlert:(NSString *)message;
