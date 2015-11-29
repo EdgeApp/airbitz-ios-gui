@@ -21,7 +21,7 @@
 
 static const NSString *PROTOCOL = @"bridge://";
 
-@interface PluginViewController () <UIWebViewDelegate, SendConfirmationViewControllerDelegate>
+@interface PluginViewController () <UIWebViewDelegate, SendConfirmationViewControllerDelegate, UIImagePickerControllerDelegate>
 {
     FadingAlertView                *_fadingAlert;
     SendConfirmationViewController *_sendConfirmationViewController;
@@ -29,6 +29,9 @@ static const NSString *PROTOCOL = @"bridge://";
     Wallet                         *_sendWallet;
     NSMutableArray                 *_navStack;
     NSDictionary                   *_functions;
+    NSString                       *_tempCbidForImagePicker;
+    NSDictionary                   *_tempArgsForImagePicker;
+
     BOOL                           bWalletListDropped;
 }
 
@@ -63,6 +66,7 @@ static const NSString *PROTOCOL = @"bridge://";
                      @"wallets":NSStringFromSelector(@selector(wallets:)),
         @"createReceiveRequest":NSStringFromSelector(@selector(createReceiveRequest:)),
                 @"requestSpend":NSStringFromSelector(@selector(launchSpendConfirmation:)),
+                @"requestImage":NSStringFromSelector(@selector(launchImagePicker:)),
              @"finalizeRequest":NSStringFromSelector(@selector(finalizeRequest:)),
                    @"writeData":NSStringFromSelector(@selector(writeData:)),
                    @"clearData":NSStringFromSelector(@selector(clearData:)),
@@ -465,6 +469,37 @@ static const NSString *PROTOCOL = @"bridge://";
         _sendConfirmationViewController.bAdvanceToTx = NO;
         [Util animateController:_sendConfirmationViewController parentController:self];
     }
+}
+
+- (void)launchImagePicker:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+
+    _tempArgsForImagePicker = args;
+    _tempCbidForImagePicker = cbid;
+
+    UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    NSData *imgData = [NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)];
+    NSString *encodedString = [imgData base64Encoding];
+    
+    NSDictionary *d = @{@"image": encodedString};
+    NSDictionary *results = [self jsonResult:d];
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self callJsFunction:_tempCbidForImagePicker withArgs:results];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)createReceiveRequest:(NSDictionary *)params
