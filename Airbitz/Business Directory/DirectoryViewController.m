@@ -272,12 +272,6 @@ static bool bInitialized = false;
 
 - (void)viewDidAppear: (BOOL)animated
 {
-//XXX    if (homeTableViewFrame.size.width == 0)
-//    {
-//        //only set it once
-//        homeTableViewFrame = self.tableListingsView.frame;
-//        //ABLog(2,@"Home TableView Frame: %f, %f, %f, %f", homeTableViewFrame.origin.x, homeTableViewFrame.origin.y, homeTableViewFrame.size.width, homeTableViewFrame.size.height);
-//    }
 }
 
 - (void)viewWillAppear: (BOOL)animated
@@ -330,12 +324,9 @@ static bool bInitialized = false;
 
 - (void)viewWillDisappear: (BOOL)animated
 {
-    //ABLog(2,@"%s", __FUNCTION__);
-
     // cancel all our outstanding requests
     [self.afmanager.operationQueue cancelAllOperations];
 
-    //ABLog(2,@"Removing keyboard notification");
     [self receiveKeyboardNotifications: NO];
     [Location stopLocating];
     [super viewWillDisappear: animated];
@@ -601,7 +592,7 @@ static bool bInitialized = false;
         
         NSDictionary *results = (NSDictionary *)responseObject;
         totalResultsCount = [[results objectForKey: @"count"] intValue];
-        [self bufferBusinessResults: [results objectForKey: @"results"] forPage: 0];
+        [self bufferBusinessResults: [results objectForKey: @"results"]];
         [self.tableView reloadData];
         
         self.spinnerView.hidden = YES;
@@ -914,175 +905,6 @@ static bool bInitialized = false;
 {
 //    _categoryViewHeight.constant = 0;
 }
-
-
-//- (void)transitionSearchToMap
-//{
-//    //ABLog(2,@"Transition Search To Map");
-//    directoryMode = DIRECTORY_MODE_MAP;
-//    //ABLog(2,@"Setting map state to INIT");
-//    mapDisplayState = MAP_DISPLAY_INIT;
-//    //subtly show mapView
-//    [self showMapView];
-//    self.dividerView.userControllable = YES;
-//    [self removeBusinessListingHeader];
-//    [self.searchBarSearch resignFirstResponder];
-//    [self.searchBarLocation resignFirstResponder];
-//    self.mapView.showsUserLocation = YES;
-//    [self.tableView setContentOffset:CGPointZero animated:NO];
-//    [self.tableView setContentInset:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
-//
-//    [self setDefaultMapDividerPosition];
-//
-//    [self businessListingQueryForPage: 0];
-//
-//    [UIView animateWithDuration: 0.35
-//                          delay: 0.0
-//                        options: UIViewAnimationOptionCurveEaseInOut
-//                     animations: ^
-//    {
-//        _locationSearchViewHeight.constant = 0;
-//
-//        [self.view layoutIfNeeded];
-//
-//    }
-//                     completion: ^(BOOL finished)
-//    {
-//
-//
-//    }];
-//}
-//
-//- (void)transitionSearchToListing
-//{
-//    //directoryMode = DIRECTORY_MODE_ON_THE_WEB_LISTING;
-//    [businessSearchResults removeAllObjects];
-//    [self.searchBarSearch resignFirstResponder];
-//    [self.searchBarLocation resignFirstResponder];
-//
-//    if (directoryMode == DIRECTORY_MODE_ON_THE_WEB_LISTING)
-//    {
-//        [self removeBusinessListingHeader];
-//        [self hideDividerView];
-//    } else
-//    {
-//        directoryMode = DIRECTORY_MODE_LISTING;
-//        [self hideBackButtonAnimated: YES];
-//    }
-//
-//    [self resetTableHideSearch];
-//    [self businessListingQueryForPage: 0];
-//    [UIView animateWithDuration: 0.5
-//                          delay: 0.0
-//                        options: UIViewAnimationOptionCurveEaseInOut
-//                     animations: ^
-//    {
-////        _locationSearchViewHeight.constant -= EXTRA_SEARCH_BAR_HEIGHT;
-//
-//        [self.view layoutIfNeeded];
-//    }
-//                     completion: ^(BOOL finished)
-//    {
-//
-//
-//    }];
-//}
-//
-//- (void)transitionMapToSearch
-//{
-//    directoryMode = DIRECTORY_MODE_SEARCH;
-//
-//    [UIView animateWithDuration: 0.35
-//                          delay: 0.0
-//                        options: UIViewAnimationOptionCurveEaseInOut
-//                     animations: ^
-//    {
-//        [self hideMapView];
-//        self.mapView.showsUserLocation = NO;
-//        self.dividerView.userControllable = NO;
-//        [self addBusinessListingHeader];
-//        [self hideBackButtonAnimated: YES];
-//        [self.mapView removeAllAnnotations];
-//    }
-//                     completion: ^(BOOL finished)
-//    {
-//
-//        //subtly hide mapView
-//        [UIView animateWithDuration: 0.5
-//                              delay: 0.0
-//                            options: UIViewAnimationOptionCurveLinear
-//                         animations: ^
-//        {
-//            [self hideMapView];
-//        }
-//                         completion: ^(BOOL finished)
-//        {
-//
-//            [self resetTableHideSearch];
-//            [self positionDividerView];
-//
-//            //
-//            // Open up location searchBar
-//            //
-//            _locationSearchViewHeight.constant = EXTRA_SEARCH_BAR_HEIGHT;
-//            [self.view layoutIfNeeded];
-//
-//            //
-//            // Open up the autocomplete clues tableview. Line up top of autocomplete table with bottom of searchBarLocation
-//            //
-//            CGRect frame = [_searchBarLocation convertRect:_searchBarLocation.bounds toView:self.view];
-//            _searchCluesTop.constant = frame.origin.y + frame.size.height;
-//            [self.view layoutIfNeeded];
-//
-//        }];
-//
-//    }];
-//}
-//
-//- (void)transitionListingToMap
-//{
-//    directoryMode = DIRECTORY_MODE_MAP;
-//    //ABLog(2,@"Setting map state to INIT");
-//    mapDisplayState = MAP_DISPLAY_INIT;
-//
-//    self.mapView.showsUserLocation = YES;
-//    self.dividerView.userControllable = YES;
-//    [self removeBusinessListingHeader];
-//    [self showBackButtonAnimated: YES];
-//
-//    [self setDefaultMapDividerPosition];
-//
-//    [self businessListingQueryForPage: 0];
-//    [UIView animateWithDuration: 0.35
-//                          delay: 0.0
-//                        options: UIViewAnimationOptionCurveLinear
-//                     animations: ^
-//    {
-//
-//        [self showMapView];
-//    }
-//                     completion: ^(BOOL finished)
-//    {
-//
-//    }];
-//}
-//
-//- (void)transitionMapToListing
-//{
-//    directoryMode = DIRECTORY_MODE_LISTING;
-//
-//    [self hideMapView];
-//    self.mapView.showsUserLocation = NO;
-//    self.dividerView.userControllable = NO;
-//    [self addBusinessListingHeader];
-//    [self hideBackButtonAnimated: YES];
-//    [self.mapView removeAllAnnotations];
-//    [self resetTableHideSearch];
-//    [self positionDividerView];
-//
-//}
-
-
 #pragma mark MapView
 
 - (void)didDragMap: (UIGestureRecognizer *)gestureRecognizer
@@ -1109,49 +931,6 @@ static bool bInitialized = false;
 {
     [self.mapView setCenterCoordinate: self.mapView.userLocation.location.coordinate animated: YES];
 }
-
-//- (void)TackLocateMeButtonToMapBottomCorner
-//{
-//    CGRect locateMeFrame = self.btn_locateMe.frame;
-//    locateMeFrame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height - LOCATE_ME_BUTTON_OFFSET_FROM_MAP_BOTTOM;
-//    self.btn_locateMe.frame = locateMeFrame;
-//
-//    if (locateMeFrame.origin.y < MINIMUM_LOCATE_ME_BUTTON_OFFSET_Y)
-//    {
-//        if (locateMeButtonDesiredAlpha != 0.0)
-//        {
-//            locateMeButtonDesiredAlpha = 0.0;
-//            //hide locateMe button
-//            [UIView animateWithDuration: 0.1
-//                                  delay: 0.0
-//                                options: UIViewAnimationOptionCurveLinear
-//                             animations: ^
-//            {
-//                self.btn_locateMe.alpha = locateMeButtonDesiredAlpha;
-//            }
-//                             completion: ^(BOOL finished)
-//            {
-//            }];
-//        }
-//    } else
-//    {
-//        if (locateMeButtonDesiredAlpha != 1.0)
-//        {
-//            locateMeButtonDesiredAlpha = 1.0;
-//            //hide locateMe button
-//            [UIView animateWithDuration: 0.1
-//                                  delay: 0.0
-//                                options: UIViewAnimationOptionCurveLinear
-//                             animations: ^
-//            {
-//                self.btn_locateMe.alpha = locateMeButtonDesiredAlpha;
-//            }
-//                             completion: ^(BOOL finished)
-//            {
-//            }];
-//        }
-//    }
-//}
 
 - (void)hideMapView
 {
@@ -1250,7 +1029,6 @@ static bool bInitialized = false;
 
 - (void)AnnotationTapped: (UITapGestureRecognizer *)recognizer
 {
-    //ABLog(2,@"Tapped annotation");
     //to prevent callout from disappearing right after it appeared because user scrolled map then quickly tapped on an annotation.
     [self.afmanager.operationQueue cancelAllOperations];
 
@@ -1446,31 +1224,22 @@ static bool bInitialized = false;
 
 #pragma mark Business Listing buffer management
 
-- (void)bufferBusinessResults: (NSArray *)arrayResults forPage: (int)page
+- (void)bufferBusinessResults: (NSArray *)arrayResults
 {
     //adds a block of business search results to the businessSearchResults dictionary
 
-    int row = page * DEFAULT_RESULTS_PER_PAGE;
+    int row = 0;
     [businessSearchResults removeAllObjects];
     [self.mapView removeAllAnnotations];
 
     for (NSDictionary *dict in arrayResults)
     {
-        //printf("%i, ", row);
         [businessSearchResults setObject: dict forKey: [NSNumber numberWithInt: row]];
-        Annotation *ann = [self.mapView addAnnotationForBusiness: dict];
-        if (ann)
-        {
-            //ann.thumbnailImage = [backgroundImages imageForBusiness:ann.business];
-        }
         row++;
     }
-    //ABLog(2,@"Loaded page %i.  Buffer size: %lu", page, (unsigned long)businessSearchResults.count);
     if (mapDisplayState == MAP_DISPLAY_INIT)
     {
-        //ABLog(2,@"Setting map state to ZOOM");
         mapDisplayState = MAP_DISPLAY_ZOOM;
-        //ABLog(2,@"Zooming map");
         [self.mapView zoomToFitMapAnnotations];
     }
 }
@@ -1482,7 +1251,6 @@ static bool bInitialized = false;
         for (int row = page * DEFAULT_RESULTS_PER_PAGE; row < ((page + 1) * DEFAULT_RESULTS_PER_PAGE); row++)
         {
             NSDictionary *business = [businessSearchResults objectForKey: [NSNumber numberWithInt: row]];
-//            [backgroundImages removeImageForBusiness: business];
             [businessSearchResults removeObjectForKey: [NSNumber numberWithInt: row]];
         }
         //ABLog(2,@"Removed page: %i.  Buffer size: %lu", page, (unsigned long)[businessSearchResults count]);
