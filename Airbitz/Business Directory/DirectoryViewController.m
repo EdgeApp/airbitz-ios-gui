@@ -601,17 +601,19 @@ static bool bInitialized = false;
         self.searchIndicator.hidden = YES;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABLog(1,@"*** SERVER REQUEST STATUS FAILURE ***");
-        NSString *msg = NSLocalizedString(@"Can't connect to server.  Check your internet connection", nil);
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: NSLocalizedString(@"No Connection", @"Alert title that warns user couldn't connect to server")
-                              message: msg
-                              delegate: nil
-                              cancelButtonTitle: @"OK"
-                              otherButtonTitles: nil];
-        self.spinnerView.hidden = YES;
-        self.searchIndicator.hidden = YES;
-        [alert show];
+        NSInteger statusCode = operation.response.statusCode;
+        
+        ABLog(1,@"*** SERVER REQUEST STATUS FAILURE: %d", (int)statusCode);
+//        NSString *msg = NSLocalizedString(@"Can't connect to server.  Check your internet connection", nil);
+//        UIAlertView *alert = [[UIAlertView alloc]
+//                              initWithTitle: NSLocalizedString(@"No Connection", @"Alert title that warns user couldn't connect to server")
+//                              message: msg
+//                              delegate: nil
+//                              cancelButtonTitle: @"OK"
+//                              otherButtonTitles: nil];
+//        self.spinnerView.hidden = YES;
+//        self.searchIndicator.hidden = YES;
+//        [alert show];
     }];
 }
 
