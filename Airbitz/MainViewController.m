@@ -226,29 +226,77 @@ MainViewController *singleton;
     // add our location
     [MainViewController addLocationToQuery:strURL];
     
-    // run the search
-    [MainViewController issueRequests:@{strURL : [NSNumber numberWithInt:RequestType_BusinessesNear]} ];
-}
+    [singleton.afmanager GET:strURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *results = (NSDictionary *)responseObject;
+        
+        NSMutableArray *arrayBusinesses = singleton.arrayNearBusinesses;
+        NSArray *searchResultsArray = [results objectForKey:@"results"];
 
-+ (void)issueRequests:(NSDictionary *)dictRequest
-{
-    if (dictRequest)
-    {
-        // the requests are stored in a dictionary where the key is the URL and the value for the key is the object for callback
-        for (NSString *strKey in dictRequest)
+        if (searchResultsArray && searchResultsArray != (id)[NSNull null])
         {
-            id value = [dictRequest objectForKey:strKey];
-            
-            // run the search
-            NSString *strURL = [strKey stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            [[DL_URLServer controller] issueRequestURL:strURL
-                                            withParams:nil
-                                            withObject:value
-                                          withDelegate:singleton
-                                    acceptableCacheAge:CACHE_AGE_SECS
-                                           cacheResult:YES];
+            for (NSDictionary *dict in searchResultsArray)
+            {
+                NSString *strName = [dict objectForKey:@"name"];
+                if (strName && strName != (id)[NSNull null])
+                {
+                    [arrayBusinesses addObject:strName];
+                    
+                    // create the address
+                    NSMutableString *strAddress = [[NSMutableString alloc] init];
+                    NSString *strField = nil;
+                    if (nil != (strField = [dict objectForKey:@"address"]))
+                    {
+                        [strAddress appendString:strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"city"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"state"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"postalcode"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @" " : @""), strField];
+                    }
+                    if ([strAddress length])
+                    {
+                        [MainViewController Singleton].dictAddresses[[strName lowercaseString]] = strAddress;
+                    }
+                    
+                    // set the biz id if available
+                    NSNumber *numBizId = [dict objectForKey:@"bizId"];
+                    if (numBizId && numBizId != (id)[NSNull null])
+                    {
+                        [MainViewController Singleton].dictBizIds[[strName lowercaseString]] = @([numBizId intValue]);
+                    }
+                    
+                    // check if we can get a thumbnail
+                    NSDictionary *dictProfileImage = [dict objectForKey:@"square_image"];
+                    if (dictProfileImage && dictProfileImage != (id)[NSNull null])
+                    {
+                        NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
+                        if (strThumbnail && strThumbnail != (id)[NSNull null])
+                        {
+                            //ABLog(2,@"thumbnail path: %@", strThumbnail);
+                            [MainViewController Singleton].dictThumbnailURLs[[strName lowercaseString]] = strThumbnail;
+                        }
+                    }
+                }
+            }
+            // Send Notification of updated contacts
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CONTACTS_CHANGED
+                                                                object:nil
+                                                              userInfo:nil];
         }
-    }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSInteger statusCode = operation.response.statusCode;
+        
+        ABLog(1,@"*** generateListOfNearBusinesses() REQUEST STATUS FAILURE: %d", (int)statusCode);
+    }];
+    
 }
 
 + (void)addLocationToQuery:(NSMutableString *)query
@@ -265,94 +313,6 @@ MainViewController *singleton;
     else
     {
         //ABLog(2,@"string already contains ll");
-    }
-}
-
-#pragma mark - DLURLServer Callbacks
-
-- (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
-{
-    if (DL_URLRequestStatus_Success == status)
-    {
-        // if this is a business listing query
-        if ([object isKindOfClass:[NSNumber class]])
-        {
-            NSNumber *numRequestType = (NSNumber *)object;
-            tRequestType requestType = (tRequestType) [numRequestType intValue];
-
-            NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-
-            //ABLog(2,@"Results download returned: %@", jsonString );
-
-            NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
-            NSError *myError;
-            NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
-
-            NSArray *searchResultsArray = [dictFromServer objectForKey:@"results"];
-            if (searchResultsArray && searchResultsArray != (id)[NSNull null])
-            {
-                if (requestType == RequestType_BusinessesNear)
-                {
-                    NSMutableArray *arrayBusinesses = self.arrayNearBusinesses;
-
-                    for (NSDictionary *dict in searchResultsArray)
-                    {
-                        NSString *strName = [dict objectForKey:@"name"];
-                        if (strName && strName != (id)[NSNull null])
-                        {
-                            [arrayBusinesses addObject:strName];
-
-                            // create the address
-                            NSMutableString *strAddress = [[NSMutableString alloc] init];
-                            NSString *strField = nil;
-                            if (nil != (strField = [dict objectForKey:@"address"]))
-                            {
-                                [strAddress appendString:strField];
-                            }
-                            if (nil != (strField = [dict objectForKey:@"city"]))
-                            {
-                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
-                            }
-                            if (nil != (strField = [dict objectForKey:@"state"]))
-                            {
-                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
-                            }
-                            if (nil != (strField = [dict objectForKey:@"postalcode"]))
-                            {
-                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @" " : @""), strField];
-                            }
-                            if ([strAddress length])
-                            {
-                                [MainViewController Singleton].dictAddresses[[strName lowercaseString]] = strAddress;
-                            }
-
-                            // set the biz id if available
-                            NSNumber *numBizId = [dict objectForKey:@"bizId"];
-                            if (numBizId && numBizId != (id)[NSNull null])
-                            {
-                                [MainViewController Singleton].dictBizIds[[strName lowercaseString]] = @([numBizId intValue]);
-                            }
-
-                            // check if we can get a thumbnail
-                            NSDictionary *dictProfileImage = [dict objectForKey:@"square_image"];
-                            if (dictProfileImage && dictProfileImage != (id)[NSNull null])
-                            {
-                                NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
-                                if (strThumbnail && strThumbnail != (id)[NSNull null])
-                                {
-                                    //ABLog(2,@"thumbnail path: %@", strThumbnail);
-                                    [MainViewController Singleton].dictThumbnailURLs[[strName lowercaseString]] = strThumbnail;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Send Notification of updated contacts
-                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CONTACTS_CHANGED
-                                                                    object:nil userInfo:nil];
-            }
-        }
     }
 }
 
