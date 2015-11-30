@@ -714,12 +714,20 @@ typedef enum eRequestType
     {
         if (_bizId)
         {
-            // get the image for this bizId
-            NSString *requestURL = [MainViewController Singleton].dictImageURLFromBizID[[NSNumber numberWithInt:_bizId]];
-            NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
-                                                          cachePolicy:NSURLRequestReturnCacheDataElseLoad
-                                                      timeoutInterval:60];
-            [self.imagePhoto setImageWithURLRequest:imageRequest placeholderImage:nil success:nil failure:nil];
+            
+            
+            
+            NSString *imageURL = [MainViewController Singleton].dictImageURLFromBizName[[self.nameTextField.text lowercaseString]];
+            
+            if (imageURL)
+            {
+                NSString *requestURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, imageURL];
+                NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
+                                                              cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                          timeoutInterval:60];
+                
+                [self.imagePhoto setImageWithURLRequest:imageRequest placeholderImage:nil success:nil failure:nil];
+            }
             bHavePhoto = YES;
         }
     }
@@ -1100,8 +1108,10 @@ typedef enum eRequestType
                         }
                         
                         NSString *strThumbnail = [dict objectForKey:@"square_image"];
+                        NSString *urlString = [NSString stringWithFormat: @"%@%@", SERVER_URL, strThumbnail];
                         if (strThumbnail && strThumbnail != (id)[NSNull null]) {
-                            [MainViewController Singleton].dictThumbnailURLs[[strName lowercaseString]] = strThumbnail;
+                            [MainViewController Singleton].dictImageURLFromBizName[[strName lowercaseString]] = strThumbnail;
+                            [MainViewController Singleton].dictImageURLFromBizID[numBizId] = urlString;
                         }
                     }
                 }
@@ -1139,6 +1149,7 @@ typedef enum eRequestType
 - (void)exit:(BOOL)bNotifyExit
 {
     // if we haven't closed already
+    
     if (!_bDoneSentToDelegate)
     {
         _bDoneSentToDelegate = YES;
@@ -1280,7 +1291,7 @@ typedef enum eRequestType
     }
     else
     {
-        NSString *imageURL = [MainViewController Singleton].dictThumbnailURLs[[cell.textLabel.text lowercaseString]];
+        NSString *imageURL = [MainViewController Singleton].dictImageURLFromBizName[[cell.textLabel.text lowercaseString]];
 
         if (imageURL)
         {

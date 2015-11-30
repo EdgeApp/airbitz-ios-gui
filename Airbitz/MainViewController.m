@@ -159,7 +159,7 @@ MainViewController *singleton;
     self.arrayContacts = nil;
     self.dictImages = [[NSMutableDictionary alloc] init];
     self.dictAddresses = [[NSMutableDictionary alloc] init];
-    self.dictThumbnailURLs = [[NSMutableDictionary alloc] init];
+    self.dictImageURLFromBizName = [[NSMutableDictionary alloc] init];
     self.dictBizIds = [[NSMutableDictionary alloc] init];
     self.dictBizImages = [[NSMutableDictionary alloc] init];
     self.dictImageURLFromBizID = [[NSMutableDictionary alloc] init];
@@ -281,7 +281,7 @@ MainViewController *singleton;
                         if (strThumbnail && strThumbnail != (id)[NSNull null])
                         {
                             //ABLog(2,@"thumbnail path: %@", strThumbnail);
-                            [MainViewController Singleton].dictThumbnailURLs[[strName lowercaseString]] = strThumbnail;
+                            [MainViewController Singleton].dictImageURLFromBizName[[strName lowercaseString]] = strThumbnail;
                         }
                     }
                 }
