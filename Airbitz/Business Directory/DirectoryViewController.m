@@ -589,7 +589,7 @@ static bool bInitialized = false;
 
     NSString *serverQuery = [query stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
-    ABLog(1, [NSString stringWithFormat:@"serverQuery: %@", serverQuery]);
+    ABLog(1, @"serverQuery: %@", serverQuery);
     [self.afmanager GET:serverQuery parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *results = (NSDictionary *)responseObject;
@@ -1237,6 +1237,7 @@ static bool bInitialized = false;
     for (NSDictionary *dict in arrayResults)
     {
         [businessSearchResults setObject: dict forKey: [NSNumber numberWithInt: row]];
+        [self.mapView addAnnotationForBusiness: dict];
         row++;
     }
     if (mapDisplayState == MAP_DISPLAY_INIT)
