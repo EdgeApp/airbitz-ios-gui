@@ -589,6 +589,7 @@ static bool bInitialized = false;
 
     NSString *serverQuery = [query stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
+    ABLog(1, [NSString stringWithFormat:@"serverQuery: %@", serverQuery]);
     [self.afmanager GET:serverQuery parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *results = (NSDictionary *)responseObject;
@@ -600,7 +601,7 @@ static bool bInitialized = false;
         self.searchIndicator.hidden = YES;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABLog(2,@"*** SERVER REQUEST STATUS FAILURE ***");
+        ABLog(1,@"*** SERVER REQUEST STATUS FAILURE ***");
         NSString *msg = NSLocalizedString(@"Can't connect to server.  Check your internet connection", nil);
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: NSLocalizedString(@"No Connection", @"Alert title that warns user couldn't connect to server")
