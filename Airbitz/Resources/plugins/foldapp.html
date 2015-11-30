@@ -9712,18 +9712,18 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 </template>
 <template id="card-template">
 	<div class="item card gift-card">
-	  	<div class="row">
-	  		<div class="col-md-12">
-				<div class="title-header">Spend Bitcoin at Starbucks</div>
-				<div class="title-header-2">&amp; Save 20%</div>
-				<div class="card-image">
-					<div class="card-barcode"><div class="material-placeholder"><img class="barcode materialboxed" src=""></div></div>
-					<div class="card-number"></div>
-					<div class="card-balance">Current Balance</div>
-					<div class="card-balance-amt"></div>
-				</div>
-	  		</div>
-	  	</div>
+		<div class="title-header">Spend Ƀitcoin at Starbucks</div>
+		<div class="title-header-2">&amp; Save 20%</div>
+		<div class="card-image">
+			<div class="card-barcode"><div class="material-placeholder"><img class="barcode materialboxed" src=""></div></div>
+		</div>
+		<div class="card-info-main card-content">
+			<div class="card-number"><i class="material-icons right">more_vert</i></div>
+			<div class="card-balance">Current Balance</div>
+			<div class="card-balance-amt"></div>
+		</div>
+		<div class="card-reveal">
+		</div>
 	</div>
 </template>
 <template id="add-template">
@@ -9754,9 +9754,9 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 			</div>
 	    </h3>
 	  	<center class="main">
+	  		<i class="fa fa-question-circle fa-2x fa-pull-right fold-help"></i>
 	  		<header>
-				<img src="https://airbitz.co/go/wp-content/uploads/2015/11/starbucks-96.png">
-				<i class="fa fa-question-circle right"></i>
+					<img src="https://airbitz.co/go/wp-content/uploads/2015/11/starbucks-96.png">
 			</header>
 			<main>
 			  	<div id="user-cards" class="owl-carousel owl-theme">
@@ -11829,13 +11829,16 @@ var Account = {
 				Account.all_cards[numOfCards] = card;
 				//console.log("Card " + card.id + " has card num, " + card.num);
 				var card_html = document.querySelector('#card-template').content;
-				
-				card_html.querySelector(".gift-card").setAttribute("card", card.id);
-				card_html.querySelector(".card-barcode").innerHTML = "<img class=\"barcode materialboxed\" src=\"" + fold_api + "my/cards/" + card.id + "/barcode/png" + "\">";
-				card_html.querySelector(".card-balance-amt").innerText = card.bal;
-				card_html.querySelector(".card-number").innerText = card.num;
-				document.querySelector("#user-cards").appendChild( document.importNode(card_html, true) );
-				$('.materialboxed').materialbox();
+
+				if(!card.bal == 0) {
+					//card_html.querySelector(".gift-card").setAttribute("card", card.id);
+					card_html.querySelector(".card-barcode").innerHTML = "<img class=\"barcode materialboxed\" src=\"" + fold_api + "my/cards/" + card.id + "/barcode/png" + "\">";
+					card_html.querySelector(".card-balance-amt").innerText = card.bal;
+					card_html.querySelector(".card-balance-amt").setAttribute("card", card.id);
+					card_html.querySelector(".card-number").innerText = card.num;
+					document.querySelector("#user-cards").appendChild( document.importNode(card_html, true) );
+					$('.materialboxed').materialbox();
+				}
 			}
 			Account.owl.owlCarousel({ // Activate owl Carousel for cards.
 			    //navigation : true, // Show next and prev buttons
@@ -11965,19 +11968,19 @@ function Card(id, num, bal) {
 	this.bal = bal;
 }
 Card.prototype.ping = function() { // Tell Fold we need to check this balance to see if the user has spent it.
-	console.log("Pinging card.");
 	var url = fold_api + "my/cards/" + this.id + "/ping";
-	console.log(url);
 	$.post(url);
 }
 Card.prototype.update = function() { // Update UI with info Fold has about card.
-	cardSelector = "[card=" + this.id + "]";
+	//cardSelector = ;
 	this.ping();
 	console.log("id is: " + this.id);
+	console.log($("[card=" + this.id + "]").text());
 	$.get(fold_api + "my/cards/" + this.id).done(function(cardInfo) {
 		cardInfo = cardInfo["cards"][0];
-		$(cardSelector).children(".card-info-main").children(".card-balance").children(".card-balance-amt").text( cardInfo["balance"][0]["formatted"]["all_decimal_places"] );
-		$(cardSelector).find("card-number").text( cardInfo["code"] );
+		$("[card=" + this.id + "]").text(cardInfo["balance"][0]["formatted"]["all_decimal_places"]);
+		/*$(cardSelector).children(".card-info-main").children(".card-balance-amt").text( cardInfo["balance"][0]["formatted"]["all_decimal_places"] );
+		$(cardSelector).find("card-number").text( cardInfo["code"] );*/
 	});
 }
 Card.prototype.remove = function() { // Remove card from UI
