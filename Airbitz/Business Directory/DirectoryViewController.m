@@ -550,7 +550,8 @@ static bool bInitialized = false;
 
 - (void)addLocationToQuery: (NSMutableString *)query
 {
-    if ([query rangeOfString: @"&ll="].location == NSNotFound)
+    if ([query rangeOfString: @"&ll="].location == NSNotFound &&
+        [query rangeOfString: @"?ll="].location == NSNotFound)
     {
         CLLocation *location = [Location controller].curLocation;
         if (location) //can be nil if user has locationServices turned off
