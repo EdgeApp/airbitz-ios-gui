@@ -1361,7 +1361,9 @@ static bool bInitialized = false;
             [self.searchCluesTableView reloadData];
             if (!businessAutoCorrectArray.count)
                 ABLog(2,@"SEARCH RESULTS ARRAY IS EMPTY!");
+            self.searchIndicator.hidden = YES;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            self.searchIndicator.hidden = YES;
         }];
     }
 }
@@ -1388,8 +1390,10 @@ static bool bInitialized = false;
         locationAutoCorrectArray = [[results objectForKey: @"results"] mutableCopy];
         [self pruneCachedLocationItemsFromSearchResults];
         [self.searchCluesTableView reloadData];
+        self.searchIndicator.hidden = YES;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.searchIndicator.hidden = YES;
     }];
     
     self.searchIndicator.hidden = NO;
