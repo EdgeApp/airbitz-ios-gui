@@ -98,7 +98,7 @@
 @property (nonatomic, strong) TransactionDetailsViewController      *transactionDetailsController;
 @property (nonatomic, strong) ExportWalletViewController            *exportWalletViewController;
 @property (nonatomic, strong) NSTimer                               *walletLoadingTimer;
-@property (strong, nonatomic)        AFHTTPRequestOperationManager *afmanager;
+@property (strong, nonatomic) AFHTTPRequestOperationManager         *afmanager;
 
 
 
