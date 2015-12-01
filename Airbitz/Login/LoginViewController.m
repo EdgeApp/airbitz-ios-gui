@@ -155,7 +155,7 @@ static BOOL bInitialized = false;
     // set up the specifics on our picker text view
     self.usernameSelector.textField.borderStyle = UITextBorderStyleNone;
     self.usernameSelector.textField.backgroundColor = [UIColor clearColor];
-    self.usernameSelector.textField.font = [UIFont systemFontOfSize:16];
+    self.usernameSelector.textField.font = [UIFont fontWithName:AppFont size:16.0];
     self.usernameSelector.textField.clearButtonMode = UITextFieldViewModeNever;
     self.usernameSelector.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.usernameSelector.textField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -169,7 +169,7 @@ static BOOL bInitialized = false;
     self.PINusernameSelector.textLabel.layer.shadowRadius = 3.0f;
     self.PINusernameSelector.textLabel.layer.shadowOpacity = 1.0f;
     self.PINusernameSelector.textLabel.layer.masksToBounds = NO;
-    self.PINusernameSelector.textLabel.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.PINusernameSelector.textLabel.layer.shadowColor = [ColorPinUserNameSelectorShadow CGColor];
     self.PINusernameSelector.textLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
     self.swipeText.layer.shadowRadius = 3.0f;
@@ -178,22 +178,23 @@ static BOOL bInitialized = false;
     self.swipeText.layer.shadowColor = [[UIColor darkGrayColor] CGColor];
     self.swipeText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
-    self.titleText.layer.shadowRadius = 3.0f;
+    self.titleText.layer.shadowRadius = LoginTitleTextShadowRadius;
     self.titleText.layer.shadowOpacity = 1.0f;
     self.titleText.layer.masksToBounds = NO;
     self.titleText.layer.shadowColor = [[UIColor whiteColor] CGColor];
     self.titleText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    self.titleText.textColor = ColorLoginTitleText;
 
-    self.PINusernameSelector.button.layer.shadowRadius = 3.0f;
+    self.PINusernameSelector.button.layer.shadowRadius = PinEntryTextShadowRadius;
     self.PINusernameSelector.button.layer.shadowOpacity = 1.0f;
     self.PINusernameSelector.button.layer.masksToBounds = NO;
-    self.PINusernameSelector.button.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.PINusernameSelector.button.layer.shadowColor = [ColorPinUserNameSelectorShadow CGColor];
     self.PINusernameSelector.button.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     
     self.forgotPassworddButton.layer.shadowRadius = 3.0f;
     self.forgotPassworddButton.layer.shadowOpacity = 1.0f;
     self.forgotPassworddButton.layer.masksToBounds = NO;
-    self.forgotPassworddButton.layer.shadowColor = [[UIColor darkGrayColor] CGColor];
+    self.forgotPassworddButton.layer.shadowColor = [ColorLoginTitleTextShadow CGColor];
     self.forgotPassworddButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
     self.usernameSelector.textField.placeholder = NSLocalizedString(@"Username", @"Username");
@@ -517,18 +518,17 @@ typedef enum eReloginState
         UIFont *boldFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
         UIFont *regularFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
         UIColor *boldColor = [UIColor colorWithRed:60./255. green:140.5/255. blue:200/255. alpha:1.];
-        UIColor *regularColor = [UIColor grayColor];
         NSString *title = [NSString stringWithFormat:@"Enter PIN for (%@)",
                            username];
         // Define general attributes like color and fonts for the entire text
-        NSDictionary *attr = @{NSForegroundColorAttributeName:regularColor,
+        NSDictionary *attr = @{NSForegroundColorAttributeName:ColorPinEntryText,
                                NSFontAttributeName:regularFont};
         NSMutableAttributedString *attributedText = [ [NSMutableAttributedString alloc]
                                                      initWithString:title
                                                      attributes:attr];
         // blue and bold text attributes
         NSRange usernameTextRange = [title rangeOfString:username];
-        [attributedText setAttributes:@{NSForegroundColorAttributeName:boldColor,
+        [attributedText setAttributes:@{NSForegroundColorAttributeName:ColorPinEntryUsernameText,
                                         NSFontAttributeName:boldFont}
                                 range:usernameTextRange];
         [self.PINusernameSelector.button setAttributedTitle:attributedText forState:UIControlStateNormal];

@@ -47,7 +47,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 
     //    self.denomination = 100000000;
     self.colorTextBright = [UIColor whiteColor];
-    self.colorTextDark = UIColorFromARGB(0xff0C578C);;
+    self.colorTextDark = UIColorFromARGB(0xff0C578C);
     self.colorTextLink = UIColorFromARGB(0xFF007aFF);
     self.colorTextLinkOnDark = UIColorFromARGB(0xFFBFDFFF);
     self.colorButtonGreen = UIColorFromARGB(0xff80C342);

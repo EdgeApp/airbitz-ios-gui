@@ -565,6 +565,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btn_locateMe" destination="Ue2-Gm-7u2" id="xDJ-MF-9ot"/>
+                        <outlet property="categoryButtonsView" destination="P8l-kL-Lmr" id="CKQ-xn-qGz"/>
                         <outlet property="categoryViewHeight" destination="e93-bb-5es" id="jxb-uC-W6N"/>
                         <outlet property="contentView" destination="i8d-J1-RvK" id="SfM-Ta-bBe"/>
                         <outlet property="dividerView" destination="d8k-A8-ona" id="SR0-W3-prN"/>
@@ -1003,7 +1004,7 @@
     </scenes>
     <resources>
         <image name="back_arrow.png" width="30" height="30"/>
-        <image name="background.jpg" width="843" height="568"/>
+        <image name="background.jpg" width="960" height="600"/>
         <image name="bd_icon_location.png" width="10" height="18"/>
         <image name="btn_blue.png" width="110" height="27"/>
         <image name="btn_locateMe.png" width="39" height="39"/>

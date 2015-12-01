@@ -160,6 +160,7 @@ typedef enum eMapDisplayState
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *searchIndicator;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *categoryViewHeight;
 @property (strong, nonatomic)        AFHTTPRequestOperationManager *afmanager;
+@property (weak, nonatomic) IBOutlet UIView *categoryButtonsView;
 @end
 
 static bool bInitialized = false;
@@ -223,6 +224,7 @@ static bool bInitialized = false;
         });
     }
     
+    self.categoryButtonsView.backgroundColor = DirectoryCategoryButtonsBackgroundColor;
     self.afmanager = [MainViewController createAFManager];
 }
 
