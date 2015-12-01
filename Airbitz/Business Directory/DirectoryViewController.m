@@ -12,13 +12,11 @@
 #import "RibbonView.h"
 #import "topOverviewCell.h"
 #import "overviewCell.h"
-#import "DL_URLServer.h"
 #import "Location.h"
 #import "CJSONDeserializer.h"
 #import "Server.h"
 #import <MapKit/MapKit.h>
 #import "DividerView.h"
-#import "BackgroundImageManager.h"
 #import "BusinessDetailsViewController.h"
 #import "MapView.h"
 #import "SMCalloutView.h"
@@ -31,6 +29,8 @@
 #import "Theme.h"
 #import "Util.h"
 #import "User.h"
+#import "AFNetworking.h"
+#import "LocalSettings.h"
 
 //server defines (uncomment one)
 #define SERVER_MESSAGES_TO_SHOW		VERBOSE_MESSAGES_OFF
@@ -108,7 +108,7 @@ typedef enum eMapDisplayState
     MAP_DISPLAY_RESIZE  /* set when user moves divider bar */
 } tMapDisplayState;
 
-@interface DirectoryViewController () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, DL_URLRequestDelegate, UISearchBarDelegate, DividerViewDelegate, MKMapViewDelegate, SMCalloutViewDelegate, BackgroundImageManagerDelegate, LocationDelegate, BusinessDetailsViewControllerDelegate, MoreCategoriesViewControllerDelegate, UIGestureRecognizerDelegate, InfoViewDelegate, CommonOverviewCellDelegate>
+@interface DirectoryViewController () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, DividerViewDelegate, MKMapViewDelegate, SMCalloutViewDelegate, LocationDelegate, BusinessDetailsViewControllerDelegate, MoreCategoriesViewControllerDelegate, UIGestureRecognizerDelegate, InfoViewDelegate, CommonOverviewCellDelegate>
 {
     int totalResultsCount;          //total number of items in business listings search results (could be more than number of items actually returned due to pages)
     int currentPage;
@@ -118,7 +118,6 @@ typedef enum eMapDisplayState
     CGPoint dividerBarStartTouchPoint;
     UIView *listingHeaderView; //view that's the table's headerView
     NSMutableDictionary *businessSearchResults;
-    BackgroundImageManager *backgroundImages;
     NSDictionary *selectedBusinessInfo;     //cw we might be able to pass this to -launchBusinessDetails and remove it from here
     tDirectoryMode previousDirectoryMode;
     tDirectoryMode directoryMode;
@@ -160,6 +159,7 @@ typedef enum eMapDisplayState
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *searchIndicator;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *categoryViewHeight;
+@property (strong, nonatomic)        AFHTTPRequestOperationManager *afmanager;
 @end
 
 static bool bInitialized = false;
@@ -176,8 +176,6 @@ static bool bInitialized = false;
     originalCategoryViewHeight = _categoryViewHeight.constant;
 
     businessSearchResults = [[NSMutableDictionary alloc] init];
-    backgroundImages = [[BackgroundImageManager alloc] init];
-    backgroundImages.delegate = self;
 
     [Location initAllWithDelegate: self];
 
@@ -224,6 +222,8 @@ static bool bInitialized = false;
             }
         });
     }
+    
+    self.afmanager = [MainViewController createAFManager];
 }
 
 - (void) setupNavBar
@@ -266,18 +266,12 @@ static bool bInitialized = false;
 
 - (void)viewDidUnload
 {
-    backgroundImages = nil;
+//    backgroundImages = nil;
     [Location freeAll];
 }
 
 - (void)viewDidAppear: (BOOL)animated
 {
-//XXX    if (homeTableViewFrame.size.width == 0)
-//    {
-//        //only set it once
-//        homeTableViewFrame = self.tableListingsView.frame;
-//        //ABLog(2,@"Home TableView Frame: %f, %f, %f, %f", homeTableViewFrame.origin.x, homeTableViewFrame.origin.y, homeTableViewFrame.size.width, homeTableViewFrame.size.height);
-//    }
 }
 
 - (void)viewWillAppear: (BOOL)animated
@@ -330,12 +324,9 @@ static bool bInitialized = false;
 
 - (void)viewWillDisappear: (BOOL)animated
 {
-    //ABLog(2,@"%s", __FUNCTION__);
-
     // cancel all our outstanding requests
-    [[DL_URLServer controller] cancelAllRequestsForDelegate: self];
+    [self.afmanager.operationQueue cancelAllOperations];
 
-    //ABLog(2,@"Removing keyboard notification");
     [self receiveKeyboardNotifications: NO];
     [Location stopLocating];
     [super viewWillDisappear: animated];
@@ -559,7 +550,8 @@ static bool bInitialized = false;
 
 - (void)addLocationToQuery: (NSMutableString *)query
 {
-    if ([query rangeOfString: @"&ll="].location == NSNotFound)
+    if ([query rangeOfString: @"&ll="].location == NSNotFound &&
+        [query rangeOfString: @"?ll="].location == NSNotFound)
     {
         CLLocation *location = [Location controller].curLocation;
         if (location) //can be nil if user has locationServices turned off
@@ -596,14 +588,33 @@ static bool bInitialized = false;
     [self addLocationToQuery: query];
 
     NSString *serverQuery = [query stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
-    //ABLog(2,@"Query to server: %@", serverQuery);
-
-    [[DL_URLServer controller] issueRequestURL: serverQuery
-                                    withParams: nil
-                                    withObject: nil
-                                  withDelegate: self
-                            acceptableCacheAge: AGE_ACCEPT_CACHE_SECS
-                                   cacheResult: YES];
+    
+    ABLog(1, @"serverQuery: %@", serverQuery);
+    [self.afmanager GET:serverQuery parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *results = (NSDictionary *)responseObject;
+        totalResultsCount = [[results objectForKey: @"count"] intValue];
+        [self bufferBusinessResults: [results objectForKey: @"results"]];
+        [self.tableView reloadData];
+        
+        self.spinnerView.hidden = YES;
+        self.searchIndicator.hidden = YES;
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSInteger statusCode = operation.response.statusCode;
+        
+        ABLog(1,@"*** SERVER REQUEST STATUS FAILURE: %d", (int)statusCode);
+//        NSString *msg = NSLocalizedString(@"Can't connect to server.  Check your internet connection", nil);
+//        UIAlertView *alert = [[UIAlertView alloc]
+//                              initWithTitle: NSLocalizedString(@"No Connection", @"Alert title that warns user couldn't connect to server")
+//                              message: msg
+//                              delegate: nil
+//                              cancelButtonTitle: @"OK"
+//                              otherButtonTitles: nil];
+//        self.spinnerView.hidden = YES;
+//        self.searchIndicator.hidden = YES;
+//        [alert show];
+    }];
 }
 
 - (void)pruneCachedLocationItemsFromSearchResults
@@ -898,175 +909,6 @@ static bool bInitialized = false;
 {
 //    _categoryViewHeight.constant = 0;
 }
-
-
-//- (void)transitionSearchToMap
-//{
-//    //ABLog(2,@"Transition Search To Map");
-//    directoryMode = DIRECTORY_MODE_MAP;
-//    //ABLog(2,@"Setting map state to INIT");
-//    mapDisplayState = MAP_DISPLAY_INIT;
-//    //subtly show mapView
-//    [self showMapView];
-//    self.dividerView.userControllable = YES;
-//    [self removeBusinessListingHeader];
-//    [self.searchBarSearch resignFirstResponder];
-//    [self.searchBarLocation resignFirstResponder];
-//    self.mapView.showsUserLocation = YES;
-//    [self.tableView setContentOffset:CGPointZero animated:NO];
-//    [self.tableView setContentInset:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
-//
-//    [self setDefaultMapDividerPosition];
-//
-//    [self businessListingQueryForPage: 0];
-//
-//    [UIView animateWithDuration: 0.35
-//                          delay: 0.0
-//                        options: UIViewAnimationOptionCurveEaseInOut
-//                     animations: ^
-//    {
-//        _locationSearchViewHeight.constant = 0;
-//
-//        [self.view layoutIfNeeded];
-//
-//    }
-//                     completion: ^(BOOL finished)
-//    {
-//
-//
-//    }];
-//}
-//
-//- (void)transitionSearchToListing
-//{
-//    //directoryMode = DIRECTORY_MODE_ON_THE_WEB_LISTING;
-//    [businessSearchResults removeAllObjects];
-//    [self.searchBarSearch resignFirstResponder];
-//    [self.searchBarLocation resignFirstResponder];
-//
-//    if (directoryMode == DIRECTORY_MODE_ON_THE_WEB_LISTING)
-//    {
-//        [self removeBusinessListingHeader];
-//        [self hideDividerView];
-//    } else
-//    {
-//        directoryMode = DIRECTORY_MODE_LISTING;
-//        [self hideBackButtonAnimated: YES];
-//    }
-//
-//    [self resetTableHideSearch];
-//    [self businessListingQueryForPage: 0];
-//    [UIView animateWithDuration: 0.5
-//                          delay: 0.0
-//                        options: UIViewAnimationOptionCurveEaseInOut
-//                     animations: ^
-//    {
-////        _locationSearchViewHeight.constant -= EXTRA_SEARCH_BAR_HEIGHT;
-//
-//        [self.view layoutIfNeeded];
-//    }
-//                     completion: ^(BOOL finished)
-//    {
-//
-//
-//    }];
-//}
-//
-//- (void)transitionMapToSearch
-//{
-//    directoryMode = DIRECTORY_MODE_SEARCH;
-//
-//    [UIView animateWithDuration: 0.35
-//                          delay: 0.0
-//                        options: UIViewAnimationOptionCurveEaseInOut
-//                     animations: ^
-//    {
-//        [self hideMapView];
-//        self.mapView.showsUserLocation = NO;
-//        self.dividerView.userControllable = NO;
-//        [self addBusinessListingHeader];
-//        [self hideBackButtonAnimated: YES];
-//        [self.mapView removeAllAnnotations];
-//    }
-//                     completion: ^(BOOL finished)
-//    {
-//
-//        //subtly hide mapView
-//        [UIView animateWithDuration: 0.5
-//                              delay: 0.0
-//                            options: UIViewAnimationOptionCurveLinear
-//                         animations: ^
-//        {
-//            [self hideMapView];
-//        }
-//                         completion: ^(BOOL finished)
-//        {
-//
-//            [self resetTableHideSearch];
-//            [self positionDividerView];
-//
-//            //
-//            // Open up location searchBar
-//            //
-//            _locationSearchViewHeight.constant = EXTRA_SEARCH_BAR_HEIGHT;
-//            [self.view layoutIfNeeded];
-//
-//            //
-//            // Open up the autocomplete clues tableview. Line up top of autocomplete table with bottom of searchBarLocation
-//            //
-//            CGRect frame = [_searchBarLocation convertRect:_searchBarLocation.bounds toView:self.view];
-//            _searchCluesTop.constant = frame.origin.y + frame.size.height;
-//            [self.view layoutIfNeeded];
-//
-//        }];
-//
-//    }];
-//}
-//
-//- (void)transitionListingToMap
-//{
-//    directoryMode = DIRECTORY_MODE_MAP;
-//    //ABLog(2,@"Setting map state to INIT");
-//    mapDisplayState = MAP_DISPLAY_INIT;
-//
-//    self.mapView.showsUserLocation = YES;
-//    self.dividerView.userControllable = YES;
-//    [self removeBusinessListingHeader];
-//    [self showBackButtonAnimated: YES];
-//
-//    [self setDefaultMapDividerPosition];
-//
-//    [self businessListingQueryForPage: 0];
-//    [UIView animateWithDuration: 0.35
-//                          delay: 0.0
-//                        options: UIViewAnimationOptionCurveLinear
-//                     animations: ^
-//    {
-//
-//        [self showMapView];
-//    }
-//                     completion: ^(BOOL finished)
-//    {
-//
-//    }];
-//}
-//
-//- (void)transitionMapToListing
-//{
-//    directoryMode = DIRECTORY_MODE_LISTING;
-//
-//    [self hideMapView];
-//    self.mapView.showsUserLocation = NO;
-//    self.dividerView.userControllable = NO;
-//    [self addBusinessListingHeader];
-//    [self hideBackButtonAnimated: YES];
-//    [self.mapView removeAllAnnotations];
-//    [self resetTableHideSearch];
-//    [self positionDividerView];
-//
-//}
-
-
 #pragma mark MapView
 
 - (void)didDragMap: (UIGestureRecognizer *)gestureRecognizer
@@ -1093,49 +935,6 @@ static bool bInitialized = false;
 {
     [self.mapView setCenterCoordinate: self.mapView.userLocation.location.coordinate animated: YES];
 }
-
-//- (void)TackLocateMeButtonToMapBottomCorner
-//{
-//    CGRect locateMeFrame = self.btn_locateMe.frame;
-//    locateMeFrame.origin.y = self.mapView.frame.origin.y + self.mapView.frame.size.height - LOCATE_ME_BUTTON_OFFSET_FROM_MAP_BOTTOM;
-//    self.btn_locateMe.frame = locateMeFrame;
-//
-//    if (locateMeFrame.origin.y < MINIMUM_LOCATE_ME_BUTTON_OFFSET_Y)
-//    {
-//        if (locateMeButtonDesiredAlpha != 0.0)
-//        {
-//            locateMeButtonDesiredAlpha = 0.0;
-//            //hide locateMe button
-//            [UIView animateWithDuration: 0.1
-//                                  delay: 0.0
-//                                options: UIViewAnimationOptionCurveLinear
-//                             animations: ^
-//            {
-//                self.btn_locateMe.alpha = locateMeButtonDesiredAlpha;
-//            }
-//                             completion: ^(BOOL finished)
-//            {
-//            }];
-//        }
-//    } else
-//    {
-//        if (locateMeButtonDesiredAlpha != 1.0)
-//        {
-//            locateMeButtonDesiredAlpha = 1.0;
-//            //hide locateMe button
-//            [UIView animateWithDuration: 0.1
-//                                  delay: 0.0
-//                                options: UIViewAnimationOptionCurveLinear
-//                             animations: ^
-//            {
-//                self.btn_locateMe.alpha = locateMeButtonDesiredAlpha;
-//            }
-//                             completion: ^(BOOL finished)
-//            {
-//            }];
-//        }
-//    }
-//}
 
 - (void)hideMapView
 {
@@ -1205,7 +1004,6 @@ static bool bInitialized = false;
 
 - (void)mapView: (MKMapView *)mapView regionDidChangeAnimated: (BOOL)animated
 {
-    //ABLog(2,@"Map Region Changed");
 
     if (mapDisplayState == MAP_DISPLAY_NORMAL)
     {
@@ -1215,12 +1013,11 @@ static bool bInitialized = false;
         CLLocationCoordinate2D neCoord = MKCoordinateForMapPoint(neMapPoint);
         CLLocationCoordinate2D swCoord = MKCoordinateForMapPoint(swMapPoint);
 
-        [[DL_URLServer controller] cancelAllRequestsForDelegate: self];
+        [self.afmanager.operationQueue cancelAllOperations];
         [self businessListingQueryForPage: 0 northEastCoordinate: neCoord southWestCoordinate: swCoord];
     }
     if (mapDisplayState == MAP_DISPLAY_ZOOM)
     {
-        //ABLog(2,@"Setting map state to NORMAL");
         mapDisplayState = MAP_DISPLAY_NORMAL;
     }
 }
@@ -1236,9 +1033,9 @@ static bool bInitialized = false;
 
 - (void)AnnotationTapped: (UITapGestureRecognizer *)recognizer
 {
-    //ABLog(2,@"Tapped annotation");
     //to prevent callout from disappearing right after it appeared because user scrolled map then quickly tapped on an annotation.
-    [[DL_URLServer controller] cancelAllRequestsForDelegate: self];
+    [self.afmanager.operationQueue cancelAllOperations];
+
     //calloutViewTapCount++;
     // dismiss our callout if it's already shown but on a different parent view
     //[bottomMapView deselectAnnotation:bottomPin.annotation animated:NO];
@@ -1272,7 +1069,17 @@ static bool bInitialized = false;
     Annotation *annotation = customAnnotationView.annotation;
     av.titleLabel.text = annotation.title;
     av.subtitleLabel.text = annotation.subtitle;
-    av.bkg_image.image = [backgroundImages imageForBusiness: annotation.business];
+    
+    NSDictionary *imageInfo = [annotation.business objectForKey:@"profile_image"];
+    NSString *imageURL = [imageInfo objectForKey:@"thumbnail"];
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, imageURL];
+    
+    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
+                                                  cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                              timeoutInterval:60];
+    
+    [av.bkg_image setImageWithURLRequest:imageRequest placeholderImage:nil success:nil failure:nil];
+    
     selectedBusinessInfo = annotation.business;
 
     av.userInteractionEnabled = YES;
@@ -1421,34 +1228,23 @@ static bool bInitialized = false;
 
 #pragma mark Business Listing buffer management
 
-- (void)bufferBusinessResults: (NSArray *)arrayResults forPage: (int)page
+- (void)bufferBusinessResults: (NSArray *)arrayResults
 {
     //adds a block of business search results to the businessSearchResults dictionary
 
-    int row = page * DEFAULT_RESULTS_PER_PAGE;
+    int row = 0;
     [businessSearchResults removeAllObjects];
     [self.mapView removeAllAnnotations];
-    [backgroundImages removeAllImages];
 
-    //ABLog(2,@"Populate map annotations");
     for (NSDictionary *dict in arrayResults)
     {
-        //printf("%i, ", row);
         [businessSearchResults setObject: dict forKey: [NSNumber numberWithInt: row]];
-        [backgroundImages loadImageForBusiness: dict];
-        Annotation *ann = [self.mapView addAnnotationForBusiness: dict];
-        if (ann)
-        {
-            //ann.thumbnailImage = [backgroundImages imageForBusiness:ann.business];
-        }
+        [self.mapView addAnnotationForBusiness: dict];
         row++;
     }
-    //ABLog(2,@"Loaded page %i.  Buffer size: %lu", page, (unsigned long)businessSearchResults.count);
     if (mapDisplayState == MAP_DISPLAY_INIT)
     {
-        //ABLog(2,@"Setting map state to ZOOM");
         mapDisplayState = MAP_DISPLAY_ZOOM;
-        //ABLog(2,@"Zooming map");
         [self.mapView zoomToFitMapAnnotations];
     }
 }
@@ -1460,7 +1256,6 @@ static bool bInitialized = false;
         for (int row = page * DEFAULT_RESULTS_PER_PAGE; row < ((page + 1) * DEFAULT_RESULTS_PER_PAGE); row++)
         {
             NSDictionary *business = [businessSearchResults objectForKey: [NSNumber numberWithInt: row]];
-            [backgroundImages removeImageForBusiness: business];
             [businessSearchResults removeObjectForKey: [NSNumber numberWithInt: row]];
         }
         //ABLog(2,@"Removed page: %i.  Buffer size: %lu", page, (unsigned long)[businessSearchResults count]);
@@ -1542,38 +1337,37 @@ static bool bInitialized = false;
 
 - (void)searchBarSearchChanged: (UISearchBar *)searchBar textDidChange:(NSString *)text
 {
-    //ABLog(2, @"search text changed: %@", textField.text);
-    //mostRecentSearchTag = TAG_BUSINESS_SEARCH;
+    [self.afmanager.operationQueue cancelAllOperations];
 
-    [[DL_URLServer controller] cancelAllRequestsForDelegate: self];
     NSMutableString *urlString = [[NSMutableString alloc] init];
 
     NSString *searchTerm = [text stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
-    if (searchTerm == nil)
-    {
-        //there are non ascii characters in the string
-        searchTerm = @" ";
 
-    } else
-    {
+    if (searchTerm == nil)
+        searchTerm = @" ";
+    else
         searchTerm = text;
-    }
+    
     [urlString appendString: [NSString stringWithFormat: @"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm]];
 
     [self addLocationToQuery: urlString];
-    //ABLog(2,@"Autocomplete Query: %@", [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+    
     if (urlString != (id)[NSNull null])
     {
         self.searchIndicator.hidden = NO;
         
-        [[DL_URLServer controller] issueRequestURL: [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]
-                                        withParams: nil
-                                        withObject: searchBar
-                                      withDelegate: self
-                                acceptableCacheAge: AGE_ACCEPT_CACHE_SECS
-                                       cacheResult: YES];
+        [self.afmanager GET:[urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *results = (NSDictionary *)responseObject;
+            businessAutoCorrectArray = [[results objectForKey: @"results"] mutableCopy];
+            [self pruneCachedSearchItemsFromSearchResults];
+            [self.searchCluesTableView reloadData];
+            if (!businessAutoCorrectArray.count)
+                ABLog(2,@"SEARCH RESULTS ARRAY IS EMPTY!");
+            self.searchIndicator.hidden = YES;
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            self.searchIndicator.hidden = YES;
+        }];
     }
-
 }
 
 /*
@@ -1588,18 +1382,21 @@ static bool bInitialized = false;
 
 - (void)searchBarLocationChanged: (UISearchBar *)searchBar textDidChange:(NSString *)text
 {
-    [[DL_URLServer controller] cancelAllRequestsForDelegate: self];
-    //http://107.170.22.83:80/api/v1/autocomplete-location/?term=sa
-    //ABLog(2, @"location text changed: %@", textField.text);
+    [self.afmanager.operationQueue cancelAllOperations];
     NSMutableString *query = [[NSMutableString alloc] initWithString: [NSString stringWithFormat: @"%@/autocomplete-location?term=%@", SERVER_API, text]];
     [self addLocationToQuery: query];
-    //ABLog(2,@"Location Query: %@", query);
-    [[DL_URLServer controller] issueRequestURL: [query stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]
-                                    withParams: nil
-                                    withObject: searchBar
-                                  withDelegate: self
-                            acceptableCacheAge: AGE_ACCEPT_CACHE_SECS
-                                   cacheResult: YES];
+    
+    [self.afmanager GET:[query stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *results = (NSDictionary *)responseObject;
+        
+        locationAutoCorrectArray = [[results objectForKey: @"results"] mutableCopy];
+        [self pruneCachedLocationItemsFromSearchResults];
+        [self.searchCluesTableView reloadData];
+        self.searchIndicator.hidden = YES;
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.searchIndicator.hidden = YES;
+    }];
     
     self.searchIndicator.hidden = NO;
 }
@@ -1770,55 +1567,47 @@ static bool bInitialized = false;
             //ABLog(2,@"Requesting background image");
             UIImageView *imageView = cell.backgroundImageView;
             imageView.clipsToBounds = YES;
-            imageView.image = [backgroundImages imageForBusiness: businessInfo];
-//			ABLog(2,@"SelectedBackgroundView: %@", cell.selectedBackgroundView);
-//ABLog(2,@"ImageView: %@, image: %@", cell.backgroundView, imageView.image);
-
-            if (imageView.image)
+            
+            NSDictionary *imageInfo = [businessInfo objectForKey:@"profile_image"];
+            NSString *imageURL = [imageInfo objectForKey:@"thumbnail"];
+            NSString *requestURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, imageURL];
+            
+            NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
+                                                          cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                      timeoutInterval:60];
+            
+            [imageView setImageWithURLRequest:imageRequest placeholderImage:nil success:nil failure:nil];
+            
+            CAGradientLayer *layer = [imageView.layer valueForKey:@"GradientLayer"];
+            if (layer)
             {
-//                if (!cell.bInitialized)
-                {
-                    UIImageView *imageView = cell.backgroundImageView;
-
-
-                    CAGradientLayer *layer = [imageView.layer valueForKey:@"GradientLayer"];
-                    if (layer)
-                    {
-                        // Remove gradient and re-add below
-                        [layer removeFromSuperlayer];
-                        [imageView.layer setValue:nil forKey:@"GradientLayer"];
-                        layer = nil;
-                    }
-                    CGRect frame = imageView.frame;
-                    frame.size.width = [MainViewController getWidth];
-                    frame.size.height = [Theme Singleton].heightListings;
-
-                    imageView.frame = frame;
-
-//                    ABLog(2,@"row=%d imagewidth=%f width=%f boundswidth=%f", row, imageView.frame.size.width, [MainViewController getWidth], cell.bounds.size.width);
-                    // Set black gradient image over layer
-                    CAGradientLayer *gradient = [CAGradientLayer layer];
-                    gradient.frame = imageView.frame;
-
-                    // Add colors to layer
-                    UIColor *topColor = UIColorFromARGB(0x00000000);
-                    UIColor *centerColor = UIColorFromARGB(0x48000000);
-                    UIColor *endColor = UIColorFromARGB(0xa0000000);
-
-                    gradient.colors = @[(id) topColor.CGColor,
-                            (id) centerColor.CGColor,
-                            (id) endColor.CGColor];
-
-                    [imageView.layer insertSublayer:gradient atIndex:0];
-                    [imageView.layer setValue:gradient forKey:@"GradientLayer"];
-                    cell.bInitialized = YES;
-                }
-                imageView.hidden = NO;
+                // Remove gradient and re-add below
+                [layer removeFromSuperlayer];
+                [imageView.layer setValue:nil forKey:@"GradientLayer"];
+                layer = nil;
             }
-            else
-            {
-                imageView.hidden = YES;
-            }
+            CGRect frame = imageView.frame;
+            frame.size.width = [MainViewController getWidth];
+            frame.size.height = [Theme Singleton].heightListings;
+            
+            imageView.frame = frame;
+            
+            // Set black gradient image over layer
+            CAGradientLayer *gradient = [CAGradientLayer layer];
+            gradient.frame = imageView.frame;
+            
+            // Add colors to layer
+            UIColor *topColor = UIColorFromARGB(0x00000000);
+            UIColor *centerColor = UIColorFromARGB(0x48000000);
+            UIColor *endColor = UIColorFromARGB(0xa0000000);
+            
+            gradient.colors = @[(id) topColor.CGColor,
+                                (id) centerColor.CGColor,
+                                (id) endColor.CGColor];
+            
+            [imageView.layer insertSublayer:gradient atIndex:0];
+            [imageView.layer setValue:gradient forKey:@"GradientLayer"];
+            cell.bInitialized = YES;
 
             cell.bitCoinLabel.hidden = NO;
 #if SHOW_SERVER_PAGE
@@ -2104,74 +1893,6 @@ static bool bInitialized = false;
     }
 }
 
-#pragma mark - DLURLServer Callbacks
-
-- (void)onDL_URLRequestCompleteWithStatus: (tDL_URLRequestStatus)status resultData: (NSData *)data resultObj: (id)object
-{
-    NSString *jsonString = [[NSString alloc] initWithBytes: [data bytes] length: [data length] encoding: NSUTF8StringEncoding];
-
-    //ABLog(2,@"Results download returned: %@", jsonString );
-
-    NSData *jsonData = [jsonString dataUsingEncoding: NSUTF32BigEndianStringEncoding];
-    NSError *myError;
-    NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary: jsonData error: &myError];
-
-    if ([dictFromServer objectForKey: @"results"] != (id)[NSNull null])
-    {
-        if (object == self.searchBarLocation)
-        {
-            //ABLog(2,@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
-            locationAutoCorrectArray = [[dictFromServer objectForKey: @"results"] mutableCopy];
-            [self pruneCachedLocationItemsFromSearchResults];
-            [self.searchCluesTableView reloadData];
-
-        } else if (object == self.searchBarSearch)
-        {
-            //ABLog(2,@"Got search results: %@", [dictFromServer objectForKey:@"results"]);
-            businessAutoCorrectArray = [[dictFromServer objectForKey: @"results"] mutableCopy];
-            [self pruneCachedSearchItemsFromSearchResults];
-            [self.searchCluesTableView reloadData];
-            if (businessAutoCorrectArray.count)
-            {
-
-            } else
-            {
-                ABLog(2,@"SEARCH RESULTS ARRAY IS EMPTY!");
-            }
-        } else
-        {
-            //object is a page number (NSNumber)
-            if (DL_URLRequestStatus_Success == status)
-            {
-                //ABLog(2,@"Error: %@", myError);
-                //ABLog(2,@"Dictionary from server: %@", [dictFromServer allKeys]);
-
-                //total number of results (in all pages)
-                totalResultsCount = [[dictFromServer objectForKey: @"count"] intValue];
-
-                [self bufferBusinessResults: [dictFromServer objectForKey: @"results"] forPage: [object intValue]];
-                //ABLog(2,@"Businesses: %@", businessesArray);
-                //ABLog(2,@"Total results: %i", totalResultsCount);
-            } else
-            {
-                ABLog(2,@"*** SERVER REQUEST STATUS FAILURE ***");
-                NSString *msg = NSLocalizedString(@"Can't connect to server.  Check your internet connection", nil);
-                UIAlertView *alert = [[UIAlertView alloc]
-                                          initWithTitle: NSLocalizedString(@"No Connection", @"Alert title that warns user couldn't connect to server")
-                                                message: msg
-                                               delegate: nil
-                                      cancelButtonTitle: @"OK"
-                                      otherButtonTitles: nil];
-                [alert show];
-
-            }
-            [self.tableView reloadData];
-        }
-    }
-    self.spinnerView.hidden = YES;
-    self.searchIndicator.hidden = YES;
-}
-
 #pragma mark DividerView
 
 - (void)positionDividerView
@@ -2277,31 +1998,6 @@ static bool bInitialized = false;
 {
     //ABLog(2,@"Setting map state to NORMAL");
     mapDisplayState = MAP_DISPLAY_NORMAL;
-}
-
-#pragma mark BackgroundImageManager delegates
-
-- (void)BackgroundImageManagerImageLoadedForBizID: (NSNumber *)bizID
-{
-    NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
-
-    int imageBizID = [bizID intValue];
-    BOOL reloadTable = NO;
-    for (NSIndexPath *path in visiblePaths)
-    {
-        NSDictionary *business = [businessSearchResults objectForKey: [NSNumber numberWithInteger: path.row]];
-        int otherBizID = [[business objectForKey: @"bizId"] intValue];
-        if (imageBizID == otherBizID)
-        {
-            reloadTable = YES;
-            break;
-        }
-    }
-    if (reloadTable)
-    {
-        //ABLog(2,@"Reloading table because image for visible cell just got loaded");
-        [self.tableView reloadData];
-    }
 }
 
 #pragma mark LocationDelegates

@@ -88,7 +88,6 @@
 		DA9EE0B51BC61F920063DA07 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7FE1BC61F8F0063DA07 /* Transaction.m */; };
 		DA9EE0B61BC61F920063DA07 /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8001BC61F8F0063DA07 /* TxOutput.m */; };
 		DA9EE0B71BC61F920063DA07 /* Wallet.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8021BC61F8F0063DA07 /* Wallet.m */; };
-		DA9EE0B81BC61F920063DA07 /* BackgroundImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8051BC61F8F0063DA07 /* BackgroundImageManager.m */; };
 		DA9EE0B91BC61F920063DA07 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8081BC61F8F0063DA07 /* BD_CommonCell.m */; };
 		DA9EE0BA1BC61F920063DA07 /* BD_Social_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED80A1BC61F8F0063DA07 /* BD_Social_Cell.m */; };
 		DA9EE0BB1BC61F920063DA07 /* BusinessDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED80C1BC61F8F0063DA07 /* BusinessDetailsViewController.m */; };
@@ -110,7 +109,6 @@
 		DA9EE0CB1BC61F920063DA07 /* RibbonView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED82C1BC61F8F0063DA07 /* RibbonView.m */; };
 		DA9EE0CC1BC61F920063DA07 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED82E1BC61F8F0063DA07 /* SMCalloutView.m */; };
 		DA9EE0CD1BC61F920063DA07 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8311BC61F8F0063DA07 /* DDData.m */; };
-		DA9EE0CE1BC61F920063DA07 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8341BC61F8F0063DA07 /* DL_URLServer.m */; };
 		DA9EE0D01BC61F920063DA07 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8381BC61F8F0063DA07 /* FadingAlertView.m */; };
 		DA9EE0D11BC61F920063DA07 /* DropDownAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED83B1BC61F8F0063DA07 /* DropDownAlertView.m */; };
 		DA9EE0D21BC61F920063DA07 /* DropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83C1BC61F8F0063DA07 /* DropDownAlertView.xib */; };
@@ -540,7 +538,6 @@
 		DA9EF3B41BC7285D0063DA07 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AF1BC61E680063DA07 /* NSMutableData+Secure.m */; };
 		DA9EF3B51BC7285D0063DA07 /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE21BC61F910063DA07 /* BuySellViewController.m */; };
 		DA9EF3B61BC7285D0063DA07 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7951BC61E670063DA07 /* CoreBridge.m */; };
-		DA9EF3B71BC7285D0063DA07 /* BackgroundImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8051BC61F8F0063DA07 /* BackgroundImageManager.m */; };
 		DA9EF3B81BC7285D0063DA07 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7BC1BC61E680063DA07 /* StylizedTextField.m */; };
 		DA9EF3B91BC7285D0063DA07 /* categoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8111BC61F8F0063DA07 /* categoryCell.m */; };
 		DA9EF3BA1BC7285D0063DA07 /* FlashSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDFFF1BC61F920063DA07 /* FlashSelectView.m */; };
@@ -550,7 +547,6 @@
 		DA9EF3BE1BC7285D0063DA07 /* PopupPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEEA1BC61F910063DA07 /* PopupPickerView.m */; };
 		DA9EF3BF1BC7285D0063DA07 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0441BC61F920063DA07 /* NSDictionary_JSONExtensions.m */; };
 		DA9EF3C01BC7285D0063DA07 /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED79D1BC61E670063DA07 /* InfoView.m */; };
-		DA9EF3C11BC7285D0063DA07 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8341BC61F8F0063DA07 /* DL_URLServer.m */; };
 		DA9EF3C21BC7285D0063DA07 /* SignUpBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE02B1BC61F920063DA07 /* SignUpBaseController.m */; };
 		DA9EF3C31BC7285D0063DA07 /* ButtonOnlyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE00E1BC61F920063DA07 /* ButtonOnlyCell.m */; };
 		DA9EF3C41BC7285D0063DA07 /* CommonOverviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8261BC61F8F0063DA07 /* CommonOverviewCell.m */; };
@@ -952,7 +948,6 @@
 		DA9EF57B1BC729FA0063DA07 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AF1BC61E680063DA07 /* NSMutableData+Secure.m */; };
 		DA9EF57C1BC729FA0063DA07 /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE21BC61F910063DA07 /* BuySellViewController.m */; };
 		DA9EF57D1BC729FA0063DA07 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7951BC61E670063DA07 /* CoreBridge.m */; };
-		DA9EF57E1BC729FA0063DA07 /* BackgroundImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8051BC61F8F0063DA07 /* BackgroundImageManager.m */; };
 		DA9EF57F1BC729FA0063DA07 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7BC1BC61E680063DA07 /* StylizedTextField.m */; };
 		DA9EF5801BC729FA0063DA07 /* categoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8111BC61F8F0063DA07 /* categoryCell.m */; };
 		DA9EF5811BC729FA0063DA07 /* FlashSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDFFF1BC61F920063DA07 /* FlashSelectView.m */; };
@@ -962,7 +957,6 @@
 		DA9EF5851BC729FA0063DA07 /* PopupPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEEA1BC61F910063DA07 /* PopupPickerView.m */; };
 		DA9EF5861BC729FA0063DA07 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0441BC61F920063DA07 /* NSDictionary_JSONExtensions.m */; };
 		DA9EF5871BC729FA0063DA07 /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED79D1BC61E670063DA07 /* InfoView.m */; };
-		DA9EF5881BC729FA0063DA07 /* DL_URLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8341BC61F8F0063DA07 /* DL_URLServer.m */; };
 		DA9EF5891BC729FA0063DA07 /* SignUpBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE02B1BC61F920063DA07 /* SignUpBaseController.m */; };
 		DA9EF58A1BC729FA0063DA07 /* ButtonOnlyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE00E1BC61F920063DA07 /* ButtonOnlyCell.m */; };
 		DA9EF58B1BC729FA0063DA07 /* CommonOverviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8261BC61F8F0063DA07 /* CommonOverviewCell.m */; };
@@ -1516,8 +1510,6 @@
 		DA9ED8001BC61F8F0063DA07 /* TxOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TxOutput.m; sourceTree = "<group>"; };
 		DA9ED8011BC61F8F0063DA07 /* Wallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wallet.h; sourceTree = "<group>"; };
 		DA9ED8021BC61F8F0063DA07 /* Wallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wallet.m; sourceTree = "<group>"; };
-		DA9ED8041BC61F8F0063DA07 /* BackgroundImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundImageManager.h; sourceTree = "<group>"; };
-		DA9ED8051BC61F8F0063DA07 /* BackgroundImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundImageManager.m; sourceTree = "<group>"; };
 		DA9ED8071BC61F8F0063DA07 /* BD_CommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_CommonCell.h; sourceTree = "<group>"; };
 		DA9ED8081BC61F8F0063DA07 /* BD_CommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_CommonCell.m; sourceTree = "<group>"; };
 		DA9ED8091BC61F8F0063DA07 /* BD_Social_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_Social_Cell.h; sourceTree = "<group>"; };
@@ -1558,8 +1550,6 @@
 		DA9ED82E1BC61F8F0063DA07 /* SMCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCalloutView.m; sourceTree = "<group>"; };
 		DA9ED8301BC61F8F0063DA07 /* DDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDData.h; sourceTree = "<group>"; };
 		DA9ED8311BC61F8F0063DA07 /* DDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDData.m; sourceTree = "<group>"; };
-		DA9ED8331BC61F8F0063DA07 /* DL_URLServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DL_URLServer.h; sourceTree = "<group>"; };
-		DA9ED8341BC61F8F0063DA07 /* DL_URLServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DL_URLServer.m; sourceTree = "<group>"; };
 		DA9ED8371BC61F8F0063DA07 /* FadingAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FadingAlertView.h; sourceTree = "<group>"; };
 		DA9ED8381BC61F8F0063DA07 /* FadingAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FadingAlertView.m; sourceTree = "<group>"; };
 		DA9ED83A1BC61F8F0063DA07 /* DropDownAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownAlertView.h; sourceTree = "<group>"; };
@@ -2336,8 +2326,6 @@
 		DA9ED8031BC61F8F0063DA07 /* Business Directory */ = {
 			isa = PBXGroup;
 			children = (
-				DA9ED8041BC61F8F0063DA07 /* BackgroundImageManager.h */,
-				DA9ED8051BC61F8F0063DA07 /* BackgroundImageManager.m */,
 				DA9ED8061BC61F8F0063DA07 /* Business Details */,
 				DA9ED80F1BC61F8F0063DA07 /* BusinessDirectory.storyboard */,
 				DA9ED8101BC61F8F0063DA07 /* categoryCell.h */,
@@ -2411,15 +2399,6 @@
 				DA9ED8311BC61F8F0063DA07 /* DDData.m */,
 			);
 			path = DDData;
-			sourceTree = "<group>";
-		};
-		DA9ED8321BC61F8F0063DA07 /* DL_URLServer */ = {
-			isa = PBXGroup;
-			children = (
-				DA9ED8331BC61F8F0063DA07 /* DL_URLServer.h */,
-				DA9ED8341BC61F8F0063DA07 /* DL_URLServer.m */,
-			);
-			path = DL_URLServer;
 			sourceTree = "<group>";
 		};
 		DA9ED8361BC61F8F0063DA07 /* FadingAlert */ = {
@@ -3218,7 +3197,6 @@
 				DA9ED7FC1BC61F8F0063DA07 /* ABC Data */,
 				DA9ED8031BC61F8F0063DA07 /* Business Directory */,
 				DA9ED82F1BC61F8F0063DA07 /* DDData */,
-				DA9ED8321BC61F8F0063DA07 /* DL_URLServer */,
 				DA9ED8361BC61F8F0063DA07 /* FadingAlert */,
 				DA9ED8391BC61F8F0063DA07 /* FadingAlert2 */,
 				DA9EE5C21BC6332C0063DA07 /* Google Drive */,
@@ -4592,7 +4570,6 @@
 				DA9EF3B41BC7285D0063DA07 /* NSMutableData+Secure.m in Sources */,
 				DA9EF3B51BC7285D0063DA07 /* BuySellViewController.m in Sources */,
 				DA9EF3B61BC7285D0063DA07 /* CoreBridge.m in Sources */,
-				DA9EF3B71BC7285D0063DA07 /* BackgroundImageManager.m in Sources */,
 				DA9EF3B81BC7285D0063DA07 /* StylizedTextField.m in Sources */,
 				DA9EF3B91BC7285D0063DA07 /* categoryCell.m in Sources */,
 				DA9EF3BA1BC7285D0063DA07 /* FlashSelectView.m in Sources */,
@@ -4602,7 +4579,6 @@
 				DA9EF3BE1BC7285D0063DA07 /* PopupPickerView.m in Sources */,
 				DA9EF3BF1BC7285D0063DA07 /* NSDictionary_JSONExtensions.m in Sources */,
 				DA9EF3C01BC7285D0063DA07 /* InfoView.m in Sources */,
-				DA9EF3C11BC7285D0063DA07 /* DL_URLServer.m in Sources */,
 				DA9EF3C21BC7285D0063DA07 /* SignUpBaseController.m in Sources */,
 				DA9EF3C31BC7285D0063DA07 /* ButtonOnlyCell.m in Sources */,
 				DA9EF3C41BC7285D0063DA07 /* CommonOverviewCell.m in Sources */,
@@ -4735,7 +4711,6 @@
 				DA9EF57B1BC729FA0063DA07 /* NSMutableData+Secure.m in Sources */,
 				DA9EF57C1BC729FA0063DA07 /* BuySellViewController.m in Sources */,
 				DA9EF57D1BC729FA0063DA07 /* CoreBridge.m in Sources */,
-				DA9EF57E1BC729FA0063DA07 /* BackgroundImageManager.m in Sources */,
 				DA9EF57F1BC729FA0063DA07 /* StylizedTextField.m in Sources */,
 				DA9EF5801BC729FA0063DA07 /* categoryCell.m in Sources */,
 				DA9EF5811BC729FA0063DA07 /* FlashSelectView.m in Sources */,
@@ -4745,7 +4720,6 @@
 				DA9EF5851BC729FA0063DA07 /* PopupPickerView.m in Sources */,
 				DA9EF5861BC729FA0063DA07 /* NSDictionary_JSONExtensions.m in Sources */,
 				DA9EF5871BC729FA0063DA07 /* InfoView.m in Sources */,
-				DA9EF5881BC729FA0063DA07 /* DL_URLServer.m in Sources */,
 				DA9EF5891BC729FA0063DA07 /* SignUpBaseController.m in Sources */,
 				DA9EF58A1BC729FA0063DA07 /* ButtonOnlyCell.m in Sources */,
 				DA9EF58B1BC729FA0063DA07 /* CommonOverviewCell.m in Sources */,
@@ -4878,7 +4852,6 @@
 				DA9ED7E91BC61E680063DA07 /* NSMutableData+Secure.m in Sources */,
 				DA9EE4131BC61F920063DA07 /* BuySellViewController.m in Sources */,
 				DA9ED7DB1BC61E680063DA07 /* CoreBridge.m in Sources */,
-				DA9EE0B81BC61F920063DA07 /* BackgroundImageManager.m in Sources */,
 				DA9ED7F01BC61E680063DA07 /* StylizedTextField.m in Sources */,
 				DA9EE0BE1BC61F920063DA07 /* categoryCell.m in Sources */,
 				DA9EE5101BC61F930063DA07 /* FlashSelectView.m in Sources */,
@@ -4888,7 +4861,6 @@
 				DA9EE4171BC61F920063DA07 /* PopupPickerView.m in Sources */,
 				DA9EE5311BC61F930063DA07 /* NSDictionary_JSONExtensions.m in Sources */,
 				DA9ED7DF1BC61E680063DA07 /* InfoView.m in Sources */,
-				DA9EE0CE1BC61F920063DA07 /* DL_URLServer.m in Sources */,
 				DA9EE5261BC61F930063DA07 /* SignUpBaseController.m in Sources */,
 				DA9EE5171BC61F930063DA07 /* ButtonOnlyCell.m in Sources */,
 				DA9EE0C81BC61F920063DA07 /* CommonOverviewCell.m in Sources */,
