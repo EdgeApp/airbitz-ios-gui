@@ -34,7 +34,6 @@
 #import "AudioController.h"
 #import "FadingAlertView.h"
 #import "InfoView.h"
-#import "DL_URLServer.h"
 #import "NotificationChecker.h"
 #import "LocalSettings.h"
 #import "AirbitzViewController.h"
@@ -69,7 +68,7 @@ typedef enum eAppMode
 @interface MainViewController () <UITabBarDelegate,RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,DL_URLRequestDelegate,
+                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate>
 {
 	DirectoryViewController     *_directoryViewController;
@@ -185,11 +184,7 @@ MainViewController *singleton;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockTabbar) name:NOTIFICATION_WALLETS_LOADED object:nil];
 
     // init and set API key
-    [DL_URLServer initAll];
     NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
-    [[DL_URLServer controller] setHeaderRequestValue:token forKey: @"Authorization"];
-    [[DL_URLServer controller] setHeaderRequestValue:[LocalSettings controller].clientID forKey:@"X-Client-ID"];
-    [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
 
     self.afmanager = [AFHTTPRequestOperationManager manager];
     [self.afmanager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
