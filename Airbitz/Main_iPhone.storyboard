@@ -3124,6 +3124,7 @@
                                             <constraint firstAttribute="height" constant="37" id="JSR-NO-KwI"/>
                                             <constraint firstAttribute="width" constant="37" id="TU2-kk-RMt"/>
                                         </constraints>
+                                        <color key="color" red="0.054901960784313725" green="0.2627450980392157" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <animations/>
