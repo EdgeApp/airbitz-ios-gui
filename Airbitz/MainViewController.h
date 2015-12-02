@@ -29,7 +29,6 @@ typedef enum eNavBarSide
 @property (nonatomic, strong)        NSMutableDictionary    *dictAddresses; // addresses for the contacts and businesses
 @property (nonatomic, strong)        NSMutableDictionary    *dictImageURLFromBizName; // urls for business thumbnails
 @property (nonatomic, strong)        NSMutableDictionary    *dictBizIds; // bizIds for the businesses
-@property (nonatomic, strong)        NSMutableDictionary    *dictBizImages; // images for businesses
 @property (nonatomic, strong)        NSMutableDictionary    *dictImageURLFromBizID;
 @property (nonatomic, strong)        NSMutableArray         *arrayNearBusinesses; // businesses that match distance criteria
 

@@ -160,7 +160,6 @@ MainViewController *singleton;
     self.dictAddresses = [[NSMutableDictionary alloc] init];
     self.dictImageURLFromBizName = [[NSMutableDictionary alloc] init];
     self.dictBizIds = [[NSMutableDictionary alloc] init];
-    self.dictBizImages = [[NSMutableDictionary alloc] init];
     self.dictImageURLFromBizID = [[NSMutableDictionary alloc] init];
     self.arrayNearBusinesses = [[NSMutableArray alloc] init];
     

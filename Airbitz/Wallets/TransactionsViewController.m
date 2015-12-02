@@ -724,7 +724,7 @@
         if (transaction && transaction.bizId)
         {
             // if we don't have an image for this biz id
-            if (nil == [MainViewController Singleton].dictBizImages[@(transaction.bizId)])
+            if (nil == [MainViewController Singleton].dictImageURLFromBizID[@(transaction.bizId)])
             {
                 // start by getting the biz details...this will kick of a retreive of the images
                 [self getBizDetailsForTransaction:transaction];
@@ -778,9 +778,9 @@
 -(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
 {
     // if we got a new photo
-    if (controller.transaction.bizId && controller.photo)
+    if (controller.transaction.bizId && controller.photo && controller.photoUrl)
     {
-        [[MainViewController Singleton].dictBizImages setObject:controller.photo forKey:[NSNumber numberWithInt:controller.transaction.bizId]];
+        [MainViewController Singleton].dictImageURLFromBizID[[NSNumber numberWithInt:controller.transaction.bizId]] = controller.photoUrl;
     }
 
     [MainViewController changeNavBarOwner:self];

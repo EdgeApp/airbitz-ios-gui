@@ -714,9 +714,6 @@ typedef enum eRequestType
     {
         if (_bizId)
         {
-            
-            
-            
             NSString *imageURL = [MainViewController Singleton].dictImageURLFromBizName[[self.nameTextField.text lowercaseString]];
             
             if (imageURL)
@@ -727,6 +724,7 @@ typedef enum eRequestType
                                                           timeoutInterval:60];
                 
                 [self.imagePhoto setImageWithURLRequest:imageRequest placeholderImage:nil success:nil failure:nil];
+                self.photoUrl = requestURL;
             }
             bHavePhoto = YES;
         }
