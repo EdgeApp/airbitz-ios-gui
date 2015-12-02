@@ -446,6 +446,9 @@ static const NSString *PROTOCOL = @"bridge://";
                                 notes:[args objectForKey:@"notes"] 
                         amountSatoshi:[[args objectForKey:@"amountSatoshi"] longValue]
                                 error:&error]) {
+        if (0 < [[args objectForKey:@"bizId"] longValue]) {
+            spendTarget.bizId = [[args objectForKey:@"bizId"] longValue];
+        }
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
         _sendConfirmationViewController.delegate = self;
@@ -478,7 +481,9 @@ static const NSString *PROTOCOL = @"bridge://";
     details.szNotes = (char *)[[args objectForKey:@"notes"] UTF8String];
     details.szCategory = (char *)[[args objectForKey:@"category"] UTF8String];
 	details.attributes = 0x0;
-    details.bizId = 0;
+    if (0 < [[args objectForKey:@"bizId"] longValue]) {
+        details.bizId = [[args objectForKey:@"bizId"] longValue];
+    }
 
 	char *pRequestID = NULL;
 

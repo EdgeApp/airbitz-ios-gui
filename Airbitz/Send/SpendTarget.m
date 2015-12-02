@@ -17,6 +17,7 @@
     self = [super init];
     if (self) {
         _pSpend = NULL;
+        _bizId = 0;
     }
     return self;
 }
@@ -95,6 +96,9 @@
         }
         if (fiatAmount > 0) {
             pTrans->pDetails->amountCurrency = fiatAmount;
+        }
+        if (0 < _bizId) {
+            pTrans->pDetails->bizId = _bizId;
         }
         ABC_SetTransactionDetails([[User Singleton].name UTF8String], NULL,
             [self.srcWallet.strUUID UTF8String], [txId UTF8String],
