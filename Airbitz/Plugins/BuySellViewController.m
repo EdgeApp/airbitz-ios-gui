@@ -124,11 +124,11 @@
 {
     NSInteger row = [indexPath row];
     Plugin *plugin = [[Plugin getPlugins] objectAtIndex:row];
-    [self launchPlugin:plugin];
+    [self launchPlugin:plugin uri:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider
+- (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider uri:(NSURL *)uri
 {
     Plugin *plugin = nil;
     for (Plugin *p in [Plugin getPlugins]) {
@@ -138,13 +138,13 @@
         }
     }
     if (plugin != nil) {
-        [self launchPlugin:plugin];
+        [self launchPlugin:plugin uri:uri];
         return YES;
     }
     return NO;
 }
 
-- (void)launchPlugin:(Plugin *)plugin
+- (void)launchPlugin:(Plugin *)plugin uri:(NSURL *)uri
 {
     if (_pluginViewController != nil) {
         [_pluginViewController.view removeFromSuperview];
@@ -155,6 +155,7 @@
     _pluginViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"PluginViewController"];
     _pluginViewController.delegate = self;
     _pluginViewController.plugin = plugin;
+    _pluginViewController.uri = uri;
     [Util animateController:_pluginViewController parentController:self];
 }
 

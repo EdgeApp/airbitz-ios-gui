@@ -1627,9 +1627,9 @@ MainViewController *singleton;
     [_settingsViewController bringUpRecoveryQuestionsView];
 }
 
-- (void)launchBuySell:(NSString *)country provider:(NSString *)provider
+- (void)launchBuySell:(NSString *)country provider:(NSString *)provider uri:(NSURL *)uri
 {
-    if ([_buySellViewController launchPluginByCountry:country provider:provider]) {
+    if ([_buySellViewController launchPluginByCountry:country provider:provider uri:uri]) {
         [self switchToSettingsView:_buySellViewController];
     } else {
         // Notify user no match!
@@ -1663,7 +1663,7 @@ MainViewController *singleton;
     if ([uri.scheme isEqualToString:@"airbitz"] && [uri.host isEqualToString:@"plugin"]) {
         NSArray *cs = [uri.path pathComponents];
         if ([cs count] == 3) {
-            [self launchBuySell:cs[2] provider:cs[1]];
+            [self launchBuySell:cs[2] provider:cs[1] uri:uri];
         }
     } else if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:@"airbitz"] || [uri.scheme isEqualToString:@"bitid"]) {
         if ([User isLoggedIn]) {

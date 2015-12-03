@@ -84,11 +84,16 @@ static const NSString *PROTOCOL = @"bridge://";
     };
 
     [NSHTTPCookieStorage sharedHTTPCookieStorage].cookieAcceptPolicy = NSHTTPCookieAcceptPolicyAlways;
-    NSString *localFilePath = [[NSBundle mainBundle] pathForResource:_plugin.sourceFile ofType:_plugin.sourceExtension];
-    NSURLRequest *localRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localFilePath]];
     _webView.delegate = self;
     _webView.backgroundColor = [UIColor clearColor];
     _webView.opaque = NO;
+
+    NSString *localFilePath = [[NSBundle mainBundle] pathForResource:_plugin.sourceFile ofType:_plugin.sourceExtension];
+    if (_uri != nil) {
+        localFilePath = [NSString stringWithFormat:@"%@?%@", localFilePath, _uri.query];
+    }
+
+    NSURLRequest *localRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localFilePath]];
     [_webView loadRequest:localRequest];
 }
 
