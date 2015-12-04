@@ -147,12 +147,6 @@ static BOOL bInitialized = false;
         }
     }
 
-    #if HARD_CODED_LOGIN
-    
-    self.usernameSelection.textField.text = HARD_CODED_LOGIN_NAME;
-    self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
-    #endif
-
     // set up the specifics on our picker text view
     self.usernameSelector.textField.borderStyle = UITextBorderStyleNone;
     self.usernameSelector.textField.backgroundColor = [UIColor clearColor];
@@ -362,6 +356,14 @@ typedef enum eReloginState
 {
     _bUsedTouchIDToLogin = NO;
     
+    if (HARD_CODED_LOGIN) {
+        self.usernameSelector.textField.text = HARD_CODED_LOGIN_NAME;
+        self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
+        [self showSpinner:YES];
+        [self SignIn];
+        return;
+    }
+    
     if (! [Keychain bHasSecureEnclave] ) return;
 
     NSString *username = [LocalSettings controller].cachedUsername;
@@ -514,7 +516,6 @@ typedef enum eReloginState
 - (void)setUsernameText:(NSString *)username
 {
     // Update non-PIN username
-#if !HARD_CODED_LOGIN
     if (username && 0 < username.length)
     {
         //
@@ -544,7 +545,6 @@ typedef enum eReloginState
         self.usernameSelector.textField.text = username;
     }
     self.passwordTextField.text = [User Singleton].password;
-#endif
 
 }
 
