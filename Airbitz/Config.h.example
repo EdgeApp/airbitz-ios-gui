@@ -33,4 +33,6 @@
 #define CLEVERCOIN_API_LABEL            @"Need an API Key"
 #define CLEVERCOIN_API_SECRET           @"00000000000"
 
+#define FOLD_API_KEY                    @"00000000000"
+
 #endif

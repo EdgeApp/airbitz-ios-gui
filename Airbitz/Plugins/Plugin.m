@@ -35,6 +35,7 @@ static NSMutableArray *plugins;
         plugin.imageFile = @"plugin_icon_coffee";
         plugin.name = @"20% Off Starbucks";
         plugin.env = @{
+                       @"API-TOKEN": FOLD_API_KEY,
                        @"BRAND": @"Starbucks",
                        };
         [plugins addObject:plugin];
@@ -48,6 +49,7 @@ static NSMutableArray *plugins;
         plugin.imageFile = @"plugin_icon_target";
         plugin.name = @"~15% Off on Target";
         plugin.env = @{
+                       @"API-TOKEN": FOLD_API_KEY,
                        @"BRAND": @"Target",
                        };
         [plugins addObject:plugin];
@@ -85,10 +87,10 @@ static NSMutableArray *plugins;
                         @"CLEVERCOIN_API_SECRET": CLEVERCOIN_API_SECRET,
                        @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                         };
+            [plugins addObject:plugin];
+            
         }
         
-        [plugins addObject:plugin];
-
         bInitialized = YES;
     }
 }
