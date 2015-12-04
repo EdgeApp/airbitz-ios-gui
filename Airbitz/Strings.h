@@ -47,7 +47,7 @@
 #define changePINText                               NSLocalizedString(@"Change PIN", nil)
 #define twoFactorText                               NSLocalizedString(@"Two Factor", nil)
 #define importText                                  NSLocalizedString(@"Import", nil)
-#define buySellText                                 NSLocalizedString(@"Buy/Sell Bitcoin", nil)
+#define buySellText                                 NSLocalizedString(@"Buy/Sell/Spend Bitcoin", nil)
 #define passwordRecoveryText                        NSLocalizedString(@"Password Recovery", nil)
 #define passwordMismatchText                        NSLocalizedString(@"Password does not match re-entered password", @"")
 #define defaultCurrencyInfoText                     NSLocalizedString(@"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.", nil)
