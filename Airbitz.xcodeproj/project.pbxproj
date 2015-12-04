@@ -1334,6 +1334,9 @@
 		DABE85621BC88FBD00369AEE /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DABE85191BC88FBD00369AEE /* libzmq.a */; };
 		DABE85631BC88FBD00369AEE /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DABE85191BC88FBD00369AEE /* libzmq.a */; };
 		DABE85641BC88FBD00369AEE /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DABE85191BC88FBD00369AEE /* libzmq.a */; };
+		DABF60F11C10263A004E613B /* clevercoin.html in Resources */ = {isa = PBXBuildFile; fileRef = DABF60F01C10263A004E613B /* clevercoin.html */; };
+		DABF60F61C1027C1004E613B /* clevercoin.html in Resources */ = {isa = PBXBuildFile; fileRef = DABF60F01C10263A004E613B /* clevercoin.html */; };
+		DABF60F71C1027C1004E613B /* clevercoin.html in Resources */ = {isa = PBXBuildFile; fileRef = DABF60F01C10263A004E613B /* clevercoin.html */; };
 		DAD1AD7C1BC6065100C648C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7B1BC6065100C648C4 /* main.m */; };
 		DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
 		DAD1AD951BC6065100C648C4 /* AirbitzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD941BC6065100C648C4 /* AirbitzTests.m */; };
@@ -2036,6 +2039,7 @@
 		DABE85171BC88FBD00369AEE /* libwallet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwallet.a; path = "AirBitz/ABC-testnet/libwallet.a"; sourceTree = SOURCE_ROOT; };
 		DABE85181BC88FBD00369AEE /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = "../../../builds/develop-testnet/abc/abc-ios-universal/lib/libz.a"; sourceTree = "<group>"; };
 		DABE85191BC88FBD00369AEE /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = "../../../builds/develop-testnet/abc/abc-ios-universal/lib/libzmq.a"; sourceTree = "<group>"; };
+		DABF60F01C10263A004E613B /* clevercoin.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = clevercoin.html; sourceTree = "<group>"; };
 		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD7B1BC6065100C648C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2817,6 +2821,7 @@
 		DA9EDFEC1BC61F920063DA07 /* plugins */ = {
 			isa = PBXGroup;
 			children = (
+				DABF60F01C10263A004E613B /* clevercoin.html */,
 				DA10BDE01C00280E0086AD8B /* foldapp.html */,
 				DA9EDFED1BC61F920063DA07 /* glidera.html */,
 				DA9EDFEE1BC61F920063DA07 /* img */,
@@ -3700,6 +3705,7 @@
 				DA9EF47F1BC7285D0063DA07 /* icon_bitcoin_symbol.png in Resources */,
 				DA9EF4801BC7285D0063DA07 /* icon_export_printer@2x.png in Resources */,
 				DA9EF4811BC7285D0063DA07 /* icon_directory@2x.png in Resources */,
+				DABF60F61C1027C1004E613B /* clevercoin.html in Resources */,
 				DA9EF4821BC7285D0063DA07 /* BLE_photo@2x.png in Resources */,
 				DA9EF4831BC7285D0063DA07 /* swipe-arrow@2x.png in Resources */,
 				DA9EF4841BC7285D0063DA07 /* bd_icon_share@2x.png in Resources */,
@@ -3954,6 +3960,7 @@
 				DA9EF6441BC729FA0063DA07 /* Lato-Bold.ttf in Resources */,
 				DA9EF6461BC729FA0063DA07 /* icon_bitcoin_symbol.png in Resources */,
 				DA9EF6471BC729FA0063DA07 /* icon_export_printer@2x.png in Resources */,
+				DABF60F71C1027C1004E613B /* clevercoin.html in Resources */,
 				DA9EF6481BC729FA0063DA07 /* icon_directory@2x.png in Resources */,
 				DA9EF6491BC729FA0063DA07 /* BLE_photo@2x.png in Resources */,
 				DA9EF64A1BC729FA0063DA07 /* swipe-arrow@2x.png in Resources */,
@@ -4264,6 +4271,7 @@
 				DA9EE43B1BC61F920063DA07 /* btn_add@2x.png in Resources */,
 				DA9EE4A51BC61F920063DA07 /* icon_logout.png in Resources */,
 				DA9EE4151BC61F920063DA07 /* Plugins.storyboard in Resources */,
+				DABF60F11C10263A004E613B /* clevercoin.html in Resources */,
 				DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */,
 				DA9EE5031BC61F920063DA07 /* transactionDetails.html in Resources */,
 				DA9EE4BC1BC61F920063DA07 /* icon_settings@3x.png in Resources */,
