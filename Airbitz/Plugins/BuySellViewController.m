@@ -107,6 +107,7 @@
     Plugin *plugin = [[Plugin getPlugins] objectAtIndex:row];
     [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
     cell.text.text = plugin.name;
+    cell.text.textColor = plugin.textColor;
     cell.imageView.image = [UIImage imageNamed:plugin.imageFile];
     
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -116,6 +117,7 @@
     bgColorView.backgroundColor = [Theme Singleton].colorBackgroundHighlight;
     bgColorView.layer.masksToBounds = YES;
     cell.selectedBackgroundView = bgColorView;
+    cell.backgroundColor = plugin.backgroundColor;
     
     return cell;
 }
