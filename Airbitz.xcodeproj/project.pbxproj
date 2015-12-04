@@ -1268,6 +1268,9 @@
 		DABA01281C111982008702AB /* plugin_icon_coffee@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */; };
 		DABA01291C111982008702AB /* plugin_icon_coffee@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */; };
 		DABA012A1C111982008702AB /* plugin_icon_coffee@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */; };
+		DABA012C1C111D59008702AB /* plugin_icon_target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */; };
+		DABA012D1C111D59008702AB /* plugin_icon_target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */; };
+		DABA012E1C111D59008702AB /* plugin_icon_target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */; };
 		DABE851A1BC88FBD00369AEE /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DABE85011BC88FBD00369AEE /* libabc.a */; };
 		DABE851B1BC88FBD00369AEE /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DABE85011BC88FBD00369AEE /* libabc.a */; };
 		DABE851C1BC88FBD00369AEE /* libabc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DABE85011BC88FBD00369AEE /* libabc.a */; };
@@ -2006,6 +2009,7 @@
 		DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_euro@2x.png"; sourceTree = "<group>"; };
 		DABA01231C111950008702AB /* plugin_icon_usd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_usd@2x.png"; sourceTree = "<group>"; };
 		DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_coffee@2x.png"; sourceTree = "<group>"; };
+		DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_target@2x.png"; sourceTree = "<group>"; };
 		DABE85001BC88FBD00369AEE /* ABC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABC.h; path = "../../../builds/develop-testnet/prefix/ios/armv7/include/ABC.h"; sourceTree = "<group>"; };
 		DABE85011BC88FBD00369AEE /* libabc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libabc.a; path = "../../../builds/develop-testnet/abc/abc-ios-universal/lib/libabc.a"; sourceTree = "<group>"; };
 		DABE85021BC88FBD00369AEE /* libbitcoin-client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libbitcoin-client.a"; path = "AirBitz/ABC-testnet/libbitcoin-client.a"; sourceTree = SOURCE_ROOT; };
@@ -2707,6 +2711,7 @@
 				DA9EDFB51BC61F920063DA07 /* password_dot@2x.png */,
 				DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */,
 				DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */,
+				DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */,
 				DABA01231C111950008702AB /* plugin_icon_usd@2x.png */,
 				DA9EEFB71BC724B00063DA07 /* QR-bracket.png */,
 				DA9EDFB91BC61F920063DA07 /* Red-X@2x.png */,
@@ -3797,6 +3802,7 @@
 				DA9EF4E71BC7285D0063DA07 /* San Diego.gpx in Resources */,
 				DA9EF4E81BC7285D0063DA07 /* btn_export.png in Resources */,
 				DA9EF4E91BC7285D0063DA07 /* icon_category_shopping@2x.png in Resources */,
+				DABA012D1C111D59008702AB /* plugin_icon_target@2x.png in Resources */,
 				DA9EF4EA1BC7285D0063DA07 /* btn_add@4x.png in Resources */,
 				DA9EF4EB1BC7285D0063DA07 /* bd_icon_phone@2x.png in Resources */,
 				DA9EF4EC1BC7285D0063DA07 /* Montserrat-Regular.ttf in Resources */,
@@ -4050,6 +4056,7 @@
 				DA9EF6AE1BC729FA0063DA07 /* San Diego.gpx in Resources */,
 				DA9EF6AF1BC729FA0063DA07 /* btn_export.png in Resources */,
 				DA9EF6B01BC729FA0063DA07 /* icon_category_shopping@2x.png in Resources */,
+				DABA012E1C111D59008702AB /* plugin_icon_target@2x.png in Resources */,
 				DA9EF6B11BC729FA0063DA07 /* btn_add@4x.png in Resources */,
 				DA9EF6B21BC729FA0063DA07 /* bd_icon_phone@2x.png in Resources */,
 				DA9EF6B31BC729FA0063DA07 /* Montserrat-Regular.ttf in Resources */,
@@ -4208,6 +4215,7 @@
 				DA9EE4DC1BC61F920063DA07 /* swipe-arrow@2x.png in Resources */,
 				DA9EE42F1BC61F920063DA07 /* bd_icon_share@2x.png in Resources */,
 				DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */,
+				DABA012C1C111D59008702AB /* plugin_icon_target@2x.png in Resources */,
 				DA9ED7D11BC61E680063DA07 /* BalanceView~iphone.xib in Resources */,
 				DA9EE4A91BC61F920063DA07 /* icon_more.png in Resources */,
 				DA9EE4451BC61F920063DA07 /* btn_close@2x.png in Resources */,
