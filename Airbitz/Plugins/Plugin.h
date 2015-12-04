@@ -13,6 +13,7 @@
 @property (nonatomic, copy)     NSString        *name;
 @property (nonatomic, copy)     NSString        *sourceFile;
 @property (nonatomic, copy)     NSString        *sourceExtension;
+@property (nonatomic, copy)     NSString        *imageFile;
 @property (nonatomic, copy)     NSDictionary    *env;
 
 + (void)initAll;

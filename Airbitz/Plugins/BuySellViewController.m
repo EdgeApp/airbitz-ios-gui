@@ -107,8 +107,10 @@
     Plugin *plugin = [[Plugin getPlugins] objectAtIndex:row];
     [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
     cell.text.text = plugin.name;
+    cell.imageView.image = [UIImage imageNamed:plugin.imageFile];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryNone;
  
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = [Theme Singleton].colorBackgroundHighlight;

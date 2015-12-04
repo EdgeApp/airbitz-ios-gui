@@ -32,6 +32,7 @@ static NSMutableArray *plugins;
         plugin.country = @"US";
         plugin.sourceFile = @"foldapp";
         plugin.sourceExtension = @"html";
+        plugin.imageFile = @"plugin_icon_coffee";
         plugin.name = @"20% Off Starbucks";
         plugin.env = @{
                        @"BRAND": @"Starbucks",
@@ -45,6 +46,7 @@ static NSMutableArray *plugins;
         plugin.country = @"US";
         plugin.sourceFile = @"glidera";
         plugin.sourceExtension = @"html";
+        plugin.imageFile = @"plugin_icon_usd";
         plugin.name = @"Buy/Sell Bitcoin (US/Canada)";
         plugin.env = @{
                        @"SANDBOX": (isTestnet ? @"true" : @"false"),
