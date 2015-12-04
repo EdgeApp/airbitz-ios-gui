@@ -21,7 +21,7 @@
 
 static const NSString *PROTOCOL = @"bridge://";
 
-@interface PluginViewController () <UIWebViewDelegate, SendConfirmationViewControllerDelegate>
+@interface PluginViewController () <UIWebViewDelegate, SendConfirmationViewControllerDelegate, UIImagePickerControllerDelegate>
 {
     FadingAlertView                *_fadingAlert;
     SendConfirmationViewController *_sendConfirmationViewController;
@@ -29,6 +29,9 @@ static const NSString *PROTOCOL = @"bridge://";
     Wallet                         *_sendWallet;
     NSMutableArray                 *_navStack;
     NSDictionary                   *_functions;
+    NSString                       *_tempCbidForImagePicker;
+    NSDictionary                   *_tempArgsForImagePicker;
+
     BOOL                           bWalletListDropped;
 }
 
@@ -63,6 +66,7 @@ static const NSString *PROTOCOL = @"bridge://";
                      @"wallets":NSStringFromSelector(@selector(wallets:)),
         @"createReceiveRequest":NSStringFromSelector(@selector(createReceiveRequest:)),
                 @"requestSpend":NSStringFromSelector(@selector(launchSpendConfirmation:)),
+                @"requestFile":NSStringFromSelector(@selector(launchFilePicker:)),
              @"finalizeRequest":NSStringFromSelector(@selector(finalizeRequest:)),
                    @"writeData":NSStringFromSelector(@selector(writeData:)),
                    @"clearData":NSStringFromSelector(@selector(clearData:)),
@@ -74,6 +78,7 @@ static const NSString *PROTOCOL = @"bridge://";
               @"formatCurrency":NSStringFromSelector(@selector(formatCurrency:)),
                    @"getConfig":NSStringFromSelector(@selector(getConfig:)),
                    @"showAlert":NSStringFromSelector(@selector(showAlert:)),
+                   @"hideAlert":NSStringFromSelector(@selector(hideAlert:)),
                        @"title":NSStringFromSelector(@selector(title:)),
                   @"showNavBar":NSStringFromSelector(@selector(showNavBar:)),
                   @"hideNavBar":NSStringFromSelector(@selector(hideNavBar:)),
@@ -84,11 +89,18 @@ static const NSString *PROTOCOL = @"bridge://";
     };
 
     [NSHTTPCookieStorage sharedHTTPCookieStorage].cookieAcceptPolicy = NSHTTPCookieAcceptPolicyAlways;
-    NSString *localFilePath = [[NSBundle mainBundle] pathForResource:_plugin.sourceFile ofType:_plugin.sourceExtension];
-    NSURLRequest *localRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localFilePath]];
     _webView.delegate = self;
     _webView.backgroundColor = [UIColor clearColor];
     _webView.opaque = NO;
+
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:_plugin.sourceFile ofType:_plugin.sourceExtension]];
+    NSString *localFilePath = [url absoluteString];  
+
+    if (_uri != nil) {
+        localFilePath = [NSString stringWithFormat:@"%@?%@", localFilePath, _uri.query];
+    }
+
+    NSURLRequest *localRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:localFilePath]];
     [_webView loadRequest:localRequest];
 }
 
@@ -462,6 +474,48 @@ static const NSString *PROTOCOL = @"bridge://";
     }
 }
 
+- (void)launchFilePicker:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+
+    _tempArgsForImagePicker = args;
+    _tempCbidForImagePicker = cbid;
+
+    UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    NSData *imgData = [NSData dataWithData:UIImageJPEGRepresentation(image, 0.75)];
+    NSString *encodedString = [imgData base64Encoding];
+    
+    int SLICE_SIZE = 500;
+    size_t len = [encodedString length];
+    [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz.bufferClear();"]];
+    for (int i = 0; i < len / SLICE_SIZE; ++i) {
+        size_t start = i * SLICE_SIZE;
+        size_t size = start + SLICE_SIZE > len ? len - start : SLICE_SIZE;
+
+        NSString *chunk = [encodedString substringWithRange:NSMakeRange(start, size)];
+        [_webView stringByEvaluatingJavaScriptFromString:
+            [NSString stringWithFormat:@"Airbitz.bufferAdd('%s');", chunk]];
+    }
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    // NSDictionary *results = [self jsonResult:@"useBuffer"];
+    NSDictionary *results = [self jsonResult:encodedString];
+    [self callJsFunction:_tempCbidForImagePicker withArgs:results];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)createReceiveRequest:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
@@ -659,6 +713,15 @@ static const NSString *PROTOCOL = @"bridge://";
     BOOL showSpinner = [[args objectForKey:@"showSpinner"] boolValue];
 
     [self showFadingAlert:[args objectForKey:@"message"] showSpinner:showSpinner];
+    [self setJsResults:cbid withArgs:[self jsonSuccess]];
+}
+
+- (void)hideAlert:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+
+    [MainViewController fadingAlertDismiss];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
 }
 

@@ -68,22 +68,27 @@ static NSMutableArray *plugins;
                        };
         [plugins addObject:plugin];
 
-        plugin = [[Plugin alloc] init];
-        plugin.pluginId = @"com.glidera.us";
-        plugin.provider = @"glidera";
-        plugin.country = @"US";
-        plugin.sourceFile = @"glidera";
-        plugin.sourceExtension = @"html";
-        plugin.imageFile = @"plugin_icon_euro";
-        plugin.name = @"Buy Bitcoin (Euro)";
-        plugin.env = @{
-                       @"SANDBOX": (isTestnet ? @"true" : @"false"),
-                       @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
-                       @"REDIRECT_URI": [NSString stringWithFormat:@"airbitz://plugin/glidera/%@/", plugin.country],
+        if (isTestnet) {
+            plugin = [[Plugin alloc] init];
+            plugin.pluginId = @"com.clevercoin";
+            plugin.provider = @"clevercoin";
+            plugin.country = @"EUR";
+            plugin.sourceFile = @"clevercoin";
+            plugin.sourceExtension = @"html";
+            plugin.imageFile = @"plugin_icon_euro";
+            plugin.name = @"Buy Bitcoin (Euro)";
+            plugin.env = @{
+                        @"SANDBOX": (isTestnet ? @"true" : @"false"),
+                        @"REDIRECT_URI": [NSString stringWithFormat:@"airbitz://plugin/clevercoin/%@/", plugin.country],
+                        @"CLEVERCOIN_API_KEY": CLEVERCOIN_API_KEY,
+                        @"CLEVERCOIN_API_LABEL": CLEVERCOIN_API_LABEL,
+                        @"CLEVERCOIN_API_SECRET": CLEVERCOIN_API_SECRET,
                        @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
-                       };
+                        };
+        }
         
         [plugins addObject:plugin];
+
         bInitialized = YES;
     }
 }
