@@ -56,6 +56,7 @@ static const NSString *PROTOCOL = @"bridge://";
     bWalletListDropped = false;
     _navStack = [[NSMutableArray alloc] init];
     _functions = @{
+                     @"debugLevel":NSStringFromSelector(@selector(debugLevel:)),
                      @"bitidAddress":NSStringFromSelector(@selector(bitidAddress:)),
                      @"bitidSignature":NSStringFromSelector(@selector(bitidSignature:)),
                      @"selectedWallet":NSStringFromSelector(@selector(selectedWallet:)),
@@ -667,6 +668,18 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
 
     _titleLabel.text = [args objectForKey:@"title"];
+    [self setJsResults:cbid withArgs:[self jsonSuccess]];
+}
+
+- (void)debugLevel:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+    
+    NSString *text = [args objectForKey:@"text"];
+    NSString *level = [args objectForKey:@"level"];
+    
+    ABLog((int) [level integerValue], @"%@", text);
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
 }
 
