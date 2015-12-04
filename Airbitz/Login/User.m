@@ -104,7 +104,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.runLoop = [NSRunLoop currentRunLoop];
     self.PINLoginInvalidEntryCount = 0;
     self.reviewNotified = NO;
-    self.disclaimerViewed = NO;
+    self.bDisclaimerViewed = NO;
     self.loginCount = 0;
     self.needsPasswordCheck = NO;
     self.firstLoginTime = nil;
@@ -176,7 +176,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
 - (void)loadLocalSettings:(tABC_AccountSettings *)pSettings
 {
     NSUserDefaults *localConfig = [NSUserDefaults standardUserDefaults];
-    self.disclaimerViewed = [localConfig boolForKey:DISCLAIMER_VIEWED];
+    self.bDisclaimerViewed = [localConfig boolForKey:DISCLAIMER_VIEWED];
     self.reviewNotified = [localConfig boolForKey:REVIEW_NOTIFIED];
     self.firstLoginTime = [localConfig objectForKey:FIRST_LOGIN_TIME];
     self.loginCount = [localConfig integerForKey:LOGIN_COUNT];
@@ -205,7 +205,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     [localConfig setBool:_bDailySpendLimit forKey:[self userKey:SPENDING_LIMIT_ENABLED]];
 
     [localConfig setBool:self.reviewNotified forKey:REVIEW_NOTIFIED];
-    [localConfig setBool:self.disclaimerViewed forKey:DISCLAIMER_VIEWED];
+    [localConfig setBool:self.bDisclaimerViewed forKey:DISCLAIMER_VIEWED];
     [localConfig setObject:self.firstLoginTime forKey:FIRST_LOGIN_TIME];
     [localConfig setInteger:self.loginCount forKey:LOGIN_COUNT];
     [localConfig setInteger:self.requestViewCount forKey:REQUEST_VIEW_COUNT];
@@ -310,16 +310,20 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 - (BOOL)offerDisclaimer;
 {
-    if (self.disclaimerViewed)
+    if (self.bDisclaimerViewed)
     {
         return NO;
     }
     else
     {
-        self.disclaimerViewed = YES;
-        [self saveLocalSettings];
         return YES;
     }
+}
+
+- (void)saveDisclaimerViewed
+{
+    self.bDisclaimerViewed = YES;
+    [self saveLocalSettings];
 }
 
 + (BOOL)offerUserReview

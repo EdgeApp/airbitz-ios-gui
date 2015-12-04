@@ -93,10 +93,11 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet UILabel			*errorMessageText;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeArrowLeft;
 
-@property (nonatomic, weak) IBOutlet PickerTextView   *usernameSelector;
-@property (nonatomic, strong) NSArray   *arrayAccounts;
-@property (nonatomic, strong) NSArray   *otherAccounts;
-@property (weak, nonatomic) IBOutlet UIButton *buttonOutsideTap;
+@property (nonatomic, weak) IBOutlet    PickerTextView      *usernameSelector;
+@property (nonatomic, strong)           NSArray             *arrayAccounts;
+@property (nonatomic, strong)           NSArray             *otherAccounts;
+@property (weak, nonatomic) IBOutlet    UIButton            *buttonOutsideTap;
+@property (weak, nonatomic) IBOutlet    InfoView            *disclaimerInfoView;
 
 @end
 
@@ -332,7 +333,7 @@ typedef enum eReloginState
         [self.usernameSelector.textField resignFirstResponder];
         [self.PINCodeView resignFirstResponder];
 
-        [InfoView CreateWithHTML:@"infoDisclaimer" forView:self.view agreeButton:YES delegate:self];
+        self.disclaimerInfoView = [InfoView CreateWithHTML:@"infoDisclaimer" forView:self.view agreeButton:YES delegate:self];
     }
     else
     {
@@ -345,6 +346,10 @@ typedef enum eReloginState
 - (void) InfoViewFinished:(InfoView *)infoView
 {
     [infoView removeFromSuperview];
+    if (infoView == self.disclaimerInfoView)
+    {
+        [[User Singleton] saveDisclaimerViewed];
+    }
     if (bPINModeEnabled)
         [self.PINCodeView becomeFirstResponder];
     else
