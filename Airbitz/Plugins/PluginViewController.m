@@ -207,7 +207,8 @@ static const NSString *PROTOCOL = @"bridge://";
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *url = [request URL].absoluteString;
-    NSLog(@("url: %@"), url);
+    if (![url containsString:@"debugLevel"])
+        NSLog(@("url: %@"), url);
     if ([[url lowercaseString] hasPrefix:PROTOCOL]) {
         url = [url substringFromIndex:PROTOCOL.length];
         url = [url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
