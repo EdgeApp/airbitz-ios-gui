@@ -11405,36 +11405,6 @@ try {
   module = angular.module('app', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('app/prices/partials/expires.html',
-    '<div class="live-price-expiration">\n' +
-    '  <span class="expiration-label">Expires</span> <span class="expiration-data">{{ expires }}</span>\n' +
-    '</div>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('app');
-} catch (e) {
-  module = angular.module('app', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('app/prices/partials/rate.html',
-    '<div class="live-price-rate">\n' +
-    '  <span class="price-rate-label">1 BTC =</span> <span class="price-rate-data">{{ price }} {{ currency }} </span>\n' +
-    '</div>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('app');
-} catch (e) {
-  module = angular.module('app', []);
-}
-module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/user/partials/accountSummary.html',
     '<div class="exchange-user-account row">\n' +
     '  <div class="account-message col-xs-12"\n' +
@@ -12556,6 +12526,36 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '  </form>\n' +
     '\n' +
+    '</div>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('app');
+} catch (e) {
+  module = angular.module('app', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('app/prices/partials/expires.html',
+    '<div class="live-price-expiration">\n' +
+    '  <span class="expiration-label">Expires</span> <span class="expiration-data">{{ expires }}</span>\n' +
+    '</div>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('app');
+} catch (e) {
+  module = angular.module('app', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('app/prices/partials/rate.html',
+    '<div class="live-price-rate">\n' +
+    '  <span class="price-rate-label">1 BTC =</span> <span class="price-rate-data">{{ price }} {{ currency }} </span>\n' +
     '</div>\n' +
     '');
 }]);

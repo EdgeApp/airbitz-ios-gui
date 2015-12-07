@@ -12,6 +12,7 @@
 
 @property (assign) id<BuySellViewControllerDelegate> delegate;
 - (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider uri:(NSURL *)uri;
+- (void)resetViews;
 
 @end
 

@@ -1286,8 +1286,6 @@ div.card.card-content.card-info-main {
 	.card-balance     {font-family: Lato, Verdana, Arial, Helvetica, sans-serif; font-size:11pt; color: #555555; padding-top: 5px}
 	.card-balance-amt {font-family: Lato, Verdana, Arial, Helvetica, sans-serif; font-size:20pt; color: #555555; padding-bottom: 10px}
 	.card-value       {font-family: Lato, Verdana, Arial, Helvetica, sans-serif; font-size:18pt; color: #555555; height: 50px}
-    .card-info        {font-family: Lato, Verdana, Arial, Helvetica, sans-serif; font-size:10pt; color: #007aFF; height: 20px}
-    .partner-logo     {height: 35px; align-content: center}
 	.collapsible-header {vert-align: middle}
 	.buy-card         {
 		background-color: #FFFFFF;
@@ -9755,13 +9753,13 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 		</div>
 		<div class="card-info-main card-content">
 			<div class="card-number"></div>
-			<div class="card-balance">Current Balance</div>
+			<div class="card-balance">Current Balance</div><i class="material-icons right activator card-info">info_outline</i>
 			<div class="card-balance-amt"></div>
-            <div><span class="activator card-info">Refund Card</span></div>
 		</div>
-		<div class="card-reveal valign-wrapper"><br>
-			<a class="waves-effect btn center card-refund valign">Refund Card</a><br><br>
-            <span class="card-title grey-text text-darken-4">Cancel</span><br>
+		<div class="card-reveal valign-wrapper">
+			<span class="card-title grey-text text-darken-4">Refund Card?<i class="material-icons card-close right">close</i></span><br><br>
+			<a class="waves-effect btn center card-refund valign">Yes</a>
+
 		</div>
 	</div>
 </template>
@@ -9770,7 +9768,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 	<li class="collection-item avatar card-list">
 		<span class="title"><h4 class="card-value" value=""></h4></span>
 		<div class="secondary-content">
-            <button type="button" class="buy-card">Buy</button>
+			<button type="button" class="buy-card btn-floating btn-large waves-effect waves-light green"><i class="material-icons medium">add</i></button>
 		</div>
 	</li>
 </template>
@@ -9817,10 +9815,8 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 				<div class="container">
 					<div class="row">
 						<div class="col l6 s12">
-							<h6>This service is provided by</h6>
-                            <img class="partner-logo" src="https://airbitz.co/go/wp-content/uploads/2015/12/fold-logo-yellow-text.png"><br>
-                            For issues with gift card purchases and refunds, please contact <span class="support-mail-link"></span>
-							<h6>Account Credentials:</h6>
+							<h6>This service is provided by Fold Inc. For issues with gift card purchases and refunds, please contact <span class="support-mail-link"></span></h6>
+							<h6>Please provide the following account information to support:</h6>
 							<h6><span class="user-creds"></span></h6>
 							<h6>This application is not affiliated with the <span class="brand-name"></span> Corporation</h6>
 						</div>
@@ -11851,11 +11847,9 @@ function updateWallet(wallet) {
 function logStats(event, brand, amount) {
 	var statsKey = Airbitz.config.get('AIRBITZ_STATS_KEY');
     var s = {};
-	s['btc'] = 0;
-	s['partner'] = 'Fold:';
+	s['btc'] = amount;
+	s['partner'] = 'Fold:' + brand;
 	s['country'] = 'USA';
-	s['brand'] = brand;
-	s['usd'] = amount;
 	$.ajax({
 		headers: {
 			'Content-Type' : 'application/json',
@@ -11866,7 +11860,7 @@ function logStats(event, brand, amount) {
 		'data' : JSON.stringify({
 			'event_type': event,
 			'event_network' : 'mainnet',
-			'event_text': JSON.stringify(s),
+			'event_text': s,
 		}),
 		'dataType': 'json',
 		success : function(response) {
@@ -12022,7 +12016,6 @@ var Account = {
 		Airbitz.ui.debugLevel(1,"updateCards: brand: "+ brand + ": " + cards.length);
 		if(!cards.length > 0) {
 			if(Account.haveCardsChanged(cards) || (!Account.owlSet)) {
-                Account.all_cards = [];
 				Airbitz.ui.debugLevel(1,"No cards. New acc!");
 				if(typeof Account.owl.data("owlCarousel").owl === 'undefined') {
 					Account.setDummyC();
@@ -12064,7 +12057,7 @@ var Account = {
 						card_html.querySelector(".card-balance-amt").setAttribute("card", card.id);
 						card_html.querySelector(".card-number").innerText = card.num;
 						if(card.isRefundable && refund_enabled) {
-							card_html.querySelector(".card-info").innerText = "Refund Card"; // Make sure the info button shows up.
+							card_html.querySelector(".card-info").innerText = "info_outline"; // Make sure the info button shows up.
 						} else { 
 							card_html.querySelector(".card-info").innerText = "";
 						}
@@ -12264,7 +12257,7 @@ var Account = {
                         force_refresh = 1;
                         Account.clearOwl();
                         Airbitz.ui.debugLevel(1,"Funds were sent.");
-                        logStats("purchase",brand,denomination);
+                        logStats("purchase",brand,this.bal)
                     }
 	        	},
 	        	error: function() {
@@ -12305,7 +12298,6 @@ Card.prototype.refund = function() {
         Airbitz.ui.showAlert('', 'Refunding card...', {'showSpinner': true}); 
 		url = fold_api + "my/refunds";
 		thisCard = this;
-		var balance = this.bal;
 		Airbitz.ui.debugLevel(1,"Refunding card " + this.id + " amount: " + this.bal);
 		refund = {"refunds": [{
 			  "card_id": this.id
@@ -12323,7 +12315,7 @@ Card.prototype.refund = function() {
 						Airbitz.ui.showAlert("Card Refunded", "Card Refunded. Please allow several minutes for refund.");
 						Airbitz.ui.debugLevel(1,response);
                         Airbitz.ui.debugLevel(1,"Done refunding!");
-                        logStats("refund",brand,balance);
+                        logStats("refund",brand,this.bal)
 						force_refresh = 1;
 					}, function(error) {
 						Airbitz.ui.showAlert("Card Not Refunded", "Error refunding card. Please try again later. Error:sRequestHandler:refund");
@@ -12450,7 +12442,7 @@ $(function() {
 	}
 
 	$(".brand-logo").attr("src", brand_logo_urls[brand]);
-	$(".user-creds").text("Username: " + Account.username  + " Password: " + Account.pass);
+	$(".user-creds").text("Username: " + Account.username  + " Pass: " + Account.pass);
 	$(".support-mail-link").html("<a href=\"mailto:support@foldapp.com?subject=Support%20Requested&Body=" + "Username:" + Account.username + "\">support@foldapp.com.</a>");
 });
 
