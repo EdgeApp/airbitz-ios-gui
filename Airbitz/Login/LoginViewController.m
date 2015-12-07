@@ -354,6 +354,13 @@ typedef enum eReloginState
 
 - (void)autoReloginOrTouchIDIfPossible
 {
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        [self autoReloginOrTouchIDIfPossibleMain];
+    });
+}
+
+- (void)autoReloginOrTouchIDIfPossibleMain
+{
     _bUsedTouchIDToLogin = NO;
     
     if (HARD_CODED_LOGIN) {
