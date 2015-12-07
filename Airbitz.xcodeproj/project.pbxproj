@@ -169,7 +169,6 @@
 		DA9EE43F1BC61F920063DA07 /* btn_add_black.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF1C1BC61F910063DA07 /* btn_add_black.png */; };
 		DA9EE4401BC61F920063DA07 /* btn_add_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF1D1BC61F910063DA07 /* btn_add_black@2x.png */; };
 		DA9EE4411BC61F920063DA07 /* btn_add_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF1E1BC61F910063DA07 /* btn_add_black@3x.png */; };
-		DA9EE4421BC61F920063DA07 /* btn_add_black@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF1F1BC61F910063DA07 /* btn_add_black@4x.png */; };
 		DA9EE4441BC61F920063DA07 /* btn_close.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF211BC61F910063DA07 /* btn_close.png */; };
 		DA9EE4451BC61F920063DA07 /* btn_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF221BC61F910063DA07 /* btn_close@2x.png */; };
 		DA9EE4461BC61F920063DA07 /* btn_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF231BC61F910063DA07 /* btn_close@3x.png */; };
@@ -753,7 +752,6 @@
 		DA9EF4A61BC7285D0063DA07 /* Warning_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFBE1BC61F920063DA07 /* Warning_icon@2x.png */; };
 		DA9EF4A71BC7285D0063DA07 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED78E1BC61E670063DA07 /* CalculatorView~iphone.xib */; };
 		DA9EF4A81BC7285D0063DA07 /* icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF871BC61F910063DA07 /* icon_more@2x.png */; };
-		DA9EF4A91BC7285D0063DA07 /* btn_add_black@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF1F1BC61F910063DA07 /* btn_add_black@4x.png */; };
 		DA9EF4AA1BC7285D0063DA07 /* icon_settings_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF9D1BC61F910063DA07 /* icon_settings_dark@3x.png */; };
 		DA9EF4AB1BC7285D0063DA07 /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC71BC61F920063DA07 /* ca-certificates.crt */; };
 		DA9EF4AC1BC7285D0063DA07 /* bankcheck.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFEF1BC61F920063DA07 /* bankcheck.png */; };
@@ -1163,7 +1161,6 @@
 		DA9EF66D1BC729FA0063DA07 /* Warning_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFBE1BC61F920063DA07 /* Warning_icon@2x.png */; };
 		DA9EF66E1BC729FA0063DA07 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED78E1BC61E670063DA07 /* CalculatorView~iphone.xib */; };
 		DA9EF66F1BC729FA0063DA07 /* icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF871BC61F910063DA07 /* icon_more@2x.png */; };
-		DA9EF6701BC729FA0063DA07 /* btn_add_black@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF1F1BC61F910063DA07 /* btn_add_black@4x.png */; };
 		DA9EF6711BC729FA0063DA07 /* icon_settings_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF9D1BC61F910063DA07 /* icon_settings_dark@3x.png */; };
 		DA9EF6721BC729FA0063DA07 /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC71BC61F920063DA07 /* ca-certificates.crt */; };
 		DA9EF6731BC729FA0063DA07 /* bankcheck.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFEF1BC61F920063DA07 /* bankcheck.png */; };
@@ -1647,7 +1644,6 @@
 		DA9EDF1C1BC61F910063DA07 /* btn_add_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_add_black.png; sourceTree = "<group>"; };
 		DA9EDF1D1BC61F910063DA07 /* btn_add_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_add_black@2x.png"; sourceTree = "<group>"; };
 		DA9EDF1E1BC61F910063DA07 /* btn_add_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_add_black@3x.png"; sourceTree = "<group>"; };
-		DA9EDF1F1BC61F910063DA07 /* btn_add_black@4x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_add_black@4x.png"; sourceTree = "<group>"; };
 		DA9EDF211BC61F910063DA07 /* btn_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_close.png; sourceTree = "<group>"; };
 		DA9EDF221BC61F910063DA07 /* btn_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close@2x.png"; sourceTree = "<group>"; };
 		DA9EDF231BC61F910063DA07 /* btn_close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close@3x.png"; sourceTree = "<group>"; };
@@ -2587,7 +2583,6 @@
 				DA9EDF1C1BC61F910063DA07 /* btn_add_black.png */,
 				DA9EDF1D1BC61F910063DA07 /* btn_add_black@2x.png */,
 				DA9EDF1E1BC61F910063DA07 /* btn_add_black@3x.png */,
-				DA9EDF1F1BC61F910063DA07 /* btn_add_black@4x.png */,
 				DA9EDF211BC61F910063DA07 /* btn_close.png */,
 				DA9EDF221BC61F910063DA07 /* btn_close@2x.png */,
 				DA9EDF231BC61F910063DA07 /* btn_close@3x.png */,
@@ -3745,7 +3740,6 @@
 				DA9EF4A61BC7285D0063DA07 /* Warning_icon@2x.png in Resources */,
 				DA9EF4A71BC7285D0063DA07 /* CalculatorView~iphone.xib in Resources */,
 				DA9EF4A81BC7285D0063DA07 /* icon_more@2x.png in Resources */,
-				DA9EF4A91BC7285D0063DA07 /* btn_add_black@4x.png in Resources */,
 				DA9EF4AA1BC7285D0063DA07 /* icon_settings_dark@3x.png in Resources */,
 				DA9EF4AB1BC7285D0063DA07 /* ca-certificates.crt in Resources */,
 				DA9EF4AC1BC7285D0063DA07 /* bankcheck.png in Resources */,
@@ -4001,7 +3995,6 @@
 				DA9EF66D1BC729FA0063DA07 /* Warning_icon@2x.png in Resources */,
 				DA9EF66E1BC729FA0063DA07 /* CalculatorView~iphone.xib in Resources */,
 				DA9EF66F1BC729FA0063DA07 /* icon_more@2x.png in Resources */,
-				DA9EF6701BC729FA0063DA07 /* btn_add_black@4x.png in Resources */,
 				DA9EF6711BC729FA0063DA07 /* icon_settings_dark@3x.png in Resources */,
 				DA9EF6721BC729FA0063DA07 /* ca-certificates.crt in Resources */,
 				DA9EF6731BC729FA0063DA07 /* bankcheck.png in Resources */,
@@ -4258,7 +4251,6 @@
 				DA9EE4DF1BC61F920063DA07 /* Warning_icon@2x.png in Resources */,
 				DA9ED7D81BC61E680063DA07 /* CalculatorView~iphone.xib in Resources */,
 				DA9EE4AA1BC61F920063DA07 /* icon_more@2x.png in Resources */,
-				DA9EE4421BC61F920063DA07 /* btn_add_black@4x.png in Resources */,
 				DA9EE4C01BC61F920063DA07 /* icon_settings_dark@3x.png in Resources */,
 				DA9EE4E61BC61F920063DA07 /* ca-certificates.crt in Resources */,
 				DA9EE5071BC61F920063DA07 /* bankcheck.png in Resources */,

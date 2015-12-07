@@ -165,7 +165,7 @@
                                     <tabBarItem title="Transactions" image="icon_transactions.png" id="j3q-OI-el3" userLabel="Transactions">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
-                                    <tabBarItem title="More" image="icon_more.png" id="sAy-bR-lqd">
+                                    <tabBarItem title="Menu" image="icon_more.png" id="sAy-bR-lqd">
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                                     </tabBarItem>
                                 </items>
