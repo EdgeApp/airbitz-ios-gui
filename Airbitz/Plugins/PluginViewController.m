@@ -299,7 +299,9 @@ static const NSString *PROTOCOL = @"bridge://";
     if (resp == nil) {
         ABLog(2,@"resp is null. count = %d", (unsigned int)[args count]);
     }
-    [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz._results[%@]=%@", cbid, resp]];
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz._results[%@]=%@", cbid, resp]];
+    });
 }
 
 - (void)callJsFunction:(NSString *)cbid withArgs:(NSDictionary *)args
@@ -316,7 +318,9 @@ static const NSString *PROTOCOL = @"bridge://";
     if (resp == nil) {
         ABLog(2,@"resp is null. count = %d", (int)[args count]);
     }
-    [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz._callbacks[%@]('%@');", cbid, resp]];
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz._callbacks[%@]('%@');", cbid, resp]];
+    });
 }
 
 #pragma mark - Action Methods

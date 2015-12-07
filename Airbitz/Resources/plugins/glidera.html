@@ -1056,25 +1056,62 @@ button.btn-add.btn {
 }
 .main {
   display: none;
+  margin: 10px;
+}
+.main-container {
+  width: 90%;
+}
+.brand-logo {
+  width: 64px;
+  height: 64px;
+}
+.card-barcode {
+  padding: 20px 20px 0 20px;
+  margin-bottom: 0;
 }
 .barcode {
   width: 200px;
-  height: 65px;
+}
+.barcode-inactive {
+  opacity: .15;
 }
 #user-cards .item {
     display: block;
     width: 100%;
     height: auto;
+    max-width: 400px;
+}
+#user-cards .owl-item div{
+}
+.gift-card {
+  border-radius: 10px!important;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}
+.card-close {
+  position: absolute;
+  right: 25px;
+  top: 15px;
+}
+.add-funds-header {
+  padding-top: 13px;
 }
 .add-buttons {
   text-align: left;
 }
+.card-value {
+  padding-top: 5px;
+}
 .collection .collection-item.avatar.card-list {
   padding: 10px 20px;
 }
-.card-content.card-info-main {
-  padding: 0;
-  margin: 0;
+div.card.card-content.card-info-main {
+  padding-top: 0;
+}
+.fold-help {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 /* Fixes flicker issues seen in Safari */
 .ng-trans-fade.ng-enter {
@@ -1215,6 +1252,11 @@ function _bridge() {
       _native('requestSpend', cbid, options);
     },
 
+    requestFile: function(options) {
+      var cbid = createCallback(options);
+      _native('requestFile', cbid, options);
+    },
+
     writeData: function(key, value) {
       _handleBlocking(_native('writeData', newId(), {'key': key, 'value': value}, true));
     },
@@ -1267,8 +1309,16 @@ function _bridge() {
       }, true));
     },
 
+    hideAlert: function(title, message, options) {
+      return _handleBlocking(_native('hideAlert', newId(), {}, true));
+    },
+
     title: function(s) {
       return _handleBlocking(_native('title', newId(), {'title': s}, true));
+    },
+
+    debugLevel: function(level, text) {
+      return _handleBlocking(_native('debugLevel', newId(), {'level': level, 'text': text}, true))
     },
 
     showNavBar: function() {
@@ -1318,6 +1368,15 @@ function _bridge() {
   Airbitz._denomListener = null;
   Airbitz._bridge = _bridge();
 
+  Airbitz.buffer = '';
+  Airbitz.bufferClear = function() {
+    Airbitz.buffer = '';
+  };
+  Airbitz.bufferAdd = function(s) {
+    Airbitz.buffer += s;
+  };
+
+
   Airbitz.core.bitidAddress = function(uri, message) {
     return Airbitz._bridge.bitidAddress(uri, message);
   };
@@ -1346,6 +1405,10 @@ function _bridge() {
   // Takes a spend request and sends user to send confirmation screen to spend.
   Airbitz.core.requestSpend = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
     Airbitz._bridge.requestSpend(wallet, toAddress, amountSatoshi, amountFiat, options);
+  };
+
+  Airbitz.core.requestFile = function(options) {
+    Airbitz._bridge.requestFile(options);
   };
 
   Airbitz.core.writeData = function(key, data) {
@@ -1446,8 +1509,16 @@ function _bridge() {
     Airbitz._bridge.showAlert(title, message, options || {});
   };
 
+  Airbitz.ui.hideAlert = function(title, message, options) {
+    Airbitz._bridge.hideAlert();
+  };
+
   Airbitz.ui.title = function(s) {
     Airbitz._bridge.title(s);
+  };
+
+  Airbitz.ui.debugLevel = function(level, text) {
+    Airbitz._bridge.debugLevel(level, text);
   };
 
   Airbitz.ui.showNavBar = function() {
@@ -10542,6 +10613,7 @@ var app = angular.module('app.core', [
           notes: notes,
           amountSatoshi: amountSatoshi,
           amountFiat: amountFiat,
+          bizId: ExchangeFactory.bizId,
           success: resolve,
           error: reject
         })
@@ -10612,6 +10684,7 @@ var app = angular.module('app.core', [
         Airbitz.core.requestSpend(wallet, data.sellAddress, btcToSatoshi(qty), amountFiat, {
           label: 'Glidera',
           category: 'Exchange:Sell Bitcoin',
+          bizId: ExchangeFactory.bizId,
           notes: notes,
           success: function(res) {
             if (res && res.back) {
@@ -10670,9 +10743,9 @@ var app = angular.module('app.core', [
           'event_text': JSON.stringify(s),
         }
       }).then(function successCallback(response) {
-        console.log(respone);
+        console.log(response);
       }, function errorCallback(response) {
-        console.log(respone);
+        console.log(response);
       });
     };
     return factory;
@@ -10686,6 +10759,7 @@ var app = angular.module('app.core', [
     factory.depositId = 'Glidera Inc';
     factory.orderTimeout = '60';
     factory.depositTimeout = '3600';
+    factory.bizId = 11063;
     factory.updateCurrency = function(countryCode) {
       if (!countryCode) {
         return;
@@ -12167,12 +12241,12 @@ module.run(['$templateCache', function($templateCache) {
     '  </div>\n' +
     '  <div class="col-xs-6 no-pad">\n' +
     '    <button type="submit"\n' +
-    '            ng-show="userStatus.userPhoneIsSetup"\n' +
+    '            ng-if="userStatus.userPhoneIsSetup"\n' +
     '            ng-click="deletePhone()"\n' +
     '            ng-disabled="form.$invalid"\n' +
     '            class="buy-sell-next btn btn-lg btn-block btn-danger">Delete</button>\n' +
     '    <button type="submit"\n' +
-    '            ng-show="!userStatus.userPhoneIsSetup"\n' +
+    '            ng-if="!userStatus.userPhoneIsSetup"\n' +
     '            ng-click="submitPhone()"\n' +
     '            ng-disabled="form.$invalid"\n' +
     '            class="buy-sell-next btn btn-lg btn-block btn-success">Verify</button>\n' +
@@ -12182,7 +12256,8 @@ module.run(['$templateCache', function($templateCache) {
     '<div class="return-to-dashboard row">\n' +
     '  <div class="col-xs-12 no-pad">\n' +
     '    <button type="button" ui-sref="dashboard" class="btn btn-block btn-lg btn-info">Dashboard</button>\n' +
-    '</div>');
+    '</div>\n' +
+    '');
 }]);
 })();
 
